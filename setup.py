@@ -4,7 +4,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 setup(
-    name='tensorflow_datasets',
+    name='tensorflow-datasets',
     version='0.0.1',
     description='tensorflow/datasets',
     author='Google Inc.',

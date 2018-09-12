@@ -7,7 +7,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 Installation:
 
 ```
-pip install tensorflow_datasets
+pip install tensorflow-datasets
 # Also requires tensorflow or tensorflow-gpu to be installed
 ```
 
