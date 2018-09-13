@@ -22,8 +22,16 @@ python setup.py sdist
 python setup.py bdist_wheel --universal
 
 # Publish to PyPI
-echo "Publishing to PyPI"
-twine upload dist/*
+read -p "Publish? (y/n) " -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  echo "Publishing to PyPI"
+  twine upload dist/*
+else
+  echo "Skipping upload"
+  exit 1
+fi
 
 # Cleanup
 rm -rf build/ dist/ tensorflow_datasets.egg-info/

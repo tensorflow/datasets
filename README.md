@@ -1,8 +1,11 @@
 # TensorFlow Datasets
 
-**Note: `tensorflow_datasets` is under development. API unstable.**
+**Note: `tensorflow_datasets` is not yet functional and is under active
+development. API unstable.**
 
 TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
+
+[![Travis](https://img.shields.io/travis/tensorflow/datasets.svg)](https://travis-ci.org/tensorflow/datasets)
 
 Installation:
 
