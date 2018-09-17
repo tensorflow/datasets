@@ -12,4 +12,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from tensorflow_datasets.data_loader import load as load
+"""Data Loader functions"""
+
+def load(dataset, split="train", data_dir="~/tfdata", download=True):  # pylint: disable=unused-argument
+    """Loads datset"""
+    raise NotImplementedError
