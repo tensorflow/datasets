@@ -9,6 +9,13 @@ _pycache__/
 /*.egg-info
 .eggs/
 
+# Python distribution, Pip files
+.Python
+bin/
+include/
+lib/
+pip-selfcheck.json
+
 # PyPI distribution artifacts.
 build/
 dist/
