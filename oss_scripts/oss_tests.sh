@@ -14,8 +14,19 @@ function set_status() {
     STATUS=$(($last_status || $STATUS))
 }
 
-# Run tests
-pytest
+# Run Eager tests
+# These tests call tf.enable_eager_execution at the top-level and should be run
+# separately so as not to run other tests in Eager mode.
+EAGER_TESTS="
+tensorflow_datasets/core/dataset_builder_test.py
+tensorflow_datasets/core/file_format_adapter_test.py
+"
+EAGER_IGNORE=$(for test in $EAGER_TESTS; do echo "--ignore=$test "; done)
+pytest $EAGER_TESTS
+set_status
+
+# Run other tests
+pytest $EAGER_IGNORE
 set_status
 
 exit $STATUS

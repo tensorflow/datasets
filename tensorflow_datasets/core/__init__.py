@@ -13,7 +13,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""tensorflow_datasets module."""
-# pylint: disable=g-multiple-import
-from tensorflow_datasets.core.dataset_builder import Split
-from tensorflow_datasets.core.registered import builder, registered, load
+"""tensorflow_datasets.core module."""
