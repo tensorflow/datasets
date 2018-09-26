@@ -84,7 +84,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
 
 
 class CSVAdapter(FileFormatAdapter):
-  """Writes serialized Examples protos to TFRecord files."""
+  """Writes serialized Examples protos to CSV files."""
 
   # TODO(rsepassi): Instead of feature_types, take record_defaults and
   # infer the types from the default values if provided.
