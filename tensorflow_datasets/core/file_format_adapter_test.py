@@ -42,7 +42,8 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
     return [
         (zero_to_thirty,
          [self._split_files(split=dataset_builder.Split.TRAIN, num_shards=2),
-          self._split_files(split=dataset_builder.Split.VALID, num_shards=1)]),
+          self._split_files(split=dataset_builder.Split.VALIDATION,
+                            num_shards=1)]),
         (thirty_to_forty,
          [self._split_files(split=dataset_builder.Split.TEST, num_shards=1)]),
     ]
@@ -73,7 +74,7 @@ class FileFormatAdapterTest(tf.test.TestCase):
       builder = builder_cls(data_dir=tmp_dir)
       builder.download_and_prepare()
       train_dataset = builder.as_dataset(split=dataset_builder.Split.TRAIN)
-      valid_dataset = builder.as_dataset(split=dataset_builder.Split.VALID)
+      valid_dataset = builder.as_dataset(split=dataset_builder.Split.VALIDATION)
       test_dataset = builder.as_dataset(split=dataset_builder.Split.TEST)
 
       def validate_dataset(dataset, min_val, max_val, test_range=False):

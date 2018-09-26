@@ -29,7 +29,7 @@ Datasets usually come with some pre-defined splits (for example, MNIST has train
 and test splits) and the `DatasetBuilder` should reflect that.
 
 For datasets that have no such splits, a default split of
-`(TRAIN: 80%, VALID: 10%, TEST: 10%)` should be used.
+`(TRAIN: 80%, VALIDATION: 10%, TEST: 10%)` should be used.
 
 ## Dataset info
 

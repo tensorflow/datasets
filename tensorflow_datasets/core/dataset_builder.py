@@ -40,20 +40,20 @@ class Split(enum.Enum):
   stages of training and evaluation. All datasets have at least the TRAIN and
   TEST splits.
 
-  Note that for datasets without a VALID split, you should use a fraction
+  Note that for datasets without a VALIDATION split, you should use a fraction
   of the TRAIN data for evaluation as you iterate on your model so as not to
   overfit to the TEST data. You can do so by...
   TODO(rsepassi): update when as_dataset supports this.
 
   * TRAIN: the training data.
-  * VALID: the validation data. If present, this is typically used as evaluation
-    data while iterating on a model (e.g. changing hyperparameters, model
-    architecture, etc.).
+  * VALIDATION: the validation data. If present, this is typically used as
+    evaluation data while iterating on a model (e.g. changing hyperparameters,
+    model architecture, etc.).
   * TEST: the testing data. This is the data to report metrics on. Typically you
     do not want to use this during model iteration as you may overfit to it.
   """
   TRAIN = "train"
-  VALID = "valid"
+  VALIDATION = "validation"
   TEST = "test"
 
 
@@ -132,7 +132,7 @@ class DatasetBuilder(object):
     self._download_and_prepare()
 
   # TODO(rsepassi): Make it easy to further shard the TRAIN data (e.g. for
-  # synthetic VALID splits).
+  # synthetic VALIDATION splits).
   @api_utils.disallow_positional_args
   def as_dataset(self, split, shuffle_files=None):
     """Constructs a `tf.data.Dataset`.
