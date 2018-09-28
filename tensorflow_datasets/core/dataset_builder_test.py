@@ -47,7 +47,8 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
   def _dataset_split_generators(self):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
-    return [(dummy_data_generator, self.splits)]
+    return [dataset_builder.SplitGenerator(generator_fn=dummy_data_generator,
+                                           split_files=self.splits)]
 
   @property
   def _file_format_adapter(self):
@@ -83,20 +84,6 @@ class DatasetBuilderTest(tf.test.TestCase):
       self.assertEqual(20, len(train_data))
       self.assertEqual(10, len(test_data))
       self.assertEqual(list(range(30)), sorted(train_data + test_data))
-
-  def test_registered(self):
-    name = "dummy_dataset_shared_generator"
-    self.assertEqual(name, DummyDatasetSharedGenerator.name)
-    self.assertTrue(DummyDatasetSharedGenerator is registered.builder(name))
-    self.assertTrue(name in registered.registered())
-    self.assertFalse("dataset_builder" in registered.registered())
-
-    nonexistent = "nonexistent_foobar_dataset"
-    with self.assertRaisesWithPredicateMatch(ValueError, "not found"):
-      registered.builder(nonexistent)
-    # Prints registered datasets
-    with self.assertRaisesWithPredicateMatch(ValueError, name):
-      registered.builder(nonexistent)
 
   def test_load(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:

@@ -2,40 +2,48 @@
 
 All datasets subclass
 [`DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
+`DatasetBuilder` subclasses must override 2 methods: `_download_and_prepare`,
+which is responsible for downloading the source data and putting it into some
+format on disk, and `_as_dataset`, which is responsible for producing a
+`tf.data.Dataset` from the data on disk.
 
-Most datasets should be a subclass of
-[`GeneratorBasedDatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
-See its docstring for which methods to implement.
+As a convenience,
+[`GeneratorBasedDatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py)
+is a subclass of `DatasetBuilder` that works well for most datasets that can be
+generated on a single machine. It expects subclasses to provide generators that
+produce examples that will be written across sharded files. See its docstring
+for more details.
 
 ## Downloading data
 
-Most datasets will need to download some data from the web. All downloads should
+Most datasets will need to download some data from the web. All downloads must
 go through the `DownloadManager`:
 `self._download_manager.download([url1, url2])`.
 
 ## File access and `tf.gfile`
 
-To ensure support across Cloud storage systems, all file access should use
-`tf.gfile` or other TensorFlow file APIs (for example, `tf.python_io`). Python
-built-ins (e.g. `open`, `os.rename`, etc.) should be avoided.
+In order to support Cloud storage systems, all file access must use `tf.gfile`
+or other TensorFlow file APIs (for example, `tf.python_io`). Python built-ins
+for file operations (e.g. `open`, `os.rename`, `gzip`, etc.) must be avoided.
 
 Datasets often need to extract data using `gzip`, `zlib`, etc.; these
-extractions should use `DownloadManager.extract` instead of using the extraction
-libraries directly.
+extractions must use `DownloadManager.extract` instead of using the extraction
+libraries directly. `DownloadManager` currently supports extracting `.zip`,
+`.gz`, and `.tar` files.
 
 ## Dataset splits
 
 Datasets usually come with some pre-defined splits (for example, MNIST has train
-and test splits) and the `DatasetBuilder` should reflect that.
+and test splits); the `DatasetBuilder` must reflect those splits on disk.
 
-For datasets that have no such splits, a default split of
-`(TRAIN: 80%, VALIDATION: 10%, TEST: 10%)` should be used.
+For datasets that have no such pre-defined splits, a default split of `(TRAIN:
+80%, VALIDATION: 10%, TEST: 10%)` must be used.
 
 ## Dataset info
 
 TODO(rsepassi): Document how to fill in and expose `DatasetInfo`
 
-## Large datasets and distributed generation
+## Large datasets and distributed generation (coming soon)
 
 Some datasets are so large as to require multiple machines to download and
 generate. We intend to soon support this use case using Apache Beam. Stay tuned.

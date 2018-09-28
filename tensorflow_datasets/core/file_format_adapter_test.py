@@ -28,7 +28,6 @@ tf.enable_eager_execution()
 
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
-  REGISTERED = False
 
   def _dataset_split_generators(self):
     def zero_to_thirty():
@@ -39,13 +38,18 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
       for i in range(30, 40):
         yield {"x": i, "y": -i, "z": tf.compat.as_text(str(i))}
 
+    zero_to_thirty_splits = [
+        self._split_files(split=dataset_builder.Split.TRAIN, num_shards=2),
+        self._split_files(split=dataset_builder.Split.VALIDATION, num_shards=1)
+    ]
+    thirty_to_forty_splits = [
+        self._split_files(split=dataset_builder.Split.TEST, num_shards=1)
+    ]
     return [
-        (zero_to_thirty,
-         [self._split_files(split=dataset_builder.Split.TRAIN, num_shards=2),
-          self._split_files(split=dataset_builder.Split.VALIDATION,
-                            num_shards=1)]),
-        (thirty_to_forty,
-         [self._split_files(split=dataset_builder.Split.TEST, num_shards=1)]),
+        dataset_builder.SplitGenerator(generator_fn=zero_to_thirty,
+                                       split_files=zero_to_thirty_splits),
+        dataset_builder.SplitGenerator(generator_fn=thirty_to_forty,
+                                       split_files=thirty_to_forty_splits),
     ]
 
   @property
@@ -59,7 +63,6 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
 
 
 class DummyCSVBuilder(DummyTFRecordBuilder):
-  REGISTERED = False
 
   @property
   def _file_format_adapter(self):

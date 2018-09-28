@@ -19,6 +19,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import abc
+import collections
 import os
 import enum
 
@@ -106,7 +108,6 @@ class SplitFiles(object):
 @six.add_metaclass(registered.RegisteredDataset)
 class DatasetBuilder(object):
   """Base class for datasets."""
-  REGISTERED = False
 
   @api_utils.disallow_positional_args
   def __init__(self, data_dir=api_utils.REQUIRED_ARG, download_manager=None):
@@ -165,48 +166,110 @@ class DatasetBuilder(object):
     kwargs["data_dir"] = self._data_dir
     return SplitFiles(**kwargs)
 
+  @abc.abstractmethod
   def _download_and_prepare(self):
-    raise NotImplementedError()
+    raise NotImplementedError
 
+  @abc.abstractmethod
   def _as_dataset(self, split, shuffle_files=None):
     raise NotImplementedError
+
+
+class SplitGenerator(collections.namedtuple("_SplitGenerator",
+                                            ["generator_fn", "split_files"])):
+  """Contains a generator to produce examples across splits.
+
+  Args:
+    generator_fn: function with no arguments yielding feature dictionaries.
+    split_files (list<SplitFiles>): splits that the examples from `generator_fn`
+      should be sharded across.
+  """
+
+  def output_files_exist(self):
+    """Whether all the specified output files exist."""
+    return all([split.exists() for split in self.split_files])
+
+  @property
+  def output_files(self):
+    """Output files combined across `split_files`."""
+    output_files = []
+    for split in self.split_files:
+      output_files.extend(split.filepaths)
+    return output_files
+
+  @property
+  def splits(self):
+    return [sf.split for sf in self.split_files]
 
 
 class GeneratorBasedDatasetBuilder(DatasetBuilder):
   """Base class for datasets with data generation based on dict generators.
 
-  Minimally, subclasses must override _dataset_split_generators and
-  _file_format_adapter.
+  `GeneratorBasedDatasetBuilder` is a convenience class that abstracts away much
+  of the data writing and reading of `DatasetBuilder`. It expects subclasses to
+  implement generators of feature dictionaries across the dataset splits
+  (`_dataset_split_generators`) and to specify a file type
+  (`_file_format_adapter`). See the method docstrings for details.
 
-  The FileFormatAdapters are defined in
-  tensorflow_datasets.core.file_format_adapter.
+  Minimally, subclasses must override `_dataset_split_generators` and
+  `_file_format_adapter`. Subclasses may also override `_preprocess` if they
+  wish to do further runtime pre-processing on the `tf.data.Dataset`.
 
-  If subclasses need to do further preprocessing on the records, they should
-  override _preprocess.
+  `FileFormatAdapter`s are defined in
+  `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
+  feature dictionaries yielded by example generators. See the class docstrings.
   """
-  REGISTERED = False
 
+  @abc.abstractmethod
   def _dataset_split_generators(self):
-    """Specify example generators and dataset splits.
+    """Specify feature dictionary generators and dataset splits.
+
+    This function returns a list of `SplitGenerator`s.
+    Each generator yields feature dictionaries (`dict<str feature_name,
+    feature_value>`).  The examples yielded by each generator will be written to
+    the specified `SplitFile`s.
+
+    If a generator produces data exclusively for a single split, then the
+    `SplitGenerator` should have only a single `SplitFile`.
+
+    If a generator produces examples that should be sharded across multiple
+    splits (this is the case if the underlying dataset does not have pre-defined
+    data splits), then the `SplitGenerator` will have multiple `SplitFile`s
+    (equal to the number of splits the examples should be sharded across). The
+    proportion of the examples that will end up in each split is defined by the
+    relative number of shards each `ShardFiles` object specifies. For example:
+
+    ```
+    def _dataset_split_generators(self):
+      return [
+          SplitGenerator(
+              generator_fn=my_generator_fn,
+              split_files=[
+                  self._split_files(split=Split.TRAIN, num_shards=2),
+                  self._split_files(split=Split.VALIDATION, num_shards=2),
+                  self._split_files(split=Split.TEST, num_shards=2)
+              ]
+          )
+      ]
+    ```
+
+    The examples from `my_generator_fn` would be split evenly across the 3
+    `Split`s provided.
+
+    Each `SplitFiles` can be constructed with the `_split_files` helper method
+    (`self._split_files(split=Split.TRAIN, num_shards=10)`) which fills in
+    common fields.
 
     For downloads and extractions, use `self._download_manager`.
     Note that the `DownloadManager` caches downloads, so it is fine to have each
     generator attempt to download the source data.
 
     Returns:
-      List of tuple(generator_fn, list<SplitFiles>).
-
-      If you have a separate generator per split, then the
-      list<SplitFiles> per element should have length == 1. If you only
-      have a single generator and want the records to be automatically split for
-      you, then the list<SplitFiles> should have length > 1.
-
-      The generator_fns should take no arguments and yield dicts of feature name
-      to feature value.
+      `list<SplitGenerator`>.
     """
     raise NotImplementedError()
 
-  @property
+  @abc.abstractproperty
   def _file_format_adapter(self):
     """Returns a FileFormatAdapter.
 
@@ -214,7 +277,8 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     methods to write and read data from a particular file format. See the
     constructor for each adapter to see what arguments it takes.
 
-    For example, to write and read from TFRecord files:
+    For example, to write and read from TFRecord files you would provide the
+    name, shape, and type of each feature on disk:
 
     ```python
     return TFRecordExampleAdapter({
@@ -230,7 +294,7 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     """Preprocess the feature dictionary.
 
     Note that this is a TensorFlow function that has Tensor inputs and Tensor
-    outputs and should use TensorFlow ops. It will be used as a `map_fn` to the
+    outputs and must use TensorFlow ops. It will be used as a `map_fn` to the
     `tf.data.Dataset`.
 
     Args:
@@ -245,20 +309,13 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
   def _download_and_prepare(self):
     if not tf.gfile.Exists(self._data_dir):
       tf.gfile.MakeDirs(self._data_dir)
-    # Flatten out the output files for generators going to multiple splits.
-    flattened = []
-    for (generator_fn, split_files) in self._dataset_split_generators():
-      output_files = []
-      if all([split.exists() for split in split_files]):
+    for split_generator in self._dataset_split_generators():
+      if split_generator.output_files_exist():
         tf.logging.info("Skipping download_and_prepare for splits %s as all "
-                        "files exist.",
-                        [split.split for split in split_files])
+                        "files exist.", split_generator.splits)
         continue
-      for split in split_files:
-        output_files.extend(split.filepaths)
-      flattened.append((generator_fn, output_files))
-    if flattened:
-      self._file_format_adapter.write_from_generators(flattened)
+      self._file_format_adapter.write_from_generator(
+          split_generator.generator_fn, split_generator.output_files)
 
   def _as_dataset(self, split=Split.TRAIN, shuffle_files=None):
     return dataset_utils.build_dataset(

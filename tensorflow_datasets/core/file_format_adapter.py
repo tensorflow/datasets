@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import abc
 import collections
 import contextlib
 import csv
@@ -30,31 +31,42 @@ import tensorflow as tf
 import tqdm
 
 
+@six.add_metaclass(abc.ABCMeta)
 class FileFormatAdapter(object):
   """Provides writing and reading methods for a file format."""
 
-  def write_from_generators(self, generators_and_filenames):
+  @abc.abstractmethod
+  def write_from_generator(self, generator_fn, output_files):
     """Write to files from generators_and_filenames.
 
     Args:
-      generators_and_filenames: list<tuple<generator_fn, output_files>>. The
-        generator yields dictionaries of feature name to value, and those
-        records should be written to output_files.
+      generator_fn: returns generator yielding dictionaries of feature name to
+        value.
+      output_files (list<str>): output files to write records to.
     """
     raise NotImplementedError
 
+  @abc.abstractmethod
   def dataset_from_filename(self, filename):
     """Returns a `tf.data.Dataset` whose elements are dicts given a filename."""
     raise NotImplementedError
 
-  @property
+  @abc.abstractproperty
   def filetype_suffix(self):
     """Returns a str file type suffix (e.g. "csv")."""
     raise NotImplementedError
 
 
 class TFRecordExampleAdapter(FileFormatAdapter):
-  """Writes serialized Examples protos to TFRecord files."""
+  """Writes serialized Examples protos to TFRecord files.
+
+  Constraints on generators:
+
+  * The generator must yield feature dictionaries (`dict<str feature_name,
+    feature_value>`).
+  * The allowed feature types are `int`, `float`, and `str` (or `bytes` in
+    Python 3; `unicode` strings will be encoded in `utf-8`), or lists thereof.
+  """
 
   def __init__(self, example_reading_spec):
     """Construcs a TFRecordExampleAdapter.
@@ -65,10 +77,9 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     """
     self._example_reading_spec = example_reading_spec
 
-  def write_from_generators(self, generators_and_filenames):
-    for (generator_fn, output_files) in generators_and_filenames:
-      wrapped = _generate_tf_examples(generator_fn())
-      _write_tfrecords_from_generator(wrapped, output_files)
+  def write_from_generator(self, generator_fn, output_files):
+    wrapped = _generate_tf_examples(generator_fn())
+    _write_tfrecords_from_generator(wrapped, output_files)
 
   def dataset_from_filename(self, filename):
     dataset = tf.data.TFRecordDataset(filename, buffer_size=int(16 * 1e6))
@@ -84,7 +95,21 @@ class TFRecordExampleAdapter(FileFormatAdapter):
 
 
 class CSVAdapter(FileFormatAdapter):
-  """Writes serialized Examples protos to CSV files."""
+  """Writes features to CSV files.
+
+  Constraints on generators:
+
+  * The generator must yield feature dictionaries (`dict<str feature_name,
+    feature_value>`).
+  * The allowed feature types are `int`, `float`, and `str`. By default, only
+    scalar features are supported (that is, not lists).
+
+  You can modify how records are written by passing `csv_writer_ctor`.
+
+  You can modify how records are read by passing `csv_dataset_kwargs`.
+
+  Note that all CSV files produced will have a header row.
+  """
 
   # TODO(rsepassi): Instead of feature_types, take record_defaults and
   # infer the types from the default values if provided.
@@ -98,7 +123,7 @@ class CSVAdapter(FileFormatAdapter):
       feature_types (dict<name, type>): specifies the dtypes of each of the
         features (columns in the CSV file).
       csv_dataset_kwargs (dict): forwarded to `tf.contrib.data.CsvDataset`.
-      csv_writer_ctor (function): takes filename and returns writer.
+      csv_writer_ctor (function): takes file handle and returns writer.
 
     Raises:
       ValueError: if csv_dataset_kwargs["header"] is present.
@@ -114,11 +139,10 @@ class CSVAdapter(FileFormatAdapter):
     self._csv_writer_ctor = csv_writer_ctor
 
   # TODO(rsepassi): Add support for non-scalar features (e.g. list of integers).
-  def write_from_generators(self, generators_and_filenames):
-    for (generator_fn, output_files) in generators_and_filenames:
-      wrapped = _generate_csv_rows(generator_fn())
-      _write_csv_from_generator(wrapped, output_files,
-                                self._csv_writer_ctor)
+  def write_from_generator(self, generator_fn, output_files):
+    wrapped = _generate_csv_rows(generator_fn())
+    _write_csv_from_generator(wrapped, output_files,
+                              self._csv_writer_ctor)
 
   def dataset_from_filename(self, filename):
     dataset = tf.contrib.data.CsvDataset(filename, **self._csv_kwargs)
@@ -163,9 +187,14 @@ def incomplete_file(filename):
 def _incomplete_files(filenames):
   """Create temporary files for filenames and rename on exit."""
   tmp_files = [incomplete_file(f) for f in filenames]
-  yield tmp_files
-  for tmp, output in zip(tmp_files, filenames):
-    tf.gfile.Rename(tmp, output)
+  try:
+    yield tmp_files
+    for tmp, output in zip(tmp_files, filenames):
+      tf.gfile.Rename(tmp, output)
+  finally:
+    for tmp in tmp_files:
+      if tf.gfile.Exists(tmp):
+        tf.gfile.Remove(tmp)
 
 
 # TODO(rsepassi): Use the TFRecordWriter.write op to get multithreading
