@@ -153,6 +153,7 @@ class DatasetBuilder(object):
     """Yields numpy elements from dataset."""
     def iterate():
       dataset = self.as_dataset(**as_dataset_kwargs)
+      dataset = dataset.prefetch(1)
       return dataset_utils.iterate_over_dataset(dataset)
 
     if tf.executing_eagerly():
