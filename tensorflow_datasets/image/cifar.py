@@ -20,12 +20,12 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import cPickle
 import os
 import random
 
 import numpy as np
 import six
+from six.moves import cPickle
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import file_format_adapter

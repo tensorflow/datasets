@@ -17,3 +17,7 @@
 # pylint: disable=g-multiple-import
 from tensorflow_datasets.core.dataset_builder import Split
 from tensorflow_datasets.core.registered import builder, registered, load
+
+# Imports for registration
+import tensorflow_datasets.image.cifar
+import tensorflow_datasets.image.mnist
