@@ -1,7 +1,8 @@
 # TensorFlow Datasets
 
-**Note: `tensorflow_datasets` is not yet functional and is under active
-development. API unstable.**
+**Note: `tensorflow_datasets` is not yet released. Follow the [release tracking
+issue](https://github.com/tensorflow/datasets/issues/5) to be notified
+of release.**
 
 TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
