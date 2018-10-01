@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-import tensorflow_datasets as datasets  # pylint: disable=unused-import
+import tensorflow_datasets as tfds  # pylint: disable=unused-import
 
 
 class ImportTest(tf.test.TestCase):

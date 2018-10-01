@@ -20,7 +20,7 @@ pip install tensorflow-datasets
 ### Usage
 
 ```python
-import tensorflow_datasets as datasets
+import tensorflow_datasets as tfds
 
 # See available datasets
 print(datasets.registered())
@@ -42,7 +42,7 @@ image, label = features["input"], features["target"]
 All datasets are implemented as subclasses of `DatasetBuilder`.
 
 ```python
-import tensorflow_datasets as datasets
+import tensorflow_datasets as tfds
 
 # The following is the equivalent of the `load` call above.
 
@@ -61,7 +61,7 @@ All datasets are usable outside of TensorFlow with the `numpy_iterator`
 method, which takes the same arguments as `as_dataset`.
 
 ```python
-import tensorflow_datasets as datasets
+import tensorflow_datasets as tfds
 
 mnist_builder = datasets.builder("mnist")(data_dir="~/tfdata")
 mnist_builder.download_and_prepare()

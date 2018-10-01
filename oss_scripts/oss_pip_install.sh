@@ -14,6 +14,6 @@ fi
 
 # First ensure that the base dependencies are sufficient for a full import
 pip install -q -e .
-python -c "import tensorflow_datasets as datasets"
+python -c "import tensorflow_datasets as tfds"
 
 pip install -q -e .[tests]
