@@ -58,7 +58,7 @@ class FileFormatAdapter(object):
 
 
 class TFRecordExampleAdapter(FileFormatAdapter):
-  """Writes serialized Examples protos to TFRecord files.
+  """Writes/Reads serialized Examples protos to/from TFRecord files.
 
   Constraints on generators:
 
@@ -95,7 +95,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
 
 
 class CSVAdapter(FileFormatAdapter):
-  """Writes features to CSV files.
+  """Writes/reads features to/from CSV files.
 
   Constraints on generators:
 
