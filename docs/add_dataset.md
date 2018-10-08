@@ -1,4 +1,4 @@
-# Adding a dataset
+# Add a dataset
 
 All datasets subclass
 [`DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).

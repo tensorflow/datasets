@@ -74,4 +74,4 @@ Note that the library still requires `tensorflow` as an internal dependency.
 ## Contributing a dataset
 
 Thanks for considering a contribution. See the
-[doc on adding a new dataset](https://github.com/tensorflow/datasets/tree/master/docs/new_dataset.md)
+[doc on adding a new dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)

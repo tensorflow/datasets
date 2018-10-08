@@ -1,0 +1,51 @@
+book_path: /datasets/_book.yaml
+project_path: /datasets/_project.yaml
+description: <!--no description-->
+landing_page:
+  custom_css_path: /site-assets/css/style.css
+  rows:
+  - heading: A collection of datasets ready to use with TensorFlow.
+    items:
+    - description: >
+        TensorFlow Datasets (TFDS) is a collection of datasets ready to use with
+        TensorFlow.
+
+    - code_block: |
+        <pre class = "prettyprint">
+        import tensorflow as tf
+        import tensorflow_datasets as tfds
+
+        # See available datasets
+        print(datasets.registered())
+
+        # Construct a tf.data.Dataset
+        dataset = datasets.load(name="mnist",
+                                split=datasets.Split.TRAIN,
+                                data_dir="~/tfdata",
+                                download=True)
+
+        # Build your input pipeline
+        dataset = dataset.shuffle(1000).batch(128).prefetch(1)
+        features = dataset.make_oneshot_iterator().get_next()
+        image, label = features["input"], features["target"]
+        </pre>
+
+  - classname: devsite-landing-row-cards
+    items:
+    - heading: Introducing TensorFlow Datasets
+      image_path: /ecosystem/images/tf-logo-card-16x9.png
+      path: https://medium.com/tensorflow/REPLACE_ME
+      buttons:
+      - label: Read on TensorFlow blog
+        path: https://medium.com/tensorflow/REPLACE_ME
+    - heading: TensorFlow Datasets video
+      youtube_id: xxxxx
+      buttons:
+      - label: Watch the video
+        path: https://www.youtube.com/watch?v=xxxxx
+    - heading: TensorFlow Datasets on GitHub
+      image_path: /ecosystem/images/github-card-16x9.png
+      path: https://github.com/tensorflow/datasets
+      buttons:
+      - label: View on GitHub
+        path: https://github.com/tensorflow/datasets
