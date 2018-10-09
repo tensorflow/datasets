@@ -23,6 +23,10 @@ import functools
 import inspect
 import six
 
+__all__ = [
+    "disallow_positional_args"
+]
+
 REQUIRED_ARG = object()
 _POSITIONAL_ARG_ERR_MSG = (
     "Please use keyword arguments and not positional arguments. This enables "

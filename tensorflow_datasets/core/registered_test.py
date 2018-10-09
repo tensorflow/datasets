@@ -57,8 +57,8 @@ class RegisteredTest(tf.test.TestCase):
     name = "empty_dataset_builder"
     self.assertEqual(name, EmptyDatasetBuilder.name)
     self.assertIs(EmptyDatasetBuilder, registered.builder(name))
-    self.assertIn(name, registered.registered())
-    self.assertNotIn("unregistered_builder", registered.registered())
+    self.assertIn(name, registered.list_builders())
+    self.assertNotIn("unregistered_builder", registered.list_builders())
 
     nonexistent = "nonexistent_foobar_dataset"
     with self.assertRaisesWithPredicateMatch(ValueError, "not found"):

@@ -28,6 +28,13 @@ import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import naming
 
+__all__ = [
+    "RegisteredDataset",
+    "list_builders",
+    "builder",
+    "load",
+]
+
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
 
@@ -51,13 +58,13 @@ class RegisteredDataset(abc.ABCMeta):
     return cls
 
 
-def registered():
-  """Returns names of all registered datasets."""
+def list_builders():
+  """Returns the string names of all `tfds.DatasetBuilder`s."""
   return sorted(list(_DATASET_REGISTRY))
 
 
 def builder(name):
-  """Returns the `DatasetBuilder` class registered with name.
+  """Fetches a `tfds.DatasetBuilder` by string name.
 
   Args:
     name (str): the registered name of the `DatasetBuilder` (the snake case
@@ -69,16 +76,16 @@ def builder(name):
   Returns:
     Constructor for the named `DatasetBuilder`.
 
-    If name does not contain keyword arguments, this will be the named
-    `DatasetBuilder` class itself. If name does contain kwargs, this will be a
+    If `name` does not contain keyword arguments, this will be the named
+    `DatasetBuilder` class itself. If `name` does contain kwargs, this will be a
     wrapper function with the keyword arguments partially applied.
 
   Raises:
-    ValueError: if name not registered.
+    ValueError: if `name` is unrecognized.
   """
   name, str_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   if name not in _DATASET_REGISTRY:
-    all_datasets_str = "".join(["  * %s\n" % d for d in registered()])
+    all_datasets_str = "".join(["  * %s\n" % d for d in list_builders()])
     raise ValueError("Dataset %s not found. Available datasets:\n%s" %
                      (name, all_datasets_str))
 
@@ -100,11 +107,13 @@ def load(name,
          data_dir=api_utils.REQUIRED_ARG,
          download=False,
          **as_dataset_kwargs):
-  """Load tf.data.Dataset.
+  """Loads the given `tfds.Split` as a `tf.data.Dataset`.
 
-  This is a convenience method that fetches the dataset by string, optionally
-  calls `DatasetBuilder.download_and_prepare`, and then calls
-  `DatasetBuilder.as_dataset`.
+  `load` is a convenience method that fetches the `tfds.DatasetBuilder` by
+  string name, optionally calls `DatasetBuilder.download_and_prepare`
+  (if `download=True`), and then calls `DatasetBuilder.as_dataset`.
+
+  Callers must pass arguments as keyword arguments.
 
   Args:
     name (str): the registered name of the `DatasetBuilder` (the snake case
@@ -113,10 +122,13 @@ def load(name,
       `"foo_bar/a=True,b=3"` would use the `FooBar` dataset passing the keyword
       arguments `a=True` and `b=3`.
     data_dir (str): directory to read/write data.
-    download (bool): whether to call `download_and_prepare` before calling
-      `as_dataset`. If `False`, data is expected to be in `data_dir`. If `True`
-      and the data is already in `data_dir`, `download_and_prepare` is a no-op.
-    **as_dataset_kwargs (dict): Keyword arguments passed to `as_dataset`.
+    download (bool): whether to call `tfds.DatasetBuilder.download_and_prepare`
+      before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
+      expected to be in `data_dir`. If `True` and the data is already in
+      `data_dir`, `download_and_prepare` is a no-op. Optional,
+      defaults to `False`.
+    **as_dataset_kwargs (dict): Keyword arguments passed to
+      `tfds.DatasetBuilder.as_dataset`.
 
   Returns:
     `tf.data.Dataset`

@@ -34,6 +34,10 @@ import tensorflow as tf
 from tensorflow_datasets.core import file_format_adapter
 import tqdm
 
+__all__ = [
+    "DownloadManager",
+]
+
 DEFAULT_DOWNLOAD_DIR = os.path.join("~", "tensorflow_datasets", "downloads")
 
 

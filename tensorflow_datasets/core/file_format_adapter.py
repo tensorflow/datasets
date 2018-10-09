@@ -30,6 +30,13 @@ import six
 import tensorflow as tf
 import tqdm
 
+__all__ = [
+    "FileFormatAdapter",
+    "TFRecordExampleAdapter",
+    "CSVAdapter",
+    "do_files_exist",
+]
+
 
 @six.add_metaclass(abc.ABCMeta)
 class FileFormatAdapter(object):

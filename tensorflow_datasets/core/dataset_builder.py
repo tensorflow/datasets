@@ -34,25 +34,34 @@ from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 
+__all__ = [
+    "Split",
+    "SplitFiles",
+    "DatasetBuilder",
+    "SplitGenerator",
+    "GeneratorBasedDatasetBuilder",
+]
+
 
 class Split(enum.Enum):
-  """Enum for dataset splits on disk.
+  """`Enum` for dataset splits.
 
   Datasets are typically split into different subsets to be used at various
-  stages of training and evaluation. All datasets have at least the TRAIN and
-  TEST splits.
+  stages of training and evaluation. All datasets have at least the `TRAIN` and
+  `TEST` splits.
 
-  Note that for datasets without a VALIDATION split, you should use a fraction
-  of the TRAIN data for evaluation as you iterate on your model so as not to
-  overfit to the TEST data. You can do so by...
+  Note that for datasets without a `VALIDATION` split, you should use a fraction
+  of the `TRAIN` data for evaluation as you iterate on your model so as not to
+  overfit to the `TEST` data. You can do so by...
+
   TODO(rsepassi): update when as_dataset supports this.
 
-  * TRAIN: the training data.
-  * VALIDATION: the validation data. If present, this is typically used as
+  * `TRAIN`: the training data.
+  * `VALIDATION`: the validation data. If present, this is typically used as
     evaluation data while iterating on a model (e.g. changing hyperparameters,
     model architecture, etc.).
-  * TEST: the testing data. This is the data to report metrics on. Typically you
-    do not want to use this during model iteration as you may overfit to it.
+  * `TEST`: the testing data. This is the data to report metrics on. Typically
+    you do not want to use this during model iteration as you may overfit to it.
   """
   TRAIN = "train"
   VALIDATION = "validation"
@@ -107,17 +116,35 @@ class SplitFiles(object):
 # TODO(rsepassi): Add info() property
 @six.add_metaclass(registered.RegisteredDataset)
 class DatasetBuilder(object):
-  """Base class for datasets."""
+  """Abstract base class for datasets.
+
+  Typical usage:
+
+  ```python
+  mnist_builder = tfds.MNIST(data_dir="~/tfds_data")
+  mnist_builder.download_and_prepare()
+  train_dataset = mnist_builder.as_dataset(tfds.Split.TRAIN)
+  assert isinstance(train_dataset, tf.data.Dataset)
+
+  # And then the rest of your input pipeline
+  train_dataset = train_dataset.repeat().shuffle(1024).batch(128).prefetch(4)
+  features = train_dataset.make_one_shot_iterator().get_next()
+  image, label = features['input'], features['target']
+  ```
+  """
 
   @api_utils.disallow_positional_args
   def __init__(self, data_dir=api_utils.REQUIRED_ARG, download_manager=None):
     """Construct a DatasetBuilder.
 
+    Callers must pass arguments as keyword arguments.
+
     Args:
       data_dir (str): directory to read/write data.
       download_manager (DownloadManager): manager to download and extract data.
+        Optional, useful for testing.
     """
-    self._data_dir = data_dir
+    self._data_dir = os.path.expanduser(data_dir)
     self._download_manager = (
         download_manager or
         download_manager_lib.DownloadManager(
@@ -126,9 +153,9 @@ class DatasetBuilder(object):
 
   @api_utils.disallow_positional_args
   def download_and_prepare(self):
-    """Download and prepare dataset.
+    """Downloads and prepares dataset for reading.
 
-    Subclasses override _download_and_prepare.
+    Subclasses must override _download_and_prepare.
     """
     self._download_and_prepare()
 
@@ -138,11 +165,14 @@ class DatasetBuilder(object):
   def as_dataset(self, split, shuffle_files=None):
     """Constructs a `tf.data.Dataset`.
 
-    Subclasses override _as_dataset.
+    Callers must pass arguments as keyword arguments.
+
+    Subclasses must override _as_dataset.
 
     Args:
-      split (Split): which subset of the data to read.
-      shuffle_files (bool): whether to shuffle the input files.
+      split (`tfds.Split`): which subset of the data to read.
+      shuffle_files (bool): whether to shuffle the input files. Optional,
+        defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 
     Returns:
       `tf.data.Dataset`
@@ -150,10 +180,21 @@ class DatasetBuilder(object):
     return self._as_dataset(split=split, shuffle_files=shuffle_files)
 
   def numpy_iterator(self, **as_dataset_kwargs):
-    """Yields numpy elements from dataset."""
+    """Generates numpy elements from the given `tfds.Split`.
+
+    This generator can be useful for non-TensorFlow programs.
+
+    Args:
+      **as_dataset_kwargs: Keyword arguments passed on to
+        `tfds.DatasetBuilder.as_dataset`.
+
+    Returns:
+      Generator yielding feature dictionaries
+      `dict<str feature_name, numpy.array feature_val>`.
+    """
     def iterate():
       dataset = self.as_dataset(**as_dataset_kwargs)
-      dataset = dataset.prefetch(1)
+      dataset = dataset.prefetch(128)
       return dataset_utils.iterate_over_dataset(dataset)
 
     if tf.executing_eagerly():

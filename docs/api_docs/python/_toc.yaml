@@ -4,3 +4,13 @@ toc:
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds
+    - title: builder
+      path: /datasets/api_docs/python/tfds/builder
+    - title: DatasetBuilder
+      path: /datasets/api_docs/python/tfds/DatasetBuilder
+    - title: list_builders
+      path: /datasets/api_docs/python/tfds/list_builders
+    - title: load
+      path: /datasets/api_docs/python/tfds/load
+    - title: Split
+      path: /datasets/api_docs/python/tfds/Split

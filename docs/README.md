@@ -23,7 +23,7 @@ pip install tensorflow-datasets
 import tensorflow_datasets as tfds
 
 # See available datasets
-print(datasets.registered())
+print(datasets.list_builders())
 
 # Construct a tf.data.Dataset
 dataset = datasets.load(name="mnist",

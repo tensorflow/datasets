@@ -21,7 +21,10 @@ from __future__ import print_function
 
 import tensorflow as tf
 
-CUDA_ENV_VAR = "CUDA_VISIBLE_DEVICES"
+__all__ = [
+    "build_dataset",
+    "iterate_over_dataset",
+]
 
 
 def build_dataset(filepattern,
