@@ -183,7 +183,7 @@ def _close_on_exit(handles):
       handle.close()
 
 
-def incomplete_file(filename):
+def get_incomplete_path(filename):
   """Returns a temporary filename based on filename."""
   random_suffix = "".join(
       random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
@@ -193,7 +193,7 @@ def incomplete_file(filename):
 @contextlib.contextmanager
 def _incomplete_files(filenames):
   """Create temporary files for filenames and rename on exit."""
-  tmp_files = [incomplete_file(f) for f in filenames]
+  tmp_files = [get_incomplete_path(f) for f in filenames]
   try:
     yield tmp_files
     for tmp, output in zip(tmp_files, filenames):
@@ -202,6 +202,18 @@ def _incomplete_files(filenames):
     for tmp in tmp_files:
       if tf.gfile.Exists(tmp):
         tf.gfile.Remove(tmp)
+
+
+@contextlib.contextmanager
+def incomplete_dir(dirname):
+  """Create temporary dir for dirname and rename on exit."""
+  tmp_dir = get_incomplete_path(dirname)
+  try:
+    yield tmp_dir
+    tf.gfile.Rename(tmp_dir, dirname)
+  finally:
+    if tf.gfile.Exists(tmp_dir):
+      tf.gfile.DeleteRecursively(tmp_dir)
 
 
 # TODO(rsepassi): Use the TFRecordWriter.write op to get multithreading

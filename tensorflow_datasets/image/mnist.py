@@ -19,9 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import functools
 import random
 
 import numpy as np
+import six.moves.urllib as urllib
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import file_format_adapter
@@ -46,11 +48,33 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
   """MNIST."""
   URL = _MNIST_URL
 
-  def _dataset_split_generators(self):
+  def _dataset_split_generators(self, dl_manager):
+
+    # Download the full MNist Database
+    filenames = {
+        "train_data": _MNIST_TRAIN_DATA_FILENAME,
+        "train_labels": _MNIST_TRAIN_LABELS_FILENAME,
+        "test_data": _MNIST_TEST_DATA_FILENAME,
+        "test_labels": _MNIST_TEST_LABELS_FILENAME,
+    }
+    mnist_files = dl_manager.download_and_extract({
+        k: urllib.parse.urljoin(self.URL, v) for k, v in filenames.items()
+    })
+
     # MNIST provides TRAIN and TEST splits, not a VALIDATION split, so we only
     # write the TRAIN and TEST splits to disk.
-    train_gen = lambda: self._generate_mnist_examples(is_training=True)
-    test_gen = lambda: self._generate_mnist_examples(is_training=False)
+    train_gen = functools.partial(
+        _generate_mnist_examples,
+        nb_examples=_TRAIN_EXAMPLES,
+        data_path=mnist_files["train_data"],
+        label_path=mnist_files["train_labels"],
+    )
+    test_gen = functools.partial(
+        _generate_mnist_examples,
+        nb_examples=_TEST_EXAMPLES,
+        data_path=mnist_files["test_data"],
+        label_path=mnist_files["test_labels"],
+    )
     train_splits = [
         self._split_files(split=dataset_builder.Split.TRAIN, num_shards=10)
     ]
@@ -78,52 +102,34 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
         [_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1])
     return record
 
-  def _generate_mnist_examples(self, is_training):
-    """Generate MNIST examples as dicts.
 
-    Args:
-      is_training (bool): whether to generate train or test data.
+def _generate_mnist_examples(nb_examples, data_path, label_path):
+  """Generate MNIST examples as dicts.
 
-    Returns:
-      Generator yielding:
-        Feature dictionaries `dict<str feature_name, feature_value>` containing:
-          * `image/encoded`: png-encoded image
-          * `image/shape`: image shape
-          * `image/format`: "png"
-          * `target`: label
-    """
-    download_manager = self._download_manager
-    mnist_url = self.URL
-    files = _download_mnist(download_manager, mnist_url)
-    data_file, labels_file = files[0] if is_training else files[1]
-    data_file = download_manager.extract(
-        data_file, "images" + str(is_training))
-    labels_file = download_manager.extract(
-        labels_file, "labels" + str(is_training))
-    images = _extract_mnist_images(
-        data_file, _TRAIN_EXAMPLES if is_training else _TEST_EXAMPLES)
-    labels = _extract_mnist_labels(
-        labels_file, _TRAIN_EXAMPLES if is_training else _TEST_EXAMPLES)
-    # Shuffle the data to make sure classes are well distributed.
-    data = list(zip(images, labels))
-    random.shuffle(data)
+  Args:
+    nb_examples (int): The number of example.
+    data_path (str): Path to the data files
+    label_path (str): Path to the labels
 
-    return image_utils.image_classification_generator(data)
+  Returns:
+    Generator yielding:
+      Feature dictionaries `dict<str feature_name, feature_value>` containing:
+        * `image/encoded`: png-encoded image
+        * `image/shape`: image shape
+        * `image/format`: "png"
+        * `target`: label
+  """
+  images = _extract_mnist_images(data_path, nb_examples)
+  labels = _extract_mnist_labels(label_path, nb_examples)
+  # Shuffle the data to make sure classes are well distributed.
+  data = list(zip(images, labels))
+  random.shuffle(data)
+
+  return image_utils.image_classification_generator(data)
 
 
 class FashionMNIST(MNIST):
   URL = _FASHION_MNIST_URL
-
-
-def _download_mnist(download_manager, url_prefix=_MNIST_URL):
-  mnist_files = [
-      _MNIST_TRAIN_DATA_FILENAME, _MNIST_TRAIN_LABELS_FILENAME,
-      _MNIST_TEST_DATA_FILENAME, _MNIST_TEST_LABELS_FILENAME
-  ]
-  mnist_urls = [url_prefix + fname for fname in mnist_files]
-  local_files = download_manager.download(mnist_urls)
-  train_data, test_data = local_files[:2], local_files[2:]
-  return train_data, test_data
 
 
 def _extract_mnist_images(image_filepath, num_images):

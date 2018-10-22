@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
+import functools
 import os
 import random
 
@@ -66,9 +67,22 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
         out_label_keys=None,
     )
 
-  def _dataset_split_generators(self):
-    train_gen = lambda: self._generate_cifar_examples(is_training=True)
-    test_gen = lambda: self._generate_cifar_examples(is_training=False)
+  def _dataset_split_generators(self, dl_manager):
+    cifar_path = dl_manager.download_and_extract(self._cifar_info.url)
+
+    def gen_filenames(filenames):
+      for f in filenames:
+        yield os.path.join(cifar_path, self._cifar_info.prefix, f)
+
+    train_gen = functools.partial(
+        self._generate_cifar_examples,
+        filepaths=gen_filenames(self._cifar_info.train_files),
+    )
+    test_gen = functools.partial(
+        self._generate_cifar_examples,
+        filepaths=gen_filenames(self._cifar_info.test_files),
+    )
+
     train_splits = [
         self._split_files(split=dataset_builder.Split.TRAIN, num_shards=10)
     ]
@@ -96,14 +110,14 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
         [_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3])
     return record
 
-  def _generate_cifar_examples(self, is_training):
+  def _generate_cifar_examples(self, filepaths):
     """Generate CIFAR examples as dicts.
 
     Shared across CIFAR-{10, 100}. Uses self._cifar_info as
     configuration.
 
     Args:
-      is_training (bool): Whether to generate train or test data.
+      filepaths (list[str]): The files to use to generate the data.
 
     Yields:
       Feature dictionaries `dict<str feature_name, feature_value>` containing:
@@ -116,18 +130,7 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
       feature dictionary will have all `label_keys` included with keys being
       `self._cifar_info["out_label_keys"]`.
     """
-    download_manager = self._download_manager
     cifar_info = self._cifar_info
-    downloaded, = download_manager.download([cifar_info.url])
-    # TODO(epot): Combine the extractions
-    extracted = download_manager.extract(
-        downloaded, cifar_info.name + "tar", filetype="gz")
-    extracted = download_manager.extract(
-        extracted, cifar_info.name, filetype="tar")
-    if is_training:
-      data_files = cifar_info.train_files
-    else:
-      data_files = cifar_info.test_files
 
     label_keys = cifar_info.label_keys
     use_extra_labels = len(label_keys) > 1
@@ -136,8 +139,7 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
 
     images, labels = [], []
     extra_labels = []
-    for filename in data_files:
-      path = os.path.join(extracted, cifar_info.prefix, filename)
+    for path in filepaths:
       with tf.gfile.Open(path, "rb") as f:
         if six.PY2:
           data = cPickle.load(f)

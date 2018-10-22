@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import abc
 import collections
+import datetime
 import os
 import enum
 
@@ -29,7 +30,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.core import download_manager as download_manager_lib
+from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
@@ -41,6 +42,8 @@ __all__ = [
     "SplitGenerator",
     "GeneratorBasedDatasetBuilder",
 ]
+
+DEFAULT_DATA_DIR = os.path.join("~", "tensorflow_datasets")
 
 
 class Split(enum.Enum):
@@ -134,30 +137,65 @@ class DatasetBuilder(object):
   """
 
   @api_utils.disallow_positional_args
-  def __init__(self, data_dir=api_utils.REQUIRED_ARG, download_manager=None):
+  def __init__(self, data_dir=None):
     """Construct a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
 
     Args:
       data_dir (str): directory to read/write data.
-      download_manager (DownloadManager): manager to download and extract data.
         Optional, useful for testing.
     """
-    self._data_dir = os.path.expanduser(data_dir)
-    self._download_manager = (
-        download_manager or
-        download_manager_lib.DownloadManager(
-            download_dir=os.path.join(
-                download_manager_lib.DEFAULT_DOWNLOAD_DIR, self.name)))
+    self._data_dir_root = os.path.expanduser(data_dir or DEFAULT_DATA_DIR)
+    # Get the last dataset if it exists (or None otherwise)
+    self._data_dir = self._get_data_dir()
 
   @api_utils.disallow_positional_args
-  def download_and_prepare(self):
+  def download_and_prepare(self, cache_dir=None, dl_manager=None):
     """Downloads and prepares dataset for reading.
 
     Subclasses must override _download_and_prepare.
+
+    Args:
+      cache_dir (str): Cached directory where to extract the data. If None,
+        a default tmp directory will be used.
+      dl_manager (DownloadManager): DownloadManager to use. Only one of
+        dl_manager and cache_dir can be set
+
+    Raises:
+      ValueError: If the user defines both cache_dir and dl_manager
     """
-    self._download_and_prepare()
+    # Both args are set
+    if cache_dir and dl_manager is not None:
+      raise ValueError("Only one of dl_manager and cache_dir can be defined.")
+    # None are set. Use the data_dir as cache_dir
+    if not cache_dir and dl_manager is None:
+      cache_dir = os.path.join(self._data_dir_root, "tmp")
+
+    # Create the download manager
+    if cache_dir:
+      dl_manager = download.DownloadManager(cache_dir=cache_dir)
+
+    # If the dataset already exists (data_dir not empty) and that we do not
+    # overwrite the dataset
+    if (self._data_dir and
+        dl_manager.mode == download.GenerateMode.REUSE_DATASET_IF_EXISTS):
+      tf.logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
+      return
+
+    # Otherwise, create a new version in a new data_dir.
+    curr_date = datetime.datetime.now()
+    version_str = curr_date.strftime("v_%Y%m%d_%H%M")
+    data_dir = self._get_data_dir(version=version_str)
+    tf.logging.info("Generating dataset %s (%s)", self.name, data_dir)
+
+    # Wrap the Dataset generation in a .incomplete directory
+    with file_format_adapter.incomplete_dir(data_dir) as data_dir_tmp:
+      # TODO(epot): Data_dir should be an argument of download_and_prepare.
+      # Modify this once a better split API exists.
+      self._data_dir = data_dir_tmp
+      self._download_and_prepare(dl_manager)
+      self._data_dir = data_dir
 
   # TODO(rsepassi): Make it easy to further shard the TRAIN data (e.g. for
   # synthetic VALIDATION splits).
@@ -203,17 +241,70 @@ class DatasetBuilder(object):
       with tf.Graph().as_default():
         return iterate()
 
+  def _get_data_dir(self, version=None):
+    """Return the data directory of one dataset version.
+
+    Args:
+      version (str): If specified, return the data_dir associated with the
+        given version
+
+    Returns:
+      data_dir (str):
+        If version is given, return the data_dir associated with this version.
+        Otherwise, automatically extract the last version from the directory.
+        If no previous version is found, return None.
+    """
+    data_root_dir = os.path.join(self._data_dir_root, self.name)
+    if version is not None:
+      return os.path.join(data_root_dir, version)
+
+    # Get the most recent directory
+    if tf.gfile.Exists(data_root_dir):
+      version_dirnames = [
+          f for f in sorted(tf.gfile.ListDirectory(data_root_dir))
+          if ".incomplete" not in f
+      ]
+      if version_dirnames:
+        return os.path.join(data_root_dir, version_dirnames[-1])
+
+    # No directory found
+    return None
+
   def _split_files(self, **kwargs):
     kwargs["dataset_name"] = self.name
     kwargs["data_dir"] = self._data_dir
     return SplitFiles(**kwargs)
 
   @abc.abstractmethod
-  def _download_and_prepare(self):
+  def _download_and_prepare(self, dl_manager):
+    """Downloads and prepares dataset for reading.
+
+    This is the internal implementation to overwritte called when user call
+    `download_and_prepare`. It should download all required data and generate
+    the pre-processed datasets files.
+
+    Args:
+      dl_manager (DownloadManager): `DownloadManager` used to download and cache
+        data.
+    """
     raise NotImplementedError
 
   @abc.abstractmethod
   def _as_dataset(self, split, shuffle_files=None):
+    """Constructs a `tf.data.Dataset`.
+
+    This is the internal implementation to overwritte called when user call
+    `as_dataset`. It should read the pre-processed datasets files and generate
+    the `tf.data.Dataset` object.
+
+    Args:
+      split (`tfds.Split`): which subset of the data to read.
+      shuffle_files (bool): whether to shuffle the input files. Optional,
+        defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+
+    Returns:
+      `tf.data.Dataset`
+    """
     raise NotImplementedError
 
 
@@ -263,7 +354,7 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
   """
 
   @abc.abstractmethod
-  def _dataset_split_generators(self):
+  def _dataset_split_generators(self, dl_manager):
     """Specify feature dictionary generators and dataset splits.
 
     This function returns a list of `SplitGenerator`s.
@@ -302,9 +393,12 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     (`self._split_files(split=Split.TRAIN, num_shards=10)`) which fills in
     common fields.
 
-    For downloads and extractions, use `self._download_manager`.
+    For downloads and extractions, use the given `download_manager`.
     Note that the `DownloadManager` caches downloads, so it is fine to have each
     generator attempt to download the source data.
+
+    Args:
+      dl_manager (DownloadManager): Download manager to download the data
 
     Returns:
       `list<SplitGenerator`>.
@@ -348,10 +442,10 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     """
     return feature_dict
 
-  def _download_and_prepare(self):
+  def _download_and_prepare(self, dl_manager):
     if not tf.gfile.Exists(self._data_dir):
       tf.gfile.MakeDirs(self._data_dir)
-    for split_generator in self._dataset_split_generators():
+    for split_generator in self._dataset_split_generators(dl_manager):
       if split_generator.output_files_exist():
         tf.logging.info("Skipping download_and_prepare for splits %s as all "
                         "files exist.", split_generator.splits)

@@ -25,7 +25,6 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import download_manager
 from tensorflow_datasets.core import registered
 
 # pylint: disable=unused-import,g-bad-import-order
@@ -37,9 +36,9 @@ from tensorflow_datasets.image import mnist
 flags = tf.flags
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("builder", None, "Registered name of DatasetBuilder")
+flags.DEFINE_string("dataset_name", None, "Registered name of DatasetBuilder")
 flags.DEFINE_string("data_dir", None, "Directory for data")
-flags.DEFINE_string("download_dir", None, "Directory for downloads")
+flags.DEFINE_string("cache_dir", None, "Directory for downloads")
 flags.DEFINE_boolean("debug", False,
                      "If True, will drop into debugger after generation")
 
@@ -59,10 +58,8 @@ FEATURE_STATS_STR = """\
 
 
 def main(_):
-  dm = download_manager.DownloadManager(FLAGS.download_dir)
-  builder = registered.builder(FLAGS.builder)(
-      data_dir=FLAGS.data_dir, download_manager=dm)
-  builder.download_and_prepare()
+  builder = registered.builder(FLAGS.dataset_name)(data_dir=FLAGS.data_dir)
+  builder.download_and_prepare(cache_dir=FLAGS.cache_dir)
 
   # TODO(rsepassi): Get splits from info
   splits = [dataset_builder.Split.TRAIN, dataset_builder.Split.TEST]
@@ -119,6 +116,6 @@ def compute_stats(builder, split):
 
 
 if __name__ == "__main__":
-  flags.mark_flags_as_required(["builder", "data_dir"])
+  flags.mark_flags_as_required(["dataset_name"])
   tf.enable_eager_execution()
   tf.app.run()

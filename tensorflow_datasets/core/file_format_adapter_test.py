@@ -29,7 +29,7 @@ tf.enable_eager_execution()
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
 
-  def _dataset_split_generators(self):
+  def _dataset_split_generators(self, dl_manager):
     def zero_to_thirty():
       for i in range(30):
         yield {"x": i, "y": -i, "z": tf.compat.as_text(str(i))}

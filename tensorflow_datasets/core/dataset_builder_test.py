@@ -44,9 +44,10 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
         self._split_files(split=dataset_builder.Split.TEST, num_shards=1),
     ]
 
-  def _dataset_split_generators(self):
+  def _dataset_split_generators(self, dl_manager):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
+    del dl_manager
     return [dataset_builder.SplitGenerator(generator_fn=dummy_data_generator,
                                            split_files=self.splits)]
 
@@ -66,9 +67,10 @@ class DatasetBuilderTest(tf.test.TestCase):
       builder.download_and_prepare()
 
       written_filepaths = [
-          os.path.join(tmp_dir, fname)
-          for fname in tf.gfile.ListDirectory(tmp_dir)
+          os.path.join(builder._data_dir, fname)
+          for fname in tf.gfile.ListDirectory(builder._data_dir)
       ]
+      # The data_dir contains the cached directory by default
       expected_filepaths = []
       for split in builder.splits:
         expected_filepaths.extend(split.filepaths)
