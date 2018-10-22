@@ -20,7 +20,6 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
-import functools
 import inspect
 
 import tensorflow as tf
@@ -63,50 +62,40 @@ def list_builders():
   return sorted(list(_DATASET_REGISTRY))
 
 
-def builder(name):
+def builder(name, **ctor_kwargs):
   """Fetches a `tfds.DatasetBuilder` by string name.
 
   Args:
-    name (str): the registered name of the `DatasetBuilder` (the snake case
+    name: `str`, the registered name of the `DatasetBuilder` (the snake case
       version of the class name). As a convenience, this string may contain
-      comma-separated keyword arguments for the builder. For example
-      `"foo_bar/a=True,b=3"` would use the `FooBar` dataset passing the keyword
-      arguments `a=True` and `b=3`.
+      comma-separated keyword arguments for the builder separated from the name
+      by a "/". For example `"foo_bar/a=True,b=3"` would use the `FooBar`
+      dataset with keyword arguments `a=True` and `b=3`.
+    **ctor_kwargs: `dict` of keyword arguments passed to the `DatasetBuilder`.
+      These will override keyword arguments passed in `name`, if any.
 
   Returns:
-    Constructor for the named `DatasetBuilder`.
-
-    If `name` does not contain keyword arguments, this will be the named
-    `DatasetBuilder` class itself. If `name` does contain kwargs, this will be a
-    wrapper function with the keyword arguments partially applied.
+    A `tfds.DatasetBuilder`.
 
   Raises:
     ValueError: if `name` is unrecognized.
   """
-  name, str_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  builder_kwargs.update(ctor_kwargs)
   if name not in _DATASET_REGISTRY:
     all_datasets_str = "".join(["  * %s\n" % d for d in list_builders()])
     raise ValueError("Dataset %s not found. Available datasets:\n%s" %
                      (name, all_datasets_str))
 
-  if not str_kwargs:
-    return _DATASET_REGISTRY[name]
-
-  @functools.wraps(_DATASET_REGISTRY[name])
-  def wrapped_dataset_constructor(**dataset_kwargs):
-    all_kwargs = {}
-    all_kwargs.update(str_kwargs)
-    all_kwargs.update(dataset_kwargs)
-    return _DATASET_REGISTRY[name](**all_kwargs)
-
-  return wrapped_dataset_constructor
+  return _DATASET_REGISTRY[name](**builder_kwargs)
 
 
 @api_utils.disallow_positional_args
 def load(name,
+         split,
          data_dir=api_utils.REQUIRED_ARG,
          download=False,
-         **as_dataset_kwargs):
+         as_dataset_kwargs=None):
   """Loads the given `tfds.Split` as a `tf.data.Dataset`.
 
   `load` is a convenience method that fetches the `tfds.DatasetBuilder` by
@@ -116,29 +105,35 @@ def load(name,
   Callers must pass arguments as keyword arguments.
 
   Args:
-    name (str): the registered name of the `DatasetBuilder` (the snake case
+    name: `str`, the registered name of the `DatasetBuilder` (the snake case
       version of the class name). As a convenience, this string may contain
       comma-separated keyword arguments for the builder. For example
       `"foo_bar/a=True,b=3"` would use the `FooBar` dataset passing the keyword
       arguments `a=True` and `b=3`.
-    data_dir (str): directory to read/write data.
-    download (bool): whether to call `tfds.DatasetBuilder.download_and_prepare`
+    split: `tfds.Split`, which split of the data to load.
+    data_dir: `str`, directory to read/write data.
+    download: `bool` (optional), whether to call
+      `tfds.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
       expected to be in `data_dir`. If `True` and the data is already in
-      `data_dir`, `download_and_prepare` is a no-op. Optional,
-      defaults to `False`.
-    **as_dataset_kwargs (dict): Keyword arguments passed to
-      `tfds.DatasetBuilder.as_dataset`.
+      `data_dir`, `download_and_prepare` is a no-op.
+      Defaults to `False`.
+    as_dataset_kwargs: `dict` (optional), keyword arguments passed to
+      `tfds.DatasetBuilder.as_dataset`. `split` will be passed through by
+      default.
 
   Returns:
     `tf.data.Dataset`
   """
-  name, str_kwargs = _dataset_name_and_kwargs_from_name_str(name)
-  all_kwargs = dict(data_dir=data_dir)
-  all_kwargs.update(str_kwargs)
-  dbuilder = builder(name)(**all_kwargs)
+  dbuilder = builder(name, data_dir=data_dir)
   if download:
     dbuilder.download_and_prepare()
+
+  if as_dataset_kwargs is None:
+    as_dataset_kwargs = {}
+  as_dataset_kwargs = dict(as_dataset_kwargs)
+  as_dataset_kwargs["split"] = split
+
   return dbuilder.as_dataset(**as_dataset_kwargs)
 
 

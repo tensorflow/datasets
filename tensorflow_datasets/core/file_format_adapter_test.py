@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import file_format_adapter
@@ -32,11 +33,13 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
   def _dataset_split_generators(self, dl_manager):
     def zero_to_thirty():
       for i in range(30):
-        yield {"x": i, "y": -i, "z": tf.compat.as_text(str(i))}
+        yield {"x": i, "y": np.array([-i]).astype(np.int64)[0],
+               "z": tf.compat.as_text(str(i))}
 
     def thirty_to_forty():
       for i in range(30, 40):
-        yield {"x": i, "y": -i, "z": tf.compat.as_text(str(i))}
+        yield {"x": i, "y": np.array([-i]).astype(np.int64)[0],
+               "z": tf.compat.as_text(str(i))}
 
     zero_to_thirty_splits = [
         self._split_files(split=dataset_builder.Split.TRAIN, num_shards=2),

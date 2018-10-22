@@ -13,9 +13,15 @@ with TensorFlow.
 
 Each dataset is defined as a <a href="./tfds/DatasetBuilder.md"><code>tfds.DatasetBuilder</code></a>.
 
+## Modules
+
+[`download`](./tfds/download.md) module: Public API of the download manager.
+
 ## Classes
 
 [`class DatasetBuilder`](./tfds/DatasetBuilder.md): Abstract base class for datasets.
+
+[`class GenerateMode`](./tfds/download/GenerateMode.md): Enum for the different version conflict resolution modes.
 
 [`class Split`](./tfds/Split.md): `Enum` for dataset splits.
 

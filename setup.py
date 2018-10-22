@@ -26,6 +26,7 @@ REQUIRED_PKGS = [
 
 TESTS_REQUIRE = [
     'absl-py',
+    'jupyter',
     'pytest',
 ]
 
@@ -56,8 +57,8 @@ setup(
     scripts=[],
     install_requires=REQUIRED_PKGS,
     extras_require={
-        'tensorflow': ['tensorflow>=1.9.0'],
-        'tensorflow_gpu': ['tensorflow-gpu>=1.9.0'],
+        'tensorflow': ['tf-nightly>=1.12.0.dev20181008'],
+        'tensorflow_gpu': ['tf-nightly-gpu>=1.12.0.dev20181008'],
         'tests': TESTS_REQUIRE,
     },
     classifiers=[

@@ -14,3 +14,15 @@ toc:
       path: /datasets/api_docs/python/tfds/load
     - title: Split
       path: /datasets/api_docs/python/tfds/Split
+  - title: tfds.download
+    section:
+    - title: Overview
+      path: /datasets/api_docs/python/tfds/download
+    - title: DownloadManager
+      path: /datasets/api_docs/python/tfds/download/DownloadManager
+    - title: ExtractInfo
+      path: /datasets/api_docs/python/tfds/download/ExtractInfo
+    - title: GenerateMode
+      path: /datasets/api_docs/python/tfds/download/GenerateMode
+    - title: UrlInfo
+      path: /datasets/api_docs/python/tfds/download/UrlInfo

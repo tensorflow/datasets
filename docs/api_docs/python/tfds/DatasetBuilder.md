@@ -46,7 +46,6 @@ Callers must pass arguments as keyword arguments.
 #### Args:
 
 data_dir (str): directory to read/write data.
-download_manager (DownloadManager): manager to download and extract data.
   Optional, useful for testing.
 
 
@@ -70,9 +69,9 @@ Subclasses must override _as_dataset.
 
 #### Args:
 
-split (<a href="../tfds/Split.md"><code>tfds.Split</code></a>): which subset of the data to read.
-shuffle_files (bool): whether to shuffle the input files. Optional,
-  defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+* <b>`split`</b>: <a href="../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read.
+* <b>`shuffle_files`</b>: `bool` (optional), whether to shuffle the input files.
+    Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 
 
 #### Returns:
@@ -91,6 +90,18 @@ download_and_prepare(
 Downloads and prepares dataset for reading.
 
 Subclasses must override _download_and_prepare.
+
+#### Args:
+
+cache_dir (str): Cached directory where to extract the data. If None,
+  a default tmp directory will be used.
+dl_manager (DownloadManager): DownloadManager to use. Only one of
+  dl_manager and cache_dir can be set
+
+
+#### Raises:
+
+* <b>`ValueError`</b>: If the user defines both cache_dir and dl_manager
 
 <h3 id="numpy_iterator"><code>numpy_iterator</code></h3>
 

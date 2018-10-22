@@ -23,6 +23,7 @@ import abc
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import registered
 
 
@@ -56,7 +57,7 @@ class RegisteredTest(tf.test.TestCase):
   def test_registered(self):
     name = "empty_dataset_builder"
     self.assertEqual(name, EmptyDatasetBuilder.name)
-    self.assertIs(EmptyDatasetBuilder, registered.builder(name))
+    self.assertIsInstance(registered.builder(name), EmptyDatasetBuilder)
     self.assertIn(name, registered.list_builders())
     self.assertNotIn("unregistered_builder", registered.list_builders())
 
@@ -70,9 +71,7 @@ class RegisteredTest(tf.test.TestCase):
   def test_builder_with_kwargs(self):
     name = "empty_dataset_builder"
     name_with_kwargs = name + "/k1=1,k2=1.,k3=foo,k4=True,k5=False"
-    builder_ctor = registered.builder(name_with_kwargs)
-    builder = builder_ctor(data_dir="bar")
-    print(builder.kwargs)
+    builder = registered.builder(name_with_kwargs, data_dir="bar")
     expectations = [("k1", 1), ("k2", 1.), ("k3", u"foo"), ("k4", True),
                     ("k5", False)]
     for k, v in expectations:
@@ -86,14 +85,21 @@ class RegisteredTest(tf.test.TestCase):
 
     # EmptyDatasetBuilder returns self from as_dataset
     builder = registered.load(
-        name=name, data_dir=data_dir, download=False, **as_dataset_kwargs)
+        name=name, split=dataset_builder.Split.TEST, data_dir=data_dir,
+        download=False, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertFalse(builder.download_called)
+    print(as_dataset_kwargs)
+    print(builder.as_dataset_kwargs)
+    self.assertEqual(dataset_builder.Split.TEST,
+                     builder.as_dataset_kwargs.pop("split"))
+    print(builder.as_dataset_kwargs)
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
     builder = registered.load(
-        name=name, data_dir=data_dir, download=True, **as_dataset_kwargs)
+        name=name, split=dataset_builder.Split.TRAIN, data_dir=data_dir,
+        download=True, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)
 

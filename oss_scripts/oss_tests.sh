@@ -29,4 +29,14 @@ set_status
 pytest $EAGER_IGNORE
 set_status
 
+# Test notebooks
+NOTEBOOKS="
+docs/tensorflow_datasets.ipynb
+"
+for notebook in $NOTEBOOKS
+do
+  jupyter nbconvert --ExecutePreprocessor.timeout=600 --to notebook --execute $notebook
+  set_status
+done
+
 exit $STATUS

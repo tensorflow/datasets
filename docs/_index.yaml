@@ -24,20 +24,23 @@ landing_page:
         tf.enable_eager_execution()
 
         # See available datasets
-        print(datasets.registered())
+        print(tfds.list_builders())
 
         # Construct a tf.data.Dataset
-        dataset = datasets.load(name="mnist",
-                                split=datasets.Split.TRAIN,
-                                data_dir="~/tfdata",
-                                download=True)
+        dataset = tfds.load(name="mnist",
+                            split=tfds.Split.TRAIN,
+                            data_dir="~/tfdata",
+                            download=True)
 
         # Build your input pipeline
-        dataset = dataset.shuffle(1000).batch(128).prefetch(1)
+        dataset = dataset.shuffle(1024).batch(32).prefetch(100)
         for features in dataset.take(1):
           image, label = features["input"], features["target"]
         </pre>
 
+        {% dynamic if request.tld != 'cn' %}
+          <a class="colab-button" target="_blank" href="https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb">Run in a <span>Notebook</span></a>
+        {% dynamic endif %}
   - classname: devsite-landing-row-cards
     items:
     - heading: Introducing TensorFlow Datasets

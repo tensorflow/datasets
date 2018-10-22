@@ -8,12 +8,14 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
 [![Travis](https://img.shields.io/travis/tensorflow/datasets.svg)](https://travis-ci.org/tensorflow/datasets)
 
+Try it in a [Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/tensorflow_datasets.ipynb).
+
 ### Installation
 
 ```
 pip install tensorflow-datasets
 
-# Requires tensorflow or tensorflow-gpu to be installed
+# Currently requires tf-nightly or tf-nightly-gpu to be installed
 # Some datasets require additional libraries; see setup.py extras_require
 ```
 
@@ -23,13 +25,13 @@ pip install tensorflow-datasets
 import tensorflow_datasets as tfds
 
 # See available datasets
-print(datasets.list_builders())
+print(tfds.list_builders())
 
 # Construct a tf.data.Dataset
-dataset = datasets.load(name="mnist",
-                        split=datasets.Split.TRAIN,
-                        data_dir="~/tfdata",
-                        download=True)
+dataset = tfds.load(name="mnist",
+                    split=tfds.Split.TRAIN,
+                    data_dir="~/tfdata",
+                    download=True)
 
 # Build your input pipeline
 dataset = dataset.shuffle(1000).batch(128).prefetch(1)
@@ -47,12 +49,12 @@ import tensorflow_datasets as tfds
 # The following is the equivalent of the `load` call above.
 
 # You can fetch the DatasetBuilder class by string
-mnist_builder = datasets.builder("mnist")(data_dir="~/tfdata")
+mnist_builder = tfds.builder("mnist", data_dir="~/tfdata")
 
 # Download the dataset
 mnist_builder.download_and_prepare()
 # Construct a tf.data.Dataset
-dataset = mnist_builder.as_dataset(split=datasets.Split.TRAIN)
+dataset = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
 ```
 
 ### Non-TensorFlow Usage
@@ -63,9 +65,9 @@ method, which takes the same arguments as `as_dataset`.
 ```python
 import tensorflow_datasets as tfds
 
-mnist_builder = datasets.builder("mnist")(data_dir="~/tfdata")
+mnist_builder = tfds.builder("mnist", data_dir="~/tfdata")
 mnist_builder.download_and_prepare()
-for element in mnist_builder.numpy_iterator(split=datasets.Split.TRAIN):
+for element in mnist_builder.numpy_iterator(split=tfds.Split.TRAIN):
   numpy_image, numpy_label = element["input"], element["target"]
 ```
 

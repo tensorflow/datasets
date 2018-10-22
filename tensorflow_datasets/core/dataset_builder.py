@@ -79,11 +79,11 @@ class SplitFiles(object):
     """Constructs a SplitFiles object.
 
     Args:
-      dataset_name (str): name of the dataset. Typically `DatasetBuilder.name`.
-      split (Split): which split of the dataset.
-      num_shards (int): number of file shards for this split on disk.
-      data_dir (str): directory containing the data files.
-      filetype_suffix (str): if provided, will be added to the filenames before
+      dataset_name: `str`, name of the dataset. Typically `DatasetBuilder.name`.
+      split: `tfds.Split`, which split of the dataset.
+      num_shards: `int`, number of file shards for this split on disk.
+      data_dir: `str`, directory containing the data files.
+      filetype_suffix: `str`, if provided, will be added to the filenames before
         the sharding specification (e.g.
         "foo_dataset-train.csv-00000-of-00001").
     """
@@ -208,9 +208,9 @@ class DatasetBuilder(object):
     Subclasses must override _as_dataset.
 
     Args:
-      split (`tfds.Split`): which subset of the data to read.
-      shuffle_files (bool): whether to shuffle the input files. Optional,
-        defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+      split: `tfds.Split`, which subset of the data to read.
+      shuffle_files: `bool` (optional), whether to shuffle the input files.
+        Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 
     Returns:
       `tf.data.Dataset`
@@ -314,8 +314,8 @@ class SplitGenerator(collections.namedtuple("_SplitGenerator",
 
   Args:
     generator_fn: function with no arguments yielding feature dictionaries.
-    split_files (list<SplitFiles>): splits that the examples from `generator_fn`
-      should be sharded across.
+    split_files: `list<SplitFiles>`, splits that the examples from
+      `generator_fn` should be sharded across.
   """
 
   def output_files_exist(self):
@@ -434,11 +434,11 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     `tf.data.Dataset`.
 
     Args:
-      feature_dict (dict): Feature name to Tensor, a single entry from the
-        `tf.data.Dataset`.
+      feature_dict: `dict<str feature_name, Tensor feature_value>`,
+        a single entry from the `tf.data.Dataset`.
 
     Returns:
-      feature_dict, possibly modified.
+      `feature_dict`, possibly modified.
     """
     return feature_dict
 

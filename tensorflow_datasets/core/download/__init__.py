@@ -19,3 +19,14 @@ from tensorflow_datasets.core.download.download_manager import DownloadManager
 from tensorflow_datasets.core.download.proto.download_generated_pb2 import ExtractInfo
 from tensorflow_datasets.core.download.proto.download_generated_pb2 import UrlInfo
 from tensorflow_datasets.core.download.util import GenerateMode
+
+from tensorflow.python.util.all_util import remove_undocumented
+
+__all__ = [
+    "DownloadManager",
+    "ExtractInfo",
+    "UrlInfo",
+    "GenerateMode",
+]
+
+remove_undocumented(__name__, __all__)

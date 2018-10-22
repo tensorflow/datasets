@@ -26,6 +26,7 @@ import csv
 import random
 import string
 
+import numpy as np
 import six
 import tensorflow as tf
 import tqdm
@@ -283,14 +284,14 @@ def _dict_to_tf_example(example_dict):
   for (k, v) in six.iteritems(example_dict):
     if v is None:
       continue
-    if not isinstance(v, (list, tuple)):
+    if not isinstance(v, (list, tuple, np.ndarray)):
       v = [v]
 
-    if isinstance(v[0], six.integer_types):
+    if isinstance(v[0], six.integer_types + (np.integer,)):
       features[k] = tf.train.Feature(int64_list=tf.train.Int64List(value=v))
-    elif isinstance(v[0], float):
+    elif isinstance(v[0], (float, np.floating)):
       features[k] = tf.train.Feature(float_list=tf.train.FloatList(value=v))
-    elif isinstance(v[0], six.string_types) or isinstance(v[0], bytes):
+    elif isinstance(v[0], six.string_types + (bytes,)):
       v = [tf.compat.as_bytes(x) for x in v]
       features[k] = tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
     else:
