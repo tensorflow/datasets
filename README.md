@@ -8,7 +8,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
 [![Travis](https://img.shields.io/travis/tensorflow/datasets.svg)](https://travis-ci.org/tensorflow/datasets)
 
-Try it in a [Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/tensorflow_datasets.ipynb).
+Try it in a [Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb).
 
 ### Installation
 
