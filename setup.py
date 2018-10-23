@@ -19,6 +19,7 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'future',
+    'pytz',
     'requests',
     'six',
     'tqdm',
