@@ -58,7 +58,7 @@ FEATURE_STATS_STR = """\
 
 
 def main(_):
-  builder = registered.builder(FLAGS.dataset_name)(data_dir=FLAGS.data_dir)
+  builder = registered.builder(FLAGS.dataset_name, data_dir=FLAGS.data_dir)
   builder.download_and_prepare(cache_dir=FLAGS.cache_dir)
 
   # TODO(rsepassi): Get splits from info
