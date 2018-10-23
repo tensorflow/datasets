@@ -3,6 +3,9 @@ language: python
 git:
   depth: 10
   quiet: true
+notifications:
+  email:
+    - tensorflow-datasets+travis@google.com
 python:
   - "2.7"
   - "3.6"
