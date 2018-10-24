@@ -13,16 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Public API of the download manager."""
-
-from tensorflow_datasets.core.download.download_manager import DownloadManager
-from tensorflow_datasets.core.download.proto.download_generated_pb2 import ExtractInfo
-from tensorflow_datasets.core.download.proto.download_generated_pb2 import UrlInfo
-from tensorflow_datasets.core.download.util import GenerateMode
-
-__all__ = [
-    "DownloadManager",
-    "ExtractInfo",
-    "UrlInfo",
-    "GenerateMode",
-]

@@ -19,6 +19,7 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'future',
+    'protobuf',
     'pytz',
     'requests',
     'six',
@@ -37,6 +38,7 @@ if sys.version_info.major == 3:
 else:
   # Packages only for Python 2
   TESTS_REQUIRE.append('mock')
+  REQUIRED_PKGS.append('futures')  # concurrent.futures
 
 if sys.version_info < (3, 4):
   # enum introduced in Python 3.4

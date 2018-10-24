@@ -32,8 +32,6 @@ from tensorflow_datasets.core.registered import builder, list_builders, load
 import tensorflow_datasets.image.cifar
 import tensorflow_datasets.image.mnist
 
-from tensorflow.python.util.all_util import remove_undocumented
-
 __all__ = [
     "DatasetBuilder",
     "Split",
@@ -43,5 +41,3 @@ __all__ = [
     "download",
     "GenerateMode",
 ]
-
-remove_undocumented(__name__, __all__)

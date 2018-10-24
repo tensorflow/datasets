@@ -28,7 +28,6 @@ import random
 import string
 import threading
 
-from absl import logging
 import enum
 import pytz
 from six.moves import urllib
@@ -54,12 +53,15 @@ class GenerateMode(enum.Enum):
   REUSE_DATASET_IF_EXISTS = 'reuse_dataset_if_exists'
 
 
+# TODO(epot): Move some of those functions into core.py_utils
+
+
 def build_log(prefix):
   """Create a f-string compatible logging function with prefix."""
 
   def log(msg, *args, **kwargs):
     msg = '{}: {}'.format(prefix, msg.format(*args, **kwargs))
-    logging.info(msg)
+    tf.logging.info(msg)
 
   return log
 
