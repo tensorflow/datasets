@@ -31,7 +31,7 @@ set_status
 
 # Test notebooks
 NOTEBOOKS="
-docs/tensorflow_datasets.ipynb
+docs/overview.ipynb
 "
 for notebook in $NOTEBOOKS
 do
