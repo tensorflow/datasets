@@ -93,8 +93,8 @@ def builder(name, **ctor_kwargs):
 @api_utils.disallow_positional_args
 def load(name,
          split,
-         data_dir=api_utils.REQUIRED_ARG,
-         download=False,
+         data_dir=None,
+         download=True,
          as_dataset_kwargs=None):
   """Loads the given `tfds.Split` as a `tf.data.Dataset`.
 
@@ -104,6 +104,9 @@ def load(name,
 
   Callers must pass arguments as keyword arguments.
 
+  **Warning**: calling this function might potentially trigger the download
+  of hundreds of GiB to disk. Refer to download argument.
+
   Args:
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
       version of the class name). As a convenience, this string may contain
@@ -111,13 +114,14 @@ def load(name,
       `"foo_bar/a=True,b=3"` would use the `FooBar` dataset passing the keyword
       arguments `a=True` and `b=3`.
     split: `tfds.Split`, which split of the data to load.
-    data_dir: `str`, directory to read/write data.
+    data_dir: `str` (optional), directory to read/write data.
+      Defaults to "~/tensorflow_datasets".
     download: `bool` (optional), whether to call
       `tfds.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
       expected to be in `data_dir`. If `True` and the data is already in
       `data_dir`, `download_and_prepare` is a no-op.
-      Defaults to `False`.
+      Defaults to `True`.
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
       `tfds.DatasetBuilder.as_dataset`. `split` will be passed through by
       default.

@@ -136,6 +136,10 @@ class DatasetBuilder(object):
   ```
   """
 
+  name = None  # Name of the dataset, filled by metaclass based on class name.
+  SIZE = None  # Approximate size of dataset, if known, in GB.
+  # TODO(pierrot): take size from DatasetInfo.
+
   @api_utils.disallow_positional_args
   def __init__(self, data_dir=None):
     """Construct a DatasetBuilder.
@@ -189,6 +193,13 @@ class DatasetBuilder(object):
     data_dir = self._get_data_dir(version=version_str)
     tf.logging.info("Generating dataset %s (%s)", self.name, data_dir)
 
+    # Print is intentional: we want this to always go to stdout so user has
+    # information needed to cancel download/preparation if needed.
+    # This comes right before the progress bar.
+    print("Downloading / extracting dataset %s (%s GB) to %s..." % (
+        self.name, self.SIZE or "?", data_dir))
+    # TODO(pierrot): print size in bold.
+
     # Wrap the Dataset generation in a .incomplete directory
     with file_format_adapter.incomplete_dir(data_dir) as data_dir_tmp:
       # TODO(epot): Data_dir should be an argument of download_and_prepare.
@@ -215,6 +226,12 @@ class DatasetBuilder(object):
     Returns:
       `tf.data.Dataset`
     """
+    if not self._data_dir:
+      raise AssertionError(
+          ("Dataset %s: could not find data in %s. Please make sure to call "
+           "dataset_builder.download_and_prepare(), or pass download=True to "
+           "tfds.load() before trying to access the tf.data.Dataset object."
+          ) % (self.name, self._data_dir_root))
     return self._as_dataset(split=split, shuffle_files=shuffle_files)
 
   def numpy_iterator(self, **as_dataset_kwargs):

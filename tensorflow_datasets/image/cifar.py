@@ -55,6 +55,8 @@ _CIFAR_IMAGE_SIZE = 32
 class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
   """CIFAR-10."""
 
+  SIZE = .162  # GB
+
   @property
   def _cifar_info(self):
     return CifarInfo(
