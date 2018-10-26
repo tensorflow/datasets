@@ -35,6 +35,8 @@ from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 
+import termcolor
+
 __all__ = [
     "Split",
     "SplitFiles",
@@ -196,9 +198,9 @@ class DatasetBuilder(object):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
-    print("Downloading / extracting dataset %s (%s GB) to %s..." % (
-        self.name, self.SIZE or "?", data_dir))
-    # TODO(pierrot): print size in bold.
+    size_text = termcolor.colored("%s GB" % self.SIZE or "?", attrs=["bold"])
+    termcolor.cprint("Downloading / extracting dataset %s (%s) to %s..." % (
+        self.name, size_text, data_dir))
 
     # Wrap the Dataset generation in a .incomplete directory
     with file_format_adapter.incomplete_dir(data_dir) as data_dir_tmp:

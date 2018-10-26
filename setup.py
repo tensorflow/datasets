@@ -23,6 +23,7 @@ REQUIRED_PKGS = [
     'pytz',
     'requests',
     'six',
+    'termcolor',
     'tqdm',
 ]
 
