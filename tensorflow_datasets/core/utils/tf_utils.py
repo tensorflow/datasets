@@ -118,7 +118,7 @@ class TFGraphRunner(object):
       graph_run.session.close()
 
 
-def is_dytpe(value):
+def is_dtype(value):
   """Return True is the given value is a TensorFlow dtype."""
   try:
     tf.as_dtype(value)
