@@ -14,6 +14,13 @@ generated on a single machine. It expects subclasses to provide generators that
 produce examples that will be written across sharded files. See its docstring
 for more details.
 
+Here is a diagram showing the abstraction layers of the dataset, from the raw
+compressed data files to the `tf.data.Dataset` object.
+
+<p align="center">
+  <img src="dataset_layers.png" alt="DatasetBuilder abstraction layers" width="700"/>
+</p>
+
 ## Downloading data
 
 Most datasets will need to download some data from the web. All downloads must
