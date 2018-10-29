@@ -13,7 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""FileFormatAdapters for GeneratorBasedDatasetBuilder."""
+"""FileFormatAdapters for GeneratorBasedDatasetBuilder.
+
+FileFormatAdapters implement methods to write and read data from a
+particular file format.
+
+Currently, two FileAdapter are available:
+ * TFRecordExampleAdapter: To store the pre-processed dataset as .tfrecord file
+ * CSVAdapter: To store the dataset as CSV file
+
+```python
+return TFRecordExampleAdapter({
+    "x": tf.FixedLenFeature(tuple(), tf.int64)
+})
+```
+
+"""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -23,6 +38,7 @@ import abc
 import collections
 import contextlib
 import csv
+import itertools
 import random
 import string
 
@@ -86,15 +102,15 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     self._example_reading_spec = example_reading_spec
 
   def write_from_generator(self, generator_fn, output_files):
-    wrapped = _generate_tf_examples(generator_fn())
+    wrapped = (
+        _dict_to_tf_example(d).SerializeToString() for d in generator_fn())
     _write_tfrecords_from_generator(wrapped, output_files)
 
   def dataset_from_filename(self, filename):
     dataset = tf.data.TFRecordDataset(filename, buffer_size=int(16 * 1e6))
     return dataset.map(self._decode)
 
-  def _decode(self, *record):
-    record, = record
+  def _decode(self, record):
     return tf.parse_single_example(record, self._example_reading_spec)
 
   @property
@@ -139,29 +155,35 @@ class CSVAdapter(FileFormatAdapter):
     self._csv_kwargs = csv_dataset_kwargs or {}
     if "header" in self._csv_kwargs:
       raise ValueError("header must not be present")
-    self._feature_types = _sort_dict_by_key(feature_types)
+    self._feature_types = collections.OrderedDict(sorted(feature_types.items()))
     self._csv_kwargs["header"] = True
+    # TODO(epot): Should check feature_types and raise error is some are
+    # not supported with CSV. Currently CSV files only support single
+    # values, no array.
     if "record_defaults" not in self._csv_kwargs:
-      types = list(zip(*self._feature_types))[1]
+      types = [f.dtype for f in self._feature_types.values()]
       self._csv_kwargs["record_defaults"] = types
     self._csv_writer_ctor = csv_writer_ctor
 
   # TODO(rsepassi): Add support for non-scalar features (e.g. list of integers).
   def write_from_generator(self, generator_fn, output_files):
-    wrapped = _generate_csv_rows(generator_fn())
-    _write_csv_from_generator(wrapped, output_files,
-                              self._csv_writer_ctor)
+    # Flatten the dict returned by the generator and add the header
+    header_keys = list(self._feature_types.keys())
+    rows_generator = ([d[k] for k in header_keys] for d in generator_fn())
+    generator_with_header = itertools.chain([header_keys], rows_generator)
+    _write_csv_from_generator(
+        generator_with_header,
+        output_files,
+        self._csv_writer_ctor)
 
   def dataset_from_filename(self, filename):
     dataset = tf.contrib.data.CsvDataset(filename, **self._csv_kwargs)
     return dataset.map(self._decode)
 
   def _decode(self, *record):
-    record_dict = {}
-    feature_names = list(zip(*self._feature_types))[0]
-    for name, feature in zip(feature_names, record):
-      record_dict[name] = feature
-    return record_dict
+    return {
+        k: v for k, v in zip(self._feature_types.keys(), record)
+    }
 
   @property
   def filetype_suffix(self):
@@ -237,21 +259,6 @@ def _round_robin_write(writers, generator):
     writers[i % len(writers)].write(record)
 
 
-def _sort_dict_by_key(feature_dict):
-  keys = sorted(list(feature_dict.keys()))
-  return [(k, feature_dict[k]) for k in keys]
-
-
-def _generate_csv_rows(generator):
-  header_row = None
-  for record in generator:
-    this_header, record_row = zip(*_sort_dict_by_key(record))
-    if header_row is None:
-      header_row = this_header
-      yield header_row
-    yield record_row
-
-
 def _write_csv_from_generator(generator, output_files, writer_ctor=None):
   """Write records to CSVs using writer_ctor (defaults to csv.writer)."""
   if do_files_exist(output_files):
@@ -282,10 +289,11 @@ def _dict_to_tf_example(example_dict):
   """Builds tf.train.Example from (string -> int/float/str list) dictionary."""
   features = {}
   for (k, v) in six.iteritems(example_dict):
-    if v is None:
-      continue
+
     if not isinstance(v, (list, tuple, np.ndarray)):
       v = [v]
+    elif isinstance(v, np.ndarray):
+      v = v.flatten()
 
     if isinstance(v[0], six.integer_types + (np.integer,)):
       features[k] = tf.train.Feature(int64_list=tf.train.Int64List(value=v))
@@ -299,9 +307,3 @@ def _dict_to_tf_example(example_dict):
                        (k, str(v[0]), str(type(v[0]))))
 
   return tf.train.Example(features=tf.train.Features(feature=features))
-
-
-def _generate_tf_examples(generator):
-  """Wraps dict generator to produce serialized tf.train.Examples."""
-  for example_dict in generator:
-    yield _dict_to_tf_example(example_dict).SerializeToString()

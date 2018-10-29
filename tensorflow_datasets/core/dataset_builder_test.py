@@ -23,16 +23,11 @@ import os
 
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import file_format_adapter
+from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import test_utils
 
 tf.enable_eager_execution()
-
-
-def dummy_data_generator():
-  for i in range(30):
-    yield {"x": i}
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
@@ -48,15 +43,17 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [dataset_builder.SplitGenerator(generator_fn=dummy_data_generator,
-                                           split_files=self.splits)]
+    return [dataset_builder.SplitGenerator(
+        generator_fn=self.dummy_data_generator, split_files=self.splits)]
 
-  @property
-  def _file_format_adapter(self):
-    example_spec = {
-        "x": tf.FixedLenFeature(tuple(), tf.int64),
-    }
-    return file_format_adapter.TFRecordExampleAdapter(example_spec)
+  def _info(self):
+    return dataset_builder.DatasetInfo(
+        specs=features.SpecDict({"x": tf.int64}),
+    )
+
+  def dummy_data_generator(self):
+    for i in range(30):
+      yield self.info.specs.encode_sample({"x": i})
 
 
 class DatasetBuilderTest(tf.test.TestCase):

@@ -25,9 +25,9 @@ import random
 import numpy as np
 import six.moves.urllib as urllib
 import tensorflow as tf
+
 from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import file_format_adapter
-from tensorflow_datasets.image import image_utils
+from tensorflow_datasets.core import features
 
 # MNIST constants
 _MNIST_URL = "http://yann.lecun.com/exdb/mnist/"
@@ -48,6 +48,15 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
   """MNIST."""
   URL = _MNIST_URL
 
+  def _info(self):
+    mnist_shape = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
+    return dataset_builder.DatasetInfo(
+        specs=features.SpecDict({
+            "input": features.Image(shape=mnist_shape),
+            "target": tf.int64,
+        }),
+    )
+
   def _dataset_split_generators(self, dl_manager):
 
     # Download the full MNist Database
@@ -64,13 +73,13 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
     # MNIST provides TRAIN and TEST splits, not a VALIDATION split, so we only
     # write the TRAIN and TEST splits to disk.
     train_gen = functools.partial(
-        _generate_mnist_examples,
+        self._generate_mnist_examples,
         nb_examples=_TRAIN_EXAMPLES,
         data_path=mnist_files["train_data"],
         label_path=mnist_files["train_labels"],
     )
     test_gen = functools.partial(
-        _generate_mnist_examples,
+        self._generate_mnist_examples,
         nb_examples=_TEST_EXAMPLES,
         data_path=mnist_files["test_data"],
         label_path=mnist_files["test_labels"],
@@ -88,44 +97,28 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
                                        split_files=test_splits),
     ]
 
-  @property
-  def _file_format_adapter(self):
-    example_spec = {
-        "input/encoded": tf.FixedLenFeature(tuple(), tf.string),
-        "target": tf.FixedLenFeature(tuple(), tf.int64),
-    }
-    return file_format_adapter.TFRecordExampleAdapter(example_spec)
+  def _generate_mnist_examples(self, nb_examples, data_path, label_path):
+    """Generate MNIST examples as dicts.
 
-  def _preprocess(self, record):
-    record["input"] = image_utils.decode_png(
-        record.pop("input/encoded"),
-        [_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1])
-    return record
+    Args:
+      nb_examples (int): The number of example.
+      data_path (str): Path to the data files
+      label_path (str): Path to the labels
 
+    Yields:
+      Generator yielding the next samples
+    """
+    images = _extract_mnist_images(data_path, nb_examples)
+    labels = _extract_mnist_labels(label_path, nb_examples)
+    # Shuffle the data to make sure classes are well distributed.
+    data = list(zip(images, labels))
+    random.shuffle(data)
 
-def _generate_mnist_examples(nb_examples, data_path, label_path):
-  """Generate MNIST examples as dicts.
-
-  Args:
-    nb_examples (int): The number of example.
-    data_path (str): Path to the data files
-    label_path (str): Path to the labels
-
-  Returns:
-    Generator yielding:
-      Feature dictionaries `dict<str feature_name, feature_value>` containing:
-        * `image/encoded`: png-encoded image
-        * `image/shape`: image shape
-        * `image/format`: "png"
-        * `target`: label
-  """
-  images = _extract_mnist_images(data_path, nb_examples)
-  labels = _extract_mnist_labels(label_path, nb_examples)
-  # Shuffle the data to make sure classes are well distributed.
-  data = list(zip(images, labels))
-  random.shuffle(data)
-
-  return image_utils.image_classification_generator(data)
+    for image, label in data:
+      yield self.info.specs.encode_sample({
+          "input": image,
+          "target": label,
+      })
 
 
 class FashionMNIST(MNIST):
@@ -137,8 +130,9 @@ def _extract_mnist_images(image_filepath, num_images):
     f.read(16)  # header
     buf = f.read(_MNIST_IMAGE_SIZE * _MNIST_IMAGE_SIZE * num_images)
     data = np.frombuffer(
-        buf, dtype=np.uint8).reshape(num_images, _MNIST_IMAGE_SIZE,
-                                     _MNIST_IMAGE_SIZE, 1)
+        buf,
+        dtype=np.uint8,
+    ).reshape(num_images, _MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
     return data
 
 

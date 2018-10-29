@@ -29,8 +29,7 @@ import six
 from six.moves import cPickle
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import file_format_adapter
-from tensorflow_datasets.image import image_utils
+from tensorflow_datasets.core import features
 
 # CIFAR-10 constants
 _CIFAR10_URL = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
@@ -57,6 +56,15 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
 
   SIZE = .162  # GB
 
+  def _info(self):
+    cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
+    return dataset_builder.DatasetInfo(
+        specs=features.SpecDict({
+            "input": features.Image(shape=cifar_shape),
+            "target": tf.int64,  # Could replace by features.Label()
+        }),
+    )
+
   @property
   def _cifar_info(self):
     return CifarInfo(
@@ -66,7 +74,6 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
         test_files=_CIFAR10_TEST_FILES,
         prefix=_CIFAR10_PREFIX,
         label_keys=["labels"],
-        out_label_keys=None,
     )
 
   def _dataset_split_generators(self, dl_manager):
@@ -98,20 +105,6 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
                                        split_files=test_splits),
     ]
 
-  @property
-  def _file_format_adapter(self):
-    example_spec = {
-        "input/encoded": tf.FixedLenFeature(tuple(), tf.string),
-        "target": tf.FixedLenFeature(tuple(), tf.int64),
-    }
-    return file_format_adapter.TFRecordExampleAdapter(example_spec)
-
-  def _preprocess(self, record):
-    record["input"] = image_utils.decode_png(
-        record.pop("input/encoded"),
-        [_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3])
-    return record
-
   def _generate_cifar_examples(self, filepaths):
     """Generate CIFAR examples as dicts.
 
@@ -122,25 +115,9 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
       filepaths (list[str]): The files to use to generate the data.
 
     Yields:
-      Feature dictionaries `dict<str feature_name, feature_value>` containing:
-        * `image/encoded`: png-encoded image
-        * `image/shape`: image shape
-        * `image/format`: "png"
-        * `target`: label
-
-      If `len(self._cifar_info["label_keys"]) > 1`, then instead of `target` the
-      feature dictionary will have all `label_keys` included with keys being
-      `self._cifar_info["out_label_keys"]`.
+      The cifar samples, as defined in the dataset info specs.
     """
-    cifar_info = self._cifar_info
-
-    label_keys = cifar_info.label_keys
-    use_extra_labels = len(label_keys) > 1
-    if use_extra_labels:
-      assert len(label_keys) == 2
-
     images, labels = [], []
-    extra_labels = []
     for path in filepaths:
       with tf.gfile.Open(path, "rb") as f:
         if six.PY2:
@@ -156,32 +133,24 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
           np.squeeze(batch_images[j]).transpose((1, 2, 0))
           for j in range(num_images)
       ])
-      batch_labels = data[label_keys[0]]
-      labels.extend([batch_labels[j] for j in range(num_images)])
-      if use_extra_labels:
-        batch_extra_labels = data[label_keys[1]]
-        extra_labels.extend([batch_extra_labels[j] for j in range(num_images)])
+
+      # Extract the list[dict[label_key, sample_label]]
+      labels.extend([
+          {k: data[k][j] for k in self._cifar_info.label_keys}
+          for j in range(num_images)
+      ])
 
     # Shuffle the data to make sure classes are well distributed.
-    data = [images, labels]
-    if use_extra_labels:
-      data.append(extra_labels)
-    data = list(zip(*data))
+    data = list(zip(images, labels))
     random.shuffle(data)
-    if use_extra_labels:
-      images, labels, extra_labels = list(zip(*data))
-    else:
-      images, labels = list(zip(*data))
-      extra_labels = None
 
-    example_gen = image_utils.image_classification_generator(
-        zip(images, labels))
-    for i, feature_dict in enumerate(example_gen):
-      if extra_labels:
-        feature_dict[cifar_info.out_label_keys[0]] = feature_dict.pop(
-            "target")
-        feature_dict[cifar_info.out_label_keys[1]] = extra_labels[i]
-      yield feature_dict
+    for image, label in data:
+      if len(label) == 1:
+        label = label[self._cifar_info.label_keys[0]]
+      yield self.info.specs.encode_sample({
+          "input": image,
+          "target": label,
+      })
 
 
 class Cifar100(Cifar10):
@@ -210,23 +179,20 @@ class Cifar100(Cifar10):
         test_files=_CIFAR100_TEST_FILES,
         prefix=_CIFAR100_PREFIX,
         label_keys=["fine_labels", "coarse_labels"],
-        out_label_keys=["fine_label", "coarse_label"],
     )
 
-  @property
-  def _file_format_adapter(self):
-    example_spec = {
-        "input/encoded": tf.FixedLenFeature(tuple(), tf.string),
-        "fine_label": tf.FixedLenFeature(tuple(), tf.int64),
-        "coarse_label": tf.FixedLenFeature(tuple(), tf.int64),
-    }
-    return file_format_adapter.TFRecordExampleAdapter(example_spec)
-
-  def _preprocess(self, record):
-    record = super(Cifar100, self)._preprocess(record)
-    target_key = "coarse_label" if self._use_coarse_labels else "fine_label"
-    record["target"] = record[target_key]
-    return record
+  def _info(self):
+    cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
+    label_to_use = "coarse_labels" if self._use_coarse_labels else "fine_labels"
+    return dataset_builder.DatasetInfo(
+        specs=features.SpecDict({
+            "input": features.Image(shape=cifar_shape),
+            "target": features.OneOf(choice=label_to_use, feature_dict={
+                "coarse_labels": tf.int32,
+                "fine_labels": tf.int32,
+            }),
+        }),
+    )
 
 
 class CifarInfo(collections.namedtuple("_CifarInfo", [
@@ -236,7 +202,6 @@ class CifarInfo(collections.namedtuple("_CifarInfo", [
     "train_files",
     "test_files",
     "label_keys",
-    "out_label_keys",
 ])):
   """Contains the information necessary to generate a CIFAR dataset.
 
@@ -250,7 +215,4 @@ class CifarInfo(collections.namedtuple("_CifarInfo", [
     label_keys (list<str>): names of the label keys in the data. If longer than
       1, provide `out_label_keys` to specify output names in feature
       dictionaries.  Otherwise will use "target".
-    out_label_keys (list<str>): if `label_keys` is longer than 1, these specify
-      the names of those features in the generated feature dictionary.
   """
-  pass

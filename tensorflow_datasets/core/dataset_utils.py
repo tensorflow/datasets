@@ -29,7 +29,6 @@ __all__ = [
 
 def build_dataset(filepattern,
                   dataset_from_file_fn,
-                  process_fn=None,
                   shuffle_files=False,
                   parallel_reads=64):
   """Constructs a `tf.data.Dataset` from TFRecord files.
@@ -38,8 +37,6 @@ def build_dataset(filepattern,
     filepattern (str): Glob pattern for TFRecord files.
     dataset_from_file_fn (function): returns a `tf.data.Dataset` given a
       filename.
-    process_fn (function): If provided, will map over input records of the
-      `Dataset` returned by `dataset_from_file_fn`.
     shuffle_files (bool): Whether to shuffle the input filenames.
     parallel_reads (int): how many files to read in parallel.
 
@@ -51,8 +48,6 @@ def build_dataset(filepattern,
       dataset_from_file_fn,
       cycle_length=parallel_reads,
       num_parallel_calls=parallel_reads)
-  if process_fn is not None:
-    dataset = dataset.map(process_fn)
   return dataset
 
 

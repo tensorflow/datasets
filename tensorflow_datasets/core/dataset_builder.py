@@ -34,6 +34,7 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import utils
 
 import termcolor
 
@@ -118,6 +119,14 @@ class SplitFiles(object):
     return file_format_adapter.do_files_exist(self.filepaths)
 
 
+# TODO(afrozm): Replace by the metadata DatasetInfo
+class DatasetInfo(collections.namedtuple("DatasetInfo", ["specs"])):
+  """Structure defining the info of the dataset.
+
+  DatasetInfo
+  """
+
+
 # TODO(rsepassi): Add info() property
 @six.add_metaclass(registered.RegisteredDataset)
 class DatasetBuilder(object):
@@ -155,6 +164,11 @@ class DatasetBuilder(object):
     self._data_dir_root = os.path.expanduser(data_dir or DEFAULT_DATA_DIR)
     # Get the last dataset if it exists (or None otherwise)
     self._data_dir = self._get_data_dir()
+
+  @utils.memoized_property
+  def info(self):
+    """Return the dataset info object. See `DatasetInfo` for details."""
+    return self._info()
 
   @api_utils.disallow_positional_args
   def download_and_prepare(self, cache_dir=None, dl_manager=None):
@@ -295,6 +309,18 @@ class DatasetBuilder(object):
     return SplitFiles(**kwargs)
 
   @abc.abstractmethod
+  def _info(self):
+    """Construct the DatasetInfo object. See `DatasetInfo` for details.
+
+    Warning: This function is only called once and the result is cached for all
+    following .info() calls.
+
+    Returns:
+      dataset_info (DatasetInfo): The dataset information
+    """
+    raise NotImplementedError
+
+  @abc.abstractmethod
   def _download_and_prepare(self, dl_manager):
     """Downloads and prepares dataset for reading.
 
@@ -364,13 +390,26 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
   (`_file_format_adapter`). See the method docstrings for details.
 
   Minimally, subclasses must override `_dataset_split_generators` and
-  `_file_format_adapter`. Subclasses may also override `_preprocess` if they
-  wish to do further runtime pre-processing on the `tf.data.Dataset`.
+  `_file_format_adapter`.
 
   `FileFormatAdapter`s are defined in
   `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
   feature dictionaries yielded by example generators. See the class docstrings.
   """
+
+  @api_utils.disallow_positional_args
+  def __init__(self, **kwargs):
+    """Builder constructor.
+
+    Args:
+      **kwargs: Constructor kwargs forwarded to DatasetBuilder
+    """
+    super(GeneratorBasedDatasetBuilder, self).__init__(**kwargs)
+
+    # Load the format adapter (CSV, TF-Record,...)
+    file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
+    file_specs = self.info.specs.get_specs()
+    self._file_format_adapter = file_adapter_cls(file_specs)
 
   @abc.abstractmethod
   def _dataset_split_generators(self, dl_manager):
@@ -424,43 +463,6 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     """
     raise NotImplementedError()
 
-  @abc.abstractproperty
-  def _file_format_adapter(self):
-    """Returns a FileFormatAdapter.
-
-    FileFormatAdapters are defined in file_format_adapter.py and implement
-    methods to write and read data from a particular file format. See the
-    constructor for each adapter to see what arguments it takes.
-
-    For example, to write and read from TFRecord files you would provide the
-    name, shape, and type of each feature on disk:
-
-    ```python
-    return TFRecordExampleAdapter({
-        "x": tf.FixedLenFeature(tuple(), tf.int64)})
-    ```
-
-    Returns:
-      FileFormatAdapter instance
-    """
-    raise NotImplementedError
-
-  def _preprocess(self, feature_dict):
-    """Preprocess the feature dictionary.
-
-    Note that this is a TensorFlow function that has Tensor inputs and Tensor
-    outputs and must use TensorFlow ops. It will be used as a `map_fn` to the
-    `tf.data.Dataset`.
-
-    Args:
-      feature_dict: `dict<str feature_name, Tensor feature_value>`,
-        a single entry from the `tf.data.Dataset`.
-
-    Returns:
-      `feature_dict`, possibly modified.
-    """
-    return feature_dict
-
   def _download_and_prepare(self, dl_manager):
     if not tf.gfile.Exists(self._data_dir):
       tf.gfile.MakeDirs(self._data_dir)
@@ -473,12 +475,13 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
           split_generator.generator_fn, split_generator.output_files)
 
   def _as_dataset(self, split=Split.TRAIN, shuffle_files=None):
-    return dataset_utils.build_dataset(
+    tf_data = dataset_utils.build_dataset(
         filepattern=self._split_files(num_shards=None, split=split).filepattern,
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
-        process_fn=self._preprocess,
         shuffle_files=(
             split == Split.TRAIN if shuffle_files is None else shuffle_files))
+    tf_data = tf_data.map(self.info.specs.decode_sample)
+    return tf_data
 
   def _split_files(self, **kwargs):
     kwargs["dataset_name"] = self.name

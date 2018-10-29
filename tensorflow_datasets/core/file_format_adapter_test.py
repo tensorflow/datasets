@@ -22,6 +22,7 @@ from __future__ import print_function
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import test_utils
 
@@ -33,13 +34,19 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
   def _dataset_split_generators(self, dl_manager):
     def zero_to_thirty():
       for i in range(30):
-        yield {"x": i, "y": np.array([-i]).astype(np.int64)[0],
-               "z": tf.compat.as_text(str(i))}
+        yield self.info.specs.encode_sample({
+            "x": i,
+            "y": np.array([-i]).astype(np.int64)[0],
+            "z": tf.compat.as_text(str(i))
+        })
 
     def thirty_to_forty():
       for i in range(30, 40):
-        yield {"x": i, "y": np.array([-i]).astype(np.int64)[0],
-               "z": tf.compat.as_text(str(i))}
+        yield self.info.specs.encode_sample({
+            "x": i,
+            "y": np.array([-i]).astype(np.int64)[0],
+            "z": tf.compat.as_text(str(i))
+        })
 
     zero_to_thirty_splits = [
         self._split_files(split=dataset_builder.Split.TRAIN, num_shards=2),
@@ -55,22 +62,23 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
                                        split_files=thirty_to_forty_splits),
     ]
 
-  @property
-  def _file_format_adapter(self):
-    example_spec = {
-        "x": tf.FixedLenFeature(tuple(), tf.int64),
-        "y": tf.FixedLenFeature(tuple(), tf.int64),
-        "z": tf.FixedLenFeature(tuple(), tf.string),
-    }
-    return file_format_adapter.TFRecordExampleAdapter(example_spec)
+  def _info(self):
+    return dataset_builder.DatasetInfo(
+        specs=features.SpecDict({
+            "x": tf.int64,
+            "y": tf.int64,
+            "z": tf.string,
+        }),
+    )
 
 
 class DummyCSVBuilder(DummyTFRecordBuilder):
 
-  @property
-  def _file_format_adapter(self):
-    return file_format_adapter.CSVAdapter(
-        feature_types={"x": tf.int32, "y": tf.int32, "z": tf.string})
+  def __init__(self, *args, **kwargs):
+    super(DummyCSVBuilder, self).__init__(*args, **kwargs)
+    file_adapter_cls = file_format_adapter.CSVAdapter
+    file_specs = self.info.specs.get_specs()
+    self._file_format_adapter = file_adapter_cls(file_specs)
 
 
 class FileFormatAdapterTest(tf.test.TestCase):
@@ -123,16 +131,6 @@ class TFRecordUtilsTest(tf.test.TestCase):
     self.assertEqual([1], list(feature["a"].int64_list.value))
     self.assertEqual([b"foo", b"bar"], list(feature["b"].bytes_list.value))
     self.assertEqual([2.0], list(feature["c"].float_list.value))
-
-  def test_convert_to_example_generator(self):
-    wrapped = file_format_adapter._generate_tf_examples(self.generator())
-    expected = file_format_adapter._dict_to_tf_example(self.example_dict)
-    wrapped_examples = list(wrapped)
-    self.assertEqual(3, len(wrapped_examples))
-    for serialized_example in wrapped_examples:
-      example = tf.train.Example()
-      example.ParseFromString(serialized_example)
-      self.assertEqual(expected, example)
 
 
 if __name__ == "__main__":
