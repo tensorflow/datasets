@@ -41,6 +41,21 @@ _STR_KWARGS_ERR = ("To pass keyword arguments to DatasetBuilders by string, "
                    "the format must be 'dataset_name/kwarg1=val1,kwarg2=val2'")
 
 
+class DatasetNotFountError(ValueError):
+  """The requested Dataset was not found."""
+
+  def __init__(self, name):
+    all_datasets_str = "\n\t- ".join([""] + list_builders())
+    # TODO(pierrot): move remediation to md doc.
+    ValueError.__init__(self, (
+        "Dataset %s not found. Available datasets:%s\n"
+        "Check that:\n"
+        "\t- dataset module is imported in root __init__.py and "
+        "core/download_and_prepare.py;\n"
+        "\t- dataset class defines all base class abstract methods."
+        ) % (name, all_datasets_str))
+
+
 class RegisteredDataset(abc.ABCMeta):
   """Subclasses will be registered and given a `name` property."""
 
@@ -83,10 +98,7 @@ def builder(name, **ctor_kwargs):
   name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   builder_kwargs.update(ctor_kwargs)
   if name not in _DATASET_REGISTRY:
-    all_datasets_str = "".join(["  * %s\n" % d for d in list_builders()])
-    raise ValueError("Dataset %s not found. Available datasets:\n%s" %
-                     (name, all_datasets_str))
-
+    raise DatasetNotFountError(name)
   return _DATASET_REGISTRY[name](**builder_kwargs)
 
 
