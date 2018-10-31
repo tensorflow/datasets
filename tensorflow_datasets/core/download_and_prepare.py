@@ -84,6 +84,8 @@ def compute_stats(builder, split):
     if first_example is None:
       first_example = example
       for k in example:
+        if example[k].dtype == tf.string:
+          continue
         per_feature_stats[k] = {
             "min": np.inf,
             "max": -np.inf,
@@ -93,6 +95,8 @@ def compute_stats(builder, split):
     # DatasetInfo.
 
     for k in example:
+      if example[k].dtype == tf.string:
+        continue
       fmin = np.min(example[k].numpy())
       if fmin < per_feature_stats[k]["min"]:
         per_feature_stats[k]["min"] = fmin
