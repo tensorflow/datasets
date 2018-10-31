@@ -74,13 +74,13 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
     # write the TRAIN and TEST splits to disk.
     train_gen = functools.partial(
         self._generate_mnist_examples,
-        nb_examples=_TRAIN_EXAMPLES,
+        num_examples=_TRAIN_EXAMPLES,
         data_path=mnist_files["train_data"],
         label_path=mnist_files["train_labels"],
     )
     test_gen = functools.partial(
         self._generate_mnist_examples,
-        nb_examples=_TEST_EXAMPLES,
+        num_examples=_TEST_EXAMPLES,
         data_path=mnist_files["test_data"],
         label_path=mnist_files["test_labels"],
     )
@@ -97,19 +97,19 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
                                        split_files=test_splits),
     ]
 
-  def _generate_mnist_examples(self, nb_examples, data_path, label_path):
+  def _generate_mnist_examples(self, num_examples, data_path, label_path):
     """Generate MNIST examples as dicts.
 
     Args:
-      nb_examples (int): The number of example.
+      num_examples (int): The number of example.
       data_path (str): Path to the data files
       label_path (str): Path to the labels
 
     Yields:
       Generator yielding the next samples
     """
-    images = _extract_mnist_images(data_path, nb_examples)
-    labels = _extract_mnist_labels(label_path, nb_examples)
+    images = _extract_mnist_images(data_path, num_examples)
+    labels = _extract_mnist_labels(label_path, num_examples)
     # Shuffle the data to make sure classes are well distributed.
     data = list(zip(images, labels))
     random.shuffle(data)
