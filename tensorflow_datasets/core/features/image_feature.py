@@ -97,7 +97,7 @@ class Image(feature.FeatureConnector):
     return {
         'encoded': tf.FixedLenFeature(tuple(), tf.string),
         'format': tf.FixedLenFeature(tuple(), tf.string),
-        'shape': tf.FixedLenFeature((3,), tf.int32),
+        'shape': tf.FixedLenFeature((3,), tf.int64),
     }
 
   def encode_sample(self, image_or_path):
@@ -134,7 +134,7 @@ class Image(feature.FeatureConnector):
     """Reconstruct the image from the tf example."""
     tf_image = tf.image.decode_image(
         encoded_image['encoded'],
-        channels=encoded_image['shape'][-1],
+        channels=self._shape[-1],
         dtype=tf.uint8,
     )
     # TODO(epot): Add image shape. tf_image.set_shape(self._shape) ?

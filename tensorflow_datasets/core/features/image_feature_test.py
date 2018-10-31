@@ -19,9 +19,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+import tempfile
+
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import file_format_adapter
 
 
 class ImageFeatureTest(tf.test.TestCase):
@@ -97,9 +101,39 @@ class ImageFeatureTest(tf.test.TestCase):
     self.assertIn('Shape (128, 128, 3) do not match', str(err.exception))
 
 
+_encode_count = 0
+
+
 def _encode_decode(specs, sample):
+  """Runs the full pipeline: encode > write > tmp files > read > decode."""
+  # Encode sample
   encoded_sample = specs.encode_sample(sample)
-  return specs.decode_sample(encoded_sample)
+
+  # Build a unique filename to store the tfrecord
+  global _encode_count
+  _encode_count += 1
+  tmp_filename = os.path.join(tempfile.mkdtemp(), 'tmp.tfrecord')
+
+  # Read/write the file
+  file_adapter = file_format_adapter.TFRecordExampleAdapter(specs.get_specs())
+  file_adapter.write_from_generator(
+      generator_fn=lambda: [encoded_sample],
+      output_files=[tmp_filename],
+  )
+  dataset = file_adapter.dataset_from_filename(tmp_filename)
+
+  # Decode the sample
+  dataset = dataset.map(specs.decode_sample)
+
+  # Return the first sample
+  if tf.executing_eagerly():
+    return next(iter(dataset))
+  else:
+    with tf.Graph().as_default():
+      item = dataset.make_one_shot_iterator().get_next()
+      with tf.Session(config=tf.ConfigProto(device_count={'GPU': 0})) as sess:
+        return sess.run(item)
+
 
 if __name__ == '__main__':
   tf.test.main()
