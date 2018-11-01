@@ -167,8 +167,8 @@ class Cifar100(Cifar10):
         the `tf.data.Dataset` input pipeline.
       **kwargs: See DatasetBuilder.__init__.
     """
-    super(Cifar100, self).__init__(**kwargs)
     self._use_coarse_labels = use_coarse_labels
+    super(Cifar100, self).__init__(**kwargs)
 
   @property
   def _cifar_info(self):
@@ -188,8 +188,8 @@ class Cifar100(Cifar10):
         specs=features.SpecDict({
             "input": features.Image(shape=cifar_shape),
             "target": features.OneOf(choice=label_to_use, feature_dict={
-                "coarse_labels": tf.int32,
-                "fine_labels": tf.int32,
+                "coarse_labels": tf.int64,
+                "fine_labels": tf.int64,
             }),
         }),
     )
