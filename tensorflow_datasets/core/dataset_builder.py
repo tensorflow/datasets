@@ -406,10 +406,12 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     """
     super(GeneratorBasedDatasetBuilder, self).__init__(**kwargs)
 
+  @utils.memoized_property
+  def _file_format_adapter(self):
     # Load the format adapter (CSV, TF-Record,...)
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
     file_specs = self.info.specs.get_specs()
-    self._file_format_adapter = file_adapter_cls(file_specs)
+    return file_adapter_cls(file_specs)
 
   @abc.abstractmethod
   def _dataset_split_generators(self, dl_manager):
