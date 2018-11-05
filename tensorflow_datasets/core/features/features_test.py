@@ -26,30 +26,30 @@ import tensorflow as tf
 from tensorflow_datasets.core import features
 
 
-class TestInputConnector(features.SpecDict):
+class AnInputConnector(features.SpecDict):
   """Simple FeatureConnector implementing the based methods used for test."""
 
   def __init__(self):
-    super(TestInputConnector, self).__init__({
+    super(AnInputConnector, self).__init__({
         'a': tf.int32,
         'b': tf.int32,
     })
 
   def encode_sample(self, sample_data):
     # Encode take the input data and wrap in in a dict
-    return super(TestInputConnector, self).encode_sample({
+    return super(AnInputConnector, self).encode_sample({
         'a': sample_data + 1,
         'b': sample_data * 10
     })
 
   def decode_sample(self, tfexample_dict):
     # Decode take the saved dict and merge the two values
-    tfexample_dict = super(TestInputConnector, self).decode_sample(
+    tfexample_dict = super(AnInputConnector, self).decode_sample(
         tfexample_dict)
     return tfexample_dict['a'] + tfexample_dict['b']
 
 
-class TestOutputConnector(features.FeatureConnector):
+class AnOutputConnector(features.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
 
   def get_specs(self):
@@ -67,8 +67,8 @@ class FeatureTest(tf.test.TestCase):
   def setUp(self):
     # Create the spec dict used for all tests
     self._specs = features.SpecDict({
-        'input': TestInputConnector(),
-        'output': TestOutputConnector(),
+        'input': AnInputConnector(),
+        'output': AnOutputConnector(),
         'img': {
             'size': {
                 'height': tf.int32,
@@ -145,7 +145,7 @@ class OneOfTest(tf.test.TestCase):
             choice='choice2',
             feature_dict={
                 'choice1': tf.float32,
-                'choice2': TestInputConnector(),
+                'choice2': AnInputConnector(),
             },
         ),
     })
