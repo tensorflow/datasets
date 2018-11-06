@@ -23,8 +23,8 @@ import abc
 import six
 import tensorflow as tf
 
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import splits
 
 
 @six.add_metaclass(registered.RegisteredDataset)
@@ -85,20 +85,20 @@ class RegisteredTest(tf.test.TestCase):
 
     # EmptyDatasetBuilder returns self from as_dataset
     builder = registered.load(
-        name=name, split=dataset_builder.Split.TEST, data_dir=data_dir,
+        name=name, split=splits.Split.TEST, data_dir=data_dir,
         download=False, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertFalse(builder.download_called)
     print(as_dataset_kwargs)
     print(builder.as_dataset_kwargs)
-    self.assertEqual(dataset_builder.Split.TEST,
+    self.assertEqual(splits.Split.TEST,
                      builder.as_dataset_kwargs.pop("split"))
     print(builder.as_dataset_kwargs)
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
     builder = registered.load(
-        name=name, split=dataset_builder.Split.TRAIN, data_dir=data_dir,
+        name=name, split=splits.Split.TRAIN, data_dir=data_dir,
         download=True, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)

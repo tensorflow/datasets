@@ -20,7 +20,6 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import functools
 import os
 import random
 
@@ -30,6 +29,7 @@ from six.moves import cPickle
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import splits
 
 # CIFAR-10 constants
 _CIFAR10_URL = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
@@ -76,36 +76,26 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
         label_keys=["labels"],
     )
 
-  def _dataset_split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager):
     cifar_path = dl_manager.download_and_extract(self._cifar_info.url)
+    cifar_info = self._cifar_info
 
     def gen_filenames(filenames):
       for f in filenames:
         yield os.path.join(cifar_path, self._cifar_info.prefix, f)
 
-    train_gen = functools.partial(
-        self._generate_cifar_examples,
-        filepaths=gen_filenames(self._cifar_info.train_files),
-    )
-    test_gen = functools.partial(
-        self._generate_cifar_examples,
-        filepaths=gen_filenames(self._cifar_info.test_files),
-    )
-
-    train_splits = [
-        self._split_files(split=dataset_builder.Split.TRAIN, num_shards=10)
-    ]
-    test_splits = [
-        self._split_files(split=dataset_builder.Split.TEST, num_shards=1)
-    ]
     return [
-        dataset_builder.SplitGenerator(generator_fn=train_gen,
-                                       split_files=train_splits),
-        dataset_builder.SplitGenerator(generator_fn=test_gen,
-                                       split_files=test_splits),
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            num_shards=10,
+            gen_kwargs={"filepaths": gen_filenames(cifar_info.train_files)}),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            num_shards=1,
+            gen_kwargs={"filepaths": gen_filenames(cifar_info.test_files)}),
     ]
 
-  def _generate_cifar_examples(self, filepaths):
+  def _generate_samples(self, filepaths):
     """Generate CIFAR examples as dicts.
 
     Shared across CIFAR-{10, 100}. Uses self._cifar_info as

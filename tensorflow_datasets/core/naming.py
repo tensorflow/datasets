@@ -41,7 +41,7 @@ def filename_prefix_for_name(name):
 def filename_prefix_for_split(name, split):
   if os.path.basename(name) != name:
     raise ValueError("Should be a dataset name, not a path: %s" % name)
-  return "%s-%s" % (filename_prefix_for_name(name), split.value)
+  return "%s-%s" % (filename_prefix_for_name(name), str(split))
 
 
 def sharded_filenames(filename_prefix, num_shards):

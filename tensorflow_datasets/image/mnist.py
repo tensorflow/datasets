@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import functools
 import random
 
 import numpy as np
@@ -28,6 +27,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import splits
 
 # MNIST constants
 _MNIST_URL = "http://yann.lecun.com/exdb/mnist/"
@@ -57,7 +57,7 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
         }),
     )
 
-  def _dataset_split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager):
 
     # Download the full MNist Database
     filenames = {
@@ -72,32 +72,26 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
 
     # MNIST provides TRAIN and TEST splits, not a VALIDATION split, so we only
     # write the TRAIN and TEST splits to disk.
-    train_gen = functools.partial(
-        self._generate_mnist_examples,
-        num_examples=_TRAIN_EXAMPLES,
-        data_path=mnist_files["train_data"],
-        label_path=mnist_files["train_labels"],
-    )
-    test_gen = functools.partial(
-        self._generate_mnist_examples,
-        num_examples=_TEST_EXAMPLES,
-        data_path=mnist_files["test_data"],
-        label_path=mnist_files["test_labels"],
-    )
-    train_splits = [
-        self._split_files(split=dataset_builder.Split.TRAIN, num_shards=10)
-    ]
-    test_splits = [
-        self._split_files(split=dataset_builder.Split.TEST, num_shards=1)
-    ]
     return [
-        dataset_builder.SplitGenerator(generator_fn=train_gen,
-                                       split_files=train_splits),
-        dataset_builder.SplitGenerator(generator_fn=test_gen,
-                                       split_files=test_splits),
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            num_shards=10,
+            gen_kwargs=dict(
+                num_examples=_TRAIN_EXAMPLES,
+                data_path=mnist_files["train_data"],
+                label_path=mnist_files["train_labels"],
+            )),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            num_shards=1,
+            gen_kwargs=dict(
+                num_examples=_TEST_EXAMPLES,
+                data_path=mnist_files["test_data"],
+                label_path=mnist_files["test_labels"],
+            )),
     ]
 
-  def _generate_mnist_examples(self, num_examples, data_path, label_path):
+  def _generate_samples(self, num_examples, data_path, label_path):
     """Generate MNIST examples as dicts.
 
     Args:

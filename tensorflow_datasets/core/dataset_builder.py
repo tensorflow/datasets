@@ -20,10 +20,10 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
-import collections
 import datetime
+import functools
+import json
 import os
-import enum
 
 import six
 import tensorflow as tf
@@ -34,100 +34,88 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 
 import termcolor
 
 __all__ = [
-    "Split",
-    "SplitFiles",
+    "DatasetInfo",
     "DatasetBuilder",
-    "SplitGenerator",
     "GeneratorBasedDatasetBuilder",
 ]
 
 DEFAULT_DATA_DIR = os.path.join("~", "tensorflow_datasets")
+_DATASET_INFO_FILENAME = "dataset_info.json"  # TODO(afrozm): Replace by proto
 
 
-class Split(enum.Enum):
-  """`Enum` for dataset splits.
-
-  Datasets are typically split into different subsets to be used at various
-  stages of training and evaluation. All datasets have at least the `TRAIN` and
-  `TEST` splits.
-
-  Note that for datasets without a `VALIDATION` split, you should use a fraction
-  of the `TRAIN` data for evaluation as you iterate on your model so as not to
-  overfit to the `TEST` data. You can do so by...
-
-  TODO(rsepassi): update when as_dataset supports this.
-
-  * `TRAIN`: the training data.
-  * `VALIDATION`: the validation data. If present, this is typically used as
-    evaluation data while iterating on a model (e.g. changing hyperparameters,
-    model architecture, etc.).
-  * `TEST`: the testing data. This is the data to report metrics on. Typically
-    you do not want to use this during model iteration as you may overfit to it.
-  """
-  TRAIN = "train"
-  VALIDATION = "validation"
-  TEST = "test"
-
-
-class SplitFiles(object):
-  """Utility to produce filepaths and filepatterns for a Split."""
-
-  def __init__(self, dataset_name, split, num_shards, data_dir,
-               filetype_suffix=None):
-    """Constructs a SplitFiles object.
-
-    Args:
-      dataset_name: `str`, name of the dataset. Typically `DatasetBuilder.name`.
-      split: `tfds.Split`, which split of the dataset.
-      num_shards: `int`, number of file shards for this split on disk.
-      data_dir: `str`, directory containing the data files.
-      filetype_suffix: `str`, if provided, will be added to the filenames before
-        the sharding specification (e.g.
-        "foo_dataset-train.csv-00000-of-00001").
-    """
-    self.dataset_name = dataset_name
-    self.split = split
-    self.num_shards = num_shards
-    self.data_dir = data_dir
-    self.filetype_suffix = filetype_suffix
-
-  @property
-  def filepaths(self):
-    """Returns list of filepaths for this split."""
-    return naming.filepaths_for_dataset_split(
-        dataset_name=self.dataset_name,
-        split=self.split,
-        num_shards=self.num_shards,
-        data_dir=self.data_dir,
-        filetype_suffix=self.filetype_suffix)
-
-  @property
-  def filepattern(self):
-    """Returns a Glob filepattern for this split."""
-    return naming.filepattern_for_dataset_split(
-        dataset_name=self.dataset_name,
-        split=self.split,
-        data_dir=self.data_dir,
-        filetype_suffix=self.filetype_suffix)
-
-  def exists(self):
-    return file_format_adapter.do_files_exist(self.filepaths)
-
-
-# TODO(afrozm): Replace by the metadata DatasetInfo
-class DatasetInfo(collections.namedtuple("DatasetInfo", ["specs"])):
+# TODO(epot): Do a global renaming of builder.info.specs into
+# builder.info.features, SpecsDict => features.FeatureDict()
+class DatasetInfo(object):
   """Structure defining the info of the dataset.
 
-  DatasetInfo
+  Information on the datasets are available through the builder.info property.
+  Properties:
+    specs (SpecDict): Information on the feature dict of the `tf.data.Dataset()`
+      object from the `builder.as_dataset()` method.
+    splits (SplitDict): Available Splits for this dataset
+
+  Note that some of those fields are dynamically computed at data generation
+  time (ex: num_samples) and will be updated by update_from_metadata_dir().
+
   """
 
+  @api_utils.disallow_positional_args
+  def __init__(self, specs):
+    """Constructor of the DatasetInfo.
 
-# TODO(rsepassi): Add info() property
+    Args:
+      specs: (`tfds.features.SpecDict`) Information on the feature dict of the
+        `tf.data.Dataset()` object from the `builder.as_dataset()` method.
+
+    """
+    self._specs = specs
+    self._splits = splits.SplitDict()
+    # TODO(pierrot): Move SIZE here
+    # TODO(afrozm): Should add other metadata here (num samples, hash,...)
+
+  @property
+  def specs(self):
+    return self._specs
+
+  @property
+  def splits(self):
+    return self._splits
+
+  # TODO(afrozm): Use proto instead
+  def update_from_metadata_dir(self, metadata_dir):
+    """Update the DatasetInfo properties from the metadata file.
+
+    This function update all the dynamically generated fields (num_samples,
+    hash, time of creation,...) of the DatasetInfo. This reads the metadata
+    file on the dataset directory to extract the info and expose them.
+    This function is called after the data has been generated in
+    .download_and_prepare() and when the data is loaded and already exists.
+
+    This will overwrite all previous metadata.
+
+    Args:
+      metadata_dir: (str) The directory containing the metadata file. This
+        should be the root directory of a specific dataset version.
+    """
+    if not metadata_dir:
+      raise ValueError(
+          "Calling _refresh_metadata while metadata_dir hasn't been defined")
+
+    # Load the metadata from disk
+    # TODO(afrozm): Replace by proto
+    with tf.gfile.Open(os.path.join(metadata_dir, _DATASET_INFO_FILENAME)) as f:
+      metadata = json.loads(f.read())
+
+    # Restore the Splits
+    self._splits.from_json_data(metadata["splits"])
+
+
 @six.add_metaclass(registered.RegisteredDataset)
 class DatasetBuilder(object):
   """Abstract base class for datasets.
@@ -158,12 +146,17 @@ class DatasetBuilder(object):
     Callers must pass arguments as keyword arguments.
 
     Args:
-      data_dir (str): directory to read/write data.
-        Optional, useful for testing.
+      data_dir: (str) directory to read/write data. Defaults to
+        ~/tensorflow_datasets
     """
     self._data_dir_root = os.path.expanduser(data_dir or DEFAULT_DATA_DIR)
     # Get the last dataset if it exists (or None otherwise)
     self._data_dir = self._get_data_dir()
+
+    # If a previous dataset version exists, reload the dataset info metadata (
+    # splits info, num samples,...)
+    if self._data_dir:
+      self.info.update_from_metadata_dir(self._data_dir)
 
   @utils.memoized_property
   def info(self):
@@ -177,10 +170,10 @@ class DatasetBuilder(object):
     Subclasses must override _download_and_prepare.
 
     Args:
-      cache_dir (str): Cached directory where to extract the data. If None,
+      cache_dir: (str) Cached directory where to extract the data. If None,
         a default tmp directory will be used.
-      dl_manager (DownloadManager): DownloadManager to use. Only one of
-        dl_manager and cache_dir can be set
+      dl_manager: (`tfds.download.DownloadManager`) DownloadManager to use. Only
+        one of dl_manager and cache_dir can be set
 
     Raises:
       ValueError: If the user defines both cache_dir and dl_manager
@@ -207,6 +200,7 @@ class DatasetBuilder(object):
     curr_date = datetime.datetime.now()
     version_str = curr_date.strftime("v_%Y%m%d_%H%M")
     data_dir = self._get_data_dir(version=version_str)
+    self._data_dir = None
     tf.logging.info("Generating dataset %s (%s)", self.name, data_dir)
 
     # Print is intentional: we want this to always go to stdout so user has
@@ -218,11 +212,11 @@ class DatasetBuilder(object):
 
     # Wrap the Dataset generation in a .incomplete directory
     with file_format_adapter.incomplete_dir(data_dir) as data_dir_tmp:
-      # TODO(epot): Data_dir should be an argument of download_and_prepare.
-      # Modify this once a better split API exists.
-      self._data_dir = data_dir_tmp
-      self._download_and_prepare(dl_manager)
-      self._data_dir = data_dir
+      self._download_and_prepare(dl_manager=dl_manager, data_dir=data_dir_tmp)
+
+    # Update the DatasetInfo metadata (splits info, num samples,...)
+    self._data_dir = data_dir
+    self.info.update_from_metadata_dir(self._data_dir)
 
   # TODO(rsepassi): Make it easy to further shard the TRAIN data (e.g. for
   # synthetic VALIDATION splits).
@@ -278,11 +272,11 @@ class DatasetBuilder(object):
     """Return the data directory of one dataset version.
 
     Args:
-      version (str): If specified, return the data_dir associated with the
+      version: (str) If specified, return the data_dir associated with the
         given version
 
     Returns:
-      data_dir (str):
+      data_dir: (str)
         If version is given, return the data_dir associated with this version.
         Otherwise, automatically extract the last version from the directory.
         If no previous version is found, return None.
@@ -303,11 +297,6 @@ class DatasetBuilder(object):
     # No directory found
     return None
 
-  def _split_files(self, **kwargs):
-    kwargs["dataset_name"] = self.name
-    kwargs["data_dir"] = self._data_dir
-    return SplitFiles(**kwargs)
-
   @abc.abstractmethod
   def _info(self):
     """Construct the DatasetInfo object. See `DatasetInfo` for details.
@@ -316,12 +305,12 @@ class DatasetBuilder(object):
     following .info() calls.
 
     Returns:
-      dataset_info (DatasetInfo): The dataset information
+      dataset_info: (DatasetInfo) The dataset information
     """
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _download_and_prepare(self, dl_manager):
+  def _download_and_prepare(self, dl_manager, data_dir):
     """Downloads and prepares dataset for reading.
 
     This is the internal implementation to overwritte called when user call
@@ -329,8 +318,9 @@ class DatasetBuilder(object):
     the pre-processed datasets files.
 
     Args:
-      dl_manager (DownloadManager): `DownloadManager` used to download and cache
+      dl_manager: (DownloadManager) `DownloadManager` used to download and cache
         data.
+      data_dir: (str) Temporary folder on which generating the data
     """
     raise NotImplementedError
 
@@ -353,43 +343,16 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
 
-class SplitGenerator(collections.namedtuple("_SplitGenerator",
-                                            ["generator_fn", "split_files"])):
-  """Contains a generator to produce examples across splits.
-
-  Args:
-    generator_fn: function with no arguments yielding feature dictionaries.
-    split_files: `list<SplitFiles>`, splits that the examples from
-      `generator_fn` should be sharded across.
-  """
-
-  def output_files_exist(self):
-    """Whether all the specified output files exist."""
-    return all([split.exists() for split in self.split_files])
-
-  @property
-  def output_files(self):
-    """Output files combined across `split_files`."""
-    output_files = []
-    for split in self.split_files:
-      output_files.extend(split.filepaths)
-    return output_files
-
-  @property
-  def splits(self):
-    return [sf.split for sf in self.split_files]
-
-
 class GeneratorBasedDatasetBuilder(DatasetBuilder):
   """Base class for datasets with data generation based on dict generators.
 
   `GeneratorBasedDatasetBuilder` is a convenience class that abstracts away much
   of the data writing and reading of `DatasetBuilder`. It expects subclasses to
   implement generators of feature dictionaries across the dataset splits
-  (`_dataset_split_generators`) and to specify a file type
+  (`_split_generators`) and to specify a file type
   (`_file_format_adapter`). See the method docstrings for details.
 
-  Minimally, subclasses must override `_dataset_split_generators` and
+  Minimally, subclasses must override `_split_generators` and
   `_file_format_adapter`.
 
   `FileFormatAdapter`s are defined in
@@ -414,79 +377,164 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     return file_adapter_cls(file_specs)
 
   @abc.abstractmethod
-  def _dataset_split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager):
     """Specify feature dictionary generators and dataset splits.
 
-    This function returns a list of `SplitGenerator`s.
-    Each generator yields feature dictionaries (`dict<str feature_name,
-    feature_value>`).  The examples yielded by each generator will be written to
-    the specified `SplitFile`s.
+    This function returns a list of `SplitGenerator`s defining how to generate
+    data and what splits to use.
 
-    If a generator produces data exclusively for a single split, then the
-    `SplitGenerator` should have only a single `SplitFile`.
+    Example:
 
-    If a generator produces examples that should be sharded across multiple
-    splits (this is the case if the underlying dataset does not have pre-defined
-    data splits), then the `SplitGenerator` will have multiple `SplitFile`s
-    (equal to the number of splits the examples should be sharded across). The
-    proportion of the examples that will end up in each split is defined by the
-    relative number of shards each `ShardFiles` object specifies. For example:
-
-    ```
-    def _dataset_split_generators(self):
-      return [
-          SplitGenerator(
-              generator_fn=my_generator_fn,
-              split_files=[
-                  self._split_files(split=Split.TRAIN, num_shards=2),
-                  self._split_files(split=Split.VALIDATION, num_shards=2),
-                  self._split_files(split=Split.TEST, num_shards=2)
-              ]
-          )
+      return[
+          tfds.SplitGenerator(
+              name=tfds.Split.TRAIN,
+              num_shards=10,
+              gen_kwargs={'file': 'train_data.zip'},
+          ),
+          tfds.SplitGenerator(
+              name=tfds.Split.TEST,
+              num_shards=5,
+              gen_kwargs={'file': 'test_data.zip'},
+          ),
       ]
-    ```
 
-    The examples from `my_generator_fn` would be split evenly across the 3
-    `Split`s provided.
+    The above code will first call `_generate_samples(file='train_data.zip')` to
+    write the train data, then `_generate_samples(file='test_data.zip')` to
+    write the test data.
 
-    Each `SplitFiles` can be constructed with the `_split_files` helper method
-    (`self._split_files(split=Split.TRAIN, num_shards=10)`) which fills in
-    common fields.
+    Datasets are typically split into different subsets to be used at various
+    stages of training and evaluation.
+
+    Note that for datasets without a `VALIDATION` split, you can use a
+    fraction of the `TRAIN` data for evaluation as you iterate on your model
+    so as not to overfit to the `TEST` data.
+
+    You can use a single generator shared between splits by providing list
+    instead of values for `tfds.SplitGenerator` (this is the case if the
+    underlying dataset does not have pre-defined data splits):
+
+      return [tfds.SplitGenerator(
+          name=[tfds.Split.TRAIN, tfds.Split.VALIDATION],
+          num_shards=[10, 3],
+      )]
+
+    This will call `_generate_samples()` once but will automatically distribute
+    the samples between train and validation set.
+    The proportion of the examples that will end up in each split is defined
+    by the relative number of shards each `ShardFiles` object specifies. In
+    the previous case, the train split would contains 10/13 of the samples,
+    while the validation split would contain 3/13.
 
     For downloads and extractions, use the given `download_manager`.
     Note that the `DownloadManager` caches downloads, so it is fine to have each
     generator attempt to download the source data.
 
+    A good practice is to download all data in this function, and then
+    distribute the relevant parts to each split with the `gen_kwargs` argument
+
     Args:
-      dl_manager (DownloadManager): Download manager to download the data
+      dl_manager: (DownloadManager) Download manager to download the data
 
     Returns:
-      `list<SplitGenerator`>.
+      `list<SplitGenerator>`.
     """
     raise NotImplementedError()
 
-  def _download_and_prepare(self, dl_manager):
-    if not tf.gfile.Exists(self._data_dir):
-      tf.gfile.MakeDirs(self._data_dir)
-    for split_generator in self._dataset_split_generators(dl_manager):
-      if split_generator.output_files_exist():
-        tf.logging.info("Skipping download_and_prepare for splits %s as all "
-                        "files exist.", split_generator.splits)
-        continue
-      self._file_format_adapter.write_from_generator(
-          split_generator.generator_fn, split_generator.output_files)
+  @abc.abstractmethod
+  def _generate_samples(self, **kwargs):
+    """Default function generating samples for each `SplitGenerator`.
 
-  def _as_dataset(self, split=Split.TRAIN, shuffle_files=None):
+    This function preprocess the samples from the raw data to the preprocessed
+    dataset files.
+    This function is called once for each `SplitGenerator` defined in
+    `_split_generators`. The examples yielded here will be written on
+    disk.
+
+    Args:
+      **kwargs: (dict) Arguments forwarded from the SplitGenerator.gen_kwargs
+
+    Yields:
+      sample: (dict) Sample dict<str feature_name, feature_value>. The sample
+        should usually be encoded with `self.info.specs.encode_sample({...})`
+    """
+    raise NotImplementedError()
+
+  def _download_and_prepare(self, dl_manager, data_dir):
+    if not tf.gfile.Exists(data_dir):
+      tf.gfile.MakeDirs(data_dir)
+
+    # Generating datata for all splits
+    split_dict = splits.SplitDict()
+    for split_generator in self._split_generators(dl_manager):
+      # Keep track of all split_info
+      for s in split_generator.split_info_list:
+        split_dict.add(s)
+
+      # Generate the filenames and write the sample on disk
+      generator_fn = functools.partial(
+          self._generate_samples,
+          **split_generator.gen_kwargs
+      )
+      output_files = self._build_split_filenames(
+          data_dir=data_dir,
+          split_info_list=split_generator.split_info_list,
+      )
+      self._file_format_adapter.write_from_generator(
+          generator_fn,
+          output_files,
+      )
+
+    # Saving metadata
+    # TODO(epot): Also include the specs in the metadata for documentation.
+    metadata = {
+        "splits": split_dict.to_json_data(),
+    }
+    dataset_info_path = os.path.join(data_dir, _DATASET_INFO_FILENAME)
+    with tf.gfile.Open(dataset_info_path, "w") as f:
+      f.write(json.dumps(metadata))
+
+  def _as_dataset(self, split=splits.Split.TRAIN, shuffle_files=None):
+    # Automatically activate shuffling if training
+    should_shuffle = shuffle_files
+    if shuffle_files is None:
+      should_shuffle = split == splits.Split.TRAIN
+
+    # Compute filenames from the given split
+    # TODO(epot): Implement synthetic splits
+    filenames = self._build_split_filenames(
+        data_dir=self._data_dir,
+        split_info_list=[self.info.splits[split]],
+    )
+
+    # Load the dataset
     tf_data = dataset_utils.build_dataset(
-        filepattern=self._split_files(num_shards=None, split=split).filepattern,
+        filepattern=filenames,
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
-        shuffle_files=(
-            split == Split.TRAIN if shuffle_files is None else shuffle_files))
+        shuffle_files=should_shuffle,
+    )
     tf_data = tf_data.map(self.info.specs.decode_sample)
     return tf_data
 
-  def _split_files(self, **kwargs):
-    kwargs["dataset_name"] = self.name
-    kwargs["data_dir"] = self._data_dir
-    kwargs["filetype_suffix"] = self._file_format_adapter.filetype_suffix
-    return SplitFiles(**kwargs)
+  def _build_split_filenames(self, data_dir, split_info_list):
+    """Construct the split filenames associated with the split info.
+
+    Args:
+      data_dir: (str) Root directory of the filenames
+      split_info_list: (list[SplitInfo]) List of split from which generate the
+        filenames
+
+    Returns:
+      filenames: (list[str]) The list of filenames path corresponding to the
+        split info object
+    """
+
+    filenames = []
+    for split_info in split_info_list:
+      filenames.extend(naming.filepaths_for_dataset_split(
+          dataset_name=self.name,
+          split=split_info.name,
+          num_shards=split_info.num_shards,
+          data_dir=data_dir,
+          filetype_suffix=self._file_format_adapter.filetype_suffix,
+      ))
+    return filenames

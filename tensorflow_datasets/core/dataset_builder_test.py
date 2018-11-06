@@ -25,6 +25,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
 
 tf.enable_eager_execution()
@@ -32,26 +33,21 @@ tf.enable_eager_execution()
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
 
-  @property
-  def splits(self):
-    return [
-        self._split_files(split=dataset_builder.Split.TRAIN, num_shards=2),
-        self._split_files(split=dataset_builder.Split.TEST, num_shards=1),
-    ]
-
-  def _dataset_split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [dataset_builder.SplitGenerator(
-        generator_fn=self.dummy_data_generator, split_files=self.splits)]
+    return [splits.SplitGenerator(
+        name=[splits.Split.TRAIN, splits.Split.TEST],
+        num_shards=[2, 1],
+    )]
 
   def _info(self):
     return dataset_builder.DatasetInfo(
         specs=features.SpecDict({"x": tf.int64}),
     )
 
-  def dummy_data_generator(self):
+  def _generate_samples(self):
     for i in range(30):
       yield self.info.specs.encode_sample({"x": i})
 
@@ -68,15 +64,17 @@ class DatasetBuilderTest(tf.test.TestCase):
           for fname in tf.gfile.ListDirectory(builder._data_dir)
       ]
       # The data_dir contains the cached directory by default
-      expected_filepaths = []
-      for split in builder.splits:
-        expected_filepaths.extend(split.filepaths)
+      expected_filepaths = builder._build_split_filenames(
+          data_dir=builder._data_dir,
+          split_info_list=builder.info.splits.values())
+      expected_filepaths.append(
+          os.path.join(builder._data_dir, "dataset_info.json"))
       self.assertEqual(sorted(expected_filepaths), sorted(written_filepaths))
 
-      splits = [
-          dataset_builder.Split.TRAIN, dataset_builder.Split.TEST
+      splits_list = [
+          splits.Split.TRAIN, splits.Split.TEST
       ]
-      datasets = [builder.as_dataset(split=split) for split in splits]
+      datasets = [builder.as_dataset(split=split) for split in splits_list]
       data = [[el["x"].numpy() for el in dataset] for dataset in datasets]
 
       train_data, test_data = data
@@ -90,7 +88,7 @@ class DatasetBuilderTest(tf.test.TestCase):
           name="dummy_dataset_shared_generator",
           data_dir=tmp_dir,
           download=True,
-          split=dataset_builder.Split.TRAIN)
+          split=splits.Split.TRAIN)
       data = list(dataset)
       self.assertEqual(20, len(data))
 
@@ -99,7 +97,7 @@ class DatasetBuilderTest(tf.test.TestCase):
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
       items = []
-      for item in builder.numpy_iterator(split=dataset_builder.Split.TRAIN):
+      for item in builder.numpy_iterator(split=splits.Split.TRAIN):
         items.append(item)
       self.assertEqual(20, len(items))
 

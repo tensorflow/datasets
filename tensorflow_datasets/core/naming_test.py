@@ -21,8 +21,8 @@ from __future__ import print_function
 
 from absl.testing import parameterized
 import tensorflow as tf
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import splits
 
 
 class NamingTest(parameterized.TestCase, tf.test.TestCase):
@@ -53,7 +53,7 @@ class NamingTest(parameterized.TestCase, tf.test.TestCase):
       ("FooBar", "foo_bar-train"),
   )
   def test_filename_prefix_for_split(self, prefix, expected):
-    split = dataset_builder.Split.TRAIN
+    split = splits.Split.TRAIN
     self.assertEqual(expected, naming.filename_prefix_for_split(prefix, split))
 
   def test_filepaths_for_dataset_split(self):
@@ -63,7 +63,7 @@ class NamingTest(parameterized.TestCase, tf.test.TestCase):
     ],
                      naming.filepaths_for_dataset_split(
                          dataset_name="foo",
-                         split=dataset_builder.Split.TRAIN,
+                         split=splits.Split.TRAIN,
                          num_shards=2,
                          data_dir="/tmp/bar/"))
 
@@ -74,7 +74,7 @@ class NamingTest(parameterized.TestCase, tf.test.TestCase):
     ],
                      naming.filepaths_for_dataset_split(
                          dataset_name="foo",
-                         split=dataset_builder.Split.TRAIN,
+                         split=splits.Split.TRAIN,
                          num_shards=2,
                          data_dir="/tmp/bar/",
                          filetype_suffix="bar"))
@@ -83,12 +83,12 @@ class NamingTest(parameterized.TestCase, tf.test.TestCase):
     self.assertEqual("/tmp/bar/foo-test*",
                      naming.filepattern_for_dataset_split(
                          dataset_name="foo",
-                         split=dataset_builder.Split.TEST,
+                         split=splits.Split.TEST,
                          data_dir="/tmp/bar/"))
     self.assertEqual("/tmp/bar/foo-test.bar*",
                      naming.filepattern_for_dataset_split(
                          dataset_name="foo",
-                         split=dataset_builder.Split.TEST,
+                         split=splits.Split.TEST,
                          filetype_suffix="bar",
                          data_dir="/tmp/bar/"))
 
