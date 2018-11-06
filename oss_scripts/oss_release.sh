@@ -5,6 +5,12 @@ set -e  # fail and exit on any command erroring
 
 GIT_COMMIT_ID=${1:-""}
 [[ -z $GIT_COMMIT_ID ]] && echo "Must provide a commit" && exit 1
+SETUP_ARGS = ""
+if [ "$GIT_COMMIT_ID" = "nightly" ]
+then
+  GIT_COMMIT_ID = "master"
+  SETUP_ARGS = "--nightly"
+fi
 
 TMP_DIR=$(mktemp -d)
 pushd $TMP_DIR
@@ -18,8 +24,8 @@ pip install wheel twine pyopenssl
 
 # Build the distribution
 echo "Building distribution"
-python setup.py sdist
-python setup.py bdist_wheel --universal
+python setup.py sdist $SETUP_ARGS
+python setup.py bdist_wheel --universal $SETUP_ARGS
 
 # Publish to PyPI
 read -p "Publish? (y/n) " -r

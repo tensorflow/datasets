@@ -10,10 +10,23 @@ Usage outside of TensorFlow is also supported.
 See the README on GitHub for further documentation.
 """
 
+import datetime
 import sys
 
 from setuptools import find_packages
 from setuptools import setup
+
+nightly = False
+if '--nightly' in sys.argv:
+  nightly = True
+  sys.argv.remove('--nightly')
+
+project_name = 'tensorflow-datasets'
+version = '0.0.1'
+if nightly:
+  project_name = 'tfds-nightly'
+  datestring = datetime.datetime.now().strftime('%Y%m%d')
+  version = '%s-dev%s' % (version, datestring)
 
 DOCLINES = __doc__.split('\n')
 
@@ -47,8 +60,8 @@ if sys.version_info < (3, 4):
 
 
 setup(
-    name='tensorflow-datasets',
-    version='0.0.1',
+    name=project_name,
+    version=version,
     description=DOCLINES[0],
     long_description='\n'.join(DOCLINES[2:]),
     author='Google Inc.',
