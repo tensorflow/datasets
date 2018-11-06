@@ -28,6 +28,7 @@ import six
 from six.moves import cPickle
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits
 
@@ -58,7 +59,7 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
 
   def _info(self):
     cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
-    return dataset_builder.DatasetInfo(
+    return dataset_info.DatasetInfo(
         specs=features.SpecDict({
             "input": features.Image(shape=cifar_shape),
             "target": tf.int64,  # Could replace by features.Label()
@@ -174,7 +175,7 @@ class Cifar100(Cifar10):
   def _info(self):
     cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
     label_to_use = "coarse_labels" if self._use_coarse_labels else "fine_labels"
-    return dataset_builder.DatasetInfo(
+    return dataset_info.DatasetInfo(
         specs=features.SpecDict({
             "input": features.Image(shape=cifar_shape),
             "target": features.OneOf(choice=label_to_use, feature_dict={

@@ -24,7 +24,7 @@ Each dataset is defined as a `tfds.DatasetBuilder`.
 # pylint: disable=g-multiple-import
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
-from tensorflow_datasets.core.dataset_builder import DatasetInfo
+from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder, list_builders, load
 from tensorflow_datasets.core.splits import Split

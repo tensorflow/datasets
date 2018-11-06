@@ -22,6 +22,7 @@ from __future__ import print_function
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
@@ -53,7 +54,7 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
       })
 
   def _info(self):
-    return dataset_builder.DatasetInfo(
+    return dataset_info.DatasetInfo(
         specs=features.SpecDict({
             "x": tf.int64,
             "y": tf.int64,

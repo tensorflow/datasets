@@ -29,6 +29,7 @@ import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
@@ -40,80 +41,11 @@ from tensorflow_datasets.core import utils
 import termcolor
 
 __all__ = [
-    "DatasetInfo",
     "DatasetBuilder",
     "GeneratorBasedDatasetBuilder",
 ]
 
 DEFAULT_DATA_DIR = os.path.join("~", "tensorflow_datasets")
-_DATASET_INFO_FILENAME = "dataset_info.json"  # TODO(afrozm): Replace by proto
-
-
-# TODO(epot): Do a global renaming of builder.info.specs into
-# builder.info.features, SpecsDict => features.FeatureDict()
-class DatasetInfo(object):
-  """Structure defining the info of the dataset.
-
-  Information on the datasets are available through the builder.info property.
-  Properties:
-    specs (SpecDict): Information on the feature dict of the `tf.data.Dataset()`
-      object from the `builder.as_dataset()` method.
-    splits (SplitDict): Available Splits for this dataset
-
-  Note that some of those fields are dynamically computed at data generation
-  time (ex: num_samples) and will be updated by update_from_metadata_dir().
-
-  """
-
-  @api_utils.disallow_positional_args
-  def __init__(self, specs):
-    """Constructor of the DatasetInfo.
-
-    Args:
-      specs: (`tfds.features.SpecDict`) Information on the feature dict of the
-        `tf.data.Dataset()` object from the `builder.as_dataset()` method.
-
-    """
-    self._specs = specs
-    self._splits = splits.SplitDict()
-    # TODO(pierrot): Move SIZE here
-    # TODO(afrozm): Should add other metadata here (num samples, hash,...)
-
-  @property
-  def specs(self):
-    return self._specs
-
-  @property
-  def splits(self):
-    return self._splits
-
-  # TODO(afrozm): Use proto instead
-  def update_from_metadata_dir(self, metadata_dir):
-    """Update the DatasetInfo properties from the metadata file.
-
-    This function update all the dynamically generated fields (num_samples,
-    hash, time of creation,...) of the DatasetInfo. This reads the metadata
-    file on the dataset directory to extract the info and expose them.
-    This function is called after the data has been generated in
-    .download_and_prepare() and when the data is loaded and already exists.
-
-    This will overwrite all previous metadata.
-
-    Args:
-      metadata_dir: (str) The directory containing the metadata file. This
-        should be the root directory of a specific dataset version.
-    """
-    if not metadata_dir:
-      raise ValueError(
-          "Calling _refresh_metadata while metadata_dir hasn't been defined")
-
-    # Load the metadata from disk
-    # TODO(afrozm): Replace by proto
-    with tf.gfile.Open(os.path.join(metadata_dir, _DATASET_INFO_FILENAME)) as f:
-      metadata = json.loads(f.read())
-
-    # Restore the Splits
-    self._splits.from_json_data(metadata["splits"])
 
 
 @six.add_metaclass(registered.RegisteredDataset)
@@ -489,7 +421,9 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     metadata = {
         "splits": split_dict.to_json_data(),
     }
-    dataset_info_path = os.path.join(data_dir, _DATASET_INFO_FILENAME)
+    dataset_info_path = os.path.join(
+        data_dir,
+        dataset_info.DATASET_INFO_FILENAME)
     with tf.gfile.Open(dataset_info_path, "w") as f:
       f.write(json.dumps(metadata))
 

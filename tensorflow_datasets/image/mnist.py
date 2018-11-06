@@ -26,6 +26,7 @@ import six.moves.urllib as urllib
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits
 
@@ -50,7 +51,7 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
 
   def _info(self):
     mnist_shape = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
-    return dataset_builder.DatasetInfo(
+    return dataset_info.DatasetInfo(
         specs=features.SpecDict({
             "input": features.Image(shape=mnist_shape),
             "target": tf.int64,

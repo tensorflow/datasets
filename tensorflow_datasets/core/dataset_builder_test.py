@@ -23,6 +23,7 @@ import os
 
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
@@ -43,7 +44,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
     )]
 
   def _info(self):
-    return dataset_builder.DatasetInfo(
+    return dataset_info.DatasetInfo(
         specs=features.SpecDict({"x": tf.int64}),
     )
 
