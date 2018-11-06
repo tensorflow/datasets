@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+from tensorflow_datasets.core import utils
 
 __all__ = [
     "build_dataset",
@@ -60,7 +61,7 @@ def iterate_over_dataset(dataset):
       yield tf.contrib.framework.nest.pack_sequence_as(item, flat)
   else:
     item = dataset.make_one_shot_iterator().get_next()
-    with tf.Session(config=tf.ConfigProto(device_count={"GPU": 0})) as sess:
+    with utils.session() as sess:
       while True:
         try:
           yield sess.run(item)

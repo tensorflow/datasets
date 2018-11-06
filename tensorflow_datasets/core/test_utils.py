@@ -19,10 +19,15 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import collections
 import contextlib
+import os
 import tempfile
 
 import tensorflow as tf
+
+from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import file_format_adapter
 
 
 @contextlib.contextmanager
@@ -40,3 +45,33 @@ def make_tmp_dir(dirname=None):
 
 def rm_tmp_dir(dirname):
   tf.gfile.DeleteRecursively(dirname)
+
+
+class FeatureExpectation(
+    collections.namedtuple('_FeatureExpectation',
+                           ['name', 'feature', 'value', 'expected'])):
+  pass
+
+
+def features_encode_decode(specs_dict, sample):
+  """Runs the full pipeline: encode > write > tmp files > read > decode."""
+  # Encode sample
+  encoded_sample = specs_dict.encode_sample(sample)
+
+  with tmp_dir() as tmp_dir_:
+    tmp_filename = os.path.join(tmp_dir_, 'tmp.tfrecord')
+
+    # Read/write the file
+    file_adapter = file_format_adapter.TFRecordExampleAdapter(
+        specs_dict.get_specs())
+    file_adapter.write_from_generator(
+        generator_fn=lambda: [encoded_sample],
+        output_files=[tmp_filename],
+    )
+    dataset = file_adapter.dataset_from_filename(tmp_filename)
+
+    # Decode the sample
+    dataset = dataset.map(specs_dict.decode_sample)
+
+    for el in dataset_utils.iterate_over_dataset(dataset):
+      return el

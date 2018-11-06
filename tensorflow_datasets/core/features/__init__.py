@@ -20,3 +20,4 @@ from tensorflow_datasets.core.features.feature import OneOf
 from tensorflow_datasets.core.features.feature import SpecDict
 from tensorflow_datasets.core.features.feature import Tensor
 from tensorflow_datasets.core.features.image_feature import Image
+from tensorflow_datasets.core.features.text_feature import Text

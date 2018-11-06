@@ -209,18 +209,16 @@ class FeatureTensorTest(tf.test.TestCase):
     self.assertAllEqual(tf_output['input'], array_input)
 
     # Invalid type
-    with self.assertRaises(ValueError) as err:
+    with self.assertRaisesWithPredicateMatch(ValueError, 'int64 do not match'):
       _encode_decode(specs, {
           'input': np.random.randint(256, size=(2, 3)),
       })
-    self.assertIn('Dtype int64 do not match', str(err.exception))
 
     # Invalid shape
-    with self.assertRaises(ValueError) as err:
+    with self.assertRaisesWithPredicateMatch(ValueError, 'are incompatible'):
       _encode_decode(specs, {
           'input': np.random.rand(2, 4).astype(np.float32),
       })
-    self.assertIn('Shape (2, 4) do not match', str(err.exception))
 
   def test_shapes_dynamic(self):
     specs = features.SpecDict({
@@ -235,11 +233,10 @@ class FeatureTensorTest(tf.test.TestCase):
     self.assertAllEqual(tf_output['input'], np_input)
 
     # Invalid shape
-    with self.assertRaises(ValueError) as err:
+    with self.assertRaisesWithPredicateMatch(ValueError, 'are incompatible'):
       _encode_decode(specs, {
           'input': np.random.randint(256, size=(2, 3, 2), dtype=np.int32),
       })
-    self.assertIn('Shape (2, 3, 2) do not match', str(err.exception))
 
 
 def _encode_decode(specs, sample):

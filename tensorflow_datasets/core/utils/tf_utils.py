@@ -102,7 +102,7 @@ class TFGraphRunner(object):
       placeholder = tf.placeholder(dtype=input_.dtype, shape=input_.shape)
       output = run_args.fct(placeholder)
       return GraphRun(
-          session=tf.Session(),
+          session=session(),
           graph=g,
           placeholder=placeholder,
           output=output,
@@ -137,11 +137,16 @@ def assert_shape_match(shape1, shape2):
     shape1 (tuple): Static shape
     shape2 (tuple): Dyncamic shape (can contains None)
   """
-  if len(shape1) != len(shape2):
-    raise ValueError('Shapes should have same length: {} - {}'.format(
-        len(shape1), len(shape2)))
-  if not all(
-      s1 == s2  # All shape should match
-      for s1, s2 in zip(shape1, shape2)
-      if s2 is not None):
-    raise ValueError('Shape {} do not match {}'.format(shape1, shape2))
+  shape1 = tf.TensorShape(shape1)
+  shape2 = tf.TensorShape(shape2)
+  if shape1.ndims is None or shape2.ndims is None:
+    raise ValueError('Shapes must have known rank. Got %s and %s.' %
+                     (shape1.ndims, shape2.ndims))
+  shape1.assert_same_rank(shape2)
+  shape1.assert_is_compatible_with(shape2)
+
+
+def session():
+  """tf.Session, hiding GPUs."""
+  config = tf.ConfigProto(device_count={'GPU': 0})
+  return tf.Session(config=config)
