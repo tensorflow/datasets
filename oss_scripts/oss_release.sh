@@ -5,11 +5,11 @@ set -e  # fail and exit on any command erroring
 
 GIT_COMMIT_ID=${1:-""}
 [[ -z $GIT_COMMIT_ID ]] && echo "Must provide a commit" && exit 1
-SETUP_ARGS = ""
+SETUP_ARGS=""
 if [ "$GIT_COMMIT_ID" = "nightly" ]
 then
-  GIT_COMMIT_ID = "master"
-  SETUP_ARGS = "--nightly"
+  GIT_COMMIT_ID="master"
+  SETUP_ARGS="--nightly"
 fi
 
 TMP_DIR=$(mktemp -d)
