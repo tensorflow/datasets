@@ -25,7 +25,7 @@ project_name = 'tensorflow-datasets'
 version = '0.0.1'
 if nightly:
   project_name = 'tfds-nightly'
-  datestring = datetime.datetime.now().strftime('%Y%m%d')
+  datestring = datetime.datetime.now().strftime('%Y%m%d%H%M')
   version = '%s-dev%s' % (version, datestring)
 
 DOCLINES = __doc__.split('\n')
