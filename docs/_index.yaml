@@ -33,7 +33,7 @@ landing_page:
                             download=True)
 
         # Build your input pipeline
-        dataset = dataset.shuffle(1024).batch(32).prefetch(100)
+        dataset = dataset.shuffle(1024).batch(32).prefetch(tf.contrib.data.AUTOTUNE)
         for features in dataset.take(1):
           image, label = features["input"], features["target"]
         </pre>

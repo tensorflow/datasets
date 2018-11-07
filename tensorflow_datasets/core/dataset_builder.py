@@ -61,7 +61,9 @@ class DatasetBuilder(object):
   assert isinstance(train_dataset, tf.data.Dataset)
 
   # And then the rest of your input pipeline
-  train_dataset = train_dataset.repeat().shuffle(1024).batch(128).prefetch(4)
+  train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
+  # Use tf.contrib.data.AUTOTUNE to automatically optimize the input pipeline
+  train_dataset = train_dataset.prefetch(tf.contrib.data.AUTOTUNE)
   features = train_dataset.make_one_shot_iterator().get_next()
   image, label = features['input'], features['target']
   ```
@@ -191,7 +193,7 @@ class DatasetBuilder(object):
     """
     def iterate():
       dataset = self.as_dataset(**as_dataset_kwargs)
-      dataset = dataset.prefetch(128)
+      dataset = dataset.prefetch(tf.contrib.data.AUTOTUNE)
       return dataset_utils.iterate_over_dataset(dataset)
 
     if tf.executing_eagerly():

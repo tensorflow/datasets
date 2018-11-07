@@ -34,7 +34,7 @@ dataset = tfds.load(name="mnist",
                     download=True)
 
 # Build your input pipeline
-dataset = dataset.shuffle(1000).batch(128).prefetch(1)
+dataset = dataset.shuffle(1000).batch(128).prefetch(tf.contrib.data.AUTOTUNE)
 features = dataset.make_oneshot_iterator().get_next()
 image, label = features["input"], features["target"]
 ```
