@@ -61,7 +61,7 @@ def iterate_over_dataset(dataset):
       yield tf.contrib.framework.nest.pack_sequence_as(item, flat)
   else:
     item = dataset.make_one_shot_iterator().get_next()
-    with utils.session() as sess:
+    with utils.nogpu_session() as sess:
       while True:
         try:
           yield sess.run(item)

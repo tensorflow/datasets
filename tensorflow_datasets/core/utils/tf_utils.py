@@ -102,7 +102,7 @@ class TFGraphRunner(object):
       placeholder = tf.placeholder(dtype=input_.dtype, shape=input_.shape)
       output = run_args.fct(placeholder)
       return GraphRun(
-          session=session(),
+          session=nogpu_session(),
           graph=g,
           placeholder=placeholder,
           output=output,
@@ -146,7 +146,7 @@ def assert_shape_match(shape1, shape2):
   shape1.assert_is_compatible_with(shape2)
 
 
-def session():
+def nogpu_session():
   """tf.Session, hiding GPUs."""
   config = tf.ConfigProto(device_count={'GPU': 0})
   return tf.Session(config=config)
