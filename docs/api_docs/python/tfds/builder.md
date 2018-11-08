@@ -12,6 +12,10 @@ tfds.builder(
 )
 ```
 
+
+
+Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
+
 Fetches a <a href="../tfds/DatasetBuilder.md"><code>tfds.DatasetBuilder</code></a> by string name.
 
 #### Args:

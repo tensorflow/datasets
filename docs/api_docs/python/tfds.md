@@ -1,10 +1,13 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds" />
 <meta itemprop="path" content="Stable" />
-<meta itemprop="property" content="__all__"/>
 </div>
 
 # Module: tfds
+
+
+
+Defined in [`__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py).
 
 `tensorflow_datasets` package.
 
@@ -21,9 +24,9 @@ Each dataset is defined as a <a href="./tfds/DatasetBuilder.md"><code>tfds.Datas
 
 [`class DatasetBuilder`](./tfds/DatasetBuilder.md): Abstract base class for datasets.
 
-[`class GenerateMode`](./tfds/download/GenerateMode.md): Enum for the different version conflict resolution modes.
-
 [`class Split`](./tfds/Split.md): `Enum` for dataset splits.
+
+[`class GenerateMode`](./tfds/download/GenerateMode.md): Enum for the different version conflict resolution modes.
 
 ## Functions
 
@@ -32,8 +35,4 @@ Each dataset is defined as a <a href="./tfds/DatasetBuilder.md"><code>tfds.Datas
 [`list_builders(...)`](./tfds/list_builders.md): Returns the string names of all <a href="./tfds/DatasetBuilder.md"><code>tfds.DatasetBuilder</code></a>s.
 
 [`load(...)`](./tfds/load.md): Loads the given <a href="./tfds/Split.md"><code>tfds.Split</code></a> as a `tf.data.Dataset`.
-
-## Other Members
-
-<h3 id="__all__"><code>__all__</code></h3>
 

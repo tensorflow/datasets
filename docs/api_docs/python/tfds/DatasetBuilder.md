@@ -5,6 +5,8 @@
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="numpy_iterator"/>
+<meta itemprop="property" content="SIZE"/>
+<meta itemprop="property" content="info"/>
 <meta itemprop="property" content="name"/>
 </div>
 
@@ -13,6 +15,10 @@
 ## Class `DatasetBuilder`
 
 
+
+
+
+Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
 
 Abstract base class for datasets.
 
@@ -25,7 +31,9 @@ train_dataset = mnist_builder.as_dataset(tfds.Split.TRAIN)
 assert isinstance(train_dataset, tf.data.Dataset)
 
 # And then the rest of your input pipeline
-train_dataset = train_dataset.repeat().shuffle(1024).batch(128).prefetch(4)
+train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
+# Use tf.contrib.data.AUTOTUNE to automatically optimize the input pipeline
+train_dataset = train_dataset.prefetch(tf.contrib.data.AUTOTUNE)
 features = train_dataset.make_one_shot_iterator().get_next()
 image, label = features['input'], features['target']
 ```
@@ -45,8 +53,8 @@ Callers must pass arguments as keyword arguments.
 
 #### Args:
 
-data_dir (str): directory to read/write data.
-  Optional, useful for testing.
+* <b>`data_dir`</b>: (str) directory to read/write data. Defaults to
+    "~/tensorflow_datasets".
 
 
 
@@ -93,10 +101,10 @@ Subclasses must override _download_and_prepare.
 
 #### Args:
 
-cache_dir (str): Cached directory where to extract the data. If None,
-  a default tmp directory will be used.
-dl_manager (DownloadManager): DownloadManager to use. Only one of
-  dl_manager and cache_dir can be set
+* <b>`cache_dir`</b>: (str) Cached directory where to extract the data. If None,
+    a default tmp directory will be used.
+* <b>`dl_manager`</b>: (<a href="../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>) DownloadManager to use. Only
+    one of dl_manager and cache_dir can be set
 
 
 #### Raises:
@@ -127,6 +135,10 @@ Generator yielding feature dictionaries
 
 
 ## Class Members
+
+<h3 id="SIZE"><code>SIZE</code></h3>
+
+<h3 id="info"><code>info</code></h3>
 
 <h3 id="name"><code>name</code></h3>
 

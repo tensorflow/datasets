@@ -15,6 +15,10 @@
 
 
 
+
+
+Defined in [`core/download/download_manager.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py).
+
 Class which manages the download and extraction of data.
 
 This has the following advantage:
@@ -74,7 +78,7 @@ Download manager constructor.
 #### Args:
 
 cache_dir (str): Cache directory where all downloads, extractions and
-  other artifacts are stored.
+  other artifacts are stored. Defaults to "~/tensorflow_datasets/tmp".
 mode (GenerateMode): Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS or
   REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
 

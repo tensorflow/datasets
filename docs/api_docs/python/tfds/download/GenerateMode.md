@@ -18,6 +18,10 @@
 * Class `tfds.GenerateMode`
 * Class `tfds.download.GenerateMode`
 
+
+
+Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py).
+
 Enum for the different version conflict resolution modes.
 
 ## Class Members

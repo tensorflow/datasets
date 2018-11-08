@@ -4,7 +4,6 @@
 <meta itemprop="property" content="TEST"/>
 <meta itemprop="property" content="TRAIN"/>
 <meta itemprop="property" content="VALIDATION"/>
-<meta itemprop="property" content="__members__"/>
 </div>
 
 # tfds.Split
@@ -13,17 +12,14 @@
 
 
 
+
+
+Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
+
 `Enum` for dataset splits.
 
 Datasets are typically split into different subsets to be used at various
-stages of training and evaluation. All datasets have at least the `TRAIN` and
-`TEST` splits.
-
-Note that for datasets without a `VALIDATION` split, you should use a fraction
-of the `TRAIN` data for evaluation as you iterate on your model so as not to
-overfit to the `TEST` data. You can do so by...
-
-TODO(rsepassi): update when as_dataset supports this.
+stages of training and evaluation.
 
 * `TRAIN`: the training data.
 * `VALIDATION`: the validation data. If present, this is typically used as
@@ -39,6 +35,4 @@ TODO(rsepassi): update when as_dataset supports this.
 <h3 id="TRAIN"><code>TRAIN</code></h3>
 
 <h3 id="VALIDATION"><code>VALIDATION</code></h3>
-
-<h3 id="__members__"><code>__members__</code></h3>
 
