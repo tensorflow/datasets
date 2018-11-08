@@ -21,7 +21,7 @@ with TensorFlow.
 Each dataset is defined as a `tfds.DatasetBuilder`.
 """
 
-# pylint: disable=g-multiple-import
+# pylint: disable=g-multiple-import,g-bad-import-order
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_info import DatasetInfo
@@ -32,6 +32,7 @@ from tensorflow_datasets.core.splits import Split
 # Imports for registration
 import tensorflow_datasets.image.cifar
 import tensorflow_datasets.image.mnist
+
 
 __all__ = [
     "DatasetBuilder",
