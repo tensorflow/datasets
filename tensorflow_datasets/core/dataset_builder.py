@@ -29,6 +29,7 @@ import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
@@ -44,8 +45,6 @@ __all__ = [
     "DatasetBuilder",
     "GeneratorBasedDatasetBuilder",
 ]
-
-DEFAULT_DATA_DIR = os.path.join("~", "tensorflow_datasets")
 
 
 @six.add_metaclass(registered.RegisteredDataset)
@@ -81,9 +80,9 @@ class DatasetBuilder(object):
 
     Args:
       data_dir: (str) directory to read/write data. Defaults to
-        ~/tensorflow_datasets
+        "~/tensorflow_datasets".
     """
-    self._data_dir_root = os.path.expanduser(data_dir or DEFAULT_DATA_DIR)
+    self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
     # Get the last dataset if it exists (or None otherwise)
     self._data_dir = self._get_data_dir()
 

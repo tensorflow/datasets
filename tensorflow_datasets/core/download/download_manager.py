@@ -29,11 +29,10 @@ import concurrent.futures
 import six
 from tensorflow import gfile
 
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.download import local_backend
 from tensorflow_datasets.core.download import util
 from tensorflow_datasets.core.download.proto import download_generated_pb2 as download_pb2
-
-DEFAULT_CACHE_DIR = os.path.join('~', 'tensorflow_datasets', 'tmp')
 
 # Number of thread to use to parallelize the extractions
 _NUM_PARALLEL_DOWNLOADS = 50
@@ -97,11 +96,11 @@ class DownloadManager(object):
 
     Args:
       cache_dir (str): Cache directory where all downloads, extractions and
-        other artifacts are stored.
+        other artifacts are stored. Defaults to "~/tensorflow_datasets/tmp".
       mode (GenerateMode): Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS or
         REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
     """
-    self._cache_dir = os.path.expanduser(cache_dir or DEFAULT_CACHE_DIR)
+    self._cache_dir = os.path.expanduser(cache_dir or constants.CACHE_DIR)
     self._backend = local_backend.LocalBackend()
 
     # The generation mode to indicates if we re-use the cached download or
