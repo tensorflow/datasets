@@ -13,47 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Image feature.
-
-The `features.Image` allows to easily encode an image into a 3D tensor of
-uint8.
-The features.Image can take as input an image path (png or jpg), or a numpy
-array. Images can have either static (ex: (64, 64, 3)), or dynamic (ex:
-(None, None, 1)) shape.
-
-Example:
-
-In the DatasetInfo object:
-
-  specs=features.Specs({
-      'input': features.Image(),  # Dynamic shape
-      'target': features.Image(shape=(64, 64, 3)),  # Static shape
-  })
-
-During generation:
-
-  yield self.info.spec.encode_sample({
-      'input': 'path/to/img.jpg',
-      'target': np.ones(shape=(64, 64, 3), dtype=np.uint8),
-  })
-
-"""
+"""Image feature."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
 
-
 ENCODE_FN = {
     'png': tf.image.encode_png,
-    'jpg': tf.image.encode_jpeg,
+    'jpeg': tf.image.encode_jpeg,
+}
+
+ACCEPTABLE_CHANNELS = {
+    'png': (0, 1, 2, 3),
+    'jpeg': (0, 1, 3),
 }
 
 
@@ -61,87 +40,88 @@ class Image(feature.FeatureConnector):
   """Feature which encode/decode an image.
 
   Input: The image connector accepts as input:
-    * A path to a jpg or png image.
-    * A 3-D numpy uint8 array
+    * path to a {bmp,gif,jpeg,png} image.
+    * uint8 array representing an image.
 
   Output:
-    image: The 3-D image tf.Tensor of type tf.uint8
-  """
-  # Should we support 2D array too ?
-  # Should we support float images ?
-  # Add an option to resize the shape automatically ?
+    image: tf.Tensor of type tf.uint8 and shape [height, width, num_channels]
+    for BMP, JPEG, and PNG images and shape [num_frames, height, width, 3] for
+    GIF images.
 
-  def __init__(self, shape=None):
+  Example:
+    * In the DatasetInfo object:
+      specs=features.Specs({
+          'input': features.Image(),
+          'target': features.Image(shape=(None, None, 1),
+                                   encoding_format='png'),
+      })
+
+    * During generation:
+      yield self.info.spec.encode_sample({
+          'input': 'path/to/img.jpg',
+          'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
+      })
+  """
+
+  def __init__(self, shape=(None, None, 3), encoding_format='png'):
     """Construct the connector.
 
     Args:
-      shape (tuple): The shape of the image (h, w, c). The image dimensions can
-        be None if the images do not have constant length.
+      shape: tuple of ints or None, the shape of decoded image.
+        For GIF images: (num_frames, height, width, channels=3). num_frames,
+          height and width can be None.
+        For other images: (height, width, channels). height and width can be
+          None. See `tf.image.encode_*` for doc on channels parameter.
+        Defaults to (None, None, 3).
+      encoding_format: 'jpeg' or 'png' (default). Format to serialize np.ndarray
+        images on disk.
+        If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
+        ignored, and file original encoding is used.
 
     Raises:
       ValueError: If the shape is invalid
     """
-    self._shape = shape or (None, None, 1)
-    self._image_encoder = None
-    # Runner to execute the image encoding/decoding
-    self._runner = utils.TFGraphRunner()
-
-    if len(self._shape) != 3:
-      raise ValueError('Shape {} should be of length 3.'.format(
-          self._shape))
-    if self._shape[-1] is None:
-      raise ValueError('Shape {} should have a non-None channel.'.format(
-          self._shape))
+    self._shape = tuple(shape)
+    supported = ENCODE_FN.keys()
+    if encoding_format not in supported:
+      raise ValueError('`encoding_format` must be one of %s.' % supported)
+    channels = shape[-1]
+    acceptable_channels = ACCEPTABLE_CHANNELS[encoding_format]
+    if channels not in acceptable_channels:
+      raise ValueError('Acceptable `channels` for %s: %s (was %s)' % (
+          encoding_format, acceptable_channels, channels))
+    self._encode_fn = ENCODE_FN[encoding_format]
 
   def get_specs(self):
-    return {
-        'encoded': tf.FixedLenFeature(tuple(), tf.string),
-        'format': tf.FixedLenFeature(tuple(), tf.string),
-        'shape': tf.FixedLenFeature((3,), tf.int64),
-    }
+    # Only store raw image (includes size).
+    return tf.FixedLenFeature(tuple(), tf.string)
 
-  def encode_sample(self, image_or_path):
-    """Convert the given image into a dict convertible to tf example."""
-    if isinstance(image_or_path, six.string_types):
-      # TODO(epot): np_image = load_image_from_disk(image_or_path)
-      raise NotImplementedError
-    elif isinstance(image_or_path, np.ndarray):
-      np_image = image_or_path
-    else:
-      # Could also add PIL support
-      raise ValueError('Could not convert {} to image'.format(image_or_path))
-
-    # Check that the image is valid
-    if np_image.dtype != np.uint8:
-      raise ValueError('Image should be uint8. Detected: {}'.format(
-          np_image.dtype))
-    utils.assert_shape_match(np_image.shape, self._shape)
-
-    # TODO(epot): Should support additional format
-    image_format = 'png'
+  @utils.memoized_property
+  def _runner(self):
     # TODO(epot): Should clear the runner once every image has been encoded.
     # TODO(epot): Better support for multi-shape image (instead of re-building
     # a new graph every time)
-    image_encoded = self._runner.run(ENCODE_FN[image_format], np_image)
+    return utils.TFGraphRunner()
 
-    return {
-        'encoded': image_encoded,
-        'format': image_format,
-        'shape': np_image.shape,
-    }
+  def _encode_image(self, np_image):
+    """Returns np_image encoded as jpeg or png."""
+    if np_image.dtype != np.uint8:
+      raise ValueError('Image should be uint8. Detected: %s.' % np_image.dtype)
+    utils.assert_shape_match(np_image.shape, self._shape)
+    return self._runner.run(self._encode_fn, np_image)
 
-  def decode_sample(self, encoded_image):
+  def encode_sample(self, image_or_path):
+    """Convert the given image into a dict convertible to tf example."""
+    if isinstance(image_or_path, np.ndarray):
+      encoded_image = self._encode_image(image_or_path)
+    else:
+      with tf.gfile.Open(image_or_path, 'rb') as image_f:
+        encoded_image = image_f.read()
+    return encoded_image
+
+  def decode_sample(self, sample):
     """Reconstruct the image from the tf example."""
-    tf_image = tf.image.decode_image(
-        encoded_image['encoded'],
-        channels=self._shape[-1],
-        dtype=tf.uint8,
-    )
-    # TODO(epot): Add image shape. tf_image.set_shape(self._shape) ?
-    return tf_image
-
-
-def load_image_from_disk(image_path):
-  # TODO(epot): PIL.load(...)
-  _ = image_path
-  raise NotImplementedError
+    img = tf.image.decode_image(sample, channels=self._shape[-1],
+                                dtype=tf.uint8)
+    img.set_shape(self._shape)
+    return img
