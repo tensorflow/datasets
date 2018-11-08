@@ -25,6 +25,7 @@ import inspect
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 
 __all__ = [
@@ -141,6 +142,8 @@ def load(name,
   Returns:
     `tf.data.Dataset`
   """
+  if data_dir is None:
+    data_dir = constants.DATA_DIR
   dbuilder = builder(name, data_dir=data_dir)
   if download:
     dbuilder.download_and_prepare()
