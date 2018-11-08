@@ -24,8 +24,8 @@ import pdb
 import numpy as np
 import tensorflow as tf
 
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import splits
 
 # pylint: disable=unused-import,g-bad-import-order
 # TODO(rsepassi): Determine importing policy for tensorflow_datasets
@@ -62,8 +62,7 @@ def main(_):
   builder.download_and_prepare(cache_dir=FLAGS.cache_dir)
 
   # TODO(rsepassi): Get splits from info
-  splits = [dataset_builder.Split.TRAIN, dataset_builder.Split.TEST]
-  for split in splits:
+  for split in [splits.Split.TRAIN, splits.Split.TEST]:
     compute_stats(builder, split)
 
 
