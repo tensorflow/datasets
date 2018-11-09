@@ -33,6 +33,8 @@ flags.DEFINE_string("data_dir", None, "Directory for data")
 flags.DEFINE_string("cache_dir", None, "Directory for downloads")
 flags.DEFINE_boolean("debug", False,
                      "If True, will drop into debugger after generation")
+flags.DEFINE_boolean("compute_stats", True,
+                     "If True, will compute stats after generation")
 
 STATS_STR = """
 Stats
@@ -53,6 +55,8 @@ def main(_):
   builder = tfds.builder(FLAGS.dataset_name, data_dir=FLAGS.data_dir)
   builder.download_and_prepare(cache_dir=FLAGS.cache_dir)
 
+  if not FLAGS.compute_stats:
+    return
   # TODO(rsepassi): Get splits from info
   for split in [tfds.Split.TRAIN, tfds.Split.TEST]:
     compute_stats(builder, split)
