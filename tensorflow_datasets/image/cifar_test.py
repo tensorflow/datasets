@@ -21,10 +21,10 @@ from __future__ import print_function
 
 import tensorflow as tf
 from tensorflow_datasets.image import cifar
-from tensorflow_datasets.testing import dataset_builder_base_test
+from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class Cifar10Test(dataset_builder_base_test.TestCase):
+class Cifar10Test(dataset_builder_testing.TestCase):
   DATASET_CLASS = cifar.Cifar10
   SPLITS = {
       "train": 10,  # Number of records.
@@ -37,4 +37,4 @@ class Cifar10Test(dataset_builder_base_test.TestCase):
 
 
 if __name__ == "__main__":
-  dataset_builder_base_test.main()
+  dataset_builder_testing.main()
