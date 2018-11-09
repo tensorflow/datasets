@@ -23,15 +23,7 @@ import pdb
 
 import numpy as np
 import tensorflow as tf
-
-from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import splits
-
-# pylint: disable=unused-import,g-bad-import-order
-# TODO(rsepassi): Determine importing policy for tensorflow_datasets
-from tensorflow_datasets.image import cifar
-from tensorflow_datasets.image import mnist
-# pylint: enable=unused-import,g-bad-import-order
+import tensorflow_datasets as tfds
 
 flags = tf.flags
 FLAGS = flags.FLAGS
@@ -58,11 +50,11 @@ FEATURE_STATS_STR = """\
 
 
 def main(_):
-  builder = registered.builder(FLAGS.dataset_name, data_dir=FLAGS.data_dir)
+  builder = tfds.builder(FLAGS.dataset_name, data_dir=FLAGS.data_dir)
   builder.download_and_prepare(cache_dir=FLAGS.cache_dir)
 
   # TODO(rsepassi): Get splits from info
-  for split in [splits.Split.TRAIN, splits.Split.TEST]:
+  for split in [tfds.Split.TRAIN, tfds.Split.TEST]:
     compute_stats(builder, split)
 
 

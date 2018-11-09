@@ -73,6 +73,8 @@ def cls_url(module_name):
   mod_file = sys.modules[module_name].__file__
   if mod_file.endswith("pyc"):
     mod_file = mod_file[:-1]
+  # Get the tensorflow_datasets path
+  # tensorflow_datasets/scripts/document_datasets.py
   base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
   path = os.path.relpath(mod_file, base_dir)
   return os.path.join(BASE_URL, path)
