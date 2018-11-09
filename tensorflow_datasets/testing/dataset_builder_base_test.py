@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import tempfile
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -46,7 +47,8 @@ class TestCase(tf.test.TestCase):
           "Assign your DatasetBuilder class to %s.DATASET_CLASS." % name)
 
   def setUp(self):
-    data_dir = tf.test.get_temp_dir()
+    # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
+    data_dir = tempfile.mkdtemp(dir=tf.test.get_temp_dir())
     self.builder = self.DATASET_CLASS(data_dir=data_dir)  # pylint: disable=not-callable
     self.sample_dir = os.path.join(
         os.path.dirname(__file__),
@@ -66,12 +68,29 @@ class TestCase(tf.test.TestCase):
   def test_info(self):
     self.assertIsInstance(self.builder.info, dataset_info.DatasetInfo)
 
-  def test_download_and_prepare(self):
+  def _check_split(self, dataset):
+    """Check given split has right types and shapes."""
+    for component, (expected_type, expected_shapes) in self.SPEC.items():
+      output_type = dataset.output_types[component]
+      self.assertEqual(expected_type, output_type,
+                       "Component %s doesn't have type %s, but %s." % (
+                           component, expected_type, output_type))
+      shapes = dataset.output_shapes[component]
+      self.assertEqual(expected_shapes, shapes,
+                       "Component %s doesn't have shape %s, but %s." % (
+                           component, expected_shapes, shapes))
+
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  def test_download_and_prepare_as_dataset(self):
     dl_manager = tf.test.mock.Mock(spec_set=download_manager.DownloadManager)
     dl_manager.download_and_extract.return_value = self.sample_dir
     self.builder.download_and_prepare(dl_manager=dl_manager)
 
-  # TODO(pierrot): retrieve data from dataset
-
+    for split_name, expected_records_number in self.SPLITS.items():
+      dataset = self.builder.as_dataset(split=split_name)
+      self._check_split(dataset)
+      records_number = len(
+          [record for record in self.builder.numpy_iterator(split=split_name)])
+      self.assertEqual(records_number, expected_records_number)
 
 main = tf.test.main
