@@ -33,7 +33,7 @@ dataset = tfds.load(name="mnist", split=tfds.Split.TRAIN)
 # Build your input pipeline
 dataset = dataset.shuffle(1000).batch(128).prefetch(tf.contrib.data.AUTOTUNE)
 features = dataset.make_oneshot_iterator().get_next()
-image, label = features["input"], features["target"]
+image, label = features["image"], features["label"]
 ```
 
 ### `DatasetBuilder`
@@ -65,7 +65,7 @@ import tensorflow_datasets as tfds
 mnist_builder = tfds.builder("mnist")
 mnist_builder.download_and_prepare()
 for element in mnist_builder.numpy_iterator(split=tfds.Split.TRAIN):
-  numpy_image, numpy_label = element["input"], element["target"]
+  numpy_image, numpy_label = element["image"], element["label"]
 ```
 
 Note that the library still requires `tensorflow` as an internal dependency.

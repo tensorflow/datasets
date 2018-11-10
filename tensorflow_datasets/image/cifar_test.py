@@ -31,8 +31,8 @@ class Cifar10Test(dataset_builder_testing.TestCase):
       "test": 2,    # See testing/generate_cifar10_like_sample.py
   }
   SPEC = {
-      "target": (tf.int64, ()),
-      "input": (tf.uint8, (32, 32, 3)),
+      "label": (tf.int64, ()),
+      "image": (tf.uint8, (32, 32, 3)),
   }
 
 

@@ -61,9 +61,10 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
     cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
     return dataset_info.DatasetInfo(
         specs=features.SpecDict({
-            "input": features.Image(shape=cifar_shape),
-            "target": tf.int64,  # Could replace by features.Label()
+            "image": features.Image(shape=cifar_shape),
+            "label": tf.int64,  # Could replace by features.Label()
         }),
+        supervised_keys=("image", "label"),
     )
 
   @property
@@ -139,8 +140,8 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
       if len(label) == 1:
         label = label[self._cifar_info.label_keys[0]]
       yield self.info.specs.encode_sample({
-          "input": image,
-          "target": label,
+          "image": image,
+          "label": label,
       })
 
 
@@ -152,7 +153,7 @@ class Cifar100(Cifar10):
 
     Args:
       use_coarse_labels (bool): whether to set the coarse labels or the fine
-        labels as "target". Note that in either case, both features will be
+        labels as "label". Note that in either case, both features will be
         present in the features dictionary as "fine_label" and "coarse_label".
         Note also that this does NOT affect the data on disk and is only used in
         the `tf.data.Dataset` input pipeline.
@@ -177,12 +178,13 @@ class Cifar100(Cifar10):
     label_to_use = "coarse_labels" if self._use_coarse_labels else "fine_labels"
     return dataset_info.DatasetInfo(
         specs=features.SpecDict({
-            "input": features.Image(shape=cifar_shape),
-            "target": features.OneOf(choice=label_to_use, feature_dict={
+            "image": features.Image(shape=cifar_shape),
+            "label": features.OneOf(choice=label_to_use, feature_dict={
                 "coarse_labels": tf.int64,
                 "fine_labels": tf.int64,
             }),
         }),
+        supervised_keys=("image", "label"),
     )
 
 
@@ -205,5 +207,5 @@ class CifarInfo(collections.namedtuple("_CifarInfo", [
     test_files (list<str>): name of test files within `prefix`.
     label_keys (list<str>): names of the label keys in the data. If longer than
       1, provide `out_label_keys` to specify output names in feature
-      dictionaries.  Otherwise will use "target".
+      dictionaries.  Otherwise will use "label".
   """

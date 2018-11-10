@@ -108,6 +108,7 @@ def load(name,
          split,
          data_dir=None,
          download=True,
+         as_supervised=False,
          as_dataset_kwargs=None):
   """Loads the given `tfds.Split` as a `tf.data.Dataset`.
 
@@ -135,6 +136,11 @@ def load(name,
       expected to be in `data_dir`. If `True` and the data is already in
       `data_dir`, `download_and_prepare` is a no-op.
       Defaults to `True`.
+    as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
+      will have a 2-tuple structure `(input, label)` according to
+      `builder.info.supervised_keys`. If `False`, the default,
+      the returned `tf.data.Dataset` will have a dictionary with all the
+      features.
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
       `tfds.DatasetBuilder.as_dataset`. `split` will be passed through by
       default.
@@ -152,6 +158,7 @@ def load(name,
     as_dataset_kwargs = {}
   as_dataset_kwargs = dict(as_dataset_kwargs)
   as_dataset_kwargs["split"] = split
+  as_dataset_kwargs["as_supervised"] = as_supervised
 
   return dbuilder.as_dataset(**as_dataset_kwargs)
 

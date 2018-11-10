@@ -46,6 +46,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
   def _info(self):
     return dataset_info.DatasetInfo(
         specs=features.SpecDict({"x": tf.int64}),
+        supervised_keys=("x", "x"),
     )
 
   def _generate_samples(self):
@@ -92,15 +93,36 @@ class DatasetBuilderTest(tf.test.TestCase):
           split=splits.Split.TRAIN)
       data = list(dataset)
       self.assertEqual(20, len(data))
+      self.assertLess(data[0]["x"], 30)
+
+
+class DatasetBuilderReadTest(tf.test.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    cls._tfds_tmp_dir = test_utils.make_tmp_dir()
+    builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
+    builder.download_and_prepare()
+
+  @classmethod
+  def tearDownClass(cls):
+    test_utils.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def test_numpy_iterator(self):
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare()
-      items = []
-      for item in builder.numpy_iterator(split=splits.Split.TRAIN):
-        items.append(item)
-      self.assertEqual(20, len(items))
+    builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
+    items = []
+    for item in builder.numpy_iterator(split=splits.Split.TRAIN):
+      items.append(item)
+    self.assertEqual(20, len(items))
+    self.assertLess(items[0]["x"], 30)
+
+  def test_supervised_keys(self):
+    builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
+    for item in builder.numpy_iterator(
+        split=splits.Split.TRAIN, as_supervised=True):
+      self.assertIsInstance(item, tuple)
+      self.assertEqual(len(item), 2)
+      break
 
 
 if __name__ == "__main__":

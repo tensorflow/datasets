@@ -53,9 +53,10 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
     mnist_shape = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
     return dataset_info.DatasetInfo(
         specs=features.SpecDict({
-            "input": features.Image(shape=mnist_shape),
-            "target": tf.int64,
+            "image": features.Image(shape=mnist_shape),
+            "label": tf.int64,
         }),
+        supervised_keys=("image", "label"),
     )
 
   def _split_generators(self, dl_manager):
@@ -111,8 +112,8 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
 
     for image, label in data:
       yield self.info.specs.encode_sample({
-          "input": image,
-          "target": label,
+          "image": image,
+          "label": label,
       })
 
 

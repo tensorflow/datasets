@@ -66,22 +66,31 @@ class DatasetInfo(object):
   """
 
   @api_utils.disallow_positional_args
-  def __init__(self, specs):
+  def __init__(self, specs, supervised_keys=None):
     """Constructor of the DatasetInfo.
 
     Args:
       specs: (`tfds.features.SpecDict`) Information on the feature dict of the
         `tf.data.Dataset()` object from the `builder.as_dataset()` method.
-
+      supervised_keys: (`tuple`) Specifies the input feature and the
+        label for supervised learning, if applicable for the dataset.
     """
     self._specs = specs
     self._splits = splits.SplitDict()
+    self._supervised_keys = supervised_keys
+    if supervised_keys is not None:
+      assert isinstance(supervised_keys, tuple)
+      assert len(supervised_keys) == 2
     # TODO(pierrot): Move SIZE here
     # TODO(afrozm): Should add other metadata here (num samples, hash,...)
 
   @property
   def specs(self):
     return self._specs
+
+  @property
+  def supervised_keys(self):
+    return self._supervised_keys
 
   @property
   def splits(self):

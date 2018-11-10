@@ -36,7 +36,7 @@ landing_page:
         # Build your input pipeline
         dataset = dataset.shuffle(1024).batch(32).prefetch(tf.contrib.data.AUTOTUNE)
         for features in dataset.take(1):
-          image, label = features["input"], features["target"]
+          image, label = features["image"], features["label"]
         </pre>
 
         {% dynamic if request.tld != 'cn' %}

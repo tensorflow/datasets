@@ -64,7 +64,7 @@ class DatasetBuilder(object):
   # Use tf.contrib.data.AUTOTUNE to automatically optimize the input pipeline
   train_dataset = train_dataset.prefetch(tf.contrib.data.AUTOTUNE)
   features = train_dataset.make_one_shot_iterator().get_next()
-  image, label = features['input'], features['target']
+  image, label = features['image'], features['label']
   ```
   """
 
@@ -154,7 +154,10 @@ class DatasetBuilder(object):
   # TODO(rsepassi): Make it easy to further shard the TRAIN data (e.g. for
   # synthetic VALIDATION splits).
   @api_utils.disallow_positional_args
-  def as_dataset(self, split, shuffle_files=None):
+  def as_dataset(self,
+                 split,
+                 shuffle_files=None,
+                 as_supervised=False):
     """Constructs a `tf.data.Dataset`.
 
     Callers must pass arguments as keyword arguments.
@@ -165,6 +168,11 @@ class DatasetBuilder(object):
       split: `tfds.Split`, which subset of the data to read.
       shuffle_files: `bool` (optional), whether to shuffle the input files.
         Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+      as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
+        will have a 2-tuple structure `(input, label)` according to
+        `builder.info.supervised_keys`. If `False`, the default,
+        the returned `tf.data.Dataset` will have a dictionary with all the
+        features.
 
     Returns:
       `tf.data.Dataset`
@@ -175,7 +183,16 @@ class DatasetBuilder(object):
            "dataset_builder.download_and_prepare(), or pass download=True to "
            "tfds.load() before trying to access the tf.data.Dataset object."
           ) % (self.name, self._data_dir_root))
-    return self._as_dataset(split=split, shuffle_files=shuffle_files)
+    dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+    if as_supervised:
+      if not self.info.supervised_keys:
+        raise ValueError(
+            "as_supervised=True but %s does not support a supervised "
+            "(input, label) structure." % self.name)
+      input_f, target_f = self.info.supervised_keys
+      dataset = dataset.map(lambda fs: (fs[input_f], fs[target_f]))
+    dataset = dataset.prefetch(tf.contrib.data.AUTOTUNE)
+    return dataset
 
   def numpy_iterator(self, **as_dataset_kwargs):
     """Generates numpy elements from the given `tfds.Split`.
