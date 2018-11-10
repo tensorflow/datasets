@@ -70,9 +70,6 @@ setup(
     download_url='https://github.com/tensorflow/datasets/tags',
     license='Apache 2.0',
     packages=find_packages(),
-    package_data={
-        'tensorflow_datasets': ['core/test_data/*.png'],
-    },
     scripts=[],
     install_requires=REQUIRED_PKGS,
     extras_require={
