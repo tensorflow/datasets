@@ -23,6 +23,7 @@ from __future__ import print_function
 import tensorflow as tf
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core.features.text import text_encoder
 
 
 class TextFeatureTest(tf.test.TestCase):
@@ -30,7 +31,7 @@ class TextFeatureTest(tf.test.TestCase):
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_encode_decode(self):
     nonunicode_text = 'hello world'
-    unicode_text = u'你好，世界'
+    unicode_text = u'你好'
     expectations = [
         # Non-unicode
         test_utils.FeatureExpectation(
@@ -44,6 +45,12 @@ class TextFeatureTest(tf.test.TestCase):
             feature=features.Text(),
             value=unicode_text,
             expected=tf.compat.as_bytes(unicode_text)),
+        # Unicode integer-encoded by byte
+        test_utils.FeatureExpectation(
+            name='text_unicode_encoded',
+            feature=features.Text(encoder=text_encoder.ByteTextEncoder()),
+            value=unicode_text,
+            expected=[228, 189, 160, 229, 165, 189]),
     ]
 
     specs = features.SpecDict({exp.name: exp.feature for exp in expectations})

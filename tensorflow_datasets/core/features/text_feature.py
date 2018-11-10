@@ -27,17 +27,38 @@ from tensorflow_datasets.core.features import feature
 
 
 class Text(feature.FeatureConnector):
-  """Feature which encodes/decodes text.
+  """Feature which encodes/decodes text, possibly to integers."""
 
-  By default, text will be byte-encoded with utf-8 (if not already bytes).
-  """
+  def __init__(self, encoder=None):
+    """Constructs a Text FeatureConnector.
+
+    Args:
+      encoder: `TextEncoder`, an encoder that can convert text to integers.
+        If None, the text will be utf-8 byte-encoded.
+    """
+    self._encoder = encoder
+
+  @property
+  def encoder(self):
+    return self._encoder
+
+  @property
+  def vocab_size(self):
+    return self.encoder and self.encoder.vocab_size
 
   def get_specs(self):
-    return tf.VarLenFeature(tf.string)
+    dtype = tf.int64 if self.encoder else tf.string
+    return tf.VarLenFeature(dtype)
 
   def encode_sample(self, sample_data):
-    return tf.compat.as_bytes(sample_data)
+    if self.encoder:
+      return self.encoder.encode(sample_data)
+    else:
+      return tf.compat.as_bytes(sample_data)
 
   def decode_sample(self, tfexample_data):
     # Decoded as SparseTensor, only interested in the values
-    return tf.reshape(tfexample_data.values, tuple())
+    out = tfexample_data.values
+    if not self.encoder:
+      out = tf.reshape(out, tuple())
+    return out
