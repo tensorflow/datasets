@@ -73,7 +73,7 @@ class DatasetBuilder(object):
   # TODO(pierrot): take size from DatasetInfo.
 
   @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None):
+  def __init__(self, data_dir=None, manual_dir=None):
     """Construct a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -81,8 +81,14 @@ class DatasetBuilder(object):
     Args:
       data_dir: (str) directory to read/write data. Defaults to
         "~/tensorflow_datasets".
+      manual_dir (str): Directory where data was manually downloaded/extracted.
+        This directory is only used by get_manual_dir() for manually downloaded
+        and extracted artifacts (unprepared data).
+        Defaults to "~/tensorflow_datasets/manual/${dataset_name}".
     """
     self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
+    self._manual_dir = os.path.expanduser(
+        manual_dir or os.path.join(constants.MANUAL_DIR, self.name))
     # Get the last dataset if it exists (or None otherwise)
     self._data_dir = self._get_data_dir()
 
@@ -95,6 +101,13 @@ class DatasetBuilder(object):
   def info(self):
     """Return the dataset info object. See `DatasetInfo` for details."""
     return self._info()
+
+  def get_manual_dir(self):
+    if not tf.gfile.Exists(self._manual_dir):
+      msg = ("Directory %s does not exist. Create it and download "
+             "/ extract dataset artifacts in there.") % self._manual_dir
+      raise AssertionError(msg)
+    return self._manual_dir
 
   @api_utils.disallow_positional_args
   def download_and_prepare(self, cache_dir=None, dl_manager=None):

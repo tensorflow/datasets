@@ -24,4 +24,6 @@ DATA_DIR = os.path.join("~", "tensorflow_datasets")
 # Directory where to store downloaded artifacts.
 CACHE_DIR = os.path.join("~", "tensorflow_datasets", "tmp")
 
+# Directory where to look for manually downloaded/extracted artifacts.
+MANUAL_DIR = os.path.join("~", "tensorflow_datasets", "manual")
 
