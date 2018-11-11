@@ -13,19 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""`tensorflow_datasets` package.
+"""Public API of tfds, without the registered dataset."""
 
-`tensorflow_datasets` (`tfds`) defines a collection of datasets ready-to-use
-with TensorFlow.
+# pylint: disable=unused-import
 
-Each dataset is defined as a `tfds.core.DatasetBuilder`.
-"""
+from tensorflow_datasets import core
 
-# Imports for registration
-from tensorflow_datasets import image
+from tensorflow_datasets.core import download
+from tensorflow_datasets.core import features
+from tensorflow_datasets.core import file_format_adapter as file_adapter
 
+from tensorflow_datasets.core.download import GenerateMode
 
-# Public API to create and generate a dataset
-from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
+from tensorflow_datasets.core.registered import builder
+from tensorflow_datasets.core.registered import list_builders
+from tensorflow_datasets.core.registered import load
 
-# TODO(epot): Restore the __all__property
+from tensorflow_datasets.core.splits import Split

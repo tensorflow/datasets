@@ -25,6 +25,7 @@ from six.moves import zip  # pylint: disable=redefined-builtin
 
 __all__ = [
     "Split",
+    "SplitDict",
     "SplitGenerator",
 ]
 

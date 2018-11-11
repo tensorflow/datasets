@@ -13,3 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Image datasets."""
+
+from tensorflow_datasets.image.cifar import Cifar10
+from tensorflow_datasets.image.cifar import Cifar100
+from tensorflow_datasets.image.mnist import FashionMNIST
+from tensorflow_datasets.image.mnist import MNIST

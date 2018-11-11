@@ -14,3 +14,11 @@
 # limitations under the License.
 
 """tensorflow_datasets.core."""
+
+from tensorflow_datasets.core.dataset_builder import DatasetBuilder
+from tensorflow_datasets.core.dataset_builder import GeneratorBasedDatasetBuilder
+
+from tensorflow_datasets.core.dataset_info import DatasetInfo
+
+from tensorflow_datasets.core.splits import SplitDict
+from tensorflow_datasets.core.splits import SplitGenerator

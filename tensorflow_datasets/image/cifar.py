@@ -27,10 +27,7 @@ import numpy as np
 import six
 from six.moves import cPickle
 import tensorflow as tf
-from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import features
-from tensorflow_datasets.core import splits
+import tensorflow_datasets.public_api as tfds
 
 # CIFAR-10 constants
 _CIFAR10_URL = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
@@ -52,17 +49,17 @@ _CIFAR_IMAGE_SIZE = 32
 
 
 # TODO(rsepassi): Add tests
-class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
+class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
   """CIFAR-10."""
 
   SIZE = .162  # GB
 
   def _info(self):
     cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
-    return dataset_info.DatasetInfo(
-        specs=features.SpecDict({
-            "image": features.Image(shape=cifar_shape),
-            "label": features.ClassLabel(num_classes=10),
+    return tfds.core.DatasetInfo(
+        specs=tfds.features.SpecDict({
+            "image": tfds.features.Image(shape=cifar_shape),
+            "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
     )
@@ -87,12 +84,12 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
         yield os.path.join(cifar_path, self._cifar_info.prefix, f)
 
     return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs={"filepaths": gen_filenames(cifar_info.train_files)}),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs={"filepaths": gen_filenames(cifar_info.test_files)}),
     ]
@@ -176,12 +173,12 @@ class Cifar100(Cifar10):
   def _info(self):
     cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
     label_to_use = "coarse_labels" if self._use_coarse_labels else "fine_labels"
-    return dataset_info.DatasetInfo(
-        specs=features.SpecDict({
-            "image": features.Image(shape=cifar_shape),
-            "label": features.OneOf(choice=label_to_use, feature_dict={
-                "coarse_labels": features.ClassLabel(num_classes=10),
-                "fine_labels": features.ClassLabel(num_classes=100),
+    return tfds.DatasetInfo(
+        specs=tfds.features.SpecDict({
+            "image": tfds.features.Image(shape=cifar_shape),
+            "label": tfds.features.OneOf(choice=label_to_use, feature_dict={
+                "coarse_labels": tfds.features.ClassLabel(num_classes=10),
+                "fine_labels": tfds.features.ClassLabel(num_classes=100),
             }),
         }),
         supervised_keys=("image", "label"),

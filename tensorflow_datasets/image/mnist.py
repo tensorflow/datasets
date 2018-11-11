@@ -25,10 +25,7 @@ import numpy as np
 import six.moves.urllib as urllib
 import tensorflow as tf
 
-from tensorflow_datasets.core import dataset_builder
-from tensorflow_datasets.core import dataset_info
-from tensorflow_datasets.core import features
-from tensorflow_datasets.core import splits
+import tensorflow_datasets.public_api as tfds
 
 # MNIST constants
 _MNIST_URL = "http://yann.lecun.com/exdb/mnist/"
@@ -45,16 +42,16 @@ _FASHION_MNIST_URL = ("http://fashion-mnist.s3-website.eu-central-1"
                       ".amazonaws.com/")
 
 
-class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
+class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
   """MNIST."""
   URL = _MNIST_URL
 
   def _info(self):
     mnist_shape = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
-    return dataset_info.DatasetInfo(
-        specs=features.SpecDict({
-            "image": features.Image(shape=mnist_shape),
-            "label": features.ClassLabel(num_classes=10),
+    return tfds.core.DatasetInfo(
+        specs=tfds.features.SpecDict({
+            "image": tfds.features.Image(shape=mnist_shape),
+            "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
     )
@@ -75,16 +72,16 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
     # MNIST provides TRAIN and TEST splits, not a VALIDATION split, so we only
     # write the TRAIN and TEST splits to disk.
     return [
-        splits.SplitGenerator(
-            name=splits.Split.TRAIN,
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs=dict(
                 num_examples=_TRAIN_EXAMPLES,
                 data_path=mnist_files["train_data"],
                 label_path=mnist_files["train_labels"],
             )),
-        splits.SplitGenerator(
-            name=splits.Split.TEST,
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs=dict(
                 num_examples=_TEST_EXAMPLES,
