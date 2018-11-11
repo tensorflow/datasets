@@ -27,6 +27,7 @@ import tempfile
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 
 
@@ -51,6 +52,26 @@ class FeatureExpectation(
     collections.namedtuple('_FeatureExpectation',
                            ['name', 'feature', 'value', 'expected'])):
   pass
+
+
+class FeatureExpectationsTestCase(tf.test.TestCase):
+  """Tests FeatureExpectations with full encode-decode."""
+
+  @property
+  def expectations(self):
+    raise NotImplementedError
+
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  def test_encode_decode(self):
+    expectations = self.expectations
+    specs = features.SpecDict({exp.name: exp.feature for exp in expectations})
+
+    decoded_sample = features_encode_decode(
+        specs, dict([(exp.name, exp.value) for exp in expectations]))
+
+    for exp in expectations:
+      self.assertAllEqual(decoded_sample[exp.name], exp.expected)
+      # TODO(rsepassi): test shape and dtype against exp.feature
 
 
 def features_encode_decode(specs_dict, sample):

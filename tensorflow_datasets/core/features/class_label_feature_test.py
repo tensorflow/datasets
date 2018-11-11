@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# coding=utf-8
-"""Tests for tensorflow_datasets.core.features.text_feature."""
+"""Tests for tensorflow_datasets.core.features.class_label_feature."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -23,35 +22,22 @@ from __future__ import print_function
 import tensorflow as tf
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import test_utils
-from tensorflow_datasets.core.features.text import text_encoder
 
 
-class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
+class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
 
   @property
   def expectations(self):
-    nonunicode_text = 'hello world'
-    unicode_text = u'你好'
     return [
-        # Non-unicode
         test_utils.FeatureExpectation(
-            name='text',
-            feature=features.Text(),
-            value=nonunicode_text,
-            expected=tf.compat.as_bytes(nonunicode_text)),
-        # Unicode
-        test_utils.FeatureExpectation(
-            name='text_unicode',
-            feature=features.Text(),
-            value=unicode_text,
-            expected=tf.compat.as_bytes(unicode_text)),
-        # Unicode integer-encoded by byte
-        test_utils.FeatureExpectation(
-            name='text_unicode_encoded',
-            feature=features.Text(encoder=text_encoder.ByteTextEncoder()),
-            value=unicode_text,
-            expected=[228, 189, 160, 229, 165, 189]),
+            name='label',
+            feature=features.ClassLabel(10),
+            value=3,
+            expected=3),
     ]
+
+  def test_num_classes(self):
+    self.assertEqual(10, features.ClassLabel(10).num_classes)
 
 
 if __name__ == '__main__':

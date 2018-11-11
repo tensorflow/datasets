@@ -54,7 +54,7 @@ class MNIST(dataset_builder.GeneratorBasedDatasetBuilder):
     return dataset_info.DatasetInfo(
         specs=features.SpecDict({
             "image": features.Image(shape=mnist_shape),
-            "label": tf.int64,
+            "label": features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
     )

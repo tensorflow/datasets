@@ -62,7 +62,7 @@ class Cifar10(dataset_builder.GeneratorBasedDatasetBuilder):
     return dataset_info.DatasetInfo(
         specs=features.SpecDict({
             "image": features.Image(shape=cifar_shape),
-            "label": tf.int64,  # Could replace by features.Label()
+            "label": features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
     )
@@ -180,8 +180,8 @@ class Cifar100(Cifar10):
         specs=features.SpecDict({
             "image": features.Image(shape=cifar_shape),
             "label": features.OneOf(choice=label_to_use, feature_dict={
-                "coarse_labels": tf.int64,
-                "fine_labels": tf.int64,
+                "coarse_labels": features.ClassLabel(num_classes=10),
+                "fine_labels": features.ClassLabel(num_classes=100),
             }),
         }),
         supervised_keys=("image", "label"),
