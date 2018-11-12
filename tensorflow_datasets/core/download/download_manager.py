@@ -29,7 +29,6 @@ import concurrent.futures
 import six
 from tensorflow import gfile
 
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.download import local_backend
 from tensorflow_datasets.core.download import util
 from tensorflow_datasets.core.download.proto import download_generated_pb2 as download_pb2
@@ -91,16 +90,19 @@ class DownloadManager(object):
 
   """
 
-  def __init__(self, cache_dir, mode=None):
+  def __init__(self, cache_dir, manual_dir=None, mode=None):
     """Download manager constructor.
 
     Args:
-      cache_dir (str): Cache directory where all downloads, extractions and
-        other artifacts are stored. Defaults to "~/tensorflow_datasets/tmp".
+      cache_dir: `str`, Cache directory where all downloads, extractions and
+        other artifacts are stored.
+      manual_dir: `str`, Directory containing manually downloaded data. Default
+        to cache_dir.
       mode (GenerateMode): Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS or
         REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
     """
-    self._cache_dir = os.path.expanduser(cache_dir or constants.CACHE_DIR)
+    self._cache_dir = cache_dir
+    self._manual_dir = manual_dir or cache_dir
     self._backend = local_backend.LocalBackend()
 
     # The generation mode to indicates if we re-use the cached download or
@@ -252,9 +254,14 @@ class DownloadManager(object):
     )
 
   @property
-  def mode(self):
-    """Returns the GenerateMode value (REUSE_CACHE_IF_EXISTS,...)."""
-    return self._mode
+  def manual_dir(self):
+    """Returns the directory containing the manually extracted data."""
+    if not gfile.Exists(self._manual_dir):
+      raise AssertionError(
+          'Manual directory {} does not exist. Create it and download/extract'
+          'dataset artifacts in there.'.format(self._manual_dir)
+      )
+    return self._manual_dir
 
   # Internal functions
 

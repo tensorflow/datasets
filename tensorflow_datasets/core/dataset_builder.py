@@ -73,7 +73,7 @@ class DatasetBuilder(object):
   # TODO(pierrot): take size from DatasetInfo.
 
   @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None, manual_dir=None):
+  def __init__(self, data_dir=None):
     """Construct a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -81,14 +81,8 @@ class DatasetBuilder(object):
     Args:
       data_dir: (str) directory to read/write data. Defaults to
         "~/tensorflow_datasets".
-      manual_dir (str): Directory where data was manually downloaded/extracted.
-        This directory is only used by get_manual_dir() for manually downloaded
-        and extracted artifacts (unprepared data).
-        Defaults to "~/tensorflow_datasets/manual/${dataset_name}".
     """
     self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
-    self._manual_dir = os.path.expanduser(
-        manual_dir or os.path.join(constants.MANUAL_DIR, self.name))
     # Get the last dataset if it exists (or None otherwise)
     self._data_dir = self._get_data_dir()
 
@@ -102,45 +96,59 @@ class DatasetBuilder(object):
     """Return the dataset info object. See `DatasetInfo` for details."""
     return self._info()
 
-  def get_manual_dir(self):
-    if not tf.gfile.Exists(self._manual_dir):
-      msg = ("Directory %s does not exist. Create it and download "
-             "/ extract dataset artifacts in there.") % self._manual_dir
-      raise AssertionError(msg)
-    return self._manual_dir
-
   @api_utils.disallow_positional_args
-  def download_and_prepare(self, cache_dir=None, dl_manager=None):
+  def download_and_prepare(
+      self,
+      cache_dir=None,
+      manual_dir=None,
+      mode=None,
+      dl_manager=None):
     """Downloads and prepares dataset for reading.
 
     Subclasses must override _download_and_prepare.
 
     Args:
-      cache_dir: (str) Cached directory where to extract the data. If None,
-        a default tmp directory will be used.
-      dl_manager: (`tfds.download.DownloadManager`) DownloadManager to use. Only
-        one of dl_manager and cache_dir can be set
+      cache_dir: `str`, Cached directory where to extract the data. If None,
+        a default data_dir/tmp directory is used.
+      manual_dir: `str`, Cached directory where the manually extracted data is.
+        If None, a default data_dir/manual/{dataset_name}/ directory is used.
+        For DatasetBuilder, this is a read-only directory.
+      mode: `tfds.GenerateMode`: Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS
+        or REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
+      dl_manager: `tfds.download.DownloadManager` DownloadManager to use
+       instead of the default one. If set, none of the cache_dir, manual_dir,
+       mode should be set.
 
     Raises:
       ValueError: If the user defines both cache_dir and dl_manager
     """
-    # Both args are set
-    if cache_dir and dl_manager is not None:
-      raise ValueError("Only one of dl_manager and cache_dir can be defined.")
-    # None are set. Use the data_dir as cache_dir
-    if not cache_dir and dl_manager is None:
-      cache_dir = os.path.join(self._data_dir_root, "tmp")
 
-    # Create the download manager
-    if cache_dir:
-      dl_manager = download.DownloadManager(cache_dir=cache_dir)
+    if dl_manager is not None and (cache_dir or manual_dir or mode):
+      raise ValueError(
+          ".download_and_prepare kwargs should not be set if dl_manager "
+          "is passed to download_and_prepare.")
+
+    # If None are set. Set values to default:
+    cache_dir = cache_dir or os.path.join(self._data_dir_root, "tmp")
+    manual_dir = manual_dir or os.path.join(self._data_dir_root, "manual")
+    manual_dir = os.path.join(manual_dir, self.name)
+    mode = mode or download.GenerateMode.REUSE_DATASET_IF_EXISTS
+    mode = download.GenerateMode(mode)
 
     # If the dataset already exists (data_dir not empty) and that we do not
     # overwrite the dataset
     if (self._data_dir and
-        dl_manager.mode == download.GenerateMode.REUSE_DATASET_IF_EXISTS):
+        mode == download.GenerateMode.REUSE_DATASET_IF_EXISTS):
       tf.logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
+
+    # Create the download manager
+    if dl_manager is None:
+      dl_manager = download.DownloadManager(
+          cache_dir=cache_dir,
+          manual_dir=manual_dir,
+          mode=mode,
+      )
 
     # Otherwise, create a new version in a new data_dir.
     curr_date = datetime.datetime.now()

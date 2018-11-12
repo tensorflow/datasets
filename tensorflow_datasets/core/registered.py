@@ -109,6 +109,7 @@ def load(name,
          data_dir=None,
          download=True,
          as_supervised=False,
+         download_and_prepare_kwargs=None,
          as_dataset_kwargs=None):
   """Loads the given `tfds.Split` as a `tf.data.Dataset`.
 
@@ -141,6 +142,10 @@ def load(name,
       `builder.info.supervised_keys`. If `False`, the default,
       the returned `tf.data.Dataset` will have a dictionary with all the
       features.
+    download_and_prepare_kwargs: `dict` (optional) keyword arguments passed to
+      `tfds.DatasetBuilder.download_and_prepare` if `download=True`. Allow to
+      control where to download and extract the cached data. If not set,
+      cache_dir and manual_dir will automatically be deduced from data_dir.
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
       `tfds.DatasetBuilder.as_dataset`. `split` will be passed through by
       default.
@@ -152,7 +157,8 @@ def load(name,
     data_dir = constants.DATA_DIR
   dbuilder = builder(name, data_dir=data_dir)
   if download:
-    dbuilder.download_and_prepare()
+    download_and_prepare_kwargs = download_and_prepare_kwargs or {}
+    dbuilder.download_and_prepare(**download_and_prepare_kwargs)
 
   if as_dataset_kwargs is None:
     as_dataset_kwargs = {}
