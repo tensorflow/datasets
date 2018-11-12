@@ -473,15 +473,19 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     should_shuffle = shuffle_files
     if shuffle_files is None:
       should_shuffle = split == splits.Split.TRAIN
+    if isinstance(split, six.string_types):
+      split = splits.NamedSplit(split)
+
+    read_instruction = split.get_read_instruction(self.info.splits)
 
     # Compute filenames from the given split
-    # TODO(epot): Implement synthetic splits
     filenames = self._build_split_filenames(
         data_dir=self._data_dir,
-        split_info_list=[self.info.splits[split]],
+        split_info_list=read_instruction.split_info_list,
     )
 
     # Load the dataset
+    # TODO(epot): Add slicing during reading
     tf_data = dataset_utils.build_dataset(
         filepattern=filenames,
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,

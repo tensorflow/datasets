@@ -20,5 +20,7 @@ from tensorflow_datasets.core.dataset_builder import GeneratorBasedDatasetBuilde
 
 from tensorflow_datasets.core.dataset_info import DatasetInfo
 
+from tensorflow_datasets.core.splits import NamedSplit
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
+from tensorflow_datasets.core.splits import SplitInfo

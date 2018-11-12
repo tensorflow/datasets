@@ -57,15 +57,26 @@ def zip_dict(*dicts):
 class NonMutableDict(dict):
   """Dict where keys can only be added but not modified.
 
-  Will raise an error if the user try to overwritte one key.
+  Will raise an error if the user try to overwritte one key. The error message
+  can be customized during construction. It will be formatted using {key} for
+  the overwritted key.
   """
+
+  def __init__(self, *args, **kwargs):
+    self._error_msg = kwargs.pop(
+        "error_msg",
+        "Try to overwritte existing key: {key}",
+    )
+    if kwargs:
+      raise ValueError("NonMutableDict cannot be initialized with kwargs.")
+    super(NonMutableDict, self).__init__(*args, **kwargs)
 
   def __setitem__(self, key, value):
     if key in self:
-      raise ValueError('Try to overwritte existing key: {}'.format(key))
+      raise ValueError(self._error_msg.format(key=key))
     return super(NonMutableDict, self). __setitem__(key, value)
 
   def update(self, other):
     if any(k in self for k in other):
-      raise ValueError('Try to overwritte existing key: {}'.format(list(other)))
+      raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)

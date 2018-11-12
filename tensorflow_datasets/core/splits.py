@@ -19,18 +19,166 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import abc
 import collections
+import operator
 
+import six
 from six.moves import zip  # pylint: disable=redefined-builtin
 
+from tensorflow_datasets.core import utils
+
 __all__ = [
+    "NamedSplit",
     "Split",
     "SplitDict",
     "SplitGenerator",
+    "SplitInfo",
 ]
 
 
-# TODO(epot): Replate the str by custom objects
+@six.add_metaclass(abc.ABCMeta)
+class _SplitDescriptorNode(object):
+  """Abstract base class for Split compositionality.
+
+  There are three parts to the composition:
+    1) The splits are composed (defined, merged, splitted,...) together before
+       calling the .as_dataset() function. This is done with the __add__,
+       __getitem__, which return a tree of _SplitDescriptorNode (whose leaf are
+       the NamedSplit objects)
+
+        split = tfds.TRAIN + tfds.TEST[:50]
+
+    2) The _SplitDescriptorNode is forwarded to the .as_dataset() function to be
+       resolved into actual read instruction. This is done by the
+       .get_read_instruction() method which takes the real dataset splits
+       (name, number of shards,...) and parse the tree to return a
+       SplitReadInstruction() object
+
+        read_instruction = split.get_read_instruction(self.info.splits)
+
+    3) The SplitReadInstruction is then used in the tf.data.Dataset pipeline
+       to define which files to read and how to skip samples within file.
+
+        files_to_read = read_instruction.split_info_list
+        slice_per_file = read_instruction.slice_list
+
+  """
+
+  @abc.abstractmethod
+  def get_read_instruction(self, split_dict):
+    """Parse the descriptor tree and compile all read instructions together.
+
+    Args:
+      split_dict: (dict) The dict[split_name, SplitInfo] of the dataset
+
+    Returns:
+      split_read_instruction (SplitReadInstruction)
+    """
+    raise NotImplementedError("Abstract method")
+
+  def __eq__(self, other):
+    """Equality: tfds.Split.TRAIN == 'train'."""
+    if isinstance(other, (NamedSplit, six.string_types)):
+      return False
+    raise NotImplementedError(
+        "Equality is not implemented between merged/sub splits.")
+
+  def __add__(self, other):
+    """Merging: tfds.Split.TRAIN + tfds.Split.TEST."""
+    return _SplitMerged(self, other)
+
+  def __getitem__(self, slice_value):
+    """Synthetic subsplit: tfds.Split.TRAIN[30:50]."""
+    return _SubSplit(self, slice_value)
+
+
+class _SplitMerged(_SplitDescriptorNode):
+  """Represent two split descriptors merged together."""
+
+  def __init__(self, split1, split2):
+    self._split1 = split1
+    self._split2 = split2
+
+  def get_read_instruction(self, split_dict):
+    read_instruction1 = self._split1.get_read_instruction(split_dict)
+    read_instruction2 = self._split2.get_read_instruction(split_dict)
+    return read_instruction1 + read_instruction2
+
+
+class _SubSplit(_SplitDescriptorNode):
+  """Represent a sub split of a split descriptor."""
+
+  def __init__(self, split, slice_value):
+    self._split = split
+    self._slice_value = slice_value
+
+  def get_read_instruction(self, split_dict):
+    return self._split.get_read_instruction(split_dict)[self._slice_value]
+
+
+class NamedSplit(_SplitDescriptorNode):
+  """Descriptor corresponding to a named split (train, test,...).
+
+  Each descriptor can be composed with other using addition or slice. Ex:
+
+    split = tfds.Split.TRAIN[0:25] + tfds.Split.TEST
+
+  The resulting split will correspond to 25% of the train split merged with
+  100% of the test split.
+
+  Warning:
+    A split cannot be added twice, so the following will fail:
+
+      split = tfds.Split.TRAIN[:25] + tfds.Split.TRAIN[75:]
+      split = tfds.Split.TEST + tfds.Split.ALL
+
+  Warning:
+    The slices can be applied only one time. So the following are valid:
+
+      split = tfds.Split.TRAIN[0:25] + tfds.Split.TEST[0:50]
+      split = (tfds.Split.TRAIN + tfds.Split.TEST)[0:50]
+
+    But not:
+
+      split = tfds.Split.TRAIN[0:25][0:25]
+      split = (tfds.Split.TRAIN[:25] + tfds.Split.TEST)[0:50]
+
+  """
+
+  def __init__(self, name):
+    self._name = name
+
+  def __str__(self):
+    return self._name
+
+  def __eq__(self, other):
+    """Equality: tfds.Split.TRAIN == 'train'."""
+    if isinstance(other, NamedSplit):
+      return self._name == other._name   # pylint: disable=protected-access
+    elif isinstance(other, _SplitDescriptorNode):
+      return False
+    elif isinstance(other, six.string_types):  # Other should be string
+      return self._name == other
+    else:
+      raise ValueError("Equality not supported between split {} and {}".format(
+          self, other))
+
+  def get_read_instruction(self, split_dict):
+    return SplitReadInstruction(split_dict[self._name])
+
+
+class NamedSplitAll(NamedSplit):
+
+  def __init__(self):
+    super(NamedSplitAll, self).__init__("all")
+
+  def get_read_instruction(self, split_dict):
+    # Merge all dataset split together
+    read_instructions = [SplitReadInstruction(s) for s in split_dict.values()]
+    return six.moves.reduce(operator.add, read_instructions)
+
+
 class Split(object):
   """`Enum` for dataset splits.
 
@@ -43,10 +191,75 @@ class Split(object):
     model architecture, etc.).
   * `TEST`: the testing data. This is the data to report metrics on. Typically
     you do not want to use this during model iteration as you may overfit to it.
+  * `ALL`: Special value corresponding to all existing split of a dataset
+    merged together
   """
-  TRAIN = "train"
-  VALIDATION = "validation"
-  TEST = "test"
+  TRAIN = NamedSplit("train")
+  TEST = NamedSplit("test")
+  VALIDATION = NamedSplit("validation")
+  # All is a special Split which correspond to all split merged together
+  ALL = NamedSplitAll()
+
+
+# Similar to SplitInfo, but contain an additional slice info
+SlicedSplitInfo = collections.namedtuple("SlicedSplitInfo", [
+    "split_info",
+    "slice_value",
+])
+
+
+class SplitReadInstruction(object):
+  """Object containing the reading instruction for the dataset.
+
+  Similarly to SplitDescriptor nodes, this object can be composed with itself,
+  but the resolution happens instantaneously, instead of keeping track of the
+  tree, such as all instuctions are compiled and flattened in a single
+  SplitReadInstruction object containing the list of files and slice to use.
+
+  Once resolved, the instructions can be accessed with:
+
+    read_instructions.split_info_list  # List of splits to use
+
+  """
+
+  def __init__(self, split_info=None):
+    self._splits = utils.NonMutableDict(
+        error_msg="Overlap between splits. Split {key} has been added with "
+        "itself.")
+
+    if split_info:
+      self.add(SlicedSplitInfo(split_info=split_info, slice_value=None))
+
+  def add(self, sliced_split):
+    self._splits[sliced_split.split_info.name] = sliced_split
+
+  @property
+  def split_info_list(self):
+    return list(sorted(
+        (x.split_info for x in self._splits.values()), key=lambda s: s.name
+    ))
+
+  def __add__(self, other):
+    """Merging split together."""
+    # Will raise error if a split has already be added (NonMutableDict)
+    split_instruction = SplitReadInstruction()
+    split_instruction._splits.update(self._splits)   # pylint: disable=protected-access
+    split_instruction._splits.update(other._splits)   # pylint: disable=protected-access
+    return split_instruction
+
+  def __getitem__(self, slice_value):
+    """Sub-splits."""
+    # Will raise an error if a split has already been sliced
+    split_instruction = SplitReadInstruction()
+    for v in self._splits.values():
+      if v.slice_value is not None:
+        raise ValueError(
+            "Trying to slice Split {} which has already been sliced".format(
+                v.split_info.name))
+      v = v._asdict()
+      v["slice_value"] = slice_value
+      split_instruction.add(SlicedSplitInfo(**v))
+    return split_instruction
 
 
 # TODO(afrozm): Replace by the proto object.
@@ -55,8 +268,11 @@ class Split(object):
 SplitInfo = collections.namedtuple("SplitInfo", ["name", "num_shards"])
 
 
-class SplitDict(dict):
+class SplitDict(utils.NonMutableDict):
   """Split info object."""
+
+  def __init__(self):
+    super(SplitDict, self).__init__(error_msg="Split {key} already present")
 
   def __getitem__(self, key):
     return super(SplitDict, self).__getitem__(str(key))
@@ -66,8 +282,6 @@ class SplitDict(dict):
 
   def add(self, split_info):
     """Add the split info."""
-    if split_info.name in self:
-      raise ValueError("Split {} already present".format(split_info.name))
     super(SplitDict, self).__setitem__(str(split_info.name), split_info)
 
   # TODO(afrozm): Replace by proto
@@ -112,6 +326,7 @@ class SplitGenerator(object):
       split_zip = zip(name, num_shards)
     else:
       split_zip = [(name, num_shards)]
+
     self.split_info_list = [
-        SplitInfo(name=n, num_shards=k) for n, k in split_zip
+        SplitInfo(name=str(n), num_shards=k) for n, k in split_zip
     ]
