@@ -31,6 +31,9 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string("dataset_name", None, "Registered name of DatasetBuilder")
 flags.DEFINE_string("data_dir", None, "Directory for data")
 flags.DEFINE_string("cache_dir", None, "Directory for downloads")
+flags.DEFINE_string(
+    "manual_dir", None,
+    "Directory where dataset have manually been downloaded / extracted.")
 flags.DEFINE_boolean("debug", False,
                      "If True, will drop into debugger after generation")
 flags.DEFINE_boolean("compute_stats", True,
@@ -53,7 +56,8 @@ FEATURE_STATS_STR = """\
 
 def main(_):
   builder = tfds.builder(FLAGS.dataset_name, data_dir=FLAGS.data_dir)
-  builder.download_and_prepare(cache_dir=FLAGS.cache_dir)
+  builder.download_and_prepare(cache_dir=FLAGS.cache_dir,
+                               manual_dir=FLAGS.manual_dir)
 
   if not FLAGS.compute_stats:
     return
