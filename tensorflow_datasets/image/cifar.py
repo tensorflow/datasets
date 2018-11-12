@@ -173,7 +173,7 @@ class Cifar100(Cifar10):
   def _info(self):
     cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
     label_to_use = "coarse_labels" if self._use_coarse_labels else "fine_labels"
-    return tfds.DatasetInfo(
+    return tfds.core.DatasetInfo(
         specs=tfds.features.SpecDict({
             "image": tfds.features.Image(shape=cifar_shape),
             "label": tfds.features.OneOf(choice=label_to_use, feature_dict={
