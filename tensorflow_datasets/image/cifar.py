@@ -177,7 +177,7 @@ class Cifar100(Cifar10):
         specs=tfds.features.SpecDict({
             "image": tfds.features.Image(shape=cifar_shape),
             "label": tfds.features.OneOf(choice=label_to_use, feature_dict={
-                "coarse_labels": tfds.features.ClassLabel(num_classes=10),
+                "coarse_labels": tfds.features.ClassLabel(num_classes=20),
                 "fine_labels": tfds.features.ClassLabel(num_classes=100),
             }),
         }),
