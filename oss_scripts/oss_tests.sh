@@ -26,7 +26,7 @@ pytest $EAGER_TESTS
 set_status
 
 # Run other tests
-pytest $EAGER_IGNORE
+pytest $EAGER_IGNORE --ignore="tensorflow_datasets/core/test_utils.py"
 set_status
 
 # Test notebooks
