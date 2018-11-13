@@ -28,25 +28,57 @@ __all__ = [
 ]
 
 
-def build_dataset(filepattern,
+def build_dataset(instruction_dicts,
                   dataset_from_file_fn,
                   shuffle_files=False,
                   parallel_reads=64):
   """Constructs a `tf.data.Dataset` from TFRecord files.
 
   Args:
-    filepattern (str): Glob pattern for TFRecord files.
-    dataset_from_file_fn (function): returns a `tf.data.Dataset` given a
+    instruction_dicts: `list` of {'filepath':, 'mask':}
+      containing the information about which files and which samples to use.
+      The boolean mask will be repeated and zipped with the samples from
+      filepath.
+    dataset_from_file_fn: function returning a `tf.data.Dataset` given a
       filename.
-    shuffle_files (bool): Whether to shuffle the input filenames.
-    parallel_reads (int): how many files to read in parallel.
+    shuffle_files: `bool`, Whether to shuffle the input filenames.
+    parallel_reads: `int`, how many files to read in parallel.
 
   Returns:
     `tf.data.Dataset`
   """
-  dataset = tf.data.Dataset.list_files(filepattern, shuffle=shuffle_files)
+
+  def instruction_ds_to_file_ds(instruction):
+    """Map from instruction to real datasets."""
+    samples_ds = dataset_from_file_fn(instruction["filepath"])
+    mask_ds = tf.data.Dataset.from_tensor_slices(instruction["mask"])
+    mask_ds = mask_ds.repeat(),
+    # Zip the mask and real samples
+    ds = tf.data.Dataset.zip({
+        "sample": samples_ds,
+        "mask_value": mask_ds,
+    })
+    # Filter according to the mask (only keep True)
+    # Use [0] as from_tensor_slices() yields a tuple
+    ds = ds.filter(lambda dataset_dict: dataset_dict["mask_value"][0])
+    # Only keep the samples
+    ds = ds.map(lambda dataset_dict: dataset_dict["sample"])
+    return ds
+
+  # Transpose the list[dict] into dict[list]
+  tensor_inputs = {
+      key: list(values) for key, values in utils.zip_dict(*instruction_dicts)
+  }
+  # Skip slicing if all masks are True (No value skipped)
+  if all(all(m) for m in tensor_inputs["mask"]):
+    tensor_inputs = tensor_inputs["filepath"]
+    instruction_ds_to_file_ds = dataset_from_file_fn
+
+  dataset = tf.data.Dataset.from_tensor_slices(tensor_inputs)
+  if shuffle_files:
+    dataset = dataset.shuffle(len(instruction_dicts))
   dataset = dataset.interleave(
-      dataset_from_file_fn,
+      instruction_ds_to_file_ds,
       cycle_length=parallel_reads,
       num_parallel_calls=parallel_reads)
   return dataset

@@ -218,7 +218,7 @@ class SplitReadInstruction(object):
 
   Once resolved, the instructions can be accessed with:
 
-    read_instructions.split_info_list  # List of splits to use
+    read_instructions.get_list_sliced_split_info()  # List of splits to use
 
   """
 
@@ -231,17 +231,17 @@ class SplitReadInstruction(object):
       self.add(SlicedSplitInfo(split_info=split_info, slice_value=None))
 
   def add(self, sliced_split):
+    """Add a SlicedSplitInfo the read instructions."""
+    # TODO(epot): Check that the number of samples per shard % 100 == 0
+    # Otherwise the slices value may be unbalanced and not exactly reflect the
+    # requested slice.
     self._splits[sliced_split.split_info.name] = sliced_split
-
-  @property
-  def split_info_list(self):
-    return list(sorted(
-        (x.split_info for x in self._splits.values()), key=lambda s: s.name
-    ))
 
   def __add__(self, other):
     """Merging split together."""
     # Will raise error if a split has already be added (NonMutableDict)
+    # TODO(epot): If a split is already added but there is no overlapp between
+    # the slices, should merge the slices (ex: [:10] + [80:])
     split_instruction = SplitReadInstruction()
     split_instruction._splits.update(self._splits)   # pylint: disable=protected-access
     split_instruction._splits.update(other._splits)   # pylint: disable=protected-access
@@ -260,6 +260,19 @@ class SplitReadInstruction(object):
       v["slice_value"] = slice_value
       split_instruction.add(SlicedSplitInfo(**v))
     return split_instruction
+
+  def get_list_sliced_split_info(self):
+    return list(sorted(self._splits.values(), key=lambda x: x.split_info.name))
+
+
+def slice_to_percent_mask(slice_value):
+  """Convert a python slice [15:50] into a list[bool] mask of 100 elements."""
+  if slice_value is None:
+    slice_value = slice(None)
+  # Select only the elements of the slice
+  selected = set(list(range(100))[slice_value])
+  # Create the binary mask
+  return [i in selected for i in range(100)]
 
 
 # TODO(afrozm): Replace by the proto object.

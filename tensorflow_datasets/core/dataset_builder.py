@@ -474,23 +474,40 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     if isinstance(split, six.string_types):
       split = splits.NamedSplit(split)
 
+    # Resolve all the named split tree by real ones
     read_instruction = split.get_read_instruction(self.info.splits)
-
-    # Compute filenames from the given split
-    filenames = self._build_split_filenames(
-        data_dir=self._data_dir,
-        split_info_list=read_instruction.split_info_list,
-    )
+    # Extract the list of SlicedSplitInfo objects containing the splits
+    # to use and their associated slice
+    list_sliced_split_info = read_instruction.get_list_sliced_split_info()
+    # Resolve the SlicedSplitInfo objects into a list of
+    # {'filepath': 'path/to/data-00032-00100', 'mask': [True, True, False, ...]}
+    instruction_dicts = self._slice_split_info_to_instruction_dicts(
+        list_sliced_split_info)
 
     # Load the dataset
-    # TODO(epot): Add slicing during reading
     tf_data = dataset_utils.build_dataset(
-        filepattern=filenames,
+        instruction_dicts=instruction_dicts,
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
         shuffle_files=should_shuffle,
     )
     tf_data = tf_data.map(self.info.specs.decode_sample)
     return tf_data
+
+  def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
+    """Return the list of files and reading mask of the files to read."""
+    instruction_dicts = []
+    for sliced_split_info in list_sliced_split_info:
+      # Compute filenames from the given split
+      for filepath in self._build_split_filenames(
+          data_dir=self._data_dir,
+          split_info_list=[sliced_split_info.split_info],
+      ):
+        mask = splits.slice_to_percent_mask(sliced_split_info.slice_value)
+        instruction_dicts.append({
+            "filepath": filepath,
+            "mask": mask,
+        })
+    return instruction_dicts
 
   def _build_split_filenames(self, data_dir, split_info_list):
     """Construct the split filenames associated with the split info.
