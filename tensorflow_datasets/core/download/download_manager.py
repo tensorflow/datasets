@@ -101,8 +101,8 @@ class DownloadManager(object):
       mode (GenerateMode): Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS or
         REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
     """
-    self._cache_dir = cache_dir
-    self._manual_dir = manual_dir or cache_dir
+    self._cache_dir = os.path.expanduser(cache_dir)
+    self._manual_dir = os.path.expanduser(manual_dir or cache_dir)
     self._backend = local_backend.LocalBackend()
 
     # The generation mode to indicates if we re-use the cached download or

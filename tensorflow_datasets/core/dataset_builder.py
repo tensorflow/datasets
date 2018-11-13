@@ -129,10 +129,8 @@ class DatasetBuilder(object):
           "is passed to download_and_prepare.")
 
     # If None are set. Set values to default:
-    cache_dir = (os.path.expanduser(cache_dir) if cache_dir
-                 else os.path.join(self._data_dir_root, "tmp"))
-    manual_dir = (os.path.expanduser(manual_dir) if manual_dir
-                  else os.path.join(self._data_dir_root, "manual"))
+    cache_dir = cache_dir or os.path.join(self._data_dir_root, "tmp")
+    manual_dir = manual_dir or os.path.join(self._data_dir_root, "manual")
     manual_dir = os.path.join(manual_dir, self.name)
     mode = mode or download.GenerateMode.REUSE_DATASET_IF_EXISTS
     mode = download.GenerateMode(mode)
