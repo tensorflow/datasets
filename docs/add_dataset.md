@@ -1,38 +1,37 @@
 # Adding a dataset
 
-This page describes how to add support for a new dataset.
-If you want to use a dataset which isn't listed
+This page describes how to add support for a new dataset. If you want to use a
+dataset which isn't listed
 [here](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md),
 then this document is for you.
 
- * [Overview](#overview)
- * [Writing my_dataset.py](#writing-my-datasetpy)
- * [Testing MyDataset](#testing-mydataset)
- * [Specifying DatasetInfo](#specifying-datasetinfo)
- * [Downloading / extracting the dataset](#downloading-extracting-the-dataset)
-   * [Manual download / extraction](#manual-download-extraction)
- * [Specifying how the data should be split](#specifying-how-the-data-should-be-split)
- * [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
-   * [File access and tf.gfile](#file-access-and-tfgfile)
- * [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
+*   [Overview](#overview)
+*   [Writing my_dataset.py](#writing-my-datasetpy)
+*   [Testing MyDataset](#testing-mydataset)
+*   [Specifying DatasetInfo](#specifying-datasetinfo)
+*   [Downloading / extracting the dataset](#downloading-extracting-the-dataset)
+    *   [Manual download / extraction](#manual-download-extraction)
+*   [Specifying how the data should be split](#specifying-how-the-data-should-be-split)
+*   [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
+    *   [File access and tf.gfile](#file-access-and-tfgfile)
+*   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 
 ## Overview
 
-Datasets come from various sources and in various formats. To use a dataset,
-one must first download it and store it using a format enabling fast loading.
+Datasets come from various sources and in various formats. To use a dataset, one
+must first download it and store it using a format enabling fast loading.
 
 Adding support for a dataset means specifying:
 
- - Where the data is coming from (i.e. its URL);
- - What the dataset looks like (i.e. its features);
- - How the data should be split (e.g. `TRAIN` and `TEST`);
- - How the data should be stored on disk and fed to the model.
+-   Where the data is coming from (i.e. its URL);
+-   What the dataset looks like (i.e. its features);
+-   How the data should be split (e.g. `TRAIN` and `TEST`);
+-   How the data should be stored on disk and fed to the model.
 
 Below is a diagram showing the abstraction layers of the dataset and the
 transformation from the raw dataset files to the `tf.data.Dataset` object. The
-first time a dataset is used, it is downloaded and prepared. The following
-times it is being used, the dataset is loaded from the pre-prepared data
-directly.
+first time a dataset is used, it is downloaded and prepared. The following times
+it is being used, the dataset is loaded from the pre-prepared data directly.
 
 <p align="center">
   <img src="dataset_layers.png" alt="DatasetBuilder abstraction layers" width="700"/>
@@ -44,26 +43,26 @@ To add support for a dataset, you must write its "Builder" class, subclass of
 [`tfds.core.DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py),
 and implement the following methods:
 
- - `_info`, to build the [`DatasetInfo`](
- https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py)
- describing the dataset.
- - `_download_and_prepare`, to download and serialize the source data to disk;
- - `_as_dataset`, to produce a `tf.data.Dataset` from the serialized data.
+-   `_info`, to build the
+    [`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py)
+    describing the dataset.
+-   `_download_and_prepare`, to download and serialize the source data to disk;
+-   `_as_dataset`, to produce a `tf.data.Dataset` from the serialized data.
 
 As a convenience,
 [`tfds.core.GeneratorBasedDatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py)
 is a subclass of `tfds.core.DatasetBuilder` that simplifies defining a dataset
-and that works well for most datasets
-that can be generated on a single machine. Instead of `_download_and_prepare`
-and `_as_dataset`, its subclasses must implement:
+and that works well for most datasets that can be generated on a single machine.
+Instead of `_download_and_prepare` and `_as_dataset`, its subclasses must
+implement:
 
- - `_generate_samples`: to generate the `tf.train.Example` records that will be
- written to disk, per dataset split.
- - `_split_generators`: to define the dataset splits and arguments for
- `_generate_samples` per split.
+-   `_generate_samples`: to generate the `tf.train.Example` records that will be
+    written to disk, per dataset split.
+-   `_split_generators`: to define the dataset splits and arguments for
+    `_generate_samples` per split.
 
-Let's use `GeneratorBasedDatasetBuilder`, the easier option.
-`my_dataset.py` first looks like this:
+Let's use `GeneratorBasedDatasetBuilder`, the easier option. `my_dataset.py`
+first looks like this:
 
 ```python
 import tensorflow_datasets.public_api as tfds
@@ -90,15 +89,14 @@ iterate faster.
 dataset. It needs a "fake sample" of the source dataset, to be used as testing
 data.
 
-The "fake sample", to be stored in [`testing/test_data/fake_samples/`]
-(https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_samples/)
-under the `my_dataset` directory, should
-mimic the source dataset artifacts as downloaded and extracted.
-It can be created manually or automatically ([example script]
-(https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/generate_cifar10_like_sample.py)).
+The "fake sample", to be stored in
+[`testing/test_data/fake_samples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_samples/)
+under the `my_dataset` directory, should mimic the source dataset artifacts as
+downloaded and extracted. It can be created manually or automatically
+([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/generate_cifar10_like_sample.py)).
 
-**The fake sample should not contain any copyrighted material**. If in doubt,
-do not create the sample using material from the original dataset.
+**The fake sample should not contain any copyrighted material**. If in doubt, do
+not create the sample using material from the original dataset.
 
 ```python
 import tensorflow as tf
@@ -121,6 +119,7 @@ class MyDatasetTest(dataset_builder_testing.TestCase):
 if __name__ == "__main__":
   dataset_builder_testing.main()
 ```
+
 TODO(pierrot): remove SPEC
 
 Run the test as you proceed to implement `MyDataset`. By the end of this page,
@@ -128,10 +127,10 @@ it should pass.
 
 ## Specifying `DatasetInfo`
 
-The [`DatasetInfo`]
-(https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py) stores
-the information we know about a dataset. For now, let's add what features are
-part of the dataset and their types. For example:
+The
+[`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py)
+stores the information we know about a dataset. For now, let's add what features
+are part of the dataset and their types. For example:
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedDatasetBuilder):
@@ -150,10 +149,9 @@ class MyDataset(tfds.core.GeneratorBasedDatasetBuilder):
 The dictionary defined here defines the dictionary returned by
 `tf.data.Dataset`.
 
-The features are what defines the shape of the loaded data.
-Have a look at the [features package](
-https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/) for a complete
-list of available features and their description.
+The features are what defines the shape of the loaded data. Have a look at the
+[features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
+for a complete list of available features and their description.
 
 TODO(pierrot): link to python api doc, list a few important features
 
@@ -161,9 +159,9 @@ Run the test, `test_info` should now pass.
 
 ## Downloading / extracting the dataset
 
-Most dataset builders need to download some data from the web. All downloads
-and extractions must go through the `DownloadManager`. `DownloadManager`
-currently supports extracting `.zip`, `.gz`, and `.tar` files.
+Most dataset builders need to download some data from the web. All downloads and
+extractions must go through the `DownloadManager`. `DownloadManager` currently
+supports extracting `.zip`, `.gz`, and `.tar` files.
 
 For example, one can do both download and extraction by doing:
 
@@ -174,20 +172,19 @@ def _split_generators(self, dl_manager):
 ```
 
 ### Manual download / extraction
+
 If the dataset artifacts cannot be downloaded or extracted automatically (for
 example, if there is no API and it needs a username/password), you can use
-`path = dl_manager.manual_dir`. The user will need to manually download
-and extract the source data into the `manual_dir` of this dataset (by
-default: `~/tensorflow_datasets/manual/my_dataset`).
-
+`path = dl_manager.manual_dir`. The user will need to manually download and
+extract the source data into the `manual_dir` of this dataset (by default:
+`~/tensorflow_datasets/manual/my_dataset`).
 
 ## Specifying how the data should be split
 
 Datasets usually come with some pre-defined splits (for example, MNIST has train
 and test splits); the `DatasetBuilder` must reflect those splits on disk. If
-this is your own data, we suggest using a split of `(TRAIN:80%,
-VALIDATION: 10%, TEST: 10%)`. Users can always get subsplits through the `tfds`
-API.
+this is your own data, we suggest using a split of `(TRAIN:80%, VALIDATION: 10%,
+TEST: 10%)`. Users can always get subsplits through the `tfds` API.
 
 ```python
   def _split_generators(self, dl_manager):
@@ -240,8 +237,8 @@ def _generate_samples(self, images_dir_path, labels=None):
 ```
 
 Note that `self.info.specs.encode_sample` uses the feature definitions from
-`DatasetInfo` to encode the features passed here into a `tf.train.Example`.
-In this case, the `ImageFeature` will extract the jpeg content into the record
+`DatasetInfo` to encode the features passed here into a `tf.train.Example`. In
+this case, the `ImageFeature` will extract the jpeg content into the record
 automatically.
 
 At this point, your builder test should pass.
@@ -251,7 +248,6 @@ At this point, your builder test should pass.
 In order to support Cloud storage systems, all file access must use `tf.gfile`
 or other TensorFlow file APIs (for example, `tf.python_io`). Python built-ins
 for file operations (e.g. `open`, `os.rename`, `gzip`, etc.) must be avoided.
-
 
 ## Large datasets and distributed generation
 
