@@ -13,3 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Text utilities."""
+
+from tensorflow_datasets.core.features.text.text_encoder import ByteTextEncoder
+from tensorflow_datasets.core.features.text.text_encoder import TokenTextEncoder

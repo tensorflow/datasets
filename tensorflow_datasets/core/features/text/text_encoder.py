@@ -24,14 +24,14 @@ import six
 import tensorflow as tf
 
 # TODO(rsepassi):
-# * Add more complex tokenization and knobs (check T2T tokenization)
-# * Add support for reserved tokens (PAD, EOS, etc.)
+# * Add support for reserved tokens (PAD, EOS, etc.) to TextEncoder
+# * Determine how to handle PAD/START/END
 # * Add SubwordTextEncoder
 
 
 @six.add_metaclass(abc.ABCMeta)
 class TextEncoder(object):
-  """Base class for converting between text and integers."""
+  """Abstract base class for converting between text and integers."""
 
   @abc.abstractmethod
   def encode(self, s):
@@ -74,6 +74,17 @@ class TokenTextEncoder(TextEncoder):
                vocab_file=None,
                oov_buckets=1,
                oov_token=u"UNK"):
+    """Constructs a TokenTextEncoder.
+
+    Must pass either `vocab_list` or `vocab_file`.
+
+    Args:
+      vocab_list: `list<str>`, list of tokens.
+      vocab_file: `str`, filepath with 1 token per line.
+      oov_buckets: `int`, the number of `int`s to reserve for OOV hash buckets.
+        Tokens that are OOV will be hash-modded into a OOV bucket in `encode`.
+      oov_token: `str`, the string to use for OOV ids in `decode`.
+    """
     if not (vocab_list or vocab_file) or (vocab_list and vocab_file):
       raise ValueError("Must provide either vocab_list or vocab_file.")
     self._vocab_list = [
@@ -84,10 +95,11 @@ class TokenTextEncoder(TextEncoder):
         zip(self._vocab_list, range(len(self._vocab_list))))
     self._oov_buckets = oov_buckets
     self._oov_token = tf.compat.as_text(oov_token)
+    self._tokenizer = Tokenizer()
 
   def encode(self, s):
     ids = []
-    for token in tokenize(tf.compat.as_text(s)):
+    for token in self._tokenizer.tokenize(tf.compat.as_text(s)):
       int_id = self._token_to_id.get(token, -1)
       if int_id < 0:
         int_id = self._oov_bucket(token)
@@ -130,7 +142,64 @@ class TokenTextEncoder(TextEncoder):
       return [el.strip() for el in tf.compat.as_text(f.read()).split(u"\n")]
 
 
-def tokenize(s):
-  """Split on (and drop) non-alphanumeric characters."""
-  return [tok for tok in
-          re.split(r"\W+", tf.compat.as_text(s), flags=re.UNICODE) if tok]
+class Tokenizer(object):
+  """Splits a string into tokens, and joins them back."""
+
+  def __init__(self, alphanum_only=True, reserved_tokens=None):
+    """Constructs a Tokenizer.
+
+    Note that the Tokenizer is invertible if `alphanum_only=False`.
+    i.e. `s == t.join(t.tokenize(s))`.
+
+    Args:
+      alphanum_only: `bool`, if `True`, only parse out alphanumeric tokens
+        (non-alphanumeric characters are dropped);
+        otherwise, keep all characters (individual tokens will still be either
+        all alphanumeric or all non-alphanumeric).
+      reserved_tokens: `list<str>`, a list of strings that, if any are in `s`,
+        will be preserved as whole tokens, even if they contain mixed
+        alphnumeric/non-alphanumeric characters.
+    """
+    self._alphanum_only = alphanum_only
+    self._reserved_tokens = set(
+        [tf.compat.as_text(tok) for tok in reserved_tokens or []])
+    if self._reserved_tokens:
+      pattern = u"(%s)" % u"|".join(reserved_tokens)
+      self._reserved_tokens_re = re.compile(pattern, flags=re.UNICODE)
+
+    if self._alphanum_only:
+      pattern = r"\W+"
+    else:
+      pattern = r"(\W+)"
+    self._alphanum_re = re.compile(pattern, flags=re.UNICODE)
+
+  def tokenize(self, s):
+    """Splits a string into tokens."""
+    reserved_tokens = self._reserved_tokens
+
+    s = tf.compat.as_text(s)
+
+    if reserved_tokens:
+      # First split out the reserved tokens
+      substrs = self._reserved_tokens_re.split(s)
+    else:
+      substrs = [s]
+
+    toks = []
+    for substr in substrs:
+      if substr in reserved_tokens:
+        toks.append(substr)
+      else:
+        toks.extend(self._alphanum_re.split(substr))
+
+    # Filter out empty strings
+    toks = [t for t in toks if t]
+    return toks
+
+  def join(self, tokens):
+    """Joins tokens into a string."""
+    if self._alphanum_only:
+      return u" ".join(tokens)
+    else:
+      # Fully invertible
+      return u"".join(tokens)

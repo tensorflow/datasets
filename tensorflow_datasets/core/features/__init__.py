@@ -15,6 +15,8 @@
 
 """Public tfds.features API."""
 
+from tensorflow_datasets.core.features import text
+
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.feature import FeatureConnector
 from tensorflow_datasets.core.features.feature import FeaturesDict
