@@ -35,7 +35,7 @@ class DiabeticRetinopathyDetection(
 
   def _info(self):
     return tfds.core.DatasetInfo(
-        specs=tfds.features.SpecDict({
+        features=tfds.features.FeaturesDict({
             "name": tfds.features.Text(),  # patient ID + eye. eg: "4_left".
             "image": tfds.features.Image(),
             # From 0 (no DR - saine) to 4 (Proliferative DR). -1 means no label.
@@ -89,7 +89,7 @@ class DiabeticRetinopathyDetection(
               for fname in tf.gfile.ListDirectory(images_dir_path)
               if fname.endswith(".jpeg")]
     for name, label in data:
-      yield self.info.specs.encode_sample({
+      yield self.info.features.encode_sample({
           "name": name,
           "image": "%s/%s.jpeg" % (images_dir_path, name),
           "label": label,

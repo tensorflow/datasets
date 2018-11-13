@@ -344,8 +344,8 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
   def _file_format_adapter(self):
     # Load the format adapter (CSV, TF-Record,...)
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
-    file_specs = self.info.specs.get_specs()
-    return file_adapter_cls(file_specs)
+    serialized_features = self.info.features.get_serialized_features()
+    return file_adapter_cls(serialized_features)
 
   @abc.abstractmethod
   def _split_generators(self, dl_manager):
@@ -426,7 +426,7 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
 
     Yields:
       sample: (dict) Sample dict<str feature_name, feature_value>. The sample
-        should usually be encoded with `self.info.specs.encode_sample({...})`
+        should usually be encoded with `self.info.features.encode_sample({...})`
     """
     raise NotImplementedError()
 
@@ -456,7 +456,7 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
       )
 
     # Saving metadata
-    # TODO(epot): Also include the specs in the metadata for documentation.
+    # TODO(epot): Also include the features in the metadata for documentation.
     metadata = {
         "splits": split_dict.to_json_data(),
     }
@@ -490,7 +490,7 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
         shuffle_files=should_shuffle,
     )
-    tf_data = tf_data.map(self.info.specs.decode_sample)
+    tf_data = tf_data.map(self.info.features.decode_sample)
     return tf_data
 
   def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):

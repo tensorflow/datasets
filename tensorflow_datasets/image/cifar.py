@@ -57,7 +57,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
   def _info(self):
     cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
     return tfds.core.DatasetInfo(
-        specs=tfds.features.SpecDict({
+        features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=cifar_shape),
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
@@ -104,7 +104,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
       filepaths (list[str]): The files to use to generate the data.
 
     Yields:
-      The cifar samples, as defined in the dataset info specs.
+      The cifar samples, as defined in the dataset info features.
     """
     images, labels = [], []
     for path in filepaths:
@@ -136,7 +136,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
     for image, label in data:
       if len(label) == 1:
         label = label[self._cifar_info.label_keys[0]]
-      yield self.info.specs.encode_sample({
+      yield self.info.features.encode_sample({
           "image": image,
           "label": label,
       })
@@ -174,7 +174,7 @@ class Cifar100(Cifar10):
     cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
     label_to_use = "coarse_labels" if self._use_coarse_labels else "fine_labels"
     return tfds.core.DatasetInfo(
-        specs=tfds.features.SpecDict({
+        features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=cifar_shape),
             "label": tfds.features.OneOf(choice=label_to_use, feature_dict={
                 "coarse_labels": tfds.features.ClassLabel(num_classes=20),

@@ -17,8 +17,8 @@
 
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.feature import FeatureConnector
+from tensorflow_datasets.core.features.feature import FeaturesDict
 from tensorflow_datasets.core.features.feature import OneOf
-from tensorflow_datasets.core.features.feature import SpecDict
 from tensorflow_datasets.core.features.feature import Tensor
 from tensorflow_datasets.core.features.image_feature import Image
 from tensorflow_datasets.core.features.text_feature import Text

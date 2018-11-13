@@ -46,7 +46,7 @@ class Text(feature.FeatureConnector):
   def vocab_size(self):
     return self.encoder and self.encoder.vocab_size
 
-  def get_specs(self):
+  def get_serialized_features(self):
     dtype = tf.int64 if self.encoder else tf.string
     return tf.VarLenFeature(dtype)
 

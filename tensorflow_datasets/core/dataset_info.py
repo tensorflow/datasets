@@ -49,15 +49,13 @@ __all__ = [
 DATASET_INFO_FILENAME = "dataset_info.json"  # TODO(afrozm): Replace by proto
 
 
-# TODO(epot): Do a global renaming of builder.info.specs into
-# builder.info.features, SpecsDict => features.FeatureDict()
 class DatasetInfo(object):
   """Structure defining the info of the dataset.
 
   Information on the datasets are available through the builder.info property.
   Properties:
-    specs (SpecDict): Information on the feature dict of the `tf.data.Dataset()`
-      object from the `builder.as_dataset()` method.
+    features (FeaturesDict): Information on the feature dict of the
+      `tf.data.Dataset()` object from the `builder.as_dataset()` method.
     splits (SplitDict): Available Splits for this dataset
 
   Note that some of those fields are dynamically computed at data generation
@@ -66,16 +64,17 @@ class DatasetInfo(object):
   """
 
   @api_utils.disallow_positional_args
-  def __init__(self, specs, supervised_keys=None):
+  def __init__(self, features, supervised_keys=None):
     """Constructor of the DatasetInfo.
 
     Args:
-      specs: (`tfds.features.SpecDict`) Information on the feature dict of the
-        `tf.data.Dataset()` object from the `builder.as_dataset()` method.
+      features: (`tfds.features.FeaturesDict`) Information on the feature dict
+        of the `tf.data.Dataset()` object from the `builder.as_dataset()`
+        method.
       supervised_keys: (`tuple`) Specifies the input feature and the
         label for supervised learning, if applicable for the dataset.
     """
-    self._specs = specs
+    self._features = features
     self._splits = splits.SplitDict()
     self._supervised_keys = supervised_keys
     if supervised_keys is not None:
@@ -85,8 +84,8 @@ class DatasetInfo(object):
     # TODO(afrozm): Should add other metadata here (num samples, hash,...)
 
   @property
-  def specs(self):
-    return self._specs
+  def features(self):
+    return self._features
 
   @property
   def supervised_keys(self):

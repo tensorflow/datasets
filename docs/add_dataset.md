@@ -137,7 +137,7 @@ class MyDataset(tfds.core.GeneratorBasedDatasetBuilder):
 
   def _info(self):
     return tfds.core.DatasetInfo(
-        specs=tfds.features.SpecDict({
+        features=tfds.features.FeaturesDict({
             "image_description": tfds.features.Text(),
             "image": tfds.features.Image(),
             # Here, labels can be of 5 distinct values.
@@ -229,14 +229,14 @@ records like:
 def _generate_samples(self, images_dir_path, labels=None):
   ... # read data from CSV and build data
   for image_id, description, label in data:
-    yield self.info.specs.encode_sample({
+    yield self.info.features.encode_sample({
         "image_description": description,
         "image": "%s/%s.jpeg" % (images_dir_path, image_id),
         "label": label,
     })
 ```
 
-Note that `self.info.specs.encode_sample` uses the feature definitions from
+Note that `self.info.features.encode_sample` uses the feature definitions from
 `DatasetInfo` to encode the features passed here into a `tf.train.Example`. In
 this case, the `ImageFeature` will extract the jpeg content into the record
 automatically.

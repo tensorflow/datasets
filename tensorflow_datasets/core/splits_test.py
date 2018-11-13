@@ -35,7 +35,7 @@ class DummyDataset(tfds.core.GeneratorBasedDatasetBuilder):
 
   def _info(self):
     return tfds.core.DatasetInfo(
-        specs=tfds.features.SpecDict({'value': tf.int64})
+        features=tfds.features.FeaturesDict({'value': tf.int64})
     )
 
   def _split_generators(self, dl_manager):
@@ -60,7 +60,7 @@ class DummyDataset(tfds.core.GeneratorBasedDatasetBuilder):
 
   def _generate_samples(self, data):
     for i in data:
-      yield self.info.specs.encode_sample({
+      yield self.info.features.encode_sample({
           'value': i,
       })
 

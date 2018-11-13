@@ -64,27 +64,28 @@ class FeatureExpectationsTestCase(tf.test.TestCase):
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_encode_decode(self):
     expectations = self.expectations
-    specs = features.SpecDict({exp.name: exp.feature for exp in expectations})
+    fdict = features.FeaturesDict(
+        {exp.name: exp.feature for exp in expectations})
 
     decoded_sample = features_encode_decode(
-        specs, dict([(exp.name, exp.value) for exp in expectations]))
+        fdict, dict([(exp.name, exp.value) for exp in expectations]))
 
     for exp in expectations:
       self.assertAllEqual(decoded_sample[exp.name], exp.expected)
       # TODO(rsepassi): test shape and dtype against exp.feature
 
 
-def features_encode_decode(specs_dict, sample):
+def features_encode_decode(features_dict, sample):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
   # Encode sample
-  encoded_sample = specs_dict.encode_sample(sample)
+  encoded_sample = features_dict.encode_sample(sample)
 
   with tmp_dir() as tmp_dir_:
     tmp_filename = os.path.join(tmp_dir_, 'tmp.tfrecord')
 
     # Read/write the file
     file_adapter = file_format_adapter.TFRecordExampleAdapter(
-        specs_dict.get_specs())
+        features_dict.get_serialized_features())
     file_adapter.write_from_generator(
         generator_fn=lambda: [encoded_sample],
         output_files=[tmp_filename],
@@ -92,7 +93,7 @@ def features_encode_decode(specs_dict, sample):
     dataset = file_adapter.dataset_from_filename(tmp_filename)
 
     # Decode the sample
-    dataset = dataset.map(specs_dict.decode_sample)
+    dataset = dataset.map(features_dict.decode_sample)
 
     for el in dataset_utils.iterate_over_dataset(dataset):
       return el

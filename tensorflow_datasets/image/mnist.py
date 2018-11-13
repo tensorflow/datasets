@@ -49,7 +49,7 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
   def _info(self):
     mnist_shape = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
     return tfds.core.DatasetInfo(
-        specs=tfds.features.SpecDict({
+        features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=mnist_shape),
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
@@ -108,7 +108,7 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
     random.shuffle(data)
 
     for image, label in data:
-      yield self.info.specs.encode_sample({
+      yield self.info.features.encode_sample({
           "image": image,
           "label": label,
       })

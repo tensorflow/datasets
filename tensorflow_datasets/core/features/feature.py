@@ -20,11 +20,11 @@ tensorflow/datasets builders from how they are encoded/decoded from file.
 
 #Use FeatureConnector in DatasetBuilder
 
-1) In the _build_info() function, define the specs as you would like them
+1) In the _build_info() function, define the features as you would like them
 to be returned by the tf.data.Dataset() object.
 
 Ex:
-  specs=features.SpecDict({
+  features=features.FeaturesDict({
       'input': features.Image(),
       'target': features.Text(encoder=SubWordEncoder()),
       'extra_data': {
@@ -46,7 +46,7 @@ The tf.data.Dataset will return each samples as a dict:
 2) In the generator function, yield the samples to match what you have defined
 in the spec. The values will automatically be encoded.
 
-  yield self.info.specs.encode_sample({
+  yield self.info.features.encode_sample({
       'input': np_image,
       'target': 'This is some text',
       'extra_data': {
@@ -55,22 +55,23 @@ in the spec. The values will automatically be encoded.
       }
   })
 
-#Create your own FeatureConnector
+# Create your own FeatureConnector
 
 To create your own feature connector, you need to inherit from FeatureConnector
 and implement the abstract methods.
 
-1) If your connector only contains one value, then the get_specs, encode_sample,
-and decode_sample can directly process single value, without wrapping it in a
-dict.
+1. If your connector only contains one value, then the get_serialized_features,
+   encode_sample, and decode_sample can directly process single value, without
+   wrapping it in a dict.
 
-2) If your connector is a container of multiple sub-connectors, the easiest
-way is to inherit from features.SpecDict and use the super() methods to
-automatically encode/decode the sub-connectors. See features.OneOf as example.
+2. If your connector is a container of multiple sub-connectors, the easiest
+   way is to inherit from features.FeaturesDict and use the super() methods to
+   automatically encode/decode the sub-connectors. See features.OneOf as
+   example.
 
 This file contains the following FeatureConnector:
  * FeatureConnector: The abstract base class defining the interface
- * SpecDict: Container of FeatureConnector
+ * FeaturesDict: Container of FeatureConnector
  * Tensor: Simple tensor value with static or dynamic shape
  * OneOf: Choose one between multiple sub-connector at runtime
 
@@ -109,8 +110,8 @@ class FeatureConnector(object):
   """
 
   @abc.abstractmethod
-  def get_specs(self):
-    """Return the tf-example specs for the adapter, as stored on disk.
+  def get_serialized_features(self):
+    """Return the tf-example features for the adapter, as stored on disk.
 
     This function indicates how this feature is encoded on file internally.
     The DatasetBuilder are written on disk as tf.train.Example proto.
@@ -129,7 +130,7 @@ class FeatureConnector(object):
       return tf.FixedLenFeature((64, 64), tf.uint8)
 
     Returns:
-      specs: Either a dict of feature proto object, or a feature proto object
+      features: Either a dict of feature proto object, or a feature proto object
 
     """
     raise NotImplementedError
@@ -162,27 +163,27 @@ class FeatureConnector(object):
     raise NotImplementedError
 
   @utils.memoized_property
-  def specs_keys(self):
-    """List of the feature specs keys."""
-    specs = self.get_specs()
-    if isinstance(specs, dict):
-      return list(specs)
+  def features_keys(self):
+    """List of the feature features keys."""
+    features = self.get_serialized_features()
+    if isinstance(features, dict):
+      return list(features)
     return None
 
 
-class SpecDict(FeatureConnector):
+class FeaturesDict(FeatureConnector):
   """Main feature connector orchestrator.
 
   The encode/decode method of the spec feature will recursivelly encode/decode
   every sub-connector given on the constructor.
-  Other specs can inherit from this class and call super() in order to get
+  Other features can inherit from this class and call super() in order to get
   nested container.
 
   Example:
 
   For DatasetInfo:
 
-    specs = tfds.features.SpecDict({
+    features = tfds.features.FeaturesDict({
         'input': tfds.features.Image(),
         'target': tf.int32,
     })
@@ -190,7 +191,7 @@ class SpecDict(FeatureConnector):
   At generation time:
 
     for image, label in generate_samples:
-      yield self.info.specs.encode_sample({
+      yield self.info.features.encode_sample({
           'input': image,
           'output': label
       })
@@ -201,14 +202,14 @@ class SpecDict(FeatureConnector):
       tf_input = sample['input']
       tf_output = sample['output']
 
-  For nested features, the SpecDict will internally flatten the keys for the
-  specs and the conversion to tf.train.Example. Indeed, the tf.train.Example
+  For nested features, the FeaturesDict will internally flatten the keys for the
+  features and the conversion to tf.train.Example. Indeed, the tf.train.Example
   proto do not support nested feature, while tf.data.Dataset does.
   But internal transformation should be invisible to the user.
 
   Example:
 
-    tfds.features.SpecDict({
+    tfds.features.FeaturesDict({
         'input': tf.int32,
         'target': {
             'height': tf.int32,
@@ -227,7 +228,7 @@ class SpecDict(FeatureConnector):
   """
 
   def __init__(self, feature_dict):
-    """Initialize the specs.
+    """Initialize the features.
 
     Args:
       feature_dict (dict): Dictionary containing the feature connectors of a
@@ -238,35 +239,36 @@ class SpecDict(FeatureConnector):
     Raises:
       ValueError: If one of the given features is not recognised
     """
-    super(SpecDict, self).__init__()
+    super(FeaturesDict, self).__init__()
     self._feature_dict = {k: to_feature(v) for k, v in feature_dict.items()}
 
-  def get_specs(self):
+  def get_serialized_features(self):
     """See base class for details."""
-    # Flatten tf-example specs dict
+    # Flatten tf-example features dict
     # Use NonMutableDict to ensure there is no collision between features keys
-    specs_dict = utils.NonMutableDict()
+    features_dict = utils.NonMutableDict()
     for feature_key, feature in self._feature_dict.items():
-      feature_specs = feature.get_specs()
+      serialized_features = feature.get_serialized_features()
 
       # Features can be either containers (dict of other features) or plain
       # features (ex: single tensor). Plain features have a None
-      # feature.specs_keys
-      if not feature.specs_keys:
-        specs_dict[feature_key] = feature_specs
+      # feature.features_keys
+      if not feature.features_keys:
+        features_dict[feature_key] = serialized_features
       else:
-        # Sanity check which should always be True, as feature.specs_keys is
-        # computed using feature.get_specs()
-        _assert_keys_match(feature_specs.keys(), feature.specs_keys)
-        specs_dict.update({
-            posixpath.join(feature_key, k): v for k, v in feature_specs.items()
+        # Sanity check which should always be True, as feature.features_keys is
+        # computed using feature.get_serialized_features()
+        _assert_keys_match(serialized_features.keys(), feature.features_keys)
+        features_dict.update({
+            posixpath.join(feature_key, k): v for k, v
+            in serialized_features.items()
         })
 
-    return specs_dict
+    return features_dict
 
   def encode_sample(self, sample_dict):
     """See base class for details."""
-    # Flatten dict matching the tf-example specs
+    # Flatten dict matching the tf-example features
     # Use NonMutableDict to ensure there is no collision between features keys
     tfexample_dict = utils.NonMutableDict()
 
@@ -279,14 +281,14 @@ class SpecDict(FeatureConnector):
       encoded_feature = feature.encode_sample(sample_value)
 
       # Singleton case
-      if not feature.specs_keys:
+      if not feature.features_keys:
         tfexample_dict[feature_key] = encoded_feature
       # Feature contains sub features
       else:
-        _assert_keys_match(encoded_feature.keys(), feature.specs_keys)
+        _assert_keys_match(encoded_feature.keys(), feature.features_keys)
         tfexample_dict.update({
             posixpath.join(feature_key, k): encoded_feature[k]
-            for k in feature.specs_keys
+            for k in feature.features_keys
         })
     return tfexample_dict
 
@@ -320,7 +322,7 @@ class Tensor(FeatureConnector):
     self._shape = shape
     self._dtype = dtype
 
-  def get_specs(self):
+  def get_serialized_features(self):
     """See base class for details."""
     if (self._shape and  # Shape is a sequence (None, ...)
         len(self._shape) >= 2 and
@@ -351,7 +353,7 @@ class Tensor(FeatureConnector):
     return tfexample_data
 
 
-class OneOf(SpecDict):
+class OneOf(FeaturesDict):
   """Feature which encodes multiple features, but decodes only one at runtime.
 
   This avoids having duplicate files for every version of your dataset. You
@@ -360,7 +362,7 @@ class OneOf(SpecDict):
 
   Example:
 
-    specs = tfds.features.SpecDict({
+    features = tfds.features.FeaturesDict({
         'labels': features.OneOf('coco', {
             'coco': tf.string,
             'cifar10': tf.string,
@@ -370,7 +372,7 @@ class OneOf(SpecDict):
   At generation time, encode both coco and cifar labels:
 
     for sample in generate_samples:
-      yield self.info.specs.encode_sample({
+      yield self.info.features.encode_sample({
           'labels': {
               'coco': 'person',
               'cifar10': 'airplane',
@@ -385,7 +387,7 @@ class OneOf(SpecDict):
   """
 
   def __init__(self, choice, feature_dict):
-    """Create the specs for the container.
+    """Create the features for the container.
 
     Args:
       choice (str): The key of the spec to decode.
@@ -397,7 +399,7 @@ class OneOf(SpecDict):
     """
     if choice not in feature_dict:
       raise ValueError(
-          'Field {} selected not found in the specs.'.format(choice))
+          'Field {} selected not found in the features.'.format(choice))
 
     super(OneOf, self).__init__(feature_dict)
     self._choice = choice
@@ -418,7 +420,7 @@ def to_feature(value):
   elif utils.is_dtype(value):  # tf.int32, tf.string,...
     return Tensor(shape=(), dtype=tf.as_dtype(value))
   elif isinstance(value, dict):
-    return SpecDict(value)
+    return FeaturesDict(value)
   else:
     raise ValueError('Feature not supported: {}'.format(value))
 
@@ -438,14 +440,14 @@ def decode_single_feature_from_dict(
     decoded_feature: The output of the feature.decode_sample
   """
   # Singleton case
-  if not feature.specs_keys:
+  if not feature.features_keys:
     data_to_decode = tfexample_dict[feature_k]
   # Feature contains sub features
   else:
     # Extract the sub-features from the global feature dict
     data_to_decode = {
         k: tfexample_dict[posixpath.join(feature_k, k)]
-        for k in feature.specs_keys
+        for k in feature.features_keys
     }
   return feature.decode_sample(data_to_decode)
 

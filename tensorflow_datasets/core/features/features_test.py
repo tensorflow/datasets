@@ -23,10 +23,10 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
-from tensorflow_datasets.core import features
+from tensorflow_datasets.core import features as features_lib
 
 
-class AnInputConnector(features.SpecDict):
+class AnInputConnector(features_lib.FeaturesDict):
   """Simple FeatureConnector implementing the based methods used for test."""
 
   def __init__(self):
@@ -49,10 +49,10 @@ class AnInputConnector(features.SpecDict):
     return tfexample_dict['a'] + tfexample_dict['b']
 
 
-class AnOutputConnector(features.FeatureConnector):
+class AnOutputConnector(features_lib.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
 
-  def get_specs(self):
+  def get_serialized_features(self):
     return tf.FixedLenFeature(shape=(), dtype=tf.float32)
 
   def encode_sample(self, sample_data):
@@ -66,7 +66,7 @@ class FeatureTest(tf.test.TestCase):
 
   def setUp(self):
     # Create the spec dict used for all tests
-    self._specs = features.SpecDict({
+    self._features = features_lib.FeaturesDict({
         'input': AnInputConnector(),
         'output': AnOutputConnector(),
         'img': {
@@ -78,9 +78,9 @@ class FeatureTest(tf.test.TestCase):
         }
     })
 
-  def test_specs(self):
+  def test_features(self):
     # Specs of the tf example file
-    self.assertEqual(self._specs.get_specs(), {
+    self.assertEqual(self._features.get_serialized_features(), {
         'input/a': tf.FixedLenFeature(shape=(), dtype=tf.int32),
         'input/b': tf.FixedLenFeature(shape=(), dtype=tf.int32),
         'output': tf.FixedLenFeature(shape=(), dtype=tf.float32),
@@ -92,7 +92,7 @@ class FeatureTest(tf.test.TestCase):
   def test_encode(self):
 
     # During encoding, all FeatureConnector.encode_sample() are applied
-    encoded_sample = self._specs.encode_sample({
+    encoded_sample = self._features.encode_sample({
         'input': 1,
         'output': -1,
         'img': {
@@ -115,7 +115,7 @@ class FeatureTest(tf.test.TestCase):
   def test_decode(self):
 
     # Decoding call all FeatureConnector.decode_sample()
-    decoded_sample = self._specs.decode_sample({
+    decoded_sample = self._features.decode_sample({
         'input/a': 2,  # 1 + 1
         'input/b': 10,  # 1 * 10
         'output': -10.0,  # -1 * 10.0
@@ -140,8 +140,8 @@ class OneOfTest(tf.test.TestCase):
 
   def setUp(self):
     # Create the spec dict used for all tests
-    self._specs = features.SpecDict({
-        'input': features.OneOf(
+    self._features = features_lib.FeaturesDict({
+        'input': features_lib.OneOf(
             choice='choice2',
             feature_dict={
                 'choice1': tf.float32,
@@ -150,9 +150,9 @@ class OneOfTest(tf.test.TestCase):
         ),
     })
 
-  def test_specs(self):
+  def test_features(self):
     # All choices are present in the spec
-    self.assertEqual(self._specs.get_specs(), {
+    self.assertEqual(self._features.get_serialized_features(), {
         'input/choice1': tf.FixedLenFeature(shape=(), dtype=tf.float32),
         'input/choice2/a': tf.FixedLenFeature(shape=(), dtype=tf.int32),
         'input/choice2/b': tf.FixedLenFeature(shape=(), dtype=tf.int32),
@@ -160,7 +160,7 @@ class OneOfTest(tf.test.TestCase):
 
   def test_encode(self):
     # All choices are encoded
-    encoded_sample = self._specs.encode_sample({
+    encoded_sample = self._features.encode_sample({
         'input': {
             'choice1': 0.0,
             'choice2': 1,
@@ -174,7 +174,7 @@ class OneOfTest(tf.test.TestCase):
 
   def test_decode(self):
     # Only choice 2 is decoded.
-    decoded_sample = self._specs.decode_sample({
+    decoded_sample = self._features.decode_sample({
         'input/choice1': 0.0,
         'input/choice2/a': 2,  # 1 + 1
         'input/choice2/b': 10,  # 1 * 10
@@ -187,13 +187,13 @@ class OneOfTest(tf.test.TestCase):
 class FeatureTensorTest(tf.test.TestCase):
 
   def test_shapes_static(self):
-    specs = features.SpecDict({
-        'input': features.Tensor(shape=(2, 3), dtype=tf.float32),
+    features = features_lib.FeaturesDict({
+        'input': features_lib.Tensor(shape=(2, 3), dtype=tf.float32),
     })
 
     # Numpy array
     np_input = np.random.rand(2, 3).astype(np.float32)
-    tf_output = _encode_decode(specs, {
+    tf_output = _encode_decode(features, {
         'input': np_input,
     })
     self.assertAllEqual(tf_output['input'], np_input)
@@ -203,45 +203,45 @@ class FeatureTensorTest(tf.test.TestCase):
         [1, 2, 3],
         [4, 5, 6],
     ]
-    tf_output = _encode_decode(specs, {
+    tf_output = _encode_decode(features, {
         'input': array_input,
     })
     self.assertAllEqual(tf_output['input'], array_input)
 
     # Invalid type
     with self.assertRaisesWithPredicateMatch(ValueError, 'int64 do not match'):
-      _encode_decode(specs, {
+      _encode_decode(features, {
           'input': np.random.randint(256, size=(2, 3)),
       })
 
     # Invalid shape
     with self.assertRaisesWithPredicateMatch(ValueError, 'are incompatible'):
-      _encode_decode(specs, {
+      _encode_decode(features, {
           'input': np.random.rand(2, 4).astype(np.float32),
       })
 
   def test_shapes_dynamic(self):
-    specs = features.SpecDict({
-        'input': features.Tensor(shape=(None, None, 1), dtype=tf.int32),
+    features = features_lib.FeaturesDict({
+        'input': features_lib.Tensor(shape=(None, None, 1), dtype=tf.int32),
     })
 
     # Numpy array
     np_input = np.random.randint(256, size=(2, 3, 1), dtype=np.int32)
-    tf_output = _encode_decode(specs, {
+    tf_output = _encode_decode(features, {
         'input': np_input,
     })
     self.assertAllEqual(tf_output['input'], np_input)
 
     # Invalid shape
     with self.assertRaisesWithPredicateMatch(ValueError, 'are incompatible'):
-      _encode_decode(specs, {
+      _encode_decode(features, {
           'input': np.random.randint(256, size=(2, 3, 2), dtype=np.int32),
       })
 
 
-def _encode_decode(specs, sample):
-  encoded_sample = specs.encode_sample(sample)
-  return specs.decode_sample(encoded_sample)
+def _encode_decode(features, sample):
+  encoded_sample = features.encode_sample(sample)
+  return features.decode_sample(encoded_sample)
 
 
 if __name__ == '__main__':

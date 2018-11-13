@@ -47,7 +47,7 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
 
   def _generate_samples(self, range_):
     for i in range_:
-      yield self.info.specs.encode_sample({
+      yield self.info.features.encode_sample({
           "x": i,
           "y": np.array([-i]).astype(np.int64)[0],
           "z": tf.compat.as_text(str(i))
@@ -55,7 +55,7 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
 
   def _info(self):
     return dataset_info.DatasetInfo(
-        specs=features.SpecDict({
+        features=features.FeaturesDict({
             "x": tf.int64,
             "y": tf.int64,
             "z": tf.string,
@@ -68,8 +68,8 @@ class DummyCSVBuilder(DummyTFRecordBuilder):
   def __init__(self, *args, **kwargs):
     super(DummyCSVBuilder, self).__init__(*args, **kwargs)
     file_adapter_cls = file_format_adapter.CSVAdapter
-    file_specs = self.info.specs.get_specs()
-    self._file_format_adapter = file_adapter_cls(file_specs)
+    serialized_features = self.info.features.get_serialized_features()
+    self._file_format_adapter = file_adapter_cls(serialized_features)
 
 
 class FileFormatAdapterTest(tf.test.TestCase):

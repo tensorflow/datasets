@@ -50,14 +50,14 @@ class Image(feature.FeatureConnector):
 
   Example:
     * In the DatasetInfo object:
-      specs=features.Specs({
+      features=features.FeatureDict({
           'input': features.Image(),
           'target': features.Image(shape=(None, None, 1),
                                    encoding_format='png'),
       })
 
     * During generation:
-      yield self.info.spec.encode_sample({
+      yield self.info.features.encode_sample({
           'input': 'path/to/img.jpg',
           'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
       })
@@ -92,7 +92,7 @@ class Image(feature.FeatureConnector):
           encoding_format, acceptable_channels, channels))
     self._encode_fn = ENCODE_FN[encoding_format]
 
-  def get_specs(self):
+  def get_serialized_features(self):
     # Only store raw image (includes size).
     return tf.FixedLenFeature(tuple(), tf.string)
 
