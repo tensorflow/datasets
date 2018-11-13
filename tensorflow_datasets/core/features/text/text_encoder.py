@@ -24,14 +24,27 @@ import six
 import tensorflow as tf
 
 # TODO(rsepassi):
-# * Add support for reserved tokens (PAD, EOS, etc.) to TextEncoder
-# * Determine how to handle PAD/START/END
+# * Add support for reserved tokens (EOS, etc.) to TextEncoder
+# * Determine how to handle START/END
 # * Add SubwordTextEncoder
 
 
 @six.add_metaclass(abc.ABCMeta)
 class TextEncoder(object):
-  """Abstract base class for converting between text and integers."""
+  """Abstract base class for converting between text and integers.
+
+  **A note on padding**:
+
+    Because text data is typically variable length and nearly always requires
+    padding during training, ID 0 is always reserved for padding. To accommodate
+    this, all `TextEncoder`s behave in certain ways:
+
+    * `encode`: never returns id 0 (all ids are 1+)
+    * `decode`: drops 0 in the input ids
+    * `vocab_size`: includes ID 0
+
+    New subclasses should be careful to match this behavior.
+  """
 
   @abc.abstractmethod
   def encode(self, s):
@@ -52,14 +65,16 @@ class ByteTextEncoder(TextEncoder):
   """Byte-encodes text."""
 
   def encode(self, s):
-    return list(bytearray(tf.compat.as_bytes(s)))
+    return [i + 1 for i in list(bytearray(tf.compat.as_bytes(s)))]
 
   def decode(self, ids):
+    ids = _pad_decr(ids)
     return tf.compat.as_text(bytes(bytearray(ids)))
 
   @property
   def vocab_size(self):
-    return 2**8
+    # Plus 1 for pad
+    return 2**8 + 1
 
 
 class TokenTextEncoder(TextEncoder):
@@ -106,9 +121,13 @@ class TokenTextEncoder(TextEncoder):
         if int_id is None:
           raise ValueError("Out of vocabulary token %s" % token)
       ids.append(int_id)
-    return ids
+
+    # Increment for pad id 0
+    return _pad_incr(ids)
 
   def decode(self, ids):
+    ids = _pad_decr(ids)
+
     tokens = []
     for int_id in ids:
       if int_id < len(self._vocab_list):
@@ -119,7 +138,8 @@ class TokenTextEncoder(TextEncoder):
 
   @property
   def vocab_size(self):
-    return len(self._vocab_list) + self._oov_buckets
+    # Plus 1 for pad
+    return len(self._vocab_list) + self._oov_buckets + 1
 
   @property
   def tokens(self):
@@ -203,3 +223,20 @@ class Tokenizer(object):
     else:
       # Fully invertible
       return u"".join(tokens)
+
+
+def _pad_decr(ids):
+  """Strip ID 0 and decrement ids by 1."""
+  idx = -1
+  while not ids[idx]:
+    idx -= 1
+  if idx == -1:
+    ids = ids
+  else:
+    ids = ids[:idx + 1]
+  return [i - 1 for i in ids]
+
+
+def _pad_incr(ids):
+  """Add 1 to ids to account for pad."""
+  return [i + 1 for i in ids]

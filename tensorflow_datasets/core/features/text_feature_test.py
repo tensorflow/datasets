@@ -50,7 +50,7 @@ class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
             name='text_unicode_encoded',
             feature=features.Text(encoder=text_encoder.ByteTextEncoder()),
             value=unicode_text,
-            expected=[228, 189, 160, 229, 165, 189]),
+            expected=[i + 1 for i in [228, 189, 160, 229, 165, 189]]),
     ]
 
 

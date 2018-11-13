@@ -32,8 +32,9 @@ EN_HELLO = u'hello '
 
 
 class ByteTextEncoderTest(tf.test.TestCase):
-  ZH_HELLO_IDS = [228, 189, 160, 229, 165, 189, 32]
-  EN_HELLO_IDS = [104, 101, 108, 108, 111, 32]
+  # Incremented for pad
+  ZH_HELLO_IDS = [i + 1 for i in [228, 189, 160, 229, 165, 189, 32]]
+  EN_HELLO_IDS = [i + 1 for i in [104, 101, 108, 108, 111, 32]]
 
   def test_encode_decode(self):
     encoder = text_encoder.ByteTextEncoder()
@@ -42,7 +43,7 @@ class ByteTextEncoderTest(tf.test.TestCase):
     self.assertEqual(self.EN_HELLO_IDS, encoder.encode('hello '))
     self.assertEqual(EN_HELLO, encoder.decode(self.EN_HELLO_IDS))
     self.assertEqual(ZH_HELLO, encoder.decode(self.ZH_HELLO_IDS))
-    self.assertEqual(2**8, encoder.vocab_size)
+    self.assertEqual(2**8 + 1, encoder.vocab_size)
 
 
 class TokenTextEncoderTest(tf.test.TestCase):
@@ -50,7 +51,7 @@ class TokenTextEncoderTest(tf.test.TestCase):
   def test_encode_decode(self):
     encoder = text_encoder.TokenTextEncoder(
         vocab_list=[u'hi', 'bye', ZH_HELLO])
-    ids = [0, 1, 2, 0]
+    ids = [i + 1 for i in [0, 1, 2, 0]]
     self.assertEqual(ids, encoder.encode('hi  bye %s hi' % ZH_HELLO))
     self.assertEqual(u'hi bye %shi' % ZH_HELLO, encoder.decode(ids))
 
@@ -59,9 +60,10 @@ class TokenTextEncoderTest(tf.test.TestCase):
         vocab_list=[u'hi', 'bye', ZH_HELLO],
         oov_buckets=1,
         oov_token='UNK')
-    self.assertEqual([0, 3, 3, 1], encoder.encode('hi boo foo bye'))
-    self.assertEqual('hi UNK UNK bye', encoder.decode([0, 3, 3, 1]))
-    self.assertEqual(4, encoder.vocab_size)
+    ids = [i + 1 for i in [0, 3, 3, 1]]
+    self.assertEqual(ids, encoder.encode('hi boo foo bye'))
+    self.assertEqual('hi UNK UNK bye', encoder.decode(ids))
+    self.assertEqual(5, encoder.vocab_size)
 
   def test_multiple_oov(self):
     encoder = text_encoder.TokenTextEncoder(
@@ -69,19 +71,19 @@ class TokenTextEncoderTest(tf.test.TestCase):
         oov_buckets=2,
         oov_token='UNK')
     encoded = encoder.encode('hi boo zoo too foo bye')
-    self.assertEqual(0, encoded[0])
-    self.assertEqual(1, encoded[-1])
-    self.assertIn(3, encoded)
+    self.assertEqual(1, encoded[0])
+    self.assertEqual(2, encoded[-1])
     self.assertIn(4, encoded)
-    self.assertEqual(5, encoder.vocab_size)
-    self.assertEqual('hi UNK UNK bye', encoder.decode([0, 3, 4, 1]))
+    self.assertIn(5, encoded)
+    self.assertEqual(6, encoder.vocab_size)
+    self.assertEqual('hi UNK UNK bye', encoder.decode([1, 4, 5, 2]))
 
   def test_tokenization(self):
     encoder = text_encoder.TokenTextEncoder(vocab_list=[u'hi', 'bye', ZH_HELLO])
     text = 'hi<<>><<>foo!^* bar && bye (%s hi)' % ZH_HELLO
     self.assertEqual(['hi', 'foo', 'bar', 'bye', ZH_HELLO.strip(), 'hi'],
                      text_encoder.Tokenizer().tokenize(text))
-    self.assertEqual([0, 3, 3, 1, 2, 0], encoder.encode(text))
+    self.assertEqual([i + 1 for i in [0, 3, 3, 1, 2, 0]], encoder.encode(text))
 
   def test_file_backed(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
