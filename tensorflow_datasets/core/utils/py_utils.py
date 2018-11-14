@@ -80,3 +80,14 @@ class NonMutableDict(dict):
     if any(k in self for k in other):
       raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)
+
+
+def map_nested(function, data_struct):
+  """Apply a function recursivelly to each element of a nested data struct."""
+  if isinstance(data_struct, list):
+    return [map_nested(function, v) for v in data_struct]
+  elif isinstance(data_struct, dict):
+    return {k: map_nested(function, v) for k, v in data_struct.items()}
+  # Could add support for more exotic data_struct, like OrderedDict
+  else:  # Singleton
+    return function(data_struct)

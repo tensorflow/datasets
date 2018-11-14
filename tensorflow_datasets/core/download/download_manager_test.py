@@ -34,20 +34,6 @@ from tensorflow_datasets.core.download import util
 
 class DownloadManagerBaseTest(tf.test.TestCase):
 
-  def test_map(self):
-    """Test the mapping function."""
-    def process_fn(x):
-      return x * 10
-
-    result = download_manager._map(process_fn, {'a': 1, 'b': 2})
-    self.assertEqual(result, {'a': 10, 'b': 20})
-
-    result = download_manager._map(process_fn, [1, 2, 3])
-    self.assertEqual(result, [10, 20, 30])
-
-    result = download_manager._map(process_fn, 1)
-    self.assertEqual(result, 10)
-
   def test_parallel_run(self):
     """Test the parallel_run function."""
     # _parallel_run should be like map, but execute things in parallel

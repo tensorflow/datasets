@@ -29,6 +29,7 @@ import concurrent.futures
 import six
 from tensorflow import gfile
 
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import local_backend
 from tensorflow_datasets.core.download import util
 from tensorflow_datasets.core.download.proto import download_generated_pb2 as download_pb2
@@ -508,21 +509,10 @@ def _parallel_run(function, input_struct, max_workers=1):
     def launch_worker(value):
       return executor.submit(function, value)
 
-    output_struct = _map(launch_worker, input_struct)
+    output_struct = utils.map_nested(launch_worker, input_struct)
 
   # Gather all results once all workers have finished
   def gather_results(value):
     return value.result()
 
-  return _map(gather_results, output_struct)
-
-
-def _map(function, data_struct):
-  """Apply the function to the given data structure."""
-  if isinstance(data_struct, list):
-    return [function(v) for v in data_struct]
-  elif isinstance(data_struct, dict):
-    return {k: function(v) for k, v in data_struct.items()}
-  # Could add support for more exotic data_struct, like OrderedDict
-  else:  # Singleton
-    return function(data_struct)
+  return utils.map_nested(gather_results, output_struct)
