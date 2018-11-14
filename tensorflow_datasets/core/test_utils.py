@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import collections
 import contextlib
 import os
 import tempfile
@@ -48,10 +47,40 @@ def rm_tmp_dir(dirname):
   tf.gfile.DeleteRecursively(dirname)
 
 
-class FeatureExpectation(
-    collections.namedtuple('_FeatureExpectation',
-                           ['name', 'feature', 'value', 'expected'])):
-  pass
+class FeatureExpectationItem(object):
+  """Test item of a FeatureExpectation."""
+
+  def __init__(
+      self,
+      value,
+      expected=None,
+      expected_serialized=None,
+      raise_cls=None,
+      raise_msg=None):
+    self.value = value
+    self.expected = expected
+    self.expected_serialized = expected_serialized
+    self.raise_cls = raise_cls
+    self.raise_msg = raise_msg
+
+
+class FeatureExpectation(object):
+  """Object defining a featureConnector test."""
+
+  def __init__(
+      self,
+      name,
+      feature,
+      shape,
+      dtype,
+      tests,
+      serialized_features=None):
+    self.name = name
+    self.feature = feature
+    self.shape = shape
+    self.dtype = dtype
+    self.tests = tests
+    self.serialized_features = serialized_features
 
 
 class FeatureExpectationsTestCase(tf.test.TestCase):
@@ -63,16 +92,47 @@ class FeatureExpectationsTestCase(tf.test.TestCase):
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_encode_decode(self):
-    expectations = self.expectations
-    fdict = features.FeaturesDict(
-        {exp.name: exp.feature for exp in expectations})
+    # Maybe should try to use metaclass instead and dynamically generate one
+    # method per feature expectation.
+    for exp in self.expectations:
+      tf.logging.info("Testing feature %s", exp.name)
 
-    decoded_sample = features_encode_decode(
-        fdict, dict([(exp.name, exp.value) for exp in expectations]))
+      # Check the shape/dtype
+      self.assertEqual(exp.feature.shape, exp.shape)
+      self.assertEqual(exp.feature.dtype, exp.dtype)
 
-    for exp in expectations:
-      self.assertAllEqual(decoded_sample[exp.name], exp.expected)
-      # TODO(rsepassi): test shape and dtype against exp.feature
+      # Check the serialized features
+      if exp.serialized_features is not None:
+        self.assertEqual(
+            exp.serialized_features,
+            exp.feature.get_serialized_features(),
+        )
+
+      # Create the feature dict
+      fdict = features.FeaturesDict({exp.name: exp.feature})
+      for test in exp.tests:
+        input_value = {exp.name: test.value}
+
+        if test.raise_cls is not None:
+          if not test.raise_msg:
+            raise ValueError(
+                "test.raise_msg should be set with {}for test {}".format(
+                    test.raise_cls, exp.name))
+          with self.assertRaisesWithPredicateMatch(
+              test.raise_cls, test.raise_msg):
+            features_encode_decode(fdict, input_value)
+        else:
+          # Test the serialization only
+          if test.expected_serialized is not None:
+            self.assertEqual(
+                test.expected_serialized,
+                exp.feature.encode_sample(test.value),
+            )
+
+          # Test serialization + decoding from disk
+          decoded_samples = features_encode_decode(fdict, input_value)
+          self.assertAllEqual(test.expected, decoded_samples[exp.name])
+          # TODO(rsepassi): test shape and dtype against exp.feature
 
 
 def features_encode_decode(features_dict, sample):
@@ -81,7 +141,7 @@ def features_encode_decode(features_dict, sample):
   encoded_sample = features_dict.encode_sample(sample)
 
   with tmp_dir() as tmp_dir_:
-    tmp_filename = os.path.join(tmp_dir_, 'tmp.tfrecord')
+    tmp_filename = os.path.join(tmp_dir_, "tmp.tfrecord")
 
     # Read/write the file
     file_adapter = file_format_adapter.TFRecordExampleAdapter(

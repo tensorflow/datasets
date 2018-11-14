@@ -32,8 +32,20 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
         test_utils.FeatureExpectation(
             name='label',
             feature=features.ClassLabel(10),
-            value=3,
-            expected=3),
+            dtype=tf.int64,
+            shape=(),
+            tests=[
+                test_utils.FeatureExpectationItem(
+                    value=3,
+                    expected=3,
+                ),
+                test_utils.FeatureExpectationItem(
+                    value=10,
+                    raise_cls=ValueError,
+                    raise_msg='greater than configured num_classes',
+                ),
+            ]
+        ),
     ]
 
   def test_num_classes(self):

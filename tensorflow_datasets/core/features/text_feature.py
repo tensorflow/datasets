@@ -46,9 +46,11 @@ class Text(feature.FeatureConnector):
   def vocab_size(self):
     return self.encoder and self.encoder.vocab_size
 
-  def get_serialized_features(self):
-    dtype = tf.int64 if self.encoder else tf.string
-    return tf.VarLenFeature(dtype)
+  def get_tensor_info(self):
+    if self.encoder:
+      return feature.TensorInfo(shape=(None,), dtype=tf.int64)
+    else:
+      return feature.TensorInfo(shape=(), dtype=tf.string)
 
   def encode_sample(self, sample_data):
     if self.encoder:
@@ -57,8 +59,8 @@ class Text(feature.FeatureConnector):
       return tf.compat.as_bytes(sample_data)
 
   def decode_sample(self, tfexample_data):
-    # Decoded as SparseTensor, only interested in the values
-    out = tfexample_data.values
-    if not self.encoder:
-      out = tf.reshape(out, tuple())
-    return out
+    if self.encoder:
+      # Decoded as SparseTensor, only interested in the values
+      return tfexample_data.values
+    else:
+      return tfexample_data

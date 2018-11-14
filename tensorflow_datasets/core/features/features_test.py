@@ -24,6 +24,7 @@ from __future__ import print_function
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import test_utils
 
 
 class AnInputConnector(features_lib.FeaturesDict):
@@ -31,9 +32,15 @@ class AnInputConnector(features_lib.FeaturesDict):
 
   def __init__(self):
     super(AnInputConnector, self).__init__({
-        'a': tf.int32,
-        'b': tf.int32,
+        'a': tf.int64,
+        'b': tf.int64,
     })
+
+  def get_tensor_info(self):
+    # With this connector, the way the data is on disk ({'a', 'b'}) do not match
+    # the way it is exposed to the user (int64), so we overwrite
+    # FeaturesDict.get_tensor_info
+    return features_lib.TensorInfo(shape=(), dtype=tf.int64)
 
   def encode_sample(self, sample_data):
     # Encode take the input data and wrap in in a dict
@@ -52,8 +59,8 @@ class AnInputConnector(features_lib.FeaturesDict):
 class AnOutputConnector(features_lib.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
 
-  def get_serialized_features(self):
-    return tf.FixedLenFeature(shape=(), dtype=tf.float32)
+  def get_tensor_info(self):
+    return features_lib.TensorInfo(shape=(), dtype=tf.float32)
 
   def encode_sample(self, sample_data):
     return sample_data * 10.0
@@ -62,186 +69,187 @@ class AnOutputConnector(features_lib.FeatureConnector):
     return tfexample_data / 10.0
 
 
-class FeatureTest(tf.test.TestCase):
+class FeatureDictTest(test_utils.FeatureExpectationsTestCase):
 
-  def setUp(self):
-    # Create the spec dict used for all tests
-    self._features = features_lib.FeaturesDict({
-        'input': AnInputConnector(),
-        'output': AnOutputConnector(),
-        'img': {
-            'size': {
-                'height': tf.int32,
-                'width': tf.int32,
+  @property
+  def expectations(self):
+
+    return [
+        test_utils.FeatureExpectation(
+            name='fdict',
+            feature=features_lib.FeaturesDict({
+                'input': AnInputConnector(),
+                'output': AnOutputConnector(),
+                'img': {
+                    'size': {
+                        'height': tf.int64,
+                        'width': tf.int64,
+                    },
+                    'metadata/path': tf.string,
+                }
+            }),
+            serialized_features={
+                'input/a': tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'input/b': tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'output': tf.FixedLenFeature(shape=(), dtype=tf.float32),
+                'img/size/height': tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'img/size/width': tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'img/metadata/path': tf.FixedLenFeature(
+                    shape=(), dtype=tf.string),
             },
-            'metadata/path': tf.string,
-        }
-    })
-
-  def test_features(self):
-    # Specs of the tf example file
-    self.assertEqual(self._features.get_serialized_features(), {
-        'input/a': tf.FixedLenFeature(shape=(), dtype=tf.int32),
-        'input/b': tf.FixedLenFeature(shape=(), dtype=tf.int32),
-        'output': tf.FixedLenFeature(shape=(), dtype=tf.float32),
-        'img/size/height': tf.FixedLenFeature(shape=(), dtype=tf.int32),
-        'img/size/width': tf.FixedLenFeature(shape=(), dtype=tf.int32),
-        'img/metadata/path': tf.FixedLenFeature(shape=(), dtype=tf.string),
-    })
-
-  def test_encode(self):
-
-    # During encoding, all FeatureConnector.encode_sample() are applied
-    encoded_sample = self._features.encode_sample({
-        'input': 1,
-        'output': -1,
-        'img': {
-            'size': {
-                'height': 256,
-                'width': 128,
+            dtype={
+                'input': tf.int64,
+                'output': tf.float32,
+                'img': {
+                    'size': {
+                        'height': tf.int64,
+                        'width': tf.int64,
+                    },
+                    'metadata/path': tf.string,
+                }
             },
-            'metadata/path': 'path/to/xyz.jpg',
-        }
-    })
-    self.assertEqual(encoded_sample, {
-        'input/a': 2,  # 1 + 1
-        'input/b': 10,  # 1 * 10
-        'output': -10.0,  # -1 * 10.0
-        'img/size/height': 256,
-        'img/size/width': 128,
-        'img/metadata/path': 'path/to/xyz.jpg',
-    })
-
-  def test_decode(self):
-
-    # Decoding call all FeatureConnector.decode_sample()
-    decoded_sample = self._features.decode_sample({
-        'input/a': 2,  # 1 + 1
-        'input/b': 10,  # 1 * 10
-        'output': -10.0,  # -1 * 10.0
-        'img/size/height': 256,
-        'img/size/width': 128,
-        'img/metadata/path': 'path/to/xyz.jpg',
-    })
-    self.assertEqual(decoded_sample, {
-        'input': 12,  # 2 + 10
-        'output': -1,
-        'img': {
-            'size': {
-                'height': 256,
-                'width': 128,
+            shape={
+                'input': (),
+                'output': (),
+                'img': {
+                    'size': {
+                        'height': (),
+                        'width': (),
+                    },
+                    'metadata/path': (),
+                },
             },
-            'metadata/path': 'path/to/xyz.jpg',
-        },
-    })
-
-
-class OneOfTest(tf.test.TestCase):
-
-  def setUp(self):
-    # Create the spec dict used for all tests
-    self._features = features_lib.FeaturesDict({
-        'input': features_lib.OneOf(
-            choice='choice2',
-            feature_dict={
-                'choice1': tf.float32,
-                'choice2': AnInputConnector(),
-            },
+            tests=[
+                # Np array
+                test_utils.FeatureExpectationItem(
+                    value={
+                        'input': 1,
+                        'output': -1,
+                        'img': {
+                            'size': {
+                                'height': 256,
+                                'width': 128,
+                            },
+                            'metadata/path': 'path/to/xyz.jpg',
+                        }
+                    },
+                    expected_serialized={
+                        'input/a': 2,  # 1 + 1
+                        'input/b': 10,  # 1 * 10
+                        'output': -10.0,  # -1 * 10.0
+                        'img/size/height': 256,
+                        'img/size/width': 128,
+                        'img/metadata/path': 'path/to/xyz.jpg',
+                    },
+                    expected={
+                        # a = 1 + 1, b = 1 * 10 => output = a + b = 2 + 10 = 12
+                        'input': 12,  # 2 + 10
+                        'output': -1.0,
+                        'img': {
+                            'size': {
+                                'height': 256,
+                                'width': 128,
+                            },
+                            'metadata/path':
+                                tf.compat.as_bytes('path/to/xyz.jpg'),
+                        },
+                    },
+                ),
+            ],
         ),
-    })
-
-  def test_features(self):
-    # All choices are present in the spec
-    self.assertEqual(self._features.get_serialized_features(), {
-        'input/choice1': tf.FixedLenFeature(shape=(), dtype=tf.float32),
-        'input/choice2/a': tf.FixedLenFeature(shape=(), dtype=tf.int32),
-        'input/choice2/b': tf.FixedLenFeature(shape=(), dtype=tf.int32),
-    })
-
-  def test_encode(self):
-    # All choices are encoded
-    encoded_sample = self._features.encode_sample({
-        'input': {
-            'choice1': 0.0,
-            'choice2': 1,
-        },
-    })
-    self.assertEqual(encoded_sample, {
-        'input/choice1': 0.0,
-        'input/choice2/a': 2,  # 1 + 1
-        'input/choice2/b': 10,  # 1 * 10
-    })
-
-  def test_decode(self):
-    # Only choice 2 is decoded.
-    decoded_sample = self._features.decode_sample({
-        'input/choice1': 0.0,
-        'input/choice2/a': 2,  # 1 + 1
-        'input/choice2/b': 10,  # 1 * 10
-    })
-    self.assertEqual(decoded_sample, {
-        'input': 12,  # 2 + 10
-    })
+    ]
 
 
-class FeatureTensorTest(tf.test.TestCase):
+class OneOfTest(test_utils.FeatureExpectationsTestCase):
 
-  def test_shapes_static(self):
-    features = features_lib.FeaturesDict({
-        'input': features_lib.Tensor(shape=(2, 3), dtype=tf.float32),
-    })
+  @property
+  def expectations(self):
 
-    # Numpy array
+    return [
+        test_utils.FeatureExpectation(
+            name='oneof',
+            feature=features_lib.OneOf(
+                choice='choice2',
+                feature_dict={
+                    'choice1': tf.float32,
+                    'choice2': AnInputConnector(),
+                },
+            ),
+            # All choices are present in the serialized feature
+            serialized_features={
+                'choice1': tf.FixedLenFeature(shape=(), dtype=tf.float32),
+                'choice2/a': tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'choice2/b': tf.FixedLenFeature(shape=(), dtype=tf.int64),
+            },
+            # choice2 selected so dtype == AnInputConnector().dtype
+            dtype=tf.int64,
+            # choice2 selected so shape == AnInputConnector().shape
+            shape=(),
+            tests=[
+                # Np array
+                test_utils.FeatureExpectationItem(
+                    value={
+                        'choice1': 0.0,
+                        'choice2': 1,
+                    },
+                    # All choices are serialized
+                    expected_serialized={
+                        'choice1': 0.0,
+                        'choice2/a': 2,  # 1 + 1
+                        'choice2/b': 10,  # 1 * 10
+                    },
+                    # Only choice 2 is decoded.
+                    # a = 1 + 1, b = 1 * 10 => output = a + b = 2 + 10 = 12
+                    expected=12,
+                ),
+            ],
+        ),
+    ]
+
+
+class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
+
+  @property
+  def expectations(self):
+
     np_input = np.random.rand(2, 3).astype(np.float32)
-    tf_output = _encode_decode(features, {
-        'input': np_input,
-    })
-    self.assertAllEqual(tf_output['input'], np_input)
-
-    # Python array
     array_input = [
         [1, 2, 3],
         [4, 5, 6],
     ]
-    tf_output = _encode_decode(features, {
-        'input': array_input,
-    })
-    self.assertAllEqual(tf_output['input'], array_input)
 
-    # Invalid type
-    with self.assertRaisesWithPredicateMatch(ValueError, 'int64 do not match'):
-      _encode_decode(features, {
-          'input': np.random.randint(256, size=(2, 3)),
-      })
-
-    # Invalid shape
-    with self.assertRaisesWithPredicateMatch(ValueError, 'are incompatible'):
-      _encode_decode(features, {
-          'input': np.random.rand(2, 4).astype(np.float32),
-      })
-
-  def test_shapes_dynamic(self):
-    features = features_lib.FeaturesDict({
-        'input': features_lib.Tensor(shape=(None, None, 1), dtype=tf.int32),
-    })
-
-    # Numpy array
-    np_input = np.random.randint(256, size=(2, 3, 1), dtype=np.int32)
-    tf_output = _encode_decode(features, {
-        'input': np_input,
-    })
-    self.assertAllEqual(tf_output['input'], np_input)
-
-    # Invalid shape
-    with self.assertRaisesWithPredicateMatch(ValueError, 'are incompatible'):
-      _encode_decode(features, {
-          'input': np.random.randint(256, size=(2, 3, 2), dtype=np.int32),
-      })
-
-
-def _encode_decode(features, sample):
-  encoded_sample = features.encode_sample(sample)
-  return features.decode_sample(encoded_sample)
+    return [
+        test_utils.FeatureExpectation(
+            name='shape_static',
+            feature=features_lib.Tensor(shape=(2, 3), dtype=tf.float32),
+            dtype=tf.float32,
+            shape=(2, 3),
+            tests=[
+                # Np array
+                test_utils.FeatureExpectationItem(
+                    value=np_input,
+                    expected=np_input,
+                ),
+                # Python array
+                test_utils.FeatureExpectationItem(
+                    value=array_input,
+                    expected=array_input,
+                ),
+                # Invalid dtype
+                test_utils.FeatureExpectationItem(
+                    value=np.random.randint(256, size=(2, 3)),
+                    raise_cls=ValueError,
+                    raise_msg='int64 do not match',
+                ),
+                # Invalid shape
+                test_utils.FeatureExpectationItem(
+                    value=np.random.rand(2, 4).astype(np.float32),
+                    raise_cls=ValueError,
+                    raise_msg='are incompatible',
+                ),
+            ],
+        ),
+    ]
 
 
 if __name__ == '__main__':

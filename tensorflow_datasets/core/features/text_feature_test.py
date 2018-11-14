@@ -33,24 +33,37 @@ class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
     nonunicode_text = 'hello world'
     unicode_text = u'你好'
     return [
-        # Non-unicode
         test_utils.FeatureExpectation(
             name='text',
             feature=features.Text(),
-            value=nonunicode_text,
-            expected=tf.compat.as_bytes(nonunicode_text)),
-        # Unicode
-        test_utils.FeatureExpectation(
-            name='text_unicode',
-            feature=features.Text(),
-            value=unicode_text,
-            expected=tf.compat.as_bytes(unicode_text)),
+            shape=(),
+            dtype=tf.string,
+            tests=[
+                # Non-unicode
+                test_utils.FeatureExpectationItem(
+                    value=nonunicode_text,
+                    expected=tf.compat.as_bytes(nonunicode_text),
+                ),
+                # Unicode
+                test_utils.FeatureExpectationItem(
+                    value=unicode_text,
+                    expected=tf.compat.as_bytes(unicode_text),
+                ),
+            ],
+        ),
         # Unicode integer-encoded by byte
         test_utils.FeatureExpectation(
             name='text_unicode_encoded',
             feature=features.Text(encoder=text_encoder.ByteTextEncoder()),
-            value=unicode_text,
-            expected=[i + 1 for i in [228, 189, 160, 229, 165, 189]]),
+            shape=(None,),
+            dtype=tf.int64,
+            tests=[
+                test_utils.FeatureExpectationItem(
+                    value=unicode_text,
+                    expected=[i + 1 for i in [228, 189, 160, 229, 165, 189]],
+                ),
+            ],
+        ),
     ]
 
 

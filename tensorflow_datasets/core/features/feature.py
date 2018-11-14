@@ -61,8 +61,8 @@ To create your own feature connector, you need to inherit from FeatureConnector
 and implement the abstract methods.
 
 1. If your connector only contains one value, then the get_serialized_features,
-   encode_sample, and decode_sample can directly process single value, without
-   wrapping it in a dict.
+   get_tensor_info, encode_sample, and decode_sample can directly process
+   single value, without wrapping it in a dict.
 
 2. If your connector is a container of multiple sub-connectors, the easiest
    way is to inherit from features.FeaturesDict and use the super() methods to
@@ -82,6 +82,7 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
+import collections
 import posixpath
 
 import numpy as np
@@ -90,6 +91,9 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
+
+
+TensorInfo = collections.namedtuple('TensorInfo', ['dtype', 'shape'])
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -110,6 +114,42 @@ class FeatureConnector(object):
   """
 
   @abc.abstractmethod
+  def get_tensor_info(self):
+    """Return the tf.Tensor dtype/shape of the feature.
+
+    This returns the tensor dtype/shape, as returned by .as_dataset by the
+    `tf.data.Dataset` object.
+
+    Ex:
+
+      return {
+          'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8):
+          'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+          'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+      }
+
+    FeatureConnector which are not containers should return the feature proto
+    directly:
+
+      return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
+
+    Returns:
+      tensor_info: Either a dict of `tfds.features.TensorInfo` object, or a
+        `tfds.features.TensorInfo`
+
+    """
+    raise NotImplementedError
+
+  @property
+  def shape(self):
+    """Return the shape (or dict of shape) of this FeatureConnector."""
+    return utils.map_nested(lambda t: t.shape, self.get_tensor_info())
+
+  @property
+  def dtype(self):
+    """Return the dtype (or dict of dtype) of this FeatureConnector."""
+    return utils.map_nested(lambda t: t.dtype, self.get_tensor_info())
+
   def get_serialized_features(self):
     """Return the tf-example features for the adapter, as stored on disk.
 
@@ -129,11 +169,14 @@ class FeatureConnector(object):
 
       return tf.FixedLenFeature((64, 64), tf.uint8)
 
+    If not defined, the retuned values are automatically deduced from the
+    `get_tensor_info` function.
+
     Returns:
       features: Either a dict of feature proto object, or a feature proto object
 
     """
-    raise NotImplementedError
+    return utils.map_nested(to_serialized_field, self.get_tensor_info())
 
   @abc.abstractmethod
   def encode_sample(self, sample_data):
@@ -163,8 +206,8 @@ class FeatureConnector(object):
     raise NotImplementedError
 
   @utils.memoized_property
-  def features_keys(self):
-    """List of the feature features keys."""
+  def serialized_keys(self):
+    """List of the flattened feature keys after serialization."""
     features = self.get_serialized_features()
     if isinstance(features, dict):
       return list(features)
@@ -242,6 +285,13 @@ class FeaturesDict(FeatureConnector):
     super(FeaturesDict, self).__init__()
     self._feature_dict = {k: to_feature(v) for k, v in feature_dict.items()}
 
+  def get_tensor_info(self):
+    """See base class for details."""
+    return {
+        feature_key: feature.get_tensor_info()
+        for feature_key, feature in self._feature_dict.items()
+    }
+
   def get_serialized_features(self):
     """See base class for details."""
     # Flatten tf-example features dict
@@ -253,15 +303,15 @@ class FeaturesDict(FeatureConnector):
       # Features can be either containers (dict of other features) or plain
       # features (ex: single tensor). Plain features have a None
       # feature.features_keys
-      if not feature.features_keys:
+      if not feature.serialized_keys:
         features_dict[feature_key] = serialized_features
       else:
-        # Sanity check which should always be True, as feature.features_keys is
-        # computed using feature.get_serialized_features()
-        _assert_keys_match(serialized_features.keys(), feature.features_keys)
+        # Sanity check which should always be True, as feature.serialized_keys
+        # is computed using feature.get_serialized_features()
+        _assert_keys_match(serialized_features.keys(), feature.serialized_keys)
         features_dict.update({
-            posixpath.join(feature_key, k): v for k, v
-            in serialized_features.items()
+            posixpath.join(feature_key, k): v
+            for k, v in serialized_features.items()
         })
 
     return features_dict
@@ -281,14 +331,14 @@ class FeaturesDict(FeatureConnector):
       encoded_feature = feature.encode_sample(sample_value)
 
       # Singleton case
-      if not feature.features_keys:
+      if not feature.serialized_keys:
         tfexample_dict[feature_key] = encoded_feature
       # Feature contains sub features
       else:
-        _assert_keys_match(encoded_feature.keys(), feature.features_keys)
+        _assert_keys_match(encoded_feature.keys(), feature.serialized_keys)
         tfexample_dict.update({
             posixpath.join(feature_key, k): encoded_feature[k]
-            for k in feature.features_keys
+            for k in feature.serialized_keys
         })
     return tfexample_dict
 
@@ -315,6 +365,8 @@ class Tensor(FeatureConnector):
   # shape in the spec, as it seems tf-example lose the shape by flattening the
   # value
   # TODO(epot): Call tf.compat.as_text for string data. Add unittests for str.
+  # TODO(epot): TFRecord crash with tf.int32, tf.uint8. Should automatically
+  # convert to int64 when encoding and back to int32 when decoding.
 
   @api_utils.disallow_positional_args
   def __init__(self, shape, dtype):
@@ -322,17 +374,9 @@ class Tensor(FeatureConnector):
     self._shape = shape
     self._dtype = dtype
 
-  def get_serialized_features(self):
+  def get_tensor_info(self):
     """See base class for details."""
-    if (self._shape and  # Shape is a sequence (None, ...)
-        len(self._shape) >= 2 and
-        self._shape[0] is None and
-        None not in self._shape[1:]):
-      return tf.FixedLenSequenceFeature(shape=self._shape, dtype=self._dtype)
-    elif None in self._shape:  # At least one dimension is undefined
-      return tf.VarLenFeature(dtype=self._dtype)
-    else:
-      return tf.FixedLenFeature(shape=self._shape, dtype=self._dtype)
+    return TensorInfo(shape=self._shape, dtype=self._dtype)
 
   def encode_sample(self, sample_data):
     """See base class for details."""
@@ -349,7 +393,11 @@ class Tensor(FeatureConnector):
 
   def decode_sample(self, tfexample_data):
     """See base class for details."""
-    # TODO(epot): Should assert the shape here
+    # TODO(epot): Support dynamic shape
+    if self.shape.count(None) < 2:
+      # Restore the shape if possible. TF Example flattened it.
+      shape = [-1 if i is None else i for i in self.shape]
+      tfexample_data = tf.reshape(tfexample_data, shape)
     return tfexample_data
 
 
@@ -404,12 +452,37 @@ class OneOf(FeaturesDict):
     super(OneOf, self).__init__(feature_dict)
     self._choice = choice
 
+  def get_tensor_info(self):
+    """See base class for details."""
+    # Overwrite FeaturesDict.get_tensor_info() to only select the
+    # shape/dtype/tensor_info of the choice
+    return self._feature_dict[self._choice].get_tensor_info()
+
   def decode_sample(self, tfexample_dict):
     """See base class for details."""
     return decode_single_feature_from_dict(
         feature_k=self._choice,
         feature=self._feature_dict[self._choice],
         tfexample_dict=tfexample_dict,
+    )
+
+
+def to_serialized_field(tensor_info):
+  """Convert a `TensorInfo` object into a feature proto object."""
+  if (tensor_info.shape and  # Shape is a sequence (None, ...)
+      len(tensor_info.shape) >= 2 and
+      tensor_info.shape[0] is None and
+      None not in tensor_info.shape[1:]):
+    return tf.FixedLenSequenceFeature(
+        shape=tensor_info.shape,
+        dtype=tensor_info.dtype,
+    )
+  elif None in tensor_info.shape:  # At least one dimension is undefined
+    return tf.VarLenFeature(dtype=tensor_info.dtype)
+  else:
+    return tf.FixedLenFeature(
+        shape=tensor_info.shape,
+        dtype=tensor_info.dtype,
     )
 
 
@@ -440,14 +513,14 @@ def decode_single_feature_from_dict(
     decoded_feature: The output of the feature.decode_sample
   """
   # Singleton case
-  if not feature.features_keys:
+  if not feature.serialized_keys:
     data_to_decode = tfexample_dict[feature_k]
   # Feature contains sub features
   else:
     # Extract the sub-features from the global feature dict
     data_to_decode = {
         k: tfexample_dict[posixpath.join(feature_k, k)]
-        for k in feature.features_keys
+        for k in feature.serialized_keys
     }
   return feature.decode_sample(data_to_decode)
 

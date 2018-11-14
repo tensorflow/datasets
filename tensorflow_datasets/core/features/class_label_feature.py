@@ -50,8 +50,8 @@ class ClassLabel(feature.FeatureConnector):
   def names(self):
     return self._names
 
-  def get_serialized_features(self):
-    return tf.FixedLenFeature(tuple(), tf.int64)
+  def get_tensor_info(self):
+    return feature.TensorInfo(shape=(), dtype=tf.int64)
 
   def encode_sample(self, sample_data):
     # Allowing -1 to mean no label.

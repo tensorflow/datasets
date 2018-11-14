@@ -92,6 +92,10 @@ class Image(feature.FeatureConnector):
           encoding_format, acceptable_channels, channels))
     self._encode_fn = ENCODE_FN[encoding_format]
 
+  def get_tensor_info(self):
+    # Image is returned as a 3-d uint8 tf.Tensor.
+    return feature.TensorInfo(shape=self._shape, dtype=tf.uint8)
+
   def get_serialized_features(self):
     # Only store raw image (includes size).
     return tf.FixedLenFeature(tuple(), tf.string)
