@@ -24,6 +24,7 @@ import collections
 import operator
 
 import six
+from six.moves import range  # pylint: disable=redefined-builtin
 from six.moves import zip  # pylint: disable=redefined-builtin
 
 from tensorflow_datasets.core import utils
@@ -88,9 +89,129 @@ class _SplitDescriptorNode(object):
     """Merging: tfds.Split.TRAIN + tfds.Split.TEST."""
     return _SplitMerged(self, other)
 
+  def subsplit(self, arg=None, k=None, percent=None, weighted=None):   # pylint: disable=redefined-outer-name
+    """Divides this split into subsplits.
+
+    There are 3 ways to define subsplits, which correspond to the 3
+    arguments `k` (get `k` even subsplits), `percent` (get a slice of the
+    dataset with `tfds.percent`), and `weighted` (get subsplits with proportions
+    specified by `weighted`).
+
+    Examples:
+
+    ```
+    # 50% train, 50% test
+    train, test = split.subsplit(k=2)
+    # 50% train, 25% test, 25% validation
+    train, test, validation = split.subsplit(weighted=[2, 1, 1])
+    # Extract last 20%
+    subsplit = split.subsplit(tfds.percent[-20:])
+    ```
+
+    Warning: k and weighted will be converted into percent which mean that
+    values bellow the percent will be rounded up or down. The final split may be
+    bigger to deal with remainders. For instance:
+
+    ```
+    train, test, valid = split.subsplit(k=3)  # 33%, 33%, 34%
+    s1, s2, s3, s4 = split.subsplit(weighted=[2, 2, 1, 1])  # 33%, 33%, 16%, 18%
+    ```
+
+    Args:
+      arg: If no kwargs are given, `arg` will be interpreted as one of
+        `k`, `percent`, or `weighted` depending on the type.
+        For example:
+        ```
+        split.subsplit(10)  # Equivalent to split.subsplit(k=10)
+        split.subsplit(tfds.percent[:-20])  # percent=tfds.percent[:-20]
+        split.subsplit([1, 1, 2])  # weighted=[1, 1, 2]
+        ```
+      k: `int` If set, subdivide the split into `k` equal parts.
+      percent: `tfds.percent slice`, return a single subplit corresponding to
+        a slice of the original split. For example:
+        `split.subsplit(tfds.percent[-20:])  # Last 20% of the dataset`.
+      weighted: `list[int]`, return a list of subsplits whose proportions match
+        the normalized sum of the list. For example:
+        `split.subsplit(weighted=[1, 1, 2])  # 25%, 25%, 50%`.
+
+    Returns:
+      A subsplit or list of subsplits extracted from this split object.
+    """
+    # Note that the percent kwargs redefine the outer name tfds.percent. This
+    # is done for consistency (.subsplit(percent=tfds.percent[:40]))
+    if sum(bool(x) for x in (arg, k, percent, weighted)) != 1:
+      raise ValueError("Only one argument of subsplit should be set.")
+
+    # Auto deduce k
+    if isinstance(arg, int):
+      k = arg
+    elif isinstance(arg, slice):
+      percent = arg
+    elif isinstance(arg, list):
+      weighted = arg
+
+    if not (k or percent or weighted):
+      raise ValueError(
+          "Invalid split argument {}. Only list, slice and int supported. "
+          "One of k, weighted or percent should be set to a non empty value."
+          .format(arg)
+      )
+
+    def assert_slices_coverage(slices):
+      # Ensure that the expended slices cover all percents.
+      assert (
+          sum((list(range(*s.indices(100))) for s in slices), []) ==
+          list(range(100))
+      )
+
+    if k:
+      if not 0 < k <= 100:
+        raise ValueError(
+            "Subsplit k should be between 0 and 100, got {}".format(k))
+      shift = 100 // k
+      slices = [slice(i * shift, (i + 1) * shift) for i in range(k)]
+      # Round up last element to ensure all elements are taken
+      slices[-1] = slice(slices[-1].start, 100)
+      # Internal check to ensure full coverage
+      assert_slices_coverage(slices)
+      return tuple(_SubSplit(self, s) for s in slices)
+    elif percent:
+      return _SubSplit(self, percent)
+    elif weighted:
+      # Normalize the weighted sum
+      total = sum(weighted)
+      weighted = [100 * x // total for x in weighted]
+      # Create the slice for each of the elements
+      start = 0
+      stop = 0
+      slices = []
+      for v in weighted:
+        stop += v
+        slices.append(slice(start, stop))
+        start = stop
+      # Round up last element to ensure all elements are taken
+      slices[-1] = slice(slices[-1].start, 100)
+      # Internal check to ensure full coverage
+      assert_slices_coverage(slices)
+      return tuple(_SubSplit(self, s) for s in slices)
+    else:
+      # Should not be possible
+      raise ValueError("Could not determine the split")
+
+
+class PercentSlice(object):
+  """Syntactic sugar to easily select subsplit using tfds.percent[75:-5]."""
+
   def __getitem__(self, slice_value):
-    """Synthetic subsplit: tfds.Split.TRAIN[30:50]."""
-    return _SubSplit(self, slice_value)
+    """tfds.percent[:-30]."""
+    if not isinstance(slice_value, slice):
+      raise ValueError(
+          "tfds.percent should only be called with slice, not {}".format(
+              slice_value))
+    return slice_value
+
+
+percent = PercentSlice()
 
 
 class _SplitMerged(_SplitDescriptorNode):
