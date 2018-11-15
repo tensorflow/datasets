@@ -218,6 +218,9 @@ class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
         [4, 5, 6],
     ]
 
+    np_input_dynamic_1 = np.random.randint(256, size=(2, 3, 2), dtype=np.int32)
+    np_input_dynamic_2 = np.random.randint(256, size=(5, 3, 2), dtype=np.int32)
+
     return [
         test_utils.FeatureExpectation(
             name='shape_static',
@@ -248,6 +251,29 @@ class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
                     raise_msg='are incompatible',
                 ),
             ],
+        ),
+        test_utils.FeatureExpectation(
+            name='shape_dynamic',
+            feature=features_lib.Tensor(shape=(None, 3, 2), dtype=tf.int32),
+            dtype=tf.int32,
+            shape=(None, 3, 2),
+            tests=[
+                test_utils.FeatureExpectationItem(
+                    value=np_input_dynamic_1,
+                    expected=np_input_dynamic_1,
+                ),
+                test_utils.FeatureExpectationItem(
+                    value=np_input_dynamic_2,
+                    expected=np_input_dynamic_2,
+                ),
+                # Invalid shape
+                test_utils.FeatureExpectationItem(
+                    value=
+                    np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
+                    raise_cls=ValueError,
+                    raise_msg='are incompatible',
+                ),
+            ]
         ),
     ]
 

@@ -59,8 +59,4 @@ class Text(feature.FeatureConnector):
       return tf.compat.as_bytes(sample_data)
 
   def decode_sample(self, tfexample_data):
-    if self.encoder:
-      # Decoded as SparseTensor, only interested in the values
-      return tfexample_data.values
-    else:
-      return tfexample_data
+    return tfexample_data

@@ -51,6 +51,33 @@ class PyUtilsTest(tf.test.TestCase):
     result = py_utils.map_nested(map_fn, 1)
     self.assertEqual(result, 10)
 
+  def test_zip_nested(self):
+    """Test the zip nested function."""
+
+    arg0 = {
+        'a': 1,
+        'b': {
+            'c': 2,
+            'e': [3, 4, 5],
+        },
+    }
+    arg1 = {
+        'a': 10,
+        'b': {
+            'c': 20,
+            'e': [30, 40, 50],
+        },
+    }
+
+    result = py_utils.zip_nested(arg0, arg1)
+    self.assertEqual(result, {
+        'a': (1, 10),
+        'b': {
+            'c': (2, 20),
+            'e': [(3, 30), (4, 40), (5, 50)],
+        },
+    })
+
 
 if __name__ == '__main__':
   tf.test.main()

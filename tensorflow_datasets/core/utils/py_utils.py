@@ -91,3 +91,14 @@ def map_nested(function, data_struct):
   # Could add support for more exotic data_struct, like OrderedDict
   else:  # Singleton
     return function(data_struct)
+
+
+def zip_nested(arg0, *args):
+  """Zip data struct together and return a data struct with the same shape."""
+  if isinstance(arg0, list):
+    return [zip_nested(*a) for a in zip(arg0, *args)]
+  elif isinstance(arg0, dict):
+    return {k: zip_nested(*a) for k, a in zip_dict(arg0, *args)}
+  # Could add support for more exotic data_struct, like OrderedDict
+  else:  # Singleton
+    return (arg0,) + args

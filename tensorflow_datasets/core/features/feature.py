@@ -365,14 +365,18 @@ class Tensor(FeatureConnector):
   # shape in the spec, as it seems tf-example lose the shape by flattening the
   # value
   # TODO(epot): Call tf.compat.as_text for string data. Add unittests for str.
-  # TODO(epot): TFRecord crash with tf.int32, tf.uint8. Should automatically
-  # convert to int64 when encoding and back to int32 when decoding.
 
   @api_utils.disallow_positional_args
   def __init__(self, shape, dtype):
     """Construct a Tensor feature."""
     self._shape = shape
     self._dtype = dtype
+
+    if self._shape is None or self._shape.count(None) > 1:
+      raise NotImplementedError(
+          'Tensor feature connector do not support tensors with more than '
+          'one unknown dimension. Got {}'.format(self._shape)
+      )
 
   def get_tensor_info(self):
     """See base class for details."""
@@ -389,6 +393,7 @@ class Tensor(FeatureConnector):
       raise ValueError('Dtype {} do not match {}'.format(
           sample_data.dtype, np_dtype))
     utils.assert_shape_match(sample_data.shape, self._shape)
+    # Convert numpy array to the correct type
     return sample_data
 
   def decode_sample(self, tfexample_data):
@@ -398,6 +403,8 @@ class Tensor(FeatureConnector):
       # Restore the shape if possible. TF Example flattened it.
       shape = [-1 if i is None else i for i in self.shape]
       tfexample_data = tf.reshape(tfexample_data, shape)
+    if tfexample_data.dtype != self.dtype:
+      tfexample_data = tf.dtypes.cast(tfexample_data, self.dtype)
     return tfexample_data
 
 
@@ -469,20 +476,44 @@ class OneOf(FeaturesDict):
 
 def to_serialized_field(tensor_info):
   """Convert a `TensorInfo` object into a feature proto object."""
-  if (tensor_info.shape and  # Shape is a sequence (None, ...)
-      len(tensor_info.shape) >= 2 and
-      tensor_info.shape[0] is None and
-      None not in tensor_info.shape[1:]):
-    return tf.FixedLenSequenceFeature(
-        shape=tensor_info.shape,
-        dtype=tensor_info.dtype,
+  # Select the type
+  dtype = tensor_info.dtype
+
+  # TODO(epot): Better way of detecting a int/float ?
+  if tensor_info.dtype in (
+      tf.int8,
+      tf.uint8,
+      tf.uint16,
+      tf.uint32,
+      tf.uint64,
+      tf.int16,
+      tf.int32,
+  ):
+    dtype = tf.int64
+  elif tensor_info.dtype in (tf.float16, tf.float64):
+    dtype = tf.float32
+
+  # TFRecord only support 3 types
+  if dtype not in (tf.int64, tf.float32, tf.string):
+    raise NotImplementedError(
+        'Serialization not implemented for {}'.format(dtype))
+
+  # Select the feature proto type in function of the unknown shape
+  if (tensor_info.shape is not None and  # Shape is a sequence (None, ...)
+      tensor_info.shape.count(None) == 1 and
+      tensor_info.shape[0] is None):
+    return tf.io.FixedLenSequenceFeature(
+        shape=tensor_info.shape[1:],
+        dtype=dtype,
+        allow_missing=True,
     )
-  elif None in tensor_info.shape:  # At least one dimension is undefined
-    return tf.VarLenFeature(dtype=tensor_info.dtype)
+  # At least one dimension is undefined
+  elif tensor_info.shape is None or None in tensor_info.shape:
+    return tf.io.VarLenFeature(dtype=dtype)
   else:
-    return tf.FixedLenFeature(
+    return tf.io.FixedLenFeature(
         shape=tensor_info.shape,
-        dtype=tensor_info.dtype,
+        dtype=dtype,
     )
 
 

@@ -28,6 +28,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
+from tensorflow_datasets.core import utils
 
 
 @contextlib.contextmanager
@@ -86,56 +87,96 @@ class FeatureExpectation(object):
 class FeatureExpectationsTestCase(tf.test.TestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
+  @classmethod
+  def setUpClass(cls):
+    cls._sub_test_stack = []
+
   @property
   def expectations(self):
     raise NotImplementedError
 
+  @contextlib.contextmanager
+  def _subTest(self, test_str):
+    sub_test_not_implemented = True
+    if sub_test_not_implemented:
+      yield
+    else:
+      self._sub_test_stack.append(test_str)
+      sub_test_str = "/".join(self._sub_test_stack)
+      with self.subTest(sub_test_str):
+        yield
+      self._sub_test_stack.pop()
+
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_encode_decode(self):
-    # Maybe should try to use metaclass instead and dynamically generate one
-    # method per feature expectation.
     for exp in self.expectations:
-      tf.logging.info("Testing feature %s", exp.name)
+      with self._subTest(exp.name):
+        self._process_exp(exp)
 
-      # Check the shape/dtype
+  def _process_exp(self, exp):
+
+    # Check the shape/dtype
+    with self._subTest("shape"):
       self.assertEqual(exp.feature.shape, exp.shape)
+    with self._subTest("dtype"):
       self.assertEqual(exp.feature.dtype, exp.dtype)
 
-      # Check the serialized features
-      if exp.serialized_features is not None:
+    # Check the serialized features
+    if exp.serialized_features is not None:
+      with self._subTest("serialized_features"):
         self.assertEqual(
             exp.serialized_features,
             exp.feature.get_serialized_features(),
         )
 
-      # Create the feature dict
-      fdict = features.FeaturesDict({exp.name: exp.feature})
-      for test in exp.tests:
+    # Create the feature dict
+    fdict = features.FeaturesDict({exp.name: exp.feature})
+    for i, test in enumerate(exp.tests):
+      with self._subTest(str(i)):
+        # self._process_subtest_exp(e)
         input_value = {exp.name: test.value}
 
         if test.raise_cls is not None:
-          if not test.raise_msg:
-            raise ValueError(
-                "test.raise_msg should be set with {}for test {}".format(
-                    test.raise_cls, exp.name))
-          with self.assertRaisesWithPredicateMatch(
-              test.raise_cls, test.raise_msg):
-            features_encode_decode(fdict, input_value)
+          with self._subTest("raise"):
+            if not test.raise_msg:
+              raise ValueError(
+                  "test.raise_msg should be set with {}for test {}".format(
+                      test.raise_cls, exp.name))
+            with self.assertRaisesWithPredicateMatch(
+                test.raise_cls, test.raise_msg):
+              features_encode_decode(fdict, input_value)
         else:
           # Test the serialization only
           if test.expected_serialized is not None:
-            self.assertEqual(
-                test.expected_serialized,
-                exp.feature.encode_sample(test.value),
+            with self._subTest("out_serialize"):
+              self.assertEqual(
+                  test.expected_serialized,
+                  exp.feature.encode_sample(test.value),
+              )
+
+          # Assert the returned type match the expected one
+          with self._subTest("out_extract"):
+            out = features_encode_decode(fdict, input_value, as_tensor=True)
+            out = out[exp.name]
+          with self._subTest("out_dtype"):
+            out_dtypes = utils.map_nested(lambda s: s.dtype, out)
+            self.assertEqual(out_dtypes, exp.feature.dtype)
+          with self._subTest("out_shape"):
+            # For shape, because (None, 3) match with (5, 3), we use
+            # tf.TensorShape.assert_is_compatible_with on each of the elements
+            out_shapes = utils.zip_nested(out, exp.feature.shape)
+            utils.map_nested(
+                lambda x: x[0].shape.assert_is_compatible_with(x[1]),
+                out_shapes
             )
 
           # Test serialization + decoding from disk
-          decoded_samples = features_encode_decode(fdict, input_value)
-          self.assertAllEqual(test.expected, decoded_samples[exp.name])
-          # TODO(rsepassi): test shape and dtype against exp.feature
+          with self._subTest("out_value"):
+            decoded_samples = features_encode_decode(fdict, input_value)
+            self.assertAllEqual(test.expected, decoded_samples[exp.name])
 
 
-def features_encode_decode(features_dict, sample):
+def features_encode_decode(features_dict, sample, as_tensor=False):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
   # Encode sample
   encoded_sample = features_dict.encode_sample(sample)
@@ -155,5 +196,11 @@ def features_encode_decode(features_dict, sample):
     # Decode the sample
     dataset = dataset.map(features_dict.decode_sample)
 
-    for el in dataset_utils.iterate_over_dataset(dataset):
-      return el
+    if not as_tensor:  # Evaluate to numpy array
+      for el in dataset_utils.iterate_over_dataset(dataset):
+        return el
+    else:
+      if tf.executing_eagerly():
+        return next(iter(dataset))
+      else:
+        return dataset.make_one_shot_iterator().get_next()
