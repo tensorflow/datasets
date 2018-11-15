@@ -130,10 +130,13 @@ it should pass.
 The
 [`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py)
 stores the information we know about a dataset. For now, let's add what features
-are part of the dataset and their types. For example:
+are part of the dataset and their types. If possible, please also add the 
+approximate size of the dataset. For example:
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedDatasetBuilder):
+
+  SIZE = 10 # Dataset size in GiB.
 
   def _info(self):
     return tfds.core.DatasetInfo(
