@@ -95,6 +95,9 @@ under the `my_dataset` directory, should mimic the source dataset artifacts as
 downloaded and extracted. It can be created manually or automatically
 ([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/generate_cifar10_like_sample.py)).
 
+Make sure to use different data in your fake sample splits, as the test will
+fail if your dataset splits overlap.
+
 **The fake sample should not contain any copyrighted material**. If in doubt, do
 not create the sample using material from the original dataset.
 

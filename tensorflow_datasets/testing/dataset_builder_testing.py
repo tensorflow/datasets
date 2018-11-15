@@ -19,6 +19,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import hashlib
+import itertools
 import os
 import tempfile
 import tensorflow as tf
@@ -35,9 +37,27 @@ class TestCase(tf.test.TestCase):
 
   You must set the following class attributes:
     DATASET_CLASS: class object of DatasetBuilder you want to test.
+
+  You may set the following class attributes:
+    OVERLAPPING_SPLITS: `list[str]`, splits containing records from other splits
+      (e.g. a "sample" split containing pictures from other splits).
+
+  This test case will check for the following:
+   - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
+   - the dataset builder can read the fake samples stored in
+       testing/test_data/fake_samples/${dataset_name};
+   - the dataset builder can produce serialized data;
+   - the dataset builder produces a valid Dataset object from serialized data
+     - in earger mode;
+     - in graph mode.
+   - the produced Dataset records have the expected dimensions and types;
+   - the produced Dataset has and the expected number of records;
+   - a record is not part of two splits, or one of these splits is whitelisted
+       in OVERLAPPING_SPLITS.
   """
 
   DATASET_CLASS = None
+  OVERLAPPING_SPLITS = []
 
   @classmethod
   def setUpClass(cls):
@@ -73,9 +93,10 @@ class TestCase(tf.test.TestCase):
     """Check given split has right types and shapes."""
     for component, (expected_type, expected_shapes) in self.SPEC.items():
       output_type = dataset.output_types[component]
-      self.assertEqual(expected_type, output_type,
-                       "Component %s doesn't have type %s, but %s." % (
-                           component, expected_type, output_type))
+      self.assertEqual(
+          expected_type, output_type,
+          "Component %s doesn't have type %s, but %s." %
+          (component, expected_type, output_type))
       shapes = dataset.output_shapes[component]
       tf_utils.assert_shape_match(shapes, expected_shapes)
 
@@ -87,11 +108,30 @@ class TestCase(tf.test.TestCase):
     dl_manager.manual_dir = self.sample_dir
     self.builder.download_and_prepare(dl_manager=dl_manager)
 
+    split_to_checksums = {}  # {"split": set(records_checksums)}
     for split_name, expected_records_number in self.SPLITS.items():
       dataset = self.builder.as_dataset(split=split_name)
       self._check_split(dataset)
-      records_number = len(
-          [record for record in self.builder.numpy_iterator(split=split_name)])
-      self.assertEqual(records_number, expected_records_number)
+      records = list(self.builder.numpy_iterator(split=split_name))
+      split_to_checksums[split_name] = set(checksum(rec) for rec in records)
+      self.assertEqual(len(records), expected_records_number)
+    for (split1, hashes1), (split2, hashes2) in itertools.combinations(
+        split_to_checksums.items(), 2):
+      if split1 in self.OVERLAPPING_SPLITS or split2 in self.OVERLAPPING_SPLITS:
+        continue
+      self.assertFalse(
+          hashes1.intersection(hashes2),
+          ("Splits '%s' and '%s' are overlapping. Are you sure you want to have"
+           " the same objects in those splits? If yes, add one one of them to "
+           "OVERLAPPING_SPLITS class attribute.") % (split1, split2))
+
+
+def checksum(record):
+  hash_ = hashlib.md5()
+  for key, val in sorted(record.items()):
+    hash_.update(key.encode("utf-8"))
+    hash_.update(val)
+  return hash_.hexdigest()
+
 
 main = tf.test.main

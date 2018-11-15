@@ -32,6 +32,7 @@ class DiabeticRetinopathyDetectionTest(dataset_builder_testing.TestCase):
       "train": 12,
       "test": 12,
   }
+  OVERLAPPING_SPLITS = ["sample"]  # contains records from other samples
   SPEC = {
       "name": (tf.string, ()),
       "image": (tf.uint8, (None, None, 3)),
