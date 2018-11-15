@@ -51,7 +51,6 @@ __all__ = [
     "FileFormatAdapter",
     "TFRecordExampleAdapter",
     "CSVAdapter",
-    "do_files_exist",
 ]
 
 

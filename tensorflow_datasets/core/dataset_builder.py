@@ -222,7 +222,7 @@ class DatasetBuilder(object):
 
     Args:
       **as_dataset_kwargs: Keyword arguments passed on to
-        `tfds.DatasetBuilder.as_dataset`.
+        `tfds.core.DatasetBuilder.as_dataset`.
 
     Returns:
       Generator yielding feature dictionaries

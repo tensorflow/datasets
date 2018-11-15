@@ -1,7 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.download.DownloadManager" />
 <meta itemprop="path" content="Stable" />
-<meta itemprop="property" content="mode"/>
+<meta itemprop="property" content="manual_dir"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
 <meta itemprop="property" content="download_and_extract"/>
@@ -69,6 +69,7 @@ with the same guaranties/features than download and extraction.
 ``` python
 __init__(
     cache_dir,
+    manual_dir=None,
     mode=None
 )
 ```
@@ -77,18 +78,20 @@ Download manager constructor.
 
 #### Args:
 
-cache_dir (str): Cache directory where all downloads, extractions and
-  other artifacts are stored. Defaults to "~/tensorflow_datasets/tmp".
-mode (GenerateMode): Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS or
-  REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
+* <b>`cache_dir`</b>: `str`, Cache directory where all downloads, extractions and
+    other artifacts are stored.
+* <b>`manual_dir`</b>: `str`, Directory containing manually downloaded data. Default
+    to cache_dir.
+  mode (GenerateMode): Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS or
+    REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
 
 
 
 ## Properties
 
-<h3 id="mode"><code>mode</code></h3>
+<h3 id="manual_dir"><code>manual_dir</code></h3>
 
-Returns the GenerateMode value (REUSE_CACHE_IF_EXISTS,...).
+Returns the directory containing the manually extracted data.
 
 
 

@@ -1,5 +1,5 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
-<meta itemprop="name" content="tfds.DatasetBuilder" />
+<meta itemprop="name" content="tfds.core.DatasetBuilder" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
@@ -10,7 +10,7 @@
 <meta itemprop="property" content="name"/>
 </div>
 
-# tfds.DatasetBuilder
+# tfds.core.DatasetBuilder
 
 ## Class `DatasetBuilder`
 
@@ -35,7 +35,7 @@ train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
 # Use tf.contrib.data.AUTOTUNE to automatically optimize the input pipeline
 train_dataset = train_dataset.prefetch(tf.contrib.data.AUTOTUNE)
 features = train_dataset.make_one_shot_iterator().get_next()
-image, label = features['input'], features['target']
+image, label = features['image'], features['label']
 ```
 
 <h2 id="__init__"><code>__init__</code></h2>
@@ -77,9 +77,14 @@ Subclasses must override _as_dataset.
 
 #### Args:
 
-* <b>`split`</b>: <a href="../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read.
+* <b>`split`</b>: <a href="../../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read.
 * <b>`shuffle_files`</b>: `bool` (optional), whether to shuffle the input files.
     Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+* <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
+    will have a 2-tuple structure `(input, label)` according to
+    `builder.info.supervised_keys`. If `False`, the default,
+    the returned `tf.data.Dataset` will have a dictionary with all the
+    features.
 
 
 #### Returns:
@@ -101,10 +106,16 @@ Subclasses must override _download_and_prepare.
 
 #### Args:
 
-* <b>`cache_dir`</b>: (str) Cached directory where to extract the data. If None,
-    a default tmp directory will be used.
-* <b>`dl_manager`</b>: (<a href="../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>) DownloadManager to use. Only
-    one of dl_manager and cache_dir can be set
+* <b>`cache_dir`</b>: `str`, Cached directory where to extract the data. If None,
+    a default data_dir/tmp directory is used.
+* <b>`manual_dir`</b>: `str`, Cached directory where the manually extracted data is.
+    If None, a default data_dir/manual/{dataset_name}/ directory is used.
+    For DatasetBuilder, this is a read-only directory.
+* <b>`mode`</b>: <a href="../../tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>: Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS
+    or REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
+* <b>`dl_manager`</b>: <a href="../../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a> DownloadManager to use
+   instead of the default one. If set, none of the cache_dir, manual_dir,
+   mode should be set.
 
 
 #### Raises:
@@ -117,14 +128,14 @@ Subclasses must override _download_and_prepare.
 numpy_iterator(**as_dataset_kwargs)
 ```
 
-Generates numpy elements from the given <a href="../tfds/Split.md"><code>tfds.Split</code></a>.
+Generates numpy elements from the given <a href="../../tfds/Split.md"><code>tfds.Split</code></a>.
 
 This generator can be useful for non-TensorFlow programs.
 
 #### Args:
 
 * <b>`**as_dataset_kwargs`</b>: Keyword arguments passed on to
-    <a href="../tfds/DatasetBuilder.md#as_dataset"><code>tfds.DatasetBuilder.as_dataset</code></a>.
+    <a href="../../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>.
 
 
 #### Returns:

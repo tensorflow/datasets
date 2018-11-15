@@ -13,4 +13,4 @@ tfds.list_builders()
 
 Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
 
-Returns the string names of all <a href="../tfds/DatasetBuilder.md"><code>tfds.DatasetBuilder</code></a>s.
+Returns the string names of all <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>s.

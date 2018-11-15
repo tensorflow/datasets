@@ -73,12 +73,12 @@ class RegisteredDataset(abc.ABCMeta):
 
 
 def list_builders():
-  """Returns the string names of all `tfds.DatasetBuilder`s."""
+  """Returns the string names of all `tfds.core.DatasetBuilder`s."""
   return sorted(list(_DATASET_REGISTRY))
 
 
 def builder(name, **ctor_kwargs):
-  """Fetches a `tfds.DatasetBuilder` by string name.
+  """Fetches a `tfds.core.DatasetBuilder` by string name.
 
   Args:
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
@@ -90,7 +90,7 @@ def builder(name, **ctor_kwargs):
       These will override keyword arguments passed in `name`, if any.
 
   Returns:
-    A `tfds.DatasetBuilder`.
+    A `tfds.core.DatasetBuilder`.
 
   Raises:
     ValueError: if `name` is unrecognized.
@@ -112,7 +112,7 @@ def load(name,
          as_dataset_kwargs=None):
   """Loads the given `tfds.Split` as a `tf.data.Dataset`.
 
-  `load` is a convenience method that fetches the `tfds.DatasetBuilder` by
+  `load` is a convenience method that fetches the `tfds.core.DatasetBuilder` by
   string name, optionally calls `DatasetBuilder.download_and_prepare`
   (if `download=True`), and then calls `DatasetBuilder.as_dataset`.
 
@@ -131,7 +131,7 @@ def load(name,
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
     download: `bool` (optional), whether to call
-      `tfds.DatasetBuilder.download_and_prepare`
+      `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
       expected to be in `data_dir`. If `True` and the data is already in
       `data_dir`, `download_and_prepare` is a no-op.
@@ -142,11 +142,11 @@ def load(name,
       the returned `tf.data.Dataset` will have a dictionary with all the
       features.
     download_and_prepare_kwargs: `dict` (optional) keyword arguments passed to
-      `tfds.DatasetBuilder.download_and_prepare` if `download=True`. Allow to
-      control where to download and extract the cached data. If not set,
+      `tfds.core.DatasetBuilder.download_and_prepare` if `download=True`. Allow
+      to control where to download and extract the cached data. If not set,
       cache_dir and manual_dir will automatically be deduced from data_dir.
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
-      `tfds.DatasetBuilder.as_dataset`. `split` will be passed through by
+      `tfds.core.DatasetBuilder.as_dataset`. `split` will be passed through by
       default.
 
   Returns:

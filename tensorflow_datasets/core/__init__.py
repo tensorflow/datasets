@@ -24,3 +24,13 @@ from tensorflow_datasets.core.splits import NamedSplit
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
+
+__all__ = [
+    "DatasetBuilder",
+    "GeneratorBasedDatasetBuilder",
+    "DatasetInfo",
+    "NamedSplit",
+    "SplitDict",
+    "SplitGenerator",
+    "SplitInfo",
+]

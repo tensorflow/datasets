@@ -25,3 +25,15 @@ from tensorflow_datasets.core.features.feature import Tensor
 from tensorflow_datasets.core.features.feature import TensorInfo
 from tensorflow_datasets.core.features.image_feature import Image
 from tensorflow_datasets.core.features.text_feature import Text
+
+__all__ = [
+    "text",
+    "ClassLabel",
+    "FeatureConnector",
+    "FeaturesDict",
+    "OneOf",
+    "Tensor",
+    "TensorInfo",
+    "Image",
+    "Text",
+]

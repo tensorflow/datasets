@@ -31,3 +31,15 @@ from tensorflow_datasets.core.registered import load
 
 from tensorflow_datasets.core.splits import percent
 from tensorflow_datasets.core.splits import Split
+
+__all__ = [
+    "core",
+    "download",
+    "features",
+    "file_adapter",
+    "GenerateMode",
+    "builder",
+    "list_builders",
+    "load",
+    "Split",
+]

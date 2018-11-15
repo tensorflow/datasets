@@ -17,3 +17,8 @@
 
 from tensorflow_datasets.core.features.text.text_encoder import ByteTextEncoder
 from tensorflow_datasets.core.features.text.text_encoder import TokenTextEncoder
+
+__all__ = [
+    "ByteTextEncoder",
+    "TokenTextEncoder",
+]
