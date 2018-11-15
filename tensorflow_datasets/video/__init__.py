@@ -13,20 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""`tensorflow_datasets` package.
+"""Video datasets."""
 
-`tensorflow_datasets` (`tfds`) defines a collection of datasets ready-to-use
-with TensorFlow.
-
-Each dataset is defined as a `tfds.core.DatasetBuilder`.
-"""
-
-# Imports for registration
-from tensorflow_datasets import image
-from tensorflow_datasets import video
-
-
-# Public API to create and generate a dataset
-from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
-
-# TODO(epot): Restore the __all__property
+from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushing
