@@ -8,4 +8,8 @@ if [[ $(protoc --version) != 'libprotoc 3.6.1' ]]; then
   exit
 fi
 protoc download.proto --python_out=.
+# We want to have 'generated' in the name.
 mv download_pb2.py download_generated_pb2.py
+# We don't want pylint to run on this file, so we prepend directives.
+printf "%s\n%s" "# pylint: skip-file" "$(cat download_generated_pb2.py)" > \
+  download_generated_pb2.py

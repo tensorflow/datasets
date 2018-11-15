@@ -32,7 +32,7 @@ from tensorflow import gfile
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import local_backend
 from tensorflow_datasets.core.download import util
-from tensorflow_datasets.core.download.proto import download_generated_pb2 as download_pb2
+from tensorflow_datasets.core.proto import download_generated_pb2 as download_pb2
 
 # Number of thread to use to parallelize the extractions
 _NUM_PARALLEL_DOWNLOADS = 50

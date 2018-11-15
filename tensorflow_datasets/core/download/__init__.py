@@ -16,9 +16,9 @@
 """Public API of the download manager."""
 
 from tensorflow_datasets.core.download.download_manager import DownloadManager
-from tensorflow_datasets.core.download.proto.download_generated_pb2 import ExtractInfo
-from tensorflow_datasets.core.download.proto.download_generated_pb2 import UrlInfo
 from tensorflow_datasets.core.download.util import GenerateMode
+from tensorflow_datasets.core.proto.download_generated_pb2 import ExtractInfo
+from tensorflow_datasets.core.proto.download_generated_pb2 import UrlInfo
 
 __all__ = [
     "DownloadManager",

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-package tensorflow_datasets.download.proto;
+package tensorflow_datasets;
 
 // Structure containing the info about the request of the url to download
 message UrlInfo {
