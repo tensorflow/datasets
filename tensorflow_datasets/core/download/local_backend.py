@@ -77,7 +77,7 @@ def download(uri, dst_dir):
   # TODO(epot): Could add a shared tqdm instance across parallel download
   # to display a single shared progression bar.
 
-  # TODO(epot): Add Google Drive support (cf Ryan code)
+  # TODO(b/119663674): Add Google Drive support (cf Ryan code)
 
   with gfile.Open(incomplete_path, 'wb') as f:
     f.write(response.read())
