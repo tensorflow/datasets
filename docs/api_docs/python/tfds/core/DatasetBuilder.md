@@ -41,10 +41,7 @@ image, label = features['image'], features['label']
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(
-    *args,
-    **kwargs
-)
+__init__(data_dir=None)
 ```
 
 Construct a DatasetBuilder.
@@ -64,8 +61,9 @@ Callers must pass arguments as keyword arguments.
 
 ``` python
 as_dataset(
-    *args,
-    **kwargs
+    split,
+    shuffle_files=None,
+    as_supervised=False
 )
 ```
 
@@ -95,8 +93,10 @@ Subclasses must override _as_dataset.
 
 ``` python
 download_and_prepare(
-    *args,
-    **kwargs
+    cache_dir=None,
+    manual_dir=None,
+    mode=None,
+    dl_manager=None
 )
 ```
 

@@ -19,9 +19,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import functools
 import inspect
+
 import six
+import wrapt
 
 __all__ = [
     "disallow_positional_args"
@@ -34,24 +35,13 @@ _POSITIONAL_ARG_ERR_MSG = (
     "Positional arguments passed to fn %s: %s.")
 
 
-def disallow_positional_args(fn):
+@wrapt.decorator
+def disallow_positional_args(fn, instance, args, kwargs):
   """Requires function to be called using keyword arguments."""
-  ismethod = getargspec(fn).args[0] == "self"
-
-  if ismethod:
-    @functools.wraps(fn)
-    def wrapped(self, *args, **kwargs):
-      _check_no_positional(fn, args, True)
-      _check_required(fn, kwargs)
-      return fn(self, *args, **kwargs)
-  else:
-    @functools.wraps(fn)
-    def wrapped(*args, **kwargs):
-      _check_no_positional(fn, args)
-      _check_required(fn, kwargs)
-      return fn(*args, **kwargs)
-
-  return wrapped
+  ismethod = instance is not None
+  _check_no_positional(fn, args, ismethod)
+  _check_required(fn, kwargs)
+  return fn(*args, **kwargs)
 
 
 def _check_no_positional(fn, args, is_method=False):

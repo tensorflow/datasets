@@ -27,8 +27,8 @@ Feature encoding a tf.Tensor value (both fixed and variable).
 
 ``` python
 __init__(
-    *args,
-    **kwargs
+    shape,
+    dtype
 )
 ```
 

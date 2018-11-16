@@ -33,8 +33,8 @@ time (ex: num_samples) and will be updated by update_from_metadata_dir().
 
 ``` python
 __init__(
-    *args,
-    **kwargs
+    features,
+    supervised_keys=None
 )
 ```
 

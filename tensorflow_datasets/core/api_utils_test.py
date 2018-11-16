@@ -31,6 +31,7 @@ class ApiUtilsTest(tf.test.TestCase):
     def fn(a, b, c=api_utils.REQUIRED_ARG, d=4):
       return (a, b, c, d)
 
+    self.assertEqual(["a", "b", "c", "d"], api_utils.getargspec(fn).args)
     self.assertEqual((1, 2, 3, 4), fn(a=1, b=2, c=3))
     predicate = "use keyword"
     with self.assertRaisesWithPredicateMatch(ValueError, predicate):

@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.features.Tensor.serialized_keys", 
+  "current_doc_full_name": "tfds.core.DatasetInfo.__format__", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
@@ -406,7 +406,6 @@
     "tfds.core.NamedSplit.__eq__": true, 
     "tfds.core.NamedSplit.__format__": true, 
     "tfds.core.NamedSplit.__getattribute__": true, 
-    "tfds.core.NamedSplit.__getitem__": true, 
     "tfds.core.NamedSplit.__hash__": true, 
     "tfds.core.NamedSplit.__init__": true, 
     "tfds.core.NamedSplit.__module__": true, 
@@ -420,6 +419,7 @@
     "tfds.core.NamedSplit.__subclasshook__": true, 
     "tfds.core.NamedSplit.__weakref__": true, 
     "tfds.core.NamedSplit.get_read_instruction": true, 
+    "tfds.core.NamedSplit.subsplit": true, 
     "tfds.core.SplitDict": false, 
     "tfds.core.SplitDict.__cmp__": true, 
     "tfds.core.SplitDict.__contains__": true, 
@@ -1000,7 +1000,8 @@
     "tfds.file_adapter.TFRecordExampleAdapter.filetype_suffix": true, 
     "tfds.file_adapter.TFRecordExampleAdapter.write_from_generator": true, 
     "tfds.list_builders": false, 
-    "tfds.load": false
+    "tfds.load": false, 
+    "tfds.percent": true
   }, 
   "py_module_names": [
     "tfds"

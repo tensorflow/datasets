@@ -7,14 +7,19 @@
 
 ``` python
 tfds.load(
-    *args,
-    **kwargs
+    name,
+    split,
+    data_dir=None,
+    download=True,
+    as_supervised=False,
+    download_and_prepare_kwargs=None,
+    as_dataset_kwargs=None
 )
 ```
 
 
 
-Defined in [`core/api_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/api_utils.py).
+Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
 
 Loads the given <a href="../tfds/Split.md"><code>tfds.Split</code></a> as a `tf.data.Dataset`.
 

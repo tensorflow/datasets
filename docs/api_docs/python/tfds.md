@@ -1,6 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="percent"/>
 </div>
 
 # Module: tfds
@@ -39,4 +40,8 @@ Each dataset is defined as a <a href="./tfds/core/DatasetBuilder.md"><code>tfds.
 [`list_builders(...)`](./tfds/list_builders.md): Returns the string names of all <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>s.
 
 [`load(...)`](./tfds/load.md): Loads the given <a href="./tfds/Split.md"><code>tfds.Split</code></a> as a `tf.data.Dataset`.
+
+## Other Members
+
+<h3 id="percent"><code>percent</code></h3>
 
