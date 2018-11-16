@@ -45,6 +45,20 @@ class ByteTextEncoderTest(tf.test.TestCase):
     self.assertEqual(ZH_HELLO, encoder.decode(self.ZH_HELLO_IDS))
     self.assertEqual(2**8 + 1, encoder.vocab_size)
 
+  def test_reserved_tokens(self):
+    # One with non-alphanumeric chars, one uppercase, one lowercase
+    reserved_tokens = ['<EOS>', 'FOO', 'bar']
+    encoder = text_encoder.ByteTextEncoder(reserved_tokens=reserved_tokens)
+    # Without reserved tokens
+    hello_ids = [i + len(reserved_tokens) for i in self.ZH_HELLO_IDS]
+    self.assertEqual(hello_ids, encoder.encode(ZH_HELLO))
+    # With reserved tokens
+    text_reserved = '%s %s%s%s' % (
+        reserved_tokens[0], ZH_HELLO, reserved_tokens[1], reserved_tokens[2])
+    self.assertEqual([1, 32 + 1 + len(reserved_tokens)] + hello_ids + [2, 3],
+                     encoder.encode(text_reserved))
+    self.assertEqual(2**8 + 1 + len(reserved_tokens), encoder.vocab_size)
+
 
 class TokenTextEncoderTest(tf.test.TestCase):
 
@@ -94,6 +108,65 @@ class TokenTextEncoderTest(tf.test.TestCase):
       file_backed_encoder = text_encoder.TokenTextEncoder(
           vocab_file=vocab_fname)
       self.assertEqual(encoder.tokens, file_backed_encoder.tokens)
+
+  def test_reserved_tokens(self):
+    reserved_tokens = ['<EOS>', 'FOO', 'zoo']
+    vocab_list = [u'hi', 'bye', ZH_HELLO]
+
+    # Check that reserved tokens are a prefix of vocab
+    with self.assertRaisesWithPredicateMatch(ValueError, 'must start with'):
+      text_encoder.TokenTextEncoder(vocab_list=vocab_list,
+                                    reserved_tokens=reserved_tokens)
+
+    vocab_list = reserved_tokens + vocab_list
+    encoder = text_encoder.TokenTextEncoder(vocab_list=vocab_list,
+                                            reserved_tokens=reserved_tokens)
+
+    # No reserved tokens
+    text = 'hi<<>><<>foo!^* bar && bye (%s hi)' % ZH_HELLO
+    text_ids = [i + 1 for i in [3, 6, 6, 4, 5, 3]]
+    self.assertEqual(text_ids, encoder.encode(text))
+
+    # With reserved tokens
+    text = 'hi<<>><<>foo!<EOS>^* barFOO && bye (%szoo hi)' % ZH_HELLO
+    reserved_text_ids = list(text_ids)
+    reserved_text_ids.insert(2, 1)  # <EOS>
+    reserved_text_ids.insert(4, 2)  # FOO
+    reserved_text_ids.insert(7, 3)  # zoo
+    self.assertEqual(reserved_text_ids, encoder.encode(text))
+
+  def test_lowercase(self):
+    reserved_tokens = ['<EOS>', 'FOO', 'foo', 'zoo']
+    vocab_list = reserved_tokens + [u'hi', 'bye', ZH_HELLO]
+    encoder = text_encoder.TokenTextEncoder(vocab_list=vocab_list,
+                                            reserved_tokens=reserved_tokens,
+                                            lowercase=True)
+    # No reserved tokens
+    self.assertEqual([5, 6, 5], encoder.encode('hi byE HI'))
+    # With reserved tokens
+    self.assertEqual([5, 1, 6, 2, 5], encoder.encode('hi<EOS>byE FOO HI'))
+
+  def test_with_tokenizer(self):
+
+    class DummyTokenizer(object):
+
+      def tokenize(self, s):
+        del s
+        return ['hi', 'bye']
+
+    tokenizer = DummyTokenizer()
+    base_vocab = [u'hi', 'bye', ZH_HELLO]
+    reserved_tokens = ['<EOS>', 'FOO', 'foo', 'zoo']
+    vocab_list = reserved_tokens + base_vocab
+    with self.assertRaisesWithPredicateMatch(ValueError,
+                                             'reserved_tokens must be None'):
+      text_encoder.TokenTextEncoder(vocab_list=vocab_list,
+                                    reserved_tokens=reserved_tokens,
+                                    tokenizer=tokenizer)
+    encoder = text_encoder.TokenTextEncoder(vocab_list=base_vocab,
+                                            tokenizer=tokenizer)
+    # Ensure it uses the passed tokenizer and not the default
+    self.assertEqual([1, 2], encoder.encode('zoo foo'))
 
 
 class TokenizeTest(parameterized.TestCase, tf.test.TestCase):
