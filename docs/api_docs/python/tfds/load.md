@@ -12,6 +12,7 @@ tfds.load(
     data_dir=None,
     download=True,
     as_supervised=False,
+    builder_kwargs=None,
     download_and_prepare_kwargs=None,
     as_dataset_kwargs=None
 )
@@ -53,6 +54,9 @@ of hundreds of GiB to disk. Refer to download argument.
     `builder.info.supervised_keys`. If `False`, the default,
     the returned `tf.data.Dataset` will have a dictionary with all the
     features.
+* <b>`builder_kwargs`</b>: `dict` (optional), keyword arguments to be passed to the
+    <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> constructor. `data_dir` will be passed
+    through by default.
 * <b>`download_and_prepare_kwargs`</b>: `dict` (optional) keyword arguments passed to
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a> if `download=True`. Allow
     to control where to download and extract the cached data. If not set,

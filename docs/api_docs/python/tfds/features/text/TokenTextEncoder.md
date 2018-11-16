@@ -1,6 +1,9 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.features.text.TokenTextEncoder" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="lowercase"/>
+<meta itemprop="property" content="reserved_tokens"/>
+<meta itemprop="property" content="tokenizer"/>
 <meta itemprop="property" content="tokens"/>
 <meta itemprop="property" content="vocab_size"/>
 <meta itemprop="property" content="__init__"/>
@@ -31,7 +34,10 @@ __init__(
     vocab_list=None,
     vocab_file=None,
     oov_buckets=1,
-    oov_token=u'UNK'
+    oov_token=u'UNK',
+    lowercase=False,
+    reserved_tokens=None,
+    tokenizer=None
 )
 ```
 
@@ -46,10 +52,33 @@ Must pass either `vocab_list` or `vocab_file`.
 * <b>`oov_buckets`</b>: `int`, the number of `int`s to reserve for OOV hash buckets.
     Tokens that are OOV will be hash-modded into a OOV bucket in `encode`.
 * <b>`oov_token`</b>: `str`, the string to use for OOV ids in `decode`.
+* <b>`lowercase`</b>: `bool`, whether to lowercase all text in `encode` before
+    matching to tokens.
+* <b>`reserved_tokens`</b>: `list<str>`, list of reserved tokens. Note that these
+    must be a prefix of `vocab_list`/`vocab_file`. Passing them here enables
+    tokens with non-alphanumeric characters. For example,
+    `reserved_tokens=["<EOS>"]` will ensure that the sentence `"Hello
+    world!<EOS>"` is tokenized as `["Hello", "world", "<EOS>"]`.
+* <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text into a
+    list of tokens. If passed, `reserved_tokens` must be None. Defaults to a
+    tokenizer that splits on (and drops) non-alphanumeric characters and
+    recognizes and keeps `reserved_tokens`.
 
 
 
 ## Properties
+
+<h3 id="lowercase"><code>lowercase</code></h3>
+
+
+
+<h3 id="reserved_tokens"><code>reserved_tokens</code></h3>
+
+
+
+<h3 id="tokenizer"><code>tokenizer</code></h3>
+
+
 
 <h3 id="tokens"><code>tokens</code></h3>
 

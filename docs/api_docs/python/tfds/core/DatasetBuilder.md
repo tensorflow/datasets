@@ -32,7 +32,6 @@ assert isinstance(train_dataset, tf.data.Dataset)
 
 # And then the rest of your input pipeline
 train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
-# Use tf.data.experimental.AUTOTUNE to automatically optimize the input pipeline
 train_dataset = train_dataset.prefetch(tf.data.experimental.AUTOTUNE)
 features = train_dataset.make_one_shot_iterator().get_next()
 image, label = features['image'], features['label']
