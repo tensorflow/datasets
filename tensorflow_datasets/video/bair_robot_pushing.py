@@ -40,8 +40,6 @@ FRAMES_PER_VIDEO = 30
 class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
   """Robot pushing dataset from BAIR."""
 
-  SIZE = 30  # Dataset size (in GiB)
-
   def _split_generators(self, dl_manager):
     files = dl_manager.download_and_extract(DATA_URL)
     return [
@@ -63,6 +61,11 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
 
   def _info(self):
     return tfds.core.DatasetInfo(
+        name=self.name,
+        description="This data set contains roughly 59,000 examples of robot "
+        "pushing motions, including one training set (train) and "
+        "two test sets of previously seen (testseen) and unseen "
+        "(testnovel) objects.",
         features=tfds.features.FeaturesDict({
             # TODO(michalski): replace with Video feature.
             "video_main":
@@ -77,7 +80,12 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
             "endeffector_pos":
                 tfds.features.Tensor(
                     shape=(FRAMES_PER_VIDEO, 3), dtype=tf.float32),
-        }),)
+        }),
+        urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
+        size_in_bytes=30.0 * tfds.core.units.GiB,
+        citation="Unsupervised Learning for Physical Interaction through Video "
+        " Prediction. Chelsea Finn, Ian Goodfellow, Sergey Levine",
+    )
 
   def _parse_single_video(self, example_proto):
     """Parses single video from the input tfrecords.

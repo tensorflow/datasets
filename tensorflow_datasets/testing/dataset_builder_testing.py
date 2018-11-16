@@ -48,7 +48,7 @@ class TestCase(tf.test.TestCase):
        testing/test_data/fake_samples/${dataset_name};
    - the dataset builder can produce serialized data;
    - the dataset builder produces a valid Dataset object from serialized data
-     - in earger mode;
+     - in eager mode;
      - in graph mode.
    - the produced Dataset records have the expected dimensions and types;
    - the produced Dataset has and the expected number of records;
@@ -88,6 +88,9 @@ class TestCase(tf.test.TestCase):
 
   def test_info(self):
     self.assertIsInstance(self.builder.info, dataset_info.DatasetInfo)
+
+    info = self.builder.info
+    self.assertEquals(self.builder.name, info.name)
 
   def _check_split(self, dataset):
     """Check given split has right types and shapes."""

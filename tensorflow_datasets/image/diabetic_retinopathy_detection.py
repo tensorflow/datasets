@@ -31,16 +31,19 @@ class DiabeticRetinopathyDetection(
     tfds.core.GeneratorBasedDatasetBuilder):
   """Diabetic retinopathy detection."""
 
-  SIZE = 97  # GiB
-
   def _info(self):
     return tfds.core.DatasetInfo(
+        name=self.name,
+        description="A large set of high-resolution retina images taken under "
+        "a variety of imaging conditions.",
         features=tfds.features.FeaturesDict({
             "name": tfds.features.Text(),  # patient ID + eye. eg: "4_left".
             "image": tfds.features.Image(),
             # From 0 (no DR - saine) to 4 (Proliferative DR). -1 means no label.
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
+        urls=["https://www.kaggle.com/c/diabetic-retinopathy-detection/data"],
+        size_in_bytes=97.0 * tfds.core.units.GiB,
     )
 
   def _split_generators(self, dl_manager):
