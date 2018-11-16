@@ -67,10 +67,10 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
             # TODO(michalski): replace with Video feature.
             "video_main":
                 tfds.features.Tensor(
-                    shape=(FRAMES_PER_VIDEO, 64, 64, 3), dtype=tf.int64),
+                    shape=(FRAMES_PER_VIDEO, 64, 64, 3), dtype=tf.uint8),
             "video_aux1":
                 tfds.features.Tensor(
-                    shape=(FRAMES_PER_VIDEO, 64, 64, 3), dtype=tf.int64),
+                    shape=(FRAMES_PER_VIDEO, 64, 64, 3), dtype=tf.uint8),
             "action":
                 tfds.features.Tensor(
                     shape=(FRAMES_PER_VIDEO, 4), dtype=tf.float32),
@@ -102,11 +102,10 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
     # Decode images from string to uint8 tensor (64, 64, 3).
     for frame in range(FRAMES_PER_VIDEO):
       for key in ["image_main/encoded", "image_aux1/encoded"]:
-        # TODO(b/119551763): remove the int64 cast after we support uint8.
         parsed["%d/%s" % (frame, key)] = tf.cast(
             tf.reshape(
                 tf.decode_raw(parsed["%d/%s" % (frame, key)], tf.uint8),
-                (64, 64, 3)), dtype=tf.int64)
+                (64, 64, 3)), dtype=tf.uint8)
     return parsed
 
   def _generate_samples(self, split_name, filedir):

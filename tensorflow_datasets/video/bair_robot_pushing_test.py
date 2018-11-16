@@ -33,8 +33,8 @@ class BairRobotPushingTest(dataset_builder_testing.TestCase):
   }
 
   SPEC = {
-      "video_aux1": (tf.int64, (30, 64, 64, 3)),
-      "video_main": (tf.int64, (30, 64, 64, 3)),
+      "video_aux1": (tf.uint8, (30, 64, 64, 3)),
+      "video_main": (tf.uint8, (30, 64, 64, 3)),
       "action": (tf.float32, (30, 4)),
       "endeffector_pos": (tf.float32, (30, 3)),
   }
