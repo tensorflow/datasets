@@ -22,7 +22,6 @@ from __future__ import print_function
 import abc
 import datetime
 import functools
-import json
 import os
 
 import six
@@ -30,16 +29,17 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 
 import termcolor
+
 
 __all__ = [
     "DatasetBuilder",
@@ -67,9 +67,8 @@ class DatasetBuilder(object):
   ```
   """
 
-  name = None  # Name of the dataset, filled by metaclass based on class name.
-  SIZE = None  # Approximate size of dataset, if known, in GB.
-  # TODO(pierrot): take size from DatasetInfo.
+  # Name of the dataset, filled by metaclass based on class name.
+  name = None
 
   @api_utils.disallow_positional_args
   def __init__(self, data_dir=None):
@@ -85,10 +84,9 @@ class DatasetBuilder(object):
     # Get the last dataset if it exists (or None otherwise)
     self._data_dir = self._get_data_dir()
 
-    # If a previous dataset version exists, reload the dataset info metadata (
-    # splits info, num samples,...)
+    # If a previous dataset version exists, reload the dataset info as well.
     if self._data_dir:
-      self.info.update_from_metadata_dir(self._data_dir)
+      self.info.read_from_directory(self._data_dir)
 
   @utils.memoized_property
   def info(self):
@@ -101,7 +99,8 @@ class DatasetBuilder(object):
       cache_dir=None,
       manual_dir=None,
       mode=None,
-      dl_manager=None):
+      dl_manager=None,
+      compute_stats=True):
     """Downloads and prepares dataset for reading.
 
     Subclasses must override _download_and_prepare.
@@ -117,6 +116,8 @@ class DatasetBuilder(object):
       dl_manager: `tfds.download.DownloadManager` DownloadManager to use
        instead of the default one. If set, none of the cache_dir, manual_dir,
        mode should be set.
+      compute_stats: `boolean` If True, compute statistics over the generated
+        data and write the `tfds.core.DatasetInfo` protobuf to disk.
 
     Raises:
       ValueError: If the user defines both cache_dir and dl_manager
@@ -159,17 +160,23 @@ class DatasetBuilder(object):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
-    size_text = termcolor.colored("%s GB" % self.SIZE or "?", attrs=["bold"])
-    termcolor.cprint("Downloading / extracting dataset %s (%s) to %s..." % (
-        self.name, size_text, data_dir))
+    size_text = units.size_str(self.info.size_in_bytes)
+    termcolor.cprint("Downloading / extracting dataset %s (%s) to %s..." %
+                     (self.name, size_text, data_dir), attrs=["bold"])
 
     # Wrap the Dataset generation in a .incomplete directory
     with file_format_adapter.incomplete_dir(data_dir) as data_dir_tmp:
       self._download_and_prepare(dl_manager=dl_manager, data_dir=data_dir_tmp)
 
-    # Update the DatasetInfo metadata (splits info, num samples,...)
+    # Update the DatasetInfo metadata by computing statistics from the data.
     self._data_dir = data_dir
-    self.info.update_from_metadata_dir(self._data_dir)
+    if compute_stats:
+      # Update the info object with the statistics and schema.
+      # Note: self.info already contains static information about the dataset
+      self.info.compute_dynamic_properties(self)
+
+    # Write DatasetInfo to disk, even if we haven't computed the statistics.
+    self.info.write_to_directory(self._data_dir)
 
   # TODO(rsepassi): Make it easy to further shard the TRAIN data (e.g. for
   # synthetic VALIDATION splits).
@@ -465,16 +472,11 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
           output_files,
       )
 
-    # Saving metadata
-    # TODO(epot): Also include the features in the metadata for documentation.
-    metadata = {
-        "splits": split_dict.to_json_data(),
-    }
-    dataset_info_path = os.path.join(
-        data_dir,
-        dataset_info.DATASET_INFO_FILENAME)
-    with tf.gfile.Open(dataset_info_path, "w") as f:
-      f.write(json.dumps(metadata))
+    # TODO(afrozm): Make it so that basic split information is known without
+    # having to call download_and_prepare. Maybe dataset definitions should
+    # include it.
+    # Update the info object with the splits.
+    self.info.splits = split_dict
 
   def _as_dataset(self, split=splits.Split.TRAIN, shuffle_files=None):
     # Automatically activate shuffling if training

@@ -1,0 +1,64 @@
+// Definitions for metadata related to whole datasets and its instances and
+// splits.
+
+syntax = "proto3";
+option cc_enable_arenas = true;
+
+package tensorflow_datasets;
+
+import "tensorflow_metadata/proto/v0/statistics.proto";
+import "tensorflow_metadata/proto/v0/schema.proto";
+
+// Message to represent location of a dataset, for now just has a url field, but
+// can internally have folders etc.
+message DatasetLocation {
+  repeated string urls = 1;
+}
+
+// This is a serialization of tensorflow_datasets.core.SplitInfo -- this is
+// supposed to encapsulate the information specific to a particular instance
+// of this dataset, so attributes that are common to this dataset go directly
+// in DatasetInfo (name, location, schema), but attributes specific to an
+// instance go here.
+message SplitInfo {
+  // A string identifying this SplitInfo, i.e. "TRAIN", "TEST", "v18" etc.
+  string name = 1;
+
+  // The number of shards in this splits on-disk representation.
+  int64 num_shards = 2;
+
+  // The concrete statistics about this split.
+  tensorflow.metadata.v0.DatasetFeatureStatistics statistics = 3;
+}
+
+// This message indicates which feature in the dataset schema is the input and
+// which one is the output.
+message SupervisedKeys {
+  string input = 1;
+  string output = 2;
+}
+
+// This is a serialization of tensorflow_datasets.core.DatasetInfo.
+message DatasetInfo {
+  string name = 1;
+  string description = 2;
+
+  // A citation string if one exists for this dataset.
+  string citation = 3;
+
+  // *Approximate* size in bytes of this dataset on disk.
+  int64 size_in_bytes = 4;
+
+  // Canonical location of the dataset.
+  DatasetLocation location = 5;
+
+  // The schema of the dataset.
+  tensorflow.metadata.v0.Schema schema = 6;
+
+  // The information about the specific splits.
+  repeated SplitInfo splits = 7;
+
+  // If this is a supervised learning problem, then the input and output feature
+  // can be specified using this.
+  SupervisedKeys supervised_keys = 8;
+}

@@ -36,6 +36,7 @@ REQUIRED_PKGS = [
     'pytz',
     'requests',
     'six',
+    'tensorflow-metadata',
     'termcolor',
     'tqdm',
     'wrapt',

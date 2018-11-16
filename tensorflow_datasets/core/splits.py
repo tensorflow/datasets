@@ -28,6 +28,7 @@ from six.moves import range  # pylint: disable=redefined-builtin
 from six.moves import zip  # pylint: disable=redefined-builtin
 
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.proto import SplitInfo
 
 __all__ = [
     "NamedSplit",
@@ -396,12 +397,6 @@ def slice_to_percent_mask(slice_value):
   return [i in selected for i in range(100)]
 
 
-# TODO(afrozm): Replace by the proto object.
-# Could also add the number of sample here such as the user can do
-# num_train_sample = builder.info.splits[tfds.Split.TRAIN].num_sample
-SplitInfo = collections.namedtuple("SplitInfo", ["name", "num_shards"])
-
-
 class SplitDict(utils.NonMutableDict):
   """Split info object."""
 
@@ -416,21 +411,22 @@ class SplitDict(utils.NonMutableDict):
 
   def add(self, split_info):
     """Add the split info."""
-    super(SplitDict, self).__setitem__(str(split_info.name), split_info)
+    if split_info.name in self:
+      raise ValueError("Split {} already present".format(split_info.name))
+    # TODO(epot): Make sure this works with Named splits correctly.
+    super(SplitDict, self).__setitem__(split_info.name, split_info)
 
-  # TODO(afrozm): Replace by proto
-  def from_json_data(self, split_data):
-    """Restore the splits info from the written metadata file."""
-    self.clear()
-    for s in split_data:
-      self.add(SplitInfo(name=s["name"], num_shards=s["num_shards"]))
+  @classmethod
+  def from_proto(cls, repeated_split_infos):
+    """Returns a new SplitDict initialized from the `repeated_split_infos`."""
+    split_dict = cls()
+    for s in repeated_split_infos:
+      split_dict.add(s)
+    return split_dict
 
-  def to_json_data(self):
-    """Export the metadata for json export."""
-    return [
-        {"name": str(s.name), "num_shards": s.num_shards}
-        for s in self.values()
-    ]
+  def to_proto(self):
+    """Returns a list of SplitInfo protos that we have."""
+    return sorted(self.values(), key=lambda split_info: split_info.name)
 
 
 class SplitGenerator(object):

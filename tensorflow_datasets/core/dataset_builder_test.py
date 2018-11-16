@@ -84,6 +84,10 @@ class DatasetBuilderTest(tf.test.TestCase):
       self.assertEqual(10, len(test_data))
       self.assertEqual(list(range(30)), sorted(train_data + test_data))
 
+      # Builder's info should also have the above information.
+      self.assertTrue(builder.info.initialized)
+      self.assertEqual(30, builder.info.num_examples)
+
   def test_load(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       dataset = registered.load(

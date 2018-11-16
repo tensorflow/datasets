@@ -14,3 +14,8 @@
 # limitations under the License.
 
 """Public API of the proto package."""
+
+# pylint: disable=reimported,g-bad-import-order
+from tensorflow_datasets.core.proto import dataset_info_generated_pb2 as dataset_info_pb2
+from tensorflow_datasets.core.proto.dataset_info_generated_pb2 import SplitInfo
+# pylint: enable=reimported,g-bad-import-order

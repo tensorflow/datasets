@@ -22,8 +22,8 @@ from __future__ import print_function
 import tensorflow as tf
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core.proto import SplitInfo
 import tensorflow_datasets.public_api as tfds
-
 
 RANGE_TRAIN = list(range(0, 2000))
 RANGE_TEST = list(range(3000, 3200))
@@ -35,7 +35,7 @@ class DummyDataset(tfds.core.GeneratorBasedDatasetBuilder):
 
   def _info(self):
     return tfds.core.DatasetInfo(
-        features=tfds.features.FeaturesDict({'value': tf.int64})
+        features=tfds.features.FeaturesDict({"value": tf.int64})
     )
 
   def _split_generators(self, dl_manager):
@@ -61,11 +61,11 @@ class DummyDataset(tfds.core.GeneratorBasedDatasetBuilder):
   def _generate_samples(self, data):
     for i in data:
       yield self.info.features.encode_sample({
-          'value': i,
+          "value": i,
       })
 
   def values(self, split):
-    return [v['value'] for v in self.numpy_iterator(split=split)]
+    return [v["value"] for v in self.numpy_iterator(split=split)]
 
 
 class SplitsUnitTest(tf.test.TestCase):
@@ -73,9 +73,9 @@ class SplitsUnitTest(tf.test.TestCase):
   @classmethod
   def setUpClass(cls):
     cls._splits = tfds.core.SplitDict()
-    cls._splits.add(tfds.core.SplitInfo(name='train', num_shards=10))
-    cls._splits.add(tfds.core.SplitInfo(name='test', num_shards=2))
-    cls._splits.add(tfds.core.SplitInfo(name='validation', num_shards=2))
+    cls._splits.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    cls._splits.add(tfds.core.SplitInfo(name="test", num_shards=2))
+    cls._splits.add(tfds.core.SplitInfo(name="validation", num_shards=2))
 
   def test_split_slice_merge(self):
 
@@ -87,11 +87,11 @@ class SplitsUnitTest(tf.test.TestCase):
     # List sorted so always deterministic
     self.assertEqual(self._info(split), [
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='test', num_shards=2),
+            split_info=tfds.core.SplitInfo(name="test", num_shards=2),
             slice_value=slice(30, 40),
         ),
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='train', num_shards=10),
+            split_info=tfds.core.SplitInfo(name="train", num_shards=10),
             slice_value=None,
         ),
     ])
@@ -106,15 +106,15 @@ class SplitsUnitTest(tf.test.TestCase):
     # List sorted so always deterministic
     self.assertEqual(self._info(split), [
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='test', num_shards=2),
+            split_info=tfds.core.SplitInfo(name="test", num_shards=2),
             slice_value=slice(30, 40),
         ),
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='train', num_shards=10),
+            split_info=tfds.core.SplitInfo(name="train", num_shards=10),
             slice_value=slice(30, 40),
         ),
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='validation', num_shards=2),
+            split_info=tfds.core.SplitInfo(name="validation", num_shards=2),
             slice_value=slice(None, 15),
         ),
     ])
@@ -125,33 +125,33 @@ class SplitsUnitTest(tf.test.TestCase):
 
     self.assertEqual(self._info(split1), [
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='test', num_shards=2),
+            split_info=tfds.core.SplitInfo(name="test", num_shards=2),
             slice_value=slice(0, 33),
         ),
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='train', num_shards=10),
+            split_info=tfds.core.SplitInfo(name="train", num_shards=10),
             slice_value=slice(0, 33),
         ),
     ])
 
     self.assertEqual(self._info(split2), [
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='test', num_shards=2),
+            split_info=tfds.core.SplitInfo(name="test", num_shards=2),
             slice_value=slice(33, 66),
         ),
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='train', num_shards=10),
+            split_info=tfds.core.SplitInfo(name="train", num_shards=10),
             slice_value=slice(33, 66),
         ),
     ])
 
     self.assertEqual(self._info(split3), [
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='test', num_shards=2),
+            split_info=tfds.core.SplitInfo(name="test", num_shards=2),
             slice_value=slice(66, 100),
         ),
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='train', num_shards=10),
+            split_info=tfds.core.SplitInfo(name="train", num_shards=10),
             slice_value=slice(66, 100),
         ),
     ])
@@ -162,22 +162,22 @@ class SplitsUnitTest(tf.test.TestCase):
 
     self.assertEqual(self._info(split1), [
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='test', num_shards=2),
+            split_info=tfds.core.SplitInfo(name="test", num_shards=2),
             slice_value=slice(0, 66),
         ),
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='train', num_shards=10),
+            split_info=tfds.core.SplitInfo(name="train", num_shards=10),
             slice_value=slice(0, 66),
         ),
     ])
 
     self.assertEqual(self._info(split2), [
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='test', num_shards=2),
+            split_info=tfds.core.SplitInfo(name="test", num_shards=2),
             slice_value=slice(66, 100),
         ),
         splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name='train', num_shards=10),
+            split_info=tfds.core.SplitInfo(name="train", num_shards=10),
             slice_value=slice(66, 100),
         ),
     ])
@@ -227,19 +227,19 @@ class SplitsUnitTest(tf.test.TestCase):
     train = tfds.Split.TRAIN
 
     with self.assertRaisesWithPredicateMatch(
-        NotImplementedError, 'Equality is not implemented'):
+        NotImplementedError, "Equality is not implemented"):
       _ = test.subsplit(tfds.percent[10:]) == test.subsplit(tfds.percent[10:])
 
     with self.assertRaisesWithPredicateMatch(
-        NotImplementedError, 'Equality is not implemented'):
+        NotImplementedError, "Equality is not implemented"):
       _ = test + train == test + train
 
     self.assertEqual(tfds.Split.TEST, tfds.Split.TEST)
-    self.assertEqual(tfds.Split.TEST, 'test')
-    self.assertEqual('test', tfds.Split.TEST)
-    self.assertEqual(tfds.Split.ALL, 'all')
+    self.assertEqual(tfds.Split.TEST, "test")
+    self.assertEqual("test", tfds.Split.TEST)
+    self.assertEqual(tfds.Split.ALL, "all")
 
-    self.assertNotEqual(tfds.Split.ALL, 'test')
+    self.assertNotEqual(tfds.Split.ALL, "test")
     self.assertNotEqual(tfds.Split.ALL, test)
     self.assertNotEqual(train, test)
     self.assertNotEqual(train, train.subsplit(tfds.percent[:50]))
@@ -271,7 +271,7 @@ class SplitsIntegrationTest(tf.test.TestCase):
   @classmethod
   def setUpClass(cls):
     cls._builder = DummyDataset(data_dir=test_utils.make_tmp_dir())
-    cls._builder.download_and_prepare()
+    cls._builder.download_and_prepare(compute_stats=False)
 
   def test_split_all(self):
     split = tfds.Split.ALL
@@ -370,15 +370,15 @@ class SplitsIntegrationTest(tf.test.TestCase):
     # Cannot add a split with himself
     test = tfds.Split.TEST
 
-    with self.assertRaisesWithPredicateMatch(ValueError, 'added with itself'):
+    with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):
       split = test + test
       self._builder.values(split=split)
 
-    with self.assertRaisesWithPredicateMatch(ValueError, 'added with itself'):
+    with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):
       split = test + tfds.Split.ALL
       self._builder.values(split=split)
 
-    with self.assertRaisesWithPredicateMatch(ValueError, 'added with itself'):
+    with self.assertRaisesWithPredicateMatch(ValueError, "added with itself"):
       split = (test.subsplit(tfds.percent[:10]) +
                test.subsplit(tfds.percent[10:]))
       self._builder.values(split=split)
@@ -386,16 +386,48 @@ class SplitsIntegrationTest(tf.test.TestCase):
     # Cannot slice a split twice
 
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'has already been sliced'):
+        ValueError, "has already been sliced"):
       split = test.subsplit(tfds.percent[:10]).subsplit(tfds.percent[:10])
       self._builder.values(split=split)
 
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'has already been sliced'):
+        ValueError, "has already been sliced"):
       split = test.subsplit(tfds.percent[10:]) + tfds.Split.TRAIN
       split = split.subsplit(tfds.percent[:50])
       self._builder.values(split=split)
 
 
-if __name__ == '__main__':
+class SplitsDictTest(tf.test.TestCase):
+
+  @property
+  def split_dict(self):
+    sd = splits.SplitDict()
+    sd.add(SplitInfo(name="train", num_shards=10))
+    sd.add(SplitInfo(name="test", num_shards=1))
+    return sd
+
+  # .add is implicitly tested, since s was created by calling .add
+  def test_get(self):
+    s = self.split_dict["train"]
+    self.assertEqual("train", s.name)
+    self.assertEqual(10, s.num_shards)
+
+  def test_from_proto(self):
+    sd = splits.SplitDict.from_proto(
+        [SplitInfo(name="validation", num_shards=5)])
+    self.assertTrue("validation" in sd)
+    self.assertFalse("train" in sd)
+    self.assertFalse("test" in sd)
+
+  def test_to_proto(self):
+    sd = self.split_dict
+    sdp = sd.to_proto()
+
+    self.assertEqual("test", sdp[0].name)
+    self.assertEqual(1, sdp[0].num_shards)
+
+    self.assertEqual("train", sdp[1].name)
+    self.assertEqual(10, sdp[1].num_shards)
+
+if __name__ == "__main__":
   tf.test.main()

@@ -34,12 +34,9 @@ _MNIST_TRAIN_LABELS_FILENAME = "train-labels-idx1-ubyte.gz"
 _MNIST_TEST_DATA_FILENAME = "t10k-images-idx3-ubyte.gz"
 _MNIST_TEST_LABELS_FILENAME = "t10k-labels-idx1-ubyte.gz"
 _MNIST_IMAGE_SIZE = 28
+_MNIST_IMAGE_SHAPE = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
 _TRAIN_EXAMPLES = 60000
 _TEST_EXAMPLES = 10000
-
-# URL for Fashion MNIST data.
-_FASHION_MNIST_URL = ("http://fashion-mnist.s3-website.eu-central-1"
-                      ".amazonaws.com/")
 
 
 class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
@@ -47,13 +44,21 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
   URL = _MNIST_URL
 
   def _info(self):
-    mnist_shape = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
     return tfds.core.DatasetInfo(
+        name=self.name,
+        description=("The MNIST database of handwritten digits, has a training "
+                     "set of 60,000 examples, and a test set of 10,000 "
+                     "examples."),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=mnist_shape),
+            "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
+        urls=[self.URL],
+        size_in_bytes=11.0 * tfds.core.units.MiB,
+        citation="Y. Lecun and C. Cortes, \"The MNIST database of handwritten "
+                 "digits,\" 1998.\n[Online]. Available: "
+                 "http://yann.lecun.com/exdb/mnist/",
     )
 
   def _split_generators(self, dl_manager):
@@ -115,7 +120,28 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
 
 
 class FashionMNIST(MNIST):
-  URL = _FASHION_MNIST_URL
+  URL = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/"
+
+  # TODO(afrozm): Try to inherit from MNIST's _info and mutate things as needed.
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        name=self.name,
+        description=("Fashion-MNIST is a dataset of Zalando's article images "
+                     "consisting of a training set of 60,000 examples and a "
+                     "test set of 10,000 examples. Each example is a 28x28 "
+                     "grayscale image, associated with a label from 10 "
+                     "classes."),
+        features=tfds.features.FeaturesDict({
+            "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(num_classes=10),
+        }),
+        supervised_keys=("image", "label"),
+        urls=["https://github.com/zalandoresearch/fashion-mnist"],
+        size_in_bytes=29.4 * tfds.core.units.MiB,
+        citation="Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine"
+                 " Learning Algorithms. Han Xiao, Kashif Rasul, Roland "
+                 "Vollgraf. arXiv:1708.07747"
+    )
 
 
 def _extract_mnist_images(image_filepath, num_images):

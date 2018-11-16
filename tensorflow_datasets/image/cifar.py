@@ -46,22 +46,31 @@ _CIFAR100_TEST_FILES = ["test"]
 
 # Shared constants
 _CIFAR_IMAGE_SIZE = 32
+_CIFAR_IMAGE_SHAPE = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
 
 
-# TODO(rsepassi): Add tests
 class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
   """CIFAR-10."""
 
   SIZE = .162  # GB
 
   def _info(self):
-    cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
     return tfds.core.DatasetInfo(
+        name=self.name,
+        description=("The CIFAR-10 dataset consists of 60000 32x32 colour "
+                     "images in 10 classes, with 6000 images per class. There "
+                     "are 50000 training images and 10000 test images."),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=cifar_shape),
+            "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
+        urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
+        size_in_bytes=162.6 * tfds.core.units.MiB,
+        citation=("Learning Multiple Layers of Features from Tiny Images, "
+                  "Alex Krizhevsky, 2009. "
+                  "https://www.cs.toronto.edu/~kriz/"
+                  "learning-features-2009-TR.pdf")
     )
 
   @property
@@ -171,17 +180,30 @@ class Cifar100(Cifar10):
     )
 
   def _info(self):
-    cifar_shape = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
     label_to_use = "coarse_labels" if self._use_coarse_labels else "fine_labels"
     return tfds.core.DatasetInfo(
+        name=self.name,
+        description=("This dataset is just like the CIFAR-10, except it has "
+                     "100 classes containing 600 images each. There are 500 "
+                     "training images and 100 testing images per class. The "
+                     "100 classes in the CIFAR-100 are grouped into 20 "
+                     "superclasses. Each image comes with a \"fine\" label "
+                     "(the class to which it belongs) and a \"coarse\" label "
+                     "(the superclass to which it belongs)."),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=cifar_shape),
+            "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             "label": tfds.features.OneOf(choice=label_to_use, feature_dict={
                 "coarse_labels": tfds.features.ClassLabel(num_classes=20),
                 "fine_labels": tfds.features.ClassLabel(num_classes=100),
             }),
         }),
         supervised_keys=("image", "label"),
+        urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
+        size_in_bytes=161.2 * tfds.core.units.MiB,
+        citation=("Learning Multiple Layers of Features from Tiny Images, "
+                  "Alex Krizhevsky, 2009. "
+                  "https://www.cs.toronto.edu/~kriz/"
+                  "learning-features-2009-TR.pdf")
     )
 
 

@@ -106,7 +106,8 @@ class TestCase(tf.test.TestCase):
     dl_manager.download_and_extract.return_value = self.sample_dir
     dl_manager.extract.return_value = self.sample_dir
     dl_manager.manual_dir = self.sample_dir
-    self.builder.download_and_prepare(dl_manager=dl_manager)
+    self.builder.download_and_prepare(dl_manager=dl_manager,
+                                      compute_stats=False)
 
     split_to_checksums = {}  # {"split": set(records_checksums)}
     for split_name, expected_records_number in self.SPLITS.items():

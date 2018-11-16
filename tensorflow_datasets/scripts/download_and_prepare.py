@@ -21,9 +21,9 @@ from __future__ import print_function
 
 import pdb
 
-import numpy as np
 import tensorflow as tf
 import tensorflow_datasets as tfds
+import termcolor
 
 flags = tf.flags
 FLAGS = flags.FLAGS
@@ -39,83 +39,20 @@ flags.DEFINE_boolean("debug", False,
 flags.DEFINE_boolean("compute_stats", True,
                      "If True, will compute stats after generation")
 
-STATS_STR = """
-Stats
-Dataset: {name}
-Split: {split}
-Count: {count}
-Per-feature stats:
-  {per_feature_stats}
-"""
-
-FEATURE_STATS_STR = """\
-{name}: {dtype} {shape}
-    {stats}\
-"""
-
 
 def main(_):
   builder = tfds.builder(FLAGS.dataset_name, data_dir=FLAGS.data_dir)
   builder.download_and_prepare(cache_dir=FLAGS.cache_dir,
-                               manual_dir=FLAGS.manual_dir)
+                               manual_dir=FLAGS.manual_dir,
+                               compute_stats=FLAGS.compute_stats)
+  termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
 
-  if not FLAGS.compute_stats:
-    return
-  # TODO(rsepassi): Get splits from info
-  for split in [tfds.Split.TRAIN, tfds.Split.TEST]:
-    compute_stats(builder, split)
-
-
-def compute_stats(builder, split):
-  """Print statistics for this split."""
-  dataset = builder.as_dataset(split=split)
   if FLAGS.debug:
+    dataset = builder.as_dataset(split=tfds.Split.TRAIN)
     iterator = tf.contrib.eager.Iterator(dataset)
     pdb.set_trace()
     del iterator
     return
-
-  first_example = None
-  count = 0
-  per_feature_stats = {}
-  for example in dataset:
-    count += 1
-    if first_example is None:
-      first_example = example
-      for k in example:
-        if example[k].dtype == tf.string:
-          continue
-        per_feature_stats[k] = {
-            "min": np.inf,
-            "max": -np.inf,
-        }
-
-    # TODO(rsepassi): Check feature names, types, shapes stay constant and match
-    # DatasetInfo.
-
-    for k in example:
-      if example[k].dtype == tf.string:
-        continue
-      fmin = np.min(example[k].numpy())
-      if fmin < per_feature_stats[k]["min"]:
-        per_feature_stats[k]["min"] = fmin
-      fmax = np.max(example[k].numpy())
-      if fmax > per_feature_stats[k]["max"]:
-        per_feature_stats[k]["max"] = fmax
-
-  per_feature_stats_str = "\n  ".join([
-      FEATURE_STATS_STR.format(
-          name=k,
-          dtype=repr(first_example[k].dtype),
-          shape=first_example[k].shape,
-          stats=v) for k, v in per_feature_stats.items()
-  ])
-  print(
-      STATS_STR.format(
-          name=builder.name,
-          split=split,
-          count=count,
-          per_feature_stats=per_feature_stats_str))
 
 
 if __name__ == "__main__":
