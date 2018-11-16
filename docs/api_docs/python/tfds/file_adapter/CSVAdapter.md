@@ -48,7 +48,7 @@ Constructs CSVAdapter.
 
 feature_types (dict<name, type>): specifies the dtypes of each of the
   features (columns in the CSV file).
-csv_dataset_kwargs (dict): forwarded to `tf.contrib.data.CsvDataset`.
+csv_dataset_kwargs (dict): forwarded to `tf.data.experimental.CsvDataset`.
 csv_writer_ctor (function): takes file handle and returns writer.
 
 

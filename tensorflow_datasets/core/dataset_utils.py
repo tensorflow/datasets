@@ -50,7 +50,13 @@ def build_dataset(instruction_dicts,
 
   def instruction_ds_to_file_ds(instruction):
     """Map from instruction to real datasets."""
+
     samples_ds = dataset_from_file_fn(instruction["filepath"])
+    # TODO(rsepassi): Replace masking with window and flat_map
+    # num, den = sum(mask), len(mask)
+    # Something like (adjusting for nested structure):
+    # samples_ds.window(den).flat_map(lambda ds: ds.take(num))
+
     mask_ds = tf.data.Dataset.from_tensor_slices(instruction["mask"])
     mask_ds = mask_ds.repeat(),
     # Zip the mask and real samples
@@ -74,13 +80,15 @@ def build_dataset(instruction_dicts,
     tensor_inputs = tensor_inputs["filepath"]
     instruction_ds_to_file_ds = dataset_from_file_fn
 
+  # Dataset of filenames (or file instructions)
   dataset = tf.data.Dataset.from_tensor_slices(tensor_inputs)
   if shuffle_files:
     dataset = dataset.shuffle(len(instruction_dicts))
+  # Use interleave to parallel read files and decode records
   dataset = dataset.interleave(
       instruction_ds_to_file_ds,
       cycle_length=parallel_reads,
-      num_parallel_calls=parallel_reads)
+      num_parallel_calls=tf.data.experimental.AUTOTUNE)
   return dataset
 
 

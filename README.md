@@ -31,7 +31,7 @@ print(tfds.list_builders())
 dataset = tfds.load(name="mnist", split=tfds.Split.TRAIN)
 
 # Build your input pipeline
-dataset = dataset.shuffle(1000).batch(128).prefetch(tf.contrib.data.AUTOTUNE)
+dataset = dataset.shuffle(1000).batch(128).prefetch(tf.data.experimental.AUTOTUNE)
 features = dataset.make_oneshot_iterator().get_next()
 image, label = features["image"], features["label"]
 ```

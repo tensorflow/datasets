@@ -114,9 +114,12 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
     files = tf.gfile.ListDirectory(filedir)
     tf.logging.info("Split %s: files found: %d.", split_name, len(files))
     with tf.Graph().as_default():
-      iterator = tf.data.TFRecordDataset([
+      ds = tf.data.TFRecordDataset([
           os.path.join(filedir, x) for x in files
-      ]).map(self._parse_single_video).make_one_shot_iterator().get_next()
+      ])
+      ds = ds.map(self._parse_single_video,
+                  num_parallel_calls=tf.data.experimental.AUTOTUNE)
+      iterator = ds.make_one_shot_iterator().get_next()
       with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         try:

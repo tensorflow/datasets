@@ -34,7 +34,7 @@ landing_page:
         dataset = tfds.load(name="mnist", split=tfds.Split.TRAIN)
 
         # Build your input pipeline
-        dataset = dataset.shuffle(1024).batch(32).prefetch(tf.contrib.data.AUTOTUNE)
+        dataset = dataset.shuffle(1024).batch(32).prefetch(tf.data.experimental.AUTOTUNE)
         for features in dataset.take(1):
           image, label = features["image"], features["label"]
         </pre>

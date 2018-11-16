@@ -61,8 +61,7 @@ class DatasetBuilder(object):
 
   # And then the rest of your input pipeline
   train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
-  # Use tf.contrib.data.AUTOTUNE to automatically optimize the input pipeline
-  train_dataset = train_dataset.prefetch(tf.contrib.data.AUTOTUNE)
+  train_dataset = train_dataset.prefetch(tf.data.experimental.AUTOTUNE)
   features = train_dataset.make_one_shot_iterator().get_next()
   image, label = features['image'], features['label']
   ```
@@ -204,6 +203,10 @@ class DatasetBuilder(object):
            "dataset_builder.download_and_prepare(), or pass download=True to "
            "tfds.load() before trying to access the tf.data.Dataset object."
           ) % (self.name, self._data_dir_root))
+
+    if shuffle_files is None:
+      shuffle_files = split == splits.Split.TRAIN
+
     dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
     if as_supervised:
       if not self.info.supervised_keys:
@@ -211,8 +214,15 @@ class DatasetBuilder(object):
             "as_supervised=True but %s does not support a supervised "
             "(input, label) structure." % self.name)
       input_f, target_f = self.info.supervised_keys
-      dataset = dataset.map(lambda fs: (fs[input_f], fs[target_f]))
-    dataset = dataset.prefetch(tf.contrib.data.AUTOTUNE)
+      dataset = dataset.map(lambda fs: (fs[input_f], fs[target_f]),
+                            num_parallel_calls=tf.data.experimental.AUTOTUNE)
+
+    dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
+
+    # If shuffling, allow pipeline to be non-deterministic
+    options = tf.data.Options()
+    options.experimental_deterministic = not shuffle_files
+    dataset = dataset.with_options(options)
     return dataset
 
   def numpy_iterator(self, **as_dataset_kwargs):
@@ -230,7 +240,7 @@ class DatasetBuilder(object):
     """
     def iterate():
       dataset = self.as_dataset(**as_dataset_kwargs)
-      dataset = dataset.prefetch(tf.contrib.data.AUTOTUNE)
+      dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
       return dataset_utils.iterate_over_dataset(dataset)
 
     if tf.executing_eagerly():
@@ -468,9 +478,6 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
 
   def _as_dataset(self, split=splits.Split.TRAIN, shuffle_files=None):
     # Automatically activate shuffling if training
-    should_shuffle = shuffle_files
-    if shuffle_files is None:
-      should_shuffle = split == splits.Split.TRAIN
     if isinstance(split, six.string_types):
       split = splits.NamedSplit(split)
 
@@ -485,13 +492,14 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
         list_sliced_split_info)
 
     # Load the dataset
-    tf_data = dataset_utils.build_dataset(
+    dataset = dataset_utils.build_dataset(
         instruction_dicts=instruction_dicts,
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
-        shuffle_files=should_shuffle,
+        shuffle_files=shuffle_files,
     )
-    tf_data = tf_data.map(self.info.features.decode_sample)
-    return tf_data
+    dataset = dataset.map(self.info.features.decode_sample,
+                          num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    return dataset
 
   def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
     """Return the list of files and reading mask of the files to read."""

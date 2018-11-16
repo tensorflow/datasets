@@ -107,7 +107,8 @@ class TFRecordExampleAdapter(FileFormatAdapter):
 
   def dataset_from_filename(self, filename):
     dataset = tf.data.TFRecordDataset(filename, buffer_size=int(16 * 1e6))
-    return dataset.map(self._decode)
+    return dataset.map(self._decode,
+                       num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
   def _decode(self, record):
     return tf.parse_single_example(record, self._example_reading_spec)
@@ -145,7 +146,7 @@ class CSVAdapter(FileFormatAdapter):
     Args:
       feature_types (dict<name, type>): specifies the dtypes of each of the
         features (columns in the CSV file).
-      csv_dataset_kwargs (dict): forwarded to `tf.contrib.data.CsvDataset`.
+      csv_dataset_kwargs (dict): forwarded to `tf.data.experimental.CsvDataset`.
       csv_writer_ctor (function): takes file handle and returns writer.
 
     Raises:
@@ -176,8 +177,9 @@ class CSVAdapter(FileFormatAdapter):
         self._csv_writer_ctor)
 
   def dataset_from_filename(self, filename):
-    dataset = tf.contrib.data.CsvDataset(filename, **self._csv_kwargs)
-    return dataset.map(self._decode)
+    dataset = tf.data.experimental.CsvDataset(filename, **self._csv_kwargs)
+    return dataset.map(self._decode,
+                       num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
   def _decode(self, *record):
     return {
