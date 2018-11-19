@@ -86,6 +86,8 @@ class DatasetBuilderTest(tf.test.TestCase):
 
       # Builder's info should also have the above information.
       self.assertTrue(builder.info.initialized)
+      self.assertEqual(20, builder.info.splits[splits.Split.TRAIN].num_examples)
+      self.assertEqual(10, builder.info.splits[splits.Split.TEST].num_examples)
       self.assertEqual(30, builder.info.num_examples)
 
   def test_load(self):

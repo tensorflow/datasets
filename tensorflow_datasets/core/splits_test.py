@@ -20,9 +20,9 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
-from tensorflow_datasets.core.proto import SplitInfo
 import tensorflow_datasets.public_api as tfds
 
 RANGE_TRAIN = list(range(0, 2000))
@@ -402,8 +402,8 @@ class SplitsDictTest(tf.test.TestCase):
   @property
   def split_dict(self):
     sd = splits.SplitDict()
-    sd.add(SplitInfo(name="train", num_shards=10))
-    sd.add(SplitInfo(name="test", num_shards=1))
+    sd.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    sd.add(tfds.core.SplitInfo(name="test", num_shards=1))
     return sd
 
   # .add is implicitly tested, since s was created by calling .add
@@ -414,7 +414,7 @@ class SplitsDictTest(tf.test.TestCase):
 
   def test_from_proto(self):
     sd = splits.SplitDict.from_proto(
-        [SplitInfo(name="validation", num_shards=5)])
+        [proto.SplitInfo(name="validation", num_shards=5)])
     self.assertTrue("validation" in sd)
     self.assertFalse("train" in sd)
     self.assertFalse("test" in sd)
