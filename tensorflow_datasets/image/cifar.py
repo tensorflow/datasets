@@ -52,8 +52,6 @@ _CIFAR_IMAGE_SHAPE = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
 class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
   """CIFAR-10."""
 
-  SIZE = .162  # GB
-
   def _info(self):
     return tfds.core.DatasetInfo(
         name=self.name,
