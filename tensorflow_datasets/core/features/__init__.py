@@ -25,6 +25,7 @@ from tensorflow_datasets.core.features.feature import Tensor
 from tensorflow_datasets.core.features.feature import TensorInfo
 from tensorflow_datasets.core.features.image_feature import Image
 from tensorflow_datasets.core.features.text_feature import Text
+from tensorflow_datasets.core.features.video_feature import Video
 
 __all__ = [
     "text",
@@ -36,4 +37,5 @@ __all__ = [
     "TensorInfo",
     "Image",
     "Text",
+    "Video",
 ]

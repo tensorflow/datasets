@@ -60,27 +60,21 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
     ]
 
   def _info(self):
+    nb_frames = FRAMES_PER_VIDEO
+    features = tfds.features.FeaturesDict({
+        "video_main": tfds.features.Video(shape=(nb_frames, 64, 64, 3)),
+        "video_aux1": tfds.features.Video(shape=(nb_frames, 64, 64, 3)),
+        "action": tfds.features.Tensor(shape=(nb_frames, 4), dtype=tf.float32),
+        "endeffector_pos": tfds.features.Tensor(
+            shape=(nb_frames, 3), dtype=tf.float32),
+    })
     return tfds.core.DatasetInfo(
         name=self.name,
         description="This data set contains roughly 59,000 examples of robot "
         "pushing motions, including one training set (train) and "
         "two test sets of previously seen (testseen) and unseen "
         "(testnovel) objects.",
-        features=tfds.features.FeaturesDict({
-            # TODO(michalski): replace with Video feature.
-            "video_main":
-                tfds.features.Tensor(
-                    shape=(FRAMES_PER_VIDEO, 64, 64, 3), dtype=tf.uint8),
-            "video_aux1":
-                tfds.features.Tensor(
-                    shape=(FRAMES_PER_VIDEO, 64, 64, 3), dtype=tf.uint8),
-            "action":
-                tfds.features.Tensor(
-                    shape=(FRAMES_PER_VIDEO, 4), dtype=tf.float32),
-            "endeffector_pos":
-                tfds.features.Tensor(
-                    shape=(FRAMES_PER_VIDEO, 3), dtype=tf.float32),
-        }),
+        features=features,
         urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
         size_in_bytes=30.0 * tfds.units.GiB,
         citation="Unsupervised Learning for Physical Interaction through Video "
