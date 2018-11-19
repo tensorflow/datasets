@@ -14,6 +14,7 @@ then this document is for you.
 *   [Specifying how the data should be split](#specifying-how-the-data-should-be-split)
 *   [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
     *   [File access and tf.gfile](#file-access-and-tfgfile)
+*   [Adding Features](#adding-features)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 
 ## Overview
@@ -139,21 +140,33 @@ approximate size of the dataset. For example:
 ```python
 class MyDataset(tfds.core.GeneratorBasedDatasetBuilder):
 
-  SIZE = 10 # Dataset size in GiB.
-
   def _info(self):
     return tfds.core.DatasetInfo(
+        name=self.name,
+        description=("This is the dataset for xxx. It contains yyy. The "
+                     "images are kept at their original dimensions."),
+        # Features specify the shape and dtype of the loaded data, as returned
+        # by tf.data.Dataset. It also abstract the encoding/decoding of the
+        # data into disk.
         features=tfds.features.FeaturesDict({
             "image_description": tfds.features.Text(),
             "image": tfds.features.Image(),
             # Here, labels can be of 5 distinct values.
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
+        # When using .as_dataset(split=..., as_supervised=True), a tuple
+        # (input_feature, output_feature) will be returned instead of the
+        # full dict.
+        # This is useful as this correspond to Keras input format.
+        supervised_keys=("image", "label"),
+        # Homepage of the dataset. Not used anywhere except for documentation
+        urls=["https://dataset-homepage.org"],
+        # Approximate dataset size (used to raise warning before download).
+        size_in_bytes=162.6 * tfds.units.MiB,
+        # Citation to use for using this dataset
+        citation="Dataset Paper Title, A. Smith, 2009.",
     )
 ```
-
-The dictionary defined here defines the dictionary returned by
-`tf.data.Dataset`.
 
 The features are what defines the shape of the loaded data. Have a look at the
 [features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
@@ -254,6 +267,60 @@ At this point, your builder test should pass.
 In order to support Cloud storage systems, all file access must use `tf.gfile`
 or other TensorFlow file APIs (for example, `tf.python_io`). Python built-ins
 for file operations (e.g. `open`, `os.rename`, `gzip`, etc.) must be avoided.
+
+## Adding Features
+
+The main intuition behind Feature is that what you defines in DatasetInfo should
+match what is returned by the `tf.data.Dataset` object. For instance, with:
+
+```
+tfds.DatasetInfo(features=tfds.features.FeatureDict({
+    'input': tfds.features.Image(),
+    'output': tfds.features.Text(encoder=tfds.text.ByteEncoder()),
+    'metadata': {
+        'description': tfds.features.Text(),
+        'img_id': tf.int32,
+    },
+}))
+```
+
+The `tf.data.Dataset` object associated with the defined info will be:
+
+```
+{
+    'input': tf.Tensor(shape=(None, None, 3), dtype=tf.uint8),
+    'output': tf.Tensor(shape=(None,), dtype=tf.int32),  # Sequence of token ids
+    'metadata': {
+        'lang': tf.Tensor(shape=(), dtype=tf.string),
+        'img_path': tf.Tensor(shape=(), dtype=tf.int32),
+    },
+}
+```
+
+The `tfds.features.FeatureConnector` object abstracts the way the feature is
+internally encoded on disk from how it is presented to the user. To create a new
+feature, you need to subclass `tfds.features.FeatureConnector` and overwrite the
+following methods:
+
+*   `get_tensor_info()`: Indicates the shape/dtype of the tensor(s) returned by
+    `tf.data.Dataset`
+*   `encode_sample(input_data)`: Defines how to encode the data given in the
+    generator `_generate_samples()` into a `tf.train.Example` compatible data
+*   `decode_sample`: Defines how to decode the data from the tensor read from
+    `tf.train.Example` into user tensor returned by `tf.data.Dataset`.
+*   (optionally) `get_serialized_info()`: If the info returned by
+    `get_tensor_info()` is different from how the data are actually written on
+    disk, then you need to overwrite `get_serialized_info()` to match the specs
+    of the `tf.train.Example`
+
+If your feature is a container of sub-features, you may want to inherit from
+`tfds.features.FeatureDict` instead and call `super().encode_sample` and
+`super().decode_sample` to reuse boilerplate code when dealing with nested
+features.
+
+Have a look at the
+[features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
+for examples.
 
 ## Large datasets and distributed generation
 
