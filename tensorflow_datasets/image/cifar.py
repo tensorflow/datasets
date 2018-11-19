@@ -66,7 +66,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
-        size_in_bytes=162.6 * tfds.core.units.MiB,
+        size_in_bytes=162.6 * tfds.units.MiB,
         citation=("Learning Multiple Layers of Features from Tiny Images, "
                   "Alex Krizhevsky, 2009. "
                   "https://www.cs.toronto.edu/~kriz/"
@@ -199,7 +199,7 @@ class Cifar100(Cifar10):
         }),
         supervised_keys=("image", "label"),
         urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
-        size_in_bytes=161.2 * tfds.core.units.MiB,
+        size_in_bytes=161.2 * tfds.units.MiB,
         citation=("Learning Multiple Layers of Features from Tiny Images, "
                   "Alex Krizhevsky, 2009. "
                   "https://www.cs.toronto.edu/~kriz/"

@@ -82,7 +82,7 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
                     shape=(FRAMES_PER_VIDEO, 3), dtype=tf.float32),
         }),
         urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
-        size_in_bytes=30.0 * tfds.core.units.GiB,
+        size_in_bytes=30.0 * tfds.units.GiB,
         citation="Unsupervised Learning for Physical Interaction through Video "
         " Prediction. Chelsea Finn, Ian Goodfellow, Sergey Levine",
     )

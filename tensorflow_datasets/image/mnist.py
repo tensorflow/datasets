@@ -55,7 +55,7 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=[self.URL],
-        size_in_bytes=11.0 * tfds.core.units.MiB,
+        size_in_bytes=11.0 * tfds.units.MiB,
         citation="Y. Lecun and C. Cortes, \"The MNIST database of handwritten "
                  "digits,\" 1998.\n[Online]. Available: "
                  "http://yann.lecun.com/exdb/mnist/",
@@ -137,7 +137,7 @@ class FashionMNIST(MNIST):
         }),
         supervised_keys=("image", "label"),
         urls=["https://github.com/zalandoresearch/fashion-mnist"],
-        size_in_bytes=29.4 * tfds.core.units.MiB,
+        size_in_bytes=29.4 * tfds.units.MiB,
         citation="Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine"
                  " Learning Algorithms. Han Xiao, Kashif Rasul, Roland "
                  "Vollgraf. arXiv:1708.07747"

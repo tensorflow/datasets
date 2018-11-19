@@ -21,6 +21,7 @@ from tensorflow_datasets import core
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter as file_adapter
+from tensorflow_datasets.core import units
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
 from tensorflow_datasets.core.registered import list_builders
@@ -33,6 +34,7 @@ __all__ = [
     "download",
     "features",
     "file_adapter",
+    "units",
     "GenerateMode",
     "builder",
     "list_builders",
