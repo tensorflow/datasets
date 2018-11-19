@@ -49,8 +49,8 @@ class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
                 tfds.features.Image(
                     shape=(178, 218, 3), encoding_format="jpeg")
         }),
-        urls=[IMG_ALIGNED_DATA],
-        size_in_bytes=2 * tfds.core.units.GiB,
+        urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],
+        size_in_bytes=2 * tfds.units.GiB,
         citation="Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang "
         "Deep Learning Face Attributes in the Wild "
         "ICCV 2015")
