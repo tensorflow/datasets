@@ -178,8 +178,6 @@ class DatasetBuilder(object):
     # Write DatasetInfo to disk, even if we haven't computed the statistics.
     self.info.write_to_directory(self._data_dir)
 
-  # TODO(rsepassi): Make it easy to further shard the TRAIN data (e.g. for
-  # synthetic VALIDATION splits).
   @api_utils.disallow_positional_args
   def as_dataset(self,
                  split,
