@@ -67,7 +67,6 @@ class DatasetBuilderTest(tf.test.TestCase):
       ]
       # The data_dir contains the cached directory by default
       expected_filepaths = builder._build_split_filenames(
-          data_dir=builder._data_dir,
           split_info_list=builder.info.splits.values())
       expected_filepaths.append(
           os.path.join(builder._data_dir, "dataset_info.json"))

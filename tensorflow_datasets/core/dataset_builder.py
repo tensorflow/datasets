@@ -154,7 +154,6 @@ class DatasetBuilder(object):
     curr_date = datetime.datetime.now()
     version_str = curr_date.strftime("v_%Y%m%d_%H%M")
     data_dir = self._get_data_dir(version=version_str)
-    self._data_dir = None
     tf.logging.info("Generating dataset %s (%s)", self.name, data_dir)
 
     # Print is intentional: we want this to always go to stdout so user has
@@ -166,10 +165,13 @@ class DatasetBuilder(object):
 
     # Wrap the Dataset generation in a .incomplete directory
     with file_format_adapter.incomplete_dir(data_dir) as data_dir_tmp:
-      self._download_and_prepare(dl_manager=dl_manager, data_dir=data_dir_tmp)
+      # Modify the data_dir here to avoid having to forward it to every sub
+      # function
+      self._data_dir = data_dir_tmp
+      self._download_and_prepare(dl_manager=dl_manager)
+      self._data_dir = data_dir
 
     # Update the DatasetInfo metadata by computing statistics from the data.
-    self._data_dir = data_dir
     if compute_stats:
       # Update the info object with the statistics and schema.
       # Note: self.info already contains static information about the dataset
@@ -296,7 +298,7 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _download_and_prepare(self, dl_manager, data_dir):
+  def _download_and_prepare(self, dl_manager):
     """Downloads and prepares dataset for reading.
 
     This is the internal implementation to overwritte called when user call
@@ -306,7 +308,6 @@ class DatasetBuilder(object):
     Args:
       dl_manager: (DownloadManager) `DownloadManager` used to download and cache
         data.
-      data_dir: (str) Temporary folder on which generating the data
     """
     raise NotImplementedError
 
@@ -445,9 +446,9 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     """
     raise NotImplementedError()
 
-  def _download_and_prepare(self, dl_manager, data_dir):
-    if not tf.gfile.Exists(data_dir):
-      tf.gfile.MakeDirs(data_dir)
+  def _download_and_prepare(self, dl_manager):
+    if not tf.gfile.Exists(self._data_dir):
+      tf.gfile.MakeDirs(self._data_dir)
 
     # Generating datata for all splits
     split_dict = splits.SplitDict()
@@ -462,7 +463,6 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
           **split_generator.gen_kwargs
       )
       output_files = self._build_split_filenames(
-          data_dir=data_dir,
           split_info_list=split_generator.split_info_list,
       )
       self._file_format_adapter.write_from_generator(
@@ -507,7 +507,6 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     for sliced_split_info in list_sliced_split_info:
       # Compute filenames from the given split
       for filepath in self._build_split_filenames(
-          data_dir=self._data_dir,
           split_info_list=[sliced_split_info.split_info],
       ):
         mask = splits.slice_to_percent_mask(sliced_split_info.slice_value)
@@ -517,11 +516,13 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
         })
     return instruction_dicts
 
-  def _build_split_filenames(self, data_dir, split_info_list):
+  def _build_split_filenames(self, split_info_list):
     """Construct the split filenames associated with the split info.
 
+    The filenames correspond to the pre-processed datasets files present in
+    the root directory of the dataset.
+
     Args:
-      data_dir: (str) Root directory of the filenames
       split_info_list: (list[SplitInfo]) List of split from which generate the
         filenames
 
@@ -536,7 +537,7 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
           dataset_name=self.name,
           split=split_info.name,
           num_shards=split_info.num_shards,
-          data_dir=data_dir,
+          data_dir=self._data_dir,
           filetype_suffix=self._file_format_adapter.filetype_suffix,
       ))
     return filenames
