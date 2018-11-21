@@ -47,7 +47,7 @@ class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(
-                    shape=(178, 218, 3), encoding_format="jpeg")
+                    shape=(218, 178, 3), encoding_format="jpeg")
         }),
         urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],
         size_in_bytes=2 * tfds.units.GiB,

@@ -34,7 +34,7 @@ class CelebATest(dataset_builder_testing.TestCase):
   }
 
   SPEC = {
-      "image": (tf.uint8, (178, 218, 3)),
+      "image": (tf.uint8, (218, 178, 3)),
   }
 
 
