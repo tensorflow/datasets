@@ -179,11 +179,25 @@ class DatasetInfo(object):
 
   @property
   def num_examples(self):
-    return sum(s.num_examples for s in self.splits.values())
+    return sum(self.examples_per_split().values())
 
   @property
   def initialized(self):
     return self._fully_initialized
+
+  # TODO(epot): Wrap SplitInfo into a class and expose num_samples.
+  def examples_per_split(self):
+    """Returns a dict of split name and number of samples."""
+    if not self._fully_initialized:
+      raise tf.errors.FailedPreconditionError(
+          "Please call `compute_dynamic_properties` first to initialize the"
+          " dynamic properties in DatasetInfo.")
+
+    examples_per_split = {}
+    for split_info in self._info_proto.splits:
+      examples_per_split[split_info.name] = split_info.statistics.num_examples
+
+    return examples_per_split
 
   def _dataset_info_filename(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
@@ -193,7 +207,7 @@ class DatasetInfo(object):
       f.write(json_format.MessageToJson(self._info_proto))
 
   def compute_dynamic_properties(self, builder):
-    update_dataset_info(builder, self)
+    update_dataset_info(builder, self.as_proto)
     self._fully_initialized = True
 
   def read_from_directory(self, dataset_info_dir):
@@ -388,7 +402,7 @@ def get_dataset_feature_statistics(builder, split):
 def update_dataset_info(builder, info):
   """Fill statistics in `info` by going over the dataset in the `builder`."""
   # Fill other things by going over the dataset.
-  for split_info in info.splits.values():
+  for split_info in info.splits:
     try:
       split_name = split_info.name
       # Fill DatasetFeatureStatistics.
@@ -399,7 +413,7 @@ def update_dataset_info(builder, info):
       split_info.statistics.CopyFrom(dataset_feature_statistics)
 
       # Set the schema at the top-level since this is independent of the split.
-      info.as_proto.schema.CopyFrom(schema)
+      info.schema.CopyFrom(schema)
 
     except tf.errors.InvalidArgumentError as e:
       # This means there is no such split, even though it was specified in the
