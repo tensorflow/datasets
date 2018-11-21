@@ -285,6 +285,10 @@ class FeaturesDict(FeatureConnector):
     super(FeaturesDict, self).__init__()
     self._feature_dict = {k: to_feature(v) for k, v in feature_dict.items()}
 
+  def __getitem__(self, key):
+    """Return the feature associated with the key."""
+    return self._feature_dict[key]
+
   def get_tensor_info(self):
     """See base class for details."""
     return {
