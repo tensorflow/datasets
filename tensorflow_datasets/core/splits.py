@@ -27,8 +27,8 @@ import six
 from six.moves import range  # pylint: disable=redefined-builtin
 from six.moves import zip  # pylint: disable=redefined-builtin
 
+from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.proto import SplitInfo
 
 __all__ = [
     "NamedSplit",
@@ -37,6 +37,15 @@ __all__ = [
     "SplitGenerator",
     "SplitInfo",
 ]
+
+
+@utils.as_proto_cls(proto.SplitInfo)
+class SplitInfo(object):
+  """Similar structure as `proto.SplitInfo` but with additional property."""
+
+  @property
+  def num_examples(self):
+    return self.statistics.num_examples
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -420,13 +429,16 @@ class SplitDict(utils.NonMutableDict):
   def from_proto(cls, repeated_split_infos):
     """Returns a new SplitDict initialized from the `repeated_split_infos`."""
     split_dict = cls()
-    for s in repeated_split_infos:
-      split_dict.add(s)
+    for split_info_proto in repeated_split_infos:
+      split_info = SplitInfo()
+      split_info.CopyFrom(split_info_proto)
+      split_dict.add(split_info)
     return split_dict
 
   def to_proto(self):
     """Returns a list of SplitInfo protos that we have."""
-    return sorted(self.values(), key=lambda split_info: split_info.name)
+    # Return the proto.SplitInfo, sorted by name
+    return sorted((s.get_proto() for s in self.values()), key=lambda s: s.name)
 
 
 class SplitGenerator(object):

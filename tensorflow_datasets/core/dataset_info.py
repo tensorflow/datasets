@@ -125,6 +125,11 @@ class DatasetInfo(object):
 
   @property
   def as_proto(self):
+    # Update the proto to ensure it contains every SplitDict external updates.
+    del self._info_proto.splits[:]  # Clear previous messages
+    for split_info in self._splits.to_proto():
+      self._info_proto.splits.add().CopyFrom(split_info)
+
     return self._info_proto
 
   @property
@@ -165,10 +170,6 @@ class DatasetInfo(object):
     # Update the dictionary representation.
     self._splits = split_dict
 
-    # Update the proto representation.
-    for split_info in self._splits.to_proto():
-      self._info_proto.splits.add().CopyFrom(split_info)
-
   @property
   def urls(self):
     return self._info_proto.location.urls
@@ -179,35 +180,22 @@ class DatasetInfo(object):
 
   @property
   def num_examples(self):
-    return sum(self.examples_per_split().values())
+    return sum(s.num_examples for s in self.splits.values())
 
   @property
   def initialized(self):
     return self._fully_initialized
 
-  # TODO(epot): Wrap SplitInfo into a class and expose num_samples.
-  def examples_per_split(self):
-    """Returns a dict of split name and number of samples."""
-    if not self._fully_initialized:
-      raise tf.errors.FailedPreconditionError(
-          "Please call `compute_dynamic_properties` first to initialize the"
-          " dynamic properties in DatasetInfo.")
-
-    examples_per_split = {}
-    for split_info in self._info_proto.splits:
-      examples_per_split[split_info.name] = split_info.statistics.num_examples
-
-    return examples_per_split
-
   def _dataset_info_filename(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
   def write_to_directory(self, dataset_info_dir):
+
     with tf.gfile.Open(self._dataset_info_filename(dataset_info_dir), "w") as f:
-      f.write(json_format.MessageToJson(self._info_proto))
+      f.write(json_format.MessageToJson(self.as_proto))
 
   def compute_dynamic_properties(self, builder):
-    update_dataset_info(builder, self.as_proto)
+    update_dataset_info(builder, self)
     self._fully_initialized = True
 
   def read_from_directory(self, dataset_info_dir):
@@ -402,7 +390,7 @@ def get_dataset_feature_statistics(builder, split):
 def update_dataset_info(builder, info):
   """Fill statistics in `info` by going over the dataset in the `builder`."""
   # Fill other things by going over the dataset.
-  for split_info in info.splits:
+  for split_info in info.splits.values():
     try:
       split_name = split_info.name
       # Fill DatasetFeatureStatistics.
@@ -413,7 +401,7 @@ def update_dataset_info(builder, info):
       split_info.statistics.CopyFrom(dataset_feature_statistics)
 
       # Set the schema at the top-level since this is independent of the split.
-      info.schema.CopyFrom(schema)
+      info.as_proto.schema.CopyFrom(schema)
 
     except tf.errors.InvalidArgumentError as e:
       # This means there is no such split, even though it was specified in the
