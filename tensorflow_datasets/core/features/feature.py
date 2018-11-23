@@ -498,19 +498,15 @@ def to_serialized_field(tensor_info):
   # Select the type
   dtype = tensor_info.dtype
 
-  # TODO(epot): Better way of detecting a int/float ?
-  if tensor_info.dtype in (
-      tf.int8,
-      tf.uint8,
-      tf.uint16,
-      tf.uint32,
-      tf.uint64,
-      tf.int16,
-      tf.int32,
-  ):
+  # TODO(b/119937875): TF Examples proto only support int64, float32 and string
+  # This create limitation like float64 downsampled to float32, bool converted
+  # to int64 which is space ineficient, no support for complexes or quantized
+  if tensor_info.dtype.is_integer or tensor_info.dtype.is_bool:
     dtype = tf.int64
-  elif tensor_info.dtype in (tf.float16, tf.float64):
+  elif tensor_info.dtype.is_floating:
     dtype = tf.float32
+  # It seems quite space inefficient to convert bool to int64
+  # We may want to add support for complex, quantize dtype in the future
 
   # TFRecord only support 3 types
   if dtype not in (tf.int64, tf.float32, tf.string):
