@@ -66,6 +66,12 @@ class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
         ),
     ]
 
+  def text_conversion_test(self):
+    text = features.Text(encoder=text_encoder.ByteTextEncoder())
+
+    self.assertEqual(text.str2ints(u'你好'), [228, 189, 160, 229, 165, 189])
+    self.assertEqual(text.ints2str([228, 189, 160, 229, 165, 189]), u'你好')
+
 
 if __name__ == '__main__':
   tf.test.main()

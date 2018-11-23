@@ -46,6 +46,20 @@ class Text(feature.FeatureConnector):
   def vocab_size(self):
     return self.encoder and self.encoder.vocab_size
 
+  def str2ints(self, str_value):
+    """Conversion list[int] => decoded string."""
+    if not self._encoder:
+      raise ValueError(
+          "Text.str2ints is not available because encoder hasn't been defined.")
+    return self._encoder.encode(tf.compat.as_text(str_value))
+
+  def ints2str(self, int_values):
+    """Conversion string => encoded list[int]."""
+    if not self._encoder:
+      raise ValueError(
+          "Text.ints2str is not available because encoder hasn't been defined.")
+    return self._encoder.decode(int_values)
+
   def get_tensor_info(self):
     if self.encoder:
       return feature.TensorInfo(shape=(None,), dtype=tf.int64)
