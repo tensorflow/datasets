@@ -93,7 +93,7 @@ from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 
 
-TensorInfo = collections.namedtuple('TensorInfo', ['dtype', 'shape'])
+TensorInfo = collections.namedtuple('TensorInfo', ['shape', 'dtype'])
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -213,6 +213,17 @@ class FeatureConnector(object):
       return list(features)
     return None
 
+  def __repr__(self):
+    """Display the feature dictionary."""
+    tensor_info = self.get_tensor_info()
+    if isinstance(tensor_info, TensorInfo):
+      return '{}(shape={}, dtype={!r})'.format(
+          type(self).__name__,
+          tensor_info.shape,
+          tensor_info.dtype,
+      )
+    return '{}({})'.format(type(self).__name__, tensor_info)
+
 
 class FeaturesDict(FeatureConnector):
   """Main feature connector orchestrator.
@@ -288,6 +299,10 @@ class FeaturesDict(FeatureConnector):
   def __getitem__(self, key):
     """Return the feature associated with the key."""
     return self._feature_dict[key]
+
+  def __repr__(self):
+    """Display the feature dictionary."""
+    return '{}({})'.format(type(self).__name__, self._feature_dict)
 
   def get_tensor_info(self):
     """See base class for details."""
