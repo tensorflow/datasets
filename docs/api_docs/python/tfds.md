@@ -27,6 +27,8 @@ Each dataset is defined as a <a href="./tfds/core/DatasetBuilder.md"><code>tfds.
 
 [`file_adapter`](./tfds/file_adapter.md) module: FileFormatAdapters for GeneratorBasedDatasetBuilder.
 
+[`units`](./tfds/units.md) module: Defines convenience constants/functions for converting various units.
+
 ## Classes
 
 [`class GenerateMode`](./tfds/download/GenerateMode.md): Enum for the different version conflict resolution modes.

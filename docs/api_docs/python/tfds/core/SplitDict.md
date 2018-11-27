@@ -5,8 +5,8 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="__setitem__"/>
 <meta itemprop="property" content="add"/>
-<meta itemprop="property" content="from_json_data"/>
-<meta itemprop="property" content="to_json_data"/>
+<meta itemprop="property" content="from_proto"/>
+<meta itemprop="property" content="to_proto"/>
 <meta itemprop="property" content="update"/>
 </div>
 
@@ -61,21 +61,25 @@ add(split_info)
 
 Add the split info.
 
-<h3 id="from_json_data"><code>from_json_data</code></h3>
+<h3 id="from_proto"><code>from_proto</code></h3>
 
 ``` python
-from_json_data(split_data)
+@classmethod
+from_proto(
+    cls,
+    repeated_split_infos
+)
 ```
 
-Restore the splits info from the written metadata file.
+Returns a new SplitDict initialized from the `repeated_split_infos`.
 
-<h3 id="to_json_data"><code>to_json_data</code></h3>
+<h3 id="to_proto"><code>to_proto</code></h3>
 
 ``` python
-to_json_data()
+to_proto()
 ```
 
-Export the metadata for json export.
+Returns a list of SplitInfo protos that we have.
 
 <h3 id="update"><code>update</code></h3>
 

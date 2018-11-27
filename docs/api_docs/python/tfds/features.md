@@ -27,9 +27,11 @@ Public tfds.features API.
 
 [`class Tensor`](../tfds/features/Tensor.md): Feature encoding a tf.Tensor value (both fixed and variable).
 
-[`class TensorInfo`](../tfds/features/TensorInfo.md): TensorInfo(dtype, shape)
+[`class TensorInfo`](../tfds/features/TensorInfo.md): TensorInfo(shape, dtype)
 
 [`class Image`](../tfds/features/Image.md): Feature which encode/decode an image.
 
 [`class Text`](../tfds/features/Text.md): Feature which encodes/decodes text, possibly to integers.
+
+[`class Video`](../tfds/features/Video.md): Feature which encode/decode a video.
 

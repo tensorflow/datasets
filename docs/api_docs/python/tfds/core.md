@@ -25,5 +25,5 @@ tensorflow_datasets.core.
 
 [`class SplitGenerator`](../tfds/core/SplitGenerator.md): Defines the split info for the generator.
 
-[`class SplitInfo`](../tfds/core/SplitInfo.md): SplitInfo(name, num_shards)
+[`class SplitInfo`](../tfds/core/SplitInfo.md)
 

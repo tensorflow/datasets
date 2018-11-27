@@ -1,44 +1,62 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
-<meta itemprop="name" content="tfds.features.Text" />
+<meta itemprop="name" content="tfds.features.Video" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="encoder"/>
 <meta itemprop="property" content="shape"/>
-<meta itemprop="property" content="vocab_size"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_sample"/>
 <meta itemprop="property" content="encode_sample"/>
 <meta itemprop="property" content="get_serialized_features"/>
 <meta itemprop="property" content="get_tensor_info"/>
-<meta itemprop="property" content="ints2str"/>
-<meta itemprop="property" content="str2ints"/>
 <meta itemprop="property" content="serialized_keys"/>
 </div>
 
-# tfds.features.Text
+# tfds.features.Video
 
-## Class `Text`
+## Class `Video`
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
+Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 
 
-Defined in [`core/features/text_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py).
+Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
 
-Feature which encodes/decodes text, possibly to integers.
+Feature which encode/decode a video.
+
+Video: The image connector accepts as input:
+  * uint8 array representing an video.
+
+Output:
+  video: tf.Tensor of type tf.uint8 and shape [num_frames, height, width, 3]
+
+Example:
+  * In the DatasetInfo object:
+    features=features.FeatureDict({
+        'video': features.Video(shape=(None, 64, 64, 3)),
+    })
+
+  * During generation:
+    yield self.info.features.encode_sample({
+        'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
+    })
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(encoder=None)
+__init__(shape)
 ```
 
-Constructs a Text FeatureConnector.
+Construct the connector.
 
 #### Args:
 
-* <b>`encoder`</b>: `TextEncoder`, an encoder that can convert text to integers.
-    If None, the text will be utf-8 byte-encoded.
+* <b>`shape`</b>: tuple of ints, the shape of the video (num_frames, height, width,
+    channels=3).
+
+
+#### Raises:
+
+* <b>`ValueError`</b>: If the shape is invalid
 
 
 
@@ -48,17 +66,9 @@ Constructs a Text FeatureConnector.
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="encoder"><code>encoder</code></h3>
-
-
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
-
-<h3 id="vocab_size"><code>vocab_size</code></h3>
-
-
 
 
 
@@ -70,7 +80,7 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_sample(tfexample_data)
 ```
 
-
+See base class for details.
 
 <h3 id="encode_sample"><code>encode_sample</code></h3>
 
@@ -78,7 +88,7 @@ decode_sample(tfexample_data)
 encode_sample(sample_data)
 ```
 
-
+See base class for details.
 
 <h3 id="get_serialized_features"><code>get_serialized_features</code></h3>
 
@@ -117,23 +127,7 @@ If not defined, the retuned values are automatically deduced from the
 get_tensor_info()
 ```
 
-
-
-<h3 id="ints2str"><code>ints2str</code></h3>
-
-``` python
-ints2str(int_values)
-```
-
-Conversion string => encoded list[int].
-
-<h3 id="str2ints"><code>str2ints</code></h3>
-
-``` python
-str2ints(str_value)
-```
-
-Conversion list[int] => decoded string.
+See base class for details.
 
 
 

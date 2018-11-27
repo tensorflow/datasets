@@ -1,9 +1,11 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.core.SplitInfo" />
 <meta itemprop="path" content="Stable" />
-<meta itemprop="property" content="name"/>
-<meta itemprop="property" content="num_shards"/>
-<meta itemprop="property" content="__new__"/>
+<meta itemprop="property" content="num_examples"/>
+<meta itemprop="property" content="__eq__"/>
+<meta itemprop="property" content="__getattr__"/>
+<meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="get_proto"/>
 </div>
 
 # tfds.core.SplitInfo
@@ -14,32 +16,54 @@
 
 
 
-Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
+Defined in [`core/utils/py_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/py_utils.py).
 
-SplitInfo(name, num_shards)
 
-<h2 id="__new__"><code>__new__</code></h2>
+
+<h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-@staticmethod
-__new__(
-    _cls,
-    name,
-    num_shards
+__init__(
+    *args,
+    **kwargs
 )
 ```
 
-Create new instance of SplitInfo(name, num_shards)
+
 
 
 
 ## Properties
 
-<h3 id="name"><code>name</code></h3>
+<h3 id="num_examples"><code>num_examples</code></h3>
 
 
 
-<h3 id="num_shards"><code>num_shards</code></h3>
+
+
+## Methods
+
+<h3 id="__eq__"><code>__eq__</code></h3>
+
+``` python
+__eq__(other)
+```
+
+
+
+<h3 id="__getattr__"><code>__getattr__</code></h3>
+
+``` python
+__getattr__(attr_name)
+```
+
+
+
+<h3 id="get_proto"><code>get_proto</code></h3>
+
+``` python
+get_proto()
+```
 
 
 

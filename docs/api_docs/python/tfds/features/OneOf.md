@@ -3,6 +3,7 @@
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="shape"/>
+<meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_sample"/>
 <meta itemprop="property" content="encode_sample"/>
@@ -88,6 +89,14 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 
 ## Methods
+
+<h3 id="__getitem__"><code>__getitem__</code></h3>
+
+``` python
+__getitem__(key)
+```
+
+Return the feature associated with the key.
 
 <h3 id="decode_sample"><code>decode_sample</code></h3>
 

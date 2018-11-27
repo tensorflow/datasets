@@ -5,7 +5,6 @@
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="numpy_iterator"/>
-<meta itemprop="property" content="SIZE"/>
 <meta itemprop="property" content="info"/>
 <meta itemprop="property" content="name"/>
 </div>
@@ -90,7 +89,8 @@ download_and_prepare(
     cache_dir=None,
     manual_dir=None,
     mode=None,
-    dl_manager=None
+    dl_manager=None,
+    compute_stats=True
 )
 ```
 
@@ -110,6 +110,8 @@ Subclasses must override _download_and_prepare.
 * <b>`dl_manager`</b>: <a href="../../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a> DownloadManager to use
    instead of the default one. If set, none of the cache_dir, manual_dir,
    mode should be set.
+* <b>`compute_stats`</b>: `boolean` If True, compute statistics over the generated
+    data and write the <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> protobuf to disk.
 
 
 #### Raises:
@@ -140,8 +142,6 @@ Generator yielding feature dictionaries
 
 
 ## Class Members
-
-<h3 id="SIZE"><code>SIZE</code></h3>
 
 <h3 id="info"><code>info</code></h3>
 
