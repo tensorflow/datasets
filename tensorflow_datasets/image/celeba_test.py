@@ -35,6 +35,12 @@ class CelebATest(dataset_builder_testing.TestCase):
 
   SPEC = {
       "image": (tf.uint8, (218, 178, 3)),
+      # TODO(b/120124306) : seems that the spec doesn't support hierarchy.
+      #                     uncomment after it is supported.
+      #      "landmarks/lefteye_x": (tf.int64, None),
+      #      "landmarks/redeye_x": (tf.int64, None),
+      #      "landmarks/nose_x": (tf.int64, None)
+      #      "attributes/Black_Hair": (tf.int64, None)
   }
 
 

@@ -31,12 +31,32 @@ import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = ("https://drive.google.com/uc?export=download&"
                     "id=0B7EVK8r0v71pZjFTYXZWM3FlRnM")
+EVAL_LIST = ("https://drive.google.com/uc?export=download&"
+             "id=0B7EVK8r0v71pY0NSMzRuSXJEVkk")
+# Landmark coordinates: left_eye, right_eye etc.
+LANDMARKS_DATA = ("https://drive.google.com/uc?export=download&"
+                  "id=0B7EVK8r0v71pd0FJY3Blby1HUTQ")
 
-EVAL_LIST = ("TODO")
+# Attributes in the image (Eyeglasses, Mustache etc).
+ATTR_DATA = ("https://drive.google.com/uc?export=download&"
+             "id=0B7EVK8r0v71pblRyaVFSWGxPY0U")
+
+LANDMARK_HEADINGS = ("lefteye_x lefteye_y righteye_x righteye_y "
+                     "nose_x nose_y leftmouth_x leftmouth_y rightmouth_x "
+                     "rightmouth_y").split()
+ATTR_HEADINGS = (
+    "5_o_Clock_Shadow Arched_Eyebrows Attractive Bags_Under_Eyes Bald Bangs "
+    "Big_Lips Big_Nose Black_Hair Blond_Hair Blurry Brown_Hair "
+    "Bushy_Eyebrows Chubby Double_Chin Eyeglasses Goatee Gray_Hair "
+    "Heavy_Makeup High_Cheekbones Male Mouth_Slightly_Open Mustache "
+    "Narrow_Eyes No_Beard Oval_Face Pale_Skin Pointy_Nose Receding_Hairline "
+    "Rosy_Cheeks Sideburns Smiling Straight_Hair Wavy_Hair Wearing_Earrings "
+    "Wearing_Hat Wearing_Lipstick Wearing_Necklace Wearing_Necktie Young"
+).split()
 
 
 class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
-  """CelebA dataset."""
+  """CelebA dataset. Aligned and cropped. With metadata."""
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -44,11 +64,17 @@ class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
         description=("Large-scale CelebFaces Attributes, CelebA."
                      "Set of ~30k celebrities pictures. "
                      "These pictures are cropped."),
-        version="0.1.0",
+        version="0.2.0",
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(
-                    shape=(218, 178, 3), encoding_format="jpeg")
+                    shape=(218, 178, 3), encoding_format="jpeg"),
+            "landmarks": {name: tf.int64 for name in LANDMARK_HEADINGS},
+            "attributes": {
+                # TODO(b/120125201): this should be optimized
+                # (either as tf.bool or some special FeatureConnector).
+                name: tf.int64 for name in ATTR_HEADINGS
+            },
         }),
         urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],
         size_in_bytes=2 * tfds.units.GiB,
@@ -57,53 +83,97 @@ class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
         "ICCV 2015")
 
   def _split_generators(self, dl_manager):
-    files = dl_manager.download_and_extract(IMG_ALIGNED_DATA)
-    img_list_path = dl_manager.download_and_extract(EVAL_LIST)
+    # TODO(b/120128659): pass the map directly to download_and_extract
+    #                    after this is supported by the test framework.
+    extracted_dirs = {
+        key: dl_manager.download_and_extract(path) for key, path in {
+            "img_align_celeba": IMG_ALIGNED_DATA,
+            "list_eval_partition": EVAL_LIST,
+            "list_attr_celeba": ATTR_DATA,
+            "landmarks_celeba": LANDMARKS_DATA
+        }.items()
+    }
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs={
-                "file_id":
-                    0,
-                "filedir":
-                    os.path.join(files, "img_align_celeba"),
-                "img_list_path":
-                    os.path.join(img_list_path, "list_eval_partition.txt")
+                "file_id": 0,
+                "extracted_dirs": extracted_dirs,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             num_shards=4,
             gen_kwargs={
-                "file_id":
-                    1,
-                "filedir":
-                    os.path.join(files, "img_align_celeba"),
-                "img_list_path":
-                    os.path.join(img_list_path, "list_eval_partition.txt")
+                "file_id": 1,
+                "extracted_dirs": extracted_dirs,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=4,
             gen_kwargs={
-                "file_id":
-                    2,
-                "filedir":
-                    os.path.join(files, "img_align_celeba"),
-                "img_list_path":
-                    os.path.join(img_list_path, "list_eval_partition.txt")
+                "file_id": 2,
+                "extracted_dirs": extracted_dirs,
             })
     ]
 
-  def _generate_samples(self, filedir, img_list_path, file_id):
+  def _process_celeba_config_file(self, file_path):
+    """Unpack the celeba config file.
+
+    The file starts with the number of lines, and a header.
+    Afterwards, there is a configuration for each file: one per line.
+
+    Args:
+      file_path: Path to the file with the configuration.
+
+    Returns:
+      keys: names of the attributes
+      values: map from the file name to the list of attribute values for
+              this file.
+    """
+    with tf.gfile.Open(file_path) as f:
+      data_raw = f.read()
+    lines = data_raw.split("\n")
+
+    keys = lines[1].strip().split()
+    values = {}
+    # Go over each line (skip the last one, as it is empty).
+    for line in lines[2:-1]:
+      row_values = line.strip().split()
+      # Each row start with the 'file_name' and then space-separated values.
+      values[row_values[0]] = [int(v) for v in row_values[1:]]
+    return keys, values
+
+  def _generate_samples(self, file_id, extracted_dirs):
+    filedir = os.path.join(extracted_dirs["img_align_celeba"],
+                           "img_align_celeba")
+
+    img_list_path = os.path.join(extracted_dirs["list_eval_partition"],
+                                 "list_eval_partition.txt")
+    landmarks_path = os.path.join(extracted_dirs["landmarks_celeba"],
+                                  "list_landmarks_align_celeba.txt")
+    attr_path = os.path.join(extracted_dirs["list_attr_celeba"],
+                             "list_attr_celeba.txt")
+
     with tf.gfile.Open(img_list_path) as f:
       files = [
           line.split()[0]
           for line in f.readlines()
           if int(line.split()[1]) == file_id
       ]
+
+    attributes = self._process_celeba_config_file(attr_path)
+    landmarks = self._process_celeba_config_file(landmarks_path)
+
     for file_name in files:
       path = os.path.join(filedir, file_name)
+
       yield self.info.features.encode_sample({
           "image": path,
+          "landmarks": {
+              k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
+          },
+          "attributes": {
+              k: v for k, v in zip(attributes[0], attributes[1][file_name])
+          },
       })

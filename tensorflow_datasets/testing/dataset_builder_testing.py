@@ -131,10 +131,18 @@ class TestCase(tf.test.TestCase):
 
 
 def checksum(record):
+  """Computes the md5 for a given record."""
   hash_ = hashlib.md5()
   for key, val in sorted(record.items()):
     hash_.update(key.encode("utf-8"))
-    hash_.update(val)
+    # TODO(b/120124306): This will only work for "one-level"
+    #                    dictionary. We might need a better solution here.
+    if isinstance(val, dict):
+      for k, v in sorted(val.items()):
+        hash_.update(k.encode("utf-8"))
+        hash_.update(v)
+    else:
+      hash_.update(val)
   return hash_.hexdigest()
 
 
