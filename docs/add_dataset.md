@@ -291,8 +291,8 @@ The `tf.data.Dataset` object associated with the defined info will be:
     'input': tf.Tensor(shape=(None, None, 3), dtype=tf.uint8),
     'output': tf.Tensor(shape=(None,), dtype=tf.int32),  # Sequence of token ids
     'metadata': {
-        'lang': tf.Tensor(shape=(), dtype=tf.string),
-        'img_path': tf.Tensor(shape=(), dtype=tf.int32),
+        'description': tf.Tensor(shape=(), dtype=tf.string),
+        'img_id': tf.Tensor(shape=(), dtype=tf.int32),
     },
 }
 ```
