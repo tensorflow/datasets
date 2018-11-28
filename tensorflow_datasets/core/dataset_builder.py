@@ -156,12 +156,7 @@ class DatasetBuilder(object):
     data_dir = self._get_data_dir(version=version_str)
     tf.logging.info("Generating dataset %s (%s)", self.name, data_dir)
 
-    # Print is intentional: we want this to always go to stdout so user has
-    # information needed to cancel download/preparation if needed.
-    # This comes right before the progress bar.
-    size_text = units.size_str(self.info.size_in_bytes)
-    termcolor.cprint("Downloading / extracting dataset %s (%s) to %s..." %
-                     (self.name, size_text, data_dir), attrs=["bold"])
+    self._check_available_size(data_dir)
 
     # Wrap the Dataset generation in a .incomplete directory
     with file_format_adapter.incomplete_dir(data_dir) as data_dir_tmp:
@@ -211,6 +206,10 @@ class DatasetBuilder(object):
            "tfds.load() before trying to access the tf.data.Dataset object."
           ) % (self.name, self._data_dir_root))
 
+    if isinstance(split, six.string_types):
+      split = splits.NamedSplit(split)
+
+    # Automatically activate shuffling if training
     if shuffle_files is None:
       shuffle_files = split == splits.Split.TRAIN
 
@@ -284,6 +283,17 @@ class DatasetBuilder(object):
 
     # No directory found
     return None
+
+  def _check_available_size(self, data_dir):
+    """Estimate the available size of the dataset."""
+    # Print is intentional: we want this to always go to stdout so user has
+    # information needed to cancel download/preparation if needed.
+    # This comes right before the progress bar.
+    size_text = units.size_str(self.info.size_in_bytes)
+    termcolor.cprint("Downloading / extracting dataset %s (%s) to %s..." %
+                     (self.name, size_text, data_dir), attrs=["bold"])
+    # TODO(tfds): Should try to estimate the available free disk space (if
+    # possible) and raise an error if not.
 
   @abc.abstractmethod
   def _info(self):
@@ -477,9 +487,6 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     self.info.splits = split_dict
 
   def _as_dataset(self, split=splits.Split.TRAIN, shuffle_files=None):
-    # Automatically activate shuffling if training
-    if isinstance(split, six.string_types):
-      split = splits.NamedSplit(split)
 
     # Resolve all the named split tree by real ones
     read_instruction = split.get_read_instruction(self.info.splits)

@@ -149,6 +149,10 @@ class DatasetInfo(object):
   def features(self):
     return self._features
 
+  @features.setter
+  def features(self, new_features):
+    self._features = new_features
+
   @property
   def supervised_keys(self):
     if not self._info_proto.HasField("supervised_keys"):
