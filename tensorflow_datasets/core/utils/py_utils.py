@@ -82,26 +82,37 @@ class NonMutableDict(dict):
     return super(NonMutableDict, self).update(other)
 
 
-def map_nested(function, data_struct):
+def map_nested(function, data_struct, dict_only=False):
   """Apply a function recursivelly to each element of a nested data struct."""
-  if isinstance(data_struct, list):
-    return [map_nested(function, v) for v in data_struct]
-  elif isinstance(data_struct, dict):
-    return {k: map_nested(function, v) for k, v in data_struct.items()}
+
   # Could add support for more exotic data_struct, like OrderedDict
-  else:  # Singleton
-    return function(data_struct)
+  if isinstance(data_struct, dict):
+    return {
+        k: map_nested(function, v, dict_only) for k, v in data_struct.items()
+    }
+  elif not dict_only:
+    if isinstance(data_struct, list):
+      return [map_nested(function, v, dict_only) for v in data_struct]
+  # Singleton
+  return function(data_struct)
 
 
-def zip_nested(arg0, *args):
+def zip_nested(arg0, *args, **kwargs):
   """Zip data struct together and return a data struct with the same shape."""
-  if isinstance(arg0, list):
-    return [zip_nested(*a) for a in zip(arg0, *args)]
-  elif isinstance(arg0, dict):
-    return {k: zip_nested(*a) for k, a in zip_dict(arg0, *args)}
+  # Python 2 do not support kwargs only arguments
+  dict_only = kwargs.pop("dict_only", False)
+  assert not kwargs
+
   # Could add support for more exotic data_struct, like OrderedDict
-  else:  # Singleton
-    return (arg0,) + args
+  if isinstance(arg0, dict):
+    return {
+        k: zip_nested(*a, dict_only=dict_only) for k, a in zip_dict(arg0, *args)
+    }
+  elif not dict_only:
+    if isinstance(arg0, list):
+      return [zip_nested(*a, dict_only=dict_only) for a in zip(arg0, *args)]
+  # Singleton
+  return (arg0,) + args
 
 
 def as_proto_cls(proto_cls):

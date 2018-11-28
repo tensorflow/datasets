@@ -155,25 +155,40 @@ class FeatureExpectationsTestCase(tf.test.TestCase):
               )
 
           # Assert the returned type match the expected one
-          with self._subTest("out_extract"):
+          with self._subTest("out"):
             out = features_encode_decode(fdict, input_value, as_tensor=True)
             out = out[exp.name]
-          with self._subTest("out_dtype"):
-            out_dtypes = utils.map_nested(lambda s: s.dtype, out)
-            self.assertEqual(out_dtypes, exp.feature.dtype)
-          with self._subTest("out_shape"):
-            # For shape, because (None, 3) match with (5, 3), we use
-            # tf.TensorShape.assert_is_compatible_with on each of the elements
-            out_shapes = utils.zip_nested(out, exp.feature.shape)
-            utils.map_nested(
-                lambda x: x[0].shape.assert_is_compatible_with(x[1]),
-                out_shapes
-            )
+            with self._subTest("dtype"):
+              out_dtypes = utils.map_nested(lambda s: s.dtype, out)
+              self.assertEqual(out_dtypes, exp.feature.dtype)
+            with self._subTest("shape"):
+              # For shape, because (None, 3) match with (5, 3), we use
+              # tf.TensorShape.assert_is_compatible_with on each of the elements
+              out_shapes = utils.zip_nested(out, exp.feature.shape)
+              utils.map_nested(
+                  lambda x: x[0].shape.assert_is_compatible_with(x[1]),
+                  out_shapes
+              )
 
           # Test serialization + decoding from disk
           with self._subTest("out_value"):
             decoded_samples = features_encode_decode(fdict, input_value)
-            self.assertAllEqual(test.expected, decoded_samples[exp.name])
+            decoded_samples = decoded_samples[exp.name]
+            if isinstance(decoded_samples, dict):
+              # assertAllEqual do not works well with dictionaries so assert
+              # on each individual elements instead
+              zipped_samples = utils.zip_nested(
+                  test.expected,
+                  decoded_samples,
+                  dict_only=True,
+              )
+              utils.map_nested(
+                  lambda x: self.assertAllEqual(x[0], x[1]),
+                  zipped_samples,
+                  dict_only=True,
+              )
+            else:
+              self.assertAllEqual(test.expected, decoded_samples)
 
 
 def features_encode_decode(features_dict, sample, as_tensor=False):

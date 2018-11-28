@@ -78,6 +78,46 @@ class PyUtilsTest(tf.test.TestCase):
         },
     })
 
+    result = py_utils.zip_nested(1, 2)
+    self.assertEqual(result, (1, 2))
+
+  def test_dict_only(self):
+    def map_fn(x):
+      return x[0] + x[1]
+
+    arg0 = {
+        'a': (1, 2),
+        'b': {
+            'c': 2,
+            'e': [3, 4, 5],
+        },
+    }
+    arg1 = {
+        'a': (10, 20),
+        'b': {
+            'c': 20,
+            'e': [30, 40, 50],
+        },
+    }
+
+    result = py_utils.zip_nested(arg0, arg1, dict_only=True)
+    self.assertEqual(result, {
+        'a': ((1, 2), (10, 20)),
+        'b': {
+            'c': (2, 20),
+            'e': ([3, 4, 5], [30, 40, 50]),
+        },
+    })
+
+    result = py_utils.map_nested(map_fn, result, dict_only=True)
+    self.assertEqual(result, {
+        'a': (1, 2, 10, 20),
+        'b': {
+            'c': 22,
+            'e': [3, 4, 5, 30, 40, 50],
+        },
+    })
+
 
 if __name__ == '__main__':
   tf.test.main()
