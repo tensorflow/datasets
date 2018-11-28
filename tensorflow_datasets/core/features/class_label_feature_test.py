@@ -31,7 +31,7 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
     return [
         test_utils.FeatureExpectation(
             name='label',
-            feature=features.ClassLabel(10),
+            feature=features.ClassLabel(num_classes=10),
             dtype=tf.int64,
             shape=(),
             tests=[
@@ -44,12 +44,67 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
                     raise_cls=ValueError,
                     raise_msg='greater than configured num_classes',
                 ),
+                test_utils.FeatureExpectationItem(
+                    value='3',
+                    raise_cls=ValueError,
+                    raise_msg='not available',
+                ),
+            ]
+        ),
+        test_utils.FeatureExpectation(
+            name='directions',
+            feature=features.ClassLabel(names=['left', 'right']),
+            dtype=tf.int64,
+            shape=(),
+            tests=[
+                test_utils.FeatureExpectationItem(
+                    value=1,
+                    expected=1,
+                ),
+                test_utils.FeatureExpectationItem(
+                    value='left',
+                    expected=0,
+                ),
+                test_utils.FeatureExpectationItem(
+                    value='right',
+                    expected=1,
+                ),
             ]
         ),
     ]
 
   def test_num_classes(self):
-    self.assertEqual(10, features.ClassLabel(10).num_classes)
+    labels = features.ClassLabel(num_classes=10)
+    self.assertEqual(10, labels.num_classes)
+
+    with self.assertRaisesWithPredicateMatch(ValueError, 'is not available'):
+      _ = labels.names
+
+    with self.assertRaisesWithPredicateMatch(ValueError, 'is not available'):
+      labels.str2int('1')
+
+    with self.assertRaisesWithPredicateMatch(ValueError, 'is not available'):
+      labels.int2str(1)
+
+  def test_str_classes(self):
+    labels = features.ClassLabel(names=[
+        'label3',
+        'label1',
+        'label2',
+    ])
+    self.assertEqual(3, labels.num_classes)
+    self.assertEqual(labels.names, [
+        'label3',
+        'label1',
+        'label2',
+    ])
+
+    self.assertEqual(labels.str2int('label3'), 0)
+    self.assertEqual(labels.str2int('label1'), 1)
+    self.assertEqual(labels.str2int('label2'), 2)
+    self.assertEqual(labels.int2str(0), 'label3')
+    self.assertEqual(labels.int2str(1), 'label1')
+    self.assertEqual(labels.int2str(2), 'label2')
 
 
 if __name__ == '__main__':

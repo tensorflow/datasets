@@ -15,32 +15,49 @@
 
 """ClassLabel feature."""
 
+import six
 import tensorflow as tf
+from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.features import feature
 
 
 class ClassLabel(feature.FeatureConnector):
   """Feature encoding an integer class label."""
 
-  def __init__(self, num_classes, names=None, names_file=None):
+  @api_utils.disallow_positional_args
+  def __init__(self, num_classes=None, names=None, names_file=None):
     """Constructs a ClassLabel FeatureConnector.
+
+    There are 3 ways to define a ClassLabel, which correspond to the 3
+    arguments:
+     * `num_classes`: create 0 to (num_classes-1) labels
+     * `names`: a list of label strings
+     * `names_file`: a file containing the list of labels.
+
+    Note: On python2, the strings are encoded as utf-8.
 
     Args:
       num_classes: `int`, number of classes. All labels must be < num_classes.
-      names: `list<str>`, optional string names for the integer classes.
-      names_file: `str`, optional path to a file with names for the integer
+      names: `list<str>`, string names for the integer classes. The
+        order in which the names are provided is kept.
+      names_file: `str`, path to a file with names for the integer
         classes, one per line.
     """
-    self._num_classes = num_classes
+    self._num_classes = None
+    self._str2int = None
+    self._int2str = None
 
-    if names and names_file:
-      raise ValueError("Must provide either names or names_file, not both.")
-    if names or names_file:
+    if sum(bool(a) for a in (num_classes, names, names_file)) != 1:
+      raise ValueError(
+          "Only a single argument of ClassLabel() should be provided.")
+
+    if num_classes:
+      self._num_classes = num_classes
+    else:
       names = names or self._load_names_from_file(names_file)
-      self._names = [tf.compat.as_text(name) for name in names]
-      if len(self._names) != self._num_classes:
-        raise ValueError("num_classes=%d but found %d names. Those must match" %
-                         (self._num_classes, len(self._names)))
+      self._int2str = [tf.compat.as_text(name) for name in names]
+      self._str2int = {name: i for i, name in enumerate(self._int2str)}
+      self._num_classes = len(self._str2int)
 
   @property
   def num_classes(self):
@@ -48,12 +65,39 @@ class ClassLabel(feature.FeatureConnector):
 
   @property
   def names(self):
-    return self._names
+    if not self._int2str:
+      raise ValueError(
+          "ClassLabel.names is not available because names haven't been "
+          "defined in the ClassLabel constructor.")
+    return list(self._int2str)
+
+  def str2int(self, str_value):
+    """Conversion class name string => integer."""
+    if not self._str2int:
+      raise ValueError(
+          "ClassLabel.str2int is not available because names haven't been "
+          "defined in the ClassLabel constructor.")
+    return self._str2int[tf.compat.as_text(str_value)]
+
+  def int2str(self, int_value):
+    """Conversion integer => class name string."""
+    if not self._int2str:
+      raise ValueError(
+          "ClassLabel.int2str is not available because names haven't been "
+          "defined in the ClassLabel constructor.")
+    # Maybe should support batched np array/eager tensors, to allow things like
+    # out_ids = model(inputs)
+    # labels = cifar10.info.features['label'].int2str(out_ids)
+    return self._int2str[int_value]
 
   def get_tensor_info(self):
     return feature.TensorInfo(shape=(), dtype=tf.int64)
 
   def encode_sample(self, sample_data):
+    # If a string is given, convert to associated integer
+    if isinstance(sample_data, six.string_types):
+      sample_data = self.str2int(sample_data)
+
     # Allowing -1 to mean no label.
     if not -1 <= sample_data < self._num_classes:
       raise ValueError("Class label %d greater than configured num_classes %d" %
