@@ -43,6 +43,9 @@ message DatasetInfo {
   string name = 1;
   string description = 2;
 
+  // Version string of the dataset (ex: '1.0.5')
+  string version = 9;
+
   // A citation string if one exists for this dataset.
   string citation = 3;
 

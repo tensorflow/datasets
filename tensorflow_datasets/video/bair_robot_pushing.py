@@ -74,6 +74,7 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
         "pushing motions, including one training set (train) and "
         "two test sets of previously seen (testseen) and unseen "
         "(testnovel) objects.",
+        version="0.1.0",
         features=features,
         urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
         size_in_bytes=30.0 * tfds.units.GiB,

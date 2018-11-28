@@ -100,6 +100,20 @@ class DatasetBuilderTest(tf.test.TestCase):
       self.assertEqual(20, len(data))
       self.assertLess(data[0]["x"], 30)
 
+  def test_get_data_dir(self):
+    # Test that the dataset load the most recent dir
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
+
+      # The dataset folder contains multiple versions
+      tf.gfile.MakeDirs(os.path.join(tmp_dir, builder.name, "14.0.0.invalid"))
+      tf.gfile.MakeDirs(os.path.join(tmp_dir, builder.name, "10.0.0"))
+      tf.gfile.MakeDirs(os.path.join(tmp_dir, builder.name, "9.0.0"))
+
+      # The last valid version is chosen by default
+      most_recent_dir = os.path.join(tmp_dir, builder.name, "10.0.0")
+      self.assertEqual(builder._get_data_dir(), most_recent_dir)
+
 
 class DatasetBuilderReadTest(tf.test.TestCase):
 

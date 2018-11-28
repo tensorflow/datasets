@@ -44,6 +44,7 @@ class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
         description=("Large-scale CelebFaces Attributes, CelebA."
                      "Set of ~30k celebrities pictures. "
                      "These pictures are cropped."),
+        version="0.1.0",
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(

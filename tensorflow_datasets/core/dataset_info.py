@@ -42,6 +42,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from google.protobuf import json_format
 from tensorflow_metadata.proto.v0 import schema_pb2
@@ -65,6 +66,7 @@ class DatasetInfo(object):
   Properties:
     name: `str`, name of this dataset.
     description: `str`, description of this dataset.
+    version: `str`, semantic version of the dataset (ex: '1.2.0')
     features: `tfds.features.FeaturesDict`: Information on the feature dict of
       the `tf.data.Dataset` object from the `builder.as_dataset()` method.
     splits: `SplitDict`, the available Splits for this dataset.
@@ -83,6 +85,7 @@ class DatasetInfo(object):
   def __init__(self,
                name=None,
                description=None,
+               version=None,
                features=None,
                supervised_keys=None,
                splits=None,
@@ -94,6 +97,7 @@ class DatasetInfo(object):
     Args:
       name: (`str`) Name of the dataset, usually set to builder.name.
       description: `str`, description of this dataset.
+      version: `str`, semantic version of the dataset (ex: '1.2.0')
       features: (`tfds.features.FeaturesDict`) Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
@@ -105,9 +109,13 @@ class DatasetInfo(object):
         size of the dataset that we will be downloading from the internet.
       citation: `str`, optional, the citation to use for this dataset.
     """
+    version = version or "0.0.0"
+    utils.str_to_version(version)  # Ensure that the version is valid
+
     self._info_proto = dataset_info_pb2.DatasetInfo(
         name=name,
         description=description,
+        version=version,
         size_in_bytes=int(size_in_bytes),
         citation=citation)
     if urls:
@@ -133,17 +141,8 @@ class DatasetInfo(object):
 
     return self._info_proto
 
-  @property
-  def name(self):
-    return self._info_proto.name
-
-  @property
-  def description(self):
-    return self._info_proto.description
-
-  @property
-  def citation(self):
-    return self._info_proto.citation
+  def __getattr__(self, key):
+    return getattr(self.as_proto, key)
 
   @property
   def features(self):
@@ -178,10 +177,6 @@ class DatasetInfo(object):
   @property
   def urls(self):
     return self._info_proto.location.urls
-
-  @property
-  def size_in_bytes(self):
-    return self._info_proto.size_in_bytes
 
   @property
   def num_examples(self):

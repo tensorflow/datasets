@@ -20,7 +20,6 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
-import datetime
 import functools
 import os
 
@@ -151,9 +150,15 @@ class DatasetBuilder(object):
       )
 
     # Otherwise, create a new version in a new data_dir.
-    curr_date = datetime.datetime.now()
-    version_str = curr_date.strftime("v_%Y%m%d_%H%M")
-    data_dir = self._get_data_dir(version=version_str)
+    data_dir = self._get_data_dir(version=self.info.version)
+    if tf.gfile.Exists(data_dir):
+      # If generation is determinism, the dataset can be re-generated and raise
+      # an error only if generated files are different
+      raise ValueError(
+          "Trying to overwrite an existing dataset {} at {}. A dataset with "
+          "the same version {} already exists. If the dataset has changed, "
+          "please update the version number.".format(
+              self.name, data_dir, self.info.version))
     tf.logging.info("Generating dataset %s (%s)", self.name, data_dir)
 
     self._check_available_size(data_dir)
@@ -274,11 +279,17 @@ class DatasetBuilder(object):
 
     # Get the most recent directory
     if tf.gfile.Exists(data_root_dir):
-      version_dirnames = [
-          f for f in sorted(tf.gfile.ListDirectory(data_root_dir))
-          if ".incomplete" not in f
-      ]
+      version_dirnames = {}
+      for filename in tf.gfile.ListDirectory(data_root_dir):
+        try:
+          version_dirnames[filename] = utils.str_to_version(filename)
+        except ValueError:  # Invalid version (ex: incomplete data dir)
+          pass
+      # If found valid data directories, take the biggest version
       if version_dirnames:
+        version_dirnames = [
+            k for k, _ in sorted(version_dirnames.items(), key=lambda x: x[-1])
+        ]
         return os.path.join(data_root_dir, version_dirnames[-1])
 
     # No directory found

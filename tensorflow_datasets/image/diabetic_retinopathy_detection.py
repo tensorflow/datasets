@@ -36,6 +36,7 @@ class DiabeticRetinopathyDetection(
         name=self.name,
         description="A large set of high-resolution retina images taken under "
         "a variety of imaging conditions.",
+        version="1.0.0",
         features=tfds.features.FeaturesDict({
             "name": tfds.features.Text(),  # patient ID + eye. eg: "4_left".
             "image": tfds.features.Image(),
