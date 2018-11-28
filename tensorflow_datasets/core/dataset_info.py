@@ -40,6 +40,7 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from google.protobuf import json_format
@@ -249,19 +250,17 @@ class DatasetInfo(object):
 #
 
 _FEATURE_TYPE_MAP = {
-    tf.uint8: schema_pb2.INT,
-    tf.int64: schema_pb2.INT,
-    tf.float32: schema_pb2.FLOAT,
-    tf.float16: schema_pb2.FLOAT,
-    tf.float64: schema_pb2.FLOAT,
-    tf.int8: schema_pb2.INT,
-    tf.int16: schema_pb2.INT,
-    tf.int32: schema_pb2.INT,
-    tf.int64: schema_pb2.INT,
-    tf.uint8: schema_pb2.INT,
-    tf.uint16: schema_pb2.INT,
-    tf.uint32: schema_pb2.INT,
-    tf.uint64: schema_pb2.INT,
+    np.float16: schema_pb2.FLOAT,
+    np.float32: schema_pb2.FLOAT,
+    np.float64: schema_pb2.FLOAT,
+    np.int8: schema_pb2.INT,
+    np.int16: schema_pb2.INT,
+    np.int32: schema_pb2.INT,
+    np.int64: schema_pb2.INT,
+    np.uint8: schema_pb2.INT,
+    np.uint16: schema_pb2.INT,
+    np.uint32: schema_pb2.INT,
+    np.uint64: schema_pb2.INT,
 }
 
 _SCHEMA_TYPE_MAP = {
@@ -293,7 +292,7 @@ def get_dataset_feature_statistics(builder, split):
   feature_to_min = {}
   feature_to_max = {}
 
-  for example in dataset:
+  for example in dataset_utils.iterate_over_dataset(dataset):
     statistics.num_examples += 1
 
     assert isinstance(example, dict)
@@ -304,14 +303,22 @@ def get_dataset_feature_statistics(builder, split):
       # Update the number of examples this feature appears in.
       feature_to_num_examples[feature_name] += 1
 
-      feature_shape = example[feature_name].shape
-      feature_dtype = example[feature_name].dtype
-      feature_np = example[feature_name].numpy()
+      feature_np = example[feature_name]
+
+      # For compatibility in graph and eager mode, we can get PODs here and
+      # everything may not be neatly wrapped up in numpy's ndarray.
+
+      # TODO(afrozm): Use tf.data.Dataset.{output_types, output_shapes} here.
+      feature_shape = ()
+      feature_dtype = type(feature_np)
+
+      if isinstance(feature_np, np.ndarray):
+        feature_shape = feature_np.shape
+        feature_dtype = feature_np.dtype.type
 
       feature_min, feature_max = None, None
-      is_numeric = (
-          feature_dtype.is_floating or feature_dtype.is_integer or
-          feature_dtype.is_bool)
+      is_numeric = (np.issubdtype(feature_dtype, np.number) or
+                    feature_dtype == np.bool_)
       if is_numeric:
         feature_min = np.min(feature_np)
         feature_max = np.max(feature_np)
@@ -354,7 +361,7 @@ def get_dataset_feature_statistics(builder, split):
 
     # TODO(afrozm): What do we do for non fixed size shapes?
     # What to do for scalars?
-    for dim in feature_to_shape[feature_name].as_list():
+    for dim in feature_to_shape[feature_name]:
       feature.shape.dim.add().size = dim
     feature_type = feature_to_dtype[feature_name]
     feature.type = _FEATURE_TYPE_MAP.get(feature_type, schema_pb2.BYTES)

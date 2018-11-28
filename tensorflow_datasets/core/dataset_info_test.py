@@ -23,12 +23,37 @@ import json
 import os
 import tensorflow as tf
 
+from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import features
+from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
 
 pkg_dir, _ = os.path.split(__file__)
 _TESTDATA = os.path.join(pkg_dir, "test_data")
 _NON_EXISTENT_DIR = os.path.join(pkg_dir, "non_existent_dir")
+
+
+class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
+
+  def _split_generators(self, dl_manager):
+    # Split the 30 examples from the generator into 2 train shards and 1 test
+    # shard.
+    del dl_manager
+    return [splits.SplitGenerator(
+        name=[splits.Split.TRAIN, splits.Split.TEST],
+        num_shards=[2, 1],
+    )]
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        features=features.FeaturesDict({"x": tf.int64}),
+        supervised_keys=("x", "x"),
+    )
+
+  def _generate_samples(self):
+    for i in range(30):
+      yield self.info.features.encode_sample({"x": i})
 
 
 class DatasetInfoTest(tf.test.TestCase):
@@ -89,6 +114,20 @@ class DatasetInfoTest(tf.test.TestCase):
     # Assert what was read and then written and read again is the same.
     self.assertEqual(existing_json, new_json)
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes
+  def test_statistics_generation(self):
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
+      builder.download_and_prepare(compute_stats=True)
+
+      # Overall
+      self.assertEqual(30, builder.info.num_examples)
+
+      # Per split.
+      test_split = builder.info.splits["test"].get_proto()
+      train_split = builder.info.splits["train"].get_proto()
+      self.assertEqual(10, test_split.statistics.num_examples)
+      self.assertEqual(20, train_split.statistics.num_examples)
 
 if __name__ == "__main__":
   tf.test.main()
