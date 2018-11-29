@@ -29,6 +29,8 @@ Public tfds.features API.
 
 [`class TensorInfo`](../tfds/features/TensorInfo.md): TensorInfo(shape, dtype)
 
+[`class SequenceDict`](../tfds/features/SequenceDict.md): Sequence feature.
+
 [`class Image`](../tfds/features/Image.md): Feature which encode/decode an image.
 
 [`class Text`](../tfds/features/Text.md): Feature which encodes/decodes text, possibly to integers.

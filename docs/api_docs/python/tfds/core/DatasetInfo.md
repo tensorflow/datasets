@@ -2,16 +2,13 @@
 <meta itemprop="name" content="tfds.core.DatasetInfo" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="as_proto"/>
-<meta itemprop="property" content="citation"/>
-<meta itemprop="property" content="description"/>
 <meta itemprop="property" content="features"/>
 <meta itemprop="property" content="initialized"/>
-<meta itemprop="property" content="name"/>
 <meta itemprop="property" content="num_examples"/>
-<meta itemprop="property" content="size_in_bytes"/>
 <meta itemprop="property" content="splits"/>
 <meta itemprop="property" content="supervised_keys"/>
 <meta itemprop="property" content="urls"/>
+<meta itemprop="property" content="__getattr__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="compute_dynamic_properties"/>
 <meta itemprop="property" content="read_from_directory"/>
@@ -31,27 +28,28 @@ Defined in [`core/dataset_info.py`](https://github.com/tensorflow/datasets/tree/
 Structure defining the info of the dataset.
 
 Information on the datasets are available through the builder.info property.
-Properties:
-  name: `str`, name of this dataset.
-  description: `str`, description of this dataset.
-  features: <a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>: Information on the feature dict of
-    the `tf.data.Dataset` object from the `builder.as_dataset()` method.
-  splits: `SplitDict`, the available Splits for this dataset.
-  urls: `list(str)`, the homepage(s) for this dataset.
-  size_in_bytes: `integer`, approximate size in bytes of the raw size of the
-    dataset that we will be downloading from the internet.
-  num_examples: `integer`, number of examples across all splits.
-  examples_per_split: `dict(string, integer)`, number of examples per split.
+Properties: name: `str`, name of this dataset. description: `str`, description
+of this dataset. version: `str`, semantic version of the dataset (ex: '1.2.0')
+features:
+<a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>:
+Information on the feature dict of the `tf.data.Dataset` object from the
+`builder.as_dataset()` method. splits: `SplitDict`, the available Splits for
+this dataset. urls: `list(str)`, the homepage(s) for this dataset.
+size_in_bytes: `integer`, approximate size in bytes of the raw size of the
+dataset that we will be downloading from the internet. num_examples: `integer`,
+number of examples across all splits. examples_per_split: `dict(string,
+integer)`, number of examples per split.
 
 Note that some of those fields are dynamically computed at data generation
 time, and updated by `compute_dynamic_properties`.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
+```python
 __init__(
     name=None,
     description=None,
+    version=None,
     features=None,
     supervised_keys=None,
     splits=None,
@@ -65,32 +63,24 @@ Constructor of the DatasetInfo.
 
 #### Args:
 
-* <b>`name`</b>: (`str`) Name of the dataset, usually set to builder.name.
-* <b>`description`</b>: `str`, description of this dataset.
-* <b>`features`</b>: (<a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>) Information on the feature dict
-    of the `tf.data.Dataset()` object from the `builder.as_dataset()`
-    method.
-* <b>`supervised_keys`</b>: (`tuple`) Specifies the input feature and the label for
-    supervised learning, if applicable for the dataset.
-* <b>`splits`</b>: `SplitDict`, the available Splits for this dataset.
-* <b>`urls`</b>: `list(str)`, optional, the homepage(s) for this dataset.
-* <b>`size_in_bytes`</b>: `integer`, optional, approximate size in bytes of the raw
-    size of the dataset that we will be downloading from the internet.
-* <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
-
-
+*   <b>`name`</b>: (`str`) Name of the dataset, usually set to builder.name.
+*   <b>`description`</b>: `str`, description of this dataset.
+*   <b>`version`</b>: `str`, semantic version of the dataset (ex: '1.2.0')
+*   <b>`features`</b>:
+    (<a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>)
+    Information on the feature dict of the `tf.data.Dataset()` object from the
+    `builder.as_dataset()` method.
+*   <b>`supervised_keys`</b>: (`tuple`) Specifies the input feature and the
+    label for supervised learning, if applicable for the dataset.
+*   <b>`splits`</b>: `SplitDict`, the available Splits for this dataset.
+*   <b>`urls`</b>: `list(str)`, optional, the homepage(s) for this dataset.
+*   <b>`size_in_bytes`</b>: `integer`, optional, approximate size in bytes of
+    the raw size of the dataset that we will be downloading from the internet.
+*   <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
 
 ## Properties
 
 <h3 id="as_proto"><code>as_proto</code></h3>
-
-
-
-<h3 id="citation"><code>citation</code></h3>
-
-
-
-<h3 id="description"><code>description</code></h3>
 
 
 
@@ -102,15 +92,7 @@ Constructor of the DatasetInfo.
 
 
 
-<h3 id="name"><code>name</code></h3>
-
-
-
 <h3 id="num_examples"><code>num_examples</code></h3>
-
-
-
-<h3 id="size_in_bytes"><code>size_in_bytes</code></h3>
 
 
 
@@ -129,6 +111,12 @@ Constructor of the DatasetInfo.
 
 
 ## Methods
+
+<h3 id="__getattr__"><code>__getattr__</code></h3>
+
+```python
+__getattr__(key)
+```
 
 <h3 id="compute_dynamic_properties"><code>compute_dynamic_properties</code></h3>
 
