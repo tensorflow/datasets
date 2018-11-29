@@ -141,8 +141,25 @@ class DatasetInfo(object):
 
     return self._info_proto
 
-  def __getattr__(self, key):
-    return getattr(self.as_proto, key)
+  @property
+  def name(self):
+    return self.as_proto.name
+
+  @property
+  def description(self):
+    return self.as_proto.description
+
+  @property
+  def version(self):
+    return self.as_proto.version
+
+  @property
+  def citation(self):
+    return self.as_proto.citation
+
+  @property
+  def size_in_bytes(self):
+    return self.as_proto.size_in_bytes
 
   @property
   def features(self):
