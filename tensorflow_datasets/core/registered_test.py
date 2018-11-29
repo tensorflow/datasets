@@ -96,7 +96,7 @@ class RegisteredTest(tf.test.TestCase):
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
     builder = registered.load(
-        name=name, split=splits.Split.TRAIN, data_dir=data_dir,
+        name, split=splits.Split.TRAIN, data_dir=data_dir,
         download=True, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)

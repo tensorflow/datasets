@@ -102,7 +102,7 @@ def builder(name, **ctor_kwargs):
   return _DATASET_REGISTRY[name](**builder_kwargs)
 
 
-@api_utils.disallow_positional_args
+@api_utils.disallow_positional_args(allowed=["name"])
 def load(name,
          split,
          data_dir=None,

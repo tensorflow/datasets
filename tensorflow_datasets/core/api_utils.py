@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import functools
 import inspect
 
 import six
@@ -35,19 +36,31 @@ _POSITIONAL_ARG_ERR_MSG = (
     "Positional arguments passed to fn %s: %s.")
 
 
-@wrapt.decorator
-def disallow_positional_args(fn, instance, args, kwargs):
+def disallow_positional_args(wrapped=None, allowed=None):
   """Requires function to be called using keyword arguments."""
-  ismethod = instance is not None
-  _check_no_positional(fn, args, ismethod)
-  _check_required(fn, kwargs)
-  return fn(*args, **kwargs)
+  # See
+  # https://wrapt.readthedocs.io/en/latest/decorators.html#decorators-with-optional-arguments
+  # for decorator pattern.
+  if wrapped is None:
+    return functools.partial(disallow_positional_args, allowed=allowed)
+
+  @wrapt.decorator
+  def disallow_positional_args_dec(fn, instance, args, kwargs):
+    ismethod = instance is not None
+    _check_no_positional(fn, args, ismethod, allowed=allowed)
+    _check_required(fn, kwargs)
+    return fn(*args, **kwargs)
+
+  return disallow_positional_args_dec(wrapped)  # pylint: disable=no-value-for-parameter
 
 
-def _check_no_positional(fn, args, is_method=False):
+def _check_no_positional(fn, args, is_method=False, allowed=None):
+  allowed = set(allowed or [])
   offset = int(is_method)
   if args:
     arg_names = getargspec(fn).args[offset:offset + len(args)]
+    if all([name in allowed for name in arg_names]):
+      return
     raise ValueError(_POSITIONAL_ARG_ERR_MSG % (fn.__name__, str(arg_names)))
 
 
