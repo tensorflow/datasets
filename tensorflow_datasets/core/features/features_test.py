@@ -283,6 +283,46 @@ class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
                 ),
             ]
         ),
+        test_utils.FeatureExpectation(
+            name='bool_flat',
+            feature=features_lib.Tensor(shape=(), dtype=tf.bool),
+            dtype=tf.bool,
+            shape=(),
+            tests=[
+                test_utils.FeatureExpectationItem(
+                    value=np.array(True),
+                    expected=True,
+                ),
+                test_utils.FeatureExpectationItem(
+                    value=np.array(False),
+                    expected=False,
+                ),
+                test_utils.FeatureExpectationItem(
+                    value=True,
+                    expected=True,
+                ),
+                test_utils.FeatureExpectationItem(
+                    value=False,
+                    expected=False,
+                ),
+            ]
+        ),
+        test_utils.FeatureExpectation(
+            name='bool_array',
+            feature=features_lib.Tensor(shape=(3,), dtype=tf.bool),
+            dtype=tf.bool,
+            shape=(3,),
+            tests=[
+                test_utils.FeatureExpectationItem(
+                    value=np.array([True, True, False]),
+                    expected=[True, True, False],
+                ),
+                test_utils.FeatureExpectationItem(
+                    value=[True, False, True],
+                    expected=[True, False, True],
+                ),
+            ]
+        ),
     ]
 
 

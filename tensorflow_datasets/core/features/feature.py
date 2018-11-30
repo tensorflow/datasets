@@ -467,7 +467,9 @@ class Tensor(FeatureConnector):
       raise ValueError('Dtype {} do not match {}'.format(
           sample_data.dtype, np_dtype))
     utils.assert_shape_match(sample_data.shape, self._shape)
-    # Convert numpy array to the correct type
+    # For booleans, convert to integer (tf.train.Example does not support bool)
+    if sample_data.dtype == np.bool_:
+      sample_data = sample_data.astype(int)
     return sample_data
 
   def decode_sample(self, tfexample_data):

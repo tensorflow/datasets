@@ -70,10 +70,9 @@ class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
                 tfds.features.Image(
                     shape=(218, 178, 3), encoding_format="jpeg"),
             "landmarks": {name: tf.int64 for name in LANDMARK_HEADINGS},
+            # Attributes could be some special MultiLabel FeatureConnector
             "attributes": {
-                # TODO(b/120125201): this should be optimized
-                # (either as tf.bool or some special FeatureConnector).
-                name: tf.int64 for name in ATTR_HEADINGS
+                name: tf.bool for name in ATTR_HEADINGS
             },
         }),
         urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],

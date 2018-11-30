@@ -304,7 +304,10 @@ def _dict_to_tf_example(example_dict):
       v = [tf.compat.as_bytes(x) for x in v]
       features[k] = tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
     else:
-      raise ValueError("Value for %s is not a recognized type; v: %s type: %s" %
-                       (k, str(v[0]), str(type(v[0]))))
+      raise ValueError(
+          "tf.train.Example does not support type {} of {} for feature key {}. "
+          "This may indicate that one of the FeatureConnectors received an "
+          "unsupported value as input.".format(repr(type(v[0])), repr(v[0]), k)
+      )
 
   return tf.train.Example(features=tf.train.Features(feature=features))
