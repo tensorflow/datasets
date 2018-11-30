@@ -108,6 +108,7 @@ def load(name,
          data_dir=None,
          download=True,
          as_supervised=False,
+         with_info=False,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
          as_dataset_kwargs=None):
@@ -116,6 +117,18 @@ def load(name,
   `load` is a convenience method that fetches the `tfds.core.DatasetBuilder` by
   string name, optionally calls `DatasetBuilder.download_and_prepare`
   (if `download=True`), and then calls `DatasetBuilder.as_dataset`.
+  This is roughly equivalent to:
+
+  ```
+  builder = tfds.builder(name, data_dir=data_dir, **builder_kwargs)
+  if download:
+    builder.download_and_prepare(**download_and_prepare_kwargs)
+  ds = builder.as_dataset(
+      split=split, as_supervised=as_supervised, **as_dataset_kwargs)
+  if with_info:
+    return ds, builder.info
+  return ds
+  ```
 
   Callers must pass arguments as keyword arguments.
 
@@ -142,6 +155,9 @@ def load(name,
       `builder.info.supervised_keys`. If `False`, the default,
       the returned `tf.data.Dataset` will have a dictionary with all the
       features.
+    with_info: `bool`, if True, tfds.load will return the tuple
+      (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
+      with the builder.
     builder_kwargs: `dict` (optional), keyword arguments to be passed to the
       `tfds.core.DatasetBuilder` constructor. `data_dir` will be passed
       through by default.
@@ -154,7 +170,10 @@ def load(name,
       default.
 
   Returns:
-    `tf.data.Dataset`
+    ds: `tf.data.Dataset`, the dataset requested.
+    ds_info: `tfds.core.DatasetInfo`, if `with_info` is True, then tfds.load
+      will return a tuple (ds, ds_info) containing the dataset info (version,
+      features, splits, num_examples,...).
   """
   if data_dir is None:
     data_dir = constants.DATA_DIR
@@ -170,7 +189,10 @@ def load(name,
   as_dataset_kwargs["split"] = split
   as_dataset_kwargs["as_supervised"] = as_supervised
 
-  return dbuilder.as_dataset(**as_dataset_kwargs)
+  ds = dbuilder.as_dataset(**as_dataset_kwargs)
+  if with_info:
+    return ds, dbuilder.info
+  return ds
 
 
 def _dataset_name_and_kwargs_from_name_str(name_str):
