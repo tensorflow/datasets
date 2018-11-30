@@ -182,12 +182,40 @@ class FeatureConnector(object):
   def encode_sample(self, sample_data):
     """Encode the feature dict into tf-example compatible input.
 
+    The input sample_data can be anything that the user passed at data
+    generation. For example:
+
+    For features:
+    ```
+    features={
+        'image': tfds.features.Image(),
+        'custom_feature': tfds.features.CustomFeature(),
+    }
+    ```
+    At data generation (in `_generate_samples`), if the user yields:
+    ```
+    yield self.info.features.encode_samples({
+        'image': 'path/to/img.png',
+        'custom_feature': [123, 'str', lambda x: x+1]
+    })
+    ```
+    Then:
+     * `tfds.features.Image.encode_sample` will get `'path/to/img.png'` as input
+     * `tfds.features.CustomFeature.encode_sample` will get `[123, 'str',
+       lambda x: x+1] as input
+
     Args:
       sample_data: Value or dictionary of values to convert into tf-example
         compatible data.
 
     Returns:
-      tfexample_data: Data or dictionary of data to write as tf-example
+      tfexample_data: Data or dictionary of data to write as tf-example. Data
+        can be a list or numpy array.
+        Note that numpy arrays are flattened so it's the feature connector
+        responsibility to reshape them in `decode_sample()`.
+        Note that tf.train.Example only supports int64, float32 and string so
+        the data returned here should be integer, float or string. User type
+        can be restored in `decode_sample()`.
     """
     raise NotImplementedError
 
@@ -195,9 +223,14 @@ class FeatureConnector(object):
   def decode_sample(self, tfexample_data):
     """Decode the feature dict to TF compatible input.
 
+    Note: If eager is not enabled, this function will be executed as a
+    tensorflow graph (in `tf.data.Dataset.map(features.decode_samples)`).
+
     Args:
       tfexample_data: Data or dictionary of data, as read by the tf-example
-        reader.
+        reader. It correspond to the `tf.Tensor()` (or dict of `tf.Tensor()`)
+        extracted from the `tf.train.Example`, matching the info defined in
+        `get_serialize_info()`.
 
     Returns:
       tensor_data: Tensor or dictionary of tensor, output of the tf.data.Dataset

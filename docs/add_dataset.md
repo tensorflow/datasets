@@ -14,7 +14,7 @@ then this document is for you.
 *   [Specifying how the data should be split](#specifying-how-the-data-should-be-split)
 *   [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
     *   [File access and tf.gfile](#file-access-and-tfgfile)
-*   [Adding Features](#adding-features)
+*   [Create your own FeatureConnector](#create-your-own-featureconnector)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 
 ## Overview
@@ -29,14 +29,9 @@ Adding support for a dataset means specifying:
 -   How the data should be split (e.g. `TRAIN` and `TEST`);
 -   How the data should be stored on disk and fed to the model.
 
-Below is a diagram showing the abstraction layers of the dataset and the
-transformation from the raw dataset files to the `tf.data.Dataset` object. The
-first time a dataset is used, it is downloaded and prepared. The following times
-it is being used, the dataset is loaded from the pre-prepared data directly.
-
-<p align="center">
-  <img src="dataset_layers.png" alt="DatasetBuilder abstraction layers" width="700"/>
-</p>
+The first time a dataset is used, the dataset is downloaded and prepared and
+pre-processed files are generated. The following times it is being used, the
+dataset is loaded from the pre-prepared data directly.
 
 ## Writing `my_dataset.py`
 
@@ -268,10 +263,10 @@ In order to support Cloud storage systems, all file access must use `tf.gfile`
 or other TensorFlow file APIs (for example, `tf.python_io`). Python built-ins
 for file operations (e.g. `open`, `os.rename`, `gzip`, etc.) must be avoided.
 
-## Adding Features
+# Create your own `FeatureConnector`
 
-The main intuition behind Feature is that what you defines in DatasetInfo should
-match what is returned by the `tf.data.Dataset` object. For instance, with:
+`FeatureConnector`s in `DatasetInfo` correspond to the elements returned in the
+`tf.data.Dataset` object. For instance, with:
 
 ```
 tfds.DatasetInfo(features=tfds.features.FeatureDict({
@@ -298,9 +293,16 @@ The `tf.data.Dataset` object associated with the defined info will be:
 ```
 
 The `tfds.features.FeatureConnector` object abstracts the way the feature is
-internally encoded on disk from how it is presented to the user. To create a new
-feature, you need to subclass `tfds.features.FeatureConnector` and overwrite the
-following methods:
+internally encoded on disk from how it is presented to the user. Below is a
+diagram showing the abstraction layers of the dataset and the transformation
+from the raw dataset files to the `tf.data.Dataset` object.
+
+<p align="center">
+  <img src="dataset_layers.png" alt="DatasetBuilder abstraction layers" width="700"/>
+</p>
+
+To create your own feature connector, subclass `tfds.features.FeatureConnector`
+and implement the abstract methods.
 
 *   `get_tensor_info()`: Indicates the shape/dtype of the tensor(s) returned by
     `tf.data.Dataset`
@@ -313,14 +315,19 @@ following methods:
     disk, then you need to overwrite `get_serialized_info()` to match the specs
     of the `tf.train.Example`
 
-If your feature is a container of sub-features, you may want to inherit from
-`tfds.features.FeatureDict` instead and call `super().encode_sample` and
-`super().decode_sample` to reuse boilerplate code when dealing with nested
-features.
+1.  If your connector only contains one value, then the `get_tensor_info`,
+    `encode_sample`, and `decode_sample` methods can directly return single
+    value (without wrapping it in a dict).
 
-Have a look at the
+2.  If your connector is a container of multiple sub-features, the easiest way
+    is to inherit from `tfds.features.FeaturesDict` and use the `super()`
+    methods to automatically encode/decode the sub-connectors. See
+    `tfds.features.OneOf` as example.
+
+Have a look at the doc of `tfds.features.FeatureConnector` for more details and
+the
 [features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
-for examples.
+for more examples.
 
 ## Large datasets and distributed generation
 

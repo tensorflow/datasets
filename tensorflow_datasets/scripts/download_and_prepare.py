@@ -13,7 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Script to call download_and_prepare on DatasetBuilder."""
+r"""Script to call download_and_prepare on DatasetBuilder.
+
+This is just a standalone script to generate a specific dataset. This can be
+used if you don't want to separate download/generation of dataset from acual
+usage.
+
+By default, the dataset is generated in the default location
+(~/tensorflow_datasets), which the same as when calling `tfds.load()`.
+You can overwrite the dataset location with `--data_dir` and the cache location
+with `--cache_dir`.
+
+Instructions:
+```
+python -m tensorflow_datasets.scripts.download_and_prepare \
+  --dataset_name=cifar10
+```
+
+
+"""
 
 from __future__ import absolute_import
 from __future__ import division
