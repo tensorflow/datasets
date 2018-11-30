@@ -1,9 +1,31 @@
 # How to Contribute
 
+## Datasets
+
+Adding a public dataset to `tensorflow_datasets` is a great way of making it
+more accessible to the TensorFlow community.
+
+See our
+[Add a dataset doc](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+to learn how to add a dataset.
+
+## Docstrings
+
+Methods and classes should have clear and complete docstrings.
+Most methods (and all publicly-facing API methods) should have an `Args:`
+section that documents the name, type, and description of each argument.
+Argument lines should be formatted as
+`` arg_name: (`arg_type`) Description of arg. ``
+
+References to `tfds` methods or classes within a docstring should go in
+backticks and use the publicly accessible path to that symbol. For example
+`` `tfds.core.DatasetBuilder` ``.
+Doing so ensures that the API documentation will insert a link to the
+documentation for that symbol.
+
 # Pull Requests
 
-Please send in fixes, feature additions, and especially new datasets through
-Pull Requests.
+All contributions are done through Pull Requests here on GitHub.
 
 ## Contributor License Agreement
 
@@ -23,17 +45,3 @@ All submissions, including submissions by project members, require review. We
 use GitHub pull requests for this purpose. Consult
 [GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
 information on using pull requests.
-
-## Docstrings
-
-Methods and classes should have clear and complete docstrings.
-Most methods (and all publicly-facing API methods) should have an `Args:`
-section that documents the name, type, and description of each argument.
-Argument lines should be formatted as
-`` arg_name: (`arg_type`) Description of arg. ``
-
-References to `tfds` methods or classes within a docstring should go in
-backticks and use the publicly accessible path to that symbol. For example
-`` `tfds.core.DatasetBuilder` ``.
-Doing so ensures that the API documentation will insert a link to the
-documentation for that symbol.
