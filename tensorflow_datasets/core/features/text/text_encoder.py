@@ -16,6 +16,10 @@
 # coding=utf-8
 """TextEncoders convert between text and integers."""
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import abc
 import hashlib
 import re
@@ -23,8 +27,10 @@ import re
 import six
 import tensorflow as tf
 
-# TODO(rsepassi):
-# * Add SubwordTextEncoder
+
+ALPHANUM_REGEX = re.compile(r"\W+", flags=re.UNICODE)
+ALL_REGEX = re.compile(r"(\W+)", flags=re.UNICODE)
+NUM_BYTES = 2**8
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -44,12 +50,6 @@ class TextEncoder(object):
     New subclasses should be careful to match this behavior.
   """
 
-  def __init__(self, reserved_tokens=None):
-    self._reserved_tokens, self._reserved_tokens_re = _prepare_reserved_tokens(
-        reserved_tokens)
-    self._reserved_token_to_id = dict(
-        zip(self._reserved_tokens, range(len(self._reserved_tokens))))
-
   @abc.abstractmethod
   def encode(self, s):
     """Encodes text into a list of integers."""
@@ -64,44 +64,58 @@ class TextEncoder(object):
   def vocab_size(self):
     raise NotImplementedError
 
-  @property
-  def reserved_tokens(self):
-    return self._reserved_tokens
-
 
 class ByteTextEncoder(TextEncoder):
   """Byte-encodes text."""
 
-  def encode(self, s):
-    if not self.reserved_tokens:
-      offset = 1 + len(self.reserved_tokens)
-      return [i + offset for i in list(bytearray(tf.compat.as_bytes(s)))]
+  def __init__(self, additional_tokens=None):
+    """Constructs ByteTextEncoder.
 
-    # Handle reserved tokens
+    Args:
+      additional_tokens: `list<str>`, list of additional tokens. These will be
+        assigned vocab ids `[1, 1+len(additional_tokens)]`. Useful for things
+        like "end-of-string" tokens (e.g. "<EOS>").
+    """
+    self._additional_tokens, self._additional_tokens_re = (
+        _prepare_reserved_tokens(additional_tokens))
+    # Note that internally everything is 0-indexed. Padding is dealt with at the
+    # end of encode and the beginning of decode.
+    self._additional_token_to_id = dict(
+        zip(self._additional_tokens, range(len(self._additional_tokens))))
+
+  def encode(self, s):
+    if not self.additional_tokens:
+      return pad_incr(list(bytearray(tf.compat.as_bytes(s))))
+
+    # Handle additional tokens
     s = tf.compat.as_text(s)
     ids = []
-    for substr in self._reserved_tokens_re.split(s):
+    for substr in self._additional_tokens_re.split(s):
       if not substr:
         continue
-      tok_id = self._reserved_token_to_id.get(substr)
+      tok_id = self._additional_token_to_id.get(substr)
       if tok_id is None:
-        offset = len(self.reserved_tokens)
+        offset = len(self.additional_tokens)
         tok_ids = [i + offset for i in
                    list(bytearray(tf.compat.as_bytes(substr)))]
       else:
         tok_ids = [tok_id]
       ids.extend(tok_ids)
 
-    return _pad_incr(ids)
+    return pad_incr(ids)
 
   def decode(self, ids):
-    ids = _pad_decr(ids)
+    ids = pad_decr(ids)
     return tf.compat.as_text(bytes(bytearray(ids)))
 
   @property
   def vocab_size(self):
     # Plus 1 for pad
-    return len(self.reserved_tokens) + 2**8 + 1
+    return len(self.additional_tokens) + NUM_BYTES + 1
+
+  @property
+  def additional_tokens(self):
+    return self._additional_tokens
 
 
 class TokenTextEncoder(TextEncoder):
@@ -117,7 +131,6 @@ class TokenTextEncoder(TextEncoder):
                oov_buckets=1,
                oov_token=u"UNK",
                lowercase=False,
-               reserved_tokens=None,
                tokenizer=None):
     """Constructs a TokenTextEncoder.
 
@@ -129,59 +142,36 @@ class TokenTextEncoder(TextEncoder):
       oov_buckets: `int`, the number of `int`s to reserve for OOV hash buckets.
         Tokens that are OOV will be hash-modded into a OOV bucket in `encode`.
       oov_token: `str`, the string to use for OOV ids in `decode`.
-      lowercase: `bool`, whether to lowercase all text in `encode` before
-        matching to tokens.
-      reserved_tokens: `list<str>`, list of reserved tokens. Note that these
-        must be a prefix of `vocab_list`/`vocab_file`. Passing them here enables
-        tokens with non-alphanumeric characters. For example,
-        `reserved_tokens=["<EOS>"]` will ensure that the sentence `"Hello
-        world!<EOS>"` is tokenized as `["Hello", "world", "<EOS>"]`.
+      lowercase: `bool`, whether to make all text and tokens lowercase.
       tokenizer: `Tokenizer`, responsible for converting incoming text into a
-        list of tokens. If passed, `reserved_tokens` must be None. Defaults to a
-        tokenizer that splits on (and drops) non-alphanumeric characters and
-        recognizes and keeps `reserved_tokens`.
+        list of tokens.
     """
-    super(TokenTextEncoder, self).__init__(reserved_tokens=reserved_tokens)
     if not (vocab_list or vocab_file) or (vocab_list and vocab_file):
       raise ValueError("Must provide either vocab_list or vocab_file.")
     self._vocab_list = [
         tf.compat.as_text(el).strip() for el in
         vocab_list or self._load_tokens_from_file(vocab_file)
     ]
+    self._lowercase = lowercase
+    if self._lowercase:
+      self._vocab_list = [t.lower() for t in self._vocab_list]
+    # Note that internally everything is 0-indexed. Padding is dealt with at the
+    # end of encode and the beginning of decode.
     self._token_to_id = dict(
         zip(self._vocab_list, range(len(self._vocab_list))))
     self._oov_buckets = oov_buckets
     self._oov_token = tf.compat.as_text(oov_token)
-    self._lowercase = lowercase
-    if tokenizer is not None:
-      self._tokenizer = tokenizer
-      if reserved_tokens is not None:
-        raise ValueError(
-            "If a Tokenizer is provided, reserved_tokens must be None as the "
-            "provided Tokenizer is expected to handle them itself.")
-    else:
-      self._tokenizer = Tokenizer(reserved_tokens=self._reserved_tokens)
-    self._reserved_tokens_set = set(self._reserved_tokens)
 
-    if self._reserved_tokens:
-      # Ensure reserved_tokens is a prefix of vocab
-      if self._reserved_tokens != self._vocab_list[:len(self._reserved_tokens)]:
-        raise ValueError(
-            "The vocabulary must start with the passed reserved tokens. "
-            "reserved_tokens=%s. First elements of vocabulary are %s" %
-            (self.reserved_tokens,
-             self._vocab_list[:len(self.reserved_tokens)]))
+    # Reserved tokens are all tokens that are mixed alphanum and non-alphanum.
+    reserved_tokens = [t for t in self._vocab_list if is_mixed_alphanum(t)]
+    self._tokenizer = (tokenizer or Tokenizer(reserved_tokens=reserved_tokens))
 
   def encode(self, s):
+    s = tf.compat.as_text(s)
+    if self.lowercase:
+      s = s.lower()
     ids = []
-    for token in self._tokenizer.tokenize(tf.compat.as_text(s)):
-      if token in self._reserved_tokens_set:
-        # Reserved token
-        ids.append(self._token_to_id[token])
-        continue
-
-      if self.lowercase:
-        token = token.lower()
+    for token in self._tokenizer.tokenize(s):
       int_id = self._token_to_id.get(token, -1)
       if int_id < 0:
         int_id = self._oov_bucket(token)
@@ -190,10 +180,10 @@ class TokenTextEncoder(TextEncoder):
       ids.append(int_id)
 
     # Increment for pad id 0
-    return _pad_incr(ids)
+    return pad_incr(ids)
 
   def decode(self, ids):
-    ids = _pad_decr(ids)
+    ids = pad_decr(ids)
 
     tokens = []
     for int_id in ids:
@@ -259,12 +249,7 @@ class Tokenizer(object):
     reserved_tokens, self._reserved_tokens_re = _prepare_reserved_tokens(
         reserved_tokens)
     self._reserved_tokens = set(reserved_tokens)
-
-    if self._alphanum_only:
-      pattern = r"\W+"
-    else:
-      pattern = r"(\W+)"
-    self._alphanum_re = re.compile(pattern, flags=re.UNICODE)
+    self._alphanum_re = ALPHANUM_REGEX if self._alphanum_only else ALL_REGEX
 
   @property
   def alphanum_only(self):
@@ -276,11 +261,9 @@ class Tokenizer(object):
 
   def tokenize(self, s):
     """Splits a string into tokens."""
-    reserved_tokens = self.reserved_tokens
-
     s = tf.compat.as_text(s)
 
-    if reserved_tokens:
+    if self.reserved_tokens:
       # First split out the reserved tokens
       substrs = self._reserved_tokens_re.split(s)
     else:
@@ -288,7 +271,7 @@ class Tokenizer(object):
 
     toks = []
     for substr in substrs:
-      if substr in reserved_tokens:
+      if substr in self.reserved_tokens:
         toks.append(substr)
       else:
         toks.extend(self._alphanum_re.split(substr))
@@ -306,7 +289,7 @@ class Tokenizer(object):
       return u"".join(tokens)
 
 
-def _pad_decr(ids):
+def pad_decr(ids):
   """Strip ID 0 and decrement ids by 1."""
   idx = -1
   while not ids[idx]:
@@ -318,18 +301,35 @@ def _pad_decr(ids):
   return [i - 1 for i in ids]
 
 
-def _pad_incr(ids):
+def pad_incr(ids):
   """Add 1 to ids to account for pad."""
   return [i + 1 for i in ids]
 
 
 def _prepare_reserved_tokens(reserved_tokens):
+  """Prepare reserved tokens and a regex for splitting them out of strings."""
   reserved_tokens = [tf.compat.as_text(tok) for tok in reserved_tokens or []]
-  if len(set(reserved_tokens)) != len(reserved_tokens):
-    raise ValueError("Reserved tokens contains duplicates and must not: %s" %
-                     str(reserved_tokens))
+  dups = _find_duplicates(reserved_tokens)
+  if dups:
+    raise ValueError("Duplicates found in tokens: %s" % dups)
   reserved_tokens_re = None
   if reserved_tokens:
-    pattern = u"(%s)" % u"|".join(reserved_tokens)
+    escaped = [rt.replace(u"\\", u"\\\\") for rt in reserved_tokens]
+    pattern = u"(%s)" % u"|".join(escaped)
     reserved_tokens_re = re.compile(pattern, flags=re.UNICODE)
   return reserved_tokens, reserved_tokens_re
+
+
+def _find_duplicates(els):
+  seen = set()
+  dups = []
+  for x in els:
+    if x in seen:
+      dups.append(x)
+    else:
+      seen.add(x)
+  return dups
+
+
+def is_mixed_alphanum(token):
+  return len([s for s in ALL_REGEX.split(token) if s]) > 1

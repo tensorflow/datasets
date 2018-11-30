@@ -15,10 +15,14 @@
 
 """Text utilities."""
 
+from tensorflow_datasets.core.features.text.subword_text_encoder import SubwordTextEncoder
 from tensorflow_datasets.core.features.text.text_encoder import ByteTextEncoder
+from tensorflow_datasets.core.features.text.text_encoder import Tokenizer
 from tensorflow_datasets.core.features.text.text_encoder import TokenTextEncoder
 
 __all__ = [
     "ByteTextEncoder",
+    "SubwordTextEncoder",
+    "Tokenizer",
     "TokenTextEncoder",
 ]
