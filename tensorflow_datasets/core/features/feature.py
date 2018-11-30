@@ -224,6 +224,45 @@ class FeatureConnector(object):
       )
     return '{}({})'.format(type(self).__name__, tensor_info)
 
+  def save_metadata(self, data_dir, feature_name):
+    """Save the feature metadata on disk.
+
+    This function is called after the data has been generated (by
+    `_download_and_prepare`) to save the feature connector info with the
+    generated dataset.
+
+    Some dataset/features dynamically compute info during
+    `_download_and_prepare`. For instance:
+     * Labels are loaded from the downloaded data
+     * Vocabulary is created from the downloaded data
+     * ImageLabelFolder compute the image dtypes/shape from the manual_dir
+
+    After the info have been added to the feature, this function allow to
+    save those additional info to be restored the next time the data is loaded.
+
+    By default, this function do not save anything, but sub-classes can
+    overwrite the function.
+
+    Args:
+      data_dir: `str`, path to the dataset folder to which save the info (ex:
+        `~/datasets/cifar10/1.2.0/`)
+      feature_name: `str`, the name of the feature (from the FeatureDict key)
+    """
+    pass
+
+  def load_metadata(self, data_dir, feature_name):
+    """Restore the feature metadata from disk.
+
+    If a dataset is re-loaded and generated files exists on disk, this function
+    will restore the feature metadata from the saved file.
+
+    Args:
+      data_dir: `str`, path to the dataset folder to which save the info (ex:
+        `~/datasets/cifar10/1.2.0/`)
+      feature_name: `str`, the name of the feature (from the FeatureDict key)
+    """
+    pass
+
 
 class FeaturesDict(FeatureConnector):
   """Main feature connector orchestrator.
@@ -376,6 +415,22 @@ class FeaturesDict(FeatureConnector):
 
   # TODO(epot): Should investigate if fixed size feature read can be more
   # optimized. And eventually expose a property has_fixed_shape_feature.
+
+  def save_metadata(self, data_dir, feature_name=None):
+    """See base class for details."""
+    # Recursively save all child features
+    for feature_key, feature in six.iteritems(self._feature_dict):
+      if feature_name:
+        feature_key = '-'.join((feature_name, feature_key))
+      feature.save_metadata(data_dir, feature_name=feature_key)
+
+  def load_metadata(self, data_dir, feature_name=None):
+    """See base class for details."""
+    # Recursively load all child features
+    for feature_key, feature in six.iteritems(self._feature_dict):
+      if feature_name:
+        feature_key = '-'.join((feature_name, feature_key))
+      feature.load_metadata(data_dir, feature_name=feature_key)
 
 
 class Tensor(FeatureConnector):

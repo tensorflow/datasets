@@ -76,9 +76,7 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
   def test_num_classes(self):
     labels = features.ClassLabel(num_classes=10)
     self.assertEqual(10, labels.num_classes)
-
-    with self.assertRaisesWithPredicateMatch(ValueError, 'is not available'):
-      _ = labels.names
+    self.assertEqual(labels.names, None)
 
     with self.assertRaisesWithPredicateMatch(ValueError, 'is not available'):
       labels.str2int('1')
@@ -105,6 +103,47 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
     self.assertEqual(labels.int2str(0), 'label3')
     self.assertEqual(labels.int2str(1), 'label1')
     self.assertEqual(labels.int2str(2), 'label2')
+
+  def test_save_load(self):
+    labels1 = features.ClassLabel(names=['label3', 'label1', 'label2'])
+    labels2 = features.ClassLabel(num_classes=None)
+    labels3 = features.ClassLabel(num_classes=1)
+
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      labels1.save_metadata(tmp_dir, 'test-labels')
+      labels2.load_metadata(tmp_dir, 'test-labels')
+      with self.assertRaisesWithPredicateMatch(
+          ValueError, 'number of names do not match the defined num_classes'):
+        labels3.load_metadata(tmp_dir, 'test-labels')
+
+    # labels2 should have been copied from label1
+    self.assertEqual(3, labels2.num_classes)
+    self.assertEqual(labels2.names, [
+        'label3',
+        'label1',
+        'label2',
+    ])
+
+  def test_names(self):
+
+    labels = features.ClassLabel(names=['label3', 'label1', 'label2'])
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'overwrite already defined ClassLabel'):
+      labels.names = ['other', 'labels']
+
+    labels = features.ClassLabel()
+    labels.names = ['label3', 'label1', 'label2']
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'overwrite already defined ClassLabel'):
+      labels.names = ['other', 'labels']
+
+    labels = features.ClassLabel(num_classes=3)
+    labels.names = ['label3', 'label1', 'label2']
+
+    labels = features.ClassLabel(num_classes=3)
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'number of names do not match the defined num_classes'):
+      labels.names = ['label3', 'label1']
 
 
 if __name__ == '__main__':

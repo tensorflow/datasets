@@ -19,9 +19,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import json
+import os
+
 import numpy as np
 import tensorflow as tf
 
+from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature
 
@@ -63,7 +67,8 @@ class Image(feature.FeatureConnector):
       })
   """
 
-  def __init__(self, shape=(None, None, 3), encoding_format='png'):
+  @api_utils.disallow_positional_args
+  def __init__(self, shape=None, encoding_format=None):
     """Construct the connector.
 
     Args:
@@ -81,16 +86,28 @@ class Image(feature.FeatureConnector):
     Raises:
       ValueError: If the shape is invalid
     """
-    self._shape = tuple(shape)
+    self._encoding_format = None
+    self._shape = None
+
+    # Set and validate values
+    self.set_encoding_format(encoding_format or 'png')
+    self.set_shape(shape or (None, None, 3))
+
+  def set_encoding_format(self, encoding_format):
+    """Update the encoding format."""
     supported = ENCODE_FN.keys()
     if encoding_format not in supported:
       raise ValueError('`encoding_format` must be one of %s.' % supported)
+    self._encoding_format = encoding_format
+
+  def set_shape(self, shape):
+    """Update the shape."""
     channels = shape[-1]
-    acceptable_channels = ACCEPTABLE_CHANNELS[encoding_format]
+    acceptable_channels = ACCEPTABLE_CHANNELS[self._encoding_format]
     if channels not in acceptable_channels:
       raise ValueError('Acceptable `channels` for %s: %s (was %s)' % (
-          encoding_format, acceptable_channels, channels))
-    self._encode_fn = ENCODE_FN[encoding_format]
+          self._encoding_format, acceptable_channels, channels))
+    self._shape = tuple(shape)
 
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
@@ -112,7 +129,7 @@ class Image(feature.FeatureConnector):
     if np_image.dtype != np.uint8:
       raise ValueError('Image should be uint8. Detected: %s.' % np_image.dtype)
     utils.assert_shape_match(np_image.shape, self._shape)
-    return self._runner.run(self._encode_fn, np_image)
+    return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
 
   def encode_sample(self, image_or_path):
     """Convert the given image into a dict convertible to tf example."""
@@ -129,3 +146,26 @@ class Image(feature.FeatureConnector):
                                 dtype=tf.uint8)
     img.set_shape(self._shape)
     return img
+
+  def save_metadata(self, data_dir, feature_name=None):
+    """See base class for details."""
+    filepath = _get_metadata_filepath(data_dir, feature_name)
+    with tf.gfile.Open(filepath, 'w') as f:
+      json.dump({
+          'shape': [-1 if d is None else d for d in self._shape],
+          'encoding_format': self._encoding_format,
+      }, f)
+
+  def load_metadata(self, data_dir, feature_name=None):
+    """See base class for details."""
+    # Restore names if defined
+    filepath = _get_metadata_filepath(data_dir, feature_name)
+    if tf.gfile.Exists(filepath):
+      with tf.gfile.Open(filepath, 'r') as f:
+        info_data = json.load(f)
+      self.set_encoding_format(info_data['encoding_format'])
+      self.set_shape([None if d == -1 else d for d in info_data['shape']])
+
+
+def _get_metadata_filepath(data_dir, feature_name):
+  return os.path.join(data_dir, '{}.image.json'.format(feature_name))

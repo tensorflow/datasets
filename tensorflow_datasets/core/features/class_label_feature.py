@@ -15,6 +15,7 @@
 
 """ClassLabel feature."""
 
+import os
 import six
 import tensorflow as tf
 from tensorflow_datasets.core import api_utils
@@ -47,6 +48,10 @@ class ClassLabel(feature.FeatureConnector):
     self._str2int = None
     self._int2str = None
 
+    # The label is explicitly set as undefined (no label defined)
+    if not sum(bool(a) for a in (num_classes, names, names_file)):
+      return
+
     if sum(bool(a) for a in (num_classes, names, names_file)) != 1:
       raise ValueError(
           "Only a single argument of ClassLabel() should be provided.")
@@ -54,10 +59,7 @@ class ClassLabel(feature.FeatureConnector):
     if num_classes:
       self._num_classes = num_classes
     else:
-      names = names or self._load_names_from_file(names_file)
-      self._int2str = [tf.compat.as_text(name) for name in names]
-      self._str2int = {name: i for i, name in enumerate(self._int2str)}
-      self._num_classes = len(self._str2int)
+      self.names = names or _load_names_from_file(names_file)
 
   @property
   def num_classes(self):
@@ -66,10 +68,29 @@ class ClassLabel(feature.FeatureConnector):
   @property
   def names(self):
     if not self._int2str:
-      raise ValueError(
-          "ClassLabel.names is not available because names haven't been "
-          "defined in the ClassLabel constructor.")
+      return None
     return list(self._int2str)
+
+  @names.setter
+  def names(self, new_names):
+    # Names can only be defined once
+    if self._int2str is not None:
+      raise ValueError("Trying to overwrite already defined ClassLabel names.")
+
+    # Set-up new names
+    self._int2str = [tf.compat.as_text(name) for name in new_names]
+    self._str2int = {name: i for i, name in enumerate(self._int2str)}
+
+    # If num_classes has been defined, ensure that num_classes and names match
+    num_classes = len(self._str2int)
+    if self._num_classes is None:
+      self._num_classes = num_classes
+    elif self._num_classes != num_classes:
+      raise ValueError(
+          "ClassLabel number of names do not match the defined num_classes. "
+          "Got {} names VS {} num_classes".format(
+              num_classes, self._num_classes)
+      )
 
   def str2int(self, str_value):
     """Conversion class name string => integer."""
@@ -94,6 +115,12 @@ class ClassLabel(feature.FeatureConnector):
     return feature.TensorInfo(shape=(), dtype=tf.int64)
 
   def encode_sample(self, sample_data):
+    if self._num_classes is None:
+      raise ValueError(
+          "Trying to use ClassLabel feature with undefined number of class. "
+          "Please set ClassLabel.names or num_classes."
+      )
+
     # If a string is given, convert to associated integer
     if isinstance(sample_data, six.string_types):
       sample_data = self.str2int(sample_data)
@@ -107,6 +134,34 @@ class ClassLabel(feature.FeatureConnector):
   def decode_sample(self, tfexample_data):
     return tf.reshape(tfexample_data, tuple())
 
-  def _load_names_from_file(self, names_file):
-    with tf.gfile.Open(names_file, "rb") as f:
-      return [name.strip() for name in tf.compat.as_text(f.read()).split("\n")]
+  def save_metadata(self, data_dir, feature_name=None):
+    """See base class for details."""
+    # Save names if defined
+    if self.names is not None:
+      names_filepath = _get_names_filepath(data_dir, feature_name)
+      _write_names_to_file(names_filepath, self.names)
+
+  def load_metadata(self, data_dir, feature_name=None):
+    """See base class for details."""
+    # Restore names if defined
+    names_filepath = _get_names_filepath(data_dir, feature_name)
+    if tf.gfile.Exists(names_filepath):
+      self.names = _load_names_from_file(names_filepath)
+
+
+def _get_names_filepath(data_dir, feature_name):
+  return os.path.join(data_dir, "{}.labels.txt".format(feature_name))
+
+
+def _load_names_from_file(names_filepath):
+  with tf.gfile.Open(names_filepath, "r") as f:
+    return [
+        name.strip()
+        for name in tf.compat.as_text(f.read()).split("\n")
+        if name.strip()  # Filter empty names
+    ]
+
+
+def _write_names_to_file(names_filepath, names):
+  with tf.gfile.Open(names_filepath, "w") as f:
+    f.write("\n".join(names) + "\n")

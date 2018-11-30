@@ -168,17 +168,26 @@ class DatasetBuilder(object):
       # Modify the data_dir here to avoid having to forward it to every sub
       # function
       self._data_dir = data_dir_tmp
+
+      # Download data, generate the tf.train.Example
       self._download_and_prepare(dl_manager=dl_manager)
+
+      # Update the DatasetInfo metadata by computing statistics from the data.
+      if compute_stats:
+        # Update the info object with the statistics and schema.
+        # Note: self.info already contains static information about the dataset
+        self.info.compute_dynamic_properties(self)
+
+      # Write DatasetInfo to disk, even if we haven't computed the statistics.
+      self.info.write_to_directory(self._data_dir)
+
+      # Once the data has been fully generated in the temporary directory,
+      # we restore set data_dir to it's final location by renaming the
+      # tmp_dir => data_dir (when exiting the context manager).
+      # Using a temporary directory ensure that the loaded data is not corrupted
+      # as only data having completed generation without crash (during the data
+      # generation, stat computation, data info writing,...) can be loaded.
       self._data_dir = data_dir
-
-    # Update the DatasetInfo metadata by computing statistics from the data.
-    if compute_stats:
-      # Update the info object with the statistics and schema.
-      # Note: self.info already contains static information about the dataset
-      self.info.compute_dynamic_properties(self)
-
-    # Write DatasetInfo to disk, even if we haven't computed the statistics.
-    self.info.write_to_directory(self._data_dir)
 
   @api_utils.disallow_positional_args
   def as_dataset(self,

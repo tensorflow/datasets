@@ -20,14 +20,12 @@ from __future__ import division
 from __future__ import print_function
 
 import itertools
-import json
 import os
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 
-METADATA_FILENAME = "image_folder_metadata.json"
 SUPPORTED_IMAGE_FORMAT = (".jpg", ".jpeg", ".png")
 
 
@@ -79,21 +77,6 @@ class ImageLabelFolder(tfds.core.GeneratorBasedDatasetBuilder):
     self.name = name
     super(ImageLabelFolder, self).__init__(**kwargs)
 
-    if self._data_dir:  # Data is restored
-      self._load_info_features()
-
-  def _load_info_features(self):
-    """Load shape, labels,... from the recorded metadata."""
-    metadata_filename = os.path.join(self._data_dir, METADATA_FILENAME)
-    with tf.gfile.Open(metadata_filename) as f:
-      info_data = json.load(f)
-    self.info.features = tfds.features.FeaturesDict({
-        "image": tfds.features.Image(
-            encoding_format=info_data["encoding_format"],
-        ),
-        "label": tfds.features.ClassLabel(names=info_data["labels"]),
-    })
-
   def _info(self):
     if not self._data_dir:
       tf.logging.warning(
@@ -104,10 +87,11 @@ class ImageLabelFolder(tfds.core.GeneratorBasedDatasetBuilder):
     return tfds.core.DatasetInfo(
         name=self.name,
         description="Generic image classification dataset.",
-        # Placeholder generic features before the data is generated
+        version="1.0.0",
+        # Generic features before the data is generated
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(num_classes=1),
+            "label": tfds.features.ClassLabel(num_classes=None),
         }),
         supervised_keys=("image", "label"),
     )
@@ -146,17 +130,10 @@ class ImageLabelFolder(tfds.core.GeneratorBasedDatasetBuilder):
     else:
       encoding_format = "jpeg"
 
-    # Save the automatically computed metadata on disk (every time the dataset
-    # is restored, metadata will be restored as well)
-    metadata_filename = os.path.join(self._data_dir, METADATA_FILENAME)
-    with tf.gfile.Open(metadata_filename, "w") as f:
-      json.dump({
-          "labels": labels,
-          "encoding_format": encoding_format,
-      }, f)
-
-    # Update the info.features from the metadata file
-    self._load_info_features()
+    # Update the info.features. Those info will be automatically resored when
+    # the dataset is re-created
+    self.info.features["image"].set_encoding_format(encoding_format)
+    self.info.features["label"].names = labels
 
     def num_samples(label_images):
       return sum(len(imgs) for imgs in label_images.values())

@@ -165,10 +165,6 @@ class DatasetInfo(object):
   def features(self):
     return self._features
 
-  @features.setter
-  def features(self, new_features):
-    self._features = new_features
-
   @property
   def supervised_keys(self):
     if not self._info_proto.HasField("supervised_keys"):
@@ -206,14 +202,17 @@ class DatasetInfo(object):
   def _dataset_info_filename(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
-  def write_to_directory(self, dataset_info_dir):
-
-    with tf.gfile.Open(self._dataset_info_filename(dataset_info_dir), "w") as f:
-      f.write(json_format.MessageToJson(self.as_proto))
-
   def compute_dynamic_properties(self, builder):
     update_dataset_info(builder, self)
     self._fully_initialized = True
+
+  def write_to_directory(self, dataset_info_dir):
+    # Save the metadata from the features (vocabulary, labels,...)
+    if self.features:
+      self.features.save_metadata(dataset_info_dir)
+
+    with tf.gfile.Open(self._dataset_info_filename(dataset_info_dir), "w") as f:
+      f.write(json_format.MessageToJson(self.as_proto))
 
   def read_from_directory(self, dataset_info_dir):
     """Update the DatasetInfo properties from the metadata file.
@@ -249,6 +248,10 @@ class DatasetInfo(object):
 
     # Restore the Splits
     self._splits = splits_lib.SplitDict.from_proto(self._info_proto.splits)
+
+    # Restore the feature metadata (vocabulary, labels names,...)
+    if self.features:
+      self.features.load_metadata(dataset_info_dir)
 
     # Mark as fully initialized.
     self._fully_initialized = True
