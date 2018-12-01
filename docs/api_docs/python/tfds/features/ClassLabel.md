@@ -11,6 +11,8 @@
 <meta itemprop="property" content="get_serialized_features"/>
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="int2str"/>
+<meta itemprop="property" content="load_metadata"/>
+<meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="str2int"/>
 <meta itemprop="property" content="serialized_keys"/>
 </div>
@@ -29,7 +31,7 @@ Feature encoding an integer class label.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-```python
+``` python
 __init__(
     num_classes=None,
     names=None,
@@ -39,20 +41,23 @@ __init__(
 
 Constructs a ClassLabel FeatureConnector.
 
-There are 3 ways to define a ClassLabel, which correspond to the 3 arguments: *
-`num_classes`: create 0 to (num_classes-1) labels * `names`: a list of label
-strings * `names_file`: a file containing the list of labels.
+There are 3 ways to define a ClassLabel, which correspond to the 3
+arguments:
+ * `num_classes`: create 0 to (num_classes-1) labels
+ * `names`: a list of label strings
+ * `names_file`: a file containing the list of labels.
 
 Note: On python2, the strings are encoded as utf-8.
 
 #### Args:
 
-*   <b>`num_classes`</b>: `int`, number of classes. All labels must be <
-    num_classes.
-*   <b>`names`</b>: `list<str>`, string names for the integer classes. The order
-    in which the names are provided is kept.
-*   <b>`names_file`</b>: `str`, path to a file with names for the integer
+* <b>`num_classes`</b>: `int`, number of classes. All labels must be < num_classes.
+* <b>`names`</b>: `list<str>`, string names for the integer classes. The
+    order in which the names are provided is kept.
+* <b>`names_file`</b>: `str`, path to a file with names for the integer
     classes, one per line.
+
+
 
 ## Properties
 
@@ -105,16 +110,20 @@ The DatasetBuilder are written on disk as tf.train.Example proto.
 
 Ex:
 
-  return {
-      'image': tf.VarLenFeature(tf.uint8):
-      'height': tf.FixedLenFeature((), tf.int32),
-      'width': tf.FixedLenFeature((), tf.int32),
-  }
+```
+return {
+    'image': tf.VarLenFeature(tf.uint8):
+    'height': tf.FixedLenFeature((), tf.int32),
+    'width': tf.FixedLenFeature((), tf.int32),
+}
+```
 
 FeatureConnector which are not containers should return the feature proto
 directly:
 
-  return tf.FixedLenFeature((64, 64), tf.uint8)
+```
+return tf.FixedLenFeature((64, 64), tf.uint8)
+```
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.
@@ -129,21 +138,47 @@ If not defined, the retuned values are automatically deduced from the
 get_tensor_info()
 ```
 
+
+
 <h3 id="int2str"><code>int2str</code></h3>
 
-```python
+``` python
 int2str(int_value)
 ```
 
 Conversion integer => class name string.
 
+<h3 id="load_metadata"><code>load_metadata</code></h3>
+
+``` python
+load_metadata(
+    data_dir,
+    feature_name=None
+)
+```
+
+See base class for details.
+
+<h3 id="save_metadata"><code>save_metadata</code></h3>
+
+``` python
+save_metadata(
+    data_dir,
+    feature_name=None
+)
+```
+
+See base class for details.
+
 <h3 id="str2int"><code>str2int</code></h3>
 
-```python
+``` python
 str2int(str_value)
 ```
 
 Conversion class name string => integer.
+
+
 
 ## Class Members
 

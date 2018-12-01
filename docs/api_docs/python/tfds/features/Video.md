@@ -8,6 +8,8 @@
 <meta itemprop="property" content="encode_sample"/>
 <meta itemprop="property" content="get_serialized_features"/>
 <meta itemprop="property" content="get_tensor_info"/>
+<meta itemprop="property" content="load_metadata"/>
+<meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="serialized_keys"/>
 </div>
 
@@ -103,16 +105,20 @@ The DatasetBuilder are written on disk as tf.train.Example proto.
 
 Ex:
 
-  return {
-      'image': tf.VarLenFeature(tf.uint8):
-      'height': tf.FixedLenFeature((), tf.int32),
-      'width': tf.FixedLenFeature((), tf.int32),
-  }
+```
+return {
+    'image': tf.VarLenFeature(tf.uint8):
+    'height': tf.FixedLenFeature((), tf.int32),
+    'width': tf.FixedLenFeature((), tf.int32),
+}
+```
 
 FeatureConnector which are not containers should return the feature proto
 directly:
 
-  return tf.FixedLenFeature((64, 64), tf.uint8)
+```
+return tf.FixedLenFeature((64, 64), tf.uint8)
+```
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.
@@ -128,6 +134,60 @@ get_tensor_info()
 ```
 
 See base class for details.
+
+<h3 id="load_metadata"><code>load_metadata</code></h3>
+
+``` python
+load_metadata(
+    data_dir,
+    feature_name
+)
+```
+
+Restore the feature metadata from disk.
+
+If a dataset is re-loaded and generated files exists on disk, this function
+will restore the feature metadata from the saved file.
+
+#### Args:
+
+* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
+    `~/datasets/cifar10/1.2.0/`)
+* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
+
+<h3 id="save_metadata"><code>save_metadata</code></h3>
+
+``` python
+save_metadata(
+    data_dir,
+    feature_name
+)
+```
+
+Save the feature metadata on disk.
+
+This function is called after the data has been generated (by
+`_download_and_prepare`) to save the feature connector info with the
+generated dataset.
+
+Some dataset/features dynamically compute info during
+`_download_and_prepare`. For instance:
+
+ * Labels are loaded from the downloaded data
+ * Vocabulary is created from the downloaded data
+ * ImageLabelFolder compute the image dtypes/shape from the manual_dir
+
+After the info have been added to the feature, this function allow to
+save those additional info to be restored the next time the data is loaded.
+
+By default, this function do not save anything, but sub-classes can
+overwrite the function.
+
+#### Args:
+
+* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
+    `~/datasets/cifar10/1.2.0/`)
+* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
 
 
 

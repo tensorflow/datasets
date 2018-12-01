@@ -9,6 +9,8 @@
 <meta itemprop="property" content="encode_sample"/>
 <meta itemprop="property" content="get_serialized_features"/>
 <meta itemprop="property" content="get_tensor_info"/>
+<meta itemprop="property" content="load_metadata"/>
+<meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="serialized_keys"/>
 </div>
 
@@ -33,24 +35,30 @@ Example:
 
 For DatasetInfo:
 
-  features = tfds.features.FeaturesDict({
-      'input': tfds.features.Image(),
-      'target': tf.int32,
-  })
+```
+features = tfds.features.FeaturesDict({
+    'input': tfds.features.Image(),
+    'target': tf.int32,
+})
+```
 
 At generation time:
 
-  for image, label in generate_samples:
-    yield self.info.features.encode_sample({
-        'input': image,
-        'output': label
-    })
+```
+for image, label in generate_samples:
+  yield self.info.features.encode_sample({
+      'input': image,
+      'output': label
+  })
+```
 
 At tf.data.Dataset() time:
 
-  for sample in tfds.load(...):
-    tf_input = sample['input']
-    tf_output = sample['output']
+```
+for sample in tfds.load(...):
+  tf_input = sample['input']
+  tf_output = sample['output']
+```
 
 For nested features, the FeaturesDict will internally flatten the keys for the
 features and the conversion to tf.train.Example. Indeed, the tf.train.Example
@@ -59,21 +67,25 @@ But internal transformation should be invisible to the user.
 
 Example:
 
-  tfds.features.FeaturesDict({
-      'input': tf.int32,
-      'target': {
-          'height': tf.int32,
-          'width': tf.int32,
-      },
-  })
+```
+tfds.features.FeaturesDict({
+    'input': tf.int32,
+    'target': {
+        'height': tf.int32,
+        'width': tf.int32,
+    },
+})
+```
 
 Will internally store the data as:
 
+```
 {
-    'input': ...,
-    'target/height': ...,
-    'target/width': ...,
+    'input': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
+    'target/height': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
+    'target/width': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
 }
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -147,6 +159,28 @@ See base class for details.
 
 ``` python
 get_tensor_info()
+```
+
+See base class for details.
+
+<h3 id="load_metadata"><code>load_metadata</code></h3>
+
+``` python
+load_metadata(
+    data_dir,
+    feature_name=None
+)
+```
+
+See base class for details.
+
+<h3 id="save_metadata"><code>save_metadata</code></h3>
+
+``` python
+save_metadata(
+    data_dir,
+    feature_name=None
+)
 ```
 
 See base class for details.

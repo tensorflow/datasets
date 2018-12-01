@@ -106,7 +106,9 @@ class FeatureConnector(object):
   Here is a diagram on how FeatureConnector methods fit into the data
   generation/reading:
 
-    generator => encode_sample() => tf_example => decode_sample() => data dict
+  ```
+  generator => encode_sample() => tf_example => decode_sample() => data dict
+  ```
 
   The connector can either get raw or dictionary values as input, depending on
   the connector type.
@@ -122,16 +124,20 @@ class FeatureConnector(object):
 
     Ex:
 
-      return {
-          'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8):
-          'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
-          'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
-      }
+    ```
+    return {
+        'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8):
+        'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+        'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+    }
+    ```
 
     FeatureConnector which are not containers should return the feature proto
     directly:
 
-      return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
+    ```
+    return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
+    ```
 
     Returns:
       tensor_info: Either a dict of `tfds.features.TensorInfo` object, or a
@@ -158,16 +164,20 @@ class FeatureConnector(object):
 
     Ex:
 
-      return {
-          'image': tf.VarLenFeature(tf.uint8):
-          'height': tf.FixedLenFeature((), tf.int32),
-          'width': tf.FixedLenFeature((), tf.int32),
-      }
+    ```
+    return {
+        'image': tf.VarLenFeature(tf.uint8):
+        'height': tf.FixedLenFeature((), tf.int32),
+        'width': tf.FixedLenFeature((), tf.int32),
+    }
+    ```
 
     FeatureConnector which are not containers should return the feature proto
     directly:
 
-      return tf.FixedLenFeature((64, 64), tf.uint8)
+    ```
+    return tf.FixedLenFeature((64, 64), tf.uint8)
+    ```
 
     If not defined, the retuned values are automatically deduced from the
     `get_tensor_info` function.
@@ -186,20 +196,25 @@ class FeatureConnector(object):
     generation. For example:
 
     For features:
+
     ```
     features={
         'image': tfds.features.Image(),
         'custom_feature': tfds.features.CustomFeature(),
     }
     ```
+
     At data generation (in `_generate_samples`), if the user yields:
+
     ```
     yield self.info.features.encode_samples({
         'image': 'path/to/img.png',
         'custom_feature': [123, 'str', lambda x: x+1]
     })
     ```
+
     Then:
+
      * `tfds.features.Image.encode_sample` will get `'path/to/img.png'` as input
      * `tfds.features.CustomFeature.encode_sample` will get `[123, 'str',
        lambda x: x+1] as input
@@ -266,6 +281,7 @@ class FeatureConnector(object):
 
     Some dataset/features dynamically compute info during
     `_download_and_prepare`. For instance:
+
      * Labels are loaded from the downloaded data
      * Vocabulary is created from the downloaded data
      * ImageLabelFolder compute the image dtypes/shape from the manual_dir
@@ -309,24 +325,30 @@ class FeaturesDict(FeatureConnector):
 
   For DatasetInfo:
 
-    features = tfds.features.FeaturesDict({
-        'input': tfds.features.Image(),
-        'target': tf.int32,
-    })
+  ```
+  features = tfds.features.FeaturesDict({
+      'input': tfds.features.Image(),
+      'target': tf.int32,
+  })
+  ```
 
   At generation time:
 
-    for image, label in generate_samples:
-      yield self.info.features.encode_sample({
-          'input': image,
-          'output': label
-      })
+  ```
+  for image, label in generate_samples:
+    yield self.info.features.encode_sample({
+        'input': image,
+        'output': label
+    })
+  ```
 
   At tf.data.Dataset() time:
 
-    for sample in tfds.load(...):
-      tf_input = sample['input']
-      tf_output = sample['output']
+  ```
+  for sample in tfds.load(...):
+    tf_input = sample['input']
+    tf_output = sample['output']
+  ```
 
   For nested features, the FeaturesDict will internally flatten the keys for the
   features and the conversion to tf.train.Example. Indeed, the tf.train.Example
@@ -335,21 +357,25 @@ class FeaturesDict(FeatureConnector):
 
   Example:
 
-    tfds.features.FeaturesDict({
-        'input': tf.int32,
-        'target': {
-            'height': tf.int32,
-            'width': tf.int32,
-        },
-    })
+  ```
+  tfds.features.FeaturesDict({
+      'input': tf.int32,
+      'target': {
+          'height': tf.int32,
+          'width': tf.int32,
+      },
+  })
+  ```
 
   Will internally store the data as:
 
+  ```
   {
-      'input': ...,
-      'target/height': ...,
-      'target/width': ...,
+      'input': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
+      'target/height': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
+      'target/width': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
   }
+  ```
 
   """
 
@@ -526,27 +552,33 @@ class OneOf(FeaturesDict):
 
   Example:
 
-    features = tfds.features.FeaturesDict({
-        'labels': features.OneOf('coco', {
-            'coco': tf.string,
-            'cifar10': tf.string,
-        }),
-    })
+  ```
+  features = tfds.features.FeaturesDict({
+      'labels': features.OneOf('coco', {
+          'coco': tf.string,
+          'cifar10': tf.string,
+      }),
+  })
+  ```
 
   At generation time, encode both coco and cifar labels:
 
-    for sample in generate_samples:
-      yield self.info.features.encode_sample({
-          'labels': {
-              'coco': 'person',
-              'cifar10': 'airplane',
-          },
-      })
+  ```
+  for sample in generate_samples:
+    yield self.info.features.encode_sample({
+        'labels': {
+            'coco': 'person',
+            'cifar10': 'airplane',
+        },
+    })
+  ```
 
   At tf.data.Dataset() time, only the label from coco is decoded:
 
-    for sample in tfds.load(...):
-      tf_label = sample['labels']  # == 'person'
+  ```
+  for sample in tfds.load(...):
+    tf_label = sample['labels']  # == 'person'
+  ```
 
   """
 

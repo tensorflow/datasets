@@ -8,6 +8,10 @@
 <meta itemprop="property" content="encode_sample"/>
 <meta itemprop="property" content="get_serialized_features"/>
 <meta itemprop="property" content="get_tensor_info"/>
+<meta itemprop="property" content="load_metadata"/>
+<meta itemprop="property" content="save_metadata"/>
+<meta itemprop="property" content="set_encoding_format"/>
+<meta itemprop="property" content="set_shape"/>
 <meta itemprop="property" content="serialized_keys"/>
 </div>
 
@@ -50,8 +54,8 @@ Example:
 
 ``` python
 __init__(
-    shape=(None, None, 3),
-    encoding_format='png'
+    shape=None,
+    encoding_format=None
 )
 ```
 
@@ -122,6 +126,44 @@ get_tensor_info()
 ```
 
 
+
+<h3 id="load_metadata"><code>load_metadata</code></h3>
+
+``` python
+load_metadata(
+    data_dir,
+    feature_name=None
+)
+```
+
+See base class for details.
+
+<h3 id="save_metadata"><code>save_metadata</code></h3>
+
+``` python
+save_metadata(
+    data_dir,
+    feature_name=None
+)
+```
+
+See base class for details.
+
+<h3 id="set_encoding_format"><code>set_encoding_format</code></h3>
+
+``` python
+set_encoding_format(encoding_format)
+```
+
+Update the encoding format.
+
+<h3 id="set_shape"><code>set_shape</code></h3>
+
+``` python
+set_shape(shape)
+```
+
+Update the shape.
 
 
 

@@ -7,6 +7,8 @@
 <meta itemprop="property" content="encode_sample"/>
 <meta itemprop="property" content="get_serialized_features"/>
 <meta itemprop="property" content="get_tensor_info"/>
+<meta itemprop="property" content="load_metadata"/>
+<meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="serialized_keys"/>
 </div>
 
@@ -28,7 +30,9 @@ on disk, and the way it is presented to the user.
 Here is a diagram on how FeatureConnector methods fit into the data
 generation/reading:
 
-  generator => encode_sample() => tf_example => decode_sample() => data dict
+```
+generator => encode_sample() => tf_example => decode_sample() => data dict
+```
 
 The connector can either get raw or dictionary values as input, depending on
 the connector type.
@@ -55,10 +59,15 @@ decode_sample(tfexample_data)
 
 Decode the feature dict to TF compatible input.
 
+Note: If eager is not enabled, this function will be executed as a
+tensorflow graph (in `tf.data.Dataset.map(features.decode_samples)`).
+
 #### Args:
 
 * <b>`tfexample_data`</b>: Data or dictionary of data, as read by the tf-example
-    reader.
+    reader. It correspond to the `tf.Tensor()` (or dict of `tf.Tensor()`)
+    extracted from the `tf.train.Example`, matching the info defined in
+    `get_serialize_info()`.
 
 
 #### Returns:
@@ -74,6 +83,33 @@ encode_sample(sample_data)
 
 Encode the feature dict into tf-example compatible input.
 
+The input sample_data can be anything that the user passed at data
+generation. For example:
+
+For features:
+
+```
+features={
+    'image': tfds.features.Image(),
+    'custom_feature': tfds.features.CustomFeature(),
+}
+```
+
+At data generation (in `_generate_samples`), if the user yields:
+
+```
+yield self.info.features.encode_samples({
+    'image': 'path/to/img.png',
+    'custom_feature': [123, 'str', lambda x: x+1]
+})
+```
+
+Then:
+
+ * <a href="../../tfds/features/Image.md#encode_sample"><code>tfds.features.Image.encode_sample</code></a> will get `'path/to/img.png'` as input
+ * `tfds.features.CustomFeature.encode_sample` will get `[123, 'str',
+   lambda x: x+1] as input
+
 #### Args:
 
 * <b>`sample_data`</b>: Value or dictionary of values to convert into tf-example
@@ -82,7 +118,13 @@ Encode the feature dict into tf-example compatible input.
 
 #### Returns:
 
-* <b>`tfexample_data`</b>: Data or dictionary of data to write as tf-example
+* <b>`tfexample_data`</b>: Data or dictionary of data to write as tf-example. Data
+    can be a list or numpy array.
+    Note that numpy arrays are flattened so it's the feature connector
+    responsibility to reshape them in `decode_sample()`.
+    Note that tf.train.Example only supports int64, float32 and string so
+    the data returned here should be integer, float or string. User type
+    can be restored in `decode_sample()`.
 
 <h3 id="get_serialized_features"><code>get_serialized_features</code></h3>
 
@@ -97,16 +139,20 @@ The DatasetBuilder are written on disk as tf.train.Example proto.
 
 Ex:
 
-  return {
-      'image': tf.VarLenFeature(tf.uint8):
-      'height': tf.FixedLenFeature((), tf.int32),
-      'width': tf.FixedLenFeature((), tf.int32),
-  }
+```
+return {
+    'image': tf.VarLenFeature(tf.uint8):
+    'height': tf.FixedLenFeature((), tf.int32),
+    'width': tf.FixedLenFeature((), tf.int32),
+}
+```
 
 FeatureConnector which are not containers should return the feature proto
 directly:
 
-  return tf.FixedLenFeature((64, 64), tf.uint8)
+```
+return tf.FixedLenFeature((64, 64), tf.uint8)
+```
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.
@@ -128,21 +174,79 @@ This returns the tensor dtype/shape, as returned by .as_dataset by the
 
 Ex:
 
-  return {
-      'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8):
-      'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
-      'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
-  }
+```
+return {
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8):
+    'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+    'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+}
+```
 
 FeatureConnector which are not containers should return the feature proto
 directly:
 
-  return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
+```
+return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
+```
 
 #### Returns:
 
 * <b>`tensor_info`</b>: Either a dict of <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a> object, or a
     <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>
+
+<h3 id="load_metadata"><code>load_metadata</code></h3>
+
+``` python
+load_metadata(
+    data_dir,
+    feature_name
+)
+```
+
+Restore the feature metadata from disk.
+
+If a dataset is re-loaded and generated files exists on disk, this function
+will restore the feature metadata from the saved file.
+
+#### Args:
+
+* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
+    `~/datasets/cifar10/1.2.0/`)
+* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
+
+<h3 id="save_metadata"><code>save_metadata</code></h3>
+
+``` python
+save_metadata(
+    data_dir,
+    feature_name
+)
+```
+
+Save the feature metadata on disk.
+
+This function is called after the data has been generated (by
+`_download_and_prepare`) to save the feature connector info with the
+generated dataset.
+
+Some dataset/features dynamically compute info during
+`_download_and_prepare`. For instance:
+
+ * Labels are loaded from the downloaded data
+ * Vocabulary is created from the downloaded data
+ * ImageLabelFolder compute the image dtypes/shape from the manual_dir
+
+After the info have been added to the feature, this function allow to
+save those additional info to be restored the next time the data is loaded.
+
+By default, this function do not save anything, but sub-classes can
+overwrite the function.
+
+#### Args:
+
+* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
+    `~/datasets/cifar10/1.2.0/`)
+* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
 
 
 

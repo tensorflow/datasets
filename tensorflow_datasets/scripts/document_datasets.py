@@ -32,6 +32,8 @@ import tensorflow_datasets as tfds
 
 BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets"
 
+# ImageLabelFolder require an extra constructor arg so is handled separately
+# TODO(tfds): Document the manual_dir datasets in a separate section
 BUILDER_BLACKLIST = ["image_label_folder"]
 
 DOC = """\
@@ -124,7 +126,7 @@ def make_module_to_builder_dict():
       tfds.builder(name)
       for name in tfds.list_builders()
       if name not in BUILDER_BLACKLIST
-  ]
+  ] + [tfds.builder("image_label_folder", dataset_name="image_label_folder")]
 
   for builder in builders:
     mod_name = builder.__class__.__module__

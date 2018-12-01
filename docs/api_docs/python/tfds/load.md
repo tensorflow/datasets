@@ -12,6 +12,7 @@ tfds.load(
     data_dir=None,
     download=True,
     as_supervised=False,
+    with_info=False,
     builder_kwargs=None,
     download_and_prepare_kwargs=None,
     as_dataset_kwargs=None
@@ -27,6 +28,18 @@ Loads the given <a href="../tfds/Split.md"><code>tfds.Split</code></a> as a `tf.
 `load` is a convenience method that fetches the <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by
 string name, optionally calls `DatasetBuilder.download_and_prepare`
 (if `download=True`), and then calls `DatasetBuilder.as_dataset`.
+This is roughly equivalent to:
+
+```
+builder = tfds.builder(name, data_dir=data_dir, **builder_kwargs)
+if download:
+  builder.download_and_prepare(**download_and_prepare_kwargs)
+ds = builder.as_dataset(
+    split=split, as_supervised=as_supervised, **as_dataset_kwargs)
+if with_info:
+  return ds, builder.info
+return ds
+```
 
 Callers must pass arguments as keyword arguments.
 
@@ -54,6 +67,9 @@ of hundreds of GiB to disk. Refer to download argument.
     `builder.info.supervised_keys`. If `False`, the default,
     the returned `tf.data.Dataset` will have a dictionary with all the
     features.
+* <b>`with_info`</b>: `bool`, if True, tfds.load will return the tuple
+    (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
+    with the builder.
 * <b>`builder_kwargs`</b>: `dict` (optional), keyword arguments to be passed to the
     <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> constructor. `data_dir` will be passed
     through by default.
@@ -68,4 +84,7 @@ of hundreds of GiB to disk. Refer to download argument.
 
 #### Returns:
 
-`tf.data.Dataset`
+* <b>`ds`</b>: `tf.data.Dataset`, the dataset requested.
+* <b>`ds_info`</b>: <a href="../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>, if `with_info` is True, then tfds.load
+    will return a tuple (ds, ds_info) containing the dataset info (version,
+    features, splits, num_examples,...).

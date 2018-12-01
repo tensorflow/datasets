@@ -73,8 +73,8 @@ class ImageLabelFolder(tfds.core.GeneratorBasedDatasetBuilder):
 
   # TODO(epot): Image shape should be automatically deduced
 
-  def __init__(self, name, **kwargs):
-    self.name = name
+  def __init__(self, dataset_name, **kwargs):
+    self.name = dataset_name
     super(ImageLabelFolder, self).__init__(**kwargs)
 
   def _info(self):

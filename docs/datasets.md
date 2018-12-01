@@ -18,6 +18,7 @@ Datasets
   * [`"cifar100"`](#cifar100)
   * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
   * [`"fashion_mnist"`](#fashion_mnist)
+  * [`"image_label_folder"`](#image_label_folder)
   * [`"mnist"`](#mnist)
 * `video`
   * [`"bair_robot_pushing"`](#bair_robot_pushing)
@@ -41,6 +42,10 @@ Datasets
 ## `"fashion_mnist"`
 
 [`tfds.image.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
+
+## `"image_label_folder"`
+
+[`tfds.image.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/image_folder.py)
 
 ## `"mnist"`
 

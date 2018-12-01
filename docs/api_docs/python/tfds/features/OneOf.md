@@ -9,6 +9,8 @@
 <meta itemprop="property" content="encode_sample"/>
 <meta itemprop="property" content="get_serialized_features"/>
 <meta itemprop="property" content="get_tensor_info"/>
+<meta itemprop="property" content="load_metadata"/>
+<meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="serialized_keys"/>
 </div>
 
@@ -30,27 +32,33 @@ output you want for the tf.data.Dataset at decode time.
 
 Example:
 
-  features = tfds.features.FeaturesDict({
-      'labels': features.OneOf('coco', {
-          'coco': tf.string,
-          'cifar10': tf.string,
-      }),
-  })
+```
+features = tfds.features.FeaturesDict({
+    'labels': features.OneOf('coco', {
+        'coco': tf.string,
+        'cifar10': tf.string,
+    }),
+})
+```
 
 At generation time, encode both coco and cifar labels:
 
-  for sample in generate_samples:
-    yield self.info.features.encode_sample({
-        'labels': {
-            'coco': 'person',
-            'cifar10': 'airplane',
-        },
-    })
+```
+for sample in generate_samples:
+  yield self.info.features.encode_sample({
+      'labels': {
+          'coco': 'person',
+          'cifar10': 'airplane',
+      },
+  })
+```
 
 At tf.data.Dataset() time, only the label from coco is decoded:
 
-  for sample in tfds.load(...):
-    tf_label = sample['labels']  # == 'person'
+```
+for sample in tfds.load(...):
+  tf_label = sample['labels']  # == 'person'
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -126,6 +134,28 @@ See base class for details.
 
 ``` python
 get_tensor_info()
+```
+
+See base class for details.
+
+<h3 id="load_metadata"><code>load_metadata</code></h3>
+
+``` python
+load_metadata(
+    data_dir,
+    feature_name=None
+)
+```
+
+See base class for details.
+
+<h3 id="save_metadata"><code>save_metadata</code></h3>
+
+``` python
+save_metadata(
+    data_dir,
+    feature_name=None
+)
 ```
 
 See base class for details.

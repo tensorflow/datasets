@@ -29,7 +29,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 
 class ImageLabelFolderTest(dataset_builder_testing.TestCase):
   DATASET_CLASS = functools.partial(
-      image_folder.ImageLabelFolder, name="image_folder_data")
+      image_folder.ImageLabelFolder, dataset_name="image_folder_data")
   SPLITS = {
       "train": 2,  # Number of samples.
       "test": 6,
