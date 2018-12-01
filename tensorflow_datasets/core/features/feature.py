@@ -600,6 +600,10 @@ class OneOf(FeaturesDict):
     super(OneOf, self).__init__(feature_dict)
     self._choice = choice
 
+  def __getattr__(self, key):
+    """Access choice attribute."""
+    return getattr(self._feature_dict[self._choice], key)
+
   def get_tensor_info(self):
     """See base class for details."""
     # Overwrite FeaturesDict.get_tensor_info() to only select the
