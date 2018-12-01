@@ -23,6 +23,7 @@ Each dataset is defined as a `tfds.core.DatasetBuilder`.
 
 # Imports for registration
 from tensorflow_datasets import image
+from tensorflow_datasets import text_sentiment
 from tensorflow_datasets import video
 
 

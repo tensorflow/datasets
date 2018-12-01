@@ -1,0 +1,16 @@
+* aclImdb
+  * train/
+    * pos/
+      * 0_7.txt
+      * 1_8.txt
+    * neg/
+      * 0_7.txt
+      * 1_8.txt
+      * 2_9.txt
+  * test/
+    * pos/
+      * 777_7.txt
+      * 778_7.txt
+    * neg/
+      * 888_7.txt
+      * 889_7.txt

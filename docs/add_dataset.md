@@ -263,6 +263,12 @@ In order to support Cloud storage systems, all file access must use `tf.gfile`
 or other TensorFlow file APIs (for example, `tf.python_io`). Python built-ins
 for file operations (e.g. `open`, `os.rename`, `gzip`, etc.) must be avoided.
 
+## Register your dataset
+
+To ensure that users can access the dataset through `tfds.load` and
+`tfds.builder`, make sure your module `my_dataset` is imported in
+`tensorflow_datasets/__init__.py`.
+
 # Create your own `FeatureConnector`
 
 `FeatureConnector`s in `DatasetInfo` correspond to the elements returned in the

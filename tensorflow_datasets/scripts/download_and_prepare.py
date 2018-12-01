@@ -37,6 +37,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 import pdb
 
 import tensorflow as tf
@@ -46,8 +47,10 @@ import termcolor
 flags = tf.flags
 FLAGS = flags.FLAGS
 
+DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
+
 flags.DEFINE_string("dataset_name", None, "Registered name of DatasetBuilder")
-flags.DEFINE_string("data_dir", None, "Directory for data")
+flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Directory for data")
 flags.DEFINE_string("cache_dir", None, "Directory for downloads")
 flags.DEFINE_string(
     "manual_dir", None,
