@@ -29,21 +29,6 @@ from six.moves import cPickle
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-# CIFAR-10 constants
-_CIFAR10_URL = "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
-_CIFAR10_PREFIX = "cifar-10-batches-py/"
-_CIFAR10_TRAIN_FILES = [
-    "data_batch_1", "data_batch_2", "data_batch_3", "data_batch_4",
-    "data_batch_5"
-]
-_CIFAR10_TEST_FILES = ["test_batch"]
-
-# CIFAR-100 constants
-_CIFAR100_URL = "https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz"
-_CIFAR100_PREFIX = "cifar-100-python/"
-_CIFAR100_TRAIN_FILES = ["train"]
-_CIFAR100_TEST_FILES = ["test"]
-
 # Shared constants
 _CIFAR_IMAGE_SIZE = 32
 _CIFAR_IMAGE_SHAPE = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
@@ -58,7 +43,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
         description=("The CIFAR-10 dataset consists of 60000 32x32 colour "
                      "images in 10 classes, with 6000 images per class. There "
                      "are 50000 training images and 10000 test images."),
-        version="1.0.0",
+        version="1.0.1",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=10),
@@ -76,10 +61,14 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
   def _cifar_info(self):
     return CifarInfo(
         name=self.name,
-        url=_CIFAR10_URL,
-        train_files=_CIFAR10_TRAIN_FILES,
-        test_files=_CIFAR10_TEST_FILES,
-        prefix=_CIFAR10_PREFIX,
+        url="https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz",
+        train_files=[
+            "data_batch_1", "data_batch_2", "data_batch_3", "data_batch_4",
+            "data_batch_5"
+        ],
+        test_files=["test_batch"],
+        meta_file="batches.meta",
+        prefix="cifar-10-batches-py/",
         label_keys=["labels"],
     )
 
@@ -87,9 +76,25 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
     cifar_path = dl_manager.download_and_extract(self._cifar_info.url)
     cifar_info = self._cifar_info
 
+    cifar_path = os.path.join(cifar_path, cifar_info.prefix)
+
+    # Load the label names
+    metadata = _load_pickle(os.path.join(cifar_path, cifar_info.meta_file))
+    for label_key in cifar_info.label_keys:
+      label_key = _strip_s(label_key)  # labels => label
+      label_names = metadata["{}_names".format(label_key)]
+
+      # Multi label case
+      if len(cifar_info.label_keys) > 1:
+        self.info.features["label"][label_key].names = label_names
+      # Single label
+      else:
+        self.info.features["label"].names = label_names
+
+    # Define the splits
     def gen_filenames(filenames):
       for f in filenames:
-        yield os.path.join(cifar_path, self._cifar_info.prefix, f)
+        yield os.path.join(cifar_path, f)
 
     return [
         tfds.core.SplitGenerator(
@@ -116,11 +121,8 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
     """
     images, labels = [], []
     for path in filepaths:
-      with tf.gfile.Open(path, "rb") as f:
-        if six.PY2:
-          data = cPickle.load(f)
-        else:
-          data = cPickle.load(f, encoding="latin1")
+      data = _load_pickle(path)
+
       batch_images = data["data"]
       num_images = batch_images.shape[0]
       batch_images = batch_images.reshape(
@@ -133,7 +135,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
 
       # Extract the list[dict[label_key, sample_label]]
       labels.extend([
-          {k: data[k][j] for k in self._cifar_info.label_keys}
+          {_strip_s(k): data[k][j] for k in self._cifar_info.label_keys}
           for j in range(num_images)
       ])
 
@@ -143,7 +145,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
 
     for image, label in data:
       if len(label) == 1:
-        label = label[self._cifar_info.label_keys[0]]
+        label = label[_strip_s(self._cifar_info.label_keys[0])]
       yield self.info.features.encode_sample({
           "image": image,
           "label": label,
@@ -171,15 +173,16 @@ class Cifar100(Cifar10):
   def _cifar_info(self):
     return CifarInfo(
         name=self.name,
-        url=_CIFAR100_URL,
-        train_files=_CIFAR100_TRAIN_FILES,
-        test_files=_CIFAR100_TEST_FILES,
-        prefix=_CIFAR100_PREFIX,
+        url="https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz",
+        train_files=["train"],
+        test_files=["test"],
+        meta_file="meta",
+        prefix="cifar-100-python/",
         label_keys=["fine_labels", "coarse_labels"],
     )
 
   def _info(self):
-    label_to_use = "coarse_labels" if self._use_coarse_labels else "fine_labels"
+    label_to_use = "coarse_label" if self._use_coarse_labels else "fine_label"
     return tfds.core.DatasetInfo(
         name=self.name,
         description=("This dataset is just like the CIFAR-10, except it has "
@@ -189,12 +192,12 @@ class Cifar100(Cifar10):
                      "superclasses. Each image comes with a \"fine\" label "
                      "(the class to which it belongs) and a \"coarse\" label "
                      "(the superclass to which it belongs)."),
-        version="1.0.0",
+        version="1.1.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             "label": tfds.features.OneOf(choice=label_to_use, feature_dict={
-                "coarse_labels": tfds.features.ClassLabel(num_classes=20),
-                "fine_labels": tfds.features.ClassLabel(num_classes=100),
+                "coarse_label": tfds.features.ClassLabel(num_classes=20),
+                "fine_label": tfds.features.ClassLabel(num_classes=100),
             }),
         }),
         supervised_keys=("image", "label"),
@@ -213,6 +216,7 @@ class CifarInfo(collections.namedtuple("_CifarInfo", [
     "prefix",
     "train_files",
     "test_files",
+    "meta_file",
     "label_keys",
 ])):
   """Contains the information necessary to generate a CIFAR dataset.
@@ -224,7 +228,24 @@ class CifarInfo(collections.namedtuple("_CifarInfo", [
       for `train_files` and `test_files`.
     train_files (list<str>): name of training files within `prefix`.
     test_files (list<str>): name of test files within `prefix`.
+    meta_file (str): name of metadata file (labels) within `prefix`.
     label_keys (list<str>): names of the label keys in the data. If longer than
       1, provide `out_label_keys` to specify output names in feature
       dictionaries.  Otherwise will use "label".
   """
+
+
+def _load_pickle(path):
+  with tf.gfile.Open(path, "rb") as f:
+    if six.PY2:
+      data = cPickle.load(f)
+    else:
+      data = cPickle.load(f, encoding="latin1")
+  return data
+
+
+def _strip_s(s):
+  """Remove the 's': labels => label."""
+  if not s.endswith("s"):
+    raise AssertionError("{} should ends with 's'".format(s))
+  return s[:-1]
