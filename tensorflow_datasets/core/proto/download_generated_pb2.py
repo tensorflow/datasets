@@ -28,7 +28,6 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -36,24 +35,23 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='tensorflow_datasets',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=_b('\n\x0e\x64ownload.proto\x12\x13tensorflow_datasets\x1a\x1fgoogle/protobuf/timestamp.proto\"\x16\n\x07UrlInfo\x12\x0b\n\x03url\x18\x01 \x01(\t\"\x8b\x01\n\x0b\x45xtractInfo\x12\x0c\n\x04path\x18\x01 \x01(\t\x12;\n\x08\x66iletype\x18\x03 \x01(\x0e\x32).tensorflow_datasets.ExtractInfo.FileType\"1\n\x08\x46ileType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03RAR\x10\x01\x12\x07\n\x03ZIP\x10\x02\x12\x06\n\x02GZ\x10\x03\"\x98\x03\n\x08UriTrial\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0boutput_path\x18\x02 \x01(\t\x12\x30\n\x08url_info\x18\n \x01(\x0b\x32\x1c.tensorflow_datasets.UrlInfoH\x00\x12\x38\n\x0c\x65xtract_info\x18\x0b \x01(\x0b\x32 .tensorflow_datasets.ExtractInfoH\x00\x12\x39\n\x06status\x18\x03 \x01(\x0e\x32).tensorflow_datasets.UriTrial.TrialStatus\x12\x11\n\terror_msg\x18\x04 \x01(\t\x12.\n\nstart_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"G\n\x0bTrialStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0bIN_PROGRESS\x10\x01\x12\r\n\tCOMPLETED\x10\x02\x12\x0b\n\x07\x41\x42ORTED\x10\x03\x42\n\n\x08uri_infob\x06proto3')
-  ,
-  dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
+  serialized_pb=_b('\n\x0e\x64ownload.proto\x12\x13tensorflow_datasets\"\x16\n\x07UrlInfo\x12\x0b\n\x03url\x18\x01 \x01(\t\"\xc7\x01\n\x0b\x45xtractInfo\x12\x0c\n\x04path\x18\x01 \x01(\t\x12L\n\x11\x65xtraction_method\x18\x02 \x01(\x0e\x32\x31.tensorflow_datasets.ExtractInfo.ExtractionMethod\"\\\n\x10\x45xtractionMethod\x12\x10\n\x0c\x41UTO_EXTRACT\x10\x00\x12\x0e\n\nNO_EXTRACT\x10\x01\x12\x07\n\x03ZIP\x10\x02\x12\x08\n\x04GZIP\x10\x03\x12\x07\n\x03TAR\x10\x04\x12\n\n\x06TAR_GZ\x10\x05\"x\n\x0eUrlExtractInfo\x12.\n\x08url_info\x18\x01 \x01(\x0b\x32\x1c.tensorflow_datasets.UrlInfo\x12\x36\n\x0c\x65xtract_info\x18\x02 \x01(\x0b\x32 .tensorflow_datasets.ExtractInfob\x06proto3')
+)
 
 
 
-_EXTRACTINFO_FILETYPE = _descriptor.EnumDescriptor(
-  name='FileType',
-  full_name='tensorflow_datasets.ExtractInfo.FileType',
+_EXTRACTINFO_EXTRACTIONMETHOD = _descriptor.EnumDescriptor(
+  name='ExtractionMethod',
+  full_name='tensorflow_datasets.ExtractInfo.ExtractionMethod',
   filename=None,
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='UNKNOWN', index=0, number=0,
+      name='AUTO_EXTRACT', index=0, number=0,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RAR', index=1, number=1,
+      name='NO_EXTRACT', index=1, number=1,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
@@ -61,46 +59,24 @@ _EXTRACTINFO_FILETYPE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='GZ', index=3, number=3,
+      name='GZIP', index=3, number=3,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TAR', index=4, number=4,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='TAR_GZ', index=5, number=5,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=187,
-  serialized_end=236,
+  serialized_start=171,
+  serialized_end=263,
 )
-_sym_db.RegisterEnumDescriptor(_EXTRACTINFO_FILETYPE)
-
-_URITRIAL_TRIALSTATUS = _descriptor.EnumDescriptor(
-  name='TrialStatus',
-  full_name='tensorflow_datasets.UriTrial.TrialStatus',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='UNKNOWN', index=0, number=0,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='IN_PROGRESS', index=1, number=1,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='COMPLETED', index=2, number=2,
-      serialized_options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ABORTED', index=3, number=3,
-      serialized_options=None,
-      type=None),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=564,
-  serialized_end=635,
-)
-_sym_db.RegisterEnumDescriptor(_URITRIAL_TRIALSTATUS)
+_sym_db.RegisterEnumDescriptor(_EXTRACTINFO_EXTRACTIONMETHOD)
 
 
 _URLINFO = _descriptor.Descriptor(
@@ -129,8 +105,8 @@ _URLINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=72,
-  serialized_end=94,
+  serialized_start=39,
+  serialized_end=61,
 )
 
 
@@ -149,8 +125,8 @@ _EXTRACTINFO = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='filetype', full_name='tensorflow_datasets.ExtractInfo.filetype', index=1,
-      number=3, type=14, cpp_type=8, label=1,
+      name='extraction_method', full_name='tensorflow_datasets.ExtractInfo.extraction_method', index=1,
+      number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -160,7 +136,7 @@ _EXTRACTINFO = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _EXTRACTINFO_FILETYPE,
+    _EXTRACTINFO_EXTRACTIONMETHOD,
   ],
   serialized_options=None,
   is_extendable=False,
@@ -168,70 +144,28 @@ _EXTRACTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=97,
-  serialized_end=236,
+  serialized_start=64,
+  serialized_end=263,
 )
 
 
-_URITRIAL = _descriptor.Descriptor(
-  name='UriTrial',
-  full_name='tensorflow_datasets.UriTrial',
+_URLEXTRACTINFO = _descriptor.Descriptor(
+  name='UrlExtractInfo',
+  full_name='tensorflow_datasets.UrlExtractInfo',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='tensorflow_datasets.UriTrial.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='output_path', full_name='tensorflow_datasets.UriTrial.output_path', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='url_info', full_name='tensorflow_datasets.UriTrial.url_info', index=2,
-      number=10, type=11, cpp_type=10, label=1,
+      name='url_info', full_name='tensorflow_datasets.UrlExtractInfo.url_info', index=0,
+      number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='extract_info', full_name='tensorflow_datasets.UriTrial.extract_info', index=3,
-      number=11, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='tensorflow_datasets.UriTrial.status', index=4,
-      number=3, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='error_msg', full_name='tensorflow_datasets.UriTrial.error_msg', index=5,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='start_time', full_name='tensorflow_datasets.UriTrial.start_time', index=6,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='end_time', full_name='tensorflow_datasets.UriTrial.end_time', index=7,
-      number=6, type=11, cpp_type=10, label=1,
+      name='extract_info', full_name='tensorflow_datasets.UrlExtractInfo.extract_info', index=1,
+      number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -241,38 +175,24 @@ _URITRIAL = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _URITRIAL_TRIALSTATUS,
   ],
   serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
-    _descriptor.OneofDescriptor(
-      name='uri_info', full_name='tensorflow_datasets.UriTrial.uri_info',
-      index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=239,
-  serialized_end=647,
+  serialized_start=265,
+  serialized_end=385,
 )
 
-_EXTRACTINFO.fields_by_name['filetype'].enum_type = _EXTRACTINFO_FILETYPE
-_EXTRACTINFO_FILETYPE.containing_type = _EXTRACTINFO
-_URITRIAL.fields_by_name['url_info'].message_type = _URLINFO
-_URITRIAL.fields_by_name['extract_info'].message_type = _EXTRACTINFO
-_URITRIAL.fields_by_name['status'].enum_type = _URITRIAL_TRIALSTATUS
-_URITRIAL.fields_by_name['start_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_URITRIAL.fields_by_name['end_time'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
-_URITRIAL_TRIALSTATUS.containing_type = _URITRIAL
-_URITRIAL.oneofs_by_name['uri_info'].fields.append(
-  _URITRIAL.fields_by_name['url_info'])
-_URITRIAL.fields_by_name['url_info'].containing_oneof = _URITRIAL.oneofs_by_name['uri_info']
-_URITRIAL.oneofs_by_name['uri_info'].fields.append(
-  _URITRIAL.fields_by_name['extract_info'])
-_URITRIAL.fields_by_name['extract_info'].containing_oneof = _URITRIAL.oneofs_by_name['uri_info']
+_EXTRACTINFO.fields_by_name['extraction_method'].enum_type = _EXTRACTINFO_EXTRACTIONMETHOD
+_EXTRACTINFO_EXTRACTIONMETHOD.containing_type = _EXTRACTINFO
+_URLEXTRACTINFO.fields_by_name['url_info'].message_type = _URLINFO
+_URLEXTRACTINFO.fields_by_name['extract_info'].message_type = _EXTRACTINFO
 DESCRIPTOR.message_types_by_name['UrlInfo'] = _URLINFO
 DESCRIPTOR.message_types_by_name['ExtractInfo'] = _EXTRACTINFO
-DESCRIPTOR.message_types_by_name['UriTrial'] = _URITRIAL
+DESCRIPTOR.message_types_by_name['UrlExtractInfo'] = _URLEXTRACTINFO
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 UrlInfo = _reflection.GeneratedProtocolMessageType('UrlInfo', (_message.Message,), dict(
@@ -289,12 +209,12 @@ ExtractInfo = _reflection.GeneratedProtocolMessageType('ExtractInfo', (_message.
   ))
 _sym_db.RegisterMessage(ExtractInfo)
 
-UriTrial = _reflection.GeneratedProtocolMessageType('UriTrial', (_message.Message,), dict(
-  DESCRIPTOR = _URITRIAL,
+UrlExtractInfo = _reflection.GeneratedProtocolMessageType('UrlExtractInfo', (_message.Message,), dict(
+  DESCRIPTOR = _URLEXTRACTINFO,
   __module__ = 'download_pb2'
-  # @@protoc_insertion_point(class_scope:tensorflow_datasets.UriTrial)
+  # @@protoc_insertion_point(class_scope:tensorflow_datasets.UrlExtractInfo)
   ))
-_sym_db.RegisterMessage(UriTrial)
+_sym_db.RegisterMessage(UrlExtractInfo)
 
 
 # @@protoc_insertion_point(module_scope)

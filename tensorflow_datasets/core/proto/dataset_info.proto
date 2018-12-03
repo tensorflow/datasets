@@ -55,6 +55,9 @@ message DatasetInfo {
   // Canonical location of the dataset.
   DatasetLocation location = 5;
 
+  // Checksums of resources: URL to checksum of resource at URL.
+  map<string, string> download_checksums = 10;
+
   // The schema of the dataset.
   tensorflow.metadata.v0.Schema schema = 6;
 
@@ -64,4 +67,6 @@ message DatasetInfo {
   // If this is a supervised learning problem, then the input and output feature
   // can be specified using this.
   SupervisedKeys supervised_keys = 8;
+
+  // Next available: 11
 }

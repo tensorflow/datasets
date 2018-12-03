@@ -21,3 +21,6 @@ import os
 # Directory where to store processed datasets.
 DATA_DIR = os.path.join("~", "tensorflow_datasets")
 
+# Suffix of files / directories which aren't finished downloading / extracting.
+INCOMPLETE_SUFFIX = ".incomplete"
+

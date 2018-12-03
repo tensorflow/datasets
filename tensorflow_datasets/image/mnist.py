@@ -56,6 +56,7 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=[self.URL],
+        download_checksums=tfds.download.load_checksums(self.name),
         size_in_bytes=11.0 * tfds.units.MiB,
         citation="Y. Lecun and C. Cortes, \"The MNIST database of handwritten "
                  "digits,\" 1998.\n[Online]. Available: "

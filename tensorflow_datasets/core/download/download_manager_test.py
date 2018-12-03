@@ -19,219 +19,170 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import gzip
-import os
-import shutil
-import tarfile
-import time
-import zipfile
+import hashlib
+import re
+import threading
 
+import promise
 import tensorflow as tf
-from tensorflow import gfile
-from tensorflow_datasets.core.download import download_manager
-from tensorflow_datasets.core.download import util
+from tensorflow_datasets.core.download import download_manager as dm
+from tensorflow_datasets.core.proto import download_generated_pb2 as download_pb2
 
 
-class DownloadManagerBaseTest(tf.test.TestCase):
-
-  def test_parallel_run(self):
-    """Test the parallel_run function."""
-    # _parallel_run should be like map, but execute things in parallel
-    def process_fn(x):
-      return x * 10
-
-    result = download_manager._parallel_run(process_fn, {'a': 1, 'b': 2})
-    self.assertEqual(result, {'a': 10, 'b': 20})
-
-    result = download_manager._parallel_run(process_fn, [1, 2, 3])
-    self.assertEqual(result, [10, 20, 30])
-
-    result = download_manager._parallel_run(process_fn, 1)
-    self.assertEqual(result, 10)
-
-    timeouts = []
-    def add_timeout(timeout):
-      time.sleep(timeout)
-      timeouts.append(timeout)
-      return timeout * 10
-
-    result = download_manager._parallel_run(
-        add_timeout,
-        [3, 2, 1, 0],
-        max_workers=5,
-    )
-    # Results in same input order
-    self.assertEqual(result, [30, 20, 10, 0])
-    # But processed in revered order
-    self.assertEqual(timeouts, [0, 1, 2, 3])
-
-  def test_mode_reuse_cache(self):
-    """Check that cache is reused in REUSE_CACHE_IF_EXISTS mode."""
-
-    dl_manager_1 = download_manager.DownloadManager(
-        cache_dir=tf.test.get_temp_dir(),
-        mode=util.GenerateMode.REUSE_CACHE_IF_EXISTS,
-    )
-    dl_manager_2 = download_manager.DownloadManager(
-        cache_dir=tf.test.get_temp_dir(),
-        mode=util.GenerateMode.REUSE_CACHE_IF_EXISTS,
-    )
-
-    process_mock = tf.test.mock.Mock()
-    key = '/unittest/test_mode_reuse_cache'
-
-    # Execute the same processing twice
-    output_dir_1 = dl_manager_1.execute_and_cache(process_mock, cache_key=key)
-    output_dir_2 = dl_manager_2.execute_and_cache(process_mock, cache_key=key)
-
-    # Results should be the same
-    self.assertEqual(output_dir_1, output_dir_2)
-    # The process function should have been called only once
-    self.assertEqual(process_mock.call_count, 1)
-
-  def test_mode_reuse_dataset(self):
-    """Check that cache is reused in REUSE_DATASET_IF_EXISTS mode."""
-    # REUSE_CACHE_IF_EXISTS and REUSE_DATASET_IF_EXISTS should act the same
-    # way for the download
-
-    dl_manager_1 = download_manager.DownloadManager(
-        cache_dir=tf.test.get_temp_dir(),
-        mode=util.GenerateMode.REUSE_DATASET_IF_EXISTS,
-    )
-    dl_manager_2 = download_manager.DownloadManager(
-        cache_dir=tf.test.get_temp_dir(),
-        mode=util.GenerateMode.REUSE_DATASET_IF_EXISTS,
-    )
-
-    process_mock = tf.test.mock.Mock()
-    key = '/unittest/test_mode_reuse_dataset'
-
-    # Execute the same processing twice
-    output_dir_1 = dl_manager_1.execute_and_cache(process_mock, cache_key=key)
-    output_dir_2 = dl_manager_2.execute_and_cache(process_mock, cache_key=key)
-
-    # Results should be the same
-    self.assertEqual(output_dir_1, output_dir_2)
-    # The process function should have been called only once
-    self.assertEqual(process_mock.call_count, 1)
-
-  def test_mode_redownload(self):
-    """Check that cache is NOT reused in FORCE_REDOWNLOAD mode."""
-
-    dl_manager_1 = download_manager.DownloadManager(
-        cache_dir=tf.test.get_temp_dir(),
-        mode=util.GenerateMode.FORCE_REDOWNLOAD,
-    )
-    dl_manager_2 = download_manager.DownloadManager(
-        cache_dir=tf.test.get_temp_dir(),
-        mode=util.GenerateMode.FORCE_REDOWNLOAD,
-    )
-
-    process_mock = tf.test.mock.Mock()
-    key = '/unittest/test_mode_redownload'
-
-    # Execute the same processing twice
-    dl_manager_1.execute_and_cache(process_mock, cache_key=key)
-    dl_manager_2.execute_and_cache(process_mock, cache_key=key)
-
-    # The process function should have been called twice
-    self.assertEqual(process_mock.call_count, 2)
+def _get_promise_on_event(result=None, error=None):
+  """Returns (event, Promise). Promise is fulfilled when `event.set()`."""
+  event = threading.Event()
+  def callback(resolve, reject):
+    def inside():
+      event.wait()
+      if error is not None:
+        reject(error)
+      resolve(result)
+    t = threading.Thread(target=inside)
+    t.daemon = True
+    t.start()
+  return event, promise.Promise(callback)
 
 
-class DownloadManagerClassTest(tf.test.TestCase):
+def _sha256(str_):
+  return hashlib.sha256(str_.encode('utf8')).hexdigest()
 
-  @classmethod
-  def setUpClass(cls):
-    cache_dir = tf.test.get_temp_dir()
 
-    # Create a dummy file
-    dummy_dir = os.path.join(cache_dir, 'dummy')
-    dummy_filepath = os.path.join(dummy_dir, 'dummy.txt')
+class GetExtractMethodTest(tf.test.TestCase):
 
-    gfile.MakeDirs(dummy_dir)
-    dummy_file_contents = 'hello world'
-    with gfile.Open(dummy_filepath, 'w') as f:
-      f.write(dummy_file_contents)
+  def test_(self):
+    for method, path, expected_result in [
+        (dm.AUTO_EXTRACT, 'path/to/bar.tar.gz', dm.TAR_GZ),
+        (dm.AUTO_EXTRACT, 'path/to/bar.gz', dm.GZIP),
+        (dm.AUTO_EXTRACT, 'path/to/bar.gz.strange', dm.NO_EXTRACT),
+        (dm.NO_EXTRACT, 'path/to/bar.gz', dm.NO_EXTRACT),
+        (dm.GZIP, 'path/to/bar.tar.gz', dm.GZIP),
+    ]:
+      res = dm._get_extract_method(download_pb2.ExtractInfo(
+          path=path, extraction_method=method))
+      self.assertEqual(res, expected_result, '(%s, %s)->%s instead of %s' % (
+          method, path, res, expected_result))
 
-    # File containing compressed archives
-    input_dir = os.path.join(cache_dir, 'to_extract')
-    gfile.MakeDirs(input_dir)
 
-    dl_manager = download_manager.DownloadManager(
-        cache_dir=cache_dir,
-        mode=util.GenerateMode.REUSE_CACHE_IF_EXISTS,
-    )
+class DownloadManagerTest(tf.test.TestCase):
 
-    cls.dummy_dir = dummy_dir
-    cls.dummy_filepath = dummy_filepath
-    cls.dummy_file_contents = dummy_file_contents
-    cls.input_dir = input_dir
-    cls.dl_manager = dl_manager
+  def setUp(self):
+    self.addCleanup(tf.test.mock.patch.stopall)
+    self.existing_paths = []
+    self.made_dirs = []
+    self.dl_results = {}
+    self.extract_results = {}
+    gfile = tf.test.mock.patch.object(
+        tf, 'gfile',
+        Exists=lambda path: path in self.existing_paths,
+        MakeDirs=self.made_dirs.append,
+        ListDirectory=lambda path: ['one_file'],
+        )
+    self.gfile = gfile.start()
 
-  def _check_dir_contents(self, dirpath):
-    with gfile.Open(os.path.join(dirpath, 'dummy.txt')) as f:
-      self.assertEqual(self.dummy_file_contents, f.read().strip())
+  def _get_manager(self, force_download=False, force_extraction=False,
+                   checksums=None):
+    manager = dm.DownloadManager(
+        'my_dataset', '/dl_dir', '/extract_dir', '/manual_dir',
+        force_download=force_download, force_extraction=force_extraction,
+        checksums=checksums)
+    download = tf.test.mock.patch.object(
+        manager._downloader, 'download',
+        side_effect=lambda url_info, tmpdir_path: self.dl_results[url_info.url])
+    self.downloader_download = download.start()
+    extract = tf.test.mock.patch.object(
+        manager._extractor, 'extract',
+        side_effect=(
+            lambda from_path, to_path, mtd: self.extract_results[from_path]))
+    self.extractor_extract = extract.start()
+    return manager
 
-  @tf.test.mock.patch('six.moves.urllib.request.urlopen')
-  def test_download(self, mock_urlopen):
-    # Path urllib.request.urlopen to return some dummy message
-    urlfile_mock = tf.test.mock.Mock()
-    urlfile_mock.geturl.return_value = 'http://b.org/response.txt'
-    urlfile_mock.read.return_value = 'Hello world'
-    mock_urlopen.return_value = urlfile_mock
+  def test_download(self):
+    """One file in cache, one not."""
+    urls = {
+        'cached': download_pb2.UrlInfo(url='http://a.ch/a'),
+        'new': download_pb2.UrlInfo(url='https://a.ch/b'),
+    }
+    urla_sha256 = _sha256('http://a.ch/a')
+    urlb_sha256 = _sha256('https://a.ch/b')
+    self.existing_paths.append('/dl_dir/url.%s' % urla_sha256)
+    downloaded_b, self.dl_results['https://a.ch/b'] = _get_promise_on_event(
+        'sha_b')
+    manager = self._get_manager()
+    res = manager.download(urls, async_=True)
+    self.assertFalse(res.is_fulfilled)
+    downloaded_b.set()
+    downloads = res.get()
+    self.assertEqual(downloads, {
+        'cached': '/dl_dir/url.%s' % urla_sha256,
+        'new': '/dl_dir/url.%s' % urlb_sha256,
+    })
 
-    with tf.test.mock.patch('six.moves.urllib.request.urlopen', mock_urlopen):
-      output_file = self.dl_manager.download('https://a.org/query.txt')
+  def test_extract(self):
+    """One file extracted, one file with NO_EXTRACT, one to extract."""
+    files = {
+        'cached': download_pb2.ExtractInfo(path='/dl_dir/a',
+                                           extraction_method=dm.ZIP),
+        'new': download_pb2.ExtractInfo(path='/dl_dir/b',
+                                        extraction_method=dm.TAR),
+    }
+    self.existing_paths.append('/extract_dir/2.a')
+    extracted_b, self.extract_results['/dl_dir/b'] = _get_promise_on_event()
+    manager = self._get_manager()
+    res = manager.extract(files, async_=True)
+    self.assertFalse(res.is_fulfilled)
+    extracted_b.set()
+    self.assertEqual(res.get(), {
+        'cached': '/extract_dir/2.a',
+        'new': '/extract_dir/4.b',
+    })
 
-    # Correct url called
-    mock_urlopen.assert_called_with('https://a.org/query.txt')
-    # Name correctly extracted
-    self.assertEqual(os.path.basename(output_file), 'response.txt')
-    # Content correctly fetched
-    with gfile.Open(output_file, 'rb') as f:
-      self.assertEqual(b'Hello world', f.read())
+  def test_download_and_extract(self):
+    urls = {'a': 'ftp://a/a',
+            'b': 'ftp://b/b'}
+    dl_a, self.dl_results['ftp://a/a'] = _get_promise_on_event('sha_a')
+    dl_b, self.dl_results['ftp://b/b'] = _get_promise_on_event('sha_b')
+    ext_a, self.extract_results['/dl_dir/a.12'] = _get_promise_on_event(
+        '/extract_dir/a')
+    ext_b, self.extract_results['/dl_dir/b.34'] = _get_promise_on_event(
+        '/extract_dir/b')
+    for event in [dl_a, dl_b, ext_a, ext_b]:
+      event.set()
+    manager = self._get_manager()
+    res = manager.download_and_extract(urls)
+    urla_sha256 = _sha256('ftp://a/a')
+    urlb_sha256 = _sha256('ftp://b/b')
+    self.assertEqual(res, {
+        'a': '/dl_dir/url.%s' % urla_sha256,
+        'b': '/dl_dir/url.%s' % urlb_sha256})
 
-  def test_extract_zip(self):
-    # Create zip
-    zip_input = os.path.join(self.input_dir, 'foo.zip')
-    with zipfile.ZipFile(zip_input, 'w') as zip_f:
-      zip_f.write(self.dummy_filepath, arcname='dummy.txt')
+  def test_force_download_and_extract(self):
+    url = 'http://a/b.tar.gz'
+    self.existing_paths = ['/dl_dir/sha_a', '/extract_dir/5.sha_a']
+    dl_a, self.dl_results[url] = _get_promise_on_event('sha_a')
+    ext_a, self.extract_results['/dl_dir/sha_a'] = _get_promise_on_event()
+    dl_a.set()
+    ext_a.set()
+    manager = self._get_manager(force_download=True, force_extraction=True,
+                                checksums={url: 'sha_a'})
+    res = manager.download_and_extract(url)
+    self.assertEqual('/extract_dir/5.sha_a', res)
+    # Rename after download:
+    (from_, to), kwargs = self.gfile.Rename.call_args
+    self.assertTrue(re.match('/dl_dir/tmp/[a-h0-9]{32}/one_file', from_))
+    self.assertEqual('/dl_dir/sha_a', to)
+    self.assertEqual(kwargs, {'overwrite': True})
+    self.assertEqual(1, self.downloader_download.call_count)
+    self.assertEqual(1, self.extractor_extract.call_count)
 
-    # Extract zip
-    output_dir = self.dl_manager.extract(zip_input)
-    self._check_dir_contents(output_dir)
-
-  def test_extract_rar(self):
-    # Create tar
-    tar_input = os.path.join(self.input_dir, 'foo.tar')
-    with tarfile.open(tar_input, 'w') as tar:
-      tar.add(self.dummy_dir, arcname='foo')
-
-    # Extract tar
-    output_dir = self.dl_manager.extract(tar_input)
-    self._check_dir_contents(os.path.join(output_dir, 'foo'))
-
-  def test_extract_gzip(self):
-    # Create gzip file
-    gzip_input = os.path.join(self.input_dir, 'dummy.txt.gz')
-    with gzip.open(gzip_input, 'wb') as gf:
-      with gfile.Open(self.dummy_filepath, 'rb') as f:
-        shutil.copyfileobj(f, gf)
-
-    # Extract gzip
-    output_path = self.dl_manager.extract(gzip_input)
-    output_dir = os.path.dirname(output_path)
-    self._check_dir_contents(output_dir)
-
-  def test_execute_and_cache(self):
-
-    def write_additional_data(cache_dir):
-      with gfile.Open(os.path.join(cache_dir, 'dummy.txt'), 'w') as f:
-        f.write('hello world')
-
-    output_dir = self.dl_manager.execute_and_cache(
-        write_additional_data, cache_key='/unittest/additional_data')
-    self._check_dir_contents(output_dir)
+  def test_wrong_checksum(self):
+    url = 'http://a/b.tar.gz'
+    dl_a, self.dl_results[url] = _get_promise_on_event('sha_a')
+    dl_a.set()
+    manager = self._get_manager(checksums={url: 'sha_b'})
+    with self.assertRaises(dm.NonMatchingChecksumError):
+      manager.download(url)
+    self.assertEqual(0, self.gfile.Rename.call_count)
 
 
 if __name__ == '__main__':

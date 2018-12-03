@@ -23,12 +23,13 @@ import hashlib
 import itertools
 import os
 import tempfile
+
+import promise
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core.download import download_manager
 from tensorflow_datasets.core.utils import tf_utils
 
 
@@ -105,13 +106,15 @@ class TestCase(tf.test.TestCase):
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
-    dl_manager = tf.test.mock.Mock(spec_set=download_manager.DownloadManager)
-    dl_manager.download_and_extract.return_value = self.sample_dir
-    dl_manager.extract.return_value = self.sample_dir
-    dl_manager.manual_dir = self.sample_dir
-    self.builder.download_and_prepare(dl_manager=dl_manager,
-                                      compute_stats=False)
-
+    result_p = promise.Promise.resolve(self.sample_dir)
+    fct = lambda obj, url, async_=False: async_ and result_p or self.sample_dir
+    with tf.test.mock.patch.multiple(
+        "tensorflow_datasets.core.download.DownloadManager",
+        download_and_extract=fct,
+        extract=fct,
+        manual_dir=self.sample_dir,
+        ):
+      self.builder.download_and_prepare(compute_stats=False)
     split_to_checksums = {}  # {"split": set(records_checksums)}
     for split_name, expected_records_number in self.SPLITS.items():
       dataset = self.builder.as_dataset(split=split_name)

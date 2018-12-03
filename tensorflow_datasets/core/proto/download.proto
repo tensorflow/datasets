@@ -1,51 +1,30 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 package tensorflow_datasets;
+
+// TODO(pierrot): replace those proto by simple python code.
 
 // Structure containing the info about the request of the url to download
 message UrlInfo {
   string url = 1;  // required
-  // Here could be added, output name, password, checksum, mirrors,...
+  // Here could be added username/password, mirrors,...
 }
 
 // Structure containing the info about the request of the file to extract
 message ExtractInfo {
-  enum FileType {
-    UNKNOWN = 0;
-    RAR = 1;
+  enum ExtractionMethod {
+    AUTO_EXTRACT = 0;
+    NO_EXTRACT = 1;
     ZIP = 2;
-    GZ = 3;
+    GZIP = 3;
+    TAR = 4;
+    TAR_GZ = 5;
   }
-
-  string path = 1;        // required
-  FileType filetype = 3;  // optional
+  string path = 1;
+  ExtractionMethod extraction_method = 2;
 }
 
-// Stucture capturing the state of a trial (download, extraction, processing)
-message UriTrial {
-  enum TrialStatus {
-    UNKNOWN = 0;
-    IN_PROGRESS = 1;
-    COMPLETED = 2;
-    ABORTED = 3;  // Failed for whatever reason (crash, permissions,...)
-  }
-
-  // Unique id key
-  string id = 1;  // required
-
-  // Info on the trial
-  string output_path = 2;  // required Output directory or path of the trial
-  oneof uri_info {
-    UrlInfo url_info = 10;
-    ExtractInfo extract_info = 11;
-  }
-
-  TrialStatus status = 3;  // required
-  string error_msg = 4;
-
-  // Trial start and end date
-  google.protobuf.Timestamp start_time = 5;
-  google.protobuf.Timestamp end_time = 6;
+message UrlExtractInfo {
+  UrlInfo url_info = 1;
+  ExtractInfo extract_info = 2;
 }

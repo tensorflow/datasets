@@ -15,6 +15,7 @@ then this document is for you.
 *   [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
     *   [File access and tf.gfile](#file-access-and-tfgfile)
 *   [Create your own FeatureConnector](#create-your-own-featureconnector)
+*   [Enabling downloads validation](#enabling-downloads-validation)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 
 ## Overview
@@ -188,7 +189,7 @@ def _split_generators(self, dl_manager):
 ### Manual download / extraction
 
 If the dataset artifacts cannot be downloaded or extracted automatically (for
-example, if there is no API and it needs a username/password), you can use
+example, if there are no APIs and it needs a username/password), you can use
 `path = dl_manager.manual_dir`. The user will need to manually download and
 extract the source data into the `manual_dir` of this dataset (by default:
 `~/tensorflow_datasets/manual/my_dataset`).
@@ -334,6 +335,32 @@ Have a look at the doc of `tfds.features.FeatureConnector` for more details and
 the
 [features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
 for more examples.
+
+## Enabling downloads validation
+
+Once your `DatasetBuilder` works as expected, and while you still have the
+downloaded files on disk, it is time to enable the downloaded files checksum
+validation.
+
+You will need to add the file containing the URLs and associated checksums.
+This file can be generated using the `create_checksum_file` script. E.g.
+
+```sh
+scripts/create_checksum_file --dest_dir=url_checksums --dataset=mnist
+```
+
+Then, edit the `tfds.core.DatasetInfo` specified earlier to pass in a dict
+mapping url to checksum (sha256) of downloaded file. That dict is loaded from
+the file created by previous command.
+
+```
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        ...
+        download_checksums=tfds.download.load_checksums(self.name),
+        ...
+    )
+```
 
 ## Large datasets and distributed generation
 

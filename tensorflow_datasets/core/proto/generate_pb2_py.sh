@@ -1,15 +1,26 @@
 #!/bin/bash
 
 # This script use the protoc compiler to generate the python code of the
-# download.proto file.
+# .proto files.
 
 if [[ $(protoc --version) != 'libprotoc 3.6.1' ]]; then
   echo 'Please use version 3.6.1 of protoc for compatibility with Python 2 and 3.'
   exit
 fi
-protoc download.proto --python_out=.
-# We want to have 'generated' in the name.
-mv download_pb2.py download_generated_pb2.py
-# We don't want pylint to run on this file, so we prepend directives.
-printf "%s\n%s" "# pylint: skip-file" "$(cat download_generated_pb2.py)" > \
-  download_generated_pb2.py
+
+# Make it possible to run script from project root dir:
+cd `dirname $0`
+
+function gen_proto {
+  echo "gen_proto $1..."
+  protoc $1.proto --python_out=.
+  # We want to have 'generated' in the name.
+  mv $1_pb2.py $1_generated_pb2.py
+  # We don't want pylint to run on this file, so we prepend directives.
+  printf "%s\n%s" "# pylint: skip-file" "$(cat $1_generated_pb2.py)" > \
+    $1_generated_pb2.py
+  echo "done"
+}
+
+# gen_proto dataset_info
+gen_proto download

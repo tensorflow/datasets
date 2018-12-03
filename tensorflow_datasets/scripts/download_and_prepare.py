@@ -50,8 +50,9 @@ FLAGS = flags.FLAGS
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
 
 flags.DEFINE_string("dataset_name", None, "Registered name of DatasetBuilder")
-flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Directory for data")
-flags.DEFINE_string("cache_dir", None, "Directory for downloads")
+flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Were to place the data.")
+flags.DEFINE_string("download_dir", None, "Where to place downloads.")
+flags.DEFINE_string("extract_dir", None, "Where to extract files.")
 flags.DEFINE_string(
     "manual_dir", None,
     "Directory where dataset have manually been downloaded / extracted.")
@@ -63,7 +64,8 @@ flags.DEFINE_boolean("compute_stats", True,
 
 def main(_):
   builder = tfds.builder(FLAGS.dataset_name, data_dir=FLAGS.data_dir)
-  builder.download_and_prepare(cache_dir=FLAGS.cache_dir,
+  builder.download_and_prepare(download_dir=FLAGS.download_dir,
+                               extract_dir=FLAGS.extract_dir,
                                manual_dir=FLAGS.manual_dir,
                                compute_stats=FLAGS.compute_stats)
   termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])

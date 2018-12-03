@@ -21,8 +21,17 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import functools
 import itertools
+import sys
+
+# pylint: disable=g-import-not-at-top
+if sys.version_info[0] > 2:
+  import functools
+else:
+  import functools32 as functools
+# pylint: enable=g-import-not-at-top
+
+memoize = lambda: functools.lru_cache(maxsize=None)
 
 
 class memoized_property(object):  # pylint: disable=invalid-name

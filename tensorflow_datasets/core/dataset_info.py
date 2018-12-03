@@ -71,6 +71,8 @@ class DatasetInfo(object):
       the `tf.data.Dataset` object from the `builder.as_dataset()` method.
     splits: `SplitDict`, the available Splits for this dataset.
     urls: `list(str)`, the homepage(s) for this dataset.
+    checksums: `Dict[str, str]`, URL to sha256 of resource. If a url is not
+      listed, its checksum is not checked.
     size_in_bytes: `integer`, approximate size in bytes of the raw size of the
       dataset that we will be downloading from the internet.
     num_examples: `integer`, number of examples across all splits.
@@ -90,6 +92,7 @@ class DatasetInfo(object):
                supervised_keys=None,
                splits=None,
                urls=None,
+               download_checksums=None,
                size_in_bytes=0,
                citation=None):
     """Constructor of the DatasetInfo.
@@ -105,6 +108,8 @@ class DatasetInfo(object):
         supervised learning, if applicable for the dataset.
       splits: `SplitDict`, the available Splits for this dataset.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
+      download_checksums: `dict<str url, str sha256>`, URL to sha256 of file.
+        If a url is not listed, its checksum is not checked.
       size_in_bytes: `integer`, optional, approximate size in bytes of the raw
         size of the dataset that we will be downloading from the internet.
       citation: `str`, optional, the citation to use for this dataset.
@@ -120,6 +125,7 @@ class DatasetInfo(object):
         citation=citation)
     if urls:
       self._info_proto.location.urls[:] = urls
+    self._info_proto.download_checksums.update(download_checksums or {})
 
     self._features = features
     self._splits = splits or splits_lib.SplitDict()
@@ -190,6 +196,10 @@ class DatasetInfo(object):
   @property
   def urls(self):
     return self._info_proto.location.urls
+
+  @property
+  def download_checksums(self):
+    return self._info_proto.download_checksums
 
   @property
   def num_examples(self):
