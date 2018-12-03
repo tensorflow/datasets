@@ -137,14 +137,14 @@ class SubwordTextEncoderBuildTest(tf.test.TestCase):
     # and single byte subwords are skipped because all bytes are in the vocab by
     # default.
     self.assertEqual(encoder.vocab_size, text_encoder.NUM_BYTES + 1)
-    self.assertEmpty(encoder.subwords)
+    self.assertEqual(len(encoder.subwords), 0)
 
     # Not the case when there are unicode characters
     text_gen = lorem_ipsum_zh_generator
     build_fn = subword_text_encoder.SubwordTextEncoder.build_from_corpus
     encoder = build_fn(text_gen(), 300, max_subword_length=1)
     self.assertGreater(encoder.vocab_size, text_encoder.NUM_BYTES + 1)
-    self.assertNotEmpty(encoder.subwords)
+    self.assertGreater(len(encoder.subwords), 0)
 
   def test_max_chars(self):
     text_gen = lorem_ipsum_zh_generator

@@ -44,6 +44,20 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
   The vocabulary is "trained" on a corpus and all wordpieces are stored in a
   vocabulary file. To generate a vocabulary from a corpus, use
   `tfds.features.text.SubwordTextEncoder.build_from_corpus`.
+
+  Typical usage:
+
+  ```
+  # Build
+  encoder = tfds.features.text.SubwordTextEncoder.build_from_corpus(
+      corpus_generator, target_vocab_size=2**15)
+  encoder.store_to_file(vocab_filename)
+
+  # Load
+  encoder = tfds.features.text.SubwordTextEncoder(vocab_file=vocab_filename)
+  ids = encoder.encode("hello world")
+  text = encoder.decode([1, 2, 3, 4])
+  ```
   """
 
   def __init__(self, vocab_file=None, vocab_list=None):
