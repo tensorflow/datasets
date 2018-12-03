@@ -46,10 +46,14 @@ import termcolor
 
 flags = tf.flags
 FLAGS = flags.FLAGS
+BUILDERS = tfds.list_builders()
 
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
 
-flags.DEFINE_string("dataset_name", None, "Registered name of DatasetBuilder")
+flags.DEFINE_multi_enum("datasets", BUILDERS, BUILDERS, "Datasets to build")
+flags.DEFINE_multi_enum("exclude_datasets", [], BUILDERS,
+                        "Datasets to exclude (no download, no prepare).")
+
 flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Were to place the data.")
 flags.DEFINE_string("download_dir", None, "Where to place downloads.")
 flags.DEFINE_string("extract_dir", None, "Where to extract files.")
@@ -63,22 +67,28 @@ flags.DEFINE_boolean("compute_stats", True,
 
 
 def main(_):
-  builder = tfds.builder(FLAGS.dataset_name, data_dir=FLAGS.data_dir)
-  builder.download_and_prepare(download_dir=FLAGS.download_dir,
-                               extract_dir=FLAGS.extract_dir,
-                               manual_dir=FLAGS.manual_dir,
-                               compute_stats=FLAGS.compute_stats)
-  termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
+  # TODO(b/116270825): Add flag to force extraction / preparation.
+  mode = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
+  for dataset_name in FLAGS.datasets:
+    if dataset_name in FLAGS.exclude_datasets:
+      continue
+    print("Download and prepare dataset %s ..." % dataset_name)
+    builder = tfds.builder(dataset_name, data_dir=FLAGS.data_dir)
+    builder.download_and_prepare(download_dir=FLAGS.download_dir,
+                                 extract_dir=FLAGS.extract_dir,
+                                 manual_dir=FLAGS.manual_dir,
+                                 compute_stats=FLAGS.compute_stats,
+                                 mode=mode)
+    termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
 
-  if FLAGS.debug:
-    dataset = builder.as_dataset(split=tfds.Split.TRAIN)
-    iterator = tf.contrib.eager.Iterator(dataset)
-    pdb.set_trace()
-    del iterator
-    return
+    if FLAGS.debug:
+      dataset = builder.as_dataset(split=tfds.Split.TRAIN)
+      iterator = tf.contrib.eager.Iterator(dataset)
+      pdb.set_trace()
+      del iterator
+      return
 
 
 if __name__ == "__main__":
-  flags.mark_flags_as_required(["dataset_name"])
   tf.enable_eager_execution()
   tf.app.run()
