@@ -15,6 +15,7 @@
 
 """Image datasets."""
 
+from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
