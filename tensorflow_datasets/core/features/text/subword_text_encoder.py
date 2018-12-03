@@ -15,10 +15,14 @@
 
 # coding=utf-8
 """SubwordTextEncoder."""
+# This implementation is based on SubwordTextEncoder in Tensor2Tensor,
+# originally written by Noam Shazeer (GitHub: nshazeer).
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+
+import collections
 
 import six
 import tensorflow as tf
@@ -57,7 +61,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
         interior are disallowed and should use the underscore escape sequence
         "\u".
     """
-    if not (vocab_list or vocab_file) or (vocab_list and vocab_file):
+    if sum([vocab_list is None, vocab_file is None]) != 1:
       raise ValueError("Must provide either vocab_list or vocab_file.")
     if vocab_file:
       vocab_list = self._vocab_list_from_file(vocab_file)
@@ -67,38 +71,10 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     """Encodes text into a list of integers."""
     s = tf.compat.as_text(s)
     tokens = self._tokenizer.tokenize(s)
-
-    def _encode_token(t, next_t):
-      skip_next = False
-      t = _escape(t)
-      # If next token is a single space, add _ suffix to token and skip the
-      # empty space.
-      if next_t == u" ":
-        t += u"_"
-        skip_next = True
-      t_ids = self._token_to_ids(t)
-      return t_ids, skip_next
-
+    tokens = _prepare_tokens_for_encode(tokens)
     ids = []
-    next_tokens = tokens[1:] + [None]
-    skip_single_token = False
-    for token, next_token in zip(tokens, next_tokens):
-      if skip_single_token:
-        skip_single_token = False
-        continue
-
-      # If the user-supplied string contains the underscore replacement string,
-      # break it into 2 tokens and encode those separately.
-      if token == _UNDERSCORE_REPLACEMENT:
-        t1, t2 = _UNDERSCORE_REPLACEMENT[:2], _UNDERSCORE_REPLACEMENT[2:]
-        t1_ids, _ = _encode_token(t1, None)
-        t2_ids, _ = _encode_token(t2, next_token)
-        ids.extend(t1_ids)
-        ids.extend(t2_ids)
-        continue
-
-      t_ids, skip_single_token = _encode_token(token, next_token)
-      ids.extend(t_ids)
+    for token in tokens:
+      ids.extend(self._token_to_ids(token))
     return text_encoder.pad_incr(ids)
 
   def decode(self, ids):
@@ -132,11 +108,11 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
         trimmed, add_space = _trim_underscore_and_tell(subword)
         subwords.append(trimmed)
         if add_space:
-          subwords.append(" ")
+          subwords.append(u" ")
     # If there were trailing bytes, convert to unicode.
     prev_bytes = consume_prev_bytes()
 
-    return u"".join(subwords)
+    return tf.compat.as_text(u"".join(subwords))
 
   @property
   def vocab_size(self):
@@ -234,7 +210,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     # We remember the maximum length of any subword to avoid having to
     # check arbitrarily long strings.
     self._max_subword_len = max(
-        len(_UNDERSCORE_REPLACEMENT), max([len(s) for s in subwords]))
+        len(_UNDERSCORE_REPLACEMENT), max([len(s) for s in subwords] or [1]))
 
     # Initialize the cache
     self._cache_size = 2**20
@@ -244,7 +220,6 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     # Reserved tokens are all tokens that are mixed alphanum and non-alphanum.
     reserved_tokens = [_UNDERSCORE_REPLACEMENT]
     for t in self._subwords:
-      t = _trim_underscore(t)
       if text_encoder.is_mixed_alphanum(t):
         reserved_tokens.append(t)
     self._tokenizer = text_encoder.Tokenizer(
@@ -274,23 +249,166 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
   def build_from_corpus(cls,
                         corpus_generator,
                         target_vocab_size,
-                        max_subword_length=None,
+                        max_subword_length=20,
+                        max_corpus_chars=None,
                         reserved_tokens=None):
     """Builds a `SubwordTextEncoder` based on the `corpus_generator`.
 
     Args:
-      corpus_generator: generator yielding `str`.
+      corpus_generator: generator yielding `str`, from which subwords will be
+        constructed.
       target_vocab_size: `int`, approximate size of the vocabulary to create.
       max_subword_length: `int`, maxmimum length of a subword. Note that memory
         and compute scale quadratically in the length of the longest token.
+      max_corpus_chars: `int`, the maximum number of characters to consume from
+        `corpus_generator` for the purposes of building the subword vocabulary.
       reserved_tokens: `list<str>`, list of tokens that will always be treated
         as whole tokens and not split up. Note that these must contain a mix of
-        alphanumeric and non-alphanumeric characters (e.g. "<EOS>").
+        alphanumeric and non-alphanumeric characters (e.g. "<EOS>") and not end
+        in an underscore.
 
     Returns:
       `SubwordTextEncoder`.
     """
-    raise NotImplementedError
+    reserved_tokens = reserved_tokens or []
+    _validate_build_arguments(
+        max_subword_length=max_subword_length,
+        reserved_tokens=reserved_tokens,
+        target_vocab_size=target_vocab_size)
+    token_counts = _token_counts_from_generator(
+        generator=corpus_generator,
+        max_chars=max_corpus_chars,
+        reserved_tokens=reserved_tokens)
+
+    # Binary search on the minimum token count to build a vocabulary with
+    # approximately the right size
+    def _binary_search(min_token_count, max_token_count):
+      """Binary search min_token_count to build SubwordTextEncoder vocab."""
+      candidate_min = (min_token_count + max_token_count) // 2
+      tf.logging.info("SubwordTextEncoder build: trying min_token_count %d",
+                      candidate_min)
+      encoder = cls._build_from_token_counts(
+          token_counts=token_counts,
+          min_token_count=candidate_min,
+          reserved_tokens=reserved_tokens,
+          num_iterations=4,
+          max_subword_length=max_subword_length)
+      vocab_size = encoder.vocab_size
+
+      # Being within 1% of the target vocab size is ok
+      target_achieved = (
+          abs(vocab_size - target_vocab_size) * 100 < target_vocab_size)
+      if (target_achieved or min_token_count >= max_token_count or
+          candidate_min <= 1):
+        # Search complete
+        return encoder
+
+      # Recurse
+      if vocab_size > target_vocab_size:
+        next_encoder = _binary_search(candidate_min + 1, max_token_count)
+      else:
+        next_encoder = _binary_search(min_token_count, candidate_min - 1)
+
+      # Return the one that's closest to the target_vocab_size
+      if (abs(vocab_size - target_vocab_size) <
+          abs(next_encoder.vocab_size - target_vocab_size)):
+        return encoder
+      else:
+        return next_encoder
+
+    return _binary_search(1, 1000)
+
+  @classmethod
+  def _build_from_token_counts(cls, token_counts, min_token_count,
+                               reserved_tokens, num_iterations,
+                               max_subword_length):
+    # Start with subwords initialized to only reserved_tokens
+    subwords = list(reserved_tokens)
+
+    for _ in range(num_iterations):
+      encoder = cls(vocab_list=subwords)
+      subword_counts = collections.defaultdict(int)
+      for token, count in six.iteritems(token_counts):
+        start_idx = 0
+        for subword in encoder._token_to_subwords(token):  # pylint: disable=protected-access
+          last_idx = min(len(token), start_idx + max_subword_length)
+          for end_idx in range(start_idx + 1, last_idx + 1):
+            candidate_subword = token[start_idx:end_idx]
+            subword_counts[candidate_subword] += count
+          start_idx += len(subword)
+
+      # Group subword candidates by length and filter bad candidates
+      len_to_subwords = [set() for _ in range(max_subword_length + 1)]
+      for subword, count in six.iteritems(subword_counts):
+        if count < min_token_count:
+          continue
+        # Skip single bytes because they're always in the vocab
+        if len(tf.compat.as_bytes(subword)) <= 1:
+          continue
+        len_to_subwords[len(subword)].add(subword)
+
+      # Consider subword candidates by descending length so that if a longer
+      # subword is accepted, its prefixes can have their counts decremented.
+      candidate_subwords = []
+      for subword_len in reversed(range(max_subword_length + 1)):
+        for subword in len_to_subwords[subword_len]:
+          count = subword_counts[subword]
+          if count < min_token_count:
+            continue
+          candidate_subwords.append((count, subword))
+          # Decrement prefix counts
+          for end_idx in range(1, subword_len):
+            subword_counts[subword[:end_idx]] -= count
+
+      # Sort subwords by count in descending order, keeping reserved_tokens as
+      # the beginning.
+      candidate_subwords.sort(reverse=True)
+      subwords = reserved_tokens + [s for _, s in candidate_subwords]
+
+    return cls(vocab_list=subwords)
+
+
+def _token_counts_from_generator(generator, max_chars, reserved_tokens):
+  """Builds token counts from generator."""
+  reserved_tokens = list(reserved_tokens) + [_UNDERSCORE_REPLACEMENT]
+  tokenizer = text_encoder.Tokenizer(
+      alphanum_only=False, reserved_tokens=reserved_tokens)
+  num_chars = 0
+  token_counts = collections.defaultdict(int)
+  for s in generator:
+    s = tf.compat.as_text(s)
+    if max_chars and (num_chars + len(s)) >= max_chars:
+      s = s[:(max_chars - num_chars)]
+    tokens = tokenizer.tokenize(s)
+    tokens = _prepare_tokens_for_encode(tokens)
+    for t in tokens:
+      token_counts[t] += 1
+    if max_chars:
+      num_chars += len(s)
+      if num_chars > max_chars:
+        break
+  return token_counts
+
+
+def _validate_build_arguments(max_subword_length, reserved_tokens,
+                              target_vocab_size):
+  """Validate arguments for SubwordTextEncoder.build_from_corpus."""
+  if max_subword_length <= 0:
+    raise ValueError(
+        "max_subword_length must be > 0. Note that memory and compute for "
+        "building the vocabulary scale quadratically in the length of the "
+        "longest token.")
+  for t in reserved_tokens:
+    if t.endswith(u"_") or not text_encoder.is_mixed_alphanum(t):
+      raise ValueError(
+          "Reserved tokens must not end with _ and they must contain a mix "
+          "of alphanumeric and non-alphanumeric characters. For example, "
+          "'<EOS>'.")
+  # Minimum vocab size = bytes + pad + 1
+  minimum_vocab_size = text_encoder.NUM_BYTES + 1 + 1
+  if target_vocab_size < minimum_vocab_size:
+    raise ValueError("target_vocab_size must be >= %d. Got %d" %
+                     (minimum_vocab_size, target_vocab_size))
 
 
 def _trim_underscore(token):
@@ -311,3 +429,51 @@ def _escape(s):
 
 def _unescape(s):
   return s.replace(_UNDERSCORE_REPLACEMENT, u"_")
+
+
+def _prepare_tokens_for_encode(tokens):
+  """Prepare tokens for encoding.
+
+  Tokens followed by a single space have "_" appended and the single space token
+  is dropped.
+
+  If a token is _UNDERSCORE_REPLACEMENT, it is broken up into 2 tokens.
+
+  Args:
+    tokens: `list<str>`, tokens to prepare.
+
+  Returns:
+    `list<str>` prepared tokens.
+  """
+  prepared_tokens = []
+
+  def _prepare_token(t, next_t):
+    skip_next = False
+    t = _escape(t)
+    # If next token is a single space, add _ suffix to token and skip the
+    # empty space.
+    if next_t == u" ":
+      t += u"_"
+      skip_next = True
+    return t, skip_next
+
+  next_tokens = tokens[1:] + [None]
+  skip_single_token = False
+  for token, next_token in zip(tokens, next_tokens):
+    if skip_single_token:
+      skip_single_token = False
+      continue
+
+    # If the user-supplied string contains the underscore replacement string,
+    # break it into 2 tokens and encode those separately.
+    if token == _UNDERSCORE_REPLACEMENT:
+      t1, t2 = _UNDERSCORE_REPLACEMENT[:2], _UNDERSCORE_REPLACEMENT[2:]
+      t1, _ = _prepare_token(t1, None)
+      t2, _ = _prepare_token(t2, next_token)
+      prepared_tokens.append(t1)
+      prepared_tokens.append(t2)
+      continue
+
+    token, skip_single_token = _prepare_token(token, next_token)
+    prepared_tokens.append(token)
+  return prepared_tokens

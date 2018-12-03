@@ -25,7 +25,6 @@ import os
 from absl.testing import parameterized
 import tensorflow as tf
 from tensorflow_datasets.core import test_utils
-from tensorflow_datasets.core.features.text import subword_text_encoder
 from tensorflow_datasets.core.features.text import text_encoder
 
 ZH_HELLO = u'你好 '
@@ -203,70 +202,6 @@ class TokenizeTest(parameterized.TestCase, tf.test.TestCase):
                                        reserved_tokens=['<EOS>', 'FOO', 'bar'])
     self.assertEqual(tokens, tokenizer.tokenize(text))
     self.assertEqual(text, tokenizer.join(tokenizer.tokenize(text)))
-
-
-class SubwordTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
-
-  def setUp(self):
-    super(SubwordTextEncoderTest, self).setUp()
-    # Vocab ids will be (offset for pad=0):
-    #                  1       2       3      4      5
-    self.vocab_list = ['foo_', 'bar_', 'foo', 'bar', '<EOS>']
-    self.encoder = subword_text_encoder.SubwordTextEncoder(
-        vocab_list=self.vocab_list)
-
-  def test_vocab_size(self):
-    # Bytes + pad + subwords
-    self.assertEqual((256 + 1 + len(self.vocab_list)), self.encoder.vocab_size)
-
-  @parameterized.parameters(
-      (u'foo bar', [1, 4]),
-      (u'foobar foo bar<EOS>bar', [3, 2, 1, 4, 5, 4]),
-      # Respects whitespace
-      (u'bar <EOS>bar', [2, 5, 4]),
-      (u'bar <EOS> bar', [2, 5, 38, 4]),
-      (u'bar<EOS> bar', [4, 5, 38, 4]),
-      # Invertible even with oov, respecting underscores and backslashes
-      (u'a_b!', [103, 101, 104, 39]),
-      (u'foo \\bar_!', [3, 38, 98, 4, 101, 39]),
-      (u'foo \\\\bar_!', [3, 38, 98, 98, 4, 101, 39]),
-      (u'hello world!', None),
-      (u'foo_ bar', None),
-      (u'foo _ bar', None),
-      (u'foo _bar', None),
-      (u'hello_world', None),
-      (u'hello_ world', None),
-      (u'hello _ world', None),
-      (u'hello _world', None),
-      (u'_', None),
-      # Test that the underscore replacement string is unharmed
-      (u'\\&undsc', None),
-      # Unicode encoded as bytes but decoded back to unicode character
-      (u'你', [234, 195, 166]),
-  )
-  def test_encode_decode(self, text, expected_ids):
-    ids = self.encoder.encode(text)
-    # Test ids match if ids provided
-    if expected_ids:
-      self.assertEqual(expected_ids, ids)
-    # Test invertibility
-    self.assertEqual(tf.compat.as_text(text), self.encoder.decode(ids))
-
-  def test_bad_bytes(self):
-    valid_unicode = u'你'
-    bad_bytes = [220 + len(self.vocab_list) + 1]
-    bad_ids = self.encoder.encode(u'你') + bad_bytes
-    text = self.encoder.decode(bad_ids)
-    # Valid unicode character preserved
-    self.assertEqual(valid_unicode, text[0])
-    # Invalid byte converted to unknown character
-    self.assertEqual(u'\uFFFD', text[1])
-
-  def test_vocab_file(self):
-    vocab_file = os.path.join(self.get_temp_dir(), 'vocab.subwords')
-    self.encoder.store_to_file(vocab_file)
-    encoder = subword_text_encoder.SubwordTextEncoder(vocab_file=vocab_file)
-    self.assertEqual(encoder.subwords, self.vocab_list)
 
 
 if __name__ == '__main__':
