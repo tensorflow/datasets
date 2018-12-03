@@ -59,10 +59,10 @@ class IMDBReviews(tfds.core.GeneratorBasedDatasetBuilder):
     return tfds.core.DatasetInfo(
         name=self.name,
         description=_DESCRIPTION,
-        version="0.0.1",
+        version="0.0.2",
         features=tfds.features.FeaturesDict({
             "text": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(names=["pos", "neg"]),
+            "label": tfds.features.ClassLabel(names=["neg", "pos"]),
         }),
         supervised_keys=("text", "label"),
         urls=["http://ai.stanford.edu/~amaas/data/sentiment/"],
