@@ -45,9 +45,9 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
             gen_kwargs={"range_": range(30, 40)}),
     ]
 
-  def _generate_samples(self, range_):
+  def _generate_examples(self, range_):
     for i in range_:
-      yield self.info.features.encode_sample({
+      yield self.info.features.encode_example({
           "x": i,
           "y": np.array([-i]).astype(np.int64)[0],
           "z": tf.compat.as_text(str(i))

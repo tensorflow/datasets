@@ -66,11 +66,11 @@ class Text(feature.FeatureConnector):
     else:
       return feature.TensorInfo(shape=(), dtype=tf.string)
 
-  def encode_sample(self, sample_data):
+  def encode_example(self, example_data):
     if self.encoder:
-      return self.encoder.encode(sample_data)
+      return self.encoder.encode(example_data)
     else:
-      return tf.compat.as_bytes(sample_data)
+      return tf.compat.as_bytes(example_data)
 
-  def decode_sample(self, tfexample_data):
+  def decode_example(self, tfexample_data):
     return tfexample_data

@@ -68,15 +68,15 @@ class TestCase(test_utils.SubTestCase):
 
   You may set the following class attributes:
     OVERLAPPING_SPLITS: `list[str]`, splits containing records from other splits
-      (e.g. a "sample" split containing pictures from other splits).
+      (e.g. a "example" split containing pictures from other splits).
     MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
       disable checks preventing usage of `os` or builtin functions instead of
       recommended `tf.gfile` API.
 
   This test case will check for the following:
    - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
-   - the dataset builder can read the fake samples stored in
-       testing/test_data/fake_samples/${dataset_name};
+   - the dataset builder can read the fake examples stored in
+       testing/test_data/fake_examples/${dataset_name};
    - the dataset builder can produce serialized data;
    - the dataset builder produces a valid Dataset object from serialized data
      - in eager mode;
@@ -104,9 +104,9 @@ class TestCase(test_utils.SubTestCase):
     # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
     data_dir = tempfile.mkdtemp(dir=tf.test.get_temp_dir())
     self.builder = self.DATASET_CLASS(data_dir=data_dir)  # pylint: disable=not-callable
-    self.sample_dir = os.path.join(
+    self.example_dir = os.path.join(
         os.path.dirname(__file__),
-        "test_data/fake_samples/%s" % self.builder.name)
+        "test_data/fake_examples/%s" % self.builder.name)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
 
@@ -154,8 +154,8 @@ class TestCase(test_utils.SubTestCase):
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
-    result_p = promise.Promise.resolve(self.sample_dir)
-    fct = lambda obj, url, async_=False: async_ and result_p or self.sample_dir
+    result_p = promise.Promise.resolve(self.example_dir)
+    fct = lambda obj, url, async_=False: async_ and result_p or self.example_dir
 
     # TODO(b/119906277): Disable stat computation for diabetic
     if self.builder.name == "diabetic_retinopathy_detection":
@@ -167,15 +167,15 @@ class TestCase(test_utils.SubTestCase):
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=fct,
         extract=fct,
-        manual_dir=self.sample_dir,
-        ):
+        manual_dir=self.example_dir,
+    ):
       self.builder.download_and_prepare(compute_stats=compute_stats)
 
     with self._subTest("as_dataset"):
       self._assertAsDataset(self.builder)
 
     if compute_stats:  # TODO(b/119906277): Remove
-      with self._subTest("num_samples"):
+      with self._subTest("num_examples"):
         self._assertNumSamples(self.builder)
 
     with self._subTest("reload"):
@@ -210,10 +210,10 @@ class TestCase(test_utils.SubTestCase):
            "them to OVERLAPPING_SPLITS class attribute.") % (split1, split2))
 
   def _assertNumSamples(self, builder):
-    for split_name, expected_num_samples in self.SPLITS.items():
+    for split_name, expected_num_examples in self.SPLITS.items():
       self.assertEqual(
           builder.info.splits[split_name].num_examples,
-          expected_num_samples,
+          expected_num_examples,
       )
     self.assertEqual(
         builder.info.num_examples,

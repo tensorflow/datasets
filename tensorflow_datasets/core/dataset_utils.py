@@ -36,8 +36,8 @@ def build_dataset(instruction_dicts,
 
   Args:
     instruction_dicts: `list` of {'filepath':, 'mask':}
-      containing the information about which files and which samples to use.
-      The boolean mask will be repeated and zipped with the samples from
+      containing the information about which files and which examples to use.
+      The boolean mask will be repeated and zipped with the examples from
       filepath.
     dataset_from_file_fn: function returning a `tf.data.Dataset` given a
       filename.
@@ -51,24 +51,24 @@ def build_dataset(instruction_dicts,
   def instruction_ds_to_file_ds(instruction):
     """Map from instruction to real datasets."""
 
-    samples_ds = dataset_from_file_fn(instruction["filepath"])
+    examples_ds = dataset_from_file_fn(instruction["filepath"])
     # TODO(rsepassi): Replace masking with window and flat_map
     # num, den = sum(mask), len(mask)
     # Something like (adjusting for nested structure):
-    # samples_ds.window(den).flat_map(lambda ds: ds.take(num))
+    # examples_ds.window(den).flat_map(lambda ds: ds.take(num))
 
     mask_ds = tf.data.Dataset.from_tensor_slices(instruction["mask"])
     mask_ds = mask_ds.repeat(),
-    # Zip the mask and real samples
+    # Zip the mask and real examples
     ds = tf.data.Dataset.zip({
-        "sample": samples_ds,
+        "example": examples_ds,
         "mask_value": mask_ds,
     })
     # Filter according to the mask (only keep True)
     # Use [0] as from_tensor_slices() yields a tuple
     ds = ds.filter(lambda dataset_dict: dataset_dict["mask_value"][0])
-    # Only keep the samples
-    ds = ds.map(lambda dataset_dict: dataset_dict["sample"])
+    # Only keep the examples
+    ds = ds.map(lambda dataset_dict: dataset_dict["example"])
     return ds
 
   # Transpose the list[dict] into dict[list]

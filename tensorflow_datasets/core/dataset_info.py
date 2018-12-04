@@ -227,7 +227,7 @@ class DatasetInfo(object):
   def read_from_directory(self, dataset_info_dir):
     """Update the DatasetInfo properties from the metadata file.
 
-    This function updates all the dynamically generated fields (num_samples,
+    This function updates all the dynamically generated fields (num_examples,
     hash, time of creation,...) of the DatasetInfo. This reads the metadata
     file on the dataset directory to extract the info and expose them.
     This function is called after the data has been generated in

@@ -44,7 +44,7 @@ class Video(feature.Tensor):
       })
 
     * During generation:
-      yield self.info.features.encode_sample({
+      yield self.info.features.encode_example({
           'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
       })
   """

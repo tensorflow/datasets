@@ -97,7 +97,7 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
             )),
     ]
 
-  def _generate_samples(self, num_examples, data_path, label_path):
+  def _generate_examples(self, num_examples, data_path, label_path):
     """Generate MNIST examples as dicts.
 
     Args:
@@ -106,7 +106,7 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
       label_path (str): Path to the labels
 
     Yields:
-      Generator yielding the next samples
+      Generator yielding the next examples
     """
     images = _extract_mnist_images(data_path, num_examples)
     labels = _extract_mnist_labels(label_path, num_examples)
@@ -115,7 +115,7 @@ class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
     random.shuffle(data)
 
     for image, label in data:
-      yield self.info.features.encode_sample({
+      yield self.info.features.encode_example({
           "image": image,
           "label": label,
       })

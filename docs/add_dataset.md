@@ -53,10 +53,10 @@ and that works well for most datasets that can be generated on a single machine.
 Instead of `_download_and_prepare` and `_as_dataset`, its subclasses must
 implement:
 
--   `_generate_samples`: to generate the `tf.train.Example` records that will be
-    written to disk, per dataset split.
+-   `_generate_examples`: to generate the `tf.train.Example` records that will
+    be written to disk, per dataset split.
 -   `_split_generators`: to define the dataset splits and arguments for
-    `_generate_samples` per split.
+    `_generate_examples` per split.
 
 Let's use `GeneratorBasedDatasetBuilder`, the easier option. `my_dataset.py`
 first looks like this:
@@ -73,7 +73,7 @@ class MyDataset(tfds.core.GeneratorBasedDatasetBuilder):
   def _split_generators(self, dl_manager):
     pass  # TODO
 
-  def _generate_samples(self):
+  def _generate_examples(self):
     pass  # TODO
 ```
 
@@ -83,20 +83,20 @@ iterate faster.
 ## Testing MyDataset
 
 `dataset_builder_testing.TestCase` is a base `TestCase` to fully exercise a
-dataset. It needs a "fake sample" of the source dataset, to be used as testing
+dataset. It needs a "fake example" of the source dataset, to be used as testing
 data.
 
-The "fake sample", to be stored in
-[`testing/test_data/fake_samples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_samples/)
+The "fake example", to be stored in
+[`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/)
 under the `my_dataset` directory, should mimic the source dataset artifacts as
 downloaded and extracted. It can be created manually or automatically
-([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/generate_cifar10_like_sample.py)).
+([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/generate_cifar10_like_example.py)).
 
-Make sure to use different data in your fake sample splits, as the test will
+Make sure to use different data in your fake example splits, as the test will
 fail if your dataset splits overlap.
 
-**The fake sample should not contain any copyrighted material**. If in doubt, do
-not create the sample using material from the original dataset.
+**The fake example should not contain any copyrighted material**. If in doubt,
+do not create the example using material from the original dataset.
 
 ```python
 import tensorflow as tf
@@ -106,7 +106,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 
 class MyDatasetTest(dataset_builder_testing.TestCase):
   DATASET_CLASS = my_dataset.MyDataset
-  SPLITS = {  # Expected number of records on each split from fake sample.
+  SPLITS = {  # Expected number of records on each split from fake example.
       "train": 12,
       "test": 12,
   }
@@ -226,12 +226,12 @@ Use the `SplitGenerator` to describe how each split should be generated. The
 
 ## Reading downloaded data and generating serialized dataset
 
-When using `GeneratorBasedDatasetBuilder` base class, the `_generate_samples`
+When using `GeneratorBasedDatasetBuilder` base class, the `_generate_examples`
 method generates the records to be stored for each split, out of the original
 source data. With the previous example, it will be called as:
 
 ```python
-builder._generate_samples(
+builder._generate_examples(
     images_dir_path="{extracted_path}/train",
     labels="{extracted_path}/train_labels.csv",
 )
@@ -241,17 +241,17 @@ This method will typically read source dataset artifacts (e.g. a CSV) and yield
 records like:
 
 ```python
-def _generate_samples(self, images_dir_path, labels=None):
+def _generate_examples(self, images_dir_path, labels=None):
   ... # read data from CSV and build data
   for image_id, description, label in data:
-    yield self.info.features.encode_sample({
+    yield self.info.features.encode_example({
         "image_description": description,
         "image": "%s/%s.jpeg" % (images_dir_path, image_id),
         "label": label,
     })
 ```
 
-Note that `self.info.features.encode_sample` uses the feature definitions from
+Note that `self.info.features.encode_example` uses the feature definitions from
 `DatasetInfo` to encode the features passed here into a `tf.train.Example`. In
 this case, the `ImageFeature` will extract the jpeg content into the record
 automatically.
@@ -313,9 +313,9 @@ and implement the abstract methods.
 
 *   `get_tensor_info()`: Indicates the shape/dtype of the tensor(s) returned by
     `tf.data.Dataset`
-*   `encode_sample(input_data)`: Defines how to encode the data given in the
-    generator `_generate_samples()` into a `tf.train.Example` compatible data
-*   `decode_sample`: Defines how to decode the data from the tensor read from
+*   `encode_example(input_data)`: Defines how to encode the data given in the
+    generator `_generate_examples()` into a `tf.train.Example` compatible data
+*   `decode_example`: Defines how to decode the data from the tensor read from
     `tf.train.Example` into user tensor returned by `tf.data.Dataset`.
 *   (optionally) `get_serialized_info()`: If the info returned by
     `get_tensor_info()` is different from how the data are actually written on
@@ -323,7 +323,7 @@ and implement the abstract methods.
     of the `tf.train.Example`
 
 1.  If your connector only contains one value, then the `get_tensor_info`,
-    `encode_sample`, and `decode_sample` methods can directly return single
+    `encode_example`, and `decode_example` methods can directly return single
     value (without wrapping it in a dict).
 
 2.  If your connector is a container of multiple sub-features, the easiest way

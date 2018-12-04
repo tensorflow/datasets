@@ -33,7 +33,7 @@ class ImageLabelFolderTest(dataset_builder_testing.TestCase):
   # The above construct forces us to disable those checks:
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
   SPLITS = {
-      "train": 2,  # Number of samples.
+      "train": 2,  # Number of examples.
       "test": 6,
   }
   SPEC = {

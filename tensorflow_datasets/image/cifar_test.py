@@ -28,7 +28,7 @@ class Cifar10Test(dataset_builder_testing.TestCase):
   DATASET_CLASS = cifar.Cifar10
   SPLITS = {
       "train": 10,  # Number of records.
-      "test": 2,    # See testing/generate_cifar10_like_sample.py
+      "test": 2,  # See testing/generate_cifar10_like_example.py
   }
   SPEC = {
       "label": (tf.int64, ()),

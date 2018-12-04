@@ -143,7 +143,7 @@ class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
       values[row_values[0]] = [int(v) for v in row_values[1:]]
     return keys, values
 
-  def _generate_samples(self, file_id, extracted_dirs):
+  def _generate_examples(self, file_id, extracted_dirs):
     filedir = os.path.join(extracted_dirs["img_align_celeba"],
                            "img_align_celeba")
 
@@ -167,7 +167,7 @@ class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
     for file_name in files:
       path = os.path.join(filedir, file_name)
 
-      yield self.info.features.encode_sample({
+      yield self.info.features.encode_example({
           "image": path,
           "landmarks": {
               k: v for k, v in zip(landmarks[0], landmarks[1][file_name])

@@ -108,7 +108,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
             gen_kwargs={"filepaths": gen_filenames(cifar_info.test_files)}),
     ]
 
-  def _generate_samples(self, filepaths):
+  def _generate_examples(self, filepaths):
     """Generate CIFAR examples as dicts.
 
     Shared across CIFAR-{10, 100}. Uses self._cifar_info as
@@ -118,7 +118,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
       filepaths (list[str]): The files to use to generate the data.
 
     Yields:
-      The cifar samples, as defined in the dataset info features.
+      The cifar examples, as defined in the dataset info features.
     """
     images, labels = [], []
     for path in filepaths:
@@ -134,7 +134,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
           for j in range(num_images)
       ])
 
-      # Extract the list[dict[label_key, sample_label]]
+      # Extract the list[dict[label_key, example_label]]
       labels.extend([
           {_strip_s(k): data[k][j] for k in self._cifar_info.label_keys}
           for j in range(num_images)
@@ -147,7 +147,7 @@ class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
     for image, label in data:
       if len(label) == 1:
         label = label[_strip_s(self._cifar_info.label_keys[0])]
-      yield self.info.features.encode_sample({
+      yield self.info.features.encode_example({
           "image": image,
           "label": label,
       })

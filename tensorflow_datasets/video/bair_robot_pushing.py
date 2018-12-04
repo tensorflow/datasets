@@ -111,7 +111,7 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
                 (64, 64, 3)), dtype=tf.uint8)
     return parsed
 
-  def _generate_samples(self, split_name, filedir):
+  def _generate_examples(self, split_name, filedir):
     tf.logging.info("Reading data from %s.", filedir)
     files = tf.gfile.ListDirectory(filedir)
     tf.logging.info("Split %s: files found: %d.", split_name, len(files))
@@ -127,7 +127,7 @@ class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
         try:
           while True:
             video = sess.run(iterator)
-            yield self.info.features.encode_sample({
+            yield self.info.features.encode_example({
                 "video_main":
                     np.array([
                         video["%d/image_main/encoded" % i]

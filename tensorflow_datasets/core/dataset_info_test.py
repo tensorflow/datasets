@@ -51,9 +51,9 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
         supervised_keys=("x", "x"),
     )
 
-  def _generate_samples(self):
+  def _generate_examples(self):
     for i in range(30):
-      yield self.info.features.encode_sample({"x": i})
+      yield self.info.features.encode_example({"x": i})
 
 
 class DatasetInfoTest(tf.test.TestCase):

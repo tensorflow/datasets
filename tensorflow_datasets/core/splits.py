@@ -69,7 +69,7 @@ class _SplitDescriptorNode(object):
         read_instruction = split.get_read_instruction(self.info.splits)
 
     3) The SplitReadInstruction is then used in the tf.data.Dataset pipeline
-       to define which files to read and how to skip samples within file.
+       to define which files to read and how to skip examples within file.
 
         files_to_read = read_instruction.split_info_list
         slice_per_file = read_instruction.slice_list
@@ -363,7 +363,7 @@ class SplitReadInstruction(object):
 
   def add(self, sliced_split):
     """Add a SlicedSplitInfo the read instructions."""
-    # TODO(epot): Check that the number of samples per shard % 100 == 0
+    # TODO(epot): Check that the number of examples per shard % 100 == 0
     # Otherwise the slices value may be unbalanced and not exactly reflect the
     # requested slice.
     self._splits[sliced_split.split_info.name] = sliced_split
@@ -451,12 +451,12 @@ class SplitGenerator(object):
 
   Args:
     name (str/list[str]): Name of the Split for which the generator will create
-      the samples. If a list is given, the generator samples will be distributed
-      among the splits proportionally to the num_shards
+      the examples. If a list is given, the generator examples will be
+      distributed among the splits proportionally to the num_shards
     num_shards (int/list[int]): Number of shards between which the generated
-      samples will be written. If name is a list, then num_shards should be a
+      examples will be written. If name is a list, then num_shards should be a
       list with the same number of element.
-    gen_kwargs (dict): Kwargs to forward to the ._generate_samples() of the
+    gen_kwargs (dict): Kwargs to forward to the ._generate_examples() of the
       generator builder
 
   """

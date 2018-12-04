@@ -42,17 +42,17 @@ class AnInputConnector(features_lib.FeaturesDict):
     # FeaturesDict.get_tensor_info
     return features_lib.TensorInfo(shape=(), dtype=tf.int64)
 
-  def encode_sample(self, sample_data):
+  def encode_example(self, example_data):
     # Encode take the input data and wrap in in a dict
-    return super(AnInputConnector, self).encode_sample({
-        'a': sample_data + 1,
-        'b': sample_data * 10
+    return super(AnInputConnector, self).encode_example({
+        'a': example_data + 1,
+        'b': example_data * 10
     })
 
-  def decode_sample(self, tfexample_dict):
+  def decode_example(self, tfexample_dict):
     # Decode take the saved dict and merge the two values
-    tfexample_dict = super(AnInputConnector, self).decode_sample(
-        tfexample_dict)
+    tfexample_dict = super(AnInputConnector,
+                           self).decode_example(tfexample_dict)
     return tfexample_dict['a'] + tfexample_dict['b']
 
 
@@ -62,10 +62,10 @@ class AnOutputConnector(features_lib.FeatureConnector):
   def get_tensor_info(self):
     return features_lib.TensorInfo(shape=(), dtype=tf.float32)
 
-  def encode_sample(self, sample_data):
-    return sample_data * 10.0
+  def encode_example(self, example_data):
+    return example_data * 10.0
 
-  def decode_sample(self, tfexample_data):
+  def decode_example(self, tfexample_data):
     return tfexample_data / 10.0
 
 

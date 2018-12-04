@@ -33,7 +33,7 @@ Ex:
       }
   })
 
-The tf.data.Dataset will return each samples as a dict:
+The tf.data.Dataset will return each examples as a dict:
   {
       'input': tf.Tensor(shape=(batch, height, width, channel), tf.uint8),
       'target': tf.Tensor(shape=(batch, sequence_length), tf.int64),
@@ -43,10 +43,10 @@ The tf.data.Dataset will return each samples as a dict:
       }
   }
 
-2) In the generator function, yield the samples to match what you have defined
+2) In the generator function, yield the examples to match what you have defined
 in the spec. The values will automatically be encoded.
 
-  yield self.info.features.encode_sample({
+  yield self.info.features.encode_example({
       'input': np_image,
       'target': 'This is some text',
       'extra_data': {
@@ -61,7 +61,7 @@ To create your own feature connector, you need to inherit from FeatureConnector
 and implement the abstract methods.
 
 1. If your connector only contains one value, then the get_serialized_features,
-   get_tensor_info, encode_sample, and decode_sample can directly process
+   get_tensor_info, encode_example, and decode_example can directly process
    single value, without wrapping it in a dict.
 
 2. If your connector is a container of multiple sub-connectors, the easiest
@@ -107,7 +107,7 @@ class FeatureConnector(object):
   generation/reading:
 
   ```
-  generator => encode_sample() => tf_example => decode_sample() => data dict
+  generator => encode_example() => tf_example => decode_example() => data dict
   ```
 
   The connector can either get raw or dictionary values as input, depending on
@@ -189,10 +189,10 @@ class FeatureConnector(object):
     return utils.map_nested(to_serialized_field, self.get_tensor_info())
 
   @abc.abstractmethod
-  def encode_sample(self, sample_data):
+  def encode_example(self, example_data):
     """Encode the feature dict into tf-example compatible input.
 
-    The input sample_data can be anything that the user passed at data
+    The input example_data can be anything that the user passed at data
     generation. For example:
 
     For features:
@@ -204,10 +204,10 @@ class FeatureConnector(object):
     }
     ```
 
-    At data generation (in `_generate_samples`), if the user yields:
+    At data generation (in `_generate_examples`), if the user yields:
 
     ```
-    yield self.info.features.encode_samples({
+    yield self.info.features.encode_examples({
         'image': 'path/to/img.png',
         'custom_feature': [123, 'str', lambda x: x+1]
     })
@@ -215,31 +215,32 @@ class FeatureConnector(object):
 
     Then:
 
-     * `tfds.features.Image.encode_sample` will get `'path/to/img.png'` as input
-     * `tfds.features.CustomFeature.encode_sample` will get `[123, 'str',
+     * `tfds.features.Image.encode_example` will get `'path/to/img.png'` as
+       input
+     * `tfds.features.CustomFeature.encode_example` will get `[123, 'str',
        lambda x: x+1] as input
 
     Args:
-      sample_data: Value or dictionary of values to convert into tf-example
+      example_data: Value or dictionary of values to convert into tf-example
         compatible data.
 
     Returns:
       tfexample_data: Data or dictionary of data to write as tf-example. Data
         can be a list or numpy array.
         Note that numpy arrays are flattened so it's the feature connector
-        responsibility to reshape them in `decode_sample()`.
+        responsibility to reshape them in `decode_example()`.
         Note that tf.train.Example only supports int64, float32 and string so
         the data returned here should be integer, float or string. User type
-        can be restored in `decode_sample()`.
+        can be restored in `decode_example()`.
     """
     raise NotImplementedError
 
   @abc.abstractmethod
-  def decode_sample(self, tfexample_data):
+  def decode_example(self, tfexample_data):
     """Decode the feature dict to TF compatible input.
 
     Note: If eager is not enabled, this function will be executed as a
-    tensorflow graph (in `tf.data.Dataset.map(features.decode_samples)`).
+    tensorflow graph (in `tf.data.Dataset.map(features.decode_examples)`).
 
     Args:
       tfexample_data: Data or dictionary of data, as read by the tf-example
@@ -335,8 +336,8 @@ class FeaturesDict(FeatureConnector):
   At generation time:
 
   ```
-  for image, label in generate_samples:
-    yield self.info.features.encode_sample({
+  for image, label in generate_examples:
+    yield self.info.features.encode_example({
         'input': image,
         'output': label
     })
@@ -345,9 +346,9 @@ class FeaturesDict(FeatureConnector):
   At tf.data.Dataset() time:
 
   ```
-  for sample in tfds.load(...):
-    tf_input = sample['input']
-    tf_output = sample['output']
+  for example in tfds.load(...):
+    tf_input = example['input']
+    tf_output = example['output']
   ```
 
   For nested features, the FeaturesDict will internally flatten the keys for the
@@ -384,7 +385,7 @@ class FeaturesDict(FeatureConnector):
 
     Args:
       feature_dict (dict): Dictionary containing the feature connectors of a
-        sample. The keys should correspond to the data dict as returned by
+        example. The keys should correspond to the data dict as returned by
         tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically
         be converted into FeatureConnector.
 
@@ -433,19 +434,17 @@ class FeaturesDict(FeatureConnector):
 
     return features_dict
 
-  def encode_sample(self, sample_dict):
+  def encode_example(self, example_dict):
     """See base class for details."""
     # Flatten dict matching the tf-example features
     # Use NonMutableDict to ensure there is no collision between features keys
     tfexample_dict = utils.NonMutableDict()
 
-    # Iterate over sample fields
-    for feature_key, (feature, sample_value) in utils.zip_dict(
-        self._feature_dict,
-        sample_dict
-    ):
+    # Iterate over example fields
+    for feature_key, (feature, example_value) in utils.zip_dict(
+        self._feature_dict, example_dict):
       # Encode the field with the associated encoder
-      encoded_feature = feature.encode_sample(sample_value)
+      encoded_feature = feature.encode_example(example_value)
 
       # Singleton case
       if not feature.serialized_keys:
@@ -459,7 +458,7 @@ class FeaturesDict(FeatureConnector):
         })
     return tfexample_dict
 
-  def decode_sample(self, tfexample_dict):
+  def decode_example(self, tfexample_dict):
     """See base class for details."""
     tensor_dict = {}
     # Iterate over the Tensor dict keys
@@ -515,23 +514,23 @@ class Tensor(FeatureConnector):
     """See base class for details."""
     return TensorInfo(shape=self._shape, dtype=self._dtype)
 
-  def encode_sample(self, sample_data):
+  def encode_example(self, example_data):
     """See base class for details."""
     np_dtype = np.dtype(self._dtype.as_numpy_dtype)
     # Convert to numpy if possible
-    if not isinstance(sample_data, np.ndarray):
-      sample_data = np.array(sample_data, dtype=np_dtype)
+    if not isinstance(example_data, np.ndarray):
+      example_data = np.array(example_data, dtype=np_dtype)
     # Ensure the shape and dtype match
-    if sample_data.dtype != np_dtype:
+    if example_data.dtype != np_dtype:
       raise ValueError('Dtype {} do not match {}'.format(
-          sample_data.dtype, np_dtype))
-    utils.assert_shape_match(sample_data.shape, self._shape)
+          example_data.dtype, np_dtype))
+    utils.assert_shape_match(example_data.shape, self._shape)
     # For booleans, convert to integer (tf.train.Example does not support bool)
-    if sample_data.dtype == np.bool_:
-      sample_data = sample_data.astype(int)
-    return sample_data
+    if example_data.dtype == np.bool_:
+      example_data = example_data.astype(int)
+    return example_data
 
-  def decode_sample(self, tfexample_data):
+  def decode_example(self, tfexample_data):
     """See base class for details."""
     # TODO(epot): Support dynamic shape
     if self.shape.count(None) < 2:
@@ -564,8 +563,8 @@ class OneOf(FeaturesDict):
   At generation time, encode both coco and cifar labels:
 
   ```
-  for sample in generate_samples:
-    yield self.info.features.encode_sample({
+  for example in generate_examples:
+    yield self.info.features.encode_example({
         'labels': {
             'coco': 'person',
             'cifar10': 'airplane',
@@ -576,8 +575,8 @@ class OneOf(FeaturesDict):
   At tf.data.Dataset() time, only the label from coco is decoded:
 
   ```
-  for sample in tfds.load(...):
-    tf_label = sample['labels']  # == 'person'
+  for example in tfds.load(...):
+    tf_label = example['labels']  # == 'person'
   ```
 
   """
@@ -610,7 +609,7 @@ class OneOf(FeaturesDict):
     # shape/dtype/tensor_info of the choice
     return self._feature_dict[self._choice].get_tensor_info()
 
-  def decode_sample(self, tfexample_dict):
+  def decode_example(self, tfexample_dict):
     """See base class for details."""
     return decode_single_feature_from_dict(
         feature_k=self._choice,
@@ -682,7 +681,7 @@ def decode_single_feature_from_dict(
     tfexample_dict (dict): Dict containing the data to decode.
 
   Returns:
-    decoded_feature: The output of the feature.decode_sample
+    decoded_feature: The output of the feature.decode_example
   """
   # Singleton case
   if not feature.serialized_keys:
@@ -694,7 +693,7 @@ def decode_single_feature_from_dict(
         k: tfexample_dict[posixpath.join(feature_k, k)]
         for k in feature.serialized_keys
     }
-  return feature.decode_sample(data_to_decode)
+  return feature.decode_example(data_to_decode)
 
 
 def _assert_keys_match(keys1, keys2):

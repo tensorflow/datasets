@@ -52,7 +52,7 @@ class SequenceDict(feature.FeaturesDict):
   During data generation:
 
   ```
-  yield self.info.encode_sample({
+  yield self.info.encode_example({
       'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
       'action': ['left', 'left', 'up', ...],
   })
@@ -129,9 +129,9 @@ class SequenceDict(feature.FeaturesDict):
     tensor_info = super(SequenceDict, self).get_serialized_features()
     return utils.map_nested(add_length_dim, tensor_info)
 
-  def encode_sample(self, sample_dict):
+  def encode_example(self, example_dict):
     # Convert nested dict[list] into list[nested dict]
-    sequence_elements = _transpose_dict_list(sample_dict)
+    sequence_elements = _transpose_dict_list(example_dict)
 
     # If length is static, ensure that the given length match
     if self._length is not None and len(sequence_elements) != self._length:
@@ -145,7 +145,7 @@ class SequenceDict(feature.FeaturesDict):
 
     # Encode each individual elements
     sequence_elements = [
-        super(SequenceDict, self).encode_sample(sequence_elem)
+        super(SequenceDict, self).encode_example(sequence_elem)
         for sequence_elem in sequence_elements
     ]
 
@@ -157,14 +157,14 @@ class SequenceDict(feature.FeaturesDict):
     }
     return sequence_elements
 
-  def decode_sample(self, tfexample_dict):
+  def decode_example(self, tfexample_dict):
     # TODO(epot): In eager mode, should investigate the use of
     # tf.contrib.eager.defun to parallelize the calls and improve the pipeline
     # performances, as recommended in tf.map_fn documentation
 
     # Apply the decoding to each of the individual feature.
     return tf.map_fn(
-        super(SequenceDict, self).decode_sample,
+        super(SequenceDict, self).decode_example,
         tfexample_dict,
         dtype=self.dtype,
         parallel_iterations=10,

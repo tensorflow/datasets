@@ -413,8 +413,8 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
           ),
       ]
 
-    The above code will first call `_generate_samples(file='train_data.zip')` to
-    write the train data, then `_generate_samples(file='test_data.zip')` to
+    The above code will first call `_generate_examples(file='train_data.zip')`
+    to write the train data, then `_generate_examples(file='test_data.zip')` to
     write the test data.
 
     Datasets are typically split into different subsets to be used at various
@@ -433,11 +433,11 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
           num_shards=[10, 3],
       )]
 
-    This will call `_generate_samples()` once but will automatically distribute
-    the samples between train and validation set.
+    This will call `_generate_examples()` once but will automatically distribute
+    the examples between train and validation set.
     The proportion of the examples that will end up in each split is defined
     by the relative number of shards each `ShardFiles` object specifies. In
-    the previous case, the train split would contains 10/13 of the samples,
+    the previous case, the train split would contains 10/13 of the examples,
     while the validation split would contain 3/13.
 
     For downloads and extractions, use the given `download_manager`.
@@ -456,10 +456,10 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     raise NotImplementedError()
 
   @abc.abstractmethod
-  def _generate_samples(self, **kwargs):
-    """Default function generating samples for each `SplitGenerator`.
+  def _generate_examples(self, **kwargs):
+    """Default function generating examples for each `SplitGenerator`.
 
-    This function preprocess the samples from the raw data to the preprocessed
+    This function preprocess the examples from the raw data to the preprocessed
     dataset files.
     This function is called once for each `SplitGenerator` defined in
     `_split_generators`. The examples yielded here will be written on
@@ -469,8 +469,9 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
       **kwargs: (dict) Arguments forwarded from the SplitGenerator.gen_kwargs
 
     Yields:
-      sample: (dict) Sample dict<str feature_name, feature_value>. The sample
-        should usually be encoded with `self.info.features.encode_sample({...})`
+      example: (dict) Sample dict<str feature_name, feature_value>. The example
+        should usually be encoded with
+        `self.info.features.encode_example({...})`
     """
     raise NotImplementedError()
 
@@ -485,11 +486,9 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
       for s in split_generator.split_info_list:
         split_dict.add(s)
 
-      # Generate the filenames and write the sample on disk
-      generator_fn = functools.partial(
-          self._generate_samples,
-          **split_generator.gen_kwargs
-      )
+      # Generate the filenames and write the example on disk
+      generator_fn = functools.partial(self._generate_examples,
+                                       **split_generator.gen_kwargs)
       output_files = self._build_split_filenames(
           split_info_list=split_generator.split_info_list,
       )
@@ -522,8 +521,9 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
         shuffle_files=shuffle_files,
     )
-    dataset = dataset.map(self.info.features.decode_sample,
-                          num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    dataset = dataset.map(
+        self.info.features.decode_example,
+        num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return dataset
 
   def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):

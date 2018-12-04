@@ -58,9 +58,9 @@ class DummyDataset(tfds.core.GeneratorBasedDatasetBuilder):
         ),
     ]
 
-  def _generate_samples(self, data):
+  def _generate_examples(self, data):
     for i in data:
-      yield self.info.features.encode_sample({
+      yield self.info.features.encode_example({
           "value": i,
       })
 
@@ -312,7 +312,7 @@ class SplitsIntegrationTest(tf.test.TestCase):
     self.assertEqual(set(values_20_39) & set(values_40_99), set())
     self.assertEqual(set(values_40_99) & set(values_00_19), set())
 
-    # The number of sample in each split match the defined subsplit
+    # The number of example in each split match the defined subsplit
     self.assertEqual(len(values_00_19), len(RANGE_TRAIN) // 5)  # 20%
     self.assertEqual(len(values_20_39), len(RANGE_TRAIN) // 5)  # 20%
     self.assertEqual(len(values_40_99), len(RANGE_TRAIN) * 3 // 5)  # 60%
@@ -335,7 +335,7 @@ class SplitsIntegrationTest(tf.test.TestCase):
     # None of the two splits should intersect
     self.assertEqual(set(values_pos) & set(values_neg), set())
 
-    # The number of sample in each split match the defined subsplit
+    # The number of example in each split match the defined subsplit
     self.assertEqual(len(values_pos), len(RANGE_TRAIN + RANGE_TEST) // 100)
     self.assertEqual(len(values_neg), len(RANGE_TRAIN + RANGE_TEST) * 99 // 100)
 
@@ -360,7 +360,7 @@ class SplitsIntegrationTest(tf.test.TestCase):
     # None of the two splits should intersect
     self.assertEqual(set(values_pos) & set(values_neg), set())
 
-    # The number of sample in each split match the defined subsplit
+    # The number of example in each split match the defined subsplit
     self.assertEqual(
         len(values_pos), len(RANGE_TRAIN) // 2 + len(RANGE_TEST) // 10)
     self.assertEqual(

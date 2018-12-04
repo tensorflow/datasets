@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tool for preparing test sample of BAIR dataset.
+"""Tool for preparing test example of BAIR dataset.
 
 mkdir test/
 mkdir train/

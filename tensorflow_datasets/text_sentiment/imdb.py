@@ -87,8 +87,8 @@ class IMDBReviews(tfds.core.GeneratorBasedDatasetBuilder):
             gen_kwargs={"directory": test_dir}),
     ]
 
-  def _generate_samples(self, directory):
-    """Generate IMDB samples."""
+  def _generate_examples(self, directory):
+    """Generate IMDB examples."""
     pos_dir = os.path.join(directory, "pos")
     neg_dir = os.path.join(directory, "neg")
 
@@ -96,7 +96,7 @@ class IMDBReviews(tfds.core.GeneratorBasedDatasetBuilder):
       for filename in tf.gfile.ListDirectory(d):
         with tf.gfile.Open(os.path.join(d, filename)) as imdb_f:
           text = imdb_f.read().strip()
-          yield self.info.features.encode_sample({
+          yield self.info.features.encode_example({
               "text": text,
               "label": label,
           })

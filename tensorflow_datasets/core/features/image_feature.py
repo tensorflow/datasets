@@ -61,7 +61,7 @@ class Image(feature.FeatureConnector):
       })
 
     * During generation:
-      yield self.info.features.encode_sample({
+      yield self.info.features.encode_example({
           'input': 'path/to/img.jpg',
           'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
       })
@@ -131,7 +131,7 @@ class Image(feature.FeatureConnector):
     utils.assert_shape_match(np_image.shape, self._shape)
     return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
 
-  def encode_sample(self, image_or_path):
+  def encode_example(self, image_or_path):
     """Convert the given image into a dict convertible to tf example."""
     if isinstance(image_or_path, np.ndarray):
       encoded_image = self._encode_image(image_or_path)
@@ -140,10 +140,10 @@ class Image(feature.FeatureConnector):
         encoded_image = image_f.read()
     return encoded_image
 
-  def decode_sample(self, sample):
+  def decode_example(self, example):
     """Reconstruct the image from the tf example."""
-    img = tf.image.decode_image(sample, channels=self._shape[-1],
-                                dtype=tf.uint8)
+    img = tf.image.decode_image(
+        example, channels=self._shape[-1], dtype=tf.uint8)
     img.set_shape(self._shape)
     return img
 

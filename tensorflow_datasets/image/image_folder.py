@@ -54,7 +54,7 @@ class ImageLabelFolder(tfds.core.GeneratorBasedDatasetBuilder):
   ```
   builder = tfds.image.ImageLabelFolder('<dataset_name>')
   builder.download_and_prepare(manual_dir='path/to/manual_dir/')
-  print(ds_builder.info)  # Splits, num samples,... automatically extracted
+  print(ds_builder.info)  # Splits, num examples,... automatically extracted
   ds = builder.as_dataset(split='split_name')
   ```
 
@@ -135,7 +135,7 @@ class ImageLabelFolder(tfds.core.GeneratorBasedDatasetBuilder):
     self.info.features["image"].set_encoding_format(encoding_format)
     self.info.features["label"].names = labels
 
-    def num_samples(label_images):
+    def num_examples(label_images):
       return sum(len(imgs) for imgs in label_images.values())
 
     # Define the splits
@@ -144,19 +144,17 @@ class ImageLabelFolder(tfds.core.GeneratorBasedDatasetBuilder):
             name=split_name,
             # The number of shards is a dynamic function of the total
             # number of images (between 0-10)
-            num_shards=min(10, max(num_samples(label_images) // 1000, 1)),
-            gen_kwargs=dict(
-                label_images=label_images,
-            ),
+            num_shards=min(10, max(num_examples(label_images) // 1000, 1)),
+            gen_kwargs=dict(label_images=label_images,),
         ) for split_name, label_images in split_label_images.items()
     ]
 
-  def _generate_samples(self, label_images):
-    """Generate sample for each image in the dict."""
+  def _generate_examples(self, label_images):
+    """Generate example for each image in the dict."""
 
     for label, image_paths in label_images.items():
       for image_path in image_paths:
-        yield self.info.features.encode_sample({
+        yield self.info.features.encode_example({
             "image": image_path,
             "label": label,
         })

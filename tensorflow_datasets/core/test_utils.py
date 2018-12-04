@@ -164,7 +164,7 @@ class FeatureExpectationsTestCase(SubTestCase):
             with self._subTest("out_serialize"):
               self.assertEqual(
                   test.expected_serialized,
-                  exp.feature.encode_sample(test.value),
+                  exp.feature.encode_example(test.value),
               )
 
           # Assert the returned type match the expected one
@@ -185,29 +185,29 @@ class FeatureExpectationsTestCase(SubTestCase):
 
           # Test serialization + decoding from disk
           with self._subTest("out_value"):
-            decoded_samples = features_encode_decode(fdict, input_value)
-            decoded_samples = decoded_samples[exp.name]
-            if isinstance(decoded_samples, dict):
+            decoded_examples = features_encode_decode(fdict, input_value)
+            decoded_examples = decoded_examples[exp.name]
+            if isinstance(decoded_examples, dict):
               # assertAllEqual do not works well with dictionaries so assert
               # on each individual elements instead
-              zipped_samples = utils.zip_nested(
+              zipped_examples = utils.zip_nested(
                   test.expected,
-                  decoded_samples,
+                  decoded_examples,
                   dict_only=True,
               )
               utils.map_nested(
                   lambda x: self.assertAllEqual(x[0], x[1]),
-                  zipped_samples,
+                  zipped_examples,
                   dict_only=True,
               )
             else:
-              self.assertAllEqual(test.expected, decoded_samples)
+              self.assertAllEqual(test.expected, decoded_examples)
 
 
-def features_encode_decode(features_dict, sample, as_tensor=False):
+def features_encode_decode(features_dict, example, as_tensor=False):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
-  # Encode sample
-  encoded_sample = features_dict.encode_sample(sample)
+  # Encode example
+  encoded_example = features_dict.encode_example(example)
 
   with tmp_dir() as tmp_dir_:
     tmp_filename = os.path.join(tmp_dir_, "tmp.tfrecord")
@@ -216,13 +216,13 @@ def features_encode_decode(features_dict, sample, as_tensor=False):
     file_adapter = file_format_adapter.TFRecordExampleAdapter(
         features_dict.get_serialized_features())
     file_adapter.write_from_generator(
-        generator_fn=lambda: [encoded_sample],
+        generator_fn=lambda: [encoded_example],
         output_files=[tmp_filename],
     )
     dataset = file_adapter.dataset_from_filename(tmp_filename)
 
-    # Decode the sample
-    dataset = dataset.map(features_dict.decode_sample)
+    # Decode the example
+    dataset = dataset.map(features_dict.decode_example)
 
     if not as_tensor:  # Evaluate to numpy array
       for el in dataset_utils.iterate_over_dataset(dataset):

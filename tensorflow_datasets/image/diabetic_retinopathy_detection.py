@@ -76,7 +76,7 @@ class DiabeticRetinopathyDetection(
         ),
     ]
 
-  def _generate_samples(self, images_dir_path, csv_path=None):
+  def _generate_examples(self, images_dir_path, csv_path=None):
     """Yields Example instances from given CSV.
 
     Args:
@@ -93,7 +93,7 @@ class DiabeticRetinopathyDetection(
               for fname in tf.gfile.ListDirectory(images_dir_path)
               if fname.endswith(".jpeg")]
     for name, label in data:
-      yield self.info.features.encode_sample({
+      yield self.info.features.encode_example({
           "name": name,
           "image": "%s/%s.jpeg" % (images_dir_path, name),
           "label": label,

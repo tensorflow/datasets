@@ -117,7 +117,7 @@ class ClassLabel(feature.FeatureConnector):
   def get_tensor_info(self):
     return feature.TensorInfo(shape=(), dtype=tf.int64)
 
-  def encode_sample(self, sample_data):
+  def encode_example(self, example_data):
     if self._num_classes is None:
       raise ValueError(
           "Trying to use ClassLabel feature with undefined number of class. "
@@ -125,16 +125,16 @@ class ClassLabel(feature.FeatureConnector):
       )
 
     # If a string is given, convert to associated integer
-    if isinstance(sample_data, six.string_types):
-      sample_data = self.str2int(sample_data)
+    if isinstance(example_data, six.string_types):
+      example_data = self.str2int(example_data)
 
     # Allowing -1 to mean no label.
-    if not -1 <= sample_data < self._num_classes:
+    if not -1 <= example_data < self._num_classes:
       raise ValueError("Class label %d greater than configured num_classes %d" %
-                       (sample_data, self._num_classes))
-    return sample_data
+                       (example_data, self._num_classes))
+    return example_data
 
-  def decode_sample(self, tfexample_data):
+  def decode_example(self, tfexample_data):
     return tf.reshape(tfexample_data, tuple())
 
   def save_metadata(self, data_dir, feature_name=None):
