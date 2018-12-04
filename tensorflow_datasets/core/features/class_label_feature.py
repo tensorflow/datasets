@@ -76,7 +76,9 @@ class ClassLabel(feature.FeatureConnector):
     int2str = [tf.compat.as_text(name) for name in new_names]
     # Names can only be defined once
     if self._int2str is not None and self._int2str != int2str:
-      raise ValueError("Trying to overwrite already defined ClassLabel names.")
+      raise ValueError(
+          "Trying to overwrite already defined ClassLabel names. Previous: {} "
+          ", new: {}".format(self._int2str, int2str))
 
     # Set-up [new] names
     self._int2str = int2str
