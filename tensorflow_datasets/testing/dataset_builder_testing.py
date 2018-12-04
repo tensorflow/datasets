@@ -30,6 +30,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import registered
+from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import tf_utils
 
 
@@ -59,7 +60,7 @@ FORBIDDEN_OS_FUNCTIONS = (
     )
 
 
-class TestCase(tf.test.TestCase):
+class TestCase(test_utils.SubTestCase):
   """Inherit this class to test your DatasetBuilder class.
 
   You must set the following class attributes:
@@ -92,6 +93,7 @@ class TestCase(tf.test.TestCase):
 
   @classmethod
   def setUpClass(cls):
+    super(TestCase, cls).setUpClass()
     name = cls.__name__
     # Check class has the right attributes
     if cls.DATASET_CLASS is None or not callable(cls.DATASET_CLASS):
@@ -154,13 +156,41 @@ class TestCase(tf.test.TestCase):
   def test_download_and_prepare_as_dataset(self):
     result_p = promise.Promise.resolve(self.sample_dir)
     fct = lambda obj, url, async_=False: async_ and result_p or self.sample_dir
+
+    # TODO(b/119906277): Disable stat computation for diabetic
+    if self.builder.name == "diabetic_retinopathy_detection":
+      compute_stats = False
+    else:
+      compute_stats = True
+
     with tf.test.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=fct,
         extract=fct,
         manual_dir=self.sample_dir,
         ):
-      self.builder.download_and_prepare(compute_stats=False)
+      self.builder.download_and_prepare(compute_stats=compute_stats)
+
+    with self._subTest("as_dataset"):
+      self._assertAsDataset(self.builder)
+
+    if compute_stats:  # TODO(b/119906277): Remove
+      with self._subTest("num_samples"):
+        self._assertNumSamples(self.builder)
+
+    with self._subTest("reload"):
+      # When reloading the dataset, metadata should been reloaded too.
+      builder_reloaded = self.DATASET_CLASS(  # pylint: disable=not-callable
+          data_dir=self.builder._data_dir_root)  # pylint: disable=protected-access
+
+      if compute_stats:  # TODO(b/119906277): Remove
+        self._assertNumSamples(builder_reloaded)
+
+      # After reloading, as_dataset should still be working
+      with self._subTest("as_dataset"):
+        self._assertAsDataset(builder_reloaded)
+
+  def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(records_checksums)}
     for split_name, expected_records_number in self.SPLITS.items():
       dataset = self.builder.as_dataset(split=split_name)
@@ -170,13 +200,25 @@ class TestCase(tf.test.TestCase):
       self.assertEqual(len(records), expected_records_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
         split_to_checksums.items(), 2):
-      if split1 in self.OVERLAPPING_SPLITS or split2 in self.OVERLAPPING_SPLITS:
+      if (split1 in self.OVERLAPPING_SPLITS or
+          split2 in self.OVERLAPPING_SPLITS):
         continue
       self.assertFalse(
           hashes1.intersection(hashes2),
-          ("Splits '%s' and '%s' are overlapping. Are you sure you want to have"
-           " the same objects in those splits? If yes, add one one of them to "
-           "OVERLAPPING_SPLITS class attribute.") % (split1, split2))
+          ("Splits '%s' and '%s' are overlapping. Are you sure you want to "
+           "have the same objects in those splits? If yes, add one one of "
+           "them to OVERLAPPING_SPLITS class attribute.") % (split1, split2))
+
+  def _assertNumSamples(self, builder):
+    for split_name, expected_num_samples in self.SPLITS.items():
+      self.assertEqual(
+          builder.info.splits[split_name].num_examples,
+          expected_num_samples,
+      )
+    self.assertEqual(
+        builder.info.num_examples,
+        sum(self.SPLITS.values()),
+    )
 
 
 def checksum(record):
@@ -193,6 +235,5 @@ def checksum(record):
     else:
       hash_.update(val)
   return hash_.hexdigest()
-
 
 main = tf.test.main

@@ -89,16 +89,16 @@ class FeatureExpectation(object):
     self.serialized_features = serialized_features
 
 
-class FeatureExpectationsTestCase(tf.test.TestCase):
-  """Tests FeatureExpectations with full encode-decode."""
+class SubTestCase(tf.test.TestCase):
+  """Adds subTest() context manager to the TestCase if supported.
+
+  Note: To use this feature, make sure you call super() in setUpClass to
+  initialize the sub stack.
+  """
 
   @classmethod
   def setUpClass(cls):
     cls._sub_test_stack = []
-
-  @property
-  def expectations(self):
-    raise NotImplementedError
 
   @contextlib.contextmanager
   def _subTest(self, test_str):
@@ -111,6 +111,14 @@ class FeatureExpectationsTestCase(tf.test.TestCase):
       with self.subTest(sub_test_str):
         yield
       self._sub_test_stack.pop()
+
+
+class FeatureExpectationsTestCase(SubTestCase):
+  """Tests FeatureExpectations with full encode-decode."""
+
+  @property
+  def expectations(self):
+    raise NotImplementedError
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_encode_decode(self):
