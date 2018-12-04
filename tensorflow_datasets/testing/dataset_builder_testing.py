@@ -67,8 +67,8 @@ class TestCase(test_utils.SubTestCase):
     DATASET_CLASS: class object of DatasetBuilder you want to test.
 
   You may set the following class attributes:
-    OVERLAPPING_SPLITS: `list[str]`, splits containing records from other splits
-      (e.g. a "example" split containing pictures from other splits).
+    OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
+      splits (e.g. a "example" split containing pictures from other splits).
     MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
       disable checks preventing usage of `os` or builtin functions instead of
       recommended `tf.gfile` API.
@@ -81,9 +81,9 @@ class TestCase(test_utils.SubTestCase):
    - the dataset builder produces a valid Dataset object from serialized data
      - in eager mode;
      - in graph mode.
-   - the produced Dataset records have the expected dimensions and types;
-   - the produced Dataset has and the expected number of records;
-   - a record is not part of two splits, or one of these splits is whitelisted
+   - the produced Dataset examples have the expected dimensions and types;
+   - the produced Dataset has and the expected number of examples;
+   - a example is not part of two splits, or one of these splits is whitelisted
        in OVERLAPPING_SPLITS.
   """
 
@@ -191,13 +191,13 @@ class TestCase(test_utils.SubTestCase):
         self._assertAsDataset(builder_reloaded)
 
   def _assertAsDataset(self, builder):
-    split_to_checksums = {}  # {"split": set(records_checksums)}
-    for split_name, expected_records_number in self.SPLITS.items():
+    split_to_checksums = {}  # {"split": set(examples_checksums)}
+    for split_name, expected_examples_number in self.SPLITS.items():
       dataset = self.builder.as_dataset(split=split_name)
       self._check_split(dataset)
-      records = list(self.builder.numpy_iterator(split=split_name))
-      split_to_checksums[split_name] = set(checksum(rec) for rec in records)
-      self.assertEqual(len(records), expected_records_number)
+      examples = list(self.builder.numpy_iterator(split=split_name))
+      split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
+      self.assertEqual(len(examples), expected_examples_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
         split_to_checksums.items(), 2):
       if (split1 in self.OVERLAPPING_SPLITS or
@@ -221,10 +221,10 @@ class TestCase(test_utils.SubTestCase):
     )
 
 
-def checksum(record):
-  """Computes the md5 for a given record."""
+def checksum(example):
+  """Computes the md5 for a given example."""
   hash_ = hashlib.md5()
-  for key, val in sorted(record.items()):
+  for key, val in sorted(example.items()):
     hash_.update(key.encode("utf-8"))
     # TODO(b/120124306): This will only work for "one-level"
     #                    dictionary. We might need a better solution here.

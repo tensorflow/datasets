@@ -27,7 +27,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 class Cifar10Test(dataset_builder_testing.TestCase):
   DATASET_CLASS = cifar.Cifar10
   SPLITS = {
-      "train": 10,  # Number of records.
+      "train": 10,  # Number of examples.
       "test": 2,  # See testing/generate_cifar10_like_example.py
   }
   SPEC = {

@@ -106,7 +106,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 
 class MyDatasetTest(dataset_builder_testing.TestCase):
   DATASET_CLASS = my_dataset.MyDataset
-  SPLITS = {  # Expected number of records on each split from fake example.
+  SPLITS = {  # Expected number of examples on each split from fake example.
       "train": 12,
       "test": 12,
   }
@@ -227,7 +227,7 @@ Use the `SplitGenerator` to describe how each split should be generated. The
 ## Reading downloaded data and generating serialized dataset
 
 When using `GeneratorBasedDatasetBuilder` base class, the `_generate_examples`
-method generates the records to be stored for each split, out of the original
+method generates the examples to be stored for each split, out of the original
 source data. With the previous example, it will be called as:
 
 ```python
@@ -238,7 +238,7 @@ builder._generate_examples(
 ```
 
 This method will typically read source dataset artifacts (e.g. a CSV) and yield
-records like:
+examples like:
 
 ```python
 def _generate_examples(self, images_dir_path, labels=None):
@@ -253,8 +253,8 @@ def _generate_examples(self, images_dir_path, labels=None):
 
 Note that `self.info.features.encode_example` uses the feature definitions from
 `DatasetInfo` to encode the features passed here into a `tf.train.Example`. In
-this case, the `ImageFeature` will extract the jpeg content into the record
-automatically.
+this case, the `ImageFeature` will encode the jpeg content into the tf-record
+file automatically.
 
 At this point, your builder test should pass.
 

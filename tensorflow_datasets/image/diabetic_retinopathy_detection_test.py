@@ -27,12 +27,12 @@ from tensorflow_datasets.testing import dataset_builder_testing
 
 class DiabeticRetinopathyDetectionTest(dataset_builder_testing.TestCase):
   DATASET_CLASS = diabetic_retinopathy_detection.DiabeticRetinopathyDetection
-  SPLITS = {  # Expected number of records on each split.
+  SPLITS = {  # Expected number of examples on each split.
       "sample": 4,
       "train": 12,
       "test": 12,
   }
-  OVERLAPPING_SPLITS = ["sample"]  # contains records from other examples
+  OVERLAPPING_SPLITS = ["sample"]  # contains examples from other examples
   SPEC = {
       "name": (tf.string, ()),
       "image": (tf.uint8, (None, None, 3)),

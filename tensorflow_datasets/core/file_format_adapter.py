@@ -255,9 +255,9 @@ def _write_tfrecords_from_generator(generator, output_files):
 
 def _round_robin_write(writers, generator):
   """Write records from generator round-robin across writers."""
-  for i, record in enumerate(tqdm.tqdm(generator, unit=" records",
-                                       mininterval=10)):
-    writers[i % len(writers)].write(record)
+  for i, example in enumerate(tqdm.tqdm(generator, unit=" examples",
+                                        mininterval=10)):
+    writers[i % len(writers)].write(example)
 
 
 def _write_csv_from_generator(generator, output_files, writer_ctor=None):

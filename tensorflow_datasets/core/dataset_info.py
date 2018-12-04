@@ -25,7 +25,7 @@ This includes things that we know about the dataset statically, i.e.:
 
 This also includes the things that can and should be computed once we've
 processed the dataset as well:
- - number of records (in each split)
+ - number of examples (in each split)
  - feature statistics (in each split)
  - etc.
 """
