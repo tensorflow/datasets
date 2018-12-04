@@ -279,17 +279,17 @@ class DatasetInfo(object):
 #
 
 _FEATURE_TYPE_MAP = {
-    np.float16: schema_pb2.FLOAT,
-    np.float32: schema_pb2.FLOAT,
-    np.float64: schema_pb2.FLOAT,
-    np.int8: schema_pb2.INT,
-    np.int16: schema_pb2.INT,
-    np.int32: schema_pb2.INT,
-    np.int64: schema_pb2.INT,
-    np.uint8: schema_pb2.INT,
-    np.uint16: schema_pb2.INT,
-    np.uint32: schema_pb2.INT,
-    np.uint64: schema_pb2.INT,
+    tf.float16: schema_pb2.FLOAT,
+    tf.float32: schema_pb2.FLOAT,
+    tf.float64: schema_pb2.FLOAT,
+    tf.int8: schema_pb2.INT,
+    tf.int16: schema_pb2.INT,
+    tf.int32: schema_pb2.INT,
+    tf.int64: schema_pb2.INT,
+    tf.uint8: schema_pb2.INT,
+    tf.uint16: schema_pb2.INT,
+    tf.uint32: schema_pb2.INT,
+    tf.uint64: schema_pb2.INT,
 }
 
 _SCHEMA_TYPE_MAP = {
@@ -315,8 +315,6 @@ def get_dataset_feature_statistics(builder, split):
   statistics.num_examples = 0
 
   # Feature dictionaries.
-  feature_to_shape = {}
-  feature_to_dtype = {}
   feature_to_num_examples = collections.defaultdict(int)
   feature_to_min = {}
   feature_to_max = {}
@@ -337,12 +335,9 @@ def get_dataset_feature_statistics(builder, split):
       # For compatibility in graph and eager mode, we can get PODs here and
       # everything may not be neatly wrapped up in numpy's ndarray.
 
-      # TODO(afrozm): Use tf.data.Dataset.{output_types, output_shapes} here.
-      feature_shape = ()
       feature_dtype = type(feature_np)
 
       if isinstance(feature_np, np.ndarray):
-        feature_shape = feature_np.shape
         feature_dtype = feature_np.dtype.type
 
       feature_min, feature_max = None, None
@@ -354,18 +349,6 @@ def get_dataset_feature_statistics(builder, split):
 
       # TODO(afrozm): What if shapes don't match? Populate ValueCount? Add
       # logic for that.
-
-      # Set the shape, or assert shapes match.
-      if feature_name not in feature_to_shape:
-        feature_to_shape[feature_name] = feature_shape
-      else:
-        assert feature_to_shape[feature_name] == feature_shape
-
-      # Set the shape, or assert shapes match.
-      if feature_name not in feature_to_dtype:
-        feature_to_dtype[feature_name] = feature_dtype
-      else:
-        assert feature_to_dtype[feature_name] == feature_dtype
 
       # Set or update the min, max.
       if is_numeric:
@@ -379,20 +362,26 @@ def get_dataset_feature_statistics(builder, split):
 
   # Start here, we've processed all examples.
 
-  # Assert that the keys match up.
-  assert feature_to_shape.keys() == feature_to_dtype.keys()
-  assert feature_to_shape.keys() == feature_to_num_examples.keys()
+  output_shapes_dict = dataset.output_shapes
+  output_types_dict = dataset.output_types
 
-  for feature_name in feature_to_shape:
+  for feature_name in feature_to_num_examples:
     # Try to fill in the schema.
     feature = schema.feature.add()
     feature.name = feature_name
 
-    # TODO(afrozm): What do we do for non fixed size shapes?
-    # What to do for scalars?
-    for dim in feature_to_shape[feature_name]:
-      feature.shape.dim.add().size = dim
-    feature_type = feature_to_dtype[feature_name]
+    # TODO(afrozm): Make this work with nested structures, currently the Schema
+    # proto has no support for it.
+    maybe_feature_shape = output_shapes_dict[feature_name]
+    if not isinstance(maybe_feature_shape, tf.TensorShape):
+      tf.logging.error(
+          "Statistics generation doesn't work for nested structures yet")
+      continue
+
+    for dim in maybe_feature_shape.as_list():
+      # We denote `None`s as -1 in the shape proto.
+      feature.shape.dim.add().size = dim if dim else -1
+    feature_type = output_types_dict[feature_name]
     feature.type = _FEATURE_TYPE_MAP.get(feature_type, schema_pb2.BYTES)
 
     common_statistics = statistics_pb2.CommonStatistics()

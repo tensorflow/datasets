@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import json
 import os
+import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -54,6 +55,25 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
   def _generate_examples(self):
     for i in range(30):
       yield self.info.features.encode_example({"x": i})
+
+
+class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        features=features.FeaturesDict({"im": features.Image()}),
+        supervised_keys=("im", "im"),
+    )
+
+  def _generate_examples(self):
+    for _ in range(30):
+      height = np.random.randint(5, high=10)
+      width = np.random.randint(5, high=10)
+      yield self.info.features.encode_example({
+          "im":
+              np.random.randint(
+                  0, 255, size=(height, width, 3), dtype=np.uint8)
+      })
 
 
 class DatasetInfoTest(tf.test.TestCase):
@@ -128,6 +148,20 @@ class DatasetInfoTest(tf.test.TestCase):
       train_split = builder.info.splits["train"].get_proto()
       self.assertEqual(10, test_split.statistics.num_examples)
       self.assertEqual(20, train_split.statistics.num_examples)
+
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes
+  def test_statistics_generation_variable_sizes(self):
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = RandomShapedImageGenerator(data_dir=tmp_dir)
+      builder.download_and_prepare(compute_stats=True)
+
+      # Get the expected type of the feature.
+      schema_feature = builder.info.as_proto.schema.feature[0]
+      self.assertEqual("im", schema_feature.name)
+
+      self.assertEqual(-1, schema_feature.shape.dim[0].size)
+      self.assertEqual(-1, schema_feature.shape.dim[1].size)
+      self.assertEqual(3, schema_feature.shape.dim[2].size)
 
 if __name__ == "__main__":
   tf.test.main()
