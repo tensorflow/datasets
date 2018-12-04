@@ -93,7 +93,7 @@ class IMDBReviews(tfds.core.GeneratorBasedDatasetBuilder):
     neg_dir = os.path.join(directory, "neg")
 
     for d, label in [(pos_dir, "pos"), (neg_dir, "neg")]:
-      for filename in os.listdir(d):
+      for filename in tf.gfile.ListDirectory(d):
         with tf.gfile.Open(os.path.join(d, filename)) as imdb_f:
           text = imdb_f.read().strip()
           yield self.info.features.encode_sample({

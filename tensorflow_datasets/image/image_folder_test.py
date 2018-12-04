@@ -30,6 +30,8 @@ from tensorflow_datasets.testing import dataset_builder_testing
 class ImageLabelFolderTest(dataset_builder_testing.TestCase):
   DATASET_CLASS = functools.partial(
       image_folder.ImageLabelFolder, dataset_name="image_folder_data")
+  # The above construct forces us to disable those checks:
+  MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
   SPLITS = {
       "train": 2,  # Number of samples.
       "test": 6,

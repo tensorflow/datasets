@@ -33,6 +33,32 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core.utils import tf_utils
 
 
+# `os` module Functions for which tf.gfile equivalent should be preferred.
+FORBIDDEN_OS_FUNCTIONS = (
+    "chmod",
+    "chown",
+    "link",
+    "listdir",
+    "lstat",
+    "makedirs",
+    "mkdir",
+    "mknod",
+    "open",
+    "pathconf",
+    "readlink",
+    "remove",
+    "removedirs",
+    "rename",
+    "renames",
+    "rmdir",
+    "stat",
+    "statvfs",
+    "symlink",
+    "unlink",
+    "walk",
+    )
+
+
 class TestCase(tf.test.TestCase):
   """Inherit this class to test your DatasetBuilder class.
 
@@ -42,6 +68,9 @@ class TestCase(tf.test.TestCase):
   You may set the following class attributes:
     OVERLAPPING_SPLITS: `list[str]`, splits containing records from other splits
       (e.g. a "sample" split containing pictures from other splits).
+    MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
+      disable checks preventing usage of `os` or builtin functions instead of
+      recommended `tf.gfile` API.
 
   This test case will check for the following:
    - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
@@ -59,6 +88,7 @@ class TestCase(tf.test.TestCase):
 
   DATASET_CLASS = None
   OVERLAPPING_SPLITS = []
+  MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
 
   @classmethod
   def setUpClass(cls):
@@ -75,6 +105,22 @@ class TestCase(tf.test.TestCase):
     self.sample_dir = os.path.join(
         os.path.dirname(__file__),
         "test_data/fake_samples/%s" % self.builder.name)
+    if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
+      self._mock_out_forbidden_os_functions()
+
+  def _mock_out_forbidden_os_functions(self):
+    """Raise error if forbidden os functions are called instead of tf.gfile."""
+    err = AssertionError("Do not use `os`, but `tf.gfile` module instead.")
+    mock_os = tf.test.mock.Mock(os, path=os.path)
+    for fop in FORBIDDEN_OS_FUNCTIONS:
+      getattr(mock_os, fop).side_effect = err
+    tf.test.mock.patch(self.DATASET_CLASS.__module__ + ".os", mock_os).start()
+    mock_builtins = __builtins__.copy()
+    mock_builtins["open"] = tf.test.mock.Mock(side_effect=err)
+    tf.test.mock.patch(
+        self.DATASET_CLASS.__module__ + ".__builtins__",
+        mock_builtins
+        ).start()
 
   def test_baseclass(self):
     self.assertIsInstance(
