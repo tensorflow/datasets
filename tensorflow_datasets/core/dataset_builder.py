@@ -125,6 +125,7 @@ class DatasetBuilder(object):
       ValueError: If the user defines both cache_dir and dl_manager
     """
 
+    mode = mode and download.GenerateMode(mode) or REUSE_DATASET_IF_EXISTS
     if (self._data_dir and mode == REUSE_DATASET_IF_EXISTS):
       tf.logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
@@ -134,7 +135,6 @@ class DatasetBuilder(object):
     extract_dir = extract_dir or os.path.join(self._data_dir_root, "extracted")
     manual_dir = manual_dir or os.path.join(self._data_dir_root, "manual")
     manual_dir = os.path.join(manual_dir, self.name)
-    mode = mode and download.GenerateMode(mode) or REUSE_DATASET_IF_EXISTS
 
     # Create the download manager
     dl_manager = download.DownloadManager(
