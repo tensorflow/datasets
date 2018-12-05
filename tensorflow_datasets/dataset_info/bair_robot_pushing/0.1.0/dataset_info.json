@@ -1,0 +1,186 @@
+{
+  "splits": [
+    {
+      "numShards": "4", 
+      "name": "test", 
+      "statistics": {
+        "features": [
+          {
+            "name": "video_main", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "256"
+              }, 
+              "max": 255.0, 
+              "min": 2.0
+            }
+          }, 
+          {
+            "name": "action", 
+            "type": "FLOAT", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "256"
+              }, 
+              "max": 4.0, 
+              "min": -0.06998101621866226
+            }
+          }, 
+          {
+            "name": "endeffector_pos", 
+            "type": "FLOAT", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "256"
+              }, 
+              "max": 0.8404459953308105, 
+              "min": -0.2932646870613098
+            }
+          }, 
+          {
+            "name": "video_aux1", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "256"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "256"
+      }
+    }, 
+    {
+      "numShards": "10", 
+      "name": "train", 
+      "statistics": {
+        "features": [
+          {
+            "name": "video_main", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "43264"
+              }, 
+              "max": 255.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "action", 
+            "type": "FLOAT", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "43264"
+              }, 
+              "max": 4.0, 
+              "min": -0.06999984383583069
+            }
+          }, 
+          {
+            "name": "endeffector_pos", 
+            "type": "FLOAT", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "43264"
+              }, 
+              "max": 0.8548911809921265, 
+              "min": -0.30802449584007263
+            }
+          }, 
+          {
+            "name": "video_aux1", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "43264"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "43264"
+      }
+    }
+  ], 
+  "citation": "Unsupervised Learning for Physical Interaction through Video  Prediction. Chelsea Finn, Ian Goodfellow, Sergey Levine", 
+  "location": {
+    "urls": [
+      "https://sites.google.com/site/brainrobotdata/home/push-dataset"
+    ]
+  }, 
+  "sizeInBytes": "32212254720", 
+  "description": "This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects.", 
+  "name": "bair_robot_pushing", 
+  "schema": {
+    "feature": [
+      {
+        "shape": {
+          "dim": [
+            {
+              "size": "30"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "name": "video_main", 
+        "type": "INT"
+      }, 
+      {
+        "shape": {
+          "dim": [
+            {
+              "size": "30"
+            }, 
+            {
+              "size": "4"
+            }
+          ]
+        }, 
+        "name": "action", 
+        "type": "FLOAT"
+      }, 
+      {
+        "shape": {
+          "dim": [
+            {
+              "size": "30"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "name": "endeffector_pos", 
+        "type": "FLOAT"
+      }, 
+      {
+        "shape": {
+          "dim": [
+            {
+              "size": "30"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "name": "video_aux1", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "version": "0.1.0"
+}

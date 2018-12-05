@@ -1,0 +1,100 @@
+{
+  "description": "This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a \"fine\" label (the class to which it belongs) and a \"coarse\" label (the superclass to which it belongs).", 
+  "schema": {
+    "feature": [
+      {
+        "name": "label", 
+        "type": "INT"
+      }, 
+      {
+        "name": "image", 
+        "type": "INT", 
+        "shape": {
+          "dim": [
+            {
+              "size": "32"
+            }, 
+            {
+              "size": "32"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }
+      }
+    ]
+  }, 
+  "downloadChecksums": {
+    "https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz": "85cd44d02ba6437773c5bbd22e183051d648de2e7d6b014e1ef29b855ba677a7"
+  }, 
+  "sizeInBytes": "169030451", 
+  "citation": "Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf", 
+  "supervisedKeys": {
+    "output": "label", 
+    "input": "image"
+  }, 
+  "location": {
+    "urls": [
+      "https://www.cs.toronto.edu/~kriz/cifar.html"
+    ]
+  }, 
+  "name": "cifar100", 
+  "splits": [
+    {
+      "name": "test", 
+      "statistics": {
+        "features": [
+          {
+            "name": "label", 
+            "numStats": {
+              "max": 99.0, 
+              "commonStats": {
+                "numNonMissing": "10000"
+              }
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "10000"
+              }
+            }
+          }
+        ], 
+        "numExamples": "10000"
+      }, 
+      "numShards": "1"
+    }, 
+    {
+      "name": "train", 
+      "statistics": {
+        "features": [
+          {
+            "name": "label", 
+            "numStats": {
+              "max": 99.0, 
+              "commonStats": {
+                "numNonMissing": "50000"
+              }
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "50000"
+              }
+            }
+          }
+        ], 
+        "numExamples": "50000"
+      }, 
+      "numShards": "10"
+    }
+  ], 
+  "version": "1.1.0"
+}

@@ -1,0 +1,97 @@
+{
+  "version": "1.0.0", 
+  "splits": [
+    {
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "10000"
+              }
+            }, 
+            "name": "image"
+          }, 
+          {
+            "numStats": {
+              "max": 9.0, 
+              "commonStats": {
+                "numNonMissing": "10000"
+              }
+            }, 
+            "name": "label"
+          }
+        ], 
+        "numExamples": "10000"
+      }, 
+      "name": "test"
+    }, 
+    {
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "60000"
+              }
+            }, 
+            "name": "image"
+          }, 
+          {
+            "numStats": {
+              "max": 9.0, 
+              "commonStats": {
+                "numNonMissing": "60000"
+              }
+            }, 
+            "name": "label"
+          }
+        ], 
+        "numExamples": "60000"
+      }, 
+      "name": "train"
+    }
+  ], 
+  "name": "fashion_mnist", 
+  "description": "Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.", 
+  "location": {
+    "urls": [
+      "https://github.com/zalandoresearch/fashion-mnist"
+    ]
+  }, 
+  "sizeInBytes": "30828134", 
+  "citation": "Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms. Han Xiao, Kashif Rasul, Roland Vollgraf. arXiv:1708.07747", 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "schema": {
+    "feature": [
+      {
+        "shape": {
+          "dim": [
+            {
+              "size": "28"
+            }, 
+            {
+              "size": "28"
+            }, 
+            {
+              "size": "1"
+            }
+          ]
+        }, 
+        "type": "INT", 
+        "name": "image"
+      }, 
+      {
+        "type": "INT", 
+        "name": "label"
+      }
+    ]
+  }
+}

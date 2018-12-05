@@ -11,6 +11,7 @@ See the README on GitHub for further documentation.
 """
 
 import datetime
+import os
 import sys
 
 from setuptools import find_packages
@@ -63,6 +64,13 @@ if sys.version_info < (3, 4):
   REQUIRED_PKGS.append('enum34')
 
 
+DATASET_INFO_FILES = [
+    os.path.join(dirpath, 'dataset_info.json')
+    for dirpath, _, files in os.walk('dataset_info/')
+    if 'dataset_info.json' in files
+]
+
+
 setup(
     name=project_name,
     version=version,
@@ -75,7 +83,7 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': ['url_checksums/*.csv'],
+        'tensorflow_datasets': ['url_checksums/*.csv'] + DATASET_INFO_FILES
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

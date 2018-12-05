@@ -1,0 +1,100 @@
+{
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "numExamples": "10000", 
+        "features": [
+          {
+            "numStats": {
+              "max": 9.0, 
+              "commonStats": {
+                "numNonMissing": "10000"
+              }
+            }, 
+            "name": "label"
+          }, 
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "10000"
+              }
+            }, 
+            "name": "image"
+          }
+        ]
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "numExamples": "50000", 
+        "features": [
+          {
+            "numStats": {
+              "max": 9.0, 
+              "commonStats": {
+                "numNonMissing": "50000"
+              }
+            }, 
+            "name": "label"
+          }, 
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "50000"
+              }
+            }, 
+            "name": "image"
+          }
+        ]
+      }
+    }
+  ], 
+  "citation": "Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf", 
+  "downloadChecksums": {
+    "https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz": "6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce"
+  }, 
+  "version": "1.0.1", 
+  "name": "cifar10", 
+  "schema": {
+    "feature": [
+      {
+        "type": "INT", 
+        "name": "label"
+      }, 
+      {
+        "type": "INT", 
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "32"
+            }, 
+            {
+              "size": "32"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }
+      }
+    ]
+  }, 
+  "location": {
+    "urls": [
+      "https://www.cs.toronto.edu/~kriz/cifar.html"
+    ]
+  }, 
+  "description": "The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.", 
+  "sizeInBytes": "170498457", 
+  "supervisedKeys": {
+    "output": "label", 
+    "input": "image"
+  }
+}

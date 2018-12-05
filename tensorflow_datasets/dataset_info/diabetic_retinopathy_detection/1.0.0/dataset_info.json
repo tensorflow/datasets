@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0", 
+  "name": "diabetic_retinopathy_detection", 
+  "description": "A large set of high-resolution retina images taken under a variety of imaging conditions.", 
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/diabetic-retinopathy-detection/data"
+    ]
+  }, 
+  "schema": {
+    "feature": [
+      {
+        "type": "INT", 
+        "name": "label"
+      }, 
+      {
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT", 
+        "name": "image"
+      }, 
+      {
+        "type": "BYTES", 
+        "name": "name"
+      }
+    ]
+  }, 
+  "sizeInBytes": "104152956928", 
+  "splits": [
+    {
+      "statistics": {
+        "numExamples": "10", 
+        "features": [
+          {
+            "numStats": {
+              "max": -1.0, 
+              "commonStats": {
+                "numNonMissing": "10"
+              }, 
+              "min": -1.0
+            }, 
+            "name": "label"
+          }, 
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "10"
+              }
+            }, 
+            "name": "image"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }
+            }, 
+            "type": "BYTES", 
+            "name": "name"
+          }
+        ]
+      }, 
+      "numShards": "1", 
+      "name": "sample"
+    }, 
+    {
+      "statistics": {
+        "numExamples": "53576", 
+        "features": [
+          {
+            "numStats": {
+              "max": -1.0, 
+              "commonStats": {
+                "numNonMissing": "53576"
+              }, 
+              "min": -1.0
+            }, 
+            "name": "label"
+          }, 
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "53576"
+              }
+            }, 
+            "name": "image"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "53576"
+              }
+            }, 
+            "type": "BYTES", 
+            "name": "name"
+          }
+        ]
+      }, 
+      "numShards": "10", 
+      "name": "test"
+    }, 
+    {
+      "statistics": {
+        "numExamples": "35126", 
+        "features": [
+          {
+            "numStats": {
+              "max": 4.0, 
+              "commonStats": {
+                "numNonMissing": "35126"
+              }
+            }, 
+            "name": "label"
+          }, 
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "35126"
+              }
+            }, 
+            "name": "image"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "35126"
+              }
+            }, 
+            "type": "BYTES", 
+            "name": "name"
+          }
+        ]
+      }, 
+      "numShards": "10", 
+      "name": "train"
+    }
+  ]
+}
