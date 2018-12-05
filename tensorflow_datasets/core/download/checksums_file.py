@@ -15,6 +15,10 @@
 
 """Functions to load/dump checksums files."""
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import csv
 import os
 
@@ -23,8 +27,9 @@ import tensorflow as tf
 
 
 def _open_checksums_file(dataset_name):
-  path = os.path.join(os.path.dirname(__file__),
-                      '..', '..', 'url_checksums', '%s.csv' % dataset_name)
+  path = os.path.normpath(
+      os.path.join(os.path.dirname(__file__),
+                   '..', '..', 'url_checksums', '%s.csv' % dataset_name))
   return tf.gfile.Open(path)
 
 
