@@ -88,14 +88,19 @@ class FeatureDictTest(test_utils.FeatureExpectationsTestCase):
                     'metadata/path': tf.string,
                 }
             }),
-            serialized_features={
-                'input/a': tf.FixedLenFeature(shape=(), dtype=tf.int64),
-                'input/b': tf.FixedLenFeature(shape=(), dtype=tf.int64),
-                'output': tf.FixedLenFeature(shape=(), dtype=tf.float32),
-                'img/size/height': tf.FixedLenFeature(shape=(), dtype=tf.int64),
-                'img/size/width': tf.FixedLenFeature(shape=(), dtype=tf.int64),
-                'img/metadata/path': tf.FixedLenFeature(
-                    shape=(), dtype=tf.string),
+            serialized_info={
+                'input/a':
+                    tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'input/b':
+                    tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'output':
+                    tf.FixedLenFeature(shape=(), dtype=tf.float32),
+                'img/size/height':
+                    tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'img/size/width':
+                    tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                'img/metadata/path':
+                    tf.FixedLenFeature(shape=(), dtype=tf.string),
             },
             dtype={
                 'input': tf.int64,
@@ -184,7 +189,7 @@ class OneOfTest(test_utils.FeatureExpectationsTestCase):
                 },
             ),
             # All choices are present in the serialized feature
-            serialized_features={
+            serialized_info={
                 'choice1': tf.FixedLenFeature(shape=(), dtype=tf.float32),
                 'choice2/a': tf.FixedLenFeature(shape=(), dtype=tf.int64),
                 'choice2/b': tf.FixedLenFeature(shape=(), dtype=tf.int64),

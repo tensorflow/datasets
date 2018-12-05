@@ -388,8 +388,8 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
   def _file_format_adapter(self):
     # Load the format adapter (CSV, TF-Record,...)
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
-    serialized_features = self.info.features.get_serialized_features()
-    return file_adapter_cls(serialized_features)
+    serialized_info = self.info.features.get_serialized_info()
+    return file_adapter_cls(serialized_info)
 
   @abc.abstractmethod
   def _split_generators(self, dl_manager):

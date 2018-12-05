@@ -60,7 +60,7 @@ in the spec. The values will automatically be encoded.
 To create your own feature connector, you need to inherit from FeatureConnector
 and implement the abstract methods.
 
-1. If your connector only contains one value, then the get_serialized_features,
+1. If your connector only contains one value, then the get_serialized_info,
    get_tensor_info, encode_example, and decode_example can directly process
    single value, without wrapping it in a dict.
 
@@ -156,7 +156,7 @@ class FeatureConnector(object):
     """Return the dtype (or dict of dtype) of this FeatureConnector."""
     return utils.map_nested(lambda t: t.dtype, self.get_tensor_info())
 
-  def get_serialized_features(self):
+  def get_serialized_info(self):
     """Return the tf-example features for the adapter, as stored on disk.
 
     This function indicates how this feature is encoded on file internally.
@@ -257,7 +257,7 @@ class FeatureConnector(object):
   @utils.memoized_property
   def serialized_keys(self):
     """List of the flattened feature keys after serialization."""
-    features = self.get_serialized_features()
+    features = self.get_serialized_info()
     if isinstance(features, dict):
       return list(features)
     return None
@@ -410,26 +410,26 @@ class FeaturesDict(FeatureConnector):
         for feature_key, feature in self._feature_dict.items()
     }
 
-  def get_serialized_features(self):
+  def get_serialized_info(self):
     """See base class for details."""
     # Flatten tf-example features dict
     # Use NonMutableDict to ensure there is no collision between features keys
     features_dict = utils.NonMutableDict()
     for feature_key, feature in self._feature_dict.items():
-      serialized_features = feature.get_serialized_features()
+      serialized_info = feature.get_serialized_info()
 
       # Features can be either containers (dict of other features) or plain
       # features (ex: single tensor). Plain features have a None
       # feature.features_keys
       if not feature.serialized_keys:
-        features_dict[feature_key] = serialized_features
+        features_dict[feature_key] = serialized_info
       else:
         # Sanity check which should always be True, as feature.serialized_keys
-        # is computed using feature.get_serialized_features()
-        _assert_keys_match(serialized_features.keys(), feature.serialized_keys)
+        # is computed using feature.get_serialized_info()
+        _assert_keys_match(serialized_info.keys(), feature.serialized_keys)
         features_dict.update({
             posixpath.join(feature_key, k): v
-            for k, v in serialized_features.items()
+            for k, v in serialized_info.items()
         })
 
     return features_dict

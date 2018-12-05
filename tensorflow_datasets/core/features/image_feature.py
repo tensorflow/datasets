@@ -113,7 +113,7 @@ class Image(feature.FeatureConnector):
     # Image is returned as a 3-d uint8 tf.Tensor.
     return feature.TensorInfo(shape=self._shape, dtype=tf.uint8)
 
-  def get_serialized_features(self):
+  def get_serialized_info(self):
     # Only store raw image (includes size).
     return tf.FixedLenFeature(tuple(), tf.string)
 

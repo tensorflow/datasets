@@ -73,20 +73,13 @@ class FeatureExpectationItem(object):
 class FeatureExpectation(object):
   """Object defining a featureConnector test."""
 
-  def __init__(
-      self,
-      name,
-      feature,
-      shape,
-      dtype,
-      tests,
-      serialized_features=None):
+  def __init__(self, name, feature, shape, dtype, tests, serialized_info=None):
     self.name = name
     self.feature = feature
     self.shape = shape
     self.dtype = dtype
     self.tests = tests
-    self.serialized_features = serialized_features
+    self.serialized_info = serialized_info
 
 
 class SubTestCase(tf.test.TestCase):
@@ -135,11 +128,11 @@ class FeatureExpectationsTestCase(SubTestCase):
       self.assertEqual(exp.feature.dtype, exp.dtype)
 
     # Check the serialized features
-    if exp.serialized_features is not None:
-      with self._subTest("serialized_features"):
+    if exp.serialized_info is not None:
+      with self._subTest("serialized_info"):
         self.assertEqual(
-            exp.serialized_features,
-            exp.feature.get_serialized_features(),
+            exp.serialized_info,
+            exp.feature.get_serialized_info(),
         )
 
     # Create the feature dict
@@ -214,7 +207,7 @@ def features_encode_decode(features_dict, example, as_tensor=False):
 
     # Read/write the file
     file_adapter = file_format_adapter.TFRecordExampleAdapter(
-        features_dict.get_serialized_features())
+        features_dict.get_serialized_info())
     file_adapter.write_from_generator(
         generator_fn=lambda: [encoded_example],
         output_files=[tmp_filename],

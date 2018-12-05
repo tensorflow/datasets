@@ -100,7 +100,7 @@ class SequenceDict(feature.FeaturesDict):
     tensor_info = super(SequenceDict, self).get_tensor_info()
     return utils.map_nested(add_length_dim, tensor_info)
 
-  def get_serialized_features(self):
+  def get_serialized_info(self):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
 
@@ -126,7 +126,7 @@ class SequenceDict(feature.FeaturesDict):
         )
       return serialized_feature
 
-    tensor_info = super(SequenceDict, self).get_serialized_features()
+    tensor_info = super(SequenceDict, self).get_serialized_info()
     return utils.map_nested(add_length_dim, tensor_info)
 
   def encode_example(self, example_dict):
