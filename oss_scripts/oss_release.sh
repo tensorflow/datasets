@@ -3,6 +3,15 @@
 set -v  # print commands as they're executed
 set -e  # fail and exit on any command erroring
 
+function setup_env() {
+  local py_version=$1
+  local venv_path="tfds_env_${py_version}"
+  virtualenv -p $py_version $venv_path
+  source $venv_path/bin/activate
+  pip install -q --upgrade setuptools pip
+  pip install wheel twine pyopenssl
+}
+
 GIT_COMMIT_ID=${1:-""}
 [[ -z $GIT_COMMIT_ID ]] && echo "Must provide a commit" && exit 1
 SETUP_ARGS=""
@@ -20,12 +29,15 @@ git clone https://github.com/tensorflow/datasets.git
 cd datasets
 git checkout $GIT_COMMIT_ID
 
-pip install wheel twine pyopenssl
+setup_env python2
 
-# Build the distribution
-echo "Building distribution"
+echo "Building source distribution"
 python setup.py sdist $SETUP_ARGS
-python setup.py bdist_wheel --universal $SETUP_ARGS
+
+# Build the wheels
+python setup.py bdist_wheel $SETUP_ARGS
+setup_env python3
+python setup.py bdist_wheel $SETUP_ARGS
 
 # Publish to PyPI
 read -p "Publish? (y/n) " -r
@@ -39,7 +51,5 @@ else
   exit 1
 fi
 
-# Cleanup
-rm -rf build/ dist/ tensorflow_datasets.egg-info/
 popd
 rm -rf $TMP_DIR
