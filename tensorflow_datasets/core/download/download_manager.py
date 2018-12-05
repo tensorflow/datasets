@@ -217,7 +217,7 @@ class DownloadManager(object):
     final_path = self._downloaded_path(url_info)
     self._write_info_file(final_path, url_info)
     tf.gfile.Rename(tmp_path, final_path, overwrite=True)
-    tf.gfile.Remove(tmp_dir_path)
+    tf.gfile.DeleteRecursively(tmp_dir_path)
     return final_path
 
   def _download(self, url_info):
