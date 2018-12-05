@@ -16,9 +16,11 @@ fi
 # seeing with Python 3
 pip install -q -U numpy
 
-# First ensure that the base dependencies are sufficient for a full import
+# First ensure that the base dependencies are sufficient for a full import and
+# data load
 pip install -q -e .
 python -c "import tensorflow_datasets as tfds"
+python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split=tfds.Split.TRAIN)"
 
 # Then install the test dependencies
 pip install -q -e .[tests]
