@@ -7,7 +7,7 @@ upper_tabs:
   path: /resources
   is_default: true
   menu:
-  - include: /ecosystem/_menu_toc.yaml
+  - include: /resources/_menu_toc.yaml
   lower_tabs:
     # Subsite tabs
     other:
