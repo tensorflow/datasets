@@ -5,7 +5,6 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
 <meta itemprop="property" content="download_and_extract"/>
-<meta itemprop="property" content="execute_and_cache"/>
 <meta itemprop="property" content="extract"/>
 </div>
 
@@ -19,32 +18,31 @@
 
 Defined in [`core/download/download_manager.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py).
 
-Class which manages the download and extraction of data.
+Manages the download and extraction of files, as well as caching.
 
-This has the following advantage:
- * Remove the boilerplate code common to each dataset as now the user only
-   has to provide urls.
- * Allow multiple download backends (local and cloud). Otherwise the user
-   may be tempted to use standard Python function (ex: tarfile) which may
-   not be compatible with one of the backend.
- * Allow to launch multiple download in parallel.
- * Better ressources management (ex: a same url used by multiple
-   datasets is downloaded/extracted only once).
+Downloaded files are cached under `download_dir`. The file name is:
+  - if there is a sha256 associated with the url: "${sha256_of_content}s".
+  - otherwise: "url.%(sha256_of_url)s".
 
-The function members accept either plain value, or values wrapped into list
-or dict. Giving a data structure will parallelize the downloads.
+The sha256 of content (if any) associated to each URL are given through the
+`checksum_file` given to constructor.
 
-Example:
+When a file is downloaded, a "%{fname}s.INFO.json" file is created next to it.
+This INFO file contains the following information:
+{"dataset_names": ["name1", "name2"],
+ "urls": ["http://url.of/downloaded_file"]}
+The INFO files are used by `create_checksum_files.py` script.
+
+Extracted files/dirs are stored under `extract_dir`. The file name or
+directory name is the same as the original name, prefixed with the extraction
+method. E.g. "${extract_dir}/ZIP.%(sha256_of_zipped_content)s" or
+             "${extract_dir}/TAR.url.%(sha256_of_url)s".
+
+Example of usage:
 
   # Sequential download: str -> str
   train_dir = dl_manager.download_and_extract('https://abc.org/train.tar.gz')
   test_dir = dl_manager.download_and_extract('https://abc.org/test.tar.gz')
-
-
-  # Parallel download: list -> list
-  image_files = dl_manager.download(
-      ['https://a.org/1.jpg', 'https://a.org/2.jpg', ...])
-
 
   # Parallel download: dict -> dict
   data_dirs = dl_manager.download_and_extract({
@@ -55,22 +53,19 @@ Example:
   data_dirs['test']
 
 For more customization on the download/extraction (ex: passwords, output_name,
-...), you can give UrlInfo() or ExtractInfo() instead of plain string.
-
-It is also possible to use the download manager to process a custom function
-with the same guaranties/features than download and extraction.
-
-  # The "/vocab/en-fr" path is cached and can be reused accros run. If
-  # the path already exists, the cached value is re-used
-  vocab_dir = dl_manager.execute_and_cache(generate_vocab_fn, '/vocab/en-fr')
+...), you can pass UrlInfo() ExtractInfo() or UrlExtractInfo as arguments.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
 __init__(
-    cache_dir,
+    dataset_name,
+    download_dir=None,
+    extract_dir=None,
     manual_dir=None,
-    mode=None
+    checksums=None,
+    force_download=False,
+    force_extraction=False
 )
 ```
 
@@ -78,12 +73,16 @@ Download manager constructor.
 
 #### Args:
 
-* <b>`cache_dir`</b>: `str`, Cache directory where all downloads, extractions and
-    other artifacts are stored.
-* <b>`manual_dir`</b>: `str`, Directory containing manually downloaded data. Default
-    to cache_dir.
-  mode (GenerateMode): Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS or
-    REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
+* <b>`dataset_name`</b>: `str`, name of dataset this instance will be used for.
+* <b>`download_dir`</b>: `str`, path to directory where downloads are stored.
+* <b>`extract_dir`</b>: `str`, path to directory where artifacts are extracted.
+* <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data directory.
+* <b>`checksums`</b>: `dict<str url, str sha256>`, url to sha256 of resource.
+    Only URLs present are checked.
+  `bool`, if True, validate checksums of files if url is
+    present in the checksums file. If False, no checks are done.
+* <b>`force_download`</b>: `bool`, default to False. If True, always [re]download.
+* <b>`force_extraction`</b>: `bool`, default to False. If True, always [re]extract.
 
 
 
@@ -100,102 +99,71 @@ Returns the directory containing the manually extracted data.
 <h3 id="download"><code>download</code></h3>
 
 ``` python
-download(urls_info)
+download(
+    urls,
+    async_=False
+)
 ```
 
-Downloads the given urls.
-
-If one of the download already exists, the cached value will be reused.
+Download given artifacts, returns {'name': 'path'} or 'path'.
 
 #### Args:
 
-urls_info (UrlInfo): The url to download. If a string is passed, it will
-  automatically be converted into UrlInfo object
+* <b>`urls`</b>: A single URL (str or UrlInfo) or a `Dict[str, UrlInfo]`.
+    The URL(s) to download.
+* <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
 
 #### Returns:
 
-downloaded_filepaths (str): The downloaded files paths
+`str` or `Dict[str, str]`: path or {name: path}.
 
 <h3 id="download_and_extract"><code>download_and_extract</code></h3>
 
 ``` python
-download_and_extract(urls_info)
-```
-
-Convinience method to perform download+extract in a single command.
-
-As most downloads are imediatelly followed by an extraction, this
-function avoid some boilerplate code. It is equivalent to:
-  extracted_dirs = dl_manager.extract(dl_manager.download(urls_info))
-
-#### Args:
-
-urls_info (UrlInfo): Same input as .download()
-
-
-#### Returns:
-
-extracted_dir (str): Same output as .extract()
-
-<h3 id="execute_and_cache"><code>execute_and_cache</code></h3>
-
-``` python
-execute_and_cache(
-    process_fn,
-    cache_key
+download_and_extract(
+    url_extract_info,
+    async_=False
 )
 ```
 
-Execute the function and cache the associated path.
-
-This function executes the process_fn using a custom cached directory given
-by the key. This allow to use the download manager to cache and share
-additional data like vocabulary or other intermediate artifacts.
-
-The key are shared between datasets which allow re-using data from other
-datasets but also increase the risk of name collision. A good practice
-is to add the dataset name as prefix of the key.
-
-  vocab_cache_key = os.path.join(self.name, 'vocab/en-fr')
-  vocab_dir = dl_manager.execute_and_cache(
-      generate_vocab_fn,
-      cache_key=vocab_cache_key,
-  )
+Downlaod and extract given resources, returns path or {name: path}.
 
 #### Args:
 
-process_fn (fct): Function with signature "(cache_dir) -> None" which
-  takes as input a directory on which storing the additional data.
-cache_key (str): Key of the cache to store the data. If the key already
-  exists, the process_fn isn't used and the previously cached dir is
-  reused.
+* <b>`url_extract_info`</b>: `Dict[str, str|DownloadExtractInfo]` or a single
+    str|DownloadExtractInfo.
+* <b>`async_`</b>: `bool`, defaults to False. If True, returns promise on result.
+
+If URL(s) are given (no `DownloadExtractInfo`), the extraction method is
+guessed from the extension of file on URL path.
 
 
 #### Returns:
 
-cache_dir (str): The directory on which the additional data has been
-  written.
+`Dict[str, str]` or `str`: {'name': 'out_path'} or 'out_path' of
+downloaded AND extracted resource.
 
 <h3 id="extract"><code>extract</code></h3>
 
 ``` python
-extract(extracts_info)
+extract(
+    paths,
+    async_=False
+)
 ```
 
-Extract the given path.
-
-If one of the extraction already exists, the cached value will be reused.
+Extract path(s).
 
 #### Args:
 
-extracts_info (ExtractInfo): The path to extract. If a string is passed,
-  it will automatically be converted into ExtractInfo object
+* <b>`paths`</b>: `Dict[str, str|ExtractInfo]` or a single str|ExtractInfo.
+* <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
 
 #### Returns:
 
-extracted_dirs (str): The downloaded files
+`Dict[str, str]` or `str`: {'name': 'out_path'} or 'out_path'.
 
 
 

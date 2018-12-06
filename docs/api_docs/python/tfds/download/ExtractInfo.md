@@ -1,7 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.download.ExtractInfo" />
 <meta itemprop="path" content="Stable" />
-<meta itemprop="property" content="filetype"/>
+<meta itemprop="property" content="extraction_method"/>
 <meta itemprop="property" content="path"/>
 <meta itemprop="property" content="ByteSize"/>
 <meta itemprop="property" content="Clear"/>
@@ -22,13 +22,15 @@
 <meta itemprop="property" content="__eq__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="__unicode__"/>
+<meta itemprop="property" content="AUTO_EXTRACT"/>
 <meta itemprop="property" content="DESCRIPTOR"/>
-<meta itemprop="property" content="FILETYPE_FIELD_NUMBER"/>
-<meta itemprop="property" content="FileType"/>
-<meta itemprop="property" content="GZ"/>
+<meta itemprop="property" content="EXTRACTION_METHOD_FIELD_NUMBER"/>
+<meta itemprop="property" content="ExtractionMethod"/>
+<meta itemprop="property" content="GZIP"/>
+<meta itemprop="property" content="NO_EXTRACT"/>
 <meta itemprop="property" content="PATH_FIELD_NUMBER"/>
-<meta itemprop="property" content="RAR"/>
-<meta itemprop="property" content="UNKNOWN"/>
+<meta itemprop="property" content="TAR"/>
+<meta itemprop="property" content="TAR_GZ"/>
 <meta itemprop="property" content="ZIP"/>
 </div>
 
@@ -56,9 +58,9 @@ __init__(**kwargs)
 
 ## Properties
 
-<h3 id="filetype"><code>filetype</code></h3>
+<h3 id="extraction_method"><code>extraction_method</code></h3>
 
-Magic attribute generated for "filetype" proto field.
+Magic attribute generated for "extraction_method" proto field.
 
 <h3 id="path"><code>path</code></h3>
 
@@ -234,19 +236,23 @@ __unicode__()
 
 ## Class Members
 
+<h3 id="AUTO_EXTRACT"><code>AUTO_EXTRACT</code></h3>
+
 <h3 id="DESCRIPTOR"><code>DESCRIPTOR</code></h3>
 
-<h3 id="FILETYPE_FIELD_NUMBER"><code>FILETYPE_FIELD_NUMBER</code></h3>
+<h3 id="EXTRACTION_METHOD_FIELD_NUMBER"><code>EXTRACTION_METHOD_FIELD_NUMBER</code></h3>
 
-<h3 id="FileType"><code>FileType</code></h3>
+<h3 id="ExtractionMethod"><code>ExtractionMethod</code></h3>
 
-<h3 id="GZ"><code>GZ</code></h3>
+<h3 id="GZIP"><code>GZIP</code></h3>
+
+<h3 id="NO_EXTRACT"><code>NO_EXTRACT</code></h3>
 
 <h3 id="PATH_FIELD_NUMBER"><code>PATH_FIELD_NUMBER</code></h3>
 
-<h3 id="RAR"><code>RAR</code></h3>
+<h3 id="TAR"><code>TAR</code></h3>
 
-<h3 id="UNKNOWN"><code>UNKNOWN</code></h3>
+<h3 id="TAR_GZ"><code>TAR_GZ</code></h3>
 
 <h3 id="ZIP"><code>ZIP</code></h3>
 

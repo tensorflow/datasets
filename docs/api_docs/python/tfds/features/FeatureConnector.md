@@ -2,14 +2,14 @@
 <meta itemprop="name" content="tfds.features.FeatureConnector" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
+<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
-<meta itemprop="property" content="decode_sample"/>
-<meta itemprop="property" content="encode_sample"/>
-<meta itemprop="property" content="get_serialized_features"/>
+<meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="encode_example"/>
+<meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="save_metadata"/>
-<meta itemprop="property" content="serialized_keys"/>
 </div>
 
 # tfds.features.FeatureConnector
@@ -31,7 +31,7 @@ Here is a diagram on how FeatureConnector methods fit into the data
 generation/reading:
 
 ```
-generator => encode_sample() => tf_example => decode_sample() => data dict
+generator => encode_example() => tf_example => decode_example() => data dict
 ```
 
 The connector can either get raw or dictionary values as input, depending on
@@ -43,6 +43,10 @@ the connector type.
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
+<h3 id="serialized_keys"><code>serialized_keys</code></h3>
+
+List of the flattened feature keys after serialization.
+
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
@@ -51,16 +55,16 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
 
-<h3 id="decode_sample"><code>decode_sample</code></h3>
+<h3 id="decode_example"><code>decode_example</code></h3>
 
 ``` python
-decode_sample(tfexample_data)
+decode_example(tfexample_data)
 ```
 
 Decode the feature dict to TF compatible input.
 
 Note: If eager is not enabled, this function will be executed as a
-tensorflow graph (in `tf.data.Dataset.map(features.decode_samples)`).
+tensorflow graph (in `tf.data.Dataset.map(features.decode_examples)`).
 
 #### Args:
 
@@ -75,15 +79,15 @@ tensorflow graph (in `tf.data.Dataset.map(features.decode_samples)`).
 * <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the tf.data.Dataset
     object
 
-<h3 id="encode_sample"><code>encode_sample</code></h3>
+<h3 id="encode_example"><code>encode_example</code></h3>
 
 ``` python
-encode_sample(sample_data)
+encode_example(example_data)
 ```
 
 Encode the feature dict into tf-example compatible input.
 
-The input sample_data can be anything that the user passed at data
+The input example_data can be anything that the user passed at data
 generation. For example:
 
 For features:
@@ -95,10 +99,10 @@ features={
 }
 ```
 
-At data generation (in `_generate_samples`), if the user yields:
+At data generation (in `_generate_examples`), if the user yields:
 
 ```
-yield self.info.features.encode_samples({
+yield self.info.features.encode_examples({
     'image': 'path/to/img.png',
     'custom_feature': [123, 'str', lambda x: x+1]
 })
@@ -106,13 +110,14 @@ yield self.info.features.encode_samples({
 
 Then:
 
- * <a href="../../tfds/features/Image.md#encode_sample"><code>tfds.features.Image.encode_sample</code></a> will get `'path/to/img.png'` as input
- * `tfds.features.CustomFeature.encode_sample` will get `[123, 'str',
+ * <a href="../../tfds/features/Image.md#encode_example"><code>tfds.features.Image.encode_example</code></a> will get `'path/to/img.png'` as
+   input
+ * `tfds.features.CustomFeature.encode_example` will get `[123, 'str',
    lambda x: x+1] as input
 
 #### Args:
 
-* <b>`sample_data`</b>: Value or dictionary of values to convert into tf-example
+* <b>`example_data`</b>: Value or dictionary of values to convert into tf-example
     compatible data.
 
 
@@ -121,15 +126,15 @@ Then:
 * <b>`tfexample_data`</b>: Data or dictionary of data to write as tf-example. Data
     can be a list or numpy array.
     Note that numpy arrays are flattened so it's the feature connector
-    responsibility to reshape them in `decode_sample()`.
+    responsibility to reshape them in `decode_example()`.
     Note that tf.train.Example only supports int64, float32 and string so
     the data returned here should be integer, float or string. User type
-    can be restored in `decode_sample()`.
+    can be restored in `decode_example()`.
 
-<h3 id="get_serialized_features"><code>get_serialized_features</code></h3>
+<h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
-get_serialized_features()
+get_serialized_info()
 ```
 
 Return the tf-example features for the adapter, as stored on disk.
@@ -249,8 +254,4 @@ overwrite the function.
 * <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
 
 
-
-## Class Members
-
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
 

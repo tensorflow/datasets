@@ -3,18 +3,18 @@
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="encoder"/>
+<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="vocab_size"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="decode_sample"/>
-<meta itemprop="property" content="encode_sample"/>
-<meta itemprop="property" content="get_serialized_features"/>
+<meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="encode_example"/>
+<meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="ints2str"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="str2ints"/>
-<meta itemprop="property" content="serialized_keys"/>
 </div>
 
 # tfds.features.Text
@@ -54,6 +54,10 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 
 
+<h3 id="serialized_keys"><code>serialized_keys</code></h3>
+
+List of the flattened feature keys after serialization.
+
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
@@ -66,26 +70,26 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
 
-<h3 id="decode_sample"><code>decode_sample</code></h3>
+<h3 id="decode_example"><code>decode_example</code></h3>
 
 ``` python
-decode_sample(tfexample_data)
+decode_example(tfexample_data)
 ```
 
 
 
-<h3 id="encode_sample"><code>encode_sample</code></h3>
+<h3 id="encode_example"><code>encode_example</code></h3>
 
 ``` python
-encode_sample(sample_data)
+encode_example(example_data)
 ```
 
 
 
-<h3 id="get_serialized_features"><code>get_serialized_features</code></h3>
+<h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
-get_serialized_features()
+get_serialized_info()
 ```
 
 Return the tf-example features for the adapter, as stored on disk.
@@ -196,8 +200,4 @@ str2ints(str_value)
 Conversion list[int] => decoded string.
 
 
-
-## Class Members
-
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
 

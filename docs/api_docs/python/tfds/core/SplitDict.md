@@ -5,6 +5,7 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="__setitem__"/>
 <meta itemprop="property" content="add"/>
+<meta itemprop="property" content="copy"/>
 <meta itemprop="property" content="from_proto"/>
 <meta itemprop="property" content="to_proto"/>
 <meta itemprop="property" content="update"/>
@@ -60,6 +61,14 @@ add(split_info)
 ```
 
 Add the split info.
+
+<h3 id="copy"><code>copy</code></h3>
+
+``` python
+copy()
+```
+
+
 
 <h3 id="from_proto"><code>from_proto</code></h3>
 

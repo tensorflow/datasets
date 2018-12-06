@@ -1,9 +1,11 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.core.DatasetInfo" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="as_json"/>
 <meta itemprop="property" content="as_proto"/>
 <meta itemprop="property" content="citation"/>
 <meta itemprop="property" content="description"/>
+<meta itemprop="property" content="download_checksums"/>
 <meta itemprop="property" content="features"/>
 <meta itemprop="property" content="initialized"/>
 <meta itemprop="property" content="name"/>
@@ -40,6 +42,8 @@ Properties:
     the `tf.data.Dataset` object from the `builder.as_dataset()` method.
   splits: `SplitDict`, the available Splits for this dataset.
   urls: `list(str)`, the homepage(s) for this dataset.
+  checksums: `Dict[str, str]`, URL to sha256 of resource. If a url is not
+    listed, its checksum is not checked.
   size_in_bytes: `integer`, approximate size in bytes of the raw size of the
     dataset that we will be downloading from the internet.
   num_examples: `integer`, number of examples across all splits.
@@ -59,6 +63,7 @@ __init__(
     supervised_keys=None,
     splits=None,
     urls=None,
+    download_checksums=None,
     size_in_bytes=0,
     citation=None
 )
@@ -78,6 +83,8 @@ Constructor of the DatasetInfo.
     supervised learning, if applicable for the dataset.
 * <b>`splits`</b>: `SplitDict`, the available Splits for this dataset.
 * <b>`urls`</b>: `list(str)`, optional, the homepage(s) for this dataset.
+* <b>`download_checksums`</b>: `dict<str url, str sha256>`, URL to sha256 of file.
+    If a url is not listed, its checksum is not checked.
 * <b>`size_in_bytes`</b>: `integer`, optional, approximate size in bytes of the raw
     size of the dataset that we will be downloading from the internet.
 * <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
@@ -85,6 +92,10 @@ Constructor of the DatasetInfo.
 
 
 ## Properties
+
+<h3 id="as_json"><code>as_json</code></h3>
+
+
 
 <h3 id="as_proto"><code>as_proto</code></h3>
 
@@ -95,6 +106,10 @@ Constructor of the DatasetInfo.
 
 
 <h3 id="description"><code>description</code></h3>
+
+
+
+<h3 id="download_checksums"><code>download_checksums</code></h3>
 
 
 
@@ -154,7 +169,7 @@ read_from_directory(dataset_info_dir)
 
 Update the DatasetInfo properties from the metadata file.
 
-This function updates all the dynamically generated fields (num_samples,
+This function updates all the dynamically generated fields (num_examples,
 hash, time of creation,...) of the DatasetInfo. This reads the metadata
 file on the dataset directory to extract the info and expose them.
 This function is called after the data has been generated in

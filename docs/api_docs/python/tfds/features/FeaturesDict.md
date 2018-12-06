@@ -2,16 +2,16 @@
 <meta itemprop="name" content="tfds.features.FeaturesDict" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
+<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="decode_sample"/>
-<meta itemprop="property" content="encode_sample"/>
-<meta itemprop="property" content="get_serialized_features"/>
+<meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="encode_example"/>
+<meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="save_metadata"/>
-<meta itemprop="property" content="serialized_keys"/>
 </div>
 
 # tfds.features.FeaturesDict
@@ -45,8 +45,8 @@ features = tfds.features.FeaturesDict({
 At generation time:
 
 ```
-for image, label in generate_samples:
-  yield self.info.features.encode_sample({
+for image, label in generate_examples:
+  yield self.info.features.encode_example({
       'input': image,
       'output': label
   })
@@ -55,9 +55,9 @@ for image, label in generate_samples:
 At tf.data.Dataset() time:
 
 ```
-for sample in tfds.load(...):
-  tf_input = sample['input']
-  tf_output = sample['output']
+for example in tfds.load(...):
+  tf_input = example['input']
+  tf_output = example['output']
 ```
 
 For nested features, the FeaturesDict will internally flatten the keys for the
@@ -98,7 +98,7 @@ Initialize the features.
 #### Args:
 
 feature_dict (dict): Dictionary containing the feature connectors of a
-  sample. The keys should correspond to the data dict as returned by
+  example. The keys should correspond to the data dict as returned by
   tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically
   be converted into FeatureConnector.
 
@@ -114,6 +114,10 @@ feature_dict (dict): Dictionary containing the feature connectors of a
 <h3 id="dtype"><code>dtype</code></h3>
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
+
+<h3 id="serialized_keys"><code>serialized_keys</code></h3>
+
+List of the flattened feature keys after serialization.
 
 <h3 id="shape"><code>shape</code></h3>
 
@@ -131,26 +135,26 @@ __getitem__(key)
 
 Return the feature associated with the key.
 
-<h3 id="decode_sample"><code>decode_sample</code></h3>
+<h3 id="decode_example"><code>decode_example</code></h3>
 
 ``` python
-decode_sample(tfexample_dict)
+decode_example(tfexample_dict)
 ```
 
 See base class for details.
 
-<h3 id="encode_sample"><code>encode_sample</code></h3>
+<h3 id="encode_example"><code>encode_example</code></h3>
 
 ``` python
-encode_sample(sample_dict)
+encode_example(example_dict)
 ```
 
 See base class for details.
 
-<h3 id="get_serialized_features"><code>get_serialized_features</code></h3>
+<h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
-get_serialized_features()
+get_serialized_info()
 ```
 
 See base class for details.
@@ -186,8 +190,4 @@ save_metadata(
 See base class for details.
 
 
-
-## Class Members
-
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
 

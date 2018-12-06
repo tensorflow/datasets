@@ -1,11 +1,14 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.core.DatasetBuilder" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="builder_config"/>
+<meta itemprop="property" content="info"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="numpy_iterator"/>
-<meta itemprop="property" content="info"/>
+<meta itemprop="property" content="DATA_CONFIGS"/>
+<meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
 </div>
 
@@ -39,7 +42,10 @@ image, label = features['image'], features['label']
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(data_dir=None)
+__init__(
+    data_dir=None,
+    config=None
+)
 ```
 
 Construct a DatasetBuilder.
@@ -50,6 +56,21 @@ Callers must pass arguments as keyword arguments.
 
 * <b>`data_dir`</b>: (str) directory to read/write data. Defaults to
     "~/tensorflow_datasets".
+* <b>`config`</b>: (<a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> or `str` name) optional configuration
+    for the dataset that affects the data generated on disk. Different
+    `builder_config`s will have their own subdirectories and versions.
+
+
+
+## Properties
+
+<h3 id="builder_config"><code>builder_config</code></h3>
+
+
+
+<h3 id="info"><code>info</code></h3>
+
+Return the dataset info object. See `DatasetInfo` for details.
 
 
 
@@ -91,10 +112,10 @@ Subclasses must override _as_dataset.
 
 ``` python
 download_and_prepare(
-    cache_dir=None,
+    download_dir=None,
+    extract_dir=None,
     manual_dir=None,
     mode=None,
-    dl_manager=None,
     compute_stats=True
 )
 ```
@@ -105,16 +126,15 @@ Subclasses must override _download_and_prepare.
 
 #### Args:
 
-* <b>`cache_dir`</b>: `str`, Cached directory where to extract the data. If None,
-    a default data_dir/tmp directory is used.
-* <b>`manual_dir`</b>: `str`, Cached directory where the manually extracted data is.
-    If None, a default data_dir/manual/{dataset_name}/ directory is used.
-    For DatasetBuilder, this is a read-only directory.
-* <b>`mode`</b>: <a href="../../tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>: Mode to FORCE_REDOWNLOAD, REUSE_CACHE_IF_EXISTS
-    or REUSE_DATASET_IF_EXISTS. Default to REUSE_DATASET_IF_EXISTS.
-* <b>`dl_manager`</b>: <a href="../../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a> DownloadManager to use
-   instead of the default one. If set, none of the cache_dir, manual_dir,
-   mode should be set.
+* <b>`download_dir`</b>: `str`, directory where downloaded files are stored.
+    Defaults to "~/tensorflow-datasets/downloads".
+* <b>`extract_dir`</b>: `str`, directory where extracted files are stored.
+    Defaults to "~/tensorflow-datasets/extracted".
+* <b>`manual_dir`</b>: `str`, read-only directory where manually downloaded/extracted
+    data is stored. Defaults to
+    "~/tensorflow-datasets/manual/{dataset_name}".
+* <b>`mode`</b>: <a href="../../tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>: Mode to FORCE_REDOWNLOAD,
+    or REUSE_DATASET_IF_EXISTS. Defaults to REUSE_DATASET_IF_EXISTS.
 * <b>`compute_stats`</b>: `boolean` If True, compute statistics over the generated
     data and write the <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> protobuf to disk.
 
@@ -148,7 +168,9 @@ Generator yielding feature dictionaries
 
 ## Class Members
 
-<h3 id="info"><code>info</code></h3>
+<h3 id="DATA_CONFIGS"><code>DATA_CONFIGS</code></h3>
+
+<h3 id="builder_configs"><code>builder_configs</code></h3>
 
 <h3 id="name"><code>name</code></h3>
 

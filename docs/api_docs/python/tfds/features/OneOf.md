@@ -2,16 +2,17 @@
 <meta itemprop="name" content="tfds.features.OneOf" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
+<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
+<meta itemprop="property" content="__getattr__"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="decode_sample"/>
-<meta itemprop="property" content="encode_sample"/>
-<meta itemprop="property" content="get_serialized_features"/>
+<meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="encode_example"/>
+<meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="save_metadata"/>
-<meta itemprop="property" content="serialized_keys"/>
 </div>
 
 # tfds.features.OneOf
@@ -44,8 +45,8 @@ features = tfds.features.FeaturesDict({
 At generation time, encode both coco and cifar labels:
 
 ```
-for sample in generate_samples:
-  yield self.info.features.encode_sample({
+for example in generate_examples:
+  yield self.info.features.encode_example({
       'labels': {
           'coco': 'person',
           'cifar10': 'airplane',
@@ -56,8 +57,8 @@ for sample in generate_samples:
 At tf.data.Dataset() time, only the label from coco is decoded:
 
 ```
-for sample in tfds.load(...):
-  tf_label = sample['labels']  # == 'person'
+for example in tfds.load(...):
+  tf_label = example['labels']  # == 'person'
 ```
 
 <h2 id="__init__"><code>__init__</code></h2>
@@ -90,6 +91,10 @@ feature_dict (dict): Dictionary containing the sub fields. The choice
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
+<h3 id="serialized_keys"><code>serialized_keys</code></h3>
+
+List of the flattened feature keys after serialization.
+
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
@@ -97,6 +102,14 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 
 ## Methods
+
+<h3 id="__getattr__"><code>__getattr__</code></h3>
+
+``` python
+__getattr__(key)
+```
+
+Access choice attribute.
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
 
@@ -106,26 +119,26 @@ __getitem__(key)
 
 Return the feature associated with the key.
 
-<h3 id="decode_sample"><code>decode_sample</code></h3>
+<h3 id="decode_example"><code>decode_example</code></h3>
 
 ``` python
-decode_sample(tfexample_dict)
+decode_example(tfexample_dict)
 ```
 
 See base class for details.
 
-<h3 id="encode_sample"><code>encode_sample</code></h3>
+<h3 id="encode_example"><code>encode_example</code></h3>
 
 ``` python
-encode_sample(sample_dict)
+encode_example(example_dict)
 ```
 
 See base class for details.
 
-<h3 id="get_serialized_features"><code>get_serialized_features</code></h3>
+<h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
-get_serialized_features()
+get_serialized_info()
 ```
 
 See base class for details.
@@ -161,8 +174,4 @@ save_metadata(
 See base class for details.
 
 
-
-## Class Members
-
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
 

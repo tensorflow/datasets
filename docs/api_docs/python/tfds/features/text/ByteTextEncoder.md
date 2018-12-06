@@ -1,7 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.features.text.ByteTextEncoder" />
 <meta itemprop="path" content="Stable" />
-<meta itemprop="property" content="reserved_tokens"/>
+<meta itemprop="property" content="additional_tokens"/>
 <meta itemprop="property" content="vocab_size"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode"/>
@@ -23,16 +23,22 @@ Byte-encodes text.
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(reserved_tokens=None)
+__init__(additional_tokens=None)
 ```
 
+Constructs ByteTextEncoder.
 
+#### Args:
+
+* <b>`additional_tokens`</b>: `list<str>`, list of additional tokens. These will be
+    assigned vocab ids `[1, 1+len(additional_tokens)]`. Useful for things
+    like "end-of-string" tokens (e.g. "<EOS>").
 
 
 
 ## Properties
 
-<h3 id="reserved_tokens"><code>reserved_tokens</code></h3>
+<h3 id="additional_tokens"><code>additional_tokens</code></h3>
 
 
 

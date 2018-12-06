@@ -14,18 +14,25 @@ mnist_train_dataset = tfds.load(name="mnist")
 Datasets
 
 * `image`
+  * [`"celeb_a"`](#celeb_a)
   * [`"cifar10"`](#cifar10)
   * [`"cifar100"`](#cifar100)
   * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
   * [`"fashion_mnist"`](#fashion_mnist)
   * [`"image_label_folder"`](#image_label_folder)
   * [`"mnist"`](#mnist)
+* `text_sentiment`
+  * [`"imdb_reviews"`](#imdb_reviews)
 * `video`
   * [`"bair_robot_pushing"`](#bair_robot_pushing)
 
 ---
 
 # `image`
+
+## `"celeb_a"`
+
+[`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
 
 ## `"cifar10"`
 
@@ -50,6 +57,13 @@ Datasets
 ## `"mnist"`
 
 [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
+
+
+# `text_sentiment`
+
+## `"imdb_reviews"`
+
+[`tfds.text_sentiment.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text_sentiment/imdb.py)
 
 
 # `video`

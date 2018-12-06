@@ -16,6 +16,8 @@ toc:
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds/core
+    - title: BuilderConfig
+      path: /datasets/api_docs/python/tfds/core/BuilderConfig
     - title: DatasetBuilder
       path: /datasets/api_docs/python/tfds/core/DatasetBuilder
     - title: DatasetInfo
@@ -40,6 +42,8 @@ toc:
       path: /datasets/api_docs/python/tfds/download/ExtractInfo
     - title: GenerateMode
       path: /datasets/api_docs/python/tfds/download/GenerateMode
+    - title: load_checksums
+      path: /datasets/api_docs/python/tfds/download/load_checksums
     - title: UrlInfo
       path: /datasets/api_docs/python/tfds/download/UrlInfo
   - title: tfds.features
@@ -72,6 +76,10 @@ toc:
         path: /datasets/api_docs/python/tfds/features/text
       - title: ByteTextEncoder
         path: /datasets/api_docs/python/tfds/features/text/ByteTextEncoder
+      - title: SubwordTextEncoder
+        path: /datasets/api_docs/python/tfds/features/text/SubwordTextEncoder
+      - title: Tokenizer
+        path: /datasets/api_docs/python/tfds/features/text/Tokenizer
       - title: TokenTextEncoder
         path: /datasets/api_docs/python/tfds/features/text/TokenTextEncoder
   - title: tfds.file_adapter

@@ -13,6 +13,8 @@ tensorflow_datasets.core.
 
 ## Classes
 
+[`class BuilderConfig`](../tfds/core/BuilderConfig.md): Base class for data configuration.
+
 [`class DatasetBuilder`](../tfds/core/DatasetBuilder.md): Abstract base class for datasets.
 
 [`class GeneratorBasedDatasetBuilder`](../tfds/core/GeneratorBasedDatasetBuilder.md): Base class for datasets with data generation based on dict generators.
