@@ -40,14 +40,18 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
                     expected=3,
                 ),
                 test_utils.FeatureExpectationItem(
+                    value='3',
+                    expected=3,
+                ),
+                test_utils.FeatureExpectationItem(
                     value=10,
                     raise_cls=ValueError,
                     raise_msg='greater than configured num_classes',
                 ),
                 test_utils.FeatureExpectationItem(
-                    value='3',
+                    value='10',
                     raise_cls=ValueError,
-                    raise_msg='not available',
+                    raise_msg='Invalid',
                 ),
             ]
         ),
@@ -76,13 +80,15 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
   def test_num_classes(self):
     labels = features.ClassLabel(num_classes=10)
     self.assertEqual(10, labels.num_classes)
-    self.assertEqual(labels.names, None)
+    self.assertEqual(10, len(labels.names))
 
-    with self.assertRaisesWithPredicateMatch(ValueError, 'is not available'):
-      labels.str2int('1')
+    self.assertEqual(1, labels.str2int('1'))
+    self.assertEqual(u'1', labels.int2str(1))
 
-    with self.assertRaisesWithPredicateMatch(ValueError, 'is not available'):
-      labels.int2str(1)
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Invalid'):
+      labels.str2int('10')
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Invalid'):
+      labels.int2str(10)
 
   def test_str_classes(self):
     labels = features.ClassLabel(names=[

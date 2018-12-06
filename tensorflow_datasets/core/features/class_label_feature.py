@@ -68,7 +68,7 @@ class ClassLabel(feature.FeatureConnector):
   @property
   def names(self):
     if not self._int2str:
-      return None
+      return [tf.compat.as_text(str(i)) for i in range(self._num_classes)]
     return list(self._int2str)
 
   @names.setter
@@ -97,22 +97,33 @@ class ClassLabel(feature.FeatureConnector):
 
   def str2int(self, str_value):
     """Conversion class name string => integer."""
-    if not self._str2int:
-      raise ValueError(
-          "ClassLabel.str2int is not available because names haven't been "
-          "defined in the ClassLabel constructor.")
-    return self._str2int[tf.compat.as_text(str_value)]
+    str_value = tf.compat.as_text(str_value)
+    if self._str2int:
+      return self._str2int[str_value]
+
+    # No names provided, try to integerize
+    failed_parse = False
+    try:
+      int_value = int(str_value)
+    except ValueError:
+      failed_parse = True
+    if failed_parse or not 0 <= int_value < self._num_classes:
+      raise ValueError("Invalid string class label %s" % str_value)
+    return int_value
 
   def int2str(self, int_value):
     """Conversion integer => class name string."""
-    if not self._int2str:
-      raise ValueError(
-          "ClassLabel.int2str is not available because names haven't been "
-          "defined in the ClassLabel constructor.")
-    # Maybe should support batched np array/eager tensors, to allow things like
-    # out_ids = model(inputs)
-    # labels = cifar10.info.features['label'].int2str(out_ids)
-    return self._int2str[int_value]
+    if self._int2str:
+      # Maybe should support batched np array/eager tensors, to allow things
+      # like
+      # out_ids = model(inputs)
+      # labels = cifar10.info.features['label'].int2str(out_ids)
+      return self._int2str[int_value]
+
+    # No names provided, return str(int)
+    if not 0 <= int_value < self._num_classes:
+      raise ValueError("Invalid integer class label %d" % int_value)
+    return tf.compat.as_text(str(int_value))
 
   def get_tensor_info(self):
     return feature.TensorInfo(shape=(), dtype=tf.int64)
@@ -140,7 +151,7 @@ class ClassLabel(feature.FeatureConnector):
   def save_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     # Save names if defined
-    if self.names is not None:
+    if self._str2int is not None:
       names_filepath = _get_names_filepath(data_dir, feature_name)
       _write_names_to_file(names_filepath, self.names)
 
