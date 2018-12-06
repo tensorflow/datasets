@@ -13,13 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""`tensorflow_datasets` package.
-
-`tensorflow_datasets` (`tfds`) defines a collection of datasets ready-to-use
-with TensorFlow.
+# pylint: disable=line-too-long
+"""`tensorflow_datasets` (`tfds`) defines a collection of datasets ready-to-use with TensorFlow.
 
 Each dataset is defined as a `tfds.core.DatasetBuilder`.
+
+See `tfds.builder`, `tfds.list_builders`, and `tfds.load` for the main
+entrypoints into the library, or take a look at
+[our dataset documentation](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md).
 """
+# pylint: enable=line-too-long
 
 
 # Copied from tensorflow/probability
