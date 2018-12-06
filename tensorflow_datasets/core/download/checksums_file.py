@@ -23,13 +23,15 @@ import csv
 import os
 
 import tensorflow as tf
+from tensorflow_datasets.core.utils import py_utils
 
 
 
 def _open_checksums_file(dataset_name):
   path = os.path.normpath(
-      os.path.join(os.path.dirname(__file__),
-                   '..', '..', 'url_checksums', '%s.csv' % dataset_name))
+      os.path.join(py_utils.tfds_dir(),
+                   'url_checksums',
+                   '%s.csv' % dataset_name))
   return tf.gfile.Open(path)
 
 

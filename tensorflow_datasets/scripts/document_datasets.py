@@ -29,6 +29,7 @@ import sys
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils import py_utils
 
 BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets"
 
@@ -72,17 +73,11 @@ DATASET_ENTRY = """\
 """
 
 
-def tfds_dir():
-  # Get the tensorflow_datasets path
-  # tensorflow_datasets/scripts/document_datasets.py
-  return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 def cls_url(module_name):
   mod_file = sys.modules[module_name].__file__
   if mod_file.endswith("pyc"):
     mod_file = mod_file[:-1]
-  path = os.path.relpath(mod_file, tfds_dir())
+  path = os.path.relpath(mod_file, py_utils.tfds_dir())
   return os.path.join(BASE_URL, path)
 
 

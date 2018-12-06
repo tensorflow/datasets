@@ -23,6 +23,7 @@ from __future__ import print_function
 
 import contextlib
 import itertools
+import os
 import sys
 
 # pylint: disable=g-import-not-at-top
@@ -212,3 +213,8 @@ def str_to_version(version_str):
         "Could not convert the {} to version. Format should be x.y.z".format(
             version_str))
   return version_ids
+
+
+def tfds_dir():
+  """Path to tensorflow_datasets directory."""
+  return os.path.dirname(os.path.dirname(os.path.dirname(__file__)))

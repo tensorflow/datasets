@@ -38,11 +38,6 @@ def tmp_dir(dirname=None):
   rm_tmp_dir(tmp)
 
 
-def tfds_dir():
-  """Path to tensorflow_datasets directory."""
-  return os.path.dirname(os.path.dirname(__file__))
-
-
 def make_tmp_dir(dirname=None):
   if dirname and not tf.gfile.Exists(dirname):
     tf.gfile.MakeDirs(dirname)

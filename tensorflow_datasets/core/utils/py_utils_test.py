@@ -134,6 +134,9 @@ class PyUtilsTest(tf.test.TestCase):
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       py_utils.str_to_version('a.b.c')
 
+  def test_tfds_dir(self):
+    """Test the proper suffix only, since the prefix can vary."""
+    self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))
 
 if __name__ == '__main__':
   tf.test.main()
