@@ -15,4 +15,4 @@
 
 """Text-based sentiment analysis datasets."""
 
-from tensorflow_datasets.text_sentiment.imdb import IMDBReviews
+from tensorflow_datasets.text.imdb import IMDBReviews

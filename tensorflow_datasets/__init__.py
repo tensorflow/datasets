@@ -70,7 +70,7 @@ _ensure_tf_install()
 
 # Imports for registration
 from tensorflow_datasets import image
-from tensorflow_datasets import text_sentiment
+from tensorflow_datasets import text
 from tensorflow_datasets import video
 
 

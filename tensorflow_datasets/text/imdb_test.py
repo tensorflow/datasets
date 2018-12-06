@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.text_sentiment import imdb
+from tensorflow_datasets.text import imdb
 
 
 class IMDBReviewsTest(dataset_builder_testing.TestCase):
