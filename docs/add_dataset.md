@@ -115,6 +115,11 @@ class MyDatasetTest(dataset_builder_testing.TestCase):
       "image": (tf.uint8, (None, None, 3)),
       "label": (tf.int64, ()),
   }
+  # If dataset `download_and_extract` more than one resource:
+  DL_EXTRACT_RESULT = {
+      "name1": "path/to/file1",  # Relative to fake_examples/my_dataset dir.
+      "name2": "file2",
+  }
 
 if __name__ == "__main__":
   dataset_builder_testing.main()

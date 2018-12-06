@@ -27,6 +27,10 @@ from __future__ import print_function
 
 import os
 import tensorflow as tf
+
+from tensorflow_datasets.core.download import ExtractInfo
+from tensorflow_datasets.core.download import UrlExtractInfo
+from tensorflow_datasets.core.download import UrlInfo
 import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = ("https://drive.google.com/uc?export=download&"
@@ -82,16 +86,14 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
         "ICCV 2015")
 
   def _split_generators(self, dl_manager):
-    # TODO(b/120128659): pass the map directly to download_and_extract
-    #                    after this is supported by the test framework.
-    extracted_dirs = {
-        key: dl_manager.download_and_extract(path) for key, path in {
-            "img_align_celeba": IMG_ALIGNED_DATA,
-            "list_eval_partition": EVAL_LIST,
-            "list_attr_celeba": ATTR_DATA,
-            "landmarks_celeba": LANDMARKS_DATA
-        }.items()
-    }
+    extracted_dirs = dl_manager.download_and_extract({
+        "img_align_celeba": UrlExtractInfo(
+            url_info=UrlInfo(url=IMG_ALIGNED_DATA),
+            extract_info=ExtractInfo(extraction_method=ExtractInfo.ZIP)),
+        "list_eval_partition": EVAL_LIST,
+        "list_attr_celeba": ATTR_DATA,
+        "landmarks_celeba": LANDMARKS_DATA,
+    })
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -146,13 +148,9 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, file_id, extracted_dirs):
     filedir = os.path.join(extracted_dirs["img_align_celeba"],
                            "img_align_celeba")
-
-    img_list_path = os.path.join(extracted_dirs["list_eval_partition"],
-                                 "list_eval_partition.txt")
-    landmarks_path = os.path.join(extracted_dirs["landmarks_celeba"],
-                                  "list_landmarks_align_celeba.txt")
-    attr_path = os.path.join(extracted_dirs["list_attr_celeba"],
-                             "list_attr_celeba.txt")
+    img_list_path = extracted_dirs["list_eval_partition"]
+    landmarks_path = extracted_dirs["landmarks_celeba"]
+    attr_path = extracted_dirs["list_attr_celeba"]
 
     with tf.gfile.Open(img_list_path) as f:
       files = [

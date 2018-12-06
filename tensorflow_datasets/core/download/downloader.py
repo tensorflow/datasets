@@ -19,26 +19,20 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import contextlib
 import hashlib
 import io
 import os
+import re
 
 import concurrent.futures
 import promise
-import six.moves.urllib as urllib
+import requests
 from tensorflow import gfile
 
 from tensorflow_datasets.core.download import util
 from tensorflow_datasets.core.utils import py_utils
 
-
-class HTTPError(Exception):
-  """There was a problem retrieving resource."""
-
-  def __init__(self, url, code, reason):
-    msg = 'Failed retrieving %s: %s %s.' % (url, code, reason)
-    Exception.__init__(self, msg)
+_DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
 
 @py_utils.memoize()
@@ -77,27 +71,28 @@ class _Downloader(object):
     future = self._executor.submit(self._sync_download, url, destination_path)
     return promise.Promise.resolve(future)
 
+  def _get_drive_url(self, url, session):
+    """Returns url, possibly with confirmation token."""
+    response = session.get(url, stream=True)
+    for k, v in response.cookies.items():
+      if k.startswith('download_warning'):
+        return url + '&confirm=' + v  # v is the confirm token
+    # No token found, let's try with original URL:
+    return url
+
   def _sync_download(self, url, destination_path):
     """Synchronous version of `download` method."""
     checksum = self._checksumer()
-    try:
-      with contextlib.closing(urllib.request.urlopen(url)) as response:
-        fname = util.get_file_name(response.geturl())
-        path = os.path.join(destination_path, fname)
-        _copy_response_to_file(response, path, checksum)
-    except urllib.error.HTTPError as err:
-      raise HTTPError(url, err.code, err.reason)
+    session = requests.Session()
+    if _DRIVE_URL.match(url):
+      url = self._get_drive_url(url, session)
+    response = session.get(url, stream=True)
+    fname = util.get_file_name(response.url)
+    path = os.path.join(destination_path, fname)
+    with gfile.Open(path, 'wb') as file_:
+      for block in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
+        checksum.update(block)
+        # TODO(pierrot): Test this is faster than doing checksum in the end
+        # and document results here.
+        file_.write(block)
     return checksum.hexdigest()
-
-
-def _copy_response_to_file(response, path, checksum):
-  """Copy response (stream) content to file at path, updates checksum."""
-  with gfile.Open(path, 'wb') as file_:
-    while True:
-      block = response.read(io.DEFAULT_BUFFER_SIZE)
-      if not block:
-        break
-      checksum.update(block)
-      # TODO(pierrot): Test this is faster than doing checksum in the end
-      # and document results here.
-      file_.write(block)

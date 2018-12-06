@@ -33,6 +33,13 @@ class CelebATest(dataset_builder_testing.TestCase):
       "test": 1,
   }
 
+  DL_EXTRACT_RESULT = {
+      "img_align_celeba": "",  # Code looks into 'img_align_celeba' subdir.
+      "list_eval_partition": "list_eval_partition.txt",
+      "list_attr_celeba": "list_attr_celeba.txt",
+      "landmarks_celeba": "list_landmarks_align_celeba.txt",
+  }
+
   SPEC = {
       "image": (tf.uint8, (218, 178, 3)),
       # TODO(b/120124306) : seems that the spec doesn't support hierarchy.

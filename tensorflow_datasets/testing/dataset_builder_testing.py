@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import contextlib
 import hashlib
 import itertools
 import os
@@ -70,6 +69,10 @@ class TestCase(test_utils.SubTestCase):
     DATASET_CLASS: class object of DatasetBuilder you want to test.
 
   You may set the following class attributes:
+    DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
+      `download_and_extract` method. The values should be the path of files
+      present in the `fake_examples` directory, relative to that directory.
+      If not specified, path to `fake_examples` will always be returned.
     OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
       splits (e.g. a "example" split containing pictures from other splits).
     MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
@@ -91,6 +94,7 @@ class TestCase(test_utils.SubTestCase):
   """
 
   DATASET_CLASS = None
+  DL_EXTRACT_RESULT = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
 
@@ -143,13 +147,28 @@ class TestCase(test_utils.SubTestCase):
     self.assertIsInstance(info, dataset_info.DatasetInfo)
     self.assertEquals(self.builder.name, info.name)
 
+  def _get_dl_extract_result(self, url, async_=False):
+    del url
+    if self.DL_EXTRACT_RESULT is None:
+      res = self.example_dir
+    else:
+      res = {k: os.path.join(self.example_dir, v)
+             for k, v in self.DL_EXTRACT_RESULT.items()}
+    result_p = promise.Promise.resolve(res)
+    return async_ and result_p or res
+
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
     # TODO(b/119906277): Remove here and checks below. compute_stats should
     # always be True for testing.
     compute_stats = self.builder.name not in COMPUTE_STATS_BLACKLIST
 
-    with mocked_download_manager(self.example_dir):
+    with tf.test.mock.patch.multiple(
+        "tensorflow_datasets.core.download.DownloadManager",
+        download_and_extract=self._get_dl_extract_result,
+        extract=self._get_dl_extract_result,
+        manual_dir=self.example_dir,
+    ):
       self.builder.download_and_prepare(compute_stats=compute_stats)
 
     with self._subTest("as_dataset"):
@@ -226,24 +245,6 @@ def checksum(example):
     else:
       hash_.update(val)
   return hash_.hexdigest()
-
-
-@contextlib.contextmanager
-def mocked_download_manager(mock_dir):
-  """Mock out DownloadManager to return mock_dir."""
-  mock_dir_promise = promise.Promise.resolve(mock_dir)
-
-  def mock_download_extract(obj, url, async_=False):
-    del obj, url
-    return (async_ and mock_dir_promise) or mock_dir
-
-  with tf.test.mock.patch.multiple(
-      "tensorflow_datasets.core.download.DownloadManager",
-      download_and_extract=mock_download_extract,
-      extract=mock_download_extract,
-      manual_dir=mock_dir,
-  ):
-    yield
 
 
 main = tf.test.main
