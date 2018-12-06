@@ -47,7 +47,7 @@ and implement the following methods:
 -   `_as_dataset`, to produce a `tf.data.Dataset` from the serialized data.
 
 As a convenience,
-[`tfds.core.GeneratorBasedDatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py)
+[`tfds.core.GeneratorBasedBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py)
 is a subclass of `tfds.core.DatasetBuilder` that simplifies defining a dataset
 and that works well for most datasets that can be generated on a single machine.
 Instead of `_download_and_prepare` and `_as_dataset`, its subclasses must
@@ -58,13 +58,13 @@ implement:
 -   `_split_generators`: to define the dataset splits and arguments for
     `_generate_examples` per split.
 
-Let's use `GeneratorBasedDatasetBuilder`, the easier option. `my_dataset.py`
-first looks like this:
+Let's use `GeneratorBasedBuilder`, the easier option. `my_dataset.py` first
+looks like this:
 
 ```python
 import tensorflow_datasets.public_api as tfds
 
-class MyDataset(tfds.core.GeneratorBasedDatasetBuilder):
+class MyDataset(tfds.core.GeneratorBasedBuilder):
   """Short description of my dataset."""
 
   def _info(self):
@@ -134,7 +134,7 @@ are part of the dataset and their types. If possible, please also add the
 approximate size of the dataset. For example:
 
 ```python
-class MyDataset(tfds.core.GeneratorBasedDatasetBuilder):
+class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -226,9 +226,9 @@ Use the `SplitGenerator` to describe how each split should be generated. The
 
 ## Reading downloaded data and generating serialized dataset
 
-When using `GeneratorBasedDatasetBuilder` base class, the `_generate_examples`
-method generates the examples to be stored for each split, out of the original
-source data. With the previous example, it will be called as:
+When using `GeneratorBasedBuilder` base class, the `_generate_examples` method
+generates the examples to be stored for each split, out of the original source
+data. With the previous example, it will be called as:
 
 ```python
 builder._generate_examples(

@@ -32,7 +32,7 @@ from tensorflow_datasets.core import test_utils
 tf.enable_eager_execution()
 
 
-class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
+class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     # Split the 30 examples from the generator into 2 train shards and 1 test
@@ -61,7 +61,7 @@ class DummyBuilderConfig(dataset_builder.BuilderConfig):
     self.increment = increment
 
 
-class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedDatasetBuilder):
+class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
   DATA_CONFIGS = [
       DummyBuilderConfig(
           name="plus1",

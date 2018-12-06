@@ -29,7 +29,7 @@ import tensorflow_datasets.public_api as tfds
 SUPPORTED_IMAGE_FORMAT = (".jpg", ".jpeg", ".png")
 
 
-class ImageLabelFolder(tfds.core.GeneratorBasedDatasetBuilder):
+class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
   """Generic image classification dataset created from manual directory.
 
   The data directory should have the following structure:

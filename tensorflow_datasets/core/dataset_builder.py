@@ -432,10 +432,10 @@ class DatasetBuilder(object):
     return config_dict
 
 
-class GeneratorBasedDatasetBuilder(DatasetBuilder):
+class GeneratorBasedBuilder(DatasetBuilder):
   """Base class for datasets with data generation based on dict generators.
 
-  `GeneratorBasedDatasetBuilder` is a convenience class that abstracts away much
+  `GeneratorBasedBuilder` is a convenience class that abstracts away much
   of the data writing and reading of `DatasetBuilder`. It expects subclasses to
   implement generators of feature dictionaries across the dataset splits
   (`_split_generators`) and to specify a file type
@@ -456,7 +456,7 @@ class GeneratorBasedDatasetBuilder(DatasetBuilder):
     Args:
       **kwargs: Constructor kwargs forwarded to DatasetBuilder
     """
-    super(GeneratorBasedDatasetBuilder, self).__init__(**kwargs)
+    super(GeneratorBasedBuilder, self).__init__(**kwargs)
 
   @utils.memoized_property
   def _file_format_adapter(self):

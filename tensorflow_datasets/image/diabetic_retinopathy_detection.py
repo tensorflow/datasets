@@ -27,8 +27,7 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 
-class DiabeticRetinopathyDetection(
-    tfds.core.GeneratorBasedDatasetBuilder):
+class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   """Diabetic retinopathy detection."""
 
   def _info(self):

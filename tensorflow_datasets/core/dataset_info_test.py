@@ -35,7 +35,7 @@ _TESTDATA = os.path.join(pkg_dir, "test_data")
 _NON_EXISTENT_DIR = os.path.join(pkg_dir, "non_existent_dir")
 
 
-class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
+class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     # Split the 30 examples from the generator into 2 train shards and 1 test

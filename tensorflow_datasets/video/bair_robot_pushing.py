@@ -37,7 +37,7 @@ DATA_URL = (
 FRAMES_PER_VIDEO = 30
 
 
-class BairRobotPushing(tfds.core.GeneratorBasedDatasetBuilder):
+class BairRobotPushing(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR."""
 
   def _split_generators(self, dl_manager):

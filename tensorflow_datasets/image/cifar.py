@@ -34,7 +34,7 @@ _CIFAR_IMAGE_SIZE = 32
 _CIFAR_IMAGE_SHAPE = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
 
 
-class Cifar10(tfds.core.GeneratorBasedDatasetBuilder):
+class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
   def _info(self):

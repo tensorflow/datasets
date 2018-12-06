@@ -39,7 +39,7 @@ _TRAIN_EXAMPLES = 60000
 _TEST_EXAMPLES = 10000
 
 
-class MNIST(tfds.core.GeneratorBasedDatasetBuilder):
+class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
 

@@ -55,7 +55,7 @@ ATTR_HEADINGS = (
 ).split()
 
 
-class CelebA(tfds.core.GeneratorBasedDatasetBuilder):
+class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
   def _info(self):

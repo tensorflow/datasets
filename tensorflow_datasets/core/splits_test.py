@@ -30,7 +30,7 @@ RANGE_TEST = list(range(3000, 3200))
 RANGE_VAL = list(range(6000, 6010))
 
 
-class DummyDataset(tfds.core.GeneratorBasedDatasetBuilder):
+class DummyDataset(tfds.core.GeneratorBasedBuilder):
   """Dataset used for the tests."""
 
   def _info(self):

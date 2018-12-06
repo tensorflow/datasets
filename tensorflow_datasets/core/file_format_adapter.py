@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""FileFormatAdapters for GeneratorBasedDatasetBuilder.
+"""FileFormatAdapters for GeneratorBasedBuilder.
 
 FileFormatAdapters implement methods to write and read data from a
 particular file format.

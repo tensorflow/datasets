@@ -451,8 +451,8 @@ class SplitGenerator(object):
   """Defines the split info for the generator.
 
   This should be used as returned value of
-  `GeneratorBasedDatasetBuilder._split_generators`.
-  See `GeneratorBasedDatasetBuilder._split_generators` for more info and example
+  `GeneratorBasedBuilder._split_generators`.
+  See `GeneratorBasedBuilder._split_generators` for more info and example
   of usage.
 
   Args:

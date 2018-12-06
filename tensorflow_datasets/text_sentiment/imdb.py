@@ -52,7 +52,7 @@ _DOWNLOAD_URL = "http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
 
 
 # TODO(rsepassi): Add configs for various encodings
-class IMDBReviews(tfds.core.GeneratorBasedDatasetBuilder):
+class IMDBReviews(tfds.core.GeneratorBasedBuilder):
   """IMDB movie reviews dataset."""
 
   def _info(self):

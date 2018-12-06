@@ -31,7 +31,7 @@ from tensorflow_datasets.core import test_utils
 tf.enable_eager_execution()
 
 
-class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
+class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     return [
