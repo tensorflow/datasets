@@ -52,6 +52,20 @@ from tensorflow_metadata.proto.v0 import statistics_pb2
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
 
+INFO_STR = """tfds.core.DatasetInfo(
+    name={name},
+    version={version},
+    description=\"{description}\",
+    urls={urls},
+    features={features},
+    num_examples={num_examples},
+    splits={splits},
+    examples_per_split={examples_per_split},
+    supervised_keys={supervised_keys},
+    citation=\"{citation}\",
+)
+"""
+
 
 # TODO(tfds): Do we require to warn the user about the peak memory used while
 # constructing the dataset?
@@ -302,6 +316,18 @@ class DatasetInfo(object):
     return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(
         name=self.name, proto=repr(self.as_proto))
 
+  def __str__(self):
+    return INFO_STR.format(
+        name=self.name,
+        version=self.version,
+        description=self.description,
+        num_examples=self.num_examples,
+        features=str(self.features),
+        splits=self.splits.keys(),
+        examples_per_split=[s.num_examples for s in self.splits.values()],
+        citation=self.citation,
+        urls=self.urls,
+        supervised_keys=self.supervised_keys)
 
 #
 #
