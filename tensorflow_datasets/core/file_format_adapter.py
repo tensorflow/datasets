@@ -232,6 +232,7 @@ def _incomplete_files(filenames):
 def incomplete_dir(dirname):
   """Create temporary dir for dirname and rename on exit."""
   tmp_dir = get_incomplete_path(dirname)
+  tf.gfile.MakeDirs(tmp_dir)
   try:
     yield tmp_dir
     tf.gfile.Rename(tmp_dir, dirname)

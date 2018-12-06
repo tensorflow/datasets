@@ -49,10 +49,6 @@ from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
 
-__all__ = [
-    "DatasetInfo",
-]
-
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
 
@@ -140,11 +136,6 @@ class DatasetInfo(object):
 
   @property
   def as_proto(self):
-    # Update the proto to ensure it contains every SplitDict external updates.
-    del self._info_proto.splits[:]  # Clear previous messages
-    for split_info in self._splits.to_proto():
-      self._info_proto.splits.add().CopyFrom(split_info)
-
     return self._info_proto
 
   @property
@@ -173,9 +164,9 @@ class DatasetInfo(object):
 
   @property
   def supervised_keys(self):
-    if not self._info_proto.HasField("supervised_keys"):
+    if not self.as_proto.HasField("supervised_keys"):
       return None
-    supervised_keys = self._info_proto.supervised_keys
+    supervised_keys = self.as_proto.supervised_keys
     return (supervised_keys.input, supervised_keys.output)
 
   @property
@@ -184,22 +175,28 @@ class DatasetInfo(object):
       # TODO(epot): Consider raising an error here instead?
       tf.logging.info("`splits` hasn't been fully initialized, statistics maybe"
                       " missing.")
-    return self._splits
+    return self._splits.copy()
 
   @splits.setter
   def splits(self, split_dict):
     assert isinstance(split_dict, splits_lib.SplitDict)
 
     # Update the dictionary representation.
-    self._splits = split_dict
+    # Use from/to proto for a clean copy
+    self._splits = split_dict.copy()
+
+    # Update the proto
+    del self.as_proto.splits[:]  # Clear previous
+    for split_info in split_dict.to_proto():
+      self.as_proto.splits.add().CopyFrom(split_info)
 
   @property
   def urls(self):
-    return self._info_proto.location.urls
+    return self.as_proto.location.urls
 
   @property
   def download_checksums(self):
-    return self._info_proto.download_checksums
+    return self.as_proto.download_checksums
 
   @property
   def num_examples(self):
@@ -213,8 +210,43 @@ class DatasetInfo(object):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
   def compute_dynamic_properties(self, builder):
-    update_dataset_info(builder, self)
+    self._compute_dynamic_properties(builder)
     self._fully_initialized = True
+
+  def _compute_dynamic_properties(self, builder):
+    """Update from the DatasetBuilder."""
+    # Fill other things by going over the dataset.
+    splits = self.splits
+    for split_info in splits.values():
+      try:
+        split_name = split_info.name
+        # Fill DatasetFeatureStatistics.
+        dataset_feature_statistics, schema = get_dataset_feature_statistics(
+            builder, split_name)
+
+        # Add the statistics to this split.
+        split_info.statistics.CopyFrom(dataset_feature_statistics)
+
+        # Set the schema at the top-level since this is independent of the
+        # split.
+        self.as_proto.schema.CopyFrom(schema)
+
+      except tf.errors.InvalidArgumentError as e:
+        # This means there is no such split, even though it was specified in the
+        # info, the least we can do is to log this.
+        raise tf.errors.InvalidArgumentError(
+            "%s's info() property specifies split %s, but it "
+            "doesn't seem to have been generated. Please ensure "
+            "that the data was downloaded for this split and re-run "
+            "download_and_prepare. Original eror is [%s]" %
+            (self.name, split_name, str(e)))
+
+    # Set splits to trigger proto update in setter
+    self.splits = splits
+
+  @property
+  def as_json(self):
+    return json_format.MessageToJson(self.as_proto)
 
   def write_to_directory(self, dataset_info_dir):
     # Save the metadata from the features (vocabulary, labels,...)
@@ -222,7 +254,7 @@ class DatasetInfo(object):
       self.features.save_metadata(dataset_info_dir)
 
     with tf.gfile.Open(self._dataset_info_filename(dataset_info_dir), "w") as f:
-      f.write(json_format.MessageToJson(self.as_proto))
+      f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir):
     """Update the DatasetInfo properties from the metadata file.
@@ -257,7 +289,7 @@ class DatasetInfo(object):
                                          dataset_info_pb2.DatasetInfo())
 
     # Restore the Splits
-    self._splits = splits_lib.SplitDict.from_proto(self._info_proto.splits)
+    self.splits = splits_lib.SplitDict.from_proto(self.as_proto.splits)
 
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
@@ -265,6 +297,10 @@ class DatasetInfo(object):
 
     # Mark as fully initialized.
     self._fully_initialized = True
+
+  def __repr__(self):
+    return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(
+        name=self.name, proto=repr(self.as_proto))
 
 
 #
@@ -410,30 +446,3 @@ def get_dataset_feature_statistics(builder, split):
       feature_name_statistics.bytes_stats.CopyFrom(bytes_statistics)
 
   return statistics, schema
-
-
-def update_dataset_info(builder, info):
-  """Fill statistics in `info` by going over the dataset in the `builder`."""
-  # Fill other things by going over the dataset.
-  for split_info in info.splits.values():
-    try:
-      split_name = split_info.name
-      # Fill DatasetFeatureStatistics.
-      dataset_feature_statistics, schema = get_dataset_feature_statistics(
-          builder, split_name)
-
-      # Add the statistics to this split.
-      split_info.statistics.CopyFrom(dataset_feature_statistics)
-
-      # Set the schema at the top-level since this is independent of the split.
-      info.as_proto.schema.CopyFrom(schema)
-
-    except tf.errors.InvalidArgumentError as e:
-      # This means there is no such split, even though it was specified in the
-      # info, the least we can do is to log this.
-      raise tf.errors.InvalidArgumentError(
-          "%s's info() property specifies split %s, but it "
-          "doesn't seem to have been generated. Please ensure "
-          "that the data was downloaded for this split and re-run "
-          "download_and_prepare. Original eror is [%s]" % (info.name,
-                                                           split_name, str(e)))

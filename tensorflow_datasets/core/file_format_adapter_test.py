@@ -65,11 +65,11 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedDatasetBuilder):
 
 class DummyCSVBuilder(DummyTFRecordBuilder):
 
-  def __init__(self, *args, **kwargs):
-    super(DummyCSVBuilder, self).__init__(*args, **kwargs)
+  @property
+  def _file_format_adapter(self):
     file_adapter_cls = file_format_adapter.CSVAdapter
     serialized_info = self.info.features.get_serialized_info()
-    self._file_format_adapter = file_adapter_cls(serialized_info)
+    return file_adapter_cls(serialized_info)
 
 
 class FileFormatAdapterTest(tf.test.TestCase):

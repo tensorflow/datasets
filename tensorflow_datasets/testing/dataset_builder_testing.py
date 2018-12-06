@@ -19,10 +19,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import contextlib
 import hashlib
 import itertools
 import os
-import tempfile
 
 import promise
 import tensorflow as tf
@@ -57,7 +57,10 @@ FORBIDDEN_OS_FUNCTIONS = (
     "symlink",
     "unlink",
     "walk",
-    )
+)
+
+# TODO(b/119906277): Rm
+COMPUTE_STATS_BLACKLIST = ["diabetic_retinopathy_detection"]
 
 
 class TestCase(test_utils.SubTestCase):
@@ -101,9 +104,9 @@ class TestCase(test_utils.SubTestCase):
           "Assign your DatasetBuilder class to %s.DATASET_CLASS." % name)
 
   def setUp(self):
-    # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
-    data_dir = tempfile.mkdtemp(dir=tf.test.get_temp_dir())
-    self.builder = self.DATASET_CLASS(data_dir=data_dir)  # pylint: disable=not-callable
+    # New data_dir and builder for each test
+    self.data_dir = test_utils.make_tmp_dir(self.get_temp_dir())
+    self.builder = self.DATASET_CLASS(data_dir=self.data_dir)  # pylint: disable=not-callable
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
         "test_data/fake_examples/%s" % self.builder.name)
@@ -136,10 +139,36 @@ class TestCase(test_utils.SubTestCase):
                   "Dataset was not registered.")
 
   def test_info(self):
-    self.assertIsInstance(self.builder.info, dataset_info.DatasetInfo)
-
     info = self.builder.info
+    self.assertIsInstance(info, dataset_info.DatasetInfo)
     self.assertEquals(self.builder.name, info.name)
+
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  def test_download_and_prepare_as_dataset(self):
+    # TODO(b/119906277): Remove here and checks below. compute_stats should
+    # always be True for testing.
+    compute_stats = self.builder.name not in COMPUTE_STATS_BLACKLIST
+
+    with mocked_download_manager(self.example_dir):
+      self.builder.download_and_prepare(compute_stats=compute_stats)
+
+    with self._subTest("as_dataset"):
+      self._assertAsDataset(self.builder)
+
+    if compute_stats:
+      with self._subTest("num_examples"):
+        self._assertNumSamples(self.builder)
+
+    with self._subTest("reload"):
+      # When reloading the dataset, metadata should been reloaded too.
+      builder_reloaded = self.DATASET_CLASS(data_dir=self.data_dir)  # pylint: disable=not-callable
+
+      if compute_stats:
+        self._assertNumSamples(builder_reloaded)
+
+      # After reloading, as_dataset should still be working
+      with self._subTest("as_dataset"):
+        self._assertAsDataset(builder_reloaded)
 
   def _check_split(self, dataset):
     """Check given split has right types and shapes."""
@@ -152,50 +181,12 @@ class TestCase(test_utils.SubTestCase):
       shapes = dataset.output_shapes[component]
       tf_utils.assert_shape_match(shapes, expected_shapes)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
-  def test_download_and_prepare_as_dataset(self):
-    result_p = promise.Promise.resolve(self.example_dir)
-    fct = lambda obj, url, async_=False: async_ and result_p or self.example_dir
-
-    # TODO(b/119906277): Disable stat computation for diabetic
-    if self.builder.name == "diabetic_retinopathy_detection":
-      compute_stats = False
-    else:
-      compute_stats = True
-
-    with tf.test.mock.patch.multiple(
-        "tensorflow_datasets.core.download.DownloadManager",
-        download_and_extract=fct,
-        extract=fct,
-        manual_dir=self.example_dir,
-    ):
-      self.builder.download_and_prepare(compute_stats=compute_stats)
-
-    with self._subTest("as_dataset"):
-      self._assertAsDataset(self.builder)
-
-    if compute_stats:  # TODO(b/119906277): Remove
-      with self._subTest("num_examples"):
-        self._assertNumSamples(self.builder)
-
-    with self._subTest("reload"):
-      # When reloading the dataset, metadata should been reloaded too.
-      builder_reloaded = self.DATASET_CLASS(  # pylint: disable=not-callable
-          data_dir=self.builder._data_dir_root)  # pylint: disable=protected-access
-
-      if compute_stats:  # TODO(b/119906277): Remove
-        self._assertNumSamples(builder_reloaded)
-
-      # After reloading, as_dataset should still be working
-      with self._subTest("as_dataset"):
-        self._assertAsDataset(builder_reloaded)
-
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}
     for split_name, expected_examples_number in self.SPLITS.items():
-      dataset = self.builder.as_dataset(split=split_name)
+      dataset = builder.as_dataset(split=split_name)
       self._check_split(dataset)
-      examples = list(self.builder.numpy_iterator(split=split_name))
+      examples = list(builder.numpy_iterator(split=split_name))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
       self.assertEqual(len(examples), expected_examples_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
@@ -235,5 +226,24 @@ def checksum(example):
     else:
       hash_.update(val)
   return hash_.hexdigest()
+
+
+@contextlib.contextmanager
+def mocked_download_manager(mock_dir):
+  """Mock out DownloadManager to return mock_dir."""
+  mock_dir_promise = promise.Promise.resolve(mock_dir)
+
+  def mock_download_extract(obj, url, async_=False):
+    del obj, url
+    return (async_ and mock_dir_promise) or mock_dir
+
+  with tf.test.mock.patch.multiple(
+      "tensorflow_datasets.core.download.DownloadManager",
+      download_and_extract=mock_download_extract,
+      extract=mock_download_extract,
+      manual_dir=mock_dir,
+  ):
+    yield
+
 
 main = tf.test.main

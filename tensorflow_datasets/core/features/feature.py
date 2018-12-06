@@ -254,7 +254,7 @@ class FeatureConnector(object):
     """
     raise NotImplementedError
 
-  @utils.memoized_property
+  @property
   def serialized_keys(self):
     """List of the flattened feature keys after serialization."""
     features = self.get_serialized_info()

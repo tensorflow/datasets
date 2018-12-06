@@ -283,6 +283,9 @@ class NamedSplit(_SplitDescriptorNode):
   def __str__(self):
     return self._name
 
+  def __repr__(self):
+    return "<tfds.core.NamedSplit name={name}>".format(name=self._name)
+
   def __eq__(self, other):
     """Equality: tfds.Split.TRAIN == 'train'."""
     if isinstance(other, NamedSplit):
@@ -439,6 +442,9 @@ class SplitDict(utils.NonMutableDict):
     """Returns a list of SplitInfo protos that we have."""
     # Return the proto.SplitInfo, sorted by name
     return sorted((s.get_proto() for s in self.values()), key=lambda s: s.name)
+
+  def copy(self):
+    return SplitDict.from_proto(self.to_proto())
 
 
 class SplitGenerator(object):

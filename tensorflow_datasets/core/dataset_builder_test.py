@@ -54,6 +54,56 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedDatasetBuilder):
       yield self.info.features.encode_example({"x": i})
 
 
+class DummyBuilderConfig(dataset_builder.BuilderConfig):
+
+  def __init__(self, increment=0, **kwargs):
+    super(DummyBuilderConfig, self).__init__(**kwargs)
+    self.increment = increment
+
+
+class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedDatasetBuilder):
+  DATA_CONFIGS = [
+      DummyBuilderConfig(
+          name="plus1",
+          version="0.0.1",
+          description="Add 1 to the records",
+          increment=1),
+      DummyBuilderConfig(
+          name="plus2",
+          version="0.0.2",
+          description="Add 2 to the records",
+          increment=2),
+  ]
+
+  def _split_generators(self, dl_manager):
+    # Split the 30 examples from the generator into 2 train shards and 1 test
+    # shard.
+    del dl_manager
+    return [
+        splits.SplitGenerator(
+            name=[splits.Split.TRAIN, splits.Split.TEST],
+            num_shards=[2, 1],
+        )
+    ]
+
+  def _info(self):
+    if self._builder_config:
+      version = self._builder_config.version
+    else:
+      version = "1.0.0"
+    return dataset_info.DatasetInfo(
+        features=features.FeaturesDict({"x": tf.int64}),
+        supervised_keys=("x", "x"),
+        version=version,
+    )
+
+  def _generate_examples(self):
+    for i in range(30):
+      if self.builder_config:
+        i += self.builder_config.increment
+      yield self.info.features.encode_example({"x": i})
+
+
 class DatasetBuilderTest(tf.test.TestCase):
 
   def test_shared_generator(self):
@@ -104,15 +154,73 @@ class DatasetBuilderTest(tf.test.TestCase):
     # Test that the dataset load the most recent dir
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
+      builder_data_dir = os.path.join(tmp_dir, builder.name)
 
       # The dataset folder contains multiple versions
-      tf.gfile.MakeDirs(os.path.join(tmp_dir, builder.name, "14.0.0.invalid"))
-      tf.gfile.MakeDirs(os.path.join(tmp_dir, builder.name, "10.0.0"))
-      tf.gfile.MakeDirs(os.path.join(tmp_dir, builder.name, "9.0.0"))
+      tf.gfile.MakeDirs(os.path.join(builder_data_dir, "14.0.0.invalid"))
+      tf.gfile.MakeDirs(os.path.join(builder_data_dir, "10.0.0"))
+      tf.gfile.MakeDirs(os.path.join(builder_data_dir, "9.0.0"))
 
       # The last valid version is chosen by default
-      most_recent_dir = os.path.join(tmp_dir, builder.name, "10.0.0")
+      most_recent_dir = os.path.join(builder_data_dir, "10.0.0")
+      v9_dir = os.path.join(builder_data_dir, "9.0.0")
       self.assertEqual(builder._get_data_dir(), most_recent_dir)
+      self.assertEqual(builder._get_data_dir(version="9.0.0"), v9_dir)
+
+  def test_get_data_dir_with_config(self):
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      config_name = "plus1"
+      builder = DummyDatasetWithConfigs(config=config_name, data_dir=tmp_dir)
+
+      builder_data_dir = os.path.join(tmp_dir, builder.name, config_name)
+      version_data_dir = os.path.join(builder_data_dir, "0.0.1")
+
+      tf.gfile.MakeDirs(version_data_dir)
+      self.assertEqual(builder._get_data_dir(), version_data_dir)
+
+  def test_config_construction(self):
+    self.assertSetEqual(
+        set(["plus1", "plus2"]),
+        set(DummyDatasetWithConfigs.builder_configs.keys()))
+    plus1_config = DummyDatasetWithConfigs.builder_configs["plus1"]
+    builder = DummyDatasetWithConfigs(config="plus1", data_dir=None)
+    self.assertIs(plus1_config, builder.builder_config)
+    builder = DummyDatasetWithConfigs(config=plus1_config, data_dir=None)
+    self.assertIs(plus1_config, builder.builder_config)
+    self.assertIs(builder.builder_config,
+                  DummyDatasetWithConfigs.DATA_CONFIGS[0])
+
+  def test_with_configs(self):
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder1 = DummyDatasetWithConfigs(config="plus1", data_dir=tmp_dir)
+      builder2 = DummyDatasetWithConfigs(config="plus2", data_dir=tmp_dir)
+      # Test that builder.builder_config is the correct config
+      self.assertIs(builder1.builder_config,
+                    DummyDatasetWithConfigs.builder_configs["plus1"])
+      self.assertIs(builder2.builder_config,
+                    DummyDatasetWithConfigs.builder_configs["plus2"])
+      builder1.download_and_prepare()
+      builder2.download_and_prepare()
+      data_dir1 = os.path.join(tmp_dir, builder1.name, "plus1", "0.0.1")
+      data_dir2 = os.path.join(tmp_dir, builder2.name, "plus2", "0.0.2")
+      # Test that subdirectories were created per config
+      self.assertTrue(tf.gfile.Exists(data_dir1))
+      self.assertTrue(tf.gfile.Exists(data_dir2))
+      # 2 train shards, 1 test shard, plus metadata files
+      self.assertGreater(len(tf.gfile.ListDirectory(data_dir1)), 3)
+      self.assertGreater(len(tf.gfile.ListDirectory(data_dir2)), 3)
+
+      # Test that the config was used and they didn't collide.
+      splits_list = [splits.Split.TRAIN, splits.Split.TEST]
+      for builder, incr in [(builder1, 1), (builder2, 2)]:
+        datasets = [builder.as_dataset(split=split) for split in splits_list]
+        data = [[el["x"].numpy() for el in dataset] for dataset in datasets]
+
+        train_data, test_data = data
+        self.assertEqual(20, len(train_data))
+        self.assertEqual(10, len(test_data))
+        self.assertEqual([incr + el for el in range(30)],
+                         sorted(train_data + test_data))
 
 
 class DatasetBuilderReadTest(tf.test.TestCase):

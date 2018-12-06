@@ -21,6 +21,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import contextlib
 import itertools
 import sys
 
@@ -31,29 +32,24 @@ else:
   import functools32 as functools
 # pylint: enable=g-import-not-at-top
 
-memoize = lambda: functools.lru_cache(maxsize=None)
+
+# NOTE: When used on an instance method, the cache is shared across all
+# instances and IS NOT per-instance.
+# See
+# https://stackoverflow.com/questions/14946264/python-lru-cache-decorator-per-instance
+# For @property methods, use @memoized_property below.
+# TODO(rsepassi): Write a @memoize decorator that does the right thing for
+# instance methods.
+memoize = functools.lru_cache
 
 
-class memoized_property(object):  # pylint: disable=invalid-name
-  """Memoization property descriptor used as decorator.
-
-  Allow to have members loaded only the first time there are needed and then
-  there value is cached for later calls.
-  """
-
-  def __init__(self, fct):
-    self.fct = fct  # Function which evaluate the attribute
-    # Update __module__, __doc__ of the instance. Warning: This has no effect
-    # on help() which look at the type().__doc__ and not the instance.__doc__
-    functools.update_wrapper(self, fct)
-
-  def __get__(self, instance, owner):
-    if instance is None:  # Call from the class (cls.value)
-      return None
-    # The function is called only once per instance for loading the first time
-    value = self.fct(instance)
-    setattr(instance, self.fct.__name__, value)  # Overwrite the descriptor
-    return value
+@contextlib.contextmanager
+def temporary_assignment(obj, attr, value):
+  """Temporarily assign obj.attr to value."""
+  original = getattr(obj, attr, None)
+  setattr(obj, attr, value)
+  yield
+  setattr(obj, attr, original)
 
 
 def zip_dict(*dicts):
@@ -89,6 +85,30 @@ class NonMutableDict(dict):
     if any(k in self for k in other):
       raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)
+
+
+class classproperty(property):  # pylint: disable=invalid-name
+  """Descriptor to be used as decorator for @classmethods."""
+
+  def __get__(self, obj, objtype=None):
+    return self.fget.__get__(None, objtype)()
+
+
+class memoized_property(property):  # pylint: disable=invalid-name
+  """Descriptor that mimics @property but caches output in member variable."""
+
+  def __get__(self, obj, objtype=None):
+    # See https://docs.python.org/3/howto/descriptor.html#properties
+    if obj is None:
+      return self
+    if self.fget is None:
+      raise AttributeError("unreadable attribute")
+    attr = "__cached_" + self.fget.__name__
+    cached = getattr(obj, attr, None)
+    if cached is None:
+      cached = self.fget(obj)
+      setattr(obj, attr, cached)
+    return cached
 
 
 def map_nested(function, data_struct, dict_only=False):
