@@ -66,11 +66,25 @@ class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
         ),
     ]
 
-  def text_conversion_test(self):
-    text = features.Text(encoder=text_encoder.ByteTextEncoder())
+  def test_text_conversion(self):
+    text_f = features.Text(encoder=text_encoder.ByteTextEncoder())
+    text = u'你好'
+    self.assertEqual(text, text_f.ints2str(text_f.str2ints(text)))
 
-    self.assertEqual(text.str2ints(u'你好'), [228, 189, 160, 229, 165, 189])
-    self.assertEqual(text.ints2str([228, 189, 160, 229, 165, 189]), u'你好')
+  def test_save_load_metadata(self):
+    text_f = features.Text(
+        encoder=text_encoder.ByteTextEncoder(additional_tokens=['HI']))
+    text = u'HI 你好'
+    ids = text_f.str2ints(text)
+    self.assertEqual(1, ids[0])
+
+    with test_utils.tmp_dir(self.get_temp_dir()) as data_dir:
+      feature_name = 'dummy'
+      text_f.save_metadata(data_dir, feature_name)
+
+      new_f = features.Text()
+      new_f.load_metadata(data_dir, feature_name)
+      self.assertEqual(ids, text_f.str2ints(text))
 
 
 if __name__ == '__main__':

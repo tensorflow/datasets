@@ -22,10 +22,12 @@ from __future__ import print_function
 
 import abc
 import hashlib
+import json
 import re
 
 import six
 import tensorflow as tf
+from tensorflow_datasets.core.utils import py_utils
 
 
 ALPHANUM_REGEX = re.compile(r"\W+", flags=re.UNICODE)
@@ -62,7 +64,27 @@ class TextEncoder(object):
 
   @abc.abstractproperty
   def vocab_size(self):
+    """Size of the vocabulary. Decode produces ints [1, vocab_size)."""
     raise NotImplementedError
+
+  @abc.abstractmethod
+  def save_to_file(self, filename_prefix):
+    """Store to file. Inverse of load_from_file."""
+    raise NotImplementedError
+
+  @py_utils.abstractclassmethod
+  def load_from_file(cls, filename_prefix):  # pylint: disable=no-self-argument
+    """Load from file. Inverse of save_to_file."""
+    raise NotImplementedError
+
+  @classmethod
+  def _write_lines_to_file(cls, filename, lines, metadata_dict=None):
+    """Writes lines to file prepended by header and metadata."""
+    write_lines_to_file(cls.__name__, filename, lines, metadata_dict)
+
+  @classmethod
+  def _read_lines_from_file(cls, filename):
+    return read_lines_from_file(cls.__name__, filename)
 
 
 class ByteTextEncoder(TextEncoder):
@@ -117,6 +139,19 @@ class ByteTextEncoder(TextEncoder):
   def additional_tokens(self):
     return self._additional_tokens
 
+  @classmethod
+  def _filename(cls, filename_prefix):
+    return filename_prefix + ".bytes"
+
+  def save_to_file(self, filename_prefix):
+    self._write_lines_to_file(
+        self._filename(filename_prefix), self.additional_tokens)
+
+  @classmethod
+  def load_from_file(cls, filename_prefix):
+    lines, _ = cls._read_lines_from_file(cls._filename(filename_prefix))
+    return cls(additional_tokens=lines)
+
 
 class TokenTextEncoder(TextEncoder):
   r"""TextEncoder backed by a list of tokens.
@@ -126,19 +161,18 @@ class TokenTextEncoder(TextEncoder):
   """
 
   def __init__(self,
-               vocab_list=None,
-               vocab_file=None,
+               vocab_list,
                oov_buckets=1,
                oov_token=u"UNK",
                lowercase=False,
                tokenizer=None):
     """Constructs a TokenTextEncoder.
 
-    Must pass either `vocab_list` or `vocab_file`.
+    To load from a file saved with `TokenTextEncoder.save_to_file`, use
+    `TokenTextEncoder.load_from_file`.
 
     Args:
       vocab_list: `list<str>`, list of tokens.
-      vocab_file: `str`, filepath with 1 token per line.
       oov_buckets: `int`, the number of `int`s to reserve for OOV hash buckets.
         Tokens that are OOV will be hash-modded into a OOV bucket in `encode`.
       oov_token: `str`, the string to use for OOV ids in `decode`.
@@ -146,12 +180,7 @@ class TokenTextEncoder(TextEncoder):
       tokenizer: `Tokenizer`, responsible for converting incoming text into a
         list of tokens.
     """
-    if not (vocab_list or vocab_file) or (vocab_list and vocab_file):
-      raise ValueError("Must provide either vocab_list or vocab_file.")
-    self._vocab_list = [
-        tf.compat.as_text(el).strip() for el in
-        vocab_list or self._load_tokens_from_file(vocab_file)
-    ]
+    self._vocab_list = [tf.compat.as_text(el).strip() for el in vocab_list]
     self._lowercase = lowercase
     if self._lowercase:
       self._vocab_list = [t.lower() for t in self._vocab_list]
@@ -165,6 +194,7 @@ class TokenTextEncoder(TextEncoder):
     # Reserved tokens are all tokens that are mixed alphanum and non-alphanum.
     reserved_tokens = [t for t in self._vocab_list if is_mixed_alphanum(t)]
     self._tokenizer = (tokenizer or Tokenizer(reserved_tokens=reserved_tokens))
+    self._user_defined_tokenizer = tokenizer
 
   def encode(self, s):
     s = tf.compat.as_text(s)
@@ -203,16 +233,16 @@ class TokenTextEncoder(TextEncoder):
     return list(self._vocab_list)
 
   @property
+  def oov_token(self):
+    return self._oov_token
+
+  @property
   def lowercase(self):
     return self._lowercase
 
   @property
   def tokenizer(self):
     return self._tokenizer
-
-  def store_to_file(self, fname):
-    with tf.gfile.Open(fname, "wb") as f:
-      f.write(tf.compat.as_bytes(u"\n".join(self._vocab_list)))
 
   def _oov_bucket(self, token):
     if self._oov_buckets <= 0:
@@ -222,9 +252,30 @@ class TokenTextEncoder(TextEncoder):
     hash_val = int(hashlib.md5(tf.compat.as_bytes(token)).hexdigest(), 16)
     return len(self._vocab_list) + hash_val % self._oov_buckets
 
-  def _load_tokens_from_file(self, fname):
-    with tf.gfile.Open(fname, "rb") as f:
-      return [el.strip() for el in tf.compat.as_text(f.read()).split(u"\n")]
+  @classmethod
+  def _filename(cls, filename_prefix):
+    return filename_prefix + ".tokens"
+
+  def save_to_file(self, filename_prefix):
+    filename = self._filename(filename_prefix)
+    kwargs = {
+        "oov_buckets": self._oov_buckets,
+        "lowercase": self._lowercase,
+        "oov_token": self._oov_token,
+    }
+    if self._user_defined_tokenizer is not None:
+      self._tokenizer.save_to_file(filename)
+      kwargs["tokenizer_file_prefix"] = filename
+    self._write_lines_to_file(filename, self._vocab_list, kwargs)
+
+  @classmethod
+  def load_from_file(cls, filename_prefix):
+    filename = cls._filename(filename_prefix)
+    vocab_lines, kwargs = cls._read_lines_from_file(filename)
+    tokenizer_file = kwargs.pop("tokenizer_file_prefix", None)
+    if tokenizer_file:
+      kwargs["tokenizer"] = Tokenizer.load_from_file(tokenizer_file)
+    return cls(vocab_list=vocab_lines, **kwargs)
 
 
 class Tokenizer(object):
@@ -288,6 +339,24 @@ class Tokenizer(object):
       # Fully invertible
       return u"".join(tokens)
 
+  @classmethod
+  def _filename(cls, filename_prefix):
+    return filename_prefix + ".tokenizer"
+
+  def save_to_file(self, filename_prefix):
+    filename = self._filename(filename_prefix)
+    kwargs = {
+        "reserved_tokens": list(self._reserved_tokens),
+        "alphanum_only": self._alphanum_only
+    }
+    write_lines_to_file(type(self).__name__, filename, [], kwargs)
+
+  @classmethod
+  def load_from_file(cls, filename_prefix):
+    filename = cls._filename(filename_prefix)
+    _, kwargs = read_lines_from_file(cls.__name__, filename)
+    return cls(**kwargs)
+
 
 def pad_decr(ids):
   """Strip ID 0 and decrement ids by 1."""
@@ -333,3 +402,33 @@ def _find_duplicates(els):
 
 def is_mixed_alphanum(token):
   return len([s for s in ALL_REGEX.split(token) if s]) > 1
+
+
+_HEADER_PREFIX = "### "
+_METADATA_PREFIX = "### Metadata: "
+
+
+def write_lines_to_file(cls_name, filename, lines, metadata_dict):
+  """Writes lines to file prepended by header and metadata."""
+  metadata_dict = metadata_dict or {}
+  header_line = u"%s%s" % (_HEADER_PREFIX, cls_name)
+  metadata_line = u"%s%s" % (_METADATA_PREFIX, json.dumps(metadata_dict))
+  with tf.gfile.Open(filename, "wb") as f:
+    for line in [header_line, metadata_line]:
+      f.write(tf.compat.as_bytes(line))
+      f.write(tf.compat.as_bytes(u"\n"))
+    f.write(tf.compat.as_bytes(u"\n".join(lines)))
+    f.write(tf.compat.as_bytes(u"\n"))
+
+
+def read_lines_from_file(cls_name, filename):
+  """Read lines from file, parsing out header and metadata."""
+  with tf.gfile.Open(filename, "rb") as f:
+    lines = [tf.compat.as_text(line)[:-1] for line in f]
+  header_line = u"%s%s" % (_HEADER_PREFIX, cls_name)
+  if lines[0] != header_line:
+    raise ValueError("File {fname} does not seem to have been created from "
+                     "{name}.save_to_file.".format(
+                         fname=filename, name=cls_name))
+  metadata_dict = json.loads(lines[1][len(_METADATA_PREFIX):])
+  return lines[2:], metadata_dict

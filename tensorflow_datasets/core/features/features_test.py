@@ -164,7 +164,7 @@ class FeatureDictTest(test_utils.FeatureExpectationsTestCase):
         ),
     ]
 
-  def feature_getitem_test(self):
+  def test_feature_getitem(self):
     fdict = features_lib.FeaturesDict({
         'integer': tf.int32,
         'string': tf.string,

@@ -51,34 +51,28 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
   # Build
   encoder = tfds.features.text.SubwordTextEncoder.build_from_corpus(
       corpus_generator, target_vocab_size=2**15)
-  encoder.store_to_file(vocab_filename)
+  encoder.save_to_file(vocab_filename)
 
   # Load
-  encoder = tfds.features.text.SubwordTextEncoder(vocab_file=vocab_filename)
+  encoder = tfds.features.text.SubwordTextEncoder.load_from_file(vocab_filename)
   ids = encoder.encode("hello world")
   text = encoder.decode([1, 2, 3, 4])
   ```
   """
 
-  def __init__(self, vocab_file=None, vocab_list=None):
-    r"""Constructs a SubwordTextEncoder from a vocabulary file or list.
+  def __init__(self, vocab_list=None):
+    r"""Constructs a SubwordTextEncoder from a vocabulary list.
 
     Note: To generate a vocabulary from a corpus, use
     `tfds.features.text.SubwordTextEncoder.build_from_corpus`.
 
     Args:
-      vocab_file: `str`, path to vocabulary file produced by
-        `SubwordTextEncoder.store_to_file`.
       vocab_list: `list<str>`, list of subwords for the vocabulary. Note that an
         underscore at the end of a subword indicates the end of the word (i.e. a
         space will be inserted afterwards when decoding). Underscores in the
         interior are disallowed and should use the underscore escape sequence
         "\u".
     """
-    if sum([vocab_list is None, vocab_file is None]) != 1:
-      raise ValueError("Must provide either vocab_list or vocab_file.")
-    if vocab_file:
-      vocab_list = self._vocab_list_from_file(vocab_file)
     self._init_from_list(vocab_list)
 
   def encode(self, s):
@@ -239,25 +233,26 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     self._tokenizer = text_encoder.Tokenizer(
         alphanum_only=False, reserved_tokens=reserved_tokens)
 
-  def _vocab_list_from_file(self, filename):
-    """Extracts list of subwords from file."""
-    if not tf.gfile.Exists(filename):
-      raise ValueError("Vocab file not found: %s" % filename)
-    with tf.gfile.Open(filename) as f:
-      # Strip wrapping single quotes and newline
-      vocab_list = [line[1:-2] for line in f]
-      return vocab_list
+  @classmethod
+  def _filename(cls, filename_prefix):
+    return filename_prefix + ".subwords"
 
-  def store_to_file(self, filename):
+  def save_to_file(self, filename_prefix):
     """Save the vocabulary to a file."""
-    with tf.gfile.Open(filename, "wb") as f:
-      for subword in self._subwords:
-        # Wrap in single quotes to make it easier to see the full subword when
-        # it has spaces and make it easier to search with ctrl+f.
-        f.write(tf.compat.as_bytes(u"'"))
-        f.write(tf.compat.as_bytes(subword))
-        f.write(tf.compat.as_bytes(u"'"))
-        f.write(tf.compat.as_bytes(u"\n"))
+    # Wrap in single quotes to make it easier to see the full subword when
+    # it has spaces and make it easier to search with ctrl+f.
+    filename = self._filename(filename_prefix)
+    lines = [u"'%s'" % s for s in self._subwords]
+    self._write_lines_to_file(filename, lines)
+
+  @classmethod
+  def load_from_file(cls, filename_prefix):
+    """Extracts list of subwords from file."""
+    filename = cls._filename(filename_prefix)
+    lines, _ = cls._read_lines_from_file(filename)
+    # Strip wrapping single quotes
+    vocab_list = [line[1:-1] for line in lines]
+    return cls(vocab_list=vocab_list)
 
   @classmethod
   def build_from_corpus(cls,

@@ -60,6 +60,19 @@ class ByteTextEncoderTest(tf.test.TestCase):
     self.assertEqual(text_encoder.NUM_BYTES + 1 + len(additional_tokens),
                      encoder.vocab_size)
 
+  def test_file_backed(self):
+    additional_tokens = ['<EOS>', 'FOO', 'bar']
+    encoder = text_encoder.ByteTextEncoder(additional_tokens=additional_tokens)
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      vocab_fname = os.path.join(tmp_dir, 'vocab')
+      encoder.save_to_file(vocab_fname)
+
+      file_backed_encoder = text_encoder.ByteTextEncoder.load_from_file(
+          vocab_fname)
+      self.assertEqual(encoder.vocab_size, file_backed_encoder.vocab_size)
+      self.assertEqual(encoder.additional_tokens,
+                       file_backed_encoder.additional_tokens)
+
 
 class TokenTextEncoderTest(tf.test.TestCase):
 
@@ -103,13 +116,39 @@ class TokenTextEncoderTest(tf.test.TestCase):
 
   def test_file_backed(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      vocab_fname = os.path.join(tmp_dir, 'vocab.tokens')
+      vocab_fname = os.path.join(tmp_dir, 'vocab')
       encoder = text_encoder.TokenTextEncoder(
           vocab_list=[u'hi', 'bye', ZH_HELLO])
-      encoder.store_to_file(vocab_fname)
-      file_backed_encoder = text_encoder.TokenTextEncoder(
-          vocab_file=vocab_fname)
+      encoder.save_to_file(vocab_fname)
+      file_backed_encoder = text_encoder.TokenTextEncoder.load_from_file(
+          vocab_fname)
       self.assertEqual(encoder.tokens, file_backed_encoder.tokens)
+
+  def test_file_backed_with_args(self):
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      # Set all the args to non-default values, including Tokenizer
+      tokenizer = text_encoder.Tokenizer(
+          reserved_tokens=['<FOOBAR>'], alphanum_only=False)
+      encoder = text_encoder.TokenTextEncoder(
+          vocab_list=[u'hi', 'bye', ZH_HELLO],
+          lowercase=True,
+          oov_buckets=2,
+          oov_token='ZOO',
+          tokenizer=tokenizer)
+
+      vocab_fname = os.path.join(tmp_dir, 'vocab')
+      encoder.save_to_file(vocab_fname)
+
+      file_backed_encoder = text_encoder.TokenTextEncoder.load_from_file(
+          vocab_fname)
+      self.assertEqual(encoder.tokens, file_backed_encoder.tokens)
+      self.assertEqual(encoder.vocab_size, file_backed_encoder.vocab_size)
+      self.assertEqual(encoder.lowercase, file_backed_encoder.lowercase)
+      self.assertEqual(encoder.oov_token, file_backed_encoder.oov_token)
+      self.assertEqual(encoder.tokenizer.alphanum_only,
+                       file_backed_encoder.tokenizer.alphanum_only)
+      self.assertEqual(encoder.tokenizer.reserved_tokens,
+                       file_backed_encoder.tokenizer.reserved_tokens)
 
   def test_mixedalphanum_tokens(self):
     mixed_tokens = ['<EOS>', 'zoo!', '!foo']

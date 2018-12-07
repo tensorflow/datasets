@@ -89,9 +89,9 @@ class SubwordTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
     self.assertEqual(u'\uFFFD', text[1])
 
   def test_vocab_file(self):
-    vocab_file = os.path.join(self.get_temp_dir(), 'vocab.subwords')
-    self.encoder.store_to_file(vocab_file)
-    encoder = subword_text_encoder.SubwordTextEncoder(vocab_file=vocab_file)
+    vocab_file = os.path.join(self.get_temp_dir(), 'vocab')
+    self.encoder.save_to_file(vocab_file)
+    encoder = subword_text_encoder.SubwordTextEncoder.load_from_file(vocab_file)
     self.assertEqual(encoder.subwords, self.vocab_list)
 
 

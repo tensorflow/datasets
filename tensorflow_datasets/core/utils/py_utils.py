@@ -218,3 +218,13 @@ def str_to_version(version_str):
 def tfds_dir():
   """Path to tensorflow_datasets directory."""
   return os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
+
+class abstractclassmethod(classmethod):  # pylint: disable=invalid-name
+  """Decorate a method to mark it as an abstract @classmethod."""
+
+  __isabstractmethod__ = True
+
+  def __init__(self, fn):
+    fn.__isabstractmethod__ = True
+    super(abstractclassmethod, self).__init__(fn)
