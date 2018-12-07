@@ -280,6 +280,9 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
+
+    Returns:
+      True if we were able to initialize using `dataset_info_dir`, else false.
     """
     if not dataset_info_dir:
       raise ValueError(
@@ -289,7 +292,7 @@ class DatasetInfo(object):
 
     # Load the metadata from disk
     if not tf.gfile.Exists(json_filename):
-      return
+      return False
 
     with tf.gfile.Open(json_filename, "r") as f:
       dataset_info_json_str = f.read()
@@ -308,11 +311,22 @@ class DatasetInfo(object):
     # Mark as fully initialized.
     self._fully_initialized = True
 
+    return True
+
+  def initialize_from_package_data(self):
+    """Initialize DatasetInfo from package data, returns True on success."""
+
+    return self.read_from_directory(os.path.join(utils.tfds_dir(),
+                                                 "dataset_info",
+                                                 self.name,
+                                                 self.version))
+
   def __repr__(self):
     return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(
         name=self.name, proto=repr(self.as_proto))
 
   def __str__(self):
+    # TODO(afrozm): pprint the features dicts somehow.
     return INFO_STR.format(
         name=self.name,
         version=self.version,

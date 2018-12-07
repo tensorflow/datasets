@@ -136,6 +136,15 @@ class DatasetInfoTest(tf.test.TestCase):
     # Assert what was read and then written and read again is the same.
     self.assertEqual(existing_json, new_json)
 
+  def test_reading_from_package_data(self):
+    # We have mnist's 1.0.0 checked in the package data, so this should work.
+    info = dataset_info.DatasetInfo(name="mnist", version="1.0.0")
+    self.assertTrue(info.initialize_from_package_data())
+
+    # A nominal check to see if we read it.
+    self.assertTrue(info.initialized)
+    self.assertEqual(10000, info.splits["test"].num_examples)
+
   @tf.contrib.eager.run_test_in_graph_and_eager_modes
   def test_statistics_generation(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:

@@ -120,9 +120,10 @@ class DatasetBuilder(object):
     # Get the last dataset if it exists (or None otherwise)
     self._data_dir = self._get_data_dir()
 
-    # If a previous dataset version exists, reload the dataset info as well.
     if self._data_dir:
       self.info.read_from_directory(self._data_dir)
+    else:
+      self.info.initialize_from_package_data()
 
   @utils.memoized_property
   def info(self):
