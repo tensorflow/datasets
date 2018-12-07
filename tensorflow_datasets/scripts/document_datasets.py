@@ -69,7 +69,40 @@ SECTION_DATASETS = """\
 DATASET_ENTRY = """\
 ## `"{snakecase_name}"`
 
-[`{module_and_class}`]({cls_url})
+{description}
+
+[`{module_and_class}`]({cls_url}) v{version}
+
+#### Features
+{feature_information}
+
+#### Statistics
+{statistics_information}
+
+#### Urls
+{urls}
+
+#### Supervised Keys
+{supervised_keys}
+
+#### Citation
+```
+{citation}
+```
+
+---
+"""
+
+FEATURE_TABLE = """\
+Name  | Type | Shape
+:---- | :--- | :----
+{feature_values}
+"""
+
+STATISTICS_TABLE = """\
+Split  | Number of Examples
+:----- | ---:
+{split_statistics}
 """
 
 
@@ -92,10 +125,18 @@ def document_single_builder(builder):
   mod_file = sys.modules[mod_name].__file__
   if mod_file.endswith("pyc"):
     mod_file = mod_file[:-1]
+  info = builder.info
   return DATASET_ENTRY.format(
       snakecase_name=builder.name,
       module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
       cls_url=cls_url(mod_name),
+      description=info.description,
+      version=info.version,
+      feature_information=make_feature_information(info),
+      statistics_information=make_statistics_information(info),
+      urls="\n".join([" * " + url for url in info.urls]),
+      supervised_keys=str(info.supervised_keys),
+      citation=info.citation,
   )
 
 
@@ -134,6 +175,35 @@ def make_module_to_builder_dict():
 
   module_to_builder = module_to_builder["tensorflow_datasets"]
   return module_to_builder
+
+
+def make_feature_information(info):
+  """Make feature information table."""
+  feature_table_rows = []
+  for feature_name in info.features.get_tensor_info():
+    try:
+      v = info.features[feature_name]
+    except KeyError:
+      # TODO(afrozm): For things like CelebA's nested attributes this doesn't
+      # work, ex: attributes/High_Cheekbones but maybe this is for the better
+      # there are O(100)s of attributes if not more.
+      continue
+    feature_table_rows.append(
+        "|".join([feature_name, repr(v.dtype), str(v.shape)]))
+  return FEATURE_TABLE.format(feature_values="\n".join(feature_table_rows))
+
+
+def make_statistics_information(info):
+  """Make statistics information table."""
+  l = []
+  for k, v in info.splits.items():
+    l.append((k.upper(), v.num_examples))
+  l.append(("ALL", info.num_examples))
+  if len(l) == 1:
+    # That means that we have yet to calculate the statistics for this.
+    return "TBD"
+  l = "\n".join(["{0:10} | {1:>10,}".format(a[0], a[1]) for a in l])
+  return STATISTICS_TABLE.format(split_statistics=l)
 
 
 def dataset_docs_str():
