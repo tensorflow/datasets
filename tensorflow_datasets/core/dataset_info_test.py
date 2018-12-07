@@ -29,10 +29,12 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core.utils import py_utils
 
-pkg_dir, _ = os.path.split(__file__)
-_TESTDATA = os.path.join(pkg_dir, "test_data")
-_NON_EXISTENT_DIR = os.path.join(pkg_dir, "non_existent_dir")
+
+_TFDS_DIR = py_utils.tfds_dir()
+_INFO_DIR = os.path.join(_TFDS_DIR, "dataset_info", "mnist", "1.0.0")
+_NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
@@ -92,7 +94,7 @@ class DatasetInfoTest(tf.test.TestCase):
 
   def test_reading(self):
     info = dataset_info.DatasetInfo()
-    info.read_from_directory(_TESTDATA)
+    info.read_from_directory(_INFO_DIR)
 
     # Assert that we read the file and initialized DatasetInfo.
     self.assertTrue(info.initialized)
@@ -117,10 +119,10 @@ class DatasetInfoTest(tf.test.TestCase):
   def test_writing(self):
     # First read in stuff.
     info = dataset_info.DatasetInfo()
-    info.read_from_directory(_TESTDATA)
+    info.read_from_directory(_INFO_DIR)
 
     # Read the json file into a string.
-    with tf.gfile.Open(info._dataset_info_filename(_TESTDATA)) as f:
+    with tf.gfile.Open(info._dataset_info_filename(_INFO_DIR)) as f:
       existing_json = json.load(f)
 
     # Now write to a temp directory.

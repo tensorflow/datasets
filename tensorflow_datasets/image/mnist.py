@@ -46,9 +46,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         name=self.name,
-        description=("The MNIST database of handwritten digits, has a training "
-                     "set of 60,000 examples, and a test set of 10,000 "
-                     "examples."),
+        description=("The MNIST database of handwritten digits."),
         version="1.0.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),

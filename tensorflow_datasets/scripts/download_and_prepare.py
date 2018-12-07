@@ -27,7 +27,7 @@ with `--cache_dir`.
 Instructions:
 ```
 python -m tensorflow_datasets.scripts.download_and_prepare \
-  --dataset_name=cifar10
+  --datasets=cifar10
 ```
 
 

@@ -53,16 +53,16 @@ from tensorflow_metadata.proto.v0 import statistics_pb2
 DATASET_INFO_FILENAME = "dataset_info.json"
 
 INFO_STR = """tfds.core.DatasetInfo(
-    name={name},
+    name='{name}',
     version={version},
-    description=\"{description}\",
+    description='{description}',
     urls={urls},
     features={features},
     num_examples={num_examples},
     splits={splits},
     examples_per_split={examples_per_split},
     supervised_keys={supervised_keys},
-    citation=\"{citation}\",
+    citation='{citation}',
 )
 """
 
@@ -70,27 +70,15 @@ INFO_STR = """tfds.core.DatasetInfo(
 # TODO(tfds): Do we require to warn the user about the peak memory used while
 # constructing the dataset?
 class DatasetInfo(object):
-  """Structure defining the info of the dataset.
+  """Information about a dataset.
 
-  Information on the datasets are available through the builder.info property.
-  Properties:
-    name: `str`, name of this dataset.
-    description: `str`, description of this dataset.
-    version: `str`, semantic version of the dataset (ex: '1.2.0')
-    features: `tfds.features.FeaturesDict`: Information on the feature dict of
-      the `tf.data.Dataset` object from the `builder.as_dataset()` method.
-    splits: `SplitDict`, the available Splits for this dataset.
-    urls: `list(str)`, the homepage(s) for this dataset.
-    checksums: `Dict[str, str]`, URL to sha256 of resource. If a url is not
-      listed, its checksum is not checked.
-    size_in_bytes: `integer`, approximate size in bytes of the raw size of the
-      dataset that we will be downloading from the internet.
-    num_examples: `integer`, number of examples across all splits.
-    examples_per_split: `dict(string, integer)`, number of examples per split.
+  `DatasetInfo` documents datasets, including its name, version, and features.
+  See the constructor arguments and properties for a full list.
 
-  Note that some of those fields are dynamically computed at data generation
-  time, and updated by `compute_dynamic_properties`.
-
+  Note: Not all fields are known on construction and may be updated later
+  by `compute_dynamic_properties`. For example, the number of examples in each
+  split is typically updated during data generation (i.e. on calling
+  `builder.download_and_prepare()`).
   """
 
   @api_utils.disallow_positional_args
@@ -105,22 +93,22 @@ class DatasetInfo(object):
                download_checksums=None,
                size_in_bytes=0,
                citation=None):
-    """Constructor of the DatasetInfo.
+    """Constructs DatasetInfo.
 
     Args:
-      name: (`str`) Name of the dataset, usually set to builder.name.
+      name: `str`, Name of the dataset, usually set to builder.name.
       description: `str`, description of this dataset.
       version: `str`, semantic version of the dataset (ex: '1.2.0')
-      features: (`tfds.features.FeaturesDict`) Information on the feature dict
+      features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
-      supervised_keys: (`tuple`) Specifies the input feature and the label for
+      supervised_keys: `tuple`, Specifies the input feature and the label for
         supervised learning, if applicable for the dataset.
-      splits: `SplitDict`, the available Splits for this dataset.
+      splits: `tfds.core.SplitDict`, the available splits for this dataset.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
       download_checksums: `dict<str url, str sha256>`, URL to sha256 of file.
         If a url is not listed, its checksum is not checked.
-      size_in_bytes: `integer`, optional, approximate size in bytes of the raw
+      size_in_bytes: `int`, optional, approximate size in bytes of the raw
         size of the dataset that we will be downloading from the internet.
       citation: `str`, optional, the citation to use for this dataset.
     """
@@ -218,6 +206,7 @@ class DatasetInfo(object):
 
   @property
   def initialized(self):
+    """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized
 
   def _dataset_info_filename(self, dataset_info_dir):
@@ -263,6 +252,16 @@ class DatasetInfo(object):
     return json_format.MessageToJson(self.as_proto)
 
   def write_to_directory(self, dataset_info_dir):
+    """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
+    # TODO(tfds): Re-enable this check as currently there's a bug.
+    # Currently read_from_directory assumes self._fully_initialized
+    # should be set to True, but that assumes that write_to_directory was
+    # called on a DatasetInfo with self._fully_initialized = True.
+    # if not self._fully_initialized:
+    #   raise ValueError("Trying to write DatasetInfo to disk before updating "
+    #                    "dynamic properties. This is typically done in "
+    #                    "builder.download_and_prepare()")
+
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
       self.features.save_metadata(dataset_info_dir)
@@ -271,13 +270,10 @@ class DatasetInfo(object):
       f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir):
-    """Update the DatasetInfo properties from the metadata file.
+    """Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
-    hash, time of creation,...) of the DatasetInfo. This reads the metadata
-    file on the dataset directory to extract the info and expose them.
-    This function is called after the data has been generated in
-    .download_and_prepare() and when the data is loaded and already exists.
+    hash, time of creation,...) of the DatasetInfo.
 
     This will overwrite all previous metadata.
 
