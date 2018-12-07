@@ -28,6 +28,7 @@ import promise
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import util
@@ -93,22 +94,32 @@ class DownloadManager(object):
   method. E.g. "${extract_dir}/ZIP.%(sha256_of_zipped_content)s" or
                "${extract_dir}/TAR.url.%(sha256_of_url)s".
 
+  The function members accept either plain value, or values wrapped into list
+  or dict. Giving a data structure will parallelize the downloads.
+
   Example of usage:
 
-    # Sequential download: str -> str
-    train_dir = dl_manager.download_and_extract('https://abc.org/train.tar.gz')
-    test_dir = dl_manager.download_and_extract('https://abc.org/test.tar.gz')
+  ```
+  # Sequential download: str -> str
+  train_dir = dl_manager.download_and_extract('https://abc.org/train.tar.gz')
+  test_dir = dl_manager.download_and_extract('https://abc.org/test.tar.gz')
 
-    # Parallel download: dict -> dict
-    data_dirs = dl_manager.download_and_extract({
-       'train': 'https://abc.org/train.zip',
-       'test': 'https://abc.org/test.zip',
-    })
-    data_dirs['train']
-    data_dirs['test']
+  # Parallel download: list -> list
+  image_files = dl_manager.download(
+      ['https://a.org/1.jpg', 'https://a.org/2.jpg', ...])
+
+  # Parallel download: dict -> dict
+  data_dirs = dl_manager.download_and_extract({
+     'train': 'https://abc.org/train.zip',
+     'test': 'https://abc.org/test.zip',
+  })
+  data_dirs['train']
+  data_dirs['test']
+  ```
 
   For more customization on the download/extraction (ex: passwords, output_name,
-  ...), you can pass UrlInfo() ExtractInfo() or UrlExtractInfo as arguments.
+  ...), you can pass `tfds.download.UrlInfo` `tfds.download.ExtractInfo()` or
+  `tfds.download.UrlExtractInfo` as arguments.
   """
 
   def __init__(self,
@@ -273,63 +284,59 @@ class DownloadManager(object):
       return self._extract(extract_info)
     return self._download(url_info).then(callback)
 
-  def download(self, urls, async_=False):
-    """Download given artifacts, returns {'name': 'path'} or 'path'.
+  def download(self, url_or_urls, async_=False):
+    """Download given url(s).
 
     Args:
-      urls: A single URL (str or UrlInfo) or a `Dict[str, UrlInfo]`.
-        The URL(s) to download.
+      url_or_urls: url or `list`/`dict` of urls to download and extract. Each
+        url can be a `str` or `UrlInfo`.
       async_: `bool`, default to False. If True, returns promise on result.
 
     Returns:
-      `str` or `Dict[str, str]`: path or {name: path}.
+      downloaded_path(s): `str`, The downloaded paths matching the given input
+        url_or_urls
     """
-    if isinstance(urls, dict):  # A dict or URL (`str`) or `UrlInfo` objects.
-      paths = {name: self._download(url) for name, url in urls.items()}
-      prom = promise.Promise.for_dict(paths)
-    else:  # A single URL, `str` or `UrlInfo` object.
-      prom = self._download(urls)
-    return async_ and prom or prom.get()
+    return _map_promise(self._download, url_or_urls, async_=async_)
 
-  def extract(self, paths, async_=False):
-    """Extract path(s).
+  def extract(self, path_or_paths, async_=False):
+    """Extract given path(s).
 
     Args:
-      paths: `Dict[str, str|ExtractInfo]` or a single str|ExtractInfo.
+      path_or_paths: path or `list`/`dict` of path of file to extract. Each
+        path can be a `str` or `ExtractInfo`.
       async_: `bool`, default to False. If True, returns promise on result.
 
-    Returns:
-      `Dict[str, str]` or `str`: {'name': 'out_path'} or 'out_path'.
-    """
-    if isinstance(paths, dict):  # A dict of paths, `str` or `ExtractInfo` objs.
-      paths = {name: self._extract(path) for name, path in paths.items()}
-      prom = promise.Promise.for_dict(paths)
-    else:  # A single path, `str` or `ExtractInfo` object.
-      prom = self._extract(paths)
-    return async_ and prom or prom.get()
+    If not explicitly specified in `ExtractInfo`, the extraction method will
+    automatically be deduced.
 
-  def download_and_extract(self, url_extract_info, async_=False):
-    """Downlaod and extract given resources, returns path or {name: path}.
+    Returns:
+      extracted_path(s): `str`, The extracted paths matching the given input
+        path_or_paths
+    """
+    return _map_promise(self._extract, path_or_paths, async_=async_)
+
+  def download_and_extract(self, url_or_urls, async_=False):
+    """Downlaod and extract given resources.
+
+    Is roughly equivalent to:
+
+    ```
+    extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
+    ```
 
     Args:
-      url_extract_info: `Dict[str, str|DownloadExtractInfo]` or a single
-        str|DownloadExtractInfo.
+      url_or_urls: url or `list`/`dict` of urls to download and extract. Each
+        url can be a `str` or `UrlExtractInfo`.
       async_: `bool`, defaults to False. If True, returns promise on result.
 
-    If URL(s) are given (no `DownloadExtractInfo`), the extraction method is
-    guessed from the extension of file on URL path.
+    If not explicitly specified in `UrlExtractInfo`, the extraction method will
+    automatically be deduced.
 
     Returns:
-      `Dict[str, str]` or `str`: {'name': 'out_path'} or 'out_path' of
-      downloaded AND extracted resource.
+      extracted_path(s): `str`, The extracted paths matching the given input
+        path_or_paths
     """
-    if isinstance(url_extract_info, dict):
-      paths = {name: self._download_extract(uei)
-               for name, uei in url_extract_info.items()}
-      prom = promise.Promise.for_dict(paths)
-    else:
-      prom = self._download_extract(url_extract_info)
-    return async_ and prom or prom.get()
+    return _map_promise(self._download_extract, url_or_urls, async_=async_)
 
   @property
   def manual_dir(self):
@@ -339,3 +346,17 @@ class DownloadManager(object):
           'Manual directory {} does not exist. Create it and download/extract'
           'dataset artifacts in there.'.format(self._manual_dir))
     return self._manual_dir
+
+
+def _map_promise(map_fn, all_inputs, async_):
+  """Map the function into each element and resolve the promise."""
+  all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
+
+  if isinstance(all_promises, dict):
+    merged_promise = promise.Promise.for_dict(all_promises)
+  elif isinstance(all_promises, list):
+    merged_promise = promise.Promise.all(all_promises)
+  else:
+    merged_promise = all_promises
+
+  return merged_promise if async_ else merged_promise.get()
