@@ -174,5 +174,39 @@ class DatasetInfoTest(tf.test.TestCase):
       self.assertEqual(-1, schema_feature.shape.dim[1].size)
       self.assertEqual(3, schema_feature.shape.dim[2].size)
 
+  def test_updates_dynamic_properties_on_version_match(self):
+    info = dataset_info.DatasetInfo(version="1.0.0",
+                                    description="won't be updated")
+    # No statistics in the above.
+    self.assertEqual(0, info.num_examples)
+    self.assertEqual(0, len(info.as_proto.schema.feature))
+
+    # Partial update will happen here.
+    info.read_from_directory(_INFO_DIR)
+
+    # Assert that description (things specified in the code) didn't change
+    # but statistics are updated.
+    self.assertEqual("won't be updated", info.description)
+
+    # These are dynamically computed, so will be updated.
+    self.assertEqual(70000, info.num_examples)
+    self.assertEqual(2, len(info.as_proto.schema.feature))
+
+  def test_full_update_on_version_mismatch(self):
+    info = dataset_info.DatasetInfo(version="2.0.0",
+                                    description="will be updated")
+    # No statistics in the above.
+    self.assertEqual(0, info.num_examples)
+    self.assertEqual(0, len(info.as_proto.schema.feature))
+
+    # Full update should happen here.
+    info.read_from_directory(_INFO_DIR)
+
+    # Assert that description (things specified in the code) didn't change
+    # but statistics are updated.
+    self.assertNotEqual("will be updated", info.description)
+    self.assertEqual(70000, info.num_examples)
+    self.assertEqual(2, len(info.as_proto.schema.feature))
+
 if __name__ == "__main__":
   tf.test.main()
