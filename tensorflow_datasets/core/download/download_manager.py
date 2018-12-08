@@ -316,7 +316,7 @@ class DownloadManager(object):
     return _map_promise(self._extract, path_or_paths, async_=async_)
 
   def download_and_extract(self, url_or_urls, async_=False):
-    """Downlaod and extract given resources.
+    """Download and extract given resources.
 
     Is roughly equivalent to:
 

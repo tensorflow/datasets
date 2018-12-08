@@ -63,15 +63,15 @@ def zip_dict(*dicts):
 class NonMutableDict(dict):
   """Dict where keys can only be added but not modified.
 
-  Will raise an error if the user try to overwritte one key. The error message
+  Will raise an error if the user try to overwrite one key. The error message
   can be customized during construction. It will be formatted using {key} for
-  the overwritted key.
+  the overwritten key.
   """
 
   def __init__(self, *args, **kwargs):
     self._error_msg = kwargs.pop(
         "error_msg",
-        "Try to overwritte existing key: {key}",
+        "Try to overwrite existing key: {key}",
     )
     if kwargs:
       raise ValueError("NonMutableDict cannot be initialized with kwargs.")
@@ -113,7 +113,7 @@ class memoized_property(property):  # pylint: disable=invalid-name
 
 
 def map_nested(function, data_struct, dict_only=False):
-  """Apply a function recursivelly to each element of a nested data struct."""
+  """Apply a function recursively to each element of a nested data struct."""
 
   # Could add support for more exotic data_struct, like OrderedDict
   if isinstance(data_struct, dict):
@@ -149,7 +149,7 @@ def as_proto_cls(proto_cls):
   """Simulate proto inheritance.
 
   By default, protobuf do not support direct inheritance, so this decorator
-  simulate inheriance to the class to which it is applied.
+  simulates inheritance to the class to which it is applied.
 
   Example:
 

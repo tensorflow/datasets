@@ -127,7 +127,7 @@ download_and_extract(
 )
 ```
 
-Downlaod and extract given resources, returns path or {name: path}.
+Download and extract given resources, returns path or {name: path}.
 
 #### Args:
 

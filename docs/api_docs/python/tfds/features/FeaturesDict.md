@@ -26,7 +26,7 @@ Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/t
 
 Main feature connector orchestrator.
 
-The encode/decode method of the spec feature will recursivelly encode/decode
+The encode/decode method of the spec feature will recursively encode/decode
 every sub-connector given on the constructor.
 Other features can inherit from this class and call super() in order to get
 nested container.

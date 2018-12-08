@@ -241,7 +241,7 @@ class DatasetInfo(object):
             "%s's info() property specifies split %s, but it "
             "doesn't seem to have been generated. Please ensure "
             "that the data was downloaded for this split and re-run "
-            "download_and_prepare. Original eror is [%s]" %
+            "download_and_prepare. Original error is [%s]" %
             (self.name, split_name, str(e)))
 
     # Set splits to trigger proto update in setter

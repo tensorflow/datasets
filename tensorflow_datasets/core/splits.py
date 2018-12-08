@@ -137,7 +137,7 @@ class _SplitDescriptorNode(object):
         split.subsplit([1, 1, 2])  # weighted=[1, 1, 2]
         ```
       k: `int` If set, subdivide the split into `k` equal parts.
-      percent: `tfds.percent slice`, return a single subplit corresponding to
+      percent: `tfds.percent slice`, return a single subsplit corresponding to
         a slice of the original split. For example:
         `split.subsplit(tfds.percent[-20:])  # Last 20% of the dataset`.
       weighted: `list[int]`, return a list of subsplits whose proportions match
@@ -347,7 +347,7 @@ class SplitReadInstruction(object):
 
   Similarly to SplitDescriptor nodes, this object can be composed with itself,
   but the resolution happens instantaneously, instead of keeping track of the
-  tree, such as all instuctions are compiled and flattened in a single
+  tree, such as all instructions are compiled and flattened in a single
   SplitReadInstruction object containing the list of files and slice to use.
 
   Once resolved, the instructions can be accessed with:
@@ -374,7 +374,7 @@ class SplitReadInstruction(object):
   def __add__(self, other):
     """Merging split together."""
     # Will raise error if a split has already be added (NonMutableDict)
-    # TODO(epot): If a split is already added but there is no overlapp between
+    # TODO(epot): If a split is already added but there is no overlap between
     # the slices, should merge the slices (ex: [:10] + [80:])
     split_instruction = SplitReadInstruction()
     split_instruction._splits.update(self._splits)   # pylint: disable=protected-access

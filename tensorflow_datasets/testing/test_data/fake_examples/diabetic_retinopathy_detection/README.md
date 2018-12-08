@@ -1,5 +1,5 @@
 Files in this directory have been created manually.
-They exibit the following properties seen on original dataset:
+They exhibit the following properties seen on original dataset:
 
  - a: notch
    1. none

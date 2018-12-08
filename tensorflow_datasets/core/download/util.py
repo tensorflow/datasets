@@ -54,7 +54,7 @@ class GenerateMode(enum.Enum):
 
 
 def build_synchronize_decorator():
-  """Returns a decorator which prevent concurents calls to functions.
+  """Returns a decorator which prevents concurrent calls to functions.
 
   Usage:
     synchronized = build_synchronize_decorator()
