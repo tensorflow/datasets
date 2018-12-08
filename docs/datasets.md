@@ -39,13 +39,13 @@ Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. Thes
 #### Features
 Name  | Type | Shape
 :---- | :--- | :----
+attributes|{'Big_Nose': tf.bool, 'High_Cheekbones': tf.bool, 'Young': tf.bool, 'Sideburns': tf.bool, 'Blond_Hair': tf.bool, 'Arched_Eyebrows': tf.bool, 'Bags_Under_Eyes': tf.bool, 'Pale_Skin': tf.bool, 'Mouth_Slightly_Open': tf.bool, 'Wearing_Hat': tf.bool, 'Narrow_Eyes': tf.bool, 'Brown_Hair': tf.bool, 'Gray_Hair': tf.bool, 'Black_Hair': tf.bool, 'Bald': tf.bool, 'Double_Chin': tf.bool, 'Rosy_Cheeks': tf.bool, 'Bangs': tf.bool, 'Bushy_Eyebrows': tf.bool, 'Blurry': tf.bool, 'Big_Lips': tf.bool, 'Wearing_Necklace': tf.bool, 'Heavy_Makeup': tf.bool, 'No_Beard': tf.bool, 'Chubby': tf.bool, '5_o_Clock_Shadow': tf.bool, 'Mustache': tf.bool, 'Pointy_Nose': tf.bool, 'Wavy_Hair': tf.bool, 'Receding_Hairline': tf.bool, 'Attractive': tf.bool, 'Wearing_Earrings': tf.bool, 'Wearing_Lipstick': tf.bool, 'Male': tf.bool, 'Goatee': tf.bool, 'Eyeglasses': tf.bool, 'Straight_Hair': tf.bool, 'Smiling': tf.bool, 'Oval_Face': tf.bool, 'Wearing_Necktie': tf.bool}|{'Big_Nose': (), 'High_Cheekbones': (), 'Young': (), 'Sideburns': (), 'Blond_Hair': (), 'Arched_Eyebrows': (), 'Bags_Under_Eyes': (), 'Pale_Skin': (), 'Mouth_Slightly_Open': (), 'Wearing_Hat': (), 'Narrow_Eyes': (), 'Brown_Hair': (), 'Gray_Hair': (), 'Black_Hair': (), 'Bald': (), 'Double_Chin': (), 'Rosy_Cheeks': (), 'Bangs': (), 'Bushy_Eyebrows': (), 'Blurry': (), 'Big_Lips': (), 'Wearing_Necklace': (), 'Heavy_Makeup': (), 'No_Beard': (), 'Chubby': (), '5_o_Clock_Shadow': (), 'Mustache': (), 'Pointy_Nose': (), 'Wavy_Hair': (), 'Receding_Hairline': (), 'Attractive': (), 'Wearing_Earrings': (), 'Wearing_Lipstick': (), 'Male': (), 'Goatee': (), 'Eyeglasses': (), 'Straight_Hair': (), 'Smiling': (), 'Oval_Face': (), 'Wearing_Necktie': ()}
 image|tf.uint8|(218, 178, 3)
-landmarks|{'nose_x': tf.int64, 'nose_y': tf.int64, 'rightmouth_x': tf.int64, 'lefteye_x': tf.int64, 'righteye_x': tf.int64, 'righteye_y': tf.int64, 'lefteye_y': tf.int64, 'leftmouth_x': tf.int64, 'leftmouth_y': tf.int64, 'rightmouth_y': tf.int64}|{'nose_x': (), 'nose_y': (), 'rightmouth_x': (), 'lefteye_x': (), 'righteye_x': (), 'righteye_y': (), 'lefteye_y': (), 'leftmouth_x': (), 'leftmouth_y': (), 'rightmouth_y': ()}
-attributes|{'Black_Hair': tf.bool, 'Oval_Face': tf.bool, 'Bushy_Eyebrows': tf.bool, 'Pointy_Nose': tf.bool, 'Blurry': tf.bool, 'Brown_Hair': tf.bool, 'Wearing_Necklace': tf.bool, 'Young': tf.bool, 'Wearing_Earrings': tf.bool, 'Double_Chin': tf.bool, 'Wavy_Hair': tf.bool, 'Big_Lips': tf.bool, 'Eyeglasses': tf.bool, 'Wearing_Hat': tf.bool, 'Smiling': tf.bool, 'Bald': tf.bool, 'Mustache': tf.bool, 'Rosy_Cheeks': tf.bool, 'Attractive': tf.bool, 'Blond_Hair': tf.bool, 'Wearing_Necktie': tf.bool, 'Gray_Hair': tf.bool, 'Pale_Skin': tf.bool, 'High_Cheekbones': tf.bool, 'Mouth_Slightly_Open': tf.bool, '5_o_Clock_Shadow': tf.bool, 'Sideburns': tf.bool, 'Receding_Hairline': tf.bool, 'Bangs': tf.bool, 'Male': tf.bool, 'Wearing_Lipstick': tf.bool, 'No_Beard': tf.bool, 'Chubby': tf.bool, 'Straight_Hair': tf.bool, 'Arched_Eyebrows': tf.bool, 'Big_Nose': tf.bool, 'Narrow_Eyes': tf.bool, 'Heavy_Makeup': tf.bool, 'Bags_Under_Eyes': tf.bool, 'Goatee': tf.bool}|{'Black_Hair': (), 'Oval_Face': (), 'Bushy_Eyebrows': (), 'Pointy_Nose': (), 'Blurry': (), 'Brown_Hair': (), 'Wearing_Necklace': (), 'Young': (), 'Wearing_Earrings': (), 'Double_Chin': (), 'Wavy_Hair': (), 'Big_Lips': (), 'Eyeglasses': (), 'Wearing_Hat': (), 'Smiling': (), 'Bald': (), 'Mustache': (), 'Rosy_Cheeks': (), 'Attractive': (), 'Blond_Hair': (), 'Wearing_Necktie': (), 'Gray_Hair': (), 'Pale_Skin': (), 'High_Cheekbones': (), 'Mouth_Slightly_Open': (), '5_o_Clock_Shadow': (), 'Sideburns': (), 'Receding_Hairline': (), 'Bangs': (), 'Male': (), 'Wearing_Lipstick': (), 'No_Beard': (), 'Chubby': (), 'Straight_Hair': (), 'Arched_Eyebrows': (), 'Big_Nose': (), 'Narrow_Eyes': (), 'Heavy_Makeup': (), 'Bags_Under_Eyes': (), 'Goatee': ()}
+landmarks|{'rightmouth_y': tf.int64, 'rightmouth_x': tf.int64, 'nose_y': tf.int64, 'nose_x': tf.int64, 'lefteye_y': tf.int64, 'lefteye_x': tf.int64, 'leftmouth_y': tf.int64, 'leftmouth_x': tf.int64, 'righteye_y': tf.int64, 'righteye_x': tf.int64}|{'rightmouth_y': (), 'rightmouth_x': (), 'nose_y': (), 'nose_x': (), 'lefteye_y': (), 'lefteye_x': (), 'leftmouth_y': (), 'leftmouth_x': (), 'righteye_y': (), 'righteye_x': ()}
 
 
 #### Statistics
-TBD
+None computed
 
 #### Urls
  * http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
@@ -74,11 +74,11 @@ label|tf.int64|()
 
 
 #### Statistics
-Split  | Number of Examples
+Split  | Examples
 :----- | ---:
+ALL        |     60,000
 TRAIN      |     50,000
 TEST       |     10,000
-ALL        |     60,000
 
 
 #### Urls
@@ -108,11 +108,11 @@ label|tf.int64|()
 
 
 #### Statistics
-Split  | Number of Examples
+Split  | Examples
 :----- | ---:
+ALL        |     60,000
 TRAIN      |     50,000
 TEST       |     10,000
-ALL        |     60,000
 
 
 #### Urls
@@ -138,17 +138,17 @@ A large set of high-resolution retina images taken under a variety of imaging co
 Name  | Type | Shape
 :---- | :--- | :----
 image|tf.uint8|(None, None, 3)
-name|tf.string|()
 label|tf.int64|()
+name|tf.string|()
 
 
 #### Statistics
-Split  | Number of Examples
+Split  | Examples
 :----- | ---:
-SAMPLE     |         10
-TRAIN      |     35,126
-TEST       |     53,576
 ALL        |     88,712
+TEST       |     53,576
+TRAIN      |     35,126
+SAMPLE     |         10
 
 
 #### Urls
@@ -178,11 +178,11 @@ label|tf.int64|()
 
 
 #### Statistics
-Split  | Number of Examples
+Split  | Examples
 :----- | ---:
+ALL        |     70,000
 TRAIN      |     60,000
 TEST       |     10,000
-ALL        |     70,000
 
 
 #### Urls
@@ -212,7 +212,7 @@ label|tf.int64|()
 
 
 #### Statistics
-TBD
+None computed
 
 #### Urls
 
@@ -241,11 +241,11 @@ label|tf.int64|()
 
 
 #### Statistics
-Split  | Number of Examples
+Split  | Examples
 :----- | ---:
+ALL        |     70,000
 TRAIN      |     60,000
 TEST       |     10,000
-ALL        |     70,000
 
 
 #### Urls
@@ -280,11 +280,11 @@ text|tf.string|()
 
 
 #### Statistics
-Split  | Number of Examples
+Split  | Examples
 :----- | ---:
+ALL        |     50,000
 TRAIN      |     25,000
 TEST       |     25,000
-ALL        |     50,000
 
 
 #### Urls
@@ -324,17 +324,17 @@ This data set contains roughly 59,000 examples of robot pushing motions, includi
 Name  | Type | Shape
 :---- | :--- | :----
 action|tf.float32|(30, 4)
-video_main|tf.uint8|(30, 64, 64, 3)
-video_aux1|tf.uint8|(30, 64, 64, 3)
 endeffector_pos|tf.float32|(30, 3)
+video_aux1|tf.uint8|(30, 64, 64, 3)
+video_main|tf.uint8|(30, 64, 64, 3)
 
 
 #### Statistics
-Split  | Number of Examples
+Split  | Examples
 :----- | ---:
+ALL        |     43,520
 TRAIN      |     43,264
 TEST       |        256
-ALL        |     43,520
 
 
 #### Urls

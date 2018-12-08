@@ -100,7 +100,7 @@ Name  | Type | Shape
 """
 
 STATISTICS_TABLE = """\
-Split  | Number of Examples
+Split  | Examples
 :----- | ---:
 {split_statistics}
 """
@@ -190,18 +190,23 @@ def make_feature_information(info):
       continue
     feature_table_rows.append(
         "|".join([feature_name, repr(v.dtype), str(v.shape)]))
-  return FEATURE_TABLE.format(feature_values="\n".join(feature_table_rows))
+  # We sort the table rows to minimize churn on subsequent generations.
+  return FEATURE_TABLE.format(
+      feature_values="\n".join(sorted(feature_table_rows)))
 
 
 def make_statistics_information(info):
   """Make statistics information table."""
+  if not info.num_examples:
+    # That means that we have yet to calculate the statistics for this.
+    return "None computed"
+
   l = []
   for k, v in info.splits.items():
     l.append((k.upper(), v.num_examples))
   l.append(("ALL", info.num_examples))
-  if len(l) == 1:
-    # That means that we have yet to calculate the statistics for this.
-    return "TBD"
+  # Sort reverse on number of examples.
+  l = reversed(sorted(l, key=lambda x: x[1]))
   l = "\n".join(["{0:10} | {1:>10,}".format(a[0], a[1]) for a in l])
   return STATISTICS_TABLE.format(split_statistics=l)
 
