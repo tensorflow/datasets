@@ -58,9 +58,6 @@ FORBIDDEN_OS_FUNCTIONS = (
     "walk",
 )
 
-# TODO(b/119906277): Rm
-COMPUTE_STATS_BLACKLIST = ["diabetic_retinopathy_detection"]
-
 
 class TestCase(test_utils.SubTestCase):
   """Inherit this class to test your DatasetBuilder class.
@@ -159,9 +156,6 @@ class TestCase(test_utils.SubTestCase):
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
-    # TODO(b/119906277): Remove here and checks below. compute_stats should
-    # always be True for testing.
-    compute_stats = self.builder.name not in COMPUTE_STATS_BLACKLIST
 
     with tf.test.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
@@ -169,21 +163,19 @@ class TestCase(test_utils.SubTestCase):
         extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
-      self.builder.download_and_prepare(compute_stats=compute_stats)
+      self.builder.download_and_prepare(compute_stats=True)
 
     with self._subTest("as_dataset"):
       self._assertAsDataset(self.builder)
 
-    if compute_stats:
-      with self._subTest("num_examples"):
-        self._assertNumSamples(self.builder)
+    with self._subTest("num_examples"):
+      self._assertNumSamples(self.builder)
 
     with self._subTest("reload"):
       # When reloading the dataset, metadata should been reloaded too.
       builder_reloaded = self.DATASET_CLASS(data_dir=self.data_dir)  # pylint: disable=not-callable
 
-      if compute_stats:
-        self._assertNumSamples(builder_reloaded)
+      self._assertNumSamples(builder_reloaded)
 
       # After reloading, as_dataset should still be working
       with self._subTest("as_dataset"):
