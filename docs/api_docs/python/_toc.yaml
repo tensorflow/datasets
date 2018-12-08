@@ -22,8 +22,8 @@ toc:
       path: /datasets/api_docs/python/tfds/core/DatasetBuilder
     - title: DatasetInfo
       path: /datasets/api_docs/python/tfds/core/DatasetInfo
-    - title: GeneratorBasedDatasetBuilder
-      path: /datasets/api_docs/python/tfds/core/GeneratorBasedDatasetBuilder
+    - title: GeneratorBasedBuilder
+      path: /datasets/api_docs/python/tfds/core/GeneratorBasedBuilder
     - title: NamedSplit
       path: /datasets/api_docs/python/tfds/core/NamedSplit
     - title: SplitDict
@@ -44,6 +44,8 @@ toc:
       path: /datasets/api_docs/python/tfds/download/GenerateMode
     - title: load_checksums
       path: /datasets/api_docs/python/tfds/download/load_checksums
+    - title: UrlExtractInfo
+      path: /datasets/api_docs/python/tfds/download/UrlExtractInfo
     - title: UrlInfo
       path: /datasets/api_docs/python/tfds/download/UrlInfo
   - title: tfds.features
@@ -78,6 +80,8 @@ toc:
         path: /datasets/api_docs/python/tfds/features/text/ByteTextEncoder
       - title: SubwordTextEncoder
         path: /datasets/api_docs/python/tfds/features/text/SubwordTextEncoder
+      - title: TextEncoder
+        path: /datasets/api_docs/python/tfds/features/text/TextEncoder
       - title: Tokenizer
         path: /datasets/api_docs/python/tfds/features/text/Tokenizer
       - title: TokenTextEncoder

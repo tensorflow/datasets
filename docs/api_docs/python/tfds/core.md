@@ -17,9 +17,9 @@ tensorflow_datasets.core.
 
 [`class DatasetBuilder`](../tfds/core/DatasetBuilder.md): Abstract base class for datasets.
 
-[`class GeneratorBasedDatasetBuilder`](../tfds/core/GeneratorBasedDatasetBuilder.md): Base class for datasets with data generation based on dict generators.
+[`class GeneratorBasedBuilder`](../tfds/core/GeneratorBasedBuilder.md): Base class for datasets with data generation based on dict generators.
 
-[`class DatasetInfo`](../tfds/core/DatasetInfo.md): Structure defining the info of the dataset.
+[`class DatasetInfo`](../tfds/core/DatasetInfo.md): Information about a dataset.
 
 [`class NamedSplit`](../tfds/core/NamedSplit.md): Descriptor corresponding to a named split (train, test,...).
 

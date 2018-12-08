@@ -21,6 +21,8 @@ Public API of the download manager.
 
 [`class UrlInfo`](../tfds/download/UrlInfo.md)
 
+[`class UrlExtractInfo`](../tfds/download/UrlExtractInfo.md)
+
 ## Functions
 
 [`load_checksums(...)`](../tfds/download/load_checksums.md): Returns dict: {"url": "checksum"} for given dataset.

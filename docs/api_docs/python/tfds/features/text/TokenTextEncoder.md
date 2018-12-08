@@ -2,20 +2,22 @@
 <meta itemprop="name" content="tfds.features.text.TokenTextEncoder" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="lowercase"/>
+<meta itemprop="property" content="oov_token"/>
 <meta itemprop="property" content="tokenizer"/>
 <meta itemprop="property" content="tokens"/>
 <meta itemprop="property" content="vocab_size"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode"/>
 <meta itemprop="property" content="encode"/>
-<meta itemprop="property" content="store_to_file"/>
+<meta itemprop="property" content="load_from_file"/>
+<meta itemprop="property" content="save_to_file"/>
 </div>
 
 # tfds.features.text.TokenTextEncoder
 
 ## Class `TokenTextEncoder`
 
-
+Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 
 
@@ -30,8 +32,7 @@ regex "\W+".
 
 ``` python
 __init__(
-    vocab_list=None,
-    vocab_file=None,
+    vocab_list,
     oov_buckets=1,
     oov_token=u'UNK',
     lowercase=False,
@@ -41,12 +42,12 @@ __init__(
 
 Constructs a TokenTextEncoder.
 
-Must pass either `vocab_list` or `vocab_file`.
+To load from a file saved with `TokenTextEncoder.save_to_file`, use
+`TokenTextEncoder.load_from_file`.
 
 #### Args:
 
 * <b>`vocab_list`</b>: `list<str>`, list of tokens.
-* <b>`vocab_file`</b>: `str`, filepath with 1 token per line.
 * <b>`oov_buckets`</b>: `int`, the number of `int`s to reserve for OOV hash buckets.
     Tokens that are OOV will be hash-modded into a OOV bucket in `encode`.
 * <b>`oov_token`</b>: `str`, the string to use for OOV ids in `decode`.
@@ -59,6 +60,10 @@ Must pass either `vocab_list` or `vocab_file`.
 ## Properties
 
 <h3 id="lowercase"><code>lowercase</code></h3>
+
+
+
+<h3 id="oov_token"><code>oov_token</code></h3>
 
 
 
@@ -94,10 +99,22 @@ encode(s)
 
 
 
-<h3 id="store_to_file"><code>store_to_file</code></h3>
+<h3 id="load_from_file"><code>load_from_file</code></h3>
 
 ``` python
-store_to_file(fname)
+@classmethod
+load_from_file(
+    cls,
+    filename_prefix
+)
+```
+
+
+
+<h3 id="save_to_file"><code>save_to_file</code></h3>
+
+``` python
+save_to_file(filename_prefix)
 ```
 
 

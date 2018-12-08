@@ -1,5 +1,5 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
-<meta itemprop="name" content="tfds.core.GeneratorBasedDatasetBuilder" />
+<meta itemprop="name" content="tfds.core.GeneratorBasedBuilder" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="builder_config"/>
 <meta itemprop="property" content="info"/>
@@ -12,9 +12,9 @@
 <meta itemprop="property" content="name"/>
 </div>
 
-# tfds.core.GeneratorBasedDatasetBuilder
+# tfds.core.GeneratorBasedBuilder
 
-## Class `GeneratorBasedDatasetBuilder`
+## Class `GeneratorBasedBuilder`
 
 Inherits From: [`DatasetBuilder`](../../tfds/core/DatasetBuilder.md)
 
@@ -24,7 +24,7 @@ Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tr
 
 Base class for datasets with data generation based on dict generators.
 
-`GeneratorBasedDatasetBuilder` is a convenience class that abstracts away much
+`GeneratorBasedBuilder` is a convenience class that abstracts away much
 of the data writing and reading of `DatasetBuilder`. It expects subclasses to
 implement generators of feature dictionaries across the dataset splits
 (`_split_generators`) and to specify a file type

@@ -7,14 +7,15 @@
 <meta itemprop="property" content="build_from_corpus"/>
 <meta itemprop="property" content="decode"/>
 <meta itemprop="property" content="encode"/>
-<meta itemprop="property" content="store_to_file"/>
+<meta itemprop="property" content="load_from_file"/>
+<meta itemprop="property" content="save_to_file"/>
 </div>
 
 # tfds.features.text.SubwordTextEncoder
 
 ## Class `SubwordTextEncoder`
 
-
+Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 
 
@@ -35,10 +36,10 @@ Typical usage:
 # Build
 encoder = tfds.features.text.SubwordTextEncoder.build_from_corpus(
     corpus_generator, target_vocab_size=2**15)
-encoder.store_to_file(vocab_filename)
+encoder.save_to_file(vocab_filename)
 
 # Load
-encoder = tfds.features.text.SubwordTextEncoder(vocab_file=vocab_filename)
+encoder = tfds.features.text.SubwordTextEncoder.load_from_file(vocab_filename)
 ids = encoder.encode("hello world")
 text = encoder.decode([1, 2, 3, 4])
 ```
@@ -46,21 +47,16 @@ text = encoder.decode([1, 2, 3, 4])
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(
-    vocab_file=None,
-    vocab_list=None
-)
+__init__(vocab_list=None)
 ```
 
-Constructs a SubwordTextEncoder from a vocabulary file or list.
+Constructs a SubwordTextEncoder from a vocabulary list.
 
 Note: To generate a vocabulary from a corpus, use
 <a href="../../../tfds/features/text/SubwordTextEncoder.md#build_from_corpus"><code>tfds.features.text.SubwordTextEncoder.build_from_corpus</code></a>.
 
 #### Args:
 
-* <b>`vocab_file`</b>: `str`, path to vocabulary file produced by
-    `SubwordTextEncoder.store_to_file`.
 * <b>`vocab_list`</b>: `list<str>`, list of subwords for the vocabulary. Note that an
     underscore at the end of a subword indicates the end of the word (i.e. a
     space will be inserted afterwards when decoding). Underscores in the
@@ -134,10 +130,22 @@ encode(s)
 
 Encodes text into a list of integers.
 
-<h3 id="store_to_file"><code>store_to_file</code></h3>
+<h3 id="load_from_file"><code>load_from_file</code></h3>
 
 ``` python
-store_to_file(filename)
+@classmethod
+load_from_file(
+    cls,
+    filename_prefix
+)
+```
+
+Extracts list of subwords from file.
+
+<h3 id="save_to_file"><code>save_to_file</code></h3>
+
+``` python
+save_to_file(filename_prefix)
 ```
 
 Save the vocabulary to a file.

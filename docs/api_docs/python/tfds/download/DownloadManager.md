@@ -38,22 +38,32 @@ directory name is the same as the original name, prefixed with the extraction
 method. E.g. "${extract_dir}/ZIP.%(sha256_of_zipped_content)s" or
              "${extract_dir}/TAR.url.%(sha256_of_url)s".
 
+The function members accept either plain value, or values wrapped into list
+or dict. Giving a data structure will parallelize the downloads.
+
 Example of usage:
 
-  # Sequential download: str -> str
-  train_dir = dl_manager.download_and_extract('https://abc.org/train.tar.gz')
-  test_dir = dl_manager.download_and_extract('https://abc.org/test.tar.gz')
+```
+# Sequential download: str -> str
+train_dir = dl_manager.download_and_extract('https://abc.org/train.tar.gz')
+test_dir = dl_manager.download_and_extract('https://abc.org/test.tar.gz')
 
-  # Parallel download: dict -> dict
-  data_dirs = dl_manager.download_and_extract({
-     'train': 'https://abc.org/train.zip',
-     'test': 'https://abc.org/test.zip',
-  })
-  data_dirs['train']
-  data_dirs['test']
+# Parallel download: list -> list
+image_files = dl_manager.download(
+    ['https://a.org/1.jpg', 'https://a.org/2.jpg', ...])
+
+# Parallel download: dict -> dict
+data_dirs = dl_manager.download_and_extract({
+   'train': 'https://abc.org/train.zip',
+   'test': 'https://abc.org/test.zip',
+})
+data_dirs['train']
+data_dirs['test']
+```
 
 For more customization on the download/extraction (ex: passwords, output_name,
-...), you can pass UrlInfo() ExtractInfo() or UrlExtractInfo as arguments.
+...), you can pass <a href="../../tfds/download/UrlInfo.md"><code>tfds.download.UrlInfo</code></a> `tfds.download.ExtractInfo()` or
+<a href="../../tfds/download/UrlExtractInfo.md"><code>tfds.download.UrlExtractInfo</code></a> as arguments.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -100,70 +110,82 @@ Returns the directory containing the manually extracted data.
 
 ``` python
 download(
-    urls,
+    url_or_urls,
     async_=False
 )
 ```
 
-Download given artifacts, returns {'name': 'path'} or 'path'.
+Download given url(s).
 
 #### Args:
 
-* <b>`urls`</b>: A single URL (str or UrlInfo) or a `Dict[str, UrlInfo]`.
-    The URL(s) to download.
+* <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
+    url can be a `str` or `UrlInfo`.
 * <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
 
 #### Returns:
 
-`str` or `Dict[str, str]`: path or {name: path}.
+downloaded_path(s): `str`, The downloaded paths matching the given input
+  url_or_urls
 
 <h3 id="download_and_extract"><code>download_and_extract</code></h3>
 
 ``` python
 download_and_extract(
-    url_extract_info,
+    url_or_urls,
     async_=False
 )
 ```
 
-Downlaod and extract given resources, returns path or {name: path}.
+Downlaod and extract given resources.
+
+Is roughly equivalent to:
+
+```
+extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
+```
 
 #### Args:
 
-* <b>`url_extract_info`</b>: `Dict[str, str|DownloadExtractInfo]` or a single
-    str|DownloadExtractInfo.
+* <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
+    url can be a `str` or `UrlExtractInfo`.
 * <b>`async_`</b>: `bool`, defaults to False. If True, returns promise on result.
 
-If URL(s) are given (no `DownloadExtractInfo`), the extraction method is
-guessed from the extension of file on URL path.
+If not explicitly specified in `UrlExtractInfo`, the extraction method will
+automatically be deduced.
 
 
 #### Returns:
 
-`Dict[str, str]` or `str`: {'name': 'out_path'} or 'out_path' of
-downloaded AND extracted resource.
+extracted_path(s): `str`, The extracted paths matching the given input
+  path_or_paths
 
 <h3 id="extract"><code>extract</code></h3>
 
 ``` python
 extract(
-    paths,
+    path_or_paths,
     async_=False
 )
 ```
 
-Extract path(s).
+Extract given path(s).
 
 #### Args:
 
-* <b>`paths`</b>: `Dict[str, str|ExtractInfo]` or a single str|ExtractInfo.
+* <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract. Each
+    path can be a `str` or `ExtractInfo`.
 * <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
+
+If not explicitly specified in `ExtractInfo`, the extraction method will
+automatically be deduced.
 
 
 #### Returns:
 
-`Dict[str, str]` or `str`: {'name': 'out_path'} or 'out_path'.
+extracted_path(s): `str`, The extracted paths matching the given input
+  path_or_paths
 
 
 

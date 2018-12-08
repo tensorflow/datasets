@@ -32,15 +32,20 @@ Feature which encodes/decodes text, possibly to integers.
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(encoder=None)
+__init__(
+    encoder=None,
+    encoder_cls=None
+)
 ```
 
 Constructs a Text FeatureConnector.
 
 #### Args:
 
-* <b>`encoder`</b>: `TextEncoder`, an encoder that can convert text to integers.
-    If None, the text will be utf-8 byte-encoded.
+* <b>`encoder`</b>: <a href="../../tfds/features/text/TextEncoder.md"><code>tfds.features.text.TextEncoder</code></a>, an encoder that can convert
+    text to integers. If None, the text will be utf-8 byte-encoded.
+* <b>`encoder_cls`</b>: <a href="../../tfds/features/text/TextEncoder.md"><code>tfds.features.text.TextEncoder</code></a>, needed if restoring from a
+    file with `load_metadata`.
 
 
 
@@ -146,16 +151,7 @@ load_metadata(
 )
 ```
 
-Restore the feature metadata from disk.
 
-If a dataset is re-loaded and generated files exists on disk, this function
-will restore the feature metadata from the saved file.
-
-#### Args:
-
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -166,30 +162,7 @@ save_metadata(
 )
 ```
 
-Save the feature metadata on disk.
 
-This function is called after the data has been generated (by
-`_download_and_prepare`) to save the feature connector info with the
-generated dataset.
-
-Some dataset/features dynamically compute info during
-`_download_and_prepare`. For instance:
-
- * Labels are loaded from the downloaded data
- * Vocabulary is created from the downloaded data
- * ImageLabelFolder compute the image dtypes/shape from the manual_dir
-
-After the info have been added to the feature, this function allow to
-save those additional info to be restored the next time the data is loaded.
-
-By default, this function do not save anything, but sub-classes can
-overwrite the function.
-
-#### Args:
-
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
 
 <h3 id="str2ints"><code>str2ints</code></h3>
 

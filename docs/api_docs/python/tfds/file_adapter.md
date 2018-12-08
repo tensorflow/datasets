@@ -9,7 +9,7 @@
 
 Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
 
-FileFormatAdapters for GeneratorBasedDatasetBuilder.
+FileFormatAdapters for GeneratorBasedBuilder.
 
 FileFormatAdapters implement methods to write and read data from a
 particular file format.
