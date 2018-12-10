@@ -1,0 +1,95 @@
+{
+  "name": "celeb_a", 
+  "version": "0.2.0", 
+  "splits": [
+    {
+      "numShards": "4", 
+      "statistics": {
+        "features": [
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "19962"
+              }
+            }, 
+            "name": "image"
+          }
+        ], 
+        "numExamples": "19962"
+      }, 
+      "name": "test"
+    }, 
+    {
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "162770"
+              }
+            }, 
+            "name": "image"
+          }
+        ], 
+        "numExamples": "162770"
+      }, 
+      "name": "train"
+    }, 
+    {
+      "numShards": "4", 
+      "statistics": {
+        "features": [
+          {
+            "numStats": {
+              "max": 255.0, 
+              "commonStats": {
+                "numNonMissing": "19867"
+              }
+            }, 
+            "name": "image"
+          }
+        ], 
+        "numExamples": "19867"
+      }, 
+      "name": "validation"
+    }
+  ], 
+  "sizeInBytes": "2147483648", 
+  "citation": "Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang Deep Learning Face Attributes in the Wild ICCV 2015", 
+  "schema": {
+    "feature": [
+      {
+        "name": "attributes"
+      }, 
+      {
+        "shape": {
+          "dim": [
+            {
+              "size": "218"
+            }, 
+            {
+              "size": "178"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT", 
+        "name": "image"
+      }, 
+      {
+        "name": "landmarks"
+      }
+    ]
+  }, 
+  "location": {
+    "urls": [
+      "http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"
+    ]
+  }, 
+  "description": "Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. These pictures are cropped."
+}
