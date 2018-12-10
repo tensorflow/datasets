@@ -25,6 +25,7 @@ from __future__ import print_function
 
 import collections
 import os
+import pprint
 import sys
 
 import tensorflow as tf
@@ -188,8 +189,15 @@ def make_feature_information(info):
       # work, ex: attributes/High_Cheekbones but maybe this is for the better
       # there are O(100)s of attributes if not more.
       continue
+    # If we have nested structures we have to do something special.
+    v_dtype_str = repr(v.dtype)
+    v_shape_str = str(v.shape)
+    if isinstance(v.dtype, dict) and isinstance(v.shape, dict):
+      # If v.dtype is dict, so must v.shape be.
+      v_dtype_str = pprint.pformat(v.dtype, width=1).replace("\n", "<br>")
+      v_shape_str = pprint.pformat(v.shape, width=1).replace("\n", "<br>")
     feature_table_rows.append(
-        "|".join([feature_name, repr(v.dtype), str(v.shape)]))
+        "|".join([feature_name, v_dtype_str, v_shape_str]))
   # We sort the table rows to minimize churn on subsequent generations.
   return FEATURE_TABLE.format(
       feature_values="\n".join(sorted(feature_table_rows)))
