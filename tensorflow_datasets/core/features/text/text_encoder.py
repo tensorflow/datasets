@@ -35,6 +35,25 @@ ALL_REGEX = re.compile(r"(\W+)", flags=re.UNICODE)
 NUM_BYTES = 2**8
 
 
+class TextEncoderConfig(object):
+  """Configuration for `tfds.features.Text`."""
+
+  def __init__(self, encoder=None, encoder_cls=None, vocab_size=None):
+    if encoder:
+      if (encoder_cls or vocab_size):
+        raise ValueError("If encoder is provided, encoder_cls and "
+                         "vocab_size must be None")
+      encoder_cls = type(encoder)
+      vocab_size = encoder.vocab_size
+    else:
+      if encoder_cls is ByteTextEncoder:
+        encoder = encoder_cls()
+
+    self.encoder = encoder
+    self.encoder_cls = encoder_cls
+    self.vocab_size = vocab_size
+
+
 @six.add_metaclass(abc.ABCMeta)
 class TextEncoder(object):
   """Abstract base class for converting between text and integers.

@@ -301,26 +301,21 @@ class DatasetInfo(object):
     parsed_proto = json_format.Parse(dataset_info_json_str,
                                      dataset_info_pb2.DatasetInfo())
 
-    # If the version in the code and version in the given file match, then only
-    # update the stats and schema, everything else is specified in the code and
-    # let it be.
-    if parsed_proto.version == self._info_proto.version:
-      self.splits = splits_lib.SplitDict.from_proto(parsed_proto.splits)
-      self.as_proto.schema.CopyFrom(parsed_proto.schema)
-      self._fully_initialized = True
-      return True
-
-    # Update our representation.
-    self._info_proto = parsed_proto
-
-    # Restore the Splits
-    self.splits = splits_lib.SplitDict.from_proto(self.as_proto.splits)
-
+    # Update splits
+    self.splits = splits_lib.SplitDict.from_proto(parsed_proto.splits)
+    # Update schema
+    self.as_proto.schema.CopyFrom(parsed_proto.schema)
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
 
-    # Mark as fully initialized.
+    # If the version in the code and version in the given file match, then leave
+    # the rest alone as it is specified in the code.
+    if parsed_proto.version != self._info_proto.version:
+      # Update the full proto
+      self._info_proto = parsed_proto
+
+    # Mark as fully initialized
     self._fully_initialized = True
 
     return True

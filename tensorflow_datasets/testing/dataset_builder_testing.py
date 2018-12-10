@@ -23,6 +23,7 @@ import hashlib
 import itertools
 import os
 
+from absl.testing import parameterized
 import promise
 import tensorflow as tf
 
@@ -59,7 +60,7 @@ FORBIDDEN_OS_FUNCTIONS = (
 )
 
 
-class TestCase(test_utils.SubTestCase):
+class TestCase(parameterized.TestCase, test_utils.SubTestCase):
   """Inherit this class to test your DatasetBuilder class.
 
   You must set the following class attributes:
@@ -105,9 +106,10 @@ class TestCase(test_utils.SubTestCase):
           "Assign your DatasetBuilder class to %s.DATASET_CLASS." % name)
 
   def setUp(self):
+    super(TestCase, self).setUp()
     # New data_dir and builder for each test
     self.data_dir = test_utils.make_tmp_dir(self.get_temp_dir())
-    self.builder = self.DATASET_CLASS(data_dir=self.data_dir)  # pylint: disable=not-callable
+    self.builder = self._make_builder()
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
         "test_data/fake_examples/%s" % self.builder.name)
@@ -142,7 +144,7 @@ class TestCase(test_utils.SubTestCase):
   def test_info(self):
     info = self.builder.info
     self.assertIsInstance(info, dataset_info.DatasetInfo)
-    self.assertEquals(self.builder.name, info.name)
+    self.assertEqual(self.builder.name, info.name)
 
   def _get_dl_extract_result(self, url, async_=False):
     del url
@@ -154,52 +156,55 @@ class TestCase(test_utils.SubTestCase):
     result_p = promise.Promise.resolve(res)
     return async_ and result_p or res
 
+  def _make_builder(self, config=None):
+    return self.DATASET_CLASS(data_dir=self.data_dir, config=config)  # pylint: disable=not-callable
+
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
+    configs = self.builder.BUILDER_CONFIGS
+    if configs:
+      for config in configs:
+        with self._subTest(config.name):
+          print("Testing config %s" % config.name)
+          builder = self._make_builder(config=config)
+          self._download_and_prepare_as_dataset(builder)
+    else:
+      self._download_and_prepare_as_dataset(self.builder)
 
+  def _download_and_prepare_as_dataset(self, builder):
     with tf.test.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
-      self.builder.download_and_prepare(compute_stats=True)
+      builder.download_and_prepare()
 
     with self._subTest("as_dataset"):
-      self._assertAsDataset(self.builder)
+      self._assertAsDataset(builder)
 
     with self._subTest("num_examples"):
-      self._assertNumSamples(self.builder)
+      self._assertNumSamples(builder)
 
     with self._subTest("reload"):
       # When reloading the dataset, metadata should been reloaded too.
-      builder_reloaded = self.DATASET_CLASS(data_dir=self.data_dir)  # pylint: disable=not-callable
 
+      builder_reloaded = self._make_builder(config=builder.builder_config)
       self._assertNumSamples(builder_reloaded)
 
       # After reloading, as_dataset should still be working
       with self._subTest("as_dataset"):
         self._assertAsDataset(builder_reloaded)
 
-  def _check_split(self, dataset):
-    """Check given split has right types and shapes."""
-    for component, (expected_type, expected_shapes) in self.SPEC.items():
-      output_type = dataset.output_types[component]
-      self.assertEqual(
-          expected_type, output_type,
-          "Component %s doesn't have type %s, but %s." %
-          (component, expected_type, output_type))
-      shapes = dataset.output_shapes[component]
-      tf_utils.assert_shape_match(shapes, expected_shapes)
-
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}
     for split_name, expected_examples_number in self.SPLITS.items():
       dataset = builder.as_dataset(split=split_name)
-      self._check_split(dataset)
+      compare_shapes_and_types(builder.info.features.get_tensor_info(),
+                               dataset.output_types, dataset.output_shapes)
       examples = list(builder.numpy_iterator(split=split_name))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
-      self.assertEqual(len(examples), expected_examples_number)
+      self.assertLen(examples, expected_examples_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
         split_to_checksums.items(), 2):
       if (split1 in self.OVERLAPPING_SPLITS or
@@ -237,6 +242,24 @@ def checksum(example):
     else:
       hash_.update(val)
   return hash_.hexdigest()
+
+
+def compare_shapes_and_types(tensor_info, output_types, output_shapes):
+  """Compare shapes and types between TensorInfo and Dataset types/shapes."""
+  for feature_name, feature_info in tensor_info.items():
+    if isinstance(feature_info, dict):
+      compare_shapes_and_types(feature_info, output_types[feature_name],
+                               output_shapes[feature_name])
+    else:
+      expected_type = feature_info.dtype
+      output_type = output_types[feature_name]
+      if expected_type != output_type:
+        raise TypeError("Feature %s has type %s but expected %s" %
+                        (feature_name, output_type, expected_type))
+
+      expected_shape = feature_info.shape
+      output_shape = output_shapes[feature_name]
+      tf_utils.assert_shape_match(expected_shape, output_shape)
 
 
 main = tf.test.main

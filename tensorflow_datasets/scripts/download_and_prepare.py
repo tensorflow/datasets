@@ -66,27 +66,41 @@ flags.DEFINE_boolean("compute_stats", True,
                      "If True, will compute stats after generation")
 
 
-def main(_):
+def download_and_prepare(dataset_name, builder_config=None):
+  """Generate data for a given dataset."""
+  print("download_and_prepare for dataset %s config %s ..." %
+        (dataset_name, builder_config and builder_config.name))
+  builder = tfds.builder(
+      dataset_name, data_dir=FLAGS.data_dir, config=builder_config)
   # TODO(b/116270825): Add flag to force extraction / preparation.
   mode = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
+  builder.download_and_prepare(
+      download_dir=FLAGS.download_dir,
+      extract_dir=FLAGS.extract_dir,
+      manual_dir=FLAGS.manual_dir,
+      compute_stats=FLAGS.compute_stats,
+      mode=mode)
+  termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
+
+  if FLAGS.debug:
+    dataset = builder.as_dataset(split=tfds.Split.TRAIN)
+    iterator = tf.contrib.eager.Iterator(dataset)
+    item = next(iterator)
+    print("'item' is a single record. Use print(next(iterator)) to see more.")
+    pdb.set_trace()
+    del iterator, item
+
+
+def main(_):
   for dataset_name in FLAGS.datasets:
     if dataset_name in FLAGS.exclude_datasets:
       continue
-    print("Download and prepare dataset %s ..." % dataset_name)
     builder = tfds.builder(dataset_name, data_dir=FLAGS.data_dir)
-    builder.download_and_prepare(download_dir=FLAGS.download_dir,
-                                 extract_dir=FLAGS.extract_dir,
-                                 manual_dir=FLAGS.manual_dir,
-                                 compute_stats=FLAGS.compute_stats,
-                                 mode=mode)
-    termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
-
-    if FLAGS.debug:
-      dataset = builder.as_dataset(split=tfds.Split.TRAIN)
-      iterator = tf.contrib.eager.Iterator(dataset)
-      pdb.set_trace()
-      del iterator
-      return
+    if builder.BUILDER_CONFIGS:
+      for config in builder.BUILDER_CONFIGS:
+        download_and_prepare(dataset_name, config)
+    else:
+      download_and_prepare(dataset_name)
 
 
 if __name__ == "__main__":

@@ -22,6 +22,7 @@ from __future__ import print_function
 import os
 
 import tensorflow as tf
+from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -51,17 +52,65 @@ _CITATION = """\
 _DOWNLOAD_URL = "http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
 
 
-# TODO(rsepassi): Add configs for various encodings
+class IMDBReviewsConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for IMDBReviews."""
+
+  @api_utils.disallow_positional_args
+  def __init__(self, text_encoder_config=None, **kwargs):
+    """BuilderConfig for IMDBReviews.
+
+    Args:
+      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
+        for the `tfds.features.text.TextEncoder` used for the IMDB `"text"`
+        feature.
+      **kwargs: keyword arguments forwarded to super.
+    """
+    super(IMDBReviewsConfig, self).__init__(**kwargs)
+    self.text_encoder_config = (
+        text_encoder_config or tfds.features.text.TextEncoderConfig())
+
+
 class IMDBReviews(tfds.core.GeneratorBasedBuilder):
   """IMDB movie reviews dataset."""
+  BUILDER_CONFIGS = [
+      IMDBReviewsConfig(
+          name="plain_text",
+          version="0.0.1",
+          description="Plain text",
+      ),
+      IMDBReviewsConfig(
+          name="bytes",
+          version="0.0.1",
+          description="Uses byte-level text encoding",
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder=tfds.features.text.ByteTextEncoder()),
+      ),
+      IMDBReviewsConfig(
+          name="subwords8k",
+          version="0.0.1",
+          description="Uses SubwordTextEncoder with 8k vocab size",
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              vocab_size=2**13),
+      ),
+      IMDBReviewsConfig(
+          name="subwords32k",
+          version="0.0.1",
+          description="Uses SubwordTextEncoder with 32k vocab size",
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              vocab_size=2**15),
+      ),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
         name=self.name,
         description=_DESCRIPTION,
-        version="0.0.2",
+        version=self._builder_config.version,
         features=tfds.features.FeaturesDict({
-            "text": tfds.features.Text(),
+            "text": tfds.features.Text(
+                encoder_config=self._builder_config.text_encoder_config),
             "label": tfds.features.ClassLabel(names=["neg", "pos"]),
         }),
         supervised_keys=("text", "label"),
@@ -70,11 +119,19 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
+  def _vocab_text_gen(self, train_dir):
+    for ex in self._generate_examples(train_dir):
+      yield ex["text"]
+
   def _split_generators(self, dl_manager):
     imdb_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
 
     train_dir = os.path.join(imdb_path, "aclImdb", "train")
     test_dir = os.path.join(imdb_path, "aclImdb", "test")
+
+    # Generate vocabulary from training data if SubwordTextEncoder configured
+    self.info.features["text"].maybe_build_from_corpus(
+        self._vocab_text_gen(train_dir))
 
     return [
         tfds.core.SplitGenerator(

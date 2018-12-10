@@ -62,7 +62,7 @@ class DummyBuilderConfig(dataset_builder.BuilderConfig):
 
 
 class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
-  DATA_CONFIGS = [
+  BUILDER_CONFIGS = [
       DummyBuilderConfig(
           name="plus1",
           version="0.0.1",
@@ -188,7 +188,7 @@ class DatasetBuilderTest(tf.test.TestCase):
     builder = DummyDatasetWithConfigs(config=plus1_config, data_dir=None)
     self.assertIs(plus1_config, builder.builder_config)
     self.assertIs(builder.builder_config,
-                  DummyDatasetWithConfigs.DATA_CONFIGS[0])
+                  DummyDatasetWithConfigs.BUILDER_CONFIGS[0])
 
   def test_with_configs(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:

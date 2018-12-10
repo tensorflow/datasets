@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
 from tensorflow_datasets.image import celeba
 from tensorflow_datasets.testing import dataset_builder_testing
 
@@ -38,16 +37,6 @@ class CelebATest(dataset_builder_testing.TestCase):
       "list_eval_partition": "list_eval_partition.txt",
       "list_attr_celeba": "list_attr_celeba.txt",
       "landmarks_celeba": "list_landmarks_align_celeba.txt",
-  }
-
-  SPEC = {
-      "image": (tf.uint8, (218, 178, 3)),
-      # TODO(b/120124306) : seems that the spec doesn't support hierarchy.
-      #                     uncomment after it is supported.
-      #      "landmarks/lefteye_x": (tf.int64, None),
-      #      "landmarks/redeye_x": (tf.int64, None),
-      #      "landmarks/nose_x": (tf.int64, None)
-      #      "attributes/Black_Hair": (tf.int64, None)
   }
 
 

@@ -110,11 +110,6 @@ class MyDatasetTest(dataset_builder_testing.TestCase):
       "train": 12,
       "test": 12,
   }
-  SPEC = {  # What data as returned by the tf.data.Dataset should look like.
-      "image_description": (tf.string, ()),
-      "image": (tf.uint8, (None, None, 3)),
-      "label": (tf.int64, ()),
-  }
   # If dataset `download_and_extract` more than one resource:
   DL_EXTRACT_RESULT = {
       "name1": "path/to/file1",  # Relative to fake_examples/my_dataset dir.
@@ -124,8 +119,6 @@ class MyDatasetTest(dataset_builder_testing.TestCase):
 if __name__ == "__main__":
   dataset_builder_testing.main()
 ```
-
-TODO(pierrot): remove SPEC
 
 Run the test as you proceed to implement `MyDataset`. By the end of this page,
 it should pass.

@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
 from tensorflow_datasets.image import cifar
 from tensorflow_datasets.testing import dataset_builder_testing
 
@@ -29,10 +28,6 @@ class Cifar10Test(dataset_builder_testing.TestCase):
   SPLITS = {
       "train": 10,  # Number of examples.
       "test": 2,  # See testing/generate_cifar10_like_example.py
-  }
-  SPEC = {
-      "label": (tf.int64, ()),
-      "image": (tf.uint8, (32, 32, 3)),
   }
 
 
