@@ -134,7 +134,10 @@ class FashionMNIST(MNIST):
         version="1.0.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(num_classes=10),
+            "label": tfds.features.ClassLabel(names=[
+                "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
+                "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"
+            ]),
         }),
         supervised_keys=("image", "label"),
         urls=["https://github.com/zalandoresearch/fashion-mnist"],
