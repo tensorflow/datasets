@@ -28,9 +28,6 @@ from __future__ import print_function
 import os
 import tensorflow as tf
 
-from tensorflow_datasets.core.download import ExtractInfo
-from tensorflow_datasets.core.download import UrlExtractInfo
-from tensorflow_datasets.core.download import UrlInfo
 import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = ("https://drive.google.com/uc?export=download&"
@@ -87,9 +84,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     extracted_dirs = dl_manager.download_and_extract({
-        "img_align_celeba": UrlExtractInfo(
-            url_info=UrlInfo(url=IMG_ALIGNED_DATA),
-            extract_info=ExtractInfo(extraction_method=ExtractInfo.ZIP)),
+        "img_align_celeba": IMG_ALIGNED_DATA,
         "list_eval_partition": EVAL_LIST,
         "list_attr_celeba": ATTR_DATA,
         "landmarks_celeba": LANDMARKS_DATA,

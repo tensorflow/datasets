@@ -25,6 +25,11 @@ import contextlib
 import itertools
 import os
 import sys
+import uuid
+
+import tensorflow as tf
+
+from tensorflow_datasets.core import constants
 
 # pylint: disable=g-import-not-at-top
 if sys.version_info[0] > 2:
@@ -218,6 +223,15 @@ def str_to_version(version_str):
 def tfds_dir():
   """Path to tensorflow_datasets directory."""
   return os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
+
+@contextlib.contextmanager
+def atomic_write(path, mode):
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_path = "%s%s_%s" % (path, constants.INCOMPLETE_SUFFIX, uuid.uuid4().hex)
+  with tf.gfile.Open(tmp_path, mode) as file_:
+    yield file_
+  tf.gfile.Rename(tmp_path, path, overwrite=True)
 
 
 class abstractclassmethod(classmethod):  # pylint: disable=invalid-name

@@ -18,15 +18,9 @@
 from tensorflow_datasets.core.download.checksums_file import load as load_checksums
 from tensorflow_datasets.core.download.download_manager import DownloadManager
 from tensorflow_datasets.core.download.util import GenerateMode
-from tensorflow_datasets.core.proto.download_generated_pb2 import ExtractInfo
-from tensorflow_datasets.core.proto.download_generated_pb2 import UrlExtractInfo
-from tensorflow_datasets.core.proto.download_generated_pb2 import UrlInfo
 
 __all__ = [
     "DownloadManager",
-    "ExtractInfo",
     "GenerateMode",
-    "UrlInfo",
-    "UrlExtractInfo",
     "load_checksums",
 ]

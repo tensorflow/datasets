@@ -22,5 +22,5 @@ function gen_proto {
   echo "done"
 }
 
+# TODO(afrozm): re-enable this.
 # gen_proto dataset_info
-gen_proto download
