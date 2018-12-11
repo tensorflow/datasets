@@ -13,13 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Image datasets."""
+r"""Generate fake data for SVHN.
 
-from tensorflow_datasets.image.celeba import CelebA
-from tensorflow_datasets.image.cifar import Cifar10
-from tensorflow_datasets.image.cifar import Cifar100
-from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
-from tensorflow_datasets.image.image_folder import ImageLabelFolder
-from tensorflow_datasets.image.mnist import FashionMNIST
-from tensorflow_datasets.image.mnist import MNIST
-from tensorflow_datasets.image.svhn import SvhnCropped
+"""
+
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import numpy as np
+import scipy.io
+
+for split_name, num_examples in [
+    ('train', 3),
+    ('test', 2),
+    ('extra', 1),
+]:
+  img_shape = (32, 32, 3, num_examples)
+  scipy.io.savemat('{}_32x32.mat'.format(split_name), {
+      'X': np.random.randint(255, size=img_shape, dtype=np.uint8),
+      'y': np.random.randint(1, 10, size=(num_examples, 1)),
+  })

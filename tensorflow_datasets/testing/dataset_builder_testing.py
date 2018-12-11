@@ -175,6 +175,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     with tf.test.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
+        download=self._get_dl_extract_result,
         extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):

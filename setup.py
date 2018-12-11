@@ -37,6 +37,7 @@ REQUIRED_PKGS = [
     'protobuf',
     'pytz',
     'requests',
+    'scipy',
     'six',
     'tensorflow-metadata',
     'termcolor',

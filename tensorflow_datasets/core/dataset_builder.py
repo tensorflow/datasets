@@ -563,6 +563,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
     for split_generator in self._split_generators(dl_manager):
       # Keep track of all split_info
       for s in split_generator.split_info_list:
+        tf.logging.info("Generating split %s", s.name)
         split_dict.add(s)
 
       # Generate the filenames and write the example on disk
