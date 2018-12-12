@@ -28,19 +28,28 @@ from absl import app
 from absl import flags
 import numpy as np
 
+import tensorflow as tf
+import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils import py_utils
+
 NUMBER_IMAGES_PER_BATCH = 2
 HEIGHT, WIDTH = (32, 32)
 NUMBER_BATCHES = 5
 NUMBER_LABELS = 10
 
-flags.DEFINE_string("output_dir", None,
-                    "Path to directory where to generate data.")
 
+flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
+                    "Path to tensorflow_datasets directory")
 FLAGS = flags.FLAGS
 
 
+def output_dir():
+  return os.path.join(FLAGS.tfds_dir, "testing", "test_data",
+                      "fake_examples", "cifar10", "cifar-10-batches-py")
+
+
 def dump(fname, **data):
-  path = os.path.join(FLAGS.output_dir, fname)
+  path = os.path.join(output_dir(), fname)
   print("Writing %s..." % path)
   with open(path, "wb") as out_file:
     pickle.dump(data, out_file)
@@ -55,11 +64,13 @@ def generate_batch(batch_name):
 
 
 def generate_data():
+  tf.gfile.DeleteRecursively(output_dir())
+  tf.gfile.MakeDirs(output_dir())
   for batch_number in range(1, NUMBER_BATCHES+1):
     generate_batch("data_batch_%s" % batch_number)
   generate_batch("test_batch")
-  label_names = ["label%s" % i for i in range(NUMBER_LABELS)]
-  dump("batches.meta", labels_names=label_names)
+  label_names = tfds.builder("cifar10").info.features["label"].names
+  dump("batches.meta", label_names=label_names)
 
 
 def main(argv):

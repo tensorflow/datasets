@@ -129,6 +129,8 @@ class Text(feature.FeatureConnector):
     """Call SubwordTextEncoder.build_from_corpus is encoder_cls is such."""
     if self._encoder_cls is not text_lib.SubwordTextEncoder:
       return
+    if self.encoder:
+      return
 
     vocab_size = self._encoder_config.vocab_size
     self.encoder = text_lib.SubwordTextEncoder.build_from_corpus(

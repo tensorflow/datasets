@@ -35,6 +35,7 @@
 *  <a href="./tfds/features/text/ByteTextEncoder.md"><code>tfds.features.text.ByteTextEncoder</code></a>
 *  <a href="./tfds/features/text/SubwordTextEncoder.md"><code>tfds.features.text.SubwordTextEncoder</code></a>
 *  <a href="./tfds/features/text/TextEncoder.md"><code>tfds.features.text.TextEncoder</code></a>
+*  <a href="./tfds/features/text/TextEncoderConfig.md"><code>tfds.features.text.TextEncoderConfig</code></a>
 *  <a href="./tfds/features/text/TokenTextEncoder.md"><code>tfds.features.text.TokenTextEncoder</code></a>
 *  <a href="./tfds/features/text/Tokenizer.md"><code>tfds.features.text.Tokenizer</code></a>
 *  <a href="./tfds/file_adapter.md"><code>tfds.file_adapter</code></a>

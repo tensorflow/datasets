@@ -92,6 +92,7 @@ class DatasetInfo(object):
                urls=None,
                download_checksums=None,
                size_in_bytes=0,
+               config_name=None,
                citation=None):
     """Constructs DatasetInfo.
 
@@ -110,6 +111,7 @@ class DatasetInfo(object):
         If a url is not listed, its checksum is not checked.
       size_in_bytes: `int`, optional, approximate size in bytes of the raw
         size of the dataset that we will be downloading from the internet.
+      config_name: `str`, BuilderConfig name.
       citation: `str`, optional, the citation to use for this dataset.
     """
     version = version or "0.0.0"
@@ -132,6 +134,8 @@ class DatasetInfo(object):
       assert len(supervised_keys) == 2
       self._info_proto.supervised_keys.input = supervised_keys[0]
       self._info_proto.supervised_keys.output = supervised_keys[1]
+
+    self._config_name = config_name
 
     # Is this object initialized with both the static and the dynamic data?
     self._fully_initialized = False
@@ -249,7 +253,7 @@ class DatasetInfo(object):
 
   @property
   def as_json(self):
-    return json_format.MessageToJson(self.as_proto)
+    return json_format.MessageToJson(self.as_proto, sort_keys=True)
 
   def write_to_directory(self, dataset_info_dir):
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
@@ -322,11 +326,12 @@ class DatasetInfo(object):
 
   def initialize_from_package_data(self):
     """Initialize DatasetInfo from package data, returns True on success."""
-
-    return self.read_from_directory(os.path.join(utils.tfds_dir(),
-                                                 "dataset_info",
-                                                 self.name,
-                                                 self.version))
+    info_dir = os.path.join(utils.tfds_dir(), "dataset_info", self.name)
+    if self._config_name:
+      info_dir = os.path.join(info_dir, self._config_name, self.version)
+    else:
+      info_dir = os.path.join(info_dir, self.version)
+    return self.read_from_directory(info_dir)
 
   def __repr__(self):
     return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(

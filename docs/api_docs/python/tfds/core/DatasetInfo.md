@@ -55,6 +55,7 @@ __init__(
     urls=None,
     download_checksums=None,
     size_in_bytes=0,
+    config_name=None,
     citation=None
 )
 ```
@@ -77,6 +78,7 @@ Constructs DatasetInfo.
     If a url is not listed, its checksum is not checked.
 * <b>`size_in_bytes`</b>: `int`, optional, approximate size in bytes of the raw
     size of the dataset that we will be downloading from the internet.
+* <b>`config_name`</b>: `str`, BuilderConfig name.
 * <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
 
 

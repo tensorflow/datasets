@@ -436,8 +436,9 @@ def write_lines_to_file(cls_name, filename, lines, metadata_dict):
     for line in [header_line, metadata_line]:
       f.write(tf.compat.as_bytes(line))
       f.write(tf.compat.as_bytes(u"\n"))
-    f.write(tf.compat.as_bytes(u"\n".join(lines)))
-    f.write(tf.compat.as_bytes(u"\n"))
+    if lines:
+      f.write(tf.compat.as_bytes(u"\n".join(lines)))
+      f.write(tf.compat.as_bytes(u"\n"))
 
 
 def read_lines_from_file(cls_name, filename):

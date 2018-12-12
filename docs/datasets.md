@@ -36,7 +36,7 @@ Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. Thes
 
 [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py) v0.2.0
 
-#### Features
+### Features
 Name  | Type | Shape
 :---- | :--- | :----
 attributes|{'5_o_Clock_Shadow': tf.bool,<br> 'Arched_Eyebrows': tf.bool,<br> 'Attractive': tf.bool,<br> 'Bags_Under_Eyes': tf.bool,<br> 'Bald': tf.bool,<br> 'Bangs': tf.bool,<br> 'Big_Lips': tf.bool,<br> 'Big_Nose': tf.bool,<br> 'Black_Hair': tf.bool,<br> 'Blond_Hair': tf.bool,<br> 'Blurry': tf.bool,<br> 'Brown_Hair': tf.bool,<br> 'Bushy_Eyebrows': tf.bool,<br> 'Chubby': tf.bool,<br> 'Double_Chin': tf.bool,<br> 'Eyeglasses': tf.bool,<br> 'Goatee': tf.bool,<br> 'Gray_Hair': tf.bool,<br> 'Heavy_Makeup': tf.bool,<br> 'High_Cheekbones': tf.bool,<br> 'Male': tf.bool,<br> 'Mouth_Slightly_Open': tf.bool,<br> 'Mustache': tf.bool,<br> 'Narrow_Eyes': tf.bool,<br> 'No_Beard': tf.bool,<br> 'Oval_Face': tf.bool,<br> 'Pale_Skin': tf.bool,<br> 'Pointy_Nose': tf.bool,<br> 'Receding_Hairline': tf.bool,<br> 'Rosy_Cheeks': tf.bool,<br> 'Sideburns': tf.bool,<br> 'Smiling': tf.bool,<br> 'Straight_Hair': tf.bool,<br> 'Wavy_Hair': tf.bool,<br> 'Wearing_Earrings': tf.bool,<br> 'Wearing_Hat': tf.bool,<br> 'Wearing_Lipstick': tf.bool,<br> 'Wearing_Necklace': tf.bool,<br> 'Wearing_Necktie': tf.bool,<br> 'Young': tf.bool}|{'5_o_Clock_Shadow': (),<br> 'Arched_Eyebrows': (),<br> 'Attractive': (),<br> 'Bags_Under_Eyes': (),<br> 'Bald': (),<br> 'Bangs': (),<br> 'Big_Lips': (),<br> 'Big_Nose': (),<br> 'Black_Hair': (),<br> 'Blond_Hair': (),<br> 'Blurry': (),<br> 'Brown_Hair': (),<br> 'Bushy_Eyebrows': (),<br> 'Chubby': (),<br> 'Double_Chin': (),<br> 'Eyeglasses': (),<br> 'Goatee': (),<br> 'Gray_Hair': (),<br> 'Heavy_Makeup': (),<br> 'High_Cheekbones': (),<br> 'Male': (),<br> 'Mouth_Slightly_Open': (),<br> 'Mustache': (),<br> 'Narrow_Eyes': (),<br> 'No_Beard': (),<br> 'Oval_Face': (),<br> 'Pale_Skin': (),<br> 'Pointy_Nose': (),<br> 'Receding_Hairline': (),<br> 'Rosy_Cheeks': (),<br> 'Sideburns': (),<br> 'Smiling': (),<br> 'Straight_Hair': (),<br> 'Wavy_Hair': (),<br> 'Wearing_Earrings': (),<br> 'Wearing_Hat': (),<br> 'Wearing_Lipstick': (),<br> 'Wearing_Necklace': (),<br> 'Wearing_Necktie': (),<br> 'Young': ()}
@@ -44,7 +44,7 @@ image|tf.uint8|(218, 178, 3)
 landmarks|{'lefteye_x': tf.int64,<br> 'lefteye_y': tf.int64,<br> 'leftmouth_x': tf.int64,<br> 'leftmouth_y': tf.int64,<br> 'nose_x': tf.int64,<br> 'nose_y': tf.int64,<br> 'righteye_x': tf.int64,<br> 'righteye_y': tf.int64,<br> 'rightmouth_x': tf.int64,<br> 'rightmouth_y': tf.int64}|{'lefteye_x': (),<br> 'lefteye_y': (),<br> 'leftmouth_x': (),<br> 'leftmouth_y': (),<br> 'nose_x': (),<br> 'nose_y': (),<br> 'righteye_x': (),<br> 'righteye_y': (),<br> 'rightmouth_x': (),<br> 'rightmouth_y': ()}
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |    202,599
@@ -53,13 +53,13 @@ TEST       |     19,962
 VALIDATION |     19,867
 
 
-#### Urls
+### Urls
  * http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 
-#### Supervised Keys
+### Supervised Keys
 None
 
-#### Citation
+### Citation
 ```
 Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang Deep Learning Face Attributes in the Wild ICCV 2015
 ```
@@ -72,14 +72,14 @@ The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6
 
 [`tfds.image.cifar.Cifar10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py) v1.0.1
 
-#### Features
+### Features
 Name  | Type | Shape
 :---- | :--- | :----
 image|tf.uint8|(32, 32, 3)
 label|tf.int64|()
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     60,000
@@ -87,13 +87,13 @@ TRAIN      |     50,000
 TEST       |     10,000
 
 
-#### Urls
+### Urls
  * https://www.cs.toronto.edu/~kriz/cifar.html
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf
 ```
@@ -106,14 +106,14 @@ This dataset is just like the CIFAR-10, except it has 100 classes containing 600
 
 [`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py) v1.1.0
 
-#### Features
+### Features
 Name  | Type | Shape
 :---- | :--- | :----
 image|tf.uint8|(32, 32, 3)
 label|tf.int64|()
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     60,000
@@ -121,13 +121,13 @@ TRAIN      |     50,000
 TEST       |     10,000
 
 
-#### Urls
+### Urls
  * https://www.cs.toronto.edu/~kriz/cifar.html
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf
 ```
@@ -140,7 +140,7 @@ A large set of high-resolution retina images taken under a variety of imaging co
 
 [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py) v1.0.0
 
-#### Features
+### Features
 Name  | Type | Shape
 :---- | :--- | :----
 image|tf.uint8|(None, None, 3)
@@ -148,7 +148,7 @@ label|tf.int64|()
 name|tf.string|()
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     88,712
@@ -157,13 +157,13 @@ TRAIN      |     35,126
 SAMPLE     |         10
 
 
-#### Urls
+### Urls
  * https://www.kaggle.com/c/diabetic-retinopathy-detection/data
 
-#### Supervised Keys
+### Supervised Keys
 None
 
-#### Citation
+### Citation
 ```
 
 ```
@@ -176,14 +176,14 @@ Fashion-MNIST is a dataset of Zalando's article images consisting of a training 
 
 [`tfds.image.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py) v1.0.0
 
-#### Features
+### Features
 Name  | Type | Shape
 :---- | :--- | :----
 image|tf.uint8|(28, 28, 1)
 label|tf.int64|()
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     70,000
@@ -191,13 +191,13 @@ TRAIN      |     60,000
 TEST       |     10,000
 
 
-#### Urls
+### Urls
  * https://github.com/zalandoresearch/fashion-mnist
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms. Han Xiao, Kashif Rasul, Roland Vollgraf. arXiv:1708.07747
 ```
@@ -210,23 +210,23 @@ Generic image classification dataset.
 
 [`tfds.image.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/image_folder.py) v1.0.0
 
-#### Features
+### Features
 Name  | Type | Shape
 :---- | :--- | :----
 image|tf.uint8|(None, None, 3)
 label|tf.int64|()
 
 
-#### Statistics
+### Statistics
 None computed
 
-#### Urls
+### Urls
 
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 
 ```
@@ -239,14 +239,14 @@ The MNIST database of handwritten digits.
 
 [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py) v1.0.0
 
-#### Features
+### Features
 Name  | Type | Shape
 :---- | :--- | :----
 image|tf.uint8|(28, 28, 1)
 label|tf.int64|()
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     70,000
@@ -254,13 +254,13 @@ TRAIN      |     60,000
 TEST       |     10,000
 
 
-#### Urls
+### Urls
  * http://yann.lecun.com/exdb/mnist/
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
 [Online]. Available: http://yann.lecun.com/exdb/mnist/
@@ -273,33 +273,75 @@ Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
 
 ## `"imdb_reviews"`
 
-Large Movie Review Dataset
-This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well. Raw text and already processed bag of words formats are provided. See the README file contained in the release for more details.
+Large Movie Review Dataset.
+This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing.
 
-[`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py) v0.0.2
+[`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
 
-#### Features
+`imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"plain_text"` (v0.0.1): Plain text
+
+* `"bytes"` (v0.0.1): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+* `"subwords8k"` (v0.0.1): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+
+* `"subwords32k"` (v0.0.1): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+
+### `"imdb_reviews/plain_text"`
+
 Name  | Type | Shape
 :---- | :--- | :----
 label|tf.int64|()
 text|tf.string|()
 
 
-#### Statistics
+
+### `"imdb_reviews/bytes"`
+
+Name  | Type | Shape
+:---- | :--- | :----
+label|tf.int64|()
+text|tf.int64|(None,)
+
+
+
+### `"imdb_reviews/subwords8k"`
+
+Name  | Type | Shape
+:---- | :--- | :----
+label|tf.int64|()
+text|tf.int64|(None,)
+
+
+
+### `"imdb_reviews/subwords32k"`
+
+Name  | Type | Shape
+:---- | :--- | :----
+label|tf.int64|()
+text|tf.int64|(None,)
+
+
+
+
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     50,000
-TEST       |     25,000
 TRAIN      |     25,000
+TEST       |     25,000
 
 
-#### Urls
+### Urls
  * http://ai.stanford.edu/~amaas/data/sentiment/
 
-#### Supervised Keys
+### Supervised Keys
 (u'text', u'label')
 
-#### Citation
+### Citation
 ```
 @InProceedings{maas-EtAl:2011:ACL-HLT2011,
   author    = {Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher},
@@ -326,7 +368,7 @@ This data set contains roughly 59,000 examples of robot pushing motions, includi
 
 [`tfds.video.bair_robot_pushing.BairRobotPushing`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py) v0.1.0
 
-#### Features
+### Features
 Name  | Type | Shape
 :---- | :--- | :----
 action|tf.float32|(30, 4)
@@ -335,7 +377,7 @@ video_aux1|tf.uint8|(30, 64, 64, 3)
 video_main|tf.uint8|(30, 64, 64, 3)
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     43,520
@@ -343,13 +385,13 @@ TRAIN      |     43,264
 TEST       |        256
 
 
-#### Urls
+### Urls
  * https://sites.google.com/site/brainrobotdata/home/push-dataset
 
-#### Supervised Keys
+### Supervised Keys
 None
 
-#### Citation
+### Citation
 ```
 Unsupervised Learning for Physical Interaction through Video  Prediction. Chelsea Finn, Ian Goodfellow, Sergey Levine
 ```

@@ -88,9 +88,10 @@ data.
 
 The "fake example", to be stored in
 [`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/)
-under the `my_dataset` directory, should mimic the source dataset artifacts as
-downloaded and extracted. It can be created manually or automatically
-([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/generate_cifar10_like_example.py)).
+under the `my_dataset` directory and should mimic the source dataset artifacts
+as downloaded and extracted. It can be created manually or automatically with a
+script ([example
+script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar10.py)).
 
 Make sure to use different data in your fake example splits, as the test will
 fail if your dataset splits overlap.

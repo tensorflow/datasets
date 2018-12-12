@@ -13,6 +13,7 @@
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="ints2str"/>
 <meta itemprop="property" content="load_metadata"/>
+<meta itemprop="property" content="maybe_build_from_corpus"/>
 <meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="str2ints"/>
 </div>
@@ -34,7 +35,7 @@ Feature which encodes/decodes text, possibly to integers.
 ``` python
 __init__(
     encoder=None,
-    encoder_cls=None
+    encoder_config=None
 )
 ```
 
@@ -44,8 +45,8 @@ Constructs a Text FeatureConnector.
 
 * <b>`encoder`</b>: <a href="../../tfds/features/text/TextEncoder.md"><code>tfds.features.text.TextEncoder</code></a>, an encoder that can convert
     text to integers. If None, the text will be utf-8 byte-encoded.
-* <b>`encoder_cls`</b>: <a href="../../tfds/features/text/TextEncoder.md"><code>tfds.features.text.TextEncoder</code></a>, needed if restoring from a
-    file with `load_metadata`.
+* <b>`encoder_config`</b>: <a href="../../tfds/features/text/TextEncoderConfig.md"><code>tfds.features.text.TextEncoderConfig</code></a>, needed if
+    restoring from a file with `load_metadata`.
 
 
 
@@ -152,6 +153,17 @@ load_metadata(
 ```
 
 
+
+<h3 id="maybe_build_from_corpus"><code>maybe_build_from_corpus</code></h3>
+
+``` python
+maybe_build_from_corpus(
+    corpus_generator,
+    **kwargs
+)
+```
+
+Call SubwordTextEncoder.build_from_corpus is encoder_cls is such.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 

@@ -26,13 +26,10 @@ from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
-Large Movie Review Dataset
+Large Movie Review Dataset.
 This is a dataset for binary sentiment classification containing substantially \
 more data than previous benchmark datasets. We provide a set of 25,000 highly \
-polar movie reviews for training, and 25,000 for testing. There is additional \
-unlabeled data for use as well. Raw text and already processed bag of words \
-formats are provided. See the README file contained in the release for more \
-details.\
+polar movie reviews for training, and 25,000 for testing.\
 """
 
 _CITATION = """\
@@ -81,14 +78,16 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       IMDBReviewsConfig(
           name="bytes",
           version="0.0.1",
-          description="Uses byte-level text encoding",
+          description=("Uses byte-level text encoding with "
+                       "`tfds.features.text.ByteTextEncoder`"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder=tfds.features.text.ByteTextEncoder()),
       ),
       IMDBReviewsConfig(
           name="subwords8k",
           version="0.0.1",
-          description="Uses SubwordTextEncoder with 8k vocab size",
+          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
+                       "vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               vocab_size=2**13),
@@ -96,7 +95,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       IMDBReviewsConfig(
           name="subwords32k",
           version="0.0.1",
-          description="Uses SubwordTextEncoder with 32k vocab size",
+          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
+                       "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               vocab_size=2**15),
@@ -108,6 +108,7 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
         name=self.name,
         description=_DESCRIPTION,
         version=self._builder_config.version,
+        config_name=self._builder_config.name,
         features=tfds.features.FeaturesDict({
             "text": tfds.features.Text(
                 encoder_config=self._builder_config.text_encoder_config),

@@ -82,6 +82,8 @@ toc:
         path: /datasets/api_docs/python/tfds/features/text/SubwordTextEncoder
       - title: TextEncoder
         path: /datasets/api_docs/python/tfds/features/text/TextEncoder
+      - title: TextEncoderConfig
+        path: /datasets/api_docs/python/tfds/features/text/TextEncoderConfig
       - title: Tokenizer
         path: /datasets/api_docs/python/tfds/features/text/Tokenizer
       - title: TokenTextEncoder

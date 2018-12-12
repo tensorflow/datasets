@@ -67,6 +67,48 @@ SECTION_DATASETS = """\
 {datasets}
 """
 
+CONFIG_BULLET = """\
+* `"{name}"` (v{version}): {description}
+"""
+
+SINGLE_CONFIG_ENTRY = """\
+### `"{builder_name}/{config_name}"`
+
+{feature_information}
+
+"""
+
+DATASET_WITH_CONFIGS_ENTRY = """\
+## `"{snakecase_name}"`
+
+{description}
+
+[`{module_and_class}`]({cls_url})
+
+`{snakecase_name}` is configured with `{config_cls}` and has the following
+configurations predefined (defaults to the first one):
+
+{config_names}
+
+{configs}
+
+### Statistics
+{statistics_information}
+
+### Urls
+{urls}
+
+### Supervised Keys
+{supervised_keys}
+
+### Citation
+```
+{citation}
+```
+
+---
+"""
+
 DATASET_ENTRY = """\
 ## `"{snakecase_name}"`
 
@@ -74,19 +116,19 @@ DATASET_ENTRY = """\
 
 [`{module_and_class}`]({cls_url}) v{version}
 
-#### Features
+### Features
 {feature_information}
 
-#### Statistics
+### Statistics
 {statistics_information}
 
-#### Urls
+### Urls
 {urls}
 
-#### Supervised Keys
+### Supervised Keys
 {supervised_keys}
 
-#### Citation
+### Citation
 ```
 {citation}
 ```
@@ -121,24 +163,60 @@ def tfds_mod_name(mod_name):
 
 
 def document_single_builder(builder):
+  """Doc string for a single builder, with or without configs."""
   mod_name = builder.__class__.__module__
   cls_name = builder.__class__.__name__
   mod_file = sys.modules[mod_name].__file__
   if mod_file.endswith("pyc"):
     mod_file = mod_file[:-1]
-  info = builder.info
-  return DATASET_ENTRY.format(
-      snakecase_name=builder.name,
-      module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
-      cls_url=cls_url(mod_name),
-      description=info.description,
-      version=info.version,
-      feature_information=make_feature_information(info),
-      statistics_information=make_statistics_information(info),
-      urls="\n".join([" * " + url for url in info.urls]),
-      supervised_keys=str(info.supervised_keys),
-      citation=info.citation,
-  )
+
+  if builder.builder_configs:
+    # Dataset with configs; document each one
+    config_docs = []
+    for config in builder.BUILDER_CONFIGS:
+      builder = tfds.builder(builder.name, config=config)
+      info = builder.info
+      # TODO(rsepassi): document the actual config object
+      config_doc = SINGLE_CONFIG_ENTRY.format(
+          builder_name=builder.name,
+          config_name=config.name,
+          description=config.description,
+          version=config.version,
+          feature_information=make_feature_information(info),
+      )
+      config_docs.append(config_doc)
+    return DATASET_WITH_CONFIGS_ENTRY.format(
+        snakecase_name=builder.name,
+        module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
+        cls_url=cls_url(mod_name),
+        config_names="\n".join([
+            CONFIG_BULLET.format(name=config.name,
+                                 description=config.description,
+                                 version=config.version)
+            for config in builder.BUILDER_CONFIGS]),
+        config_cls="%s.%s" % (tfds_mod_name(mod_name),
+                              type(builder.builder_config).__name__),
+        configs="\n".join(config_docs),
+        urls="\n".join([" * " + url for url in info.urls]),
+        supervised_keys=str(info.supervised_keys),
+        citation=info.citation,
+        statistics_information=make_statistics_information(info),
+        description=builder.info.description,
+    )
+  else:
+    info = builder.info
+    return DATASET_ENTRY.format(
+        snakecase_name=builder.name,
+        module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
+        cls_url=cls_url(mod_name),
+        description=info.description,
+        version=info.version,
+        feature_information=make_feature_information(info),
+        statistics_information=make_statistics_information(info),
+        urls="\n".join([" * " + url for url in info.urls]),
+        supervised_keys=str(info.supervised_keys),
+        citation=info.citation,
+    )
 
 
 def create_section_toc(section, builders):
@@ -209,14 +287,15 @@ def make_statistics_information(info):
     # That means that we have yet to calculate the statistics for this.
     return "None computed"
 
-  l = []
-  for k, v in info.splits.items():
-    l.append((k.upper(), v.num_examples))
-  l.append(("ALL", info.num_examples))
+  stats = [(info.num_examples, "ALL")]
+  for split_name, split_info in info.splits.items():
+    stats.append((split_info.num_examples, split_name.upper()))
   # Sort reverse on number of examples.
-  l = reversed(sorted(l, key=lambda x: x[1]))
-  l = "\n".join(["{0:10} | {1:>10,}".format(a[0], a[1]) for a in l])
-  return STATISTICS_TABLE.format(split_statistics=l)
+  stats.sort(reverse=True)
+  stats = "\n".join([
+      "{0:10} | {1:>10,}".format(name, num_exs) for (num_exs, name) in stats
+  ])
+  return STATISTICS_TABLE.format(split_statistics=stats)
 
 
 def dataset_docs_str():

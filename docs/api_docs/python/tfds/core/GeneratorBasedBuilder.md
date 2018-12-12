@@ -7,7 +7,7 @@
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="numpy_iterator"/>
-<meta itemprop="property" content="DATA_CONFIGS"/>
+<meta itemprop="property" content="BUILDER_CONFIGS"/>
 <meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
 </div>
@@ -157,7 +157,7 @@ Generator yielding feature dictionaries
 
 ## Class Members
 
-<h3 id="DATA_CONFIGS"><code>DATA_CONFIGS</code></h3>
+<h3 id="BUILDER_CONFIGS"><code>BUILDER_CONFIGS</code></h3>
 
 <h3 id="builder_configs"><code>builder_configs</code></h3>
 
