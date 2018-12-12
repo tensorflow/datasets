@@ -15,4 +15,4 @@
 
 """Video datasets."""
 
-from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushing
+from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushingSmall
