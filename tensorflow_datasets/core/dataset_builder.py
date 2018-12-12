@@ -22,6 +22,7 @@ from __future__ import print_function
 import abc
 import functools
 import os
+import re
 
 import six
 import tensorflow as tf
