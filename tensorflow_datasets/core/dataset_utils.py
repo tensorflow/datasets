@@ -22,11 +22,6 @@ from __future__ import print_function
 import tensorflow as tf
 from tensorflow_datasets.core import utils
 
-__all__ = [
-    "build_dataset",
-    "iterate_over_dataset",
-]
-
 
 def build_dataset(instruction_dicts,
                   dataset_from_file_fn,

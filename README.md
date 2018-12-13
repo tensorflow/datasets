@@ -54,19 +54,32 @@ mnist_builder.download_and_prepare()
 dataset = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
 ```
 
-### Non-TensorFlow Usage
+### NumPy Usage with `as_numpy()`
 
-All datasets are usable outside of TensorFlow with the `numpy_iterator`
-method, which takes the same arguments as `as_dataset`.
+As a convenience for users that have limited familiarity with TensorFlow,
+`DatasetBuilder` has an `as_numpy()` method that yields batched NumPy arrays.
 
-```python
-import tensorflow_datasets as tfds
-
+```
 mnist_builder = tfds.builder("mnist")
 mnist_builder.download_and_prepare()
-for element in mnist_builder.numpy_iterator(split=tfds.Split.TRAIN):
-  numpy_image, numpy_label = element["image"], element["label"]
+for example in mnist_builder.as_numpy(split=tfds.Split.TRAIN, batch_size=128):
+  numpy_images, numpy_labels = example["image"], example["label"]
 ```
+
+You can also get the entire dataset at once (if it fits in your machine's
+memory) by using `batch_size=-1`:
+
+```
+mnist_builder = tfds.builder("mnist")
+mnist_builder.download_and_prepare()
+numpy_dataset = mnist_builder.as_numpy(split=tfds.Split.TRAIN, batch_size=-1)
+numpy_images, numpy_labels = numpy_dataset["image"], numpy_dataset["label"]
+```
+
+Note that `tf.data.Dataset` objects are iterable when running in Eager mode
+(`tf.enable_eager_execution`), so you can use `builder.as_dataset`, build an
+input pipeline, and then iterate through the dataset to get NumPy arrays as
+well.
 
 Note that the library still requires `tensorflow` as an internal dependency.
 

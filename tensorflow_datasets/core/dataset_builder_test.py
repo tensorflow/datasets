@@ -236,21 +236,22 @@ class DatasetBuilderReadTest(tf.test.TestCase):
   def tearDownClass(cls):
     test_utils.rm_tmp_dir(cls._tfds_tmp_dir)
 
-  def test_numpy_iterator(self):
+  def test_as_numpy(self):
     builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
-    items = []
-    for item in builder.numpy_iterator(split=splits.Split.TRAIN):
-      items.append(item)
-    self.assertEqual(20, len(items))
-    self.assertLess(items[0]["x"], 30)
+    items = builder.as_numpy(split=splits.Split.TRAIN, batch_size=-1)
+    self.assertEqual(items["x"].shape[0], 20)
+    self.assertLess(items["x"][0], 30)
+
+    count = 0
+    for _ in builder.as_numpy(split=splits.Split.TRAIN):
+      count += 1
+    self.assertEqual(count, 20)
 
   def test_supervised_keys(self):
     builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
-    for item in builder.numpy_iterator(
-        split=splits.Split.TRAIN, as_supervised=True):
-      self.assertIsInstance(item, tuple)
-      self.assertEqual(len(item), 2)
-      break
+    x, _ = builder.as_numpy(
+        split=splits.Split.TRAIN, as_supervised=True, batch_size=-1)
+    self.assertEqual(x.shape[0], 20)
 
 
 if __name__ == "__main__":

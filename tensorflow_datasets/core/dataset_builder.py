@@ -258,29 +258,51 @@ class DatasetBuilder(object):
     dataset = dataset.with_options(options)
     return dataset
 
-  def numpy_iterator(self, **as_dataset_kwargs):
-    """Generates numpy elements from the given `tfds.Split`.
-
-    This generator can be useful for non-TensorFlow programs.
+  def as_numpy(self, batch_size=1, **as_dataset_kwargs):
+    # pylint: disable=g-doc-return-or-yield
+    """Generates batches of NumPy arrays from the given `tfds.Split`.
 
     Args:
+      batch_size: `int`, batch size for the NumPy arrays. If -1 or None,
+        `as_numpy` will return the full dataset at once, each feature having its
+        own array.
       **as_dataset_kwargs: Keyword arguments passed on to
         `tfds.core.DatasetBuilder.as_dataset`.
 
-    Returns:
-      Generator yielding feature dictionaries
+    Yields:
+      Feature dictionaries
       `dict<str feature_name, numpy.array feature_val>`.
+
+      If `batch_size` is -1 or None, will return a single dictionary containing
+      the entire dataset instead of yielding batches.
     """
-    def iterate():
+    # pylint: enable=g-doc-return-or-yield
+    def _as_numpy(batch_size):
+      """Internal as_numpy."""
       dataset = self.as_dataset(**as_dataset_kwargs)
-      dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
-      return dataset_utils.iterate_over_dataset(dataset)
+      # Use padded_batch so that features with unknown shape are supported.
+      padded_shapes = self.info.features.shape
+      if as_dataset_kwargs.get("as_supervised", False):
+        input_f, target_f = self.info.supervised_keys
+        padded_shapes = (padded_shapes[input_f], padded_shapes[target_f])
+      if (not batch_size or batch_size <= 0) and batch_size != -1:
+        raise ValueError("batch_size must be a positive number or -1 to return "
+                         "the full dataset, got %s" % str(batch_size))
+      wants_full_dataset = batch_size == -1
+      if wants_full_dataset:
+        batch_size = self.info.num_examples or int(1e10)
+      dataset = dataset.padded_batch(batch_size, padded_shapes)
+      gen = dataset_utils.iterate_over_dataset(dataset)
+      if wants_full_dataset:
+        return next(gen)
+      else:
+        return gen
 
     if tf.executing_eagerly():
-      return iterate()
+      return _as_numpy(batch_size)
     else:
       with tf.Graph().as_default():
-        return iterate()
+        return _as_numpy(batch_size)
 
   def _get_data_dir(self, version=None):
     """Return the data directory of one dataset version.

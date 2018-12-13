@@ -203,7 +203,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       dataset = builder.as_dataset(split=split_name)
       compare_shapes_and_types(builder.info.features.get_tensor_info(),
                                dataset.output_types, dataset.output_shapes)
-      examples = list(builder.numpy_iterator(split=split_name))
+      examples = list(builder.as_numpy(split=split_name))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
       self.assertLen(examples, expected_examples_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
