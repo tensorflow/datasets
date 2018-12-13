@@ -74,3 +74,19 @@ Note that the library still requires `tensorflow` as an internal dependency.
 
 Thanks for considering a contribution. See the
 [doc on adding a new dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+
+#### Disclaimers
+
+This is a utility library that downloads and prepares public datasets. We do
+not host or distribute these datasets, vouch for their quality or fairness, or
+claim that you have license to use the dataset. It is your responsibility to
+determine whether you have permission to use the dataset under the dataset's
+license.
+
+If you're a dataset owner and do not want your dataset to be included in this
+library, please let us know and we'll remove it.
+
+If you're interested in learning more about responsible AI practices, including
+fairness, please see https://ai.google/education/responsible-ai-practices.
+
+`tensorflow/datasets` is Apache 2.0 licensed. See the `LICENSE` file.
