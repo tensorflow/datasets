@@ -23,7 +23,7 @@ if '--nightly' in sys.argv:
   sys.argv.remove('--nightly')
 
 project_name = 'tensorflow-datasets'
-version = '0.0.1'
+version = '0.0.2'
 if nightly:
   project_name = 'tfds-nightly'
   datestring = datetime.datetime.now().strftime('%Y%m%d%H%M')
