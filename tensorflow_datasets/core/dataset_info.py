@@ -36,6 +36,8 @@ from __future__ import print_function
 
 import collections
 import os
+import pprint
+
 import numpy as np
 import tensorflow as tf
 
@@ -60,7 +62,6 @@ INFO_STR = """tfds.core.DatasetInfo(
     features={features},
     num_examples={num_examples},
     splits={splits},
-    examples_per_split={examples_per_split},
     supervised_keys={supervised_keys},
     citation='{citation}',
 )
@@ -338,16 +339,25 @@ class DatasetInfo(object):
         name=self.name, proto=repr(self.as_proto))
 
   def __str__(self):
-    # TODO(afrozm): pprint the features dicts somehow.
+    splits_pprint = "{\n %s\n    }" % (
+        pprint.pformat(
+            {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
+            indent=8, width=1)[1:-1])
+    features_dict = self.features._feature_dict  # pylint: disable=protected-access
+    features_pprint = "FeaturesDict({\n %s\n    }" % (
+        pprint.pformat({
+            k: features_dict[k] for k in sorted(list(features_dict.keys()))
+        }, indent=8, width=1)[1:-1])
+    citation_pprint = '"""\n%s\n    """' % "\n".join(
+        [u" " * 8 + line for line in self.citation.split(u"\n")])
     return INFO_STR.format(
         name=self.name,
         version=self.version,
         description=self.description,
         num_examples=self.num_examples,
-        features=str(self.features),
-        splits=self.splits.keys(),
-        examples_per_split=[s.num_examples for s in self.splits.values()],
-        citation=self.citation,
+        features=features_pprint,
+        splits=splits_pprint,
+        citation=citation_pprint,
         urls=self.urls,
         supervised_keys=self.supervised_keys)
 

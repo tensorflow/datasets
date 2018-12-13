@@ -30,6 +30,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.image import mnist
 
 
 _TFDS_DIR = py_utils.tfds_dir()
@@ -137,13 +138,15 @@ class DatasetInfoTest(tf.test.TestCase):
     self.assertEqual(existing_json, new_json)
 
   def test_reading_from_package_data(self):
-    # We have mnist's 1.0.0 checked in the package data, so this should work.
-    info = dataset_info.DatasetInfo(name="mnist", version="1.0.0")
-    self.assertTrue(info.initialize_from_package_data())
-
+    # info files are packaged in and should be loaded by default
+    info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     # A nominal check to see if we read it.
     self.assertTrue(info.initialized)
     self.assertEqual(10000, info.splits["test"].num_examples)
+
+  def test_str_smoke(self):
+    info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
+    _ = str(info)
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes
   def test_statistics_generation(self):

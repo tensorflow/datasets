@@ -198,6 +198,10 @@ def as_proto_cls(proto_cls):
       def get_proto(self):
         return self.__proto
 
+      def __repr__(self):
+        return "<{cls_name}\n{proto_repr}\n>".format(
+            cls_name=cls.__name__, proto_repr=repr(self.__proto))
+
     decorator_cls = type(cls.__name__, (cls, ProtoCls), {})
     # Class cannot be wraped because __doc__ not overwritable with python2
     return decorator_cls
