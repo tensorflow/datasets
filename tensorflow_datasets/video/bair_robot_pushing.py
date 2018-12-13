@@ -38,6 +38,27 @@ FRAMES_PER_VIDEO = 30
 IMG_SHAPE = (64, 64, 3)
 
 
+_CITATION = """\
+@inproceedings{conf/nips/FinnGL16,
+  added-at = {2016-12-16T00:00:00.000+0100},
+  author = {Finn, Chelsea and Goodfellow, Ian J. and Levine, Sergey},
+  biburl = {https://www.bibsonomy.org/bibtex/230073873b4fe43b314724b772d0f9256/dblp},
+  booktitle = {NIPS},
+  crossref = {conf/nips/2016},
+  editor = {Lee, Daniel D. and Sugiyama, Masashi and Luxburg, Ulrike V. and Guyon, Isabelle and Garnett, Roman},
+  ee = {http://papers.nips.cc/paper/6161-unsupervised-learning-for-physical-interaction-through-video-prediction},
+  interhash = {2e6b416723704f4aa5ad0686ce5a3593},
+  intrahash = {30073873b4fe43b314724b772d0f9256},
+  keywords = {dblp},
+  pages = {64-72},
+  timestamp = {2016-12-17T11:33:40.000+0100},
+  title = {Unsupervised Learning for Physical Interaction through Video Prediction.},
+  url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
+  year = 2016
+}
+"""
+
+
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
@@ -78,8 +99,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         features=features,
         urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
         size_in_bytes=30.0 * tfds.units.GiB,
-        citation="Unsupervised Learning for Physical Interaction through Video "
-        " Prediction. Chelsea Finn, Ian Goodfellow, Sergey Levine",
+        citation=_CITATION,
     )
 
   def _generate_examples(self, filedir):
