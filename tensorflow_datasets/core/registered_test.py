@@ -93,13 +93,28 @@ class RegisteredTest(tf.test.TestCase):
                      builder.as_dataset_kwargs.pop("split"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
-    self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
+    self.assertEqual(dict(data_dir=data_dir, k1=1, config=None), builder.kwargs)
 
     builder = registered.load(
         name, split=splits.Split.TRAIN, data_dir=data_dir,
         download=True, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)
+
+  def test_load_with_config(self):
+    data_dir = "foo"
+    name = "empty_dataset_builder/bar/k1=1"
+    # EmptyDatasetBuilder returns self from as_dataset
+    builder = registered.load(name=name, split=splits.Split.TEST,
+                              data_dir=data_dir)
+    self.assertEqual(dict(data_dir=data_dir, k1=1, config="bar"),
+                     builder.kwargs)
+
+    name = "empty_dataset_builder/bar"
+    builder = registered.load(name=name, split=splits.Split.TEST,
+                              data_dir=data_dir)
+    self.assertEqual(dict(data_dir=data_dir, config="bar"),
+                     builder.kwargs)
 
 
 if __name__ == "__main__":

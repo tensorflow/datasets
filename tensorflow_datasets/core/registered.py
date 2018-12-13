@@ -38,8 +38,14 @@ __all__ = [
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
 
-_STR_KWARGS_ERR = ("To pass keyword arguments to DatasetBuilders by string, "
-                   "the format must be 'dataset_name/kwarg1=val1,kwarg2=val2'")
+_NAME_STR_ERR = """\
+Parsing builder name string failed.
+The builder name string must be in one of the following formats:
+  * "dataset_name"
+  * "dataset_name/config_name"
+  * "dataset_name/kwarg1=val1,kwarg2=val2"
+  * "dataset_name/config_name/kwarg1=val1,kwarg2=val2"
+"""
 
 
 class DatasetNotFoundError(ValueError):
@@ -82,10 +88,14 @@ def builder(name, **ctor_kwargs):
 
   Args:
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
-      version of the class name). As a convenience, this string may contain
-      comma-separated keyword arguments for the builder separated from the name
-      by a "/". For example `"foo_bar/a=True,b=3"` would use the `FooBar`
-      dataset with keyword arguments `a=True` and `b=3`.
+      version of the class name). This can be either `"dataset_name"` or
+      `"dataset_name/config_name"` for datasets with `BuilderConfig`s.
+      As a convenience, this string may contain comma-separated keyword
+      arguments for the builder. For example `"foo_bar/a=True,b=3"` would use
+      the `FooBar` dataset passing the keyword arguments `a=True` and `b=3`
+      (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
+      use the `"zoo"` config and pass to the builder keyword arguments `a=True`
+      and `b=3`).
     **ctor_kwargs: `dict` of keyword arguments passed to the `DatasetBuilder`.
       These will override keyword arguments passed in `name`, if any.
 
@@ -137,10 +147,14 @@ def load(name,
 
   Args:
     name: `str`, the registered name of the `DatasetBuilder` (the snake case
-      version of the class name). As a convenience, this string may contain
-      comma-separated keyword arguments for the builder. For example
-      `"foo_bar/a=True,b=3"` would use the `FooBar` dataset passing the keyword
-      arguments `a=True` and `b=3`.
+      version of the class name). This can be either `"dataset_name"` or
+      `"dataset_name/config_name"` for datasets with `BuilderConfig`s.
+      As a convenience, this string may contain comma-separated keyword
+      arguments for the builder. For example `"foo_bar/a=True,b=3"` would use
+      the `FooBar` dataset passing the keyword arguments `a=True` and `b=3`
+      (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
+      use the `"zoo"` config and pass to the builder keyword arguments `a=True`
+      and `b=3`).
     split: `tfds.Split`, which split of the data to load.
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
@@ -197,22 +211,52 @@ def load(name,
 
 def _dataset_name_and_kwargs_from_name_str(name_str):
   """Extract kwargs from name str."""
-  if "/" not in name_str:
-    if "," in name_str:
-      raise ValueError(_STR_KWARGS_ERR)
-    return name_str, {}
+  num_slashes = name_str.count("/")
+  has_kwargs = "," in name_str or "=" in name_str
 
   try:
-    dataset_name, kwargs_str = name_str.split("/")
-    kwarg_strs = kwargs_str.split(",")
-    kwargs = {}
-    for kwarg_str in kwarg_strs:
-      kwarg_name, kwarg_val = kwarg_str.split("=")
-      kwargs[kwarg_name] = _cast_to_pod(kwarg_val)
+    if not num_slashes:
+      # 1. dataset_name
+      if has_kwargs:
+        raise ValueError(_NAME_STR_ERR)
+      return name_str, {}
+
+    name_splits = name_str.split("/")
+    if has_kwargs:
+      if num_slashes == 1:
+        # 2. dataset_name/kwargs
+        dataset_name, kwargs_str = name_splits
+        config = None
+      else:
+        if num_slashes > 2:
+          raise ValueError(_NAME_STR_ERR)
+        assert num_slashes == 2
+        # 3. dataset_name/config_name/kwargs
+        dataset_name, config, kwargs_str = name_splits
+    else:
+      # 4. dataset_name/config_name
+      dataset_name, config = name_splits
+      kwargs_str = ""
+
+    kwargs = _kwargs_str_to_kwargs(kwargs_str)
+    if "config" in kwargs and config:
+      raise ValueError("Cannot pass config twice. Got %s" % name_str)
+    kwargs["config"] = config
     return dataset_name, kwargs
   except:
-    tf.logging.error()
+    tf.logging.error(_NAME_STR_ERR)
     raise
+
+
+def _kwargs_str_to_kwargs(kwargs_str):
+  if not kwargs_str:
+    return {}
+  kwarg_strs = kwargs_str.split(",")
+  kwargs = {}
+  for kwarg_str in kwarg_strs:
+    kwarg_name, kwarg_val = kwarg_str.split("=")
+    kwargs[kwarg_name] = _cast_to_pod(kwarg_val)
+  return kwargs
 
 
 def _cast_to_pod(val):
