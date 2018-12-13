@@ -56,6 +56,28 @@ ATTR_HEADINGS = (
 ).split()
 
 
+_CITATION = """\
+@inproceedings{conf/iccv/LiuLWT15,
+  added-at = {2018-10-09T00:00:00.000+0200},
+  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},
+  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},
+  booktitle = {ICCV},
+  crossref = {conf/iccv/2015},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},
+  interhash = {3f735aaa11957e73914bbe2ca9d5e702},
+  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},
+  isbn = {978-1-4673-8391-2},
+  keywords = {dblp},
+  pages = {3730-3738},
+  publisher = {IEEE Computer Society},
+  timestamp = {2018-10-11T11:43:28.000+0200},
+  title = {Deep Learning Face Attributes in the Wild.},
+  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},
+  year = 2015
+}
+"""
+
+
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
@@ -78,9 +100,8 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
         }),
         urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],
         size_in_bytes=2 * tfds.units.GiB,
-        citation="Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang "
-        "Deep Learning Face Attributes in the Wild "
-        "ICCV 2015")
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     extracted_dirs = dl_manager.download_and_extract({

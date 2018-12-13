@@ -32,6 +32,16 @@ import tensorflow_datasets.public_api as tfds
 URL = "http://ufldl.stanford.edu/housenumbers/"
 
 
+_CITATION = """\
+@article{Netzer2011,
+author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
+booktitle = {Advances in Neural Information Processing Systems ({NIPS})},
+title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
+year = {2011}
+}
+"""
+
+
 class SvhnCropped(tfds.core.GeneratorBasedBuilder):
   """Street View House Numbers (SVHN) Dataset, cropped version."""
 
@@ -51,11 +61,7 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
         urls=[URL],
         download_checksums=tfds.download.load_checksums(self.name),
         size_in_bytes=1.5 * tfds.units.GiB,
-        citation=(
-            "Yuval Netzer, Tao Wang, Adam Coates, Alessandro Bissacco, Bo Wu, "
-            "Andrew Y. Ng, Reading Digits in Natural Images with Unsupervised "
-            "Feature Learning, NIPS Workshop on Deep Learning and Unsupervised "
-            "Feature Learning, 2011."),
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):

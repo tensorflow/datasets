@@ -160,4 +160,4 @@ class Resource(object):
                 original_fname=original_fname)
     tf.logging.info('Writing INFO file %s ...' % self.info_path)
     with py_utils.atomic_write(self.info_path, 'w') as info_f:
-      json.dump(info, info_f)
+      json.dump(info, info_f, sort_keys=True)

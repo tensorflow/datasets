@@ -329,5 +329,9 @@ def dataset_docs_str():
   return full_doc
 
 
-if __name__ == "__main__":
+def main(_):
   print(dataset_docs_str())
+
+
+if __name__ == "__main__":
+  tf.app.run()

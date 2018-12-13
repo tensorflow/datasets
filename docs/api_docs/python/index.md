@@ -15,10 +15,7 @@
 *  <a href="./tfds/core/SplitInfo.md"><code>tfds.core.SplitInfo</code></a>
 *  <a href="./tfds/download.md"><code>tfds.download</code></a>
 *  <a href="./tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
-*  <a href="./tfds/download/ExtractInfo.md"><code>tfds.download.ExtractInfo</code></a>
 *  <a href="./tfds/download/GenerateMode.md"><code>tfds.download.GenerateMode</code></a>
-*  <a href="./tfds/download/UrlExtractInfo.md"><code>tfds.download.UrlExtractInfo</code></a>
-*  <a href="./tfds/download/UrlInfo.md"><code>tfds.download.UrlInfo</code></a>
 *  <a href="./tfds/download/load_checksums.md"><code>tfds.download.load_checksums</code></a>
 *  <a href="./tfds/features.md"><code>tfds.features</code></a>
 *  <a href="./tfds/features/ClassLabel.md"><code>tfds.features.ClassLabel</code></a>

@@ -431,7 +431,8 @@ def write_lines_to_file(cls_name, filename, lines, metadata_dict):
   """Writes lines to file prepended by header and metadata."""
   metadata_dict = metadata_dict or {}
   header_line = u"%s%s" % (_HEADER_PREFIX, cls_name)
-  metadata_line = u"%s%s" % (_METADATA_PREFIX, json.dumps(metadata_dict))
+  metadata_line = u"%s%s" % (_METADATA_PREFIX,
+                             json.dumps(metadata_dict, sort_keys=True))
   with tf.gfile.Open(filename, "wb") as f:
     for line in [header_line, metadata_line]:
       f.write(tf.compat.as_bytes(line))

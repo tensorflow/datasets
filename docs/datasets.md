@@ -21,16 +21,19 @@ Datasets
   * [`"fashion_mnist"`](#fashion_mnist)
   * [`"image_label_folder"`](#image_label_folder)
   * [`"mnist"`](#mnist)
+  * [`"svhn_cropped"`](#svhn_cropped)
 * `text`
   * [`"imdb_reviews"`](#imdb_reviews)
 * `video`
-  * [`"bair_robot_pushing"`](#bair_robot_pushing)
+  * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
 
 ---
 
 # `image`
 
 ## `"celeb_a"`
+
+From http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 
 Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. These pictures are cropped.
 
@@ -61,12 +64,32 @@ None
 
 ### Citation
 ```
-Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang Deep Learning Face Attributes in the Wild ICCV 2015
+@inproceedings{conf/iccv/LiuLWT15,
+  added-at = {2018-10-09T00:00:00.000+0200},
+  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},
+  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},
+  booktitle = {ICCV},
+  crossref = {conf/iccv/2015},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},
+  interhash = {3f735aaa11957e73914bbe2ca9d5e702},
+  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},
+  isbn = {978-1-4673-8391-2},
+  keywords = {dblp},
+  pages = {3730-3738},
+  publisher = {IEEE Computer Society},
+  timestamp = {2018-10-11T11:43:28.000+0200},
+  title = {Deep Learning Face Attributes in the Wild.},
+  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},
+  year = 2015
+}
+
 ```
 
 ---
 
 ## `"cifar10"`
+
+From https://www.cs.toronto.edu/~kriz/cifar.html
 
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.
 
@@ -95,12 +118,20 @@ TEST       |     10,000
 
 ### Citation
 ```
-Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf
+@TECHREPORT{Krizhevsky09learningmultiple,
+    author = {Alex Krizhevsky},
+    title = {Learning multiple layers of features from tiny images},
+    institution = {},
+    year = {2009}
+}
+
 ```
 
 ---
 
 ## `"cifar100"`
+
+From https://www.cs.toronto.edu/~kriz/cifar.html
 
 This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a "fine" label (the class to which it belongs) and a "coarse" label (the superclass to which it belongs).
 
@@ -129,12 +160,20 @@ TEST       |     10,000
 
 ### Citation
 ```
-Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf
+@TECHREPORT{Krizhevsky09learningmultiple,
+    author = {Alex Krizhevsky},
+    title = {Learning multiple layers of features from tiny images},
+    institution = {},
+    year = {2009}
+}
+
 ```
 
 ---
 
 ## `"diabetic_retinopathy_detection"`
+
+From https://www.kaggle.com/c/diabetic-retinopathy-detection/data
 
 A large set of high-resolution retina images taken under a variety of imaging conditions.
 
@@ -172,6 +211,8 @@ None
 
 ## `"fashion_mnist"`
 
+From https://github.com/zalandoresearch/fashion-mnist
+
 Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.
 
 [`tfds.image.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py) v1.0.0
@@ -199,12 +240,29 @@ TEST       |     10,000
 
 ### Citation
 ```
-Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms. Han Xiao, Kashif Rasul, Roland Vollgraf. arXiv:1708.07747
+@article{journals/corr/abs-1708-07747,
+  added-at = {2018-08-13T00:00:00.000+0200},
+  author = {Xiao, Han and Rasul, Kashif and Vollgraf, Roland},
+  biburl = {https://www.bibsonomy.org/bibtex/2c1bcf55a1de644db3d7b0a4a9b7a778e/dblp},
+  ee = {http://arxiv.org/abs/1708.07747},
+  interhash = {0c81f9a6170118f14703b6796101ce40},
+  intrahash = {c1bcf55a1de644db3d7b0a4a9b7a778e},
+  journal = {CoRR},
+  keywords = {dblp},
+  timestamp = {2018-08-14T12:22:49.000+0200},
+  title = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms.},
+  url = {http://dblp.uni-trier.de/db/journals/corr/corr1708.html#abs-1708-07747},
+  volume = {abs/1708.07747},
+  year = 2017
+}
+
 ```
 
 ---
 
 ## `"image_label_folder"`
+
+From <no known url>
 
 Generic image classification dataset.
 
@@ -235,6 +293,8 @@ None computed
 
 ## `"mnist"`
 
+From http://yann.lecun.com/exdb/mnist/
+
 The MNIST database of handwritten digits.
 
 [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py) v1.0.0
@@ -262,8 +322,66 @@ TEST       |     10,000
 
 ### Citation
 ```
-Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
-[Online]. Available: http://yann.lecun.com/exdb/mnist/
+@article{lecun-mnisthandwrittendigit-2010,
+  added-at = {2010-06-28T21:16:30.000+0200},
+  author = {LeCun, Yann and Cortes, Corinna},
+  biburl = {https://www.bibsonomy.org/bibtex/2935bad99fa1f65e03c25b315aa3c1032/mhwombat},
+  groups = {public},
+  howpublished = {http://yann.lecun.com/exdb/mnist/},
+  interhash = {21b9d0558bd66279df9452562df6e6f3},
+  intrahash = {935bad99fa1f65e03c25b315aa3c1032},
+  keywords = {MSc _checked character_recognition mnist network neural},
+  lastchecked = {2016-01-14 14:24:11},
+  timestamp = {2016-07-12T19:25:30.000+0200},
+  title = {{MNIST} handwritten digit database},
+  url = {http://yann.lecun.com/exdb/mnist/},
+  username = {mhwombat},
+  year = 2010
+}
+
+```
+
+---
+
+## `"svhn_cropped"`
+
+From http://ufldl.stanford.edu/housenumbers/
+
+The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
+
+[`tfds.image.svhn.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/svhn.py) v1.0.0
+
+### Features
+Name  | Type | Shape
+:---- | :--- | :----
+image|tf.uint8|(32, 32, 3)
+label|tf.int64|()
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    630,420
+EXTRA      |    531,131
+TRAIN      |     73,257
+TEST       |     26,032
+
+
+### Urls
+ * http://ufldl.stanford.edu/housenumbers/
+
+### Supervised Keys
+(u'image', u'label')
+
+### Citation
+```
+@article{Netzer2011,
+author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
+booktitle = {Advances in Neural Information Processing Systems ({NIPS})},
+title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
+year = {2011}
+}
+
 ```
 
 ---
@@ -272,6 +390,8 @@ Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
 # `text`
 
 ## `"imdb_reviews"`
+
+From http://ai.stanford.edu/~amaas/data/sentiment/
 
 Large Movie Review Dataset.
 This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing.
@@ -362,19 +482,21 @@ TEST       |     25,000
 
 # `video`
 
-## `"bair_robot_pushing"`
+## `"bair_robot_pushing_small"`
 
-This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects.
+From https://sites.google.com/site/brainrobotdata/home/push-dataset
 
-[`tfds.video.bair_robot_pushing.BairRobotPushing`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py) v0.1.0
+This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
+
+[`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py) v1.0.0
 
 ### Features
 Name  | Type | Shape
 :---- | :--- | :----
-action|tf.float32|(30, 4)
-endeffector_pos|tf.float32|(30, 3)
-video_aux1|tf.uint8|(30, 64, 64, 3)
-video_main|tf.uint8|(30, 64, 64, 3)
+action|tf.float32|(4,)
+endeffector_pos|tf.float32|(3,)
+image_aux1|tf.uint8|(64, 64, 3)
+image_main|tf.uint8|(64, 64, 3)
 
 
 ### Statistics
@@ -393,7 +515,24 @@ None
 
 ### Citation
 ```
-Unsupervised Learning for Physical Interaction through Video  Prediction. Chelsea Finn, Ian Goodfellow, Sergey Levine
+@inproceedings{conf/nips/FinnGL16,
+  added-at = {2016-12-16T00:00:00.000+0100},
+  author = {Finn, Chelsea and Goodfellow, Ian J. and Levine, Sergey},
+  biburl = {https://www.bibsonomy.org/bibtex/230073873b4fe43b314724b772d0f9256/dblp},
+  booktitle = {NIPS},
+  crossref = {conf/nips/2016},
+  editor = {Lee, Daniel D. and Sugiyama, Masashi and Luxburg, Ulrike V. and Guyon, Isabelle and Garnett, Roman},
+  ee = {http://papers.nips.cc/paper/6161-unsupervised-learning-for-physical-interaction-through-video-prediction},
+  interhash = {2e6b416723704f4aa5ad0686ce5a3593},
+  intrahash = {30073873b4fe43b314724b772d0f9256},
+  keywords = {dblp},
+  pages = {64-72},
+  timestamp = {2016-12-17T11:33:40.000+0100},
+  title = {Unsupervised Learning for Physical Interaction through Video Prediction.},
+  url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
+  year = 2016
+}
+
 ```
 
 ---

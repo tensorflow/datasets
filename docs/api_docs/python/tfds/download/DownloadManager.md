@@ -62,8 +62,7 @@ data_dirs['test']
 ```
 
 For more customization on the download/extraction (ex: passwords, output_name,
-...), you can pass <a href="../../tfds/download/UrlInfo.md"><code>tfds.download.UrlInfo</code></a> `tfds.download.ExtractInfo()` or
-<a href="../../tfds/download/UrlExtractInfo.md"><code>tfds.download.UrlExtractInfo</code></a> as arguments.
+...), you can pass `resource.Resource` as argument.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -120,14 +119,14 @@ Download given url(s).
 #### Args:
 
 * <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
-    url can be a `str` or `UrlInfo`.
+    url can be a `str` or `Resource`.
 * <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
 
 #### Returns:
 
 downloaded_path(s): `str`, The downloaded paths matching the given input
-  url_or_urls
+  url_or_urls.
 
 <h3 id="download_and_extract"><code>download_and_extract</code></h3>
 
@@ -138,7 +137,7 @@ download_and_extract(
 )
 ```
 
-Downlaod and extract given resources.
+Downlaod and extract given url_or_urls.
 
 Is roughly equivalent to:
 
@@ -149,17 +148,16 @@ extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
 #### Args:
 
 * <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
-    url can be a `str` or `UrlExtractInfo`.
+    url can be a `str` or `Resource`.
 * <b>`async_`</b>: `bool`, defaults to False. If True, returns promise on result.
 
-If not explicitly specified in `UrlExtractInfo`, the extraction method will
-automatically be deduced.
+If not explicitly specified in `Resource`, the extraction method will
+automatically be deduced from downloaded file name.
 
 
 #### Returns:
 
-extracted_path(s): `str`, The extracted paths matching the given input
-  path_or_paths
+extracted_path(s): `str`, extracted paths of given URL(s).
 
 <h3 id="extract"><code>extract</code></h3>
 
@@ -175,17 +173,17 @@ Extract given path(s).
 #### Args:
 
 * <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract. Each
-    path can be a `str` or `ExtractInfo`.
+    path can be a `str` or `Resource`.
 * <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
-If not explicitly specified in `ExtractInfo`, the extraction method will
-automatically be deduced.
+If not explicitly specified in `Resource`, the extraction method is deduced
+from downloaded file name.
 
 
 #### Returns:
 
 extracted_path(s): `str`, The extracted paths matching the given input
-  path_or_paths
+  path_or_paths.
 
 
 

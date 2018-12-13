@@ -154,7 +154,7 @@ class Image(feature.FeatureConnector):
       json.dump({
           'shape': [-1 if d is None else d for d in self._shape],
           'encoding_format': self._encoding_format,
-      }, f)
+      }, f, sort_keys=True)
 
   def load_metadata(self, data_dir, feature_name=None):
     """See base class for details."""

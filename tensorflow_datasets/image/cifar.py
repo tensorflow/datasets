@@ -34,6 +34,16 @@ _CIFAR_IMAGE_SIZE = 32
 _CIFAR_IMAGE_SHAPE = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
 
 
+_CITATION = """\
+@TECHREPORT{Krizhevsky09learningmultiple,
+    author = {Alex Krizhevsky},
+    title = {Learning multiple layers of features from tiny images},
+    institution = {},
+    year = {2009}
+}
+"""
+
+
 class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
@@ -52,10 +62,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
         urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
         download_checksums=tfds.download.load_checksums(self.name),
         size_in_bytes=162.6 * tfds.units.MiB,
-        citation=("Learning Multiple Layers of Features from Tiny Images, "
-                  "Alex Krizhevsky, 2009. "
-                  "https://www.cs.toronto.edu/~kriz/"
-                  "learning-features-2009-TR.pdf")
+        citation=_CITATION,
     )
 
   @property
@@ -205,10 +212,7 @@ class Cifar100(Cifar10):
         urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
         download_checksums=tfds.download.load_checksums(self.name),
         size_in_bytes=161.2 * tfds.units.MiB,
-        citation=("Learning Multiple Layers of Features from Tiny Images, "
-                  "Alex Krizhevsky, 2009. "
-                  "https://www.cs.toronto.edu/~kriz/"
-                  "learning-features-2009-TR.pdf")
+        citation=_CITATION,
     )
 
 

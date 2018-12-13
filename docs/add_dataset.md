@@ -158,8 +158,9 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
         urls=["https://dataset-homepage.org"],
         # Approximate dataset size (used to raise warning before download).
         size_in_bytes=162.6 * tfds.units.MiB,
-        # Citation to use for using this dataset
-        citation="Dataset Paper Title, A. Smith, 2009.",
+        # Citation to use for using this dataset in the Bibtex format.
+        citation=r"""@article{my-awesome-dataset-2020,
+                              author = {Smith, John},"}""",
     )
 ```
 

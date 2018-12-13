@@ -100,7 +100,7 @@ class DownloadManagerTest(tf.test.TestCase):
     self.gfile = gfile.start()
 
   def _write_info(self, path, info):
-    content = json.dumps(info)
+    content = json.dumps(info, sort_keys=True)
     self._add_file(path, content)
 
   def _get_manager(self, force_download=False, force_extraction=False,

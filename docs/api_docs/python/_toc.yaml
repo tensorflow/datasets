@@ -38,16 +38,10 @@ toc:
       path: /datasets/api_docs/python/tfds/download
     - title: DownloadManager
       path: /datasets/api_docs/python/tfds/download/DownloadManager
-    - title: ExtractInfo
-      path: /datasets/api_docs/python/tfds/download/ExtractInfo
     - title: GenerateMode
       path: /datasets/api_docs/python/tfds/download/GenerateMode
     - title: load_checksums
       path: /datasets/api_docs/python/tfds/download/load_checksums
-    - title: UrlExtractInfo
-      path: /datasets/api_docs/python/tfds/download/UrlExtractInfo
-    - title: UrlInfo
-      path: /datasets/api_docs/python/tfds/download/UrlInfo
   - title: tfds.features
     section:
     - title: Overview
