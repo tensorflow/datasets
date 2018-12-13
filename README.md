@@ -10,6 +10,9 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
 Try it in a [Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb).
 
+See all our datasets on our
+[datasets documentation page](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md).
+
 ### Installation
 
 ```
@@ -50,8 +53,31 @@ mnist_builder = tfds.builder("mnist")
 
 # Download the dataset
 mnist_builder.download_and_prepare()
+
 # Construct a tf.data.Dataset
 dataset = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
+
+# Get the `DatasetInfo` object, which contains useful information about the
+# dataset and its features
+info = mnist_builder.info
+print(info)
+
+  tfds.core.DatasetInfo(
+      name='mnist',
+      version=1.0.0,
+      description='The MNIST database of handwritten digits.',
+      urls=[u'http://yann.lecun.com/exdb/mnist/'],
+      features=FeaturesDict({
+          'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+          'label': ClassLabel(shape=(), dtype=tf.int64)
+      }),
+      num_examples=70000,
+      splits=[u'test', u'train'],
+      examples_per_split=[10000L, 60000L],
+      supervised_keys=(u'image', u'label'),
+      citation='Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
+  [Online]. Available: http://yann.lecun.com/exdb/mnist/',
+  )
 ```
 
 ### NumPy Usage with `as_numpy()`
