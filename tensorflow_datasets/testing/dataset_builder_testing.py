@@ -107,6 +107,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   def setUp(self):
     super(TestCase, self).setUp()
+    self.patchers = []
     # New data_dir and builder for each test
     self.data_dir = test_utils.make_tmp_dir(self.get_temp_dir())
     self.builder = self._make_builder()
@@ -116,19 +117,29 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
 
+  def tearDown(self):
+    super(TestCase, self).tearDown()
+    for patcher in self.patchers:
+      patcher.stop()
+
   def _mock_out_forbidden_os_functions(self):
     """Raise error if forbidden os functions are called instead of tf.gfile."""
     err = AssertionError("Do not use `os`, but `tf.gfile` module instead.")
     mock_os = tf.test.mock.Mock(os, path=os.path)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       getattr(mock_os, fop).side_effect = err
-    tf.test.mock.patch(self.DATASET_CLASS.__module__ + ".os", mock_os).start()
+    os_patcher = tf.test.mock.patch(
+        self.DATASET_CLASS.__module__ + ".os", mock_os, create=True)
+    os_patcher.start()
+    self.patchers.append(os_patcher)
+
     mock_builtins = __builtins__.copy()
     mock_builtins["open"] = tf.test.mock.Mock(side_effect=err)
-    tf.test.mock.patch(
+    open_patcher = tf.test.mock.patch(
         self.DATASET_CLASS.__module__ + ".__builtins__",
-        mock_builtins
-        ).start()
+        mock_builtins)
+    open_patcher.start()
+    self.patchers.append(open_patcher)
 
   def test_baseclass(self):
     self.assertIsInstance(
