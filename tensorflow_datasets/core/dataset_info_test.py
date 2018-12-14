@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import json
 import os
+import tempfile
 import numpy as np
 import tensorflow as tf
 
@@ -29,6 +30,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
 
@@ -40,6 +42,15 @@ _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 
+  VERSION = utils.Version("1.0.0")
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": tf.int64}),
+        supervised_keys=("x", "x"),
+    )
+
   def _split_generators(self, dl_manager):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
@@ -48,12 +59,6 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
         name=[splits.Split.TRAIN, splits.Split.TEST],
         num_shards=[2, 1],
     )]
-
-  def _info(self):
-    return dataset_info.DatasetInfo(
-        features=features.FeaturesDict({"x": tf.int64}),
-        supervised_keys=("x", "x"),
-    )
 
   def _generate_examples(self):
     for i in range(30):
@@ -64,6 +69,7 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
 
   def _info(self):
     return dataset_info.DatasetInfo(
+        builder=self,
         features=features.FeaturesDict({"im": features.Image()}),
         supervised_keys=("im", "im"),
     )
@@ -81,20 +87,29 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
 
 class DatasetInfoTest(tf.test.TestCase):
 
+  @classmethod
+  def setUpClass(cls):
+    cls._tfds_tmp_dir = test_utils.make_tmp_dir()
+    cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
+
+  @classmethod
+  def tearDownClass(cls):
+    test_utils.rm_tmp_dir(cls._tfds_tmp_dir)
+
   def test_undefined_dir(self):
     with self.assertRaisesWithPredicateMatch(ValueError,
                                              "undefined dataset_info_dir"):
-      info = dataset_info.DatasetInfo()
+      info = dataset_info.DatasetInfo(builder=self._builder)
       info.read_from_directory(None)
 
   def test_non_existent_dir(self):
-    info = dataset_info.DatasetInfo()
+    info = dataset_info.DatasetInfo(builder=self._builder)
     info.read_from_directory(_NON_EXISTENT_DIR)
 
     self.assertFalse(info.initialized)
 
   def test_reading(self):
-    info = dataset_info.DatasetInfo()
+    info = dataset_info.DatasetInfo(builder=self._builder)
     info.read_from_directory(_INFO_DIR)
 
     # Assert that we read the file and initialized DatasetInfo.
@@ -119,7 +134,7 @@ class DatasetInfoTest(tf.test.TestCase):
 
   def test_writing(self):
     # First read in stuff.
-    info = dataset_info.DatasetInfo()
+    info = dataset_info.DatasetInfo(builder=self._builder)
     info.read_from_directory(_INFO_DIR)
 
     # Read the json file into a string.
@@ -138,8 +153,12 @@ class DatasetInfoTest(tf.test.TestCase):
     self.assertEqual(existing_json, new_json)
 
   def test_reading_from_package_data(self):
-    # info files are packaged in and should be loaded by default
-    info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
+    # We have mnist's 1.0.0 checked in the package data, so this should work.
+    mnist_builder = mnist.MNIST(
+        data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
+    info = dataset_info.DatasetInfo(builder=mnist_builder)
+    info = mnist_builder.info
+
     # A nominal check to see if we read it.
     self.assertTrue(info.initialized)
     self.assertEqual(10000, info.splits["test"].num_examples)
@@ -177,15 +196,16 @@ class DatasetInfoTest(tf.test.TestCase):
       self.assertEqual(-1, schema_feature.shape.dim[1].size)
       self.assertEqual(3, schema_feature.shape.dim[2].size)
 
-  def test_updates_dynamic_properties_on_version_match(self):
-    info = dataset_info.DatasetInfo(version="1.0.0",
+  def test_updates_on_packaged_data(self):
+
+    info = dataset_info.DatasetInfo(builder=self._builder,
                                     description="won't be updated")
     # No statistics in the above.
     self.assertEqual(0, info.num_examples)
     self.assertEqual(0, len(info.as_proto.schema.feature))
 
     # Partial update will happen here.
-    info.read_from_directory(_INFO_DIR)
+    info.read_from_directory(_INFO_DIR, from_packaged_data=True)
 
     # Assert that description (things specified in the code) didn't change
     # but statistics are updated.
@@ -195,21 +215,6 @@ class DatasetInfoTest(tf.test.TestCase):
     self.assertEqual(70000, info.num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
 
-  def test_full_update_on_version_mismatch(self):
-    info = dataset_info.DatasetInfo(version="2.0.0",
-                                    description="will be updated")
-    # No statistics in the above.
-    self.assertEqual(0, info.num_examples)
-    self.assertEqual(0, len(info.as_proto.schema.feature))
-
-    # Full update should happen here.
-    info.read_from_directory(_INFO_DIR)
-
-    # Assert that description (things specified in the code) didn't change
-    # but statistics are updated.
-    self.assertNotEqual("will be updated", info.description)
-    self.assertEqual(70000, info.num_examples)
-    self.assertEqual(2, len(info.as_proto.schema.feature))
 
 if __name__ == "__main__":
   tf.test.main()

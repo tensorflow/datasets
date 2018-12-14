@@ -84,23 +84,20 @@ class DatasetInfo(object):
 
   @api_utils.disallow_positional_args
   def __init__(self,
-               name=None,
+               builder,
                description=None,
-               version=None,
                features=None,
                supervised_keys=None,
                splits=None,
                urls=None,
                download_checksums=None,
                size_in_bytes=0,
-               config_name=None,
                citation=None):
     """Constructs DatasetInfo.
 
     Args:
-      name: `str`, Name of the dataset, usually set to builder.name.
+      builder: `DatasetBuilder`, dataset builder for this info.
       description: `str`, description of this dataset.
-      version: `str`, semantic version of the dataset (ex: '1.2.0')
       features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
@@ -112,16 +109,14 @@ class DatasetInfo(object):
         If a url is not listed, its checksum is not checked.
       size_in_bytes: `int`, optional, approximate size in bytes of the raw
         size of the dataset that we will be downloading from the internet.
-      config_name: `str`, BuilderConfig name.
       citation: `str`, optional, the citation to use for this dataset.
     """
-    version = version or "0.0.0"
-    utils.str_to_version(version)  # Ensure that the version is valid
+    self._builder = builder
 
     self._info_proto = dataset_info_pb2.DatasetInfo(
-        name=name,
+        name=builder.name,
         description=description,
-        version=version,
+        version=str(builder._version),  # pylint: disable=protected-access
         size_in_bytes=int(size_in_bytes),
         citation=citation)
     if urls:
@@ -135,8 +130,6 @@ class DatasetInfo(object):
       assert len(supervised_keys) == 2
       self._info_proto.supervised_keys.input = supervised_keys[0]
       self._info_proto.supervised_keys.output = supervised_keys[1]
-
-    self._config_name = config_name
 
     # Is this object initialized with both the static and the dynamic data?
     self._fully_initialized = False
@@ -155,7 +148,7 @@ class DatasetInfo(object):
 
   @property
   def version(self):
-    return self.as_proto.version
+    return utils.Version(self.as_proto.version)
 
   @property
   def citation(self):
@@ -217,8 +210,8 @@ class DatasetInfo(object):
   def _dataset_info_filename(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
-  def compute_dynamic_properties(self, builder):
-    self._compute_dynamic_properties(builder)
+  def compute_dynamic_properties(self):
+    self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
 
   def _compute_dynamic_properties(self, builder):
@@ -274,7 +267,7 @@ class DatasetInfo(object):
     with tf.gfile.Open(self._dataset_info_filename(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir):
+  def read_from_directory(self, dataset_info_dir, from_packaged_data=False):
     """Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -285,6 +278,8 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
+      from_packaged_data: `bool`, If data is restored from packaged data,
+        then only the informations not defined in the code are updated
 
     Returns:
       True if we were able to initialize using `dataset_info_dir`, else false.
@@ -314,25 +309,33 @@ class DatasetInfo(object):
     if self.features:
       self.features.load_metadata(dataset_info_dir)
 
-    # If the version in the code and version in the given file match, then leave
-    # the rest alone as it is specified in the code.
-    if parsed_proto.version != self._info_proto.version:
+    # If we are restoring on-disk data, then we also restore all dataste info
+    # information from the previously saved proto.
+    # If we are loading from packaged data (only possible when we do not
+    # restore previous data), then do not restore the info which are already
+    # defined in the code. Otherwise, we would overwrite code info.
+    if not from_packaged_data:
       # Update the full proto
       self._info_proto = parsed_proto
 
-    # Mark as fully initialized
+    if self._builder._version != self.version:  # pylint: disable=protected-access
+      raise AssertionError(
+          "The constructed DatasetInfo instance and the restored proto version "
+          "do not match. Builder version: {}. Proto version: {}".format(
+              self._builder._version, self.version))  # pylint: disable=protected-access
+
+    # Mark as fully initialized.
     self._fully_initialized = True
 
     return True
 
   def initialize_from_package_data(self):
     """Initialize DatasetInfo from package data, returns True on success."""
-    info_dir = os.path.join(utils.tfds_dir(), "dataset_info", self.name)
-    if self._config_name:
-      info_dir = os.path.join(info_dir, self._config_name, self.version)
-    else:
-      info_dir = os.path.join(info_dir, self.version)
-    return self.read_from_directory(info_dir)
+    pkg_path = os.path.join(utils.tfds_dir(), "dataset_info", self.name)
+    if self._builder.builder_config:
+      pkg_path = os.path.join(pkg_path, self._builder.builder_config.name)
+    pkg_path = os.path.join(pkg_path, str(self.version))
+    return self.read_from_directory(pkg_path, from_packaged_data=True)
 
   def __repr__(self):
     return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(

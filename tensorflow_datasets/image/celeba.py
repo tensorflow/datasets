@@ -81,13 +81,14 @@ _CITATION = """\
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
+  VERSION = tfds.Version("0.2.0")
+
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("Large-scale CelebFaces Attributes, CelebA."
                      "Set of ~30k celebrities pictures. "
                      "These pictures are cropped."),
-        version="0.2.0",
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(

@@ -208,22 +208,6 @@ def as_proto_cls(proto_cls):
   return decorator
 
 
-def str_to_version(version_str):
-  """Return the tuple (major, minor, patch) version extracted from the str."""
-  version_ids = version_str.split(".")
-  if len(version_ids) != 3 or "-" in version_str:
-    raise ValueError(
-        "Could not convert the {} to version. Format should be x.y.z".format(
-            version_str))
-  try:
-    version_ids = tuple(int(v) for v in version_ids)
-  except ValueError:
-    raise ValueError(
-        "Could not convert the {} to version. Format should be x.y.z".format(
-            version_str))
-  return version_ids
-
-
 def tfds_dir():
   """Path to tensorflow_datasets directory."""
   return os.path.dirname(os.path.dirname(os.path.dirname(__file__)))

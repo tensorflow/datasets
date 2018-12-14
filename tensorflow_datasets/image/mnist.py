@@ -82,11 +82,12 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
 
+  VERSION = tfds.Version("1.0.0")
+
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("The MNIST database of handwritten digits."),
-        version="1.0.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=10),
@@ -159,16 +160,17 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
 class FashionMNIST(MNIST):
   URL = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/"
 
+  VERSION = tfds.Version("1.0.0")
+
   # TODO(afrozm): Try to inherit from MNIST's _info and mutate things as needed.
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("Fashion-MNIST is a dataset of Zalando's article images "
                      "consisting of a training set of 60,000 examples and a "
                      "test set of 10,000 examples. Each example is a 28x28 "
                      "grayscale image, associated with a label from 10 "
                      "classes."),
-        version="1.0.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(names=[

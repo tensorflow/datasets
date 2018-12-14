@@ -67,6 +67,8 @@ import tensorflow_datasets.public_api as tfds
 class MyDataset(tfds.core.GeneratorBasedBuilder):
   """Short description of my dataset."""
 
+  VERSION = tfds.Version('0.1.0')
+
   def _info(self):
     pass # TODO
 
@@ -137,7 +139,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("This is the dataset for xxx. It contains yyy. The "
                      "images are kept at their original dimensions."),
         # Features specify the shape and dtype of the loaded data, as returned

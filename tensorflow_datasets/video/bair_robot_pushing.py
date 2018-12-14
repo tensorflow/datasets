@@ -62,6 +62,30 @@ _CITATION = """\
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
+  VERSION = tfds.Version("1.0.0")
+
+  def _info(self):
+    # The Bair dataset consist of a sequence of frames (video) with associated
+    # metadata (action and position)
+    features = tfds.features.SequenceDict({
+        "image_main": tfds.features.Image(shape=IMG_SHAPE),
+        "image_aux1": tfds.features.Image(shape=IMG_SHAPE),
+        "action": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+        "endeffector_pos": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+    }, length=FRAMES_PER_VIDEO)
+
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description="This data set contains roughly 59,000 examples of robot "
+        "pushing motions, including one training set (train) and "
+        "two test sets of previously seen (testseen) and unseen "
+        "(testnovel) objects. This is the small 64x64 version.",
+        features=features,
+        urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
+        size_in_bytes=30.0 * tfds.units.GiB,
+        citation=_CITATION,
+    )
+
   def _split_generators(self, dl_manager):
     files = dl_manager.download_and_extract(DATA_URL)
     return [
@@ -78,29 +102,6 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
                 "filedir": os.path.join(files, "softmotion30_44k", "test"),
             }),
     ]
-
-  def _info(self):
-    # The Bair dataset consist of a sequence of frames (video) with associated
-    # metadata (action and position)
-    features = tfds.features.SequenceDict({
-        "image_main": tfds.features.Image(shape=IMG_SHAPE),
-        "image_aux1": tfds.features.Image(shape=IMG_SHAPE),
-        "action": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
-        "endeffector_pos": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-    }, length=FRAMES_PER_VIDEO)
-
-    return tfds.core.DatasetInfo(
-        name=self.name,
-        description="This data set contains roughly 59,000 examples of robot "
-        "pushing motions, including one training set (train) and "
-        "two test sets of previously seen (testseen) and unseen "
-        "(testnovel) objects. This is the small 64x64 version.",
-        version="1.0.0",
-        features=features,
-        urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
-        size_in_bytes=30.0 * tfds.units.GiB,
-        citation=_CITATION,
-    )
 
   def _generate_examples(self, filedir):
     tf.logging.info("Reading data from %s.", filedir)

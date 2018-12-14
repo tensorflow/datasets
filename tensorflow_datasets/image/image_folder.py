@@ -71,6 +71,8 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
   """
 
+  VERSION = tfds.Version("1.0.0")
+
   # TODO(epot): Image shape should be automatically deduced
 
   def __init__(self, dataset_name, **kwargs):
@@ -85,9 +87,8 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
           ".info. The .info.features won't be computed.")
 
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description="Generic image classification dataset.",
-        version="1.0.0",
         # Generic features before the data is generated
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),

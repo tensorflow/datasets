@@ -105,10 +105,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=_DESCRIPTION,
-        version=self.builder_config.version,
-        config_name=self.builder_config.name,
         features=tfds.features.FeaturesDict({
             "text": tfds.features.Text(
                 encoder_config=self.builder_config.text_encoder_config),

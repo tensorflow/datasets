@@ -29,11 +29,14 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core import utils
 
 tf.enable_eager_execution()
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
+
+  VERSION = utils.Version("0.0.0")
 
   def _split_generators(self, dl_manager):
     # Split the 30 examples from the generator into 2 train shards and 1 test
@@ -46,6 +49,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 
   def _info(self):
     return dataset_info.DatasetInfo(
+        builder=self,
         features=features.FeaturesDict({"x": tf.int64}),
         supervised_keys=("x", "x"),
     )
@@ -88,14 +92,11 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
     ]
 
   def _info(self):
-    if self._builder_config:
-      version = self._builder_config.version
-    else:
-      version = "1.0.0"
+
     return dataset_info.DatasetInfo(
+        builder=self,
         features=features.FeaturesDict({"x": tf.int64}),
         supervised_keys=("x", "x"),
-        version=version,
     )
 
   def _generate_examples(self):

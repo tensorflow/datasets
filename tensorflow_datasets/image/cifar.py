@@ -47,13 +47,14 @@ _CITATION = """\
 class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
+  VERSION = tfds.Version("1.0.1")
+
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("The CIFAR-10 dataset consists of 60000 32x32 colour "
                      "images in 10 classes, with 6000 images per class. There "
                      "are 50000 training images and 10000 test images."),
-        version="1.0.1",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=10),
@@ -163,6 +164,8 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
+  VERSION = tfds.Version("1.1.0")
+
   def __init__(self, use_coarse_labels=False, **kwargs):
     """Constructs Cifar-100 dataset.
 
@@ -192,7 +195,7 @@ class Cifar100(Cifar10):
   def _info(self):
     label_to_use = "coarse_label" if self._use_coarse_labels else "fine_label"
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("This dataset is just like the CIFAR-10, except it has "
                      "100 classes containing 600 images each. There are 500 "
                      "training images and 100 testing images per class. The "
@@ -200,7 +203,6 @@ class Cifar100(Cifar10):
                      "superclasses. Each image comes with a \"fine\" label "
                      "(the class to which it belongs) and a \"coarse\" label "
                      "(the superclass to which it belongs)."),
-        version="1.1.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
             "label": tfds.features.OneOf(choice=label_to_use, feature_dict={

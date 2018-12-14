@@ -43,14 +43,15 @@ year = {2011}
 class SvhnCropped(tfds.core.GeneratorBasedBuilder):
   """Street View House Numbers (SVHN) Dataset, cropped version."""
 
+  VERSION = tfds.Version("1.0.0")
+
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=(
             "The Street View House Numbers (SVHN) Dataset is an image digit "
             "recognition dataset of over 600,000 digit images coming from "
             "real world data. Images are cropped to 32x32."),
-        version="1.0.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=(32, 32, 3)),
             "label": tfds.features.ClassLabel(num_classes=10),
