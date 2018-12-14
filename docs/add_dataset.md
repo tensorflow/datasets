@@ -270,6 +270,39 @@ To ensure that users can access the dataset through `tfds.load` and
 `tfds.builder`, make sure your module `my_dataset` is imported in
 `tensorflow_datasets/__init__.py`.
 
+## Dataset configuration
+
+Some datasets may have variants that are best implemented through configuration
+rather than being entirely separate `DatasetBuilder`s. For example, datasets
+with text features may want to have different text encodings (e.g.
+character-level vs subword-level vs word-level vocabularies). To enable
+different configurations of your dataset, you must:
+
+1. Define your own configuration object as a subclass of
+   `tfds.core.BuilderConfig`. For example, `MyDatasetConfig`.
+2. Define the `BUILDER_CONFIGS` class member in `MyDataset` that lists
+   `MyDatasetConfig`s that the dataset exposes.
+3. Use `self.builder_config` in `MyDataset` to configure data generation. This
+   may include setting different values in `_info()` or changing download data
+   access.
+
+Each `MyDatasetConfig` would have a name and so the dataset would be addressed
+as `my_dataset/my_config_name` in `tfds.builder` or `tfds.load`. You can also
+instantiate the `MyDataset` class directly and pass the `config` kwarg which
+can either be a config name or a `MyDatasetConfig` object.
+
+See [`IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
+for an example of a dataset that uses `BuilderConfig`s.
+
+Note that `BuilderConfig`s are only for situations that would affect how the
+data is written to disk, not for situations where alterations could be made
+on-the-fly in the `tf.data` input pipeline. To add configuration that would
+only affect data reading, add keyword arguments to the `MyDataset` constructor,
+store them in member variables, and then use them later. For example,
+you could override `_as_dataset()`, call `super()` to get the base
+`tf.data.Dataset`, and then do additional transformations based on the member
+variables.
+
 # Create your own `FeatureConnector`
 
 `FeatureConnector`s in `DatasetInfo` correspond to the elements returned in the
