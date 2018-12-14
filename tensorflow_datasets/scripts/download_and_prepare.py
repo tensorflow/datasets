@@ -46,13 +46,17 @@ import termcolor
 
 flags = tf.flags
 FLAGS = flags.FLAGS
-BUILDERS = tfds.list_builders()
+BUILDERS = ",".join(tfds.list_builders())
+
 
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
 
-flags.DEFINE_multi_enum("datasets", BUILDERS, BUILDERS, "Datasets to build")
-flags.DEFINE_multi_enum("exclude_datasets", [], BUILDERS,
-                        "Datasets to exclude (no download, no prepare).")
+flags.DEFINE_str("datasets", BUILDERS,
+                 "Comma separated list of datasets to build, defaults to all "
+                 "registered builders.")
+flags.DEFINE_str("exclude_datasets", "",
+                 "Comma separated list of datasets to exclude,"
+                 "(no download, no prepare).")
 
 flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Were to place the data.")
 flags.DEFINE_string("download_dir", None, "Where to place downloads.")
@@ -93,8 +97,11 @@ def download_and_prepare(dataset_name, builder_config=None):
 
 
 def main(_):
-  for dataset_name in FLAGS.datasets:
-    if dataset_name in FLAGS.exclude_datasets:
+  datasets_to_build = FLAGS.datasets.split(",")
+  datasets_to_exclude = FLAGS.exclude_datasets.split(",")
+  for dataset_name in datasets_to_build:
+    if dataset_name in datasets_to_exclude:
+      tf.logging.info("Excluding [%s]" % dataset_name)
       continue
     builder = tfds.builder(dataset_name, data_dir=FLAGS.data_dir)
     if builder.BUILDER_CONFIGS:

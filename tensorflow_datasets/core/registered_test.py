@@ -59,7 +59,6 @@ class RegisteredTest(tf.test.TestCase):
     self.assertEqual(name, EmptyDatasetBuilder.name)
     self.assertIsInstance(registered.builder(name), EmptyDatasetBuilder)
     self.assertIn(name, registered.list_builders())
-    self.assertNotIn("unregistered_builder", registered.list_builders())
 
     nonexistent = "nonexistent_foobar_dataset"
     with self.assertRaisesWithPredicateMatch(ValueError, "not found"):
@@ -67,6 +66,15 @@ class RegisteredTest(tf.test.TestCase):
     # Prints registered datasets
     with self.assertRaisesWithPredicateMatch(ValueError, name):
       registered.builder(nonexistent)
+
+  def test_abstract(self):
+    name = "unregistered_builder"
+    self.assertEqual(name, UnregisteredBuilder.name)
+    self.assertNotIn(name, registered.list_builders())
+
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, "Requesting the builder for an abstract class"):
+      registered.builder(name)
 
   def test_builder_with_kwargs(self):
     name = "empty_dataset_builder"

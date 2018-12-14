@@ -38,6 +38,10 @@ __all__ = [
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
 
+# Internal registry containing:
+# <str snake_cased_name, abstract DatasetBuilder subclass>
+_ABSTRACT_DATASET_REGISTRY = {}
+
 _NAME_STR_ERR = """\
 Parsing builder name string failed.
 The builder name string must be in one of the following formats:
@@ -47,19 +51,27 @@ The builder name string must be in one of the following formats:
   * "dataset_name/config_name/kwarg1=val1,kwarg2=val2"
 """
 
+_DATASET_NOT_FOUND_ERR = """\
+Check that:
+    - the dataset name is spelled correctly
+    - dataset class defines all base class abstract methods
+    - the module defining the dataset class is imported
+"""
+
 
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
 
-  def __init__(self, name):
+  def __init__(self, name, is_abstract=False):
     all_datasets_str = "\n\t- ".join([""] + list_builders())
-    ValueError.__init__(self, (
-        "Dataset %s not found. Available datasets:%s\n"
-        "Check that:\n"
-        "\t- the dataset name is spelled correctly\n"
-        "\t- dataset class defines all base class abstract methods\n"
-        "\t- the module defining the dataset class is imported\n"
-        ) % (name, all_datasets_str))
+    if is_abstract:
+      error_string = ("Dataset %s not found. "
+                      "Requesting the builder for an abstract class\n"
+                      "%s") % (name, _DATASET_NOT_FOUND_ERR)
+    else:
+      error_string = ("Dataset %s not found. Available datasets:%s\n"
+                      "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
+    ValueError.__init__(self, error_string)
 
 
 class RegisteredDataset(abc.ABCMeta):
@@ -73,7 +85,12 @@ class RegisteredDataset(abc.ABCMeta):
 
     if name in _DATASET_REGISTRY:
       raise ValueError("Dataset with name %s already registered." % name)
-    if not inspect.isabstract(cls):
+    if name in _ABSTRACT_DATASET_REGISTRY:
+      raise ValueError(
+          "Dataset with name %s already registered as abstract." % name)
+    if inspect.isabstract(cls):
+      _ABSTRACT_DATASET_REGISTRY[name] = cls
+    else:
       _DATASET_REGISTRY[name] = cls
     return cls
 
@@ -107,8 +124,10 @@ def builder(name, **ctor_kwargs):
   """
   name, builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   builder_kwargs.update(ctor_kwargs)
+  if name in _ABSTRACT_DATASET_REGISTRY:
+    raise DatasetNotFoundError(name, is_abstract=True)
   if name not in _DATASET_REGISTRY:
-    raise DatasetNotFoundError(name)
+    raise DatasetNotFoundError(name, is_abstract=False)
   return _DATASET_REGISTRY[name](**builder_kwargs)
 
 
