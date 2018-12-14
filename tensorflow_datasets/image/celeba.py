@@ -81,7 +81,7 @@ _CITATION = """\
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
-  VERSION = tfds.Version("0.2.0")
+  VERSION = tfds.core.Version("0.2.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(

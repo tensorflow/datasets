@@ -31,7 +31,7 @@ DATA_URL_DIR = "https://storage.googleapis.com/scv_dataset/data/"
 class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
   """Abstract class Starcraft video datasets."""
 
-  VERSION = tfds.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
     features = tfds.features.FeaturesDict({

@@ -47,7 +47,7 @@ _CITATION = """\
 class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
-  VERSION = tfds.Version("1.0.1")
+  VERSION = tfds.core.Version("1.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -164,7 +164,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
-  VERSION = tfds.Version("1.1.0")
+  VERSION = tfds.core.Version("1.1.0")
 
   def __init__(self, use_coarse_labels=False, **kwargs):
     """Constructs Cifar-100 dataset.

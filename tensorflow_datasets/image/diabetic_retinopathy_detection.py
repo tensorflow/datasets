@@ -30,7 +30,7 @@ import tensorflow_datasets.public_api as tfds
 class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   """Diabetic retinopathy detection."""
 
-  VERSION = tfds.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(

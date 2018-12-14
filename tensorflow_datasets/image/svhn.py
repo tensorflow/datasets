@@ -43,7 +43,7 @@ year = {2011}
 class SvhnCropped(tfds.core.GeneratorBasedBuilder):
   """Street View House Numbers (SVHN) Dataset, cropped version."""
 
-  VERSION = tfds.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(

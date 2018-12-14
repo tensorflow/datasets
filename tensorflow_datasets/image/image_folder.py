@@ -71,7 +71,7 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
   """
 
-  VERSION = tfds.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0")
 
   # TODO(epot): Image shape should be automatically deduced
 

@@ -25,6 +25,7 @@ from tensorflow_datasets.core.splits import NamedSplit
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
+from tensorflow_datasets.core.utils import Version
 
 __all__ = [
     "BuilderConfig",
@@ -35,4 +36,5 @@ __all__ = [
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",
+    "Version",
 ]

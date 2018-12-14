@@ -67,7 +67,7 @@ import tensorflow_datasets.public_api as tfds
 class MyDataset(tfds.core.GeneratorBasedBuilder):
   """Short description of my dataset."""
 
-  VERSION = tfds.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
     pass # TODO

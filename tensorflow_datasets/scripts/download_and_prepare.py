@@ -78,9 +78,7 @@ def download_and_prepare(dataset_name, builder_config=None):
   builder = tfds.builder(
       dataset_name,
       data_dir=FLAGS.data_dir,
-      config=builder_config,
-      version=tfds.Version.LATEST,
-  )
+      config=builder_config)
   # TODO(b/116270825): Add flag to force extraction / preparation.
   mode = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
   builder.download_and_prepare(
@@ -108,7 +106,7 @@ def main(_):
       tf.logging.info("Excluding [%s]" % dataset_name)
       continue
     builder = tfds.builder(
-        dataset_name, data_dir=FLAGS.data_dir, version=tfds.Version.LATEST)
+        dataset_name, data_dir=FLAGS.data_dir)
     if builder.BUILDER_CONFIGS:
       for config in builder.BUILDER_CONFIGS:
         download_and_prepare(dataset_name, config)

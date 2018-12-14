@@ -62,7 +62,7 @@ _CITATION = """\
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
-  VERSION = tfds.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
