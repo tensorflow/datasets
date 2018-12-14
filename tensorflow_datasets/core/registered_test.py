@@ -91,6 +91,7 @@ class RegisteredTest(tf.test.TestCase):
     self.assertFalse(builder.download_called)
     self.assertEqual(splits.Split.TEST,
                      builder.as_dataset_kwargs.pop("split"))
+    self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
     self.assertEqual(dict(data_dir=data_dir, k1=1, config=None), builder.kwargs)

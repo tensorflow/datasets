@@ -116,7 +116,9 @@ def builder(name, **ctor_kwargs):
 def load(name,
          split,
          data_dir=None,
+         batch_size=1,
          download=True,
+         as_numpy=False,
          as_supervised=False,
          with_info=False,
          builder_kwargs=None,
@@ -158,12 +160,17 @@ def load(name,
     split: `tfds.Split`, which split of the data to load.
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
+    batch_size: `int`, set to > 1 to get batches of examples. Note that
+      variable length features will be 0-padded. If `as_numpy=True` and
+      `batch_size=-1`, will return the full dataset in NumPy arrays.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
       expected to be in `data_dir`. If `True` and the data is already in
       `data_dir`, `download_and_prepare` is a no-op.
       Defaults to `True`.
+    as_numpy: `bool`, whether to return a generator of NumPy array batches
+      using `tfds.core.DatasetBuilder.as_numpy`.
     as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
       will have a 2-tuple structure `(input, label)` according to
       `builder.info.supervised_keys`. If `False`, the default,
@@ -202,8 +209,12 @@ def load(name,
   as_dataset_kwargs = dict(as_dataset_kwargs)
   as_dataset_kwargs["split"] = split
   as_dataset_kwargs["as_supervised"] = as_supervised
+  as_dataset_kwargs["batch_size"] = batch_size
 
-  ds = dbuilder.as_dataset(**as_dataset_kwargs)
+  if as_numpy:
+    ds = dbuilder.as_numpy(**as_dataset_kwargs)
+  else:
+    ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:
     return ds, dbuilder.info
   return ds

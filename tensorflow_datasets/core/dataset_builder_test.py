@@ -236,20 +236,32 @@ class DatasetBuilderReadTest(tf.test.TestCase):
   def tearDownClass(cls):
     test_utils.rm_tmp_dir(cls._tfds_tmp_dir)
 
+  def setUp(self):
+    self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
+
+  def test_with_batch_size(self):
+    items = list(self.builder.as_numpy(
+        split=splits.Split.TRAIN + splits.Split.TEST, batch_size=10))
+    # 3 batches of 10
+    self.assertEqual(3, len(items))
+    x1, x2, x3 = items[0]["x"], items[1]["x"], items[2]["x"]
+    self.assertEqual(10, x1.shape[0])
+    self.assertEqual(10, x2.shape[0])
+    self.assertEqual(10, x3.shape[0])
+    self.assertEqual(sum(range(30)), int(x1.sum() + x2.sum() + x3.sum()))
+
   def test_as_numpy(self):
-    builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
-    items = builder.as_numpy(split=splits.Split.TRAIN, batch_size=-1)
+    items = self.builder.as_numpy(split=splits.Split.TRAIN, batch_size=-1)
     self.assertEqual(items["x"].shape[0], 20)
     self.assertLess(items["x"][0], 30)
 
     count = 0
-    for _ in builder.as_numpy(split=splits.Split.TRAIN):
+    for _ in self.builder.as_numpy(split=splits.Split.TRAIN):
       count += 1
     self.assertEqual(count, 20)
 
   def test_supervised_keys(self):
-    builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
-    x, _ = builder.as_numpy(
+    x, _ = self.builder.as_numpy(
         split=splits.Split.TRAIN, as_supervised=True, batch_size=-1)
     self.assertEqual(x.shape[0], 20)
 

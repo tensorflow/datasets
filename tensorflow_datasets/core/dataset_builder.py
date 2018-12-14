@@ -205,6 +205,7 @@ class DatasetBuilder(object):
   @api_utils.disallow_positional_args
   def as_dataset(self,
                  split,
+                 batch_size=1,
                  shuffle_files=None,
                  as_supervised=False):
     """Constructs a `tf.data.Dataset`.
@@ -215,6 +216,10 @@ class DatasetBuilder(object):
 
     Args:
       split: `tfds.Split`, which subset of the data to read.
+      batch_size: `int`, batch size. Note that variable-length features will
+        be 0-padded if `batch_size > 1`. Users that want more custom behavior
+        should use `batch_size=1` and use the `tf.data` API to construct a
+        custom pipeline.
       shuffle_files: `bool` (optional), whether to shuffle the input files.
         Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
@@ -241,6 +246,11 @@ class DatasetBuilder(object):
       shuffle_files = split == splits.Split.TRAIN
 
     dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+    if batch_size > 1:
+      # Use padded_batch so that features with unknown shape are supported.
+      padded_shapes = self.info.features.shape
+      dataset = dataset.padded_batch(batch_size, padded_shapes)
+
     if as_supervised:
       if not self.info.supervised_keys:
         raise ValueError(
@@ -279,19 +289,10 @@ class DatasetBuilder(object):
     # pylint: enable=g-doc-return-or-yield
     def _as_numpy(batch_size):
       """Internal as_numpy."""
-      dataset = self.as_dataset(**as_dataset_kwargs)
-      # Use padded_batch so that features with unknown shape are supported.
-      padded_shapes = self.info.features.shape
-      if as_dataset_kwargs.get("as_supervised", False):
-        input_f, target_f = self.info.supervised_keys
-        padded_shapes = (padded_shapes[input_f], padded_shapes[target_f])
-      if (not batch_size or batch_size <= 0) and batch_size != -1:
-        raise ValueError("batch_size must be a positive number or -1 to return "
-                         "the full dataset, got %s" % str(batch_size))
       wants_full_dataset = batch_size == -1
       if wants_full_dataset:
         batch_size = self.info.num_examples or int(1e10)
-      dataset = dataset.padded_batch(batch_size, padded_shapes)
+      dataset = self.as_dataset(batch_size=batch_size, **as_dataset_kwargs)
       gen = dataset_utils.iterate_over_dataset(dataset)
       if wants_full_dataset:
         return next(gen)
