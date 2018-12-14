@@ -51,12 +51,12 @@ BUILDERS = ",".join(tfds.list_builders())
 
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
 
-flags.DEFINE_str("datasets", BUILDERS,
-                 "Comma separated list of datasets to build, defaults to all "
-                 "registered builders.")
-flags.DEFINE_str("exclude_datasets", "",
-                 "Comma separated list of datasets to exclude,"
-                 "(no download, no prepare).")
+flags.DEFINE_string("datasets", BUILDERS,
+                    "Comma separated list of datasets to build, defaults to all"
+                    "registered builders.")
+flags.DEFINE_string("exclude_datasets", "",
+                    "Comma separated list of datasets to exclude,"
+                    "(no download, no prepare).")
 
 flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Were to place the data.")
 flags.DEFINE_string("download_dir", None, "Where to place downloads.")
