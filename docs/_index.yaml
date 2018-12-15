@@ -44,12 +44,12 @@ landing_page:
         {% dynamic endif %}
   - classname: devsite-landing-row-cards
     items:
-    #- heading: Introducing TensorFlow Datasets
-    #  image_path: /resources/images/tf-logo-card-16x9.png
-    #  path: https://medium.com/tensorflow/REPLACE_ME
-    #  buttons:
-    #  - label: Read on TensorFlow blog
-    #    path: https://medium.com/tensorflow/REPLACE_ME
+    - heading: Introducing TensorFlow Datasets
+      image_path: /resources/images/tf-logo-card-16x9.png
+      path: https://medium.com/tensorflow/REPLACE_ME
+      buttons:
+      - label: Read on TensorFlow blog
+        path: https://medium.com/tensorflow/REPLACE_ME
     - heading: TensorFlow Datasets on GitHub
       image_path: /resources/images/github-card-16x9.png
       path: https://github.com/tensorflow/datasets
