@@ -49,9 +49,11 @@ from tensorflow_datasets.core.download import util
 flags.DEFINE_string('dataset', None, 'Name of dataset.')
 flags.DEFINE_string('dest_dir', 'url_checksums',
                     'Path to directory in which to write the checksums file .')
-flags.DEFINE_string('downloads_path', '~/tensorflow-datasets/downloads',
+flags.DEFINE_string('downloads_path',
+                    os.path.join('~', 'tensorflow_datasets', 'downloads'),
                     'Path to downloads directory.')
-flags.DEFINE_string('extracts_path', '~/tensorflow-datasets/extracted',
+flags.DEFINE_string('extracts_path',
+                    os.path.join('~', 'tensorflow_datasets', 'extracted'),
                     'Path to extractions directory.')
 
 FLAGS = flags.FLAGS

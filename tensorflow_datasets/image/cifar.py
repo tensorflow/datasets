@@ -95,7 +95,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
 
       # Multi label case
       if len(cifar_info.label_keys) > 1:
-        self.info.features["label"][label_key].names = label_names
+        self.info.features[label_key].names = label_names
       # Single label
       else:
         self.info.features["label"].names = label_names
@@ -155,23 +155,28 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     for image, label in data:
       if len(label) == 1:
         label = label[_strip_s(self._cifar_info.label_keys[0])]
-      yield self.info.features.encode_example({
-          "image": image,
-          "label": label,
-      })
+        yield self.info.features.encode_example({
+            "image": image,
+            "label": label,
+        })
+      else:
+        features = {"image": image}
+        features.update(label)
+        yield self.info.features.encode_example(features)
 
 
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.2.0")
 
   def __init__(self, use_coarse_labels=False, **kwargs):
     """Constructs Cifar-100 dataset.
 
     Args:
       use_coarse_labels (bool): whether to set the coarse labels or the fine
-        labels as "label". Note that in either case, both features will be
+        labels as the target feature if `as_supervised=True` in `as_dataset`.
+        Note that in either case, both features will be
         present in the features dictionary as "fine_label" and "coarse_label".
         Note also that this does NOT affect the data on disk and is only used in
         the `tf.data.Dataset` input pipeline.
@@ -205,12 +210,10 @@ class Cifar100(Cifar10):
                      "(the superclass to which it belongs)."),
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
-            "label": tfds.features.OneOf(choice=label_to_use, feature_dict={
-                "coarse_label": tfds.features.ClassLabel(num_classes=20),
-                "fine_label": tfds.features.ClassLabel(num_classes=100),
-            }),
+            "coarse_label": tfds.features.ClassLabel(num_classes=20),
+            "fine_label": tfds.features.ClassLabel(num_classes=100),
         }),
-        supervised_keys=("image", "label"),
+        supervised_keys=("image", label_to_use),
         urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
         download_checksums=tfds.download.load_checksums(self.name),
         size_in_bytes=161.2 * tfds.units.MiB,

@@ -23,11 +23,22 @@ from tensorflow_datasets.image import cifar
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
+# testing/cifar.py generates fake input data
+
+
 class Cifar10Test(dataset_builder_testing.TestCase):
   DATASET_CLASS = cifar.Cifar10
   SPLITS = {
-      "train": 10,  # Number of examples.
-      "test": 2,  # See testing/cifar10.py
+      "train": 10,
+      "test": 2,
+  }
+
+
+class Cifar100Test(dataset_builder_testing.TestCase):
+  DATASET_CLASS = cifar.Cifar100
+  SPLITS = {
+      "train": 10,
+      "test": 2,
   }
 
 
