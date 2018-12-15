@@ -14,6 +14,8 @@ then this document is for you.
 *   [Specifying how the data should be split](#specifying-how-the-data-should-be-split)
 *   [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
     *   [File access and tf.gfile](#file-access-and-tfgfile)
+*   [Register your dataset](#register-your-dataset)
+*   [Dataset configuration](#dataset-configuration)
 *   [Create your own FeatureConnector](#create-your-own-featureconnector)
 *   [Enabling downloads validation](#enabling-downloads-validation)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
