@@ -48,6 +48,13 @@ def rm_tmp_dir(dirname):
   tf.gfile.DeleteRecursively(dirname)
 
 
+def remake_dir(d):
+  """Possibly deletes and recreates directory."""
+  if tf.gfile.Exists(d):
+    tf.gfile.DeleteRecursively(d)
+  tf.gfile.MakeDirs(d)
+
+
 class FeatureExpectationItem(object):
   """Test item of a FeatureExpectation."""
 

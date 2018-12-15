@@ -28,8 +28,8 @@ from absl import app
 from absl import flags
 import numpy as np
 
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import py_utils
 
 NUMBER_IMAGES_PER_BATCH = 2
@@ -84,15 +84,9 @@ def generate_batch(batch_name):
   dump(cifar10_output_dir(), batch_name, data=data, labels=labels)
 
 
-def remake_dirs(d):
-  if tf.gfile.Exists(d):
-    tf.gfile.DeleteRecursively(d)
-  tf.gfile.MakeDirs(d)
-
-
 def generate_cifar100_data():
   output_dir = cifar100_output_dir()
-  remake_dirs(output_dir)
+  test_utils.remake_dir(output_dir)
   generate_cifar100_batch("train", 10)
   generate_cifar100_batch("test", 2)
   fine_names = tfds.builder("cifar100").info.features["fine_label"].names
@@ -106,7 +100,7 @@ def generate_cifar100_data():
 
 def generate_cifar10_data():
   output_dir = cifar10_output_dir()
-  remake_dirs(output_dir)
+  test_utils.remake_dir(output_dir)
   for batch_number in range(1, NUMBER_BATCHES + 1):
     generate_batch("data_batch_%s" % batch_number)
   generate_batch("test_batch")
