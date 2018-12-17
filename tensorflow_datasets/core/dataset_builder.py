@@ -119,76 +119,28 @@ class DatasetBuilder(object):
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
     """
-    # Currently the version is always set to the code version
-    version = utils.Version(utils.Version.LATEST)
-    self._version = None
-
     # Create the builder config if exists
     self._builder_config = self._create_builder_config(config)
 
     self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
 
-    # Get the last dataset if it exists (or None otherwise)
-    self._data_dir = self._get_data_dir(version=version)
-
-    # Choose the version to use (restored from data or use the code)
-    self._set_version(version)
-
-  def _set_version(self, version):
-    """Backward compatible version manager (restore data or use code version).
-
-    Version management to ensure backward compatibility. This function either
-    restore the version from disk or ignore the disk and use only the
-    code.
-
-    Warning: Once this function has been called and previously generated
-    data has been restored, the version is definitly set and it's not possible
-    re-generate the data at the last version. A new builder instance should be
-    created instead.
-
-    Args:
-      version: `tfds.core.Version`, The version to restore, or a LATEST or AUTO
-        constant to auto-inference.
-    """
-    # TODO(tfds): Clean up once we decide how we'd like to handle backwards
-    # compatibility.
+    # Extract code version (VERSION or config)
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
           "DatasetBuilder {} does not have defined version. Please add a "
-          "`VERSION = tfds.core.Version('x.y.z')` to the class "
-          "attribute".format(
+          "`VERSION = tfds.Version('x.y.z')` to the class attribute".format(
               self.name))
 
-    # Step 1: Extract code_version and data_version
-    if self._data_dir:
-      data_version = utils.Version(os.path.basename(self._data_dir))
-    else:
-      data_version = None
-
     if self._builder_config:
-      code_version = utils.Version(self._builder_config.version)
+      self._version = utils.Version(self._builder_config.version)
     else:
-      code_version = utils.Version(self.VERSION)
+      self._version = utils.Version(self.VERSION)
 
-    # Step 2: Depending on the requested version, data version, code version,
-    # choose whether use the code version (ignore data) or data
-    # version (restore DatasetInfo,...)
-    use_code = self._choose_version(
-        requested_version=version,
-        data_version=data_version,
-        code_version=code_version
-    )
+    # Load the data dir
+    self._data_dir = self._get_data_dir(version=self._version)
 
-    # Step 3: Ensure that version wasn't set before this point (this ensure
-    # that no part of the code depends on version before version is properly
-    # set)
-    if self._version is not None:
-      # Should never happend as self._version is initialized by this function
-      raise AssertionError("Version as been defined, yet isn't restored yet.")
-
-    # Step 4: Set version either to code or data and restore DatasetInfo
-    if use_code:  # Use the code version (do not restore data)
-      self._version = code_version
+    # Use the code version (do not restore data)
+    if not tf.gfile.Exists(self._data_dir):
       # When using the code version, we explicitly reset the data_dir to None,
       # even if previously generated data exists.
       self._data_dir = None
@@ -197,90 +149,10 @@ class DatasetBuilder(object):
       # ...)
       self.info.initialize_from_package_data()
 
-    else:  # Use data version (restored from disk)
-      # Now the version has been restored so can be used to set-up backward
-      # compatible code.
-      self._version = data_version
-
+    # Use data version (restored from disk)
+    else:
       # Overwrite the current dataset info with the restored data version.
       self.info.read_from_directory(self._data_dir)
-
-  def _choose_version(self, requested_version, data_version, code_version):
-    """Choose which version to use between data_version and code_version.
-
-    There are three cases:
-     * Restore the version from disk (restore previous DatasetInfo,...) (4):
-       * If version=AUTO and previous data exists on disk (any version)
-       * If version=LATEST and last version exists on disk
-       * If version=custom and version exists
-     * Do not restore version and use code version.
-       * If version=AUTO or version=LATEST and no version is found on disk (1)
-       * If version=LATEST and data on disk is not at the latest version (2)
-     * Raise an error:
-       * If a custom version is given but is not found on disk (3)
-
-    Args:
-      requested_version: `tfds.core.Version` requested by the user (AUTO,
-        LATEST or custom)
-      data_version: `tfds.core.Version`, data_version (or None if no previous
-        data is found)
-      code_version: `tfds.core.Version`, Code version (either from
-        BuilderConfig or DatasetBuilder.VERSION)
-
-    Returns:
-      use_code: `bool`, Return True is data_dir should be ignored and code
-        version used. Return False if data_dir should be restored.
-    """
-    # 1. No data is found on disk (and mode is LATEST or AUTO)
-    if (not data_version and
-        requested_version in (utils.Version.AUTO, utils.Version.LATEST)):
-      use_code = True
-
-    # 2. Data is found but correspond to a previous version (LATEST mode)
-    elif (
-        data_version and
-        data_version < code_version and
-        requested_version == utils.Version.LATEST
-    ):
-      use_code = True
-
-    # 3. No data is found on disk (but version has been explicitly set)
-    elif not data_version:
-      raise ValueError("Could not find the requested version at {}".format(
-          self._data_dir))
-
-    # 4. Data version defined and restored
-    else:
-      if code_version > data_version:
-        tf.logging.warn(
-            "WARNING: The restored dataset is at version %s but the code is at "
-            "a more recent version %s. You may want to re-generate the data "
-            "using tfds.builder(%s, version=tfds.core.Version.LATEST) followed "
-            "by download_and_prepare().\n"
-            "Entering in backward compatibility mode...",
-            data_version,
-            code_version,
-            self.name,
-        )
-
-      if code_version < data_version:
-        raise ValueError(
-            "Error for dataset {name}: The dataset present in {data_dir} is at "
-            "a higher version than the code (data version: {data_version} > "
-            "code version: {code_version}). This probably means that you're "
-            "using an old version of the code. You can try to explicitly load "
-            "the data version from your code by explicitly using the version "
-            "kwarg: tfds.builder({name}, version={code_version})."
-            "".format(
-                name=self.name,
-                data_dir=self._data_dir,
-                data_version=data_version,
-                code_version=code_version,
-            ))
-
-      use_code = False
-
-    return use_code
 
   @utils.memoized_property
   def info(self):
