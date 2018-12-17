@@ -84,8 +84,7 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': ['url_checksums/*.csv'] +
-                               DATASET_INFO_AND_METADATA_FILES,
+        'tensorflow_datasets': DATASET_INFO_AND_METADATA_FILES,
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
