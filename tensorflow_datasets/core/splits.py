@@ -294,6 +294,9 @@ class NamedSplit(_SplitDescriptorNode):
       raise ValueError("Equality not supported between split {} and {}".format(
           self, other))
 
+  def __hash__(self):
+    return hash(self._name)
+
   def get_read_instruction(self, split_dict):
     return SplitReadInstruction(split_dict[self._name])
 

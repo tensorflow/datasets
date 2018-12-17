@@ -34,7 +34,7 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import splits
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 
@@ -259,7 +259,7 @@ class DatasetBuilder(object):
 
   @api_utils.disallow_positional_args
   def as_dataset(self,
-                 split,
+                 split=None,
                  batch_size=1,
                  shuffle_files=None,
                  as_supervised=False):
@@ -270,7 +270,8 @@ class DatasetBuilder(object):
     Subclasses must override _as_dataset.
 
     Args:
-      split: `tfds.Split`, which subset of the data to read.
+      split: `tfds.Split`, which subset of the data to read. If None, returns a
+        dict `<key: tfds.Split, value: tf.data.Dataset>` with all the splits.
       batch_size: `int`, batch size. Note that variable-length features will
         be 0-padded if `batch_size > 1`. Users that want more custom behavior
         should use `batch_size=1` and use the `tf.data` API to construct a
@@ -284,7 +285,8 @@ class DatasetBuilder(object):
         features.
 
     Returns:
-      `tf.data.Dataset`
+      `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
+      tfds.data.Dataset>`.
     """
     if not self._data_dir:
       raise AssertionError(
@@ -293,13 +295,36 @@ class DatasetBuilder(object):
            "tfds.load() before trying to access the tf.data.Dataset object."
           ) % (self.name, self._data_dir_root))
 
-    if isinstance(split, six.string_types):
-      split = splits.NamedSplit(split)
+    if split is None:
+      splits = list(self.info.splits)
+      return_dict = True
+    else:
+      splits = [split]
+      return_dict = False
 
-    if shuffle_files is None:
-      # Shuffle files if training
-      shuffle_files = split == splits.Split.TRAIN
+    datasets = []
+    for split in splits:
+      if isinstance(split, six.string_types):
+        split = splits_lib.NamedSplit(split)
+      split_shuffle = shuffle_files
+      if split_shuffle is None:
+        # Shuffle files if training
+        split_shuffle = split == splits_lib.Split.TRAIN
+      dataset = self._build_single_dataset(split=split,
+                                           shuffle_files=split_shuffle,
+                                           batch_size=batch_size,
+                                           as_supervised=as_supervised)
+      datasets.append(dataset)
 
+    if return_dict:
+      return dict(zip(splits, datasets))
+    else:
+      assert len(splits) == 1
+      return datasets[0]
+
+  def _build_single_dataset(self, split, shuffle_files, batch_size,
+                            as_supervised):
+    """as_dataset for a single split."""
     dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
     if batch_size > 1:
       # Use padded_batch so that features with unknown shape are supported.
@@ -336,7 +361,8 @@ class DatasetBuilder(object):
 
     Yields:
       Feature dictionaries
-      `dict<str feature_name, numpy.array feature_val>`.
+      `dict<str feature_name, numpy.array feature_val>`, or if `split=None`,
+      `dict` from `tfds.Split` to the feature dictionaries.
 
       If `batch_size` is -1 or None, will return a single dictionary containing
       the entire dataset instead of yielding batches.
@@ -348,11 +374,18 @@ class DatasetBuilder(object):
       if wants_full_dataset:
         batch_size = self.info.num_examples or int(1e10)
       dataset = self.as_dataset(batch_size=batch_size, **as_dataset_kwargs)
-      gen = dataset_utils.iterate_over_dataset(dataset)
-      if wants_full_dataset:
-        return next(gen)
+
+      def _np_from_ds(ds):
+        gen = dataset_utils.iterate_over_dataset(ds)
+        if wants_full_dataset:
+          return next(gen)
+        else:
+          return gen
+
+      if as_dataset_kwargs.get("split") is None:
+        return {s: _np_from_ds(ds) for s, ds in dataset.items()}
       else:
-        return gen
+        return _np_from_ds(dataset)
 
     if tf.executing_eagerly():
       return _as_numpy(batch_size)
@@ -644,7 +677,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
       tf.gfile.MakeDirs(self._data_dir)
 
     # Generating data for all splits
-    split_dict = splits.SplitDict()
+    split_dict = splits_lib.SplitDict()
     for split_generator in self._split_generators(dl_manager):
       # Keep track of all split_info
       for s in split_generator.split_info_list:
@@ -665,7 +698,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
     # Update the info object with the splits.
     self.info.splits = split_dict
 
-  def _as_dataset(self, split=splits.Split.TRAIN, shuffle_files=None):
+  def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=None):
 
     # Resolve all the named split tree by real ones
     read_instruction = split.get_read_instruction(self.info.splits)
@@ -696,7 +729,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
       for filepath in self._build_split_filenames(
           split_info_list=[sliced_split_info.split_info],
       ):
-        mask = splits.slice_to_percent_mask(sliced_split_info.slice_value)
+        mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
         instruction_dicts.append({
             "filepath": filepath,
             "mask": mask,

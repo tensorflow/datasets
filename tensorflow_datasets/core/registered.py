@@ -136,7 +136,7 @@ def builder(name, **ctor_kwargs):
 
 @api_utils.disallow_positional_args(allowed=["name"])
 def load(name,
-         split,
+         split=None,
          data_dir=None,
          batch_size=1,
          download=True,
@@ -179,7 +179,9 @@ def load(name,
       (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
       use the `"zoo"` config and pass to the builder keyword arguments `a=True`
       and `b=3`).
-    split: `tfds.Split`, which split of the data to load.
+    split: `tfds.Split`, which split of the data to load. If None, will return
+      all a `dict` with all splits (typically `tfds.Split.TRAIN` and
+      `tfds.Split.TEST`).
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
     batch_size: `int`, set to > 1 to get batches of examples. Note that
@@ -213,7 +215,8 @@ def load(name,
       default.
 
   Returns:
-    ds: `tf.data.Dataset`, the dataset requested.
+    ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
+      `dict<key: tfds.Split, value: tfds.data.Dataset>`.
     ds_info: `tfds.core.DatasetInfo`, if `with_info` is True, then tfds.load
       will return a tuple (ds, ds_info) containing the dataset info (version,
       features, splits, num_examples,...).

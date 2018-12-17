@@ -27,7 +27,7 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import splits
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
 
@@ -42,8 +42,8 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [splits.SplitGenerator(
-        name=[splits.Split.TRAIN, splits.Split.TEST],
+    return [splits_lib.SplitGenerator(
+        name=[splits_lib.Split.TRAIN, splits_lib.Split.TEST],
         num_shards=[2, 1],
     )]
 
@@ -85,8 +85,8 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
     # shard.
     del dl_manager
     return [
-        splits.SplitGenerator(
-            name=[splits.Split.TRAIN, splits.Split.TEST],
+        splits_lib.SplitGenerator(
+            name=[splits_lib.Split.TRAIN, splits_lib.Split.TEST],
             num_shards=[2, 1],
         )
     ]
@@ -125,7 +125,7 @@ class DatasetBuilderTest(tf.test.TestCase):
       self.assertEqual(sorted(expected_filepaths), sorted(written_filepaths))
 
       splits_list = [
-          splits.Split.TRAIN, splits.Split.TEST
+          splits_lib.Split.TRAIN, splits_lib.Split.TEST
       ]
       datasets = [builder.as_dataset(split=split) for split in splits_list]
       data = [[el["x"].numpy() for el in dataset] for dataset in datasets]
@@ -137,8 +137,10 @@ class DatasetBuilderTest(tf.test.TestCase):
 
       # Builder's info should also have the above information.
       self.assertTrue(builder.info.initialized)
-      self.assertEqual(20, builder.info.splits[splits.Split.TRAIN].num_examples)
-      self.assertEqual(10, builder.info.splits[splits.Split.TEST].num_examples)
+      self.assertEqual(20,
+                       builder.info.splits[splits_lib.Split.TRAIN].num_examples)
+      self.assertEqual(10,
+                       builder.info.splits[splits_lib.Split.TEST].num_examples)
       self.assertEqual(30, builder.info.num_examples)
 
   def test_load(self):
@@ -147,7 +149,7 @@ class DatasetBuilderTest(tf.test.TestCase):
           name="dummy_dataset_shared_generator",
           data_dir=tmp_dir,
           download=True,
-          split=splits.Split.TRAIN)
+          split=splits_lib.Split.TRAIN)
       data = list(dataset)
       self.assertEqual(20, len(data))
       self.assertLess(data[0]["x"], 30)
@@ -213,7 +215,7 @@ class DatasetBuilderTest(tf.test.TestCase):
       self.assertGreater(len(tf.gfile.ListDirectory(data_dir2)), 3)
 
       # Test that the config was used and they didn't collide.
-      splits_list = [splits.Split.TRAIN, splits.Split.TEST]
+      splits_list = [splits_lib.Split.TRAIN, splits_lib.Split.TEST]
       for builder, incr in [(builder1, 1), (builder2, 2)]:
         datasets = [builder.as_dataset(split=split) for split in splits_list]
         data = [[el["x"].numpy() for el in dataset] for dataset in datasets]
@@ -240,9 +242,24 @@ class DatasetBuilderReadTest(tf.test.TestCase):
   def setUp(self):
     self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
 
+  def test_all_splits(self):
+    splits = self.builder.as_numpy(batch_size=-1)
+    self.assertSetEqual(set(splits.keys()),
+                        set([splits_lib.Split.TRAIN, splits_lib.Split.TEST]))
+
+    # Test that enum and string both access same object
+    self.assertIs(splits["train"], splits[splits_lib.Split.TRAIN])
+    self.assertIs(splits["test"], splits[splits_lib.Split.TEST])
+
+    train_data = splits[splits_lib.Split.TRAIN]["x"]
+    test_data = splits[splits_lib.Split.TEST]["x"]
+    self.assertEqual(20, len(train_data))
+    self.assertEqual(10, len(test_data))
+    self.assertEqual(sum(range(30)), int(train_data.sum() + test_data.sum()))
+
   def test_with_batch_size(self):
     items = list(self.builder.as_numpy(
-        split=splits.Split.TRAIN + splits.Split.TEST, batch_size=10))
+        split=splits_lib.Split.TRAIN + splits_lib.Split.TEST, batch_size=10))
     # 3 batches of 10
     self.assertEqual(3, len(items))
     x1, x2, x3 = items[0]["x"], items[1]["x"], items[2]["x"]
@@ -252,18 +269,18 @@ class DatasetBuilderReadTest(tf.test.TestCase):
     self.assertEqual(sum(range(30)), int(x1.sum() + x2.sum() + x3.sum()))
 
   def test_as_numpy(self):
-    items = self.builder.as_numpy(split=splits.Split.TRAIN, batch_size=-1)
+    items = self.builder.as_numpy(split=splits_lib.Split.TRAIN, batch_size=-1)
     self.assertEqual(items["x"].shape[0], 20)
     self.assertLess(items["x"][0], 30)
 
     count = 0
-    for _ in self.builder.as_numpy(split=splits.Split.TRAIN):
+    for _ in self.builder.as_numpy(split=splits_lib.Split.TRAIN):
       count += 1
     self.assertEqual(count, 20)
 
   def test_supervised_keys(self):
     x, _ = self.builder.as_numpy(
-        split=splits.Split.TRAIN, as_supervised=True, batch_size=-1)
+        split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1)
     self.assertEqual(x.shape[0], 20)
 
 

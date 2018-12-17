@@ -110,6 +110,13 @@ class RegisteredTest(tf.test.TestCase):
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)
 
+  def test_load_all_splits(self):
+    name = "empty_dataset_builder"
+    # EmptyDatasetBuilder returns self from as_dataset
+    builder = registered.load(name=name, data_dir="foo")
+    self.assertTrue(builder.as_dataset_called)
+    self.assertEqual(None, builder.as_dataset_kwargs.pop("split"))
+
   def test_load_with_config(self):
     data_dir = "foo"
     name = "empty_dataset_builder/bar/k1=1"
