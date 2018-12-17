@@ -89,6 +89,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     """Decodes a list of integers into text."""
     ids = text_encoder.pad_decr(ids)
     subword_ids = ids
+    del ids
 
     subwords = []
 

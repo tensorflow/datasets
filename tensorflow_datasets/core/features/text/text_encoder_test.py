@@ -55,8 +55,10 @@ class ByteTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
     # With additional tokens
     text_additional = '%s %s%s%s' % (additional_tokens[0], ZH_HELLO,
                                      additional_tokens[1], additional_tokens[2])
-    self.assertEqual([1, 32 + 1 + len(additional_tokens)] + hello_ids + [2, 3],
+    expected_ids = [1, 32 + 1 + len(additional_tokens)] + hello_ids + [2, 3]
+    self.assertEqual(expected_ids,
                      encoder.encode(text_additional))
+    self.assertEqual(text_additional, encoder.decode(expected_ids))
     self.assertEqual(text_encoder.NUM_BYTES + 1 + len(additional_tokens),
                      encoder.vocab_size)
 

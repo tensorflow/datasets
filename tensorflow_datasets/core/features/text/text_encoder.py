@@ -147,7 +147,41 @@ class ByteTextEncoder(TextEncoder):
 
   def decode(self, ids):
     ids = pad_decr(ids)
-    return tf.compat.as_text(bytes(bytearray(ids)))
+    if not self.additional_tokens:
+      return tf.compat.as_text(bytes(bytearray(ids)))
+
+    # Handle additional tokens
+    # First pass picks out the additional tokens
+    tmp_decoded = []
+    for byte_id in ids:
+      is_additional_token = byte_id < len(self.additional_tokens)
+      if is_additional_token:
+        tmp_decoded.append(self.additional_tokens[byte_id])
+      else:
+        # Leave these as ints so that we can contiguously decode bytes
+        # afterwards
+        tmp_decoded.append(byte_id - len(self.additional_tokens))
+
+    # Second pass to decode contiguous bytes
+    strs = []
+    i = 0
+    while i < len(tmp_decoded):
+      el = tmp_decoded[i]
+      if isinstance(el, six.string_types):
+        strs.append(el)
+        i += 1
+      else:
+        # Decode contiguous bytes
+        byte_ids = []
+        while i < len(tmp_decoded):
+          b = tmp_decoded[i]
+          if isinstance(b, int):
+            byte_ids.append(b)
+            i += 1
+          else:
+            break
+        strs.append(bytes(bytearray(byte_ids)).decode("utf-8", "replace"))
+    return u"".join(strs)
 
   @property
   def vocab_size(self):
