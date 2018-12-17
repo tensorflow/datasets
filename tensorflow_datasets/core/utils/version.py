@@ -26,13 +26,11 @@ import collections
 class Version(collections.namedtuple("Version", ["major", "minor", "patch"])):
   """Structure representing a version.
 
-  In addition, Version has two special values:
-   * AUTO: Load existing data dir if exists, otherwise use code version
-   * CODE: Always use the code version (ignore data dir even if data exists)
+  In addition, Version has special values:
+   * LATEST: Always use the code version (ignore data dir even if data exists)
 
   """
 
-  AUTO = "auto"
   LATEST = "latest"
 
   def __new__(cls, *args, **kwargs):
@@ -43,7 +41,7 @@ class Version(collections.namedtuple("Version", ["major", "minor", "patch"])):
       version_str = args[0]
       if isinstance(version_str, cls):
         return version_str
-      elif version_str in (cls.AUTO, cls.LATEST):
+      elif version_str == cls.LATEST:
         return version_str
       return super(Version, cls).__new__(cls, *_str_to_version(version_str))
     elif not args and not kwargs:

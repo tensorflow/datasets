@@ -33,7 +33,6 @@ class VersionTest(tf.test.TestCase):
     self.assertEqual(
         version.Version(major=1, minor=3, patch=5), version.Version(1, 3, 5))
 
-    self.assertEqual(version.Version('auto'), version.Version.AUTO)
     self.assertEqual(version.Version('latest'), version.Version.LATEST)
     self.assertEqual(
         version.Version(version.Version('1.3.5')), version.Version(1, 3, 5))

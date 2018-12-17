@@ -406,7 +406,7 @@ class DatasetBuilder(object):
         Otherwise, automatically extract the last version from the directory.
         If no previous version is found, return None.
     """
-    if version in (utils.Version.LATEST, utils.Version.AUTO):
+    if version == utils.Version.LATEST:
       version = None
 
     builder_config = self._builder_config
