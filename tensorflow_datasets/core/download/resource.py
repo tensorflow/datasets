@@ -79,6 +79,7 @@ class Resource(object):
     self._extract_method = extract_method
     self._fname = None
     self._original_fname = None  # Name of the file as downloaded.
+    self._info = None  # The INFO dict, once known.
 
   @property
   def fname(self):
@@ -100,7 +101,7 @@ class Resource(object):
     if not self._extract_method:
       self._extract_method = _guess_extract_method(
           # no original_fname if extract is called directly (no URL).
-          self.url and self._get_original_fname() or self.fname)
+          self._get_info() and self._get_original_fname() or self.fname)
     return self._extract_method
 
   @property
@@ -115,12 +116,14 @@ class Resource(object):
 
   def _get_info(self):
     """Returns info dict or None."""
-    if not tf.gfile.Exists(self.info_path):
-      tf.logging.info('INFO file %s not found.' % self.info_path)
-      return None
-    tf.logging.info('Reading INFO file %s ...' % self.info_path)
-    with tf.gfile.Open(self.info_path) as info_f:
-      return json.load(info_f)
+    if not self._info:
+      if not tf.gfile.Exists(self.info_path):
+        tf.logging.info('INFO file %s not found.' % self.info_path)
+        return None
+      tf.logging.info('Reading INFO file %s ...' % self.info_path)
+      with tf.gfile.Open(self.info_path) as info_f:
+        self._info = json.load(info_f)
+    return self._info
 
   def exists_locally(self):
     """Returns whether the resource exists locally, at `resource.path`."""
@@ -161,3 +164,4 @@ class Resource(object):
     tf.logging.info('Writing INFO file %s ...' % self.info_path)
     with py_utils.atomic_write(self.info_path, 'w') as info_f:
       json.dump(info, info_f, sort_keys=True)
+    self._info = info

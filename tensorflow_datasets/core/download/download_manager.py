@@ -206,6 +206,20 @@ class DownloadManager(object):
     """
     return _map_promise(self._download, url_or_urls, async_=async_)
 
+  def iter_archive(self, resource):
+    """Returns iterator over files within archive.
+
+    Args:
+      resource: path to archive or `resource_lib.Resource`.
+
+    Returns:
+      Generator yielding tuple (path_within_archive, file_obj).
+      Important: read files as they are yielded. Reading out of order is slow.
+    """
+    if isinstance(resource, six.string_types):
+      resource = resource_lib.Resource(path=resource)
+    return extractor.iter_archive(resource.path, resource.extract_method)
+
   def extract(self, path_or_paths, async_=False):
     """Extract given path(s).
 

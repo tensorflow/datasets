@@ -167,6 +167,16 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     result_p = promise.Promise.resolve(res)
     return async_ and result_p or res
 
+  def _get_iter_archive_result(self, path):
+    dir_path = self._get_dl_extract_result(url=None)
+    self.assertIsInstance(dir_path, str)
+    for dir_path, unused_subdirname, fnames in tf.gfile.Walk(dir_path):
+      for fname in fnames:
+        full_path = os.path.join(dir_path, fname)
+        # +1 to remove leading slash.
+        short_path = full_path[len(path)+1:]
+        yield (short_path, tf.gfile.Open(full_path))
+
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(data_dir=self.data_dir, config=config)  # pylint: disable=not-callable
 
@@ -189,6 +199,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
         download=self._get_dl_extract_result,
         extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
+        iter_archive=self._get_iter_archive_result,
     ):
       builder.download_and_prepare()
 

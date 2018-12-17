@@ -20,8 +20,8 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import re
 
-import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
@@ -118,41 +118,41 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, train_dir):
-    for ex in self._generate_examples(train_dir):
+  def _vocab_text_gen(self, archive):
+    for ex in self._generate_examples(archive,
+                                      os.path.join("aclImdb", "train")):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
-    imdb_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
-
-    train_dir = os.path.join(imdb_path, "aclImdb", "train")
-    test_dir = os.path.join(imdb_path, "aclImdb", "test")
+    arch_path = dl_manager.download(_DOWNLOAD_URL)
+    archive = lambda: dl_manager.iter_archive(arch_path)
 
     # Generate vocabulary from training data if SubwordTextEncoder configured
     self.info.features["text"].maybe_build_from_corpus(
-        self._vocab_text_gen(train_dir))
+        self._vocab_text_gen(archive()))
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             num_shards=10,
-            gen_kwargs={"directory": train_dir}),
+            gen_kwargs={"archive": archive(),
+                        "directory": os.path.join("aclImdb", "train")}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=10,
-            gen_kwargs={"directory": test_dir}),
+            gen_kwargs={"archive": archive(),
+                        "directory": os.path.join("aclImdb", "test")}),
     ]
 
-  def _generate_examples(self, directory):
+  def _generate_examples(self, archive, directory):
     """Generate IMDB examples."""
-    pos_dir = os.path.join(directory, "pos")
-    neg_dir = os.path.join(directory, "neg")
-
-    for d, label in [(pos_dir, "pos"), (neg_dir, "neg")]:
-      for filename in tf.gfile.ListDirectory(d):
-        with tf.gfile.Open(os.path.join(d, filename)) as imdb_f:
-          text = imdb_f.read().strip()
-          yield self.info.features.encode_example({
-              "text": text,
-              "label": label,
-          })
+    reg = re.compile(os.path.join("^%s" % directory, "(?P<label>neg|pos)", ""))
+    for path, imdb_f in archive:
+      res = reg.match(path)
+      if not res:
+        continue
+      text = imdb_f.read().strip()
+      yield self.info.features.encode_example({
+          "text": text,
+          "label": res.groupdict()["label"],
+      })

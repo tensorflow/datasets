@@ -67,7 +67,8 @@ class _Extractor(object):
         'Extracting %s (%s) to %s ...' % (from_path, method, to_path))
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
-    _EXTRACT_METHODS[method](from_path, to_path_tmp)
+    for path, handle in iter_archive(from_path, method):
+      _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     tf.gfile.Rename(to_path_tmp, to_path, overwrite=True)
     tf.logging.info('Finished extracting %s to %s .' % (from_path, to_path))
     return to_path
@@ -91,40 +92,45 @@ def _normpath(path):
   return path
 
 
-def _extract_tar(src, dst, gz=False):
+def _iter_tar(src, gz=False):
   read_type = 'r:gz' if gz else 'r'
-  with tf.gfile.Open(src, 'rb') as f:
-    tar = tarfile.open(mode=read_type, fileobj=f)
+  with tf.gfile.Open(src, 'rb') as tar_file:
+    tar = tarfile.open(mode=read_type, fileobj=tar_file)
     for member in tar.getmembers():
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
-        to_path = os.path.join(dst, _normpath(member.path))
-        _copy(extract_file, to_path)
+        path = _normpath(member.path)
+        yield [path, extract_file]
 
 
-def _extract_tar_gz(src, dst):
-  _extract_tar(src, dst, gz=True)
+def _iter_tar_gz(src):
+  return _iter_tar(src, gz=True)
 
 
-def _extract_gzip(src, dst):
-  with tf.gfile.Open(src, 'rb') as f:
-    gz_file = gzip.GzipFile(fileobj=f)
-    _copy(gz_file, dst)
+def _iter_gzip(src):
+  with tf.gfile.Open(src, 'rb') as gzip_file:
+    gzip_ = gzip.GzipFile(fileobj=gzip_file)
+    yield ('', gzip_)  # No inner file.
 
 
-def _extract_zip(src, dst):
-  with tf.gfile.Open(src, 'rb') as f:
-    z = zipfile.ZipFile(f)
+def _iter_zip(src):
+  with tf.gfile.Open(src, 'rb') as zip_f:
+    z = zipfile.ZipFile(zip_f)
     for member in z.infolist():
       extract_file = z.open(member)
       if extract_file:  # File with data (not directory):
-        to_path = os.path.join(dst, _normpath(member.filename))
-        _copy(extract_file, to_path)
+        path = _normpath(member.filename)
+        yield [path, extract_file]
 
 
 _EXTRACT_METHODS = {
-    resource_lib.ExtractMethod.TAR: _extract_tar,
-    resource_lib.ExtractMethod.TAR_GZ: _extract_tar_gz,
-    resource_lib.ExtractMethod.GZIP: _extract_gzip,
-    resource_lib.ExtractMethod.ZIP: _extract_zip,
+    resource_lib.ExtractMethod.TAR: _iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ: _iter_tar_gz,
+    resource_lib.ExtractMethod.GZIP: _iter_gzip,
+    resource_lib.ExtractMethod.ZIP: _iter_zip,
 }
+
+
+def iter_archive(path, method):
+  """Yields (path_within_archive, file_obj) for archive at path using method."""
+  return _EXTRACT_METHODS[method](path)
