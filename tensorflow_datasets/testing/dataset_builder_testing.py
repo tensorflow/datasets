@@ -67,6 +67,9 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     DATASET_CLASS: class object of DatasetBuilder you want to test.
 
   You may set the following class attributes:
+    BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
+      that should be tested. If None, all the BUILDER_CONFIGS from the class
+      will be tested.
     DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
@@ -92,6 +95,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
   """
 
   DATASET_CLASS = None
+  BUILDER_CONFIG_NAMES_TO_TEST = []
   DL_EXTRACT_RESULT = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
@@ -185,6 +189,11 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     configs = self.builder.BUILDER_CONFIGS
     if configs:
       for config in configs:
+        # Skip the configs that are not in the list.
+        if (self.BUILDER_CONFIG_NAMES_TO_TEST and
+            (config.name not in self.BUILDER_CONFIG_NAMES_TO_TEST)):
+          print("Skipping config %s" % config.name)
+          continue
         with self._subTest(config.name):
           print("Testing config %s" % config.name)
           builder = self._make_builder(config=config)

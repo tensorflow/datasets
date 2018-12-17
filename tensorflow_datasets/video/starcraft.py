@@ -19,39 +19,115 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import abc
-
 import tensorflow as tf
 
+from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 DATA_URL_DIR = "https://storage.googleapis.com/scv_dataset/data/"
 
 
+class StarcraftVideoConfig(tfds.core.BuilderConfig):
+
+  @api_utils.disallow_positional_args
+  def __init__(self, map_name, resolution, size_in_gb, **kwargs):
+    super(StarcraftVideoConfig, self).__init__(**kwargs)
+    self.map_name = map_name
+    self.resolution = resolution
+    self.size_in_gb = size_in_gb
+
+
 class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
   """Abstract class Starcraft video datasets."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  BUILDER_CONFIGS = [
+      StarcraftVideoConfig(
+          name="brawl_64",
+          description="Brawl map with 64x64 resolution.",
+          map_name="Brawl",
+          version="0.1.0",
+          resolution=64,
+          size_in_gb=6.3,
+      ),
+      StarcraftVideoConfig(
+          name="brawl_128",
+          description="Brawl map with 128x128 resolution.",
+          map_name="Brawl",
+          version="0.1.0",
+          resolution=128,
+          size_in_gb=20.7,
+      ),
+      StarcraftVideoConfig(
+          name="collect_mineral_shards_64",
+          description="CollectMineralShards map with 64x64 resolution.",
+          map_name="CollectMineralShards",
+          version="0.1.0",
+          resolution=64,
+          size_in_gb=6.3,
+      ),
+      StarcraftVideoConfig(
+          name="collect_mineral_shards_128",
+          description="CollectMineralShards map with 128x128 resolution.",
+          map_name="CollectMineralShards",
+          version="0.1.0",
+          resolution=128,
+          size_in_gb=20.7,
+      ),
+      StarcraftVideoConfig(
+          name="move_unit_to_border_64",
+          description="MoveUnitToBorder map with 64x64 resolution.",
+          map_name="MoveUnitToBorder",
+          version="0.1.0",
+          resolution=64,
+          size_in_gb=5.8,
+      ),
+      StarcraftVideoConfig(
+          name="move_unit_to_border_128",
+          description="MoveUnitToBorder map with 128x128 resolution.",
+          map_name="MoveUnitToBorder",
+          version="0.1.0",
+          resolution=128,
+          size_in_gb=20.7,
+      ),
+      StarcraftVideoConfig(
+          name="road_trip_with_medevac_64",
+          description="RoadTripWithMedevac map with 64x64 resolution.",
+          map_name="RoadTripWithMedevac",
+          version="0.1.0",
+          resolution=64,
+          size_in_gb=2.4,
+      ),
+      StarcraftVideoConfig(
+          name="road_trip_with_medevac_128",
+          description="RoadTripWithMedevac map with 128x128 resolution.",
+          map_name="RoadTripWithMedevac",
+          version="0.1.0",
+          resolution=128,
+          size_in_gb=7.9,
+      ),
+  ]
 
   def _info(self):
     features = tfds.features.FeaturesDict({
         "rgb_screen":
             tfds.features.Video(
-                shape=(None, self._resolution(), self._resolution(), 3)),
+                shape=(None, self.builder_config.resolution,
+                       self.builder_config.resolution, 3)),
     })
     return tfds.core.DatasetInfo(
         builder=self,
         description="This data set contains videos generated from Starcraft.",
         features=features,
         urls=["https://storage.googleapis.com/scv_dataset/README.html"],
-        size_in_bytes=30.0 * tfds.units.GiB,
+        size_in_bytes=self.builder_config.size_in_gb * tfds.units.GiB,
         citation=("Towards Accurate Generative Models of Video: "
                   "New Metrics & Challenges"),
     )
 
   def _split_generators(self, dl_manager):
-    url = DATA_URL_DIR + "%s_%dx%d_png/" % (
-        self._map_name(), self._resolution(), self._resolution())
+    url = DATA_URL_DIR + "%s_%dx%d_png/" % (self.builder_config.map_name,
+                                            self.builder_config.resolution,
+                                            self.builder_config.resolution)
 
     urls_to_download = {
         "train_%d" % i: url + "train-0000%d-of-00010.tfrecords" % i
@@ -129,31 +205,3 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         except tf.errors.OutOfRangeError:
           # End of file.
           return
-
-  @abc.abstractmethod
-  def _resolution(self):
-    """The resolution of the video (single integer)."""
-    raise NotImplementedError
-
-  @abc.abstractmethod
-  def _map_name(self):
-    """The name of the map/scenario used."""
-    raise NotImplementedError
-
-
-class StarcraftVideoBrawl64(StarcraftVideo):
-
-  def _resolution(self):
-    return 64
-
-  def _map_name(self):
-    return "Brawl"
-
-
-class StarcraftVideoBrawl128(StarcraftVideo):
-
-  def _resolution(self):
-    return 128
-
-  def _map_name(self):
-    return "Brawl"
