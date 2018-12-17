@@ -82,7 +82,6 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         "(testnovel) objects. This is the small 64x64 version.",
         features=features,
         urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
-        size_in_bytes=30.0 * tfds.units.GiB,
         citation=_CITATION,
     )
 

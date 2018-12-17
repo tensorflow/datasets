@@ -30,6 +30,7 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
+from tensorflow_datasets.core.download import util
 
 
 class NonMatchingChecksumError(Exception):
@@ -105,13 +106,13 @@ class DownloadManager(object):
       manual_dir: `str`, path to manually downloaded/extracted data directory.
       checksums: `dict<str url, str sha256>`, url to sha256 of resource.
         Only URLs present are checked.
-      `bool`, if True, validate checksums of files if url is
-        present in the checksums file. If False, no checks are done.
       force_download: `bool`, default to False. If True, always [re]download.
       force_extraction: `bool`, default to False. If True, always [re]extract.
     """
     self._dataset_name = dataset_name
     self._checksums = checksums or {}
+    self._recorded_download_checksums = {}
+    self._download_sizes = {}
     self._download_dir = os.path.expanduser(download_dir)
     self._extract_dir = os.path.expanduser(extract_dir)
     self._manual_dir = os.path.expanduser(manual_dir)
@@ -131,8 +132,25 @@ class DownloadManager(object):
       return True
     return self._checksums[url] == checksum
 
-  def _handle_download_result(self, resource, tmp_dir_path, sha256):
+  @property
+  def recorded_download_checksums(self):
+    """Returns checksums for downloaded urls."""
+    return dict(self._recorded_download_checksums)
+
+  @property
+  def download_sizes(self):
+    """Returns sizes (in bytes) for downloaded urls."""
+    return dict(self._download_sizes)
+
+  def _handle_download_result(self, resource, tmp_dir_path, sha256, dl_size,
+                              existing=False):
     """Store dled file to definitive place, write INFO file, return path."""
+    self._download_sizes[resource.url] = dl_size
+    self._recorded_download_checksums[resource.url] = sha256
+    if existing:
+      if not self._validate_checksum(resource.url, sha256):
+        raise NonMatchingChecksumError(resource.url, resource.path)
+      return resource.path
     fnames = tf.gfile.ListDirectory(tmp_dir_path)
     if len(fnames) > 1:
       raise AssertionError('More than one file in %s.' % tmp_dir_path)
@@ -141,8 +159,8 @@ class DownloadManager(object):
     if not self._validate_checksum(resource.url, sha256):
       raise NonMatchingChecksumError(resource.url, tmp_path)
     resource.write_info_file(self._dataset_name, original_fname)
-    # Inconditionally overwrite previously existing file, since if there is one,
-    # the user asked not to use it (FORCE_DOWNLOAD).
+    # Unconditionally overwrite because either file doesn't exist or
+    # FORCE_DOWNLOAD=true
     tf.gfile.Rename(tmp_path, resource.path, overwrite=True)
     tf.gfile.DeleteRecursively(tmp_dir_path)
     return resource.path
@@ -157,6 +175,9 @@ class DownloadManager(object):
       tf.logging.info(
           'URL %s already downloaded: reusing %s.' % (resource.url,
                                                       resource.path))
+      checksum, dl_size = util.read_checksum_digest(resource.path)
+      self._handle_download_result(resource, None, checksum, dl_size,
+                                   existing=True)
       return promise.Promise.resolve(resource.path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
@@ -164,8 +185,10 @@ class DownloadManager(object):
     tmp_dir_path = '%s.tmp.%s' % (resource.path, uuid.uuid4().hex)
     tf.gfile.MakeDirs(tmp_dir_path)
     tf.logging.info('Downloading %s into %s...' % (resource.url, tmp_dir_path))
-    def callback(checksum):
-      return self._handle_download_result(resource, tmp_dir_path, checksum)
+    def callback(val):
+      checksum, dl_size = val
+      return self._handle_download_result(resource, tmp_dir_path, checksum,
+                                          dl_size)
     return self._downloader.download(resource, tmp_dir_path).then(callback)
 
   def _extract(self, resource):

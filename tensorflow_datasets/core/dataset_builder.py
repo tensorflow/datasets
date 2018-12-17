@@ -240,10 +240,20 @@ class DatasetBuilder(object):
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
         self._download_and_prepare(dl_manager=dl_manager)
 
+        # NOTE: If modifying the lines below to put additional information in
+        # DatasetInfo, you'll likely also want to update
+        # DatasetInfo.read_from_directory to possibly restore these attributes
+        # when reading from package data.
+
         # Update the DatasetInfo metadata by computing statistics from the data.
         if compute_stats:
           self.info.compute_dynamic_properties()
 
+        # Set checksums for all files downloaded
+        self.info.download_checksums = dl_manager.recorded_download_checksums
+        # Set size of all files downloaded
+        self.info.size_in_bytes = sum(
+            [v for _, v in dl_manager.download_sizes.items()])
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)
 

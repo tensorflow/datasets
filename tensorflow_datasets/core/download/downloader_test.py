@@ -63,7 +63,7 @@ class DownloaderTest(tf.test.TestCase):
 
   def test_ok(self):
     promise = self.downloader.download(self.resource, self.tmp_dir)
-    checksum = promise.get()
+    checksum, _ = promise.get()
     self.assertEqual(checksum, self.resp_checksum)
     with open(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
@@ -73,7 +73,7 @@ class DownloaderTest(tf.test.TestCase):
     resource = resouce_lib.Resource(
         url='https://drive.google.com/uc?export=download&id=a1b2bc3')
     promise = self.downloader.download(resource, self.tmp_dir)
-    checksum = promise.get()
+    checksum, _ = promise.get()
     self.assertEqual(checksum, self.resp_checksum)
     with open(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)

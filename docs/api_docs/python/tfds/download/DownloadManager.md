@@ -1,6 +1,8 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.download.DownloadManager" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="download_checksums"/>
+<meta itemprop="property" content="download_sizes"/>
 <meta itemprop="property" content="manual_dir"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
@@ -88,14 +90,20 @@ Download manager constructor.
 * <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data directory.
 * <b>`checksums`</b>: `dict<str url, str sha256>`, url to sha256 of resource.
     Only URLs present are checked.
-  `bool`, if True, validate checksums of files if url is
-    present in the checksums file. If False, no checks are done.
 * <b>`force_download`</b>: `bool`, default to False. If True, always [re]download.
 * <b>`force_extraction`</b>: `bool`, default to False. If True, always [re]extract.
 
 
 
 ## Properties
+
+<h3 id="download_checksums"><code>download_checksums</code></h3>
+
+Returns checksums for downloaded urls.
+
+<h3 id="download_sizes"><code>download_sizes</code></h3>
+
+Returns sizes (in bytes) for downloaded urls.
 
 <h3 id="manual_dir"><code>manual_dir</code></h3>
 

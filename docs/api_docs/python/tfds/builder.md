@@ -21,10 +21,14 @@ Fetches a <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilde
 #### Args:
 
 * <b>`name`</b>: `str`, the registered name of the `DatasetBuilder` (the snake case
-    version of the class name). As a convenience, this string may contain
-    comma-separated keyword arguments for the builder separated from the name
-    by a "/". For example `"foo_bar/a=True,b=3"` would use the `FooBar`
-    dataset with keyword arguments `a=True` and `b=3`.
+    version of the class name). This can be either `"dataset_name"` or
+    `"dataset_name/config_name"` for datasets with `BuilderConfig`s.
+    As a convenience, this string may contain comma-separated keyword
+    arguments for the builder. For example `"foo_bar/a=True,b=3"` would use
+    the `FooBar` dataset passing the keyword arguments `a=True` and `b=3`
+    (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
+    use the `"zoo"` config and pass to the builder keyword arguments `a=True`
+    and `b=3`).
 * <b>`**ctor_kwargs`</b>: `dict` of keyword arguments passed to the `DatasetBuilder`.
     These will override keyword arguments passed in `name`, if any.
 

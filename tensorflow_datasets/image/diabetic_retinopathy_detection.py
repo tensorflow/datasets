@@ -44,7 +44,6 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
         urls=["https://www.kaggle.com/c/diabetic-retinopathy-detection/data"],
-        size_in_bytes=97.0 * tfds.units.GiB,
     )
 
   def _split_generators(self, dl_manager):

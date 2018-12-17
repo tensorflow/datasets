@@ -91,12 +91,14 @@ def get_file_name(url):
 
 
 def read_checksum_digest(path, checksum_cls=hashlib.sha256):
-  """Given a hash constructor, returns checksum digest of file at path."""
+  """Given a hash constructor, returns checksum digest and size of file."""
   checksum = checksum_cls()
+  size = 0
   with tf.gfile.Open(path, 'rb') as f:
     while True:
       block = f.read(io.DEFAULT_BUFFER_SIZE)
+      size += len(block)
       if not block:
         break
       checksum.update(block)
-  return checksum.hexdigest()
+  return checksum.hexdigest(), size

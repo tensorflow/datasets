@@ -119,7 +119,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         description="This data set contains videos generated from Starcraft.",
         features=features,
         urls=["https://storage.googleapis.com/scv_dataset/README.html"],
-        size_in_bytes=self.builder_config.size_in_gb * tfds.units.GiB,
         citation=("Towards Accurate Generative Models of Video: "
                   "New Metrics & Challenges"),
     )

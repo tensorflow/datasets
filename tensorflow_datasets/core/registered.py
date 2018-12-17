@@ -128,7 +128,10 @@ def builder(name, **ctor_kwargs):
     raise DatasetNotFoundError(name, is_abstract=True)
   if name not in _DATASET_REGISTRY:
     raise DatasetNotFoundError(name, is_abstract=False)
-  return _DATASET_REGISTRY[name](**builder_kwargs)
+  try:
+    return _DATASET_REGISTRY[name](**builder_kwargs)
+  except Exception as e:
+    raise type(e)(e.message + "\nFailed to construct dataset %s" % name)
 
 
 @api_utils.disallow_positional_args(allowed=["name"])

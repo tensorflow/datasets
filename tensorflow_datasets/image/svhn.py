@@ -58,8 +58,6 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=[URL],
-        download_checksums=tfds.download.load_checksums(self.name),
-        size_in_bytes=1.5 * tfds.units.GiB,
         citation=_CITATION,
     )
 

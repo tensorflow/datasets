@@ -32,6 +32,8 @@ toc:
       path: /datasets/api_docs/python/tfds/core/SplitGenerator
     - title: SplitInfo
       path: /datasets/api_docs/python/tfds/core/SplitInfo
+    - title: Version
+      path: /datasets/api_docs/python/tfds/core/Version
   - title: tfds.download
     section:
     - title: Overview
@@ -40,8 +42,6 @@ toc:
       path: /datasets/api_docs/python/tfds/download/DownloadManager
     - title: GenerateMode
       path: /datasets/api_docs/python/tfds/download/GenerateMode
-    - title: load_checksums
-      path: /datasets/api_docs/python/tfds/download/load_checksums
   - title: tfds.features
     section:
     - title: Overview

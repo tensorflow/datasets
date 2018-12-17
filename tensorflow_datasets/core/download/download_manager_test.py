@@ -88,7 +88,7 @@ class DownloadManagerTest(tf.test.TestCase):
         self.existing_paths.append(to)
         self.existing_paths.remove(from_)
         self.files_content[to] = self.files_content.pop(from_)
-    gfile = tf.test.mock.patch.object(
+    self.gfile_patch = tf.test.mock.patch.object(
         tf, 'gfile',
         Exists=lambda path: path in self.existing_paths,
         MakeDirs=self.made_dirs.append,
@@ -97,7 +97,10 @@ class DownloadManagerTest(tf.test.TestCase):
         Open=open_,
         Rename=tf.test.mock.Mock(side_effect=rename),
         )
-    self.gfile = gfile.start()
+    self.gfile = self.gfile_patch.start()
+
+  def tearDown(self):
+    self.gfile_patch.stop()
 
   def _write_info(self, path, info):
     content = json.dumps(info, sort_keys=True)
@@ -130,15 +133,15 @@ class DownloadManagerTest(tf.test.TestCase):
     urla_sha256 = _sha256('http://a.ch/a')
     urlb_sha256 = _sha256('https://a.ch/b')
     urlc_sha256 = _sha256('https://a.ch/c')
-    self.existing_paths.extend([
+    _ = [self._add_file(path) for path in [
         '/dl_dir/%s' % urla_sha256,
         '/dl_dir/%s.INFO' % urla_sha256,
         '/dl_dir/%s' % urlc_sha256,
-    ])
+    ]]
     downloaded_b, self.dl_results['https://a.ch/b'] = _get_promise_on_event(
-        'sha_b')
+        ('sha_b', 10))
     downloaded_c, self.dl_results['https://a.ch/c'] = _get_promise_on_event(
-        'sha_c')
+        ('sha_c', 10))
     manager = self._get_manager()
     res = manager.download(urls, async_=True)
     self.assertFalse(res.is_fulfilled)
@@ -179,8 +182,8 @@ class DownloadManagerTest(tf.test.TestCase):
     url_a_sha = _sha256(url_a)
     url_b_sha = _sha256(url_b)
     self.file_names[url_a_sha] = 'a.zip'
-    dl_a, self.dl_results[url_a] = _get_promise_on_event('sha_a')
-    dl_b, self.dl_results[url_b] = _get_promise_on_event('sha_b')
+    dl_a, self.dl_results[url_a] = _get_promise_on_event(('sha_a', 10))
+    dl_b, self.dl_results[url_b] = _get_promise_on_event(('sha_b', 10))
     ext_a, self.extract_results['/dl_dir/%s' % url_a_sha] = (
         _get_promise_on_event('/extract_dir/ZIP.%s' % url_a_sha))
     # url_b doesn't need any extraction.
@@ -197,7 +200,7 @@ class DownloadManagerTest(tf.test.TestCase):
     url_a_sha = _sha256(url_a)
     self.file_names[url_a_sha] = 'a.zip'
     # File was already downloaded:
-    self.existing_paths.append('/dl_dir/%s' % url_a_sha)
+    self._add_file('/dl_dir/%s' % url_a_sha)
     self._write_info('/dl_dir/%s.INFO' % url_a_sha, {'original_fname': 'a.zip'})
     ext_a, self.extract_results['/dl_dir/%s' % url_a_sha] = (
         _get_promise_on_event('/extract_dir/ZIP.%s' % url_a_sha))
@@ -215,7 +218,7 @@ class DownloadManagerTest(tf.test.TestCase):
     self.file_names[url_sha] = 'b.tar.gz'
     self._write_info('/dl_dir/%s.INFO' % url_sha,
                      {'original_fname': 'b.tar.gz'})
-    dl_a, self.dl_results[url] = _get_promise_on_event('sha_a')
+    dl_a, self.dl_results[url] = _get_promise_on_event(('sha_a', 10))
     ext_a, self.extract_results['/dl_dir/%s' % url_sha] = (
         _get_promise_on_event('/extract_dir/TAR_GZ.%s' % url_sha))
     dl_a.set()
@@ -235,7 +238,7 @@ class DownloadManagerTest(tf.test.TestCase):
 
   def test_wrong_checksum(self):
     url = 'http://a/b.tar.gz'
-    dl_a, self.dl_results[url] = _get_promise_on_event('sha_a')
+    dl_a, self.dl_results[url] = _get_promise_on_event(('sha_a', 10))
     dl_a.set()
     manager = self._get_manager(checksums={url: 'sha_b'})
     with self.assertRaises(dm.NonMatchingChecksumError):

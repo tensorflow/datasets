@@ -26,6 +26,8 @@ Datasets
   * [`"imdb_reviews"`](#imdb_reviews)
 * `video`
   * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
+  * [`"starcraft_video_brawl128"`](#starcraft_video_brawl128)
+  * [`"starcraft_video_brawl64"`](#starcraft_video_brawl64)
 
 ---
 
@@ -135,28 +137,24 @@ From https://www.cs.toronto.edu/~kriz/cifar.html
 
 This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a "fine" label (the class to which it belongs) and a "coarse" label (the superclass to which it belongs).
 
-[`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py) v1.1.0
+[`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py) v1.2.0
 
 ### Features
 Name  | Type | Shape
 :---- | :--- | :----
+coarse_label|tf.int64|()
+fine_label|tf.int64|()
 image|tf.uint8|(32, 32, 3)
-label|tf.int64|()
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     60,000
-TRAIN      |     50,000
-TEST       |     10,000
-
+None computed
 
 ### Urls
  * https://www.cs.toronto.edu/~kriz/cifar.html
 
 ### Supervised Keys
-(u'image', u'label')
+(u'image', u'fine_label')
 
 ### Citation
 ```
@@ -359,13 +357,7 @@ label|tf.int64|()
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |    630,420
-EXTRA      |    531,131
-TRAIN      |     73,257
-TEST       |     26,032
-
+None computed
 
 ### Urls
  * http://ufldl.stanford.edu/housenumbers/
@@ -448,12 +440,7 @@ text|tf.int64|(None,)
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     50,000
-TRAIN      |     25,000
-TEST       |     25,000
-
+None computed
 
 ### Urls
  * http://ai.stanford.edu/~amaas/data/sentiment/
@@ -500,12 +487,7 @@ image_main|tf.uint8|(64, 64, 3)
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     43,520
-TRAIN      |     43,264
-TEST       |        256
-
+None computed
 
 ### Urls
  * https://sites.google.com/site/brainrobotdata/home/push-dataset
@@ -533,6 +515,66 @@ None
   year = 2016
 }
 
+```
+
+---
+
+## `"starcraft_video_brawl128"`
+
+From https://storage.googleapis.com/scv_dataset/README.html
+
+This data set contains videos generated from Starcraft.
+
+[`tfds.video.starcraft.StarcraftVideoBrawl128`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/starcraft.py) v0.1.0
+
+### Features
+Name  | Type | Shape
+:---- | :--- | :----
+rgb_screen|tf.uint8|(None, 128, 128, 3)
+
+
+### Statistics
+None computed
+
+### Urls
+ * https://storage.googleapis.com/scv_dataset/README.html
+
+### Supervised Keys
+None
+
+### Citation
+```
+Towards Accurate Generative Models of Video: New Metrics & Challenges
+```
+
+---
+
+## `"starcraft_video_brawl64"`
+
+From https://storage.googleapis.com/scv_dataset/README.html
+
+This data set contains videos generated from Starcraft.
+
+[`tfds.video.starcraft.StarcraftVideoBrawl64`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/starcraft.py) v0.1.0
+
+### Features
+Name  | Type | Shape
+:---- | :--- | :----
+rgb_screen|tf.uint8|(None, 64, 64, 3)
+
+
+### Statistics
+None computed
+
+### Urls
+ * https://storage.googleapis.com/scv_dataset/README.html
+
+### Supervised Keys
+None
+
+### Citation
+```
+Towards Accurate Generative Models of Video: New Metrics & Challenges
 ```
 
 ---

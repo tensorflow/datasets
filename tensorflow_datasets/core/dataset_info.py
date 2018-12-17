@@ -158,6 +158,10 @@ class DatasetInfo(object):
   def size_in_bytes(self):
     return self.as_proto.size_in_bytes
 
+  @size_in_bytes.setter
+  def size_in_bytes(self, size):
+    self.as_proto.size_in_bytes = size
+
   @property
   def features(self):
     return self._features
@@ -197,6 +201,11 @@ class DatasetInfo(object):
   @property
   def download_checksums(self):
     return self.as_proto.download_checksums
+
+  @download_checksums.setter
+  def download_checksums(self, checksums):
+    self.as_proto.download_checksums.clear()
+    self.as_proto.download_checksums.update(checksums)
 
   @property
   def num_examples(self):
@@ -308,6 +317,9 @@ class DatasetInfo(object):
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
+    # Restore download info
+    self.download_checksums = parsed_proto.download_checksums
+    self.size_in_bytes = parsed_proto.size_in_bytes
 
     # If we are restoring on-disk data, then we also restore all dataste info
     # information from the previously saved proto.

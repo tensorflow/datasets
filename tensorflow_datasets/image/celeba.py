@@ -100,7 +100,6 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
             },
         }),
         urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],
-        size_in_bytes=2 * tfds.units.GiB,
         citation=_CITATION,
     )
 

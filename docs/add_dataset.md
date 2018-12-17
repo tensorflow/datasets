@@ -14,10 +14,9 @@ then this document is for you.
 *   [Specifying how the data should be split](#specifying-how-the-data-should-be-split)
 *   [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
     *   [File access and tf.gfile](#file-access-and-tfgfile)
-*   [Register your dataset](#register-your-dataset)
 *   [Dataset configuration](#dataset-configuration)
 *   [Create your own FeatureConnector](#create-your-own-featureconnector)
-*   [Enabling downloads validation](#enabling-downloads-validation)
+*   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 
 ## Overview
@@ -133,8 +132,7 @@ it should pass.
 The
 [`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py)
 stores the information we know about a dataset. For now, let's add what features
-are part of the dataset and their types. If possible, please also add the 
-approximate size of the dataset. For example:
+are part of the dataset and their types. For example:
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
@@ -160,8 +158,6 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
         supervised_keys=("image", "label"),
         # Homepage of the dataset. Not used anywhere except for documentation
         urls=["https://dataset-homepage.org"],
-        # Approximate dataset size (used to raise warning before download).
-        size_in_bytes=162.6 * tfds.units.MiB,
         # Citation to use for using this dataset in the Bibtex format.
         citation=r"""@article{my-awesome-dataset-2020,
                               author = {Smith, John},"}""",
@@ -268,12 +264,6 @@ In order to support Cloud storage systems, all file access must use `tf.gfile`
 or other TensorFlow file APIs (for example, `tf.python_io`). Python built-ins
 for file operations (e.g. `open`, `os.rename`, `gzip`, etc.) must be avoided.
 
-## Register your dataset
-
-To ensure that users can access the dataset through `tfds.load` and
-`tfds.builder`, make sure your module `my_dataset` is imported in
-`tensorflow_datasets/__init__.py`.
-
 ## Dataset configuration
 
 Some datasets may have variants that are best implemented through configuration
@@ -373,31 +363,31 @@ the
 [features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
 for more examples.
 
-## Enabling downloads validation
+## Adding the dataset to `tensorflow/datasets`
 
-Once your `DatasetBuilder` works as expected, and while you still have the
-downloaded files on disk, it is time to enable the downloaded files checksum
-validation.
+Thanks for making the dataset accessible to the community! Before you send your
+pull request, make sure your dataset's module is imported and that the metadata
+files are copied in.
 
-You will need to add the file containing the URLs and associated checksums.
-This file can be generated using the `create_checksum_file` script. E.g.
+### Import for Registration
 
-```sh
-scripts/create_checksum_file --dest_dir=url_checksums --dataset=mnist
-```
+All subclasses of `tfds.core.DatasetBuilder` are automatically registered
+when their module is imported such that they can be accessed through
+`tfds.builder` and `tfds.load`.
 
-Then, edit the `tfds.core.DatasetInfo` specified earlier to pass in a dict
-mapping url to checksum (sha256) of downloaded file. That dict is loaded from
-the file created by previous command.
+If you're contributing the dataset to `tensorflow/datasets`, add the module
+import to `tensorflow_datasets/__init__.py`.
 
-```
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        ...
-        download_checksums=tfds.download.load_checksums(self.name),
-        ...
-    )
-```
+### Package `DatasetInfo` and metadata files
+
+All datasets that ship with `tensorflow-datasets` have their
+`dataset_info.json` and metadata files packaged in so that users can access
+statistics and other information without needing to generate the dataset.
+
+Run [`tensorflow_datasets/scripts/download_and_prepare`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/scripts/download_and_prepare.py)
+to generate the dataset and then copy in the `dataset_info.json` and other
+metadata files to [`tensorflow_datasets/dataset_info`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/dataset_info/).
+
 
 ## Large datasets and distributed generation
 

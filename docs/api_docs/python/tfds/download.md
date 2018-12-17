@@ -17,7 +17,3 @@ Public API of the download manager.
 
 [`class GenerateMode`](../tfds/download/GenerateMode.md): Enum for the different version conflict resolution modes.
 
-## Functions
-
-[`load_checksums(...)`](../tfds/download/load_checksums.md): Returns dict: {"url": "checksum"} for given dataset.
-

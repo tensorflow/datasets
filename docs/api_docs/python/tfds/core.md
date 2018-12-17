@@ -29,3 +29,5 @@ tensorflow_datasets.core.
 
 [`class SplitInfo`](../tfds/core/SplitInfo.md)
 
+[`class Version`](../tfds/core/Version.md): Structure representing a version.
+

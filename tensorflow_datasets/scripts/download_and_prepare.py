@@ -99,19 +99,19 @@ def download_and_prepare(dataset_name, builder_config=None):
 
 
 def main(_):
-  datasets_to_build = FLAGS.datasets.split(",")
-  datasets_to_exclude = FLAGS.exclude_datasets.split(",")
-  for dataset_name in datasets_to_build:
-    if dataset_name in datasets_to_exclude:
-      tf.logging.info("Excluding [%s]" % dataset_name)
-      continue
-    builder = tfds.builder(
-        dataset_name, data_dir=FLAGS.data_dir)
+  datasets_to_build = (
+      set(FLAGS.datasets.split(",")) -
+      set(FLAGS.exclude_datasets.split(",")))
+  tf.logging.info("Running download_and_prepare for datasets:\n%s",
+                  "\n".join(datasets_to_build))
+  builders = [tfds.builder(name, data_dir=FLAGS.data_dir)
+              for name in datasets_to_build]
+  for builder in builders:
     if builder.BUILDER_CONFIGS:
       for config in builder.BUILDER_CONFIGS:
-        download_and_prepare(dataset_name, config)
+        download_and_prepare(builder.name, config)
     else:
-      download_and_prepare(dataset_name)
+      download_and_prepare(builder.name)
 
 
 

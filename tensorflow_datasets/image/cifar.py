@@ -61,8 +61,6 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
-        download_checksums=tfds.download.load_checksums(self.name),
-        size_in_bytes=162.6 * tfds.units.MiB,
         citation=_CITATION,
     )
 
@@ -215,8 +213,6 @@ class Cifar100(Cifar10):
         }),
         supervised_keys=("image", label_to_use),
         urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
-        download_checksums=tfds.download.load_checksums(self.name),
-        size_in_bytes=161.2 * tfds.units.MiB,
         citation=_CITATION,
     )
 

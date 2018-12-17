@@ -16,6 +16,10 @@
   "schema": {
     "feature": [
       {
+        "name": "label", 
+        "type": "INT"
+      }, 
+      {
         "name": "image", 
         "shape": {
           "dim": [
@@ -31,14 +35,10 @@
           ]
         }, 
         "type": "INT"
-      }, 
-      {
-        "name": "label", 
-        "type": "INT"
       }
     ]
   }, 
-  "sizeInBytes": "11534336", 
+  "sizeInBytes": "11594722", 
   "splits": [
     {
       "name": "test", 
@@ -46,21 +46,21 @@
       "statistics": {
         "features": [
           {
-            "name": "image", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
             "name": "label", 
             "numStats": {
               "commonStats": {
                 "numNonMissing": "10000"
               }, 
               "max": 9.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              }, 
+              "max": 255.0
             }
           }
         ], 
@@ -73,21 +73,21 @@
       "statistics": {
         "features": [
           {
-            "name": "image", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "60000"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
             "name": "label", 
             "numStats": {
               "commonStats": {
                 "numNonMissing": "60000"
               }, 
               "max": 9.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              }, 
+              "max": 255.0
             }
           }
         ], 

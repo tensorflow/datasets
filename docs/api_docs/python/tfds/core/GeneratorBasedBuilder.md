@@ -5,9 +5,10 @@
 <meta itemprop="property" content="info"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
+<meta itemprop="property" content="as_numpy"/>
 <meta itemprop="property" content="download_and_prepare"/>
-<meta itemprop="property" content="numpy_iterator"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
+<meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
 </div>
@@ -70,6 +71,7 @@ Return the dataset info object. See `DatasetInfo` for details.
 ``` python
 as_dataset(
     split,
+    batch_size=1,
     shuffle_files=None,
     as_supervised=False
 )
@@ -84,6 +86,10 @@ Subclasses must override _as_dataset.
 #### Args:
 
 * <b>`split`</b>: <a href="../../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read.
+* <b>`batch_size`</b>: `int`, batch size. Note that variable-length features will
+    be 0-padded if `batch_size > 1`. Users that want more custom behavior
+    should use `batch_size=1` and use the `tf.data` API to construct a
+    custom pipeline.
 * <b>`shuffle_files`</b>: `bool` (optional), whether to shuffle the input files.
     Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 * <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
@@ -96,6 +102,34 @@ Subclasses must override _as_dataset.
 #### Returns:
 
 `tf.data.Dataset`
+
+<h3 id="as_numpy"><code>as_numpy</code></h3>
+
+``` python
+as_numpy(
+    batch_size=1,
+    **as_dataset_kwargs
+)
+```
+
+Generates batches of NumPy arrays from the given <a href="../../tfds/Split.md"><code>tfds.Split</code></a>.
+
+#### Args:
+
+* <b>`batch_size`</b>: `int`, batch size for the NumPy arrays. If -1 or None,
+    `as_numpy` will return the full dataset at once, each feature having its
+    own array.
+* <b>`**as_dataset_kwargs`</b>: Keyword arguments passed on to
+    <a href="../../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>.
+
+
+#### Yields:
+
+Feature dictionaries
+`dict<str feature_name, numpy.array feature_val>`.
+
+If `batch_size` is -1 or None, will return a single dictionary containing
+the entire dataset instead of yielding batches.
 
 <h3 id="download_and_prepare"><code>download_and_prepare</code></h3>
 
@@ -132,32 +166,13 @@ Subclasses must override _download_and_prepare.
 
 * <b>`ValueError`</b>: If the user defines both cache_dir and dl_manager
 
-<h3 id="numpy_iterator"><code>numpy_iterator</code></h3>
-
-``` python
-numpy_iterator(**as_dataset_kwargs)
-```
-
-Generates numpy elements from the given <a href="../../tfds/Split.md"><code>tfds.Split</code></a>.
-
-This generator can be useful for non-TensorFlow programs.
-
-#### Args:
-
-* <b>`**as_dataset_kwargs`</b>: Keyword arguments passed on to
-    <a href="../../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>.
-
-
-#### Returns:
-
-Generator yielding feature dictionaries
-`dict<str feature_name, numpy.array feature_val>`.
-
 
 
 ## Class Members
 
 <h3 id="BUILDER_CONFIGS"><code>BUILDER_CONFIGS</code></h3>
+
+<h3 id="VERSION"><code>VERSION</code></h3>
 
 <h3 id="builder_configs"><code>builder_configs</code></h3>
 

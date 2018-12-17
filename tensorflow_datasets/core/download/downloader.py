@@ -98,10 +98,12 @@ class _Downloader(object):
     response = session.get(url, stream=True)
     fname = _get_filename(response)
     path = os.path.join(destination_path, fname)
+    size = 0
     with gfile.Open(path, 'wb') as file_:
       for block in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
+        size += len(block)
         checksum.update(block)
         # TODO(pierrot): Test this is faster than doing checksum in the end
         # and document results here.
         file_.write(block)
-    return checksum.hexdigest()
+    return checksum.hexdigest(), size

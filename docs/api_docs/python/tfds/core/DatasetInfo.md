@@ -46,16 +46,14 @@ split is typically updated during data generation (i.e. on calling
 
 ``` python
 __init__(
-    name=None,
+    builder,
     description=None,
-    version=None,
     features=None,
     supervised_keys=None,
     splits=None,
     urls=None,
     download_checksums=None,
     size_in_bytes=0,
-    config_name=None,
     citation=None
 )
 ```
@@ -64,9 +62,8 @@ Constructs DatasetInfo.
 
 #### Args:
 
-* <b>`name`</b>: `str`, Name of the dataset, usually set to builder.name.
+* <b>`builder`</b>: `DatasetBuilder`, dataset builder for this info.
 * <b>`description`</b>: `str`, description of this dataset.
-* <b>`version`</b>: `str`, semantic version of the dataset (ex: '1.2.0')
 * <b>`features`</b>: <a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>, Information on the feature dict
     of the `tf.data.Dataset()` object from the `builder.as_dataset()`
     method.
@@ -78,7 +75,6 @@ Constructs DatasetInfo.
     If a url is not listed, its checksum is not checked.
 * <b>`size_in_bytes`</b>: `int`, optional, approximate size in bytes of the raw
     size of the dataset that we will be downloading from the internet.
-* <b>`config_name`</b>: `str`, BuilderConfig name.
 * <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
 
 
@@ -148,7 +144,7 @@ Whether DatasetInfo has been fully initialized.
 <h3 id="compute_dynamic_properties"><code>compute_dynamic_properties</code></h3>
 
 ``` python
-compute_dynamic_properties(builder)
+compute_dynamic_properties()
 ```
 
 
@@ -164,7 +160,10 @@ Initialize DatasetInfo from package data, returns True on success.
 <h3 id="read_from_directory"><code>read_from_directory</code></h3>
 
 ``` python
-read_from_directory(dataset_info_dir)
+read_from_directory(
+    dataset_info_dir,
+    from_packaged_data=False
+)
 ```
 
 Update DatasetInfo from the JSON file in `dataset_info_dir`.
@@ -178,6 +177,8 @@ This will overwrite all previous metadata.
 
 * <b>`dataset_info_dir`</b>: `str` The directory containing the metadata file. This
     should be the root directory of a specific dataset version.
+* <b>`from_packaged_data`</b>: `bool`, If data is restored from packaged data,
+    then only the informations not defined in the code are updated
 
 
 #### Returns:

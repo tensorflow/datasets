@@ -10,7 +10,9 @@ tfds.load(
     name,
     split,
     data_dir=None,
+    batch_size=1,
     download=True,
+    as_numpy=False,
     as_supervised=False,
     with_info=False,
     builder_kwargs=None,
@@ -49,19 +51,28 @@ of hundreds of GiB to disk. Refer to download argument.
 #### Args:
 
 * <b>`name`</b>: `str`, the registered name of the `DatasetBuilder` (the snake case
-    version of the class name). As a convenience, this string may contain
-    comma-separated keyword arguments for the builder. For example
-    `"foo_bar/a=True,b=3"` would use the `FooBar` dataset passing the keyword
-    arguments `a=True` and `b=3`.
+    version of the class name). This can be either `"dataset_name"` or
+    `"dataset_name/config_name"` for datasets with `BuilderConfig`s.
+    As a convenience, this string may contain comma-separated keyword
+    arguments for the builder. For example `"foo_bar/a=True,b=3"` would use
+    the `FooBar` dataset passing the keyword arguments `a=True` and `b=3`
+    (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
+    use the `"zoo"` config and pass to the builder keyword arguments `a=True`
+    and `b=3`).
 * <b>`split`</b>: <a href="../tfds/Split.md"><code>tfds.Split</code></a>, which split of the data to load.
 * <b>`data_dir`</b>: `str` (optional), directory to read/write data.
     Defaults to "~/tensorflow_datasets".
+* <b>`batch_size`</b>: `int`, set to > 1 to get batches of examples. Note that
+    variable length features will be 0-padded. If `as_numpy=True` and
+    `batch_size=-1`, will return the full dataset in NumPy arrays.
 * <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
     expected to be in `data_dir`. If `True` and the data is already in
     `data_dir`, `download_and_prepare` is a no-op.
     Defaults to `True`.
+* <b>`as_numpy`</b>: `bool`, whether to return a generator of NumPy array batches
+    using <a href="../tfds/core/DatasetBuilder.md#as_numpy"><code>tfds.core.DatasetBuilder.as_numpy</code></a>.
 * <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default,

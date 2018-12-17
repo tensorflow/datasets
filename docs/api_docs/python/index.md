@@ -13,10 +13,10 @@
 *  <a href="./tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>
 *  <a href="./tfds/core/SplitGenerator.md"><code>tfds.core.SplitGenerator</code></a>
 *  <a href="./tfds/core/SplitInfo.md"><code>tfds.core.SplitInfo</code></a>
+*  <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
 *  <a href="./tfds/download.md"><code>tfds.download</code></a>
 *  <a href="./tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
 *  <a href="./tfds/download/GenerateMode.md"><code>tfds.download.GenerateMode</code></a>
-*  <a href="./tfds/download/load_checksums.md"><code>tfds.download.load_checksums</code></a>
 *  <a href="./tfds/features.md"><code>tfds.features</code></a>
 *  <a href="./tfds/features/ClassLabel.md"><code>tfds.features.ClassLabel</code></a>
 *  <a href="./tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>

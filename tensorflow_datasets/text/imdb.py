@@ -114,7 +114,6 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("text", "label"),
         urls=["http://ai.stanford.edu/~amaas/data/sentiment/"],
-        size_in_bytes=85 * tfds.units.MiB,
         citation=_CITATION,
     )
 

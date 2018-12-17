@@ -94,8 +94,6 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=[self.URL],
-        download_checksums=tfds.download.load_checksums(self.name),
-        size_in_bytes=11.0 * tfds.units.MiB,
         citation=_MNIST_CITATION,
     )
 
@@ -180,7 +178,6 @@ class FashionMNIST(MNIST):
         }),
         supervised_keys=("image", "label"),
         urls=["https://github.com/zalandoresearch/fashion-mnist"],
-        size_in_bytes=29.4 * tfds.units.MiB,
         citation=_FASHION_MNIST_CITATION,
     )
 
