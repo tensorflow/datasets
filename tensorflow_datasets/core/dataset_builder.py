@@ -369,30 +369,29 @@ class DatasetBuilder(object):
       the entire dataset instead of yielding batches.
     """
     # pylint: enable=g-doc-return-or-yield
-    def _as_numpy(batch_size):
+    wants_full_dataset = batch_size == -1
+    if wants_full_dataset:
+      batch_size = self.info.num_examples or int(1e10)
+
+    def _as_numpy(graph=None):
       """Internal as_numpy."""
-      wants_full_dataset = batch_size == -1
-      if wants_full_dataset:
-        batch_size = self.info.num_examples or int(1e10)
+
+      def ds_iter(ds):
+        # Need to ensure that the graph is re-entered and the yield is explicit
+        # so that the Session.run calls are within its context.
+        with utils.maybe_with_graph(graph):
+          for el in dataset_utils.iterate_over_dataset(ds):
+            yield el
+
       dataset = self.as_dataset(batch_size=batch_size, **as_dataset_kwargs)
+      return utils.map_nested(ds_iter, dataset, dict_only=True)
 
-      def _np_from_ds(ds):
-        gen = dataset_utils.iterate_over_dataset(ds)
-        if wants_full_dataset:
-          return next(gen)
-        else:
-          return gen
-
-      if as_dataset_kwargs.get("split") is None:
-        return {s: _np_from_ds(ds) for s, ds in dataset.items()}
+    with utils.maybe_with_graph() as g:
+      gen = _as_numpy(g)
+      if wants_full_dataset:
+        return utils.map_nested(next, gen)
       else:
-        return _np_from_ds(dataset)
-
-    if tf.executing_eagerly():
-      return _as_numpy(batch_size)
-    else:
-      with tf.Graph().as_default():
-        return _as_numpy(batch_size)
+        return gen
 
   def _get_data_dir(self, version=None):
     """Return the data directory of one dataset version.

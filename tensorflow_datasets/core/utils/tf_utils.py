@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
+import contextlib
 
 import numpy as np
 import tensorflow as tf
@@ -150,3 +151,15 @@ def nogpu_session():
   """tf.Session, hiding GPUs."""
   config = tf.ConfigProto(device_count={'GPU': 0})
   return tf.Session(config=config)
+
+
+@contextlib.contextmanager
+def maybe_with_graph(graph=None):
+  """Eager-compatible Graph().as_default() yielding the graph."""
+  if tf.executing_eagerly():
+    yield None
+  else:
+    if graph is None:
+      graph = tf.Graph()
+    with graph.as_default():
+      yield graph
