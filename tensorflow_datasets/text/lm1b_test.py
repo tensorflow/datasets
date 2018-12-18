@@ -13,9 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text-based sentiment analysis datasets."""
+"""Tests for lm1b dataset module."""
 
-from tensorflow_datasets.text.imdb import IMDBReviews
-from tensorflow_datasets.text.imdb import IMDBReviewsConfig
-from tensorflow_datasets.text.lm1b import Lm1b
-from tensorflow_datasets.text.lm1b import Lm1bConfig
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets.testing import dataset_builder_testing
+from tensorflow_datasets.text import lm1b
+
+
+class Lm1bTest(dataset_builder_testing.TestCase):
+  DATASET_CLASS = lm1b.Lm1b
+  SPLITS = {
+      "train": 3,
+      "test": 2,
+  }
+
+
+if __name__ == "__main__":
+  dataset_builder_testing.main()
