@@ -1,0 +1,133 @@
+{
+  "citation": "@article{2016arXiv160605250R,\n       author = {{Rajpurkar}, Pranav and {Zhang}, Jian and {Lopyrev},\n                 Konstantin and {Liang}, Percy},\n        title = \"{SQuAD: 100,000+ Questions for Machine Comprehension of Text}\",\n      journal = {arXiv e-prints},\n         year = 2016,\n          eid = {arXiv:1606.05250},\n        pages = {arXiv:1606.05250},\narchivePrefix = {arXiv},\n       eprint = {1606.05250},\n}\n", 
+  "description": "Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable.\n", 
+  "downloadChecksums": {
+    "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v1.1.json": "95aa6a52d5d6a735563366753ca50492a658031da74f301ac5238b03966972c9", 
+    "https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json": "3527663986b8295af4f7fcdff1ba1ff3f72d07d61a20f487cb238a6ef92fd955"
+  }, 
+  "location": {
+    "urls": [
+      "https://rajpurkar.github.io/SQuAD-explorer/"
+    ]
+  }, 
+  "name": "squad", 
+  "schema": {
+    "feature": [
+      {
+        "name": "context", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "question", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "first_answer", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "35142551", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "context", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "87599"
+              }, 
+              "max": 8180.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "question", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "87599"
+              }, 
+              "max": 8171.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "first_answer", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "87599"
+              }, 
+              "max": 8179.0, 
+              "min": 1.0
+            }
+          }
+        ], 
+        "numExamples": "87599"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "context", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10570"
+              }, 
+              "max": 8179.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "question", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10570"
+              }, 
+              "max": 8146.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "first_answer", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10570"
+              }, 
+              "max": 8179.0, 
+              "min": 1.0
+            }
+          }
+        ], 
+        "numExamples": "10570"
+      }
+    }
+  ], 
+  "version": "0.0.1"
+}
