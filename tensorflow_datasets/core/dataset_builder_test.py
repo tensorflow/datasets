@@ -29,34 +29,9 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import test_utils
-from tensorflow_datasets.core import utils
-
-tf.enable_eager_execution()
 
 
-class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
-
-  VERSION = utils.Version("0.0.0")
-
-  def _split_generators(self, dl_manager):
-    # Split the 30 examples from the generator into 2 train shards and 1 test
-    # shard.
-    del dl_manager
-    return [splits_lib.SplitGenerator(
-        name=[splits_lib.Split.TRAIN, splits_lib.Split.TEST],
-        num_shards=[2, 1],
-    )]
-
-  def _info(self):
-    return dataset_info.DatasetInfo(
-        builder=self,
-        features=features.FeaturesDict({"x": tf.int64}),
-        supervised_keys=("x", "x"),
-    )
-
-  def _generate_examples(self):
-    for i in range(30):
-      yield self.info.features.encode_example({"x": i})
+DummyDatasetSharedGenerator = test_utils.DummyDatasetSharedGenerator
 
 
 class DummyBuilderConfig(dataset_builder.BuilderConfig):
@@ -108,6 +83,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
 
 class DatasetBuilderTest(tf.test.TestCase):
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_shared_generator(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
@@ -127,10 +103,11 @@ class DatasetBuilderTest(tf.test.TestCase):
       splits_list = [
           splits_lib.Split.TRAIN, splits_lib.Split.TEST
       ]
-      datasets = [builder.as_dataset(split=split) for split in splits_list]
-      data = [[el["x"].numpy() for el in dataset] for dataset in datasets]
+      train_data, test_data = [
+          [el["x"] for el in builder.as_numpy(split=split)]
+          for split in splits_list
+      ]
 
-      train_data, test_data = data
       self.assertEqual(20, len(train_data))
       self.assertEqual(10, len(test_data))
       self.assertEqual(list(range(30)), sorted(train_data + test_data))
@@ -143,12 +120,14 @@ class DatasetBuilderTest(tf.test.TestCase):
                        builder.info.splits[splits_lib.Split.TEST].num_examples)
       self.assertEqual(30, builder.info.num_examples)
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_load(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       dataset = registered.load(
           name="dummy_dataset_shared_generator",
           data_dir=tmp_dir,
           download=True,
+          as_numpy=True,
           split=splits_lib.Split.TRAIN)
       data = list(dataset)
       self.assertEqual(20, len(data))
@@ -194,6 +173,7 @@ class DatasetBuilderTest(tf.test.TestCase):
     self.assertIs(builder.builder_config,
                   DummyDatasetWithConfigs.BUILDER_CONFIGS[0])
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_with_configs(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder1 = DummyDatasetWithConfigs(config="plus1", data_dir=tmp_dir)
@@ -217,10 +197,11 @@ class DatasetBuilderTest(tf.test.TestCase):
       # Test that the config was used and they didn't collide.
       splits_list = [splits_lib.Split.TRAIN, splits_lib.Split.TEST]
       for builder, incr in [(builder1, 1), (builder2, 2)]:
-        datasets = [builder.as_dataset(split=split) for split in splits_list]
-        data = [[el["x"].numpy() for el in dataset] for dataset in datasets]
+        train_data, test_data = [
+            [el["x"] for el in builder.as_numpy(split=split)]
+            for split in splits_list
+        ]
 
-        train_data, test_data = data
         self.assertEqual(20, len(train_data))
         self.assertEqual(10, len(test_data))
         self.assertEqual([incr + el for el in range(30)],
@@ -242,6 +223,7 @@ class DatasetBuilderReadTest(tf.test.TestCase):
   def setUp(self):
     self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_all_splits(self):
     splits = self.builder.as_numpy(batch_size=-1)
     self.assertSetEqual(set(splits.keys()),
@@ -257,6 +239,7 @@ class DatasetBuilderReadTest(tf.test.TestCase):
     self.assertEqual(10, len(test_data))
     self.assertEqual(sum(range(30)), int(train_data.sum() + test_data.sum()))
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_with_batch_size(self):
     items = list(self.builder.as_numpy(
         split=splits_lib.Split.TRAIN + splits_lib.Split.TEST, batch_size=10))
@@ -268,6 +251,7 @@ class DatasetBuilderReadTest(tf.test.TestCase):
     self.assertEqual(10, x3.shape[0])
     self.assertEqual(sum(range(30)), int(x1.sum() + x2.sum() + x3.sum()))
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_as_numpy(self):
     items = self.builder.as_numpy(split=splits_lib.Split.TRAIN, batch_size=-1)
     self.assertEqual(items["x"].shape[0], 20)
@@ -278,6 +262,7 @@ class DatasetBuilderReadTest(tf.test.TestCase):
       count += 1
     self.assertEqual(count, 20)
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_supervised_keys(self):
     x, _ = self.builder.as_numpy(
         split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1)

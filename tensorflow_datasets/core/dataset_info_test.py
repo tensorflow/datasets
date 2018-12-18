@@ -25,12 +25,9 @@ import tempfile
 import numpy as np
 import tensorflow as tf
 
-from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
 
@@ -40,29 +37,7 @@ _INFO_DIR = os.path.join(_TFDS_DIR, "dataset_info", "mnist", "1.0.0")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
-class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
-
-  VERSION = utils.Version("1.0.0")
-
-  def _info(self):
-    return dataset_info.DatasetInfo(
-        builder=self,
-        features=features.FeaturesDict({"x": tf.int64}),
-        supervised_keys=("x", "x"),
-    )
-
-  def _split_generators(self, dl_manager):
-    # Split the 30 examples from the generator into 2 train shards and 1 test
-    # shard.
-    del dl_manager
-    return [splits.SplitGenerator(
-        name=[splits.Split.TRAIN, splits.Split.TEST],
-        num_shards=[2, 1],
-    )]
-
-  def _generate_examples(self):
-    for i in range(30):
-      yield self.info.features.encode_example({"x": i})
+DummyDatasetSharedGenerator = test_utils.DummyDatasetSharedGenerator
 
 
 class RandomShapedImageGenerator(DummyDatasetSharedGenerator):

@@ -23,6 +23,7 @@ import abc
 import functools
 import os
 import re
+import sys
 
 import six
 import tensorflow as tf
@@ -275,7 +276,9 @@ class DatasetBuilder(object):
       batch_size: `int`, batch size. Note that variable-length features will
         be 0-padded if `batch_size > 1`. Users that want more custom behavior
         should use `batch_size=1` and use the `tf.data` API to construct a
-        custom pipeline.
+        custom pipeline. If `batch_size == -1`, will return feature
+        dictionaries of the whole dataset with `tf.Tensor`s instead of a
+        `tf.data.Dataset`.
       shuffle_files: `bool` (optional), whether to shuffle the input files.
         Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
@@ -287,6 +290,9 @@ class DatasetBuilder(object):
     Returns:
       `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
       tfds.data.Dataset>`.
+
+      If `batch_size` is -1, will return feature dictionaries containing
+      the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
     if not self._data_dir:
       raise AssertionError(
@@ -325,6 +331,10 @@ class DatasetBuilder(object):
   def _build_single_dataset(self, split, shuffle_files, batch_size,
                             as_supervised):
     """as_dataset for a single split."""
+    wants_full_dataset = batch_size == -1
+    if wants_full_dataset:
+      batch_size = self.info.num_examples or sys.maxsize
+
     dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
     if batch_size > 1:
       # Use padded_batch so that features with unknown shape are supported.
@@ -346,17 +356,18 @@ class DatasetBuilder(object):
     options = tf.data.Options()
     options.experimental_deterministic = not shuffle_files
     dataset = dataset.with_options(options)
-    return dataset
+
+    if wants_full_dataset:
+      return tf.data.experimental.get_single_element(dataset)
+    else:
+      return dataset
 
   @api_utils.disallow_positional_args
-  def as_numpy(self, batch_size=1, **as_dataset_kwargs):
+  def as_numpy(self, **as_dataset_kwargs):
     # pylint: disable=g-doc-return-or-yield
     """Generates batches of NumPy arrays from the given `tfds.Split`.
 
     Args:
-      batch_size: `int`, batch size for the NumPy arrays. If -1 or None,
-        `as_numpy` will return the full dataset at once, each feature having its
-        own array.
       **as_dataset_kwargs: Keyword arguments passed on to
         `tfds.core.DatasetBuilder.as_dataset`.
 
@@ -365,16 +376,11 @@ class DatasetBuilder(object):
       `dict<str feature_name, numpy.array feature_val>`, or if `split=None`,
       `dict` from `tfds.Split` to the feature dictionaries.
 
-      If `batch_size` is -1 or None, will return a single dictionary containing
+      If `batch_size` is -1, will return a single dictionary containing
       the entire dataset instead of yielding batches.
     """
     # pylint: enable=g-doc-return-or-yield
-    wants_full_dataset = batch_size == -1
-    if wants_full_dataset:
-      batch_size = self.info.num_examples or int(1e10)
-
-    def _as_numpy(graph=None):
-      """Internal as_numpy."""
+    with utils.maybe_with_graph() as graph:
 
       def ds_iter(ds):
         # Need to ensure that the graph is re-entered and the yield is explicit
@@ -383,15 +389,19 @@ class DatasetBuilder(object):
           for el in dataset_utils.iterate_over_dataset(ds):
             yield el
 
-      dataset = self.as_dataset(batch_size=batch_size, **as_dataset_kwargs)
-      return utils.map_nested(ds_iter, dataset, dict_only=True)
-
-    with utils.maybe_with_graph() as g:
-      gen = _as_numpy(g)
+      dataset = self.as_dataset(**as_dataset_kwargs)
+      wants_full_dataset = as_dataset_kwargs.get("batch_size") == -1
       if wants_full_dataset:
-        return utils.map_nested(next, gen)
+        # as_dataset returned Tensors, possibly tupleized with
+        # as_supervised=True
+        if tf.executing_eagerly():
+          return utils.map_nested(lambda t: t.numpy(), dataset, map_tuple=True)
+        else:
+          with utils.nogpu_session() as sess:
+            return sess.run(dataset)
       else:
-        return gen
+        # as_dataset returned tf.data.Datasets
+        return utils.map_nested(ds_iter, dataset, dict_only=True)
 
   def _get_data_dir(self, version=None):
     """Return the data directory of one dataset version.

@@ -185,8 +185,9 @@ def load(name,
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
     batch_size: `int`, set to > 1 to get batches of examples. Note that
-      variable length features will be 0-padded. If `as_numpy=True` and
-      `batch_size=-1`, will return the full dataset in NumPy arrays.
+      variable length features will be 0-padded. If
+      `batch_size=-1`, will return the full dataset (in either `tf.Tensor`s or
+      NumPy arrays if `as_numpy=True`).
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
@@ -216,7 +217,9 @@ def load(name,
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
-      `dict<key: tfds.Split, value: tfds.data.Dataset>`.
+      `dict<key: tfds.Split, value: tfds.data.Dataset>`. If `as_numpy=True`,
+      these will be iterables of NumPy arrays. If `batch_size=-1`,
+      these will be full datasets in either `tf.Tensor`s or NumPy arrays.
     ds_info: `tfds.core.DatasetInfo`, if `with_info` is True, then tfds.load
       will return a tuple (ds, ds_info) containing the dataset info (version,
       features, splits, num_examples,...).

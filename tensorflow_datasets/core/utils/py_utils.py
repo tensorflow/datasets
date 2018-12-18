@@ -117,17 +117,26 @@ class memoized_property(property):  # pylint: disable=invalid-name
     return cached
 
 
-def map_nested(function, data_struct, dict_only=False):
+def map_nested(function, data_struct, dict_only=False, map_tuple=False):
   """Apply a function recursivelly to each element of a nested data struct."""
 
   # Could add support for more exotic data_struct, like OrderedDict
   if isinstance(data_struct, dict):
     return {
-        k: map_nested(function, v, dict_only) for k, v in data_struct.items()
+        k: map_nested(function, v, dict_only, map_tuple)
+        for k, v in data_struct.items()
     }
   elif not dict_only:
-    if isinstance(data_struct, list):
-      return [map_nested(function, v, dict_only) for v in data_struct]
+    types = [list]
+    if map_tuple:
+      types.append(tuple)
+    if isinstance(data_struct, tuple(types)):
+      mapped = [map_nested(function, v, dict_only, map_tuple)
+                for v in data_struct]
+      if isinstance(data_struct, list):
+        return mapped
+      else:
+        return tuple(mapped)
   # Singleton
   return function(data_struct)
 
