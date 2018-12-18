@@ -348,6 +348,7 @@ class DatasetBuilder(object):
     dataset = dataset.with_options(options)
     return dataset
 
+  @api_utils.disallow_positional_args
   def as_numpy(self, batch_size=1, **as_dataset_kwargs):
     # pylint: disable=g-doc-return-or-yield
     """Generates batches of NumPy arrays from the given `tfds.Split`.
