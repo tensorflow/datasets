@@ -386,28 +386,30 @@ class DatasetBuilder(object):
       the entire dataset instead of yielding batches.
     """
     # pylint: enable=g-doc-return-or-yield
+    # TF does not like it when you nest Graph/Session contexts, and because we
+    # may be operating on multiple splits here, we more directly control the
+    # graph and session creation/contexts to stay in the contexts for as little
+    # time as possible (basically keeping the contexts local and not persisting
+    # them).
     with utils.maybe_with_graph() as graph:
-
-      def ds_iter(ds):
-        # Need to ensure that the graph is re-entered and the yield is explicit
-        # so that the Session.run calls are within its context.
-        with utils.maybe_with_graph(graph):
-          for el in dataset_utils.iterate_over_dataset(ds):
-            yield el
-
       dataset = self.as_dataset(**as_dataset_kwargs)
-      wants_full_dataset = as_dataset_kwargs.get("batch_size") == -1
-      if wants_full_dataset:
-        # as_dataset returned Tensors, possibly tupleized with
-        # as_supervised=True
-        if tf.executing_eagerly():
-          return utils.map_nested(lambda t: t.numpy(), dataset, map_tuple=True)
-        else:
-          with utils.nogpu_session() as sess:
-            return sess.run(dataset)
+
+    def ds_iter(ds):
+      for el in dataset_utils.iterate_over_dataset(ds, graph=graph):
+        yield el
+
+    wants_full_dataset = as_dataset_kwargs.get("batch_size") == -1
+    if wants_full_dataset:
+      # as_dataset returned Tensors, possibly tupleized with
+      # as_supervised=True
+      if tf.executing_eagerly():
+        return utils.map_nested(lambda t: t.numpy(), dataset, map_tuple=True)
       else:
-        # as_dataset returned tf.data.Datasets
-        return utils.map_nested(ds_iter, dataset, dict_only=True)
+        with utils.nogpu_session(graph=graph) as sess:
+          return sess.run(dataset)
+    else:
+      # as_dataset returned tf.data.Datasets
+      return utils.map_nested(ds_iter, dataset, dict_only=True)
 
   def _get_data_dir(self, version=None):
     """Return the data directory of one dataset version.
