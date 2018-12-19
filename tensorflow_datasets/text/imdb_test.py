@@ -29,6 +29,7 @@ class IMDBReviewsTest(dataset_builder_testing.TestCase):
       "train": 5,
       "test": 4,
   }
+  DL_EXTRACT_RESULT = "aclImdb_v1.tar.gz"
 
 
 if __name__ == "__main__":
