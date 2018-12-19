@@ -81,7 +81,7 @@ Return the dataset info object. See `DatasetInfo` for details.
 
 ``` python
 as_dataset(
-    split,
+    split=None,
     batch_size=1,
     shuffle_files=None,
     as_supervised=False
@@ -96,11 +96,14 @@ Subclasses must override _as_dataset.
 
 #### Args:
 
-* <b>`split`</b>: <a href="../../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read.
+* <b>`split`</b>: <a href="../../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read. If None, returns a
+    dict `<key: tfds.Split, value: tf.data.Dataset>` with all the splits.
 * <b>`batch_size`</b>: `int`, batch size. Note that variable-length features will
     be 0-padded if `batch_size > 1`. Users that want more custom behavior
     should use `batch_size=1` and use the `tf.data` API to construct a
-    custom pipeline.
+    custom pipeline. If `batch_size == -1`, will return feature
+    dictionaries of the whole dataset with `tf.Tensor`s instead of a
+    `tf.data.Dataset`.
 * <b>`shuffle_files`</b>: `bool` (optional), whether to shuffle the input files.
     Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 * <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
@@ -112,24 +115,22 @@ Subclasses must override _as_dataset.
 
 #### Returns:
 
-`tf.data.Dataset`
+`tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
+tfds.data.Dataset>`.
+
+If `batch_size` is -1, will return feature dictionaries containing
+the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
 
 <h3 id="as_numpy"><code>as_numpy</code></h3>
 
 ``` python
-as_numpy(
-    batch_size=1,
-    **as_dataset_kwargs
-)
+as_numpy(**as_dataset_kwargs)
 ```
 
 Generates batches of NumPy arrays from the given <a href="../../tfds/Split.md"><code>tfds.Split</code></a>.
 
 #### Args:
 
-* <b>`batch_size`</b>: `int`, batch size for the NumPy arrays. If -1 or None,
-    `as_numpy` will return the full dataset at once, each feature having its
-    own array.
 * <b>`**as_dataset_kwargs`</b>: Keyword arguments passed on to
     <a href="../../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>.
 
@@ -137,9 +138,10 @@ Generates batches of NumPy arrays from the given <a href="../../tfds/Split.md"><
 #### Yields:
 
 Feature dictionaries
-`dict<str feature_name, numpy.array feature_val>`.
+`dict<str feature_name, numpy.array feature_val>`, or if `split=None`,
+`dict` from <a href="../../tfds/Split.md"><code>tfds.Split</code></a> to the feature dictionaries.
 
-If `batch_size` is -1 or None, will return a single dictionary containing
+If `batch_size` is -1, will return a single dictionary containing
 the entire dataset instead of yielding batches.
 
 <h3 id="download_and_prepare"><code>download_and_prepare</code></h3>

@@ -1,13 +1,14 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.download.DownloadManager" />
 <meta itemprop="path" content="Stable" />
-<meta itemprop="property" content="download_checksums"/>
 <meta itemprop="property" content="download_sizes"/>
 <meta itemprop="property" content="manual_dir"/>
+<meta itemprop="property" content="recorded_download_checksums"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
 <meta itemprop="property" content="download_and_extract"/>
 <meta itemprop="property" content="extract"/>
+<meta itemprop="property" content="iter_archive"/>
 </div>
 
 # tfds.download.DownloadManager
@@ -97,10 +98,6 @@ Download manager constructor.
 
 ## Properties
 
-<h3 id="download_checksums"><code>download_checksums</code></h3>
-
-Returns checksums for downloaded urls.
-
 <h3 id="download_sizes"><code>download_sizes</code></h3>
 
 Returns sizes (in bytes) for downloaded urls.
@@ -108,6 +105,10 @@ Returns sizes (in bytes) for downloaded urls.
 <h3 id="manual_dir"><code>manual_dir</code></h3>
 
 Returns the directory containing the manually extracted data.
+
+<h3 id="recorded_download_checksums"><code>recorded_download_checksums</code></h3>
+
+Returns checksums for downloaded urls.
 
 
 
@@ -145,7 +146,7 @@ download_and_extract(
 )
 ```
 
-Downlaod and extract given url_or_urls.
+Download and extract given url_or_urls.
 
 Is roughly equivalent to:
 
@@ -192,6 +193,24 @@ from downloaded file name.
 
 extracted_path(s): `str`, The extracted paths matching the given input
   path_or_paths.
+
+<h3 id="iter_archive"><code>iter_archive</code></h3>
+
+``` python
+iter_archive(resource)
+```
+
+Returns iterator over files within archive.
+
+#### Args:
+
+* <b>`resource`</b>: path to archive or `resource_lib.Resource`.
+
+
+#### Returns:
+
+Generator yielding tuple (path_within_archive, file_obj).
+* <b>`Important`</b>: read files as they are yielded. Reading out of order is slow.
 
 
 

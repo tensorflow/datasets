@@ -25,7 +25,6 @@ from __future__ import print_function
 
 import collections
 import os
-import pprint
 import sys
 
 import tensorflow as tf
@@ -140,10 +139,10 @@ From {url}
 ---
 """
 
-FEATURE_TABLE = """\
-Name  | Type | Shape
-:---- | :--- | :----
-{feature_values}
+FEATURE_BLOCK = """\
+```
+%s
+```
 """
 
 STATISTICS_TABLE = """\
@@ -266,29 +265,30 @@ def make_module_to_builder_dict():
   return module_to_builder
 
 
+def _pprint_features_dict(features_dict, indent=0, add_prefix=True):
+  """Pretty-print tfds.features.FeaturesDict."""
+  if isinstance(features_dict, tfds.features.FeaturesDict):
+    features_dict = features_dict._feature_dict  # pylint: disable=protected-access
+
+  first_last_indent_str = " " * indent
+  indent_str = " " * (indent + 4)
+  first_line = "%sFeaturesDict({" % (
+      first_last_indent_str if add_prefix else "")
+  lines = [first_line]
+  for k in sorted(list(features_dict.keys())):
+    v = features_dict[k]
+    if isinstance(v, tfds.features.FeaturesDict):
+      v_str = _pprint_features_dict(v, indent + 4, False)
+    else:
+      v_str = str(v)
+    lines.append("%s'%s': %s," % (indent_str, k, v_str))
+  lines.append("%s})" % first_last_indent_str)
+  return "\n".join(lines)
+
+
 def make_feature_information(info):
   """Make feature information table."""
-  feature_table_rows = []
-  for feature_name in info.features.get_tensor_info():
-    try:
-      v = info.features[feature_name]
-    except KeyError:
-      # TODO(afrozm): For things like CelebA's nested attributes this doesn't
-      # work, ex: attributes/High_Cheekbones but maybe this is for the better
-      # there are O(100)s of attributes if not more.
-      continue
-    # If we have nested structures we have to do something special.
-    v_dtype_str = repr(v.dtype)
-    v_shape_str = str(v.shape)
-    if isinstance(v.dtype, dict) and isinstance(v.shape, dict):
-      # If v.dtype is dict, so must v.shape be.
-      v_dtype_str = pprint.pformat(v.dtype, width=1).replace("\n", "<br>")
-      v_shape_str = pprint.pformat(v.shape, width=1).replace("\n", "<br>")
-    feature_table_rows.append(
-        "|".join([feature_name, v_dtype_str, v_shape_str]))
-  # We sort the table rows to minimize churn on subsequent generations.
-  return FEATURE_TABLE.format(
-      feature_values="\n".join(sorted(feature_table_rows)))
+  return FEATURE_BLOCK % _pprint_features_dict(info.features)
 
 
 def make_statistics_information(info):

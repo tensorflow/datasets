@@ -5,7 +5,6 @@
 <meta itemprop="property" content="minor"/>
 <meta itemprop="property" content="patch"/>
 <meta itemprop="property" content="__new__"/>
-<meta itemprop="property" content="AUTO"/>
 <meta itemprop="property" content="LATEST"/>
 </div>
 
@@ -21,9 +20,8 @@ Defined in [`core/utils/version.py`](https://github.com/tensorflow/datasets/tree
 
 Structure representing a version.
 
-In addition, Version has two special values:
- * AUTO: Load existing data dir if exists, otherwise use code version
- * CODE: Always use the code version (ignore data dir even if data exists)
+In addition, Version has special values:
+ * LATEST: Always use the code version (ignore data dir even if data exists)
 
 <h2 id="__new__"><code>__new__</code></h2>
 
@@ -57,8 +55,6 @@ __new__(
 
 
 ## Class Members
-
-<h3 id="AUTO"><code>AUTO</code></h3>
 
 <h3 id="LATEST"><code>LATEST</code></h3>
 
