@@ -241,7 +241,7 @@ class abstractclassmethod(classmethod):  # pylint: disable=invalid-name
     super(abstractclassmethod, self).__init__(fn)
 
 
-def get_path(relative_path):
+def get_tfds_path(relative_path):
   """Returns absolute path to file given path relative to repo root."""
   path = os.path.join(tfds_dir(), relative_path)
   return path

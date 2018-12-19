@@ -62,7 +62,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    names_file = tfds.core.get_path(_LABELS_FNAME)
+    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -79,7 +79,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   @staticmethod
   def _get_validation_labels():
     """Returns labels for validation."""
-    labels_path = tfds.core.get_path(_VALIDATION_LABELS_FNAME)
+    labels_path = tfds.core.get_tfds_path(_VALIDATION_LABELS_FNAME)
     with tf.gfile.Open(labels_path) as labels_f:
       labels = labels_f.readlines()
     return [label.strip() for label in labels]
