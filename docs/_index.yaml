@@ -46,10 +46,10 @@ landing_page:
     items:
     - heading: Introducing TensorFlow Datasets
       image_path: /resources/images/tf-logo-card-16x9.png
-      path: https://medium.com/tensorflow/REPLACE_ME
+      path: https://www.tensorflow.org/datasets/
       buttons:
-      - label: Read on TensorFlow blog
-        path: https://medium.com/tensorflow/REPLACE_ME
+      - label: Coming soon...
+        path: https://www.tensorflow.org/datasets/
     - heading: TensorFlow Datasets on GitHub
       image_path: /resources/images/github-card-16x9.png
       path: https://github.com/tensorflow/datasets
