@@ -134,13 +134,64 @@ def builder(name, **ctor_kwargs):
     raise type(e)(e.message + "\nFailed to construct dataset %s" % name)
 
 
+def _load(name,
+          split=None,
+          data_dir=None,
+          batch_size=1,
+          download=True,
+          as_numpy=False,
+          as_supervised=False,
+          with_info=False,
+          builder_kwargs=None,
+          download_and_prepare_kwargs=None,
+          as_dataset_kwargs=None):
+  """Shared implementation for `tfds.load` and `tfds.load_numpy`."""
+  if data_dir is None:
+    data_dir = constants.DATA_DIR
+  builder_kwargs = builder_kwargs or {}
+  dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
+  if download:
+    download_and_prepare_kwargs = download_and_prepare_kwargs or {}
+    dbuilder.download_and_prepare(**download_and_prepare_kwargs)
+
+  if as_dataset_kwargs is None:
+    as_dataset_kwargs = {}
+  as_dataset_kwargs = dict(as_dataset_kwargs)
+  as_dataset_kwargs["split"] = split
+  as_dataset_kwargs["as_supervised"] = as_supervised
+  as_dataset_kwargs["batch_size"] = batch_size
+
+  if as_numpy:
+    ds = dbuilder.as_numpy(**as_dataset_kwargs)
+  else:
+    ds = dbuilder.as_dataset(**as_dataset_kwargs)
+  if with_info:
+    return ds, dbuilder.info
+  return ds
+
+
+def load_numpy(**kwargs):
+  """`tfds.load` with NumPy generators/arrays instead of Datasets/Tensors.
+
+  Uses `tfds.core.DatasetBuilder.as_numpy` instead of `as_dataset`.
+
+  Args:
+    **kwargs: passed to `tfds.load`.
+
+  Returns:
+    Generator(s) of NumPy arrays (or just the NumPy arrays if `batch_size=-1`).
+    If `split=None` (default), returns a `dict` with all the data splits.
+  """
+  kwargs["as_numpy"] = True
+  return _load(**kwargs)
+
+
 @api_utils.disallow_positional_args(allowed=["name"])
 def load(name,
          split=None,
          data_dir=None,
          batch_size=1,
          download=True,
-         as_numpy=False,
          as_supervised=False,
          with_info=False,
          builder_kwargs=None,
@@ -186,16 +237,13 @@ def load(name,
       Defaults to "~/tensorflow_datasets".
     batch_size: `int`, set to > 1 to get batches of examples. Note that
       variable length features will be 0-padded. If
-      `batch_size=-1`, will return the full dataset (in either `tf.Tensor`s or
-      NumPy arrays if `as_numpy=True`).
+      `batch_size=-1`, will return the full dataset (as `tf.Tensor`s).
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
       expected to be in `data_dir`. If `True` and the data is already in
       `data_dir`, `download_and_prepare` is a no-op.
       Defaults to `True`.
-    as_numpy: `bool`, whether to return a generator of NumPy array batches
-      using `tfds.core.DatasetBuilder.as_numpy`.
     as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
       will have a 2-tuple structure `(input, label)` according to
       `builder.info.supervised_keys`. If `False`, the default,
@@ -217,35 +265,23 @@ def load(name,
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
-      `dict<key: tfds.Split, value: tfds.data.Dataset>`. If `as_numpy=True`,
-      these will be iterables of NumPy arrays. If `batch_size=-1`,
-      these will be full datasets in either `tf.Tensor`s or NumPy arrays.
+      `dict<key: tfds.Split, value: tfds.data.Dataset>`. If `batch_size=-1`,
+      these will be full datasets in either `tf.Tensor`s.
     ds_info: `tfds.core.DatasetInfo`, if `with_info` is True, then tfds.load
       will return a tuple (ds, ds_info) containing the dataset info (version,
       features, splits, num_examples,...).
   """
-  if data_dir is None:
-    data_dir = constants.DATA_DIR
-  builder_kwargs = builder_kwargs or {}
-  dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
-  if download:
-    download_and_prepare_kwargs = download_and_prepare_kwargs or {}
-    dbuilder.download_and_prepare(**download_and_prepare_kwargs)
-
-  if as_dataset_kwargs is None:
-    as_dataset_kwargs = {}
-  as_dataset_kwargs = dict(as_dataset_kwargs)
-  as_dataset_kwargs["split"] = split
-  as_dataset_kwargs["as_supervised"] = as_supervised
-  as_dataset_kwargs["batch_size"] = batch_size
-
-  if as_numpy:
-    ds = dbuilder.as_numpy(**as_dataset_kwargs)
-  else:
-    ds = dbuilder.as_dataset(**as_dataset_kwargs)
-  if with_info:
-    return ds, dbuilder.info
-  return ds
+  return _load(
+      name=name,
+      split=split,
+      data_dir=data_dir,
+      batch_size=batch_size,
+      download=download,
+      as_supervised=as_supervised,
+      with_info=with_info,
+      builder_kwargs=builder_kwargs,
+      download_and_prepare_kwargs=download_and_prepare_kwargs,
+      as_dataset_kwargs=as_dataset_kwargs)
 
 
 def _dataset_name_and_kwargs_from_name_str(name_str):

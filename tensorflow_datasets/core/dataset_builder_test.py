@@ -123,11 +123,10 @@ class DatasetBuilderTest(tf.test.TestCase):
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_load(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      dataset = registered.load(
+      dataset = registered.load_numpy(
           name="dummy_dataset_shared_generator",
           data_dir=tmp_dir,
           download=True,
-          as_numpy=True,
           split=splits_lib.Split.TRAIN)
       data = list(dataset)
       self.assertEqual(20, len(data))
