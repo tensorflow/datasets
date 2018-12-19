@@ -45,8 +45,12 @@ DOC = """\
 # See all registered datasets
 tfds.list_builders()
 
-# Load a given dataset by name
-mnist_train_dataset = tfds.load(name="mnist")
+# Load a given dataset by name, along with the DatasetInfo
+data, info = tfds.load("mnist", with_info=True)
+train_data, test_data = data['test'], data['train']
+assert isinstance(train_data, tf.data.Dataset)
+assert info.features['label'].num_classes == 10
+assert info.splits['train'].num_examples == 60000
 ```
 
 ---
