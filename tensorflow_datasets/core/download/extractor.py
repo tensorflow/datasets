@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import contextlib
 import gzip
 import io
 import os
@@ -28,6 +29,7 @@ import zipfile
 
 import concurrent.futures
 import promise
+import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import constants
@@ -92,10 +94,19 @@ def _normpath(path):
   return path
 
 
-def _iter_tar(src, gz=False):
-  read_type = 'r:gz' if gz else 'r'
-  with tf.gfile.Open(src, 'rb') as tar_file:
-    tar = tarfile.open(mode=read_type, fileobj=tar_file)
+@contextlib.contextmanager
+def _open_or_pass(path_or_fobj):
+  if isinstance(path_or_fobj, six.string_types):
+    with tf.gfile.Open(path_or_fobj, 'rb') as f_obj:
+      yield f_obj
+  else:
+    yield path_or_fobj
+
+
+def iter_tar(arch_f, gz=False):
+  read_type = 'r:gz' if gz else 'r:'
+  with _open_or_pass(arch_f) as fobj:
+    tar = tarfile.open(mode=read_type, fileobj=fobj)
     for member in tar.getmembers():
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
@@ -103,19 +114,19 @@ def _iter_tar(src, gz=False):
         yield [path, extract_file]
 
 
-def _iter_tar_gz(src):
-  return _iter_tar(src, gz=True)
+def iter_tar_gz(arch_f):
+  return iter_tar(arch_f, gz=True)
 
 
-def _iter_gzip(src):
-  with tf.gfile.Open(src, 'rb') as gzip_file:
-    gzip_ = gzip.GzipFile(fileobj=gzip_file)
+def iter_gzip(arch_f):
+  with _open_or_pass(arch_f) as fobj:
+    gzip_ = gzip.GzipFile(fileobj=fobj)
     yield ('', gzip_)  # No inner file.
 
 
-def _iter_zip(src):
-  with tf.gfile.Open(src, 'rb') as zip_f:
-    z = zipfile.ZipFile(zip_f)
+def iter_zip(arch_f):
+  with _open_or_pass(arch_f) as fobj:
+    z = zipfile.ZipFile(fobj)
     for member in z.infolist():
       extract_file = z.open(member)
       if extract_file:  # File with data (not directory):
@@ -124,10 +135,10 @@ def _iter_zip(src):
 
 
 _EXTRACT_METHODS = {
-    resource_lib.ExtractMethod.TAR: _iter_tar,
-    resource_lib.ExtractMethod.TAR_GZ: _iter_tar_gz,
-    resource_lib.ExtractMethod.GZIP: _iter_gzip,
-    resource_lib.ExtractMethod.ZIP: _iter_zip,
+    resource_lib.ExtractMethod.TAR: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ: iter_tar_gz,
+    resource_lib.ExtractMethod.GZIP: iter_gzip,
+    resource_lib.ExtractMethod.ZIP: iter_zip,
 }
 
 

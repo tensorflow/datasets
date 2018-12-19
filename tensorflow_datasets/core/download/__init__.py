@@ -16,9 +16,17 @@
 """Public API of the download manager."""
 
 from tensorflow_datasets.core.download.download_manager import DownloadManager
+from tensorflow_datasets.core.download.extractor import iter_gzip
+from tensorflow_datasets.core.download.extractor import iter_tar
+from tensorflow_datasets.core.download.extractor import iter_tar_gz
+from tensorflow_datasets.core.download.extractor import iter_zip
 from tensorflow_datasets.core.download.util import GenerateMode
 
 __all__ = [
     "DownloadManager",
     "GenerateMode",
+    "iter_gzip",
+    "iter_tar",
+    "iter_tar_gz",
+    "iter_zip",
 ]

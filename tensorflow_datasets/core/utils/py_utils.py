@@ -28,8 +28,8 @@ import sys
 import uuid
 
 import tensorflow as tf
-
 from tensorflow_datasets.core import constants
+
 
 # pylint: disable=g-import-not-at-top
 if sys.version_info[0] > 2:
@@ -239,3 +239,9 @@ class abstractclassmethod(classmethod):  # pylint: disable=invalid-name
   def __init__(self, fn):
     fn.__isabstractmethod__ = True
     super(abstractclassmethod, self).__init__(fn)
+
+
+def get_path(relative_path):
+  """Returns absolute path to file given path relative to repo root."""
+  path = os.path.join(tfds_dir(), relative_path)
+  return path

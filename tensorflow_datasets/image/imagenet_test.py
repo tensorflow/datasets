@@ -13,14 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Image datasets."""
+"""Tests for imagenet dataset module."""
 
-from tensorflow_datasets.image.celeba import CelebA
-from tensorflow_datasets.image.cifar import Cifar10
-from tensorflow_datasets.image.cifar import Cifar100
-from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
-from tensorflow_datasets.image.image_folder import ImageLabelFolder
-from tensorflow_datasets.image.imagenet import Imagenet2012
-from tensorflow_datasets.image.mnist import FashionMNIST
-from tensorflow_datasets.image.mnist import MNIST
-from tensorflow_datasets.image.svhn import SvhnCropped
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets.image import imagenet
+from tensorflow_datasets.testing import dataset_builder_testing
+
+
+class Imagenet2012Test(dataset_builder_testing.TestCase):
+  DATASET_CLASS = imagenet.Imagenet2012
+  SPLITS = {  # Expected number of examples on each split.
+      "train": 100,
+      "validation": 10,
+  }
+
+
+if __name__ == "__main__":
+  dataset_builder_testing.main()
