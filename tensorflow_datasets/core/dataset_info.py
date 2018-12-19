@@ -241,15 +241,15 @@ class DatasetInfo(object):
         # split.
         self.as_proto.schema.CopyFrom(schema)
 
-      except tf.errors.InvalidArgumentError as e:
+      except tf.errors.InvalidArgumentError:
         # This means there is no such split, even though it was specified in the
         # info, the least we can do is to log this.
-        raise tf.errors.InvalidArgumentError(
+        tf.logging.error((
             "%s's info() property specifies split %s, but it "
             "doesn't seem to have been generated. Please ensure "
             "that the data was downloaded for this split and re-run "
-            "download_and_prepare. Original eror is [%s]" %
-            (self.name, split_name, str(e)))
+            "download_and_prepare"), self.name, split_name)
+        raise
 
     # Set splits to trigger proto update in setter
     self.splits = splits
