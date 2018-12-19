@@ -262,16 +262,29 @@ class FeatureConnector(object):
       return list(features)
     return None
 
+  def _additional_repr_info(self):
+    """Override to return addtional info to go into __repr__."""
+    return {}
+
   def __repr__(self):
     """Display the feature dictionary."""
     tensor_info = self.get_tensor_info()
-    if isinstance(tensor_info, TensorInfo):
-      return '{}(shape={}, dtype={!r})'.format(
-          type(self).__name__,
-          tensor_info.shape,
-          tensor_info.dtype,
-      )
-    return '{}({})'.format(type(self).__name__, tensor_info)
+    if not isinstance(tensor_info, TensorInfo):
+      return '{}({})'.format(type(self).__name__, tensor_info)
+
+    # Ensure ordering of keys by adding them one-by-one
+    repr_info = collections.OrderedDict()
+    repr_info['shape'] = tensor_info.shape
+    repr_info['dtype'] = repr(tensor_info.dtype)
+    additional_info = self._additional_repr_info()
+    for k, v in additional_info.items():
+      repr_info[k] = v
+
+    info_str = ', '.join(['%s=%s' % (k, v) for k, v in repr_info.items()])
+    return '{}({})'.format(
+        type(self).__name__,
+        info_str,
+    )
 
   def save_metadata(self, data_dir, feature_name):
     """Save the feature metadata on disk.

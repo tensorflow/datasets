@@ -105,6 +105,9 @@ class TextEncoder(object):
   def _read_lines_from_file(cls, filename):
     return read_lines_from_file(cls.__name__, filename)
 
+  def __repr__(self):
+    return "<%s vocab_size=%d>" % (type(self).__name__, self.vocab_size)
+
 
 class ByteTextEncoder(TextEncoder):
   """Byte-encodes text."""

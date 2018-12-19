@@ -141,3 +141,6 @@ class Text(feature.FeatureConnector):
   @property
   def _encoder_cls(self):
     return self._encoder_config and self._encoder_config.encoder_cls
+
+  def _additional_repr_info(self):
+    return {"encoder": repr(self.encoder)}

@@ -162,6 +162,9 @@ class ClassLabel(feature.FeatureConnector):
     if tf.gfile.Exists(names_filepath):
       self.names = _load_names_from_file(names_filepath)
 
+  def _additional_repr_info(self):
+    return {"num_classes": self.num_classes}
+
 
 def _get_names_filepath(data_dir, feature_name):
   return os.path.join(data_dir, "{}.labels.txt".format(feature_name))
