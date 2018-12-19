@@ -62,11 +62,18 @@ class Text(feature.FeatureConnector):
     if self.encoder:
       raise ValueError("Cannot override encoder")
     self._encoder = new_encoder
-    if not isinstance(new_encoder, self._encoder_cls):
+    encoder_cls = self._encoder_cls or type(None)
+    if not isinstance(new_encoder, encoder_cls):
       raise ValueError(
           "Changing type of encoder. Got %s but must be %s" %
           (type(new_encoder).__name__,
            self._encoder_cls.__name__))
+
+  def maybe_set_encoder(self, new_encoder):
+    """Set encoder, but no-op if encoder is already set."""
+    if self.encoder:
+      return
+    self.encoder = new_encoder
 
   @property
   def vocab_size(self):

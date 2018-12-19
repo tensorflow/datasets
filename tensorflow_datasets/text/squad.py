@@ -143,15 +143,15 @@ class Squad(tfds.core.GeneratorBasedBuilder):
     }
     downloaded_files = dl_manager.download_and_extract(urls_to_download)
 
-    # Generate vocabulary from training data if SubwordTextEncoder configured
-    # TODO(b/121180613): Currently we create it individually for each feature,
-    # but we might want to create a common one.
+    # Generate shared vocabulary
+    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
     self.info.features["context"].maybe_build_from_corpus(
         self._vocab_text_gen(downloaded_files["train"]))
-    self.info.features["question"].maybe_build_from_corpus(
-        self._vocab_text_gen(downloaded_files["train"]))
-    self.info.features["first_answer"].maybe_build_from_corpus(
-        self._vocab_text_gen(downloaded_files["train"]))
+    encoder = self.info.features["context"].encoder
+    # Use maybe_set_encoder because the encoder may have been restored from
+    # package data.
+    self.info.features["question"].maybe_set_encoder(encoder)
+    self.info.features["first_answer"].maybe_set_encoder(encoder)
 
     return [
         tfds.core.SplitGenerator(
