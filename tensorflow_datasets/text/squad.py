@@ -133,8 +133,8 @@ class Squad(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, filepath):
-    for ex in self._generate_examples(filepath):
-      yield b" ".join([ex["question"], ex["context"]])
+    for ex in self._generate_examples_internal(filepath):
+      yield " ".join([ex["question"], ex["context"]])
 
   def _split_generators(self, dl_manager):
     urls_to_download = {
@@ -164,7 +164,8 @@ class Squad(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"filepath": downloaded_files["dev"]}),
     ]
 
-  def _generate_examples(self, filepath):
+  def _generate_examples_internal(self, filepath):
+    """This function returns the examples in the raw (text) form."""
     tf.logging.info("generating examples from = %s", filepath)
     with tf.gfile.Open(filepath) as f:
       squad = json.load(f)
@@ -192,9 +193,14 @@ class Squad(tfds.core.GeneratorBasedBuilder):
                 "answer_starts": answer_starts,
                 "answers": answers,
             }
-            yield self.info.features.encode_example({
-                "question": example["question"],
-                # TODO(b/121176753): return all the answers.
-                "first_answer": example["answers"][0],
-                "context": example["context"]
-            })
+            yield example
+
+  def _generate_examples(self, filepath):
+    """This function returns examples with tfds encoding."""
+    for example in self._generate_examples_internal(filepath):
+      yield self.info.features.encode_example({
+          "question": example["question"],
+          # TODO(b/121176753): return all the answers.
+          "first_answer": example["answers"][0],
+          "context": example["context"]
+      })
