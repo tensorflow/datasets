@@ -91,12 +91,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
       label_key = _strip_s(label_key)  # labels => label
       label_names = metadata["{}_names".format(label_key)]
 
-      # Multi label case
-      if len(cifar_info.label_keys) > 1:
-        self.info.features[label_key].names = label_names
-      # Single label
-      else:
-        self.info.features["label"].names = label_names
+      self.info.features[_label_to_feature_key(label_key)].names = label_names
 
     # Define the splits
     def gen_filenames(filenames):
@@ -142,8 +137,10 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
 
       # Extract the list[dict[label_key, example_label]]
       labels.extend([
-          {_strip_s(k): data[k][j] for k in self._cifar_info.label_keys}
-          for j in range(num_images)
+          {
+              _label_to_feature_key(_strip_s(k)): data[k][j]
+              for k in self._cifar_info.label_keys
+          } for j in range(num_images)
       ])
 
     # Shuffle the data to make sure classes are well distributed.
@@ -151,37 +148,15 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     random.shuffle(data)
 
     for image, label in data:
-      if len(label) == 1:
-        label = label[_strip_s(self._cifar_info.label_keys[0])]
-        yield self.info.features.encode_example({
-            "image": image,
-            "label": label,
-        })
-      else:
-        features = {"image": image}
-        features.update(label)
-        yield self.info.features.encode_example(features)
+      features = {"image": image}
+      features.update(label)
+      yield self.info.features.encode_example(features)
 
 
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
-  VERSION = tfds.core.Version("1.2.0")
-
-  def __init__(self, use_coarse_labels=False, **kwargs):
-    """Constructs Cifar-100 dataset.
-
-    Args:
-      use_coarse_labels (bool): whether to set the coarse labels or the fine
-        labels as the target feature if `as_supervised=True` in `as_dataset`.
-        Note that in either case, both features will be
-        present in the features dictionary as "fine_label" and "coarse_label".
-        Note also that this does NOT affect the data on disk and is only used in
-        the `tf.data.Dataset` input pipeline.
-      **kwargs: See DatasetBuilder.__init__.
-    """
-    self._use_coarse_labels = use_coarse_labels
-    super(Cifar100, self).__init__(**kwargs)
+  VERSION = tfds.core.Version("1.3.0")
 
   @property
   def _cifar_info(self):
@@ -196,7 +171,6 @@ class Cifar100(Cifar10):
     )
 
   def _info(self):
-    label_to_use = "coarse_label" if self._use_coarse_labels else "fine_label"
     return tfds.core.DatasetInfo(
         builder=self,
         description=("This dataset is just like the CIFAR-10, except it has "
@@ -208,10 +182,10 @@ class Cifar100(Cifar10):
                      "(the superclass to which it belongs)."),
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_CIFAR_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(num_classes=100),
             "coarse_label": tfds.features.ClassLabel(num_classes=20),
-            "fine_label": tfds.features.ClassLabel(num_classes=100),
         }),
-        supervised_keys=("image", label_to_use),
+        supervised_keys=("image", "label"),
         urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
         citation=_CITATION,
     )
@@ -256,3 +230,9 @@ def _strip_s(s):
   if not s.endswith("s"):
     raise AssertionError("{} should ends with 's'".format(s))
   return s[:-1]
+
+
+def _label_to_feature_key(key):
+  if key == "fine_label":
+    return "label"
+  return key
