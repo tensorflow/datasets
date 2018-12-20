@@ -97,17 +97,15 @@ class Squad(tfds.core.GeneratorBasedBuilder):
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               vocab_size=2**13),
       ),
-      # TODO(b/121181405): Enable once we figure out the issue with
-      # dictionary words.
-      # SquadConfig(
-      #    name="subwords32k",
-      #    version="0.0.1",
-      #    description=("Uses `tfds.features.text.SubwordTextEncoder` with "
-      #                 "32k vocab size"),
-      #    text_encoder_config=tfds.features.text.TextEncoderConfig(
-      #        encoder_cls=tfds.features.text.SubwordTextEncoder,
-      #        vocab_size=2**15),
-      #),
+      SquadConfig(
+          name="subwords32k",
+          version="0.0.1",
+          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
+                       "32k vocab size"),
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              vocab_size=2**15),
+      ),
   ]
 
   def _info(self):
