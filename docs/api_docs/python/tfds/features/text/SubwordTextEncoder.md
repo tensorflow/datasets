@@ -100,7 +100,7 @@ Builds a `SubwordTextEncoder` based on the `corpus_generator`.
 * <b>`corpus_generator`</b>: generator yielding `str`, from which subwords will be
     constructed.
 * <b>`target_vocab_size`</b>: `int`, approximate size of the vocabulary to create.
-* <b>`max_subword_length`</b>: `int`, maxmimum length of a subword. Note that memory
+* <b>`max_subword_length`</b>: `int`, maximum length of a subword. Note that memory
     and compute scale quadratically in the length of the longest token.
 * <b>`max_corpus_chars`</b>: `int`, the maximum number of characters to consume from
     `corpus_generator` for the purposes of building the subword vocabulary.
