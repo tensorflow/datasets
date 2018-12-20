@@ -65,14 +65,11 @@ class _Extractor(object):
     """Returns `to_path` once resource has been extracted there."""
     from_path = resource.path
     method = resource.extract_method
-    tf.logging.info(
-        'Extracting %s (%s) to %s ...' % (from_path, method, to_path))
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     for path, handle in iter_archive(from_path, method):
       _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     tf.gfile.Rename(to_path_tmp, to_path, overwrite=True)
-    tf.logging.info('Finished extracting %s to %s .' % (from_path, to_path))
     return to_path
 
 

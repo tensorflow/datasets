@@ -118,9 +118,7 @@ class Resource(object):
     """Returns info dict or None."""
     if not self._info:
       if not tf.gfile.Exists(self.info_path):
-        tf.logging.info('INFO file %s not found.' % self.info_path)
         return None
-      tf.logging.info('Reading INFO file %s ...' % self.info_path)
       with tf.gfile.Open(self.info_path) as info_f:
         self._info = json.load(info_f)
     return self._info
@@ -161,7 +159,6 @@ class Resource(object):
               info['original_fname', self.info_path, original_fname]))
     info = dict(urls=list(urls), dataset_names=list(dataset_names),
                 original_fname=original_fname)
-    tf.logging.info('Writing INFO file %s ...' % self.info_path)
     with py_utils.atomic_write(self.info_path, 'w') as info_f:
       json.dump(info, info_f, sort_keys=True)
     self._info = info
