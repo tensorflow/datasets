@@ -102,12 +102,12 @@ class TFGraphRunner(object):
       input_ = run_args.input
       placeholder = tf.placeholder(dtype=input_.dtype, shape=input_.shape)
       output = run_args.fct(placeholder)
-      return GraphRun(
-          session=raw_nogpu_session(),
-          graph=g,
-          placeholder=placeholder,
-          output=output,
-      )
+    return GraphRun(
+        session=raw_nogpu_session(g),
+        graph=g,
+        placeholder=placeholder,
+        output=output,
+    )
 
   def _build_signature(self, run_args):
     """Create a unique signature for each fct/inputs."""
