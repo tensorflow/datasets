@@ -51,8 +51,8 @@ class TFGraphRunner(object):
   Limitations:
    * Currently the graph runner only support function with single input
      and output. Support for more complex function could be added and should be
-     relatively straightforward.
-   * A different graph is created for each input shape, so it isn't really adapted
+     relativelly straighforward.
+   * A different graph is created for each input shape, so isn't really addapted
      for dynamic batch size.
 
   Usage:
@@ -136,7 +136,7 @@ def assert_shape_match(shape1, shape2):
 
   Args:
     shape1 (tuple): Static shape
-    shape2 (tuple): Dynamic shape (can contain None)
+    shape2 (tuple): Dyncamic shape (can contains None)
   """
   shape1 = tf.TensorShape(shape1)
   shape2 = tf.TensorShape(shape2)

@@ -16,7 +16,7 @@
 r"""Script to call download_and_prepare on DatasetBuilder.
 
 This is just a standalone script to generate a specific dataset. This can be
-used if you don't want to separate download/generation of dataset from actual
+used if you don't want to separate download/generation of dataset from acual
 usage.
 
 By default, the dataset is generated in the default location

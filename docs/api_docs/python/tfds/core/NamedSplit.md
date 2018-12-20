@@ -129,7 +129,7 @@ s1, s2, s3, s4 = split.subsplit(weighted=[2, 2, 1, 1])  # 33%, 33%, 16%, 18%
     split.subsplit([1, 1, 2])  # weighted=[1, 1, 2]
     ```
 * <b>`k`</b>: `int` If set, subdivide the split into `k` equal parts.
-* <b>`percent`</b>: `tfds.percent slice`, return a single subsplit corresponding to
+* <b>`percent`</b>: `tfds.percent slice`, return a single subplit corresponding to
     a slice of the original split. For example:
     `split.subsplit(tfds.percent[-20:])  # Last 20% of the dataset`.
 * <b>`weighted`</b>: `list[int]`, return a list of subsplits whose proportions match

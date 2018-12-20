@@ -268,7 +268,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
       corpus_generator: generator yielding `str`, from which subwords will be
         constructed.
       target_vocab_size: `int`, approximate size of the vocabulary to create.
-      max_subword_length: `int`, maximum length of a subword. Note that memory
+      max_subword_length: `int`, maxmimum length of a subword. Note that memory
         and compute scale quadratically in the length of the longest token.
       max_corpus_chars: `int`, the maximum number of characters to consume from
         `corpus_generator` for the purposes of building the subword vocabulary.
