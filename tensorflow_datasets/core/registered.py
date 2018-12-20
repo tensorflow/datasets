@@ -130,8 +130,9 @@ def builder(name, **ctor_kwargs):
     raise DatasetNotFoundError(name, is_abstract=False)
   try:
     return _DATASET_REGISTRY[name](**builder_kwargs)
-  except Exception as e:
-    raise type(e)(e.message + "\nFailed to construct dataset %s" % name)
+  except BaseException:
+    tf.logging.error("Failed to construct dataset %s", name)
+    raise
 
 
 def _load(name,
