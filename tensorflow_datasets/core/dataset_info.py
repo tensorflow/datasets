@@ -248,7 +248,7 @@ class DatasetInfo(object):
             "%s's info() property specifies split %s, but it "
             "doesn't seem to have been generated. Please ensure "
             "that the data was downloaded for this split and re-run "
-            "download_and_prepare"), self.name, split_name)
+            "download_and_prepare."), self.name, split_name)
         raise
 
     # Set splits to trigger proto update in setter

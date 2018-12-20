@@ -480,7 +480,7 @@ class DatasetBuilder(object):
   def _download_and_prepare(self, dl_manager):
     """Downloads and prepares dataset for reading.
 
-    This is the internal implementation to overwritte called when user call
+    This is the internal implementation to overwrite called when user calls
     `download_and_prepare`. It should download all required data and generate
     the pre-processed datasets files.
 
@@ -494,7 +494,7 @@ class DatasetBuilder(object):
   def _as_dataset(self, split, shuffle_files=None):
     """Constructs a `tf.data.Dataset`.
 
-    This is the internal implementation to overwritte called when user call
+    This is the internal implementation to overwrite called when user calls
     `as_dataset`. It should read the pre-processed datasets files and generate
     the `tf.data.Dataset` object.
 

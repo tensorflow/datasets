@@ -1,6 +1,6 @@
 # Protobuf
 
-This page describe how to update the protobuff generated python file. By
+This page describe how to update the protobuf generated python file. By
 default, the protobuf is already compiled into python file so you won't have to
 do anything. Those steps are required only if you update the `.proto` file. The
 instruction are for linux.
