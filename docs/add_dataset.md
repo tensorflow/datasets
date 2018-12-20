@@ -224,6 +224,9 @@ Use the `SplitGenerator` to describe how each split should be generated. The
 `gen_kwargs` argument is what will be passed to the method writing the TF
 `tf.train.Example` to be serialized and written to disk.
 
+Warning: When specifying the number of shards, make sure that no shard is bigger
+than 4 Gib as shards will be loaded entirelly in memory during shuffling.
+
 ## Reading downloaded data and generating serialized dataset
 
 When using `GeneratorBasedBuilder` base class, the `_generate_examples` method

@@ -19,8 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import random
-
 import numpy as np
 import six.moves.urllib as urllib
 import tensorflow as tf
@@ -144,10 +142,9 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     """
     images = _extract_mnist_images(data_path, num_examples)
     labels = _extract_mnist_labels(label_path, num_examples)
-    # Shuffle the data to make sure classes are well distributed.
     data = list(zip(images, labels))
-    random.shuffle(data)
 
+    # Data is shuffled automatically to distribute classes uniformly.
     for image, label in data:
       yield self.info.features.encode_example({
           "image": image,
