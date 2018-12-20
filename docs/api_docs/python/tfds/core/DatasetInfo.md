@@ -17,6 +17,7 @@
 <meta itemprop="property" content="version"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="compute_dynamic_properties"/>
+<meta itemprop="property" content="initialize_from_package_data"/>
 <meta itemprop="property" content="read_from_directory"/>
 <meta itemprop="property" content="write_to_directory"/>
 </div>
@@ -31,34 +32,22 @@
 
 Defined in [`core/dataset_info.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py).
 
-Structure defining the info of the dataset.
+Information about a dataset.
 
-Information on the datasets are available through the builder.info property.
-Properties:
-  name: `str`, name of this dataset.
-  description: `str`, description of this dataset.
-  version: `str`, semantic version of the dataset (ex: '1.2.0')
-  features: <a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>: Information on the feature dict of
-    the `tf.data.Dataset` object from the `builder.as_dataset()` method.
-  splits: `SplitDict`, the available Splits for this dataset.
-  urls: `list(str)`, the homepage(s) for this dataset.
-  checksums: `Dict[str, str]`, URL to sha256 of resource. If a url is not
-    listed, its checksum is not checked.
-  size_in_bytes: `integer`, approximate size in bytes of the raw size of the
-    dataset that we will be downloading from the internet.
-  num_examples: `integer`, number of examples across all splits.
-  examples_per_split: `dict(string, integer)`, number of examples per split.
+`DatasetInfo` documents datasets, including its name, version, and features.
+See the constructor arguments and properties for a full list.
 
-Note that some of those fields are dynamically computed at data generation
-time, and updated by `compute_dynamic_properties`.
+Note: Not all fields are known on construction and may be updated later
+by `compute_dynamic_properties`. For example, the number of examples in each
+split is typically updated during data generation (i.e. on calling
+`builder.download_and_prepare()`).
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
 __init__(
-    name=None,
+    builder,
     description=None,
-    version=None,
     features=None,
     supervised_keys=None,
     splits=None,
@@ -69,23 +58,22 @@ __init__(
 )
 ```
 
-Constructor of the DatasetInfo.
+Constructs DatasetInfo.
 
 #### Args:
 
-* <b>`name`</b>: (`str`) Name of the dataset, usually set to builder.name.
+* <b>`builder`</b>: `DatasetBuilder`, dataset builder for this info.
 * <b>`description`</b>: `str`, description of this dataset.
-* <b>`version`</b>: `str`, semantic version of the dataset (ex: '1.2.0')
-* <b>`features`</b>: (<a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>) Information on the feature dict
+* <b>`features`</b>: <a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>, Information on the feature dict
     of the `tf.data.Dataset()` object from the `builder.as_dataset()`
     method.
-* <b>`supervised_keys`</b>: (`tuple`) Specifies the input feature and the label for
+* <b>`supervised_keys`</b>: `tuple`, Specifies the input feature and the label for
     supervised learning, if applicable for the dataset.
-* <b>`splits`</b>: `SplitDict`, the available Splits for this dataset.
+* <b>`splits`</b>: <a href="../../tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>, the available splits for this dataset.
 * <b>`urls`</b>: `list(str)`, optional, the homepage(s) for this dataset.
 * <b>`download_checksums`</b>: `dict<str url, str sha256>`, URL to sha256 of file.
     If a url is not listed, its checksum is not checked.
-* <b>`size_in_bytes`</b>: `integer`, optional, approximate size in bytes of the raw
+* <b>`size_in_bytes`</b>: `int`, optional, approximate size in bytes of the raw
     size of the dataset that we will be downloading from the internet.
 * <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
 
@@ -119,7 +107,7 @@ Constructor of the DatasetInfo.
 
 <h3 id="initialized"><code>initialized</code></h3>
 
-
+Whether DatasetInfo has been fully initialized.
 
 <h3 id="name"><code>name</code></h3>
 
@@ -156,24 +144,32 @@ Constructor of the DatasetInfo.
 <h3 id="compute_dynamic_properties"><code>compute_dynamic_properties</code></h3>
 
 ``` python
-compute_dynamic_properties(builder)
+compute_dynamic_properties()
 ```
 
 
+
+<h3 id="initialize_from_package_data"><code>initialize_from_package_data</code></h3>
+
+``` python
+initialize_from_package_data()
+```
+
+Initialize DatasetInfo from package data, returns True on success.
 
 <h3 id="read_from_directory"><code>read_from_directory</code></h3>
 
 ``` python
-read_from_directory(dataset_info_dir)
+read_from_directory(
+    dataset_info_dir,
+    from_packaged_data=False
+)
 ```
 
-Update the DatasetInfo properties from the metadata file.
+Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
 This function updates all the dynamically generated fields (num_examples,
-hash, time of creation,...) of the DatasetInfo. This reads the metadata
-file on the dataset directory to extract the info and expose them.
-This function is called after the data has been generated in
-.download_and_prepare() and when the data is loaded and already exists.
+hash, time of creation,...) of the DatasetInfo.
 
 This will overwrite all previous metadata.
 
@@ -181,6 +177,13 @@ This will overwrite all previous metadata.
 
 * <b>`dataset_info_dir`</b>: `str` The directory containing the metadata file. This
     should be the root directory of a specific dataset version.
+* <b>`from_packaged_data`</b>: `bool`, If data is restored from packaged data,
+    then only the informations not defined in the code are updated
+
+
+#### Returns:
+
+True if we were able to initialize using `dataset_info_dir`, else false.
 
 <h3 id="write_to_directory"><code>write_to_directory</code></h3>
 
@@ -188,7 +191,7 @@ This will overwrite all previous metadata.
 write_to_directory(dataset_info_dir)
 ```
 
-
+Write `DatasetInfo` as JSON to `dataset_info_dir`.
 
 
 

@@ -15,4 +15,6 @@
 
 """Video datasets."""
 
-from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushing
+from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushingSmall
+from tensorflow_datasets.video.starcraft import StarcraftVideo
+from tensorflow_datasets.video.starcraft import StarcraftVideoConfig

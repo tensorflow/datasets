@@ -13,6 +13,7 @@
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="ints2str"/>
 <meta itemprop="property" content="load_metadata"/>
+<meta itemprop="property" content="maybe_build_from_corpus"/>
 <meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="str2ints"/>
 </div>
@@ -32,15 +33,20 @@ Feature which encodes/decodes text, possibly to integers.
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(encoder=None)
+__init__(
+    encoder=None,
+    encoder_config=None
+)
 ```
 
 Constructs a Text FeatureConnector.
 
 #### Args:
 
-* <b>`encoder`</b>: `TextEncoder`, an encoder that can convert text to integers.
-    If None, the text will be utf-8 byte-encoded.
+* <b>`encoder`</b>: <a href="../../tfds/features/text/TextEncoder.md"><code>tfds.features.text.TextEncoder</code></a>, an encoder that can convert
+    text to integers. If None, the text will be utf-8 byte-encoded.
+* <b>`encoder_config`</b>: <a href="../../tfds/features/text/TextEncoderConfig.md"><code>tfds.features.text.TextEncoderConfig</code></a>, needed if
+    restoring from a file with `load_metadata`.
 
 
 
@@ -146,16 +152,18 @@ load_metadata(
 )
 ```
 
-Restore the feature metadata from disk.
 
-If a dataset is re-loaded and generated files exists on disk, this function
-will restore the feature metadata from the saved file.
 
-#### Args:
+<h3 id="maybe_build_from_corpus"><code>maybe_build_from_corpus</code></h3>
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
+``` python
+maybe_build_from_corpus(
+    corpus_generator,
+    **kwargs
+)
+```
+
+Call SubwordTextEncoder.build_from_corpus is encoder_cls is such.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -166,30 +174,7 @@ save_metadata(
 )
 ```
 
-Save the feature metadata on disk.
 
-This function is called after the data has been generated (by
-`_download_and_prepare`) to save the feature connector info with the
-generated dataset.
-
-Some dataset/features dynamically compute info during
-`_download_and_prepare`. For instance:
-
- * Labels are loaded from the downloaded data
- * Vocabulary is created from the downloaded data
- * ImageLabelFolder compute the image dtypes/shape from the manual_dir
-
-After the info have been added to the feature, this function allow to
-save those additional info to be restored the next time the data is loaded.
-
-By default, this function do not save anything, but sub-classes can
-overwrite the function.
-
-#### Args:
-
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
 
 <h3 id="str2ints"><code>str2ints</code></h3>
 

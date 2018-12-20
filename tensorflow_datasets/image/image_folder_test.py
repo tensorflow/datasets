@@ -21,7 +21,6 @@ from __future__ import print_function
 
 import functools
 
-import tensorflow as tf
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.image import image_folder
 from tensorflow_datasets.testing import dataset_builder_testing
@@ -35,10 +34,6 @@ class ImageLabelFolderTest(dataset_builder_testing.TestCase):
   SPLITS = {
       "train": 2,  # Number of examples.
       "test": 6,
-  }
-  SPEC = {
-      "label": (tf.int64, ()),
-      "image": (tf.uint8, (None, None, 3)),
   }
 
   def test_info(self):

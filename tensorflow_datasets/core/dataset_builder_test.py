@@ -21,37 +21,17 @@ from __future__ import print_function
 
 import os
 
+from absl.testing import parameterized
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import splits
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import test_utils
 
-tf.enable_eager_execution()
 
-
-class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
-
-  def _split_generators(self, dl_manager):
-    # Split the 30 examples from the generator into 2 train shards and 1 test
-    # shard.
-    del dl_manager
-    return [splits.SplitGenerator(
-        name=[splits.Split.TRAIN, splits.Split.TEST],
-        num_shards=[2, 1],
-    )]
-
-  def _info(self):
-    return dataset_info.DatasetInfo(
-        features=features.FeaturesDict({"x": tf.int64}),
-        supervised_keys=("x", "x"),
-    )
-
-  def _generate_examples(self):
-    for i in range(30):
-      yield self.info.features.encode_example({"x": i})
+DummyDatasetSharedGenerator = test_utils.DummyDatasetSharedGenerator
 
 
 class DummyBuilderConfig(dataset_builder.BuilderConfig):
@@ -62,7 +42,7 @@ class DummyBuilderConfig(dataset_builder.BuilderConfig):
 
 
 class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
-  DATA_CONFIGS = [
+  BUILDER_CONFIGS = [
       DummyBuilderConfig(
           name="plus1",
           version="0.0.1",
@@ -80,21 +60,18 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
     # shard.
     del dl_manager
     return [
-        splits.SplitGenerator(
-            name=[splits.Split.TRAIN, splits.Split.TEST],
+        splits_lib.SplitGenerator(
+            name=[splits_lib.Split.TRAIN, splits_lib.Split.TEST],
             num_shards=[2, 1],
         )
     ]
 
   def _info(self):
-    if self._builder_config:
-      version = self._builder_config.version
-    else:
-      version = "1.0.0"
+
     return dataset_info.DatasetInfo(
+        builder=self,
         features=features.FeaturesDict({"x": tf.int64}),
         supervised_keys=("x", "x"),
-        version=version,
     )
 
   def _generate_examples(self):
@@ -106,6 +83,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
 
 class DatasetBuilderTest(tf.test.TestCase):
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_shared_generator(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
@@ -123,29 +101,33 @@ class DatasetBuilderTest(tf.test.TestCase):
       self.assertEqual(sorted(expected_filepaths), sorted(written_filepaths))
 
       splits_list = [
-          splits.Split.TRAIN, splits.Split.TEST
+          splits_lib.Split.TRAIN, splits_lib.Split.TEST
       ]
-      datasets = [builder.as_dataset(split=split) for split in splits_list]
-      data = [[el["x"].numpy() for el in dataset] for dataset in datasets]
+      train_data, test_data = [
+          [el["x"] for el in builder.as_numpy(split=split)]
+          for split in splits_list
+      ]
 
-      train_data, test_data = data
       self.assertEqual(20, len(train_data))
       self.assertEqual(10, len(test_data))
       self.assertEqual(list(range(30)), sorted(train_data + test_data))
 
       # Builder's info should also have the above information.
       self.assertTrue(builder.info.initialized)
-      self.assertEqual(20, builder.info.splits[splits.Split.TRAIN].num_examples)
-      self.assertEqual(10, builder.info.splits[splits.Split.TEST].num_examples)
+      self.assertEqual(20,
+                       builder.info.splits[splits_lib.Split.TRAIN].num_examples)
+      self.assertEqual(10,
+                       builder.info.splits[splits_lib.Split.TEST].num_examples)
       self.assertEqual(30, builder.info.num_examples)
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_load(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      dataset = registered.load(
+      dataset = registered.load_numpy(
           name="dummy_dataset_shared_generator",
           data_dir=tmp_dir,
           download=True,
-          split=splits.Split.TRAIN)
+          split=splits_lib.Split.TRAIN)
       data = list(dataset)
       self.assertEqual(20, len(data))
       self.assertLess(data[0]["x"], 30)
@@ -188,8 +170,9 @@ class DatasetBuilderTest(tf.test.TestCase):
     builder = DummyDatasetWithConfigs(config=plus1_config, data_dir=None)
     self.assertIs(plus1_config, builder.builder_config)
     self.assertIs(builder.builder_config,
-                  DummyDatasetWithConfigs.DATA_CONFIGS[0])
+                  DummyDatasetWithConfigs.BUILDER_CONFIGS[0])
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_with_configs(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder1 = DummyDatasetWithConfigs(config="plus1", data_dir=tmp_dir)
@@ -211,12 +194,13 @@ class DatasetBuilderTest(tf.test.TestCase):
       self.assertGreater(len(tf.gfile.ListDirectory(data_dir2)), 3)
 
       # Test that the config was used and they didn't collide.
-      splits_list = [splits.Split.TRAIN, splits.Split.TEST]
+      splits_list = [splits_lib.Split.TRAIN, splits_lib.Split.TEST]
       for builder, incr in [(builder1, 1), (builder2, 2)]:
-        datasets = [builder.as_dataset(split=split) for split in splits_list]
-        data = [[el["x"].numpy() for el in dataset] for dataset in datasets]
+        train_data, test_data = [
+            [el["x"] for el in builder.as_numpy(split=split)]
+            for split in splits_list
+        ]
 
-        train_data, test_data = data
         self.assertEqual(20, len(train_data))
         self.assertEqual(10, len(test_data))
         self.assertEqual([incr + el for el in range(30)],
@@ -235,21 +219,53 @@ class DatasetBuilderReadTest(tf.test.TestCase):
   def tearDownClass(cls):
     test_utils.rm_tmp_dir(cls._tfds_tmp_dir)
 
-  def test_numpy_iterator(self):
-    builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
-    items = []
-    for item in builder.numpy_iterator(split=splits.Split.TRAIN):
-      items.append(item)
-    self.assertEqual(20, len(items))
-    self.assertLess(items[0]["x"], 30)
+  def setUp(self):
+    self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
 
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  def test_all_splits(self):
+    splits = self.builder.as_numpy(batch_size=-1)
+    self.assertSetEqual(set(splits.keys()),
+                        set([splits_lib.Split.TRAIN, splits_lib.Split.TEST]))
+
+    # Test that enum and string both access same object
+    self.assertIs(splits["train"], splits[splits_lib.Split.TRAIN])
+    self.assertIs(splits["test"], splits[splits_lib.Split.TEST])
+
+    train_data = splits[splits_lib.Split.TRAIN]["x"]
+    test_data = splits[splits_lib.Split.TEST]["x"]
+    self.assertEqual(20, len(train_data))
+    self.assertEqual(10, len(test_data))
+    self.assertEqual(sum(range(30)), int(train_data.sum() + test_data.sum()))
+
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  def test_with_batch_size(self):
+    items = list(self.builder.as_numpy(
+        split=splits_lib.Split.TRAIN + splits_lib.Split.TEST, batch_size=10))
+    # 3 batches of 10
+    self.assertEqual(3, len(items))
+    x1, x2, x3 = items[0]["x"], items[1]["x"], items[2]["x"]
+    self.assertEqual(10, x1.shape[0])
+    self.assertEqual(10, x2.shape[0])
+    self.assertEqual(10, x3.shape[0])
+    self.assertEqual(sum(range(30)), int(x1.sum() + x2.sum() + x3.sum()))
+
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  def test_as_numpy(self):
+    items = self.builder.as_numpy(split=splits_lib.Split.TRAIN, batch_size=-1)
+    self.assertEqual(items["x"].shape[0], 20)
+    self.assertLess(items["x"][0], 30)
+
+    count = 0
+    for _ in self.builder.as_numpy(split=splits_lib.Split.TRAIN):
+      count += 1
+    self.assertEqual(count, 20)
+
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_supervised_keys(self):
-    builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
-    for item in builder.numpy_iterator(
-        split=splits.Split.TRAIN, as_supervised=True):
-      self.assertIsInstance(item, tuple)
-      self.assertEqual(len(item), 2)
-      break
+    x, _ = self.builder.as_numpy(
+        split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1)
+    self.assertEqual(x.shape[0], 20)
 
 
 if __name__ == "__main__":

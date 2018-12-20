@@ -19,24 +19,16 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
 from tensorflow_datasets.testing import dataset_builder_testing
 from tensorflow_datasets.video import bair_robot_pushing
 
 
 class BairRobotPushingTest(dataset_builder_testing.TestCase):
-  DATASET_CLASS = bair_robot_pushing.BairRobotPushing
+  DATASET_CLASS = bair_robot_pushing.BairRobotPushingSmall
 
   SPLITS = {
       "train": 1,
       "test": 1,
-  }
-
-  SPEC = {
-      "video_aux1": (tf.uint8, (30, 64, 64, 3)),
-      "video_main": (tf.uint8, (30, 64, 64, 3)),
-      "action": (tf.float32, (30, 4)),
-      "endeffector_pos": (tf.float32, (30, 3)),
   }
 
 

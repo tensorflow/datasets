@@ -23,6 +23,7 @@ import json
 import os
 
 import numpy as np
+import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
@@ -131,13 +132,15 @@ class Image(feature.FeatureConnector):
     utils.assert_shape_match(np_image.shape, self._shape)
     return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
 
-  def encode_example(self, image_or_path):
+  def encode_example(self, image_or_path_or_fobj):
     """Convert the given image into a dict convertible to tf example."""
-    if isinstance(image_or_path, np.ndarray):
-      encoded_image = self._encode_image(image_or_path)
-    else:
-      with tf.gfile.Open(image_or_path, 'rb') as image_f:
+    if isinstance(image_or_path_or_fobj, np.ndarray):
+      encoded_image = self._encode_image(image_or_path_or_fobj)
+    elif isinstance(image_or_path_or_fobj, six.string_types):
+      with tf.gfile.Open(image_or_path_or_fobj, 'rb') as image_f:
         encoded_image = image_f.read()
+    else:
+      encoded_image = image_or_path_or_fobj.read()
     return encoded_image
 
   def decode_example(self, example):
@@ -154,7 +157,7 @@ class Image(feature.FeatureConnector):
       json.dump({
           'shape': [-1 if d is None else d for d in self._shape],
           'encoding_format': self._encoding_format,
-      }, f)
+      }, f, sort_keys=True)
 
   def load_metadata(self, data_dir, feature_name=None):
     """See base class for details."""

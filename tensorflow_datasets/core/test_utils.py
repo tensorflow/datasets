@@ -25,9 +25,12 @@ import tempfile
 
 import tensorflow as tf
 
+from tensorflow_datasets.core import dataset_builder
+from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
+from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 
 
@@ -46,6 +49,13 @@ def make_tmp_dir(dirname=None):
 
 def rm_tmp_dir(dirname):
   tf.gfile.DeleteRecursively(dirname)
+
+
+def remake_dir(d):
+  """Possibly deletes and recreates directory."""
+  if tf.gfile.Exists(d):
+    tf.gfile.DeleteRecursively(d)
+  tf.gfile.MakeDirs(d)
 
 
 class FeatureExpectationItem(object):
@@ -220,3 +230,30 @@ def features_encode_decode(features_dict, example, as_tensor=False):
         return next(iter(dataset))
       else:
         return dataset.make_one_shot_iterator().get_next()
+
+
+class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
+  """Test DatasetBuilder."""
+
+  VERSION = utils.Version("1.0.0")
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({"x": tf.int64}),
+        supervised_keys=("x", "x"),
+    )
+
+  def _split_generators(self, dl_manager):
+    # Split the 30 examples from the generator into 2 train shards and 1 test
+    # shard.
+    del dl_manager
+    return [splits.SplitGenerator(
+        name=[splits.Split.TRAIN, splits.Split.TEST],
+        num_shards=[2, 1],
+    )]
+
+  def _generate_examples(self):
+    for i in range(30):
+      yield self.info.features.encode_example({"x": i})
+

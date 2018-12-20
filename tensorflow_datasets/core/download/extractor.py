@@ -19,7 +19,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import contextlib
 import gzip
+import io
 import os
 import tarfile
 import uuid
@@ -27,18 +29,12 @@ import zipfile
 
 import concurrent.futures
 import promise
+import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import constants
-from tensorflow_datasets.core.proto import download_generated_pb2 as download_pb2
+from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.utils import py_utils
-
-TAR = download_pb2.ExtractInfo.TAR
-TAR_GZ = download_pb2.ExtractInfo.TAR_GZ
-GZIP = download_pb2.ExtractInfo.GZIP
-ZIP = download_pb2.ExtractInfo.ZIP
-
-_BUFFER_SIZE = 1024 * 8
 
 
 @py_utils.memoize()
@@ -57,22 +53,24 @@ class _Extractor(object):
     self._executor = concurrent.futures.ThreadPoolExecutor(
         max_workers=max_workers)
 
-  def extract(self, from_path, to_path, method):
-    """Returns `promise.Promise` => extraction done."""
-    if method not in _EXTRACT_METHODS:
-      raise ValueError('Unknonw extraction method "%s".' % method)
-    future = self._executor.submit(self._sync_extract, from_path, to_path,
-                                   method)
+  def extract(self, resource, to_path):
+    """Returns `promise.Promise` => to_path."""
+    if resource.extract_method not in _EXTRACT_METHODS:
+      raise ValueError('Unknonw extraction method "%s".' %
+                       resource.extract_method)
+    future = self._executor.submit(self._sync_extract, resource, to_path)
     return promise.Promise.resolve(future)
 
-  def _sync_extract(self, from_path, to_path, method):
-    tf.logging.info(
-        'Extracting %s (%s) to %s...' % (from_path, method, to_path))
+  def _sync_extract(self, resource, to_path):
+    """Returns `to_path` once resource has been extracted there."""
+    from_path = resource.path
+    method = resource.extract_method
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
-    _EXTRACT_METHODS[method](from_path, to_path_tmp)
+    for path, handle in iter_archive(from_path, method):
+      _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     tf.gfile.Rename(to_path_tmp, to_path, overwrite=True)
-    tf.logging.info('Finished extracting %s to %s.' % (from_path, to_path))
+    return to_path
 
 
 def _copy(src_file, dest_path):
@@ -80,7 +78,7 @@ def _copy(src_file, dest_path):
   tf.gfile.MakeDirs(os.path.dirname(dest_path))
   with tf.gfile.Open(dest_path, 'wb') as dest_file:
     while True:
-      data = src_file.read(_BUFFER_SIZE)
+      data = src_file.read(io.DEFAULT_BUFFER_SIZE)
       if not data:
         break
       dest_file.write(data)
@@ -93,40 +91,54 @@ def _normpath(path):
   return path
 
 
-def _extract_tar(src, dst, gz=False):
-  read_type = 'r:gz' if gz else 'r'
-  with tf.gfile.Open(src, 'rb') as f:
-    tar = tarfile.open(mode=read_type, fileobj=f)
+@contextlib.contextmanager
+def _open_or_pass(path_or_fobj):
+  if isinstance(path_or_fobj, six.string_types):
+    with tf.gfile.Open(path_or_fobj, 'rb') as f_obj:
+      yield f_obj
+  else:
+    yield path_or_fobj
+
+
+def iter_tar(arch_f, gz=False):
+  read_type = 'r:gz' if gz else 'r:'
+  with _open_or_pass(arch_f) as fobj:
+    tar = tarfile.open(mode=read_type, fileobj=fobj)
     for member in tar.getmembers():
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
-        to_path = os.path.join(dst, _normpath(member.path))
-        _copy(extract_file, to_path)
+        path = _normpath(member.path)
+        yield [path, extract_file]
 
 
-def _extract_tar_gz(src, dst):
-  _extract_tar(src, dst, gz=True)
+def iter_tar_gz(arch_f):
+  return iter_tar(arch_f, gz=True)
 
 
-def _extract_gzip(src, dst):
-  with tf.gfile.Open(src, 'rb') as f:
-    gz_file = gzip.GzipFile(fileobj=f)
-    _copy(gz_file, dst)
+def iter_gzip(arch_f):
+  with _open_or_pass(arch_f) as fobj:
+    gzip_ = gzip.GzipFile(fileobj=fobj)
+    yield ('', gzip_)  # No inner file.
 
 
-def _extract_zip(src, dst):
-  with tf.gfile.Open(src, 'rb') as f:
-    z = zipfile.ZipFile(f)
+def iter_zip(arch_f):
+  with _open_or_pass(arch_f) as fobj:
+    z = zipfile.ZipFile(fobj)
     for member in z.infolist():
       extract_file = z.open(member)
       if extract_file:  # File with data (not directory):
-        to_path = os.path.join(dst, _normpath(member.filename))
-        _copy(extract_file, to_path)
+        path = _normpath(member.filename)
+        yield [path, extract_file]
 
 
 _EXTRACT_METHODS = {
-    TAR: _extract_tar,
-    TAR_GZ: _extract_tar_gz,
-    GZIP: _extract_gzip,
-    ZIP: _extract_zip,
+    resource_lib.ExtractMethod.TAR: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ: iter_tar_gz,
+    resource_lib.ExtractMethod.GZIP: iter_gzip,
+    resource_lib.ExtractMethod.ZIP: iter_zip,
 }
+
+
+def iter_archive(path, method):
+  """Yields (path_within_archive, file_obj) for archive at path using method."""
+  return _EXTRACT_METHODS[method](path)

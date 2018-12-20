@@ -15,13 +15,5 @@ Public API of the download manager.
 
 [`class DownloadManager`](../tfds/download/DownloadManager.md): Manages the download and extraction of files, as well as caching.
 
-[`class ExtractInfo`](../tfds/download/ExtractInfo.md)
-
 [`class GenerateMode`](../tfds/download/GenerateMode.md): Enum for the different version conflict resolution modes.
-
-[`class UrlInfo`](../tfds/download/UrlInfo.md)
-
-## Functions
-
-[`load_checksums(...)`](../tfds/download/load_checksums.md): Returns dict: {"url": "checksum"} for given dataset.
 

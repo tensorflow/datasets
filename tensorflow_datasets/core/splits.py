@@ -30,14 +30,6 @@ from six.moves import zip  # pylint: disable=redefined-builtin
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import utils
 
-__all__ = [
-    "NamedSplit",
-    "Split",
-    "SplitDict",
-    "SplitGenerator",
-    "SplitInfo",
-]
-
 
 @utils.as_proto_cls(proto.SplitInfo)
 class SplitInfo(object):
@@ -46,6 +38,10 @@ class SplitInfo(object):
   @property
   def num_examples(self):
     return self.statistics.num_examples
+
+  def __repr__(self):
+    num_examples = self.num_examples or "unknown"
+    return "<tfds.core.SplitInfo num_examples=%s>" % str(num_examples)
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -297,6 +293,9 @@ class NamedSplit(_SplitDescriptorNode):
     else:
       raise ValueError("Equality not supported between split {} and {}".format(
           self, other))
+
+  def __hash__(self):
+    return hash(self._name)
 
   def get_read_instruction(self, split_dict):
     return SplitReadInstruction(split_dict[self._name])

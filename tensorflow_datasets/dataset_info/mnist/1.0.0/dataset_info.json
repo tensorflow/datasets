@@ -1,66 +1,26 @@
 {
-  "version": "1.0.0", 
-  "name": "mnist", 
+  "citation": "@article{lecun-mnisthandwrittendigit-2010,\n  added-at = {2010-06-28T21:16:30.000+0200},\n  author = {LeCun, Yann and Cortes, Corinna},\n  biburl = {https://www.bibsonomy.org/bibtex/2935bad99fa1f65e03c25b315aa3c1032/mhwombat},\n  groups = {public},\n  howpublished = {http://yann.lecun.com/exdb/mnist/},\n  interhash = {21b9d0558bd66279df9452562df6e6f3},\n  intrahash = {935bad99fa1f65e03c25b315aa3c1032},\n  keywords = {MSc _checked character_recognition mnist network neural},\n  lastchecked = {2016-01-14 14:24:11},\n  timestamp = {2016-07-12T19:25:30.000+0200},\n  title = {{MNIST} handwritten digit database},\n  url = {http://yann.lecun.com/exdb/mnist/},\n  username = {mhwombat},\n  year = 2010\n}\n", 
   "description": "The MNIST database of handwritten digits.", 
-  "splits": [
-    {
-      "statistics": {
-        "numExamples": "10000", 
-        "features": [
-          {
-            "numStats": {
-              "max": 255.0, 
-              "commonStats": {
-                "numNonMissing": "10000"
-              }
-            }, 
-            "name": "image"
-          }, 
-          {
-            "numStats": {
-              "max": 9.0, 
-              "commonStats": {
-                "numNonMissing": "10000"
-              }
-            }, 
-            "name": "label"
-          }
-        ]
-      }, 
-      "numShards": "1", 
-      "name": "test"
-    }, 
-    {
-      "statistics": {
-        "numExamples": "60000", 
-        "features": [
-          {
-            "numStats": {
-              "max": 255.0, 
-              "commonStats": {
-                "numNonMissing": "60000"
-              }
-            }, 
-            "name": "image"
-          }, 
-          {
-            "numStats": {
-              "max": 9.0, 
-              "commonStats": {
-                "numNonMissing": "60000"
-              }
-            }, 
-            "name": "label"
-          }
-        ]
-      }, 
-      "numShards": "10", 
-      "name": "train"
-    }
-  ], 
+  "downloadChecksums": {
+    "http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6", 
+    "http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6", 
+    "http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609", 
+    "http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c"
+  }, 
+  "location": {
+    "urls": [
+      "http://yann.lecun.com/exdb/mnist/"
+    ]
+  }, 
+  "name": "mnist", 
   "schema": {
     "feature": [
       {
+        "name": "label", 
+        "type": "INT"
+      }, 
+      {
+        "name": "image", 
         "shape": {
           "dim": [
             {
@@ -74,30 +34,70 @@
             }
           ]
         }, 
-        "type": "INT", 
-        "name": "image"
-      }, 
-      {
-        "type": "INT", 
-        "name": "label"
+        "type": "INT"
       }
     ]
   }, 
-  "downloadChecksums": {
-    "http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6", 
-    "http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz": "440fcabf73cc546fa21475e81ea370265605f56be210a4024d2ca8f203523609", 
-    "http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz": "3552534a0a558bbed6aed32b30c495cca23d567ec52cac8be1a0730e8010255c", 
-    "http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz": "f7ae60f92e00ec6debd23a6088c31dbd2371eca3ffa0defaefb259924204aec6"
-  }, 
+  "sizeInBytes": "11594722", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              }, 
+              "max": 9.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "10000"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              }, 
+              "max": 9.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "60000"
+      }
+    }
+  ], 
   "supervisedKeys": {
     "input": "image", 
     "output": "label"
   }, 
-  "location": {
-    "urls": [
-      "http://yann.lecun.com/exdb/mnist/"
-    ]
-  }, 
-  "citation": "Y. Lecun and C. Cortes, \"The MNIST database of handwritten digits,\" 1998.\n[Online]. Available: http://yann.lecun.com/exdb/mnist/", 
-  "sizeInBytes": "11534336"
+  "version": "1.0.0"
 }

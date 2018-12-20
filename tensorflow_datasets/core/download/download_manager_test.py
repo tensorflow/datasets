@@ -20,13 +20,21 @@ from __future__ import division
 from __future__ import print_function
 
 import hashlib
+import json
+import os
 import re
+import tempfile
 import threading
 
 import promise
 import tensorflow as tf
 from tensorflow_datasets.core.download import download_manager as dm
-from tensorflow_datasets.core.proto import download_generated_pb2 as download_pb2
+from tensorflow_datasets.core.download import resource as resource_lib
+
+
+ZIP = resource_lib.ExtractMethod.ZIP
+TAR = resource_lib.ExtractMethod.TAR
+NO_EXTRACT = resource_lib.ExtractMethod.NO_EXTRACT
 
 
 def _get_promise_on_event(result=None, error=None):
@@ -48,23 +56,16 @@ def _sha256(str_):
   return hashlib.sha256(str_.encode('utf8')).hexdigest()
 
 
-class GetExtractMethodTest(tf.test.TestCase):
-
-  def test_(self):
-    for method, path, expected_result in [
-        (dm.AUTO_EXTRACT, 'path/to/bar.tar.gz', dm.TAR_GZ),
-        (dm.AUTO_EXTRACT, 'path/to/bar.gz', dm.GZIP),
-        (dm.AUTO_EXTRACT, 'path/to/bar.gz.strange', dm.NO_EXTRACT),
-        (dm.NO_EXTRACT, 'path/to/bar.gz', dm.NO_EXTRACT),
-        (dm.GZIP, 'path/to/bar.tar.gz', dm.GZIP),
-    ]:
-      res = dm._get_extract_method(download_pb2.ExtractInfo(
-          path=path, extraction_method=method))
-      self.assertEqual(res, expected_result, '(%s, %s)->%s instead of %s' % (
-          method, path, res, expected_result))
-
-
 class DownloadManagerTest(tf.test.TestCase):
+
+  def _add_file(self, path, content='', mode='w'):
+    """Returns open file handle."""
+    temp_f = tempfile.NamedTemporaryFile(mode=mode, delete=False)
+    self.files_content[path] = temp_f.name
+    temp_f.write(content)
+    temp_f.close()
+    self.existing_paths.append(path)
+    return temp_f
 
   def setUp(self):
     self.addCleanup(tf.test.mock.patch.stopall)
@@ -72,13 +73,38 @@ class DownloadManagerTest(tf.test.TestCase):
     self.made_dirs = []
     self.dl_results = {}
     self.extract_results = {}
-    gfile = tf.test.mock.patch.object(
+    self.file_names = {}  # url_sha -> original file name
+    def list_directory(path):
+      sha = os.path.basename(path).split('.')[0]
+      return [self.file_names.get(sha, 'file_with_no_ext')]
+    self.files_content = {}
+    def open_(path, mode='r'):
+      if 'w' in mode:
+        self._add_file(path)
+      return open(self.files_content[path], mode)
+    def rename(from_, to, overwrite=False):
+      del overwrite
+      if from_ in self.files_content:
+        self.existing_paths.append(to)
+        self.existing_paths.remove(from_)
+        self.files_content[to] = self.files_content.pop(from_)
+    self.gfile_patch = tf.test.mock.patch.object(
         tf, 'gfile',
         Exists=lambda path: path in self.existing_paths,
         MakeDirs=self.made_dirs.append,
-        ListDirectory=lambda path: ['one_file'],
+        # Used to get name of file as downloaded:
+        ListDirectory=list_directory,
+        Open=open_,
+        Rename=tf.test.mock.Mock(side_effect=rename),
         )
-    self.gfile = gfile.start()
+    self.gfile = self.gfile_patch.start()
+
+  def tearDown(self):
+    self.gfile_patch.stop()
+
+  def _write_info(self, path, info):
+    content = json.dumps(info, sort_keys=True)
+    self._add_file(path, content)
 
   def _get_manager(self, force_download=False, force_extraction=False,
                    checksums=None):
@@ -88,101 +114,136 @@ class DownloadManagerTest(tf.test.TestCase):
         checksums=checksums)
     download = tf.test.mock.patch.object(
         manager._downloader, 'download',
-        side_effect=lambda url_info, tmpdir_path: self.dl_results[url_info.url])
+        side_effect=lambda resource, tmpdir_path: self.dl_results[resource.url])
     self.downloader_download = download.start()
     extract = tf.test.mock.patch.object(
         manager._extractor, 'extract',
-        side_effect=(
-            lambda from_path, to_path, mtd: self.extract_results[from_path]))
+        side_effect=lambda resource, dest: self.extract_results[resource.path])
     self.extractor_extract = extract.start()
     return manager
 
   def test_download(self):
     """One file in cache, one not."""
     urls = {
-        'cached': download_pb2.UrlInfo(url='http://a.ch/a'),
-        'new': download_pb2.UrlInfo(url='https://a.ch/b'),
+        'cached': resource_lib.Resource(url='http://a.ch/a'),
+        'new': resource_lib.Resource(url='https://a.ch/b'),
+        # INFO file of c has been deleted:
+        'info_deleted': resource_lib.Resource(url='https://a.ch/c'),
     }
     urla_sha256 = _sha256('http://a.ch/a')
     urlb_sha256 = _sha256('https://a.ch/b')
-    self.existing_paths.append('/dl_dir/url.%s' % urla_sha256)
+    urlc_sha256 = _sha256('https://a.ch/c')
+    _ = [self._add_file(path) for path in [
+        '/dl_dir/%s' % urla_sha256,
+        '/dl_dir/%s.INFO' % urla_sha256,
+        '/dl_dir/%s' % urlc_sha256,
+    ]]
     downloaded_b, self.dl_results['https://a.ch/b'] = _get_promise_on_event(
-        'sha_b')
+        ('sha_b', 10))
+    downloaded_c, self.dl_results['https://a.ch/c'] = _get_promise_on_event(
+        ('sha_c', 10))
     manager = self._get_manager()
     res = manager.download(urls, async_=True)
     self.assertFalse(res.is_fulfilled)
     downloaded_b.set()
+    downloaded_c.set()
     downloads = res.get()
     self.assertEqual(downloads, {
-        'cached': '/dl_dir/url.%s' % urla_sha256,
-        'new': '/dl_dir/url.%s' % urlb_sha256,
+        'cached': '/dl_dir/%s' % urla_sha256,
+        'new': '/dl_dir/%s' % urlb_sha256,
+        'info_deleted': '/dl_dir/%s' % urlc_sha256,
     })
 
   def test_extract(self):
-    """One file extracted, one file with NO_EXTRACT, one to extract."""
+    """One file already extracted, one file with NO_EXTRACT, one to extract."""
     files = {
-        'cached': download_pb2.ExtractInfo(path='/dl_dir/a',
-                                           extraction_method=dm.ZIP),
-        'new': download_pb2.ExtractInfo(path='/dl_dir/b',
-                                        extraction_method=dm.TAR),
+        'cached': resource_lib.Resource(path='/dl_dir/cached',
+                                        extract_method=ZIP),
+        'new': resource_lib.Resource(path='/dl_dir/new', extract_method=TAR),
+        'noextract': resource_lib.Resource(path='/dl_dir/noextract',
+                                           extract_method=NO_EXTRACT),
     }
-    self.existing_paths.append('/extract_dir/2.a')
-    extracted_b, self.extract_results['/dl_dir/b'] = _get_promise_on_event()
+    self.existing_paths.append('/extract_dir/ZIP.cached')
+    extracted_new, self.extract_results['/dl_dir/new'] = _get_promise_on_event(
+        '/extract_dir/TAR.new')
     manager = self._get_manager()
     res = manager.extract(files, async_=True)
     self.assertFalse(res.is_fulfilled)
-    extracted_b.set()
+    extracted_new.set()
     self.assertEqual(res.get(), {
-        'cached': '/extract_dir/2.a',
-        'new': '/extract_dir/4.b',
+        'cached': '/extract_dir/ZIP.cached',
+        'new': '/extract_dir/TAR.new',
+        'noextract': '/dl_dir/noextract',
     })
 
   def test_download_and_extract(self):
-    urls = {'a': 'ftp://a/a',
-            'b': 'ftp://b/b'}
-    dl_a, self.dl_results['ftp://a/a'] = _get_promise_on_event('sha_a')
-    dl_b, self.dl_results['ftp://b/b'] = _get_promise_on_event('sha_b')
-    ext_a, self.extract_results['/dl_dir/a.12'] = _get_promise_on_event(
-        '/extract_dir/a')
-    ext_b, self.extract_results['/dl_dir/b.34'] = _get_promise_on_event(
-        '/extract_dir/b')
-    for event in [dl_a, dl_b, ext_a, ext_b]:
+    url_a = 'http://a/a.zip'
+    url_b = 'http://b/b'
+    url_a_sha = _sha256(url_a)
+    url_b_sha = _sha256(url_b)
+    self.file_names[url_a_sha] = 'a.zip'
+    dl_a, self.dl_results[url_a] = _get_promise_on_event(('sha_a', 10))
+    dl_b, self.dl_results[url_b] = _get_promise_on_event(('sha_b', 10))
+    ext_a, self.extract_results['/dl_dir/%s' % url_a_sha] = (
+        _get_promise_on_event('/extract_dir/ZIP.%s' % url_a_sha))
+    # url_b doesn't need any extraction.
+    for event in [dl_a, dl_b, ext_a]:
       event.set()
     manager = self._get_manager()
-    res = manager.download_and_extract(urls)
-    urla_sha256 = _sha256('ftp://a/a')
-    urlb_sha256 = _sha256('ftp://b/b')
+    res = manager.download_and_extract({'a': url_a, 'b': url_b})
     self.assertEqual(res, {
-        'a': '/dl_dir/url.%s' % urla_sha256,
-        'b': '/dl_dir/url.%s' % urlb_sha256})
+        'a': '/extract_dir/ZIP.%s' % url_a_sha,
+        'b': '/dl_dir/%s' % url_b_sha})
+
+  def test_download_and_extract_already_downloaded(self):
+    url_a = 'http://a/a.zip'
+    url_a_sha = _sha256(url_a)
+    self.file_names[url_a_sha] = 'a.zip'
+    # File was already downloaded:
+    self._add_file('/dl_dir/%s' % url_a_sha)
+    self._write_info('/dl_dir/%s.INFO' % url_a_sha, {'original_fname': 'a.zip'})
+    ext_a, self.extract_results['/dl_dir/%s' % url_a_sha] = (
+        _get_promise_on_event('/extract_dir/ZIP.%s' % url_a_sha))
+    ext_a.set()
+    manager = self._get_manager()
+    res = manager.download_and_extract(url_a)
+    self.assertEqual(res, '/extract_dir/ZIP.%s' % url_a_sha)
 
   def test_force_download_and_extract(self):
     url = 'http://a/b.tar.gz'
-    self.existing_paths = ['/dl_dir/sha_a', '/extract_dir/5.sha_a']
-    dl_a, self.dl_results[url] = _get_promise_on_event('sha_a')
-    ext_a, self.extract_results['/dl_dir/sha_a'] = _get_promise_on_event()
+    url_sha = _sha256(url)
+    # resource was already downloaded / extracted:
+    self.existing_paths = ['/dl_dir/%s' % url_sha,
+                           '/extract_dir/TAR_GZ.%s' % url_sha]
+    self.file_names[url_sha] = 'b.tar.gz'
+    self._write_info('/dl_dir/%s.INFO' % url_sha,
+                     {'original_fname': 'b.tar.gz'})
+    dl_a, self.dl_results[url] = _get_promise_on_event(('sha_a', 10))
+    ext_a, self.extract_results['/dl_dir/%s' % url_sha] = (
+        _get_promise_on_event('/extract_dir/TAR_GZ.%s' % url_sha))
     dl_a.set()
     ext_a.set()
     manager = self._get_manager(force_download=True, force_extraction=True,
                                 checksums={url: 'sha_a'})
     res = manager.download_and_extract(url)
-    self.assertEqual('/extract_dir/5.sha_a', res)
+    self.assertEqual('/extract_dir/TAR_GZ.%s' % url_sha, res)
     # Rename after download:
     (from_, to), kwargs = self.gfile.Rename.call_args
-    self.assertTrue(re.match('/dl_dir/tmp/[a-h0-9]{32}/one_file', from_))
-    self.assertEqual('/dl_dir/sha_a', to)
+    self.assertTrue(re.match(
+        r'/dl_dir/%s\.tmp\.[a-h0-9]{32}/b.tar.gz' % url_sha, from_))
+    self.assertEqual('/dl_dir/%s' % url_sha, to)
     self.assertEqual(kwargs, {'overwrite': True})
     self.assertEqual(1, self.downloader_download.call_count)
     self.assertEqual(1, self.extractor_extract.call_count)
 
   def test_wrong_checksum(self):
     url = 'http://a/b.tar.gz'
-    dl_a, self.dl_results[url] = _get_promise_on_event('sha_a')
+    dl_a, self.dl_results[url] = _get_promise_on_event(('sha_a', 10))
     dl_a.set()
     manager = self._get_manager(checksums={url: 'sha_b'})
     with self.assertRaises(dm.NonMatchingChecksumError):
       manager.download(url)
-    self.assertEqual(0, self.gfile.Rename.call_count)
+    self.assertEqual(0, self.extractor_extract.call_count)
 
 
 if __name__ == '__main__':

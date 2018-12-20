@@ -25,14 +25,18 @@ from tensorflow_datasets.core.splits import NamedSplit
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
+from tensorflow_datasets.core.utils import get_tfds_path
+from tensorflow_datasets.core.utils import Version
 
 __all__ = [
     "BuilderConfig",
     "DatasetBuilder",
     "GeneratorBasedBuilder",
+    "get_tfds_path",
     "DatasetInfo",
     "NamedSplit",
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",
+    "Version",
 ]

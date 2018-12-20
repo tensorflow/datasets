@@ -36,6 +36,8 @@ from __future__ import print_function
 
 import collections
 import os
+import pprint
+
 import numpy as np
 import tensorflow as tf
 
@@ -60,7 +62,6 @@ INFO_STR = """tfds.core.DatasetInfo(
     features={features},
     num_examples={num_examples},
     splits={splits},
-    examples_per_split={examples_per_split},
     supervised_keys={supervised_keys},
     citation='{citation}',
 )
@@ -83,9 +84,8 @@ class DatasetInfo(object):
 
   @api_utils.disallow_positional_args
   def __init__(self,
-               name=None,
+               builder,
                description=None,
-               version=None,
                features=None,
                supervised_keys=None,
                splits=None,
@@ -96,9 +96,8 @@ class DatasetInfo(object):
     """Constructs DatasetInfo.
 
     Args:
-      name: `str`, Name of the dataset, usually set to builder.name.
+      builder: `DatasetBuilder`, dataset builder for this info.
       description: `str`, description of this dataset.
-      version: `str`, semantic version of the dataset (ex: '1.2.0')
       features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
@@ -112,13 +111,12 @@ class DatasetInfo(object):
         size of the dataset that we will be downloading from the internet.
       citation: `str`, optional, the citation to use for this dataset.
     """
-    version = version or "0.0.0"
-    utils.str_to_version(version)  # Ensure that the version is valid
+    self._builder = builder
 
     self._info_proto = dataset_info_pb2.DatasetInfo(
-        name=name,
+        name=builder.name,
         description=description,
-        version=version,
+        version=str(builder._version),  # pylint: disable=protected-access
         size_in_bytes=int(size_in_bytes),
         citation=citation)
     if urls:
@@ -150,7 +148,7 @@ class DatasetInfo(object):
 
   @property
   def version(self):
-    return self.as_proto.version
+    return utils.Version(self.as_proto.version)
 
   @property
   def citation(self):
@@ -159,6 +157,10 @@ class DatasetInfo(object):
   @property
   def size_in_bytes(self):
     return self.as_proto.size_in_bytes
+
+  @size_in_bytes.setter
+  def size_in_bytes(self, size):
+    self.as_proto.size_in_bytes = size
 
   @property
   def features(self):
@@ -200,6 +202,11 @@ class DatasetInfo(object):
   def download_checksums(self):
     return self.as_proto.download_checksums
 
+  @download_checksums.setter
+  def download_checksums(self, checksums):
+    self.as_proto.download_checksums.clear()
+    self.as_proto.download_checksums.update(checksums)
+
   @property
   def num_examples(self):
     return sum(s.num_examples for s in self.splits.values())
@@ -212,8 +219,8 @@ class DatasetInfo(object):
   def _dataset_info_filename(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
-  def compute_dynamic_properties(self, builder):
-    self._compute_dynamic_properties(builder)
+  def compute_dynamic_properties(self):
+    self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
 
   def _compute_dynamic_properties(self, builder):
@@ -234,22 +241,22 @@ class DatasetInfo(object):
         # split.
         self.as_proto.schema.CopyFrom(schema)
 
-      except tf.errors.InvalidArgumentError as e:
+      except tf.errors.InvalidArgumentError:
         # This means there is no such split, even though it was specified in the
         # info, the least we can do is to log this.
-        raise tf.errors.InvalidArgumentError(
+        tf.logging.error((
             "%s's info() property specifies split %s, but it "
             "doesn't seem to have been generated. Please ensure "
             "that the data was downloaded for this split and re-run "
-            "download_and_prepare. Original error is [%s]" %
-            (self.name, split_name, str(e)))
+            "download_and_prepare"), self.name, split_name)
+        raise
 
     # Set splits to trigger proto update in setter
     self.splits = splits
 
   @property
   def as_json(self):
-    return json_format.MessageToJson(self.as_proto)
+    return json_format.MessageToJson(self.as_proto, sort_keys=True)
 
   def write_to_directory(self, dataset_info_dir):
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
@@ -269,7 +276,7 @@ class DatasetInfo(object):
     with tf.gfile.Open(self._dataset_info_filename(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir):
+  def read_from_directory(self, dataset_info_dir, from_packaged_data=False):
     """Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -280,6 +287,8 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
+      from_packaged_data: `bool`, If data is restored from packaged data,
+        then only the informations not defined in the code are updated
 
     Returns:
       True if we were able to initialize using `dataset_info_dir`, else false.
@@ -298,15 +307,34 @@ class DatasetInfo(object):
       dataset_info_json_str = f.read()
 
     # Parse it back into a proto.
-    self._info_proto = json_format.Parse(dataset_info_json_str,
-                                         dataset_info_pb2.DatasetInfo())
+    parsed_proto = json_format.Parse(dataset_info_json_str,
+                                     dataset_info_pb2.DatasetInfo())
 
-    # Restore the Splits
-    self.splits = splits_lib.SplitDict.from_proto(self.as_proto.splits)
-
+    # Update splits
+    self.splits = splits_lib.SplitDict.from_proto(parsed_proto.splits)
+    # Update schema
+    self.as_proto.schema.CopyFrom(parsed_proto.schema)
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
+    # Restore download info
+    self.download_checksums = parsed_proto.download_checksums
+    self.size_in_bytes = parsed_proto.size_in_bytes
+
+    # If we are restoring on-disk data, then we also restore all dataste info
+    # information from the previously saved proto.
+    # If we are loading from packaged data (only possible when we do not
+    # restore previous data), then do not restore the info which are already
+    # defined in the code. Otherwise, we would overwrite code info.
+    if not from_packaged_data:
+      # Update the full proto
+      self._info_proto = parsed_proto
+
+    if self._builder._version != self.version:  # pylint: disable=protected-access
+      raise AssertionError(
+          "The constructed DatasetInfo instance and the restored proto version "
+          "do not match. Builder version: {}. Proto version: {}".format(
+              self._builder._version, self.version))  # pylint: disable=protected-access
 
     # Mark as fully initialized.
     self._fully_initialized = True
@@ -315,27 +343,36 @@ class DatasetInfo(object):
 
   def initialize_from_package_data(self):
     """Initialize DatasetInfo from package data, returns True on success."""
-
-    return self.read_from_directory(os.path.join(utils.tfds_dir(),
-                                                 "dataset_info",
-                                                 self.name,
-                                                 self.version))
+    pkg_path = os.path.join(utils.tfds_dir(), "dataset_info", self.name)
+    if self._builder.builder_config:
+      pkg_path = os.path.join(pkg_path, self._builder.builder_config.name)
+    pkg_path = os.path.join(pkg_path, str(self.version))
+    return self.read_from_directory(pkg_path, from_packaged_data=True)
 
   def __repr__(self):
     return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(
         name=self.name, proto=repr(self.as_proto))
 
   def __str__(self):
-    # TODO(afrozm): pprint the features dicts somehow.
+    splits_pprint = "{\n %s\n    }" % (
+        pprint.pformat(
+            {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
+            indent=8, width=1)[1:-1])
+    features_dict = self.features._feature_dict  # pylint: disable=protected-access
+    features_pprint = "FeaturesDict({\n %s\n    }" % (
+        pprint.pformat({
+            k: features_dict[k] for k in sorted(list(features_dict.keys()))
+        }, indent=8, width=1)[1:-1])
+    citation_pprint = '"""\n%s\n    """' % "\n".join(
+        [u" " * 8 + line for line in self.citation.split(u"\n")])
     return INFO_STR.format(
         name=self.name,
         version=self.version,
         description=self.description,
         num_examples=self.num_examples,
-        features=str(self.features),
-        splits=self.splits.keys(),
-        examples_per_split=[s.num_examples for s in self.splits.values()],
-        citation=self.citation,
+        features=features_pprint,
+        splits=splits_pprint,
+        citation=citation_pprint,
         urls=self.urls,
         supervised_keys=self.supervised_keys)
 

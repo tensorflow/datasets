@@ -30,12 +30,13 @@ import tensorflow_datasets.public_api as tfds
 class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   """Diabetic retinopathy detection."""
 
+  VERSION = tfds.core.Version("1.0.0")
+
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description="A large set of high-resolution retina images taken under "
         "a variety of imaging conditions.",
-        version="1.0.0",
         features=tfds.features.FeaturesDict({
             "name": tfds.features.Text(),  # patient ID + eye. eg: "4_left".
             "image": tfds.features.Image(),
@@ -43,7 +44,6 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
         urls=["https://www.kaggle.com/c/diabetic-retinopathy-detection/data"],
-        size_in_bytes=97.0 * tfds.units.GiB,
     )
 
   def _split_generators(self, dl_manager):

@@ -89,6 +89,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     """Decodes a list of integers into text."""
     ids = text_encoder.pad_decr(ids)
     subword_ids = ids
+    del ids
 
     subwords = []
 
@@ -226,10 +227,10 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
 
     # Setup tokenizer
     # Reserved tokens are all tokens that are mixed alphanum and non-alphanum.
-    reserved_tokens = [_UNDERSCORE_REPLACEMENT]
+    reserved_tokens = set([_UNDERSCORE_REPLACEMENT])
     for t in self._subwords:
       if text_encoder.is_mixed_alphanum(t):
-        reserved_tokens.append(t)
+        reserved_tokens.add(t)
     self._tokenizer = text_encoder.Tokenizer(
         alphanum_only=False, reserved_tokens=reserved_tokens)
 

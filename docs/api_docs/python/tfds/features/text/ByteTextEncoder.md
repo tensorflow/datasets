@@ -6,13 +6,15 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode"/>
 <meta itemprop="property" content="encode"/>
+<meta itemprop="property" content="load_from_file"/>
+<meta itemprop="property" content="save_to_file"/>
 </div>
 
 # tfds.features.text.ByteTextEncoder
 
 ## Class `ByteTextEncoder`
 
-
+Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 
 
@@ -62,6 +64,26 @@ decode(ids)
 
 ``` python
 encode(s)
+```
+
+
+
+<h3 id="load_from_file"><code>load_from_file</code></h3>
+
+``` python
+@classmethod
+load_from_file(
+    cls,
+    filename_prefix
+)
+```
+
+
+
+<h3 id="save_to_file"><code>save_to_file</code></h3>
+
+``` python
+save_to_file(filename_prefix)
 ```
 
 

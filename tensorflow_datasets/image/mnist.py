@@ -19,8 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import random
-
 import numpy as np
 import six.moves.urllib as urllib
 import tensorflow as tf
@@ -39,26 +37,62 @@ _TRAIN_EXAMPLES = 60000
 _TEST_EXAMPLES = 10000
 
 
+_MNIST_CITATION = """\
+@article{lecun-mnisthandwrittendigit-2010,
+  added-at = {2010-06-28T21:16:30.000+0200},
+  author = {LeCun, Yann and Cortes, Corinna},
+  biburl = {https://www.bibsonomy.org/bibtex/2935bad99fa1f65e03c25b315aa3c1032/mhwombat},
+  groups = {public},
+  howpublished = {http://yann.lecun.com/exdb/mnist/},
+  interhash = {21b9d0558bd66279df9452562df6e6f3},
+  intrahash = {935bad99fa1f65e03c25b315aa3c1032},
+  keywords = {MSc _checked character_recognition mnist network neural},
+  lastchecked = {2016-01-14 14:24:11},
+  timestamp = {2016-07-12T19:25:30.000+0200},
+  title = {{MNIST} handwritten digit database},
+  url = {http://yann.lecun.com/exdb/mnist/},
+  username = {mhwombat},
+  year = 2010
+}
+"""
+
+
+_FASHION_MNIST_CITATION = """\
+@article{journals/corr/abs-1708-07747,
+  added-at = {2018-08-13T00:00:00.000+0200},
+  author = {Xiao, Han and Rasul, Kashif and Vollgraf, Roland},
+  biburl = {https://www.bibsonomy.org/bibtex/2c1bcf55a1de644db3d7b0a4a9b7a778e/dblp},
+  ee = {http://arxiv.org/abs/1708.07747},
+  interhash = {0c81f9a6170118f14703b6796101ce40},
+  intrahash = {c1bcf55a1de644db3d7b0a4a9b7a778e},
+  journal = {CoRR},
+  keywords = {dblp},
+  timestamp = {2018-08-14T12:22:49.000+0200},
+  title = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms.},
+  url = {http://dblp.uni-trier.de/db/journals/corr/corr1708.html#abs-1708-07747},
+  volume = {abs/1708.07747},
+  year = 2017
+}
+"""
+
+
 class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
 
+  VERSION = tfds.core.Version("1.0.0")
+
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("The MNIST database of handwritten digits."),
-        version="1.0.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
         urls=[self.URL],
-        download_checksums=tfds.download.load_checksums(self.name),
-        size_in_bytes=11.0 * tfds.units.MiB,
-        citation="Y. Lecun and C. Cortes, \"The MNIST database of handwritten "
-                 "digits,\" 1998.\n[Online]. Available: "
-                 "http://yann.lecun.com/exdb/mnist/",
+        citation=_MNIST_CITATION,
     )
 
   def _split_generators(self, dl_manager):
@@ -108,10 +142,9 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     """
     images = _extract_mnist_images(data_path, num_examples)
     labels = _extract_mnist_labels(label_path, num_examples)
-    # Shuffle the data to make sure classes are well distributed.
     data = list(zip(images, labels))
-    random.shuffle(data)
 
+    # Data is shuffled automatically to distribute classes uniformly.
     for image, label in data:
       yield self.info.features.encode_example({
           "image": image,
@@ -122,26 +155,27 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
 class FashionMNIST(MNIST):
   URL = "http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/"
 
+  VERSION = tfds.core.Version("1.0.0")
+
   # TODO(afrozm): Try to inherit from MNIST's _info and mutate things as needed.
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("Fashion-MNIST is a dataset of Zalando's article images "
                      "consisting of a training set of 60,000 examples and a "
                      "test set of 10,000 examples. Each example is a 28x28 "
                      "grayscale image, associated with a label from 10 "
                      "classes."),
-        version="1.0.0",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(num_classes=10),
+            "label": tfds.features.ClassLabel(names=[
+                "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
+                "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"
+            ]),
         }),
         supervised_keys=("image", "label"),
         urls=["https://github.com/zalandoresearch/fashion-mnist"],
-        size_in_bytes=29.4 * tfds.units.MiB,
-        citation="Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine"
-                 " Learning Algorithms. Han Xiao, Kashif Rasul, Roland "
-                 "Vollgraf. arXiv:1708.07747"
+        citation=_FASHION_MNIST_CITATION,
     )
 
 

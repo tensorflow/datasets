@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
 from tensorflow_datasets.testing import dataset_builder_testing
 from tensorflow_datasets.text import imdb
 
@@ -30,10 +29,7 @@ class IMDBReviewsTest(dataset_builder_testing.TestCase):
       "train": 5,
       "test": 4,
   }
-  SPEC = {
-      "text": (tf.string, ()),
-      "label": (tf.int64, ()),
-  }
+  DL_EXTRACT_RESULT = "aclImdb_v1.tar.gz"
 
 
 if __name__ == "__main__":

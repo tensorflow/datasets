@@ -28,9 +28,6 @@ from __future__ import print_function
 import os
 import tensorflow as tf
 
-from tensorflow_datasets.core.download import ExtractInfo
-from tensorflow_datasets.core.download import UrlExtractInfo
-from tensorflow_datasets.core.download import UrlInfo
 import tensorflow_datasets.public_api as tfds
 
 IMG_ALIGNED_DATA = ("https://drive.google.com/uc?export=download&"
@@ -59,16 +56,39 @@ ATTR_HEADINGS = (
 ).split()
 
 
+_CITATION = """\
+@inproceedings{conf/iccv/LiuLWT15,
+  added-at = {2018-10-09T00:00:00.000+0200},
+  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},
+  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},
+  booktitle = {ICCV},
+  crossref = {conf/iccv/2015},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},
+  interhash = {3f735aaa11957e73914bbe2ca9d5e702},
+  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},
+  isbn = {978-1-4673-8391-2},
+  keywords = {dblp},
+  pages = {3730-3738},
+  publisher = {IEEE Computer Society},
+  timestamp = {2018-10-11T11:43:28.000+0200},
+  title = {Deep Learning Face Attributes in the Wild.},
+  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},
+  year = 2015
+}
+"""
+
+
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
+  VERSION = tfds.core.Version("0.2.0")
+
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("Large-scale CelebFaces Attributes, CelebA."
                      "Set of ~30k celebrities pictures. "
                      "These pictures are cropped."),
-        version="0.2.0",
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(
@@ -80,16 +100,12 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
             },
         }),
         urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],
-        size_in_bytes=2 * tfds.units.GiB,
-        citation="Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang "
-        "Deep Learning Face Attributes in the Wild "
-        "ICCV 2015")
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     extracted_dirs = dl_manager.download_and_extract({
-        "img_align_celeba": UrlExtractInfo(
-            url_info=UrlInfo(url=IMG_ALIGNED_DATA),
-            extract_info=ExtractInfo(extraction_method=ExtractInfo.ZIP)),
+        "img_align_celeba": IMG_ALIGNED_DATA,
         "list_eval_partition": EVAL_LIST,
         "list_attr_celeba": ATTR_DATA,
         "landmarks_celeba": LANDMARKS_DATA,

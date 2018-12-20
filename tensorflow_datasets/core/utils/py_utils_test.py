@@ -118,22 +118,6 @@ class PyUtilsTest(tf.test.TestCase):
         },
     })
 
-  def test_str_to_version(self):
-    """Test the zip nested function."""
-
-    self.assertEqual(py_utils.str_to_version('1.3.534'), (1, 3, 534))
-
-    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
-      py_utils.str_to_version('1.3.-534')
-    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
-      py_utils.str_to_version('1.3')
-    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
-      py_utils.str_to_version('1.3.')
-    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
-      py_utils.str_to_version('1..5')
-    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
-      py_utils.str_to_version('a.b.c')
-
   def test_tfds_dir(self):
     """Test the proper suffix only, since the prefix can vary."""
     self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))

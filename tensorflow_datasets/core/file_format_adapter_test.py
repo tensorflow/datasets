@@ -27,11 +27,14 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core import utils
 
 tf.enable_eager_execution()
 
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
+
+  VERSION = utils.Version("0.0.0")
 
   def _split_generators(self, dl_manager):
     return [
@@ -55,6 +58,7 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
 
   def _info(self):
     return dataset_info.DatasetInfo(
+        builder=self,
         features=features.FeaturesDict({
             "x": tf.int64,
             "y": tf.int64,

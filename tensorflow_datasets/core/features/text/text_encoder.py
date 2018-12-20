@@ -35,6 +35,25 @@ ALL_REGEX = re.compile(r"(\W+)", flags=re.UNICODE)
 NUM_BYTES = 2**8
 
 
+class TextEncoderConfig(object):
+  """Configuration for `tfds.features.Text`."""
+
+  def __init__(self, encoder=None, encoder_cls=None, vocab_size=None):
+    if encoder:
+      if (encoder_cls or vocab_size):
+        raise ValueError("If encoder is provided, encoder_cls and "
+                         "vocab_size must be None")
+      encoder_cls = type(encoder)
+      vocab_size = encoder.vocab_size
+    else:
+      if encoder_cls is ByteTextEncoder:
+        encoder = encoder_cls()
+
+    self.encoder = encoder
+    self.encoder_cls = encoder_cls
+    self.vocab_size = vocab_size
+
+
 @six.add_metaclass(abc.ABCMeta)
 class TextEncoder(object):
   """Abstract base class for converting between text and integers.
@@ -86,6 +105,9 @@ class TextEncoder(object):
   def _read_lines_from_file(cls, filename):
     return read_lines_from_file(cls.__name__, filename)
 
+  def __repr__(self):
+    return "<%s vocab_size=%d>" % (type(self).__name__, self.vocab_size)
+
 
 class ByteTextEncoder(TextEncoder):
   """Byte-encodes text."""
@@ -128,7 +150,41 @@ class ByteTextEncoder(TextEncoder):
 
   def decode(self, ids):
     ids = pad_decr(ids)
-    return tf.compat.as_text(bytes(bytearray(ids)))
+    if not self.additional_tokens:
+      return tf.compat.as_text(bytes(bytearray(ids)))
+
+    # Handle additional tokens
+    # First pass picks out the additional tokens
+    tmp_decoded = []
+    for byte_id in ids:
+      is_additional_token = byte_id < len(self.additional_tokens)
+      if is_additional_token:
+        tmp_decoded.append(self.additional_tokens[byte_id])
+      else:
+        # Leave these as ints so that we can contiguously decode bytes
+        # afterwards
+        tmp_decoded.append(byte_id - len(self.additional_tokens))
+
+    # Second pass to decode contiguous bytes
+    strs = []
+    i = 0
+    while i < len(tmp_decoded):
+      el = tmp_decoded[i]
+      if isinstance(el, six.string_types):
+        strs.append(el)
+        i += 1
+      else:
+        # Decode contiguous bytes
+        byte_ids = []
+        while i < len(tmp_decoded):
+          b = tmp_decoded[i]
+          if isinstance(b, int):
+            byte_ids.append(b)
+            i += 1
+          else:
+            break
+        strs.append(bytes(bytearray(byte_ids)).decode("utf-8", "replace"))
+    return u"".join(strs)
 
   @property
   def vocab_size(self):
@@ -412,13 +468,15 @@ def write_lines_to_file(cls_name, filename, lines, metadata_dict):
   """Writes lines to file prepended by header and metadata."""
   metadata_dict = metadata_dict or {}
   header_line = u"%s%s" % (_HEADER_PREFIX, cls_name)
-  metadata_line = u"%s%s" % (_METADATA_PREFIX, json.dumps(metadata_dict))
+  metadata_line = u"%s%s" % (_METADATA_PREFIX,
+                             json.dumps(metadata_dict, sort_keys=True))
   with tf.gfile.Open(filename, "wb") as f:
     for line in [header_line, metadata_line]:
       f.write(tf.compat.as_bytes(line))
       f.write(tf.compat.as_bytes(u"\n"))
-    f.write(tf.compat.as_bytes(u"\n".join(lines)))
-    f.write(tf.compat.as_bytes(u"\n"))
+    if lines:
+      f.write(tf.compat.as_bytes(u"\n".join(lines)))
+      f.write(tf.compat.as_bytes(u"\n"))
 
 
 def read_lines_from_file(cls_name, filename):

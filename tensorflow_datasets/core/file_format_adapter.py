@@ -103,7 +103,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
   def write_from_generator(self, generator_fn, output_files):
     wrapped = (
         _dict_to_tf_example(d).SerializeToString() for d in generator_fn())
-    _write_tfrecords_from_generator(wrapped, output_files)
+    _write_tfrecords_from_generator(wrapped, output_files, shuffle=True)
 
   def dataset_from_filename(self, filename):
     dataset = tf.data.TFRecordDataset(filename, buffer_size=int(16 * 1e6))
@@ -241,23 +241,42 @@ def incomplete_dir(dirname):
       tf.gfile.DeleteRecursively(tmp_dir)
 
 
+def _shuffle_tfrecord(path):
+  """Shuffle a single record file in memory."""
+  # Read all records
+  record_iter = tf.io.tf_record_iterator(path)
+  all_records = [
+      r for r in tqdm.tqdm(record_iter, desc="Reading...", unit=" examples")
+  ]
+  # Shuffling in memory
+  random.shuffle(all_records)
+  # Write all record back
+  with tf.io.TFRecordWriter(path) as writer:
+    for record in tqdm.tqdm(all_records, desc="Writing...", unit=" examples"):
+      writer.write(record)
+
+
 # TODO(rsepassi): Use the TFRecordWriter.write op to get multithreading
-def _write_tfrecords_from_generator(generator, output_files):
+def _write_tfrecords_from_generator(generator, output_files, shuffle=True):
   """Writes generated str records to output_files in round-robin order."""
   if do_files_exist(output_files):
     return
 
   with _incomplete_files(output_files) as tmp_files:
+    # Write all shards
     writers = [tf.python_io.TFRecordWriter(fname) for fname in tmp_files]
     with _close_on_exit(writers) as writers:
       tf.logging.info("Writing TFRecords")
       _round_robin_write(writers, generator)
+    # Shuffle each shard
+    if shuffle:
+      for path in tqdm.tqdm(tmp_files, desc="Shuffling...", unit=" shard"):
+        _shuffle_tfrecord(path)
 
 
 def _round_robin_write(writers, generator):
   """Write records from generator round-robin across writers."""
-  for i, example in enumerate(tqdm.tqdm(generator, unit=" examples",
-                                        mininterval=10)):
+  for i, example in enumerate(tqdm.tqdm(generator, unit=" examples")):
     writers[i % len(writers)].write(example)
 
 

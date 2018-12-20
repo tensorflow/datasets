@@ -23,7 +23,7 @@ if '--nightly' in sys.argv:
   sys.argv.remove('--nightly')
 
 project_name = 'tensorflow-datasets'
-version = '0.0.1'
+version = '0.0.2'
 if nightly:
   project_name = 'tfds-nightly'
   datestring = datetime.datetime.now().strftime('%Y%m%d%H%M')
@@ -37,6 +37,7 @@ REQUIRED_PKGS = [
     'protobuf',
     'pytz',
     'requests',
+    'scipy',
     'six',
     'tensorflow-metadata',
     'termcolor',
@@ -63,14 +64,16 @@ if sys.version_info < (3, 4):
   # enum introduced in Python 3.4
   REQUIRED_PKGS.append('enum34')
 
-
-# dataset_info/{dataset_name}/{version}/dataset_info.json
-DATASET_INFO_FILES = [
-    os.path.join(dirpath, 'dataset_info.json')[len('tensorflow_datasets/'):]
+# DatasetInfo and Metadata files - everything under the
+# dataset_info directory.
+DATASET_INFO_AND_METADATA_FILES = [
+    os.path.join(dirpath, filename)[len('tensorflow_datasets/'):]
     for dirpath, _, files in os.walk('tensorflow_datasets/dataset_info/')
-    if 'dataset_info.json' in files
+    for filename in files
+] + [  # Static files needed by datasets.
+    'image/imagenet2012_labels.txt',
+    'image/imagenet2012_validation_labels.txt',
 ]
-
 
 setup(
     name=project_name,
@@ -84,7 +87,7 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': ['url_checksums/*.csv'] + DATASET_INFO_FILES,
+        'tensorflow_datasets': DATASET_INFO_AND_METADATA_FILES,
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

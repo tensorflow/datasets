@@ -1,0 +1,129 @@
+{
+  "citation": "@article{Netzer2011,\nauthor = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},\nbooktitle = {Advances in Neural Information Processing Systems ({NIPS})},\ntitle = {Reading Digits in Natural Images with Unsupervised Feature Learning},\nyear = {2011}\n}\n", 
+  "description": "The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.", 
+  "downloadChecksums": {
+    "http://ufldl.stanford.edu/housenumbers/extra_32x32.mat": "a133a4beb38a00fcdda90c9489e0c04f900b660ce8a316a5e854838379a71eb3", 
+    "http://ufldl.stanford.edu/housenumbers/test_32x32.mat": "cdce80dfb2a2c4c6160906d0bd7c68ec5a99d7ca4831afa54f09182025b6a75b", 
+    "http://ufldl.stanford.edu/housenumbers/train_32x32.mat": "435e94d69a87fde4fd4d7f3dd208dfc32cb6ae8af2240d066de1df7508d083b8"
+  }, 
+  "location": {
+    "urls": [
+      "http://ufldl.stanford.edu/housenumbers/"
+    ]
+  }, 
+  "name": "svhn_cropped", 
+  "schema": {
+    "feature": [
+      {
+        "name": "label", 
+        "type": "INT"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "32"
+            }, 
+            {
+              "size": "32"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "1610612736", 
+  "splits": [
+    {
+      "name": "extra", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "531131"
+              }, 
+              "max": 9.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "531131"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "531131"
+      }
+    }, 
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "26032"
+              }, 
+              "max": 9.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "26032"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "26032"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "73257"
+              }, 
+              "max": 9.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "73257"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "73257"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

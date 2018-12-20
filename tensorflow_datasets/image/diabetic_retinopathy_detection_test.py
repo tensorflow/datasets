@@ -19,8 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
-
 from tensorflow_datasets.image import diabetic_retinopathy_detection
 from tensorflow_datasets.testing import dataset_builder_testing
 
@@ -33,11 +31,6 @@ class DiabeticRetinopathyDetectionTest(dataset_builder_testing.TestCase):
       "test": 12,
   }
   OVERLAPPING_SPLITS = ["sample"]  # contains examples from other examples
-  SPEC = {
-      "name": (tf.string, ()),
-      "image": (tf.uint8, (None, None, 3)),
-      "label": (tf.int64, ()),
-  }
 
 
 if __name__ == "__main__":

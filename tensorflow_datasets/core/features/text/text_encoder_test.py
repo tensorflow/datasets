@@ -31,7 +31,7 @@ ZH_HELLO = u'你好 '
 EN_HELLO = u'hello '
 
 
-class ByteTextEncoderTest(tf.test.TestCase):
+class ByteTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
   # Incremented for pad
   ZH_HELLO_IDS = [i + 1 for i in [228, 189, 160, 229, 165, 189, 32]]
   EN_HELLO_IDS = [i + 1 for i in [104, 101, 108, 108, 111, 32]]
@@ -55,13 +55,18 @@ class ByteTextEncoderTest(tf.test.TestCase):
     # With additional tokens
     text_additional = '%s %s%s%s' % (additional_tokens[0], ZH_HELLO,
                                      additional_tokens[1], additional_tokens[2])
-    self.assertEqual([1, 32 + 1 + len(additional_tokens)] + hello_ids + [2, 3],
+    expected_ids = [1, 32 + 1 + len(additional_tokens)] + hello_ids + [2, 3]
+    self.assertEqual(expected_ids,
                      encoder.encode(text_additional))
+    self.assertEqual(text_additional, encoder.decode(expected_ids))
     self.assertEqual(text_encoder.NUM_BYTES + 1 + len(additional_tokens),
                      encoder.vocab_size)
 
-  def test_file_backed(self):
-    additional_tokens = ['<EOS>', 'FOO', 'bar']
+  @parameterized.parameters(
+      (['<EOS>', 'FOO', 'bar'],),
+      ([],),
+  )
+  def test_file_backed(self, additional_tokens):
     encoder = text_encoder.ByteTextEncoder(additional_tokens=additional_tokens)
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       vocab_fname = os.path.join(tmp_dir, 'vocab')

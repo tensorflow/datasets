@@ -19,8 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import hashlib
-import json
 import os
 import uuid
 
@@ -31,38 +29,8 @@ import tensorflow as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
+from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
-from tensorflow_datasets.core.proto import download_generated_pb2 as download_pb2
-
-AUTO_EXTRACT = download_pb2.ExtractInfo.AUTO_EXTRACT
-NO_EXTRACT = download_pb2.ExtractInfo.NO_EXTRACT
-TAR = download_pb2.ExtractInfo.TAR
-TAR_GZ = download_pb2.ExtractInfo.TAR_GZ
-GZIP = download_pb2.ExtractInfo.GZIP
-ZIP = download_pb2.ExtractInfo.ZIP
-
-_EXTRACTION_METHOD_TO_EXTS = [
-    (TAR_GZ, ['.tar.gz', '.tgz']),
-    (TAR, ['.tar', '.tar.bz2', '.tbz2', '.tbz', '.tb2']),
-    (ZIP, ['.zip']),
-    (GZIP, ['.gz']),
-]
-
-
-def _guess_extract_method(fname):
-  """Guess extraction method, given file name (or path)."""
-  for method, extensions in _EXTRACTION_METHOD_TO_EXTS:
-    for ext in extensions:
-      if fname.endswith(ext):
-        return method
-  return NO_EXTRACT
-
-
-def _get_extract_method(extract_info):
-  """Returns extraction_method for given artifact, if needed, guess it."""
-  if extract_info.extraction_method != AUTO_EXTRACT:
-    return extract_info.extraction_method
-  return _guess_extract_method(extract_info.path)
 
 
 class NonMatchingChecksumError(Exception):
@@ -118,8 +86,7 @@ class DownloadManager(object):
   ```
 
   For more customization on the download/extraction (ex: passwords, output_name,
-  ...), you can pass `tfds.download.UrlInfo` `tfds.download.ExtractInfo()` or
-  `tfds.download.UrlExtractInfo` as arguments.
+  ...), you can pass `resource.Resource` as argument.
   """
 
   def __init__(self,
@@ -139,13 +106,13 @@ class DownloadManager(object):
       manual_dir: `str`, path to manually downloaded/extracted data directory.
       checksums: `dict<str url, str sha256>`, url to sha256 of resource.
         Only URLs present are checked.
-      `bool`, if True, validate checksums of files if url is
-        present in the checksums file. If False, no checks are done.
       force_download: `bool`, default to False. If True, always [re]download.
       force_extraction: `bool`, default to False. If True, always [re]extract.
     """
     self._dataset_name = dataset_name
     self._checksums = checksums or {}
+    self._recorded_download_checksums = {}
+    self._download_sizes = {}
     self._download_dir = os.path.expanduser(download_dir)
     self._extract_dir = os.path.expanduser(extract_dir)
     self._manual_dir = os.path.expanduser(manual_dir)
@@ -156,33 +123,6 @@ class DownloadManager(object):
     self._extractor = extractor.get_extractor()
     self._downloader = downloader.get_downloader()
 
-  @util.build_synchronize_decorator()
-  def _write_info_file(self, fpath, url_info):
-    """Write the INFO file next to downloaded file.
-
-    Although the method is synchronized, there is still a risk two processes
-    running at the same time overlap here. Risk accepted, since those INFO files
-    are mostly targeted to human users.
-
-    Args:
-      fpath: path to downloaded file.
-      url_info: data used to dl the file.
-    """
-    info_path = fpath + '.INFO'
-    if tf.gfile.Exists(info_path):
-      with tf.gfile.Open(info_path) as info_f:
-        info = json.load(info_f)
-    else:
-      info = {}
-    # TODO(epot): add original filename in INFO file.
-    urls = set(info.get('urls', []))
-    urls.add(url_info.url)
-    dataset_names = set(info.get('dataset_names', []))
-    dataset_names.add(self._dataset_name)
-    info = dict(urls=list(urls), dataset_names=list(dataset_names))
-    with tf.gfile.Open(info_path, 'w') as info_f:
-      json.dump(info, info_f)
-
   def _validate_checksum(self, url, checksum):
     """Returns True if url matches with checksum."""
     # TODO(pierrot): decide if we want to support partial checksum validation
@@ -192,131 +132,136 @@ class DownloadManager(object):
       return True
     return self._checksums[url] == checksum
 
-  def _downloaded_path(self, url_info):
-    """Returns path to which should be stored downloaded file.
+  @property
+  def recorded_download_checksums(self):
+    """Returns checksums for downloaded urls."""
+    return dict(self._recorded_download_checksums)
 
-    Args:
-      url_info: `download_pb2.UrlInfo`, url_info used to download file.
-    """
-    url = url_info.url
-    sha256 = self._checksums.get(url, None)
-    if sha256:
-      fname = sha256
-    else:
-      fname = 'url.%s' % hashlib.sha256(url.encode('utf8')).hexdigest()
-    return os.path.join(self._download_dir, fname)
+  @property
+  def download_sizes(self):
+    """Returns sizes (in bytes) for downloaded urls."""
+    return dict(self._download_sizes)
 
-  def _extracted_path(self, path, method):
-    """Returns path to which should be extracted given path."""
-    if not path.startswith(self._download_dir):
-      # This would probably require to compute the hash of file to extract...
-      # or to not cache extraction.
-      raise NotImplementedError('%s is not located under %s' % (
-          path, self._download_dir))
-    # For downloaded files, we reused the filename.
-    fname = os.path.basename(path)
-    return os.path.join(self._extract_dir, '%s.%s' % (method, fname))
-
-  def _handle_download_result(self, url_info, tmp_dir_path, sha256):
+  def _handle_download_result(self, resource, tmp_dir_path, sha256, dl_size,
+                              existing=False):
     """Store dled file to definitive place, write INFO file, return path."""
+    self._download_sizes[resource.url] = dl_size
+    self._recorded_download_checksums[resource.url] = sha256
+    if existing:
+      if not self._validate_checksum(resource.url, sha256):
+        raise NonMatchingChecksumError(resource.url, resource.path)
+      return resource.path
     fnames = tf.gfile.ListDirectory(tmp_dir_path)
     if len(fnames) > 1:
       raise AssertionError('More than one file in %s.' % tmp_dir_path)
-    tmp_path = os.path.join(tmp_dir_path, fnames[0])
-    if not self._validate_checksum(url_info.url, sha256):
-      raise NonMatchingChecksumError(url_info.url, tmp_path)
-    final_path = self._downloaded_path(url_info)
-    self._write_info_file(final_path, url_info)
-    tf.gfile.Rename(tmp_path, final_path, overwrite=True)
+    original_fname = fnames[0]
+    tmp_path = os.path.join(tmp_dir_path, original_fname)
+    if not self._validate_checksum(resource.url, sha256):
+      raise NonMatchingChecksumError(resource.url, tmp_path)
+    resource.write_info_file(self._dataset_name, original_fname)
+    # Unconditionally overwrite because either file doesn't exist or
+    # FORCE_DOWNLOAD=true
+    tf.gfile.Rename(tmp_path, resource.path, overwrite=True)
     tf.gfile.DeleteRecursively(tmp_dir_path)
-    return final_path
+    return resource.path
 
-  def _download(self, url_info):
-    """Download url, returns Promise->path to downloaded file."""
-    if isinstance(url_info, six.string_types):
-      url_info = download_pb2.UrlInfo(url=url_info)
-    path = self._downloaded_path(url_info)
-    if not self._force_download and tf.gfile.Exists(path):
+  def _download(self, resource):
+    """Download resource, returns Promise->path to downloaded file."""
+    if isinstance(resource, six.string_types):
+      resource = resource_lib.Resource(url=resource)
+    if not resource.path:
+      resource.path = os.path.join(self._download_dir, resource.fname)
+    if not self._force_download and resource.exists_locally():
       tf.logging.info(
-          'URL %s already downloaded: reusing %s.' % (url_info.url, path))
-      return promise.Promise.resolve(path)
+          'URL %s already downloaded: reusing %s.' % (resource.url,
+                                                      resource.path))
+      checksum, dl_size = util.read_checksum_digest(resource.path)
+      self._handle_download_result(resource, None, checksum, dl_size,
+                                   existing=True)
+      return promise.Promise.resolve(resource.path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
     # manages the temp directory of downloader.
-    uid = uuid.uuid4().hex
-    tmp_dir_path = os.path.join(self._download_dir, 'tmp', uid)
+    tmp_dir_path = '%s.tmp.%s' % (resource.path, uuid.uuid4().hex)
     tf.gfile.MakeDirs(tmp_dir_path)
-    tf.logging.info('Downloading %s into %s...' % (url_info.url, tmp_dir_path))
-    def callback(checksum):
-      return self._handle_download_result(url_info, tmp_dir_path, checksum)
-    return self._downloader.download(url_info, tmp_dir_path).then(callback)
+    tf.logging.info('Downloading %s into %s...' % (resource.url, tmp_dir_path))
+    def callback(val):
+      checksum, dl_size = val
+      return self._handle_download_result(resource, tmp_dir_path, checksum,
+                                          dl_size)
+    return self._downloader.download(resource, tmp_dir_path).then(callback)
 
-  def _extract(self, extract_info):
+  def _extract(self, resource):
     """Extract a single archive, returns Promise->path to extraction result."""
-    if isinstance(extract_info, six.string_types):
-      extract_info = download_pb2.ExtractInfo(path=extract_info)
-    extraction_method = _get_extract_method(extract_info)
-    if extraction_method == NO_EXTRACT:
+    if isinstance(resource, six.string_types):
+      resource = resource_lib.Resource(path=resource)
+    if resource.extract_method == resource_lib.ExtractMethod.NO_EXTRACT:
       tf.logging.info(
-          'Skipping extraction for %s (method=NO_EXTRACT).' % extract_info.path)
-      return promise.Promise.resolve(extract_info.path)
-    to_path = self._extracted_path(extract_info.path, extraction_method)
-    if not self._force_extraction and tf.gfile.Exists(to_path):
-      tf.logging.info(
-          'Reusing extraction of %s at %s.' % (extract_info.path, to_path))
-      return promise.Promise.resolve(to_path)
-    tf.logging.info('Extracting %s to %s...' % (extract_info.path, to_path))
-    return self._extractor.extract(extract_info.path, to_path,
-                                   extraction_method).then(lambda _: to_path)
+          'Skipping extraction for %s (method=NO_EXTRACT).' % resource.path)
+      return promise.Promise.resolve(resource.path)
+    extract_path = os.path.join(self._extract_dir, resource.extract_fname)
+    if not self._force_extraction and tf.gfile.Exists(extract_path):
+      tf.logging.info('Reusing extraction of %s at %s.' % (
+          resource.path, extract_path))
+      return promise.Promise.resolve(extract_path)
+    return self._extractor.extract(resource, extract_path)
 
-  def _download_extract(self, url_extract_info):
-    """Download-extract `UrlExtractInfo` or url, returns Promise->path."""
-    if isinstance(url_extract_info, download_pb2.UrlExtractInfo):
-      url_info = url_extract_info.url_info
-      extract_info = url_extract_info.extract_info
-    else:  # string, url
-      url_info = url_extract_info
-      fname = util.get_file_name(url_info)
-      extract_info = download_pb2.ExtractInfo(
-          extraction_method=_guess_extract_method(fname))
+  def _download_extract(self, resource):
+    """Download-extract `Resource` or url, returns Promise->path."""
+    if isinstance(resource, six.string_types):
+      resource = resource_lib.Resource(url=resource)
     def callback(path):
-      extract_info.path = path
-      return self._extract(extract_info)
-    return self._download(url_info).then(callback)
+      resource.path = path
+      return self._extract(resource)
+    return self._download(resource).then(callback)
 
   def download(self, url_or_urls, async_=False):
     """Download given url(s).
 
     Args:
       url_or_urls: url or `list`/`dict` of urls to download and extract. Each
-        url can be a `str` or `UrlInfo`.
+        url can be a `str` or `Resource`.
       async_: `bool`, default to False. If True, returns promise on result.
 
     Returns:
       downloaded_path(s): `str`, The downloaded paths matching the given input
-        url_or_urls
+        url_or_urls.
     """
     return _map_promise(self._download, url_or_urls, async_=async_)
+
+  def iter_archive(self, resource):
+    """Returns iterator over files within archive.
+
+    Args:
+      resource: path to archive or `resource_lib.Resource`.
+
+    Returns:
+      Generator yielding tuple (path_within_archive, file_obj).
+      Important: read files as they are yielded. Reading out of order is slow.
+    """
+    if isinstance(resource, six.string_types):
+      resource = resource_lib.Resource(path=resource)
+    return extractor.iter_archive(resource.path, resource.extract_method)
 
   def extract(self, path_or_paths, async_=False):
     """Extract given path(s).
 
     Args:
       path_or_paths: path or `list`/`dict` of path of file to extract. Each
-        path can be a `str` or `ExtractInfo`.
+        path can be a `str` or `Resource`.
       async_: `bool`, default to False. If True, returns promise on result.
 
-    If not explicitly specified in `ExtractInfo`, the extraction method will
-    automatically be deduced.
+    If not explicitly specified in `Resource`, the extraction method is deduced
+    from downloaded file name.
 
     Returns:
       extracted_path(s): `str`, The extracted paths matching the given input
-        path_or_paths
+        path_or_paths.
     """
     return _map_promise(self._extract, path_or_paths, async_=async_)
 
   def download_and_extract(self, url_or_urls, async_=False):
-    """Download and extract given resources.
+    """Download and extract given url_or_urls.
 
     Is roughly equivalent to:
 
@@ -326,15 +271,14 @@ class DownloadManager(object):
 
     Args:
       url_or_urls: url or `list`/`dict` of urls to download and extract. Each
-        url can be a `str` or `UrlExtractInfo`.
+        url can be a `str` or `Resource`.
       async_: `bool`, defaults to False. If True, returns promise on result.
 
-    If not explicitly specified in `UrlExtractInfo`, the extraction method will
-    automatically be deduced.
+    If not explicitly specified in `Resource`, the extraction method will
+    automatically be deduced from downloaded file name.
 
     Returns:
-      extracted_path(s): `str`, The extracted paths matching the given input
-        path_or_paths
+      extracted_path(s): `str`, extracted paths of given URL(s).
     """
     return _map_promise(self._download_extract, url_or_urls, async_=async_)
 

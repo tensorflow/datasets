@@ -59,7 +59,6 @@ class RegisteredTest(tf.test.TestCase):
     self.assertEqual(name, EmptyDatasetBuilder.name)
     self.assertIsInstance(registered.builder(name), EmptyDatasetBuilder)
     self.assertIn(name, registered.list_builders())
-    self.assertNotIn("unregistered_builder", registered.list_builders())
 
     nonexistent = "nonexistent_foobar_dataset"
     with self.assertRaisesWithPredicateMatch(ValueError, "not found"):
@@ -67,6 +66,15 @@ class RegisteredTest(tf.test.TestCase):
     # Prints registered datasets
     with self.assertRaisesWithPredicateMatch(ValueError, name):
       registered.builder(nonexistent)
+
+  def test_abstract(self):
+    name = "unregistered_builder"
+    self.assertEqual(name, UnregisteredBuilder.name)
+    self.assertNotIn(name, registered.list_builders())
+
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, "Requesting the builder for an abstract class"):
+      registered.builder(name)
 
   def test_builder_with_kwargs(self):
     name = "empty_dataset_builder"
@@ -91,15 +99,38 @@ class RegisteredTest(tf.test.TestCase):
     self.assertFalse(builder.download_called)
     self.assertEqual(splits.Split.TEST,
                      builder.as_dataset_kwargs.pop("split"))
+    self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
-    self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
+    self.assertEqual(dict(data_dir=data_dir, k1=1, config=None), builder.kwargs)
 
     builder = registered.load(
         name, split=splits.Split.TRAIN, data_dir=data_dir,
         download=True, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)
+
+  def test_load_all_splits(self):
+    name = "empty_dataset_builder"
+    # EmptyDatasetBuilder returns self from as_dataset
+    builder = registered.load(name=name, data_dir="foo")
+    self.assertTrue(builder.as_dataset_called)
+    self.assertEqual(None, builder.as_dataset_kwargs.pop("split"))
+
+  def test_load_with_config(self):
+    data_dir = "foo"
+    name = "empty_dataset_builder/bar/k1=1"
+    # EmptyDatasetBuilder returns self from as_dataset
+    builder = registered.load(name=name, split=splits.Split.TEST,
+                              data_dir=data_dir)
+    self.assertEqual(dict(data_dir=data_dir, k1=1, config="bar"),
+                     builder.kwargs)
+
+    name = "empty_dataset_builder/bar"
+    builder = registered.load(name=name, split=splits.Split.TEST,
+                              data_dir=data_dir)
+    self.assertEqual(dict(data_dir=data_dir, config="bar"),
+                     builder.kwargs)
 
 
 if __name__ == "__main__":

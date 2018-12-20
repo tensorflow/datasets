@@ -22,6 +22,7 @@ from __future__ import print_function
 import os
 import tensorflow as tf
 from tensorflow_datasets.core.download import extractor
+from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.testing import test_case
 
 
@@ -54,47 +55,56 @@ class ExtractorTest(test_case.TestCase):
 
   def test_unknown_method(self):
     with self.assertRaises(ValueError):
-      self.extractor.extract('from/path', 'to/path',
-                             extractor.download_pb2.ExtractInfo.NO_EXTRACT)
+      resource = resource_lib.Resource(
+          path='from/path',
+          extract_method=resource_lib.ExtractMethod.NO_EXTRACT)
+      self.extractor.extract(resource, 'to/path')
 
   def _test_extract(self, method, archive_name, expected_files):
     from_path = os.path.join(self.test_data, 'archives', archive_name)
-    self.extractor.extract(from_path, self.to_path, method).get()
+    resource = resource_lib.Resource(path=from_path, extract_method=method)
+    self.extractor.extract(resource, self.to_path).get()
     for name, content in expected_files.items():
       path = os.path.join(self.to_path, name)
       self.assertEqual(_read(path), content, 'File %s has bad content.' % path)
 
   def test_zip(self):
     self._test_extract(
-        extractor.ZIP, 'arch1.zip',
+        resource_lib.ExtractMethod.ZIP, 'arch1.zip',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_tar(self):
     self._test_extract(
-        extractor.TAR, 'arch1.tar',
+        resource_lib.ExtractMethod.TAR, 'arch1.tar',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_targz(self):
     self._test_extract(
-        extractor.TAR_GZ, 'arch1.tar.gz',
+        resource_lib.ExtractMethod.TAR_GZ, 'arch1.tar.gz',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_gzip(self):
     from_path = os.path.join(self.test_data, 'archives', 'arch1.tar.gz')
-    self.extractor.extract(from_path, self.to_path, extractor.GZIP).get()
+    resource = resource_lib.Resource(
+        path=from_path, extract_method=resource_lib.ExtractMethod.GZIP)
+    self.extractor.extract(resource, self.to_path).get()
     arch1_path = os.path.join(self.test_data, 'archives', 'arch1.tar')
     self.assertEqual(_read(self.to_path), _read(arch1_path))
 
   def test_gzip2(self):
     # Same as previous test, except it is not a .tar.gz, but a .gz.
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
-    self.extractor.extract(from_path, self.to_path, extractor.GZIP).get()
+    resource = resource_lib.Resource(
+        path=from_path, extract_method=resource_lib.ExtractMethod.GZIP)
+    self.extractor.extract(resource, self.to_path).get()
     foo_csv_path = os.path.join(self.test_data, 'foo.csv')
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
   def test_absolute_path(self):
     from_path = os.path.join(self.test_data, 'archives', 'absolute_path.tar')
-    promise = self.extractor.extract(from_path, self.to_path, extractor.TAR)
+    resource = resource_lib.Resource(
+        path=from_path, extract_method=resource_lib.ExtractMethod.TAR)
+    promise = self.extractor.extract(resource, self.to_path)
     with self.assertRaises(extractor.UnsafeArchiveError):
       promise.get()
 

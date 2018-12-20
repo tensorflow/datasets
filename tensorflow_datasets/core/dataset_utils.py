@@ -22,11 +22,6 @@ from __future__ import print_function
 import tensorflow as tf
 from tensorflow_datasets.core import utils
 
-__all__ = [
-    "build_dataset",
-    "iterate_over_dataset",
-]
-
 
 def build_dataset(instruction_dicts,
                   dataset_from_file_fn,
@@ -92,7 +87,7 @@ def build_dataset(instruction_dicts,
   return dataset
 
 
-def iterate_over_dataset(dataset):
+def iterate_over_dataset(dataset, graph=None):
   """Yields numpy elements of `tf.data.Dataset`."""
   if tf.executing_eagerly():
     for item in dataset:
@@ -100,8 +95,9 @@ def iterate_over_dataset(dataset):
       flat = [el.numpy() for el in flat]
       yield tf.contrib.framework.nest.pack_sequence_as(item, flat)
   else:
-    item = dataset.make_one_shot_iterator().get_next()
-    with utils.nogpu_session() as sess:
+    with utils.maybe_with_graph(graph, create_if_none=False):
+      item = dataset.make_one_shot_iterator().get_next()
+    with utils.nogpu_session(graph) as sess:
       while True:
         try:
           yield sess.run(item)

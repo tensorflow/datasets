@@ -45,8 +45,12 @@ DOC = """\
 # See all registered datasets
 tfds.list_builders()
 
-# Load a given dataset by name
-mnist_train_dataset = tfds.load(name="mnist")
+# Load a given dataset by name, along with the DatasetInfo
+data, info = tfds.load("mnist", with_info=True)
+train_data, test_data = data['test'], data['train']
+assert isinstance(train_data, tf.data.Dataset)
+assert info.features['label'].num_classes == 10
+assert info.splits['train'].num_examples == 60000
 ```
 
 ---
@@ -66,26 +70,43 @@ SECTION_DATASETS = """\
 {datasets}
 """
 
-DATASET_ENTRY = """\
+CONFIG_BULLET = """\
+* `"{name}"` (v{version}): {description}
+"""
+
+SINGLE_CONFIG_ENTRY = """\
+### `"{builder_name}/{config_name}"`
+
+{feature_information}
+
+"""
+
+DATASET_WITH_CONFIGS_ENTRY = """\
 ## `"{snakecase_name}"`
+
+From {url}
 
 {description}
 
-[`{module_and_class}`]({cls_url}) v{version}
+[`{module_and_class}`]({cls_url})
 
-#### Features
-{feature_information}
+`{snakecase_name}` is configured with `{config_cls}` and has the following
+configurations predefined (defaults to the first one):
 
-#### Statistics
+{config_names}
+
+{configs}
+
+### Statistics
 {statistics_information}
 
-#### Urls
+### Urls
 {urls}
 
-#### Supervised Keys
+### Supervised Keys
 {supervised_keys}
 
-#### Citation
+### Citation
 ```
 {citation}
 ```
@@ -93,10 +114,39 @@ DATASET_ENTRY = """\
 ---
 """
 
-FEATURE_TABLE = """\
-Name  | Type | Shape
-:---- | :--- | :----
-{feature_values}
+DATASET_ENTRY = """\
+## `"{snakecase_name}"`
+
+From {url}
+
+{description}
+
+[`{module_and_class}`]({cls_url}) v{version}
+
+### Features
+{feature_information}
+
+### Statistics
+{statistics_information}
+
+### Urls
+{urls}
+
+### Supervised Keys
+{supervised_keys}
+
+### Citation
+```
+{citation}
+```
+
+---
+"""
+
+FEATURE_BLOCK = """\
+```
+%s
+```
 """
 
 STATISTICS_TABLE = """\
@@ -119,25 +169,67 @@ def tfds_mod_name(mod_name):
   return ".".join(["tfds"] + parts[1:])
 
 
+def url_from_info(info):
+  return (info.urls and info.urls[0]) or "<no known url>"
+
+
 def document_single_builder(builder):
+  """Doc string for a single builder, with or without configs."""
   mod_name = builder.__class__.__module__
   cls_name = builder.__class__.__name__
   mod_file = sys.modules[mod_name].__file__
   if mod_file.endswith("pyc"):
     mod_file = mod_file[:-1]
-  info = builder.info
-  return DATASET_ENTRY.format(
-      snakecase_name=builder.name,
-      module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
-      cls_url=cls_url(mod_name),
-      description=info.description,
-      version=info.version,
-      feature_information=make_feature_information(info),
-      statistics_information=make_statistics_information(info),
-      urls="\n".join([" * " + url for url in info.urls]),
-      supervised_keys=str(info.supervised_keys),
-      citation=info.citation,
-  )
+
+  if builder.builder_configs:
+    # Dataset with configs; document each one
+    config_docs = []
+    for config in builder.BUILDER_CONFIGS:
+      builder = tfds.builder(builder.name, config=config)
+      info = builder.info
+      # TODO(rsepassi): document the actual config object
+      config_doc = SINGLE_CONFIG_ENTRY.format(
+          builder_name=builder.name,
+          config_name=config.name,
+          description=config.description,
+          version=config.version,
+          feature_information=make_feature_information(info),
+      )
+      config_docs.append(config_doc)
+    return DATASET_WITH_CONFIGS_ENTRY.format(
+        snakecase_name=builder.name,
+        module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
+        cls_url=cls_url(mod_name),
+        config_names="\n".join([
+            CONFIG_BULLET.format(name=config.name,
+                                 description=config.description,
+                                 version=config.version)
+            for config in builder.BUILDER_CONFIGS]),
+        config_cls="%s.%s" % (tfds_mod_name(mod_name),
+                              type(builder.builder_config).__name__),
+        configs="\n".join(config_docs),
+        urls="\n".join([" * " + url for url in info.urls]),
+        url=url_from_info(info),
+        supervised_keys=str(info.supervised_keys),
+        citation=info.citation,
+        statistics_information=make_statistics_information(info),
+        description=builder.info.description,
+    )
+  else:
+    info = builder.info
+    return DATASET_ENTRY.format(
+        snakecase_name=builder.name,
+        module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
+        cls_url=cls_url(mod_name),
+        description=info.description,
+        version=info.version,
+        feature_information=make_feature_information(info),
+        statistics_information=make_statistics_information(info),
+        urls="\n".join([" * " + url for url in info.urls]),
+        url=url_from_info(info),
+        supervised_keys=str(info.supervised_keys),
+        citation=info.citation,
+    )
 
 
 def create_section_toc(section, builders):
@@ -177,22 +269,30 @@ def make_module_to_builder_dict():
   return module_to_builder
 
 
+def _pprint_features_dict(features_dict, indent=0, add_prefix=True):
+  """Pretty-print tfds.features.FeaturesDict."""
+  if isinstance(features_dict, tfds.features.FeaturesDict):
+    features_dict = features_dict._feature_dict  # pylint: disable=protected-access
+
+  first_last_indent_str = " " * indent
+  indent_str = " " * (indent + 4)
+  first_line = "%sFeaturesDict({" % (
+      first_last_indent_str if add_prefix else "")
+  lines = [first_line]
+  for k in sorted(list(features_dict.keys())):
+    v = features_dict[k]
+    if isinstance(v, tfds.features.FeaturesDict):
+      v_str = _pprint_features_dict(v, indent + 4, False)
+    else:
+      v_str = str(v)
+    lines.append("%s'%s': %s," % (indent_str, k, v_str))
+  lines.append("%s})" % first_last_indent_str)
+  return "\n".join(lines)
+
+
 def make_feature_information(info):
   """Make feature information table."""
-  feature_table_rows = []
-  for feature_name in info.features.get_tensor_info():
-    try:
-      v = info.features[feature_name]
-    except KeyError:
-      # TODO(afrozm): For things like CelebA's nested attributes this doesn't
-      # work, ex: attributes/High_Cheekbones but maybe this is for the better
-      # there are O(100)s of attributes if not more.
-      continue
-    feature_table_rows.append(
-        "|".join([feature_name, repr(v.dtype), str(v.shape)]))
-  # We sort the table rows to minimize churn on subsequent generations.
-  return FEATURE_TABLE.format(
-      feature_values="\n".join(sorted(feature_table_rows)))
+  return FEATURE_BLOCK % _pprint_features_dict(info.features)
 
 
 def make_statistics_information(info):
@@ -201,14 +301,15 @@ def make_statistics_information(info):
     # That means that we have yet to calculate the statistics for this.
     return "None computed"
 
-  l = []
-  for k, v in info.splits.items():
-    l.append((k.upper(), v.num_examples))
-  l.append(("ALL", info.num_examples))
+  stats = [(info.num_examples, "ALL")]
+  for split_name, split_info in info.splits.items():
+    stats.append((split_info.num_examples, split_name.upper()))
   # Sort reverse on number of examples.
-  l = reversed(sorted(l, key=lambda x: x[1]))
-  l = "\n".join(["{0:10} | {1:>10,}".format(a[0], a[1]) for a in l])
-  return STATISTICS_TABLE.format(split_statistics=l)
+  stats.sort(reverse=True)
+  stats = "\n".join([
+      "{0:10} | {1:>10,}".format(name, num_exs) for (num_exs, name) in stats
+  ])
+  return STATISTICS_TABLE.format(split_statistics=stats)
 
 
 def dataset_docs_str():
@@ -232,5 +333,9 @@ def dataset_docs_str():
   return full_doc
 
 
-if __name__ == "__main__":
+def main(_):
   print(dataset_docs_str())
+
+
+if __name__ == "__main__":
+  tf.app.run()

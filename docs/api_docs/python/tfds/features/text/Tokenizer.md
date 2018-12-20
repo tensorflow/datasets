@@ -5,6 +5,8 @@
 <meta itemprop="property" content="reserved_tokens"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="join"/>
+<meta itemprop="property" content="load_from_file"/>
+<meta itemprop="property" content="save_to_file"/>
 <meta itemprop="property" content="tokenize"/>
 </div>
 
@@ -67,6 +69,26 @@ join(tokens)
 ```
 
 Joins tokens into a string.
+
+<h3 id="load_from_file"><code>load_from_file</code></h3>
+
+``` python
+@classmethod
+load_from_file(
+    cls,
+    filename_prefix
+)
+```
+
+
+
+<h3 id="save_to_file"><code>save_to_file</code></h3>
+
+``` python
+save_to_file(filename_prefix)
+```
+
+
 
 <h3 id="tokenize"><code>tokenize</code></h3>
 

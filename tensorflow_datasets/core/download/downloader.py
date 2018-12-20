@@ -40,6 +40,15 @@ def get_downloader(*args, **kwargs):
   return _Downloader(*args, **kwargs)
 
 
+def _get_filename(response):
+  content_disposition = response.headers.get('content-disposition', None)
+  if content_disposition:
+    match = re.findall('filename="(.+?)"', content_disposition)
+    if match:
+      return match[0]
+  return util.get_file_name(response.url)
+
+
 class _Downloader(object):
   """Class providing async download API with checksum validation.
 
@@ -87,12 +96,14 @@ class _Downloader(object):
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
     response = session.get(url, stream=True)
-    fname = util.get_file_name(response.url)
+    fname = _get_filename(response)
     path = os.path.join(destination_path, fname)
+    size = 0
     with gfile.Open(path, 'wb') as file_:
       for block in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
+        size += len(block)
         checksum.update(block)
         # TODO(pierrot): Test this is faster than doing checksum in the end
         # and document results here.
         file_.write(block)
-    return checksum.hexdigest()
+    return checksum.hexdigest(), size

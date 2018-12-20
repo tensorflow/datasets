@@ -23,6 +23,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
 RANGE_TRAIN = list(range(0, 2000))
@@ -33,8 +34,11 @@ RANGE_VAL = list(range(6000, 6010))
 class DummyDataset(tfds.core.GeneratorBasedBuilder):
   """Dataset used for the tests."""
 
+  VERSION = utils.Version("0.0.0")
+
   def _info(self):
     return tfds.core.DatasetInfo(
+        builder=self,
         features=tfds.features.FeaturesDict({"value": tf.int64})
     )
 
@@ -65,7 +69,7 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
       })
 
   def values(self, split):
-    return [v["value"] for v in self.numpy_iterator(split=split)]
+    return [int(v["value"]) for v in self.as_numpy(split=split)]
 
 
 class SplitsUnitTest(tf.test.TestCase):

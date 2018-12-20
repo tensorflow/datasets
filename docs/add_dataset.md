@@ -14,8 +14,9 @@ then this document is for you.
 *   [Specifying how the data should be split](#specifying-how-the-data-should-be-split)
 *   [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
     *   [File access and tf.gfile](#file-access-and-tfgfile)
+*   [Dataset configuration](#dataset-configuration)
 *   [Create your own FeatureConnector](#create-your-own-featureconnector)
-*   [Enabling downloads validation](#enabling-downloads-validation)
+*   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 
 ## Overview
@@ -67,6 +68,8 @@ import tensorflow_datasets.public_api as tfds
 class MyDataset(tfds.core.GeneratorBasedBuilder):
   """Short description of my dataset."""
 
+  VERSION = tfds.core.Version('0.1.0')
+
   def _info(self):
     pass # TODO
 
@@ -88,9 +91,10 @@ data.
 
 The "fake example", to be stored in
 [`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/)
-under the `my_dataset` directory, should mimic the source dataset artifacts as
-downloaded and extracted. It can be created manually or automatically
-([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/generate_cifar10_like_example.py)).
+under the `my_dataset` directory and should mimic the source dataset artifacts
+as downloaded and extracted. It can be created manually or automatically with a
+script ([example
+script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
 
 Make sure to use different data in your fake example splits, as the test will
 fail if your dataset splits overlap.
@@ -110,11 +114,6 @@ class MyDatasetTest(dataset_builder_testing.TestCase):
       "train": 12,
       "test": 12,
   }
-  SPEC = {  # What data as returned by the tf.data.Dataset should look like.
-      "image_description": (tf.string, ()),
-      "image": (tf.uint8, (None, None, 3)),
-      "label": (tf.int64, ()),
-  }
   # If dataset `download_and_extract` more than one resource:
   DL_EXTRACT_RESULT = {
       "name1": "path/to/file1",  # Relative to fake_examples/my_dataset dir.
@@ -125,8 +124,6 @@ if __name__ == "__main__":
   dataset_builder_testing.main()
 ```
 
-TODO(pierrot): remove SPEC
-
 Run the test as you proceed to implement `MyDataset`. By the end of this page,
 it should pass.
 
@@ -135,15 +132,14 @@ it should pass.
 The
 [`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py)
 stores the information we know about a dataset. For now, let's add what features
-are part of the dataset and their types. If possible, please also add the 
-approximate size of the dataset. For example:
+are part of the dataset and their types. For example:
 
 ```python
 class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     return tfds.core.DatasetInfo(
-        name=self.name,
+        builder=self,
         description=("This is the dataset for xxx. It contains yyy. The "
                      "images are kept at their original dimensions."),
         # Features specify the shape and dtype of the loaded data, as returned
@@ -162,10 +158,9 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
         supervised_keys=("image", "label"),
         # Homepage of the dataset. Not used anywhere except for documentation
         urls=["https://dataset-homepage.org"],
-        # Approximate dataset size (used to raise warning before download).
-        size_in_bytes=162.6 * tfds.units.MiB,
-        # Citation to use for using this dataset
-        citation="Dataset Paper Title, A. Smith, 2009.",
+        # Citation to use for using this dataset in the Bibtex format.
+        citation=r"""@article{my-awesome-dataset-2020,
+                              author = {Smith, John},"}""",
     )
 ```
 
@@ -229,6 +224,9 @@ Use the `SplitGenerator` to describe how each split should be generated. The
 `gen_kwargs` argument is what will be passed to the method writing the TF
 `tf.train.Example` to be serialized and written to disk.
 
+Warning: When specifying the number of shards, make sure that no shard is bigger
+than 4 Gib as shards will be loaded entirelly in memory during shuffling.
+
 ## Reading downloaded data and generating serialized dataset
 
 When using `GeneratorBasedBuilder` base class, the `_generate_examples` method
@@ -269,11 +267,38 @@ In order to support Cloud storage systems, all file access must use `tf.gfile`
 or other TensorFlow file APIs (for example, `tf.python_io`). Python built-ins
 for file operations (e.g. `open`, `os.rename`, `gzip`, etc.) must be avoided.
 
-## Register your dataset
+## Dataset configuration
 
-To ensure that users can access the dataset through `tfds.load` and
-`tfds.builder`, make sure your module `my_dataset` is imported in
-`tensorflow_datasets/__init__.py`.
+Some datasets may have variants that are best implemented through configuration
+rather than being entirely separate `DatasetBuilder`s. For example, datasets
+with text features may want to have different text encodings (e.g.
+character-level vs subword-level vs word-level vocabularies). To enable
+different configurations of your dataset, you must:
+
+1. Define your own configuration object as a subclass of
+   `tfds.core.BuilderConfig`. For example, `MyDatasetConfig`.
+2. Define the `BUILDER_CONFIGS` class member in `MyDataset` that lists
+   `MyDatasetConfig`s that the dataset exposes.
+3. Use `self.builder_config` in `MyDataset` to configure data generation. This
+   may include setting different values in `_info()` or changing download data
+   access.
+
+Each `MyDatasetConfig` would have a name and so the dataset would be addressed
+as `my_dataset/my_config_name` in `tfds.builder` or `tfds.load`. You can also
+instantiate the `MyDataset` class directly and pass the `config` kwarg which
+can either be a config name or a `MyDatasetConfig` object.
+
+See [`IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
+for an example of a dataset that uses `BuilderConfig`s.
+
+Note that `BuilderConfig`s are only for situations that would affect how the
+data is written to disk, not for situations where alterations could be made
+on-the-fly in the `tf.data` input pipeline. To add configuration that would
+only affect data reading, add keyword arguments to the `MyDataset` constructor,
+store them in member variables, and then use them later. For example,
+you could override `_as_dataset()`, call `super()` to get the base
+`tf.data.Dataset`, and then do additional transformations based on the member
+variables.
 
 # Create your own `FeatureConnector`
 
@@ -341,31 +366,31 @@ the
 [features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
 for more examples.
 
-## Enabling downloads validation
+## Adding the dataset to `tensorflow/datasets`
 
-Once your `DatasetBuilder` works as expected, and while you still have the
-downloaded files on disk, it is time to enable the downloaded files checksum
-validation.
+Thanks for making the dataset accessible to the community! Before you send your
+pull request, make sure your dataset's module is imported and that the metadata
+files are copied in.
 
-You will need to add the file containing the URLs and associated checksums.
-This file can be generated using the `create_checksum_file` script. E.g.
+### Import for Registration
 
-```sh
-scripts/create_checksum_file --dest_dir=url_checksums --dataset=mnist
-```
+All subclasses of `tfds.core.DatasetBuilder` are automatically registered
+when their module is imported such that they can be accessed through
+`tfds.builder` and `tfds.load`.
 
-Then, edit the `tfds.core.DatasetInfo` specified earlier to pass in a dict
-mapping url to checksum (sha256) of downloaded file. That dict is loaded from
-the file created by previous command.
+If you're contributing the dataset to `tensorflow/datasets`, add the module
+import to `tensorflow_datasets/__init__.py`.
 
-```
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        ...
-        download_checksums=tfds.download.load_checksums(self.name),
-        ...
-    )
-```
+### Package `DatasetInfo` and metadata files
+
+All datasets that ship with `tensorflow-datasets` have their
+`dataset_info.json` and metadata files packaged in so that users can access
+statistics and other information without needing to generate the dataset.
+
+Run [`tensorflow_datasets/scripts/download_and_prepare`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/scripts/download_and_prepare.py)
+to generate the dataset and then copy in the `dataset_info.json` and other
+metadata files to [`tensorflow_datasets/dataset_info`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/dataset_info/).
+
 
 ## Large datasets and distributed generation
 

@@ -31,11 +31,12 @@ from tensorflow_datasets.testing import test_case
 class ReadChecksumDigestTest(test_case.TestCase):
 
   def test_digest(self):
-    digest = util.read_checksum_digest(
+    digest, size = util.read_checksum_digest(
         os.path.join(self.test_data, '6pixels.png'), hashlib.sha256)
     self.assertEqual(
         digest,
         '04f38ebed34d3b027d2683193766155912fba647158c583c3bdb4597ad8af34c')
+    self.assertEqual(102, size)
 
 
 if __name__ == '__main__':

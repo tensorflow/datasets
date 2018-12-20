@@ -21,10 +21,14 @@ Datasets
   * [`"fashion_mnist"`](#fashion_mnist)
   * [`"image_label_folder"`](#image_label_folder)
   * [`"mnist"`](#mnist)
+  * [`"svhn_cropped"`](#svhn_cropped)
 * `text`
   * [`"imdb_reviews"`](#imdb_reviews)
+  * [`"lm1b"`](#lm1b)
+  * [`"squad"`](#squad)
 * `video`
-  * [`"bair_robot_pushing"`](#bair_robot_pushing)
+  * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
+  * [`"starcraft_video"`](#starcraft_video)
 
 ---
 
@@ -32,28 +36,90 @@ Datasets
 
 ## `"celeb_a"`
 
+From http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+
 Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. These pictures are cropped.
 
 [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py) v0.2.0
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-attributes|{'Big_Nose': tf.bool, 'High_Cheekbones': tf.bool, 'Young': tf.bool, 'Sideburns': tf.bool, 'Blond_Hair': tf.bool, 'Arched_Eyebrows': tf.bool, 'Bags_Under_Eyes': tf.bool, 'Pale_Skin': tf.bool, 'Mouth_Slightly_Open': tf.bool, 'Wearing_Hat': tf.bool, 'Narrow_Eyes': tf.bool, 'Brown_Hair': tf.bool, 'Gray_Hair': tf.bool, 'Black_Hair': tf.bool, 'Bald': tf.bool, 'Double_Chin': tf.bool, 'Rosy_Cheeks': tf.bool, 'Bangs': tf.bool, 'Bushy_Eyebrows': tf.bool, 'Blurry': tf.bool, 'Big_Lips': tf.bool, 'Wearing_Necklace': tf.bool, 'Heavy_Makeup': tf.bool, 'No_Beard': tf.bool, 'Chubby': tf.bool, '5_o_Clock_Shadow': tf.bool, 'Mustache': tf.bool, 'Pointy_Nose': tf.bool, 'Wavy_Hair': tf.bool, 'Receding_Hairline': tf.bool, 'Attractive': tf.bool, 'Wearing_Earrings': tf.bool, 'Wearing_Lipstick': tf.bool, 'Male': tf.bool, 'Goatee': tf.bool, 'Eyeglasses': tf.bool, 'Straight_Hair': tf.bool, 'Smiling': tf.bool, 'Oval_Face': tf.bool, 'Wearing_Necktie': tf.bool}|{'Big_Nose': (), 'High_Cheekbones': (), 'Young': (), 'Sideburns': (), 'Blond_Hair': (), 'Arched_Eyebrows': (), 'Bags_Under_Eyes': (), 'Pale_Skin': (), 'Mouth_Slightly_Open': (), 'Wearing_Hat': (), 'Narrow_Eyes': (), 'Brown_Hair': (), 'Gray_Hair': (), 'Black_Hair': (), 'Bald': (), 'Double_Chin': (), 'Rosy_Cheeks': (), 'Bangs': (), 'Bushy_Eyebrows': (), 'Blurry': (), 'Big_Lips': (), 'Wearing_Necklace': (), 'Heavy_Makeup': (), 'No_Beard': (), 'Chubby': (), '5_o_Clock_Shadow': (), 'Mustache': (), 'Pointy_Nose': (), 'Wavy_Hair': (), 'Receding_Hairline': (), 'Attractive': (), 'Wearing_Earrings': (), 'Wearing_Lipstick': (), 'Male': (), 'Goatee': (), 'Eyeglasses': (), 'Straight_Hair': (), 'Smiling': (), 'Oval_Face': (), 'Wearing_Necktie': ()}
-image|tf.uint8|(218, 178, 3)
-landmarks|{'rightmouth_y': tf.int64, 'rightmouth_x': tf.int64, 'nose_y': tf.int64, 'nose_x': tf.int64, 'lefteye_y': tf.int64, 'lefteye_x': tf.int64, 'leftmouth_y': tf.int64, 'leftmouth_x': tf.int64, 'righteye_y': tf.int64, 'righteye_x': tf.int64}|{'rightmouth_y': (), 'rightmouth_x': (), 'nose_y': (), 'nose_x': (), 'lefteye_y': (), 'lefteye_x': (), 'leftmouth_y': (), 'leftmouth_x': (), 'righteye_y': (), 'righteye_x': ()}
+### Features
+```
+FeaturesDict({
+    'attributes': FeaturesDict({
+        '5_o_Clock_Shadow': Tensor(shape=(), dtype=tf.bool),
+        'Arched_Eyebrows': Tensor(shape=(), dtype=tf.bool),
+        'Attractive': Tensor(shape=(), dtype=tf.bool),
+        'Bags_Under_Eyes': Tensor(shape=(), dtype=tf.bool),
+        'Bald': Tensor(shape=(), dtype=tf.bool),
+        'Bangs': Tensor(shape=(), dtype=tf.bool),
+        'Big_Lips': Tensor(shape=(), dtype=tf.bool),
+        'Big_Nose': Tensor(shape=(), dtype=tf.bool),
+        'Black_Hair': Tensor(shape=(), dtype=tf.bool),
+        'Blond_Hair': Tensor(shape=(), dtype=tf.bool),
+        'Blurry': Tensor(shape=(), dtype=tf.bool),
+        'Brown_Hair': Tensor(shape=(), dtype=tf.bool),
+        'Bushy_Eyebrows': Tensor(shape=(), dtype=tf.bool),
+        'Chubby': Tensor(shape=(), dtype=tf.bool),
+        'Double_Chin': Tensor(shape=(), dtype=tf.bool),
+        'Eyeglasses': Tensor(shape=(), dtype=tf.bool),
+        'Goatee': Tensor(shape=(), dtype=tf.bool),
+        'Gray_Hair': Tensor(shape=(), dtype=tf.bool),
+        'Heavy_Makeup': Tensor(shape=(), dtype=tf.bool),
+        'High_Cheekbones': Tensor(shape=(), dtype=tf.bool),
+        'Male': Tensor(shape=(), dtype=tf.bool),
+        'Mouth_Slightly_Open': Tensor(shape=(), dtype=tf.bool),
+        'Mustache': Tensor(shape=(), dtype=tf.bool),
+        'Narrow_Eyes': Tensor(shape=(), dtype=tf.bool),
+        'No_Beard': Tensor(shape=(), dtype=tf.bool),
+        'Oval_Face': Tensor(shape=(), dtype=tf.bool),
+        'Pale_Skin': Tensor(shape=(), dtype=tf.bool),
+        'Pointy_Nose': Tensor(shape=(), dtype=tf.bool),
+        'Receding_Hairline': Tensor(shape=(), dtype=tf.bool),
+        'Rosy_Cheeks': Tensor(shape=(), dtype=tf.bool),
+        'Sideburns': Tensor(shape=(), dtype=tf.bool),
+        'Smiling': Tensor(shape=(), dtype=tf.bool),
+        'Straight_Hair': Tensor(shape=(), dtype=tf.bool),
+        'Wavy_Hair': Tensor(shape=(), dtype=tf.bool),
+        'Wearing_Earrings': Tensor(shape=(), dtype=tf.bool),
+        'Wearing_Hat': Tensor(shape=(), dtype=tf.bool),
+        'Wearing_Lipstick': Tensor(shape=(), dtype=tf.bool),
+        'Wearing_Necklace': Tensor(shape=(), dtype=tf.bool),
+        'Wearing_Necktie': Tensor(shape=(), dtype=tf.bool),
+        'Young': Tensor(shape=(), dtype=tf.bool),
+    }),
+    'image': Image(shape=(218, 178, 3), dtype=tf.uint8),
+    'landmarks': FeaturesDict({
+        'lefteye_x': Tensor(shape=(), dtype=tf.int64),
+        'lefteye_y': Tensor(shape=(), dtype=tf.int64),
+        'leftmouth_x': Tensor(shape=(), dtype=tf.int64),
+        'leftmouth_y': Tensor(shape=(), dtype=tf.int64),
+        'nose_x': Tensor(shape=(), dtype=tf.int64),
+        'nose_y': Tensor(shape=(), dtype=tf.int64),
+        'righteye_x': Tensor(shape=(), dtype=tf.int64),
+        'righteye_y': Tensor(shape=(), dtype=tf.int64),
+        'rightmouth_x': Tensor(shape=(), dtype=tf.int64),
+        'rightmouth_y': Tensor(shape=(), dtype=tf.int64),
+    }),
+})
+```
 
 
-#### Statistics
-None computed
+### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    202,599
+TRAIN      |    162,770
+TEST       |     19,962
+VALIDATION |     19,867
 
-#### Urls
+
+### Urls
  * http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 
-#### Supervised Keys
+### Supervised Keys
 None
 
-#### Citation
+### Citation
 ```
 Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang Deep Learning Face Attributes in the Wild ICCV 2015
 ```
@@ -62,18 +128,22 @@ Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang Deep Learning Face Attr
 
 ## `"cifar10"`
 
+From https://www.cs.toronto.edu/~kriz/cifar.html
+
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.
 
 [`tfds.image.cifar.Cifar10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py) v1.0.1
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-image|tf.uint8|(32, 32, 3)
-label|tf.int64|()
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+})
+```
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     60,000
@@ -81,13 +151,13 @@ TRAIN      |     50,000
 TEST       |     10,000
 
 
-#### Urls
+### Urls
  * https://www.cs.toronto.edu/~kriz/cifar.html
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf
 ```
@@ -96,53 +166,63 @@ Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. ht
 
 ## `"cifar100"`
 
+From https://www.cs.toronto.edu/~kriz/cifar.html
+
 This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a "fine" label (the class to which it belongs) and a "coarse" label (the superclass to which it belongs).
 
-[`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py) v1.1.0
+[`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py) v1.2.0
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-image|tf.uint8|(32, 32, 3)
-label|tf.int64|()
-
-
-#### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     60,000
-TRAIN      |     50,000
-TEST       |     10,000
+### Features
+```
+FeaturesDict({
+    'coarse_label': ClassLabel(shape=(), dtype=tf.int64),
+    'fine_label': ClassLabel(shape=(), dtype=tf.int64),
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+})
+```
 
 
-#### Urls
+### Statistics
+None computed
+
+### Urls
  * https://www.cs.toronto.edu/~kriz/cifar.html
 
-#### Supervised Keys
-(u'image', u'label')
+### Supervised Keys
+(u'image', u'fine_label')
 
-#### Citation
+### Citation
 ```
-Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf
+@TECHREPORT{Krizhevsky09learningmultiple,
+    author = {Alex Krizhevsky},
+    title = {Learning multiple layers of features from tiny images},
+    institution = {},
+    year = {2009}
+}
+
 ```
 
 ---
 
 ## `"diabetic_retinopathy_detection"`
 
+From https://www.kaggle.com/c/diabetic-retinopathy-detection/data
+
 A large set of high-resolution retina images taken under a variety of imaging conditions.
 
 [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py) v1.0.0
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-image|tf.uint8|(None, None, 3)
-label|tf.int64|()
-name|tf.string|()
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     88,712
@@ -151,13 +231,13 @@ TRAIN      |     35,126
 SAMPLE     |         10
 
 
-#### Urls
+### Urls
  * https://www.kaggle.com/c/diabetic-retinopathy-detection/data
 
-#### Supervised Keys
+### Supervised Keys
 None
 
-#### Citation
+### Citation
 ```
 
 ```
@@ -166,18 +246,22 @@ None
 
 ## `"fashion_mnist"`
 
+From https://github.com/zalandoresearch/fashion-mnist
+
 Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.
 
 [`tfds.image.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py) v1.0.0
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-image|tf.uint8|(28, 28, 1)
-label|tf.int64|()
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+})
+```
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     70,000
@@ -185,13 +269,13 @@ TRAIN      |     60,000
 TEST       |     10,000
 
 
-#### Urls
+### Urls
  * https://github.com/zalandoresearch/fashion-mnist
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms. Han Xiao, Kashif Rasul, Roland Vollgraf. arXiv:1708.07747
 ```
@@ -200,27 +284,31 @@ Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithm
 
 ## `"image_label_folder"`
 
+From <no known url>
+
 Generic image classification dataset.
 
 [`tfds.image.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/image_folder.py) v1.0.0
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-image|tf.uint8|(None, None, 3)
-label|tf.int64|()
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+})
+```
 
 
-#### Statistics
+### Statistics
 None computed
 
-#### Urls
+### Urls
 
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 
 ```
@@ -229,18 +317,22 @@ None computed
 
 ## `"mnist"`
 
+From http://yann.lecun.com/exdb/mnist/
+
 The MNIST database of handwritten digits.
 
 [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py) v1.0.0
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-image|tf.uint8|(28, 28, 1)
-label|tf.int64|()
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+})
+```
 
 
-#### Statistics
+### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     70,000
@@ -248,16 +340,49 @@ TRAIN      |     60,000
 TEST       |     10,000
 
 
-#### Urls
+### Urls
  * http://yann.lecun.com/exdb/mnist/
 
-#### Supervised Keys
+### Supervised Keys
 (u'image', u'label')
 
-#### Citation
+### Citation
 ```
 Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
 [Online]. Available: http://yann.lecun.com/exdb/mnist/
+```
+
+---
+
+## `"svhn_cropped"`
+
+From http://ufldl.stanford.edu/housenumbers/
+
+The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
+
+[`tfds.image.svhn.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/svhn.py) v1.0.0
+
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+})
+```
+
+
+### Statistics
+None computed
+
+### Urls
+ * http://ufldl.stanford.edu/housenumbers/
+
+### Supervised Keys
+(u'image', u'label')
+
+### Citation
+```
+Yuval Netzer, Tao Wang, Adam Coates, Alessandro Bissacco, Bo Wu, Andrew Y. Ng, Reading Digits in Natural Images with Unsupervised Feature Learning, NIPS Workshop on Deep Learning and Unsupervised Feature Learning, 2011.
 ```
 
 ---
@@ -267,33 +392,80 @@ Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
 
 ## `"imdb_reviews"`
 
+From http://ai.stanford.edu/~amaas/data/sentiment/
+
 Large Movie Review Dataset
 This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well. Raw text and already processed bag of words formats are provided. See the README file contained in the release for more details.
 
-[`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py) v0.0.2
+[`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-label|tf.int64|()
-text|tf.string|()
+`imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the following
+configurations predefined (defaults to the first one):
 
+* `"plain_text"` (v0.0.1): Plain text
 
-#### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     50,000
-TRAIN      |     25,000
-TEST       |     25,000
+* `"bytes"` (v0.0.1): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+* `"subwords8k"` (v0.0.1): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+
+* `"subwords32k"` (v0.0.1): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 
-#### Urls
+### `"imdb_reviews/plain_text"`
+
+```
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
+
+
+
+### `"imdb_reviews/bytes"`
+
+```
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64),
+})
+```
+
+
+
+### `"imdb_reviews/subwords8k"`
+
+```
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64),
+})
+```
+
+
+
+### `"imdb_reviews/subwords32k"`
+
+```
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64),
+})
+```
+
+
+
+
+### Statistics
+None computed
+
+### Urls
  * http://ai.stanford.edu/~amaas/data/sentiment/
 
-#### Supervised Keys
+### Supervised Keys
 (u'text', u'label')
 
-#### Citation
+### Citation
 ```
 @InProceedings{maas-EtAl:2011:ACL-HLT2011,
   author    = {Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher},
@@ -311,41 +483,350 @@ TEST       |     25,000
 
 ---
 
+## `"lm1b"`
+
+From http://www.statmt.org/lm-benchmark/
+
+A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data.
+
+
+[`tfds.text.lm1b.Lm1b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/lm1b.py)
+
+`lm1b` is configured with `tfds.text.lm1b.Lm1bConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"plain_text"` (v0.0.1): Plain text
+
+* `"bytes"` (v0.0.1): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+* `"subwords8k"` (v0.0.1): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+
+* `"subwords32k"` (v0.0.1): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+
+### `"lm1b/plain_text"`
+
+```
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
+
+
+
+### `"lm1b/bytes"`
+
+```
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64),
+})
+```
+
+
+
+### `"lm1b/subwords8k"`
+
+```
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
+
+
+
+### `"lm1b/subwords32k"`
+
+```
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
+
+
+
+
+### Statistics
+None computed
+
+### Urls
+ * http://www.statmt.org/lm-benchmark/
+
+### Supervised Keys
+(u'text', u'text')
+
+### Citation
+```
+@article{DBLP:journals/corr/ChelbaMSGBK13,
+  author    = {Ciprian Chelba and
+               Tomas Mikolov and
+               Mike Schuster and
+               Qi Ge and
+               Thorsten Brants and
+               Phillipp Koehn},
+  title     = {One Billion Word Benchmark for Measuring Progress in Statistical Language
+               Modeling},
+  journal   = {CoRR},
+  volume    = {abs/1312.3005},
+  year      = {2013},
+  url       = {http://arxiv.org/abs/1312.3005},
+  archivePrefix = {arXiv},
+  eprint    = {1312.3005},
+  timestamp = {Mon, 13 Aug 2018 16:46:16 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/ChelbaMSGBK13},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+```
+
+---
+
+## `"squad"`
+
+From https://rajpurkar.github.io/SQuAD-explorer/
+
+Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable.
+
+
+[`tfds.text.squad.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/squad.py)
+
+`squad` is configured with `tfds.text.squad.SquadConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"plain_text"` (v0.0.1): Plain text
+
+* `"bytes"` (v0.0.1): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+* `"subwords8k"` (v0.0.1): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+
+
+### `"squad/plain_text"`
+
+```
+FeaturesDict({
+    'context': Text(shape=(), dtype=tf.string),
+    'first_answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+
+
+### `"squad/bytes"`
+
+```
+FeaturesDict({
+    'context': Text(shape=(None,), dtype=tf.int64),
+    'first_answer': Text(shape=(None,), dtype=tf.int64),
+    'question': Text(shape=(None,), dtype=tf.int64),
+})
+```
+
+
+
+### `"squad/subwords8k"`
+
+```
+FeaturesDict({
+    'context': Text(shape=(None,), dtype=tf.int64),
+    'first_answer': Text(shape=(None,), dtype=tf.int64),
+    'question': Text(shape=(None,), dtype=tf.int64),
+})
+```
+
+
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     98,169
+TRAIN      |     87,599
+VALIDATION |     10,570
+
+
+### Urls
+ * https://rajpurkar.github.io/SQuAD-explorer/
+
+### Supervised Keys
+None
+
+### Citation
+```
+@article{2016arXiv160605250R,
+       author = {{Rajpurkar}, Pranav and {Zhang}, Jian and {Lopyrev},
+                 Konstantin and {Liang}, Percy},
+        title = "{SQuAD: 100,000+ Questions for Machine Comprehension of Text}",
+      journal = {arXiv e-prints},
+         year = 2016,
+          eid = {arXiv:1606.05250},
+        pages = {arXiv:1606.05250},
+archivePrefix = {arXiv},
+       eprint = {1606.05250},
+}
+
+```
+
+---
+
 
 # `video`
 
-## `"bair_robot_pushing"`
+## `"bair_robot_pushing_small"`
 
-This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects.
+From https://sites.google.com/site/brainrobotdata/home/push-dataset
 
-[`tfds.video.bair_robot_pushing.BairRobotPushing`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py) v0.1.0
+This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
-#### Features
-Name  | Type | Shape
-:---- | :--- | :----
-action|tf.float32|(30, 4)
-endeffector_pos|tf.float32|(30, 3)
-video_aux1|tf.uint8|(30, 64, 64, 3)
-video_main|tf.uint8|(30, 64, 64, 3)
+[`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py) v1.0.0
 
-
-#### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     43,520
-TRAIN      |     43,264
-TEST       |        256
+### Features
+```
+FeaturesDict({
+    'action': Tensor(shape=(4,), dtype=tf.float32),
+    'endeffector_pos': Tensor(shape=(3,), dtype=tf.float32),
+    'image_aux1': Image(shape=(64, 64, 3), dtype=tf.uint8),
+    'image_main': Image(shape=(64, 64, 3), dtype=tf.uint8),
+})
+```
 
 
-#### Urls
+### Statistics
+None computed
+
+### Urls
  * https://sites.google.com/site/brainrobotdata/home/push-dataset
 
-#### Supervised Keys
+### Supervised Keys
 None
 
-#### Citation
+### Citation
 ```
 Unsupervised Learning for Physical Interaction through Video  Prediction. Chelsea Finn, Ian Goodfellow, Sergey Levine
+```
+
+---
+
+## `"starcraft_video"`
+
+From https://storage.googleapis.com/scv_dataset/README.html
+
+This data set contains videos generated from Starcraft.
+
+[`tfds.video.starcraft.StarcraftVideo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/starcraft.py)
+
+`starcraft_video` is configured with `tfds.video.starcraft.StarcraftVideoConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"brawl_64"` (v0.1.0): Brawl map with 64x64 resolution.
+
+* `"brawl_128"` (v0.1.0): Brawl map with 128x128 resolution.
+
+* `"collect_mineral_shards_64"` (v0.1.0): CollectMineralShards map with 64x64 resolution.
+
+* `"collect_mineral_shards_128"` (v0.1.0): CollectMineralShards map with 128x128 resolution.
+
+* `"move_unit_to_border_64"` (v0.1.0): MoveUnitToBorder map with 64x64 resolution.
+
+* `"move_unit_to_border_128"` (v0.1.0): MoveUnitToBorder map with 128x128 resolution.
+
+* `"road_trip_with_medivac_64"` (v0.1.0): RoadTripWithMedivac map with 64x64 resolution.
+
+* `"road_trip_with_medivac_128"` (v0.1.0): RoadTripWithMedivac map with 128x128 resolution.
+
+
+### `"starcraft_video/brawl_64"`
+
+```
+FeaturesDict({
+    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8),
+})
+```
+
+
+
+### `"starcraft_video/brawl_128"`
+
+```
+FeaturesDict({
+    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8),
+})
+```
+
+
+
+### `"starcraft_video/collect_mineral_shards_64"`
+
+```
+FeaturesDict({
+    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8),
+})
+```
+
+
+
+### `"starcraft_video/collect_mineral_shards_128"`
+
+```
+FeaturesDict({
+    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8),
+})
+```
+
+
+
+### `"starcraft_video/move_unit_to_border_64"`
+
+```
+FeaturesDict({
+    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8),
+})
+```
+
+
+
+### `"starcraft_video/move_unit_to_border_128"`
+
+```
+FeaturesDict({
+    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8),
+})
+```
+
+
+
+### `"starcraft_video/road_trip_with_medivac_64"`
+
+```
+FeaturesDict({
+    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8),
+})
+```
+
+
+
+### `"starcraft_video/road_trip_with_medivac_128"`
+
+```
+FeaturesDict({
+    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8),
+})
+```
+
+
+
+
+### Statistics
+None computed
+
+### Urls
+ * https://storage.googleapis.com/scv_dataset/README.html
+
+### Supervised Keys
+None
+
+### Citation
+```
+Towards Accurate Generative Models of Video: New Metrics & Challenges
 ```
 
 ---

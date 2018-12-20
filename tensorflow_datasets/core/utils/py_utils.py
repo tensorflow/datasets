@@ -25,6 +25,11 @@ import contextlib
 import itertools
 import os
 import sys
+import uuid
+
+import tensorflow as tf
+from tensorflow_datasets.core import constants
+
 
 # pylint: disable=g-import-not-at-top
 if sys.version_info[0] > 2:
@@ -111,18 +116,26 @@ class memoized_property(property):  # pylint: disable=invalid-name
       setattr(obj, attr, cached)
     return cached
 
-
-def map_nested(function, data_struct, dict_only=False):
+def map_nested(function, data_struct, dict_only=False, map_tuple=False):
   """Apply a function recursively to each element of a nested data struct."""
 
   # Could add support for more exotic data_struct, like OrderedDict
   if isinstance(data_struct, dict):
     return {
-        k: map_nested(function, v, dict_only) for k, v in data_struct.items()
+        k: map_nested(function, v, dict_only, map_tuple)
+        for k, v in data_struct.items()
     }
   elif not dict_only:
-    if isinstance(data_struct, list):
-      return [map_nested(function, v, dict_only) for v in data_struct]
+    types = [list]
+    if map_tuple:
+      types.append(tuple)
+    if isinstance(data_struct, tuple(types)):
+      mapped = [map_nested(function, v, dict_only, map_tuple)
+                for v in data_struct]
+      if isinstance(data_struct, list):
+        return mapped
+      else:
+        return tuple(mapped)
   # Singleton
   return function(data_struct)
 
@@ -193,31 +206,28 @@ def as_proto_cls(proto_cls):
       def get_proto(self):
         return self.__proto
 
+      def __repr__(self):
+        return "<{cls_name}\n{proto_repr}\n>".format(
+            cls_name=cls.__name__, proto_repr=repr(self.__proto))
+
     decorator_cls = type(cls.__name__, (cls, ProtoCls), {})
     # Class cannot be wraped because __doc__ not overwritable with python2
     return decorator_cls
   return decorator
 
 
-def str_to_version(version_str):
-  """Return the tuple (major, minor, patch) version extracted from the str."""
-  version_ids = version_str.split(".")
-  if len(version_ids) != 3 or "-" in version_str:
-    raise ValueError(
-        "Could not convert the {} to version. Format should be x.y.z".format(
-            version_str))
-  try:
-    version_ids = tuple(int(v) for v in version_ids)
-  except ValueError:
-    raise ValueError(
-        "Could not convert the {} to version. Format should be x.y.z".format(
-            version_str))
-  return version_ids
-
-
 def tfds_dir():
   """Path to tensorflow_datasets directory."""
   return os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
+
+@contextlib.contextmanager
+def atomic_write(path, mode):
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_path = "%s%s_%s" % (path, constants.INCOMPLETE_SUFFIX, uuid.uuid4().hex)
+  with tf.gfile.Open(tmp_path, mode) as file_:
+    yield file_
+  tf.gfile.Rename(tmp_path, path, overwrite=True)
 
 
 class abstractclassmethod(classmethod):  # pylint: disable=invalid-name
@@ -228,3 +238,9 @@ class abstractclassmethod(classmethod):  # pylint: disable=invalid-name
   def __init__(self, fn):
     fn.__isabstractmethod__ = True
     super(abstractclassmethod, self).__init__(fn)
+
+
+def get_tfds_path(relative_path):
+  """Returns absolute path to file given path relative to repo root."""
+  path = os.path.join(tfds_dir(), relative_path)
+  return path

@@ -1,4 +1,11 @@
-* aclImdb
+aclImdb_v1.tar.gz contains the following files tree.
+it was produced with:
+
+```
+tar -zcvf aclImdb_v1.tar.gz aclImdb
+```
+
+* aclImdb/
   * train/
     * pos/
       * 0_7.txt

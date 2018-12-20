@@ -16,3 +16,7 @@
 """Text-based sentiment analysis datasets."""
 
 from tensorflow_datasets.text.imdb import IMDBReviews
+from tensorflow_datasets.text.imdb import IMDBReviewsConfig
+from tensorflow_datasets.text.lm1b import Lm1b
+from tensorflow_datasets.text.lm1b import Lm1bConfig
+from tensorflow_datasets.text.squad import Squad

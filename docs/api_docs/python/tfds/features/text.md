@@ -17,6 +17,10 @@ Text utilities.
 
 [`class SubwordTextEncoder`](../../tfds/features/text/SubwordTextEncoder.md): Invertible `TextEncoder` using word pieces with a byte-level fallback.
 
+[`class TextEncoder`](../../tfds/features/text/TextEncoder.md): Abstract base class for converting between text and integers.
+
+[`class TextEncoderConfig`](../../tfds/features/text/TextEncoderConfig.md): Configuration for <a href="../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
+
 [`class Tokenizer`](../../tfds/features/text/Tokenizer.md): Splits a string into tokens, and joins them back.
 
 [`class TokenTextEncoder`](../../tfds/features/text/TokenTextEncoder.md): TextEncoder backed by a list of tokens.

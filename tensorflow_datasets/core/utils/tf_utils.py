@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
+import contextlib
 
 import numpy as np
 import tensorflow as tf
@@ -102,7 +103,7 @@ class TFGraphRunner(object):
       placeholder = tf.placeholder(dtype=input_.dtype, shape=input_.shape)
       output = run_args.fct(placeholder)
       return GraphRun(
-          session=nogpu_session(),
+          session=raw_nogpu_session(),
           graph=g,
           placeholder=placeholder,
           output=output,
@@ -146,7 +147,33 @@ def assert_shape_match(shape1, shape2):
   shape1.assert_is_compatible_with(shape2)
 
 
-def nogpu_session():
+@contextlib.contextmanager
+def nogpu_session(graph=None):
+  """tf.Session context manager, hiding GPUs."""
+  # We don't use the with construction because we don't want the Session to be
+  # installed as the "default" session.
+  sess = raw_nogpu_session(graph)
+  yield sess
+  sess.close()
+
+
+def raw_nogpu_session(graph=None):
   """tf.Session, hiding GPUs."""
   config = tf.ConfigProto(device_count={'GPU': 0})
-  return tf.Session(config=config)
+  return tf.Session(config=config, graph=graph)
+
+
+@contextlib.contextmanager
+def maybe_with_graph(graph=None, create_if_none=True):
+  """Eager-compatible Graph().as_default() yielding the graph."""
+  if tf.executing_eagerly():
+    yield None
+  else:
+    if graph is None and create_if_none:
+      graph = tf.Graph()
+
+    if graph is None:
+      yield None
+    else:
+      with graph.as_default():
+        yield graph
