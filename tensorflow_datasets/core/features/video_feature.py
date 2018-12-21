@@ -44,9 +44,9 @@ class Video(feature.FeatureConnector):
       })
 
     * During generation:
-      yield self.info.features.encode_example({
+      yield {
           'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
-      })
+      }
   """
 
   def __init__(self, shape):

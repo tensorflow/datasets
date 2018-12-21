@@ -146,10 +146,10 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
 
     # Data is shuffled automatically to distribute classes uniformly.
     for image, label in data:
-      yield self.info.features.encode_example({
+      yield {
           "image": image,
           "label": label,
-      })
+      }
 
 
 class FashionMNIST(MNIST):

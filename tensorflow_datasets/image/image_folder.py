@@ -155,10 +155,10 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
     for label, image_paths in label_images.items():
       for image_path in image_paths:
-        yield self.info.features.encode_example({
+        yield {
             "image": image_path,
             "label": label,
-        })
+        }
 
 
 def list_folders(root_dir):

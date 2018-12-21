@@ -144,9 +144,9 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
           all_frames.append(frame_feature)
 
         # Encode the sequence (list) of frames (feature dicts)
-        # self.info.features.encode_example([
+        # yield [
         #     {'action': [...], 'image_main': img_frame0, ...},  # Frame 0
         #     {'action': [...], 'image_main': img_frame1, ...},  # Frame 1
         #     ...,
-        # ])
-        yield self.info.features.encode_example(all_frames)
+        # ]
+        yield all_frames

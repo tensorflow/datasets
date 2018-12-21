@@ -18,7 +18,7 @@
 FeatureConnector is a way of abstracting what data is returned by the
 tensorflow/datasets builders from how they are encoded/decoded from file.
 
-#Use FeatureConnector in DatasetBuilder
+# Use FeatureConnector in `GeneratorBasedBuilder`
 
 1) In the _build_info() function, define the features as you would like them
 to be returned by the tf.data.Dataset() object.
@@ -46,14 +46,14 @@ The tf.data.Dataset will return each examples as a dict:
 2) In the generator function, yield the examples to match what you have defined
 in the spec. The values will automatically be encoded.
 
-  yield self.info.features.encode_example({
+  yield {
       'input': np_image,
       'target': 'This is some text',
       'extra_data': {
           'label_id': 43,
           'language': 'en',
       }
-  })
+  }
 
 # Create your own FeatureConnector
 
@@ -207,10 +207,10 @@ class FeatureConnector(object):
     At data generation (in `_generate_examples`), if the user yields:
 
     ```
-    yield self.info.features.encode_examples({
+    yield {
         'image': 'path/to/img.png',
         'custom_feature': [123, 'str', lambda x: x+1]
-    })
+    }
     ```
 
     Then:
@@ -350,10 +350,10 @@ class FeaturesDict(FeatureConnector):
 
   ```
   for image, label in generate_examples:
-    yield self.info.features.encode_example({
+    yield {
         'input': image,
         'output': label
-    })
+    }
   ```
 
   At tf.data.Dataset() time:
@@ -577,12 +577,12 @@ class OneOf(FeaturesDict):
 
   ```
   for example in generate_examples:
-    yield self.info.features.encode_example({
+    yield {
         'labels': {
             'coco': 'person',
             'cifar10': 'airplane',
         },
-    })
+    }
   ```
 
   At tf.data.Dataset() time, only the label from coco is decoded:

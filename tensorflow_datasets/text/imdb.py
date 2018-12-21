@@ -151,7 +151,7 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       if not res:
         continue
       text = imdb_f.read().strip()
-      yield self.info.features.encode_example({
+      yield {
           "text": text,
           "label": res.groupdict()["label"],
-      })
+      }

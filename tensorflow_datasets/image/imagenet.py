@@ -123,16 +123,16 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
       # alternative, as this loads ~150MB in RAM.
       fobj_mem = io.BytesIO(fobj.read())
       for image_fname, image_fobj in tfds.download.iter_tar(fobj_mem):
-        yield self.info.features.encode_example({
+        yield {
             'file_name': image_fname,
             'image': image_fobj,
             'label': label,
-        })
+        }
 
   def _generate_examples_validation(self, archive, labels):
     for (fname, fobj), label in zip(archive, labels):
-      yield self.info.features.encode_example({
+      yield {
           'file_name': fname,
           'image': fobj,
           'label': label,
-      })
+      }

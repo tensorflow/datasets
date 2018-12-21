@@ -150,7 +150,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     for image, label in data:
       features = {"image": image}
       features.update(label)
-      yield self.info.features.encode_example(features)
+      yield features
 
 
 class Cifar100(Cifar10):

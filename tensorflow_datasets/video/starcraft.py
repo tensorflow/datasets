@@ -199,7 +199,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         try:
           while True:
             video = sess.run(iterator)
-            yield self.info.features.encode_example({"rgb_screen": video})
+            yield {"rgb_screen": video}
 
         except tf.errors.OutOfRangeError:
           # End of file.

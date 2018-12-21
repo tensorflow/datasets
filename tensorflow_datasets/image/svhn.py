@@ -108,9 +108,9 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
     assert np.min(data["y"]) > 0
 
     for image, label in zip(np.rollaxis(data["X"], -1), data["y"]):
-      yield self.info.features.encode_example({
+      yield {
           "image": image,
           "label": label % 10,  # digit 0 is saved as 0 (instead of 10)
-      })
+      }
 
 # TODO(tfds): Add the SvhnFull dataset

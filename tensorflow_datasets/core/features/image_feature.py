@@ -62,10 +62,10 @@ class Image(feature.FeatureConnector):
       })
 
     * During generation:
-      yield self.info.features.encode_example({
+      yield {
           'input': 'path/to/img.jpg',
           'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
-      })
+      }
   """
 
   @api_utils.disallow_positional_args

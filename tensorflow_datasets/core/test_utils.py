@@ -255,5 +255,5 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 
   def _generate_examples(self):
     for i in range(30):
-      yield self.info.features.encode_example({"x": i})
+      yield {"x": i}
 

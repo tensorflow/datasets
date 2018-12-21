@@ -181,7 +181,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     for file_name in files:
       path = os.path.join(filedir, file_name)
 
-      yield self.info.features.encode_example({
+      yield {
           "image": path,
           "landmarks": {
               k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
@@ -189,4 +189,4 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
           "attributes": {
               k: v for k, v in zip(attributes[0], attributes[1][file_name])
           },
-      })
+      }

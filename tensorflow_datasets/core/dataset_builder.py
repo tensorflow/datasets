@@ -20,7 +20,6 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
-import functools
 import os
 import sys
 
@@ -684,14 +683,26 @@ class GeneratorBasedBuilder(DatasetBuilder):
 
     Yields:
       example: (`dict<str feature_name, feature_value>`), a feature dictionary
-        ready to be written to disk. The example should usually be encoded with
-        `self.info.features.encode_example({...})`.
+        ready to be encoded and written to disk. The example will be
+        encoded with `self.info.features.encode_example({...})`.
     """
     raise NotImplementedError()
 
   def _download_and_prepare(self, dl_manager):
     if not tf.gfile.Exists(self._data_dir):
       tf.gfile.MakeDirs(self._data_dir)
+
+    # Generate the filenames and write the example on disk
+    def make_generator_fn(**kwargs):
+
+      def generator_fn():
+        for ex in self._generate_examples(**kwargs):
+          # Use the DatasetInfo FeaturesDict to encode the example. This allows
+          # the user's function to simply yield raw examples from the source
+          # data, which makes reusing it easier.
+          yield self.info.features.encode_example(ex)
+
+      return generator_fn
 
     # Generating data for all splits
     split_dict = splits_lib.SplitDict()
@@ -701,14 +712,11 @@ class GeneratorBasedBuilder(DatasetBuilder):
         tf.logging.info("Generating split %s", s.name)
         split_dict.add(s)
 
-      # Generate the filenames and write the example on disk
-      generator_fn = functools.partial(self._generate_examples,
-                                       **split_generator.gen_kwargs)
       output_files = self._build_split_filenames(
           split_info_list=split_generator.split_info_list,
       )
       self._file_format_adapter.write_from_generator(
-          generator_fn,
+          make_generator_fn(**split_generator.gen_kwargs),
           output_files,
       )
 

@@ -92,8 +92,8 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
               for fname in tf.gfile.ListDirectory(images_dir_path)
               if fname.endswith(".jpeg")]
     for name, label in data:
-      yield self.info.features.encode_example({
+      yield {
           "name": name,
           "image": "%s/%s.jpeg" % (images_dir_path, name),
           "label": label,
-      })
+      }

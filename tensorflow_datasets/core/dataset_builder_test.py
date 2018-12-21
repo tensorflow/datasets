@@ -78,7 +78,7 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
     for i in range(30):
       if self.builder_config:
         i += self.builder_config.increment
-      yield self.info.features.encode_example({"x": i})
+      yield {"x": i}
 
 
 class DatasetBuilderTest(tf.test.TestCase):

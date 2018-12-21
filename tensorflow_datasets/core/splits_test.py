@@ -64,9 +64,9 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, data):
     for i in data:
-      yield self.info.features.encode_example({
+      yield {
           "value": i,
-      })
+      }
 
   def values(self, split):
     return [int(v["value"]) for v in self.as_numpy(split=split)]

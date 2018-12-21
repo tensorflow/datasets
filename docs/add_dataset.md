@@ -247,17 +247,17 @@ examples like:
 def _generate_examples(self, images_dir_path, labels=None):
   ... # read data from CSV and build data
   for image_id, description, label in data:
-    yield self.info.features.encode_example({
+    yield {
         "image_description": description,
         "image": "%s/%s.jpeg" % (images_dir_path, image_id),
         "label": label,
-    })
+    }
 ```
 
-Note that `self.info.features.encode_example` uses the feature definitions from
-`DatasetInfo` to encode the features passed here into a `tf.train.Example`. In
-this case, the `ImageFeature` will encode the jpeg content into the tf-record
-file automatically.
+These dictionaries will be encoded by `self.info.features.encode_example`, which
+uses the feature definitions from `DatasetInfo` to encode the features passed
+here into a `tf.train.Example`. In this case, the `ImageFeature` will encode the
+jpeg content into the tf-record file automatically.
 
 At this point, your builder test should pass.
 

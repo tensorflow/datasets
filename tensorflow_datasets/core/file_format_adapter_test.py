@@ -50,11 +50,11 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
 
   def _generate_examples(self, range_):
     for i in range_:
-      yield self.info.features.encode_example({
+      yield {
           "x": i,
           "y": np.array([-i]).astype(np.int64)[0],
           "z": tf.compat.as_text(str(i))
-      })
+      }
 
   def _info(self):
     return dataset_info.DatasetInfo(

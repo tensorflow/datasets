@@ -53,11 +53,11 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
     for _ in range(30):
       height = np.random.randint(5, high=10)
       width = np.random.randint(5, high=10)
-      yield self.info.features.encode_example({
+      yield {
           "im":
               np.random.randint(
                   0, 255, size=(height, width, 3), dtype=np.uint8)
-      })
+      }
 
 
 class DatasetInfoTest(tf.test.TestCase):

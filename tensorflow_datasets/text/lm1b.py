@@ -169,6 +169,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       tf.logging.info("generating examples from = %s", filepath)
       with tf.gfile.Open(filepath) as f:
         for line in f:
-          yield self.info.features.encode_example({
+          yield {
               "text": line.strip(),
-          })
+          }
