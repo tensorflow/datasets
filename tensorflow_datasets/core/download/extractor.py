@@ -140,5 +140,5 @@ _EXTRACT_METHODS = {
 
 
 def iter_archive(path, method):
-  """Yields (path_within_archive, file_obj) for archive at path using method."""
+  """Yields (path_in_archive, f_obj) for archive at path using `tfds.download.ExtractMethod`."""  # pylint: disable=line-too-long
   return _EXTRACT_METHODS[method](path)

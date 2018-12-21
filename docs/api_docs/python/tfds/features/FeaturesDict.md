@@ -24,7 +24,7 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
-Main feature connector orchestrator.
+Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
 The encode/decode method of the spec feature will recursively encode/decode
 every sub-connector given on the constructor.
@@ -46,10 +46,10 @@ At generation time:
 
 ```
 for image, label in generate_examples:
-  yield self.info.features.encode_example({
+  yield {
       'input': image,
       'output': label
-  })
+  }
 ```
 
 At tf.data.Dataset() time:

@@ -17,6 +17,8 @@ upper_tabs:
         path: /datasets/overview
       - title: Datasets
         path: /datasets/datasets
+      - title: Splits
+        path: /datasets/splits
       - title: Add a dataset
         path: /datasets/add_dataset
     - name: API

@@ -24,12 +24,7 @@ import collections
 
 
 class Version(collections.namedtuple("Version", ["major", "minor", "patch"])):
-  """Structure representing a version.
-
-  In addition, Version has special values:
-   * LATEST: Always use the code version (ignore data dir even if data exists)
-
-  """
+  """Dataset version MAJOR.MINOR.PATCH."""
 
   LATEST = "latest"
 

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""tensorflow_datasets.core."""
+"""API to define datasets."""
 
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder

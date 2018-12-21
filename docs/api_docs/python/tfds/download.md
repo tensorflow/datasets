@@ -9,11 +9,19 @@
 
 Defined in [`core/download/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/__init__.py).
 
-Public API of the download manager.
+<a href="../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a> API.
 
 ## Classes
 
 [`class DownloadManager`](../tfds/download/DownloadManager.md): Manages the download and extraction of files, as well as caching.
 
-[`class GenerateMode`](../tfds/download/GenerateMode.md): Enum for the different version conflict resolution modes.
+[`class GenerateMode`](../tfds/download/GenerateMode.md): `Enum` for how to treat pre-existing downloads and data.
+
+[`class Resource`](../tfds/download/Resource.md): Represents a resource to download, extract, or both.
+
+[`class ExtractMethod`](../tfds/download/ExtractMethod.md): The extraction method to use to pre-process a downloaded file.
+
+## Functions
+
+[`iter_archive(...)`](../tfds/download/iter_archive.md): Yields (path_in_archive, f_obj) for archive at path using <a href="../tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>.
 

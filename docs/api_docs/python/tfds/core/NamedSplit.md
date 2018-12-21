@@ -18,7 +18,7 @@
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
-Descriptor corresponding to a named split (train, test,...).
+Descriptor corresponding to a named split (train, test, ...).
 
 Each descriptor can be composed with other using addition or slice. Ex:
 
@@ -95,7 +95,7 @@ Divides this split into subsplits.
 
 There are 3 ways to define subsplits, which correspond to the 3
 arguments `k` (get `k` even subsplits), `percent` (get a slice of the
-dataset with <a href="../../tfds.md#percent"><code>tfds.percent</code></a>), and `weighted` (get subsplits with proportions
+dataset with <a href="../../tfds/percent.md"><code>tfds.percent</code></a>), and `weighted` (get subsplits with proportions
 specified by `weighted`).
 
 Examples:

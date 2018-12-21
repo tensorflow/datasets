@@ -1,0 +1,82 @@
+# Splits
+
+All `DatasetBuilder`s expose various data subsets defined as
+[`tfds.Split`s](api_docs/python/tfds/Split.md)
+(typically `tfds.Split.TRAIN` and `tfds.Split.TEST`). A given dataset's
+splits are defined in
+[`tfds.DatasetBuilder.info.splits`](api_docs/python/tfds/core/DatasetBuilder.md#info)
+and are accessible through
+[`tfds.load`](api_docs/python/tfds/load.md)
+and
+[`tfds.DatasetBuilder.as_dataset`](api_docs/python/tfds/core/DatasetBuilder.md#as_dataset),
+both of which take `split=` as a keyword argument.
+
+`tfds` enables you to further manipulate splits by combining them or
+subsplitting them up. The resulting splits can be passed to `tfds.load` or
+`tfds.DatasetBuilder.as_dataset`.
+
+## Add splits together
+
+```
+combined_split = `tfds.Split.TRAIN` + `tfds.Split.TEST`
+
+dataset = tfds.load("mnist", split=combined_split)
+```
+
+## Subsplit
+
+You have 3 options for how to get a thinner slice of the data than the
+base splits, all based on `tfds.Split.subsplit`.
+
+### Specify number of subsplits
+
+```
+train_half_1, train_half_2 = tfds.Split.TRAIN.subsplit(2)
+
+dataset = tfds.load("mnist", split=train_half_1)
+```
+
+### Specify a percentage slice
+
+```
+first_10_percent = tfds.Split.TRAIN.subsplit(tfds.percent[:10])
+last_2_percent = tfds.Split.TRAIN.subsplit(tfds.percent[-2:])
+middle_50_percent = tfds.Split.TRAIN.subsplit(tfds.percent[25:75])
+
+dataset = tfds.load("mnist", split=middle_50_percent)
+```
+
+### Specify a weighting
+
+```
+half, quarter1, quarter2 = tfds.Split.TRAIN.subsplit([2, 1, 1])
+
+dataset = tfds.load("mnist", split=half)
+```
+
+## Composing split adding and subsplitting
+
+It's possible to compose the above operations:
+
+```
+# Half of the TRAIN split plus the TEST split
+split = tfds.Split.TRAIN.subsplit(tfds.percent[:50]) + tfds.Split.TEST
+
+# Split the combined TRAIN and TEST splits into 2
+first_half, second_half = (tfds.Split.TRAIN + tfds.Split.TEST).subsplit(2)
+```
+
+Note that a split cannot be added twice, and subsplitting can only happen once.
+For example, these are invalid:
+
+```
+# INVALID! TRAIN included twice
+split = tfds.Split.TRAIN.subsplit(tfds.percent[:25]) + tfds.Split.TRAIN
+
+# INVALID! Subsplit of subsplit
+split = tfds.Split.TRAIN.subsplit(tfds.percent[0:25]).subsplit(2)
+
+# INVALID! Subsplit of subsplit
+split = (tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
+         tfds.Split.TEST).subsplit(tfds.percent[0:50])
+```

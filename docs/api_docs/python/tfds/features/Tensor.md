@@ -23,7 +23,7 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
-Feature encoding a tf.Tensor value (both fixed and variable).
+`FeatureConnector` for generic data of arbitrary shape and type.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

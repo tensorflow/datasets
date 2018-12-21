@@ -18,10 +18,7 @@
 
 Defined in [`core/utils/version.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py).
 
-Structure representing a version.
-
-In addition, Version has special values:
- * LATEST: Always use the code version (ignore data dir even if data exists)
+Dataset version MAJOR.MINOR.PATCH.
 
 <h2 id="__new__"><code>__new__</code></h2>
 

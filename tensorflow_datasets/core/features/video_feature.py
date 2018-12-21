@@ -29,7 +29,7 @@ from tensorflow_datasets.core.features import sequence_feature
 
 
 class Video(feature.FeatureConnector):
-  """Feature which encode/decode a video.
+  """`FeatureConnector` for videos, png-encoding frames on disk.
 
   Video: The image connector accepts as input:
     * uint8 array representing an video.

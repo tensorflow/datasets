@@ -7,7 +7,6 @@ then this document is for you.
 
 *   [Overview](#overview)
 *   [Writing my_dataset.py](#writing-my-datasetpy)
-*   [Testing MyDataset](#testing-mydataset)
 *   [Specifying DatasetInfo](#specifying-datasetinfo)
 *   [Downloading / extracting the dataset](#downloading-extracting-the-dataset)
     *   [Manual download / extraction](#manual-download-extraction)
@@ -18,6 +17,7 @@ then this document is for you.
 *   [Create your own FeatureConnector](#create-your-own-featureconnector)
 *   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
+*   [Testing MyDataset](#testing-mydataset)
 
 ## Overview
 
@@ -35,20 +35,24 @@ The first time a dataset is used, the dataset is downloaded and prepared and
 pre-processed files are generated. The following times it is being used, the
 dataset is loaded from the pre-prepared data directly.
 
+**Note**: Currently we do not support datasets that take longer than 1 day to
+generate on a single machine. See the
+[section below](#large-datasets-and-distributed-generation).
+
 ## Writing `my_dataset.py`
 
 To add support for a dataset, you must write its "Builder" class, subclass of
-[`tfds.core.DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py),
+[`tfds.core.DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetBuilder.md)
 and implement the following methods:
 
 -   `_info`, to build the
-    [`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py)
+    [`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetInfo.md)
     describing the dataset.
 -   `_download_and_prepare`, to download and serialize the source data to disk;
 -   `_as_dataset`, to produce a `tf.data.Dataset` from the serialized data.
 
 As a convenience,
-[`tfds.core.GeneratorBasedBuilder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py)
+[`tfds.core.GeneratorBasedBuilder`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/GeneratorBasedBuilder.md)
 is a subclass of `tfds.core.DatasetBuilder` that simplifies defining a dataset
 and that works well for most datasets that can be generated on a single machine.
 Instead of `_download_and_prepare` and `_as_dataset`, its subclasses must
@@ -81,56 +85,14 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 ```
 
 Before implementing the methods, we recommend to add a test which can help you
-iterate faster.
-
-## Testing MyDataset
-
-`dataset_builder_testing.TestCase` is a base `TestCase` to fully exercise a
-dataset. It needs a "fake example" of the source dataset, to be used as testing
-data.
-
-The "fake example", to be stored in
-[`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/)
-under the `my_dataset` directory and should mimic the source dataset artifacts
-as downloaded and extracted. It can be created manually or automatically with a
-script ([example
-script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
-
-Make sure to use different data in your fake example splits, as the test will
-fail if your dataset splits overlap.
-
-**The fake example should not contain any copyrighted material**. If in doubt,
-do not create the example using material from the original dataset.
-
-```python
-import tensorflow as tf
-from tensorflow_datasets import my_dataset
-from tensorflow_datasets.testing import dataset_builder_testing
-
-
-class MyDatasetTest(dataset_builder_testing.TestCase):
-  DATASET_CLASS = my_dataset.MyDataset
-  SPLITS = {  # Expected number of examples on each split from fake example.
-      "train": 12,
-      "test": 12,
-  }
-  # If dataset `download_and_extract` more than one resource:
-  DL_EXTRACT_RESULT = {
-      "name1": "path/to/file1",  # Relative to fake_examples/my_dataset dir.
-      "name2": "file2",
-  }
-
-if __name__ == "__main__":
-  dataset_builder_testing.main()
-```
-
-Run the test as you proceed to implement `MyDataset`. By the end of this page,
-it should pass.
+iterate faster. If you'd like to follow a test-driven development workflow,
+jump to the [testing instructions](#testing-mydataset) below, add the test,
+and then return here.
 
 ## Specifying `DatasetInfo`
 
 The
-[`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py)
+[`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetInfo.md)
 stores the information we know about a dataset. For now, let's add what features
 are part of the dataset and their types. For example:
 
@@ -165,25 +127,30 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 ```
 
 The features are what defines the shape of the loaded data. Have a look at the
-[features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
+[features package](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features.md)
 for a complete list of available features and their description.
 
-TODO(pierrot): link to python api doc, list a few important features
-
-Run the test, `test_info` should now pass.
+If you've implemented the test harness, `test_info` should now pass.
 
 ## Downloading / extracting the dataset
 
 Most dataset builders need to download some data from the web. All downloads and
-extractions must go through the `DownloadManager`. `DownloadManager` currently
+extractions must go through the
+[`tfds.download.DownloadManager`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/download/DownloadManager.md).
+`DownloadManager` currently
 supports extracting `.zip`, `.gz`, and `.tar` files.
 
-For example, one can do both download and extraction by doing:
+For example, one can do both download and extraction with
+`download_and_extract`:
 
 ```python
 def _split_generators(self, dl_manager):
-  # Equivalent to dl_manager.extract(dl_manager.download(url))
-  foo_dir = dl_manager.download_and_extract('https://example.com/foo.zip')
+  # Equivalent to dl_manager.extract(dl_manager.download(urls))
+  dl_paths = dl_manager.download_and_extract({
+      'foo': 'https://example.com/foo.zip',
+      'bar': 'https://example.com/bar.zip',
+  })
+  dl_paths['foo'], dl_paths['bar']
 ```
 
 ### Manual download / extraction
@@ -193,6 +160,8 @@ example, if there are no APIs and it needs a username/password), you can use
 `path = dl_manager.manual_dir`. The user will need to manually download and
 extract the source data into the `manual_dir` of this dataset (by default:
 `~/tensorflow_datasets/manual/my_dataset`).
+
+TODO(tfds): Add support for specifying checksums for manual_dir datasets.
 
 ## Specifying how the data should be split
 
@@ -224,8 +193,8 @@ Use the `SplitGenerator` to describe how each split should be generated. The
 `gen_kwargs` argument is what will be passed to the method writing the TF
 `tf.train.Example` to be serialized and written to disk.
 
-Warning: When specifying the number of shards, make sure that no shard is bigger
-than 4 Gib as shards will be loaded entirelly in memory during shuffling.
+Note: When specifying the number of shards, make sure that no shard is bigger
+than 4 GiB as shards will be loaded entirely in memory for shuffling.
 
 ## Reading downloaded data and generating serialized dataset
 
@@ -257,9 +226,9 @@ def _generate_examples(self, images_dir_path, labels=None):
 These dictionaries will be encoded by `self.info.features.encode_example`, which
 uses the feature definitions from `DatasetInfo` to encode the features passed
 here into a `tf.train.Example`. In this case, the `ImageFeature` will encode the
-jpeg content into the tf-record file automatically.
+jpeg content into the TFRecord file automatically.
 
-At this point, your builder test should pass.
+If you've implemented the test harness, your builder test should now pass.
 
 ### File access and `tf.gfile`
 
@@ -302,7 +271,12 @@ variables.
 
 # Create your own `FeatureConnector`
 
-`FeatureConnector`s in `DatasetInfo` correspond to the elements returned in the
+Note that most datasets will find the [current set of
+`tfds.features.FeatureConnector`s](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features.md)
+sufficient, but sometimes a new one may need to be defined.
+
+[`tfds.features.FeatureConnector`s](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features/FeatureConnector.md)
+in `DatasetInfo` correspond to the elements returned in the
 `tf.data.Dataset` object. For instance, with:
 
 ```
@@ -358,21 +332,22 @@ and implement the abstract methods.
 
 2.  If your connector is a container of multiple sub-features, the easiest way
     is to inherit from `tfds.features.FeaturesDict` and use the `super()`
-    methods to automatically encode/decode the sub-connectors. See
-    `tfds.features.OneOf` as example.
+    methods to automatically encode/decode the sub-connectors.
 
 Have a look at the doc of `tfds.features.FeatureConnector` for more details and
 the
-[features package](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/)
+[features package](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features.md)
 for more examples.
 
 ## Adding the dataset to `tensorflow/datasets`
 
-Thanks for making the dataset accessible to the community! Before you send your
-pull request, make sure your dataset's module is imported and that the metadata
-files are copied in.
+If you'd like to share your work with the community, you can check in your
+dataset implementation to `tensorflow/datasets`. Thanks for thinking of
+contributing!
 
-### Import for Registration
+Before you send your pull request, follow these last few steps:
+
+### 1. Add an import for registration
 
 All subclasses of `tfds.core.DatasetBuilder` are automatically registered
 when their module is imported such that they can be accessed through
@@ -381,7 +356,7 @@ when their module is imported such that they can be accessed through
 If you're contributing the dataset to `tensorflow/datasets`, add the module
 import to `tensorflow_datasets/__init__.py`.
 
-### Package `DatasetInfo` and metadata files
+### 2. Package `DatasetInfo` and metadata files
 
 All datasets that ship with `tensorflow-datasets` have their
 `dataset_info.json` and metadata files packaged in so that users can access
@@ -391,8 +366,58 @@ Run [`tensorflow_datasets/scripts/download_and_prepare`](https://github.com/tens
 to generate the dataset and then copy in the `dataset_info.json` and other
 metadata files to [`tensorflow_datasets/dataset_info`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/dataset_info/).
 
+### 3. Add a test
+
+See the [testing section](#testing-mydataset) below.
 
 ## Large datasets and distributed generation
 
 Some datasets are so large as to require multiple machines to download and
-generate. We intend to soon support this use case using Apache Beam. Stay tuned.
+generate. We intend to soon support this use case using Apache Beam. Follow
+[our tracking issue](https://github.com/tensorflow/datasets/issues/10)
+to be updated.
+
+
+## Testing MyDataset
+
+`dataset_builder_testing.TestCase` is a base `TestCase` to fully exercise a
+dataset. It needs a "fake example" of the source dataset, to be used as testing
+data.
+
+The "fake example", to be stored in
+[`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/)
+under the `my_dataset` directory and should mimic the source dataset artifacts
+as downloaded and extracted. It can be created manually or automatically with a
+script ([example
+script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
+
+Make sure to use different data in your fake example splits, as the test will
+fail if your dataset splits overlap.
+
+**The fake example should not contain any copyrighted material**. If in doubt,
+do not create the example using material from the original dataset.
+
+```python
+import tensorflow as tf
+from tensorflow_datasets import my_dataset
+from tensorflow_datasets.testing import dataset_builder_testing
+
+
+class MyDatasetTest(dataset_builder_testing.TestCase):
+  DATASET_CLASS = my_dataset.MyDataset
+  SPLITS = {  # Expected number of examples on each split from fake example.
+      "train": 12,
+      "test": 12,
+  }
+  # If dataset `download_and_extract` more than one resource:
+  DL_EXTRACT_RESULT = {
+      "name1": "path/to/file1",  # Relative to fake_examples/my_dataset dir.
+      "name2": "file2",
+  }
+
+if __name__ == "__main__":
+  dataset_builder_testing.main()
+```
+
+You can run the test as you proceed to implement `MyDataset`.
+If you go through all the steps above, it should pass.

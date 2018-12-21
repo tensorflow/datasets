@@ -17,13 +17,13 @@
 
 ## Class `Video`
 
-Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
+Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
 
-Feature which encode/decode a video.
+`FeatureConnector` for videos, png-encoding frames on disk.
 
 Video: The image connector accepts as input:
   * uint8 array representing an video.
@@ -38,9 +38,9 @@ Example:
     })
 
   * During generation:
-    yield self.info.features.encode_example({
+    yield {
         'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
-    })
+    }
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -86,7 +86,7 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
-See base class for details.
+
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -94,7 +94,7 @@ See base class for details.
 encode_example(example_data)
 ```
 
-See base class for details.
+
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
@@ -102,34 +102,7 @@ See base class for details.
 get_serialized_info()
 ```
 
-Return the tf-example features for the adapter, as stored on disk.
 
-This function indicates how this feature is encoded on file internally.
-The DatasetBuilder are written on disk as tf.train.Example proto.
-
-Ex:
-
-```
-return {
-    'image': tf.VarLenFeature(tf.uint8):
-    'height': tf.FixedLenFeature((), tf.int32),
-    'width': tf.FixedLenFeature((), tf.int32),
-}
-```
-
-FeatureConnector which are not containers should return the feature proto
-directly:
-
-```
-return tf.FixedLenFeature((64, 64), tf.uint8)
-```
-
-If not defined, the retuned values are automatically deduced from the
-`get_tensor_info` function.
-
-#### Returns:
-
-* <b>`features`</b>: Either a dict of feature proto object, or a feature proto object
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
@@ -137,7 +110,7 @@ If not defined, the retuned values are automatically deduced from the
 get_tensor_info()
 ```
 
-See base class for details.
+
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 

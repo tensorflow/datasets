@@ -12,7 +12,6 @@ tfds.load(
     data_dir=None,
     batch_size=1,
     download=True,
-    as_numpy=False,
     as_supervised=False,
     with_info=False,
     builder_kwargs=None,
@@ -25,7 +24,10 @@ tfds.load(
 
 Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
 
-Loads the given <a href="../tfds/Split.md"><code>tfds.Split</code></a> as a `tf.data.Dataset`.
+Loads the named dataset into a `tf.data.Dataset`.
+
+If `split=None` (the default), returns all splits for the dataset. Otherwise,
+returns the specified split.
 
 `load` is a convenience method that fetches the <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by
 string name, optionally calls `DatasetBuilder.download_and_prepare`
@@ -43,10 +45,13 @@ if with_info:
 return ds
 ```
 
+If you'd like NumPy arrays instead of `tf.data.Dataset`s or `tf.Tensor`s,
+you can pass the return value to <a href="../tfds/dataset_as_numpy.md"><code>tfds.dataset_as_numpy</code></a>.
+
 Callers must pass arguments as keyword arguments.
 
 **Warning**: calling this function might potentially trigger the download
-of hundreds of GiB to disk. Refer to download argument.
+of hundreds of GiB to disk. Refer to the `download` argument.
 
 #### Args:
 
@@ -59,23 +64,19 @@ of hundreds of GiB to disk. Refer to download argument.
     (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
     use the `"zoo"` config and pass to the builder keyword arguments `a=True`
     and `b=3`).
-* <b>`split`</b>: <a href="../tfds/Split.md"><code>tfds.Split</code></a>, which split of the data to load. If None, will return
-    all a `dict` with all splits (typically <a href="../tfds/Split.md#TRAIN"><code>tfds.Split.TRAIN</code></a> and
+* <b>`split`</b>: <a href="../tfds/Split.md"><code>tfds.Split</code></a> or `str`, which split of the data to load. If None,
+    will return a `dict` with all splits (typically <a href="../tfds/Split.md#TRAIN"><code>tfds.Split.TRAIN</code></a> and
     <a href="../tfds/Split.md#TEST"><code>tfds.Split.TEST</code></a>).
 * <b>`data_dir`</b>: `str` (optional), directory to read/write data.
     Defaults to "~/tensorflow_datasets".
 * <b>`batch_size`</b>: `int`, set to > 1 to get batches of examples. Note that
     variable length features will be 0-padded. If
-    `batch_size=-1`, will return the full dataset (in either `tf.Tensor`s or
-    NumPy arrays if `as_numpy=True`).
+    `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
 * <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
     expected to be in `data_dir`. If `True` and the data is already in
     `data_dir`, `download_and_prepare` is a no-op.
-    Defaults to `True`.
-* <b>`as_numpy`</b>: `bool`, whether to return a generator of NumPy array batches
-    using <a href="../tfds/core/DatasetBuilder.md#as_numpy"><code>tfds.core.DatasetBuilder.as_numpy</code></a>.
 * <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default,
@@ -99,9 +100,8 @@ of hundreds of GiB to disk. Refer to download argument.
 #### Returns:
 
 * <b>`ds`</b>: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
-    `dict<key: tfds.Split, value: tfds.data.Dataset>`. If `as_numpy=True`,
-    these will be iterables of NumPy arrays. If `batch_size=-1`,
-    these will be full datasets in either `tf.Tensor`s or NumPy arrays.
-* <b>`ds_info`</b>: <a href="../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>, if `with_info` is True, then tfds.load
-    will return a tuple (ds, ds_info) containing the dataset info (version,
-    features, splits, num_examples,...).
+    `dict<key: tfds.Split, value: tfds.data.Dataset>`. If `batch_size=-1`,
+    these will be full datasets as `tf.Tensor`s.
+* <b>`ds_info`</b>: <a href="../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>, if `with_info` is True, then <a href="../tfds/load.md"><code>tfds.load</code></a>
+    will return a tuple `(ds, ds_info)` containing dataset information
+    (version, features, splits, num_examples,...).

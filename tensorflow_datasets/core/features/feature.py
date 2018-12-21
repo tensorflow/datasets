@@ -66,14 +66,12 @@ and implement the abstract methods.
 
 2. If your connector is a container of multiple sub-connectors, the easiest
    way is to inherit from features.FeaturesDict and use the super() methods to
-   automatically encode/decode the sub-connectors. See features.OneOf as
-   example.
+   automatically encode/decode the sub-connectors.
 
 This file contains the following FeatureConnector:
  * FeatureConnector: The abstract base class defining the interface
  * FeaturesDict: Container of FeatureConnector
  * Tensor: Simple tensor value with static or dynamic shape
- * OneOf: Choose one between multiple sub-connector at runtime
 
 """
 
@@ -98,7 +96,7 @@ TensorInfo = collections.namedtuple('TensorInfo', ['shape', 'dtype'])
 
 @six.add_metaclass(abc.ABCMeta)
 class FeatureConnector(object):
-  """Feature connector class.
+  """Abstract base class for feature types.
 
   This class provides an interface between the way the information is stored
   on disk, and the way it is presented to the user.
@@ -328,7 +326,7 @@ class FeatureConnector(object):
 
 
 class FeaturesDict(FeatureConnector):
-  """Main feature connector orchestrator.
+  """Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
   The encode/decode method of the spec feature will recursively encode/decode
   every sub-connector given on the constructor.
@@ -505,11 +503,11 @@ class FeaturesDict(FeatureConnector):
 
 
 class Tensor(FeatureConnector):
-  """Feature encoding a tf.Tensor value (both fixed and variable)."""
+  """`FeatureConnector` for generic data of arbitrary shape and type."""
   # TODO(epot): For variable length feature, will probably have to include the
   # shape in the spec, as it seems tf-example lose the shape by flattening the
   # value
-  # TODO(epot): Call tf.compat.as_text for string data. Add unittests for str.
+  # TODO(epot): Call tf.compat.as_bytes for string data. Add unittests for str.
 
   @api_utils.disallow_positional_args
   def __init__(self, shape, dtype):
@@ -553,82 +551,6 @@ class Tensor(FeatureConnector):
     if tfexample_data.dtype != self.dtype:
       tfexample_data = tf.dtypes.cast(tfexample_data, self.dtype)
     return tfexample_data
-
-
-class OneOf(FeaturesDict):
-  """Feature which encodes multiple features, but decodes only one at runtime.
-
-  This avoids having duplicate files for every version of your dataset. You
-  can just encode everything on disk in a single dataset, and choose which
-  output you want for the tf.data.Dataset at decode time.
-
-  Example:
-
-  ```
-  features = tfds.features.FeaturesDict({
-      'labels': features.OneOf('coco', {
-          'coco': tf.string,
-          'cifar10': tf.string,
-      }),
-  })
-  ```
-
-  At generation time, encode both coco and cifar labels:
-
-  ```
-  for example in generate_examples:
-    yield {
-        'labels': {
-            'coco': 'person',
-            'cifar10': 'airplane',
-        },
-    }
-  ```
-
-  At tf.data.Dataset() time, only the label from coco is decoded:
-
-  ```
-  for example in tfds.load(...):
-    tf_label = example['labels']  # == 'person'
-  ```
-
-  """
-
-  def __init__(self, choice, feature_dict):
-    """Create the features for the container.
-
-    Args:
-      choice (str): The key of the spec to decode.
-      feature_dict (dict): Dictionary containing the sub fields. The choice
-        should match one of the key.
-
-    Raises:
-      ValueError: If the choice is invalid.
-    """
-    if choice not in feature_dict:
-      raise ValueError(
-          'Field {} selected not found in the features.'.format(choice))
-
-    super(OneOf, self).__init__(feature_dict)
-    self._choice = choice
-
-  def __getattr__(self, key):
-    """Access choice attribute."""
-    return getattr(self._feature_dict[self._choice], key)
-
-  def get_tensor_info(self):
-    """See base class for details."""
-    # Overwrite FeaturesDict.get_tensor_info() to only select the
-    # shape/dtype/tensor_info of the choice
-    return self._feature_dict[self._choice].get_tensor_info()
-
-  def decode_example(self, tfexample_dict):
-    """See base class for details."""
-    return decode_single_feature_from_dict(
-        feature_k=self._choice,
-        feature=self._feature_dict[self._choice],
-        tfexample_dict=tfexample_dict,
-    )
 
 
 def to_serialized_field(tensor_info):

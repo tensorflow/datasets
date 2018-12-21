@@ -27,7 +27,7 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 Defined in [`core/features/class_label_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/class_label_feature.py).
 
-Feature encoding an integer class label.
+`FeatureConnector` for integer class labels.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

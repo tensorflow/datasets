@@ -8,7 +8,7 @@
 ``` python
 tfds.builder(
     name,
-    **ctor_kwargs
+    **builder_init_kwargs
 )
 ```
 
@@ -29,8 +29,9 @@ Fetches a <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilde
     (for builders with configs, it would be `"foo_bar/zoo/a=True,b=3"` to
     use the `"zoo"` config and pass to the builder keyword arguments `a=True`
     and `b=3`).
-* <b>`**ctor_kwargs`</b>: `dict` of keyword arguments passed to the `DatasetBuilder`.
-    These will override keyword arguments passed in `name`, if any.
+* <b>`**builder_init_kwargs`</b>: `dict` of keyword arguments passed to the
+    `DatasetBuilder`. These will override keyword arguments passed in `name`,
+    if any.
 
 
 #### Returns:
@@ -40,4 +41,4 @@ A <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code>
 
 #### Raises:
 
-* <b>`ValueError`</b>: if `name` is unrecognized.
+* <b>`DatasetNotFoundError`</b>: if `name` is unrecognized.

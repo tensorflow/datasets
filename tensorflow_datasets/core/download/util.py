@@ -32,22 +32,23 @@ import tensorflow as tf
 
 
 class GenerateMode(enum.Enum):
-  """Enum for the different version conflict resolution modes."""
+  """`Enum` for how to treat pre-existing downloads and data.
 
-  # The generations modes:
-  #                          |     Cache     |    Dataset
-  # -----------------------------------------------
-  # Reuse dataset if exists  |     Reuse     |     Reuse
-  # Reuse cache if exists    |     Reuse     |  New version
-  # Force Re-Download        |  Re-download  |  New version
+  The default mode is `REUSE_DATASET_IF_EXISTS`, which will reuse both
+  raw downloads and the prepared dataset if they exist.
 
-  # Generate a new version of the dataset from scratch (download included)
-  FORCE_REDOWNLOAD = 'force_redownload'
-  # Generate a new version of the dataset, but reuse cached downloads if
-  # they exists
-  REUSE_CACHE_IF_EXISTS = 'reuse_cache_if_exists'
-  # Do nothing if the dataset already exists (default mode)
+  The generations modes:
+
+  |                                    | Downloads | Dataset |
+  | -----------------------------------|-----------|---------|
+  | `REUSE_DATASET_IF_EXISTS` (default)| Reuse     | Reuse   |
+  | `REUSE_CACHE_IF_EXISTS`            | Reuse     | Fresh   |
+  | `FORCE_REDOWNLOAD`                 | Fresh     | Fresh   |
+  """
+
   REUSE_DATASET_IF_EXISTS = 'reuse_dataset_if_exists'
+  REUSE_CACHE_IF_EXISTS = 'reuse_cache_if_exists'
+  FORCE_REDOWNLOAD = 'force_redownload'
 
 
 # TODO(epot): Move some of those functions into core.py_utils

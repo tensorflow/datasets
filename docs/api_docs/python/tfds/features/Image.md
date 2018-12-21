@@ -25,7 +25,7 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 Defined in [`core/features/image_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py).
 
-Feature which encode/decode an image.
+`FeatureConnector` for images.
 
 Input: The image connector accepts as input:
   * path to a {bmp,gif,jpeg,png} image.
@@ -45,10 +45,10 @@ Example:
     })
 
   * During generation:
-    yield self.info.features.encode_example({
+    yield {
         'input': 'path/to/img.jpg',
         'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
-    })
+    }
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -110,7 +110,7 @@ Reconstruct the image from the tf example.
 <h3 id="encode_example"><code>encode_example</code></h3>
 
 ``` python
-encode_example(image_or_path)
+encode_example(image_or_path_or_fobj)
 ```
 
 Convert the given image into a dict convertible to tf example.

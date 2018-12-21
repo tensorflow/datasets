@@ -173,53 +173,6 @@ class FeatureDictTest(test_utils.FeatureExpectationsTestCase):
     self.assertEqual(fdict['string'].dtype, tf.string)
 
 
-class OneOfTest(test_utils.FeatureExpectationsTestCase):
-
-  @property
-  def expectations(self):
-
-    return [
-        test_utils.FeatureExpectation(
-            name='oneof',
-            feature=features_lib.OneOf(
-                choice='choice2',
-                feature_dict={
-                    'choice1': tf.float32,
-                    'choice2': AnInputConnector(),
-                },
-            ),
-            # All choices are present in the serialized feature
-            serialized_info={
-                'choice1': tf.FixedLenFeature(shape=(), dtype=tf.float32),
-                'choice2/a': tf.FixedLenFeature(shape=(), dtype=tf.int64),
-                'choice2/b': tf.FixedLenFeature(shape=(), dtype=tf.int64),
-            },
-            # choice2 selected so dtype == AnInputConnector().dtype
-            dtype=tf.int64,
-            # choice2 selected so shape == AnInputConnector().shape
-            shape=(),
-            tests=[
-                # Np array
-                test_utils.FeatureExpectationItem(
-                    value={
-                        'choice1': 0.0,
-                        'choice2': 1,
-                    },
-                    # All choices are serialized
-                    expected_serialized={
-                        'choice1': 0.0,
-                        'choice2/a': 2,  # 1 + 1
-                        'choice2/b': 10,  # 1 * 10
-                    },
-                    # Only choice 2 is decoded.
-                    # a = 1 + 1, b = 1 * 10 => output = a + b = 2 + 10 = 12
-                    expected=12,
-                ),
-            ],
-        ),
-    ]
-
-
 class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
 
   @property

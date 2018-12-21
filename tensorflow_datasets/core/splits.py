@@ -33,7 +33,7 @@ from tensorflow_datasets.core import utils
 
 @utils.as_proto_cls(proto.SplitInfo)
 class SplitInfo(object):
-  """Similar structure as `proto.SplitInfo` but with additional property."""
+  """Wraps `proto.SplitInfo` with an additional property."""
 
   @property
   def num_examples(self):
@@ -205,11 +205,15 @@ class _SplitDescriptorNode(object):
       raise ValueError("Could not determine the split")
 
 
-class PercentSlice(object):
-  """Syntactic sugar to easily select subsplit using tfds.percent[75:-5]."""
+# 2 requirements:
+# 1. tfds.percent be sliceable
+# 2. tfds.percent be documented
+#
+# Instances are not documented, so we want tfds.percent to be a class, but to
+# have it be sliceable, we need this metaclass.
+class PercentSliceMeta(type):
 
-  def __getitem__(self, slice_value):
-    """tfds.percent[:-30]."""
+  def __getitem__(cls, slice_value):
     if not isinstance(slice_value, slice):
       raise ValueError(
           "tfds.percent should only be called with slice, not {}".format(
@@ -217,7 +221,20 @@ class PercentSlice(object):
     return slice_value
 
 
-percent = PercentSlice()
+@six.add_metaclass(PercentSliceMeta)
+class PercentSlice(object):
+  # pylint: disable=line-too-long
+  """Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
+
+  See the
+  [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+  for more information.
+  """
+  # pylint: enable=line-too-long
+  pass
+
+
+percent = PercentSlice  # pylint: disable=invalid-name
 
 
 class _SplitMerged(_SplitDescriptorNode):
@@ -245,7 +262,7 @@ class _SubSplit(_SplitDescriptorNode):
 
 
 class NamedSplit(_SplitDescriptorNode):
-  """Descriptor corresponding to a named split (train, test,...).
+  """Descriptor corresponding to a named split (train, test, ...).
 
   Each descriptor can be composed with other using addition or slice. Ex:
 
@@ -313,6 +330,7 @@ class NamedSplitAll(NamedSplit):
 
 
 class Split(object):
+  # pylint: disable=line-too-long
   """`Enum` for dataset splits.
 
   Datasets are typically split into different subsets to be used at various
@@ -324,9 +342,14 @@ class Split(object):
     model architecture, etc.).
   * `TEST`: the testing data. This is the data to report metrics on. Typically
     you do not want to use this during model iteration as you may overfit to it.
-  * `ALL`: Special value corresponding to all existing split of a dataset
+  * `ALL`: Special value corresponding to all existing splits of a dataset
     merged together
+
+  See the
+  [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+  for more information.
   """
+  # pylint: enable=line-too-long
   TRAIN = NamedSplit("train")
   TEST = NamedSplit("test")
   VALIDATION = NamedSplit("validation")
@@ -447,26 +470,27 @@ class SplitDict(utils.NonMutableDict):
 
 
 class SplitGenerator(object):
-  """Defines the split info for the generator.
+  """Defines the split information for the generator.
 
   This should be used as returned value of
   `GeneratorBasedBuilder._split_generators`.
   See `GeneratorBasedBuilder._split_generators` for more info and example
   of usage.
-
-  Args:
-    name (str/list[str]): Name of the Split for which the generator will create
-      the examples. If a list is given, the generator examples will be
-      distributed among the splits proportionally to the num_shards
-    num_shards (int/list[int]): Number of shards between which the generated
-      examples will be written. If name is a list, then num_shards should be a
-      list with the same number of element.
-    gen_kwargs (dict): Kwargs to forward to the ._generate_examples() of the
-      generator builder
-
   """
 
   def __init__(self, name, num_shards=1, gen_kwargs=None):
+    """Constructs a `SplitGenerator`.
+
+    Args:
+      name: `str` or `list<str>`, name of the Split for which the generator will
+        create the examples. If a list is given, the generator examples will be
+        distributed among the splits proportionally to the num_shards.
+      num_shards: `int` or `list<int>`, number of shards between which the
+        generated examples will be written. If name is a list, then num_shards
+        should be a list with the same number of elements.
+      gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method
+        of the builder.
+    """
     self.gen_kwargs = gen_kwargs or {}
 
     if isinstance(name, list):

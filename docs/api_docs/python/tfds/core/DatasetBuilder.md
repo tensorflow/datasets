@@ -5,7 +5,6 @@
 <meta itemprop="property" content="info"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
-<meta itemprop="property" content="as_numpy"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
 <meta itemprop="property" content="VERSION"/>
@@ -23,19 +22,35 @@
 
 Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
 
-Abstract base class for datasets.
+Abstract base class for all datasets.
 
-Typical usage:
+`DatasetBuilder` has 3 key methods:
+  * `tfds.DatasetBuilder.info`: documents the dataset, including feature
+    names, types, and shapes, version, splits, citation, etc.
+  * `tfds.DatasetBuilder.download_and_prepare`: downloads the source data
+    and writes it to disk.
+  * `tfds.DatasetBuilder.as_dataset`: builds an input pipeline using
+    `tf.data.Dataset`s.
+
+**Configuration**: Some `DatasetBuilder`s expose multiple variants of the
+dataset by defining a <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> subclass and accepting a
+config object (or name) on construction. Configurable datasets expose a
+pre-defined set of configurations in `tfds.DatasetBuilder.builder_configs`.
+
+Typical `DatasetBuilder` usage:
 
 ```python
-mnist_builder = tfds.MNIST(data_dir="~/tfds_data")
+mnist_builder = tfds.builder("mnist")
+mnist_info = mnist_builder.info
 mnist_builder.download_and_prepare()
-train_dataset = mnist_builder.as_dataset(tfds.Split.TRAIN)
+datasets = mnist_builder.as_dataset()
+
+train_dataset, test_dataset = datasets["train"], datasets["test"]
 assert isinstance(train_dataset, tf.data.Dataset)
 
 # And then the rest of your input pipeline
 train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
-train_dataset = train_dataset.prefetch(tf.data.experimental.AUTOTUNE)
+train_dataset = train_dataset.prefetch(2)
 features = train_dataset.make_one_shot_iterator().get_next()
 image, label = features['image'], features['label']
 ```
@@ -49,7 +64,7 @@ __init__(
 )
 ```
 
-Construct a DatasetBuilder.
+Constructs a DatasetBuilder.
 
 Callers must pass arguments as keyword arguments.
 
@@ -67,11 +82,11 @@ Callers must pass arguments as keyword arguments.
 
 <h3 id="builder_config"><code>builder_config</code></h3>
 
-
+<a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> for this builder.
 
 <h3 id="info"><code>info</code></h3>
 
-Return the dataset info object. See `DatasetInfo` for details.
+<a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> for this builder.
 
 
 
@@ -92,19 +107,18 @@ Constructs a `tf.data.Dataset`.
 
 Callers must pass arguments as keyword arguments.
 
-Subclasses must override _as_dataset.
-
 #### Args:
 
-* <b>`split`</b>: <a href="../../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read. If None, returns a
-    dict `<key: tfds.Split, value: tf.data.Dataset>` with all the splits.
+* <b>`split`</b>: <a href="../../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read. If None (default),
+    returns all splits in a dict
+    `<key: tfds.Split, value: tf.data.Dataset>`.
 * <b>`batch_size`</b>: `int`, batch size. Note that variable-length features will
     be 0-padded if `batch_size > 1`. Users that want more custom behavior
     should use `batch_size=1` and use the `tf.data` API to construct a
     custom pipeline. If `batch_size == -1`, will return feature
     dictionaries of the whole dataset with `tf.Tensor`s instead of a
     `tf.data.Dataset`.
-* <b>`shuffle_files`</b>: `bool` (optional), whether to shuffle the input files.
+* <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files.
     Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 * <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
     will have a 2-tuple structure `(input, label)` according to
@@ -121,29 +135,6 @@ tfds.data.Dataset>`.
 If `batch_size` is -1, will return feature dictionaries containing
 the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
 
-<h3 id="as_numpy"><code>as_numpy</code></h3>
-
-``` python
-as_numpy(**as_dataset_kwargs)
-```
-
-Generates batches of NumPy arrays from the given <a href="../../tfds/Split.md"><code>tfds.Split</code></a>.
-
-#### Args:
-
-* <b>`**as_dataset_kwargs`</b>: Keyword arguments passed on to
-    <a href="../../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>.
-
-
-#### Yields:
-
-Feature dictionaries
-`dict<str feature_name, numpy.array feature_val>`, or if `split=None`,
-`dict` from <a href="../../tfds/Split.md"><code>tfds.Split</code></a> to the feature dictionaries.
-
-If `batch_size` is -1, will return a single dictionary containing
-the entire dataset instead of yielding batches.
-
 <h3 id="download_and_prepare"><code>download_and_prepare</code></h3>
 
 ``` python
@@ -158,8 +149,6 @@ download_and_prepare(
 
 Downloads and prepares dataset for reading.
 
-Subclasses must override _download_and_prepare.
-
 #### Args:
 
 * <b>`download_dir`</b>: `str`, directory where downloaded files are stored.
@@ -169,10 +158,11 @@ Subclasses must override _download_and_prepare.
 * <b>`manual_dir`</b>: `str`, read-only directory where manually downloaded/extracted
     data is stored. Defaults to
     "~/tensorflow-datasets/manual/{dataset_name}".
-* <b>`mode`</b>: <a href="../../tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>: Mode to FORCE_REDOWNLOAD,
-    or REUSE_DATASET_IF_EXISTS. Defaults to REUSE_DATASET_IF_EXISTS.
-* <b>`compute_stats`</b>: `boolean` If True, compute statistics over the generated
-    data and write the <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> protobuf to disk.
+* <b>`mode`</b>: <a href="../../tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>, how to deal with downloads or data that already
+    exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will reuse both
+    downloads and data if it already exists.
+* <b>`compute_stats`</b>: `bool`, whether to compute statistics over the generated
+    data.
 
 
 #### Raises:

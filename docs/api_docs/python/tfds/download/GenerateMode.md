@@ -22,7 +22,18 @@
 
 Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py).
 
-Enum for the different version conflict resolution modes.
+`Enum` for how to treat pre-existing downloads and data.
+
+The default mode is `REUSE_DATASET_IF_EXISTS`, which will reuse both
+raw downloads and the prepared dataset if they exist.
+
+The generations modes:
+
+|                                    | Downloads | Dataset |
+| -----------------------------------|-----------|---------|
+| `REUSE_DATASET_IF_EXISTS` (default)| Reuse     | Reuse   |
+| `REUSE_CACHE_IF_EXISTS`            | Reuse     | Fresh   |
+| `FORCE_REDOWNLOAD`                 | Fresh     | Fresh   |
 
 ## Class Members
 

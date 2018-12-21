@@ -28,8 +28,12 @@ stages of training and evaluation.
   model architecture, etc.).
 * `TEST`: the testing data. This is the data to report metrics on. Typically
   you do not want to use this during model iteration as you may overfit to it.
-* `ALL`: Special value corresponding to all existing split of a dataset
+* `ALL`: Special value corresponding to all existing splits of a dataset
   merged together
+
+See the
+[guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+for more information.
 
 ## Class Members
 

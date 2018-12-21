@@ -27,7 +27,7 @@ from tensorflow_datasets.core.features import feature
 
 
 class SequenceDict(feature.FeaturesDict):
-  """Sequence feature.
+  """Composite `FeatureConnector` for a `dict` where each value is a list.
 
   `SequenceDict` correspond to sequence of `tfds.features.FeatureDict`. At
   generation time, a list for each of the sequence element is given. The output

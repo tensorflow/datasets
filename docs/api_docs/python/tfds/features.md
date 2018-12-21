@@ -9,7 +9,7 @@
 
 Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/__init__.py).
 
-Public tfds.features API.
+<a href="../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a> API defining feature types.
 
 ## Modules
 
@@ -17,23 +17,21 @@ Public tfds.features API.
 
 ## Classes
 
-[`class ClassLabel`](../tfds/features/ClassLabel.md): Feature encoding an integer class label.
+[`class ClassLabel`](../tfds/features/ClassLabel.md): `FeatureConnector` for integer class labels.
 
-[`class FeatureConnector`](../tfds/features/FeatureConnector.md): Feature connector class.
+[`class FeatureConnector`](../tfds/features/FeatureConnector.md): Abstract base class for feature types.
 
-[`class FeaturesDict`](../tfds/features/FeaturesDict.md): Main feature connector orchestrator.
+[`class FeaturesDict`](../tfds/features/FeaturesDict.md): Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
-[`class OneOf`](../tfds/features/OneOf.md): Feature which encodes multiple features, but decodes only one at runtime.
-
-[`class Tensor`](../tfds/features/Tensor.md): Feature encoding a tf.Tensor value (both fixed and variable).
+[`class Tensor`](../tfds/features/Tensor.md): `FeatureConnector` for generic data of arbitrary shape and type.
 
 [`class TensorInfo`](../tfds/features/TensorInfo.md): TensorInfo(shape, dtype)
 
-[`class SequenceDict`](../tfds/features/SequenceDict.md): Sequence feature.
+[`class SequenceDict`](../tfds/features/SequenceDict.md): Composite `FeatureConnector` for a `dict` where each value is a list.
 
-[`class Image`](../tfds/features/Image.md): Feature which encode/decode an image.
+[`class Image`](../tfds/features/Image.md): `FeatureConnector` for images.
 
-[`class Text`](../tfds/features/Text.md): Feature which encodes/decodes text, possibly to integers.
+[`class Text`](../tfds/features/Text.md): `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
-[`class Video`](../tfds/features/Video.md): Feature which encode/decode a video.
+[`class Video`](../tfds/features/Video.md): `FeatureConnector` for videos, png-encoding frames on disk.
 

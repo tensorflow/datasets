@@ -122,7 +122,8 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
       # to call `fobj.seekable()`, which Gfile doesn't have. We should find an
       # alternative, as this loads ~150MB in RAM.
       fobj_mem = io.BytesIO(fobj.read())
-      for image_fname, image_fobj in tfds.download.iter_tar(fobj_mem):
+      for image_fname, image_fobj in tfds.download.iter_archive(
+          fobj_mem, tfds.download.ExtractMethod.TAR):
         yield {
             'file_name': image_fname,
             'image': image_fobj,

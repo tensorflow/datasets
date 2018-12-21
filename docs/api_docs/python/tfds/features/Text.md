@@ -14,6 +14,7 @@
 <meta itemprop="property" content="ints2str"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="maybe_build_from_corpus"/>
+<meta itemprop="property" content="maybe_set_encoder"/>
 <meta itemprop="property" content="save_metadata"/>
 <meta itemprop="property" content="str2ints"/>
 </div>
@@ -28,7 +29,7 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 Defined in [`core/features/text_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py).
 
-Feature which encodes/decodes text, possibly to integers.
+`FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -164,6 +165,14 @@ maybe_build_from_corpus(
 ```
 
 Call SubwordTextEncoder.build_from_corpus is encoder_cls is such.
+
+<h3 id="maybe_set_encoder"><code>maybe_set_encoder</code></h3>
+
+``` python
+maybe_set_encoder(new_encoder)
+```
+
+Set encoder, but no-op if encoder is already set.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 

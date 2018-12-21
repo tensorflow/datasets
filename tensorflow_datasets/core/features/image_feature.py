@@ -42,7 +42,7 @@ ACCEPTABLE_CHANNELS = {
 
 
 class Image(feature.FeatureConnector):
-  """Feature which encode/decode an image.
+  """`FeatureConnector` for images.
 
   Input: The image connector accepts as input:
     * path to a {bmp,gif,jpeg,png} image.

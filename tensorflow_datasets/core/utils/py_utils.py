@@ -211,8 +211,9 @@ def as_proto_cls(proto_cls):
         return "<{cls_name}\n{proto_repr}\n>".format(
             cls_name=cls.__name__, proto_repr=repr(self.__proto))
 
-    decorator_cls = type(cls.__name__, (cls, ProtoCls), {})
-    # Class cannot be wraped because __doc__ not overwritable with python2
+    decorator_cls = type(cls.__name__, (cls, ProtoCls), {
+        "__doc__": cls.__doc__,
+    })
     return decorator_cls
   return decorator
 
@@ -242,6 +243,6 @@ class abstractclassmethod(classmethod):  # pylint: disable=invalid-name
 
 
 def get_tfds_path(relative_path):
-  """Returns absolute path to file given path relative to repo root."""
+  """Returns absolute path to file given path relative to tfds root."""
   path = os.path.join(tfds_dir(), relative_path)
   return path

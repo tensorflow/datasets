@@ -46,7 +46,7 @@ REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
 
 
 class BuilderConfig(object):
-  """Base class for data configuration.
+  """Base class for `DatasetBuilder` data configuration.
 
   DatasetBuilder subclasses with data configuration options should subclass
   `BuilderConfig` and add their own properties.
@@ -79,19 +79,35 @@ class BuilderConfig(object):
 
 @six.add_metaclass(registered.RegisteredDataset)
 class DatasetBuilder(object):
-  """Abstract base class for datasets.
+  """Abstract base class for all datasets.
 
-  Typical usage:
+  `DatasetBuilder` has 3 key methods:
+    * `tfds.DatasetBuilder.info`: documents the dataset, including feature
+      names, types, and shapes, version, splits, citation, etc.
+    * `tfds.DatasetBuilder.download_and_prepare`: downloads the source data
+      and writes it to disk.
+    * `tfds.DatasetBuilder.as_dataset`: builds an input pipeline using
+      `tf.data.Dataset`s.
+
+  **Configuration**: Some `DatasetBuilder`s expose multiple variants of the
+  dataset by defining a `tfds.core.BuilderConfig` subclass and accepting a
+  config object (or name) on construction. Configurable datasets expose a
+  pre-defined set of configurations in `tfds.DatasetBuilder.builder_configs`.
+
+  Typical `DatasetBuilder` usage:
 
   ```python
-  mnist_builder = tfds.MNIST(data_dir="~/tfds_data")
+  mnist_builder = tfds.builder("mnist")
+  mnist_info = mnist_builder.info
   mnist_builder.download_and_prepare()
-  train_dataset = mnist_builder.as_dataset(tfds.Split.TRAIN)
+  datasets = mnist_builder.as_dataset()
+
+  train_dataset, test_dataset = datasets["train"], datasets["test"]
   assert isinstance(train_dataset, tf.data.Dataset)
 
   # And then the rest of your input pipeline
   train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
-  train_dataset = train_dataset.prefetch(tf.data.experimental.AUTOTUNE)
+  train_dataset = train_dataset.prefetch(2)
   features = train_dataset.make_one_shot_iterator().get_next()
   image, label = features['image'], features['label']
   ```
@@ -107,7 +123,7 @@ class DatasetBuilder(object):
 
   @api_utils.disallow_positional_args
   def __init__(self, data_dir=None, config=None):
-    """Construct a DatasetBuilder.
+    """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
 
@@ -155,7 +171,7 @@ class DatasetBuilder(object):
 
   @utils.memoized_property
   def info(self):
-    """Return the dataset info object. See `DatasetInfo` for details."""
+    """`tfds.core.DatasetInfo` for this builder."""
     # Ensure .info hasn't been called before versioning is set-up
     # Otherwise, backward compatibility cannot be guaranteed as some code will
     # depend on the code version instead of the restored data version
@@ -178,8 +194,6 @@ class DatasetBuilder(object):
       compute_stats=True):
     """Downloads and prepares dataset for reading.
 
-    Subclasses must override _download_and_prepare.
-
     Args:
       download_dir: `str`, directory where downloaded files are stored.
         Defaults to "~/tensorflow-datasets/downloads".
@@ -188,10 +202,11 @@ class DatasetBuilder(object):
       manual_dir: `str`, read-only directory where manually downloaded/extracted
         data is stored. Defaults to
         "~/tensorflow-datasets/manual/{dataset_name}".
-      mode: `tfds.GenerateMode`: Mode to FORCE_REDOWNLOAD,
-        or REUSE_DATASET_IF_EXISTS. Defaults to REUSE_DATASET_IF_EXISTS.
-      compute_stats: `boolean` If True, compute statistics over the generated
-        data and write the `tfds.core.DatasetInfo` protobuf to disk.
+      mode: `tfds.GenerateMode`, how to deal with downloads or data that already
+        exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will reuse both
+        downloads and data if it already exists.
+      compute_stats: `bool`, whether to compute statistics over the generated
+        data.
 
     Raises:
       ValueError: If the user defines both cache_dir and dl_manager
@@ -201,16 +216,6 @@ class DatasetBuilder(object):
     if (self._data_dir and mode == REUSE_DATASET_IF_EXISTS):
       tf.logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
-
-    if self._data_dir:
-      raise ValueError(
-          "DatasetBuilder cannot generate a dataset if it has already loaded "
-          "data ({}). Otherwise, this could create conflict between version ("
-          "ex: loaded info from version 1.0.0 but try to generate version 1.1.0"
-          "). If you want to generate the data at a new version, please set "
-          "version=tfds.core.Version.LATEST at construction time."
-          "".format(self._data_dir)
-      )
 
     dl_manager = self._make_download_manager(
         download_dir=download_dir,
@@ -272,18 +277,17 @@ class DatasetBuilder(object):
 
     Callers must pass arguments as keyword arguments.
 
-    Subclasses must override _as_dataset.
-
     Args:
-      split: `tfds.Split`, which subset of the data to read. If None, returns a
-        dict `<key: tfds.Split, value: tf.data.Dataset>` with all the splits.
+      split: `tfds.Split`, which subset of the data to read. If None (default),
+        returns all splits in a dict
+        `<key: tfds.Split, value: tf.data.Dataset>`.
       batch_size: `int`, batch size. Note that variable-length features will
         be 0-padded if `batch_size > 1`. Users that want more custom behavior
         should use `batch_size=1` and use the `tf.data` API to construct a
         custom pipeline. If `batch_size == -1`, will return feature
         dictionaries of the whole dataset with `tf.Tensor`s instead of a
         `tf.data.Dataset`.
-      shuffle_files: `bool` (optional), whether to shuffle the input files.
+      shuffle_files: `bool`, whether to shuffle the input files.
         Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
         will have a 2-tuple structure `(input, label)` according to
@@ -483,6 +487,7 @@ class DatasetBuilder(object):
 
   @property
   def builder_config(self):
+    """`tfds.core.BuilderConfig` for this builder."""
     return self._builder_config
 
   def _create_builder_config(self, builder_config):
@@ -520,6 +525,7 @@ class DatasetBuilder(object):
   @classmethod
   @utils.memoize()
   def builder_configs(cls):
+    """Pre-defined list of configurations for this builder class."""
     config_dict = {config.name: config for config in cls.BUILDER_CONFIGS}
     if len(config_dict) != len(cls.BUILDER_CONFIGS):
       names = [config.name for config in cls.BUILDER_CONFIGS]

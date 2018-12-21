@@ -65,7 +65,7 @@ data_dirs['test']
 ```
 
 For more customization on the download/extraction (ex: passwords, output_name,
-...), you can pass `resource.Resource` as argument.
+...), you can pass a <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a> as argument.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -128,7 +128,7 @@ Download given url(s).
 #### Args:
 
 * <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
-    url can be a `str` or `Resource`.
+    url can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 * <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
 
@@ -157,7 +157,7 @@ extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
 #### Args:
 
 * <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
-    url can be a `str` or `Resource`.
+    url can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 * <b>`async_`</b>: `bool`, defaults to False. If True, returns promise on result.
 
 If not explicitly specified in `Resource`, the extraction method will
@@ -182,7 +182,7 @@ Extract given path(s).
 #### Args:
 
 * <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract. Each
-    path can be a `str` or `Resource`.
+    path can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 * <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
 If not explicitly specified in `Resource`, the extraction method is deduced
@@ -202,15 +202,17 @@ iter_archive(resource)
 
 Returns iterator over files within archive.
 
+**Important Note**: caller should read files as they are yielded.
+Reading out of order is slow.
+
 #### Args:
 
-* <b>`resource`</b>: path to archive or `resource_lib.Resource`.
+* <b>`resource`</b>: path to archive or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 
 #### Returns:
 
 Generator yielding tuple (path_within_archive, file_obj).
-* <b>`Important`</b>: read files as they are yielded. Reading out of order is slow.
 
 
 

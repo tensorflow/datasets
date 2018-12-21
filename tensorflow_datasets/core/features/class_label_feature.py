@@ -23,7 +23,7 @@ from tensorflow_datasets.core.features import feature
 
 
 class ClassLabel(feature.FeatureConnector):
-  """Feature encoding an integer class label."""
+  """`FeatureConnector` for integer class labels."""
 
   @api_utils.disallow_positional_args
   def __init__(self, num_classes=None, names=None, names_file=None):

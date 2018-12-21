@@ -16,11 +16,22 @@
 # pylint: disable=line-too-long
 """`tensorflow_datasets` (`tfds`) defines a collection of datasets ready-to-use with TensorFlow.
 
-Each dataset is defined as a `tfds.core.DatasetBuilder`.
+Each dataset is defined as a `tfds.core.DatasetBuilder`, which encapsulates
+the logic to download the dataset and construct an input pipeline, as well as
+contains the dataset documentation (version, splits, number of examples, etc.).
 
-See `tfds.builder`, `tfds.list_builders`, and `tfds.load` for the main
-entrypoints into the library, or take a look at
-[our dataset documentation](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md).
+The main library entrypoints are:
+
+* `tfds.builder`: fetch a `tfds.core.DatasetBuilder` by name
+* `tfds.load`: convenience method to construct a builder, download the data, and
+  create an input pipeline, returning a `tf.data.Dataset`.
+
+Documentation:
+
+* [Available datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
+* [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
+* These API docs
+* [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
 """
 # pylint: enable=line-too-long
 

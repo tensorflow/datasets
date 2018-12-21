@@ -14,15 +14,19 @@
 *  <a href="./tfds/core/SplitGenerator.md"><code>tfds.core.SplitGenerator</code></a>
 *  <a href="./tfds/core/SplitInfo.md"><code>tfds.core.SplitInfo</code></a>
 *  <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
+*  <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
+*  <a href="./tfds/dataset_as_numpy.md"><code>tfds.dataset_as_numpy</code></a>
 *  <a href="./tfds/download.md"><code>tfds.download</code></a>
 *  <a href="./tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
+*  <a href="./tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>
 *  <a href="./tfds/download/GenerateMode.md"><code>tfds.download.GenerateMode</code></a>
+*  <a href="./tfds/download/Resource.md"><code>tfds.download.Resource</code></a>
+*  <a href="./tfds/download/iter_archive.md"><code>tfds.download.iter_archive</code></a>
 *  <a href="./tfds/features.md"><code>tfds.features</code></a>
 *  <a href="./tfds/features/ClassLabel.md"><code>tfds.features.ClassLabel</code></a>
 *  <a href="./tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>
 *  <a href="./tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>
 *  <a href="./tfds/features/Image.md"><code>tfds.features.Image</code></a>
-*  <a href="./tfds/features/OneOf.md"><code>tfds.features.OneOf</code></a>
 *  <a href="./tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>
 *  <a href="./tfds/features/Tensor.md"><code>tfds.features.Tensor</code></a>
 *  <a href="./tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>
@@ -41,5 +45,6 @@
 *  <a href="./tfds/file_adapter/TFRecordExampleAdapter.md"><code>tfds.file_adapter.TFRecordExampleAdapter</code></a>
 *  <a href="./tfds/list_builders.md"><code>tfds.list_builders</code></a>
 *  <a href="./tfds/load.md"><code>tfds.load</code></a>
+*  <a href="./tfds/percent.md"><code>tfds.percent</code></a>
 *  <a href="./tfds/units.md"><code>tfds.units</code></a>
 *  <a href="./tfds/units/size_str.md"><code>tfds.units.size_str</code></a>

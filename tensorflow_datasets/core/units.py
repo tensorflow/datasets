@@ -36,9 +36,11 @@ def size_str(size_in_bytes):
 
   If size_in_bytes is None, then returns "?? GiB".
 
+  For example `size_str(1.5 * tfds.units.GiB) == "1.50 GiB"`.
+
   Args:
-    size_in_bytes: `integer` or `None`, the size, in bytes, that we want to
-      format as a human understandable size string.
+    size_in_bytes: `int` or `None`, the size, in bytes, that we want to
+      format as a human-readable size string.
   """
   if not size_in_bytes:
     return "?? GiB"

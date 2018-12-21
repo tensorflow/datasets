@@ -13,14 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Public tfds.features API."""
+"""`tfds.features.FeatureConnector` API defining feature types."""
 
 from tensorflow_datasets.core.features import text
 
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.feature import FeatureConnector
 from tensorflow_datasets.core.features.feature import FeaturesDict
-from tensorflow_datasets.core.features.feature import OneOf
 from tensorflow_datasets.core.features.feature import Tensor
 from tensorflow_datasets.core.features.feature import TensorInfo
 from tensorflow_datasets.core.features.image_feature import Image
@@ -33,7 +32,6 @@ __all__ = [
     "ClassLabel",
     "FeatureConnector",
     "FeaturesDict",
-    "OneOf",
     "Tensor",
     "TensorInfo",
     "SequenceDict",

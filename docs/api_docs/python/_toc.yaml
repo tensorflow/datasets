@@ -6,10 +6,14 @@ toc:
       path: /datasets/api_docs/python/tfds
     - title: builder
       path: /datasets/api_docs/python/tfds/builder
+    - title: dataset_as_numpy
+      path: /datasets/api_docs/python/tfds/dataset_as_numpy
     - title: list_builders
       path: /datasets/api_docs/python/tfds/list_builders
     - title: load
       path: /datasets/api_docs/python/tfds/load
+    - title: percent
+      path: /datasets/api_docs/python/tfds/percent
     - title: Split
       path: /datasets/api_docs/python/tfds/Split
   - title: tfds.core
@@ -24,6 +28,8 @@ toc:
       path: /datasets/api_docs/python/tfds/core/DatasetInfo
     - title: GeneratorBasedBuilder
       path: /datasets/api_docs/python/tfds/core/GeneratorBasedBuilder
+    - title: get_tfds_path
+      path: /datasets/api_docs/python/tfds/core/get_tfds_path
     - title: NamedSplit
       path: /datasets/api_docs/python/tfds/core/NamedSplit
     - title: SplitDict
@@ -40,8 +46,14 @@ toc:
       path: /datasets/api_docs/python/tfds/download
     - title: DownloadManager
       path: /datasets/api_docs/python/tfds/download/DownloadManager
+    - title: ExtractMethod
+      path: /datasets/api_docs/python/tfds/download/ExtractMethod
     - title: GenerateMode
       path: /datasets/api_docs/python/tfds/download/GenerateMode
+    - title: iter_archive
+      path: /datasets/api_docs/python/tfds/download/iter_archive
+    - title: Resource
+      path: /datasets/api_docs/python/tfds/download/Resource
   - title: tfds.features
     section:
     - title: Overview
@@ -54,8 +66,6 @@ toc:
       path: /datasets/api_docs/python/tfds/features/FeaturesDict
     - title: Image
       path: /datasets/api_docs/python/tfds/features/Image
-    - title: OneOf
-      path: /datasets/api_docs/python/tfds/features/OneOf
     - title: SequenceDict
       path: /datasets/api_docs/python/tfds/features/SequenceDict
     - title: Tensor

@@ -86,7 +86,7 @@ class DownloadManager(object):
   ```
 
   For more customization on the download/extraction (ex: passwords, output_name,
-  ...), you can pass `resource.Resource` as argument.
+  ...), you can pass a `tfds.download.Resource` as argument.
   """
 
   def __init__(self,
@@ -220,7 +220,7 @@ class DownloadManager(object):
 
     Args:
       url_or_urls: url or `list`/`dict` of urls to download and extract. Each
-        url can be a `str` or `Resource`.
+        url can be a `str` or `tfds.download.Resource`.
       async_: `bool`, default to False. If True, returns promise on result.
 
     Returns:
@@ -232,12 +232,14 @@ class DownloadManager(object):
   def iter_archive(self, resource):
     """Returns iterator over files within archive.
 
+    **Important Note**: caller should read files as they are yielded.
+    Reading out of order is slow.
+
     Args:
-      resource: path to archive or `resource_lib.Resource`.
+      resource: path to archive or `tfds.download.Resource`.
 
     Returns:
       Generator yielding tuple (path_within_archive, file_obj).
-      Important: read files as they are yielded. Reading out of order is slow.
     """
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(path=resource)
@@ -248,7 +250,7 @@ class DownloadManager(object):
 
     Args:
       path_or_paths: path or `list`/`dict` of path of file to extract. Each
-        path can be a `str` or `Resource`.
+        path can be a `str` or `tfds.download.Resource`.
       async_: `bool`, default to False. If True, returns promise on result.
 
     If not explicitly specified in `Resource`, the extraction method is deduced
@@ -271,7 +273,7 @@ class DownloadManager(object):
 
     Args:
       url_or_urls: url or `list`/`dict` of urls to download and extract. Each
-        url can be a `str` or `Resource`.
+        url can be a `str` or `tfds.download.Resource`.
       async_: `bool`, defaults to False. If True, returns promise on result.
 
     If not explicitly specified in `Resource`, the extraction method will

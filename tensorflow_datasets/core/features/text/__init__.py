@@ -13,7 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text utilities."""
+"""Text utilities.
+
+`tfds` includes a set of `TextEncoder`s as well as a `Tokenizer` to enable
+expressive, performant, and reproducible natural language research.
+"""
 
 from tensorflow_datasets.core.features.text.subword_text_encoder import SubwordTextEncoder
 from tensorflow_datasets.core.features.text.text_encoder import ByteTextEncoder

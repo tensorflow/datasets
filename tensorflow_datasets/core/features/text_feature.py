@@ -30,7 +30,7 @@ from tensorflow_datasets.core.features import text as text_lib
 
 
 class Text(feature.FeatureConnector):
-  """Feature which encodes/decodes text, possibly to integers."""
+  """`FeatureConnector` for text, encoding to integers with a `TextEncoder`."""
 
   def __init__(self, encoder=None, encoder_config=None):
     """Constructs a Text FeatureConnector.

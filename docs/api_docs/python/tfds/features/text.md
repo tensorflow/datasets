@@ -11,6 +11,9 @@ Defined in [`core/features/text/__init__.py`](https://github.com/tensorflow/data
 
 Text utilities.
 
+<a href="../../tfds.md"><code>tfds</code></a> includes a set of `TextEncoder`s as well as a `Tokenizer` to enable
+expressive, performant, and reproducible natural language research.
+
 ## Classes
 
 [`class ByteTextEncoder`](../../tfds/features/text/ByteTextEncoder.md): Byte-encodes text.

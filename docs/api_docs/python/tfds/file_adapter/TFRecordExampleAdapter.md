@@ -32,7 +32,7 @@ Constraints on generators:
 __init__(example_reading_spec)
 ```
 
-Constructs a TFRecordExampleAdapter.
+Construcs a TFRecordExampleAdapter.
 
 #### Args:
 

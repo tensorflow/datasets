@@ -11,15 +11,19 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 Try it in a [Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb).
 
 See all our datasets on our
-[datasets documentation page](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md).
+[datasets documentation page](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
+or see our [API docs](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds.md)
 
 ### Installation
 
 ```
 pip install tensorflow-datasets
 
-# Currently requires tf-nightly or tf-nightly-gpu to be installed
+# Currently requires TF 1.13+, i.e. tf-nightly or tf-nightly-gpu to be installed
 # Some datasets require additional libraries; see setup.py extras_require
+
+# To use our nightly release
+pip install tfds-nightly
 ```
 
 ### Usage
@@ -31,17 +35,19 @@ import tensorflow_datasets as tfds
 print(tfds.list_builders())
 
 # Construct a tf.data.Dataset
-dataset = tfds.load(name="mnist", split=tfds.Split.TRAIN)
+datasets = tfds.load(name="mnist")
+train_dataset, test_dataset = datasets["train"], datasets["test"]
 
 # Build your input pipeline
-dataset = dataset.shuffle(1000).batch(128).prefetch(tf.data.experimental.AUTOTUNE)
-features = dataset.make_oneshot_iterator().get_next()
+train_dataset = train_dataset.shuffle(1000).batch(128).prefetch(10)
+features = train_dataset.make_oneshot_iterator().get_next()
 image, label = features["image"], features["label"]
 ```
 
 ### `DatasetBuilder`
 
-All datasets are implemented as subclasses of `DatasetBuilder`.
+All datasets are implemented as subclasses of `DatasetBuilder` and `tfds.load`
+is a thin convenience wrapper.
 
 ```python
 import tensorflow_datasets as tfds
@@ -62,21 +68,40 @@ dataset = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
 info = mnist_builder.info
 print(info)
 
-  tfds.core.DatasetInfo(
-      name='mnist',
-      version=1.0.0,
-      description='The MNIST database of handwritten digits.',
-      urls=[u'http://yann.lecun.com/exdb/mnist/'],
-      features=FeaturesDict({
-          'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-          'label': ClassLabel(shape=(), dtype=tf.int64)
-      }),
-      num_examples=70000,
-      splits=[u'test', u'train'],
-      examples_per_split=[10000L, 60000L],
-      supervised_keys=(u'image', u'label'),
-      citation='Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
-  [Online]. Available: http://yann.lecun.com/exdb/mnist/',
+    tfds.core.DatasetInfo(
+        name='mnist',
+        version=1.0.0,
+        description='The MNIST database of handwritten digits.',
+        urls=[u'http://yann.lecun.com/exdb/mnist/'],
+        features=FeaturesDict({
+            'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+            'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
+        },
+        num_examples=70000,
+        splits={
+            u'test': <tfds.core.SplitInfo num_examples=10000>,
+            u'train': <tfds.core.SplitInfo num_examples=60000>
+        },
+        supervised_keys=(u'image', u'label'),
+        citation='"""
+            @article{lecun-mnisthandwrittendigit-2010,
+              added-at = {2010-06-28T21:16:30.000+0200},
+              author = {LeCun, Yann and Cortes, Corinna},
+              biburl = {https://www.bibsonomy.org/bibtex/2935bad99fa1f65e03c25b315aa3c1032/mhwombat},
+              groups = {public},
+              howpublished = {http://yann.lecun.com/exdb/mnist/},
+              interhash = {21b9d0558bd66279df9452562df6e6f3},
+              intrahash = {935bad99fa1f65e03c25b315aa3c1032},
+              keywords = {MSc _checked character_recognition mnist network neural},
+              lastchecked = {2016-01-14 14:24:11},
+              timestamp = {2016-07-12T19:25:30.000+0200},
+              title = {{MNIST} handwritten digit database},
+              url = {http://yann.lecun.com/exdb/mnist/},
+              username = {mhwombat},
+              year = 2010
+            }
+
+      """',
   )
 ```
 
@@ -111,6 +136,15 @@ Note that the library still requires `tensorflow` as an internal dependency.
 Thanks for considering a contribution! We're eager to grow the available set of
 datasets. See the
 [doc on adding a new dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md).
+
+## Want a certain dataset?
+
+Consider contributing (see above). But if you'd just like to request a dataset,
+open a GitHub Issue (select the `Dataset request` issue template) and the
+community can vote on which datasets they'd like most by adding +1/thumbs-up
+to the issue.
+
+Vote on the current [set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request).
 
 #### Disclaimers
 
