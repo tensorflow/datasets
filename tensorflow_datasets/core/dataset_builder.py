@@ -366,49 +366,6 @@ class DatasetBuilder(object):
     else:
       return dataset
 
-  @api_utils.disallow_positional_args
-  def as_numpy(self, **as_dataset_kwargs):
-    # pylint: disable=g-doc-return-or-yield
-    """Generates batches of NumPy arrays from the given `tfds.Split`.
-
-    Args:
-      **as_dataset_kwargs: Keyword arguments passed on to
-        `tfds.core.DatasetBuilder.as_dataset`.
-
-    Yields:
-      Feature dictionaries
-      `dict<str feature_name, numpy.array feature_val>`, or if `split=None`,
-      `dict` from `tfds.Split` to the feature dictionaries.
-
-      If `batch_size` is -1, will return a single dictionary containing
-      the entire dataset instead of yielding batches.
-    """
-    # pylint: enable=g-doc-return-or-yield
-    # TF does not like it when you nest Graph/Session contexts, and because we
-    # may be operating on multiple splits here, we more directly control the
-    # graph and session creation/contexts to stay in the contexts for as little
-    # time as possible (basically keeping the contexts local and not persisting
-    # them).
-    with utils.maybe_with_graph() as graph:
-      dataset = self.as_dataset(**as_dataset_kwargs)
-
-    def ds_iter(ds):
-      for el in dataset_utils.iterate_over_dataset(ds, graph=graph):
-        yield el
-
-    wants_full_dataset = as_dataset_kwargs.get("batch_size") == -1
-    if wants_full_dataset:
-      # as_dataset returned Tensors, possibly tupleized with
-      # as_supervised=True
-      if tf.executing_eagerly():
-        return utils.map_nested(lambda t: t.numpy(), dataset, map_tuple=True)
-      else:
-        with utils.nogpu_session(graph=graph) as sess:
-          return sess.run(dataset)
-    else:
-      # as_dataset returned tf.data.Datasets
-      return utils.map_nested(ds_iter, dataset, dict_only=True)
-
   def _get_data_dir(self, version=None):
     """Return the data directory of one dataset version.
 

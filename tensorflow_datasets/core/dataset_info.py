@@ -428,7 +428,7 @@ def get_dataset_feature_statistics(builder, split):
   feature_to_min = {}
   feature_to_max = {}
 
-  for example in dataset_utils.iterate_over_dataset(dataset):
+  for example in dataset_utils.dataset_as_numpy(dataset):
     statistics.num_examples += 1
 
     assert isinstance(example, dict)

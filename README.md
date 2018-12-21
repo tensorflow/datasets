@@ -80,39 +80,37 @@ print(info)
   )
 ```
 
-### NumPy Usage with `as_numpy()`
+### NumPy Usage with `tfds.dataset_as_numpy`
 
-As a convenience for users that have limited familiarity with TensorFlow,
-`DatasetBuilder` has an `as_numpy()` method that yields batched NumPy arrays.
+As a convenience for users that want simple NumPy arrays in their programs, you
+can use `tfds.dataset_as_numpy` to return a generator that yields NumPy array
+records out of a `tf.data.Dataset`. This allows you to build high-performance
+input pipelines with `tf.data` but use whatever you'd like for your model
+components.
 
 ```
-mnist_builder = tfds.builder("mnist")
-mnist_builder.download_and_prepare()
-for example in mnist_builder.as_numpy(split=tfds.Split.TRAIN, batch_size=128):
+train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
+train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
+for example in tfds.dataset_as_numpy(train_ds):
   numpy_images, numpy_labels = example["image"], example["label"]
 ```
 
-You can also get the entire dataset at once (if it fits in your machine's
-memory) by using `batch_size=-1`:
+You can also use `tfds.dataset_as_numpy` in conjunction with `batch_size=-1` to
+get the full dataset in NumPy arrays from the returned `tf.Tensor` object:
 
 ```
-mnist_builder = tfds.builder("mnist")
-mnist_builder.download_and_prepare()
-numpy_dataset = mnist_builder.as_numpy(split=tfds.Split.TRAIN, batch_size=-1)
+train_data = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
+numpy_data = tfds.dataset_as_numpy(train_data)
 numpy_images, numpy_labels = numpy_dataset["image"], numpy_dataset["label"]
 ```
-
-Note that `tf.data.Dataset` objects are iterable when running in Eager mode
-(`tf.enable_eager_execution`), so you can use `builder.as_dataset`, build an
-input pipeline, and then iterate through the dataset to get NumPy arrays as
-well.
 
 Note that the library still requires `tensorflow` as an internal dependency.
 
 ## Contributing a dataset
 
-Thanks for considering a contribution. See the
-[doc on adding a new dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+Thanks for considering a contribution! We're eager to grow the available set of
+datasets. See the
+[doc on adding a new dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md).
 
 #### Disclaimers
 

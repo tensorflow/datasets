@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 
 
@@ -87,19 +88,84 @@ def build_dataset(instruction_dicts,
   return dataset
 
 
-def iterate_over_dataset(dataset, graph=None):
-  """Yields numpy elements of `tf.data.Dataset`."""
+def _eager_dataset_iterator(dataset):
+  for item in dataset:
+    flat = tf.contrib.framework.nest.flatten(item)
+    flat = [el.numpy() for el in flat]
+    yield tf.contrib.framework.nest.pack_sequence_as(item, flat)
+
+
+def _graph_dataset_iterator(ds_item, graph=None):
+  with utils.nogpu_session(graph) as sess:
+    while True:
+      try:
+        yield sess.run(ds_item)
+      except tf.errors.OutOfRangeError:
+        break
+
+
+@api_utils.disallow_positional_args(allowed=["dataset"])
+def dataset_as_numpy(dataset, graph=None):
+  """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
+
+  `dataset_as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
+  and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
+
+  Args:
+    dataset: a possibly nested structure of `tf.data.Dataset`s and/or
+      `tf.Tensor`s.
+    graph: `tf.Graph`, optional, explicitly set the graph to use.
+
+  Returns:
+    A structure matching `dataset` where `tf.data.Datset`s are converted to
+    generators of NumPy arrays and `tf.Tensor`s are converted to NumPy arrays.
+  """
+  nested_ds = dataset
+  del dataset
+
+  # Flatten
+  flat_ds = tf.contrib.framework.nest.flatten(nested_ds)
+  flat_np = []
+
+  # Type check for Tensors and Datasets
+  for ds_el in flat_ds:
+    types = [type(el) for el in flat_ds]
+    types = tf.contrib.framework.nest.pack_sequence_as(nested_ds, types)
+    if not isinstance(ds_el, (tf.Tensor, tf.data.Dataset)):
+      raise ValueError("Arguments to dataset_as_numpy must be tf.Tensors or "
+                       "tf.data.Datasets. Got: %s" % types)
+
   if tf.executing_eagerly():
-    for item in dataset:
-      flat = tf.contrib.framework.nest.flatten(item)
-      flat = [el.numpy() for el in flat]
-      yield tf.contrib.framework.nest.pack_sequence_as(item, flat)
+    # Eager mode
+    for ds_el in flat_ds:
+      if isinstance(ds_el, tf.Tensor):
+        np_el = ds_el.numpy()
+      elif isinstance(ds_el, tf.data.Dataset):
+        np_el = _eager_dataset_iterator(ds_el)
+      else:
+        assert False
+      flat_np.append(np_el)
   else:
+    # Graph mode
+
+    # First create necessary graph ops
+    ds_iters = [None] * len(flat_ds)
     with utils.maybe_with_graph(graph, create_if_none=False):
-      item = dataset.make_one_shot_iterator().get_next()
+      for i, ds_el in enumerate(flat_ds):
+        if isinstance(ds_el, tf.data.Dataset):
+          ds_iters[i] = ds_el.make_one_shot_iterator().get_next()
+
+    # Then create NumPy items
+    # Shared session for tf.Tensor runs
     with utils.nogpu_session(graph) as sess:
-      while True:
-        try:
-          yield sess.run(item)
-        except tf.errors.OutOfRangeError:
-          break
+      for ds_iter, ds_el in zip(ds_iters, flat_ds):
+        if ds_iter is None:
+          # Tensor
+          np_el = sess.run(ds_el)
+        else:
+          # Dataset
+          np_el = _graph_dataset_iterator(ds_iter, graph)
+        flat_np.append(np_el)
+
+  # Nest
+  return tf.contrib.framework.nest.pack_sequence_as(nested_ds, flat_np)

@@ -135,58 +135,6 @@ def builder(name, **ctor_kwargs):
     raise
 
 
-def _load(name,
-          split=None,
-          data_dir=None,
-          batch_size=1,
-          download=True,
-          as_numpy=False,
-          as_supervised=False,
-          with_info=False,
-          builder_kwargs=None,
-          download_and_prepare_kwargs=None,
-          as_dataset_kwargs=None):
-  """Shared implementation for `tfds.load` and `tfds.load_numpy`."""
-  if data_dir is None:
-    data_dir = constants.DATA_DIR
-  builder_kwargs = builder_kwargs or {}
-  dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
-  if download:
-    download_and_prepare_kwargs = download_and_prepare_kwargs or {}
-    dbuilder.download_and_prepare(**download_and_prepare_kwargs)
-
-  if as_dataset_kwargs is None:
-    as_dataset_kwargs = {}
-  as_dataset_kwargs = dict(as_dataset_kwargs)
-  as_dataset_kwargs["split"] = split
-  as_dataset_kwargs["as_supervised"] = as_supervised
-  as_dataset_kwargs["batch_size"] = batch_size
-
-  if as_numpy:
-    ds = dbuilder.as_numpy(**as_dataset_kwargs)
-  else:
-    ds = dbuilder.as_dataset(**as_dataset_kwargs)
-  if with_info:
-    return ds, dbuilder.info
-  return ds
-
-
-def load_numpy(**kwargs):
-  """`tfds.load` with NumPy generators/arrays instead of Datasets/Tensors.
-
-  Uses `tfds.core.DatasetBuilder.as_numpy` instead of `as_dataset`.
-
-  Args:
-    **kwargs: passed to `tfds.load`.
-
-  Returns:
-    Generator(s) of NumPy arrays (or just the NumPy arrays if `batch_size=-1`).
-    If `split=None` (default), returns a `dict` with all the data splits.
-  """
-  kwargs["as_numpy"] = True
-  return _load(**kwargs)
-
-
 @api_utils.disallow_positional_args(allowed=["name"])
 def load(name,
          split=None,
@@ -272,17 +220,25 @@ def load(name,
       will return a tuple (ds, ds_info) containing the dataset info (version,
       features, splits, num_examples,...).
   """
-  return _load(
-      name=name,
-      split=split,
-      data_dir=data_dir,
-      batch_size=batch_size,
-      download=download,
-      as_supervised=as_supervised,
-      with_info=with_info,
-      builder_kwargs=builder_kwargs,
-      download_and_prepare_kwargs=download_and_prepare_kwargs,
-      as_dataset_kwargs=as_dataset_kwargs)
+  if data_dir is None:
+    data_dir = constants.DATA_DIR
+  builder_kwargs = builder_kwargs or {}
+  dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
+  if download:
+    download_and_prepare_kwargs = download_and_prepare_kwargs or {}
+    dbuilder.download_and_prepare(**download_and_prepare_kwargs)
+
+  if as_dataset_kwargs is None:
+    as_dataset_kwargs = {}
+  as_dataset_kwargs = dict(as_dataset_kwargs)
+  as_dataset_kwargs["split"] = split
+  as_dataset_kwargs["as_supervised"] = as_supervised
+  as_dataset_kwargs["batch_size"] = batch_size
+
+  ds = dbuilder.as_dataset(**as_dataset_kwargs)
+  if with_info:
+    return ds, dbuilder.info
+  return ds
 
 
 def _dataset_name_and_kwargs_from_name_str(name_str):
