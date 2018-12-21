@@ -1,6 +1,6 @@
 ---
 name: Dataset request
-about: Template for requesting a dataset to be added
+about: Request a dataset to be added
 title: "[data request] <dataset name>"
 labels: dataset request
 assignees: ''
