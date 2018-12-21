@@ -137,7 +137,25 @@ None
 
 ### Citation
 ```
-Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang Deep Learning Face Attributes in the Wild ICCV 2015
+@inproceedings{conf/iccv/LiuLWT15,
+  added-at = {2018-10-09T00:00:00.000+0200},
+  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},
+  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},
+  booktitle = {ICCV},
+  crossref = {conf/iccv/2015},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},
+  interhash = {3f735aaa11957e73914bbe2ca9d5e702},
+  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},
+  isbn = {978-1-4673-8391-2},
+  keywords = {dblp},
+  pages = {3730-3738},
+  publisher = {IEEE Computer Society},
+  timestamp = {2018-10-11T11:43:28.000+0200},
+  title = {Deep Learning Face Attributes in the Wild.},
+  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},
+  year = 2015
+}
+
 ```
 
 ---
@@ -175,7 +193,13 @@ TEST       |     10,000
 
 ### Citation
 ```
-Learning Multiple Layers of Features from Tiny Images, Alex Krizhevsky, 2009. https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf
+@TECHREPORT{Krizhevsky09learningmultiple,
+    author = {Alex Krizhevsky},
+    title = {Learning multiple layers of features from tiny images},
+    institution = {},
+    year = {2009}
+}
+
 ```
 
 ---
@@ -293,7 +317,23 @@ TEST       |     10,000
 
 ### Citation
 ```
-Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms. Han Xiao, Kashif Rasul, Roland Vollgraf. arXiv:1708.07747
+@article{DBLP:journals/corr/abs-1708-07747,
+  author    = {Han Xiao and
+               Kashif Rasul and
+               Roland Vollgraf},
+  title     = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning
+               Algorithms},
+  journal   = {CoRR},
+  volume    = {abs/1708.07747},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1708.07747},
+  archivePrefix = {arXiv},
+  eprint    = {1708.07747},
+  timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
 ```
 
 ---
@@ -358,7 +398,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |  1,331,167
+TRAIN      |  1,281,167
+VALIDATION |     50,000
+
 
 ### Urls
  * http://image-net.org/
@@ -416,8 +461,14 @@ TEST       |     10,000
 
 ### Citation
 ```
-Y. Lecun and C. Cortes, "The MNIST database of handwritten digits," 1998.
-[Online]. Available: http://yann.lecun.com/exdb/mnist/
+@article{lecun2010mnist,
+  title={MNIST handwritten digit database},
+  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+  journal={AT\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+  volume={2},
+  year={2010}
+}
+
 ```
 
 ---
@@ -440,7 +491,13 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |    630,420
+EXTRA      |    531,131
+TRAIN      |     73,257
+TEST       |     26,032
+
 
 ### Urls
  * http://ufldl.stanford.edu/housenumbers/
@@ -450,7 +507,13 @@ None computed
 
 ### Citation
 ```
-Yuval Netzer, Tao Wang, Adam Coates, Alessandro Bissacco, Bo Wu, Andrew Y. Ng, Reading Digits in Natural Images with Unsupervised Feature Learning, NIPS Workshop on Deep Learning and Unsupervised Feature Learning, 2011.
+@article{Netzer2011,
+author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
+booktitle = {Advances in Neural Information Processing Systems ({NIPS})},
+title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
+year = {2011}
+}
+
 ```
 
 ---
@@ -460,8 +523,8 @@ Yuval Netzer, Tao Wang, Adam Coates, Alessandro Bissacco, Bo Wu, Andrew Y. Ng, R
 
 ## `"imdb_reviews"`
 
-Large Movie Review Dataset
-This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well. Raw text and already processed bag of words formats are provided. See the README file contained in the release for more details.
+Large Movie Review Dataset.
+This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing.
 
 * URL: http://ai.stanford.edu/~amaas/data/sentiment/
 * `DatasetBuilder`: [`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
@@ -494,7 +557,7 @@ FeaturesDict({
 ```
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=258>),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
 })
 ```
 
@@ -524,7 +587,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     50,000
+TRAIN      |     25,000
+TEST       |     25,000
+
 
 ### Urls
  * http://ai.stanford.edu/~amaas/data/sentiment/
@@ -594,7 +662,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=58517>),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -604,7 +672,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=58517>),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -716,12 +784,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     98,169
-TRAIN      |     87,599
-VALIDATION |     10,570
-
+None computed
 
 ### Urls
  * https://rajpurkar.github.io/SQuAD-explorer/
@@ -770,7 +833,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     43,520
+TRAIN      |     43,264
+TEST       |        256
+
 
 ### Urls
  * https://sites.google.com/site/brainrobotdata/home/push-dataset
@@ -780,7 +848,24 @@ None
 
 ### Citation
 ```
-Unsupervised Learning for Physical Interaction through Video  Prediction. Chelsea Finn, Ian Goodfellow, Sergey Levine
+@inproceedings{conf/nips/FinnGL16,
+  added-at = {2016-12-16T00:00:00.000+0100},
+  author = {Finn, Chelsea and Goodfellow, Ian J. and Levine, Sergey},
+  biburl = {https://www.bibsonomy.org/bibtex/230073873b4fe43b314724b772d0f9256/dblp},
+  booktitle = {NIPS},
+  crossref = {conf/nips/2016},
+  editor = {Lee, Daniel D. and Sugiyama, Masashi and Luxburg, Ulrike V. and Guyon, Isabelle and Garnett, Roman},
+  ee = {http://papers.nips.cc/paper/6161-unsupervised-learning-for-physical-interaction-through-video-prediction},
+  interhash = {2e6b416723704f4aa5ad0686ce5a3593},
+  intrahash = {30073873b4fe43b314724b772d0f9256},
+  keywords = {dblp},
+  pages = {64-72},
+  timestamp = {2016-12-17T11:33:40.000+0100},
+  title = {Unsupervised Learning for Physical Interaction through Video Prediction.},
+  url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
+  year = 2016
+}
+
 ```
 
 ---

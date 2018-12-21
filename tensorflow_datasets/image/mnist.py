@@ -37,41 +37,33 @@ _TRAIN_EXAMPLES = 60000
 _TEST_EXAMPLES = 10000
 
 
-_MNIST_CITATION = """\
-@article{lecun-mnisthandwrittendigit-2010,
-  added-at = {2010-06-28T21:16:30.000+0200},
-  author = {LeCun, Yann and Cortes, Corinna},
-  biburl = {https://www.bibsonomy.org/bibtex/2935bad99fa1f65e03c25b315aa3c1032/mhwombat},
-  groups = {public},
-  howpublished = {http://yann.lecun.com/exdb/mnist/},
-  interhash = {21b9d0558bd66279df9452562df6e6f3},
-  intrahash = {935bad99fa1f65e03c25b315aa3c1032},
-  keywords = {MSc _checked character_recognition mnist network neural},
-  lastchecked = {2016-01-14 14:24:11},
-  timestamp = {2016-07-12T19:25:30.000+0200},
-  title = {{MNIST} handwritten digit database},
-  url = {http://yann.lecun.com/exdb/mnist/},
-  username = {mhwombat},
-  year = 2010
+_MNIST_CITATION = r"""\
+@article{lecun2010mnist,
+  title={MNIST handwritten digit database},
+  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+  journal={AT\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+  volume={2},
+  year={2010}
 }
 """
 
 
 _FASHION_MNIST_CITATION = """\
-@article{journals/corr/abs-1708-07747,
-  added-at = {2018-08-13T00:00:00.000+0200},
-  author = {Xiao, Han and Rasul, Kashif and Vollgraf, Roland},
-  biburl = {https://www.bibsonomy.org/bibtex/2c1bcf55a1de644db3d7b0a4a9b7a778e/dblp},
-  ee = {http://arxiv.org/abs/1708.07747},
-  interhash = {0c81f9a6170118f14703b6796101ce40},
-  intrahash = {c1bcf55a1de644db3d7b0a4a9b7a778e},
-  journal = {CoRR},
-  keywords = {dblp},
-  timestamp = {2018-08-14T12:22:49.000+0200},
-  title = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms.},
-  url = {http://dblp.uni-trier.de/db/journals/corr/corr1708.html#abs-1708-07747},
-  volume = {abs/1708.07747},
-  year = 2017
+@article{DBLP:journals/corr/abs-1708-07747,
+  author    = {Han Xiao and
+               Kashif Rasul and
+               Roland Vollgraf},
+  title     = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning
+               Algorithms},
+  journal   = {CoRR},
+  volume    = {abs/1708.07747},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1708.07747},
+  archivePrefix = {arXiv},
+  eprint    = {1708.07747},
+  timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 """
 

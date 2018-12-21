@@ -84,23 +84,13 @@ print(info)
         },
         supervised_keys=(u'image', u'label'),
         citation='"""
-            @article{lecun-mnisthandwrittendigit-2010,
-              added-at = {2010-06-28T21:16:30.000+0200},
-              author = {LeCun, Yann and Cortes, Corinna},
-              biburl = {https://www.bibsonomy.org/bibtex/2935bad99fa1f65e03c25b315aa3c1032/mhwombat},
-              groups = {public},
-              howpublished = {http://yann.lecun.com/exdb/mnist/},
-              interhash = {21b9d0558bd66279df9452562df6e6f3},
-              intrahash = {935bad99fa1f65e03c25b315aa3c1032},
-              keywords = {MSc _checked character_recognition mnist network neural},
-              lastchecked = {2016-01-14 14:24:11},
-              timestamp = {2016-07-12T19:25:30.000+0200},
-              title = {{MNIST} handwritten digit database},
-              url = {http://yann.lecun.com/exdb/mnist/},
-              username = {mhwombat},
-              year = 2010
+            @article{lecun2010mnist,
+              title={MNIST handwritten digit database},
+              author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+              journal={AT\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+              volume={2},
+              year={2010}
             }
-
       """',
   )
 ```
@@ -146,20 +136,20 @@ to the issue.
 
 Vote on the current [set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request).
 
-#### Disclaimers
+#### *Disclaimers*
 
-This is a utility library that downloads and prepares public datasets. We do
-not host or distribute these datasets, vouch for their quality or fairness, or
-claim that you have license to use the dataset. It is your responsibility to
-determine whether you have permission to use the dataset under the dataset's
-license.
+*This is a utility library that downloads and prepares public datasets. We do*
+*not host or distribute these datasets, vouch for their quality or fairness, or*
+*claim that you have license to use the dataset. It is your responsibility to*
+*determine whether you have permission to use the dataset under the dataset's*
+*license.*
 
-If you're a dataset owner and wish to update any part of it (description,
-citation, etc.), or do not want your dataset to be included in this
-library, please get in touch through a GitHub issue. Thanks for your
-contribution to the ML community!
+*If you're a dataset owner and wish to update any part of it (description,*
+*citation, etc.), or do not want your dataset to be included in this*
+*library, please get in touch through a GitHub issue. Thanks for your*
+*contribution to the ML community!*
 
-If you're interested in learning more about responsible AI practices, including
-fairness, please see https://ai.google/education/responsible-ai-practices.
+*If you're interested in learning more about responsible AI practices, including*
+*fairness, please see Google AI's [Responsible AI Practices](https://ai.google/education/responsible-ai-practices).*
 
-`tensorflow/datasets` is Apache 2.0 licensed. See the `LICENSE` file.
+*`tensorflow/datasets` is Apache 2.0 licensed. See the `LICENSE` file.*

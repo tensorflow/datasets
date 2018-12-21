@@ -370,6 +370,16 @@ metadata files to [`tensorflow_datasets/dataset_info`](https://github.com/tensor
 
 See the [testing section](#testing-mydataset) below.
 
+### 4. Double-check the citation
+
+If the paper is on [arXiv](https://arxiv.org/), find it there and click the
+`bibtex` link on the right-hand side. Use this for `info.citation`.
+
+If the paper is not on arXiv, find the paper on
+[Google Scholar](https://scholar.google.com) and click the double-quotation mark
+underneath the title and on the popup, click `BibTeX`. Use this for
+`info.citation`.
+
 ## Large datasets and distributed generation
 
 Some datasets are so large as to require multiple machines to download and
