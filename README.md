@@ -8,7 +8,10 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
 [![Travis](https://img.shields.io/travis/tensorflow/datasets.svg)](https://travis-ci.org/tensorflow/datasets)
 
-Try it in a [Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb).
+<a class="colab-button" target="_blank"
+href="https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb">
+Try in a <span>Notebook</span>
+</a>
 
 See all our datasets on our
 [datasets documentation page](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
@@ -163,3 +166,36 @@ If you're interested in learning more about responsible AI practices, including
 fairness, please see https://ai.google/education/responsible-ai-practices.
 
 `tensorflow/datasets` is Apache 2.0 licensed. See the `LICENSE` file.
+
+<style>
+/* From TF site */
+a.colab-button {
+  background: rgba(255, 255, 255, .75);
+  border: solid 1px rgba(0, 0, 0, .08);
+  border-bottom-color: rgba(0, 0, 0, .15);
+  border-radius: 4px;
+  color: #aaa;
+  display: inline-block;
+  font-size: 11px !important;
+  font-weight: 300;
+  line-height: 16px;
+  padding: 4px 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a.colab-button:hover {
+  background: white;
+  border-color: rgba(0, 0, 0, .2);
+  color: #666;
+}
+
+a.colab-button span {
+  background: url(https://www.tensorflow.org/images/colab_logo_button.svg) no-repeat 1px 1px / 20px;
+  border-radius: 4px;
+  display: inline-block;
+  padding-left: 24px;
+  text-decoration: none;
+}
+
+</style>
