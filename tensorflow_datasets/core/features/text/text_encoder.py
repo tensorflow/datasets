@@ -38,7 +38,8 @@ NUM_BYTES = 2**8
 class TextEncoderConfig(object):
   """Configuration for `tfds.features.Text`."""
 
-  def __init__(self, encoder=None, encoder_cls=None, vocab_size=None):
+  def __init__(self, encoder=None, encoder_cls=None, vocab_size=None,
+               name=None):
     if encoder:
       if (encoder_cls or vocab_size):
         raise ValueError("If encoder is provided, encoder_cls and "
@@ -52,6 +53,7 @@ class TextEncoderConfig(object):
     self.encoder = encoder
     self.encoder_cls = encoder_cls
     self.vocab_size = vocab_size
+    self.name = name
 
 
 @six.add_metaclass(abc.ABCMeta)
