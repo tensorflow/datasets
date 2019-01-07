@@ -16,6 +16,11 @@
 # pylint: disable=line-too-long
 """`tensorflow_datasets` (`tfds`) defines a collection of datasets ready-to-use with TensorFlow.
 
+Warning: these docs are from branch `master`. `tensorflow-datasets` will
+release a stable version shortly. Follow the
+[release tracking issue](https://github.com/tensorflow/datasets/issues/5)
+to be notified of release.
+
 Each dataset is defined as a `tfds.core.DatasetBuilder`, which encapsulates
 the logic to download the dataset and construct an input pipeline, as well as
 contains the dataset documentation (version, splits, number of examples, etc.).
