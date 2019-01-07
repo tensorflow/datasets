@@ -86,8 +86,7 @@ class SequenceFeatureTest(test_utils.FeatureExpectationsTestCase):
                 # Empty sequence length
                 test_utils.FeatureExpectationItem(
                     value={'label': []},
-                    raise_cls=ValueError,
-                    raise_msg='do not support empty sequences',
+                    expected={'label': []},
                 ),
             ],
         ),
@@ -193,6 +192,15 @@ class SequenceFeatureTest(test_utils.FeatureExpectationsTestCase):
                 test_utils.FeatureExpectationItem(
                     value={'image': imgs},
                     expected={'image': imgs_stacked},
+                ),
+                # Empty value
+                test_utils.FeatureExpectationItem(
+                    value={'image': []},
+                    # The empty value still has the right shape
+                    expected={'image': np.empty(
+                        shape=(0, 128, 100, 3),
+                        dtype=np.uint8
+                    )},
                 ),
             ],
         ),

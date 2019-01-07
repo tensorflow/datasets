@@ -104,27 +104,34 @@ class SequenceDict(feature.FeaturesDict):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
 
-    def add_length_dim(serialized_feature):
-      """Add the length dimension to the serialized_feature."""
-      if isinstance(serialized_feature, tf.io.FixedLenFeature):
+    def add_length_dim(serialized_info):
+      """Add the length dimension to the serialized_info.
+
+      Args:
+        serialized_info: One of tf.io.FixedLenFeature, tf.io.VarLenFeature,...
+
+      Returns:
+        new_serialized_info: serialized_info with extended first dimension
+      """
+      if isinstance(serialized_info, tf.io.FixedLenFeature):
         if self._length is not None:
           return tf.io.FixedLenFeature(
-              shape=(self._length,) + serialized_feature.shape,
-              dtype=serialized_feature.dtype,
+              shape=(self._length,) + serialized_info.shape,
+              dtype=serialized_info.dtype,
           )
         else:
           return tf.io.FixedLenSequenceFeature(
-              shape=serialized_feature.shape,
-              dtype=serialized_feature.dtype,
+              shape=serialized_info.shape,
+              dtype=serialized_info.dtype,
               allow_missing=True,
           )
-      elif isinstance(serialized_feature, tf.io.VarLenFeature):
-        return serialized_feature
+      elif isinstance(serialized_info, tf.io.VarLenFeature):
+        return serialized_info
       else:
         raise ValueError(
             'FixedLenSequenceFeature not supported inside SequenceDict'
         )
-      return serialized_feature
+      return serialized_info
 
     tensor_info = super(SequenceDict, self).get_serialized_info()
     return utils.map_nested(add_length_dim, tensor_info)
@@ -139,9 +146,13 @@ class SequenceDict(feature.FeaturesDict):
           'Input sequence length do not match the defined one. Got {} != '
           '{}'.format(len(sequence_elements), self._length)
       )
-    # Empty sequences not supported
+
+    # Empty sequences return empty arrays
     if not sequence_elements:
-      raise ValueError('SequenceFeatures do not support empty sequences.')
+      return {
+          key: np.empty(shape=(0,), dtype=serialized_info.dtype.as_numpy_dtype)
+          for key, serialized_info in self.get_serialized_info().items()
+      }
 
     # Encode each individual elements
     sequence_elements = [

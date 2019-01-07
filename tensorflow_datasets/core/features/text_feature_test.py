@@ -49,6 +49,11 @@ class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
                     value=unicode_text,
                     expected=tf.compat.as_bytes(unicode_text),
                 ),
+                # Empty string
+                test_utils.FeatureExpectationItem(
+                    value='',
+                    expected=tf.compat.as_bytes(''),
+                ),
             ],
         ),
         # Unicode integer-encoded by byte
@@ -61,6 +66,11 @@ class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
                 test_utils.FeatureExpectationItem(
                     value=unicode_text,
                     expected=[i + 1 for i in [228, 189, 160, 229, 165, 189]],
+                ),
+                # Empty string
+                test_utils.FeatureExpectationItem(
+                    value='',
+                    expected=[],
                 ),
             ],
         ),

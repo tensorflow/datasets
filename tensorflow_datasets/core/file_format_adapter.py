@@ -310,17 +310,21 @@ def _dict_to_tf_example(example_dict):
   """Builds tf.train.Example from (string -> int/float/str list) dictionary."""
   features = {}
   for (k, v) in six.iteritems(example_dict):
+    if isinstance(v, (list, tuple)) and not v:
+      raise ValueError(
+          "Feature {} received an empty list value, so is unable to infer the "
+          "feature type to record. To support empty value, the corresponding "
+          "FeatureConnector should return a numpy array with the correct dtype "
+          "instead of a Python list.".format(k)
+      )
 
-    if not isinstance(v, (list, tuple, np.ndarray)):
-      v = [v]
-    elif isinstance(v, np.ndarray):
-      v = v.flatten()
+    v = np.array(v).flatten()  # Convert v into a 1-d array
 
-    if isinstance(v[0], six.integer_types + (np.integer,)):
+    if np.issubdtype(v.dtype, np.integer):
       features[k] = tf.train.Feature(int64_list=tf.train.Int64List(value=v))
-    elif isinstance(v[0], (float, np.floating)):
+    elif np.issubdtype(v.dtype, np.floating):
       features[k] = tf.train.Feature(float_list=tf.train.FloatList(value=v))
-    elif isinstance(v[0], six.string_types + (bytes,)):
+    elif v.dtype.kind in ("U", "S") or v.dtype == object:  # binary or unicode
       v = [tf.compat.as_bytes(x) for x in v]
       features[k] = tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
     else:
@@ -328,7 +332,7 @@ def _dict_to_tf_example(example_dict):
           "_dict_to_tf_example value received: {}.\n"
           "tf.train.Example does not support type {} for feature key {}. "
           "This may indicate that one of the FeatureConnectors received an "
-          "unsupported value as input.".format(repr(v[0]), repr(type(v[0])), k)
+          "unsupported value as input.".format(repr(v), repr(type(v)), k)
       )
 
   return tf.train.Example(features=tf.train.Features(feature=features))

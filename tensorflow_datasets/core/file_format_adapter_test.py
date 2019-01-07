@@ -114,13 +114,34 @@ class TFRecordUtilsTest(tf.test.TestCase):
   def test_dict_to_example(self):
     example = file_format_adapter._dict_to_tf_example({
         "a": 1,
+        "a2": np.array(1),
         "b": ["foo", "bar"],
+        "b2": np.array(["foo", "bar"]),
         "c": [2.0],
+        "c2": np.array([2.0]),
+        # Empty values supported when type is defined
+        "d": np.array([], dtype=np.int32),
     })
     feature = example.features.feature
     self.assertEqual([1], list(feature["a"].int64_list.value))
+    self.assertEqual([1], list(feature["a2"].int64_list.value))
     self.assertEqual([b"foo", b"bar"], list(feature["b"].bytes_list.value))
+    self.assertEqual([b"foo", b"bar"], list(feature["b2"].bytes_list.value))
     self.assertEqual([2.0], list(feature["c"].float_list.value))
+    self.assertEqual([2.0], list(feature["c2"].float_list.value))
+    self.assertEqual([], list(feature["d"].int64_list.value))
+
+    with self.assertRaisesWithPredicateMatch(ValueError, "received an empty"):
+      # Raise error if an undefined empty value is given
+      file_format_adapter._dict_to_tf_example({
+          "empty": [],
+      })
+
+    with self.assertRaisesWithPredicateMatch(ValueError, "not support type"):
+      # Raise error if an unsupported dtype is given
+      file_format_adapter._dict_to_tf_example({
+          "wrong_type": np.zeros(shape=(5,), dtype=np.complex64),
+      })
 
 
 if __name__ == "__main__":

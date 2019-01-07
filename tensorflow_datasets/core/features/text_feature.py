@@ -23,6 +23,7 @@ from __future__ import print_function
 
 import os
 
+import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core.features import feature
@@ -101,7 +102,9 @@ class Text(feature.FeatureConnector):
 
   def encode_example(self, example_data):
     if self.encoder:
-      return self.encoder.encode(example_data)
+      # Wrap inside an array to ensure dtype is correctly infered even for
+      # empty list
+      return np.array(self.encoder.encode(example_data), dtype=np.int64)
     else:
       return tf.compat.as_bytes(example_data)
 
