@@ -42,6 +42,7 @@ np_datasets = tfds.dataset_as_numpy(datasets)
   * [`"imdb_reviews"`](#imdb_reviews)
   * [`"lm1b"`](#lm1b)
   * [`"squad"`](#squad)
+  * [`"translate_wmt"`](#translate_wmt)
 * [`video`](#video)
   * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
   * [`"starcraft_video"`](#starcraft_video)
@@ -121,13 +122,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |    202,599
-TRAIN      |    162,770
-TEST       |     19,962
-VALIDATION |     19,867
-
+None computed
 
 ### Urls
  * http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
@@ -178,12 +173,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     60,000
-TRAIN      |     50,000
-TEST       |     10,000
-
+None computed
 
 ### Urls
  * https://www.cs.toronto.edu/~kriz/cifar.html
@@ -263,13 +253,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     88,712
-TEST       |     53,576
-TRAIN      |     35,126
-SAMPLE     |         10
-
+None computed
 
 ### Urls
  * https://www.kaggle.com/c/diabetic-retinopathy-detection/data
@@ -302,12 +286,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     70,000
-TRAIN      |     60,000
-TEST       |     10,000
-
+None computed
 
 ### Urls
  * https://github.com/zalandoresearch/fashion-mnist
@@ -317,21 +296,20 @@ TEST       |     10,000
 
 ### Citation
 ```
-@article{DBLP:journals/corr/abs-1708-07747,
-  author    = {Han Xiao and
-               Kashif Rasul and
-               Roland Vollgraf},
-  title     = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning
-               Algorithms},
-  journal   = {CoRR},
-  volume    = {abs/1708.07747},
-  year      = {2017},
-  url       = {http://arxiv.org/abs/1708.07747},
-  archivePrefix = {arXiv},
-  eprint    = {1708.07747},
-  timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
-  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
+@article{journals/corr/abs-1708-07747,
+  added-at = {2018-08-13T00:00:00.000+0200},
+  author = {Xiao, Han and Rasul, Kashif and Vollgraf, Roland},
+  biburl = {https://www.bibsonomy.org/bibtex/2c1bcf55a1de644db3d7b0a4a9b7a778e/dblp},
+  ee = {http://arxiv.org/abs/1708.07747},
+  interhash = {0c81f9a6170118f14703b6796101ce40},
+  intrahash = {c1bcf55a1de644db3d7b0a4a9b7a778e},
+  journal = {CoRR},
+  keywords = {dblp},
+  timestamp = {2018-08-14T12:22:49.000+0200},
+  title = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms.},
+  url = {http://dblp.uni-trier.de/db/journals/corr/corr1708.html#abs-1708-07747},
+  volume = {abs/1708.07747},
+  year = 2017
 }
 
 ```
@@ -398,12 +376,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |  1,331,167
-TRAIN      |  1,281,167
-VALIDATION |     50,000
-
+None computed
 
 ### Urls
  * http://image-net.org/
@@ -446,12 +419,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     70,000
-TRAIN      |     60,000
-TEST       |     10,000
-
+None computed
 
 ### Urls
  * http://yann.lecun.com/exdb/mnist/
@@ -461,12 +429,21 @@ TEST       |     10,000
 
 ### Citation
 ```
-@article{lecun2010mnist,
-  title={MNIST handwritten digit database},
-  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-  journal={AT\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
-  volume={2},
-  year={2010}
+@article{lecun-mnisthandwrittendigit-2010,
+  added-at = {2010-06-28T21:16:30.000+0200},
+  author = {LeCun, Yann and Cortes, Corinna},
+  biburl = {https://www.bibsonomy.org/bibtex/2935bad99fa1f65e03c25b315aa3c1032/mhwombat},
+  groups = {public},
+  howpublished = {http://yann.lecun.com/exdb/mnist/},
+  interhash = {21b9d0558bd66279df9452562df6e6f3},
+  intrahash = {935bad99fa1f65e03c25b315aa3c1032},
+  keywords = {MSc _checked character_recognition mnist network neural},
+  lastchecked = {2016-01-14 14:24:11},
+  timestamp = {2016-07-12T19:25:30.000+0200},
+  title = {{MNIST} handwritten digit database},
+  url = {http://yann.lecun.com/exdb/mnist/},
+  username = {mhwombat},
+  year = 2010
 }
 
 ```
@@ -491,13 +468,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |    630,420
-EXTRA      |    531,131
-TRAIN      |     73,257
-TEST       |     26,032
-
+None computed
 
 ### Urls
  * http://ufldl.stanford.edu/housenumbers/
@@ -587,12 +558,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     50,000
-TRAIN      |     25,000
-TEST       |     25,000
-
+None computed
 
 ### Urls
  * http://ai.stanford.edu/~amaas/data/sentiment/
@@ -662,7 +628,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=58517>),
 })
 ```
 
@@ -672,7 +638,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=58517>),
 })
 ```
 
@@ -810,6 +776,61 @@ archivePrefix = {arXiv},
 
 ---
 
+## `"translate_wmt"`
+
+Translate dataset based on the data from statmt.org.
+
+
+* URL: http://www.statmt.org/wmt18/
+* `DatasetBuilder`: [`tfds.text.translate_wmt.TranslateWmt`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/translate_wmt.py)
+
+`translate_wmt` is configured with `tfds.text.translate_wmt.WMTConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {'train': ['ende_news_commentary_wmt18', 'ende_commoncrawl_wmt13', 'ende_europarl_wmt13'], 'test': ['ende_newstest_wmt13'], 'dev': []}.
+
+* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {'train': ['ende_news_commentary_wmt18', 'ende_commoncrawl_wmt13', 'ende_europarl_wmt13'], 'test': ['ende_newstest_wmt13'], 'dev': []}.
+
+
+### `"translate_wmt/ende_plain_text_t2t"`
+
+```
+FeaturesDict({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"translate_wmt/ende_subwords8k_t2t"`
+
+```
+FeaturesDict({
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=26503>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=19322>),
+})
+```
+
+
+
+
+### Statistics
+None computed
+
+### Urls
+ * http://www.statmt.org/wmt18/
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+
+```
+
+---
+
 
 # [`video`](#video)
 
@@ -833,12 +854,7 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     43,520
-TRAIN      |     43,264
-TEST       |        256
-
+None computed
 
 ### Urls
  * https://sites.google.com/site/brainrobotdata/home/push-dataset
@@ -901,7 +917,7 @@ configurations predefined (defaults to the first one):
 
 ```
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8),
+    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
 
@@ -911,7 +927,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8),
+    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
 
@@ -921,7 +937,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8),
+    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
 
@@ -931,7 +947,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8),
+    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
 
@@ -941,7 +957,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8),
+    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
 
@@ -951,7 +967,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8),
+    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
 
@@ -961,7 +977,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8),
+    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
 
@@ -971,7 +987,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8),
+    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
 

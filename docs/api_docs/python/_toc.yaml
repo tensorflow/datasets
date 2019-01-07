@@ -66,6 +66,8 @@ toc:
       path: /datasets/api_docs/python/tfds/features/FeaturesDict
     - title: Image
       path: /datasets/api_docs/python/tfds/features/Image
+    - title: Sequence
+      path: /datasets/api_docs/python/tfds/features/Sequence
     - title: SequenceDict
       path: /datasets/api_docs/python/tfds/features/SequenceDict
     - title: Tensor

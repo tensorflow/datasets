@@ -22,7 +22,8 @@ Configuration for <a href="../../../tfds/features/Text.md"><code>tfds.features.T
 __init__(
     encoder=None,
     encoder_cls=None,
-    vocab_size=None
+    vocab_size=None,
+    name=None
 )
 ```
 

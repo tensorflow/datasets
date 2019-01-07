@@ -27,6 +27,8 @@ Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/
 
 [`class TensorInfo`](../tfds/features/TensorInfo.md): TensorInfo(shape, dtype)
 
+[`class Sequence`](../tfds/features/Sequence.md): Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
+
 [`class SequenceDict`](../tfds/features/SequenceDict.md): Composite `FeatureConnector` for a `dict` where each value is a list.
 
 [`class Image`](../tfds/features/Image.md): `FeatureConnector` for images.

@@ -1,5 +1,5 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
-<meta itemprop="name" content="tfds.features.Video" />
+<meta itemprop="name" content="tfds.features.Sequence" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="serialized_keys"/>
@@ -14,52 +14,60 @@
 <meta itemprop="property" content="save_metadata"/>
 </div>
 
-# tfds.features.Video
+# tfds.features.Sequence
 
-## Class `Video`
+## Class `Sequence`
 
-Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
+Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
-Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
+Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
-`FeatureConnector` for videos, png-encoding frames on disk.
+Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
 
-Video: The image connector accepts as input:
-  * uint8 array representing an video.
+Ex:
+In `DatasetInfo`:
 
-Output:
-  video: tf.Tensor of type tf.uint8 and shape [num_frames, height, width, 3]
+```
+features=tfds.features.FeatureDict({
+    'image': tfds.features.Image(),
+    'labels': tfds.features.Sequence(tfds.features.ClassLabel(num_classes=5)),
+})
+```
 
-Example:
-  * In the DatasetInfo object:
-    features=features.FeatureDict({
-        'video': features.Video(shape=(None, 64, 64, 3)),
-    })
+At generation time:
 
-  * During generation:
-    yield {
-        'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
-    }
+```
+yield {
+    'image': 'path/to/img.png',
+    'labels': [0, 3, 3, 2, 4],
+}
+```
+
+Note that the underlying feature attributes can be accessed directly through
+the sequence.
+
+```
+builder.info.features['labels'].names
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(shape)
+__init__(
+    feature,
+    **kwargs
+)
 ```
 
-Construct the connector.
+Construct a sequence from a specific feature.
 
 #### Args:
 
-* <b>`shape`</b>: tuple of ints, the shape of the video (num_frames, height, width,
-    channels=3).
-
-
-#### Raises:
-
-* <b>`ValueError`</b>: If the shape is invalid
+* <b>`feature`</b>: <a href="../../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>, The feature to wrap as sequence
+* <b>`**kwargs`</b>: Same additional arguments as for <a href="../../tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>,
+    like `length`.
 
 
 
