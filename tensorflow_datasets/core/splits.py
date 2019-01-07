@@ -438,6 +438,9 @@ class SplitDict(utils.NonMutableDict):
     super(SplitDict, self).__init__(error_msg="Split {key} already present")
 
   def __getitem__(self, key):
+    if str(key) not in self:
+      raise KeyError("Invalid split %s. Available splits are: %s" % (
+          key, sorted(list(self.keys()))))
     return super(SplitDict, self).__getitem__(str(key))
 
   def __setitem__(self, key, value):
