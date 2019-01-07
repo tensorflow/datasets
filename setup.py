@@ -81,7 +81,7 @@ setup(
     description=DOCLINES[0],
     long_description='\n'.join(DOCLINES[2:]),
     author='Google Inc.',
-    author_email='opensource@google.com',
+    author_email='packages@tensorflow.org',
     url='http://github.com/tensorflow/datasets',
     download_url='https://github.com/tensorflow/datasets/tags',
     license='Apache 2.0',
