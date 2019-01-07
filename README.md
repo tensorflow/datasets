@@ -32,6 +32,9 @@ pip install tfds-nightly
 import tensorflow_datasets as tfds
 import tensorflow as tf
 
+# tfds works in both Eager and Graph modes
+tf.enable_eager_execution()
+
 # See available datasets
 print(tfds.list_builders())
 
@@ -41,8 +44,8 @@ train_dataset, test_dataset = datasets["train"], datasets["test"]
 
 # Build your input pipeline
 train_dataset = train_dataset.shuffle(1000).batch(128).prefetch(10)
-features = tf.compat.v1.data.make_one_shot_iterator(train_dataset).get_next()
-image, label = features["image"], features["label"]
+for features in train_dataset.take(1):
+  image, label = features["image"], features["label"]
 ```
 
 ### `DatasetBuilder`
