@@ -30,6 +30,7 @@ pip install tfds-nightly
 
 ```python
 import tensorflow_datasets as tfds
+import tensorflow as tf
 
 # See available datasets
 print(tfds.list_builders())
@@ -40,7 +41,7 @@ train_dataset, test_dataset = datasets["train"], datasets["test"]
 
 # Build your input pipeline
 train_dataset = train_dataset.shuffle(1000).batch(128).prefetch(10)
-features = train_dataset.make_oneshot_iterator().get_next()
+features = tf.compat.v1.data.make_one_shot_iterator(train_dataset).get_next()
 image, label = features["image"], features["label"]
 ```
 
