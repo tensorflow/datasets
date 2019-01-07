@@ -49,6 +49,10 @@ def _get_filename(response):
   return util.get_file_name(response.url)
 
 
+class DownloadError(Exception):
+  pass
+
+
 class _Downloader(object):
   """Class providing async download API with checksum validation.
 
@@ -83,6 +87,9 @@ class _Downloader(object):
   def _get_drive_url(self, url, session):
     """Returns url, possibly with confirmation token."""
     response = session.get(url, stream=True)
+    if response.status_code != 200:
+      raise DownloadError(
+          'Failed to get url %s. HTTP code: %d.' % (url, response.status_code))
     for k, v in response.cookies.items():
       if k.startswith('download_warning'):
         return url + '&confirm=' + v  # v is the confirm token
@@ -96,6 +103,9 @@ class _Downloader(object):
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
     response = session.get(url, stream=True)
+    if response.status_code != 200:
+      raise DownloadError(
+          'Failed to get url %s. HTTP code: %d.' % (url, response.status_code))
     fname = _get_filename(response)
     path = os.path.join(destination_path, fname)
     size = 0

@@ -31,11 +31,12 @@ from tensorflow_datasets.core.download import resource as resouce_lib
 
 class _FakeResponse(object):
 
-  def __init__(self, url, content, cookies=None, headers=None):
+  def __init__(self, url, content, cookies=None, headers=None, status_code=200):
     self.url = url
     self.raw = io.BytesIO(content)
     self.cookies = cookies or {}
     self.headers = headers or {}
+    self.status_code = status_code
 
   def iter_content(self, chunk_size):
     del chunk_size
@@ -89,6 +90,16 @@ class DownloaderTest(tf.test.TestCase):
         downloader.requests.Session, 'get', side_effect=error).start()
     promise = self.downloader.download(self.resource, self.tmp_dir)
     with self.assertRaises(downloader.requests.exceptions.HTTPError):
+      promise.get()
+
+  def test_bad_http_status(self):
+    tf.test.mock.patch.object(
+        downloader.requests.Session,
+        'get',
+        lambda *a, **kw: _FakeResponse(self.url, b'error', status_code=404),
+    ).start()
+    promise = self.downloader.download(self.resource, self.tmp_dir)
+    with self.assertRaises(downloader.DownloadError):
       promise.get()
 
 
