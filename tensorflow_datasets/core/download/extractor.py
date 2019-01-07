@@ -69,7 +69,11 @@ class _Extractor(object):
                                uuid.uuid4().hex)
     for path, handle in iter_archive(from_path, method):
       _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
-    tf.gfile.Rename(to_path_tmp, to_path, overwrite=True)
+    # `tf.gfile.Rename(overwrite=True)` doesn't work for non empty directories,
+    # so delete destination first, if it already exists.
+    if tf.gfile.Exists(to_path):
+      tf.gfile.DeleteRecursively(to_path)
+    tf.gfile.Rename(to_path_tmp, to_path)
     return to_path
 
 
