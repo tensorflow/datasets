@@ -23,10 +23,10 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import feature as feature_lib
 
 
-class SequenceDict(feature.FeaturesDict):
+class SequenceDict(feature_lib.FeaturesDict):
   """Composite `FeatureConnector` for a `dict` where each value is a list.
 
   `SequenceDict` correspond to sequence of `tfds.features.FeatureDict`. At
@@ -92,7 +92,7 @@ class SequenceDict(feature.FeaturesDict):
     # Add the additional length dimension to every shape
 
     def add_length_dim(tensor_info):
-      return feature.TensorInfo(
+      return feature_lib.TensorInfo(
           shape=(self._length,) + tensor_info.shape,
           dtype=tensor_info.dtype,
       )
@@ -182,6 +182,70 @@ class SequenceDict(feature.FeaturesDict):
         back_prop=False,
         name='sequence_decode',
     )
+
+
+class Sequence(feature_lib.FeatureConnector):
+  """Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
+
+  Ex:
+  In `DatasetInfo`:
+
+  ```
+  features=tfds.features.FeatureDict({
+      'image': tfds.features.Image(),
+      'labels': tfds.features.Sequence(tfds.features.ClassLabel(num_classes=5)),
+  })
+  ```
+
+  At generation time:
+
+  ```
+  yield {
+      'image': 'path/to/img.png',
+      'labels': [0, 3, 3, 2, 4],
+  }
+  ```
+
+  Note that the underlying feature attributes can be accessed directly through
+  the sequence.
+
+  ```
+  builder.info.features['labels'].names
+  ```
+
+  """
+
+  def __init__(self, feature, **kwargs):
+    """Construct a sequence from a specific feature.
+
+    Args:
+      feature: `tfds.features.FeatureConnector`, The feature to wrap as sequence
+      **kwargs: Same additional arguments as for `tfds.features.SequenceDict`,
+        like `length`.
+    """
+    self._seq_feature = SequenceDict({'inner': feature}, **kwargs)
+
+  def __getattr__(self, key):
+    """Allow to access the underlying attributes directly."""
+    return getattr(self._seq_feature['inner'], key)
+
+  def get_tensor_info(self):
+    return self._seq_feature.get_tensor_info()['inner']
+
+  def get_serialized_info(self):
+    return self._seq_feature.get_serialized_info()['inner']
+
+  def encode_example(self, example_data):
+    """Wrapper arround SequenceDict."""
+    return self._seq_feature.encode_example({'inner': example_data})['inner']
+
+  def decode_example(self, tfexample_data):
+    """Wrapper arround SequenceDict."""
+    return self._seq_feature.decode_example({'inner': tfexample_data})['inner']
+
+  def _additional_repr_info(self):
+    """Override to return addtional info to go into __repr__."""
+    return {'feature': repr(self._seq_feature['inner'])}
 
 
 def stack_arrays(*elems):

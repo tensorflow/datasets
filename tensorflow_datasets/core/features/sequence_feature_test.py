@@ -25,7 +25,7 @@ from tensorflow_datasets.core import test_utils
 import tensorflow_datasets.public_api as tfds
 
 
-class SequenceFeatureTest(test_utils.FeatureExpectationsTestCase):
+class SequenceDictFeatureTest(test_utils.FeatureExpectationsTestCase):
 
   @property
   def expectations(self):
@@ -209,6 +209,69 @@ class SequenceFeatureTest(test_utils.FeatureExpectationsTestCase):
     return all_tests
 
   # Should add unittest for _transpose_dict_list
+
+
+class SequenceFeatureTest(test_utils.FeatureExpectationsTestCase):
+
+  @property
+  def expectations(self):
+
+    return [
+        test_utils.FeatureExpectation(
+            name='int',
+            feature=tfds.features.Sequence(tf.int32, length=3),
+            shape=(3,),
+            dtype=tf.int32,
+            tests=[
+                # Python array
+                test_utils.FeatureExpectationItem(
+                    value=[1, 2, 3],
+                    expected=[1, 2, 3],
+                ),
+                # Numpy array
+                test_utils.FeatureExpectationItem(
+                    value=np.ones(shape=(3,), dtype=np.int32),
+                    expected=[1, 1, 1],
+                ),
+                # Wrong sequence length
+                test_utils.FeatureExpectationItem(
+                    value=np.ones(shape=(4,), dtype=np.int32),
+                    raise_cls=ValueError,
+                    raise_msg='Input sequence length do not match',
+                ),
+            ],
+        ),
+        test_utils.FeatureExpectation(
+            name='label',
+            feature=tfds.features.Sequence(
+                tfds.features.ClassLabel(names=['left', 'right']),
+            ),
+            shape=(None,),
+            dtype=tf.int64,
+            tests=[
+                test_utils.FeatureExpectationItem(
+                    value=['right', 'left', 'left'],
+                    expected=[1, 0, 0],
+                ),
+                # Variable sequence length
+                test_utils.FeatureExpectationItem(
+                    value=['right', 'left', 'right', 'left'],
+                    expected=[1, 0, 1, 0],
+                ),
+                # Empty sequence length
+                test_utils.FeatureExpectationItem(
+                    value=[],
+                    expected=[],
+                ),
+            ],
+        ),
+    ]
+
+  def test_getattr(self):
+    feature = tfds.features.Sequence(
+        tfds.features.ClassLabel(names=['left', 'right']),
+    )
+    self.assertEqual(feature.names, ['left', 'right'])
 
 
 if __name__ == '__main__':

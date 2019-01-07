@@ -19,16 +19,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
-
-from tensorflow_datasets.core.features import feature
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 
 # TODO(tfds): Support more formats (gifs, mp4,...)
 
 
-class Video(feature.FeatureConnector):
+class Video(sequence_feature.Sequence):
   """`FeatureConnector` for videos, png-encoding frames on disk.
 
   Video: The image connector accepts as input:
@@ -65,25 +62,7 @@ class Video(feature.FeatureConnector):
     if shape.count(None) > 1:
       raise ValueError('Video shape cannot have more than 1 unknown dim')
 
-    self._shape = shape
-    self._dtype = tf.uint8
-    self._seq_feature = sequence_feature.SequenceDict({
-        'frame': image_feature.Image(shape=self._shape[1:],
-                                     encoding_format='png'),
-    })
-
-  def get_tensor_info(self):
-    return feature.TensorInfo(shape=self._shape, dtype=self._dtype)
-
-  def get_serialized_info(self):
-    # N png-encoded frames
-    return self._seq_feature.get_serialized_info()['frame']
-
-  def encode_example(self, example_data):
-    # example_data: 4-D np.array
-    return self._seq_feature.encode_example({'frame': example_data})['frame']
-
-  def decode_example(self, tfexample_data):
-    video = self._seq_feature.decode_example({'frame': tfexample_data})['frame']
-    video.set_shape(self._shape)
-    return video
+    super(Video, self).__init__(
+        image_feature.Image(shape=shape[1:], encoding_format='png'),
+        length=shape[0],
+    )
