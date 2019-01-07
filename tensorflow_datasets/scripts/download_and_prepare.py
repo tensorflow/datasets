@@ -68,14 +68,10 @@ flags.DEFINE_boolean("compute_stats", True,
 
 
 
-def download_and_prepare(dataset_name, builder_config=None):
+def download_and_prepare(builder, dataset_name, config_name):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset %s config %s ..." %
-        (dataset_name, builder_config and builder_config.name))
-  builder = tfds.builder(
-      dataset_name,
-      data_dir=FLAGS.data_dir,
-      config=builder_config)
+  print("download_and_prepare for dataset %s config %s ..." % (dataset_name,
+                                                               config_name))
   # TODO(b/116270825): Add flag to force extraction / preparation.
   mode = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
   builder.download_and_prepare(
@@ -95,21 +91,31 @@ def download_and_prepare(dataset_name, builder_config=None):
     del iterator, item
 
 
+
 def main(_):
   datasets_to_build = (
       set(FLAGS.datasets.split(",")) -
       set(FLAGS.exclude_datasets.split(",")))
   tf.logging.info("Running download_and_prepare for datasets:\n%s",
                   "\n".join(datasets_to_build))
-  builders = [tfds.builder(name, data_dir=FLAGS.data_dir)
-              for name in datasets_to_build]
-  for builder in builders:
-    if builder.BUILDER_CONFIGS:
-      for config in builder.BUILDER_CONFIGS:
-        download_and_prepare(builder.name, config)
-    else:
-      download_and_prepare(builder.name)
+  builders = {
+      name: tfds.builder(name, data_dir=FLAGS.data_dir)
+      for name in datasets_to_build
+  }
 
+  for name, builder in builders.items():
+    if builder.BUILDER_CONFIGS and "/" not in name:
+      # If builder has multiple configs, and no particular config was
+      # requested, then compute all.
+      for config in builder.BUILDER_CONFIGS:
+        builder_for_config = tfds.builder(
+            builder.name, data_dir=FLAGS.data_dir, config=config)
+        download_and_prepare(builder_for_config, builder.name, config.name)
+    else:
+      # If there is a slash in the name, then user requested a specific
+      # dataset configuration.
+      download_and_prepare(builder, builder.name,
+                           name.split("/", 1)[1] if "/" in name else "")
 
 
 if __name__ == "__main__":
