@@ -34,7 +34,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'future',
     'promise',
-    'protobuf',
+    'protobuf>=3.6.1',
     'pytz',
     'requests',
     'scipy',
