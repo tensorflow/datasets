@@ -176,6 +176,19 @@ class DownloadManagerTest(tf.test.TestCase):
         'noextract': '/dl_dir/noextract',
     })
 
+  def test_extract_twice_parallel(self):
+    # Make sure calling extract twice on same resource actually does the
+    # extraction once.
+    extracted_new, self.extract_results['/dl_dir/foo.tar'] = (
+        _get_promise_on_event('/extract_dir/TAR.foo'))
+    manager = self._get_manager()
+    res1 = manager.extract('/dl_dir/foo.tar', async_=True)
+    res2 = manager.extract('/dl_dir/foo.tar', async_=True)
+    self.assertTrue(res1 is res2)
+    extracted_new.set()
+    self.assertEqual(res1.get(), '/extract_dir/TAR.foo')
+    self.assertEqual(1, self.extractor_extract.call_count)
+
   def test_download_and_extract(self):
     url_a = 'http://a/a.zip'
     url_b = 'http://b/b'

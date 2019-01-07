@@ -165,6 +165,10 @@ class DownloadManager(object):
     tf.gfile.DeleteRecursively(tmp_dir_path)
     return resource.path
 
+  # synchronize and memoize decorators ensure same resource will only be
+  # processed once, even if passed twice to download_manager.
+  @util.build_synchronize_decorator()
+  @utils.memoize()
   def _download(self, resource):
     """Download resource, returns Promise->path to downloaded file."""
     if isinstance(resource, six.string_types):
@@ -191,6 +195,8 @@ class DownloadManager(object):
                                           dl_size)
     return self._downloader.download(resource, tmp_dir_path).then(callback)
 
+  @util.build_synchronize_decorator()
+  @utils.memoize()
   def _extract(self, resource):
     """Extract a single archive, returns Promise->path to extraction result."""
     if isinstance(resource, six.string_types):
@@ -206,6 +212,8 @@ class DownloadManager(object):
       return promise.Promise.resolve(extract_path)
     return self._extractor.extract(resource, extract_path)
 
+  @util.build_synchronize_decorator()
+  @utils.memoize()
   def _download_extract(self, resource):
     """Download-extract `Resource` or url, returns Promise->path."""
     if isinstance(resource, six.string_types):
