@@ -185,43 +185,26 @@ class DatasetBuilder(object):
     return self._info()
 
   @api_utils.disallow_positional_args
-  def download_and_prepare(
-      self,
-      download_dir=None,
-      extract_dir=None,
-      manual_dir=None,
-      mode=None,
-      compute_stats=True):
+  def download_and_prepare(self, download_dir=None, download_config=None):
     """Downloads and prepares dataset for reading.
 
     Args:
       download_dir: `str`, directory where downloaded files are stored.
         Defaults to "~/tensorflow-datasets/downloads".
-      extract_dir: `str`, directory where extracted files are stored.
-        Defaults to "~/tensorflow-datasets/extracted".
-      manual_dir: `str`, read-only directory where manually downloaded/extracted
-        data is stored. Defaults to
-        "~/tensorflow-datasets/manual/{dataset_name}".
-      mode: `tfds.GenerateMode`, how to deal with downloads or data that already
-        exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will reuse both
-        downloads and data if it already exists.
-      compute_stats: `bool`, whether to compute statistics over the generated
-        data.
-
-    Raises:
-      ValueError: If the user defines both cache_dir and dl_manager
+      download_config: `tfds.download.DownloadConfig`, further configuration for
+        downloading and preparing dataset.
     """
 
-    mode = (mode and download.GenerateMode(mode)) or REUSE_DATASET_IF_EXISTS
-    if (self._data_dir and mode == REUSE_DATASET_IF_EXISTS):
+    download_config = download_config or download.DownloadConfig()
+
+    if (self._data_dir and
+        download_config.download_mode == REUSE_DATASET_IF_EXISTS):
       tf.logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
     dl_manager = self._make_download_manager(
         download_dir=download_dir,
-        extract_dir=extract_dir,
-        manual_dir=manual_dir,
-        mode=mode)
+        download_config=download_config)
 
     # Create a new version in a new data_dir.
     self._data_dir = self._get_data_dir(version=self.info.version)
@@ -250,7 +233,7 @@ class DatasetBuilder(object):
         # when reading from package data.
 
         # Update the DatasetInfo metadata by computing statistics from the data.
-        if compute_stats:
+        if download_config.compute_stats:
           already_has_stats = bool(self.info.num_examples)
           if already_has_stats:
             tf.logging.info("Skipping computing stats because they are already "
@@ -468,11 +451,13 @@ class DatasetBuilder(object):
     """
     raise NotImplementedError
 
-  def _make_download_manager(self, download_dir, extract_dir, manual_dir, mode):
+  def _make_download_manager(self, download_dir, download_config):
     download_dir = download_dir or os.path.join(self._data_dir_root,
                                                 "downloads")
-    extract_dir = extract_dir or os.path.join(self._data_dir_root, "extracted")
-    manual_dir = manual_dir or os.path.join(self._data_dir_root, "manual")
+    extract_dir = (download_config.extract_dir or
+                   os.path.join(download_dir, "extracted"))
+    manual_dir = (download_config.manual_dir or
+                  os.path.join(download_dir, "manual"))
     manual_dir = os.path.join(manual_dir, self.name)
 
     return download.DownloadManager(
@@ -481,8 +466,8 @@ class DatasetBuilder(object):
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
-        force_download=(mode == FORCE_REDOWNLOAD),
-        force_extraction=(mode == FORCE_REDOWNLOAD),
+        force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
+        force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
     )
 
   @property

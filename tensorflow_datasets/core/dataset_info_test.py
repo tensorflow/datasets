@@ -146,7 +146,7 @@ class DatasetInfoTest(tf.test.TestCase):
   def test_statistics_generation(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare(compute_stats=True)
+      builder.download_and_prepare()
 
       # Overall
       self.assertEqual(30, builder.info.num_examples)
@@ -161,7 +161,7 @@ class DatasetInfoTest(tf.test.TestCase):
   def test_statistics_generation_variable_sizes(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare(compute_stats=True)
+      builder.download_and_prepare()
 
       # Get the expected type of the feature.
       schema_feature = builder.info.as_proto.schema.feature[0]

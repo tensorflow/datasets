@@ -41,6 +41,35 @@ class NonMatchingChecksumError(Exception):
     Exception.__init__(self, msg)
 
 
+class DownloadConfig(object):
+  """Configuration for `tfds.core.DatasetBuilder.download_and_prepare`."""
+
+  def __init__(self,
+               extract_dir=None,
+               manual_dir=None,
+               download_mode=None,
+               compute_stats=True):
+    """Constructs a `DownloadConfig`.
+
+    Args:
+      extract_dir: `str`, directory where extracted files are stored.
+        Defaults to "<download_dir>/extracted".
+      manual_dir: `str`, read-only directory where manually downloaded/extracted
+        data is stored. Defaults to
+        "<download_dir>/manual".
+      download_mode: `tfds.GenerateMode`, how to deal with downloads or data
+        that already exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will
+        reuse both downloads and data if it already exists.
+      compute_stats: `bool`, whether to compute statistics over the generated
+        data.
+    """
+    self.extract_dir = extract_dir
+    self.manual_dir = manual_dir
+    self.download_mode = util.GenerateMode(
+        download_mode or util.GenerateMode.REUSE_DATASET_IF_EXISTS)
+    self.compute_stats = compute_stats
+
+
 class DownloadManager(object):
   """Manages the download and extraction of files, as well as caching.
 

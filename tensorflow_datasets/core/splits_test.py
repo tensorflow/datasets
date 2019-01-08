@@ -276,7 +276,7 @@ class SplitsIntegrationTest(tf.test.TestCase):
   @classmethod
   def setUpClass(cls):
     cls._builder = DummyDataset(data_dir=test_utils.make_tmp_dir())
-    cls._builder.download_and_prepare(compute_stats=False)
+    cls._builder.download_and_prepare()
 
   def test_split_all(self):
     split = tfds.Split.ALL

@@ -74,12 +74,15 @@ def download_and_prepare(builder, dataset_name, config_name):
                                                                config_name))
   # TODO(b/116270825): Add flag to force extraction / preparation.
   mode = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
-  builder.download_and_prepare(
-      download_dir=FLAGS.download_dir,
+  config = tfds.download.DownloadConfig(
       extract_dir=FLAGS.extract_dir,
       manual_dir=FLAGS.manual_dir,
       compute_stats=FLAGS.compute_stats,
-      mode=mode)
+      download_mode=mode)
+
+  builder.download_and_prepare(
+      download_dir=FLAGS.download_dir,
+      download_config=config)
   termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
 
   if FLAGS.debug:
