@@ -134,11 +134,13 @@ datasets. See the
 ## Want a certain dataset?
 
 Consider contributing (see above). But if you'd just like to request a dataset,
-open a GitHub Issue (select the `Dataset request` issue template) and the
-community can vote on which datasets they'd like most by adding +1/thumbs-up
-to the issue.
+open a
+[Dataset request GitHub issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=dataset+request&template=dataset-request.md&title=%5Bdata+request%5D+%3Cdataset+name%3E)
+and the community can vote on which datasets they'd like most by adding
++1/thumbs-up to the issue.
 
-Vote on the current [set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request).
+Vote on the current
+[set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request).
 
 #### *Disclaimers*
 
