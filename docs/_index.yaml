@@ -18,7 +18,9 @@ landing_page:
         input pipelines.
 
         To get started see the
-        <a href="./overview">TensorFlow Datasets Guide</a>.
+        <a href="./overview">guide</a>
+        and our
+        <a href="./datasets">list of datasets</a>.
     - code_block: |
         <pre class = "prettyprint">
         import tensorflow as tf
