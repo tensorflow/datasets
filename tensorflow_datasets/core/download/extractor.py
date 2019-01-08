@@ -42,6 +42,15 @@ def get_extractor(*args, **kwargs):
   return _Extractor(*args, **kwargs)
 
 
+class ExtractError(Exception):
+  """There was an error while extracting the archive."""
+
+  def __init__(self, resource, err):
+    url = ' (%s)' % resource.url if resource.url else ''
+    msg = 'Error while extracting file %s%s: %s.' % (resource.path, url, err)
+    super(ExtractError, self).__init__(msg)
+
+
 class UnsafeArchiveError(Exception):
   """The archive is unsafe to unpack, e.g. absolute path."""
 
@@ -67,8 +76,11 @@ class _Extractor(object):
     method = resource.extract_method
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
-    for path, handle in iter_archive(from_path, method):
-      _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
+    try:
+      for path, handle in iter_archive(from_path, method):
+        _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
+    except BaseException as err:
+      raise ExtractError(resource, err)
     # `tf.gfile.Rename(overwrite=True)` doesn't work for non empty directories,
     # so delete destination first, if it already exists.
     if tf.gfile.Exists(to_path):

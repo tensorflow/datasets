@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import re
 import tensorflow as tf
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -105,7 +106,19 @@ class ExtractorTest(test_case.TestCase):
     resource = resource_lib.Resource(
         path=from_path, extract_method=resource_lib.ExtractMethod.TAR)
     promise = self.extractor.extract(resource, self.to_path)
-    with self.assertRaises(extractor.UnsafeArchiveError):
+    with self.assertRaisesRegex(extractor.ExtractError,
+                                'Archive at .* is not safe'):
+      promise.get()
+
+  def test_wrong_method(self):
+    from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
+    resource = resource_lib.Resource(
+        path=from_path, extract_method=resource_lib.ExtractMethod.ZIP,
+        url='http://example.com/foo.zip')
+    promise = self.extractor.extract(resource, self.to_path)
+    expected_msg = re.escape(
+        'foo.csv.gz (http://example.com/foo.zip): File is not a zip file.')
+    with self.assertRaisesRegex(extractor.ExtractError, expected_msg):
       promise.get()
 
 

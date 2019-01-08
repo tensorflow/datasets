@@ -22,10 +22,11 @@ from __future__ import print_function
 import os
 import tempfile
 
+from absl.testing import absltest
 import tensorflow as tf
 
 
-class TestCase(tf.test.TestCase):
+class TestCase(absltest.TestCase):
   """Base TestCase for tests using test_data or tmp_dir.
 
   `test_data` class attribute: path to the directory with test data.
@@ -33,10 +34,11 @@ class TestCase(tf.test.TestCase):
   """
 
   @classmethod
-  def setUpClass(cls):
+  def setUpClass(cls):  # pylint: disable=g-missing-super-call
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
 
   def setUp(self):
+    super(TestCase, self).setUp()
     # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
     self.tmp_dir = tempfile.mkdtemp(dir=tf.test.get_temp_dir())
 
