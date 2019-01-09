@@ -1,3 +1,5 @@
 redirects:
 - from: /datasets/api_docs/python/tfds/GenerateMode
   to: /datasets/api_docs/python/tfds/download/GenerateMode
+- from: /datasets/api_docs/python/tfds/features/text
+  to: /datasets/api_docs/python/tfds/features/text_lib

@@ -787,9 +787,9 @@ Translate dataset based on the data from statmt.org.
 `translate_wmt` is configured with `tfds.text.translate_wmt.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {'train': ['ende_news_commentary_wmt18', 'ende_commoncrawl_wmt13', 'ende_europarl_wmt13'], 'test': ['ende_newstest_wmt13'], 'dev': []}.
+* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {'test': ['ende_newstest_wmt13'], 'train': ['ende_news_commentary_wmt18', 'ende_commoncrawl_wmt13', 'ende_europarl_wmt13'], 'dev': []}.
 
-* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {'train': ['ende_news_commentary_wmt18', 'ende_commoncrawl_wmt13', 'ende_europarl_wmt13'], 'test': ['ende_newstest_wmt13'], 'dev': []}.
+* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {'test': ['ende_newstest_wmt13'], 'train': ['ende_news_commentary_wmt18', 'ende_commoncrawl_wmt13', 'ende_europarl_wmt13'], 'dev': []}.
 
 
 ### `"translate_wmt/ende_plain_text_t2t"`
