@@ -44,6 +44,8 @@ toc:
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds/download
+    - title: DownloadConfig
+      path: /datasets/api_docs/python/tfds/download/DownloadConfig
     - title: DownloadManager
       path: /datasets/api_docs/python/tfds/download/DownloadManager
     - title: ExtractMethod

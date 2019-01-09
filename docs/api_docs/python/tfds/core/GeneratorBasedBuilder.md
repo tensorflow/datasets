@@ -113,10 +113,7 @@ the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
 ``` python
 download_and_prepare(
     download_dir=None,
-    extract_dir=None,
-    manual_dir=None,
-    mode=None,
-    compute_stats=True
+    download_config=None
 )
 ```
 
@@ -126,21 +123,8 @@ Downloads and prepares dataset for reading.
 
 * <b>`download_dir`</b>: `str`, directory where downloaded files are stored.
     Defaults to "~/tensorflow-datasets/downloads".
-* <b>`extract_dir`</b>: `str`, directory where extracted files are stored.
-    Defaults to "~/tensorflow-datasets/extracted".
-* <b>`manual_dir`</b>: `str`, read-only directory where manually downloaded/extracted
-    data is stored. Defaults to
-    "~/tensorflow-datasets/manual/{dataset_name}".
-* <b>`mode`</b>: <a href="../../tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>, how to deal with downloads or data that already
-    exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will reuse both
-    downloads and data if it already exists.
-* <b>`compute_stats`</b>: `bool`, whether to compute statistics over the generated
-    data.
-
-
-#### Raises:
-
-* <b>`ValueError`</b>: If the user defines both cache_dir and dl_manager
+* <b>`download_config`</b>: <a href="../../tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>, further configuration for
+    downloading and preparing dataset.
 
 
 

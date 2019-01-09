@@ -37,6 +37,7 @@ np_datasets = tfds.dataset_as_numpy(datasets)
   * [`"image_label_folder"`](#image_label_folder)
   * [`"imagenet2012"`](#imagenet2012)
   * [`"mnist"`](#mnist)
+  * [`"omniglot"`](#omniglot)
   * [`"svhn_cropped"`](#svhn_cropped)
 * [`text`](#text)
   * [`"imdb_reviews"`](#imdb_reviews)
@@ -450,6 +451,60 @@ None computed
 
 ---
 
+## `"omniglot"`
+
+Omniglot data set for one-shot learning. This dataset contains 1623 different
+handwritten characters from 50 different alphabets.
+
+
+* URL: https://github.com/brendenlake/omniglot/
+* `DatasetBuilder`: [`tfds.image.omniglot.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/omniglot.py)
+* Version: `v1.0.0`
+
+### Features
+```
+FeaturesDict({
+    'alphabet': ClassLabel(shape=(), dtype=tf.int64, num_classes=50),
+    'alphabet_char_id': Tensor(shape=(), dtype=tf.int64),
+    'image': Image(shape=(105, 105, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1623),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     38,300
+TRAIN      |     19,280
+TEST       |     13,180
+SMALL2     |      3,120
+SMALL1     |      2,720
+
+
+### Urls
+ * https://github.com/brendenlake/omniglot/
+
+### Supervised keys (for `as_supervised=True`)
+(u'image', u'label')
+
+### Citation
+```
+@article{lake2015human,
+  title={Human-level concept learning through probabilistic program induction},
+  author={Lake, Brenden M and Salakhutdinov, Ruslan and Tenenbaum, Joshua B},
+  journal={Science},
+  volume={350},
+  number={6266},
+  pages={1332--1338},
+  year={2015},
+  publisher={American Association for the Advancement of Science}
+}
+
+```
+
+---
+
 ## `"svhn_cropped"`
 
 The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
@@ -787,9 +842,9 @@ Translate dataset based on the data from statmt.org.
 `translate_wmt` is configured with `tfds.text.translate_wmt.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {'test': ['ende_newstest_wmt13'], 'train': ['ende_news_commentary_wmt18', 'ende_commoncrawl_wmt13', 'ende_europarl_wmt13'], 'dev': []}.
+* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": [], "test": ["ende_newstest_wmt13"], "train": ["ende_news_commentary_wmt18", "ende_commoncrawl_wmt13", "ende_europarl_wmt13"]}.
 
-* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {'test': ['ende_newstest_wmt13'], 'train': ['ende_news_commentary_wmt18', 'ende_commoncrawl_wmt13', 'ende_europarl_wmt13'], 'dev': []}.
+* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": [], "test": ["ende_newstest_wmt13"], "train": ["ende_news_commentary_wmt18", "ende_commoncrawl_wmt13", "ende_europarl_wmt13"]}.
 
 
 ### `"translate_wmt/ende_plain_text_t2t"`

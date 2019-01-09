@@ -1,0 +1,243 @@
+{
+  "citation": "@article{lake2015human,\n  title={Human-level concept learning through probabilistic program induction},\n  author={Lake, Brenden M and Salakhutdinov, Ruslan and Tenenbaum, Joshua B},\n  journal={Science},\n  volume={350},\n  number={6266},\n  pages={1332--1338},\n  year={2015},\n  publisher={American Association for the Advancement of Science}\n}\n", 
+  "description": "Omniglot data set for one-shot learning. This dataset contains 1623 different\nhandwritten characters from 50 different alphabets.\n", 
+  "downloadChecksums": {
+    "https://github.com/brendenlake/omniglot/raw/master/python/images_background.zip": "ad41ab679c8b5d90b271ef46be6987cc81211774a695c29dcc5367b2b26ee640", 
+    "https://github.com/brendenlake/omniglot/raw/master/python/images_background_small1.zip": "f38eb80f801274ac2b4dff5b24289016bfaba4a7d5bb50deebf27104ad6cb8a4", 
+    "https://github.com/brendenlake/omniglot/raw/master/python/images_background_small2.zip": "3ccaa407515a8778e5d0861875af38b17e418f301ad5bb3b5a6b65d901a41c7f", 
+    "https://github.com/brendenlake/omniglot/raw/master/python/images_evaluation.zip": "1f61a8f3366785b057fc117d9228e78a16e3d976c8953b2a10fcc74cf0609cee"
+  }, 
+  "location": {
+    "urls": [
+      "https://github.com/brendenlake/omniglot"
+    ]
+  }, 
+  "name": "omniglot", 
+  "schema": {
+    "feature": [
+      {
+        "name": "alphabet_char_id", 
+        "type": "INT"
+      }, 
+      {
+        "name": "alphabet", 
+        "type": "INT"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "105"
+            }, 
+            {
+              "size": "105"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "18827037", 
+  "splits": [
+    {
+      "name": "small1", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "alphabet_char_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2720"
+              }, 
+              "max": 39.0
+            }
+          }, 
+          {
+            "name": "alphabet", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2720"
+              }, 
+              "max": 31.0, 
+              "min": 10.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2720"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2720"
+              }, 
+              "max": 707.0, 
+              "min": 107.0
+            }
+          }
+        ], 
+        "numExamples": "2720"
+      }
+    }, 
+    {
+      "name": "small2", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "alphabet_char_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3120"
+              }, 
+              "max": 46.0
+            }
+          }, 
+          {
+            "name": "alphabet", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3120"
+              }, 
+              "max": 45.0, 
+              "min": 21.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3120"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3120"
+              }, 
+              "max": 908.0, 
+              "min": 393.0
+            }
+          }
+        ], 
+        "numExamples": "3120"
+      }
+    }, 
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "alphabet_char_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13180"
+              }, 
+              "max": 46.0
+            }
+          }, 
+          {
+            "name": "alphabet", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13180"
+              }, 
+              "max": 49.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13180"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13180"
+              }, 
+              "max": 1622.0, 
+              "min": 964.0
+            }
+          }
+        ], 
+        "numExamples": "13180"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "alphabet_char_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19280"
+              }, 
+              "max": 54.0
+            }
+          }, 
+          {
+            "name": "alphabet", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19280"
+              }, 
+              "max": 48.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19280"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19280"
+              }, 
+              "max": 963.0
+            }
+          }
+        ], 
+        "numExamples": "19280"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
+import json
 import os
 
 import tensorflow as tf
@@ -97,7 +98,8 @@ class WMTConfig(tfds.core.BuilderConfig):
     description = (
         "Translation dataset from %s to %s, uses encoder %s. It uses the "
         "following data files (see the code for exact contents): %s.") % (
-            language_pair[0], language_pair[1], encoder_name, data)
+            language_pair[0], language_pair[1], encoder_name,
+            json.dumps(data, sort_keys=True))
 
     super(WMTConfig, self).__init__(
         name=name, description=description, **kwargs)

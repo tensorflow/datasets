@@ -269,7 +269,7 @@ you could override `_as_dataset()`, call `super()` to get the base
 `tf.data.Dataset`, and then do additional transformations based on the member
 variables.
 
-# Create your own `FeatureConnector`
+## Create your own `FeatureConnector`
 
 Note that most datasets will find the [current set of
 `tfds.features.FeatureConnector`s](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features.md)

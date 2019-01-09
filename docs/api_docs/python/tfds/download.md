@@ -13,6 +13,8 @@ Defined in [`core/download/__init__.py`](https://github.com/tensorflow/datasets/
 
 ## Classes
 
+[`class DownloadConfig`](../tfds/download/DownloadConfig.md): Configuration for <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.
+
 [`class DownloadManager`](../tfds/download/DownloadManager.md): Manages the download and extraction of files, as well as caching.
 
 [`class GenerateMode`](../tfds/download/GenerateMode.md): `Enum` for how to treat pre-existing downloads and data.

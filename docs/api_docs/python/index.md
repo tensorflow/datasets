@@ -17,6 +17,7 @@
 *  <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
 *  <a href="./tfds/dataset_as_numpy.md"><code>tfds.dataset_as_numpy</code></a>
 *  <a href="./tfds/download.md"><code>tfds.download</code></a>
+*  <a href="./tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>
 *  <a href="./tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
 *  <a href="./tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>
 *  <a href="./tfds/download/GenerateMode.md"><code>tfds.download.GenerateMode</code></a>
