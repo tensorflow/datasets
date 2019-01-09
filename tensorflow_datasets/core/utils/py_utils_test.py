@@ -19,8 +19,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import hashlib
+import os
+
 import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.testing import test_case
 
 
 class PyUtilsTest(tf.test.TestCase):
@@ -121,6 +125,18 @@ class PyUtilsTest(tf.test.TestCase):
   def test_tfds_dir(self):
     """Test the proper suffix only, since the prefix can vary."""
     self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))
+
+
+class ReadChecksumDigestTest(test_case.TestCase):
+
+  def test_digest(self):
+    digest, size = py_utils.read_checksum_digest(
+        os.path.join(self.test_data, '6pixels.png'), hashlib.sha256)
+    self.assertEqual(
+        digest,
+        '04f38ebed34d3b027d2683193766155912fba647158c583c3bdb4597ad8af34c')
+    self.assertEqual(102, size)
+
 
 if __name__ == '__main__':
   tf.test.main()

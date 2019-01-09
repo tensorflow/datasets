@@ -208,7 +208,7 @@ class DownloadManager(object):
       tf.logging.info(
           'URL %s already downloaded: reusing %s.' % (resource.url,
                                                       resource.path))
-      checksum, dl_size = util.read_checksum_digest(resource.path)
+      checksum, dl_size = utils.read_checksum_digest(resource.path)
       self._handle_download_result(resource, None, checksum, dl_size,
                                    existing=True)
       return promise.Promise.resolve(resource.path)

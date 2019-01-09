@@ -20,15 +20,11 @@ from __future__ import division
 from __future__ import print_function
 
 import functools
-import hashlib
-import io
 import os
 import threading
 
 import enum
 from six.moves import urllib
-
-import tensorflow as tf
 
 
 class GenerateMode(enum.Enum):
@@ -89,17 +85,3 @@ def build_synchronize_decorator():
 def get_file_name(url):
   """Returns file name of file at given url."""
   return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'
-
-
-def read_checksum_digest(path, checksum_cls=hashlib.sha256):
-  """Given a hash constructor, returns checksum digest and size of file."""
-  checksum = checksum_cls()
-  size = 0
-  with tf.gfile.Open(path, 'rb') as f:
-    while True:
-      block = f.read(io.DEFAULT_BUFFER_SIZE)
-      size += len(block)
-      if not block:
-        break
-      checksum.update(block)
-  return checksum.hexdigest(), size
