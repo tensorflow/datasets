@@ -37,11 +37,11 @@ _TRAIN_EXAMPLES = 60000
 _TEST_EXAMPLES = 10000
 
 
-_MNIST_CITATION = r"""\
+_MNIST_CITATION = """\
 @article{lecun2010mnist,
   title={MNIST handwritten digit database},
   author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-  journal={AT\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+  journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
   volume={2},
   year={2010}
 }
