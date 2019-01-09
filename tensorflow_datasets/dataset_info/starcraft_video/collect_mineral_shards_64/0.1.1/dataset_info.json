@@ -1,0 +1,106 @@
+{
+  "citation": "Towards Accurate Generative Models of Video: New Metrics & Challenges", 
+  "description": "This data set contains videos generated from Starcraft.", 
+  "downloadChecksums": {
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/test-00000-of-00001.tfrecords": "d65bfbf493eb4ab520258f68349c51426935503a5c33d8785d0def9ef7f47263", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00000-of-00010.tfrecords": "50f249a9242ea7239f4d7d2db140d108f6da2d09d6097fd22fa553e13d1b6259", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00001-of-00010.tfrecords": "026f310d2c673f74265118b83b9ba9eb696259df02b9259749eaf9be3675b073", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00002-of-00010.tfrecords": "065007a1ab99ff8de847afdeaba780cb177b739b66550afd0934196ef5ea93ac", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00003-of-00010.tfrecords": "f032af0f55a082f684cbe21caee064b1c2cd3fac200a8273febd71b07c9bc8e0", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00004-of-00010.tfrecords": "a253f0a2e05722193b39b10d8c7908f188046eb0ce529d8d13d86bf1f0584c53", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00005-of-00010.tfrecords": "66c822725f8e45c261b05763966611966cbba656489cbbdb161463e947346c9b", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00006-of-00010.tfrecords": "30434ab58e46edd56d78c954517b98ed19a56c680960fc4c7cd55e4b876fba57", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00007-of-00010.tfrecords": "507668ae3dc5ca7dc1e06bd88a4ccf0ba125da5fe3599b1e930a045d88cdb80f", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00008-of-00010.tfrecords": "c9f5004db7758b09b60b72376b056a0bf5c00da1b191626927bc7646690ca313", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/train-00009-of-00010.tfrecords": "b900a281c0231485216f0bb9f844f9545dd631f3f2f1c9fdceb1fe7c9feb4d63", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_64x64_png/valid-00000-of-00001.tfrecords": "db290df2b626cc2eaae60a1a76ee4853b9a4d0303f51aac996d0d73205176326"
+  }, 
+  "location": {
+    "urls": [
+      "https://storage.googleapis.com/scv_dataset/README.html"
+    ]
+  }, 
+  "name": "starcraft_video", 
+  "schema": {
+    "feature": [
+      {
+        "name": "rgb_screen", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "8412465948", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "10000"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }
+  ], 
+  "version": "0.1.1"
+}

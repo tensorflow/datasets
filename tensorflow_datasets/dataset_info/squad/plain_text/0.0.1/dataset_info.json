@@ -14,15 +14,15 @@
   "schema": {
     "feature": [
       {
+        "name": "first_answer", 
+        "type": "BYTES"
+      }, 
+      {
         "name": "context", 
         "type": "BYTES"
       }, 
       {
         "name": "question", 
-        "type": "BYTES"
-      }, 
-      {
-        "name": "first_answer", 
         "type": "BYTES"
       }
     ]
@@ -40,6 +40,15 @@
                 "numNonMissing": "87599"
               }
             }, 
+            "name": "first_answer", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "87599"
+              }
+            }, 
             "name": "context", 
             "type": "BYTES"
           }, 
@@ -50,15 +59,6 @@
               }
             }, 
             "name": "question", 
-            "type": "BYTES"
-          }, 
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "87599"
-              }
-            }, 
-            "name": "first_answer", 
             "type": "BYTES"
           }
         ], 
@@ -76,6 +76,15 @@
                 "numNonMissing": "10570"
               }
             }, 
+            "name": "first_answer", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "10570"
+              }
+            }, 
             "name": "context", 
             "type": "BYTES"
           }, 
@@ -86,15 +95,6 @@
               }
             }, 
             "name": "question", 
-            "type": "BYTES"
-          }, 
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "10570"
-              }
-            }, 
-            "name": "first_answer", 
             "type": "BYTES"
           }
         ], 

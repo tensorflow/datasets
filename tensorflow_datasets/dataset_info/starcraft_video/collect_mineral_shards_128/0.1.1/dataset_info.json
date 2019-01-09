@@ -1,0 +1,106 @@
+{
+  "citation": "Towards Accurate Generative Models of Video: New Metrics & Challenges", 
+  "description": "This data set contains videos generated from Starcraft.", 
+  "downloadChecksums": {
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/test-00000-of-00001.tfrecords": "578b65cb7509ec87a2d60e125c0ef875f41c00cb1c0535f27ba330940b25fa6b", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00000-of-00010.tfrecords": "d5438510eac3a02192eb55a04ac46723a28a0db16af92b09a23ac23bf74acb2b", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00001-of-00010.tfrecords": "bf16d5cc5743f192e08a3a32ee79b958b268edaea7f4b5e50868c101411432ac", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00002-of-00010.tfrecords": "f753223dde6ee39194129eeb980ab81f2a42a6061e914d4b171cf0baf6942613", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00003-of-00010.tfrecords": "90248cc9864c86159b996caba45a91e241005c328b528911ea110de3529123b6", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00004-of-00010.tfrecords": "1a7a96f8322d362291e9b3e5cb69797a6e0700670efd41122f539066a29e96e9", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00005-of-00010.tfrecords": "7c9c895184358462278b47361ea9ec9268bf95fe17e592e2b2bcf7ae233358d8", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00006-of-00010.tfrecords": "410a604528c53fbf40e3ff00876071bf82658fdb82184833921f391706eb8d62", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00007-of-00010.tfrecords": "64a630f46515b23d4d02ac748f93bcc1a4d72f3e3165ea414840c4087ad37da4", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00008-of-00010.tfrecords": "9ae1c2966da098847bcc36459ca09e64d3b3424da60d84068a43d4e3280e66e4", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/train-00009-of-00010.tfrecords": "a6241d1aec523d9347da10304e054f446c3ce238bdaa08268623de0009ee7ac5", 
+    "https://storage.googleapis.com/scv_dataset/data/CollectMineralShards_128x128_png/valid-00000-of-00001.tfrecords": "1588884efe57a65c260b9a1ea93d65ab0f548351efb8861bd91c85b611d120fd"
+  }, 
+  "location": {
+    "urls": [
+      "https://storage.googleapis.com/scv_dataset/README.html"
+    ]
+  }, 
+  "name": "starcraft_video", 
+  "schema": {
+    "feature": [
+      {
+        "name": "rgb_screen", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "128"
+            }, 
+            {
+              "size": "128"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "26663222422", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "10000"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }
+  ], 
+  "version": "0.1.1"
+}

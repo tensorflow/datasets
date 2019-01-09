@@ -21,22 +21,22 @@
       "statistics": {
         "features": [
           {
-            "name": "de", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3000"
-              }, 
-              "max": 26444.0, 
-              "min": 1.0
-            }
-          }, 
-          {
             "name": "en", 
             "numStats": {
               "commonStats": {
                 "numNonMissing": "3000"
               }, 
               "max": 19292.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "de", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3000"
+              }, 
+              "max": 26444.0, 
               "min": 1.0
             }
           }
@@ -50,22 +50,22 @@
       "statistics": {
         "features": [
           {
-            "name": "de", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "4592289"
-              }, 
-              "max": 26489.0, 
-              "min": 1.0
-            }
-          }, 
-          {
             "name": "en", 
             "numStats": {
               "commonStats": {
                 "numNonMissing": "4592289"
               }, 
               "max": 19305.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "de", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "4592289"
+              }, 
+              "max": 26489.0, 
               "min": 1.0
             }
           }

@@ -14,6 +14,17 @@
   "schema": {
     "feature": [
       {
+        "name": "first_answer", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
         "name": "context", 
         "shape": {
           "dim": [
@@ -34,17 +45,6 @@
           ]
         }, 
         "type": "INT"
-      }, 
-      {
-        "name": "first_answer", 
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        }, 
-        "type": "INT"
       }
     ]
   }, 
@@ -55,6 +55,16 @@
       "numShards": "10", 
       "statistics": {
         "features": [
+          {
+            "name": "first_answer", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "87599"
+              }, 
+              "max": 8179.0, 
+              "min": 1.0
+            }
+          }, 
           {
             "name": "context", 
             "numStats": {
@@ -74,16 +84,6 @@
               "max": 8171.0, 
               "min": 1.0
             }
-          }, 
-          {
-            "name": "first_answer", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "87599"
-              }, 
-              "max": 8179.0, 
-              "min": 1.0
-            }
           }
         ], 
         "numExamples": "87599"
@@ -94,6 +94,16 @@
       "numShards": "1", 
       "statistics": {
         "features": [
+          {
+            "name": "first_answer", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10570"
+              }, 
+              "max": 8179.0, 
+              "min": 1.0
+            }
+          }, 
           {
             "name": "context", 
             "numStats": {
@@ -111,16 +121,6 @@
                 "numNonMissing": "10570"
               }, 
               "max": 8146.0, 
-              "min": 1.0
-            }
-          }, 
-          {
-            "name": "first_answer", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "10570"
-              }, 
-              "max": 8179.0, 
               "min": 1.0
             }
           }

@@ -1,0 +1,106 @@
+{
+  "citation": "Towards Accurate Generative Models of Video: New Metrics & Challenges", 
+  "description": "This data set contains videos generated from Starcraft.", 
+  "downloadChecksums": {
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/test-00000-of-00001.tfrecords": "1d2112a1e709a4c2d1e306df2544d87ac5dc9d4e8c96b2fdd79713dae80064cc", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00000-of-00010.tfrecords": "771417617138a071e461a0121ecba55f1108aca1b3b54174ef9b180e62387d71", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00001-of-00010.tfrecords": "3bf017606a5c2e53138f189913eacd9268a118d6008453cf2448ac5d44c8401c", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00002-of-00010.tfrecords": "fc86428d2b5c226f254c2b8045082e900d58a0d268c3f8138cc8c37dfad4e513", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00003-of-00010.tfrecords": "b343dfc841c09406c45352f6046b82acd077a562ab47eb9280f23792bdb7aa3a", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00004-of-00010.tfrecords": "431be72b2bb0ab73f69718804e762e7d4534bb75587a88510f717946a2cf1505", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00005-of-00010.tfrecords": "85f9d7d3e7dd45d6faa95482f108c4fdef1c5c8fff1d76e41d441e8f1bac6efe", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00006-of-00010.tfrecords": "234c1b2d215eb8724f6fb3287b5ee8746c59a101e5f1d0451926bedd6c846323", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00007-of-00010.tfrecords": "6ced437ac9705c3b594b093d3d0df32bc73a5539eb534fb5782aad782023ebca", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00008-of-00010.tfrecords": "56baecd2f0800571f22b1741736a6ecce8c72c6337f8883b60bc5b219657b93f", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/train-00009-of-00010.tfrecords": "2b3435a7680b6dc6d2ba9484a6fc865e63bc37c1ceac9e2049c50516d64adcde", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_128x128_png/valid-00000-of-00001.tfrecords": "e49e0e682ae0bb2f6c54a7ac99c37dd00e5f4e47b438203a3b52988c40c453ff"
+  }, 
+  "location": {
+    "urls": [
+      "https://storage.googleapis.com/scv_dataset/README.html"
+    ]
+  }, 
+  "name": "starcraft_video", 
+  "schema": {
+    "feature": [
+      {
+        "name": "rgb_screen", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "128"
+            }, 
+            {
+              "size": "128"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "22287001316", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "10000"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }
+  ], 
+  "version": "0.1.1"
+}

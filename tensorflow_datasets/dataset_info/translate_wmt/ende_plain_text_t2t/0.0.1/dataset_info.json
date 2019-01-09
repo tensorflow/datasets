@@ -1,5 +1,5 @@
 {
-  "description": "Translate dataset based on the data from statmt.org page.\n", 
+  "description": "Translate dataset based on the data from statmt.org.\n", 
   "downloadChecksums": {
     "http://data.statmt.org/wmt17/translation-task/dev.tgz": "9d5ff04a28496b7796904ea65e50e3837bab14dbdca88b1e063105f17513dca9", 
     "http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz": "17992b7e919cfb754c60f4e754148bc23b80706ad0ed7b34150831a554b40c91", 
@@ -15,11 +15,11 @@
   "schema": {
     "feature": [
       {
-        "name": "de", 
+        "name": "en", 
         "type": "BYTES"
       }, 
       {
-        "name": "en", 
+        "name": "de", 
         "type": "BYTES"
       }
     ]
@@ -37,7 +37,7 @@
                 "numNonMissing": "3000"
               }
             }, 
-            "name": "de", 
+            "name": "en", 
             "type": "BYTES"
           }, 
           {
@@ -46,7 +46,7 @@
                 "numNonMissing": "3000"
               }
             }, 
-            "name": "en", 
+            "name": "de", 
             "type": "BYTES"
           }
         ], 
@@ -61,23 +61,23 @@
           {
             "bytesStats": {
               "commonStats": {
-                "numNonMissing": "4603578"
+                "numNonMissing": "4592289"
               }
             }, 
-            "name": "de", 
+            "name": "en", 
             "type": "BYTES"
           }, 
           {
             "bytesStats": {
               "commonStats": {
-                "numNonMissing": "4603578"
+                "numNonMissing": "4592289"
               }
             }, 
-            "name": "en", 
+            "name": "de", 
             "type": "BYTES"
           }
         ], 
-        "numExamples": "4603578"
+        "numExamples": "4592289"
       }
     }, 
     {

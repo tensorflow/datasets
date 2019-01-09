@@ -1,5 +1,5 @@
 {
-  "citation": "@article{lecun2010mnist,\n  title={MNIST handwritten digit database},\n  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},\n  journal={AT\\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},\n  volume={2},\n  year={2010}\n}\n", 
+  "citation": "\\\n@article{lecun2010mnist,\n  title={MNIST handwritten digit database},\n  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},\n  journal={AT\\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},\n  volume={2},\n  year={2010}\n}\n", 
   "description": "The MNIST database of handwritten digits.", 
   "downloadChecksums": {
     "http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz": "8d422c7b0a1c1c79245a5bcf07fe86e33eeafee792b84584aec276f5a2dbc4e6", 

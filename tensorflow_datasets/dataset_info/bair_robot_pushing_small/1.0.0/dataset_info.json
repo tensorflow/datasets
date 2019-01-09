@@ -1,6 +1,9 @@
 {
   "citation": "@inproceedings{conf/nips/FinnGL16,\n  added-at = {2016-12-16T00:00:00.000+0100},\n  author = {Finn, Chelsea and Goodfellow, Ian J. and Levine, Sergey},\n  biburl = {https://www.bibsonomy.org/bibtex/230073873b4fe43b314724b772d0f9256/dblp},\n  booktitle = {NIPS},\n  crossref = {conf/nips/2016},\n  editor = {Lee, Daniel D. and Sugiyama, Masashi and Luxburg, Ulrike V. and Guyon, Isabelle and Garnett, Roman},\n  ee = {http://papers.nips.cc/paper/6161-unsupervised-learning-for-physical-interaction-through-video-prediction},\n  interhash = {2e6b416723704f4aa5ad0686ce5a3593},\n  intrahash = {30073873b4fe43b314724b772d0f9256},\n  keywords = {dblp},\n  pages = {64-72},\n  timestamp = {2016-12-17T11:33:40.000+0100},\n  title = {Unsupervised Learning for Physical Interaction through Video Prediction.},\n  url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},\n  year = 2016\n}\n", 
   "description": "This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.", 
+  "downloadChecksums": {
+    "http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0.tar": "c6f8d164ab2be07174ef597e3e070d7466f3142caddc467b6af119b9458cd9cd"
+  }, 
   "location": {
     "urls": [
       "https://sites.google.com/site/brainrobotdata/home/push-dataset"
@@ -10,7 +13,7 @@
   "schema": {
     "feature": [
       {
-        "name": "image_aux1", 
+        "name": "image_main", 
         "shape": {
           "dim": [
             {
@@ -30,7 +33,7 @@
         "type": "INT"
       }, 
       {
-        "name": "image_main", 
+        "name": "image_aux1", 
         "shape": {
           "dim": [
             {
@@ -79,22 +82,13 @@
       }
     ]
   }, 
-  "sizeInBytes": "32212254720", 
+  "sizeInBytes": "32274964480", 
   "splits": [
     {
       "name": "test", 
       "numShards": "4", 
       "statistics": {
         "features": [
-          {
-            "name": "image_aux1", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "256"
-              }, 
-              "max": 255.0
-            }
-          }, 
           {
             "name": "image_main", 
             "numStats": {
@@ -103,6 +97,15 @@
               }, 
               "max": 255.0, 
               "min": 2.0
+            }
+          }, 
+          {
+            "name": "image_aux1", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "256"
+              }, 
+              "max": 255.0
             }
           }, 
           {
@@ -137,15 +140,6 @@
       "statistics": {
         "features": [
           {
-            "name": "image_aux1", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "43264"
-              }, 
-              "max": 255.0
-            }
-          }, 
-          {
             "name": "image_main", 
             "numStats": {
               "commonStats": {
@@ -153,6 +147,15 @@
               }, 
               "max": 255.0, 
               "min": 1.0
+            }
+          }, 
+          {
+            "name": "image_aux1", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "43264"
+              }, 
+              "max": 255.0
             }
           }, 
           {

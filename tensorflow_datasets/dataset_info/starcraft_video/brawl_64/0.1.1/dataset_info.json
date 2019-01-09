@@ -1,0 +1,106 @@
+{
+  "citation": "Towards Accurate Generative Models of Video: New Metrics & Challenges", 
+  "description": "This data set contains videos generated from Starcraft.", 
+  "downloadChecksums": {
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/test-00000-of-00001.tfrecords": "17c24a9d1a170ae818a5717ad42c420ee452f320c167082fad13ea53bb571882", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00000-of-00010.tfrecords": "f6a319c089781510d410a935fa6cc0fcea87009d578a2bfb9c549bad356e17fb", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00001-of-00010.tfrecords": "2a51e03f38c51b43649aab5df9f10167767f6cfebc6a2d9c8edd8ad36d88699c", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00002-of-00010.tfrecords": "e8715a94f5ed22823381fc3cc40de4eb4e6548cd60286db998679881cfc58007", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00003-of-00010.tfrecords": "3246a41dd7cbe152d213eccf23531c88400f78d7bacb0eedec6bb0cc0296666d", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00004-of-00010.tfrecords": "9c05f73c53a23df3968f8f9b81ebe0dd40300c96d159d4f25e15fcf0d9f62438", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00005-of-00010.tfrecords": "60366f016c5aafe49681cadc84388940392028ec19eccd7d9436c21335f82f65", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00006-of-00010.tfrecords": "b7f419ab5e2bd3357bd7845b35de1baa4fbe5a202c27e8734d8638536e904b52", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00007-of-00010.tfrecords": "5ac2ec8673bc41cc7e705adb165886992f85e08ebba61e135275cce7f6ec14c7", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00008-of-00010.tfrecords": "c90f99b39923b177144c88019bb41a68bca4a0f1338aaea1789a73b301b241b5", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/train-00009-of-00010.tfrecords": "df65e3de010f525843078733f0861e79edd08cf4455b15742d80a29fb0b99321", 
+    "https://storage.googleapis.com/scv_dataset/data/Brawl_64x64_png/valid-00000-of-00001.tfrecords": "667f2d8c7ee4ddd84f8b358a8b74a0d93388527d9665c50ee4bb8f19646dd3a1"
+  }, 
+  "location": {
+    "urls": [
+      "https://storage.googleapis.com/scv_dataset/README.html"
+    ]
+  }, 
+  "name": "starcraft_video", 
+  "schema": {
+    "feature": [
+      {
+        "name": "rgb_screen", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "6876254915", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "10000"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "rgb_screen", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }
+  ], 
+  "version": "0.1.1"
+}

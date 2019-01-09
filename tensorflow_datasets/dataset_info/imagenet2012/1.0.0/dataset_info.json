@@ -1,18 +1,14 @@
 {
-  "citation": "@TECHREPORT{,\n    author = {},\n    title = {},\n    institution = {},\n    year = {2012}\n}\n", 
+  "citation": "@article{ILSVRC15,\nAuthor = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},\nTitle = {{ImageNet Large Scale Visual Recognition Challenge}},\nYear = {2015},\njournal   = {International Journal of Computer Vision (IJCV)},\ndoi = {10.1007/s11263-015-0816-y},\nvolume={115},\nnumber={3},\npages={211-252}\n}\n", 
   "description": "ILSVRC 2012, aka ImageNet is an image dataset organized according to the\nWordNet hierarchy. Each meaningful concept in WordNet, possibly described by\nmultiple words or word phrases, is called a \"synonym set\" or \"synset\". There are\nmore than 100,000 synsets in WordNet, majority of them are nouns (80,000+). In\nImageNet, we aim to provide on average 1000 images to illustrate each synset.\nImages of each concept are quality-controlled and human-annotated. In its\ncompletion, we hope ImageNet will offer tens of millions of cleanly sorted\nimages for most of the concepts in the WordNet hierarchy.\n", 
   "location": {
     "urls": [
       "http://image-net.org/"
     ]
   }, 
-  "name": "imagenet2012",
+  "name": "imagenet2012", 
   "schema": {
     "feature": [
-      {
-        "name": "label", 
-        "type": "INT"
-      }, 
       {
         "name": "file_name", 
         "type": "BYTES"
@@ -33,6 +29,10 @@
           ]
         }, 
         "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
       }
     ]
   }, 
@@ -42,16 +42,6 @@
       "numShards": "1000", 
       "statistics": {
         "features": [
-          {
-            "name": "label", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1281167"
-              }, 
-              "max": 15075141.0, 
-              "min": 1440764.0
-            }
-          }, 
           {
             "bytesStats": {
               "commonStats": {
@@ -68,6 +58,15 @@
                 "numNonMissing": "1281167"
               }, 
               "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1281167"
+              }, 
+              "max": 999.0
             }
           }
         ], 
@@ -80,16 +79,6 @@
       "statistics": {
         "features": [
           {
-            "name": "label", 
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "50000"
-              }, 
-              "max": 15075141.0, 
-              "min": 1440764.0
-            }
-          }, 
-          {
             "bytesStats": {
               "commonStats": {
                 "numNonMissing": "50000"
@@ -105,6 +94,15 @@
                 "numNonMissing": "50000"
               }, 
               "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "50000"
+              }, 
+              "max": 999.0
             }
           }
         ], 

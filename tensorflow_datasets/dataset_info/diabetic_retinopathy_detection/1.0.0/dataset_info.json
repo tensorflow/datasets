@@ -1,19 +1,15 @@
 {
-  "version": "1.0.0", 
-  "name": "diabetic_retinopathy_detection", 
   "description": "A large set of high-resolution retina images taken under a variety of imaging conditions.", 
   "location": {
     "urls": [
       "https://www.kaggle.com/c/diabetic-retinopathy-detection/data"
     ]
   }, 
+  "name": "diabetic_retinopathy_detection", 
   "schema": {
     "feature": [
       {
-        "type": "INT", 
-        "name": "label"
-      }, 
-      {
+        "name": "image", 
         "shape": {
           "dim": [
             {
@@ -27,76 +23,69 @@
             }
           ]
         }, 
-        "type": "INT", 
-        "name": "image"
+        "type": "INT"
       }, 
       {
-        "type": "BYTES", 
-        "name": "name"
+        "name": "name", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
       }
     ]
   }, 
-  "sizeInBytes": "104152956928", 
   "splits": [
     {
-      "statistics": {
-        "numExamples": "10", 
-        "features": [
-          {
-            "numStats": {
-              "max": -1.0, 
-              "commonStats": {
-                "numNonMissing": "10"
-              }, 
-              "min": -1.0
-            }, 
-            "name": "label"
-          }, 
-          {
-            "numStats": {
-              "max": 255.0, 
-              "commonStats": {
-                "numNonMissing": "10"
-              }
-            }, 
-            "name": "image"
-          }, 
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "10"
-              }
-            }, 
-            "type": "BYTES", 
-            "name": "name"
-          }
-        ]
-      }, 
+      "name": "sample", 
       "numShards": "1", 
-      "name": "sample"
-    }, 
-    {
       "statistics": {
-        "numExamples": "53576", 
         "features": [
           {
+            "name": "image", 
             "numStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }
+            }, 
+            "name": "name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }, 
               "max": -1.0, 
+              "min": -1.0
+            }
+          }
+        ], 
+        "numExamples": "10"
+      }
+    }, 
+    {
+      "name": "test", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
               "commonStats": {
                 "numNonMissing": "53576"
               }, 
-              "min": -1.0
-            }, 
-            "name": "label"
-          }, 
-          {
-            "numStats": {
-              "max": 255.0, 
-              "commonStats": {
-                "numNonMissing": "53576"
-              }
-            }, 
-            "name": "image"
+              "max": 255.0
+            }
           }, 
           {
             "bytesStats": {
@@ -104,35 +93,36 @@
                 "numNonMissing": "53576"
               }
             }, 
-            "type": "BYTES", 
-            "name": "name"
+            "name": "name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "53576"
+              }, 
+              "max": -1.0, 
+              "min": -1.0
+            }
           }
-        ]
-      }, 
-      "numShards": "10", 
-      "name": "test"
+        ], 
+        "numExamples": "53576"
+      }
     }, 
     {
+      "name": "train", 
+      "numShards": "10", 
       "statistics": {
-        "numExamples": "35126", 
         "features": [
           {
+            "name": "image", 
             "numStats": {
-              "max": 4.0, 
               "commonStats": {
                 "numNonMissing": "35126"
-              }
-            }, 
-            "name": "label"
-          }, 
-          {
-            "numStats": {
-              "max": 255.0, 
-              "commonStats": {
-                "numNonMissing": "35126"
-              }
-            }, 
-            "name": "image"
+              }, 
+              "max": 255.0
+            }
           }, 
           {
             "bytesStats": {
@@ -140,13 +130,22 @@
                 "numNonMissing": "35126"
               }
             }, 
-            "type": "BYTES", 
-            "name": "name"
+            "name": "name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "35126"
+              }, 
+              "max": 4.0
+            }
           }
-        ]
-      }, 
-      "numShards": "10", 
-      "name": "train"
+        ], 
+        "numExamples": "35126"
+      }
     }
-  ]
+  ], 
+  "version": "1.0.0"
 }
