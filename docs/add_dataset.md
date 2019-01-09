@@ -366,11 +366,7 @@ Run [`tensorflow_datasets/scripts/download_and_prepare`](https://github.com/tens
 to generate the dataset and then copy in the `dataset_info.json` and other
 metadata files to [`tensorflow_datasets/dataset_info`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/dataset_info/).
 
-### 3. Add a test
-
-See the [testing section](#testing-mydataset) below.
-
-### 4. Double-check the citation
+### 3. Double-check the citation
 
 If the paper is on [arXiv](https://arxiv.org/), find it there and click the
 `bibtex` link on the right-hand side. Use this for `info.citation`.
@@ -379,6 +375,12 @@ If the paper is not on arXiv, find the paper on
 [Google Scholar](https://scholar.google.com) and click the double-quotation mark
 underneath the title and on the popup, click `BibTeX`. Use this for
 `info.citation`.
+
+### 4. Add a test
+
+Adding a unit test is optional, however, it's recommended, especially for
+important large datasets and datasets that require a new
+`FeatureConnector`. See the [testing section](#testing-mydataset) below.
 
 ## Large datasets and distributed generation
 
