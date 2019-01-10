@@ -433,7 +433,7 @@ def get_dataset_feature_statistics(builder, split):
 
     assert isinstance(example, dict)
 
-    feature_names = example.keys()
+    feature_names = sorted(example.keys())
     for feature_name in feature_names:
 
       # Update the number of examples this feature appears in.
