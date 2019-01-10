@@ -32,6 +32,7 @@ from tensorflow_datasets.core.utils import py_utils
 
 ALPHANUM_REGEX = re.compile(r"\W+", flags=re.UNICODE)
 ALL_REGEX = re.compile(r"(\W+)", flags=re.UNICODE)
+
 NUM_BYTES = 2**8
 
 
@@ -443,8 +444,13 @@ def _prepare_reserved_tokens(reserved_tokens):
   if reserved_tokens:
     escaped = [rt.replace(u"\\", u"\\\\") for rt in reserved_tokens]
     pattern = u"(%s)" % u"|".join(escaped)
-    reserved_tokens_re = re.compile(pattern, flags=re.UNICODE)
+    reserved_tokens_re = _make_reserved_tokens_re(pattern)
   return reserved_tokens, reserved_tokens_re
+
+
+def _make_reserved_tokens_re(pattern):
+  reserved_tokens_re = re.compile(pattern, flags=re.UNICODE)
+  return reserved_tokens_re
 
 
 def _find_duplicates(els):
