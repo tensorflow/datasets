@@ -38,29 +38,73 @@ TranslateData = collections.namedtuple("TranslateData",
                                        ["url", "language_to_file"])
 
 TRANSLATE_DATASETS = {
-    "ende_news_commentary_wmt18": TranslateData(
-        url="http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz",  # pylint: disable=line-too-long
+    "wmt10_giga_fren_enfr": TranslateData(
+        url="http://www.statmt.org/wmt10/training-giga-fren.tar",
         language_to_file={
-            "en": "training-parallel-nc-v13/news-commentary-v13.de-en.en",
-            "de": "training-parallel-nc-v13/news-commentary-v13.de-en.de",
+            "en": "giga-fren.release2.fixed.en.gz",
+            "fr": "giga-fren.release2.fixed.fr.gz",
         }),
-    "ende_commoncrawl_wmt13": TranslateData(
+    "wmt13_commoncrawl_ende": TranslateData(
         url="http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
         language_to_file={
             "en": "commoncrawl.de-en.en",
             "de": "commoncrawl.de-en.de",
         }),
-    "ende_europarl_wmt13": TranslateData(
+    "wmt13_commoncrawl_enfr": TranslateData(
+        url="http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
+        language_to_file={
+            "en": "commoncrawl.fr-en.en",
+            "fr": "commoncrawl.fr-en.fr",
+        }),
+
+    "wmt13_europarl_ende": TranslateData(
         url="http://www.statmt.org/wmt13/training-parallel-europarl-v7.tgz",
         language_to_file={
             "en": "training/europarl-v7.de-en.en",
             "de": "training/europarl-v7.de-en.de",
         }),
-    "ende_newstest_wmt13": TranslateData(
+    "wmt13_europarl_enfr": TranslateData(
+        url="http://www.statmt.org/wmt13/training-parallel-europarl-v7.tgz",
+        language_to_file={
+            "en": "training/europarl-v7.fr-en.en",
+            "fr": "training/europarl-v7.fr-en.fr",
+        }),
+    "wmt13_undoc_enfr": TranslateData(
+        url="http://www.statmt.org/wmt13/training-parallel-un.tgz",
+        language_to_file={
+            "en": "un/undoc.2000.fr-en.en",
+            "fr": "un/undoc.2000.fr-en.fr",
+        }),
+    "wmt14_news_commentary_enfr": TranslateData(
+        url="http://www.statmt.org/wmt14/training-parallel-nc-v9.tgz",
+        language_to_file={
+            "en": "training/news-commentary-v9.fr-en.en",
+            "fr": "training/news-commentary-v9.fr-en.fr",
+        }),
+    "wmt17_newstest": TranslateData(
         url="http://data.statmt.org/wmt17/translation-task/dev.tgz",
         language_to_file={
             "en": "dev/newstest2013.en",
             "de": "dev/newstest2013.de",
+            "fr": "dev/newstest2013.fr",
+        }),
+    "wmt18_news_commentary_ende": TranslateData(
+        url="http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz",  # pylint: disable=line-too-long
+        language_to_file={
+            "en": "training-parallel-nc-v13/news-commentary-v13.de-en.en",
+            "de": "training-parallel-nc-v13/news-commentary-v13.de-en.de",
+        }),
+    "opennmt_1M_enfr_train": TranslateData(
+        url="https://s3.amazonaws.com/opennmt-trainingdata/baseline-1M-enfr.tgz",  # pylint: disable=line-too-long
+        language_to_file={
+            "en": "baseline-1M-enfr/baseline-1M_train.en",
+            "fr": "baseline-1M-enfr/baseline-1M_train.fr",
+        }),
+    "opennmt_1M_enfr_valid": TranslateData(
+        url="https://s3.amazonaws.com/opennmt-trainingdata/baseline-1M-enfr.tgz",  # pylint: disable=line-too-long
+        language_to_file={
+            "en": "baseline-1M-enfr/baseline-1M_valid.en",
+            "fr": "baseline-1M-enfr/baseline-1M_valid.fr",
         }),
 }
 
@@ -112,10 +156,22 @@ class WMTConfig(tfds.core.BuilderConfig):
 
 # Datasets used by T2T code for en-de translation.
 T2T_ENDE_TRAIN = [
-    "ende_news_commentary_wmt18", "ende_commoncrawl_wmt13",
-    "ende_europarl_wmt13"
+    "wmt18_news_commentary_ende", "wmt13_commoncrawl_ende",
+    "wmt13_europarl_ende"
 ]
-T2T_ENDE_TEST = ["ende_newstest_wmt13"]
+T2T_ENDE_TEST = ["wmt17_newstest"]
+
+T2T_ENFR_TRAIN_SMALL = ["opennmt_1M_enfr_train"]
+T2T_ENFR_TEST_SMALL = ["opennmt_1M_enfr_valid"]
+
+T2T_ENFR_TRAIN_LARGE = ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr",
+                        "wmt14_news_commentary_enfr",
+                        # TODO(b/119253909): figure out if we need this
+                        # as a part of the train set (as it has data
+                        # in a different file format).
+                        # "wmt10_giga_fren_enfr",
+                        "wmt13_undoc_enfr"]
+T2T_ENFR_TEST_LARGE = ["wmt17_newstest"]
 
 
 class TranslateWmt(tfds.core.GeneratorBasedBuilder):
@@ -143,6 +199,51 @@ class TranslateWmt(tfds.core.GeneratorBasedBuilder):
           data={
               "train": T2T_ENDE_TRAIN,
               "test": T2T_ENDE_TEST,
+              "dev": []
+          }),
+      # EN-FR translations (matching the data used by Tensor2Tensor library).
+      WMTConfig(
+          language_pair=("en", "fr"),
+          version="0.0.1",
+          name_suffix="t2t_small",
+          data={
+              "train": T2T_ENFR_TRAIN_SMALL,
+              "test": T2T_ENFR_TEST_SMALL,
+              "dev": []
+          }),
+      WMTConfig(
+          language_pair=("en", "fr"),
+          version="0.0.1",
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              name="subwords8k",
+              vocab_size=2**13),
+          name_suffix="t2t_small",
+          data={
+              "train": T2T_ENFR_TRAIN_SMALL,
+              "test": T2T_ENFR_TEST_SMALL,
+              "dev": []
+          }),
+      WMTConfig(
+          language_pair=("en", "fr"),
+          version="0.0.1",
+          name_suffix="t2t_large",
+          data={
+              "train": T2T_ENFR_TRAIN_LARGE,
+              "test": T2T_ENFR_TEST_LARGE,
+              "dev": []
+          }),
+      WMTConfig(
+          language_pair=("en", "fr"),
+          version="0.0.1",
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              name="subwords8k",
+              vocab_size=2**13),
+          name_suffix="t2t_large",
+          data={
+              "train": T2T_ENFR_TRAIN_LARGE,
+              "test": T2T_ENFR_TEST_LARGE,
               "dev": []
           }),
   ]
