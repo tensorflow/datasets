@@ -123,7 +123,13 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |    202,599
+TRAIN      |    162,770
+TEST       |     19,962
+VALIDATION |     19,867
+
 
 ### Urls
  * http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
@@ -174,7 +180,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     60,000
+TRAIN      |     50,000
+TEST       |     10,000
+
 
 ### Urls
  * https://www.cs.toronto.edu/~kriz/cifar.html
@@ -214,7 +225,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     60,000
+TRAIN      |     50,000
+TEST       |     10,000
+
 
 ### Urls
  * https://www.cs.toronto.edu/~kriz/cifar.html
@@ -254,7 +270,13 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     88,712
+TEST       |     53,576
+TRAIN      |     35,126
+SAMPLE     |         10
+
 
 ### Urls
  * https://www.kaggle.com/c/diabetic-retinopathy-detection/data
@@ -287,7 +309,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     70,000
+TRAIN      |     60,000
+TEST       |     10,000
+
 
 ### Urls
  * https://github.com/zalandoresearch/fashion-mnist
@@ -297,20 +324,21 @@ None computed
 
 ### Citation
 ```
-@article{journals/corr/abs-1708-07747,
-  added-at = {2018-08-13T00:00:00.000+0200},
-  author = {Xiao, Han and Rasul, Kashif and Vollgraf, Roland},
-  biburl = {https://www.bibsonomy.org/bibtex/2c1bcf55a1de644db3d7b0a4a9b7a778e/dblp},
-  ee = {http://arxiv.org/abs/1708.07747},
-  interhash = {0c81f9a6170118f14703b6796101ce40},
-  intrahash = {c1bcf55a1de644db3d7b0a4a9b7a778e},
-  journal = {CoRR},
-  keywords = {dblp},
-  timestamp = {2018-08-14T12:22:49.000+0200},
-  title = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning Algorithms.},
-  url = {http://dblp.uni-trier.de/db/journals/corr/corr1708.html#abs-1708-07747},
-  volume = {abs/1708.07747},
-  year = 2017
+@article{DBLP:journals/corr/abs-1708-07747,
+  author    = {Han Xiao and
+               Kashif Rasul and
+               Roland Vollgraf},
+  title     = {Fashion-MNIST: a Novel Image Dataset for Benchmarking Machine Learning
+               Algorithms},
+  journal   = {CoRR},
+  volume    = {abs/1708.07747},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1708.07747},
+  archivePrefix = {arXiv},
+  eprint    = {1708.07747},
+  timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 
 ```
@@ -377,7 +405,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |  1,331,167
+TRAIN      |  1,281,167
+VALIDATION |     50,000
+
 
 ### Urls
  * http://image-net.org/
@@ -420,7 +453,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     70,000
+TRAIN      |     60,000
+TEST       |     10,000
+
 
 ### Urls
  * http://yann.lecun.com/exdb/mnist/
@@ -430,21 +468,13 @@ None computed
 
 ### Citation
 ```
-@article{lecun-mnisthandwrittendigit-2010,
-  added-at = {2010-06-28T21:16:30.000+0200},
-  author = {LeCun, Yann and Cortes, Corinna},
-  biburl = {https://www.bibsonomy.org/bibtex/2935bad99fa1f65e03c25b315aa3c1032/mhwombat},
-  groups = {public},
-  howpublished = {http://yann.lecun.com/exdb/mnist/},
-  interhash = {21b9d0558bd66279df9452562df6e6f3},
-  intrahash = {935bad99fa1f65e03c25b315aa3c1032},
-  keywords = {MSc _checked character_recognition mnist network neural},
-  lastchecked = {2016-01-14 14:24:11},
-  timestamp = {2016-07-12T19:25:30.000+0200},
-  title = {{MNIST} handwritten digit database},
-  url = {http://yann.lecun.com/exdb/mnist/},
-  username = {mhwombat},
-  year = 2010
+\
+@article{lecun2010mnist,
+  title={MNIST handwritten digit database},
+  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+  journal={AT\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+  volume={2},
+  year={2010}
 }
 
 ```
@@ -523,7 +553,13 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |    630,420
+EXTRA      |    531,131
+TRAIN      |     73,257
+TEST       |     26,032
+
 
 ### Urls
  * http://ufldl.stanford.edu/housenumbers/
@@ -613,7 +649,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     50,000
+TRAIN      |     25,000
+TEST       |     25,000
+
 
 ### Urls
  * http://ai.stanford.edu/~amaas/data/sentiment/
@@ -701,7 +742,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        | 30,607,716
+TRAIN      | 30,301,028
+TEST       |    306,688
+
 
 ### Urls
  * http://www.statmt.org/lm-benchmark/
@@ -805,7 +851,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     98,169
+TRAIN      |     87,599
+VALIDATION |     10,570
+
 
 ### Urls
  * https://rajpurkar.github.io/SQuAD-explorer/
@@ -871,7 +922,13 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |  4,595,289
+TRAIN      |  4,592,289
+TEST       |      3,000
+VALIDATION |          0
+
 
 ### Urls
  * http://www.statmt.org/wmt18/
@@ -909,7 +966,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     43,520
+TRAIN      |     43,264
+TEST       |        256
+
 
 ### Urls
  * https://sites.google.com/site/brainrobotdata/home/push-dataset
@@ -1050,7 +1112,13 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     14,000
+TRAIN      |     10,000
+VALIDATION |      2,000
+TEST       |      2,000
+
 
 ### Urls
  * https://storage.googleapis.com/scv_dataset/README.html
