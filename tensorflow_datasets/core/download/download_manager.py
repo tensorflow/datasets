@@ -334,12 +334,14 @@ class DownloadManager(object):
 def _map_promise(map_fn, all_inputs, async_):
   """Map the function into each element and resolve the promise."""
   all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
+  if async_:
+    # TODO(tfds): Fix for nested case
+    if isinstance(all_promises, dict):
+      merged_promise = promise.Promise.for_dict(all_promises)
+    elif isinstance(all_promises, list):
+      merged_promise = promise.Promise.all(all_promises)
+    else:
+      merged_promise = all_promises
+    return merged_promise
 
-  if isinstance(all_promises, dict):
-    merged_promise = promise.Promise.for_dict(all_promises)
-  elif isinstance(all_promises, list):
-    merged_promise = promise.Promise.all(all_promises)
-  else:
-    merged_promise = all_promises
-
-  return merged_promise if async_ else merged_promise.get()
+  return utils.map_nested(lambda p: p.get(), all_promises)

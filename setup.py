@@ -35,6 +35,7 @@ REQUIRED_PKGS = [
     'future',
     'promise',
     'protobuf>=3.6.1',
+    'pydub',  # actual use requires ffmpeg
     'pytz',
     'requests',
     'scipy',
