@@ -18,6 +18,8 @@
 from tensorflow_datasets.core.features import text
 
 from tensorflow_datasets.core.features.audio_feature import Audio
+from tensorflow_datasets.core.features.bounding_boxes import BBox
+from tensorflow_datasets.core.features.bounding_boxes import BBoxFeature
 from tensorflow_datasets.core.features.class_label_feature import ClassLabel
 from tensorflow_datasets.core.features.feature import FeatureConnector
 from tensorflow_datasets.core.features.feature import FeaturesDict
@@ -30,8 +32,10 @@ from tensorflow_datasets.core.features.text_feature import Text
 from tensorflow_datasets.core.features.video_feature import Video
 
 __all__ = [
-    "Audio",
     "text",
+    "Audio",
+    "BBox",
+    "BBoxFeature",
     "ClassLabel",
     "FeatureConnector",
     "FeaturesDict",

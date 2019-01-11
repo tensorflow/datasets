@@ -1,0 +1,159 @@
+{
+  "citation": "@article{DBLP:journals/corr/LinMBHPRDZ14,\n  author    = {Tsung{-}Yi Lin and\n               Michael Maire and\n               Serge J. Belongie and\n               Lubomir D. Bourdev and\n               Ross B. Girshick and\n               James Hays and\n               Pietro Perona and\n               Deva Ramanan and\n               Piotr Doll{'{a}}r and\n               C. Lawrence Zitnick},\n  title     = {Microsoft {COCO:} Common Objects in Context},\n  journal   = {CoRR},\n  volume    = {abs/1405.0312},\n  year      = {2014},\n  url       = {http://arxiv.org/abs/1405.0312},\n  archivePrefix = {arXiv},\n  eprint    = {1405.0312},\n  timestamp = {Mon, 13 Aug 2018 16:48:13 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n", 
+  "description": "COCO is a large-scale object detection, segmentation, and captioning dataset. This version contains images, bounding boxes and labels for the 2014 version.\nNote:\n * Some images from the train and validation sets don't have annotations.\n * The test split don't have any annotations (only images).\n * Coco defines 91 classes but the data only had 80 classes.\n", 
+  "downloadChecksums": {
+    "http://images.cocodataset.org/annotations/annotations_trainval2014.zip": "031296bbc80c45a1d1f76bf9a90ead27e94e99ec629208449507a4917a3bf009", 
+    "http://images.cocodataset.org/annotations/image_info_test2014.zip": "7cecc66f6b09c1671c1896a1bcc1f35eb09b7fcf00a5c18420a5f0f5983dc8c9", 
+    "http://images.cocodataset.org/annotations/image_info_test2015.zip": "cf400242f8497257fb8a3e369bc766491f4a7e42625fb3d72555504e9a8c3b18", 
+    "http://images.cocodataset.org/zips/test2014.zip": "ead40c62230cb2cf70ff4c8b4c70abdc260a7556e77b3282621d06d8e2e35bdf", 
+    "http://images.cocodataset.org/zips/test2015.zip": "1a2aa896b81140a850a78fa8bff07d455698d2abf364ff05721763458a8101ca", 
+    "http://images.cocodataset.org/zips/train2014.zip": "ede4087e640bddba550e090eae701092534b554b42b05ac33f0300b984b31775", 
+    "http://images.cocodataset.org/zips/val2014.zip": "fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0"
+  }, 
+  "location": {
+    "urls": [
+      "http://cocodataset.org/#home"
+    ]
+  }, 
+  "name": "coco2014", 
+  "schema": {
+    "feature": [
+      {
+        "name": "objects"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image/filename", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "40342135426", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "40775"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "40775"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "40775"
+      }
+    }, 
+    {
+      "name": "test2015", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "81434"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "81434"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "81434"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "82783"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "82783"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "82783"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "40504"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "40504"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "40504"
+      }
+    }
+  ], 
+  "version": "1.0.0"
+}
