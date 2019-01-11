@@ -68,10 +68,12 @@ flags.DEFINE_boolean("compute_stats", True,
 
 
 
-def download_and_prepare(builder, dataset_name, config_name):
+def download_and_prepare(builder):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset %s config %s ..." % (dataset_name,
-                                                               config_name))
+  print("download_and_prepare for dataset {} config {} ...".format(
+      builder.name,
+      builder.builder_config and builder.builder_config.name,
+  ))
   # TODO(b/116270825): Add flag to force extraction / preparation.
   mode = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
   config = tfds.download.DownloadConfig(
@@ -113,12 +115,11 @@ def main(_):
       for config in builder.BUILDER_CONFIGS:
         builder_for_config = tfds.builder(
             builder.name, data_dir=FLAGS.data_dir, config=config)
-        download_and_prepare(builder_for_config, builder.name, config.name)
+        download_and_prepare(builder_for_config)
     else:
       # If there is a slash in the name, then user requested a specific
       # dataset configuration.
-      download_and_prepare(builder, builder.name,
-                           name.split("/", 1)[1] if "/" in name else "")
+      download_and_prepare(builder)
 
 
 if __name__ == "__main__":
