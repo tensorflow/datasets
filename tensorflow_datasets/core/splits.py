@@ -50,25 +50,31 @@ class _SplitDescriptorNode(object):
 
   There are three parts to the composition:
     1) The splits are composed (defined, merged, splitted,...) together before
-       calling the .as_dataset() function. This is done with the __add__,
-       __getitem__, which return a tree of _SplitDescriptorNode (whose leaf are
-       the NamedSplit objects)
+       calling the `.as_dataset()` function. This is done with the `__add__`,
+       `__getitem__`, which return a tree of `_SplitDescriptorNode` (whose leaf
+       are the `NamedSplit` objects)
 
-        split = tfds.TRAIN + tfds.TEST[:50]
+    ```
+    split = tfds.TRAIN + tfds.TEST.subsplit(tfds.percent[:50])
+    ```
 
-    2) The _SplitDescriptorNode is forwarded to the .as_dataset() function to be
-       resolved into actual read instruction. This is done by the
-       .get_read_instruction() method which takes the real dataset splits
+    2) The `_SplitDescriptorNode` is forwarded to the `.as_dataset()` function
+       to be resolved into actual read instruction. This is done by the
+       `.get_read_instruction()` method which takes the real dataset splits
        (name, number of shards,...) and parse the tree to return a
-       SplitReadInstruction() object
+       `SplitReadInstruction()` object
 
-        read_instruction = split.get_read_instruction(self.info.splits)
+    ```
+    read_instruction = split.get_read_instruction(self.info.splits)
+    ```
 
-    3) The SplitReadInstruction is then used in the tf.data.Dataset pipeline
+    3) The `SplitReadInstruction` is then used in the `tf.data.Dataset` pipeline
        to define which files to read and how to skip examples within file.
 
-        files_to_read = read_instruction.split_info_list
-        slice_per_file = read_instruction.slice_list
+    ```
+    files_to_read = read_instruction.split_info_list
+    slice_per_file = read_instruction.slice_list
+    ```
 
   """
 
@@ -77,10 +83,10 @@ class _SplitDescriptorNode(object):
     """Parse the descriptor tree and compile all read instructions together.
 
     Args:
-      split_dict: (dict) The dict[split_name, SplitInfo] of the dataset
+      split_dict: `dict`, The `dict[split_name, SplitInfo]` of the dataset
 
     Returns:
-      split_read_instruction (SplitReadInstruction)
+      split_read_instruction: `SplitReadInstruction`
     """
     raise NotImplementedError("Abstract method")
 
@@ -266,7 +272,9 @@ class NamedSplit(_SplitDescriptorNode):
 
   Each descriptor can be composed with other using addition or slice. Ex:
 
-    split = tfds.Split.TRAIN[0:25] + tfds.Split.TEST
+  ```
+  split = tfds.Split.TRAIN.subsplit(tfds.percent[0:25]) + tfds.Split.TEST
+  ```
 
   The resulting split will correspond to 25% of the train split merged with
   100% of the test split.
@@ -274,19 +282,33 @@ class NamedSplit(_SplitDescriptorNode):
   Warning:
     A split cannot be added twice, so the following will fail:
 
-      split = tfds.Split.TRAIN[:25] + tfds.Split.TRAIN[75:]
-      split = tfds.Split.TEST + tfds.Split.ALL
+  ```
+  split = (
+      tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
+      tfds.Split.TRAIN.subsplit(tfds.percent[75:])
+  )  # Error
+  split = tfds.Split.TEST + tfds.Split.ALL  # Error
+  ```
 
   Warning:
     The slices can be applied only one time. So the following are valid:
 
-      split = tfds.Split.TRAIN[0:25] + tfds.Split.TEST[0:50]
-      split = (tfds.Split.TRAIN + tfds.Split.TEST)[0:50]
+  ```
+  split = (
+      tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
+      tfds.Split.TEST.subsplit(tfds.percent[:50])
+  )
+  split = (tfds.Split.TRAIN + tfds.Split.TEST).subsplit(tfds.percent[:50])
+  ```
 
     But not:
 
-      split = tfds.Split.TRAIN[0:25][0:25]
-      split = (tfds.Split.TRAIN[:25] + tfds.Split.TEST)[0:50]
+  ```
+  train = tfds.Split.TRAIN
+  test = tfds.Split.TEST
+  split = train.subsplit(tfds.percent[:25]).subsplit(tfds.percent[:25])
+  split = (train.subsplit(tfds.percent[:25]) + test).subsplit(tfds.percent[:50])
+  ```
 
   """
 
@@ -319,6 +341,7 @@ class NamedSplit(_SplitDescriptorNode):
 
 
 class NamedSplitAll(NamedSplit):
+  """Split corresponding to the union of all defined dataset splits."""
 
   def __init__(self):
     super(NamedSplitAll, self).__init__("all")
@@ -367,14 +390,16 @@ SlicedSplitInfo = collections.namedtuple("SlicedSplitInfo", [
 class SplitReadInstruction(object):
   """Object containing the reading instruction for the dataset.
 
-  Similarly to SplitDescriptor nodes, this object can be composed with itself,
+  Similarly to `SplitDescriptor` nodes, this object can be composed with itself,
   but the resolution happens instantaneously, instead of keeping track of the
   tree, such as all instructions are compiled and flattened in a single
   SplitReadInstruction object containing the list of files and slice to use.
 
   Once resolved, the instructions can be accessed with:
 
-    read_instructions.get_list_sliced_split_info()  # List of splits to use
+  ```
+  read_instructions.get_list_sliced_split_info()  # List of splits to use
+  ```
 
   """
 
