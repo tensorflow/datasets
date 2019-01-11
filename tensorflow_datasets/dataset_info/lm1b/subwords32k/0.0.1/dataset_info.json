@@ -38,7 +38,7 @@
               "commonStats": {
                 "numNonMissing": "306688"
               }, 
-              "max": 58500.0, 
+              "max": 32694.0, 
               "min": 1.0
             }
           }
@@ -57,7 +57,7 @@
               "commonStats": {
                 "numNonMissing": "30301028"
               }, 
-              "max": 58505.0, 
+              "max": 32699.0, 
               "min": 1.0
             }
           }

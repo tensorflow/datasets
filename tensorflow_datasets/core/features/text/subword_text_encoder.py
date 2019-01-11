@@ -326,7 +326,12 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
       else:
         return next_encoder
 
-    return _binary_search(1, 1000)
+    # Get min and max token counts.
+    min_token_count = max(min(token_counts.values()), 1)
+    max_token_count = max(token_counts.values())
+
+    # Another option could be to do a binary search over *ranks* of the tokens.
+    return _binary_search(min_token_count, max_token_count)
 
   @classmethod
   def _build_from_token_counts(cls, token_counts, min_token_count,
