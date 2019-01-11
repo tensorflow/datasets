@@ -47,11 +47,12 @@ class Audio(feature.Tensor):
     super(Audio, self).__init__(shape=shape, dtype=tf.int64)
 
   def encode_example(self, audio_or_path_or_fobj):
-    if isinstance(audio_or_path_or_fobj, (np.ndarray, list)):
-      return audio_or_path_or_fobj
+    audio = audio_or_path_or_fobj
+    if isinstance(audio, (np.ndarray, list)):
+      return audio
 
-    file_format = self._file_format or audio_or_path_or_fobj.split(".")[-1]
-    audio_segment = pydub.AudioSegment.from_file(
-        audio_or_path_or_fobj, format=file_format)
-    return super(Audio, self).encode_example(
-        np.array(audio_segment.get_array_of_samples()).astype(np.int64))
+    with tf.gfile.Open(audio, "rb") as audio_f:
+      file_format = self._file_format or audio.split(".")[-1]
+      audio_segment = pydub.AudioSegment.from_file(audio_f, format=file_format)
+      return super(Audio, self).encode_example(
+          np.array(audio_segment.get_array_of_samples()).astype(np.int64))
