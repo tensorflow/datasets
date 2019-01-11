@@ -76,6 +76,21 @@ DATASET_INFO_AND_METADATA_FILES = [
     'image/imagenet2012_validation_labels.txt',
 ]
 
+DATASET_EXTRAS = {
+    'librispeech': ['pydub'],
+}
+
+all_dataset_extras = []
+for deps in DATASET_EXTRAS.values():
+  all_dataset_extras.extend(deps)
+
+EXTRAS_REQUIRE = {
+    'tensorflow': ['tf-nightly>=1.12.0.dev20181008'],
+    'tensorflow_gpu': ['tf-nightly-gpu>=1.12.0.dev20181008'],
+    'tests': TESTS_REQUIRE + all_dataset_extras,
+}
+EXTRAS_REQUIRE.update(DATASET_EXTRAS)
+
 setup(
     name=project_name,
     version=version,
@@ -92,11 +107,7 @@ setup(
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
-    extras_require={
-        'tensorflow': ['tf-nightly>=1.12.0.dev20181008'],
-        'tensorflow_gpu': ['tf-nightly-gpu>=1.12.0.dev20181008'],
-        'tests': TESTS_REQUIRE,
-    },
+    extras_require=EXTRAS_REQUIRE,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

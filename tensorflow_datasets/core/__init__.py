@@ -21,6 +21,8 @@ from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
 
 from tensorflow_datasets.core.dataset_info import DatasetInfo
 
+from tensorflow_datasets.core.lazy_imports import lazy_imports
+
 from tensorflow_datasets.core.splits import NamedSplit
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
@@ -29,6 +31,7 @@ from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
 
 __all__ = [
+    "lazy_imports",
     "BuilderConfig",
     "DatasetBuilder",
     "GeneratorBasedBuilder",

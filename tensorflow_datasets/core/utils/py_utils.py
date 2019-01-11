@@ -29,6 +29,7 @@ import os
 import sys
 import uuid
 
+import six
 import tensorflow as tf
 from tensorflow_datasets.core import constants
 
@@ -262,3 +263,10 @@ def read_checksum_digest(path, checksum_cls=hashlib.sha256):
         break
       checksum.update(block)
   return checksum.hexdigest(), size
+
+
+def reraise(additional_msg):
+  """Reraise an exception with an additional message."""
+  exc_type, exc_value, exc_traceback = sys.exc_info()
+  msg = str(exc_value) + "\n" + additional_msg
+  six.reraise(exc_type, exc_type(msg), exc_traceback)

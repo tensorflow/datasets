@@ -20,11 +20,11 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import pydub
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.lazy_imports import lazy_imports
 
 
 class Audio(feature.Tensor):
@@ -53,6 +53,7 @@ class Audio(feature.Tensor):
 
     with tf.gfile.Open(audio, "rb") as audio_f:
       file_format = self._file_format or audio.split(".")[-1]
-      audio_segment = pydub.AudioSegment.from_file(audio_f, format=file_format)
+      audio_segment = lazy_imports.pydub.AudioSegment.from_file(
+          audio_f, format=file_format)
       return super(Audio, self).encode_example(
           np.array(audio_segment.get_array_of_samples()).astype(np.int64))
