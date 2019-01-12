@@ -379,6 +379,10 @@ class Split(object):
   # All is a special Split which correspond to all split merged together
   ALL = NamedSplitAll()
 
+  def __new__(cls, name):
+    """Create a custom split with tfds.Split('custom_name')."""
+    return NamedSplit(name)
+
 
 # Similar to SplitInfo, but contain an additional slice info
 SlicedSplitInfo = collections.namedtuple("SlicedSplitInfo", [

@@ -56,7 +56,7 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
             gen_kwargs=dict(data=RANGE_TEST),
         ),
         tfds.core.SplitGenerator(
-            tfds.Split.VALIDATION,
+            tfds.Split("custom"),
             num_shards=2,
             gen_kwargs=dict(data=RANGE_VAL),
         ),
@@ -80,7 +80,7 @@ class SplitsUnitTest(tf.test.TestCase):
     cls._splits = tfds.core.SplitDict()
     cls._splits.add(tfds.core.SplitInfo(name="train", num_shards=10))
     cls._splits.add(tfds.core.SplitInfo(name="test", num_shards=2))
-    cls._splits.add(tfds.core.SplitInfo(name="validation", num_shards=2))
+    cls._splits.add(tfds.core.SplitInfo(name="custom", num_shards=2))
 
   def test_split_slice_merge(self):
 
@@ -106,10 +106,14 @@ class SplitsUnitTest(tf.test.TestCase):
     # Merge, then slice (then merge)
     split = tfds.Split.TEST + tfds.Split.TRAIN
     split = split.subsplit(tfds.percent[30:40])
-    split = split + tfds.Split.VALIDATION.subsplit(tfds.percent[:15])
+    split = split + tfds.Split("custom").subsplit(tfds.percent[:15])
 
     # List sorted so always deterministic
     self.assertEqual(self._info(split), [
+        splits.SlicedSplitInfo(
+            split_info=tfds.core.SplitInfo(name="custom", num_shards=2),
+            slice_value=slice(None, 15),
+        ),
         splits.SlicedSplitInfo(
             split_info=tfds.core.SplitInfo(name="test", num_shards=2),
             slice_value=slice(30, 40),
@@ -117,10 +121,6 @@ class SplitsUnitTest(tf.test.TestCase):
         splits.SlicedSplitInfo(
             split_info=tfds.core.SplitInfo(name="train", num_shards=10),
             slice_value=slice(30, 40),
-        ),
-        splits.SlicedSplitInfo(
-            split_info=tfds.core.SplitInfo(name="validation", num_shards=2),
-            slice_value=slice(None, 15),
         ),
     ])
 
