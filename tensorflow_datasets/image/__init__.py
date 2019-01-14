@@ -22,6 +22,7 @@ from tensorflow_datasets.image.coco import Coco2014
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
+from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.mnist import FashionMNIST
 from tensorflow_datasets.image.mnist import MNIST
 from tensorflow_datasets.image.omniglot import Omniglot
