@@ -22,7 +22,9 @@ Descriptor corresponding to a named split (train, test, ...).
 
 Each descriptor can be composed with other using addition or slice. Ex:
 
-  split = tfds.Split.TRAIN[0:25] + tfds.Split.TEST
+```
+split = tfds.Split.TRAIN.subsplit(tfds.percent[0:25]) + tfds.Split.TEST
+```
 
 The resulting split will correspond to 25% of the train split merged with
 100% of the test split.
@@ -30,19 +32,33 @@ The resulting split will correspond to 25% of the train split merged with
 Warning:
   A split cannot be added twice, so the following will fail:
 
-    split = tfds.Split.TRAIN[:25] + tfds.Split.TRAIN[75:]
-    split = tfds.Split.TEST + tfds.Split.ALL
+```
+split = (
+    tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
+    tfds.Split.TRAIN.subsplit(tfds.percent[75:])
+)  # Error
+split = tfds.Split.TEST + tfds.Split.ALL  # Error
+```
 
 Warning:
   The slices can be applied only one time. So the following are valid:
 
-    split = tfds.Split.TRAIN[0:25] + tfds.Split.TEST[0:50]
-    split = (tfds.Split.TRAIN + tfds.Split.TEST)[0:50]
+```
+split = (
+    tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
+    tfds.Split.TEST.subsplit(tfds.percent[:50])
+)
+split = (tfds.Split.TRAIN + tfds.Split.TEST).subsplit(tfds.percent[:50])
+```
 
   But not:
 
-    split = tfds.Split.TRAIN[0:25][0:25]
-    split = (tfds.Split.TRAIN[:25] + tfds.Split.TEST)[0:50]
+```
+train = tfds.Split.TRAIN
+test = tfds.Split.TEST
+split = train.subsplit(tfds.percent[:25]).subsplit(tfds.percent[:25])
+split = (train.subsplit(tfds.percent[:25]) + test).subsplit(tfds.percent[:50])
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 

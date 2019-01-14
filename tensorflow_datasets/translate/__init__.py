@@ -13,10 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text-based sentiment analysis datasets."""
+"""Translation datasets."""
 
-from tensorflow_datasets.text.imdb import IMDBReviews
-from tensorflow_datasets.text.imdb import IMDBReviewsConfig
-from tensorflow_datasets.text.lm1b import Lm1b
-from tensorflow_datasets.text.lm1b import Lm1bConfig
-from tensorflow_datasets.text.squad import Squad
+from tensorflow_datasets.translate.wmt import WMTConfig
+from tensorflow_datasets.translate.wmt_ende import WmtTranslateEnde
+from tensorflow_datasets.translate.wmt_enfr import WmtTranslateEnfr

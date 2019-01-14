@@ -15,6 +15,7 @@
 *  <a href="./tfds/core/SplitInfo.md"><code>tfds.core.SplitInfo</code></a>
 *  <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
 *  <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
+*  <a href="./tfds/core/lazy_imports.md"><code>tfds.core.lazy_imports</code></a>
 *  <a href="./tfds/dataset_as_numpy.md"><code>tfds.dataset_as_numpy</code></a>
 *  <a href="./tfds/download.md"><code>tfds.download</code></a>
 *  <a href="./tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>
@@ -24,6 +25,9 @@
 *  <a href="./tfds/download/Resource.md"><code>tfds.download.Resource</code></a>
 *  <a href="./tfds/download/iter_archive.md"><code>tfds.download.iter_archive</code></a>
 *  <a href="./tfds/features.md"><code>tfds.features</code></a>
+*  <a href="./tfds/features/Audio.md"><code>tfds.features.Audio</code></a>
+*  <a href="./tfds/features/BBox.md"><code>tfds.features.BBox</code></a>
+*  <a href="./tfds/features/BBoxFeature.md"><code>tfds.features.BBoxFeature</code></a>
 *  <a href="./tfds/features/ClassLabel.md"><code>tfds.features.ClassLabel</code></a>
 *  <a href="./tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>
 *  <a href="./tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>

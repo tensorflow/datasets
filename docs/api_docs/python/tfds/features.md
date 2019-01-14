@@ -17,6 +17,12 @@ Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/
 
 ## Classes
 
+[`class Audio`](../tfds/features/Audio.md): `FeatureConnector` for audio, encoded as raw integer wave form.
+
+[`class BBox`](../tfds/features/BBox.md): BBox(ymin, xmin, ymax, xmax)
+
+[`class BBoxFeature`](../tfds/features/BBoxFeature.md): `FeatureConnector` for a normalized bounding box.
+
 [`class ClassLabel`](../tfds/features/ClassLabel.md): `FeatureConnector` for integer class labels.
 
 [`class FeatureConnector`](../tfds/features/FeatureConnector.md): Abstract base class for feature types.

@@ -28,10 +28,13 @@ np_datasets = tfds.dataset_as_numpy(datasets)
 
 # Datasets
 
+* [`audio`](#audio)
+  * [`"librispeech"`](#librispeech)
 * [`image`](#image)
   * [`"celeb_a"`](#celeb_a)
   * [`"cifar10"`](#cifar10)
   * [`"cifar100"`](#cifar100)
+  * [`"coco2014"`](#coco2014)
   * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
   * [`"fashion_mnist"`](#fashion_mnist)
   * [`"image_label_folder"`](#image_label_folder)
@@ -43,12 +46,234 @@ np_datasets = tfds.dataset_as_numpy(datasets)
   * [`"imdb_reviews"`](#imdb_reviews)
   * [`"lm1b"`](#lm1b)
   * [`"squad"`](#squad)
-  * [`"translate_wmt"`](#translate_wmt)
+* [`translate`](#translate)
+  * [`"wmt_translate_ende"`](#wmt_translate_ende)
+  * [`"wmt_translate_enfr"`](#wmt_translate_enfr)
 * [`video`](#video)
   * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
   * [`"starcraft_video"`](#starcraft_video)
 
 ---
+
+# [`audio`](#audio)
+
+## `"librispeech"`
+
+LibriSpeech is a corpus of approximately 1000 hours of 16kHz read English speech, prepared by Vassil Panayotov with the assistance of Daniel Povey. The data is derived from read audiobooks from the LibriVox project, and has been carefully segmented and aligned.
+
+
+* URL: http://www.openslr.org/12
+* `DatasetBuilder`: [`tfds.audio.librispeech.Librispeech`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/librispeech.py)
+
+`librispeech` is configured with `tfds.audio.librispeech.LibrispeechConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"clean100_plain_text"` (`v0.1.0`): Uses only clean data, not including train-clean-360. Transcriptions are in plain text.
+
+* `"clean360_plain_text"` (`v0.1.0`): Uses only clean data, including train-clean-360. Transcriptions are in plain text.
+
+* `"all_plain_text"` (`v0.1.0`): Uses all data. Transcriptions are in plain text.
+
+* `"clean100_bytes"` (`v0.1.0`): Uses only clean data, not including train-clean-360. Transcriptions use the ByteTextEncoder
+
+* `"clean360_bytes"` (`v0.1.0`): Uses only clean data, including train-clean-360. Transcriptions use the ByteTextEncoder
+
+* `"all_bytes"` (`v0.1.0`): Uses all data. Transcriptions use the ByteTextEncoder
+
+* `"clean100_subwords8k"` (`v0.1.0`): Uses only clean data, not including train-clean-360. Transcriptions use the SubwordTextEncoder
+
+* `"clean360_subwords8k"` (`v0.1.0`): Uses only clean data, including train-clean-360. Transcriptions use the SubwordTextEncoder
+
+* `"all_subwords8k"` (`v0.1.0`): Uses all data. Transcriptions use the SubwordTextEncoder
+
+* `"clean100_subwords32k"` (`v0.1.0`): Uses only clean data, not including train-clean-360. Transcriptions use the SubwordTextEncoder
+
+* `"clean360_subwords32k"` (`v0.1.0`): Uses only clean data, including train-clean-360. Transcriptions use the SubwordTextEncoder
+
+* `"all_subwords32k"` (`v0.1.0`): Uses all data. Transcriptions use the SubwordTextEncoder
+
+
+### `"librispeech/clean100_plain_text"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"librispeech/clean360_plain_text"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"librispeech/all_plain_text"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"librispeech/clean100_bytes"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
+
+
+
+### `"librispeech/clean360_bytes"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
+
+
+
+### `"librispeech/all_bytes"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
+
+
+
+### `"librispeech/clean100_subwords8k"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"librispeech/clean360_subwords8k"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"librispeech/all_subwords8k"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"librispeech/clean100_subwords32k"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"librispeech/clean360_subwords32k"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"librispeech/all_subwords32k"`
+
+```
+FeaturesDict({
+    'chapter_id': Tensor(shape=(), dtype=tf.int64),
+    'speaker_id': Tensor(shape=(), dtype=tf.int64),
+    'speech': Audio(shape=(None,), dtype=tf.int64),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+### Statistics
+None computed
+
+### Urls
+ * http://www.openslr.org/12
+
+### Supervised keys (for `as_supervised=True`)
+(u'speech', u'text')
+
+### Citation
+```
+@inproceedings{panayotov2015librispeech,
+  title={Librispeech: an ASR corpus based on public domain audio books},
+  author={Panayotov, Vassil and Chen, Guoguo and Povey, Daniel and Khudanpur, Sanjeev},
+  booktitle={Acoustics, Speech and Signal Processing (ICASSP), 2015 IEEE International Conference on},
+  pages={5206--5210},
+  year={2015},
+  organization={IEEE}
+}
+
+```
+
+---
+
 
 # [`image`](#image)
 
@@ -245,6 +470,78 @@ TEST       |     10,000
     title = {Learning multiple layers of features from tiny images},
     institution = {},
     year = {2009}
+}
+
+```
+
+---
+
+## `"coco2014"`
+
+COCO is a large-scale object detection, segmentation, and captioning dataset. This version contains images, bounding boxes and labels for the 2014 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only had 80 classes.
+
+
+* URL: http://cocodataset.org/#home
+* `DatasetBuilder`: [`tfds.image.coco.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
+* Version: `v1.0.0`
+
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'objects': FeaturesDict({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    245,496
+TRAIN      |     82,783
+TEST2015   |     81,434
+TEST       |     40,775
+VALIDATION |     40,504
+
+
+### Urls
+ * http://cocodataset.org/#home
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+@article{DBLP:journals/corr/LinMBHPRDZ14,
+  author    = {Tsung{-}Yi Lin and
+               Michael Maire and
+               Serge J. Belongie and
+               Lubomir D. Bourdev and
+               Ross B. Girshick and
+               James Hays and
+               Pietro Perona and
+               Deva Ramanan and
+               Piotr Doll{'{a}}r and
+               C. Lawrence Zitnick},
+  title     = {Microsoft {COCO:} Common Objects in Context},
+  journal   = {CoRR},
+  volume    = {abs/1405.0312},
+  year      = {2014},
+  url       = {http://arxiv.org/abs/1405.0312},
+  archivePrefix = {arXiv},
+  eprint    = {1405.0312},
+  timestamp = {Mon, 13 Aug 2018 16:48:13 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 
 ```
@@ -882,23 +1179,26 @@ archivePrefix = {arXiv},
 
 ---
 
-## `"translate_wmt"`
+
+# [`translate`](#translate)
+
+## `"wmt_translate_ende"`
 
 Translate dataset based on the data from statmt.org.
 
 
 * URL: http://www.statmt.org/wmt18/
-* `DatasetBuilder`: [`tfds.text.translate_wmt.TranslateWmt`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/translate_wmt.py)
+* `DatasetBuilder`: [`tfds.translate.wmt_ende.WmtTranslateEnde`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_ende.py)
 
-`translate_wmt` is configured with `tfds.text.translate_wmt.WMTConfig` and has the following
+`wmt_translate_ende` is configured with `tfds.translate.wmt_ende.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": [], "test": ["ende_newstest_wmt13"], "train": ["ende_news_commentary_wmt18", "ende_commoncrawl_wmt13", "ende_europarl_wmt13"]}.
+* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "test": ["wmt17_newstest14"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
 
-* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": [], "test": ["ende_newstest_wmt13"], "train": ["ende_news_commentary_wmt18", "ende_commoncrawl_wmt13", "ende_europarl_wmt13"]}.
+* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "test": ["wmt17_newstest14"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
 
 
-### `"translate_wmt/ende_plain_text_t2t"`
+### `"wmt_translate_ende/ende_plain_text_t2t"`
 
 ```
 FeaturesDict({
@@ -909,12 +1209,12 @@ FeaturesDict({
 
 
 
-### `"translate_wmt/ende_subwords8k_t2t"`
+### `"wmt_translate_ende/ende_subwords8k_t2t"`
 
 ```
 FeaturesDict({
-    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=26503>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=19322>),
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -922,13 +1222,88 @@ FeaturesDict({
 
 
 ### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |  4,595,289
-TRAIN      |  4,592,289
-TEST       |      3,000
-VALIDATION |          0
+None computed
 
+### Urls
+ * http://www.statmt.org/wmt18/
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+
+```
+
+---
+
+## `"wmt_translate_enfr"`
+
+Translate dataset based on the data from statmt.org.
+
+
+* URL: http://www.statmt.org/wmt18/
+* `DatasetBuilder`: [`tfds.translate.wmt_enfr.WmtTranslateEnfr`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_enfr.py)
+
+`wmt_translate_enfr` is configured with `tfds.translate.wmt_enfr.WMTConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"enfr_plain_text_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "test": ["wmt17_newstest14"], "train": ["opennmt_1M_enfr_train"]}.
+
+* `"enfr_subwords8k_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "test": ["wmt17_newstest14"], "train": ["opennmt_1M_enfr_train"]}.
+
+* `"enfr_plain_text_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "test": ["wmt17_newstest14"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
+
+* `"enfr_subwords8k_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "test": ["wmt17_newstest14"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
+
+
+### `"wmt_translate_enfr/enfr_plain_text_t2t_small"`
+
+```
+FeaturesDict({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"wmt_translate_enfr/enfr_subwords8k_t2t_small"`
+
+```
+FeaturesDict({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"wmt_translate_enfr/enfr_plain_text_t2t_large"`
+
+```
+FeaturesDict({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"wmt_translate_enfr/enfr_subwords8k_t2t_large"`
+
+```
+FeaturesDict({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+### Statistics
+None computed
 
 ### Urls
  * http://www.statmt.org/wmt18/

@@ -91,6 +91,7 @@ _ensure_tf_install()
 from tensorflow_datasets import audio
 from tensorflow_datasets import image
 from tensorflow_datasets import text
+from tensorflow_datasets import translate
 from tensorflow_datasets import video
 
 

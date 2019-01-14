@@ -20,23 +20,26 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.text import translate_wmt
+from tensorflow_datasets.translate import wmt_ende
 
 
-class TranslateWMTTest(dataset_builder_testing.TestCase):
-  DATASET_CLASS = translate_wmt.TranslateWmt
+class TranslateEndeWMTTest(dataset_builder_testing.TestCase):
+  DATASET_CLASS = wmt_ende.WmtTranslateEnde
   BUILDER_CONFIG_NAMES_TO_TEST = ["ende_plain_text_t2t", "ende_subwords8k_t2t"]
+  OVERLAPPING_SPLITS = ["validation"]
 
   DL_EXTRACT_RESULT = {
       "train_0": "nc_v13",
       "train_1": "crawl",
       "train_2": "europarl",
       "test_0": "task",
+      "dev_0": "validation",
   }
 
   SPLITS = {
       "train": 5,
       "test": 2,
+      "validation": 2,
   }
 
 

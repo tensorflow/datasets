@@ -30,6 +30,8 @@ toc:
       path: /datasets/api_docs/python/tfds/core/GeneratorBasedBuilder
     - title: get_tfds_path
       path: /datasets/api_docs/python/tfds/core/get_tfds_path
+    - title: lazy_imports
+      path: /datasets/api_docs/python/tfds/core/lazy_imports
     - title: NamedSplit
       path: /datasets/api_docs/python/tfds/core/NamedSplit
     - title: SplitDict
@@ -60,6 +62,12 @@ toc:
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds/features
+    - title: Audio
+      path: /datasets/api_docs/python/tfds/features/Audio
+    - title: BBox
+      path: /datasets/api_docs/python/tfds/features/BBox
+    - title: BBoxFeature
+      path: /datasets/api_docs/python/tfds/features/BBoxFeature
     - title: ClassLabel
       path: /datasets/api_docs/python/tfds/features/ClassLabel
     - title: FeatureConnector

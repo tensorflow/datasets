@@ -13,6 +13,8 @@ API to define datasets.
 
 ## Classes
 
+[`class lazy_imports`](../tfds/core/lazy_imports.md): Lazy importer for heavy dependencies.
+
 [`class BuilderConfig`](../tfds/core/BuilderConfig.md): Base class for `DatasetBuilder` data configuration.
 
 [`class DatasetBuilder`](../tfds/core/DatasetBuilder.md): Abstract base class for all datasets.
