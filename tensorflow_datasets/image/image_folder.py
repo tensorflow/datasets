@@ -53,19 +53,21 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
   ```
   builder = tfds.image.ImageLabelFolder('<dataset_name>')
-  builder.download_and_prepare(manual_dir='path/to/manual_dir/')
-  print(ds_builder.info)  # Splits, num examples,... automatically extracted
+  config = tfds.core.download.DownloadConfig(manual_dir='path/to/manual_dir/')
+  builder.download_and_prepare(download_config=config)
+  print(builder.info)  # Splits, num examples,... automatically extracted
   ds = builder.as_dataset(split='split_name')
   ```
 
   Or with load:
 
   ```
+  config = tfds.core.download.DownloadConfig(manual_dir='path/to/manual_dir/')
   tfds.load(
       'image_label_folder',
       split='split_name'
-      builder_kwargs=dict(name='<dataset_name>'),
-      download_and_prepare_kwargs=dict(manual_dir='path/to/manual_dir/'),
+      builder_kwargs=dict(dataset_name='<dataset_name>'),
+      download_and_prepare_kwargs=dict(download_config=config),
   )
   ```
 
