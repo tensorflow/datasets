@@ -657,6 +657,13 @@ class GeneratorBasedBuilder(DatasetBuilder):
     for split_generator in self._split_generators(dl_manager):
       # Keep track of all split_info
       for s in split_generator.split_info_list:
+        if splits_lib.Split.ALL == s.name:
+          raise ValueError(
+              "tfds.Split.ALL is a special split keyword corresponding to the "
+              "union of all splits, so cannot be used as key in "
+              "._split_generator()."
+          )
+
         tf.logging.info("Generating split %s", s.name)
         split_dict.add(s)
 

@@ -82,6 +82,17 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
       yield {"x": i}
 
 
+class InvalidSplitDataset(DummyDatasetWithConfigs):
+
+  def _split_generators(self, _):
+    return [
+        splits_lib.SplitGenerator(
+            name=splits_lib.Split.ALL,  # Error: ALL cannot be used as Split key
+            num_shards=5,
+        )
+    ]
+
+
 class DatasetBuilderTest(tf.test.TestCase):
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
@@ -208,6 +219,15 @@ class DatasetBuilderTest(tf.test.TestCase):
         self.assertEqual(10, len(test_data))
         self.assertEqual([incr + el for el in range(30)],
                          sorted(train_data + test_data))
+
+  def test_invalid_split_dataset(self):
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      with self.assertRaisesWithPredicateMatch(ValueError, "ALL is a special"):
+        # Raise error during .download_and_prepare()
+        registered.load(
+            name="invalid_split_dataset",
+            data_dir=tmp_dir,
+        )
 
 
 class DatasetBuilderReadTest(tf.test.TestCase):
