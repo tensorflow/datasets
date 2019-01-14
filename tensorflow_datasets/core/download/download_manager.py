@@ -326,7 +326,7 @@ class DownloadManager(object):
     """Returns the directory containing the manually extracted data."""
     if not tf.gfile.Exists(self._manual_dir):
       raise AssertionError(
-          'Manual directory {} does not exist. Create it and download/extract'
+          'Manual directory {} does not exist. Create it and download/extract '
           'dataset artifacts in there.'.format(self._manual_dir))
     return self._manual_dir
 
