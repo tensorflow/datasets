@@ -255,6 +255,9 @@ class _SplitMerged(_SplitDescriptorNode):
     read_instruction2 = self._split2.get_read_instruction(split_dict)
     return read_instruction1 + read_instruction2
 
+  def __repr__(self):
+    return "({!r} + {!r})".format(self._split1, self._split2)
+
 
 class _SubSplit(_SplitDescriptorNode):
   """Represent a sub split of a split descriptor."""
@@ -265,6 +268,18 @@ class _SubSplit(_SplitDescriptorNode):
 
   def get_read_instruction(self, split_dict):
     return self._split.get_read_instruction(split_dict)[self._slice_value]
+
+  def __repr__(self):
+    slice_str = "{start}:{stop}"
+    if self._slice_value.step is not None:
+      slice_str += ":{step}"
+    slice_str = slice_str.format(
+        start=
+        "" if self._slice_value.start is None else self._slice_value.start,
+        stop="" if self._slice_value.stop is None else self._slice_value.stop,
+        step=self._slice_value.step,
+    )
+    return "{!r}(tfds.percent[{}])".format(self._split, slice_str)
 
 
 class NamedSplit(_SplitDescriptorNode):
@@ -319,7 +334,7 @@ class NamedSplit(_SplitDescriptorNode):
     return self._name
 
   def __repr__(self):
-    return "<tfds.core.NamedSplit name={name}>".format(name=self._name)
+    return "NamedSplit('{name}')".format(name=self._name)
 
   def __eq__(self, other):
     """Equality: tfds.Split.TRAIN == 'train'."""
@@ -345,6 +360,9 @@ class NamedSplitAll(NamedSplit):
 
   def __init__(self):
     super(NamedSplitAll, self).__init__("all")
+
+  def __repr__(self):
+    return "NamedSplitAll()".format(name=self._name)
 
   def get_read_instruction(self, split_dict):
     # Merge all dataset split together

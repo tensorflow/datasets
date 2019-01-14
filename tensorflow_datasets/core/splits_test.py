@@ -89,6 +89,11 @@ class SplitsUnitTest(tf.test.TestCase):
     test = tfds.Split.TEST
     split = test.subsplit(tfds.percent[30:40]) + train
 
+    self.assertEqual(
+        "{}".format(split),
+        "(NamedSplit('test')(tfds.percent[30:40]) + NamedSplit('train'))"
+    )
+
     # List sorted so always deterministic
     self.assertEqual(self._info(split), [
         splits.SlicedSplitInfo(
