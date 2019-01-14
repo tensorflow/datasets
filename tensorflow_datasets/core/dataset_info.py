@@ -474,7 +474,7 @@ def get_dataset_feature_statistics(builder, split):
   output_shapes_dict = dataset.output_shapes
   output_types_dict = dataset.output_types
 
-  for feature_name in feature_to_num_examples:
+  for feature_name in sorted(feature_to_num_examples.keys()):
     # Try to fill in the schema.
     feature = schema.feature.add()
     feature.name = feature_name
