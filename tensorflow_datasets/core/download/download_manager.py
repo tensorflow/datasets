@@ -135,11 +135,14 @@ class DownloadManager(object):
       manual_dir: `str`, path to manually downloaded/extracted data directory.
       checksums: `dict<str url, str sha256>`, url to sha256 of resource.
         Only URLs present are checked.
+        If empty, checksum of (already) downloaded files is computed and can
+        then be retrieved using `recorded_download_checksums` property.
       force_download: `bool`, default to False. If True, always [re]download.
       force_extraction: `bool`, default to False. If True, always [re]extract.
     """
     self._dataset_name = dataset_name
     self._checksums = checksums or {}
+    self._record_checksum_size = not checksums
     self._recorded_download_checksums = {}
     self._download_sizes = {}
     self._download_dir = os.path.expanduser(download_dir)
@@ -209,9 +212,11 @@ class DownloadManager(object):
       tf.logging.info(
           'URL %s already downloaded: reusing %s.' % (resource.url,
                                                       resource.path))
-      checksum, dl_size = utils.read_checksum_digest(resource.path)
-      self._handle_download_result(resource, None, checksum, dl_size,
-                                   existing=True)
+      if self._record_checksum_size:
+        tf.logging.info('Reading checksum and size of %s ...' % resource.path)
+        checksum, dl_size = utils.read_checksum_digest(resource.path)
+        self._handle_download_result(resource, None, checksum, dl_size,
+                                     existing=True)
       return promise.Promise.resolve(resource.path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
