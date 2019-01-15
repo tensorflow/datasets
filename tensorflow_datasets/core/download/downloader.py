@@ -78,7 +78,7 @@ class _Downloader(object):
       destination_path: `str`, path to directory where to download the resource.
 
     Returns:
-      Promise obj -> (`str`, int): (dlded object checksum, size in bytes).
+      Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
     url = url_info.url
     future = self._executor.submit(self._sync_download, url, destination_path)
