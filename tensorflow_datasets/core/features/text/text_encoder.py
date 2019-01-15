@@ -419,6 +419,8 @@ class Tokenizer(object):
 
 def pad_decr(ids):
   """Strip ID 0 and decrement ids by 1."""
+  if not ids:
+    return ids
   idx = -1
   while not ids[idx]:
     idx -= 1
