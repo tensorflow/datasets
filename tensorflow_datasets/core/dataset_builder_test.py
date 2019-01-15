@@ -145,22 +145,22 @@ class DatasetBuilderTest(tf.test.TestCase):
       self.assertEqual(20, len(data))
       self.assertLess(data[0]["x"], 30)
 
-  def test_get_data_dir(self):
-    # Test that the dataset load the most recent dir
+  def test_build_data_dir(self):
+    # Test that the dataset loads the data_dir for the builder's version
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
+      self.assertEqual(str(builder.info.version), "1.0.0")
       builder_data_dir = os.path.join(tmp_dir, builder.name)
+      version_dir = os.path.join(builder_data_dir, "1.0.0")
 
-      # The dataset folder contains multiple versions
+      # The dataset folder contains multiple other versions
       tf.gfile.MakeDirs(os.path.join(builder_data_dir, "14.0.0.invalid"))
       tf.gfile.MakeDirs(os.path.join(builder_data_dir, "10.0.0"))
       tf.gfile.MakeDirs(os.path.join(builder_data_dir, "9.0.0"))
+      tf.gfile.MakeDirs(os.path.join(builder_data_dir, "0.1.0"))
 
-      # The last valid version is chosen by default
-      most_recent_dir = os.path.join(builder_data_dir, "10.0.0")
-      v9_dir = os.path.join(builder_data_dir, "9.0.0")
-      self.assertEqual(builder._get_data_dir(), most_recent_dir)
-      self.assertEqual(builder._get_data_dir(version="9.0.0"), v9_dir)
+      # The builder's version dir is chosen
+      self.assertEqual(builder._build_data_dir(), version_dir)
 
   def test_get_data_dir_with_config(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
@@ -171,19 +171,20 @@ class DatasetBuilderTest(tf.test.TestCase):
       version_data_dir = os.path.join(builder_data_dir, "0.0.1")
 
       tf.gfile.MakeDirs(version_data_dir)
-      self.assertEqual(builder._get_data_dir(), version_data_dir)
+      self.assertEqual(builder._build_data_dir(), version_data_dir)
 
   def test_config_construction(self):
-    self.assertSetEqual(
-        set(["plus1", "plus2"]),
-        set(DummyDatasetWithConfigs.builder_configs.keys()))
-    plus1_config = DummyDatasetWithConfigs.builder_configs["plus1"]
-    builder = DummyDatasetWithConfigs(config="plus1", data_dir=None)
-    self.assertIs(plus1_config, builder.builder_config)
-    builder = DummyDatasetWithConfigs(config=plus1_config, data_dir=None)
-    self.assertIs(plus1_config, builder.builder_config)
-    self.assertIs(builder.builder_config,
-                  DummyDatasetWithConfigs.BUILDER_CONFIGS[0])
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      self.assertSetEqual(
+          set(["plus1", "plus2"]),
+          set(DummyDatasetWithConfigs.builder_configs.keys()))
+      plus1_config = DummyDatasetWithConfigs.builder_configs["plus1"]
+      builder = DummyDatasetWithConfigs(config="plus1", data_dir=tmp_dir)
+      self.assertIs(plus1_config, builder.builder_config)
+      builder = DummyDatasetWithConfigs(config=plus1_config, data_dir=tmp_dir)
+      self.assertIs(plus1_config, builder.builder_config)
+      self.assertIs(builder.builder_config,
+                    DummyDatasetWithConfigs.BUILDER_CONFIGS[0])
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_with_configs(self):
@@ -279,6 +280,7 @@ class DatasetBuilderReadTest(tf.test.TestCase):
     x, _ = dataset_utils.dataset_as_numpy(self.builder.as_dataset(
         split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
     self.assertEqual(x.shape[0], 20)
+
 
 
 if __name__ == "__main__":

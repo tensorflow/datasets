@@ -143,7 +143,7 @@ class DatasetBuilder(object):
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
           "DatasetBuilder {} does not have defined version. Please add a "
-          "`VERSION = tfds.Version('x.y.z')` to the class attribute".format(
+          "`VERSION = tfds.Version('x.y.z')` to the class.".format(
               self.name))
 
     if self._builder_config:
@@ -152,22 +152,18 @@ class DatasetBuilder(object):
       self._version = utils.Version(self.VERSION)
 
     # Load the data dir
-    self._data_dir = self._get_data_dir(version=self._version)
+    self._data_dir = self._build_data_dir()
+
+    # Use data version (restored from disk)
+    if tf.gfile.Exists(self._data_dir):
+      # Overwrite the current dataset info with the restored data version.
+      self.info.read_from_directory(self._data_dir)
 
     # Use the code version (do not restore data)
-    if not tf.gfile.Exists(self._data_dir):
-      # When using the code version, we explicitly reset the data_dir to None,
-      # even if previously generated data exists.
-      self._data_dir = None
-
+    else:
       # If defined, add pre-computed info to DatasetInfo (num samples, splits,
       # ...)
       self.info.initialize_from_package_data()
-
-    # Use data version (restored from disk)
-    else:
-      # Overwrite the current dataset info with the restored data version.
-      self.info.read_from_directory(self._data_dir)
 
   @utils.memoized_property
   def info(self):
@@ -196,8 +192,8 @@ class DatasetBuilder(object):
     """
 
     download_config = download_config or download.DownloadConfig()
-
-    if (self._data_dir and
+    data_exists = tf.gfile.Exists(self._data_dir)
+    if (data_exists and
         download_config.download_mode == REUSE_DATASET_IF_EXISTS):
       tf.logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
@@ -206,12 +202,10 @@ class DatasetBuilder(object):
         download_dir=download_dir,
         download_config=download_config)
 
-    # Create a new version in a new data_dir.
-    self._data_dir = self._get_data_dir(version=self.info.version)
     # Currently it's not possible to overwrite the data because it would
     # conflict with versioning: If the last version has already been generated,
     # it will always be reloaded and data_dir will be set at construction.
-    if tf.gfile.Exists(self._data_dir):
+    if data_exists:
       raise ValueError(
           "Trying to overwrite an existing dataset {} at {}. A dataset with "
           "the same version {} already exists. If the dataset has changed, "
@@ -285,7 +279,7 @@ class DatasetBuilder(object):
       If `batch_size` is -1, will return feature dictionaries containing
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
-    if not self._data_dir:
+    if not tf.gfile.Exists(self._data_dir):
       raise AssertionError(
           ("Dataset %s: could not find data in %s. Please make sure to call "
            "dataset_builder.download_and_prepare(), or pass download=True to "
@@ -353,47 +347,44 @@ class DatasetBuilder(object):
     else:
       return dataset
 
-  def _get_data_dir(self, version=None):
-    """Return the data directory of one dataset version.
-
-    Args:
-      version: (str) If specified, return the data_dir associated with the
-        given version.
-
-    Returns:
-      data_dir: (str)
-        If version is given, return the data_dir associated with this version.
-        Otherwise, automatically extract the last version from the directory.
-        If no previous version is found, return None.
-    """
-    if version == utils.Version.LATEST:
-      version = None
-
-    builder_config = self._builder_config
+  def _build_data_dir(self):
+    """Return the data directory for the current version."""
     builder_data_dir = os.path.join(self._data_dir_root, self.name)
+    builder_config = self._builder_config
     if builder_config:
       builder_data_dir = os.path.join(builder_data_dir, builder_config.name)
-    if version:
-      return os.path.join(builder_data_dir, str(version))
+    version = self._version
+    version_data_dir = os.path.join(builder_data_dir, str(version))
 
-    if not tf.gfile.Exists(builder_data_dir):
-      return None
+    def _other_versions_on_disk():
+      """Returns previous versions on disk."""
+      if not tf.gfile.Exists(builder_data_dir):
+        return []
 
-    # Get the highest version directory
-    version_dirnames = []
-    for dir_name in tf.gfile.ListDirectory(builder_data_dir):
-      try:
-        version_dirnames.append((utils.Version(dir_name), dir_name))
-      except ValueError:  # Invalid version (ex: incomplete data dir)
-        pass
-    # If found valid data directories, take the biggest version
-    if version_dirnames:
+      version_dirnames = []
+      for dir_name in tf.gfile.ListDirectory(builder_data_dir):
+        try:
+          version_dirnames.append((utils.Version(dir_name), dir_name))
+        except ValueError:  # Invalid version (ex: incomplete data dir)
+          pass
       version_dirnames.sort(reverse=True)
-      highest_version_dir = str(version_dirnames[0][1])
-      return os.path.join(builder_data_dir, highest_version_dir)
+      return version_dirnames
 
-    # No directory found
-    return None
+    # Check and warn if other versions exist on disk
+    version_dirs = _other_versions_on_disk()
+    if version_dirs:
+      other_version = version_dirs[0][0]
+      if other_version != self._version:
+        tf.logging.warn(
+            "Found a different version {other_version} of dataset {name} in "
+            "data_dir {data_dir}. Using currently defined version "
+            "{cur_version}.".format(
+                other_version=str(other_version),
+                name=self.name,
+                data_dir=self._data_dir_root,
+                cur_version=str(self._version)))
+
+    return version_data_dir
 
   def _log_download_bytes(self):
     # Print is intentional: we want this to always go to stdout so user has
