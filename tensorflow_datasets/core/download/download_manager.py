@@ -157,11 +157,8 @@ class DownloadManager(object):
 
   def _validate_checksum(self, url, checksum):
     """Returns True if url matches with checksum."""
-    # TODO(pierrot): decide if we want to support partial checksum validation
-    # by default and silently. If not, fail when _checksums exist and url is not
-    # present.
-    if url not in self._checksums:  # URL not to be checked.
-      return True
+    if self._record_checksum_size:
+      return True  # We are recording, so nothing to compare to.
     return self._checksums[url] == checksum
 
   @property
