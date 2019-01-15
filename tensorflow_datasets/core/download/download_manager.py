@@ -89,7 +89,7 @@ class DownloadManager(object):
   Extracted files/dirs are stored under `extract_dir`. The file name or
   directory name is the same as the original name, prefixed with the extraction
   method. E.g. "${extract_dir}/ZIP.%(sha256_of_zipped_content)s" or
-               "${extract_dir}/TAR.url.%(sha256_of_url)s".
+               "${extract_dir}/TAR.%(sha256_of_url)s".
 
   The function members accept either plain value, or values wrapped into list
   or dict. Giving a data structure will parallelize the downloads.
@@ -202,6 +202,7 @@ class DownloadManager(object):
     """Download resource, returns Promise->path to downloaded file."""
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
+    resource.sha256 = self._checksums.get(resource.url, None)
     if not resource.path:
       resource.path = os.path.join(self._download_dir, resource.fname)
     if not self._force_download and resource.exists_locally():
