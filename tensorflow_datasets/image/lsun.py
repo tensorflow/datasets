@@ -57,7 +57,12 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(
           name="classroom",
           description="Classroom images.",
-          version="0.1.0",
+          version="0.1.1",
+      ),
+      tfds.core.BuilderConfig(
+          name="bedroom",
+          description="Bedroom images.",
+          version="0.1.1",
       )
   ]
 
@@ -81,7 +86,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
+            num_shards=40,
             gen_kwargs={
                 "extracted_dir": extracted_dirs["train"],
                 "file_path": "%s_%s_lmdb" % (self.builder_config.name, "train")
