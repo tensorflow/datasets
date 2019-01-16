@@ -46,6 +46,7 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
+import tqdm
 from google.protobuf import json_format
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
@@ -227,7 +228,8 @@ class DatasetInfo(object):
     """Update from the DatasetBuilder."""
     # Fill other things by going over the dataset.
     splits = self.splits
-    for split_info in splits.values():
+    for split_info in tqdm.tqdm(
+        splits.values(), desc="Computing statistics...", unit=" split"):
       try:
         split_name = split_info.name
         # Fill DatasetFeatureStatistics.
@@ -428,7 +430,8 @@ def get_dataset_feature_statistics(builder, split):
   feature_to_min = {}
   feature_to_max = {}
 
-  for example in dataset_utils.dataset_as_numpy(dataset):
+  np_dataset = dataset_utils.dataset_as_numpy(dataset)
+  for example in tqdm.tqdm(np_dataset, unit=" examples"):
     statistics.num_examples += 1
 
     assert isinstance(example, dict)
