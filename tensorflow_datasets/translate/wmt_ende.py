@@ -72,7 +72,7 @@ class WmtTranslateEnde(wmt.WmtTranslate):
   BUILDER_CONFIGS = [
       wmt.WMTConfig(
           language_pair=("en", "de"),
-          version="0.0.1",
+          version="0.0.2",
           name_suffix="t2t",
           data={
               "train": T2T_ENDE_TRAIN,
@@ -81,7 +81,7 @@ class WmtTranslateEnde(wmt.WmtTranslate):
           }),
       wmt.WMTConfig(
           language_pair=("en", "de"),
-          version="0.0.1",
+          version="0.0.2",
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               name="subwords8k",

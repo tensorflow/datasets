@@ -105,11 +105,10 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   """WMT translation dataset."""
   _URL = "http://www.statmt.org/wmt18/"
 
-  VERSION = tfds.core.Version("0.0.1")
-
   @abc.abstractproperty
   def translate_datasets(self):
     """Datasets used in this class."""
+    raise NotImplementedError
 
   def _info(self):
     src, target = self.builder_config.language_pair
@@ -124,9 +123,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Text(
                     encoder_config=self.builder_config.text_encoder_config),
         }),
-        # No default supervised_keys (as we have to pass both question
-        # and context as input).
-        supervised_keys=None,
+        supervised_keys=(src, target),
         urls=["http://www.statmt.org/wmt18/"],
         citation=_CITATION,
     )
