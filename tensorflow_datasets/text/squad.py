@@ -47,9 +47,6 @@ articles, where the answer to every question is a segment of text, or span, \
 from the corresponding reading passage, or the question might be unanswerable.
 """
 
-_DOWNLOAD_URL = ("http://www.statmt.org/lm-benchmark/"
-                 "1-billion-word-language-modeling-benchmark-r13output.tar.gz")
-
 
 class SquadConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SQUAD."""
@@ -132,6 +129,7 @@ class Squad(tfds.core.GeneratorBasedBuilder):
 
   def _vocab_text_gen(self, filepath):
     for ex in self._generate_examples(filepath):
+      # "first_answer" is a substring of "context" so not need to add it here
       yield " ".join([ex["question"], ex["context"]])
 
   def _split_generators(self, dl_manager):
