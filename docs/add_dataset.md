@@ -356,15 +356,15 @@ when their module is imported such that they can be accessed through
 If you're contributing the dataset to `tensorflow/datasets`, add the module
 import to `tensorflow_datasets/__init__.py`.
 
-### 2. Package `DatasetInfo` and metadata files
+### 2. Run `download_and_prepare` locally.
 
-All datasets that ship with `tensorflow-datasets` have their
-`dataset_info.json` and metadata files packaged in so that users can access
-statistics and other information without needing to generate the dataset.
+Run `download_and_prepare` locally to ensure that data generation works:
 
-Run [`tensorflow_datasets/scripts/download_and_prepare`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/scripts/download_and_prepare.py)
-to generate the dataset and then copy in the `dataset_info.json` and other
-metadata files to [`tensorflow_datasets/dataset_info`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/dataset_info/).
+```
+python -m tensorflow_datasets.scripts.download_and_prepare \
+  --datasets=my_new_dataset
+```
+
 
 ### 3. Double-check the citation
 
