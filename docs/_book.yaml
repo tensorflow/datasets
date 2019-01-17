@@ -11,12 +11,14 @@ upper_tabs:
   lower_tabs:
     # Subsite tabs
     other:
+    - name: Datasets
+      contents:
+        - title: Datasets
+          path: /datasets/datasets
     - name: Guide
       contents:
       - title: Overview
         path: /datasets/overview
-      - title: Datasets
-        path: /datasets/datasets
       - title: Splits
         path: /datasets/splits
       - title: Add a dataset
