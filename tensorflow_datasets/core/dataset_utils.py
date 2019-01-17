@@ -117,7 +117,7 @@ def dataset_as_numpy(dataset, graph=None):
     graph: `tf.Graph`, optional, explicitly set the graph to use.
 
   Returns:
-    A structure matching `dataset` where `tf.data.Datset`s are converted to
+    A structure matching `dataset` where `tf.data.Dataset`s are converted to
     generators of NumPy arrays and `tf.Tensor`s are converted to NumPy arrays.
   """
   nested_ds = dataset
