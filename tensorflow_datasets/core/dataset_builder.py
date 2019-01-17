@@ -224,7 +224,9 @@ class DatasetBuilder(object):
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
-        self._download_and_prepare(dl_manager=dl_manager)
+        self._download_and_prepare(
+            dl_manager=dl_manager,
+            max_examples_per_split=download_config.max_examples_per_split)
 
         # NOTE: If modifying the lines below to put additional information in
         # DatasetInfo, you'll likely also want to update
@@ -416,7 +418,7 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _download_and_prepare(self, dl_manager):
+  def _download_and_prepare(self, dl_manager, max_examples_per_split=None):
     """Downloads and prepares dataset for reading.
 
     This is the internal implementation to overwrite called when user calls
@@ -426,6 +428,8 @@ class DatasetBuilder(object):
     Args:
       dl_manager: (DownloadManager) `DownloadManager` used to download and cache
         data.
+      max_examples_per_split: `int`, optional max number of examples to write
+        into each split (use for testing).
     """
     raise NotImplementedError
 
@@ -632,18 +636,24 @@ class GeneratorBasedBuilder(DatasetBuilder):
     """
     raise NotImplementedError()
 
-  def _download_and_prepare(self, dl_manager):
+  def _download_and_prepare(self, dl_manager, max_examples_per_split=None):
+    if max_examples_per_split is not None:
+      tf.logging.warn("Splits capped at %s examples max.",
+                      max_examples_per_split)
     if not tf.gfile.Exists(self._data_dir):
       tf.gfile.MakeDirs(self._data_dir)
 
     # Generate the filenames and write the example on disk
     def make_generator_fn(**kwargs):
+      """Returns generator_fn bound to **kwargs."""
 
       def generator_fn():
-        for ex in self._generate_examples(**kwargs):
+        for i, ex in enumerate(self._generate_examples(**kwargs)):
           # Use the DatasetInfo FeaturesDict to encode the example. This allows
           # the user's function to simply yield raw examples from the source
           # data, which makes reusing it easier.
+          if max_examples_per_split and i >= max_examples_per_split:
+            break
           yield self.info.features.encode_example(ex)
 
       return generator_fn

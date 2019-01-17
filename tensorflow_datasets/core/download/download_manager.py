@@ -49,7 +49,8 @@ class DownloadConfig(object):
                extract_dir=None,
                manual_dir=None,
                download_mode=None,
-               compute_stats=True):
+               compute_stats=True,
+               max_examples_per_split=None):
     """Constructs a `DownloadConfig`.
 
     Args:
@@ -63,12 +64,15 @@ class DownloadConfig(object):
         reuse both downloads and data if it already exists.
       compute_stats: `bool`, whether to compute statistics over the generated
         data.
+      max_examples_per_split: `int`, optional max number of examples to write
+        into each split.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
     self.download_mode = util.GenerateMode(
         download_mode or util.GenerateMode.REUSE_DATASET_IF_EXISTS)
     self.compute_stats = compute_stats
+    self.max_examples_per_split = max_examples_per_split
 
 
 class DownloadManager(object):

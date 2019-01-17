@@ -65,6 +65,9 @@ flags.DEFINE_boolean("debug", False,
                      "If True, will drop into debugger after generation")
 flags.DEFINE_boolean("compute_stats", True,
                      "If True, will compute stats after generation")
+flags.DEFINE_integer(
+    "max_examples_per_split", None,
+    "optional max number of examples to write into each split (for testing).")
 
 
 
@@ -80,7 +83,9 @@ def download_and_prepare(builder):
       extract_dir=FLAGS.extract_dir,
       manual_dir=FLAGS.manual_dir,
       compute_stats=FLAGS.compute_stats,
-      download_mode=mode)
+      download_mode=mode,
+      max_examples_per_split=FLAGS.max_examples_per_split,
+      )
 
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,
