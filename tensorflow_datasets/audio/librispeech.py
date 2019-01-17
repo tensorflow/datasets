@@ -161,6 +161,8 @@ class Librispeech(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = _make_builder_configs()
 
+  IN_DEVELOPMENT = True
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,

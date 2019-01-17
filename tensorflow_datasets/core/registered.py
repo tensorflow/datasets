@@ -42,6 +42,10 @@ _DATASET_REGISTRY = {}
 # <str snake_cased_name, abstract DatasetBuilder subclass>
 _ABSTRACT_DATASET_REGISTRY = {}
 
+# Datasets that are under active development and which we can't therefore load.
+# <str snake_cased_name, in development DatasetBuilder subclass>
+_IN_DEVELOPMENT_REGISTRY = {}
+
 _NAME_STR_ERR = """\
 Parsing builder name string failed.
 The builder name string must be in one of the following formats:
@@ -55,6 +59,7 @@ _DATASET_NOT_FOUND_ERR = """\
 Check that:
     - the dataset name is spelled correctly
     - dataset class defines all base class abstract methods
+    - dataset class is not in development, i.e. if IN_DEVELOPMENT=True
     - the module defining the dataset class is imported
 """
 
@@ -62,12 +67,15 @@ Check that:
 class DatasetNotFoundError(ValueError):
   """The requested Dataset was not found."""
 
-  def __init__(self, name, is_abstract=False):
+  def __init__(self, name, is_abstract=False, in_development=False):
     all_datasets_str = "\n\t- ".join([""] + list_builders())
     if is_abstract:
       error_string = ("Dataset %s not found. "
                       "Requesting the builder for an abstract class\n"
                       "%s") % (name, _DATASET_NOT_FOUND_ERR)
+    elif in_development:
+      error_string = ("Dataset %s is under active development and is not "
+                      "available yet.\n") % name
     else:
       error_string = ("Dataset %s not found. Available datasets:%s\n"
                       "%s") % (name, all_datasets_str, _DATASET_NOT_FOUND_ERR)
@@ -85,11 +93,16 @@ class RegisteredDataset(abc.ABCMeta):
 
     if name in _DATASET_REGISTRY:
       raise ValueError("Dataset with name %s already registered." % name)
+    if name in _IN_DEVELOPMENT_REGISTRY:
+      raise ValueError(
+          "Dataset with name %s already registered as in development." % name)
     if name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
     if inspect.isabstract(cls):
       _ABSTRACT_DATASET_REGISTRY[name] = cls
+    elif class_dict.get("IN_DEVELOPMENT"):
+      _IN_DEVELOPMENT_REGISTRY[name] = cls
     else:
       _DATASET_REGISTRY[name] = cls
     return cls
@@ -127,8 +140,10 @@ def builder(name, **builder_init_kwargs):
   builder_kwargs.update(builder_init_kwargs)
   if name in _ABSTRACT_DATASET_REGISTRY:
     raise DatasetNotFoundError(name, is_abstract=True)
+  if name in _IN_DEVELOPMENT_REGISTRY:
+    raise DatasetNotFoundError(name, in_development=True)
   if name not in _DATASET_REGISTRY:
-    raise DatasetNotFoundError(name, is_abstract=False)
+    raise DatasetNotFoundError(name)
   try:
     return _DATASET_REGISTRY[name](**builder_kwargs)
   except BaseException:
