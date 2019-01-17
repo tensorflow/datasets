@@ -23,12 +23,35 @@ from __future__ import print_function
 import os
 
 from absl.testing import parameterized
+import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.features.text import text_encoder
 
 ZH_HELLO = u'你好 '
 EN_HELLO = u'hello '
+
+
+class TextEncoderTest(tf.test.TestCase):
+
+  def test_pad_decr(self):
+    self.assertEqual([2, 1, 0], text_encoder.pad_decr([3, 2, 1]))
+    self.assertEqual([2, 1, 0], text_encoder.pad_decr([3, 2, 1, 0, 0, 0]))
+    self.assertEqual([-1, 2, 1, 0], text_encoder.pad_decr([0, 3, 2, 1, 0, 0]))
+    self.assertEqual([], text_encoder.pad_decr([]))
+    self.assertEqual([], text_encoder.pad_decr(np.array([])))
+
+  def test_pad_incr(self):
+    self.assertEqual([4, 3, 2], text_encoder.pad_incr([3, 2, 1]))
+    self.assertEqual([4, 3, 2, 1], text_encoder.pad_incr([3, 2, 1, 0]))
+
+  def test_is_mixed_alphanum(self):
+    self.assertFalse(text_encoder.is_mixed_alphanum('hi'))
+    self.assertFalse(text_encoder.is_mixed_alphanum(ZH_HELLO[:-1]))
+    self.assertTrue(text_encoder.is_mixed_alphanum('hi.'))
+    self.assertTrue(text_encoder.is_mixed_alphanum('hi.bye'))
+    self.assertTrue(text_encoder.is_mixed_alphanum('hi '))
+    self.assertTrue(text_encoder.is_mixed_alphanum(ZH_HELLO))
 
 
 class ByteTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
