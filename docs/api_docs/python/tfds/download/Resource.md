@@ -41,7 +41,7 @@ Resource constructor.
 * <b>`extract_method`</b>: `ExtractMethod` to be used to extract resource. If
     not set, will be guessed from downloaded file name `original_fname`.
 * <b>`path`</b>: `str`, path of resource on local disk. Can be None if resource has
-    not be downloaded yet. In such case, `url` must be set.
+    not be downloaded yet. In such case, `url` and `sha256` must be set.
 
 
 

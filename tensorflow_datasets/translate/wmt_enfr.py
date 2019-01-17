@@ -60,12 +60,6 @@ TRANSLATE_DATASETS = {
             "en": "dev/newstest2013.en",
             "fr": "dev/newstest2013.fr",
         }),
-    "wmt17_newstest14": wmt.TranslateData(
-        url="http://data.statmt.org/wmt17/translation-task/dev.tgz",
-        language_to_file={
-            "en": "dev/newstest2014.en",
-            "fr": "dev/newstest2014.fr",
-        }),
     "opennmt_1M_enfr_train": wmt.TranslateData(
         url="https://s3.amazonaws.com/opennmt-trainingdata/baseline-1M-enfr.tgz",  # pylint: disable=line-too-long
         language_to_file={
@@ -92,7 +86,6 @@ T2T_ENFR_TRAIN_LARGE = ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr",
                         # "wmt10_giga_fren_enfr",
                         "wmt13_undoc_enfr"]
 T2T_ENFR_DEV_LARGE = ["wmt17_newstest13"]
-T2T_ENFR_TEST = ["wmt17_newstest14"]
 
 
 class WmtTranslateEnfr(wmt.WmtTranslate):
@@ -102,16 +95,15 @@ class WmtTranslateEnfr(wmt.WmtTranslate):
       # EN-FR translations (matching the data used by Tensor2Tensor library).
       wmt.WMTConfig(
           language_pair=("en", "fr"),
-          version="0.0.2",
+          version="0.0.1",
           name_suffix="t2t_small",
           data={
               "train": T2T_ENFR_TRAIN_SMALL,
-              "test": T2T_ENFR_TEST,
               "dev": T2T_ENFR_DEV_SMALL
           }),
       wmt.WMTConfig(
           language_pair=("en", "fr"),
-          version="0.0.2",
+          version="0.0.1",
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               name="subwords8k",
@@ -119,21 +111,19 @@ class WmtTranslateEnfr(wmt.WmtTranslate):
           name_suffix="t2t_small",
           data={
               "train": T2T_ENFR_TRAIN_SMALL,
-              "test": T2T_ENFR_TEST,
               "dev": T2T_ENFR_DEV_SMALL
           }),
       wmt.WMTConfig(
           language_pair=("en", "fr"),
-          version="0.0.2",
+          version="0.0.1",
           name_suffix="t2t_large",
           data={
               "train": T2T_ENFR_TRAIN_LARGE,
-              "test": T2T_ENFR_TEST,
               "dev": T2T_ENFR_DEV_LARGE
           }),
       wmt.WMTConfig(
           language_pair=("en", "fr"),
-          version="0.0.2",
+          version="0.0.1",
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               name="subwords8k",
@@ -141,7 +131,6 @@ class WmtTranslateEnfr(wmt.WmtTranslate):
           name_suffix="t2t_large",
           data={
               "train": T2T_ENFR_TRAIN_LARGE,
-              "test": T2T_ENFR_TEST,
               "dev": T2T_ENFR_DEV_LARGE
           }),
   ]

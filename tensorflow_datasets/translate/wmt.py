@@ -134,7 +134,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     urls_to_download = {}
-    for split in ["train", "test", "dev"]:
+    for split in ["train", "dev"]:
       urls_to_download.update({
           "%s_%d" % (split, i): self.translate_datasets[entry].url
           for i, entry in enumerate(self.builder_config.data[split])
@@ -145,7 +145,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     # Dictionary with file locations for each split.
     # Inside it contains a list of pairs of files with matching sentences.
     files = {}
-    for split in ["train", "test", "dev"]:
+    for split in ["train", "dev"]:
       files[split] = []
       for i, entry in enumerate(self.builder_config.data[split]):
         path = os.path.join(
@@ -171,10 +171,6 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.VALIDATION,
             num_shards=1,
             gen_kwargs={"files": files["dev"]}),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            num_shards=1,
-            gen_kwargs={"files": files["test"]}),
     ]
 
   def _generate_examples(self, files):

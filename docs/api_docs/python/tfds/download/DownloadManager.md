@@ -39,7 +39,7 @@ The INFO files are used by `create_checksum_files.py` script.
 Extracted files/dirs are stored under `extract_dir`. The file name or
 directory name is the same as the original name, prefixed with the extraction
 method. E.g. "${extract_dir}/ZIP.%(sha256_of_zipped_content)s" or
-             "${extract_dir}/TAR.url.%(sha256_of_url)s".
+             "${extract_dir}/TAR.%(sha256_of_url)s".
 
 The function members accept either plain value, or values wrapped into list
 or dict. Giving a data structure will parallelize the downloads.
@@ -91,6 +91,8 @@ Download manager constructor.
 * <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data directory.
 * <b>`checksums`</b>: `dict<str url, str sha256>`, url to sha256 of resource.
     Only URLs present are checked.
+    If empty, checksum of (already) downloaded files is computed and can
+    then be retrieved using `recorded_download_checksums` property.
 * <b>`force_download`</b>: `bool`, default to False. If True, always [re]download.
 * <b>`force_extraction`</b>: `bool`, default to False. If True, always [re]extract.
 

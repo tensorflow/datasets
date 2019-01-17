@@ -42,12 +42,6 @@ TRANSLATE_DATASETS = {
             "en": "dev/newstest2013.en",
             "de": "dev/newstest2013.de",
         }),
-    "wmt17_newstest14": wmt.TranslateData(
-        url="http://data.statmt.org/wmt17/translation-task/dev.tgz",
-        language_to_file={
-            "en": "dev/newstest2014.en",
-            "de": "dev/newstest2014.de",
-        }),
     "wmt18_news_commentary_ende": wmt.TranslateData(
         url="http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz",  # pylint: disable=line-too-long
         language_to_file={
@@ -63,7 +57,6 @@ T2T_ENDE_TRAIN = [
     "wmt13_europarl_ende"
 ]
 T2T_ENDE_DEV = ["wmt17_newstest13"]
-T2T_ENDE_TEST = ["wmt17_newstest14"]
 
 
 class WmtTranslateEnde(wmt.WmtTranslate):
@@ -72,16 +65,15 @@ class WmtTranslateEnde(wmt.WmtTranslate):
   BUILDER_CONFIGS = [
       wmt.WMTConfig(
           language_pair=("en", "de"),
-          version="0.0.2",
+          version="0.0.1",
           name_suffix="t2t",
           data={
               "train": T2T_ENDE_TRAIN,
-              "test": T2T_ENDE_TEST,
               "dev": T2T_ENDE_DEV
           }),
       wmt.WMTConfig(
           language_pair=("en", "de"),
-          version="0.0.2",
+          version="0.0.1",
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               name="subwords8k",
@@ -89,7 +81,6 @@ class WmtTranslateEnde(wmt.WmtTranslate):
           name_suffix="t2t",
           data={
               "train": T2T_ENDE_TRAIN,
-              "test": T2T_ENDE_TEST,
               "dev": T2T_ENDE_DEV
           }),
   ]

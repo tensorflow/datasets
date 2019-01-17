@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.core.Version.__reduce_ex__", 
+  "current_doc_full_name": "tfds.features.text.Tokenizer.__repr__", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
@@ -10,7 +10,6 @@
     "tfds.Split.__getattribute__": "tfds.core.BuilderConfig.__getattribute__", 
     "tfds.Split.__hash__": "tfds.core.BuilderConfig.__hash__", 
     "tfds.Split.__init__": "tfds.core.Version.__init__", 
-    "tfds.Split.__new__": "tfds.core.BuilderConfig.__new__", 
     "tfds.Split.__reduce__": "tfds.core.BuilderConfig.__reduce__", 
     "tfds.Split.__reduce_ex__": "tfds.core.BuilderConfig.__reduce_ex__", 
     "tfds.Split.__repr__": "tfds.core.DatasetBuilder.__repr__", 

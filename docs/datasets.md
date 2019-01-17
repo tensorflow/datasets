@@ -39,6 +39,7 @@ np_datasets = tfds.dataset_as_numpy(datasets)
   * [`"fashion_mnist"`](#fashion_mnist)
   * [`"image_label_folder"`](#image_label_folder)
   * [`"imagenet2012"`](#imagenet2012)
+  * [`"lsun"`](#lsun)
   * [`"mnist"`](#mnist)
   * [`"omniglot"`](#omniglot)
   * [`"svhn_cropped"`](#svhn_cropped)
@@ -732,6 +733,73 @@ pages={211-252}
 
 ---
 
+## `"lsun"`
+
+Large scale images showing different objects from given categories like bedroom, tower etc.
+
+* URL: https://www.yf.io/p/lsun
+* `DatasetBuilder`: [`tfds.image.lsun.Lsun`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lsun.py)
+
+`lsun` is configured with `tfds.image.lsun.BuilderConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"classroom"` (`v0.1.1`): Classroom images.
+
+* `"bedroom"` (`v0.1.1`): Bedroom images.
+
+
+### `"lsun/classroom"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+### `"lsun/bedroom"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+
+### Statistics
+None computed
+
+### Urls
+ * https://www.yf.io/p/lsun
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+@article{journals/corr/YuZSSX15,
+  added-at = {2018-08-13T00:00:00.000+0200},
+  author = {Yu, Fisher and Zhang, Yinda and Song, Shuran and Seff, Ari and Xiao, Jianxiong},
+  biburl = {https://www.bibsonomy.org/bibtex/2446d4ffb99a5d7d2ab6e5417a12e195f/dblp},
+  ee = {http://arxiv.org/abs/1506.03365},
+  interhash = {3e9306c4ce2ead125f3b2ab0e25adc85},
+  intrahash = {446d4ffb99a5d7d2ab6e5417a12e195f},
+  journal = {CoRR},
+  keywords = {dblp},
+  timestamp = {2018-08-14T15:08:59.000+0200},
+  title = {LSUN: Construction of a Large-scale Image Dataset using Deep Learning with Humans in the Loop.},
+  url = {http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YuZSSX15},
+  volume = {abs/1506.03365},
+  year = 2015
+}
+
+```
+
+---
+
 ## `"mnist"`
 
 The MNIST database of handwritten digits.
@@ -765,11 +833,10 @@ TEST       |     10,000
 
 ### Citation
 ```
-\
 @article{lecun2010mnist,
   title={MNIST handwritten digit database},
   author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-  journal={AT\&T Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+  journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
   volume={2},
   year={2010}
 }
@@ -927,7 +994,7 @@ FeaturesDict({
 ```
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8155>),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8185>),
 })
 ```
 
@@ -1126,9 +1193,9 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'context': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8196>),
-    'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8196>),
-    'question': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8196>),
+    'context': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8190>),
+    'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8190>),
+    'question': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8190>),
 })
 ```
 
@@ -1138,9 +1205,9 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'context': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32952>),
-    'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32952>),
-    'question': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32952>),
+    'context': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32953>),
+    'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32953>),
+    'question': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32953>),
 })
 ```
 
@@ -1193,9 +1260,9 @@ Translate dataset based on the data from statmt.org.
 `wmt_translate_ende` is configured with `tfds.translate.wmt_ende.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "test": ["wmt17_newstest14"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
+* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
 
-* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "test": ["wmt17_newstest14"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
+* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
 
 
 ### `"wmt_translate_ende/ende_plain_text_t2t"`
@@ -1228,10 +1295,24 @@ None computed
  * http://www.statmt.org/wmt18/
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'en', u'de')
 
 ### Citation
 ```
+@InProceedings{bojar-EtAl:2018:WMT1,
+  author    = {Bojar, Ond{r}ej  and  Federmann, Christian  and  Fishel, Mark
+    and Graham, Yvette  and  Haddow, Barry  and  Huck, Matthias  and
+    Koehn, Philipp  and  Monz, Christof},
+  title     = {Findings of the 2018 Conference on Machine Translation (WMT18)},
+  booktitle = {Proceedings of the Third Conference on Machine Translation,
+    Volume 2: Shared Task Papers},
+  month     = {October},
+  year      = {2018},
+  address   = {Belgium, Brussels},
+  publisher = {Association for Computational Linguistics},
+  pages     = {272--307},
+  url       = {http://www.aclweb.org/anthology/W18-6401}
+}
 
 ```
 
@@ -1248,13 +1329,13 @@ Translate dataset based on the data from statmt.org.
 `wmt_translate_enfr` is configured with `tfds.translate.wmt_enfr.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"enfr_plain_text_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "test": ["wmt17_newstest14"], "train": ["opennmt_1M_enfr_train"]}.
+* `"enfr_plain_text_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train": ["opennmt_1M_enfr_train"]}.
 
-* `"enfr_subwords8k_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "test": ["wmt17_newstest14"], "train": ["opennmt_1M_enfr_train"]}.
+* `"enfr_subwords8k_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train": ["opennmt_1M_enfr_train"]}.
 
-* `"enfr_plain_text_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "test": ["wmt17_newstest14"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
+* `"enfr_plain_text_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
 
-* `"enfr_subwords8k_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "test": ["wmt17_newstest14"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
+* `"enfr_subwords8k_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
 
 
 ### `"wmt_translate_enfr/enfr_plain_text_t2t_small"`
@@ -1309,10 +1390,24 @@ None computed
  * http://www.statmt.org/wmt18/
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'en', u'fr')
 
 ### Citation
 ```
+@InProceedings{bojar-EtAl:2018:WMT1,
+  author    = {Bojar, Ond{r}ej  and  Federmann, Christian  and  Fishel, Mark
+    and Graham, Yvette  and  Haddow, Barry  and  Huck, Matthias  and
+    Koehn, Philipp  and  Monz, Christof},
+  title     = {Findings of the 2018 Conference on Machine Translation (WMT18)},
+  booktitle = {Proceedings of the Third Conference on Machine Translation,
+    Volume 2: Shared Task Papers},
+  month     = {October},
+  year      = {2018},
+  address   = {Belgium, Brussels},
+  publisher = {Association for Computational Linguistics},
+  pages     = {272--307},
+  url       = {http://www.aclweb.org/anthology/W18-6401}
+}
 
 ```
 

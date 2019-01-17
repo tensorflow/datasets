@@ -1,6 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.Split" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="__new__"/>
 <meta itemprop="property" content="ALL"/>
 <meta itemprop="property" content="TEST"/>
 <meta itemprop="property" content="TRAIN"/>
@@ -34,6 +35,20 @@ stages of training and evaluation.
 See the
 [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
 for more information.
+
+<h2 id="__new__"><code>__new__</code></h2>
+
+``` python
+@staticmethod
+__new__(
+    cls,
+    name
+)
+```
+
+Create a custom split with tfds.Split('custom_name').
+
+
 
 ## Class Members
 

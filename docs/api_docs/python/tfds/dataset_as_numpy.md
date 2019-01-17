@@ -30,5 +30,5 @@ and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
 
 #### Returns:
 
-A structure matching `dataset` where `tf.data.Datset`s are converted to
+A structure matching `dataset` where `tf.data.Dataset`s are converted to
 generators of NumPy arrays and `tf.Tensor`s are converted to NumPy arrays.

@@ -32,13 +32,11 @@ class TranslateEndeWMTTest(dataset_builder_testing.TestCase):
       "train_0": "nc_v13",
       "train_1": "crawl",
       "train_2": "europarl",
-      "test_0": "task",
       "dev_0": "validation",
   }
 
   SPLITS = {
       "train": 5,
-      "test": 2,
       "validation": 2,
   }
 
