@@ -23,6 +23,7 @@ import hashlib
 import json
 import os
 import re
+import sys
 import tempfile
 import threading
 
@@ -187,7 +188,10 @@ class DownloadManagerTest(tf.test.TestCase):
     manager = self._get_manager()
     res1 = manager.extract('/dl_dir/foo.tar', async_=True)
     res2 = manager.extract('/dl_dir/foo.tar', async_=True)
-    self.assertTrue(res1 is res2)
+    if sys.version_info[0] > 2:
+      self.assertTrue(res1 is res2)
+    else:
+      self.assertTrue(res1._promise is res2._promise)
     extracted_new.set()
     self.assertEqual(res1.get(), '/extract_dir/TAR.foo')
     self.assertEqual(1, self.extractor_extract.call_count)

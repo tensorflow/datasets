@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import sys
 import uuid
 
 import promise
@@ -334,6 +335,36 @@ class DownloadManager(object):
     return self._manual_dir
 
 
+# ============================================================================
+# In Python 2.X, threading.Condition.wait() cannot be interrupted by SIGINT,
+# unless it's given a timeout. Here we artificially give a long timeout to
+# allow ctrl+C.
+# This code should be deleted once python2 is no longer supported.
+if sys.version_info[0] > 2:
+
+  def _wait_on_promise(p):
+    return p.get()
+
+else:
+
+  def _wait_on_promise(p):
+    while True:
+      result = p.get(sys.maxint)  # pylint: disable=g-deprecated-member-used
+      if p.is_fulfilled:
+        return result
+
+  class _KillablePromise(promise.Promise):
+
+    def __init__(self, promise_):
+      self._promise = promise_
+
+    def get(self, timeout=None):
+      if timeout is not None:
+        return self._promise.get(timeout)
+      return _wait_on_promise(self._promise)
+# ============================================================================
+
+
 def _map_promise(map_fn, all_inputs, async_):
   """Map the function into each element and resolve the promise."""
   all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
@@ -345,6 +376,8 @@ def _map_promise(map_fn, all_inputs, async_):
       merged_promise = promise.Promise.all(all_promises)
     else:
       merged_promise = all_promises
+    if sys.version_info[0] == 2:
+      merged_promise = _KillablePromise(merged_promise)
     return merged_promise
 
-  return utils.map_nested(lambda p: p.get(), all_promises)
+  return utils.map_nested(_wait_on_promise, all_promises)
