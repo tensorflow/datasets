@@ -36,6 +36,7 @@ from __future__ import print_function
 
 import os
 import pdb
+import time
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -61,14 +62,30 @@ flags.DEFINE_string("extract_dir", None, "Where to extract files.")
 flags.DEFINE_string(
     "manual_dir", None,
     "Directory where dataset have manually been downloaded / extracted.")
-flags.DEFINE_boolean("debug", False,
-                     "If True, will drop into debugger after generation")
 flags.DEFINE_boolean("compute_stats", True,
                      "If True, will compute stats after generation")
 flags.DEFINE_integer(
     "max_examples_per_split", None,
     "optional max number of examples to write into each split (for testing).")
 
+# Debug flags
+flags.DEFINE_boolean("debug", False,
+                     "If True, will drop into debugger after data generation")
+flags.DEFINE_boolean("debug_start", False,
+                     "If True, will drop into debugger on startup")
+flags.DEFINE_boolean("sleep_start", False,
+                     "If True, will sleep on startup; useful for ssh")
+
+
+def download_config():
+  return tfds.download.DownloadConfig(
+      extract_dir=FLAGS.extract_dir,
+      manual_dir=FLAGS.manual_dir,
+      compute_stats=FLAGS.compute_stats,
+      # TODO(b/116270825): Add flag to force extraction / preparation.
+      download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
+      max_examples_per_split=FLAGS.max_examples_per_split,
+  )
 
 
 def download_and_prepare(builder):
@@ -77,19 +94,10 @@ def download_and_prepare(builder):
       builder.name,
       builder.builder_config and builder.builder_config.name,
   ))
-  # TODO(b/116270825): Add flag to force extraction / preparation.
-  mode = tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS
-  config = tfds.download.DownloadConfig(
-      extract_dir=FLAGS.extract_dir,
-      manual_dir=FLAGS.manual_dir,
-      compute_stats=FLAGS.compute_stats,
-      download_mode=mode,
-      max_examples_per_split=FLAGS.max_examples_per_split,
-      )
 
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,
-      download_config=config)
+      download_config=download_config())
   termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
 
   if FLAGS.debug:
@@ -101,8 +109,12 @@ def download_and_prepare(builder):
     del iterator, item
 
 
-
 def main(_):
+  if FLAGS.debug_start:
+    pdb.set_trace()
+  if FLAGS.sleep_start:
+    time.sleep(60*60*3)
+
   datasets_to_build = (
       set(FLAGS.datasets.split(",")) -
       set(FLAGS.exclude_datasets.split(",")))

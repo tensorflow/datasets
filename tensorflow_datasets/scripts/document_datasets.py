@@ -97,7 +97,7 @@ DATASET_WITH_CONFIGS_ENTRY = """\
 
 {description}
 
-* URL: {url}
+* URL: [{url}]({url})
 * `DatasetBuilder`: [`{module_and_class}`]({cls_url})
 
 `{snakecase_name}` is configured with `{config_cls}` and has the following
@@ -129,7 +129,7 @@ DATASET_ENTRY = """\
 
 {description}
 
-* URL: {url}
+* URL: [{url}]({url})
 * `DatasetBuilder`: [`{module_and_class}`]({cls_url})
 * Version: `v{version}`
 
@@ -183,6 +183,10 @@ def url_from_info(info):
   return (info.urls and info.urls[0]) or "<no known url>"
 
 
+def format_urls(urls):
+  return "\n".join([" * [{url}]({url})".format(url=url) for url in urls])
+
+
 def document_single_builder(builder):
   """Doc string for a single builder, with or without configs."""
   mod_name = builder.__class__.__module__
@@ -218,7 +222,7 @@ def document_single_builder(builder):
         config_cls="%s.%s" % (tfds_mod_name(mod_name),
                               type(builder.builder_config).__name__),
         configs="\n".join(config_docs),
-        urls="\n".join([" * " + url for url in info.urls]),
+        urls=format_urls(info.urls),
         url=url_from_info(info),
         supervised_keys=str(info.supervised_keys),
         citation=info.citation,
@@ -235,7 +239,7 @@ def document_single_builder(builder):
         version=info.version,
         feature_information=make_feature_information(info),
         statistics_information=make_statistics_information(info),
-        urls="\n".join([" * " + url for url in info.urls]),
+        urls=format_urls(info.urls),
         url=url_from_info(info),
         supervised_keys=str(info.supervised_keys),
         citation=info.citation,

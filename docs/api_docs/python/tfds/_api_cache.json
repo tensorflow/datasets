@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.features.text.Tokenizer.__repr__", 
+  "current_doc_full_name": "tfds.features.FeaturesDict.__getitem__", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
@@ -513,6 +513,7 @@
     "tfds.core.BuilderConfig.version": true, 
     "tfds.core.DatasetBuilder": false, 
     "tfds.core.DatasetBuilder.BUILDER_CONFIGS": true, 
+    "tfds.core.DatasetBuilder.IN_DEVELOPMENT": true, 
     "tfds.core.DatasetBuilder.VERSION": true, 
     "tfds.core.DatasetBuilder.__abstractmethods__": true, 
     "tfds.core.DatasetBuilder.__delattr__": true, 
@@ -576,6 +577,7 @@
     "tfds.core.DatasetInfo.write_to_directory": true, 
     "tfds.core.GeneratorBasedBuilder": false, 
     "tfds.core.GeneratorBasedBuilder.BUILDER_CONFIGS": true, 
+    "tfds.core.GeneratorBasedBuilder.IN_DEVELOPMENT": true, 
     "tfds.core.GeneratorBasedBuilder.VERSION": true, 
     "tfds.core.GeneratorBasedBuilder.__abstractmethods__": true, 
     "tfds.core.GeneratorBasedBuilder.__delattr__": true, 

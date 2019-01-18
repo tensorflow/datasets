@@ -60,7 +60,7 @@ np_datasets = tfds.dataset_as_numpy(datasets)
 
 Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. These pictures are cropped.
 
-* URL: http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+* URL: [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 * `DatasetBuilder`: [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
 * Version: `v0.2.0`
 
@@ -136,7 +136,7 @@ VALIDATION |     19,867
 
 
 ### Urls
- * http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+ * [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 
 ### Supervised keys (for `as_supervised=True`)
 None
@@ -170,7 +170,7 @@ None
 
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.
 
-* URL: https://www.cs.toronto.edu/~kriz/cifar.html
+* URL: [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 * `DatasetBuilder`: [`tfds.image.cifar.Cifar10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
 * Version: `v1.0.1`
 
@@ -192,7 +192,7 @@ TEST       |     10,000
 
 
 ### Urls
- * https://www.cs.toronto.edu/~kriz/cifar.html
+ * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'image', u'label')
@@ -214,7 +214,7 @@ TEST       |     10,000
 
 This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a "fine" label (the class to which it belongs) and a "coarse" label (the superclass to which it belongs).
 
-* URL: https://www.cs.toronto.edu/~kriz/cifar.html
+* URL: [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 * `DatasetBuilder`: [`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
 * Version: `v1.3.0`
 
@@ -237,7 +237,7 @@ TEST       |     10,000
 
 
 ### Urls
- * https://www.cs.toronto.edu/~kriz/cifar.html
+ * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'image', u'label')
@@ -264,7 +264,7 @@ Note:
  * Coco defines 91 classes but the data only had 80 classes.
 
 
-* URL: http://cocodataset.org/#home
+* URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 * `DatasetBuilder`: [`tfds.image.coco.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
 * Version: `v1.0.0`
 
@@ -293,7 +293,7 @@ VALIDATION |     40,504
 
 
 ### Urls
- * http://cocodataset.org/#home
+ * [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
 ### Supervised keys (for `as_supervised=True`)
 None
@@ -331,7 +331,7 @@ None
 
 A large set of high-resolution retina images taken under a variety of imaging conditions.
 
-* URL: https://www.kaggle.com/c/diabetic-retinopathy-detection/data
+* URL: [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 * `DatasetBuilder`: [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py)
 * Version: `v1.0.0`
 
@@ -355,7 +355,7 @@ SAMPLE     |         10
 
 
 ### Urls
- * https://www.kaggle.com/c/diabetic-retinopathy-detection/data
+ * [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
 ### Supervised keys (for `as_supervised=True`)
 None
@@ -371,7 +371,7 @@ None
 
 Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.
 
-* URL: https://github.com/zalandoresearch/fashion-mnist
+* URL: [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 * `DatasetBuilder`: [`tfds.image.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 * Version: `v1.0.0`
 
@@ -393,7 +393,7 @@ TEST       |     10,000
 
 
 ### Urls
- * https://github.com/zalandoresearch/fashion-mnist
+ * [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'image', u'label')
@@ -425,7 +425,7 @@ TEST       |     10,000
 
 Generic image classification dataset.
 
-* URL: <no known url>
+* URL: [<no known url>](<no known url>)
 * `DatasetBuilder`: [`tfds.image.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/image_folder.py)
 * Version: `v1.0.0`
 
@@ -466,7 +466,7 @@ completion, we hope ImageNet will offer tens of millions of cleanly sorted
 images for most of the concepts in the WordNet hierarchy.
 
 
-* URL: http://image-net.org/
+* URL: [http://image-net.org/](http://image-net.org/)
 * `DatasetBuilder`: [`tfds.image.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet.py)
 * Version: `v1.0.0`
 
@@ -489,7 +489,7 @@ VALIDATION |     50,000
 
 
 ### Urls
- * http://image-net.org/
+ * [http://image-net.org/](http://image-net.org/)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'image', u'label')
@@ -515,7 +515,7 @@ pages={211-252}
 
 Large scale images showing different objects from given categories like bedroom, tower etc.
 
-* URL: https://www.yf.io/p/lsun
+* URL: [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 * `DatasetBuilder`: [`tfds.image.lsun.Lsun`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lsun.py)
 
 `lsun` is configured with `tfds.image.lsun.BuilderConfig` and has the following
@@ -548,10 +548,15 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |  3,033,342
+TRAIN      |  3,033,042
+VALIDATION |        300
+
 
 ### Urls
- * https://www.yf.io/p/lsun
+ * [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ### Supervised keys (for `as_supervised=True`)
 None
@@ -582,7 +587,7 @@ None
 
 The MNIST database of handwritten digits.
 
-* URL: http://yann.lecun.com/exdb/mnist/
+* URL: [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 * `DatasetBuilder`: [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 * Version: `v1.0.0`
 
@@ -604,7 +609,7 @@ TEST       |     10,000
 
 
 ### Urls
- * http://yann.lecun.com/exdb/mnist/
+ * [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'image', u'label')
@@ -629,7 +634,7 @@ Omniglot data set for one-shot learning. This dataset contains 1623 different
 handwritten characters from 50 different alphabets.
 
 
-* URL: https://github.com/brendenlake/omniglot/
+* URL: [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 * `DatasetBuilder`: [`tfds.image.omniglot.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/omniglot.py)
 * Version: `v1.0.0`
 
@@ -655,7 +660,7 @@ SMALL1     |      2,720
 
 
 ### Urls
- * https://github.com/brendenlake/omniglot/
+ * [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'image', u'label')
@@ -681,7 +686,7 @@ SMALL1     |      2,720
 
 The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
 
-* URL: http://ufldl.stanford.edu/housenumbers/
+* URL: [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 * `DatasetBuilder`: [`tfds.image.svhn.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/svhn.py)
 * Version: `v1.0.0`
 
@@ -704,7 +709,7 @@ TEST       |     26,032
 
 
 ### Urls
- * http://ufldl.stanford.edu/housenumbers/
+ * [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'image', u'label')
@@ -730,7 +735,7 @@ year = {2011}
 Large Movie Review Dataset.
 This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing.
 
-* URL: http://ai.stanford.edu/~amaas/data/sentiment/
+* URL: [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 * `DatasetBuilder`: [`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
 
 `imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the following
@@ -799,7 +804,7 @@ TEST       |     25,000
 
 
 ### Urls
- * http://ai.stanford.edu/~amaas/data/sentiment/
+ * [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'text', u'label')
@@ -827,7 +832,7 @@ TEST       |     25,000
 A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data.
 
 
-* URL: http://www.statmt.org/lm-benchmark/
+* URL: [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 * `DatasetBuilder`: [`tfds.text.lm1b.Lm1b`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/lm1b.py)
 
 `lm1b` is configured with `tfds.text.lm1b.Lm1bConfig` and has the following
@@ -892,7 +897,7 @@ TEST       |    306,688
 
 
 ### Urls
- * http://www.statmt.org/lm-benchmark/
+ * [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'text', u'text')
@@ -928,7 +933,7 @@ TEST       |    306,688
 Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable.
 
 
-* URL: https://rajpurkar.github.io/SQuAD-explorer/
+* URL: [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 * `DatasetBuilder`: [`tfds.text.squad.Squad`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/squad.py)
 
 `squad` is configured with `tfds.text.squad.SquadConfig` and has the following
@@ -1001,7 +1006,7 @@ VALIDATION |     10,570
 
 
 ### Urls
- * https://rajpurkar.github.io/SQuAD-explorer/
+ * [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
 ### Supervised keys (for `as_supervised=True`)
 None
@@ -1032,7 +1037,7 @@ archivePrefix = {arXiv},
 Translate dataset based on the data from statmt.org.
 
 
-* URL: http://www.statmt.org/wmt18/
+* URL: [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 * `DatasetBuilder`: [`tfds.translate.wmt_ende.WmtTranslateEnde`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_ende.py)
 
 `wmt_translate_ende` is configured with `tfds.translate.wmt_ende.WMTConfig` and has the following
@@ -1058,8 +1063,8 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8267>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8216>),
 })
 ```
 
@@ -1067,10 +1072,15 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |  4,595,289
+TRAIN      |  4,592,289
+VALIDATION |      3,000
+
 
 ### Urls
- * http://www.statmt.org/wmt18/
+ * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'en', u'de')
@@ -1101,7 +1111,7 @@ None computed
 Translate dataset based on the data from statmt.org.
 
 
-* URL: http://www.statmt.org/wmt18/
+* URL: [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 * `DatasetBuilder`: [`tfds.translate.wmt_enfr.WmtTranslateEnfr`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_enfr.py)
 
 `wmt_translate_enfr` is configured with `tfds.translate.wmt_enfr.WMTConfig` and has the following
@@ -1165,7 +1175,7 @@ FeaturesDict({
 None computed
 
 ### Urls
- * http://www.statmt.org/wmt18/
+ * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 
 ### Supervised keys (for `as_supervised=True`)
 (u'en', u'fr')
@@ -1198,7 +1208,7 @@ None computed
 
 This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
-* URL: https://sites.google.com/site/brainrobotdata/home/push-dataset
+* URL: [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
 * `DatasetBuilder`: [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
 * Version: `v1.0.0`
 
@@ -1222,7 +1232,7 @@ TEST       |        256
 
 
 ### Urls
- * https://sites.google.com/site/brainrobotdata/home/push-dataset
+ * [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
 None
@@ -1255,7 +1265,7 @@ None
 
 This data set contains videos generated from Starcraft.
 
-* URL: https://storage.googleapis.com/scv_dataset/README.html
+* URL: [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 * `DatasetBuilder`: [`tfds.video.starcraft.StarcraftVideo`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/starcraft.py)
 
 `starcraft_video` is configured with `tfds.video.starcraft.StarcraftVideoConfig` and has the following
@@ -1369,7 +1379,7 @@ TEST       |      2,000
 
 
 ### Urls
- * https://storage.googleapis.com/scv_dataset/README.html
+ * [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
 ### Supervised keys (for `as_supervised=True`)
 None

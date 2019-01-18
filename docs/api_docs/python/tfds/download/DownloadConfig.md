@@ -23,7 +23,8 @@ __init__(
     extract_dir=None,
     manual_dir=None,
     download_mode=None,
-    compute_stats=True
+    compute_stats=True,
+    max_examples_per_split=None
 )
 ```
 
@@ -41,6 +42,8 @@ Constructs a `DownloadConfig`.
     reuse both downloads and data if it already exists.
 * <b>`compute_stats`</b>: `bool`, whether to compute statistics over the generated
     data.
+* <b>`max_examples_per_split`</b>: `int`, optional max number of examples to write
+    into each split.
 
 
 

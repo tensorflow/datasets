@@ -7,6 +7,7 @@
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
+<meta itemprop="property" content="IN_DEVELOPMENT"/>
 <meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
@@ -158,6 +159,8 @@ Downloads and prepares dataset for reading.
 ## Class Members
 
 <h3 id="BUILDER_CONFIGS"><code>BUILDER_CONFIGS</code></h3>
+
+<h3 id="IN_DEVELOPMENT"><code>IN_DEVELOPMENT</code></h3>
 
 <h3 id="VERSION"><code>VERSION</code></h3>
 
