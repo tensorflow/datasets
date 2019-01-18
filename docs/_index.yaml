@@ -12,7 +12,7 @@ landing_page:
 
         All datasets are exposed as
         <a href="https://www.tensorflow.org/api_docs/python/tf/data/Dataset">
-        <code>tf.data.Dataset</code>s
+        <code>tf.data.Datasets</code>
         </a>,
         enabling easy-to-use and high-performance
         input pipelines.
