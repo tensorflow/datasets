@@ -376,6 +376,11 @@ If the paper is not on arXiv, find the paper on
 underneath the title and on the popup, click `BibTeX`. Use this for
 `info.citation`.
 
+If there is no associated paper (for example, there's just a website), you can
+use the
+[BibTeX Online Editor](https://truben.no/latex/bibtex/) to create a custom
+BibTeX entry.
+
 ### 4. Add a test
 
 Adding a unit test is optional, however, it's recommended, especially for
