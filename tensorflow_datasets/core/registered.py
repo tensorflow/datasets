@@ -239,7 +239,9 @@ def load(name,
       these will be full datasets as `tf.Tensor`s.
     ds_info: `tfds.core.DatasetInfo`, if `with_info` is True, then `tfds.load`
       will return a tuple `(ds, ds_info)` containing dataset information
-      (version, features, splits, num_examples,...).
+      (version, features, splits, num_examples,...). Note that the `ds_info`
+      object documents the entire dataset, regardless of the `split` requested.
+      Split-specific information is available in `ds_info.splits`.
   """
   if data_dir is None:
     data_dir = constants.DATA_DIR
