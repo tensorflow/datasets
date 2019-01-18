@@ -81,14 +81,14 @@ class Text(feature.FeatureConnector):
     return self.encoder and self.encoder.vocab_size
 
   def str2ints(self, str_value):
-    """Conversion list[int] => decoded string."""
+    """Conversion string => encoded list[int]."""
     if not self._encoder:
       raise ValueError(
           "Text.str2ints is not available because encoder hasn't been defined.")
     return self._encoder.encode(str_value)
 
   def ints2str(self, int_values):
-    """Conversion string => encoded list[int]."""
+    """Conversion list[int] => decoded string."""
     if not self._encoder:
       raise ValueError(
           "Text.ints2str is not available because encoder hasn't been defined.")
