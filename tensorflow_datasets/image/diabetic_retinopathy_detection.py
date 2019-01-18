@@ -27,6 +27,17 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 
+_CITATION = """\
+@ONLINE {kaggle-diabetic-retinopathy,
+    author = "Kaggle and EyePacs",
+    title  = "Kaggle Diabetic Retinopathy Detection",
+    month  = "jul",
+    year   = "2015",
+    url    = "https://www.kaggle.com/c/diabetic-retinopathy-detection/data"
+}
+"""
+
+
 class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   """Diabetic retinopathy detection."""
 
@@ -44,6 +55,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
         urls=["https://www.kaggle.com/c/diabetic-retinopathy-detection/data"],
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
