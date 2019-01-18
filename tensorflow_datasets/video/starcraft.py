@@ -25,6 +25,27 @@ from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 DATA_URL_DIR = "https://storage.googleapis.com/scv_dataset/data/"
+_CITATION = """\
+@article{DBLP:journals/corr/abs-1812-01717,
+  author    = {Thomas Unterthiner and
+               Sjoerd van Steenkiste and
+               Karol Kurach and
+               Rapha{\"{e}}l Marinier and
+               Marcin Michalski and
+               Sylvain Gelly},
+  title     = {Towards Accurate Generative Models of Video: {A} New Metric and
+               Challenges},
+  journal   = {CoRR},
+  volume    = {abs/1812.01717},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1812.01717},
+  archivePrefix = {arXiv},
+  eprint    = {1812.01717},
+  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+"""
 
 
 class StarcraftVideoConfig(tfds.core.BuilderConfig):
@@ -119,8 +140,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         description="This data set contains videos generated from Starcraft.",
         features=features,
         urls=["https://storage.googleapis.com/scv_dataset/README.html"],
-        citation=("Towards Accurate Generative Models of Video: "
-                  "New Metrics & Challenges"),
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
