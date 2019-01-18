@@ -47,6 +47,7 @@ class ExtractorTest(test_case.TestCase):
   def setUp(self):
     super(ExtractorTest, self).setUp()
     self.extractor = extractor.get_extractor()
+    self.extractor._pbar_path = tf.test.mock.MagicMock()
     # Where archive will be extracted:
     self.to_path = os.path.join(self.tmp_dir, 'extracted_arch')
     # Obviously it must not exist before test runs:

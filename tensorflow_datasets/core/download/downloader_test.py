@@ -35,7 +35,7 @@ class _FakeResponse(object):
     self.url = url
     self.raw = io.BytesIO(content)
     self.cookies = cookies or {}
-    self.headers = headers or {}
+    self.headers = headers or {'Content-length': 12345}
     self.status_code = status_code
 
   def iter_content(self, chunk_size):
@@ -61,6 +61,12 @@ class DownloaderTest(tf.test.TestCase):
         downloader.requests.Session, 'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
+    tf.test.mock.patch.object(
+        downloader.requests.Session, 'get',
+        lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
+    ).start()
+    self.downloader._pbar_url = tf.test.mock.MagicMock()
+    self.downloader._pbar_dl_size = tf.test.mock.MagicMock()
 
   def test_ok(self):
     promise = self.downloader.download(self.resource, self.tmp_dir)

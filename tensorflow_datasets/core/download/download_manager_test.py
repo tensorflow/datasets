@@ -23,7 +23,6 @@ import hashlib
 import json
 import os
 import re
-import sys
 import tempfile
 import threading
 
@@ -144,11 +143,9 @@ class DownloadManagerTest(tf.test.TestCase):
     downloaded_c, self.dl_results['https://a.ch/c'] = _get_promise_on_event(
         ('sha_c', 10))
     manager = self._get_manager()
-    res = manager.download(urls, async_=True)
-    self.assertFalse(res.is_fulfilled)
     downloaded_b.set()
     downloaded_c.set()
-    downloads = res.get()
+    downloads = manager.download(urls)
     self.assertEqual(downloads, {
         'cached': '/dl_dir/%s' % afname,
         'new': '/dl_dir/%s' % bfname,
@@ -171,10 +168,9 @@ class DownloadManagerTest(tf.test.TestCase):
     extracted_new, self.extract_results['/dl_dir/%s' % resource_new.fname] = (
         _get_promise_on_event('/extract_dir/TAR.new'))
     manager = self._get_manager()
-    res = manager.extract(files, async_=True)
-    self.assertFalse(res.is_fulfilled)
     extracted_new.set()
-    self.assertEqual(res.get(), {
+    res = manager.extract(files)
+    self.assertEqual(res, {
         'cached': '/extract_dir/ZIP.%s' % resource_cached.fname,
         'new': '/extract_dir/TAR.%s' % resource_new.fname,
         'noextract': '/dl_dir/%s' % resource_noextract.fname,
@@ -186,14 +182,13 @@ class DownloadManagerTest(tf.test.TestCase):
     extracted_new, self.extract_results['/dl_dir/foo.tar'] = (
         _get_promise_on_event('/extract_dir/TAR.foo'))
     manager = self._get_manager()
-    res1 = manager.extract('/dl_dir/foo.tar', async_=True)
-    res2 = manager.extract('/dl_dir/foo.tar', async_=True)
-    if sys.version_info[0] > 2:
-      self.assertTrue(res1 is res2)
-    else:
-      self.assertTrue(res1._promise is res2._promise)
     extracted_new.set()
-    self.assertEqual(res1.get(), '/extract_dir/TAR.foo')
+    out1 = manager.extract(['/dl_dir/foo.tar', '/dl_dir/foo.tar'])
+    out2 = manager.extract('/dl_dir/foo.tar')
+    self.assertEqual(out1[0], '/extract_dir/TAR.foo')
+    self.assertEqual(out1[1], '/extract_dir/TAR.foo')
+    self.assertEqual(out2, '/extract_dir/TAR.foo')
+    # Result is memoize so extract has only been called once
     self.assertEqual(1, self.extractor_extract.call_count)
 
   def test_download_and_extract(self):

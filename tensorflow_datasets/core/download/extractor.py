@@ -61,9 +61,19 @@ class _Extractor(object):
   def __init__(self, max_workers=12):
     self._executor = concurrent.futures.ThreadPoolExecutor(
         max_workers=max_workers)
+    self._pbar_path = None
+
+  @contextlib.contextmanager
+  def tqdm(self):
+    """Add a progression bar for the current extraction."""
+    with py_utils.async_tqdm(
+        total=0, desc='Extraction completed...', unit=' file') as pbar_path:
+      self._pbar_path = pbar_path
+      yield
 
   def extract(self, resource, to_path):
     """Returns `promise.Promise` => to_path."""
+    self._pbar_path.update_total(1)
     if resource.extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknonw extraction method "%s".' %
                        resource.extract_method)
@@ -86,6 +96,7 @@ class _Extractor(object):
     if tf.gfile.Exists(to_path):
       tf.gfile.DeleteRecursively(to_path)
     tf.gfile.Rename(to_path_tmp, to_path)
+    self._pbar_path.update(1)
     return to_path
 
 

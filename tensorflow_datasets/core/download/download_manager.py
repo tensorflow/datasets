@@ -260,19 +260,20 @@ class DownloadManager(object):
       return self._extract(resource)
     return self._download(resource).then(callback)
 
-  def download(self, url_or_urls, async_=False):
+  def download(self, url_or_urls):
     """Download given url(s).
 
     Args:
       url_or_urls: url or `list`/`dict` of urls to download and extract. Each
         url can be a `str` or `tfds.download.Resource`.
-      async_: `bool`, default to False. If True, returns promise on result.
 
     Returns:
       downloaded_path(s): `str`, The downloaded paths matching the given input
         url_or_urls.
     """
-    return _map_promise(self._download, url_or_urls, async_=async_)
+    # Add progress bar to follow the download state
+    with self._downloader.tqdm():
+      return _map_promise(self._download, url_or_urls)
 
   def iter_archive(self, resource):
     """Returns iterator over files within archive.
@@ -290,13 +291,12 @@ class DownloadManager(object):
       resource = resource_lib.Resource(path=resource)
     return extractor.iter_archive(resource.path, resource.extract_method)
 
-  def extract(self, path_or_paths, async_=False):
+  def extract(self, path_or_paths):
     """Extract given path(s).
 
     Args:
       path_or_paths: path or `list`/`dict` of path of file to extract. Each
         path can be a `str` or `tfds.download.Resource`.
-      async_: `bool`, default to False. If True, returns promise on result.
 
     If not explicitly specified in `Resource`, the extraction method is deduced
     from downloaded file name.
@@ -305,9 +305,11 @@ class DownloadManager(object):
       extracted_path(s): `str`, The extracted paths matching the given input
         path_or_paths.
     """
-    return _map_promise(self._extract, path_or_paths, async_=async_)
+    # Add progress bar to follow the download state
+    with self._extractor.tqdm():
+      return _map_promise(self._extract, path_or_paths)
 
-  def download_and_extract(self, url_or_urls, async_=False):
+  def download_and_extract(self, url_or_urls):
     """Download and extract given url_or_urls.
 
     Is roughly equivalent to:
@@ -319,7 +321,6 @@ class DownloadManager(object):
     Args:
       url_or_urls: url or `list`/`dict` of urls to download and extract. Each
         url can be a `str` or `tfds.download.Resource`.
-      async_: `bool`, defaults to False. If True, returns promise on result.
 
     If not explicitly specified in `Resource`, the extraction method will
     automatically be deduced from downloaded file name.
@@ -327,7 +328,10 @@ class DownloadManager(object):
     Returns:
       extracted_path(s): `str`, extracted paths of given URL(s).
     """
-    return _map_promise(self._download_extract, url_or_urls, async_=async_)
+    # Add progress bar to follow the download state
+    with self._downloader.tqdm():
+      with self._extractor.tqdm():
+        return _map_promise(self._download_extract, url_or_urls)
 
   @property
   def manual_dir(self):
@@ -357,31 +361,10 @@ else:
       if p.is_fulfilled:
         return result
 
-  class _KillablePromise(promise.Promise):
-
-    def __init__(self, promise_):
-      self._promise = promise_
-
-    def get(self, timeout=None):
-      if timeout is not None:
-        return self._promise.get(timeout)
-      return _wait_on_promise(self._promise)
 # ============================================================================
 
 
-def _map_promise(map_fn, all_inputs, async_):
+def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
   all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
-  if async_:
-    # TODO(tfds): Fix for nested case
-    if isinstance(all_promises, dict):
-      merged_promise = promise.Promise.for_dict(all_promises)
-    elif isinstance(all_promises, list):
-      merged_promise = promise.Promise.all(all_promises)
-    else:
-      merged_promise = all_promises
-    if sys.version_info[0] == 2:
-      merged_promise = _KillablePromise(merged_promise)
-    return merged_promise
-
   return utils.map_nested(_wait_on_promise, all_promises)
