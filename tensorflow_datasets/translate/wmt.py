@@ -176,9 +176,9 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files):
     """This function returns the examples in the raw (text) form."""
     for entry in files:
-      with tf.gfile.Open(entry[0]) as f:
+      with tf.io.gfile.GFile(entry[0]) as f:
         lang1_sentences = f.read().split("\n")
-      with tf.gfile.Open(entry[1]) as f:
+      with tf.io.gfile.GFile(entry[1]) as f:
         lang2_sentences = f.read().split("\n")
 
       assert len(lang1_sentences) == len(

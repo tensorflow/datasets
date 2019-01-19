@@ -126,8 +126,7 @@ class Text(feature.FeatureConnector):
 
     # Error checking: ensure there are no metadata files
     feature_files = [
-        f for f in tf.gfile.ListDirectory(data_dir)
-        if f.startswith(fname_prefix)
+        f for f in tf.io.gfile.listdir(data_dir) if f.startswith(fname_prefix)
     ]
     if feature_files:
       raise ValueError(

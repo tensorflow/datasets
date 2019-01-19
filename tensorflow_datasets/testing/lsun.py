@@ -32,10 +32,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from absl import app
+from absl import flags
 import lmdb
 import tensorflow as tf
 
-flags = tf.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string("input_files", None,
@@ -50,9 +51,9 @@ def main(argv):
   db = lmdb.open(FLAGS.output_file)
   with db.begin(write=True) as txn:
     for index, path in enumerate(FLAGS.input_files.split(",")):
-      data = tf.gfile.Open(path, "rb").read()
+      data = tf.io.gfile.GFile(path, "rb").read()
       txn.put(str(index), data)
 
 
 if __name__ == "__main__":
-  tf.app.run(main)
+  app.run(main)

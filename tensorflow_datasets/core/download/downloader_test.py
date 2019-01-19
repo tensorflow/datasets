@@ -47,9 +47,9 @@ class _FakeResponse(object):
 class DownloaderTest(tf.test.TestCase):
 
   def setUp(self):
-    self.addCleanup(tf.test.mock.patch.stopall)
+    self.addCleanup(tf.compat.v1.test.mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)
-    self.tmp_dir = tempfile.mkdtemp(dir=tf.test.get_temp_dir())
+    self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
     self.url = 'http://example.com/foo.tar.gz'
     self.resource = resouce_lib.Resource(url=self.url)
     self.path = os.path.join(self.tmp_dir, 'foo.tar.gz')
@@ -57,16 +57,18 @@ class DownloaderTest(tf.test.TestCase):
     self.response = b'This \nis an \nawesome\n response!'
     self.resp_checksum = hashlib.sha256(self.response).hexdigest()
     self.cookies = {}
-    tf.test.mock.patch.object(
-        downloader.requests.Session, 'get',
+    tf.compat.v1.test.mock.patch.object(
+        downloader.requests.Session,
+        'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    tf.test.mock.patch.object(
-        downloader.requests.Session, 'get',
+    tf.compat.v1.test.mock.patch.object(
+        downloader.requests.Session,
+        'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    self.downloader._pbar_url = tf.test.mock.MagicMock()
-    self.downloader._pbar_dl_size = tf.test.mock.MagicMock()
+    self.downloader._pbar_url = tf.compat.v1.test.mock.MagicMock()
+    self.downloader._pbar_dl_size = tf.compat.v1.test.mock.MagicMock()
 
   def test_ok(self):
     promise = self.downloader.download(self.resource, self.tmp_dir)
@@ -74,7 +76,7 @@ class DownloaderTest(tf.test.TestCase):
     self.assertEqual(checksum, self.resp_checksum)
     with open(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
-    self.assertFalse(tf.gfile.Exists(self.incomplete_path))
+    self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
   def test_drive_no_cookies(self):
     resource = resouce_lib.Resource(
@@ -84,7 +86,7 @@ class DownloaderTest(tf.test.TestCase):
     self.assertEqual(checksum, self.resp_checksum)
     with open(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
-    self.assertFalse(tf.gfile.Exists(self.incomplete_path))
+    self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
   def test_drive(self):
     self.cookies = {'foo': 'bar', 'download_warning_a': 'token', 'a': 'b'}
@@ -92,14 +94,14 @@ class DownloaderTest(tf.test.TestCase):
 
   def test_http_error(self):
     error = downloader.requests.exceptions.HTTPError('Problem serving file.')
-    tf.test.mock.patch.object(
+    tf.compat.v1.test.mock.patch.object(
         downloader.requests.Session, 'get', side_effect=error).start()
     promise = self.downloader.download(self.resource, self.tmp_dir)
     with self.assertRaises(downloader.requests.exceptions.HTTPError):
       promise.get()
 
   def test_bad_http_status(self):
-    tf.test.mock.patch.object(
+    tf.compat.v1.test.mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, b'error', status_code=404),

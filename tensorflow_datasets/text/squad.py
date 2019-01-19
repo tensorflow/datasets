@@ -22,6 +22,7 @@ from __future__ import print_function
 import json
 import os
 
+from absl import logging
 import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
@@ -162,8 +163,8 @@ class Squad(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
-    tf.logging.info("generating examples from = %s", filepath)
-    with tf.gfile.Open(filepath) as f:
+    logging.info("generating examples from = %s", filepath)
+    with tf.io.gfile.GFile(filepath) as f:
       squad = json.load(f)
       for article in squad["data"]:
         if "title" in article:

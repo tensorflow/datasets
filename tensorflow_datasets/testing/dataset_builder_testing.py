@@ -35,7 +35,7 @@ from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import tf_utils
 
 
-# `os` module Functions for which tf.gfile equivalent should be preferred.
+# `os` module Functions for which tf.io.gfile equivalent should be preferred.
 FORBIDDEN_OS_FUNCTIONS = (
     "chmod",
     "chown",
@@ -79,7 +79,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       splits (e.g. a "example" split containing pictures from other splits).
     MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
       disable checks preventing usage of `os` or builtin functions instead of
-      recommended `tf.gfile` API.
+      recommended `tf.io.gfile` API.
 
   This test case will check for the following:
    - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
@@ -128,21 +128,20 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       patcher.stop()
 
   def _mock_out_forbidden_os_functions(self):
-    """Raise error if forbidden os functions are called instead of tf.gfile."""
-    err = AssertionError("Do not use `os`, but `tf.gfile` module instead.")
-    mock_os = tf.test.mock.Mock(os, path=os.path)
+    """Raises error if forbidden os functions are called instead of gfile."""
+    err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead.")
+    mock_os = tf.compat.v1.test.mock.Mock(os, path=os.path)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       getattr(mock_os, fop).side_effect = err
-    os_patcher = tf.test.mock.patch(
+    os_patcher = tf.compat.v1.test.mock.patch(
         self.DATASET_CLASS.__module__ + ".os", mock_os, create=True)
     os_patcher.start()
     self.patchers.append(os_patcher)
 
     mock_builtins = __builtins__.copy()
-    mock_builtins["open"] = tf.test.mock.Mock(side_effect=err)
-    open_patcher = tf.test.mock.patch(
-        self.DATASET_CLASS.__module__ + ".__builtins__",
-        mock_builtins)
+    mock_builtins["open"] = tf.compat.v1.test.mock.Mock(side_effect=err)
+    open_patcher = tf.compat.v1.test.mock.patch(
+        self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins)
     open_patcher.start()
     self.patchers.append(open_patcher)
 
@@ -196,7 +195,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       self._download_and_prepare_as_dataset(self.builder)
 
   def _download_and_prepare_as_dataset(self, builder):
-    with tf.test.mock.patch.multiple(
+    with tf.compat.v1.test.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_extract_result,

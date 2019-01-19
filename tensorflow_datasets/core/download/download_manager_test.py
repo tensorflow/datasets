@@ -68,7 +68,7 @@ class DownloadManagerTest(tf.test.TestCase):
     return temp_f
 
   def setUp(self):
-    self.addCleanup(tf.test.mock.patch.stopall)
+    self.addCleanup(tf.compat.v1.test.mock.patch.stopall)
     self.existing_paths = []
     self.made_dirs = []
     self.dl_results = {}
@@ -88,15 +88,17 @@ class DownloadManagerTest(tf.test.TestCase):
         self.existing_paths.append(to)
         self.existing_paths.remove(from_)
         self.files_content[to] = self.files_content.pop(from_)
-    self.gfile_patch = tf.test.mock.patch.object(
-        tf, 'gfile',
-        Exists=lambda path: path in self.existing_paths,
-        MakeDirs=self.made_dirs.append,
+
+    self.gfile_patch = tf.compat.v1.test.mock.patch.object(
+        tf.io,
+        'gfile',
+        exists=lambda path: path in self.existing_paths,
+        makedirs=self.made_dirs.append,
         # Used to get name of file as downloaded:
-        ListDirectory=list_directory,
-        Open=open_,
-        Rename=tf.test.mock.Mock(side_effect=rename),
-        )
+        listdir=list_directory,
+        GFile=open_,
+        rename=tf.compat.v1.test.mock.Mock(side_effect=rename),
+    )
     self.gfile = self.gfile_patch.start()
 
   def tearDown(self):
@@ -112,12 +114,14 @@ class DownloadManagerTest(tf.test.TestCase):
         'my_dataset', '/dl_dir', '/extract_dir', '/manual_dir',
         force_download=force_download, force_extraction=force_extraction,
         checksums=checksums)
-    download = tf.test.mock.patch.object(
-        manager._downloader, 'download',
+    download = tf.compat.v1.test.mock.patch.object(
+        manager._downloader,
+        'download',
         side_effect=lambda resource, tmpdir_path: self.dl_results[resource.url])
     self.downloader_download = download.start()
-    extract = tf.test.mock.patch.object(
-        manager._extractor, 'extract',
+    extract = tf.compat.v1.test.mock.patch.object(
+        manager._extractor,
+        'extract',
         side_effect=lambda resource, dest: self.extract_results[resource.path])
     self.extractor_extract = extract.start()
     return manager
@@ -251,7 +255,7 @@ class DownloadManagerTest(tf.test.TestCase):
     res = manager.download_and_extract(url)
     self.assertEqual('/extract_dir/TAR_GZ.%s' % resource_.fname, res)
     # Rename after download:
-    (from_, to), kwargs = self.gfile.Rename.call_args
+    (from_, to), kwargs = self.gfile.rename.call_args
     self.assertTrue(re.match(
         r'/dl_dir/%s\.tmp\.[a-h0-9]{32}/b.tar.gz' % resource_.fname, from_))
     self.assertEqual('/dl_dir/%s' % resource_.fname, to)

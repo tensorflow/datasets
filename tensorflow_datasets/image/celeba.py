@@ -148,7 +148,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       values: map from the file name to the list of attribute values for
               this file.
     """
-    with tf.gfile.Open(file_path) as f:
+    with tf.io.gfile.GFile(file_path) as f:
       data_raw = f.read()
     lines = data_raw.split("\n")
 
@@ -168,7 +168,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     landmarks_path = extracted_dirs["landmarks_celeba"]
     attr_path = extracted_dirs["list_attr_celeba"]
 
-    with tf.gfile.Open(img_list_path) as f:
+    with tf.io.gfile.GFile(img_list_path) as f:
       files = [
           line.split()[0]
           for line in f.readlines()

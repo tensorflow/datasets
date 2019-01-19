@@ -127,15 +127,15 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
 
 def _walk_omniglot_dir(directory):
   """Walk an Omniglot directory and yield examples."""
-  directory = os.path.join(directory, tf.gfile.ListDirectory(directory)[0])
-  alphabets = sorted(tf.gfile.ListDirectory(directory))
+  directory = os.path.join(directory, tf.io.gfile.listdir(directory)[0])
+  alphabets = sorted(tf.io.gfile.listdir(directory))
   for alphabet in alphabets:
     alphabet_dir = os.path.join(directory, alphabet)
-    characters = sorted(tf.gfile.ListDirectory(alphabet_dir))
+    characters = sorted(tf.io.gfile.listdir(alphabet_dir))
     for character in characters:
       character_id = int(character[len("character"):]) - 1
       character_dir = os.path.join(alphabet_dir, character)
-      images = tf.gfile.ListDirectory(character_dir)
+      images = tf.io.gfile.listdir(character_dir)
       for image in images:
         label, _ = image.split("_")
         label = int(label) - 1

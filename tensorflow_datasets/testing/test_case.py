@@ -40,7 +40,7 @@ class TestCase(absltest.TestCase):
   def setUp(self):
     super(TestCase, self).setUp()
     # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
-    self.tmp_dir = tempfile.mkdtemp(dir=tf.test.get_temp_dir())
+    self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
 
 
 main = tf.test.main

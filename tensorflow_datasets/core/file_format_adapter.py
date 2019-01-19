@@ -42,6 +42,7 @@ import itertools
 import random
 import string
 
+from absl import logging
 import numpy as np
 import six
 import tensorflow as tf
@@ -111,7 +112,8 @@ class TFRecordExampleAdapter(FileFormatAdapter):
                        num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
   def _decode(self, record):
-    return tf.parse_single_example(record, self._example_reading_spec)
+    return tf.io.parse_single_example(
+        serialized=record, features=self._example_reading_spec)
 
   @property
   def filetype_suffix(self):
@@ -193,7 +195,7 @@ class CSVAdapter(FileFormatAdapter):
 
 def do_files_exist(filenames):
   """Whether all filenames exist."""
-  preexisting = [tf.gfile.Exists(f) for f in filenames]
+  preexisting = [tf.io.gfile.exists(f) for f in filenames]
   return all(preexisting)
 
 
@@ -221,30 +223,30 @@ def _incomplete_files(filenames):
   try:
     yield tmp_files
     for tmp, output in zip(tmp_files, filenames):
-      tf.gfile.Rename(tmp, output)
+      tf.io.gfile.rename(tmp, output)
   finally:
     for tmp in tmp_files:
-      if tf.gfile.Exists(tmp):
-        tf.gfile.Remove(tmp)
+      if tf.io.gfile.exists(tmp):
+        tf.io.gfile.remove(tmp)
 
 
 @contextlib.contextmanager
 def incomplete_dir(dirname):
   """Create temporary dir for dirname and rename on exit."""
   tmp_dir = get_incomplete_path(dirname)
-  tf.gfile.MakeDirs(tmp_dir)
+  tf.io.gfile.makedirs(tmp_dir)
   try:
     yield tmp_dir
-    tf.gfile.Rename(tmp_dir, dirname)
+    tf.io.gfile.rename(tmp_dir, dirname)
   finally:
-    if tf.gfile.Exists(tmp_dir):
-      tf.gfile.DeleteRecursively(tmp_dir)
+    if tf.io.gfile.exists(tmp_dir):
+      tf.io.gfile.rmtree(tmp_dir)
 
 
 def _shuffle_tfrecord(path):
   """Shuffle a single record file in memory."""
   # Read all records
-  record_iter = tf.io.tf_record_iterator(path)
+  record_iter = tf.compat.v1.io.tf_record_iterator(path)
   all_records = [
       r for r in tqdm.tqdm(record_iter, desc="Reading...", unit=" examples")
   ]
@@ -264,9 +266,9 @@ def _write_tfrecords_from_generator(generator, output_files, shuffle=True):
 
   with _incomplete_files(output_files) as tmp_files:
     # Write all shards
-    writers = [tf.python_io.TFRecordWriter(fname) for fname in tmp_files]
+    writers = [tf.io.TFRecordWriter(fname) for fname in tmp_files]
     with _close_on_exit(writers) as writers:
-      tf.logging.info("Writing TFRecords")
+      logging.info("Writing TFRecords")
       _round_robin_write(writers, generator)
     # Shuffle each shard
     if shuffle:
@@ -289,7 +291,7 @@ def _write_csv_from_generator(generator, output_files, writer_ctor=None):
     writer_ctor = csv.writer
 
   def create_csv_writer(filename):
-    with tf.gfile.Open(filename, "wb") as f:
+    with tf.io.gfile.GFile(filename, "wb") as f:
       writer = writer_ctor(f)
       # Simple way to give the writer a "write" method proxying writerow
       writer = collections.namedtuple("_writer", ["write"])(
@@ -299,7 +301,7 @@ def _write_csv_from_generator(generator, output_files, writer_ctor=None):
   with _incomplete_files(output_files) as tmp_files:
     handles, writers = zip(*[create_csv_writer(fname) for fname in tmp_files])
     with _close_on_exit(handles):
-      tf.logging.info("Writing CSVs")
+      logging.info("Writing CSVs")
       header = next(generator)
       for w in writers:
         w.write(header)

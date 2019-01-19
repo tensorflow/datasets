@@ -100,7 +100,8 @@ class TFGraphRunner(object):
     with tf.Graph().as_default() as g:
       # Create placeholder
       input_ = run_args.input
-      placeholder = tf.placeholder(dtype=input_.dtype, shape=input_.shape)
+      placeholder = tf.compat.v1.placeholder(
+          dtype=input_.dtype, shape=input_.shape)
       output = run_args.fct(placeholder)
     return GraphRun(
         session=raw_nogpu_session(g),
@@ -159,8 +160,8 @@ def nogpu_session(graph=None):
 
 def raw_nogpu_session(graph=None):
   """tf.Session, hiding GPUs."""
-  config = tf.ConfigProto(device_count={'GPU': 0})
-  return tf.Session(config=config, graph=graph)
+  config = tf.compat.v1.ConfigProto(device_count={'GPU': 0})
+  return tf.compat.v1.Session(config=config, graph=graph)
 
 
 @contextlib.contextmanager

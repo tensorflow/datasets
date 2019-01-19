@@ -80,14 +80,14 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   def _get_validation_labels():
     """Returns labels for validation."""
     labels_path = tfds.core.get_tfds_path(_VALIDATION_LABELS_FNAME)
-    with tf.gfile.Open(labels_path) as labels_f:
+    with tf.io.gfile.GFile(labels_path) as labels_f:
       labels = labels_f.readlines()
     return [label.strip() for label in labels]
 
   def _split_generators(self, dl_manager):
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
     val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
-    if not tf.gfile.Exists(train_path) or not tf.gfile.Exists(val_path):
+    if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
       msg = 'You must download the dataset files manually and place them in: '
       msg += ', '.join([train_path, val_path])
       raise AssertionError(msg)

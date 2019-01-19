@@ -28,7 +28,7 @@ import re
 import concurrent.futures
 import promise
 import requests
-from tensorflow import gfile
+import tensorflow as tf
 
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core.download import util
@@ -130,7 +130,7 @@ class _Downloader(object):
     self._pbar_dl_size.update_total(
         int(response.headers.get('Content-length', 0)) // unit_mb
     )
-    with gfile.Open(path, 'wb') as file_:
+    with tf.io.gfile.GFile(path, 'wb') as file_:
       for block in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
         size += len(block)
 

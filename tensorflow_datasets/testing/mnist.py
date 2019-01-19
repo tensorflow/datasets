@@ -59,13 +59,13 @@ def make_labels(num_labels):
 
 
 def write_image_file(filename, num_images):
-  with tf.gfile.Open(filename, "wb") as f:
+  with tf.io.gfile.GFile(filename, "wb") as f:
     f.write(b"1" * 16)  # header
     f.write(make_images(num_images).tobytes())
 
 
 def write_label_file(filename, num_labels):
-  with tf.gfile.Open(filename, "wb") as f:
+  with tf.io.gfile.GFile(filename, "wb") as f:
     f.write(b"1" * 8)  # header
     f.write(make_labels(num_labels).tobytes())
 

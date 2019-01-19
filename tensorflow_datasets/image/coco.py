@@ -24,6 +24,7 @@ import collections
 import json
 import os
 
+from absl import logging
 import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -243,7 +244,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
               "is_crowd": bool(instance_info["iscrowd"]),
           } for instance_info in instances],
       }
-    tf.logging.info(
+    logging.info(
         "%d/%d images do not contains any annotations",
         annotation_skipped,
         len(images),
@@ -255,7 +256,7 @@ class CocoAnnotation(object):
 
   def __init__(self, annotation_path):
 
-    with tf.gfile.Open(annotation_path) as f:
+    with tf.io.gfile.GFile(annotation_path) as f:
       data = json.load(f)
     self._data = data
 

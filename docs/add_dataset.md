@@ -12,7 +12,7 @@ then this document is for you.
     *   [Manual download / extraction](#manual-download-extraction)
 *   [Specifying how the data should be split](#specifying-how-the-data-should-be-split)
 *   [Reading downloaded data and generating serialized dataset](#reading-downloaded-data-and-generating-serialized-dataset)
-    *   [File access and tf.gfile](#file-access-and-tfgfile)
+    *   [File access and tf.io.gfile](#file-access-and-tfgfile)
 *   [Dataset configuration](#dataset-configuration)
 *   [Create your own FeatureConnector](#create-your-own-featureconnector)
 *   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
@@ -230,11 +230,12 @@ jpeg content into the TFRecord file automatically.
 
 If you've implemented the test harness, your builder test should now pass.
 
-### File access and `tf.gfile`
+### File access and `tf.io.gfile`
 
-In order to support Cloud storage systems, all file access must use `tf.gfile`
-or other TensorFlow file APIs (for example, `tf.python_io`). Python built-ins
-for file operations (e.g. `open`, `os.rename`, `gzip`, etc.) must be avoided.
+In order to support Cloud storage systems, all file access must use
+`tf.io.gfile` or other TensorFlow file APIs (for example, `tf.python_io`).
+Python built-ins for file operations (e.g. `open`, `os.rename`, `gzip`, etc.)
+must be avoided.
 
 ## Dataset configuration
 

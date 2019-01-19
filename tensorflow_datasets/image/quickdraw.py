@@ -93,7 +93,7 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
     """
     for label in file_paths.keys():
       path = file_paths[label]
-      with tf.gfile.Open(path, "rb") as f:
+      with tf.io.gfile.GFile(path, "rb") as f:
         class_images = np.load(f)
         for np_image in class_images:
           yield {

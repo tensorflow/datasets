@@ -234,7 +234,7 @@ LibrispeechExample = collections.namedtuple(
 def _walk_librispeech_dir(directory):
   """Walk a Librispeech directory and yield examples."""
   directory = os.path.join(directory, "LibriSpeech")
-  for path, _, files in tf.gfile.Walk(directory):
+  for path, _, files in tf.io.gfile.walk(directory):
     if not files:
       continue
 
@@ -244,7 +244,7 @@ def _walk_librispeech_dir(directory):
     assert len(transcript_file) == 1
     transcript_file, = transcript_file
     transcripts = {}
-    with tf.gfile.Open(os.path.join(path, transcript_file)) as f:
+    with tf.io.gfile.GFile(os.path.join(path, transcript_file)) as f:
       for line in f:
         line = line.strip()
         key, transcript = line.split(" ", 1)

@@ -116,7 +116,7 @@ class Image(feature.FeatureConnector):
 
   def get_serialized_info(self):
     # Only store raw image (includes size).
-    return tf.FixedLenFeature(tuple(), tf.string)
+    return tf.io.FixedLenFeature(tuple(), tf.string)
 
   @utils.memoized_property
   def _runner(self):
@@ -137,7 +137,7 @@ class Image(feature.FeatureConnector):
     if isinstance(image_or_path_or_fobj, np.ndarray):
       encoded_image = self._encode_image(image_or_path_or_fobj)
     elif isinstance(image_or_path_or_fobj, six.string_types):
-      with tf.gfile.Open(image_or_path_or_fobj, 'rb') as image_f:
+      with tf.io.gfile.GFile(image_or_path_or_fobj, 'rb') as image_f:
         encoded_image = image_f.read()
     else:
       encoded_image = image_or_path_or_fobj.read()
@@ -153,7 +153,7 @@ class Image(feature.FeatureConnector):
   def save_metadata(self, data_dir, feature_name=None):
     """See base class for details."""
     filepath = _get_metadata_filepath(data_dir, feature_name)
-    with tf.gfile.Open(filepath, 'w') as f:
+    with tf.io.gfile.GFile(filepath, 'w') as f:
       json.dump({
           'shape': [-1 if d is None else d for d in self._shape],
           'encoding_format': self._encoding_format,
@@ -163,8 +163,8 @@ class Image(feature.FeatureConnector):
     """See base class for details."""
     # Restore names if defined
     filepath = _get_metadata_filepath(data_dir, feature_name)
-    if tf.gfile.Exists(filepath):
-      with tf.gfile.Open(filepath, 'r') as f:
+    if tf.io.gfile.exists(filepath):
+      with tf.io.gfile.GFile(filepath, 'r') as f:
         info_data = json.load(f)
       self.set_encoding_format(info_data['encoding_format'])
       self.set_shape([None if d == -1 else d for d in info_data['shape']])

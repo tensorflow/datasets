@@ -251,9 +251,9 @@ class Resource(object):
   def _get_info(self):
     """Returns info dict or None."""
     if not self._info:
-      if not tf.gfile.Exists(self.info_path):
+      if not tf.io.gfile.exists(self.info_path):
         return None
-      with tf.gfile.Open(self.info_path) as info_f:
+      with tf.io.gfile.GFile(self.info_path) as info_f:
         self._info = json.load(info_f)
     return self._info
 
@@ -261,7 +261,7 @@ class Resource(object):
     """Returns whether the resource exists locally, at `resource.path`."""
     # If INFO file doesn't exist, consider resource does NOT exist, as it would
     # prevent guessing the `extract_method`.
-    return tf.gfile.Exists(self.path) and tf.gfile.Exists(self.info_path)
+    return tf.io.gfile.exists(self.path) and tf.io.gfile.exists(self.info_path)
 
   def _get_original_fname(self):
     # We rely on the INFO file because some urls (eg: drive) do not contain the

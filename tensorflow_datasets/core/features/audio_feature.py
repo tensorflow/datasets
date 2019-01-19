@@ -51,7 +51,7 @@ class Audio(feature.Tensor):
     if isinstance(audio, (np.ndarray, list)):
       return audio
 
-    with tf.gfile.Open(audio, "rb") as audio_f:
+    with tf.io.gfile.GFile(audio, "rb") as audio_f:
       file_format = self._file_format or audio.split(".")[-1]
       audio_segment = lazy_imports.pydub.AudioSegment.from_file(
           audio_f, format=file_format)

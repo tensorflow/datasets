@@ -153,7 +153,8 @@ def dataset_as_numpy(dataset, graph=None):
     with utils.maybe_with_graph(graph, create_if_none=False):
       for i, ds_el in enumerate(flat_ds):
         if isinstance(ds_el, tf.data.Dataset):
-          ds_iters[i] = ds_el.make_one_shot_iterator().get_next()
+          ds_iters[i] = tf.compat.v1.data.make_one_shot_iterator(
+              ds_el).get_next()
 
     # Then create NumPy items
     # Shared session for tf.Tensor runs

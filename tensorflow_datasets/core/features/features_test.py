@@ -90,17 +90,17 @@ class FeatureDictTest(test_utils.FeatureExpectationsTestCase):
             }),
             serialized_info={
                 'input/a':
-                    tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                    tf.io.FixedLenFeature(shape=(), dtype=tf.int64),
                 'input/b':
-                    tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                    tf.io.FixedLenFeature(shape=(), dtype=tf.int64),
                 'output':
-                    tf.FixedLenFeature(shape=(), dtype=tf.float32),
+                    tf.io.FixedLenFeature(shape=(), dtype=tf.float32),
                 'img/size/height':
-                    tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                    tf.io.FixedLenFeature(shape=(), dtype=tf.int64),
                 'img/size/width':
-                    tf.FixedLenFeature(shape=(), dtype=tf.int64),
+                    tf.io.FixedLenFeature(shape=(), dtype=tf.int64),
                 'img/metadata/path':
-                    tf.FixedLenFeature(shape=(), dtype=tf.string),
+                    tf.io.FixedLenFeature(shape=(), dtype=tf.string),
             },
             dtype={
                 'input': tf.int64,

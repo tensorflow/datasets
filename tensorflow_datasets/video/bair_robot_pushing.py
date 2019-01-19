@@ -25,6 +25,8 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+
+from absl import logging
 import numpy as np
 import tensorflow as tf
 
@@ -103,16 +105,16 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, filedir):
-    tf.logging.info("Reading data from %s.", filedir)
-    files = tf.gfile.ListDirectory(filedir)
-    tf.logging.info("%d files found.", len(files))
+    logging.info("Reading data from %s.", filedir)
+    files = tf.io.gfile.listdir(filedir)
+    logging.info("%d files found.", len(files))
 
     # For each file
-    for filename in tf.gfile.ListDirectory(filedir):
+    for filename in tf.io.gfile.listdir(filedir):
       filepath = os.path.join(filedir, filename)
 
       # For each video inside the file
-      for example_str in tf.io.tf_record_iterator(filepath):
+      for example_str in tf.compat.v1.io.tf_record_iterator(filepath):
         example = tf.train.SequenceExample.FromString(example_str)
 
         # Merge all frames together

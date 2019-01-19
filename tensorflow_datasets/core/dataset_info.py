@@ -38,6 +38,7 @@ import collections
 import os
 import pprint
 
+from absl import logging
 import numpy as np
 import tensorflow as tf
 
@@ -178,8 +179,8 @@ class DatasetInfo(object):
   def splits(self):
     if not self._fully_initialized:
       # TODO(epot): Consider raising an error here instead?
-      tf.logging.info("`splits` hasn't been fully initialized, statistics maybe"
-                      " missing.")
+      logging.info("`splits` hasn't been fully initialized, statistics maybe"
+                   " missing.")
     return self._splits.copy()
 
   @splits.setter
@@ -246,11 +247,10 @@ class DatasetInfo(object):
       except tf.errors.InvalidArgumentError:
         # This means there is no such split, even though it was specified in the
         # info, the least we can do is to log this.
-        tf.logging.error((
-            "%s's info() property specifies split %s, but it "
-            "doesn't seem to have been generated. Please ensure "
-            "that the data was downloaded for this split and re-run "
-            "download_and_prepare."), self.name, split_name)
+        logging.error(("%s's info() property specifies split %s, but it "
+                       "doesn't seem to have been generated. Please ensure "
+                       "that the data was downloaded for this split and re-run "
+                       "download_and_prepare."), self.name, split_name)
         raise
 
     # Set splits to trigger proto update in setter
@@ -275,7 +275,8 @@ class DatasetInfo(object):
     if self.features:
       self.features.save_metadata(dataset_info_dir)
 
-    with tf.gfile.Open(self._dataset_info_filename(dataset_info_dir), "w") as f:
+    with tf.io.gfile.GFile(self._dataset_info_filename(dataset_info_dir),
+                           "w") as f:
       f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir, from_packaged_data=False):
@@ -302,10 +303,10 @@ class DatasetInfo(object):
     json_filename = self._dataset_info_filename(dataset_info_dir)
 
     # Load the metadata from disk
-    if not tf.gfile.Exists(json_filename):
+    if not tf.io.gfile.exists(json_filename):
       return False
 
-    with tf.gfile.Open(json_filename, "r") as f:
+    with tf.io.gfile.GFile(json_filename, "r") as f:
       dataset_info_json_str = f.read()
 
     # Parse it back into a proto.
@@ -486,7 +487,7 @@ def get_dataset_feature_statistics(builder, split):
     # proto has no support for it.
     maybe_feature_shape = output_shapes_dict[feature_name]
     if not isinstance(maybe_feature_shape, tf.TensorShape):
-      tf.logging.error(
+      logging.error(
           "Statistics generation doesn't work for nested structures yet")
       continue
 

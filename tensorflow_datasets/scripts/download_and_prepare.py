@@ -38,11 +38,13 @@ import os
 import pdb
 import time
 
+from absl import app
+from absl import flags
+from absl import logging
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
 
-flags = tf.flags
 FLAGS = flags.FLAGS
 BUILDERS = ",".join(tfds.list_builders())
 
@@ -102,11 +104,8 @@ def download_and_prepare(builder):
 
   if FLAGS.debug:
     dataset = builder.as_dataset(split=tfds.Split.TRAIN)
-    iterator = tf.contrib.eager.Iterator(dataset)
-    item = next(iterator)
-    print("'item' is a single record. Use print(next(iterator)) to see more.")
     pdb.set_trace()
-    del iterator, item
+    del dataset
 
 
 def main(_):
@@ -118,8 +117,8 @@ def main(_):
   datasets_to_build = (
       set(FLAGS.datasets.split(",")) -
       set(FLAGS.exclude_datasets.split(",")))
-  tf.logging.info("Running download_and_prepare for datasets:\n%s",
-                  "\n".join(datasets_to_build))
+  logging.info("Running download_and_prepare for datasets:\n%s",
+               "\n".join(datasets_to_build))
   builders = {
       name: tfds.builder(name, data_dir=FLAGS.data_dir)
       for name in datasets_to_build
@@ -140,5 +139,5 @@ def main(_):
 
 
 if __name__ == "__main__":
-  tf.enable_eager_execution()
-  tf.app.run()
+  tf.compat.v1.enable_eager_execution()
+  app.run()

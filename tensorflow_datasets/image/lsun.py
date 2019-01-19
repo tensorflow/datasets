@@ -114,7 +114,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
 
         next_iterator = tf.compat.v1.data.make_one_shot_iterator(
             dataset).get_next()
-        with tf.train.MonitoredTrainingSession() as session:
+        with tf.compat.v1.train.MonitoredTrainingSession() as session:
           while True:
             try:
               _, jpeg_image = session.run(next_iterator)

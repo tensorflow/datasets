@@ -42,20 +42,20 @@ def tmp_dir(dirname=None):
 
 
 def make_tmp_dir(dirname=None):
-  if dirname and not tf.gfile.Exists(dirname):
-    tf.gfile.MakeDirs(dirname)
+  if dirname and not tf.io.gfile.exists(dirname):
+    tf.io.gfile.makedirs(dirname)
   return tempfile.mkdtemp(dir=dirname)
 
 
 def rm_tmp_dir(dirname):
-  tf.gfile.DeleteRecursively(dirname)
+  tf.io.gfile.rmtree(dirname)
 
 
 def remake_dir(d):
   """Possibly deletes and recreates directory."""
-  if tf.gfile.Exists(d):
-    tf.gfile.DeleteRecursively(d)
-  tf.gfile.MakeDirs(d)
+  if tf.io.gfile.exists(d):
+    tf.io.gfile.rmtree(d)
+  tf.io.gfile.makedirs(d)
 
 
 class FeatureExpectationItem(object):
@@ -229,7 +229,7 @@ def features_encode_decode(features_dict, example, as_tensor=False):
       if tf.executing_eagerly():
         return next(iter(dataset))
       else:
-        return dataset.make_one_shot_iterator().get_next()
+        return tf.compat.v1.data.make_one_shot_iterator(dataset).get_next()
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
@@ -256,4 +256,3 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   def _generate_examples(self):
     for i in range(30):
       yield {"x": i}
-

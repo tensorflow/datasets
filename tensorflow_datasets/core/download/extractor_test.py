@@ -28,7 +28,7 @@ from tensorflow_datasets.testing import test_case
 
 
 def _read(path):
-  with tf.gfile.Open(path, 'rb') as f:
+  with tf.io.gfile.GFile(path, 'rb') as f:
     return f.read()
 
 
@@ -39,19 +39,19 @@ class ExtractorTest(test_case.TestCase):
     super(ExtractorTest, cls).setUpClass()
     f1_path = os.path.join(cls.test_data, '6pixels.png')
     f2_path = os.path.join(cls.test_data, 'foo.csv')
-    with tf.gfile.Open(f1_path, 'rb') as f1_f:
+    with tf.io.gfile.GFile(f1_path, 'rb') as f1_f:
       cls.f1_content = f1_f.read()
-    with tf.gfile.Open(f2_path, 'rb') as f2_f:
+    with tf.io.gfile.GFile(f2_path, 'rb') as f2_f:
       cls.f2_content = f2_f.read()
 
   def setUp(self):
     super(ExtractorTest, self).setUp()
     self.extractor = extractor.get_extractor()
-    self.extractor._pbar_path = tf.test.mock.MagicMock()
+    self.extractor._pbar_path = tf.compat.v1.test.mock.MagicMock()
     # Where archive will be extracted:
     self.to_path = os.path.join(self.tmp_dir, 'extracted_arch')
     # Obviously it must not exist before test runs:
-    self.assertFalse(tf.gfile.Exists(self.to_path))
+    self.assertFalse(tf.io.gfile.exists(self.to_path))
 
     self.result_path = os.path.join(self.to_path, '6pixels.png')
 

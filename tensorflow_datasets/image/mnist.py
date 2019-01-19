@@ -172,7 +172,7 @@ class FashionMNIST(MNIST):
 
 
 def _extract_mnist_images(image_filepath, num_images):
-  with tf.gfile.Open(image_filepath, "rb") as f:
+  with tf.io.gfile.GFile(image_filepath, "rb") as f:
     f.read(16)  # header
     buf = f.read(_MNIST_IMAGE_SIZE * _MNIST_IMAGE_SIZE * num_images)
     data = np.frombuffer(
@@ -183,7 +183,7 @@ def _extract_mnist_images(image_filepath, num_images):
 
 
 def _extract_mnist_labels(labels_filepath, num_labels):
-  with tf.gfile.Open(labels_filepath, "rb") as f:
+  with tf.io.gfile.GFile(labels_filepath, "rb") as f:
     f.read(8)  # header
     buf = f.read(num_labels)
     labels = np.frombuffer(buf, dtype=np.uint8).astype(np.int64)

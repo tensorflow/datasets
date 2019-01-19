@@ -217,7 +217,7 @@ class CifarInfo(collections.namedtuple("_CifarInfo", [
 
 
 def _load_pickle(path):
-  with tf.gfile.Open(path, "rb") as f:
+  with tf.io.gfile.GFile(path, "rb") as f:
     if six.PY2:
       data = cPickle.load(f)
     else:

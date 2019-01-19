@@ -22,6 +22,7 @@ from __future__ import print_function
 import itertools
 import os
 
+from absl import logging
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -83,7 +84,7 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     if not self._data_dir:
-      tf.logging.warning(
+      logging.warning(
           "ImageLabelFolder.info is only complete once the data has been "
           "generated. Please call .download_and_prepare() before calling "
           ".info. The .info.features won't be computed.")
@@ -165,13 +166,14 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
 def list_folders(root_dir):
   return [
-      f for f in tf.gfile.ListDirectory(root_dir)
-      if tf.gfile.IsDirectory(os.path.join(root_dir, f))
+      f for f in tf.io.gfile.listdir(root_dir)
+      if tf.io.gfile.isdir(os.path.join(root_dir, f))
   ]
 
 
 def list_imgs(root_dir):
   return [
-      os.path.join(root_dir, f) for f in tf.gfile.ListDirectory(root_dir)
+      os.path.join(root_dir, f)
+      for f in tf.io.gfile.listdir(root_dir)
       if any(f.lower().endswith(ext) for ext in SUPPORTED_IMAGE_FORMAT)
   ]

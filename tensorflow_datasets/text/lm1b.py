@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import os
 
+from absl import logging
 import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
@@ -82,11 +83,11 @@ class Lm1bConfig(tfds.core.BuilderConfig):
 
 
 def _train_data_filenames(tmp_dir):
-  return tf.gfile.Glob(os.path.join(tmp_dir, _TRAIN_FILE_FORMAT))
+  return tf.io.gfile.glob(os.path.join(tmp_dir, _TRAIN_FILE_FORMAT))
 
 
 def _test_data_filenames(tmp_dir):
-  return tf.gfile.Glob(os.path.join(tmp_dir, _HELDOUT_FILE_FORMAT))
+  return tf.io.gfile.glob(os.path.join(tmp_dir, _HELDOUT_FILE_FORMAT))
 
 
 class Lm1b(tfds.core.GeneratorBasedBuilder):
@@ -166,8 +167,8 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, files):
     for filepath in files:
-      tf.logging.info("generating examples from = %s", filepath)
-      with tf.gfile.Open(filepath) as f:
+      logging.info("generating examples from = %s", filepath)
+      with tf.io.gfile.GFile(filepath) as f:
         for line in f:
           yield {
               "text": line.strip(),

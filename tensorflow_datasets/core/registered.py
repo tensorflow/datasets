@@ -22,6 +22,7 @@ from __future__ import print_function
 import abc
 import inspect
 
+from absl import logging
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
@@ -147,7 +148,7 @@ def builder(name, **builder_init_kwargs):
   try:
     return _DATASET_REGISTRY[name](**builder_kwargs)
   except BaseException:
-    tf.logging.error("Failed to construct dataset %s", name)
+    logging.error("Failed to construct dataset %s", name)
     raise
 
 
@@ -299,7 +300,7 @@ def _dataset_name_and_kwargs_from_name_str(name_str):
     kwargs["config"] = config
     return dataset_name, kwargs
   except:
-    tf.logging.error(_NAME_STR_ERR)
+    logging.error(_NAME_STR_ERR)
     raise
 
 

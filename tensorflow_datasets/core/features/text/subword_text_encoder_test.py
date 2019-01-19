@@ -168,7 +168,7 @@ class SubwordTextEncoderBuildTest(tf.test.TestCase):
 
 
 def _yield_lines_from_file(txt_file):
-  with tf.gfile.Open(txt_file, 'rb') as f:
+  with tf.io.gfile.GFile(txt_file, 'rb') as f:
     for line in f:
       yield tf.compat.as_text(line)
 

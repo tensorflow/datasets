@@ -96,12 +96,12 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
         label. If not provided, just scan image directory, don't set labels.
     """
     if csv_path:
-      with tf.gfile.Open(csv_path) as csv_f:
+      with tf.io.gfile.GFile(csv_path) as csv_f:
         reader = csv.DictReader(csv_f)
         data = [(row["image"], int(row["level"])) for row in reader]
     else:
       data = [(fname[:-5], -1)
-              for fname in tf.gfile.ListDirectory(images_dir_path)
+              for fname in tf.io.gfile.listdir(images_dir_path)
               if fname.endswith(".jpeg")]
     for name, label in data:
       yield {

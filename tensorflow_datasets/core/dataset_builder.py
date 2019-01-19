@@ -23,6 +23,7 @@ import abc
 import os
 import sys
 
+from absl import logging
 import six
 import tensorflow as tf
 
@@ -108,7 +109,7 @@ class DatasetBuilder(object):
   # And then the rest of your input pipeline
   train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
   train_dataset = train_dataset.prefetch(2)
-  features = train_dataset.make_one_shot_iterator().get_next()
+  features = tf.compat.v1.data.make_one_shot_iterator(train_dataset).get_next()
   image, label = features['image'], features['label']
   ```
   """
@@ -160,7 +161,7 @@ class DatasetBuilder(object):
     self._data_dir = self._build_data_dir()
 
     # Use data version (restored from disk)
-    if tf.gfile.Exists(self._data_dir):
+    if tf.io.gfile.exists(self._data_dir):
       # Overwrite the current dataset info with the restored data version.
       self.info.read_from_directory(self._data_dir)
 
@@ -197,10 +198,10 @@ class DatasetBuilder(object):
     """
 
     download_config = download_config or download.DownloadConfig()
-    data_exists = tf.gfile.Exists(self._data_dir)
+    data_exists = tf.io.gfile.exists(self._data_dir)
     if (data_exists and
         download_config.download_mode == REUSE_DATASET_IF_EXISTS):
-      tf.logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
+      logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
     dl_manager = self._make_download_manager(
@@ -216,7 +217,7 @@ class DatasetBuilder(object):
           "the same version {} already exists. If the dataset has changed, "
           "please update the version number.".format(self.name, self._data_dir,
                                                      self.info.version))
-    tf.logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
+    logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     self._log_download_bytes()
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
@@ -237,8 +238,8 @@ class DatasetBuilder(object):
         if download_config.compute_stats:
           already_has_stats = bool(self.info.num_examples)
           if already_has_stats:
-            tf.logging.info("Skipping computing stats because they are already "
-                            "populated.")
+            logging.info("Skipping computing stats because they are already "
+                         "populated.")
           else:
             self.info.compute_dynamic_properties()
 
@@ -286,7 +287,7 @@ class DatasetBuilder(object):
       If `batch_size` is -1, will return feature dictionaries containing
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
-    if not tf.gfile.Exists(self._data_dir):
+    if not tf.io.gfile.exists(self._data_dir):
       raise AssertionError(
           ("Dataset %s: could not find data in %s. Please make sure to call "
            "dataset_builder.download_and_prepare(), or pass download=True to "
@@ -365,11 +366,11 @@ class DatasetBuilder(object):
 
     def _other_versions_on_disk():
       """Returns previous versions on disk."""
-      if not tf.gfile.Exists(builder_data_dir):
+      if not tf.io.gfile.exists(builder_data_dir):
         return []
 
       version_dirnames = []
-      for dir_name in tf.gfile.ListDirectory(builder_data_dir):
+      for dir_name in tf.io.gfile.listdir(builder_data_dir):
         try:
           version_dirnames.append((utils.Version(dir_name), dir_name))
         except ValueError:  # Invalid version (ex: incomplete data dir)
@@ -382,7 +383,7 @@ class DatasetBuilder(object):
     if version_dirs:
       other_version = version_dirs[0][0]
       if other_version != self._version:
-        tf.logging.warn(
+        warn_msg = (
             "Found a different version {other_version} of dataset {name} in "
             "data_dir {data_dir}. Using currently defined version "
             "{cur_version}.".format(
@@ -390,6 +391,7 @@ class DatasetBuilder(object):
                 name=self.name,
                 data_dir=self._data_dir_root,
                 cur_version=str(self._version)))
+        logging.warn(warn_msg)
 
     return version_data_dir
 
@@ -479,8 +481,8 @@ class DatasetBuilder(object):
     """Create and validate BuilderConfig object."""
     if builder_config is None and self.BUILDER_CONFIGS:
       builder_config = self.BUILDER_CONFIGS[0]
-      tf.logging.info("No config specified, defaulting to first: %s/%s",
-                      self.name, builder_config.name)
+      logging.info("No config specified, defaulting to first: %s/%s", self.name,
+                   builder_config.name)
     if not builder_config:
       return
     if isinstance(builder_config, six.string_types):
@@ -494,7 +496,7 @@ class DatasetBuilder(object):
       raise ValueError("BuilderConfig must have a name, got %s" % name)
     is_custom = name not in self.builder_configs
     if is_custom:
-      tf.logging.warning("Using custom data configuration %s", name)
+      logging.warning("Using custom data configuration %s", name)
     else:
       if builder_config is not self.builder_configs[name]:
         raise ValueError(
@@ -639,10 +641,9 @@ class GeneratorBasedBuilder(DatasetBuilder):
 
   def _download_and_prepare(self, dl_manager, max_examples_per_split=None):
     if max_examples_per_split is not None:
-      tf.logging.warn("Splits capped at %s examples max.",
-                      max_examples_per_split)
-    if not tf.gfile.Exists(self._data_dir):
-      tf.gfile.MakeDirs(self._data_dir)
+      logging.warn("Splits capped at %s examples max.", max_examples_per_split)
+    if not tf.io.gfile.exists(self._data_dir):
+      tf.io.gfile.makedirs(self._data_dir)
 
     # Generate the filenames and write the example on disk
     def make_generator_fn(**kwargs):
@@ -671,7 +672,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
               "._split_generator()."
           )
 
-        tf.logging.info("Generating split %s", s.name)
+        logging.info("Generating split %s", s.name)
         split_dict.add(s)
 
       output_files = self._build_split_filenames(

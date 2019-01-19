@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from absl import logging
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
@@ -187,17 +188,17 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
       dict with all frames, positions and actions.
     """
     context_features = {
-        "game_duration_loops": tf.FixedLenFeature([1], tf.int64),
-        "game_duration_seconds": tf.FixedLenFeature([1], tf.float32),
-        "n_steps": tf.FixedLenFeature([1], tf.int64),
-        "screen_size": tf.FixedLenFeature([2], tf.int64),
+        "game_duration_loops": tf.io.FixedLenFeature([1], tf.int64),
+        "game_duration_seconds": tf.io.FixedLenFeature([1], tf.float32),
+        "n_steps": tf.io.FixedLenFeature([1], tf.int64),
+        "screen_size": tf.io.FixedLenFeature([2], tf.int64),
     }
 
     sequence_features = {
-        "rgb_screen": tf.FixedLenSequenceFeature([], tf.string),
+        "rgb_screen": tf.io.FixedLenSequenceFeature([], tf.string),
     }
 
-    _, seq_feat = tf.parse_single_sequence_example(
+    _, seq_feat = tf.io.parse_single_sequence_example(
         example_proto,
         context_features=context_features,
         sequence_features=sequence_features)
@@ -207,15 +208,15 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
     return video_frames
 
   def _generate_examples(self, files):
-    tf.logging.info("Reading data from %s.", ",".join(files))
+    logging.info("Reading data from %s.", ",".join(files))
     with tf.Graph().as_default():
       ds = tf.data.TFRecordDataset(files)
       ds = ds.map(
           self._parse_single_video,
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
-      iterator = ds.make_one_shot_iterator().get_next()
-      with tf.Session() as sess:
-        sess.run(tf.global_variables_initializer())
+      iterator = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
+      with tf.compat.v1.Session() as sess:
+        sess.run(tf.compat.v1.global_variables_initializer())
         try:
           while True:
             video = sess.run(iterator)

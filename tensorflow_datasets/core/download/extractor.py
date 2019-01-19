@@ -91,19 +91,19 @@ class _Extractor(object):
         _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     except BaseException as err:
       raise ExtractError(resource, err)
-    # `tf.gfile.Rename(overwrite=True)` doesn't work for non empty directories,
-    # so delete destination first, if it already exists.
-    if tf.gfile.Exists(to_path):
-      tf.gfile.DeleteRecursively(to_path)
-    tf.gfile.Rename(to_path_tmp, to_path)
+    # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
+    # directories, so delete destination first, if it already exists.
+    if tf.io.gfile.exists(to_path):
+      tf.io.gfile.rmtree(to_path)
+    tf.io.gfile.rename(to_path_tmp, to_path)
     self._pbar_path.update(1)
     return to_path
 
 
 def _copy(src_file, dest_path):
   """Copy data read from src file obj to new file in dest_path."""
-  tf.gfile.MakeDirs(os.path.dirname(dest_path))
-  with tf.gfile.Open(dest_path, 'wb') as dest_file:
+  tf.io.gfile.makedirs(os.path.dirname(dest_path))
+  with tf.io.gfile.GFile(dest_path, 'wb') as dest_file:
     while True:
       data = src_file.read(io.DEFAULT_BUFFER_SIZE)
       if not data:
@@ -121,7 +121,7 @@ def _normpath(path):
 @contextlib.contextmanager
 def _open_or_pass(path_or_fobj):
   if isinstance(path_or_fobj, six.string_types):
-    with tf.gfile.Open(path_or_fobj, 'rb') as f_obj:
+    with tf.io.gfile.GFile(path_or_fobj, 'rb') as f_obj:
       yield f_obj
   else:
     yield path_or_fobj

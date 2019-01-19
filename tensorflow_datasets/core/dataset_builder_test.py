@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import os
 
+from absl import logging
 from absl.testing import parameterized
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
@@ -103,7 +104,7 @@ class DatasetBuilderTest(tf.test.TestCase):
 
       written_filepaths = [
           os.path.join(builder._data_dir, fname)
-          for fname in tf.gfile.ListDirectory(builder._data_dir)
+          for fname in tf.io.gfile.listdir(builder._data_dir)
       ]
       # The data_dir contains the cached directory by default
       expected_filepaths = builder._build_split_filenames(
@@ -154,10 +155,10 @@ class DatasetBuilderTest(tf.test.TestCase):
       version_dir = os.path.join(builder_data_dir, "1.0.0")
 
       # The dataset folder contains multiple other versions
-      tf.gfile.MakeDirs(os.path.join(builder_data_dir, "14.0.0.invalid"))
-      tf.gfile.MakeDirs(os.path.join(builder_data_dir, "10.0.0"))
-      tf.gfile.MakeDirs(os.path.join(builder_data_dir, "9.0.0"))
-      tf.gfile.MakeDirs(os.path.join(builder_data_dir, "0.1.0"))
+      tf.io.gfile.makedirs(os.path.join(builder_data_dir, "14.0.0.invalid"))
+      tf.io.gfile.makedirs(os.path.join(builder_data_dir, "10.0.0"))
+      tf.io.gfile.makedirs(os.path.join(builder_data_dir, "9.0.0"))
+      tf.io.gfile.makedirs(os.path.join(builder_data_dir, "0.1.0"))
 
       # The builder's version dir is chosen
       self.assertEqual(builder._build_data_dir(), version_dir)
@@ -170,7 +171,7 @@ class DatasetBuilderTest(tf.test.TestCase):
       builder_data_dir = os.path.join(tmp_dir, builder.name, config_name)
       version_data_dir = os.path.join(builder_data_dir, "0.0.1")
 
-      tf.gfile.MakeDirs(version_data_dir)
+      tf.io.gfile.makedirs(version_data_dir)
       self.assertEqual(builder._build_data_dir(), version_data_dir)
 
   def test_config_construction(self):
@@ -201,11 +202,11 @@ class DatasetBuilderTest(tf.test.TestCase):
       data_dir1 = os.path.join(tmp_dir, builder1.name, "plus1", "0.0.1")
       data_dir2 = os.path.join(tmp_dir, builder2.name, "plus2", "0.0.2")
       # Test that subdirectories were created per config
-      self.assertTrue(tf.gfile.Exists(data_dir1))
-      self.assertTrue(tf.gfile.Exists(data_dir2))
+      self.assertTrue(tf.io.gfile.exists(data_dir1))
+      self.assertTrue(tf.io.gfile.exists(data_dir2))
       # 2 train shards, 1 test shard, plus metadata files
-      self.assertGreater(len(tf.gfile.ListDirectory(data_dir1)), 3)
-      self.assertGreater(len(tf.gfile.ListDirectory(data_dir2)), 3)
+      self.assertGreater(len(tf.io.gfile.listdir(data_dir1)), 3)
+      self.assertGreater(len(tf.io.gfile.listdir(data_dir2)), 3)
 
       # Test that the config was used and they didn't collide.
       splits_list = [splits_lib.Split.TRAIN, splits_lib.Split.TEST]

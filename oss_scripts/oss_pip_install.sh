@@ -6,13 +6,20 @@ set -e  # fail and exit on any command erroring
 : "${TF_VERSION:?}"
 
 # Install ffmpeg for Audio FeatureConnector tests
-sudo add-apt-repository -y ppa:mc3man/trusty-media
-sudo apt-get -qq update
-sudo apt-get install -y ffmpeg
+FFMPEG=$(command -v ffmpeg)
+if [[ -z "$FFMPEG" ]]
+then
+  sudo add-apt-repository -y ppa:mc3man/trusty-media
+  sudo apt-get -qq update
+  sudo apt-get install -y ffmpeg
+fi
 
 if [[ "$TF_VERSION" == "tf-nightly"  ]]
 then
-  pip install tf-nightly;
+  pip install -q tf-nightly;
+elif [[ "$TF_VERSION" == "tf2"  ]]
+then
+  pip install -q "tf-nightly-2.0-preview"
 else
   pip install -q "tensorflow==$TF_VERSION"
 fi

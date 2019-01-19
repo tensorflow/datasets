@@ -32,6 +32,7 @@ if nightly:
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
+    'absl-py',
     'future',
     'promise',
     'protobuf>=3.6.1',
@@ -47,7 +48,6 @@ REQUIRED_PKGS = [
 ]
 
 TESTS_REQUIRE = [
-    'absl-py',
     'jupyter',
     'pytest',
 ]
@@ -77,7 +77,7 @@ DATASET_INFO_AND_METADATA_FILES = [
 ]
 
 DATASET_EXTRAS = {
-    'librispeech': ['pydub'],
+    'librispeech': ['pydub'],  # and ffmpeg installed
 }
 
 all_dataset_extras = []

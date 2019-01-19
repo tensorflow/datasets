@@ -33,15 +33,15 @@ class DatasetAsNumPyTest(tf.test.TestCase):
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_singleton_tensor(self):
-    t = tf.random_normal((10, 10))
+    t = tf.random.normal((10, 10))
     np_t = dataset_utils.dataset_as_numpy(t)
     self.assertEqual((10, 10), np_t.shape)
     self.assertEqual(np.float32, np_t.dtype)
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_nested_tensors(self):
-    t1 = tf.random_normal((10, 10))
-    t2 = tf.random_normal((10, 20))
+    t1 = tf.random.normal((10, 10))
+    t2 = tf.random.normal((10, 20))
     nest_tup = (t1, t2)
     np_t1, np_t2 = dataset_utils.dataset_as_numpy(nest_tup)
     self.assertEqual((10, 10), np_t1.shape)

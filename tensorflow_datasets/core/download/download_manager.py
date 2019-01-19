@@ -23,6 +23,7 @@ import os
 import sys
 import uuid
 
+from absl import logging
 import promise
 import six
 import tensorflow as tf
@@ -153,8 +154,8 @@ class DownloadManager(object):
     self._download_dir = os.path.expanduser(download_dir)
     self._extract_dir = os.path.expanduser(extract_dir)
     self._manual_dir = os.path.expanduser(manual_dir)
-    tf.gfile.MakeDirs(self._download_dir)
-    tf.gfile.MakeDirs(self._extract_dir)
+    tf.io.gfile.makedirs(self._download_dir)
+    tf.io.gfile.makedirs(self._extract_dir)
     self._force_download = force_download
     self._force_extraction = force_extraction
     self._extractor = extractor.get_extractor()
@@ -185,7 +186,7 @@ class DownloadManager(object):
       if not self._validate_checksum(resource.url, sha256):
         raise NonMatchingChecksumError(resource.url, resource.path)
       return resource.path
-    fnames = tf.gfile.ListDirectory(tmp_dir_path)
+    fnames = tf.io.gfile.listdir(tmp_dir_path)
     if len(fnames) > 1:
       raise AssertionError('More than one file in %s.' % tmp_dir_path)
     original_fname = fnames[0]
@@ -195,8 +196,8 @@ class DownloadManager(object):
     resource.write_info_file(self._dataset_name, original_fname)
     # Unconditionally overwrite because either file doesn't exist or
     # FORCE_DOWNLOAD=true
-    tf.gfile.Rename(tmp_path, resource.path, overwrite=True)
-    tf.gfile.DeleteRecursively(tmp_dir_path)
+    tf.io.gfile.rename(tmp_path, resource.path, overwrite=True)
+    tf.io.gfile.rmtree(tmp_dir_path)
     return resource.path
 
   # synchronize and memoize decorators ensure same resource will only be
@@ -211,11 +212,10 @@ class DownloadManager(object):
     if not resource.path:
       resource.path = os.path.join(self._download_dir, resource.fname)
     if not self._force_download and resource.exists_locally():
-      tf.logging.info(
-          'URL %s already downloaded: reusing %s.' % (resource.url,
-                                                      resource.path))
+      logging.info('URL %s already downloaded: reusing %s.', resource.url,
+                   resource.path)
       if self._record_checksum_size:
-        tf.logging.info('Reading checksum and size of %s ...' % resource.path)
+        logging.info('Reading checksum and size of %s ...', resource.path)
         checksum, dl_size = utils.read_checksum_digest(resource.path)
         self._handle_download_result(resource, None, checksum, dl_size,
                                      existing=True)
@@ -224,8 +224,9 @@ class DownloadManager(object):
     # the extractor manages its own temp directory, while the DownloadManager
     # manages the temp directory of downloader.
     tmp_dir_path = '%s.tmp.%s' % (resource.path, uuid.uuid4().hex)
-    tf.gfile.MakeDirs(tmp_dir_path)
-    tf.logging.info('Downloading %s into %s...' % (resource.url, tmp_dir_path))
+    tf.io.gfile.makedirs(tmp_dir_path)
+    logging.info('Downloading %s into %s...', resource.url, tmp_dir_path)
+
     def callback(val):
       checksum, dl_size = val
       return self._handle_download_result(resource, tmp_dir_path, checksum,
@@ -239,13 +240,13 @@ class DownloadManager(object):
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(path=resource)
     if resource.extract_method == resource_lib.ExtractMethod.NO_EXTRACT:
-      tf.logging.info(
-          'Skipping extraction for %s (method=NO_EXTRACT).' % resource.path)
+      logging.info(
+          'Skipping extraction for %s (method=NO_EXTRACT).', resource.path)
       return promise.Promise.resolve(resource.path)
     extract_path = os.path.join(self._extract_dir, resource.extract_fname)
-    if not self._force_extraction and tf.gfile.Exists(extract_path):
-      tf.logging.info('Reusing extraction of %s at %s.' % (
-          resource.path, extract_path))
+    if not self._force_extraction and tf.io.gfile.exists(extract_path):
+      logging.info('Reusing extraction of %s at %s.', resource.path,
+                   extract_path)
       return promise.Promise.resolve(extract_path)
     return self._extractor.extract(resource, extract_path)
 
@@ -336,7 +337,7 @@ class DownloadManager(object):
   @property
   def manual_dir(self):
     """Returns the directory containing the manually extracted data."""
-    if not tf.gfile.Exists(self._manual_dir):
+    if not tf.io.gfile.exists(self._manual_dir):
       raise AssertionError(
           'Manual directory {} does not exist. Create it and download/extract '
           'dataset artifacts in there.'.format(self._manual_dir))

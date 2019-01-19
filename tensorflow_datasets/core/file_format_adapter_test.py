@@ -29,7 +29,7 @@ from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
 
-tf.enable_eager_execution()
+tf.compat.v1.enable_eager_execution()
 
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):

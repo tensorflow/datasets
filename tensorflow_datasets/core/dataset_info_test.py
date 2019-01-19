@@ -113,7 +113,7 @@ class DatasetInfoTest(tf.test.TestCase):
     info.read_from_directory(_INFO_DIR)
 
     # Read the json file into a string.
-    with tf.gfile.Open(info._dataset_info_filename(_INFO_DIR)) as f:
+    with tf.io.gfile.GFile(info._dataset_info_filename(_INFO_DIR)) as f:
       existing_json = json.load(f)
 
     # Now write to a temp directory.
@@ -121,7 +121,7 @@ class DatasetInfoTest(tf.test.TestCase):
       info.write_to_directory(tmp_dir)
 
       # Read the newly written json file into a string.
-      with tf.gfile.Open(info._dataset_info_filename(tmp_dir)) as f:
+      with tf.io.gfile.GFile(info._dataset_info_filename(tmp_dir)) as f:
         new_json = json.load(f)
 
     # Assert what was read and then written and read again is the same.

@@ -99,7 +99,7 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
     Yields:
       Generator yielding the next samples
     """
-    with tf.gfile.Open(filepath, "rb") as f:
+    with tf.io.gfile.GFile(filepath, "rb") as f:
       data = scipy.io.loadmat(f)
 
     # Maybe should shuffle ?

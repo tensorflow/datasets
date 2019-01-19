@@ -159,7 +159,7 @@ class ClassLabel(feature.FeatureConnector):
     """See base class for details."""
     # Restore names if defined
     names_filepath = _get_names_filepath(data_dir, feature_name)
-    if tf.gfile.Exists(names_filepath):
+    if tf.io.gfile.exists(names_filepath):
       self.names = _load_names_from_file(names_filepath)
 
   def _additional_repr_info(self):
@@ -171,7 +171,7 @@ def _get_names_filepath(data_dir, feature_name):
 
 
 def _load_names_from_file(names_filepath):
-  with tf.gfile.Open(names_filepath, "r") as f:
+  with tf.io.gfile.GFile(names_filepath, "r") as f:
     return [
         name.strip()
         for name in tf.compat.as_text(f.read()).split("\n")
@@ -180,5 +180,5 @@ def _load_names_from_file(names_filepath):
 
 
 def _write_names_to_file(names_filepath, names):
-  with tf.gfile.Open(names_filepath, "w") as f:
+  with tf.io.gfile.GFile(names_filepath, "w") as f:
     f.write("\n".join(names) + "\n")

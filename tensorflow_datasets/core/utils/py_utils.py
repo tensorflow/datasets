@@ -232,9 +232,9 @@ def tfds_dir():
 def atomic_write(path, mode):
   """Writes to path atomically, by writing to temp file and renaming it."""
   tmp_path = "%s%s_%s" % (path, constants.INCOMPLETE_SUFFIX, uuid.uuid4().hex)
-  with tf.gfile.Open(tmp_path, mode) as file_:
+  with tf.io.gfile.GFile(tmp_path, mode) as file_:
     yield file_
-  tf.gfile.Rename(tmp_path, path, overwrite=True)
+  tf.io.gfile.rename(tmp_path, path, overwrite=True)
 
 
 class abstractclassmethod(classmethod):  # pylint: disable=invalid-name
@@ -257,7 +257,7 @@ def read_checksum_digest(path, checksum_cls=hashlib.sha256):
   """Given a hash constructor, returns checksum digest and size of file."""
   checksum = checksum_cls()
   size = 0
-  with tf.gfile.Open(path, "rb") as f:
+  with tf.io.gfile.GFile(path, "rb") as f:
     while True:
       block = f.read(io.DEFAULT_BUFFER_SIZE)
       size += len(block)
