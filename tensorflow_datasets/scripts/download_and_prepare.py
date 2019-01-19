@@ -140,4 +140,4 @@ def main(_):
 
 if __name__ == "__main__":
   tf.compat.v1.enable_eager_execution()
-  app.run()
+  app.run(main)
