@@ -6,9 +6,11 @@ set -e  # fail and exit on any command erroring
 : "${TF_VERSION:?}"
 
 # Install ffmpeg for Audio FeatureConnector tests
-FFMPEG=$(command -v ffmpeg)
-if [[ -z "$FFMPEG" ]]
+if command -v ffmpeg 2>/dev/null
 then
+  echo "Using installed ffmpeg"
+else
+  echo "Installing ffmpeg"
   sudo add-apt-repository -y ppa:mc3man/trusty-media
   sudo apt-get -qq update
   sudo apt-get install -y ffmpeg
