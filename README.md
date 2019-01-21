@@ -81,7 +81,7 @@ print(info)
             'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
             'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
         },
-        num_examples=70000,
+        total_num_examples=70000,
         splits={
             u'test': <tfds.core.SplitInfo num_examples=10000>,
             u'train': <tfds.core.SplitInfo num_examples=60000>

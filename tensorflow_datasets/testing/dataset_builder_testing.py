@@ -248,7 +248,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
           expected_num_examples,
       )
     self.assertEqual(
-        builder.info.num_examples,
+        builder.info.splits.total_num_examples,
         sum(self.SPLITS.values()),
     )
 

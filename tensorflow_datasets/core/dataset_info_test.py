@@ -102,7 +102,7 @@ class DatasetInfoTest(tf.test.TestCase):
     self.assertTrue("test" in split_dict)
 
     # Assert that this is computed correctly.
-    self.assertEqual(70000, info.num_examples)
+    self.assertEqual(70000, info.splits.total_num_examples)
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
@@ -149,7 +149,7 @@ class DatasetInfoTest(tf.test.TestCase):
       builder.download_and_prepare()
 
       # Overall
-      self.assertEqual(30, builder.info.num_examples)
+      self.assertEqual(30, builder.info.splits.total_num_examples)
 
       # Per split.
       test_split = builder.info.splits["test"].get_proto()
@@ -176,7 +176,7 @@ class DatasetInfoTest(tf.test.TestCase):
     info = dataset_info.DatasetInfo(builder=self._builder,
                                     description="won't be updated")
     # No statistics in the above.
-    self.assertEqual(0, info.num_examples)
+    self.assertEqual(0, info.splits.total_num_examples)
     self.assertEqual(0, len(info.as_proto.schema.feature))
 
     # Partial update will happen here.
@@ -187,7 +187,7 @@ class DatasetInfoTest(tf.test.TestCase):
     self.assertEqual("won't be updated", info.description)
 
     # These are dynamically computed, so will be updated.
-    self.assertEqual(70000, info.num_examples)
+    self.assertEqual(70000, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
 
 

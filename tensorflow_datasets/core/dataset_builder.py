@@ -236,7 +236,7 @@ class DatasetBuilder(object):
 
         # Update the DatasetInfo metadata by computing statistics from the data.
         if download_config.compute_stats:
-          already_has_stats = bool(self.info.num_examples)
+          already_has_stats = bool(self.info.splits.total_num_examples)
           if already_has_stats:
             logging.info("Skipping computing stats because they are already "
                          "populated.")
@@ -326,7 +326,7 @@ class DatasetBuilder(object):
     """as_dataset for a single split."""
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
-      batch_size = self.info.num_examples or sys.maxsize
+      batch_size = self.info.splits.total_num_examples or sys.maxsize
 
     dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
     if batch_size > 1:

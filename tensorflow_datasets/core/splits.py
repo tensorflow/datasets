@@ -515,6 +515,11 @@ class SplitDict(utils.NonMutableDict):
     # Return the proto.SplitInfo, sorted by name
     return sorted((s.get_proto() for s in self.values()), key=lambda s: s.name)
 
+  @property
+  def total_num_examples(self):
+    """Return the total number of examples."""
+    return sum(s.num_examples for s in self.values())
+
   def copy(self):
     return SplitDict.from_proto(self.to_proto())
 

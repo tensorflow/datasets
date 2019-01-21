@@ -132,7 +132,7 @@ class DatasetBuilderTest(tf.test.TestCase):
                        builder.info.splits[splits_lib.Split.TRAIN].num_examples)
       self.assertEqual(10,
                        builder.info.splits[splits_lib.Split.TEST].num_examples)
-      self.assertEqual(30, builder.info.num_examples)
+      self.assertEqual(30, builder.info.splits.total_num_examples)
 
   @tf.contrib.eager.run_test_in_graph_and_eager_modes()
   def test_load(self):

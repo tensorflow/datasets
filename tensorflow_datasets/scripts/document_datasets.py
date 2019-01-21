@@ -311,11 +311,11 @@ def make_feature_information(info):
 
 def make_statistics_information(info):
   """Make statistics information table."""
-  if not info.num_examples:
+  if not info.splits.total_num_examples:
     # That means that we have yet to calculate the statistics for this.
     return "None computed"
 
-  stats = [(info.num_examples, "ALL")]
+  stats = [(info.splits.total_num_examples, "ALL")]
   for split_name, split_info in info.splits.items():
     stats.append((split_info.num_examples, split_name.upper()))
   # Sort reverse on number of examples.

@@ -62,7 +62,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     description='{description}',
     urls={urls},
     features={features},
-    num_examples={num_examples},
+    total_num_examples={total_num_examples},
     splits={splits},
     supervised_keys={supervised_keys},
     citation='{citation}',
@@ -209,9 +209,17 @@ class DatasetInfo(object):
     self.as_proto.download_checksums.clear()
     self.as_proto.download_checksums.update(checksums)
 
+  # TODO(tfds): Delete before release
   @property
   def num_examples(self):
-    return sum(s.num_examples for s in self.splits.values())
+    """DEPRECATED. Please use `info.splits.total_num_examples` instead."""
+    raise AttributeError(
+        "ds_info.num_examples has been removed and replaced by:\n"
+        " * To get the total number of split:\n"
+        " total_examples = info.splits.total_num_examples\n"
+        " * To get the number of example of a particular split:\n"
+        " num_train_examples = info.splits['train'].num_examples"
+    )
 
   @property
   def initialized(self):
@@ -374,7 +382,7 @@ class DatasetInfo(object):
         name=self.name,
         version=self.version,
         description=self.description,
-        num_examples=self.num_examples,
+        total_num_examples=self.splits.total_num_examples,
         features=features_pprint,
         splits=splits_pprint,
         citation=citation_pprint,
