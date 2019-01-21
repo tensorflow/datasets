@@ -119,10 +119,7 @@ Returns checksums for downloaded urls.
 <h3 id="download"><code>download</code></h3>
 
 ``` python
-download(
-    url_or_urls,
-    async_=False
-)
+download(url_or_urls)
 ```
 
 Download given url(s).
@@ -131,7 +128,6 @@ Download given url(s).
 
 * <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
     url can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
-* <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
 
 #### Returns:
@@ -142,10 +138,7 @@ downloaded_path(s): `str`, The downloaded paths matching the given input
 <h3 id="download_and_extract"><code>download_and_extract</code></h3>
 
 ``` python
-download_and_extract(
-    url_or_urls,
-    async_=False
-)
+download_and_extract(url_or_urls)
 ```
 
 Download and extract given url_or_urls.
@@ -160,7 +153,6 @@ extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
 
 * <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
     url can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
-* <b>`async_`</b>: `bool`, defaults to False. If True, returns promise on result.
 
 If not explicitly specified in `Resource`, the extraction method will
 automatically be deduced from downloaded file name.
@@ -173,10 +165,7 @@ extracted_path(s): `str`, extracted paths of given URL(s).
 <h3 id="extract"><code>extract</code></h3>
 
 ``` python
-extract(
-    path_or_paths,
-    async_=False
-)
+extract(path_or_paths)
 ```
 
 Extract given path(s).
@@ -185,7 +174,6 @@ Extract given path(s).
 
 * <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract. Each
     path can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
-* <b>`async_`</b>: `bool`, default to False. If True, returns promise on result.
 
 If not explicitly specified in `Resource`, the extraction method is deduced
 from downloaded file name.

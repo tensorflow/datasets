@@ -361,8 +361,10 @@ class DatasetInfo(object):
         pprint.pformat(
             {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
             indent=8, width=1)[1:-1])
-    features_dict = self.features._feature_dict  # pylint: disable=protected-access
-    features_pprint = "FeaturesDict({\n %s\n    }" % (
+    # TODO(tfds): Should indent nested feature dict properly.
+    features_dict = self.features
+    features_pprint = "%s({\n %s\n    }" % (
+        type(features_dict).__name__,
         pprint.pformat({
             k: features_dict[k] for k in sorted(list(features_dict.keys()))
         }, indent=8, width=1)[1:-1])

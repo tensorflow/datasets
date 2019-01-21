@@ -273,7 +273,7 @@ Note:
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': FeaturesDict({
+    'objects': SequenceDict({
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
         'is_crowd': Tensor(shape=(), dtype=tf.bool),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
@@ -1214,7 +1214,7 @@ This data set contains roughly 59,000 examples of robot pushing motions, includi
 
 ### Features
 ```
-FeaturesDict({
+SequenceDict({
     'action': Tensor(shape=(4,), dtype=tf.float32),
     'endeffector_pos': Tensor(shape=(3,), dtype=tf.float32),
     'image_aux1': Image(shape=(64, 64, 3), dtype=tf.uint8),

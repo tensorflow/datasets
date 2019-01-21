@@ -286,13 +286,12 @@ def make_module_to_builder_dict():
 
 def _pprint_features_dict(features_dict, indent=0, add_prefix=True):
   """Pretty-print tfds.features.FeaturesDict."""
-  if isinstance(features_dict, tfds.features.FeaturesDict):
-    features_dict = features_dict._feature_dict  # pylint: disable=protected-access
-
   first_last_indent_str = " " * indent
   indent_str = " " * (indent + 4)
-  first_line = "%sFeaturesDict({" % (
-      first_last_indent_str if add_prefix else "")
+  first_line = "%s%s({" % (
+      first_last_indent_str if add_prefix else "",
+      type(features_dict).__name__,
+  )
   lines = [first_line]
   for k in sorted(list(features_dict.keys())):
     v = features_dict[k]

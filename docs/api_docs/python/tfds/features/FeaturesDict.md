@@ -6,12 +6,17 @@
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="__iter__"/>
+<meta itemprop="property" content="__len__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
+<meta itemprop="property" content="items"/>
+<meta itemprop="property" content="keys"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="save_metadata"/>
+<meta itemprop="property" content="values"/>
 </div>
 
 # tfds.features.FeaturesDict
@@ -135,6 +140,22 @@ __getitem__(key)
 
 Return the feature associated with the key.
 
+<h3 id="__iter__"><code>__iter__</code></h3>
+
+``` python
+__iter__()
+```
+
+
+
+<h3 id="__len__"><code>__len__</code></h3>
+
+``` python
+__len__()
+```
+
+
+
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 ``` python
@@ -167,6 +188,22 @@ get_tensor_info()
 
 See base class for details.
 
+<h3 id="items"><code>items</code></h3>
+
+``` python
+items()
+```
+
+
+
+<h3 id="keys"><code>keys</code></h3>
+
+``` python
+keys()
+```
+
+
+
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
 ``` python
@@ -188,6 +225,14 @@ save_metadata(
 ```
 
 See base class for details.
+
+<h3 id="values"><code>values</code></h3>
+
+``` python
+values()
+```
+
+
 
 
 

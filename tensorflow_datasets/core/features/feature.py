@@ -406,9 +406,29 @@ class FeaturesDict(FeatureConnector):
     super(FeaturesDict, self).__init__()
     self._feature_dict = {k: to_feature(v) for k, v in feature_dict.items()}
 
+  # Dict functions.
+  # In Python 3, should inherit from collections.abc.Mapping().
+
+  def keys(self):
+    return self._feature_dict.keys()
+
+  def items(self):
+    return self._feature_dict.items()
+
+  def values(self):
+    return self._feature_dict.values()
+
   def __getitem__(self, key):
     """Return the feature associated with the key."""
     return self._feature_dict[key]
+
+  def __len__(self):
+    return len(self._feature_dict)
+
+  def __iter__(self):
+    return iter(self._feature_dict)
+
+  # Feature functions
 
   def __repr__(self):
     """Display the feature dictionary."""
