@@ -77,8 +77,7 @@ class RegisteredTest(tf.test.TestCase):
     self.assertEqual(name, UnregisteredBuilder.name)
     self.assertNotIn(name, registered.list_builders())
 
-    with self.assertRaisesWithPredicateMatch(
-        ValueError, "Requesting the builder for an abstract class"):
+    with self.assertRaisesWithPredicateMatch(ValueError, "an abstract class"):
       registered.builder(name)
 
   def test_in_development(self):

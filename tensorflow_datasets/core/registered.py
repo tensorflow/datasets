@@ -71,8 +71,8 @@ class DatasetNotFoundError(ValueError):
   def __init__(self, name, is_abstract=False, in_development=False):
     all_datasets_str = "\n\t- ".join([""] + list_builders())
     if is_abstract:
-      error_string = ("Dataset %s not found. "
-                      "Requesting the builder for an abstract class\n"
+      error_string = ("Dataset %s is an abstract class so cannot be created. "
+                      "Please make sure to instantiate all abstract methods.\n"
                       "%s") % (name, _DATASET_NOT_FOUND_ERR)
     elif in_development:
       error_string = ("Dataset %s is under active development and is not "
