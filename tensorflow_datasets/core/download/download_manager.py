@@ -368,4 +368,5 @@ else:
 def _map_promise(map_fn, all_inputs):
   """Map the function into each element and resolve the promise."""
   all_promises = utils.map_nested(map_fn, all_inputs)  # Apply the function
-  return utils.map_nested(_wait_on_promise, all_promises)
+  res = utils.map_nested(_wait_on_promise, all_promises)
+  return res
