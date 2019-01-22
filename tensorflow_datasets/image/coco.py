@@ -205,7 +205,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
 
     # Iterate over all images
     annotation_skipped = 0
-    for image_info in images:
+    for image_info in sorted(images, key=lambda x: x["id"]):
       if has_annotation:
         # Each instance annotation is a dict:
         # {

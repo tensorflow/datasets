@@ -604,6 +604,9 @@ class GeneratorBasedBuilder(DatasetBuilder):
     the previous case, the train split would contains 10/13 of the examples,
     while the validation split would contain 3/13.
 
+    Warning: Each shard shouldn't be bigger than 4GiB as shards are loaded
+    entirely in memory during shuffling
+
     For downloads and extractions, use the given `download_manager`.
     Note that the `DownloadManager` caches downloads, so it is fine to have each
     generator attempt to download the source data.

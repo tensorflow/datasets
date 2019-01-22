@@ -23,6 +23,7 @@ import os
 
 from absl import logging
 from absl.testing import parameterized
+import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -145,6 +146,33 @@ class DatasetBuilderTest(tf.test.TestCase):
       data = list(dataset_utils.dataset_as_numpy(dataset))
       self.assertEqual(20, len(data))
       self.assertLess(data[0]["x"], 30)
+
+  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  def test_determinism(self):
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      ds = registered.load(
+          name="dummy_dataset_shared_generator",
+          data_dir=tmp_dir,
+          split=splits_lib.Split.TRAIN,
+          as_dataset_kwargs=dict(shuffle_files=False))
+      ds_values = list(dataset_utils.dataset_as_numpy(ds))
+
+      # Ensure determinism. If this test fail, this mean that numpy random
+      # module isn't always determinist (maybe between version, architecture,
+      # ...), and so our datasets aren't guarantee either
+      l = list(range(20))
+      np.random.RandomState(42).shuffle(l)
+      self.assertEqual(l, [
+          0, 17, 15, 1, 8, 5, 11, 3, 18, 16, 13, 2, 9, 19, 4, 12, 7, 10, 14, 6
+      ])
+
+      # Ensure determinism. If this test fails, this mean the dataset are not
+      # deterministically generated.
+      self.assertEqual(
+          [e["x"] for e in ds_values],
+          [24, 1, 3, 4, 15, 25, 0, 16, 21, 10, 6, 13, 27, 22, 12, 28, 9, 19,
+           18, 7],
+      )
 
   def test_build_data_dir(self):
     # Test that the dataset loads the data_dir for the builder's version

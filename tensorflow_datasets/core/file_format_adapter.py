@@ -66,7 +66,7 @@ class FileFormatAdapter(object):
     Args:
       generator_fn: returns generator yielding dictionaries of feature name to
         value.
-      output_files (list<str>): output files to write records to.
+      output_files: `list<str>`, output files to write records to.
     """
     raise NotImplementedError
 
@@ -194,9 +194,9 @@ class CSVAdapter(FileFormatAdapter):
 
 
 def do_files_exist(filenames):
-  """Whether all filenames exist."""
+  """Whether any of the filenames exist."""
   preexisting = [tf.io.gfile.exists(f) for f in filenames]
-  return all(preexisting)
+  return any(preexisting)
 
 
 @contextlib.contextmanager
@@ -243,7 +243,7 @@ def incomplete_dir(dirname):
       tf.io.gfile.rmtree(tmp_dir)
 
 
-def _shuffle_tfrecord(path):
+def _shuffle_tfrecord(path, random_gen):
   """Shuffle a single record file in memory."""
   # Read all records
   record_iter = tf.compat.v1.io.tf_record_iterator(path)
@@ -251,7 +251,7 @@ def _shuffle_tfrecord(path):
       r for r in tqdm.tqdm(record_iter, desc="Reading...", unit=" examples")
   ]
   # Shuffling in memory
-  random.shuffle(all_records)
+  random_gen.shuffle(all_records)
   # Write all record back
   with tf.io.TFRecordWriter(path) as writer:
     for record in tqdm.tqdm(all_records, desc="Writing...", unit=" examples"):
@@ -262,7 +262,8 @@ def _shuffle_tfrecord(path):
 def _write_tfrecords_from_generator(generator, output_files, shuffle=True):
   """Writes generated str records to output_files in round-robin order."""
   if do_files_exist(output_files):
-    return
+    raise ValueError(
+        "Pre-processed files already exists: {}.".format(output_files))
 
   with _incomplete_files(output_files) as tmp_files:
     # Write all shards
@@ -272,8 +273,12 @@ def _write_tfrecords_from_generator(generator, output_files, shuffle=True):
       _round_robin_write(writers, generator)
     # Shuffle each shard
     if shuffle:
+      # WARNING: Using np instead of Python random because Python random
+      # produce different values between Python 2 and 3 and between
+      # architectures
+      random_gen = np.random.RandomState(42)
       for path in tqdm.tqdm(tmp_files, desc="Shuffling...", unit=" shard"):
-        _shuffle_tfrecord(path)
+        _shuffle_tfrecord(path, random_gen=random_gen)
 
 
 def _round_robin_write(writers, generator):
@@ -285,7 +290,8 @@ def _round_robin_write(writers, generator):
 def _write_csv_from_generator(generator, output_files, writer_ctor=None):
   """Write records to CSVs using writer_ctor (defaults to csv.writer)."""
   if do_files_exist(output_files):
-    return
+    raise ValueError(
+        "Pre-processed files already exists: {}.".format(output_files))
 
   if writer_ctor is None:
     writer_ctor = csv.writer

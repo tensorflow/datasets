@@ -110,7 +110,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
     logging.info("%d files found.", len(files))
 
     # For each file
-    for filename in tf.io.gfile.listdir(filedir):
+    for filename in sorted(tf.io.gfile.listdir(filedir)):
       filepath = os.path.join(filedir, filename)
 
       # For each video inside the file

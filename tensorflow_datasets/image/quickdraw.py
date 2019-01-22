@@ -91,8 +91,7 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
     Yields:
       The QuickDraw examples, as defined in the dataset info features.
     """
-    for label in file_paths.keys():
-      path = file_paths[label]
+    for label, path in sorted(file_paths.items(), key=lambda x: x[0]):
       with tf.io.gfile.GFile(path, "rb") as f:
         class_images = np.load(f)
         for np_image in class_images:

@@ -21,7 +21,6 @@ from __future__ import print_function
 
 import collections
 import os
-import random
 
 import numpy as np
 import six
@@ -143,11 +142,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
           } for j in range(num_images)
       ])
 
-    # Shuffle the data to make sure classes are well distributed.
-    data = list(zip(images, labels))
-    random.shuffle(data)
-
-    for image, label in data:
+    for image, label in zip(images, labels):
       features = {"image": image}
       features.update(label)
       yield features
