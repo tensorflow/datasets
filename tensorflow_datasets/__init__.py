@@ -41,6 +41,7 @@ Documentation:
 # pylint: enable=line-too-long
 
 
+
 # Copied from tensorflow/probability
 # Ensure TensorFlow is importable and its version is sufficiently recent. This
 # needs to happen before anything else, since the imports below will try to
@@ -88,6 +89,7 @@ _ensure_tf_install()
 
 
 # Imports for registration
+# pylint: disable=g-import-not-at-top
 from tensorflow_datasets import audio
 from tensorflow_datasets import image
 from tensorflow_datasets import text
@@ -101,3 +103,4 @@ from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
 # __all__ for import * as well as documentation
 from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
 __all__ = public_api.__all__
+
