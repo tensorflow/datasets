@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -v  # print commands as they're executed
+set -vx  # print command from file as well as evaluated command
 
 # Instead of exiting on any failure with "set -e", we'll call set_status after
 # each command and exit $STATUS at the end.

@@ -84,6 +84,10 @@ def _ensure_tf_install():  # pylint: disable=g-statement-before-imports
             present=tf.__version__))
   # pylint: enable=g-import-not-at-top
 
+  # Compat for TF > 1.13
+  if not hasattr(tf.io.gfile, "GFile"):
+    tf.io.gfile.GFile = tf.gfile.GFile
+
 
 _ensure_tf_install()
 

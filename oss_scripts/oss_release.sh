@@ -1,7 +1,7 @@
 #!/bin/bash
 
-set -v  # print commands as they're executed
-set -e  # fail and exit on any command erroring
+set -vx  # print command from file as well as evaluated command
+set -e   # fail and exit on any command erroring
 
 function setup_env() {
   local py_version=$1
