@@ -177,10 +177,6 @@ class DatasetInfo(object):
 
   @property
   def splits(self):
-    if not self._fully_initialized:
-      # TODO(epot): Consider raising an error here instead?
-      logging.info("`splits` hasn't been fully initialized, statistics maybe"
-                   " missing.")
     return self._splits.copy()
 
   @splits.setter
