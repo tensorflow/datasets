@@ -22,7 +22,10 @@ from __future__ import division
 from __future__ import print_function
 
 from absl import app
+import tensorflow as tf
 import tensorflow_datasets as tfds
+
+tf.enable_eager_execution()
 
 
 def main(argv):
@@ -31,6 +34,13 @@ def main(argv):
   print(mnist, info)
   mnist_train = tfds.load('mnist', split='train')
   print(mnist_train)
+  mnist_subsplit = tfds.Split.TRAIN.subsplit(tfds.percent[:10])
+  mnist_train2 = tfds.load('mnist', split=mnist_subsplit)
+  print(mnist_train2)
+  for i, unused_row in enumerate(mnist_train2):
+    if i > 10:
+      break
+    print(i)
   cifar10, info = tfds.load('cifar10', with_info=True)
   print(cifar10, info)
   cifar10_np = tfds.dataset_as_numpy(cifar10)
