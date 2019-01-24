@@ -313,13 +313,7 @@ class DatasetInfo(object):
     # Load the metadata from disk
     if not tf.io.gfile.exists(json_filename):
       return False
-
-    with tf.io.gfile.GFile(json_filename, "r") as f:
-      dataset_info_json_str = f.read()
-
-    # Parse it back into a proto.
-    parsed_proto = json_format.Parse(dataset_info_json_str,
-                                     dataset_info_pb2.DatasetInfo())
+    parsed_proto = read_from_json(json_filename)
 
     # Update splits
     self.splits = splits_lib.SplitDict.from_proto(parsed_proto.splits)
@@ -332,7 +326,7 @@ class DatasetInfo(object):
     self.download_checksums = parsed_proto.download_checksums
     self.size_in_bytes = parsed_proto.size_in_bytes
 
-    # If we are restoring on-disk data, then we also restore all dataste info
+    # If we are restoring on-disk data, then we also restore all dataset info
     # information from the previously saved proto.
     # If we are loading from packaged data (only possible when we do not
     # restore previous data), then do not restore the info which are already
@@ -533,3 +527,13 @@ def get_dataset_feature_statistics(builder, split):
       feature_name_statistics.bytes_stats.CopyFrom(bytes_statistics)
 
   return statistics, schema
+
+
+def read_from_json(json_filename):
+  """Read JSON-formatted proto into DatasetInfo proto."""
+  with tf.io.gfile.GFile(json_filename) as f:
+    dataset_info_json_str = f.read()
+  # Parse it back into a proto.
+  parsed_proto = json_format.Parse(dataset_info_json_str,
+                                   dataset_info_pb2.DatasetInfo())
+  return parsed_proto
