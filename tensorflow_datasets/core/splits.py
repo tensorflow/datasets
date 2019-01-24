@@ -45,20 +45,25 @@ class SplitInfo(object):
 
 
 @six.add_metaclass(abc.ABCMeta)
-class _SplitDescriptorNode(object):
+class SplitBase(object):
+  # pylint: disable=line-too-long
   """Abstract base class for Split compositionality.
+
+  See the
+  [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+  for more information.
 
   There are three parts to the composition:
     1) The splits are composed (defined, merged, splitted,...) together before
        calling the `.as_dataset()` function. This is done with the `__add__`,
-       `__getitem__`, which return a tree of `_SplitDescriptorNode` (whose leaf
+       `__getitem__`, which return a tree of `SplitBase` (whose leaf
        are the `NamedSplit` objects)
 
     ```
     split = tfds.TRAIN + tfds.TEST.subsplit(tfds.percent[:50])
     ```
 
-    2) The `_SplitDescriptorNode` is forwarded to the `.as_dataset()` function
+    2) The `SplitBase` is forwarded to the `.as_dataset()` function
        to be resolved into actual read instruction. This is done by the
        `.get_read_instruction()` method which takes the real dataset splits
        (name, number of shards,...) and parse the tree to return a
@@ -77,6 +82,7 @@ class _SplitDescriptorNode(object):
     ```
 
   """
+  # pylint: enable=line-too-long
 
   @abc.abstractmethod
   def get_read_instruction(self, split_dict):
@@ -243,7 +249,7 @@ class PercentSlice(object):
 percent = PercentSlice  # pylint: disable=invalid-name
 
 
-class _SplitMerged(_SplitDescriptorNode):
+class _SplitMerged(SplitBase):
   """Represent two split descriptors merged together."""
 
   def __init__(self, split1, split2):
@@ -259,7 +265,7 @@ class _SplitMerged(_SplitDescriptorNode):
     return "({!r} + {!r})".format(self._split1, self._split2)
 
 
-class _SubSplit(_SplitDescriptorNode):
+class _SubSplit(SplitBase):
   """Represent a sub split of a split descriptor."""
 
   def __init__(self, split, slice_value):
@@ -282,7 +288,7 @@ class _SubSplit(_SplitDescriptorNode):
     return "{!r}(tfds.percent[{}])".format(self._split, slice_str)
 
 
-class NamedSplit(_SplitDescriptorNode):
+class NamedSplit(SplitBase):
   """Descriptor corresponding to a named split (train, test, ...).
 
   Each descriptor can be composed with other using addition or slice. Ex:
@@ -340,7 +346,7 @@ class NamedSplit(_SplitDescriptorNode):
     """Equality: tfds.Split.TRAIN == 'train'."""
     if isinstance(other, NamedSplit):
       return self._name == other._name   # pylint: disable=protected-access
-    elif isinstance(other, _SplitDescriptorNode):
+    elif isinstance(other, SplitBase):
       return False
     elif isinstance(other, six.string_types):  # Other should be string
       return self._name == other
@@ -385,6 +391,8 @@ class Split(object):
     you do not want to use this during model iteration as you may overfit to it.
   * `ALL`: Special value corresponding to all existing splits of a dataset
     merged together
+
+  Note: All splits, including compositions inherit from `tfds.core.SplitBase`
 
   See the
   [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)

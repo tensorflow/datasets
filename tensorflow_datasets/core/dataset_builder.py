@@ -263,8 +263,8 @@ class DatasetBuilder(object):
     Callers must pass arguments as keyword arguments.
 
     Args:
-      split: `tfds.Split`, which subset of the data to read. If None (default),
-        returns all splits in a dict
+      split: `tfds.core.SplitBase`, which subset of the data to read. If None
+        (default), returns all splits in a dict
         `<key: tfds.Split, value: tf.data.Dataset>`.
       batch_size: `int`, batch size. Note that variable-length features will
         be 0-padded if `batch_size > 1`. Users that want more custom behavior
@@ -304,7 +304,7 @@ class DatasetBuilder(object):
     datasets = []
     for split in splits:
       if isinstance(split, six.string_types):
-        split = splits_lib.NamedSplit(split)
+        split = splits_lib.Split(split)
       split_shuffle = shuffle_files
       if split_shuffle is None:
         # Shuffle files if training

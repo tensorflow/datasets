@@ -24,6 +24,7 @@ from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.lazy_imports import lazy_imports
 
 from tensorflow_datasets.core.splits import NamedSplit
+from tensorflow_datasets.core.splits import SplitBase
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
@@ -38,6 +39,7 @@ __all__ = [
     "get_tfds_path",
     "DatasetInfo",
     "NamedSplit",
+    "SplitBase",
     "SplitDict",
     "SplitGenerator",
     "SplitInfo",
