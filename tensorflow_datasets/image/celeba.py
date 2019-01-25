@@ -81,7 +81,7 @@ _CITATION = """\
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
-  VERSION = tfds.core.Version("0.2.0")
+  VERSION = tfds.core.Version("0.3.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -178,7 +178,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     attributes = self._process_celeba_config_file(attr_path)
     landmarks = self._process_celeba_config_file(landmarks_path)
 
-    for file_name in files:
+    for file_name in sorted(files):
       path = os.path.join(filedir, file_name)
 
       yield {
@@ -187,6 +187,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
               k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
           },
           "attributes": {
-              k: v for k, v in zip(attributes[0], attributes[1][file_name])
+              # atributes value are either 1 or -1, so convert to bool
+              k: v > 0 for k, v in zip(attributes[0], attributes[1][file_name])
           },
       }
