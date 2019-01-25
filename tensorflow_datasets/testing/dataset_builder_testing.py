@@ -153,8 +153,9 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     # all needed methods were implemented.
 
   def test_registered(self):
-    self.assertIn(self.builder.name, registered.list_builders(),
-                  "Dataset was not registered.")
+    is_registered = self.builder.name in registered.list_builders()
+    self.assertTrue(is_registered or self.builder.IN_DEVELOPMENT,
+                    "Dataset was not registered and is not `IN_DEVELOPMENT`.")
 
   def test_info(self):
     info = self.builder.info
