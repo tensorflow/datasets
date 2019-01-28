@@ -1,6 +1,6 @@
 # TensorFlow Datasets
 
-**Note: `tensorflow_datasets` is not yet released. Follow the [release tracking
+**Note: `tensorflow-datasets` is not yet released. Follow the [release tracking
 issue](https://github.com/tensorflow/datasets/issues/5) to be notified
 of release.**
 
@@ -17,13 +17,14 @@ or see our [API docs](https://github.com/tensorflow/datasets/tree/master/docs/ap
 ### Installation
 
 ```
-pip install tensorflow-datasets
-
-# Currently requires TF 1.13+, i.e. tf-nightly or tf-nightly-gpu to be installed
-# Some datasets require additional libraries; see setup.py extras_require
-
-# To use our nightly release
+# A stable tensorflow-datasets has not yet been released.
+# To use our nightly release:
 pip install tfds-nightly
+
+# Currently requires TF 1.13+, i.e. tf-nightly or tf-nightly-gpu, to be
+# installed.
+# Some datasets require additional libraries; see setup.py extras_require
+pip install tf-nightly
 ```
 
 ### Usage
