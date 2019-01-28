@@ -148,25 +148,33 @@ def dataset_as_numpy(dataset, graph=None):
   else:
     # Graph mode
 
-    # First create necessary graph ops
-    ds_iters = [None] * len(flat_ds)
-    with utils.maybe_with_graph(graph, create_if_none=False):
-      for i, ds_el in enumerate(flat_ds):
-        if isinstance(ds_el, tf.data.Dataset):
-          ds_iters[i] = tf.compat.v1.data.make_one_shot_iterator(
-              ds_el).get_next()
+    # First create iterators for datasets
+    ds_iters = [
+        tf.compat.v1.data.make_one_shot_iterator(ds_el).get_next()
+        for ds_el in flat_ds if _is_ds(ds_el)
+    ]
+    ds_iters = [_graph_dataset_iterator(ds_iter) for ds_iter in ds_iters]
 
-    # Then create NumPy items
-    # Shared session for tf.Tensor runs
-    with utils.nogpu_session(graph) as sess:
-      for ds_iter, ds_el in zip(ds_iters, flat_ds):
-        if ds_iter is None:
-          # Tensor
-          np_el = sess.run(ds_el)
-        else:
-          # Dataset
-          np_el = _graph_dataset_iterator(ds_iter, graph)
-        flat_np.append(np_el)
+    # Then create numpy arrays for tensors
+    with utils.nogpu_session(graph) as sess:  # Shared session for tf.Tensor
+      # Warning: call sess.run once to that shuffling provide the same values
+      # for all keys.
+      np_arrays = sess.run([
+          ds_el for ds_el in flat_ds
+          if not _is_ds(ds_el)
+      ])
+
+    # Merge the datasets iterators and np array
+    iter_ds = iter(ds_iters)
+    iter_array = iter(np_arrays)
+    flat_np = [
+        next(iter_ds) if _is_ds(ds_el) else next(iter_array)
+        for ds_el in flat_ds
+    ]
 
   # Nest
   return tf.contrib.framework.nest.pack_sequence_as(nested_ds, flat_np)
+
+
+def _is_ds(ds):
+  return isinstance(ds, tf.data.Dataset)
