@@ -29,10 +29,11 @@ class Video(sequence_feature.Sequence):
   """`FeatureConnector` for videos, png-encoding frames on disk.
 
   Video: The image connector accepts as input:
-    * uint8 array representing an video.
+    * uint8 array representing a video.
 
   Output:
-    video: tf.Tensor of type tf.uint8 and shape [num_frames, height, width, 3]
+    video: tf.Tensor of type tf.uint8 and shape
+      [num_frames, height, width, channels], where channels must be 1 or 3
 
   Example:
     * In the DatasetInfo object:
@@ -51,7 +52,7 @@ class Video(sequence_feature.Sequence):
 
     Args:
       shape: tuple of ints, the shape of the video (num_frames, height, width,
-        channels=3).
+        channels), where channels is 1 or 3.
 
     Raises:
       ValueError: If the shape is invalid
@@ -61,6 +62,8 @@ class Video(sequence_feature.Sequence):
       raise ValueError('Video shape should be of rank 4')
     if shape.count(None) > 1:
       raise ValueError('Video shape cannot have more than 1 unknown dim')
+    if shape[-1] not in (1, 3):
+      raise ValueError('Video channels must be 1 or 3, got %d' % shape[-1])
 
     super(Video, self).__init__(
         image_feature.Image(shape=shape[1:], encoding_format='png'),
