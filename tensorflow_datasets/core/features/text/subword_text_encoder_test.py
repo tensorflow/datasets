@@ -19,6 +19,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import os
 
@@ -46,29 +47,29 @@ class SubwordTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
     self.assertEqual((256 + 1 + len(self.vocab_list)), self.encoder.vocab_size)
 
   @parameterized.parameters(
-      (u'foo bar', [1, 4]),
-      (u'foobar foo bar<EOS>bar', [3, 2, 1, 4, 5, 4]),
+      ('foo bar', [1, 4]),
+      ('foobar foo bar<EOS>bar', [3, 2, 1, 4, 5, 4]),
       # Respects whitespace
-      (u'bar <EOS>bar', [2, 5, 4]),
-      (u'bar <EOS> bar', [2, 5, 38, 4]),
-      (u'bar<EOS> bar', [4, 5, 38, 4]),
+      ('bar <EOS>bar', [2, 5, 4]),
+      ('bar <EOS> bar', [2, 5, 38, 4]),
+      ('bar<EOS> bar', [4, 5, 38, 4]),
       # Invertible even with oov, respecting underscores and backslashes
-      (u'a_b!', [103, 101, 104, 39]),
-      (u'foo \\bar_!', [3, 38, 98, 4, 101, 39]),
-      (u'foo \\\\bar_!', [3, 38, 98, 98, 4, 101, 39]),
-      (u'hello world!', None),
-      (u'foo_ bar', None),
-      (u'foo _ bar', None),
-      (u'foo _bar', None),
-      (u'hello_world', None),
-      (u'hello_ world', None),
-      (u'hello _ world', None),
-      (u'hello _world', None),
-      (u'_', None),
+      ('a_b!', [103, 101, 104, 39]),
+      ('foo \\bar_!', [3, 38, 98, 4, 101, 39]),
+      ('foo \\\\bar_!', [3, 38, 98, 98, 4, 101, 39]),
+      ('hello world!', None),
+      ('foo_ bar', None),
+      ('foo _ bar', None),
+      ('foo _bar', None),
+      ('hello_world', None),
+      ('hello_ world', None),
+      ('hello _ world', None),
+      ('hello _world', None),
+      ('_', None),
       # Test that the underscore replacement string is unharmed
-      (u'\\&undsc', None),
+      ('\\&undsc', None),
       # Unicode encoded as bytes but decoded back to unicode character
-      (u'你', [234, 195, 166]),
+      ('你', [234, 195, 166]),
   )
   def test_encode_decode(self, text, expected_ids):
     ids = self.encoder.encode(text)
@@ -79,14 +80,14 @@ class SubwordTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
     self.assertEqual(tf.compat.as_text(text), self.encoder.decode(ids))
 
   def test_bad_bytes(self):
-    valid_unicode = u'你'
+    valid_unicode = '你'
     bad_bytes = [220 + len(self.vocab_list) + 1]
-    bad_ids = self.encoder.encode(u'你') + bad_bytes
+    bad_ids = self.encoder.encode('你') + bad_bytes
     text = self.encoder.decode(bad_ids)
     # Valid unicode character preserved
     self.assertEqual(valid_unicode, text[0])
     # Invalid byte converted to unknown character
-    self.assertEqual(u'\uFFFD', text[1])
+    self.assertEqual('\uFFFD', text[1])
 
   def test_vocab_file(self):
     vocab_file = os.path.join(self.get_temp_dir(), 'vocab')
