@@ -260,7 +260,7 @@ def np_to_list(elem):
     return elem
   elif isinstance(elem, np.ndarray):
     elem = np.split(elem, elem.shape[0])
-    elem = np.squeeze(elem, axis=0)
+    elem = [np.squeeze(e, axis=0) for e in elem]
     return elem
   else:
     raise ValueError(

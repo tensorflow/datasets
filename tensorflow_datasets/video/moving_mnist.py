@@ -10,7 +10,6 @@ import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.image.mnist import _MNIST_IMAGE_SIZE
 
 _OUT_RESOLUTION = (64, 64)
-_TOTAL_PADDING = tuple(o - _MNIST_IMAGE_SIZE for o in _OUT_RESOLUTION) # 36, 36
 _SEQUENCE_LENGTH = 20
 _IMAGES_PER_SEQUENCE = 2
 
@@ -38,17 +37,6 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
-    shape = (_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,)
-
-    # as Image - doesn't work with 1 as final dim?
-    # sequence = tfds.features.Image(shape=shape)
-
-    # as video - doesn't work with 1 as final dim?
-    # sequence = tfds.features.Video(shape=shape)
-
-    # as base tensor - space inefficient??
-    sequence = tfds.features.Tensor(shape=shape, dtype=tf.uint8)
-
     return tfds.core.DatasetInfo(
         builder=self,
         description=(
@@ -57,7 +45,8 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
           "`tfds.video.moving_sequence` for functions to generate training/"
           "validation data."),
         features=tfds.features.FeaturesDict(
-          dict(image_sequence=sequence)),
+          dict(image_sequence=tfds.features.Video(
+              shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,)))),
         # supervised_keys=("inputs",),
         urls=["http://www.cs.toronto.edu/~nitish/unsupervised_video/"],
         citation=_citation,
@@ -79,15 +68,15 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_path):
-    """Generate MOVING_MNIST sequences as a single.
+    """Generate MOVING_MNIST sequences.
 
     Args:
       data_path (str): Path to the data file
 
-    Returns:
-      10000 x 20 x 64 x 64 x 1 uint8 numpy array
+    Yields:
+      20 x 64 x 64 x 1 uint8 numpy arrays
     """
-    with tf.io.gfile.GFile(data_path, "r") as fp:
+    with tf.io.gfile.GFile(data_path, "rb") as fp:
       images = np.load(fp)
     images = np.transpose(images, (1, 0, 2, 3))
     images = np.expand_dims(images, axis=-1)
