@@ -149,22 +149,19 @@ def dataset_as_numpy(dataset, graph=None):
     # Graph mode
 
     # First create iterators for datasets
-    ds_iters = [
-        tf.compat.v1.data.make_one_shot_iterator(ds_el).get_next()
-        for ds_el in flat_ds if _is_ds(ds_el)
-    ]
-    ds_iters = [_graph_dataset_iterator(ds_iter) for ds_iter in ds_iters]
+    with utils.maybe_with_graph(graph, create_if_none=False):
+      ds_iters = [
+          tf.compat.v1.data.make_one_shot_iterator(ds_el).get_next()
+          for ds_el in flat_ds if _is_ds(ds_el)
+      ]
+    ds_iters = [_graph_dataset_iterator(ds_iter, graph) for ds_iter in ds_iters]
 
     # Then create numpy arrays for tensors
     with utils.nogpu_session(graph) as sess:  # Shared session for tf.Tensor
-      # Warning: call sess.run once to that shuffling provide the same values
-      # for all keys.
-      np_arrays = sess.run([
-          ds_el for ds_el in flat_ds
-          if not _is_ds(ds_el)
-      ])
+      # Calling sess.run once so that randomness is shared.
+      np_arrays = sess.run([tensor for tensor in flat_ds if not _is_ds(tensor)])
 
-    # Merge the datasets iterators and np array
+    # Merge the dataset iterators and np arrays
     iter_ds = iter(ds_iters)
     iter_array = iter(np_arrays)
     flat_np = [
