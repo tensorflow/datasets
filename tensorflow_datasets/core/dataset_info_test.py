@@ -31,6 +31,7 @@ from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
 
+tf.compat.v1.enable_eager_execution()
 
 _TFDS_DIR = py_utils.tfds_dir()
 _INFO_DIR = os.path.join(_TFDS_DIR, "dataset_info", "mnist", "1.0.0")
@@ -142,7 +143,7 @@ class DatasetInfoTest(tf.test.TestCase):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     _ = str(info)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes
+  @test_utils.run_in_graph_and_eager_modes()
   def test_statistics_generation(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
@@ -157,7 +158,7 @@ class DatasetInfoTest(tf.test.TestCase):
       self.assertEqual(10, test_split.statistics.num_examples)
       self.assertEqual(20, train_split.statistics.num_examples)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes
+  @test_utils.run_in_graph_and_eager_modes()
   def test_statistics_generation_variable_sizes(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)

@@ -34,6 +34,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import tf_utils
 
+tf.compat.v1.enable_eager_execution()
 
 # `os` module Functions for which tf.io.gfile equivalent should be preferred.
 FORBIDDEN_OS_FUNCTIONS = (
@@ -178,7 +179,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(data_dir=self.data_dir, config=config)  # pylint: disable=not-callable
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
     configs = self.builder.BUILDER_CONFIGS
     if configs:
