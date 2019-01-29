@@ -7,12 +7,9 @@ import functools
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.image.mnist import _MNIST_IMAGE_SIZE
 
 _OUT_RESOLUTION = (64, 64)
 _SEQUENCE_LENGTH = 20
-_IMAGES_PER_SEQUENCE = 2
-
 _citation = """
 @article{DBLP:journals/corr/SrivastavaMS15,
   author    = {Nitish Srivastava and
