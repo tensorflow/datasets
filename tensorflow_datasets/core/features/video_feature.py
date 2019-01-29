@@ -62,8 +62,6 @@ class Video(sequence_feature.Sequence):
       raise ValueError('Video shape should be of rank 4')
     if shape.count(None) > 1:
       raise ValueError('Video shape cannot have more than 1 unknown dim')
-    if shape[-1] not in (1, 3):
-      raise ValueError('Video channels must be 1 or 3, got %d' % shape[-1])
 
     super(Video, self).__init__(
         image_feature.Image(shape=shape[1:], encoding_format='png'),

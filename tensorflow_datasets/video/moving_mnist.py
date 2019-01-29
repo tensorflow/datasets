@@ -45,8 +45,7 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
           dict(image_sequence=tfds.features.Video(
               shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,)))),
         urls=["http://www.cs.toronto.edu/~nitish/unsupervised_video/"],
-        citation=_citation,
-        splits=[tfds.Split.TEST]
+        citation=_citation
     )
 
   def _split_generators(self, dl_manager):
