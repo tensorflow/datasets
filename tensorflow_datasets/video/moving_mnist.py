@@ -44,7 +44,6 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(
           dict(image_sequence=tfds.features.Video(
               shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,)))),
-        # supervised_keys=("inputs",),
         urls=["http://www.cs.toronto.edu/~nitish/unsupervised_video/"],
         citation=_citation,
         splits=[tfds.Split.TEST]
