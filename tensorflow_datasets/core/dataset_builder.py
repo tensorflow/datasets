@@ -169,7 +169,7 @@ class DatasetBuilder(object):
     else:
       # If defined, add pre-computed info to DatasetInfo (num samples, splits,
       # ...)
-      self.info.initialize_from_package_data()
+      self.info.initialize_from_bucket()
 
   @utils.memoized_property
   def info(self):

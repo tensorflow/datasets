@@ -43,6 +43,7 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -283,7 +284,7 @@ class DatasetInfo(object):
                            "w") as f:
       f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir, from_packaged_data=False):
+  def read_from_directory(self, dataset_info_dir, from_bucket=False):
     """Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -294,7 +295,7 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
-      from_packaged_data: `bool`, If data is restored from packaged data,
+      from_bucket: `bool`, If data is restored from info files on GCS,
         then only the informations not defined in the code are updated
 
     Returns:
@@ -324,10 +325,10 @@ class DatasetInfo(object):
 
     # If we are restoring on-disk data, then we also restore all dataset info
     # information from the previously saved proto.
-    # If we are loading from packaged data (only possible when we do not
+    # If we are loading from the GCS bucket (only possible when we do not
     # restore previous data), then do not restore the info which are already
     # defined in the code. Otherwise, we would overwrite code info.
-    if not from_packaged_data:
+    if not from_bucket:
       # Update the full proto
       self._info_proto = parsed_proto
 
@@ -342,13 +343,13 @@ class DatasetInfo(object):
 
     return True
 
-  def initialize_from_package_data(self):
-    """Initialize DatasetInfo from package data, returns True on success."""
-    pkg_path = os.path.join(utils.tfds_dir(), "dataset_info", self.name)
+  def initialize_from_bucket(self):
+    """Initialize DatasetInfo from GCS bucket info files."""
+    info_path = os.path.join(constants.DATASET_INFO_BUCKET, self.name)
     if self._builder.builder_config:
-      pkg_path = os.path.join(pkg_path, self._builder.builder_config.name)
-    pkg_path = os.path.join(pkg_path, str(self.version))
-    return self.read_from_directory(pkg_path, from_packaged_data=True)
+      info_path = os.path.join(info_path, self._builder.builder_config.name)
+    info_path = os.path.join(info_path, str(self.version))
+    return self.read_from_directory(info_path, from_bucket=True)
 
   def __repr__(self):
     return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(
