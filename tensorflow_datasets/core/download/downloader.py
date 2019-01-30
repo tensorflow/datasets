@@ -113,6 +113,16 @@ class _Downloader(object):
 
   def _sync_download(self, url, destination_path):
     """Synchronous version of `download` method."""
+    try:
+      # If url is on a filesystem that gfile understands, use copy. Otherwise,
+      # use requests.
+      path = os.path.join(destination_path, os.path.basename(url))
+      tf.io.gfile.copy(url, path)
+      hexdigest, size = py_utils.read_checksum_digest(
+          path, checksum_cls=self._checksumer)
+      return hexdigest, size
+    except tf.errors.UnimplementedError:
+      pass
     checksum = self._checksumer()
     session = requests.Session()
     if _DRIVE_URL.match(url):

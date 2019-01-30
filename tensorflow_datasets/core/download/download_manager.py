@@ -28,6 +28,7 @@ import promise
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import downloader
@@ -125,21 +126,23 @@ class DownloadManager(object):
   ...), you can pass a `tfds.download.Resource` as argument.
   """
 
+  @api_utils.disallow_positional_args
   def __init__(self,
-               dataset_name,
-               download_dir=None,
+               download_dir,
                extract_dir=None,
                manual_dir=None,
+               dataset_name=None,
                checksums=None,
                force_download=False,
                force_extraction=False):
     """Download manager constructor.
 
     Args:
-      dataset_name: `str`, name of dataset this instance will be used for.
       download_dir: `str`, path to directory where downloads are stored.
       extract_dir: `str`, path to directory where artifacts are extracted.
       manual_dir: `str`, path to manually downloaded/extracted data directory.
+      dataset_name: `str`, name of dataset this instance will be used for. If
+        provided, downloads will contain which datasets they were used for.
       checksums: `dict<str url, str sha256>`, url to sha256 of resource.
         Only URLs present are checked.
         If empty, checksum of (already) downloaded files is computed and can
@@ -153,8 +156,9 @@ class DownloadManager(object):
     self._recorded_download_checksums = {}
     self._download_sizes = {}
     self._download_dir = os.path.expanduser(download_dir)
-    self._extract_dir = os.path.expanduser(extract_dir)
-    self._manual_dir = os.path.expanduser(manual_dir)
+    self._extract_dir = os.path.expanduser(
+        extract_dir or os.path.join(download_dir, 'extracted'))
+    self._manual_dir = manual_dir and os.path.expanduser(manual_dir)
     tf.io.gfile.makedirs(self._download_dir)
     tf.io.gfile.makedirs(self._extract_dir)
     self._force_download = force_download
