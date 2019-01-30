@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
+import functools
 import os
 import sys
 
@@ -263,7 +264,7 @@ class DatasetBuilder(object):
     Callers must pass arguments as keyword arguments.
 
     Args:
-      split: `tfds.core.SplitBase`, which subset of the data to read. If None
+      split: `tfds.core.SplitBase`, which subset(s) of the data to read. If None
         (default), returns all splits in a dict
         `<key: tfds.Split, value: tf.data.Dataset>`.
       batch_size: `int`, batch size. Note that variable-length features will
@@ -294,36 +295,30 @@ class DatasetBuilder(object):
            "tfds.load() before trying to access the tf.data.Dataset object."
           ) % (self.name, self._data_dir_root))
 
+    # By default, return all splits
     if split is None:
-      splits = list(self.info.splits)
-      return_dict = True
-    else:
-      splits = [split]
-      return_dict = False
+      split = {s: s for s in self.info.splits}
 
-    datasets = []
-    for split in splits:
-      if isinstance(split, six.string_types):
-        split = splits_lib.Split(split)
-      split_shuffle = shuffle_files
-      if split_shuffle is None:
-        # Shuffle files if training
-        split_shuffle = split == splits_lib.Split.TRAIN
-      dataset = self._build_single_dataset(split=split,
-                                           shuffle_files=split_shuffle,
-                                           batch_size=batch_size,
-                                           as_supervised=as_supervised)
-      datasets.append(dataset)
-
-    if return_dict:
-      return dict(zip(splits, datasets))
-    else:
-      assert len(splits) == 1
-      return datasets[0]
+    # Create a dataset for each of the given splits
+    build_single_dataset = functools.partial(
+        self._build_single_dataset,
+        shuffle_files=shuffle_files,
+        batch_size=batch_size,
+        as_supervised=as_supervised,
+    )
+    datasets = utils.map_nested(build_single_dataset, split)
+    return datasets
 
   def _build_single_dataset(self, split, shuffle_files, batch_size,
                             as_supervised):
     """as_dataset for a single split."""
+    if isinstance(split, six.string_types):
+      split = splits_lib.Split(split)
+
+    if shuffle_files is None:
+      # Shuffle files if training
+      shuffle_files = split == splits_lib.Split.TRAIN
+
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize

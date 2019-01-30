@@ -40,12 +40,11 @@ tf.enable_eager_execution()
 print(tfds.list_builders())
 
 # Construct a tf.data.Dataset
-datasets = tfds.load(name="mnist")
-train_dataset, test_dataset = datasets["train"], datasets["test"]
+ds_train, ds_test = tfds.load(name="mnist", split=["train", "test"])
 
 # Build your input pipeline
-train_dataset = train_dataset.shuffle(1000).batch(128).prefetch(10)
-for features in train_dataset.take(1):
+ds_train = ds_train.shuffle(1000).batch(128).prefetch(10)
+for features in ds_train.take(1):
   image, label = features["image"], features["label"]
 ```
 

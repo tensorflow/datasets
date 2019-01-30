@@ -175,6 +175,21 @@ class DatasetBuilderTest(tf.test.TestCase):
            18, 7],
       )
 
+  @test_utils.run_in_graph_and_eager_modes()
+  def test_multi_split(self):
+    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      ds_train, ds_test = registered.load(
+          name="dummy_dataset_shared_generator",
+          data_dir=tmp_dir,
+          split=[splits_lib.Split.TRAIN, splits_lib.Split.TEST],
+          as_dataset_kwargs=dict(shuffle_files=False))
+
+      data = list(dataset_utils.dataset_as_numpy(ds_train))
+      self.assertEqual(20, len(data))
+
+      data = list(dataset_utils.dataset_as_numpy(ds_test))
+      self.assertEqual(10, len(data))
+
   def test_build_data_dir(self):
     # Test that the dataset loads the data_dir for the builder's version
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
