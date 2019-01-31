@@ -123,7 +123,6 @@ class _Downloader(object):
       return hexdigest, size
     except tf.errors.UnimplementedError:
       pass
-    checksum = self._checksumer()
     session = requests.Session()
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
@@ -141,6 +140,7 @@ class _Downloader(object):
         int(response.headers.get('Content-length', 0)) // unit_mb
     )
     with tf.io.gfile.GFile(path, 'wb') as file_:
+      checksum = self._checksumer()
       for block in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
         size += len(block)
 
@@ -151,8 +151,6 @@ class _Downloader(object):
           size_mb %= unit_mb
 
         checksum.update(block)
-        # TODO(pierrot): Test this is faster than doing checksum in the end
-        # and document results here.
         file_.write(block)
     self._pbar_url.update(1)
     return checksum.hexdigest(), size

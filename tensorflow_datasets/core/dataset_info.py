@@ -206,18 +206,6 @@ class DatasetInfo(object):
     self.as_proto.download_checksums.clear()
     self.as_proto.download_checksums.update(checksums)
 
-  # TODO(tfds): Delete before release
-  @property
-  def num_examples(self):
-    """DEPRECATED. Please use `info.splits.total_num_examples` instead."""
-    raise AttributeError(
-        "ds_info.num_examples has been removed and replaced by:\n"
-        " * To get the total number of split:\n"
-        " total_examples = info.splits.total_num_examples\n"
-        " * To get the number of example of a particular split:\n"
-        " num_train_examples = info.splits['train'].num_examples"
-    )
-
   @property
   def initialized(self):
     """Whether DatasetInfo has been fully initialized."""
@@ -267,15 +255,6 @@ class DatasetInfo(object):
 
   def write_to_directory(self, dataset_info_dir):
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
-    # TODO(tfds): Re-enable this check as currently there's a bug.
-    # Currently read_from_directory assumes self._fully_initialized
-    # should be set to True, but that assumes that write_to_directory was
-    # called on a DatasetInfo with self._fully_initialized = True.
-    # if not self._fully_initialized:
-    #   raise ValueError("Trying to write DatasetInfo to disk before updating "
-    #                    "dynamic properties. This is typically done in "
-    #                    "builder.download_and_prepare()")
-
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
       self.features.save_metadata(dataset_info_dir)
@@ -360,7 +339,6 @@ class DatasetInfo(object):
         pprint.pformat(
             {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
             indent=8, width=1)[1:-1])
-    # TODO(tfds): Should indent nested feature dict properly.
     features_dict = self.features
     features_pprint = "%s({\n %s\n    }" % (
         type(features_dict).__name__,

@@ -46,13 +46,7 @@ def build_dataset(instruction_dicts,
 
   def instruction_ds_to_file_ds(instruction):
     """Map from instruction to real datasets."""
-
     examples_ds = dataset_from_file_fn(instruction["filepath"])
-    # TODO(rsepassi): Replace masking with window and flat_map
-    # num, den = sum(mask), len(mask)
-    # Something like (adjusting for nested structure):
-    # examples_ds.window(den).flat_map(lambda ds: ds.take(num))
-
     mask_ds = tf.data.Dataset.from_tensor_slices(instruction["mask"])
     mask_ds = mask_ds.repeat(),
     # Zip the mask and real examples
