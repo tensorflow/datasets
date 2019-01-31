@@ -355,7 +355,8 @@ when their module is imported such that they can be accessed through
 `tfds.builder` and `tfds.load`.
 
 If you're contributing the dataset to `tensorflow/datasets`, add the module
-import to `tensorflow_datasets/__init__.py`.
+import to its subdirectory's `__init__.py`
+(e.g. [`image/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/__init__.py).
 
 ### 2. Run `download_and_prepare` locally.
 

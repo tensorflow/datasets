@@ -120,6 +120,9 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
         "test_data/fake_examples/%s" % self.builder.name)
+    if not tf.io.gfile.exists(self.example_dir):
+      err_msg = "fake_examples dir %s not found."
+      raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
 
