@@ -123,7 +123,7 @@ class DatasetAsNumPyTest(tf.test.TestCase):
       self.assertEqual(i + 2, el1["c"][0])
       self.assertEqual(i + 3, el1["c"][1])
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_in_graph_and_eager_modes()
   def test_tensors_match(self):
     t = tf.random.uniform(
         shape=(50, 3),
