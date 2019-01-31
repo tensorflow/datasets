@@ -90,9 +90,9 @@ def build_dataset(instruction_dicts,
 
 def _eager_dataset_iterator(dataset):
   for item in dataset:
-    flat = tf.contrib.framework.nest.flatten(item)
+    flat = tf.nest.flatten(item)
     flat = [el.numpy() for el in flat]
-    yield tf.contrib.framework.nest.pack_sequence_as(item, flat)
+    yield tf.nest.pack_sequence_as(item, flat)
 
 
 def _graph_dataset_iterator(ds_item, graph=None):
@@ -124,13 +124,13 @@ def dataset_as_numpy(dataset, graph=None):
   del dataset
 
   # Flatten
-  flat_ds = tf.contrib.framework.nest.flatten(nested_ds)
+  flat_ds = tf.nest.flatten(nested_ds)
   flat_np = []
 
   # Type check for Tensors and Datasets
   for ds_el in flat_ds:
     types = [type(el) for el in flat_ds]
-    types = tf.contrib.framework.nest.pack_sequence_as(nested_ds, types)
+    types = tf.nest.pack_sequence_as(nested_ds, types)
     if not isinstance(ds_el, (tf.Tensor, tf.data.Dataset)):
       raise ValueError("Arguments to dataset_as_numpy must be tf.Tensors or "
                        "tf.data.Datasets. Got: %s" % types)
@@ -170,7 +170,7 @@ def dataset_as_numpy(dataset, graph=None):
     ]
 
   # Nest
-  return tf.contrib.framework.nest.pack_sequence_as(nested_ds, flat_np)
+  return tf.nest.pack_sequence_as(nested_ds, flat_np)
 
 
 def _is_ds(ds):

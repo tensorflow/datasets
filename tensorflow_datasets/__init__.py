@@ -86,6 +86,8 @@ def _ensure_tf_install():  # pylint: disable=g-statement-before-imports
   # Compat for TF > 1.13
   if not hasattr(tf.io.gfile, "GFile"):
     tf.io.gfile.GFile = tf.gfile.GFile
+  if not hasattr(tf, "nest"):
+    tf.nest = tf.contrib.framework.nest
 
 
 _ensure_tf_install()
