@@ -16,7 +16,7 @@ or see our [API docs](https://github.com/tensorflow/datasets/tree/master/docs/ap
 
 ### Installation
 
-```
+```sh
 # A stable tensorflow-datasets has not yet been released.
 # To use our nightly release:
 pip install tfds-nightly
@@ -107,7 +107,7 @@ records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model
 components.
 
-```
+```python
 train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
 train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
 for example in tfds.dataset_as_numpy(train_ds):
@@ -117,7 +117,7 @@ for example in tfds.dataset_as_numpy(train_ds):
 You can also use `tfds.dataset_as_numpy` in conjunction with `batch_size=-1` to
 get the full dataset in NumPy arrays from the returned `tf.Tensor` object:
 
-```
+```python
 train_data = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
 numpy_data = tfds.dataset_as_numpy(train_data)
 numpy_images, numpy_labels = numpy_dataset["image"], numpy_dataset["label"]
