@@ -28,4 +28,6 @@ from tensorflow_datasets.image.mnist import MNIST
 from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
+from tensorflow_datasets.image.shapenet_r2n2 import ShapenetR2n2
+from tensorflow_datasets.image.shapenet_r2n2 import ShapenetR2n2Config
 from tensorflow_datasets.image.svhn import SvhnCropped
