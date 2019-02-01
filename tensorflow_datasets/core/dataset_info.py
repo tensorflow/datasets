@@ -410,7 +410,7 @@ def get_dataset_feature_statistics(builder, split):
   feature_to_min = {}
   feature_to_max = {}
 
-  np_dataset = dataset_utils.dataset_as_numpy(dataset)
+  np_dataset = dataset_utils.as_numpy(dataset)
   for example in tqdm.tqdm(np_dataset, unit=" examples"):
     statistics.num_examples += 1
 

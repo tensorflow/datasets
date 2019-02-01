@@ -62,7 +62,7 @@ builder.download_and_prepare()
 datasets = builder.as_dataset()
 
 # If you need NumPy arrays
-np_datasets = tfds.dataset_as_numpy(datasets)
+np_datasets = tfds.as_numpy(datasets)
 ```
 
 ---

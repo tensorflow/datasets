@@ -225,7 +225,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       dataset = builder.as_dataset(split=split_name)
       compare_shapes_and_types(builder.info.features.get_tensor_info(),
                                dataset.output_types, dataset.output_shapes)
-      examples = list(dataset_utils.dataset_as_numpy(
+      examples = list(dataset_utils.as_numpy(
           builder.as_dataset(split=split_name)))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
       self.assertLen(examples, expected_examples_number)

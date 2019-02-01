@@ -1,6 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.core.SplitDict" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="total_num_examples"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="__setitem__"/>
@@ -30,6 +31,14 @@ __init__()
 ```
 
 
+
+
+
+## Properties
+
+<h3 id="total_num_examples"><code>total_num_examples</code></h3>
+
+Return the total number of examples.
 
 
 

@@ -98,11 +98,18 @@ def _graph_dataset_iterator(ds_item, graph=None):
         break
 
 
+def dataset_as_numpy(*args, **kwargs):
+  """DEPRECATED. Renamed `tfds.as_numpy`."""
+  del args, kwargs
+  raise AttributeError(
+      "tfds.dataset_as_numpy has been renamed to tfds.as_numpy.")
+
+
 @api_utils.disallow_positional_args(allowed=["dataset"])
-def dataset_as_numpy(dataset, graph=None):
+def as_numpy(dataset, graph=None):
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
-  `dataset_as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
+  `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
   and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
 
   Args:
@@ -126,7 +133,7 @@ def dataset_as_numpy(dataset, graph=None):
     types = [type(el) for el in flat_ds]
     types = tf.nest.pack_sequence_as(nested_ds, types)
     if not isinstance(ds_el, (tf.Tensor, tf.data.Dataset)):
-      raise ValueError("Arguments to dataset_as_numpy must be tf.Tensors or "
+      raise ValueError("Arguments to as_numpy must be tf.Tensors or "
                        "tf.data.Datasets. Got: %s" % types)
 
   if tf.executing_eagerly():

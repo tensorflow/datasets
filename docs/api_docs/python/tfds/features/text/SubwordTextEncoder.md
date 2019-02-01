@@ -60,8 +60,8 @@ Note: To generate a vocabulary from a corpus, use
 * <b>`vocab_list`</b>: `list<str>`, list of subwords for the vocabulary. Note that an
     underscore at the end of a subword indicates the end of the word (i.e. a
     space will be inserted afterwards when decoding). Underscores in the
-    interior are disallowed and should use the underscore escape sequence
-    "\u".
+    interior of subwords are disallowed and should use the underscore
+    escape sequence.
 
 
 

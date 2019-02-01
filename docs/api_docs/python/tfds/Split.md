@@ -32,6 +32,8 @@ stages of training and evaluation.
 * `ALL`: Special value corresponding to all existing splits of a dataset
   merged together
 
+Note: All splits, including compositions inherit from <a href="../tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>
+
 See the
 [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
 for more information.

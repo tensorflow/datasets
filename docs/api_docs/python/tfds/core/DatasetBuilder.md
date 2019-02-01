@@ -52,7 +52,7 @@ assert isinstance(train_dataset, tf.data.Dataset)
 # And then the rest of your input pipeline
 train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
 train_dataset = train_dataset.prefetch(2)
-features = train_dataset.make_one_shot_iterator().get_next()
+features = tf.compat.v1.data.make_one_shot_iterator(train_dataset).get_next()
 image, label = features['image'], features['label']
 ```
 
@@ -110,8 +110,8 @@ Callers must pass arguments as keyword arguments.
 
 #### Args:
 
-* <b>`split`</b>: <a href="../../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read. If None (default),
-    returns all splits in a dict
+* <b>`split`</b>: <a href="../../tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>, which subset(s) of the data to read. If None
+    (default), returns all splits in a dict
     `<key: tfds.Split, value: tf.data.Dataset>`.
 * <b>`batch_size`</b>: `int`, batch size. Note that variable-length features will
     be 0-padded if `batch_size > 1`. Users that want more custom behavior

@@ -299,7 +299,7 @@ def features_encode_decode(features_dict, example, as_tensor=False):
     dataset = dataset.map(features_dict.decode_example)
 
     if not as_tensor:  # Evaluate to numpy array
-      for el in dataset_utils.dataset_as_numpy(dataset):
+      for el in dataset_utils.as_numpy(dataset):
         return el
     else:
       if tf.executing_eagerly():

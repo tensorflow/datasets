@@ -4,6 +4,8 @@ toc:
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds
+    - title: as_numpy
+      path: /datasets/api_docs/python/tfds/as_numpy
     - title: builder
       path: /datasets/api_docs/python/tfds/builder
     - title: dataset_as_numpy
@@ -34,6 +36,8 @@ toc:
       path: /datasets/api_docs/python/tfds/core/lazy_imports
     - title: NamedSplit
       path: /datasets/api_docs/python/tfds/core/NamedSplit
+    - title: SplitBase
+      path: /datasets/api_docs/python/tfds/core/SplitBase
     - title: SplitDict
       path: /datasets/api_docs/python/tfds/core/SplitDict
     - title: SplitGenerator

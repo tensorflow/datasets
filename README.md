@@ -99,10 +99,10 @@ print(info)
   )
 ```
 
-### NumPy Usage with `tfds.dataset_as_numpy`
+### NumPy Usage with `tfds.as_numpy`
 
 As a convenience for users that want simple NumPy arrays in their programs, you
-can use `tfds.dataset_as_numpy` to return a generator that yields NumPy array
+can use `tfds.as_numpy` to return a generator that yields NumPy array
 records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model
 components.
@@ -110,16 +110,16 @@ components.
 ```python
 train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
 train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
-for example in tfds.dataset_as_numpy(train_ds):
+for example in tfds.as_numpy(train_ds):
   numpy_images, numpy_labels = example["image"], example["label"]
 ```
 
-You can also use `tfds.dataset_as_numpy` in conjunction with `batch_size=-1` to
+You can also use `tfds.as_numpy` in conjunction with `batch_size=-1` to
 get the full dataset in NumPy arrays from the returned `tf.Tensor` object:
 
 ```python
 train_data = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
-numpy_data = tfds.dataset_as_numpy(train_data)
+numpy_data = tfds.as_numpy(train_data)
 numpy_images, numpy_labels = numpy_dataset["image"], numpy_dataset["label"]
 ```
 

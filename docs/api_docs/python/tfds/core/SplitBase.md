@@ -1,74 +1,55 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
-<meta itemprop="name" content="tfds.core.NamedSplit" />
+<meta itemprop="name" content="tfds.core.SplitBase" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="__add__"/>
 <meta itemprop="property" content="__eq__"/>
-<meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="get_read_instruction"/>
 <meta itemprop="property" content="subsplit"/>
 </div>
 
-# tfds.core.NamedSplit
+# tfds.core.SplitBase
 
-## Class `NamedSplit`
+## Class `SplitBase`
 
-Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
+
 
 
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
-Descriptor corresponding to a named split (train, test, ...).
+Abstract base class for Split compositionality.
 
-Each descriptor can be composed with other using addition or slice. Ex:
+See the
+[guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
+for more information.
 
-```
-split = tfds.Split.TRAIN.subsplit(tfds.percent[0:25]) + tfds.Split.TEST
-```
+There are three parts to the composition:
+  1) The splits are composed (defined, merged, splitted,...) together before
+     calling the `.as_dataset()` function. This is done with the `__add__`,
+     `__getitem__`, which return a tree of `SplitBase` (whose leaf
+     are the `NamedSplit` objects)
 
-The resulting split will correspond to 25% of the train split merged with
-100% of the test split.
+  ```
+  split = tfds.TRAIN + tfds.TEST.subsplit(tfds.percent[:50])
+  ```
 
-Warning:
-  A split cannot be added twice, so the following will fail:
+  2) The `SplitBase` is forwarded to the `.as_dataset()` function
+     to be resolved into actual read instruction. This is done by the
+     `.get_read_instruction()` method which takes the real dataset splits
+     (name, number of shards,...) and parse the tree to return a
+     `SplitReadInstruction()` object
 
-```
-split = (
-    tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
-    tfds.Split.TRAIN.subsplit(tfds.percent[75:])
-)  # Error
-split = tfds.Split.TEST + tfds.Split.ALL  # Error
-```
+  ```
+  read_instruction = split.get_read_instruction(self.info.splits)
+  ```
 
-Warning:
-  The slices can be applied only one time. So the following are valid:
+  3) The `SplitReadInstruction` is then used in the `tf.data.Dataset` pipeline
+     to define which files to read and how to skip examples within file.
 
-```
-split = (
-    tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
-    tfds.Split.TEST.subsplit(tfds.percent[:50])
-)
-split = (tfds.Split.TRAIN + tfds.Split.TEST).subsplit(tfds.percent[:50])
-```
-
-  But not:
-
-```
-train = tfds.Split.TRAIN
-test = tfds.Split.TEST
-split = train.subsplit(tfds.percent[:25]).subsplit(tfds.percent[:25])
-split = (train.subsplit(tfds.percent[:25]) + test).subsplit(tfds.percent[:50])
-```
-
-<h2 id="__init__"><code>__init__</code></h2>
-
-``` python
-__init__(name)
-```
-
-
-
-
+  ```
+  files_to_read = read_instruction.split_info_list
+  slice_per_file = read_instruction.slice_list
+  ```
 
 ## Methods
 
@@ -94,7 +75,16 @@ Equality: tfds.Split.TRAIN == 'train'.
 get_read_instruction(split_dict)
 ```
 
+Parse the descriptor tree and compile all read instructions together.
 
+#### Args:
+
+* <b>`split_dict`</b>: `dict`, The `dict[split_name, SplitInfo]` of the dataset
+
+
+#### Returns:
+
+* <b>`split_read_instruction`</b>: `SplitReadInstruction`
 
 <h3 id="subsplit"><code>subsplit</code></h3>
 
