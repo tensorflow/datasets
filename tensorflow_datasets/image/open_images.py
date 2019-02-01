@@ -178,7 +178,7 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
     paths = dl_manager.download_and_extract(_URLS)
     source_str2int = self.info.features['objects']['source'].str2int
     # Set the labels' names:
-    with tf.gfile.Open(paths['class_descriptions']) as classes_f:
+    with tf.io.gfile.GFile(paths['class_descriptions']) as classes_f:
       classes = [l.split(',')[0]
                  for l in classes_f.read().split('\n') if l]
     logging.info('Number of loaded classes: %s', len(classes))
@@ -254,7 +254,7 @@ def _load_objects(csv_paths, source_str2int, label_str2int,
                csv_paths, csv_positions, prefix)
   objects = collections.defaultdict(list)
   for i, labels_path in enumerate(csv_paths):
-    with tf.gfile.Open(labels_path) as csv_f:
+    with tf.io.gfile.GFile(labels_path) as csv_f:
       if csv_positions[i] > 0:
         csv_f.seek(csv_positions[i])
       else:
@@ -278,7 +278,7 @@ def _load_bboxes(csv_path, source_str2int, label_str2int,
   logging.info('Loading CSVs %s from positions %s with prefix %s',
                csv_path, csv_positions, prefix)
   boxes = collections.defaultdict(list)
-  with tf.gfile.Open(csv_path) as csv_f:
+  with tf.io.gfile.GFile(csv_path) as csv_f:
     if csv_positions[0] > 0:
       csv_f.seek(csv_positions[0])
     else:

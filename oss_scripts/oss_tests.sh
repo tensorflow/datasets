@@ -14,8 +14,21 @@ function set_status() {
     STATUS=$(($last_status || $STATUS))
 }
 
+# Certain datasets/tests don't work with TF2
+# Skip them here, and link to a GitHub issue that explains why it doesn't work
+# and what the plan is to support it.
+TF2_IGNORE_TESTS=""
+if [[ "$TF_VERSION" == "tf2"  ]]
+then
+  # * lsun_test: https://github.com/tensorflow/datasets/issues/34
+  TF2_IGNORE_TESTS="
+  tensorflow_datasets/image/lsun_test.py
+  "
+fi
+TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
+
 # Run Tests
-pytest --ignore="tensorflow_datasets/core/test_utils.py"
+pytest $TF2_IGNORE --ignore="tensorflow_datasets/core/test_utils.py"
 set_status
 
 # Test notebooks
