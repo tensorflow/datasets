@@ -24,7 +24,6 @@ import itertools
 import os
 
 from absl.testing import parameterized
-import promise
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -32,6 +31,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tf_utils
 
 tf.compat.v1.enable_eager_execution()
@@ -166,18 +166,12 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertIsInstance(info, dataset_info.DatasetInfo)
     self.assertEqual(self.builder.name, info.name)
 
-  def _get_dl_extract_result(self, url, async_=False):
+  def _get_dl_extract_result(self, url):
     del url
     if self.DL_EXTRACT_RESULT is None:
-      res = self.example_dir
-    elif isinstance(self.DL_EXTRACT_RESULT, dict):
-      res = {k: os.path.join(self.example_dir, v)
-             for k, v in self.DL_EXTRACT_RESULT.items()}
-    else:
-      res = os.path.join(self.example_dir,
-                         self.DL_EXTRACT_RESULT)
-    result_p = promise.Promise.resolve(res)
-    return async_ and result_p or res
+      return self.example_dir
+    return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
+                            self.DL_EXTRACT_RESULT)
 
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(data_dir=self.data_dir, config=config)  # pylint: disable=not-callable
