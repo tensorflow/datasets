@@ -37,7 +37,6 @@ REQUIRED_PKGS = [
     'protobuf>=3.6.1',
     'pytz',
     'requests',
-    'scipy',
     'six',
     'tensorflow-metadata',
     'termcolor',
@@ -71,6 +70,8 @@ DATASET_FILES = [
 
 DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'cats_vs_dogs': ['matplotlib'],
+    'svhn': ['scipy'],
 }
 
 all_dataset_extras = []

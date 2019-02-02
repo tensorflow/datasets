@@ -51,6 +51,26 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def matplotlib(cls):
+    return _try_import("matplotlib")
+
+  @utils.classproperty
+  @classmethod
+  def pyplot(cls):
+    return _try_import("matplotlib.pyplot")
+
+  @utils.classproperty
+  @classmethod
+  def scipy(cls):
+    return _try_import("scipy")
+
+  @utils.classproperty
+  @classmethod
+  def scipy_io(cls):
+    return _try_import("scipy.io")
+
+  @utils.classproperty
+  @classmethod
   def os(cls):
     """For testing purposes only."""
     return _try_import("os")
