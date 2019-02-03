@@ -51,6 +51,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def jsonlines(cls):
+    return _try_import("jsonlines")
+
+  @utils.classproperty
+  @classmethod
   def matplotlib(cls):
     return _try_import("matplotlib")
 

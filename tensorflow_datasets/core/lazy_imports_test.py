@@ -27,6 +27,7 @@ import tensorflow_datasets as tfds
 class LazyImportsTest(parameterized.TestCase, tf.test.TestCase):
 
   @parameterized.parameters(
+      "jsonlines",
       "matplotlib",
       "os",
       "pydub",
