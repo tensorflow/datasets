@@ -5,10 +5,14 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
+from tensorflow_datasets.core import test_utils
 import tensorflow_datasets.video.moving_sequence as ms
 
+test_utils.run_test_in_graph_and_eager_modes = tf.contrib.eager.run_test_in_graph_and_eager_modes
+
+
 class MovingSequenceTest(tf.test.TestCase):
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_test_in_graph_and_eager_modes()
   def test_images_as_moving_sequence(self):
     h, w = (28, 28)
     sequence_length = 8
@@ -21,13 +25,8 @@ class MovingSequenceTest(tf.test.TestCase):
     out_size = (h + sequence_length, w + sequence_length)
     start_position = tf.constant([0, 0], dtype=tf.float32)
 
-
-    images = tf.expand_dims(image, axis=0)
-    velocities = tf.expand_dims(velocity, axis=0)
-    start_positions = tf.expand_dims(start_position, axis=0)
-
-    sequence = ms.images_as_moving_sequence(
-        images, start_positions=start_positions, velocities=velocities,
+    sequence = ms.image_as_moving_sequence(
+        image, start_position=start_position, velocity=velocity,
         output_size=out_size, sequence_length=sequence_length)
     sequence = tf.cast(sequence.image_sequence, tf.float32)
 
@@ -46,17 +45,17 @@ class MovingSequenceTest(tf.test.TestCase):
     graph = tf.Graph()
     with graph.as_default():
       image_floats = tf.placeholder(
-          shape=(None, None, None, 1), dtype=tf.float32)
-      images = tf.cast(image_floats, tf.uint8)
+          shape=(None, None, 1), dtype=tf.float32)
+      image = tf.cast(image_floats, tf.uint8)
       h, w = 64, 64
       sequence_length = 20
-      sequence = ms.images_as_moving_sequence(
-          images, output_size=(h, w),
+      sequence = ms.image_as_moving_sequence(
+          image, output_size=(h, w),
           sequence_length=sequence_length).image_sequence
 
-    with self.session(graph=graph) as sess:
-      for ni, ih, iw in ((2, 31, 32), (3, 37, 38)):
-        image_vals = np.random.uniform(high=255, size=(ni, ih, iw, 1))
+    with tf.Session(graph=graph) as sess:
+      for ih, iw in ((31, 32), (37, 38)):
+        image_vals = np.random.uniform(high=255, size=(ih, iw, 1))
         out = sess.run(sequence, feed_dict={image_floats: image_vals})
         self.assertAllEqual(out.shape, [sequence_length, h, w, 1])
 
