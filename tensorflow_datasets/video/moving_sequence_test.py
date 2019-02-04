@@ -54,7 +54,7 @@ class MovingSequenceTest(tf.test.TestCase):
           images, output_size=(h, w),
           sequence_length=sequence_length).image_sequence
 
-    with tf.Session(graph=graph) as sess:
+    with self.session(graph=graph) as sess:
       for ni, ih, iw in ((2, 31, 32), (3, 37, 38)):
         image_vals = np.random.uniform(high=255, size=(ni, ih, iw, 1))
         out = sess.run(sequence, feed_dict={image_floats: image_vals})

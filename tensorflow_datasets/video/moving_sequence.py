@@ -60,7 +60,9 @@ def _create_merged_moving_sequence(
         the output.
 
   Returns:
-    [sequence_length, out_h, out_w, n_channels] overlayed padded sequence.
+    [sequence_length, out_h, out_w, n_channels_out] overlayed padded sequence.
+    n_channels_out defined by background/merge_fn output
+    (same as n_channels in for default values).
   """
   if isinstance(merge_fn, six.string_types):
       merge_fn = _merge_fns[merge_fn]
@@ -91,7 +93,7 @@ def _create_merged_moving_sequence(
   if callable(background):
     background = background(out_image_shape, tf.uint8)
 
-  if background.shape != out_image_shape:
+  if background.shape[:-1] != out_image_shape[:-1]:
     raise ValueError(
         "background shape should be %s, got %s" %
         (str(background.shape), str(out_image_shape)))
