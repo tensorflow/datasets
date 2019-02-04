@@ -11,7 +11,6 @@ See the README on GitHub for further documentation.
 """
 
 import datetime
-import os
 import sys
 
 from setuptools import find_packages
@@ -38,7 +37,6 @@ REQUIRED_PKGS = [
     'protobuf>=3.6.1',
     'pytz',
     'requests',
-    'scipy',
     'six',
     'tensorflow-metadata',
     'termcolor',
@@ -64,19 +62,16 @@ if sys.version_info < (3, 4):
   # enum introduced in Python 3.4
   REQUIRED_PKGS.append('enum34')
 
-# DatasetInfo and Metadata files - everything under the
-# dataset_info directory.
-DATASET_INFO_AND_METADATA_FILES = [
-    os.path.join(dirpath, filename)[len('tensorflow_datasets/'):]
-    for dirpath, _, files in os.walk('tensorflow_datasets/dataset_info/')
-    for filename in files
-] + [  # Static files needed by datasets.
+# Static files needed by datasets.
+DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
 ]
 
 DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'cats_vs_dogs': ['matplotlib'],
+    'svhn': ['scipy'],
 }
 
 all_dataset_extras = []
@@ -102,7 +97,7 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': DATASET_INFO_AND_METADATA_FILES,
+        'tensorflow_datasets': DATASET_FILES,
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

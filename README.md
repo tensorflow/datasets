@@ -1,6 +1,6 @@
 # TensorFlow Datasets
 
-**Note: `tensorflow_datasets` is not yet released. Follow the [release tracking
+**Note: `tensorflow-datasets` is not yet released. Follow the [release tracking
 issue](https://github.com/tensorflow/datasets/issues/5) to be notified
 of release.**
 
@@ -16,14 +16,15 @@ or see our [API docs](https://github.com/tensorflow/datasets/tree/master/docs/ap
 
 ### Installation
 
-```
-pip install tensorflow-datasets
-
-# Currently requires TF 1.13+, i.e. tf-nightly or tf-nightly-gpu to be installed
-# Some datasets require additional libraries; see setup.py extras_require
-
-# To use our nightly release
+```sh
+# A stable tensorflow-datasets has not yet been released.
+# To use our nightly release:
 pip install tfds-nightly
+
+# Currently requires TF 1.13+, i.e. tf-nightly or tf-nightly-gpu, to be
+# installed.
+# Some datasets require additional libraries; see setup.py extras_require
+pip install tf-nightly
 ```
 
 ### Usage
@@ -39,12 +40,11 @@ tf.enable_eager_execution()
 print(tfds.list_builders())
 
 # Construct a tf.data.Dataset
-datasets = tfds.load(name="mnist")
-train_dataset, test_dataset = datasets["train"], datasets["test"]
+ds_train, ds_test = tfds.load(name="mnist", split=["train", "test"])
 
 # Build your input pipeline
-train_dataset = train_dataset.shuffle(1000).batch(128).prefetch(10)
-for features in train_dataset.take(1):
+ds_train = ds_train.shuffle(1000).batch(128).prefetch(10)
+for features in ds_train.take(1):
   image, label = features["image"], features["label"]
 ```
 
@@ -99,27 +99,27 @@ print(info)
   )
 ```
 
-### NumPy Usage with `tfds.dataset_as_numpy`
+### NumPy Usage with `tfds.as_numpy`
 
 As a convenience for users that want simple NumPy arrays in their programs, you
-can use `tfds.dataset_as_numpy` to return a generator that yields NumPy array
+can use `tfds.as_numpy` to return a generator that yields NumPy array
 records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model
 components.
 
-```
+```python
 train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
 train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
-for example in tfds.dataset_as_numpy(train_ds):
+for example in tfds.as_numpy(train_ds):
   numpy_images, numpy_labels = example["image"], example["label"]
 ```
 
-You can also use `tfds.dataset_as_numpy` in conjunction with `batch_size=-1` to
+You can also use `tfds.as_numpy` in conjunction with `batch_size=-1` to
 get the full dataset in NumPy arrays from the returned `tf.Tensor` object:
 
-```
+```python
 train_data = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
-numpy_data = tfds.dataset_as_numpy(train_data)
+numpy_data = tfds.as_numpy(train_data)
 numpy_images, numpy_labels = numpy_dataset["image"], numpy_dataset["label"]
 ```
 

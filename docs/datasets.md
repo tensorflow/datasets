@@ -9,7 +9,7 @@ tfds.list_builders()
 
 # Load a given dataset by name, along with the DatasetInfo
 data, info = tfds.load("mnist", with_info=True)
-train_data, test_data = data['train'], data['test']
+train_data, test_data = data['test'], data['train']
 assert isinstance(train_data, tf.data.Dataset)
 assert info.features['label'].num_classes == 10
 assert info.splits['train'].num_examples == 60000
@@ -21,13 +21,15 @@ builder.download_and_prepare()
 datasets = builder.as_dataset()
 
 # If you need NumPy arrays
-np_datasets = tfds.dataset_as_numpy(datasets)
+np_datasets = tfds.as_numpy(datasets)
 ```
 
 ---
 
 # Datasets
 
+* [`audio`](#audio)
+  * [`"nsynth"`](#nsynth)
 * [`image`](#image)
   * [`"celeb_a"`](#celeb_a)
   * [`"cifar10"`](#cifar10)
@@ -40,6 +42,8 @@ np_datasets = tfds.dataset_as_numpy(datasets)
   * [`"lsun"`](#lsun)
   * [`"mnist"`](#mnist)
   * [`"omniglot"`](#omniglot)
+  * [`"open_images_v4"`](#open_images_v4)
+  * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
   * [`"svhn_cropped"`](#svhn_cropped)
 * [`text`](#text)
   * [`"imdb_reviews"`](#imdb_reviews)
@@ -54,6 +58,92 @@ np_datasets = tfds.dataset_as_numpy(datasets)
 
 ---
 
+# [`audio`](#audio)
+
+## `"nsynth"`
+
+The NSynth Dataset is an audio dataset containing ~300k musical notes, each
+with a unique pitch, timbre, and envelope. Each note is annotated with three
+additional pieces of information based on a combination of human evaluation 
+and heuristic algorithms:
+ -Source: The method of sound production for the note's instrument.
+ -Family: The high-level family of which the note's instrument is a member.
+ -Qualities: Sonic qualities of the note.
+
+The dataset is split into train, valid, and test sets, with no instruments
+overlapping between the train set and the valid/test sets.
+
+
+* URL: [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
+* `DatasetBuilder`: [`tfds.audio.nsynth.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
+* Version: `v1.0.0`
+
+### Features
+```
+FeaturesDict({
+    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'instrument': FeaturesDict({
+        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    }),
+    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'qualities': FeaturesDict({
+        'bright': Tensor(shape=(), dtype=tf.bool),
+        'dark': Tensor(shape=(), dtype=tf.bool),
+        'distortion': Tensor(shape=(), dtype=tf.bool),
+        'fast_decay': Tensor(shape=(), dtype=tf.bool),
+        'long_release': Tensor(shape=(), dtype=tf.bool),
+        'multiphonic': Tensor(shape=(), dtype=tf.bool),
+        'nonlinear_env': Tensor(shape=(), dtype=tf.bool),
+        'percussive': Tensor(shape=(), dtype=tf.bool),
+        'reverb': Tensor(shape=(), dtype=tf.bool),
+        'tempo-synced': Tensor(shape=(), dtype=tf.bool),
+    }),
+    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    305,979
+TRAIN      |    289,205
+VALID      |     12,678
+TEST       |      4,096
+
+
+### Urls
+ * [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+@InProceedings{pmlr-v70-engel17a,
+  title = 	 {Neural Audio Synthesis of Musical Notes with {W}ave{N}et Autoencoders},
+  author = 	 {Jesse Engel and Cinjon Resnick and Adam Roberts and Sander Dieleman and Mohammad Norouzi and Douglas Eck and Karen Simonyan},
+  booktitle = 	 {Proceedings of the 34th International Conference on Machine Learning},
+  pages = 	 {1068--1077},
+  year = 	 {2017},
+  editor = 	 {Doina Precup and Yee Whye Teh},
+  volume = 	 {70},
+  series = 	 {Proceedings of Machine Learning Research},
+  address = 	 {International Convention Centre, Sydney, Australia},
+  month = 	 {06--11 Aug},
+  publisher = 	 {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v70/engel17a/engel17a.pdf},
+  url = 	 {http://proceedings.mlr.press/v70/engel17a.html},
+}
+
+```
+
+---
+
+
 # [`image`](#image)
 
 ## `"celeb_a"`
@@ -62,7 +152,7 @@ Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. Thes
 
 * URL: [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 * `DatasetBuilder`: [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
-* Version: `v0.2.0`
+* Version: `v0.3.0`
 
 ### Features
 ```
@@ -468,7 +558,7 @@ images for most of the concepts in the WordNet hierarchy.
 
 * URL: [http://image-net.org/](http://image-net.org/)
 * `DatasetBuilder`: [`tfds.image.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet.py)
-* Version: `v1.0.0`
+* Version: `v2.0.0`
 
 ### Features
 ```
@@ -682,6 +772,143 @@ SMALL1     |      2,720
 
 ---
 
+## `"open_images_v4"`
+
+Open Images is a dataset of ~9M images that have been annotated with image-level
+ labels and object bounding boxes.
+
+The training set of V4 contains 14.6M bounding boxes for 600 object classes on
+1.74M images, making it the largest existing dataset with object location
+annotations. The boxes have been largely manually drawn by professional
+annotators to ensure accuracy and consistency. The images are very diverse and
+often contain complex scenes with several objects (8.4 per image on average).
+Moreover, the dataset is annotated with image-level labels spanning thousands of
+classes.
+
+
+* URL: [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
+* `DatasetBuilder`: [`tfds.image.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/open_images.py)
+* Version: `v0.0.1`
+
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'objects': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    }),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |  1,910,098
+TRAIN      |  1,743,042
+TEST       |    125,436
+VALIDATION |     41,620
+
+
+### Urls
+ * [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+@article{OpenImages,
+  author = {Alina Kuznetsova and
+            Hassan Rom and
+            Neil Alldrin and
+            Jasper Uijlings and
+            Ivan Krasin and
+            Jordi Pont-Tuset and
+            Shahab Kamali and
+            Stefan Popov and
+            Matteo Malloci and
+            Tom Duerig and
+            Vittorio Ferrari},
+  title = {The Open Images Dataset V4: Unified image classification,
+           object detection, and visual relationship detection at scale},
+  year = {2018},
+  journal = {arXiv:1811.00982}
+}
+@article{OpenImages2,
+  author = {Krasin, Ivan and
+            Duerig, Tom and
+            Alldrin, Neil and
+            Ferrari, Vittorio
+            and Abu-El-Haija, Sami and
+            Kuznetsova, Alina and
+            Rom, Hassan and
+            Uijlings, Jasper and
+            Popov, Stefan and
+            Kamali, Shahab and
+            Malloci, Matteo and
+            Pont-Tuset, Jordi and
+            Veit, Andreas and
+            Belongie, Serge and
+            Gomes, Victor and
+            Gupta, Abhinav and
+            Sun, Chen and
+            Chechik, Gal and
+            Cai, David and
+            Feng, Zheyun and
+            Narayanan, Dhyanesh and
+            Murphy, Kevin},
+  title = {OpenImages: A public dataset for large-scale multi-label and
+           multi-class image classification.},
+  journal = {Dataset available from
+             https://storage.googleapis.com/openimages/web/index.html},
+  year={2017}
+}
+
+```
+
+---
+
+## `"quickdraw_bitmap"`
+
+The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images
+
+* URL: [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+* `DatasetBuilder`: [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
+* Version: `v1.0.0`
+
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=345),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      | 50,426,266
+ALL        | 50,426,266
+
+
+### Urls
+ * [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+
+### Supervised keys (for `as_supervised=True`)
+(u'image', u'label')
+
+### Citation
+```
+A Neural Representation of Sketch Drawings, D. Ha and D. Eck, arXiv:1704.03477v4, 2017.
+```
+
+---
+
 ## `"svhn_cropped"`
 
 The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
@@ -871,7 +1098,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=58517>),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
 })
 ```
 
@@ -881,7 +1108,7 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=58517>),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
 })
 ```
 
@@ -1141,8 +1368,8 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8215>),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8150>),
 })
 ```
 
@@ -1163,8 +1390,8 @@ FeaturesDict({
 
 ```
 FeaturesDict({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8222>),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8181>),
 })
 ```
 
@@ -1172,7 +1399,12 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        | 18,319,500
+TRAIN      | 18,316,500
+VALIDATION |      3,000
+
 
 ### Urls
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
@@ -1271,21 +1503,21 @@ This data set contains videos generated from Starcraft.
 `starcraft_video` is configured with `tfds.video.starcraft.StarcraftVideoConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"brawl_64"` (`v0.1.1`): Brawl map with 64x64 resolution.
+* `"brawl_64"` (`v0.1.2`): Brawl map with 64x64 resolution.
 
-* `"brawl_128"` (`v0.1.1`): Brawl map with 128x128 resolution.
+* `"brawl_128"` (`v0.1.2`): Brawl map with 128x128 resolution.
 
-* `"collect_mineral_shards_64"` (`v0.1.1`): CollectMineralShards map with 64x64 resolution.
+* `"collect_mineral_shards_64"` (`v0.1.2`): CollectMineralShards map with 64x64 resolution.
 
-* `"collect_mineral_shards_128"` (`v0.1.1`): CollectMineralShards map with 128x128 resolution.
+* `"collect_mineral_shards_128"` (`v0.1.2`): CollectMineralShards map with 128x128 resolution.
 
-* `"move_unit_to_border_64"` (`v0.1.1`): MoveUnitToBorder map with 64x64 resolution.
+* `"move_unit_to_border_64"` (`v0.1.2`): MoveUnitToBorder map with 64x64 resolution.
 
-* `"move_unit_to_border_128"` (`v0.1.1`): MoveUnitToBorder map with 128x128 resolution.
+* `"move_unit_to_border_128"` (`v0.1.2`): MoveUnitToBorder map with 128x128 resolution.
 
-* `"road_trip_with_medivac_64"` (`v0.1.1`): RoadTripWithMedivac map with 64x64 resolution.
+* `"road_trip_with_medivac_64"` (`v0.1.2`): RoadTripWithMedivac map with 64x64 resolution.
 
-* `"road_trip_with_medivac_128"` (`v0.1.1`): RoadTripWithMedivac map with 128x128 resolution.
+* `"road_trip_with_medivac_128"` (`v0.1.2`): RoadTripWithMedivac map with 128x128 resolution.
 
 
 ### `"starcraft_video/brawl_64"`
@@ -1386,7 +1618,26 @@ None
 
 ### Citation
 ```
-Towards Accurate Generative Models of Video: New Metrics & Challenges
+@article{DBLP:journals/corr/abs-1812-01717,
+  author    = {Thomas Unterthiner and
+               Sjoerd van Steenkiste and
+               Karol Kurach and
+               Rapha{"{e}}l Marinier and
+               Marcin Michalski and
+               Sylvain Gelly},
+  title     = {Towards Accurate Generative Models of Video: {A} New Metric and
+               Challenges},
+  journal   = {CoRR},
+  volume    = {abs/1812.01717},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1812.01717},
+  archivePrefix = {arXiv},
+  eprint    = {1812.01717},
+  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
 ```
 
 ---

@@ -43,7 +43,7 @@ def main(argv):
     print(i)
   cifar10, info = tfds.load('cifar10', with_info=True)
   print(cifar10, info)
-  cifar10_np = tfds.dataset_as_numpy(cifar10)
+  cifar10_np = tfds.as_numpy(cifar10)
   print(cifar10_np)
 
 

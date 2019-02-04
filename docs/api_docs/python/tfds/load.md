@@ -46,7 +46,7 @@ return ds
 ```
 
 If you'd like NumPy arrays instead of `tf.data.Dataset`s or `tf.Tensor`s,
-you can pass the return value to <a href="../tfds/dataset_as_numpy.md"><code>tfds.dataset_as_numpy</code></a>.
+you can pass the return value to <a href="../tfds/as_numpy.md"><code>tfds.as_numpy</code></a>.
 
 Callers must pass arguments as keyword arguments.
 

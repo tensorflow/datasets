@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import io
 import os
+import tarfile
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -53,13 +54,18 @@ pages={211-252}
 '''
 
 _LABELS_FNAME = 'image/imagenet2012_labels.txt'
+
+# This file contains the validation labels, in the alphabetic order of
+# corresponding image names (and not in the order they have been added to the
+# tar file).
 _VALIDATION_LABELS_FNAME = 'image/imagenet2012_validation_labels.txt'
 
 
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('2.0.0')
+  # 1.0.0 to 2.0.0: fix validation labels.
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -77,12 +83,23 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     )
 
   @staticmethod
-  def _get_validation_labels():
-    """Returns labels for validation."""
+  def _get_validation_labels(val_path):
+    """Returns labels for validation.
+
+    Args:
+      val_path: path to TAR file containing validation images. It is used to
+      retrieve the name of pictures and associate them to labels.
+
+    Returns:
+      dict, mapping from image name (str) to label (str).
+    """
     labels_path = tfds.core.get_tfds_path(_VALIDATION_LABELS_FNAME)
     with tf.io.gfile.GFile(labels_path) as labels_f:
-      labels = labels_f.readlines()
-    return [label.strip() for label in labels]
+      labels = labels_f.read().strip().split('\n')
+    with tf.io.gfile.GFile(val_path, 'rb') as tar_f_obj:
+      tar = tarfile.open(mode='r:', fileobj=tar_f_obj)
+      images = sorted(tar.getnames())
+    return dict(zip(images, labels))
 
   def _split_generators(self, dl_manager):
     train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
@@ -104,7 +121,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
             num_shards=5,
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
-                'validation_labels': self._get_validation_labels(),
+                'validation_labels': self._get_validation_labels(val_path),
             },
         ),
     ]
@@ -131,9 +148,9 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         }
 
   def _generate_examples_validation(self, archive, labels):
-    for (fname, fobj), label in zip(archive, labels):
+    for fname, fobj in archive:
       yield {
           'file_name': fname,
           'image': fobj,
-          'label': label,
+          'label': labels[fname],
       }

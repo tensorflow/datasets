@@ -61,7 +61,7 @@ _EXTRACTION_METHOD_TO_EXTS = [
 ]
 
 _KNOWN_EXTENSIONS = [
-    ext_ for ext_ in itertools.chain(
+    ext_ for ext_ in itertools.chain(  # pylint: disable=g-complex-comprehension
         *[extensions_ for _, extensions_ in _EXTRACTION_METHOD_TO_EXTS])]
 
 _NETLOC_COMMON_PREFIXES = [
@@ -286,12 +286,14 @@ class Resource(object):
     """
     info = self._get_info() or {}
     urls = set(info.get('urls', []) + [self.url])
-    dataset_names = set(info.get('dataset_names', []) + [dataset_name])
+    dataset_names = info.get('dataset_names', [])
+    if dataset_name:
+      dataset_names.append(dataset_name)
     if 'original_fname' in info and info['original_fname'] != original_fname:
       raise AssertionError(
           '`original_fname` "%s" stored in %s does NOT match "%s".' % (
               info['original_fname', self.info_path, original_fname]))
-    info = dict(urls=list(urls), dataset_names=list(dataset_names),
+    info = dict(urls=list(urls), dataset_names=list(set(dataset_names)),
                 original_fname=original_fname)
     with py_utils.atomic_write(self.info_path, 'w') as info_f:
       json.dump(info, info_f, sort_keys=True)

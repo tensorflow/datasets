@@ -22,6 +22,7 @@ from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter as file_adapter
 from tensorflow_datasets.core import units
+from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.dataset_utils import dataset_as_numpy
 from tensorflow_datasets.core.download import GenerateMode
 from tensorflow_datasets.core.registered import builder
@@ -32,6 +33,7 @@ from tensorflow_datasets.core.splits import Split
 
 __all__ = [
     "core",
+    "as_numpy",
     "dataset_as_numpy",
     "download",
     "features",

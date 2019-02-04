@@ -71,10 +71,10 @@ For more customization on the download/extraction (ex: passwords, output_name,
 
 ``` python
 __init__(
-    dataset_name,
-    download_dir=None,
+    download_dir,
     extract_dir=None,
     manual_dir=None,
+    dataset_name=None,
     checksums=None,
     force_download=False,
     force_extraction=False
@@ -85,10 +85,11 @@ Download manager constructor.
 
 #### Args:
 
-* <b>`dataset_name`</b>: `str`, name of dataset this instance will be used for.
 * <b>`download_dir`</b>: `str`, path to directory where downloads are stored.
 * <b>`extract_dir`</b>: `str`, path to directory where artifacts are extracted.
 * <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data directory.
+* <b>`dataset_name`</b>: `str`, name of dataset this instance will be used for. If
+    provided, downloads will contain which datasets they were used for.
 * <b>`checksums`</b>: `dict<str url, str sha256>`, url to sha256 of resource.
     Only URLs present are checked.
     If empty, checksum of (already) downloaded files is computed and can

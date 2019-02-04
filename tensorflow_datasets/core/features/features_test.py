@@ -26,6 +26,8 @@ import tensorflow as tf
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import test_utils
 
+tf.compat.v1.enable_eager_execution()
+
 
 class AnInputConnector(features_lib.FeaturesDict):
   """Simple FeatureConnector implementing the based methods used for test."""

@@ -83,8 +83,8 @@ Callers must pass arguments as keyword arguments.
 
 #### Args:
 
-* <b>`split`</b>: <a href="../../tfds/Split.md"><code>tfds.Split</code></a>, which subset of the data to read. If None (default),
-    returns all splits in a dict
+* <b>`split`</b>: <a href="../../tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>, which subset(s) of the data to read. If None
+    (default), returns all splits in a dict
     `<key: tfds.Split, value: tf.data.Dataset>`.
 * <b>`batch_size`</b>: `int`, batch size. Note that variable-length features will
     be 0-padded if `batch_size > 1`. Users that want more custom behavior

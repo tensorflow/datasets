@@ -31,9 +31,11 @@ from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
 
+tf.compat.v1.enable_eager_execution()
 
 _TFDS_DIR = py_utils.tfds_dir()
-_INFO_DIR = os.path.join(_TFDS_DIR, "dataset_info", "mnist", "1.0.0")
+_INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
+                         "mnist", "1.0.0")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
@@ -127,8 +129,7 @@ class DatasetInfoTest(tf.test.TestCase):
     # Assert what was read and then written and read again is the same.
     self.assertEqual(existing_json, new_json)
 
-  def test_reading_from_package_data(self):
-    # We have mnist's 1.0.0 checked in the package data, so this should work.
+  def test_reading_from_gcs_bucket(self):
     mnist_builder = mnist.MNIST(
         data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
     info = dataset_info.DatasetInfo(builder=mnist_builder)
@@ -142,7 +143,7 @@ class DatasetInfoTest(tf.test.TestCase):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     _ = str(info)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes
+  @test_utils.run_in_graph_and_eager_modes()
   def test_statistics_generation(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
@@ -157,7 +158,7 @@ class DatasetInfoTest(tf.test.TestCase):
       self.assertEqual(10, test_split.statistics.num_examples)
       self.assertEqual(20, train_split.statistics.num_examples)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes
+  @test_utils.run_in_graph_and_eager_modes()
   def test_statistics_generation_variable_sizes(self):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
@@ -171,7 +172,7 @@ class DatasetInfoTest(tf.test.TestCase):
       self.assertEqual(-1, schema_feature.shape.dim[1].size)
       self.assertEqual(3, schema_feature.shape.dim[2].size)
 
-  def test_updates_on_packaged_data(self):
+  def test_updates_on_bucket_info(self):
 
     info = dataset_info.DatasetInfo(builder=self._builder,
                                     description="won't be updated")
@@ -180,7 +181,7 @@ class DatasetInfoTest(tf.test.TestCase):
     self.assertEqual(0, len(info.as_proto.schema.feature))
 
     # Partial update will happen here.
-    info.read_from_directory(_INFO_DIR, from_packaged_data=True)
+    info.read_from_directory(_INFO_DIR, from_bucket=True)
 
     # Assert that description (things specified in the code) didn't change
     # but statistics are updated.

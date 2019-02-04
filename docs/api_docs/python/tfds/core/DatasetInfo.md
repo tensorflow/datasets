@@ -9,7 +9,6 @@
 <meta itemprop="property" content="features"/>
 <meta itemprop="property" content="initialized"/>
 <meta itemprop="property" content="name"/>
-<meta itemprop="property" content="num_examples"/>
 <meta itemprop="property" content="size_in_bytes"/>
 <meta itemprop="property" content="splits"/>
 <meta itemprop="property" content="supervised_keys"/>
@@ -17,7 +16,7 @@
 <meta itemprop="property" content="version"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="compute_dynamic_properties"/>
-<meta itemprop="property" content="initialize_from_package_data"/>
+<meta itemprop="property" content="initialize_from_bucket"/>
 <meta itemprop="property" content="read_from_directory"/>
 <meta itemprop="property" content="write_to_directory"/>
 </div>
@@ -113,10 +112,6 @@ Whether DatasetInfo has been fully initialized.
 
 
 
-<h3 id="num_examples"><code>num_examples</code></h3>
-
-
-
 <h3 id="size_in_bytes"><code>size_in_bytes</code></h3>
 
 
@@ -149,20 +144,20 @@ compute_dynamic_properties()
 
 
 
-<h3 id="initialize_from_package_data"><code>initialize_from_package_data</code></h3>
+<h3 id="initialize_from_bucket"><code>initialize_from_bucket</code></h3>
 
 ``` python
-initialize_from_package_data()
+initialize_from_bucket()
 ```
 
-Initialize DatasetInfo from package data, returns True on success.
+Initialize DatasetInfo from GCS bucket info files.
 
 <h3 id="read_from_directory"><code>read_from_directory</code></h3>
 
 ``` python
 read_from_directory(
     dataset_info_dir,
-    from_packaged_data=False
+    from_bucket=False
 )
 ```
 
@@ -177,7 +172,7 @@ This will overwrite all previous metadata.
 
 * <b>`dataset_info_dir`</b>: `str` The directory containing the metadata file. This
     should be the root directory of a specific dataset version.
-* <b>`from_packaged_data`</b>: `bool`, If data is restored from packaged data,
+* <b>`from_bucket`</b>: `bool`, If data is restored from info files on GCS,
     then only the informations not defined in the code are updated
 
 

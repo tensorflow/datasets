@@ -22,48 +22,24 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import random
 import tarfile
 import tempfile
 
 from absl import app
 from absl import flags
-import numpy as np
-import tensorflow as tf
 
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import imagenet
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.testing import _utils
 
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
 FLAGS = flags.FLAGS
-MIN_HEIGHT_WIDTH = 10
-MAX_HEIGHT_WIDTH = 15
-CHANNELS_NB = 3
 
 TRAIN_SYNSET_NUMBER = 10
 TRAIN_IMAGES_PER_SYNSET = 10
 VAL_IMAGES_NUMBER = 10
-
-
-def _get_random_picture():
-  height = random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
-  width = random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
-  return np.random.randint(
-      256, size=(height, width, CHANNELS_NB), dtype=np.uint8)
-
-
-def _get_random_jpeg():
-  image = _get_random_picture()
-  jpeg = tf.image.encode_jpeg(image)
-  with utils.nogpu_session() as sess:
-    res = sess.run(jpeg)
-  fobj = tempfile.NamedTemporaryFile(delete=False, mode='wb', suffix='.JPEG')
-  fobj.write(res)
-  fobj.close()
-  return fobj.name
 
 
 def _get_synset(synset_name):
@@ -72,7 +48,7 @@ def _get_synset(synset_name):
   tar = tarfile.open(mode='w', fileobj=fobj)
   for i in range(1, TRAIN_IMAGES_PER_SYNSET+1):
     fname = '%s_%s.JPEG' % (synset_name, i)
-    jpeg = _get_random_jpeg()
+    jpeg = _utils.get_random_jpeg()
     tar.add(jpeg, arcname=fname)
   fobj.close()
   return fobj.name
@@ -104,7 +80,7 @@ def _generate_val_archive():
   tar = tarfile.open(output_path, mode='w')
   for i in range(1, VAL_IMAGES_NUMBER+1):
     fname = 'ILSVRC2012_val_0000%03i.JPEG' % i
-    jpeg = _get_random_jpeg()
+    jpeg = _utils.get_random_jpeg()
     tar.add(jpeg, arcname=fname)
   tar.close()
 

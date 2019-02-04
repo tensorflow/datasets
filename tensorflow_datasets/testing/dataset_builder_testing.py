@@ -24,7 +24,6 @@ import itertools
 import os
 
 from absl.testing import parameterized
-import promise
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -32,8 +31,10 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tf_utils
 
+tf.compat.v1.enable_eager_execution()
 
 # `os` module Functions for which tf.io.gfile equivalent should be preferred.
 FORBIDDEN_OS_FUNCTIONS = (
@@ -119,6 +120,9 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
         "test_data/fake_examples/%s" % self.builder.name)
+    if not tf.io.gfile.exists(self.example_dir):
+      err_msg = "fake_examples dir %s not found."
+      raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
 
@@ -162,23 +166,17 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
     self.assertIsInstance(info, dataset_info.DatasetInfo)
     self.assertEqual(self.builder.name, info.name)
 
-  def _get_dl_extract_result(self, url, async_=False):
+  def _get_dl_extract_result(self, url):
     del url
     if self.DL_EXTRACT_RESULT is None:
-      res = self.example_dir
-    elif isinstance(self.DL_EXTRACT_RESULT, dict):
-      res = {k: os.path.join(self.example_dir, v)
-             for k, v in self.DL_EXTRACT_RESULT.items()}
-    else:
-      res = os.path.join(self.example_dir,
-                         self.DL_EXTRACT_RESULT)
-    result_p = promise.Promise.resolve(res)
-    return async_ and result_p or res
+      return self.example_dir
+    return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
+                            self.DL_EXTRACT_RESULT)
 
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(data_dir=self.data_dir, config=config)  # pylint: disable=not-callable
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
     configs = self.builder.BUILDER_CONFIGS
     if configs:
@@ -227,7 +225,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       dataset = builder.as_dataset(split=split_name)
       compare_shapes_and_types(builder.info.features.get_tensor_info(),
                                dataset.output_types, dataset.output_shapes)
-      examples = list(dataset_utils.dataset_as_numpy(
+      examples = list(dataset_utils.as_numpy(
           builder.as_dataset(split=split_name)))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
       self.assertLen(examples, expected_examples_number)

@@ -14,18 +14,21 @@ function set_status() {
     STATUS=$(($last_status || $STATUS))
 }
 
-# Run Eager tests
-# These tests call tf.enable_eager_execution at the top-level and must be run
-# separately so as not to run other tests in Eager mode.
-EAGER_TESTS="
-tensorflow_datasets/core/file_format_adapter_test.py
-"
-EAGER_IGNORE=$(for test in $EAGER_TESTS; do echo "--ignore=$test "; done)
-pytest $EAGER_TESTS
-set_status
+# Certain datasets/tests don't work with TF2
+# Skip them here, and link to a GitHub issue that explains why it doesn't work
+# and what the plan is to support it.
+TF2_IGNORE_TESTS=""
+if [[ "$TF_VERSION" == "tf2"  ]]
+then
+  # * lsun_test: https://github.com/tensorflow/datasets/issues/34
+  TF2_IGNORE_TESTS="
+  tensorflow_datasets/image/lsun_test.py
+  "
+fi
+TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 
-# Run other tests
-pytest $EAGER_IGNORE --ignore="tensorflow_datasets/core/test_utils.py"
+# Run Tests
+pytest $TF2_IGNORE --ignore="tensorflow_datasets/core/test_utils.py"
 set_status
 
 # Test notebooks

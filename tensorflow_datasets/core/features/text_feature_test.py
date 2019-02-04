@@ -25,6 +25,8 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.features.text import text_encoder
 
+tf.compat.v1.enable_eager_execution()
+
 
 class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
 
