@@ -2,7 +2,7 @@
 
 This page describes how to add support for a new dataset. If you want to use a
 dataset which isn't listed
-[here](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md),
+[here](datasets.md),
 then this document is for you.
 
 *   [Overview](#overview)
@@ -42,17 +42,17 @@ generate on a single machine. See the
 ## Writing `my_dataset.py`
 
 To add support for a dataset, you must write its "Builder" class, subclass of
-[`tfds.core.DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetBuilder.md)
+[`tfds.core.DatasetBuilder`](api_docs/python/tfds/core/DatasetBuilder.md)
 and implement the following methods:
 
 -   `_info`, to build the
-    [`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetInfo.md)
+    [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md)
     describing the dataset.
 -   `_download_and_prepare`, to download and serialize the source data to disk;
 -   `_as_dataset`, to produce a `tf.data.Dataset` from the serialized data.
 
 As a convenience,
-[`tfds.core.GeneratorBasedBuilder`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/GeneratorBasedBuilder.md)
+[`tfds.core.GeneratorBasedBuilder`](api_docs/python/tfds/core/GeneratorBasedBuilder.md)
 is a subclass of `tfds.core.DatasetBuilder` that simplifies defining a dataset
 and that works well for most datasets that can be generated on a single machine.
 Instead of `_download_and_prepare` and `_as_dataset`, its subclasses must
@@ -92,7 +92,7 @@ and then return here.
 ## Specifying `DatasetInfo`
 
 The
-[`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetInfo.md)
+[`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md)
 stores the information we know about a dataset. For now, let's add what features
 are part of the dataset and their types. For example:
 
@@ -127,7 +127,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 ```
 
 The features are what defines the shape of the loaded data. Have a look at the
-[features package](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features.md)
+[features package](api_docs/python/tfds/features.md)
 for a complete list of available features and their description.
 
 If you've implemented the test harness, `test_info` should now pass.
@@ -136,7 +136,7 @@ If you've implemented the test harness, `test_info` should now pass.
 
 Most dataset builders need to download some data from the web. All downloads and
 extractions must go through the
-[`tfds.download.DownloadManager`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/download/DownloadManager.md).
+[`tfds.download.DownloadManager`](api_docs/python/tfds/download/DownloadManager.md).
 `DownloadManager` currently
 supports extracting `.zip`, `.gz`, and `.tar` files.
 
@@ -273,10 +273,10 @@ variables.
 ## Create your own `FeatureConnector`
 
 Note that most datasets will find the [current set of
-`tfds.features.FeatureConnector`s](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features.md)
+`tfds.features.FeatureConnector`s](api_docs/python/tfds/features.md)
 sufficient, but sometimes a new one may need to be defined.
 
-[`tfds.features.FeatureConnector`s](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features/FeatureConnector.md)
+[`tfds.features.FeatureConnector`s](api_docs/python/tfds/features/FeatureConnector.md)
 in `DatasetInfo` correspond to the elements returned in the
 `tf.data.Dataset` object. For instance, with:
 
@@ -337,7 +337,7 @@ and implement the abstract methods.
 
 Have a look at the doc of `tfds.features.FeatureConnector` for more details and
 the
-[features package](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/features.md)
+[features package](api_docs/python/tfds/features.md)
 for more examples.
 
 ## Adding the dataset to `tensorflow/datasets`
