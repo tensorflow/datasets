@@ -137,7 +137,7 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, **kwargs):
-    for i, ex in self._generate_examples(**kwargs):
+    for i, ex in enumerate(self._generate_examples(**kwargs)):
       # Use 10k examples for vocab generation
       if i >= 10000:
         break
