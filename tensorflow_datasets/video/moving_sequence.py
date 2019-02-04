@@ -1,65 +1,4 @@
-"""
-Contains functions for creating moving sequences of smaller bouncing images.
-
-This is a generalization of the code provided by the authors of the moving mnist
-dataset.
-
-Example usage:
-```python
-import tensorflow as tf
-import tensorflow_datasets as tfds
-import tensorflow_datasets.video.moving_sequence as ms
-
-
-def animate(sequence):
-  import matplotlib.pyplot as plt
-  import matplotlib.animation as animation
-
-  fig = plt.figure()
-  plt.axis("off")
-  ims = [[plt.imshow(im, cmap="gray", animated=True)] for im in sequence]
-  # don't remove `anim =` as linter may suggets
-  # weird behaviour, plot will freeze on last frame
-  anim = animation.ArtistAnimation(
-      fig, ims, interval=50, blit=True, repeat_delay=100)
-
-  plt.show()
-  plt.close()
-
-
-# ---------------------------------------------------------------------------
-# ---------------------------------------------------------------------------
-# get a base dataset
-base_dataset = tfds.load("fashion_mnist")[tfds.Split.TRAIN]
-base_dataset = base_dataset.repeat().shuffle(1024)
-dataset = ms.as_moving_sequence_dataset(
-    base_dataset,
-    speed=lambda n: tf.random_normal(shape=(n,))*0.1,
-    image_key="image",
-    sequence_length=20)
-
-data = dataset.make_one_shot_iterator().get_next()
-sequence = data["image_sequence"]
-sequence = tf.squeeze(sequence, axis=-1)  # output_shape [20, 64, 64]
-
-with tf.Session() as sess:
-  seq = sess.run(sequence)
-  animate(seq)
-```
-
-Default arguments in `as_moving_sequence_dataset` are for the original
-moving mnist dataset, with
-```python
-base_dataset = tfds.load("mnist")[tfds.Split.TRAIN].repeat().shuffle(1024)
-dataset = ms.as_moving_sequence_dataset(base_dataset)
-```
-
-Compare results above with
-```
-dataset = tfds.load("moving_mnist")[tfds.Split.TEST]
-```
-(test data provided by original authors)
-"""
+"""Provides `images_as_moving_sequence`."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -76,7 +15,17 @@ _merge_fns = {
 
 
 def _create_moving_sequence(image, pad_lefts, total_padding):
-  """See create_moving_sequence."""
+  """Create a moving image sequence from the given image a left padding values.
+
+  Args:
+    image: [in_h, in_w, n_channels] uint8 array
+    pad_lefts: [sequence_length, 2] int32 array of left padding values
+    total_padding: tensor of padding values, (pad_h, pad_w)
+
+  Returns:
+    [sequence_length, out_h, out_w, n_channels] uint8 image sequence, where
+      out_h = in_h + pad_h, out_w = in_w + out_w
+  """
 
   with tf.name_scope("moving_sequence"):
     def get_padded_image(args):
@@ -94,48 +43,16 @@ def _create_moving_sequence(image, pad_lefts, total_padding):
   return padded_images
 
 
-def create_moving_sequence(image, pad_lefts, total_padding):
-  """
-  Create a moving image sequence from the given image and left padding values.
-
-  Args:
-    image: [h, w, n_channels] uint8 array
-    pad_lefts: [sequence_length, 2] int32 array of
-      left padding values
-    total_padding: TensorShape or list/tuple, (out_h, out_w)
-
-  Returns:
-    [sequence_length, out_h, out_w, n_shannels] uint8 sequence.
-  """
-  total_padding = tf.TensorShape(total_padding)
-  pad_lefts = tf.convert_to_tensor(pad_lefts, dtype=tf.float32)
-  image = tf.convert_to_tensor(image, dtype=tf.uint8)
-  if image.shape.ndims != 3:
-    raise ValueError("`image` must be a rank 3 tensor")
-  if pad_lefts.shape.ndims != 2:
-    raise ValueError("`sequence_pad_lefts` must be a rank 2 tensor")
-  if len(total_padding) != 2:
-    raise ValueError(
-      "`total_padding` must have 2 entres, got %s"
-      % str(total_padding.as_list()))
-  seq = _create_moving_sequence(
-      image, pad_lefts, tf.convert_to_tensor(total_padding))
-  ph, pw = total_padding
-  h, w, n_channels = image.shape
-  sequence_length = pad_lefts.shape[0]
-  seq.set_shape((sequence_length, h + ph, w + pw, n_channels))
-  return seq
-
-
-def create_merged_moving_sequence(
-    images, sequence_pad_lefts, total_padding, background=tf.zeros,
-    merge_fn="max"):
+def _create_merged_moving_sequence(
+    images, sequence_pad_lefts, image_size, total_padding,
+    background=tf.zeros, merge_fn="max"):
   """
   Args:
     images: [n_images, h, w, n_channels] uint8 array
     sequence_pad_lefts: [n_images, sequence_length, 2] int32 array of
       left padding values
-    total_padding: TensorShape (out_h, out_w)
+    image_size: TensorShape (out_h, out_w)
+    total_padding: tensor, images.shape[1:3] - image_size
     background: background image, or callable that takes `shape` and `dtype`
         args.
     merge_fn: "max" for maximum, or callable mapping (seq0, seq1) -> seq, where
@@ -152,22 +69,22 @@ def create_merged_moving_sequence(
   if images.shape.ndims != 4:
     raise ValueError("`images` must be a rank 4 tensor")
   if sequence_pad_lefts.shape.ndims != 3:
-    raise ValueError("`sequence_pad_lefts` must be a rank 4 tensor")
-  if len(total_padding) != 2:
+    raise ValueError("`sequence_pad_lefts` must be a rank 3 tensor")
+  if total_padding.shape != (2,):
     raise ValueError(
       "`total_padding` must be len 2, got %s"
       % str(total_padding.as_list()))
 
-  image_res = [i + t for i, t in zip(images.shape[1:3], total_padding)]
-
   n_channels = images.shape[3]
-  out_image_shape = image_res + [n_channels]
-
-  total_padding_tensor = tf.convert_to_tensor(total_padding)
+  out_image_shape = (
+    [sequence_pad_lefts.shape[1]] +
+    image_size.as_list() +
+    [n_channels]
+  )
 
   def fn(seq0, args):
     image, pad_lefts = args
-    seq1 = _create_moving_sequence(image, pad_lefts, total_padding_tensor)
+    seq1 = _create_moving_sequence(image, pad_lefts, total_padding)
     seq1.set_shape(out_image_shape)
     return merge_fn(seq0, seq1)
 
@@ -187,52 +104,7 @@ def create_merged_moving_sequence(
   return sequence
 
 
-def get_random_trajectories(
-    n_trajectories, sequence_length, ndims=2, speed=0.1,
-    dtype=tf.float32):
-  """
-  Args:
-    n_trajectories: int32 number of trajectories
-    sequence_length: int32 length of sequence
-    ndims: int32 number of dimensions
-    speed: (float) length of each step, or rank 1 tensor of length
-    `n_trajectories`
-      dx = speed*normalized_velocity
-    dtype: returned data type. Must be float
-
-  Returns:
-    trajectories: [n_trajectories, sequence_length, ndims] `dtype` tensor
-      on [0, 1].
-    x0: [n_trajectories, ndims] `dtype` tensor of random initial positions
-      used
-    velocity: [n_trajectories, ndims] `dtype` tensor of random normalized
-      velocities used.
-  """
-  if not dtype.is_floating:
-    raise ValueError("dtype must be float")
-  speed = tf.convert_to_tensor(speed, dtype=dtype)
-  if speed.shape.ndims not in (0, 1):
-    raise ValueError("speed must be scalar or rank 1 tensor")
-
-  nt = n_trajectories
-  x0 = tf.random.uniform((nt, ndims), dtype=dtype)
-  velocity = tf.random_normal((nt, ndims), dtype=dtype)
-  speed = tf.convert_to_tensor(speed, dtype=dtype)
-  if speed.shape.ndims == 1:
-      if speed.shape[0].value not in (1, n_trajectories):
-        raise ValueError(
-            "If speed is a rank 1 tensor, its length must be 1 or same as "
-            "`n_trajectories`, got shape %s" % str(speed.shape))
-      speed = tf.expand_dims(speed, axis=-1)
-  velocity = velocity * (
-    speed / tf.linalg.norm(velocity, axis=-1, keepdims=True))
-  t = tf.range(sequence_length, dtype=dtype)
-  linear_trajectories = get_linear_trajectories(x0, velocity, t)
-  bounced_trajectories = bounce_to_bbox(linear_trajectories)
-  return bounced_trajectories, x0, velocity
-
-
-def get_linear_trajectories(x0, velocity, t):
+def _get_linear_trajectories(x0, velocity, t):
   """
   Args:
     x0: [n_trajectories, ndims] float tensor.
@@ -259,7 +131,7 @@ def get_linear_trajectories(x0, velocity, t):
   return linear_trajectories
 
 
-def bounce_to_bbox(points):
+def _bounce_to_bbox(points):
   """
   Bounce potentially unbounded points to [0, 1].
 
@@ -281,139 +153,154 @@ def bounce_to_bbox(points):
   return tf.math.minimum(2 - points, points)
 
 
+def _get_random_velocities(n_velocities, ndims, speed, dtype=tf.float32):
+  """Get random velocities with given speed.
+
+  Args:
+    n_velocities: int, number of velocities to generate
+    ndims: number of dimensions, e.g. 2 for images
+    speed: scalar speed for each velocity, or rank 1 tensor giving speed for
+      each generated velocity.
+    dtype: `tf.DType` of returned tensor
+
+  Returns:
+    [n_velocities, ndims] tensor where each row has length speed in a random
+      direction.
+  """
+  velocity = tf.random_normal((n_velocities, ndims), dtype=dtype)
+  speed = tf.convert_to_tensor(speed, dtype=dtype)
+  if speed.shape.ndims == 1:
+    if (
+        speed.shape[0].value not in (1, n_velocities) and
+        isinstance(n_velocities, int)):
+      raise ValueError(
+          "If speed is a rank 1 tensor, its length must be 1 or same as "
+          "`n_trajectories`, got shape %s" % str(speed.shape))
+    speed = tf.expand_dims(speed, axis=-1)
+  velocity = velocity * (
+    speed / tf.linalg.norm(velocity, axis=-1, keepdims=True))
+  return velocity
+
+
 MovingSequence = collections.namedtuple(
   "MovingSequence",
   ["image_sequence", "trajectories", "start_positions", "velocities"])
 
 
-def images_to_moving_sequence(
-    images, sequence_length=20, speed=0.1, total_padding=(36, 36),
-    **kwargs):
-  """
-  Convert images to a moving sequence.
+def images_as_moving_sequence(
+    images, sequence_length=20, output_size=(64, 64),
+    speed=0.1, velocities=None, start_positions=None,
+    background=tf.zeros, merge_fn='max'):
+  """Turn simple static images into sequences of the originals bouncing around.
+
+  Adapted from Srivastava et al.
+  http://www.cs.toronto.edu/~nitish/unsupervised_video/
+
+  Example usage:
+  ```python
+  import tensorflow as tf
+  import tensorflow_datasets as tfds
+  from tensorflow_datasets.video import moving_sequence
+
+  def animate(sequence):
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import matplotlib.animation as animation
+    sequence = np.squeeze(sequence, axis=-1)
+
+    fig = plt.figure()
+    plt.axis("off")
+    ims = [[plt.imshow(im, cmap="gray", animated=True)] for im in sequence]
+    # don't remove `anim =` as linter may suggets
+    # weird behaviour, plot will freeze on last frame
+    anim = animation.ArtistAnimation(
+        fig, ims, interval=50, blit=True, repeat_delay=100)
+
+    plt.show()
+    plt.close()
+
+
+  tf.enable_eager_execution()
+  mnist_ds = tfds.load("mnist", split=tfds.Split.TRAIN, as_supervised=True)
+  mnist_ds = mnist_ds.repeat().shuffle(1024).batch(2, drop_remainder=True)
+
+  def map_fn(image, label):
+    sequence = moving_sequence.images_as_moving_sequence(
+      image, sequence_length=20)
+    return dict(image_sequence=sequence.image_sequence)
+
+  moving_mnist_ds = mnist_ds.map(map_fn)
+  # # for comparison with test data provided by original authors
+  # moving_mnist_ds = tfds.load("moving_mnist", split=tfds.Split.TEST)
+
+  for seq in moving_mnist_ds:
+    animate(seq["image_sequence"].numpy())
+  ```
 
   Args:
-    images: [?, in_h, in_w, n_channels] uint8 tensor of images.
+    images: [n_images, in_h, in_w, n_channels] uint8 tensor of images.
     sequence_length: int, length of sequence.
+    output_size: (out_h, out_w) size returned images.
     speed: float, length of each step. Scalar, or rank 1 tensor with length
-        the same as images.shape[0].
-    total_padding: (pad_y, pad_x) total padding to be applied in each dimension.
-    kwargs: passed to `create_merged_moving_sequence`
+        n_images. Ignored if velocities is not `None`.
+    velocities: 2D velocity of each image. Randomly generated with speed 0.1
+        if not provided. This is the normalized distance moved each time step
+        by each image, where normalization occurs over the feasible distance the
+        image can move. e.g if the input image is [10 x 10] and the output image
+        is [60 x 60], a speed of 0.1 means the image moves (60 - 10) * 0.1 = 5
+        pixels per time step.
+    start_positions: [n_images, 2] float32 normalized initial position of each
+        image in [0, 1]. Randomized uniformly if not given.
+    background: background image, or callable that takes `shape` and `dtype`
+        args.
+    merge_fn: "max" for maximum, or callable mapping (seq0, seq1) -> seq, where
+        each of seq0, seq1 and seq2 are tensors of the same shape/dtype as
+        the output.
 
   Returns:
     `MovingSequence` namedtuple containing:
         `image_sequence`:
-            [sequence_length, in_h + pad_y, in_w + pad_x, n_channels] uint8.
-        `trajectories`: [sequence_length, n_images, 2] float32 in [0, 1].
+          [sequence_length, out_h, out_w, n_channels_out] uint8.
+          With default arguments for `background`/`merge_fn`,
+          `n_channels_out` is the same as `n_channels`
+        `trajectories`: [sequence_length, n_images, 2] float32 in [0, 1]
+          2D normalized coordinates of each image at every time step.
         `start_positions`: [n_images, 2] float32 initial positions in [0, 1].
-        `velocities`: [n_images, 2] float32 normalized velocities.
+          2D normalized initial position of each image.
+        `velocities`: [n_images, 2] float32 normalized velocities. Each image
+          moves by this amount (give or take due to pixel rounding) per time
+          step.
   """
+  ndims = 2
   images = tf.convert_to_tensor(images, dtype=tf.uint8)
-  total_padding = tf.TensorShape(total_padding)
-  speed = tf.convert_to_tensor(speed, dtype=tf.float32)
-  n_images = images.shape[0].value
-  trajectories, x0, velocity = get_random_trajectories(
-    n_images, sequence_length, ndims=2, speed=speed,
-    dtype=tf.float32)
+  output_size = tf.TensorShape(output_size)
+  if len(output_size) != ndims:
+    raise ValueError("output_size must have exactly %d elements, got %s"
+                     % (ndims, output_size))
+  image_shape = tf.shape(images)
+  n_images = image_shape[0]
+  if start_positions is None:
+    start_positions = tf.random_uniform((n_images, ndims), dtype=tf.float32)
+  elif start_positions.shape.ndims != 2 or start_positions.shape[-1] != ndims:
+    raise ValueError("start_positions must be rank 2 and %d-D" % ndims)
+  if velocities is None:
+    velocities = _get_random_velocities(n_images, ndims, speed, tf.float32)
+  t = tf.range(sequence_length, dtype=tf.float32)
+  trajectories = _get_linear_trajectories(start_positions, velocities, t)
+  trajectories = _bounce_to_bbox(trajectories)
+
+  total_padding = output_size - image_shape[1:3]
+  with tf.control_dependencies([tf.assert_non_negative(total_padding)]):
+    total_padding = tf.identity(total_padding)
+
   sequence_pad_lefts = tf.cast(
-    trajectories * tf.cast(total_padding, tf.float32),
-    tf.int32)
-  sequence = create_merged_moving_sequence(
-    images, sequence_pad_lefts, total_padding, **kwargs)
+    tf.math.round(trajectories * tf.cast(total_padding, tf.float32)), tf.int32)
+
+  sequence = _create_merged_moving_sequence(
+    images, sequence_pad_lefts, output_size, total_padding,
+    background=background, merge_fn=merge_fn)
   return MovingSequence(
     image_sequence=sequence,
     trajectories=trajectories,
-    start_positions=x0,
-    velocities=velocity)
-
-
-def as_moving_sequence_dataset(
-    base_dataset, n_images=2, sequence_length=20, total_padding=(36, 36),
-    speed=0.1, image_key="image", num_parallel_calls=None, **kwargs):
-  """
-  Get a moving sequence dataset based on another image dataset.
-
-  This is based on batching the base_dataset and mapping through
-  `images_to_moving_sequence`. For good variety, consider shuffling the
-  `base_dataset` before calling this rather than shuffling the returned one, as
-  this will make it extremely unlikely to get the same combination of images
-  in the sequence.
-
-  Example usage:
-  ```python
-  base_dataset = tfds.load("fashion_mnist")[tfds.Split.TRAIN]
-  base_dataset = base_dataset.repeat().shuffle(1024)
-  dataset = ms.as_moving_sequence_dataset(
-      base_dataset,
-      speed=lambda n: tf.random_normal(shape=(n,)) / 10,
-      sequence_length=20, total_padding=(36, 36))
-  dataset = dataset.batch(128)
-  features = dataset.make_one_shot_iterator().get_next()
-  images = features["image_sequence"]
-  labels = features["label"]
-  print(images.shape)  # [128, 20, 64, 64, 1]
-  print(labels.shape)  # [2]
-  ```
-
-  Args:
-    base_dataset: base image dataset to use.
-    n_images: number of sub-images making up each frame.
-    sequence_length: number of frames per sequences.
-    total_padding: TensorShape/list/tuple with [py, px]. Each image will be
-        padded with this amount on either left or right (top/bottom) per frame.
-    speed: normalized rate(s) at which sub-images move around. Each subimage
-        moves this fraction of the available space each frame. Scalar or rank 1
-        tensor of length `n_images`, or a callable mapping `n_images` to one
-        of the above
-    image_key: key from the base dataset containing the images.
-    num_parallel_calls: used in dataset `map`.
-    kwargs: passed to `images_to_moving_sequence`.
-
-  Returns:
-    mapped dataset dict entries
-        `image_sequence`: [
-            sequence_length, base_im_h + py, base_im_w + px, base_im_channels],
-            uint8 tensor.
-        `trajectories`: [n_images, sequence_length, 2] float tensor with values
-            in range [0, 1] giving position for each base image in each frame.
-        `start_positions`: [n_images, 2] starting positions of each subimage.
-        `velocities`: [n_images, 2] normalized velocities
-    along with other entries from the base dataset
-  """
-  dtypes = base_dataset.output_types
-  if image_key not in dtypes:
-      raise ValueError(
-          "base_dataset doesn't have key `image_key='%s'`.\nAvailable keys:\n%s"
-          % (image_key, "\n".join(dtypes)))
-  dtype = dtypes[image_key]
-  if dtype != tf.uint8:
-    raise TypeError("images must be uint8, got %s" % str(dtype))
-  shape = base_dataset.output_shapes[image_key]
-  if shape.ndims != 3:
-      raise ValueError("images must be rank 3, got %s" % str(shape))
-
-  dataset = base_dataset.batch(n_images, drop_remainder=True)
-
-  def map_fn(data):
-    # Do this check inside `map_fn` makes the resulting `Dataset`
-    # usable via `make_one_shot_iterator`
-    if callable(speed):
-      speed_ = speed(n_images)
-    else:
-      speed_ = speed
-    images = data.pop(image_key)
-    sequence = images_to_moving_sequence(
-        images,
-        sequence_length,
-        total_padding=total_padding,
-        speed=speed_,
-        **kwargs)
-    return dict(
-      image_sequence=sequence.image_sequence,
-      trajectories=sequence.trajectories,
-      start_positions=sequence.start_positions,
-      velocities=sequence.velocities,
-      **data
-    )
-
-  return dataset.map(map_fn, num_parallel_calls=num_parallel_calls)
+    start_positions=start_positions,
+    velocities=velocities)
