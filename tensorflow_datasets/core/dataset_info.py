@@ -418,19 +418,17 @@ def get_dataset_feature_statistics(builder, split):
 
     feature_names = sorted(example.keys())
     for feature_name in feature_names:
+      feature_np = example[feature_name]
+      # For compatibility in graph and eager mode, we can get PODs here and
+      # everything may not be neatly wrapped up in numpy's ndarray.
+      feature_dtype = type(feature_np)
+      if isinstance(feature_np, np.ndarray):
+        if not feature_np.size:
+          continue
+        feature_dtype = feature_np.dtype.type
 
       # Update the number of examples this feature appears in.
       feature_to_num_examples[feature_name] += 1
-
-      feature_np = example[feature_name]
-
-      # For compatibility in graph and eager mode, we can get PODs here and
-      # everything may not be neatly wrapped up in numpy's ndarray.
-
-      feature_dtype = type(feature_np)
-
-      if isinstance(feature_np, np.ndarray):
-        feature_dtype = feature_np.dtype.type
 
       feature_min, feature_max = None, None
       is_numeric = (np.issubdtype(feature_dtype, np.number) or
