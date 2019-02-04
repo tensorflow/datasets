@@ -49,8 +49,6 @@ else:
 # See
 # https://stackoverflow.com/questions/14946264/python-lru-cache-decorator-per-instance
 # For @property methods, use @memoized_property below.
-# TODO(rsepassi): Write a @memoize decorator that does the right thing for
-# instance methods.
 memoize = functools.lru_cache
 
 

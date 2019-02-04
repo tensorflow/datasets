@@ -3,6 +3,7 @@
 *  <a href="./tfds.md"><code>tfds</code></a>
 *  <a href="./tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>
 *  <a href="./tfds/Split.md"><code>tfds.Split</code></a>
+*  <a href="./tfds/as_numpy.md"><code>tfds.as_numpy</code></a>
 *  <a href="./tfds/builder.md"><code>tfds.builder</code></a>
 *  <a href="./tfds/core.md"><code>tfds.core</code></a>
 *  <a href="./tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
@@ -10,6 +11,7 @@
 *  <a href="./tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>
 *  <a href="./tfds/core/GeneratorBasedBuilder.md"><code>tfds.core.GeneratorBasedBuilder</code></a>
 *  <a href="./tfds/core/NamedSplit.md"><code>tfds.core.NamedSplit</code></a>
+*  <a href="./tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>
 *  <a href="./tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>
 *  <a href="./tfds/core/SplitGenerator.md"><code>tfds.core.SplitGenerator</code></a>
 *  <a href="./tfds/core/SplitInfo.md"><code>tfds.core.SplitInfo</code></a>

@@ -19,6 +19,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import os
 
@@ -28,8 +29,8 @@ import tensorflow as tf
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.features.text import text_encoder
 
-ZH_HELLO = u'你好 '
-EN_HELLO = u'hello '
+ZH_HELLO = '你好 '
+EN_HELLO = 'hello '
 
 
 class TextEncoderTest(tf.test.TestCase):
@@ -106,14 +107,14 @@ class TokenTextEncoderTest(tf.test.TestCase):
 
   def test_encode_decode(self):
     encoder = text_encoder.TokenTextEncoder(
-        vocab_list=[u'hi', 'bye', ZH_HELLO])
+        vocab_list=['hi', 'bye', ZH_HELLO])
     ids = [i + 1 for i in [0, 1, 2, 0]]
     self.assertEqual(ids, encoder.encode('hi  bye %s hi' % ZH_HELLO))
-    self.assertEqual(u'hi bye %shi' % ZH_HELLO, encoder.decode(ids))
+    self.assertEqual('hi bye %shi' % ZH_HELLO, encoder.decode(ids))
 
   def test_oov(self):
     encoder = text_encoder.TokenTextEncoder(
-        vocab_list=[u'hi', 'bye', ZH_HELLO],
+        vocab_list=['hi', 'bye', ZH_HELLO],
         oov_buckets=1,
         oov_token='UNK')
     ids = [i + 1 for i in [0, 3, 3, 1]]
@@ -123,7 +124,7 @@ class TokenTextEncoderTest(tf.test.TestCase):
 
   def test_multiple_oov(self):
     encoder = text_encoder.TokenTextEncoder(
-        vocab_list=[u'hi', 'bye', ZH_HELLO],
+        vocab_list=['hi', 'bye', ZH_HELLO],
         oov_buckets=2,
         oov_token='UNK')
     encoded = encoder.encode('hi boo zoo too foo bye')
@@ -135,10 +136,10 @@ class TokenTextEncoderTest(tf.test.TestCase):
     self.assertEqual('hi UNK UNK bye', encoder.decode([1, 4, 5, 2]))
 
   def test_tokenization(self):
-    encoder = text_encoder.TokenTextEncoder(vocab_list=[u'hi', 'bye', ZH_HELLO])
-    text = u'hi<<>><<>foo!^* bar && bye (%s hi)' % ZH_HELLO
-    self.assertEqual([u'hi', u'foo', u'bar', u'bye',
-                      ZH_HELLO.strip(), u'hi'],
+    encoder = text_encoder.TokenTextEncoder(vocab_list=['hi', 'bye', ZH_HELLO])
+    text = 'hi<<>><<>foo!^* bar && bye (%s hi)' % ZH_HELLO
+    self.assertEqual(['hi', 'foo', 'bar', 'bye',
+                      ZH_HELLO.strip(), 'hi'],
                      text_encoder.Tokenizer().tokenize(text))
     self.assertEqual([i + 1 for i in [0, 3, 3, 1, 2, 0]], encoder.encode(text))
 
@@ -146,7 +147,7 @@ class TokenTextEncoderTest(tf.test.TestCase):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
       vocab_fname = os.path.join(tmp_dir, 'vocab')
       encoder = text_encoder.TokenTextEncoder(
-          vocab_list=[u'hi', 'bye', ZH_HELLO])
+          vocab_list=['hi', 'bye', ZH_HELLO])
       encoder.save_to_file(vocab_fname)
       file_backed_encoder = text_encoder.TokenTextEncoder.load_from_file(
           vocab_fname)
@@ -158,7 +159,7 @@ class TokenTextEncoderTest(tf.test.TestCase):
       tokenizer = text_encoder.Tokenizer(
           reserved_tokens=['<FOOBAR>'], alphanum_only=False)
       encoder = text_encoder.TokenTextEncoder(
-          vocab_list=[u'hi', 'bye', ZH_HELLO],
+          vocab_list=['hi', 'bye', ZH_HELLO],
           lowercase=True,
           oov_buckets=2,
           oov_token='ZOO',
@@ -180,7 +181,7 @@ class TokenTextEncoderTest(tf.test.TestCase):
 
   def test_mixedalphanum_tokens(self):
     mixed_tokens = ['<EOS>', 'zoo!', '!foo']
-    vocab_list = mixed_tokens + [u'hi', 'bye', ZH_HELLO]
+    vocab_list = mixed_tokens + ['hi', 'bye', ZH_HELLO]
 
     encoder = text_encoder.TokenTextEncoder(vocab_list=vocab_list)
 
@@ -198,7 +199,7 @@ class TokenTextEncoderTest(tf.test.TestCase):
 
   def test_lowercase(self):
     mixed_tokens = ['<EOS>', 'zoo!']
-    vocab_list = mixed_tokens + [u'hi', 'bye', ZH_HELLO]
+    vocab_list = mixed_tokens + ['hi', 'bye', ZH_HELLO]
     encoder = text_encoder.TokenTextEncoder(
         vocab_list=vocab_list, lowercase=True)
     # No mixed tokens
@@ -215,7 +216,7 @@ class TokenTextEncoderTest(tf.test.TestCase):
         return ['hi', 'bye']
 
     tokenizer = DummyTokenizer()
-    vocab_list = [u'hi', 'bye', ZH_HELLO]
+    vocab_list = ['hi', 'bye', ZH_HELLO]
     encoder = text_encoder.TokenTextEncoder(
         vocab_list=vocab_list, tokenizer=tokenizer)
     # Ensure it uses the passed tokenizer and not the default
@@ -262,11 +263,21 @@ class TokenizeTest(parameterized.TestCase, tf.test.TestCase):
     self.assertEqual(s, tokenizer.join(tokenizer.tokenize(s)))
 
   def test_reserved_tokens(self):
-    text = u'hello worldbar bar foozoo zoo FOO<EOS>'
+    text = 'hello worldbar bar foozoo zoo FOO<EOS>'
     tokens = ['hello', ' ', 'world', 'bar', ' ', 'bar', ' ', 'foozoo',
               ' ', 'zoo', ' ', 'FOO', '<EOS>']
     tokenizer = text_encoder.Tokenizer(alphanum_only=False,
                                        reserved_tokens=['<EOS>', 'FOO', 'bar'])
+    self.assertEqual(tokens, tokenizer.tokenize(text))
+    self.assertEqual(text, tokenizer.join(tokenizer.tokenize(text)))
+
+  def test_reserved_tokens_with_regex_chars(self):
+    text = r'hello worldba\)r bar foozoo zoo FOO|<EOS>'
+    tokens = ['hello', ' ', 'world', r'ba\)r', ' ', 'bar', ' ', 'foozoo',
+              ' ', 'zoo', ' ', 'FOO|', '<EOS>']
+    tokenizer = text_encoder.Tokenizer(
+        alphanum_only=False,
+        reserved_tokens=['<EOS>', 'FOO|', r'ba\)r'])
     self.assertEqual(tokens, tokenizer.tokenize(text))
     self.assertEqual(text, tokenizer.join(tokenizer.tokenize(text)))
 

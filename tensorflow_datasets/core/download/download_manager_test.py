@@ -28,7 +28,6 @@ import threading
 
 import promise
 import tensorflow as tf
-from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import resource as resource_lib
 
@@ -110,10 +109,15 @@ class DownloadManagerTest(tf.test.TestCase):
     self._add_file(path, content)
 
   def _get_manager(self, force_download=False, force_extraction=False,
-                   checksums=None):
+                   checksums=None, dl_dir='/dl_dir',
+                   extract_dir='/extract_dir'):
     manager = dm.DownloadManager(
-        'my_dataset', '/dl_dir', '/extract_dir', '/manual_dir',
-        force_download=force_download, force_extraction=force_extraction,
+        dataset_name='my_dataset',
+        download_dir=dl_dir,
+        extract_dir=extract_dir,
+        manual_dir='/manual_dir',
+        force_download=force_download,
+        force_extraction=force_extraction,
         checksums=checksums)
     download = tf.compat.v1.test.mock.patch.object(
         manager._downloader,
@@ -138,7 +142,7 @@ class DownloadManagerTest(tf.test.TestCase):
     afname = resource_lib.Resource(url='http://a.ch/a').fname
     bfname = resource_lib.Resource(url='https://a.ch/b').fname
     cfname = resource_lib.Resource(url='https://a.ch/c').fname
-    _ = [self._add_file(path) for path in [
+    _ = [self._add_file(path) for path in [  # pylint: disable=g-complex-comprehension
         '/dl_dir/%s' % afname,
         '/dl_dir/%s.INFO' % afname,
         '/dl_dir/%s' % cfname,
@@ -226,6 +230,7 @@ class DownloadManagerTest(tf.test.TestCase):
         'b': '/dl_dir/%s' % resource_b.fname,
     }
     self.assertEqual(res, expected)
+
 
   def test_download_and_extract_already_downloaded(self):
     url_a = 'http://a/a.zip'

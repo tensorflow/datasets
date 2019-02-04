@@ -24,6 +24,8 @@ import tensorflow as tf
 from tensorflow_datasets.core import test_utils
 import tensorflow_datasets.public_api as tfds
 
+tf.compat.v1.enable_eager_execution()
+
 
 class SequenceDictFeatureTest(test_utils.FeatureExpectationsTestCase):
 

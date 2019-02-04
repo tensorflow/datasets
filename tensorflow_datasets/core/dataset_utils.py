@@ -46,13 +46,7 @@ def build_dataset(instruction_dicts,
 
   def instruction_ds_to_file_ds(instruction):
     """Map from instruction to real datasets."""
-
     examples_ds = dataset_from_file_fn(instruction["filepath"])
-    # TODO(rsepassi): Replace masking with window and flat_map
-    # num, den = sum(mask), len(mask)
-    # Something like (adjusting for nested structure):
-    # examples_ds.window(den).flat_map(lambda ds: ds.take(num))
-
     mask_ds = tf.data.Dataset.from_tensor_slices(instruction["mask"])
     mask_ds = mask_ds.repeat(),
     # Zip the mask and real examples
@@ -90,9 +84,9 @@ def build_dataset(instruction_dicts,
 
 def _eager_dataset_iterator(dataset):
   for item in dataset:
-    flat = tf.contrib.framework.nest.flatten(item)
+    flat = tf.nest.flatten(item)
     flat = [el.numpy() for el in flat]
-    yield tf.contrib.framework.nest.pack_sequence_as(item, flat)
+    yield tf.nest.pack_sequence_as(item, flat)
 
 
 def _graph_dataset_iterator(ds_item, graph=None):
@@ -104,11 +98,18 @@ def _graph_dataset_iterator(ds_item, graph=None):
         break
 
 
+def dataset_as_numpy(*args, **kwargs):
+  """DEPRECATED. Renamed `tfds.as_numpy`."""
+  del args, kwargs
+  raise AttributeError(
+      "tfds.dataset_as_numpy has been renamed to tfds.as_numpy.")
+
+
 @api_utils.disallow_positional_args(allowed=["dataset"])
-def dataset_as_numpy(dataset, graph=None):
+def as_numpy(dataset, graph=None):
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
-  `dataset_as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
+  `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
   and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
 
   Args:
@@ -124,15 +125,15 @@ def dataset_as_numpy(dataset, graph=None):
   del dataset
 
   # Flatten
-  flat_ds = tf.contrib.framework.nest.flatten(nested_ds)
+  flat_ds = tf.nest.flatten(nested_ds)
   flat_np = []
 
   # Type check for Tensors and Datasets
   for ds_el in flat_ds:
     types = [type(el) for el in flat_ds]
-    types = tf.contrib.framework.nest.pack_sequence_as(nested_ds, types)
+    types = tf.nest.pack_sequence_as(nested_ds, types)
     if not isinstance(ds_el, (tf.Tensor, tf.data.Dataset)):
-      raise ValueError("Arguments to dataset_as_numpy must be tf.Tensors or "
+      raise ValueError("Arguments to as_numpy must be tf.Tensors or "
                        "tf.data.Datasets. Got: %s" % types)
 
   if tf.executing_eagerly():
@@ -148,25 +149,30 @@ def dataset_as_numpy(dataset, graph=None):
   else:
     # Graph mode
 
-    # First create necessary graph ops
-    ds_iters = [None] * len(flat_ds)
+    # First create iterators for datasets
     with utils.maybe_with_graph(graph, create_if_none=False):
-      for i, ds_el in enumerate(flat_ds):
-        if isinstance(ds_el, tf.data.Dataset):
-          ds_iters[i] = tf.compat.v1.data.make_one_shot_iterator(
-              ds_el).get_next()
+      ds_iters = [
+          tf.compat.v1.data.make_one_shot_iterator(ds_el).get_next()
+          for ds_el in flat_ds if _is_ds(ds_el)
+      ]
+    ds_iters = [_graph_dataset_iterator(ds_iter, graph) for ds_iter in ds_iters]
 
-    # Then create NumPy items
-    # Shared session for tf.Tensor runs
-    with utils.nogpu_session(graph) as sess:
-      for ds_iter, ds_el in zip(ds_iters, flat_ds):
-        if ds_iter is None:
-          # Tensor
-          np_el = sess.run(ds_el)
-        else:
-          # Dataset
-          np_el = _graph_dataset_iterator(ds_iter, graph)
-        flat_np.append(np_el)
+    # Then create numpy arrays for tensors
+    with utils.nogpu_session(graph) as sess:  # Shared session for tf.Tensor
+      # Calling sess.run once so that randomness is shared.
+      np_arrays = sess.run([tensor for tensor in flat_ds if not _is_ds(tensor)])
+
+    # Merge the dataset iterators and np arrays
+    iter_ds = iter(ds_iters)
+    iter_array = iter(np_arrays)
+    flat_np = [
+        next(iter_ds) if _is_ds(ds_el) else next(iter_array)
+        for ds_el in flat_ds
+    ]
 
   # Nest
-  return tf.contrib.framework.nest.pack_sequence_as(nested_ds, flat_np)
+  return tf.nest.pack_sequence_as(nested_ds, flat_np)
+
+
+def _is_ds(ds):
+  return isinstance(ds, tf.data.Dataset)

@@ -62,7 +62,7 @@ builder.download_and_prepare()
 datasets = builder.as_dataset()
 
 # If you need NumPy arrays
-np_datasets = tfds.dataset_as_numpy(datasets)
+np_datasets = tfds.as_numpy(datasets)
 ```
 
 ---
@@ -334,7 +334,7 @@ def dataset_docs_str():
   section_tocs = []
   section_docs = []
   for section in sections:
-    builders = tf.contrib.framework.nest.flatten(module_to_builder[section])
+    builders = tf.nest.flatten(module_to_builder[section])
     builders = sorted(builders, key=lambda b: b.name)
     builder_docs = [document_single_builder(builder) for builder in builders]
     section_doc = SECTION_DATASETS.format(

@@ -25,6 +25,8 @@ API to define datasets.
 
 [`class NamedSplit`](../tfds/core/NamedSplit.md): Descriptor corresponding to a named split (train, test, ...).
 
+[`class SplitBase`](../tfds/core/SplitBase.md): Abstract base class for Split compositionality.
+
 [`class SplitDict`](../tfds/core/SplitDict.md): Split info object.
 
 [`class SplitGenerator`](../tfds/core/SplitGenerator.md): Defines the split information for the generator.

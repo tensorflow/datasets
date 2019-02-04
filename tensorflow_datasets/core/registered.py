@@ -185,7 +185,7 @@ def load(name,
   ```
 
   If you'd like NumPy arrays instead of `tf.data.Dataset`s or `tf.Tensor`s,
-  you can pass the return value to `tfds.dataset_as_numpy`.
+  you can pass the return value to `tfds.as_numpy`.
 
   Callers must pass arguments as keyword arguments.
 

@@ -23,6 +23,8 @@ import tensorflow as tf
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import test_utils
 
+tf.compat.v1.enable_eager_execution()
+
 
 class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
 

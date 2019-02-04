@@ -34,7 +34,7 @@ regex "\W+".
 __init__(
     vocab_list,
     oov_buckets=1,
-    oov_token=u'UNK',
+    oov_token='UNK',
     lowercase=False,
     tokenizer=None
 )

@@ -171,7 +171,7 @@ class CSVAdapter(FileFormatAdapter):
   def write_from_generator(self, generator_fn, output_files):
     # Flatten the dict returned by the generator and add the header
     header_keys = list(self._feature_types.keys())
-    rows_generator = ([d[k] for k in header_keys] for d in generator_fn())
+    rows_generator = ([d[k] for k in header_keys] for d in generator_fn())  # pylint: disable=g-complex-comprehension
     generator_with_header = itertools.chain([header_keys], rows_generator)
     _write_csv_from_generator(
         generator_with_header,
@@ -258,7 +258,6 @@ def _shuffle_tfrecord(path, random_gen):
       writer.write(record)
 
 
-# TODO(rsepassi): Use the TFRecordWriter.write op to get multithreading
 def _write_tfrecords_from_generator(generator, output_files, shuffle=True):
   """Writes generated str records to output_files in round-robin order."""
   if do_files_exist(output_files):

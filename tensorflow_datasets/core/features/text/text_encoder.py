@@ -19,6 +19,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+from __future__ import unicode_literals
 
 import abc
 import hashlib
@@ -30,10 +31,15 @@ import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
 
 
-ALPHANUM_REGEX = re.compile(r"\W+", flags=re.UNICODE)
-ALL_REGEX = re.compile(r"(\W+)", flags=re.UNICODE)
+def _re_compile(pattern):
+  return re.compile(pattern, flags=re.UNICODE)
+
 
 NUM_BYTES = 2**8
+ALPHANUM_REGEX = _re_compile(r"\W+")
+ALL_REGEX = _re_compile(r"(\W+)")
+
+
 
 
 class TextEncoderConfig(object):
@@ -187,7 +193,7 @@ class ByteTextEncoder(TextEncoder):
           else:
             break
         strs.append(bytes(bytearray(byte_ids)).decode("utf-8", "replace"))
-    return u"".join(strs)
+    return "".join(strs)
 
   @property
   def vocab_size(self):
@@ -222,7 +228,7 @@ class TokenTextEncoder(TextEncoder):
   def __init__(self,
                vocab_list,
                oov_buckets=1,
-               oov_token=u"UNK",
+               oov_token="UNK",
                lowercase=False,
                tokenizer=None):
     """Constructs a TokenTextEncoder.
@@ -280,7 +286,7 @@ class TokenTextEncoder(TextEncoder):
         tokens.append(self._vocab_list[int_id])
       else:
         tokens.append(self._oov_token)
-    return u" ".join(tokens)
+    return " ".join(tokens)
 
   @property
   def vocab_size(self):
@@ -393,10 +399,10 @@ class Tokenizer(object):
   def join(self, tokens):
     """Joins tokens into a string."""
     if self._alphanum_only:
-      return u" ".join(tokens)
+      return " ".join(tokens)
     else:
       # Fully invertible
-      return u"".join(tokens)
+      return "".join(tokens)
 
   @classmethod
   def _filename(cls, filename_prefix):
@@ -442,16 +448,23 @@ def _prepare_reserved_tokens(reserved_tokens):
   dups = _find_duplicates(reserved_tokens)
   if dups:
     raise ValueError("Duplicates found in tokens: %s" % dups)
-  reserved_tokens_re = None
-  if reserved_tokens:
-    escaped = [rt.replace(u"\\", u"\\\\") for rt in reserved_tokens]
-    pattern = u"(%s)" % u"|".join(escaped)
-    reserved_tokens_re = _make_reserved_tokens_re(pattern)
+  reserved_tokens_re = _make_reserved_tokens_re(reserved_tokens)
   return reserved_tokens, reserved_tokens_re
 
 
-def _make_reserved_tokens_re(pattern):
-  reserved_tokens_re = re.compile(pattern, flags=re.UNICODE)
+def _re_escape(s):
+  """Escape regex control characters."""
+  escaped = re.sub(r"[(){}\[\].*?|^$\\+-]", r"\\\g<0>", s)
+  return escaped
+
+
+def _make_reserved_tokens_re(reserved_tokens):
+  """Constructs compiled regex to parse out reserved tokens."""
+  if not reserved_tokens:
+    return None
+  escaped_tokens = [_re_escape(rt) for rt in reserved_tokens]
+  pattern = "(%s)" % "|".join(escaped_tokens)
+  reserved_tokens_re = _re_compile(pattern)
   return reserved_tokens_re
 
 
@@ -477,23 +490,23 @@ _METADATA_PREFIX = "### Metadata: "
 def write_lines_to_file(cls_name, filename, lines, metadata_dict):
   """Writes lines to file prepended by header and metadata."""
   metadata_dict = metadata_dict or {}
-  header_line = u"%s%s" % (_HEADER_PREFIX, cls_name)
-  metadata_line = u"%s%s" % (_METADATA_PREFIX,
-                             json.dumps(metadata_dict, sort_keys=True))
+  header_line = "%s%s" % (_HEADER_PREFIX, cls_name)
+  metadata_line = "%s%s" % (_METADATA_PREFIX,
+                            json.dumps(metadata_dict, sort_keys=True))
   with tf.io.gfile.GFile(filename, "wb") as f:
     for line in [header_line, metadata_line]:
       f.write(tf.compat.as_bytes(line))
-      f.write(tf.compat.as_bytes(u"\n"))
+      f.write(tf.compat.as_bytes("\n"))
     if lines:
-      f.write(tf.compat.as_bytes(u"\n".join(lines)))
-      f.write(tf.compat.as_bytes(u"\n"))
+      f.write(tf.compat.as_bytes("\n".join(lines)))
+      f.write(tf.compat.as_bytes("\n"))
 
 
 def read_lines_from_file(cls_name, filename):
   """Read lines from file, parsing out header and metadata."""
   with tf.io.gfile.GFile(filename, "rb") as f:
     lines = [tf.compat.as_text(line)[:-1] for line in f]
-  header_line = u"%s%s" % (_HEADER_PREFIX, cls_name)
+  header_line = "%s%s" % (_HEADER_PREFIX, cls_name)
   if lines[0] != header_line:
     raise ValueError("File {fname} does not seem to have been created from "
                      "{name}.save_to_file.".format(

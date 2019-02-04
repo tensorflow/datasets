@@ -256,14 +256,17 @@ def stack_arrays(*elems):
 
 
 def np_to_list(elem):
+  """Returns list from list, tuple or ndarray."""
   if isinstance(elem, list):
     return elem
+  elif isinstance(elem, tuple):
+    return list(elem)
   elif isinstance(elem, np.ndarray):
     return list(elem)
   else:
     raise ValueError(
-        'Input elements of a sequence should be either a numpy array or a '
-        'python list. Got {}'.format(type(elem)))
+        'Input elements of a sequence should be either a numpy array, a '
+        'python list or tuple. Got {}'.format(type(elem)))
 
 
 def _transpose_dict_list(dict_list):

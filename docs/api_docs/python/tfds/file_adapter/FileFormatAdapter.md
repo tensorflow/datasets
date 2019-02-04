@@ -51,7 +51,7 @@ Write to files from generators_and_filenames.
 
 * <b>`generator_fn`</b>: returns generator yielding dictionaries of feature name to
     value.
-  output_files (list<str>): output files to write records to.
+* <b>`output_files`</b>: `list<str>`, output files to write records to.
 
 
 

@@ -142,7 +142,7 @@ get_tensor_info()
 ints2str(int_values)
 ```
 
-Conversion string => encoded list[int].
+Conversion list[int] => decoded string.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
@@ -191,7 +191,7 @@ save_metadata(
 str2ints(str_value)
 ```
 
-Conversion list[int] => decoded string.
+Conversion string => encoded list[int].
 
 
 

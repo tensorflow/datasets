@@ -43,6 +43,7 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -205,18 +206,6 @@ class DatasetInfo(object):
     self.as_proto.download_checksums.clear()
     self.as_proto.download_checksums.update(checksums)
 
-  # TODO(tfds): Delete before release
-  @property
-  def num_examples(self):
-    """DEPRECATED. Please use `info.splits.total_num_examples` instead."""
-    raise AttributeError(
-        "ds_info.num_examples has been removed and replaced by:\n"
-        " * To get the total number of split:\n"
-        " total_examples = info.splits.total_num_examples\n"
-        " * To get the number of example of a particular split:\n"
-        " num_train_examples = info.splits['train'].num_examples"
-    )
-
   @property
   def initialized(self):
     """Whether DatasetInfo has been fully initialized."""
@@ -266,15 +255,6 @@ class DatasetInfo(object):
 
   def write_to_directory(self, dataset_info_dir):
     """Write `DatasetInfo` as JSON to `dataset_info_dir`."""
-    # TODO(tfds): Re-enable this check as currently there's a bug.
-    # Currently read_from_directory assumes self._fully_initialized
-    # should be set to True, but that assumes that write_to_directory was
-    # called on a DatasetInfo with self._fully_initialized = True.
-    # if not self._fully_initialized:
-    #   raise ValueError("Trying to write DatasetInfo to disk before updating "
-    #                    "dynamic properties. This is typically done in "
-    #                    "builder.download_and_prepare()")
-
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
       self.features.save_metadata(dataset_info_dir)
@@ -283,7 +263,7 @@ class DatasetInfo(object):
                            "w") as f:
       f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir, from_packaged_data=False):
+  def read_from_directory(self, dataset_info_dir, from_bucket=False):
     """Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -294,7 +274,7 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
-      from_packaged_data: `bool`, If data is restored from packaged data,
+      from_bucket: `bool`, If data is restored from info files on GCS,
         then only the informations not defined in the code are updated
 
     Returns:
@@ -324,10 +304,10 @@ class DatasetInfo(object):
 
     # If we are restoring on-disk data, then we also restore all dataset info
     # information from the previously saved proto.
-    # If we are loading from packaged data (only possible when we do not
+    # If we are loading from the GCS bucket (only possible when we do not
     # restore previous data), then do not restore the info which are already
     # defined in the code. Otherwise, we would overwrite code info.
-    if not from_packaged_data:
+    if not from_bucket:
       # Update the full proto
       self._info_proto = parsed_proto
 
@@ -342,13 +322,13 @@ class DatasetInfo(object):
 
     return True
 
-  def initialize_from_package_data(self):
-    """Initialize DatasetInfo from package data, returns True on success."""
-    pkg_path = os.path.join(utils.tfds_dir(), "dataset_info", self.name)
+  def initialize_from_bucket(self):
+    """Initialize DatasetInfo from GCS bucket info files."""
+    info_path = os.path.join(constants.DATASET_INFO_BUCKET, self.name)
     if self._builder.builder_config:
-      pkg_path = os.path.join(pkg_path, self._builder.builder_config.name)
-    pkg_path = os.path.join(pkg_path, str(self.version))
-    return self.read_from_directory(pkg_path, from_packaged_data=True)
+      info_path = os.path.join(info_path, self._builder.builder_config.name)
+    info_path = os.path.join(info_path, str(self.version))
+    return self.read_from_directory(info_path, from_bucket=True)
 
   def __repr__(self):
     return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(
@@ -359,7 +339,6 @@ class DatasetInfo(object):
         pprint.pformat(
             {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
             indent=8, width=1)[1:-1])
-    # TODO(tfds): Should indent nested feature dict properly.
     features_dict = self.features
     features_pprint = "%s({\n %s\n    }" % (
         type(features_dict).__name__,
@@ -431,7 +410,7 @@ def get_dataset_feature_statistics(builder, split):
   feature_to_min = {}
   feature_to_max = {}
 
-  np_dataset = dataset_utils.dataset_as_numpy(dataset)
+  np_dataset = dataset_utils.as_numpy(dataset)
   for example in tqdm.tqdm(np_dataset, unit=" examples"):
     statistics.num_examples += 1
 

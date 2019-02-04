@@ -12,7 +12,7 @@
 
 ## Class `NamedSplit`
 
-
+Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
 
 
 

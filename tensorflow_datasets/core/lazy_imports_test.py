@@ -26,7 +26,14 @@ import tensorflow_datasets as tfds
 
 class LazyImportsTest(parameterized.TestCase, tf.test.TestCase):
 
-  @parameterized.parameters("pydub", "os")
+  @parameterized.parameters(
+      "matplotlib",
+      "os",
+      "pydub",
+      "pyplot",
+      "scipy",
+      "scipy_io",
+  )
   def test_import(self, module_name):
     getattr(tfds.core.lazy_imports, module_name)
 

@@ -70,7 +70,7 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
 
   def values(self, split):
     return [int(v["value"]) for v in
-            tfds.dataset_as_numpy(self.as_dataset(split=split))]
+            tfds.as_numpy(self.as_dataset(split=split))]
 
 
 class SplitsUnitTest(tf.test.TestCase):
