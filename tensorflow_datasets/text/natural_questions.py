@@ -26,6 +26,7 @@ from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _BUCKET = "gs://natural_questions/v1.0/"
+_DOWNLOAD_URL = "https://storage.googleapis.com/natural_questions/v1.0/"
 
 _CITATION = """\
 
@@ -135,8 +136,8 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, filepath):
-    for i, ex in self._generate_examples(filepath):
+  def _vocab_text_gen(self, **kwargs):
+    for i, ex in self._generate_examples(**kwargs):
       # Use 10k examples for vocab generation
       if i >= 10000:
         break
@@ -146,11 +147,7 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
       yield " ".join([ex[name] for name in vocab_fields])
 
   def _split_generators(self, dl_manager):
-    files = {
-        split: tf.io.gfile.listdir(os.path.join(_BUCKET, split)) for split in
-        ["train", "dev"]
-    }
-    downloads = dl_manager.download_and_extract(files)
+    downloads = dl_manager.download(_nq_urls())
 
     # Generate vocabulary
     # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
@@ -158,7 +155,7 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
                              "short_answer", "long_answer"]
     text_feature = self.info.features[shared_vocab_features[0]]
     text_feature.maybe_build_from_corpus(
-        self._vocab_text_gen(downloads["train"]))
+        self._vocab_text_gen(files=downloads["train"], dl_manager=dl_manager))
     encoder = text_feature.encoder
     for feature in shared_vocab_features:
       self.info.features[feature].maybe_set_encoder(encoder)
@@ -167,17 +164,18 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             num_shards=100,
-            gen_kwargs={"files": downloads["train"]}),
+            gen_kwargs={"files": downloads["train"], "dl_manager": dl_manager}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             num_shards=10,
-            gen_kwargs={"files": downloads["dev"]}),
+            gen_kwargs={"files": downloads["dev"], "dl_manager": dl_manager}),
     ]
 
-  def _generate_examples(self, files):
+  def _generate_examples(self, files, dl_manager):
     """This function returns the examples in the raw (text) form."""
     for filename in files:
-      with tf.io.gfile.GFile(filename) as f:
+      for _, f in dl_manager.iter_archive(filename):
+      # with tf.io.gfile.GFile(filename) as f:
         reader = tfds.core.lazy_imports.jsonlines.Reader(f)
         for record in reader:
 
@@ -188,6 +186,11 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
                 "utf-8")[start_byte:end_byte].decode("utf-8")
 
           annotation = record["annotations"][0]
+          short_answers = annotation["short_answers"]
+          if short_answers:
+            short_answer = _answer(short_answers[0])
+          else:
+            short_answer = ""
           yield {
               "example_id": record["example_id"],
               "document_title": record["document_title"],
@@ -195,6 +198,16 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
               "document_html": record["document_html"],
               "document_url": record["document_url"],
               "long_answer": _answer(annotation["long_answer"]),
-              "short_answer": _answer(annotation["short_answer"]),
+              "short_answer": short_answer,
               "yes_no_answer": annotation["yes_no_answer"],
           }
+
+
+def _nq_urls():
+  urls = {}
+  for split in ["train", "dev"]:
+    # Use listdir on the GCS bucket to get the filenames but use the GCS
+    # URLs instead of the filenames.
+    split_files = tf.io.gfile.listdir(os.path.join(_BUCKET, split))
+    urls[split] = [os.path.join(_DOWNLOAD_URL, split, f) for f in split_files]
+  return urls
