@@ -7,7 +7,7 @@ import numpy as np
 
 import tensorflow_datasets.core.features.rle_feature.rle.tf_impl as brle
 import tensorflow_datasets.core.features.rle_feature.rle.shared_tests as st
-
+from tensorflow_datasets.core import test_utils
 
 
 class BlreTfTest(tf.test.TestCase):
@@ -31,7 +31,7 @@ class BlreTfTest(tf.test.TestCase):
 #   def test_decode_encode(self):
 #     st.test_decode_encode(self)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_in_graph_and_eager_modes()
   def test_brle_logical_not(self):
     st.test_brle_logical_not(self)
 
@@ -50,19 +50,19 @@ class BlreTfTest(tf.test.TestCase):
 #   def test_encode(self):
 #     st.test_encode(self)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_in_graph_and_eager_modes()
   def test_brle_to_dense(self):
     st.test_brle_to_dense(self)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_in_graph_and_eager_modes()
   def test_brle_length(self):
     st.test_brle_length(self)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_in_graph_and_eager_modes()
   def test_rle_length(self):
     st.test_rle_length(self)
 
-  @tf.contrib.eager.run_test_in_graph_and_eager_modes()
+  @test_utils.run_in_graph_and_eager_modes()
   def test_rle_to_dense(self):
     st.test_rle_to_dense(self)
 

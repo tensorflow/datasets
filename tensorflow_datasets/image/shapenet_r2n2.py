@@ -318,7 +318,7 @@ class ShapenetR2n2(tfds.core.GeneratorBasedBuilder):
     cat_renderings_dir = os.path.join(
         renderings_path, "ShapeNetRendering", cat_id)
     example_ids = self._get_id_split(
-        tf.gfile.ListDirectory(cat_voxels_dir), split)
+        tf.io.gfile.listdir(cat_voxels_dir), split)
 
     load_meta = _meta_loader(cat_renderings_dir)
     load_image = _image_loader(cat_renderings_dir)
