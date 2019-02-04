@@ -37,10 +37,10 @@ import tqdm
 
 
 # pylint: disable=g-import-not-at-top
-if sys.version_info[0] > 2:
-  import functools
-else:
+if six.PY2:
   import functools32 as functools
+else:
+  import functools
 # pylint: enable=g-import-not-at-top
 
 

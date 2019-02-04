@@ -75,7 +75,7 @@ class _Extractor(object):
     """Returns `promise.Promise` => to_path."""
     self._pbar_path.update_total(1)
     if resource.extract_method not in _EXTRACT_METHODS:
-      raise ValueError('Unknonw extraction method "%s".' %
+      raise ValueError('Unknown extraction method "%s".' %
                        resource.extract_method)
     future = self._executor.submit(self._sync_extract, resource, to_path)
     return promise.Promise.resolve(future)
