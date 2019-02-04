@@ -87,7 +87,7 @@ def _bounce_to_bbox(points):
 
 
 def _get_random_unit_vector(ndims=2, dtype=tf.float32):
-  x = tf.random_normal((ndims,), dtype=dtype)
+  x = tf.random.normal((ndims,), dtype=dtype)
   return x / tf.linalg.norm(x, axis=-1, keepdims=True)
 
 MovingSequence = collections.namedtuple(
@@ -184,7 +184,7 @@ def image_as_moving_sequence(
                      % (ndims, output_size))
   image_shape = tf.shape(image)
   if start_position is None:
-    start_position = tf.random_uniform((ndims,), dtype=tf.float32)
+    start_position = tf.random.uniform((ndims,), dtype=tf.float32)
   elif start_position.shape != (ndims,):
     raise ValueError("start_positions must (%d,)" % ndims)
   velocity = tf.convert_to_tensor(velocity, dtype=tf.float32)
@@ -197,8 +197,11 @@ def image_as_moving_sequence(
   trajectory = _bounce_to_bbox(trajectory)
 
   total_padding = output_size - image_shape[:2]
-  with tf.control_dependencies([tf.assert_non_negative(total_padding)]):
-    total_padding = tf.identity(total_padding)
+
+  # cond = tf.assert_greater(total_padding, -1)
+  # if not tf.executing_eagerly():
+  #   with tf.control_dependencies([cond]):
+  #     total_padding = tf.identity(total_padding)
 
   sequence_pad_lefts = tf.cast(
     tf.math.round(trajectory * tf.cast(total_padding, tf.float32)), tf.int32)
