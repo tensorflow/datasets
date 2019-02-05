@@ -20,6 +20,7 @@ from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.coco import Coco2014
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
+from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.lsun import Lsun
