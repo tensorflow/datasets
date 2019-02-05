@@ -21,9 +21,6 @@ import os
 # Directory where to store processed datasets.
 DATA_DIR = os.path.join("~", "tensorflow_datasets")
 
-# GCS bucket with dataset info and metadata files
-DATASET_INFO_BUCKET = "gs://tfds-data/dataset_info"
-
 # Suffix of files / directories which aren't finished downloading / extracting.
 INCOMPLETE_SUFFIX = ".incomplete"
 

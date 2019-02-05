@@ -37,13 +37,15 @@ from __future__ import print_function
 import collections
 import os
 import pprint
+import tempfile
+from xml.etree import ElementTree
 
 from absl import logging
 import numpy as np
+import requests
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -56,6 +58,11 @@ from tensorflow_metadata.proto.v0 import statistics_pb2
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
+
+# GCS
+GCS_URL = "http://storage.googleapis.com/tfds-data"
+GCS_BUCKET = "gs://tfds-data"
+GCS_DATASET_INFO_PATH = "dataset_info"
 
 INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
@@ -324,11 +331,16 @@ class DatasetInfo(object):
 
   def initialize_from_bucket(self):
     """Initialize DatasetInfo from GCS bucket info files."""
-    info_path = os.path.join(constants.DATASET_INFO_BUCKET, self.name)
+    dataset_path_parts = [self.name]
     if self._builder.builder_config:
-      info_path = os.path.join(info_path, self._builder.builder_config.name)
-    info_path = os.path.join(info_path, str(self.version))
-    return self.read_from_directory(info_path, from_bucket=True)
+      dataset_path_parts.append(self._builder.builder_config.name)
+    dataset_path_parts.append(str(self.version))
+
+    # In order to support Colab, we use the HTTP GCS API to access the metadata
+    # files. They are copied locally and then loaded.
+    tmp_dir = tempfile.mkdtemp("tfds")
+    copy_gcs_files("/".join(dataset_path_parts), tmp_dir)
+    return self.read_from_directory(tmp_dir, from_bucket=True)
 
   def __repr__(self):
     return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(
@@ -512,3 +524,43 @@ def read_from_json(json_filename):
   parsed_proto = json_format.Parse(dataset_info_json_str,
                                    dataset_info_pb2.DatasetInfo())
   return parsed_proto
+
+
+def download_gcs_file(path, out_fname=None):
+  """Download a file from GCS, optionally to a file."""
+  url = "/".join([GCS_URL, path])
+  stream = bool(out_fname)
+  resp = requests.get(url, stream=stream)
+  if not resp.ok:
+    raise ValueError("GCS bucket inaccessible")
+  if out_fname:
+    with tf.io.gfile.GFile(out_fname, "wb") as f:
+      for chunk in resp.iter_content(1024):
+        f.write(chunk)
+  else:
+    return resp.content
+
+
+@utils.memoize()
+def gcs_files():
+  top_level_xml_str = download_gcs_file("")
+  xml_root = ElementTree.fromstring(top_level_xml_str)
+  filenames = [el[0].text for el in xml_root if el.tag.endswith("Contents")]
+  return filenames
+
+
+def gcs_dataset_files(dataset_dir):
+  """Return paths to GCS files in the given dataset directory."""
+  prefix = "/".join([GCS_DATASET_INFO_PATH, dataset_dir, ""])
+  # Filter for this dataset
+  filenames = [el for el in gcs_files()
+               if el.startswith(prefix) and len(el) > len(prefix)]
+  return filenames
+
+
+def copy_gcs_files(dataset_dir, out_dir):
+  """Copy GCS files from a dataset_dir to out_dir."""
+  data_files = gcs_dataset_files(dataset_dir)
+  for fname in data_files:
+    out_fname = os.path.join(out_dir, os.path.basename(fname))
+    download_gcs_file(fname, out_fname)
