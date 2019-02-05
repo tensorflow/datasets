@@ -81,7 +81,7 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
     dirs = tf.io.gfile.listdir(walk_dir)
 
     for d in dirs:
-      if os.path.isdir(os.path.join(walk_dir, d)):
+      if tf.io.gfile.isdir(os.path.join(walk_dir, d)):
         for full_path, _, fname in tf.io.gfile.walk(os.path.join(walk_dir, d)):
           for image_file in fname:
             if image_file.endswith(".jpg"):
