@@ -138,7 +138,7 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
   def _vocab_text_gen(self, shared_features, **kwargs):
     for i, ex in enumerate(self._generate_examples(**kwargs)):
       # Use 10k examples for vocab generation
-      if i >= 10000:
+      if i >= 1000:
         break
       yield " ".join([ex[name] for name in shared_features])
 
@@ -189,7 +189,7 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
 
           # TODO: translate long and short indices into the encoded space
           # And have a way to go back to the original indices
-          short_answer_indices = []
+          short_answer_indices = [0, 0]
           short_answers = annotation["short_answers"]
           if short_answers:
             short_answer = short_answers[0]
@@ -208,8 +208,8 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
               "yes_no_answer": annotation["yes_no_answer"],
               "question_text": record["question_text"],
               "document_text": document_text,
-              # short_answer_indices
-              # long_answer_indices
+              "short_answer_indices": short_answer_indices,
+              "long_answer_indices": long_answer_indices,
           }
 
 
