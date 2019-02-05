@@ -23,6 +23,7 @@ import hashlib
 import itertools
 import os
 
+from absl.testing import absltest
 from absl.testing import parameterized
 import tensorflow as tf
 
@@ -132,17 +133,17 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
   def _mock_out_forbidden_os_functions(self):
     """Raises error if forbidden os functions are called instead of gfile."""
     err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead.")
-    mock_os = tf.compat.v1.test.mock.Mock(os, path=os.path)
+    mock_os = absltest.mock.Mock(os, path=os.path)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       getattr(mock_os, fop).side_effect = err
-    os_patcher = tf.compat.v1.test.mock.patch(
+    os_patcher = absltest.mock.patch(
         self.DATASET_CLASS.__module__ + ".os", mock_os, create=True)
     os_patcher.start()
     self.patchers.append(os_patcher)
 
     mock_builtins = __builtins__.copy()
-    mock_builtins["open"] = tf.compat.v1.test.mock.Mock(side_effect=err)
-    open_patcher = tf.compat.v1.test.mock.patch(
+    mock_builtins["open"] = absltest.mock.Mock(side_effect=err)
+    open_patcher = absltest.mock.patch(
         self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins)
     open_patcher.start()
     self.patchers.append(open_patcher)
@@ -192,7 +193,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       self._download_and_prepare_as_dataset(self.builder)
 
   def _download_and_prepare_as_dataset(self, builder):
-    with tf.compat.v1.test.mock.patch.multiple(
+    with absltest.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_extract_result,

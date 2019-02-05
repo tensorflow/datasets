@@ -23,6 +23,8 @@ import hashlib
 import io
 import os
 import tempfile
+
+from absl.testing import absltest
 import tensorflow as tf
 
 from tensorflow_datasets.core.download import downloader
@@ -48,7 +50,7 @@ class _FakeResponse(object):
 class DownloaderTest(test_case.TestCase):
 
   def setUp(self):
-    self.addCleanup(tf.compat.v1.test.mock.patch.stopall)
+    self.addCleanup(absltest.mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
     self.url = 'http://example.com/foo.tar.gz'
@@ -58,18 +60,18 @@ class DownloaderTest(test_case.TestCase):
     self.response = b'This \nis an \nawesome\n response!'
     self.resp_checksum = hashlib.sha256(self.response).hexdigest()
     self.cookies = {}
-    tf.compat.v1.test.mock.patch.object(
+    absltest.mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    tf.compat.v1.test.mock.patch.object(
+    absltest.mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    self.downloader._pbar_url = tf.compat.v1.test.mock.MagicMock()
-    self.downloader._pbar_dl_size = tf.compat.v1.test.mock.MagicMock()
+    self.downloader._pbar_url = absltest.mock.MagicMock()
+    self.downloader._pbar_dl_size = absltest.mock.MagicMock()
 
   def test_ok(self):
     promise = self.downloader.download(self.resource, self.tmp_dir)
@@ -95,14 +97,14 @@ class DownloaderTest(test_case.TestCase):
 
   def test_http_error(self):
     error = downloader.requests.exceptions.HTTPError('Problem serving file.')
-    tf.compat.v1.test.mock.patch.object(
+    absltest.mock.patch.object(
         downloader.requests.Session, 'get', side_effect=error).start()
     promise = self.downloader.download(self.resource, self.tmp_dir)
     with self.assertRaises(downloader.requests.exceptions.HTTPError):
       promise.get()
 
   def test_bad_http_status(self):
-    tf.compat.v1.test.mock.patch.object(
+    absltest.mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, b'error', status_code=404),

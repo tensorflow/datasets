@@ -21,7 +21,10 @@ from __future__ import print_function
 
 import os
 import re
+
+from absl.testing import absltest
 import tensorflow as tf
+
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.testing import test_case
@@ -47,7 +50,7 @@ class ExtractorTest(test_case.TestCase):
   def setUp(self):
     super(ExtractorTest, self).setUp()
     self.extractor = extractor.get_extractor()
-    self.extractor._pbar_path = tf.compat.v1.test.mock.MagicMock()
+    self.extractor._pbar_path = absltest.mock.MagicMock()
     # Where archive will be extracted:
     self.to_path = os.path.join(self.tmp_dir, 'extracted_arch')
     # Obviously it must not exist before test runs:
