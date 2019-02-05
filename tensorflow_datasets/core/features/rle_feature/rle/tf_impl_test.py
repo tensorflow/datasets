@@ -8,6 +8,7 @@ import numpy as np
 import tensorflow_datasets.core.features.rle_feature.rle.tf_impl as brle
 import tensorflow_datasets.core.features.rle_feature.rle.shared_tests as st
 from tensorflow_datasets.core import test_utils
+tf.compat.v1.enable_eager_execution()
 
 
 class BlreTfTest(tf.test.TestCase):
@@ -16,6 +17,10 @@ class BlreTfTest(tf.test.TestCase):
     return brle
 
   def assert_array_equal(self, x, y, *args, **kwargs):
+    if isinstance(x, tf.Tensor):
+      x = self.evaluate(x)
+    if isinstance(y, tf.Tensor):
+      y = self.evaluate(y)
     return self.assertAllEqual(x, y, *args, **kwargs)
 
   def dense_logical_not(self, x):
@@ -25,30 +30,9 @@ class BlreTfTest(tf.test.TestCase):
     assert(len(x.shape) == 1)
     return tf.shape(x)[0]
 
-#   def test_encode_decode(self):
-#     st.test_encode_decode(self)
-
-#   def test_decode_encode(self):
-#     st.test_decode_encode(self)
-
   @test_utils.run_in_graph_and_eager_modes()
   def test_brle_logical_not(self):
     st.test_brle_logical_not(self)
-
-#   def test_maybe_pad_brle(self):
-#     st.test_maybe_pad_brle(self)
-
-#   def test_merge_brle_lengths(self):
-#     st.test_merge_brle_lengths(self)
-
-#   def test_split_long_brle_lengths(self):
-#     st.test_split_long_brle_lengths(self)
-
-#   def test_split_merge(self):
-#     st.test_split_merge(self)
-
-#   def test_encode(self):
-#     st.test_encode(self)
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_brle_to_dense(self):

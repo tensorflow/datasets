@@ -24,6 +24,9 @@ class BlreNpTest(unittest.TestCase):
     assert(len(x.shape) == 1)
     return x.shape[0]
 
+  def evaluate(self, x):
+    return x
+
   # RLE tests
   def test_merge_rle_lengths(self):
     st.test_merge_rle_lengths(self)
