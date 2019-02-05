@@ -45,6 +45,7 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"open_images_v4"`](#open_images_v4)
   * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
   * [`"svhn_cropped"`](#svhn_cropped)
+  * [`"tf_flowers"`](#tf_flowers)
 * [`text`](#text)
   * [`"imdb_reviews"`](#imdb_reviews)
   * [`"lm1b"`](#lm1b)
@@ -262,7 +263,7 @@ The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6
 
 * URL: [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 * `DatasetBuilder`: [`tfds.image.cifar.Cifar10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
-* Version: `v1.0.1`
+* Version: `v1.0.2`
 
 ### Features
 ```
@@ -306,7 +307,7 @@ This dataset is just like the CIFAR-10, except it has 100 classes containing 600
 
 * URL: [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 * `DatasetBuilder`: [`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
-* Version: `v1.3.0`
+* Version: `v1.3.1`
 
 ### Features
 ```
@@ -788,17 +789,27 @@ classes.
 
 * URL: [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 * `DatasetBuilder`: [`tfds.image.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/open_images.py)
-* Version: `v0.0.1`
+* Version: `v0.1.0`
 
 ### Features
 ```
 FeaturesDict({
+    'bobjects': SequenceDict({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
     'objects': SequenceDict({
         'confidence': Tensor(shape=(), dtype=tf.int32),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
 })
 ```
@@ -949,6 +960,45 @@ booktitle = {Advances in Neural Information Processing Systems ({NIPS})},
 title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
 year = {2011}
 }
+
+```
+
+---
+
+## `"tf_flowers"`
+
+A large set of images of flowers
+
+* URL: [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
+* `DatasetBuilder`: [`tfds.image.flowers.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flowers.py)
+* Version: `v1.0.0`
+
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+})
+```
+
+
+### Statistics
+None computed
+
+### Urls
+ * [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+@ONLINE {tfflowers,
+author = "The TensorFlow Team",
+title = "Flowers",
+month = "jan",
+year = "2019",
+url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 
 ```
 
