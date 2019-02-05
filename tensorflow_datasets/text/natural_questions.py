@@ -119,15 +119,14 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
             "question_text":
                 tfds.features.Text(
                     encoder_config=self.builder_config.text_encoder_config),
-            "document_html":
+            "document_text":
                 tfds.features.Text(
                     encoder_config=self.builder_config.text_encoder_config),
-            "long_answer":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "short_answer":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+            # These are indices into document_text
+            "long_answer_indices": tfds.features.Tensor(
+                dtype=tf.int64, shape=(2,)),
+            "short_answer_indices": tfds.features.Tensor(
+                dtype=tf.int64, shape=(2,)),
             "yes_no_answer": tfds.features.ClassLabel(
                 names=["NO", "YES", "NONE"]),
         }),
@@ -136,26 +135,26 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, **kwargs):
+  def _vocab_text_gen(self, shared_features, **kwargs):
     for i, ex in enumerate(self._generate_examples(**kwargs)):
       # Use 10k examples for vocab generation
       if i >= 10000:
         break
-      # long_answer and short_answer are in the document_html so no need to
-      # include them here.
-      vocab_fields = ["document_title", "question_text", "document_html"]
-      yield " ".join([ex[name] for name in vocab_fields])
+      yield " ".join([ex[name] for name in shared_features])
 
   def _split_generators(self, dl_manager):
     downloads = dl_manager.download(_nq_urls())
 
     # Generate vocabulary
     # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
-    shared_vocab_features = ["document_title", "question_text", "document_html",
-                             "short_answer", "long_answer"]
+    shared_vocab_features = ["document_title", "question_text", "document_text"]
     text_feature = self.info.features[shared_vocab_features[0]]
     text_feature.maybe_build_from_corpus(
-        self._vocab_text_gen(files=downloads["train"], dl_manager=dl_manager))
+        self._vocab_text_gen(
+            shared_vocab_features,
+            files=downloads["train"],
+            dl_manager=dl_manager))
+    # Share the encoder
     encoder = text_feature.encoder
     for feature in shared_vocab_features:
       self.info.features[feature].maybe_set_encoder(encoder)
@@ -175,9 +174,10 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
     """This function returns the examples in the raw (text) form."""
     for filename in files:
       for _, f in dl_manager.iter_archive(filename):
-      # with tf.io.gfile.GFile(filename) as f:
         reader = tfds.core.lazy_imports.jsonlines.Reader(f)
         for record in reader:
+          document_text = " ".join(
+              [token["token"] for token in record["document_tokens"]])
 
           def _answer(annotation):
             start_byte = annotation["start_byte"]
@@ -186,20 +186,30 @@ class NaturalQuestions(tfds.core.GeneratorBasedBuilder):
                 "utf-8")[start_byte:end_byte].decode("utf-8")
 
           annotation = record["annotations"][0]
+
+          # TODO: translate long and short indices into the encoded space
+          # And have a way to go back to the original indices
+          short_answer_indices = []
           short_answers = annotation["short_answers"]
           if short_answers:
-            short_answer = _answer(short_answers[0])
-          else:
-            short_answer = ""
+            short_answer = short_answers[0]
+            short_answer_indices = (
+                short_answer["start_token"],
+                short_answer["end_token"])
+          long_answer = annotation["long_answer"]
+          long_answer_indices = (
+              long_answer["start_token"],
+              long_answer["end_token"])
+
           yield {
               "example_id": record["example_id"],
               "document_title": record["document_title"],
-              "question_text": record["question_text"],
-              "document_html": record["document_html"],
               "document_url": record["document_url"],
-              "long_answer": _answer(annotation["long_answer"]),
-              "short_answer": short_answer,
               "yes_no_answer": annotation["yes_no_answer"],
+              "question_text": record["question_text"],
+              "document_text": document_text,
+              # short_answer_indices
+              # long_answer_indices
           }
 
 
