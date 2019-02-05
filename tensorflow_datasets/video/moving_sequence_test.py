@@ -7,6 +7,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import test_utils
 import tensorflow_datasets.video.moving_sequence as ms
+tf.compat.v1.enable_eager_execution()
 
 
 class MovingSequenceTest(tf.test.TestCase):
@@ -29,15 +30,17 @@ class MovingSequenceTest(tf.test.TestCase):
     sequence = tf.cast(sequence.image_sequence, tf.float32)
 
     self.assertAllEqual(
-        tf.reduce_sum(sequence, axis=(1, 2, 3)),
-        tf.fill((sequence_length,), tf.reduce_sum(tf.cast(image, tf.float32))))
+        self.evaluate(tf.reduce_sum(sequence, axis=(1, 2, 3))),
+        self.evaluate(
+          tf.fill(
+            (sequence_length,), tf.reduce_sum(tf.cast(image, tf.float32)))))
 
     for i, full_image in enumerate(tf.unstack(sequence, axis=0)):
       j = i // 2
       subimage = full_image[i:i+h, j:j+w]
       n_true = tf.reduce_sum(subimage)
       # allow for pixel rounding errors in each dimension
-      self.assertAllEqual(n_true >= (h-1)*(w-1), True)
+      self.assertTrue(self.evaluate(n_true) >= (h-1)*(w-1))
 
 
 if __name__ == '__main__':

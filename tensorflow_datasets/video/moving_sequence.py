@@ -108,6 +108,7 @@ def image_as_moving_sequence(
   import tensorflow as tf
   import tensorflow_datasets as tfds
   from tensorflow_datasets.video import moving_sequence
+  tf.compat.v1.enable_eager_execution()
 
   def animate(sequence):
     import numpy as np
@@ -199,9 +200,10 @@ def image_as_moving_sequence(
   total_padding = output_size - image_shape[:2]
 
   # cond = tf.assert_greater(total_padding, -1)
-  # if not tf.executing_eagerly():
-  #   with tf.control_dependencies([cond]):
-  #     total_padding = tf.identity(total_padding)
+  cond = tf.compat.v1.assert_greater(total_padding, -1)
+  if not tf.executing_eagerly():
+    with tf.control_dependencies([cond]):
+      total_padding = tf.identity(total_padding)
 
   sequence_pad_lefts = tf.cast(
     tf.math.round(trajectory * tf.cast(total_padding, tf.float32)), tf.int32)
