@@ -11,7 +11,8 @@ from tensorflow_datasets.video.moving_sequence import image_as_moving_sequence  
 
 _OUT_RESOLUTION = (64, 64)
 _SEQUENCE_LENGTH = 20
-_citation = """
+_URL = "http://www.cs.toronto.edu/~nitish/unsupervised_video/"
+_CITATION = """\
 @article{DBLP:journals/corr/SrivastavaMS15,
   author    = {Nitish Srivastava and
                Elman Mansimov and
@@ -40,19 +41,17 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
         description=(
           "Moving variant of MNIST database of handwritten digits. This is the "
           "data used by the authors for reporting model performance. See "
-          "`tensorflow_datasets.video.moving_mnist.image_as_moving_sequence` "
+          "`tfds.video.moving_mnist.image_as_moving_sequence` "
           "for generating training/validation data from the MNIST dataset."),
         features=tfds.features.FeaturesDict(
           dict(image_sequence=tfds.features.Video(
               shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,)))),
-        urls=["http://www.cs.toronto.edu/~nitish/unsupervised_video/"],
-        citation=_citation
+        urls=[_URL],
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
-    data_path = dl_manager.download(
-        "http://www.cs.toronto.edu/~nitish/unsupervised_video/"
-        "mnist_test_seq.npy")
+    data_path = dl_manager.download(_URL + "mnist_test_seq.npy")
 
     # authors only provide test data.
     # See `tfds.video.moving_mnist.image_as_moving_sequence` for mapping
@@ -65,7 +64,7 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_path):
-    """Generate MOVING_MNIST sequences.
+    """Generate MovingMnist sequences.
 
     Args:
       data_path (str): Path to the data file
