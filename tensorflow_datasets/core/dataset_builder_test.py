@@ -32,6 +32,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.testing import test_case
 
 tf.compat.v1.enable_eager_execution()
 
@@ -96,7 +97,7 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
     ]
 
 
-class DatasetBuilderTest(tf.test.TestCase):
+class DatasetBuilderTest(test_case.TestCase):
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_shared_generator(self):
@@ -276,10 +277,11 @@ class DatasetBuilderTest(tf.test.TestCase):
         )
 
 
-class DatasetBuilderReadTest(tf.test.TestCase):
+class DatasetBuilderReadTest(test_case.TestCase):
 
   @classmethod
   def setUpClass(cls):
+    super(DatasetBuilderReadTest, cls).setUpClass()
     cls._tfds_tmp_dir = test_utils.make_tmp_dir()
     builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
     builder.download_and_prepare()
@@ -329,4 +331,4 @@ class DatasetBuilderReadTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

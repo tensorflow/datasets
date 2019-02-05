@@ -30,6 +30,7 @@ import promise
 import tensorflow as tf
 from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import resource as resource_lib
+from tensorflow_datasets.testing import test_case
 
 
 ZIP = resource_lib.ExtractMethod.ZIP
@@ -56,7 +57,7 @@ def _sha256(str_):
   return hashlib.sha256(str_.encode('utf8')).hexdigest()
 
 
-class DownloadManagerTest(tf.test.TestCase):
+class DownloadManagerTest(test_case.TestCase):
 
   def _add_file(self, path, content='', mode='w'):
     """Returns open file handle."""
@@ -290,4 +291,4 @@ class DownloadManagerTest(tf.test.TestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  test_case.main()

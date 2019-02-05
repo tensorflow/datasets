@@ -28,6 +28,7 @@ from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.testing import test_case
 
 tf.compat.v1.enable_eager_execution()
 
@@ -76,7 +77,7 @@ class DummyCSVBuilder(DummyTFRecordBuilder):
     return file_adapter_cls(serialized_info)
 
 
-class FileFormatAdapterTest(tf.test.TestCase):
+class FileFormatAdapterTest(test_case.TestCase):
 
   def _test_generator_based_builder(self, builder_cls):
     with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
@@ -109,7 +110,7 @@ class FileFormatAdapterTest(tf.test.TestCase):
     self._test_generator_based_builder(DummyCSVBuilder)
 
 
-class TFRecordUtilsTest(tf.test.TestCase):
+class TFRecordUtilsTest(test_case.TestCase):
 
   def test_dict_to_example(self):
     example = file_format_adapter._dict_to_tf_example({
@@ -145,4 +146,4 @@ class TFRecordUtilsTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

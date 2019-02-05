@@ -19,11 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
 from tensorflow_datasets.core.utils import version
+from tensorflow_datasets.testing import test_case
 
 
-class VersionTest(tf.test.TestCase):
+class VersionTest(test_case.TestCase):
 
   def test_version(self):
     """Test the zip nested function."""
@@ -53,4 +53,4 @@ class VersionTest(tf.test.TestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  test_case.main()

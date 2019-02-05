@@ -20,12 +20,12 @@ from __future__ import division
 from __future__ import print_function
 
 from absl.testing import parameterized
-import tensorflow as tf
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.testing import test_case
 
 
-class NamingTest(parameterized.TestCase, tf.test.TestCase):
+class NamingTest(parameterized.TestCase, test_case.TestCase):
 
   @parameterized.parameters(
       ("HelloWorld", "hello_world"),
@@ -94,4 +94,4 @@ class NamingTest(parameterized.TestCase, tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

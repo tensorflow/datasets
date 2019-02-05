@@ -21,10 +21,10 @@ from __future__ import print_function
 
 import abc
 import six
-import tensorflow as tf
 
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.testing import test_case
 
 
 @six.add_metaclass(registered.RegisteredDataset)
@@ -57,7 +57,7 @@ class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
   IN_DEVELOPMENT = True
 
 
-class RegisteredTest(tf.test.TestCase):
+class RegisteredTest(test_case.TestCase):
 
   def test_registered(self):
     name = "empty_dataset_builder"
@@ -149,4 +149,4 @@ class RegisteredTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

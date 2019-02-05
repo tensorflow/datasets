@@ -20,11 +20,11 @@ from __future__ import division
 from __future__ import print_function
 
 from absl.testing import parameterized
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.testing import test_case
 
 
-class LazyImportsTest(parameterized.TestCase, tf.test.TestCase):
+class LazyImportsTest(parameterized.TestCase, test_case.TestCase):
 
   @parameterized.parameters(
       "matplotlib",
@@ -43,4 +43,4 @@ class LazyImportsTest(parameterized.TestCase, tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

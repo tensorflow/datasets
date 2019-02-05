@@ -23,11 +23,12 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.testing import test_case
 
 tf.compat.v1.enable_eager_execution()
 
 
-class TfUtilsTest(tf.test.TestCase):
+class TfUtilsTest(test_case.TestCase):
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_graph_runner(self):
@@ -58,4 +59,4 @@ class TfUtilsTest(tf.test.TestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  test_case.main()

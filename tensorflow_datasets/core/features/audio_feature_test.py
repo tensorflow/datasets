@@ -76,4 +76,4 @@ class AudioFeatureTest(test_utils.FeatureExpectationsTestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_utils.main()

@@ -19,12 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
-
 from tensorflow_datasets.core import units
+from tensorflow_datasets.testing import test_case
 
 
-class UnitsTest(tf.test.TestCase):
+class UnitsTest(test_case.TestCase):
 
   def test_none(self):
     self.assertEqual("?? GiB", units.size_str(None))
@@ -41,4 +40,4 @@ class UnitsTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

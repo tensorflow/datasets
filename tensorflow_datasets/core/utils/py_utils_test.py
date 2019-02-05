@@ -22,12 +22,11 @@ from __future__ import print_function
 import hashlib
 import os
 
-import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import test_case
 
 
-class PyUtilsTest(tf.test.TestCase):
+class PyUtilsTest(test_case.TestCase):
 
   def test_map_nested(self):
     """Test the mapping function."""
@@ -139,4 +138,4 @@ class ReadChecksumDigestTest(test_case.TestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  test_case.main()

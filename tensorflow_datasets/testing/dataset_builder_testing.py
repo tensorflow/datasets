@@ -114,8 +114,6 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
   def setUp(self):
     super(TestCase, self).setUp()
     self.patchers = []
-    # New data_dir and builder for each test
-    self.data_dir = test_utils.make_tmp_dir(self.get_temp_dir())
     self.builder = self._make_builder()
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
@@ -174,7 +172,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
                             self.DL_EXTRACT_RESULT)
 
   def _make_builder(self, config=None):
-    return self.DATASET_CLASS(data_dir=self.data_dir, config=config)  # pylint: disable=not-callable
+    return self.DATASET_CLASS(data_dir=self.tmp_dir, config=config)  # pylint: disable=not-callable
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
@@ -286,4 +284,4 @@ def compare_shapes_and_types(tensor_info, output_types, output_shapes):
       tf_utils.assert_shape_match(expected_shape, output_shape)
 
 
-main = tf.test.main
+main = test_utils.main

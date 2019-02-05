@@ -23,6 +23,7 @@ import contextlib
 import os
 import tempfile
 
+from absl.testing import absltest
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -32,6 +33,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.testing import test_case
 
 
 @contextlib.contextmanager
@@ -87,7 +89,7 @@ class FeatureExpectation(object):
     self.serialized_info = serialized_info
 
 
-class SubTestCase(tf.test.TestCase):
+class SubTestCase(test_case.TestCase):
   """Adds subTest() context manager to the TestCase if supported.
 
   Note: To use this feature, make sure you call super() in setUpClass to
@@ -96,6 +98,7 @@ class SubTestCase(tf.test.TestCase):
 
   @classmethod
   def setUpClass(cls):
+    super(SubTestCase, cls).setUpClass()
     cls._sub_test_stack = []
 
   @contextlib.contextmanager
@@ -117,7 +120,7 @@ def run_in_graph_and_eager_modes(func=None,
   """Execute the decorated test with and without enabling eager execution.
 
   This function returns a decorator intended to be applied to test methods in
-  a `tf.test.TestCase` class. Doing so will cause the contents of the test
+  a `test_case.TestCase` class. Doing so will cause the contents of the test
   method to be executed twice - once in graph mode, and once with eager
   execution enabled. This allows unittests to confirm the equivalence between
   eager and graph execution.
@@ -130,7 +133,7 @@ def run_in_graph_and_eager_modes(func=None,
   ```python
   tf.compat.v1.enable_eager_execution()
 
-  class SomeTest(tf.test.TestCase):
+  class SomeTest(test_case.TestCase):
 
     @test_utils.run_in_graph_and_eager_modes
     def test_foo(self):
@@ -140,7 +143,7 @@ def run_in_graph_and_eager_modes(func=None,
       self.assertAllEqual([4, 6], self.evaluate(z))
 
   if __name__ == "__main__":
-    tf.test.main()
+    test_case.main()
   ```
 
   This test validates that `tf.add()` has the same behavior when computed with
@@ -332,3 +335,6 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   def _generate_examples(self):
     for i in range(30):
       yield {"x": i}
+
+
+main = test_case.main

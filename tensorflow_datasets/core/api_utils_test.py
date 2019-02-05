@@ -19,11 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.testing import test_case
 
 
-class ApiUtilsTest(tf.test.TestCase):
+class ApiUtilsTest(test_case.TestCase):
 
   def test_disallow_positional_args(self):
 
@@ -79,4 +79,4 @@ class ApiUtilsTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

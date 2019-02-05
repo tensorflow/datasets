@@ -25,6 +25,7 @@ from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.testing import test_case
 
 RANGE_TRAIN = list(range(0, 2000))
 RANGE_TEST = list(range(3000, 3200))
@@ -73,10 +74,11 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
             tfds.as_numpy(self.as_dataset(split=split))]
 
 
-class SplitsUnitTest(tf.test.TestCase):
+class SplitsUnitTest(test_case.TestCase):
 
   @classmethod
   def setUpClass(cls):
+    super(SplitsUnitTest, cls).setUpClass()
     cls._splits = tfds.core.SplitDict()
     cls._splits.add(tfds.core.SplitInfo(name="train", num_shards=10))
     cls._splits.add(tfds.core.SplitInfo(name="test", num_shards=2))
@@ -236,12 +238,14 @@ class SplitsUnitTest(tf.test.TestCase):
     test = tfds.Split.TEST
     train = tfds.Split.TRAIN
 
-    with self.assertRaisesWithPredicateMatch(
-        NotImplementedError, "Equality is not implemented"):
+    with self.assertRaisesWithLiteralMatch(
+        NotImplementedError,
+        "Equality is not implemented between merged/sub splits."):
       _ = test.subsplit(tfds.percent[10:]) == test.subsplit(tfds.percent[10:])
 
-    with self.assertRaisesWithPredicateMatch(
-        NotImplementedError, "Equality is not implemented"):
+    with self.assertRaisesWithLiteralMatch(
+        NotImplementedError,
+        "Equality is not implemented between merged/sub splits."):
       _ = test + train == test + train
 
     self.assertEqual(tfds.Split.TEST, tfds.Split.TEST)
@@ -260,7 +264,7 @@ class SplitsUnitTest(tf.test.TestCase):
     return read_instruction.get_list_sliced_split_info()
 
 
-class SliceToMaskTest(tf.test.TestCase):
+class SliceToMaskTest(test_case.TestCase):
 
   def __getitem__(self, slice_value):
     return slice_value
@@ -276,7 +280,7 @@ class SliceToMaskTest(tf.test.TestCase):
     self.assertEqual(s2p(self[:-20]), [True] * 80 + [False] * 20)
 
 
-class SplitsIntegrationTest(tf.test.TestCase):
+class SplitsIntegrationTest(test_case.TestCase):
 
   @classmethod
   def setUpClass(cls):
@@ -407,7 +411,7 @@ class SplitsIntegrationTest(tf.test.TestCase):
       self._builder.values(split=split)
 
 
-class SplitsDictTest(tf.test.TestCase):
+class SplitsDictTest(test_case.TestCase):
 
   @property
   def split_dict(self):
@@ -440,4 +444,4 @@ class SplitsDictTest(tf.test.TestCase):
     self.assertEqual(10, sdp[1].num_shards)
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

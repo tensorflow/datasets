@@ -30,6 +30,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
+from tensorflow_datasets.testing import test_case
 
 tf.compat.v1.enable_eager_execution()
 
@@ -62,10 +63,11 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
       }
 
 
-class DatasetInfoTest(tf.test.TestCase):
+class DatasetInfoTest(test_case.TestCase):
 
   @classmethod
   def setUpClass(cls):
+    super(DatasetInfoTest, cls).setUpClass()
     cls._tfds_tmp_dir = test_utils.make_tmp_dir()
     cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
 
@@ -193,4 +195,4 @@ class DatasetInfoTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

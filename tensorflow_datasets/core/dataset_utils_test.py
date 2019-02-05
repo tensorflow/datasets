@@ -24,6 +24,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.testing import test_case
 
 tf.compat.v1.enable_eager_execution()
 
@@ -32,7 +33,7 @@ def _create_dataset(rng):
   return tf.data.Dataset.from_tensor_slices(list(rng))
 
 
-class DatasetAsNumPyTest(tf.test.TestCase):
+class DatasetAsNumPyTest(test_case.TestCase):
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_singleton_tensor(self):
@@ -138,4 +139,4 @@ class DatasetAsNumPyTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_case.main()

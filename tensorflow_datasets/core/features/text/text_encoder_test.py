@@ -25,15 +25,15 @@ import os
 
 from absl.testing import parameterized
 import numpy as np
-import tensorflow as tf
 from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.features.text import text_encoder
+from tensorflow_datasets.testing import test_case
 
 ZH_HELLO = '你好 '
 EN_HELLO = 'hello '
 
 
-class TextEncoderTest(tf.test.TestCase):
+class TextEncoderTest(test_case.TestCase):
 
   def test_pad_decr(self):
     self.assertEqual([2, 1, 0], text_encoder.pad_decr([3, 2, 1]))
@@ -55,7 +55,7 @@ class TextEncoderTest(tf.test.TestCase):
     self.assertTrue(text_encoder.is_mixed_alphanum(ZH_HELLO))
 
 
-class ByteTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
+class ByteTextEncoderTest(parameterized.TestCase, test_case.TestCase):
   # Incremented for pad
   ZH_HELLO_IDS = [i + 1 for i in [228, 189, 160, 229, 165, 189, 32]]
   EN_HELLO_IDS = [i + 1 for i in [104, 101, 108, 108, 111, 32]]
@@ -103,7 +103,7 @@ class ByteTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
                        file_backed_encoder.additional_tokens)
 
 
-class TokenTextEncoderTest(tf.test.TestCase):
+class TokenTextEncoderTest(test_case.TestCase):
 
   def test_encode_decode(self):
     encoder = text_encoder.TokenTextEncoder(
@@ -223,7 +223,7 @@ class TokenTextEncoderTest(tf.test.TestCase):
     self.assertEqual([1, 2], encoder.encode('zoo foo'))
 
 
-class TokenizeTest(parameterized.TestCase, tf.test.TestCase):
+class TokenizeTest(parameterized.TestCase, test_case.TestCase):
 
   def test_default(self):
     text = 'hi<<>><<>foo!^* bar &&  bye (%s hi)' % ZH_HELLO
@@ -283,4 +283,4 @@ class TokenizeTest(parameterized.TestCase, tf.test.TestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  test_case.main()

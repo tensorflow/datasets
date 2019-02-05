@@ -28,11 +28,12 @@ import tensorflow as tf
 from tensorflow_datasets.core.features.text import subword_text_encoder
 from tensorflow_datasets.core.features.text import text_encoder
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.testing import test_case
 
 TEST_DATA_DIR = os.path.join(py_utils.tfds_dir(), 'testing', 'test_data')
 
 
-class SubwordTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
+class SubwordTextEncoderTest(parameterized.TestCase, test_case.TestCase):
 
   def setUp(self):
     super(SubwordTextEncoderTest, self).setUp()
@@ -96,7 +97,7 @@ class SubwordTextEncoderTest(parameterized.TestCase, tf.test.TestCase):
     self.assertEqual(encoder.subwords, self.vocab_list)
 
 
-class SubwordTextEncoderBuildTest(tf.test.TestCase):
+class SubwordTextEncoderBuildTest(test_case.TestCase):
 
   def test_build(self):
     text_gen = lorem_ipsum_generator
@@ -185,4 +186,4 @@ def lorem_ipsum_zh_generator():
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  test_case.main()
