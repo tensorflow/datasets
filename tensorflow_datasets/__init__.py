@@ -39,7 +39,39 @@ Documentation:
 * [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
 """
 # pylint: enable=line-too-long
+import types
 
+
+
+def _patch_for_tf1_12(tf):
+  """Monkey patch tf 1.12 so tfds can use it."""
+  tf.io.gfile = tf.gfile
+  tf.io.gfile.copy = tf.gfile.Copy
+  tf.io.gfile.exists = tf.gfile.Exists
+  tf.io.gfile.glob = tf.gfile.Glob
+  tf.io.gfile.isdir = tf.gfile.IsDirectory
+  tf.io.gfile.listdir = tf.gfile.ListDirectory
+  tf.io.gfile.makedirs = tf.gfile.MakeDirs
+  tf.io.gfile.mkdir = tf.gfile.MkDir
+  tf.io.gfile.remove = tf.gfile.Remove
+  tf.io.gfile.rename = tf.gfile.Rename
+  tf.io.gfile.rmtree = tf.gfile.DeleteRecursively
+  tf.io.gfile.stat = tf.gfile.Stat
+  tf.io.gfile.walk = tf.gfile.Walk
+  tf.data.experimental = tf.contrib.data
+  tf.compat.v1 = types.ModuleType("tf.compat.v1")
+  tf.compat.v1.placeholder = tf.placeholder
+  tf.compat.v1.ConfigProto = tf.ConfigProto
+  tf.compat.v1.Session = tf.Session
+  tf.compat.v1.enable_eager_execution = tf.enable_eager_execution
+  tf.compat.v1.io = tf.io
+  tf.compat.v1.data = tf.data
+  tf.compat.v1.data.make_one_shot_iterator = (
+      lambda ds: ds.make_one_shot_iterator())
+  tf.compat.v1.train = tf.train
+  tf.compat.v1.global_variables_initializer = tf.global_variables_initializer
+  tf.compat.v1.test = tf.test
+  tf.compat.v1.test.get_temp_dir = tf.test.get_temp_dir
 
 
 # Copied from tensorflow/probability
@@ -68,18 +100,18 @@ def _ensure_tf_install():  # pylint: disable=g-statement-before-imports
 
   import distutils.version
 
-  #
-  # Update this whenever we need to depend on a newer TensorFlow release.
-  #
-  required_tensorflow_version = "1.13.0"
-
-  if (distutils.version.LooseVersion(tf.__version__) <
-      distutils.version.LooseVersion(required_tensorflow_version)):
+  v_1_12 = distutils.version.LooseVersion("1.12.0")
+  v_1_13 = distutils.version.LooseVersion("1.13.0")
+  tf_version = distutils.version.LooseVersion(tf.__version__)
+  if v_1_12 <= tf_version < v_1_13:
+    # TODO(b/123930850): remove when 1.13 is stable.
+    _patch_for_tf1_12(tf)
+  elif tf_version < v_1_12:
     raise ImportError(
         "This version of TensorFlow Datasets requires TensorFlow "
         "version >= {required}; Detected an installation of version {present}. "
         "Please upgrade TensorFlow to proceed.".format(
-            required=required_tensorflow_version,
+            required="1.13.0",
             present=tf.__version__))
   # pylint: enable=g-import-not-at-top
 

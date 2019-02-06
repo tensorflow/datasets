@@ -238,12 +238,12 @@ class SplitsUnitTest(test_case.TestCase):
     test = tfds.Split.TEST
     train = tfds.Split.TRAIN
 
-    with self.assertRaisesWithLiteralMatch(
+    with self.assertRaisesWithPredicateMatch(
         NotImplementedError,
         "Equality is not implemented between merged/sub splits."):
       _ = test.subsplit(tfds.percent[10:]) == test.subsplit(tfds.percent[10:])
 
-    with self.assertRaisesWithLiteralMatch(
+    with self.assertRaisesWithPredicateMatch(
         NotImplementedError,
         "Equality is not implemented between merged/sub splits."):
       _ = test + train == test + train
