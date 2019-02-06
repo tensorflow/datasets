@@ -41,9 +41,10 @@ def main(argv):
     if i > 10:
       break
     print(i)
-  cifar10, info = tfds.load('cifar10', with_info=True)
-  print(cifar10, info)
-  cifar10_np = tfds.as_numpy(cifar10)
+  builder = tfds.builder('cifar10')
+  dataset = builder.as_dataset(split='train')
+  print(dataset)
+  cifar10_np = tfds.as_numpy(dataset)
   print(cifar10_np)
 
 
