@@ -19,6 +19,7 @@ if [ "$GIT_COMMIT_ID" = "nightly" ]
 then
   GIT_COMMIT_ID="master"
   SETUP_ARGS="--nightly"
+  export TFDS_NIGHTLY_TIMESTAMP=$(date +"%Y%m%d%H%M")
 fi
 
 TMP_DIR=$(mktemp -d)
