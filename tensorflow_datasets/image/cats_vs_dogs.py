@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -59,6 +59,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names=["cat", "dog"]),
         }),
+        supervised_keys=("image", "label"),
         urls=["https://www.microsoft.com/en-us/download/details.aspx?id=54765"],
         citation=_CITATION
         )

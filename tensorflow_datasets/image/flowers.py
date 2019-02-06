@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,7 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(
                 names=["dandelion", "daisy", "tulips", "sunflowers", "roses"]),
         }),
+        supervised_keys=("image", "label"),
         urls=[_URL],
         citation=_CITATION
         )
@@ -85,9 +86,8 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
         for full_path, _, fname in tf.io.gfile.walk(os.path.join(walk_dir, d)):
           for image_file in fname:
             if image_file.endswith(".jpg"):
-              label = d.lower()
               image_path = os.path.join(full_path, image_file)
               yield {
                   "image": image_path,
-                  "label": label,
+                  "label": d.lower(),
               }
