@@ -80,7 +80,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
     """Generate Cats vs Dogs images and labels given a directory path."""
     parent_dirs = tf.io.gfile.listdir(images_dir_path)
     for pd in parent_dirs:
-      if os.path.isdir(os.path.join(images_dir_path, pd)):
+      if tf.io.gfile.isdir(os.path.join(images_dir_path, pd)):
         path_to_image_dir = os.path.join(images_dir_path, pd)
         break
 
