@@ -30,28 +30,24 @@ tf.compat.v1.enable_eager_execution()
 
 class VideoFeatureTest(test_utils.FeatureExpectationsTestCase):
 
-  @property
-  def expectations(self):
+  def test_video(self):
 
     np_video = np.random.randint(256, size=(128, 64, 64, 3), dtype=np.uint8)
 
-    return [
-        test_utils.FeatureExpectation(
-            name='video',
-            feature=features.Video(shape=(None, 64, 64, 3)),
-            shape=(None, 64, 64, 3),
-            dtype=tf.uint8,
-            tests=[
-                # Numpy array
-                test_utils.FeatureExpectationItem(
-                    value=np_video,
-                    expected=np_video,
-                ),
-                # File path (Gif)
-                # File path (.mp4)
-            ],
-        ),
-    ]
+    self.assertFeature(
+        feature=features.Video(shape=(None, 64, 64, 3)),
+        shape=(None, 64, 64, 3),
+        dtype=tf.uint8,
+        tests=[
+            # Numpy array
+            test_utils.FeatureExpectationItem(
+                value=np_video,
+                expected=np_video,
+            ),
+            # File path (Gif)
+            # File path (.mp4)
+        ],
+    )
 
 
 if __name__ == '__main__':

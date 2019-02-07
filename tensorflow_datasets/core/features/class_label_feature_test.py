@@ -28,56 +28,54 @@ tf.compat.v1.enable_eager_execution()
 
 class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
 
-  @property
-  def expectations(self):
-    return [
-        test_utils.FeatureExpectation(
-            name='label',
-            feature=features.ClassLabel(num_classes=10),
-            dtype=tf.int64,
-            shape=(),
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=3,
-                    expected=3,
-                ),
-                test_utils.FeatureExpectationItem(
-                    value='3',
-                    expected=3,
-                ),
-                test_utils.FeatureExpectationItem(
-                    value=10,
-                    raise_cls=ValueError,
-                    raise_msg='greater than configured num_classes',
-                ),
-                test_utils.FeatureExpectationItem(
-                    value='10',
-                    raise_cls=ValueError,
-                    raise_msg='Invalid',
-                ),
-            ]
-        ),
-        test_utils.FeatureExpectation(
-            name='directions',
-            feature=features.ClassLabel(names=['left', 'right']),
-            dtype=tf.int64,
-            shape=(),
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=1,
-                    expected=1,
-                ),
-                test_utils.FeatureExpectationItem(
-                    value='left',
-                    expected=0,
-                ),
-                test_utils.FeatureExpectationItem(
-                    value='right',
-                    expected=1,
-                ),
-            ]
-        ),
-    ]
+  def test_feature(self):
+    self.assertFeature(
+        feature=features.ClassLabel(num_classes=10),
+        dtype=tf.int64,
+        shape=(),
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value=3,
+                expected=3,
+            ),
+            test_utils.FeatureExpectationItem(
+                value='3',
+                expected=3,
+            ),
+            test_utils.FeatureExpectationItem(
+                value=10,
+                raise_cls=ValueError,
+                raise_msg='greater than configured num_classes',
+            ),
+            test_utils.FeatureExpectationItem(
+                value='10',
+                raise_cls=ValueError,
+                raise_msg='Invalid',
+            ),
+        ]
+    )
+
+  def test_labels(self):
+
+    self.assertFeature(
+        feature=features.ClassLabel(names=['left', 'right']),
+        dtype=tf.int64,
+        shape=(),
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value=1,
+                expected=1,
+            ),
+            test_utils.FeatureExpectationItem(
+                value='left',
+                expected=0,
+            ),
+            test_utils.FeatureExpectationItem(
+                value='right',
+                expected=1,
+            ),
+        ]
+    )
 
   def test_num_classes(self):
     labels = features.ClassLabel(num_classes=10)

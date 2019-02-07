@@ -29,142 +29,144 @@ tf.compat.v1.enable_eager_execution()
 
 class SequenceDictFeatureTest(test_utils.FeatureExpectationsTestCase):
 
-  @property
-  def expectations(self):
+  def test_int(self):
 
-    all_tests = [
-        test_utils.FeatureExpectation(
-            name='int',
-            feature=tfds.features.SequenceDict({
-                'int': tf.int32,
-            }, length=3),
-            shape={'int': (3,)},
-            dtype={'int': tf.int32},
-            tests=[
-                # Python array
-                test_utils.FeatureExpectationItem(
-                    value={'int': [1, 2, 3]},
-                    expected={'int': [1, 2, 3]},
-                ),
-                # Numpy array
-                test_utils.FeatureExpectationItem(
-                    value={'int': np.ones(shape=(3,), dtype=np.int32)},
-                    expected={'int': [1, 1, 1]},
-                ),
-                # Array of dict
-                test_utils.FeatureExpectationItem(
-                    value=[
-                        {'int': 1},
-                        {'int': 10},
-                        {'int': 100},
+    self.assertFeature(
+        feature=tfds.features.SequenceDict({
+            'int': tf.int32,
+        }, length=3),
+        shape={'int': (3,)},
+        dtype={'int': tf.int32},
+        tests=[
+            # Python array
+            test_utils.FeatureExpectationItem(
+                value={'int': [1, 2, 3]},
+                expected={'int': [1, 2, 3]},
+            ),
+            # Numpy array
+            test_utils.FeatureExpectationItem(
+                value={'int': np.ones(shape=(3,), dtype=np.int32)},
+                expected={'int': [1, 1, 1]},
+            ),
+            # Array of dict
+            test_utils.FeatureExpectationItem(
+                value=[
+                    {'int': 1},
+                    {'int': 10},
+                    {'int': 100},
+                ],
+                expected={'int': [1, 10, 100]},
+            ),
+            # Wrong sequence length
+            test_utils.FeatureExpectationItem(
+                value={'int': np.ones(shape=(4,), dtype=np.int32)},
+                raise_cls=ValueError,
+                raise_msg='Input sequence length do not match',
+            ),
+        ],
+    )
+
+  def test_label(self):
+
+    self.assertFeature(
+        feature=tfds.features.SequenceDict({
+            'label': tfds.features.ClassLabel(names=['left', 'right']),
+        }, length=None),
+        shape={'label': (None,)},
+        dtype={'label': tf.int64},
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value={'label': ['right', 'left', 'left']},
+                expected={'label': [1, 0, 0]},
+            ),
+            # Variable sequence length
+            test_utils.FeatureExpectationItem(
+                value={'label': ['right', 'left', 'right', 'left']},
+                expected={'label': [1, 0, 1, 0]},
+            ),
+            # Empty sequence length
+            test_utils.FeatureExpectationItem(
+                value={'label': []},
+                expected={'label': []},
+            ),
+        ],
+    )
+
+  def test_nested(self):
+
+    self.assertFeature(
+        feature=tfds.features.SequenceDict({
+            'a': tf.string,
+            'b': {
+                'c': tfds.features.Tensor(shape=(4, 2), dtype=tf.int32),
+                'd': tf.uint8,
+            }
+        }, length=None),
+        shape={
+            'a': (None,),
+            'b': {
+                'c': (None, 4, 2),
+                'd': (None,),
+            }
+        },
+        dtype={
+            'a': tf.string,
+            'b': {
+                'c': tf.int32,
+                'd': tf.uint8,
+            }
+        },
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value={
+                    'a': ['aa', 'b', 'ccc'],
+                    'b': {
+                        'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
+                        'd': [1, 2, 3],
+                    }
+                },
+                expected={
+                    'a': [
+                        tf.compat.as_bytes(t) for t in ('aa', 'b', 'ccc')
                     ],
-                    expected={'int': [1, 10, 100]},
-                ),
-                # Wrong sequence length
-                test_utils.FeatureExpectationItem(
-                    value={'int': np.ones(shape=(4,), dtype=np.int32)},
-                    raise_cls=ValueError,
-                    raise_msg='Input sequence length do not match',
-                ),
-            ],
-        ),
-        test_utils.FeatureExpectation(
-            name='label',
-            feature=tfds.features.SequenceDict({
-                'label': tfds.features.ClassLabel(names=['left', 'right']),
-            }, length=None),
-            shape={'label': (None,)},
-            dtype={'label': tf.int64},
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value={'label': ['right', 'left', 'left']},
-                    expected={'label': [1, 0, 0]},
-                ),
-                # Variable sequence length
-                test_utils.FeatureExpectationItem(
-                    value={'label': ['right', 'left', 'right', 'left']},
-                    expected={'label': [1, 0, 1, 0]},
-                ),
-                # Empty sequence length
-                test_utils.FeatureExpectationItem(
-                    value={'label': []},
-                    expected={'label': []},
-                ),
-            ],
-        ),
-        test_utils.FeatureExpectation(
-            name='nested',
-            feature=tfds.features.SequenceDict({
-                'a': tf.string,
-                'b': {
-                    'c': tfds.features.Tensor(shape=(4, 2), dtype=tf.int32),
-                    'd': tf.uint8,
-                }
-            }, length=None),
-            shape={
-                'a': (None,),
-                'b': {
-                    'c': (None, 4, 2),
-                    'd': (None,),
-                }
-            },
-            dtype={
-                'a': tf.string,
-                'b': {
-                    'c': tf.int32,
-                    'd': tf.uint8,
-                }
-            },
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value={
-                        'a': ['aa', 'b', 'ccc'],
-                        'b': {
-                            'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
-                            'd': [1, 2, 3],
-                        }
-                    },
-                    expected={
-                        'a': [
-                            tf.compat.as_bytes(t) for t in ('aa', 'b', 'ccc')
-                        ],
-                        'b': {
-                            'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
-                            'd': [1, 2, 3],
-                        }
-                    },
-                ),
-                test_utils.FeatureExpectationItem(
-                    value={
-                        'a': [str(i) for i in range(100)],
-                        'b': [{
-                            'c': np.ones(shape=(4, 2), dtype=np.int32),
-                            'd': 5,
-                        } for _ in range(100)]
-                    },
-                    expected={
-                        'a': [tf.compat.as_bytes(str(i)) for i in range(100)],
-                        'b': {
-                            'c': np.ones(shape=(100, 4, 2), dtype=np.int32),
-                            'd': [5] * 100,
-                        }
-                    },
-                ),
-                # Test inputs not same sequence length
-                test_utils.FeatureExpectationItem(
-                    value={
-                        'a': ['aa', 'b', 'ccc'],
-                        'b': {
-                            'c': np.ones(shape=(4, 4, 2), dtype=np.int32),
-                            'd': [1, 2, 3],
-                        }
-                    },
-                    raise_cls=ValueError,
-                    raise_msg='length of all elements of one sequence should',
-                ),
-            ],
-        ),
-    ]
+                    'b': {
+                        'c': np.ones(shape=(3, 4, 2), dtype=np.int32),
+                        'd': [1, 2, 3],
+                    }
+                },
+            ),
+            test_utils.FeatureExpectationItem(
+                value={
+                    'a': [str(i) for i in range(100)],
+                    'b': [{   # pylint: disable=g-complex-comprehension
+                        'c': np.ones(shape=(4, 2), dtype=np.int32),
+                        'd': 5,
+                    } for _ in range(100)]
+                },
+                expected={
+                    'a': [tf.compat.as_bytes(str(i)) for i in range(100)],
+                    'b': {
+                        'c': np.ones(shape=(100, 4, 2), dtype=np.int32),
+                        'd': [5] * 100,
+                    }
+                },
+            ),
+            # Test inputs not same sequence length
+            test_utils.FeatureExpectationItem(
+                value={
+                    'a': ['aa', 'b', 'ccc'],
+                    'b': {
+                        'c': np.ones(shape=(4, 4, 2), dtype=np.int32),
+                        'd': [1, 2, 3],
+                    }
+                },
+                raise_cls=ValueError,
+                raise_msg='length of all elements of one sequence should',
+            ),
+        ],
+    )
+
+  def test_image(self):
 
     imgs = [
         np.random.randint(256, size=(128, 100, 3), dtype=np.uint8),
@@ -174,100 +176,93 @@ class SequenceDictFeatureTest(test_utils.FeatureExpectationsTestCase):
     ]
     imgs_stacked = np.stack(imgs)
 
-    all_tests += [
-        test_utils.FeatureExpectation(
-            name='image',
-            feature=tfds.features.SequenceDict({
-                'image': tfds.features.Image(shape=(128, 100, 3)),
-            }, length=None),
-            shape={'image': (None, 128, 100, 3)},
-            dtype={'image': tf.uint8},
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=[{'image': img} for img in imgs],
-                    expected={'image': imgs_stacked},
-                ),
-                test_utils.FeatureExpectationItem(
-                    value={'image': imgs_stacked},
-                    expected={'image': imgs_stacked},
-                ),
-                test_utils.FeatureExpectationItem(
-                    value={'image': imgs},
-                    expected={'image': imgs_stacked},
-                ),
-                # Empty value
-                test_utils.FeatureExpectationItem(
-                    value={'image': []},
-                    # The empty value still has the right shape
-                    expected={'image': np.empty(
-                        shape=(0, 128, 100, 3),
-                        dtype=np.uint8
-                    )},
-                ),
-            ],
-        ),
-    ]
-
-    return all_tests
+    self.assertFeature(
+        feature=tfds.features.SequenceDict({
+            'image': tfds.features.Image(shape=(128, 100, 3)),
+        }, length=None),
+        shape={'image': (None, 128, 100, 3)},
+        dtype={'image': tf.uint8},
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value=[{'image': img} for img in imgs],
+                expected={'image': imgs_stacked},
+            ),
+            test_utils.FeatureExpectationItem(
+                value={'image': imgs_stacked},
+                expected={'image': imgs_stacked},
+            ),
+            test_utils.FeatureExpectationItem(
+                value={'image': imgs},
+                expected={'image': imgs_stacked},
+            ),
+            # Empty value
+            test_utils.FeatureExpectationItem(
+                value={'image': []},
+                # The empty value still has the right shape
+                expected={'image': np.empty(
+                    shape=(0, 128, 100, 3),
+                    dtype=np.uint8
+                )},
+            ),
+        ],
+    )
 
   # Should add unittest for _transpose_dict_list
 
 
 class SequenceFeatureTest(test_utils.FeatureExpectationsTestCase):
 
-  @property
-  def expectations(self):
+  def test_int(self):
 
-    return [
-        test_utils.FeatureExpectation(
-            name='int',
-            feature=tfds.features.Sequence(tf.int32, length=3),
-            shape=(3,),
-            dtype=tf.int32,
-            tests=[
-                # Python array
-                test_utils.FeatureExpectationItem(
-                    value=[1, 2, 3],
-                    expected=[1, 2, 3],
-                ),
-                # Numpy array
-                test_utils.FeatureExpectationItem(
-                    value=np.ones(shape=(3,), dtype=np.int32),
-                    expected=[1, 1, 1],
-                ),
-                # Wrong sequence length
-                test_utils.FeatureExpectationItem(
-                    value=np.ones(shape=(4,), dtype=np.int32),
-                    raise_cls=ValueError,
-                    raise_msg='Input sequence length do not match',
-                ),
-            ],
-        ),
-        test_utils.FeatureExpectation(
-            name='label',
-            feature=tfds.features.Sequence(
-                tfds.features.ClassLabel(names=['left', 'right']),
+    self.assertFeature(
+        feature=tfds.features.Sequence(tf.int32, length=3),
+        shape=(3,),
+        dtype=tf.int32,
+        tests=[
+            # Python array
+            test_utils.FeatureExpectationItem(
+                value=[1, 2, 3],
+                expected=[1, 2, 3],
             ),
-            shape=(None,),
-            dtype=tf.int64,
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=['right', 'left', 'left'],
-                    expected=[1, 0, 0],
-                ),
-                # Variable sequence length
-                test_utils.FeatureExpectationItem(
-                    value=['right', 'left', 'right', 'left'],
-                    expected=[1, 0, 1, 0],
-                ),
-                # Empty sequence length
-                test_utils.FeatureExpectationItem(
-                    value=[],
-                    expected=[],
-                ),
-            ],
+            # Numpy array
+            test_utils.FeatureExpectationItem(
+                value=np.ones(shape=(3,), dtype=np.int32),
+                expected=[1, 1, 1],
+            ),
+            # Wrong sequence length
+            test_utils.FeatureExpectationItem(
+                value=np.ones(shape=(4,), dtype=np.int32),
+                raise_cls=ValueError,
+                raise_msg='Input sequence length do not match',
+            ),
+        ],
+    )
+
+  def test_label(self):
+
+    self.assertFeature(
+        feature=tfds.features.Sequence(
+            tfds.features.ClassLabel(names=['left', 'right']),
         ),
-    ]
+        shape=(None,),
+        dtype=tf.int64,
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value=['right', 'left', 'left'],
+                expected=[1, 0, 0],
+            ),
+            # Variable sequence length
+            test_utils.FeatureExpectationItem(
+                value=['right', 'left', 'right', 'left'],
+                expected=[1, 0, 1, 0],
+            ),
+            # Empty sequence length
+            test_utils.FeatureExpectationItem(
+                value=[],
+                expected=[],
+            ),
+        ],
+    )
 
   def test_getattr(self):
     feature = tfds.features.Sequence(

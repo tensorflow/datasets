@@ -30,53 +30,53 @@ tf.compat.v1.enable_eager_execution()
 
 class TextFeatureTest(test_utils.FeatureExpectationsTestCase):
 
-  @property
-  def expectations(self):
+  def test_text(self):
     nonunicode_text = 'hello world'
     unicode_text = u'你好'
-    return [
-        test_utils.FeatureExpectation(
-            name='text',
-            feature=features.Text(),
-            shape=(),
-            dtype=tf.string,
-            tests=[
-                # Non-unicode
-                test_utils.FeatureExpectationItem(
-                    value=nonunicode_text,
-                    expected=tf.compat.as_bytes(nonunicode_text),
-                ),
-                # Unicode
-                test_utils.FeatureExpectationItem(
-                    value=unicode_text,
-                    expected=tf.compat.as_bytes(unicode_text),
-                ),
-                # Empty string
-                test_utils.FeatureExpectationItem(
-                    value='',
-                    expected=tf.compat.as_bytes(''),
-                ),
-            ],
-        ),
-        # Unicode integer-encoded by byte
-        test_utils.FeatureExpectation(
-            name='text_unicode_encoded',
-            feature=features.Text(encoder=text_encoder.ByteTextEncoder()),
-            shape=(None,),
-            dtype=tf.int64,
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=unicode_text,
-                    expected=[i + 1 for i in [228, 189, 160, 229, 165, 189]],
-                ),
-                # Empty string
-                test_utils.FeatureExpectationItem(
-                    value='',
-                    expected=[],
-                ),
-            ],
-        ),
-    ]
+
+    self.assertFeature(
+        feature=features.Text(),
+        shape=(),
+        dtype=tf.string,
+        tests=[
+            # Non-unicode
+            test_utils.FeatureExpectationItem(
+                value=nonunicode_text,
+                expected=tf.compat.as_bytes(nonunicode_text),
+            ),
+            # Unicode
+            test_utils.FeatureExpectationItem(
+                value=unicode_text,
+                expected=tf.compat.as_bytes(unicode_text),
+            ),
+            # Empty string
+            test_utils.FeatureExpectationItem(
+                value='',
+                expected=tf.compat.as_bytes(''),
+            ),
+        ],
+    )
+
+  def test_text_encoded(self):
+    unicode_text = u'你好'
+
+    # Unicode integer-encoded by byte
+    self.assertFeature(
+        feature=features.Text(encoder=text_encoder.ByteTextEncoder()),
+        shape=(None,),
+        dtype=tf.int64,
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value=unicode_text,
+                expected=[i + 1 for i in [228, 189, 160, 229, 165, 189]],
+            ),
+            # Empty string
+            test_utils.FeatureExpectationItem(
+                value='',
+                expected=[],
+            ),
+        ],
+    )
 
   def test_text_conversion(self):
     text_f = features.Text(encoder=text_encoder.ByteTextEncoder())

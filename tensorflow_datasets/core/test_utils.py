@@ -77,18 +77,6 @@ class FeatureExpectationItem(object):
     self.raise_msg = raise_msg
 
 
-class FeatureExpectation(object):
-  """Object defining a featureConnector test."""
-
-  def __init__(self, name, feature, shape, dtype, tests, serialized_info=None):
-    self.name = name
-    self.feature = feature
-    self.shape = shape
-    self.dtype = dtype
-    self.tests = tests
-    self.serialized_info = serialized_info
-
-
 class SubTestCase(test_case.TestCase):
   """Adds subTest() context manager to the TestCase if supported.
 
@@ -193,92 +181,95 @@ def run_in_graph_and_eager_modes(func=None,
 class FeatureExpectationsTestCase(SubTestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
-  @property
-  def expectations(self):
-    raise NotImplementedError
-
   @run_in_graph_and_eager_modes()
-  def test_encode_decode(self):
-    for exp in self.expectations:
-      with self._subTest(exp.name):
-        self._process_exp(exp)
-
-  def _process_exp(self, exp):
+  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None):
+    """Test the given feature against the predicates."""
 
     # Check the shape/dtype
     with self._subTest("shape"):
-      self.assertEqual(exp.feature.shape, exp.shape)
+      self.assertEqual(feature.shape, shape)
     with self._subTest("dtype"):
-      self.assertEqual(exp.feature.dtype, exp.dtype)
+      self.assertEqual(feature.dtype, dtype)
 
     # Check the serialized features
-    if exp.serialized_info is not None:
+    if serialized_info is not None:
       with self._subTest("serialized_info"):
         self.assertEqual(
-            exp.serialized_info,
-            exp.feature.get_serialized_info(),
+            serialized_info,
+            feature.get_serialized_info(),
         )
 
     # Create the feature dict
-    fdict = features.FeaturesDict({exp.name: exp.feature})
-    for i, test in enumerate(exp.tests):
+    fdict = features.FeaturesDict({"inner": feature})
+    for i, test in enumerate(tests):
       with self._subTest(str(i)):
-        # self._process_subtest_exp(e)
-        input_value = {exp.name: test.value}
+        self.assertFeatureTest(
+            fdict=fdict,
+            test=test,
+            feature=feature,
+            shape=shape,
+            dtype=dtype,
+        )
 
-        if test.raise_cls is not None:
-          with self._subTest("raise"):
-            if not test.raise_msg:
-              raise ValueError(
-                  "test.raise_msg should be set with {}for test {}".format(
-                      test.raise_cls, exp.name))
-            with self.assertRaisesWithPredicateMatch(
-                test.raise_cls, test.raise_msg):
-              features_encode_decode(fdict, input_value)
+  def assertFeatureTest(self, fdict, test, feature, shape, dtype):
+    """Test that encode=>decoding of a value works correctly."""
+
+    # self._process_subtest_exp(e)
+    input_value = {"inner": test.value}
+
+    if test.raise_cls is not None:
+      with self._subTest("raise"):
+        if not test.raise_msg:
+          raise ValueError(
+              "test.raise_msg should be set with {} for test {}".format(
+                  test.raise_cls, type(feature)))
+        with self.assertRaisesWithPredicateMatch(
+            test.raise_cls, test.raise_msg):
+          features_encode_decode(fdict, input_value)
+    else:
+      # Test the serialization only
+      if test.expected_serialized is not None:
+        with self._subTest("out_serialize"):
+          self.assertEqual(
+              test.expected_serialized,
+              feature.encode_example(test.value),
+          )
+
+      # Assert the returned type match the expected one
+      with self._subTest("out"):
+        out = features_encode_decode(fdict, input_value, as_tensor=True)
+        out = out["inner"]
+        with self._subTest("dtype"):
+          out_dtypes = utils.map_nested(lambda s: s.dtype, out)
+          self.assertEqual(out_dtypes, feature.dtype)
+        with self._subTest("shape"):
+          # For shape, because (None, 3) match with (5, 3), we use
+          # tf.TensorShape.assert_is_compatible_with on each of the elements
+          out_shapes = utils.zip_nested(out, feature.shape)
+          utils.map_nested(
+              lambda x: x[0].shape.assert_is_compatible_with(x[1]),
+              out_shapes
+          )
+
+      # Test serialization + decoding from disk
+      with self._subTest("out_value"):
+        decoded_examples = features_encode_decode(fdict, input_value)
+        decoded_examples = decoded_examples["inner"]
+        if isinstance(decoded_examples, dict):
+          # assertAllEqual do not works well with dictionaries so assert
+          # on each individual elements instead
+          zipped_examples = utils.zip_nested(
+              test.expected,
+              decoded_examples,
+              dict_only=True,
+          )
+          utils.map_nested(
+              lambda x: self.assertAllEqual(x[0], x[1]),
+              zipped_examples,
+              dict_only=True,
+          )
         else:
-          # Test the serialization only
-          if test.expected_serialized is not None:
-            with self._subTest("out_serialize"):
-              self.assertEqual(
-                  test.expected_serialized,
-                  exp.feature.encode_example(test.value),
-              )
-
-          # Assert the returned type match the expected one
-          with self._subTest("out"):
-            out = features_encode_decode(fdict, input_value, as_tensor=True)
-            out = out[exp.name]
-            with self._subTest("dtype"):
-              out_dtypes = utils.map_nested(lambda s: s.dtype, out)
-              self.assertEqual(out_dtypes, exp.feature.dtype)
-            with self._subTest("shape"):
-              # For shape, because (None, 3) match with (5, 3), we use
-              # tf.TensorShape.assert_is_compatible_with on each of the elements
-              out_shapes = utils.zip_nested(out, exp.feature.shape)
-              utils.map_nested(
-                  lambda x: x[0].shape.assert_is_compatible_with(x[1]),
-                  out_shapes
-              )
-
-          # Test serialization + decoding from disk
-          with self._subTest("out_value"):
-            decoded_examples = features_encode_decode(fdict, input_value)
-            decoded_examples = decoded_examples[exp.name]
-            if isinstance(decoded_examples, dict):
-              # assertAllEqual do not works well with dictionaries so assert
-              # on each individual elements instead
-              zipped_examples = utils.zip_nested(
-                  test.expected,
-                  decoded_examples,
-                  dict_only=True,
-              )
-              utils.map_nested(
-                  lambda x: self.assertAllEqual(x[0], x[1]),
-                  zipped_examples,
-                  dict_only=True,
-              )
-            else:
-              self.assertAllEqual(test.expected, decoded_examples)
+          self.assertAllEqual(test.expected, decoded_examples)
 
 
 def features_encode_decode(features_dict, example, as_tensor=False):

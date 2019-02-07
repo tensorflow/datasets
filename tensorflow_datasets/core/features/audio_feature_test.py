@@ -34,10 +34,25 @@ tf.compat.v1.enable_eager_execution()
 
 class AudioFeatureTest(test_utils.FeatureExpectationsTestCase):
 
-  @property
-  def expectations(self):
+  def test_audio(self):
 
     np_audio = np.random.randint(-2**10, 2**10, size=(10,), dtype=np.int64)
+
+    # Numpy array
+    self.assertFeature(
+        feature=features.Audio(),
+        shape=(None,),
+        dtype=tf.int64,
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value=np_audio,
+                expected=np_audio,
+            ),
+        ],
+    )
+
+    # WAV file
+
     audio = pydub.AudioSegment.empty().set_sample_width(2)
     # See documentation for _spawn usage:
     # https://github.com/jiaaro/pydub/blob/master/API.markdown#audiosegmentget_array_of_samples
@@ -45,34 +60,17 @@ class AudioFeatureTest(test_utils.FeatureExpectationsTestCase):
     _, tmp_file = tempfile.mkstemp()
     audio.export(tmp_file, format="wav")
 
-    return [
-        # Numpy array
-        test_utils.FeatureExpectation(
-            name="audio_np",
-            feature=features.Audio(),
-            shape=(None,),
-            dtype=tf.int64,
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=np_audio,
-                    expected=np_audio,
-                ),
-            ],
-        ),
-        # WAV file
-        test_utils.FeatureExpectation(
-            name="audio_np",
-            feature=features.Audio(file_format="wav"),
-            shape=(None,),
-            dtype=tf.int64,
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=tmp_file,
-                    expected=np_audio,
-                ),
-            ],
-        ),
-    ]
+    self.assertFeature(
+        feature=features.Audio(file_format="wav"),
+        shape=(None,),
+        dtype=tf.int64,
+        tests=[
+            test_utils.FeatureExpectationItem(
+                value=tmp_file,
+                expected=np_audio,
+            ),
+        ],
+    )
 
 
 if __name__ == "__main__":
