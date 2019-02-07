@@ -307,7 +307,7 @@ class DatasetBuilder(object):
         batch_size=batch_size,
         as_supervised=as_supervised,
     )
-    datasets = utils.map_nested(build_single_dataset, split)
+    datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
 
   def _build_single_dataset(self, split, shuffle_files, batch_size,

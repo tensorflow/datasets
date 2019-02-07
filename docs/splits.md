@@ -18,7 +18,7 @@ subsplitting them up. The resulting splits can be passed to `tfds.load` or
 ## Add splits together
 
 ```py
-combined_split = `tfds.Split.TRAIN` + `tfds.Split.TEST`
+combined_split = tfds.Split.TRAIN + tfds.Split.TEST
 
 ds = tfds.load("mnist", split=combined_split)
 ```
