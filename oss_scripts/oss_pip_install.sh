@@ -12,6 +12,7 @@ then
 else
   echo "Installing ffmpeg"
   sudo add-apt-repository -y ppa:jonathonf/ffmpeg-4
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B05F25D762E3157
   sudo apt-get -qq update
   sudo apt-get install -qq -y ffmpeg
 fi
