@@ -59,6 +59,7 @@ def _patch_for_tf1_12(tf):
   tf.io.gfile.stat = tf.gfile.Stat
   tf.io.gfile.walk = tf.gfile.Walk
   tf.data.experimental = tf.contrib.data
+  tf.data.Dataset.map_with_legacy_function = tf.data.Dataset.map
   tf.compat.v1 = types.ModuleType("tf.compat.v1")
   tf.compat.v1.assert_greater = tf.assert_greater
   tf.compat.v1.placeholder = tf.placeholder
@@ -117,6 +118,7 @@ def _ensure_tf_install():  # pylint: disable=g-statement-before-imports
   # pylint: enable=g-import-not-at-top
 
   # Compat for TF > 1.13
+  tf.data.Dataset.map_with_legacy_function = tf.data.Dataset.map
   if not hasattr(tf.io.gfile, "GFile"):
     tf.io.gfile.GFile = tf.gfile.GFile
   if not hasattr(tf, "nest"):
