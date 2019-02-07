@@ -24,7 +24,7 @@ import tensorflow_datasets as tfds
 from tensorflow_datasets.testing import test_case
 
 
-class LazyImportsTest(parameterized.TestCase, test_case.TestCase):
+class LazyImportsTest(test_case.TestCase, parameterized.TestCase):
 
   @parameterized.parameters(
       "matplotlib",
@@ -38,7 +38,7 @@ class LazyImportsTest(parameterized.TestCase, test_case.TestCase):
     getattr(tfds.core.lazy_imports, module_name)
 
   def test_bad_import(self):
-    with self.assertRaisesRegex(ImportError, "extras_require"):
+    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
 

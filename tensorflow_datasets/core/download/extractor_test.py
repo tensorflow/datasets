@@ -20,7 +20,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import re
 
 from absl.testing import absltest
 import tensorflow as tf
@@ -110,8 +109,8 @@ class ExtractorTest(test_case.TestCase):
     resource = resource_lib.Resource(
         path=from_path, extract_method=resource_lib.ExtractMethod.TAR)
     promise = self.extractor.extract(resource, self.to_path)
-    with self.assertRaisesRegex(extractor.ExtractError,
-                                'Archive at .* is not safe'):
+    with self.assertRaisesWithPredicateMatch(
+        extractor.ExtractError, 'is not safe'):
       promise.get()
 
   def test_wrong_method(self):
@@ -120,9 +119,10 @@ class ExtractorTest(test_case.TestCase):
         path=from_path, extract_method=resource_lib.ExtractMethod.ZIP,
         url='http://example.com/foo.zip')
     promise = self.extractor.extract(resource, self.to_path)
-    expected_msg = re.escape(
+    expected_msg = (
         'foo.csv.gz (http://example.com/foo.zip): File is not a zip file.')
-    with self.assertRaisesRegex(extractor.ExtractError, expected_msg):
+    with self.assertRaisesWithPredicateMatch(
+        extractor.ExtractError, expected_msg):
       promise.get()
 
 
