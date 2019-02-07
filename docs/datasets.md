@@ -31,6 +31,7 @@ np_datasets = tfds.as_numpy(datasets)
 * [`audio`](#audio)
   * [`"nsynth"`](#nsynth)
 * [`image`](#image)
+  * [`"cats_vs_dogs"`](#cats_vs_dogs)
   * [`"celeb_a"`](#celeb_a)
   * [`"cifar10"`](#cifar10)
   * [`"cifar100"`](#cifar100)
@@ -55,6 +56,7 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"wmt_translate_enfr"`](#wmt_translate_enfr)
 * [`video`](#video)
   * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
+  * [`"moving_mnist"`](#moving_mnist)
   * [`"starcraft_video"`](#starcraft_video)
 
 ---
@@ -146,6 +148,49 @@ None
 
 
 # [`image`](#image)
+
+## `"cats_vs_dogs"`
+
+A large set of images of cats and dogs.There are 1800 corrupted images that are dropped.
+
+* URL: [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
+* `DatasetBuilder`: [`tfds.image.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cats_vs_dogs.py)
+* Version: `v1.0.0`
+
+### Features
+```
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+### Statistics
+None computed
+
+### Urls
+ * [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+@Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,
+author = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},
+title = {Asirra: A CAPTCHA that Exploits Interest-Aligned Manual Image Categorization},
+booktitle = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
+year = {2007},
+month = {October},
+publisher = {Association for Computing Machinery, Inc.},
+url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization/},
+edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
+}
+
+```
+
+---
 
 ## `"celeb_a"`
 
@@ -1537,6 +1582,61 @@ None
   title = {Unsupervised Learning for Physical Interaction through Video Prediction.},
   url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
   year = 2016
+}
+
+```
+
+---
+
+## `"moving_mnist"`
+
+Moving variant of MNIST database of handwritten digits. This is the
+data used by the authors for reporting model performance. See
+`tfds.video.moving_mnist.image_as_moving_sequence`
+for generating training/validation data from the MNIST dataset.
+
+
+* URL: [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
+* `DatasetBuilder`: [`tfds.video.moving_mnist.MovingMnist`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/moving_mnist.py)
+* Version: `v0.1.0`
+
+### Features
+```
+FeaturesDict({
+    'image_sequence': Video(shape=(20, 64, 64, 1), dtype=tf.uint8, feature=Image(shape=(64, 64, 1), dtype=tf.uint8)),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+TEST       |     10,000
+ALL        |     10,000
+
+
+### Urls
+ * [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
+
+### Supervised keys (for `as_supervised=True`)
+None
+
+### Citation
+```
+@article{DBLP:journals/corr/SrivastavaMS15,
+  author    = {Nitish Srivastava and
+               Elman Mansimov and
+               Ruslan Salakhutdinov},
+  title     = {Unsupervised Learning of Video Representations using LSTMs},
+  journal   = {CoRR},
+  volume    = {abs/1502.04681},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1502.04681},
+  archivePrefix = {arXiv},
+  eprint    = {1502.04681},
+  timestamp = {Mon, 13 Aug 2018 16:47:05 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 
 ```

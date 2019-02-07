@@ -262,9 +262,7 @@ def np_to_list(elem):
   elif isinstance(elem, tuple):
     return list(elem)
   elif isinstance(elem, np.ndarray):
-    elem = np.split(elem, elem.shape[0])
-    elem = np.squeeze(elem, axis=0)
-    return elem
+    return list(elem)
   else:
     raise ValueError(
         'Input elements of a sequence should be either a numpy array, a '
