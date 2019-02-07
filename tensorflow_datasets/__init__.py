@@ -60,6 +60,7 @@ def _patch_for_tf1_12(tf):
   tf.io.gfile.walk = tf.gfile.Walk
   tf.data.experimental = tf.contrib.data
   tf.compat.v1 = types.ModuleType("tf.compat.v1")
+  tf.compat.v1.assert_greater = tf.assert_greater
   tf.compat.v1.placeholder = tf.placeholder
   tf.compat.v1.ConfigProto = tf.ConfigProto
   tf.compat.v1.Session = tf.Session
