@@ -7,7 +7,7 @@ source ./oss_scripts/utils.sh
 function setup_env() {
   create_virtualenv $1 $2
   pip install -q --upgrade setuptools pip
-  pip install wheel twine pyopenssl
+  pip install -q wheel twine pyopenssl
 }
 
 GIT_COMMIT_ID=${1:-""}
