@@ -23,7 +23,7 @@ from tensorflow_datasets.image import imagenet
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class Imagenet2012Test(dataset_builder_testing.TestCase):
+class Imagenet2012Test(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagenet.Imagenet2012
   SPLITS = {  # Expected number of examples on each split.
       "train": 100,

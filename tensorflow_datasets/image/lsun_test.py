@@ -23,7 +23,7 @@ from tensorflow_datasets.image import lsun
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class LsunTest(dataset_builder_testing.TestCase):
+class LsunTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = lsun.Lsun
   BUILDER_CONFIG_NAMES_TO_TEST = ["classroom"]
 

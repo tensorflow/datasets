@@ -29,7 +29,7 @@ mnist._TRAIN_EXAMPLES = 10
 mnist._TEST_EXAMPLES = 2
 
 
-class MNISTTest(dataset_builder_testing.TestCase):
+class MNISTTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = mnist.MNIST
   SPLITS = {
       "train": 10,

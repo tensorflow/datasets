@@ -23,7 +23,8 @@ from tensorflow_datasets.image import diabetic_retinopathy_detection
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class DiabeticRetinopathyDetectionTest(dataset_builder_testing.TestCase):
+class DiabeticRetinopathyDetectionTest(
+    dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = diabetic_retinopathy_detection.DiabeticRetinopathyDetection
   SPLITS = {  # Expected number of examples on each split.
       "sample": 4,

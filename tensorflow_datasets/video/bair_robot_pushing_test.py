@@ -23,7 +23,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 from tensorflow_datasets.video import bair_robot_pushing
 
 
-class BairRobotPushingTest(dataset_builder_testing.TestCase):
+class BairRobotPushingTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = bair_robot_pushing.BairRobotPushingSmall
 
   SPLITS = {

@@ -492,7 +492,7 @@ to be updated.
 
 ## Testing MyDataset
 
-`dataset_builder_testing.TestCase` is a base `TestCase` to fully exercise a
+`dataset_builder_testing.DatasetBuilderTestCase` is a base `TestCase` to fully exercise a
 dataset. It uses "fake examples" as test data that mimic the structure of the
 source dataset.
 
@@ -515,7 +515,7 @@ from tensorflow_datasets import my_dataset
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class MyDatasetTest(dataset_builder_testing.TestCase):
+class MyDatasetTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = my_dataset.MyDataset
   SPLITS = {  # Expected number of examples on each split from fake example.
       "train": 12,

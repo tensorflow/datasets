@@ -23,7 +23,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 from tensorflow_datasets.text import squad
 
 
-class SquadTest(dataset_builder_testing.TestCase):
+class SquadTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = squad.Squad
 
   DL_EXTRACT_RESULT = {

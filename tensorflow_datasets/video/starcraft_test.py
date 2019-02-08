@@ -23,7 +23,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 from tensorflow_datasets.video import starcraft
 
 
-class StarcraftVideoDatasetTest(dataset_builder_testing.TestCase):
+class StarcraftVideoDatasetTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = starcraft.StarcraftVideo
   BUILDER_CONFIG_NAMES_TO_TEST = ["brawl_64"]
 
@@ -41,7 +41,8 @@ class StarcraftVideoDatasetTest(dataset_builder_testing.TestCase):
   }
 
 
-class StarcraftVideoDataset128Test(dataset_builder_testing.TestCase):
+class StarcraftVideoDataset128Test(
+    dataset_builder_testing.DatasetBuilderTestCase):
   """Separate test to cover the 128x128 resolution videos."""
   DATASET_CLASS = starcraft.StarcraftVideo
   BUILDER_CONFIG_NAMES_TO_TEST = ["brawl_128"]

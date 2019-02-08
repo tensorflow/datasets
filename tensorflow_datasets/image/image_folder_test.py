@@ -26,7 +26,7 @@ from tensorflow_datasets.image import image_folder
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class ImageLabelFolderTest(dataset_builder_testing.TestCase):
+class ImageLabelFolderTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = functools.partial(
       image_folder.ImageLabelFolder, dataset_name="image_folder_data")
   # The above construct forces us to disable those checks:

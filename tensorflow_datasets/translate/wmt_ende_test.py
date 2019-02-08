@@ -23,7 +23,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 from tensorflow_datasets.translate import wmt_ende
 
 
-class TranslateEndeWMTTest(dataset_builder_testing.TestCase):
+class TranslateEndeWMTTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = wmt_ende.WmtTranslateEnde
   BUILDER_CONFIG_NAMES_TO_TEST = ["ende_plain_text_t2t", "ende_subwords8k_t2t"]
   OVERLAPPING_SPLITS = ["validation"]

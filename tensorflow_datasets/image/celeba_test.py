@@ -23,7 +23,7 @@ from tensorflow_datasets.image import celeba
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class CelebATest(dataset_builder_testing.TestCase):
+class CelebATest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = celeba.CelebA
 
   SPLITS = {

@@ -23,7 +23,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 from tensorflow_datasets.text import lm1b
 
 
-class Lm1bTest(dataset_builder_testing.TestCase):
+class Lm1bTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = lm1b.Lm1b
   SPLITS = {
       "train": 3,

@@ -23,7 +23,7 @@ from tensorflow_datasets.image import flowers
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class TFFlowersTest(dataset_builder_testing.TestCase):
+class TFFlowersTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = flowers.TFFlowers
 
   SPLITS = {

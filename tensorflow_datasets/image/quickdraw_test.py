@@ -21,7 +21,7 @@ from tensorflow_datasets.image import quickdraw
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class QuickdrawTest(dataset_builder_testing.TestCase):
+class QuickdrawTest(dataset_builder_testing.DatasetBuilderTestCase):
 
   DATASET_CLASS = quickdraw.QuickdrawBitmap
   SPLITS = {

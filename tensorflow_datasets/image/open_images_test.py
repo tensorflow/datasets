@@ -23,7 +23,7 @@ from tensorflow_datasets.image import open_images
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class OpenImagesV42012Test(dataset_builder_testing.TestCase):
+class OpenImagesV42012Test(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = open_images.OpenImagesV4
   SPLITS = {  # Expected number of examples on each split.
       'train': 512,

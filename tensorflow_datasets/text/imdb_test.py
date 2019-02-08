@@ -23,7 +23,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 from tensorflow_datasets.text import imdb
 
 
-class IMDBReviewsTest(dataset_builder_testing.TestCase):
+class IMDBReviewsTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = imdb.IMDBReviews
   SPLITS = {
       "train": 5,

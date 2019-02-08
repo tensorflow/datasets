@@ -23,7 +23,7 @@ from tensorflow_datasets.image import svhn
 from tensorflow_datasets.testing import dataset_builder_testing
 
 
-class SvhnTest(dataset_builder_testing.TestCase):
+class SvhnTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = svhn.SvhnCropped
   SPLITS = {  # Number of examples.
       "train": 3,

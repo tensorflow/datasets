@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Base TestCase to test a DatasetBuilder base class."""
+"""Base DatasetBuilderTestCase to test a DatasetBuilder base class."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -63,7 +63,7 @@ FORBIDDEN_OS_FUNCTIONS = (
 )
 
 
-class TestCase(parameterized.TestCase, test_utils.SubTestCase):
+class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   """Inherit this class to test your DatasetBuilder class.
 
   You must set the following class attributes:
@@ -105,7 +105,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   @classmethod
   def setUpClass(cls):
-    super(TestCase, cls).setUpClass()
+    super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
     # Check class has the right attributes
     if cls.DATASET_CLASS is None or not callable(cls.DATASET_CLASS):
@@ -113,7 +113,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
           "Assign your DatasetBuilder class to %s.DATASET_CLASS." % name)
 
   def setUp(self):
-    super(TestCase, self).setUp()
+    super(DatasetBuilderTestCase, self).setUp()
     self.patchers = []
     self.builder = self._make_builder()
     self.example_dir = os.path.join(
@@ -126,7 +126,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       self._mock_out_forbidden_os_functions()
 
   def tearDown(self):
-    super(TestCase, self).tearDown()
+    super(DatasetBuilderTestCase, self).tearDown()
     for patcher in self.patchers:
       patcher.stop()
 

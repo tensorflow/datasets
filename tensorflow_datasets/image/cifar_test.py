@@ -26,7 +26,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 # testing/cifar.py generates fake input data
 
 
-class Cifar10Test(dataset_builder_testing.TestCase):
+class Cifar10Test(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = cifar.Cifar10
   SPLITS = {
       "train": 10,
@@ -34,7 +34,7 @@ class Cifar10Test(dataset_builder_testing.TestCase):
   }
 
 
-class Cifar100Test(dataset_builder_testing.TestCase):
+class Cifar100Test(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = cifar.Cifar100
   SPLITS = {
       "train": 10,

@@ -25,7 +25,7 @@ from tensorflow_datasets.testing import dataset_builder_testing
 cats_vs_dogs._NUM_CORRUPT_IMAGES = 0
 
 
-class CatsVsDogsTest(dataset_builder_testing.TestCase):
+class CatsVsDogsTest(dataset_builder_testing.DatasetBuilderTestCase):
   DATASET_CLASS = cats_vs_dogs.CatsVsDogs
 
   SPLITS = {
