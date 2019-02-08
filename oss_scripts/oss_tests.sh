@@ -2,7 +2,7 @@
 
 set -vx  # print command from file as well as evaluated command
 
-source ./oss_scripts/virtualenv.sh
+source ./oss_scripts/utils.sh
 
 # Instead of exiting on any failure with "set -e", we'll call set_status after
 # each command and exit $STATUS at the end.
@@ -43,6 +43,7 @@ function test_notebook() {
   local notebook=$1
   create_virtualenv tfds_notebook $PY_BIN
   pip install -q jupyter
+  install_tf "$TF_VERSION"
   jupyter nbconvert --ExecutePreprocessor.timeout=600 --to notebook --execute $notebook
   set_status
 }

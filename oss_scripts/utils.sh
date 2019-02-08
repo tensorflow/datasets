@@ -15,3 +15,16 @@ function create_virtualenv() {
   pip install --upgrade pip
   popd
 }
+
+function install_tf() {
+  local version=$1
+  if [[ "$version" == "tf-nightly"  ]]
+  then
+    pip install -q tf-nightly;
+  elif [[ "$version" == "tf2"  ]]
+  then
+    pip install -q "tf-nightly-2.0-preview"
+  else
+    pip install -q "tensorflow==$version"
+  fi
+}

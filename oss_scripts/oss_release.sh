@@ -3,7 +3,7 @@
 set -vx  # print command from file as well as evaluated command
 set -e   # fail and exit on any command erroring
 
-source ./virtualenv.sh  # for create_virtualenv
+source ./oss_scripts/utils.sh
 function setup_env() {
   create_virtualenv $1 $2
   pip install -q --upgrade setuptools pip

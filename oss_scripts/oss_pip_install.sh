@@ -5,6 +5,8 @@ set -e   # fail and exit on any command erroring
 
 : "${TF_VERSION:?}"
 
+source ./oss_scripts/utils.sh
+
 # Install ffmpeg for Audio FeatureConnector tests
 if command -v ffmpeg 2>/dev/null
 then
@@ -16,15 +18,7 @@ else
   sudo apt-get install -qq -y ffmpeg
 fi
 
-if [[ "$TF_VERSION" == "tf-nightly"  ]]
-then
-  pip install -q tf-nightly;
-elif [[ "$TF_VERSION" == "tf2"  ]]
-then
-  pip install -q "tf-nightly-2.0-preview"
-else
-  pip install -q "tensorflow==$TF_VERSION"
-fi
+install_tf "$TF_VERSION"
 
 # Make sure we have the latest version of numpy - avoid problems we were
 # seeing with Python 3
