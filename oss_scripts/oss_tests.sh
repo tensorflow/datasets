@@ -2,6 +2,8 @@
 
 set -vx  # print command from file as well as evaluated command
 
+source ./oss_scripts/virtualenv.sh
+
 # Instead of exiting on any failure with "set -e", we'll call set_status after
 # each command and exit $STATUS at the end.
 STATUS=0
@@ -31,14 +33,23 @@ TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 pytest $TF2_IGNORE --ignore="tensorflow_datasets/core/test_utils.py"
 set_status
 
-# Test notebooks
+# Test notebooks in isolated environments
 NOTEBOOKS="
 docs/overview.ipynb
+docs/_index.ipynb
 "
-for notebook in $NOTEBOOKS
-do
+PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
+function test_notebook() {
+  local notebook=$1
+  create_virtualenv tfds_notebook $PY_BIN
+  pip install -q jupyter
   jupyter nbconvert --ExecutePreprocessor.timeout=600 --to notebook --execute $notebook
   set_status
+}
+
+for notebook in $NOTEBOOKS
+do
+  test_notebook $notebook
 done
 
 exit $STATUS

@@ -3,11 +3,9 @@
 set -vx  # print command from file as well as evaluated command
 set -e   # fail and exit on any command erroring
 
+source ./virtualenv.sh  # for create_virtualenv
 function setup_env() {
-  local py_version=$1
-  local venv_path="tfds_env_${py_version}"
-  virtualenv -p $py_version $venv_path
-  source $venv_path/bin/activate
+  create_virtualenv $1 $2
   pip install -q --upgrade setuptools pip
   pip install wheel twine pyopenssl
 }
@@ -30,14 +28,14 @@ git clone https://github.com/tensorflow/datasets.git
 cd datasets
 git checkout $GIT_COMMIT_ID
 
-setup_env python2
+setup_env tfds_py2 python2.7
 
 echo "Building source distribution"
 python setup.py sdist $SETUP_ARGS
 
 # Build the wheels
 python setup.py bdist_wheel $SETUP_ARGS
-setup_env python3
+setup_env tfds_py3 python3.6
 python setup.py bdist_wheel $SETUP_ARGS
 
 # Publish to PyPI
