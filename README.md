@@ -29,10 +29,11 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 # To use our nightly release:
 pip install tfds-nightly
 
-# Currently requires TF 1.13+, i.e. tf-nightly or tf-nightly-gpu, to be
-# installed.
+# Requires TF 1.12+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
-pip install tf-nightly
+pip install tensorflow
+# or:
+pip install tensorflow-gpu
 ```
 
 ### Usage
