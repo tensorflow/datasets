@@ -151,7 +151,7 @@ None
 
 ## `"cats_vs_dogs"`
 
-A large set of images of cats and dogs.There are 1800 corrupted images that are dropped.
+A dataset of 25k images of cats and dogs. There are 1800 corrupted images that are dropped.
 
 * URL: [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 * `DatasetBuilder`: [`tfds.image.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cats_vs_dogs.py)
