@@ -21,6 +21,7 @@ from __future__ import print_function
 
 from tensorflow_datasets.core.download import resource
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 NO_EXTRACT = resource.ExtractMethod.NO_EXTRACT
 TAR = resource.ExtractMethod.TAR
@@ -85,4 +86,4 @@ cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.
 
 
 if __name__ == '__main__':
-  test_case.main()
+  test_utils.test_main()

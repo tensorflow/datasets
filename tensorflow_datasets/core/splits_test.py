@@ -444,4 +444,4 @@ class SplitsDictTest(test_case.TestCase):
     self.assertEqual(10, sdp[1].num_shards)
 
 if __name__ == "__main__":
-  test_case.main()
+  test_utils.test_main()

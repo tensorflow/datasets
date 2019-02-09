@@ -21,6 +21,7 @@ from __future__ import print_function
 
 from tensorflow_datasets.image import diabetic_retinopathy_detection
 from tensorflow_datasets.testing import dataset_builder_testing
+from tensorflow_datasets.testing import test_utils
 
 
 class DiabeticRetinopathyDetectionTest(
@@ -35,4 +36,4 @@ class DiabeticRetinopathyDetectionTest(
 
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  test_utils.test_main()

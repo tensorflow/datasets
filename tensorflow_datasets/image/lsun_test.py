@@ -21,6 +21,7 @@ from __future__ import print_function
 
 from tensorflow_datasets.image import lsun
 from tensorflow_datasets.testing import dataset_builder_testing
+from tensorflow_datasets.testing import test_utils
 
 
 class LsunTest(dataset_builder_testing.DatasetBuilderTestCase):
@@ -36,4 +37,4 @@ class LsunTest(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  test_utils.test_main()

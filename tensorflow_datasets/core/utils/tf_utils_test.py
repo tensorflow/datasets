@@ -59,4 +59,4 @@ class TfUtilsTest(test_case.TestCase):
 
 
 if __name__ == '__main__':
-  test_case.main()
+  test_utils.test_main()

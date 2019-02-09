@@ -29,6 +29,7 @@ from tensorflow_datasets.core.features.text import subword_text_encoder
 from tensorflow_datasets.core.features.text import text_encoder
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 TEST_DATA_DIR = os.path.join(py_utils.tfds_dir(), 'testing', 'test_data')
 
@@ -186,4 +187,4 @@ def lorem_ipsum_zh_generator():
 
 
 if __name__ == '__main__':
-  test_case.main()
+  test_utils.test_main()

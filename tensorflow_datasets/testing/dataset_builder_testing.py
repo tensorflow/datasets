@@ -284,5 +284,3 @@ def compare_shapes_and_types(tensor_info, output_types, output_shapes):
       output_shape = output_shapes[feature_name]
       tf_utils.assert_shape_match(expected_shape, output_shape)
 
-
-main = test_utils.main

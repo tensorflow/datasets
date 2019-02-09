@@ -51,4 +51,4 @@ class VideoFeatureTest(test_utils.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  test_utils.main()
+  test_utils.test_main()

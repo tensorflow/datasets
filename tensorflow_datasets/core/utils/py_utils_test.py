@@ -24,6 +24,7 @@ import os
 
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 
 class PyUtilsTest(test_case.TestCase):
@@ -138,4 +139,4 @@ class ReadChecksumDigestTest(test_case.TestCase):
 
 
 if __name__ == '__main__':
-  test_case.main()
+  test_utils.test_main()

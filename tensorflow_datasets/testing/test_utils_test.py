@@ -74,4 +74,4 @@ class RunInGraphAndEagerTest(test_case.TestCase):
     self.assertEqual(modes[2:], ["setup_graph", "run_graph"])
 
 if __name__ == "__main__":
-  test_case.main()
+  test_utils.test_main()

@@ -22,6 +22,7 @@ from __future__ import print_function
 from absl.testing import parameterized
 import tensorflow_datasets as tfds
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 
 class LazyImportsTest(test_case.TestCase, parameterized.TestCase):
@@ -43,4 +44,4 @@ class LazyImportsTest(test_case.TestCase, parameterized.TestCase):
 
 
 if __name__ == "__main__":
-  test_case.main()
+  test_utils.test_main()

@@ -62,4 +62,4 @@ class MovingSequenceTest(tf.test.TestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  test_utils.test_main()

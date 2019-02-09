@@ -21,6 +21,7 @@ from __future__ import print_function
 
 from tensorflow_datasets.image import mnist
 from tensorflow_datasets.testing import dataset_builder_testing
+from tensorflow_datasets.testing import test_utils
 
 
 # testing/mnist.py generates fake input data
@@ -48,4 +49,4 @@ class FashionMNISTTest(MNISTTest):
 
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  test_utils.test_main()

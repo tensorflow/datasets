@@ -30,6 +30,7 @@ import tensorflow as tf
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resouce_lib
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 
 class _FakeResponse(object):
@@ -131,4 +132,4 @@ class GetFilenameTest(test_case.TestCase):
     self.assertEqual(res, 'hello.zip')
 
 if __name__ == '__main__':
-  test_case.main()
+  test_utils.test_main()

@@ -32,6 +32,7 @@ import tensorflow as tf
 from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 
 ZIP = resource_lib.ExtractMethod.ZIP
@@ -292,4 +293,4 @@ class DownloadManagerTest(test_case.TestCase):
 
 
 if __name__ == '__main__':
-  test_case.main()
+  test_utils.test_main()

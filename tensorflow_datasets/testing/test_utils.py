@@ -131,7 +131,7 @@ def run_in_graph_and_eager_modes(func=None,
       self.assertAllEqual([4, 6], self.evaluate(z))
 
   if __name__ == "__main__":
-    test_case.main()
+    test_utils.test_main()
   ```
 
   This test validates that `tf.add()` has the same behavior when computed with
@@ -329,4 +329,8 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
       yield {"x": i}
 
 
-main = test_case.main
+def test_main():
+  # NOTE: Checking if eager is enabled doesn't let us enable eager execution!
+  tf.compat.v1.enable_eager_execution()
+  tf.test.main()
+

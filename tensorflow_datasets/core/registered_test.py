@@ -25,6 +25,7 @@ import six
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 
 @six.add_metaclass(registered.RegisteredDataset)
@@ -149,4 +150,4 @@ class RegisteredTest(test_case.TestCase):
 
 
 if __name__ == "__main__":
-  test_case.main()
+  test_utils.test_main()

@@ -27,6 +27,7 @@ import tensorflow as tf
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 
 def _read(path):
@@ -127,4 +128,4 @@ class ExtractorTest(test_case.TestCase):
 
 
 if __name__ == '__main__':
-  test_case.main()
+  test_utils.test_main()

@@ -24,6 +24,7 @@ import functools
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.image import image_folder
 from tensorflow_datasets.testing import dataset_builder_testing
+from tensorflow_datasets.testing import test_utils
 
 
 class ImageLabelFolderTest(dataset_builder_testing.DatasetBuilderTestCase):
@@ -45,4 +46,4 @@ class ImageLabelFolderTest(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  test_utils.test_main()

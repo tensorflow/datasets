@@ -513,6 +513,7 @@ do not create the data using material from the original dataset.
 import tensorflow as tf
 from tensorflow_datasets import my_dataset
 from tensorflow_datasets.testing import dataset_builder_testing
+from tensorflow_datasets.testing import test_utils
 
 
 class MyDatasetTest(dataset_builder_testing.DatasetBuilderTestCase):
@@ -528,7 +529,7 @@ class MyDatasetTest(dataset_builder_testing.DatasetBuilderTestCase):
   }
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  test_utils.test_main()
 ```
 
 You can run the test as you proceed to implement `MyDataset`.

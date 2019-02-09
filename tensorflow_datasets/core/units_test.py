@@ -21,6 +21,7 @@ from __future__ import print_function
 
 from tensorflow_datasets.core import units
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 
 class UnitsTest(test_case.TestCase):
@@ -40,4 +41,4 @@ class UnitsTest(test_case.TestCase):
 
 
 if __name__ == "__main__":
-  test_case.main()
+  test_utils.test_main()

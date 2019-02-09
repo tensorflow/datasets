@@ -53,5 +53,3 @@ class TestCase(tf.test.TestCase):
     return super(TestCase, self).assertRaisesWithPredicateMatch(
         err_type, predicate_fct)
 
-
-main = tf.test.main

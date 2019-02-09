@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import tensorflow_datasets as tfds  # pylint: disable=unused-import
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 
 class ImportTest(test_case.TestCase):
@@ -30,4 +31,4 @@ class ImportTest(test_case.TestCase):
 
 
 if __name__ == '__main__':
-  test_case.main()
+  test_utils.test_main()
