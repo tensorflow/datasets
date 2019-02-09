@@ -703,8 +703,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
         shuffle_files=shuffle_files,
     )
-    # TODO(b/123952794): Migrate to V2 function.
-    dataset = dataset.map_with_legacy_function(
+    dataset = dataset.map(
         self.info.features.decode_example,
         num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return dataset

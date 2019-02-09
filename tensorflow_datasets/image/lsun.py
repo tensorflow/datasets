@@ -101,23 +101,8 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, extracted_dir, file_path):
-    if tf.executing_eagerly():
+    with tf.Graph().as_default():
       dataset = tf.contrib.data.LMDBDataset(
           os.path.join(extracted_dir, file_path, "data.mdb"))
-
-      for _, jpeg_image in dataset:
-        yield {"image": io.BytesIO(jpeg_image.numpy())}
-    else:
-      with tf.Graph().as_default():
-        dataset = tf.contrib.data.LMDBDataset(
-            os.path.join(extracted_dir, file_path, "data.mdb"))
-
-        next_iterator = tf.compat.v1.data.make_one_shot_iterator(
-            dataset).get_next()
-        with tf.compat.v1.train.MonitoredTrainingSession() as session:
-          while True:
-            try:
-              _, jpeg_image = session.run(next_iterator)
-              yield {"image": io.BytesIO(jpeg_image)}
-            except tf.errors.OutOfRangeError:
-              break
+      for _, jpeg_image in tfds.as_numpy(dataset):
+        yield {"image": io.BytesIO(jpeg_image)}

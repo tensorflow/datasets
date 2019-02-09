@@ -132,7 +132,7 @@ def as_numpy(dataset, graph=None):
   for ds_el in flat_ds:
     types = [type(el) for el in flat_ds]
     types = tf.nest.pack_sequence_as(nested_ds, types)
-    if not isinstance(ds_el, (tf.Tensor, tf.data.Dataset)):
+    if not (isinstance(ds_el, tf.Tensor) or _is_ds(ds_el)):
       raise ValueError("Arguments to as_numpy must be tf.Tensors or "
                        "tf.data.Datasets. Got: %s" % types)
 
@@ -141,7 +141,7 @@ def as_numpy(dataset, graph=None):
     for ds_el in flat_ds:
       if isinstance(ds_el, tf.Tensor):
         np_el = ds_el.numpy()
-      elif isinstance(ds_el, tf.data.Dataset):
+      elif _is_ds(ds_el):
         np_el = _eager_dataset_iterator(ds_el)
       else:
         assert False
@@ -175,4 +175,11 @@ def as_numpy(dataset, graph=None):
 
 
 def _is_ds(ds):
-  return isinstance(ds, tf.data.Dataset)
+  dataset_types = [tf.data.Dataset]
+  v1_ds = utils.rgetattr(tf, "compat.v1.data.Dataset", None)
+  v2_ds = utils.rgetattr(tf, "compat.v2.data.Dataset", None)
+  if v1_ds is not None:
+    dataset_types.append(v1_ds)
+  if v2_ds is not None:
+    dataset_types.append(v2_ds)
+  return isinstance(ds, tuple(dataset_types))

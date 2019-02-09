@@ -4,6 +4,8 @@ set -vx  # print command from file as well as evaluated command
 
 source ./oss_scripts/utils.sh
 
+: "${TF_VERSION:?}"
+
 # Instead of exiting on any failure with "set -e", we'll call set_status after
 # each command and exit $STATUS at the end.
 STATUS=0
@@ -30,7 +32,7 @@ fi
 TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 
 # Run Tests
-pytest $TF2_IGNORE --ignore="tensorflow_datasets/core/test_utils.py"
+pytest $TF2_IGNORE --ignore="tensorflow_datasets/testing/test_utils.py"
 set_status
 
 # Test notebooks in isolated environments

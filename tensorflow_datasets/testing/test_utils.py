@@ -290,8 +290,7 @@ def features_encode_decode(features_dict, example, as_tensor=False):
     dataset = file_adapter.dataset_from_filename(tmp_filename)
 
     # Decode the example
-    # TODO(b/123952794): Migrate to V2 function.
-    dataset = dataset.map_with_legacy_function(features_dict.decode_example)
+    dataset = dataset.map(features_dict.decode_example)
 
     if not as_tensor:  # Evaluate to numpy array
       for el in dataset_utils.as_numpy(dataset):
