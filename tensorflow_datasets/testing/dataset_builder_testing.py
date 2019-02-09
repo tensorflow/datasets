@@ -31,9 +31,9 @@ from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.testing import test_utils
 
 tf.compat.v1.enable_eager_execution()
 

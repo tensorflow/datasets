@@ -22,8 +22,8 @@ from __future__ import print_function
 
 import tensorflow as tf
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.features.text import text_encoder
+from tensorflow_datasets.testing import test_utils
 
 tf.compat.v1.enable_eager_execution()
 

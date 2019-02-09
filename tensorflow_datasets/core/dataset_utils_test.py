@@ -23,8 +23,8 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 tf.compat.v1.enable_eager_execution()
 

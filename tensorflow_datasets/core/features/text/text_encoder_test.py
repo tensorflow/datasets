@@ -25,9 +25,9 @@ import os
 
 from absl.testing import parameterized
 import numpy as np
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.features.text import text_encoder
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 ZH_HELLO = '你好 '
 EN_HELLO = 'hello '

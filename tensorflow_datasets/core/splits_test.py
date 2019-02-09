@@ -22,10 +22,10 @@ from __future__ import print_function
 import tensorflow as tf
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 RANGE_TRAIN = list(range(0, 2000))
 RANGE_TEST = list(range(3000, 3200))

@@ -27,10 +27,10 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
 from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 tf.compat.v1.enable_eager_execution()
 
