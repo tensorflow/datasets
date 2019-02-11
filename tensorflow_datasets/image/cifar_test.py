@@ -20,14 +20,13 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.image import cifar
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
 # testing/cifar.py generates fake input data
 
 
-class Cifar10Test(dataset_builder_testing.DatasetBuilderTestCase):
+class Cifar10Test(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = cifar.Cifar10
   SPLITS = {
       "train": 10,
@@ -35,7 +34,7 @@ class Cifar10Test(dataset_builder_testing.DatasetBuilderTestCase):
   }
 
 
-class Cifar100Test(dataset_builder_testing.DatasetBuilderTestCase):
+class Cifar100Test(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = cifar.Cifar100
   SPLITS = {
       "train": 10,
@@ -44,4 +43,4 @@ class Cifar100Test(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()

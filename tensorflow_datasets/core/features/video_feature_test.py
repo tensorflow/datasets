@@ -23,12 +23,12 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import features
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class VideoFeatureTest(test_utils.FeatureExpectationsTestCase):
+class VideoFeatureTest(tfds_test.FeatureExpectationsTestCase):
 
   def test_video(self):
 
@@ -40,7 +40,7 @@ class VideoFeatureTest(test_utils.FeatureExpectationsTestCase):
         dtype=tf.uint8,
         tests=[
             # Numpy array
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np_video,
                 expected=np_video,
             ),
@@ -51,4 +51,4 @@ class VideoFeatureTest(test_utils.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  test_utils.test_main()
+  tfds_test.test_main()

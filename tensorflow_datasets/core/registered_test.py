@@ -24,8 +24,7 @@ import six
 
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
-from tensorflow_datasets.testing import test_case
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
 @six.add_metaclass(registered.RegisteredDataset)
@@ -58,7 +57,7 @@ class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
   IN_DEVELOPMENT = True
 
 
-class RegisteredTest(test_case.TestCase):
+class RegisteredTest(tfds_test.TestCase):
 
   def test_registered(self):
     name = "empty_dataset_builder"
@@ -150,4 +149,4 @@ class RegisteredTest(test_case.TestCase):
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()

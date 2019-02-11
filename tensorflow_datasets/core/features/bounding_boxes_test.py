@@ -22,12 +22,12 @@ from __future__ import print_function
 import tensorflow as tf
 
 from tensorflow_datasets.core import features
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class BBoxFeatureTest(test_utils.FeatureExpectationsTestCase):
+class BBoxFeatureTest(tfds_test.FeatureExpectationsTestCase):
 
   def test_feature(self):
 
@@ -37,7 +37,7 @@ class BBoxFeatureTest(test_utils.FeatureExpectationsTestCase):
         dtype=tf.float32,
         tests=[
             # Numpy array
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=features.BBox(
                     ymin=0.0,
                     xmin=0.25,
@@ -51,4 +51,4 @@ class BBoxFeatureTest(test_utils.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  test_utils.test_main()
+  tfds_test.test_main()

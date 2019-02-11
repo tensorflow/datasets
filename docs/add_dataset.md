@@ -492,7 +492,7 @@ to be updated.
 
 ## Testing MyDataset
 
-`dataset_builder_testing.DatasetBuilderTestCase` is a base `TestCase` to fully exercise a
+`tfds.testing.DatasetBuilderTestCase` is a base `TestCase` to fully exercise a
 dataset. It uses "fake examples" as test data that mimic the structure of the
 source dataset.
 
@@ -512,11 +512,10 @@ do not create the data using material from the original dataset.
 ```python
 import tensorflow as tf
 from tensorflow_datasets import my_dataset
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
-class MyDatasetTest(dataset_builder_testing.DatasetBuilderTestCase):
+class MyDatasetTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = my_dataset.MyDataset
   SPLITS = {  # Expected number of examples on each split from fake example.
       "train": 12,
@@ -529,7 +528,7 @@ class MyDatasetTest(dataset_builder_testing.DatasetBuilderTestCase):
   }
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()
 ```
 
 You can run the test as you proceed to implement `MyDataset`.

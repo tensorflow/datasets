@@ -131,7 +131,7 @@ def run_in_graph_and_eager_modes(func=None,
       self.assertAllEqual([4, 6], self.evaluate(z))
 
   if __name__ == "__main__":
-    test_utils.test_main()
+    tfds_test.test_main()
   ```
 
   This test validates that `tf.add()` has the same behavior when computed with

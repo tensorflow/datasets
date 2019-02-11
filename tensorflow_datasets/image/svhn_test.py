@@ -20,11 +20,10 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.image import svhn
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
-class SvhnTest(dataset_builder_testing.DatasetBuilderTestCase):
+class SvhnTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = svhn.SvhnCropped
   SPLITS = {  # Number of examples.
       "train": 3,
@@ -39,4 +38,4 @@ class SvhnTest(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()

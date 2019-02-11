@@ -29,8 +29,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resouce_lib
-from tensorflow_datasets.testing import test_case
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
 class _FakeResponse(object):
@@ -48,7 +47,7 @@ class _FakeResponse(object):
       yield line
 
 
-class DownloaderTest(test_case.TestCase):
+class DownloaderTest(tfds_test.TestCase):
 
   def setUp(self):
     self.addCleanup(absltest.mock.patch.stopall)
@@ -115,7 +114,7 @@ class DownloaderTest(test_case.TestCase):
       promise.get()
 
 
-class GetFilenameTest(test_case.TestCase):
+class GetFilenameTest(tfds_test.TestCase):
 
   def test_no_headers(self):
     resp = _FakeResponse('http://foo.bar/baz.zip', b'content')
@@ -132,4 +131,4 @@ class GetFilenameTest(test_case.TestCase):
     self.assertEqual(res, 'hello.zip')
 
 if __name__ == '__main__':
-  test_utils.test_main()
+  tfds_test.test_main()

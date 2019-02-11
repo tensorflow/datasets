@@ -24,7 +24,7 @@ from __future__ import print_function
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import features as features_lib
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
@@ -71,7 +71,7 @@ class AnOutputConnector(features_lib.FeatureConnector):
     return tfexample_data / 10.0
 
 
-class FeatureDictTest(test_utils.FeatureExpectationsTestCase):
+class FeatureDictTest(tfds_test.FeatureExpectationsTestCase):
 
   def test_fdict(self):
 
@@ -125,7 +125,7 @@ class FeatureDictTest(test_utils.FeatureExpectationsTestCase):
         },
         tests=[
             # Np array
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value={
                     'input': 1,
                     'output': -1,
@@ -171,7 +171,7 @@ class FeatureDictTest(test_utils.FeatureExpectationsTestCase):
     self.assertEqual(fdict['string'].dtype, tf.string)
 
 
-class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
+class FeatureTensorTest(tfds_test.FeatureExpectationsTestCase):
 
   def test_shape_static(self):
 
@@ -187,23 +187,23 @@ class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
         shape=(2, 3),
         tests=[
             # Np array
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np_input,
                 expected=np_input,
             ),
             # Python array
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=array_input,
                 expected=array_input,
             ),
             # Invalid dtype
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np.random.randint(256, size=(2, 3)),
                 raise_cls=ValueError,
                 raise_msg='int64 do not match',
             ),
             # Invalid shape
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np.random.rand(2, 4).astype(np.float32),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
@@ -221,16 +221,16 @@ class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
         dtype=tf.int32,
         shape=(None, 3, 2),
         tests=[
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np_input_dynamic_1,
                 expected=np_input_dynamic_1,
             ),
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np_input_dynamic_2,
                 expected=np_input_dynamic_2,
             ),
             # Invalid shape
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=
                 np.random.randint(256, size=(2, 3, 1), dtype=np.int32),
                 raise_cls=ValueError,
@@ -246,19 +246,19 @@ class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
         dtype=tf.bool,
         shape=(),
         tests=[
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np.array(True),
                 expected=True,
             ),
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np.array(False),
                 expected=False,
             ),
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=True,
                 expected=True,
             ),
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=False,
                 expected=False,
             ),
@@ -272,11 +272,11 @@ class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
         dtype=tf.bool,
         shape=(3,),
         tests=[
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=np.array([True, True, False]),
                 expected=[True, True, False],
             ),
-            test_utils.FeatureExpectationItem(
+            tfds_test.FeatureExpectationItem(
                 value=[True, False, True],
                 expected=[True, False, True],
             ),
@@ -285,4 +285,4 @@ class FeatureTensorTest(test_utils.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  test_utils.test_main()
+  tfds_test.test_main()

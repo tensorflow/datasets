@@ -23,11 +23,10 @@ import hashlib
 import os
 
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.testing import test_case
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
-class PyUtilsTest(test_case.TestCase):
+class PyUtilsTest(tfds_test.TestCase):
 
   def test_map_nested(self):
     """Test the mapping function."""
@@ -127,7 +126,7 @@ class PyUtilsTest(test_case.TestCase):
     self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))
 
 
-class ReadChecksumDigestTest(test_case.TestCase):
+class ReadChecksumDigestTest(tfds_test.TestCase):
 
   def test_digest(self):
     digest, size = py_utils.read_checksum_digest(
@@ -139,4 +138,4 @@ class ReadChecksumDigestTest(test_case.TestCase):
 
 
 if __name__ == '__main__':
-  test_utils.test_main()
+  tfds_test.test_main()

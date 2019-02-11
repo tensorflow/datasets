@@ -26,14 +26,13 @@ import os
 from absl.testing import parameterized
 import numpy as np
 from tensorflow_datasets.core.features.text import text_encoder
-from tensorflow_datasets.testing import test_case
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 ZH_HELLO = '你好 '
 EN_HELLO = 'hello '
 
 
-class TextEncoderTest(test_case.TestCase):
+class TextEncoderTest(tfds_test.TestCase):
 
   def test_pad_decr(self):
     self.assertEqual([2, 1, 0], text_encoder.pad_decr([3, 2, 1]))
@@ -55,7 +54,7 @@ class TextEncoderTest(test_case.TestCase):
     self.assertTrue(text_encoder.is_mixed_alphanum(ZH_HELLO))
 
 
-class ByteTextEncoderTest(parameterized.TestCase, test_case.TestCase):
+class ByteTextEncoderTest(parameterized.TestCase, tfds_test.TestCase):
   # Incremented for pad
   ZH_HELLO_IDS = [i + 1 for i in [228, 189, 160, 229, 165, 189, 32]]
   EN_HELLO_IDS = [i + 1 for i in [104, 101, 108, 108, 111, 32]]
@@ -92,7 +91,7 @@ class ByteTextEncoderTest(parameterized.TestCase, test_case.TestCase):
   )
   def test_file_backed(self, additional_tokens):
     encoder = text_encoder.ByteTextEncoder(additional_tokens=additional_tokens)
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       vocab_fname = os.path.join(tmp_dir, 'vocab')
       encoder.save_to_file(vocab_fname)
 
@@ -103,7 +102,7 @@ class ByteTextEncoderTest(parameterized.TestCase, test_case.TestCase):
                        file_backed_encoder.additional_tokens)
 
 
-class TokenTextEncoderTest(test_case.TestCase):
+class TokenTextEncoderTest(tfds_test.TestCase):
 
   def test_encode_decode(self):
     encoder = text_encoder.TokenTextEncoder(
@@ -144,7 +143,7 @@ class TokenTextEncoderTest(test_case.TestCase):
     self.assertEqual([i + 1 for i in [0, 3, 3, 1, 2, 0]], encoder.encode(text))
 
   def test_file_backed(self):
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       vocab_fname = os.path.join(tmp_dir, 'vocab')
       encoder = text_encoder.TokenTextEncoder(
           vocab_list=['hi', 'bye', ZH_HELLO])
@@ -154,7 +153,7 @@ class TokenTextEncoderTest(test_case.TestCase):
       self.assertEqual(encoder.tokens, file_backed_encoder.tokens)
 
   def test_file_backed_with_args(self):
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # Set all the args to non-default values, including Tokenizer
       tokenizer = text_encoder.Tokenizer(
           reserved_tokens=['<FOOBAR>'], alphanum_only=False)
@@ -223,7 +222,7 @@ class TokenTextEncoderTest(test_case.TestCase):
     self.assertEqual([1, 2], encoder.encode('zoo foo'))
 
 
-class TokenizeTest(parameterized.TestCase, test_case.TestCase):
+class TokenizeTest(parameterized.TestCase, tfds_test.TestCase):
 
   def test_default(self):
     text = 'hi<<>><<>foo!^* bar &&  bye (%s hi)' % ZH_HELLO
@@ -283,4 +282,4 @@ class TokenizeTest(parameterized.TestCase, test_case.TestCase):
 
 
 if __name__ == '__main__':
-  test_utils.test_main()
+  tfds_test.test_main()

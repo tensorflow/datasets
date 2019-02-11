@@ -13,3 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Libraries for testing datasets."""
+
+from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase
+from tensorflow_datasets.testing.test_case import TestCase
+from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
+from tensorflow_datasets.testing.test_utils import FeatureExpectationItem
+from tensorflow_datasets.testing.test_utils import FeatureExpectationsTestCase
+from tensorflow_datasets.testing.test_utils import make_tmp_dir
+from tensorflow_datasets.testing.test_utils import rm_tmp_dir
+from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
+from tensorflow_datasets.testing.test_utils import test_main
+from tensorflow_datasets.testing.test_utils import tmp_dir
+
+__all__ = [
+    "DatasetBuilderTestCase",
+    "DummyDatasetSharedGenerator",
+    "FeatureExpectationItem",
+    "FeatureExpectationsTestCase",
+    "TestCase",
+    "run_in_graph_and_eager_modes",
+    "test_main",
+    "tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
+    "make_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
+    "rm_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
+]

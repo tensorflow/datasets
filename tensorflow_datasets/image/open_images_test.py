@@ -20,11 +20,10 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.image import open_images
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
-class OpenImagesV42012Test(dataset_builder_testing.DatasetBuilderTestCase):
+class OpenImagesV42012Test(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = open_images.OpenImagesV4
   SPLITS = {  # Expected number of examples on each split.
       'train': 512,
@@ -50,4 +49,4 @@ class OpenImagesV42012Test(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == '__main__':
-  test_utils.test_main()
+  tfds_test.test_main()

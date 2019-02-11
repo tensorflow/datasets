@@ -23,11 +23,10 @@ import functools
 
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.image import image_folder
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
-class ImageLabelFolderTest(dataset_builder_testing.DatasetBuilderTestCase):
+class ImageLabelFolderTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = functools.partial(
       image_folder.ImageLabelFolder, dataset_name="image_folder_data")
   # The above construct forces us to disable those checks:
@@ -46,4 +45,4 @@ class ImageLabelFolderTest(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()

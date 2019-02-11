@@ -20,11 +20,10 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.image import imagenet
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
-class Imagenet2012Test(dataset_builder_testing.DatasetBuilderTestCase):
+class Imagenet2012Test(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = imagenet.Imagenet2012
   SPLITS = {  # Expected number of examples on each split.
       "train": 100,
@@ -33,4 +32,4 @@ class Imagenet2012Test(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()

@@ -19,12 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 from tensorflow_datasets.text import squad
 
 
-class SquadTest(dataset_builder_testing.DatasetBuilderTestCase):
+class SquadTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = squad.Squad
 
   DL_EXTRACT_RESULT = {
@@ -39,4 +38,4 @@ class SquadTest(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()

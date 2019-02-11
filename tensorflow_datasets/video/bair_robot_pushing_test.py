@@ -19,12 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 from tensorflow_datasets.video import bair_robot_pushing
 
 
-class BairRobotPushingTest(dataset_builder_testing.DatasetBuilderTestCase):
+class BairRobotPushingTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = bair_robot_pushing.BairRobotPushingSmall
 
   SPLITS = {
@@ -34,4 +33,4 @@ class BairRobotPushingTest(dataset_builder_testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()

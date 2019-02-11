@@ -19,12 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.testing import dataset_builder_testing
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 from tensorflow_datasets.video import starcraft
 
 
-class StarcraftVideoDatasetTest(dataset_builder_testing.DatasetBuilderTestCase):
+class StarcraftVideoDatasetTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = starcraft.StarcraftVideo
   BUILDER_CONFIG_NAMES_TO_TEST = ["brawl_64"]
 
@@ -42,8 +41,7 @@ class StarcraftVideoDatasetTest(dataset_builder_testing.DatasetBuilderTestCase):
   }
 
 
-class StarcraftVideoDataset128Test(
-    dataset_builder_testing.DatasetBuilderTestCase):
+class StarcraftVideoDataset128Test(tfds_test.DatasetBuilderTestCase):
   """Separate test to cover the 128x128 resolution videos."""
   DATASET_CLASS = starcraft.StarcraftVideo
   BUILDER_CONFIG_NAMES_TO_TEST = ["brawl_128"]
@@ -63,4 +61,4 @@ class StarcraftVideoDataset128Test(
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()

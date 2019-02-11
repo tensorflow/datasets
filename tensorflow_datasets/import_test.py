@@ -20,15 +20,14 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow_datasets as tfds  # pylint: disable=unused-import
-from tensorflow_datasets.testing import test_case
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 
-class ImportTest(test_case.TestCase):
+class ImportTest(tfds_test.TestCase):
 
   def test_import(self):
     pass
 
 
 if __name__ == '__main__':
-  test_utils.test_main()
+  tfds_test.test_main()

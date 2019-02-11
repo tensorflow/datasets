@@ -29,8 +29,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
-from tensorflow_datasets.testing import test_case
-from tensorflow_datasets.testing import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
@@ -40,7 +39,7 @@ _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
-DummyDatasetSharedGenerator = test_utils.DummyDatasetSharedGenerator
+DummyDatasetSharedGenerator = tfds_test.DummyDatasetSharedGenerator
 
 
 class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
@@ -63,17 +62,17 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
       }
 
 
-class DatasetInfoTest(test_case.TestCase):
+class DatasetInfoTest(tfds_test.TestCase):
 
   @classmethod
   def setUpClass(cls):
     super(DatasetInfoTest, cls).setUpClass()
-    cls._tfds_tmp_dir = test_utils.make_tmp_dir()
+    cls._tfds_tmp_dir = tfds_test.make_tmp_dir()
     cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
 
   @classmethod
   def tearDownClass(cls):
-    test_utils.rm_tmp_dir(cls._tfds_tmp_dir)
+    tfds_test.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def test_undefined_dir(self):
     with self.assertRaisesWithPredicateMatch(ValueError,
@@ -121,7 +120,7 @@ class DatasetInfoTest(test_case.TestCase):
       existing_json = json.load(f)
 
     # Now write to a temp directory.
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       info.write_to_directory(tmp_dir)
 
       # Read the newly written json file into a string.
@@ -145,9 +144,9 @@ class DatasetInfoTest(test_case.TestCase):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     _ = str(info)
 
-  @test_utils.run_in_graph_and_eager_modes()
+  @tfds_test.run_in_graph_and_eager_modes()
   def test_statistics_generation(self):
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
@@ -160,9 +159,9 @@ class DatasetInfoTest(test_case.TestCase):
       self.assertEqual(10, test_split.statistics.num_examples)
       self.assertEqual(20, train_split.statistics.num_examples)
 
-  @test_utils.run_in_graph_and_eager_modes()
+  @tfds_test.run_in_graph_and_eager_modes()
   def test_statistics_generation_variable_sizes(self):
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
@@ -195,4 +194,4 @@ class DatasetInfoTest(test_case.TestCase):
 
 
 if __name__ == "__main__":
-  test_utils.test_main()
+  tfds_test.test_main()
