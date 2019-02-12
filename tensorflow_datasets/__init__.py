@@ -33,6 +33,10 @@ Documentation:
 * [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
 * [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
 """
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 # pylint: enable=line-too-long
 # pylint: disable=g-import-not-at-top,g-bad-import-order
 

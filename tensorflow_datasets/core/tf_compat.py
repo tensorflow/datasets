@@ -24,8 +24,13 @@ from __future__ import print_function
 import types
 import distutils.version
 
-
-PATCHED = False
+# Which patch function was called
+# For debug only, not to be depended upon.
+# Will be set to one of:
+# * tf1_12
+# * tf1_13
+# * nopatch
+TF_PATCH = ""
 
 
 # Ensure TensorFlow is importable and its version is sufficiently recent. This
@@ -64,8 +69,8 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
 
 def _patch_tf(tf):
   """Patch TF to maintain compatibility across versions."""
-  global PATCHED
-  if PATCHED:
+  global TF_PATCH
+  if TF_PATCH:
     return
 
   v_1_12 = distutils.version.LooseVersion("1.12.0")
@@ -74,11 +79,13 @@ def _patch_tf(tf):
   tf_version = distutils.version.LooseVersion(tf.__version__)
   if v_1_12 <= tf_version < v_1_13:
     # TODO(b/123930850): remove when 1.13 is stable.
+    TF_PATCH = "tf1_12"
     _patch_for_tf1_12(tf)
   elif v_1_13 <= tf_version < v_2:
+    TF_PATCH = "tf1_13"
     _patch_for_tf1_13(tf)
-
-  PATCHED = True
+  else:
+    TF_PATCH = "nopatch"
 
 
 def _patch_for_tf1_12(tf):
@@ -128,7 +135,24 @@ def _patch_for_tf1_13(tf):
   # TODO(b/123952794): Rm patch. Migrate to V2 function.
   if hasattr(tf.data.Dataset, "map_with_legacy_function"):
     tf.data.Dataset.map = tf.data.Dataset.map_with_legacy_function
+  if not hasattr(tf.compat, "v2"):
+    tf.compat.v2 = types.ModuleType("tf.compat.v2")
+    tf.compat.v2.data = types.ModuleType("tf.compat.v2.data")
+    from tensorflow.python.data.ops import dataset_ops
+    tf.compat.v2.data.Dataset = dataset_ops.DatasetV2
 
 
+def is_dataset(ds):
+  """Whether ds is a Dataset. Compatible across TF versions."""
+  import tensorflow as tf
+  from tensorflow_datasets.core.utils import py_utils
+  dataset_types = [tf.data.Dataset]
+  v1_ds = py_utils.rgetattr(tf, "compat.v1.data.Dataset", None)
+  v2_ds = py_utils.rgetattr(tf, "compat.v2.data.Dataset", None)
+  if v1_ds is not None:
+    dataset_types.append(v1_ds)
+  if v2_ds is not None:
+    dataset_types.append(v2_ds)
+  return isinstance(ds, tuple(dataset_types))
 
 

@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils
 
 
@@ -132,7 +133,7 @@ def as_numpy(dataset, graph=None):
   for ds_el in flat_ds:
     types = [type(el) for el in flat_ds]
     types = tf.nest.pack_sequence_as(nested_ds, types)
-    if not (isinstance(ds_el, tf.Tensor) or _is_ds(ds_el)):
+    if not (isinstance(ds_el, tf.Tensor) or tf_compat.is_dataset(ds_el)):
       raise ValueError("Arguments to as_numpy must be tf.Tensors or "
                        "tf.data.Datasets. Got: %s" % types)
 
@@ -141,7 +142,7 @@ def as_numpy(dataset, graph=None):
     for ds_el in flat_ds:
       if isinstance(ds_el, tf.Tensor):
         np_el = ds_el.numpy()
-      elif _is_ds(ds_el):
+      elif tf_compat.is_dataset(ds_el):
         np_el = _eager_dataset_iterator(ds_el)
       else:
         assert False
@@ -153,33 +154,23 @@ def as_numpy(dataset, graph=None):
     with utils.maybe_with_graph(graph, create_if_none=False):
       ds_iters = [
           tf.compat.v1.data.make_one_shot_iterator(ds_el).get_next()
-          for ds_el in flat_ds if _is_ds(ds_el)
+          for ds_el in flat_ds if tf_compat.is_dataset(ds_el)
       ]
     ds_iters = [_graph_dataset_iterator(ds_iter, graph) for ds_iter in ds_iters]
 
     # Then create numpy arrays for tensors
     with utils.nogpu_session(graph) as sess:  # Shared session for tf.Tensor
       # Calling sess.run once so that randomness is shared.
-      np_arrays = sess.run([tensor for tensor in flat_ds if not _is_ds(tensor)])
+      np_arrays = sess.run([tensor for tensor in flat_ds
+                            if not tf_compat.is_dataset(tensor)])
 
     # Merge the dataset iterators and np arrays
     iter_ds = iter(ds_iters)
     iter_array = iter(np_arrays)
     flat_np = [
-        next(iter_ds) if _is_ds(ds_el) else next(iter_array)
+        next(iter_ds) if tf_compat.is_dataset(ds_el) else next(iter_array)
         for ds_el in flat_ds
     ]
 
   # Nest
   return tf.nest.pack_sequence_as(nested_ds, flat_np)
-
-
-def _is_ds(ds):
-  dataset_types = [tf.data.Dataset]
-  v1_ds = utils.rgetattr(tf, "compat.v1.data.Dataset", None)
-  v2_ds = utils.rgetattr(tf, "compat.v2.data.Dataset", None)
-  if v1_ds is not None:
-    dataset_types.append(v1_ds)
-  if v2_ds is not None:
-    dataset_types.append(v2_ds)
-  return isinstance(ds, tuple(dataset_types))
