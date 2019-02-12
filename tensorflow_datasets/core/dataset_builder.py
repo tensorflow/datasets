@@ -238,19 +238,13 @@ class DatasetBuilder(object):
 
         # Update the DatasetInfo metadata by computing statistics from the data.
         if download_config.compute_stats:
-          already_has_stats = bool(self.info.splits.total_num_examples)
-          if already_has_stats:
-            logging.info("Skipping computing stats because they are already "
-                         "populated.")
+          if self.info.splits.total_num_examples:
+            logging.info("Skipping computing stats, already populated.")
           else:
             self.info.compute_dynamic_properties()
-
-            # Set checksums for all files downloaded
-            self.info.download_checksums = (
-                dl_manager.recorded_download_checksums)
-            # Set size of all files downloaded
-            self.info.size_in_bytes = sum(
-                [v for _, v in dl_manager.download_sizes.items()])
+        if not self.info.download_checksums:
+          self.info.download_checksums = dl_manager.recorded_download_checksums
+          self.info.size_in_bytes = sum(dl_manager.download_sizes.values())
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)
 
