@@ -237,13 +237,21 @@ class DatasetBuilder(object):
         # when reading from package data.
 
         # Update the DatasetInfo metadata by computing statistics from the data.
-        if download_config.compute_stats:
-          if self.info.splits.total_num_examples:
-            logging.info("Skipping computing stats, already populated.")
-          else:
-            self.info.compute_dynamic_properties()
+        if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
+            download_config.compute_stats == download.ComputeStatsMode.AUTO and
+            bool(self.info.splits.total_num_examples)
+           ):
+          logging.info(
+              "Skipping computing stats for mode %s.",
+              download_config.compute_stats)
+        else:  # Mode is forced or stats do not exists yet
+          logging.info("Computing statistics.")
+          self.info.compute_dynamic_properties()
+        # DLManager dynamic fields are only updated if not restored by GCS
         if not self.info.download_checksums:
+          # Set checksums for all files downloaded
           self.info.download_checksums = dl_manager.recorded_download_checksums
+          # Set size of all files downloaded
           self.info.size_in_bytes = sum(dl_manager.download_sizes.values())
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)

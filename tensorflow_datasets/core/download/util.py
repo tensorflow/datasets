@@ -47,6 +47,25 @@ class GenerateMode(enum.Enum):
   FORCE_REDOWNLOAD = 'force_redownload'
 
 
+class ComputeStatsMode(enum.Enum):
+  """Mode to decide if dynamic dataset info fields should be computed or not.
+
+  Mode can be:
+
+  * AUTO: Compute the DatasetInfo dynamic fields only if they haven't been
+    restored from GCS.
+  * FORCE: Always recompute DatasetInfo dynamic  fields, even if they are
+    already present
+  * SKIP: Ignore the dataset dynamic field computation (whether they already
+    exist or not)
+
+  """
+
+  AUTO = 'auto'
+  FORCE = 'force'
+  SKIP = 'skip'
+
+
 # TODO(epot): Move some of those functions into core.py_utils
 
 

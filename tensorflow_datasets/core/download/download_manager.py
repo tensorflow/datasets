@@ -52,7 +52,7 @@ class DownloadConfig(object):
                extract_dir=None,
                manual_dir=None,
                download_mode=None,
-               compute_stats=True,
+               compute_stats=None,
                max_examples_per_split=None):
     """Constructs a `DownloadConfig`.
 
@@ -65,8 +65,8 @@ class DownloadConfig(object):
       download_mode: `tfds.GenerateMode`, how to deal with downloads or data
         that already exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will
         reuse both downloads and data if it already exists.
-      compute_stats: `bool`, whether to compute statistics over the generated
-        data.
+      compute_stats: `tfds.download.ComputeStats`, whether to compute
+        statistics over the generated data. Defaults to `AUTO`.
       max_examples_per_split: `int`, optional max number of examples to write
         into each split.
     """
@@ -74,7 +74,8 @@ class DownloadConfig(object):
     self.manual_dir = manual_dir
     self.download_mode = util.GenerateMode(
         download_mode or util.GenerateMode.REUSE_DATASET_IF_EXISTS)
-    self.compute_stats = compute_stats
+    self.compute_stats = util.ComputeStatsMode(
+        compute_stats or util.ComputeStatsMode.AUTO)
     self.max_examples_per_split = max_examples_per_split
 
 
