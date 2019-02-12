@@ -24,6 +24,7 @@ import os
 import tempfile
 
 from absl.testing import absltest
+import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -326,6 +327,44 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   def _generate_examples(self):
     for i in range(30):
       yield {"x": i}
+
+
+class DummyMnist(dataset_builder.GeneratorBasedBuilder):
+  """Test DatasetBuilder."""
+
+  VERSION = utils.Version("1.0.0")
+
+  def __init__(self, *args, **kwargs):
+    self._num_shards = kwargs.pop("num_shards", 10)
+    super(DummyMnist, self).__init__(*args, **kwargs)
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({
+            "image": features.Image(shape=(28, 28, 1)),
+            "label": features.ClassLabel(num_classes=10),
+        }),
+    )
+
+  def _split_generators(self, dl_manager):
+    return [
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            num_shards=self._num_shards,
+            gen_kwargs=dict()),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            num_shards=1,
+            gen_kwargs=dict()),
+    ]
+
+  def _generate_examples(self):
+    for i in range(20):
+      yield {
+          "image": np.ones((28, 28, 1), dtype=np.uint8),
+          "label": i % 10,
+      }
 
 
 def test_main():

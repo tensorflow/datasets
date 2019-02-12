@@ -442,5 +442,34 @@ class SplitsDictTest(tfds_test.TestCase):
     self.assertEqual("train", sdp[1].name)
     self.assertEqual(10, sdp[1].num_shards)
 
+  def test_bool(self):
+    sd = splits.SplitDict()
+    self.assertFalse(sd)  # Empty split is False
+    sd.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    self.assertTrue(sd)  # Non-empty split is True
+
+  def test_check_splits_equals(self):
+    s1 = splits.SplitDict()
+    s1.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    s1.add(tfds.core.SplitInfo(name="test", num_shards=3))
+
+    s2 = splits.SplitDict()
+    s2.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    s2.add(tfds.core.SplitInfo(name="test", num_shards=3))
+
+    s3 = splits.SplitDict()
+    s3.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    s3.add(tfds.core.SplitInfo(name="test", num_shards=3))
+    s3.add(tfds.core.SplitInfo(name="valid", num_shards=0))
+
+    s4 = splits.SplitDict()
+    s4.add(tfds.core.SplitInfo(name="train", num_shards=11))
+    s4.add(tfds.core.SplitInfo(name="test", num_shards=3))
+
+    self.assertTrue(splits.check_splits_equals(s1, s1))
+    self.assertTrue(splits.check_splits_equals(s1, s2))
+    self.assertFalse(splits.check_splits_equals(s1, s3))  # Not same names
+    self.assertFalse(splits.check_splits_equals(s1, s4))  # Nb of shards !=
+
 if __name__ == "__main__":
   tfds_test.test_main()

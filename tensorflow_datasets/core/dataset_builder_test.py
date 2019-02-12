@@ -29,9 +29,11 @@ import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import utils
 import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
@@ -256,7 +258,7 @@ class DatasetBuilderTest(tfds_test.TestCase):
       # Test that the config was used and they didn't collide.
       splits_list = [splits_lib.Split.TRAIN, splits_lib.Split.TEST]
       for builder, incr in [(builder1, 1), (builder2, 2)]:
-        train_data, test_data = [
+        train_data, test_data = [   # pylint: disable=g-complex-comprehension
             [el["x"] for el in
              dataset_utils.as_numpy(builder.as_dataset(split=split))]
             for split in splits_list
@@ -275,6 +277,115 @@ class DatasetBuilderTest(tfds_test.TestCase):
             name="invalid_split_dataset",
             data_dir=tmp_dir,
         )
+
+
+class BuilderRestoreGcsTest(tfds_test.TestCase):
+
+  def setUp(self):
+    super(BuilderRestoreGcsTest, self).setUp()
+
+    def load_mnist_dataset_info(self):
+      mnist_info_path = os.path.join(
+          utils.tfds_dir(),
+          "testing/test_data/dataset_info/mnist/1.0.0",
+      )
+      mnist_info_path = os.path.normpath(mnist_info_path)
+      self.read_from_directory(mnist_info_path)
+
+    patcher = absltest.mock.patch.object(
+        dataset_info.DatasetInfo,
+        "initialize_from_bucket",
+        new=load_mnist_dataset_info
+    )
+    patcher.start()
+    self.patch_gcs = patcher
+    self.addCleanup(patcher.stop)
+
+    patcher = absltest.mock.patch.object(
+        dataset_info.DatasetInfo, "compute_dynamic_properties",
+    )
+    self.compute_dynamic_property = patcher.start()
+    self.addCleanup(patcher.stop)
+
+  def test_stats_restored_from_gcs(self):
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = tfds_test.DummyMnist(data_dir=tmp_dir)
+      self.assertEqual(builder.info.splits.total_num_examples, 70000)
+      self.assertFalse(self.compute_dynamic_property.called)
+
+      builder.download_and_prepare()
+
+      # Statistics shouldn't have been recomputed
+      self.assertEqual(builder.info.splits.total_num_examples, 70000)
+      self.assertFalse(self.compute_dynamic_property.called)
+
+  def test_stats_not_restored_gcs_overwritten(self):
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      # If split are different that the one restored, stats should be recomputed
+      builder = tfds_test.DummyMnist(data_dir=tmp_dir, num_shards=5)
+      self.assertEqual(builder.info.splits.total_num_examples, 70000)
+      self.assertFalse(self.compute_dynamic_property.called)
+
+      builder.download_and_prepare()
+
+      # Statistics should have been recomputed (split different from the
+      # restored ones)
+      self.assertTrue(self.compute_dynamic_property.called)
+
+  def test_gcs_not_exists(self):
+    # By disabling the patch, and because DummyMnist is not on GCS, we can
+    # simulate a new dataset starting from scratch
+    self.patch_gcs.stop()
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = tfds_test.DummyMnist(data_dir=tmp_dir)
+      # No dataset_info restored, so stats are empty
+      self.assertEqual(builder.info.splits.total_num_examples, 0)
+      self.assertFalse(self.compute_dynamic_property.called)
+
+      builder.download_and_prepare()
+
+      # Statistics should have been recomputed
+      self.assertTrue(self.compute_dynamic_property.called)
+    self.patch_gcs.start()
+
+  def test_skip_stats(self):
+    # Test when stats do not exists yet and compute_stats='skip'
+
+    # By disabling the patch, and because DummyMnist is not on GCS, we can
+    # simulate a new dataset starting from scratch
+    self.patch_gcs.stop()
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      # No dataset_info restored, so stats are empty
+      builder = tfds_test.DummyMnist(data_dir=tmp_dir, num_shards=5)
+      self.assertEqual(builder.info.splits.total_num_examples, 0)
+      self.assertFalse(self.compute_dynamic_property.called)
+
+      download_config = download.DownloadConfig(
+          compute_stats=download.ComputeStatsMode.SKIP,
+      )
+      builder.download_and_prepare(download_config=download_config)
+
+      # Statistics computation should have been skipped
+      self.assertEqual(builder.info.splits.total_num_examples, 0)
+      self.assertFalse(self.compute_dynamic_property.called)
+    self.patch_gcs.start()
+
+  def test_force_stats(self):
+    # Test when stats already exists but compute_stats='force'
+
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      # No dataset_info restored, so stats are empty
+      builder = tfds_test.DummyMnist(data_dir=tmp_dir, num_shards=5)
+      self.assertEqual(builder.info.splits.total_num_examples, 70000)
+      self.assertFalse(self.compute_dynamic_property.called)
+
+      download_config = download.DownloadConfig(
+          compute_stats=download.ComputeStatsMode.FORCE,
+      )
+      builder.download_and_prepare(download_config=download_config)
+
+      # Statistics computation should have been recomputed
+      self.assertTrue(self.compute_dynamic_property.called)
 
 
 class DatasetBuilderReadTest(tfds_test.TestCase):

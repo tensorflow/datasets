@@ -187,10 +187,30 @@ class DatasetInfo(object):
   def splits(self):
     return self._splits.copy()
 
-  @splits.setter
-  def splits(self, split_dict):
+  def update_splits_if_different(self, split_dict):
+    """Overwrite the splits if they are different from the current ones.
+
+    * If splits aren't already defined or different (ex: different number of
+      shards), then the new split dict is used. This will trigger stats
+      computation during download_and_prepare.
+    * If splits are already defined in DatasetInfo and similar (same names and
+      shards): keep the restored split which contains the statistics (restored
+      from GCS or file)
+
+    Args:
+      split_dict: `tfds.core.SplitDict`, the new split
+    """
     assert isinstance(split_dict, splits_lib.SplitDict)
 
+    # If splits are already defined and identical, then we do not update
+    if self._splits and splits_lib.check_splits_equals(
+        self._splits, split_dict):
+      return
+
+    self._set_splits(split_dict)
+
+  def _set_splits(self, split_dict):
+    """Split setter (private method)."""
     # Update the dictionary representation.
     # Use from/to proto for a clean copy
     self._splits = split_dict.copy()
@@ -254,7 +274,7 @@ class DatasetInfo(object):
         raise
 
     # Set splits to trigger proto update in setter
-    self.splits = splits
+    self._set_splits(splits)
 
   @property
   def as_json(self):
@@ -295,7 +315,7 @@ class DatasetInfo(object):
     parsed_proto = read_from_json(json_filename)
 
     # Update splits
-    self.splits = splits_lib.SplitDict.from_proto(parsed_proto.splits)
+    self._set_splits(splits_lib.SplitDict.from_proto(parsed_proto.splits))
 
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:

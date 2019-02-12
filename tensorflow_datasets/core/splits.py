@@ -532,6 +532,16 @@ class SplitDict(utils.NonMutableDict):
     return SplitDict.from_proto(self.to_proto())
 
 
+def check_splits_equals(splits1, splits2):
+  """Check that the two split dicts have the same names and num_shards."""
+  if set(splits1) ^ set(splits2):  # Name intersection should be null
+    return False
+  for _, (split1, split2) in utils.zip_dict(splits1, splits2):
+    if split1.num_shards != split2.num_shards:
+      return False
+  return True
+
+
 class SplitGenerator(object):
   """Defines the split information for the generator.
 

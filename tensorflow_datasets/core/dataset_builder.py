@@ -685,7 +685,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
       )
 
     # Update the info object with the splits.
-    self.info.splits = split_dict
+    self.info.update_splits_if_different(split_dict)
 
   def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=None):
 

@@ -18,6 +18,7 @@
 from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase
 from tensorflow_datasets.testing.test_case import TestCase
 from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
+from tensorflow_datasets.testing.test_utils import DummyMnist
 from tensorflow_datasets.testing.test_utils import FeatureExpectationItem
 from tensorflow_datasets.testing.test_utils import FeatureExpectationsTestCase
 from tensorflow_datasets.testing.test_utils import make_tmp_dir
@@ -29,6 +30,7 @@ from tensorflow_datasets.testing.test_utils import tmp_dir
 __all__ = [
     "DatasetBuilderTestCase",
     "DummyDatasetSharedGenerator",
+    "DummyMnist",
     "FeatureExpectationItem",
     "FeatureExpectationsTestCase",
     "TestCase",

@@ -30,6 +30,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import download
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tf_utils
@@ -200,7 +201,12 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
-      builder.download_and_prepare()
+      # Skip computation, otherwise the computed number of samples won't match
+      # the one restored from GCS
+      download_config = download.DownloadConfig(
+          compute_stats=download.ComputeStatsMode.FORCE,
+      )
+      builder.download_and_prepare(download_config=download_config)
 
     with self._subTest("as_dataset"):
       self._assertAsDataset(builder)
