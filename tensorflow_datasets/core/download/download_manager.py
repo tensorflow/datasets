@@ -81,23 +81,23 @@ class DownloadConfig(object):
 class DownloadManager(object):
   """Manages the download and extraction of files, as well as caching.
 
-  Downloaded files are cached under `download_dir`. The file name is:
-    - if there is a sha256 associated with the url: "${sha256_of_content}s".
-    - otherwise: "url.%(sha256_of_url)s".
+  Downloaded files are cached under `download_dir`. The file name of downloaded
+   files follows pattern "${sanitized_url}${content_checksum}.${ext}". Eg:
+   'cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz'.
 
-  The sha256 of content (if any) associated to each URL are given through the
-  `checksum_file` given to constructor.
+  While a file is being downloaded, it is placed into a directory following a
+  similar but different pattern:
+  "%{sanitized_url}${url_checksum}.tmp.${uuid}".
 
   When a file is downloaded, a "%{fname}s.INFO.json" file is created next to it.
   This INFO file contains the following information:
   {"dataset_names": ["name1", "name2"],
    "urls": ["http://url.of/downloaded_file"]}
-  The INFO files are used by `create_checksum_files.py` script.
 
   Extracted files/dirs are stored under `extract_dir`. The file name or
   directory name is the same as the original name, prefixed with the extraction
-  method. E.g. "${extract_dir}/ZIP.%(sha256_of_zipped_content)s" or
-               "${extract_dir}/TAR.%(sha256_of_url)s".
+  method. E.g.
+   "${extract_dir}/TAR_GZ.cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz".
 
   The function members accept either plain value, or values wrapped into list
   or dict. Giving a data structure will parallelize the downloads.
@@ -166,12 +166,6 @@ class DownloadManager(object):
     self._extractor = extractor.get_extractor()
     self._downloader = downloader.get_downloader()
 
-  def _validate_checksum(self, url, checksum):
-    """Returns True if url matches with checksum."""
-    if self._record_checksum_size:
-      return True  # We are recording, so nothing to compare to.
-    return self._checksums[url] == checksum
-
   @property
   def recorded_download_checksums(self):
     """Returns checksums for downloaded urls."""
@@ -182,21 +176,18 @@ class DownloadManager(object):
     """Returns sizes (in bytes) for downloaded urls."""
     return dict(self._download_sizes)
 
-  def _handle_download_result(self, resource, tmp_dir_path, sha256, dl_size,
-                              existing=False):
+  def _handle_download_result(self, resource, tmp_dir_path, sha256, dl_size):
     """Store dled file to definitive place, write INFO file, return path."""
-    self._download_sizes[resource.url] = dl_size
-    self._recorded_download_checksums[resource.url] = sha256
-    if existing:
-      if not self._validate_checksum(resource.url, sha256):
-        raise NonMatchingChecksumError(resource.url, resource.path)
-      return resource.path
     fnames = tf.io.gfile.listdir(tmp_dir_path)
     if len(fnames) > 1:
       raise AssertionError('More than one file in %s.' % tmp_dir_path)
     original_fname = fnames[0]
     tmp_path = os.path.join(tmp_dir_path, original_fname)
-    if not self._validate_checksum(resource.url, sha256):
+    if self._record_checksum_size:
+      resource.sha256 = sha256
+      self._download_sizes[resource.url] = dl_size
+      self._recorded_download_checksums[resource.url] = sha256
+    elif self._checksums[resource.url] != sha256:
       raise NonMatchingChecksumError(resource.url, tmp_path)
     resource.write_info_file(self._dataset_name, original_fname)
     # Unconditionally overwrite because either file doesn't exist or
@@ -219,11 +210,6 @@ class DownloadManager(object):
     if not self._force_download and resource.exists_locally():
       logging.info('URL %s already downloaded: reusing %s.', resource.url,
                    resource.path)
-      if self._record_checksum_size:
-        logging.info('Reading checksum and size of %s ...', resource.path)
-        checksum, dl_size = utils.read_checksum_digest(resource.path)
-        self._handle_download_result(resource, None, checksum, dl_size,
-                                     existing=True)
       return promise.Promise.resolve(resource.path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
