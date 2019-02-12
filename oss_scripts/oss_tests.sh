@@ -25,6 +25,7 @@ TF2_IGNORE_TESTS=""
 if [[ "$TF_VERSION" == "tf2"  ]]
 then
   # * lsun_test: https://github.com/tensorflow/datasets/issues/34
+  # * open_images_test, sequence_feature_test: https://github.com/tensorflow/datasets/issues/47
   TF2_IGNORE_TESTS="
   tensorflow_datasets/image/lsun_test.py
   tensorflow_datasets/image/open_images_test.py
