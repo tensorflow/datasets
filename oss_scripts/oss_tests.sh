@@ -27,6 +27,8 @@ then
   # * lsun_test: https://github.com/tensorflow/datasets/issues/34
   TF2_IGNORE_TESTS="
   tensorflow_datasets/image/lsun_test.py
+  tensorflow_datasets/image/open_images_test.py
+  tensorflow_datasets/core/features/sequence_feature_test.py
   "
 fi
 TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
