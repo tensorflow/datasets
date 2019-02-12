@@ -55,7 +55,6 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
-        size_in_bytes=37702.8 * tfds.units.MiB,
         citation=("A Neural Representation of Sketch Drawings, "
                   "D. Ha and D. Eck, arXiv:1704.03477v4, 2017.")
     )

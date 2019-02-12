@@ -36,6 +36,7 @@ from __future__ import print_function
 
 import collections
 import os
+import posixpath
 import pprint
 import tempfile
 from xml.etree import ElementTree
@@ -98,10 +99,7 @@ class DatasetInfo(object):
                description=None,
                features=None,
                supervised_keys=None,
-               splits=None,
                urls=None,
-               download_checksums=None,
-               size_in_bytes=0,
                citation=None):
     """Constructs DatasetInfo.
 
@@ -113,12 +111,7 @@ class DatasetInfo(object):
         method.
       supervised_keys: `tuple`, Specifies the input feature and the label for
         supervised learning, if applicable for the dataset.
-      splits: `tfds.core.SplitDict`, the available splits for this dataset.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
-      download_checksums: `dict<str url, str sha256>`, URL to sha256 of file.
-        If a url is not listed, its checksum is not checked.
-      size_in_bytes: `int`, optional, approximate size in bytes of the raw
-        size of the dataset that we will be downloading from the internet.
       citation: `str`, optional, the citation to use for this dataset.
     """
     self._builder = builder
@@ -127,14 +120,12 @@ class DatasetInfo(object):
         name=builder.name,
         description=description,
         version=str(builder._version),  # pylint: disable=protected-access
-        size_in_bytes=int(size_in_bytes),
         citation=citation)
     if urls:
       self._info_proto.location.urls[:] = urls
-    self._info_proto.download_checksums.update(download_checksums or {})
 
     self._features = features
-    self._splits = splits or splits_lib.SplitDict()
+    self._splits = splits_lib.SplitDict()
     if supervised_keys is not None:
       assert isinstance(supervised_keys, tuple)
       assert len(supervised_keys) == 2
@@ -151,6 +142,15 @@ class DatasetInfo(object):
   @property
   def name(self):
     return self.as_proto.name
+
+  @property
+  def full_name(self):
+    """Full canonical name: (<dataset_name>/<config_name>/<version>)."""
+    names = [self._builder.name]
+    if self._builder.builder_config:
+      names.append(self._builder.builder_config.name)
+    names.append(str(self.version))
+    return posixpath.join(*names)
 
   @property
   def description(self):
@@ -270,7 +270,7 @@ class DatasetInfo(object):
                            "w") as f:
       f.write(self.as_json)
 
-  def read_from_directory(self, dataset_info_dir, from_bucket=False):
+  def read_from_directory(self, dataset_info_dir):
     """Update DatasetInfo from the JSON file in `dataset_info_dir`.
 
     This function updates all the dynamically generated fields (num_examples,
@@ -281,8 +281,6 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
-      from_bucket: `bool`, If data is restored from info files on GCS,
-        then only the informations not defined in the code are updated
 
     Returns:
       True if we were able to initialize using `dataset_info_dir`, else false.
@@ -294,29 +292,39 @@ class DatasetInfo(object):
     json_filename = self._dataset_info_filename(dataset_info_dir)
 
     # Load the metadata from disk
-    if not tf.io.gfile.exists(json_filename):
-      return False
     parsed_proto = read_from_json(json_filename)
 
     # Update splits
     self.splits = splits_lib.SplitDict.from_proto(parsed_proto.splits)
-    # Update schema
-    self.as_proto.schema.CopyFrom(parsed_proto.schema)
+
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
-    # Restore download info
-    self.download_checksums = parsed_proto.download_checksums
-    self.size_in_bytes = parsed_proto.size_in_bytes
 
-    # If we are restoring on-disk data, then we also restore all dataset info
-    # information from the previously saved proto.
-    # If we are loading from the GCS bucket (only possible when we do not
-    # restore previous data), then do not restore the info which are already
-    # defined in the code. Otherwise, we would overwrite code info.
-    if not from_bucket:
-      # Update the full proto
-      self._info_proto = parsed_proto
+    # Update fields which are not defined in the code. This means that
+    # the code will overwrite fields which are present in
+    # dataset_info.json.
+    for field_name, field in self.as_proto.DESCRIPTOR.fields_by_name.items():
+      field_value = getattr(self._info_proto, field_name)
+      field_value_restored = getattr(parsed_proto, field_name)
+
+      try:
+        is_defined = self._info_proto.HasField(field_name)
+      except ValueError:
+        is_defined = bool(field_value)
+
+      # If field is defined in code, we ignore the value
+      if is_defined:
+        if field_value != field_value_restored:
+          logging.info(
+              "Field info.%s from disk and from code do not match. Keeping "
+              "the one from code.", field_name)
+        continue
+      # Otherwise, we restore the dataset_info.json value
+      if field.type == field.TYPE_MESSAGE:
+        field_value.MergeFrom(field_value_restored)
+      else:
+        setattr(self._info_proto, field_name, field_value_restored)
 
     if self._builder._version != self.version:  # pylint: disable=protected-access
       raise AssertionError(
@@ -327,24 +335,20 @@ class DatasetInfo(object):
     # Mark as fully initialized.
     self._fully_initialized = True
 
-    return True
-
   def initialize_from_bucket(self):
     """Initialize DatasetInfo from GCS bucket info files."""
-    dataset_path_parts = [self.name]
-    if self._builder.builder_config:
-      dataset_path_parts.append(self._builder.builder_config.name)
-    dataset_path_parts.append(str(self.version))
-
     # In order to support Colab, we use the HTTP GCS API to access the metadata
     # files. They are copied locally and then loaded.
     tmp_dir = tempfile.mkdtemp("tfds")
-    copy_gcs_files("/".join(dataset_path_parts), tmp_dir)
-    return self.read_from_directory(tmp_dir, from_bucket=True)
-
-  def __repr__(self):
-    return "<tfds.core.DatasetInfo name={name}, proto={{\n{proto}}}>".format(
-        name=self.name, proto=repr(self.as_proto))
+    data_files = gcs_dataset_files(self.full_name)
+    if not data_files:
+      logging.info("No GCS info files found for %s", self.full_name)
+      return
+    logging.info("Loading info from GCS for %s", self.full_name)
+    for fname in data_files:
+      out_fname = os.path.join(tmp_dir, os.path.basename(fname))
+      download_gcs_file(fname, out_fname)
+    return self.read_from_directory(tmp_dir)
 
   def __str__(self):
     splits_pprint = "{\n %s\n    }" % (
@@ -551,16 +555,8 @@ def gcs_files():
 
 def gcs_dataset_files(dataset_dir):
   """Return paths to GCS files in the given dataset directory."""
-  prefix = "/".join([GCS_DATASET_INFO_PATH, dataset_dir, ""])
+  prefix = posixpath.join(GCS_DATASET_INFO_PATH, dataset_dir, "")
   # Filter for this dataset
   filenames = [el for el in gcs_files()
                if el.startswith(prefix) and len(el) > len(prefix)]
   return filenames
-
-
-def copy_gcs_files(dataset_dir, out_dir):
-  """Copy GCS files from a dataset_dir to out_dir."""
-  data_files = gcs_dataset_files(dataset_dir)
-  for fname in data_files:
-    out_fname = os.path.join(out_dir, os.path.basename(fname))
-    download_gcs_file(fname, out_fname)

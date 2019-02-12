@@ -92,10 +92,7 @@ def download_config():
 
 def download_and_prepare(builder):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset {} config {} ...".format(
-      builder.name,
-      builder.builder_config and builder.builder_config.name,
-  ))
+  print("download_and_prepare for dataset {}...".format(builder.info.full_name))
 
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,
