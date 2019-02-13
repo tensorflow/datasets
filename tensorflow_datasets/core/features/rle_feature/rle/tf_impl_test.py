@@ -9,9 +9,16 @@ import tensorflow_datasets.core.features.rle_feature.rle.tf_impl as brle
 import tensorflow_datasets.core.features.rle_feature.rle.shared_tests as st
 from tensorflow_datasets.testing import test_utils
 tf.compat.v1.enable_eager_execution()
+<<<<<<< HEAD
 
 
 if brle.is_over_1_12:
+=======
+major, minor = (int(v) for v in tf.__version__.split('.')[:2])
+is_over_1_12 = major >= 1 and minor > 12
+
+if is_over_1_12:
+>>>>>>> 474073f64fd0b414fbde5080a478d06a3af387d5
   class BlreTfTest(tf.test.TestCase):
     @property
     def impl(self):
