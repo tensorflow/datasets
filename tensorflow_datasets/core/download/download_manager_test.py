@@ -240,6 +240,26 @@ class DownloadManagerTest(tfds_test.TestCase):
     }
     self.assertEqual(res, expected)
 
+  def test_download_and_extract_archive_ext_in_fname(self):
+    # Make sure extraction method is properly deduced from original fname, and
+    # not from URL.
+    url = 'http://a?key=1234'
+    content = 'content from zip file'
+    resource = resource_lib.Resource(url=url)
+    resource.sha256 = _sha256(content)
+    self.file_names[resource.fname] = 'a.zip'
+    dl, self.dl_results[url] = _get_promise_on_event((resource.sha256, 20))
+    ext, self.extract_results['/dl_dir/%s' % resource.fname] = (
+        _get_promise_on_event('/extract_dir/ZIP.%s' % resource.fname))
+    dl.set()
+    ext.set()
+    manager = self._get_manager(checksums={url: resource.sha256})
+    res = manager.download_and_extract({'a': url})
+    expected = {
+        'a': '/extract_dir/ZIP.%s' % resource.fname,
+    }
+    self.assertEqual(res, expected)
+
 
   def test_download_and_extract_already_downloaded(self):
     url_a = 'http://a/a.zip'
