@@ -20,7 +20,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import os
+import re
+
 from absl import logging
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -40,16 +41,21 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 
 _URL = ("https://download.microsoft.com/download/3/E/1/3E1C3F21-"
         "ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_3367a.zip")
-_NUM_CORRUPT_IMAGES = 1800
+_NUM_CORRUPT_IMAGES = 1738
 _DESCRIPTION = (("A large set of images of cats and dogs."
                  "There are %d corrupted images that are dropped.")
                 % _NUM_CORRUPT_IMAGES)
+
+_NAME_RE = re.compile(r"^PetImages/(Cat|Dog)/\d+\.jpg$")
 
 
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
+  # From 1.0.0 to 2.0.0:
+  #  - _NUM_CORRUPT_IMAGES: 1800->1738.
+  #  - add 'image/filename' feature.
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -57,6 +63,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
+            "image/filename": tfds.features.Text(),  # eg 'PetImages/Dog/0.jpg'
             "label": tfds.features.ClassLabel(names=["cat", "dog"]),
         }),
         supervised_keys=("image", "label"),
@@ -65,7 +72,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
         )
 
   def _split_generators(self, dl_manager):
-    path = dl_manager.download_and_extract(_URL)
+    path = dl_manager.download(_URL)
 
     # There is no predefined train/val/test split for this dataset.
     return [
@@ -73,35 +80,26 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             num_shards=20,
             gen_kwargs={
-                "images_dir_path": path
+                "archive": dl_manager.iter_archive(path),
             }),
     ]
 
-  def _generate_examples(self, images_dir_path):
+  def _generate_examples(self, archive):
     """Generate Cats vs Dogs images and labels given a directory path."""
-    parent_dirs = tf.io.gfile.listdir(images_dir_path)
-    for pd in parent_dirs:
-      if tf.io.gfile.isdir(os.path.join(images_dir_path, pd)):
-        path_to_image_dir = os.path.join(images_dir_path, pd)
-        break
-
-    dirs = tf.io.gfile.listdir(path_to_image_dir)
-
     num_skipped = 0
-    for d in dirs:  # runs only twice for Cat and Dog directory
-      for full_path, _, files in tf.io.gfile.walk(
-          os.path.join(path_to_image_dir, d)):
-        for image_file in files:
-          if image_file.endswith(".jpg"):
-            image_path = os.path.join(full_path, image_file)
-            with tf.io.gfile.GFile(image_path, mode="rb") as f:
-              if tf.compat.as_bytes("JFIF") not in f.read(10):
-                num_skipped += 1
-                continue
-            yield {
-                "image": image_path,
-                "label": d.lower(),
-            }
+    for fname, fobj in archive:
+      res = _NAME_RE.match(fname)
+      if not res:  # README file, ...
+        continue
+      label = res.group(1).lower()
+      if tf.compat.as_bytes("JFIF") not in fobj.peek(10):
+        num_skipped += 1
+        continue
+      yield {
+          "image": fobj,
+          "image/filename": fname,
+          "label": label,
+      }
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
       raise ValueError("Expected % corrupt images, but found %d" % (

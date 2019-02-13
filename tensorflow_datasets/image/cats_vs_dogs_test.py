@@ -31,6 +31,7 @@ class CatsVsDogsTest(tfds_test.DatasetBuilderTestCase):
   SPLITS = {
       'train': 4
   }
+  DL_EXTRACT_RESULT = 'cats_vs_dogs.zip'
 
 if __name__ == '__main__':
   tfds_test.test_main()
