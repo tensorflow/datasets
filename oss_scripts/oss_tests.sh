@@ -53,10 +53,9 @@ function test_notebook() {
   set_status
 }
 
-# Disable notebook tests for python2.7 and (tf-nightly, tf2)
+# Disable notebook tests for python2.7 and tf2
 # TODO(tfds): Re-enable these https://github.com/tensorflow/datasets/issues/48
-if [[ ("$PY_BIN" = "python2.7" && "$TF_VERSION" = "tf-nightly") ||
-      ("$PY_BIN" = "python2.7" && "$TF_VERSION" = "tf2") ]]
+if [[ "$PY_BIN" = "python2.7" && "$TF_VERSION" = "tf2" ]]
 then
   echo "Skipping notebook tests"
 else
