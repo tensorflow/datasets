@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,11 +20,11 @@ from __future__ import division
 from __future__ import print_function
 
 from absl.testing import parameterized
-import tensorflow as tf
 import tensorflow_datasets as tfds
+import tensorflow_datasets.testing as tfds_test
 
 
-class LazyImportsTest(parameterized.TestCase, tf.test.TestCase):
+class LazyImportsTest(tfds_test.TestCase, parameterized.TestCase):
 
   @parameterized.parameters(
       "matplotlib",
@@ -38,9 +38,9 @@ class LazyImportsTest(parameterized.TestCase, tf.test.TestCase):
     getattr(tfds.core.lazy_imports, module_name)
 
   def test_bad_import(self):
-    with self.assertRaisesRegex(ImportError, "extras_require"):
+    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
       _ = tfds.core.lazy_imports.test_foo
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  tfds_test.test_main()

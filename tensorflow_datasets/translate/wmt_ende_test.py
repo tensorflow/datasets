@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.testing import dataset_builder_testing
+import tensorflow_datasets.testing as tfds_test
 from tensorflow_datasets.translate import wmt_ende
 
 
-class TranslateEndeWMTTest(dataset_builder_testing.TestCase):
+class TranslateEndeWMTTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = wmt_ende.WmtTranslateEnde
   BUILDER_CONFIG_NAMES_TO_TEST = ["ende_plain_text_t2t", "ende_subwords8k_t2t"]
   OVERLAPPING_SPLITS = ["validation"]
@@ -42,4 +42,4 @@ class TranslateEndeWMTTest(dataset_builder_testing.TestCase):
 
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  tfds_test.test_main()

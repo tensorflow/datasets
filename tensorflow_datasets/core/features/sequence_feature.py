@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -262,9 +262,7 @@ def np_to_list(elem):
   elif isinstance(elem, tuple):
     return list(elem)
   elif isinstance(elem, np.ndarray):
-    elem = np.split(elem, elem.shape[0])
-    elem = np.squeeze(elem, axis=0)
-    return elem
+    return list(elem)
   else:
     raise ValueError(
         'Input elements of a sequence should be either a numpy array, a '

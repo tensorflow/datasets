@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -115,6 +115,8 @@ def _normpath(path):
   path = os.path.normpath(path)
   if path.startswith('.') or os.path.isabs(path):
     raise UnsafeArchiveError('Archive at %s is not safe.' % path)
+  if path.endswith('~') or os.path.basename(path).startswith('.'):
+    return None
   return path
 
 
@@ -128,6 +130,7 @@ def _open_or_pass(path_or_fobj):
 
 
 def iter_tar(arch_f, gz=False):
+  """Iter over tar archive, yielding (path, object-like) tuples."""
   read_type = 'r:gz' if gz else 'r:'
   with _open_or_pass(arch_f) as fobj:
     tar = tarfile.open(mode=read_type, fileobj=fobj)
@@ -135,6 +138,8 @@ def iter_tar(arch_f, gz=False):
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
         path = _normpath(member.path)
+        if not path:
+          continue
         yield [path, extract_file]
 
 
@@ -155,6 +160,8 @@ def iter_zip(arch_f):
       extract_file = z.open(member)
       if extract_file:  # File with data (not directory):
         path = _normpath(member.filename)
+        if not path:
+          continue
         yield [path, extract_file]
 
 

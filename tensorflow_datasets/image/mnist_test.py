@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.image import mnist
-from tensorflow_datasets.testing import dataset_builder_testing
+import tensorflow_datasets.testing as tfds_test
 
 
 # testing/mnist.py generates fake input data
@@ -29,7 +29,7 @@ mnist._TRAIN_EXAMPLES = 10
 mnist._TEST_EXAMPLES = 2
 
 
-class MNISTTest(dataset_builder_testing.TestCase):
+class MNISTTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = mnist.MNIST
   SPLITS = {
       "train": 10,
@@ -48,4 +48,4 @@ class FashionMNISTTest(MNISTTest):
 
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  tfds_test.test_main()

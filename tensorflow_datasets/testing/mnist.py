@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ from absl import flags
 import numpy as np
 import tensorflow as tf
 
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.testing import test_utils
 
 flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
                     "Path to tensorflow_datasets directory")

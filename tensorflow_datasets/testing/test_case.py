@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,18 +23,21 @@ import os
 import tempfile
 
 from absl.testing import absltest
+import six
 import tensorflow as tf
 
 
-class TestCase(absltest.TestCase):
-  """Base TestCase for tests using test_data or tmp_dir.
+
+class TestCase(tf.test.TestCase):
+  """Base TestCase to be used for all tests.
 
   `test_data` class attribute: path to the directory with test data.
   `tmp_dir` attribute: path to temp directory reset before every test.
   """
 
   @classmethod
-  def setUpClass(cls):  # pylint: disable=g-missing-super-call
+  def setUpClass(cls):
+    super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
 
   def setUp(self):
@@ -42,5 +45,11 @@ class TestCase(absltest.TestCase):
     # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
 
+  def assertRaisesWithPredicateMatch(self, err_type, predicate):
+    if isinstance(predicate, six.string_types):
+      predicate_fct = lambda err: predicate in str(err)
+    else:
+      predicate_fct = predicate
+    return super(TestCase, self).assertRaisesWithPredicateMatch(
+        err_type, predicate_fct)
 
-main = tf.test.main

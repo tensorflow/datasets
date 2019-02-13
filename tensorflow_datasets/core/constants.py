@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,6 @@ import os
 
 # Directory where to store processed datasets.
 DATA_DIR = os.path.join("~", "tensorflow_datasets")
-
-# GCS bucket with dataset info and metadata files
-DATASET_INFO_BUCKET = "gs://tfds-data/dataset_info"
 
 # Suffix of files / directories which aren't finished downloading / extracting.
 INCOMPLETE_SUFFIX = ".incomplete"

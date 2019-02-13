@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import contextlib
 import os
 import tempfile
 
+from absl.testing import absltest
+import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -32,6 +34,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.testing import test_case
 
 
 @contextlib.contextmanager
@@ -92,19 +95,7 @@ class FeatureExpectationItem(object):
     self.raise_msg = raise_msg
 
 
-class FeatureExpectation(object):
-  """Object defining a featureConnector test."""
-
-  def __init__(self, name, feature, shape, dtype, tests, serialized_info=None):
-    self.name = name
-    self.feature = feature
-    self.shape = shape
-    self.dtype = dtype
-    self.tests = tests
-    self.serialized_info = serialized_info
-
-
-class SubTestCase(tf.test.TestCase):
+class SubTestCase(test_case.TestCase):
   """Adds subTest() context manager to the TestCase if supported.
 
   Note: To use this feature, make sure you call super() in setUpClass to
@@ -113,6 +104,7 @@ class SubTestCase(tf.test.TestCase):
 
   @classmethod
   def setUpClass(cls):
+    super(SubTestCase, cls).setUpClass()
     cls._sub_test_stack = []
 
   @contextlib.contextmanager
@@ -134,7 +126,7 @@ def run_in_graph_and_eager_modes(func=None,
   """Execute the decorated test with and without enabling eager execution.
 
   This function returns a decorator intended to be applied to test methods in
-  a `tf.test.TestCase` class. Doing so will cause the contents of the test
+  a `test_case.TestCase` class. Doing so will cause the contents of the test
   method to be executed twice - once in graph mode, and once with eager
   execution enabled. This allows unittests to confirm the equivalence between
   eager and graph execution.
@@ -147,7 +139,7 @@ def run_in_graph_and_eager_modes(func=None,
   ```python
   tf.compat.v1.enable_eager_execution()
 
-  class SomeTest(tf.test.TestCase):
+  class SomeTest(test_case.TestCase):
 
     @test_utils.run_in_graph_and_eager_modes
     def test_foo(self):
@@ -157,7 +149,7 @@ def run_in_graph_and_eager_modes(func=None,
       self.assertAllEqual([4, 6], self.evaluate(z))
 
   if __name__ == "__main__":
-    tf.test.main()
+    tfds_test.test_main()
   ```
 
   This test validates that `tf.add()` has the same behavior when computed with
@@ -227,74 +219,94 @@ class FeatureExpectationsTestCase(SubTestCase):
     raise NotImplementedError
 
   @run_in_graph_and_eager_modes()
-  def test_encode_decode(self):
-    for exp in self.expectations:
-      with self._subTest(exp.name):
-        self._process_exp(exp)
-
-  def _process_exp(self, exp):
+  def assertFeature(self, feature, shape, dtype, tests, serialized_info=None):
+    """Test the given feature against the predicates."""
 
     # Check the shape/dtype
     with self._subTest("shape"):
-      self.assertShapeDimensionsEqual(exp.feature.shape, exp.shape)
+      self.assertShapeDimensionsEqual(feature.shape, shape)
     with self._subTest("dtype"):
-      self.assertEqual(exp.feature.dtype, exp.dtype)
+      self.assertEqual(feature.dtype, dtype)
 
     # Check the serialized features
-    if exp.serialized_info is not None:
+    if serialized_info is not None:
       with self._subTest("serialized_info"):
         self.assertEqual(
-            exp.serialized_info,
-            exp.feature.get_serialized_info(),
+            serialized_info,
+            feature.get_serialized_info(),
         )
 
     # Create the feature dict
-    fdict = features.FeaturesDict({exp.name: exp.feature})
-    for i, test in enumerate(exp.tests):
+    fdict = features.FeaturesDict({"inner": feature})
+    for i, test in enumerate(tests):
       with self._subTest(str(i)):
-        # self._process_subtest_exp(e)
-        input_value = {exp.name: test.value}
+        self.assertFeatureTest(
+            fdict=fdict,
+            test=test,
+            feature=feature,
+            shape=shape,
+            dtype=dtype,
+        )
 
-        if test.raise_cls is not None:
-          with self._subTest("raise"):
-            if not test.raise_msg:
-              raise ValueError(
-                  "test.raise_msg should be set with {}for test {}".format(
-                      test.raise_cls, exp.name))
-            with self.assertRaisesWithPredicateMatch(
-                test.raise_cls, test.raise_msg):
-              features_encode_decode(fdict, input_value)
+  def assertFeatureTest(self, fdict, test, feature, shape, dtype):
+    """Test that encode=>decoding of a value works correctly."""
+
+    # self._process_subtest_exp(e)
+    input_value = {"inner": test.value}
+
+    if test.raise_cls is not None:
+      with self._subTest("raise"):
+        if not test.raise_msg:
+          raise ValueError(
+              "test.raise_msg should be set with {} for test {}".format(
+                  test.raise_cls, type(feature)))
+        with self.assertRaisesWithPredicateMatch(
+            test.raise_cls, test.raise_msg):
+          features_encode_decode(fdict, input_value)
+    else:
+      # Test the serialization only
+      if test.expected_serialized is not None:
+        with self._subTest("out_serialize"):
+          self.assertEqual(
+              test.expected_serialized,
+              feature.encode_example(test.value),
+          )
+
+      # Assert the returned type match the expected one
+      with self._subTest("out"):
+        out = features_encode_decode(fdict, input_value, as_tensor=True)
+        out = out["inner"]
+        with self._subTest("dtype"):
+          out_dtypes = utils.map_nested(lambda s: s.dtype, out)
+          self.assertEqual(out_dtypes, feature.dtype)
+        with self._subTest("shape"):
+          # For shape, because (None, 3) match with (5, 3), we use
+          # tf.TensorShape.assert_is_compatible_with on each of the elements
+          out_shapes = utils.zip_nested(out, feature.shape)
+          utils.map_nested(
+              lambda x: x[0].shape.assert_is_compatible_with(x[1]),
+              out_shapes
+          )
+
+      # Test serialization + decoding from disk
+      with self._subTest("out_value"):
+        decoded_examples = features_encode_decode(fdict, input_value)
+        decoded_examples = decoded_examples["inner"]
+        if isinstance(decoded_examples, dict):
+          # assertAllEqual do not works well with dictionaries so assert
+          # on each individual elements instead
+          zipped_examples = utils.zip_nested(
+              test.expected,
+              decoded_examples,
+              dict_only=True,
+          )
+          utils.map_nested(
+              lambda x: self.assertAllEqual(x[0], x[1]),
+              zipped_examples,
+              dict_only=True,
+          )
         else:
-          # Test the serialization only
-          if test.expected_serialized is not None:
-            with self._subTest("out_serialize"):
-              _maybe_map_dicts(
-                self.assertAllEqual,
-                test.expected_serialized,
-                exp.feature.encode_example(test.value))
-
-          # Assert the returned type match the expected one
-          with self._subTest("out"):
-            out = features_encode_decode(fdict, input_value, as_tensor=True)
-            out = out[exp.name]
-            with self._subTest("dtype"):
-              out_dtypes = utils.map_nested(lambda s: s.dtype, out)
-              self.assertEqual(out_dtypes, exp.feature.dtype)
-            with self._subTest("shape"):
-              # For shape, because (None, 3) match with (5, 3), we use
-              # tf.TensorShape.assert_is_compatible_with on each of the elements
-              out_shapes = utils.zip_nested(out, exp.feature.shape)
-              utils.map_nested(
-                  lambda x: x[0].shape.assert_is_compatible_with(x[1]),
-                  out_shapes
-              )
-
-          # Test serialization + decoding from disk
-          with self._subTest("out_value"):
-            decoded_examples = features_encode_decode(fdict, input_value)
-            decoded_examples = decoded_examples[exp.name]
-            _maybe_map_dicts(
-              self.assertAllEqual, test.expected, decoded_examples)
+          self.assertAllEqual(test.expected, decoded_examples)
 
 
 def features_encode_decode(features_dict, example, as_tensor=False):
@@ -351,3 +363,47 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   def _generate_examples(self):
     for i in range(30):
       yield {"x": i}
+
+
+class DummyMnist(dataset_builder.GeneratorBasedBuilder):
+  """Test DatasetBuilder."""
+
+  VERSION = utils.Version("1.0.0")
+
+  def __init__(self, *args, **kwargs):
+    self._num_shards = kwargs.pop("num_shards", 10)
+    super(DummyMnist, self).__init__(*args, **kwargs)
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({
+            "image": features.Image(shape=(28, 28, 1)),
+            "label": features.ClassLabel(num_classes=10),
+        }),
+    )
+
+  def _split_generators(self, dl_manager):
+    return [
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            num_shards=self._num_shards,
+            gen_kwargs=dict()),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            num_shards=1,
+            gen_kwargs=dict()),
+    ]
+
+  def _generate_examples(self):
+    for i in range(20):
+      yield {
+          "image": np.ones((28, 28, 1), dtype=np.uint8),
+          "label": i % 10,
+      }
+
+
+def test_main():
+  # NOTE: Checking if eager is enabled doesn't let us enable eager execution!
+  tf.compat.v1.enable_eager_execution()
+  tf.test.main()

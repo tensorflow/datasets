@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,6 +77,19 @@ _CITATION = """\
 }
 """
 
+_DESCRIPTION = """\
+CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset\
+ with more than 200K celebrity images, each with 40 attribute annotations. The \
+images in this dataset cover large pose variations and background clutter. \
+CelebA has large diversities, large quantities, and rich annotations, including\
+ - 10,177 number of identities,
+ - 202,599 number of face images, and
+ - 5 landmark locations, 40 binary attributes annotations per image.
+The dataset can be employed as the training and test sets for the following \
+computer vision tasks: face attribute recognition, face detection, and landmark\
+ (or facial part) localization.
+"""
+
 
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
@@ -86,9 +99,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=("Large-scale CelebFaces Attributes, CelebA."
-                     "Set of ~30k celebrities pictures. "
-                     "These pictures are cropped."),
+        description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(

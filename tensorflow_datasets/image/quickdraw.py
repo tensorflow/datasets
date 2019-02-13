@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,7 +55,6 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
-        size_in_bytes=37702.8 * tfds.units.MiB,
         citation=("A Neural Representation of Sketch Drawings, "
                   "D. Ha and D. Eck, arXiv:1704.03477v4, 2017.")
     )

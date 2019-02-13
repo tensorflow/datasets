@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
 from tensorflow_datasets.core.download import resource
+import tensorflow_datasets.testing as tfds_test
 
 NO_EXTRACT = resource.ExtractMethod.NO_EXTRACT
 TAR = resource.ExtractMethod.TAR
@@ -29,7 +29,7 @@ GZIP = resource.ExtractMethod.GZIP
 ZIP = resource.ExtractMethod.ZIP
 
 
-class GuessExtractMethodTest(tf.test.TestCase):
+class GuessExtractMethodTest(tfds_test.TestCase):
 
   def test_(self):
     for fname, expected_result in [
@@ -44,7 +44,7 @@ class GuessExtractMethodTest(tf.test.TestCase):
           fname, res, expected_result))
 
 
-class GetFnameTest(tf.test.TestCase):
+class GetFnameTest(tfds_test.TestCase):
   urls = '''\
 http://data.statmt.org/wmt17/translation-task/dev.tgz
 http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz
@@ -85,4 +85,4 @@ cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  tfds_test.test_main()

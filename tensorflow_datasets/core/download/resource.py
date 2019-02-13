@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -205,15 +205,25 @@ class Resource(object):
       extract_method: `ExtractMethod` to be used to extract resource. If
         not set, will be guessed from downloaded file name `original_fname`.
       path: `str`, path of resource on local disk. Can be None if resource has
-        not be downloaded yet. In such case, `url` and `sha256` must be set.
+        not be downloaded yet. In such case, `url` must be set.
     """
     self.url = url
-    self.sha256 = None
+    self._sha256 = None
     self.path = path
     self._extract_method = extract_method
     self._fname = None
     self._original_fname = None  # Name of the file as downloaded.
     self._info = None  # The INFO dict, once known.
+
+  @property
+  def sha256(self):
+    return self._sha256
+
+  @sha256.setter
+  def sha256(self, value):
+    if self._sha256 != value:
+      self._sha256 = value
+      self._fname = None
 
   @property
   def fname(self):
@@ -233,9 +243,7 @@ class Resource(object):
   def extract_method(self):
     """Returns `ExtractMethod` to use on resource. Cannot be None."""
     if not self._extract_method:
-      self._extract_method = _guess_extract_method(
-          # no original_fname if extract is called directly (no URL).
-          self._get_info() and self._get_original_fname() or self.fname)
+      self._extract_method = _guess_extract_method(self.fname)
     return self._extract_method
 
   @property
@@ -261,7 +269,8 @@ class Resource(object):
     """Returns whether the resource exists locally, at `resource.path`."""
     # If INFO file doesn't exist, consider resource does NOT exist, as it would
     # prevent guessing the `extract_method`.
-    return tf.io.gfile.exists(self.path) and tf.io.gfile.exists(self.info_path)
+    return (self.path and tf.io.gfile.exists(self.path) and
+            tf.io.gfile.exists(self.info_path))
 
   def _get_original_fname(self):
     # We rely on the INFO file because some urls (eg: drive) do not contain the
@@ -292,7 +301,7 @@ class Resource(object):
     if 'original_fname' in info and info['original_fname'] != original_fname:
       raise AssertionError(
           '`original_fname` "%s" stored in %s does NOT match "%s".' % (
-              info['original_fname', self.info_path, original_fname]))
+              info['original_fname'], self.info_path, original_fname))
     info = dict(urls=list(urls), dataset_names=list(set(dataset_names)),
                 original_fname=original_fname)
     with py_utils.atomic_write(self.info_path, 'w') as info_f:

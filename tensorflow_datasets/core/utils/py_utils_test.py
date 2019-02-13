@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,12 +22,11 @@ from __future__ import print_function
 import hashlib
 import os
 
-import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.testing import test_case
+import tensorflow_datasets.testing as tfds_test
 
 
-class PyUtilsTest(tf.test.TestCase):
+class PyUtilsTest(tfds_test.TestCase):
 
   def test_map_nested(self):
     """Test the mapping function."""
@@ -127,7 +126,7 @@ class PyUtilsTest(tf.test.TestCase):
     self.assertTrue(py_utils.tfds_dir().endswith('/tensorflow_datasets'))
 
 
-class ReadChecksumDigestTest(test_case.TestCase):
+class ReadChecksumDigestTest(tfds_test.TestCase):
 
   def test_digest(self):
     digest, size = py_utils.read_checksum_digest(
@@ -139,4 +138,4 @@ class ReadChecksumDigestTest(test_case.TestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  tfds_test.test_main()

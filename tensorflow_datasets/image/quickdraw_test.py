@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,10 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.image import quickdraw
-from tensorflow_datasets.testing import dataset_builder_testing
+import tensorflow_datasets.testing as tfds_test
 
 
-class QuickdrawTest(dataset_builder_testing.TestCase):
+class QuickdrawTest(tfds_test.DatasetBuilderTestCase):
 
   DATASET_CLASS = quickdraw.QuickdrawBitmap
   SPLITS = {
@@ -34,4 +34,4 @@ class QuickdrawTest(dataset_builder_testing.TestCase):
   }
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  tfds_test.test_main()

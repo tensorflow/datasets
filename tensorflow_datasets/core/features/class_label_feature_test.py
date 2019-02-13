@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,63 +21,61 @@ from __future__ import print_function
 
 import tensorflow as tf
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
+class ClassLabelFeatureTest(tfds_test.FeatureExpectationsTestCase):
 
-  @property
-  def expectations(self):
-    return [
-        test_utils.FeatureExpectation(
-            name='label',
-            feature=features.ClassLabel(num_classes=10),
-            dtype=tf.int64,
-            shape=(),
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=3,
-                    expected=3,
-                ),
-                test_utils.FeatureExpectationItem(
-                    value='3',
-                    expected=3,
-                ),
-                test_utils.FeatureExpectationItem(
-                    value=10,
-                    raise_cls=ValueError,
-                    raise_msg='greater than configured num_classes',
-                ),
-                test_utils.FeatureExpectationItem(
-                    value='10',
-                    raise_cls=ValueError,
-                    raise_msg='Invalid',
-                ),
-            ]
-        ),
-        test_utils.FeatureExpectation(
-            name='directions',
-            feature=features.ClassLabel(names=['left', 'right']),
-            dtype=tf.int64,
-            shape=(),
-            tests=[
-                test_utils.FeatureExpectationItem(
-                    value=1,
-                    expected=1,
-                ),
-                test_utils.FeatureExpectationItem(
-                    value='left',
-                    expected=0,
-                ),
-                test_utils.FeatureExpectationItem(
-                    value='right',
-                    expected=1,
-                ),
-            ]
-        ),
-    ]
+  def test_feature(self):
+    self.assertFeature(
+        feature=features.ClassLabel(num_classes=10),
+        dtype=tf.int64,
+        shape=(),
+        tests=[
+            tfds_test.FeatureExpectationItem(
+                value=3,
+                expected=3,
+            ),
+            tfds_test.FeatureExpectationItem(
+                value='3',
+                expected=3,
+            ),
+            tfds_test.FeatureExpectationItem(
+                value=10,
+                raise_cls=ValueError,
+                raise_msg='greater than configured num_classes',
+            ),
+            tfds_test.FeatureExpectationItem(
+                value='10',
+                raise_cls=ValueError,
+                raise_msg='Invalid',
+            ),
+        ]
+    )
+
+  def test_labels(self):
+
+    self.assertFeature(
+        feature=features.ClassLabel(names=['left', 'right']),
+        dtype=tf.int64,
+        shape=(),
+        tests=[
+            tfds_test.FeatureExpectationItem(
+                value=1,
+                expected=1,
+            ),
+            tfds_test.FeatureExpectationItem(
+                value='left',
+                expected=0,
+            ),
+            tfds_test.FeatureExpectationItem(
+                value='right',
+                expected=1,
+            ),
+        ]
+    )
 
   def test_num_classes(self):
     labels = features.ClassLabel(num_classes=10)
@@ -117,7 +115,7 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
     labels2 = features.ClassLabel(num_classes=None)
     labels3 = features.ClassLabel(num_classes=1)
 
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       labels1.save_metadata(tmp_dir, 'test-labels')
       labels2.load_metadata(tmp_dir, 'test-labels')
       with self.assertRaisesWithPredicateMatch(
@@ -155,4 +153,4 @@ class ClassLabelFeatureTest(test_utils.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  tfds_test.test_main()

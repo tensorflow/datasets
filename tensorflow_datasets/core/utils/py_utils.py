@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -328,3 +328,10 @@ class _TqdmPbarAsync(object):
   def clear(self):
     """Remove the tqdm pbar from the update."""
     self._tqdm_bars.pop()
+
+
+def rgetattr(obj, attr, *args):
+  """Get attr that handles dots in attr name."""
+  def _getattr(obj, attr):
+    return getattr(obj, attr, *args)
+  return functools.reduce(_getattr, [obj] + attr.split("."))

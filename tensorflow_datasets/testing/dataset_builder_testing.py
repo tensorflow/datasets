@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Base TestCase to test a DatasetBuilder base class."""
+"""Base DatasetBuilderTestCase to test a DatasetBuilder base class."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -23,16 +23,18 @@ import hashlib
 import itertools
 import os
 
+from absl.testing import absltest
 from absl.testing import parameterized
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import download
 from tensorflow_datasets.core import registered
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tf_utils
+from tensorflow_datasets.testing import test_utils
 
 tf.compat.v1.enable_eager_execution()
 
@@ -62,7 +64,7 @@ FORBIDDEN_OS_FUNCTIONS = (
 )
 
 
-class TestCase(parameterized.TestCase, test_utils.SubTestCase):
+class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   """Inherit this class to test your DatasetBuilder class.
 
   You must set the following class attributes:
@@ -104,7 +106,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   @classmethod
   def setUpClass(cls):
-    super(TestCase, cls).setUpClass()
+    super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
     # Check class has the right attributes
     if cls.DATASET_CLASS is None or not callable(cls.DATASET_CLASS):
@@ -112,39 +114,37 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
           "Assign your DatasetBuilder class to %s.DATASET_CLASS." % name)
 
   def setUp(self):
-    super(TestCase, self).setUp()
+    super(DatasetBuilderTestCase, self).setUp()
     self.patchers = []
-    # New data_dir and builder for each test
-    self.data_dir = test_utils.make_tmp_dir(self.get_temp_dir())
     self.builder = self._make_builder()
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
         "test_data/fake_examples/%s" % self.builder.name)
     if not tf.io.gfile.exists(self.example_dir):
-      err_msg = "fake_examples dir %s not found."
+      err_msg = "fake_examples dir %s not found." % self.example_dir
       raise ValueError(err_msg)
     if self.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS:
       self._mock_out_forbidden_os_functions()
 
   def tearDown(self):
-    super(TestCase, self).tearDown()
+    super(DatasetBuilderTestCase, self).tearDown()
     for patcher in self.patchers:
       patcher.stop()
 
   def _mock_out_forbidden_os_functions(self):
     """Raises error if forbidden os functions are called instead of gfile."""
     err = AssertionError("Do not use `os`, but `tf.io.gfile` module instead.")
-    mock_os = tf.compat.v1.test.mock.Mock(os, path=os.path)
+    mock_os = absltest.mock.Mock(os, path=os.path)
     for fop in FORBIDDEN_OS_FUNCTIONS:
       getattr(mock_os, fop).side_effect = err
-    os_patcher = tf.compat.v1.test.mock.patch(
+    os_patcher = absltest.mock.patch(
         self.DATASET_CLASS.__module__ + ".os", mock_os, create=True)
     os_patcher.start()
     self.patchers.append(os_patcher)
 
     mock_builtins = __builtins__.copy()
-    mock_builtins["open"] = tf.compat.v1.test.mock.Mock(side_effect=err)
-    open_patcher = tf.compat.v1.test.mock.patch(
+    mock_builtins["open"] = absltest.mock.Mock(side_effect=err)
+    open_patcher = absltest.mock.patch(
         self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins)
     open_patcher.start()
     self.patchers.append(open_patcher)
@@ -174,7 +174,7 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
                             self.DL_EXTRACT_RESULT)
 
   def _make_builder(self, config=None):
-    return self.DATASET_CLASS(data_dir=self.data_dir, config=config)  # pylint: disable=not-callable
+    return self.DATASET_CLASS(data_dir=self.tmp_dir, config=config)  # pylint: disable=not-callable
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
@@ -194,14 +194,19 @@ class TestCase(parameterized.TestCase, test_utils.SubTestCase):
       self._download_and_prepare_as_dataset(self.builder)
 
   def _download_and_prepare_as_dataset(self, builder):
-    with tf.compat.v1.test.mock.patch.multiple(
+    with absltest.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_extract_result,
         extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
-      builder.download_and_prepare()
+      # Skip computation, otherwise the computed number of samples won't match
+      # the one restored from GCS
+      download_config = download.DownloadConfig(
+          compute_stats=download.ComputeStatsMode.FORCE,
+      )
+      builder.download_and_prepare(download_config=download_config)
 
     with self._subTest("as_dataset"):
       self._assertAsDataset(builder)
@@ -285,5 +290,3 @@ def compare_shapes_and_types(tensor_info, output_types, output_shapes):
       output_shape = output_shapes[feature_name]
       tf_utils.assert_shape_match(expected_shape, output_shape)
 
-
-main = tf.test.main

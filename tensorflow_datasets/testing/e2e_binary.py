@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,9 +41,10 @@ def main(argv):
     if i > 10:
       break
     print(i)
-  cifar10, info = tfds.load('cifar10', with_info=True)
-  print(cifar10, info)
-  cifar10_np = tfds.as_numpy(cifar10)
+  builder = tfds.builder('cifar10')
+  dataset = builder.as_dataset(split='train')
+  print(dataset)
+  cifar10_np = tfds.as_numpy(dataset)
   print(cifar10_np)
 
 

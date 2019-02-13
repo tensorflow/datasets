@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,11 +20,13 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import re
+
+from absl.testing import absltest
 import tensorflow as tf
+
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
-from tensorflow_datasets.testing import test_case
+import tensorflow_datasets.testing as tfds_test
 
 
 def _read(path):
@@ -32,7 +34,7 @@ def _read(path):
     return f.read()
 
 
-class ExtractorTest(test_case.TestCase):
+class ExtractorTest(tfds_test.TestCase):
 
   @classmethod
   def setUpClass(cls):
@@ -47,7 +49,7 @@ class ExtractorTest(test_case.TestCase):
   def setUp(self):
     super(ExtractorTest, self).setUp()
     self.extractor = extractor.get_extractor()
-    self.extractor._pbar_path = tf.compat.v1.test.mock.MagicMock()
+    self.extractor._pbar_path = absltest.mock.MagicMock()
     # Where archive will be extracted:
     self.to_path = os.path.join(self.tmp_dir, 'extracted_arch')
     # Obviously it must not exist before test runs:
@@ -107,8 +109,8 @@ class ExtractorTest(test_case.TestCase):
     resource = resource_lib.Resource(
         path=from_path, extract_method=resource_lib.ExtractMethod.TAR)
     promise = self.extractor.extract(resource, self.to_path)
-    with self.assertRaisesRegex(extractor.ExtractError,
-                                'Archive at .* is not safe'):
+    with self.assertRaisesWithPredicateMatch(
+        extractor.ExtractError, 'is not safe'):
       promise.get()
 
   def test_wrong_method(self):
@@ -117,11 +119,12 @@ class ExtractorTest(test_case.TestCase):
         path=from_path, extract_method=resource_lib.ExtractMethod.ZIP,
         url='http://example.com/foo.zip')
     promise = self.extractor.extract(resource, self.to_path)
-    expected_msg = re.escape(
+    expected_msg = (
         'foo.csv.gz (http://example.com/foo.zip): File is not a zip file.')
-    with self.assertRaisesRegex(extractor.ExtractError, expected_msg):
+    with self.assertRaisesWithPredicateMatch(
+        extractor.ExtractError, expected_msg):
       promise.get()
 
 
 if __name__ == '__main__':
-  test_case.main()
+  tfds_test.test_main()

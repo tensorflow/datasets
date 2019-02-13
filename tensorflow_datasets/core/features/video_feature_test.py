@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,36 +23,32 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import test_utils
+import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class VideoFeatureTest(test_utils.FeatureExpectationsTestCase):
+class VideoFeatureTest(tfds_test.FeatureExpectationsTestCase):
 
-  @property
-  def expectations(self):
+  def test_video(self):
 
     np_video = np.random.randint(256, size=(128, 64, 64, 3), dtype=np.uint8)
 
-    return [
-        test_utils.FeatureExpectation(
-            name='video',
-            feature=features.Video(shape=(None, 64, 64, 3)),
-            shape=(None, 64, 64, 3),
-            dtype=tf.uint8,
-            tests=[
-                # Numpy array
-                test_utils.FeatureExpectationItem(
-                    value=np_video,
-                    expected=np_video,
-                ),
-                # File path (Gif)
-                # File path (.mp4)
-            ],
-        ),
-    ]
+    self.assertFeature(
+        feature=features.Video(shape=(None, 64, 64, 3)),
+        shape=(None, 64, 64, 3),
+        dtype=tf.uint8,
+        tests=[
+            # Numpy array
+            tfds_test.FeatureExpectationItem(
+                value=np_video,
+                expected=np_video,
+            ),
+            # File path (Gif)
+            # File path (.mp4)
+        ],
+    )
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  tfds_test.test_main()

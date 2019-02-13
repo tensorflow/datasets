@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,9 +27,9 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
+import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
@@ -39,7 +39,7 @@ _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
-DummyDatasetSharedGenerator = test_utils.DummyDatasetSharedGenerator
+DummyDatasetSharedGenerator = tfds_test.DummyDatasetSharedGenerator
 
 
 class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
@@ -62,16 +62,17 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
       }
 
 
-class DatasetInfoTest(tf.test.TestCase):
+class DatasetInfoTest(tfds_test.TestCase):
 
   @classmethod
   def setUpClass(cls):
-    cls._tfds_tmp_dir = test_utils.make_tmp_dir()
+    super(DatasetInfoTest, cls).setUpClass()
+    cls._tfds_tmp_dir = tfds_test.make_tmp_dir()
     cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
 
   @classmethod
   def tearDownClass(cls):
-    test_utils.rm_tmp_dir(cls._tfds_tmp_dir)
+    tfds_test.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def test_undefined_dir(self):
     with self.assertRaisesWithPredicateMatch(ValueError,
@@ -81,9 +82,9 @@ class DatasetInfoTest(tf.test.TestCase):
 
   def test_non_existent_dir(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
-    info.read_from_directory(_NON_EXISTENT_DIR)
-
-    self.assertFalse(info.initialized)
+    with self.assertRaisesWithPredicateMatch(
+        tf.errors.NotFoundError, "No such file or dir"):
+      info.read_from_directory(_NON_EXISTENT_DIR)
 
   def test_reading(self):
     info = dataset_info.DatasetInfo(builder=self._builder)
@@ -91,7 +92,8 @@ class DatasetInfoTest(tf.test.TestCase):
 
     # Assert that we read the file and initialized DatasetInfo.
     self.assertTrue(info.initialized)
-    self.assertTrue("mnist", info.name)
+    self.assertEqual("dummy_dataset_shared_generator", info.name)
+    self.assertEqual("dummy_dataset_shared_generator/1.0.0", info.full_name)
 
     # Test splits are initialized properly.
     split_dict = info.splits
@@ -111,7 +113,10 @@ class DatasetInfoTest(tf.test.TestCase):
 
   def test_writing(self):
     # First read in stuff.
-    info = dataset_info.DatasetInfo(builder=self._builder)
+    mnist_builder = mnist.MNIST(
+        data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
+
+    info = dataset_info.DatasetInfo(builder=mnist_builder)
     info.read_from_directory(_INFO_DIR)
 
     # Read the json file into a string.
@@ -119,7 +124,7 @@ class DatasetInfoTest(tf.test.TestCase):
       existing_json = json.load(f)
 
     # Now write to a temp directory.
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       info.write_to_directory(tmp_dir)
 
       # Read the newly written json file into a string.
@@ -128,6 +133,69 @@ class DatasetInfoTest(tf.test.TestCase):
 
     # Assert what was read and then written and read again is the same.
     self.assertEqual(existing_json, new_json)
+
+  def test_restore_after_modification(self):
+    # Create a DatasetInfo
+    info = dataset_info.DatasetInfo(
+        builder=self._builder,
+        description="A description",
+        supervised_keys=("input", "output"),
+        urls=["some location"],
+        citation="some citation",
+    )
+    info.size_in_bytes = 456
+    info.as_proto.schema.feature.add()
+    info.as_proto.schema.feature.add()  # Add dynamic statistics
+    info.download_checksums = {
+        "url1": "some checksum",
+        "url2": "some other checksum",
+    }
+
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      # Save it
+      info.write_to_directory(tmp_dir)
+
+      # If fields are not defined, then everything is restored from disk
+      restored_info = dataset_info.DatasetInfo(builder=self._builder)
+      restored_info.read_from_directory(tmp_dir)
+      self.assertEqual(info.as_proto, restored_info.as_proto)
+
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      # Save it
+      info.write_to_directory(tmp_dir)
+
+      # If fields are defined, then the code version is kept
+      restored_info = dataset_info.DatasetInfo(
+          builder=self._builder,
+          supervised_keys=("input (new)", "output (new)"),
+          urls=["some location (new)"],
+          citation="some citation (new)",
+      )
+      restored_info.size_in_bytes = 789
+      restored_info.as_proto.schema.feature.add()
+      restored_info.as_proto.schema.feature.add()
+      restored_info.as_proto.schema.feature.add()
+      restored_info.as_proto.schema.feature.add()  # Add dynamic statistics
+      restored_info.download_checksums = {
+          "url2": "some other checksum (new)",
+          "url3": "some checksum (new)",
+      }
+
+      restored_info.read_from_directory(tmp_dir)
+
+      # Even though restored_info has been restored, informations defined in
+      # the code overwrite informations from the json file.
+      self.assertEqual(restored_info.description, "A description")
+      self.assertEqual(
+          restored_info.supervised_keys, ("input (new)", "output (new)"))
+      self.assertEqual(restored_info.urls, ["some location (new)"])
+      self.assertEqual(restored_info.citation, "some citation (new)")
+      self.assertEqual(restored_info.size_in_bytes, 789)
+      self.assertEqual(len(restored_info.as_proto.schema.feature), 4)
+      self.assertEqual(restored_info.download_checksums, {
+          "url2": "some other checksum (new)",
+          "url3": "some checksum (new)",
+      })
 
   def test_reading_from_gcs_bucket(self):
     mnist_builder = mnist.MNIST(
@@ -143,9 +211,9 @@ class DatasetInfoTest(tf.test.TestCase):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     _ = str(info)
 
-  @test_utils.run_in_graph_and_eager_modes()
+  @tfds_test.run_in_graph_and_eager_modes()
   def test_statistics_generation(self):
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
@@ -158,9 +226,9 @@ class DatasetInfoTest(tf.test.TestCase):
       self.assertEqual(10, test_split.statistics.num_examples)
       self.assertEqual(20, train_split.statistics.num_examples)
 
-  @test_utils.run_in_graph_and_eager_modes()
+  @tfds_test.run_in_graph_and_eager_modes()
   def test_statistics_generation_variable_sizes(self):
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
@@ -181,7 +249,7 @@ class DatasetInfoTest(tf.test.TestCase):
     self.assertEqual(0, len(info.as_proto.schema.feature))
 
     # Partial update will happen here.
-    info.read_from_directory(_INFO_DIR, from_bucket=True)
+    info.read_from_directory(_INFO_DIR)
 
     # Assert that description (things specified in the code) didn't change
     # but statistics are updated.
@@ -193,4 +261,4 @@ class DatasetInfoTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  tfds_test.test_main()

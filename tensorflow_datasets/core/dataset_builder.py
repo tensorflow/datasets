@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -84,6 +84,7 @@ class DatasetBuilder(object):
   """Abstract base class for all datasets.
 
   `DatasetBuilder` has 3 key methods:
+
     * `tfds.DatasetBuilder.info`: documents the dataset, including feature
       names, types, and shapes, version, splits, citation, etc.
     * `tfds.DatasetBuilder.download_and_prepare`: downloads the source data
@@ -236,20 +237,22 @@ class DatasetBuilder(object):
         # when reading from package data.
 
         # Update the DatasetInfo metadata by computing statistics from the data.
-        if download_config.compute_stats:
-          already_has_stats = bool(self.info.splits.total_num_examples)
-          if already_has_stats:
-            logging.info("Skipping computing stats because they are already "
-                         "populated.")
-          else:
-            self.info.compute_dynamic_properties()
-
-            # Set checksums for all files downloaded
-            self.info.download_checksums = (
-                dl_manager.recorded_download_checksums)
-            # Set size of all files downloaded
-            self.info.size_in_bytes = sum(
-                [v for _, v in dl_manager.download_sizes.items()])
+        if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
+            download_config.compute_stats == download.ComputeStatsMode.AUTO and
+            bool(self.info.splits.total_num_examples)
+           ):
+          logging.info(
+              "Skipping computing stats for mode %s.",
+              download_config.compute_stats)
+        else:  # Mode is forced or stats do not exists yet
+          logging.info("Computing statistics.")
+          self.info.compute_dynamic_properties()
+        # DLManager dynamic fields are only updated if not restored by GCS
+        if not self.info.download_checksums:
+          # Set checksums for all files downloaded
+          self.info.download_checksums = dl_manager.recorded_download_checksums
+          # Set size of all files downloaded
+          self.info.size_in_bytes = sum(dl_manager.download_sizes.values())
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)
 
@@ -306,7 +309,7 @@ class DatasetBuilder(object):
         batch_size=batch_size,
         as_supervised=as_supervised,
     )
-    datasets = utils.map_nested(build_single_dataset, split)
+    datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
 
   def _build_single_dataset(self, split, shuffle_files, batch_size,
@@ -682,7 +685,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
       )
 
     # Update the info object with the splits.
-    self.info.splits = split_dict
+    self.info.update_splits_if_different(split_dict)
 
   def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=None):
 

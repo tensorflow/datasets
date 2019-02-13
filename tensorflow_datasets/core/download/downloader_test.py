@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,10 +23,13 @@ import hashlib
 import io
 import os
 import tempfile
+
+from absl.testing import absltest
 import tensorflow as tf
 
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resouce_lib
+import tensorflow_datasets.testing as tfds_test
 
 
 class _FakeResponse(object):
@@ -44,10 +47,10 @@ class _FakeResponse(object):
       yield line
 
 
-class DownloaderTest(tf.test.TestCase):
+class DownloaderTest(tfds_test.TestCase):
 
   def setUp(self):
-    self.addCleanup(tf.compat.v1.test.mock.patch.stopall)
+    self.addCleanup(absltest.mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
     self.url = 'http://example.com/foo.tar.gz'
@@ -57,18 +60,18 @@ class DownloaderTest(tf.test.TestCase):
     self.response = b'This \nis an \nawesome\n response!'
     self.resp_checksum = hashlib.sha256(self.response).hexdigest()
     self.cookies = {}
-    tf.compat.v1.test.mock.patch.object(
+    absltest.mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    tf.compat.v1.test.mock.patch.object(
+    absltest.mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    self.downloader._pbar_url = tf.compat.v1.test.mock.MagicMock()
-    self.downloader._pbar_dl_size = tf.compat.v1.test.mock.MagicMock()
+    self.downloader._pbar_url = absltest.mock.MagicMock()
+    self.downloader._pbar_dl_size = absltest.mock.MagicMock()
 
   def test_ok(self):
     promise = self.downloader.download(self.resource, self.tmp_dir)
@@ -94,14 +97,14 @@ class DownloaderTest(tf.test.TestCase):
 
   def test_http_error(self):
     error = downloader.requests.exceptions.HTTPError('Problem serving file.')
-    tf.compat.v1.test.mock.patch.object(
+    absltest.mock.patch.object(
         downloader.requests.Session, 'get', side_effect=error).start()
     promise = self.downloader.download(self.resource, self.tmp_dir)
     with self.assertRaises(downloader.requests.exceptions.HTTPError):
       promise.get()
 
   def test_bad_http_status(self):
-    tf.compat.v1.test.mock.patch.object(
+    absltest.mock.patch.object(
         downloader.requests.Session,
         'get',
         lambda *a, **kw: _FakeResponse(self.url, b'error', status_code=404),
@@ -111,7 +114,7 @@ class DownloaderTest(tf.test.TestCase):
       promise.get()
 
 
-class GetFilenameTest(tf.test.TestCase):
+class GetFilenameTest(tfds_test.TestCase):
 
   def test_no_headers(self):
     resp = _FakeResponse('http://foo.bar/baz.zip', b'content')
@@ -128,4 +131,4 @@ class GetFilenameTest(tf.test.TestCase):
     self.assertEqual(res, 'hello.zip')
 
 if __name__ == '__main__':
-  tf.test.main()
+  tfds_test.test_main()

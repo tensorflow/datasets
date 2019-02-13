@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,10 +23,10 @@ import functools
 
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.image import image_folder
-from tensorflow_datasets.testing import dataset_builder_testing
+import tensorflow_datasets.testing as tfds_test
 
 
-class ImageLabelFolderTest(dataset_builder_testing.TestCase):
+class ImageLabelFolderTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = functools.partial(
       image_folder.ImageLabelFolder, dataset_name="image_folder_data")
   # The above construct forces us to disable those checks:
@@ -45,4 +45,4 @@ class ImageLabelFolderTest(dataset_builder_testing.TestCase):
 
 
 if __name__ == "__main__":
-  dataset_builder_testing.main()
+  tfds_test.test_main()

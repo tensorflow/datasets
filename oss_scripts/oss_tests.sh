@@ -2,6 +2,10 @@
 
 set -vx  # print command from file as well as evaluated command
 
+source ./oss_scripts/utils.sh
+
+: "${TF_VERSION:?}"
+
 # Instead of exiting on any failure with "set -e", we'll call set_status after
 # each command and exit $STATUS at the end.
 STATUS=0
@@ -21,24 +25,45 @@ TF2_IGNORE_TESTS=""
 if [[ "$TF_VERSION" == "tf2"  ]]
 then
   # * lsun_test: https://github.com/tensorflow/datasets/issues/34
+  # * open_images_test, sequence_feature_test: https://github.com/tensorflow/datasets/issues/47
   TF2_IGNORE_TESTS="
   tensorflow_datasets/image/lsun_test.py
+  tensorflow_datasets/image/open_images_test.py
+  tensorflow_datasets/core/features/sequence_feature_test.py
   "
 fi
 TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 
 # Run Tests
-pytest $TF2_IGNORE --ignore="tensorflow_datasets/core/test_utils.py"
+pytest $TF2_IGNORE --ignore="tensorflow_datasets/testing/test_utils.py"
 set_status
 
-# Test notebooks
+# Test notebooks in isolated environments
 NOTEBOOKS="
 docs/overview.ipynb
+docs/_index.ipynb
 "
-for notebook in $NOTEBOOKS
-do
+PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
+function test_notebook() {
+  local notebook=$1
+  create_virtualenv tfds_notebook $PY_BIN
+  pip install -q jupyter
+  install_tf "$TF_VERSION"
   jupyter nbconvert --ExecutePreprocessor.timeout=600 --to notebook --execute $notebook
   set_status
-done
+}
+
+# Disable notebook tests for python2.7 and (tf-nightly, tf2)
+# TODO(tfds): Re-enable these https://github.com/tensorflow/datasets/issues/48
+if [[ ("$PY_BIN" = "python2.7" && "$TF_VERSION" = "tf-nightly") ||
+      ("$PY_BIN" = "python2.7" && "$TF_VERSION" = "tf2") ]]
+then
+  echo "Skipping notebook tests"
+else
+  for notebook in $NOTEBOOKS
+  do
+    test_notebook $notebook
+  done
+fi
 
 exit $STATUS

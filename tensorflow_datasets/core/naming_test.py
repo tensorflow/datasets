@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,12 +20,12 @@ from __future__ import division
 from __future__ import print_function
 
 from absl.testing import parameterized
-import tensorflow as tf
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits
+import tensorflow_datasets.testing as tfds_test
 
 
-class NamingTest(parameterized.TestCase, tf.test.TestCase):
+class NamingTest(parameterized.TestCase, tfds_test.TestCase):
 
   @parameterized.parameters(
       ("HelloWorld", "hello_world"),
@@ -94,4 +94,4 @@ class NamingTest(parameterized.TestCase, tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  tfds_test.test_main()

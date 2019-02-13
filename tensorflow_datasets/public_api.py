@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,9 @@
 
 """Public API of tfds, without the registered dataset."""
 
-# pylint: disable=unused-import
+# pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order
+from tensorflow_datasets.core import tf_compat
+tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
 from tensorflow_datasets.core import download

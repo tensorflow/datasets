@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -64,8 +64,12 @@ flags.DEFINE_string("extract_dir", None, "Where to extract files.")
 flags.DEFINE_string(
     "manual_dir", None,
     "Directory where dataset have manually been downloaded / extracted.")
-flags.DEFINE_boolean("compute_stats", True,
-                     "If True, will compute stats after generation")
+default_compute_stats = tfds.download.ComputeStatsMode.AUTO
+flags.DEFINE_enum(
+    "compute_stats",
+    default_compute_stats.value,
+    [e.value for e in tfds.download.ComputeStatsMode],
+    "Whether to compute or not the dynamic statistics.")
 flags.DEFINE_integer(
     "max_examples_per_split", None,
     "optional max number of examples to write into each split (for testing).")
@@ -92,10 +96,7 @@ def download_config():
 
 def download_and_prepare(builder):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset {} config {} ...".format(
-      builder.name,
-      builder.builder_config and builder.builder_config.name,
-  ))
+  print("download_and_prepare for dataset {}...".format(builder.info.full_name))
 
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,

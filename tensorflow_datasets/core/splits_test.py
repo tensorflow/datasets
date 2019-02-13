@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ from __future__ import print_function
 import tensorflow as tf
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
+import tensorflow_datasets.testing as tfds_test
 
 RANGE_TRAIN = list(range(0, 2000))
 RANGE_TEST = list(range(3000, 3200))
@@ -73,10 +73,11 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
             tfds.as_numpy(self.as_dataset(split=split))]
 
 
-class SplitsUnitTest(tf.test.TestCase):
+class SplitsUnitTest(tfds_test.TestCase):
 
   @classmethod
   def setUpClass(cls):
+    super(SplitsUnitTest, cls).setUpClass()
     cls._splits = tfds.core.SplitDict()
     cls._splits.add(tfds.core.SplitInfo(name="train", num_shards=10))
     cls._splits.add(tfds.core.SplitInfo(name="test", num_shards=2))
@@ -237,11 +238,13 @@ class SplitsUnitTest(tf.test.TestCase):
     train = tfds.Split.TRAIN
 
     with self.assertRaisesWithPredicateMatch(
-        NotImplementedError, "Equality is not implemented"):
+        NotImplementedError,
+        "Equality is not implemented between merged/sub splits."):
       _ = test.subsplit(tfds.percent[10:]) == test.subsplit(tfds.percent[10:])
 
     with self.assertRaisesWithPredicateMatch(
-        NotImplementedError, "Equality is not implemented"):
+        NotImplementedError,
+        "Equality is not implemented between merged/sub splits."):
       _ = test + train == test + train
 
     self.assertEqual(tfds.Split.TEST, tfds.Split.TEST)
@@ -260,7 +263,7 @@ class SplitsUnitTest(tf.test.TestCase):
     return read_instruction.get_list_sliced_split_info()
 
 
-class SliceToMaskTest(tf.test.TestCase):
+class SliceToMaskTest(tfds_test.TestCase):
 
   def __getitem__(self, slice_value):
     return slice_value
@@ -276,11 +279,11 @@ class SliceToMaskTest(tf.test.TestCase):
     self.assertEqual(s2p(self[:-20]), [True] * 80 + [False] * 20)
 
 
-class SplitsIntegrationTest(tf.test.TestCase):
+class SplitsIntegrationTest(tfds_test.TestCase):
 
   @classmethod
   def setUpClass(cls):
-    cls._builder = DummyDataset(data_dir=test_utils.make_tmp_dir())
+    cls._builder = DummyDataset(data_dir=tfds_test.make_tmp_dir())
     cls._builder.download_and_prepare()
 
   def test_split_all(self):
@@ -407,7 +410,7 @@ class SplitsIntegrationTest(tf.test.TestCase):
       self._builder.values(split=split)
 
 
-class SplitsDictTest(tf.test.TestCase):
+class SplitsDictTest(tfds_test.TestCase):
 
   @property
   def split_dict(self):
@@ -439,5 +442,34 @@ class SplitsDictTest(tf.test.TestCase):
     self.assertEqual("train", sdp[1].name)
     self.assertEqual(10, sdp[1].num_shards)
 
+  def test_bool(self):
+    sd = splits.SplitDict()
+    self.assertFalse(sd)  # Empty split is False
+    sd.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    self.assertTrue(sd)  # Non-empty split is True
+
+  def test_check_splits_equals(self):
+    s1 = splits.SplitDict()
+    s1.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    s1.add(tfds.core.SplitInfo(name="test", num_shards=3))
+
+    s2 = splits.SplitDict()
+    s2.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    s2.add(tfds.core.SplitInfo(name="test", num_shards=3))
+
+    s3 = splits.SplitDict()
+    s3.add(tfds.core.SplitInfo(name="train", num_shards=10))
+    s3.add(tfds.core.SplitInfo(name="test", num_shards=3))
+    s3.add(tfds.core.SplitInfo(name="valid", num_shards=0))
+
+    s4 = splits.SplitDict()
+    s4.add(tfds.core.SplitInfo(name="train", num_shards=11))
+    s4.add(tfds.core.SplitInfo(name="test", num_shards=3))
+
+    self.assertTrue(splits.check_splits_equals(s1, s1))
+    self.assertTrue(splits.check_splits_equals(s1, s2))
+    self.assertFalse(splits.check_splits_equals(s1, s3))  # Not same names
+    self.assertFalse(splits.check_splits_equals(s1, s4))  # Nb of shards !=
+
 if __name__ == "__main__":
-  tf.test.main()
+  tfds_test.test_main()

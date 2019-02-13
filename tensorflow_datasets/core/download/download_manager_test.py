@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,10 +26,12 @@ import re
 import tempfile
 import threading
 
+from absl.testing import absltest
 import promise
 import tensorflow as tf
 from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import resource as resource_lib
+import tensorflow_datasets.testing as tfds_test
 
 
 ZIP = resource_lib.ExtractMethod.ZIP
@@ -56,7 +58,7 @@ def _sha256(str_):
   return hashlib.sha256(str_.encode('utf8')).hexdigest()
 
 
-class DownloadManagerTest(tf.test.TestCase):
+class DownloadManagerTest(tfds_test.TestCase):
 
   def _add_file(self, path, content='', mode='w'):
     """Returns open file handle."""
@@ -68,7 +70,7 @@ class DownloadManagerTest(tf.test.TestCase):
     return temp_f
 
   def setUp(self):
-    self.addCleanup(tf.compat.v1.test.mock.patch.stopall)
+    self.addCleanup(absltest.mock.patch.stopall)
     self.existing_paths = []
     self.made_dirs = []
     self.dl_results = {}
@@ -89,7 +91,7 @@ class DownloadManagerTest(tf.test.TestCase):
         self.existing_paths.remove(from_)
         self.files_content[to] = self.files_content.pop(from_)
 
-    self.gfile_patch = tf.compat.v1.test.mock.patch.object(
+    self.gfile_patch = absltest.mock.patch.object(
         tf.io,
         'gfile',
         exists=lambda path: path in self.existing_paths,
@@ -97,7 +99,7 @@ class DownloadManagerTest(tf.test.TestCase):
         # Used to get name of file as downloaded:
         listdir=list_directory,
         GFile=open_,
-        rename=tf.compat.v1.test.mock.Mock(side_effect=rename),
+        rename=absltest.mock.Mock(side_effect=rename),
     )
     self.gfile = self.gfile_patch.start()
 
@@ -119,12 +121,12 @@ class DownloadManagerTest(tf.test.TestCase):
         force_download=force_download,
         force_extraction=force_extraction,
         checksums=checksums)
-    download = tf.compat.v1.test.mock.patch.object(
+    download = absltest.mock.patch.object(
         manager._downloader,
         'download',
         side_effect=lambda resource, tmpdir_path: self.dl_results[resource.url])
     self.downloader_download = download.start()
-    extract = tf.compat.v1.test.mock.patch.object(
+    extract = absltest.mock.patch.object(
         manager._extractor,
         'extract',
         side_effect=lambda resource, dest: self.extract_results[resource.path])
@@ -290,4 +292,4 @@ class DownloadManagerTest(tf.test.TestCase):
 
 
 if __name__ == '__main__':
-  tf.test.main()
+  tfds_test.test_main()

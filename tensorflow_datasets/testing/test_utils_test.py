@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,12 +21,13 @@ from __future__ import print_function
 
 import tensorflow as tf
 
-from tensorflow_datasets.core import test_utils
+from tensorflow_datasets.testing import test_case
+from tensorflow_datasets.testing import test_utils
 
 tf.compat.v1.enable_eager_execution()
 
 
-class RunInGraphAndEagerTest(tf.test.TestCase):
+class RunInGraphAndEagerTest(test_case.TestCase):
 
   def test_run_in_graph_and_eager_modes(self):
     l = []
@@ -53,7 +54,7 @@ class RunInGraphAndEagerTest(tf.test.TestCase):
     modes = []
     mode_name = lambda: "eager" if tf.executing_eagerly() else "graph"
 
-    class ExampleTest(tf.test.TestCase):
+    class ExampleTest(test_case.TestCase):
 
       def runTest(self):
         pass
@@ -73,4 +74,4 @@ class RunInGraphAndEagerTest(tf.test.TestCase):
     self.assertEqual(modes[2:], ["setup_graph", "run_graph"])
 
 if __name__ == "__main__":
-  tf.test.main()
+  test_utils.test_main()

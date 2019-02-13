@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
-from tensorflow_datasets.core import test_utils
 from tensorflow_datasets.core import utils
+import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
@@ -76,10 +76,10 @@ class DummyCSVBuilder(DummyTFRecordBuilder):
     return file_adapter_cls(serialized_info)
 
 
-class FileFormatAdapterTest(tf.test.TestCase):
+class FileFormatAdapterTest(tfds_test.TestCase):
 
   def _test_generator_based_builder(self, builder_cls):
-    with test_utils.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = builder_cls(data_dir=tmp_dir)
       builder.download_and_prepare()
       train_dataset = builder.as_dataset(split=splits.Split.TRAIN)
@@ -109,7 +109,7 @@ class FileFormatAdapterTest(tf.test.TestCase):
     self._test_generator_based_builder(DummyCSVBuilder)
 
 
-class TFRecordUtilsTest(tf.test.TestCase):
+class TFRecordUtilsTest(tfds_test.TestCase):
 
   def test_dict_to_example(self):
     example = file_format_adapter._dict_to_tf_example({
@@ -145,4 +145,4 @@ class TFRecordUtilsTest(tf.test.TestCase):
 
 
 if __name__ == "__main__":
-  tf.test.main()
+  tfds_test.test_main()

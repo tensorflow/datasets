@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.features.text.TextEncoder.__hash__", 
+  "current_doc_full_name": "tfds.percent.__doc__", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 

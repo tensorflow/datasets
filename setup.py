@@ -11,6 +11,7 @@ See the README on GitHub for further documentation.
 """
 
 import datetime
+import os
 import sys
 
 from setuptools import find_packages
@@ -22,10 +23,11 @@ if '--nightly' in sys.argv:
   sys.argv.remove('--nightly')
 
 project_name = 'tensorflow-datasets'
-version = '0.0.2'
+version = '1.0.0'
 if nightly:
   project_name = 'tfds-nightly'
-  datestring = datetime.datetime.now().strftime('%Y%m%d%H%M')
+  datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
+                datetime.datetime.now().strftime('%Y%m%d%H%M'))
   version = '%s-dev%s' % (version, datestring)
 
 DOCLINES = __doc__.split('\n')
@@ -35,7 +37,6 @@ REQUIRED_PKGS = [
     'future',
     'promise',
     'protobuf>=3.6.1',
-    'pytz',
     'requests',
     'six',
     'tensorflow-metadata',
@@ -79,8 +80,8 @@ for deps in DATASET_EXTRAS.values():
   all_dataset_extras.extend(deps)
 
 EXTRAS_REQUIRE = {
-    'tensorflow': ['tf-nightly>=1.12.0.dev20181008'],
-    'tensorflow_gpu': ['tf-nightly-gpu>=1.12.0.dev20181008'],
+    'tensorflow': ['tensorflow>=1.12.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)

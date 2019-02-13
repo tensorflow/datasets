@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,11 +20,13 @@ from tensorflow_datasets.core.download.download_manager import DownloadManager
 from tensorflow_datasets.core.download.extractor import iter_archive
 from tensorflow_datasets.core.download.resource import ExtractMethod
 from tensorflow_datasets.core.download.resource import Resource
+from tensorflow_datasets.core.download.util import ComputeStatsMode
 from tensorflow_datasets.core.download.util import GenerateMode
 
 __all__ = [
     "DownloadConfig",
     "DownloadManager",
+    "ComputeStatsMode",
     "GenerateMode",
     "Resource",
     "ExtractMethod",

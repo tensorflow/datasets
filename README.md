@@ -8,11 +8,19 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
 [![Travis](https://img.shields.io/travis/tensorflow/datasets.svg)](https://travis-ci.org/tensorflow/datasets)
 
-Try it in a [Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb).
+* [List of datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
+* [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
+* [API docs](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds.md)
+* [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
 
-See all our datasets on our
-[datasets documentation page](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
-or see our [API docs](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds.md)
+**Table of Contents**
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [`DatasetBuilder`](#datasetbuilder)
+* [NumPy usage](#numpy-usage-with-tfdsas-numpy)
+* [Want a certain dataset?](#want-a-certain-dataset)
+* [Disclaimers](#disclaimers)
 
 ### Installation
 
@@ -21,10 +29,11 @@ or see our [API docs](https://github.com/tensorflow/datasets/tree/master/docs/ap
 # To use our nightly release:
 pip install tfds-nightly
 
-# Currently requires TF 1.13+, i.e. tf-nightly or tf-nightly-gpu, to be
-# installed.
+# Requires TF 1.12+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
-pip install tf-nightly
+pip install tensorflow
+# or:
+pip install tensorflow-gpu
 ```
 
 ### Usage
@@ -48,10 +57,18 @@ for features in ds_train.take(1):
   image, label = features["image"], features["label"]
 ```
 
+Try it interactively in a
+[Colab notebook](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb).
+
 ### `DatasetBuilder`
 
-All datasets are implemented as subclasses of `DatasetBuilder` and `tfds.load`
+All datasets are implemented as subclasses of
+[`DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetBuilder.md)
+and
+[`tfds.load`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/load.md)
 is a thin convenience wrapper.
+[`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetInfo.md)
+documents the dataset.
 
 ```python
 import tensorflow_datasets as tfds
@@ -102,7 +119,9 @@ print(info)
 ### NumPy Usage with `tfds.as_numpy`
 
 As a convenience for users that want simple NumPy arrays in their programs, you
-can use `tfds.as_numpy` to return a generator that yields NumPy array
+can use
+[`tfds.as_numpy`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/as_numpy.md)
+to return a generator that yields NumPy array
 records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model
 components.
@@ -125,22 +144,17 @@ numpy_images, numpy_labels = numpy_dataset["image"], numpy_dataset["label"]
 
 Note that the library still requires `tensorflow` as an internal dependency.
 
-## Contributing a dataset
-
-Thanks for considering a contribution! We're eager to grow the available set of
-datasets. See the
-[doc on adding a new dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md).
-
 ## Want a certain dataset?
 
-Consider contributing (see above). But if you'd just like to request a dataset,
-open a
-[Dataset request GitHub issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=dataset+request&template=dataset-request.md&title=%5Bdata+request%5D+%3Cdataset+name%3E)
-and the community can vote on which datasets they'd like most by adding
-+1/thumbs-up to the issue.
+Adding a dataset is really straightforward by following
+[our guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md).
 
-Vote on the current
-[set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request).
+Request a dataset by opening a
+[Dataset request GitHub issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=dataset+request&template=dataset-request.md&title=%5Bdata+request%5D+%3Cdataset+name%3E).
+
+And vote on the current
+[set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request)
+by adding a thumbs-up reaction to the issue.
 
 #### *Disclaimers*
 

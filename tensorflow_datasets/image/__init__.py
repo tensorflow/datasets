@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,13 @@
 
 """Image datasets."""
 
+from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.coco import Coco2014
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
+from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.lsun import Lsun

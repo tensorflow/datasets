@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2018 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,5 +16,6 @@
 """Video datasets."""
 
 from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushingSmall
+from tensorflow_datasets.video.moving_mnist import MovingMnist
 from tensorflow_datasets.video.starcraft import StarcraftVideo
 from tensorflow_datasets.video.starcraft import StarcraftVideoConfig
