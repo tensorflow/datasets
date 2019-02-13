@@ -34,6 +34,9 @@ from tensorflow_datasets.core.utils import py_utils
 
 BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets"
 
+INTERNAL_DOC = """\
+"""
+
 # ImageLabelFolder require an extra constructor arg so is handled separately
 # TODO(tfds): Document the manual_dir datasets in a separate section
 BUILDER_BLACKLIST = ["image_label_folder"]
@@ -339,8 +342,11 @@ def dataset_docs_str():
     builder_docs = [document_single_builder(builder) for builder in builders]
     section_doc = SECTION_DATASETS.format(
         section_name=section, datasets="\n".join(builder_docs))
+    section_toc = create_section_toc(section, builders)
+
+
     section_docs.append(section_doc)
-    section_tocs.append(create_section_toc(section, builders))
+    section_tocs.append(section_toc)
 
   full_doc = DOC.format(toc="\n".join(section_tocs),
                         datasets="\n".join(section_docs))

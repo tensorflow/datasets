@@ -47,6 +47,7 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
   * [`"svhn_cropped"`](#svhn_cropped)
   * [`"tf_flowers"`](#tf_flowers)
+
 * [`text`](#text)
   * [`"imdb_reviews"`](#imdb_reviews)
   * [`"lm1b"`](#lm1b)
@@ -1067,6 +1068,7 @@ url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 ```
 
 ---
+
 
 
 # [`text`](#text)
