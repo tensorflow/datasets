@@ -19,6 +19,8 @@ class RleFeatureBase(feature.FeatureConnector):
 
   See `RleFeature` and `BrleFeature` for implementations.
   """
+  def __init__(self):
+    tf_impl.ensure_supported_version('`%s`' % self.__class__.__name__)
   _encoded_dtype = tf.int64
 
   def get_serialized_info(self):
