@@ -135,32 +135,39 @@ class DownloadManagerTest(tfds_test.TestCase):
 
   def test_download(self):
     """One file in cache, one not."""
+    resource_a = resource_lib.Resource(url='http://a.ch/a')
+    resource_a.sha256 = _sha256('some content')
+    resource_b = resource_lib.Resource(url='http://a.ch/b')
+    resource_b.sha256 = _sha256('content of b')
+    resource_c = resource_lib.Resource(url='http://a.ch/c')
+    resource_c.sha256 = _sha256('content of c')
     urls = {
-        'cached': resource_lib.Resource(url='http://a.ch/a'),
+        'cached': resource_a,
         'new': resource_lib.Resource(url='https://a.ch/b'),
         # INFO file of c has been deleted:
         'info_deleted': resource_lib.Resource(url='https://a.ch/c'),
     }
-    afname = resource_lib.Resource(url='http://a.ch/a').fname
-    bfname = resource_lib.Resource(url='https://a.ch/b').fname
-    cfname = resource_lib.Resource(url='https://a.ch/c').fname
-    _ = [self._add_file(path) for path in [  # pylint: disable=g-complex-comprehension
-        '/dl_dir/%s' % afname,
-        '/dl_dir/%s.INFO' % afname,
-        '/dl_dir/%s' % cfname,
+    _ = [self._add_file(path, content) for path, content in [  # pylint: disable=g-complex-comprehension
+        ('/dl_dir/%s' % resource_a.fname, 'content of a'),
+        ('/dl_dir/%s.INFO' % resource_a.fname, 'content of info file for a'),
+        ('/dl_dir/%s' % resource_c.fname, 'content of c'),
     ]]
     downloaded_b, self.dl_results['https://a.ch/b'] = _get_promise_on_event(
-        ('sha_b', 10))
+        (_sha256('content of b'), 10))
     downloaded_c, self.dl_results['https://a.ch/c'] = _get_promise_on_event(
-        ('sha_c', 10))
-    manager = self._get_manager()
+        (_sha256('content of c'), 10))
+    manager = self._get_manager(checksums={
+        resource_a.url: resource_a.sha256,
+        'https://a.ch/b': resource_b.sha256,
+        'https://a.ch/c': resource_c.sha256,
+    })
     downloaded_b.set()
     downloaded_c.set()
     downloads = manager.download(urls)
     expected = {
-        'cached': '/dl_dir/%s' % afname,
-        'new': '/dl_dir/%s' % bfname,
-        'info_deleted': '/dl_dir/%s' % cfname,
+        'cached': '/dl_dir/%s' % resource_a.fname,
+        'new': '/dl_dir/%s' % resource_b.fname,
+        'info_deleted': '/dl_dir/%s' % resource_c.fname,
     }
     self.assertEqual(downloads, expected)
 
@@ -237,6 +244,7 @@ class DownloadManagerTest(tfds_test.TestCase):
   def test_download_and_extract_already_downloaded(self):
     url_a = 'http://a/a.zip'
     resource_a = resource_lib.Resource(url=url_a)
+    resource_a.sha256 = _sha256('content')
     self.file_names[resource_a.fname] = 'a.zip'
     # File was already downloaded:
     self._add_file('/dl_dir/%s' % resource_a.fname)
@@ -245,7 +253,7 @@ class DownloadManagerTest(tfds_test.TestCase):
     ext_a, self.extract_results['/dl_dir/%s' % resource_a.fname] = (
         _get_promise_on_event('/extract_dir/ZIP.%s' % resource_a.fname))
     ext_a.set()
-    manager = self._get_manager()
+    manager = self._get_manager(checksums={resource_a.url: resource_a.sha256})
     res = manager.download_and_extract(url_a)
     expected = '/extract_dir/ZIP.%s' % resource_a.fname
     self.assertEqual(res, expected)

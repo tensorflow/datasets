@@ -301,9 +301,6 @@ class DatasetInfo(object):
     Args:
       dataset_info_dir: `str` The directory containing the metadata file. This
         should be the root directory of a specific dataset version.
-
-    Returns:
-      True if we were able to initialize using `dataset_info_dir`, else false.
     """
     if not dataset_info_dir:
       raise ValueError(
@@ -368,7 +365,7 @@ class DatasetInfo(object):
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
       download_gcs_file(fname, out_fname)
-    return self.read_from_directory(tmp_dir)
+    self.read_from_directory(tmp_dir)
 
   def __str__(self):
     splits_pprint = "{\n %s\n    }" % (
