@@ -122,7 +122,7 @@ TEST       |      4,096
  * [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
@@ -167,13 +167,17 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+TRAIN      |     23,198
+ALL        |     23,198
+
 
 ### Urls
  * [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'image', u'label')
 
 ### Citation
 ```
@@ -194,7 +198,11 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 
 ## `"celeb_a"`
 
-Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. These pictures are cropped.
+CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including - 10,177 number of identities,
+ - 202,599 number of face images, and
+ - 5 landmark locations, 40 binary attributes annotations per image.
+The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization.
+
 
 * URL: [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 * `DatasetBuilder`: [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
@@ -275,7 +283,7 @@ VALIDATION |     19,867
  * [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
@@ -432,7 +440,7 @@ VALIDATION |     40,504
  * [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
@@ -494,10 +502,17 @@ SAMPLE     |         10
  * [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
+@ONLINE {kaggle-diabetic-retinopathy,
+    author = "Kaggle and EyePacs",
+    title  = "Kaggle Diabetic Retinopathy Detection",
+    month  = "jul",
+    year   = "2015",
+    url    = "https://www.kaggle.com/c/diabetic-retinopathy-detection/data"
+}
 
 ```
 
@@ -695,7 +710,7 @@ VALIDATION |        300
  * [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
@@ -873,7 +888,7 @@ VALIDATION |     41,620
  * [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
@@ -1028,13 +1043,17 @@ FeaturesDict({
 
 
 ### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+TRAIN      |      3,670
+ALL        |      3,670
+
 
 ### Urls
  * [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'image', u'label')
 
 ### Citation
 ```
@@ -1331,7 +1350,7 @@ VALIDATION |     10,570
  * [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
@@ -1533,7 +1552,7 @@ VALIDATION |      3,000
 
 ## `"bair_robot_pushing_small"`
 
-This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
+This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
 * URL: [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
 * `DatasetBuilder`: [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
@@ -1562,7 +1581,7 @@ TEST       |        256
  * [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
@@ -1619,7 +1638,7 @@ ALL        |     10,000
  * [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
@@ -1764,7 +1783,7 @@ TEST       |      2,000
  * [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
 ### Supervised keys (for `as_supervised=True`)
-None
+(u'', u'')
 
 ### Citation
 ```
