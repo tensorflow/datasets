@@ -5,6 +5,15 @@ from __future__ import print_function
 
 import tensorflow as tf
 
+major, minor = (int(v) for v in tf.__version__.split('.')[:2])
+is_over_1_12 = major >= 1 and minor > 12
+
+
+def ensure_supported_version(error_identifier):
+  if not is_over_1_12:
+    raise NotImplementedError(
+      "%s not implemented for version < 1.13" % error_identifier)
+
 
 def brle_length(brle):
   return tf.reduce_sum(brle)
@@ -38,6 +47,7 @@ def brle_to_dense(brle, vals=None):
     Dense representation, rank-1 tensor with dtype the same as vals or `tf.bool`
       if `vals is None`.
   """
+  ensure_supported_version('`brle_to_dense`')
   brle = tf.convert_to_tensor(brle)
   if not brle.dtype.is_integer:
     raise TypeError("`brle` must be of integer type.")
@@ -77,6 +87,7 @@ def tf_repeat(values, counts):
   def f(values, counts):
     return np.repeat(values.numpy(), counts.numpy())
 
+  ensure_supported_version('`tf_repeat`')
   return tf.py_function(f, [values, counts], values.dtype, name='repeat')
 
 
