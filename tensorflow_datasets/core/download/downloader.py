@@ -111,16 +111,20 @@ class _Downloader(object):
     # No token found, let's try with original URL:
     return url
 
+  def _sync_file_copy(self, filepath, destination_path):
+    out_path = os.path.join(destination_path, os.path.basename(filepath))
+    tf.io.gfile.copy(filepath, out_path)
+    hexdigest, size = py_utils.read_checksum_digest(
+        out_path, checksum_cls=self._checksumer)
+    return hexdigest, size
+
   def _sync_download(self, url, destination_path):
     """Synchronous version of `download` method."""
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
       # use requests.
-      path = os.path.join(destination_path, os.path.basename(url))
-      tf.io.gfile.copy(url, path)
-      hexdigest, size = py_utils.read_checksum_digest(
-          path, checksum_cls=self._checksumer)
-      return hexdigest, size
+      if not url.startswith('http'):
+        return self._sync_file_copy(url, destination_path)
     except tf.errors.UnimplementedError:
       pass
     session = requests.Session()
