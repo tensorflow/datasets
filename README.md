@@ -1,9 +1,5 @@
 # TensorFlow Datasets
 
-**Note: `tensorflow-datasets` is not yet released. Follow the [release tracking
-issue](https://github.com/tensorflow/datasets/issues/5) to be notified
-of release.**
-
 TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
 [![Travis](https://img.shields.io/travis/tensorflow/datasets.svg)](https://travis-ci.org/tensorflow/datasets)
