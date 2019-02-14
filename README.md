@@ -25,9 +25,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 ### Installation
 
 ```sh
-# A stable tensorflow-datasets has not yet been released.
-# To use our nightly release:
-pip install tfds-nightly
+pip install tensorflow-datasets
 
 # Requires TF 1.12+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
