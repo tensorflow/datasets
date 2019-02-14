@@ -97,7 +97,7 @@ class Squad(tfds.core.GeneratorBasedBuilder):
       ),
       SquadConfig(
           name="subwords32k",
-          version="0.0.1",
+          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
                        "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
