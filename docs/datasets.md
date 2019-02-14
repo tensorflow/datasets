@@ -152,16 +152,17 @@ TEST       |      4,096
 
 ## `"cats_vs_dogs"`
 
-A large set of images of cats and dogs.There are 1800 corrupted images that are dropped.
+A large set of images of cats and dogs.There are 1738 corrupted images that are dropped.
 
 * URL: [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 * `DatasetBuilder`: [`tfds.image.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cats_vs_dogs.py)
-* Version: `v1.0.0`
+* Version: `v2.0.0`
 
 ### Features
 ```
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
@@ -170,8 +171,8 @@ FeaturesDict({
 ### Statistics
 Split  | Examples
 :----- | ---:
-TRAIN      |     23,198
-ALL        |     23,198
+TRAIN      |     23,262
+ALL        |     23,262
 
 
 ### Urls
@@ -1288,7 +1289,7 @@ configurations predefined (defaults to the first one):
 
 * `"subwords8k"` (`v0.0.1`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
-* `"subwords32k"` (`v0.0.1`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+* `"subwords32k"` (`v0.0.2`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 
 ### `"squad/plain_text"`

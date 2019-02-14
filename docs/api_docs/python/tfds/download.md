@@ -17,6 +17,8 @@ Defined in [`core/download/__init__.py`](https://github.com/tensorflow/datasets/
 
 [`class DownloadManager`](../tfds/download/DownloadManager.md): Manages the download and extraction of files, as well as caching.
 
+[`class ComputeStatsMode`](../tfds/download/ComputeStatsMode.md): Mode to decide if dynamic dataset info fields should be computed or not.
+
 [`class GenerateMode`](../tfds/download/GenerateMode.md): `Enum` for how to treat pre-existing downloads and data.
 
 [`class Resource`](../tfds/download/Resource.md): Represents a resource to download, extract, or both.

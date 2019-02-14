@@ -11,11 +11,6 @@ Defined in [`__init__.py`](https://github.com/tensorflow/datasets/tree/master/te
 
 `tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a collection of datasets ready-to-use with TensorFlow.
 
-Warning: these docs are from branch `master`. `tensorflow-datasets` will
-release a stable version shortly. Follow the
-[release tracking issue](https://github.com/tensorflow/datasets/issues/5)
-to be notified of release.
-
 Each dataset is defined as a <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>, which encapsulates
 the logic to download the dataset and construct an input pipeline, as well as
 contains the dataset documentation (version, splits, number of examples, etc.).
@@ -28,9 +23,9 @@ The main library entrypoints are:
 
 Documentation:
 
+* These API docs
 * [Available datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
 * [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-* These API docs
 * [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
 
 ## Modules
@@ -44,6 +39,8 @@ Documentation:
 [`file_adapter`](./tfds/file_adapter.md) module: <a href="./tfds/file_adapter/FileFormatAdapter.md"><code>tfds.file_adapter.FileFormatAdapter</code></a>s for GeneratorBasedBuilder.
 
 [`units`](./tfds/units.md) module: Defines convenience constants/functions for converting various units.
+
+[`testing`](./tfds/testing.md) module: Testing utilities.
 
 ## Classes
 

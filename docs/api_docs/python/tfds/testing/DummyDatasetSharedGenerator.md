@@ -1,5 +1,5 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
-<meta itemprop="name" content="tfds.core.DatasetBuilder" />
+<meta itemprop="name" content="tfds.testing.DummyDatasetSharedGenerator" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="builder_config"/>
 <meta itemprop="property" content="info"/>
@@ -13,70 +13,29 @@
 <meta itemprop="property" content="name"/>
 </div>
 
-# tfds.core.DatasetBuilder
+# tfds.testing.DummyDatasetSharedGenerator
 
-## Class `DatasetBuilder`
+## Class `DummyDatasetSharedGenerator`
+
+Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)
 
 
 
+Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
-
-Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
-
-Abstract base class for all datasets.
-
-`DatasetBuilder` has 3 key methods:
-
-  * `tfds.DatasetBuilder.info`: documents the dataset, including feature
-    names, types, and shapes, version, splits, citation, etc.
-  * `tfds.DatasetBuilder.download_and_prepare`: downloads the source data
-    and writes it to disk.
-  * `tfds.DatasetBuilder.as_dataset`: builds an input pipeline using
-    `tf.data.Dataset`s.
-
-**Configuration**: Some `DatasetBuilder`s expose multiple variants of the
-dataset by defining a <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> subclass and accepting a
-config object (or name) on construction. Configurable datasets expose a
-pre-defined set of configurations in `tfds.DatasetBuilder.builder_configs`.
-
-Typical `DatasetBuilder` usage:
-
-```python
-mnist_builder = tfds.builder("mnist")
-mnist_info = mnist_builder.info
-mnist_builder.download_and_prepare()
-datasets = mnist_builder.as_dataset()
-
-train_dataset, test_dataset = datasets["train"], datasets["test"]
-assert isinstance(train_dataset, tf.data.Dataset)
-
-# And then the rest of your input pipeline
-train_dataset = train_dataset.repeat().shuffle(1024).batch(128)
-train_dataset = train_dataset.prefetch(2)
-features = tf.compat.v1.data.make_one_shot_iterator(train_dataset).get_next()
-image, label = features['image'], features['label']
-```
+Test DatasetBuilder.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(
-    data_dir=None,
-    config=None
-)
+__init__(**kwargs)
 ```
 
-Constructs a DatasetBuilder.
-
-Callers must pass arguments as keyword arguments.
+Builder constructor.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, directory to read/write data. Defaults to
-    "~/tensorflow_datasets".
-* <b>`config`</b>: <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> or `str` name, optional configuration
-    for the dataset that affects the data generated on disk. Different
-    `builder_config`s will have their own subdirectories and versions.
+* <b>`**kwargs`</b>: Constructor kwargs forwarded to DatasetBuilder
 
 
 

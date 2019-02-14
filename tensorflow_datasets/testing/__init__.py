@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Libraries for testing datasets."""
+"""Testing utilities."""
 
 from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase
 from tensorflow_datasets.testing.test_case import TestCase

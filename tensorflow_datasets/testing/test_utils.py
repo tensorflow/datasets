@@ -39,18 +39,21 @@ from tensorflow_datasets.testing import test_case
 
 @contextlib.contextmanager
 def tmp_dir(dirname=None):
+  """Context manager for a temporary directory."""
   tmp = make_tmp_dir(dirname)
   yield tmp
   rm_tmp_dir(tmp)
 
 
 def make_tmp_dir(dirname=None):
+  """Make a temporary directory."""
   if dirname and not tf.io.gfile.exists(dirname):
     tf.io.gfile.makedirs(dirname)
   return tempfile.mkdtemp(dir=dirname)
 
 
 def rm_tmp_dir(dirname):
+  """Rm temporary directory."""
   tf.io.gfile.rmtree(dirname)
 
 
@@ -108,7 +111,7 @@ class SubTestCase(test_case.TestCase):
 def run_in_graph_and_eager_modes(func=None,
                                  config=None,
                                  use_gpu=True):
-  """Execute the decorated test with and without enabling eager execution.
+  """Execute the decorated test in both graph mode and eager mode.
 
   This function returns a decorator intended to be applied to test methods in
   a `test_case.TestCase` class. Doing so will cause the contents of the test
@@ -370,7 +373,7 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
 
 
 def test_main():
-  # NOTE: Checking if eager is enabled doesn't let us enable eager execution!
+  """Entrypoint for tests."""
   tf.compat.v1.enable_eager_execution()
   tf.test.main()
 

@@ -277,6 +277,8 @@ def make_module_to_builder_dict():
   for builder in builders:
     mod_name = builder.__class__.__module__
     modules = mod_name.split(".")
+    if "testing" in modules:
+      continue
 
     current_mod_ctr = module_to_builder
     for mod in modules:
