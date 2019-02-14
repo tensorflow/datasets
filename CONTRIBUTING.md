@@ -2,7 +2,7 @@
 
 ## Datasets
 
-Adding a public dataset to `tensorflow_datasets` is a great way of making it
+Adding a public dataset to `tensorflow-datasets` is a great way of making it
 more accessible to the TensorFlow community.
 
 See our
@@ -22,6 +22,25 @@ backticks and use the publicly accessible path to that symbol. For example
 `` `tfds.core.DatasetBuilder` ``.
 Doing so ensures that the API documentation will insert a link to the
 documentation for that symbol.
+
+## Tests
+
+To ensure that `tensorflow-datasets` is nice to use and nice to work on
+long-term, all modules should have clear tests for public members. All tests
+require:
+
+* Subclassing
+[`tfds.testing.TestCase`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py)
+* Calling `tf.compat.v1.enable_eager_execution()` at the top-level just after
+  the imports. This is to enable testing against TF 2.0.
+* Using the `@tfds.testing.run_in_graph_and_eager_modes()` decorator for all
+  functionality that touches TF ops. To evaluate Tensor values in a way that
+  is compatible in both Graph and Eager modes, use `self.evaluate(tensors)`
+  or `tfds.as_numpy`.
+* End the test file with `if __name__ == "__main__": tfds.testing.test_main()`.
+
+*Note that tests for DatasetBuilders are different and are documented in the*
+*[guide to add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md#testing-mydataset).*
 
 # Pull Requests
 
