@@ -33,6 +33,7 @@ from tensorflow_datasets.core.registered import load
 from tensorflow_datasets.core.splits import percent
 from tensorflow_datasets.core.splits import Split
 
+
 __all__ = [
     "core",
     "as_numpy",
@@ -47,4 +48,16 @@ __all__ = [
     "load",
     "percent",
     "Split",
+    "testing",
 ]
+
+
+def _import_testing():
+  try:
+    from tensorflow_datasets import testing  # pylint: disable=redefined-outer-name
+    return testing
+  except:
+    raise   # pylint: disable=unreachable
+
+
+testing = _import_testing()

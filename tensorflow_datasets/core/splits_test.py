@@ -20,11 +20,11 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
-import tensorflow_datasets.testing as tfds_test
 
 RANGE_TRAIN = list(range(0, 2000))
 RANGE_TEST = list(range(3000, 3200))
@@ -73,7 +73,7 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
             tfds.as_numpy(self.as_dataset(split=split))]
 
 
-class SplitsUnitTest(tfds_test.TestCase):
+class SplitsUnitTest(testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
@@ -263,7 +263,7 @@ class SplitsUnitTest(tfds_test.TestCase):
     return read_instruction.get_list_sliced_split_info()
 
 
-class SliceToMaskTest(tfds_test.TestCase):
+class SliceToMaskTest(testing.TestCase):
 
   def __getitem__(self, slice_value):
     return slice_value
@@ -279,11 +279,11 @@ class SliceToMaskTest(tfds_test.TestCase):
     self.assertEqual(s2p(self[:-20]), [True] * 80 + [False] * 20)
 
 
-class SplitsIntegrationTest(tfds_test.TestCase):
+class SplitsIntegrationTest(testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
-    cls._builder = DummyDataset(data_dir=tfds_test.make_tmp_dir())
+    cls._builder = DummyDataset(data_dir=testing.make_tmp_dir())
     cls._builder.download_and_prepare()
 
   def test_split_all(self):
@@ -410,7 +410,7 @@ class SplitsIntegrationTest(tfds_test.TestCase):
       self._builder.values(split=split)
 
 
-class SplitsDictTest(tfds_test.TestCase):
+class SplitsDictTest(testing.TestCase):
 
   @property
   def split_dict(self):
@@ -472,4 +472,4 @@ class SplitsDictTest(tfds_test.TestCase):
     self.assertFalse(splits.check_splits_equals(s1, s4))  # Nb of shards !=
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

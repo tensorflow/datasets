@@ -20,13 +20,12 @@ from __future__ import division
 from __future__ import print_function
 
 import functools
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.image import image_folder
-import tensorflow_datasets.testing as tfds_test
 
 
-class ImageLabelFolderTest(tfds_test.DatasetBuilderTestCase):
+class ImageLabelFolderTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = functools.partial(
       image_folder.ImageLabelFolder, dataset_name="image_folder_data")
   # The above construct forces us to disable those checks:
@@ -45,4 +44,4 @@ class ImageLabelFolderTest(tfds_test.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

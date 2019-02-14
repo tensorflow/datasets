@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 
-import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets import testing
 import tensorflow_datasets.video.moving_sequence as ms
 
 tf.compat.v1.enable_eager_execution()
@@ -29,7 +29,7 @@ tf.compat.v1.enable_eager_execution()
 
 class MovingSequenceTest(tf.test.TestCase):
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_images_as_moving_sequence(self):
     h, w = (28, 28)
     sequence_length = 8
@@ -62,4 +62,4 @@ class MovingSequenceTest(tf.test.TestCase):
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

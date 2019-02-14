@@ -122,9 +122,9 @@ def run_in_graph_and_eager_modes(func=None,
   ```python
   tf.compat.v1.enable_eager_execution()
 
-  class SomeTest(test_case.TestCase):
+  class SomeTest(testing.TestCase):
 
-    @test_utils.run_in_graph_and_eager_modes
+    @testing.run_in_graph_and_eager_modes
     def test_foo(self):
       x = tf.constant([1, 2])
       y = tf.constant([3, 4])
@@ -132,7 +132,7 @@ def run_in_graph_and_eager_modes(func=None,
       self.assertAllEqual([4, 6], self.evaluate(z))
 
   if __name__ == "__main__":
-    tfds_test.test_main()
+    testing.test_main()
   ```
 
   This test validates that `tf.add()` has the same behavior when computed with

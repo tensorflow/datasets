@@ -29,9 +29,9 @@ import threading
 from absl.testing import absltest
 import promise
 import tensorflow as tf
+from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import download_manager as dm
 from tensorflow_datasets.core.download import resource as resource_lib
-import tensorflow_datasets.testing as tfds_test
 
 
 ZIP = resource_lib.ExtractMethod.ZIP
@@ -58,7 +58,7 @@ def _sha256(str_):
   return hashlib.sha256(str_.encode('utf8')).hexdigest()
 
 
-class DownloadManagerTest(tfds_test.TestCase):
+class DownloadManagerTest(testing.TestCase):
 
   def _add_file(self, path, content='', mode='w'):
     """Returns open file handle."""
@@ -320,4 +320,4 @@ class DownloadManagerTest(tfds_test.TestCase):
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

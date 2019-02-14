@@ -19,11 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets import testing
 from tensorflow_datasets.text import imdb
 
 
-class IMDBReviewsTest(tfds_test.DatasetBuilderTestCase):
+class IMDBReviewsTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imdb.IMDBReviews
   SPLITS = {
       "train": 5,
@@ -33,4 +33,4 @@ class IMDBReviewsTest(tfds_test.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

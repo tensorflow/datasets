@@ -19,11 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets import testing
 from tensorflow_datasets.translate import wmt_ende
 
 
-class TranslateEndeWMTTest(tfds_test.DatasetBuilderTestCase):
+class TranslateEndeWMTTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = wmt_ende.WmtTranslateEnde
   BUILDER_CONFIG_NAMES_TO_TEST = ["ende_plain_text_t2t", "ende_subwords8k_t2t"]
   OVERLAPPING_SPLITS = ["validation"]
@@ -42,4 +42,4 @@ class TranslateEndeWMTTest(tfds_test.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

@@ -18,14 +18,13 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.image import cats_vs_dogs
-import tensorflow_datasets.testing as tfds_test
 
 cats_vs_dogs._NUM_CORRUPT_IMAGES = 0
 
 
-class CatsVsDogsTest(tfds_test.DatasetBuilderTestCase):
+class CatsVsDogsTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cats_vs_dogs.CatsVsDogs
 
   SPLITS = {
@@ -34,4 +33,4 @@ class CatsVsDogsTest(tfds_test.DatasetBuilderTestCase):
   DL_EXTRACT_RESULT = 'cats_vs_dogs.zip'
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

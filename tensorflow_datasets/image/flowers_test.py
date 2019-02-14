@@ -18,12 +18,11 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.image import flowers
-import tensorflow_datasets.testing as tfds_test
 
 
-class TFFlowersTest(tfds_test.DatasetBuilderTestCase):
+class TFFlowersTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = flowers.TFFlowers
 
   SPLITS = {
@@ -31,4 +30,4 @@ class TFFlowersTest(tfds_test.DatasetBuilderTestCase):
   }
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

@@ -20,13 +20,13 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class ClassLabelFeatureTest(tfds_test.FeatureExpectationsTestCase):
+class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_feature(self):
     self.assertFeature(
@@ -34,20 +34,20 @@ class ClassLabelFeatureTest(tfds_test.FeatureExpectationsTestCase):
         dtype=tf.int64,
         shape=(),
         tests=[
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=3,
                 expected=3,
             ),
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value='3',
                 expected=3,
             ),
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=10,
                 raise_cls=ValueError,
                 raise_msg='greater than configured num_classes',
             ),
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value='10',
                 raise_cls=ValueError,
                 raise_msg='Invalid',
@@ -62,15 +62,15 @@ class ClassLabelFeatureTest(tfds_test.FeatureExpectationsTestCase):
         dtype=tf.int64,
         shape=(),
         tests=[
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=1,
                 expected=1,
             ),
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value='left',
                 expected=0,
             ),
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value='right',
                 expected=1,
             ),
@@ -115,7 +115,7 @@ class ClassLabelFeatureTest(tfds_test.FeatureExpectationsTestCase):
     labels2 = features.ClassLabel(num_classes=None)
     labels3 = features.ClassLabel(num_classes=1)
 
-    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       labels1.save_metadata(tmp_dir, 'test-labels')
       labels2.load_metadata(tmp_dir, 'test-labels')
       with self.assertRaisesWithPredicateMatch(
@@ -153,4 +153,4 @@ class ClassLabelFeatureTest(tfds_test.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

@@ -20,14 +20,13 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class BBoxFeatureTest(tfds_test.FeatureExpectationsTestCase):
+class BBoxFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_feature(self):
 
@@ -37,7 +36,7 @@ class BBoxFeatureTest(tfds_test.FeatureExpectationsTestCase):
         dtype=tf.float32,
         tests=[
             # Numpy array
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=features.BBox(
                     ymin=0.0,
                     xmin=0.25,
@@ -51,4 +50,4 @@ class BBoxFeatureTest(tfds_test.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

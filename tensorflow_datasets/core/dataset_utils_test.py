@@ -21,9 +21,8 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
-import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
@@ -32,16 +31,16 @@ def _create_dataset(rng):
   return tf.data.Dataset.from_tensor_slices(list(rng))
 
 
-class DatasetAsNumPyTest(tfds_test.TestCase):
+class DatasetAsNumPyTest(testing.TestCase):
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_singleton_tensor(self):
     t = tf.random.normal((10, 10))
     np_t = dataset_utils.as_numpy(t)
     self.assertEqual((10, 10), np_t.shape)
     self.assertEqual(np.float32, np_t.dtype)
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_nested_tensors(self):
     t1 = tf.random.normal((10, 10))
     t2 = tf.random.normal((10, 20))
@@ -61,7 +60,7 @@ class DatasetAsNumPyTest(tfds_test.TestCase):
     self.assertEqual((10, 20), np_t2.shape)
     self.assertEqual(np.float32, np_t2.dtype)
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_singleton_dataset(self):
     ds = _create_dataset(range(10))
     np_ds = dataset_utils.as_numpy(ds)
@@ -74,7 +73,7 @@ class DatasetAsNumPyTest(tfds_test.TestCase):
       np_ds = dataset_utils.as_numpy(ds, graph=g)
       self.assertEqual(list(range(10)), [int(el) for el in list(np_ds)])
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_singleton_dataset_with_nested_elements(self):
     ds = _create_dataset(range(10))
     ds = ds.map(lambda el: {"a": el, "b": el + 1, "c": (el + 2, el + 3)})
@@ -85,7 +84,7 @@ class DatasetAsNumPyTest(tfds_test.TestCase):
       self.assertEqual(i + 2, el["c"][0])
       self.assertEqual(i + 3, el["c"][1])
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_nested_dataset_sequential_access(self):
     ds1 = _create_dataset(range(10))
     ds2 = _create_dataset(range(10, 20))
@@ -96,7 +95,7 @@ class DatasetAsNumPyTest(tfds_test.TestCase):
     self.assertEqual(list(range(10)), [int(el) for el in list(np_ds1)])
     self.assertEqual(list(range(10, 20)), [int(el) for el in list(np_ds2)])
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_nested_dataset_simultaneous_access(self):
     ds1 = _create_dataset(range(10))
     ds2 = _create_dataset(range(10, 20))
@@ -107,7 +106,7 @@ class DatasetAsNumPyTest(tfds_test.TestCase):
     for i1, i2 in zip(np_ds1, np_ds2):
       self.assertEqual(i2, int(i1) + 10)
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_nested_dataset_nested_elements(self):
     ds1 = _create_dataset(range(10))
     ds1 = ds1.map(lambda el: {"a": el, "b": el + 1, "c": (el + 2, el + 3)})
@@ -123,7 +122,7 @@ class DatasetAsNumPyTest(tfds_test.TestCase):
       self.assertEqual(i + 2, el1["c"][0])
       self.assertEqual(i + 3, el1["c"][1])
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_tensors_match(self):
     t = tf.random.uniform(
         shape=(50, 3),
@@ -138,4 +137,4 @@ class DatasetAsNumPyTest(tfds_test.TestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

@@ -18,12 +18,11 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.image import diabetic_retinopathy_detection
-import tensorflow_datasets.testing as tfds_test
 
 
-class DiabeticRetinopathyDetectionTest(tfds_test.DatasetBuilderTestCase):
+class DiabeticRetinopathyDetectionTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = diabetic_retinopathy_detection.DiabeticRetinopathyDetection
   SPLITS = {  # Expected number of examples on each split.
       "sample": 4,
@@ -34,4 +33,4 @@ class DiabeticRetinopathyDetectionTest(tfds_test.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()
