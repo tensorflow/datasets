@@ -6,7 +6,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
 * [List of datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
 * [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-* [API docs](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds.md)
+* [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 * [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
 
 **Table of Contents**
@@ -57,11 +57,11 @@ Try it interactively in a
 ### `DatasetBuilder`
 
 All datasets are implemented as subclasses of
-[`DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetBuilder.md)
+[`DatasetBuilder`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetBuilder.md)
 and
-[`tfds.load`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/load.md)
+[`tfds.load`](https://www.tensorflow.org/datasets/api_docs/python/tfds/load.md)
 is a thin convenience wrapper.
-[`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetInfo.md)
+[`DatasetInfo`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetInfo.md)
 documents the dataset.
 
 ```python
@@ -114,7 +114,7 @@ print(info)
 
 As a convenience for users that want simple NumPy arrays in their programs, you
 can use
-[`tfds.as_numpy`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/as_numpy.md)
+[`tfds.as_numpy`](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_numpy.md)
 to return a generator that yields NumPy array
 records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model

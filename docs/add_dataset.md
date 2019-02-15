@@ -326,7 +326,7 @@ text datasets, different `TextEncoder`s and vocabularies affect the token ids
 that are written to disk.
 
 Heavy configuration is done through
-[`tfds.core.BuilderConfig`s](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/BuilderConfig.md):
+[`tfds.core.BuilderConfig`s](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/BuilderConfig.md):
 
 1. Define your own configuration object as a subclass of
    `tfds.core.BuilderConfig`. For example, `MyDatasetConfig`.
