@@ -253,9 +253,7 @@ def document_single_builder(builder):
 def create_section_toc(section, builders):
   heading = "* [`%s`](#%s)" % (section, section)
   entry = "  * [`\"{name}\"`](#{name})"
-  entries = []
-  for builder in builders:
-    entries.append(entry.format(name=builder.name))
+  entries = [entry.format(name=builder.name) for builder in builders]
   return "\n".join([heading] + entries)
 
 

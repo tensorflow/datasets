@@ -46,9 +46,8 @@ def _output_dir():
 
 
 def _write_class_descriptions():
-  lines = []
-  for i, class_name in enumerate(CLASS_NAMES):
-    lines.append('%s,name %s' % (class_name, i))
+  lines = ['%s,name %s' % (class_name, i)
+           for i, class_name in enumerate(CLASS_NAMES)]
   path = os.path.join(_output_dir(), 'class_descriptions.csv')
   with open(path, 'w') as csv_f:
     csv_f.write('\n'.join(lines))

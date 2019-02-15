@@ -70,12 +70,9 @@ def _required_args(fn):
   if not spec.defaults:
     return []
 
-  required_args = []
   arg_names = spec.args[-len(spec.defaults):]
-  for name, val in zip(arg_names, spec.defaults):
-    if val is REQUIRED_ARG:
-      required_args.append(name)
-  return required_args
+  return [name for name, val in zip(arg_names, spec.defaults)
+          if val is REQUIRED_ARG]
 
 
 def _check_required(fn, kwargs):
