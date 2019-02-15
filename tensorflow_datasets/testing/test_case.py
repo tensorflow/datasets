@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import contextlib
 import os
 import tempfile
 
@@ -27,6 +28,12 @@ import six
 import tensorflow as tf
 from tensorflow_datasets.core import dataset_info
 
+
+
+GCS_ACCESS_FNS = {
+    "original": dataset_info.gcs_dataset_files,
+    "dummy": lambda _: []
+}
 
 
 class TestCase(tf.test.TestCase):
@@ -41,7 +48,15 @@ class TestCase(tf.test.TestCase):
     super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
     # Test must not communicate with GCS.
-    dataset_info.gcs_dataset_files = lambda _: []
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["dummy"]
+
+  @contextlib.contextmanager
+  def gcs_access(self):
+    # Restore GCS access
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["original"]
+    yield
+    # Revert access
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["dummy"]
 
   def setUp(self):
     super(TestCase, self).setUp()

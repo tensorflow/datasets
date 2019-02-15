@@ -32,8 +32,26 @@ fi
 TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 
 # Run Tests
-pytest $TF2_IGNORE --ignore="tensorflow_datasets/testing/test_utils.py"
+# Ignores:
+# * Some TF2 tests if running against TF2 (see above)
+# * test_utils.py is not a test file
+# * eager_not_enabled_by_default_test needs to be run separately because the
+#   enable_eager_execution calls set global state and pytest runs all the tests
+#   in the same process.
+pytest \
+  --disable-warnings \
+  $TF2_IGNORE \
+  --ignore="tensorflow_datasets/testing/test_utils.py" \
+  --ignore="tensorflow_datasets/eager_not_enabled_by_default_test.py"
 set_status
+# If not running with TF2, ensure Eager is not enabled by default
+if [[ "$TF_VERSION" != "tf2" ]]
+then
+  pytest \
+    --disable-warnings \
+    tensorflow_datasets/eager_not_enabled_by_default_test.py
+  set_status
+fi
 
 # Test notebooks in isolated environments
 NOTEBOOKS="
@@ -54,8 +72,9 @@ function test_notebook() {
   set_status
 }
 
-# Re-enable as TF 2.0 gets closer to stable release
+# TODO(tfds): Re-enable as TF 2.0 gets closer to stable release
 if [[ "$PY_BIN" = "python2.7" && "$TF_VERSION" = "tf2" ]]
+then
   echo "Skipping notebook tests"
 else
   for notebook in $NOTEBOOKS
