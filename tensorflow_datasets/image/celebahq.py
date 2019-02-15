@@ -74,17 +74,17 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.1.0")
 
   BUILDER_CONFIGS = [
-      CelebaHQConfig(resolution=1, version="0.1.0"),
-      CelebaHQConfig(resolution=2, version="0.1.0"),
-      CelebaHQConfig(resolution=4, version="0.1.0"),
-      CelebaHQConfig(resolution=8, version="0.1.0"),
-      CelebaHQConfig(resolution=16, version="0.1.0"),
-      CelebaHQConfig(resolution=32, version="0.1.0"),
-      CelebaHQConfig(resolution=64, version="0.1.0"),
-      CelebaHQConfig(resolution=128, version="0.1.0"),
-      CelebaHQConfig(resolution=256, version="0.1.0"),
-      CelebaHQConfig(resolution=512, version="0.1.0"),
       CelebaHQConfig(resolution=1024, version="0.1.0"),
+      CelebaHQConfig(resolution=512, version="0.1.0"),
+      CelebaHQConfig(resolution=256, version="0.1.0"),
+      CelebaHQConfig(resolution=128, version="0.1.0"),
+      CelebaHQConfig(resolution=64, version="0.1.0"),
+      CelebaHQConfig(resolution=32, version="0.1.0"),
+      CelebaHQConfig(resolution=16, version="0.1.0"),
+      CelebaHQConfig(resolution=8, version="0.1.0"),
+      CelebaHQConfig(resolution=4, version="0.1.0"),
+      CelebaHQConfig(resolution=2, version="0.1.0"),
+      CelebaHQConfig(resolution=1, version="0.1.0"),
   ]
 
   def _info(self):
