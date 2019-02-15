@@ -8,8 +8,6 @@ toc:
       path: /datasets/api_docs/python/tfds/as_numpy
     - title: builder
       path: /datasets/api_docs/python/tfds/builder
-    - title: dataset_as_numpy
-      path: /datasets/api_docs/python/tfds/dataset_as_numpy
     - title: list_builders
       path: /datasets/api_docs/python/tfds/list_builders
     - title: load

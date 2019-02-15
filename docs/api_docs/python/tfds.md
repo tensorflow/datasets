@@ -54,8 +54,6 @@ Documentation:
 
 [`as_numpy(...)`](./tfds/as_numpy.md): Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
-[`dataset_as_numpy(...)`](./tfds/dataset_as_numpy.md): DEPRECATED. Renamed <a href="./tfds/as_numpy.md"><code>tfds.as_numpy</code></a>.
-
 [`builder(...)`](./tfds/builder.md): Fetches a <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by string name.
 
 [`list_builders(...)`](./tfds/list_builders.md): Returns the string names of all <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>s.

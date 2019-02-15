@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.testing.DummyMnist.__dict__", 
+  "current_doc_full_name": "tfds.features.text.SubwordTextEncoder.__reduce__", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
@@ -913,7 +913,6 @@
     "tfds.core.Version.patch": true, 
     "tfds.core.get_tfds_path": false, 
     "tfds.core.lazy_imports": false, 
-    "tfds.dataset_as_numpy": false, 
     "tfds.download": false, 
     "tfds.download.ComputeStatsMode": false, 
     "tfds.download.ComputeStatsMode.AUTO": true, 
@@ -1660,6 +1659,7 @@
     "tfds.testing.DatasetBuilderTestCase.DATASET_CLASS": true, 
     "tfds.testing.DatasetBuilderTestCase.DL_EXTRACT_RESULT": true, 
     "tfds.testing.DatasetBuilderTestCase.INTERNAL_DATASET": true, 
+    "tfds.testing.DatasetBuilderTestCase.MOCK_MONARCH": true, 
     "tfds.testing.DatasetBuilderTestCase.MOCK_OUT_FORBIDDEN_OS_FUNCTIONS": true, 
     "tfds.testing.DatasetBuilderTestCase.OVERLAPPING_SPLITS": true, 
     "tfds.testing.DatasetBuilderTestCase.__call__": true, 
@@ -1906,6 +1906,7 @@
     "tfds.testing.FeatureExpectationItem.__subclasshook__": true, 
     "tfds.testing.FeatureExpectationItem.__weakref__": true, 
     "tfds.testing.FeatureExpectationsTestCase": false, 
+    "tfds.testing.FeatureExpectationsTestCase.MOCK_MONARCH": true, 
     "tfds.testing.FeatureExpectationsTestCase.__call__": true, 
     "tfds.testing.FeatureExpectationsTestCase.__delattr__": true, 
     "tfds.testing.FeatureExpectationsTestCase.__dict__": true, 
@@ -2074,6 +2075,7 @@
     "tfds.testing.FeatureExpectationsTestCase.tempfile_cleanup": true, 
     "tfds.testing.FeatureExpectationsTestCase.test_session": true, 
     "tfds.testing.TestCase": false, 
+    "tfds.testing.TestCase.MOCK_MONARCH": true, 
     "tfds.testing.TestCase.__call__": true, 
     "tfds.testing.TestCase.__delattr__": true, 
     "tfds.testing.TestCase.__dict__": true, 

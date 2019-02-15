@@ -18,7 +18,6 @@
 *  <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
 *  <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
 *  <a href="./tfds/core/lazy_imports.md"><code>tfds.core.lazy_imports</code></a>
-*  <a href="./tfds/dataset_as_numpy.md"><code>tfds.dataset_as_numpy</code></a>
 *  <a href="./tfds/download.md"><code>tfds.download</code></a>
 *  <a href="./tfds/download/ComputeStatsMode.md"><code>tfds.download.ComputeStatsMode</code></a>
 *  <a href="./tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>

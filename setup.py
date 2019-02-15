@@ -23,7 +23,7 @@ if '--nightly' in sys.argv:
   sys.argv.remove('--nightly')
 
 project_name = 'tensorflow-datasets'
-version = '1.0.0'
+version = '1.0.1'
 if nightly:
   project_name = 'tfds-nightly'
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or

@@ -327,122 +327,34 @@ WARNING: this dataset currently requires you to prepare images on your own.
 `celeb_a_hq` is configured with `tfds.image.celebahq.CelebaHQConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"1"` (`v0.1.0`): CelebaHQ images in 1 x 1 resolution
-
-* `"2"` (`v0.1.0`): CelebaHQ images in 2 x 2 resolution
-
-* `"4"` (`v0.1.0`): CelebaHQ images in 4 x 4 resolution
-
-* `"8"` (`v0.1.0`): CelebaHQ images in 8 x 8 resolution
-
-* `"16"` (`v0.1.0`): CelebaHQ images in 16 x 16 resolution
-
-* `"32"` (`v0.1.0`): CelebaHQ images in 32 x 32 resolution
-
-* `"64"` (`v0.1.0`): CelebaHQ images in 64 x 64 resolution
-
-* `"128"` (`v0.1.0`): CelebaHQ images in 128 x 128 resolution
-
-* `"256"` (`v0.1.0`): CelebaHQ images in 256 x 256 resolution
+* `"1024"` (`v0.1.0`): CelebaHQ images in 1024 x 1024 resolution
 
 * `"512"` (`v0.1.0`): CelebaHQ images in 512 x 512 resolution
 
-* `"1024"` (`v0.1.0`): CelebaHQ images in 1024 x 1024 resolution
+* `"256"` (`v0.1.0`): CelebaHQ images in 256 x 256 resolution
+
+* `"128"` (`v0.1.0`): CelebaHQ images in 128 x 128 resolution
+
+* `"64"` (`v0.1.0`): CelebaHQ images in 64 x 64 resolution
+
+* `"32"` (`v0.1.0`): CelebaHQ images in 32 x 32 resolution
+
+* `"16"` (`v0.1.0`): CelebaHQ images in 16 x 16 resolution
+
+* `"8"` (`v0.1.0`): CelebaHQ images in 8 x 8 resolution
+
+* `"4"` (`v0.1.0`): CelebaHQ images in 4 x 4 resolution
+
+* `"2"` (`v0.1.0`): CelebaHQ images in 2 x 2 resolution
+
+* `"1"` (`v0.1.0`): CelebaHQ images in 1 x 1 resolution
 
 
-### `"celeb_a_hq/1"`
-
-```
-FeaturesDict({
-    'image': Image(shape=(1, 1, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-
-
-### `"celeb_a_hq/2"`
-
-```
-FeaturesDict({
-    'image': Image(shape=(2, 2, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-
-
-### `"celeb_a_hq/4"`
+### `"celeb_a_hq/1024"`
 
 ```
 FeaturesDict({
-    'image': Image(shape=(4, 4, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-
-
-### `"celeb_a_hq/8"`
-
-```
-FeaturesDict({
-    'image': Image(shape=(8, 8, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-
-
-### `"celeb_a_hq/16"`
-
-```
-FeaturesDict({
-    'image': Image(shape=(16, 16, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-
-
-### `"celeb_a_hq/32"`
-
-```
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-
-
-### `"celeb_a_hq/64"`
-
-```
-FeaturesDict({
-    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-
-
-### `"celeb_a_hq/128"`
-
-```
-FeaturesDict({
-    'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-
-
-### `"celeb_a_hq/256"`
-
-```
-FeaturesDict({
-    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
+    'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
@@ -460,11 +372,99 @@ FeaturesDict({
 
 
 
-### `"celeb_a_hq/1024"`
+### `"celeb_a_hq/256"`
 
 ```
 FeaturesDict({
-    'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
+    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"celeb_a_hq/128"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"celeb_a_hq/64"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"celeb_a_hq/32"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"celeb_a_hq/16"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(16, 16, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"celeb_a_hq/8"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(8, 8, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"celeb_a_hq/4"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(4, 4, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"celeb_a_hq/2"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(2, 2, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+### `"celeb_a_hq/1"`
+
+```
+FeaturesDict({
+    'image': Image(shape=(1, 1, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```

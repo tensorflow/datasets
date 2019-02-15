@@ -128,6 +128,7 @@
 <meta itemprop="property" content="tearDown"/>
 <meta itemprop="property" content="tearDownClass"/>
 <meta itemprop="property" content="test_session"/>
+<meta itemprop="property" content="MOCK_MONARCH"/>
 <meta itemprop="property" content="longMessage"/>
 <meta itemprop="property" content="maxDiff"/>
 <meta itemprop="property" content="tempfile_cleanup"/>
@@ -2423,6 +2424,8 @@ Use `self.session()` or `self.cached_session()` instead.
 
 
 ## Class Members
+
+<h3 id="MOCK_MONARCH"><code>MOCK_MONARCH</code></h3>
 
 <h3 id="longMessage"><code>longMessage</code></h3>
 
