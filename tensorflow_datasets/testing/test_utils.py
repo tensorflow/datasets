@@ -23,7 +23,6 @@ import contextlib
 import os
 import tempfile
 
-from absl.testing import absltest
 import numpy as np
 import tensorflow as tf
 
@@ -92,8 +91,6 @@ class SubTestCase(test_case.TestCase):
   def setUpClass(cls):
     super(SubTestCase, cls).setUpClass()
     cls._sub_test_stack = []
-    # Test must not communicate with GCS.
-    dataset_info.gcs_dataset_files = lambda _: []
 
   @contextlib.contextmanager
   def _subTest(self, test_str):

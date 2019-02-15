@@ -25,6 +25,7 @@ import tempfile
 from absl.testing import absltest
 import six
 import tensorflow as tf
+from tensorflow_datasets.core import dataset_info
 
 
 
@@ -39,6 +40,8 @@ class TestCase(tf.test.TestCase):
   def setUpClass(cls):
     super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
+    # Test must not communicate with GCS.
+    dataset_info.gcs_dataset_files = lambda _: []
 
   def setUp(self):
     super(TestCase, self).setUp()
