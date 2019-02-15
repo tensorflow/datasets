@@ -44,19 +44,24 @@ PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 function test_notebook() {
   local notebook=$1
   create_virtualenv tfds_notebook $PY_BIN
-  pip install -q jupyter
-  install_tf "$TF_VERSION"
-  jupyter nbconvert --ExecutePreprocessor.timeout=600 --to notebook --execute $notebook
+  pip install -q jupyter ipykernel
+  ipython kernel install --user --name tfds-notebook
+  jupyter nbconvert \
+    --ExecutePreprocessor.timeout=600 \
+    --ExecutePreprocessor.kernel_name=tfds-notebook \
+    --to notebook \
+    --execute $notebook
   set_status
 }
 
-# Disable notebook tests.
-# TODO(tfds): Make notebook tests respect the virtualenv
-# https://github.com/tensorflow/datasets/issues/48
-echo "Skipping notebook tests"
-#  for notebook in $NOTEBOOKS
-#  do
-#    test_notebook $notebook
-#  done
+# Re-enable as TF 2.0 gets closer to stable release
+if [[ "$PY_BIN" = "python2.7" && "$TF_VERSION" = "tf2" ]]
+  echo "Skipping notebook tests"
+else
+  for notebook in $NOTEBOOKS
+  do
+    test_notebook $notebook
+  done
+fi
 
 exit $STATUS
