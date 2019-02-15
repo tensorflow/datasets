@@ -100,13 +100,6 @@ def _graph_dataset_iterator(ds_item, graph=None):
         break
 
 
-def dataset_as_numpy(*args, **kwargs):
-  """DEPRECATED. Renamed `tfds.as_numpy`."""
-  del args, kwargs
-  raise AttributeError(
-      "tfds.dataset_as_numpy has been renamed to tfds.as_numpy.")
-
-
 @api_utils.disallow_positional_args(allowed=["dataset"])
 def as_numpy(dataset, graph=None):
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
