@@ -36,7 +36,6 @@ from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import tf_utils
 from tensorflow_datasets.testing import test_utils
 
-tf.compat.v1.enable_eager_execution()
 
 # `os` module Functions for which tf.io.gfile equivalent should be preferred.
 FORBIDDEN_OS_FUNCTIONS = (
@@ -106,6 +105,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   @classmethod
   def setUpClass(cls):
+    tf.compat.v1.enable_eager_execution()
     super(DatasetBuilderTestCase, cls).setUpClass()
     name = cls.__name__
     # Check class has the right attributes
