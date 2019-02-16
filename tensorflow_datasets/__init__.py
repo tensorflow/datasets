@@ -50,6 +50,7 @@ tf_compat.ensure_tf_install()
 # pylint: disable=g-import-not-at-top
 from tensorflow_datasets import audio
 from tensorflow_datasets import image
+from tensorflow_datasets import structured
 from tensorflow_datasets import text
 from tensorflow_datasets import translate
 from tensorflow_datasets import video
