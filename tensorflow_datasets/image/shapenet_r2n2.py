@@ -3,7 +3,8 @@
 3D Reconstruction from images.
 
 `meta` values are those released by the authors (See `META_KEYS` for
-interpretation). See [this discussion](https://github.com/chrischoy/3D-R2N2/issues/39)
+interpretation). See
+[this discussion](https://github.com/chrischoy/3D-R2N2/issues/39)
 regarding the consistency/accuracy of the values.
 
 Example usage:
@@ -69,10 +70,12 @@ import tensorflow as tf
 import itertools
 
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.core.features.rle_feature.rle import binvox as bv
-from tensorflow_datasets.core.features.rle_feature.rle import np_impl
+from tensorflow_datasets.core.features.run_length_encoded_feature.rle import binvox as bv
+from tensorflow_datasets.core.features.run_length_encoded_feature.rle import np_impl
 
+VOXEL_SHAPE = (32, 32, 32)
 RENDERINGS_PER_EXAMPLE = 24
+IMAGE_SHAPE = (137, 137, 3)
 BACKGROUND_COLOR = (255, 255, 255)  # white
 META_KEYS = (
     "azimuth",
@@ -173,6 +176,21 @@ def _valid_cats_string():
   return "\n".join('%s : %s' % (_cat_ids[k], k) for k in sorted(_cat_ids))
 
 
+_TRAIN_FRAC = 0.8
+
+
+def _get_id_split(example_ids, split):
+    example_ids.sort()
+    n_examples = len(example_ids)
+    split_index = int(_TRAIN_FRAC * n_examples)
+    if split == tfds.Split.TRAIN:
+      return example_ids[:split_index]
+    elif split == tfds.Split.TEST:
+      return example_ids[split_index:]
+    else:
+      raise ValueError("Invalid split '%s'" % split)
+
+
 class ShapenetR2n2Config(tfds.core.BuilderConfig):
   def __init__(self, cat, single_view):
     """Create the config object for `ShapenetR2n2` `DatasetBuilder`.
@@ -230,14 +248,14 @@ def _voxel_loader(cat_voxels_dir):
     binvox_path = os.path.join(cat_voxels_dir, example_id, "model.binvox")
     with tf.io.gfile.GFile(binvox_path, mode="rb") as fp:
       binvox = bv.parse_binvox(fp)
-    return np_impl.rle_to_brle(binvox.rle)
+    return (VOXEL_SHAPE,
+            np.asarray(np_impl.rle_to_brle(binvox.rle), dtype=np.int64))
 
   return f
 
 
 class ShapenetR2n2(tfds.core.GeneratorBasedBuilder):
   """Builder for rendered/voxelized subset of Shapenet 3D dataset."""
-  VERSION = tfds.core.Version("0.0.1")
 
   BUILDER_CONFIGS = [
       ShapenetR2n2Config(cat=cat, single_view=single_view) for
@@ -247,15 +265,11 @@ class ShapenetR2n2(tfds.core.GeneratorBasedBuilder):
     features = dict(
         cat_id=tfds.features.ClassLabel(names=cat_ids()),
         example_id=tfds.features.Text(),
-        voxels=tfds.features.SkipEncodingFeature(
-            tfds.features.StaticShapedTensor(
-                tfds.features.BrleFeature(),
-                shape=(32, 32, 32),
-            )
-        )
-    )
+        voxels=tfds.features.StaticShapedTensor(
+            tfds.features.BinaryRunLengthEncodedFeature(np.prod(VOXEL_SHAPE)),
+            shape=VOXEL_SHAPE))
     rendering_feature_dict = dict(
-        image=tfds.features.Image(shape=(137, 137, 3)),
+        image=tfds.features.Image(shape=IMAGE_SHAPE),
         meta=tfds.features.Tensor(shape=(5,), dtype=tf.float32))
 
     if self.builder_config.single_view:
@@ -301,24 +315,12 @@ class ShapenetR2n2(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TEST, num_shards=2, gen_kwargs=test_kwargs)
     ]
 
-  def _get_id_split(self, example_ids, split):
-    example_ids.sort()
-    n_examples = len(example_ids)
-    split_index = int(0.8 * n_examples)
-    if split == tfds.Split.TRAIN:
-      return example_ids[:split_index]
-    elif split == tfds.Split.TEST:
-      return example_ids[split_index:]
-    else:
-      raise ValueError("Invalid split '%s'" % split)
-
   def _generate_examples(self, split, voxels_path, renderings_path):
     cat_id = self.builder_config.cat_id
     cat_voxels_dir = os.path.join(voxels_path, "ShapeNetVox32", cat_id)
     cat_renderings_dir = os.path.join(
         renderings_path, "ShapeNetRendering", cat_id)
-    example_ids = self._get_id_split(
-        tf.io.gfile.listdir(cat_voxels_dir), split)
+    example_ids = _get_id_split(tf.io.gfile.listdir(cat_voxels_dir), split)
 
     load_meta = _meta_loader(cat_renderings_dir)
     load_image = _image_loader(cat_renderings_dir)
@@ -346,7 +348,7 @@ class ShapenetR2n2(tfds.core.GeneratorBasedBuilder):
         voxels = load_voxels(example_id)
         meta = load_meta(example_id)
         yield dict(
-              voxels=voxels,
-              rendering=dict(image=images, meta=meta),
-              example_id=example_id,
-              cat_id=cat_id)
+          voxels=voxels,
+          rendering=dict(image=images, meta=meta),
+          example_id=example_id,
+          cat_id=cat_id)

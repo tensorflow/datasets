@@ -199,20 +199,22 @@ def run_in_graph_and_eager_modes(func=None,
 class FeatureExpectationsTestCase(SubTestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
-  def assertShapeDimensionsEqual(self, shape0, shape1):
+  def assertShapesCompatible(self, shape0, shape1):
     """Similar to self.assertAllEqual(shape0, shape1) but works with `None`.
+
+    Passes if both shapes are None, or neither is `None` and shapes are
+    compatible according to `TensorShape.is_compatible_with`.
 
     Required because of the following intended behaviour:
     ```python
-    TensorShape((5, 3)) == TensorShape((5, 3))  # TRUE
-    TensorShape((None, 3)) != TensorShape((None, 3))  # TRUE
+    tf.TensorShape((5, 3)) == tf.TensorShape((5, 3))        # True
+    tf.TensorShape((None, 3)) == tf.TensorShape((None, 3))  # False
     ```
     """
     self.assertEqual(shape0 is None, shape1 is None)
     if shape0 is not None:
-      self.assertEqual(len(shape0), len(shape1))
-      for dims in zip(shape0, shape1):
-        self.assertEqual(*(d.value if hasattr(d, "value") else d for d in dims))
+      self.assertTrue(
+        tf.TensorShape(shape0).is_compatible_with(tf.TensorShape(shape1)))
 
   @property
   def expectations(self):
@@ -224,7 +226,7 @@ class FeatureExpectationsTestCase(SubTestCase):
 
     # Check the shape/dtype
     with self._subTest("shape"):
-      self.assertShapeDimensionsEqual(feature.shape, shape)
+      self.assertShapesCompatible(feature.shape, shape)
     with self._subTest("dtype"):
       self.assertEqual(feature.dtype, dtype)
 
@@ -267,10 +269,10 @@ class FeatureExpectationsTestCase(SubTestCase):
       # Test the serialization only
       if test.expected_serialized is not None:
         with self._subTest("out_serialize"):
-          self.assertEqual(
-              test.expected_serialized,
-              feature.encode_example(test.value),
-          )
+          _maybe_map_dicts(
+            self.assertAllEqual,
+            test.expected_serialized,
+            feature.encode_example(test.value))
 
       # Assert the returned type match the expected one
       with self._subTest("out"):
@@ -292,21 +294,7 @@ class FeatureExpectationsTestCase(SubTestCase):
       with self._subTest("out_value"):
         decoded_examples = features_encode_decode(fdict, input_value)
         decoded_examples = decoded_examples["inner"]
-        if isinstance(decoded_examples, dict):
-          # assertAllEqual do not works well with dictionaries so assert
-          # on each individual elements instead
-          zipped_examples = utils.zip_nested(
-              test.expected,
-              decoded_examples,
-              dict_only=True,
-          )
-          utils.map_nested(
-              lambda x: self.assertAllEqual(x[0], x[1]),
-              zipped_examples,
-              dict_only=True,
-          )
-        else:
-          self.assertAllEqual(test.expected, decoded_examples)
+        _maybe_map_dicts(self.assertAllEqual, test.expected, decoded_examples)
 
 
 def features_encode_decode(features_dict, example, as_tensor=False):

@@ -1,36 +1,43 @@
-"""Tensorflow encode/decode/utility implementations."""
+"""Tensorflow encode/decode/utility implementations for run length encodings."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
 
-major, minor = (int(v) for v in tf.__version__.split('.')[:2])
-is_over_1_12 = major >= 1 and minor > 12
+REQUIRED_TF_VERSION = "1.13.0"
 
 
-def ensure_supported_version(error_identifier):
-  if not is_over_1_12:
-    raise NotImplementedError(
-      "%s not implemented for version < 1.13" % error_identifier)
+def _assert_required_version(func_name):
+  from tensorflow_datasets.core import tf_compat
+  tf_compat.assert_tf_version_gte(
+    REQUIRED_TF_VERSION,
+    "`%s` requires at least tensorflow version {tf_version}, found {version}."
+    % func_name)
 
 
 def brle_length(brle):
+  """Length of dense form of binary run-length-encoded input.
+
+  Efficient implementation of `len(brle_to_dense(brle))`."""
   return tf.reduce_sum(brle)
 
 
 def rle_length(rle):
+  """Length of dense form of run-length-encoded input.
+
+  Efficient implementation of `len(rle_to_dense(rle))`."""
   return tf.reduce_sum(rle[1::2])
 
 
 def brle_logical_not(brle):
   """Get the BRLE encoding of the `logical_not`ed decoding of brle.
 
-  Equivalent to `encode(tf.logical_not(decode(brle)))` but highly optimized.
-  Actual implementation just pads brle with a 0 on each end.
+  Equivalent to `dense_to_brle(tf.logical_not(brle_to_dense(brle)))` but highly
+  optimized. Actual implementation just pads brle with a 0 on each end.
 
   Args:
-    brle: rank 1 int tensor of
+    brle: rank 1 int tensor of ints.
   """
   return tf.pad(brle, [[1, 1]])
 
@@ -47,7 +54,7 @@ def brle_to_dense(brle, vals=None):
     Dense representation, rank-1 tensor with dtype the same as vals or `tf.bool`
       if `vals is None`.
   """
-  ensure_supported_version('`brle_to_dense`')
+  _assert_required_version("brle_to_dense")
   brle = tf.convert_to_tensor(brle)
   if not brle.dtype.is_integer:
     raise TypeError("`brle` must be of integer type.")
@@ -87,7 +94,7 @@ def tf_repeat(values, counts):
   def f(values, counts):
     return np.repeat(values.numpy(), counts.numpy())
 
-  ensure_supported_version('`tf_repeat`')
+  _assert_required_version("tf_repeat")
   return tf.py_function(f, [values, counts], values.dtype, name='repeat')
 
 

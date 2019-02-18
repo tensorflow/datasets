@@ -8,20 +8,24 @@ from __future__ import print_function
 import numpy as np
 
 
-class RleNpTest(object):
-  """Interface."""
+class RleTest(object):
+  """Tests should inherit from this class along with unittest.TestCase."""
 
   def impl(self):
     raise NotImplementedError
 
   def assert_array_equal(self, x, y, *args, **kwargs):
-    raise NotImplementedError
+    return np.testing.assert_array_equal(x, y, *args, **kwargs)
 
   def dense_logical_not(self, x):
-    raise NotImplementedError
+    return np.logical_not(x)
 
   def dense_length(self, x):
-    raise NotImplementedError
+    assert(len(x.shape) == 1)
+    return x.shape[0]
+
+  def evaluate(self, x):
+    return x
 
 
 def random_rle_encoding(n=20, max_value=255, dtype=np.uint8):

@@ -5,27 +5,14 @@ from __future__ import print_function
 import unittest
 import numpy as np
 
-from tensorflow_datasets.core.features.rle_feature.rle import np_impl
-import tensorflow_datasets.core.features.rle_feature.rle.shared_tests as st
+from tensorflow_datasets.core.features.run_length_encoded_feature.rle import np_impl
+import tensorflow_datasets.core.features.run_length_encoded_feature.rle.shared_tests as st
 
 
-class BlreNpTest(unittest.TestCase):
+class BlreNpTest(unittest.TestCase, st.RleTest):
   @property
   def impl(self):
     return np_impl
-
-  def assert_array_equal(self, x, y, *args, **kwargs):
-    return np.testing.assert_array_equal(x, y, *args, **kwargs)
-
-  def dense_logical_not(self, x):
-    return np.logical_not(x)
-
-  def dense_length(self, x):
-    assert(len(x.shape) == 1)
-    return x.shape[0]
-
-  def evaluate(self, x):
-    return x
 
   # RLE tests
   def test_merge_rle_lengths(self):

@@ -26,14 +26,13 @@ from tensorflow_datasets.core.features.feature import FeaturesDict
 from tensorflow_datasets.core.features.feature import Tensor
 from tensorflow_datasets.core.features.feature import TensorInfo
 from tensorflow_datasets.core.features.image_feature import Image
-from tensorflow_datasets.core.features.rle_feature import BrleFeature
-from tensorflow_datasets.core.features.rle_feature import RleFeature
+from tensorflow_datasets.core.features.run_length_encoded_feature import BinaryRunLengthEncodedFeature
+from tensorflow_datasets.core.features.run_length_encoded_feature import RunLengthEncodedFeature
 from tensorflow_datasets.core.features.sequence_feature import Sequence
 from tensorflow_datasets.core.features.sequence_feature import SequenceDict
 from tensorflow_datasets.core.features.shaped_feature import DynamicShapedTensor
 from tensorflow_datasets.core.features.shaped_feature import ShapedTensor
 from tensorflow_datasets.core.features.shaped_feature import StaticShapedTensor
-from tensorflow_datasets.core.features.skip_encoding_feature import SkipEncodingFeature
 from tensorflow_datasets.core.features.text_feature import Text
 from tensorflow_datasets.core.features.video_feature import Video
 
@@ -42,13 +41,17 @@ __all__ = [
     "Audio",
     "BBox",
     "BBoxFeature",
+    "BinaryRunLengthEncodedFeature",
     "ClassLabel",
+    "DynamicShapedTensor",
     "FeatureConnector",
     "FeaturesDict",
+    "RunLengthEncodedFeature",
     "Tensor",
     "TensorInfo",
     "Sequence",
     "SequenceDict",
+    "StaticShapedTensor",
     "Image",
     "Text",
     "Video",

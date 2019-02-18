@@ -5,14 +5,15 @@ from __future__ import print_function
 import tensorflow as tf
 import numpy as np
 
-import tensorflow_datasets.core.features.rle_feature.rle.tf_impl as brle
-import tensorflow_datasets.core.features.rle_feature.rle.shared_tests as st
+import tensorflow_datasets.core.features.run_length_encoded_feature.rle.tf_impl as brle
+import tensorflow_datasets.core.features.run_length_encoded_feature.rle.shared_tests as st
 from tensorflow_datasets.testing import test_utils
+from tensorflow_datasets.core import tf_compat
 tf.compat.v1.enable_eager_execution()
 
 
-if brle.is_over_1_12:
-  class BlreTfTest(tf.test.TestCase):
+if tf_compat.get_tf_version() > brle.REQUIRED_TF_VERSION:
+  class BlreTfTest(tf.test.TestCase, st.RleTest):
     @property
     def impl(self):
       return brle

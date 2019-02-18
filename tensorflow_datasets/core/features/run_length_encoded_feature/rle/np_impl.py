@@ -1,4 +1,4 @@
-"""Numpy encode/decode/utility implementations."""
+"""Numpy encode/decode/utility implementations for run length encodings."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -7,12 +7,12 @@ import numpy as np
 
 
 def brle_length(brle):
-  """Optimized implementation of `len(decode(brle))`"""
+  """Optimized implementation of `len(brle_to_dense(brle))`"""
   return np.sum(brle)
 
 
 def rle_length(rle):
-  """Optimized implementation of `len(decode(rle_to_brle(rle)))`"""
+  """Optimized implementation of `len(rle_to_dense(rle_to_brle(rle)))`"""
   return np.sum(rle[1::2])
 
 
@@ -54,10 +54,10 @@ def rle_to_brle(rle, dtype=None):
 
 
 def brle_logical_not(brle):
-  """Get the BRLE encoding of the `logical_not`ed decoding of `brle`.
+  """Get the BRLE encoding of the `logical_not`ed dense form of `brle`.
 
-  Equivalent to `encode(np.logical_not(decode(brle)))` but highly optimized.
-  Actual implementation just pads brle with a 0 on each end.
+  Equivalent to `dense_to_brle(np.logical_not(brle_to_dense(brle)))` but highly
+  optimized. Actual implementation just pads brle with a 0 on each end.
 
   Args:
     brle: rank 1 int array of
@@ -90,7 +90,7 @@ def maybe_pad_brle(lengths, start_value=False):
 
 
 def merge_brle_lengths(lengths):
-  """Inverse of _split_long_brle_lengths."""
+  """Inverse of split_long_brle_lengths."""
   if len(lengths) == 0:
     return []
 
@@ -169,7 +169,7 @@ def brle_to_dense(brle_data, vals=None):
   Args:
     brle_data: BRLE counts of False/True values
     vals: if not `None`, a length 2 array/list/tuple with False/True substitute
-      values, e.g. decode([2, 3, 1, 0], [7, 9]) == [7, 7, 9, 9, 9, 7]
+      values, e.g. brle_to_dense([2, 3, 1, 0], [7, 9]) == [7, 7, 9, 9, 9, 7]
 
   Returns:
     rank 1 dense data of dtype `bool if vals is None else vals.dtype`

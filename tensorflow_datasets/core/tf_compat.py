@@ -24,6 +24,10 @@ from __future__ import print_function
 import types
 import distutils.version
 
+def get_tf_version():
+  import tensorflow as tf
+  return distutils.version.LooseVersion(tf.__version__)
+
 # Which patch function was called
 # For debug only, not to be depended upon.
 # Will be set to one of:
@@ -54,16 +58,12 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
           "most recent version of TensorFlow, by following instructions at "
           "https://tensorflow.org/install.\n\n")
     raise
+  assert_tf_version_gte(
+    "1.12.0",
+    err_msg="This version of TensorFlow Datasets requires TensorFlow "
+            "version >= {version}; Detected an installation of version "
+            "{tf_version}. Please upgrade TensorFlow to proceed.")
 
-  tf_version = distutils.version.LooseVersion(tf.__version__)
-  v_1_12 = distutils.version.LooseVersion("1.12.0")
-  if tf_version < v_1_12:
-    raise ImportError(
-        "This version of TensorFlow Datasets requires TensorFlow "
-        "version >= {required}; Detected an installation of version {present}. "
-        "Please upgrade TensorFlow to proceed.".format(
-            required="1.13.0",
-            present=tf.__version__))
   _patch_tf(tf)
 
 
@@ -76,7 +76,7 @@ def _patch_tf(tf):
   v_1_12 = distutils.version.LooseVersion("1.12.0")
   v_1_13 = distutils.version.LooseVersion("1.13.0")
   v_2 = distutils.version.LooseVersion("2.0.0")
-  tf_version = distutils.version.LooseVersion(tf.__version__)
+  tf_version = get_tf_version()
   if v_1_12 <= tf_version < v_1_13:
     # TODO(b/123930850): remove when 1.13 is stable.
     TF_PATCH = "tf1_12"
@@ -156,3 +156,30 @@ def is_dataset(ds):
   return isinstance(ds, tuple(dataset_types))
 
 
+def assert_tf_version(version, cond, err_msg):
+  """Assert tensorflow version satisfies `cond` compared to version.
+
+  Args:
+    version: string version or `distutils.version.Version`.
+    cond: function mapping (tf_version, version) to bool
+    err_msg: errror message to be formatted with `version` and `tf_version`.
+
+  Returns:
+    `None`
+
+  Raises:
+    `ImportError` if cond is not satisfied by tf_version, version.
+  """
+  tf_version = get_tf_version()
+  if not cond(tf_version, version):
+    if "{version}" in err_msg and "{tf_version}" in err_msg:
+        err_msg = err_msg.format(version=version, tf_version=get_tf_version())
+    raise ImportError(err_msg)
+
+
+def assert_tf_version_gte(
+    version,
+    err_msg=("Tensorflow version must be "
+             "at least {version}, but found installed version {tf_version}")):
+  assert_tf_version(
+    version, cond=(lambda tfv, v: tfv >= v), err_msg=err_msg)

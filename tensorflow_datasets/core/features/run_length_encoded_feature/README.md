@@ -32,10 +32,10 @@ Sequences with counts exceeding the data type's maximum value have to be handled
 
 ## Module Layout
 
-The `rle` submodule contains `numpy` and _limited_ `tensorflow` implementations of RLE/BRLE encoding, decoding and utility functions. For use with `DatasetBuilder`s we provide the `RleFeature` and `BrleFeature` `FeatureConnector`s for (B)RLE-to-dense connections.
+The `rle` submodule contains `numpy` and _limited_ `tensorflow` implementations of RLE/BRLE encoding, decoding and utility functions. For use with `DatasetBuilder`s we provide the `RunLengthEncodedFeature` and `BinaryRunLengthEncodedFeature` `FeatureConnector`s for (B)RLE-to-dense connections.
 
-Note `RleFeature` connectors depend on `rle.tf_impl.rle_to_dense` which is currently implemented using `tf.py_function`. This may cause issues on some systems.
+Note `RunLengthEncodedFeature` connectors depend on `rle.tf_impl.rle_to_dense` which is currently implemented using `tf.py_function`. This may cause issues on some systems.
 
 ## Example
 
-See [shapenet_r2n2.py](../../../image/shapenet_r2n2.py) for a `DatasetBuilder` which uses a `BrleFeature` to encode voxel data.
+See [image/shapenet_r2n2.py](../../../image/shapenet_r2n2.py) for a `DatasetBuilder` which uses a `BinaryRunLengthEncodedFeature` to encode voxel data.
