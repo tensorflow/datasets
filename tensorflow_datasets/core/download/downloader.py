@@ -31,13 +31,13 @@ import requests
 import tensorflow as tf
 
 from tensorflow_datasets.core import units
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import util
-from tensorflow_datasets.core.utils import py_utils
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
 
-@py_utils.memoize()
+@utils.memoize()
 def get_downloader(*args, **kwargs):
   return _Downloader(*args, **kwargs)
 
@@ -77,7 +77,7 @@ class _Downloader(object):
   @contextlib.contextmanager
   def tqdm(self):
     """Add a progression bar for the current download."""
-    async_tqdm = py_utils.async_tqdm
+    async_tqdm = utils.async_tqdm
     with async_tqdm(total=0, desc='Dl Completed...', unit=' url') as pbar_url:
       with async_tqdm(total=0, desc='Dl Size...', unit=' MiB') as pbar_dl_size:
         self._pbar_url = pbar_url
@@ -114,7 +114,7 @@ class _Downloader(object):
   def _sync_file_copy(self, filepath, destination_path):
     out_path = os.path.join(destination_path, os.path.basename(filepath))
     tf.io.gfile.copy(filepath, out_path)
-    hexdigest, size = py_utils.read_checksum_digest(
+    hexdigest, size = utils.read_checksum_digest(
         out_path, checksum_cls=self._checksumer)
     return hexdigest, size
 

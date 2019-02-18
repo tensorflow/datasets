@@ -33,11 +33,11 @@ import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import resource as resource_lib
-from tensorflow_datasets.core.utils import py_utils
 
 
-@py_utils.memoize()
+@utils.memoize()
 def get_extractor(*args, **kwargs):
   return _Extractor(*args, **kwargs)
 
@@ -66,7 +66,7 @@ class _Extractor(object):
   @contextlib.contextmanager
   def tqdm(self):
     """Add a progression bar for the current extraction."""
-    with py_utils.async_tqdm(
+    with utils.async_tqdm(
         total=0, desc='Extraction completed...', unit=' file') as pbar_path:
       self._pbar_path = pbar_path
       yield

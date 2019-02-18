@@ -46,7 +46,9 @@ from absl import logging
 import numpy as np
 import six
 import tensorflow as tf
-import tqdm
+
+from tensorflow_datasets.core import utils
+
 
 __all__ = [
     "FileFormatAdapter",
@@ -248,13 +250,13 @@ def _shuffle_tfrecord(path, random_gen):
   # Read all records
   record_iter = tf.compat.v1.io.tf_record_iterator(path)
   all_records = [
-      r for r in tqdm.tqdm(record_iter, desc="Reading...", unit=" examples")
+      r for r in utils.tqdm(record_iter, desc="Reading...", unit=" examples")
   ]
   # Shuffling in memory
   random_gen.shuffle(all_records)
   # Write all record back
   with tf.io.TFRecordWriter(path) as writer:
-    for record in tqdm.tqdm(all_records, desc="Writing...", unit=" examples"):
+    for record in utils.tqdm(all_records, desc="Writing...", unit=" examples"):
       writer.write(record)
 
 
@@ -276,13 +278,13 @@ def _write_tfrecords_from_generator(generator, output_files, shuffle=True):
       # produce different values between Python 2 and 3 and between
       # architectures
       random_gen = np.random.RandomState(42)
-      for path in tqdm.tqdm(tmp_files, desc="Shuffling...", unit=" shard"):
+      for path in utils.tqdm(tmp_files, desc="Shuffling...", unit=" shard"):
         _shuffle_tfrecord(path, random_gen=random_gen)
 
 
 def _round_robin_write(writers, generator):
   """Write records from generator round-robin across writers."""
-  for i, example in enumerate(tqdm.tqdm(generator, unit=" examples")):
+  for i, example in enumerate(utils.tqdm(generator, unit=" examples")):
     writers[i % len(writers)].write(example)
 
 
