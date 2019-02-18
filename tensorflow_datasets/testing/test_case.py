@@ -23,6 +23,7 @@ import contextlib
 import os
 import tempfile
 
+from absl import logging
 from absl.testing import absltest
 import six
 import tensorflow as tf
@@ -71,3 +72,14 @@ class TestCase(tf.test.TestCase):
     return super(TestCase, self).assertRaisesWithPredicateMatch(
         err_type, predicate_fct)
 
+  @contextlib.contextmanager
+  def assertLogs(self, text, level="info"):
+    with absltest.mock.patch.object(logging, level) as mock_log:
+      yield
+      concat_logs = ""
+      for log_call in mock_log.call_args_list:
+        args = log_call[0]
+        base, args = args[0], args[1:]
+        log_text = base % tuple(args)
+        concat_logs += " " + log_text
+      self.assertIn(text, concat_logs)

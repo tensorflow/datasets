@@ -22,6 +22,7 @@ from tensorflow_datasets.testing.test_utils import DummyMnist
 from tensorflow_datasets.testing.test_utils import FeatureExpectationItem
 from tensorflow_datasets.testing.test_utils import FeatureExpectationsTestCase
 from tensorflow_datasets.testing.test_utils import make_tmp_dir
+from tensorflow_datasets.testing.test_utils import mock_kaggle_api
 from tensorflow_datasets.testing.test_utils import rm_tmp_dir
 from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
 from tensorflow_datasets.testing.test_utils import test_main
@@ -38,5 +39,6 @@ __all__ = [
     "test_main",
     "tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
     "make_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
+    "mock_kaggle_api",
     "rm_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
 ]

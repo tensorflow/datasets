@@ -21,7 +21,10 @@ from __future__ import print_function
 
 import contextlib
 import os
+import subprocess
 import tempfile
+
+from absl.testing import absltest
 
 import numpy as np
 import tensorflow as tf
@@ -374,3 +377,63 @@ def test_main():
   tf.compat.v1.enable_eager_execution()
   tf.test.main()
 
+
+@contextlib.contextmanager
+def mock_kaggle_api(filenames=None, err_msg=None):
+  """Mock out the kaggle CLI.
+
+  Args:
+    filenames: `list<str>`, names of the competition files.
+    err_msg: `str`, if provided, the kaggle CLI will raise a CalledProcessError
+      and this will be the command output.
+
+  Yields:
+    None, context will have kaggle CLI mocked out.
+  """
+
+  def make_mock_files_call(filenames, err_msg):
+    """Mock subprocess.check_output for files call."""
+
+    def check_output(command_args):
+      assert command_args[2] == "files"
+      if err_msg:
+        raise subprocess.CalledProcessError(1, command_args,
+                                            tf.compat.as_bytes(err_msg))
+      return tf.compat.as_bytes(
+          "\n".join(["name,size,creationDate"] +
+                    ["%s,34MB,None" % fname for fname in filenames]))
+
+    return check_output
+
+  def make_mock_download_call():
+    """Mock subprocess.check_output for download call."""
+
+    def check_output(command_args):
+      assert command_args[2] == "download"
+      fname = command_args[command_args.index("--file") + 1]
+      out_dir = command_args[command_args.index("--path") + 1]
+      fpath = os.path.join(out_dir, fname)
+      with tf.io.gfile.GFile(fpath, "w") as f:
+        f.write(fname)
+      return tf.compat.as_bytes("Downloading %s to %s" % (fname, fpath))
+
+    return check_output
+
+  def make_mock_check_output(filenames, err_msg):
+    """Mock subprocess.check_output for both calls."""
+
+    files_call = make_mock_files_call(filenames, err_msg)
+    dl_call = make_mock_download_call()
+
+    def check_output(command_args):
+      if command_args[2] == "files":
+        return files_call(command_args)
+      else:
+        assert command_args[2] == "download"
+        return dl_call(command_args)
+
+    return check_output
+
+  with absltest.mock.patch("subprocess.check_output",
+                           make_mock_check_output(filenames, err_msg)):
+    yield

@@ -32,7 +32,8 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.download import util
+from tensorflow_datasets.core.download import kaggle
+from tensorflow_datasets.core.download import util as download_util
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
 
@@ -48,7 +49,7 @@ def _get_filename(response):
     match = re.findall('filename="(.+?)"', content_disposition)
     if match:
       return match[0]
-  return util.get_file_name(response.url)
+  return download_util.get_file_name(response.url)
 
 
 class DownloadError(Exception):
@@ -73,6 +74,10 @@ class _Downloader(object):
     self._checksumer = checksumer or hashlib.sha256
     self._pbar_url = None
     self._pbar_dl_size = None
+
+  @utils.memoize()
+  def kaggle_downloader(self, competition_name):
+    return kaggle.KaggleCompetitionDownloader(competition_name)
 
   @contextlib.contextmanager
   def tqdm(self):
@@ -99,6 +104,22 @@ class _Downloader(object):
     future = self._executor.submit(self._sync_download, url, destination_path)
     return promise.Promise.resolve(future)
 
+  def _sync_kaggle_download(self, kaggle_url, destination_path):
+    """Download with Kaggle API."""
+    kaggle_file = kaggle.KaggleFile.from_url(kaggle_url)
+    downloader = self.kaggle_downloader(kaggle_file.competition)
+    filepath = downloader.download_file(kaggle_file.filename, destination_path)
+
+    dl_size = tf.io.gfile.stat(filepath).length
+    checksum = self._checksumer()
+    with tf.io.gfile.GFile(filepath, 'rb') as f:
+      while True:
+        block = f.read(io.DEFAULT_BUFFER_SIZE)
+        if not block:
+          break
+        checksum.update(block)
+    return checksum.hexdigest(), dl_size
+
   def _get_drive_url(self, url, session):
     """Returns url, possibly with confirmation token."""
     response = session.get(url, stream=True)
@@ -120,6 +141,9 @@ class _Downloader(object):
 
   def _sync_download(self, url, destination_path):
     """Synchronous version of `download` method."""
+    if kaggle.KaggleFile.is_kaggle_url(url):
+      return self._sync_kaggle_download(url, destination_path)
+
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
       # use requests.
@@ -127,6 +151,7 @@ class _Downloader(object):
         return self._sync_file_copy(url, destination_path)
     except tf.errors.UnimplementedError:
       pass
+
     session = requests.Session()
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
