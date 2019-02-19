@@ -28,7 +28,7 @@ from absl import app
 from absl import flags
 
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.testing import _utils
+from tensorflow_datasets.testing import fake_data_utils
 
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
@@ -44,7 +44,7 @@ def _output_dir():
 def main(argv):
   del argv
   out_path = os.path.join(_output_dir(), 'cats_vs_dogs.zip')
-  jpg = _utils.get_random_jpeg(height=1, width=1)
+  jpg = fake_data_utils.get_random_jpeg(height=1, width=1)
   with zipfile.ZipFile(out_path, 'w') as myzip:
     myzip.write(jpg, 'PetImages/Dog/0.jpg')
     myzip.write(jpg, 'PetImages/Dog/1.jpg')

@@ -30,7 +30,7 @@ from absl import flags
 
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import open_images
-from tensorflow_datasets.testing import _utils
+from tensorflow_datasets.testing import fake_data_utils
 
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
@@ -77,7 +77,7 @@ def _write_tar(path, split_name, image_ids, prefix=None):
   with tarfile.open(path, mode='w') as tar:
     for image_id in image_ids:
       fname = '%s/%s.jpg' % (split_name, image_id)
-      tar.add(_utils.get_random_jpeg(), arcname=fname)
+      tar.add(fake_data_utils.get_random_jpeg(), arcname=fname)
 
 
 def _write_image_level_labels(fname, image_ids, machine=False):
