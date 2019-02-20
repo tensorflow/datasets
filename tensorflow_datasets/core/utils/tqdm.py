@@ -22,7 +22,7 @@ from __future__ import print_function
 
 import contextlib
 
-import tqdm as tqdm_lib
+from tqdm import auto as tqdm_lib
 
 tqdm = tqdm_lib.tqdm
 
@@ -59,7 +59,7 @@ class _TqdmPbarAsync(object):
   _tqdm_bars = []
 
   def __init__(self, pbar):
-    self._lock = tqdm_lib.tqdm.get_lock()
+    self._lock = tqdm.get_lock()
     self._pbar = pbar
     self._tqdm_bars.append(pbar)
 

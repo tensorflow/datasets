@@ -443,7 +443,7 @@ def get_dataset_feature_statistics(builder, split):
   feature_to_max = {}
 
   np_dataset = dataset_utils.as_numpy(dataset)
-  for example in utils.tqdm(np_dataset, unit=" examples"):
+  for example in utils.tqdm(np_dataset, unit=" examples", leave=False):
     statistics.num_examples += 1
 
     assert isinstance(example, dict)
