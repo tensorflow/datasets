@@ -11,6 +11,7 @@ from absl import flags
 import numpy as np
 import tensorflow as tf
 
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import test_utils
 from tensorflow_datasets.image.colorectal_histology import _CLASS_NAMES
@@ -48,8 +49,8 @@ def make_images(num_images, size):
 
 
 def write_image(filename, data):
-  from PIL import Image
-  Image.fromarray(data).save(filename, compression=FLAGS.compression)
+  tfds.core.lazy_imports.PIL_Image.fromarray(data).save(
+    filename, compression=FLAGS.compression)
 
 
 def main(_):
@@ -58,7 +59,7 @@ def main(_):
     subdir = os.path.join(base_dir, _class_subdir(ci, class_name))
     tf.io.gfile.makedirs(subdir)
 
-    for i, image_data in enumerate(make_images(10, _TILES_SIZE)):
+    for i, image_data in enumerate(make_images(2, _TILES_SIZE)):
       fn = "image%d.tif" % i
       write_image(os.path.join(subdir, fn), image_data)
 

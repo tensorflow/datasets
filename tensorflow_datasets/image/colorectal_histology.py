@@ -30,7 +30,6 @@ _CLASS_NAMES = (
 )
 _TILES_SIZE  = 150
 _LARGE_SIZE = 5000
-_SEED = 37  # used to determine train/val/test splits
 
 _CITATION = """\
 @article{kather2016multi,
@@ -49,14 +48,8 @@ def _class_subdir(class_index, class_name):
 
 
 def _load_tif(path):
-  try:
-    from PIL import Image
-  except ImportError:
-    raise ImportError(
-        "PIL required for colorectal histology dataset encoding")
-
   with tf.io.gfile.GFile(path, "rb") as fp:
-    image = Image.open(fp)
+    image = tfds.core.lazy_imports.PIL_Image.open(fp)
   return np.array(image)
 
 
@@ -84,48 +77,21 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     folder = dl_manager.download_and_extract(_TILES_DL_URL)
-    # no official train/validation/test split, so we use 80% / 10% / 10%
     return [
-        tfds.core.SplitGenerator(
+      tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=8,
-            gen_kwargs=dict(
-                start_frac=0,
-                end_frac=0.8,
-                root_dir=folder
-            )
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            num_shards=1,
-            gen_kwargs=dict(
-                start_frac=0.8,
-                end_frac=0.9,
-                root_dir=folder
-            )
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            num_shards=1,
-            gen_kwargs=dict(
-                start_frac=0.9,
-                end_frac=1,
-                root_dir=folder
-            )
-        ),
+            num_shards=10,
+            gen_kwargs=dict(root_dir=folder))
     ]
 
-  def _generate_examples(self, root_dir, start_frac, end_frac):
-    random.seed(_SEED)
+  def _generate_examples(self, root_dir):
     root_dir = os.path.join(root_dir, _TILES_SUBDIR)
     for i, class_name in enumerate(_CLASS_NAMES):
       class_dir = os.path.join(root_dir, _class_subdir(i, class_name))
       fns = tf.io.gfile.listdir(class_dir)
       random.shuffle(fns)
       n = len(fns)
-      start_index = int(n*start_frac)
-      end_index = int(n*end_frac)
-      for fn in fns[start_index:end_index]:
+      for fn in fns:
         image = _load_tif(os.path.join(class_dir, fn))
         yield {
             "image": image,

@@ -14,9 +14,7 @@ num_classes = len(colorectal_histology._CLASS_NAMES)
 class ColorectalHistologyTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = colorectal_histology.ColorectalHistology
   SPLITS = {
-      "train": 8*num_classes,
-      "test": num_classes,
-      "validation": num_classes,
+      "train": 2*num_classes,
   }
 
 

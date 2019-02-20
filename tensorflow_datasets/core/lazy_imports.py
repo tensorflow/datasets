@@ -56,6 +56,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def PIL_Image(cls):
+    return _try_import("PIL.Image")
+
+  @utils.classproperty
+  @classmethod
   def pyplot(cls):
     return _try_import("matplotlib.pyplot")
 
