@@ -3,7 +3,7 @@
 
 ## Usage
 
-```
+```python
 # See all registered datasets
 tfds.list_builders()
 
@@ -84,7 +84,7 @@ overlapping between the train set and the valid/test sets.
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),
     'id': Tensor(shape=(), dtype=tf.string),
@@ -124,7 +124,7 @@ TEST       |      4,096
  * [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -143,7 +143,6 @@ TEST       |      4,096
   pdf = 	 {http://proceedings.mlr.press/v70/engel17a/engel17a.pdf},
   url = 	 {http://proceedings.mlr.press/v70/engel17a.html},
 }
-
 ```
 
 ---
@@ -160,7 +159,7 @@ A large set of images of cats and dogs.There are 1738 corrupted images that are 
 * Version: `v2.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -180,7 +179,7 @@ ALL        |     23,262
  * [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -194,7 +193,6 @@ publisher = {Association for Computing Machinery, Inc.},
 url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization/},
 edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
 }
-
 ```
 
 ---
@@ -212,7 +210,7 @@ The dataset can be employed as the training and test sets for the following comp
 * Version: `v0.3.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'attributes': FeaturesDict({
         '5_o_Clock_Shadow': Tensor(shape=(), dtype=tf.bool),
@@ -286,7 +284,7 @@ VALIDATION |     19,867
  * [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -308,7 +306,6 @@ VALIDATION |     19,867
   url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},
   year = 2015
 }
-
 ```
 
 ---
@@ -352,7 +349,7 @@ configurations predefined (defaults to the first one):
 
 ### `"celeb_a_hq/1024"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -363,7 +360,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/512"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(512, 512, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -374,7 +371,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/256"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -385,7 +382,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/128"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -396,7 +393,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/64"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -407,7 +404,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/32"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -418,7 +415,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/16"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(16, 16, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -429,7 +426,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/8"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(8, 8, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -440,7 +437,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/4"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(4, 4, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -451,7 +448,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/2"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(2, 2, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -462,7 +459,7 @@ FeaturesDict({
 
 ### `"celeb_a_hq/1"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(1, 1, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -483,7 +480,7 @@ ALL        |     30,000
  * [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -503,7 +500,6 @@ ALL        |     30,000
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1710-10196},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
@@ -517,7 +513,7 @@ The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6
 * Version: `v1.0.2`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
@@ -537,7 +533,7 @@ TEST       |     10,000
  * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -547,7 +543,6 @@ TEST       |     10,000
     institution = {},
     year = {2009}
 }
-
 ```
 
 ---
@@ -561,7 +556,7 @@ This dataset is just like the CIFAR-10, except it has 100 classes containing 600
 * Version: `v1.3.1`
 
 ### Features
-```
+```python
 FeaturesDict({
     'coarse_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -582,7 +577,7 @@ TEST       |     10,000
  * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -592,7 +587,6 @@ TEST       |     10,000
     institution = {},
     year = {2009}
 }
-
 ```
 
 ---
@@ -611,7 +605,7 @@ Note:
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -638,7 +632,7 @@ VALIDATION |     40,504
  * [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -664,7 +658,6 @@ VALIDATION |     40,504
   biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
@@ -678,7 +671,7 @@ A large set of high-resolution retina images taken under a variety of imaging co
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
@@ -700,7 +693,7 @@ SAMPLE     |         10
  * [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -711,7 +704,6 @@ SAMPLE     |         10
     year   = "2015",
     url    = "https://www.kaggle.com/c/diabetic-retinopathy-detection/data"
 }
-
 ```
 
 ---
@@ -725,7 +717,7 @@ Fashion-MNIST is a dataset of Zalando's article images consisting of a training 
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
@@ -745,7 +737,7 @@ TEST       |     10,000
  * [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -765,7 +757,6 @@ TEST       |     10,000
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
@@ -779,7 +770,7 @@ Generic image classification dataset.
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=None),
@@ -794,12 +785,8 @@ None computed
 
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
-### Citation
-```
-
-```
 
 ---
 
@@ -820,7 +807,7 @@ images for most of the concepts in the WordNet hierarchy.
 * Version: `v2.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -841,7 +828,7 @@ VALIDATION |     50,000
  * [http://image-net.org/](http://image-net.org/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -855,7 +842,6 @@ volume={115},
 number={3},
 pages={211-252}
 }
-
 ```
 
 ---
@@ -877,7 +863,7 @@ configurations predefined (defaults to the first one):
 
 ### `"lsun/classroom"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
@@ -887,7 +873,7 @@ FeaturesDict({
 
 ### `"lsun/bedroom"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
@@ -908,7 +894,7 @@ VALIDATION |        300
  * [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -927,7 +913,6 @@ VALIDATION |        300
   volume = {abs/1506.03365},
   year = 2015
 }
-
 ```
 
 ---
@@ -941,7 +926,7 @@ The MNIST database of handwritten digits.
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
@@ -961,7 +946,7 @@ TEST       |     10,000
  * [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -972,7 +957,6 @@ TEST       |     10,000
   volume={2},
   year={2010}
 }
-
 ```
 
 ---
@@ -988,7 +972,7 @@ handwritten characters from 50 different alphabets.
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'alphabet': ClassLabel(shape=(), dtype=tf.int64, num_classes=50),
     'alphabet_char_id': Tensor(shape=(), dtype=tf.int64),
@@ -1012,7 +996,7 @@ SMALL1     |      2,720
  * [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -1026,7 +1010,6 @@ SMALL1     |      2,720
   year={2015},
   publisher={American Association for the Advancement of Science}
 }
-
 ```
 
 ---
@@ -1050,7 +1033,7 @@ classes.
 * Version: `v0.1.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'bobjects': SequenceDict({
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
@@ -1086,7 +1069,7 @@ VALIDATION |     41,620
  * [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -1136,7 +1119,6 @@ VALIDATION |     41,620
              https://storage.googleapis.com/openimages/web/index.html},
   year={2017}
 }
-
 ```
 
 ---
@@ -1150,7 +1132,7 @@ The Quick Draw Dataset is a collection of 50 million drawings across 345 categor
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=345),
@@ -1169,7 +1151,7 @@ ALL        | 50,426,266
  * [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -1187,7 +1169,7 @@ The Street View House Numbers (SVHN) Dataset is an image digit recognition datas
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
@@ -1208,7 +1190,7 @@ TEST       |     26,032
  * [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -1218,7 +1200,6 @@ booktitle = {Advances in Neural Information Processing Systems ({NIPS})},
 title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
 year = {2011}
 }
-
 ```
 
 ---
@@ -1232,7 +1213,7 @@ A large set of images of flowers
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
@@ -1251,7 +1232,7 @@ ALL        |      3,670
  * [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+`(u'image', u'label')`
 
 ### Citation
 ```
@@ -1261,7 +1242,6 @@ title = "Flowers",
 month = "jan",
 year = "2019",
 url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
-
 ```
 
 ---
@@ -1292,7 +1272,7 @@ configurations predefined (defaults to the first one):
 
 ### `"imdb_reviews/plain_text"`
 
-```
+```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'text': Text(shape=(), dtype=tf.string, encoder=None),
@@ -1303,7 +1283,7 @@ FeaturesDict({
 
 ### `"imdb_reviews/bytes"`
 
-```
+```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
@@ -1314,7 +1294,7 @@ FeaturesDict({
 
 ### `"imdb_reviews/subwords8k"`
 
-```
+```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8185>),
@@ -1325,7 +1305,7 @@ FeaturesDict({
 
 ### `"imdb_reviews/subwords32k"`
 
-```
+```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32650>),
@@ -1347,7 +1327,7 @@ TEST       |     25,000
  * [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'text', u'label')
+`(u'text', u'label')`
 
 ### Citation
 ```
@@ -1362,7 +1342,6 @@ TEST       |     25,000
   pages     = {142--150},
   url       = {http://www.aclweb.org/anthology/P11-1015}
 }
-
 ```
 
 ---
@@ -1389,7 +1368,7 @@ configurations predefined (defaults to the first one):
 
 ### `"lm1b/plain_text"`
 
-```
+```python
 FeaturesDict({
     'text': Text(shape=(), dtype=tf.string, encoder=None),
 })
@@ -1399,7 +1378,7 @@ FeaturesDict({
 
 ### `"lm1b/bytes"`
 
-```
+```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
 })
@@ -1409,7 +1388,7 @@ FeaturesDict({
 
 ### `"lm1b/subwords8k"`
 
-```
+```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
 })
@@ -1419,7 +1398,7 @@ FeaturesDict({
 
 ### `"lm1b/subwords32k"`
 
-```
+```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
 })
@@ -1440,7 +1419,7 @@ TEST       |    306,688
  * [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'text', u'text')
+`(u'text', u'text')`
 
 ### Citation
 ```
@@ -1463,7 +1442,6 @@ TEST       |    306,688
   biburl    = {https://dblp.org/rec/bib/journals/corr/ChelbaMSGBK13},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
@@ -1490,7 +1468,7 @@ configurations predefined (defaults to the first one):
 
 ### `"squad/plain_text"`
 
-```
+```python
 FeaturesDict({
     'context': Text(shape=(), dtype=tf.string, encoder=None),
     'first_answer': Text(shape=(), dtype=tf.string, encoder=None),
@@ -1502,7 +1480,7 @@ FeaturesDict({
 
 ### `"squad/bytes"`
 
-```
+```python
 FeaturesDict({
     'context': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
     'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
@@ -1514,7 +1492,7 @@ FeaturesDict({
 
 ### `"squad/subwords8k"`
 
-```
+```python
 FeaturesDict({
     'context': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8190>),
     'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8190>),
@@ -1526,7 +1504,7 @@ FeaturesDict({
 
 ### `"squad/subwords32k"`
 
-```
+```python
 FeaturesDict({
     'context': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32953>),
     'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32953>),
@@ -1549,7 +1527,7 @@ VALIDATION |     10,570
  * [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -1564,7 +1542,6 @@ VALIDATION |     10,570
 archivePrefix = {arXiv},
        eprint = {1606.05250},
 }
-
 ```
 
 ---
@@ -1590,7 +1567,7 @@ configurations predefined (defaults to the first one):
 
 ### `"wmt_translate_ende/ende_plain_text_t2t"`
 
-```
+```python
 FeaturesDict({
     'de': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
@@ -1601,7 +1578,7 @@ FeaturesDict({
 
 ### `"wmt_translate_ende/ende_subwords8k_t2t"`
 
-```
+```python
 FeaturesDict({
     'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8267>),
     'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8216>),
@@ -1623,7 +1600,7 @@ VALIDATION |      3,000
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'en', u'de')
+`(u'en', u'de')`
 
 ### Citation
 ```
@@ -1641,7 +1618,6 @@ VALIDATION |      3,000
   pages     = {272--307},
   url       = {http://www.aclweb.org/anthology/W18-6401}
 }
-
 ```
 
 ---
@@ -1668,7 +1644,7 @@ configurations predefined (defaults to the first one):
 
 ### `"wmt_translate_enfr/enfr_plain_text_t2t_small"`
 
-```
+```python
 FeaturesDict({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'fr': Text(shape=(), dtype=tf.string, encoder=None),
@@ -1679,7 +1655,7 @@ FeaturesDict({
 
 ### `"wmt_translate_enfr/enfr_subwords8k_t2t_small"`
 
-```
+```python
 FeaturesDict({
     'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8215>),
     'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8150>),
@@ -1690,7 +1666,7 @@ FeaturesDict({
 
 ### `"wmt_translate_enfr/enfr_plain_text_t2t_large"`
 
-```
+```python
 FeaturesDict({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'fr': Text(shape=(), dtype=tf.string, encoder=None),
@@ -1701,7 +1677,7 @@ FeaturesDict({
 
 ### `"wmt_translate_enfr/enfr_subwords8k_t2t_large"`
 
-```
+```python
 FeaturesDict({
     'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8222>),
     'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8181>),
@@ -1723,7 +1699,7 @@ VALIDATION |      3,000
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'en', u'fr')
+`(u'en', u'fr')`
 
 ### Citation
 ```
@@ -1741,7 +1717,6 @@ VALIDATION |      3,000
   pages     = {272--307},
   url       = {http://www.aclweb.org/anthology/W18-6401}
 }
-
 ```
 
 ---
@@ -1758,7 +1733,7 @@ This data set contains roughly 44,000 examples of robot pushing motions, includi
 * Version: `v1.0.0`
 
 ### Features
-```
+```python
 SequenceDict({
     'action': Tensor(shape=(4,), dtype=tf.float32),
     'endeffector_pos': Tensor(shape=(3,), dtype=tf.float32),
@@ -1780,7 +1755,7 @@ TEST       |        256
  * [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -1801,7 +1776,6 @@ TEST       |        256
   url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
   year = 2016
 }
-
 ```
 
 ---
@@ -1819,7 +1793,7 @@ for generating training/validation data from the MNIST dataset.
 * Version: `v0.1.0`
 
 ### Features
-```
+```python
 FeaturesDict({
     'image_sequence': Video(shape=(20, 64, 64, 1), dtype=tf.uint8, feature=Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
@@ -1837,7 +1811,7 @@ ALL        |     10,000
  * [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -1856,7 +1830,6 @@ ALL        |     10,000
   biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
@@ -1890,7 +1863,7 @@ configurations predefined (defaults to the first one):
 
 ### `"starcraft_video/brawl_64"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -1900,7 +1873,7 @@ FeaturesDict({
 
 ### `"starcraft_video/brawl_128"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -1910,7 +1883,7 @@ FeaturesDict({
 
 ### `"starcraft_video/collect_mineral_shards_64"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -1920,7 +1893,7 @@ FeaturesDict({
 
 ### `"starcraft_video/collect_mineral_shards_128"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -1930,7 +1903,7 @@ FeaturesDict({
 
 ### `"starcraft_video/move_unit_to_border_64"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -1940,7 +1913,7 @@ FeaturesDict({
 
 ### `"starcraft_video/move_unit_to_border_128"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -1950,7 +1923,7 @@ FeaturesDict({
 
 ### `"starcraft_video/road_trip_with_medivac_64"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -1960,7 +1933,7 @@ FeaturesDict({
 
 ### `"starcraft_video/road_trip_with_medivac_128"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -1982,7 +1955,7 @@ TEST       |      2,000
  * [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
 ### Supervised keys (for `as_supervised=True`)
-(u'', u'')
+`(u'', u'')`
 
 ### Citation
 ```
@@ -2005,7 +1978,6 @@ TEST       |      2,000
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---

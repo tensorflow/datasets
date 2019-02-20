@@ -47,7 +47,7 @@ DOC = """\
 
 ## Usage
 
-```
+```python
 # See all registered datasets
 tfds.list_builders()
 
@@ -118,13 +118,9 @@ configurations predefined (defaults to the first one):
 {urls}
 
 ### Supervised keys (for `as_supervised=True`)
-{supervised_keys}
+`{supervised_keys}`
 
-### Citation
-```
 {citation}
-```
-
 ---
 """
 
@@ -147,17 +143,20 @@ DATASET_ENTRY = """\
 {urls}
 
 ### Supervised keys (for `as_supervised=True`)
-{supervised_keys}
+`{supervised_keys}`
 
-### Citation
-```
 {citation}
-```
-
 ---
 """
 
 FEATURE_BLOCK = """\
+```python
+%s
+```
+"""
+
+CITATION_BLOCK = """\
+### Citation
 ```
 %s
 ```
@@ -229,7 +228,7 @@ def document_single_builder(builder):
         urls=format_urls(info.urls),
         url=url_from_info(info),
         supervised_keys=str(info.supervised_keys),
-        citation=info.citation,
+        citation=make_citation(info.citation),
         statistics_information=make_statistics_information(info),
         description=builder.info.description,
     )
@@ -246,7 +245,7 @@ def document_single_builder(builder):
         urls=format_urls(info.urls),
         url=url_from_info(info),
         supervised_keys=str(info.supervised_keys),
-        citation=info.citation,
+        citation=make_citation(info.citation),
     )
 
 
@@ -310,6 +309,10 @@ def _pprint_features_dict(features_dict, indent=0, add_prefix=True):
 def make_feature_information(info):
   """Make feature information table."""
   return FEATURE_BLOCK % _pprint_features_dict(info.features)
+
+
+def make_citation(citation):
+  return CITATION_BLOCK % citation.strip() if citation else ""
 
 
 def make_statistics_information(info):
