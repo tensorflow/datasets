@@ -427,6 +427,8 @@ def pad_decr(ids):
   """Strip ID 0 and decrement ids by 1."""
   if len(ids) < 1:
     return list(ids)
+  if not any(ids):
+    return []  # all padding.
   idx = -1
   while not ids[idx]:
     idx -= 1
