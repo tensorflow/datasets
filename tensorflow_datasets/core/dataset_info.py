@@ -329,12 +329,20 @@ class DatasetInfo(object):
       except ValueError:
         is_defined = bool(field_value)
 
+      try:
+        is_defined_in_restored = parsed_proto.HasField(field_name)
+      except ValueError:
+        is_defined_in_restored = bool(field_value_restored)
+
       # If field is defined in code, we ignore the value
       if is_defined:
         if field_value != field_value_restored:
           logging.info(
               "Field info.%s from disk and from code do not match. Keeping "
               "the one from code.", field_name)
+        continue
+      # If the field is also not defined in JSON file, we do nothing
+      if not is_defined_in_restored:
         continue
       # Otherwise, we restore the dataset_info.json value
       if field.type == field.TYPE_MESSAGE:

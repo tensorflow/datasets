@@ -35,6 +35,8 @@ tf.compat.v1.enable_eager_execution()
 _TFDS_DIR = py_utils.tfds_dir()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
                          "mnist", "1.0.0")
+_INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
+                                   "dataset_info", "mnist_unlabeled", "1.0.0")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
@@ -109,6 +111,13 @@ class DatasetInfoTest(testing.TestCase):
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
+
+  def test_reading_empty_properties(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    info.read_from_directory(_INFO_DIR_UNLABELED)
+
+    # Assert supervised_keys has not been set
+    self.assertEqual(None, info.supervised_keys)
 
   def test_writing(self):
     # First read in stuff.
