@@ -13,6 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Structured datasets."""
+"""Tests for titanic data loading."""
 
-from tensorflow_datasets.structured.titanic import Titanic
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets.structured import titanic
+import tensorflow_datasets.testing as tfds_test
+
+
+class TitanicTest(tfds_test.DatasetBuilderTestCase):
+  DATASET_CLASS = titanic.Titanic
+
+  SPLITS = {
+      'train': 5
+  }
+
+  DL_EXTRACT_RESULT = 'test.csv'
+
+if __name__ == '__main__':
+  tfds_test.test_main()
