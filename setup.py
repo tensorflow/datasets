@@ -73,6 +73,7 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     'cats_vs_dogs': ['matplotlib'],
     'svhn': ['scipy'],
+    'colorectal_histology': ['Pillow'],
 }
 
 all_dataset_extras = []
