@@ -35,5 +35,7 @@ Testing utilities.
 
 [`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary directory.
 
+[`mock_kaggle_api(...)`](../tfds/testing/mock_kaggle_api.md): Mock out the kaggle CLI.
+
 [`rm_tmp_dir(...)`](../tfds/testing/rm_tmp_dir.md): Rm temporary directory.
 

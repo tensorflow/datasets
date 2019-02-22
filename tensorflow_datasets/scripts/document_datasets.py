@@ -70,7 +70,7 @@ np_datasets = tfds.as_numpy(datasets)
 
 ---
 
-# Datasets
+## All Datasets
 
 {toc}
 
@@ -80,7 +80,7 @@ np_datasets = tfds.as_numpy(datasets)
 """
 
 SECTION_DATASETS = """\
-# [`{section_name}`](#{section_name})
+## [`{section_name}`](#{section_name})
 
 {datasets}
 """
@@ -90,14 +90,14 @@ CONFIG_BULLET = """\
 """
 
 SINGLE_CONFIG_ENTRY = """\
-### `"{builder_name}/{config_name}"`
+#### `"{builder_name}/{config_name}"`
 
 {feature_information}
 
 """
 
 DATASET_WITH_CONFIGS_ENTRY = """\
-## `"{snakecase_name}"`
+### `"{snakecase_name}"`
 
 {description}
 
@@ -111,13 +111,13 @@ configurations predefined (defaults to the first one):
 
 {configs}
 
-### Statistics
+#### Statistics
 {statistics_information}
 
-### Urls
+#### Urls
 {urls}
 
-### Supervised keys (for `as_supervised=True`)
+#### Supervised keys (for `as_supervised=True`)
 `{supervised_keys}`
 
 {citation}
@@ -125,7 +125,7 @@ configurations predefined (defaults to the first one):
 """
 
 DATASET_ENTRY = """\
-## `"{snakecase_name}"`
+### `"{snakecase_name}"`
 
 {description}
 
@@ -133,16 +133,16 @@ DATASET_ENTRY = """\
 * `DatasetBuilder`: [`{module_and_class}`]({cls_url})
 * Version: `v{version}`
 
-### Features
+#### Features
 {feature_information}
 
-### Statistics
+#### Statistics
 {statistics_information}
 
-### Urls
+#### Urls
 {urls}
 
-### Supervised keys (for `as_supervised=True`)
+#### Supervised keys (for `as_supervised=True`)
 `{supervised_keys}`
 
 {citation}
@@ -156,7 +156,7 @@ FEATURE_BLOCK = """\
 """
 
 CITATION_BLOCK = """\
-### Citation
+#### Citation
 ```
 %s
 ```

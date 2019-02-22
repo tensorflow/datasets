@@ -52,6 +52,7 @@
 <meta itemprop="property" content="assertLess"/>
 <meta itemprop="property" content="assertLessEqual"/>
 <meta itemprop="property" content="assertListEqual"/>
+<meta itemprop="property" content="assertLogs"/>
 <meta itemprop="property" content="assertMultiLineEqual"/>
 <meta itemprop="property" content="assertNDArrayNear"/>
 <meta itemprop="property" content="assertNear"/>
@@ -111,6 +112,7 @@
 <meta itemprop="property" content="failUnlessAlmostEqual"/>
 <meta itemprop="property" content="failUnlessEqual"/>
 <meta itemprop="property" content="failUnlessRaises"/>
+<meta itemprop="property" content="gcs_access"/>
 <meta itemprop="property" content="getExternalLinks"/>
 <meta itemprop="property" content="getRecordedProperties"/>
 <meta itemprop="property" content="get_temp_dir"/>
@@ -1074,6 +1076,17 @@ A list-specific equality assertion.
 * <b>`list2`</b>: The second list to compare.
 * <b>`msg`</b>: Optional message to use on failure instead of a list of
             differences.
+
+<h3 id="assertLogs"><code>assertLogs</code></h3>
+
+``` python
+assertLogs(
+    *args,
+    **kwds
+)
+```
+
+
 
 <h3 id="assertMultiLineEqual"><code>assertMultiLineEqual</code></h3>
 
@@ -2226,6 +2239,17 @@ failUnlessEqual(
 failUnlessRaises(
     *args,
     **kwargs
+)
+```
+
+
+
+<h3 id="gcs_access"><code>gcs_access</code></h3>
+
+``` python
+gcs_access(
+    *args,
+    **kwds
 )
 ```
 

@@ -7,6 +7,7 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
 <meta itemprop="property" content="download_and_extract"/>
+<meta itemprop="property" content="download_kaggle_data"/>
 <meta itemprop="property" content="extract"/>
 <meta itemprop="property" content="iter_archive"/>
 </div>
@@ -162,6 +163,14 @@ automatically be deduced from downloaded file name.
 #### Returns:
 
 extracted_path(s): `str`, extracted paths of given URL(s).
+
+<h3 id="download_kaggle_data"><code>download_kaggle_data</code></h3>
+
+``` python
+download_kaggle_data(competition_name)
+```
+
+Download data for a given Kaggle competition.
 
 <h3 id="extract"><code>extract</code></h3>
 
