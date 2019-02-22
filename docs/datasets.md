@@ -37,6 +37,8 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"cifar10"`](#cifar10)
   * [`"cifar100"`](#cifar100)
   * [`"coco2014"`](#coco2014)
+  * [`"colorectal_histology"`](#colorectal_histology)
+  * [`"colorectal_histology_large"`](#colorectal_histology_large)
   * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
   * [`"fashion_mnist"`](#fashion_mnist)
   * [`"image_label_folder"`](#image_label_folder)
@@ -49,6 +51,8 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"svhn_cropped"`](#svhn_cropped)
   * [`"tf_flowers"`](#tf_flowers)
 
+* [`structured`](#structured)
+  * [`"titanic"`](#titanic)
 * [`text`](#text)
   * [`"imdb_reviews"`](#imdb_reviews)
   * [`"lm1b"`](#lm1b)
@@ -124,7 +128,7 @@ TEST       |      4,096
  * [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -284,7 +288,7 @@ VALIDATION |     19,867
  * [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -480,7 +484,7 @@ ALL        |     30,000
  * [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -632,7 +636,7 @@ VALIDATION |     40,504
  * [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -657,6 +661,97 @@ VALIDATION |     40,504
   timestamp = {Mon, 13 Aug 2018 16:48:13 +0200},
   biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+---
+
+## `"colorectal_histology"`
+
+Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes.
+
+* URL: [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+* `DatasetBuilder`: [`tfds.image.colorectal_histology.ColorectalHistology`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/colorectal_histology.py)
+* Version: `v0.0.1`
+
+### Features
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(150, 150, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |      5,000
+ALL        |      5,000
+
+
+### Urls
+ * [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+### Citation
+```
+@article{kather2016multi,
+  title={Multi-class texture analysis in colorectal cancer histology},
+  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{"o}llner, Frank Gerrit},
+  journal={Scientific reports},
+  volume={6},
+  pages={27988},
+  year={2016},
+  publisher={Nature Publishing Group}
+}
+```
+
+---
+
+## `"colorectal_histology_large"`
+
+10 large 5000 x 5000 textured colorectal cancer histology images
+
+* URL: [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+* `DatasetBuilder`: [`tfds.image.colorectal_histology.ColorectalHistologyLarge`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/colorectal_histology.py)
+* Version: `v0.0.1`
+
+### Features
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(5000, 5000, 3), dtype=tf.uint8),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+TEST       |         10
+ALL        |         10
+
+
+### Urls
+ * [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+
+### Supervised keys (for `as_supervised=True`)
+`None`
+
+### Citation
+```
+@article{kather2016multi,
+  title={Multi-class texture analysis in colorectal cancer histology},
+  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{"o}llner, Frank Gerrit},
+  journal={Scientific reports},
+  volume={6},
+  pages={27988},
+  year={2016},
+  publisher={Nature Publishing Group}
 }
 ```
 
@@ -693,7 +788,7 @@ SAMPLE     |         10
  * [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -894,7 +989,7 @@ VALIDATION |        300
  * [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -1069,7 +1164,7 @@ VALIDATION |     41,620
  * [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -1246,6 +1341,66 @@ url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 
 ---
 
+
+
+# [`structured`](#structured)
+
+## `"titanic"`
+
+Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'.
+
+* URL: [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
+* `DatasetBuilder`: [`tfds.structured.titanic.Titanic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/titanic.py)
+* Version: `v1.0.0`
+
+### Features
+```python
+FeaturesDict({
+    'features': FeaturesDict({
+        'age': Tensor(shape=(), dtype=tf.float32),
+        'boat': Tensor(shape=(), dtype=tf.string),
+        'body': Tensor(shape=(), dtype=tf.int32),
+        'cabin': Tensor(shape=(), dtype=tf.string),
+        'embarked': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+        'fare': Tensor(shape=(), dtype=tf.float32),
+        'home.dest': Tensor(shape=(), dtype=tf.string),
+        'name': Tensor(shape=(), dtype=tf.string),
+        'parch': Tensor(shape=(), dtype=tf.int32),
+        'pclass': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'sex': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'sibsp': Tensor(shape=(), dtype=tf.int32),
+        'ticket': Tensor(shape=(), dtype=tf.string),
+    }),
+    'survived': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |      1,309
+ALL        |      1,309
+
+
+### Urls
+ * [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'features', u'survived')`
+
+### Citation
+```
+@ONLINE {titanic,
+author = "Frank E. Harrell Jr., Thomas Cason",
+title  = "Titanic dataset",
+month  = "oct",
+year   = "2017",
+url    = "https://www.openml.org/d/40945"
+}
+```
+
+---
 
 
 # [`text`](#text)
@@ -1755,7 +1910,7 @@ TEST       |        256
  * [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -1811,7 +1966,7 @@ ALL        |     10,000
  * [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
@@ -1955,7 +2110,7 @@ TEST       |      2,000
  * [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 ### Citation
 ```
