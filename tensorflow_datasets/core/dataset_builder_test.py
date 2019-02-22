@@ -121,7 +121,7 @@ class DatasetBuilderTest(testing.TestCase):
           splits_lib.Split.TRAIN, splits_lib.Split.TEST
       ]
       train_data, test_data = [
-          [el["x"] for el in
+          [el["x"] for el in   # pylint: disable=g-complex-comprehension
            dataset_utils.as_numpy(builder.as_dataset(split=split))]
           for split in splits_list
       ]
@@ -257,8 +257,8 @@ class DatasetBuilderTest(testing.TestCase):
       # Test that the config was used and they didn't collide.
       splits_list = [splits_lib.Split.TRAIN, splits_lib.Split.TEST]
       for builder, incr in [(builder1, 1), (builder2, 2)]:
-        train_data, test_data = [   # pylint: disable=g-complex-comprehension
-            [el["x"] for el in
+        train_data, test_data = [
+            [el["x"] for el in   # pylint: disable=g-complex-comprehension
              dataset_utils.as_numpy(builder.as_dataset(split=split))]
             for split in splits_list
         ]

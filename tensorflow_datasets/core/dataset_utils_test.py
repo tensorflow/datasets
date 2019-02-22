@@ -136,5 +136,46 @@ class DatasetAsNumPyTest(testing.TestCase):
     self.assertAllEqual(ds["a"], ds["b"])
 
 
+class DatasetUtilsTest(testing.TestCase):
+
+  def test_mask_to_instruction(self):
+    self.assertEqual(dataset_utils.mask_to_instruction([False]*5 + [True]*95), {
+        "skip": 5,
+        "take": 95,
+    })
+    self.assertEqual(dataset_utils.mask_to_instruction([True]*9 + [False]*91), {
+        "skip": 0,
+        "take": 9,
+    })
+    self.assertEqual(dataset_utils.mask_to_instruction([True]*100), {
+        "skip": 0,
+        "take": 100,
+    })
+    with self.assertRaisesWithPredicateMatch(AssertionError, "Invalid mask"):
+      # Not sum to 100
+      dataset_utils.mask_to_instruction([True] * 9 + [False] * 90)
+
+    with self.assertRaisesWithPredicateMatch(AssertionError, "Invalid mask"):
+      # Nothing read
+      dataset_utils.mask_to_instruction([False] * 100)
+
+    with self.assertRaisesWithPredicateMatch(AssertionError, "Invalid mask"):
+      # Multiple dispatched ds.take
+      dataset_utils.mask_to_instruction([True]*10 + [False]*80 + [True]*10)
+
+  def test_transpose_list_dict(self):
+
+    values = dataset_utils._transpose_list_dict([
+        {"a": 1, "b": {"c": 2}},
+        {"a": 11, "b": {"c": 12}},
+    ])
+
+    # Flatten numpy array as equality not supported with np.
+    values["a"] = list(values["a"])
+    values["b"]["c"] = list(values["b"]["c"])
+
+    self.assertEqual(values, {"a": [1, 11], "b": {"c": [2, 12]}})
+
+
 if __name__ == "__main__":
   testing.test_main()

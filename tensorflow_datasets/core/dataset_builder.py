@@ -679,7 +679,7 @@ class GeneratorBasedBuilder(DatasetBuilder):
     # to use and their associated slice
     list_sliced_split_info = read_instruction.get_list_sliced_split_info()
     # Resolve the SlicedSplitInfo objects into a list of
-    # {'filepath': 'path/to/data-00032-00100', 'mask': [True, True, False, ...]}
+    # {'filepath': 'path/to/data-00032-00100', 'mask_window': {...}}
     instruction_dicts = self._slice_split_info_to_instruction_dicts(
         list_sliced_split_info)
 
@@ -703,9 +703,11 @@ class GeneratorBasedBuilder(DatasetBuilder):
           split_info_list=[sliced_split_info.split_info],
       ):
         mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+        # TODO(b/120126758): Here, we could compute the offset for each shards
+        # using the total number of examples from the stats
         instruction_dicts.append({
             "filepath": filepath,
-            "mask": mask,
+            "mask_window": dataset_utils.mask_to_instruction(mask),
         })
     return instruction_dicts
 
