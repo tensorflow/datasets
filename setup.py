@@ -74,6 +74,11 @@ DATASET_EXTRAS = {
     'cats_vs_dogs': ['matplotlib'],
     'svhn': ['scipy'],
     'colorectal_histology': ['Pillow'],
+    'imagenet2012_corrupted': [
+        # This includes pre-built source; you may need to use an alternative
+        # route to install OpenCV
+        'opencv-python==3.4.0.14'
+    ],
 }
 
 all_dataset_extras = []

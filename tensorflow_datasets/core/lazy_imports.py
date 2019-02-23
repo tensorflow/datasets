@@ -46,6 +46,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def cv2(cls):
+    return _try_import("cv2")  # pylint: disable=unreachable
+
+  @utils.classproperty
+  @classmethod
   def pydub(cls):
     return _try_import("pydub")
 
