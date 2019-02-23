@@ -5,4 +5,5 @@ encoding/decoding/utility implementations.
 """
 from tensorflow_datasets.core.features.run_length_encoded_feature.run_length_encoded_feature import BinaryRunLengthEncodedFeature
 from tensorflow_datasets.core.features.run_length_encoded_feature.run_length_encoded_feature import RunLengthEncodedFeature
+from tensorflow_datasets.core.features.run_length_encoded_feature.run_length_encoded_feature import ShapedTensor
 from tensorflow_datasets.core.features.run_length_encoded_feature import rle

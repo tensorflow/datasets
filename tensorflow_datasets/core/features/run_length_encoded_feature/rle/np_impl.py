@@ -7,12 +7,16 @@ import numpy as np
 
 
 def brle_length(brle):
-  """Optimized implementation of `len(brle_to_dense(brle))`"""
+  """Length of dense form of binary run-length-encoded input.
+
+  Efficient implementation of `len(brle_to_dense(brle))`."""
   return np.sum(brle)
 
 
 def rle_length(rle):
-  """Optimized implementation of `len(rle_to_dense(rle_to_brle(rle)))`"""
+  """Length of dense form of run-length-encoded input.
+
+  Efficient implementation of `len(rle_to_dense(rle))`."""
   return np.sum(rle[1::2])
 
 
@@ -51,21 +55,6 @@ def rle_to_brle(rle, dtype=None):
     out = brle_to_brle(out, dtype=dtype)
   out = maybe_pad_brle(out)
   return out
-
-
-def brle_logical_not(brle):
-  """Get the BRLE encoding of the `logical_not`ed dense form of `brle`.
-
-  Equivalent to `dense_to_brle(np.logical_not(brle_to_dense(brle)))` but highly
-  optimized. Actual implementation just pads brle with a 0 on each end.
-
-  Args:
-    brle: rank 1 int array of
-  """
-  if brle[0] or brle[-1]:
-    return np.pad(brle, [1, 1], mode='constant')
-  else:
-    return brle[1:-1]
 
 
 def maybe_pad_brle(lengths, start_value=False):
@@ -161,33 +150,6 @@ def dense_to_brle(dense_data, dtype=np.int64):
 
 
 _ft = np.array([False, True], dtype=np.bool)
-
-
-def brle_to_dense(brle_data, vals=None):
-  """Decode binary run length encoded data to dense.
-
-  Args:
-    brle_data: BRLE counts of False/True values
-    vals: if not `None`, a length 2 array/list/tuple with False/True substitute
-      values, e.g. brle_to_dense([2, 3, 1, 0], [7, 9]) == [7, 7, 9, 9, 9, 7]
-
-  Returns:
-    rank 1 dense data of dtype `bool if vals is None else vals.dtype`
-  """
-  if vals is None:
-    vals = _ft
-  else:
-    vals = np.asarray(vals)
-    if vals.shape != (2,):
-      raise ValueError("vals.shape must be (2,), got %s" % (vals.shape))
-  ft = np.repeat(_ft[np.newaxis, :], len(brle_data) // 2, axis=0).flatten()
-  return np.repeat(ft, brle_data).flatten()
-
-
-def rle_to_dense(rle_data):
-  """Get the dense decoding of the associated run length encoded data."""
-  values, counts = np.reshape(rle_data, (-1, 2)).T
-  return np.repeat(values, counts)
 
 
 def dense_to_rle(dense_data, dtype=np.int64):

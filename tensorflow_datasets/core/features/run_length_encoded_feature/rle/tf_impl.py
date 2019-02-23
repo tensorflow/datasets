@@ -4,16 +4,7 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-
-REQUIRED_TF_VERSION = "1.13.0"
-
-
-def _assert_required_version(func_name):
-  from tensorflow_datasets.core import tf_compat
-  tf_compat.assert_tf_version_gte(
-    REQUIRED_TF_VERSION,
-    "`%s` requires at least tensorflow version {tf_version}, found {version}."
-    % func_name)
+from tensorflow_datasets.core import tf_compat
 
 
 def brle_length(brle):
@@ -54,12 +45,58 @@ def brle_to_dense(brle, vals=None):
     Dense representation, rank-1 tensor with dtype the same as vals or `tf.bool`
       if `vals is None`.
   """
-  _assert_required_version("brle_to_dense")
+  if hasattr(tf, 'RaggedTensor'):
+    return _brle_to_dense_ragged(brle, vals)
+  else:
+    return _brle_to_dense_loop(brle, vals)
+
+
+def _brle_to_dense_loop(brle, vals=None):
+  """brle_to_dense implementation using `tf.while_loop`."""
+  # foldl doesn't expose `shape_invariants`.
+  # possible optimization (or at least more elegance) if the following is
+  # accepted
+  # https://github.com/tensorflow/tensorflow/pull/26030
+  false_counts, true_counts = tf.unstack(tf.reshape(brle, (-1, 2)), axis=-1)
+  if vals is None:
+    def get_next(n_false, n_true):
+      return (
+        tf.zeros((n_false,), dtype=tf.bool), tf.ones((n_true,), dtype=tf.bool))
+  else:
+    if vals.shape != (2,):
+      raise ValueError('vals must have shape (2,), got %s' % (vals.shape))
+    false_val, true_val = tf.unstack(vals, axis=-1)
+
+    def get_next(n_false, n_true):
+      return (
+        tf.fill((n_false,), false_val), tf.fill((n_true,), true_val))
+
+  n_repeats = tf.size(false_counts)
+  _, accumulator = tf.while_loop(
+    lambda i, _: tf.less(i, n_repeats),
+    lambda i, acc:
+      (i+1, tf.concat(
+        (acc,) + get_next(false_counts[i], true_counts[i]), axis=0)),
+    loop_vars=(
+        tf.zeros_like(n_repeats),
+        tf.zeros((0,), dtype=tf.bool if vals is None else vals.dtype)),
+    back_prop=False,
+    shape_invariants=(tf.TensorShape(()), tf.TensorShape((None,)))
+  )
+  return accumulator
+
+
+def _brle_to_dense_ragged(brle, vals=None):
+  """brle_to_dense implementation using RaggedTensor. Requires tf 1.13."""
+  if not hasattr(tf, 'RaggedTensor'):
+    raise RuntimeError('_brle_to_dense_ragged requires tf.RaggedTensor')
+
   brle = tf.convert_to_tensor(brle)
   if not brle.dtype.is_integer:
     raise TypeError("`brle` must be of integer type.")
   if not brle.shape.ndims == 1:
     raise TypeError("`brle` must be a rank 1 tensor.")
+  brle = tf.cast(brle, tf.int64)
   enc_false, enc_true = tf.unstack(tf.reshape(brle, (-1, 2)), axis=1)
 
   n_false = tf.reduce_sum(enc_false)
@@ -85,17 +122,48 @@ def brle_to_dense(brle, vals=None):
   return ragged_all.values
 
 
-def tf_repeat(values, counts):
-  """Tensorflow implementation of np.repeat.
+def tf_repeat(values, repeats):
+  values = tf.convert_to_tensor(values)
+  repeats = tf.convert_to_tensor(repeats)
+  if not values.shape.is_compatible_with(repeats.shape):
+    raise ValueError(
+      'values and repeats shapes must be compatible, got %s and %s'
+      % (values.shape, repeats.shape))
 
-  Currently uses `tf.py_function`.
-  """
-  import numpy as np
-  def f(values, counts):
-    return np.repeat(values.numpy(), counts.numpy())
+  if values.shape.ndims != 1:
+    raise ValueError('values must be rank 1, got shape %s' % values.shape)
+  if repeats.shape.ndims != 1:
+    raise ValueError('repeats must be rank 1, got shape %s' % repeats.shape)
+  if not repeats.dtype.is_integer:
+    raise ValueError('repeats must be an integer, got %s' % repeats.dtype)
 
-  _assert_required_version("tf_repeat")
-  return tf.py_function(f, [values, counts], values.dtype, name='repeat')
+  # foldl doesn't expose `shape_invariants`.
+  # https://github.com/tensorflow/tensorflow/pull/26030
+  # If merged, the following is a more elegant implementation
+
+  # def fold_fn(red, elems):
+  #   value, repeat = elems
+  #   return tf.concat((red, tf.fill((repeat,), value)), axis=0)
+
+  # return tf.foldl(
+  #     fold_fn, (values, repeats),
+  #     back_prop=False,
+  #     initializer=tf.zeros((0,), dtype=values.dtype),
+  #     shape_invariants=tf.TensorShape((None,)))
+
+  n_repeats = tf.size(repeats)
+  _, accumulator = tf.while_loop(
+    lambda i, _: tf.less(i, n_repeats),
+    lambda i, acc:
+      (i+1, tf.concat((acc, tf.fill([repeats[i]], values[i])), axis=0)),
+    loop_vars=(
+        tf.zeros_like(n_repeats),
+        tf.zeros((0,), dtype=values.dtype)),
+    back_prop=False,
+    shape_invariants=(tf.TensorShape(()), tf.TensorShape((None,)))
+  )
+
+  return accumulator
 
 
 def rle_to_dense(rle, dtype=tf.int64):

@@ -6,69 +6,88 @@ import unittest
 import numpy as np
 
 from tensorflow_datasets.core.features.run_length_encoded_feature.rle import np_impl
-import tensorflow_datasets.core.features.run_length_encoded_feature.rle.shared_tests as st
 
 
-class BlreNpTest(unittest.TestCase, st.RleTest):
-  @property
-  def impl(self):
-    return np_impl
-
-  # RLE tests
-  def test_merge_rle_lengths(self):
-    st.test_merge_rle_lengths(self)
-
-  def test_split_long_rle_lengths(self):
-    st.test_split_long_rle_lengths(self)
+class BlreNpTest(unittest.TestCase):
+  def test_brle_length(self):
+    np.testing.assert_equal(np_impl.brle_length([5, 10, 3, 2]), 20)
 
   def test_rle_length(self):
-    st.test_rle_length(self)
+    np.testing.assert_equal(np_impl.rle_length([4, 10, 1, 20, 3, 30]), 60)
 
-  def test_rle_to_brle(self):
-    st.test_rle_to_brle(self)
+  def test_merge_rle_lengths(self):
+    v0, l0 = [5, 5, 2], [10, 10, 1]
+    v1, l1 = [5, 2], [20, 1]
+    v0, l0 = np_impl.merge_rle_lengths(v0, l0)
+    np.testing.assert_equal(v0, v1)
+    np.testing.assert_equal(l0, l1)
 
-  def test_rle_to_dense(self):
-    st.test_rle_to_dense(self)
+  def test_split_long_rle_lengths(self):
+    v0, l0 = [5], [300]
+    v1, l1 = [5, 5], [255, 45]
 
-  def test_rle_encode_decode(self):
-    st.test_rle_encode_decode(self)
+    v0, l0 = np_impl.split_long_rle_lengths(v0, l0, dtype=np.uint8)
+    np.testing.assert_equal(v0, v1)
+    np.testing.assert_equal(l0, l1)
 
-  def test_rle_decode_encode(self):
-    st.test_rle_decode_encode(self)
+    v0, l0 = [5, 2, 3], [10, 1000, 4]
+    v1, l1 = [5, 2, 2, 2, 2, 3], [10, 255, 255, 255, 235, 4]
 
-  # BRLE tests
-  def test_brle_logical_not(self):
-    st.test_brle_logical_not(self)
-
-  def test_brle_length(self):
-    st.test_brle_length(self)
+    v0, l0 = np_impl.split_long_rle_lengths(v0, l0, dtype=np.uint8)
+    np.testing.assert_equal(v0, v1)
+    np.testing.assert_equal(l0, l1)
 
   def test_maybe_pad_brle(self):
-    st.test_maybe_pad_brle(self)
+    np.testing.assert_equal(np_impl.maybe_pad_brle([5], 0), [5, 0])
+    np.testing.assert_equal(np_impl.maybe_pad_brle([5], 1), [0, 5])
+    np.testing.assert_equal(np_impl.maybe_pad_brle([5, 3], 0), [5, 3])
+    np.testing.assert_equal(np_impl.maybe_pad_brle([5, 3], 1), [0, 5, 3, 0])
 
   def test_merge_brle_lengths(self):
-    st.test_merge_brle_lengths(self)
+    np.testing.assert_equal(
+      np_impl.merge_brle_lengths([10, 0, 10, 2]), [20, 2])
+    np.testing.assert_equal(
+        np_impl.merge_brle_lengths([10, 0, 10, 2]), [20, 2])
+    np.testing.assert_equal(
+        np_impl.merge_brle_lengths([10, 1, 10, 2]), [10, 1, 10, 2])
+    np.testing.assert_equal(
+        np_impl.merge_brle_lengths([0, 10, 2, 3]), [0, 10, 2, 3])
 
   def test_split_long_brle_lengths(self):
-    st.test_split_long_brle_lengths(self)
+    np.testing.assert_equal(
+      np_impl.split_long_brle_lengths([300, 600, 10], np.uint8),
+      [255, 0, 45, 255, 0, 255, 0, 90, 10])
 
   def test_brle_split_merge(self):
-    st.test_brle_split_merge(self)
+    x = [300, 600, 10, 0]
+    split = np_impl.split_long_brle_lengths(x, np.uint8)
+    merged = np_impl.merge_brle_lengths(split)
+    np.testing.assert_equal(merged, x)
 
   def test_dense_to_brle(self):
-    st.test_dense_to_brle(self)
-
-  def test_brle_to_dense(self):
-    st.test_brle_to_dense(self)
+    x = np.array([False]*300 + [True]*200 + [False]*1000)
+    np.testing.assert_equal(np_impl.dense_to_brle(x), [300, 200, 1000, 0])
+    np.testing.assert_equal(
+        np_impl.dense_to_brle(x, np.uint8),
+        [255, 0, 45, 200, 255, 0, 255, 0, 255, 0, 235, 0])
 
   def test_brle_to_rle(self):
-    st.test_brle_to_rle(self)
+    np.testing.assert_equal(
+        np_impl.brle_to_rle([0, 5, 2, 0]), [1, 5, 0, 2])
 
-  def test_brle_encode_decode(self):
-    st.test_brle_encode_decode(self)
-
-  def test_brle_decode_encode(self):
-    st.test_brle_decode_encode(self)
+  def test_rle_to_brle(self):
+    np.testing.assert_equal(
+        np_impl.rle_to_brle([0, 5, 1, 3, 0, 10]),
+        [5, 3, 10, 0])
+    np.testing.assert_equal(
+        np_impl.rle_to_brle([0, 5, 0, 3, 1, 10]),
+        [8, 10])
+    np.testing.assert_equal(
+        np_impl.rle_to_brle([1, 5, 0, 3, 1, 10]),
+        [0, 5, 3, 10])
+    np.testing.assert_equal(
+        np_impl.rle_to_brle([1, 5, 0, 2]),
+        [0, 5, 2, 0])
 
 
 if __name__ == '__main__':

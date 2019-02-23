@@ -265,9 +265,7 @@ class ShapenetR2n2(tfds.core.GeneratorBasedBuilder):
     features = dict(
         cat_id=tfds.features.ClassLabel(names=cat_ids()),
         example_id=tfds.features.Text(),
-        voxels=tfds.features.StaticShapedTensor(
-            tfds.features.BinaryRunLengthEncodedFeature(np.prod(VOXEL_SHAPE)),
-            shape=VOXEL_SHAPE))
+        voxels=tfds.features.BinaryRunLengthEncodedFeature(shape=VOXEL_SHAPE))
     rendering_feature_dict = dict(
         image=tfds.features.Image(shape=IMAGE_SHAPE),
         meta=tfds.features.Tensor(shape=(5,), dtype=tf.float32))
