@@ -66,9 +66,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager):
-        # Downloads the data and defines the splits
-        # dl_manager is a tfds.download.DownloadManager that can be used to
-        # download and extract URLs
         path = dl_manager.manual_dir
         train_path = os.path.join(path, _TRAIN_DIR)
         val_path = os.path.join(path, _VALIDATION_DIR)
@@ -98,7 +95,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         ]
 
     def _generate_examples(self, imgs_path, csv_path):
-        # Yields examples from the dataset
         with tf.io.gfile.GFile(csv_path) as csv_f:
             reader = csv.DictReader(csv_f)
             # Get keys for each label from csv
