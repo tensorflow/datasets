@@ -48,8 +48,7 @@ _LABELS = ['', '-1.0', '0.0', '1.0']
 class Chexpert(tfds.core.GeneratorBasedBuilder):
     """CheXpert 2019."""
 
-    VERSION = tfds.core.Version('2.0.0')
-    # 1.0.0 to 2.0.0: fix validation labels.
+    VERSION = tfds.core.Version('1.0.0')
 
     def _info(self):
         return tfds.core.DatasetInfo(
