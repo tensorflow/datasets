@@ -34,3 +34,4 @@ from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.svhn import SvhnCropped
+from tensorflow_datasets.image.chexpert import Chexpert
