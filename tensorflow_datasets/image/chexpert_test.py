@@ -10,8 +10,8 @@ from tensorflow_datasets.image import chexpert
 class ChexpertTest(testing.DatasetBuilderTestCase):
     DATASET_CLASS = chexpert.Chexpert
     SPLITS = {
-        "train": 10,
-        "test": 2,
+        "train": 1,
+        "validation": 1,
     }
 
 
