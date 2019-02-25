@@ -1,3 +1,6 @@
+"""https://stanfordmlgroup.github.io/competitions/chexpert/"""
+
+import csv
 import os
 
 import tensorflow_datasets.public_api as tfds
@@ -52,9 +55,10 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
             builder=self,
             description=_DESCRIPTION,
             features=tfds.features.FeaturesDict({
+                "name": tfds.features.Text(), # patient info
                 "image": tfds.features.Image(),
-                "label": tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
-                "file_name": tfds.features.Text(),
+                "label": tfds.features.Sequence(
+                    tfds.features.ClassLabel(num_classes=_NUM_CLASSES)),
             }),
             supervised_keys=("image", "label"),
             urls=["https://stanfordmlgroup.github.io/competitions/chexpert/"],
@@ -70,8 +74,8 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         val_path = os.path.join(path, _VALIDATION_DIR)
 
         if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
-            msg = 'You must download the dataset files manually and place them in: '
-            msg += f'{train_path}, {val_path}'
+            msg = 'You must download the dataset folder manually and place' + \
+                  f'contents into {path}'
             raise AssertionError(msg)
 
         return [
@@ -79,7 +83,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 name=tfds.Split.TRAIN,
                 num_shards=1000,
                 gen_kwargs={
-                    "archive": dl_manager.iter_archive(train_path),
+                    "imgs_path": path,
                     "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME),
                 },
             ),
@@ -87,13 +91,27 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 name=tfds.Split.VALIDATION,
                 num_shards=10,
                 gen_kwargs={
-                    "archive": dl_manager.iter_archive(val_path),
+                    "imgs_path": path,
                     "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME),
                 },
             ),
         ]
 
-    def _generate_examples(self, archive, csv_path):
+    def _generate_examples(self, imgs_path, csv_path):
         # Yields examples from the dataset
-        for name, img in archive:
-            pass
+        with tf.io.gfile.GFile(csv_path) as csv_f:
+            reader = csv.DictReader(csv_f)
+            # Get keys for each label using n csv structure
+            label_keys = reader.fieldnames[5:]
+            data = []
+            for row in reader:
+                # Get image based on indicated path in csv
+                name = row['Path']
+                labels = [int(float(row[key])) for key in label_keys]
+                data.append((name, labels))
+        for name, labels in data:
+            yield {
+                'name': name,
+                'image': f'{imgs_path}/{name}',
+                'label': labels
+            }
