@@ -18,9 +18,6 @@ or uncertain. We decided on the 14 observations based on the prevalence in the
 reports and clinical relevance.
 '''
 
-# Number of observations (labels) per image
-_NUM_CLASSES = 14
-
 _CITATION = '''\
 @article{DBLP:journals/corr/abs-1901-07031,
   author    = {Jeremy Irvin and Pranav Rajpurkar and Michael Ko and Yifan Yu and Silviana Ciurea{-}Ilcus and Chris Chute and Henrik Marklund and Behzad Haghgoo and Robyn L. Ball and Katie Shpanskaya and Jayne Seekins and David A. Mong and Safwan S. Halabi and Jesse K. Sandberg and Ricky Jones and David B. Larson and Curtis P. Langlotz and Bhavik N. Patel and Matthew P. Lungren and Andrew Y. Ng},
@@ -37,11 +34,15 @@ _CITATION = '''\
 }
 '''
 
-# Files contain paths to images and category labels
-_TRAIN_DIR = 'train'
-_VALIDATION_DIR = 'valid'
-_TRAIN_LABELS_FNAME = 'train.csv'
-_VALIDATION_LABELS_FNAME = 'valid.csv'
+# Path to images and category labels in data dir
+_DATA_DIR =                   'CheXpert-v1.0-small'
+_TRAIN_DIR =                   f'{_DATA_DIR}/train'
+_VALIDATION_DIR =              f'{_DATA_DIR}/valid'
+_TRAIN_LABELS_FNAME =      f'{_DATA_DIR}/train.csv'
+_VALIDATION_LABELS_FNAME = f'{_DATA_DIR}/valid.csv'
+
+# Labels per category
+_LABELS = ['', '-1.0', '0.0', '1.0']
 
 
 class Chexpert(tfds.core.GeneratorBasedBuilder):
@@ -55,10 +56,10 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
             builder=self,
             description=_DESCRIPTION,
             features=tfds.features.FeaturesDict({
-                "name": tfds.features.Text(), # patient info
+                "name": tfds.features.Text(),  # patient info
                 "image": tfds.features.Image(),
                 "label": tfds.features.Sequence(
-                    tfds.features.ClassLabel(num_classes=_NUM_CLASSES)),
+                    tfds.features.ClassLabel(names=_LABELS)),
             }),
             supervised_keys=("image", "label"),
             urls=["https://stanfordmlgroup.github.io/competitions/chexpert/"],
@@ -74,17 +75,17 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         val_path = os.path.join(path, _VALIDATION_DIR)
 
         if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
-            msg = 'You must download the dataset folder manually and place' + \
-                  f'contents into {path}'
+            msg = 'You must download the dataset folder from CheXpert' + \
+                  f'website manually and place it into {path}.'
             raise AssertionError(msg)
 
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
-                num_shards=1000,
+                num_shards=100,
                 gen_kwargs={
-                    "imgs_path": path,
-                    "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME),
+                    "imgs_path": path,  # Relative img path is provided in csv
+                    "csv_path": f'{path}/{_TRAIN_LABELS_FNAME}',
                 },
             ),
             tfds.core.SplitGenerator(
@@ -92,7 +93,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 num_shards=10,
                 gen_kwargs={
                     "imgs_path": path,
-                    "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME),
+                    "csv_path": f'{path}/{_VALIDATION_LABELS_FNAME}',
                 },
             ),
         ]
@@ -101,14 +102,15 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         # Yields examples from the dataset
         with tf.io.gfile.GFile(csv_path) as csv_f:
             reader = csv.DictReader(csv_f)
-            # Get keys for each label using n csv structure
+            # Get keys for each label from csv
             label_keys = reader.fieldnames[5:]
             data = []
             for row in reader:
                 # Get image based on indicated path in csv
                 name = row['Path']
-                labels = [int(float(row[key])) for key in label_keys]
+                labels = [row[key] for key in label_keys]
                 data.append((name, labels))
+
         for name, labels in data:
             yield {
                 'name': name,
