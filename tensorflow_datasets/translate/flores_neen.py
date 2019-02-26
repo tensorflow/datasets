@@ -13,11 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Translation datasets."""
+"""FLoRes Nepali-English translation dataset."""
 
-from tensorflow_datasets.translate.flores import FloresConfig
-from tensorflow_datasets.translate.flores_neen import FloresTranslateNeen
-from tensorflow_datasets.translate.flores_sien import FloresTranslateSien
-from tensorflow_datasets.translate.wmt import WMTConfig
-from tensorflow_datasets.translate.wmt_ende import WmtTranslateEnde
-from tensorflow_datasets.translate.wmt_enfr import WmtTranslateEnfr
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets.translate import flores
+
+
+class FloresTranslateNeen(flores.FloresTranslate):
+  """FLoRes Nepali-English translation dataset."""
+
+  def is_abstract(self):
+    return False
+
+  BUILDER_CONFIGS = [
+      flores.FloresConfig(
+          language_pair=("ne", "en"),
+          version="0.0.1",
+      ),
+  ]
