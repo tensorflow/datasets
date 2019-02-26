@@ -50,3 +50,15 @@ def get_random_jpeg(height=None, width=None):
   fobj.write(res)
   fobj.close()
   return fobj.name
+
+
+def get_random_png(height=None, width=None):
+  """Returns path to PNG picture."""
+  image = get_random_picture(height, width)
+  png = tf.image.encode_png(image)
+  with utils.nogpu_session() as sess:
+    res = sess.run(png)
+  fobj = tempfile.NamedTemporaryFile(delete=False, mode='wb', suffix='.PNG')
+  fobj.write(res)
+  fobj.close()
+  return fobj.name
