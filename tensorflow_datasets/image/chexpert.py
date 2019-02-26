@@ -2,6 +2,7 @@
 
 import csv
 import os
+from collections import OrderedDict
 
 import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
@@ -46,8 +47,12 @@ _TRAIN_LABELS_FNAME = os.path.join(_DATA_DIR, 'train.csv')
 _VALIDATION_LABELS_FNAME = os.path.join(_DATA_DIR, 'valid.csv')
 
 # Labels per category
-_LABELS = ['', '-1.0', '0.0', '1.0']
-
+_LABELS = OrderedDict({
+  "-1.0": "uncertain",
+  "1.0": "positive",
+  "0.0": "negative",
+  "": "unmentioned",
+})
 
 class Chexpert(tfds.core.GeneratorBasedBuilder):
     """CheXpert 2019."""
@@ -62,7 +67,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 "name": tfds.features.Text(),  # patient info
                 "image": tfds.features.Image(),
                 "label": tfds.features.Sequence(
-                    tfds.features.ClassLabel(names=_LABELS)),
+                    tfds.features.ClassLabel(names=_LABELS.values())),
             }),
             supervised_keys=("image", "label"),
             urls=["https://stanfordmlgroup.github.io/competitions/chexpert/"],
@@ -107,7 +112,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
             for row in reader:
                 # Get image based on indicated path in csv
                 name = row['Path']
-                labels = [row[key] for key in label_keys]
+                labels = [_LABELS[row[key]] for key in label_keys]
                 data.append((name, labels))
 
         for name, labels in data:
