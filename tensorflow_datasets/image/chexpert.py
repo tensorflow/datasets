@@ -16,6 +16,10 @@ radiology reports were retrospectively collected from Stanford Hospital. Each
 report was labeled for the presence of 14 observations as positive, negative, 
 or uncertain. We decided on the 14 observations based on the prevalence in the 
 reports and clinical relevance.
+
+The CheXpert dataset must be downloaded separately after reading and agreeing 
+to a Research Use Agreement. To do so, please follow the instructions on the 
+website, https://stanfordmlgroup.github.io/competitions/chexpert/.
 '''
 
 _CITATION = '''\
