@@ -39,11 +39,11 @@ _CITATION = '''\
 '''
 
 # Path to images and category labels in data dir
-_DATA_DIR =                   'CheXpert-v1.0-small'
-_TRAIN_DIR =                   f'{_DATA_DIR}/train'
-_VALIDATION_DIR =              f'{_DATA_DIR}/valid'
-_TRAIN_LABELS_FNAME =      f'{_DATA_DIR}/train.csv'
-_VALIDATION_LABELS_FNAME = f'{_DATA_DIR}/valid.csv'
+_DATA_DIR = 'CheXpert-v1.0-small'
+_TRAIN_DIR = os.path.join(_DATA_DIR, 'train')
+_VALIDATION_DIR = os.path.join(_DATA_DIR, 'valid')
+_TRAIN_LABELS_FNAME = os.path.join(_DATA_DIR, 'train.csv')
+_VALIDATION_LABELS_FNAME = os.path.join(_DATA_DIR, 'valid.csv')
 
 # Labels per category
 _LABELS = ['', '-1.0', '0.0', '1.0']
@@ -76,7 +76,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
 
         if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
             msg = 'You must download the dataset folder from CheXpert' + \
-                  f'website manually and place it into {path}.'
+                  'website manually and place it into %s.' % path
             raise AssertionError(msg)
 
         return [
@@ -85,7 +85,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 num_shards=100,
                 gen_kwargs={
                     "imgs_path": path,  # Relative img path is provided in csv
-                    "csv_path": f'{path}/{_TRAIN_LABELS_FNAME}',
+                    "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME)
                 },
             ),
             tfds.core.SplitGenerator(
@@ -93,7 +93,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 num_shards=10,
                 gen_kwargs={
                     "imgs_path": path,
-                    "csv_path": f'{path}/{_VALIDATION_LABELS_FNAME}',
+                    "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME)
                 },
             ),
         ]
@@ -113,6 +113,6 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         for name, labels in data:
             yield {
                 'name': name,
-                'image': f'{imgs_path}/{name}',
+                'image': os.path.join(imgs_path, name),
                 'label': labels
             }
