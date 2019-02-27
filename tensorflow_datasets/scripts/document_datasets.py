@@ -357,13 +357,13 @@ def dataset_docs_str():
 
 
 JSON_LD_STR = """\
-{
+{{
   "@context": "https://schema.org/",
   "@type": "Dataset",
   "name": "{name}",
   "description": "{description}",
   "url": {url},
-}
+}}
 """
 
 
