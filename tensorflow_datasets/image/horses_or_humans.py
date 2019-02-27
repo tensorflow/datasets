@@ -45,7 +45,7 @@ _NAME_RE = re.compile(r"^(humans|horses)/[\w-]*\.png$")
 class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
   """Horses or Humans dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
