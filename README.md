@@ -2,7 +2,7 @@
 
 TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 
-[![Kokoro](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
+[![Kokoro](https://svgshare.com/i/BUp.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
 
 * [List of datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
