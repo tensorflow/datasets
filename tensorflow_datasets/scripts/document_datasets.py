@@ -356,6 +356,40 @@ def dataset_docs_str():
   return full_doc
 
 
+JSON_LD_STR = """\
+{
+  "@context": "https://schema.org/",
+  "@type": "Dataset",
+  "name": "{name}",
+  "description": "{description}",
+  "url": {url},
+}
+"""
+
+
+def schema_org(builder):
+  # pylint: disable=line-too-long
+  """Builds schema.org JSON-LD for DatasetSearch from DatasetBuilder.
+
+  Markup spec: https://developers.google.com/search/docs/data-types/dataset#dataset
+  Testing tool: https://search.google.com/structured-data/testing-tool
+  For Google Dataset Search: https://toolbox.google.com/datasetsearch
+
+  Args:
+    builder: `tfds.core.DatasetBuilder`
+
+  Returns:
+    JSON-LD str.
+  """
+  # pylint: enable=line-too-long
+  info = builder.info
+  return JSON_LD_STR.format(
+      name=builder.name,
+      description=info.description,
+      url=str(info.urls[0]).replace("'", "\""),
+  )
+
+
 def main(_):
   print(dataset_docs_str())
 
