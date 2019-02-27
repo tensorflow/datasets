@@ -18,6 +18,7 @@
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
+from tensorflow_datasets.image.chexpert import Chexpert
 from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.coco import Coco2014

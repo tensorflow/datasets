@@ -158,7 +158,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   def test_registered(self):
     is_registered = self.builder.name in registered.list_builders()
-    self.assertTrue(is_registered or self.builder.IN_DEVELOPMENT,
+    exceptions = self.builder.IN_DEVELOPMENT
+    self.assertTrue(is_registered or exceptions,
                     "Dataset was not registered and is not `IN_DEVELOPMENT`.")
 
   def test_info(self):

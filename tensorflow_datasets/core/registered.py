@@ -47,6 +47,7 @@ _ABSTRACT_DATASET_REGISTRY = {}
 # <str snake_cased_name, in development DatasetBuilder subclass>
 _IN_DEVELOPMENT_REGISTRY = {}
 
+
 _NAME_STR_ERR = """\
 Parsing builder name string failed.
 The builder name string must be in one of the following formats:
@@ -100,6 +101,7 @@ class RegisteredDataset(abc.ABCMeta):
     if name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
+
     if inspect.isabstract(cls):
       _ABSTRACT_DATASET_REGISTRY[name] = cls
     elif class_dict.get("IN_DEVELOPMENT"):
