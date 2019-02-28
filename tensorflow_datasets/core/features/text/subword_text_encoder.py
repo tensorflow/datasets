@@ -81,6 +81,9 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     """Encodes text into a list of integers."""
     s = tf.compat.as_text(s)
     tokens = self._tokenizer.tokenize(s)
+    return self.encode_tokens(tokens)
+
+  def encode_tokens(self, tokens):
     tokens = _prepare_tokens_for_encode(tokens)
     ids = []
     for token in tokens:
@@ -88,6 +91,10 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     return text_encoder.pad_incr(ids)
 
   def decode(self, ids):
+    subwords = self.decode_tokens(ids)
+    return tf.compat.as_text("".join(subwords))
+
+  def decode_tokens(self, ids):
     """Decodes a list of integers into text."""
     ids = text_encoder.pad_decr(ids)
     subword_ids = ids
@@ -123,7 +130,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
     # If there were trailing bytes, convert to unicode.
     prev_bytes = consume_prev_bytes()
 
-    return tf.compat.as_text("".join(subwords))
+    return subwords
 
   @property
   def vocab_size(self):
