@@ -95,7 +95,7 @@ class WmtTranslateEnfr(wmt.WmtTranslate):
       # EN-FR translations (matching the data used by Tensor2Tensor library).
       wmt.WMTConfig(
           language_pair=("en", "fr"),
-          version="0.0.1",
+          version="0.0.2",
           name_suffix="t2t_small",
           data={
               "train": T2T_ENFR_TRAIN_SMALL,
@@ -103,7 +103,7 @@ class WmtTranslateEnfr(wmt.WmtTranslate):
           }),
       wmt.WMTConfig(
           language_pair=("en", "fr"),
-          version="0.0.1",
+          version="0.0.2",
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               name="subwords8k",
@@ -115,7 +115,7 @@ class WmtTranslateEnfr(wmt.WmtTranslate):
           }),
       wmt.WMTConfig(
           language_pair=("en", "fr"),
-          version="0.0.1",
+          version="0.0.2",
           name_suffix="t2t_large",
           data={
               "train": T2T_ENFR_TRAIN_LARGE,
@@ -123,7 +123,7 @@ class WmtTranslateEnfr(wmt.WmtTranslate):
           }),
       wmt.WMTConfig(
           language_pair=("en", "fr"),
-          version="0.0.1",
+          version="0.0.2",
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               name="subwords8k",
