@@ -77,7 +77,7 @@ mnist_builder = tfds.builder("mnist")
 mnist_builder.download_and_prepare()
 
 # Construct a tf.data.Dataset
-dataset = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
+ds = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
 
 # Get the `DatasetInfo` object, which contains useful information about the
 # dataset and its features
@@ -132,9 +132,9 @@ You can also use `tfds.as_numpy` in conjunction with `batch_size=-1` to
 get the full dataset in NumPy arrays from the returned `tf.Tensor` object:
 
 ```python
-train_data = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
-numpy_data = tfds.as_numpy(train_data)
-numpy_images, numpy_labels = numpy_dataset["image"], numpy_dataset["label"]
+train_ds = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
+numpy_ds = tfds.as_numpy(train_ds)
+numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
 ```
 
 Note that the library still requires `tensorflow` as an internal dependency.
