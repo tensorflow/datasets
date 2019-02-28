@@ -34,6 +34,7 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"cats_vs_dogs"`](#cats_vs_dogs)
   * [`"celeb_a"`](#celeb_a)
   * [`"celeb_a_hq"`](#celeb_a_hq)
+  * [`"chexpert"`](#chexpert)
   * [`"cifar10"`](#cifar10)
   * [`"cifar100"`](#cifar100)
   * [`"coco2014"`](#coco2014)
@@ -41,6 +42,7 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"colorectal_histology_large"`](#colorectal_histology_large)
   * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
   * [`"fashion_mnist"`](#fashion_mnist)
+  * [`"horses_or_humans"`](#horses_or_humans)
   * [`"image_label_folder"`](#image_label_folder)
   * [`"imagenet2012"`](#imagenet2012)
   * [`"lsun"`](#lsun)
@@ -48,9 +50,9 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"omniglot"`](#omniglot)
   * [`"open_images_v4"`](#open_images_v4)
   * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
+  * [`"rock_paper_scissors"`](#rock_paper_scissors)
   * [`"svhn_cropped"`](#svhn_cropped)
   * [`"tf_flowers"`](#tf_flowers)
-
 * [`structured`](#structured)
   * [`"titanic"`](#titanic)
 * [`text`](#text)
@@ -58,6 +60,8 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"lm1b"`](#lm1b)
   * [`"squad"`](#squad)
 * [`translate`](#translate)
+  * [`"flores_translate_neen"`](#flores_translate_neen)
+  * [`"flores_translate_sien"`](#flores_translate_sien)
   * [`"wmt_translate_ende"`](#wmt_translate_ende)
   * [`"wmt_translate_enfr"`](#wmt_translate_enfr)
 * [`video`](#video)
@@ -183,7 +187,7 @@ ALL        |     23,262
  * [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -508,6 +512,64 @@ ALL        |     30,000
 
 ---
 
+### `"chexpert"`
+
+CheXpert is a large dataset of chest X-rays and competition for automated chest 
+x-ray interpretation, which features uncertainty labels and radiologist-labeled 
+reference standard evaluation sets. It consists of 224,316 chest radiographs 
+of 65,240 patients, where the chest radiographic examinations and the associated 
+radiology reports were retrospectively collected from Stanford Hospital. Each 
+report was labeled for the presence of 14 observations as positive, negative, 
+or uncertain. We decided on the 14 observations based on the prevalence in the 
+reports and clinical relevance.
+
+The CheXpert dataset must be downloaded separately after reading and agreeing 
+to a Research Use Agreement. To do so, please follow the instructions on the 
+website, https://stanfordmlgroup.github.io/competitions/chexpert/.
+
+
+* URL: [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
+* `DatasetBuilder`: [`tfds.image.chexpert.Chexpert`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/chexpert.py)
+* Version: `v1.0.0`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=4)),
+    'name': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+#### Statistics
+None computed
+
+#### Urls
+ * [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
+
+#### Supervised keys (for `as_supervised=True`)
+`('image', 'label')`
+
+#### Citation
+```
+@article{DBLP:journals/corr/abs-1901-07031,
+  author    = {Jeremy Irvin and Pranav Rajpurkar and Michael Ko and Yifan Yu and Silviana Ciurea{-}Ilcus and Chris Chute and Henrik Marklund and Behzad Haghgoo and Robyn L. Ball and Katie Shpanskaya and Jayne Seekins and David A. Mong and Safwan S. Halabi and Jesse K. Sandberg and Ricky Jones and David B. Larson and Curtis P. Langlotz and Bhavik N. Patel and Matthew P. Lungren and Andrew Y. Ng},
+  title     = {CheXpert: {A} Large Chest Radiograph Dataset with Uncertainty Labels and Expert Comparison},
+  journal   = {CoRR},
+  volume    = {abs/1901.07031},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1901.07031},
+  archivePrefix = {arXiv},
+  eprint    = {1901.07031},
+  timestamp = {Fri, 01 Feb 2019 13:39:59 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1901-07031},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+---
+
 ### `"cifar10"`
 
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.
@@ -537,7 +599,7 @@ TEST       |     10,000
  * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -581,7 +643,7 @@ TEST       |     10,000
  * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -695,7 +757,7 @@ ALL        |      5,000
  * [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -832,7 +894,7 @@ TEST       |     10,000
  * [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -851,6 +913,50 @@ TEST       |     10,000
   timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+---
+
+### `"horses_or_humans"`
+
+A large set of images of horses and humans.
+
+* URL: [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
+* `DatasetBuilder`: [`tfds.image.horses_or_humans.HorsesOrHumans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/horses_or_humans.py)
+* Version: `v1.0.0`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      1,283
+TRAIN      |      1,027
+TEST       |        256
+
+
+#### Urls
+ * [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
+
+#### Supervised keys (for `as_supervised=True`)
+`('image', 'label')`
+
+#### Citation
+```
+@ONLINE {horses_or_humans,
+author = "Laurence Moroney",
+title = "Horses or Humans Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/horses-or-humans-dataset"
 }
 ```
 
@@ -880,7 +986,7 @@ None computed
 
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 
 ---
@@ -923,7 +1029,7 @@ VALIDATION |     50,000
  * [http://image-net.org/](http://image-net.org/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -1041,7 +1147,7 @@ TEST       |     10,000
  * [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -1091,7 +1197,7 @@ SMALL1     |      2,720
  * [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -1246,11 +1352,50 @@ ALL        | 50,426,266
  * [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
 A Neural Representation of Sketch Drawings, D. Ha and D. Eck, arXiv:1704.03477v4, 2017.
+```
+
+---
+
+### `"rock_paper_scissors"`
+
+Images of hands playing rock, paper, scissor game.
+
+* URL: [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
+* `DatasetBuilder`: [`tfds.image.rock_paper_scissors.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/rock_paper_scissors.py)
+* Version: `v1.0.0`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+})
+```
+
+
+#### Statistics
+None computed
+
+#### Urls
+ * [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
+
+#### Supervised keys (for `as_supervised=True`)
+`('image', 'label')`
+
+#### Citation
+```
+@ONLINE {rps,
+author = "Laurence Moroney",
+title = "Rock, Paper, Scissors Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
+}
 ```
 
 ---
@@ -1285,7 +1430,7 @@ TEST       |     26,032
  * [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -1327,7 +1472,7 @@ ALL        |      3,670
  * [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -1340,7 +1485,6 @@ url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 ```
 
 ---
-
 
 
 ## [`structured`](#structured)
@@ -1387,7 +1531,7 @@ ALL        |      1,309
  * [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'features', u'survived')`
+`('features', 'survived')`
 
 #### Citation
 ```
@@ -1482,7 +1626,7 @@ TEST       |     25,000
  * [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'text', u'label')`
+`('text', 'label')`
 
 #### Citation
 ```
@@ -1569,7 +1713,7 @@ None computed
  * [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'text', u'text')`
+`('text', 'text')`
 
 #### Citation
 ```
@@ -1677,7 +1821,7 @@ VALIDATION |     10,570
  * [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'', u'')`
+`None`
 
 #### Citation
 ```
@@ -1698,6 +1842,104 @@ archivePrefix = {arXiv},
 
 
 ## [`translate`](#translate)
+
+### `"flores_translate_neen"`
+
+Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.
+
+
+* URL: [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+* `DatasetBuilder`: [`tfds.translate.flores_neen.FloresTranslateNeen`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores_neen.py)
+
+`flores_translate_neen` is configured with `tfds.translate.flores_neen.FloresConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"neen_plain_text"` (`v0.0.1`): Translation dataset from ne to en, uses encoder plain_text.
+
+
+#### `"flores_translate_neen/neen_plain_text"`
+
+```python
+FeaturesDict({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ne': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+None computed
+
+#### Urls
+ * [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+
+#### Supervised keys (for `as_supervised=True`)
+`('ne', 'en')`
+
+#### Citation
+```
+@misc{guzmn2019new,
+    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},
+    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},
+    year={2019},
+    eprint={1902.01382},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+
+---
+
+### `"flores_translate_sien"`
+
+Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.
+
+
+* URL: [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+* `DatasetBuilder`: [`tfds.translate.flores_sien.FloresTranslateSien`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores_sien.py)
+
+`flores_translate_sien` is configured with `tfds.translate.flores_sien.FloresConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"sien_plain_text"` (`v0.0.1`): Translation dataset from si to en, uses encoder plain_text.
+
+
+#### `"flores_translate_sien/sien_plain_text"`
+
+```python
+FeaturesDict({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'si': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+None computed
+
+#### Urls
+ * [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+
+#### Supervised keys (for `as_supervised=True`)
+`('si', 'en')`
+
+#### Citation
+```
+@misc{guzmn2019new,
+    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},
+    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},
+    year={2019},
+    eprint={1902.01382},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+
+---
 
 ### `"wmt_translate_ende"`
 
@@ -1750,7 +1992,7 @@ VALIDATION |      3,000
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'en', u'de')`
+`('en', 'de')`
 
 #### Citation
 ```
@@ -1849,7 +2091,7 @@ VALIDATION |      3,000
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'en', u'fr')`
+`('en', 'fr')`
 
 #### Citation
 ```
