@@ -28,42 +28,53 @@ np_datasets = tfds.as_numpy(datasets)
 
 ## All Datasets
 
-* [`audio`](#audio)
-  * [`"nsynth"`](#nsynth)
-* [`image`](#image)
-  * [`"cats_vs_dogs"`](#cats_vs_dogs)
-  * [`"celeb_a"`](#celeb_a)
-  * [`"celeb_a_hq"`](#celeb_a_hq)
-  * [`"cifar10"`](#cifar10)
-  * [`"cifar100"`](#cifar100)
-  * [`"coco2014"`](#coco2014)
-  * [`"colorectal_histology"`](#colorectal_histology)
-  * [`"colorectal_histology_large"`](#colorectal_histology_large)
-  * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
-  * [`"fashion_mnist"`](#fashion_mnist)
-  * [`"image_label_folder"`](#image_label_folder)
-  * [`"imagenet2012"`](#imagenet2012)
-  * [`"lsun"`](#lsun)
-  * [`"mnist"`](#mnist)
-  * [`"omniglot"`](#omniglot)
-  * [`"open_images_v4"`](#open_images_v4)
-  * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
-  * [`"svhn_cropped"`](#svhn_cropped)
-  * [`"tf_flowers"`](#tf_flowers)
+*   [`audio`](#audio)
+    *   [`"nsynth"`](#nsynth)
+*   [`image`](#image)
+    *   [`"cats_vs_dogs"`](#cats_vs_dogs)
+    *   [`"celeb_a"`](#celeb_a)
+    *   [`"celeb_a_hq"`](#celeb_a_hq)
+    *   [`"chexpert"`](#chexpert)
+    *   [`"cifar10"`](#cifar10)
+    *   [`"cifar100"`](#cifar100)
+    *   [`"coco2014"`](#coco2014)
+    *   [`"colorectal_histology"`](#colorectal_histology)
+    *   [`"colorectal_histology_large"`](#colorectal_histology_large)
+    *   [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
+    *   [`"fashion_mnist"`](#fashion_mnist)
+    *   [`"horses_or_humans"`](#horses_or_humans)
+    *   [`"image_label_folder"`](#image_label_folder)
+    *   [`"imagenet2012"`](#imagenet2012)
+    *   [`"lsun"`](#lsun)
+    *   [`"mnist"`](#mnist)
+    *   [`"omniglot"`](#omniglot)
+    *   [`"open_images_v4"`](#open_images_v4)
+    *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
+    *   [`"rock_paper_scissors"`](#rock_paper_scissors)
+    *   [`"svhn_cropped"`](#svhn_cropped)
 
-* [`structured`](#structured)
-  * [`"titanic"`](#titanic)
-* [`text`](#text)
-  * [`"imdb_reviews"`](#imdb_reviews)
-  * [`"lm1b"`](#lm1b)
-  * [`"squad"`](#squad)
-* [`translate`](#translate)
-  * [`"wmt_translate_ende"`](#wmt_translate_ende)
-  * [`"wmt_translate_enfr"`](#wmt_translate_enfr)
-* [`video`](#video)
-  * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
-  * [`"moving_mnist"`](#moving_mnist)
-  * [`"starcraft_video"`](#starcraft_video)
+*   [`structured`](#structured)
+
+    *   [`"titanic"`](#titanic)
+
+*   [`text`](#text)
+
+    *   [`"imdb_reviews"`](#imdb_reviews)
+    *   [`"lm1b"`](#lm1b)
+    *   [`"squad"`](#squad)
+
+*   [`translate`](#translate)
+
+    *   [`"flores_translate_neen"`](#flores_translate_neen)
+    *   [`"flores_translate_sien"`](#flores_translate_sien)
+    *   [`"wmt_translate_ende"`](#wmt_translate_ende)
+    *   [`"wmt_translate_enfr"`](#wmt_translate_enfr)
+
+*   [`video`](#video)
+
+    *   [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
+    *   [`"moving_mnist"`](#moving_mnist)
+    *   [`"starcraft_video"`](#starcraft_video)
 
 ---
 
@@ -506,6 +517,74 @@ ALL        |     30,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+### `"chexpert"`
+
+
+CheXpert is a large dataset of chest X-rays and competition for automated chest
+x-ray interpretation, which features uncertainty labels and radiologist-labeled
+reference standard evaluation sets. It consists of 224,316 chest radiographs of
+65,240 patients, where the chest radiographic examinations and the associated
+radiology reports were retrospectively collected from Stanford Hospital. Each
+report was labeled for the presence of 14 observations as positive, negative, or
+uncertain. We decided on the 14 observations based on the prevalence in the
+reports and clinical relevance.
+
+The CheXpert dataset must be downloaded separately after reading and agreeing to
+a Research Use Agreement. To do so, please follow the instructions on the
+website, https://stanfordmlgroup.github.io/competitions/chexpert/.
+
+*   URL:
+    [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
+*   `DatasetBuilder`:
+    [`tfds.image.chexpert.Chexpert`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/chexpert.py)
+*   Version: `v1.0.0`
+
+#### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=4)),
+    'name': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 223,648
+TRAIN      | 223,414
+VALIDATION | 234
+
+#### Urls
+
+*   [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+#### Citation
+
+```
+@article{DBLP:journals/corr/abs-1901-07031,
+  author    = {Jeremy Irvin and Pranav Rajpurkar and Michael Ko and Yifan Yu and Silviana Ciurea{-}Ilcus and Chris Chute and Henrik Marklund and Behzad Haghgoo and Robyn L. Ball and Katie Shpanskaya and Jayne Seekins and David A. Mong and Safwan S. Halabi and Jesse K. Sandberg and Ricky Jones and David B. Larson and Curtis P. Langlotz and Bhavik N. Patel and Matthew P. Lungren and Andrew Y. Ng},
+  title     = {CheXpert: {A} Large Chest Radiograph Dataset with Uncertainty Labels and Expert Comparison},
+  journal   = {CoRR},
+  volume    = {abs/1901.07031},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1901.07031},
+  archivePrefix = {arXiv},
+  eprint    = {1901.07031},
+  timestamp = {Fri, 01 Feb 2019 13:39:59 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1901-07031},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
 ---
 
 ### `"cifar10"`
@@ -855,6 +934,55 @@ TEST       |     10,000
 ```
 
 ---
+
+### `"horses_or_humans"`
+
+A large set of images of horses and humans.
+
+*   URL:
+    [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
+*   `DatasetBuilder`:
+    [`tfds.image.horses_or_humans.HorsesOrHumans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/horses_or_humans.py)
+*   Version: `v1.0.0`
+
+#### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 1,283
+TRAIN | 1,027
+TEST  | 256
+
+#### Urls
+
+*   [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+#### Citation
+
+```
+@ONLINE {horses_or_humans,
+author = "Laurence Moroney",
+title = "Horses or Humans Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/horses-or-humans-dataset"
+}
+```
+
+--------------------------------------------------------------------------------
 
 ### `"image_label_folder"`
 
@@ -1253,6 +1381,55 @@ ALL        | 50,426,266
 A Neural Representation of Sketch Drawings, D. Ha and D. Eck, arXiv:1704.03477v4, 2017.
 ```
 
+--------------------------------------------------------------------------------
+
+### `"rock_paper_scissors"`
+
+Images of hands playing rock, paper, scissor game.
+
+*   URL:
+    [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
+*   `DatasetBuilder`:
+    [`tfds.image.rock_paper_scissors.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/rock_paper_scissors.py)
+*   Version: `v1.0.0`
+
+#### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 2,892
+TRAIN | 2,520
+TEST  | 372
+
+#### Urls
+
+*   [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+#### Citation
+
+```
+@ONLINE {rps,
+author = "Laurence Moroney",
+title = "Rock, Paper, Scissors Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
+}
+```
+
 ---
 
 ### `"svhn_cropped"`
@@ -1545,25 +1722,25 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
 })
 ```
-
-
 
 #### `"lm1b/subwords32k"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
 })
 ```
 
-
-
-
 #### Statistics
-None computed
+
+Split | Examples
+:---- | ---------:
+ALL   | 30,607,716
+TRAIN | 30,301,028
+TEST  | 306,688
 
 #### Urls
  * [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
@@ -1699,6 +1876,120 @@ archivePrefix = {arXiv},
 
 ## [`translate`](#translate)
 
+### `"flores_translate_neen"`
+
+Evaluation datasets for low-resource machine translation: Nepali-English and
+Sinhala-English.
+
+*   URL:
+    [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+*   `DatasetBuilder`:
+    [`tfds.translate.flores_neen.FloresTranslateNeen`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores_neen.py)
+
+`flores_translate_neen` is configured with
+`tfds.translate.flores_neen.FloresConfig` and has the following configurations
+predefined (defaults to the first one):
+
+*   `"neen_plain_text"` (`v0.0.2`): Translation dataset from ne to en, uses
+    encoder plain_text.
+
+#### `"flores_translate_neen/neen_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ne': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 5,394
+TEST       | 2,835
+VALIDATION | 2,559
+
+#### Urls
+
+*   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'ne', u'en')`
+
+#### Citation
+
+```
+@misc{guzmn2019new,
+    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},
+    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},
+    year={2019},
+    eprint={1902.01382},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+
+--------------------------------------------------------------------------------
+
+### `"flores_translate_sien"`
+
+Evaluation datasets for low-resource machine translation: Nepali-English and
+Sinhala-English.
+
+*   URL:
+    [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+*   `DatasetBuilder`:
+    [`tfds.translate.flores_sien.FloresTranslateSien`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores_sien.py)
+
+`flores_translate_sien` is configured with
+`tfds.translate.flores_sien.FloresConfig` and has the following configurations
+predefined (defaults to the first one):
+
+*   `"sien_plain_text"` (`v0.0.2`): Translation dataset from si to en, uses
+    encoder plain_text.
+
+#### `"flores_translate_sien/sien_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'si': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 5,664
+VALIDATION | 2,898
+TEST       | 2,766
+
+#### Urls
+
+*   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'si', u'en')`
+
+#### Citation
+
+```
+@misc{guzmn2019new,
+    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},
+    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},
+    year={2019},
+    eprint={1902.01382},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+
+--------------------------------------------------------------------------------
+
 ### `"wmt_translate_ende"`
 
 Translate dataset based on the data from statmt.org.
@@ -1710,41 +2001,39 @@ Translate dataset based on the data from statmt.org.
 `wmt_translate_ende` is configured with `tfds.translate.wmt_ende.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
+*   `"ende_plain_text_t2t"` (`v0.0.2`): Translation dataset from en to de, uses
+    encoder plain_text. It uses the following data files (see the code for exact
+    contents): {"dev": ["wmt17_newstest13"], "train":
+    ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende",
+    "wmt13_europarl_ende"]}.
 
-* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
-
+*   `"ende_subwords8k_t2t"` (`v0.0.2`): Translation dataset from en to de, uses
+    encoder subwords8k. It uses the following data files (see the code for exact
+    contents): {"dev": ["wmt17_newstest13"], "train":
+    ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende",
+    "wmt13_europarl_ende"]}.
 
 #### `"wmt_translate_ende/ende_plain_text_t2t"`
 
 ```python
-FeaturesDict({
+Translation({
     'de': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-
-
 #### `"wmt_translate_ende/ende_subwords8k_t2t"`
 
 ```python
-FeaturesDict({
-    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8267>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8216>),
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-
-
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |  4,595,289
-TRAIN      |  4,592,289
-VALIDATION |      3,000
 
+None computed
 
 #### Urls
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
@@ -1783,67 +2072,67 @@ Translate dataset based on the data from statmt.org.
 `wmt_translate_enfr` is configured with `tfds.translate.wmt_enfr.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"enfr_plain_text_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train": ["opennmt_1M_enfr_train"]}.
+*   `"enfr_plain_text_t2t_small"` (`v0.0.2`): Translation dataset from en to fr,
+    uses encoder plain_text. It uses the following data files (see the code for
+    exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train":
+    ["opennmt_1M_enfr_train"]}.
 
-* `"enfr_subwords8k_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train": ["opennmt_1M_enfr_train"]}.
+*   `"enfr_subwords8k_t2t_small"` (`v0.0.2`): Translation dataset from en to fr,
+    uses encoder subwords8k. It uses the following data files (see the code for
+    exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train":
+    ["opennmt_1M_enfr_train"]}.
 
-* `"enfr_plain_text_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
+*   `"enfr_plain_text_t2t_large"` (`v0.0.2`): Translation dataset from en to fr,
+    uses encoder plain_text. It uses the following data files (see the code for
+    exact contents): {"dev": ["wmt17_newstest13"], "train":
+    ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr",
+    "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
 
-* `"enfr_subwords8k_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
-
+*   `"enfr_subwords8k_t2t_large"` (`v0.0.2`): Translation dataset from en to fr,
+    uses encoder subwords8k. It uses the following data files (see the code for
+    exact contents): {"dev": ["wmt17_newstest13"], "train":
+    ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr",
+    "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
 
 #### `"wmt_translate_enfr/enfr_plain_text_t2t_small"`
 
 ```python
-FeaturesDict({
+Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
-
-
 
 #### `"wmt_translate_enfr/enfr_subwords8k_t2t_small"`
 
 ```python
-FeaturesDict({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8215>),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8150>),
-})
-```
-
-
-
-#### `"wmt_translate_enfr/enfr_plain_text_t2t_large"`
-
-```python
-FeaturesDict({
+Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
+#### `"wmt_translate_enfr/enfr_plain_text_t2t_large"`
 
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
 
 #### `"wmt_translate_enfr/enfr_subwords8k_t2t_large"`
 
 ```python
-FeaturesDict({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8222>),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8181>),
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-
-
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        | 18,319,500
-TRAIN      | 18,316,500
-VALIDATION |      3,000
 
+None computed
 
 #### Urls
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
