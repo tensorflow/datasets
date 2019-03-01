@@ -145,8 +145,8 @@ class TranslationVariableLanguages(sequence_feature.SequenceDict):
     """Constructs a Translation FeatureConnector.
 
     Args:
-      languages: `list<string>` (optional), full list of languages codes if
-        shared by all examples and known in advance.
+      languages: `list<string>` (optional), full list of language codes if known
+        in advance.
     """
     # TODO(adarob): Add optional text encoders once `SequenceDict` adds support
     # for FixedVarLenFeatures.
