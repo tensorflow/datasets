@@ -99,7 +99,7 @@ SINGLE_CONFIG_ENTRY = """\
 DATASET_WITH_CONFIGS_ENTRY = """\
 ### `"{snakecase_name}"`
 
-{description}
+{description_prefix}{description}
 
 * URL: [{url}]({url})
 * `DatasetBuilder`: [`{module_and_class}`]({cls_url})
@@ -127,7 +127,7 @@ configurations predefined (defaults to the first one):
 DATASET_ENTRY = """\
 ### `"{snakecase_name}"`
 
-{description}
+{description_prefix}{description}
 
 * URL: [{url}]({url})
 * `DatasetBuilder`: [`{module_and_class}`]({cls_url})
@@ -198,6 +198,9 @@ def document_single_builder(builder):
   if mod_file.endswith("pyc"):
     mod_file = mod_file[:-1]
 
+  description_prefix = ""
+
+
   if builder.builder_configs:
     # Dataset with configs; document each one
     config_docs = []
@@ -231,6 +234,7 @@ def document_single_builder(builder):
         citation=make_citation(info.citation),
         statistics_information=make_statistics_information(info),
         description=builder.info.description,
+        description_prefix=description_prefix,
     )
   else:
     info = builder.info
@@ -239,6 +243,7 @@ def document_single_builder(builder):
         module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
         cls_url=cls_url(mod_name),
         description=info.description,
+        description_prefix=description_prefix,
         version=info.version,
         feature_information=make_feature_information(info),
         statistics_information=make_statistics_information(info),
