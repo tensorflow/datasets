@@ -46,12 +46,11 @@ import tensorflow_datasets as tfds
 import termcolor
 
 FLAGS = flags.FLAGS
-BUILDERS = ",".join(tfds.list_builders())
 
 
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
 
-flags.DEFINE_string("datasets", BUILDERS,
+flags.DEFINE_string("datasets", None,
                     "Comma separated list of datasets to build, defaults to all"
                     "registered builders.")
 flags.DEFINE_string("exclude_datasets", "",
@@ -115,8 +114,12 @@ def main(_):
   if FLAGS.sleep_start:
     time.sleep(60*60*3)
 
+  if FLAGS.datasets:
+    datasets = FLAGS.datasets.split(",")
+  else:
+    datasets = tfds.list_builders()
   datasets_to_build = (
-      set(FLAGS.datasets.split(",")) -
+      set(datasets) -
       set(FLAGS.exclude_datasets.split(",")))
   logging.info("Running download_and_prepare for datasets:\n%s",
                "\n".join(datasets_to_build))
