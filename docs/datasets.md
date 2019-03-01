@@ -543,7 +543,12 @@ FeaturesDict({
 
 
 #### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |    223,648
+TRAIN      |    223,414
+VALIDATION |        234
+
 
 #### Urls
  * [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
@@ -1379,7 +1384,12 @@ FeaturesDict({
 
 
 #### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |      2,892
+TRAIN      |      2,520
+TEST       |        372
+
 
 #### Urls
  * [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
@@ -1870,7 +1880,12 @@ FeaturesDict({
 
 
 #### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |      5,394
+TEST       |      2,835
+VALIDATION |      2,559
+
 
 #### Urls
  * [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
@@ -1919,7 +1934,12 @@ FeaturesDict({
 
 
 #### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |      5,664
+VALIDATION |      2,898
+TEST       |      2,766
+
 
 #### Urls
  * [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
