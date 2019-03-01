@@ -31,6 +31,6 @@ class FloresTranslateNeen(flores.FloresTranslate):
   BUILDER_CONFIGS = [
       flores.FloresConfig(
           language_pair=("ne", "en"),
-          version="0.0.1",
+          version="0.0.2",
       ),
   ]
