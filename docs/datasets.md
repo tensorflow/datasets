@@ -552,11 +552,12 @@ FeaturesDict({
 ```
 
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |    223,648
-TRAIN      |    223,414
-VALIDATION |        234
+
+Split      | Examples
+:--------- | -------:
+ALL        | 223,648
+TRAIN      | 223,414
+VALIDATION | 234
 
 #### Urls
 
@@ -1402,6 +1403,7 @@ FeaturesDict({
 ```
 
 #### Statistics
+
 Split | Examples
 :---- | -------:
 ALL   | 2,892

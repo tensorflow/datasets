@@ -261,7 +261,7 @@ def create_section_toc(section, builders):
   return "\n".join([heading] + entries)
 
 
-def make_module_to_builder_dict():
+def make_module_to_builder_dict(datasets=None):
   """Get all builders organized by module in nested dicts."""
   # pylint: disable=g-long-lambda
   # dict to hold tfds->image->mnist->[builders]
@@ -270,11 +270,14 @@ def make_module_to_builder_dict():
           lambda: collections.defaultdict(list)))
   # pylint: enable=g-long-lambda
 
-  builders = [
-      tfds.builder(name)
-      for name in tfds.list_builders()
-      if name not in BUILDER_BLACKLIST
-  ] + [tfds.builder("image_label_folder", dataset_name="image_label_folder")]
+  if datasets:
+    builders = [tfds.builder(name) for name in datasets]
+  else:
+    builders = [
+        tfds.builder(name)
+        for name in tfds.list_builders()
+        if name not in BUILDER_BLACKLIST
+    ] + [tfds.builder("image_label_folder", dataset_name="image_label_folder")]
 
   for builder in builders:
     mod_name = builder.__class__.__module__
@@ -337,9 +340,17 @@ def make_statistics_information(info):
   return STATISTICS_TABLE.format(split_statistics=stats)
 
 
-def dataset_docs_str():
-  """Create dataset documentation string."""
-  module_to_builder = make_module_to_builder_dict()
+def dataset_docs_str(datasets=None):
+  """Create dataset documentation string for given datasets.
+
+  Args:
+    datasets: list of datasets for which to create documentation.
+              If None, then all available datasets will be used.
+
+  Returns:
+    string describing the datasets (in the MarkDown format).
+  """
+  module_to_builder = make_module_to_builder_dict(datasets)
 
   sections = sorted(list(module_to_builder.keys()))
   section_tocs = []
