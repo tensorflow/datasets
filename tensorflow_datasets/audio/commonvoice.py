@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import tensorflow_datasets.public_api as tfds
+import os
 import tensorflow as tf
 _DOWNLOAD_LINK = {"en":"https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-1/en.tar.gz"}
 _SPLITS = {"train":"train","test":"test","validate":"validated"}
@@ -13,6 +14,7 @@ class commonvoice(tfds.core.GeneratorBasedBuilder):
        urls = [u"https://voice.mozilla.org/en/datasets"]
        )
     def _split_generators(self,dl_manager):
+        dl_manager.force_download = False
         dl_path = dl_manager.download_and_extract(_DOWNLOAD_LINK)
         clip_folder = os.path.join(dl_path["en"],"clips") # Need to Check for replacement
         return [tfds.core.SplitGenerator(
