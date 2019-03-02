@@ -18,3 +18,7 @@ dist/
 
 # Other
 *.DS_Store
+.*.swp
+.*.swo
+.*.swn
+
