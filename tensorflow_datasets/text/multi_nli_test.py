@@ -13,11 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text-based sentiment analysis datasets."""
+"""Tests for multinli dataset module."""
 
-from tensorflow_datasets.text.imdb import IMDBReviews
-from tensorflow_datasets.text.imdb import IMDBReviewsConfig
-from tensorflow_datasets.text.lm1b import Lm1b
-from tensorflow_datasets.text.lm1b import Lm1bConfig
-from tensorflow_datasets.text.multi_nli import MultiNLI
-from tensorflow_datasets.text.squad import Squad
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.text import multi_nli
+
+
+class MultiNLITest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = multi_nli.MultiNLI
+
+  SPLITS = {
+      "train": 3,
+      "validation": 2,
+  }
+
+
+if __name__ == "__main__":
+  testing.test_main()
