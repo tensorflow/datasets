@@ -15,7 +15,7 @@ class commonvoice(tfds.core.GeneratorBasedBuilder):
        )
     def _split_generators(self,dl_manager):
         dl_manager.force_download = False
-        dl_path = dl_manager.download_and_extract(_DOWNLOAD_LINK)
+        dl_path = dl_manager.extract(dl_manager.download(_DOWNLOAD_LINK))
         clip_folder = os.path.join(dl_path["en"],"clips") # Need to Check for replacement
         return [tfds.core.SplitGenerator(
         name = k,
