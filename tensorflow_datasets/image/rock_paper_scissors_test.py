@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for horses or humans data loading."""
+"""Tests for rock_paper_scissors data loading."""
 
 from __future__ import absolute_import
 from __future__ import division
