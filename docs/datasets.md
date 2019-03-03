@@ -52,6 +52,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
     *   [`"rock_paper_scissors"`](#rock_paper_scissors)
     *   [`"svhn_cropped"`](#svhn_cropped)
+    *   [`"tf_flowers"`](#tf_flowers)
 
 *   [`structured`](#structured)
 
