@@ -23,7 +23,7 @@ class commonvoice(tfds.core.GeneratorBasedBuilder):
         gen_kwargs = {
         "image_path":clip_folder,
         "label_path":os.path.join(dl_path["en"],"%s.tsv"%v)
-        }) for k,v in _SPLITS]
+        }) for k,v in _SPLITS.items()]
     def _generate_examples(self,image_path,label_path):
         def decode_tsv(line):
             record_defaults = [""]*8
