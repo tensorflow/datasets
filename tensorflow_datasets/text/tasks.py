@@ -25,7 +25,24 @@ from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION="""\
-@article(
+@article{DBLP:journals/corr/WestonBCM15,
+  author    = {Jason Weston and
+               Antoine Bordes and
+               Sumit Chopra and
+               Tomas Mikolov},
+  title     = {Towards AI-Complete Question Answering: {A} Set of Prerequisite Toy
+               Tasks},
+  journal   = {CoRR},
+  volume    = {abs/1502.05698},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1502.05698},
+  archivePrefix = {arXiv},
+  eprint    = {1502.05698},
+  timestamp = {Mon, 13 Aug 2018 16:47:58 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/WestonBCM15},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
 """
 _DESCRIPTION="""\
 This dataset is the collection of 1000 training and test data which deals with the collection of certain \
