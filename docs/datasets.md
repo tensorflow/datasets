@@ -9,7 +9,7 @@ tfds.list_builders()
 
 # Load a given dataset by name, along with the DatasetInfo
 data, info = tfds.load("mnist", with_info=True)
-train_data, test_data = data['test'], data['train']
+train_data, test_data = data['train'], data['test']
 assert isinstance(train_data, tf.data.Dataset)
 assert info.features['label'].num_classes == 10
 assert info.splits['train'].num_examples == 60000
@@ -333,7 +333,8 @@ VALIDATION |     19,867
 High-quality version of the CELEBA
 dataset, consisting of 30000 images in 1024 x 1024 resolution.
 
-WARNING: this dataset currently requires you to prepare images on your own.
+WARNING: This dataset currently requires you to prepare images on your own. Tensorflow also provides an image generator 
+[here](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/celebahq.py). 
 
 
 * URL: [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
@@ -525,7 +526,7 @@ ALL        |     30,000
 ### `"chexpert"`
 
 
-CheXpert is a large dataset of chest X-rays and competition for automated chest
+CheXpert is a large dataset of chest X-rays used in competitions for automated chest
 x-ray interpretation, which features uncertainty labels and radiologist-labeled
 reference standard evaluation sets. It consists of 224,316 chest radiographs of
 65,240 patients, where the chest radiographic examinations and the associated
@@ -683,7 +684,7 @@ COCO is a large-scale object detection, segmentation, and captioning dataset. Th
 Note:
  * Some images from the train and validation sets don't have annotations.
  * The test split don't have any annotations (only images).
- * Coco defines 91 classes but the data only had 80 classes.
+ * Coco defines 91 classes but the data only has 80 classes.
 
 
 * URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
@@ -750,7 +751,7 @@ VALIDATION |     40,504
 
 ### `"colorectal_histology"`
 
-Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes.
+Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image with 8 classes each.
 
 * URL: [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
 * `DatasetBuilder`: [`tfds.image.colorectal_histology.ColorectalHistology`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/colorectal_histology.py)
