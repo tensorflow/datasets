@@ -9,7 +9,7 @@ tfds.list_builders()
 
 # Load a given dataset by name, along with the DatasetInfo
 data, info = tfds.load("mnist", with_info=True)
-train_data, test_data = data['test'], data['train']
+train_data, test_data = data['train'], data['test']
 assert isinstance(train_data, tf.data.Dataset)
 assert info.features['label'].num_classes == 10
 assert info.splits['train'].num_examples == 60000
@@ -317,7 +317,7 @@ None computed
 High-quality version of the CELEBA
 dataset, consisting of 30000 images in 1024 x 1024 resolution.
 
-WARNING: this dataset currently requires you to prepare images on your own.
+WARNING: This dataset currently requires you to prepare images on your own.
 
 
 * URL: [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
