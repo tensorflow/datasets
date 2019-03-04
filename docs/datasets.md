@@ -29,47 +29,69 @@ np_datasets = tfds.as_numpy(datasets)
 ## All Datasets
 
 * [`audio`](#audio)
-  * [`"nsynth"`](#nsynth)
+
+    |            Name           	| Size(MiB)	|
+    |------------------------------	|----------	|
+    | [ `"nsynth"` ]( #nsynth ) 	|     NA   	|
+
 * [`image`](#image)
-  * [`"cats_vs_dogs"`](#cats_vs_dogs)
-  * [`"celeb_a"`](#celeb_a)
-  * [`"celeb_a_hq"`](#celeb_a_hq)
-  * [`"chexpert"`](#chexpert)
-  * [`"cifar10"`](#cifar10)
-  * [`"cifar100"`](#cifar100)
-  * [`"coco2014"`](#coco2014)
-  * [`"colorectal_histology"`](#colorectal_histology)
-  * [`"colorectal_histology_large"`](#colorectal_histology_large)
-  * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
-  * [`"fashion_mnist"`](#fashion_mnist)
-  * [`"horses_or_humans"`](#horses_or_humans)
-  * [`"image_label_folder"`](#image_label_folder)
-  * [`"imagenet2012"`](#imagenet2012)
-  * [`"lsun"`](#lsun)
-  * [`"mnist"`](#mnist)
-  * [`"omniglot"`](#omniglot)
-  * [`"open_images_v4"`](#open_images_v4)
-  * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
-  * [`"rock_paper_scissors"`](#rock_paper_scissors)
-  * [`"svhn_cropped"`](#svhn_cropped)
-  * [`"tf_flowers"`](#tf_flowers)
+
+    |                                    Name                                   	| Size(MiB)	|
+    |------------------------------------------------------------------------------	|----------	|
+    | [ `"cats_vs_dogs"` ]( #cats_vs_dogs )                                     	| 786.68   	|
+    | [ `"celeb_a"` ]( #celeb_a )                                               	| NA       	|
+    | [ `"celeb_a_hq"` ]( #celeb_a_hq )                                         	| NA       	|
+    | [ `"chexpert"` ]( #chexpert )                                             	| NA       	|
+    | [ `"cifar10"` ]( #cifar10 )                                               	| 162.17   	|
+    | [ `"cifar100"` ]( #cifar100 )                                             	| 160.71   	|
+    | [ `"coco2014"` ]( #coco2014 )                                             	| 37.57 GiB	|
+    | [ `"colorectal_histology"` ]( #colorectal_histology )                     	| NA       	|
+    | [ `"colorectal_histology_large"` ]( #colorectal_histology_large )         	| NA       	|
+    | [ `"diabetic_retinopathy_detection"` ]( #diabetic_retinopathy_detection ) 	| NA       	|
+    | [ `"fashion_mnist"` ]( #fashion_mnist )                                   	| 29.45    	|
+    | [ `"horses_or_humans"` ]( #horses_or_humans )                             	| 153.59   	|
+    | [ `"image_label_folder"` ]( #image_label_folder )                         	| NA       	|
+    | [ `"imagenet2012"` ]( #imagenet2012 )                                     	| NA       	|
+    | [ `"lsun"` ]( #lsun )                                                     	| NA       	|
+    | [ `"mnist"` ]( #mnist )                                                   	| 11.06    	|
+    | [ `"omniglot"` ]( #omniglot )                                             	| 17.95    	|
+    | [ `"open_images_v4"` ]( #open_images_v4 )                                 	| 565.1 GiB	|
+    | [ `"quickdraw_bitmap"` ]( #quickdraw_bitmap )                             	| 36.82 GiB	|
+    | [ `"rock_paper_scissors"` ]( #rock_paper_scissors )                       	| NA       	|
+    | [ `"svhn_cropped"` ]( #svhn_cropped )                                     	| 1.47 GiB 	|
+    | [ `"tf_flowers"` ]( #tf_flowers )                                         	| 218.21   	|
 
 * [`structured`](#structured)
-  * [`"titanic"`](#titanic)
+
+    | Name                         	| Size(MiB)	|
+    |------------------------------	|----------	|
+    | [ `"titanic"` ]( #titanic ) 	| NA       	|
+
 * [`text`](#text)
-  * [`"imdb_reviews"`](#imdb_reviews)
-  * [`"lm1b"`](#lm1b)
-  * [`"multi_nli"`](#multi_nli)
-  * [`"squad"`](#squad)
+
+    | Name                                  	| Size 	|
+    |---------------------------------------	|------	|
+    | [ `"imdb_reviews"` ]( #imdb_reviews ) 	| NA   	|
+    | [ `"lm1b"` ]( #lm1b )                 	| NA   	|
+    | [ `"multi_nli"` ]( #multi_nli )       	| NA   	|
+    | [ `"squad"` ]( #squad )               	| NA   	|
+
 * [`translate`](#translate)
-  * [`"flores_translate_neen"`](#flores_translate_neen)
-  * [`"flores_translate_sien"`](#flores_translate_sien)
-  * [`"wmt_translate_ende"`](#wmt_translate_ende)
-  * [`"wmt_translate_enfr"`](#wmt_translate_enfr)
+
+    | Name                                                    	| Size 	|
+    |---------------------------------------------------------	|------	|
+    | [ `"flores_translate_neen"` ]( #flores_translate_neen ) 	| NA   	|
+    | [ `"flores_translate_sien"` ]( #flores_translate_sien ) 	| NA   	|
+    | [ `"wmt_translate_ende"` ]( #wmt_translate_ende )       	| NA   	|
+    | [ `"wmt_translate_enfr"` ]( #wmt_translate_enfr )       	| NA   	|
+
 * [`video`](#video)
-  * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
-  * [`"moving_mnist"`](#moving_mnist)
-  * [`"starcraft_video"`](#starcraft_video)
+
+    | Name                                                          	| Size(MiB)	|
+    |---------------------------------------------------------------	|----------	|
+    | [ `"bair_robot_pushing_small"` ]( #bair_robot_pushing_small ) 	| 30.06 GiB |
+    | [ `"moving_mnist"` ]( #moving_mnist )                         	| 781.25   	|
+    | [ `"starcraft_video"` ]( #starcraft_video )                   	| NA       	|
 
 ---
 
