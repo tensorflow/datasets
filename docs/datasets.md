@@ -317,7 +317,7 @@ None computed
 High-quality version of the CELEBA
 dataset, consisting of 30000 images in 1024 x 1024 resolution.
 
-WARNING: This dataset currently requires you to prepare images on your own.
+WARNING: this dataset currently requires you to prepare images on your own.
 
 
 * URL: [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
@@ -2425,6 +2425,5 @@ TEST       |      2,000
 ```
 
 ---
-
 
 
