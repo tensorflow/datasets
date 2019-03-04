@@ -53,7 +53,7 @@ tfds.list_builders()
 
 # Load a given dataset by name, along with the DatasetInfo
 data, info = tfds.load("mnist", with_info=True)
-train_data, test_data = data['train'], data['test']
+train_data, test_data = data['test'], data['train']
 assert isinstance(train_data, tf.data.Dataset)
 assert info.features['label'].num_classes == 10
 assert info.splits['train'].num_examples == 60000
@@ -86,7 +86,7 @@ SECTION_DATASETS = """\
 """
 
 CONFIG_BULLET = """\
-* `"{name}"` (`v{version}`): {description}
+* `"{name}"` (`v{version}`) (`Size: {size}`): {description}
 """
 
 SINGLE_CONFIG_ENTRY = """\
@@ -132,6 +132,7 @@ DATASET_ENTRY = """\
 * URL: [{url}]({url})
 * `DatasetBuilder`: [`{module_and_class}`]({cls_url})
 * Version: `v{version}`
+* Size: `{size}`
 
 #### Features
 {feature_information}
@@ -214,6 +215,7 @@ def document_single_builder(builder):
           description=config.description,
           version=config.version,
           feature_information=make_feature_information(info),
+          size=tfds.units.size_str(info.size_in_bytes),
       )
       config_docs.append(config_doc)
     return DATASET_WITH_CONFIGS_ENTRY.format(
@@ -223,7 +225,8 @@ def document_single_builder(builder):
         config_names="\n".join([
             CONFIG_BULLET.format(name=config.name,
                                  description=config.description,
-                                 version=config.version)
+                                 version=config.version,
+                                 size=tfds.units.size_str(tfds.builder(builder.name, config=config).info.size_in_bytes))
             for config in builder.BUILDER_CONFIGS]),
         config_cls="%s.%s" % (tfds_mod_name(mod_name),
                               type(builder.builder_config).__name__),
@@ -251,6 +254,7 @@ def document_single_builder(builder):
         url=url_from_info(info),
         supervised_keys=str(info.supervised_keys),
         citation=make_citation(info.citation),
+        size=tfds.units.size_str(info.size_in_bytes),
     )
 
 
@@ -379,6 +383,7 @@ JSON_LD_STR = """\
   "name": "{name}",
   "description": "{description}",
   "url": {url},
+  "size:" {size},
 }}
 """
 
@@ -403,6 +408,7 @@ def schema_org(builder):
       name=builder.name,
       description=info.description,
       url=str(info.urls[0]).replace("'", "\""),
+      size=tfds.units.size_str(info.size_in_bytes),
   )
 
 
