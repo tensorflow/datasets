@@ -1,5 +1,33 @@
 # How to Contribute
 
+Thanks for thinking about contributing to our library !
+
+
+## Before you start
+* Please accept the [Contributor License Agreement](https://cla.developers.google.com) (see below)
+* [Ask here](https://github.com/tensorflow/datasets/issues/142) to be added to
+  the list of collaborators so that issues can be assigned to you.
+* Comment on the issue that you plan to work on so we can assign it to you and
+  there isn't unnecessary duplication of work.
+* When you plan to work on something larger (for example, adding new
+  `FeatureConnectors`), please respond on the issue (or create one if there
+  isn't one) to explain your plan and give others a chance to discuss.
+* If you're fixing some smaller issue - please check the list of
+  [pending Pull Requests](https://github.com/tensorflow/datasets/pulls) to
+  avoid unnecessary duplication.
+
+
+## How you can help:
+
+You can help in multiple ways:
+
+* Adding new datasets and/or requested features (see the [issues](https://github.com/tensorflow/datasets/issues))
+* Reproducing bugs reported by others: This helps us **a lot**.
+* Doing code reviews on the Pull Requests from the community.
+* Verifying that Pull Requests from others are working correctly
+  (especially the ones that add new datasets).
+
+
 ## Datasets
 
 Adding a public dataset to `tensorflow-datasets` is a great way of making it
@@ -42,7 +70,7 @@ require:
 *Note that tests for DatasetBuilders are different and are documented in the*
 *[guide to add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md#testing-mydataset).*
 
-# Pull Requests
+## Pull Requests
 
 All contributions are done through Pull Requests here on GitHub.
 
