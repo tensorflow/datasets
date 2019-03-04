@@ -126,7 +126,7 @@ class tasks(tfds.core.GeneratorBasedBuilder):
                         }),
             supervised_keys=("text", "text"),
             urls=["http://www.thespermwhale.com/jaseweston/babi/"],
-            citation=_Citation
+            citation=_CITATION
                 )
 
     def _vocab_text_gen(self, training_files):
@@ -152,7 +152,7 @@ class tasks(tfds.core.GeneratorBasedBuilder):
                 gen_kwargs={"files": test_files}),
             ]
 
-    def _generate_examples(self):
+    def _generate_examples(self, files):
         for filepath in files:
             logging.info("generating examples from = %s", filepath)
             with tf.io.gfile.GFile(filepath) as f:
