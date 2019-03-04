@@ -19,6 +19,8 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import quickdraw
 
+"""Tests for Quickdraw data"""
+
 
 class QuickdrawTest(testing.DatasetBuilderTestCase):
 
