@@ -30,10 +30,10 @@ class commonvoice(tfds.core.GeneratorBasedBuilder):
         name = k,
         num_shards = 40,
         gen_kwargs = {
-        "image_path":clip_folder,
+        "audio_path":clip_folder,
         "label_path":os.path.join(dl_path["en"],"%s.tsv"%v)
         }) for k,v in _SPLITS.items()]
-    def _generate_examples(self,image_path,label_path):
+    def _generate_examples(self,audio_path,label_path):
         def decode_tsv(line):
             record_defaults = [""]*8
             data = tf.decode_csv(line,record_defaults,field_delim = "\t")
@@ -45,7 +45,7 @@ class commonvoice(tfds.core.GeneratorBasedBuilder):
         ds = tfds.as_numpy(tf.data.TextLineDataset(label_path).skip(1).map(decode_tsv))
         ffmpeg = tfds.features.Audio(file_format = "mp3")
         for id_,path,sentence,upvotes,downvotes,age,gender,accent in ds:
-            wave = ffmpeg.encode_example(os.path.join(image_path,"%s.mp3"%path.decode("utf-8"))).astype("float32")
+            wave = ffmpeg.encode_example(os.path.join(audio_path,"%s.mp3"%path.decode("utf-8"))).astype("float32")
             yield {
             "client_id":id_.decode("utf-8"),
             "voice": wave,
