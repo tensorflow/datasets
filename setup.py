@@ -56,6 +56,7 @@ if sys.version_info.major == 3:
 else:
   # Packages only for Python 2
   TESTS_REQUIRE.append('mock')
+  REQUIRED_PKGS.append('bz2file')
   REQUIRED_PKGS.append('functools32')
   REQUIRED_PKGS.append('futures')  # concurrent.futures
 

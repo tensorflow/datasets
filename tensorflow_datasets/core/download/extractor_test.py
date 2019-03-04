@@ -103,6 +103,14 @@ class ExtractorTest(testing.TestCase):
     foo_csv_path = os.path.join(self.test_data, 'foo.csv')
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
+  def test_bzip2(self):
+    from_path = os.path.join(self.test_data, 'archives', 'foo.csv.bz2')
+    resource = resource_lib.Resource(
+        path=from_path, extract_method=resource_lib.ExtractMethod.BZIP2)
+    self.extractor.extract(resource, self.to_path).get()
+    foo_csv_path = os.path.join(self.test_data, 'foo.csv')
+    self.assertEqual(_read(self.to_path), _read(foo_csv_path))
+
   def test_absolute_path(self):
     from_path = os.path.join(self.test_data, 'archives', 'absolute_path.tar')
     resource = resource_lib.Resource(
