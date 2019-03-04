@@ -113,7 +113,8 @@ def main(_):
   if FLAGS.sleep_start:
     time.sleep(60*60*3)
 
-  datasets_to_build = set(FLAGS.datasets.split(",") or tfds.list_builders())
+  datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
+                          or tfds.list_builders())
   datasets_to_build -= set(FLAGS.exclude_datasets.split(","))
   logging.info("Running download_and_prepare for datasets:\n%s",
                "\n".join(datasets_to_build))
