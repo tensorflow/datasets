@@ -24,7 +24,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
-_CITATION="""\
+_CITATION = """\
 @article{DBLP:journals/corr/WestonBCM15,
   author    = {Jason Weston and
                Antoine Bordes and
@@ -44,27 +44,25 @@ _CITATION="""\
 }
 
 """
-_DESCRIPTION="""\
+_DESCRIPTION = """\
 This dataset is the collection of 1000 training and test data which deals with the collection of certain \
 text with every 3rd line containing some questions based on the previous values giving certain answers \
 related to the dataset and with the id number related to the answer
 """
 
-_DOWNLOAD_URL= ("http://www.thespermwhale.com/jaseweston/babi/"
-                "tasks_1-20_v1-2.tar.gz")
+_DOWNLOAD_URL = ("http://www.thespermwhale.com/jaseweston/babi/"
+                 "tasks_1-20_v1-2.tar.gz")
+_TOP_LEVEL_DIR = "tasks_1-29_v1-2"
 
-_TOP_LEVEL_DIR= "tasks_1-29_v1-2"
-
-_TRAIN_FILE_FORMAT= os.path.join(_TOP_LEVEL_DIR,"shuffled-10k","qa(.*)train.txt") 
-_TEST_FILE_FORMAT= os.path.join(_TOP_LEVEL_DIR,"shuffled-10k","qa(.*)test.txt")
+_TRAIN_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR, "shuffled-10k", "qa(.*)train.txt")
+_TEST_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR, "shuffled-10k", "qa(.*)test.txt")
 
 class TasksConfig(tfds.core.BuilderConfig):
     """ Builder config for tasks dataset"""
     @api_utils.disallow_positional_args
     def __init__(self, text_encoder_config=None, **kwargs):
-        """BuilderConfig for tasks.
-
-    Args:
+        """ BuilderConfig for tasks.
+        Args:
       text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
         for the `tfds.features.text.TextEncoder` used for the tasks `"text"`
         feature.
@@ -81,71 +79,67 @@ def _test_data_filenames(tmp_dir):
     return tf.io.gfile.glob(os.path.join(tmp_dir, _TEST_FILE_FORMAT))
 
 class tasks(tfds.core.GeneratorBasedBuilder):
-    """Tasks dataset combining useful information of training and test data of simple question and answers"""
+    """ Tasks dataset combining useful information of training and test data """
     BUILDER_CONFIGS = [
-      TasksConfig(
-          name="plain_text",
-          version="0.0.1",
-          description="Plain text",
-      ),
-      TasksConfig(
-          name="bytes",
-          version="0.0.1",
-          description=("Uses byte-level text encoding with "
-                       "`tfds.features.text.ByteTextEncoder`"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder=tfds.features.text.ByteTextEncoder()),
-      ),
-      TasksConfig(
-          name="subwords8k",
-          version="0.0.2",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
-                       "vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
-              vocab_size=2**13),
-      ),
-      TasksConfig(
-          name="subwords32k",
-          version="0.0.2",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
-                       "32k vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
-              vocab_size=2**15),
-      ),
-  ]
+        TasksConfig(
+            name="plain_text",
+            version="0.0.1",
+            description="Plain text",
+        ),
+        TasksConfig(
+            name="bytes",
+            version="0.0.1",
+            description=("Uses byte-level text encoding with "
+                         "`tfds.features.text.ByteTextEncoder`"),
+            text_encoder_config=tfds.features.text.TextEncoderConfig(
+                encoder=tfds.features.text.ByteTextEncoder()),
+        ),
+        TasksConfig(
+            name="subwords8k",
+            version="0.0.2",
+            description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
+                         "vocab size"),
+            text_encoder_config=tfds.features.text.TextEncoderConfig(
+                encoder_cls=tfds.features.text.SubwordTextEncoder,
+                vocab_size=2**13),
+        ),
+        TasksConfig(
+            name="subwords32k",
+            version="0.0.2",
+            description=("Uses `tfds.features.text.SubwordTextEncoder` with "
+                         "32k vocab size"),
+            text_encoder_config=tfds.features.text.TextEncoderConfig(
+                encoder_cls=tfds.features.text.SubwordTextEncoder,
+                vocab_size=2**15),
+        ),
+    ]
 
 
     def _info(self):
-        #Specifies tfds.core.DatasetInfo object
+        # Specifies tfds.core.DatasetInfo object
         return tfds.core.DatasetInfo(
-                builder=self,
-                description=_DESCRIPTION,
-                features=tfds.features.FeaturesDict({
-                        "text":tfds.features.Text(
-                            encoder_config=self.builder_config.text_encoder_config),
+            builder=self,
+            description=_DESCRIPTION,
+            features=tfds.features.FeaturesDict({
+                "text":tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
                         }),
-                supervised_keys=("text","text"),
-                urls=["http://www.thespermwhale.com/jaseweston/babi/"],
-                citation=_Citation
+            supervised_keys=("text", "text"),
+            urls=["http://www.thespermwhale.com/jaseweston/babi/"],
+            citation=_Citation
                 )
 
     def _vocab_text_gen(self, training_files):
         for ex in self._generate_examples(training_files):
             yield ex["text"]
-              
 
     def _split_generators(self, dl_manager):
-
-        tasks_path=dl_manager.download_and_extract(_DOWNLOAD_URL)
-        train_files= _train_data_filenames(tasks_path)
-        test_files= _test_data_filenames(tasks_path)
-        
+        tasks_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
+        train_files = _train_data_filenames(tasks_path)
+        test_files = _test_data_filenames(tasks_path)
         # Generate vocabulary from training data if SubwordTextEncoder configured
-        
         self.info.features["text"].maybe_build_from_corpus(
-        self._vocab_text_gen(train_files))
+            self._vocab_text_gen(train_files))
 
         return [
             tfds.core.SplitGenerator(
@@ -156,9 +150,7 @@ class tasks(tfds.core.GeneratorBasedBuilder):
                 name=tfds.Split.TEST,
                 num_shards=10,
                 gen_kwargs={"files": test_files}),
-        ]   
-
-
+            ]
 
     def _generate_examples(self):
         for filepath in files:
@@ -167,6 +159,4 @@ class tasks(tfds.core.GeneratorBasedBuilder):
                 for line in f:
                     yield {
                         "text": line.strip(),
-                    }   
-                                  
-
+                        }
