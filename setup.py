@@ -68,6 +68,7 @@ if sys.version_info < (3, 4):
 DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
+    'image/quickdraw_labels.txt',
 ]
 
 DATASET_EXTRAS = {
