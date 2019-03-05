@@ -46,5 +46,9 @@ class FashionMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.FashionMNIST
 
 
+class KMNISTTest(MNISTTest):
+    DATASET_CLASS = mnist.KMNIST
+
+
 if __name__ == "__main__":
   testing.test_main()

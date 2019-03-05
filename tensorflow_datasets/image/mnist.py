@@ -68,6 +68,18 @@ _FASHION_MNIST_CITATION = """\
 """
 
 
+_K_MNIST_CITATION ="""
+  @online{clanuwat2018deep,
+  author       = {Tarin Clanuwat and Mikel Bober-Irizar and Asanobu Kitamoto and Alex Lamb and Kazuaki Yamamoto and David Ha},
+  title        = {Deep Learning for Classical Japanese Literature},
+  date         = {2018-12-03},
+  year         = {2018},
+  eprintclass  = {cs.CV},
+  eprinttype   = {arXiv},
+  eprint       = {cs.CV/1812.01718},
+  }
+"""
+
 class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
@@ -170,6 +182,32 @@ class FashionMNIST(MNIST):
         citation=_FASHION_MNIST_CITATION,
     )
 
+class KMNIST(MNIST):
+  URL = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/"
+
+  VERSION = tfds.core.Version("1.0.0")
+
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=("Kuzushiji-MNIST is a drop-in replacement for the MNIST "
+                     "dataset (28x28 grayscale, 70,000 images), provided in "
+                     "the original MNIST format as well as a NumPy format. "
+                     "Since MNIST restricts us to 10 classes, we chose one "
+                     "character to represent each of the 10 rows of Hiragana "
+                     "when creating Kuzushiji-MNIST."),
+        features=tfds.features.FeaturesDict({
+            "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(names=[
+                'o', 'ki', 'su', 'tsu', 'na', 'ha', 'ma', 'ya', 're', 'wo'
+            ]),
+        }),
+        supervised_keys=("image", "label"),
+        urls=["http://codh.rois.ac.jp/kmnist/dataset/kmnist/"],
+        citation=_K_MNIST_CITATION,
+    )
+
+
 
 def _extract_mnist_images(image_filepath, num_images):
   with tf.io.gfile.GFile(image_filepath, "rb") as f:
@@ -188,3 +226,8 @@ def _extract_mnist_labels(labels_filepath, num_labels):
     buf = f.read(num_labels)
     labels = np.frombuffer(buf, dtype=np.uint8).astype(np.int64)
     return labels
+
+
+
+# test file
+# and full test
