@@ -10,7 +10,7 @@ class CommonVoiceTest(tfds_test.DatasetBuilderTestCase):
     CommonVoice Tester Class
     """
     DATASET_CLASS = commonvoice.CommonVoice
-    SPLITS = {"train": 10, "test": 10, "validation": 10}
+    SPLITS = {"train": 3, "test": 3, "validation": 3}
     DL_EXTRACT_RESULT = {"en": "."}
 
 
