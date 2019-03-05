@@ -31,6 +31,7 @@ from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.mnist import FashionMNIST
+from tensorflow_datasets.image.mnist import KMNIST
 from tensorflow_datasets.image.mnist import MNIST
 from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4

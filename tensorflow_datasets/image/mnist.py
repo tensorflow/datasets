@@ -68,6 +68,28 @@ _FASHION_MNIST_CITATION = """\
 """
 
 
+_K_MNIST_CITATION = """\
+@article{DBLP:journals/corr/abs-1812-01718,
+  author    = {Tarin Clanuwat and
+               Mikel Bober{-}Irizar and
+               Asanobu Kitamoto and
+               Alex Lamb and
+               Kazuaki Yamamoto and
+               David Ha},
+  title     = {Deep Learning for Classical Japanese Literature},
+  journal   = {CoRR},
+  volume    = {abs/1812.01718},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1812.01718},
+  archivePrefix = {arXiv},
+  eprint    = {1812.01718},
+  timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01718},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+"""
+
+
 class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
   URL = _MNIST_URL
@@ -168,6 +190,32 @@ class FashionMNIST(MNIST):
         supervised_keys=("image", "label"),
         urls=["https://github.com/zalandoresearch/fashion-mnist"],
         citation=_FASHION_MNIST_CITATION,
+    )
+
+
+class KMNIST(MNIST):
+  URL = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/"
+
+  VERSION = tfds.core.Version("1.0.0")
+
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=("Kuzushiji-MNIST is a drop-in replacement for the MNIST "
+                     "dataset (28x28 grayscale, 70,000 images), provided in "
+                     "the original MNIST format as well as a NumPy format. "
+                     "Since MNIST restricts us to 10 classes, we chose one "
+                     "character to represent each of the 10 rows of Hiragana "
+                     "when creating Kuzushiji-MNIST."),
+        features=tfds.features.FeaturesDict({
+            "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(names=[
+                "o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"
+            ]),
+        }),
+        supervised_keys=("image", "label"),
+        urls=["http://codh.rois.ac.jp/kmnist/index.html.en"],
+        citation=_K_MNIST_CITATION,
     )
 
 
