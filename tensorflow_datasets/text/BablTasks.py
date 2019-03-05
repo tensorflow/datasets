@@ -63,7 +63,7 @@ class TasksConfig(tfds.core.BuilderConfig):
     def __init__(self, text_encoder_config=None, **kwargs):
         """ BuilderConfig for tasks.
         Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
+        text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
         for the `tfds.features.text.TextEncoder` used for the tasks `"text"`
         feature.
       **kwargs: keyword arguments forwarded to super.
@@ -78,7 +78,7 @@ def _train_data_filenames(tmp_dir):
 def _test_data_filenames(tmp_dir):
     return tf.io.gfile.glob(os.path.join(tmp_dir, _TEST_FILE_FORMAT))
 
-class tasks(tfds.core.GeneratorBasedBuilder):
+class BablTasks(tfds.core.GeneratorBasedBuilder):
     """ Tasks dataset combining useful information of training and test data """
     BUILDER_CONFIGS = [
         TasksConfig(
@@ -120,11 +120,13 @@ class tasks(tfds.core.GeneratorBasedBuilder):
         return tfds.core.DatasetInfo(
             builder=self,
             description=_DESCRIPTION,
-            features=tfds.features.FeaturesDict({
+            features=tfds.features.SequenceDict({
                 "text":tfds.features.Text(
                     encoder_config=self.builder_config.text_encoder_config),
+                "id":tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config)
                         }),
-            supervised_keys=("text", "text"),
+            supervised_keys=None,
             urls=["http://www.thespermwhale.com/jaseweston/babi/"],
             citation=_CITATION
                 )
@@ -144,11 +146,11 @@ class tasks(tfds.core.GeneratorBasedBuilder):
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
-                num_shards=10,
+                num_shards=1,
                 gen_kwargs={"files": train_files}),
             tfds.core.SplitGenerator(
                 name=tfds.Split.TEST,
-                num_shards=10,
+                num_shards=1,
                 gen_kwargs={"files": test_files}),
             ]
 
@@ -158,5 +160,6 @@ class tasks(tfds.core.GeneratorBasedBuilder):
             with tf.io.gfile.GFile(filepath) as f:
                 for line in f:
                     yield {
-                        "text": line.strip(),
+                        "id": line[0],
+                        "text": line[2:],
                         }

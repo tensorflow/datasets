@@ -19,10 +19,10 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import tasks
+from tensorflow_datasets.text import BablTasks
 
-class TasksTest(testing.DatasetBuilderTestCase):
-    DATASET_CLASS= tasks.tasks
+class BablTasksTest(testing.DatasetBuilderTestCase):
+    DATASET_CLASS= BablTasks.BablTasks
     SPLITS={
             "train":3,
             "test":2,
