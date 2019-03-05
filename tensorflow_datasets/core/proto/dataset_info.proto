@@ -38,6 +38,12 @@ message SupervisedKeys {
   string output = 2;
 }
 
+// This message includes information for redistribution of the dataset.
+message RedistributionInfo {
+  // Text to be included in LICENSE file.
+  string license = 1;
+}
+
 // This is a serialization of tensorflow_datasets.core.DatasetInfo.
 message DatasetInfo {
   string name = 1;
@@ -68,5 +74,7 @@ message DatasetInfo {
   // can be specified using this.
   SupervisedKeys supervised_keys = 8;
 
-  // Next available: 11
+  RedistributionInfo redistribution_info = 11;
+
+  // Next available: 12
 }
