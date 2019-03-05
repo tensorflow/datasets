@@ -139,8 +139,15 @@ class DatasetInfoTest(testing.TestCase):
       with tf.io.gfile.GFile(info._dataset_info_filename(tmp_dir)) as f:
         new_json = json.load(f)
 
+      # Read the newly written LICENSE file into a string.
+      with tf.io.gfile.GFile(info._license_filename(tmp_dir)) as f:
+        license_ = f.read()
+
     # Assert what was read and then written and read again is the same.
     self.assertEqual(existing_json, new_json)
+
+    # Assert correct license was written.
+    self.assertEqual(existing_json["redistributionInfo"]["license"], license_)
 
   def test_restore_after_modification(self):
     # Create a DatasetInfo
@@ -150,6 +157,7 @@ class DatasetInfoTest(testing.TestCase):
         supervised_keys=("input", "output"),
         urls=["some location"],
         citation="some citation",
+        redistribution_info={"license": "some license"}
     )
     info.size_in_bytes = 456
     info.as_proto.schema.feature.add()
@@ -178,6 +186,7 @@ class DatasetInfoTest(testing.TestCase):
           supervised_keys=("input (new)", "output (new)"),
           urls=["some location (new)"],
           citation="some citation (new)",
+          redistribution_info={"license": "some license (new)"}
       )
       restored_info.size_in_bytes = 789
       restored_info.as_proto.schema.feature.add()
@@ -198,6 +207,8 @@ class DatasetInfoTest(testing.TestCase):
           restored_info.supervised_keys, ("input (new)", "output (new)"))
       self.assertEqual(restored_info.urls, ["some location (new)"])
       self.assertEqual(restored_info.citation, "some citation (new)")
+      self.assertEqual(restored_info.redistribution_info.license,
+                       "some license (new)")
       self.assertEqual(restored_info.size_in_bytes, 789)
       self.assertEqual(len(restored_info.as_proto.schema.feature), 4)
       self.assertEqual(restored_info.download_checksums, {

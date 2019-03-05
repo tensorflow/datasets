@@ -99,5 +99,8 @@
     "input": "image", 
     "output": "label"
   }, 
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "redistributionInfo": {
+    "license": "test license"
+  }
 }
