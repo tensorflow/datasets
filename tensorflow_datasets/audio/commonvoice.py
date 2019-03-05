@@ -2,6 +2,7 @@
 Mozilla Common Voice Dataset (English)
 """
 import os
+import csv
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 _DOWNLOAD_LINK = {
@@ -52,35 +53,18 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
             Generate Voice Samples and Statements Given the Path to the Shared Audio Folder
             and Path to the Train/Test/Validation File (.tsv)
         """
-        def decode_tsv(line):
-            """
-                Decodes Lines read from TSV Files
-            """
-            record_defaults = [""] * 8
-            data = tf.decode_csv(line, record_defaults, field_delim="\t")
-            return data
-
-        def convert(byte, type_):
-            """
-                Helper Function to Handle Typecasting of Missing Values
-            """
-            assert callable(type_)
-            value = byte.decode("utf-8")
-            return type_(value) if len(value) > 0 else 0
-        dataset = tfds.as_numpy(tf.data.TextLineDataset(
-            label_path).skip(1).map(decode_tsv))
+        dataset = csv.DictReader(label_path, delimiter="\t")
         ffmpeg = tfds.features.Audio(file_format="mp3")
-        for id_, path, sentence, upvotes, downvotes, age, gender, accent in dataset:
+        for row in dataset:
             wave = ffmpeg.encode_example(
                 os.path.join(
-                    audio_path, "%s.mp3" %
-                    path.decode("utf-8"))).astype("float32")
+                    audio_path, "%s.mp3" % row["path"]))
             yield {
-                "client_id": id_.decode("utf-8"),
+                "client_id": row["client_id"],
                 "voice": wave,
-                "sentence": sentence.decode("utf-8"),
-                "upvotes": convert(upvotes, int),
-                "downvotes": convert(downvotes, int),
-                "age": age.decode("utf-8"),
-                "gender": gender.decode("utf-8"),
-                "accent": accent.decode("utf-8")}
+                "sentence": row["sentence"],
+                "upvotes": int(row["up_votes"]) if len(row["up_votes"]) > 0 else 0,
+                "downvotes": int(row["down_votes"]) if len(row["down_votes"]) > 0 else 0,
+                "age": row["age"],
+                "gender": row["gender"],
+                "accent": row["accent"]}
