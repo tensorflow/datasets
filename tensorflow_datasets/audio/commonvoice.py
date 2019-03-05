@@ -59,7 +59,7 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
             for row in dataset:
                 wave = ffmpeg.encode_example(
                     os.path.join(
-                        audio_path, "%s.mp3" % row["path"]))
+                        audio_path, "%s.mp3" % row["path"])).astype("float32")
                 yield {
                     "client_id": row["client_id"],
                     "voice": wave,
