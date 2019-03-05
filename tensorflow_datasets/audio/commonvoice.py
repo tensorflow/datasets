@@ -53,7 +53,8 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
             Generate Voice Samples and Statements Given the Path to the Shared Audio Folder
             and Path to the Train/Test/Validation File (.tsv)
         """
-        dataset = csv.DictReader(label_path, delimiter="\t")
+        file_ = tf.gfile.GFile(label_path)
+        dataset = csv.DictReader(file_, delimiter="\t")
         ffmpeg = tfds.features.Audio(file_format="mp3")
         for row in dataset:
             wave = ffmpeg.encode_example(
