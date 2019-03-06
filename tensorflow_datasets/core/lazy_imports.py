@@ -94,5 +94,10 @@ class LazyImporter(object):
     """For testing purposes only."""
     return _try_import("test_foo")
 
+  @utils.classproperty
+  @classmethod
+  def test_shutil(cls):
+    """For testing purposes only."""
+    return _try_import("shutil")
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name
