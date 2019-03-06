@@ -496,7 +496,7 @@ to be updated.
 dataset. It uses "fake examples" as test data that mimic the structure of the
 source dataset.
 
-The test data should be put in in
+The test data should be put in
 [`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/)
 under the `my_dataset` directory and should mimic the source dataset artifacts
 as downloaded and extracted. It can be created manually or automatically with a
