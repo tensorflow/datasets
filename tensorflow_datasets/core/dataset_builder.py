@@ -23,7 +23,7 @@ import abc
 import functools
 import os
 import sys
-from shutil import disk_usage
+import shutil
 
 from absl import logging
 import six
@@ -384,7 +384,7 @@ class DatasetBuilder(object):
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
 
-    free_disk_size = disk_usage(os.path.realpath('/'))[2] # this is an array
+    free_disk_size = shutil.disk_usage(os.path.realpath('/'))[2] # this is an array
                                                           # like tha usage(total=121123069952, used=101785796608, free=15452622848)
     dataset_size = self.info.size_in_bytes
 
