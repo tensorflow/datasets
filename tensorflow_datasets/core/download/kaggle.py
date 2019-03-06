@@ -101,7 +101,7 @@ class KaggleCompetitionDownloader(object):
         self._competition_name,
     ]
     output = _run_kaggle_command(command, self._competition_name)
-    return sorted([line.split(",")[0] for line in output.split("\n")[1:]])
+    return sorted([line.split(",")[0] for line in output.split("\n")[1:] if line!=""])
 
   @utils.memoized_property
   def competition_urls(self):
