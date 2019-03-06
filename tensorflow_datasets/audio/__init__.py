@@ -19,3 +19,4 @@ from tensorflow_datasets.audio.librispeech import Librispeech
 from tensorflow_datasets.audio.librispeech import LibrispeechConfig
 from tensorflow_datasets.audio.nsynth import Nsynth
 from tensorflow_datasets.audio.commonvoice import CommonVoice
+from tensorflow_datasets.audio.commonvoice import CommonVoiceConfig

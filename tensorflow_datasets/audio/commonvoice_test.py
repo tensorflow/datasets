@@ -11,7 +11,6 @@ class CommonVoiceTest(tfds_test.DatasetBuilderTestCase):
     """
     DATASET_CLASS = commonvoice.CommonVoice
     SPLITS = {"train": 3, "test": 3, "validation": 3}
-    DL_EXTRACT_RESULT = {"en": "."}
 
 
 if __name__ == "__main__":
