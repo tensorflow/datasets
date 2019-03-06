@@ -31,7 +31,7 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
                 "gender": tfds.features.Text(),
                 "accent": tfds.features.Text(),
                 "sentence": tfds.features.Text(),
-                "voice": tfds.features.Tensor(shape=(None,), dtype=tf.float32)
+                "voice": tfds.features.Audio()
             }),
             urls=[u"https://voice.mozilla.org/en/datasets"]
         )
@@ -55,14 +55,10 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
         """
         with tf.io.gfile.GFile(label_path) as file_:
             dataset = csv.DictReader(file_, delimiter="\t")
-            ffmpeg = tfds.features.Audio(file_format="mp3")
             for row in dataset:
-                wave = ffmpeg.encode_example(
-                    os.path.join(
-                        audio_path, "%s.mp3" % row["path"])).astype("float32")
                 yield {
                     "client_id": row["client_id"],
-                    "voice": wave,
+                    "voice": os.path.join(audio_path,"%s.mp3"%row["path"]),
                     "sentence": row["sentence"],
                     "upvotes": int(row["up_votes"]) if len(row["up_votes"]) > 0 else 0,
                     "downvotes": int(row["down_votes"]) if len(row["down_votes"]) > 0 else 0,
