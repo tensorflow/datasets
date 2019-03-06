@@ -382,6 +382,19 @@ class DatasetBuilder(object):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
+    stat = os.statvfs('/')
+    free_disk_size = (stat.f_bavail * stat.f_frsize) / 1024
+    dataset_size = self.info.size_in_bytes
+
+    def _check_disk_size():
+        if (dataset_size > free_disk_size ) :
+            raise IOError("Not enough disk space!!\nDataset size : {dataset_size} \nFree size : {free_disk_size} \nYou need to extra {needed_disk_size} to download."
+                          .format(dataset_size=units.size_str(dataset_size),
+                                  free_disk_size=units.size_str(free_disk_size),
+                                  needed_disk_size=units.size_str(dataset_size-free_disk_size)))
+
+    _check_disk_size()
+
     size_text = units.size_str(self.info.size_in_bytes)
     termcolor.cprint(
         "Downloading / extracting dataset %s (%s) to %s..." %
