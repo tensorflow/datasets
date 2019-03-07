@@ -13,13 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Translation datasets."""
+"""Tests for the bilingual translate TED Talk module."""
 
-from tensorflow_datasets.translate.flores import FloresConfig
-from tensorflow_datasets.translate.flores_neen import FloresTranslateNeen
-from tensorflow_datasets.translate.flores_sien import FloresTranslateSien
-from tensorflow_datasets.translate.ted_hrlr import TedHrlrTranslate
-from tensorflow_datasets.translate.ted_multi import TedMultiTranslate
-from tensorflow_datasets.translate.wmt import WMTConfig
-from tensorflow_datasets.translate.wmt_ende import WmtTranslateEnde
-from tensorflow_datasets.translate.wmt_enfr import WmtTranslateEnfr
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.translate import ted_hrlr
+
+
+class TedHrlrTranslateTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = ted_hrlr.TedHrlrTranslate
+  BUILDER_CONFIG_NAMES_TO_TEST = ["az_to_en", "az_tr_to_en"]
+  SPLITS = {
+      "train": 4,
+      "validation": 4,
+      "test": 4,
+  }
+
+
+if __name__ == "__main__":
+  testing.test_main()
