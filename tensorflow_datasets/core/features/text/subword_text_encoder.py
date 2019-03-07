@@ -380,7 +380,8 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
       # Sort subwords by count in descending order, keeping reserved_tokens as
       # the beginning.
       candidate_subwords.sort(reverse=True)
-      subwords = reserved_tokens + [s for _, s in candidate_subwords]
+      subwords = reserved_tokens + [s for _, s in candidate_subwords
+                                    if s not in reserved_tokens]
 
     return cls(vocab_list=subwords)
 
