@@ -132,9 +132,9 @@ class Nsynth(tfds.core.GeneratorBasedBuilder):
           "pitch": features["pitch"].int64_list.value[0],
           "velocity": features["velocity"].int64_list.value[0],
           "instrument": {
-              "label": features["instrument_str"].bytes_list.value[0],
-              "family": features["instrument_family_str"].bytes_list.value[0],
-              "source": features["instrument_source_str"].bytes_list.value[0]
+              "label": features["instrument_str"].bytes_list.value[0].decode("utf-8"),
+              "family": features["instrument_family_str"].bytes_list.value[0].decode("utf-8"),
+              "source": features["instrument_source_str"].bytes_list.value[0].decode("utf-8")
           },
           "qualities": {
               q: features["qualities"].int64_list.value[i]
