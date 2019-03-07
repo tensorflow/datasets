@@ -1,0 +1,28 @@
+; Some pipe(|) separated metadata about the audio chapters included in the corpus.
+;
+; The meaning of the fields in left-to-right order is as follows:
+;
+; chapter_id: the ID of the chapter in the LibriVox's database
+; reader_id: the ID of the reader in the LibriVox's database
+; duration: how many minutes of this chapter are used in the corpus
+; subset: the corpus subset to which this chapter is assigned
+; project_id: the LibriVox project ID
+; book_id: the Project Gutenberg's ID for the book on which the LibriVox project is based
+; chapter_title: the title of the chapter on LibriVox
+; project_title: the title of the LibriVox project
+;
+;ID    |READER|MINUTES| SUBSET           | PROJ.|BOOK ID| CH. TITLE  | PROJECT TITLE
+01     | 11   | 19.77 | dev-clean        | 53   | 2     | In Chancer | Bleak House
+02     | 12   | 10.30 | dev-clean        | 53   | 3     | In Fashion | Bleak House
+03     | 13   | 7.67  | dev-other        | 68   | 7     | Letter XXV | Unbeaten Tracks in Japan
+04     | 14   | 8.42  | dev-other        | 219  | 9     | Chapter 01 | Northanger Abbey
+05     | 15   | 11.68 | test-clean       | 219  | 1     | Chapter 02 | Northanger Abbey
+06     | 16   | 11.25 | test-clean       | 219  | 5     | Chapter 03 | Northanger Abbey
+07     | 17   | 7.57  | test-other       | 219  | 9     | Chapter 04 | Northanger Abbey
+08     | 18   | 12.76 | test-other       | 219  | 3     | Chapter 07 | Northanger Abbey
+09     | 19   | 12.82 | train-clean-100  | 219  | 4     | Chapter 08 | Northanger Abbey
+10     | 20   | 18.33 | train-clean-100  | 219  | 6     | Chapter 10 | Northanger Abbey
+11     | 21   | 12.95 | train-clean-360  | 219  | 8     | Chapter 11 | Northanger Abbey
+12     | 22   | 8.20  | train-clean-360  | 219  | 1     | Chapter 12 | Northanger Abbey
+13     | 23   | 12.09 | train-other-500  | 219  | 4     | Chapter 15 | Northanger Abbey
+14     | 24   | 6.19  | train-other-500  | 219  | 5     | Chapter 17 | Northanger Abbey
