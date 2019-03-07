@@ -55,7 +55,6 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description="A large set of fruits on a white background.",
         features=tfds.features.FeaturesDict({
-            #"image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "file_name": tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
             "label": tfds.features.ClassLabel(
                 names=_CLASS_NAMES),
@@ -106,9 +105,7 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
 
       for fn in sorted(fns):
         image_fn = os.path.join(class_dir, fn)
-        #image = _load_image(image_fn)
         yield {
-        #    "image": image,
             "label": class_name,
             "file_name": image_fn,
         }
