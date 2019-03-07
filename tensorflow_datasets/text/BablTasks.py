@@ -54,8 +54,8 @@ _DOWNLOAD_URL = ("http://www.thespermwhale.com/jaseweston/babi/"
                  "tasks_1-20_v1-2.tar.gz")
 _TOP_LEVEL_DIR = "tasks_1-29_v1-2"
 
-_TRAIN_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR, "shuffled-10k", "qa(.*)train.txt")
-_TEST_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR, "shuffled-10k", "qa(.*)test.txt")
+_TRAIN_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR, "shuffled-10k", "qa*train.txt")
+_TEST_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR, "shuffled-10k", "qa*test.txt")
 
 class TasksConfig(tfds.core.BuilderConfig):
     """ Builder config for tasks dataset"""
