@@ -235,7 +235,7 @@ class BinaryRunLengthEncodedFeature(RunLengthEncodedFeatureBase):
       return np_impl.dense_to_brle(example_data, dtype=dtype)
     elif example_data.dtype == dtype:
       # assume encoded already
-      _check_size(np_impl.brle_length(example_data), self._shape)
+      _check_size(np.sum(example_data), self._shape)
       return example_data
     else:
       raise ValueError(

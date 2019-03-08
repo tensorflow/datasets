@@ -173,7 +173,7 @@ class RunLengthEncodedFeatureTest(test_utils.FeatureExpectationsTestCase):
     shape = (10,)
     brle_dense_and_encodings = (
         (bools([0, 0, 0, 1, 1, 0, 0, 0, 1, 1]), ints([3, 2, 3, 2])),
-        (bools([0, 0, 0, 1, 1, 0, 0, 0, 1, 0]), ints([3, 2, 3, 1, 1, 0])),
+        (bools([0, 0, 0, 1, 1, 0, 0, 0, 1, 0]), ints([3, 2, 3, 1, 1])),
     )
     brle_items = []
     for dense, encoding in brle_dense_and_encodings:

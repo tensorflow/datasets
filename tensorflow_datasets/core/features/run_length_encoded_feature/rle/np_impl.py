@@ -6,20 +6,6 @@ from __future__ import print_function
 import numpy as np
 
 
-def brle_length(brle):
-  """Length of dense form of binary run-length-encoded input.
-
-  Efficient implementation of `len(brle_to_dense(brle))`."""
-  return np.sum(brle)
-
-
-def rle_length(rle):
-  """Length of dense form of run-length-encoded input.
-
-  Efficient implementation of `len(rle_to_dense(rle))`."""
-  return np.sum(rle[1::2])
-
-
 def rle_to_brle(rle, dtype=None):
   """Convert run length encoded (RLE) value/counts to BRLE.
 
@@ -53,29 +39,7 @@ def rle_to_brle(rle, dtype=None):
     out.append(0)
   if dtype is not None:
     out = brle_to_brle(out, dtype=dtype)
-  out = maybe_pad_brle(out)
   return out
-
-
-def maybe_pad_brle(lengths, start_value=False):
-  """Get a potentially padded version of lengths.
-
-  Args:
-    lengths: rank 1 int array
-    start_value: bool indicating value corresponding to the first value of
-      lengths
-
-  Returns:
-    rank 1 array of same dtype as lengths, with an extra zero at the front
-      if `start_value`, and an extra zero at the end if the resulting array
-      would not have an even number of elements.
-  """
-  pad_left = int(start_value)
-  pad_right = (len(lengths) + pad_left) % 2
-  if pad_left + pad_right > 0:
-    return np.pad(lengths, [pad_left, pad_right], mode='constant')
-  else:
-    return lengths
 
 
 def merge_brle_lengths(lengths):
@@ -94,7 +58,7 @@ def merge_brle_lengths(lengths):
         accumulating = True
       else:
         out.append(int(length))
-  return maybe_pad_brle(out)
+  return out
 
 
 def split_long_brle_lengths(lengths, dtype=np.int64):
@@ -146,7 +110,9 @@ def dense_to_brle(dense_data, dtype=np.int64):
   starts = np.r_[0, np.flatnonzero(dense_data[1:] != dense_data[:-1]) + 1]
   lengths = np.diff(np.r_[starts, n])
   lengths = split_long_brle_lengths(lengths, dtype=dtype)
-  return maybe_pad_brle(lengths, dense_data[0])
+  if dense_data[0]:
+    lengths = np.pad(lengths, [1, 0], mode='constant')
+  return lengths
 
 
 _ft = np.array([False, True], dtype=np.bool)

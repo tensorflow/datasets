@@ -9,11 +9,6 @@ from tensorflow_datasets.core.features.run_length_encoded_feature.rle import np_
 
 
 class BlreNpTest(unittest.TestCase):
-  def test_brle_length(self):
-    np.testing.assert_equal(np_impl.brle_length([5, 10, 3, 2]), 20)
-
-  def test_rle_length(self):
-    np.testing.assert_equal(np_impl.rle_length([4, 10, 1, 20, 3, 30]), 60)
 
   def test_merge_rle_lengths(self):
     v0, l0 = [5, 5, 2], [10, 10, 1]
@@ -37,12 +32,6 @@ class BlreNpTest(unittest.TestCase):
     np.testing.assert_equal(v0, v1)
     np.testing.assert_equal(l0, l1)
 
-  def test_maybe_pad_brle(self):
-    np.testing.assert_equal(np_impl.maybe_pad_brle([5], 0), [5, 0])
-    np.testing.assert_equal(np_impl.maybe_pad_brle([5], 1), [0, 5])
-    np.testing.assert_equal(np_impl.maybe_pad_brle([5, 3], 0), [5, 3])
-    np.testing.assert_equal(np_impl.maybe_pad_brle([5, 3], 1), [0, 5, 3, 0])
-
   def test_merge_brle_lengths(self):
     np.testing.assert_equal(
       np_impl.merge_brle_lengths([10, 0, 10, 2]), [20, 2])
@@ -59,17 +48,17 @@ class BlreNpTest(unittest.TestCase):
       [255, 0, 45, 255, 0, 255, 0, 90, 10])
 
   def test_brle_split_merge(self):
-    x = [300, 600, 10, 0]
+    x = [300, 600, 10]
     split = np_impl.split_long_brle_lengths(x, np.uint8)
     merged = np_impl.merge_brle_lengths(split)
     np.testing.assert_equal(merged, x)
 
   def test_dense_to_brle(self):
     x = np.array([False]*300 + [True]*200 + [False]*1000)
-    np.testing.assert_equal(np_impl.dense_to_brle(x), [300, 200, 1000, 0])
+    np.testing.assert_equal(np_impl.dense_to_brle(x), [300, 200, 1000])
     np.testing.assert_equal(
         np_impl.dense_to_brle(x, np.uint8),
-        [255, 0, 45, 200, 255, 0, 255, 0, 255, 0, 235, 0])
+        [255, 0, 45, 200, 255, 0, 255, 0, 255, 0, 235])
 
   def test_brle_to_rle(self):
     np.testing.assert_equal(
