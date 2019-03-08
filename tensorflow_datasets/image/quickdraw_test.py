@@ -13,15 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Tests for Quickdraw data."""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.image import quickdraw
-import tensorflow_datasets.testing as tfds_test
 
 
-class QuickdrawTest(tfds_test.DatasetBuilderTestCase):
+class QuickdrawTest(testing.DatasetBuilderTestCase):
 
   DATASET_CLASS = quickdraw.QuickdrawBitmap
   SPLITS = {
@@ -34,4 +35,4 @@ class QuickdrawTest(tfds_test.DatasetBuilderTestCase):
   }
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

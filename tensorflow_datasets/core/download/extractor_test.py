@@ -23,10 +23,9 @@ import os
 
 from absl.testing import absltest
 import tensorflow as tf
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
-import tensorflow_datasets.testing as tfds_test
 
 
 def _read(path):
@@ -34,7 +33,7 @@ def _read(path):
     return f.read()
 
 
-class ExtractorTest(tfds_test.TestCase):
+class ExtractorTest(testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
@@ -104,6 +103,14 @@ class ExtractorTest(tfds_test.TestCase):
     foo_csv_path = os.path.join(self.test_data, 'foo.csv')
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
+  def test_bzip2(self):
+    from_path = os.path.join(self.test_data, 'archives', 'foo.csv.bz2')
+    resource = resource_lib.Resource(
+        path=from_path, extract_method=resource_lib.ExtractMethod.BZIP2)
+    self.extractor.extract(resource, self.to_path).get()
+    foo_csv_path = os.path.join(self.test_data, 'foo.csv')
+    self.assertEqual(_read(self.to_path), _read(foo_csv_path))
+
   def test_absolute_path(self):
     from_path = os.path.join(self.test_data, 'archives', 'absolute_path.tar')
     resource = resource_lib.Resource(
@@ -127,4 +134,4 @@ class ExtractorTest(tfds_test.TestCase):
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

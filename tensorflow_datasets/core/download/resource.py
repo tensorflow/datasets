@@ -51,6 +51,7 @@ class ExtractMethod(enum.Enum):
   TAR_GZ = 3
   GZIP = 4
   ZIP = 5
+  BZIP2 = 6
 
 
 _EXTRACTION_METHOD_TO_EXTS = [
@@ -58,6 +59,7 @@ _EXTRACTION_METHOD_TO_EXTS = [
     (ExtractMethod.TAR, ['.tar', '.tar.bz2', '.tbz2', '.tbz', '.tb2']),
     (ExtractMethod.ZIP, ['.zip']),
     (ExtractMethod.GZIP, ['.gz']),
+    (ExtractMethod.BZIP2, ['.bz2']),
 ]
 
 _KNOWN_EXTENSIONS = [
@@ -243,7 +245,11 @@ class Resource(object):
   def extract_method(self):
     """Returns `ExtractMethod` to use on resource. Cannot be None."""
     if not self._extract_method:
-      self._extract_method = _guess_extract_method(self.fname)
+      self._extract_method = _guess_extract_method(
+          # no original_fname if extract is called directly (no URL).
+          # We need to use the original_fname as much as possible for files
+          # for which the url doesn't give extension (eg: drive).
+          self._get_info() and self._get_original_fname() or self.fname)
     return self._extract_method
 
   @property

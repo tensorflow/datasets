@@ -21,9 +21,11 @@ from __future__ import print_function
 
 import contextlib
 import os
+import subprocess
 import tempfile
 
 from absl.testing import absltest
+
 import numpy as np
 import tensorflow as tf
 
@@ -39,18 +41,21 @@ from tensorflow_datasets.testing import test_case
 
 @contextlib.contextmanager
 def tmp_dir(dirname=None):
+  """Context manager for a temporary directory."""
   tmp = make_tmp_dir(dirname)
   yield tmp
   rm_tmp_dir(tmp)
 
 
 def make_tmp_dir(dirname=None):
+  """Make a temporary directory."""
   if dirname and not tf.io.gfile.exists(dirname):
     tf.io.gfile.makedirs(dirname)
   return tempfile.mkdtemp(dir=dirname)
 
 
 def rm_tmp_dir(dirname):
+  """Rm temporary directory."""
   tf.io.gfile.rmtree(dirname)
 
 
@@ -123,7 +128,7 @@ class SubTestCase(test_case.TestCase):
 def run_in_graph_and_eager_modes(func=None,
                                  config=None,
                                  use_gpu=True):
-  """Execute the decorated test with and without enabling eager execution.
+  """Execute the decorated test in both graph mode and eager mode.
 
   This function returns a decorator intended to be applied to test methods in
   a `test_case.TestCase` class. Doing so will cause the contents of the test
@@ -139,9 +144,9 @@ def run_in_graph_and_eager_modes(func=None,
   ```python
   tf.compat.v1.enable_eager_execution()
 
-  class SomeTest(test_case.TestCase):
+  class SomeTest(testing.TestCase):
 
-    @test_utils.run_in_graph_and_eager_modes
+    @testing.run_in_graph_and_eager_modes
     def test_foo(self):
       x = tf.constant([1, 2])
       y = tf.constant([3, 4])
@@ -149,7 +154,7 @@ def run_in_graph_and_eager_modes(func=None,
       self.assertAllEqual([4, 6], self.evaluate(z))
 
   if __name__ == "__main__":
-    tfds_test.test_main()
+    testing.test_main()
   ```
 
   This test validates that `tf.add()` has the same behavior when computed with
@@ -392,6 +397,67 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
 
 
 def test_main():
-  # NOTE: Checking if eager is enabled doesn't let us enable eager execution!
+  """Entrypoint for tests."""
   tf.compat.v1.enable_eager_execution()
   tf.test.main()
+
+
+@contextlib.contextmanager
+def mock_kaggle_api(filenames=None, err_msg=None):
+  """Mock out the kaggle CLI.
+
+  Args:
+    filenames: `list<str>`, names of the competition files.
+    err_msg: `str`, if provided, the kaggle CLI will raise a CalledProcessError
+      and this will be the command output.
+
+  Yields:
+    None, context will have kaggle CLI mocked out.
+  """
+
+  def make_mock_files_call(filenames, err_msg):
+    """Mock subprocess.check_output for files call."""
+
+    def check_output(command_args):
+      assert command_args[2] == "files"
+      if err_msg:
+        raise subprocess.CalledProcessError(1, command_args,
+                                            tf.compat.as_bytes(err_msg))
+      return tf.compat.as_bytes(
+          "\n".join(["name,size,creationDate"] +
+                    ["%s,34MB,None" % fname for fname in filenames]))
+
+    return check_output
+
+  def make_mock_download_call():
+    """Mock subprocess.check_output for download call."""
+
+    def check_output(command_args):
+      assert command_args[2] == "download"
+      fname = command_args[command_args.index("--file") + 1]
+      out_dir = command_args[command_args.index("--path") + 1]
+      fpath = os.path.join(out_dir, fname)
+      with tf.io.gfile.GFile(fpath, "w") as f:
+        f.write(fname)
+      return tf.compat.as_bytes("Downloading %s to %s" % (fname, fpath))
+
+    return check_output
+
+  def make_mock_check_output(filenames, err_msg):
+    """Mock subprocess.check_output for both calls."""
+
+    files_call = make_mock_files_call(filenames, err_msg)
+    dl_call = make_mock_download_call()
+
+    def check_output(command_args):
+      if command_args[2] == "files":
+        return files_call(command_args)
+      else:
+        assert command_args[2] == "download"
+        return dl_call(command_args)
+
+    return check_output
+
+  with absltest.mock.patch("subprocess.check_output",
+                           make_mock_check_output(filenames, err_msg)):
+    yield

@@ -48,10 +48,10 @@ landing_page:
     items:
     - heading: Introducing TensorFlow Datasets
       image_path: /resources/images/tf-logo-card-16x9.png
-      path: https://www.tensorflow.org/datasets/
+      path: https://github.com/tensorflow/datasets/blob/master/docs/announce_proxy.md
       buttons:
-      - label: Coming soon...
-        path: https://www.tensorflow.org/datasets/
+      - label: Read on TensorFlow Blog
+        path: https://github.com/tensorflow/datasets/blob/master/docs/announce_proxy.md
     - heading: TensorFlow Datasets on GitHub
       image_path: /resources/images/github-card-16x9.png
       path: https://github.com/tensorflow/datasets

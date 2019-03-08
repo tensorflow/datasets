@@ -129,6 +129,7 @@ class DatasetBuilder(object):
   # be available through tfds.{load, builder} or documented in datasets.md.
   IN_DEVELOPMENT = False
 
+
   @api_utils.disallow_positional_args
   def __init__(self, data_dir=None, config=None):
     """Constructs a DatasetBuilder.
@@ -142,35 +143,22 @@ class DatasetBuilder(object):
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
     """
-    # Create the builder config if exists
     self._builder_config = self._create_builder_config(config)
-
-    self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
-
     # Extract code version (VERSION or config)
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
           "DatasetBuilder {} does not have defined version. Please add a "
           "`VERSION = tfds.Version('x.y.z')` to the class.".format(
               self.name))
-
-    if self._builder_config:
-      self._version = utils.Version(self._builder_config.version)
-    else:
-      self._version = utils.Version(self.VERSION)
-
-    # Load the data dir
+    self._version = utils.Version(
+        self._builder_config and self._builder_config.version or self.VERSION)
+    self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
     self._data_dir = self._build_data_dir()
-
-    # Use data version (restored from disk)
     if tf.io.gfile.exists(self._data_dir):
-      # Overwrite the current dataset info with the restored data version.
+      logging.info("Overwrite dataset info from restored data version.")
       self.info.read_from_directory(self._data_dir)
-
-    # Use the code version (do not restore data)
-    else:
-      # If defined, add pre-computed info to DatasetInfo (num samples, splits,
-      # ...)
+    else:  # Use the code version (do not restore data)
+      logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
 
   @utils.memoized_property
@@ -247,12 +235,9 @@ class DatasetBuilder(object):
         else:  # Mode is forced or stats do not exists yet
           logging.info("Computing statistics.")
           self.info.compute_dynamic_properties()
-        # DLManager dynamic fields are only updated if not restored by GCS
-        if not self.info.download_checksums:
-          # Set checksums for all files downloaded
-          self.info.download_checksums = dl_manager.recorded_download_checksums
-          # Set size of all files downloaded
-          self.info.size_in_bytes = sum(dl_manager.download_sizes.values())
+        # Set checksums of downloaded (or cached) files, and size:
+        self.info.download_checksums = dl_manager.recorded_download_checksums
+        self.info.size_in_bytes = sum(dl_manager.download_sizes.values())
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)
 

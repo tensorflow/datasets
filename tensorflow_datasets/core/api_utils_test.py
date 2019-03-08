@@ -18,12 +18,11 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import api_utils
-import tensorflow_datasets.testing as tfds_test
 
 
-class ApiUtilsTest(tfds_test.TestCase):
+class ApiUtilsTest(testing.TestCase):
 
   def test_disallow_positional_args(self):
 
@@ -79,4 +78,4 @@ class ApiUtilsTest(tfds_test.TestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

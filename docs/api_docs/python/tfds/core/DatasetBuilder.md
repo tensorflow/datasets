@@ -26,6 +26,7 @@ Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tr
 Abstract base class for all datasets.
 
 `DatasetBuilder` has 3 key methods:
+
   * `tfds.DatasetBuilder.info`: documents the dataset, including feature
     names, types, and shapes, version, splits, citation, etc.
   * `tfds.DatasetBuilder.download_and_prepare`: downloads the source data

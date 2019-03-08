@@ -108,7 +108,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords8k",
-          version="0.0.1",
+          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -117,7 +117,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords32k",
-          version="0.0.1",
+          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
                        "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(

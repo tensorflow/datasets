@@ -26,10 +26,9 @@ import tempfile
 
 from absl.testing import absltest
 import tensorflow as tf
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
-from tensorflow_datasets.core.download import resource as resouce_lib
-import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets.core.download import resource as resource_lib
 
 
 class _FakeResponse(object):
@@ -47,14 +46,14 @@ class _FakeResponse(object):
       yield line
 
 
-class DownloaderTest(tfds_test.TestCase):
+class DownloaderTest(testing.TestCase):
 
   def setUp(self):
     self.addCleanup(absltest.mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
     self.url = 'http://example.com/foo.tar.gz'
-    self.resource = resouce_lib.Resource(url=self.url)
+    self.resource = resource_lib.Resource(url=self.url)
     self.path = os.path.join(self.tmp_dir, 'foo.tar.gz')
     self.incomplete_path = '%s.incomplete' % self.path
     self.response = b'This \nis an \nawesome\n response!'
@@ -82,7 +81,7 @@ class DownloaderTest(tfds_test.TestCase):
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
   def test_drive_no_cookies(self):
-    resource = resouce_lib.Resource(
+    resource = resource_lib.Resource(
         url='https://drive.google.com/uc?export=download&id=a1b2bc3')
     promise = self.downloader.download(resource, self.tmp_dir)
     checksum, _ = promise.get()
@@ -113,8 +112,18 @@ class DownloaderTest(tfds_test.TestCase):
     with self.assertRaises(downloader.DownloadError):
       promise.get()
 
+  def test_kaggle_api(self):
+    fname = 'a.csv'
+    with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
+      resource = resource_lib.Resource(url='kaggle://some-competition/a.csv')
+      promise = self.downloader.download(resource, self.tmp_dir)
+      _, dl_size = promise.get()
+      self.assertEqual(dl_size, len(fname))
+      with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
+        self.assertEqual(fname, f.read())
 
-class GetFilenameTest(tfds_test.TestCase):
+
+class GetFilenameTest(testing.TestCase):
 
   def test_no_headers(self):
     resp = _FakeResponse('http://foo.bar/baz.zip', b'content')
@@ -131,4 +140,4 @@ class GetFilenameTest(tfds_test.TestCase):
     self.assertEqual(res, 'hello.zip')
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

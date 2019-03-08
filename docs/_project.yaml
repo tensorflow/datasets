@@ -1,5 +1,5 @@
 name: TensorFlow Datasets
-breadcrumb_name: Datasets
+breadcrumb_name: Datasets v1.0.1
 home_url: /datasets/
 parent_project_metadata_path: /_project.yaml
 description: >
@@ -8,3 +8,4 @@ use_site_branding: true
 hide_from_products_list: true
 content_license: cc3-apache2
 buganizer_id: 473701
+include: /_project_included.yaml

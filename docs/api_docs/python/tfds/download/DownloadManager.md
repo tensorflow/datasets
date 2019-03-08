@@ -7,6 +7,7 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
 <meta itemprop="property" content="download_and_extract"/>
+<meta itemprop="property" content="download_kaggle_data"/>
 <meta itemprop="property" content="extract"/>
 <meta itemprop="property" content="iter_archive"/>
 </div>
@@ -23,23 +24,23 @@ Defined in [`core/download/download_manager.py`](https://github.com/tensorflow/d
 
 Manages the download and extraction of files, as well as caching.
 
-Downloaded files are cached under `download_dir`. The file name is:
-  - if there is a sha256 associated with the url: "${sha256_of_content}s".
-  - otherwise: "url.%(sha256_of_url)s".
+Downloaded files are cached under `download_dir`. The file name of downloaded
+ files follows pattern "${sanitized_url}${content_checksum}.${ext}". Eg:
+ 'cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz'.
 
-The sha256 of content (if any) associated to each URL are given through the
-`checksum_file` given to constructor.
+While a file is being downloaded, it is placed into a directory following a
+similar but different pattern:
+"%{sanitized_url}${url_checksum}.tmp.${uuid}".
 
 When a file is downloaded, a "%{fname}s.INFO.json" file is created next to it.
 This INFO file contains the following information:
 {"dataset_names": ["name1", "name2"],
  "urls": ["http://url.of/downloaded_file"]}
-The INFO files are used by `create_checksum_files.py` script.
 
 Extracted files/dirs are stored under `extract_dir`. The file name or
 directory name is the same as the original name, prefixed with the extraction
-method. E.g. "${extract_dir}/ZIP.%(sha256_of_zipped_content)s" or
-             "${extract_dir}/TAR.%(sha256_of_url)s".
+method. E.g.
+ "${extract_dir}/TAR_GZ.cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz".
 
 The function members accept either plain value, or values wrapped into list
 or dict. Giving a data structure will parallelize the downloads.
@@ -162,6 +163,14 @@ automatically be deduced from downloaded file name.
 #### Returns:
 
 extracted_path(s): `str`, extracted paths of given URL(s).
+
+<h3 id="download_kaggle_data"><code>download_kaggle_data</code></h3>
+
+``` python
+download_kaggle_data(competition_name)
+```
+
+Download data for a given Kaggle competition.
 
 <h3 id="extract"><code>extract</code></h3>
 

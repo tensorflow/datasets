@@ -19,13 +19,22 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import contextlib
 import os
 import tempfile
 
+from absl import logging
 from absl.testing import absltest
 import six
 import tensorflow as tf
+from tensorflow_datasets.core import dataset_info
 
+
+
+GCS_ACCESS_FNS = {
+    "original": dataset_info.gcs_dataset_files,
+    "dummy": lambda _: []
+}
 
 
 class TestCase(tf.test.TestCase):
@@ -39,6 +48,16 @@ class TestCase(tf.test.TestCase):
   def setUpClass(cls):
     super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
+    # Test must not communicate with GCS.
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["dummy"]
+
+  @contextlib.contextmanager
+  def gcs_access(self):
+    # Restore GCS access
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["original"]
+    yield
+    # Revert access
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["dummy"]
 
   def setUp(self):
     super(TestCase, self).setUp()
@@ -53,3 +72,14 @@ class TestCase(tf.test.TestCase):
     return super(TestCase, self).assertRaisesWithPredicateMatch(
         err_type, predicate_fct)
 
+  @contextlib.contextmanager
+  def assertLogs(self, text, level="info"):
+    with absltest.mock.patch.object(logging, level) as mock_log:
+      yield
+      concat_logs = ""
+      for log_call in mock_log.call_args_list:
+        args = log_call[0]
+        base, args = args[0], args[1:]
+        log_text = base % tuple(args)
+        concat_logs += " " + log_text
+      self.assertIn(text, concat_logs)

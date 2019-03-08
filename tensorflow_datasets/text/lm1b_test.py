@@ -19,11 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets import testing
 from tensorflow_datasets.text import lm1b
 
 
-class Lm1bTest(tfds_test.DatasetBuilderTestCase):
+class Lm1bTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = lm1b.Lm1b
   SPLITS = {
       "train": 3,
@@ -32,4 +32,4 @@ class Lm1bTest(tfds_test.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

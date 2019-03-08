@@ -25,14 +25,13 @@ import tempfile
 import numpy as np
 import pydub
 import tensorflow as tf
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
-import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class AudioFeatureTest(tfds_test.FeatureExpectationsTestCase):
+class AudioFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_audio(self):
 
@@ -44,7 +43,7 @@ class AudioFeatureTest(tfds_test.FeatureExpectationsTestCase):
         shape=(None,),
         dtype=tf.int64,
         tests=[
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=np_audio,
                 expected=np_audio,
             ),
@@ -65,7 +64,7 @@ class AudioFeatureTest(tfds_test.FeatureExpectationsTestCase):
         shape=(None,),
         dtype=tf.int64,
         tests=[
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=tmp_file,
                 expected=np_audio,
             ),
@@ -74,4 +73,4 @@ class AudioFeatureTest(tfds_test.FeatureExpectationsTestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

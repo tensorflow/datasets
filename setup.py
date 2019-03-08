@@ -23,7 +23,7 @@ if '--nightly' in sys.argv:
   sys.argv.remove('--nightly')
 
 project_name = 'tensorflow-datasets'
-version = '1.0.0'
+version = '1.0.1'
 if nightly:
   project_name = 'tfds-nightly'
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
@@ -56,6 +56,7 @@ if sys.version_info.major == 3:
 else:
   # Packages only for Python 2
   TESTS_REQUIRE.append('mock')
+  REQUIRED_PKGS.append('bz2file')
   REQUIRED_PKGS.append('functools32')
   REQUIRED_PKGS.append('futures')  # concurrent.futures
 
@@ -67,12 +68,19 @@ if sys.version_info < (3, 4):
 DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
+    'image/quickdraw_labels.txt',
 ]
 
 DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     'cats_vs_dogs': ['matplotlib'],
     'svhn': ['scipy'],
+    'colorectal_histology': ['Pillow'],
+    'imagenet2012_corrupted': [
+        # This includes pre-built source; you may need to use an alternative
+        # route to install OpenCV
+        'opencv-python==3.4.0.14'
+    ],
 }
 
 all_dataset_extras = []

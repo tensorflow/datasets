@@ -21,12 +21,13 @@ from __future__ import print_function
 
 from absl.testing import parameterized
 import tensorflow_datasets as tfds
-import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets import testing
 
 
-class LazyImportsTest(tfds_test.TestCase, parameterized.TestCase):
+class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
   @parameterized.parameters(
+      "cv2",
       "matplotlib",
       "os",
       "pydub",
@@ -43,4 +44,4 @@ class LazyImportsTest(tfds_test.TestCase, parameterized.TestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

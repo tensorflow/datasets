@@ -22,12 +22,16 @@ from __future__ import print_function
 import abc
 import inspect
 
+from absl import flags
 from absl import logging
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
+
+
+FLAGS = flags.FLAGS
 
 __all__ = [
     "RegisteredDataset",
@@ -46,6 +50,7 @@ _ABSTRACT_DATASET_REGISTRY = {}
 # Datasets that are under active development and which we can't therefore load.
 # <str snake_cased_name, in development DatasetBuilder subclass>
 _IN_DEVELOPMENT_REGISTRY = {}
+
 
 _NAME_STR_ERR = """\
 Parsing builder name string failed.
@@ -100,6 +105,7 @@ class RegisteredDataset(abc.ABCMeta):
     if name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
+
     if inspect.isabstract(cls):
       _ABSTRACT_DATASET_REGISTRY[name] = cls
     elif class_dict.get("IN_DEVELOPMENT"):

@@ -3,13 +3,13 @@
 
 ## Usage
 
-```
+```python
 # See all registered datasets
 tfds.list_builders()
 
 # Load a given dataset by name, along with the DatasetInfo
 data, info = tfds.load("mnist", with_info=True)
-train_data, test_data = data['test'], data['train']
+train_data, test_data = data['train'], data['test']
 assert isinstance(train_data, tf.data.Dataset)
 assert info.features['label'].num_classes == 10
 assert info.splits['train'].num_examples == 60000
@@ -26,18 +26,23 @@ np_datasets = tfds.as_numpy(datasets)
 
 ---
 
-# Datasets
+## All Datasets
 
 * [`audio`](#audio)
   * [`"nsynth"`](#nsynth)
 * [`image`](#image)
   * [`"cats_vs_dogs"`](#cats_vs_dogs)
   * [`"celeb_a"`](#celeb_a)
+  * [`"celeb_a_hq"`](#celeb_a_hq)
+  * [`"chexpert"`](#chexpert)
   * [`"cifar10"`](#cifar10)
   * [`"cifar100"`](#cifar100)
   * [`"coco2014"`](#coco2014)
+  * [`"colorectal_histology"`](#colorectal_histology)
+  * [`"colorectal_histology_large"`](#colorectal_histology_large)
   * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
   * [`"fashion_mnist"`](#fashion_mnist)
+  * [`"horses_or_humans"`](#horses_or_humans)
   * [`"image_label_folder"`](#image_label_folder)
   * [`"imagenet2012"`](#imagenet2012)
   * [`"lsun"`](#lsun)
@@ -45,13 +50,21 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"omniglot"`](#omniglot)
   * [`"open_images_v4"`](#open_images_v4)
   * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
+  * [`"rock_paper_scissors"`](#rock_paper_scissors)
   * [`"svhn_cropped"`](#svhn_cropped)
   * [`"tf_flowers"`](#tf_flowers)
+
+* [`structured`](#structured)
+  * [`"titanic"`](#titanic)
 * [`text`](#text)
   * [`"imdb_reviews"`](#imdb_reviews)
   * [`"lm1b"`](#lm1b)
+  * [`"multi_nli"`](#multi_nli)
   * [`"squad"`](#squad)
 * [`translate`](#translate)
+  * [`"flores_translate_neen"`](#flores_translate_neen)
+  * [`"flores_translate_sien"`](#flores_translate_sien)
+  * [`"ted_multi_translate"`](#ted_multi_translate)
   * [`"wmt_translate_ende"`](#wmt_translate_ende)
   * [`"wmt_translate_enfr"`](#wmt_translate_enfr)
 * [`video`](#video)
@@ -61,9 +74,9 @@ np_datasets = tfds.as_numpy(datasets)
 
 ---
 
-# [`audio`](#audio)
+## [`audio`](#audio)
 
-## `"nsynth"`
+### `"nsynth"`
 
 The NSynth Dataset is an audio dataset containing ~300k musical notes, each
 with a unique pitch, timbre, and envelope. Each note is annotated with three
@@ -80,9 +93,10 @@ overlapping between the train set and the valid/test sets.
 * URL: [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 * `DatasetBuilder`: [`tfds.audio.nsynth.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
 * Version: `v1.0.0`
+* Size: `73.07 GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),
     'id': Tensor(shape=(), dtype=tf.string),
@@ -109,7 +123,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |    305,979
@@ -118,13 +132,13 @@ VALID      |     12,678
 TEST       |      4,096
 
 
-### Urls
+#### Urls
  * [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
 @InProceedings{pmlr-v70-engel17a,
   title = 	 {Neural Audio Synthesis of Musical Notes with {W}ave{N}et Autoencoders},
@@ -141,41 +155,46 @@ None
   pdf = 	 {http://proceedings.mlr.press/v70/engel17a/engel17a.pdf},
   url = 	 {http://proceedings.mlr.press/v70/engel17a.html},
 }
-
 ```
 
 ---
 
 
-# [`image`](#image)
+## [`image`](#image)
 
-## `"cats_vs_dogs"`
+### `"cats_vs_dogs"`
 
-A large set of images of cats and dogs.There are 1800 corrupted images that are dropped.
+A large set of images of cats and dogs.There are 1738 corrupted images that are dropped.
 
 * URL: [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 * `DatasetBuilder`: [`tfds.image.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cats_vs_dogs.py)
-* Version: `v1.0.0`
+* Version: `v2.0.0`
+* Size: `786.68 MiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
 
 
-### Statistics
-None computed
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |     23,262
+ALL        |     23,262
 
-### Urls
+
+#### Urls
  * [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,
 author = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},
@@ -187,21 +206,27 @@ publisher = {Association for Computing Machinery, Inc.},
 url = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization/},
 edition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},
 }
-
 ```
 
 ---
 
-## `"celeb_a"`
+### `"celeb_a"`
 
-Large-scale CelebFaces Attributes, CelebA.Set of ~30k celebrities pictures. These pictures are cropped.
+CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including
+ - 10,177 number of identities,
+ - 202,599 number of face images, and
+ - 5 landmark locations, 40 binary attributes annotations per image.
+
+The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization.
+
 
 * URL: [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 * `DatasetBuilder`: [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
 * Version: `v0.3.0`
+* Size: `1.38 GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'attributes': FeaturesDict({
         '5_o_Clock_Shadow': Tensor(shape=(), dtype=tf.bool),
@@ -262,7 +287,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |    202,599
@@ -271,13 +296,13 @@ TEST       |     19,962
 VALIDATION |     19,867
 
 
-### Urls
+#### Urls
  * [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
 @inproceedings{conf/iccv/LiuLWT15,
   added-at = {2018-10-09T00:00:00.000+0200},
@@ -297,21 +322,274 @@ None
   url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},
   year = 2015
 }
-
 ```
 
 ---
 
-## `"cifar10"`
+### `"celeb_a_hq"`
+
+High-quality version of the CELEBA
+dataset, consisting of 30000 images in 1024 x 1024 resolution.
+
+WARNING: This dataset currently requires you to prepare images on your own.
+
+
+* URL: [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+* `DatasetBuilder`: [`tfds.image.celebahq.CelebAHq`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celebahq.py)
+
+`celeb_a_hq` is configured with `tfds.image.celebahq.CelebaHQConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"1024"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 1024 x 1024 resolution
+
+* `"512"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 512 x 512 resolution
+
+* `"256"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 256 x 256 resolution
+
+* `"128"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 128 x 128 resolution
+
+* `"64"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 64 x 64 resolution
+
+* `"32"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 32 x 32 resolution
+
+* `"16"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 16 x 16 resolution
+
+* `"8"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 8 x 8 resolution
+
+* `"4"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 4 x 4 resolution
+
+* `"2"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 2 x 2 resolution
+
+* `"1"` (`v0.1.0`) (`Size: ?? GiB`): CelebaHQ images in 1 x 1 resolution
+
+
+#### `"celeb_a_hq/1024"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/512"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(512, 512, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/256"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/128"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/64"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/32"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/16"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(16, 16, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/8"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(8, 8, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(4, 4, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(2, 2, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"celeb_a_hq/1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(1, 1, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |     30,000
+ALL        |     30,000
+
+
+#### Urls
+ * [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@article{DBLP:journals/corr/abs-1710-10196,
+  author    = {Tero Karras and
+               Timo Aila and
+               Samuli Laine and
+               Jaakko Lehtinen},
+  title     = {Progressive Growing of GANs for Improved Quality, Stability, and Variation},
+  journal   = {CoRR},
+  volume    = {abs/1710.10196},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1710.10196},
+  archivePrefix = {arXiv},
+  eprint    = {1710.10196},
+  timestamp = {Mon, 13 Aug 2018 16:46:42 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1710-10196},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+---
+
+### `"chexpert"`
+
+CheXpert is a large dataset of chest X-rays and competition for automated chest 
+x-ray interpretation, which features uncertainty labels and radiologist-labeled 
+reference standard evaluation sets. It consists of 224,316 chest radiographs 
+of 65,240 patients, where the chest radiographic examinations and the associated 
+radiology reports were retrospectively collected from Stanford Hospital. Each 
+report was labeled for the presence of 14 observations as positive, negative, 
+or uncertain. We decided on the 14 observations based on the prevalence in the 
+reports and clinical relevance.
+
+The CheXpert dataset must be downloaded separately after reading and agreeing 
+to a Research Use Agreement. To do so, please follow the instructions on the 
+website, https://stanfordmlgroup.github.io/competitions/chexpert/.
+
+
+* URL: [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
+* `DatasetBuilder`: [`tfds.image.chexpert.Chexpert`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/chexpert.py)
+* Version: `v1.0.0`
+* Size: `?? GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=4)),
+    'name': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+#### Statistics
+None computed
+
+#### Urls
+ * [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@article{DBLP:journals/corr/abs-1901-07031,
+  author    = {Jeremy Irvin and Pranav Rajpurkar and Michael Ko and Yifan Yu and Silviana Ciurea{-}Ilcus and Chris Chute and Henrik Marklund and Behzad Haghgoo and Robyn L. Ball and Katie Shpanskaya and Jayne Seekins and David A. Mong and Safwan S. Halabi and Jesse K. Sandberg and Ricky Jones and David B. Larson and Curtis P. Langlotz and Bhavik N. Patel and Matthew P. Lungren and Andrew Y. Ng},
+  title     = {CheXpert: {A} Large Chest Radiograph Dataset with Uncertainty Labels and Expert Comparison},
+  journal   = {CoRR},
+  volume    = {abs/1901.07031},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1901.07031},
+  archivePrefix = {arXiv},
+  eprint    = {1901.07031},
+  timestamp = {Fri, 01 Feb 2019 13:39:59 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1901-07031},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+---
+
+### `"cifar10"`
 
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.
 
 * URL: [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 * `DatasetBuilder`: [`tfds.image.cifar.Cifar10`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
 * Version: `v1.0.2`
+* Size: `162.17 MiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
@@ -319,7 +597,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     60,000
@@ -327,13 +605,13 @@ TRAIN      |     50,000
 TEST       |     10,000
 
 
-### Urls
+#### Urls
  * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @TECHREPORT{Krizhevsky09learningmultiple,
     author = {Alex Krizhevsky},
@@ -341,21 +619,21 @@ TEST       |     10,000
     institution = {},
     year = {2009}
 }
-
 ```
 
 ---
 
-## `"cifar100"`
+### `"cifar100"`
 
 This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a "fine" label (the class to which it belongs) and a "coarse" label (the superclass to which it belongs).
 
 * URL: [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 * `DatasetBuilder`: [`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
 * Version: `v1.3.1`
+* Size: `160.71 MiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'coarse_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -364,7 +642,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     60,000
@@ -372,13 +650,13 @@ TRAIN      |     50,000
 TEST       |     10,000
 
 
-### Urls
+#### Urls
  * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @TECHREPORT{Krizhevsky09learningmultiple,
     author = {Alex Krizhevsky},
@@ -386,12 +664,11 @@ TEST       |     10,000
     institution = {},
     year = {2009}
 }
-
 ```
 
 ---
 
-## `"coco2014"`
+### `"coco2014"`
 
 COCO is a large-scale object detection, segmentation, and captioning dataset. This version contains images, bounding boxes and labels for the 2014 version.
 Note:
@@ -403,9 +680,10 @@ Note:
 * URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 * `DatasetBuilder`: [`tfds.image.coco.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
 * Version: `v1.0.0`
+* Size: `37.57 GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
@@ -418,7 +696,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |    245,496
@@ -428,13 +706,13 @@ TEST       |     40,775
 VALIDATION |     40,504
 
 
-### Urls
+#### Urls
  * [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
 @article{DBLP:journals/corr/LinMBHPRDZ14,
   author    = {Tsung{-}Yi Lin and
@@ -458,21 +736,114 @@ None
   biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
 
-## `"diabetic_retinopathy_detection"`
+### `"colorectal_histology"`
+
+Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes.
+
+* URL: [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+* `DatasetBuilder`: [`tfds.image.colorectal_histology.ColorectalHistology`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/colorectal_histology.py)
+* Version: `v0.0.1`
+* Size: `246.14 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(150, 150, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |      5,000
+ALL        |      5,000
+
+
+#### Urls
+ * [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@article{kather2016multi,
+  title={Multi-class texture analysis in colorectal cancer histology},
+  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{"o}llner, Frank Gerrit},
+  journal={Scientific reports},
+  volume={6},
+  pages={27988},
+  year={2016},
+  publisher={Nature Publishing Group}
+}
+```
+
+---
+
+### `"colorectal_histology_large"`
+
+10 large 5000 x 5000 textured colorectal cancer histology images
+
+* URL: [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+* `DatasetBuilder`: [`tfds.image.colorectal_histology.ColorectalHistologyLarge`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/colorectal_histology.py)
+* Version: `v0.0.1`
+* Size: `707.65 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(5000, 5000, 3), dtype=tf.uint8),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TEST       |         10
+ALL        |         10
+
+
+#### Urls
+ * [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@article{kather2016multi,
+  title={Multi-class texture analysis in colorectal cancer histology},
+  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{"o}llner, Frank Gerrit},
+  journal={Scientific reports},
+  volume={6},
+  pages={27988},
+  year={2016},
+  publisher={Nature Publishing Group}
+}
+```
+
+---
+
+### `"diabetic_retinopathy_detection"`
 
 A large set of high-resolution retina images taken under a variety of imaging conditions.
 
 * URL: [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 * `DatasetBuilder`: [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py)
 * Version: `v1.0.0`
+* Size: `?? GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
@@ -481,7 +852,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     88,712
@@ -490,29 +861,36 @@ TRAIN      |     35,126
 SAMPLE     |         10
 
 
-### Urls
+#### Urls
  * [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
-
+@ONLINE {kaggle-diabetic-retinopathy,
+    author = "Kaggle and EyePacs",
+    title  = "Kaggle Diabetic Retinopathy Detection",
+    month  = "jul",
+    year   = "2015",
+    url    = "https://www.kaggle.com/c/diabetic-retinopathy-detection/data"
+}
 ```
 
 ---
 
-## `"fashion_mnist"`
+### `"fashion_mnist"`
 
 Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.
 
 * URL: [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 * `DatasetBuilder`: [`tfds.image.mnist.FashionMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 * Version: `v1.0.0`
+* Size: `29.45 MiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
@@ -520,7 +898,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     70,000
@@ -528,13 +906,13 @@ TRAIN      |     60,000
 TEST       |     10,000
 
 
-### Urls
+#### Urls
  * [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @article{DBLP:journals/corr/abs-1708-07747,
   author    = {Han Xiao and
@@ -552,21 +930,66 @@ TEST       |     10,000
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
 
-## `"image_label_folder"`
+### `"horses_or_humans"`
+
+A large set of images of horses and humans.
+
+* URL: [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
+* `DatasetBuilder`: [`tfds.image.horses_or_humans.HorsesOrHumans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/horses_or_humans.py)
+* Version: `v1.0.0`
+* Size: `153.59 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      1,283
+TRAIN      |      1,027
+TEST       |        256
+
+
+#### Urls
+ * [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@ONLINE {horses_or_humans,
+author = "Laurence Moroney",
+title = "Horses or Humans Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/horses-or-humans-dataset"
+}
+```
+
+---
+
+### `"image_label_folder"`
 
 Generic image classification dataset.
 
 * URL: [<no known url>](<no known url>)
 * `DatasetBuilder`: [`tfds.image.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/image_folder.py)
 * Version: `v1.0.0`
+* Size: `?? GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=None),
@@ -574,23 +997,19 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 None computed
 
-### Urls
+#### Urls
 
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
-```
-
-```
 
 ---
 
-## `"imagenet2012"`
+### `"imagenet2012"`
 
 ILSVRC 2012, aka ImageNet is an image dataset organized according to the
 WordNet hierarchy. Each meaningful concept in WordNet, possibly described by
@@ -605,9 +1024,10 @@ images for most of the concepts in the WordNet hierarchy.
 * URL: [http://image-net.org/](http://image-net.org/)
 * `DatasetBuilder`: [`tfds.image.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet.py)
 * Version: `v2.0.0`
+* Size: `?? GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -616,7 +1036,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |  1,331,167
@@ -624,13 +1044,13 @@ TRAIN      |  1,281,167
 VALIDATION |     50,000
 
 
-### Urls
+#### Urls
  * [http://image-net.org/](http://image-net.org/)
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @article{ILSVRC15,
 Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},
@@ -642,12 +1062,11 @@ volume={115},
 number={3},
 pages={211-252}
 }
-
 ```
 
 ---
 
-## `"lsun"`
+### `"lsun"`
 
 Large scale images showing different objects from given categories like bedroom, tower etc.
 
@@ -657,14 +1076,14 @@ Large scale images showing different objects from given categories like bedroom,
 `lsun` is configured with `tfds.image.lsun.BuilderConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"classroom"` (`v0.1.1`): Classroom images.
+* `"classroom"` (`v0.1.1`) (`Size: 3.06 GiB`): Classroom images.
 
-* `"bedroom"` (`v0.1.1`): Bedroom images.
+* `"bedroom"` (`v0.1.1`) (`Size: 42.77 GiB`): Bedroom images.
 
 
-### `"lsun/classroom"`
+#### `"lsun/classroom"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
@@ -672,9 +1091,9 @@ FeaturesDict({
 
 
 
-### `"lsun/bedroom"`
+#### `"lsun/bedroom"`
 
-```
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
@@ -683,7 +1102,7 @@ FeaturesDict({
 
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |  3,033,342
@@ -691,13 +1110,13 @@ TRAIN      |  3,033,042
 VALIDATION |        300
 
 
-### Urls
+#### Urls
  * [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
 @article{journals/corr/YuZSSX15,
   added-at = {2018-08-13T00:00:00.000+0200},
@@ -714,21 +1133,21 @@ None
   volume = {abs/1506.03365},
   year = 2015
 }
-
 ```
 
 ---
 
-## `"mnist"`
+### `"mnist"`
 
 The MNIST database of handwritten digits.
 
 * URL: [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 * `DatasetBuilder`: [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 * Version: `v1.0.0`
+* Size: `11.06 MiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
@@ -736,7 +1155,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     70,000
@@ -744,13 +1163,13 @@ TRAIN      |     60,000
 TEST       |     10,000
 
 
-### Urls
+#### Urls
  * [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @article{lecun2010mnist,
   title={MNIST handwritten digit database},
@@ -759,12 +1178,11 @@ TEST       |     10,000
   volume={2},
   year={2010}
 }
-
 ```
 
 ---
 
-## `"omniglot"`
+### `"omniglot"`
 
 Omniglot data set for one-shot learning. This dataset contains 1623 different
 handwritten characters from 50 different alphabets.
@@ -773,9 +1191,10 @@ handwritten characters from 50 different alphabets.
 * URL: [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 * `DatasetBuilder`: [`tfds.image.omniglot.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/omniglot.py)
 * Version: `v1.0.0`
+* Size: `17.95 MiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'alphabet': ClassLabel(shape=(), dtype=tf.int64, num_classes=50),
     'alphabet_char_id': Tensor(shape=(), dtype=tf.int64),
@@ -785,7 +1204,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     38,300
@@ -795,13 +1214,13 @@ SMALL2     |      3,120
 SMALL1     |      2,720
 
 
-### Urls
+#### Urls
  * [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @article{lake2015human,
   title={Human-level concept learning through probabilistic program induction},
@@ -813,12 +1232,11 @@ SMALL1     |      2,720
   year={2015},
   publisher={American Association for the Advancement of Science}
 }
-
 ```
 
 ---
 
-## `"open_images_v4"`
+### `"open_images_v4"`
 
 Open Images is a dataset of ~9M images that have been annotated with image-level
  labels and object bounding boxes.
@@ -835,9 +1253,10 @@ classes.
 * URL: [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 * `DatasetBuilder`: [`tfds.image.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/open_images.py)
 * Version: `v0.1.0`
+* Size: `565.11 GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'bobjects': SequenceDict({
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
@@ -860,7 +1279,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |  1,910,098
@@ -869,13 +1288,13 @@ TEST       |    125,436
 VALIDATION |     41,620
 
 
-### Urls
+#### Urls
  * [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
 @article{OpenImages,
   author = {Alina Kuznetsova and
@@ -923,21 +1342,21 @@ None
              https://storage.googleapis.com/openimages/web/index.html},
   year={2017}
 }
-
 ```
 
 ---
 
-## `"quickdraw_bitmap"`
+### `"quickdraw_bitmap"`
 
 The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images
 
 * URL: [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 * `DatasetBuilder`: [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
 * Version: `v1.0.0`
+* Size: `36.82 GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=345),
@@ -945,36 +1364,82 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 TRAIN      | 50,426,266
 ALL        | 50,426,266
 
 
-### Urls
+#### Urls
  * [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 A Neural Representation of Sketch Drawings, D. Ha and D. Eck, arXiv:1704.03477v4, 2017.
 ```
 
 ---
 
-## `"svhn_cropped"`
+### `"rock_paper_scissors"`
+
+Images of hands playing rock, paper, scissor game.
+
+* URL: [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
+* `DatasetBuilder`: [`tfds.image.rock_paper_scissors.RockPaperScissors`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/rock_paper_scissors.py)
+* Version: `v1.0.0`
+* Size: `219.53 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      2,892
+TRAIN      |      2,520
+TEST       |        372
+
+
+#### Urls
+ * [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@ONLINE {rps,
+author = "Laurence Moroney",
+title = "Rock, Paper, Scissors Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
+}
+```
+
+---
+
+### `"svhn_cropped"`
 
 The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
 
 * URL: [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 * `DatasetBuilder`: [`tfds.image.svhn.SvhnCropped`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/svhn.py)
 * Version: `v1.0.0`
+* Size: `1.47 GiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
@@ -982,7 +1447,7 @@ FeaturesDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |    630,420
@@ -991,13 +1456,13 @@ TRAIN      |     73,257
 TEST       |     26,032
 
 
-### Urls
+#### Urls
  * [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 
-### Supervised keys (for `as_supervised=True`)
-(u'image', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @article{Netzer2011,
 author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},
@@ -1005,21 +1470,21 @@ booktitle = {Advances in Neural Information Processing Systems ({NIPS})},
 title = {Reading Digits in Natural Images with Unsupervised Feature Learning},
 year = {2011}
 }
-
 ```
 
 ---
 
-## `"tf_flowers"`
+### `"tf_flowers"`
 
 A large set of images of flowers
 
 * URL: [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
 * `DatasetBuilder`: [`tfds.image.flowers.TFFlowers`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/flowers.py)
 * Version: `v1.0.0`
+* Size: `218.21 MiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
@@ -1027,16 +1492,20 @@ FeaturesDict({
 ```
 
 
-### Statistics
-None computed
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |      3,670
+ALL        |      3,670
 
-### Urls
+
+#### Urls
  * [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
 
-### Citation
+#### Citation
 ```
 @ONLINE {tfflowers,
 author = "The TensorFlow Team",
@@ -1044,15 +1513,76 @@ title = "Flowers",
 month = "jan",
 year = "2019",
 url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
-
 ```
 
 ---
 
 
-# [`text`](#text)
 
-## `"imdb_reviews"`
+## [`structured`](#structured)
+
+### `"titanic"`
+
+Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'.
+
+* URL: [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
+* `DatasetBuilder`: [`tfds.structured.titanic.Titanic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/titanic.py)
+* Version: `v1.0.0`
+* Size: `114.98 KiB`
+
+#### Features
+```python
+FeaturesDict({
+    'features': FeaturesDict({
+        'age': Tensor(shape=(), dtype=tf.float32),
+        'boat': Tensor(shape=(), dtype=tf.string),
+        'body': Tensor(shape=(), dtype=tf.int32),
+        'cabin': Tensor(shape=(), dtype=tf.string),
+        'embarked': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+        'fare': Tensor(shape=(), dtype=tf.float32),
+        'home.dest': Tensor(shape=(), dtype=tf.string),
+        'name': Tensor(shape=(), dtype=tf.string),
+        'parch': Tensor(shape=(), dtype=tf.int32),
+        'pclass': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'sex': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'sibsp': Tensor(shape=(), dtype=tf.int32),
+        'ticket': Tensor(shape=(), dtype=tf.string),
+    }),
+    'survived': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |      1,309
+ALL        |      1,309
+
+
+#### Urls
+ * [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'features', u'survived')`
+
+#### Citation
+```
+@ONLINE {titanic,
+author = "Frank E. Harrell Jr., Thomas Cason",
+title  = "Titanic dataset",
+month  = "oct",
+year   = "2017",
+url    = "https://www.openml.org/d/40945"
+}
+```
+
+---
+
+
+## [`text`](#text)
+
+### `"imdb_reviews"`
 
 Large Movie Review Dataset.
 This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing.
@@ -1063,18 +1593,18 @@ This is a dataset for binary sentiment classification containing substantially m
 `imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"plain_text"` (`v0.0.1`): Plain text
+* `"plain_text"` (`v0.0.1`) (`Size: 80.23 MiB`): Plain text
 
-* `"bytes"` (`v0.0.1`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+* `"bytes"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
 
-* `"subwords8k"` (`v0.0.1`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+* `"subwords8k"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
-* `"subwords32k"` (`v0.0.1`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+* `"subwords32k"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 
-### `"imdb_reviews/plain_text"`
+#### `"imdb_reviews/plain_text"`
 
-```
+```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'text': Text(shape=(), dtype=tf.string, encoder=None),
@@ -1083,9 +1613,9 @@ FeaturesDict({
 
 
 
-### `"imdb_reviews/bytes"`
+#### `"imdb_reviews/bytes"`
 
-```
+```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
@@ -1094,9 +1624,9 @@ FeaturesDict({
 
 
 
-### `"imdb_reviews/subwords8k"`
+#### `"imdb_reviews/subwords8k"`
 
-```
+```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8185>),
@@ -1105,9 +1635,9 @@ FeaturesDict({
 
 
 
-### `"imdb_reviews/subwords32k"`
+#### `"imdb_reviews/subwords32k"`
 
-```
+```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32650>),
@@ -1117,7 +1647,7 @@ FeaturesDict({
 
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     50,000
@@ -1125,13 +1655,13 @@ TRAIN      |     25,000
 TEST       |     25,000
 
 
-### Urls
+#### Urls
  * [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
-### Supervised keys (for `as_supervised=True`)
-(u'text', u'label')
+#### Supervised keys (for `as_supervised=True`)
+`(u'text', u'label')`
 
-### Citation
+#### Citation
 ```
 @InProceedings{maas-EtAl:2011:ACL-HLT2011,
   author    = {Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher},
@@ -1144,12 +1674,11 @@ TEST       |     25,000
   pages     = {142--150},
   url       = {http://www.aclweb.org/anthology/P11-1015}
 }
-
 ```
 
 ---
 
-## `"lm1b"`
+### `"lm1b"`
 
 A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data.
 
@@ -1160,18 +1689,18 @@ A benchmark corpus to be used for measuring progress in statistical language mod
 `lm1b` is configured with `tfds.text.lm1b.Lm1bConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"plain_text"` (`v0.0.1`): Plain text
+* `"plain_text"` (`v0.0.1`) (`Size: 1.67 GiB`): Plain text
 
-* `"bytes"` (`v0.0.1`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+* `"bytes"` (`v0.0.1`) (`Size: 1.67 GiB`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
 
-* `"subwords8k"` (`v0.0.1`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+* `"subwords8k"` (`v0.0.2`) (`Size: 1.67 GiB`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
-* `"subwords32k"` (`v0.0.1`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+* `"subwords32k"` (`v0.0.2`) (`Size: 1.67 GiB`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 
-### `"lm1b/plain_text"`
+#### `"lm1b/plain_text"`
 
-```
+```python
 FeaturesDict({
     'text': Text(shape=(), dtype=tf.string, encoder=None),
 })
@@ -1179,9 +1708,9 @@ FeaturesDict({
 
 
 
-### `"lm1b/bytes"`
+#### `"lm1b/bytes"`
 
-```
+```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
 })
@@ -1189,9 +1718,9 @@ FeaturesDict({
 
 
 
-### `"lm1b/subwords8k"`
+#### `"lm1b/subwords8k"`
 
-```
+```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
 })
@@ -1199,9 +1728,9 @@ FeaturesDict({
 
 
 
-### `"lm1b/subwords32k"`
+#### `"lm1b/subwords32k"`
 
-```
+```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
 })
@@ -1210,7 +1739,7 @@ FeaturesDict({
 
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        | 30,607,716
@@ -1218,13 +1747,13 @@ TRAIN      | 30,301,028
 TEST       |    306,688
 
 
-### Urls
+#### Urls
  * [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
-### Supervised keys (for `as_supervised=True`)
-(u'text', u'text')
+#### Supervised keys (for `as_supervised=True`)
+`(u'text', u'text')`
 
-### Citation
+#### Citation
 ```
 @article{DBLP:journals/corr/ChelbaMSGBK13,
   author    = {Ciprian Chelba and
@@ -1245,12 +1774,80 @@ TEST       |    306,688
   biburl    = {https://dblp.org/rec/bib/journals/corr/ChelbaMSGBK13},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
 
-## `"squad"`
+### `"multi_nli"`
+
+The Multi-Genre Natural Language Inference (MultiNLI) corpus is a
+crowd-sourced collection of 433k sentence pairs annotated with textual
+entailment information. The corpus is modeled on the SNLI corpus, but differs in
+that covers a range of genres of spoken and written text, and supports a
+distinctive cross-genre generalization evaluation. The corpus served as the
+basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
+
+
+* URL: [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
+* `DatasetBuilder`: [`tfds.text.multi_nli.MultiNLI`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/multi_nli.py)
+
+`multi_nli` is configured with `tfds.text.multi_nli.MultiNLIConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"plain_text"` (`v0.0.1`) (`Size: 216.34 MiB`): Plain text
+
+
+#### `"multi_nli/plain_text"`
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'label': Text(shape=(), dtype=tf.string, encoder=None),
+    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    402,702
+TRAIN      |    392,702
+VALIDATION |     10,000
+
+
+#### Urls
+ * [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@InProceedings{N18-1101,
+  author = "Williams, Adina
+            and Nangia, Nikita
+            and Bowman, Samuel",
+  title = "A Broad-Coverage Challenge Corpus for
+           Sentence Understanding through Inference",
+  booktitle = "Proceedings of the 2018 Conference of
+               the North American Chapter of the
+               Association for Computational Linguistics:
+               Human Language Technologies, Volume 1 (Long
+               Papers)",
+  year = "2018",
+  publisher = "Association for Computational Linguistics",
+  pages = "1112--1122",
+  location = "New Orleans, Louisiana",
+  url = "http://aclweb.org/anthology/N18-1101"
+}
+```
+
+---
+
+### `"squad"`
 
 Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable.
 
@@ -1261,18 +1858,18 @@ Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, 
 `squad` is configured with `tfds.text.squad.SquadConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"plain_text"` (`v0.0.1`): Plain text
+* `"plain_text"` (`v0.0.1`) (`Size: 33.51 MiB`): Plain text
 
-* `"bytes"` (`v0.0.1`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+* `"bytes"` (`v0.0.1`) (`Size: 33.51 MiB`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
 
-* `"subwords8k"` (`v0.0.1`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+* `"subwords8k"` (`v0.0.1`) (`Size: 33.51 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
-* `"subwords32k"` (`v0.0.1`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+* `"subwords32k"` (`v0.0.2`) (`Size: 33.51 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 
-### `"squad/plain_text"`
+#### `"squad/plain_text"`
 
-```
+```python
 FeaturesDict({
     'context': Text(shape=(), dtype=tf.string, encoder=None),
     'first_answer': Text(shape=(), dtype=tf.string, encoder=None),
@@ -1282,9 +1879,9 @@ FeaturesDict({
 
 
 
-### `"squad/bytes"`
+#### `"squad/bytes"`
 
-```
+```python
 FeaturesDict({
     'context': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
     'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
@@ -1294,9 +1891,9 @@ FeaturesDict({
 
 
 
-### `"squad/subwords8k"`
+#### `"squad/subwords8k"`
 
-```
+```python
 FeaturesDict({
     'context': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8190>),
     'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8190>),
@@ -1306,9 +1903,9 @@ FeaturesDict({
 
 
 
-### `"squad/subwords32k"`
+#### `"squad/subwords32k"`
 
-```
+```python
 FeaturesDict({
     'context': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32953>),
     'first_answer': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32953>),
@@ -1319,7 +1916,7 @@ FeaturesDict({
 
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     98,169
@@ -1327,13 +1924,13 @@ TRAIN      |     87,599
 VALIDATION |     10,570
 
 
-### Urls
+#### Urls
  * [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`(u'', u'')`
 
-### Citation
+#### Citation
 ```
 @article{2016arXiv160605250R,
        author = {{Rajpurkar}, Pranav and {Zhang}, Jian and {Lopyrev},
@@ -1346,15 +1943,186 @@ None
 archivePrefix = {arXiv},
        eprint = {1606.05250},
 }
-
 ```
 
 ---
 
 
-# [`translate`](#translate)
+## [`translate`](#translate)
 
-## `"wmt_translate_ende"`
+### `"flores_translate_neen"`
+
+Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.
+
+
+* URL: [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+* `DatasetBuilder`: [`tfds.translate.flores_neen.FloresTranslateNeen`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores_neen.py)
+
+`flores_translate_neen` is configured with `tfds.translate.flores_neen.FloresConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"neen_plain_text"` (`v0.0.2`) (`Size: 984.65 KiB`): Translation dataset from ne to en, uses encoder plain_text.
+
+
+#### `"flores_translate_neen/neen_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ne': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      5,394
+TEST       |      2,835
+VALIDATION |      2,559
+
+
+#### Urls
+ * [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'ne', u'en')`
+
+#### Citation
+```
+@misc{guzmn2019new,
+    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},
+    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},
+    year={2019},
+    eprint={1902.01382},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+
+---
+
+### `"flores_translate_sien"`
+
+Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.
+
+
+* URL: [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+* `DatasetBuilder`: [`tfds.translate.flores_sien.FloresTranslateSien`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/flores_sien.py)
+
+`flores_translate_sien` is configured with `tfds.translate.flores_sien.FloresConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"sien_plain_text"` (`v0.0.2`) (`Size: 984.65 KiB`): Translation dataset from si to en, uses encoder plain_text.
+
+
+#### `"flores_translate_sien/sien_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'si': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      5,664
+VALIDATION |      2,898
+TEST       |      2,766
+
+
+#### Urls
+ * [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'si', u'en')`
+
+#### Citation
+```
+@misc{guzmn2019new,
+    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},
+    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},
+    year={2019},
+    eprint={1902.01382},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+```
+
+---
+
+### `"ted_multi_translate"`
+
+Massively multilingual (60 language) data set derived from TED Talk transcripts.
+Each record consists of parallel arrays of language and text. Missing and
+incomplete translations will be filtered out.
+
+
+* URL: [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+* `DatasetBuilder`: [`tfds.translate.ted_multi.TedMultiTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_multi.py)
+
+`ted_multi_translate` is configured with `tfds.translate.ted_multi.BuilderConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"plain_text"` (`v0.0.3`) (`Size: 335.91 MiB`): Plain text import of multilingual TED talk translations
+
+
+#### `"ted_multi_translate/plain_text"`
+
+```python
+FeaturesDict({
+    'talk_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'translations': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string, encoder=None),
+        'translation': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    271,360
+TRAIN      |    258,098
+TEST       |      7,213
+VALIDATION |      6,049
+
+
+#### Urls
+ * [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@InProceedings{qi-EtAl:2018:N18-2,
+  author    = {Qi, Ye  and  Sachan, Devendra  and  Felix, Matthieu  and  Padmanabhan, Sarguna  and  Neubig, Graham},
+  title     = {When and Why Are Pre-Trained Word Embeddings Useful for Neural Machine Translation?},
+  booktitle = {Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 2 (Short Papers)},
+  month     = {June},
+  year      = {2018},
+  address   = {New Orleans, Louisiana},
+  publisher = {Association for Computational Linguistics},
+  pages     = {529--535},
+  abstract  = {The performance of Neural Machine Translation (NMT) systems often suffers in low-resource scenarios where sufficiently large-scale parallel corpora cannot be obtained. Pre-trained word embeddings have proven to be invaluable for improving performance in natural language analysis tasks, which often suffer from paucity of data. However, their utility for NMT has not been extensively explored. In this work, we perform five sets of experiments that analyze when we can expect pre-trained word embeddings to help in NMT tasks. We show that such embeddings can be surprisingly effective in some cases -- providing gains of up to 20 BLEU points in the most favorable setting.},
+  url       = {http://www.aclweb.org/anthology/N18-2084}
+}
+```
+
+---
+
+### `"wmt_translate_ende"`
 
 Translate dataset based on the data from statmt.org.
 
@@ -1365,15 +2133,15 @@ Translate dataset based on the data from statmt.org.
 `wmt_translate_ende` is configured with `tfds.translate.wmt_ende.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"ende_plain_text_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
+* `"ende_plain_text_t2t"` (`v0.0.2`) (`Size: 1.60 GiB`): Translation dataset from en to de, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
 
-* `"ende_subwords8k_t2t"` (`v0.0.1`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
+* `"ende_subwords8k_t2t"` (`v0.0.2`) (`Size: 1.60 GiB`): Translation dataset from en to de, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt18_news_commentary_ende", "wmt13_commoncrawl_ende", "wmt13_europarl_ende"]}.
 
 
-### `"wmt_translate_ende/ende_plain_text_t2t"`
+#### `"wmt_translate_ende/ende_plain_text_t2t"`
 
-```
-FeaturesDict({
+```python
+Translation({
     'de': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
@@ -1381,10 +2149,10 @@ FeaturesDict({
 
 
 
-### `"wmt_translate_ende/ende_subwords8k_t2t"`
+#### `"wmt_translate_ende/ende_subwords8k_t2t"`
 
-```
-FeaturesDict({
+```python
+Translation({
     'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8267>),
     'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8216>),
 })
@@ -1393,7 +2161,7 @@ FeaturesDict({
 
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |  4,595,289
@@ -1401,13 +2169,13 @@ TRAIN      |  4,592,289
 VALIDATION |      3,000
 
 
-### Urls
+#### Urls
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 
-### Supervised keys (for `as_supervised=True`)
-(u'en', u'de')
+#### Supervised keys (for `as_supervised=True`)
+`(u'en', u'de')`
 
-### Citation
+#### Citation
 ```
 @InProceedings{bojar-EtAl:2018:WMT1,
   author    = {Bojar, Ond{r}ej  and  Federmann, Christian  and  Fishel, Mark
@@ -1423,12 +2191,11 @@ VALIDATION |      3,000
   pages     = {272--307},
   url       = {http://www.aclweb.org/anthology/W18-6401}
 }
-
 ```
 
 ---
 
-## `"wmt_translate_enfr"`
+### `"wmt_translate_enfr"`
 
 Translate dataset based on the data from statmt.org.
 
@@ -1439,19 +2206,19 @@ Translate dataset based on the data from statmt.org.
 `wmt_translate_enfr` is configured with `tfds.translate.wmt_enfr.WMTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"enfr_plain_text_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train": ["opennmt_1M_enfr_train"]}.
+* `"enfr_plain_text_t2t_small"` (`v0.0.2`) (`Size: ?? GiB`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train": ["opennmt_1M_enfr_train"]}.
 
-* `"enfr_subwords8k_t2t_small"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train": ["opennmt_1M_enfr_train"]}.
+* `"enfr_subwords8k_t2t_small"` (`v0.0.2`) (`Size: ?? GiB`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["opennmt_1M_enfr_valid"], "train": ["opennmt_1M_enfr_train"]}.
 
-* `"enfr_plain_text_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
+* `"enfr_plain_text_t2t_large"` (`v0.0.2`) (`Size: ?? GiB`): Translation dataset from en to fr, uses encoder plain_text. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
 
-* `"enfr_subwords8k_t2t_large"` (`v0.0.1`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
+* `"enfr_subwords8k_t2t_large"` (`v0.0.2`) (`Size: ?? GiB`): Translation dataset from en to fr, uses encoder subwords8k. It uses the following data files (see the code for exact contents): {"dev": ["wmt17_newstest13"], "train": ["wmt13_commoncrawl_enfr", "wmt13_europarl_enfr", "wmt14_news_commentary_enfr", "wmt13_undoc_enfr"]}.
 
 
-### `"wmt_translate_enfr/enfr_plain_text_t2t_small"`
+#### `"wmt_translate_enfr/enfr_plain_text_t2t_small"`
 
-```
-FeaturesDict({
+```python
+Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
@@ -1459,21 +2226,10 @@ FeaturesDict({
 
 
 
-### `"wmt_translate_enfr/enfr_subwords8k_t2t_small"`
+#### `"wmt_translate_enfr/enfr_subwords8k_t2t_small"`
 
-```
-FeaturesDict({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8215>),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8150>),
-})
-```
-
-
-
-### `"wmt_translate_enfr/enfr_plain_text_t2t_large"`
-
-```
-FeaturesDict({
+```python
+Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
@@ -1481,33 +2237,39 @@ FeaturesDict({
 
 
 
-### `"wmt_translate_enfr/enfr_subwords8k_t2t_large"`
+#### `"wmt_translate_enfr/enfr_plain_text_t2t_large"`
 
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
 ```
-FeaturesDict({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8222>),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8181>),
+
+
+
+#### `"wmt_translate_enfr/enfr_subwords8k_t2t_large"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
 
 
 
-### Statistics
-Split  | Examples
-:----- | ---:
-ALL        | 18,319,500
-TRAIN      | 18,316,500
-VALIDATION |      3,000
+#### Statistics
+None computed
 
-
-### Urls
+#### Urls
  * [http://www.statmt.org/wmt18/](http://www.statmt.org/wmt18/)
 
-### Supervised keys (for `as_supervised=True`)
-(u'en', u'fr')
+#### Supervised keys (for `as_supervised=True`)
+`(u'en', u'fr')`
 
-### Citation
+#### Citation
 ```
 @InProceedings{bojar-EtAl:2018:WMT1,
   author    = {Bojar, Ond{r}ej  and  Federmann, Christian  and  Fishel, Mark
@@ -1523,24 +2285,24 @@ VALIDATION |      3,000
   pages     = {272--307},
   url       = {http://www.aclweb.org/anthology/W18-6401}
 }
-
 ```
 
 ---
 
 
-# [`video`](#video)
+## [`video`](#video)
 
-## `"bair_robot_pushing_small"`
+### `"bair_robot_pushing_small"`
 
-This data set contains roughly 59,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
+This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
 * URL: [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
 * `DatasetBuilder`: [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
 * Version: `v1.0.0`
+* Size: `30.06 GiB`
 
-### Features
-```
+#### Features
+```python
 SequenceDict({
     'action': Tensor(shape=(4,), dtype=tf.float32),
     'endeffector_pos': Tensor(shape=(3,), dtype=tf.float32),
@@ -1550,7 +2312,7 @@ SequenceDict({
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     43,520
@@ -1558,13 +2320,13 @@ TRAIN      |     43,264
 TEST       |        256
 
 
-### Urls
+#### Urls
  * [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
 @inproceedings{conf/nips/FinnGL16,
   added-at = {2016-12-16T00:00:00.000+0100},
@@ -1583,12 +2345,11 @@ None
   url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
   year = 2016
 }
-
 ```
 
 ---
 
-## `"moving_mnist"`
+### `"moving_mnist"`
 
 Moving variant of MNIST database of handwritten digits. This is the
 data used by the authors for reporting model performance. See
@@ -1599,29 +2360,30 @@ for generating training/validation data from the MNIST dataset.
 * URL: [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 * `DatasetBuilder`: [`tfds.video.moving_mnist.MovingMnist`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/moving_mnist.py)
 * Version: `v0.1.0`
+* Size: `781.25 MiB`
 
-### Features
-```
+#### Features
+```python
 FeaturesDict({
     'image_sequence': Video(shape=(20, 64, 64, 1), dtype=tf.uint8, feature=Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 TEST       |     10,000
 ALL        |     10,000
 
 
-### Urls
+#### Urls
  * [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
 @article{DBLP:journals/corr/SrivastavaMS15,
   author    = {Nitish Srivastava and
@@ -1638,12 +2400,11 @@ None
   biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---
 
-## `"starcraft_video"`
+### `"starcraft_video"`
 
 This data set contains videos generated from Starcraft.
 
@@ -1653,26 +2414,26 @@ This data set contains videos generated from Starcraft.
 `starcraft_video` is configured with `tfds.video.starcraft.StarcraftVideoConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"brawl_64"` (`v0.1.2`): Brawl map with 64x64 resolution.
+* `"brawl_64"` (`v0.1.2`) (`Size: 6.40 GiB`): Brawl map with 64x64 resolution.
 
-* `"brawl_128"` (`v0.1.2`): Brawl map with 128x128 resolution.
+* `"brawl_128"` (`v0.1.2`) (`Size: 20.76 GiB`): Brawl map with 128x128 resolution.
 
-* `"collect_mineral_shards_64"` (`v0.1.2`): CollectMineralShards map with 64x64 resolution.
+* `"collect_mineral_shards_64"` (`v0.1.2`) (`Size: 7.83 GiB`): CollectMineralShards map with 64x64 resolution.
 
-* `"collect_mineral_shards_128"` (`v0.1.2`): CollectMineralShards map with 128x128 resolution.
+* `"collect_mineral_shards_128"` (`v0.1.2`) (`Size: 24.83 GiB`): CollectMineralShards map with 128x128 resolution.
 
-* `"move_unit_to_border_64"` (`v0.1.2`): MoveUnitToBorder map with 64x64 resolution.
+* `"move_unit_to_border_64"` (`v0.1.2`) (`Size: 1.77 GiB`): MoveUnitToBorder map with 64x64 resolution.
 
-* `"move_unit_to_border_128"` (`v0.1.2`): MoveUnitToBorder map with 128x128 resolution.
+* `"move_unit_to_border_128"` (`v0.1.2`) (`Size: 5.75 GiB`): MoveUnitToBorder map with 128x128 resolution.
 
-* `"road_trip_with_medivac_64"` (`v0.1.2`): RoadTripWithMedivac map with 64x64 resolution.
+* `"road_trip_with_medivac_64"` (`v0.1.2`) (`Size: 2.48 GiB`): RoadTripWithMedivac map with 64x64 resolution.
 
-* `"road_trip_with_medivac_128"` (`v0.1.2`): RoadTripWithMedivac map with 128x128 resolution.
+* `"road_trip_with_medivac_128"` (`v0.1.2`) (`Size: 7.80 GiB`): RoadTripWithMedivac map with 128x128 resolution.
 
 
-### `"starcraft_video/brawl_64"`
+#### `"starcraft_video/brawl_64"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -1680,9 +2441,9 @@ FeaturesDict({
 
 
 
-### `"starcraft_video/brawl_128"`
+#### `"starcraft_video/brawl_128"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -1690,9 +2451,9 @@ FeaturesDict({
 
 
 
-### `"starcraft_video/collect_mineral_shards_64"`
+#### `"starcraft_video/collect_mineral_shards_64"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -1700,9 +2461,9 @@ FeaturesDict({
 
 
 
-### `"starcraft_video/collect_mineral_shards_128"`
+#### `"starcraft_video/collect_mineral_shards_128"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -1710,9 +2471,9 @@ FeaturesDict({
 
 
 
-### `"starcraft_video/move_unit_to_border_64"`
+#### `"starcraft_video/move_unit_to_border_64"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -1720,9 +2481,9 @@ FeaturesDict({
 
 
 
-### `"starcraft_video/move_unit_to_border_128"`
+#### `"starcraft_video/move_unit_to_border_128"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -1730,9 +2491,9 @@ FeaturesDict({
 
 
 
-### `"starcraft_video/road_trip_with_medivac_64"`
+#### `"starcraft_video/road_trip_with_medivac_64"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
@@ -1740,9 +2501,9 @@ FeaturesDict({
 
 
 
-### `"starcraft_video/road_trip_with_medivac_128"`
+#### `"starcraft_video/road_trip_with_medivac_128"`
 
-```
+```python
 FeaturesDict({
     'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
@@ -1751,7 +2512,7 @@ FeaturesDict({
 
 
 
-### Statistics
+#### Statistics
 Split  | Examples
 :----- | ---:
 ALL        |     14,000
@@ -1760,13 +2521,13 @@ VALIDATION |      2,000
 TEST       |      2,000
 
 
-### Urls
+#### Urls
  * [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
-### Supervised keys (for `as_supervised=True`)
-None
+#### Supervised keys (for `as_supervised=True`)
+`None`
 
-### Citation
+#### Citation
 ```
 @article{DBLP:journals/corr/abs-1812-01717,
   author    = {Thomas Unterthiner and
@@ -1787,7 +2548,6 @@ None
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-
 ```
 
 ---

@@ -18,18 +18,18 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import resource
-import tensorflow_datasets.testing as tfds_test
 
 NO_EXTRACT = resource.ExtractMethod.NO_EXTRACT
 TAR = resource.ExtractMethod.TAR
 TAR_GZ = resource.ExtractMethod.TAR_GZ
 GZIP = resource.ExtractMethod.GZIP
 ZIP = resource.ExtractMethod.ZIP
+BZIP2 = resource.ExtractMethod.BZIP2
 
 
-class GuessExtractMethodTest(tfds_test.TestCase):
+class GuessExtractMethodTest(testing.TestCase):
 
   def test_(self):
     for fname, expected_result in [
@@ -38,13 +38,15 @@ class GuessExtractMethodTest(tfds_test.TestCase):
         ('bar.tar.zip', ZIP),
         ('bar.gz.strange', NO_EXTRACT),
         ('bar.tar', TAR),
+        ('bar.tar.bz2', TAR),
+        ('bar.bz2', BZIP2),
     ]:
       res = resource._guess_extract_method(fname)
       self.assertEqual(res, expected_result, '(%s)->%s instead of %s' % (
           fname, res, expected_result))
 
 
-class GetFnameTest(tfds_test.TestCase):
+class GetFnameTest(testing.TestCase):
   urls = '''\
 http://data.statmt.org/wmt17/translation-task/dev.tgz
 http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz
@@ -85,4 +87,4 @@ cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

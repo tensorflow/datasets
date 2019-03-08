@@ -25,15 +25,15 @@ import os
 
 from absl.testing import parameterized
 import tensorflow as tf
+from tensorflow_datasets import testing
 from tensorflow_datasets.core.features.text import subword_text_encoder
 from tensorflow_datasets.core.features.text import text_encoder
 from tensorflow_datasets.core.utils import py_utils
-import tensorflow_datasets.testing as tfds_test
 
 TEST_DATA_DIR = os.path.join(py_utils.tfds_dir(), 'testing', 'test_data')
 
 
-class SubwordTextEncoderTest(parameterized.TestCase, tfds_test.TestCase):
+class SubwordTextEncoderTest(parameterized.TestCase, testing.TestCase):
 
   def setUp(self):
     super(SubwordTextEncoderTest, self).setUp()
@@ -97,7 +97,7 @@ class SubwordTextEncoderTest(parameterized.TestCase, tfds_test.TestCase):
     self.assertEqual(encoder.subwords, self.vocab_list)
 
 
-class SubwordTextEncoderBuildTest(tfds_test.TestCase):
+class SubwordTextEncoderBuildTest(testing.TestCase):
 
   def test_build(self):
     text_gen = lorem_ipsum_generator
@@ -186,4 +186,4 @@ def lorem_ipsum_zh_generator():
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

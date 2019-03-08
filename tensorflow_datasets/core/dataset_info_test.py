@@ -24,22 +24,23 @@ import os
 import tempfile
 import numpy as np
 import tensorflow as tf
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
-import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 _TFDS_DIR = py_utils.tfds_dir()
 _INFO_DIR = os.path.join(_TFDS_DIR, "testing", "test_data", "dataset_info",
                          "mnist", "1.0.0")
+_INFO_DIR_UNLABELED = os.path.join(_TFDS_DIR, "testing", "test_data",
+                                   "dataset_info", "mnist_unlabeled", "1.0.0")
 _NON_EXISTENT_DIR = os.path.join(_TFDS_DIR, "non_existent_dir")
 
 
-DummyDatasetSharedGenerator = tfds_test.DummyDatasetSharedGenerator
+DummyDatasetSharedGenerator = testing.DummyDatasetSharedGenerator
 
 
 class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
@@ -62,17 +63,17 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
       }
 
 
-class DatasetInfoTest(tfds_test.TestCase):
+class DatasetInfoTest(testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
     super(DatasetInfoTest, cls).setUpClass()
-    cls._tfds_tmp_dir = tfds_test.make_tmp_dir()
+    cls._tfds_tmp_dir = testing.make_tmp_dir()
     cls._builder = DummyDatasetSharedGenerator(data_dir=cls._tfds_tmp_dir)
 
   @classmethod
   def tearDownClass(cls):
-    tfds_test.rm_tmp_dir(cls._tfds_tmp_dir)
+    testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def test_undefined_dir(self):
     with self.assertRaisesWithPredicateMatch(ValueError,
@@ -111,6 +112,13 @@ class DatasetInfoTest(tfds_test.TestCase):
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
 
+  def test_reading_empty_properties(self):
+    info = dataset_info.DatasetInfo(builder=self._builder)
+    info.read_from_directory(_INFO_DIR_UNLABELED)
+
+    # Assert supervised_keys has not been set
+    self.assertEqual(None, info.supervised_keys)
+
   def test_writing(self):
     # First read in stuff.
     mnist_builder = mnist.MNIST(
@@ -124,15 +132,22 @@ class DatasetInfoTest(tfds_test.TestCase):
       existing_json = json.load(f)
 
     # Now write to a temp directory.
-    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       info.write_to_directory(tmp_dir)
 
       # Read the newly written json file into a string.
       with tf.io.gfile.GFile(info._dataset_info_filename(tmp_dir)) as f:
         new_json = json.load(f)
 
+      # Read the newly written LICENSE file into a string.
+      with tf.io.gfile.GFile(info._license_filename(tmp_dir)) as f:
+        license_ = f.read()
+
     # Assert what was read and then written and read again is the same.
     self.assertEqual(existing_json, new_json)
+
+    # Assert correct license was written.
+    self.assertEqual(existing_json["redistributionInfo"]["license"], license_)
 
   def test_restore_after_modification(self):
     # Create a DatasetInfo
@@ -142,6 +157,7 @@ class DatasetInfoTest(tfds_test.TestCase):
         supervised_keys=("input", "output"),
         urls=["some location"],
         citation="some citation",
+        redistribution_info={"license": "some license"}
     )
     info.size_in_bytes = 456
     info.as_proto.schema.feature.add()
@@ -151,7 +167,7 @@ class DatasetInfoTest(tfds_test.TestCase):
         "url2": "some other checksum",
     }
 
-    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # Save it
       info.write_to_directory(tmp_dir)
 
@@ -160,7 +176,7 @@ class DatasetInfoTest(tfds_test.TestCase):
       restored_info.read_from_directory(tmp_dir)
       self.assertEqual(info.as_proto, restored_info.as_proto)
 
-    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # Save it
       info.write_to_directory(tmp_dir)
 
@@ -170,6 +186,7 @@ class DatasetInfoTest(tfds_test.TestCase):
           supervised_keys=("input (new)", "output (new)"),
           urls=["some location (new)"],
           citation="some citation (new)",
+          redistribution_info={"license": "some license (new)"}
       )
       restored_info.size_in_bytes = 789
       restored_info.as_proto.schema.feature.add()
@@ -190,6 +207,8 @@ class DatasetInfoTest(tfds_test.TestCase):
           restored_info.supervised_keys, ("input (new)", "output (new)"))
       self.assertEqual(restored_info.urls, ["some location (new)"])
       self.assertEqual(restored_info.citation, "some citation (new)")
+      self.assertEqual(restored_info.redistribution_info.license,
+                       "some license (new)")
       self.assertEqual(restored_info.size_in_bytes, 789)
       self.assertEqual(len(restored_info.as_proto.schema.feature), 4)
       self.assertEqual(restored_info.download_checksums, {
@@ -198,22 +217,25 @@ class DatasetInfoTest(tfds_test.TestCase):
       })
 
   def test_reading_from_gcs_bucket(self):
-    mnist_builder = mnist.MNIST(
-        data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
-    info = dataset_info.DatasetInfo(builder=mnist_builder)
-    info = mnist_builder.info
+    # The base TestCase prevents GCS access, so we explicitly ask it to restore
+    # access here.
+    with self.gcs_access():
+      mnist_builder = mnist.MNIST(
+          data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
+      info = dataset_info.DatasetInfo(builder=mnist_builder)
+      info = mnist_builder.info
 
-    # A nominal check to see if we read it.
-    self.assertTrue(info.initialized)
-    self.assertEqual(10000, info.splits["test"].num_examples)
+      # A nominal check to see if we read it.
+      self.assertTrue(info.initialized)
+      self.assertEqual(10000, info.splits["test"].num_examples)
 
   def test_str_smoke(self):
     info = mnist.MNIST(data_dir="/tmp/some_dummy_dir").info
     _ = str(info)
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_statistics_generation(self):
-    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
@@ -226,9 +248,9 @@ class DatasetInfoTest(tfds_test.TestCase):
       self.assertEqual(10, test_split.statistics.num_examples)
       self.assertEqual(20, train_split.statistics.num_examples)
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_statistics_generation_variable_sizes(self):
-    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
@@ -261,4 +283,4 @@ class DatasetInfoTest(tfds_test.TestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

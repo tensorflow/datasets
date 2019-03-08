@@ -1,16 +1,13 @@
 # TensorFlow Datasets
 
-**Note: `tensorflow-datasets` is not yet released. Follow the [release tracking
-issue](https://github.com/tensorflow/datasets/issues/5) to be notified
-of release.**
+TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 
-TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
-
-[![Travis](https://img.shields.io/travis/tensorflow/datasets.svg)](https://travis-ci.org/tensorflow/datasets)
+[![Kokoro](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
+[![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
 
 * [List of datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
 * [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-* [API docs](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds.md)
+* [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 * [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
 
 **Table of Contents**
@@ -25,9 +22,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Dataset`s.
 ### Installation
 
 ```sh
-# A stable tensorflow-datasets has not yet been released.
-# To use our nightly release:
-pip install tfds-nightly
+pip install tensorflow-datasets
 
 # Requires TF 1.12+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
@@ -63,11 +58,11 @@ Try it interactively in a
 ### `DatasetBuilder`
 
 All datasets are implemented as subclasses of
-[`DatasetBuilder`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetBuilder.md)
+[`DatasetBuilder`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetBuilder.md)
 and
-[`tfds.load`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/load.md)
+[`tfds.load`](https://www.tensorflow.org/datasets/api_docs/python/tfds/load.md)
 is a thin convenience wrapper.
-[`DatasetInfo`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/DatasetInfo.md)
+[`DatasetInfo`](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/DatasetInfo.md)
 documents the dataset.
 
 ```python
@@ -82,7 +77,7 @@ mnist_builder = tfds.builder("mnist")
 mnist_builder.download_and_prepare()
 
 # Construct a tf.data.Dataset
-dataset = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
+ds = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
 
 # Get the `DatasetInfo` object, which contains useful information about the
 # dataset and its features
@@ -120,7 +115,7 @@ print(info)
 
 As a convenience for users that want simple NumPy arrays in their programs, you
 can use
-[`tfds.as_numpy`](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/as_numpy.md)
+[`tfds.as_numpy`](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_numpy.md)
 to return a generator that yields NumPy array
 records out of a `tf.data.Dataset`. This allows you to build high-performance
 input pipelines with `tf.data` but use whatever you'd like for your model
@@ -137,9 +132,9 @@ You can also use `tfds.as_numpy` in conjunction with `batch_size=-1` to
 get the full dataset in NumPy arrays from the returned `tf.Tensor` object:
 
 ```python
-train_data = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
-numpy_data = tfds.as_numpy(train_data)
-numpy_images, numpy_labels = numpy_dataset["image"], numpy_dataset["label"]
+train_ds = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
+numpy_ds = tfds.as_numpy(train_ds)
+numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
 ```
 
 Note that the library still requires `tensorflow` as an internal dependency.

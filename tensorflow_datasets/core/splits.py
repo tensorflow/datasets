@@ -389,8 +389,8 @@ class Split(object):
     model architecture, etc.).
   * `TEST`: the testing data. This is the data to report metrics on. Typically
     you do not want to use this during model iteration as you may overfit to it.
-  * `ALL`: Special value corresponding to all existing splits of a dataset
-    merged together
+  * `ALL`: Special value, never defined by a dataset, but corresponding to all
+    defined splits of a dataset merged together.
 
   Note: All splits, including compositions inherit from `tfds.core.SplitBase`
 

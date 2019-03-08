@@ -21,13 +21,13 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
+from tensorflow_datasets import testing
 import tensorflow_datasets.public_api as tfds
-import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
+class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_int(self):
 
@@ -39,17 +39,17 @@ class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
         dtype={'int': tf.int32},
         tests=[
             # Python array
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'int': [1, 2, 3]},
                 expected={'int': [1, 2, 3]},
             ),
             # Numpy array
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'int': np.ones(shape=(3,), dtype=np.int32)},
                 expected={'int': [1, 1, 1]},
             ),
             # Array of dict
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=[
                     {'int': 1},
                     {'int': 10},
@@ -58,7 +58,7 @@ class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
                 expected={'int': [1, 10, 100]},
             ),
             # Wrong sequence length
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'int': np.ones(shape=(4,), dtype=np.int32)},
                 raise_cls=ValueError,
                 raise_msg='Input sequence length do not match',
@@ -75,17 +75,17 @@ class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
         shape={'label': (None,)},
         dtype={'label': tf.int64},
         tests=[
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'label': ['right', 'left', 'left']},
                 expected={'label': [1, 0, 0]},
             ),
             # Variable sequence length
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'label': ['right', 'left', 'right', 'left']},
                 expected={'label': [1, 0, 1, 0]},
             ),
             # Empty sequence length
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'label': []},
                 expected={'label': []},
             ),
@@ -117,7 +117,7 @@ class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
             }
         },
         tests=[
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={
                     'a': ['aa', 'b', 'ccc'],
                     'b': {
@@ -135,7 +135,7 @@ class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
                     }
                 },
             ),
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={
                     'a': [str(i) for i in range(100)],
                     'b': [{   # pylint: disable=g-complex-comprehension
@@ -152,7 +152,7 @@ class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
                 },
             ),
             # Test inputs not same sequence length
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={
                     'a': ['aa', 'b', 'ccc'],
                     'b': {
@@ -183,20 +183,20 @@ class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
         shape={'image': (None, 128, 100, 3)},
         dtype={'image': tf.uint8},
         tests=[
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=[{'image': img} for img in imgs],
                 expected={'image': imgs_stacked},
             ),
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'image': imgs_stacked},
                 expected={'image': imgs_stacked},
             ),
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'image': imgs},
                 expected={'image': imgs_stacked},
             ),
             # Empty value
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value={'image': []},
                 # The empty value still has the right shape
                 expected={'image': np.empty(
@@ -210,7 +210,7 @@ class SequenceDictFeatureTest(tfds_test.FeatureExpectationsTestCase):
   # Should add unittest for _transpose_dict_list
 
 
-class SequenceFeatureTest(tfds_test.FeatureExpectationsTestCase):
+class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_int(self):
 
@@ -220,17 +220,17 @@ class SequenceFeatureTest(tfds_test.FeatureExpectationsTestCase):
         dtype=tf.int32,
         tests=[
             # Python array
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=[1, 2, 3],
                 expected=[1, 2, 3],
             ),
             # Numpy array
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=np.ones(shape=(3,), dtype=np.int32),
                 expected=[1, 1, 1],
             ),
             # Wrong sequence length
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=np.ones(shape=(4,), dtype=np.int32),
                 raise_cls=ValueError,
                 raise_msg='Input sequence length do not match',
@@ -247,17 +247,17 @@ class SequenceFeatureTest(tfds_test.FeatureExpectationsTestCase):
         shape=(None,),
         dtype=tf.int64,
         tests=[
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=['right', 'left', 'left'],
                 expected=[1, 0, 0],
             ),
             # Variable sequence length
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=['right', 'left', 'right', 'left'],
                 expected=[1, 0, 1, 0],
             ),
             # Empty sequence length
-            tfds_test.FeatureExpectationItem(
+            testing.FeatureExpectationItem(
                 value=[],
                 expected=[],
             ),
@@ -272,4 +272,4 @@ class SequenceFeatureTest(tfds_test.FeatureExpectationsTestCase):
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

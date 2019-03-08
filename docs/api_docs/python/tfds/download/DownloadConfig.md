@@ -23,7 +23,7 @@ __init__(
     extract_dir=None,
     manual_dir=None,
     download_mode=None,
-    compute_stats=True,
+    compute_stats=None,
     max_examples_per_split=None
 )
 ```
@@ -40,8 +40,8 @@ Constructs a `DownloadConfig`.
 * <b>`download_mode`</b>: <a href="../../tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>, how to deal with downloads or data
     that already exists. Defaults to `REUSE_DATASET_IF_EXISTS`, which will
     reuse both downloads and data if it already exists.
-* <b>`compute_stats`</b>: `bool`, whether to compute statistics over the generated
-    data.
+* <b>`compute_stats`</b>: `tfds.download.ComputeStats`, whether to compute
+    statistics over the generated data. Defaults to `AUTO`.
 * <b>`max_examples_per_split`</b>: `int`, optional max number of examples to write
     into each split.
 

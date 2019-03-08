@@ -33,7 +33,7 @@ def get_tf_version():
 # Will be set to one of:
 # * tf1_12
 # * tf1_13
-# * nopatch
+# * tf2
 TF_PATCH = ""
 
 
@@ -85,7 +85,16 @@ def _patch_tf(tf):
     TF_PATCH = "tf1_13"
     _patch_for_tf1_13(tf)
   else:
-    TF_PATCH = "nopatch"
+    TF_PATCH = "tf2"
+    _patch_for_tf2(tf)
+
+
+def _patch_for_tf2(tf):
+  from tensorflow.python.data.ops import dataset_ops
+  if hasattr(dataset_ops, "get_legacy_output_shapes"):
+    tf.data.Dataset.output_shapes = property(
+        dataset_ops.get_legacy_output_shapes)
+    tf.data.Dataset.output_types = property(dataset_ops.get_legacy_output_types)
 
 
 def _patch_for_tf1_12(tf):
@@ -121,9 +130,6 @@ def _patch_for_tf1_12(tf):
   tf.compat.v1.test = tf.test
   tf.compat.v1.test.get_temp_dir = tf.test.get_temp_dir
   tf.nest = tf.contrib.framework.nest
-  # TODO(b/123952794): Rm patch. Migrate to V2 function.
-  if hasattr(tf.data.Dataset, "map_with_legacy_function"):
-    tf.data.Dataset.map = tf.data.Dataset.map_with_legacy_function
 
 
 def _patch_for_tf1_13(tf):
@@ -132,9 +138,6 @@ def _patch_for_tf1_13(tf):
     tf.io.gfile.GFile = tf.gfile.GFile
   if not hasattr(tf, "nest"):
     tf.nest = tf.contrib.framework.nest
-  # TODO(b/123952794): Rm patch. Migrate to V2 function.
-  if hasattr(tf.data.Dataset, "map_with_legacy_function"):
-    tf.data.Dataset.map = tf.data.Dataset.map_with_legacy_function
   if not hasattr(tf.compat, "v2"):
     tf.compat.v2 = types.ModuleType("tf.compat.v2")
     tf.compat.v2.data = types.ModuleType("tf.compat.v2.data")

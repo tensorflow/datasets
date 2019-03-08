@@ -6,6 +6,7 @@
 <meta itemprop="property" content="extract_method_name"/>
 <meta itemprop="property" content="fname"/>
 <meta itemprop="property" content="info_path"/>
+<meta itemprop="property" content="sha256"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="exists_locally"/>
 <meta itemprop="property" content="write_info_file"/>
@@ -41,7 +42,7 @@ Resource constructor.
 * <b>`extract_method`</b>: `ExtractMethod` to be used to extract resource. If
     not set, will be guessed from downloaded file name `original_fname`.
 * <b>`path`</b>: `str`, path of resource on local disk. Can be None if resource has
-    not be downloaded yet. In such case, `url` and `sha256` must be set.
+    not be downloaded yet. In such case, `url` must be set.
 
 
 
@@ -66,6 +67,10 @@ Name of downloaded file (not as downloaded, but as stored).
 <h3 id="info_path"><code>info_path</code></h3>
 
 Returns path (`str`) of INFO file associated with resource.
+
+<h3 id="sha256"><code>sha256</code></h3>
+
+
 
 
 

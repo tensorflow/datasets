@@ -21,13 +21,13 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
+from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
-import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
@@ -76,10 +76,10 @@ class DummyCSVBuilder(DummyTFRecordBuilder):
     return file_adapter_cls(serialized_info)
 
 
-class FileFormatAdapterTest(tfds_test.TestCase):
+class FileFormatAdapterTest(testing.TestCase):
 
   def _test_generator_based_builder(self, builder_cls):
-    with tfds_test.tmp_dir(self.get_temp_dir()) as tmp_dir:
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = builder_cls(data_dir=tmp_dir)
       builder.download_and_prepare()
       train_dataset = builder.as_dataset(split=splits.Split.TRAIN)
@@ -109,7 +109,39 @@ class FileFormatAdapterTest(tfds_test.TestCase):
     self._test_generator_based_builder(DummyCSVBuilder)
 
 
-class TFRecordUtilsTest(tfds_test.TestCase):
+class TFRecordUtilsTest(testing.TestCase):
+
+  def test_dicts_to_sequence_example(self):
+    context_dict = {
+        "a": 1,
+        "a2": np.array(1),
+        "b": ["foo", "bar"],
+    }
+    sequence_dict = {
+        "w": [["foo"], ["foo", "bar"]],
+        "x": [1, 2, 3],
+        "y": np.array([2., 3., 4., 5.]),
+        "z": [[1, 2], [3, 4, 5]],
+    }
+    seq_ex = file_format_adapter._dicts_to_tf_sequence_example(
+        context_dict, sequence_dict)
+    context = seq_ex.context.feature
+    self.assertEqual([1], list(context["a"].int64_list.value))
+    self.assertEqual([1], list(context["a2"].int64_list.value))
+    self.assertEqual([b"foo", b"bar"], list(context["b"].bytes_list.value))
+    seq = seq_ex.feature_lists.feature_list
+    self.assertEqual(
+        [[b"foo"], [b"foo", b"bar"]],
+        [list(el.bytes_list.value) for el in seq["w"].feature])
+    self.assertEqual(
+        [[el] for el in [1, 2, 3]],
+        [list(el.int64_list.value) for el in seq["x"].feature])
+    self.assertAllClose(
+        [[el] for el in [2., 3., 4., 5.]],
+        [list(el.float_list.value) for el in seq["y"].feature])
+    self.assertEqual(
+        [[1, 2], [3, 4, 5]],
+        [list(el.int64_list.value) for el in seq["z"].feature])
 
   def test_dict_to_example(self):
     example = file_format_adapter._dict_to_tf_example({
@@ -145,4 +177,4 @@ class TFRecordUtilsTest(tfds_test.TestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()

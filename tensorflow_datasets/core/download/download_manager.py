@@ -29,7 +29,6 @@ import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
@@ -208,9 +207,13 @@ class DownloadManager(object):
     resource.sha256 = self._checksums.get(resource.url, None)
     if not resource.path:
       resource.path = os.path.join(self._download_dir, resource.fname)
-    if not self._force_download and resource.exists_locally():
+    if (not self._force_download and resource.sha256 and
+        resource.exists_locally()):
       logging.info('URL %s already downloaded: reusing %s.', resource.url,
                    resource.path)
+      self._recorded_download_checksums[resource.url] = resource.sha256
+      self._download_sizes[resource.url] = (
+          tf.io.gfile.stat(resource.path).length)
       return promise.Promise.resolve(resource.path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
@@ -252,6 +255,15 @@ class DownloadManager(object):
       resource.path = path
       return self._extract(resource)
     return self._download(resource).then(callback)
+
+  def download_kaggle_data(self, competition_name):
+    """Download data for a given Kaggle competition."""
+    with self._downloader.tqdm():
+      kaggle_downloader = self._downloader.kaggle_downloader(competition_name)
+      urls = kaggle_downloader.competition_urls
+      files = kaggle_downloader.competition_files
+      return _map_promise(self._download,
+                          dict((f, u) for (f, u) in zip(files, urls)))
 
   def download(self, url_or_urls):
     """Download given url(s).

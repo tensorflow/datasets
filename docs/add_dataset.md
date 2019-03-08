@@ -326,7 +326,7 @@ text datasets, different `TextEncoder`s and vocabularies affect the token ids
 that are written to disk.
 
 Heavy configuration is done through
-[`tfds.core.BuilderConfig`s](https://github.com/tensorflow/datasets/tree/master/docs/api_docs/python/tfds/core/BuilderConfig.md):
+[`tfds.core.BuilderConfig`s](https://www.tensorflow.org/datasets/api_docs/python/tfds/core/BuilderConfig.md):
 
 1. Define your own configuration object as a subclass of
    `tfds.core.BuilderConfig`. For example, `MyDatasetConfig`.
@@ -496,12 +496,12 @@ to be updated.
 dataset. It uses "fake examples" as test data that mimic the structure of the
 source dataset.
 
-The test data should be put in in
+The test data should be put in
 [`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/)
 under the `my_dataset` directory and should mimic the source dataset artifacts
 as downloaded and extracted. It can be created manually or automatically with a
-script ([example
-script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
+script
+([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
 
 Make sure to use different data in your test data splits, as the test will
 fail if your dataset splits overlap.

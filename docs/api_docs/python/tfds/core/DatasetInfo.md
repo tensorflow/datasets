@@ -7,6 +7,7 @@
 <meta itemprop="property" content="description"/>
 <meta itemprop="property" content="download_checksums"/>
 <meta itemprop="property" content="features"/>
+<meta itemprop="property" content="full_name"/>
 <meta itemprop="property" content="initialized"/>
 <meta itemprop="property" content="name"/>
 <meta itemprop="property" content="size_in_bytes"/>
@@ -18,6 +19,7 @@
 <meta itemprop="property" content="compute_dynamic_properties"/>
 <meta itemprop="property" content="initialize_from_bucket"/>
 <meta itemprop="property" content="read_from_directory"/>
+<meta itemprop="property" content="update_splits_if_different"/>
 <meta itemprop="property" content="write_to_directory"/>
 </div>
 
@@ -49,10 +51,7 @@ __init__(
     description=None,
     features=None,
     supervised_keys=None,
-    splits=None,
     urls=None,
-    download_checksums=None,
-    size_in_bytes=0,
     citation=None
 )
 ```
@@ -68,12 +67,7 @@ Constructs DatasetInfo.
     method.
 * <b>`supervised_keys`</b>: `tuple`, Specifies the input feature and the label for
     supervised learning, if applicable for the dataset.
-* <b>`splits`</b>: <a href="../../tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>, the available splits for this dataset.
 * <b>`urls`</b>: `list(str)`, optional, the homepage(s) for this dataset.
-* <b>`download_checksums`</b>: `dict<str url, str sha256>`, URL to sha256 of file.
-    If a url is not listed, its checksum is not checked.
-* <b>`size_in_bytes`</b>: `int`, optional, approximate size in bytes of the raw
-    size of the dataset that we will be downloading from the internet.
 * <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
 
 
@@ -103,6 +97,10 @@ Constructs DatasetInfo.
 <h3 id="features"><code>features</code></h3>
 
 
+
+<h3 id="full_name"><code>full_name</code></h3>
+
+Full canonical name: (<dataset_name>/<config_name>/<version>).
 
 <h3 id="initialized"><code>initialized</code></h3>
 
@@ -155,10 +153,7 @@ Initialize DatasetInfo from GCS bucket info files.
 <h3 id="read_from_directory"><code>read_from_directory</code></h3>
 
 ``` python
-read_from_directory(
-    dataset_info_dir,
-    from_bucket=False
-)
+read_from_directory(dataset_info_dir)
 ```
 
 Update DatasetInfo from the JSON file in `dataset_info_dir`.
@@ -172,13 +167,25 @@ This will overwrite all previous metadata.
 
 * <b>`dataset_info_dir`</b>: `str` The directory containing the metadata file. This
     should be the root directory of a specific dataset version.
-* <b>`from_bucket`</b>: `bool`, If data is restored from info files on GCS,
-    then only the informations not defined in the code are updated
 
+<h3 id="update_splits_if_different"><code>update_splits_if_different</code></h3>
 
-#### Returns:
+``` python
+update_splits_if_different(split_dict)
+```
 
-True if we were able to initialize using `dataset_info_dir`, else false.
+Overwrite the splits if they are different from the current ones.
+
+* If splits aren't already defined or different (ex: different number of
+  shards), then the new split dict is used. This will trigger stats
+  computation during download_and_prepare.
+* If splits are already defined in DatasetInfo and similar (same names and
+  shards): keep the restored split which contains the statistics (restored
+  from GCS or file)
+
+#### Args:
+
+* <b>`split_dict`</b>: <a href="../../tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>, the new split
 
 <h3 id="write_to_directory"><code>write_to_directory</code></h3>
 

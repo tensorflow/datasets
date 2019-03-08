@@ -20,16 +20,15 @@ from __future__ import division
 from __future__ import print_function
 
 import tensorflow as tf
-
+from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import tf_utils
-import tensorflow_datasets.testing as tfds_test
 
 tf.compat.v1.enable_eager_execution()
 
 
-class TfUtilsTest(tfds_test.TestCase):
+class TfUtilsTest(testing.TestCase):
 
-  @tfds_test.run_in_graph_and_eager_modes()
+  @testing.run_in_graph_and_eager_modes()
   def test_graph_runner(self):
     graph_runner = tf_utils.TFGraphRunner()
 
@@ -58,4 +57,4 @@ class TfUtilsTest(tfds_test.TestCase):
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()

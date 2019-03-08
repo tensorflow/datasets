@@ -8,8 +8,6 @@ toc:
       path: /datasets/api_docs/python/tfds/as_numpy
     - title: builder
       path: /datasets/api_docs/python/tfds/builder
-    - title: dataset_as_numpy
-      path: /datasets/api_docs/python/tfds/dataset_as_numpy
     - title: list_builders
       path: /datasets/api_docs/python/tfds/list_builders
     - title: load
@@ -50,6 +48,8 @@ toc:
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds/download
+    - title: ComputeStatsMode
+      path: /datasets/api_docs/python/tfds/download/ComputeStatsMode
     - title: DownloadConfig
       path: /datasets/api_docs/python/tfds/download/DownloadConfig
     - title: DownloadManager
@@ -118,6 +118,36 @@ toc:
       path: /datasets/api_docs/python/tfds/file_adapter/FileFormatAdapter
     - title: TFRecordExampleAdapter
       path: /datasets/api_docs/python/tfds/file_adapter/TFRecordExampleAdapter
+  - title: tfds.testing
+    section:
+    - title: Overview
+      path: /datasets/api_docs/python/tfds/testing
+    - title: DatasetBuilderTestCase
+      path: /datasets/api_docs/python/tfds/testing/DatasetBuilderTestCase
+    - title: DatasetBuilderTestCase.failureException
+      path: /datasets/api_docs/python/tfds/testing/DatasetBuilderTestCase/failureException
+    - title: DummyDatasetSharedGenerator
+      path: /datasets/api_docs/python/tfds/testing/DummyDatasetSharedGenerator
+    - title: DummyMnist
+      path: /datasets/api_docs/python/tfds/testing/DummyMnist
+    - title: FeatureExpectationItem
+      path: /datasets/api_docs/python/tfds/testing/FeatureExpectationItem
+    - title: FeatureExpectationsTestCase
+      path: /datasets/api_docs/python/tfds/testing/FeatureExpectationsTestCase
+    - title: make_tmp_dir
+      path: /datasets/api_docs/python/tfds/testing/make_tmp_dir
+    - title: mock_kaggle_api
+      path: /datasets/api_docs/python/tfds/testing/mock_kaggle_api
+    - title: rm_tmp_dir
+      path: /datasets/api_docs/python/tfds/testing/rm_tmp_dir
+    - title: run_in_graph_and_eager_modes
+      path: /datasets/api_docs/python/tfds/testing/run_in_graph_and_eager_modes
+    - title: TestCase
+      path: /datasets/api_docs/python/tfds/testing/TestCase
+    - title: test_main
+      path: /datasets/api_docs/python/tfds/testing/test_main
+    - title: tmp_dir
+      path: /datasets/api_docs/python/tfds/testing/tmp_dir
   - title: tfds.units
     section:
     - title: Overview

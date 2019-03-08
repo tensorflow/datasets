@@ -31,7 +31,7 @@ from absl import flags
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import imagenet
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.testing import _utils
+from tensorflow_datasets.testing import fake_data_utils
 
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
@@ -48,7 +48,7 @@ def _get_synset(synset_name):
   tar = tarfile.open(mode='w', fileobj=fobj)
   for i in range(1, TRAIN_IMAGES_PER_SYNSET+1):
     fname = '%s_%s.JPEG' % (synset_name, i)
-    jpeg = _utils.get_random_jpeg()
+    jpeg = fake_data_utils.get_random_jpeg()
     tar.add(jpeg, arcname=fname)
   fobj.close()
   return fobj.name
@@ -80,7 +80,7 @@ def _generate_val_archive():
   tar = tarfile.open(output_path, mode='w')
   for i in range(1, VAL_IMAGES_NUMBER+1):
     fname = 'ILSVRC2012_val_0000%03i.JPEG' % i
-    jpeg = _utils.get_random_jpeg()
+    jpeg = fake_data_utils.get_random_jpeg()
     tar.add(jpeg, arcname=fname)
   tar.close()
 
