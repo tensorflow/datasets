@@ -1,0 +1,4 @@
+sofa_7423
+table_1241
+monitor_2134
+bed_3571

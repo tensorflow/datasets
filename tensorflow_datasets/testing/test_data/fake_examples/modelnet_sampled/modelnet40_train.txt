@@ -1,0 +1,4 @@
+chair_4648
+bed_1527
+bed_1829
+toilet_6134
