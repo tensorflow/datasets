@@ -131,7 +131,7 @@ def main(_):
     if len(builders) > 1:
       raise ValueError(
           "--builder_config_id can only be used when building a single dataset")
-    builder, = builders
+    builder = builders[list(builders.keys())[0]]
     if not builder.BUILDER_CONFIGS:
       raise ValueError(
           "--builder_config_id can only be used with datasets with configs")
