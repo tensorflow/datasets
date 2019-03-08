@@ -22,12 +22,16 @@ from __future__ import print_function
 import abc
 import inspect
 
+from absl import flags
 from absl import logging
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
+
+
+FLAGS = flags.FLAGS
 
 __all__ = [
     "RegisteredDataset",

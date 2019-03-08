@@ -59,6 +59,8 @@ from tensorflow_metadata.proto.v0 import statistics_pb2
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
 
+LICENSE_FILENAME = "LICENSE"
+
 # GCS
 GCS_URL = "http://storage.googleapis.com/tfds-data"
 GCS_BUCKET = "gs://tfds-data"
@@ -74,6 +76,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     splits={splits},
     supervised_keys={supervised_keys},
     citation='{citation}',
+    redistribution_info={redistribution_info},
 )
 """
 
@@ -99,7 +102,8 @@ class DatasetInfo(object):
                features=None,
                supervised_keys=None,
                urls=None,
-               citation=None):
+               citation=None,
+               redistribution_info=None):
     """Constructs DatasetInfo.
 
     Args:
@@ -112,6 +116,10 @@ class DatasetInfo(object):
         supervised learning, if applicable for the dataset.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
+      redistribution_info: `dict`, optional, information needed for
+        redistribution, as specified in `dataset_info_pb2.RedistributionInfo`.
+        The content of the `license` subfield will automatically be written to a
+        LICENSE file stored with the dataset.
     """
     self._builder = builder
 
@@ -119,7 +127,9 @@ class DatasetInfo(object):
         name=builder.name,
         description=description,
         version=str(builder._version),  # pylint: disable=protected-access
-        citation=citation)
+        citation=citation,
+        redistribution_info=dataset_info_pb2.RedistributionInfo(
+            **redistribution_info) if redistribution_info else None)
     if urls:
       self._info_proto.location.urls[:] = urls
 
@@ -183,6 +193,10 @@ class DatasetInfo(object):
     return (supervised_keys.input, supervised_keys.output)
 
   @property
+  def redistribution_info(self):
+    return self.as_proto.redistribution_info
+
+  @property
   def splits(self):
     return self._splits.copy()
 
@@ -240,6 +254,9 @@ class DatasetInfo(object):
   def _dataset_info_filename(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
+  def _license_filename(self, dataset_info_dir):
+    return os.path.join(dataset_info_dir, LICENSE_FILENAME)
+
   def compute_dynamic_properties(self):
     self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
@@ -284,6 +301,11 @@ class DatasetInfo(object):
     # Save the metadata from the features (vocabulary, labels,...)
     if self.features:
       self.features.save_metadata(dataset_info_dir)
+
+    if self.redistribution_info.license:
+      with tf.io.gfile.GFile(self._license_filename(dataset_info_dir),
+                             "w") as f:
+        f.write(self.redistribution_info.license)
 
     with tf.io.gfile.GFile(self._dataset_info_filename(dataset_info_dir),
                            "w") as f:
@@ -396,7 +418,8 @@ class DatasetInfo(object):
         splits=splits_pprint,
         citation=citation_pprint,
         urls=self.urls,
-        supervised_keys=self.supervised_keys)
+        supervised_keys=self.supervised_keys,
+        redistribution_info=self.redistribution_info)
 
 #
 #

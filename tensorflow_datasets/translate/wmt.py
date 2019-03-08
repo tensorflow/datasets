@@ -115,14 +115,9 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            src:
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            target:
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-        }),
+        features=tfds.features.Translation(
+            languages=self.builder_config.language_pair,
+            encoder_config=self.builder_config.text_encoder_config),
         supervised_keys=(src, target),
         urls=["http://www.statmt.org/wmt18/"],
         citation=_CITATION,

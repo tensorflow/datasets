@@ -29,7 +29,6 @@ import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
