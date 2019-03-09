@@ -20,7 +20,7 @@ _DESCRIPTION = ("The dataset consists of 10015 dermatoscopic images which can se
 
 
 
-_IMAGE_SHAPE = (600,450,3)
+_IMAGE_SHAPE = (450,600,3)
 
 _NAMES = ['akiec','bcc','bkl','df','mel','nv','vasc'] 
 
