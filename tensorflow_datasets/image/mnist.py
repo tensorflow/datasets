@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""MNIST and Fashion MNIST."""
+"""MNIST, Fashion MNIST, KMNIST and EMNIST."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -23,6 +23,7 @@ import numpy as np
 import six.moves.urllib as urllib
 import tensorflow as tf
 
+from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # MNIST constants
@@ -68,7 +69,7 @@ _FASHION_MNIST_CITATION = """\
 """
 
 
-_K_MNIST_CITATION ="""
+_K_MNIST_CITATION = """\
   @online{clanuwat2018deep,
   author       = {Tarin Clanuwat and Mikel Bober-Irizar and Asanobu Kitamoto and Alex Lamb and Kazuaki Yamamoto and David Ha},
   title        = {Deep Learning for Classical Japanese Literature},
@@ -77,7 +78,17 @@ _K_MNIST_CITATION ="""
   eprintclass  = {cs.CV},
   eprinttype   = {arXiv},
   eprint       = {cs.CV/1812.01718},
-  }
+}
+"""
+
+_EMNIST_CITATION = """\
+@article{cohen_afshar_tapson_schaik_2017, 
+    title={EMNIST: Extending MNIST to handwritten letters}, 
+    DOI={10.1109/ijcnn.2017.7966217}, 
+    journal={2017 International Joint Conference on Neural Networks (IJCNN)}, 
+    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van}, 
+    year={2017}
+}
 """
 
 class MNIST(tfds.core.GeneratorBasedBuilder):
@@ -207,6 +218,143 @@ class KMNIST(MNIST):
         citation=_K_MNIST_CITATION,
     )
 
+class EMNISTConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for EMNIST CONFIG."""
+
+  @api_utils.disallow_positional_args
+  def __init__(self, class_number, train_examples, test_examples, **kwargs):
+    """BuilderConfig for EMNIST class number.
+
+    Args:
+      class_number: There are six different splits provided in this dataset. And have
+      different class numbers.
+
+      train_examples, test_examples: So in these have different test and train character
+      numbers.
+
+      **kwargs: keyword arguments forwarded to super.
+    """
+    super(EMNISTConfig, self).__init__(**kwargs)
+    self.class_number = class_number
+    self.train_examples = train_examples
+    self.test_examples = test_examples
+
+
+class EMNIST(MNIST):
+
+  VERSION = tfds.core.Version('1.0.0')
+
+  BUILDER_CONFIGS = [
+      EMNISTConfig(
+          name="byclass",
+          class_number=62,
+          train_examples=697932,
+          test_examples=116323,
+          description="EMNIST ByClass:  814,255 characters. 62 unbalanced classes.",
+          version="0.1.1",
+      ),
+      EMNISTConfig(
+          name="bymerge",
+          class_number=47,
+          train_examples=697932,
+          test_examples=116323,
+          description="EMNIST ByMerge: 	814,255 characters. 47 unbalanced classes.",
+          version="0.1.1",
+      ),
+      EMNISTConfig(
+          name="balanced",
+          class_number=47,
+          train_examples=112800,
+          test_examples=18800,
+          description="EMNIST Balanced:	131,600 characters. 47 balanced classes.",
+          version="0.1.1",
+      ),
+      EMNISTConfig(
+          name="letters",
+          class_number=37,
+          train_examples=88800,
+          test_examples=14800,
+          description="EMNIST Letters:	103,600 characters. 26 balanced classes.",
+          version="0.1.1",
+      ),
+      EMNISTConfig(
+          name="digits",
+          class_number=10,
+          train_examples=240000,
+          test_examples=40000,
+          description="EMNIST Digits:  280,000 characters. 10 balanced classes.",
+          version="0.1.1",
+      ),
+      EMNISTConfig(
+          name="mnist",
+          class_number=10,
+          train_examples=60000,
+          test_examples=10000,
+          description="EMNIST MNIST:  70,000 characters. 10 balanced classes.",
+          version="0.1.1",
+      ),
+      EMNISTConfig(
+          name="test",
+          class_number=62,
+          train_examples=10,
+          test_examples=2,
+          description="EMNIST test data config.",
+          version="0.1.1",
+      ),
+  ]
+
+  def _info(self):
+      return tfds.core.DatasetInfo(
+          builder=self,
+          description=("The EMNIST dataset is a set of handwritten character digits"
+                       "derived from the NIST Special Database 19  and converted to"
+                       "a 28x28 pixel image format and dataset structure that directly"
+                       "matches the MNIST dataset."
+),
+          features=tfds.features.FeaturesDict({
+              "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+              "label": tfds.features.ClassLabel(num_classes=self.builder_config.class_number),
+
+          }),
+          supervised_keys=("image", "label"),
+          urls=["https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"],
+          citation=_EMNIST_CITATION,
+      )
+
+  def _split_generators(self, dl_manager):
+
+    filenames = {
+        "train_data": 'emnist-{}-train-images-idx3-ubyte'.format(self.builder_config.name),
+        "train_labels": 'emnist-{}-train-labels-idx1-ubyte'.format(self.builder_config.name),
+        "test_data": 'emnist-{}-test-images-idx3-ubyte'.format(self.builder_config.name),
+        "test_labels": 'emnist-{}-test-labels-idx1-ubyte'.format(self.builder_config.name),
+    }
+    dir_name = dl_manager.manual_dir
+    import os
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            num_shards=10,
+            gen_kwargs=dict(
+                num_examples=self.builder_config.train_examples,
+                data_path=os.path.join(dir_name, filenames['train_data']),
+                label_path=os.path.join(dir_name, filenames["train_labels"]),
+            )
+
+        ),
+
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            num_shards=1,
+            gen_kwargs=dict(
+                num_examples=self.builder_config.test_examples,
+                data_path=os.path.join(dir_name, filenames['test_data']),
+                label_path=os.path.join(dir_name, filenames["test_labels"]),
+            )
+        )
+    ]
+
+
 
 
 def _extract_mnist_images(image_filepath, num_images):
@@ -226,8 +374,3 @@ def _extract_mnist_labels(labels_filepath, num_labels):
     buf = f.read(num_labels)
     labels = np.frombuffer(buf, dtype=np.uint8).astype(np.int64)
     return labels
-
-
-
-# test file
-# and full test
