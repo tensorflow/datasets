@@ -11,6 +11,7 @@ import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
+
 _CITATION = """\
 @article{DBLP:journals/corr/LinMBHPRDZ14,
   author    = {Tsung{-}Yi Lin and
@@ -52,18 +53,19 @@ class Coco2017(tfds.core.GeneratorBasedBuilder):
             " * Some images from the train and validation sets don't have "
             "annotations.\n"
             " * The test split don't have any annotations (only images).\n"
-            " * Coco2017 defines 133 classes.\n"),
+            " * Coco2017 defines 200 classes but the data has only 133.\n"),
         features=tfds.features.FeaturesDict({
             # Images can have variable shape
             "image": tfds.features.Image(encoding_format="jpeg"),
+            "image_id": tf.int64,
             "image/filename": tfds.features.Text(),
             "panoptic_image": tfds.features.Image(encoding_format="png"),
             "panoptic_image/filename": tfds.features.Text(),
-            "segments_info": tfds.features.SequenceDict({
+            "objects": tfds.features.SequenceDict({
                 "area": tf.int64,
                 "id": tf.int64,
                 "bbox": tfds.features.BBoxFeature(),
-                # Coco2017 has 133 categories
+                # Coco2017 has 200 categories but only 133 are present in the dataset
                 "label": tfds.features.ClassLabel(num_classes=133),
                 "is_crowd": tf.bool,
             }),
@@ -166,7 +168,7 @@ class Coco2017(tfds.core.GeneratorBasedBuilder):
     images = coco_annotation.images
 
 
-    self.info.features["segments_info"]["label"].names = [
+    self.info.features["objects"]["label"].names = [
         c["name"] for c in categories
     ]
     
@@ -192,7 +194,7 @@ class Coco2017(tfds.core.GeneratorBasedBuilder):
 
       if not instances:
         annotation_skipped += 1
-
+  
       def build_bbox(x, y, width, height):
         # pylint: disable=cell-var-from-loop
         # build_bbox is only used within the loop so it is ok to use image_info
@@ -203,13 +205,14 @@ class Coco2017(tfds.core.GeneratorBasedBuilder):
             xmax=(x + width) / image_info["width"],
         )
         # pylint: enable=cell-var-from-loop
-
+      
       yield {
           "image": os.path.join(image_dir, split_type, image_info["file_name"]),
+          "image_id": image_info["id"],
           "image/filename": image_info["file_name"],
           "panoptic_image": os.path.join(annotation_dir, "annotations","panoptic_{}".format(split_type),image_info["file_name"].replace(".jpg",".png")),
           "panoptic_image/filename": image_info["file_name"].replace(".jpg",".png"), 
-          "segments_info": [{
+          "objects": [{
               "area": instance_info["segments_info"][j]["area"],
               "id": instance_info["segments_info"][j]["id"],
               "bbox": build_bbox(*instance_info["segments_info"][j]["bbox"]),
@@ -259,5 +262,3 @@ class Coco2017Annotation(object):
     """Return all annotations associated with the image id string."""
     # Some images don't have any annotations. Return empty list instead.
     return self._img_id2annotations.get(img_id, [])
-
-
