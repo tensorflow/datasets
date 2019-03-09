@@ -38,7 +38,7 @@ url = {https://doi.org/10.7910/DVN/DBW86T}
 }
 """
 
-class ham10000(tfds.core.GeneratorBasedBuilder):
+class Ham10000(tfds.core.GeneratorBasedBuilder):
   """HAM10000 Dermatoscopic images"""
 
   VERSION = tfds.core.Version('1.0.0')
