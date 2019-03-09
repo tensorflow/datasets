@@ -80,7 +80,7 @@ class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, archive):
-    """Generate horses or humans images and labels given the directory path.
+    """Generate rock, paper or scissors images and labels given the directory path.
 
     Args:
       archive: object that iterates over the zip.
