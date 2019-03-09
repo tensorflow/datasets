@@ -43,6 +43,7 @@ REQUIRED_PKGS = [
     'termcolor',
     'tqdm',
     'wrapt',
+    'numpy',
 ]
 
 TESTS_REQUIRE = [
@@ -56,7 +57,6 @@ if sys.version_info.major == 3:
 else:
   # Packages only for Python 2
   TESTS_REQUIRE.append('mock')
-  REQUIRED_PKGS.append('bz2file')
   REQUIRED_PKGS.append('functools32')
   REQUIRED_PKGS.append('futures')  # concurrent.futures
 
@@ -68,7 +68,6 @@ if sys.version_info < (3, 4):
 DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
-    'image/quickdraw_labels.txt',
 ]
 
 DATASET_EXTRAS = {
