@@ -52,7 +52,6 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
         
         features=tfds.features.FeaturesDict({
             "image":tfds.features.Image(shape=_IMAGE_SHAPE),
-            #"file_name": tfds.features.Text(),
             "label": tfds.features.ClassLabel(names = _NAMES),
         }),
 
@@ -66,7 +65,7 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
      )
 
   def _split_generators(self, dl_manager):
-    # TODO(pierrot): implement download using kaggle API.
+    # TODO: implement download using kaggle API.
     
     path = dl_manager.manual_dir
     return [
@@ -93,7 +92,6 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
                    
                     yield {
                     
-                            
                             "label": label,
                             "image": image_path
                         }
