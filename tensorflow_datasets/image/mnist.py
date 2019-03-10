@@ -82,6 +82,7 @@ _K_MNIST_CITATION = """\
 }
 """
 
+
 _EMNIST_CITATION = """\
 @article{cohen_afshar_tapson_schaik_2017, 
     title={EMNIST: Extending MNIST to handwritten letters}, 
@@ -91,6 +92,7 @@ _EMNIST_CITATION = """\
     year={2017}
 }
 """
+
 
 class MNIST(tfds.core.GeneratorBasedBuilder):
   """MNIST."""
@@ -194,6 +196,7 @@ class FashionMNIST(MNIST):
         citation=_FASHION_MNIST_CITATION,
     )
 
+
 class KMNIST(MNIST):
   URL = "http://codh.rois.ac.jp/kmnist/dataset/kmnist/"
 
@@ -211,11 +214,11 @@ class KMNIST(MNIST):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(names=[
-                'o', 'ki', 'su', 'tsu', 'na', 'ha', 'ma', 'ya', 're', 'wo'
+                "o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"
             ]),
         }),
         supervised_keys=("image", "label"),
-        urls=["http://codh.rois.ac.jp/kmnist/dataset/kmnist/"],
+        urls=["http://codh.rois.ac.jp/kmnist/index.html.en"],
         citation=_K_MNIST_CITATION,
     )
 
@@ -354,7 +357,6 @@ class EMNIST(MNIST):
             )
         )
     ]
-
 
 
 

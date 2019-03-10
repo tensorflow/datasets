@@ -307,7 +307,7 @@ class FeatureConnector(object):
     Args:
       data_dir: `str`, path to the dataset folder to which save the info (ex:
         `~/datasets/cifar10/1.2.0/`)
-      feature_name: `str`, the name of the feature (from the FeatureDict key)
+      feature_name: `str`, the name of the feature (from the FeaturesDict key)
     """
     pass
 
@@ -320,7 +320,7 @@ class FeatureConnector(object):
     Args:
       data_dir: `str`, path to the dataset folder to which save the info (ex:
         `~/datasets/cifar10/1.2.0/`)
-      feature_name: `str`, the name of the feature (from the FeatureDict key)
+      feature_name: `str`, the name of the feature (from the FeaturesDict key)
     """
     pass
 

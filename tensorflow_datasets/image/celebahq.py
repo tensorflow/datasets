@@ -43,7 +43,7 @@ _DESCRIPTION = """\
 High-quality version of the CELEBA
 dataset, consisting of 30000 images in 1024 x 1024 resolution.
 
-WARNING: this dataset currently requires you to prepare images on your own.
+WARNING: This dataset currently requires you to prepare images on your own.
 """
 
 

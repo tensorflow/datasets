@@ -55,7 +55,7 @@ class Image(feature.FeatureConnector):
 
   Example:
     * In the DatasetInfo object:
-      features=features.FeatureDict({
+      features=features.FeaturesDict({
           'input': features.Image(),
           'target': features.Image(shape=(None, None, 1),
                                    encoding_format='png'),

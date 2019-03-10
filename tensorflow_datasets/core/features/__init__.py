@@ -29,6 +29,8 @@ from tensorflow_datasets.core.features.image_feature import Image
 from tensorflow_datasets.core.features.sequence_feature import Sequence
 from tensorflow_datasets.core.features.sequence_feature import SequenceDict
 from tensorflow_datasets.core.features.text_feature import Text
+from tensorflow_datasets.core.features.translation_feature import Translation
+from tensorflow_datasets.core.features.translation_feature import TranslationVariableLanguages
 from tensorflow_datasets.core.features.video_feature import Video
 
 __all__ = [

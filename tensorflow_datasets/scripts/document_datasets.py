@@ -53,7 +53,7 @@ tfds.list_builders()
 
 # Load a given dataset by name, along with the DatasetInfo
 data, info = tfds.load("mnist", with_info=True)
-train_data, test_data = data['test'], data['train']
+train_data, test_data = data['train'], data['test']
 assert isinstance(train_data, tf.data.Dataset)
 assert info.features['label'].num_classes == 10
 assert info.splits['train'].num_examples == 60000
@@ -86,7 +86,7 @@ SECTION_DATASETS = """\
 """
 
 CONFIG_BULLET = """\
-* `"{name}"` (`v{version}`): {description}
+* `"{name}"` (`v{version}`) (`Size: {size}`): {description}
 """
 
 SINGLE_CONFIG_ENTRY = """\
@@ -99,7 +99,7 @@ SINGLE_CONFIG_ENTRY = """\
 DATASET_WITH_CONFIGS_ENTRY = """\
 ### `"{snakecase_name}"`
 
-{description}
+{description_prefix}{description}
 
 * URL: [{url}]({url})
 * `DatasetBuilder`: [`{module_and_class}`]({cls_url})
@@ -127,11 +127,12 @@ configurations predefined (defaults to the first one):
 DATASET_ENTRY = """\
 ### `"{snakecase_name}"`
 
-{description}
+{description_prefix}{description}
 
 * URL: [{url}]({url})
 * `DatasetBuilder`: [`{module_and_class}`]({cls_url})
 * Version: `v{version}`
+* Size: `{size}`
 
 #### Features
 {feature_information}
@@ -198,6 +199,9 @@ def document_single_builder(builder):
   if mod_file.endswith("pyc"):
     mod_file = mod_file[:-1]
 
+  description_prefix = ""
+
+
   if builder.builder_configs:
     # Dataset with configs; document each one
     config_docs = []
@@ -211,6 +215,7 @@ def document_single_builder(builder):
           description=config.description,
           version=config.version,
           feature_information=make_feature_information(info),
+          size=tfds.units.size_str(info.size_in_bytes),
       )
       config_docs.append(config_doc)
     return DATASET_WITH_CONFIGS_ENTRY.format(
@@ -220,7 +225,10 @@ def document_single_builder(builder):
         config_names="\n".join([
             CONFIG_BULLET.format(name=config.name,
                                  description=config.description,
-                                 version=config.version)
+                                 version=config.version,
+                                 size=tfds.units.size_str(tfds.builder(
+                                     builder.name, config=config)
+                                                          .info.size_in_bytes))
             for config in builder.BUILDER_CONFIGS]),
         config_cls="%s.%s" % (tfds_mod_name(mod_name),
                               type(builder.builder_config).__name__),
@@ -231,6 +239,7 @@ def document_single_builder(builder):
         citation=make_citation(info.citation),
         statistics_information=make_statistics_information(info),
         description=builder.info.description,
+        description_prefix=description_prefix,
     )
   else:
     info = builder.info
@@ -239,6 +248,7 @@ def document_single_builder(builder):
         module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
         cls_url=cls_url(mod_name),
         description=info.description,
+        description_prefix=description_prefix,
         version=info.version,
         feature_information=make_feature_information(info),
         statistics_information=make_statistics_information(info),
@@ -246,6 +256,7 @@ def document_single_builder(builder):
         url=url_from_info(info),
         supervised_keys=str(info.supervised_keys),
         citation=make_citation(info.citation),
+        size=tfds.units.size_str(info.size_in_bytes),
     )
 
 
@@ -256,7 +267,7 @@ def create_section_toc(section, builders):
   return "\n".join([heading] + entries)
 
 
-def make_module_to_builder_dict():
+def make_module_to_builder_dict(datasets=None):
   """Get all builders organized by module in nested dicts."""
   # pylint: disable=g-long-lambda
   # dict to hold tfds->image->mnist->[builders]
@@ -265,11 +276,14 @@ def make_module_to_builder_dict():
           lambda: collections.defaultdict(list)))
   # pylint: enable=g-long-lambda
 
-  builders = [
-      tfds.builder(name)
-      for name in tfds.list_builders()
-      if name not in BUILDER_BLACKLIST
-  ] + [tfds.builder("image_label_folder", dataset_name="image_label_folder")]
+  if datasets:
+    builders = [tfds.builder(name) for name in datasets]
+  else:
+    builders = [
+        tfds.builder(name)
+        for name in tfds.list_builders()
+        if name not in BUILDER_BLACKLIST
+    ] + [tfds.builder("image_label_folder", dataset_name="image_label_folder")]
 
   for builder in builders:
     mod_name = builder.__class__.__module__
@@ -332,9 +346,17 @@ def make_statistics_information(info):
   return STATISTICS_TABLE.format(split_statistics=stats)
 
 
-def dataset_docs_str():
-  """Create dataset documentation string."""
-  module_to_builder = make_module_to_builder_dict()
+def dataset_docs_str(datasets=None):
+  """Create dataset documentation string for given datasets.
+
+  Args:
+    datasets: list of datasets for which to create documentation.
+              If None, then all available datasets will be used.
+
+  Returns:
+    string describing the datasets (in the MarkDown format).
+  """
+  module_to_builder = make_module_to_builder_dict(datasets)
 
   sections = sorted(list(module_to_builder.keys()))
   section_tocs = []
@@ -363,6 +385,7 @@ JSON_LD_STR = """\
   "name": "{name}",
   "description": "{description}",
   "url": {url},
+  "size:" {size},
 }}
 """
 
@@ -387,6 +410,7 @@ def schema_org(builder):
       name=builder.name,
       description=info.description,
       url=str(info.urls[0]).replace("'", "\""),
+      size=tfds.units.size_str(info.size_in_bytes),
   )
 
 
