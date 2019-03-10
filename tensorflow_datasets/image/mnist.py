@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 import numpy as np
 import six.moves.urllib as urllib
 import tensorflow as tf
@@ -242,7 +243,7 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 
 class EMNIST(MNIST):
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.0.1')
 
   BUILDER_CONFIGS = [
       EMNISTConfig(
@@ -251,7 +252,7 @@ class EMNIST(MNIST):
           train_examples=697932,
           test_examples=116323,
           description="EMNIST ByClass:  814,255 characters. 62 unbalanced classes.",
-          version="0.1.1",
+          version="1.0.1",
       ),
       EMNISTConfig(
           name="bymerge",
@@ -259,7 +260,7 @@ class EMNIST(MNIST):
           train_examples=697932,
           test_examples=116323,
           description="EMNIST ByMerge: 	814,255 characters. 47 unbalanced classes.",
-          version="0.1.1",
+          version="1.0.1",
       ),
       EMNISTConfig(
           name="balanced",
@@ -267,7 +268,7 @@ class EMNIST(MNIST):
           train_examples=112800,
           test_examples=18800,
           description="EMNIST Balanced:	131,600 characters. 47 balanced classes.",
-          version="0.1.1",
+          version="1.0.1",
       ),
       EMNISTConfig(
           name="letters",
@@ -275,7 +276,7 @@ class EMNIST(MNIST):
           train_examples=88800,
           test_examples=14800,
           description="EMNIST Letters:	103,600 characters. 26 balanced classes.",
-          version="0.1.1",
+          version="1.0.1",
       ),
       EMNISTConfig(
           name="digits",
@@ -283,7 +284,7 @@ class EMNIST(MNIST):
           train_examples=240000,
           test_examples=40000,
           description="EMNIST Digits:  280,000 characters. 10 balanced classes.",
-          version="0.1.1",
+          version="1.0.1",
       ),
       EMNISTConfig(
           name="mnist",
@@ -291,7 +292,7 @@ class EMNIST(MNIST):
           train_examples=60000,
           test_examples=10000,
           description="EMNIST MNIST:  70,000 characters. 10 balanced classes.",
-          version="0.1.1",
+          version="1.0.1",
       ),
       EMNISTConfig(
           name="test",
@@ -299,7 +300,7 @@ class EMNIST(MNIST):
           train_examples=10,
           test_examples=2,
           description="EMNIST test data config.",
-          version="0.1.1",
+          version="1.0.1",
       ),
   ]
 
@@ -330,7 +331,7 @@ class EMNIST(MNIST):
         "test_labels": 'emnist-{}-test-labels-idx1-ubyte'.format(self.builder_config.name),
     }
     dir_name = dl_manager.manual_dir
-    import os
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
