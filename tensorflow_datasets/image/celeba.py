@@ -117,33 +117,39 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    extracted_dirs = dl_manager.download_and_extract({
+    extracted_dirs = dl_manager.download({
         "img_align_celeba": IMG_ALIGNED_DATA,
         "list_eval_partition": EVAL_LIST,
         "list_attr_celeba": ATTR_DATA,
         "landmarks_celeba": LANDMARKS_DATA,
     })
+    
+    def get_iter_archives():
+      return {
+          k: dl_manager.iter_archive(arch) for k, arch in extracted_dirs.items()
+      }
+    
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs={
                 "file_id": 0,
-                "extracted_dirs": extracted_dirs,
+                "extracted_dirs": get_iter_archives(),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             num_shards=4,
             gen_kwargs={
                 "file_id": 1,
-                "extracted_dirs": extracted_dirs,
+                "extracted_dirs": get_iter_archives(),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=4,
             gen_kwargs={
                 "file_id": 2,
-                "extracted_dirs": extracted_dirs,
+                "extracted_dirs": get_iter_archives(),
             })
     ]
 
