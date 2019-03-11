@@ -21,6 +21,8 @@ from tensorflow_datasets.image.celebahq import CelebAHq
 from tensorflow_datasets.image.chexpert import Chexpert
 from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
+from tensorflow_datasets.image.cityscapes import Cityscapes
+from tensorflow_datasets.image.cityscapes import CityscapesCoarse
 from tensorflow_datasets.image.coco import Coco2014
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLarge
