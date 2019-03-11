@@ -27,7 +27,7 @@ _DESCRIPTION = '''\
   The dataset consists of 5000 annotated image, label pairs at 1024 * 2048 resolution
   pre-split into training (2975) validation (500) and test (1525) sets.
 
-  Cityscapes also provides an additional dataset (accessible via 'cityscapes_extra')
+  Cityscapes also provides an additional dataset (accessible via 'cityscapes_coarse')
   consisting of coarse labels for training and validation splits as well as 19998 images
   in a new 'train_extra' split which may be useful for data-heavy applications.
 '''
