@@ -119,12 +119,12 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, files, label): 
-    path=files[0]+"/"
+    path=files[0]
     images=tf.io.gfile.listdir(path)  
 
     for image in images:
       yield{
-          "image": path+"/"+image,
+          "image": os.path.join(path, image),
           "label": label,
       }
       
