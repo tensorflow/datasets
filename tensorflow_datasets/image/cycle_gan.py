@@ -29,22 +29,10 @@ import tensorflow_datasets.public_api as tfds
 
 
 _DL_URL = "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
-_DL_URLS = {
-    "ae_photos": _DL_URL + "ae_photos.zip",
-    "apple2orange": _DL_URL + "apple2orange.zip",
-    "summer2winter_yosemite": _DL_URL + "summer2winter_yosemite.zip",
-    "horse2zebra": _DL_URL + "horse2zebra.zip",
-    "monet2photo": _DL_URL + "monet2photo.zip",
-    "cezanne2photo": _DL_URL + "cezanne2photo.zip",
-    "ukiyoe2photo": _DL_URL + "ukiyoe2photo.zip",
-    "vangogh2photo": _DL_URL + "vangogh2photo.zip",
-    "maps": _DL_URL + "maps.zip",
-    "cityscapes": _DL_URL + "cityscapes.zip",
-    "facades": _DL_URL + "facades.zip",
-    "iphone2dslr_flower": _DL_URL + "iphone2dslr_flower.zip",
-}
 
 _DATA_OPTIONS = ["ae_photos", "apple2orange", "summer2winter_yosemite", "horse2zebra", "monet2photo", "cezanne2photo", "ukiyoe2photo", "vangogh2photo", "maps", "cityscapes", "facades", "iphone2dslr_flower"]
+
+_DL_URLS = {name: _DL_URL + name + ".zip" for name in _DATA_OPTIONS}
 
 
 class CycleGANConfig(tfds.core.BuilderConfig):
