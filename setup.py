@@ -43,6 +43,7 @@ REQUIRED_PKGS = [
     'termcolor',
     'tqdm',
     'wrapt',
+    'numpy',
 ]
 
 TESTS_REQUIRE = [
