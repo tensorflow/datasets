@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for lm1b dataset module."""
+"""Tests for cycle_gan dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -36,7 +36,3 @@ class CycleGANTest(testing.DatasetBuilderTestCase):
   
 if __name__ == "__main__":
   testing.test_main()
-  
-  
-  
-  
