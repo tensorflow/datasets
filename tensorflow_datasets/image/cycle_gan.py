@@ -80,7 +80,7 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
     url = _DL_URLS[self.builder_config.name]
     data_dirs = dl_manager.download_and_extract(url) 
     
-    path_to_dataset = data_dirs + "/" + tf.io.gfile.listdir(data_dirs)[0]
+    path_to_dataset = os.path.join(data_dirs, tf.io.gfile.listdir(data_dirs)[0])
      
     trainA_files = tf.io.gfile.glob(os.path.join(path_to_dataset, 'trainA'))
     trainB_files = tf.io.gfile.glob(os.path.join(path_to_dataset, 'trainB'))
