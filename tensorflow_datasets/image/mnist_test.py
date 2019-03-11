@@ -52,8 +52,8 @@ class KMNISTTest(MNISTTest):
 
 
 class EMNISTTest(MNISTTest):
-    DATASET_CLASS = mnist.EMNIST
-    BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
+  DATASET_CLASS = mnist.EMNIST
+  BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
 
 
 if __name__ == "__main__":

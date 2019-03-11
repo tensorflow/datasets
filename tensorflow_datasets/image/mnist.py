@@ -333,7 +333,31 @@ class EMNIST(MNIST):
         "test_data": 'emnist-{}-test-images-idx3-ubyte'.format(self.builder_config.name),
         "test_labels": 'emnist-{}-test-labels-idx1-ubyte'.format(self.builder_config.name),
     }
+
     dir_name = dl_manager.manual_dir
+
+    if not tf.io.gfile.exists(os.path.join(dir_name, filenames['train_data'])):
+      # The current tfds.core.download_manager is unable to extract multiple and nested files.
+      # We'll add soon!
+      msg = "You must download and extract the dataset files manually and place them in : "
+      msg += dl_manager.manual_dir
+      msg += """File tree must be like this :\n
+               .
+               ├── emnist
+               │   ├── emnist-byclass-train-images-idx3-ubyte
+               │   ├── emnist-byclass-train-labels-idx3-ubyte
+               │   ├── emnist-byclass-test-images-idx3-ubyte
+               │   ├── emnist-byclass-test-labels-idx3-ubyte
+               │   ├── emnist-bymerge-train-images-idx3-ubyte
+               │   ├── emnist-bymerge-train-labels-idx3-ubyte
+               │   ├── emnist-bymerge-test-images-idx3-ubyte
+               │   ├── emnist-bymerge-test-labels-idx3-ubyte
+               │   ├── .......
+               │   ├── .....
+               │   ├── ...
+               │   ├──
+            """
+      raise FileNotFoundError(msg.replace("               ", ""))
 
     return [
         tfds.core.SplitGenerator(
