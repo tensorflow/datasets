@@ -55,81 +55,13 @@ class CycleGANConfig(tfds.core.BuilderConfig):
 class CycleGAN(tfds.core.GeneratorBasedBuilder):
   """CycleGAN dataset."""
   
-  VERSION = tfds.core.Version("2.0.0")
-  
   BUILDER_CONFIGS = [
       CycleGANConfig(
-          name="facades",
+          name=config_name,
           description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="facades",
-      ),
-      CycleGANConfig(
-          name="horse2zebra",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="horse2zebra",
-      ),
-      CycleGANConfig(
-          name="ae_photos",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="ae_photos",
-      ),  
-      CycleGANConfig(
-          name="apple2orange",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="apple2orange",
-      ),
-      CycleGANConfig(
-          name="summer2winter_yosemite",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB",
-          version=VERSION, 
-          data="summer2winter_yosemite",
-      ),
-      CycleGANConfig(
-          name="monet2photo",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="monet2photo",
-      ),
-      CycleGANConfig(
-          name="cezanne2photo",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="cezanne2photo",
-      ),
-      CycleGANConfig(
-          name="ukiyoe2photo",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="ukiyoe2photo",
-      ),
-      CycleGANConfig(
-          name="vangogh2photo",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="vangogh2photo",
-      ),
-      CycleGANConfig(
-          name="maps",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="maps",
-      ),
-      CycleGANConfig(
-          name="cityscapes",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="cityscapes",
-      ),
-      CycleGANConfig(
-          name="iphone2dslr_flower",
-          description="A dataset consisting of (trainA and testA) images of typeA and (trainB and testB) images of typeB", 
-          version=VERSION,
-          data="iphone2dslr_flower", 
-      ),             
+          version="0.1.0",
+          data=config_name,
+      ) for config_name in _DATA_OPTIONS
   ]
 
   def _info(self):
