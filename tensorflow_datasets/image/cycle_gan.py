@@ -127,7 +127,3 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
           "image": os.path.join(path, image),
           "label": label,
       }
-      
-
-
-
