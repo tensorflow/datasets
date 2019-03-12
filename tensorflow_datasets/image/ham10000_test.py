@@ -9,7 +9,7 @@ import tensorflow_datasets.testing as tfds_test
 class Ham10000Test(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = ham10000.Ham10000
   SPLITS = {  
-      "train": 7,
+      "train": 2,
   }
  
 
