@@ -59,7 +59,7 @@ flags.DEFINE_integer(
     "builder_config_id", None,
     "If given 1 dataset with BUILDER_CONFIGS, id of config to build.")
 
-flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Were to place the data.")
+flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Where to place the data.")
 flags.DEFINE_string("download_dir", None, "Where to place downloads.")
 flags.DEFINE_string("extract_dir", None, "Where to extract files.")
 flags.DEFINE_string(
