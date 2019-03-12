@@ -159,7 +159,7 @@ class BablTasks(tfds.core.GeneratorBasedBuilder):
             logging.info("generating examples from = %s", filepath)
             with tf.io.gfile.GFile(filepath) as f:
                 for line in f:
-                    yield {
+                    yield [{
                         "id": line[0],
                         "text": line[2:],
-                        }
+                        }]
