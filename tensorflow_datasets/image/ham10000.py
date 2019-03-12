@@ -82,20 +82,15 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
         """ Function to extract images and labels"""
 
         csv_list = readCsv(labels_dir_path)
-        label = ""
+        
         
         data_folder_list = [os.path.join(images_dir_path, 'HAM10000_images_part_1'), os.path.join(images_dir_path, 'HAM10000_images_part_2')]
         for data_folder in data_folder_list:
             for image_file in tf.io.gfile.listdir(data_folder):
 
-                for i in range(len(csv_list)):
-                    if csv_list[i]['image_id'] == image_file:
-                        label = csv_list[i]['dx']
-                        break
-                        
                 
                 image_path = os.path.join(data_folder, image_file)
-                #label = return_label(image_file.split(".")[0], csv_list)
+                label = return_label(image_file.split(".")[0], csv_list)
                 
                 yield {
                 
