@@ -183,4 +183,27 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       values[row_values[0]] = [int(v) for v in row_values[1:]]
     return keys, values
 
+  def _generate_examples(self, file_id, extracted_txts, extracted_image):
+    for fname, fobj in extracted_image:
+      res = _NAME_RE.match(fname)
+      if not res:
+        continue
+      filename = res.group(1).lower()
+      img_list_path = extracted_txts["list_eval_partition"]
+      landmarks_path = extracted_txts["landmarks_celeba"]
+      attr_path = extracted_txts["list_attr_celeba"]
+
+      attributes = self._process_celeba_config_file(attr_path)
+      landmarks = self._process_celeba_config_file(landmarks_path)
+
+      yield {
+          "image": fobj,
+          "landmarks": {
+              k: v for k, v in zip(landmarks[0], landmarks[1][filename])
+          },
+          "attributes": {
+              # atributes value are either 1 or -1, so convert to bool
+              k: v > 0 for k, v in zip(attributes[0], attributes[1][filename])
+          },
+      }
 
