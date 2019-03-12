@@ -3,10 +3,8 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
 import os
 import csv
-
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -22,8 +20,6 @@ _DESCRIPTION = ("The dataset consists of 10015 dermatoscopic images which"
 "keratoses and lichen-planus like keratoses, bkl), dermatofibroma (df), "
 "melanoma (mel), melanocytic nevi (nv) and vascular lesions "
 "(angiomas, angiokeratomas, pyogenic granulomas and hemorrhage, vasc)")
-
-
 
 _IMAGE_SHAPE = (450, 600, 3)
 
@@ -105,14 +101,13 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
 def readCsv(labels_dir_path):
     """Function to read labels.csv file and store in memory"""
 
-    with tf.io.gfile.GFile(labels_dir_path) as csvfile:
-        readCSV = csv.reader(csvfile, delimiter=',')
-        return readCSV
+    readCSV = csv.DictReader(open("HAM10000_metadata.csv"))
+    return readCSV
 
 def return_label(image_name, csv_file):
     """Function to return the corresponding label from filename"""
 
     for row in csv_file:
-        if row[1] == image_name:
-            return row[2]
+        if row['image_id'] == image_name:
+            return row['bkl']
                 
