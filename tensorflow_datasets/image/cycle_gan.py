@@ -28,6 +28,28 @@ from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 
+# From https://arxiv.org/abs/1703.10593
+_CITATION = """\
+@article{DBLP:journals/corr/ZhuPIE17,
+  author    = {Jun{-}Yan Zhu and
+               Taesung Park and
+               Phillip Isola and
+               Alexei A. Efros},
+  title     = {Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial
+               Networks},
+  journal   = {CoRR},
+  volume    = {abs/1703.10593},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1703.10593},
+  archivePrefix = {arXiv},
+  eprint    = {1703.10593},
+  timestamp = {Mon, 13 Aug 2018 16:48:06 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuPIE17},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+"""
+
+
 _DL_URL = "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
 
 _DATA_OPTIONS = ["ae_photos", "apple2orange", "summer2winter_yosemite", "horse2zebra", "monet2photo", "cezanne2photo", "ukiyoe2photo", "vangogh2photo", "maps", "cityscapes", "facades", "iphone2dslr_flower"]
