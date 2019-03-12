@@ -28,21 +28,91 @@ _SPLITS = {
     tfds.Split.TRAIN: "train",
     tfds.Split.TEST: "test",
     tfds.Split.VALIDATION: "validated"}
+_GENDER_CLASSES = ["male", "female"]
+_ACCENT_CLASSES = {
+    "en": [
+        'None',
+        'scotland',
+        'wales',
+        'canada',
+        'other',
+        'malaysia',
+        'newzealand',
+        'indian',
+        'ireland',
+        'us',
+        'philippines',
+        'hongkong',
+        'australia',
+        'england',
+        'african'],
+    "de": [
+        'None',
+        'france',
+        'other',
+        'switzerland',
+        'austria',
+        'liechtenstein',
+        'germany'],
+    "fr": [
+        'france',
+        'None',
+        'switzerland',
+        'belgium'],
+    "cy": [
+        'None',
+        'united_kingdom',
+        'other'],
+    "br": ['None'],
+    "cv": ['None'],
+    "tr": ['None'],
+    "tt": ['None'],
+    "ky": ['None'],
+    "ga-IE": [
+        'None',
+        'connachta'],
+    "kab": ['None'],
+    "ca": [
+        'None',
+        'northwestern',
+        'central',
+        'valencian',
+        'other',
+        'balearic'],
+    "zh-TW": ['None'],
+    "sl": ['None'],
+    "it": ['None'],
+    "nl": [
+        'None',
+        'netherlands',
+        'belgium'],
+    "cnh": ['None'],
+    "eo": ['None']}
 
 
 class CommonVoiceConfig(tfds.core.BuilderConfig):
     """
         Configuration Class for Mozilla CommonVoice Dataset
+
     """
     @tfds.core.api_utils.disallow_positional_args
     def __init__(self, language="en", **kwargs):
+        """Constructs CommonVoiceConfig
+
+
+        Args:
+            language: `str`, one of
+                       [ca, nl, br, de, sl, cy, en, kab, tt, zh-TW, eo, it, fr, ga-IE, tr, ky, cnh, cv]. Language Code of
+                       the Dataset to be used.
+            **kwargs: keywords arguments forwarded to super
+        """
         if language not in _DOWNLOAD_LINKS.keys():
             raise ValueError(
                 "language must be one of %s" %
                 _DOWNLOAD_LINKS.keys())
         self._language = language
         name = kwargs.get("name", None)
-        name = "%s_%s" % ("common_voice" if name is None else name, language)
+        name = "%s" % (language)
         kwargs["name"] = name
         description = kwargs.get("description", None)
         description = "Language Code: %s" % language if description is None else description
@@ -50,9 +120,22 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
         super(CommonVoiceConfig, self).__init__(**kwargs)
 
     @property
+    def get_accent(self):
+        """
+            Property Class Labels based on Language Specified
+
+            Returns:
+                str, The Accent for the specific language as defined in `_ACCENT_CLASSES`
+        """
+        return _ACCENT_CLASSES[self._language]
+
+    @property
     def download_urls(self):
         """
             Property returning Download URL based on Language Specified
+
+            Returns:
+                str, Download Link of the dataset based on the language specified, as defined in `_DOWNLOAD_LINKS`
         """
         return _DOWNLOAD_LINKS[self._language]
 
@@ -60,6 +143,9 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
 def _generate_builder_configs():
     """
         Generates Builder Configs
+
+        Returns:
+            list<tfds.audio.CommonVoiceConfig>
     """
     configs = []
     version = "1.0.0"
@@ -85,8 +171,8 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
                 "upvotes": tf.int32,
                 "downvotes": tf.int32,
                 "age": tfds.features.Text(),
-                "gender": tfds.features.Text(),
-                "accent": tfds.features.Text(),
+                "gender": tfds.features.ClassLabel(names=_GENDER_CLASSES),
+                "accent": tfds.features.ClassLabel(names=self.builder_config.get_accent),
                 "sentence": tfds.features.Text(),
                 "voice": tfds.features.Audio()
             }),
@@ -97,7 +183,6 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
         dl_path = dl_manager.extract(
             dl_manager.download(
                 self.builder_config.download_urls))
-        # Need to Check for replacement
         clip_folder = os.path.join(dl_path, "clips")
         return [tfds.core.SplitGenerator(
             name=k,
@@ -111,6 +196,10 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
         """
             Generate Voice Samples and Statements Given the Path to the Shared Audio Folder
             and Path to the Train/Test/Validation File (.tsv)
+
+            Args:
+                audio_path: str, path to audio storage folder
+                label_path: str, path to the label files
         """
         with tf.io.gfile.GFile(label_path) as file_:
             dataset = csv.DictReader(file_, delimiter="\t")
@@ -123,4 +212,4 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
                     "downvotes": int(row["down_votes"]) if len(row["down_votes"]) > 0 else 0,
                     "age": row["age"],
                     "gender": row["gender"],
-                    "accent": row["accent"]}
+                    "accent": row["accent"] if row["accent"] is not None and len(row["accent"]) > 0 else 'None'}

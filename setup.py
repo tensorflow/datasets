@@ -74,6 +74,7 @@ DATASET_FILES = [
 
 DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'common_voice': ['pydub'], # and ffmpeg installed
     'cats_vs_dogs': ['matplotlib'],
     'svhn': ['scipy'],
     'colorectal_histology': ['Pillow'],
