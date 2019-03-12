@@ -26,6 +26,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import re
 import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -45,6 +46,9 @@ ATTR_DATA = ("https://drive.google.com/uc?export=download&"
 LANDMARK_HEADINGS = ("lefteye_x lefteye_y righteye_x righteye_y "
                      "nose_x nose_y leftmouth_x leftmouth_y rightmouth_x "
                      "rightmouth_y").split()
+
+_NAME_RE = re.compile(r".jpg")
+
 ATTR_HEADINGS = (
     "5_o_Clock_Shadow Arched_Eyebrows Attractive Bags_Under_Eyes Bald Bangs "
     "Big_Lips Big_Nose Black_Hair Blond_Hair Blurry Brown_Hair "
@@ -179,24 +183,4 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       values[row_values[0]] = [int(v) for v in row_values[1:]]
     return keys, values
 
-  def _generate_examples(self, file_id, extracted_txts, extracted_image):
-    for fname, fobj in extracted_image:
-      filedir = fname
-      img_list_path = extracted_txts["list_eval_partition"]
-      landmarks_path = extracted_txts["landmarks_celeba"]
-      attr_path = extracted_txts["list_attr_celeba"]
 
-
-      attributes = self._process_celeba_config_file(attr_path)
-      landmarks = self._process_celeba_config_file(landmarks_path)
-
-      yield {
-          "image": fobj,
-          "landmarks": {
-              k: v for k, v in zip(landmarks[0], landmarks[1][fname])
-          },
-          "attributes": {
-              # atributes value are either 1 or -1, so convert to bool
-              k: v > 0 for k, v in zip(attributes[0], attributes[1][fname])
-          },
-      }
