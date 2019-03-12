@@ -90,7 +90,6 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
                 
                 image_path = os.path.join(data_folder, image_file)
                 label = return_label(image_file.split(".")[0], csv_list)
-                print(label)
                 
                 yield {
                 
