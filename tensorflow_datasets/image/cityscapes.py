@@ -1,9 +1,8 @@
-# pylint: disable=bad-indentation
-
 '''Cityscapes Datasets.'''
 
 import os
 import re
+import abc
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -20,24 +19,26 @@ _CITATION = '''\
 _DESCRIPTION = '''\
   Cityscapes is a dataset consisting of diverse urban street scenes and dense pixel-level
   annotations taken across 50 different cities at varying times of the year. The label
-  annotations span across 30 (34 including ingore indices) distinct classes of objects
+  annotations span across 30 (34 including ignored indices) distinct classes of objects
   commonly encountered in driving scenes. Detailed label information may be found here:
   https://github.com/mcordts/cityscapesScripts/blob/master/cityscapesscripts/helpers/labels.py#L52-L99
 
   The dataset consists of 5000 annotated image, label pairs at 1024 * 2048 resolution
   pre-split into training (2975) validation (500) and test (1525) sets.
 
-  Cityscapes also provides an additional dataset (accessible via 'cityscapes_extra')
+  Cityscapes also provides an additional dataset (accessible via 'cityscapes_coarse')
   consisting of coarse labels for training and validation splits as well as 19998 images
   in a new 'train_extra' split which may be useful for data-heavy applications.
+
+  WARNING: this dataset requires users to setup a login and password in order to get the files.
 '''
 
 # TODO add instance ids (might need to import cityScapesScripts)
 
 class CityscapesCore(tfds.core.GeneratorBasedBuilder):
-  '''Base for cityscapes datasets'''
+  '''Base class for Cityscapes datasets'''
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -53,6 +54,7 @@ class CityscapesCore(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
+  @abc.abstractmethod
   def _split_generators(self, dl_manager):
     raise NotImplementedError
 
@@ -85,6 +87,7 @@ class Cityscapes(CityscapesCore):
         'labels': os.path.join(dl_manager.manual_dir, 'gtFine_trainvaltest.zip'),
     }
 
+    # Cityscapes requires a manual download
     if any(not os.path.exists(p) for p in paths.values()):
       msg = 'You must download the dataset files manually and place them in: '
       msg += ', '.join(paths.values())
@@ -97,7 +100,7 @@ class Cityscapes(CityscapesCore):
     # Max shard size = 4GB
     # Instance size = image + label = 1024 * 2048 * 3 + 1024 * 2048 * 4 bytes = 8MB
     # Max instances per shard = 4GB / 8MB = 512
-    # Split shards = 2975 / 512 = 6, 500 / 512 = 1, 1525 / 512 = 3
+    # Split shards = ceil(2975 / 512) = 6, ceil(500 / 512) = 1, ceil(1525 / 512) = 3
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -137,6 +140,7 @@ class CityscapesCoarse(CityscapesCore):
         'labels': os.path.join(dl_manager.manual_dir, 'gtCoarse.zip'),
     }
 
+    # Cityscapes requires a manual download
     if any(not os.path.exists(p) for p in paths.values()):
       msg = 'You must download the dataset files manually and place them in: '
       msg += ', '.join(paths.values())
@@ -181,5 +185,10 @@ class CityscapesCoarse(CityscapesCore):
 IMAGE_FILE_RE = re.compile(r'([a-z\-]+)_(\d+)_(\d+)_leftImg8bit\.png')
 
 def _image_id(image_file):
+  '''Returns the id of an image file. Used to associate an image file
+  with its corresponding label.
+  Example:
+    'bonn_000001_000019_leftImg8bit' -> 'bonn_000001_000019'
+  '''
   match = IMAGE_FILE_RE.match(image_file)
   return f'{match.group(1)}_{match.group(2)}_{match.group(3)}'

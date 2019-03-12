@@ -16,6 +16,7 @@ class CityscapesTest(testing.DatasetBuilderTestCase):
       'test': 2,
   }
 
+class CityscapesCoarseTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cityscapes.CityscapesCoarse
   SPLITS = {  # Expected number of examples on each split.
       'train': 3,
