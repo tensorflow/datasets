@@ -107,7 +107,7 @@ def readCsv(labels_dir_path):
 
     with tf.io.gfile.GFile(labels_dir_path) as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
-    return readCSV
+        return readCSV
 
 def return_label(image_name, csv_file):
     """Function to return the corresponding label from filename"""
