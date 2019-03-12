@@ -1,3 +1,8 @@
 lesion_id,image_id,dx,dx_type,age,sex,localization
 HAM_0002007,ISIC_0024476,nv,histo,85,male,lower extremity
-HAM_0000689,ISIC_0024356,nv,histo,75,female,foot
+HAM_0000020,ISIC_0031922,akiec,histo,60,female,face
+HAM_0003521,ISIC_0032258,mel,histo,70,female,back
+HAM_0001949,ISIC_0025767,bkl,histo,70,male,trunk
+HAM_0003023,ISIC_0031257,df,consensus,55,female,upper extremity
+HAM_0000781,ISIC_0028155,bcc,histo,50,male,back
+HAM_0004257,ISIC_0025452,vasc,consensus,55,female,abdomen
