@@ -52,7 +52,8 @@ _CITATION = """\
 
 _DL_URL = "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
 
-_DATA_OPTIONS = ["ae_photos", "apple2orange", "summer2winter_yosemite", "horse2zebra", "monet2photo", "cezanne2photo", "ukiyoe2photo", "vangogh2photo", "maps", "cityscapes", "facades", "iphone2dslr_flower"]
+# "ae_photos" : Not added because trainA and trainB are missing.
+_DATA_OPTIONS = ["apple2orange", "summer2winter_yosemite", "horse2zebra", "monet2photo", "cezanne2photo", "ukiyoe2photo", "vangogh2photo", "maps", "cityscapes", "facades", "iphone2dslr_flower"]
 
 _DL_URLS = {name: _DL_URL + name + ".zip" for name in _DATA_OPTIONS}
 
