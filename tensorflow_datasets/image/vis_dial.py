@@ -39,3 +39,22 @@ _Test_Dialogs = "https://dl.dropboxusercontent.com/s/o7mucbre2zm7i5n/visdial_1.0
 _Test_Images = "https://dl.dropboxusercontent.com/s/mwlrg31hx0430mt/VisualDialog_test2018.zip"
 
 
+class VisualDialog(tfds.core.GeneratorBasedBuilder):
+    """Visual Dialog Dataset"""
+
+    VERSION = tfds.core.version("1.0")
+
+    def _info(self):
+        return tfds.core.DatasetInfo(
+            builder = self,
+            description="A large set of Images and Dialogs",
+            features=tfds.features.FeaturesDict({
+                "label": tfds.features.ClassLabel(
+                    names=["questions", "answers", "dialogs"]),
+            }),
+            supervised_keys=("questions", "answers", "dialogs"),
+            urls=["https://visualdialog.org/"],
+            citation=_CITATION
+        )
+
+
