@@ -32,7 +32,8 @@ class KaggleTest(testing.TestCase):
   def test_competition_download(self):
     filenames = ["a", "b"]
     with testing.mock_kaggle_api(filenames):
-      downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
+      competition_name = "digit-recognizer"
+      downloader = kaggle.KaggleCompetitionDownloader(competition_name)
       self.assertEqual(downloader.competition_files, ["a", "b"])
       with testing.tmp_dir() as tmp_dir:
         for fname in downloader.competition_files:
@@ -40,6 +41,9 @@ class KaggleTest(testing.TestCase):
           self.assertEqual(out_path, os.path.join(tmp_dir, fname))
           with tf.io.gfile.GFile(out_path) as f:
             self.assertEqual(fname, f.read())
+      with testing.tmp_dir():
+        downloader.download_all_file()
+        self.assertCountEqual(os.listdir(competition_name), downloader.competition_files)
 
   def test_competition_download_404(self):
     with testing.mock_kaggle_api(err_msg="404 - Not found"):
