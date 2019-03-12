@@ -101,7 +101,7 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
 def readCsv(labels_dir_path):
     """Function to read labels.csv file and store in memory"""
 
-    readCSV = csv.DictReader(tf.gfile.GFile(labels_dir_path))
+    readCSV = csv.DictReader(tf.io.gfile.GFile(labels_dir_path))
     return readCSV
 
 def return_label(image_name, csv_file):
