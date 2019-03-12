@@ -109,5 +109,5 @@ def return_label(image_name, csv_file):
 
     for row in csv_file:
         if row['image_id'] == image_name:
-            return row['bkl']
+            return row['dx']
                 
