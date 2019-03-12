@@ -58,3 +58,31 @@ class VisualDialog(tfds.core.GeneratorBasedBuilder):
         )
 
 
+    def _split_generators(self, dl_manager):
+        Train_Dialogs = dl_manager.download(_Train_Dialogs)
+        Validation_Dialogs, Validation_Images = dl_manager.download([_Validation_Dialogs, _Validation_Images])
+        Test_Dialogs, Test_Images = dl_manager.download([_Test_Dialogs, _Test_Images])
+
+        return [
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TRAIN,
+                num_shards=10
+                gen_kwargs={
+                    "train_dialog": dl_manager.iter_archive(Train_Dialogs)
+                }),
+            tfds.core.SplitGenerator(
+                name=tfds.Split.VALIDATION,
+                num_shards=10
+                gen_kwargs={
+                    "validation_dialog": dl_manager.iter_archive(Validation_Dialogs)
+                    "validation_Image": dl_manager.iter_archive(Validation_Images)
+                }),
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TEST,
+                num_shards=10,
+                gen_kwargs={
+                    "test_dialog": dl_manager.iter_archive(Test_Dialogs)
+                    "test_Image": dl_manager.iter_archive(Test_Images)
+                }),
+        ]
+
