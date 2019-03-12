@@ -81,7 +81,7 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
     def _generate_examples(self, images_dir_path, labels_dir_path):
         """ Function to extract images and labels"""
 
-        csv_file = readCsv(labels_dir_path)
+        csv_list = readCsv(labels_dir_path)
         
         data_folder_list = [os.path.join(images_dir_path, 'HAM10000_images_part_1'), os.path.join(images_dir_path, 'HAM10000_images_part_2')]
         for data_folder in data_folder_list:
@@ -89,7 +89,8 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
                         
                 
                 image_path = os.path.join(data_folder, image_file)
-                label = return_label(image_file.split(".")[0], csv_file)
+                label = return_label(image_file.split(".")[0], csv_list)
+                print(label)
                 
                 yield {
                 
@@ -102,12 +103,13 @@ def readCsv(labels_dir_path):
     """Function to read labels.csv file and store in memory"""
 
     readCSV = csv.DictReader(tf.io.gfile.GFile(labels_dir_path))
-    return readCSV
+    #Covert csv to list to iterate without saving the state of the generator
+    return list(readCSV) 
 
-def return_label(image_name, csv_file):
+def return_label(image_name, csv_list):
     """Function to return the corresponding label from filename"""
 
-    for row in csv_file:
-        if row['image_id'] == image_name:
-            return row['dx']
+    for row in range(len(csv_list)):
+        if csv_list[row]['image_id'] == image_name:
+            return csv_list[row]['dx']
                 
