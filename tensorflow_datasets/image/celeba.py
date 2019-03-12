@@ -123,7 +123,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
         "landmarks_celeba": LANDMARKS_DATA,
     })
 
-    img_align_celeba = dl_manager.download(IMG_ALIGNED_DATA)
+    extracted_images = dl_manager.download(IMG_ALIGNED_DATA)
 
     return [
         tfds.core.SplitGenerator(
@@ -132,7 +132,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "file_id": 0,
                 "extracted_txts": extracted_txts,
-                "extracted_image": dl_manager.iter_archive(img_align_celeba),
+                "extracted_image": dl_manager.iter_archive(extracted_images),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
@@ -140,7 +140,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "file_id": 1,
                 "extracted_txts": extracted_txts,
-                "extracted_image": dl_manager.iter_archive(img_align_celeba),
+                "extracted_image": dl_manager.iter_archive(extracted_images),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
@@ -148,7 +148,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "file_id": 2,
                 "extracted_txts": extracted_txts,
-                "extracted_image": dl_manager.iter_archive(img_align_celeba),
+                "extracted_image": dl_manager.iter_archive(extracted_images),
             })
     ]
 
@@ -179,33 +179,25 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
       values[row_values[0]] = [int(v) for v in row_values[1:]]
     return keys, values
 
-  def _generate_examples(self, file_id, extracted_dirs):
-    filedir = os.path.join(extracted_dirs["img_align_celeba"],
-                           "img_align_celeba")
-    img_list_path = extracted_dirs["list_eval_partition"]
-    landmarks_path = extracted_dirs["landmarks_celeba"]
-    attr_path = extracted_dirs["list_attr_celeba"]
+  def _generate_examples(self, file_id, extracted_txts, extracted_image):
+    for fname, fobj in extracted_image:
+      filedir = fname
+      img_list_path = extracted_txts["list_eval_partition"]
+      landmarks_path = extracted_txts["landmarks_celeba"]
+      attr_path = extracted_txts["list_attr_celeba"]
 
-    with tf.io.gfile.GFile(img_list_path) as f:
-      files = [
-          line.split()[0]
-          for line in f.readlines()
-          if int(line.split()[1]) == file_id
-      ]
 
-    attributes = self._process_celeba_config_file(attr_path)
-    landmarks = self._process_celeba_config_file(landmarks_path)
-
-    for file_name in sorted(files):
-      path = os.path.join(filedir, file_name)
+      attributes = self._process_celeba_config_file(attr_path)
+      landmarks = self._process_celeba_config_file(landmarks_path)
 
       yield {
-          "image": path,
+          "image": fobj,
           "landmarks": {
-              k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
+              k: v for k, v in zip(landmarks[0], landmarks[1][fname])
           },
           "attributes": {
               # atributes value are either 1 or -1, so convert to bool
-              k: v > 0 for k, v in zip(attributes[0], attributes[1][file_name])
+              k: v > 0 for k, v in zip(attributes[0], attributes[1][fname])
           },
       }
+
