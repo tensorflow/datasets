@@ -82,6 +82,7 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
         """ Function to extract images and labels"""
 
         csv_list = readCsv(labels_dir_path)
+        label = ""
         
         data_folder_list = [os.path.join(images_dir_path, 'HAM10000_images_part_1'), os.path.join(images_dir_path, 'HAM10000_images_part_2')]
         for data_folder in data_folder_list:
