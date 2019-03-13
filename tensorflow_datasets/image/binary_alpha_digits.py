@@ -12,7 +12,7 @@ _URL = "https://cs.nyu.edu/~roweis/data/binaryalphadigs.mat"
 
 _DESCRIPTION = ("Binary 20x16 digits of '0' through '9' and capital 'A' " 
                 "through 'Z'. 39 examples of each class.")
-                
+
 _IMAGE_SHAPE = (20, 16, 1)
 
 _NAMES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
@@ -70,11 +70,11 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
             mat = tfds.core.lazy_imports.scipy_io.loadmat(f)
 
         #mat = tfds.core.lazy_imports.scipy_io.loadmat(data_dir_path)
-            for i in range(len(mat['dat'])):
-                label = mat['classlabels'][0][i].item()
-                for j in range(len(mat['dat'][i])):
-                    image = mat['dat'][i][j].reshape(20, 16, 1)      
-                    yield {
-                        "label": label,
-                        "image": image
-                        }
+        for i in range(len(mat['dat'])):
+            label = mat['classlabels'][0][i].item()
+            for j in range(len(mat['dat'][i])):
+                image = mat['dat'][i][j].reshape(20, 16, 1)      
+                yield {
+                    "label": label,
+                    "image": image
+                    }
