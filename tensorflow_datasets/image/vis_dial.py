@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import re
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -33,6 +32,7 @@ _CITATION = """\
 """
 
 _Train_Dialogs = "https://dl.dropboxusercontent.com/s/ix8keeudqrd8hn8/visdial_1.0_train.zip"
+_Train_Images = "http://images.cocodataset.org/zips/train2014.zip"
 _Validation_Dialogs = "https://dl.dropboxusercontent.com/s/ibs3a0zhw74zisc/visdial_1.0_val.zip"
 _Validation_Images = "https://dl.dropboxusercontent.com/s/twmtutniktom7tu/VisualDialog_val2018.zip"
 _Test_Dialogs = "https://dl.dropboxusercontent.com/s/o7mucbre2zm7i5n/visdial_1.0_test.zip"
@@ -42,7 +42,7 @@ _Test_Images = "https://dl.dropboxusercontent.com/s/mwlrg31hx0430mt/VisualDialog
 class VisualDialog(tfds.core.GeneratorBasedBuilder):
     """Visual Dialog Dataset"""
 
-    VERSION = tfds.core.version("1.0")
+    VERSION = tfds.core.Version("1.0.0")
 
     def _info(self):
         return tfds.core.DatasetInfo(
@@ -50,39 +50,50 @@ class VisualDialog(tfds.core.GeneratorBasedBuilder):
             description="A large set of Images and Dialogs",
             features=tfds.features.FeaturesDict({
                 "label": tfds.features.ClassLabel(
-                    names=["questions", "answers", "dialogs"]),
+                    names=["image", "dialog"]),
             }),
-            supervised_keys=("questions", "answers", "dialogs"),
+            supervised_keys=("image", "dialog"),
             urls=["https://visualdialog.org/"],
             citation=_CITATION
         )
 
 
     def _split_generators(self, dl_manager):
-        Train_Dialogs = dl_manager.download(_Train_Dialogs)
+        Train_Dialogs, Train_Images = dl_manager.download([_Train_Dialogs, _Train_Images])
         Validation_Dialogs, Validation_Images = dl_manager.download([_Validation_Dialogs, _Validation_Images])
         Test_Dialogs, Test_Images = dl_manager.download([_Test_Dialogs, _Test_Images])
 
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
-                num_shards=10
+                num_shards=10,
                 gen_kwargs={
-                    "train_dialog": dl_manager.iter_archive(Train_Dialogs)
+                    "dialog": dl_manager.iter_archive(Train_Dialogs),
+                    "image": dl_manager.iter_archive(Train_Images),
                 }),
             tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
-                num_shards=10
+                num_shards=10,
                 gen_kwargs={
-                    "validation_dialog": dl_manager.iter_archive(Validation_Dialogs)
-                    "validation_Image": dl_manager.iter_archive(Validation_Images)
+                    "dialog": dl_manager.iter_archive(Validation_Dialogs),
+                    "image": dl_manager.iter_archive(Validation_Images),
                 }),
             tfds.core.SplitGenerator(
                 name=tfds.Split.TEST,
                 num_shards=10,
                 gen_kwargs={
-                    "test_dialog": dl_manager.iter_archive(Test_Dialogs)
-                    "test_Image": dl_manager.iter_archive(Test_Images)
+                    "dialog": dl_manager.iter_archive(Test_Dialogs),
+                    "image": dl_manager.iter_archive(Test_Images),
                 }),
         ]
+
+    def _generate_examples(self, image, dialog):
+
+        for label, image_paths in image:
+            for text in dialog:
+                yield {
+                    "image": image_path,
+                    "label": label,
+                    "text": text,
+                }
 
