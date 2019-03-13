@@ -132,12 +132,15 @@ class KaggleCompetitionDownloader(object):
     _run_kaggle_command(command, self._competition_name)
     return os.path.join(output_dir, fname)
 
-  def download_all_files(self):
-    dir = self._competition_name
-    if not os.path.exists(dir):
-      os.makedirs(dir)
-    for fname in self.competition_files:
-      self.download_file(fname, self._competition_name)
+  @staticmethod
+  def download_all_files(competition_name, out_dir=None):
+    if out_dir==None:
+      out_dir = competition_name
+    downloader = KaggleCompetitionDownloader(competition_name)
+    if not os.path.exists(out_dir):
+      os.makedirs(out_dir)
+    for fname in downloader.competition_files:
+      downloader.download_file(fname, out_dir)
 
 
 def _run_kaggle_command(command_args, competition_name):

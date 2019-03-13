@@ -43,9 +43,10 @@ class KaggleTest(testing.TestCase):
           with tf.io.gfile.GFile(out_path) as f:
             self.assertEqual(fname, f.read())
       with testing.tmp_dir():
-        downloader.download_all_files()
+        out_dir = "foo"
+        kaggle.KaggleCompetitionDownloader.download_all_files(competition_name, out_dir)
         dataset_files = downloader.competition_files
-        dowloaded_files = os.listdir(competition_name)
+        dowloaded_files = os.listdir(out_dir)
         six.assertCountEqual(self, dataset_files, dowloaded_files)
 
   def test_competition_download_404(self):
