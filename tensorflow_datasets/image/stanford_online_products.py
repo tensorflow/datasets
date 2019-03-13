@@ -7,7 +7,7 @@ _SPLITS = {
     tfds.Split.TRAIN: "Ebay_train",
     tfds.Split.TEST: "Ebay_test"}
 
-
+_SUPER_CLASSES = ['bicycle', 'cabinet', 'chair', 'coffee_maker', 'fan', 'kettle', 'lamp', 'mug', 'sofa', 'stapler', 'table', 'toaster']
 class StanfordOnlineProducts(tfds.core.GeneratorBasedBuilder):
     VERSION = tfds.core.Version("1.0.0")
 
@@ -18,7 +18,7 @@ class StanfordOnlineProducts(tfds.core.GeneratorBasedBuilder):
             urls=["http://cvgl.stanford.edu/projects/lifted_struct/"],
             features=tfds.features.FeaturesDict({
                 "class_id": tfds.features.ClassLabel(num_classes=22364),
-                "super_class_id": tfds.features.ClassLabel(num_classes=12),
+                "super_class_id": tfds.features.ClassLabel(names=_SUPER_CLASSES),
                 "image": tfds.features.Image()
             })
         )
@@ -45,5 +45,5 @@ class StanfordOnlineProducts(tfds.core.GeneratorBasedBuilder):
             for row in dataset:
                 yield{
                     "class_id": int(row["class_id"]),
-                    "super_class_id": int(row["super_class_id"]),
+                    "super_class_id": _SUPER_CLASSES[int(row["super_class_id"])-1],
                     "image": os.path.join(os.path.dirname(file_path), row["path"])}
