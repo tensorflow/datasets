@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Generate fake data for rock_paper_scissors dataset.
+r"""Generate fake data for horses or humans dataset.
 
 """
 
