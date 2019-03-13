@@ -1,5 +1,4 @@
 """HAM10000 Dataset"""
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -9,17 +8,17 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = ("https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000/"
-"downloads/skin-cancer-mnist-ham10000.zip/2")
+        "downloads/skin-cancer-mnist-ham10000.zip/2")
 
 _DESCRIPTION = ("The dataset consists of 10015 dermatoscopic images which"
-"can serve as a training set for academic machine learning purposes."
-"Cases include a representative collection of all important diagnostic "
-"categories in the realm of pigmented lesions: Actinic keratoses and " 
-"intraepithelial carcinoma / Bowen's disease (akiec), basal cell carcinoma (bcc), "
-"benign keratosis-like lesions (solar lentigines / seborrheic "
-"keratoses and lichen-planus like keratoses, bkl), dermatofibroma (df), "
-"melanoma (mel), melanocytic nevi (nv) and vascular lesions "
-"(angiomas, angiokeratomas, pyogenic granulomas and hemorrhage, vasc)")
+                "can serve as a training set for academic machine learning purposes."
+                "Cases include a representative collection of all important diagnostic "
+                "categories in the realm of pigmented lesions: Actinic keratoses and " 
+                "intraepithelial carcinoma / Bowen's disease (akiec), basal cell carcinoma (bcc), "
+                "benign keratosis-like lesions (solar lentigines / seborrheic "
+                "keratoses and lichen-planus like keratoses, bkl), dermatofibroma (df), "
+                "melanoma (mel), melanocytic nevi (nv) and vascular lesions "
+                "(angiomas, angiokeratomas, pyogenic granulomas and hemorrhage, vasc)")
 
 _IMAGE_SHAPE = (450, 600, 3)
 
@@ -81,35 +80,32 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
     def _generate_examples(self, images_dir_path, labels_dir_path):
         """ Function to extract images and labels"""
 
-        csv_list = readCsv(labels_dir_path)
-        
-        
+        csv_dict = readCsv(labels_dir_path)
+        labels_dict = return_map(csv_dict)
         data_folder_list = [os.path.join(images_dir_path, 'HAM10000_images_part_1'), os.path.join(images_dir_path, 'HAM10000_images_part_2')]
         for data_folder in data_folder_list:
             for image_file in tf.io.gfile.listdir(data_folder):
 
-                
                 image_path = os.path.join(data_folder, image_file)
-                label = return_label(image_file.split(".")[0], csv_list)
-                
+                label = labels_dict[image_file.split(".")[0]]
+                 
                 yield {
                 
                     "label": label,
                     "image": image_path
-                    }
+                }
 
 
 def readCsv(labels_dir_path):
     """Function to read labels.csv file and store in memory"""
 
     readCSV = csv.DictReader(tf.io.gfile.GFile(labels_dir_path))
-    #Covert csv to list to iterate without saving the state of the generator
-    return list(readCSV) 
+    return readCSV 
 
-def return_label(image_name, csv_list):
+def return_map(csv_dict):
     """Function to return the corresponding label from filename"""
-
-    for row in range(len(csv_list)):
-        if csv_list[row]['image_id'] == image_name:
-            return csv_list[row]['dx']
+    labels_dict = {}
+    for row in csv_dict:
+        labels_dict[row['image_id']] = row['dx']
+    return labels_dict
                 
