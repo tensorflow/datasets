@@ -1,0 +1,397 @@
+bicycling, BMX
+bicycling, general
+bicycling, mountain
+bicycling, racing and road
+unicycling
+Elliptical trainer, moderate effort
+bicycling, stationary
+calisthenics
+circuit training
+health club exerceise classes
+home exercise, general
+native New Zealander physical activities
+pilates, general
+resistance training
+rowing, stationary
+ski machine, general
+slide board exercise, general
+slimnastics, jazzercise
+stretching, mild
+teaching exercise class
+therapeutic exercise ball, Fitball exercise
+upper body exercise, stationary bicycle - Airdyne (arms only) 40 rpm, moderate
+video exercise workouts, TV conditioning programs
+weight lifting, power lifting
+yoga, Nadisodhana
+yoga, Power
+Anishinaabe Jingle Dancing
+Caribbean dance (Abakua, Beguine, Bellair, Bongo, Brukin's, Caribbean Quadrills, Dinki Mini, Gere, G
+Irish step dancing
+aerobic, general
+aerobic, step
+ballet, modern, or jazz
+ballroom
+ethnic or cultural dancing (e.g., Greek, Middle Eastern, hula, salsa, merengue, bamba y plena, flame
+general dancing (e.g., disco, folk, Irish step dancing, line dancing, polka, contra, country)
+fishing from boat or canoe, sitting
+fishing from river bank
+fishing in stream, in waders (Taylor Code 670)
+fishing with a spear, standing
+fishing, catching fish with hands
+fishing, dip net, setting net and retrieving fish, general
+fishing, general
+fishing, ice, sitting
+fishing, set net, setting net and retrieving fish, general
+hunting, birds
+hunting, bow and arrow, or crossbow
+hunting, general
+hunting, rabbit, squirrel, prairie chick, raccoon, small game (Taylor Code 690)
+pistol shooting or trap shooting, standing
+trapping game, general
+breastfeeding, sitting or reclining
+child care
+cleaning windows, washing windows, general
+cleaning, general
+cleaning, sweeping floor or carpet
+cooking or food preparation
+cutting and smoking fish, drying fish or meat
+dusting or polishing furniture, general
+elder care
+feeding household animals
+food shopping with or without a grocery cart, standing or walking
+ironing
+kitchen activity, general, (e.g., cooking, washing dishes, cleaning up), moderate effort
+knitting, sewing
+landry
+making bed, changing linens
+maple syrupingsugar bushing (including carrying buckets, carrying wood)
+mopping, standing, light effort
+moving furniture, household items, carrying boxes
+moving household items upstairs, carrying boxes or furniture
+non-food shopping, with or without a cart, standing or walking
+organizing room
+playing with animals
+playing with children
+polishing floors, standing, walking slowly, using electric polishing machine
+putting away groceries (e.g. carrying groceries, shopping without a grocery cart), carrying packages
+scrubbing floors
+sweeping garage, sidewalk or outside of house
+tanning hides, general
+vacuuming, general, moderate effort
+wash dishes
+automobile repair
+carpentry, finishing or refinishing cabinets or furniture
+carpentry, general, workshop (Taylor Code 620)
+carpentry, home remodeling tasks
+carpentry, outside house, building a fence
+carpentry, sawing hardwood
+caulking, chinking log cabin
+caulking, except log cabin
+cleaning gutters
+hammering nails
+hanging sheet rock inside house
+hanging storm windows
+home repair, general
+laying or removing carpet
+laying tile or linoleum,repairing appliances
+painting inside house,wallpapering, scraping paint
+painting, outside home (Taylor Code 650)
+put on and removal of tarp - sailboat
+repairing appliances
+roofing
+sanding floors with a power sander
+scraping and painting sailboat or powerboat
+sharpening tools
+washing and waxing car
+washing and waxing hull of sailboat or airplane
+washing fence, painting fence, moderate effort
+wiring, tapping-splicing
+lying quietly, sleeping
+reclining
+sitting quietly
+standing quietly, standing in a line
+carrying, loading or stacking wood
+chopping wood
+clearing brush
+digging sandbox, shoveling sand
+digging, spading, filling garden, composting
+driving tractor
+felling trees
+gardening with heavy power tools, tilling a garden, chain saw
+gardening, general, moderate effort
+gardening, using containers, older adults > 60 years
+implied walkingstanding - picking up yard, light, picking flowers or vegetables
+irrigation channels, opening and closing ports
+laying crushed rock
+mowing lawn, power mower
+mowing lawn, walk, hand mower (Taylor Code 570)
+picking fruits/vegetables
+planting seedlings, shrub, stooping, moderate effort
+planting trees
+planting, potting, transplanting seedlings or plants, light effort
+racking lawn
+raking roof with snow rake
+riding snow blower
+shoveling dirt or mud
+shoveling snow, by hand
+trimming shrubs or trees
+walking, applying fertilizer or seeding a lawn, push applicator
+watering lawn or garden, standing or walking
+weeding, cultivating garden
+wheelbarrow, pushing garden cart or wheelbarrow
+yard work, general
+card playing,sitting
+chess game, sitting
+copying documents, standing
+drawing, writing, painting, standing
+laughing, sitting
+reading
+sitting at a sporting event, spectator
+sitting, arts and crafts,  carving wood, weaving, spinning wool
+sitting, in class, general, including note-taking or class discussion
+sitting, playing traditional video game, computer game
+sitting, studying, general, including reading andor writing, light effort
+sitting, talking in person, on the phone, computer, or text messaging, light effort
+sitting, writing, desk work, typing
+standing, arts and crafts, sand painting, carving, weaving
+standing, miscellaneous
+standing, talking in person
+touringtravelingvacation involving riding in a vehicle
+touringtravelingvacation involving walking
+accordion, sitting
+cello, sitting
+conducting orchestra, standing
+double bass, standing
+drumming (e.g., bongo, conga, benbe), moderate, sitting
+drums, sitting
+flute, sitting
+guitar, classical, folk, sitting
+guitar, rock and roll band, standing
+horn, standing
+marching band
+organ, sitting
+piano, sitting
+playing musical instruments, general
+trombone, standing
+trumpet, standing
+violin, sitting
+woodwind, sitting
+active workstation, treadmill desk, walking
+airline flight attendant
+bakery, general
+bookbinding
+carpentry, general
+chambermaid, hotel housekeeper, making bed, cleaning bathroom, pushing cart
+coal mining
+construction, outside, remodeling, new structures (e.g., roof repair, miscellaneous)
+cook, chef
+custodial work
+driving delivery truck, taxi, shuttle bus, school bus
+engineer (e.g., mechanical or electrical)
+farming
+farming, cultivating field
+farming, driving tasks (e.g., driving tractor or harvester)
+farming, feeding cattle, horses
+farming, feeding small animals
+farming, milking by hand, cleaning pails, moderate effort
+farming, milking by machine, light effort
+farming, rice, planting, grain milling activities
+farming, taking care of animals (e.g., grooming, brushing, shearing sheep, assisting with birthing,
+fire fighter
+fire fighter, hauling hoses on ground, carryinghoisting equipment, breaking down walls etc., wearin
+fishing, commercial
+forestry
+garbage collector, walking, dumping bins into truck
+hairstylist (e.g., plaiting hair, manicure, make-up artist)
+horse grooming, feeding, cleaning, harnessing and unharnessing
+horse racing
+laundry worker
+locksmith
+machine tooling
+manager, property
+manual or unskilled labor
+masonry, concrete
+massage therapist, standing
+moving, carrying or pushing heavy objects, 75 lbs or more, only active time (e.g., desks, moving van
+orange grove work, picking fruit
+painting,house, furniture, moderate effort
+plumbing activities
+police, directing traffic, standing
+police, general
+police, making an arrest, standing
+postal carrier, walking to deliver mail
+printing, paper industry worker, standing
+serving food and drinks
+shoe repair, general
+sitting meetings, light effort, general, andor with talking involved (e.g., eating at a business me
+sitting tasks, light effort (e.g., office work, chemistry lab work, computer work, light assembly re
+sitting, teaching stretching or yoga, or light effort exercise class
+skindiving or SCUBA diving as a frogman, Navy Seal
+standing, doing work
+steel mill, moderate effort (e.g., fettling, forging, tipping molds)
+tailoring
+truck driving, loading and unloading truck, tying down load, standing, walking and carrying heavy lo
+typing, electric, manual or computer
+using heavy tools
+working in scene shop, theater actor, backstage employee
+kneeling in church or at home, praying
+serving food in church
+sitting in church
+sitting, playing an instrument at church
+standing, talking in church
+jogging
+jogging, on a mini-tramp
+running
+running, cross country
+running, marathon
+running, on a track, team practice
+running, stairs, up
+eating, sitting
+grooming, washing hands, shaving,brushing teeth, putting on make-up, sitting or standing
+hairstyling
+taking medication, sitting or standing
+Alaska Native Games, Eskimo Olympics, general
+archery, non-hunting
+badminton, competitive (Taylor Code 450)
+badminton, social singles and doubles, general
+basketball
+basketball, game (Taylor Code 490)
+billiards
+bowling
+boxing, in ring, general
+boxing, punching bag
+boxing, sparring
+broomball
+children_s games, adults playing (e.g., hopscotch, 4-square, dodgeball, playground apparatus, t-ball
+coaching
+cricket, batting, bowling, fielding
+croquet
+curling
+darts, wall or lawn
+fencing
+football or baseball, playing catch
+football, competitive
+football, touch, flag
+frisbee
+golf
+gymnastics, general
+hacky sack
+handball
+hang gliding
+high ropes course, multiple elements
+hockey, field
+hockey, ice, competitive
+hockey, ice, general
+horse cart, driving, standing or sitting
+horseback riding
+horseshoe pitching, quoits
+jai alai
+juggling
+kickball
+lacrosse
+lawn bowling, bocce ball, outdoor
+martial arts, different types
+moto-cross, off-road motor sports, all-terrain vehicle, general
+orienteering
+paddleball
+polo, on horseback
+racquetball
+rock climbing
+rodeo sports
+rollerblading
+rope skipping, general
+rugby, touch, non-competitive
+shuffleboard
+skateboarding
+skating, roller (Taylor Code 360)
+skydiving, base jumping, bungee jumping
+soccer
+softball, general
+squash
+street skiing
+table tennis, ping pong (Taylor Code 410)
+tai chi, qi gong, general
+tennis
+tennis, doubles
+tennis, hitting balls, non-game play, moderate effort
+track and field
+trampoline, competitive
+trampoline, recreational
+volleyball, beach, in sand
+volleyball, indoor
+volleyball, non-competitive
+wallyball, general
+wrestling (one match = 5 minutes)
+driving automobile or light truck
+motor scooter, motorcycle
+pulling rickshaw
+pushing car
+pushing plane in and out of hangar
+riding in a bus or train
+riding in a car or truck
+sitting, doing work
+standing, child care, only active periods
+walkrun play with children, moderate, only active periods
+backpacking
+bird watching, slow walk
+carrying load, upstairs
+climbing hills
+descending stairs
+hiking
+loading unloading a car, implied walking
+marching, military, no pack
+pushing a wheelchair, non-occupational
+pushing or pulling stroller with child or walking with children, 2.5 to 3.1 mph
+race walking
+stair climbing, fast pace
+stair climbing, using or climbing up ladder (Taylor Code 030)
+using crutches
+walking the dog
+walking, for exerceise, with ski poles
+walking, general
+boating, power
+canoeing, harvesting wild rice, knocking rice off the stalks
+canoeing, kayaking, rowing, competitive
+canoeing, on camping trip (Taylor Code 270)
+canoeing, portaging
+diving, springboard or platform
+jet skiing, driving, in water
+kayaking, moderate effort
+paddle boarding, standing
+paddle boat
+sailing
+sailing, in competition
+skiing, water or wakeboarding (Taylor Code 220)
+skindiving, scuba diving, snorkeling
+snorkeling (Taylor Code 310)
+surfing
+swimming, backstroke
+swimming, breaststroke, recreational
+swimming, butterfly, general
+swimming, general
+swimming, lake, ocean, river (Taylor Codes 280, 295)
+swimming, sidestroke, general
+swimming, synchronized
+tubing, floating on a river, general
+water aerobics, water calisthenics
+water jogging
+water volleyball
+water walking
+whitewater rafting, kayaking, or canoeing
+windsurfing
+dog sledding
+operating snow blower, walking
+skating, ice
+skating, ice dancing
+skating, speed, competitive
+ski jumping
+skiing, climbing up
+skiing, cross-country
+skiing, cross-country, biathlon, skating technique
+skiing, downhill
+skiing, general
+sledding, tobogganing, bobsledding, luge (Taylor Code 370)
+snow shoeing
+snowboarding
+snowmobiling
+windsurfing or kitesurfing, winter

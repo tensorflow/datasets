@@ -494,6 +494,9 @@ def get_dataset_feature_statistics(builder, split):
 
       if isinstance(feature_np, np.ndarray):
         feature_dtype = feature_np.dtype.type
+        if feature_np.size == 0:
+          # min/max undefined
+          continue
 
       feature_min, feature_max = None, None
       is_numeric = (np.issubdtype(feature_dtype, np.number) or
@@ -554,8 +557,10 @@ def get_dataset_feature_statistics(builder, split):
 
     if feature.type == schema_pb2.INT or feature.type == schema_pb2.FLOAT:
       numeric_statistics = statistics_pb2.NumericStatistics()
-      numeric_statistics.min = feature_to_min[feature_name]
-      numeric_statistics.max = feature_to_max[feature_name]
+      # there could be no min/max values saved if all examples had size == 0
+      # common for test datasets with held-out sequential labels
+      numeric_statistics.min = feature_to_min.get(feature_name, 0)
+      numeric_statistics.max = feature_to_max.get(feature_name, 0)
       numeric_statistics.common_stats.CopyFrom(common_statistics)
       feature_name_statistics.num_stats.CopyFrom(numeric_statistics)
     else:
