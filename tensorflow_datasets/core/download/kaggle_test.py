@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import six
 import subprocess
 
 import tensorflow as tf
@@ -43,7 +44,9 @@ class KaggleTest(testing.TestCase):
             self.assertEqual(fname, f.read())
       with testing.tmp_dir():
         downloader.download_all_files()
-        self.assertCountEqual(os.listdir(competition_name), downloader.competition_files)
+        dataset_files = downloader.competition_files
+        dowloaded_files = os.listdir(competition_name)
+        six.assertCountEqual(self, dataset_files, dowloaded_files)
 
   def test_competition_download_404(self):
     with testing.mock_kaggle_api(err_msg="404 - Not found"):
