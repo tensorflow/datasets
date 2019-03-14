@@ -63,7 +63,8 @@ class Ham10000(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
         """Function to split the images into training set as no other set is specified"""
-        
+
+        #Implement kaggle API to download the dataset as soon as Issue 232 is fixed
         path = dl_manager.manual_dir
         return [
             tfds.core.SplitGenerator(
@@ -104,8 +105,8 @@ def readCsv(labels_dir_path):
 
 def return_map(csv_dict):
     """Function to return the corresponding label from filename"""
-    labels_dict = {}
-    for row in csv_dict:
-        labels_dict[row['image_id']] = row['dx']
-    return labels_dict
+    
+    return {row['image_id']: row['dx'] for row in csv_dict}
+
+    
                 
