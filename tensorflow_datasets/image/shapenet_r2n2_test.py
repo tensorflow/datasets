@@ -12,29 +12,16 @@ train_count = int(snt.N_EXAMPLES * sn._TRAIN_FRAC)
 test_count = snt.N_EXAMPLES - train_count
 
 
-class ShapeNetR2n2MultiTest(testing.DatasetBuilderTestCase):
+class ShapeNetR2n2Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = sn.ShapenetR2n2
-  BUILDER_CONFIG_NAMES_TO_TEST = ['%s-multi' % c for c in snt.CAT_IDS]
+  BUILDER_CONFIG_NAMES_TO_TEST = sn.cat_ids()[:2]
   SPLITS = {
       "train": train_count,
-      "test": test_count,
+      "test":  test_count,
   }
   DL_EXTRACT_RESULT = {
-      "voxels_path": "./",
-      "renderings_path": "./",
-  }
-
-
-class ShapeNetR2n2SingleTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = sn.ShapenetR2n2
-  BUILDER_CONFIG_NAMES_TO_TEST = ['%s-single' % c for c in sn.cat_ids()[:2]]
-  SPLITS = {
-      "train": train_count * sn.RENDERINGS_PER_EXAMPLE,
-      "test":  test_count * sn.RENDERINGS_PER_EXAMPLE,
-  }
-  DL_EXTRACT_RESULT = {
-      "voxels_path": "./",
-      "renderings_path": "./",
+      "voxels": "./",
+      "renderings": "./",
   }
 
 

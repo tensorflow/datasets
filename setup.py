@@ -81,6 +81,7 @@ DATASET_EXTRAS = {
         # route to install OpenCV
         'opencv-python==3.4.0.14'
     ],
+    'shapenet_r2n2': ['Pillow'],
 }
 
 all_dataset_extras = []
