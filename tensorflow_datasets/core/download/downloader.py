@@ -142,20 +142,11 @@ class _Downloader(object):
         out_path, checksum_cls=self._checksumer)
     return hexdigest, size
 
-  def _sync_ftp_download(self, url, destination_path):
-    out_path = os.path.join(destination_path, download_util.get_file_name(url))
-    urllib.request.urlretrieve(url, out_path)
-    hexdigest, size = utils.read_checksum_digest(
-        out_path, checksum_cls=self._checksumer)
-    return hexdigest, size
 
   def _sync_download(self, url, destination_path):
     """Synchronous version of `download` method."""
     if kaggle.KaggleFile.is_kaggle_url(url):
       return self._sync_kaggle_download(url, destination_path)
-
-    if url.startswith('ftp'):
-      return self._sync_ftp_download(url, destination_path)
 
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
@@ -168,10 +159,15 @@ class _Downloader(object):
     session = requests.Session()
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
-    response = session.get(url, stream=True)
-    if response.status_code != 200:
-      raise DownloadError(
-          'Failed to get url %s. HTTP code: %d.' % (url, response.status_code))
+    if not url.startswith('ftp'):
+      response = session.get(url, stream=True)
+      if response.status_code != 200:
+        raise DownloadError(
+          'Failed to get url %s. HTTP code: %d.' %
+          (url, response.status_code))
+    else:
+      request = urllib.request.Request(url)
+      response = urllib.request.urlopen(request)
     fname = _get_filename(response)
     path = os.path.join(destination_path, fname)
     size = 0
@@ -182,7 +178,12 @@ class _Downloader(object):
         int(response.headers.get('Content-length', 0)) // unit_mb)
     with tf.io.gfile.GFile(path, 'wb') as file_:
       checksum = self._checksumer()
-      for block in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
+      if not url.startswith("ftp"):
+        iterator = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
+      else:
+        iterator = iter(lambda: response.read(10), b'')
+
+      for block in iterator:
         size += len(block)
 
         # Update the progress bar
