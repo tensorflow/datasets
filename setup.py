@@ -35,6 +35,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'future',
+    'numpy',
     'promise',
     'protobuf>=3.6.1',
     'requests',
