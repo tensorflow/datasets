@@ -386,7 +386,7 @@ def _item_to_tf_feature(item, key_name):
         "FeatureConnector should return a numpy array with the correct dtype "
         "instead of a Python list.".format(key_name)
     )
-  if isinstance(v, bytes) and not isinstance(v, str):
+  if isinstance(v, six.binary_type):
     return tf.train.Feature(bytes_list=tf.train.BytesList(value=[v]))
 
   v = np.array(v).flatten()  # Convert v into a 1-d array
