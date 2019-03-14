@@ -73,16 +73,17 @@ DATASET_FILES = [
 ]
 
 DATASET_EXTRAS = {
-    'librispeech': ['pydub'],  # and ffmpeg installed
-    'common_voice': ['pydub'], # and ffmpeg installed
+    # In alphabetical order
     'cats_vs_dogs': ['matplotlib'],
-    'svhn': ['scipy'],
     'colorectal_histology': ['Pillow'],
+    'common_voice': ['pydub'], # and ffmpeg installed
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
         'opencv-python==3.4.0.14'
     ],
+    'librispeech': ['pydub'],  # and ffmpeg installed
+    'svhn': ['scipy'],
 }
 
 all_dataset_extras = []
