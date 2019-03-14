@@ -386,11 +386,11 @@ class DatasetBuilder(object):
 
     dataset_size = self.info.size_in_bytes
     def _check_disk_size():
-        if dataset_size > py_utils.free_disk_size("/"):
+        if dataset_size > utils.py_utils.free_disk_size("/"):
             raise IOError("Not enough disk space!!\nDataset size : {dataset_size} \nFree size : {free_disk_size} \nYou need to extra {needed_disk_size} to download."
                           .format(dataset_size=units.size_str(dataset_size),
-                                  free_disk_size=units.size_str(py_utils.free_disk_size),
-                                  needed_disk_size=units.size_str(dataset_size-py_utils.free_disk_size)))
+                                  free_disk_size=units.size_str(utils.py_utils.free_disk_size),
+                                  needed_disk_size=units.size_str(dataset_size - utils.py_utils.free_disk_size)))
 
     _check_disk_size()
 
