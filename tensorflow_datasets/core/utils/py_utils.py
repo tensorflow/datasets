@@ -28,6 +28,8 @@ import itertools
 import os
 import sys
 import uuid
+import ctypes
+import platform
 
 import six
 import tensorflow as tf
@@ -277,7 +279,14 @@ def rgetattr(obj, attr, *args):
   return functools.reduce(_getattr, [obj] + attr.split("."))
 
 
-def free_disk_size(directory):
-  stat = os.statvfs(directory)
-  free_disk_size = (stat.f_bavail * stat.f_frsize)
-  return free_disk_size
+def free_disk_size(dirname):
+    try:
+      if platform.system() == 'Windows':
+          free_bytes = ctypes.c_ulonglong(0)
+          ctypes.windll.kernel32.GetDiskFreeSpaceExW(ctypes.c_wchar_p(dirname), None, None, ctypes.pointer(free_bytes))
+          return free_bytes.value
+      else:
+          stat = os.statvfs(dirname)
+          return stat.f_bavail * stat.f_frsize
+    except:
+      return float("inf")
