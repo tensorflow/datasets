@@ -65,17 +65,6 @@ class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
       "images": "https://datasets.d2.mpi-inf.mpg.de/andriluka14cvpr/mpii_human_pose_v1.tar.gz",
       "annot": "https://datasets.d2.mpi-inf.mpg.de/andriluka14cvpr/mpii_human_pose_v1_u12_2.zip",
     })
-    # HACK
-    # paths = {
-    #   "images": "/home/jackd/tensorflow_datasets/downloads/data.d2.mpi-inf.mpg.de_andr_mpii_huma_phNxalYyEhri03LC67xT91rbEHKVupQTPcjNcLhOwnUg.tar.gz",
-    #   "annot": "/home/jackd/tmp/mpii/mpii_human_pose_v1_sequences_keyframes.mat"
-    # }
-    # images_path = paths['images']
-    # images_gen = lambda: extractor.iter_tar_gz(images_path)
-    # faster
-    # images_gen = lambda: extractor.iter_zip(
-    #   '/home/jackd/Development/datasets/mp2/images.zip')
-    # annot_path = "/home/jackd/tmp/mpii/mpii_human_pose_v1_u12_1.mat"
 
     annot_dir = paths["annot"]
     # don't extract images
@@ -83,8 +72,6 @@ class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
     if isinstance(annot_dir, dict):
       # tests return the original dict
       annot_dir = annot_dir["annot"]
-
-
 
     annot_path = os.path.join(
       annot_dir, "mpii_human_pose_v1_u12_2", "mpii_human_pose_v1_u12_1.mat")
@@ -168,7 +155,7 @@ class MpiiHumanPose(tfds.core.GeneratorBasedBuilder):
       else:
         # test data
         num_valid_people = coord_helper.num_valid_people
-        joints = np.zeros((num_valid_people, NUM_JOINTS, 2), dtype=np.int64)
+        joints = -np.ones((num_valid_people, NUM_JOINTS, 2), dtype=np.int64)
         visible = np.zeros((num_valid_people, NUM_JOINTS), dtype=np.bool)
 
       yield dict(
