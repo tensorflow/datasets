@@ -27,8 +27,30 @@ provide 4 base configurations:
 face can have any number of vertices, we store `face_values` as a single list
 of vertex indices and `face_lengths`. The original face lists can be recovered
 using `tf.RaggedTensor.from_row_lengths(face_values, face_lengths)`.
-* `tri_mesh`: the original polygon mesh where each face is split into triangular faces.
-* `cloud{N}`, `N in (100, 500)`: sampled surface points with normals
+* `tri_mesh`: the original polygon mesh where each face is split into triangular
+faces.
+* `cloud{N}`, `N in (100, 500)`: sampled surface points with normals.
+
+In the mesh cases (`poly_mesh` and `tri_mesh`), we provide the vertices exactly
+as given in the original dataset. These come at different offsets and scales,
+so we additionally provide the center and radius of the minimum sphere
+containing all points.
+
+For the point clouds, we preprocess the vertices before sampling such that all
+points lie within a unit sphere centered at the origin. This is to be consistent
+with `ModelnetSampled`. In this case, we also provide the original center
+and radius.
+
+For clouds of a different size, you can use
+```python
+import tensorflow_datasets.volume.modelnet.modelnet as mn
+
+my_num_points = 12345
+my_config = mn.PointCloudModelnetConfig(my_num_points)
+mn.Modelnet40.BUILDER_CONFIGS.append(my_config)
+
+dataset = tfds.load('modelnet40/cloud%d' % my_num_points)
+```
 
 You can implement your own config by extending
 `tensorflow_datasets.volume.modelnet.modelnet.ModelnetConfig`, implementing the
@@ -91,38 +113,40 @@ from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.volume.utils import off
 
 _URL_BASE = "http://modelnet.cs.princeton.edu/"
+DEFAULT_SEED =  143
 
 
 def _load_off_data(fp):
   # trimesh doesn't give direct access to the polygon mesh
   data = off.OffObject.from_file(fp)
   vertices = data.vertices.astype(np.float32)
-  # rescale/recenter
-  mins = np.min(vertices, axis=0)
-  maxs = np.max(vertices, axis=0)
-  center = (mins + maxs) / 2
-  vertices -= center
-  vertices /= np.max(maxs - mins)
   face_values = data.face_values.astype(np.int64)
   face_lengths = data.face_lengths.astype(np.int64)
-  return vertices, face_values, face_lengths
+  center, radius = lazy_imports.trimesh.nsphere.minimum_nsphere(vertices) # pylint: disable=no-member
+  center = center.astype(np.float32)
+  radius = radius.astype(np.float32)
+  return vertices, face_values, face_lengths, center, radius
 
 
 def _load_off_mesh(fp):
-  # we could use trimesh here, but given we already have _load_off_data we use
-  # triangulated faces to remove the required dependency for `tri_mesh` config.
-  vertices, face_values, face_lengths = _load_off_data(fp)
+  vertices, face_values, face_lengths, center, radius = _load_off_data(fp)
   faces = off.triangulated_faces(face_values, face_lengths)
-  return vertices, faces
+  return vertices, faces, center, radius
 
 
-def _cloud_features(num_points):
-  return tfds.features.FeaturesDict({
+def _cloud_features(num_points, with_originals=False):
+  features = {
       "positions": tfds.features.Tensor(
         shape=(num_points, 3), dtype=tf.float32),
       "normals": tfds.features.Tensor(
         shape=(num_points, 3), dtype=tf.float32)
+    }
+  if with_originals:
+    features.update({
+      "original_center": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+      "original_radius": tfds.features.Tensor(shape=(), dtype=tf.float32),
     })
+  return tfds.features.FeaturesDict(features)
 
 
 class ModelnetConfig(tfds.core.BuilderConfig):
@@ -141,6 +165,12 @@ class ModelnetConfig(tfds.core.BuilderConfig):
   def load(self, fp):
     raise NotImplementedError
 
+  def __enter__(self):
+    return self
+
+  def __exit__(self, *args, **kwargs):
+    pass
+
 
 class PolyMeshModelnetConfig(ModelnetConfig):
   def __init__(self, **kwargs):
@@ -155,14 +185,18 @@ class PolyMeshModelnetConfig(ModelnetConfig):
         "vertices": tfds.features.Tensor(shape=(None, 3), dtype=tf.float32),
         "face_values": tfds.features.Tensor(shape=(None,), dtype=tf.int64),
         "face_lengths": tfds.features.Tensor(shape=(None,), dtype=tf.int64),
+        "center": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+        "radius": tfds.features.Tensor(shape=(), dtype=tf.float32),
     })
 
   def load(self, fp):
-    vertices, face_values, face_lengths = _load_off_data(fp)
+    vertices, face_values, face_lengths, center, radius = _load_off_data(fp)
     return dict(
       vertices=vertices.astype(np.float32),
       face_values=face_values,
       face_lengths=face_lengths,
+      center=center,
+      radius=radius,
     )
 
 
@@ -176,27 +210,36 @@ class TriMeshModelnetConfig(ModelnetConfig):
     return tfds.features.FeaturesDict({
         "vertices": tfds.features.Tensor(shape=(None, 3), dtype=tf.float32),
         "faces": tfds.features.Tensor(shape=(None, 3), dtype=tf.int64),
+        "center": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
+        "radius": tfds.features.Tensor(shape=(), dtype=tf.float32),
       })
 
   def load(self, fp):
-    vertices, faces = _load_off_mesh(fp)
-    return dict(vertices=vertices, faces=faces)
+    vertices, faces, center, radius = _load_off_mesh(fp)
+    return dict(vertices=vertices, faces=faces, center=center, radius=radius)
 
 
 class PointCloudModelnetConfig(ModelnetConfig):
-  def __init__(self, num_points, **kwargs):
+  def __init__(self, num_points, seed=DEFAULT_SEED, **kwargs):
+    name = "cloud%d" % num_points
+    if seed != DEFAULT_SEED:
+      name = '%s-%d' % (name, seed)
+    self._seed = seed
     super(PointCloudModelnetConfig, self).__init__(
-      name="cloud%d" % num_points,
+      name=name,
       description="%d element point cloud" % num_points,
       input_key="cloud", **kwargs)
     self.num_points = num_points
+    self._original_state = None
 
   def input_features(self):
-    return _cloud_features(self.num_points)
+    return _cloud_features(self.num_points, with_originals=True)
 
   def load(self, fp):
     trimesh = lazy_imports.trimesh
-    vertices, faces = _load_off_mesh(fp)
+    vertices, faces, center, radius = _load_off_mesh(fp)
+    vertices -= center
+    vertices /= radius
     mesh = trimesh.Trimesh(vertices=vertices, faces=faces)  # pylint: disable=no-member
     positions, face_indices = trimesh.sample.sample_surface( # pylint: disable=no-member
       mesh, self.num_points)
@@ -204,7 +247,24 @@ class PointCloudModelnetConfig(ModelnetConfig):
     return dict(
       positions=positions.astype(np.float32),
       normals=normals.astype(np.float32),
+      original_center=center,
+      original_radius=radius,
     )
+
+  def __enter__(self):
+    # we rely on trimesh for sampling, but it doesn't allow for user-supplied
+    # `RandomContext`s, so we cache the random state, set seed and restore
+    # on exit.
+    if self._original_state is not None:
+      raise RuntimeError("Cannot nest PointCloudModelnetConfig contexts.")
+    self._original_state = np.random.get_state()
+    np.random.seed(self._seed)
+    return self
+
+  def __exit__(self, *args, **kwargs):
+    assert(self._original_state is not None)
+    np.random.set_state(self._original_state)
+    self._original_state = None
 
 
 class ModelnetSampledConfig(tfds.core.BuilderConfig):
@@ -306,19 +366,20 @@ class Modelnet10(tfds.core.GeneratorBasedBuilder):
     config = self.builder_config
     input_key = config.input_key
 
-    for path, fp in dl_manager.iter_archive(archive_res):
-      if not path.endswith(".off"):
-        continue
-      class_name, split, fn = path.split("/")[-3:]
-      if split != split_name:
-        continue
+    with config:
+      for path, fp in dl_manager.iter_archive(archive_res):
+        if not path.endswith(".off"):
+          continue
+        class_name, split, fn = path.split("/")[-3:]
+        if split != split_name:
+          continue
 
-      inputs = config.load(fp)
-      yield {
-        input_key: inputs,
-        "example_index": int(fn.split("_")[-1][:-4]) - 1,
-        "label": class_name,
-      }
+        inputs = config.load(fp)
+        yield {
+          input_key: inputs,
+          "example_index": int(fn.split("_")[-1][:-4]) - 1,
+          "label": class_name,
+        }
 
 
 # must be a separate class to separate downloads
