@@ -26,6 +26,7 @@ import sys
 
 from absl import logging
 import six
+import psutil
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
@@ -382,13 +383,25 @@ class DatasetBuilder(object):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
+
+    dataset_size = self.info.size_in_bytes
+    disk_size = psutil.disk_usage(self._data_dir_root).free
+
+    def _check_disk_size():
+        if dataset_size > disk_size:
+            raise IOError("Not enough disk space!!\nDataset size : {dataset_size} \nFree size : {free_disk_size} "
+                          "\nYou need to extra {needed_disk_size} to download. "
+                          .format(dataset_size=units.size_str(dataset_size),
+                                  free_disk_size=units.size_str(disk_size),
+                                  needed_disk_size=units.size_str(dataset_size - disk_size)))
+
+    _check_disk_size()
+
     size_text = units.size_str(self.info.size_in_bytes)
     termcolor.cprint(
         "Downloading / extracting dataset %s (%s) to %s..." %
         (self.name, size_text, self._data_dir),
         attrs=["bold"])
-    # TODO(tfds): Should try to estimate the available free disk space (if
-    # possible) and raise an error if not.
 
   @abc.abstractmethod
   def _info(self):
