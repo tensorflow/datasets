@@ -26,6 +26,20 @@ class OffObjectTest(unittest.TestCase):
     np.testing.assert_equal(obj.face_values, replica.face_values)
     np.testing.assert_equal(obj.face_lengths, replica.face_lengths)
 
+  def test_triangulated_faces(self):
+    face_values = np.arange(9, dtype=np.int64)
+    face_lengths = np.array([5, 4], dtype=np.int64)
+    tri_faces = off.triangulated_faces(face_values, face_lengths)
+    expected = np.array([
+        [0, 1, 2],
+        [0, 2, 3],
+        [0, 3, 4],
+        [5, 6, 7],
+        [5, 7, 8],
+    ])
+
+    np.testing.assert_equal(tri_faces, expected)
+
 
 if __name__ == '__main__':
   unittest.main()

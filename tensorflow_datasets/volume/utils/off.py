@@ -145,3 +145,51 @@ class OffObject(object):
     for face_size in self.face_lengths:
       face, values = np.split(values, (face_size,))  # pylint: disable=unbalanced-tuple-unpacking
       fp.write('%d %s\n' % (len(face), ' '.join(str(fi) for fi in face)))
+
+
+
+def triangulated_faces(face_values, face_lengths):
+  """Triangulate the polygon mesh defined by face values/lengths.
+
+  face_values and face_lengths encode the jagged array defining the polygon
+  faces. For example, the mesh made up of a square with vertices [0, 1, 2, 3]
+  and a triangle with vertices indexed by [1, 2, 4] would be given by
+  ```python
+  face_values = [0, 1, 2, 3, 1, 2, 4]
+  face_lengths = [4, 3]
+  ```
+  i.e. the first 4 entries of `face_values` correspond to the square, and
+  `face_values[4:4+3]` correspond to the triangle. We triangulate this by
+  splitting the square into 2 triangles, [0, 1, 2] and [0, 2, 3] (note the
+  direction is preserved which is important if outwards direction is defined
+  by the ordering.
+  ```python
+  >>> triangulated_faces(face_values, face_lengths)
+  # [
+  #   [0, 1, 2],  # first half of square
+  #   [0, 2, 3],  # second half of square
+  #   [1, 2, 4],  # original triangle
+  # ]
+  ```
+
+  Args:
+    face_values: 1D int array of indices of vertices in a single lists
+    face_lengths: (num_poly_faces,) int array of number of indices in
+      `face_values` corresponding to each face.
+
+  Returns:
+    (num_tri_faces, 3) int array of vertex indices for each triangular face.
+  """
+  n = np.sum(face_lengths) - 2 * len(face_lengths)
+  out = np.empty((n, 3), dtype=face_values.dtype)
+  faces = np.split(face_values, np.cumsum(face_lengths[:-1]))
+  assert(len(faces[-1]) == face_lengths[-1])
+
+  start = 0
+  for face in faces:
+    end = start + len(face) - 2
+    out[start:end, 0] = face[0]
+    out[start:end, 1] = face[1:-1]
+    out[start:end, 2] = face[2:]
+    start = end
+  return out

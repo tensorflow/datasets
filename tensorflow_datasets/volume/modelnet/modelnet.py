@@ -13,7 +13,64 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""ModelNet datasets."""
+"""ModelNet datasets.
+
+The provided `DatasetBuilder`s correspond to the
+[base modelnet dataset](http://modelnet.cs.princeton.edu/). The 10-class and
+40-class variants are implemented as separate `DatasetBuilder`s to ensure only
+the relevant data is downloaded.
+
+These builders provide the greatest versatility in terms of configurations. We
+provide 4 base configurations:
+
+* `poly_mesh`: the raw polygon mesh provided in each `.off` file. Because each
+face can have any number of vertices, we store `face_values` as a single list
+of vertex indices and `face_lengths`. The original face lists can be recovered
+using `tf.RaggedTensor.from_row_lengths(face_values, face_lengths)`.
+* `tri_mesh`: the original polygon mesh where each face is split into triangular faces.
+* `cloud{N}`, `N in (100, 500)`: sampled surface points with normals
+
+You can implement your own config by extending
+`tensorflow_datasets.volume.modelnet.modelnet.ModelnetConfig`, implementing the
+`input_features` and `load` methods and appending an instance to the relevant
+builder classes `BUILDER_CONFIGS` list.
+
+```python
+import tensorflow_datasets as tfds
+import tensorflow_datasets.volume.modelnet.modelnet as mn
+
+
+class MyModelnetConfig(mn.ModelnetConfig):
+  def input_features(self):
+    # TODO
+    ...
+
+  def load(self, fp)
+    # fp is a file-like object with `.off` encoding.
+    # TODO
+    ...
+
+my_config = MyModelnetConfig(
+    name="my_modelnet_config",
+    description="my custom modelnet config",
+    input_key="custom_input")
+
+
+mn.Modelnet40.BUILDER_CONFIGS.append(my_config)
+tfds.load("modelnet40/my_modelnet_config")
+```
+
+## ModelnetAligned40
+
+Similar to `Modelnet40` but using the aligned version of the dataset. Custom
+configs can also be applied here
+
+## ModelnetSampled
+
+The dataset provided by [Pointnet++](http://stanford.edu/~rqi/pointnet2/)
+authors consisting of pre-sampled point clouds with normals. Since the download
+is the same, we provide the number of classes in separate configs.
+"""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -30,19 +87,33 @@ from tensorflow_datasets.core import utils as core_utils
 import tensorflow_datasets.public_api as tfds
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.volume.utils import off
-from tensorflow_datasets.volume.utils import tri
 
 _URL_BASE = "http://modelnet.cs.princeton.edu/"
 
 
 def _load_off_data(fp):
+  # trimesh doesn't give direct access to the polygon mesh
   data = off.OffObject.from_file(fp)
   vertices = data.vertices.astype(np.float32)
-  vertices /= np.max(np.linalg.norm(vertices, axis=-1))  # prevents overflow
+  # rescale/recenter
+  mins = np.min(vertices, axis=0)
+  maxs = np.max(vertices, axis=0)
+  center = (mins + maxs) / 2
+  vertices -= center
+  vertices /= np.max(maxs - mins)
   face_values = data.face_values.astype(np.int64)
   face_lengths = data.face_lengths.astype(np.int64)
   return vertices, face_values, face_lengths
+
+
+def _load_off_mesh(fp):
+  # we could use trimesh here, but given we already have _load_off_data we use
+  # triangulated faces to remove the required dependency for `tri_mesh` config.
+  vertices, face_values, face_lengths = _load_off_data(fp)
+  faces = off.triangulated_faces(face_values, face_lengths)
+  return vertices, faces
 
 
 def _cloud_features(num_points):
@@ -56,17 +127,18 @@ def _cloud_features(num_points):
 
 class ModelnetConfig(tfds.core.BuilderConfig):
   def __init__(
-      self, name, description_prefix, input_key=None):
-    if input_key is None:
-      input_key = name
+      self, name, description, input_key, version=core_utils.Version(0, 0, 2),
+      **kwargs):
     self.input_key = input_key
-    description = (
-      "%s data for ModelNet object dataset" % description_prefix)
     super(ModelnetConfig, self).__init__(
-      name=name, description=description, version=core_utils.Version("0.0.1"))
+      name=name, description=description, version=version, **kwargs)
 
   @abc.abstractmethod
   def input_features(self):
+    raise NotImplementedError
+
+  @abc.abstractmethod
+  def load(self, fp):
     raise NotImplementedError
 
 
@@ -74,7 +146,9 @@ class PolyMeshModelnetConfig(ModelnetConfig):
   def __init__(self, **kwargs):
     super(PolyMeshModelnetConfig, self).__init__(
       name="poly_mesh",
-      description_prefix="Polygon mesh", **kwargs)
+      input_key="mesh",
+      description="Polygon mesh",
+      **kwargs)
 
   def input_features(self):
     return tfds.features.FeaturesDict({
@@ -83,9 +157,10 @@ class PolyMeshModelnetConfig(ModelnetConfig):
         "face_lengths": tfds.features.Tensor(shape=(None,), dtype=tf.int64),
     })
 
-  def map(self, vertices, face_values, face_lengths):
+  def load(self, fp):
+    vertices, face_values, face_lengths = _load_off_data(fp)
     return dict(
-      vertices=vertices,
+      vertices=vertices.astype(np.float32),
       face_values=face_values,
       face_lengths=face_lengths,
     )
@@ -94,7 +169,7 @@ class PolyMeshModelnetConfig(ModelnetConfig):
 class TriMeshModelnetConfig(ModelnetConfig):
   def __init__(self, **kwargs):
     super(TriMeshModelnetConfig, self).__init__(
-      name="tri_mesh", description_prefix="Triangular mesh",
+      name="tri_mesh", input_key="mesh", description="Triangular mesh",
       **kwargs)
 
   def input_features(self):
@@ -103,8 +178,8 @@ class TriMeshModelnetConfig(ModelnetConfig):
         "faces": tfds.features.Tensor(shape=(None, 3), dtype=tf.int64),
       })
 
-  def map(self, vertices, face_values, face_lengths):
-    faces = tri.triangulated_faces(face_values, face_lengths)
+  def load(self, fp):
+    vertices, faces = _load_off_mesh(fp)
     return dict(vertices=vertices, faces=faces)
 
 
@@ -112,18 +187,24 @@ class PointCloudModelnetConfig(ModelnetConfig):
   def __init__(self, num_points, **kwargs):
     super(PointCloudModelnetConfig, self).__init__(
       name="cloud%d" % num_points,
-      description_prefix="%d element point cloud" % num_points,
+      description="%d element point cloud" % num_points,
       input_key="cloud", **kwargs)
     self.num_points = num_points
 
   def input_features(self):
     return _cloud_features(self.num_points)
 
-  def map(self, vertices, face_values, face_lengths):
-    faces = tri.triangulated_faces(face_values, face_lengths)
-    _, _, positions, normals = tri.sample_faces(
-        vertices, faces, self.num_points, include_normals=True)
-    return dict(positions=positions, normals=normals)
+  def load(self, fp):
+    trimesh = lazy_imports.trimesh
+    vertices, faces = _load_off_mesh(fp)
+    mesh = trimesh.Trimesh(vertices=vertices, faces=faces)  # pylint: disable=no-member
+    positions, face_indices = trimesh.sample.sample_surface( # pylint: disable=no-member
+      mesh, self.num_points)
+    normals = mesh.face_normals[face_indices]
+    return dict(
+      positions=positions.astype(np.float32),
+      normals=normals.astype(np.float32),
+    )
 
 
 class ModelnetSampledConfig(tfds.core.BuilderConfig):
@@ -148,25 +229,6 @@ class ModelnetSampledConfig(tfds.core.BuilderConfig):
 def _class_names_path(num_classes):
   return tfds.core.get_tfds_path(os.path.join(
       "volume", "modelnet", "class_names%d.txt" % num_classes))
-
-
-def load_class_names(num_classes):
-  """Load class names corresponding to the given number of classes.
-
-  Args:
-    num_classes: int, one of 10, 40
-
-  Returns:
-    list of length `num_classes` with string descriptors corresponding to
-    the class indices.
-  """
-  class_names_path = _class_names_path(num_classes)
-  assert(tf.io.gfile.exists(class_names_path))
-  with tf.io.gfile.GFile(class_names_path, "rb") as fp:
-    class_names = fp.read().split("\n")
-  class_names = [c for c in class_names if c != ""]
-  assert(len(class_names) == num_classes)
-  return class_names
 
 
 def _modelnet_info(builder):
@@ -243,6 +305,7 @@ class Modelnet10(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, dl_manager, archive_res, split_name):
     config = self.builder_config
     input_key = config.input_key
+
     for path, fp in dl_manager.iter_archive(archive_res):
       if not path.endswith(".off"):
         continue
@@ -250,7 +313,7 @@ class Modelnet10(tfds.core.GeneratorBasedBuilder):
       if split != split_name:
         continue
 
-      inputs = config.map(*_load_off_data(fp))
+      inputs = config.load(fp)
       yield {
         input_key: inputs,
         "example_index": int(fn.split("_")[-1][:-4]) - 1,

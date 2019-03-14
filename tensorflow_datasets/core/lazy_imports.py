@@ -84,6 +84,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def trimesh(cls):
+    return _try_import("trimesh")
+
+  @utils.classproperty
+  @classmethod
   def os(cls):
     """For testing purposes only."""
     return _try_import("os")
