@@ -181,7 +181,7 @@ class _Downloader(object):
       if not url.startswith("ftp"):
         iterator = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
       else:
-        iterator = iter(lambda: response.read(10), b'')
+        iterator = iter(lambda: response.read(io.DEFAULT_BUFFER_SIZE), b'')
 
       for block in iterator:
         size += len(block)
