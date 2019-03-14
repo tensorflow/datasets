@@ -279,5 +279,5 @@ def rgetattr(obj, attr, *args):
 
 def free_disk_size(directory):
   stat = os.statvfs(directory)
-  free_disk_size = (stat.f_bavail * stat.f_frsize) / 1024
+  free_disk_size = (stat.f_bavail * stat.f_frsize)
   return free_disk_size
