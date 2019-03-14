@@ -275,3 +275,9 @@ def rgetattr(obj, attr, *args):
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
   return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def free_disk_size(directory):
+  stat = os.statvfs(directory)
+  free_disk_size = (stat.f_bavail * stat.f_frsize) / 1024
+  return free_disk_size
