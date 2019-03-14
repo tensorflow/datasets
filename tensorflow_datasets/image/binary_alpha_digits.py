@@ -73,7 +73,7 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
         for i in range(len(mat['dat'])):
             label = mat['classlabels'][0][i].item()
             for j in range(len(mat['dat'][i])):
-                image = mat['dat'][i][j].reshape(20, 16, 1).astype(np.uint8)      
+                image = mat['dat'][i][j].reshape(20, 16, 1)
                 yield {
                     "label": label,
                     "image": image
