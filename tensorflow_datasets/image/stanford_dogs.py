@@ -106,7 +106,6 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
                 annotation_file_name = os.path.join(root, fname)
                 xml_file_list[fname] = ET.parse(annotation_file_name)
 
-        
         return [
             tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -129,7 +128,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
         
     
     def _generate_examples(self, archive, file_names, annotation_files):
-        """Generate horses or humans images and labels given the directory path
+        """Generate dog images, labels, bbox attributes given the directory path
 
         Args:
         archive: object that iterates over the zip
