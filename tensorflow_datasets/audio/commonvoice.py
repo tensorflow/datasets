@@ -257,5 +257,5 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
           "upvotes": int(row["up_votes"]) if len(row["up_votes"]) > 0 else 0,
           "downvotes": int(row["down_votes"]) if len(row["down_votes"]) > 0 else 0,
           "age": row["age"],
-          "gender": row["gender"],
+          "gender": row["gender"] if row["gender"] is not None and len(row["gender"]) >0 else 'None',
           "accent": row["accent"] if row["accent"] is not None and len(row["accent"]) > 0 else 'None'}
