@@ -84,6 +84,12 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def h5py(cls):
+    return _try_import("h5py")
+
+
+  @utils.classproperty
+  @classmethod
   def os(cls):
     """For testing purposes only."""
     return _try_import("os")

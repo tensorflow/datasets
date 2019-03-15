@@ -82,6 +82,7 @@ DATASET_EXTRAS = {
         'opencv-python==3.4.0.14'
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'patch_camelyon': ['h5py'],
     'svhn': ['scipy'],
 }
 

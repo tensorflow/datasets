@@ -34,6 +34,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "pyplot",
       "scipy",
       "scipy_io",
+      "h5py"
   )
   def test_import(self, module_name):
     getattr(tfds.core.lazy_imports, module_name)
