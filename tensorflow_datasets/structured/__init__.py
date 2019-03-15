@@ -16,3 +16,4 @@
 """Structured datasets."""
 
 from tensorflow_datasets.structured.titanic import Titanic
+from tensorflow_datasets.structured.rock_you import RockYou
