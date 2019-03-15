@@ -28,7 +28,7 @@ _SPLITS = {
   tfds.Split.TRAIN: "train",
   tfds.Split.TEST: "test",
   tfds.Split.VALIDATION: "validated"}
-_GENDER_CLASSES = ["male", "female"]
+_GENDER_CLASSES = ["male", "female", "other", "None"]
 _ACCENT_CLASSES = {
   "en": [
     'canada',
