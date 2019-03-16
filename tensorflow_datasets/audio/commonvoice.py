@@ -250,7 +250,7 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(label_path) as file_:
       dataset = csv.DictReader(file_, delimiter="\t")
       for row in dataset:
-        if tf.io.gfile.Exists(os.path.join(audio_path, "%s.mp3" % row["path"])):
+        if tf.io.gfile.exists(os.path.join(audio_path, "%s.mp3" % row["path"])):
           yield {
             "client_id": row["client_id"],
             "voice": os.path.join(audio_path, "%s.mp3" % row["path"]),
