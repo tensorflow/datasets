@@ -250,12 +250,13 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(label_path) as file_:
       dataset = csv.DictReader(file_, delimiter="\t")
       for row in dataset:
-        yield {
-          "client_id": row["client_id"],
-          "voice": os.path.join(audio_path, "%s.mp3" % row["path"]),
-          "sentence": row["sentence"],
-          "upvotes": int(row["up_votes"]) if len(row["up_votes"]) > 0 else 0,
-          "downvotes": int(row["down_votes"]) if len(row["down_votes"]) > 0 else 0,
-          "age": row["age"],
-          "gender": row["gender"] if row["gender"] is not None and len(row["gender"]) >0 else 'None',
-          "accent": row["accent"] if row["accent"] is not None and len(row["accent"]) > 0 else 'None'}
+        if tf.io.gfile.Exists(os.path.join(audio_path, "%s.mp3" % row["path"])):
+          yield {
+            "client_id": row["client_id"],
+            "voice": os.path.join(audio_path, "%s.mp3" % row["path"]),
+            "sentence": row["sentence"],
+            "upvotes": int(row["up_votes"]) if len(row["up_votes"]) > 0 else 0,
+            "downvotes": int(row["down_votes"]) if len(row["down_votes"]) > 0 else 0,
+            "age": row["age"],
+            "gender": row["gender"] if row["gender"] is not None and len(row["gender"]) >0 else 'None',
+            "accent": row["accent"] if row["accent"] is not None and len(row["accent"]) > 0 else 'None'}
