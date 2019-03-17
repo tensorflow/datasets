@@ -24,7 +24,7 @@ import six.moves.urllib as urllib
 import tensorflow_datasets.public_api as tfds
 
 # MNIST constants
-_PCAM_URL = "http://yann.lecun.com/exdb/mnist/"
+_PCAM_URL = "https://github.com/basveeling/pcam"
 _CAM_URL = "https://camelyon17.grand-challenge.org/"
 _PCAM_TRAIN_DATA_FILENAME = "camelyonpatch_level_2_split_train_x.h5.gz"
 _PCAM_TRAIN_LABELS_FILENAME = "camelyonpatch_level_2_split_train_y.h5.gz"
