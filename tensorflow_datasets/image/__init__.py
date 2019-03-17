@@ -30,6 +30,7 @@ from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.lsun import Lsun
+from tensorflow_datasets.image.mini_imagenet import MiniImagenet
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
 from tensorflow_datasets.image.mnist import KMNIST
