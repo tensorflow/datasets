@@ -52,7 +52,7 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager):
         """Define Splits for training data"""
 
-        path = dl_manager.download({"train":urllib.parse.urljoin(_URL,"binaryalphadigs.mat")})
+        path = dl_manager.download({"train":urllib.parse.urljoin(_URL, "binaryalphadigs.mat")})
         
         return [
             tfds.core.SplitGenerator(
@@ -62,15 +62,13 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
                     "data_dir_path": path["train"],
                 },
             )
-    
-    ]
+        ]
 
     def _generate_examples(self, data_dir_path):
         """Generate Splits for training data"""
 
         with tf.io.gfile.GFile(data_dir_path, "rb") as f:
             mat = tfds.core.lazy_imports.scipy_io.loadmat(f)
-        #mat = tfds.core.lazy_imports.scipy_io.loadmat(data_dir_path)
         for i in range(len(mat['dat'])):
             label = mat['classlabels'][0][i].item()
             for j in range(len(mat['dat'][i])):
