@@ -57,7 +57,7 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
                 name="train",
                 num_shards=10,
                 gen_kwargs={
-                    "data_dir_path": path,
+                    "data_dir_path": tf.compat.as_str(path),
                 },
             )
     
