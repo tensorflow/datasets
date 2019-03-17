@@ -20,6 +20,7 @@ from __future__ import print_function
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from collections import defaultdict
+import numpy as np
 import os
 import re
 
@@ -58,6 +59,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=200),
             "label_name": tfds.features.Text(),
             "bbox": tfds.features.BBoxFeature(),
+            "segmentation_mask": tfds.features.Image(shape=(None, None, 1)),
         }),
         supervised_keys=("image", "label"),
         urls=_URL,
@@ -123,8 +125,6 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
 
         """
 
-        bbox_attrib = ["left", "top", "right", "bottom"]
-
         for fname, fobj in archive:
             res = _NAME_RE.match(fname)
             if not res or not fname.split("/", 1)[-1] in file_names:
@@ -133,12 +133,13 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
             label_name = res.group(3).lower()
             label_key = int(res.group(2))-1
             file_name = res.group(4).split(".")[0]
+            segmentation_mask = annotations[file_name][1]
 
-            height, width = annotations[file_name][1].shape
+            height, width = segmentation_mask.shape
 
             # BBox attributes in range of 0.0 to 1.0
             normalize_bbox = lambda bbox_side, image_side: int(bbox_side)/image_side
-            print(file_name)
+
             yield {"image": fobj, 
                 "image/filename":fname, 
                 "label": label_key,
@@ -148,5 +149,6 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
                     xmin=normalize_bbox(annotations[file_name][0]["left"], width),
                     ymax=normalize_bbox(annotations[file_name][0]["bottom"], height),
                     xmax=normalize_bbox(annotations[file_name][0]["right"], width),),
+                "segmentation_mask": segmentation_mask[:, :, np.newaxis],
                 }
             
