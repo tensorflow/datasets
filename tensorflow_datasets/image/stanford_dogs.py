@@ -102,7 +102,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
 
             if "train" in fname: 
                 train_list, train_mat_arr = parse_mat_file(full_file_name)
-                label_names = set([element.split('/')[-2].lower() 
+                label_names = set([element.split('/')[-2].lower()
                                   for element in train_mat_arr['file_list']])
             elif "test" in fname:
                 test_list, _ = parse_mat_file(full_file_name)
@@ -123,7 +123,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
                 "file_names": train_list,
                 "annotation_files": xml_file_list,
             }),
-            
+
             tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=1,
@@ -133,7 +133,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
                 "annotation_files": xml_file_list,
             })
         ]
-     
+
     def _generate_examples(self, archive, file_names, annotation_files):
         """Generate dog images, labels, bbox attributes given the directory path
 
@@ -187,9 +187,8 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
                                         attributes["width"][0]),
                 )
 
-            yield {"image": fobj, 
-                   "image/filename": fname, 
-                   "label": label_names.index(label), 
-                   "objects": [{"bbox": build_box(attributes, n)} 
+            yield {"image": fobj,
+                   "image/filename": fname,
+                   "label": label_names.index(label),
+                   "objects": [{"bbox": build_box(attributes, n)}
                                for n in range(len(attributes["xmin"]))]}
-            
