@@ -18,22 +18,23 @@ _DESCRIPTION = ("The dataset consists of 10015 dermatoscopic images which"
                 "benign keratosis-like lesions (solar lentigines / seborrheic "
                 "keratoses and lichen-planus like keratoses, bkl), dermatofibroma (df), "
                 "melanoma (mel), melanocytic nevi (nv) and vascular lesions "
-                "(angiomas, angiokeratomas, pyogenic granulomas and hemorrhage, vasc)")
+                "(angiomas, angiokeratomas, pyogenic granulomas and hemorrhage, vasc). "
+                "The dataset is available to the public under the CC BY-NC 4.0 license.")
 
 _IMAGE_SHAPE = (450, 600, 3)
 
 _NAMES = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc'] 
 
 _CITATION = """\
-@data{DVN/DBW86T_2018,
-author = {Tschandl, Philipp},
-publisher = {Harvard Dataverse},
-title = "{The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions}",
-UNF = {UNF:6:IQTf5Cb+3EzwZ95U5r0hnQ==},
+@article{Tschandl2018_HAM10000,
+author = {Philipp Tschandl and Cliff Rosendahl and Harald Kittler},
+title = {The {HAM10000} dataset, a large collection of multi-source 
+    dermatoscopic images of common pigmented skin lesions},
+journal = {Sci. Data},
+volume = {5},
 year = {2018},
-version = {V1},
-doi = {10.7910/DVN/DBW86T},
-url = {https://doi.org/10.7910/DVN/DBW86T}
+pages = {180161},
+doi = {https://doi.org/10.1038/sdata.2018.161}
 }
 """
 
@@ -105,7 +106,7 @@ def readCsv(labels_dir_path):
 
 def return_map(csv_dict):
     """Function to return the corresponding label from filename"""
-    
+
     return {row['image_id']: row['dx'] for row in csv_dict}
 
     
