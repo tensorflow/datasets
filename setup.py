@@ -73,6 +73,7 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     'cats_vs_dogs': ['matplotlib'],
     'svhn': ['scipy'],
+    'binary_alpha_digits':['scipy'],
     'colorectal_histology': ['Pillow'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
