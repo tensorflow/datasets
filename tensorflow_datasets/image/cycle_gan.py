@@ -97,6 +97,7 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=["https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"],
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
