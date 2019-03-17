@@ -13,7 +13,7 @@ class BinaryAlphaDigitsTest(tfds_test.DatasetBuilderTestCase):
       }
 
     DL_EXTRACT_RESULT = {
-        "train": tf.compat.as_str("train_20x16.mat",encoding='utf-8'),
+        tf.compat.as_str("'train':'train_20x16.mat'",encoding='utf-8'),
       }
  
 
