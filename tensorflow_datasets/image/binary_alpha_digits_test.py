@@ -13,7 +13,7 @@ class BinaryAlphaDigitsTest(tfds_test.DatasetBuilderTestCase):
       }
 
     DL_EXTRACT_RESULT = {
-        'train':'binaryalphadigstest.mat'
+        'path':'binaryalphadigstest.mat'
       }
  
 
