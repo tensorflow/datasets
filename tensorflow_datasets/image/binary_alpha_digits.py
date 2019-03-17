@@ -67,7 +67,7 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
         """Generate Splits for training data"""
 
         with tf.io.gfile.GFile(data_dir_path, "rb") as f:
-            mat = tfds.core.lazy_imports.scipy_io.loadmat(tf.compat.as_str(f))
+            mat = tfds.core.lazy_imports.scipy_io.loadmat(f)
         #mat = tfds.core.lazy_imports.scipy_io.loadmat(data_dir_path)
         for i in range(len(mat['dat'])):
             label = mat['classlabels'][0][i].item()
