@@ -13,7 +13,7 @@ class BinaryAlphaDigitsTest(tfds_test.DatasetBuilderTestCase):
       }
 
     DL_EXTRACT_RESULT = {
-        'path':'cs.nyu.edu_roweis_binaryalphadigsfFW4oOKS7kmPGCZWrnDeE7-6SFEs-PKqV1boaFghKHg.mat'
+        'train':'binaryalphadigs.mat'
       }
  
 

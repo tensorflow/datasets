@@ -3,12 +3,13 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+import six.moves.urllib as urllib
 import os
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = "https://cs.nyu.edu/~roweis/data/binaryalphadigs.mat"
+_URL = "https://cs.nyu.edu/~roweis/data/"
 
 _DESCRIPTION = ("Binary 20x16 digits of '0' through '9' and capital 'A' " 
                 "through 'Z'. 39 examples of each class.")
@@ -51,13 +52,14 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager):
         """Define Splits for training data"""
 
-        path = dl_manager.download(_URL)
+        path = dl_manager.download({"train":urllib.parse.urljoin(_URL,"binaryalphadigs.mat")})
+        
         return [
             tfds.core.SplitGenerator(
                 name="train",
                 num_shards=10,
                 gen_kwargs={
-                    "data_dir_path": path,
+                    "data_dir_path": path["train"],
                 },
             )
     
