@@ -70,6 +70,7 @@ DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/quickdraw_labels.txt',
+    'url_checksums/*',
 ]
 
 DATASET_EXTRAS = {
