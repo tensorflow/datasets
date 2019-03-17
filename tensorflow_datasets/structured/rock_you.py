@@ -29,7 +29,7 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-This dataset contains passwords that were leaked or stolen from from various sites. The author of this dataset states that "I'm hosting them because it seems like nobody else does (hopefully it isn't because hosting them is illegal :)). Naturally, I'm not the one who stole these; I simply found them online, removed any names/email addresses/etc.". This dataset is used to train Machine Learning models for password guessing and cracking. 
+This dataset contains 14,344,391 passwords that were leaked or stolen from from various sites. The author of this dataset states that "I'm hosting them because it seems like nobody else does (hopefully it isn't because hosting them is illegal :)). Naturally, I'm not the one who stole these; I simply found them online, removed any names/email addresses/etc.". This dataset is used to train Machine Learning models for password guessing and cracking. 
 """
 
 _DOWNLOAD_URL = "https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt"
@@ -56,7 +56,7 @@ class RockYou(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name="train",
-            num_shards=10,
+            num_shards=1,
             gen_kwargs={
                 "path": dl_path, 
             },
@@ -64,10 +64,13 @@ class RockYou(tfds.core.GeneratorBasedBuilder):
     ] 
 
   def _generate_examples(self, path):
-    with tf.gfile.Open(path, "rb") as f: 
-      for bline in f:
-        yield{
-            "password": bline.strip(),   
-        }
+    
+    with tf.io.gfile.GFile(path, "rb") as f: 
+      blines = f.readlines()
+      
+    for bline in blines:
+      yield{
+          "password": bline.strip(),   
+      }
 
 
