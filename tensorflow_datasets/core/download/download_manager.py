@@ -177,9 +177,10 @@ class DownloadManager(object):
     return sum(size for size, sha256 in self._recorded_sizes_checksums.values())
 
   @util.build_synchronize_decorator()
-  def _record_size_checksum(self, url, size, checksum):
-    """Store in file size/checksum of downloaded file."""
-    checksums.store_checksums(self._dataset_name, url, size, checksum)
+  def _record_sizes_checksums(self):
+    """Store in file when recorded size/checksum of downloaded files."""
+    checksums.store_checksums(self._dataset_name,
+                              self._recorded_sizes_checksums)
 
   def _handle_download_result(self, resource, tmp_dir_path, sha256, dl_size):
     """Store dled file to definitive place, write INFO file, return path."""
@@ -190,7 +191,7 @@ class DownloadManager(object):
     tmp_path = os.path.join(tmp_dir_path, original_fname)
     self._recorded_sizes_checksums[resource.url] = (dl_size, sha256)
     if self._register_checksums:
-      self._record_size_checksum(resource.url, dl_size, sha256)
+      self._record_sizes_checksums()
     elif (dl_size, sha256) != self._sizes_checksums.get(resource.url, None):
       raise NonMatchingChecksumError(resource.url, tmp_path)
     resource.write_info_file(self._dataset_name, original_fname)
