@@ -63,3 +63,5 @@ from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
 from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
 __all__ = public_api.__all__
 
+from tensorflow_datasets.version import __version__
+
