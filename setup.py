@@ -32,6 +32,12 @@ if nightly:
 
 DOCLINES = __doc__.split('\n')
 
+# To enable importing version.py directly, we add its path to sys.path.
+version_path = os.path.join(
+    os.path.dirname(__file__), 'tensorflow_datasets')
+sys.path.append(version_path)
+from version import __version__ 
+
 REQUIRED_PKGS = [
     'absl-py',
     'future',
