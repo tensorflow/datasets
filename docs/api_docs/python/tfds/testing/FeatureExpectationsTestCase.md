@@ -999,8 +999,8 @@ using assertSameStructure.
 
 #### Args:
 
-* <b>`first`</b>: A string contining JSON to decode and compare to second.
-* <b>`second`</b>: A string contining JSON to decode and compare to first.
+* <b>`first`</b>: A string containing a JSON to decode and compare to second.
+* <b>`second`</b>: A string containing a JSON to decode and compare to first.
 * <b>`msg`</b>: Additional text to include in the failure message.
 
 <h3 id="assertLen"><code>assertLen</code></h3>
@@ -1660,7 +1660,7 @@ comparing to zero, or by comparing that the difference between each value
 in the two sequences is more than the given delta.
 
 Note that decimal places (from zero) are usually not the same as significant
-digits (measured from the most signficant digit).
+digits (measured from the most significant digit).
 
 If the two sequences compare equal then they will automatically compare
 almost equal.
@@ -2248,7 +2248,7 @@ gcs_access(
 getExternalLinks()
 ```
 
-Return any externallinks that the user has provided.
+Return any external links that the user has provided.
 
 #### Returns:
 
