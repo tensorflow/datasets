@@ -17,20 +17,21 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import caltech_birds
+from tensorflow_datasets.image import caltech_birds
 import tensorflow_datasets.testing as tfds_test
 
-class StanfordDogsTest(tfds_test.DatasetBuilderTestCase):
+
+class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
 
     DATASET_CLASS = caltech_birds.CaltechBirds2010
 
-    SPLITS = { # No. of train and test samples
+    SPLITS = {  # No. of train and test samples
       'train': 9,
       'test': 6,
     }
 
     DL_EXTRACT_RESULT = ['Lists.tgz', 'Annotations.tgz', 'Images.tar.gz']
-    
+
+
 if __name__ == '__main__':
     tfds_test.test_main()
-
