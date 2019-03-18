@@ -96,7 +96,7 @@ Allow to access the underlying attributes directly.
 decode_example(tfexample_data)
 ```
 
-Wrapper arround SequenceDict.
+Wrapper around SequenceDict.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
