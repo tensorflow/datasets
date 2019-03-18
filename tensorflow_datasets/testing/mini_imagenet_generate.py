@@ -1,3 +1,18 @@
+# coding=utf-8
+# Copyright 2019 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -127,7 +142,7 @@ def dump_data(dict_data_train, dict_data_validation, dict_data_test, path):
     # save train data
     path_train = os.path.join(path, "mini-imagenet-cache-train.pkl")
     with tf.io.gfile.GFile(path_train, "wb") as f:
-        pickle.dump(dict_data_train, f, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(dict_data_train, f, 2)
 
     # save validation data
     path_validation = os.path.join(path, "mini-imagenet-cache-val.pkl")
@@ -143,4 +158,4 @@ def dump_data(dict_data_train, dict_data_validation, dict_data_test, path):
 if __name__ == "__main__":
     data = generate_data(_NUM_CLASSES_TRAIN, _NUM_CLASSES_VALIDATION,
                          _NUM_CLASSES_TEST, _NUM_IMAGES_PER_CLASS)
-    dump_data(*data, _PATH_DUMMY_DATA)
+    dump_data(*data, path=_PATH_DUMMY_DATA)
