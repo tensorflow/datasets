@@ -30,6 +30,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -52,7 +53,9 @@ class DownloadConfig(object):
                manual_dir=None,
                download_mode=None,
                compute_stats=None,
-               max_examples_per_split=None):
+               max_examples_per_split=None,
+               register_checksums=False,
+              ):
     """Constructs a `DownloadConfig`.
 
     Args:
@@ -68,6 +71,8 @@ class DownloadConfig(object):
         statistics over the generated data. Defaults to `AUTO`.
       max_examples_per_split: `int`, optional max number of examples to write
         into each split.
+      register_checksums: `bool`, defaults to False. If True, checksum of
+        downloaded files are recorded.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
@@ -76,6 +81,7 @@ class DownloadConfig(object):
     self.compute_stats = util.ComputeStatsMode(
         compute_stats or util.ComputeStatsMode.AUTO)
     self.max_examples_per_split = max_examples_per_split
+    self.register_checksums = register_checksums
 
 
 class DownloadManager(object):
@@ -132,9 +138,9 @@ class DownloadManager(object):
                extract_dir=None,
                manual_dir=None,
                dataset_name=None,
-               checksums=None,
                force_download=False,
-               force_extraction=False):
+               force_extraction=False,
+               register_checksums=False):
     """Download manager constructor.
 
     Args:
@@ -143,18 +149,12 @@ class DownloadManager(object):
       manual_dir: `str`, path to manually downloaded/extracted data directory.
       dataset_name: `str`, name of dataset this instance will be used for. If
         provided, downloads will contain which datasets they were used for.
-      checksums: `dict<str url, str sha256>`, url to sha256 of resource.
-        Only URLs present are checked.
-        If empty, checksum of (already) downloaded files is computed and can
-        then be retrieved using `recorded_download_checksums` property.
       force_download: `bool`, default to False. If True, always [re]download.
       force_extraction: `bool`, default to False. If True, always [re]extract.
+      register_checksums: `bool`, default to False. If True, dl checksums aren't
+        checked, but stored into file.
     """
     self._dataset_name = dataset_name
-    self._checksums = checksums or {}
-    self._record_checksum_size = not checksums
-    self._recorded_download_checksums = {}
-    self._download_sizes = {}
     self._download_dir = os.path.expanduser(download_dir)
     self._extract_dir = os.path.expanduser(
         extract_dir or os.path.join(download_dir, 'extracted'))
@@ -165,16 +165,21 @@ class DownloadManager(object):
     self._force_extraction = force_extraction
     self._extractor = extractor.get_extractor()
     self._downloader = downloader.get_downloader()
+    self._register_checksums = register_checksums
+    # All known URLs: {url: (size, checksum)}
+    self._sizes_checksums = checksums.get_all_sizes_checksums()
+    # To record what is being used: {url: (size, checksum)}
+    self._recorded_sizes_checksums = {}
 
   @property
-  def recorded_download_checksums(self):
-    """Returns checksums for downloaded urls."""
-    return dict(self._recorded_download_checksums)
+  def downloaded_size(self):
+    """Returns the total size of downloaded files."""
+    return sum(size for size, sha256 in self._recorded_sizes_checksums.values())
 
-  @property
-  def download_sizes(self):
-    """Returns sizes (in bytes) for downloaded urls."""
-    return dict(self._download_sizes)
+  @util.build_synchronize_decorator()
+  def _record_size_checksum(self, url, size, checksum):
+    """Store in file size/checksum of downloaded file."""
+    checksums.store_checksums(self._dataset_name, url, size, checksum)
 
   def _handle_download_result(self, resource, tmp_dir_path, sha256, dl_size):
     """Store dled file to definitive place, write INFO file, return path."""
@@ -183,11 +188,10 @@ class DownloadManager(object):
       raise AssertionError('More than one file in %s.' % tmp_dir_path)
     original_fname = fnames[0]
     tmp_path = os.path.join(tmp_dir_path, original_fname)
-    if self._record_checksum_size:
-      resource.sha256 = sha256
-      self._download_sizes[resource.url] = dl_size
-      self._recorded_download_checksums[resource.url] = sha256
-    elif self._checksums[resource.url] != sha256:
+    self._recorded_sizes_checksums[resource.url] = (dl_size, sha256)
+    if self._register_checksums:
+      self._record_size_checksum(resource.url, dl_size, sha256)
+    elif (dl_size, sha256) != self._sizes_checksums.get(resource.url, None):
       raise NonMatchingChecksumError(resource.url, tmp_path)
     resource.write_info_file(self._dataset_name, original_fname)
     # Unconditionally overwrite because either file doesn't exist or
@@ -204,23 +208,22 @@ class DownloadManager(object):
     """Download resource, returns Promise->path to downloaded file."""
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
-    resource.sha256 = self._checksums.get(resource.url, None)
+    url = resource.url
+    if url in self._sizes_checksums:
+      resource.sha256 = self._sizes_checksums[url][1]
     if not resource.path:
       resource.path = os.path.join(self._download_dir, resource.fname)
     if (not self._force_download and resource.sha256 and
         resource.exists_locally()):
-      logging.info('URL %s already downloaded: reusing %s.', resource.url,
-                   resource.path)
-      self._recorded_download_checksums[resource.url] = resource.sha256
-      self._download_sizes[resource.url] = (
-          tf.io.gfile.stat(resource.path).length)
+      logging.info('URL %s already downloaded: reusing %s.', url, resource.path)
+      self._recorded_sizes_checksums[url] = self._sizes_checksums[url]
       return promise.Promise.resolve(resource.path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
     # manages the temp directory of downloader.
     tmp_dir_path = '%s.tmp.%s' % (resource.path, uuid.uuid4().hex)
     tf.io.gfile.makedirs(tmp_dir_path)
-    logging.info('Downloading %s into %s...', resource.url, tmp_dir_path)
+    logging.info('Downloading %s into %s...', url, tmp_dir_path)
 
     def callback(val):
       checksum, dl_size = val
