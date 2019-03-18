@@ -103,7 +103,7 @@ Allow to access the underlying attributes directly.
 decode_example(tfexample_data)
 ```
 
-Wrapper arround SequenceDict.
+Wrapper around SequenceDict.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -111,7 +111,7 @@ Wrapper arround SequenceDict.
 encode_example(example_data)
 ```
 
-Wrapper arround SequenceDict.
+Wrapper around SequenceDict.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
