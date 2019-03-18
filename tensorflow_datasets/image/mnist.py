@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import io
 import os
 import numpy as np
 import six.moves.urllib as urllib
@@ -245,7 +246,7 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 
 
 class EMNIST(MNIST):
-
+  URL = "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
   VERSION = tfds.core.Version('1.0.1')
 
   BUILDER_CONFIGS = [
@@ -297,14 +298,6 @@ class EMNIST(MNIST):
           description="EMNIST MNIST:  70,000 characters. 10 balanced classes.",
           version="1.0.1",
       ),
-      EMNISTConfig(
-          name="test",
-          class_number=62,
-          train_examples=10,
-          test_examples=2,
-          description="EMNIST test data config.",
-          version="1.0.1",
-      ),
   ]
 
   def _info(self):
@@ -326,38 +319,14 @@ class EMNIST(MNIST):
       )
 
   def _split_generators(self, dl_manager):
-
     filenames = {
-        "train_data": 'emnist-{}-train-images-idx3-ubyte'.format(self.builder_config.name),
-        "train_labels": 'emnist-{}-train-labels-idx1-ubyte'.format(self.builder_config.name),
-        "test_data": 'emnist-{}-test-images-idx3-ubyte'.format(self.builder_config.name),
-        "test_labels": 'emnist-{}-test-labels-idx1-ubyte'.format(self.builder_config.name),
+        "train_data": 'emnist-{}-train-images-idx3-ubyte.gz'.format(self.builder_config.name),
+        "train_labels": 'emnist-{}-train-labels-idx1-ubyte.gz'.format(self.builder_config.name),
+        "test_data": 'emnist-{}-test-images-idx3-ubyte.gz'.format(self.builder_config.name),
+        "test_labels": 'emnist-{}-test-labels-idx1-ubyte.gz'.format(self.builder_config.name),
     }
 
-    dir_name = dl_manager.manual_dir
-
-    if not tf.io.gfile.exists(os.path.join(dir_name, filenames['train_data'])):
-      # The current tfds.core.download_manager is unable to extract multiple and nested files.
-      # We'll add soon!
-      msg = "You must download and extract the dataset files manually and place them in : "
-      msg += dl_manager.manual_dir
-      msg += """File tree must be like this :\n
-               .
-               ├── emnist
-               │   ├── emnist-byclass-train-images-idx3-ubyte
-               │   ├── emnist-byclass-train-labels-idx3-ubyte
-               │   ├── emnist-byclass-test-images-idx3-ubyte
-               │   ├── emnist-byclass-test-labels-idx3-ubyte
-               │   ├── emnist-bymerge-train-images-idx3-ubyte
-               │   ├── emnist-bymerge-train-labels-idx3-ubyte
-               │   ├── emnist-bymerge-test-images-idx3-ubyte
-               │   ├── emnist-bymerge-test-labels-idx3-ubyte
-               │   ├── .......
-               │   ├── .....
-               │   ├── ...
-               │   ├──
-            """
-      raise FileNotFoundError(msg.replace("               ", ""))
+    dir_name = os.path.join(dl_manager.download_and_extract(self.URL), "gzip")
 
     return [
         tfds.core.SplitGenerator(
@@ -365,8 +334,8 @@ class EMNIST(MNIST):
             num_shards=10,
             gen_kwargs=dict(
                 num_examples=self.builder_config.train_examples,
-                data_path=os.path.join(dir_name, filenames['train_data']),
-                label_path=os.path.join(dir_name, filenames["train_labels"]),
+                data_path=dl_manager.extract(os.path.join(dir_name, filenames["train_data"])),
+                label_path=dl_manager.extract(os.path.join(dir_name, filenames["train_labels"])),
             )
 
         ),
@@ -376,8 +345,8 @@ class EMNIST(MNIST):
             num_shards=1,
             gen_kwargs=dict(
                 num_examples=self.builder_config.test_examples,
-                data_path=os.path.join(dir_name, filenames['test_data']),
-                label_path=os.path.join(dir_name, filenames["test_labels"]),
+                data_path=dl_manager.extract(os.path.join(dir_name, filenames["test_data"])),
+                label_path=dl_manager.extract(os.path.join(dir_name, filenames["test_labels"])),
             )
         )
     ]

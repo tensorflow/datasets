@@ -21,7 +21,7 @@ from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import mnist
-
+from tensorflow_datasets.image.mnist import EMNIST, EMNISTConfig
 
 # testing/mnist.py generates fake input data
 
@@ -32,14 +32,14 @@ mnist._TEST_EXAMPLES = 2
 class MNISTTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = mnist.MNIST
   SPLITS = {
-      "train": 10,
-      "test": 2,
+    "train": 10,
+    "test": 2,
   }
   DL_EXTRACT_RESULT = {
-      "train_data": "train-image",
-      "train_labels": "train-label",
-      "test_data": "test-image",
-      "test_labels": "test-label",
+    "train_data": "train-image",
+    "train_labels": "train-label",
+    "test_data": "test-image",
+    "test_labels": "test-label",
   }
 
 
@@ -51,9 +51,23 @@ class KMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.KMNIST
 
 
+_emnist_test_builder_config = EMNIST.BUILDER_CONFIGS = [
+  EMNISTConfig(
+    name="test",
+    class_number=200,
+    train_examples=10,
+    test_examples=2,
+    description="EMNIST test data config.",
+    version="1.0.1",
+  ),
+]
+
+
 class EMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.EMNIST
-  BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
+  DATASET_CLASS.BUILDER_CONFIGS = _emnist_test_builder_config
+  DL_EXTRACT_RESULT = "gzip.zip"
+  OVERLAPPING_SPLITS = ["train"]
 
 
 if __name__ == "__main__":
