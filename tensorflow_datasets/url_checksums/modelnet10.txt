@@ -1,0 +1,1 @@
+http://vision.princeton.edu/projects/2014/3DShapeNets/ModelNet10.zip 473402300 9d8679435fc07d1d26f13009878db164a7aa8ea5e7ea3c8880e42794b7307d51

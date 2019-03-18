@@ -35,6 +35,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'future',
+    'numpy',
     'promise',
     'protobuf>=3.6.1',
     'requests',
@@ -69,19 +70,21 @@ DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/quickdraw_labels.txt',
+    'url_checksums/*',
 ]
 
 DATASET_EXTRAS = {
-    'librispeech': ['pydub'],  # and ffmpeg installed
+    # In alphabetical order
     'cats_vs_dogs': ['matplotlib'],
-    'svhn': ['scipy'],
     'colorectal_histology': ['Pillow'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
         'opencv-python==3.4.0.14'
     ],
+    'librispeech': ['pydub'],  # and ffmpeg installed
     'modelnet': 'trimesh',
+    'svhn': ['scipy'],
 }
 
 all_dataset_extras = []

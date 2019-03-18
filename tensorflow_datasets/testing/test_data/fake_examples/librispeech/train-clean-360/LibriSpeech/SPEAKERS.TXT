@@ -1,0 +1,26 @@
+; Some pipe(|) separated metadata about all LibriVox readers, whose work was used
+; in the corpus.
+;
+; The meaning of the fields in left-to-right order is as follows:
+;
+; reader_id: the ID of the reader in the LibriVox's database
+; gender: 'F' for female, 'M' for male
+; subset: the corpus subset to which the reader's audio is assigned
+; duration: total number of minutes of speech by the reader, included in the corpus
+; name: the name under which the reader is registered in LibriVox
+;
+;ID  |SEX| SUBSET           |MINUTES| NAME
+11   | F | dev-clean        | 25.03 | Wolverine
+12   | M | dev-clean        | 25.11 | Hulk
+13   | F | dev-other        | 25.04 | Zimmer
+14   | M | dev-other        | 25.19 | Carla
+15   | F | test-clean       | 30.07 | Groot
+16   | M | test-clean       | 25.14 | Tony
+17   | F | test-other       | 25.23 | Anita
+18   | M | test-other       | 30.16 | John
+19   | F | train-clean-100  | 25.08 | Denny
+20   | M | train-clean-100  | 20.14 | Sean
+21   | F | train-clean-360  | 25.03 | Kristin
+22   | M | train-clean-360  | 30.10 | Linton
+23   | F | train-other-500  | 25.19 | Annie
+24   | M | train-other-500  | 23.79 | Martin
