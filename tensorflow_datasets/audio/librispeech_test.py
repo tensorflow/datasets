@@ -26,11 +26,11 @@ import tensorflow_datasets.public_api as tfds
 
 class LibrispeechTest100(testing.DatasetBuilderTestCase):
   DATASET_CLASS = librispeech.Librispeech
-  BUILDER_CONFIG_NAMES_TO_TEST = ["clean-100"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["clean100_plain_text", "clean100_bytes"]
   SPLITS = {
       "train": 2,
-      "test": 1,
-      "dev": 1,
+      "validation": 2,
+      "test": 2,
   }
 
   DL_EXTRACT_RESULT = {
@@ -42,11 +42,11 @@ class LibrispeechTest100(testing.DatasetBuilderTestCase):
 
 class LibrispeechTest360(testing.DatasetBuilderTestCase):
   DATASET_CLASS = librispeech.Librispeech
-  BUILDER_CONFIG_NAMES_TO_TEST = ["clean-360"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["clean360_plain_text"]
   SPLITS = {
-      "train": 1,
-      "test": 1,
-      "dev": 1,
+      "train": 4,
+      "validation": 2,
+      "test": 2,
   }
 
   DL_EXTRACT_RESULT = {

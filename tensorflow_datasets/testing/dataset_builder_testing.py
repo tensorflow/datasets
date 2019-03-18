@@ -188,7 +188,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
+    # If configs specified, ensure they are all valid
+    for config in self.BUILDER_CONFIG_NAMES_TO_TEST:
+      assert config in self.builder.builder_configs, (
+          "Config %s specified in test does not exist. Available:\n%s" % (
+              config, list(self.builder.builder_configs)))
+
     configs = self.builder.BUILDER_CONFIGS
+    print("Total configs: %d" % len(configs))
     if configs:
       for config in configs:
         # Skip the configs that are not in the list.
