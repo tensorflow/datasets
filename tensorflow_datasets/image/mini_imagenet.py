@@ -1,3 +1,7 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import tensorflow_datasets.public_api as tfds
 import os
 import tensorflow as tf
@@ -115,7 +119,7 @@ class MiniImagenet(tfds.core.GeneratorBasedBuilder):
             idx_class_start = _NUM_CLASSES_TRAIN + _NUM_CLASSES_VALIDATION
 
         # read data
-        with tf.gfile.GFile(path_data, "rb") as f:
+        with tf.io.gfile.GFile(path_data, "rb") as f:
             data = pickle.load(f)
             img_data = data["image_data"]
             class_dict = data["class_dict"]
