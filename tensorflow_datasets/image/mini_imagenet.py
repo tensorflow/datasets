@@ -134,20 +134,28 @@ class MiniImagenet(tfds.core.GeneratorBasedBuilder):
             idx_class_start = _NUM_CLASSES_TRAIN + _NUM_CLASSES_VALIDATION
 
         # read data
-        with tf.io.gfile.GFile(path_data, "rb") as f:
-            data = pickle.load(f)
-            img_data = data["image_data"]
-            class_dict = data["class_dict"]
+        try:
+            with tf.io.gfile.GFile(path_data, "rb") as f:
+                data = pickle.load(f)
+        except UnicodeDecodeError as e:
+            with tf.io.gfile.GFile(path_data, "rb") as f:
+                data = pickle.load(f, encoding="latin1")
+        except Exception as e:
+            print("Unable to load data ", path_data, ":", e)
+            raise
 
-            for idx_class, (class_name, idx_img_list) in \
-                    enumerate(class_dict.items()):
-                idx_class_split = idx_class + idx_class_start
-                for idx_img in idx_img_list:
-                    img = img_data[idx_img]
+        img_data = data["image_data"]
+        class_dict = data["class_dict"]
 
-                    dict_data = {
-                        "image": img,
-                        "label": idx_class_split
-                    }
+        for idx_class, (class_name, idx_img_list) in \
+                enumerate(class_dict.items()):
+            idx_class_split = idx_class + idx_class_start
+            for idx_img in idx_img_list:
+                img = img_data[idx_img]
 
-                    yield dict_data
+                dict_data = {
+                    "image": img,
+                    "label": idx_class_split
+                }
+
+                yield dict_data
