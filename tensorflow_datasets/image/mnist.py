@@ -38,7 +38,6 @@ _MNIST_IMAGE_SHAPE = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
 _TRAIN_EXAMPLES = 60000
 _TEST_EXAMPLES = 10000
 
-
 _MNIST_CITATION = """\
 @article{lecun2010mnist,
   title={MNIST handwritten digit database},
@@ -48,7 +47,6 @@ _MNIST_CITATION = """\
   year={2010}
 }
 """
-
 
 _FASHION_MNIST_CITATION = """\
 @article{DBLP:journals/corr/abs-1708-07747,
@@ -69,7 +67,6 @@ _FASHION_MNIST_CITATION = """\
 }
 """
 
-
 _K_MNIST_CITATION = """\
   @online{clanuwat2018deep,
   author       = {Tarin Clanuwat and Mikel Bober-Irizar and Asanobu Kitamoto and Alex Lamb and Kazuaki Yamamoto and David Ha},
@@ -81,7 +78,6 @@ _K_MNIST_CITATION = """\
   eprint       = {cs.CV/1812.01718},
 }
 """
-
 
 _EMNIST_CITATION = """\
 @article{cohen_afshar_tapson_schaik_2017, 
@@ -122,9 +118,8 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
         "test_data": _MNIST_TEST_DATA_FILENAME,
         "test_labels": _MNIST_TEST_LABELS_FILENAME,
     }
-    mnist_files = dl_manager.download_and_extract({
-        k: urllib.parse.urljoin(self.URL, v) for k, v in filenames.items()
-    })
+    mnist_files = dl_manager.download_and_extract(
+        {k: urllib.parse.urljoin(self.URL, v) for k, v in filenames.items()})
 
     # MNIST provides TRAIN and TEST splits, not a VALIDATION split, so we only
     # write the TRAIN and TEST splits to disk.
@@ -185,11 +180,13 @@ class FashionMNIST(MNIST):
                      "grayscale image, associated with a label from 10 "
                      "classes."),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(names=[
-                "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
-                "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"
-            ]),
+            "image":
+                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+            "label":
+                tfds.features.ClassLabel(names=[
+                    "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
+                    "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"
+                ]),
         }),
         supervised_keys=("image", "label"),
         urls=["https://github.com/zalandoresearch/fashion-mnist"],
@@ -212,15 +209,18 @@ class KMNIST(MNIST):
                      "character to represent each of the 10 rows of Hiragana "
                      "when creating Kuzushiji-MNIST."),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(names=[
-                "o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"
-            ]),
+            "image":
+                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+            "label":
+                tfds.features.ClassLabel(names=[
+                    "o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"
+                ]),
         }),
         supervised_keys=("image", "label"),
         urls=["http://codh.rois.ac.jp/kmnist/index.html.en"],
         citation=_K_MNIST_CITATION,
     )
+
 
 class EMNISTConfig(tfds.core.BuilderConfig):
   """BuilderConfig for EMNIST CONFIG."""
@@ -230,12 +230,10 @@ class EMNISTConfig(tfds.core.BuilderConfig):
     """BuilderConfig for EMNIST class number.
 
     Args:
-      class_number: There are six different splits provided in this dataset. And have
-      different class numbers.
-
-      train_examples, test_examples: So in these have different test and train character
-      numbers.
-
+      class_number: There are six different splits provided in this dataset. And
+        have different class numbers.
+      train_examples: number of train examples
+      test_examples: number of test examples
       **kwargs: keyword arguments forwarded to super.
     """
     super(EMNISTConfig, self).__init__(**kwargs)
@@ -245,8 +243,9 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 
 
 class EMNIST(MNIST):
+  """Emnist dataset."""
   URL = "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
-  VERSION = tfds.core.Version('1.0.1')
+  VERSION = tfds.core.Version("1.0.1")
 
   BUILDER_CONFIGS = [
       EMNISTConfig(
@@ -262,7 +261,7 @@ class EMNIST(MNIST):
           class_number=47,
           train_examples=697932,
           test_examples=116323,
-          description="EMNIST ByMerge: 	814,255 characters. 47 unbalanced classes.",
+          description="EMNIST ByMerge: 814,255 characters. 47 unbalanced classes.",
           version="1.0.1",
       ),
       EMNISTConfig(
@@ -300,22 +299,24 @@ class EMNIST(MNIST):
   ]
 
   def _info(self):
-      return tfds.core.DatasetInfo(
-          builder=self,
-          description=("The EMNIST dataset is a set of handwritten character digits"
-                       "derived from the NIST Special Database 19  and converted to"
-                       "a 28x28 pixel image format and dataset structure that directly"
-                       "matches the MNIST dataset."
-),
-          features=tfds.features.FeaturesDict({
-              "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
-              "label": tfds.features.ClassLabel(num_classes=self.builder_config.class_number),
-
-          }),
-          supervised_keys=("image", "label"),
-          urls=["https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"],
-          citation=_EMNIST_CITATION,
-      )
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=(
+            "The EMNIST dataset is a set of handwritten character digits"
+            "derived from the NIST Special Database 19 and converted to"
+            "a 28x28 pixel image format and dataset structure that directly"
+            "matches the MNIST dataset."),
+        features=tfds.features.FeaturesDict({
+            "image":
+                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+            "label":
+                tfds.features.ClassLabel(
+                    num_classes=self.builder_config.class_number),
+        }),
+        supervised_keys=("image", "label"),
+        urls=["https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"],
+        citation=_EMNIST_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     filenames = {
@@ -338,7 +339,6 @@ class EMNIST(MNIST):
             )
 
         ),
-
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=1,
@@ -349,7 +349,6 @@ class EMNIST(MNIST):
             )
         )
     ]
-
 
 
 def _extract_mnist_images(image_filepath, num_images):

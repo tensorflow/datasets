@@ -59,7 +59,7 @@ flags.DEFINE_integer(
     "builder_config_id", None,
     "If given 1 dataset with BUILDER_CONFIGS, id of config to build.")
 
-flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Were to place the data.")
+flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Where to place the data.")
 flags.DEFINE_string("download_dir", None, "Where to place downloads.")
 flags.DEFINE_string("extract_dir", None, "Where to extract files.")
 flags.DEFINE_string(
@@ -74,6 +74,10 @@ flags.DEFINE_enum(
 flags.DEFINE_integer(
     "max_examples_per_split", None,
     "optional max number of examples to write into each split (for testing).")
+
+# Development flags
+flags.DEFINE_boolean("register_checksums", False,
+                     "If True, store size and checksum of downloaded files.")
 
 # Debug flags
 flags.DEFINE_boolean("debug", False,
@@ -92,6 +96,7 @@ def download_config():
       # TODO(b/116270825): Add flag to force extraction / preparation.
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=FLAGS.max_examples_per_split,
+      register_checksums=FLAGS.register_checksums,
   )
 
 
@@ -136,6 +141,7 @@ def main(_):
       raise ValueError(
           "--builder_config_id can only be used with datasets with configs")
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
+    logging.info("Running download_and_prepare for config: %s", config.name)
     builder_for_config = tfds.builder(
         builder.name, data_dir=FLAGS.data_dir, config=config)
     download_and_prepare(builder_for_config)

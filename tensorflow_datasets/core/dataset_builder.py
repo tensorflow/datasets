@@ -161,6 +161,10 @@ class DatasetBuilder(object):
       logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
 
+  @property
+  def data_dir(self):
+    return self._data_dir
+
   @utils.memoized_property
   def info(self):
     """`tfds.core.DatasetInfo` for this builder."""
@@ -235,9 +239,7 @@ class DatasetBuilder(object):
         else:  # Mode is forced or stats do not exists yet
           logging.info("Computing statistics.")
           self.info.compute_dynamic_properties()
-        # Set checksums of downloaded (or cached) files, and size:
-        self.info.download_checksums = dl_manager.recorded_download_checksums
-        self.info.size_in_bytes = sum(dl_manager.download_sizes.values())
+        self.info.size_in_bytes = dl_manager.downloaded_size
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)
 
@@ -447,12 +449,12 @@ class DatasetBuilder(object):
 
     return download.DownloadManager(
         dataset_name=self.name,
-        checksums=self.info.download_checksums,
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
+        register_checksums=download_config.register_checksums,
     )
 
   @property
