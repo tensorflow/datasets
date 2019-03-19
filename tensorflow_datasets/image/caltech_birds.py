@@ -44,7 +44,7 @@ Year = {2010}
 _IMAGES_URL = "http://www.vision.caltech.edu/visipedia-data/CUB-200/images.tgz"
 _SPLIT_URL = "http://www.vision.caltech.edu/visipedia-data/CUB-200/lists.tgz"
 _ANNOTATIONS_URL = "http://www.vision.caltech.edu/visipedia-data/CUB-200/annotations.tgz"
-_NAME_RE = re.compile(r"(\w*)/(\d*).(\w*)/(\w*.jpg)$")
+_NAME_RE = re.compile(r"((\w*)/)*(\d*).(\w*)/(\w*.jpg)$")
 
 
 class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
@@ -59,7 +59,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
                 description=_DESCRIPTION,
                 features=tfds.features.FeaturesDict({
                     # Images are of varying size
-                    # TODO: Need to add attributes and their annotations
+                    # TODO: Need to add part attributes and their annotations
                     "image": tfds.features.Image(),
                     "image/filename": tfds.features.Text(),
                     "label": tfds.features.ClassLabel(num_classes=200),
@@ -133,12 +133,15 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
 
         for fname, fobj in archive:
             res = _NAME_RE.match(fname)
-            if not res or not fname.split("/", 1)[-1] in file_names:
-                continue
 
-            label_name = res.group(3).lower()
-            label_key = int(res.group(2))-1
-            file_name = res.group(4).split(".")[0]
+            # Checking if filename is present in respective train/test list
+
+            if not res or not '/'.join(fname.split("/")[-2:]) in file_names:
+                continue
+            matches = res.groups()
+            label_name = matches[-2].lower()
+            label_key = int(matches[-3])-1
+            file_name = matches[-1].split(".")[0]
             segmentation_mask = annotations[file_name][1]
 
             height, width = segmentation_mask.shape
