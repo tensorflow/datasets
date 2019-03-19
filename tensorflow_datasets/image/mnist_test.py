@@ -21,7 +21,6 @@ from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import mnist
-from tensorflow_datasets.image.mnist import EMNIST, EMNISTConfig
 
 # testing/mnist.py generates fake input data
 
@@ -51,8 +50,8 @@ class KMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.KMNIST
 
 
-_emnist_test_builder_config = EMNIST.BUILDER_CONFIGS = [
-  EMNISTConfig(
+_emnist_test_builder_config = mnist.EMNIST.BUILDER_CONFIGS = [
+  mnist.EMNISTConfig(
     name="test",
     class_number=200,
     train_examples=10,
