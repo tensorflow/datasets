@@ -40,7 +40,7 @@ class LazyImporter(object):
   """Lazy importer for heavy dependencies.
 
   Some datasets require heavy dependencies for data generation. To allow for
-  the default installation to remain lean, those heavy depdencies are
+  the default installation to remain lean, those heavy dependencies are
   lazily imported here.
   """
 

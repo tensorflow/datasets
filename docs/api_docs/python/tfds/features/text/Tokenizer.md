@@ -44,7 +44,7 @@ i.e. `s == t.join(t.tokenize(s))`.
     all alphanumeric or all non-alphanumeric).
 * <b>`reserved_tokens`</b>: `list<str>`, a list of strings that, if any are in `s`,
     will be preserved as whole tokens, even if they contain mixed
-    alphnumeric/non-alphanumeric characters.
+    alphanumeric/non-alphanumeric characters.
 
 
 

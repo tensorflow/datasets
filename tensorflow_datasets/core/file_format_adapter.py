@@ -95,7 +95,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
   """
 
   def __init__(self, example_reading_spec):
-    """Construcs a TFRecordExampleAdapter.
+    """Constructs a TFRecordExampleAdapter.
 
     Args:
       example_reading_spec: `dict`, feature name to tf.FixedLenFeature or
@@ -139,7 +139,7 @@ class TFRecordSequenceExampleAdapter(TFRecordExampleAdapter):
   """
 
   def __init__(self, context_reading_spec, sequence_reading_spec):  # pylint: disable=super-init-not-called
-    """Construcs a TFRecordSequenceExampleAdapter.
+    """Constructs a TFRecordSequenceExampleAdapter.
 
     Args:
       context_reading_spec: `dict`, feature name to tf.FixedLenFeature or
