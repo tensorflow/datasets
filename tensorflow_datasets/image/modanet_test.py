@@ -13,27 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for horses or humans data loading."""
+"""Tests for ModaNet data loading."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.image import horses_or_humans
-import tensorflow_datasets.testing as tfds_test
-
-horses_or_humans._IMAGE_SHAPE = (None, None, 3)
+from tensorflow_datasets import testing
+from tensorflow_datasets.image import modanet
 
 
-class HorsesOrHumansTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = horses_or_humans.HorsesOrHumans
+class ModaNetTest(testing.DatasetBuilderTestCase):
+    DATASET_CLASS = modanet.ModaNet
 
-  SPLITS = {
-      'train': 2,
-      'test': 2,
-  }
+    SPLITS = {
+        'train': 10
+    }
 
-  DL_EXTRACT_RESULT = ['hoh_train.zip', 'hoh_test.zip']
+    DL_EXTRACT_RESULT = {
+        "train": "train.mat",
+    }
+
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+    testing.test_main()
