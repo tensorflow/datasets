@@ -105,7 +105,7 @@ EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 
 setup(
     name=project_name,
-    version=version,
+    version=__version__,
     description=DOCLINES[0],
     long_description='\n'.join(DOCLINES[2:]),
     author='Google Inc.',
