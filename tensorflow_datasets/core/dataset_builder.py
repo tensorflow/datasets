@@ -161,6 +161,10 @@ class DatasetBuilder(object):
       logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
 
+  @property
+  def data_dir(self):
+    return self._data_dir
+
   @utils.memoized_property
   def info(self):
     """`tfds.core.DatasetInfo` for this builder."""

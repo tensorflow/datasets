@@ -100,7 +100,7 @@ def get_all_sizes_checksums():
   return sizes_checksums
 
 
-def store_checksums(dataset_name, url, size, checksum):
+def store_checksums(dataset_name, sizes_checksums):
   """Store given checksums and sizes for specific dataset.
 
   Content of file is never disgarded, only updated. This is to ensure that if
@@ -110,17 +110,19 @@ def store_checksums(dataset_name, url, size, checksum):
   It is the responsibility of the caller not to call function multiple times in
   parallel for a given dataset.
 
+  Only original file content is updated. This means the entire set of new sizes
+  and checksums must be given at every call.
+
   Args:
-    dataset_name: `str`.
-    url: `str`, url to add to checksums file
-    size: `int`, size in bytes of file at URL.
-    checksum: `str`, checksum of file at URL.
+    dataset_name: string.
+    sizes_checksums: dict, {url: (size_in_bytes, checksum)}.
   """
   path = _get_path(dataset_name)
   original_data = _get_sizes_checksums(path)
-  if original_data.get(url, None) == (size, checksum):
+  new_data = original_data.copy()
+  new_data.update(sizes_checksums)
+  if original_data == new_data:
     return
-  data = sorted(list(original_data.items()) + [(url, (size, checksum))])
   with tf.io.gfile.GFile(path, 'w') as f:
-    for url_, (size_, checksum_) in data:
-      f.write('%s %s %s\n' % (url_, size_, checksum_))
+    for url, (size, checksum) in sorted(new_data.items()):
+      f.write('%s %s %s\n' % (url, size, checksum))
