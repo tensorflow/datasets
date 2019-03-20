@@ -165,9 +165,9 @@ def returnBbox(filename,image_dict):
         xmin= float(data['annotations'][0][i][0].item())
         ymax= float(data['annotations'][0][i][3].item())
         xmax= float(data['annotations'][0][i][1].item())
-        width,height = tfds.core.lazy_imports.pyplot.imread(image_dict[image_name]).size
-        # with tfds.core.lazy_imports.PIL_Image.open(image_dict[image_name]) as img:
-        #     width,height=img.size
+        #width,height = tfds.core.lazy_imports.pyplot.imread(image_dict[image_name]).size
+        with tfds.core.lazy_imports.PIL_Image.open(image_dict[image_name]) as img:
+            width,height=img.size
         bbox_dict[image_name] = tfds.features.BBox(ymin/height, xmin/width, ymax/height, xmax/width)
     return bbox_dict
 
