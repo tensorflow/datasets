@@ -14,9 +14,9 @@ class BinaryAlphaDigitsTest(tfds_test.DatasetBuilderTestCase):
       }
 
     DL_EXTRACT_RESULT = {
-        'train':'train/cars_train',
-        'test':'test/cars_test',
-        'extra':'extra/devkit'
+        'train':'train',
+        'test':'test',
+        'extra':'extra'
       }
  
 
