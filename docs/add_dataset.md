@@ -445,13 +445,26 @@ import to its subdirectory's `__init__.py`
 
 ### 2. Run `download_and_prepare` locally.
 
+If you're contributing the dataset to `tensorflow/datasets`, add a checksums
+file for the dataset. On first download, the `DownloadManager` will
+automatically add the sizes and checksums for all downloaded URLs to that file.
+This ensures that on subsequent data generation, the downloaded files are
+as expected.
+
+```sh
+touch tensorflow_datasets/url_checksums/my_new_dataset.txt
+```
+
 Run `download_and_prepare` locally to ensure that data generation works:
 
 ```
 # default data_dir is ~/tensorflow_datasets
 python -m tensorflow_datasets.scripts.download_and_prepare \
+  --register_checksums \
   --datasets=my_new_dataset
 ```
+
+Note that the `--register_checksums` flag must only be used while in development.
 
 Copy in the contents of the `dataset_info.json` file(s) to a [GitHub gist](https://gist.github.com/) and link to it in your pull request.
 
@@ -496,12 +509,12 @@ to be updated.
 dataset. It uses "fake examples" as test data that mimic the structure of the
 source dataset.
 
-The test data should be put in in
+The test data should be put in
 [`testing/test_data/fake_examples/`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples/)
 under the `my_dataset` directory and should mimic the source dataset artifacts
 as downloaded and extracted. It can be created manually or automatically with a
-script ([example
-script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
+script
+([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
 
 Make sure to use different data in your test data splits, as the test will
 fail if your dataset splits overlap.

@@ -64,13 +64,18 @@ class DownloaderTest(testing.TestCase):
         'get',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    absltest.mock.patch.object(
-        downloader.requests.Session,
-        'get',
-        lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
-    ).start()
     self.downloader._pbar_url = absltest.mock.MagicMock()
     self.downloader._pbar_dl_size = absltest.mock.MagicMock()
+
+    def write_fake_ftp_result(_, filename):
+      with open(filename, 'wb') as result:
+        result.write(self.response)
+
+    absltest.mock.patch.object(
+        downloader.urllib.request,
+        'urlretrieve',
+        write_fake_ftp_result,
+    ).start()
 
   def test_ok(self):
     promise = self.downloader.download(self.resource, self.tmp_dir)
@@ -122,6 +127,28 @@ class DownloaderTest(testing.TestCase):
       with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
         self.assertEqual(fname, f.read())
 
+  def test_ftp(self):
+    resource = resource_lib.Resource(
+        url='ftp://username:password@example.com/foo.tar.gz')
+    promise = self.downloader.download(resource, self.tmp_dir)
+    checksum, _ = promise.get()
+    self.assertEqual(checksum, self.resp_checksum)
+    with open(self.path, 'rb') as result:
+      self.assertEqual(result.read(), self.response)
+    self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
+
+  def test_ftp_error(self):
+    error = downloader.urllib.error.URLError('Problem serving file.')
+    absltest.mock.patch.object(
+        downloader.urllib.request,
+        'urlretrieve',
+        side_effect=error,
+    ).start()
+    resource = resource_lib.Resource(url='ftp://example.com/foo.tar.gz')
+    promise = self.downloader.download(resource, self.tmp_dir)
+    with self.assertRaises(downloader.urllib.error.URLError):
+      promise.get()
+
 
 class GetFilenameTest(testing.TestCase):
 
@@ -138,6 +165,7 @@ class GetFilenameTest(testing.TestCase):
     })
     res = downloader._get_filename(resp)
     self.assertEqual(res, 'hello.zip')
+
 
 if __name__ == '__main__':
   testing.test_main()

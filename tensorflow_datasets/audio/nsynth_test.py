@@ -13,24 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""FLoRes Nepali-English translation dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-from tensorflow_datasets.translate import flores
+"""Nsynth Dataset Builder test."""
+from tensorflow_datasets.audio import nsynth
+import tensorflow_datasets.testing as tfds_test
 
 
-class FloresTranslateNeen(flores.FloresTranslate):
-  """FLoRes Nepali-English translation dataset."""
+class NsynthTest(tfds_test.DatasetBuilderTestCase):
+  """Test Nsynth."""
+  DATASET_CLASS = nsynth.Nsynth
+  SPLITS = {"train": 3, "test": 3, "valid": 3}
+  DL_EXTRACT_RESULT = {
+      "train": "nsynth-train.tfrecord",
+      "test": "nsynth-test.tfrecord",
+      "valid": "nsynth-valid.tfrecord",
+      "instrument_labels": "nsynth-instrument_labels.txt"
+  }
 
-  def is_abstract(self):
-    return False
 
-  BUILDER_CONFIGS = [
-      flores.FloresConfig(
-          language_pair=("ne", "en"),
-          version="0.0.2",
-      ),
-  ]
+if __name__ == "__main__":
+  tfds_test.test_main()

@@ -15,7 +15,6 @@
 
 """Image datasets."""
 
-from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
@@ -32,7 +31,9 @@ from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.lsun import Lsun
+from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
+from tensorflow_datasets.image.mnist import KMNIST
 from tensorflow_datasets.image.mnist import MNIST
 from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4

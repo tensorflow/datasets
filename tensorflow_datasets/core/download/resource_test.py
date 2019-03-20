@@ -26,6 +26,7 @@ TAR = resource.ExtractMethod.TAR
 TAR_GZ = resource.ExtractMethod.TAR_GZ
 GZIP = resource.ExtractMethod.GZIP
 ZIP = resource.ExtractMethod.ZIP
+BZIP2 = resource.ExtractMethod.BZIP2
 
 
 class GuessExtractMethodTest(testing.TestCase):
@@ -37,6 +38,8 @@ class GuessExtractMethodTest(testing.TestCase):
         ('bar.tar.zip', ZIP),
         ('bar.gz.strange', NO_EXTRACT),
         ('bar.tar', TAR),
+        ('bar.tar.bz2', TAR),
+        ('bar.bz2', BZIP2),
     ]:
       res = resource._guess_extract_method(fname)
       self.assertEqual(res, expected_result, '(%s)->%s instead of %s' % (

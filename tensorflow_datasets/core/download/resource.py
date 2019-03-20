@@ -51,6 +51,7 @@ class ExtractMethod(enum.Enum):
   TAR_GZ = 3
   GZIP = 4
   ZIP = 5
+  BZIP2 = 6
 
 
 _EXTRACTION_METHOD_TO_EXTS = [
@@ -58,6 +59,7 @@ _EXTRACTION_METHOD_TO_EXTS = [
     (ExtractMethod.TAR, ['.tar', '.tar.bz2', '.tbz2', '.tbz', '.tb2']),
     (ExtractMethod.ZIP, ['.zip']),
     (ExtractMethod.GZIP, ['.gz']),
+    (ExtractMethod.BZIP2, ['.bz2']),
 ]
 
 _KNOWN_EXTENSIONS = [
