@@ -160,7 +160,7 @@ def returnBbox(filename,image_dict):
     bbox_dict = {}
     data = tfds.core.lazy_imports.scipy_io.loadmat(filename)
     for i in range(len(data['annotations'][0])):
-        image_name = "test" if "test" in filename else data['annotations'][0][i][5].item().split(".")[0]
+        image_name = data['annotations'][0][i][4].item().split(".")[0] if "test" in filename  else data['annotations'][0][i][5].item().split(".")[0]
         ymin= float(data['annotations'][0][i][1].item())
         xmin= float(data['annotations'][0][i][0].item())
         ymax= float(data['annotations'][0][i][3].item())
