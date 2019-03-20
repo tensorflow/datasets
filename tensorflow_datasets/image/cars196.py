@@ -141,9 +141,10 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
       mat = tfds.core.lazy_imports.scipy_io.loadmat(data_annotations_path)
       for i in range(len(mat['annotations'][0])):
           #-1 becuase class labels are index-1 based
+          image_name = mat['annotations'][0][i][4].item().split(".")[0] if "test" in data_annotations_path  else mat['annotations'][0][i][5].item().split(".")[0]
           label = 'test' if 'test' in data_annotations_path else _NAMES[mat['annotations'][0][i][4].item()-1] 
-          image = image_dict[mat['annotations'][0][i][5].item().split(".")[0]]
-          bbox = bbox_dict[mat['annotations'][0][i][5].item().split(".")[0]]
+          image = image_dict[image_name]
+          bbox = bbox_dict[image_name]
                
           yield {
                     "label": label,
