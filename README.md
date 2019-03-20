@@ -109,6 +109,13 @@ print(info)
             }
       """',
   )
+
+# Get details about the classes (number of classes and their names)
+class_labels = info.features['label']
+num_classes = class_labels.num_classes # 10
+names = class_labels.names # ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+name_of_class_5 = class_labels.int2str(5) # "5"
+index_of_class_named_5 = class_labels.str2int("5") # 5
 ```
 
 ### NumPy Usage with `tfds.as_numpy`
