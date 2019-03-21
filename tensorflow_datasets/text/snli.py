@@ -66,5 +66,38 @@ class SNLIConfig(tfds.core.BuilderConfig):
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
 
+class SNLI(tfds.core.GeneratorBasedBuilder):
+  """SNLI: The Stanford Natural Language Inference (SNLI) Corpus. Version 1.0"""
+
+  BUILDER_CONFIGS = [
+      SNLIConfig(
+          name="plain_text",
+          version="1.0.0",
+          description="Plain text",
+      ),
+  ]
+
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict({
+            "text":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
+            "hypothesis":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
+            "judgements":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
+        }),
+        # No default supervised_keys (as we have to pass both text
+        # and hypothesis as input).
+        supervised_keys=None,
+        urls=["https://nlp.stanford.edu/projects/snli/"],
+        citation=_CITATION,
+    )
+
 
 
