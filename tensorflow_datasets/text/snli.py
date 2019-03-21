@@ -99,5 +99,39 @@ class SNLI(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
+  def _vocab_text_gen(self, filepath):
+    for ex in self._generate_examples(filepath):
+      yield " ".join([ex["text"], ex["hypothesis"], ex["judgements"]])
+
+  def _split_generators(self, dl_manager):
+
+    downloaded_dir = dl_manager.download_and_extract(
+        "https://nlp.stanford.edu/projects/snli/snli_1.0.zip")
+    mnli_path = os.path.join(downloaded_dir, "snli_1.0")
+    train_path = os.path.join(mnli_path, "snli_1.0_train.txt")
+    # Using dev matched as the default for eval.
+    validation_path = os.path.join(mnli_path, "snli_1.0_dev.txt")
+
+    # Generate shared vocabulary
+    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
+    self.info.features["text"].maybe_build_from_corpus(
+        self._vocab_text_gen(train_path))
+    encoder = self.info.features["text"].encoder
+    # Use maybe_set_encoder because the encoder may have been restored from
+    # package data.
+    self.info.features["text"].maybe_set_encoder(encoder)
+    self.info.features["hypothesis"].maybe_set_encoder(encoder)
+    self.info.features["judgements"].maybe_set_encoder(encoder)
+
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            num_shards=10,
+            gen_kwargs={"filepath": train_path}),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            num_shards=1,
+            gen_kwargs={"filepath": validation_path}),
+    ]
 
 
