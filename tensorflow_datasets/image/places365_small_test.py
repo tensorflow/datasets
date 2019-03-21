@@ -17,7 +17,7 @@ class Places365SmallTest(tfds_test.DatasetBuilderTestCase):
     DL_EXTRACT_RESULT = {
         'train':'data_256',
         'test':'test_256',
-        'extra':'val_256'
+        'validation':'val_256'
       }
  
 
