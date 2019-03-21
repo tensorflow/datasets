@@ -27,11 +27,7 @@ class ModaNetTest(testing.DatasetBuilderTestCase):
     DATASET_CLASS = modanet.ModaNet
 
     SPLITS = {
-        'train': 10
-    }
-
-    DL_EXTRACT_RESULT = {
-        "train": "modanet.zip",
+        'train': 1
     }
 
 
