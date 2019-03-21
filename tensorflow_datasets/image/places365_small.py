@@ -7,6 +7,7 @@ import six.moves.urllib as urllib
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 import os
+import fnmatch
 import numpy as np
 
 _BASE_URL = "http://data.csail.mit.edu/places/places365/"
@@ -125,7 +126,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
                         for image_name in tf.io.gfile.listdir(class_dir):
                             image = os.path.join(class_dir,image_name)
                     else:
-                        for class_dir in tf.io.gfile.listdir(class_dir)
+                        for class_dir1 in tf.io.gfile.listdir(class_dir):
                             class_dir_path = os.path.join(class_dir,class_dir1)
                             for image_name in tf.io.gfile.listdir(class_dir_path):
                                 image = os.path.join(class_dir_path,image_name)
