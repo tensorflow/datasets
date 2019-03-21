@@ -12,7 +12,7 @@ import os
 import csv
 import numpy as np
 import gzip
-import pickle
+import pickle as pkl
 
 
 class TieredImagenet(tfds.core.GeneratorBasedBuilder):
@@ -45,7 +45,7 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
     """
 
     _BASE_URL = "https://github.com/renmengye/few-shot-ssl-public.git"
-    _DL_URL = "https://www.dropbox.com/s/2cezsh9wcwx4o4w/MiniImagenet.zip?dl=1"
+    _DL_URL = "https://drive.google.com/uc?export=download&id=1hqVbS2nhHXa51R9_aB6QDXeC0P2LQG_u"
     _IMAGE_SIZE_X = 84
     _IMAGE_SIZE_Y = 84
     _NUM_CLASSES = 34
@@ -72,7 +72,6 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager):
         """Downloads the data and defines the split."""
         extracted_path = dl_manager.download_and_extract(self._DL_URL)
-#        extracted_path = "D:/phd/experiments/all_datasets/tiered-imagenet/"
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
@@ -119,19 +118,20 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
                     "class_dict" (dict): class name to list of image indices.
                         value: (list of int, len=600)
         """
-
         # read data
-        with tf.gfile.GFile(images, "rb") as f:
-            img_data = pickle.load(f,encoding="latin1")
-        with tf.gfile.GFile(labels, "rb") as f:
-            label_data = pickle.load(f)
-            
-        for (class_name) in enumerate(label_data.items()):
-                img = img_data[0]
+        with open(labels, "rb") as f:
+          data = pkl.load(f, encoding='bytes')
+          _label_specific = data["label_specific"]
+          _label_general = data["label_general"]
+          _label_specific_str = data["label_specific_str"]
+          _label_general_str = data["label_general_str"]
 
-                dict_data = {
-                    "image": img,
-                    "label": idx_class_split
-                }
+        with np.load(images, mmap_mode="r", encoding='latin1') as data:
+            _images = data["images"]
 
-                yield dict_data
+        for i in range(0,len(_images)):
+            dict_data = {
+                "image": _images.get(i),
+                "label": _label_specific.get(i)
+            }
+        yield dict_data
