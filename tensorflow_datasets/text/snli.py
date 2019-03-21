@@ -49,3 +49,22 @@ as well as a resource for developing NLP models of any kind.
 """
 
 
+class SNLIConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for SNLI."""
+
+  @api_utils.disallow_positional_args
+  def __init__(self, text_encoder_config=None, **kwargs):
+    """BuilderConfig for SNLI.
+
+    Args:
+      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
+        for the `tfds.features.text.TextEncoder` used for the features feature.
+      **kwargs: keyword arguments forwarded to super.
+    """
+    super(SNLIConfig, self).__init__(**kwargs)
+    self.text_encoder_config = (
+        text_encoder_config or tfds.features.text.TextEncoderConfig())
+
+
+
+
