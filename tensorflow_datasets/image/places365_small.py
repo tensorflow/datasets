@@ -15,7 +15,7 @@ _TRAIN_URL = "train_256_places365standard.tar"
 _TEST_URL = "test_256.tar"
 _VALID_URL = "val_256.tar"
 
-_IMAGE_SHAPE = (256,256)
+_IMAGE_SHAPE = (256,256,3)
 
 _DESCRIPTION = ("The Places365-Standard dataset contains 1.8 million train images from 365 scene categories,which are used to train the Places365 CNNs."
 "There are 50 images per category in the validation set and 900 images per category in the testing set.")
