@@ -71,8 +71,8 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
         """Downloads the data and defines the split."""
-#        extracted_path = dl_manager.download_and_extract(self._DL_URL)
-        extracted_path = "D:/phd/experiments/all_datasets/tiered-imagenet/"
+        extracted_path = dl_manager.download_and_extract(self._DL_URL)
+#        extracted_path = "D:/phd/experiments/all_datasets/tiered-imagenet/"
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
