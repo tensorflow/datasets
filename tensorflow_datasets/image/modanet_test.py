@@ -31,7 +31,7 @@ class ModaNetTest(testing.DatasetBuilderTestCase):
     }
 
     DL_EXTRACT_RESULT = {
-        "train": "train.mat",
+        "train": "train.zip",
     }
 
 
