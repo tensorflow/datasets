@@ -117,8 +117,8 @@ class VisualDialog(tfds.core.GeneratorBasedBuilder):
                         result.append(os.path.join(root, name))
             return result
 
-        image_filedir = os.path.join(image["Train_Images"],"VisualDialog_test2018")
-        dialog_filedir = os.path.join(dialog["Train_Dialogs"],"visdial_1.0_test.json")
+        image_filedir = os.path.join(image["Train_Images"],"VisualDialog_train2018")
+        dialog_filedir = os.path.join(dialog["Train_Dialogs"],"visdial_1.0_train.json")
 
         with open(dialog_filedir) as data_file:
             data_f = json.load(data_file)
