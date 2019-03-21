@@ -14,7 +14,6 @@ import numpy as np
 import gzip
 import pickle as pkl
 
-
 class TieredImagenet(tfds.core.GeneratorBasedBuilder):
     """tiered_imagenet is larger subset  of Imagenet that uses splits defined for benchmarking few-shot learning approaches"""
     VERSION = tfds.core.Version("1.0.2")
@@ -52,7 +51,6 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
     _NUM_CLASSES_TRAIN = 20
     _NUM_CLASSES_VALIDATION = 6
     _NUM_CLASSES_TEST = 8
-
     _IMAGE_SHAPE = (
         _IMAGE_SIZE_X, _IMAGE_SIZE_Y, 3)
 
@@ -73,7 +71,7 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
         """Downloads the data and defines the split."""
         extracted_path = dl_manager.download_and_extract(self._DL_URL)
         return [
-            tfds.core.SplitGenerator(
+                tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
                 num_shards=1,
                 gen_kwargs={
@@ -119,12 +117,14 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
                         value: (list of int, len=600)
         """
         # read data
+        logging.info("Images path %s",images)
+        logging.info("Labels path %s",labels)        
         with open(labels, "rb") as f:
-          data = pkl.load(f, encoding='bytes')
-          _label_specific = data["label_specific"]
-          _label_general = data["label_general"]
-          _label_specific_str = data["label_specific_str"]
-          _label_general_str = data["label_general_str"]
+          data = pkl.load(f, encoding='latin1')
+          list_label_specific = data["label_specific"]
+          list_label_general = data["label_general"]
+          list_label_specific_str = data["label_specific_str"]
+          list_label_general_str = data["label_general_str"]
 
         with np.load(images, mmap_mode="r", encoding='latin1') as data:
             _images = data["images"]
@@ -132,6 +132,6 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
         for i in range(0,len(_images)):
             dict_data = {
                 "image": _images.get(i),
-                "label": _label_specific.get(i)
+                "label": list_label_specific.get(i)
             }
         yield dict_data
