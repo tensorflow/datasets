@@ -53,10 +53,9 @@ class VisualDialog(tfds.core.GeneratorBasedBuilder):
             builder = self,
             description="A large set of Images and Dialogs",
             features=tfds.features.FeaturesDict({
-                "label": tfds.features.ClassLabel(
-                    names=["image", "dialog"]),
+                "image": tfds.features.Image(encoding_format="jpeg"),
+                "label": tfds.features.Text(),
             }),
-            supervised_keys=("image", "dialog"),
             urls=["https://visualdialog.org/"],
             citation=_CITATION
         )
@@ -118,18 +117,16 @@ class VisualDialog(tfds.core.GeneratorBasedBuilder):
                         result.append(os.path.join(root, name))
             return result
 
-        image_filedir = os.path.join(image["Test_Images"],"VisualDialog_test2018")
-        dialog_filedir = os.path.join(dialog["Test_Dialogs"],"visdial_1.0_test.json")
+        image_filedir = os.path.join(image["Train_Images"],"VisualDialog_test2018")
+        dialog_filedir = os.path.join(dialog["Train_Dialogs"],"visdial_1.0_test.json")
 
         with open(dialog_filedir) as data_file:
             data_f = json.load(data_file)
             for details in data_f["data"]["dialogs"]:
                 pattern = '*'+ str(details["image_id"]) + '.jpg'
-                image = find(pattern, image_filedir.format(details["image_id"]))
-                dialog = details["dialog"]
-
+                image_ = find(pattern, image_filedir.format(details["image_id"]))
+                dialog_ = details["dialog"]
                 yield {
-                    "image" : image,
-                    "dialog" : dialog,
+                    "image": image_,
+                    "label": dialog_
                 }
-
