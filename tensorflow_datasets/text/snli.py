@@ -107,10 +107,10 @@ class SNLI(tfds.core.GeneratorBasedBuilder):
 
     downloaded_dir = dl_manager.download_and_extract(
         "https://nlp.stanford.edu/projects/snli/snli_1.0.zip")
-    mnli_path = os.path.join(downloaded_dir, "snli_1.0")
-    train_path = os.path.join(mnli_path, "snli_1.0_train.txt")
+    snli_path = os.path.join(downloaded_dir, "snli_1.0")
+    train_path = os.path.join(snli_path, "snli_1.0_train.txt")
     # Using dev matched as the default for eval.
-    validation_path = os.path.join(mnli_path, "snli_1.0_dev.txt")
+    validation_path = os.path.join(snli_path, "snli_1.0_dev.txt")
 
     # Generate shared vocabulary
     # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
@@ -134,4 +134,22 @@ class SNLI(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"filepath": validation_path}),
     ]
 
+  def _generate_examples(self, filepath):
+    """Generate snli examples.
+
+    Args:
+      filepath: a string
+    Yields:
+      dictionaries containing "text", "hypothesis" and "judgements" strings
+    """
+    for idx, line in enumerate(tf.io.gfile.GFile(filepath, "rb")):
+      if idx == 0: continue  # skip header
+      line = tf.compat.as_text(line.strip())
+      split_line = line.split("\t")
+      # Works for both splits even though dev has some extra human labels.
+      yield {
+          "text": split_line[5],
+          "hypothesis": split_line[6],
+          "judgements": split_line[0]
+      }
 
