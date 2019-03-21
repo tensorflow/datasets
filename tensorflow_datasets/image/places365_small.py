@@ -39,21 +39,21 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
 
-  @staticmethod
-  def getLabels():
-      with tf.io.gfile.GFile(_LABELS_FNAME) as f:
-        label_list = f.read().split("\n")
-      labels = []
-      for ele in label_list:
-        #Labels are in format /a/abbey 0
-        alphabet = ele[1]
-        m = ele.split('/'+alphabet+'/')[1] 
-        labels.append(m.split(" ")[0])
-      return labels
+#   @staticmethod
+#   def getLabels():
+#       with tf.io.gfile.GFile(_LABELS_FNAME) as f:
+#         label_list = f.read().split("\n")
+#       labels = []
+#       for ele in label_list:
+#         #Labels are in format /a/abbey 0
+#         alphabet = ele[1]
+#         m = ele.split('/'+alphabet+'/')[1] 
+#         labels.append(m.split(" ")[0])
+#       return labels
 
 
   def _info(self):
-      
+        names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
         return tfds.core.DatasetInfo(
             builder=self,
     
@@ -61,7 +61,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
             
             features=tfds.features.FeaturesDict({
                 "image":tfds.features.Image(shape=_IMAGE_SHAPE),
-                "label": tfds.features.ClassLabel(names = self.getLabels()),
+                "label": tfds.features.ClassLabel(names_file=names_file),
             }),
 
             supervised_keys=("image", "label"),
