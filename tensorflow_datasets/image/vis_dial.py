@@ -19,6 +19,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import json
+import os
+import re
+import fnmatch
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -59,41 +63,73 @@ class VisualDialog(tfds.core.GeneratorBasedBuilder):
 
 
     def _split_generators(self, dl_manager):
-        Train_Dialogs, Train_Images = dl_manager.download([_Train_Dialogs, _Train_Images])
-        Validation_Dialogs, Validation_Images = dl_manager.download([_Validation_Dialogs, _Validation_Images])
-        Test_Dialogs, Test_Images = dl_manager.download([_Test_Dialogs, _Test_Images])
+
+        extracted_json = dl_manager.download_and_extract({
+            "Train_Dialogs": _Train_Dialogs,
+            "Validation_Dialogs": _Validation_Dialogs,
+            "Test_Dialogs": _Test_Dialogs,
+        })
+        extracted_images = dl_manager.download_and_extract({
+            "Train_Images": _Train_Images,
+            "Validation_Images": _Validation_Images,
+            "Test_Images": _Test_Images,
+        })
 
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
                 num_shards=10,
                 gen_kwargs={
-                    "dialog": dl_manager.iter_archive(Train_Dialogs),
-                    "image": dl_manager.iter_archive(Train_Images),
+                    "image": extracted_images,
+                    "dialog": extracted_json,
                 }),
             tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
                 num_shards=10,
                 gen_kwargs={
-                    "dialog": dl_manager.iter_archive(Validation_Dialogs),
-                    "image": dl_manager.iter_archive(Validation_Images),
+                    "image": extracted_images,
+                    "dialog": extracted_json,
                 }),
             tfds.core.SplitGenerator(
                 name=tfds.Split.TEST,
                 num_shards=10,
                 gen_kwargs={
-                    "dialog": dl_manager.iter_archive(Test_Dialogs),
-                    "image": dl_manager.iter_archive(Test_Images),
+                    "image": extracted_images,
+                    "dialog": extracted_json,
                 }),
         ]
 
     def _generate_examples(self, image, dialog):
+        """Generate examples as dicts.
 
-        for label, image_paths in image:
-            for text in dialog:
+        Args:
+        image: `str`, directory containing the images folder
+        dialog: `str`, directory containing dialogs json
+
+        Yields:
+        Generator yielding the next samples
+        """
+
+        def find(pattern, path):
+            result = []
+            for root, dirs, files in os.walk(path):
+                for name in files:
+                    if fnmatch.fnmatch(name, pattern):
+                        result.append(os.path.join(root, name))
+            return result
+
+        image_filedir = os.path.join(image["Test_Images"],"VisualDialog_test2018")
+        dialog_filedir = os.path.join(dialog["Test_Dialogs"],"visdial_1.0_test.json")
+
+        with open(dialog_filedir) as data_file:
+            data_f = json.load(data_file)
+            for details in data_f["data"]["dialogs"]:
+                pattern = '*'+ str(details["image_id"]) + '.jpg'
+                image = find(pattern, image_filedir.format(details["image_id"]))
+                dialog = details["dialog"]
+
                 yield {
-                    "image": image_path,
-                    "label": label,
-                    "text": text,
+                    "image" : image,
+                    "dialog" : dialog,
                 }
 
