@@ -122,8 +122,8 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
                 alphabet_dir = os.path.join(data_dir_path,dir)
                 for class_name in tf.io.gfile.listdir(alphabet_dir):
                     class_dir = os.path.join(alphabet_dir,class_name)
-                    if fnmatch.fnmatch(class_name,"*.jpg"):
-                        for image_name in tf.io.gfile.listdir(class_dir):
+                    for image_name in tf.io.gfile.listdir(class_dir):
+                        if fnmatch.fnmatch(image_name,"*.jpg"):
                             image = os.path.join(class_dir,image_name)
                     else:
                         for class_dir1 in tf.io.gfile.listdir(class_dir):
