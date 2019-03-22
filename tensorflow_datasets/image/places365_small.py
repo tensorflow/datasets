@@ -137,7 +137,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
                                     image = os.path.join(class_dir_path,image_name)
                                     class_name = class_name+'/'+class_dir1
 
-                                    yield{
-                                        "image":image,
-                                        "label":class_name,
-                                    }
+                        yield{
+                            "image":image,
+                            "label":class_name,
+                        }
