@@ -20,7 +20,7 @@ from __future__ import print_function
 
 import os
 import tensorflow as tf
-from collections import OrderedDict
+import collections
 import tensorflow_datasets.public_api as tfds
 
 """dataset_url: https://github.com/ebay/modanet"""
@@ -51,7 +51,7 @@ _IMAGE_HEIGHT = 600
 _IMAGE_SHAPE = (_IMAGE_WIDTH, _IMAGE_HEIGHT, 3)
 
 # Labels per category
-_LABELS = OrderedDict({
+_LABELS = Collections.OrderedDict({
     "1": "Bag",
     "2": "Belt",
     "3": "Boots",
