@@ -48,6 +48,7 @@ systems for text, especially including those induced by representation learning 
 as well as a resource for developing NLP models of any kind.
 """
 
+ROOT_URL = "https://nlp.stanford.edu/projects/snli/snli_1.0.zip"
 
 class SNLIConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SNLI."""
@@ -105,11 +106,10 @@ class SNLI(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
 
-    downloaded_dir = dl_manager.download_and_extract(
-        "https://nlp.stanford.edu/projects/snli/snli_1.0.zip")
+    downloaded_dir = dl_manager.download_and_extract(ROOT_URL)
     snli_path = os.path.join(downloaded_dir, "snli_1.0")
     train_path = os.path.join(snli_path, "snli_1.0_train.txt")
-    # Using dev matched as the default for eval.
+    # Using dev as the default for eval.
     validation_path = os.path.join(snli_path, "snli_1.0_dev.txt")
 
     # Generate shared vocabulary
