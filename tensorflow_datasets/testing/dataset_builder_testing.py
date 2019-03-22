@@ -218,10 +218,21 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
+      if isinstance(builder, dataset_builder.BeamBasedBuilder):
+        import apache_beam as beam   # pylint: disable=g-import-not-at-top
+        # For Beam datasets, set-up the runner config
+        beam_runner = None
+        beam_options = beam.options.pipeline_options.PipelineOptions()
+      else:
+        beam_runner = None
+        beam_options = None
+
       # Skip computation, otherwise the computed number of samples won't match
       # the one restored from GCS
       download_config = download.DownloadConfig(
           compute_stats=download.ComputeStatsMode.FORCE,
+          beam_runner=beam_runner,
+          beam_options=beam_options,
       )
       builder.download_and_prepare(download_config=download_config)
 

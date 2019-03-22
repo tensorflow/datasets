@@ -55,7 +55,8 @@ class DownloadConfig(object):
                compute_stats=None,
                max_examples_per_split=None,
                register_checksums=False,
-              ):
+               beam_runner=None,
+               beam_options=None):
     """Constructs a `DownloadConfig`.
 
     Args:
@@ -73,6 +74,10 @@ class DownloadConfig(object):
         into each split.
       register_checksums: `bool`, defaults to False. If True, checksum of
         downloaded files are recorded.
+      beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
+        based on Beam for the generation.
+      beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
+        datasets based on Beam for the generation.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
@@ -82,6 +87,8 @@ class DownloadConfig(object):
         compute_stats or util.ComputeStatsMode.AUTO)
     self.max_examples_per_split = max_examples_per_split
     self.register_checksums = register_checksums
+    self.beam_runner = beam_runner
+    self.beam_options = beam_options
 
 
 class DownloadManager(object):

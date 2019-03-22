@@ -46,6 +46,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def apache_beam(cls):
+    return _try_import("apache_beam")
+
+  @utils.classproperty
+  @classmethod
   def cv2(cls):
     return _try_import("cv2")  # pylint: disable=unreachable
 
