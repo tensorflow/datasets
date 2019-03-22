@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""modanet:online street fashion datasets"""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -53,24 +52,24 @@ _IMAGE_SHAPE = (_IMAGE_WIDTH, _IMAGE_HEIGHT, 3)
 
 # Labels per category
 _LABELS = OrderedDict({
-    "1": "bag",
-    "2": "belt",
-    "3": "boots",
-    "4": "footwear",
-    "5": "outer",
-    "6": "dress",
-    "7": "sunglasses",
-    "8": "pants",
-    "9": "top",
-    "10": "shorts",
-    "11": "skirt",
-    "12": "headwear",
-    "13": "scarf & tie"
+    "1": "Bag",
+    "2": "Belt",
+    "3": "Boots",
+    "4": "Footwear",
+    "5": "Outer",
+    "6": "Dress",
+    "7": "Sunglasses",
+    "8": "Pants",
+    "9": "Top",
+    "10": "Shorts",
+    "11": "Skirt",
+    "12": "Headwear",
+    "13": "Scarf & Tie"
 })
 
 
 class ModaNet(tfds.core.GeneratorBasedBuilder):
-    """modanet: online street fashion dataset"""
+    """Modanet: online street fashion dataset"""
 
     VERSION = tfds.core.Version('1.0.0')
 
