@@ -115,6 +115,10 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
             for filename in tf.io.gfile.listdir(data_dir_path):
                 image = os.path.join(data_dir_path,filename)
                 class_name = 'test'
+                yield{
+                    "image":image,
+                    "label":class_name,
+                    }
         else:
 
       
@@ -133,13 +137,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
                                     image = os.path.join(class_dir_path,image_name)
                                     class_name = class_name+'/'+class_dir1
 
-        yield{
-            "image":image,
-            "label":class_name,
-        }
-
-
-
-
-
-
+                                    yield{
+                                        "image":image,
+                                        "label":class_name,
+                                    }
