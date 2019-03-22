@@ -9,8 +9,7 @@ class LFWTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = lfw.LFW
 
   SPLITS = {
-      "train": 3,
-      "test": 1,
+      "train": 10,
   }
 
 
