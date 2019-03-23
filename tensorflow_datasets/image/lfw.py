@@ -9,15 +9,16 @@ import tensorflow_datasets.public_api as tfds
 
 _URL="http://vis-www.cs.umass.edu/lfw/lfw.tgz"
 LFW_IMAGE_SHAPE=(250,250,3)
-LFW_CITATION="""@TechReport{LFWTech,
-  author = {Gary B. Huang and Manu Ramesh and Tamara Berg and 
-                  Erik Learned-Miller},
-  title = {Labeled Faces in the Wild: A Database for Studying 
-                  Face Recognition in Unconstrained Environments},
-  institution = {University of Massachusetts, Amherst},
-  year = 2007,
-  number = {07-49},
-  month = {October}}"""
+LFW_CITATION="""\
+@TechReport{LFWTech,
+    author = {Gary B. Huang and Manu Ramesh and Tamara Berg and Erik Learned-Miller},
+    title = {Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environments},
+    institution = {University of Massachusetts, Amherst},
+    year = 2007,
+    number = {07-49},
+    month = {October}
+}
+"""
 
 
 class LFW(tfds.core.GeneratorBasedBuilder):
@@ -42,9 +43,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
     
     def _split_generators(self, dl_manager):
         path=dl_manager.download_and_extract(_URL)
-        
-        
-        
+
         # There is no train/test split predefined 
         return [
             tfds.core.SplitGenerator(
@@ -59,6 +58,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
         print("Generating triplets, this will take a while")
         # a list of dictionary will be recieved and each element(dict) will have 3 keys, each of which will store the path to the image 
         triplet_list=self.triplet_maker(data_path)
+        
         for triplet in triplet_list:
             yield {
                 "anchor": triplet["anchor"],
@@ -76,8 +76,6 @@ class LFW(tfds.core.GeneratorBasedBuilder):
             temp1=os.listdir(lst_path)
             if(len(temp1)>1):
                 lfw_mod.append(lst)
-        #print(len(lfw_mod))
-
         for it,i in enumerate(lfw_mod):
             temp=0
             path=os.path.join(_path,i)
@@ -86,7 +84,6 @@ class LFW(tfds.core.GeneratorBasedBuilder):
             if total_images>1:
                 for img_no in range(temp,total_images):
                     for offset in range(1,total_images-temp):  
-
                         if(img_no+1)==total_images:
                             break
                         else:
@@ -98,8 +95,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
                                         break
                                     else:
                                         for __i in total_images_negative:
-                                                triplet_dict={'anchor':os.path.join(path,path_list[img_no]),'positive':os.path.join(path,path_list[img_no+offset]),'negative':os.path.join(path_list_negative,__i)}
-                                                #print(triplet_dict)
-                                                triplet_list.append(triplet_dict)
+                                            triplet_dict={'anchor':os.path.join(path,path_list[img_no]),'positive':os.path.join(path,path_list[img_no+offset]),'negative':os.path.join(path_list_negative,__i)}
+                                            triplet_list.append(triplet_dict)
                     temp=temp+1
         return triplet_list
