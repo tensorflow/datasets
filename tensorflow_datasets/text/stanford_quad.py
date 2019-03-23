@@ -54,5 +54,63 @@ the paragraph and abstain from answering. SQuAD2.0 is a challenging natural \
 language understanding task for existing models.
 """
 
+class StanfordquadConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for Stanford Question Answering Dataset - 2.0."""
+
+  @api_utils.disallow_positional_args
+  def __init__(self, text_encoder_config=None, **kwargs):
+    """BuilderConfig for Stanford Question Answering Dataset - 2.0.
+
+    Args:
+      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
+        for the `tfds.features.text.TextEncoder` used for the features feature.
+      **kwargs: keyword arguments forwarded to super.
+    """
+    super(StanfordquadConfig, self).__init__(**kwargs)
+    self.text_encoder_config = (
+        text_encoder_config or tfds.features.text.TextEncoderConfig())
+
+
+class Stanfordquad(tfds.core.GeneratorBasedBuilder):
+  """The Stanford Question Answering Dataset. Version 2.0."""
+  _URL = "https://rajpurkar.github.io/SQuAD-explorer/dataset/"
+  _DEV_FILE = "dev-v2.0.json"
+  _TRAINING_FILE = "train-v2.0.json"
+
+  BUILDER_CONFIGS = [
+      StanfordquadConfig(
+          name="plain_text",
+          version="2.0.0",
+          description="Plain text",
+      ),
+      StanfordquadConfig(
+          name="bytes",
+          version="2.0.0",
+          description=("Uses byte-level text encoding with "
+                       "`tfds.features.text.ByteTextEncoder`"),
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder=tfds.features.text.ByteTextEncoder()),
+      ),
+      StanfordquadConfig(
+          name="subwords8k",
+          version="2.0.0",
+          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
+                       "vocab size"),
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              vocab_size=2**13),
+      ),
+      StanfordquadConfig(
+          name="subwords32k",
+          version="2.0.0",
+          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
+                       "32k vocab size"),
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
+              encoder_cls=tfds.features.text.SubwordTextEncoder,
+              vocab_size=2**15),
+      ),
+  ]
+
+
 
 
