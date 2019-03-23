@@ -133,6 +133,35 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
+  def _vocab_text_gen(self, filepath):
+    for ex in self._generate_examples(filepath):
+      # "first_answer" is a substring of "context" so not need to add it here
+      yield " ".join([ex["question"], ex["context"]])
 
+  def _split_generators(self, dl_manager):
+    urls_to_download = {
+        "train": os.path.join(self._URL, self._TRAINING_FILE),
+        "dev": os.path.join(self._URL, self._DEV_FILE)
+    }
+    downloaded_files = dl_manager.download_and_extract(urls_to_download)
 
+    # Generate shared vocabulary
+    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
+    self.info.features["context"].maybe_build_from_corpus(
+        self._vocab_text_gen(downloaded_files["train"]))
+    encoder = self.info.features["context"].encoder
+    # Use maybe_set_encoder because the encoder may have been restored from
+    # package data.
+    self.info.features["question"].maybe_set_encoder(encoder)
+    self.info.features["first_answer"].maybe_set_encoder(encoder)
 
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            num_shards=10,
+            gen_kwargs={"filepath": downloaded_files["train"]}),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            num_shards=1,
+            gen_kwargs={"filepath": downloaded_files["dev"]}),
+    ]
