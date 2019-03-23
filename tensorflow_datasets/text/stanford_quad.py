@@ -111,6 +111,28 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
       ),
   ]
 
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict({
+            "context":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
+            "question":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
+            "first_answer":
+                tfds.features.Text(
+                    encoder_config=self.builder_config.text_encoder_config),
+        }),
+        # No default supervised_keys (as we have to pass both question
+        # and context as input).
+        supervised_keys=None,
+        urls=["https://rajpurkar.github.io/SQuAD-explorer/explore/v2.0/dev/"],
+        citation=_CITATION,
+    )
+
 
 
 
