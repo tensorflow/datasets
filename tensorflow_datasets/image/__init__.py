@@ -41,4 +41,3 @@ from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.vis_dial import VisualDialog
-

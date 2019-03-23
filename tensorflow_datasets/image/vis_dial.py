@@ -21,7 +21,6 @@ from __future__ import print_function
 
 import json
 import os
-import re
 import fnmatch
 
 import tensorflow as tf
@@ -46,92 +45,92 @@ _TEST_IMAGES = "https://dl.dropboxusercontent.com/s/mwlrg31hx0430mt/VisualDialog
 
 
 class VisualDialog(tfds.core.GeneratorBasedBuilder):
-    """Visual Dialog Dataset"""
+  """Visual Dialog Dataset"""
 
-    VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0")
 
-    def _info(self):
-        return tfds.core.DatasetInfo(
-            builder = self,
-            description="A large set of Images and Dialogs",
-            features=tfds.features.FeaturesDict({
-                "image": tfds.features.Image(),
-                "dialog": tfds.features.SequenceDict({
-                    'answer': tf.int8,
-                    'question': tf.int8,
-                }),
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description="A large set of Images and Dialogs",
+        features=tfds.features.FeaturesDict({
+            "image": tfds.features.Image(),
+            "dialog": tfds.features.SequenceDict({
+                "answer": tf.int8,
+                "question": tf.int8,
             }),
-            urls=["https://visualdialog.org/"],
-            citation=_CITATION
-        )
+        }),
+        urls=["https://visualdialog.org/"],
+        citation=_CITATION
+    )
 
 
-    def _split_generators(self, dl_manager):
+  def _split_generators(self, dl_manager):
 
-        extracted_json = dl_manager.download_and_extract({
-            "Train_Dialogs": _TRAIN_DIALOGS,
-            "Validation_Dialogs": _VALIDATION_DIALOGS,
-            "Test_Dialogs": _TEST_DIALOGS,
-        })
-        extracted_images = dl_manager.download_and_extract({
-            "Train_Images": _TRAIN_IMAGES,
-            "Validation_Images": _VALIDATION_IMAGES,
-            "Test_Images": _TEST_IMAGES,
-        })
+    extracted_json = dl_manager.download_and_extract({
+        "Train_Dialogs": _TRAIN_DIALOGS,
+        "Validation_Dialogs": _VALIDATION_DIALOGS,
+        "Test_Dialogs": _TEST_DIALOGS,
+    })
+    extracted_images = dl_manager.download_and_extract({
+        "Train_Images": _TRAIN_IMAGES,
+        "Validation_Images": _VALIDATION_IMAGES,
+        "Test_Images": _TEST_IMAGES,
+    })
 
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                num_shards=10,
-                gen_kwargs={
-                    "image": extracted_images,
-                    "dialog": extracted_json,
-                }),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.VALIDATION,
-                num_shards=10,
-                gen_kwargs={
-                    "image": extracted_images,
-                    "dialog": extracted_json,
-                }),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TEST,
-                num_shards=10,
-                gen_kwargs={
-                    "image": extracted_images,
-                    "dialog": extracted_json,
-                }),
-        ]
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            num_shards=10,
+            gen_kwargs={
+                "image": extracted_images,
+                "dialog": extracted_json,
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            num_shards=10,
+            gen_kwargs={
+                "image": extracted_images,
+                "dialog": extracted_json,
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            num_shards=10,
+            gen_kwargs={
+                "image": extracted_images,
+                "dialog": extracted_json,
+            }),
+    ]
 
-    def _generate_examples(self, image, dialog):
-        """Generate examples as dicts.
+  def _generate_examples(self, image, dialog):
+    """Generate examples as dicts.
 
-        Args:
-        image: `str`, directory containing the images folder
-        dialog: `str`, directory containing dialogs json
+      Args:
+      image: `str`, directory containing the images folder
+      dialog: `str`, directory containing dialogs json
 
-        Yields:
-        Generator yielding the next samples
-        """
+      Yields:
+      Generator yielding the next samples
+    """
 
-        def find(pattern, path):
-            result = []
-            for root, dirs, files in tf.io.gfile.walk(path):
-                for name in files:
-                    if fnmatch.fnmatch(name, pattern):
-                        result.append(os.path.join(root, name))
-            return result
+    def find(pattern, path):
+      result = []
+      for root, dirs, files in tf.io.gfile.walk(path):
+        for name in files:
+          if fnmatch.fnmatch(name, pattern):
+            result.append(os.path.join(root, name))
+      return result
 
-        image_filedir = os.path.join(image["Test_Images"],"VisualDialog_test2018")
-        dialog_filedir = os.path.join(dialog["Test_Dialogs"],"visdial_1.0_test.json")
+    image_filedir = os.path.join(image["Test_Images"], "VisualDialog_test2018")
+    dialog_filedir = os.path.join(dialog["Test_Dialogs"], "visdial_1.0_test.json")
 
-        with tf.io.gfile.GFile(dialog_filedir) as data_file:
-            data_f = json.load(data_file)
-            for details in data_f["data"]["dialogs"]:
-                pattern = '*'+ str(details["image_id"]) + '.jpg'
-                image_ = find(pattern, image_filedir.format(details["image_id"]))
-                dialog_ = details["dialog"]
-                yield {
-                  "image": image_,
-                  "dialog": dialog_
-                }
+    with tf.io.gfile.GFile(dialog_filedir) as data_file:
+      data_f = json.load(data_file)
+      for details in data_f["data"]["dialogs"]:
+        pattern = '*'+ str(details["image_id"]) + '.jpg'
+        image_ = find(pattern, image_filedir.format(details["image_id"]))
+        dialog_ = details["dialog"]
+        yield {
+            "image": image_,
+            "dialog": dialog_,
+        }
