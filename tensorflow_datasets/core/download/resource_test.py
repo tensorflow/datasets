@@ -46,7 +46,7 @@ class GuessExtractMethodTest(testing.TestCase):
           fname, res, expected_result))
 
 
-class GetFnameTest(testing.TestCase):
+class DlDirNameTest(testing.TestCase):
   urls = '''\
 http://data.statmt.org/wmt17/translation-task/dev.tgz
 http://data.statmt.org/wmt18/translation-task/training-parallel-nc-v13.tgz
@@ -82,7 +82,7 @@ cs.toronto.edu_kriz_cifar-100-pythonJDFhDchdt5UW8GUAkvf_-H_r_LnFs6sHlOrqTidrpSI.
 
   def test_(self):
     for url, expected in zip(self.urls, self.expected):
-      res = resource._get_fname(url)
+      res = resource.get_dl_dirname(url)
       self.assertEqual(res, expected)
 
 
