@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""lfw test script"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -22,12 +24,12 @@ from tensorflow_datasets.image import lfw
 
 
 class LFWTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = lfw.LFW
+    """Test Class"""
+    DATASET_CLASS = lfw.LFW
 
-  SPLITS = {
-      "train": 10,
-  }
-
+    SPLITS = {
+      "train":10,
+    }
 
 if __name__ == "__main__":
-  testing.test_main()
+    testing.test_main()
