@@ -1,0 +1,1 @@
+https://lmb.informatik.uni-freiburg.de/resources/datasets/ORION/modelnet40_manually_aligned.tar 2054373067 b434029692b266dc861eb0b7636429ed8f2e94dfa67bae63f495b31a277ca9bf

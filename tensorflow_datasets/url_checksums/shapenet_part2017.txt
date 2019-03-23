@@ -1,0 +1,1 @@
+https://shapenet.cs.stanford.edu/media/shapenetcore_partanno_segmentation_benchmark_v0_normal.zip 706988960 0e26411700bae2da38ee8ecc719ba4db2e6e0133486e258665952ad5dfced0fe

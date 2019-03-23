@@ -1,0 +1,1 @@
+https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip 1705117335 d64e9c5cfc479bac3260b164ae3c75ba83e94a1d216fbcd3f59ce2a9686d3762

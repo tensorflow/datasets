@@ -74,6 +74,8 @@ class ShapenetPart2017(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     data_dir = dl_manager.download_and_extract(self._DL_URL)
+    data_dir = os.path.join(
+      data_dir, "shapenetcore_partanno_segmentation_benchmark_v0_normal")
     split_dir = os.path.join(data_dir, "train_test_split")
 
     out = []

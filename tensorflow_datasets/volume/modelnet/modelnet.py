@@ -122,8 +122,19 @@ def _load_off_data(fp):
   vertices = data.vertices.astype(np.float32)
   face_values = data.face_values.astype(np.int64)
   face_lengths = data.face_lengths.astype(np.int64)
-  center, radius = lazy_imports.trimesh.nsphere.minimum_nsphere(vertices) # pylint: disable=no-member
-  center = center.astype(np.float32)
+  planar_dim_mask = np.min(vertices, axis=0) == np.max(vertices, axis=0)
+  if np.any(planar_dim_mask):
+    # planar objects give QHull issues
+    good_dim_mask = np.logical_not(planar_dim_mask)  # pylint: disable=assignment-from-no-return
+    cent, radius = lazy_imports.trimesh.nsphere.minimum_nsphere(  # pylint: disable=no-member
+      vertices[:, good_dim_mask])
+    center = np.zeros((3,), dtype=np.float32)
+    center[good_dim_mask] = cent.astype(np.float32)
+    center[planar_dim_mask] = vertices[0, planar_dim_mask]
+  else:
+    center, radius = lazy_imports.trimesh.nsphere.minimum_nsphere(vertices) # pylint: disable=no-member
+    center = center.astype(np.float32)
+
   radius = radius.astype(np.float32)
   return vertices, face_values, face_lengths, center, radius
 
@@ -262,6 +273,7 @@ class PointCloudModelnetConfig(ModelnetConfig):
     return self
 
   def __exit__(self, *args, **kwargs):
+    # restore original numpy random state
     assert(self._original_state is not None)
     np.random.set_state(self._original_state)
     self._original_state = None
@@ -375,16 +387,17 @@ class Modelnet10(tfds.core.GeneratorBasedBuilder):
           continue
 
         inputs = config.load(fp)
-        yield {
-          input_key: inputs,
-          "example_index": int(fn.split("_")[-1][:-4]) - 1,
-          "label": class_name,
-        }
+        if inputs is not None:
+          yield {
+            input_key: inputs,
+            "example_index": int(fn.split("_")[-1][:-4]) - 1,
+            "label": class_name,
+          }
 
 
 # must be a separate class to separate downloads
 class Modelnet40(Modelnet10):
-  _DL_URL = "http://modelnet.cs.princeton.edu/ModelNet40.zip",
+  _DL_URL = "http://modelnet.cs.princeton.edu/ModelNet40.zip"
   num_classes = 40
 
 

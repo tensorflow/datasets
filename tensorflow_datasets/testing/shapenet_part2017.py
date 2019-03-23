@@ -40,7 +40,9 @@ fake_examples_dir = os.path.join(
 
 
 def make_iccv2017_part_data():
-  base_dir = os.path.join(fake_examples_dir, "shapenet_part2017")
+  base_dir = os.path.join(
+    fake_examples_dir, "shapenet_part2017",
+    "shapenetcore_partanno_segmentation_benchmark_v0_normal")
   test_utils.remake_dir(base_dir)
   split_dir = os.path.join(base_dir, "train_test_split")
   tf.io.gfile.makedirs(split_dir)
