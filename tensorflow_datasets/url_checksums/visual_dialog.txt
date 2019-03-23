@@ -1,0 +1,6 @@
+http://images.cocodataset.org/zips/train2014.zip 13510573713 ede4087e640bddba550e090eae701092534b554b42b05ac33f0300b984b31775
+https://dl.dropboxusercontent.com/s/ibs3a0zhw74zisc/visdial_1.0_val.zip 5905232 28b4d63521adb6bb2fa190cd0ecd256df56eaf14c61262349cb249f5a0e1756f
+https://dl.dropboxusercontent.com/s/ix8keeudqrd8hn8/visdial_1.0_train.zip 371044056 82975c7d5dd837c4de3680527dbf87f57476029961a85a0a3cd5ada80e86a718
+https://dl.dropboxusercontent.com/s/mwlrg31hx0430mt/VisualDialog_test2018.zip 1285499338 57f9ef80026f36b0a69e5c46031361f7f1754e6f44fd81e3b0a52643f2653e94
+https://dl.dropboxusercontent.com/s/o7mucbre2zm7i5n/visdial_1.0_test.zip 3292040 8f7688b3c63e63250535714ac06ea0bc06d6908c14776aba11c7288f1e16c966
+https://dl.dropboxusercontent.com/s/twmtutniktom7tu/VisualDialog_val2018.zip 331430399 bc0a5a0483fca19d5394ba5f1b280678ae32dbc1842692f2593b2b8d2467cae1
