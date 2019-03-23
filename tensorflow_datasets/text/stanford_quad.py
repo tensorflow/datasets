@@ -165,3 +165,46 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
             num_shards=1,
             gen_kwargs={"filepath": downloaded_files["dev"]}),
     ]
+
+  def _generate_examples(self, filepath):
+    """This function returns the examples in the raw (text) form."""
+    logging.info("generating examples from = %s", filepath)
+    with tf.io.gfile.GFile(filepath) as f:
+      squad = json.load(f)
+      for article in squad["data"]:
+        if "title" in article:
+          title = article["title"].strip()
+        else:
+          title = ""
+        for paragraph in article["paragraphs"]:
+          context = paragraph["context"].strip()
+          for qa in paragraph["qas"]:
+            question = qa["question"].strip()
+            id_ = qa["id"]
+
+            answer_starts = [answer["answer_start"] for answer in qa["answers"]]
+            answers = [answer["text"].strip() for answer in qa["answers"]]
+
+            # Features currently used are "context", "question", and "answers".
+            # Others are extracted here for the ease of future expansions.
+            example = {
+                "title": title,
+                "context": context,
+                "question": question,
+                "id": id_,
+                "answer_starts": answer_starts,
+                "answers": answers,
+            }
+            if len(example["answers"]) > 1:
+              yield {
+                  "question": example["question"],
+                  "first_answer": example["answers"][0],
+                  "context": example["context"]
+              }
+            else:
+              example["answers"] = ['No answer is supported by the paragraph']
+              yield {
+                  "question": example["question"],
+                  "first_answer": example["answers"][0],
+                  "context": example["context"]
+              }
