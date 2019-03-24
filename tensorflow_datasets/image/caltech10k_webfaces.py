@@ -58,3 +58,25 @@ class Caltech10K_WebFaces(tfds.core.GeneratorBasedBuilder):
                     "extracted_dirs": extracted_dirs,
                 })
         ]
+
+
+    def _process_caltech10k_config_file(self, file_path):
+        with tf.io.gfile.GFile(file_path) as f:
+            data_raw = f.read()
+        lines = data_raw.split("\n")
+
+        keys = [x.split()[0] for x in lines[:-1]]
+        values = {}
+        # Go over each line (skip the last one, as it is empty).
+        for line in lines[0:-1]:
+        row_values = line.strip().split()
+        # Each row start with the 'file_name' and then space-separated values.
+        values[row_values[0]] = [v for v in row_values[1:]]
+        return keys, values
+
+    def _generate_examples(self, extracted_dirs):
+        filedir = os.path.join(extracted_dirs['images'],'images')
+        landmarks_path = extracted_dirs["landmarks"]
+
+        #with tf.io.gfile.GFile()
+
