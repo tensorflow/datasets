@@ -239,6 +239,8 @@ def load(name,
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
       `tfds.core.DatasetBuilder.as_dataset`. `split` will be passed through by
       default.
+      example -> {'shuffle_files':True} 
+      NOTE: shuffle_files is by defaul False unless split == tfds.Split.TRAIN
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
