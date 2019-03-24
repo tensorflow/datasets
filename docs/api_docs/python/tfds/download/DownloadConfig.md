@@ -24,7 +24,8 @@ __init__(
     manual_dir=None,
     download_mode=None,
     compute_stats=None,
-    max_examples_per_split=None
+    max_examples_per_split=None,
+    register_checksums=False
 )
 ```
 
@@ -44,6 +45,8 @@ Constructs a `DownloadConfig`.
     statistics over the generated data. Defaults to `AUTO`.
 * <b>`max_examples_per_split`</b>: `int`, optional max number of examples to write
     into each split.
+* <b>`register_checksums`</b>: `bool`, defaults to False. If True, checksum of
+    downloaded files are recorded.
 
 
 

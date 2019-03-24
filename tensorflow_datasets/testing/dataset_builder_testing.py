@@ -188,7 +188,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
+    # If configs specified, ensure they are all valid
+    for config in self.BUILDER_CONFIG_NAMES_TO_TEST:
+      assert config in self.builder.builder_configs, (
+          "Config %s specified in test does not exist. Available:\n%s" % (
+              config, list(self.builder.builder_configs)))
+
     configs = self.builder.BUILDER_CONFIGS
+    print("Total configs: %d" % len(configs))
     if configs:
       for config in configs:
         # Skip the configs that are not in the list.
@@ -211,10 +218,21 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
+      if isinstance(builder, dataset_builder.BeamBasedBuilder):
+        import apache_beam as beam   # pylint: disable=g-import-not-at-top
+        # For Beam datasets, set-up the runner config
+        beam_runner = None
+        beam_options = beam.options.pipeline_options.PipelineOptions()
+      else:
+        beam_runner = None
+        beam_options = None
+
       # Skip computation, otherwise the computed number of samples won't match
       # the one restored from GCS
       download_config = download.DownloadConfig(
           compute_stats=download.ComputeStatsMode.FORCE,
+          beam_runner=beam_runner,
+          beam_options=beam_options,
       )
       builder.download_and_prepare(download_config=download_config)
 

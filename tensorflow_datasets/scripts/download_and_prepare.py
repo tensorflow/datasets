@@ -75,6 +75,10 @@ flags.DEFINE_integer(
     "max_examples_per_split", None,
     "optional max number of examples to write into each split (for testing).")
 
+# Development flags
+flags.DEFINE_boolean("register_checksums", False,
+                     "If True, store size and checksum of downloaded files.")
+
 # Debug flags
 flags.DEFINE_boolean("debug", False,
                      "If True, will drop into debugger after data generation")
@@ -92,6 +96,7 @@ def download_config():
       # TODO(b/116270825): Add flag to force extraction / preparation.
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=FLAGS.max_examples_per_split,
+      register_checksums=FLAGS.register_checksums,
   )
 
 

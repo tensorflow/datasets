@@ -238,15 +238,6 @@ class DatasetInfo(object):
     return self.as_proto.location.urls
 
   @property
-  def download_checksums(self):
-    return self.as_proto.download_checksums
-
-  @download_checksums.setter
-  def download_checksums(self, checksums):
-    self.as_proto.download_checksums.clear()
-    self.as_proto.download_checksums.update(checksums)
-
-  @property
   def initialized(self):
     """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized

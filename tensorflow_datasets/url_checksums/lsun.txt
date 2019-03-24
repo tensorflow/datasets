@@ -1,0 +1,2 @@
+http://lsun.cs.princeton.edu/htbin/download.cgi?tag=latest&category=classroom&set=train 3279497022 73a8a3e318819e1cc602f229673c3f51a68f3ece61e3764ce22df6abea4d0873
+http://lsun.cs.princeton.edu/htbin/download.cgi?tag=latest&category=classroom&set=val 5880261 5e0e9a375d94091dfe1fa3be87d4a92f41c03f1c0b8e376acc7e05651de512d7

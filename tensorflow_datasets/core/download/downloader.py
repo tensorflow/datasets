@@ -90,20 +90,19 @@ class _Downloader(object):
         self._pbar_dl_size = pbar_dl_size
         yield
 
-  def download(self, url_info, destination_path):
+  def download(self, url, destination_path):
     """Download url to given path.
 
     Returns Promise -> sha256 of downloaded file.
 
     Args:
-      url_info: `UrlInfo`, resource to download.
+      url: address of resource to download.
       destination_path: `str`, path to directory where to download the resource.
 
     Returns:
       Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
     self._pbar_url.update_total(1)
-    url = url_info.url
     future = self._executor.submit(self._sync_download, url, destination_path)
     return promise.Promise.resolve(future)
 
