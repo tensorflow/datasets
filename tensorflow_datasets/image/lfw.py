@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 
@@ -42,12 +43,13 @@ LFW_CITATION = """\
 class LFW(tfds.core.GeneratorBasedBuilder):
   """LFW Class"""
   URL = "http://vis-www.cs.umass.edu/lfw/#resources"
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("0.1.0")
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=("Labeled Faces in the Wild:\
-        A Database for Studying Face Recognition in Unconstrained Environments"),
+  A Database for Studying Face Recognition in Unconstrained Environments"),
         features=tfds.features.FeaturesDict({
             "anchor": tfds.features.Image(shape=LFW_IMAGE_SHAPE),
             "positive": tfds.features.Image(shape=LFW_IMAGE_SHAPE),
@@ -86,17 +88,17 @@ class LFW(tfds.core.GeneratorBasedBuilder):
   #This is a helper function for making all possible triplets for siamese network(eg. FaceNet)
   def triplet_maker(self, _path):
     triplet_list = []
-    lfw = os.listdir(_path)
+    lfw = tf.gfile.ListDirectory(_path)
     lfw_mod = []
     for lst in lfw:
       lst_path = os.path.join(_path, lst)
-      temp1 = os.listdir(lst_path)
+      temp1 = tf.gfile.ListDirectory(lst_path)
       if len(temp1) > 1:
         lfw_mod.append(lst)
     for index, i in enumerate(lfw_mod):
       temp = 0
       path = os.path.join(_path, i)
-      path_list = os.listdir(path)
+      path_list = tf.gfile.ListDirectory(path)
       total_images = len(path_list)
       if total_images > 1:
         for img_no in range(temp, total_images):
@@ -106,7 +108,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
             else:
               for _index, _i in enumerate(lfw_mod):
                 path_list_negative = os.path.join(_path, _i)
-                total_images_negative = os.listdir(path_list_negative)
+                total_images_negative = tf.gfile.ListDirectory(path_list_negative)
                 if len(total_images_negative) > 1:
                   if _index == index:
                     break
