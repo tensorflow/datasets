@@ -61,6 +61,7 @@ T2T_ENDE_DEV = ["wmt17_newstest13"]
 
 class WmtTranslateEnde(wmt.WmtTranslate):
   """WMT English-German translation dataset."""
+  IN_DEVELOPMENT = True
 
   BUILDER_CONFIGS = [
       wmt.WMTConfig(

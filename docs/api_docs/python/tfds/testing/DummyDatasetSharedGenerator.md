@@ -2,11 +2,13 @@
 <meta itemprop="name" content="tfds.testing.DummyDatasetSharedGenerator" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="builder_config"/>
+<meta itemprop="property" content="data_dir"/>
 <meta itemprop="property" content="info"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
+<meta itemprop="property" content="GOOGLE_DISABLED"/>
 <meta itemprop="property" content="IN_DEVELOPMENT"/>
 <meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
@@ -44,6 +46,10 @@ Builder constructor.
 <h3 id="builder_config"><code>builder_config</code></h3>
 
 <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> for this builder.
+
+<h3 id="data_dir"><code>data_dir</code></h3>
+
+
 
 <h3 id="info"><code>info</code></h3>
 
@@ -119,6 +125,8 @@ Downloads and prepares dataset for reading.
 ## Class Members
 
 <h3 id="BUILDER_CONFIGS"><code>BUILDER_CONFIGS</code></h3>
+
+<h3 id="GOOGLE_DISABLED"><code>GOOGLE_DISABLED</code></h3>
 
 <h3 id="IN_DEVELOPMENT"><code>IN_DEVELOPMENT</code></h3>
 
