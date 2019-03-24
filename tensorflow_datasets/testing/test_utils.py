@@ -425,7 +425,7 @@ def mock_kaggle_api(filenames=None, err_msg=None):
                                             tf.compat.as_bytes(err_msg))
       return tf.compat.as_bytes(
           "\n".join(["name,size,creationDate"] +
-                    ["%s,34MB,None" % fname for fname in filenames]))
+                    ["%s,34MB,None\n" % fname for fname in filenames]))
 
     return check_output
 

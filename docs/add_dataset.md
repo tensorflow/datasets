@@ -445,13 +445,26 @@ import to its subdirectory's `__init__.py`
 
 ### 2. Run `download_and_prepare` locally.
 
+If you're contributing the dataset to `tensorflow/datasets`, add a checksums
+file for the dataset. On first download, the `DownloadManager` will
+automatically add the sizes and checksums for all downloaded URLs to that file.
+This ensures that on subsequent data generation, the downloaded files are
+as expected.
+
+```sh
+touch tensorflow_datasets/url_checksums/my_new_dataset.txt
+```
+
 Run `download_and_prepare` locally to ensure that data generation works:
 
 ```
 # default data_dir is ~/tensorflow_datasets
 python -m tensorflow_datasets.scripts.download_and_prepare \
+  --register_checksums \
   --datasets=my_new_dataset
 ```
+
+Note that the `--register_checksums` flag must only be used while in development.
 
 Copy in the contents of the `dataset_info.json` file(s) to a [GitHub gist](https://gist.github.com/) and link to it in your pull request.
 
