@@ -1,0 +1,2 @@
+http://cvgl.stanford.edu/data2/ShapeNetRendering.tgz 12318245442 3f699a0b234dcd8544db578588c0dc8d3992a54be4aaa29039423ca682d90cf6
+http://cvgl.stanford.edu/data2/ShapeNetVox32.tgz 22218020 21797cf9310771f9fd1f4bc1abbb99c5cc6235bfc9f4864f688e0edeaa7c204b
