@@ -123,6 +123,3 @@ class Caltech10K_WebFaces(tfds.core.GeneratorBasedBuilder):
                     k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
                 }
             }
-
-
-
