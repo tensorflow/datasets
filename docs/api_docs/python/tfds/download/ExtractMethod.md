@@ -1,6 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.download.ExtractMethod" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="BZIP2"/>
 <meta itemprop="property" content="GZIP"/>
 <meta itemprop="property" content="NO_EXTRACT"/>
 <meta itemprop="property" content="TAR"/>
@@ -22,6 +23,8 @@ Defined in [`core/download/resource.py`](https://github.com/tensorflow/datasets/
 The extraction method to use to pre-process a downloaded file.
 
 ## Class Members
+
+<h3 id="BZIP2"><code>BZIP2</code></h3>
 
 <h3 id="GZIP"><code>GZIP</code></h3>
 

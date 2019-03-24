@@ -1124,7 +1124,7 @@ assertNotAllClose(
 )
 ```
 
-Assert that two numpy arrays, or or Tensors, do not have near values.
+Assert that two numpy arrays, or Tensors, do not have near values.
 
 #### Args:
 

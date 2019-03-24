@@ -71,9 +71,8 @@ class Artifact(object):
     self.sha = _sha256(content)
     self.size_checksum = (self.size, self.sha)
     self.checksum_size = (self.sha, self.size)
-    self.resource = resource_lib.Resource(url=url)
-    self.resource_sha = resource_lib.Resource(url=url)
-    self.resource_sha.sha256 = self.sha
+    self.dl_fname = resource_lib.get_dl_fname(url, self.sha)
+    self.dl_tmp_dirname = resource_lib.get_dl_dirname(url)
 
 
 class DownloadManagerTest(testing.TestCase):
@@ -145,12 +144,12 @@ class DownloadManagerTest(testing.TestCase):
     download = absltest.mock.patch.object(
         manager._downloader,
         'download',
-        side_effect=lambda resource, tmpdir_path: self.dl_results[resource.url])
+        side_effect=lambda url, tmpdir_path: self.dl_results[url])
     self.downloader_download = download.start()
     extract = absltest.mock.patch.object(
         manager._extractor,
         'extract',
-        side_effect=lambda resource, dest: self.extract_results[resource.path])
+        side_effect=lambda path, method, dest: self.extract_results[path])
     self.extractor_extract = extract.start()
     return manager
 
@@ -158,15 +157,15 @@ class DownloadManagerTest(testing.TestCase):
     """One file in cache, one not."""
     a, b, c = [Artifact(i) for i in 'abc']
     urls = {
-        'cached': a.resource_sha,
-        'new': b.resource,
-        'info_deleted': c.resource,
+        'cached': a.url,
+        'new': b.url,
+        'info_deleted': c.url,
     }
     _ = [self._add_file(path, content) for path, content in [  # pylint: disable=g-complex-comprehension
-        ('/dl_dir/%s' % a.resource_sha.fname, a.content),
-        ('/dl_dir/%s.INFO' % a.resource_sha.fname, 'content of info file a'),
+        ('/dl_dir/%s' % a.dl_fname, a.content),
+        ('/dl_dir/%s.INFO' % a.dl_fname, 'content of info file a'),
         # INFO file of c has been deleted:
-        ('/dl_dir/%s' % c.resource_sha.fname, c.content),
+        ('/dl_dir/%s' % c.dl_fname, c.content),
     ]]
     dl_b, self.dl_results[b.url] = _get_promise_on_event(b.checksum_size)
     dl_c, self.dl_results[c.url] = _get_promise_on_event(c.checksum_size)
@@ -176,34 +175,33 @@ class DownloadManagerTest(testing.TestCase):
     dl_c.set()
     downloads = manager.download(urls)
     expected = {
-        'cached': '/dl_dir/%s' % a.resource_sha.fname,
-        'new': '/dl_dir/%s' % b.resource_sha.fname,
-        'info_deleted': '/dl_dir/%s' % c.resource_sha.fname,
+        'cached': '/dl_dir/%s' % a.dl_fname,
+        'new': '/dl_dir/%s' % b.dl_fname,
+        'info_deleted': '/dl_dir/%s' % c.dl_fname,
     }
     self.assertEqual(downloads, expected)
 
   def test_extract(self):
     """One file already extracted, one file with NO_EXTRACT, one to extract."""
-    resource_cached = resource_lib.Resource(path='/dl_dir/cached',
-                                            extract_method=ZIP)
-    resource_new = resource_lib.Resource(path='/dl_dir/new', extract_method=TAR)
-    resource_noextract = resource_lib.Resource(path='/dl_dir/noextract',
-                                               extract_method=NO_EXTRACT)
+    cached = resource_lib.Resource(path='/dl_dir/cached', extract_method=ZIP)
+    new_ = resource_lib.Resource(path='/dl_dir/new', extract_method=TAR)
+    no_extract = resource_lib.Resource(path='/dl_dir/noextract',
+                                       extract_method=NO_EXTRACT)
     files = {
-        'cached': resource_cached,
-        'new': resource_new,
-        'noextract': resource_noextract,
+        'cached': cached,
+        'new': new_,
+        'noextract': no_extract,
     }
-    self.existing_paths.append('/extract_dir/ZIP.%s' % resource_cached.fname)
-    extracted_new, self.extract_results['/dl_dir/%s' % resource_new.fname] = (
+    self.existing_paths.append('/extract_dir/ZIP.cached')
+    extracted_new, self.extract_results['/dl_dir/new'] = (
         _get_promise_on_event('/extract_dir/TAR.new'))
     manager = self._get_manager()
     extracted_new.set()
     res = manager.extract(files)
     expected = {
-        'cached': '/extract_dir/ZIP.%s' % resource_cached.fname,
-        'new': '/extract_dir/TAR.%s' % resource_new.fname,
-        'noextract': '/dl_dir/%s' % resource_noextract.fname,
+        'cached': '/extract_dir/ZIP.cached',
+        'new': '/extract_dir/TAR.new',
+        'noextract': '/dl_dir/noextract',
     }
     self.assertEqual(res, expected)
 
@@ -226,11 +224,11 @@ class DownloadManagerTest(testing.TestCase):
 
   def test_download_and_extract(self):
     a, b = Artifact('a.zip'), Artifact('b')
-    self.file_names[a.resource_sha.fname] = 'a.zip'
+    self.file_names[a.dl_tmp_dirname] = 'a.zip'
     dl_a, self.dl_results[a.url] = _get_promise_on_event(a.checksum_size)
     dl_b, self.dl_results[b.url] = _get_promise_on_event(b.checksum_size)
-    ext_a, self.extract_results['/dl_dir/%s' % a.resource_sha.fname] = (
-        _get_promise_on_event('/extract_dir/ZIP.%s' % a.resource_sha.fname))
+    ext_a, self.extract_results['/dl_dir/%s' % a.dl_fname] = (
+        _get_promise_on_event('/extract_dir/ZIP.%s' % a.dl_fname))
     # url_b doesn't need any extraction.
     for event in [dl_a, dl_b, ext_a]:
       event.set()
@@ -241,8 +239,8 @@ class DownloadManagerTest(testing.TestCase):
     })
     res = manager.download_and_extract({'a': a.url, 'b': b.url})
     expected = {
-        'a': '/extract_dir/ZIP.%s' % a.resource_sha.fname,
-        'b': '/dl_dir/%s' % b.resource_sha.fname,
+        'a': '/extract_dir/ZIP.%s' % a.dl_fname,
+        'b': '/dl_dir/%s' % b.dl_fname,
     }
     self.assertEqual(res, expected)
 
@@ -250,10 +248,10 @@ class DownloadManagerTest(testing.TestCase):
     # Make sure extraction method is properly deduced from original fname, and
     # not from URL.
     a = Artifact('a', url='http://a?key=1234')
-    self.file_names[a.resource_sha.fname] = 'a.zip'
+    self.file_names[a.dl_tmp_dirname] = 'a.zip'
     dl, self.dl_results[a.url] = _get_promise_on_event(a.checksum_size)
-    ext, self.extract_results['/dl_dir/%s' % a.resource_sha.fname] = (
-        _get_promise_on_event('/extract_dir/ZIP.%s' % a.resource_sha.fname))
+    ext, self.extract_results['/dl_dir/%s' % a.dl_fname] = (
+        _get_promise_on_event('/extract_dir/ZIP.%s' % a.dl_fname))
     dl.set()
     ext.set()
     manager = self._get_manager(checksums={
@@ -261,39 +259,39 @@ class DownloadManagerTest(testing.TestCase):
     })
     res = manager.download_and_extract({'a': a.url})
     expected = {
-        'a': '/extract_dir/ZIP.%s' % a.resource_sha.fname,
+        'a': '/extract_dir/ZIP.%s' % a.dl_fname,
     }
     self.assertEqual(res, expected)
 
 
   def test_download_and_extract_already_downloaded(self):
     a = Artifact('a.zip')
-    self.file_names[a.resource_sha.fname] = 'a.zip'
+    self.file_names[a.dl_tmp_dirname] = 'a.zip'
     # File was already downloaded:
-    self._add_file('/dl_dir/%s' % a.resource_sha.fname)
-    self._write_info('/dl_dir/%s.INFO' % a.resource_sha.fname,
+    self._add_file('/dl_dir/%s' % a.dl_fname)
+    self._write_info('/dl_dir/%s.INFO' % a.dl_fname,
                      {'original_fname': 'a.zip'})
-    ext_a, self.extract_results['/dl_dir/%s' % a.resource_sha.fname] = (
-        _get_promise_on_event('/extract_dir/ZIP.%s' % a.resource_sha.fname))
+    ext_a, self.extract_results['/dl_dir/%s' % a.dl_fname] = (
+        _get_promise_on_event('/extract_dir/ZIP.%s' % a.dl_fname))
     ext_a.set()
     manager = self._get_manager(checksums={
         a.url: a.size_checksum,
     })
     res = manager.download_and_extract(a.url)
-    expected = '/extract_dir/ZIP.%s' % a.resource_sha.fname
+    expected = '/extract_dir/ZIP.%s' % a.dl_fname
     self.assertEqual(res, expected)
 
   def test_force_download_and_extract(self):
     a = Artifact('a.tar.gz')
     # resource was already downloaded / extracted:
-    self.existing_paths = ['/dl_dir/%s' % a.resource_sha.fname,
-                           '/extract_dir/TAR_GZ.%s' % a.resource_sha.fname]
-    self.file_names[a.resource_sha.fname] = 'b.tar.gz'
-    self._write_info('/dl_dir/%s.INFO' % a.resource_sha.fname,
+    self.existing_paths = ['/dl_dir/%s' % a.dl_fname,
+                           '/extract_dir/TAR_GZ.%s' % a.dl_fname]
+    self.file_names[a.dl_tmp_dirname] = 'b.tar.gz'
+    self._write_info('/dl_dir/%s.INFO' % a.dl_fname,
                      {'original_fname': 'b.tar.gz'})
     dl_a, self.dl_results[a.url] = _get_promise_on_event(a.checksum_size)
-    ext_a, self.extract_results['/dl_dir/%s' % a.resource_sha.fname] = (
-        _get_promise_on_event('/extract_dir/TAR_GZ.%s' % a.resource_sha.fname))
+    ext_a, self.extract_results['/dl_dir/%s' % a.dl_fname] = (
+        _get_promise_on_event('/extract_dir/TAR_GZ.%s' % a.dl_fname))
     dl_a.set()
     ext_a.set()
     manager = self._get_manager(
@@ -302,14 +300,14 @@ class DownloadManagerTest(testing.TestCase):
             a.url: a.size_checksum,
         })
     res = manager.download_and_extract(a.url)
-    expected = '/extract_dir/TAR_GZ.%s' % a.resource_sha.fname
+    expected = '/extract_dir/TAR_GZ.%s' % a.dl_fname
     self.assertEqual(expected, res)
     # Rename after download:
     (from_, to), kwargs = self.gfile.rename.call_args
     self.assertTrue(re.match(
-        r'/dl_dir/%s\.tmp\.[a-h0-9]{32}/b.tar.gz' % a.resource_sha.fname,
+        r'/dl_dir/%s\.tmp\.[a-h0-9]{32}/b.tar.gz' % a.dl_tmp_dirname,
         from_))
-    self.assertEqual('/dl_dir/%s' % a.resource_sha.fname, to)
+    self.assertEqual('/dl_dir/%s' % a.dl_fname, to)
     self.assertEqual(kwargs, {'overwrite': True})
     self.assertEqual(1, self.downloader_download.call_count)
     self.assertEqual(1, self.extractor_extract.call_count)
