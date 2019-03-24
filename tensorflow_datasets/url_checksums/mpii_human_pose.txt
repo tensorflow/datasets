@@ -1,0 +1,2 @@
+https://datasets.d2.mpi-inf.mpg.de/andriluka14cvpr/mpii_human_pose_v1.tar.gz 12088943206 6d26fbf89f49a7aeff4aa5f98123763f334693806b98eb15630f57a0b50998ce
+https://datasets.d2.mpi-inf.mpg.de/andriluka14cvpr/mpii_human_pose_v1_u12_2.zip 12340483 3e8bd6b61d39bc2e2bc5cd33a17b0bd08cd2d06c302f24f552042e53a35bcb76

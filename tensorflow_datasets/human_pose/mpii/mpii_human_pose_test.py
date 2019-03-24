@@ -38,7 +38,6 @@ class MpiiHumanPoseTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = MpiiHumanPose
   DL_EXTRACT_RESULT = DL_EXTRACT_RESULT
 
-  BUILDER_CONFIG_NAMES_TO_TEST = ["ground_truth"]
   SPLITS = SPLITS = {
     "train": 1,
     "test": 4,
