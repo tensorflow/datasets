@@ -975,8 +975,8 @@ using assertSameStructure.
 
 #### Args:
 
-* <b>`first`</b>: A string contining JSON to decode and compare to second.
-* <b>`second`</b>: A string contining JSON to decode and compare to first.
+* <b>`first`</b>: A string containing a JSON to decode and compare to second.
+* <b>`second`</b>: A string containing a JSON to decode and compare to first.
 * <b>`msg`</b>: Additional text to include in the failure message.
 
 <h3 id="assertLen"><code>assertLen</code></h3>
