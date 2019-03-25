@@ -75,7 +75,7 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "data": dict([('class_label', int(tf.float32)),     # 1 for signal, 0 for background
+            "data": dict([('class_label', tf.float32),     # 1 for signal, 0 for background
                           # 21 low-level features
                           ('lepton_pT', tf.float64),
                           ('lepton_eta', tf.float64),
