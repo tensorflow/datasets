@@ -76,25 +76,10 @@ class Caltech10K_WebFaces(tfds.core.GeneratorBasedBuilder):
     return [
       tfds.core.SplitGenerator(
         name=tfds.Split.TRAIN,
-        num_shards=10,
-        gen_kwargs={
-          "file_id": 0,
-          "extracted_dirs": extracted_dirs,
-        }),
-      tfds.core.SplitGenerator(
-        name=tfds.Split.VALIDATION,
-        num_shards=4,
-        gen_kwargs={
-          "file_id": 1,
-          "extracted_dirs": extracted_dirs,
-        }),
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TEST,
-        num_shards=4,
-        gen_kwargs={
-          "file_id": 2,
-          "extracted_dirs": extracted_dirs,
-        })
+            num_shards=5,
+            gen_kwargs={
+                "extracted_dirs": extracted_dirs
+            })
     ]
 
 
