@@ -104,9 +104,19 @@ def download_and_prepare(builder):
   """Generate data for a given dataset."""
   print("download_and_prepare for dataset {}...".format(builder.info.full_name))
 
+  dl_config = download_config()
+
+  if isinstance(builder, tfds.core.BeamBasedBuilder):
+    beam = tfds.core.lazy_imports.apache_beam
+    # TODO(b/129149715): Restore compute stats. Currently skipped because not
+    # beam supported.
+    dl_config.compute_stats = tfds.download.ComputeStatsMode.SKIP
+    dl_config.beam_options = beam.options.pipeline_options.PipelineOptions()
+
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,
-      download_config=download_config())
+      download_config=dl_config,
+  )
   termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
 
   if FLAGS.debug:
@@ -116,6 +126,7 @@ def download_and_prepare(builder):
 
 
 def main(_):
+
   if FLAGS.debug_start:
     pdb.set_trace()
   if FLAGS.sleep_start:
