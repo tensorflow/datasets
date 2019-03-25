@@ -360,6 +360,11 @@ Note that most datasets will find the [current set of
 `tfds.features.FeatureConnector`s](api_docs/python/tfds/features.md)
 sufficient, but sometimes a new one may need to be defined.
 
+Note: If you need a new `FeatureConnector` not present in the default set and
+are planning to submit it to `tensorflow/datasets`, please open a
+[new issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)
+on GitHub with your proposal.
+
 [`tfds.features.FeatureConnector`s](api_docs/python/tfds/features/FeatureConnector.md)
 in `DatasetInfo` correspond to the elements returned in the
 `tf.data.Dataset` object. For instance, with:
