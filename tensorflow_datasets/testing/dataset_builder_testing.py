@@ -215,7 +215,6 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_extract_result,
-        extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):

@@ -51,8 +51,23 @@ class KMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.KMNIST
 
 
-class EMNISTTest(MNISTTest):
+mnist.EMNIST.BUILDER_CONFIGS.append(
+    mnist.EMNISTConfig(
+        name="test",
+        class_number=200,
+        train_examples=10,
+        test_examples=2,
+        description="EMNIST test data config.",
+        version="1.0.1",
+    ))
+
+
+class EMNISTTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = mnist.EMNIST
+  SPLITS = {
+      "train": 10,
+      "test": 2,
+  }
   BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
 
 

@@ -245,7 +245,7 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 
 class EMNIST(MNIST):
   """Emnist dataset."""
-
+  URL = "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
   VERSION = tfds.core.Version("1.0.1")
 
   BUILDER_CONFIGS = [
@@ -254,7 +254,7 @@ class EMNIST(MNIST):
           class_number=62,
           train_examples=697932,
           test_examples=116323,
-          description="EMNIST ByClass:  814,255 characters. 62 unbalanced classes.",
+          description="EMNIST ByClass",
           version="1.0.1",
       ),
       EMNISTConfig(
@@ -262,7 +262,7 @@ class EMNIST(MNIST):
           class_number=47,
           train_examples=697932,
           test_examples=116323,
-          description="EMNIST ByMerge: 814,255 characters. 47 unbalanced classes.",
+          description="EMNIST ByMerge",
           version="1.0.1",
       ),
       EMNISTConfig(
@@ -270,7 +270,7 @@ class EMNIST(MNIST):
           class_number=47,
           train_examples=112800,
           test_examples=18800,
-          description="EMNIST Balanced:	131,600 characters. 47 balanced classes.",
+          description="EMNIST Balanced",
           version="1.0.1",
       ),
       EMNISTConfig(
@@ -278,7 +278,7 @@ class EMNIST(MNIST):
           class_number=37,
           train_examples=88800,
           test_examples=14800,
-          description="EMNIST Letters:	103,600 characters. 26 balanced classes.",
+          description="EMNIST Letters",
           version="1.0.1",
       ),
       EMNISTConfig(
@@ -286,7 +286,7 @@ class EMNIST(MNIST):
           class_number=10,
           train_examples=240000,
           test_examples=40000,
-          description="EMNIST Digits:  280,000 characters. 10 balanced classes.",
+          description="EMNIST Digits",
           version="1.0.1",
       ),
       EMNISTConfig(
@@ -294,15 +294,7 @@ class EMNIST(MNIST):
           class_number=10,
           train_examples=60000,
           test_examples=10000,
-          description="EMNIST MNIST:  70,000 characters. 10 balanced classes.",
-          version="1.0.1",
-      ),
-      EMNISTConfig(
-          name="test",
-          class_number=62,
-          train_examples=10,
-          test_examples=2,
-          description="EMNIST test data config.",
+          description="EMNIST MNIST",
           version="1.0.1",
       ),
   ]
@@ -328,43 +320,25 @@ class EMNIST(MNIST):
     )
 
   def _split_generators(self, dl_manager):
-
     filenames = {
         "train_data":
-            "emnist-{}-train-images-idx3-ubyte".format(
+            "emnist-{}-train-images-idx3-ubyte.gz".format(
                 self.builder_config.name),
         "train_labels":
-            "emnist-{}-train-labels-idx1-ubyte".format(
+            "emnist-{}-train-labels-idx1-ubyte.gz".format(
                 self.builder_config.name),
         "test_data":
-            "emnist-{}-test-images-idx3-ubyte".format(self.builder_config.name),
+            "emnist-{}-test-images-idx3-ubyte.gz".format(
+                self.builder_config.name),
         "test_labels":
-            "emnist-{}-test-labels-idx1-ubyte".format(self.builder_config.name),
+            "emnist-{}-test-labels-idx1-ubyte.gz".format(
+                self.builder_config.name),
     }
 
-    dir_name = dl_manager.manual_dir
-
-    if not tf.io.gfile.exists(os.path.join(dir_name, filenames["train_data"])):
-      # The current tfds.core.download_manager is unable to
-      # extract multiple and nested files.
-      # We'll add soon! (Issue 234)
-      msg = ("You must download and extract the dataset files manually and "
-             "place them in : ")
-      msg += dl_manager.manual_dir
-      msg += """File tree must be like this :\n
-               .
-              | -- emnist
-              |   |-- emnist-byclass-train-images-idx3-ubyte
-              |   |-- emnist-byclass-train-labels-idx3-ubyte
-              |   |-- emnist-byclass-test-images-idx3-ubyte
-              |   |-- emnist-byclass-test-labels-idx3-ubyte
-              |   |-- emnist-bymerge-train-images-idx3-ubyte
-              |   |-- emnist-bymerge-train-labels-idx3-ubyte
-              |   |-- emnist-bymerge-test-images-idx3-ubyte
-              |   |-- emnist-bymerge-test-labels-idx3-ubyte
-              |   |-- .......
-            """
-      raise Exception(msg.replace("               ", ""))
+    dir_name = os.path.join(dl_manager.download_and_extract(self.URL), "gzip")
+    extracted = dl_manager.extract({
+        k: os.path.join(dir_name, fname) for k, fname in filenames.items()
+    })
 
     return [
         tfds.core.SplitGenerator(
@@ -372,16 +346,16 @@ class EMNIST(MNIST):
             num_shards=10,
             gen_kwargs=dict(
                 num_examples=self.builder_config.train_examples,
-                data_path=os.path.join(dir_name, filenames["train_data"]),
-                label_path=os.path.join(dir_name, filenames["train_labels"]),
+                data_path=extracted["train_data"],
+                label_path=extracted["train_labels"],
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs=dict(
                 num_examples=self.builder_config.test_examples,
-                data_path=os.path.join(dir_name, filenames["test_data"]),
-                label_path=os.path.join(dir_name, filenames["test_labels"]),
+                data_path=extracted["test_data"],
+                label_path=extracted["test_labels"],
             ))
     ]
 
