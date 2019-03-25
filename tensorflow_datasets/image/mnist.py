@@ -28,7 +28,8 @@ from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # MNIST constants
-_MNIST_URL = "http://yann.lecun.com/exdb/mnist/"
+# CVDF mirror of http://yann.lecun.com/exdb/mnist/
+_MNIST_URL = "https://storage.googleapis.com/cvdf-datasets/mnist/"
 _MNIST_TRAIN_DATA_FILENAME = "train-images-idx3-ubyte.gz"
 _MNIST_TRAIN_LABELS_FILENAME = "train-labels-idx1-ubyte.gz"
 _MNIST_TEST_DATA_FILENAME = "t10k-images-idx3-ubyte.gz"
