@@ -6,7 +6,7 @@ import tensorflow_datasets.testing as tfds_test
 class Caltech10K_WebFacesTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = caltech10k_webfaces.Caltech10K_WebFaces
   SPLITS = {  
-      "train": 10,
+    "train": 10,
   }
   
 
