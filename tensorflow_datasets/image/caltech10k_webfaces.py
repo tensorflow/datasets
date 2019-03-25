@@ -36,7 +36,7 @@ IMAGE_DATA = ("http://www.vision.caltech.edu/Image_Datasets/Caltech_10K_WebFaces
 LANDMARK_DATA = ("http://www.vision.caltech.edu/Image_Datasets/Caltech_10K_WebFaces/WebFaces_GroundThruth.txt")
 
 _CITATION = """\
-@article{FeiFei2004LearningGV,
+@article{Angelova05learningobjCategories,
   title={Pruning training sets for learning of object categories},
   author={ A. Angelova and Y. Abu-Mostafam and P. Perona },
   journal={Conference on Computer Vision and Pattern Recognition},
