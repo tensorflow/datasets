@@ -58,13 +58,13 @@ class Caltech10K_WebFaces(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
       builder=self,
-      description='',
+      description=_DESCRIPTION,
       features=tfds.features.FeaturesDict({
         "image": tfds.features.Image(encoding_format='jpeg'),
         "landmarks": {name: tf.int64 for name in LANDMARK_HEADINGS}
       }),
       urls=['http://www.vision.caltech.edu/Image_Datasets/Caltech_10K_WebFaces/'],
-      citation=""
+      citation=_CITATION
     )
 
 
