@@ -43,7 +43,7 @@ LFW_CITATION = """\
 class LFW(tfds.core.GeneratorBasedBuilder):
   """LFW Class"""
   URL = "http://vis-www.cs.umass.edu/lfw/#resources"
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.3.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -51,16 +51,18 @@ class LFW(tfds.core.GeneratorBasedBuilder):
         description=("Labeled Faces in the Wild:\
   A Database for Studying Face Recognition in Unconstrained Environments"),
         features=tfds.features.FeaturesDict({
-            "anchor": tfds.features.Image(shape=LFW_IMAGE_SHAPE),
-            "positive": tfds.features.Image(shape=LFW_IMAGE_SHAPE),
-            "negative": tfds.features.Image(shape=LFW_IMAGE_SHAPE),
+            "image_name": tfds.features.Text(),
+            "image": tfds.features.Image(shape=LFW_IMAGE_SHAPE),
             }),
+        supervised_keys=("image_name", "image"),
         urls=[self.URL],
         citation=LFW_CITATION,
         )
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download_and_extract(_URL)
+    path = os.path.join(path, 'lfw')
+
     # There is no train/test split predefined
     return [
         tfds.core.SplitGenerator(
@@ -72,53 +74,22 @@ class LFW(tfds.core.GeneratorBasedBuilder):
         ]
 
   def _generate_examples(self, data_path):
-    print("Generating triplets, this will take a while")
-    # a list of dictionary will be recieved
-    # each element(dict) will have 3 keys
-    # each of which will store the path to the image
-    triplet_list = self.triplet_maker(data_path)
+    image_list = self.path_maker(data_path)
 
-    for triplet in triplet_list:
+    for image in image_list:
       yield {
-          "anchor": triplet["anchor"],
-          "positive": triplet["positive"],
-          "negative": triplet["negative"],
+          "image_name":image[0],
+          "image": image[1],
       }
 
-  #This is a helper function for making all possible triplets for siamese network(eg. FaceNet)
-  def triplet_maker(self, _path):
-    triplet_list = []
-    lfw = tf.gfile.ListDirectory(_path)
-    lfw_mod = []
-    for lst in lfw:
-      lst_path = os.path.join(_path, lst)
-      temp1 = tf.gfile.ListDirectory(lst_path)
-      if len(temp1) > 1:
-        lfw_mod.append(lst)
-    for index, i in enumerate(lfw_mod):
-      temp = 0
-      path = os.path.join(_path, i)
-      path_list = tf.gfile.ListDirectory(path)
-      total_images = len(path_list)
-      if total_images > 1:
-        for img_no in range(temp, total_images):
-          for offset in range(1, total_images-temp):
-            if (img_no+1) == total_images:
-              break
-            else:
-              for _index, _i in enumerate(lfw_mod):
-                path_list_negative = os.path.join(_path, _i)
-                total_images_negative = tf.gfile.ListDirectory(path_list_negative)
-                if len(total_images_negative) > 1:
-                  if _index == index:
-                    break
-                  else:
-                    for __i in total_images_negative:
-                      triplet_dict = {
-                          'anchor':os.path.join(path, path_list[img_no]),
-                          'positive':os.path.join(path, path_list[img_no+offset]),
-                          'negative':os.path.join(path_list_negative, __i),
-                      }
-                      triplet_list.append(triplet_dict)
-            temp = temp+1
-    return triplet_list
+  #This is a helper function for making lsit of all paths
+  def path_maker(self, _path):
+    path_list = []
+    dir_list = tf.gfile.ListDirectory(_path)
+    for _dir in dir_list:
+      img_dir_path = os.path.join(_path, _dir)
+      img_list = tf.gfile.ListDirectory(img_dir_path)
+      for img in img_list:
+        img_path = os.path.join(img_dir_path, img)
+        path_list.append([_dir, img_path])
+    return path_list
