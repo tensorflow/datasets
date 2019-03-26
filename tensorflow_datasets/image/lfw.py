@@ -82,7 +82,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
           "image": image[1],
       }
 
-  #This is a helper function for making lsit of all paths
+  #This is a helper function for making list of all paths
   def path_maker(self, _path):
     path_list = []
     dir_list = tf.gfile.ListDirectory(_path)
