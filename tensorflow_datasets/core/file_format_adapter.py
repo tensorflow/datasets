@@ -47,6 +47,7 @@ import numpy as np
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.core import utils
 
 
@@ -68,8 +69,22 @@ class FileFormatAdapter(object):
     Args:
       generator_fn: returns generator yielding dictionaries of feature name to
         value.
-      output_files: `list<str>`, output files to write records to.
+      output_files: `list<str>`, output files to write files to.
     """
+    raise NotImplementedError
+
+  def write_from_pcollection(
+      self, pcollection, file_path_prefix=None, num_shards=None):
+    """Write the PCollection to file.
+
+    Args:
+      pcollection: `beam.PCollection`, the PCollection containing the examples
+        to write.
+      file_path_prefix: `str`, output files to write files to.
+      num_shards: `int`,
+    """
+    # TODO(tfds): Should try to unify the write_from_generator signatures:
+    # * Have the FileFormatAdapter to add the prefix when reading/writing
     raise NotImplementedError
 
   @abc.abstractmethod
@@ -95,7 +110,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
   """
 
   def __init__(self, example_reading_spec):
-    """Construcs a TFRecordExampleAdapter.
+    """Constructs a TFRecordExampleAdapter.
 
     Args:
       example_reading_spec: `dict`, feature name to tf.FixedLenFeature or
@@ -110,6 +125,24 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     wrapped = (
         self._serialize_record(d) for d in generator_fn())
     _write_tfrecords_from_generator(wrapped, output_files, shuffle=True)
+
+  def write_from_pcollection(self, pcollection, file_path_prefix, num_shards):
+    beam = lazy_imports.lazy_imports.apache_beam
+
+    # WARNING: WriteToTFRecord do not support long in python2 with the default,
+    # beam implementation, so need to convert the long value (from the proto
+    # field) into int, otherwise, the number of shards will be random.
+    num_shards = int(num_shards)
+
+    return (
+        pcollection
+        | "SerializeDict" >> beam.Map(self._serialize_record)
+        | "Shuffle" >> beam.Reshuffle()
+        | "WriteToExamples" >> beam.io.WriteToTFRecord(
+            file_path_prefix=".".join([file_path_prefix, self.filetype_suffix]),
+            num_shards=num_shards,
+        )
+    )
 
   def dataset_from_filename(self, filename):
     dataset = tf.data.TFRecordDataset(filename, buffer_size=int(16 * 1e6))
@@ -139,7 +172,7 @@ class TFRecordSequenceExampleAdapter(TFRecordExampleAdapter):
   """
 
   def __init__(self, context_reading_spec, sequence_reading_spec):  # pylint: disable=super-init-not-called
-    """Construcs a TFRecordSequenceExampleAdapter.
+    """Constructs a TFRecordSequenceExampleAdapter.
 
     Args:
       context_reading_spec: `dict`, feature name to tf.FixedLenFeature or

@@ -13,24 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""FLoRes Nepali-English translation dataset."""
+"""Tests for cycle_gan dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.translate import flores
+from tensorflow_datasets import testing
+from tensorflow_datasets.image import cycle_gan
 
 
-class FloresTranslateNeen(flores.FloresTranslate):
-  """FLoRes Nepali-English translation dataset."""
+class CycleGANTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = cycle_gan.CycleGAN
+  BUILDER_CONFIG_NAMES_TO_TEST = ["horse2zebra"]
+  SPLITS = {
+      "trainA": 2,
+      "testA": 2,
+      "trainB": 2,
+      "testB": 2,
+  }
 
-  def is_abstract(self):
-    return False
-
-  BUILDER_CONFIGS = [
-      flores.FloresConfig(
-          language_pair=("ne", "en"),
-          version="0.0.2",
-      ),
-  ]
+if __name__ == "__main__":
+  testing.test_main()
