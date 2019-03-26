@@ -401,7 +401,7 @@ class FeaturesDict(FeatureConnector):
         be converted into FeatureConnector.
 
     Raises:
-      ValueError: If one of the given features is not recognised
+      ValueError: If one of the given features is not recognized
     """
     super(FeaturesDict, self).__init__()
     self._feature_dict = {k: to_feature(v) for k, v in feature_dict.items()}

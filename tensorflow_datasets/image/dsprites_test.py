@@ -13,24 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""FLoRes Nepali-English translation dataset."""
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
-from tensorflow_datasets.translate import flores
+from tensorflow_datasets.image import dsprites
+import tensorflow_datasets.testing as tfds_test
 
 
-class FloresTranslateNeen(flores.FloresTranslate):
-  """FLoRes Nepali-English translation dataset."""
+class DspritesTest(tfds_test.DatasetBuilderTestCase):
+  DATASET_CLASS = dsprites.Dsprites
+  SPLITS = {"train": 5}
+  DL_EXTRACT_RESULT = "dsprites_ndarray_co1sh3sc6or40x32y32_64x64.hdf5"
 
-  def is_abstract(self):
-    return False
-
-  BUILDER_CONFIGS = [
-      flores.FloresConfig(
-          language_pair=("ne", "en"),
-          version="0.0.2",
-      ),
-  ]
+if __name__ == "__main__":
+  tfds_test.test_main()

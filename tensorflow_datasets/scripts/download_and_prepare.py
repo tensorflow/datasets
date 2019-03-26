@@ -75,6 +75,10 @@ flags.DEFINE_integer(
     "max_examples_per_split", None,
     "optional max number of examples to write into each split (for testing).")
 
+# Development flags
+flags.DEFINE_boolean("register_checksums", False,
+                     "If True, store size and checksum of downloaded files.")
+
 # Debug flags
 flags.DEFINE_boolean("debug", False,
                      "If True, will drop into debugger after data generation")
@@ -92,6 +96,7 @@ def download_config():
       # TODO(b/116270825): Add flag to force extraction / preparation.
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=FLAGS.max_examples_per_split,
+      register_checksums=FLAGS.register_checksums,
   )
 
 
@@ -99,9 +104,19 @@ def download_and_prepare(builder):
   """Generate data for a given dataset."""
   print("download_and_prepare for dataset {}...".format(builder.info.full_name))
 
+  dl_config = download_config()
+
+  if isinstance(builder, tfds.core.BeamBasedBuilder):
+    beam = tfds.core.lazy_imports.apache_beam
+    # TODO(b/129149715): Restore compute stats. Currently skipped because not
+    # beam supported.
+    dl_config.compute_stats = tfds.download.ComputeStatsMode.SKIP
+    dl_config.beam_options = beam.options.pipeline_options.PipelineOptions()
+
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,
-      download_config=download_config())
+      download_config=dl_config,
+  )
   termcolor.cprint(str(builder.info.as_proto), attrs=["bold"])
 
   if FLAGS.debug:
@@ -111,6 +126,7 @@ def download_and_prepare(builder):
 
 
 def main(_):
+
   if FLAGS.debug_start:
     pdb.set_trace()
   if FLAGS.sleep_start:

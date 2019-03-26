@@ -50,6 +50,7 @@ REQUIRED_PKGS = [
 TESTS_REQUIRE = [
     'jupyter',
     'pytest',
+    'apache-beam',
 ]
 
 if sys.version_info.major == 3:
@@ -71,6 +72,7 @@ DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/quickdraw_labels.txt',
+    'url_checksums/*',
 ]
 
 DATASET_EXTRAS = {
@@ -91,6 +93,7 @@ for deps in DATASET_EXTRAS.values():
   all_dataset_extras.extend(deps)
 
 EXTRAS_REQUIRE = {
+    'apache-beam': ['apache-beam'],
     'tensorflow': ['tensorflow>=1.12.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
