@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import abc
 import collections
 
 import tensorflow as tf
@@ -92,13 +91,19 @@ class FloresConfig(tfds.core.BuilderConfig):
     self.language_pair = language_pair
 
 
-class FloresTranslate(tfds.core.GeneratorBasedBuilder):
+class Flores(tfds.core.GeneratorBasedBuilder):
   """FLoRes machine translation dataset."""
 
-  @abc.abstractproperty
-  def is_abstract(self):
-    """Forces base class to be abstract."""
-    return True
+  BUILDER_CONFIGS = [
+      FloresConfig(
+          language_pair=("ne", "en"),
+          version="0.0.3",
+      ),
+      FloresConfig(
+          language_pair=("si", "en"),
+          version="0.0.3",
+      ),
+  ]
 
   def _info(self):
     source, target = self.builder_config.language_pair
