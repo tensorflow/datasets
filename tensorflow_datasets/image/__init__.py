@@ -28,6 +28,7 @@ from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLa
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
 from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.flowers import TFFlowers
+from tensorflow_datasets.image.food101 import Food101
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
