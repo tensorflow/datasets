@@ -110,7 +110,7 @@ feature_dict (dict): Dictionary containing the feature connectors of a
 
 #### Raises:
 
-* <b>`ValueError`</b>: If one of the given features is not recognised
+* <b>`ValueError`</b>: If one of the given features is not recognized
 
 
 

@@ -35,6 +35,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'future',
+    'numpy',
     'promise',
     'protobuf>=3.6.1',
     'requests',
@@ -48,6 +49,7 @@ REQUIRED_PKGS = [
 TESTS_REQUIRE = [
     'jupyter',
     'pytest',
+    'apache-beam',
 ]
 
 if sys.version_info.major == 3:
@@ -56,6 +58,7 @@ if sys.version_info.major == 3:
 else:
   # Packages only for Python 2
   TESTS_REQUIRE.append('mock')
+  REQUIRED_PKGS.append('bz2file')
   REQUIRED_PKGS.append('functools32')
   REQUIRED_PKGS.append('futures')  # concurrent.futures
 
@@ -67,18 +70,21 @@ if sys.version_info < (3, 4):
 DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
+    'image/quickdraw_labels.txt',
+    'url_checksums/*',
 ]
 
 DATASET_EXTRAS = {
-    'librispeech': ['pydub'],  # and ffmpeg installed
+    # In alphabetical order
     'cats_vs_dogs': ['matplotlib'],
-    'svhn': ['scipy'],
     'colorectal_histology': ['Pillow'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
         'opencv-python==3.4.0.14'
     ],
+    'librispeech': ['pydub'],  # and ffmpeg installed
+    'svhn': ['scipy'],
 }
 
 all_dataset_extras = []
@@ -86,6 +92,7 @@ for deps in DATASET_EXTRAS.values():
   all_dataset_extras.extend(deps)
 
 EXTRAS_REQUIRE = {
+    'apache-beam': ['apache-beam'],
     'tensorflow': ['tensorflow>=1.12.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,

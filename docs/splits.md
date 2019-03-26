@@ -60,7 +60,7 @@ middle_50_percent = tfds.Split.TRAIN.subsplit(tfds.percent[25:75])
 dataset = tfds.load("mnist", split=middle_50_percent)
 ```
 
-### Specify a weighting
+### Specifying weights
 
 ```py
 half, quarter1, quarter2 = tfds.Split.TRAIN.subsplit([2, 1, 1])
@@ -68,7 +68,7 @@ half, quarter1, quarter2 = tfds.Split.TRAIN.subsplit([2, 1, 1])
 dataset = tfds.load("mnist", split=half)
 ```
 
-## Composing split adding and subsplitting
+## Composing split, adding, and subsplitting
 
 It's possible to compose the above operations:
 
@@ -95,7 +95,7 @@ split = (tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
          tfds.Split.TEST).subsplit(tfds.percent[0:50])
 ```
 
-## Dataset using non conventional named split
+## Dataset using non-conventional named split
 
 For dataset using splits not in `tfds.Split.{TRAIN,VALIDATION,TEST}`, you can
 still use the subsplit API by defining the custom named split with

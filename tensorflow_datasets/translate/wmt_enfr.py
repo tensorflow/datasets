@@ -90,6 +90,7 @@ T2T_ENFR_DEV_LARGE = ["wmt17_newstest13"]
 
 class WmtTranslateEnfr(wmt.WmtTranslate):
   """English-French WMT translation dataset."""
+  IN_DEVELOPMENT = True
 
   BUILDER_CONFIGS = [
       # EN-FR translations (matching the data used by Tensor2Tensor library).
