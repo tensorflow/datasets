@@ -501,6 +501,11 @@ Most datasets in TFDS should have a unit test and your reviewer may ask you
 to add one if you haven't already. See the
 [testing section](#testing-mydataset) below.
 
+### 5. Send for review!
+
+Send the pull request for review.
+
+
 ## Large datasets and distributed generation
 
 Some datasets are so large as to require multiple machines to download and
