@@ -1,10 +1,10 @@
-"""Tests for tensorflow_datasets.image.lsun."""
+"""Tests for tensorflow_datasets.structured.iris."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import iris
+from tensorflow_datasets.structured import iris
 
 
 class IrisTest(testing.DatasetBuilderTestCase):
