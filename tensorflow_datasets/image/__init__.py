@@ -26,6 +26,7 @@ from tensorflow_datasets.image.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLarge
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
 from tensorflow_datasets.image.flowers import TFFlowers
+from tensorflow_datasets.image.ham10000 import ham10000
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
@@ -37,4 +38,4 @@ from tensorflow_datasets.image.open_images import OpenImagesV4
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
 from tensorflow_datasets.image.svhn import SvhnCropped
-from tensorflow_datasets.image.ham10000 import ham10000
+
