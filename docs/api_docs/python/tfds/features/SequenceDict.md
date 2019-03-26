@@ -54,10 +54,10 @@ tfds.SequenceDict({
 During data generation:
 
 ```
-yield self.info.encode_example({
+yield {
     'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
     'action': ['left', 'left', 'up', ...],
-})
+}
 ```
 
 Tensor returned by `.as_dataset()`:

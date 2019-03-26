@@ -36,6 +36,12 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import resource as resource_lib
 
+if six.PY3:
+  import bz2  # pylint:disable=g-import-not-at-top
+else:
+  # py2's built-in bz2 package does not support reading from file objects.
+  import bz2file as bz2  # pylint:disable=g-import-not-at-top
+
 
 @utils.memoize()
 def get_extractor(*args, **kwargs):
@@ -44,11 +50,6 @@ def get_extractor(*args, **kwargs):
 
 class ExtractError(Exception):
   """There was an error while extracting the archive."""
-
-  def __init__(self, resource, err):
-    url = ' (%s)' % resource.url if resource.url else ''
-    msg = 'Error while extracting file %s%s: %s.' % (resource.path, url, err)
-    super(ExtractError, self).__init__(msg)
 
 
 class UnsafeArchiveError(Exception):
@@ -71,26 +72,25 @@ class _Extractor(object):
       self._pbar_path = pbar_path
       yield
 
-  def extract(self, resource, to_path):
+  def extract(self, path, extract_method, to_path):
     """Returns `promise.Promise` => to_path."""
     self._pbar_path.update_total(1)
-    if resource.extract_method not in _EXTRACT_METHODS:
-      raise ValueError('Unknonw extraction method "%s".' %
-                       resource.extract_method)
-    future = self._executor.submit(self._sync_extract, resource, to_path)
+    if extract_method not in _EXTRACT_METHODS:
+      raise ValueError('Unknown extraction method "%s".' % extract_method)
+    future = self._executor.submit(self._sync_extract,
+                                   path, extract_method, to_path)
     return promise.Promise.resolve(future)
 
-  def _sync_extract(self, resource, to_path):
+  def _sync_extract(self, from_path, method, to_path):
     """Returns `to_path` once resource has been extracted there."""
-    from_path = resource.path
-    method = resource.extract_method
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     try:
       for path, handle in iter_archive(from_path, method):
         _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     except BaseException as err:
-      raise ExtractError(resource, err)
+      msg = 'Error while extracting %s to %s : %s' % (from_path, to_path, err)
+      raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
     if tf.io.gfile.exists(to_path):
@@ -153,6 +153,12 @@ def iter_gzip(arch_f):
     yield ('', gzip_)  # No inner file.
 
 
+def iter_bzip2(arch_f):
+  with _open_or_pass(arch_f) as fobj:
+    bz2_ = bz2.BZ2File(filename=fobj)
+    yield ('', bz2_)  # No inner file.
+
+
 def iter_zip(arch_f):
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
@@ -170,6 +176,7 @@ _EXTRACT_METHODS = {
     resource_lib.ExtractMethod.TAR_GZ: iter_tar_gz,
     resource_lib.ExtractMethod.GZIP: iter_gzip,
     resource_lib.ExtractMethod.ZIP: iter_zip,
+    resource_lib.ExtractMethod.BZIP2: iter_bzip2,
 }
 
 

@@ -77,6 +77,9 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
       If not specified, path to `fake_examples` will always be returned.
+    EXAMPLE_DIR: `str`, the base directory in in which fake examples are
+      contained. Optional; defaults to
+      tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
     OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
       splits (e.g. a "example" split containing pictures from other splits).
     MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
@@ -100,6 +103,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   DATASET_CLASS = None
   BUILDER_CONFIG_NAMES_TO_TEST = []
   DL_EXTRACT_RESULT = None
+  EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
 
@@ -117,9 +121,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     super(DatasetBuilderTestCase, self).setUp()
     self.patchers = []
     self.builder = self._make_builder()
+
+    # Determine the fake_examples directory.
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
         "test_data/fake_examples/%s" % self.builder.name)
+    if self.EXAMPLE_DIR is not None:
+      self.example_dir = self.EXAMPLE_DIR
+
     if not tf.io.gfile.exists(self.example_dir):
       err_msg = "fake_examples dir %s not found." % self.example_dir
       raise ValueError(err_msg)
@@ -179,7 +188,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
+    # If configs specified, ensure they are all valid
+    for config in self.BUILDER_CONFIG_NAMES_TO_TEST:
+      assert config in self.builder.builder_configs, (
+          "Config %s specified in test does not exist. Available:\n%s" % (
+              config, list(self.builder.builder_configs)))
+
     configs = self.builder.BUILDER_CONFIGS
+    print("Total configs: %d" % len(configs))
     if configs:
       for config in configs:
         # Skip the configs that are not in the list.
@@ -199,13 +215,23 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_extract_result,
-        extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
+      if isinstance(builder, dataset_builder.BeamBasedBuilder):
+        import apache_beam as beam   # pylint: disable=g-import-not-at-top
+        # For Beam datasets, set-up the runner config
+        beam_runner = None
+        beam_options = beam.options.pipeline_options.PipelineOptions()
+      else:
+        beam_runner = None
+        beam_options = None
+
       # Skip computation, otherwise the computed number of samples won't match
       # the one restored from GCS
       download_config = download.DownloadConfig(
           compute_stats=download.ComputeStatsMode.FORCE,
+          beam_runner=beam_runner,
+          beam_options=beam_options,
       )
       builder.download_and_prepare(download_config=download_config)
 

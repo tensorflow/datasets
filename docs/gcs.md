@@ -1,27 +1,31 @@
-# Using Google Cloud Storage to cache preprocessed data
+# Using Google Cloud Storage to store preprocessed data
 
-You can use Google Cloud Storage to cache the preprocessed data. This way, downloading from source and pre-processing can happen only once.
+Normally when you use TensorFlow Datasets, the downloaded and prepared data
+will be cached in a local directory (by default `~/tensorflow_datasets`).
 
-## Why ?
+In some environments where local disk may be ephemeral (a temporary cloud server
+or a [Colab notebook](https://colab.research.google.com)) or you need the data
+to be accessible by multiple machines, it's useful to
+set `data_dir` to a cloud storage system, like a Google Cloud Storage (GCS)
+bucket.
 
-It is especially useful when you're running in the mode where you don't have persistent local storage (for example colab) or when you're running multiple instances of training on multiple machines.
+## How?
 
-## How ?
+First, [create a GCS bucket](https://cloud.google.com/storage/docs/creating-buckets)
+and ensure you have read/write permissions on it.
 
-First, create google cloud bucket (you might also need to create a Google Cloud Platform project first).
+If you'll be running from cloud machines where your personal credentials may
+not be available, you may want to [create a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
+and give it permissions on your bucket.
 
-https://console.cloud.google.com/storage/browser
-
-Then, create a Service Account, give it "read and write" access to your bucket and save the JSON file with the authentication information.
-
-Finally, set the environment variable:
-
+Save the JSON file with the authentication information and set the
+environment variable:
 
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credential/json/file
 ```
 
-And run the tfds and set the data_dir to "gs://YOUR_BUCKET_NAME"
+When you use `tfds`, you can set `data_dir` to `"gs://YOUR_BUCKET_NAME"`
 
 ```python
 ds_train, ds_test = tfds.load(name="mnist", split=["train", "test"], data_dir="gs://YOUR_BUCKET_NAME")
@@ -30,6 +34,7 @@ ds_train, ds_test = tfds.load(name="mnist", split=["train", "test"], data_dir="g
 
 ## Caveats:
 
-  * This approach works for datasets that only use tf.gfile for data access. This is true for most datasets, but not all.
-  * Please check whether license of the dataset allows such storage.
-  * Data will be constantly streamed from the internet (which could lead to network costs).
+* This approach works for datasets that only use `tf.io.gfile` for data access.
+  This is true for most datasets, but not all.
+* Remember that accessing GCS is accessing a remote server and streaming data
+  from it, so you may incur network costs.

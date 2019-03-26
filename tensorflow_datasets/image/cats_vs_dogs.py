@@ -102,6 +102,6 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       }
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
-      raise ValueError("Expected % corrupt images, but found %d" % (
+      raise ValueError("Expected %d corrupt images, but found %d" % (
           _NUM_CORRUPT_IMAGES, num_skipped))
     logging.warning("%d images were corrupted and were skipped", num_skipped)

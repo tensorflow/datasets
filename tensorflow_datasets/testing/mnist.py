@@ -71,7 +71,7 @@ def write_label_file(filename, num_labels):
 
 
 def main(_):
-  for mnist in ["mnist", "fashion_mnist"]:
+  for mnist in ["mnist", "fashion_mnist", "kmnist", "emnist"]:
     output_dir = mnist_dir(mnist)
     test_utils.remake_dir(output_dir)
     write_image_file(os.path.join(output_dir, _TRAIN_DATA_FILENAME), 10)

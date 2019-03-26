@@ -1,0 +1,18 @@
+<annotation>
+<size>
+<width>15</width>
+<height>13</height>
+</size>
+<object>
+  <name>person</name>
+  <pose>left</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+  <xmin>10</xmin>
+  <ymin>6</ymin>
+  <xmax>13</xmax>
+  <ymax>11</ymax>
+  </bndbox>
+</object>
+</annotation>

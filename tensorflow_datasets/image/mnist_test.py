@@ -18,6 +18,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import mnist
 
@@ -44,6 +45,30 @@ class MNISTTest(testing.DatasetBuilderTestCase):
 
 class FashionMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.FashionMNIST
+
+
+class KMNISTTest(MNISTTest):
+  DATASET_CLASS = mnist.KMNIST
+
+
+mnist.EMNIST.BUILDER_CONFIGS.append(
+    mnist.EMNISTConfig(
+        name="test",
+        class_number=200,
+        train_examples=10,
+        test_examples=2,
+        description="EMNIST test data config.",
+        version="1.0.1",
+    ))
+
+
+class EMNISTTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = mnist.EMNIST
+  SPLITS = {
+      "train": 10,
+      "test": 2,
+  }
+  BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
 
 
 if __name__ == "__main__":
