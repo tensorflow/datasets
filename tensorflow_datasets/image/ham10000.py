@@ -104,12 +104,5 @@ def readCsv(labels_dir_path):
 
 def return_map(csv_dict):
     """Function to return the corresponding label from filename"""
-<<<<<<< HEAD
     return {row['image_id']: row['dx'] for row in csv_dict}
-=======
-    labels_dict = {}
-    for row in csv_dict:
-        labels_dict[row['image_id']] = row['dx']
-    return labels_dict
->>>>>>> parent of 92e5120... Changes made
                 
