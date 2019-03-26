@@ -116,6 +116,27 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
                             }),
                 ]
 
+    def _get_bounding_box_values(self, bbox_annotations,
+                                 img_width, img_height):
+        """
+        Function to get normalized bounding box values
+
+        Args:
+        bbox_annotations: list of bbox values in kitti format
+        img_width: image width
+        img_height: image height
+
+        Yields:
+        Normalized bounding box xmin, ymin, xmax, ymax values
+        """
+
+        ymin = bbox_annotations["top"]/img_height
+        xmin = bbox_annotations["left"]/img_width
+        ymax = bbox_annotations["bottom"]/img_height
+        xmax = bbox_annotations["right"]/img_width
+
+        return ymin, xmin, ymax, xmax
+
     def _generate_examples(self, archive, file_names, annotations):
         """Generate birds images, labels and bounding box given the directory path
 
@@ -146,23 +167,17 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
 
             height, width = segmentation_mask.shape
 
-            # BBox attributes in range of 0.0 to 1.0
-            def normalize_bbox(bbox_side, image_side):
-
-                return int(bbox_side)/image_side
+            bbox = self._get_bounding_box_values(annotations[file_name][0], 
+                                                 width, height)
 
             yield {"image": fobj,
                    "image/filename": fname,
                    "label": label_key,
                    "label_name": label_name,
                    "bbox": tfds.features.BBox(
-                        ymin=normalize_bbox(annotations[file_name][0]["top"],
-                                            height),
-                        xmin=normalize_bbox(annotations[file_name][0]["left"],
-                                            width),
-                        ymax=normalize_bbox(annotations[file_name][0]["bottom"],
-                                            height),
-                        xmax=normalize_bbox(annotations[file_name][0]["right"],
-                                            width)),
+                        ymin=bbox[0],
+                        xmin=bbox[1],
+                        ymax=bbox[2],
+                        xmax=bbox[3],),
                    "segmentation_mask": segmentation_mask[:, :, np.newaxis],
                   }
