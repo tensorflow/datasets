@@ -1,0 +1,30 @@
+<annotation>
+<size>
+<width>11</width>
+<height>14</height>
+</size>
+<object>
+  <name>tvmonitor</name>
+  <pose>right</pose>
+  <truncated>1</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+  <xmin>2</xmin>
+  <ymin>5</ymin>
+  <xmax>7</xmax>
+  <ymax>10</ymax>
+  </bndbox>
+</object>
+<object>
+  <name>train</name>
+  <pose>unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+  <xmin>6</xmin>
+  <ymin>1</ymin>
+  <xmax>10</xmax>
+  <ymax>7</ymax>
+  </bndbox>
+</object>
+</annotation>

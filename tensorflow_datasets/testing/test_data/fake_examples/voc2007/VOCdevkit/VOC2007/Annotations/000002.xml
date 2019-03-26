@@ -1,0 +1,18 @@
+<annotation>
+<size>
+<width>15</width>
+<height>11</height>
+</size>
+<object>
+  <name>train</name>
+  <pose>frontal</pose>
+  <truncated>1</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+  <xmin>2</xmin>
+  <ymin>3</ymin>
+  <xmax>6</xmax>
+  <ymax>9</ymax>
+  </bndbox>
+</object>
+</annotation>

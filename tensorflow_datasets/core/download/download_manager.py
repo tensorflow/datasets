@@ -55,7 +55,8 @@ class DownloadConfig(object):
                compute_stats=None,
                max_examples_per_split=None,
                register_checksums=False,
-              ):
+               beam_runner=None,
+               beam_options=None):
     """Constructs a `DownloadConfig`.
 
     Args:
@@ -73,6 +74,10 @@ class DownloadConfig(object):
         into each split.
       register_checksums: `bool`, defaults to False. If True, checksum of
         downloaded files are recorded.
+      beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
+        based on Beam for the generation.
+      beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
+        datasets based on Beam for the generation.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
@@ -82,6 +87,8 @@ class DownloadConfig(object):
         compute_stats or util.ComputeStatsMode.AUTO)
     self.max_examples_per_split = max_examples_per_split
     self.register_checksums = register_checksums
+    self.beam_runner = beam_runner
+    self.beam_options = beam_options
 
 
 class DownloadManager(object):
@@ -176,6 +183,10 @@ class DownloadManager(object):
     """Returns the total size of downloaded files."""
     return sum(size for size, sha256 in self._recorded_sizes_checksums.values())
 
+  def _get_final_dl_path(self, url, sha256):
+    return os.path.join(self._download_dir,
+                        resource_lib.get_dl_fname(url, sha256))
+
   @util.build_synchronize_decorator()
   def _record_sizes_checksums(self):
     """Store in file when recorded size/checksum of downloaded files."""
@@ -194,12 +205,14 @@ class DownloadManager(object):
       self._record_sizes_checksums()
     elif (dl_size, sha256) != self._sizes_checksums.get(resource.url, None):
       raise NonMatchingChecksumError(resource.url, tmp_path)
-    resource.write_info_file(self._dataset_name, original_fname)
+    download_path = self._get_final_dl_path(resource.url, sha256)
+    resource_lib.write_info_file(resource, download_path, self._dataset_name,
+                                 original_fname)
     # Unconditionally overwrite because either file doesn't exist or
     # FORCE_DOWNLOAD=true
-    tf.io.gfile.rename(tmp_path, resource.path, overwrite=True)
+    tf.io.gfile.rename(tmp_path, download_path, overwrite=True)
     tf.io.gfile.rmtree(tmp_dir_path)
-    return resource.path
+    return download_path
 
   # synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.
@@ -211,26 +224,27 @@ class DownloadManager(object):
       resource = resource_lib.Resource(url=resource)
     url = resource.url
     if url in self._sizes_checksums:
-      resource.sha256 = self._sizes_checksums[url][1]
-    if not resource.path:
-      resource.path = os.path.join(self._download_dir, resource.fname)
-    if (not self._force_download and resource.sha256 and
-        resource.exists_locally()):
-      logging.info('URL %s already downloaded: reusing %s.', url, resource.path)
-      self._recorded_sizes_checksums[url] = self._sizes_checksums[url]
-      return promise.Promise.resolve(resource.path)
+      expected_sha256 = self._sizes_checksums[url][1]
+      download_path = self._get_final_dl_path(url, expected_sha256)
+      if not self._force_download and resource.exists_locally(download_path):
+        logging.info('URL %s already downloaded: reusing %s.',
+                     url, download_path)
+        self._recorded_sizes_checksums[url] = self._sizes_checksums[url]
+        return promise.Promise.resolve(download_path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
     # manages the temp directory of downloader.
-    tmp_dir_path = '%s.tmp.%s' % (resource.path, uuid.uuid4().hex)
-    tf.io.gfile.makedirs(tmp_dir_path)
-    logging.info('Downloading %s into %s...', url, tmp_dir_path)
+    download_dir_path = os.path.join(
+        self._download_dir,
+        '%s.tmp.%s' % (resource_lib.get_dl_dirname(url), uuid.uuid4().hex))
+    tf.io.gfile.makedirs(download_dir_path)
+    logging.info('Downloading %s into %s...', url, download_dir_path)
 
     def callback(val):
       checksum, dl_size = val
-      return self._handle_download_result(resource, tmp_dir_path, checksum,
-                                          dl_size)
-    return self._downloader.download(resource, tmp_dir_path).then(callback)
+      return self._handle_download_result(
+          resource, download_dir_path, checksum, dl_size)
+    return self._downloader.download(url, download_dir_path).then(callback)
 
   @util.build_synchronize_decorator()
   @utils.memoize()
@@ -238,16 +252,18 @@ class DownloadManager(object):
     """Extract a single archive, returns Promise->path to extraction result."""
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(path=resource)
-    if resource.extract_method == resource_lib.ExtractMethod.NO_EXTRACT:
-      logging.info(
-          'Skipping extraction for %s (method=NO_EXTRACT).', resource.path)
-      return promise.Promise.resolve(resource.path)
-    extract_path = os.path.join(self._extract_dir, resource.extract_fname)
+    path = resource.path
+    extract_method = resource.extract_method
+    if extract_method == resource_lib.ExtractMethod.NO_EXTRACT:
+      logging.info('Skipping extraction for %s (method=NO_EXTRACT).', path)
+      return promise.Promise.resolve(path)
+    method_name = resource_lib.ExtractMethod(extract_method).name
+    extract_path = os.path.join(self._extract_dir,
+                                '%s.%s' % (method_name, os.path.basename(path)))
     if not self._force_extraction and tf.io.gfile.exists(extract_path):
-      logging.info('Reusing extraction of %s at %s.', resource.path,
-                   extract_path)
+      logging.info('Reusing extraction of %s at %s.', path, extract_path)
       return promise.Promise.resolve(extract_path)
-    return self._extractor.extract(resource, extract_path)
+    return self._extractor.extract(path, extract_method, extract_path)
 
   @util.build_synchronize_decorator()
   @utils.memoize()
