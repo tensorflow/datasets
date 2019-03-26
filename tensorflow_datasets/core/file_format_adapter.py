@@ -420,15 +420,26 @@ def _item_to_tf_feature(item, key_name):
         "instead of a Python list.".format(key_name)
     )
 
+  # Handle strings/bytes first
+  if isinstance(v, (six.binary_type, six.string_types)):
+    v = [tf.compat.as_bytes(v)]
+    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
+  elif (isinstance(v, (tuple, list)) and
+        all(isinstance(x, (six.binary_type, six.string_types)) for x in v)):
+    v = [tf.compat.as_bytes(x) for x in v]
+    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
+  elif (isinstance(v, np.ndarray) and
+        (v.dtype.kind in ("U", "S") or v.dtype == object)):  # binary or unicode
+    v = [tf.compat.as_bytes(x) for x in v.flatten()]
+    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
+
+  # Use NumPy for numeric types
   v = np.array(v).flatten()  # Convert v into a 1-d array
 
   if np.issubdtype(v.dtype, np.integer):
     return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
   elif np.issubdtype(v.dtype, np.floating):
     return tf.train.Feature(float_list=tf.train.FloatList(value=v))
-  elif v.dtype.kind in ("U", "S") or v.dtype == object:  # binary or unicode
-    v = [tf.compat.as_bytes(x) for x in v]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
   else:
     raise ValueError(
         "Value received: {}.\n"
