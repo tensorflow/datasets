@@ -43,7 +43,7 @@ LFW_CITATION = """\
 class LFW(tfds.core.GeneratorBasedBuilder):
   """LFW Class"""
   URL = "http://vis-www.cs.umass.edu/lfw/#resources"
-  VERSION = tfds.core.Version("0.3.0")
+  VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
