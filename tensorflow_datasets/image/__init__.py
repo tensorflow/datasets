@@ -45,4 +45,3 @@ from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.voc import Voc2007
 from tensorflow_datasets.image.lfw import LFW
-
