@@ -29,6 +29,14 @@ _QUICKDRAW_IMAGE_SHAPE = (_QUICKDRAW_IMAGE_SIZE, _QUICKDRAW_IMAGE_SIZE, 1)
 _QUICKDRAW_BASE_URL = "https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap"  # pylint: disable=line-too-long
 _QUICKDRAW_LABELS_FNAME = "image/quickdraw_labels.txt"
 
+_CITATION = """\
+@misc{1704.03477,
+Author = {David Ha and Douglas Eck},
+Title = {A Neural Representation of Sketch Drawings},
+Year = {2017},
+Eprint = {arXiv:1704.03477},
+}
+"""
 
 class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
   """Quickdraw bitmap dataset.
@@ -37,7 +45,7 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
   are generated from the raw vector information (i.e. the 'bitmap' dataset, not
   the 'raw' or 'simplified drawings' datasets).
   """
-
+  URL = "https://github.com/googlecreativelab/quickdraw-dataset"
   VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
@@ -54,9 +62,8 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names_file=labels_path),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
-        citation=("A Neural Representation of Sketch Drawings, "
-                  "D. Ha and D. Eck, arXiv:1704.03477v4, 2017.")
+        urls=self.URL,
+        citation=_CITATION
     )
 
   def _split_generators(self, dl_manager):
