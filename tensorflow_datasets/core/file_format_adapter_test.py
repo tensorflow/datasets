@@ -153,6 +153,9 @@ class TFRecordUtilsTest(testing.TestCase):
         "c2": np.array([2.0]),
         # Empty values supported when type is defined
         "d": np.array([], dtype=np.int32),
+        # Support for byte strings
+        "e": np.zeros(2, dtype=np.uint8).tobytes(),
+        "e2": [np.zeros(2, dtype=np.uint8).tobytes()] * 2,
     })
     feature = example.features.feature
     self.assertEqual([1], list(feature["a"].int64_list.value))
@@ -162,6 +165,9 @@ class TFRecordUtilsTest(testing.TestCase):
     self.assertEqual([2.0], list(feature["c"].float_list.value))
     self.assertEqual([2.0], list(feature["c2"].float_list.value))
     self.assertEqual([], list(feature["d"].int64_list.value))
+    self.assertEqual([b"\x00\x00"], list(feature["e"].bytes_list.value))
+    self.assertEqual([b"\x00\x00", b"\x00\x00"],
+                     list(feature["e2"].bytes_list.value))
 
     with self.assertRaisesWithPredicateMatch(ValueError, "received an empty"):
       # Raise error if an undefined empty value is given

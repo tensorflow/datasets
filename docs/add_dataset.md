@@ -360,6 +360,11 @@ Note that most datasets will find the [current set of
 `tfds.features.FeatureConnector`s](api_docs/python/tfds/features.md)
 sufficient, but sometimes a new one may need to be defined.
 
+Note: If you need a new `FeatureConnector` not present in the default set and
+are planning to submit it to `tensorflow/datasets`, please open a
+[new issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)
+on GitHub with your proposal.
+
 [`tfds.features.FeatureConnector`s](api_docs/python/tfds/features/FeatureConnector.md)
 in `DatasetInfo` correspond to the elements returned in the
 `tf.data.Dataset` object. For instance, with:
@@ -445,13 +450,26 @@ import to its subdirectory's `__init__.py`
 
 ### 2. Run `download_and_prepare` locally.
 
+If you're contributing the dataset to `tensorflow/datasets`, add a checksums
+file for the dataset. On first download, the `DownloadManager` will
+automatically add the sizes and checksums for all downloaded URLs to that file.
+This ensures that on subsequent data generation, the downloaded files are
+as expected.
+
+```sh
+touch tensorflow_datasets/url_checksums/my_new_dataset.txt
+```
+
 Run `download_and_prepare` locally to ensure that data generation works:
 
 ```
 # default data_dir is ~/tensorflow_datasets
 python -m tensorflow_datasets.scripts.download_and_prepare \
+  --register_checksums \
   --datasets=my_new_dataset
 ```
+
+Note that the `--register_checksums` flag must only be used while in development.
 
 Copy in the contents of the `dataset_info.json` file(s) to a [GitHub gist](https://gist.github.com/) and link to it in your pull request.
 
@@ -482,6 +500,11 @@ BibTeX entry (the drop-down menu has an `Online` entry type).
 Most datasets in TFDS should have a unit test and your reviewer may ask you
 to add one if you haven't already. See the
 [testing section](#testing-mydataset) below.
+
+### 5. Send for review!
+
+Send the pull request for review.
+
 
 ## Large datasets and distributed generation
 

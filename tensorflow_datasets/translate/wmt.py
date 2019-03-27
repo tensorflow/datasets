@@ -104,6 +104,7 @@ class WMTConfig(tfds.core.BuilderConfig):
 class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   """WMT translation dataset."""
   _URL = "http://www.statmt.org/wmt18/"
+  IN_DEVELOPMENT = True
 
   @abc.abstractproperty
   def translate_datasets(self):
