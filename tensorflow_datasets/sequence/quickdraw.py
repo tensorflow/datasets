@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """QuickDraw dataset."""
 
 from __future__ import absolute_import
@@ -22,9 +21,10 @@ import os
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
+import tqdm
 
 # Shared constants
-_QUICKDRAW_BASE_URL = "https://storage.googleapis.com/quickdraw_dataset" # pylint: disable=line-too-long
+_QUICKDRAW_BASE_URL = "https://storage.googleapis.com/quickdraw_dataset"  # pylint: disable=line-too-long
 _QUICKDRAW_LABELS_FNAME = "sequence/quickdraw_labels.txt"
 
 
@@ -48,9 +48,11 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
                          "Each category will be stored in its "
                          "own .npz file, for example, cat.npz."),
             features=tfds.features.FeaturesDict({
-                "strokes": tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
-                "label": tfds.features.ClassLabel(names_file=labels_path),
-                }),
+                "strokes":
+                tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
+                "label":
+                tfds.features.ClassLabel(names_file=labels_path),
+            }),
             supervised_keys=("strokes", "label"),
             urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
             citation=("A Neural Representation of Sketch Drawings, "
@@ -70,29 +72,31 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
 
         # Prepare the destinations used to unpack the split
         extract_dir = dl_manager._extract_dir
-        for label in file_paths:
+        for label in tqdm.tqdm(
+                file_paths, desc="Unpacking downloaded archives."):
             data = np.load(file_paths[label], encoding="latin1")
             for split in ["train", "test", "valid"]:
                 split_dir = os.path.join(extract_dir, split)
                 if not tf.io.gfile.exists(split_dir):
                     tf.io.gfile.makedirs(split_dir)
                 np.save(os.path.join(split_dir, label), data[split])
-                assert os.path.exists(os.path.join(split_dir, "{}.npy".format(label)))
+                assert os.path.exists(
+                    os.path.join(split_dir, "{}.npy".format(label)))
 
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
-                num_shards=1,
+                num_shards=20,
                 gen_kwargs={"file_paths": os.path.join(extract_dir, "train")},
             ),
             tfds.core.SplitGenerator(
                 name=tfds.Split.TEST,
-                num_shards=1,
+                num_shards=5,
                 gen_kwargs={"file_paths": os.path.join(extract_dir, "test")},
             ),
             tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
-                num_shards=1,
+                num_shards=5,
                 gen_kwargs={"file_paths": os.path.join(extract_dir, "valid")},
             ),
         ]
