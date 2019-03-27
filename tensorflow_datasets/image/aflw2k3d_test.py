@@ -19,15 +19,15 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 from tensorflow_datasets import testing
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.image import aflw2k3d
 
 
 class Aflw2k3dTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = aflw2k3d.Aflw2k3d
   SPLITS = {
-      'test': 2,
+      tfds.Split.TRAIN: 2,
   }
-  DL_EXTRACT_RESULT = ''
 
 
 if __name__ == '__main__':
