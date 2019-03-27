@@ -40,7 +40,9 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"coco2014"`](#coco2014)
   * [`"colorectal_histology"`](#colorectal_histology)
   * [`"colorectal_histology_large"`](#colorectal_histology_large)
+  * [`"cycle_gan"`](#cycle_gan)
   * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
+  * [`"dsprites"`](#dsprites)
   * [`"emnist"`](#emnist)
   * [`"fashion_mnist"`](#fashion_mnist)
   * [`"horses_or_humans"`](#horses_or_humans)
@@ -55,6 +57,7 @@ np_datasets = tfds.as_numpy(datasets)
   * [`"rock_paper_scissors"`](#rock_paper_scissors)
   * [`"svhn_cropped"`](#svhn_cropped)
   * [`"tf_flowers"`](#tf_flowers)
+  * [`"voc2007"`](#voc2007)
 
 * [`structured`](#structured)
   * [`"titanic"`](#titanic)
@@ -175,7 +178,7 @@ contains bounding boxes.
 * URL: [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
 * `DatasetBuilder`: [`tfds.image.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech.py)
 * Version: `v1.0.0`
-* Size: `?? GiB`
+* Size: `125.64 MiB`
 
 #### Features
 ```python
@@ -188,7 +191,11 @@ FeaturesDict({
 
 
 #### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+TRAIN      |      9,144
+ALL        |      9,144
+
 
 #### Urls
  * [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
@@ -820,6 +827,180 @@ ALL        |         10
 
 ---
 
+### `"cycle_gan"`
+
+Dataset with images from 2 classes (see config name for information on the specific class)
+
+* URL: [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+* `DatasetBuilder`: [`tfds.image.cycle_gan.CycleGAN`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cycle_gan.py)
+
+`cycle_gan` is configured with `tfds.image.cycle_gan.CycleGANConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"apple2orange"` (`v0.1.0`) (`Size: 74.82 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"summer2winter_yosemite"` (`v0.1.0`) (`Size: 126.50 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"horse2zebra"` (`v0.1.0`) (`Size: 111.45 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"monet2photo"` (`v0.1.0`) (`Size: 291.09 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"cezanne2photo"` (`v0.1.0`) (`Size: 266.92 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"ukiyoe2photo"` (`v0.1.0`) (`Size: 279.38 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"vangogh2photo"` (`v0.1.0`) (`Size: 292.39 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"maps"` (`v0.1.0`) (`Size: 1.38 GiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"cityscapes"` (`v0.1.0`) (`Size: 266.65 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"facades"` (`v0.1.0`) (`Size: 33.51 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+* `"iphone2dslr_flower"` (`v0.1.0`) (`Size: 324.22 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+
+
+#### `"cycle_gan/apple2orange"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/summer2winter_yosemite"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/horse2zebra"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/monet2photo"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/cezanne2photo"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/ukiyoe2photo"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/vangogh2photo"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/maps"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/cityscapes"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/facades"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+#### `"cycle_gan/iphone2dslr_flower"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      6,186
+TRAINB     |      3,325
+TRAINA     |      1,812
+TESTA      |        569
+TESTB      |        480
+
+
+#### Urls
+ * [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+
+---
+
 ### `"diabetic_retinopathy_detection"`
 
 A large set of high-resolution retina images taken under a variety of imaging conditions.
@@ -867,6 +1048,81 @@ SAMPLE     |         10
 
 ---
 
+### `"dsprites"`
+
+dSprites is a dataset of 2D shapes procedurally generated from 6 ground truth
+independent latent factors. These factors are *color*, *shape*, *scale*,
+*rotation*, *x* and *y* positions of a sprite.
+
+All possible combinations of these latents are present exactly once,
+generating N = 737280 total images.
+
+### Latent factor values
+
+*   Color: white
+*   Shape: square, ellipse, heart
+*   Scale: 6 values linearly spaced in [0.5, 1]
+*   Orientation: 40 values in [0, 2 pi]
+*   Position X: 32 values in [0, 1]
+*   Position Y: 32 values in [0, 1]
+
+We varied one latent at a time (starting from Position Y, then Position X, etc),
+and sequentially stored the images in fixed order.
+Hence the order along the first dimension is fixed and allows you to map back to
+the value of the latents corresponding to that image.
+
+We chose the latents values deliberately to have the smallest step changes
+while ensuring that all pixel outputs were different. No noise was added.
+
+
+* URL: [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
+* `DatasetBuilder`: [`tfds.image.dsprites.Dsprites`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dsprites.py)
+* Version: `v0.1.0`
+* Size: `26.73 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(64, 64, 1), dtype=tf.uint8),
+    'label_orientation': ClassLabel(shape=(), dtype=tf.int64, num_classes=40),
+    'label_scale': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    'label_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'label_x_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
+    'label_y_position': ClassLabel(shape=(), dtype=tf.int64, num_classes=32),
+    'value_orientation': Tensor(shape=[], dtype=tf.float32),
+    'value_scale': Tensor(shape=[], dtype=tf.float32),
+    'value_shape': Tensor(shape=[], dtype=tf.float32),
+    'value_x_position': Tensor(shape=[], dtype=tf.float32),
+    'value_y_position': Tensor(shape=[], dtype=tf.float32),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |    737,280
+ALL        |    737,280
+
+
+#### Urls
+ * [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@misc{dsprites17,
+author = {Loic Matthey and Irina Higgins and Demis Hassabis and Alexander Lerchner},
+title = {dSprites: Disentanglement testing Sprites dataset},
+howpublished= {https://github.com/deepmind/dsprites-dataset/},
+year = "2017",
+}
+```
+
+---
+
 ### `"emnist"`
 
 The EMNIST dataset is a set of handwritten character digitsderived from the NIST Special Database 19 and converted toa 28x28 pixel image format and dataset structure that directlymatches the MNIST dataset.
@@ -877,19 +1133,17 @@ The EMNIST dataset is a set of handwritten character digitsderived from the NIST
 `emnist` is configured with `tfds.image.mnist.EMNISTConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"byclass"` (`v1.0.1`) (`Size: ?? GiB`): EMNIST ByClass:  814,255 characters. 62 unbalanced classes.
+* `"byclass"` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST ByClass
 
-* `"bymerge"` (`v1.0.1`) (`Size: ?? GiB`): EMNIST ByMerge: 814,255 characters. 47 unbalanced classes.
+* `"bymerge"` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST ByMerge
 
-* `"balanced"` (`v1.0.1`) (`Size: ?? GiB`): EMNIST Balanced:	131,600 characters. 47 balanced classes.
+* `"balanced"` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST Balanced
 
-* `"letters"` (`v1.0.1`) (`Size: ?? GiB`): EMNIST Letters:	103,600 characters. 26 balanced classes.
+* `"letters"` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST Letters
 
-* `"digits"` (`v1.0.1`) (`Size: ?? GiB`): EMNIST Digits:  280,000 characters. 10 balanced classes.
+* `"digits"` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST Digits
 
-* `"mnist"` (`v1.0.1`) (`Size: ?? GiB`): EMNIST MNIST:  70,000 characters. 10 balanced classes.
-
-* `"test"` (`v1.0.1`) (`Size: ?? GiB`): EMNIST test data config.
+* `"mnist"` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST MNIST
 
 
 #### `"emnist/byclass"`
@@ -958,20 +1212,14 @@ FeaturesDict({
 
 
 
-#### `"emnist/test"`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=62),
-})
-```
-
-
-
 
 #### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     70,000
+TRAIN      |     60,000
+TEST       |     10,000
+
 
 #### Urls
  * [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
@@ -1300,7 +1548,7 @@ VALIDATION |        300
 
 The MNIST database of handwritten digits.
 
-* URL: [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
+* URL: [https://storage.googleapis.com/cvdf-datasets/mnist/](https://storage.googleapis.com/cvdf-datasets/mnist/)
 * `DatasetBuilder`: [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 * Version: `v1.0.0`
 * Size: `11.06 MiB`
@@ -1323,7 +1571,7 @@ TEST       |     10,000
 
 
 #### Urls
- * [http://yann.lecun.com/exdb/mnist/](http://yann.lecun.com/exdb/mnist/)
+ * [https://storage.googleapis.com/cvdf-datasets/mnist/](https://storage.googleapis.com/cvdf-datasets/mnist/)
 
 #### Supervised keys (for `as_supervised=True`)
 `(u'image', u'label')`
@@ -1672,6 +1920,67 @@ title = "Flowers",
 month = "jan",
 year = "2019",
 url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
+```
+
+---
+
+### `"voc2007"`
+
+This dataset contains the data from the PASCAL Visual Object Classes Challenge
+2007, a.k.a. VOC2007, corresponding to the Classification and Detection
+competitions.
+A total of 9,963 images are included in this dataset, where each image contains
+a set of objects, out of 20 different classes, making a total of 24,640
+annotated objects.
+In the Classification competition, the goal is to predict the set of labels
+contained in the image, while in the Detection competition the goal is to
+predict the bounding box and label of each individual object.
+
+
+* URL: [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
+* `DatasetBuilder`: [`tfds.image.voc.Voc2007`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/voc.py)
+* Version: `v1.0.0`
+* Size: `868.85 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'labels_no_difficult': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'objects': SequenceDict({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_difficult': Tensor(shape=(), dtype=tf.bool),
+        'is_truncated': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+        'pose': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    }),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      9,963
+TEST       |      4,952
+VALIDATION |      2,510
+TRAIN      |      2,501
+
+
+#### Urls
+ * [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@misc{pascal-voc-2007,
+  author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
+  title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2007 {(VOC2007)} {R}esults",
+  howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
 ```
 
 ---
