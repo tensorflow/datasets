@@ -34,8 +34,8 @@ CHANNELS_NB = 3
 
 def get_random_picture(height=None, width=None):
   """Returns random picture as np.ndarray (int)."""
-  height = random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
-  width = random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
+  height = height or random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
+  width = width or random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
   return np.random.randint(
       256, size=(height, width, CHANNELS_NB), dtype=np.uint8)
 

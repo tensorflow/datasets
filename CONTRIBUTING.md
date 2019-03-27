@@ -4,11 +4,14 @@ Thanks for thinking about contributing to our library !
 
 
 ## Before you start
+
 * Please accept the [Contributor License Agreement](https://cla.developers.google.com) (see below)
-* [Ask here](https://github.com/tensorflow/datasets/issues/142) to be added to
-  the list of collaborators so that issues can be assigned to you.
 * Comment on the issue that you plan to work on so we can assign it to you and
-  there isn't unnecessary duplication of work.
+  there isn't unnecessary duplication of work. If this is your first time
+  contributing, we'll send you an invitation on GitHub to be a contributor;
+  you must accept this invitation
+  [here](https://github.com/tensorflow/datasets/settings/collaboration)
+  before we can assign you the issue.
 * When you plan to work on something larger (for example, adding new
   `FeatureConnectors`), please respond on the issue (or create one if there
   isn't one) to explain your plan and give others a chance to discuss.

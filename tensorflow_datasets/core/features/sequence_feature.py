@@ -236,11 +236,11 @@ class Sequence(feature_lib.FeatureConnector):
     return self._seq_feature.get_serialized_info()['inner']
 
   def encode_example(self, example_data):
-    """Wrapper arround SequenceDict."""
+    """Wrapper around SequenceDict."""
     return self._seq_feature.encode_example({'inner': example_data})['inner']
 
   def decode_example(self, tfexample_data):
-    """Wrapper arround SequenceDict."""
+    """Wrapper around SequenceDict."""
     return self._seq_feature.decode_example({'inner': tfexample_data})['inner']
 
   def _additional_repr_info(self):
