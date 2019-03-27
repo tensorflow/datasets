@@ -42,10 +42,7 @@ from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
-<<<<<<< HEAD
 from tensorflow_datasets.image.stanford_dogs import StanfordDogs
-=======
 from tensorflow_datasets.image.shapes3d import Shapes3d
->>>>>>> 9c5d49d17fad5d1f1a17f31b70eb8347bec3945d
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.voc import Voc2007
