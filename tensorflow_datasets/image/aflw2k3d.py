@@ -23,7 +23,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -76,7 +75,7 @@ class Aflw2k3d(tfds.core.GeneratorBasedBuilder):
         }),
         urls=["http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm"],
         citation=_CITATION,
-    )
+        )
 
   def _split_generators(self, dl_manager):
     extracted_path = dl_manager.download_and_extract(
@@ -84,12 +83,11 @@ class Aflw2k3d(tfds.core.GeneratorBasedBuilder):
     )
     return [
         tfds.core.SplitGenerator(
-            name="test",
+            name=tfds.Split.TRAIN,
             num_shards=1,
             gen_kwargs={
                 "image_dir_path": os.path.join(extracted_path, 'AFLW2000'),
-            },
-        ),
+            }),
     ]
 
   def _generate_examples(self, image_dir_path):
