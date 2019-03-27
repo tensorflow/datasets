@@ -3,16 +3,16 @@ import os
 import numpy as np
 import tensorflow as tf
 
-_NUM_CATEGORIES_TRAIN = 20
-_NUM_CATEGORIES_VAL = 6
-_NUM_CATEGORIES_TEST = 8
+_NUM_CATEGORIES_TRAIN = 5 # Original size in dataset is 20
+_NUM_CATEGORIES_VAL = 2 # Original size in dataset is 6
+_NUM_CATEGORIES_TEST = 2 # Original size in dataset is 8
 
-_NUM_CLASSES_TRAIN = 351
-_NUM_CLASSES_VAL = 97
-_NUM_CLASSES_TEST = 160
-_NUM_IMAGES_TRAIN = 44869  # Original size in dataset is 448695
-_NUM_IMAGES_VAL = 12426  # Original size in dataset is 124261
-_NUM_IMAGES_TEST = 20620  # Original size in dataset is 206209
+_NUM_CLASSES_TRAIN = 10 # Original size in dataset is 351
+_NUM_CLASSES_VAL = 3 # Original size in dataset is 97
+_NUM_CLASSES_TEST = 4 # Original size in dataset is 160
+_NUM_IMAGES_TRAIN = 20  # Original size in dataset is 448695
+_NUM_IMAGES_VAL = 6  # Original size in dataset is 124261
+_NUM_IMAGES_TEST = 10  # Original size in dataset is 206209
 _PATH_DUMMY_DATA = "tensorflow_datasets/testing/test_data/fake_examples/tiered_imagenet"
 
 
