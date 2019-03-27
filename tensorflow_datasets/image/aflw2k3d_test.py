@@ -29,6 +29,5 @@ class Aflw2k3dTest(testing.DatasetBuilderTestCase):
       tfds.Split.TRAIN: 2,
   }
 
-
 if __name__ == '__main__':
   testing.test_main()
