@@ -15,8 +15,7 @@
 
 from __future__ import absolute_import
 from __future__ import division
-from __future__ import print_function
-
+from __future__ import print_function 
 from tensorflow_datasets.image import caltech_birds
 import tensorflow_datasets.testing as tfds_test
 
@@ -31,6 +30,18 @@ class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
     }
 
     DL_EXTRACT_RESULT = ['Lists.tgz', 'Annotations.tgz', 'Images.tar.gz']
+
+
+class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
+
+    DATASET_CLASS = caltech_birds.CaltechBirds2011
+
+    SPLITS = {  # No. of train and test samples
+      'train': 6,
+      'test': 4,
+    }
+
+    DL_EXTRACT_RESULT = ['extracted/TAR_GZ.CUB_200_2011.tar.gz', 'extracted/segmentations.tgz']
 
 
 if __name__ == '__main__':

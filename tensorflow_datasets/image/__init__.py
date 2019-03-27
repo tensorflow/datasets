@@ -16,6 +16,7 @@
 """Image datasets."""
 
 from tensorflow_datasets.image.caltech import Caltech101
+from tensorflow_datasets.image.caltech_birds import CaltechBirds2010
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
@@ -41,7 +42,6 @@ from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
-from tensorflow_datasets.image.caltech_birds import CaltechBirds2010
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.voc import Voc2007

@@ -19,7 +19,7 @@ from __future__ import print_function
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 import numpy as np
 import os
 import re
@@ -27,7 +27,8 @@ import re
 _DESCRIPTION = """\
 Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos 
 of 200 bird species (mostly North American). The total number of 
-categories of birds is 200 and there are 6033 images in the dataset.
+categories of birds is 200 and there are 6033 images in the 2010 
+dataset and 11,788 images in the 2011 dataset.
 Annotations include bounding boxes, segmentation labels.
 """
 
@@ -41,16 +42,22 @@ Title = {{Caltech-UCSD Birds 200}},
 Year = {2010}
 }
 """
-_IMAGES_URL = "http://www.vision.caltech.edu/visipedia-data/CUB-200/images.tgz"
-_SPLIT_URL = "http://www.vision.caltech.edu/visipedia-data/CUB-200/lists.tgz"
-_ANNOTATIONS_URL = "http://www.vision.caltech.edu/visipedia-data/CUB-200/annotations.tgz"
 _NAME_RE = re.compile(r"((\w*)/)*(\d*).(\w*)/(\w*.jpg)$")
 
 
 class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
-    '''Caltech Birds dataset'''
+    '''Caltech Birds 2010 dataset'''
 
     VERSION = tfds.core.Version("0.1.0")
+
+    @property
+    def _caltech_birds_info(self):
+        return CaltechBirdsInfo(
+            name=self.name,
+            images_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/images.tgz",
+            split_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/lists.tgz",
+            annotations_url="http://www.vision.caltech.edu/visipedia-data/CUB-200/annotations.tgz",
+        )
 
     def _info(self):
 
@@ -74,8 +81,15 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
 
-        download_path = dl_manager.download([_SPLIT_URL, _ANNOTATIONS_URL, _IMAGES_URL])
-        extracted_path = dl_manager.download_and_extract([_SPLIT_URL, _ANNOTATIONS_URL])
+        download_path = dl_manager.download([
+                                    self._caltech_birds_info.split_url,
+                                    self._caltech_birds_info.annotations_url,
+                                    self._caltech_birds_info.images_url,
+                                    ])
+        extracted_path = dl_manager.download_and_extract([
+                                    self._caltech_birds_info.split_url,
+                                    self._caltech_birds_info.annotations_url
+                                    ])
 
         train_path = os.path.join(extracted_path[0], "lists/train.txt")
         test_path = os.path.join(extracted_path[0], "lists/test.txt")
@@ -93,7 +107,8 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
             for fname in files:
                 if fname.endswith(".mat"):
                     path = os.path.join(root, fname)
-                    mat = tfds.core.lazy_imports.scipy_io.loadmat(path, squeeze_me=True, variable_names=["bbox", "seg"])
+                    mat = tfds.core.lazy_imports.scipy_io.loadmat(path, 
+                                squeeze_me=True, variable_names=["bbox", "seg"])
                     attributes[fname.split(".")[0]].append(mat["bbox"])
                     attributes[fname.split(".")[0]].append(mat["seg"])
 
@@ -170,14 +185,145 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
             bbox = self._get_bounding_box_values(annotations[file_name][0], 
                                                  width, height)
 
+            def clip_bbox_values(value):
+                if value > 1.0:
+                    return 1.0
+                else:
+                    return value
+
             yield {"image": fobj,
                    "image/filename": fname,
                    "label": label_key,
                    "label_name": label_name,
                    "bbox": tfds.features.BBox(
-                        ymin=bbox[0],
-                        xmin=bbox[1],
-                        ymax=bbox[2],
-                        xmax=bbox[3],),
+                        ymin=clip_bbox_values(bbox[0]),
+                        xmin=clip_bbox_values(bbox[1]),
+                        ymax=clip_bbox_values(bbox[2]),
+                        xmax=clip_bbox_values(bbox[3]),),
                    "segmentation_mask": segmentation_mask[:, :, np.newaxis],
-                  }
+                   }
+
+
+class CaltechBirds2011(CaltechBirds2010):
+    '''Caltech Birds 2011 dataset'''
+
+    VERSION = tfds.core.Version("0.1.0")
+
+    @property
+    def _caltech_birds_info(self):
+        return CaltechBirdsInfo(
+            name=self.name,
+            images_url="http://www.vision.caltech.edu/visipedia-data/CUB-200-2011/CUB_200_2011.tgz",
+            split_url=None,
+            annotations_url="http://www.vision.caltech.edu/visipedia-data/CUB-200-2011/segmentations.tgz"
+        )
+
+    def _info(self):
+
+        return tfds.core.DatasetInfo(
+                builder=self,
+                description=_DESCRIPTION,
+                features=tfds.features.FeaturesDict({
+                    # Images are of varying size
+                    # TODO: Need to add attributes and their annotations
+                    "image": tfds.features.Image(),
+                    "image/filename": tfds.features.Text(),
+                    "label": tfds.features.ClassLabel(num_classes=200),
+                    "label_name": tfds.features.Text(),
+                    "bbox": tfds.features.BBoxFeature(),
+                    "segmentation_mask": tfds.features.Image(shape=(None, None, 1)),
+                }),
+                supervised_keys=("image", "label"),
+                urls=_URL,
+                citation=_CITATION
+                )
+
+    def _split_generators(self, dl_manager):
+
+        extracted_path = dl_manager.download_and_extract([
+                                    self._caltech_birds_info.images_url,
+                                    self._caltech_birds_info.annotations_url
+                                    ])
+        tar_file_path = extracted_path[0].split("extracted/")
+        tar_file = tar_file_path[0] + tar_file_path[1][7:]
+
+        image_names_path = os.path.join(extracted_path[0], "CUB_200_2011/images.txt")
+        split_path = os.path.join(extracted_path[0], "CUB_200_2011/train_test_split.txt")
+        bbox_path = os.path.join(extracted_path[0], "CUB_200_2011/bounding_boxes.txt")
+
+        train_list, test_list = [], []
+        attributes = defaultdict(list)
+
+        with tf.io.gfile.GFile(split_path) as f, \
+        tf.io.gfile.GFile(image_names_path) as f1, \
+        tf.io.gfile.GFile(bbox_path) as f2:
+            for line, line1, line2 in zip(f, f1, f2):
+                img_idx, val = line.split()
+                idx, img_name = line1.split()
+                res = _NAME_RE.match(img_name)
+                matches = res.groups()
+                attributes[matches[-1].split(".")[0]].append(line2.split()[1:])
+                if img_idx == idx:
+                    if int(val) == 1:
+                        train_list.append(img_name)
+                    else:
+                        test_list.append(img_name)
+
+        for root, _, files in tf.io.gfile.walk(extracted_path[1]):
+            for fname in files:
+                if fname.endswith(".png"):
+                    mask = tfds.core.lazy_imports.scipy.misc.imread(os.path.join(root, fname))
+                    mask = np.resize(mask, (mask.shape[0], mask.shape[1]))
+                    attributes[fname.split(".")[0]].append(mask)
+
+        return [tfds.core.SplitGenerator(
+                name=tfds.Split.TRAIN,
+                num_shards=10,
+                gen_kwargs={
+                            "archive": dl_manager.iter_archive(tar_file),
+                            "file_names": train_list,
+                            "annotations": attributes,
+                            }),
+
+                tfds.core.SplitGenerator(
+                name=tfds.Split.TEST,
+                num_shards=1,
+                gen_kwargs={
+                            "archive": dl_manager.iter_archive(tar_file),
+                            "file_names": test_list,
+                            "annotations": attributes,
+                            }),
+                ]
+
+    def _get_bounding_box_values(self, bbox_annotations, img_width, img_height):
+        """
+        Function to get normalized bounding box values (Conversion to KITTI format)
+
+        Args:
+        bbox_annotations: list of bbox values in kitti format
+        img_width: image width
+        img_height: image height
+
+        Yields:
+        Normalized bounding box xmin, ymin, xmax, ymax values
+        """
+        xmin = float(bbox_annotations[0])/img_width
+        ymin = float(bbox_annotations[1])/img_height
+        xmax = (float(bbox_annotations[0]) + float(bbox_annotations[2]))/img_width
+        ymax = (float(bbox_annotations[1]) + float(bbox_annotations[3]))/img_height
+
+        return ymin, xmin, ymax, xmax
+
+
+class CaltechBirdsInfo(namedtuple("_CaltechBirdsInfo", [
+    "name",
+    "images_url",
+    "split_url",
+    "annotations_url"])):
+    """Contains the information necessary to generate a Caltech Birds dataset.
+    Args:
+        name (str): name of dataset.
+        images_url (str): images URL.
+        split_url (str): train/test split file URL.
+        annotations_url (str): annotation folder URL.
+    """
