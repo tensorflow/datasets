@@ -42,7 +42,7 @@ LFW_CITATION = """\
 
 class LFW(tfds.core.GeneratorBasedBuilder):
   """LFW Class"""
-  URL = "http://vis-www.cs.umass.edu/lfw/#resources"
+  URL = "http://vis-www.cs.umass.edu/lfw"
   VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
@@ -51,10 +51,10 @@ class LFW(tfds.core.GeneratorBasedBuilder):
         description=("Labeled Faces in the Wild:\
   A Database for Studying Face Recognition in Unconstrained Environments"),
         features=tfds.features.FeaturesDict({
-            "image_name": tfds.features.Text(),
+            "name": tfds.features.Text(),
             "image": tfds.features.Image(shape=LFW_IMAGE_SHAPE),
             }),
-        supervised_keys=("image_name", "image"),
+        supervised_keys=("name", "image"),
         urls=[self.URL],
         citation=LFW_CITATION,
         )
@@ -78,7 +78,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
 
     for image in image_list:
       yield {
-          "image_name":image[0],
+          "name":image[0],
           "image": image[1],
       }
 
