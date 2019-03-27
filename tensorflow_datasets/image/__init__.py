@@ -15,6 +15,7 @@
 
 """Image datasets."""
 
+from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.celeba import CelebA

@@ -76,6 +76,7 @@ DATASET_FILES = [
 
 DATASET_EXTRAS = {
     # In alphabetical order
+    'aflw2k3d': ['scipy'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'imagenet2012_corrupted': [
