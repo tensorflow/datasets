@@ -24,7 +24,9 @@ import tensorflow_datasets.public_api as tfds
 import tqdm
 
 # Shared constants
-_QUICKDRAW_BASE_URL = "https://storage.googleapis.com/quickdraw_dataset"  # pylint: disable=line-too-long
+_QUICKDRAW_BASE_URL = (
+    "https://storage.googleapis.com/quickdraw_dataset"
+)  # pylint: disable=line-too-long
 _QUICKDRAW_LABELS_FNAME = "sequence/quickdraw_labels.txt"
 
 
@@ -40,23 +42,27 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
         labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
         return tfds.core.DatasetInfo(
             builder=self,
-            description=("In this dataset, 75K samples (70K Training, "
-                         "2.5K Validation, 2.5K Test) has been randomly "
-                         "selected from each category, "
-                         "processed with RDP line simplification "
-                         "with an epsilon parameter of 2.0. "
-                         "Each category will be stored in its "
-                         "own .npz file, for example, cat.npz."),
-            features=tfds.features.FeaturesDict({
-                "strokes":
-                tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
-                "label":
-                tfds.features.ClassLabel(names_file=labels_path),
-            }),
+            description=(
+                "In this dataset, 75K samples (70K Training, "
+                "2.5K Validation, 2.5K Test) has been randomly "
+                "selected from each category, "
+                "processed with RDP line simplification "
+                "with an epsilon parameter of 2.0. "
+                "Each category will be stored in its "
+                "own .npz file, for example, cat.npz."
+            ),
+            features=tfds.features.FeaturesDict(
+                {
+                    "strokes": tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
+                    "label": tfds.features.ClassLabel(names_file=labels_path),
+                }
+            ),
             supervised_keys=("strokes", "label"),
             urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
-            citation=("A Neural Representation of Sketch Drawings, "
-                      "D. Ha and D. Eck, arXiv:1704.03477v4, 2017."),
+            citation=(
+                "A Neural Representation of Sketch Drawings, "
+                "D. Ha and D. Eck, arXiv:1704.03477v4, 2017."
+            ),
         )
 
     def _split_generators(self, dl_manager):
@@ -72,16 +78,14 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
 
         # Prepare the destinations used to unpack the split
         extract_dir = dl_manager._extract_dir
-        for label in tqdm.tqdm(
-                file_paths, desc="Unpacking downloaded archives."):
+        for label in tqdm.tqdm(file_paths, desc="Unpacking downloaded archives."):
             data = np.load(file_paths[label], encoding="latin1")
             for split in ["train", "test", "valid"]:
                 split_dir = os.path.join(extract_dir, split)
                 if not tf.io.gfile.exists(split_dir):
                     tf.io.gfile.makedirs(split_dir)
                 np.save(os.path.join(split_dir, label), data[split])
-                assert os.path.exists(
-                    os.path.join(split_dir, "{}.npy".format(label)))
+                assert os.path.exists(os.path.join(split_dir, "{}.npy".format(label)))
 
         return [
             tfds.core.SplitGenerator(
@@ -113,8 +117,7 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
             The QuickDraw examples, as defined in the dataset info features.
 
         """
-        labels = self.info.features["label"].names
-        for label in labels:
-            data = np.load(os.path.join(file_paths, "{}.npy".format(label)))
+        for path in tf.io.gfile.listdir(file_paths):
+            data = np.load(os.path.join(file_paths, path))
             for strokes in data:
-                yield {"strokes": strokes, "label": label}
+                yield {"strokes": strokes, "label": path.strip(".npy")}
