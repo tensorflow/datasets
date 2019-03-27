@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Open images datasets.
+"""AFLW2000-3D Datasets
 
-https://storage.googleapis.com/openimages/web/index.html
+http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm
 """
 
 from __future__ import absolute_import
