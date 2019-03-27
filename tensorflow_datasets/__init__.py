@@ -44,7 +44,6 @@ from __future__ import print_function
 # needs to happen before anything else, since the imports below will try to
 # import tensorflow, too.
 from tensorflow_datasets.core import tf_compat
-
 tf_compat.ensure_tf_install()
 
 # Imports for registration
@@ -63,6 +62,5 @@ from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
 
 # __all__ for import * as well as documentation
 from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
-
 __all__ = public_api.__all__
 

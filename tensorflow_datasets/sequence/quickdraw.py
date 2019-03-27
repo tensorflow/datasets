@@ -24,10 +24,7 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # Shared constants
-_QUICKDRAW_BASE_URL = (
-    "https://storage.googleapis.com/quickdraw_dataset"
-)  # pylint: disable=line-too-long
-
+_QUICKDRAW_BASE_URL = "https://storage.googleapis.com/quickdraw_dataset" # pylint: disable=line-too-long
 _QUICKDRAW_LABELS_FNAME = "sequence/quickdraw_labels.txt"
 
 
@@ -43,26 +40,21 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
         labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
         return tfds.core.DatasetInfo(
             builder=self,
-            description=(
-                "In this dataset, 75K samples (70K Training, 2.5K Validation, "
-                "2.5K Test) has been randomly selected from each category, "
-                "processed with RDP line simplification "
-                "with an epsilon parameter of 2.0. "
-                "Each category will be stored in its "
-                "own .npz file, for example, cat.npz."
-            ),
-            features=tfds.features.FeaturesDict(
-                {
-                    "strokes": tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
-                    "label": tfds.features.ClassLabel(names_file=labels_path),
-                }
-            ),
+            description=("In this dataset, 75K samples (70K Training, "
+                         "2.5K Validation, 2.5K Test) has been randomly "
+                         "selected from each category, "
+                         "processed with RDP line simplification "
+                         "with an epsilon parameter of 2.0. "
+                         "Each category will be stored in its "
+                         "own .npz file, for example, cat.npz."),
+            features=tfds.features.FeaturesDict({
+                "strokes": tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
+                "label": tfds.features.ClassLabel(names_file=labels_path),
+                }),
             supervised_keys=("strokes", "label"),
             urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
-            citation=(
-                "A Neural Representation of Sketch Drawings, "
-                "D. Ha and D. Eck, arXiv:1704.03477v4, 2017."
-            ),
+            citation=("A Neural Representation of Sketch Drawings, "
+                      "D. Ha and D. Eck, arXiv:1704.03477v4, 2017."),
         )
 
     def _split_generators(self, dl_manager):
