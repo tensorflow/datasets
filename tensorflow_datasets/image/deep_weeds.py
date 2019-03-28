@@ -16,6 +16,8 @@ _DESCRIPTION = ("""The DeepWeeds dataset consists of 17,509 images capturing eig
 
 _NAMES = ["Chinee apple", "Snake weed", "Lantana", "Prickly acacia", "Siam weed", "Parthenium", "Rubber vine", "Parkinsonia", "Negative"]
 
+_IMAGE_SHAPE = (256,256,3)
+
 _CITATION = """\
 
  @article{DeepWeeds2019,
@@ -60,7 +62,7 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
             description=(_DESCRIPTION),
             
             features=tfds.features.FeaturesDict({
-                "image":tfds.features.Image(),
+                "image":tfds.features.Image(shape=_IMAGE_SHAPE),
                 "label": tfds.features.ClassLabel(names=_NAMES),
             }),
 
