@@ -45,7 +45,6 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
     This is the version of the QuickDraw data used to train the SketchRNN model.
     """
 
-    URL = "https://github.com/googlecreativelab/quickdraw-dataset"
     VERSION = tfds.core.Version("1.0.0")
 
     def _info(self):
@@ -66,7 +65,7 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(names_file=labels_path),
             }),
             supervised_keys=("strokes", "label"),
-            urls=self.URL,
+            urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
             citation=_CITATION,
         )
 
