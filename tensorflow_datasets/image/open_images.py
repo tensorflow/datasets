@@ -140,7 +140,7 @@ BBOX_SOURCES = [
 class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   """Open Images v4."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
 
   def _info(self):
     class_label = tfds.features.ClassLabel()
