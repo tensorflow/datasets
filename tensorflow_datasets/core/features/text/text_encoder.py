@@ -359,7 +359,7 @@ class Tokenizer(object):
         all alphanumeric or all non-alphanumeric).
       reserved_tokens: `list<str>`, a list of strings that, if any are in `s`,
         will be preserved as whole tokens, even if they contain mixed
-        alphnumeric/non-alphanumeric characters.
+        alphanumeric/non-alphanumeric characters.
     """
     self._alphanum_only = alphanum_only
     reserved_tokens, self._reserved_tokens_re = _prepare_reserved_tokens(

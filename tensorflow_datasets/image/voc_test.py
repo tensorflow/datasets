@@ -13,24 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""FLoRes Nepali-English translation dataset."""
+"""Tests for PASCAL VOC image data loading."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.translate import flores
+from tensorflow_datasets import testing
+from tensorflow_datasets.image import voc
 
 
-class FloresTranslateSien(flores.FloresTranslate):
-  """FLoRes Nepali-English translation dataset."""
+class Voc2007Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = voc.Voc2007
+  SPLITS = {
+      'train': 1,
+      'validation': 2,
+      'test': 3,
+  }
 
-  def is_abstract(self):
-    return False
-
-  BUILDER_CONFIGS = [
-      flores.FloresConfig(
-          language_pair=("si", "en"),
-          version="0.0.2",
-      ),
-  ]
+if __name__ == '__main__':
+  testing.test_main()

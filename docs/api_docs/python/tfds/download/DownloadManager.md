@@ -1,9 +1,8 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.download.DownloadManager" />
 <meta itemprop="path" content="Stable" />
-<meta itemprop="property" content="download_sizes"/>
+<meta itemprop="property" content="downloaded_size"/>
 <meta itemprop="property" content="manual_dir"/>
-<meta itemprop="property" content="recorded_download_checksums"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
 <meta itemprop="property" content="download_and_extract"/>
@@ -76,9 +75,9 @@ __init__(
     extract_dir=None,
     manual_dir=None,
     dataset_name=None,
-    checksums=None,
     force_download=False,
-    force_extraction=False
+    force_extraction=False,
+    register_checksums=False
 )
 ```
 
@@ -91,28 +90,22 @@ Download manager constructor.
 * <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data directory.
 * <b>`dataset_name`</b>: `str`, name of dataset this instance will be used for. If
     provided, downloads will contain which datasets they were used for.
-* <b>`checksums`</b>: `dict<str url, str sha256>`, url to sha256 of resource.
-    Only URLs present are checked.
-    If empty, checksum of (already) downloaded files is computed and can
-    then be retrieved using `recorded_download_checksums` property.
 * <b>`force_download`</b>: `bool`, default to False. If True, always [re]download.
 * <b>`force_extraction`</b>: `bool`, default to False. If True, always [re]extract.
+* <b>`register_checksums`</b>: `bool`, default to False. If True, dl checksums aren't
+    checked, but stored into file.
 
 
 
 ## Properties
 
-<h3 id="download_sizes"><code>download_sizes</code></h3>
+<h3 id="downloaded_size"><code>downloaded_size</code></h3>
 
-Returns sizes (in bytes) for downloaded urls.
+Returns the total size of downloaded files.
 
 <h3 id="manual_dir"><code>manual_dir</code></h3>
 
 Returns the directory containing the manually extracted data.
-
-<h3 id="recorded_download_checksums"><code>recorded_download_checksums</code></h3>
-
-Returns checksums for downloaded urls.
 
 
 

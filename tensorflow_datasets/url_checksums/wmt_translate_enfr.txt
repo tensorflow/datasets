@@ -1,0 +1,1 @@
+https://s3.amazonaws.com/opennmt-trainingdata/baseline-1M-enfr.tgz 86644965 0f6b16e2c1506eac72aedc9433b35fd155606076ed9f9c906b644682cb868114

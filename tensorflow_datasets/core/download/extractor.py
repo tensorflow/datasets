@@ -51,11 +51,6 @@ def get_extractor(*args, **kwargs):
 class ExtractError(Exception):
   """There was an error while extracting the archive."""
 
-  def __init__(self, resource, err):
-    url = ' (%s)' % resource.url if resource.url else ''
-    msg = 'Error while extracting file %s%s: %s.' % (resource.path, url, err)
-    super(ExtractError, self).__init__(msg)
-
 
 class UnsafeArchiveError(Exception):
   """The archive is unsafe to unpack, e.g. absolute path."""
@@ -77,26 +72,25 @@ class _Extractor(object):
       self._pbar_path = pbar_path
       yield
 
-  def extract(self, resource, to_path):
+  def extract(self, path, extract_method, to_path):
     """Returns `promise.Promise` => to_path."""
     self._pbar_path.update_total(1)
-    if resource.extract_method not in _EXTRACT_METHODS:
-      raise ValueError('Unknown extraction method "%s".' %
-                       resource.extract_method)
-    future = self._executor.submit(self._sync_extract, resource, to_path)
+    if extract_method not in _EXTRACT_METHODS:
+      raise ValueError('Unknown extraction method "%s".' % extract_method)
+    future = self._executor.submit(self._sync_extract,
+                                   path, extract_method, to_path)
     return promise.Promise.resolve(future)
 
-  def _sync_extract(self, resource, to_path):
+  def _sync_extract(self, from_path, method, to_path):
     """Returns `to_path` once resource has been extracted there."""
-    from_path = resource.path
-    method = resource.extract_method
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     try:
       for path, handle in iter_archive(from_path, method):
         _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     except BaseException as err:
-      raise ExtractError(resource, err)
+      msg = 'Error while extracting %s to %s : %s' % (from_path, to_path, err)
+      raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
     if tf.io.gfile.exists(to_path):
