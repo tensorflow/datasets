@@ -126,4 +126,4 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
         for path in tf.io.gfile.listdir(file_paths):
             data = np.load(os.path.join(file_paths, path))
             for strokes in data:
-                yield {"strokes": strokes, "label": path.strip(".npy")}
+                yield {"strokes": strokes, "label": path.rstrip(".npy")}
