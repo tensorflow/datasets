@@ -31,6 +31,7 @@ from tensorflow_datasets.core.registered import list_builders
 from tensorflow_datasets.core.registered import load
 from tensorflow_datasets.core.splits import percent
 from tensorflow_datasets.core.splits import Split
+from tensorflow_datasets.core.utils.tqdm import disable_progress_bar
 
 
 __all__ = [
@@ -47,6 +48,7 @@ __all__ = [
     "percent",
     "Split",
     "testing",
+    "disable_progress_bar",
 ]
 
 

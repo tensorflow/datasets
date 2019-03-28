@@ -26,6 +26,17 @@ from tqdm import auto as tqdm_lib
 
 tqdm = tqdm_lib.tqdm
 
+active = True
+
+def disable_progress_bar():
+  """Disabled Tqdm progress bar.
+  Usage:
+
+  tfds.disable_progress_bar()
+
+  """
+  global active
+  active = False
 
 @contextlib.contextmanager
 def async_tqdm(*args, **kwargs):
@@ -65,9 +76,10 @@ class _TqdmPbarAsync(object):
 
   def update_total(self, n=1):
     """Increment total pbar value."""
-    with self._lock:
-      self._pbar.total += n
-      self.refresh()
+    if active:
+      with self._lock:
+        self._pbar.total += n
+        self.refresh()
 
   def update(self, n=1):
     """Increment current value."""
