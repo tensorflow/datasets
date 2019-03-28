@@ -52,6 +52,8 @@ class ExtractMethod(enum.Enum):
   GZIP = 4
   ZIP = 5
   BZIP2 = 6
+  TAR_STREAM = 7
+  TAR_GZ_STREAM = 8
 
 
 _EXTRACTION_METHOD_TO_EXTS = [

@@ -33,6 +33,8 @@ NO_EXTRACT = resource_lib.ExtractMethod.NO_EXTRACT
 TAR = resource_lib.ExtractMethod.TAR
 TAR_GZ = resource_lib.ExtractMethod.TAR_GZ
 ZIP = resource_lib.ExtractMethod.ZIP
+TAR_STREAM = resource_lib.ExtractMethod.TAR_STREAM
+TAR_GZ_STREAM = resource_lib.ExtractMethod.TAR_GZ_STREAM
 
 
 def _read(path):
@@ -87,6 +89,16 @@ class ExtractorTest(testing.TestCase):
   def test_targz(self):
     self._test_extract(
         TAR_GZ, 'arch1.tar.gz',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+
+  def test_tar_stream(self):
+    self._test_extract(
+        TAR_STREAM, 'arch1.tar',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+
+  def test_targz_stream(self):
+    self._test_extract(
+        TAR_GZ_STREAM, 'arch1.tar.gz',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_gzip(self):
