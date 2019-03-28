@@ -49,6 +49,20 @@ generate on a single machine. See the
 
 ## Writing `my_dataset.py`
 
+### Use the default template
+
+To help you get started to add a new dataset inside `tfds`, you can cloned the
+repository and use the default template by running the following command:
+
+```
+python tensorflow_datasets/scripts/create_new_dataset.py \
+  --name my_dataset \
+  --type image  # text, audio, translation,...
+```
+
+
+It will create the minimum python files that you're requiring to get started.
+
 ### `DatasetBuilder`
 
 Each dataset is defined as a subclass of
