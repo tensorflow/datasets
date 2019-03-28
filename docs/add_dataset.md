@@ -56,7 +56,7 @@ repository and use the default template by running the following command:
 
 ```
 python tensorflow_datasets/scripts/create_new_dataset.py \
-  --name my_dataset \
+  --dataset my_dataset \
   --type image  # text, audio, translation,...
 ```
 
