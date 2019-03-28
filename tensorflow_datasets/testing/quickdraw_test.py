@@ -17,14 +17,15 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from tensorflow_datasets import testing
-from tensorflow_datasets.sequence import quickdraw
-import numpy as np
+
 import os
+
+import numpy as np
 import tensorflow as tf
 
+from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.testing import fake_data_utils
+from tensorflow_datasets.sequence import quickdraw
 
 
 def _output_dir():
@@ -44,20 +45,21 @@ def _gen_stroke():
     return np.array([delta_y, delta_x, pen_off], dtype=np.int16)
 
 
-def _gen_sketch(max_strokes: int = 10):
+def _gen_sketch(max_strokes=10):
     """Sketches are arrays of strokes."""
     return np.array(
-        [_gen_stroke() for s in range(np.random.random_integers(max_strokes))]
-    )
+        [_gen_stroke() for s in range(np.random.random_integers(max_strokes))])
 
 
-def _gen_file_content(sketches: int = 10):
+def _gen_file_content(sketches=10):
     """Files ar arrays of sketches."""
     return np.array([_gen_sketch() for s in range(sketches)])
 
 
 def _generate_dummies():
-    dummy_strokes = {split: _gen_file_content() for split in ["train", "test", "valid"]}
+    dummy_strokes = {
+        split: _gen_file_content() for split in ["train", "test", "valid"]
+    }
 
     print(dummy_strokes["train"])
     print(dummy_strokes["train"].shape)

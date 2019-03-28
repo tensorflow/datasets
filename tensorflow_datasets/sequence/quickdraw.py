@@ -29,6 +29,15 @@ _QUICKDRAW_BASE_URL = (
 )  # pylint: disable=line-too-long
 _QUICKDRAW_LABELS_FNAME = "sequence/quickdraw_labels.txt"
 
+_CITATION = """\
+@misc{1704.03477,
+Author = {David Ha and Douglas Eck},
+Title = {A Neural Representation of Sketch Drawings},
+Year = {2017},
+Eprint = {arXiv:1704.03477},
+}
+"""
+
 
 class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
     """Quickdraw sequence of strokes dataset used for Sketch RNN.
@@ -36,33 +45,29 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
     This is the version of the QuickDraw data used to train the SketchRNN model.
     """
 
+    URL = "https://github.com/googlecreativelab/quickdraw-dataset"
     VERSION = tfds.core.Version("1.0.0")
 
     def _info(self):
         labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
         return tfds.core.DatasetInfo(
             builder=self,
-            description=(
-                "In this dataset, 75K samples (70K Training, "
-                "2.5K Validation, 2.5K Test) has been randomly "
-                "selected from each category, "
-                "processed with RDP line simplification "
-                "with an epsilon parameter of 2.0. "
-                "Each category will be stored in its "
-                "own .npz file, for example, cat.npz."
-            ),
-            features=tfds.features.FeaturesDict(
-                {
-                    "strokes": tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
-                    "label": tfds.features.ClassLabel(names_file=labels_path),
-                }
-            ),
+            description=("In this dataset, 75K samples (70K Training, "
+                         "2.5K Validation, 2.5K Test) has been randomly "
+                         "selected from each category, "
+                         "processed with RDP line simplification "
+                         "with an epsilon parameter of 2.0. "
+                         "Each category will be stored in its "
+                         "own .npz file, for example, cat.npz."),
+            features=tfds.features.FeaturesDict({
+                "strokes":
+                tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
+                "label":
+                tfds.features.ClassLabel(names_file=labels_path),
+            }),
             supervised_keys=("strokes", "label"),
-            urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
-            citation=(
-                "A Neural Representation of Sketch Drawings, "
-                "D. Ha and D. Eck, arXiv:1704.03477v4, 2017."
-            ),
+            urls=self.URL,
+            citation=_CITATION,
         )
 
     def _split_generators(self, dl_manager):
@@ -78,14 +83,16 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
 
         # Prepare the destinations used to unpack the split
         extract_dir = dl_manager._extract_dir
-        for label in tqdm.tqdm(file_paths, desc="Unpacking downloaded archives."):
+        for label in tqdm.tqdm(
+                file_paths, desc="Unpacking downloaded archives."):
             data = np.load(file_paths[label], encoding="latin1")
             for split in ["train", "test", "valid"]:
                 split_dir = os.path.join(extract_dir, split)
                 if not tf.io.gfile.exists(split_dir):
                     tf.io.gfile.makedirs(split_dir)
                 np.save(os.path.join(split_dir, label), data[split])
-                assert os.path.exists(os.path.join(split_dir, "{}.npy".format(label)))
+                assert os.path.exists(
+                    os.path.join(split_dir, "{}.npy".format(label)))
 
         return [
             tfds.core.SplitGenerator(
