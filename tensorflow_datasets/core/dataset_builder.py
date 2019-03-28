@@ -103,6 +103,10 @@ class DatasetBuilder(object):
   ```python
   mnist_builder = tfds.builder("mnist")
   mnist_info = mnist_builder.info
+  
+  # Get info of the dataset
+  print(mnist_info) 
+  
   mnist_builder.download_and_prepare()
   datasets = mnist_builder.as_dataset()
 
