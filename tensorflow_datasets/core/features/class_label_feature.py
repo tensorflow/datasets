@@ -31,6 +31,7 @@ class ClassLabel(feature.FeatureConnector):
 
     There are 3 ways to define a ClassLabel, which correspond to the 3
     arguments:
+
      * `num_classes`: create 0 to (num_classes-1) labels
      * `names`: a list of label strings
      * `names_file`: a file containing the list of labels.
