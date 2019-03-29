@@ -124,7 +124,7 @@ def image_as_moving_sequence(
   ```python
   import tensorflow as tf
   import tensorflow_datasets as tfds
-  from google3.third_party.tensorflow_datasets.video import moving_sequence
+  from tensorflow_datasets.video import moving_sequence
   tf.compat.v1.enable_eager_execution()
 
   def animate(sequence):

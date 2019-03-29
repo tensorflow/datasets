@@ -338,8 +338,7 @@ class DatasetBuilder(object):
 
     if wants_full_dataset:
       return tf.data.experimental.get_single_element(dataset)
-    else:
-      return dataset
+    return dataset
 
   def _build_data_dir(self):
     """Return the data directory for the current version."""
@@ -469,7 +468,7 @@ class DatasetBuilder(object):
       logging.info("No config specified, defaulting to first: %s/%s", self.name,
                    builder_config.name)
     if not builder_config:
-      return
+      return None
     if isinstance(builder_config, six.string_types):
       name = builder_config
       builder_config = self.builder_configs.get(name)

@@ -127,6 +127,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, archive, validation_labels=None):
+    """Yields examples."""
     if validation_labels:  # Validation split
       for example in self._generate_examples_validation(archive,
                                                         validation_labels):

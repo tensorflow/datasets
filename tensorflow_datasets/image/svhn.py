@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import six.moves.urllib as urllib
+from six.moves import urllib
 import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
