@@ -24,7 +24,7 @@ from tensorflow_datasets.image import colorectal_histology
 
 # testing/colorectal_histology.py generates fake input data
 
-num_classes = len(colorectal_histology._CLASS_NAMES)
+num_classes = len(colorectal_histology._CLASS_NAMES)  # pylint: disable=protected-access
 
 
 class ColorectalHistologyTest(testing.DatasetBuilderTestCase):

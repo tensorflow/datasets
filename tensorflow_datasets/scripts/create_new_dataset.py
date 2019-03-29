@@ -102,6 +102,7 @@ class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    \"""Returns SplitGenerators.\"""
     # {TODO}: Downloads the data and defines the splits
     # dl_manager is a tfds.download.DownloadManager that can be used to
     # download and extract URLs
@@ -117,6 +118,7 @@ class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self):
+    \"""Yields examples.\"""
     # {TODO}: Yields examples from the dataset
     yield {{}}\n
 """

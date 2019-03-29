@@ -164,6 +164,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, archive):
+    """Yields examples."""
     prefix_len = len("SUN397")
     for filepath, fobj in archive:
       if filepath.endswith(".jpg"):
