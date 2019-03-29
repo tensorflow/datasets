@@ -54,8 +54,7 @@ dataset = tfds.load('modelnet40/cloud%d' % my_num_points)
 
 You can implement your own config by extending
 `tensorflow_datasets.volume.modelnet.modelnet.ModelnetConfig`, implementing the
-`input_features` and `load` methods and appending an instance to the relevant
-builder classes `BUILDER_CONFIGS` list.
+`input_features` and `load` methods and constructing via a builder.
 
 ```python
 import tensorflow_datasets as tfds
@@ -67,7 +66,7 @@ class MyModelnetConfig(mn.ModelnetConfig):
     # TODO
     ...
 
-  def load(self, fp)
+  def load(self, fp, path=None)
     # fp is a file-like object with `.off` encoding.
     # TODO
     ...
@@ -78,8 +77,9 @@ my_config = MyModelnetConfig(
     input_key="custom_input")
 
 
-mn.Modelnet40.BUILDER_CONFIGS.append(my_config)
-tfds.load("modelnet40/my_modelnet_config")
+builder = mn.Modelnet40(config=my_config)
+builder.download_and_prepare()
+datasets = builder.as_dataset()
 ```
 
 ## ModelnetAligned40
@@ -116,36 +116,29 @@ _URL_BASE = "http://modelnet.cs.princeton.edu/"
 DEFAULT_SEED =  143
 
 
-def _load_off_data(fp):
+def naive_bounding_sphere(points):
+  center = (np.min(points, axis=0) + np.max(points, axis=0)) / 2
+  radius = np.max(np.linalg.norm(points - center, axis=-1))
+  return radius, center
+
+
+def load_off_data(fp):
   # trimesh doesn't give direct access to the polygon mesh
   data = off.OffObject.from_file(fp)
   vertices = data.vertices.astype(np.float32)
   face_values = data.face_values.astype(np.int64)
   face_lengths = data.face_lengths.astype(np.int64)
-  planar_dim_mask = np.min(vertices, axis=0) == np.max(vertices, axis=0)
-  if np.any(planar_dim_mask):
-    # planar objects give QHull issues
-    good_dim_mask = np.logical_not(planar_dim_mask)  # pylint: disable=assignment-from-no-return
-    cent, radius = lazy_imports.trimesh.nsphere.minimum_nsphere(  # pylint: disable=no-member
-      vertices[:, good_dim_mask])
-    center = np.zeros((3,), dtype=np.float32)
-    center[good_dim_mask] = cent.astype(np.float32)
-    center[planar_dim_mask] = vertices[0, planar_dim_mask]
-  else:
-    center, radius = lazy_imports.trimesh.nsphere.minimum_nsphere(vertices) # pylint: disable=no-member
-    center = center.astype(np.float32)
 
-  radius = radius.astype(np.float32)
-  return vertices, face_values, face_lengths, center, radius
+  return vertices, face_values, face_lengths
 
 
-def _load_off_mesh(fp):
-  vertices, face_values, face_lengths, center, radius = _load_off_data(fp)
+def load_off_mesh(fp):
+  vertices, face_values, face_lengths = load_off_data(fp)
   faces = off.triangulated_faces(face_values, face_lengths)
-  return vertices, faces, center, radius
+  return vertices, faces
 
 
-def _cloud_features(num_points, with_originals=False):
+def cloud_features(num_points, with_originals=False):
   features = {
       "positions": tfds.features.Tensor(
         shape=(num_points, 3), dtype=tf.float32),
@@ -173,7 +166,7 @@ class ModelnetConfig(tfds.core.BuilderConfig):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def load(self, fp):
+  def load(self, fp, path=None):
     raise NotImplementedError
 
   def __enter__(self):
@@ -200,14 +193,12 @@ class PolyMeshModelnetConfig(ModelnetConfig):
         "radius": tfds.features.Tensor(shape=(), dtype=tf.float32),
     })
 
-  def load(self, fp):
-    vertices, face_values, face_lengths, center, radius = _load_off_data(fp)
+  def load(self, fp, path=None):
+    vertices, face_values, face_lengths = load_off_data(fp)
     return dict(
       vertices=vertices.astype(np.float32),
       face_values=face_values,
       face_lengths=face_lengths,
-      center=center,
-      radius=radius,
     )
 
 
@@ -221,20 +212,19 @@ class TriMeshModelnetConfig(ModelnetConfig):
     return tfds.features.FeaturesDict({
         "vertices": tfds.features.Tensor(shape=(None, 3), dtype=tf.float32),
         "faces": tfds.features.Tensor(shape=(None, 3), dtype=tf.int64),
-        "center": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-        "radius": tfds.features.Tensor(shape=(), dtype=tf.float32),
       })
 
-  def load(self, fp):
-    vertices, faces, center, radius = _load_off_mesh(fp)
-    return dict(vertices=vertices, faces=faces, center=center, radius=radius)
+  def load(self, fp, path=None):
+    vertices, faces = load_off_mesh(fp)
+    return dict(vertices=vertices, faces=faces)
 
 
 class PointCloudModelnetConfig(ModelnetConfig):
-  def __init__(self, num_points, seed=DEFAULT_SEED, **kwargs):
-    name = "cloud%d" % num_points
-    if seed != DEFAULT_SEED:
-      name = '%s-%d' % (name, seed)
+  def __init__(self, num_points, seed=DEFAULT_SEED, name=None, **kwargs):
+    if name is None:
+      name = "cloud%d" % num_points
+      if seed != DEFAULT_SEED:
+        name = '%s-%d' % (name, seed)
     self._seed = seed
     super(PointCloudModelnetConfig, self).__init__(
       name=name,
@@ -244,22 +234,31 @@ class PointCloudModelnetConfig(ModelnetConfig):
     self._original_state = None
 
   def input_features(self):
-    return _cloud_features(self.num_points, with_originals=True)
+    return cloud_features(self.num_points, with_originals=True)
 
-  def load(self, fp):
+  def load(self, fp, path=None):
     trimesh = lazy_imports.trimesh
-    vertices, faces, center, radius = _load_off_mesh(fp)
+    vertices, faces = load_off_mesh(fp)
+    # quick recentering to avoid numerical instabilities in sampling
+    center = (np.max(vertices, axis=0) + np.min(vertices, axis=0)) / 2
     vertices -= center
-    vertices /= radius
+    scale = np.max(vertices)
+    vertices /= scale
     mesh = trimesh.Trimesh(vertices=vertices, faces=faces)  # pylint: disable=no-member
     positions, face_indices = trimesh.sample.sample_surface( # pylint: disable=no-member
       mesh, self.num_points)
     normals = mesh.face_normals[face_indices]
+
+    r, c = naive_bounding_sphere(positions)
+    positions -= c
+    positions /= r
+    center += c * scale
+    scale *= r
     return dict(
       positions=positions.astype(np.float32),
       normals=normals.astype(np.float32),
       original_center=center,
-      original_radius=radius,
+      original_radius=scale,
     )
 
   def __enter__(self):
@@ -295,7 +294,7 @@ class ModelnetSampledConfig(tfds.core.BuilderConfig):
     )
 
   def input_features(self):
-    return _cloud_features(self.num_points)
+    return cloud_features(self.num_points)
 
 
 def _class_names_path(num_classes):
@@ -332,8 +331,7 @@ class Modelnet10(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
     PolyMeshModelnetConfig(),
     TriMeshModelnetConfig(),
-    PointCloudModelnetConfig(num_points=100),
-    PointCloudModelnetConfig(num_points=5000),
+    PointCloudModelnetConfig(num_points=1024),
   ]
   URLS = [_URL_BASE]
   _CITATION = """\
@@ -386,7 +384,7 @@ class Modelnet10(tfds.core.GeneratorBasedBuilder):
         if split != split_name:
           continue
 
-        inputs = config.load(fp)
+        inputs = config.load(fp, path)
         if inputs is not None:
           yield {
             input_key: inputs,
