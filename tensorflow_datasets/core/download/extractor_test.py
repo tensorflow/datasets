@@ -121,11 +121,8 @@ class ExtractorTest(testing.TestCase):
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
   def test_absolute_path(self):
-    from_path = os.path.join(self.test_data, 'archives', 'absolute_path.tar')
-    promise = self.extractor.extract(from_path, TAR, self.to_path)
-    with self.assertRaisesWithPredicateMatch(
-        extractor.ExtractError, 'is not safe'):
-      promise.get()
+    # There is a file with absolute path (ignored) + a file named "foo".
+    self._test_extract(TAR, 'absolute_path.tar', {'foo': b'bar\n'})
 
   def test_wrong_method(self):
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
