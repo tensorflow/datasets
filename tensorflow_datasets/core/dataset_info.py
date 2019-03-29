@@ -484,6 +484,11 @@ def get_dataset_feature_statistics(builder, split):
       feature_dtype = type(feature_np)
 
       if isinstance(feature_np, np.ndarray):
+        # If we have an empty array, then don't proceed further with computing
+        # statistics on it.
+        if feature_np.size == 0:
+          continue
+
         feature_dtype = feature_np.dtype.type
 
       feature_min, feature_max = None, None
