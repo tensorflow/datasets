@@ -4,6 +4,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+import tensorflow as tf
 import tensorflow_datasets as tfds
 
 # BibTeX citation
@@ -27,12 +29,13 @@ _DESCRIPTION = """
 Scene parsing is to segment and parse an image into different image regions associated with semantic categories, such as sky, road, person, and bed. MIT Scene Parsing Benchmark (SceneParse150) provides a standard training and evaluation platform for the algorithms of scene parsing. 
 """
 
-_TRAIN_URL = "http://data.csail.mit.edu/places/ADEchallenge/ADEChallengeData2016.zip"
-_TEST_URL  = "http://data.csail.mit.edu/places/ADEchallenge/release_test.zip" 
+_TRAIN_URL = {
+  "images" : "http://placeschallenge.csail.mit.edu/data/ChallengeData2017/images.tar",
+  "annotations" : "http://placeschallenge.csail.mit.edu/data/ChallengeData2017/annotations_instance.tar" 
+}
 
-_IMAGE_SIZE = 256
 
-_IMAGE_SHAPE = ( _IMAGE_SIZE, _IMAGE_SIZE, 3 )
+_IMAGE_SHAPE = ( 359, 400, 3 )
 
 
 class SceneParse150(tfds.core.GeneratorBasedBuilder):
@@ -41,40 +44,59 @@ class SceneParse150(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    # TODO(scene_parse_150): Specifies the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
-        # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            # These are the features of your dataset like images, labels ...
+          "image": tfds.features.Image(shape=_IMAGE_SHAPE, encoding_format='jpeg'),
+          "annotation": tfds.features.Image(shape=_IMAGE_SHAPE, encoding_format='png')
         }),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
-        supervised_keys=(),
-        # Homepage of the dataset for documentation
+
+        supervised_keys=( "image", "annotation" ),
+
         urls=["http://sceneparsing.csail.mit.edu/"],
+
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
-    # TODO(scene_parse_150): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
+    
+    dl_paths = dl_manager.download_and_extract({
+      "images"      : _TRAIN_URL["images"],
+      "annotations" : _TRAIN_URL["annotations"],
+    })
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            # TODO(scene_parse_150): Tune the number of shards such that each shard
-            # is < 4 GB.
             num_shards=10,
-            # These kwargs will be passed to _generate_examples
-            gen_kwargs={},
+            gen_kwargs={
+              "images_dir_path" : os.path.join(dl_paths["images"], "training"),
+              "annotations_dir_path": os.path.join(dl_paths["annotations"], "training")
+            },
+        ),
+
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            num_shards=10,
+            gen_kwargs={
+              "images_dir_path" : os.path.join(dl_paths["images"], "validation"),
+              "annotations_dir_path": os.path.join(dl_paths["annotations"], "validation")
+            },
         ),
     ]
 
-  def _generate_examples(self):
-    # TODO(scene_parse_150): Yields examples from the dataset
-    yield {}
+  def _generate_examples(self, images_dir_path, annotations_dir_path):
+    
+      
+      for image_file in tf.io.gfile.listdir(images_dir_path):
+        
+        # get the filename
+        image_id = os.path.split(image_file)[1].split('.')[0]
+        
+          
+        yield {
+          "image" : os.path.join(images_dir_path, "{}.jpg".format(image_id)),
+          "annotation" : os.path.join(annotations_dir_path, "{}.png".format(image_id))
+        }
 
