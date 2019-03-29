@@ -79,6 +79,8 @@ class KaggleCompetitionDownloader(object):
   """Downloader for a Kaggle competition.
 
   Usage:
+  You can download with dataset or competition name like `zillow/zecon`
+  or `titanic`.
 
   ```
   downloader = KaggleCompetitionDownloader(competition_name)
@@ -93,9 +95,14 @@ class KaggleCompetitionDownloader(object):
   @utils.memoized_property
   def competition_files(self):
     """List of competition files."""
+    if '/' in self._competition_name:
+      type = 'datasets'
+    else:
+      type = 'competitions'
+
     command = [
         "kaggle",
-        "competitions",
+         type,
         "files",
         "-v",
         self._competition_name,
