@@ -1,4 +1,19 @@
-"""TODO(scene_parse_150): Add a description here."""
+# coding=utf-8
+# Copyright 2019 The TensorFlow Datasets Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""Tests for MIT Scene Parsing Benchmark (SceneParse150)"""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -9,20 +24,20 @@ from tensorflow_datasets.image import scene_parse_150
 
 
 class SceneParse150Test(testing.DatasetBuilderTestCase):
-  # TODO(scene_parse_150):
+
   DATASET_CLASS = scene_parse_150.SceneParse150
+
   SPLITS = {
-      "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "train": 3,
+      "test": 3,
   }
 
-  # If you are calling `download/download_and_extract` with a dict, like:
-  #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
-  # then the tests needs to provide the fake output paths relative to the
-  # fake data directory
-  # DL_EXTRACT_RESULT = {'some_key': 'output_file1.txt', ...}
+  DL_EXTRACT_RESULT = {
+      "images": "images",
+      "annotations": "annotations",
+      "test": "test",
+  }
 
 
 if __name__ == "__main__":
   testing.test_main()
-
