@@ -515,7 +515,21 @@ Most datasets in TFDS should have a unit test and your reviewer may ask you
 to add one if you haven't already. See the
 [testing section](#testing-mydataset) below.
 
-### 5. Send for review!
+### 5. Check your code style
+
+Follow the [PEP 8 Python style guide](https://www.python.org/dev/peps/pep-0008),
+except TensorFlow uses 2 spaces instead of 4. Please conform to the
+[Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
+
+Most importantly, use
+[pylint](https://www.tensorflow.org/community/contribute/code_style#pylint) to
+ensure your code is properly formatted.
+
+See
+[TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
+for more information.
+
+### 6. Send for review!
 
 Send the pull request for review.
 
