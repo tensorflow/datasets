@@ -41,6 +41,7 @@ from tensorflow_datasets.image.mnist import KMNIST
 from tensorflow_datasets.image.mnist import MNIST
 from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4
+from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
 from tensorflow_datasets.image.shapes3d import Shapes3d
