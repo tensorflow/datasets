@@ -85,11 +85,15 @@ class LFW(tfds.core.GeneratorBasedBuilder):
   #This is a helper function for making list of all paths
   def path_maker(self, _path):
     path_list = []
-    dir_list = tf.gfile.ListDirectory(_path)
+    dir_list = tf.io.gfile.listdir(_path)
     for _dir in dir_list:
-      img_dir_path = os.path.join(_path, _dir)
-      img_list = tf.gfile.ListDirectory(img_dir_path)
-      for img in img_list:
-        img_path = os.path.join(img_dir_path, img)
-        path_list.append([_dir, img_path])
+      if _dir == 'ReadME.txt':
+        pass
+      else:
+        img_dir_path = os.path.join(_path, _dir)
+        print(img_dir_path)
+        img_list = tf.io.gfile.listdir(img_dir_path)
+        for img in img_list:
+          img_path = os.path.join(img_dir_path, img)
+          path_list.append([_dir, img_path])
     return path_list
