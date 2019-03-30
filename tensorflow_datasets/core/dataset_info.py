@@ -38,7 +38,6 @@ import abc
 import collections
 import json
 import os
-import posixpath
 import pprint
 import tempfile
 
@@ -168,11 +167,7 @@ class DatasetInfo(object):
   @property
   def full_name(self):
     """Full canonical name: (<dataset_name>/<config_name>/<version>)."""
-    names = [self._builder.name]
-    if self._builder.builder_config:
-      names.append(self._builder.builder_config.name)
-    names.append(str(self.version))
-    return posixpath.join(*names)
+    return self._builder._full_name  # pylint: disable=protected-access
 
   @property
   def description(self):

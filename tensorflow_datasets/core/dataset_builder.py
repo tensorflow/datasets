@@ -23,6 +23,7 @@ import abc
 import functools
 import itertools
 import os
+import posixpath
 import sys
 
 from absl import logging
@@ -461,25 +462,21 @@ class DatasetBuilder(object):
         local_data_dir_no_version=os.path.split(self._data_dir)[0])
     logging.info(msg)
 
-  def _relative_data_dir(self, with_version=True):
-    """Relative path of this dataset in data_dir."""
-    builder_data_dir = self.name
-    builder_config = self._builder_config
-    if builder_config:
-      builder_data_dir = os.path.join(builder_data_dir, builder_config.name)
-    if not with_version:
-      return builder_data_dir
-
-    version = self._version
-    version_data_dir = os.path.join(builder_data_dir, str(version))
-    return version_data_dir
+  @property
+  def _full_name(self):
+    """Full canonical name: (<dataset_name>/<config_name>/<version>)."""
+    names = [self.name]
+    if self.builder_config:
+      names.append(self.builder_config.name)
+    names.append(str(self.version))
+    return posixpath.join(*names)
 
   def _build_data_dir(self):
     """Return the data directory for the current version."""
-    builder_data_dir = os.path.join(
-        self._data_dir_root, self._relative_data_dir(with_version=False))
-    version_data_dir = os.path.join(
-        self._data_dir_root, self._relative_data_dir(with_version=True))
+    version_data_dir = os.path.join(self._data_dir_root, self._full_name)
+    # Convert '/' to '\' on Windows
+    version_data_dir = os.path.normpath(version_data_dir)
+    builder_data_dir = os.path.dirname(version_data_dir)
 
     def _other_versions_on_disk():
       """Returns previous versions on disk."""
