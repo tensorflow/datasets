@@ -25,6 +25,7 @@ import os
 
 from absl.testing import absltest
 from absl.testing import parameterized
+import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -218,6 +219,13 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         manual_dir=self.example_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
+
+        # TODO(b/129148632): The current apache-beam 2.11.0 do not work with Py3
+        # Update once the new version is out (around April)
+        skip_beam_test = bool(six.PY3)
+        if skip_beam_test:
+          return
+
         import apache_beam as beam   # pylint: disable=g-import-not-at-top
         # For Beam datasets, set-up the runner config
         beam_runner = None
