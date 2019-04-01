@@ -59,12 +59,17 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
                          "Each category will be stored in its "
                          "own .npz file, for example, cat.npz."),
             features=tfds.features.FeaturesDict({
-                "strokes":
-                tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
+                "sketch":
+                tfds.features.FeaturesDict({
+                    "stroke_3":
+                    tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
+                    "stroke_5":
+                    tfds.features.Tensor(shape=(None, 5), dtype=tf.int16),
+                }),
                 "label":
                 tfds.features.ClassLabel(names_file=labels_path),
             }),
-            supervised_keys=("strokes", "label"),
+            supervised_keys=("sketch", "label"),
             urls=["https://github.com/googlecreativelab/quickdraw-dataset"],
             citation=_CITATION,
         )
@@ -125,5 +130,26 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
         """
         for path in tf.io.gfile.listdir(file_paths):
             data = np.load(os.path.join(file_paths, path))
-            for strokes in data:
-                yield {"strokes": strokes, "label": path.rstrip(".npy")}
+            for sketch in data:
+                stroke_5 = self._stroke_3_to_stroke_5(sketch)
+                yield {
+                    "sketch": {
+                        "stroke_5": stroke_5,
+                        "stroke_3": sketch,
+                    },
+                    "label": path.rstrip(".npy")
+                }
+
+    @staticmethod
+    def _stroke_3_to_stroke_5(sketch_3):
+        sketch_5 = []
+        seq_len = len(sketch_3)
+        for i, stroke_3 in enumerate(sketch_3, start=1):
+            stroke_5 = [*stroke_3[:2], 0, 0, 1] if i == seq_len else [
+                *stroke_3[:2],
+                int(stroke_3[2] == 0),
+                int(stroke_3[2] == 1),
+                0,
+            ]
+            sketch_5.append(stroke_5)
+        return sketch_5
