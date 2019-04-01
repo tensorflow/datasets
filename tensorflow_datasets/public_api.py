@@ -31,6 +31,7 @@ from tensorflow_datasets.core.registered import list_builders
 from tensorflow_datasets.core.registered import load
 from tensorflow_datasets.core.splits import percent
 from tensorflow_datasets.core.splits import Split
+from tensorflow_datasets.version import __version__
 
 
 __all__ = [
