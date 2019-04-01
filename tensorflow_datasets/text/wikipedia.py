@@ -114,7 +114,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
-          version="0.0.1",
+          version="0.0.2",
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES
@@ -198,7 +198,8 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
           elem.clear()
 
           # Filter redirects.
-          if raw_content is None or raw_content.startswith("#REDIRECT"):
+          if raw_content is None or raw_content.lower().startswith("#redirect"):
+            beam.metrics.Metrics.counter(language, "filtered-redirects").inc()
             continue
 
           beam.metrics.Metrics.counter(language, "extracted-examples").inc()
