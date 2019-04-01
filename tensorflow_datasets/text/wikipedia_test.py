@@ -13,35 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.lazy_imports."""
+"""Tests for wikipedia dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from absl.testing import parameterized
-import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
+from tensorflow_datasets.text import wikipedia
 
 
-class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
-  @parameterized.parameters(
-      "cv2",
-      "matplotlib",
-      "mwparserfromhell",
-      "os",
-      "pydub",
-      "pyplot",
-      "scipy",
-      "scipy_io",
-  )
-  def test_import(self, module_name):
-    getattr(tfds.core.lazy_imports, module_name)
+class WikipediaTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = wikipedia.Wikipedia
+  BUILDER_CONFIG_NAMES_TO_TEST = ["20190301.en"]
 
-  def test_bad_import(self):
-    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
-      _ = tfds.core.lazy_imports.test_foo
+  DL_EXTRACT_RESULT = {
+      "info": "dumpstatus.json",
+      "xml": ["enwiki_fake.xml", "enwiki_fake.xml"]
+  }
+
+  SPLITS = {
+      "train": 4,
+  }
 
 
 if __name__ == "__main__":

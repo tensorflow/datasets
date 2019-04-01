@@ -85,6 +85,7 @@ DATASET_EXTRAS = {
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'svhn': ['scipy'],
+    'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
 all_dataset_extras = []
