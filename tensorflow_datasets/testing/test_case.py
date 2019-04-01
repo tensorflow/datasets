@@ -27,15 +27,13 @@ from absl import logging
 from absl.testing import absltest
 import six
 import tensorflow as tf
-from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core import dataset_info
 
 
 
 GCS_ACCESS_FNS = {
-    "original_info": gcs_utils.gcs_dataset_info_files,
-    "dummy_info": lambda _: [],
-    "original_datasets": gcs_utils.is_gcs_dataset_accessible,
-    "dummy_datasets": lambda _: False,
+    "original": dataset_info.gcs_dataset_files,
+    "dummy": lambda _: []
 }
 
 
@@ -51,18 +49,15 @@ class TestCase(tf.test.TestCase):
     super(TestCase, cls).setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
     # Test must not communicate with GCS.
-    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
-    gcs_utils.is_gcs_dataset_accessible = GCS_ACCESS_FNS["dummy_datasets"]
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["dummy"]
 
   @contextlib.contextmanager
   def gcs_access(self):
     # Restore GCS access
-    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["original_info"]
-    gcs_utils.is_gcs_dataset_accessible = GCS_ACCESS_FNS["original_datasets"]
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["original"]
     yield
     # Revert access
-    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
-    gcs_utils.is_gcs_dataset_accessible = GCS_ACCESS_FNS["dummy_datasets"]
+    dataset_info.gcs_dataset_files = GCS_ACCESS_FNS["dummy"]
 
   def setUp(self):
     super(TestCase, self).setUp()
