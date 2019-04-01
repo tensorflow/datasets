@@ -39,6 +39,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import gcs_utils
 
 import termcolor
 
@@ -46,6 +47,13 @@ import termcolor
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
 REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
+
+GCS_HOSTED_MSG = """\
+Dataset {name} is hosted on GCS. You can skip download_and_prepare by setting
+data_dir=gs://tfds-data/datasets. If you find
+that read performance is slow, copy the data locally with gsutil:
+gsutil -m cp -R {gcs_path} {local_data_dir_no_version}
+"""
 
 
 class BuilderConfig(object):
@@ -194,10 +202,13 @@ class DatasetBuilder(object):
 
     download_config = download_config or download.DownloadConfig()
     data_exists = tf.io.gfile.exists(self._data_dir)
-    if (data_exists and
-        download_config.download_mode == REUSE_DATASET_IF_EXISTS):
+    if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
+
+    # Data may exist on GCS
+    if not data_exists:
+      self._maybe_log_gcs_data_dir()
 
     dl_manager = self._make_download_manager(
         download_dir=download_dir,
@@ -243,6 +254,7 @@ class DatasetBuilder(object):
         self.info.size_in_bytes = dl_manager.downloaded_size
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)
+    self._log_download_done()
 
   @api_utils.disallow_positional_args
   def as_dataset(self,
@@ -340,14 +352,37 @@ class DatasetBuilder(object):
       return tf.data.experimental.get_single_element(dataset)
     return dataset
 
-  def _build_data_dir(self):
-    """Return the data directory for the current version."""
-    builder_data_dir = os.path.join(self._data_dir_root, self.name)
+  def _maybe_log_gcs_data_dir(self):
+    """If data is on GCS, set _data_dir to GCS path."""
+    if not gcs_utils.is_gcs_dataset_accessible(self.info.full_name):
+      return
+
+    gcs_path = os.path.join(constants.GCS_DATA_DIR, self.info.full_name)
+    msg = GCS_HOSTED_MSG.format(
+        name=self.name,
+        gcs_path=gcs_path,
+        local_data_dir_no_version=os.path.split(self._data_dir)[0])
+    logging.info(msg)
+
+  def _relative_data_dir(self, with_version=True):
+    """Relative path of this dataset in data_dir."""
+    builder_data_dir = self.name
     builder_config = self._builder_config
     if builder_config:
       builder_data_dir = os.path.join(builder_data_dir, builder_config.name)
+    if not with_version:
+      return builder_data_dir
+
     version = self._version
     version_data_dir = os.path.join(builder_data_dir, str(version))
+    return version_data_dir
+
+  def _build_data_dir(self):
+    """Return the data directory for the current version."""
+    builder_data_dir = os.path.join(
+        self._data_dir_root, self._relative_data_dir(with_version=False))
+    version_data_dir = os.path.join(
+        self._data_dir_root, self._relative_data_dir(with_version=True))
 
     def _other_versions_on_disk():
       """Returns previous versions on disk."""
@@ -380,13 +415,21 @@ class DatasetBuilder(object):
 
     return version_data_dir
 
+  def _log_download_done(self):
+    msg = ("Dataset {name} downloaded and prepared to {data_dir}. "
+           "Subsequent calls will reuse this data.").format(
+               name=self.name,
+               data_dir=self._data_dir,
+           )
+    termcolor.cprint(msg, attrs=["bold"])
+
   def _log_download_bytes(self):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
     size_text = units.size_str(self.info.size_in_bytes)
     termcolor.cprint(
-        "Downloading / extracting dataset %s (%s) to %s..." %
+        "Downloading and preparing dataset %s (%s) to %s..." %
         (self.name, size_text, self._data_dir),
         attrs=["bold"])
     # TODO(tfds): Should try to estimate the available free disk space (if
