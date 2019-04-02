@@ -198,6 +198,9 @@ class DatasetBuilder(object):
         Defaults to "~/tensorflow-datasets/downloads".
       download_config: `tfds.download.DownloadConfig`, further configuration for
         downloading and preparing dataset.
+
+    Raises:
+      IOError: if there is not enough disk space available.
     """
 
     download_config = download_config or download.DownloadConfig()
@@ -224,6 +227,10 @@ class DatasetBuilder(object):
           "please update the version number.".format(self.name, self._data_dir,
                                                      self.info.version))
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
+    if not utils.has_sufficient_disk_space(
+        self.info.size_in_bytes, directory=self._data_dir_root):
+      raise IOError("Not enough disk space. Needed: %s" %
+                    units.size_str(self.info.size_in_bytes))
     self._log_download_bytes()
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
