@@ -32,6 +32,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "os",
       "pydub",
       "pyplot",
+      "pickle",
       "scipy",
       "scipy_io",
   )

@@ -19,16 +19,16 @@ from setuptools import setup
 
 nightly = False
 if '--nightly' in sys.argv:
-  nightly = True
-  sys.argv.remove('--nightly')
+    nightly = True
+    sys.argv.remove('--nightly')
 
 project_name = 'tensorflow-datasets'
 version = '1.0.1'
 if nightly:
-  project_name = 'tfds-nightly'
-  datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
-                datetime.datetime.now().strftime('%Y%m%d%H%M'))
-  version = '%s-dev%s' % (version, datestring)
+    project_name = 'tfds-nightly'
+    datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
+                  datetime.datetime.now().strftime('%Y%m%d%H%M'))
+    version = '%s-dev%s' % (version, datestring)
 
 DOCLINES = __doc__.split('\n')
 
@@ -53,18 +53,18 @@ TESTS_REQUIRE = [
 ]
 
 if sys.version_info.major == 3:
-  # Packages only for Python 3
-  pass
+    # Packages only for Python 3
+    pass
 else:
-  # Packages only for Python 2
-  TESTS_REQUIRE.append('mock')
-  REQUIRED_PKGS.append('bz2file')
-  REQUIRED_PKGS.append('functools32')
-  REQUIRED_PKGS.append('futures')  # concurrent.futures
+    # Packages only for Python 2
+    TESTS_REQUIRE.append('mock')
+    REQUIRED_PKGS.append('bz2file')
+    REQUIRED_PKGS.append('functools32')
+    REQUIRED_PKGS.append('futures')  # concurrent.futures
 
 if sys.version_info < (3, 4):
-  # enum introduced in Python 3.4
-  REQUIRED_PKGS.append('enum34')
+    # enum introduced in Python 3.4
+    REQUIRED_PKGS.append('enum34')
 
 # Static files needed by datasets.
 DATASET_FILES = [
@@ -85,11 +85,12 @@ DATASET_EXTRAS = {
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'svhn': ['scipy'],
+    'tiered_imagenet': ['pickle', 'opencv-python']
 }
 
 all_dataset_extras = []
 for deps in DATASET_EXTRAS.values():
-  all_dataset_extras.extend(deps)
+    all_dataset_extras.extend(deps)
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
