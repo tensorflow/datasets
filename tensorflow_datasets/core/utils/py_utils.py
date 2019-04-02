@@ -29,6 +29,7 @@ import os
 import sys
 import uuid
 
+import psutil
 import six
 import tensorflow as tf
 from tensorflow_datasets.core import constants
@@ -275,3 +276,11 @@ def rgetattr(obj, attr, *args):
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
   return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def has_sufficient_disk_space(needed_bytes, directory="."):
+  try:
+    free_bytes = psutil.disk_usage(os.path.abspath(directory)).free
+  except OSError:
+    return True
+  return needed_bytes < free_bytes

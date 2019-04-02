@@ -19,6 +19,7 @@ from tensorflow_datasets.translate.flores import Flores
 from tensorflow_datasets.translate.flores import FloresConfig
 from tensorflow_datasets.translate.ted_hrlr import TedHrlrTranslate
 from tensorflow_datasets.translate.ted_multi import TedMultiTranslate
-from tensorflow_datasets.translate.wmt import WMTConfig
-from tensorflow_datasets.translate.wmt_ende import WmtTranslateEnde
-from tensorflow_datasets.translate.wmt_enfr import WmtTranslateEnfr
+from tensorflow_datasets.translate.wmt import WmtConfig
+from tensorflow_datasets.translate.wmt17 import Wmt17Translate
+from tensorflow_datasets.translate.wmt18 import Wmt18Translate
+from tensorflow_datasets.translate.wmt19 import Wmt19Translate

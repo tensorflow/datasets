@@ -77,6 +77,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     cifar_path = dl_manager.download_and_extract(self._cifar_info.url)
     cifar_info = self._cifar_info
 

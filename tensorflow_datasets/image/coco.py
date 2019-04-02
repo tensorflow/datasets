@@ -92,6 +92,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     root_url = "http://images.cocodataset.org/"
     urls = {
         # Train/validation set

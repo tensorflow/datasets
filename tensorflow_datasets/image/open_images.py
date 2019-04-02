@@ -140,7 +140,7 @@ BBOX_SOURCES = [
 class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   """Open Images v4."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
 
   def _info(self):
     class_label = tfds.features.ClassLabel()
@@ -175,6 +175,7 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     paths = dl_manager.download_and_extract(_URLS)
     source_str2int = self.info.features['objects']['source'].str2int
     # Set the labels' names:
@@ -227,8 +228,9 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, archive_paths, objects_getter, bboxes_getter,
                          prefixes=None):
+    """Yields examples."""
     for i, archive_path in enumerate(archive_paths):
-      prefix = prefixes and prefixes[i] or None
+      prefix = prefixes[i] if prefixes else None
       objects = objects_getter(prefix)
       bboxes = bboxes_getter(prefix)
       logging.info('Opening archive %s ...', archive_path)

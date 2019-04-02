@@ -21,7 +21,7 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import cats_vs_dogs
 
-cats_vs_dogs._NUM_CORRUPT_IMAGES = 0
+cats_vs_dogs._NUM_CORRUPT_IMAGES = 0  # pylint: disable=protected-access
 
 
 class CatsVsDogsTest(testing.DatasetBuilderTestCase):

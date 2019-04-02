@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import os
 import numpy as np
-import six.moves.urllib as urllib
+from six.moves import urllib
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
@@ -111,8 +111,8 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
-    # Download the full MNist Database
+    """Returns SplitGenerators."""
+    # Download the full MNIST Database
     filenames = {
         "train_data": _MNIST_TRAIN_DATA_FILENAME,
         "train_labels": _MNIST_TRAIN_LABELS_FILENAME,

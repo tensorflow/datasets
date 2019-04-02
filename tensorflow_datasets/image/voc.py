@@ -135,6 +135,7 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
         yield self._generate_example(data_path, image_id)
 
   def _generate_example(self, data_path, image_id):
+    """Yields examples."""
     image_filepath = os.path.join(
         data_path, "VOCdevkit/VOC2007/JPEGImages", "{}.jpg".format(image_id))
     annon_filepath = os.path.join(
