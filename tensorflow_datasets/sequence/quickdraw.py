@@ -60,12 +60,7 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
                          "own .npz file, for example, cat.npz."),
             features=tfds.features.FeaturesDict({
                 "sketch":
-                tfds.features.FeaturesDict({
-                    "stroke_3":
-                    tfds.features.Tensor(shape=(None, 3), dtype=tf.int16),
-                    "stroke_5":
-                    tfds.features.Tensor(shape=(None, 5), dtype=tf.int16),
-                }),
+                tfds.features.Tensor(shape=(None, 5), dtype=tf.int16),
                 "label":
                 tfds.features.ClassLabel(names_file=labels_path),
             }),
@@ -83,21 +78,19 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
             for label in labels
         }
 
-        file_paths = dl_manager.download(urls)
-
         # Prepare the destinations used to unpack the split
+        file_paths = dl_manager.download(urls)
         extract_dir = dl_manager._extract_dir
-        for label in tqdm.tqdm(
-                file_paths, desc="Unpacking downloaded archives."):
-            data = np.load(file_paths[label], encoding="latin1")
-            for split in ["train", "test", "valid"]:
-                split_dir = os.path.join(extract_dir, split)
-                if not tf.io.gfile.exists(split_dir):
-                    tf.io.gfile.makedirs(split_dir)
-                np.save(os.path.join(split_dir, label), data[split])
-                assert os.path.exists(
-                    os.path.join(split_dir, "{}.npy".format(label)))
+        self._create_target_extraction_folder(extract_dir)
 
+        # Unpack the splits
+        results = {
+            label: self._unpack_archives(file_paths, label, extract_dir)
+            for label in tqdm.tqdm(
+                file_paths, desc="Unpacking downloaded archives.")
+        }
+        # print(results)
+        # Create the Splits
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
@@ -116,6 +109,25 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
             ),
         ]
 
+    @staticmethod
+    def _create_target_extraction_folder(extract_dir):
+        for split in ["train", "test", "valid"]:
+            split_dir = os.path.join(extract_dir, split)
+            if not tf.io.gfile.exists(split_dir):
+                tf.io.gfile.makedirs(split_dir)
+
+    @staticmethod
+    def _unpack_archives(file_paths, label, extract_dir):
+        data = np.load(file_paths[label], encoding="latin1")
+        output = {}
+        for split in ["train", "test", "valid"]:
+            split_dir = os.path.join(extract_dir, split)
+            np.save(os.path.join(split_dir, label), data[split])
+            extracted_file = os.path.join(split_dir, "{}.npy".format(label))
+            assert os.path.exists(extracted_file)
+            output[split] = extracted_file
+        return output
+
     def _generate_examples(self, file_paths):
         """Generate QuickDraw bitmap examples.
 
@@ -132,13 +144,7 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
             data = np.load(os.path.join(file_paths, path))
             for sketch in data:
                 stroke_5 = self._stroke_3_to_stroke_5(sketch)
-                yield {
-                    "sketch": {
-                        "stroke_5": stroke_5,
-                        "stroke_3": sketch,
-                    },
-                    "label": path.rstrip(".npy")
-                }
+                yield {"sketch": stroke_5, "label": path[:-4]}
 
     @staticmethod
     def _stroke_3_to_stroke_5(sketch_3):

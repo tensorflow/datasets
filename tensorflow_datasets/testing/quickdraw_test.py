@@ -39,8 +39,8 @@ def _output_dir():
 
 
 def _gen_stroke():
-    delta_x = np.random.random_integers(-100, 100)
-    delta_y = np.random.random_integers(-100, 100)
+    delta_x = np.random.randint(-100, 100)
+    delta_y = np.random.randint(-100, 100)
     pen_off = np.random.choice([0, 1])
     return np.array([delta_y, delta_x, pen_off], dtype=np.int16)
 
@@ -48,11 +48,11 @@ def _gen_stroke():
 def _gen_sketch(max_strokes=10):
     """Sketches are arrays of strokes."""
     return np.array(
-        [_gen_stroke() for s in range(np.random.random_integers(max_strokes))])
+        [_gen_stroke() for s in range(np.random.randint(2, max_strokes))])
 
 
 def _gen_file_content(sketches=10):
-    """Files ar arrays of sketches."""
+    """Files are arrays of sketches."""
     return np.array([_gen_sketch() for s in range(sketches)])
 
 
@@ -60,9 +60,6 @@ def _generate_dummies():
     dummy_strokes = {
         split: _gen_file_content() for split in ["train", "test", "valid"]
     }
-
-    print(dummy_strokes["train"])
-    print(dummy_strokes["train"].shape)
     np.savez(os.path.join(_output_dir(), "banana.npz"), **dummy_strokes)
 
 
@@ -77,11 +74,10 @@ def _unpack_dummies():
             split_dir = os.path.join(extract_dir, split)
             if not tf.io.gfile.exists(split_dir):
                 tf.io.gfile.makedirs(split_dir)
-            np.save(os.path.join(split_dir, path.strip(".npz")), data[split])
+            np.save(os.path.join(split_dir, path[:-4]), data[split])
 
 
 class QuickdrawSketchRNNTest(testing.DatasetBuilderTestCase):
-
     DATASET_CLASS = quickdraw.QuickdrawSketchRNN
     SPLITS = {"train": 10, "test": 10, "validation": 10}
     DL_EXTRACT_RESULT = {"banana": "banana.npz"}
