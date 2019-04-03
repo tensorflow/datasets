@@ -85,12 +85,16 @@ class LazyImporter(object):
   @utils.classproperty
   @classmethod
   def scipy(cls):
+    _try_import("scipy.io")
+    _try_import("scipy.ndimage")
     return _try_import("scipy")
 
   @utils.classproperty
   @classmethod
-  def scipy_io(cls):
-    return _try_import("scipy.io")
+  def skimage(cls):
+    _try_import("skimage.color")
+    _try_import("skimage.filters")
+    return _try_import("skimage")
 
   @utils.classproperty
   @classmethod

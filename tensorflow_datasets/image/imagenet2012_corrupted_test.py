@@ -13,35 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.lazy_imports."""
+"""Tests for corrupted_imagenet."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from absl.testing import parameterized
-import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
+from tensorflow_datasets.image import imagenet2012_corrupted
 
 
-class LazyImportsTest(testing.TestCase, parameterized.TestCase):
+class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = [
+      "defocus_blur_5", "elastic_2", "brightness_3", "zoom_blur_1",
+      "frosted_glass_blur_4"
+  ]
 
-  @parameterized.parameters(
-      "cv2",
-      "matplotlib",
-      "mwparserfromhell",
-      "os",
-      "pydub",
-      "pyplot",
-      "scipy",
-      "skimage",
-  )
-  def test_import(self, module_name):
-    getattr(tfds.core.lazy_imports, module_name)
-
-  def test_bad_import(self):
-    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
-      _ = tfds.core.lazy_imports.test_foo
+  DATASET_CLASS = imagenet2012_corrupted.Imagenet2012Corrupted
+  SPLITS = {  # Expected number of examples on the validation split.
+      "validation": 10,
+  }
 
 
 if __name__ == "__main__":
