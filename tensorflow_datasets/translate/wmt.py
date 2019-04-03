@@ -109,7 +109,7 @@ _TRAIN_SUBSETS = [
     SubDataset(
         name="commoncrawl",
         target="en",   # fr-de pair in commoncrawl_frde
-        sources={"cs", "de", "es", "fr"},
+        sources={"cs", "de", "es", "fr", "ru"},
         url="http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
         path=("commoncrawl.{src}-en.{src}", "commoncrawl.{src}-en.en")),
     SubDataset(
@@ -128,6 +128,13 @@ _TRAIN_SUBSETS = [
         # Each tar contains multiple files, which we process specially in
         # _parse_czeng.
         path=("data.plaintext-format/??train.gz",) * 10),
+    SubDataset(
+        name="czeng_16pre",
+        target="en",
+        sources={"cs"},
+        url="http://ufal.mff.cuni.cz/czeng/czeng16pre",
+        manual_dl_files=["czeng16pre.deduped-ignoring-sections.txt.gz"],
+        path=""),
     SubDataset(
         name="czeng_16",
         target="en",
@@ -169,12 +176,19 @@ _TRAIN_SUBSETS = [
              "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.de.gz"),
         path=("", "")),
     SubDataset(
-        name="europarl_v8",
+        name="europarl_v8_18",
         target="en",
         sources={"et", "fi"},
         url="http://data.statmt.org/wmt18/translation-task/training-parallel-ep-v8.tgz",
         path=("training/europarl-v8.{src}-en.{src}",
               "training/europarl-v8.{src}-en.en")),
+    SubDataset(
+        name="europarl_v8_16",
+        target="en",
+        sources={"fi", "ro"},
+        url="http://data.statmt.org/wmt16/translation-task/training-parallel-ep-v8.tgz",
+        path=("training-parallel-ep-v8/europarl-v8.{src}-en.{src}",
+              "training-parallel-ep-v8/europarl-v8.{src}-en.en")),
     SubDataset(
         name="europarl_v9",
         target="en",
@@ -308,8 +322,8 @@ _TRAIN_SUBSETS = [
     SubDataset(
         name="setimes_2",
         target="en",
-        sources={"tr"},
-        url="http://opus.nlpl.eu/download.php?f=SETIMES/v2/tmx/en-tr.tmx.gz",
+        sources={"ro", "tr"},
+        url="http://opus.nlpl.eu/download.php?f=SETIMES/v2/tmx/en-{src}.tmx.gz",
         path=""),
     SubDataset(
         name="uncorpus_v1",
@@ -672,7 +686,18 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       ds = DATASET_MAP[ss_name]
       extract_dirs = extraction_map[ss_name]
       files = _get_local_paths(ds, extract_dirs)
-      if len(files) == 2:
+      if ss_name.startswith("czeng"):
+        if ss_name.endswith("16pre"):
+          sub_generator = functools.partial(
+              _parse_tsv, language_pair=("en", "cs"))
+        elif ss_name.endswith("17"):
+          filter_path = _get_local_paths(
+              _CZENG17_FILTER, extraction_map[_CZENG17_FILTER.name])[0]
+          sub_generator = functools.partial(
+              _parse_czeng, filter_path=filter_path)
+        else:
+          sub_generator = _parse_czeng
+      elif len(files) == 2:
         if ss_name.endswith("_frde"):
           sub_generator = _parse_frde_bitext
         else:
@@ -692,14 +717,6 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
           sub_generator = _parse_wikiheadlines
         else:
           raise ValueError("Unsupported file format: %s" % fname)
-      elif ss_name.startswith("czeng"):
-        if ss_name.endswith("17"):
-          filter_path = _get_local_paths(
-              _CZENG17_FILTER, extraction_map[_CZENG17_FILTER.name])[0]
-          sub_generator = functools.partial(
-              _parse_czeng, filter_path=filter_path)
-        else:
-          sub_generator = _parse_czeng
       else:
         raise ValueError("Invalid number of files: %d" % len(files))
 
