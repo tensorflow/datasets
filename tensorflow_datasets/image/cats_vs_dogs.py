@@ -46,13 +46,13 @@ _DESCRIPTION = (("A large set of images of cats and dogs."
                  "There are %d corrupted images that are dropped.")
                 % _NUM_CORRUPT_IMAGES)
 
-_NAME_RE = re.compile(r"^PetImages/(Cat|Dog)/\d+\.jpg$")
+_NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 
 
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("2.0.1")
   # From 1.0.0 to 2.0.0:
   #  - _NUM_CORRUPT_IMAGES: 1800->1738.
   #  - add 'image/filename' feature.

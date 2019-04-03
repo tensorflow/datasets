@@ -29,11 +29,12 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
   @parameterized.parameters(
       "cv2",
       "matplotlib",
+      "mwparserfromhell",
       "os",
       "pydub",
       "pyplot",
       "scipy",
-      "scipy_io",
+      "skimage",
   )
   def test_import(self, module_name):
     getattr(tfds.core.lazy_imports, module_name)

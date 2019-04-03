@@ -64,7 +64,7 @@ _VALIDATION_LABELS_FNAME = 'image/imagenet2012_validation_labels.txt'
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('2.0.1')
   # 1.0.0 to 2.0.0: fix validation labels.
 
   def _info(self):
@@ -127,6 +127,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, archive, validation_labels=None):
+    """Yields examples."""
     if validation_labels:  # Validation split
       for example in self._generate_examples_validation(archive,
                                                         validation_labels):

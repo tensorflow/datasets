@@ -175,6 +175,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     return keys, values
 
   def _generate_examples(self, file_id, extracted_dirs):
+    """Yields examples."""
     filedir = os.path.join(extracted_dirs["img_align_celeba"],
                            "img_align_celeba")
     img_list_path = extracted_dirs["list_eval_partition"]
