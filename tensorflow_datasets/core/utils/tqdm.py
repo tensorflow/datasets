@@ -24,7 +24,6 @@ import contextlib
 
 from tqdm import auto as tqdm_lib
 
-tqdm = tqdm_lib.tqdm
 
 active = True
 
@@ -37,6 +36,13 @@ def disable_progress_bar():
   """
   global active
   active = False
+
+def tqdm(*args, **kwargs):
+  """Tqdm controller function"""
+  if active:
+    return tqdm_lib.tqdm(*args, **kwargs)
+  else:
+    return args[0]
 
 @contextlib.contextmanager
 def async_tqdm(*args, **kwargs):
@@ -58,7 +64,7 @@ def async_tqdm(*args, **kwargs):
   Yields:
     pbar: Async pbar which can be shared between threads.
   """
-  with tqdm(*args, **kwargs) as pbar:
+  with tqdm_lib.tqdm(*args, **kwargs) as pbar:
     pbar = _TqdmPbarAsync(pbar)
     yield pbar
     pbar.clear()  # pop pbar from the active list of pbar
@@ -70,7 +76,7 @@ class _TqdmPbarAsync(object):
   _tqdm_bars = []
 
   def __init__(self, pbar):
-    self._lock = tqdm.get_lock()
+    self._lock = tqdm_lib.tqdm.get_lock()
     self._pbar = pbar
     self._tqdm_bars.append(pbar)
 
@@ -83,16 +89,19 @@ class _TqdmPbarAsync(object):
 
   def update(self, n=1):
     """Increment current value."""
-    with self._lock:
-      self._pbar.update(n)
-      self.refresh()
+    if active:
+      with self._lock:
+        self._pbar.update(n)
+        self.refresh()
 
   def refresh(self):
     """Refresh all."""
-    for pbar in self._tqdm_bars:
-      pbar.refresh()
+    if active:
+      for pbar in self._tqdm_bars:
+        pbar.refresh()
 
   def clear(self):
     """Remove the tqdm pbar from the update."""
-    self._tqdm_bars.pop()
+    if active:
+      self._tqdm_bars.pop()
 
