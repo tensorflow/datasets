@@ -90,7 +90,7 @@ def _decode_image(fobj, session, filename):
     logging.warning(
         "Image %s could not be decoded by OpenCV, falling back to TF", filename)
     try:
-      image = tf.io.decode_image(buf, channels=3)
+      image = tf.image.decode_image(buf, channels=3)
       image = session.run(image)
     except tf.errors.InvalidArgumentError:
       logging.fatal("Image %s could not be decoded by Tensorflow", filename)
