@@ -21,8 +21,11 @@ from __future__ import print_function
 
 import io
 import os
-import numpy as np
 
+from absl import logging
+import numpy as np
+import tensorflow as tf
+from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
 
@@ -52,8 +55,14 @@ the entire dataset (named "full"). All images are converted to RGB.
 """
 _SUN397_URL = "https://vision.princeton.edu/projects/2010/SUN/"
 
+# These images are badly encoded and cannot be decoded correctly (TF), or the
+# decoding is not deterministic (PIL).
+_SUN397_IGNORE_IMAGES = [
+    "SUN397/c/church/outdoor/sun_bhenjvsvrtumjuri.jpg",
+]
 
-def _decode_image(fobj):
+
+def _decode_image(fobj, session, filename):
   """Reads and decodes an image from a file object as a Numpy array.
 
   The SUN dataset contains images in several formats (despite the fact that
@@ -67,6 +76,8 @@ def _decode_image(fobj):
 
   Args:
     fobj: File object to read from.
+    session: TF session used to decode the images.
+    filename: Filename of the original image in the archive.
 
   Returns:
     Numpy array with shape (height, width, channels).
@@ -76,10 +87,13 @@ def _decode_image(fobj):
   image = tfds.core.lazy_imports.cv2.imdecode(
       np.fromstring(buf, dtype=np.uint8), flags=3)  # Note: Converts to RGB.
   if image is None:
-    # OpenCV misses support for some image formats contained in the dataset.
-    image = tfds.core.lazy_imports.PIL_Image.open(io.BytesIO(buf))
-    image = image.convert("RGB")
-    image = np.array(image)
+    logging.warning(
+        "Image %s could not be decoded by OpenCV, falling back to TF", filename)
+    try:
+      image = tf.io.decode_image(buf, channels=3)
+      image = session.run(image)
+    except tf.errors.InvalidArgumentError:
+      logging.fatal("Image %s could not be decoded by Tensorflow", filename)
 
   # The GIF images contain a single frame.
   if len(image.shape) == 4:  # rank=4 -> rank=3
@@ -88,50 +102,27 @@ def _decode_image(fobj):
   return image
 
 
-def _encode_image(image, image_format=None, fobj=None):
-  """Encodes and writes an image in a Numpy array to a file object.
-
-  Args:
-    image: A numpy array with shape (height, width, channels).
-    image_format: Encode and write the image in this format.
-      If None, JPEG is used.
-    fobj: File object to write the encoded image. Random access (seek) is
-      required. If None, it creates a BytesIO file.
-
-  Returns:
-    Resulting file object. If fobj was given, the functions returns it.
-  """
-  if len(image.shape) != 3:
-    raise ValueError("The image should have shape (height, width, channels)")
-
-  # By default, for images with alpha channel use PNG, otherwise use JPEG.
-  if image_format is None:
-    image_format = "JPEG"
-
-  # Remove extra channel for grayscale images, or PIL complains.
-  if image.shape[-1] == 1:
-    image = image.reshape(image.shape[:-1])
-
-  fobj = fobj or io.BytesIO()
-  image = tfds.core.lazy_imports.PIL_Image.fromarray(image)
-  image.save(fobj, format=image_format)
+def _encode_jpeg(image):
+  _, buff = tfds.core.lazy_imports.cv2.imencode(".jpg", image)
+  fobj = io.BytesIO()
+  fobj.write(buff.tostring())
   fobj.seek(0)
   return fobj
 
 
-def _process_image_file(fobj):
+def _process_image_file(fobj, session, filename):
   """Process image files from the dataset."""
   # We need to read the image files and convert them to JPEG, since some files
   # actually contain GIF, PNG or BMP data (despite having a .jpg extension) and
   # some encoding options that will make TF crash in general.
-  image = _decode_image(fobj)
-  return _encode_image(image, image_format="JPEG")
+  image = _decode_image(fobj, session, filename=filename)
+  return _encode_jpeg(image)
 
 
 class Sun397(tfds.core.GeneratorBasedBuilder):
   """Sun397 Scene Recognition Benchmark."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.1.0")
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -166,17 +157,20 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, archive):
     """Yields examples."""
     prefix_len = len("SUN397")
-    for filepath, fobj in archive:
-      if filepath.endswith(".jpg"):
-        # Note: all files in the tar.gz are in SUN397/...
-        filename = filepath[prefix_len:]
-        # Example:
-        # From filename: /c/car_interior/backseat/sun_aenygxwhhmjtisnf.jpg
-        # To class: /c/car_interior/backseat
-        label = "/".join(filename.split("/")[:-1])
-        image = _process_image_file(fobj)
-        yield {
-            "file_name": filename,
-            "image": image,
-            "label": label,
-        }
+    with tf.Graph().as_default():
+      with utils.nogpu_session() as sess:
+        for filepath, fobj in archive:
+          if (filepath.endswith(".jpg") and
+              filepath not in _SUN397_IGNORE_IMAGES):
+            # Note: all files in the tar.gz are in SUN397/...
+            filename = filepath[prefix_len:]
+            # Example:
+            # From filename: /c/car_interior/backseat/sun_aenygxwhhmjtisnf.jpg
+            # To class: /c/car_interior/backseat
+            label = "/".join(filename.split("/")[:-1])
+            image = _process_image_file(fobj, sess, filepath)
+            yield {
+                "file_name": filename,
+                "image": image,
+                "label": label,
+            }
