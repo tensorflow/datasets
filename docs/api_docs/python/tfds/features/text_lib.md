@@ -9,6 +9,8 @@
 
 Defined in [`core/features/text/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/__init__.py).
 
+<!-- Placeholder for "Used in" -->
+
 Text utilities.
 
 <a href="../../tfds.md"><code>tfds</code></a> includes a set of `TextEncoder`s as well as a `Tokenizer` to enable

@@ -9,6 +9,8 @@
 
 Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
 
+<!-- Placeholder for "Used in" -->
+
 <a href="../tfds/file_adapter/FileFormatAdapter.md"><code>tfds.file_adapter.FileFormatAdapter</code></a>s for GeneratorBasedBuilder.
 
 FileFormatAdapters implement methods to write and read data from a

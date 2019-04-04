@@ -33,6 +33,8 @@
 
 Defined in [`core/dataset_info.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py).
 
+<!-- Placeholder for "Used in" -->
+
 Information about a dataset.
 
 `DatasetInfo` documents datasets, including its name, version, and features.

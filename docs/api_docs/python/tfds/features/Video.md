@@ -24,6 +24,8 @@ Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 
 Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
 
+<!-- Placeholder for "Used in" -->
+
 `FeatureConnector` for videos, png-encoding frames on disk.
 
 Video: The image connector accepts as input:

@@ -25,6 +25,8 @@
 
 Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
 
+<!-- Placeholder for "Used in" -->
+
 Abstract base class for all datasets.
 
 `DatasetBuilder` has 3 key methods:
@@ -160,6 +162,11 @@ Downloads and prepares dataset for reading.
     Defaults to "~/tensorflow-datasets/downloads".
 * <b>`download_config`</b>: <a href="../../tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>, further configuration for
     downloading and preparing dataset.
+
+
+#### Raises:
+
+* <b>`IOError`</b>: if there is not enough disk space available.
 
 
 

@@ -1,5 +1,5 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
-<meta itemprop="name" content="tfds.testing.DummyDatasetSharedGenerator" />
+<meta itemprop="name" content="tfds.core.BeamBasedBuilder" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="builder_config"/>
 <meta itemprop="property" content="data_dir"/>
@@ -15,19 +15,19 @@
 <meta itemprop="property" content="name"/>
 </div>
 
-# tfds.testing.DummyDatasetSharedGenerator
+# tfds.core.BeamBasedBuilder
 
-## Class `DummyDatasetSharedGenerator`
-
-Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)
+## Class `BeamBasedBuilder`
 
 
 
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
+
+
+Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
 
 <!-- Placeholder for "Used in" -->
 
-Test DatasetBuilder.
+Beam based Builder.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

@@ -18,6 +18,8 @@
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
+<!-- Placeholder for "Used in" -->
+
 Abstract base class for converting between text and integers.
 
 **A note on padding**:
