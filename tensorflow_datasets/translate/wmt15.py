@@ -67,7 +67,7 @@ class Wmt15Translate(wmt.WmtTranslate):
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "europarl_v8", "commoncrawl", "multiun",
+            "europarl_v7", "europarl_v8_16", "commoncrawl", "multiun",
             "newscommentary_v10", "gigafren", "czeng_10", "yandexcorpus",
             "wikiheadlines_fi", "wikiheadlines_ru"],
         tfds.Split.VALIDATION: [
