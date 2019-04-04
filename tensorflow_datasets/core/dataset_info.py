@@ -372,6 +372,7 @@ class DatasetInfo(object):
     tmp_dir = tempfile.mkdtemp("tfds")
     data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
+      logging.info("No GCS info found for %s", self.full_name)
       return
     logging.info("Loading info from GCS for %s", self.full_name)
     for fname in data_files:
