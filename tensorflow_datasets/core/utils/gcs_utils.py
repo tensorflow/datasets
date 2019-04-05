@@ -48,6 +48,7 @@ def download_gcs_file(path, out_fname=None):
 
 @utils.memoize()
 def gcs_files():
+  """List all files in GCS bucket."""
   top_level_xml_str = download_gcs_file("")
   xml_root = ElementTree.fromstring(top_level_xml_str)
   filenames = [el[0].text for el in xml_root if el.tag.endswith("Contents")]
