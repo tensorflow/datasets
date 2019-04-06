@@ -20,7 +20,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import scipy.io
 
 import tensorflow as tf
 from tensorflow_datasets.core import api_utils
@@ -121,7 +120,7 @@ class LeedsSportsPose(tfds.core.GeneratorBasedBuilder):
     
     images = sorted(tf.io.gfile.listdir(images_path))
     visualized_images = sorted(tf.io.gfile.listdir(visualized_path))
-    mat = scipy.io.loadmat(mat_file_path)['joints'] 
+    mat = tfds.core.lazy_imports.scipy.io.loadmat(mat_file_path)['joints'] 
     
     for image, visualized_image in zip(images, visualized_images):
       assert image == visualized_image 
