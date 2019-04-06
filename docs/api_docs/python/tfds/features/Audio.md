@@ -23,6 +23,8 @@ Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 Defined in [`core/features/audio_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/audio_feature.py).
 
+<!-- Placeholder for "Used in" -->
+
 `FeatureConnector` for audio, encoded as raw integer wave form.
 
 <h2 id="__init__"><code>__init__</code></h2>

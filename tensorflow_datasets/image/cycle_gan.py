@@ -106,6 +106,7 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     url = _DL_URLS[self.builder_config.name]
     data_dirs = dl_manager.download_and_extract(url)
 

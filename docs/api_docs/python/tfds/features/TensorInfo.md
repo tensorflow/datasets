@@ -16,6 +16,8 @@
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
+<!-- Placeholder for "Used in" -->
+
 TensorInfo(shape, dtype)
 
 <h2 id="__new__"><code>__new__</code></h2>

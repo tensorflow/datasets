@@ -29,6 +29,8 @@ Inherits From: [`FeaturesDict`](../../tfds/features/FeaturesDict.md)
 
 Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
+<!-- Placeholder for "Used in" -->
+
 Composite `FeatureConnector` for a `dict` where each value is a list.
 
 `SequenceDict` correspond to sequence of `tfds.features.FeatureDict`. At

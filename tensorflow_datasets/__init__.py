@@ -38,7 +38,7 @@ from __future__ import division
 from __future__ import print_function
 
 # pylint: enable=line-too-long
-# pylint: disable=g-import-not-at-top,g-bad-import-order
+# pylint: disable=g-import-not-at-top,g-bad-import-order,wrong-import-position
 
 # Ensure TensorFlow is importable and its version is sufficiently recent. This
 # needs to happen before anything else, since the imports below will try to

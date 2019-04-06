@@ -39,6 +39,8 @@ class _FakeResponse(object):
     self.cookies = cookies or {}
     self.headers = headers or {'Content-length': 12345}
     self.status_code = status_code
+    # For urllib codepath
+    self.read = self.raw.read
 
   def iter_content(self, chunk_size):
     del chunk_size
@@ -67,14 +69,10 @@ class DownloaderTest(testing.TestCase):
     self.downloader._pbar_url = absltest.mock.MagicMock()
     self.downloader._pbar_dl_size = absltest.mock.MagicMock()
 
-    def write_fake_ftp_result(_, filename):
-      with open(filename, 'wb') as result:
-        result.write(self.response)
-
     absltest.mock.patch.object(
         downloader.urllib.request,
-        'urlretrieve',
-        write_fake_ftp_result,
+        'urlopen',
+        lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
 
   def test_ok(self):
@@ -139,7 +137,7 @@ class DownloaderTest(testing.TestCase):
     error = downloader.urllib.error.URLError('Problem serving file.')
     absltest.mock.patch.object(
         downloader.urllib.request,
-        'urlretrieve',
+        'urlopen',
         side_effect=error,
     ).start()
     url = 'ftp://example.com/foo.tar.gz'

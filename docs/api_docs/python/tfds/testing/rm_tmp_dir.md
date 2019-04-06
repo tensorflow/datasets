@@ -13,4 +13,6 @@ tfds.testing.rm_tmp_dir(dirname)
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
+<!-- Placeholder for "Used in" -->
+
 Rm temporary directory.

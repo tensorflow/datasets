@@ -238,7 +238,9 @@ def load(name,
       cache_dir and manual_dir will automatically be deduced from data_dir.
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
       `tfds.core.DatasetBuilder.as_dataset`. `split` will be passed through by
-      default.
+      default. Example: `{'shuffle_files': True}`.
+      Note that shuffle_files is False by default unless
+      `split == tfds.Split.TRAIN`.
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a

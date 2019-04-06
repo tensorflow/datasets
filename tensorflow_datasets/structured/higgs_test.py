@@ -13,32 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for WMT translate dataset module."""
+"""Tests for HIGGS dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.translate import wmt_ende
+from tensorflow_datasets.structured import higgs
 
 
-class TranslateEndeWMTTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = wmt_ende.WmtTranslateEnde
-  BUILDER_CONFIG_NAMES_TO_TEST = ["ende_plain_text_t2t", "ende_subwords8k_t2t"]
-  OVERLAPPING_SPLITS = ["validation"]
-
-  DL_EXTRACT_RESULT = {
-      "train_0": "nc_v13",
-      "train_1": "crawl",
-      "train_2": "europarl",
-      "dev_0": "validation",
-  }
-
+class HiggsTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = higgs.Higgs
   SPLITS = {
-      "train": 5,
-      "validation": 2,
+      "train": 11,
   }
+
+  DL_EXTRACT_RESULT = "test.csv"
 
 
 if __name__ == "__main__":

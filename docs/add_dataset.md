@@ -49,6 +49,20 @@ generate on a single machine. See the
 
 ## Writing `my_dataset.py`
 
+### Use the default template
+
+To help you get started to add a new dataset inside `tfds`, you can cloned the
+repository and use the default template by running the following command:
+
+```
+python tensorflow_datasets/scripts/create_new_dataset.py \
+  --dataset my_dataset \
+  --type image  # text, audio, translation,...
+```
+
+
+It will create the minimum python files that you're requiring to get started.
+
 ### `DatasetBuilder`
 
 Each dataset is defined as a subclass of
@@ -501,7 +515,26 @@ Most datasets in TFDS should have a unit test and your reviewer may ask you
 to add one if you haven't already. See the
 [testing section](#testing-mydataset) below.
 
-### 5. Send for review!
+### 5. Check your code style
+
+Follow the [PEP 8 Python style guide](https://www.python.org/dev/peps/pep-0008),
+except TensorFlow uses 2 spaces instead of 4. Please conform to the
+[Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
+
+Most importantly, use
+[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/blob/master/oss_scripts/lint.sh)
+to ensure your code is properly formatted. For example, to lint the `image`
+directory:
+
+```sh
+./oss_scripts/lint.sh image
+```
+
+See
+[TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
+for more information.
+
+### 6. Send for review!
 
 Send the pull request for review.
 

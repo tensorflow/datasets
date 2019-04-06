@@ -144,6 +144,8 @@
 
 Defined in [`testing/test_case.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py).
 
+<!-- Placeholder for "Used in" -->
+
 Base TestCase to be used for all tests.
 
 `test_data` class attribute: path to the directory with test data.
@@ -975,8 +977,8 @@ using assertSameStructure.
 
 #### Args:
 
-* <b>`first`</b>: A string containing a JSON to decode and compare to second.
-* <b>`second`</b>: A string containing a JSON to decode and compare to first.
+* <b>`first`</b>: A string containing JSON to decode and compare to second.
+* <b>`second`</b>: A string containing JSON to decode and compare to first.
 * <b>`msg`</b>: Additional text to include in the failure message.
 
 <h3 id="assertLen"><code>assertLen</code></h3>
