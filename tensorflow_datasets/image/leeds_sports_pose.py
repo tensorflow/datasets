@@ -103,14 +103,12 @@ class LeedsSportsPose(tfds.core.GeneratorBasedBuilder):
     
     data_dirs = dl_manager.download_and_extract(_DOWNLOAD_URL) 
     
-    path_to_dataset = os.path.join(data_dirs, tf.io.gfile.listdir(data_dirs)[0])
-    
     return [
         tfds.core.SplitGenerator(
             name="train",
             num_shards=10,
             gen_kwargs={
-                "path_to_dataset": path_to_dataset,  
+                "path_to_dataset": data_dirs,  
             },
         )
     ] 
@@ -126,7 +124,7 @@ class LeedsSportsPose(tfds.core.GeneratorBasedBuilder):
     mat = scipy.io.loadmat(mat_file_path)['joints'] 
     
     for image, visualized_image in zip(images, visualized_images):
-      assert image == visualized_image
+      assert image == visualized_image 
       
       index = int(image[-8:-4]) - 1
       joint = mat[:,:,index]
@@ -137,5 +135,5 @@ class LeedsSportsPose(tfds.core.GeneratorBasedBuilder):
           "y": joint[1], 
           "binary_value_visbility": joint[2],   
       }
-      
-      
+    
+    

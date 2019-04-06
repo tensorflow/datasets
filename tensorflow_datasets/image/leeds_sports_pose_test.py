@@ -29,6 +29,8 @@ class LeedsSportsPoseTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 5, 
   }
-
+  
+  DL_EXTRACT_RESULT = "lsp_dataset"
+  
 if __name__ == "__main__":
   testing.test_main()
