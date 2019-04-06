@@ -126,6 +126,8 @@ class LeedsSportsPose(tfds.core.GeneratorBasedBuilder):
     mat = scipy.io.loadmat(mat_file_path)['joints'] 
     
     for image, visualized_image in zip(images, visualized_images):
+      assert image == visualized_image
+      
       index = int(image[-8:-4]) - 1
       joint = mat[:,:,index]
       yield{
@@ -135,5 +137,5 @@ class LeedsSportsPose(tfds.core.GeneratorBasedBuilder):
           "y": joint[1], 
           "binary_value_visbility": joint[2],   
       }
-    
-    
+      
+      
