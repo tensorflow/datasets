@@ -47,7 +47,7 @@ class Wmt15Translate(wmt.WmtTranslate):
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version="0.0.1")
+          version="0.0.2")
       for l1, l2 in _LANGUAGE_PAIRS
   ] + [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
@@ -67,7 +67,7 @@ class Wmt15Translate(wmt.WmtTranslate):
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "europarl_v8", "commoncrawl", "multiun",
+            "europarl_v7", "europarl_v8_16", "commoncrawl", "multiun",
             "newscommentary_v10", "gigafren", "czeng_10", "yandexcorpus",
             "wikiheadlines_fi", "wikiheadlines_ru"],
         tfds.Split.VALIDATION: [
