@@ -16,6 +16,8 @@
 """Image datasets."""
 
 from tensorflow_datasets.image.caltech import Caltech101
+from tensorflow_datasets.image.cartoonset import Cartoonset10k
+from tensorflow_datasets.image.cartoonset import Cartoonset100k
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
