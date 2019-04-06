@@ -92,6 +92,7 @@ DATASET_EXTRAS = {
         'scikit-image',
         'scipy'
     ],
+    'leeds_sports_pose': ['scipy'], 
     'librispeech': ['pydub'],  # and ffmpeg installed
     'svhn': ['scipy'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
