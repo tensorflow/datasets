@@ -16,7 +16,7 @@
 r"""Script to call download_and_prepare on DatasetBuilder.
 
 Standalone script to generate specific dataset(s). This can be
-used if you want to separate download/generation of dataset from acual usage.
+used if you want to separate download/generation of dataset from actual usage.
 
 By default, the dataset is generated in the default location
 (~/tensorflow_datasets), which the same as when calling `tfds.load()`.
