@@ -27,7 +27,7 @@ class LeedsSportsPoseTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = leeds_sports_pose.LeedsSportsPose
   
   SPLITS = {
-      "train": 2000, 
+      "train": 5, 
   }
 
 if __name__ == "__main__":
