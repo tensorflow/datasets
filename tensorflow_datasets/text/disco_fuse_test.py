@@ -9,6 +9,7 @@ from tensorflow_datasets.text import disco_fuse
 
 
 class DiscoFuseTest(testing.DatasetBuilderTestCase):
+  """DiscoFuse Test"""
   DATASET_CLASS = disco_fuse.DiscoFuse
   BUILDER_CONFIG_NAMES_TO_TEST = ["wikipedia"]
   SPLITS = {
@@ -23,4 +24,3 @@ class DiscoFuseTest(testing.DatasetBuilderTestCase):
 
 if __name__ == "__main__":
   testing.test_main()
-
