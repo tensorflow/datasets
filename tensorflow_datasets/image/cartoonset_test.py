@@ -22,20 +22,11 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import cartoonset
 
-
-class CartoonSet10kTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = cartoonset.Cartoonset10k
+class CartoonsetTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = cartoonset.Cartoonset
   SPLITS = {
-      "train": 3,  # Number of fake train example
+      "train": 33,  # Number of fake training examples (3 + 30)
   }
-
-
-class CartoonSet100kTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = cartoonset.Cartoonset100k
-  SPLITS = {
-      "train": 30,  # Number of fake train example
-  }
-
 
 if __name__ == "__main__":
   testing.test_main()

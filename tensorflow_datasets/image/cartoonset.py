@@ -24,21 +24,17 @@ import csv
 import tensorflow as tf
 
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core import api_utils
+
 
 _CARTOON_IMAGE_SIZE = 500
 _CARTOON_IMAGE_SHAPE = (_CARTOON_IMAGE_SIZE, _CARTOON_IMAGE_SIZE, 3)
 
-_DESCRIPTION10K = """
-Cartoon Set is a collection of random, 2D cartoon avatar images. Each image is 
-500 x 500. The cartoons vary in 10 artwork categories, 4 color categories, and 
-4 proportion categories, with a total of ~10^13 possible combinations. Set of 
-10k randomly chosen cartoons and labeled attributes are provided. 
-"""
-_DESCRIPTION100K = """
-Cartoon Set is a collection of random, 2D cartoon avatar images. Each image is 
-500 x 500. The cartoons vary in 10 artwork categories, 4 color categories, and 
-4 proportion categories, with a total of ~10^13 possible combinations. Set of
-100k randomly chosen cartoons and labeled attributes are provided. 
+_DESCRIPTION = """
+Cartoon Set is a collection of random, 2D cartoon avatar images. Each image is a
+500 x 500 PNG. The cartoons vary in 10 artwork categories, 4 color categories, 
+and  4 proportion categories, with a total of ~10^13 possible combinations. Set 
+of 10k and 100k randomly chosen cartoons and labeled attributes are provided. 
 """
 _CITATION = """
 @ONLINE {Cartoon Set,
@@ -48,17 +44,44 @@ _CITATION = """
 }
 """
 
+_DATA_OPTIONS = ['cartoonset10k', 'cartoonset100k']
 
-class Cartoonset10k(tfds.core.GeneratorBasedBuilder):
-  """CartoonSet10k is a collection of 10000 random, 2D cartoon avatar images."""
 
-  VERSION = tfds.core.Version('1.0.2')
+class CartoonsetConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for CartoonSet."""
 
+  @api_utils.disallow_positional_args
+  def __init__(self, data, **kwargs):
+    """Constructs a CartoonsetConfig.
+    Args:
+      data: `str`, one of `_DATA_OPTIONS`.
+      **kwargs: keyword arguments forwarded to super.
+    """
+    if data not in _DATA_OPTIONS:
+      raise ValueError("data must be one of %s" % _DATA_OPTIONS)
+
+    super(CartoonsetConfig, self).__init__(**kwargs)
+    self.data = data
+
+
+class Cartoonset(tfds.core.GeneratorBasedBuilder):
+  """CartoonSet is a collection of random, 2D cartoon avatar images."""
+
+  VERSION = tfds.core.Version('0.1.0')
+
+  BUILDER_CONFIGS = [
+      CartoonsetConfig(
+          name=config_name,
+          description="A collection of random, 2D cartoon avatar images",
+          version="0.1.0",
+          data=config_name,
+      ) for config_name in _DATA_OPTIONS
+  ]
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION10K,
-        features=tfds.features.features_dict(
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict(
             {"image": tfds.features.Image(shape=_CARTOON_IMAGE_SHAPE),
              "eye_angle": tfds.features.ClassLabel(num_classes=3),
              "eye_lashes": tfds.features.ClassLabel(num_classes=2),
@@ -95,7 +118,7 @@ class Cartoonset10k(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
+            num_shards=2,
             gen_kwargs={
                 "filepath": path
             })
@@ -103,85 +126,17 @@ class Cartoonset10k(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Yields examples."""
-    for file in tf.io.gfile.listdir(filepath):
-      features_dict = dict()
-      name, dtype = file.split('.')
-      if dtype == 'png':
-        image = tfds.core.lazy_imports.skimage.io.imread(
-            filepath + '/' + name + '.png')
-      with tf.io.gfile.GFile(filepath + '/' + name + '.csv', 'r') as f:
-        reader = csv.reader(f, delimiter=',')
-        for row in reader:
-          features_dict[row[0]] = row[1]
-      features_dict['image'] = image[:, :, :3]  # Currently does not support alpha channels
-      yield features_dict
-
-
-class Cartoonset100k(tfds.core.GeneratorBasedBuilder):
-  """Cartoonset10k is a collection of 100000 random, 2D cartoon avatar images."""
-
-  VERSION = tfds.core.Version('1.0.2')
-
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION100K,
-        features=tfds.features.features_dict(
-            {"image": tfds.features.Image(shape=_CARTOON_IMAGE_SHAPE),
-             "eye_angle": tfds.features.ClassLabel(num_classes=3),
-             "eye_lashes": tfds.features.ClassLabel(num_classes=2),
-             "eye_lid": tfds.features.ClassLabel(num_classes=2),
-             "chin_length": tfds.features.ClassLabel(num_classes=3),
-             "eyebrow_weight": tfds.features.ClassLabel(num_classes=2),
-             "eyebrow_shape": tfds.features.ClassLabel(num_classes=14),
-             "eyebrow_thickness": tfds.features.ClassLabel(num_classes=4),
-             "face_shape": tfds.features.ClassLabel(num_classes=7),
-             "facial_hair": tfds.features.ClassLabel(num_classes=15),
-             "hair": tfds.features.ClassLabel(num_classes=111),
-             "eye_color": tfds.features.ClassLabel(num_classes=5),
-             "face_color": tfds.features.ClassLabel(num_classes=11),
-             "hair_color": tfds.features.ClassLabel(num_classes=10),
-             "glasses": tfds.features.ClassLabel(num_classes=12),
-             "glasses_color": tfds.features.ClassLabel(num_classes=7),
-             "eye_slant": tfds.features.ClassLabel(num_classes=3),
-             "eyebrow_width": tfds.features.ClassLabel(num_classes=3),
-             "eye_eyebrow_distance": tfds.features.ClassLabel(num_classes=3)}),
-        supervised_keys=None,
-        # Homepage of the dataset for documentation
-        urls=["https://google.github.io/cartoonset/"],
-        citation=_CITATION,
-    )
-
-  def _split_generators(self, dl_manager):
-    """Returns SplitGenerators."""
-    # There is no predefined train/val/test split for this dataset.
-    path = dl_manager.manual_dir
-    if not tf.io.gfile.exists(path):
-      msg = 'You must download the dataset files manually and place them in: '
-      msg += ', '.join([path])
-      raise AssertionError(msg)
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            num_shards=10,
-            gen_kwargs={
-                "filepath": path
-            })
-    ]
-
-  def _generate_examples(self, filepath):
-    """Yields examples."""
-    for i in range(10):
-      path = filepath + '/' + str(i)
-      for file in tf.io.gfile.listdir(path):
+    for path, _, files in tf.io.gfile.walk(filepath):
+      for file in files:
         features_dict = dict()
         name, dtype = file.split('.')
         if dtype == 'png':
           image = tfds.core.lazy_imports.skimage.io.imread(
-              path + '/' + name + '.png')
+              path + '/' + name + '.png')  # Currently does not support alpha channels
+
           with tf.io.gfile.GFile(path + '/' + name + '.csv', 'r') as f:
             reader = csv.reader(f, delimiter=',')
             for row in reader:
               features_dict[row[0]] = row[1]
-          features_dict['image'] = image[:, :, :3]  # Currently does not support alpha channels
+          features_dict['image'] = image[:, :, :3]
           yield features_dict
