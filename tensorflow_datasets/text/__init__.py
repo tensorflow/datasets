@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """Text datasets."""
-
+from tensorflow_datasets.text.disco_fuse import DiscoFuse
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.lm1b import Lm1b
