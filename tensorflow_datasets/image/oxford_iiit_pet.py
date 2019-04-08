@@ -63,7 +63,7 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
+    """Returns splits."""
     # Download images and annotations that come in separate archives.
     # Note, that the extension of archives is .tar.gz even though the actual
     # archives format is uncompressed tar.
@@ -114,4 +114,3 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
             "label": int(label),
             "file_name": image_name
         }
-
