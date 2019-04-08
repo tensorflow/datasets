@@ -4,6 +4,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import csv
 import os
 
 import tensorflow as tf
@@ -22,14 +23,13 @@ _CITATION = """
 """
 
 _DESCRIPTION = """
-entence fusion is the task of joining several independent sentences into a 
+Sentence fusion is the task of joining several independent sentences into a 
 single coherent text DiscoFuse was created by applying a rule-based splitting 
 method on two corpora - sports articles crawled from the Web, and Wikipedia."""
 
 _DATA_OPTIONS = ['wikipedia', 'sports']
-_URLS = {
-    'wikipedia': 'https://storage.googleapis.com/discofuse_dataset_v1/discofuse_v1_wikipedia.tar.gz',
-    'sports': 'https://storage.googleapis.com/discofuse_dataset_v1/discofuse_v1_sports.tar.gz'}
+_URLS = {'wikipedia': 'https://storage.googleapis.com/discofuse_dataset_v1/discofuse_v1_wikipedia.tar.gz',
+         'sports': 'https://storage.googleapis.com/discofuse_dataset_v1/discofuse_v1_sports.tar.gz'}
 
 
 class DiscoFuseConfig(tfds.core.BuilderConfig):
@@ -52,8 +52,7 @@ class DiscoFuse(tfds.core.GeneratorBasedBuilder):
       DiscoFuseConfig(
           name="wikipedia",
           version="0.0.1",
-          description="DiscoFuse from Wikipedia Articles"
-      ),
+          description="DiscoFuse from Wikipedia Articles"),
       DiscoFuseConfig(
           name="sports",
           version="0.0.1",
@@ -141,17 +140,11 @@ class DiscoFuse(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, directory):
     """Yields examples."""
-    for i, line in enumerate(tf.io.gfile.GFile(directory, "rb")):
-      if i == 0: continue  # skip header
-      line = tf.compat.as_text(line.strip())
-      split_line = line.split("\t")
-      yield {
-          "coherent_first_sentence": split_line[0],
-          "coherent_second_sentence": split_line[1],
-          "incoherent_first_sentence": split_line[2],
-          "incoherent_second_sentence": split_line[3],
-          "discourse_type": split_line[4],
-          "connective_string": split_line[5],
-          "has_coref_type_pronoun": int(float(split_line[6])),
-          "has_coref_type_nominal": int(float(split_line[7]))
-      }
+    with tf.io.gfile.GFile(directory) as tsvfile:
+      reader = csv.DictReader(tsvfile, dialect='excel-tab')
+      for row in reader:
+        row['has_coref_type_pronoun'] = int(
+            float(row['has_coref_type_pronoun']))
+        row['has_coref_type_nominal'] = int(
+            float(row['has_coref_type_nominal']))
+        yield row

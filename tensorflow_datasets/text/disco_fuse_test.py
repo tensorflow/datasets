@@ -14,10 +14,10 @@ class DiscoFuseTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["wikipedia"]
   SPLITS = {
       "train": 9,  # Number of fake train example
-      "test": 4,
+      "test": 3,
       "dev": 3,
       "train_balanced": 9,  # Number of fake train example
-      "test_balanced": 4,
+      "test_balanced": 3,
       "dev_balanced": 3
   }
   OVERLAPPING_SPLITS = ["train_balanced", "test_balanced", "dev_balanced"]
