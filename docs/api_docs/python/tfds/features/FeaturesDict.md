@@ -45,7 +45,7 @@ For DatasetInfo:
 ```
 features = tfds.features.FeaturesDict({
     'input': tfds.features.Image(),
-    'target': tf.int32,
+    'output': tf.int32,
 })
 ```
 
