@@ -13,10 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""AFLW2000-3D Datasets
-
-http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm
-"""
+"""AFLW2000-3D Dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
