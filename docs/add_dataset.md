@@ -5,21 +5,34 @@ Follow this guide to add a dataset to TFDS.
 See our [list of datasets](datasets.md) to see if the dataset you want isn't
 already added.
 
-* [Overview](#overview)
-* [Writing `my_dataset.py`](#writing-my-datasetpy)
-* [Specifying `DatasetInfo`](#specifying-datasetinfo)
-  * [`FeatureConnector`s](#featureconnectors)
-* [Downloading and extracting source data](#downloading-and-extracting-source-data)
-  * [Manual download and extraction](#manual-download-and-extraction)
-* [Specifying dataset splits](#specifying-dataset-splits)
-* [Writing an example generator](#writing-an-example-generator)
-  * [File access and `tf.io.gfile`](#file-access-and-tfiogfile)
-  * [Extra dependencies](#extra-dependencies)
-* [Dataset configuration](#dataset-configuration)
-* [Create your own `FeatureConnector`](#create-your-own-featureconnector)
-* [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
-* [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
-* [Testing `MyDataset`](#testing-mydataset)
+*   [Overview](#overview)
+*   [Writing `my_dataset.py`](#writing-my-datasetpy)
+    *   [Use the default template](#use-the-default-template)
+    *   [DatasetBuilder](#datasetbuilde)
+    *   [my_dataset.py](#my-datasetpy)
+*   [Specifying `DatasetInfo`](#specifying-datasetinfo)
+    *   [`FeatureConnector`s](#featureconnectors)
+*   [Downloading and extracting source data](#downloading-and-extracting-source-data)
+    *   [Manual download and extraction](#manual-download-and-extraction)
+*   [Specifying dataset splits](#specifying-dataset-splits)
+*   [Writing an example generator](#writing-an-example-generator)
+    *   [File access and `tf.io.gfile`](#file-access-and-tfiogfile)
+    *   [Extra dependencies](#extra-dependencies)
+    *   [Corrupted data](#corrupted-data)
+    *   [Inconsistent data](#inconsistent-data)
+*   [Dataset configuration](#dataset-configuration)
+    *   [Heavy configuration with BuilderConfig](#heavy-configuration-with-builderconfig)
+    *   [Light configuration with constructor args](#light-configuration-with-constructor-args)
+*   [Create your own `FeatureConnector`](#create-your-own-featureconnector)
+*   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
+    *   [1. Add an import for registration](#1-add-an-import-for-registration)
+    *   [2. Run download_and_prepare locally](#2-run-download-and-prepare-locally)
+    *   [3. Double-check the citation](#3-double-check-the-citation)
+    *   [4. Add a test](#4-add-a-test)
+    *   [5. Check your code style](#5-check-your-code-style)
+    *   [6. Send for review!](#6-send-for-review)
+*   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
+*   [Testing `MyDataset`](#testing-mydataset)
 
 ## Overview
 
@@ -542,9 +555,8 @@ Send the pull request for review.
 ## Large datasets and distributed generation
 
 Some datasets are so large as to require multiple machines to download and
-generate. We intend to soon support this use case using Apache Beam. Follow
-[our tracking issue](https://github.com/tensorflow/datasets/issues/10)
-to be updated.
+generate. We support this use case using Apache Beam. Please read the
+[Beam Dataset Guide](beam_datasets.md) to get started.
 
 ## Testing MyDataset
 
