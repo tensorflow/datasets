@@ -102,7 +102,7 @@ class KaggleCompetitionDownloader(object):
     ]
     output = _run_kaggle_command(command, self._competition_name)
     return sorted([
-        line.split(",")[0] for line in output.split("\n")[1:] if line
+        line.split(",")[0] for line in output.split("\n")[1:] if line!=""
     ])
 
   @utils.memoized_property
@@ -133,7 +133,7 @@ class KaggleCompetitionDownloader(object):
     return os.path.join(output_dir, fname)
 
 
-def _run_kaggle_command(command_args, competition_name):
+def _run_kaggle_command(command_args, competition_name=None):
   """Run kaggle command with subprocess."""
   try:
     output = sp.check_output(command_args)
@@ -151,3 +151,83 @@ def _run_kaggle_command(command_args, competition_name):
 def _log_command_output(output, error=False):
   log = logging.error if error else logging.info
   log("kaggle command output:\n%s", tf.compat.as_text(output))
+
+
+class KaggleSearch(object):
+  def __init__(self, where='competition', search=None, group=None, category=None, sort_by=None):
+    self.search = search
+    self.group = group
+    self.category = category
+    self.sort_by = sort_by
+    self.where = where
+
+# TODO add page number
+  def searching(self):
+    command = ["kaggle"]
+    command.append(self.where)
+    command.append('list')
+
+    for i, j in {'--search':self.search, '--group':self.group, '--category':self.category, '--sort-by':self.sort_by}.items():
+      if j is not None:
+        command.extend([i, j])
+
+    output = _run_kaggle_command(command)
+    return output
+
+
+from ipywidgets import widgets
+from IPython.display import display, clear_output
+
+# TODO error handling
+def search_and_download():
+  tf.logging.set_verbosity(tf.logging.ERROR)
+
+  options = {'where':['competitions', 'datasets'],
+             'group':['general', 'entered', 'inClass'],
+             'category':['all', 'featured', 'research', 'recruitment', 'gettingStarted', 'masters', 'playground'],
+             'sort-by':['grouped', 'prize', 'earliestDeadline', 'latestDeadline', 'numberOfTeams', 'recentlyCreated']
+             }
+  where = widgets.Dropdown(options=options['where'], description="Where",
+                 layout=widgets.Layout(width='auto', grid_area='where'))
+  search_input = widgets.Text(placeholder='Search on Kaggle', description='Search:',
+                 layout=widgets.Layout(width='auto', grid_area='search'))
+  group = widgets.Dropdown(options=options['group'], description="Group",
+                 layout=widgets.Layout(width='auto', grid_area='group'))
+  category = widgets.Dropdown(options=options['category'], description="Category",
+                 layout=widgets.Layout(width='auto', grid_area='category'))
+  sort_by = widgets.Dropdown(options=options['sort-by'], description="Sort-by",
+                 layout=widgets.Layout(width='auto', grid_area='sort-by'))
+  search_button = widgets.Button(description="Search",
+                          style=widgets.ButtonStyle(button_color='lightblue'))
+
+  display(where, search_input, group, category, sort_by, search_button)
+
+
+  def handle_submit(sender):
+    clear_output(wait=True)
+
+    a = KaggleSearch(where=where.value,
+                     search=search_input.value,
+                     group=group.value,
+                     category=category.value,
+                     sort_by=sort_by.value)
+
+    print(a.searching())
+
+    dataset_name = widgets.Text(placeholder='Dataset Name', description='Download:')
+    display(dataset_name)
+    download_button = widgets.Button(description="Download",
+                              style=widgets.ButtonStyle(button_color='lightblue'))
+    display(download_button)
+
+    def kag_downloader(sender):
+      downloader = KaggleCompetitionDownloader(dataset_name.value)
+      print('Downloading...')
+      for fname in downloader.competition_files:
+        downloader.download_file(fname, dataset_name.value)
+        print('Dowloaded ', fname)
+      print('Download Completed!')
+
+    download_button.on_click(kag_downloader)
+
+  search_button.on_click(handle_submit)
