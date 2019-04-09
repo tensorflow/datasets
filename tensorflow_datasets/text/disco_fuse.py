@@ -116,9 +116,9 @@ class DiscoFuse(tfds.core.GeneratorBasedBuilder):
     train = os.path.join(directory, "train.tsv")
     dev = os.path.join(directory, "dev.tsv")
     test = os.path.join(directory, "test.tsv")
-    train_balanced = os.path.join(directory, "train.tsv")
-    dev_balanced = os.path.join(directory, "dev.tsv")
-    test_balanced = os.path.join(directory, "test.tsv")
+    train_balanced = os.path.join(directory, "train_balanced.tsv")
+    dev_balanced = os.path.join(directory, "dev_balanced.tsv")
+    test_balanced = os.path.join(directory, "test_balanced.tsv")
 
     return [
         tfds.core.SplitGenerator(
