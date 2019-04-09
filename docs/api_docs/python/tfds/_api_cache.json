@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.core.GeneratorBasedBuilder", 
+  "current_doc_full_name": "tfds.testing.TestCase.assertContainsSubsequence", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
