@@ -29,65 +29,65 @@ from tensorflow_datasets.sequence import quickdraw
 
 
 def _output_dir():
-    return os.path.join(
-        py_utils.tfds_dir(),
-        "testing",
-        "test_data",
-        "fake_examples",
-        "quickdraw_sketch_rnn",
-    )
+  return os.path.join(
+      py_utils.tfds_dir(),
+      "testing",
+      "test_data",
+      "fake_examples",
+      "quickdraw_sketch_rnn",
+  )
 
 
 def _gen_stroke():
-    delta_x = np.random.randint(-100, 100)
-    delta_y = np.random.randint(-100, 100)
-    pen_off = np.random.choice([0, 1])
-    return np.array([delta_y, delta_x, pen_off], dtype=np.int16)
+  delta_x = np.random.randint(-100, 100)
+  delta_y = np.random.randint(-100, 100)
+  pen_off = np.random.choice([0, 1])
+  return np.array([delta_y, delta_x, pen_off], dtype=np.int16)
 
 
 def _gen_sketch(max_strokes=10):
-    """Sketches are arrays of strokes."""
-    return np.array(
-        [_gen_stroke() for s in range(np.random.randint(2, max_strokes))])
+  """Sketches are arrays of strokes."""
+  return np.array(
+      [_gen_stroke() for s in range(np.random.randint(2, max_strokes))])
 
 
 def _gen_file_content(sketches=10):
-    """Files are arrays of sketches."""
-    return np.array([_gen_sketch() for s in range(sketches)])
+  """Files are arrays of sketches."""
+  return np.array([_gen_sketch() for s in range(sketches)])
 
 
 def _generate_dummies():
-    dummy_strokes = {
-        split: _gen_file_content() for split in ["train", "test", "valid"]
-    }
-    np.savez(os.path.join(_output_dir(), "banana.npz"), **dummy_strokes)
+  dummy_strokes = {
+      split: _gen_file_content() for split in ["train", "test", "valid"]
+  }
+  np.savez(os.path.join(_output_dir(), "banana.npz"), **dummy_strokes)
 
 
 def _unpack_dummies():
-    download_dir = _output_dir()
-    extract_dir = os.path.join(download_dir, "extracted")
-    for path in tf.io.gfile.listdir(download_dir):
-        if path == "extracted":
-            continue
-        data = np.load(os.path.join(download_dir, path))
-        for split in ["train", "test", "valid"]:
-            split_dir = os.path.join(extract_dir, split)
-            if not tf.io.gfile.exists(split_dir):
-                tf.io.gfile.makedirs(split_dir)
-            np.save(os.path.join(split_dir, path[:-4]), data[split])
+  download_dir = _output_dir()
+  extract_dir = os.path.join(download_dir, "extracted")
+  for path in tf.io.gfile.listdir(download_dir):
+    if path == "extracted":
+      continue
+    data = np.load(os.path.join(download_dir, path))
+    for split in ["train", "test", "valid"]:
+      split_dir = os.path.join(extract_dir, split)
+      if not tf.io.gfile.exists(split_dir):
+        tf.io.gfile.makedirs(split_dir)
+      np.save(os.path.join(split_dir, path[:-4]), data[split])
 
 
 class QuickdrawSketchRNNTest(testing.DatasetBuilderTestCase):
-    DATASET_CLASS = quickdraw.QuickdrawSketchRNN
-    SPLITS = {"train": 10, "test": 10, "validation": 10}
-    DL_EXTRACT_RESULT = {"banana": "banana.npz"}
+  DATASET_CLASS = quickdraw.QuickdrawSketchRNN
+  SPLITS = {"train": 10, "test": 10, "validation": 10}
+  DL_EXTRACT_RESULT = {"banana": "banana.npz"}
 
 
 def main():
-    _generate_dummies()
-    _unpack_dummies()
-    testing.test_main()
+  _generate_dummies()
+  _unpack_dummies()
+  testing.test_main()
 
 
 if __name__ == "__main__":
-    main()
+  main()
