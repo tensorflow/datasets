@@ -292,20 +292,24 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         sum(self.SPLITS.values()),
     )
 
-
 def checksum(example):
   """Computes the md5 for a given example."""
+  def _bytes_flatten(element):
+      """Recursively flatten an element to its byte representation."""
+      ret = "".encode("utf-8")
+
+      if isinstance(element, dict):
+          for k, v in sorted(element.items()):
+              ret += k.encode("utf-8")
+              ret += _bytes_flatten(v)
+      elif isinstance(element, str):
+          ret += element.encode("utf-8")
+      else:
+          ret += bytes(element)
+      return ret
+
   hash_ = hashlib.md5()
-  for key, val in sorted(example.items()):
-    hash_.update(key.encode("utf-8"))
-    # TODO(b/120124306): This will only work for "one-level"
-    #                    dictionary. We might need a better solution here.
-    if isinstance(val, dict):
-      for k, v in sorted(val.items()):
-        hash_.update(k.encode("utf-8"))
-        hash_.update(v)
-    else:
-      hash_.update(val)
+  hash_.update(_bytes_flatten(example))
   return hash_.hexdigest()
 
 
