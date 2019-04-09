@@ -38,7 +38,7 @@ _CITATION = """\
 }
 """
 
-_NUM_SHARDS = 50
+_NUM_SHARDS = 1
 
 _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 
@@ -46,7 +46,7 @@ _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.1.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
