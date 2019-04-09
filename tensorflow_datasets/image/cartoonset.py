@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import csv
+import os
 
 import tensorflow as tf
 
@@ -37,7 +38,7 @@ and  4 proportion categories, with a total of ~10^13 possible combinations. Set
 of 10k and 100k randomly chosen cartoons and labeled attributes are provided. 
 """
 _CITATION = """
-@ONLINE {Cartoon Set,
+@ONLINE {CartoonSet,
   author = "Forrester Cole, Inbar Mosseri, Dilip Krishnan, Aaron Sarna, Aaron Maschinot, Bill Freeman, Shiraz Fuman",
   title = "Cartoon Set : An Image Dataset of Random Cartoons",
   url  = "https://google.github.io/cartoonset/"
@@ -71,11 +72,17 @@ class Cartoonset(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       CartoonsetConfig(
-          name=config_name,
-          description="A collection of random, 2D cartoon avatar images",
+          name='cartoonset10k',
+          description="A collection of random, 10000 2D cartoon avatar images",
           version="0.1.0",
-          data=config_name,
-      ) for config_name in _DATA_OPTIONS
+          data='cartoonset10k',
+      ),
+      CartoonsetConfig(
+          name='cartoonset100k',
+          description="A collection of random, 100000 2D cartoon avatar images",
+          version="0.1.0",
+          data='cartoonset100k',
+      )
   ]
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -126,17 +133,18 @@ class Cartoonset(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     """Yields examples."""
-    for path, _, files in tf.io.gfile.walk(filepath):
+    for path, _, files in tf.io.gfile.walk(
+        os.path.join(filepath, self.builder_config.name)):
       for file in files:
         features_dict = dict()
         name, dtype = file.split('.')
         if dtype == 'png':
           image = tfds.core.lazy_imports.skimage.io.imread(
-              path + '/' + name + '.png')  # Currently does not support alpha channels
+              path + '/' + name + '.png')
 
           with tf.io.gfile.GFile(path + '/' + name + '.csv', 'r') as f:
             reader = csv.reader(f, delimiter=',')
             for row in reader:
               features_dict[row[0]] = row[1]
-          features_dict['image'] = image[:, :, :3]
+          features_dict['image'] = image[:, :, :3]  # Currently TensoFlow does not support alpha channels
           yield features_dict
