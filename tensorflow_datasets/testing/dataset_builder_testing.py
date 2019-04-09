@@ -26,6 +26,7 @@ import os
 from absl.testing import absltest
 from absl.testing import parameterized
 import six
+import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -295,18 +296,20 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 def checksum(example):
   """Computes the md5 for a given example."""
   def _bytes_flatten(element):
-      """Recursively flatten an element to its byte representation."""
-      ret = "".encode("utf-8")
+    """Recursively flatten an element to its byte representation."""
+    ret = "".encode("utf-8")
 
-      if isinstance(element, dict):
-          for k, v in sorted(element.items()):
-              ret += k.encode("utf-8")
-              ret += _bytes_flatten(v)
-      elif isinstance(element, str):
-          ret += element.encode("utf-8")
-      else:
-          ret += bytes(element)
-      return ret
+    if isinstance(element, dict):
+      for k, v in sorted(element.items()):
+        ret += k.encode("utf-8")
+        ret += _bytes_flatten(v)
+    elif isinstance(element, str):
+      ret += element.encode("utf-8")
+    elif isinstance(element, np.ndarray):
+      ret += element.tobytes()
+    else:
+      ret += bytes(element)
+    return ret
 
   hash_ = hashlib.md5()
   hash_.update(_bytes_flatten(example))
