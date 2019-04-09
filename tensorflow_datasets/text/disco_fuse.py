@@ -112,6 +112,7 @@ class DiscoFuse(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     url = _URLS[self.builder_config.name]
     directory = dl_manager.download_and_extract(url)
+    directory = os.path.join(directory, 'discofuse_v1')
     directory = os.path.join(directory, self.builder_config.name)
     train = os.path.join(directory, "train.tsv")
     dev = os.path.join(directory, "dev.tsv")
