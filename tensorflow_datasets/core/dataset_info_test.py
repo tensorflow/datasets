@@ -24,11 +24,16 @@ import os
 import tempfile
 import numpy as np
 import tensorflow as tf
+from tensorflow_data_validation.utils import test_util
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import mnist
+
+from google.protobuf import text_format
+from tensorflow_metadata.proto.v0 import schema_pb2
+from tensorflow_metadata.proto.v0 import statistics_pb2
 
 tf.compat.v1.enable_eager_execution()
 
@@ -245,22 +250,407 @@ class DatasetInfoTest(testing.TestCase):
       # Per split.
       test_split = builder.info.splits["test"].get_proto()
       train_split = builder.info.splits["train"].get_proto()
-      self.assertEqual(10, test_split.statistics.num_examples)
-      self.assertEqual(20, train_split.statistics.num_examples)
+      expected_train_stats = text_format.Parse("""
+num_examples: 20
+features {
+  name: "x"
+  num_stats {
+    common_stats {
+      num_non_missing: 20
+      min_num_values: 1
+      max_num_values: 1
+      avg_num_values: 1.0
+      num_values_histogram {
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 2.0
+        }
+        type: QUANTILES
+      }
+      tot_num_values: 20
+    }
+    mean: 14.0
+    std_dev: 8.63133825082
+    num_zeros: 1
+    median: 15.0
+    max: 28.0
+    histograms {
+      buckets {
+        high_value: 2.8
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 2.8
+        high_value: 5.6
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 5.6
+        high_value: 8.4
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 8.4
+        high_value: 11.2
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 11.2
+        high_value: 14.0
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 14.0
+        high_value: 16.8
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 16.8
+        high_value: 19.6
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 19.6
+        high_value: 22.4
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 22.4
+        high_value: 25.2
+        sample_count: 1.998
+      }
+      buckets {
+        low_value: 25.2
+        high_value: 28.0
+        sample_count: 2.018
+      }
+    }
+    histograms {
+      buckets {
+        high_value: 3.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 3.0
+        high_value: 6.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 6.0
+        high_value: 9.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 9.0
+        high_value: 12.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 12.0
+        high_value: 15.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 15.0
+        high_value: 18.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 18.0
+        high_value: 21.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 21.0
+        high_value: 24.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 24.0
+        high_value: 27.0
+        sample_count: 2.0
+      }
+      buckets {
+        low_value: 27.0
+        high_value: 28.0
+        sample_count: 2.0
+      }
+      type: QUANTILES
+    }
+  }
+}""", statistics_pb2.DatasetFeatureStatistics())
+      expected_test_stats = text_format.Parse("""
+num_examples: 10
+features {
+  name: "x"
+  num_stats {
+    common_stats {
+      num_non_missing: 10
+      min_num_values: 1
+      max_num_values: 1
+      avg_num_values: 1.0
+      num_values_histogram {
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        buckets {
+          low_value: 1.0
+          high_value: 1.0
+          sample_count: 1.0
+        }
+        type: QUANTILES
+      }
+      tot_num_values: 10
+    }
+    mean: 15.5
+    std_dev: 8.61684396981
+    min: 2.0
+    median: 17.0
+    max: 29.0
+    histograms {
+      buckets {
+        low_value: 2.0
+        high_value: 4.7
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 4.7
+        high_value: 7.4
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 7.4
+        high_value: 10.1
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 10.1
+        high_value: 12.8
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 12.8
+        high_value: 15.5
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 15.5
+        high_value: 18.2
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 18.2
+        high_value: 20.9
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 20.9
+        high_value: 23.6
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 23.6
+        high_value: 26.3
+        sample_count: 0.999
+      }
+      buckets {
+        low_value: 26.3
+        high_value: 29.0
+        sample_count: 1.009
+      }
+    }
+    histograms {
+      buckets {
+        low_value: 2.0
+        high_value: 5.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 5.0
+        high_value: 8.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 8.0
+        high_value: 11.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 11.0
+        high_value: 14.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 14.0
+        high_value: 17.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 17.0
+        high_value: 20.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 20.0
+        high_value: 23.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 23.0
+        high_value: 26.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 26.0
+        high_value: 29.0
+        sample_count: 1.0
+      }
+      buckets {
+        low_value: 29.0
+        high_value: 29.0
+        sample_count: 1.0
+      }
+      type: QUANTILES
+    }
+  }
+}""", statistics_pb2.DatasetFeatureStatistics())
+      expected_schema = text_format.Parse("""
+feature {
+  name: "x"
+  type: INT
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: 1
+    }
+  }
+}""", schema_pb2.Schema())
+
+      test_util.assert_dataset_feature_stats_proto_equal(
+          self, train_split.statistics, expected_train_stats)
+      test_util.assert_dataset_feature_stats_proto_equal(
+          self, test_split.statistics, expected_test_stats)
+      self.assertEqual(builder.info.as_proto.schema, expected_schema)
 
   @testing.run_in_graph_and_eager_modes()
-  def test_statistics_generation_variable_sizes(self):
+  def test_schema_generation_variable_sizes(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
       builder.download_and_prepare()
 
-      # Get the expected type of the feature.
-      schema_feature = builder.info.as_proto.schema.feature[0]
-      self.assertEqual("im", schema_feature.name)
-
-      self.assertEqual(-1, schema_feature.shape.dim[0].size)
-      self.assertEqual(-1, schema_feature.shape.dim[1].size)
-      self.assertEqual(3, schema_feature.shape.dim[2].size)
+      expected_schema = text_format.Parse(
+          """
+feature {
+  name: "im"
+  type: BYTES
+  presence {
+    min_fraction: 1.0
+    min_count: 1
+  }
+  shape {
+    dim {
+      size: -1
+    }
+    dim {
+      size: -1
+    }
+    dim {
+      size: 3
+    }
+  }
+}""", schema_pb2.Schema())
+      self.assertEqual(builder.info.as_proto.schema, expected_schema)
 
   def test_updates_on_bucket_info(self):
 

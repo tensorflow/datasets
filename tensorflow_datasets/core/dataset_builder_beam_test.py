@@ -148,12 +148,9 @@ class BeamBasedBuilderTest(testing.TestCase):
   # The default beam pipeline do not works with Python2
   def test_download_prepare(self):
 
-    # TODO(tfds): The current apache-beam 2.11.0 do not work with Python 3.
+    # TODO(b/129148632): The current apache-beam 2.11.0 do not work with Py3
     # Update once the new version is out (around April)
-    if six.PY3:
-      skip_beam_test = True
-    else:
-      skip_beam_test = False
+    skip_beam_test = bool(six.PY3)
     if skip_beam_test:
       return
 
