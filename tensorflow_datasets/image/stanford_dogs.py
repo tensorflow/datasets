@@ -89,6 +89,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
         extracted_path = dl_manager.download_and_extract([_SPLIT_URL, _ANNOTATIONS_URL])
         xml_file_list = defaultdict(str)
 
+        # Parsing the mat file which contains the list of train/test images
         def parse_mat_file(file_name):
 
             parsed_mat_arr = tfds.core.lazy_imports.scipy_io.loadmat(file_name, squeeze_me=True)
@@ -167,12 +168,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
             # BBox attributes in range of 0.0 to 1.0
             def normalize_bbox(bbox_side, image_side):
 
-                if bbox_side/image_side <= 1:
-                    value = bbox_side/image_side
-                else:
-                    value = 1.0
-
-                return value
+                return min(bbox_side / image_side, 1.0)
 
             def build_box(attributes, n):
 

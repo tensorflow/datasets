@@ -46,11 +46,8 @@ from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
 from tensorflow_datasets.image.shapes3d import Shapes3d
-<<<<<<< HEAD
-from tensorflow_datasets.image.stanford_dogs import StanfordDogs
-=======
 from tensorflow_datasets.image.smallnorb import Smallnorb
+from tensorflow_datasets.image.stanford_dogs import StanfordDogs
 from tensorflow_datasets.image.sun import Sun397
->>>>>>> 2ecc152355f881ee8627f15eb38a19522915f306
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.voc import Voc2007
