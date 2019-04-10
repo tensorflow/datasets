@@ -185,21 +185,15 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
             bbox = self._get_bounding_box_values(annotations[file_name][0], 
                                                  width, height)
 
-            def clip_bbox_values(value):
-                if value > 1.0:
-                    return 1.0
-                else:
-                    return value
-
             yield {"image": fobj,
                    "image/filename": fname,
                    "label": label_key,
                    "label_name": label_name,
                    "bbox": tfds.features.BBox(
-                        ymin=clip_bbox_values(bbox[0]),
-                        xmin=clip_bbox_values(bbox[1]),
-                        ymax=clip_bbox_values(bbox[2]),
-                        xmax=clip_bbox_values(bbox[3]),),
+                        ymin=min(bbox[0], 1.0),
+                        xmin=min(bbox[1], 1.0),
+                        ymax=min(bbox[2], 1.0),
+                        xmax=min(bbox[3], 1.0)),
                    "segmentation_mask": segmentation_mask[:, :, np.newaxis],
                    }
 
