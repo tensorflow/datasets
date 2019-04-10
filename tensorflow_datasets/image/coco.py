@@ -58,7 +58,7 @@ _CITATION = """\
 class Coco2014(tfds.core.GeneratorBasedBuilder):
   """MS Coco dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.1")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -113,7 +113,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
+            num_shards=100,
             gen_kwargs=dict(
                 image_dir=extracted_paths["train_images"],
                 annotation_dir=extracted_paths["trainval_annotations"],
@@ -121,7 +121,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=10,
+            num_shards=100,
             gen_kwargs=dict(
                 image_dir=extracted_paths["val_images"],
                 annotation_dir=extracted_paths["trainval_annotations"],
@@ -130,7 +130,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
         # Warning: Testing split only contains the images without any annotation
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
+            num_shards=100,
             gen_kwargs=dict(
                 image_dir=extracted_paths["test_images"],
                 annotation_dir=extracted_paths["test_annotations"],
@@ -139,7 +139,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
             )),
         tfds.core.SplitGenerator(
             name="test2015",
-            num_shards=10,
+            num_shards=100,
             gen_kwargs=dict(
                 image_dir=extracted_paths["test2015_images"],
                 annotation_dir=extracted_paths["test2015_annotations"],
