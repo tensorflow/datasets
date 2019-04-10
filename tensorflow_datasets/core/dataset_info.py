@@ -34,17 +34,18 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import collections
 import os
 import posixpath
 import pprint
 import tempfile
 
 from absl import logging
+import numpy as np
 import tensorflow as tf
-import tensorflow_data_validation as tfdv
 
 from tensorflow_datasets.core import api_utils
-from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
@@ -437,50 +438,122 @@ _SCHEMA_TYPE_MAP = {
 }
 
 
-def _populate_shape(shape_or_dict, prefix, schema_features):
-  """Populates shape in the schema."""
-  if isinstance(shape_or_dict, (tuple, list)):
-    if shape_or_dict:
-      schema_feature = schema_features["/".join(prefix)]
-      schema_feature.ClearField("shape")
-      for dim in shape_or_dict:
-        # We denote `None`s as -1 in the shape proto.
-        schema_feature.shape.dim.add().size = -1 if dim is None else dim
-    return
-  for name, val in shape_or_dict.items():
-    prefix.append(name)
-    _populate_shape(val, prefix, schema_features)
-    prefix.pop()
-
-
+# TODO(afrozm): What follows below can *VERY EASILY* be done by TFDV - rewrite
+# this section once they are python 3 ready.
 def get_dataset_feature_statistics(builder, split):
   """Calculate statistics for the specified split."""
-  filetype_suffix = builder._file_format_adapter.filetype_suffix  # pylint: disable=protected-access
-  if filetype_suffix not in ["tfrecord", "csv"]:
-    raise ValueError(
-        "Cannot generate statistics for filetype {}".format(filetype_suffix))
-  filepattern = naming.filepattern_for_dataset_split(
-      builder.name, split, builder.data_dir, filetype_suffix)
-  # Avoid generating a large number of buckets in rank histogram
-  # (default is 1000).
-  stats_options = tfdv.StatsOptions(num_top_values=10,
-                                    num_rank_histogram_buckets=10)
-  if filetype_suffix == "csv":
-    statistics = tfdv.generate_statistics_from_csv(
-        filepattern, stats_options=stats_options)
-  else:
-    statistics = tfdv.generate_statistics_from_tfrecord(
-        filepattern, stats_options=stats_options)
-  schema = tfdv.infer_schema(statistics)
-  schema_features = {feature.name: feature for feature in schema.feature}
-  # Override shape in the schema.
-  for feature_name, feature in builder.info.features.items():
-    _populate_shape(feature.shape, [feature_name], schema_features)
+  statistics = statistics_pb2.DatasetFeatureStatistics()
 
-  # Remove legacy field.
-  if getattr(schema, "generate_legacy_feature_spec", None) is not None:
-    schema.ClearField("generate_legacy_feature_spec")
-  return statistics.datasets[0], schema
+  # Make this to the best of our abilities.
+  schema = schema_pb2.Schema()
+
+  dataset = builder.as_dataset(split=split)
+
+  # Just computing the number of examples for now.
+  statistics.num_examples = 0
+
+  # Feature dictionaries.
+  feature_to_num_examples = collections.defaultdict(int)
+  feature_to_min = {}
+  feature_to_max = {}
+
+  np_dataset = dataset_utils.as_numpy(dataset)
+  for example in utils.tqdm(np_dataset, unit=" examples", leave=False):
+    statistics.num_examples += 1
+
+    assert isinstance(example, dict)
+
+    feature_names = sorted(example.keys())
+    for feature_name in feature_names:
+
+      # Update the number of examples this feature appears in.
+      feature_to_num_examples[feature_name] += 1
+
+      feature_np = example[feature_name]
+
+      # For compatibility in graph and eager mode, we can get PODs here and
+      # everything may not be neatly wrapped up in numpy's ndarray.
+
+      feature_dtype = type(feature_np)
+
+      if isinstance(feature_np, np.ndarray):
+        # If we have an empty array, then don't proceed further with computing
+        # statistics on it.
+        if feature_np.size == 0:
+          continue
+
+        feature_dtype = feature_np.dtype.type
+
+      feature_min, feature_max = None, None
+      is_numeric = (np.issubdtype(feature_dtype, np.number) or
+                    feature_dtype == np.bool_)
+      if is_numeric:
+        feature_min = np.min(feature_np)
+        feature_max = np.max(feature_np)
+
+      # TODO(afrozm): What if shapes don't match? Populate ValueCount? Add
+      # logic for that.
+
+      # Set or update the min, max.
+      if is_numeric:
+        if ((feature_name not in feature_to_min) or
+            (feature_to_min[feature_name] > feature_min)):
+          feature_to_min[feature_name] = feature_min
+
+        if ((feature_name not in feature_to_max) or
+            (feature_to_max[feature_name] < feature_max)):
+          feature_to_max[feature_name] = feature_max
+
+  # Start here, we've processed all examples.
+
+  output_shapes_dict = dataset.output_shapes
+  output_types_dict = dataset.output_types
+
+  for feature_name in sorted(feature_to_num_examples.keys()):
+    # Try to fill in the schema.
+    feature = schema.feature.add()
+    feature.name = feature_name
+
+    # TODO(afrozm): Make this work with nested structures, currently the Schema
+    # proto has no support for it.
+    maybe_feature_shape = output_shapes_dict[feature_name]
+    if not isinstance(maybe_feature_shape, tf.TensorShape):
+      logging.error(
+          "Statistics generation doesn't work for nested structures yet")
+      continue
+
+    for dim in maybe_feature_shape.as_list():
+      # We denote `None`s as -1 in the shape proto.
+      feature.shape.dim.add().size = dim if dim else -1
+    feature_type = output_types_dict[feature_name]
+    feature.type = _FEATURE_TYPE_MAP.get(feature_type, schema_pb2.BYTES)
+
+    common_statistics = statistics_pb2.CommonStatistics()
+    common_statistics.num_non_missing = feature_to_num_examples[feature_name]
+    common_statistics.num_missing = (
+        statistics.num_examples - common_statistics.num_non_missing)
+
+    feature_name_statistics = statistics.features.add()
+    feature_name_statistics.name = feature_name
+
+    # TODO(afrozm): This can be skipped, since type information was added to
+    # the Schema.
+    feature_name_statistics.type = _SCHEMA_TYPE_MAP.get(
+        feature.type, statistics_pb2.FeatureNameStatistics.BYTES)
+
+    if feature.type == schema_pb2.INT or feature.type == schema_pb2.FLOAT:
+      numeric_statistics = statistics_pb2.NumericStatistics()
+      numeric_statistics.min = feature_to_min[feature_name]
+      numeric_statistics.max = feature_to_max[feature_name]
+      numeric_statistics.common_stats.CopyFrom(common_statistics)
+      feature_name_statistics.num_stats.CopyFrom(numeric_statistics)
+    else:
+      # Let's shove it into BytesStatistics for now.
+      bytes_statistics = statistics_pb2.BytesStatistics()
+      bytes_statistics.common_stats.CopyFrom(common_statistics)
+      feature_name_statistics.bytes_stats.CopyFrom(bytes_statistics)
+
+  return statistics, schema
 
 
 def read_from_json(json_filename):
