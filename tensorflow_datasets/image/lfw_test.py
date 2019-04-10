@@ -28,7 +28,7 @@ class LFWTest(testing.DatasetBuilderTestCase):
     DATASET_CLASS = lfw.LFW
 
     SPLITS = {
-      "train":10,
+      "train":20,
     }
 
 if __name__ == "__main__":
