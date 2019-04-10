@@ -13,15 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text datasets."""
+"""Tests for multinli dataset module."""
 
-from tensorflow_datasets.text.cnn_dailymail import CnnDailymail
-from tensorflow_datasets.text.cnn_dailymail import CnnDailymailConfig
-from tensorflow_datasets.text.imdb import IMDBReviews
-from tensorflow_datasets.text.imdb import IMDBReviewsConfig
-from tensorflow_datasets.text.lm1b import Lm1b
-from tensorflow_datasets.text.lm1b import Lm1bConfig
-from tensorflow_datasets.text.multi_nli import MultiNLI
-from tensorflow_datasets.text.squad import Squad
-from tensorflow_datasets.text.wikipedia import Wikipedia
-from tensorflow_datasets.text.xnli import Xnli
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.text import xnli
+
+
+class XnliTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = xnli.Xnli
+
+  SPLITS = {
+      "test": 3,
+      "validation": 2,
+  }
+
+
+if __name__ == "__main__":
+  testing.test_main()
