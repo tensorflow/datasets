@@ -14,6 +14,8 @@
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
+<!-- Placeholder for "Used in" -->
+
 Test item of a FeatureExpectation.
 
 <h2 id="__init__"><code>__init__</code></h2>

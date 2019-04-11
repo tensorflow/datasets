@@ -47,7 +47,7 @@ class Wmt17Translate(wmt.WmtTranslate):
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version="0.0.1")
+          version="0.0.2")
       for l1, l2 in _LANGUAGE_PAIRS
   ]
 
@@ -55,10 +55,11 @@ class Wmt17Translate(wmt.WmtTranslate):
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "europarl_v8", "commoncrawl", "newscommentary_v12",
-            "czeng_16", "yandexcorpus", "wikiheadlines_fi", "wikiheadlines_ru",
-            "setimes_2", "uncorpus_v1", "rapid_2016", "leta_v1", "dcep_v1",
-            "onlinebooks_v1"] + wmt.CWMT_SUBSET_NAMES,
+            "europarl_v7", "europarl_v8_16", "commoncrawl",
+            "newscommentary_v12", "czeng_16", "yandexcorpus",
+            "wikiheadlines_fi", "wikiheadlines_ru", "setimes_2", "uncorpus_v1",
+            "rapid_2016", "leta_v1", "dcep_v1", "onlinebooks_v1"
+        ] + wmt.CWMT_SUBSET_NAMES,
         tfds.Split.VALIDATION: [
             "newsdev2014", "newsdev2015", "newsdev2016", "newsdev2017",
             "newsdiscussdev2015", "newsdiscusstest2015", "newssyscomb2009",

@@ -49,7 +49,7 @@ REQUIRED_PKGS = [
     'numpy',
     'promise',
     'protobuf>=3.6.1',
-    'psutil'
+    'psutil',
     'requests',
     'six',
     'tensorflow-metadata',
@@ -93,7 +93,9 @@ DATASET_EXTRAS = {
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
-        'opencv-python==3.4.0.14'
+        'opencv-python==3.4.0.14',
+        'scikit-image',
+        'scipy'
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'svhn': ['scipy'],

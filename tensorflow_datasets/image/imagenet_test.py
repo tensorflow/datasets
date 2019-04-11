@@ -28,6 +28,10 @@ class Imagenet2012Test(testing.DatasetBuilderTestCase):
       "train": 100,
       "validation": 10,
   }
+  DL_EXTRACT_RESULT = [
+      "ILSVRC2012_img_train.tar",
+      "ILSVRC2012_img_val.tar",
+  ]
 
 
 if __name__ == "__main__":

@@ -17,6 +17,8 @@
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
+<!-- Placeholder for "Used in" -->
+
 Abstract base class for Split compositionality.
 
 See the
@@ -116,7 +118,7 @@ subsplit = split.subsplit(tfds.percent[-20:])
 ```
 
 Warning: k and weighted will be converted into percent which mean that
-values bellow the percent will be rounded up or down. The final split may be
+values below the percent will be rounded up or down. The final split may be
 bigger to deal with remainders. For instance:
 
 ```

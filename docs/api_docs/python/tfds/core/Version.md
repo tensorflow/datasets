@@ -18,6 +18,8 @@
 
 Defined in [`core/utils/version.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py).
 
+<!-- Placeholder for "Used in" -->
+
 Dataset version MAJOR.MINOR.PATCH.
 
 <h2 id="__new__"><code>__new__</code></h2>

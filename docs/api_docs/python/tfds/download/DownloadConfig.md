@@ -14,6 +14,8 @@
 
 Defined in [`core/download/download_manager.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py).
 
+<!-- Placeholder for "Used in" -->
+
 Configuration for <a href="../../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.
 
 <h2 id="__init__"><code>__init__</code></h2>
@@ -25,7 +27,9 @@ __init__(
     download_mode=None,
     compute_stats=None,
     max_examples_per_split=None,
-    register_checksums=False
+    register_checksums=False,
+    beam_runner=None,
+    beam_options=None
 )
 ```
 
@@ -47,6 +51,10 @@ Constructs a `DownloadConfig`.
     into each split.
 * <b>`register_checksums`</b>: `bool`, defaults to False. If True, checksum of
     downloaded files are recorded.
+* <b>`beam_runner`</b>: Runner to pass to `beam.Pipeline`, only used for datasets
+    based on Beam for the generation.
+* <b>`beam_options`</b>: `PipelineOptions` to pass to `beam.Pipeline`, only used for
+    datasets based on Beam for the generation.
 
 
 
