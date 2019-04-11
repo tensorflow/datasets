@@ -49,8 +49,9 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.proto import json_format
 from tensorflow_datasets.core.utils import gcs_utils
-from google.protobuf import json_format
+
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
 

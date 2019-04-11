@@ -19,11 +19,13 @@
 
 ## Class `GeneratorBasedBuilder`
 
-Inherits From: [`DatasetBuilder`](../../tfds/core/DatasetBuilder.md)
+
 
 
 
 Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
+
+<!-- Placeholder for "Used in" -->
 
 Base class for datasets with data generation based on dict generators.
 
@@ -33,9 +35,6 @@ implement generators of feature dictionaries across the dataset splits
 (`_split_generators`) and to specify a file type
 (`_file_format_adapter`). See the method docstrings for details.
 
-Minimally, subclasses must override `_split_generators` and
-`_file_format_adapter`.
-
 `FileFormatAdapter`s are defined in
 `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
 feature dictionaries yielded by example generators. See the class docstrings.
@@ -43,14 +42,23 @@ feature dictionaries yielded by example generators. See the class docstrings.
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(**kwargs)
+__init__(
+    data_dir=None,
+    config=None
+)
 ```
 
-Builder constructor.
+Constructs a DatasetBuilder.
+
+Callers must pass arguments as keyword arguments.
 
 #### Args:
 
-* <b>`**kwargs`</b>: Constructor kwargs forwarded to DatasetBuilder
+* <b>`data_dir`</b>: `str`, directory to read/write data. Defaults to
+    "~/tensorflow_datasets".
+* <b>`config`</b>: <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> or `str` name, optional configuration
+    for the dataset that affects the data generated on disk. Different
+    `builder_config`s will have their own subdirectories and versions.
 
 
 
@@ -132,6 +140,11 @@ Downloads and prepares dataset for reading.
     Defaults to "~/tensorflow-datasets/downloads".
 * <b>`download_config`</b>: <a href="../../tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>, further configuration for
     downloading and preparing dataset.
+
+
+#### Raises:
+
+* <b>`IOError`</b>: if there is not enough disk space available.
 
 
 

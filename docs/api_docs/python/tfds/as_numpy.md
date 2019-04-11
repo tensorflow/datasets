@@ -16,6 +16,8 @@ tfds.as_numpy(
 
 Defined in [`core/dataset_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py).
 
+<!-- Placeholder for "Used in" -->
+
 Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
 `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s

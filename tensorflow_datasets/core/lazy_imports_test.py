@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 from absl.testing import parameterized
+import six
 import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 
@@ -35,9 +36,12 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "pyplot",
       "pickle",
       "scipy",
-      "scipy_io",
+      "skimage",
   )
   def test_import(self, module_name):
+    # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)
+    if module_name == "skimage" and six.PY3:
+      return
     getattr(tfds.core.lazy_imports, module_name)
 
   def test_bad_import(self):

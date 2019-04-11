@@ -102,7 +102,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   """
 
   DATASET_CLASS = None
-  BUILDER_CONFIG_NAMES_TO_TEST = []
+  BUILDER_CONFIG_NAMES_TO_TEST = None
   DL_EXTRACT_RESULT = None
   EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
@@ -190,18 +190,19 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
     # If configs specified, ensure they are all valid
-    for config in self.BUILDER_CONFIG_NAMES_TO_TEST:
-      assert config in self.builder.builder_configs, (
-          "Config %s specified in test does not exist. Available:\n%s" % (
-              config, list(self.builder.builder_configs)))
+    if self.BUILDER_CONFIG_NAMES_TO_TEST:
+      for config in self.BUILDER_CONFIG_NAMES_TO_TEST:  # pylint: disable=not-an-iterable
+        assert config in self.builder.builder_configs, (
+            "Config %s specified in test does not exist. Available:\n%s" % (
+                config, list(self.builder.builder_configs)))
 
     configs = self.builder.BUILDER_CONFIGS
     print("Total configs: %d" % len(configs))
     if configs:
       for config in configs:
         # Skip the configs that are not in the list.
-        if (self.BUILDER_CONFIG_NAMES_TO_TEST and
-            (config.name not in self.BUILDER_CONFIG_NAMES_TO_TEST)):
+        if (self.BUILDER_CONFIG_NAMES_TO_TEST is not None and
+            (config.name not in self.BUILDER_CONFIG_NAMES_TO_TEST)):  # pylint: disable=unsupported-membership-test
           print("Skipping config %s" % config.name)
           continue
         with self._subTest(config.name):

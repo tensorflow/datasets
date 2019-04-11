@@ -20,7 +20,6 @@ from __future__ import division
 from __future__ import print_function
 
 import io
-import os
 import tarfile
 
 import tensorflow as tf
@@ -53,6 +52,7 @@ pages={211-252}
 }
 '''
 
+_URL_PREFIX = 'http://www.image-net.org/challenges/LSVRC/2012/nnoupb'
 _LABELS_FNAME = 'image/imagenet2012_labels.txt'
 
 # This file contains the validation labels, in the alphabetic order of
@@ -102,8 +102,10 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return dict(zip(images, labels))
 
   def _split_generators(self, dl_manager):
-    train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
-    val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
+    train_path, val_path = dl_manager.download([
+        '%s/ILSVRC2012_img_train.tar' % _URL_PREFIX,
+        '%s/ILSVRC2012_img_val.tar' % _URL_PREFIX,
+    ])
     if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
       msg = 'You must download the dataset files manually and place them in: '
       msg += ', '.join([train_path, val_path])

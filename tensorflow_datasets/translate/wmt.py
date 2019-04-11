@@ -109,7 +109,7 @@ _TRAIN_SUBSETS = [
     SubDataset(
         name="commoncrawl",
         target="en",   # fr-de pair in commoncrawl_frde
-        sources={"cs", "de", "es", "fr"},
+        sources={"cs", "de", "es", "fr", "ru"},
         url="http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
         path=("commoncrawl.{src}-en.{src}", "commoncrawl.{src}-en.en")),
     SubDataset(
@@ -119,6 +119,22 @@ _TRAIN_SUBSETS = [
         url=("http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.fr.gz",
              "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/commoncrawl.de.gz"),
         path=("", "")),
+    SubDataset(
+        name="czeng_10",
+        target="en",
+        sources={"cs"},
+        url="http://ufal.mff.cuni.cz/czeng/czeng10",
+        manual_dl_files=["data-plaintext-format.%d.tar" % i for i in range(10)],
+        # Each tar contains multiple files, which we process specially in
+        # _parse_czeng.
+        path=("data.plaintext-format/??train.gz",) * 10),
+    SubDataset(
+        name="czeng_16pre",
+        target="en",
+        sources={"cs"},
+        url="http://ufal.mff.cuni.cz/czeng/czeng16pre",
+        manual_dl_files=["czeng16pre.deduped-ignoring-sections.txt.gz"],
+        path=""),
     SubDataset(
         name="czeng_16",
         target="en",
@@ -160,12 +176,19 @@ _TRAIN_SUBSETS = [
              "http://data.statmt.org/wmt19/translation-task/fr-de/bitexts/europarl-v7.de.gz"),
         path=("", "")),
     SubDataset(
-        name="europarl_v8",
+        name="europarl_v8_18",
         target="en",
         sources={"et", "fi"},
         url="http://data.statmt.org/wmt18/translation-task/training-parallel-ep-v8.tgz",
         path=("training/europarl-v8.{src}-en.{src}",
               "training/europarl-v8.{src}-en.en")),
+    SubDataset(
+        name="europarl_v8_16",
+        target="en",
+        sources={"fi", "ro"},
+        url="http://data.statmt.org/wmt16/translation-task/training-parallel-ep-v8.tgz",
+        path=("training-parallel-ep-v8/europarl-v8.{src}-en.{src}",
+              "training-parallel-ep-v8/europarl-v8.{src}-en.en")),
     SubDataset(
         name="europarl_v9",
         target="en",
@@ -177,14 +200,20 @@ _TRAIN_SUBSETS = [
         target="en",
         sources={"fr"},
         url="http://www.statmt.org/wmt10/training-giga-fren.tar",
-        path=("training-giga-fren/giga-fren.release2.fixed.fr",
-              "training-giga-fren/giga-fren.release2.fixed.en")),
+        path=("giga-fren.release2.fixed.fr.gz",
+              "giga-fren.release2.fixed.en.gz")),
     SubDataset(
         name="leta_v1",
         target="en",
         sources={"lv"},
         url="http://data.statmt.org/wmt17/translation-task/leta.v1.tgz",
         path=("LETA-lv-en/leta.lv", "LETA-lv-en/leta.en")),
+    SubDataset(
+        name="multiun",
+        target="en",
+        sources={"es", "fr"},
+        url="http://www.statmt.org/wmt13/training-parallel-un.tgz",
+        path=("un/undoc.2000.{src}-en.{src}", "un/undoc.2000.{src}-en.en")),
     SubDataset(
         name="newscommentary_v8",
         target="en",
@@ -204,8 +233,8 @@ _TRAIN_SUBSETS = [
         target="en",
         sources={"cs", "de", "fr", "ru"},
         url="http://www.statmt.org/wmt15/training-parallel-nc-v10.tgz",
-        path=("training-parallel-nc-v10/news-commentary-v10.{src}-en.{src}",
-              "training-parallel-nc-v10/news-commentary-v10.{src}-en.en")),
+        path=("news-commentary-v10.{src}-en.{src}",
+              "news-commentary-v10.{src}-en.en")),
     SubDataset(
         name="newscommentary_v11",
         target="en",
@@ -293,8 +322,8 @@ _TRAIN_SUBSETS = [
     SubDataset(
         name="setimes_2",
         target="en",
-        sources={"tr"},
-        url="http://opus.nlpl.eu/download.php?f=SETIMES/v2/tmx/en-tr.tmx.gz",
+        sources={"ro", "tr"},
+        url="http://opus.nlpl.eu/download.php?f=SETIMES/v2/tmx/en-{src}.tmx.gz",
         path=""),
     SubDataset(
         name="uncorpus_v1",
@@ -515,6 +544,7 @@ class WmtConfig(tfds.core.BuilderConfig):
                citation=None,
                description=None,
                language_pair=(None, None),
+               text_encoder_config=None,
                **kwargs):
     """BuilderConfig for WMT.
 
@@ -524,9 +554,14 @@ class WmtConfig(tfds.core.BuilderConfig):
       description: The description of the dataset.
       language_pair: pair of languages that will be used for translation. Should
                  contain 2 letter coded strings. For example: ("en", "de").
+     text_encoder_config: `tfds.features.text.TextEncoderConfig` (optional),
+        configuration for the `tfds.features.text.TextEncoder` used for the
+        `tfds.features.text.Translation` features.
       **kwargs: keyword arguments forwarded to super.
     """
     name = "%s-%s" % (language_pair[0], language_pair[1])
+    if text_encoder_config:
+      name += "." + text_encoder_config.name
 
     super(WmtConfig, self).__init__(
         name=name, description=description, **kwargs)
@@ -534,6 +569,7 @@ class WmtConfig(tfds.core.BuilderConfig):
     self.url = url
     self.citation = citation
     self.language_pair = language_pair
+    self.text_encoder_config = text_encoder_config
 
 
 class WmtTranslate(tfds.core.GeneratorBasedBuilder):
@@ -569,11 +605,16 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair),
+            languages=self.builder_config.language_pair,
+            encoder_config=self.builder_config.text_encoder_config),
         supervised_keys=(src, target),
         urls=[self.builder_config.url],
         citation=self.builder_config.citation,
     )
+
+  def _vocab_text_gen(self, split_subsets, extraction_map, language):
+    for ex in self._generate_examples(split_subsets, extraction_map):
+      yield ex[language]
 
   def _split_generators(self, dl_manager):
     source, _ = self.builder_config.language_pair
@@ -614,6 +655,12 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
 
     extraction_map = dict(downloaded_files, **manual_files)
 
+    # Generate vocabulary from training data if SubwordTextEncoder configured.
+    for language in self.builder_config.language_pair:
+      self.info.features[language].maybe_build_from_corpus(
+          self._vocab_text_gen(
+              self.subsets[tfds.Split.TRAIN], extraction_map, language))
+
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=split,
@@ -639,7 +686,18 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       ds = DATASET_MAP[ss_name]
       extract_dirs = extraction_map[ss_name]
       files = _get_local_paths(ds, extract_dirs)
-      if len(files) == 2:
+      if ss_name.startswith("czeng"):
+        if ss_name.endswith("16pre"):
+          sub_generator = functools.partial(
+              _parse_tsv, language_pair=("en", "cs"))
+        elif ss_name.endswith("17"):
+          filter_path = _get_local_paths(
+              _CZENG17_FILTER, extraction_map[_CZENG17_FILTER.name])[0]
+          sub_generator = functools.partial(
+              _parse_czeng, filter_path=filter_path)
+        else:
+          sub_generator = _parse_czeng
+      elif len(files) == 2:
         if ss_name.endswith("_frde"):
           sub_generator = _parse_frde_bitext
         else:
@@ -659,14 +717,6 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
           sub_generator = _parse_wikiheadlines
         else:
           raise ValueError("Unsupported file format: %s" % fname)
-      elif ss_name.startswith("czeng"):
-        if ss_name.endswith("17"):
-          filter_path = _get_local_paths(
-              _CZENG17_FILTER, extraction_map[_CZENG17_FILTER.name])[0]
-          sub_generator = functools.partial(
-              _parse_czeng, filter_path=filter_path)
-        else:
-          sub_generator = _parse_czeng
       else:
         raise ValueError("Invalid number of files: %d" % len(files))
 

@@ -21,6 +21,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import io
 import md5
 import os
 import random
@@ -32,7 +33,6 @@ from absl import flags
 
 import numpy as np
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image import sun
 import tensorflow_datasets.public_api as tfds
 
 
@@ -57,6 +57,37 @@ def _get_random_picture(height=None, width=None, channels=None):
   return np.random.randint(256, size=(height, width, channels), dtype=np.uint8)
 
 
+def _encode_image(image, image_format=None, fobj=None):
+  """Encodes and writes an image in a Numpy array to a file object.
+
+  Args:
+    image: A numpy array with shape (height, width, channels).
+    image_format: Encode and write the image in this format.
+      If None, JPEG is used.
+    fobj: File object to write the encoded image. Random access (seek) is
+      required. If None, it creates a BytesIO file.
+
+  Returns:
+    Resulting file object. If fobj was given, the functions returns it.
+  """
+  if len(image.shape) != 3:
+    raise ValueError("The image should have shape (height, width, channels)")
+
+  # By default, for images with alpha channel use PNG, otherwise use JPEG.
+  if image_format is None:
+    image_format = "JPEG"
+
+  # Remove extra channel for grayscale images, or PIL complains.
+  if image.shape[-1] == 1:
+    image = image.reshape(image.shape[:-1])
+
+  fobj = fobj or io.BytesIO()
+  image = tfds.core.lazy_imports.PIL_Image.fromarray(image)
+  image.save(fobj, format=image_format)
+  fobj.seek(0)
+  return fobj
+
+
 def _generate_data():
   """Generate random data for testing the Sun397 dataset builder."""
 
@@ -70,7 +101,7 @@ def _generate_data():
     image = _get_random_picture(channels=channels)
     # Regardless of the actual format, always write with .jpg extension.
     fobj = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
-    sun._encode_image(image, image_format, fobj=fobj)  # pylint: disable=protected-access
+    _encode_image(image, image_format, fobj=fobj)
     filename = "SUN397/%s/sun_%s.jpg" % (label,
                                          md5.new(fobj.read()).hexdigest())
     fobj.seek(0)
