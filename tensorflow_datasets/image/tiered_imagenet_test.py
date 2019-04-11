@@ -13,25 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tiered_imagenet dataset module."""
+"""testing/tiered_imagenet_generate.py generates fake input data"""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+
 from tensorflow_datasets import testing
-#from tensorflow_datasets.image import tiered_imagenet
-from tiered_imagenet import TieredImagenet
-
-
-# testing/tiered_imagenet_generate.py generates fake input data
+import tiered_imagenet
 
 
 class TieredImagenetTest(testing.DatasetBuilderTestCase):
-    DATASET_CLASS = TieredImagenet
+
+    """Tests for tiered_imagenet dataset module."""
+    DATASET_CLASS = tiered_imagenet.TieredImagenet
     SPLITS = {
-        "train": 4,
-        "test": 2,
+        "train": 1,
+        "test": 1,
+        "validation": 1
     }
+    MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
 
 
 if __name__ == "__main__":

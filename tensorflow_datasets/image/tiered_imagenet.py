@@ -13,17 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Tiered Subset of ImageNet Dataset.
+"""
+
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+
+import pickle
+import numpy as np
+from tqdm import tqdm
+
+
 from absl import logging
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
-import os
-import numpy as np
-from tqdm import tqdm
 
 _CITATION = """\
 @inproceedings{ren18fewshotssl,
@@ -53,7 +60,8 @@ Each category has corresponding more specific classes.
 """
 
 _BASE_URL = "https://arxiv.org/pdf/1803.00676.pdf"
-_DL_URL = "https://drive.google.com/uc?export=download&id=1hqVbS2nhHXa51R9_aB6QDXeC0P2LQG_u"
+# _DL_URL = "https://drive.google.com/uc?export=download&id=1hqVbS2nhHXa51R9_aB6QDXeC0P2LQG_u"
+_DL_URL = "https://drive.google.com/uc?export=download&id=1tPDwzBpKlxMT4-Jkyw2OpHsLPjPyh4LD"
 
 
 class TieredImagenet(tfds.core.GeneratorBasedBuilder):
@@ -83,45 +91,40 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager):
         """Downloads the data and defines the split."""
         extracted_path = dl_manager.download_and_extract(_DL_URL)
+        logging.info("extracted path %s", extracted_path)
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
                 num_shards=5,
                 gen_kwargs={
-                    "images": os.path.join(extracted_path,
-                                           "train_images_png.pkl"),
-                    "labels": os.path.join(extracted_path,
-                                           "train_labels.pkl"),
+                    "images_path": os.path.join(str(extracted_path), "train_images_png.pkl"),
+                    "labels_path": os.path.join(str(extracted_path), "train_labels.pkl"),
                 }
             ),
             tfds.core.SplitGenerator(
                 name=tfds.Split.TEST,
                 num_shards=5,
                 gen_kwargs={
-                    "images": os.path.join(extracted_path,
-                                           "test_images_png.pkl"),
-                    "labels": os.path.join(extracted_path,
-                                           "test_labels.pkl"),
+                    "images_path": os.path.join(str(extracted_path), "test_images_png.pkl"),
+                    "labels_path": os.path.join(str(extracted_path), "test_labels.pkl"),
                 }
             ),
             tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
                 num_shards=5,
                 gen_kwargs={
-                    "images": os.path.join(extracted_path,
-                                           "val_images_png.pkl"),
-                    "labels": os.path.join(extracted_path,
-                                           "val_labels.pkl"),
+                    "images_path": os.path.join(str(extracted_path), "val_images_png.pkl"),
+                    "labels_path": os.path.join(str(extracted_path), "val_labels.pkl"),
                 }
             ),
 
         ]
 
-    def _generate_examples(self, images, labels):
+    def _generate_examples(self, images_path, labels_path):
         """yields examples from the dataset.
         Args:
-            images: path to extracted images.
-            labels: path to extracted labels.
+            images_path: path to extracted images.
+            labels_path: path to extracted labels.
         Yields:
                 keys:
                     "image" (np.ndarray, shape=[84, 84, 3],
@@ -129,20 +132,17 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
                     "label" (string): class name.
         """
         # read data
-        logging.info("Images path %s", images)
-        logging.info("Labels path %s", labels)
-        with open(labels, "rb") as f:
-            data = tfds.core.lazy_imports.pickle.load(f, encoding='latin1')
+        with open(labels_path, "rb") as labels_file:
+            data = pickle.load(labels_file, encoding='latin1')
             list_label_specific = data["label_specific"]
-        with tf.gfile.GFile(images, "rb") as f:
-            array = tfds.core.lazy_imports.pickle.load(
-                f, encoding="latin1")
+            logging.info("Labels list %s", list_label_specific)
+        with tf.gfile.GFile(images_path, "rb") as img_file:
+            img_array = pickle.load(img_file, encoding="latin1")
             img_data = np.zeros(
-                [list_label_specific.shape[0], self._IMAGE_SIZE_X, self._IMAGE_SIZE_Y, 3], dtype=np.uint8)
-            for ii, item in tqdm(enumerate(array[:10])):
-                im = tfds.core.lazy_imports.cv2.imdecode(item, 1)
-                img_data[ii] = im
-        for i in range(0, list_label_specific.shape[0]):
+                [len(img_array["images"]), self._IMAGE_SIZE_X, self._IMAGE_SIZE_Y, 3], dtype=np.uint8)
+            for img_index, item in tqdm(enumerate(img_array["images"])):
+                img_data[img_index] = item
+        for i in range(0, len(img_array["images"])):
             dict_data = {
                 "image": img_data[i],
                 "label": list_label_specific[i]
