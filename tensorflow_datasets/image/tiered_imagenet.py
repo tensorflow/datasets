@@ -60,8 +60,7 @@ Each category has corresponding more specific classes.
 """
 
 _BASE_URL = "https://arxiv.org/pdf/1803.00676.pdf"
-# _DL_URL = "https://drive.google.com/uc?export=download&id=1hqVbS2nhHXa51R9_aB6QDXeC0P2LQG_u"
-_DL_URL = "https://drive.google.com/uc?export=download&id=1tPDwzBpKlxMT4-Jkyw2OpHsLPjPyh4LD"
+_DL_URL = "https://drive.google.com/uc?export=download&id=1g1aIDy2Ar_MViF2gDXFYDBTR-HYecV07"
 
 
 class TieredImagenet(tfds.core.GeneratorBasedBuilder):
