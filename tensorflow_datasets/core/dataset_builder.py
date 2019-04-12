@@ -701,14 +701,33 @@ class FileAdapterBuilder(DatasetBuilder):
     """Return the list of files and reading mask of the files to read."""
     instruction_dicts = []
     for sliced_split_info in list_sliced_split_info:
+      mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+
       # Compute filenames from the given split
-      for filepath in self._build_split_filenames(
+      filepaths = list(sorted(self._build_split_filenames(
           split_info_list=[sliced_split_info.split_info],
-      ):
-        mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+      )))
+
+      # Compute the offsets
+      if sliced_split_info.split_info.num_examples:
+        shard_id2num_examples = splits_lib.get_shard_id2num_examples(
+            sliced_split_info.split_info.num_shards,
+            sliced_split_info.split_info.num_examples,
+        )
+        mask_offsets = splits_lib.compute_mask_offsets(shard_id2num_examples)
+      else:
+        logging.warning(
+            "Statistics not present in the dataset. TFDS is not able to load "
+            "the total number of examples, so using the subsplit API may not "
+            "provide precise subsplits."
+        )
+        mask_offsets = [0] * len(filepaths)
+
+      for filepath, mask_offset in zip(filepaths, mask_offsets):
         instruction_dicts.append({
             "filepath": filepath,
             "mask": mask,
+            "mask_offset": mask_offset,
         })
     return instruction_dicts
 
