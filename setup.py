@@ -51,6 +51,8 @@ REQUIRED_PKGS = [
     'termcolor',
     'tqdm',
     'wrapt',
+    'ipywidgets',
+    'IPython',
 ]
 
 TESTS_REQUIRE = [
