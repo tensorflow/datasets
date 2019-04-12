@@ -166,7 +166,7 @@ def _log_command_output(output, error=False):
 
 class KaggleSearch(object):
   """Searcher for a Kaggle Competitions and Datasets."""
-  def __init__(self, where='competition', search=None, group=None,
+  def __init__(self, where='competitions', search=None, group=None,
                category=None,
                sort_by_competitions=None, sort_by_datasets=None, size=None,
                file_type=None, tag=None, user=None):

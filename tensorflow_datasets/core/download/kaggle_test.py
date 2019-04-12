@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import re
 import subprocess
 
 import tensorflow as tf
@@ -63,6 +64,14 @@ class KaggleTest(testing.TestCase):
         downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
         with self.assertRaises(subprocess.CalledProcessError):
           _ = downloader.competition_files
+
+  def test_kaggle_search(self):
+    searcher = kaggle.KaggleSearch(search='career-con-2019')
+    reg = re.compile(r'\s+')
+    output = """refdeadlinecategoryrewardteamCountuserHasEntered
+    ------------------------------------------------------------
+    --------------career-con-20192019-04-1123:59:00RecruitmentSwag1478False """
+    self.assertEqual(reg.sub('', searcher.searching), reg.sub('', output))
 
 
 if __name__ == "__main__":
