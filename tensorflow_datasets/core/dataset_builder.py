@@ -842,6 +842,9 @@ class BeamBasedBuilder(FileAdapterBuilder):
     `_split_generators`. The examples from the PCollection will be
     encoded and written to disk.
 
+    Beam liquid sharding can be used by setting num_shards to `None` in the
+    `SplitGenerator`.
+
     Warning: When running in a distributed setup, make sure that the data
     which will be read (download_dir, manual_dir,...) and written (data_dir)
     can be accessed by the workers jobs. The data should be located in a
@@ -891,6 +894,17 @@ class BeamBasedBuilder(FileAdapterBuilder):
           dl_manager,
           pipeline=pipeline,
       )
+
+    # Update the number of shards for splits where liquid sharding were used.
+    split_dict = self.info.splits
+    for split_info in split_dict.values():
+      if not split_info.num_shards:
+        output_prefix = naming.filename_prefix_for_split(
+            self.name, split_info.name)
+        output_prefix = os.path.join(self._data_dir, output_prefix)
+        split_info.get_proto().num_shards = (
+            len(tf.io.gfile.glob(output_prefix + "*")))
+    self.info.update_splits_if_different(split_dict)
 
   def _prepare_split(self, split_generator, pipeline):
     beam = lazy_imports.lazy_imports.apache_beam
