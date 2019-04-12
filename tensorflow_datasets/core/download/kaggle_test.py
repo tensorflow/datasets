@@ -49,6 +49,14 @@ class KaggleTest(testing.TestCase):
         with self.assertRaises(subprocess.CalledProcessError):
           _ = downloader.competition_files
 
+  def test_competition_download_403(self):
+    with testing.mock_kaggle_api(err_msg="403 - Forbidden"):
+      with self.assertLogs(
+          "accept the competition rules", level="error"):
+        downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
+        with self.assertRaises(subprocess.CalledProcessError):
+          _ = downloader.competition_files
+
   def test_competition_download_error(self):
     with testing.mock_kaggle_api(err_msg="Some error"):
       with self.assertLogs("install the kaggle API", level="error"):

@@ -152,7 +152,7 @@ def _run_kaggle_command(command_args, competition_name=None):
     if output.startswith(b"404"):
       logging.error(_NOT_FOUND_ERR_MSG, competition_name)
       raise
-    if output.startswith(b'403', error=True):
+    if output.startswith(b'403'):
       logging.error(_NOT_ACCEPT_RULES_ERR_MSG, competition_name)
       raise
     logging.error(_ERR_MSG, competition_name)
