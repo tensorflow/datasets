@@ -544,7 +544,7 @@ to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 
 ```sh
-./oss_scripts/lint.sh image
+./oss_scripts/lint.sh tensorflow_datasets/image
 ```
 
 See
