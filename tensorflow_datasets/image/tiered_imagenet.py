@@ -94,14 +94,29 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
         logging.info("extracted path %s", extracted_path)
         return [
             tfds.core.SplitGenerator(
+                name=tfds.Split.TRAIN,
+                num_shards=1,
+                gen_kwargs={
+                    "images_path": os.path.join(str(extracted_path), "train_images_png.pkl"),
+                    "labels_path": os.path.join(str(extracted_path), "train_labels.pkl"),
+                }
+            ),
+            tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
-                num_shards=5,
+                num_shards=1,
                 gen_kwargs={
                     "images_path": os.path.join(str(extracted_path), "val_images_png.pkl"),
                     "labels_path": os.path.join(str(extracted_path), "val_labels.pkl"),
                 }
             ),
-
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TEST,
+                num_shards=1,
+                gen_kwargs={
+                    "images_path": os.path.join(str(extracted_path), "test_images_png.pkl"),
+                    "labels_path": os.path.join(str(extracted_path), "test_labels.pkl"),
+                }
+            )
         ]
 
     def _generate_examples(self, images_path, labels_path):
@@ -128,8 +143,8 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
                 decoded_img = cv2.imdecode(item, 1)
                 img_data[img_index] = decoded_img
             for i in range(0, len(img_array)):
-              dict_data = {
-                "image": img_data[i],
-                "label": list_label_specific[i]
-              }
+                dict_data = {
+                    "image": img_data[i],
+                    "label": list_label_specific[i]
+                }
             yield dict_data
