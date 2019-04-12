@@ -22,7 +22,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-
+import cv2
 import pickle
 import numpy as np
 from tqdm import tqdm
@@ -94,22 +94,6 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
         logging.info("extracted path %s", extracted_path)
         return [
             tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                num_shards=5,
-                gen_kwargs={
-                    "images_path": os.path.join(str(extracted_path), "train_images_png.pkl"),
-                    "labels_path": os.path.join(str(extracted_path), "train_labels.pkl"),
-                }
-            ),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TEST,
-                num_shards=5,
-                gen_kwargs={
-                    "images_path": os.path.join(str(extracted_path), "test_images_png.pkl"),
-                    "labels_path": os.path.join(str(extracted_path), "test_labels.pkl"),
-                }
-            ),
-            tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
                 num_shards=5,
                 gen_kwargs={
@@ -139,12 +123,13 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
         with tf.gfile.GFile(images_path, "rb") as img_file:
             img_array = pickle.load(img_file, encoding="latin1")
             img_data = np.zeros(
-                [len(img_array["images"]), self._IMAGE_SIZE_X, self._IMAGE_SIZE_Y, 3], dtype=np.uint8)
-            for img_index, item in tqdm(enumerate(img_array["images"])):
-                img_data[img_index] = item
-        for i in range(0, len(img_array["images"])):
-            dict_data = {
+                [len(img_array), self._IMAGE_SIZE_X, self._IMAGE_SIZE_Y, 3], dtype=np.uint8)
+            for img_index, item in tqdm(enumerate(img_array)):
+                decoded_img = cv2.imdecode(item, 1)
+                img_data[img_index] = decoded_img
+            for i in range(0, len(img_array)):
+              dict_data = {
                 "image": img_data[i],
                 "label": list_label_specific[i]
-            }
-        yield dict_data
+              }
+            yield dict_data
