@@ -13,25 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for imagenet dataset module."""
+"""Tests for multinli dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import imagenet
+from tensorflow_datasets.text import xnli
 
 
-class Imagenet2012Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imagenet.Imagenet2012
-  SPLITS = {  # Expected number of examples on each split.
-      "train": 100,
-      "validation": 10,
+class XnliTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = xnli.Xnli
+
+  SPLITS = {
+      "test": 3,
+      "validation": 2,
   }
-  DL_EXTRACT_RESULT = [
-      "ILSVRC2012_img_train.tar",
-      "ILSVRC2012_img_val.tar",
-  ]
 
 
 if __name__ == "__main__":

@@ -13,26 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for imagenet dataset module."""
-
+"""Tests for tensorflow_datasets.text.cnn_dailymail."""
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-from tensorflow_datasets import testing
-from tensorflow_datasets.image import imagenet
+
+import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets.text import cnn_dailymail
 
 
-class Imagenet2012Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imagenet.Imagenet2012
-  SPLITS = {  # Expected number of examples on each split.
-      "train": 100,
-      "validation": 10,
+class CnnDailymailTest(tfds_test.DatasetBuilderTestCase):
+  DATASET_CLASS = cnn_dailymail.CnnDailymail
+  SPLITS = {
+      'train': 3,
+      'validation': 2,
+      'test': 2
   }
-  DL_EXTRACT_RESULT = [
-      "ILSVRC2012_img_train.tar",
-      "ILSVRC2012_img_val.tar",
-  ]
+  DL_EXTRACT_RESULT = {'cnn_stories': '',
+                       'dm_stories': '',
+                       'test_urls': 'all_test.txt',
+                       'train_urls': 'all_train.txt',
+                       'val_urls': 'all_val.txt'}
 
 
-if __name__ == "__main__":
-  testing.test_main()
+if __name__ == '__main__':
+  tfds_test.test_main()
