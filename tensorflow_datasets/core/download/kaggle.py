@@ -190,7 +190,8 @@ class KaggleSearch(object):
     competitions_parameters = {'--search': self.search, '--group': self.group,
                                '--category': self.category,
                                '--sort-by': self.sort_by_competitions}
-    datasets_parameters = {'--sort-by': self.sort_by_datasets,
+    datasets_parameters = {'--search': self.search,
+                           '--sort-by': self.sort_by_datasets,
                            '--size': self.size, '--file-type': self.file_type,
                            '--tags': self.tag, '--user': self.user}
 
@@ -212,7 +213,6 @@ class KaggleSearch(object):
     return output
 
 
-# TODO error handling
 def search_and_download():
   """Kaggle Searcher and Downloader extension for Jupyter Notebook"""
 
@@ -278,16 +278,15 @@ def search_and_download():
     """Change search options based on datasets or competitions"""
     if change['type'] == 'change' and change['new'] == 'competitions':
       display.clear_output(wait=True)
-      display.display(search_input, group, category, sort_by_competitions,
-                      search_button)
+      display.display(where, search_input, group, category,
+                      sort_by_competitions, search_button)
     elif change['type'] == 'change' and change['new'] == 'datasets':
       display.clear_output(wait=True)
-      display.display(where, sort_by_datasets, size, file_type, tag, user,
-                      search_button)
+      display.display(where, search_input, sort_by_datasets, size, file_type,
+                      tag, user, search_button)
 
   where.observe(on_change)
-  display.display(where)
-  display.display(search_input, group, category, sort_by_competitions,
+  display.display(where, search_input, group, category, sort_by_competitions,
                   search_button)
 
   def handle_submit(sender):  # pylint: disable=unused-argument
