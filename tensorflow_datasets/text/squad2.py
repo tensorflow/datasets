@@ -202,7 +202,7 @@ class Squad2(tfds.core.GeneratorBasedBuilder):
                 "is_impossible": is_impossible,
             }
 
-            if len(example["answers"]) < 1:
+            if not example["answers"]:
               example["answers"] = ['']
 
             yield {
@@ -211,4 +211,3 @@ class Squad2(tfds.core.GeneratorBasedBuilder):
                 "context": example["context"],
                 "is_impossible": example["is_impossible"]
             }
-
