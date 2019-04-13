@@ -561,5 +561,21 @@ class SplitsDictTest(testing.TestCase):
     self.assertFalse(splits.check_splits_equals(s1, s3))  # Not same names
     self.assertFalse(splits.check_splits_equals(s1, s4))  # Nb of shards !=
 
+  def test_split_overwrite(self):
+    s1 = splits.SplitDict()
+    s1.add(tfds.core.SplitInfo(name="train", num_shards=15))
+
+    s2 = splits.SplitDict()
+    s2.add(tfds.core.SplitInfo(name="train", num_shards=15))
+
+    self.assertTrue(splits.check_splits_equals(s1, s2))
+
+    # Modifying num_shards should also modify the underlying proto
+    s2["train"].num_shards = 10
+    self.assertEqual(s2["train"].num_shards, 10)
+    self.assertEqual(s2["train"].get_proto().num_shards, 10)
+    self.assertFalse(splits.check_splits_equals(s1, s2))
+
+
 if __name__ == "__main__":
   testing.test_main()

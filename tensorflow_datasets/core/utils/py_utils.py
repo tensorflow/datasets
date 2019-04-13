@@ -198,10 +198,19 @@ def as_proto_cls(proto_cls):
       """Base class simulating the protobuf."""
 
       def __init__(self, *args, **kwargs):
-        self.__proto = proto_cls(*args, **kwargs)
+        super(ProtoCls, self).__setattr__(
+            "_ProtoCls__proto",
+            proto_cls(*args, **kwargs),
+        )
 
       def __getattr__(self, attr_name):
         return getattr(self.__proto, attr_name)
+
+      def __setattr__(self, attr_name, new_value):
+        try:
+          return setattr(self.__proto, attr_name, new_value)
+        except AttributeError:
+          return super(ProtoCls, self).__setattr__(attr_name, new_value)
 
       def __eq__(self, other):
         return self.__proto, other.get_proto()

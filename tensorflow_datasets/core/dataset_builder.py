@@ -902,8 +902,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
         output_prefix = naming.filename_prefix_for_split(
             self.name, split_info.name)
         output_prefix = os.path.join(self._data_dir, output_prefix)
-        split_info.get_proto().num_shards = (
-            len(tf.io.gfile.glob(output_prefix + "*")))
+        split_info.num_shards = len(tf.io.gfile.glob(output_prefix + "*"))
     self.info.update_splits_if_different(split_dict)
 
   def _prepare_split(self, split_generator, pipeline):
