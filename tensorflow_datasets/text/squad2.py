@@ -54,7 +54,7 @@ the paragraph and abstain from answering. SQuAD2.0 is a challenging natural \
 language understanding task for existing models.
 """
 
-class StanfordquadConfig(tfds.core.BuilderConfig):
+class Squad2Config(tfds.core.BuilderConfig):
   """BuilderConfig for Stanford Question Answering Dataset - 2.0."""
 
   @api_utils.disallow_positional_args
@@ -66,24 +66,26 @@ class StanfordquadConfig(tfds.core.BuilderConfig):
         for the `tfds.features.text.TextEncoder` used for the features feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(StanfordquadConfig, self).__init__(**kwargs)
+    super(Squad2Config, self).__init__(**kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
 
-class Stanfordquad(tfds.core.GeneratorBasedBuilder):
+class Squad2(tfds.core.GeneratorBasedBuilder):
   """The Stanford Question Answering Dataset. Version 2.0."""
   _URL = "https://rajpurkar.github.io/SQuAD-explorer/dataset/"
   _DEV_FILE = "dev-v2.0.json"
   _TRAINING_FILE = "train-v2.0.json"
 
+  VERSION = tfds.core.Version("2.0.0")
+
   BUILDER_CONFIGS = [
-      StanfordquadConfig(
+      Squad2Config(
           name="plain_text",
           version="2.0.0",
           description="Plain text",
       ),
-      StanfordquadConfig(
+      Squad2Config(
           name="bytes",
           version="2.0.0",
           description=("Uses byte-level text encoding with "
@@ -91,7 +93,7 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
           text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder=tfds.features.text.ByteTextEncoder()),
       ),
-      StanfordquadConfig(
+      Squad2Config(
           name="subwords8k",
           version="2.0.0",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
@@ -100,7 +102,7 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               vocab_size=2**13),
       ),
-      StanfordquadConfig(
+      Squad2Config(
           name="subwords32k",
           version="2.0.0",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
@@ -125,6 +127,7 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
             "first_answer":
                 tfds.features.Text(
                     encoder_config=self.builder_config.text_encoder_config),
+            "is_impossible": tf.bool,
         }),
         # No default supervised_keys (as we have to pass both question
         # and context as input).
@@ -155,6 +158,7 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
     self.info.features["question"].maybe_set_encoder(encoder)
     self.info.features["first_answer"].maybe_set_encoder(encoder)
 
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -181,6 +185,7 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
           for qa in paragraph["qas"]:
             question = qa["question"].strip()
             id_ = qa["id"]
+            is_impossible = qa["is_impossible"]
 
             answer_starts = [answer["answer_start"] for answer in qa["answers"]]
             answers = [answer["text"].strip() for answer in qa["answers"]]
@@ -194,17 +199,20 @@ class Stanfordquad(tfds.core.GeneratorBasedBuilder):
                 "id": id_,
                 "answer_starts": answer_starts,
                 "answers": answers,
+                "is_impossible": is_impossible,
             }
             if len(example["answers"]) > 1:
               yield {
                   "question": example["question"],
                   "first_answer": example["answers"][0],
-                  "context": example["context"]
+                  "context": example["context"],
+                  "is_impossible": example["is_impossible"]
               }
             else:
               example["answers"] = ['No answer is supported by the paragraph']
               yield {
                   "question": example["question"],
                   "first_answer": example["answers"][0],
-                  "context": example["context"]
+                  "context": example["context"],
+                  "is_impossible": example["is_impossible"]
               }

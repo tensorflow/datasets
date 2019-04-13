@@ -24,5 +24,6 @@ from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.squad import Squad
+from tensorflow_datasets.text.squad2 import Squad2
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.xnli import Xnli
