@@ -201,18 +201,14 @@ class Squad2(tfds.core.GeneratorBasedBuilder):
                 "answers": answers,
                 "is_impossible": is_impossible,
             }
-            if len(example["answers"]) > 1:
-              yield {
-                  "question": example["question"],
-                  "first_answer": example["answers"][0],
-                  "context": example["context"],
-                  "is_impossible": example["is_impossible"]
-              }
-            else:
-              example["answers"] = ['No answer is supported by the paragraph']
-              yield {
-                  "question": example["question"],
-                  "first_answer": example["answers"][0],
-                  "context": example["context"],
-                  "is_impossible": example["is_impossible"]
-              }
+
+            if len(example["answers"]) < 1:
+              example["answers"] = ['']
+
+            yield {
+                "question": example["question"],
+                "first_answer": example["answers"][0],
+                "context": example["context"],
+                "is_impossible": example["is_impossible"]
+            }
+
