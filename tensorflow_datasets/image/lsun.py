@@ -111,7 +111,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, extracted_dir, file_path):
     with tf.Graph().as_default():
-      dataset = tf.contrib.data.LMDBDataset(
+      dataset = tfds.core.lazy_imports.tensorflow_io.lmdb(
           os.path.join(extracted_dir, file_path, "data.mdb"))
       for _, jpeg_image in tfds.as_numpy(dataset):
         yield {"image": io.BytesIO(jpeg_image)}

@@ -66,6 +66,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def tensorflow_io(cls):
+    return _try_import("tensorflow_io")
+
+  @utils.classproperty
+  @classmethod
   def mwparserfromhell(cls):
     return _try_import("mwparserfromhell")
 

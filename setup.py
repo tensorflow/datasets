@@ -95,6 +95,7 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     'svhn': ['scipy'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'lsun': ['tensorflow-io']
 }
 
 all_dataset_extras = []
@@ -105,6 +106,7 @@ EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
     'tensorflow': ['tensorflow>=1.12.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
+    'tensorflow-io': ['tensorflow-io>=0.5.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
