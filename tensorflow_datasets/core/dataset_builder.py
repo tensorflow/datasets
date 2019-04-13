@@ -157,7 +157,7 @@ class DatasetBuilder(object):
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
           "DatasetBuilder {} does not have defined version. Please add a "
-          "`VERSION = tfds.Version('x.y.z')` to the class.".format(
+          "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
               self.name))
     self._version = utils.Version(
         self._builder_config and self._builder_config.version or self.VERSION)
@@ -701,14 +701,33 @@ class FileAdapterBuilder(DatasetBuilder):
     """Return the list of files and reading mask of the files to read."""
     instruction_dicts = []
     for sliced_split_info in list_sliced_split_info:
+      mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+
       # Compute filenames from the given split
-      for filepath in self._build_split_filenames(
+      filepaths = list(sorted(self._build_split_filenames(
           split_info_list=[sliced_split_info.split_info],
-      ):
-        mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+      )))
+
+      # Compute the offsets
+      if sliced_split_info.split_info.num_examples:
+        shard_id2num_examples = splits_lib.get_shard_id2num_examples(
+            sliced_split_info.split_info.num_shards,
+            sliced_split_info.split_info.num_examples,
+        )
+        mask_offsets = splits_lib.compute_mask_offsets(shard_id2num_examples)
+      else:
+        logging.warning(
+            "Statistics not present in the dataset. TFDS is not able to load "
+            "the total number of examples, so using the subsplit API may not "
+            "provide precise subsplits."
+        )
+        mask_offsets = [0] * len(filepaths)
+
+      for filepath, mask_offset in zip(filepaths, mask_offsets):
         instruction_dicts.append({
             "filepath": filepath,
             "mask": mask,
+            "mask_offset": mask_offset,
         })
     return instruction_dicts
 
@@ -823,6 +842,9 @@ class BeamBasedBuilder(FileAdapterBuilder):
     `_split_generators`. The examples from the PCollection will be
     encoded and written to disk.
 
+    Beam liquid sharding can be used by setting num_shards to `None` in the
+    `SplitGenerator`.
+
     Warning: When running in a distributed setup, make sure that the data
     which will be read (download_dir, manual_dir,...) and written (data_dir)
     can be accessed by the workers jobs. The data should be located in a
@@ -872,6 +894,16 @@ class BeamBasedBuilder(FileAdapterBuilder):
           dl_manager,
           pipeline=pipeline,
       )
+
+    # Update the number of shards for splits where liquid sharding were used.
+    split_dict = self.info.splits
+    for split_info in split_dict.values():
+      if not split_info.num_shards:
+        output_prefix = naming.filename_prefix_for_split(
+            self.name, split_info.name)
+        output_prefix = os.path.join(self._data_dir, output_prefix)
+        split_info.num_shards = len(tf.io.gfile.glob(output_prefix + "*"))
+    self.info.update_splits_if_different(split_dict)
 
   def _prepare_split(self, split_generator, pipeline):
     beam = lazy_imports.lazy_imports.apache_beam

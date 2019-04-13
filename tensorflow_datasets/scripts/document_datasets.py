@@ -23,6 +23,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import cgi
 import collections
 import os
 import sys
@@ -218,7 +219,7 @@ def document_single_builder(builder):
           size=tfds.units.size_str(info.size_in_bytes),
       )
       config_docs.append(config_doc)
-    return DATASET_WITH_CONFIGS_ENTRY.format(
+    out_str = DATASET_WITH_CONFIGS_ENTRY.format(
         snakecase_name=builder.name,
         module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
         cls_url=cls_url(mod_name),
@@ -243,7 +244,7 @@ def document_single_builder(builder):
     )
   else:
     info = builder.info
-    return DATASET_ENTRY.format(
+    out_str = DATASET_ENTRY.format(
         snakecase_name=builder.name,
         module_and_class="%s.%s" % (tfds_mod_name(mod_name), cls_name),
         cls_url=cls_url(mod_name),
@@ -258,6 +259,9 @@ def document_single_builder(builder):
         citation=make_citation(info.citation),
         size=tfds.units.size_str(info.size_in_bytes),
     )
+
+  out_str = schema_org(builder) + "\n" + out_str
+  return out_str
 
 
 def create_section_toc(section, builders):
@@ -378,40 +382,70 @@ def dataset_docs_str(datasets=None):
   return full_doc
 
 
-JSON_LD_STR = """\
-{{
-  "@context": "https://schema.org/",
-  "@type": "Dataset",
-  "name": "{name}",
-  "description": "{description}",
-  "url": {url},
-  "size:" {size},
-}}
+SCHEMA_ORG_PRE = """\
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+"""
+
+SCHEMA_ORG_NAME = """\
+  <meta itemprop="name" content="{val}" />
+"""
+
+SCHEMA_ORG_URL = """\
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#{val}" />
+"""
+
+SCHEMA_ORG_DESC = """\
+  <meta itemprop="description" content="{val}" />
+"""
+
+SCHEMA_ORG_SAMEAS = """\
+  <meta itemprop="sameAs" content="{val}" />
+"""
+
+SCHEMA_ORG_POST = """\
+</div>
 """
 
 
 def schema_org(builder):
   # pylint: disable=line-too-long
-  """Builds schema.org JSON-LD for DatasetSearch from DatasetBuilder.
+  """Builds schema.org microdata for DatasetSearch from DatasetBuilder.
 
   Markup spec: https://developers.google.com/search/docs/data-types/dataset#dataset
   Testing tool: https://search.google.com/structured-data/testing-tool
   For Google Dataset Search: https://toolbox.google.com/datasetsearch
 
+  Microdata format was chosen over JSON-LD due to the fact that Markdown
+  rendering engines remove all <script> tags.
+
   Args:
     builder: `tfds.core.DatasetBuilder`
 
   Returns:
-    JSON-LD str.
+    HTML string with microdata
   """
   # pylint: enable=line-too-long
+
+  properties = [
+      (lambda x: x.name, SCHEMA_ORG_NAME),
+      (lambda x: x.description, SCHEMA_ORG_DESC),
+      (lambda x: x.name, SCHEMA_ORG_URL),
+      (lambda x: (x.urls and x.urls[0]) or "", SCHEMA_ORG_SAMEAS)
+  ]
+
   info = builder.info
-  return JSON_LD_STR.format(
-      name=builder.name,
-      description=info.description,
-      url=str(info.urls[0]).replace("'", "\""),
-      size=tfds.units.size_str(info.size_in_bytes),
-  )
+  out_str = SCHEMA_ORG_PRE
+  for extractor, template in properties:
+    val = extractor(info)
+    if val:
+      # We are using cgi module instead of html due to Python 2 compatibility
+      out_str += template.format(val=cgi.escape(val, quote=True).strip())
+  out_str += SCHEMA_ORG_POST
+
+  return out_str
 
 
 def main(_):

@@ -53,7 +53,7 @@ _IN_DEVELOPMENT_REGISTRY = {}
 
 
 _NAME_STR_ERR = """\
-Parsing builder name string failed.
+Parsing builder name string `{}` failed.
 The builder name string must be in one of the following formats:
   * "dataset_name"
   * "dataset_name/config_name"
@@ -282,7 +282,7 @@ def _dataset_name_and_kwargs_from_name_str(name_str):
     if not num_slashes:
       # 1. dataset_name
       if has_kwargs:
-        raise ValueError(_NAME_STR_ERR)
+        raise ValueError(_NAME_STR_ERR.format(name_str))
       return name_str, {}
 
     name_splits = name_str.split("/")
@@ -293,7 +293,7 @@ def _dataset_name_and_kwargs_from_name_str(name_str):
         config = None
       else:
         if num_slashes > 2:
-          raise ValueError(_NAME_STR_ERR)
+          raise ValueError(_NAME_STR_ERR.format(name_str))
         assert num_slashes == 2
         # 3. dataset_name/config_name/kwargs
         dataset_name, config, kwargs_str = name_splits
@@ -308,7 +308,7 @@ def _dataset_name_and_kwargs_from_name_str(name_str):
     kwargs["config"] = config
     return dataset_name, kwargs
   except:
-    logging.error(_NAME_STR_ERR)
+    logging.error(_NAME_STR_ERR.format(name_str))   # pylint: disable=logging-format-interpolation
     raise
 
 
