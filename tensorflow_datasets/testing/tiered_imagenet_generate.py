@@ -20,6 +20,7 @@ import os
 import pickle
 from absl import flags
 import numpy as np
+import cv2
 
 import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
@@ -45,7 +46,7 @@ def randomized_list(size, low, high):
     """ Returns a randomized list of labels in the range between low and high 
     """
     labels_list = []
-    for i in range(size):
+    for _ in range(size):
         labels_list.append(str(np.random.randint(low, high)))
     return labels_list
 
@@ -64,13 +65,22 @@ def generate_train_data(path):
         _NUM_IMAGES_TRAIN, 0, _NUM_CATEGORIES_TRAIN)
     train_specific_labels_str = train_specific_labels
     train_general_labels_str = train_general_labels
-    train_images = {"images": train_images_data}
-    train_labels = {"label_general": train_general_labels, "label_general_str": train_general_labels_str,
-                    "label_specific": train_specific_labels, "label_specific_str": train_specific_labels_str}
+    path_train_npz = os.path.join(path, "train_images.npz")
+    np.savez(path_train_npz, images=train_images_data)
+    with np.load(path_train_npz, mmap_mode="r") as data:
+        images = data["images"]
+        train_array = []
+        for imag_item in range(images.shape[0]):
+            img = images[imag_item]
+            image_string = cv2.imencode('.png', img)[1]
+            train_array.append(image_string)
     # save train images
+    print(len(train_array))
     path_train = os.path.join(path, "train_images_png.pkl")
     with tf.io.gfile.GFile(path_train, "wb") as train_img_file:
-        pickle.dump(train_images, train_img_file, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(train_array, train_img_file, pickle.HIGHEST_PROTOCOL)
+    train_labels = {"label_general": train_general_labels, "label_general_str": train_general_labels_str,
+                    "label_specific": train_specific_labels, "label_specific_str": train_specific_labels_str}
     # save train labels
     path_train = os.path.join(path, "train_labels.pkl")
     with tf.io.gfile.GFile(path_train, "wb") as train_label_file:
@@ -89,14 +99,22 @@ def generate_validation_data(path):
         _NUM_IMAGES_VAL, 0, _NUM_CATEGORIES_VAL)
     validation_specific_labels_str = validation_specific_labels
     validation_general_labels_str = validation_general_labels
-    val_images = {"images": validation_images_data}
-    val_labels = {"label_general": validation_general_labels, "label_general_str": validation_general_labels_str,
-                  "label_specific": validation_specific_labels, "label_specific_str": validation_specific_labels_str}
-
-    # save validation images
+    path_val_npz = os.path.join(path, "val_images.npz")
+    np.savez(path_val_npz, images=validation_images_data)
+    with np.load(path_val_npz, mmap_mode="r") as data:
+        images = data["images"]
+        val_array = []
+        for imag_item in range(images.shape[0]):
+            img = images[imag_item]
+            image_string = cv2.imencode('.png', img)[1]
+            val_array.append(image_string)
+    # save val images
+    print(len(val_array))
     path_validation = os.path.join(path, "val_images_png.pkl")
     with tf.io.gfile.GFile(path_validation, "wb") as val_img_file:
-        pickle.dump(val_images, val_img_file, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(val_array, val_img_file, pickle.HIGHEST_PROTOCOL)
+    val_labels = {"label_general": validation_general_labels, "label_general_str": validation_general_labels_str,
+                  "label_specific": validation_specific_labels, "label_specific_str": validation_specific_labels_str}
     # save validation labels
     path_validation = os.path.join(path, "val_labels.pkl")
     with tf.io.gfile.GFile(path_validation, "wb") as val_label_file:
@@ -115,13 +133,22 @@ def generate_test_data(path):
         _NUM_IMAGES_TEST, 0, _NUM_CATEGORIES_TEST)
     test_specific_labels_str = test_specific_labels
     test_general_labels_str = test_general_labels
-    test_images = {"images": test_images_data}
-    test_labels = {"label_general": test_general_labels, "label_general_str": test_general_labels_str,
-                   "label_specific": test_specific_labels, "label_specific_str": test_specific_labels_str}
+    path_test_npz = os.path.join(path, "test_images.npz")
+    np.savez(path_test_npz, images=test_images_data)
+    with np.load(path_test_npz, mmap_mode="r") as data:
+        images = data["images"]
+        test_array = []
+        for imag_item in range(images.shape[0]):
+            img = images[imag_item]
+            image_string = cv2.imencode('.png', img)[1]
+            test_array.append(image_string)
     # save test images
+    print(len(test_array))
     path_test = os.path.join(path, "test_images_png.pkl")
     with tf.io.gfile.GFile(path_test, "wb") as test_img_file:
-        pickle.dump(test_images, test_img_file, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(test_array, test_img_file, pickle.HIGHEST_PROTOCOL)
+    test_labels = {"label_general": test_general_labels, "label_general_str": test_general_labels_str,
+                   "label_specific": test_specific_labels, "label_specific_str": test_specific_labels_str}
     # save test labels
     path_test = os.path.join(path, "test_labels.pkl")
     with tf.io.gfile.GFile(path_test, "wb") as test_label_file:
