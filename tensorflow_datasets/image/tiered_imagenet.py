@@ -22,7 +22,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import cv2
 import pickle
 import numpy as np
 from tqdm import tqdm
@@ -89,11 +88,18 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
         """Downloads the data and defines the split."""
-        #extracted_path = dl_manager.download_and_extract(_DL_URL)
-        extracted_path = "C:\\Users\\suvar\\tensorflow_datasets\\downloads\\extracted\\"
+        extracted_path = dl_manager.download_and_extract(_DL_URL)
         extracted_path = os.path.join(str(extracted_path), "tiered-imagenet")
         logging.info("extracted path %s", extracted_path)
         return [
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TRAIN,
+                num_shards=1,
+                gen_kwargs={
+                    "images_path": os.path.join(str(extracted_path), "train_images_png.pkl"),
+                    "labels_path": os.path.join(str(extracted_path), "train_labels.pkl"),
+                }
+            ),
             tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
                 num_shards=1,
@@ -102,6 +108,14 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
                     "labels_path": os.path.join(str(extracted_path), "val_labels.pkl"),
                 }
             ),
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TEST,
+                num_shards=1,
+                gen_kwargs={
+                    "images_path": os.path.join(str(extracted_path), "test_images_png.pkl"),
+                    "labels_path": os.path.join(str(extracted_path), "test_labels.pkl"),
+                }
+            )
         ]
 
     def _generate_examples(self, images_path, labels_path):
@@ -125,7 +139,7 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
             img_data = np.zeros(
                 [len(img_array), self._IMAGE_SIZE_X, self._IMAGE_SIZE_Y, 3], dtype=np.uint8)
             for img_index, item in tqdm(enumerate(img_array)):
-                decoded_img = cv2.imdecode(item, 1)
+                decoded_img = tfds.core.lazy_imports.cv2.imdecode(item, 1)
                 img_data[img_index] = decoded_img
             for i in range(0, len(img_array)):
                 dict_data = {
