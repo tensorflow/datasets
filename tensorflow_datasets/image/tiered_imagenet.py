@@ -129,12 +129,12 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
                     "label" (string): class name.
         """
         # read data
-        with open(labels_path, "rb") as labels_file:
+        with tf.io.gfile.GFile(labels_path, "rb") as labels_file:
             data = pickle.load(
                 labels_file, encoding='latin1')
             list_label_specific = data["label_specific"]
             logging.info("Labels list %s", list_label_specific)
-        with tf.gfile.GFile(images_path, "rb") as img_file:
+        with tf.io.gfile.GFile(images_path, "rb") as img_file:
             img_array = pickle.load(
                 img_file, encoding="latin1")
             img_data = np.zeros(
