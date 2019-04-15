@@ -135,8 +135,13 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
             list_label_specific = data["label_specific"]
             logging.info("Labels list %s", list_label_specific)
         with tf.io.gfile.GFile(images_path, "rb") as img_file:
-            img_array = pickle.load(
-                img_file, encoding="latin1")
+            try:
+                img_array = pickle.load(img_file)
+            except UnicodeDecodeError as e:
+                img_array = pickle.load(img_file, encoding="latin1")
+            except Exception as e:
+                print("Unable to load the images ", images_path, ":", e)
+                raise
             img_data = np.zeros(
                 [len(img_array), self._IMAGE_SIZE_X, self._IMAGE_SIZE_Y, 3], dtype=np.uint8)
             for img_index, item in tqdm(enumerate(img_array)):
