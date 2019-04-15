@@ -79,11 +79,6 @@ class LazyImporter(object):
 
     @utils.classproperty
     @classmethod
-    def pickle(cls):
-        return _try_import("pickle")
-
-    @utils.classproperty
-    @classmethod
     def scipy(cls):
         return _try_import("scipy")
 
