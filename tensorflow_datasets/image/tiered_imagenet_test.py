@@ -19,11 +19,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets import testing
-import tiered_imagenet
+from tensorflow_datasets.image import tiered_imagenet
+import tensorflow_datasets.testing as tfds_test
 
 
-class TieredImagenetTest(testing.DatasetBuilderTestCase):
+class TieredImagenetTest(tfds_test.DatasetBuilderTestCase):
 
     """Tests for tiered_imagenet dataset module."""
     DATASET_CLASS = tiered_imagenet.TieredImagenet
@@ -36,4 +36,4 @@ class TieredImagenetTest(testing.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-    testing.test_main()
+    tfds_test.test_main()
