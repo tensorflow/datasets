@@ -51,6 +51,11 @@ https://www.kaggle.com/c/%s/rules
 """
 
 
+class DataNotFoundError(Exception):
+  """Raised when the data is no longer available"""
+  pass
+
+
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
   _URL_PREFIX = "kaggle://"
@@ -314,6 +319,8 @@ def search_and_download():
       """Download all files."""
       downloader = KaggleCompetitionDownloader(dataset_name.value)
       print('Downloading...')
+      if not downloader.competition_files:
+        raise DataNotFoundError('Data is no longer available!')
       for fname in downloader.competition_files:
         downloader.download_file(fname, dataset_name.value)
         print('Downloaded ', fname)
