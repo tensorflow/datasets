@@ -22,7 +22,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import pickle
 import numpy as np
 from tqdm import tqdm
 
@@ -131,11 +130,12 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
         """
         # read data
         with open(labels_path, "rb") as labels_file:
-            data = pickle.load(labels_file, encoding='latin1')
+            data = tfds.core.lazy_imports.pickle.load(labels_file, encoding='latin1')
             list_label_specific = data["label_specific"]
             logging.info("Labels list %s", list_label_specific)
         with tf.gfile.GFile(images_path, "rb") as img_file:
-            img_array = pickle.load(img_file, encoding="latin1")
+            img_array = tfds.core.lazy_imports.pickle.load(
+                img_file, encoding="latin1")
             img_data = np.zeros(
                 [len(img_array), self._IMAGE_SIZE_X, self._IMAGE_SIZE_Y, 3], dtype=np.uint8)
             for img_index, item in tqdm(enumerate(img_array)):
