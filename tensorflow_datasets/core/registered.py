@@ -61,7 +61,7 @@ The builder name string must be of the following format:
   Where:
 
     * dataset_name and config_name are string following python variable naming.
-    * version is of the form x.y.z where {x,y,z} can be any digit or *.
+    * version is of the form x.y.z where {{x,y,z}} can be any digit or *.
     * kwargs is a comma list separated of arguments and values to pass to
       builder.
 
@@ -291,7 +291,7 @@ _VERSION_RE = r""
 _NAME_REG = re.compile(
     r"^"
     r"(?P<dataset_name>\w+)"
-    r"(/(?P<config>\w+))?"
+    r"(/(?P<config>[\w\-\.]+))?"
     r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
     r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
     r"$")
