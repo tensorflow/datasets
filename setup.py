@@ -36,10 +36,10 @@ if nightly:
                   datetime.datetime.now().strftime('%Y%m%d%H%M'))
     version = '%s-dev%s' % (version, datestring)
     
-  project_name = 'tfds-nightly'
-  datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
+project_name = 'tfds-nightly'
+datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
-  __version__ += 'dev%s' % datestring
+__version__ += 'dev%s' % datestring
 
 DOCLINES = __doc__.split('\n')
 
