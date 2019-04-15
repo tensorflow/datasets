@@ -89,18 +89,11 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
         """Downloads the data and defines the split."""
-        extracted_path = dl_manager.download_and_extract(_DL_URL)
+        #extracted_path = dl_manager.download_and_extract(_DL_URL)
+        extracted_path = "C:\\Users\\suvar\\tensorflow_datasets\\downloads\\extracted\\"
         extracted_path = os.path.join(str(extracted_path), "tiered-imagenet")
         logging.info("extracted path %s", extracted_path)
         return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                num_shards=1,
-                gen_kwargs={
-                    "images_path": os.path.join(str(extracted_path), "train_images_png.pkl"),
-                    "labels_path": os.path.join(str(extracted_path), "train_labels.pkl"),
-                }
-            ),
             tfds.core.SplitGenerator(
                 name=tfds.Split.VALIDATION,
                 num_shards=1,
@@ -109,14 +102,6 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
                     "labels_path": os.path.join(str(extracted_path), "val_labels.pkl"),
                 }
             ),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TEST,
-                num_shards=1,
-                gen_kwargs={
-                    "images_path": os.path.join(str(extracted_path), "test_images_png.pkl"),
-                    "labels_path": os.path.join(str(extracted_path), "test_labels.pkl"),
-                }
-            )
         ]
 
     def _generate_examples(self, images_path, labels_path):

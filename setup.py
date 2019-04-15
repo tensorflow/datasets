@@ -99,7 +99,7 @@ DATASET_EXTRAS = {
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'svhn': ['scipy'],
-    'tiered_imagenet': ['pickle', 'opencv-python']
+    'tiered_imagenet': ['pickle', 'opencv-python'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
