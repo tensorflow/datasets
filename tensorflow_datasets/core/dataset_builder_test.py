@@ -48,6 +48,7 @@ class DummyBuilderConfig(dataset_builder.BuilderConfig):
 
 
 class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
+
   BUILDER_CONFIGS = [
       DummyBuilderConfig(
           name="plus1",
@@ -267,6 +268,16 @@ class DatasetBuilderTest(testing.TestCase):
         self.assertEqual(10, len(test_data))
         self.assertEqual([incr + el for el in range(30)],
                          sorted(train_data + test_data))
+
+  def test_with_supported_version(self):
+    DummyDatasetWithConfigs(config="plus1", version="0.0.1")
+
+  def test_with_unsupported_version(self):
+    expected = "Dataset dummy_dataset_with_configs cannot be loaded at version"
+    with self.assertRaisesWithPredicateMatch(AssertionError, expected):
+      DummyDatasetWithConfigs(config="plus1", version="0.0.2")
+    with self.assertRaisesWithPredicateMatch(AssertionError, expected):
+      DummyDatasetWithConfigs(config="plus1", version="0.1.*")
 
   def test_invalid_split_dataset(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:

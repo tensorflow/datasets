@@ -24,6 +24,17 @@ from tensorflow_datasets.core.utils import version
 
 class VersionTest(testing.TestCase):
 
+  def test_str_to_version(self):
+    self.assertEqual(version._str_to_version('1.2.3'), (1, 2, 3))
+    self.assertEqual(version._str_to_version('1.2.*', True), (1, 2, '*'))
+    self.assertEqual(version._str_to_version('1.*.3', True), (1, '*', 3))
+    self.assertEqual(version._str_to_version('*.2.3', True), ('*', 2, 3))
+    self.assertEqual(version._str_to_version('1.*.*', True), (1, '*', '*'))
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Invalid version '):
+      version.Version('1.3')
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Invalid version '):
+      version.Version('1.3.*')
+
   def test_version(self):
     """Test the zip nested function."""
 
@@ -49,6 +60,18 @@ class VersionTest(testing.TestCase):
       version.Version('1..5')
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       version.Version('a.b.c')
+
+  def test_match(self):
+    v = version.Version('1.2.3')
+    self.assertTrue(v.match('1.2.3'))
+    self.assertTrue(v.match('1.2.*'))
+    self.assertTrue(v.match('1.*.*'))
+    self.assertTrue(v.match('*.*.*'))
+    self.assertTrue(v.match('*.2.3'))
+    self.assertFalse(v.match('1.2.4'))
+    self.assertFalse(v.match('1.3.*'))
+    self.assertFalse(v.match('1.3.*'))
+    self.assertFalse(v.match('2.*.*'))
 
 
 if __name__ == '__main__':
