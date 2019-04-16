@@ -32,9 +32,9 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "matplotlib",
       "mwparserfromhell",
       "os",
+      "pickle",
       "pydub",
       "pyplot",
-      "pickle",
       "scipy",
       "skimage",
   )
