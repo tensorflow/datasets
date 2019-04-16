@@ -24,11 +24,59 @@ import contextlib
 
 from tqdm import auto as tqdm_lib
 
-tqdm = tqdm_lib.tqdm
+
+class EmptyTqdm(object):
+  """Dummy tqdm which doesn't do anything."""
+
+  def __init__(self, *args, **kwargs):   # pylint: disable=unused-argument
+    self._iterator = args[0] if args else None
+
+  def __iter__(self):
+    return iter(self._iterator)
+
+  def __getattr__(self, _):
+    """Return empty function."""
+    def empty_fn(*args, **kwargs):   # pylint: disable=unused-argument
+      return
+    return empty_fn
+
+  def __enter__(self):
+    return self
+
+  def __exit__(self, type_, value, traceback):
+    return
+
+_active = True
+
+
+def tqdm(*args, **kwargs):
+  if _active:
+    return tqdm_lib.tqdm(*args, **kwargs)
+  else:
+    return EmptyTqdm(*args, **kwargs)
+
+
+def async_tqdm(*args, **kwargs):
+  if _active:
+    return _async_tqdm(*args, **kwargs)
+  else:
+    return EmptyTqdm(*args, **kwargs)
+
+
+def disable_progress_bar():
+  """Disabled Tqdm progress bar.
+
+  Usage:
+
+  tfds.disable_progress_bar()
+  """
+  # Replace tqdm
+  global _active
+  _active = False
 
 
 @contextlib.contextmanager
-def async_tqdm(*args, **kwargs):
+def _async_tqdm(*args, **kwargs):
   """Wrapper around Tqdm which can be updated in threads.
 
   Usage:
@@ -47,7 +95,7 @@ def async_tqdm(*args, **kwargs):
   Yields:
     pbar: Async pbar which can be shared between threads.
   """
-  with tqdm(*args, **kwargs) as pbar:
+  with tqdm_lib.tqdm(*args, **kwargs) as pbar:
     pbar = _TqdmPbarAsync(pbar)
     yield pbar
     pbar.clear()  # pop pbar from the active list of pbar
@@ -59,7 +107,7 @@ class _TqdmPbarAsync(object):
   _tqdm_bars = []
 
   def __init__(self, pbar):
-    self._lock = tqdm.get_lock()
+    self._lock = tqdm_lib.tqdm.get_lock()
     self._pbar = pbar
     self._tqdm_bars.append(pbar)
 
@@ -83,4 +131,3 @@ class _TqdmPbarAsync(object):
   def clear(self):
     """Remove the tqdm pbar from the update."""
     self._tqdm_bars.pop()
-
