@@ -7,8 +7,9 @@ from absl import app
 from absl import flags
 
 import tensorflow as tf
-from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import fake_data_utils
+from tensorflow_datasets.core.utils import py_utils
+
 
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
@@ -27,11 +28,12 @@ def create_folder(fname):
     tf.io.gfile.makedirs(images_dir)
   for i in range(2):
     image_name = 'C189P150ThinF_IMG_20151203_141809_cell_{:03d}.png'.format(i)
-    tf.io.gfile.copy(fake_data_utils.get_random_png(),
+    tf.io.gfile.copy(fake_data_utils.get_random_png(300,300),
                      os.path.join(images_dir, image_name),
                      overwrite=True)
 
 def main(argv):
+  del argv
   create_folder('Parasitized')
   create_folder('Uninfected')
 
