@@ -61,6 +61,11 @@ class LazyImporter(object):
   @classmethod
   def matplotlib(cls):
     return _try_import("matplotlib")
+    
+  @utils.classproperty
+  @classmethod
+  def mwparserfromhell(cls):
+    return _try_import("mwparserfromhell")
 
   @utils.classproperty
   @classmethod
