@@ -101,10 +101,10 @@ class RegisteredTest(testing.TestCase):
       self.assertEqual(builder.kwargs[k], v)
 
   def test_builder_fullname(self):
-    fullname = "empty_dataset_builder/conf1:1.0.1/k1=1,k2=2"
+    fullname = "empty_dataset_builder/conf1-attr:1.0.1/k1=1,k2=2"
     builder = registered.builder(fullname, data_dir="bar")
     expected = {"k1": 1, "k2": 2, "version": "1.0.1",
-                "config": "conf1", "data_dir": "bar"}
+                "config": "conf1-attr", "data_dir": "bar"}
     self.assertEqual(expected, builder.kwargs)
 
   def test_load(self):
