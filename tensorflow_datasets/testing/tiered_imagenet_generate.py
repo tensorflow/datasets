@@ -76,13 +76,13 @@ def generate_train_data(path):
   # save train images
   path_train = os.path.join(path, "train_images_png.pkl")
   with tf.io.gfile.GFile(path_train, "wb") as train_img_file:
-    pickle.dump(train_array, train_img_file, pickle.HIGHEST_PROTOCOL)
+    pickle.dump(train_array, train_img_file, 2)
   train_labels = {"label_general": train_general_labels, "label_general_str": train_general_labels_str,
                   "label_specific": train_specific_labels, "label_specific_str": train_specific_labels_str}
   # save train labels
   path_train = os.path.join(path, "train_labels.pkl")
   with tf.io.gfile.GFile(path_train, "wb") as train_label_file:
-    pickle.dump(train_labels, train_label_file, pickle.HIGHEST_PROTOCOL)
+    pickle.dump(train_labels, train_label_file, 2)
 
 
 def generate_validation_data(path):
@@ -109,13 +109,13 @@ def generate_validation_data(path):
   # save val images
   path_validation = os.path.join(path, "val_images_png.pkl")
   with tf.io.gfile.GFile(path_validation, "wb") as val_img_file:
-    pickle.dump(val_array, val_img_file, pickle.HIGHEST_PROTOCOL)
+    pickle.dump(val_array, val_img_file, 2)
   val_labels = {"label_general": validation_general_labels, "label_general_str": validation_general_labels_str,
                 "label_specific": validation_specific_labels, "label_specific_str": validation_specific_labels_str}
   # save validation labels
   path_validation = os.path.join(path, "val_labels.pkl")
   with tf.io.gfile.GFile(path_validation, "wb") as val_label_file:
-    pickle.dump(val_labels, val_label_file, pickle.HIGHEST_PROTOCOL)
+    pickle.dump(val_labels, val_label_file, 2)
 
 
 def generate_test_data(path):
@@ -142,13 +142,13 @@ def generate_test_data(path):
   # save test images
   path_test = os.path.join(path, "test_images_png.pkl")
   with tf.io.gfile.GFile(path_test, "wb") as test_img_file:
-    pickle.dump(test_array, test_img_file, pickle.HIGHEST_PROTOCOL)
+    pickle.dump(test_array, test_img_file, 2)
   test_labels = {"label_general": test_general_labels, "label_general_str": test_general_labels_str,
                   "label_specific": test_specific_labels, "label_specific_str": test_specific_labels_str}
   # save test labels
   path_test = os.path.join(path, "test_labels.pkl")
   with tf.io.gfile.GFile(path_test, "wb") as test_label_file:
-    pickle.dump(test_labels, test_label_file, pickle.HIGHEST_PROTOCOL)
+    pickle.dump(test_labels, test_label_file, 2)
 
 
 if __name__ == "__main__":
