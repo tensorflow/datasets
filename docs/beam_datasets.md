@@ -58,6 +58,9 @@ Some additional considerations:
     object in your functions which has been declared outside of the function,
     you may encounter `pickle` errors or unexpected behavior. The fix is
     typically to avoid mutating closed-over objects.
+*   Avoid using methods on `DatasetBuilder` in the Beam pipeline because
+    Beam will try to pickle the class, including the `DatasetInfo` protocol
+    buffer, which will fail.
 
 ## Example
 
