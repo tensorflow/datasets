@@ -66,16 +66,16 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       DiabeticRetinopathyDetectionConfig(
           name="original",
-          version="0.2.0",
+          version="2.0.0",
           description="Images at their original resolution and quality."),
       DiabeticRetinopathyDetectionConfig(
           name="1M",
-          version="0.2.0",
+          version="2.0.0",
           description="Images have roughly 1,000,000 pixels, at 72 quality.",
           target_pixels=1000000),
       DiabeticRetinopathyDetectionConfig(
           name="250K",
-          version="0.2.0",
+          version="2.0.0",
           description="Images have roughly 250,000 pixels, at 72 quality.",
           target_pixels=250000),
   ]
