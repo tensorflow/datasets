@@ -58,16 +58,14 @@ class Malaria(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
         """Define Splits"""
-        path = dl_manager.download_and_extract({
-            'train':_URL
-        })
+        path = dl_manager.download_and_extract(_URL)
 
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
                 num_shards=10,
                 gen_kwargs={
-                    "data_dir_path": os.path.join(path['train'],"cell_images"),
+                    "data_dir_path": os.path.join(path,"cell_images"),
                 },
             ),
         ]
