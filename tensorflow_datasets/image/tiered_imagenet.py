@@ -130,11 +130,11 @@ class TieredImagenet(tfds.core.GeneratorBasedBuilder):
     # read data
     with tf.io.gfile.GFile(labels_path, "rb") as labels_file:
       try:
-        data = pickle.load(labels_file)
+        data = pickle.load(labels_file,encoding='bytes')
       except UnicodeDecodeError as e:
-        data = pickle.load(labels_file, encoding='latin1')
+        data = pickle.load(labels_file)
       except Exception as e:
-        logging.error("Unable to load the images ", images_path, ":", e)
+        logging.error("Unable to load the labels ", labels_path, ":", e)
         raise
       list_label_specific = data["label_specific"]
       logging.info("Labels list %s", list_label_specific)
