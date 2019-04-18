@@ -93,7 +93,7 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=20,
+            num_shards=30,
             gen_kwargs={"file_paths": os.path.join(extract_dir, "train")},
         ),
         tfds.core.SplitGenerator(
@@ -172,7 +172,8 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
 
   @staticmethod
   def _stroke_3_to_stroke_5(sketch_3):
-    sketch_5 = []
+    start_vector = [0, 0, 1, 0, 0]  # Start Stroke
+    sketch_5 = [start_vector]
     seq_len = len(sketch_3)
     for i, stroke_3 in enumerate(sketch_3, start=1):
       if i == seq_len:
