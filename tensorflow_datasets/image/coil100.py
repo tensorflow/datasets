@@ -78,7 +78,7 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
       for file_name in tf.io.gfile.listdir(data_dir_path):
         if fnmatch.fnmatch(file_name,'*.png'):
           image = os.path.join(data_dir_path,file_name)
-          label = file_name.split("_")[1]
+          label = file_name.split("_")[1].split(".")[0]
           object_id = file_name.split("_")[0]
           yield{
             "image":image,
