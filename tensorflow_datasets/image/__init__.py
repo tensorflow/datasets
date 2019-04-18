@@ -23,6 +23,7 @@ from tensorflow_datasets.image.chexpert import Chexpert
 from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.coco import Coco2014
+from tensorflow_datasets.image.coil100 import Coil100
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLarge
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
