@@ -13,25 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for multinli dataset module."""
+"""Tests for para_crawl dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets import testing
-from tensorflow_datasets.text import multi_nli
+import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets.translate import para_crawl
 
 
-class MultiNLITest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = multi_nli.MultiNLI
+class ParacrawlTest(tfds_test.DatasetBuilderTestCase):
 
+  DATASET_CLASS = para_crawl.ParaCrawl
+  BUILDER_CONFIG_NAMES_TO_TEST = ["enhu_plain_text"]
   SPLITS = {
-      "train": 3,
-      "validation_matched": 2,
-      "validation_mismatched": 1,
+      "train": 5,
   }
+  DL_EXTRACT_RESULT = {"data_file": "en-hu.bicleaner07.txt"}
 
 
 if __name__ == "__main__":
-  testing.test_main()
+  tfds_test.test_main()

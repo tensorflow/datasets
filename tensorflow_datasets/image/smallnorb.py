@@ -84,7 +84,7 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
+    """Returns splits."""
     filenames = {
         "training_dat": _TRAINING_URL_TEMPLATE.format(type="dat"),
         "training_cat": _TRAINING_URL_TEMPLATE.format(type="cat"),

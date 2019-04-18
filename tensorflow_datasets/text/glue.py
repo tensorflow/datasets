@@ -56,9 +56,6 @@ class GlueConfig(tfds.core.BuilderConfig):
                citation,
                url,
                label_classes=None,
-               dev_file="dev.tsv",
-               test_file="test.tsv",
-               train_file="train.tsv",
                train_shards=1,
                process_label=lambda x: x,
                **kwargs):
@@ -77,9 +74,6 @@ class GlueConfig(tfds.core.BuilderConfig):
       label_classes: `list[string]`, the list of classes if the label is
         categorical. If not provided, then the label will be of type
         `tf.float32`.
-      dev_file: `string`, name of the dev file
-      test_file: `string`, name of the test file
-      train_file: `string`, name of the trains file
       train_shards: `int`, number of shards for the train data set
       process_label: `Function[string, any]`, function taking in the raw value
         of the label and processing it to the form required by the label feature
@@ -93,9 +87,6 @@ class GlueConfig(tfds.core.BuilderConfig):
     self.data_dir = data_dir
     self.citation = citation
     self.url = url
-    self.dev_file = dev_file
-    self.test_file = test_file
-    self.train_file = train_file
     self.train_shards = train_shards
     self.process_label = process_label
 
@@ -220,7 +211,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           url="http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark",
           process_label=np.float32),
       GlueConfig(
-          name="mnli_matched",
+          name="mnli",
           version="0.0.1",
           description="""\
             The Multi-Genre Natural Language Inference Corpusn is a crowdsourced
@@ -229,8 +220,8 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             (entailment), contradicts the hypothesis (contradiction), or neither (neutral). The premise sentences are
             gathered from ten different sources, including transcribed speech, fiction, and government reports.
             We use the standard test set, for which we obtained private labels from the authors, and evaluate
-            on both the matched (in-domain) section. We also use and recommend the SNLI corpus as 550k
-            examples of auxiliary training data.""",
+            on both the matched (in-domain) and mismatched (cross-domain) section. We also use and recommend
+            the SNLI corpus as 550k examples of auxiliary training data.""",
           text_features={
               "premise": "sentence1",
               "hypothesis": "sentence2",
@@ -264,56 +255,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               year={2015}
             }""",
           url="http://www.nyu.edu/projects/bowman/multinli/",
-          dev_file="dev_matched.tsv",
-          test_file="test_matched.tsv",
-          train_shards=2),
-      GlueConfig(
-          name="mnli_mismatched",
-          version="0.0.1",
-          description="""\
-            The Multi-Genre Natural Language Inference Corpusn is a crowdsourced
-            collection of sentence pairs with textual entailment annotations. Given a premise sentence
-            and a hypothesis sentence, the task is to predict whether the premise entails the hypothesis
-            (entailment), contradicts the hypothesis (contradiction), or neither (neutral). The premise sentences are
-            gathered from ten different sources, including transcribed speech, fiction, and government reports.
-            We use the standard test set, for which we obtained private labels from the authors, and evaluate
-            on both the mismatched (cross-domain) section. We also use and recommend the SNLI corpus as 550k
-            examples of auxiliary training data.""",
-          text_features={
-              "premise": "sentence1",
-              "hypothesis": "sentence2",
-          },
-          label_classes=["entailment", "neutral", "contradiction"],
-          label_column="gold_label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FMNLI.zip?alt=media&token=50329ea1-e339-40e2-809c-10c40afff3ce",
-          data_dir="MNLI",
-          citation="""\
-            @InProceedings{N18-1101,
-              author = "Williams, Adina
-                        and Nangia, Nikita
-                        and Bowman, Samuel",
-              title = "A Broad-Coverage Challenge Corpus for
-                       Sentence Understanding through Inference",
-              booktitle = "Proceedings of the 2018 Conference of
-                           the North American Chapter of the
-                           Association for Computational Linguistics:
-                           Human Language Technologies, Volume 1 (Long
-                           Papers)",
-              year = "2018",
-              publisher = "Association for Computational Linguistics",
-              pages = "1112--1122",
-              location = "New Orleans, Louisiana",
-              url = "http://aclweb.org/anthology/N18-1101"
-            }
-            @article{bowman2015large,
-              title={A large annotated corpus for learning natural language inference},
-              author={Bowman, Samuel R and Angeli, Gabor and Potts, Christopher and Manning, Christopher D},
-              journal={arXiv preprint arXiv:1508.05326},
-              year={2015}
-            }""",
-          url="http://www.nyu.edu/projects/bowman/multinli/",
-          dev_file="dev_mismatched.tsv",
-          test_file="test_mismatched.tsv",
           train_shards=2),
       GlueConfig(
           name="qnli",
@@ -467,42 +408,70 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       dl_dir = dl_manager.download_and_extract(self.builder_config.data_url)
       data_dir = os.path.join(dl_dir, self.builder_config.data_dir)
       mrpc_files = None
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            num_shards=self.builder_config.train_shards,
-            gen_kwargs={
-                "data_file":
-                    os.path.join(data_dir or "",
-                                 self.builder_config.train_file),
-                "split":
-                    "train",
-                "mrpc_files":
-                    mrpc_files,
-            }),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            num_shards=1,
-            gen_kwargs={
-                "data_file":
-                    os.path.join(data_dir or "", self.builder_config.dev_file),
-                "split":
-                    "dev",
-                "mrpc_files":
-                    mrpc_files,
-            }),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            num_shards=1,
-            gen_kwargs={
-                "data_file":
-                    os.path.join(data_dir or "", self.builder_config.test_file),
-                "split":
-                    "test",
-                "mrpc_files":
-                    mrpc_files,
-            }),
-    ]
+    train_split = tfds.core.SplitGenerator(
+        name=tfds.Split.TRAIN,
+        num_shards=self.builder_config.train_shards,
+        gen_kwargs={
+            "data_file": os.path.join(data_dir or "", "train.tsv"),
+            "split": "train",
+            "mrpc_files": mrpc_files,
+        })
+    if self.builder_config.name == "mnli":
+      return [
+          train_split,
+          tfds.core.SplitGenerator(
+              name="validation_matched",
+              num_shards=1,
+              gen_kwargs={
+                  "data_file": os.path.join(data_dir, "dev_matched.tsv"),
+                  "split": "dev",
+                  "mrpc_files": None,
+              }),
+          tfds.core.SplitGenerator(
+              name="validation_mismatched",
+              num_shards=1,
+              gen_kwargs={
+                  "data_file": os.path.join(data_dir, "dev_mismatched.tsv"),
+                  "split": "dev",
+                  "mrpc_files": None,
+              }),
+          tfds.core.SplitGenerator(
+              name="test_matched",
+              num_shards=1,
+              gen_kwargs={
+                  "data_file": os.path.join(data_dir, "test_matched.tsv"),
+                  "split": "test",
+                  "mrpc_files": None,
+              }),
+          tfds.core.SplitGenerator(
+              name="test_mismatched",
+              num_shards=1,
+              gen_kwargs={
+                  "data_file": os.path.join(data_dir, "test_mismatched.tsv"),
+                  "split": "test",
+                  "mrpc_files": None,
+              }),
+      ]
+    else:
+      return [
+          train_split,
+          tfds.core.SplitGenerator(
+              name=tfds.Split.VALIDATION,
+              num_shards=1,
+              gen_kwargs={
+                  "data_file": os.path.join(data_dir or "", "dev.tsv"),
+                  "split": "dev",
+                  "mrpc_files": mrpc_files,
+              }),
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TEST,
+              num_shards=1,
+              gen_kwargs={
+                  "data_file": os.path.join(data_dir or "", "test.tsv"),
+                  "split": "test",
+                  "mrpc_files": mrpc_files,
+              }),
+      ]
 
   def _generate_examples(self, data_file, split, mrpc_files):
     if self.builder_config.name == "mrpc":

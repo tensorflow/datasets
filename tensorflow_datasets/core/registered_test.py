@@ -100,6 +100,13 @@ class RegisteredTest(testing.TestCase):
       self.assertEqual(type(builder.kwargs[k]), type(v))
       self.assertEqual(builder.kwargs[k], v)
 
+  def test_builder_fullname(self):
+    fullname = "empty_dataset_builder/conf1-attr:1.0.1/k1=1,k2=2"
+    builder = registered.builder(fullname, data_dir="bar")
+    expected = {"k1": 1, "k2": 2, "version": "1.0.1",
+                "config": "conf1-attr", "data_dir": "bar"}
+    self.assertEqual(expected, builder.kwargs)
+
   def test_load(self):
     name = "empty_dataset_builder/k1=1"
     data_dir = "foo"
@@ -116,7 +123,7 @@ class RegisteredTest(testing.TestCase):
     self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
-    self.assertEqual(dict(data_dir=data_dir, k1=1, config=None), builder.kwargs)
+    self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
     builder = registered.load(
         name, split=splits.Split.TRAIN, data_dir=data_dir,
@@ -137,8 +144,8 @@ class RegisteredTest(testing.TestCase):
     # EmptyDatasetBuilder returns self from as_dataset
     builder = registered.load(name=name, split=splits.Split.TEST,
                               data_dir=data_dir)
-    self.assertEqual(dict(data_dir=data_dir, k1=1, config="bar"),
-                     builder.kwargs)
+    expected = dict(data_dir=data_dir, k1=1, config="bar")
+    self.assertEqual(expected, builder.kwargs)
 
     name = "empty_dataset_builder/bar"
     builder = registered.load(name=name, split=splits.Split.TEST,

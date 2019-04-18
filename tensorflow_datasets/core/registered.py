@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import abc
 import inspect
+import re
 
 from absl import flags
 from absl import logging
@@ -53,12 +54,24 @@ _IN_DEVELOPMENT_REGISTRY = {}
 
 
 _NAME_STR_ERR = """\
-Parsing builder name string `{}` failed.
-The builder name string must be in one of the following formats:
-  * "dataset_name"
-  * "dataset_name/config_name"
-  * "dataset_name/kwarg1=val1,kwarg2=val2"
-  * "dataset_name/config_name/kwarg1=val1,kwarg2=val2"
+Parsing builder name string {} failed.
+The builder name string must be of the following format:
+  dataset_name[/config_name][:version][/kwargs]
+
+  Where:
+
+    * dataset_name and config_name are string following python variable naming.
+    * version is of the form x.y.z where {{x,y,z}} can be any digit or *.
+    * kwargs is a comma list separated of arguments and values to pass to
+      builder.
+
+  Examples:
+    my_dataset
+    my_dataset:1.2.*
+    my_dataset/config1
+    my_dataset/config1:1.*.*
+    my_dataset/config1/arg1=val1,arg2=val2
+    my_dataset/config1:1.2.3/right=True,foo=bar,rate=1.2
 """
 
 _DATASET_NOT_FOUND_ERR = """\
@@ -273,40 +286,33 @@ def load(name,
   return ds
 
 
+_VERSION_RE = r""
+
+_NAME_REG = re.compile(
+    r"^"
+    r"(?P<dataset_name>\w+)"
+    r"(/(?P<config>[\w\-\.]+))?"
+    r"(:(?P<version>(\d+|\*)(\.(\d+|\*)){2}))?"
+    r"(/(?P<kwargs>(\w+=\w+)(,\w+=[^,]+)*))?"
+    r"$")
+
+
 def _dataset_name_and_kwargs_from_name_str(name_str):
   """Extract kwargs from name str."""
-  num_slashes = name_str.count("/")
-  has_kwargs = "," in name_str or "=" in name_str
-
+  res = _NAME_REG.match(name_str)
+  if not res:
+    raise ValueError(_NAME_STR_ERR.format(name_str))
+  name = res.group("dataset_name")
+  kwargs = _kwargs_str_to_kwargs(res.group("kwargs"))
   try:
-    if not num_slashes:
-      # 1. dataset_name
-      if has_kwargs:
-        raise ValueError(_NAME_STR_ERR.format(name_str))
-      return name_str, {}
-
-    name_splits = name_str.split("/")
-    if has_kwargs:
-      if num_slashes == 1:
-        # 2. dataset_name/kwargs
-        dataset_name, kwargs_str = name_splits
-        config = None
-      else:
-        if num_slashes > 2:
-          raise ValueError(_NAME_STR_ERR.format(name_str))
-        assert num_slashes == 2
-        # 3. dataset_name/config_name/kwargs
-        dataset_name, config, kwargs_str = name_splits
-    else:
-      # 4. dataset_name/config_name
-      dataset_name, config = name_splits
-      kwargs_str = ""
-
-    kwargs = _kwargs_str_to_kwargs(kwargs_str)
-    if "config" in kwargs and config:
-      raise ValueError("Cannot pass config twice. Got %s" % name_str)
-    kwargs["config"] = config
-    return dataset_name, kwargs
+    for attr in ["config", "version"]:
+      val = res.group(attr)
+      if val is None:
+        continue
+      if attr in kwargs:
+        raise ValueError("Dataset %s: cannot pass %s twice." % (name, attr))
+      kwargs[attr] = val
+    return name, kwargs
   except:
     logging.error(_NAME_STR_ERR.format(name_str))   # pylint: disable=logging-format-interpolation
     raise

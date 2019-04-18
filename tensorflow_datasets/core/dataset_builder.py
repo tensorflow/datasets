@@ -140,7 +140,7 @@ class DatasetBuilder(object):
 
 
   @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None, config=None):
+  def __init__(self, data_dir=None, config=None, version=None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -151,16 +151,23 @@ class DatasetBuilder(object):
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
+      version: `str`. Optional version at which to load the dataset. An error is
+        raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
+        Note that only the currently defined version can be loaded.
     """
     self._builder_config = self._create_builder_config(config)
     # Extract code version (VERSION or config)
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
-          "DatasetBuilder {} does not have defined version. Please add a "
+          "DatasetBuilder {} does not have a defined version. Please add a "
           "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
               self.name))
     self._version = utils.Version(
         self._builder_config and self._builder_config.version or self.VERSION)
+    if version and not self._version.match(version):
+      msg = "Dataset {} cannot be loaded at version {}, only {}.".format(
+          self.name, version, self._version)
+      raise AssertionError(msg)
     self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
     self._data_dir = self._build_data_dir()
     if tf.io.gfile.exists(self._data_dir):

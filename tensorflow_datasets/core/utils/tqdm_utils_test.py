@@ -13,25 +13,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for multinli dataset module."""
+"""Tests for tensorflow_datasets.core.utils.tqdm_utils."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import multi_nli
+from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core.utils import tqdm_utils
 
 
-class MultiNLITest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = multi_nli.MultiNLI
+class TqdmUtilsTest(testing.TestCase):
 
-  SPLITS = {
-      "train": 3,
-      "validation_matched": 2,
-      "validation_mismatched": 1,
-  }
+  def test_disable_tqdm(self):
+    tqdm_utils.disable_progress_bar()
+
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+      builder.download_and_prepare()
+
+      # Check the data has been generated
+      train_ds, test_ds = builder.as_dataset(split=['train', 'test'])
+      train_ds, test_ds = dataset_utils.as_numpy((train_ds, test_ds))
+      self.assertEqual(20, len(list(train_ds)))
+      self.assertEqual(20, len(list(test_ds)))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   testing.test_main()
