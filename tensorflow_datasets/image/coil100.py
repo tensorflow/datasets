@@ -37,6 +37,8 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
 
+  UNSTABLE = "Unable to download on secured networks(eg. University Network)"
+
   def _info(self):
     """Define Dataset Info"""
 
