@@ -264,6 +264,45 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
+  def test_transform(self):
+
+    class OneHot(tfds.transform.MapAbc):
+
+      @property
+      def dtype(self):
+        return tf.float32
+
+      def _apply(self, example):
+        return tf.one_hot(example, self.feature.num_classes)
+
+    self.assertFeature(
+        feature=tfds.features.SequenceDict({
+            'label': tfds.features.ClassLabel(names=['left', 'right']),
+        }),
+        shape={'label': (None,)},
+        dtype={'label': tf.int64},
+        tests=[
+            testing.FeatureExpectationItem(
+                value={'label': [0, 0, 1]},
+                expected={'label': [[1., 0.], [1., 0.], [0., 1.]]},
+                shape={'label': (3, 2)},
+                dtype={'label': tf.float32},
+                transform={'label': OneHot()},
+            ),
+            # Test with a list
+            testing.FeatureExpectationItem(
+                value={'label': [0, 0, 1]},
+                expected={'label': [[0., 1.], [0., 1.], [0., 1.]]},
+                shape={'label': (3, 2)},
+                dtype={'label': tf.float32},
+                transform={'label': [
+                    tfds.transform.Map(lambda x: 1),
+                    OneHot(),
+                ]},
+            ),
+        ],
+    )
+
   def test_getattr(self):
     feature = tfds.features.Sequence(
         tfds.features.ClassLabel(names=['left', 'right']),
