@@ -90,20 +90,19 @@ class _Downloader(object):
         self._pbar_dl_size = pbar_dl_size
         yield
 
-  def download(self, url_info, destination_path):
+  def download(self, url, destination_path):
     """Download url to given path.
 
     Returns Promise -> sha256 of downloaded file.
 
     Args:
-      url_info: `UrlInfo`, resource to download.
+      url: address of resource to download.
       destination_path: `str`, path to directory where to download the resource.
 
     Returns:
       Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
     self._pbar_url.update_total(1)
-    url = url_info.url
     future = self._executor.submit(self._sync_download, url, destination_path)
     return promise.Promise.resolve(future)
 
@@ -142,20 +141,10 @@ class _Downloader(object):
         out_path, checksum_cls=self._checksumer)
     return hexdigest, size
 
-  def _sync_ftp_download(self, url, destination_path):
-    out_path = os.path.join(destination_path, download_util.get_file_name(url))
-    urllib.request.urlretrieve(url, out_path)
-    hexdigest, size = utils.read_checksum_digest(
-        out_path, checksum_cls=self._checksumer)
-    return hexdigest, size
-
   def _sync_download(self, url, destination_path):
     """Synchronous version of `download` method."""
     if kaggle.KaggleFile.is_kaggle_url(url):
       return self._sync_kaggle_download(url, destination_path)
-
-    if url.startswith('ftp'):
-      return self._sync_ftp_download(url, destination_path)
 
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
@@ -168,10 +157,15 @@ class _Downloader(object):
     session = requests.Session()
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
-    response = session.get(url, stream=True)
-    if response.status_code != 200:
-      raise DownloadError(
-          'Failed to get url %s. HTTP code: %d.' % (url, response.status_code))
+    use_urllib = url.startswith('ftp')
+    if use_urllib:
+      request = urllib.request.Request(url)
+      response = urllib.request.urlopen(request)
+    else:
+      response = session.get(url, stream=True)
+      if response.status_code != 200:
+        raise DownloadError('Failed to get url %s. HTTP code: %d.' %
+                            (url, response.status_code))
     fname = _get_filename(response)
     path = os.path.join(destination_path, fname)
     size = 0
@@ -182,7 +176,12 @@ class _Downloader(object):
         int(response.headers.get('Content-length', 0)) // unit_mb)
     with tf.io.gfile.GFile(path, 'wb') as file_:
       checksum = self._checksumer()
-      for block in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
+      if use_urllib:
+        iterator = iter(lambda: response.read(io.DEFAULT_BUFFER_SIZE), b'')
+      else:
+        iterator = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
+
+      for block in iterator:
         size += len(block)
 
         # Update the progress bar

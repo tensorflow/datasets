@@ -20,6 +20,8 @@ toc:
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds/core
+    - title: BeamBasedBuilder
+      path: /datasets/api_docs/python/tfds/core/BeamBasedBuilder
     - title: BuilderConfig
       path: /datasets/api_docs/python/tfds/core/BuilderConfig
     - title: DatasetBuilder

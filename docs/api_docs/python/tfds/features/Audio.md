@@ -23,6 +23,8 @@ Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 Defined in [`core/features/audio_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/audio_feature.py).
 
+<!-- Placeholder for "Used in" -->
+
 `FeatureConnector` for audio, encoded as raw integer wave form.
 
 <h2 id="__init__"><code>__init__</code></h2>
@@ -139,7 +141,7 @@ will restore the feature metadata from the saved file.
 
 * <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
     `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
+* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -173,7 +175,7 @@ overwrite the function.
 
 * <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
     `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
+* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
 
 
 

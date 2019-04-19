@@ -135,6 +135,7 @@
 <meta itemprop="property" content="BUILDER_CONFIG_NAMES_TO_TEST"/>
 <meta itemprop="property" content="DATASET_CLASS"/>
 <meta itemprop="property" content="DL_EXTRACT_RESULT"/>
+<meta itemprop="property" content="EXAMPLE_DIR"/>
 <meta itemprop="property" content="INTERNAL_DATASET"/>
 <meta itemprop="property" content="MOCK_MONARCH"/>
 <meta itemprop="property" content="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"/>
@@ -154,6 +155,8 @@
 
 Defined in [`testing/dataset_builder_testing.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py).
 
+<!-- Placeholder for "Used in" -->
+
 Inherit this class to test your DatasetBuilder class.
 
 You must set the following class attributes:
@@ -167,6 +170,9 @@ You may set the following class attributes:
     `download_and_extract` method. The values should be the path of files
     present in the `fake_examples` directory, relative to that directory.
     If not specified, path to `fake_examples` will always be returned.
+  EXAMPLE_DIR: `str`, the base directory in in which fake examples are
+    contained. Optional; defaults to
+    tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
   OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
     splits (e.g. a "example" split containing pictures from other splits).
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
@@ -1012,8 +1018,8 @@ using assertSameStructure.
 
 #### Args:
 
-* <b>`first`</b>: A string contining JSON to decode and compare to second.
-* <b>`second`</b>: A string contining JSON to decode and compare to first.
+* <b>`first`</b>: A string containing JSON to decode and compare to second.
+* <b>`second`</b>: A string containing JSON to decode and compare to first.
 * <b>`msg`</b>: Additional text to include in the failure message.
 
 <h3 id="assertLen"><code>assertLen</code></h3>
@@ -1161,7 +1167,7 @@ assertNotAllClose(
 )
 ```
 
-Assert that two numpy arrays, or or Tensors, do not have near values.
+Assert that two numpy arrays, or Tensors, do not have near values.
 
 #### Args:
 
@@ -2510,6 +2516,8 @@ Use `self.session()` or `self.cached_session()` instead.
 <h3 id="DATASET_CLASS"><code>DATASET_CLASS</code></h3>
 
 <h3 id="DL_EXTRACT_RESULT"><code>DL_EXTRACT_RESULT</code></h3>
+
+<h3 id="EXAMPLE_DIR"><code>EXAMPLE_DIR</code></h3>
 
 <h3 id="INTERNAL_DATASET"><code>INTERNAL_DATASET</code></h3>
 

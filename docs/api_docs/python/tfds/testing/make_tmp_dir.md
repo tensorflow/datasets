@@ -13,4 +13,6 @@ tfds.testing.make_tmp_dir(dirname=None)
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
+<!-- Placeholder for "Used in" -->
+
 Make a temporary directory.

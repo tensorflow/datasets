@@ -2,11 +2,13 @@
 <meta itemprop="name" content="tfds.core.GeneratorBasedBuilder" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="builder_config"/>
+<meta itemprop="property" content="data_dir"/>
 <meta itemprop="property" content="info"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
+<meta itemprop="property" content="GOOGLE_DISABLED"/>
 <meta itemprop="property" content="IN_DEVELOPMENT"/>
 <meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
@@ -17,11 +19,13 @@
 
 ## Class `GeneratorBasedBuilder`
 
-Inherits From: [`DatasetBuilder`](../../tfds/core/DatasetBuilder.md)
+
 
 
 
 Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
+
+<!-- Placeholder for "Used in" -->
 
 Base class for datasets with data generation based on dict generators.
 
@@ -31,9 +35,6 @@ implement generators of feature dictionaries across the dataset splits
 (`_split_generators`) and to specify a file type
 (`_file_format_adapter`). See the method docstrings for details.
 
-Minimally, subclasses must override `_split_generators` and
-`_file_format_adapter`.
-
 `FileFormatAdapter`s are defined in
 `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
 feature dictionaries yielded by example generators. See the class docstrings.
@@ -41,14 +42,23 @@ feature dictionaries yielded by example generators. See the class docstrings.
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(**kwargs)
+__init__(
+    data_dir=None,
+    config=None
+)
 ```
 
-Builder constructor.
+Constructs a DatasetBuilder.
+
+Callers must pass arguments as keyword arguments.
 
 #### Args:
 
-* <b>`**kwargs`</b>: Constructor kwargs forwarded to DatasetBuilder
+* <b>`data_dir`</b>: `str`, directory to read/write data. Defaults to
+    "~/tensorflow_datasets".
+* <b>`config`</b>: <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> or `str` name, optional configuration
+    for the dataset that affects the data generated on disk. Different
+    `builder_config`s will have their own subdirectories and versions.
 
 
 
@@ -57,6 +67,10 @@ Builder constructor.
 <h3 id="builder_config"><code>builder_config</code></h3>
 
 <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> for this builder.
+
+<h3 id="data_dir"><code>data_dir</code></h3>
+
+
 
 <h3 id="info"><code>info</code></h3>
 
@@ -128,10 +142,17 @@ Downloads and prepares dataset for reading.
     downloading and preparing dataset.
 
 
+#### Raises:
+
+* <b>`IOError`</b>: if there is not enough disk space available.
+
+
 
 ## Class Members
 
 <h3 id="BUILDER_CONFIGS"><code>BUILDER_CONFIGS</code></h3>
+
+<h3 id="GOOGLE_DISABLED"><code>GOOGLE_DISABLED</code></h3>
 
 <h3 id="IN_DEVELOPMENT"><code>IN_DEVELOPMENT</code></h3>
 

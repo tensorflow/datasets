@@ -25,6 +25,8 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 Defined in [`core/features/image_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py).
 
+<!-- Placeholder for "Used in" -->
+
 `FeatureConnector` for images.
 
 Input: The image connector accepts as input:
@@ -38,7 +40,7 @@ Output:
 
 Example:
   * In the DatasetInfo object:
-    features=features.FeatureDict({
+    features=features.FeaturesDict({
         'input': features.Image(),
         'target': features.Image(shape=(None, None, 1),
                                  encoding_format='png'),

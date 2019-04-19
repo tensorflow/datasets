@@ -6,6 +6,7 @@
 *  <a href="./tfds/as_numpy.md"><code>tfds.as_numpy</code></a>
 *  <a href="./tfds/builder.md"><code>tfds.builder</code></a>
 *  <a href="./tfds/core.md"><code>tfds.core</code></a>
+*  <a href="./tfds/core/BeamBasedBuilder.md"><code>tfds.core.BeamBasedBuilder</code></a>
 *  <a href="./tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
 *  <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
 *  <a href="./tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>

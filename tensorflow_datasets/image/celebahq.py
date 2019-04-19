@@ -105,6 +105,7 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     image_tar_file = os.path.join(dl_manager.manual_dir,
                                   self.builder_config.file_name)
     if not tf.io.gfile.exists(image_tar_file):

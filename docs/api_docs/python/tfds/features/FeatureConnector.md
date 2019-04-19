@@ -22,6 +22,8 @@
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
+<!-- Placeholder for "Used in" -->
+
 Abstract base class for feature types.
 
 This class provides an interface between the way the information is stored
@@ -217,7 +219,7 @@ will restore the feature metadata from the saved file.
 
 * <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
     `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
+* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -251,7 +253,7 @@ overwrite the function.
 
 * <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
     `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
+* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
 
 
 

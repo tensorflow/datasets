@@ -13,6 +13,8 @@ tfds.units.size_str(size_in_bytes)
 
 Defined in [`core/units.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py).
 
+<!-- Placeholder for "Used in" -->
+
 Returns a human readable size string.
 
 If size_in_bytes is None, then returns "?? GiB".

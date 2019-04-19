@@ -21,6 +21,8 @@ Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 Defined in [`core/features/text/subword_text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py).
 
+<!-- Placeholder for "Used in" -->
+
 Invertible `TextEncoder` using word pieces with a byte-level fallback.
 
 Encoding is fully invertible because all out-of-vocab wordpieces are

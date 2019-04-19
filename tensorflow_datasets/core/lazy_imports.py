@@ -40,9 +40,14 @@ class LazyImporter(object):
   """Lazy importer for heavy dependencies.
 
   Some datasets require heavy dependencies for data generation. To allow for
-  the default installation to remain lean, those heavy depdencies are
+  the default installation to remain lean, those heavy dependencies are
   lazily imported here.
   """
+
+  @utils.classproperty
+  @classmethod
+  def apache_beam(cls):
+    return _try_import("apache_beam")
 
   @utils.classproperty
   @classmethod
@@ -61,6 +66,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def mwparserfromhell(cls):
+    return _try_import("mwparserfromhell")
+
+  @utils.classproperty
+  @classmethod
   def PIL_Image(cls):   # pylint: disable=invalid-name
     # TiffImagePlugin need to be activated explicitly on some systems
     # https://github.com/python-pillow/Pillow/blob/5.4.x/src/PIL/Image.py#L407
@@ -75,12 +85,16 @@ class LazyImporter(object):
   @utils.classproperty
   @classmethod
   def scipy(cls):
+    _try_import("scipy.io")
+    _try_import("scipy.ndimage")
     return _try_import("scipy")
 
   @utils.classproperty
   @classmethod
-  def scipy_io(cls):
-    return _try_import("scipy.io")
+  def skimage(cls):
+    _try_import("skimage.color")
+    _try_import("skimage.filters")
+    return _try_import("skimage")
 
   @utils.classproperty
   @classmethod

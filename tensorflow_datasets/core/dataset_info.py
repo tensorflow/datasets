@@ -39,11 +39,9 @@ import os
 import posixpath
 import pprint
 import tempfile
-from xml.etree import ElementTree
 
 from absl import logging
 import numpy as np
-import requests
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
@@ -51,20 +49,16 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
-from google.protobuf import json_format
+from tensorflow_datasets.core.proto import json_format
+from tensorflow_datasets.core.utils import gcs_utils
+
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
-
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
 
 LICENSE_FILENAME = "LICENSE"
-
-# GCS
-GCS_URL = "http://storage.googleapis.com/tfds-data"
-GCS_BUCKET = "gs://tfds-data"
-GCS_DATASET_INFO_PATH = "dataset_info"
 
 INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
@@ -238,15 +232,6 @@ class DatasetInfo(object):
     return self.as_proto.location.urls
 
   @property
-  def download_checksums(self):
-    return self.as_proto.download_checksums
-
-  @download_checksums.setter
-  def download_checksums(self, checksums):
-    self.as_proto.download_checksums.clear()
-    self.as_proto.download_checksums.update(checksums)
-
-  @property
   def initialized(self):
     """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized
@@ -386,14 +371,13 @@ class DatasetInfo(object):
     # In order to support Colab, we use the HTTP GCS API to access the metadata
     # files. They are copied locally and then loaded.
     tmp_dir = tempfile.mkdtemp("tfds")
-    data_files = gcs_dataset_files(self.full_name)
+    data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
-      logging.info("No GCS info files found for %s", self.full_name)
       return
     logging.info("Loading info from GCS for %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
-      download_gcs_file(fname, out_fname)
+      gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
   def __str__(self):
@@ -493,6 +477,11 @@ def get_dataset_feature_statistics(builder, split):
       feature_dtype = type(feature_np)
 
       if isinstance(feature_np, np.ndarray):
+        # If we have an empty array, then don't proceed further with computing
+        # statistics on it.
+        if feature_np.size == 0:
+          continue
+
         feature_dtype = feature_np.dtype.type
 
       feature_min, feature_max = None, None
@@ -575,35 +564,3 @@ def read_from_json(json_filename):
   parsed_proto = json_format.Parse(dataset_info_json_str,
                                    dataset_info_pb2.DatasetInfo())
   return parsed_proto
-
-
-def download_gcs_file(path, out_fname=None):
-  """Download a file from GCS, optionally to a file."""
-  url = "/".join([GCS_URL, path])
-  stream = bool(out_fname)
-  resp = requests.get(url, stream=stream)
-  if not resp.ok:
-    raise ValueError("GCS bucket inaccessible")
-  if out_fname:
-    with tf.io.gfile.GFile(out_fname, "wb") as f:
-      for chunk in resp.iter_content(1024):
-        f.write(chunk)
-  else:
-    return resp.content
-
-
-@utils.memoize()
-def gcs_files():
-  top_level_xml_str = download_gcs_file("")
-  xml_root = ElementTree.fromstring(top_level_xml_str)
-  filenames = [el[0].text for el in xml_root if el.tag.endswith("Contents")]
-  return filenames
-
-
-def gcs_dataset_files(dataset_dir):
-  """Return paths to GCS files in the given dataset directory."""
-  prefix = posixpath.join(GCS_DATASET_INFO_PATH, dataset_dir, "")
-  # Filter for this dataset
-  filenames = [el for el in gcs_files()
-               if el.startswith(prefix) and len(el) > len(prefix)]
-  return filenames

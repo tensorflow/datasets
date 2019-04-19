@@ -1,0 +1,30 @@
+<annotation>
+<size>
+<width>13</width>
+<height>10</height>
+</size>
+<object>
+  <name>cat</name>
+  <pose>frontal</pose>
+  <truncated>1</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+  <xmin>1</xmin>
+  <ymin>1</ymin>
+  <xmax>7</xmax>
+  <ymax>5</ymax>
+  </bndbox>
+</object>
+<object>
+  <name>cow</name>
+  <pose>right</pose>
+  <truncated>0</truncated>
+  <difficult>1</difficult>
+  <bndbox>
+  <xmin>2</xmin>
+  <ymin>0</ymin>
+  <xmax>8</xmax>
+  <ymax>7</ymax>
+  </bndbox>
+</object>
+</annotation>

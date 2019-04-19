@@ -29,6 +29,8 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
+<!-- Placeholder for "Used in" -->
+
 Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
 The encode/decode method of the spec feature will recursively encode/decode
@@ -43,7 +45,7 @@ For DatasetInfo:
 ```
 features = tfds.features.FeaturesDict({
     'input': tfds.features.Image(),
-    'target': tf.int32,
+    'output': tf.int32,
 })
 ```
 
@@ -110,7 +112,7 @@ feature_dict (dict): Dictionary containing the feature connectors of a
 
 #### Raises:
 
-* <b>`ValueError`</b>: If one of the given features is not recognised
+* <b>`ValueError`</b>: If one of the given features is not recognized
 
 
 

@@ -5,6 +5,7 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="dataset_from_filename"/>
 <meta itemprop="property" content="write_from_generator"/>
+<meta itemprop="property" content="write_from_pcollection"/>
 </div>
 
 # tfds.file_adapter.TFRecordExampleAdapter
@@ -16,6 +17,8 @@ Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.m
 
 
 Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
+
+<!-- Placeholder for "Used in" -->
 
 Writes/Reads serialized Examples protos to/from TFRecord files.
 
@@ -32,12 +35,12 @@ Constraints on generators:
 __init__(example_reading_spec)
 ```
 
-Construcs a TFRecordExampleAdapter.
+Constructs a TFRecordExampleAdapter.
 
 #### Args:
 
-example_reading_spec (dict): feature name to tf.FixedLenFeature or
-  tf.VarLenFeature. Passed to tf.parse_single_example.
+* <b>`example_reading_spec`</b>: `dict`, feature name to tf.FixedLenFeature or
+    tf.VarLenFeature. Passed to tf.io.parse_single_example.
 
 
 
@@ -65,6 +68,18 @@ dataset_from_filename(filename)
 write_from_generator(
     generator_fn,
     output_files
+)
+```
+
+
+
+<h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
+
+``` python
+write_from_pcollection(
+    pcollection,
+    file_path_prefix,
+    num_shards
 )
 ```
 

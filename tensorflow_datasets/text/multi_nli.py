@@ -78,7 +78,7 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       MultiNLIConfig(
           name="plain_text",
-          version="0.0.1",
+          version="0.0.2",
           description="Plain text",
       ),
   ]
@@ -95,8 +95,8 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
                 tfds.features.Text(
                     encoder_config=self.builder_config.text_encoder_config),
             "label":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+                tfds.features.ClassLabel(
+                    names=["entailment", "neutral", "contradiction"]),
         }),
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
@@ -107,7 +107,7 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
 
   def _vocab_text_gen(self, filepath):
     for ex in self._generate_examples(filepath):
-      yield " ".join([ex["premise"], ex["hypothesis"], ex["label"]])
+      yield " ".join([ex["premise"], ex["hypothesis"]])
 
   def _split_generators(self, dl_manager):
 
@@ -116,10 +116,10 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
         "multinli_1.0.zip")
     mnli_path = os.path.join(downloaded_dir, "multinli_1.0")
     train_path = os.path.join(mnli_path, "multinli_1.0_train.txt")
-    # Using dev matched as the default for eval. Can also switch this to
-    # dev_mismatched.tsv
-    validation_path = os.path.join(mnli_path, "multinli_1.0_dev_matched.txt")
-
+    matched_validation_path = os.path.join(mnli_path,
+                                           "multinli_1.0_dev_matched.txt")
+    mismatched_validation_path = os.path.join(
+        mnli_path, "multinli_1.0_dev_mismatched.txt")
     # Generate shared vocabulary
     # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
     self.info.features["premise"].maybe_build_from_corpus(
@@ -129,7 +129,6 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
     # package data.
     self.info.features["premise"].maybe_set_encoder(encoder)
     self.info.features["hypothesis"].maybe_set_encoder(encoder)
-    self.info.features["label"].maybe_set_encoder(encoder)
 
     return [
         tfds.core.SplitGenerator(
@@ -137,9 +136,13 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
             num_shards=10,
             gen_kwargs={"filepath": train_path}),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name="validation_matched",
             num_shards=1,
-            gen_kwargs={"filepath": validation_path}),
+            gen_kwargs={"filepath": matched_validation_path}),
+        tfds.core.SplitGenerator(
+            name="validation_mismatched",
+            num_shards=1,
+            gen_kwargs={"filepath": mismatched_validation_path}),
     ]
 
   def _generate_examples(self, filepath):
@@ -147,13 +150,19 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
 
     Args:
       filepath: a string
+
     Yields:
       dictionaries containing "premise", "hypothesis" and "label" strings
     """
     for idx, line in enumerate(tf.io.gfile.GFile(filepath, "rb")):
-      if idx == 0: continue  # skip header
+      if idx == 0:
+        continue  # skip header
       line = tf.compat.as_text(line.strip())
       split_line = line.split("\t")
+      # Examples not marked with a three out of five consensus are marked with
+      # "-" and should not be used in standard evaluations.
+      if split_line[0] == "-":
+        continue
       # Works for both splits even though dev has some extra human labels.
       yield {
           "premise": split_line[5],

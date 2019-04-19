@@ -5,11 +5,11 @@
 <meta itemprop="property" content="as_proto"/>
 <meta itemprop="property" content="citation"/>
 <meta itemprop="property" content="description"/>
-<meta itemprop="property" content="download_checksums"/>
 <meta itemprop="property" content="features"/>
 <meta itemprop="property" content="full_name"/>
 <meta itemprop="property" content="initialized"/>
 <meta itemprop="property" content="name"/>
+<meta itemprop="property" content="redistribution_info"/>
 <meta itemprop="property" content="size_in_bytes"/>
 <meta itemprop="property" content="splits"/>
 <meta itemprop="property" content="supervised_keys"/>
@@ -33,6 +33,8 @@
 
 Defined in [`core/dataset_info.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py).
 
+<!-- Placeholder for "Used in" -->
+
 Information about a dataset.
 
 `DatasetInfo` documents datasets, including its name, version, and features.
@@ -52,7 +54,8 @@ __init__(
     features=None,
     supervised_keys=None,
     urls=None,
-    citation=None
+    citation=None,
+    redistribution_info=None
 )
 ```
 
@@ -69,6 +72,10 @@ Constructs DatasetInfo.
     supervised learning, if applicable for the dataset.
 * <b>`urls`</b>: `list(str)`, optional, the homepage(s) for this dataset.
 * <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
+* <b>`redistribution_info`</b>: `dict`, optional, information needed for
+    redistribution, as specified in `dataset_info_pb2.RedistributionInfo`.
+    The content of the `license` subfield will automatically be written to a
+    LICENSE file stored with the dataset.
 
 
 
@@ -90,10 +97,6 @@ Constructs DatasetInfo.
 
 
 
-<h3 id="download_checksums"><code>download_checksums</code></h3>
-
-
-
 <h3 id="features"><code>features</code></h3>
 
 
@@ -107,6 +110,10 @@ Full canonical name: (<dataset_name>/<config_name>/<version>).
 Whether DatasetInfo has been fully initialized.
 
 <h3 id="name"><code>name</code></h3>
+
+
+
+<h3 id="redistribution_info"><code>redistribution_info</code></h3>
 
 
 

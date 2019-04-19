@@ -169,9 +169,8 @@ class SequenceDict(feature_lib.FeaturesDict):
     return sequence_elements
 
   def decode_example(self, tfexample_dict):
-    # TODO(epot): In eager mode, should investigate the use of
-    # tf.contrib.eager.defun to parallelize the calls and improve the pipeline
-    # performances, as recommended in tf.map_fn documentation
+    # Note: This all works fine in Eager mode (without tf.function) because
+    # tf.data pipelines are always executed in Graph mode.
 
     # Apply the decoding to each of the individual feature.
     return tf.map_fn(
@@ -236,11 +235,11 @@ class Sequence(feature_lib.FeatureConnector):
     return self._seq_feature.get_serialized_info()['inner']
 
   def encode_example(self, example_data):
-    """Wrapper arround SequenceDict."""
+    """Wrapper around SequenceDict."""
     return self._seq_feature.encode_example({'inner': example_data})['inner']
 
   def decode_example(self, tfexample_data):
-    """Wrapper arround SequenceDict."""
+    """Wrapper around SequenceDict."""
     return self._seq_feature.decode_example({'inner': tfexample_data})['inner']
 
   def _additional_repr_info(self):
