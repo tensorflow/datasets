@@ -1,3 +1,5 @@
+"""Fake Data Generator for Coil-100 Dataset"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -28,13 +30,13 @@ def create_images(label):
     tf.io.gfile.makedirs(images_dir)
   for l in label:
     image_name = 'obj1_{}.png'.format(l)
-    tf.io.gfile.copy(fake_data_utils.get_random_png(128,128),
+    tf.io.gfile.copy(fake_data_utils.get_random_png(128, 128),
                      os.path.join(images_dir, image_name),
                      overwrite=True)
 
 def main(argv):
   del argv
-  label = [x for x in range(0,25,5)]
+  label = [x for x in range(0, 25, 5)]
   create_images(label)
 
 
