@@ -14,6 +14,33 @@ import json
 NUM_OBJECT_CLASSES = 16
 NUM_PART_CLASSES = 50
 
+# labels for class i are range(LABEL_SPLITS[i], LABEL_SPLITS[i+1])
+LABEL_SPLITS = (
+  0,
+  4,
+  6,
+  8,
+  12,
+  16,
+  19,
+  22,
+  24,
+  28,
+  30,
+  36,
+  38,
+  41,
+  44,
+  47,
+  50,
+)
+
+def part_class_indices(object_class_index):
+  return range(
+    LABEL_SPLITS[object_class_index],
+    LABEL_SPLITS[object_class_index+1],
+  )
+
 _CITATION = """\
 @article{yi2017large,
   title={Large-scale 3d shape reconstruction and segmentation from shapenet core55},
