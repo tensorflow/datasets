@@ -143,7 +143,14 @@ class _Downloader(object):
 
   def _sync_download(self, url, destination_path):
     """Synchronous version of `download` method."""
+    proxies = {
+      "http": os.environ.get('TFDS_HTTP_PROXY', None),
+      "https": os.environ.get("TFDS_HTTPS_PROXY", None),
+      "ftp": os.environ.get("TFDS_FTP_PROXY", None)
+    }
     if kaggle.KaggleFile.is_kaggle_url(url):
+      if proxies["http"]:
+        os.environ["KAGGLE_PROXY"] = proxies["http"]
       return self._sync_kaggle_download(url, destination_path)
 
     try:
@@ -155,10 +162,15 @@ class _Downloader(object):
       pass
 
     session = requests.Session()
+    session.proxies = proxies
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
     use_urllib = url.startswith('ftp')
     if use_urllib:
+      if proxies["ftp"]:
+        proxy = urllib.request.ProxyHandler({"ftp": proxies["ftp"]})
+        opener = urllib.request.build_opener(proxy)
+        urllib.request.install_opener(opener)
       request = urllib.request.Request(url)
       response = urllib.request.urlopen(request)
     else:
