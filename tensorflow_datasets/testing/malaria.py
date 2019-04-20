@@ -1,3 +1,5 @@
+"""Fake Data Generator for Malaria Dataset"""
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -19,7 +21,7 @@ FLAGS = flags.FLAGS
 
 def _output_dir():
   return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'malaria','cell_images')
+                      'malaria', 'cell_images')
 
 
 def create_folder(fname):
@@ -28,7 +30,7 @@ def create_folder(fname):
     tf.io.gfile.makedirs(images_dir)
   for i in range(2):
     image_name = 'C189P150ThinF_IMG_20151203_141809_cell_{:03d}.png'.format(i)
-    tf.io.gfile.copy(fake_data_utils.get_random_png(300,300),
+    tf.io.gfile.copy(fake_data_utils.get_random_png(300, 300),
                      os.path.join(images_dir, image_name),
                      overwrite=True)
 
