@@ -40,7 +40,6 @@ ACCEPTABLE_CHANNELS = {
     'jpeg': (0, 1, 3),
 }
 
-ACCEPTABLE_DTYPES = [tf.uint8, tf.uint16]
 
 class Image(feature.FeatureConnector):
   """`FeatureConnector` for images.
@@ -70,7 +69,7 @@ class Image(feature.FeatureConnector):
   """
 
   @api_utils.disallow_positional_args
-  def __init__(self, shape=None, encoding_format=None, dtype=None):
+  def __init__(self, shape=None, encoding_format=None):
     """Construct the connector.
 
     Args:
@@ -90,7 +89,6 @@ class Image(feature.FeatureConnector):
     """
     self._encoding_format = None
     self._shape = None
-    self._dtype = None
 
     # Set and validate values
     self.set_encoding_format(encoding_format or 'png')
@@ -103,13 +101,6 @@ class Image(feature.FeatureConnector):
       raise ValueError('`encoding_format` must be one of %s.' % supported)
     self._encoding_format = encoding_format
 
-  def set_dtype(self, dtype):
-    """Update the data-type"""
-    supported_dtype = ACCEPTABLE_DTYPES
-    if dtype not in supported_dtype:
-      raise ValueError('`Dtype` must be one of %s.' % supported_dtype)
-    self._dtype = dtype
-
   def set_shape(self, shape):
     """Update the shape."""
     channels = shape[-1]
@@ -121,7 +112,7 @@ class Image(feature.FeatureConnector):
 
   def get_tensor_info(self):
     # Image is returned as a 3-d uint8 tf.Tensor.
-    return feature.TensorInfo(shape=self._shape, dtype=self._dtype)
+    return feature.TensorInfo(shape=self._shape, dtype=tf.uint8)
 
   def get_serialized_info(self):
     # Only store raw image (includes size).
@@ -136,8 +127,8 @@ class Image(feature.FeatureConnector):
 
   def _encode_image(self, np_image):
     """Returns np_image encoded as jpeg or png."""
-    if np_image.dtype != np.uint8 or np_image.dtype != np.uint16:
-      raise ValueError('Image should be uint8 or uint16. Detected: %s.' % np_image.dtype)
+    if np_image.dtype != np.uint8:
+      raise ValueError('Image should be uint8. Detected: %s.' % np_image.dtype)
     utils.assert_shape_match(np_image.shape, self._shape)
     return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
 
