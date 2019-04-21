@@ -62,7 +62,7 @@ def load_class_names():
   """
   path = os.path.join(
       os.path.dirname(__file__), "iccv2017_synsetoffset2category.txt")
-  with tf.io.gfile.GFile(path, "rb") as fp:
+  with tf.io.gfile.GFile(path, "r") as fp:
     class_names, class_ids = zip(*(
         l.split("\t") for l in fp.read().split("\n") if l != ""))
   return class_names, class_ids
