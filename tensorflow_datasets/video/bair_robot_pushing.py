@@ -32,7 +32,7 @@ import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
-DATA_URL = "http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0.tar"
+DATA_URL = ("http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0.tar")
 
 # There are exactly 30 frames in each video.
 FRAMES_PER_VIDEO = 30
