@@ -8,6 +8,8 @@
 
 ## Class `DownloadConfig`
 
+Configuration for <a href="../../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.
+
 
 
 
@@ -16,7 +18,6 @@ Defined in [`core/download/download_manager.py`](https://github.com/tensorflow/d
 
 <!-- Placeholder for "Used in" -->
 
-Configuration for <a href="../../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

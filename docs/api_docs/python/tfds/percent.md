@@ -7,6 +7,8 @@
 
 ## Class `percent`
 
+Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
+
 
 
 
@@ -14,8 +16,6 @@
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
 <!-- Placeholder for "Used in" -->
-
-Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
 
 See the
 [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)

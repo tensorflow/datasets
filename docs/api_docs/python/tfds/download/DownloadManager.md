@@ -15,6 +15,8 @@
 
 ## Class `DownloadManager`
 
+Manages the download and extraction of files, as well as caching.
+
 
 
 
@@ -22,8 +24,6 @@
 Defined in [`core/download/download_manager.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py).
 
 <!-- Placeholder for "Used in" -->
-
-Manages the download and extraction of files, as well as caching.
 
 Downloaded files are cached under `download_dir`. The file name of downloaded
  files follows pattern "${sanitized_url}${content_checksum}.${ext}". Eg:

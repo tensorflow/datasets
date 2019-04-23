@@ -18,6 +18,8 @@
 
 ## Class `Video`
 
+`FeatureConnector` for videos, encoding frames individually on disk.
+
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 
 
@@ -25,8 +27,6 @@ Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
 
 <!-- Placeholder for "Used in" -->
-
-`FeatureConnector` for videos, encoding frames individually on disk.
 
 Video: The image connector accepts as input a 4 dimensional uint8 array
 representing a video, a sequence of paths to encoded frames, or a path or a

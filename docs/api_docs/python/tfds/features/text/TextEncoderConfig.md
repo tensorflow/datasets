@@ -8,6 +8,8 @@
 
 ## Class `TextEncoderConfig`
 
+Configuration for <a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
+
 
 
 
@@ -16,7 +18,6 @@ Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/
 
 <!-- Placeholder for "Used in" -->
 
-Configuration for <a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

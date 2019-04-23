@@ -140,6 +140,8 @@
 
 ## Class `FeatureExpectationsTestCase`
 
+Tests FeatureExpectations with full encode-decode.
+
 
 
 
@@ -148,7 +150,6 @@ Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree
 
 <!-- Placeholder for "Used in" -->
 
-Tests FeatureExpectations with full encode-decode.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

@@ -5,13 +5,14 @@
 
 # Module: tfds.core
 
+API to define datasets.
+
 
 
 Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py).
 
 <!-- Placeholder for "Used in" -->
 
-API to define datasets.
 
 ## Classes
 

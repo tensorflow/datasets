@@ -19,6 +19,8 @@
 
 ## Class `DummyDatasetSharedGenerator`
 
+Test DatasetBuilder.
+
 Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)
 
 
@@ -27,14 +29,14 @@ Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree
 
 <!-- Placeholder for "Used in" -->
 
-Test DatasetBuilder.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
 __init__(
     data_dir=None,
-    config=None
+    config=None,
+    version=None
 )
 ```
 
@@ -49,6 +51,9 @@ Callers must pass arguments as keyword arguments.
 * <b>`config`</b>: <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> or `str` name, optional configuration
     for the dataset that affects the data generated on disk. Different
     `builder_config`s will have their own subdirectories and versions.
+* <b>`version`</b>: `str`. Optional version at which to load the dataset. An error is
+    raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
+    Note that only the currently defined version can be loaded.
 
 
 

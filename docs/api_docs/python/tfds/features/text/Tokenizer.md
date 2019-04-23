@@ -14,6 +14,8 @@
 
 ## Class `Tokenizer`
 
+Splits a string into tokens, and joins them back.
+
 
 
 
@@ -22,7 +24,6 @@ Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/
 
 <!-- Placeholder for "Used in" -->
 
-Splits a string into tokens, and joins them back.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

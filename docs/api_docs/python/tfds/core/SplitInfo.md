@@ -5,12 +5,15 @@
 <meta itemprop="property" content="__eq__"/>
 <meta itemprop="property" content="__getattr__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="__setattr__"/>
 <meta itemprop="property" content="get_proto"/>
 </div>
 
 # tfds.core.SplitInfo
 
 ## Class `SplitInfo`
+
+Wraps `proto.SplitInfo` with an additional property.
 
 
 
@@ -20,7 +23,6 @@ Defined in [`core/utils/py_utils.py`](https://github.com/tensorflow/datasets/tre
 
 <!-- Placeholder for "Used in" -->
 
-Wraps `proto.SplitInfo` with an additional property.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -57,6 +59,17 @@ __eq__(other)
 
 ``` python
 __getattr__(attr_name)
+```
+
+
+
+<h3 id="__setattr__"><code>__setattr__</code></h3>
+
+``` python
+__setattr__(
+    attr_name,
+    new_value
+)
 ```
 
 

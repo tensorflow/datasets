@@ -11,6 +11,8 @@
 
 ## Class `BuilderConfig`
 
+Base class for `DatasetBuilder` data configuration.
+
 
 
 
@@ -18,8 +20,6 @@
 Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
 
 <!-- Placeholder for "Used in" -->
-
-Base class for `DatasetBuilder` data configuration.
 
 DatasetBuilder subclasses with data configuration options should subclass
 `BuilderConfig` and add their own properties.

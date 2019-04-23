@@ -11,6 +11,8 @@
 
 ## Class `FileFormatAdapter`
 
+Provides writing and reading methods for a file format.
+
 
 
 
@@ -19,7 +21,6 @@ Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/dataset
 
 <!-- Placeholder for "Used in" -->
 
-Provides writing and reading methods for a file format.
 
 ## Properties
 

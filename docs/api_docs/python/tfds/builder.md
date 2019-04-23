@@ -5,6 +5,8 @@
 
 # tfds.builder
 
+Fetches a <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by string name.
+
 ``` python
 tfds.builder(
     name,
@@ -17,8 +19,6 @@ tfds.builder(
 Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
 
 <!-- Placeholder for "Used in" -->
-
-Fetches a <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by string name.
 
 #### Args:
 

@@ -5,12 +5,15 @@
 <meta itemprop="property" content="minor"/>
 <meta itemprop="property" content="patch"/>
 <meta itemprop="property" content="__new__"/>
+<meta itemprop="property" content="match"/>
 <meta itemprop="property" content="LATEST"/>
 </div>
 
 # tfds.core.Version
 
 ## Class `Version`
+
+Dataset version MAJOR.MINOR.PATCH.
 
 
 
@@ -20,7 +23,6 @@ Defined in [`core/utils/version.py`](https://github.com/tensorflow/datasets/tree
 
 <!-- Placeholder for "Used in" -->
 
-Dataset version MAJOR.MINOR.PATCH.
 
 <h2 id="__new__"><code>__new__</code></h2>
 
@@ -50,6 +52,23 @@ __new__(
 <h3 id="patch"><code>patch</code></h3>
 
 
+
+
+
+## Methods
+
+<h3 id="match"><code>match</code></h3>
+
+``` python
+match(other_version)
+```
+
+Returns True if other_version matches.
+
+#### Args:
+
+* <b>`other_version`</b>: string, of the form "x[.y[.x]]" where {x,y,z} can be a
+    number or a wildcard.
 
 
 
