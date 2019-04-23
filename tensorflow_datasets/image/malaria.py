@@ -50,12 +50,12 @@ class Malaria(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=[_URL],
-        citation=_CITATION
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Define Splits"""
-    
+
     path = dl_manager.download_and_extract(_URL)
 
     return [
