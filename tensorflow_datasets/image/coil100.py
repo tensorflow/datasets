@@ -52,7 +52,7 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=[_URL],
-        citation=_CITATION
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
