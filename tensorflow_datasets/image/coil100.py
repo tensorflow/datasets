@@ -44,19 +44,14 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
 
     return tfds.core.DatasetInfo(
         builder=self,
-
         description=(_DESCRIPTION),
-
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(names=_LABELS),
             "object_id": tfds.features.Text()
         }),
-
         supervised_keys=("image", "label"),
-
         urls=[_URL],
-
         citation=_CITATION
     )
 
