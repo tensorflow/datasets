@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import contextlib
+import functools
 import os
 import subprocess
 import tempfile
@@ -74,11 +75,19 @@ class FeatureExpectationItem(object):
       value,
       expected=None,
       expected_serialized=None,
+      transform=None,
+      dtype=None,
+      shape=None,
       raise_cls=None,
       raise_msg=None):
     self.value = value
     self.expected = expected
     self.expected_serialized = expected_serialized
+    self.transform = transform
+    self.dtype = dtype
+    self.shape = shape
+    if not transform and (dtype is not None or shape is not None):
+      raise ValueError("dtype and shape should only be set with transform")
     self.raise_cls = raise_cls
     self.raise_msg = raise_msg
 
@@ -220,7 +229,6 @@ class FeatureExpectationsTestCase(SubTestCase):
   def assertFeatureTest(self, fdict, test, feature, shape, dtype):
     """Test that encode=>decoding of a value works correctly."""
 
-    # self._process_subtest_exp(e)
     input_value = {"inner": test.value}
 
     if test.raise_cls is not None:
@@ -231,7 +239,8 @@ class FeatureExpectationsTestCase(SubTestCase):
                   test.raise_cls, type(feature)))
         with self.assertRaisesWithPredicateMatch(
             test.raise_cls, test.raise_msg):
-          features_encode_decode(fdict, input_value)
+          features_encode_decode(
+              fdict, input_value, transform=test.transform)
     else:
       # Test the serialization only
       if test.expected_serialized is not None:
@@ -241,44 +250,51 @@ class FeatureExpectationsTestCase(SubTestCase):
               feature.encode_example(test.value),
           )
 
-      # Assert the returned type match the expected one
+      # Test serialization + decoding from disk
       with self._subTest("out"):
-        out = features_encode_decode(fdict, input_value, as_tensor=True)
-        out = out["inner"]
+        out_tensor, out_numpy = features_encode_decode(
+            fdict,
+            input_value,
+            transform={"inner": test.transform},
+        )
+        out_tensor = out_tensor["inner"]
+        out_numpy = out_numpy["inner"]
+
+        # Assert the returned type match the expected one
         with self._subTest("dtype"):
-          out_dtypes = utils.map_nested(lambda s: s.dtype, out)
-          self.assertEqual(out_dtypes, feature.dtype)
+          out_dtypes = utils.map_nested(lambda s: s.dtype, out_tensor)
+          self.assertEqual(out_dtypes, test.dtype or feature.dtype)
+
         with self._subTest("shape"):
           # For shape, because (None, 3) match with (5, 3), we use
           # tf.TensorShape.assert_is_compatible_with on each of the elements
-          out_shapes = utils.zip_nested(out, feature.shape)
+          expected_shape = feature.shape if test.shape is None else test.shape
+          out_shapes = utils.zip_nested(out_tensor, expected_shape)
           utils.map_nested(
               lambda x: x[0].shape.assert_is_compatible_with(x[1]),
               out_shapes
           )
 
-      # Test serialization + decoding from disk
-      with self._subTest("out_value"):
-        decoded_examples = features_encode_decode(fdict, input_value)
-        decoded_examples = decoded_examples["inner"]
-        if isinstance(decoded_examples, dict):
-          # assertAllEqual do not works well with dictionaries so assert
-          # on each individual elements instead
-          zipped_examples = utils.zip_nested(
-              test.expected,
-              decoded_examples,
-              dict_only=True,
-          )
-          utils.map_nested(
-              lambda x: self.assertAllEqual(x[0], x[1]),
-              zipped_examples,
-              dict_only=True,
-          )
-        else:
-          self.assertAllEqual(test.expected, decoded_examples)
+        # Assert value
+        with self._subTest("value"):
+          if isinstance(out_numpy, dict):
+            # assertAllEqual do not works well with dictionaries so assert
+            # on each individual elements instead
+            zipped_examples = utils.zip_nested(
+                test.expected,
+                out_numpy,
+                dict_only=True,
+            )
+            utils.map_nested(
+                lambda x: self.assertAllEqual(x[0], x[1]),
+                zipped_examples,
+                dict_only=True,
+            )
+          else:
+            self.assertAllEqual(test.expected, out_numpy)
 
 
-def features_encode_decode(features_dict, example, as_tensor=False):
+def features_encode_decode(features_dict, example, transform):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
   # Encode example
   encoded_example = features_dict.encode_example(example)
@@ -296,16 +312,18 @@ def features_encode_decode(features_dict, example, as_tensor=False):
     dataset = file_adapter.dataset_from_filename(tmp_filename)
 
     # Decode the example
-    dataset = dataset.map(features_dict.decode_example)
+    decode_fn = functools.partial(
+        features_dict.decode_with_transform,
+        transform=transform,
+    )
+    dataset = dataset.map(decode_fn)
 
-    if not as_tensor:  # Evaluate to numpy array
-      for el in dataset_utils.as_numpy(dataset):
-        return el
+    if tf.executing_eagerly():
+      out_tensor = next(iter(dataset))
     else:
-      if tf.executing_eagerly():
-        return next(iter(dataset))
-      else:
-        return tf.compat.v1.data.make_one_shot_iterator(dataset).get_next()
+      out_tensor = tf.compat.v1.data.make_one_shot_iterator(dataset).get_next()
+    out_numpy = dataset_utils.as_numpy(out_tensor)
+    return out_tensor, out_numpy
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):

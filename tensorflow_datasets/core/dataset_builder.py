@@ -275,7 +275,9 @@ class DatasetBuilder(object):
                  split=None,
                  batch_size=1,
                  shuffle_files=None,
+                 transform=None,
                  as_supervised=False):
+    # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
 
     Callers must pass arguments as keyword arguments.
@@ -292,6 +294,11 @@ class DatasetBuilder(object):
         `tf.data.Dataset`.
       shuffle_files: `bool`, whether to shuffle the input files.
         Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+      transform: `tfds.transform.TransformAbc`, transformations to apply to
+        the decoding. See
+        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/transform.md)
+        for more info. Note that when split=None, the same transformations will
+        be applied to all split.
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
         will have a 2-tuple structure `(input, label)` according to
         `builder.info.supervised_keys`. If `False`, the default,
@@ -305,6 +312,7 @@ class DatasetBuilder(object):
       If `batch_size` is -1, will return feature dictionaries containing
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
+    # pylint: enable=line-too-long
     if not tf.io.gfile.exists(self._data_dir):
       raise AssertionError(
           ("Dataset %s: could not find data in %s. Please make sure to call "
@@ -321,13 +329,19 @@ class DatasetBuilder(object):
         self._build_single_dataset,
         shuffle_files=shuffle_files,
         batch_size=batch_size,
+        transform=transform,
         as_supervised=as_supervised,
     )
     datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
 
-  def _build_single_dataset(self, split, shuffle_files, batch_size,
-                            as_supervised):
+  def _build_single_dataset(
+      self,
+      split,
+      shuffle_files,
+      batch_size,
+      transform,
+      as_supervised):
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
@@ -340,11 +354,14 @@ class DatasetBuilder(object):
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
-    dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+    dataset = self._as_dataset(
+        split=split,
+        transform=transform,
+        shuffle_files=shuffle_files,
+    )
     if batch_size > 1:
       # Use padded_batch so that features with unknown shape are supported.
-      padded_shapes = self.info.features.shape
-      dataset = dataset.padded_batch(batch_size, padded_shapes)
+      dataset = dataset.padded_batch(batch_size, dataset.output_shapes)
 
     if as_supervised:
       if not self.info.supervised_keys:
@@ -477,7 +494,7 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _as_dataset(self, split, shuffle_files=None):
+  def _as_dataset(self, split, transform=None, shuffle_files=None):
     """Constructs a `tf.data.Dataset`.
 
     This is the internal implementation to overwrite called when user calls
@@ -485,8 +502,10 @@ class DatasetBuilder(object):
     the `tf.data.Dataset` object.
 
     Args:
-      split (`tfds.Split`): which subset of the data to read.
-      shuffle_files (bool): whether to shuffle the input files. Optional,
+      split: `tfds.Split`: which subset of the data to read.
+      transform: `tfds.transform.TransformAbc`, transformation to apply to
+        the dataset decoding.
+      shuffle_files: `bool`: whether to shuffle the input files. Optional,
         defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 
     Returns:
@@ -681,7 +700,11 @@ class FileAdapterBuilder(DatasetBuilder):
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
 
-  def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=None):
+  def _as_dataset(
+      self,
+      split=splits_lib.Split.TRAIN,
+      transform=None,
+      shuffle_files=None):
 
     # Resolve all the named split tree by real ones
     read_instruction = split.get_read_instruction(self.info.splits)
@@ -694,15 +717,17 @@ class FileAdapterBuilder(DatasetBuilder):
         list_sliced_split_info)
 
     # Load the dataset
-    dataset = dataset_utils.build_dataset(
+    ds = dataset_utils.build_dataset(
         instruction_dicts=instruction_dicts,
         dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
         shuffle_files=shuffle_files,
     )
-    dataset = dataset.map(
-        self.info.features.decode_example,
-        num_parallel_calls=tf.data.experimental.AUTOTUNE)
-    return dataset
+    decode_fn = functools.partial(
+        self.info.features.decode_with_transform,
+        transform=transform,
+    )
+    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    return ds
 
   def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
     """Return the list of files and reading mask of the files to read."""

@@ -51,10 +51,10 @@ class AnInputConnector(features_lib.FeaturesDict):
         'b': example_data * 10
     })
 
-  def decode_example(self, tfexample_dict):
+  def decode_with_transform(self, tfexample_dict):
     # Decode take the saved dict and merge the two values
     tfexample_dict = super(AnInputConnector,
-                           self).decode_example(tfexample_dict)
+                           self).decode_with_transform(tfexample_dict)
     return tfexample_dict['a'] + tfexample_dict['b']
 
 

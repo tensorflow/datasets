@@ -88,6 +88,7 @@ import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import transform as transform_lib
 from tensorflow_datasets.core import utils
 
 
@@ -233,23 +234,67 @@ class FeatureConnector(object):
     """
     raise NotImplementedError
 
-  @abc.abstractmethod
-  def decode_example(self, tfexample_data):
+  def decode_with_transform(self, tfexample_data, transform=None):
+    """Wrapper around `decode_example` which apply the transformation(s).
+
+    This function is a wrapper around `decode_example` which will also
+    apply the eventual transformations.  If multiple transformations are given,
+    the first one may be forwarded to the `decode_example` function only if
+    `_should_forward_transform` is True. This allow to pass transformation
+    to the childs of this feature connector.
+
+    Args:
+      tfexample_data: See `decode_example` for more info.
+      transform: See `decode_example` for more info.
+
+    Returns:
+      tensor_data: See `decode_example` for more info.
+    """
+    transform = transform or []
+    if not isinstance(transform, list):
+      transform = [transform]
+
+    # TODO(epot): Have transfomation modify decoding
+    example = tfexample_data
+    example = self.decode_example(example)
+
+    for t in transform:
+      # Consume the remaining transformation
+      if not isinstance(t, transform_lib.MapAbc):
+        raise AssertionError(
+            'Could not apply transformation {} to feature {}. Expected type '
+            '`transform_lib.MapAbc`. If applying a list of multiple '
+            'transformations, make sure to have the decoding transformation be '
+            'the first list element.'.format(t, self)
+        )
+      # Apply the image transformation
+      example = t.setup_and_apply(example, feature=self)
+
+    return example
+
+  def decode_example(self, tfexample_data, transform=None):
+    # pylint: disable=line-too-long
     """Decode the feature dict to TF compatible input.
 
-    Note: If eager is not enabled, this function will be executed as a
-    tensorflow graph (in `tf.data.Dataset.map(features.decode_examples)`).
+    Note: This function will always be executed as a tensorflow graph, inside
+    the `tf.data.Dataset.map(features.decode_example)` pipeline (even if eager
+    is enabled).
 
     Args:
       tfexample_data: Data or dictionary of data, as read by the tf-example
         reader. It correspond to the `tf.Tensor()` (or dict of `tf.Tensor()`)
         extracted from the `tf.train.Example`, matching the info defined in
         `get_serialize_info()`.
+      transform: `tfds.transform.TransformAbc`, Additional transformation to
+        apply to the object. See
+        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/transform.md)
+        for more info.
 
     Returns:
       tensor_data: Tensor or dictionary of tensor, output of the tf.data.Dataset
         object
     """
+    # pylint: enable=line-too-long
     raise NotImplementedError
 
   @property
@@ -489,15 +534,26 @@ class FeaturesDict(FeatureConnector):
         })
     return tfexample_dict
 
-  def decode_example(self, tfexample_dict):
+  def decode_with_transform(self, tfexample_dict, transform=None):
     """See base class for details."""
+    transform = transform or {}
+    if not isinstance(transform, dict):
+      raise ValueError('FeaturesDict only support dict as transformation.')
+
     tensor_dict = {}
     # Iterate over the Tensor dict keys
     for feature_key, feature in six.iteritems(self._feature_dict):
+      # Eventually forward the transform kwarg
+      feature_transform = transform.get(feature_key, None)
+      if feature_transform is not None:
+        decode_kwarg = dict(transform=feature_transform)
+      else:
+        decode_kwarg = {}
       decoded_feature = decode_single_feature_from_dict(
           feature_k=feature_key,
           feature=feature,
           tfexample_dict=tfexample_dict,
+          **decode_kwarg
       )
       tensor_dict[feature_key] = decoded_feature
     return tensor_dict
@@ -627,13 +683,15 @@ def to_feature(value):
 def decode_single_feature_from_dict(
     feature_k,
     feature,
-    tfexample_dict):
+    tfexample_dict,
+    **decode_kwargs):
   """Decode the given feature from the tfexample_dict.
 
   Args:
     feature_k (str): Feature key in the tfexample_dict
     feature (FeatureConnector): Connector object to use to decode the field
     tfexample_dict (dict): Dict containing the data to decode.
+    **decode_kwargs: Additional kwargs to forward to the decode function.
 
   Returns:
     decoded_feature: The output of the feature.decode_example
@@ -648,7 +706,7 @@ def decode_single_feature_from_dict(
         k: tfexample_dict[posixpath.join(feature_k, k)]
         for k in feature.serialized_keys
     }
-  return feature.decode_example(data_to_decode)
+  return feature.decode_with_transform(data_to_decode, **decode_kwargs)
 
 
 def _assert_keys_match(keys1, keys2):

@@ -19,6 +19,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import functools
+
 import numpy as np
 import tensorflow as tf
 
@@ -168,19 +170,46 @@ class SequenceDict(feature_lib.FeaturesDict):
     }
     return sequence_elements
 
-  def decode_example(self, tfexample_dict):
+  def decode_with_transform(self, tfexample_dict, transform=None):
     # Note: This all works fine in Eager mode (without tf.function) because
     # tf.data pipelines are always executed in Graph mode.
 
+    decode_fn = functools.partial(
+        super(SequenceDict, self).decode_with_transform,
+        transform=transform,
+    )
+
+    # As the transformation may modify the returned dtype and the dtype is
+    # required for using map_fn, we try to reconstruct the expected dtype.
+    # TODO(epot): Could we guess the dtype from applying the encoding to
+    # a single elem and see the result ?
+    dtype = _transform_dtype(self.dtype, transform)
+
     # Apply the decoding to each of the individual feature.
     return tf.map_fn(
-        super(SequenceDict, self).decode_example,
+        decode_fn,
         tfexample_dict,
-        dtype=self.dtype,
+        dtype=dtype,
         parallel_iterations=10,
         back_prop=False,
         name='sequence_decode',
     )
+
+
+def _transform_dtype(dtype, transform):
+  """Merged the feature dtype with the applied transformations."""
+  if isinstance(transform, list):
+    for t in reversed(transform):
+      if t.dtype:
+        return t.dtype
+      return dtype
+  if not isinstance(dtype, dict):
+    # Return the transformation dtype if defined, or the default dtype
+    return transform and transform.dtype or dtype
+  return {
+      k: _transform_dtype(d, (transform or {}).get(k, None))
+      for k, d in dtype.items()
+  }
 
 
 class Sequence(feature_lib.FeatureConnector):
@@ -238,9 +267,12 @@ class Sequence(feature_lib.FeatureConnector):
     """Wrapper around SequenceDict."""
     return self._seq_feature.encode_example({'inner': example_data})['inner']
 
-  def decode_example(self, tfexample_data):
+  def decode_with_transform(self, tfexample_data, transform=None):
     """Wrapper around SequenceDict."""
-    return self._seq_feature.decode_example({'inner': tfexample_data})['inner']
+    return self._seq_feature.decode_with_transform(
+        {'inner': tfexample_data},
+        transform={'inner': transform},
+    )['inner']
 
   def _additional_repr_info(self):
     """Override to return addtional info to go into __repr__."""

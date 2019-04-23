@@ -179,11 +179,13 @@ def load(name,
          batch_size=1,
          download=True,
          as_supervised=False,
+         transform=None,
          with_info=False,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
          as_dataset_kwargs=None,
          try_gcs=False):
+  # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
 
   If `split=None` (the default), returns all splits for the dataset. Otherwise,
@@ -241,6 +243,11 @@ def load(name,
       `builder.info.supervised_keys`. If `False`, the default,
       the returned `tf.data.Dataset` will have a dictionary with all the
       features.
+    transform: tfds.transform.TransformAbc`, transformations to apply to
+        the decoding. See
+        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/transform.md)
+        for more info. Note that when split=None, the same transformations will
+        be applied to all split.
     with_info: `bool`, if True, tfds.load will return the tuple
       (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
       with the builder.
@@ -269,6 +276,7 @@ def load(name,
       object documents the entire dataset, regardless of the `split` requested.
       Split-specific information is available in `ds_info.splits`.
   """
+  # pylint: enable=line-too-long
   name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   name_builder_kwargs.update(builder_kwargs or {})
   builder_kwargs = name_builder_kwargs
@@ -290,6 +298,7 @@ def load(name,
   as_dataset_kwargs["split"] = split
   as_dataset_kwargs["as_supervised"] = as_supervised
   as_dataset_kwargs["batch_size"] = batch_size
+  as_dataset_kwargs["transform"] = transform
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:
