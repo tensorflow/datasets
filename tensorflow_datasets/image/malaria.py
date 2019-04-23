@@ -10,7 +10,6 @@ import fnmatch
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-
 _URL = "https://ceb.nlm.nih.gov/proj/malaria/cell_images.zip"
 
 _DESCRIPTION = ("""The Malaria dataset contains a total of 27,558 cell images with equal instances of
@@ -44,23 +43,19 @@ class Malaria(tfds.core.GeneratorBasedBuilder):
 
     return tfds.core.DatasetInfo(
         builder=self,
-
         description=(_DESCRIPTION),
-
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(names=_NAMES),
         }),
-
         supervised_keys=("image", "label"),
-
         urls=[_URL],
-
         citation=_CITATION
     )
 
   def _split_generators(self, dl_manager):
     """Define Splits"""
+    
     path = dl_manager.download_and_extract(_URL)
 
     return [
@@ -75,6 +70,7 @@ class Malaria(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, data_dir_path):
     """Generate images and labels for splits"""
+
     path1 = os.path.join(data_dir_path, "Parasitized")
     path2 = os.path.join(data_dir_path, "Uninfected")
     folder_names = [path1, path2]
