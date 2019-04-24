@@ -66,6 +66,8 @@ def gcs_dataset_info_files(dataset_dir):
   return filenames
 
 
-def is_gcs_dataset_accessible(dataset_dir):
-  info_file = posixpath.join(GCS_DATASETS_DIR, dataset_dir, "dataset_info.json")
-  return info_file in gcs_files(prefix_filter=info_file)
+def is_dataset_on_gcs(dataset_name):
+  """If the dataset is available on the GCS bucket gs://tfds-data/datasets."""
+  dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
+  return len(gcs_files(prefix_filter=dir_name)) > 2
+

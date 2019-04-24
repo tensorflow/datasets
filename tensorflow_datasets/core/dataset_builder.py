@@ -368,7 +368,7 @@ class DatasetBuilder(object):
 
   def _maybe_log_gcs_data_dir(self):
     """If data is on GCS, set _data_dir to GCS path."""
-    if not gcs_utils.is_gcs_dataset_accessible(self.info.full_name):
+    if not gcs_utils.is_dataset_on_gcs(self.info.full_name):
       return
 
     gcs_path = os.path.join(constants.GCS_DATA_DIR, self.info.full_name)
