@@ -19,7 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-# pylint: disable=g-import-not-at-top
+# pylint: disable=g-import-not-at-top,g-direct-tensorflow-import
 
 import types
 import distutils.version
@@ -62,7 +62,7 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
         "This version of TensorFlow Datasets requires TensorFlow "
         "version >= {required}; Detected an installation of version {present}. "
         "Please upgrade TensorFlow to proceed.".format(
-            required="1.13.0",
+            required="1.12.0",
             present=tf.__version__))
   _patch_tf(tf)
 
@@ -90,8 +90,8 @@ def _patch_tf(tf):
 
 
 def _patch_for_tf2(tf):
-  from tensorflow.python.data.ops import dataset_ops
-  if hasattr(dataset_ops, "get_legacy_output_shapes"):
+  if not hasattr(tf.data.Dataset, "output_shapes"):
+    from tensorflow.python.data.ops import dataset_ops
     tf.data.Dataset.output_shapes = property(
         dataset_ops.get_legacy_output_shapes)
     tf.data.Dataset.output_types = property(dataset_ops.get_legacy_output_types)
@@ -143,6 +143,13 @@ def _patch_for_tf1_13(tf):
     tf.compat.v2.data = types.ModuleType("tf.compat.v2.data")
     from tensorflow.python.data.ops import dataset_ops
     tf.compat.v2.data.Dataset = dataset_ops.DatasetV2
+  if not hasattr(tf.compat.v2.data.Dataset, "output_shapes"):
+    from tensorflow.python.data.ops import dataset_ops
+    if hasattr(dataset_ops, "get_legacy_output_shapes"):
+      tf.compat.v2.data.Dataset.output_shapes = property(
+          dataset_ops.get_legacy_output_shapes)
+      tf.compat.v2.data.Dataset.output_types = property(
+          dataset_ops.get_legacy_output_types)
 
 
 def is_dataset(ds):
