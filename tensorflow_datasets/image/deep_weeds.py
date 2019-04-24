@@ -19,7 +19,6 @@ _NAMES = ["Chinee apple", "Snake weed", "Lantana", "Prickly acacia", "Siam weed"
 _IMAGE_SHAPE = (256,256,3)
 
 _CITATION = """\
-
  @article{DeepWeeds2019,
   author = {Alex Olsen and
     Dmitry A. Konovalov and
@@ -45,7 +44,6 @@ _CITATION = """\
   url = "https://doi.org/10.1038/s41598-018-38343-3",
   doi = "10.1038/s41598-018-38343-3"
 }
-
 """
 
 class DeepWeeds(tfds.core.GeneratorBasedBuilder):
