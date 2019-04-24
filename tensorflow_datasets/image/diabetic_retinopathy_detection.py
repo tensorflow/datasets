@@ -70,12 +70,12 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
           description="Images at their original resolution and quality."),
       DiabeticRetinopathyDetectionConfig(
           name="1M",
-          version="2.0.0",
+          version="2.1.0",
           description="Images have roughly 1,000,000 pixels, at 72 quality.",
           target_pixels=1000000),
       DiabeticRetinopathyDetectionConfig(
           name="250K",
-          version="2.0.0",
+          version="2.1.0",
           description="Images have roughly 250,000 pixels, at 72 quality.",
           target_pixels=250000),
   ]
@@ -170,7 +170,10 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
     for name, label in data:
       yield {
           "name": name,
-          "image": "%s/%s.jpeg" % (images_dir_path, name),
+          "image": _resize_image_if_necessary(
+              tf.io.gfile.GFile("%s/%s.jpeg" % (images_dir_path, name),
+                                mode="rb"),
+              target_pixels=self.builder_config.target_pixels),
           "label": label,
       }
 
