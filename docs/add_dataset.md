@@ -224,7 +224,7 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
-            name="train",
+            name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "train"),
@@ -232,7 +232,7 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
             },
         ),
         tfds.core.SplitGenerator(
-            name="test",
+            name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "test"),
