@@ -216,9 +216,11 @@ class DatasetInfoTest(testing.TestCase):
           "url3": "some checksum (new)",
       })
 
-  def test_reading_from_gcs_bucket(self):
+  # TODO(b/131191992): Re-enable this test
+  def xtest_reading_from_gcs_bucket(self):
     # The base TestCase prevents GCS access, so we explicitly ask it to restore
     # access here.
+
     with self.gcs_access():
       mnist_builder = mnist.MNIST(
           data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
