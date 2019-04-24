@@ -56,6 +56,7 @@ REQUIRED_PKGS = [
 TESTS_REQUIRE = [
     'jupyter',
     'pytest',
+    'pytest-xdist',
     'apache-beam',
 ]
 
