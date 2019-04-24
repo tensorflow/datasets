@@ -506,8 +506,8 @@ def get_dataset_feature_statistics(builder, split):
 
   # Start here, we've processed all examples.
 
-  output_shapes_dict = dataset._element_structure._to_legacy_output_shapes()  # pylint: disable=protected-access
-  output_types_dict = dataset._element_structure._to_legacy_output_types()  # pylint: disable=protected-access
+  output_shapes_dict = dataset.output_shapes
+  output_types_dict = dataset.output_types
 
   for feature_name in sorted(feature_to_num_examples.keys()):
     # Try to fill in the schema.
