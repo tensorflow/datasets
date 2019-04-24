@@ -58,19 +58,14 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
 
         return tfds.core.DatasetInfo(
             builder=self,
-    
-            description=(_DESCRIPTION),
-            
+            description=(_DESCRIPTION),            
             features=tfds.features.FeaturesDict({
                 "image":tfds.features.Image(shape=_IMAGE_SHAPE),
                 "label": tfds.features.ClassLabel(names=_NAMES),
             }),
-
-            supervised_keys=("image", "label"),
-            
-            urls=[_URL],
-            
-            citation=_CITATION
+            supervised_keys=("image", "label"),            
+            urls=[_URL],            
+            citation=_CITATION,
         )
 
   def _split_generators(self, dl_manager):
@@ -93,7 +88,6 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
       for file_name in tf.io.gfile.listdir(data_dir_path):
           image = os.path.join(data_dir_path,file_name)
           label = _NAMES[int(file_name.split("-")[2].split(".")[0])]
-
           yield{
               "image":image,
               "label":label
