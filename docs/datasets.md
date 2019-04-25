@@ -28,56 +28,102 @@ np_datasets = tfds.as_numpy(datasets)
 
 ## All Datasets
 
-* [`audio`](#audio)
-  * [`"nsynth"`](#nsynth)
-* [`image`](#image)
-  * [`"caltech101"`](#caltech101)
-  * [`"cats_vs_dogs"`](#cats_vs_dogs)
-  * [`"celeb_a"`](#celeb_a)
-  * [`"celeb_a_hq"`](#celeb_a_hq)
-  * [`"cifar10"`](#cifar10)
-  * [`"cifar100"`](#cifar100)
-  * [`"coco2014"`](#coco2014)
-  * [`"colorectal_histology"`](#colorectal_histology)
-  * [`"colorectal_histology_large"`](#colorectal_histology_large)
-  * [`"cycle_gan"`](#cycle_gan)
-  * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
-  * [`"dsprites"`](#dsprites)
-  * [`"emnist"`](#emnist)
-  * [`"fashion_mnist"`](#fashion_mnist)
-  * [`"horses_or_humans"`](#horses_or_humans)
-  * [`"image_label_folder"`](#image_label_folder)
-  * [`"imagenet2012"`](#imagenet2012)
-  * [`"kmnist"`](#kmnist)
-  * [`"lsun"`](#lsun)
-  * [`"mnist"`](#mnist)
-  * [`"omniglot"`](#omniglot)
-  * [`"open_images_v4"`](#open_images_v4)
-  * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
-  * [`"rock_paper_scissors"`](#rock_paper_scissors)
-  * [`"svhn_cropped"`](#svhn_cropped)
-  * [`"tf_flowers"`](#tf_flowers)
-  * [`"voc2007"`](#voc2007)
+*   [`audio`](#audio)
+    *   [`"nsynth"`](#nsynth)
+*   [`image`](#image)
+    *   [`"abstract_reasoning"`](#abstract_reasoning)
+    *   [`"caltech101"`](#caltech101)
+    *   [`"cats_vs_dogs"`](#cats_vs_dogs)
+    *   [`"celeb_a"`](#celeb_a)
+    *   [`"celeb_a_hq"`](#celeb_a_hq)
+    *   [`"cifar10"`](#cifar10)
+    *   [`"cifar100"`](#cifar100)
+    *   [`"cifar10_corrupted"`](#cifar10_corrupted)
+    *   [`"coco2014"`](#coco2014)
+    *   [`"colorectal_histology"`](#colorectal_histology)
+    *   [`"colorectal_histology_large"`](#colorectal_histology_large)
+    *   [`"cycle_gan"`](#cycle_gan)
+    *   [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
+    *   [`"dsprites"`](#dsprites)
+    *   [`"dtd"`](#dtd)
+    *   [`"emnist"`](#emnist)
+    *   [`"fashion_mnist"`](#fashion_mnist)
+    *   [`"horses_or_humans"`](#horses_or_humans)
+    *   [`"image_label_folder"`](#image_label_folder)
+    *   [`"imagenet2012"`](#imagenet2012)
+    *   [`"imagenet2012_corrupted"`](#imagenet2012_corrupted)
+    *   [`"kmnist"`](#kmnist)
+    *   [`"lsun"`](#lsun)
+    *   [`"mnist"`](#mnist)
+    *   [`"omniglot"`](#omniglot)
+    *   [`"open_images_v4"`](#open_images_v4)
+    *   [`"oxford_iiit_pet"`](#oxford_iiit_pet)
+    *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
+    *   [`"rock_paper_scissors"`](#rock_paper_scissors)
+    *   [`"shapes3d"`](#shapes3d)
+    *   [`"smallnorb"`](#smallnorb)
+    *   [`"sun397"`](#sun397)
+    *   [`"svhn_cropped"`](#svhn_cropped)
+    *   [`"tf_flowers"`](#tf_flowers)
 
-* [`structured`](#structured)
-  * [`"titanic"`](#titanic)
-* [`text`](#text)
-  * [`"imdb_reviews"`](#imdb_reviews)
-  * [`"lm1b"`](#lm1b)
-  * [`"multi_nli"`](#multi_nli)
-  * [`"squad"`](#squad)
-* [`translate`](#translate)
-  * [`"flores"`](#flores)
-  * [`"ted_hrlr_translate"`](#ted_hrlr_translate)
-  * [`"ted_multi_translate"`](#ted_multi_translate)
-* [`video`](#video)
-  * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
-  * [`"moving_mnist"`](#moving_mnist)
-  * [`"starcraft_video"`](#starcraft_video)
+*   [`structured`](#structured)
+
+    *   [`"higgs"`](#higgs)
+    *   [`"iris"`](#iris)
+    *   [`"titanic"`](#titanic)
+
+*   [`text`](#text)
+
+    *   [`"cnn_dailymail"`](#cnn_dailymail)
+    *   [`"glue"`](#glue)
+    *   [`"imdb_reviews"`](#imdb_reviews)
+    *   [`"lm1b"`](#lm1b)
+    *   [`"multi_nli"`](#multi_nli)
+    *   [`"squad"`](#squad)
+    *   [`"wikipedia"`](#wikipedia)
+    *   [`"xnli"`](#xnli)
+
+*   [`translate`](#translate)
+
+    *   [`"flores"`](#flores)
+    *   [`"para_crawl"`](#para_crawl)
+    *   [`"ted_hrlr_translate"`](#ted_hrlr_translate)
+    *   [`"ted_multi_translate"`](#ted_multi_translate)
+    *   [`"wmt15_translate"`](#wmt15_translate)
+    *   [`"wmt16_translate"`](#wmt16_translate)
+    *   [`"wmt17_translate"`](#wmt17_translate)
+    *   [`"wmt18_translate"`](#wmt18_translate)
+    *   [`"wmt19_translate"`](#wmt19_translate)
+
+*   [`video`](#video)
+
+    *   [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
+    *   [`"moving_mnist"`](#moving_mnist)
+    *   [`"starcraft_video"`](#starcraft_video)
+    *   [`"ucf101"`](#ucf101)
 
 ---
 
 ## [`audio`](#audio)
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="nsynth" />
+  <meta itemprop="description" content="The NSynth Dataset is an audio dataset containing ~300k musical notes, each
+with a unique pitch, timbre, and envelope. Each note is annotated with three
+additional pieces of information based on a combination of human evaluation
+and heuristic algorithms:
+ -Source: The method of sound production for the note's instrument.
+ -Family: The high-level family of which the note's instrument is a member.
+ -Qualities: Sonic qualities of the note.
+
+The dataset is split into train, valid, and test sets, with no instruments
+overlapping between the train set and the valid/test sets." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#nsynth" />
+  <meta itemprop="sameAs" content="https://g.co/magenta/nsynth-dataset" />
+</div>
 
 ### `"nsynth"`
 
@@ -165,6 +211,266 @@ TEST       |      4,096
 
 ## [`image`](#image)
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="abstract_reasoning" />
+  <meta itemprop="description" content="Procedurally Generated Matrices (PGM) data from the paper Measuring Abstract Reasoning in Neural Networks, Barrett, Hill, Santoro et al. 2018. The goal is to infer the correct answer from the context panels based on abstract reasoning.
+
+To use this data set, please download all the *.tar.gz files from the data set page and place them in ~/tensorflow_datasets/abstract_reasoning/.
+
+$R$ denotes the set of relation types (progression, XOR, OR, AND, consistent union), $O$ denotes the object types (shape, line), and $A$ denotes the attribute types (size, colour, position, number). The structure of a matrix, $S$, is the set of triples $S={[r, o, a]}$ that determine the challenge posed by a particular matrix." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#abstract_reasoning" />
+  <meta itemprop="sameAs" content="https://github.com/deepmind/abstract-reasoning-matrices" />
+</div>
+
+### `"abstract_reasoning"`
+
+Procedurally Generated Matrices (PGM) data from the paper Measuring Abstract
+Reasoning in Neural Networks, Barrett, Hill, Santoro et al. 2018. The goal is to
+infer the correct answer from the context panels based on abstract reasoning.
+
+To use this data set, please download all the *.tar.gz files from the data set
+page and place them in ~/tensorflow_datasets/abstract_reasoning/.
+
+$R$ denotes the set of relation types (progression, XOR, OR, AND, consistent
+union), $O$ denotes the object types (shape, line), and $A$ denotes the
+attribute types (size, colour, position, number). The structure of a matrix,
+$S$, is the set of triples $S={[r, o, a]}$ that determine the challenge posed by
+a particular matrix.
+
+*   URL:
+    [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+*   `DatasetBuilder`:
+    [`tfds.image.abstract_reasoning.AbstractReasoning`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/abstract_reasoning.py)
+
+`abstract_reasoning` is configured with
+`tfds.image.abstract_reasoning.AbstractReasoningConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"neutral"` (`v0.0.1`) (`Size: ?? GiB`): The structures encoding the
+    matrices in both the \
+    training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \
+    $o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
+    separation occurring at the level of the input variables (i.e. pixel \
+    manifestations).
+
+*   `"interpolation"` (`v0.0.1`) (`Size: ?? GiB`): As in the neutral split, $S$
+    consisted of any \
+    triples $[r, o, a]$. For interpolation, in the training set, when the \
+    attribute was "colour" or "size" (i.e., the ordered attributes), the values
+    of \
+    the attributes were restricted to even-indexed members of a discrete set, \
+    whereas in the test set only odd-indexed values were permitted. Note that
+    all \
+    $S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
+    Thus, generalisation is required for every question in the test set.
+
+*   `"extrapolation"` (`v0.0.1`) (`Size: ?? GiB`): Same as in interpolation, but
+    the values of \
+    the attributes were restricted to the lower half of the discrete set during
+    \
+    training, whereas in the test set they took values in the upper half.
+
+*   `"attr.rel.pairs"` (`v0.0.1`) (`Size: ?? GiB`): All $S$ contained at least
+    two triples, \
+    $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$, of which 400 are viable. We \
+    randomly allocated 360 to the training set and 40 to the test set. Members \
+    $(t_1, t_2)$ of the 40 held-out pairs did not occur together in structures
+    $S$ \
+    in the training set, and all structures $S$ had at least one such pair \
+    $(t_1, t_2)$ as a subset.
+
+*   `"attr.rels"` (`v0.0.1`) (`Size: ?? GiB`): In our dataset, there are 29
+    possible unique \
+    triples $[r,o,a]$. We allocated seven of these for the test set, at random,
+    \
+    but such that each of the attributes was represented exactly once in this
+    set. \
+    These held-out triples never occurred in questions in the training set, and
+    \
+    every $S$ in the test set contained at least one of them.
+
+*   `"attrs.pairs"` (`v0.0.1`) (`Size: ?? GiB`): $S$ contained at least two
+    triples. There are 20 \
+    (unordered) viable pairs of attributes $(a_1, a_2)$ such that for some \
+    $r_i, o_i, ([r_1,o_1,a_1],[r_2,o_2,a_2])$ is a viable triple pair \
+    $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$. We allocated 16 of these pairs
+    \
+    for training and four for testing. For a pair $(a_1, a_2)$ in the test set,
+    \
+    $S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
+    set, all $S$ contained triples with $a_1$ and $a_2$.
+
+*   `"attrs.shape.color"` (`v0.0.1`) (`Size: ?? GiB`): Held-out attribute
+    shape-colour. $S$ in \
+    the training set contained no triples with $o$=shape and $a$=colour. \
+    All structures governing puzzles in the test set contained at least one
+    triple \
+    with $o$=shape and $a$=colour.
+
+*   `"attrs.line.type"` (`v0.0.1`) (`Size: ?? GiB`): Held-out attribute
+    line-type. $S$ in \
+    the training set contained no triples with $o$=line and $a$=type. \
+    All structures governing puzzles in the test set contained at least one
+    triple \
+    with $o$=line and $a$=type.
+
+#### `"abstract_reasoning/neutral"`
+
+```python
+FeaturesDict({
+    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/interpolation"`
+
+```python
+FeaturesDict({
+    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/extrapolation"`
+
+```python
+FeaturesDict({
+    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attr.rel.pairs"`
+
+```python
+FeaturesDict({
+    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attr.rels"`
+
+```python
+FeaturesDict({
+    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attrs.pairs"`
+
+```python
+FeaturesDict({
+    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attrs.shape.color"`
+
+```python
+FeaturesDict({
+    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attrs.line.type"`
+
+```python
+FeaturesDict({
+    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### Statistics
+
+None computed
+
+#### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
+
+#### Citation
+
+```
+@InProceedings{pmlr-v80-barrett18a,
+  title =    {Measuring abstract reasoning in neural networks},
+  author =   {Barrett, David and Hill, Felix and Santoro, Adam and Morcos, Ari and Lillicrap, Timothy},
+  booktitle =    {Proceedings of the 35th International Conference on Machine Learning},
+  pages =    {511--520},
+  year =     {2018},
+  editor =   {Dy, Jennifer and Krause, Andreas},
+  volume =   {80},
+  series =   {Proceedings of Machine Learning Research},
+  address =      {Stockholmsmassan, Stockholm Sweden},
+  month =    {10--15 Jul},
+  publisher =    {PMLR},
+  pdf =      {http://proceedings.mlr.press/v80/barrett18a/barrett18a.pdf},
+  url =      {http://proceedings.mlr.press/v80/barrett18a.html},
+  abstract =     {Whether neural networks can learn abstract reasoning or whetherthey merely rely on superficial statistics is a topic of recent debate. Here, we propose a dataset and challenge designed to probe abstract reasoning, inspired by a well-known human IQ test. To succeed at this challenge, models must cope with various generalisation 'regimes' in which the training data and test questions differ in clearly-defined ways. We show that popular models such as ResNets perform poorly, even when the training and test sets differ only minimally, and we present a novel architecture, with structure designed to encourage reasoning, that does significantly better. When we vary the way in which the test questions and training data differ, we find that our model is notably proficient at certain forms of generalisation, but notably weak at others. We further show that the model's ability to generalise improves markedly if it is trained to predict symbolic explanations for its answers. Altogether, we introduce and explore ways to both measure and induce stronger abstract reasoning in neural networks. Our freely-available dataset should motivate further progress in this direction.}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="caltech101" />
+  <meta itemprop="description" content="Caltech-101 consists of pictures of objects belonging to 101 classes, plus
+one `background clutter` class. Each image is labelled with a single object.
+Each class contains roughly 40 to 800 images, totalling around 9k images.
+Images are of variable sizes, with typical edge lengths of 200-300 pixels.
+This version contains image-level labels only. The original dataset also
+contains bounding boxes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#caltech101" />
+  <meta itemprop="sameAs" content="http://www.vision.caltech.edu/Image_Datasets/Caltech101/" />
+</div>
+
 ### `"caltech101"`
 
 Caltech-101 consists of pictures of objects belonging to 101 classes, plus
@@ -215,13 +521,23 @@ ALL        |      9,144
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cats_vs_dogs" />
+  <meta itemprop="description" content="A large set of images of cats and dogs.There are 1738 corrupted images that are dropped." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cats_vs_dogs" />
+  <meta itemprop="sameAs" content="https://www.microsoft.com/en-us/download/details.aspx?id=54765" />
+</div>
+
 ### `"cats_vs_dogs"`
 
 A large set of images of cats and dogs.There are 1738 corrupted images that are dropped.
 
 * URL: [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 * `DatasetBuilder`: [`tfds.image.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cats_vs_dogs.py)
-* Version: `v2.0.0`
+* Version: `v2.0.1`
 * Size: `786.68 MiB`
 
 #### Features
@@ -262,6 +578,21 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="celeb_a" />
+  <meta itemprop="description" content="CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including
+ - 10,177 number of identities,
+ - 202,599 number of face images, and
+ - 5 landmark locations, 40 binary attributes annotations per image.
+
+The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#celeb_a" />
+  <meta itemprop="sameAs" content="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html" />
+</div>
 
 ### `"celeb_a"`
 
@@ -378,6 +709,19 @@ VALIDATION |     19,867
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="celeb_a_hq" />
+  <meta itemprop="description" content="High-quality version of the CELEBA
+dataset, consisting of 30000 images in 1024 x 1024 resolution.
+
+WARNING: This dataset currently requires you to prepare images on your own." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#celeb_a_hq" />
+  <meta itemprop="sameAs" content="https://github.com/tkarras/progressive_growing_of_gans" />
+</div>
 
 ### `"celeb_a_hq"`
 
@@ -573,6 +917,16 @@ ALL        |     30,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cifar10" />
+  <meta itemprop="description" content="The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cifar10" />
+  <meta itemprop="sameAs" content="https://www.cs.toronto.edu/~kriz/cifar.html" />
+</div>
+
 ### `"cifar10"`
 
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.
@@ -616,6 +970,16 @@ TEST       |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cifar100" />
+  <meta itemprop="description" content="This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a &quot;fine&quot; label (the class to which it belongs) and a &quot;coarse&quot; label (the superclass to which it belongs)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cifar100" />
+  <meta itemprop="sameAs" content="https://www.cs.toronto.edu/~kriz/cifar.html" />
+</div>
 
 ### `"cifar100"`
 
@@ -661,6 +1025,1049 @@ TEST       |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cifar10_corrupted" />
+  <meta itemprop="description" content="Cifar10Corrupted is a dataset generated by adding 15 common corruptions to the
+test images in the Cifar10 dataset. This dataset wraps the corrupted Cifar10
+test images uploaded by the original authors." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cifar10_corrupted" />
+  <meta itemprop="sameAs" content="https://github.com/hendrycks/robustness" />
+</div>
+
+### `"cifar10_corrupted"`
+
+Cifar10Corrupted is a dataset generated by adding 15 common corruptions to the
+test images in the Cifar10 dataset. This dataset wraps the corrupted Cifar10
+test images uploaded by the original authors.
+
+
+* URL: [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
+* `DatasetBuilder`: [`tfds.image.cifar10_corrupted.Cifar10Corrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar10_corrupted.py)
+
+`cifar10_corrupted` is configured with `tfds.image.cifar10_corrupted.Cifar10CorruptedConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"brightness_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: brightness, severity level: 1
+
+* `"brightness_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: brightness, severity level: 2
+
+* `"brightness_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: brightness, severity level: 3
+
+* `"brightness_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: brightness, severity level: 4
+
+* `"brightness_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: brightness, severity level: 5
+
+* `"contrast_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: contrast, severity level: 1
+
+* `"contrast_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: contrast, severity level: 2
+
+* `"contrast_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: contrast, severity level: 3
+
+* `"contrast_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: contrast, severity level: 4
+
+* `"contrast_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: contrast, severity level: 5
+
+* `"defocus_blur_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: defocus_blur, severity level: 1
+
+* `"defocus_blur_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: defocus_blur, severity level: 2
+
+* `"defocus_blur_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: defocus_blur, severity level: 3
+
+* `"defocus_blur_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: defocus_blur, severity level: 4
+
+* `"defocus_blur_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: defocus_blur, severity level: 5
+
+* `"elastic_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: elastic, severity level: 1
+
+* `"elastic_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: elastic, severity level: 2
+
+* `"elastic_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: elastic, severity level: 3
+
+* `"elastic_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: elastic, severity level: 4
+
+* `"elastic_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: elastic, severity level: 5
+
+* `"fog_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: fog, severity level: 1
+
+* `"fog_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: fog, severity level: 2
+
+* `"fog_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: fog, severity level: 3
+
+* `"fog_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: fog, severity level: 4
+
+* `"fog_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: fog, severity level: 5
+
+* `"frost_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frost, severity level: 1
+
+* `"frost_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frost, severity level: 2
+
+* `"frost_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frost, severity level: 3
+
+* `"frost_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frost, severity level: 4
+
+* `"frost_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frost, severity level: 5
+
+* `"frosted_glass_blur_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frosted_glass_blur, severity level: 1
+
+* `"frosted_glass_blur_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frosted_glass_blur, severity level: 2
+
+* `"frosted_glass_blur_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frosted_glass_blur, severity level: 3
+
+* `"frosted_glass_blur_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frosted_glass_blur, severity level: 4
+
+* `"frosted_glass_blur_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: frosted_glass_blur, severity level: 5
+
+* `"gaussian_noise_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: gaussian_noise, severity level: 1
+
+* `"gaussian_noise_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: gaussian_noise, severity level: 2
+
+* `"gaussian_noise_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: gaussian_noise, severity level: 3
+
+* `"gaussian_noise_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: gaussian_noise, severity level: 4
+
+* `"gaussian_noise_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: gaussian_noise, severity level: 5
+
+* `"impulse_noise_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: impulse_noise, severity level: 1
+
+* `"impulse_noise_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: impulse_noise, severity level: 2
+
+* `"impulse_noise_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: impulse_noise, severity level: 3
+
+* `"impulse_noise_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: impulse_noise, severity level: 4
+
+* `"impulse_noise_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: impulse_noise, severity level: 5
+
+* `"jpeg_compression_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: jpeg_compression, severity level: 1
+
+* `"jpeg_compression_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: jpeg_compression, severity level: 2
+
+* `"jpeg_compression_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: jpeg_compression, severity level: 3
+
+* `"jpeg_compression_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: jpeg_compression, severity level: 4
+
+* `"jpeg_compression_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: jpeg_compression, severity level: 5
+
+* `"motion_blur_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: motion_blur, severity level: 1
+
+* `"motion_blur_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: motion_blur, severity level: 2
+
+* `"motion_blur_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: motion_blur, severity level: 3
+
+* `"motion_blur_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: motion_blur, severity level: 4
+
+* `"motion_blur_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: motion_blur, severity level: 5
+
+* `"pixelate_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: pixelate, severity level: 1
+
+* `"pixelate_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: pixelate, severity level: 2
+
+* `"pixelate_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: pixelate, severity level: 3
+
+* `"pixelate_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: pixelate, severity level: 4
+
+* `"pixelate_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: pixelate, severity level: 5
+
+* `"shot_noise_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: shot_noise, severity level: 1
+
+* `"shot_noise_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: shot_noise, severity level: 2
+
+* `"shot_noise_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: shot_noise, severity level: 3
+
+* `"shot_noise_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: shot_noise, severity level: 4
+
+* `"shot_noise_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: shot_noise, severity level: 5
+
+* `"snow_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: snow, severity level: 1
+
+* `"snow_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: snow, severity level: 2
+
+* `"snow_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: snow, severity level: 3
+
+* `"snow_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: snow, severity level: 4
+
+* `"snow_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: snow, severity level: 5
+
+* `"zoom_blur_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: zoom_blur, severity level: 1
+
+* `"zoom_blur_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: zoom_blur, severity level: 2
+
+* `"zoom_blur_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: zoom_blur, severity level: 3
+
+* `"zoom_blur_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: zoom_blur, severity level: 4
+
+* `"zoom_blur_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: zoom_blur, severity level: 5
+
+
+#### `"cifar10_corrupted/brightness_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/brightness_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/brightness_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/brightness_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/brightness_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/contrast_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/contrast_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/contrast_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/contrast_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/contrast_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/defocus_blur_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/defocus_blur_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/defocus_blur_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/defocus_blur_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/defocus_blur_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/elastic_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/elastic_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/elastic_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/elastic_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/elastic_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/fog_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/fog_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/fog_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/fog_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/fog_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frost_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frost_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frost_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frost_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frost_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frosted_glass_blur_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frosted_glass_blur_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frosted_glass_blur_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frosted_glass_blur_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/frosted_glass_blur_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/gaussian_noise_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/gaussian_noise_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/gaussian_noise_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/gaussian_noise_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/gaussian_noise_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/impulse_noise_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/impulse_noise_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/impulse_noise_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/impulse_noise_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/impulse_noise_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/jpeg_compression_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/jpeg_compression_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/jpeg_compression_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/jpeg_compression_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/jpeg_compression_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/motion_blur_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/motion_blur_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/motion_blur_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/motion_blur_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/motion_blur_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/pixelate_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/pixelate_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/pixelate_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/pixelate_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/pixelate_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/shot_noise_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/shot_noise_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/shot_noise_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/shot_noise_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/shot_noise_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/snow_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/snow_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/snow_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/snow_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/snow_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/zoom_blur_1"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/zoom_blur_2"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/zoom_blur_3"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/zoom_blur_4"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+#### `"cifar10_corrupted/zoom_blur_5"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TEST       |     10,000
+ALL        |     10,000
+
+
+#### Urls
+ * [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@inproceedings{
+  hendrycks2018benchmarking,
+  title={Benchmarking Neural Network Robustness to Common Corruptions and Perturbations},
+  author={Dan Hendrycks and Thomas Dietterich},
+  booktitle={International Conference on Learning Representations},
+  year={2019},
+  url={https://openreview.net/forum?id=HJz6tiCqYm},
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="coco2014" />
+  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and captioning dataset. This version contains images, bounding boxes and labels for the 2014 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only had 80 classes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#coco2014" />
+  <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
+</div>
 
 ### `"coco2014"`
 
@@ -734,6 +2141,16 @@ VALIDATION |     40,504
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="colorectal_histology" />
+  <meta itemprop="description" content="Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#colorectal_histology" />
+  <meta itemprop="sameAs" content="https://zenodo.org/record/53169#.XGZemKwzbmG" />
+</div>
+
 ### `"colorectal_histology"`
 
 Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes.
@@ -781,6 +2198,16 @@ ALL        |      5,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="colorectal_histology_large" />
+  <meta itemprop="description" content="10 large 5000 x 5000 textured colorectal cancer histology images" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#colorectal_histology_large" />
+  <meta itemprop="sameAs" content="https://zenodo.org/record/53169#.XGZemKwzbmG" />
+</div>
+
 ### `"colorectal_histology_large"`
 
 10 large 5000 x 5000 textured colorectal cancer histology images
@@ -826,6 +2253,16 @@ ALL        |         10
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cycle_gan" />
+  <meta itemprop="description" content="Dataset with images from 2 classes (see config name for information on the specific class)" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cycle_gan" />
+  <meta itemprop="sameAs" content="https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/" />
+</div>
 
 ### `"cycle_gan"`
 
@@ -1001,16 +2438,38 @@ TESTB      |        480
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="diabetic_retinopathy_detection" />
+  <meta itemprop="description" content="A large set of high-resolution retina images taken under a variety of imaging conditions." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#diabetic_retinopathy_detection" />
+  <meta itemprop="sameAs" content="https://www.kaggle.com/c/diabetic-retinopathy-detection/data" />
+</div>
+
 ### `"diabetic_retinopathy_detection"`
 
 A large set of high-resolution retina images taken under a variety of imaging conditions.
 
 * URL: [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 * `DatasetBuilder`: [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py)
-* Version: `v1.0.0`
-* Size: `?? GiB`
 
-#### Features
+`diabetic_retinopathy_detection` is configured with
+`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetectionConfig`
+and has the following configurations predefined (defaults to the first one):
+
+*   `"original"` (`v2.0.0`) (`Size: 1.13 MiB`): Images at their original
+    resolution and quality.
+
+*   `"1M"` (`v2.1.0`) (`Size: 1.13 MiB`): Images have roughly 1,000,000 pixels,
+    at 72 quality.
+
+*   `"250K"` (`v2.1.0`) (`Size: 1.13 MiB`): Images have roughly 250,000 pixels,
+    at 72 quality.
+
+#### `"diabetic_retinopathy_detection/original"`
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -1019,15 +2478,35 @@ FeaturesDict({
 })
 ```
 
+#### `"diabetic_retinopathy_detection/1M"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'name': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"diabetic_retinopathy_detection/250K"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'name': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
 
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     88,712
-TEST       |     53,576
-TRAIN      |     35,126
-SAMPLE     |         10
 
+Split      | Examples
+:--------- | -------:
+ALL        | 88,712
+TEST       | 42,670
+TRAIN      | 35,126
+VALIDATION | 10,906
+SAMPLE     | 10
 
 #### Urls
  * [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
@@ -1047,6 +2526,38 @@ SAMPLE     |         10
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="dsprites" />
+  <meta itemprop="description" content="dSprites is a dataset of 2D shapes procedurally generated from 6 ground truth
+independent latent factors. These factors are *color*, *shape*, *scale*,
+*rotation*, *x* and *y* positions of a sprite.
+
+All possible combinations of these latents are present exactly once,
+generating N = 737280 total images.
+
+### Latent factor values
+
+*   Color: white
+*   Shape: square, ellipse, heart
+*   Scale: 6 values linearly spaced in [0.5, 1]
+*   Orientation: 40 values in [0, 2 pi]
+*   Position X: 32 values in [0, 1]
+*   Position Y: 32 values in [0, 1]
+
+We varied one latent at a time (starting from Position Y, then Position X, etc),
+and sequentially stored the images in fixed order.
+Hence the order along the first dimension is fixed and allows you to map back to
+the value of the latents corresponding to that image.
+
+We chose the latents values deliberately to have the smallest step changes
+while ensuring that all pixel outputs were different. No noise was added." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#dsprites" />
+  <meta itemprop="sameAs" content="https://github.com/deepmind/dsprites-dataset" />
+</div>
 
 ### `"dsprites"`
 
@@ -1122,6 +2633,86 @@ year = "2017",
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="dtd" />
+  <meta itemprop="description" content="The Describable Textures Dataset (DTD) is an evolving collection of textural
+images in the wild, annotated with a series of human-centric attributes,
+inspired by the perceptual properties of textures. This data is made available
+to the computer vision community for research purposes.
+
+The &quot;label&quot; of each example is its &quot;key attribute&quot; (see the official website).
+The official release of the dataset defines a 10-fold cross-validation
+partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#dtd" />
+  <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html" />
+</div>
+
+### `"dtd"`
+
+The Describable Textures Dataset (DTD) is an evolving collection of textural
+images in the wild, annotated with a series of human-centric attributes,
+inspired by the perceptual properties of textures. This data is made available
+to the computer vision community for research purposes.
+
+The "label" of each example is its "key attribute" (see the official website).
+The official release of the dataset defines a 10-fold cross-validation
+partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
+
+
+* URL: [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
+* `DatasetBuilder`: [`tfds.image.dtd.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dtd.py)
+* Version: `v1.0.0`
+* Size: `608.33 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      5,640
+VALIDATION |      1,880
+TRAIN      |      1,880
+TEST       |      1,880
+
+
+#### Urls
+ * [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@InProceedings{cimpoi14describing,
+Author    = {M. Cimpoi and S. Maji and I. Kokkinos and S. Mohamed and A. Vedaldi},
+Title     = {Describing Textures in the Wild},
+Booktitle = {Proceedings of the {IEEE} Conf. on Computer Vision and Pattern Recognition ({CVPR})},
+Year      = {2014}}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="emnist" />
+  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digitsderived from the NIST Special Database 19 and converted toa 28x28 pixel image format and dataset structure that directlymatches the MNIST dataset." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#emnist" />
+  <meta itemprop="sameAs" content="https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip" />
+</div>
 
 ### `"emnist"`
 
@@ -1240,6 +2831,16 @@ TEST       |     10,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="fashion_mnist" />
+  <meta itemprop="description" content="Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#fashion_mnist" />
+  <meta itemprop="sameAs" content="https://github.com/zalandoresearch/fashion-mnist" />
+</div>
+
 ### `"fashion_mnist"`
 
 Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.
@@ -1294,6 +2895,16 @@ TEST       |     10,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="horses_or_humans" />
+  <meta itemprop="description" content="A large set of images of horses and humans." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#horses_or_humans" />
+  <meta itemprop="sameAs" content="http://laurencemoroney.com/horses-or-humans-dataset" />
+</div>
+
 ### `"horses_or_humans"`
 
 A large set of images of horses and humans.
@@ -1304,13 +2915,13 @@ A large set of images of horses and humans.
 * Size: `153.59 MiB`
 
 #### Features
+
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -1338,6 +2949,15 @@ url = "http://laurencemoroney.com/horses-or-humans-dataset"
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="image_label_folder" />
+  <meta itemprop="description" content="Generic image classification dataset." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#image_label_folder" />
+</div>
 
 ### `"image_label_folder"`
 
@@ -1369,6 +2989,23 @@ None computed
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="imagenet2012" />
+  <meta itemprop="description" content="ILSVRC 2012, aka ImageNet is an image dataset organized according to the
+WordNet hierarchy. Each meaningful concept in WordNet, possibly described by
+multiple words or word phrases, is called a &quot;synonym set&quot; or &quot;synset&quot;. There are
+more than 100,000 synsets in WordNet, majority of them are nouns (80,000+). In
+ImageNet, we aim to provide on average 1000 images to illustrate each synset.
+Images of each concept are quality-controlled and human-annotated. In its
+completion, we hope ImageNet will offer tens of millions of cleanly sorted
+images for most of the concepts in the WordNet hierarchy." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#imagenet2012" />
+  <meta itemprop="sameAs" content="http://image-net.org/" />
+</div>
+
 ### `"imagenet2012"`
 
 ILSVRC 2012, aka ImageNet is an image dataset organized according to the
@@ -1383,7 +3020,7 @@ images for most of the concepts in the WordNet hierarchy.
 
 * URL: [http://image-net.org/](http://image-net.org/)
 * `DatasetBuilder`: [`tfds.image.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet.py)
-* Version: `v2.0.0`
+* Version: `v2.0.1`
 * Size: `?? GiB`
 
 #### Features
@@ -1425,6 +3062,918 @@ pages={211-252}
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="imagenet2012_corrupted" />
+  <meta itemprop="description" content="Imagenet2012Corrupted is a dataset generated by adding common corruptions to the
+validation images in the ImageNet dataset. In the original paper, there are
+15 different corruptions, and each has 5 levels of severity. In this dataset,
+we implement 12 out of the 15 corruptions, including Gaussian noise, shot noise,
+impulse_noise, defocus blur, frosted glass blur, zoom blur, fog, brightness,
+contrast, elastic, pixelate, and jpeg compression. The randomness is fixed so
+that regeneration is deterministic." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#imagenet2012_corrupted" />
+  <meta itemprop="sameAs" content="https://openreview.net/forum?id=HJz6tiCqYm" />
+</div>
+
+### `"imagenet2012_corrupted"`
+
+Imagenet2012Corrupted is a dataset generated by adding common corruptions to the
+validation images in the ImageNet dataset. In the original paper, there are
+15 different corruptions, and each has 5 levels of severity. In this dataset,
+we implement 12 out of the 15 corruptions, including Gaussian noise, shot noise,
+impulse_noise, defocus blur, frosted glass blur, zoom blur, fog, brightness,
+contrast, elastic, pixelate, and jpeg compression. The randomness is fixed so
+that regeneration is deterministic.
+
+
+* URL: [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+* `DatasetBuilder`: [`tfds.image.imagenet2012_corrupted.Imagenet2012Corrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet2012_corrupted.py)
+
+`imagenet2012_corrupted` is configured with `tfds.image.imagenet2012_corrupted.Imagenet2012CorruptedConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"gaussian_noise_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = gaussian_noise, severity = 1
+
+* `"gaussian_noise_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = gaussian_noise, severity = 2
+
+* `"gaussian_noise_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = gaussian_noise, severity = 3
+
+* `"gaussian_noise_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = gaussian_noise, severity = 4
+
+* `"gaussian_noise_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = gaussian_noise, severity = 5
+
+* `"shot_noise_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = shot_noise, severity = 1
+
+* `"shot_noise_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = shot_noise, severity = 2
+
+* `"shot_noise_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = shot_noise, severity = 3
+
+* `"shot_noise_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = shot_noise, severity = 4
+
+* `"shot_noise_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = shot_noise, severity = 5
+
+* `"impulse_noise_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = impulse_noise, severity = 1
+
+* `"impulse_noise_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = impulse_noise, severity = 2
+
+* `"impulse_noise_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = impulse_noise, severity = 3
+
+* `"impulse_noise_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = impulse_noise, severity = 4
+
+* `"impulse_noise_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = impulse_noise, severity = 5
+
+* `"defocus_blur_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = defocus_blur, severity = 1
+
+* `"defocus_blur_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = defocus_blur, severity = 2
+
+* `"defocus_blur_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = defocus_blur, severity = 3
+
+* `"defocus_blur_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = defocus_blur, severity = 4
+
+* `"defocus_blur_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = defocus_blur, severity = 5
+
+* `"frosted_glass_blur_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = frosted_glass_blur, severity = 1
+
+* `"frosted_glass_blur_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = frosted_glass_blur, severity = 2
+
+* `"frosted_glass_blur_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = frosted_glass_blur, severity = 3
+
+* `"frosted_glass_blur_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = frosted_glass_blur, severity = 4
+
+* `"frosted_glass_blur_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = frosted_glass_blur, severity = 5
+
+* `"zoom_blur_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = zoom_blur, severity = 1
+
+* `"zoom_blur_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = zoom_blur, severity = 2
+
+* `"zoom_blur_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = zoom_blur, severity = 3
+
+* `"zoom_blur_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = zoom_blur, severity = 4
+
+* `"zoom_blur_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = zoom_blur, severity = 5
+
+* `"fog_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = fog, severity = 1
+
+* `"fog_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = fog, severity = 2
+
+* `"fog_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = fog, severity = 3
+
+* `"fog_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = fog, severity = 4
+
+* `"fog_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = fog, severity = 5
+
+* `"brightness_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = brightness, severity = 1
+
+* `"brightness_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = brightness, severity = 2
+
+* `"brightness_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = brightness, severity = 3
+
+* `"brightness_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = brightness, severity = 4
+
+* `"brightness_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = brightness, severity = 5
+
+* `"contrast_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = contrast, severity = 1
+
+* `"contrast_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = contrast, severity = 2
+
+* `"contrast_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = contrast, severity = 3
+
+* `"contrast_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = contrast, severity = 4
+
+* `"contrast_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = contrast, severity = 5
+
+* `"elastic_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = elastic, severity = 1
+
+* `"elastic_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = elastic, severity = 2
+
+* `"elastic_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = elastic, severity = 3
+
+* `"elastic_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = elastic, severity = 4
+
+* `"elastic_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = elastic, severity = 5
+
+* `"pixelate_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = pixelate, severity = 1
+
+* `"pixelate_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = pixelate, severity = 2
+
+* `"pixelate_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = pixelate, severity = 3
+
+* `"pixelate_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = pixelate, severity = 4
+
+* `"pixelate_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = pixelate, severity = 5
+
+* `"jpeg_compression_1"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = jpeg_compression, severity = 1
+
+* `"jpeg_compression_2"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = jpeg_compression, severity = 2
+
+* `"jpeg_compression_3"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = jpeg_compression, severity = 3
+
+* `"jpeg_compression_4"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = jpeg_compression, severity = 4
+
+* `"jpeg_compression_5"` (`v0.0.1`) (`Size: ?? GiB`): corruption type = jpeg_compression, severity = 5
+
+
+#### `"imagenet2012_corrupted/gaussian_noise_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/gaussian_noise_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/gaussian_noise_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/gaussian_noise_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/gaussian_noise_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/shot_noise_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/shot_noise_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/shot_noise_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/shot_noise_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/shot_noise_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/impulse_noise_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/impulse_noise_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/impulse_noise_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/impulse_noise_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/impulse_noise_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/defocus_blur_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/defocus_blur_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/defocus_blur_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/defocus_blur_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/defocus_blur_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/frosted_glass_blur_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/frosted_glass_blur_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/frosted_glass_blur_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/frosted_glass_blur_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/frosted_glass_blur_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/zoom_blur_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/zoom_blur_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/zoom_blur_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/zoom_blur_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/zoom_blur_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/fog_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/fog_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/fog_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/fog_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/fog_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/brightness_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/brightness_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/brightness_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/brightness_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/brightness_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/contrast_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/contrast_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/contrast_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/contrast_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/contrast_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/elastic_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/elastic_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/elastic_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/elastic_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/elastic_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/pixelate_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/pixelate_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/pixelate_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/pixelate_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/pixelate_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/jpeg_compression_1"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/jpeg_compression_2"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/jpeg_compression_3"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/jpeg_compression_4"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+#### `"imagenet2012_corrupted/jpeg_compression_5"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+VALIDATION |     50,000
+ALL        |     50,000
+
+
+#### Urls
+ * [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@inproceedings{
+  hendrycks2018benchmarking,
+  title={Benchmarking Neural Network Robustness to Common Corruptions and Perturbations},
+  author={Dan Hendrycks and Thomas Dietterich},
+  booktitle={International Conference on Learning Representations},
+  year={2019},
+  url={https://openreview.net/forum?id=HJz6tiCqYm},
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="kmnist" />
+  <meta itemprop="description" content="Kuzushiji-MNIST is a drop-in replacement for the MNIST dataset (28x28 grayscale, 70,000 images), provided in the original MNIST format as well as a NumPy format. Since MNIST restricts us to 10 classes, we chose one character to represent each of the 10 rows of Hiragana when creating Kuzushiji-MNIST." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#kmnist" />
+  <meta itemprop="sameAs" content="http://codh.rois.ac.jp/kmnist/index.html.en" />
+</div>
 
 ### `"kmnist"`
 
@@ -1473,6 +4022,16 @@ TEST       |     10,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="lsun" />
+  <meta itemprop="description" content="Large scale images showing different objects from given categories like bedroom, tower etc." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#lsun" />
+  <meta itemprop="sameAs" content="https://www.yf.io/p/lsun" />
+</div>
+
 ### `"lsun"`
 
 Large scale images showing different objects from given categories like bedroom, tower etc.
@@ -1483,9 +4042,25 @@ Large scale images showing different objects from given categories like bedroom,
 `lsun` is configured with `tfds.image.lsun.BuilderConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"classroom"` (`v0.1.1`) (`Size: 3.06 GiB`): Classroom images.
+* `"classroom"` (`v0.1.1`) (`Size: 3.06 GiB`): Images of category classroom
 
-* `"bedroom"` (`v0.1.1`) (`Size: 42.77 GiB`): Bedroom images.
+* `"bedroom"` (`v0.1.1`) (`Size: 42.77 GiB`): Images of category bedroom
+
+* `"bridge"` (`v0.1.1`) (`Size: 15.35 GiB`): Images of category bridge
+
+* `"church_outdoor"` (`v0.1.1`) (`Size: 2.29 GiB`): Images of category church_outdoor
+
+* `"conference_room"` (`v0.1.1`) (`Size: 3.78 GiB`): Images of category conference_room
+
+* `"dining_room"` (`v0.1.1`) (`Size: 10.80 GiB`): Images of category dining_room
+
+* `"kitchen"` (`v0.1.1`) (`Size: 33.34 GiB`): Images of category kitchen
+
+* `"living_room"` (`v0.1.1`) (`Size: 21.23 GiB`): Images of category living_room
+
+* `"restaurant"` (`v0.1.1`) (`Size: 12.57 GiB`): Images of category restaurant
+
+* `"tower"` (`v0.1.1`) (`Size: 11.19 GiB`): Images of category tower
 
 
 #### `"lsun/classroom"`
@@ -1508,12 +4083,92 @@ FeaturesDict({
 
 
 
+#### `"lsun/bridge"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+#### `"lsun/church_outdoor"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+#### `"lsun/conference_room"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+#### `"lsun/dining_room"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+#### `"lsun/kitchen"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+#### `"lsun/living_room"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+#### `"lsun/restaurant"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
+#### `"lsun/tower"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+
+
 
 #### Statistics
 Split  | Examples
 :----- | ---:
-ALL        |  3,033,342
-TRAIN      |  3,033,042
+ALL        |    708,564
+TRAIN      |    708,264
 VALIDATION |        300
 
 
@@ -1543,6 +4198,16 @@ VALIDATION |        300
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="mnist" />
+  <meta itemprop="description" content="The MNIST database of handwritten digits." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#mnist" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/cvdf-datasets/mnist/" />
+</div>
 
 ### `"mnist"`
 
@@ -1588,6 +4253,17 @@ TEST       |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="omniglot" />
+  <meta itemprop="description" content="Omniglot data set for one-shot learning. This dataset contains 1623 different
+handwritten characters from 50 different alphabets." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#omniglot" />
+  <meta itemprop="sameAs" content="https://github.com/brendenlake/omniglot/" />
+</div>
 
 ### `"omniglot"`
 
@@ -1643,6 +4319,25 @@ SMALL1     |      2,720
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="open_images_v4" />
+  <meta itemprop="description" content="Open Images is a dataset of ~9M images that have been annotated with image-level
+ labels and object bounding boxes.
+
+The training set of V4 contains 14.6M bounding boxes for 600 object classes on
+1.74M images, making it the largest existing dataset with object location
+annotations. The boxes have been largely manually drawn by professional
+annotators to ensure accuracy and consistency. The images are very diverse and
+often contain complex scenes with several objects (8.4 per image on average).
+Moreover, the dataset is annotated with image-level labels spanning thousands of
+classes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#open_images_v4" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/openimages/web/index.html" />
+</div>
+
 ### `"open_images_v4"`
 
 Open Images is a dataset of ~9M images that have been annotated with image-level
@@ -1659,10 +4354,18 @@ classes.
 
 * URL: [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 * `DatasetBuilder`: [`tfds.image.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/open_images.py)
-* Version: `v0.1.0`
-* Size: `565.11 GiB`
 
-#### Features
+`open_images_v4` is configured with `tfds.image.open_images.OpenImagesV4Config`
+and has the following configurations predefined (defaults to the first one):
+
+*   `"original"` (`v0.2.0`) (`Size: 565.11 GiB`): Images at their original
+    resolution and quality.
+
+*   `"300k"` (`v0.2.0`) (`Size: 565.11 GiB`): Images have roughly 300,000
+    pixels, at 75 JPEG quality.
+
+#### `"open_images_v4/original"`
+
 ```python
 FeaturesDict({
     'bobjects': SequenceDict({
@@ -1672,7 +4375,7 @@ FeaturesDict({
         'is_inside': Tensor(shape=(), dtype=tf.int8),
         'is_occluded': Tensor(shape=(), dtype=tf.int8),
         'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -1682,9 +4385,42 @@ FeaturesDict({
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
+    'objects_trainable': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
+#### `"open_images_v4/300k"`
+
+```python
+FeaturesDict({
+    'bobjects': SequenceDict({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'objects': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+})
+```
 
 #### Statistics
 Split  | Examples
@@ -1753,11 +4489,81 @@ VALIDATION |     41,620
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="oxford_iiit_pet" />
+  <meta itemprop="description" content="The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
+images for each class. The images have large variations in scale, pose and
+lighting. All images have an associated ground truth annotation of breed." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#oxford_iiit_pet" />
+  <meta itemprop="sameAs" content="http://www.robots.ox.ac.uk/~vgg/data/pets/" />
+</div>
+
+### `"oxford_iiit_pet"`
+
+The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
+images for each class. The images have large variations in scale, pose and
+lighting. All images have an associated ground truth annotation of breed.
+
+
+* URL: [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
+* `DatasetBuilder`: [`tfds.image.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_iiit_pet.py)
+* Version: `v1.1.0`
+* Size: `801.24 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      7,349
+TRAIN      |      3,680
+TEST       |      3,669
+
+
+#### Urls
+ * [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@InProceedings{parkhi12a,
+  author       = "Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.",
+  title        = "Cats and Dogs",
+  booktitle    = "IEEE Conference on Computer Vision and Pattern Recognition",
+  year         = "2012",
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="quickdraw_bitmap" />
+  <meta itemprop="description" content="The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#quickdraw_bitmap" />
+  <meta itemprop="sameAs" content="h" />
+</div>
+
 ### `"quickdraw_bitmap"`
 
 The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images
 
-* URL: [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+* URL: [h](h)
 * `DatasetBuilder`: [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
 * Version: `v1.0.0`
 * Size: `36.82 GiB`
@@ -1779,17 +4585,93 @@ ALL        | 50,426,266
 
 
 #### Urls
- * [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+ * [h](h)
+ * [t](t)
+ * [t](t)
+ * [p](p)
+ * [s](s)
+ * [:](:)
+ * [/](/)
+ * [/](/)
+ * [g](g)
+ * [i](i)
+ * [t](t)
+ * [h](h)
+ * [u](u)
+ * [b](b)
+ * [.](.)
+ * [c](c)
+ * [o](o)
+ * [m](m)
+ * [/](/)
+ * [g](g)
+ * [o](o)
+ * [o](o)
+ * [g](g)
+ * [l](l)
+ * [e](e)
+ * [c](c)
+ * [r](r)
+ * [e](e)
+ * [a](a)
+ * [t](t)
+ * [i](i)
+ * [v](v)
+ * [e](e)
+ * [l](l)
+ * [a](a)
+ * [b](b)
+ * [/](/)
+ * [q](q)
+ * [u](u)
+ * [i](i)
+ * [c](c)
+ * [k](k)
+ * [d](d)
+ * [r](r)
+ * [a](a)
+ * [w](w)
+ * [-](-)
+ * [d](d)
+ * [a](a)
+ * [t](t)
+ * [a](a)
+ * [s](s)
+ * [e](e)
+ * [t](t)
 
 #### Supervised keys (for `as_supervised=True`)
 `(u'image', u'label')`
 
 #### Citation
 ```
-A Neural Representation of Sketch Drawings, D. Ha and D. Eck, arXiv:1704.03477v4, 2017.
+@article{DBLP:journals/corr/HaE17,
+  author    = {David Ha and
+               Douglas Eck},
+  title     = {A Neural Representation of Sketch Drawings},
+  journal   = {CoRR},
+  volume    = {abs/1704.03477},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1704.03477},
+  archivePrefix = {arXiv},
+  eprint    = {1704.03477},
+  timestamp = {Mon, 13 Aug 2018 16:48:30 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/HaE17},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="rock_paper_scissors" />
+  <meta itemprop="description" content="Images of hands playing rock, paper, scissor game." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#rock_paper_scissors" />
+  <meta itemprop="sameAs" content="http://laurencemoroney.com/rock-paper-scissors-dataset" />
+</div>
 
 ### `"rock_paper_scissors"`
 
@@ -1836,6 +4718,255 @@ url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="shapes3d" />
+  <meta itemprop="description" content="3dshapes is a dataset of 3D shapes procedurally generated from 6 ground truth
+independent latent factors. These factors are *floor colour*, *wall colour*, *object colour*,
+*scale*, *shape* and *orientation*.
+
+All possible combinations of these latents are present exactly once, generating N = 480000 total images.
+
+### Latent factor values
+
+*   floor hue: 10 values linearly spaced in [0, 1]
+*   wall hue: 10 values linearly spaced in [0, 1]
+*   object hue: 10 values linearly spaced in [0, 1]
+*   scale: 8 values linearly spaced in [0, 1]
+*   shape: 4 values in [0, 1, 2, 3]
+*   orientation: 15 values linearly spaced in [-30, 30]
+
+We varied one latent at a time (starting from orientation, then shape, etc), and sequentially stored the images in fixed order in the `images` array. The corresponding values of the factors are stored in the same order in the `labels` array." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#shapes3d" />
+  <meta itemprop="sameAs" content="https://github.com/deepmind/3d-shapes" />
+</div>
+
+### `"shapes3d"`
+
+3dshapes is a dataset of 3D shapes procedurally generated from 6 ground truth
+independent latent factors. These factors are *floor colour*, *wall colour*, *object colour*,
+*scale*, *shape* and *orientation*.
+
+All possible combinations of these latents are present exactly once, generating N = 480000 total images.
+
+### Latent factor values
+
+*   floor hue: 10 values linearly spaced in [0, 1]
+*   wall hue: 10 values linearly spaced in [0, 1]
+*   object hue: 10 values linearly spaced in [0, 1]
+*   scale: 8 values linearly spaced in [0, 1]
+*   shape: 4 values in [0, 1, 2, 3]
+*   orientation: 15 values linearly spaced in [-30, 30]
+
+We varied one latent at a time (starting from orientation, then shape, etc), and sequentially stored the images in fixed order in the `images` array. The corresponding values of the factors are stored in the same order in the `labels` array.
+
+
+* URL: [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
+* `DatasetBuilder`: [`tfds.image.shapes3d.Shapes3d`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/shapes3d.py)
+* Version: `v0.1.0`
+* Size: `255.18 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
+    'label_floor_hue': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'label_object_hue': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'label_orientation': ClassLabel(shape=(), dtype=tf.int64, num_classes=15),
+    'label_scale': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+    'label_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+    'label_wall_hue': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'value_floor_hue': Tensor(shape=[], dtype=tf.float32),
+    'value_object_hue': Tensor(shape=[], dtype=tf.float32),
+    'value_orientation': Tensor(shape=[], dtype=tf.float32),
+    'value_scale': Tensor(shape=[], dtype=tf.float32),
+    'value_shape': Tensor(shape=[], dtype=tf.float32),
+    'value_wall_hue': Tensor(shape=[], dtype=tf.float32),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |    480,000
+ALL        |    480,000
+
+
+#### Urls
+ * [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@misc{3dshapes18,
+  title={3D Shapes Dataset},
+  author={Burgess, Chris and Kim, Hyunjik},
+  howpublished={https://github.com/deepmind/3dshapes-dataset/},
+  year={2018}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="smallnorb" />
+  <meta itemprop="description" content="\
+This database is intended for experiments in 3D object recognition from shape. It contains images of 50 toys belonging to 5 generic categories: four-legged animals, human figures, airplanes, trucks, and cars. The objects were imaged by two cameras under 6 lighting conditions, 9 elevations (30 to 70 degrees every 5 degrees), and 18 azimuths (0 to 340 every 20 degrees).
+
+The training set is composed of 5 instances of each category (instances 4, 6, 7, 8 and 9), and the test set of the remaining 5 instances (instances 0, 1, 2, 3, and 5)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#smallnorb" />
+  <meta itemprop="sameAs" content="https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/" />
+</div>
+
+### `"smallnorb"`
+
+\
+This database is intended for experiments in 3D object recognition from shape. It contains images of 50 toys belonging to 5 generic categories: four-legged animals, human figures, airplanes, trucks, and cars. The objects were imaged by two cameras under 6 lighting conditions, 9 elevations (30 to 70 degrees every 5 degrees), and 18 azimuths (0 to 340 every 20 degrees).
+
+The training set is composed of 5 instances of each category (instances 4, 6, 7, 8 and 9), and the test set of the remaining 5 instances (instances 0, 1, 2, 3, and 5).
+
+
+* URL: [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
+* `DatasetBuilder`: [`tfds.image.smallnorb.Smallnorb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/smallnorb.py)
+* Version: `v0.1.0`
+* Size: `250.60 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(96, 96, 1), dtype=tf.uint8),
+    'image2': Image(shape=(96, 96, 1), dtype=tf.uint8),
+    'instance': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'label_azimuth': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+    'label_category': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'label_elevation': ClassLabel(shape=(), dtype=tf.int64, num_classes=9),
+    'label_lighting': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     48,600
+TRAIN      |     24,300
+TEST       |     24,300
+
+
+#### Urls
+ * [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label_category')`
+
+#### Citation
+```
+\
+@article{LeCun2004LearningMF,
+  title={Learning methods for generic object recognition with invariance to pose and lighting},
+  author={Yann LeCun and Fu Jie Huang and L{\'e}on Bottou},
+  journal={Proceedings of the 2004 IEEE Computer Society Conference on Computer Vision and Pattern Recognition},
+  year={2004},
+  volume={2},
+  pages={II-104 Vol.2}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="sun397" />
+  <meta itemprop="description" content="The database contains 108,754 images of 397 categories, used in the
+Scene UNderstanding (SUN) benchmark. The number of images varies across
+categories, but there are at least 100 images per category.
+
+The official release of the dataset defines 10 overlapping partitions of the
+dataset, with 50 testing and training images in each.
+Since TFDS requires the splits not to overlap, we provide a single split for
+the entire dataset (named &quot;full&quot;). All images are converted to RGB." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#sun397" />
+  <meta itemprop="sameAs" content="https://vision.princeton.edu/projects/2010/SUN/" />
+</div>
+
+### `"sun397"`
+
+The database contains 108,754 images of 397 categories, used in the
+Scene UNderstanding (SUN) benchmark. The number of images varies across
+categories, but there are at least 100 images per category.
+
+The official release of the dataset defines 10 overlapping partitions of the
+dataset, with 50 testing and training images in each.
+Since TFDS requires the splits not to overlap, we provide a single split for
+the entire dataset (named "full"). All images are converted to RGB.
+
+
+* URL: [https://vision.princeton.edu/projects/2010/SUN/](https://vision.princeton.edu/projects/2010/SUN/)
+* `DatasetBuilder`: [`tfds.image.sun.Sun397`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/sun.py)
+* Version: `v1.1.0`
+* Size: `36.39 GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+FULL       |    108,753
+ALL        |    108,753
+
+
+#### Urls
+ * [https://vision.princeton.edu/projects/2010/SUN/](https://vision.princeton.edu/projects/2010/SUN/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@INPROCEEDINGS{Xiao:2010,
+author={J. {Xiao} and J. {Hays} and K. A. {Ehinger} and A. {Oliva} and A. {Torralba}},
+booktitle={2010 IEEE Computer Society Conference on Computer Vision and Pattern Recognition},
+title={SUN database: Large-scale scene recognition from abbey to zoo},
+year={2010},
+volume={},
+number={},
+pages={3485-3492},
+keywords={computer vision;human factors;image classification;object recognition;visual databases;SUN database;large-scale scene recognition;abbey;zoo;scene categorization;computer vision;scene understanding research;scene category;object categorization;scene understanding database;state-of-the-art algorithms;human scene classification performance;finer-grained scene representation;Sun;Large-scale systems;Layout;Humans;Image databases;Computer vision;Anthropometry;Bridges;Legged locomotion;Spatial databases}, 
+doi={10.1109/CVPR.2010.5539970},
+ISSN={1063-6919},
+month={June},}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="svhn_cropped" />
+  <meta itemprop="description" content="The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#svhn_cropped" />
+  <meta itemprop="sameAs" content="http://ufldl.stanford.edu/housenumbers/" />
+</div>
+
 ### `"svhn_cropped"`
 
 The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
@@ -1881,6 +5012,16 @@ year = {2011}
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="tf_flowers" />
+  <meta itemprop="description" content="A large set of images of flowers" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#tf_flowers" />
+  <meta itemprop="sameAs" content="http://download.tensorflow.org/example_images/flower_photos.tgz" />
+</div>
+
 ### `"tf_flowers"`
 
 A large set of images of flowers
@@ -1923,6 +5064,24 @@ url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="voc2007" />
+  <meta itemprop="description" content="This dataset contains the data from the PASCAL Visual Object Classes Challenge
+2007, a.k.a. VOC2007, corresponding to the Classification and Detection
+competitions.
+A total of 9,963 images are included in this dataset, where each image contains
+a set of objects, out of 20 different classes, making a total of 24,640
+annotated objects.
+In the Classification competition, the goal is to predict the set of labels
+contained in the image, while in the Detection competition the goal is to
+predict the bounding box and label of each individual object." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#voc2007" />
+  <meta itemprop="sameAs" content="http://host.robots.ox.ac.uk/pascal/VOC/voc2007/" />
+</div>
 
 ### `"voc2007"`
 
@@ -1989,6 +5148,192 @@ TRAIN      |      2,501
 
 ## [`structured`](#structured)
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="higgs" />
+  <meta itemprop="description" content="The data has been produced using Monte Carlo simulations. 
+The first 21 features (columns 2-22) are kinematic properties 
+measured by the particle detectors in the accelerator. 
+The last seven features are functions of the first 21 features; 
+these are high-level features derived by physicists to help 
+discriminate between the two classes. There is an interest 
+in using deep learning methods to obviate the need for physicists 
+to manually develop such features. Benchmark results using 
+Bayesian Decision Trees from a standard physics package and 
+5-layer neural networks are presented in the original paper." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#higgs" />
+  <meta itemprop="sameAs" content="https://archive.ics.uci.edu/ml/datasets/HIGGS" />
+</div>
+
+### `"higgs"`
+
+The data has been produced using Monte Carlo simulations. 
+The first 21 features (columns 2-22) are kinematic properties 
+measured by the particle detectors in the accelerator. 
+The last seven features are functions of the first 21 features; 
+these are high-level features derived by physicists to help 
+discriminate between the two classes. There is an interest 
+in using deep learning methods to obviate the need for physicists 
+to manually develop such features. Benchmark results using 
+Bayesian Decision Trees from a standard physics package and 
+5-layer neural networks are presented in the original paper. 
+
+
+* URL: [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
+* `DatasetBuilder`: [`tfds.structured.higgs.Higgs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/higgs.py)
+* Version: `v1.0.0`
+* Size: `2.62 GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'class_label': Tensor(shape=(), dtype=tf.float32),
+    'jet_1_b-tag': Tensor(shape=(), dtype=tf.float64),
+    'jet_1_eta': Tensor(shape=(), dtype=tf.float64),
+    'jet_1_phi': Tensor(shape=(), dtype=tf.float64),
+    'jet_1_pt': Tensor(shape=(), dtype=tf.float64),
+    'jet_2_b-tag': Tensor(shape=(), dtype=tf.float64),
+    'jet_2_eta': Tensor(shape=(), dtype=tf.float64),
+    'jet_2_phi': Tensor(shape=(), dtype=tf.float64),
+    'jet_2_pt': Tensor(shape=(), dtype=tf.float64),
+    'jet_3_b-tag': Tensor(shape=(), dtype=tf.float64),
+    'jet_3_eta': Tensor(shape=(), dtype=tf.float64),
+    'jet_3_phi': Tensor(shape=(), dtype=tf.float64),
+    'jet_3_pt': Tensor(shape=(), dtype=tf.float64),
+    'jet_4_b-tag': Tensor(shape=(), dtype=tf.float64),
+    'jet_4_eta': Tensor(shape=(), dtype=tf.float64),
+    'jet_4_phi': Tensor(shape=(), dtype=tf.float64),
+    'jet_4_pt': Tensor(shape=(), dtype=tf.float64),
+    'lepton_eta': Tensor(shape=(), dtype=tf.float64),
+    'lepton_pT': Tensor(shape=(), dtype=tf.float64),
+    'lepton_phi': Tensor(shape=(), dtype=tf.float64),
+    'm_bb': Tensor(shape=(), dtype=tf.float64),
+    'm_jj': Tensor(shape=(), dtype=tf.float64),
+    'm_jjj': Tensor(shape=(), dtype=tf.float64),
+    'm_jlv': Tensor(shape=(), dtype=tf.float64),
+    'm_lv': Tensor(shape=(), dtype=tf.float64),
+    'm_wbb': Tensor(shape=(), dtype=tf.float64),
+    'm_wwbb': Tensor(shape=(), dtype=tf.float64),
+    'missing_energy_magnitude': Tensor(shape=(), dtype=tf.float64),
+    'missing_energy_phi': Tensor(shape=(), dtype=tf.float64),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      | 11,000,000
+ALL        | 11,000,000
+
+
+#### Urls
+ * [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@article{Baldi:2014kfa,
+      author         = "Baldi, Pierre and Sadowski, Peter and Whiteson, Daniel",
+      title          = "{Searching for Exotic Particles in High-Energy Physics
+                        with Deep Learning}",
+      journal        = "Nature Commun.",
+      volume         = "5",
+      year           = "2014",
+      pages          = "4308",
+      doi            = "10.1038/ncomms5308",
+      eprint         = "1402.4735",
+      archivePrefix  = "arXiv",
+      primaryClass   = "hep-ph",
+      SLACcitation   = "%%CITATION = ARXIV:1402.4735;%%"
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="iris" />
+  <meta itemprop="description" content="This is perhaps the best known database to be found in the pattern recognition
+literature. Fisher's paper is a classic in the field and is referenced
+frequently to this day. (See Duda &amp; Hart, for example.) The data set contains
+3 classes of 50 instances each, where each class refers to a type of iris
+plant. One class is linearly separable from the other 2; the latter are NOT
+linearly separable from each other." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#iris" />
+  <meta itemprop="sameAs" content="https://archive.ics.uci.edu/ml/datasets/iris" />
+</div>
+
+### `"iris"`
+
+This is perhaps the best known database to be found in the pattern recognition
+literature. Fisher's paper is a classic in the field and is referenced
+frequently to this day. (See Duda & Hart, for example.) The data set contains 3
+classes of 50 instances each, where each class refers to a type of iris plant.
+One class is linearly separable from the other 2; the latter are NOT linearly
+separable from each other.
+
+*   URL:
+    [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
+*   `DatasetBuilder`:
+    [`tfds.structured.iris.Iris`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/iris.py)
+*   Version: `v1.0.0`
+*   Size: `4.44 KiB`
+
+#### Features
+
+```python
+FeaturesDict({
+    'features': Tensor(shape=(4,), dtype=tf.float32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+TRAIN | 150
+ALL   | 150
+
+#### Urls
+
+*   [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'features', u'label')`
+
+#### Citation
+
+```
+@misc{Dua:2019 ,
+author = "Dua, Dheeru and Graff, Casey",
+year = "2017",
+title = "{UCI} Machine Learning Repository",
+url = "http://archive.ics.uci.edu/ml",
+institution = "University of California, Irvine, School of Information and Computer Sciences"
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="titanic" />
+  <meta itemprop="description" content="Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#titanic" />
+  <meta itemprop="sameAs" content="https://www.openml.org/d/40945" />
+</div>
+
 ### `"titanic"`
 
 Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'.
@@ -2049,6 +5394,401 @@ url    = "https://www.openml.org/d/40945"
 
 
 ## [`text`](#text)
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cnn_dailymail" />
+  <meta itemprop="description" content="CNN/DailyMail non-anonymized summarization dataset.
+
+There are two features:
+  - article: text of news article, used as the document to be summarized
+  - highlights: joined text of highlights with &lt;s&gt; and &lt;/s&gt; around each
+    highlight, which is the target summary" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cnn_dailymail" />
+  <meta itemprop="sameAs" content="https://github.com/abisee/cnn-dailymail" />
+</div>
+
+### `"cnn_dailymail"`
+
+CNN/DailyMail non-anonymized summarization dataset.
+
+There are two features:
+  - article: text of news article, used as the document to be summarized
+  - highlights: joined text of highlights with <s> and </s> around each
+    highlight, which is the target summary
+
+
+* URL: [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+* `DatasetBuilder`: [`tfds.text.cnn_dailymail.CnnDailymail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cnn_dailymail.py)
+
+`cnn_dailymail` is configured with `tfds.text.cnn_dailymail.CnnDailymailConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"plain_text"` (`v0.0.1`) (`Size: 558.32 MiB`): Plain text
+
+* `"bytes"` (`v0.0.1`) (`Size: 558.32 MiB`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+* `"subwords32k"` (`v0.0.1`) (`Size: 558.32 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+
+#### `"cnn_dailymail/plain_text"`
+
+```python
+FeaturesDict({
+    'article': Text(shape=(), dtype=tf.string, encoder=None),
+    'highlights': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"cnn_dailymail/bytes"`
+
+```python
+FeaturesDict({
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
+
+
+
+#### `"cnn_dailymail/subwords32k"`
+
+```python
+FeaturesDict({
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    311,971
+TRAIN      |    287,113
+VALIDATION |     13,368
+TEST       |     11,490
+
+
+#### Urls
+ * [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'article', u'highlights')`
+
+#### Citation
+
+```
+@article{DBLP:journals/corr/SeeLM17,
+  author    = {Abigail See and
+               Peter J. Liu and
+               Christopher D. Manning},
+  title     = {Get To The Point: Summarization with Pointer-Generator Networks},
+  journal   = {CoRR},
+  volume    = {abs/1704.04368},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1704.04368},
+  archivePrefix = {arXiv},
+  eprint    = {1704.04368},
+  timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{hermann2015teaching,
+  title={Teaching machines to read and comprehend},
+  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},
+  booktitle={Advances in neural information processing systems},
+  pages={1693--1701},
+  year={2015}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="glue" />
+  <meta itemprop="description" content="The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task
+            in which a system must read a sentence with a pronoun and select the referent of that pronoun from
+            a list of choices. The examples are manually constructed to foil simple statistical methods: Each
+            one is contingent on contextual information provided by a single word or phrase in the sentence.
+            To convert the problem into sentence pair classification, we construct sentence pairs by replacing
+            the ambiguous pronoun with each possible referent. The task is to predict if the sentence with the
+            pronoun substituted is entailed by the original sentence. We use a small evaluation set consisting of
+            new examples derived from fiction books that was shared privately by the authors of the original
+            corpus. While the included training set is balanced between two classes, the test set is imbalanced
+            between them (65% not entailment). Also, due to a data quirk, the development set is adversarial:
+            hypotheses are sometimes shared between training and development examples, so if a model memorizes the
+            training examples, they will predict the wrong label on corresponding development set
+            example. As with QNLI, each example is evaluated separately, so there is not a systematic correspondence
+            between a model's score on this task and its score on the unconverted original task. We
+            call converted dataset WNLI (Winograd NLI)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#glue" />
+  <meta itemprop="sameAs" content="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html" />
+</div>
+
+### `"glue"`
+
+            The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task
+            in which a system must read a sentence with a pronoun and select the referent of that pronoun from
+            a list of choices. The examples are manually constructed to foil simple statistical methods: Each
+            one is contingent on contextual information provided by a single word or phrase in the sentence.
+            To convert the problem into sentence pair classification, we construct sentence pairs by replacing
+            the ambiguous pronoun with each possible referent. The task is to predict if the sentence with the
+            pronoun substituted is entailed by the original sentence. We use a small evaluation set consisting of
+            new examples derived from fiction books that was shared privately by the authors of the original
+            corpus. While the included training set is balanced between two classes, the test set is imbalanced
+            between them (65% not entailment). Also, due to a data quirk, the development set is adversarial:
+            hypotheses are sometimes shared between training and development examples, so if a model memorizes the
+            training examples, they will predict the wrong label on corresponding development set
+            example. As with QNLI, each example is evaluated separately, so there is not a systematic correspondence
+            between a model's score on this task and its score on the unconverted original task. We
+            call converted dataset WNLI (Winograd NLI).
+
+* URL: [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+* `DatasetBuilder`: [`tfds.text.glue.Glue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/glue.py)
+
+`glue` is configured with `tfds.text.glue.GlueConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"cola"` (`v0.0.1`) (`Size: 368.14 KiB`): The Corpus of Linguistic
+    Acceptability consists of English acceptability judgments drawn from books
+    and journal articles on linguistic theory. Each example is a sequence of
+    words annotated with whether it is a grammatical English sentence.
+
+*   `"sst2"` (`v0.0.1`) (`Size: 7.09 MiB`): The Stanford Sentiment Treebank
+    consists of sentences from movie reviews and human annotations of their
+    sentiment. The task is to predict the sentiment of a given sentence. We use
+    the two-way (positive/negative) class split, and use only sentence-level
+    labels.
+
+*   `"mrpc"` (`v0.0.1`) (`Size: 1.43 MiB`): The Microsoft Research Paraphrase
+    Corpus (Dolan & Brockett, 2005) is a corpus of sentence pairs automatically
+    extracted from online news sources, with human annotations for whether the
+    sentences in the pair are semantically equivalent.
+
+*   `"qqp"` (`v0.0.1`) (`Size: 57.73 MiB`): The Quora Question Pairs2 dataset is
+    a collection of question pairs from the community question-answering website
+    Quora. The task is to determine whether a pair of questions are semantically
+    equivalent.
+
+*   `"stsb"` (`v0.0.1`) (`Size: 784.05 KiB`): The Semantic Textual Similarity
+    Benchmark (Cer et al., 2017) is a collection of sentence pairs drawn from
+    news headlines, video and image captions, and natural language inference
+    data. Each pair is human-annotated with a similarity score from 1 to 5.
+
+*   `"mnli"` (`v0.0.1`) (`Size: 298.29 MiB`): The Multi-Genre Natural Language
+    Inference Corpusn is a crowdsourced collection of sentence pairs with
+    textual entailment annotations. Given a premise sentence and a hypothesis
+    sentence, the task is to predict whether the premise entails the hypothesis
+    (entailment), contradicts the hypothesis (contradiction), or neither
+    (neutral). The premise sentences are gathered from ten different sources,
+    including transcribed speech, fiction, and government reports. We use the
+    standard test set, for which we obtained private labels from the authors,
+    and evaluate on both the matched (in-domain) and mismatched (cross-domain)
+    section. We also use and recommend the SNLI corpus as 550k examples of
+    auxiliary training data.
+
+*   `"qnli"` (`v0.0.1`) (`Size: 10.14 MiB`): The Stanford Question Answering
+    Dataset is a question-answering dataset consisting of question-paragraph
+    pairs, where one of the sentences in the paragraph (drawn from Wikipedia)
+    contains the answer to the corresponding question (written by an annotator).
+    We convert the task into sentence pair classification by forming a pair
+    between each question and each sentence in the corresponding context, and
+    filtering out pairs with low lexical overlap between the question and the
+    context sentence. The task is to determine whether the context sentence
+    contains the answer to the question. This modified version of the original
+    task removes the requirement that the model select the exact answer, but
+    also removes the simplifying assumptions that the answer is always present
+    in the input and that lexical overlap is a reliable cue.
+
+*   `"rte"` (`v0.0.1`) (`Size: 680.81 KiB`): The Recognizing Textual Entailment
+    (RTE) datasets come from a series of annual textual entailment challenges.
+    We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim et al.,
+    2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009).4
+    Examples are constructed based on news and Wikipedia text. We convert all
+    datasets to a two-class split, where for three-class datasets we collapse
+    neutral and contradiction into not entailment, for consistency.
+
+*   `"wnli"` (`v0.0.1`) (`Size: 28.32 KiB`): The Winograd Schema Challenge
+    (Levesque et al., 2011) is a reading comprehension task in which a system
+    must read a sentence with a pronoun and select the referent of that pronoun
+    from a list of choices. The examples are manually constructed to foil simple
+    statistical methods: Each one is contingent on contextual information
+    provided by a single word or phrase in the sentence. To convert the problem
+    into sentence pair classification, we construct sentence pairs by replacing
+    the ambiguous pronoun with each possible referent. The task is to predict if
+    the sentence with the pronoun substituted is entailed by the original
+    sentence. We use a small evaluation set consisting of new examples derived
+    from fiction books that was shared privately by the authors of the original
+    corpus. While the included training set is balanced between two classes, the
+    test set is imbalanced between them (65% not entailment). Also, due to a
+    data quirk, the development set is adversarial: hypotheses are sometimes
+    shared between training and development examples, so if a model memorizes
+    the training examples, they will predict the wrong label on corresponding
+    development set example. As with QNLI, each example is evaluated separately,
+    so there is not a systematic correspondence between a model's score on this
+    task and its score on the unconverted original task. We call converted
+    dataset WNLI (Winograd NLI).
+
+#### `"glue/cola"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/sst2"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/mrpc"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/qqp"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'question1': Text(shape=(), dtype=tf.string, encoder=None),
+    'question2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/stsb"`
+
+```python
+FeaturesDict({
+    'label': Tensor(shape=(), dtype=tf.float32),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"glue/mnli"`
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/qnli"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'question': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/rte"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/wnli"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 852
+TRAIN      | 635
+TEST       | 146
+VALIDATION | 71
+
+#### Urls
+ * [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+ * [https://gluebenchmark.com/](https://gluebenchmark.com/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@inproceedings{levesque2012winograd,
+              title={The winograd schema challenge},
+              author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
+              booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
+              year={2012}
+            }
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="imdb_reviews" />
+  <meta itemprop="description" content="Large Movie Review Dataset.
+This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#imdb_reviews" />
+  <meta itemprop="sameAs" content="http://ai.stanford.edu/~amaas/data/sentiment/" />
+</div>
 
 ### `"imdb_reviews"`
 
@@ -2145,6 +5885,16 @@ TEST       |     25,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="lm1b" />
+  <meta itemprop="description" content="A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#lm1b" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/lm-benchmark/" />
+</div>
 
 ### `"lm1b"`
 
@@ -2246,6 +5996,21 @@ TEST       |    306,688
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="multi_nli" />
+  <meta itemprop="description" content="The Multi-Genre Natural Language Inference (MultiNLI) corpus is a
+crowd-sourced collection of 433k sentence pairs annotated with textual
+entailment information. The corpus is modeled on the SNLI corpus, but differs in
+that covers a range of genres of spoken and written text, and supports a
+distinctive cross-genre generalization evaluation. The corpus served as the
+basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#multi_nli" />
+  <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/multinli/" />
+</div>
+
 ### `"multi_nli"`
 
 The Multi-Genre Natural Language Inference (MultiNLI) corpus is a
@@ -2262,29 +6027,26 @@ basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 `multi_nli` is configured with `tfds.text.multi_nli.MultiNLIConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"plain_text"` (`v0.0.1`) (`Size: 216.34 MiB`): Plain text
-
+*   `"plain_text"` (`v0.0.2`) (`Size: 216.34 MiB`): Plain text
 
 #### `"multi_nli/plain_text"`
 
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
-    'label': Text(shape=(), dtype=tf.string, encoder=None),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'premise': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-
-
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |    402,702
-TRAIN      |    392,702
-VALIDATION |     10,000
 
+Split                 | Examples
+:-------------------- | -------:
+ALL                   | 412,349
+TRAIN                 | 392,702
+VALIDATION_MISMATCHED | 9,832
+VALIDATION_MATCHED    | 9,815
 
 #### Urls
  * [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
@@ -2314,6 +6076,16 @@ VALIDATION |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="squad" />
+  <meta itemprop="description" content="Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#squad" />
+  <meta itemprop="sameAs" content="https://rajpurkar.github.io/SQuAD-explorer/" />
+</div>
 
 ### `"squad"`
 
@@ -2415,8 +6187,4081 @@ archivePrefix = {arXiv},
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wikipedia" />
+  <meta itemprop="description" content="Wikipedia dataset containing cleaned articles of all languages. The datasets are built from the Wikipedia dump (https://dumps.wikimedia.org/) with one split per language. Each example contains the content of one full Wikipedia article with cleaning to strip markdown and unwanted sections (references, etc.)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wikipedia" />
+  <meta itemprop="sameAs" content="https://dumps.wikimedia.org" />
+</div>
+
+### `"wikipedia"`
+
+Wikipedia dataset containing cleaned articles of all languages. The datasets are built from the Wikipedia dump (https://dumps.wikimedia.org/) with one split per language. Each example contains the content of one full Wikipedia article with cleaning to strip markdown and unwanted sections (references, etc.).
+
+* URL: [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
+* `DatasetBuilder`: [`tfds.text.wikipedia.Wikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia.py)
+
+`wikipedia` is configured with `tfds.text.wikipedia.WikipediaConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"20190301.aa"` (`v0.0.2`) (`Size: 44.09 KiB`): Wikipedia dataset for aa, parsed from 20190301 dump.
+
+* `"20190301.ab"` (`v0.0.2`) (`Size: 1.31 MiB`): Wikipedia dataset for ab, parsed from 20190301 dump.
+
+* `"20190301.ace"` (`v0.0.2`) (`Size: 2.66 MiB`): Wikipedia dataset for ace, parsed from 20190301 dump.
+
+* `"20190301.ady"` (`v0.0.2`) (`Size: 349.43 KiB`): Wikipedia dataset for ady, parsed from 20190301 dump.
+
+* `"20190301.af"` (`v0.0.2`) (`Size: 84.13 MiB`): Wikipedia dataset for af, parsed from 20190301 dump.
+
+* `"20190301.ak"` (`v0.0.2`) (`Size: 377.84 KiB`): Wikipedia dataset for ak, parsed from 20190301 dump.
+
+* `"20190301.als"` (`v0.0.2`) (`Size: 46.90 MiB`): Wikipedia dataset for als, parsed from 20190301 dump.
+
+* `"20190301.am"` (`v0.0.2`) (`Size: 6.54 MiB`): Wikipedia dataset for am, parsed from 20190301 dump.
+
+* `"20190301.an"` (`v0.0.2`) (`Size: 31.39 MiB`): Wikipedia dataset for an, parsed from 20190301 dump.
+
+* `"20190301.ang"` (`v0.0.2`) (`Size: 3.77 MiB`): Wikipedia dataset for ang, parsed from 20190301 dump.
+
+* `"20190301.ar"` (`v0.0.2`) (`Size: 805.82 MiB`): Wikipedia dataset for ar, parsed from 20190301 dump.
+
+* `"20190301.arc"` (`v0.0.2`) (`Size: 952.49 KiB`): Wikipedia dataset for arc, parsed from 20190301 dump.
+
+* `"20190301.arz"` (`v0.0.2`) (`Size: 20.32 MiB`): Wikipedia dataset for arz, parsed from 20190301 dump.
+
+* `"20190301.as"` (`v0.0.2`) (`Size: 19.06 MiB`): Wikipedia dataset for as, parsed from 20190301 dump.
+
+* `"20190301.ast"` (`v0.0.2`) (`Size: 216.68 MiB`): Wikipedia dataset for ast, parsed from 20190301 dump.
+
+* `"20190301.atj"` (`v0.0.2`) (`Size: 467.05 KiB`): Wikipedia dataset for atj, parsed from 20190301 dump.
+
+* `"20190301.av"` (`v0.0.2`) (`Size: 3.61 MiB`): Wikipedia dataset for av, parsed from 20190301 dump.
+
+* `"20190301.ay"` (`v0.0.2`) (`Size: 2.06 MiB`): Wikipedia dataset for ay, parsed from 20190301 dump.
+
+* `"20190301.az"` (`v0.0.2`) (`Size: 163.04 MiB`): Wikipedia dataset for az, parsed from 20190301 dump.
+
+* `"20190301.azb"` (`v0.0.2`) (`Size: 50.59 MiB`): Wikipedia dataset for azb, parsed from 20190301 dump.
+
+* `"20190301.ba"` (`v0.0.2`) (`Size: 55.04 MiB`): Wikipedia dataset for ba, parsed from 20190301 dump.
+
+* `"20190301.bar"` (`v0.0.2`) (`Size: 30.14 MiB`): Wikipedia dataset for bar, parsed from 20190301 dump.
+
+* `"20190301.bat-smg"` (`v0.0.2`) (`Size: 4.61 MiB`): Wikipedia dataset for bat-smg, parsed from 20190301 dump.
+
+* `"20190301.bcl"` (`v0.0.2`) (`Size: 6.18 MiB`): Wikipedia dataset for bcl, parsed from 20190301 dump.
+
+* `"20190301.be"` (`v0.0.2`) (`Size: 192.23 MiB`): Wikipedia dataset for be, parsed from 20190301 dump.
+
+* `"20190301.be-x-old"` (`v0.0.2`) (`Size: 74.77 MiB`): Wikipedia dataset for be-x-old, parsed from 20190301 dump.
+
+* `"20190301.bg"` (`v0.0.2`) (`Size: 326.20 MiB`): Wikipedia dataset for bg, parsed from 20190301 dump.
+
+* `"20190301.bh"` (`v0.0.2`) (`Size: 13.28 MiB`): Wikipedia dataset for bh, parsed from 20190301 dump.
+
+* `"20190301.bi"` (`v0.0.2`) (`Size: 424.88 KiB`): Wikipedia dataset for bi, parsed from 20190301 dump.
+
+* `"20190301.bjn"` (`v0.0.2`) (`Size: 2.09 MiB`): Wikipedia dataset for bjn, parsed from 20190301 dump.
+
+* `"20190301.bm"` (`v0.0.2`) (`Size: 447.98 KiB`): Wikipedia dataset for bm, parsed from 20190301 dump.
+
+* `"20190301.bn"` (`v0.0.2`) (`Size: 145.04 MiB`): Wikipedia dataset for bn, parsed from 20190301 dump.
+
+* `"20190301.bo"` (`v0.0.2`) (`Size: 12.41 MiB`): Wikipedia dataset for bo, parsed from 20190301 dump.
+
+* `"20190301.bpy"` (`v0.0.2`) (`Size: 5.05 MiB`): Wikipedia dataset for bpy, parsed from 20190301 dump.
+
+* `"20190301.br"` (`v0.0.2`) (`Size: 49.14 MiB`): Wikipedia dataset for br, parsed from 20190301 dump.
+
+* `"20190301.bs"` (`v0.0.2`) (`Size: 103.26 MiB`): Wikipedia dataset for bs, parsed from 20190301 dump.
+
+* `"20190301.bug"` (`v0.0.2`) (`Size: 1.76 MiB`): Wikipedia dataset for bug, parsed from 20190301 dump.
+
+* `"20190301.bxr"` (`v0.0.2`) (`Size: 3.21 MiB`): Wikipedia dataset for bxr, parsed from 20190301 dump.
+
+* `"20190301.ca"` (`v0.0.2`) (`Size: 849.65 MiB`): Wikipedia dataset for ca, parsed from 20190301 dump.
+
+* `"20190301.cbk-zam"` (`v0.0.2`) (`Size: 1.84 MiB`): Wikipedia dataset for cbk-zam, parsed from 20190301 dump.
+
+* `"20190301.cdo"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for cdo, parsed from 20190301 dump.
+
+* `"20190301.ce"` (`v0.0.2`) (`Size: 43.89 MiB`): Wikipedia dataset for ce, parsed from 20190301 dump.
+
+* `"20190301.ceb"` (`v0.0.2`) (`Size: ?? GiB`): Wikipedia dataset for ceb, parsed from 20190301 dump.
+
+* `"20190301.ch"` (`v0.0.2`) (`Size: 684.97 KiB`): Wikipedia dataset for ch, parsed from 20190301 dump.
+
+* `"20190301.cho"` (`v0.0.2`) (`Size: 25.99 KiB`): Wikipedia dataset for cho, parsed from 20190301 dump.
+
+* `"20190301.chr"` (`v0.0.2`) (`Size: 651.25 KiB`): Wikipedia dataset for chr, parsed from 20190301 dump.
+
+* `"20190301.chy"` (`v0.0.2`) (`Size: 325.90 KiB`): Wikipedia dataset for chy, parsed from 20190301 dump.
+
+* `"20190301.ckb"` (`v0.0.2`) (`Size: 22.16 MiB`): Wikipedia dataset for ckb, parsed from 20190301 dump.
+
+* `"20190301.co"` (`v0.0.2`) (`Size: 3.38 MiB`): Wikipedia dataset for co, parsed from 20190301 dump.
+
+* `"20190301.cr"` (`v0.0.2`) (`Size: 259.71 KiB`): Wikipedia dataset for cr, parsed from 20190301 dump.
+
+* `"20190301.crh"` (`v0.0.2`) (`Size: 4.01 MiB`): Wikipedia dataset for crh, parsed from 20190301 dump.
+
+* `"20190301.cs"` (`v0.0.2`) (`Size: 759.21 MiB`): Wikipedia dataset for cs, parsed from 20190301 dump.
+
+* `"20190301.csb"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for csb, parsed from 20190301 dump.
+
+* `"20190301.cu"` (`v0.0.2`) (`Size: 631.49 KiB`): Wikipedia dataset for cu, parsed from 20190301 dump.
+
+* `"20190301.cv"` (`v0.0.2`) (`Size: 22.23 MiB`): Wikipedia dataset for cv, parsed from 20190301 dump.
+
+* `"20190301.cy"` (`v0.0.2`) (`Size: 64.37 MiB`): Wikipedia dataset for cy, parsed from 20190301 dump.
+
+* `"20190301.da"` (`v0.0.2`) (`Size: 323.53 MiB`): Wikipedia dataset for da, parsed from 20190301 dump.
+
+* `"20190301.de"` (`v0.0.2`) (`Size: 4.97 GiB`): Wikipedia dataset for de, parsed from 20190301 dump.
+
+* `"20190301.din"` (`v0.0.2`) (`Size: 457.06 KiB`): Wikipedia dataset for din, parsed from 20190301 dump.
+
+* `"20190301.diq"` (`v0.0.2`) (`Size: 7.24 MiB`): Wikipedia dataset for diq, parsed from 20190301 dump.
+
+* `"20190301.dsb"` (`v0.0.2`) (`Size: 3.54 MiB`): Wikipedia dataset for dsb, parsed from 20190301 dump.
+
+* `"20190301.dty"` (`v0.0.2`) (`Size: 4.95 MiB`): Wikipedia dataset for dty, parsed from 20190301 dump.
+
+* `"20190301.dv"` (`v0.0.2`) (`Size: 4.24 MiB`): Wikipedia dataset for dv, parsed from 20190301 dump.
+
+* `"20190301.dz"` (`v0.0.2`) (`Size: 360.01 KiB`): Wikipedia dataset for dz, parsed from 20190301 dump.
+
+* `"20190301.ee"` (`v0.0.2`) (`Size: 434.14 KiB`): Wikipedia dataset for ee, parsed from 20190301 dump.
+
+* `"20190301.el"` (`v0.0.2`) (`Size: 324.40 MiB`): Wikipedia dataset for el, parsed from 20190301 dump.
+
+* `"20190301.eml"` (`v0.0.2`) (`Size: 7.72 MiB`): Wikipedia dataset for eml, parsed from 20190301 dump.
+
+* `"20190301.en"` (`v0.0.2`) (`Size: 15.72 GiB`): Wikipedia dataset for en, parsed from 20190301 dump.
+
+* `"20190301.eo"` (`v0.0.2`) (`Size: 245.73 MiB`): Wikipedia dataset for eo, parsed from 20190301 dump.
+
+* `"20190301.es"` (`v0.0.2`) (`Size: 2.93 GiB`): Wikipedia dataset for es, parsed from 20190301 dump.
+
+* `"20190301.et"` (`v0.0.2`) (`Size: 196.03 MiB`): Wikipedia dataset for et, parsed from 20190301 dump.
+
+* `"20190301.eu"` (`v0.0.2`) (`Size: 180.35 MiB`): Wikipedia dataset for eu, parsed from 20190301 dump.
+
+* `"20190301.ext"` (`v0.0.2`) (`Size: 2.40 MiB`): Wikipedia dataset for ext, parsed from 20190301 dump.
+
+* `"20190301.fa"` (`v0.0.2`) (`Size: 693.84 MiB`): Wikipedia dataset for fa, parsed from 20190301 dump.
+
+* `"20190301.ff"` (`v0.0.2`) (`Size: 387.75 KiB`): Wikipedia dataset for ff, parsed from 20190301 dump.
+
+* `"20190301.fi"` (`v0.0.2`) (`Size: 656.44 MiB`): Wikipedia dataset for fi, parsed from 20190301 dump.
+
+* `"20190301.fiu-vro"` (`v0.0.2`) (`Size: 2.00 MiB`): Wikipedia dataset for fiu-vro, parsed from 20190301 dump.
+
+* `"20190301.fj"` (`v0.0.2`) (`Size: 262.98 KiB`): Wikipedia dataset for fj, parsed from 20190301 dump.
+
+* `"20190301.fo"` (`v0.0.2`) (`Size: 13.67 MiB`): Wikipedia dataset for fo, parsed from 20190301 dump.
+
+* `"20190301.fr"` (`v0.0.2`) (`Size: 4.14 GiB`): Wikipedia dataset for fr, parsed from 20190301 dump.
+
+* `"20190301.frp"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for frp, parsed from 20190301 dump.
+
+* `"20190301.frr"` (`v0.0.2`) (`Size: 7.88 MiB`): Wikipedia dataset for frr, parsed from 20190301 dump.
+
+* `"20190301.fur"` (`v0.0.2`) (`Size: 2.29 MiB`): Wikipedia dataset for fur, parsed from 20190301 dump.
+
+* `"20190301.fy"` (`v0.0.2`) (`Size: 45.52 MiB`): Wikipedia dataset for fy, parsed from 20190301 dump.
+
+* `"20190301.ga"` (`v0.0.2`) (`Size: 24.78 MiB`): Wikipedia dataset for ga, parsed from 20190301 dump.
+
+* `"20190301.gag"` (`v0.0.2`) (`Size: 2.04 MiB`): Wikipedia dataset for gag, parsed from 20190301 dump.
+
+* `"20190301.gan"` (`v0.0.2`) (`Size: 3.82 MiB`): Wikipedia dataset for gan, parsed from 20190301 dump.
+
+* `"20190301.gd"` (`v0.0.2`) (`Size: 8.51 MiB`): Wikipedia dataset for gd, parsed from 20190301 dump.
+
+* `"20190301.gl"` (`v0.0.2`) (`Size: 235.07 MiB`): Wikipedia dataset for gl, parsed from 20190301 dump.
+
+* `"20190301.glk"` (`v0.0.2`) (`Size: 1.91 MiB`): Wikipedia dataset for glk, parsed from 20190301 dump.
+
+* `"20190301.gn"` (`v0.0.2`) (`Size: 3.37 MiB`): Wikipedia dataset for gn, parsed from 20190301 dump.
+
+* `"20190301.gom"` (`v0.0.2`) (`Size: 6.07 MiB`): Wikipedia dataset for gom, parsed from 20190301 dump.
+
+* `"20190301.gor"` (`v0.0.2`) (`Size: 1.28 MiB`): Wikipedia dataset for gor, parsed from 20190301 dump.
+
+* `"20190301.got"` (`v0.0.2`) (`Size: 604.10 KiB`): Wikipedia dataset for got, parsed from 20190301 dump.
+
+* `"20190301.gu"` (`v0.0.2`) (`Size: 27.23 MiB`): Wikipedia dataset for gu, parsed from 20190301 dump.
+
+* `"20190301.gv"` (`v0.0.2`) (`Size: 5.32 MiB`): Wikipedia dataset for gv, parsed from 20190301 dump.
+
+* `"20190301.ha"` (`v0.0.2`) (`Size: 1.62 MiB`): Wikipedia dataset for ha, parsed from 20190301 dump.
+
+* `"20190301.hak"` (`v0.0.2`) (`Size: 3.28 MiB`): Wikipedia dataset for hak, parsed from 20190301 dump.
+
+* `"20190301.haw"` (`v0.0.2`) (`Size: 1017.76 KiB`): Wikipedia dataset for haw, parsed from 20190301 dump.
+
+* `"20190301.he"` (`v0.0.2`) (`Size: 572.30 MiB`): Wikipedia dataset for he, parsed from 20190301 dump.
+
+* `"20190301.hi"` (`v0.0.2`) (`Size: 137.86 MiB`): Wikipedia dataset for hi, parsed from 20190301 dump.
+
+* `"20190301.hif"` (`v0.0.2`) (`Size: 4.57 MiB`): Wikipedia dataset for hif, parsed from 20190301 dump.
+
+* `"20190301.ho"` (`v0.0.2`) (`Size: 18.37 KiB`): Wikipedia dataset for ho, parsed from 20190301 dump.
+
+* `"20190301.hr"` (`v0.0.2`) (`Size: 246.05 MiB`): Wikipedia dataset for hr, parsed from 20190301 dump.
+
+* `"20190301.hsb"` (`v0.0.2`) (`Size: 10.38 MiB`): Wikipedia dataset for hsb, parsed from 20190301 dump.
+
+* `"20190301.ht"` (`v0.0.2`) (`Size: 10.23 MiB`): Wikipedia dataset for ht, parsed from 20190301 dump.
+
+* `"20190301.hu"` (`v0.0.2`) (`Size: 810.17 MiB`): Wikipedia dataset for hu, parsed from 20190301 dump.
+
+* `"20190301.hy"` (`v0.0.2`) (`Size: 277.53 MiB`): Wikipedia dataset for hy, parsed from 20190301 dump.
+
+* `"20190301.hz"` (`v0.0.2`) (`Size: 16.35 KiB`): Wikipedia dataset for hz, parsed from 20190301 dump.
+
+* `"20190301.ia"` (`v0.0.2`) (`Size: 7.85 MiB`): Wikipedia dataset for ia, parsed from 20190301 dump.
+
+* `"20190301.id"` (`v0.0.2`) (`Size: 523.94 MiB`): Wikipedia dataset for id, parsed from 20190301 dump.
+
+* `"20190301.ie"` (`v0.0.2`) (`Size: 1.70 MiB`): Wikipedia dataset for ie, parsed from 20190301 dump.
+
+* `"20190301.ig"` (`v0.0.2`) (`Size: 1.00 MiB`): Wikipedia dataset for ig, parsed from 20190301 dump.
+
+* `"20190301.ii"` (`v0.0.2`) (`Size: 30.88 KiB`): Wikipedia dataset for ii, parsed from 20190301 dump.
+
+* `"20190301.ik"` (`v0.0.2`) (`Size: 238.12 KiB`): Wikipedia dataset for ik, parsed from 20190301 dump.
+
+* `"20190301.ilo"` (`v0.0.2`) (`Size: 15.22 MiB`): Wikipedia dataset for ilo, parsed from 20190301 dump.
+
+* `"20190301.inh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for inh, parsed from 20190301 dump.
+
+* `"20190301.io"` (`v0.0.2`) (`Size: 12.56 MiB`): Wikipedia dataset for io, parsed from 20190301 dump.
+
+* `"20190301.is"` (`v0.0.2`) (`Size: 41.86 MiB`): Wikipedia dataset for is, parsed from 20190301 dump.
+
+* `"20190301.it"` (`v0.0.2`) (`Size: 2.66 GiB`): Wikipedia dataset for it, parsed from 20190301 dump.
+
+* `"20190301.iu"` (`v0.0.2`) (`Size: 284.06 KiB`): Wikipedia dataset for iu, parsed from 20190301 dump.
+
+* `"20190301.ja"` (`v0.0.2`) (`Size: 2.74 GiB`): Wikipedia dataset for ja, parsed from 20190301 dump.
+
+* `"20190301.jam"` (`v0.0.2`) (`Size: 895.29 KiB`): Wikipedia dataset for jam, parsed from 20190301 dump.
+
+* `"20190301.jbo"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for jbo, parsed from 20190301 dump.
+
+* `"20190301.jv"` (`v0.0.2`) (`Size: 39.32 MiB`): Wikipedia dataset for jv, parsed from 20190301 dump.
+
+* `"20190301.ka"` (`v0.0.2`) (`Size: 131.78 MiB`): Wikipedia dataset for ka, parsed from 20190301 dump.
+
+* `"20190301.kaa"` (`v0.0.2`) (`Size: 1.35 MiB`): Wikipedia dataset for kaa, parsed from 20190301 dump.
+
+* `"20190301.kab"` (`v0.0.2`) (`Size: 3.62 MiB`): Wikipedia dataset for kab, parsed from 20190301 dump.
+
+* `"20190301.kbd"` (`v0.0.2`) (`Size: 1.65 MiB`): Wikipedia dataset for kbd, parsed from 20190301 dump.
+
+* `"20190301.kbp"` (`v0.0.2`) (`Size: 1.24 MiB`): Wikipedia dataset for kbp, parsed from 20190301 dump.
+
+* `"20190301.kg"` (`v0.0.2`) (`Size: 439.26 KiB`): Wikipedia dataset for kg, parsed from 20190301 dump.
+
+* `"20190301.ki"` (`v0.0.2`) (`Size: 370.78 KiB`): Wikipedia dataset for ki, parsed from 20190301 dump.
+
+* `"20190301.kj"` (`v0.0.2`) (`Size: 16.58 KiB`): Wikipedia dataset for kj, parsed from 20190301 dump.
+
+* `"20190301.kk"` (`v0.0.2`) (`Size: 113.46 MiB`): Wikipedia dataset for kk, parsed from 20190301 dump.
+
+* `"20190301.kl"` (`v0.0.2`) (`Size: 862.51 KiB`): Wikipedia dataset for kl, parsed from 20190301 dump.
+
+* `"20190301.km"` (`v0.0.2`) (`Size: 21.92 MiB`): Wikipedia dataset for km, parsed from 20190301 dump.
+
+* `"20190301.kn"` (`v0.0.2`) (`Size: 69.62 MiB`): Wikipedia dataset for kn, parsed from 20190301 dump.
+
+* `"20190301.ko"` (`v0.0.2`) (`Size: 625.16 MiB`): Wikipedia dataset for ko, parsed from 20190301 dump.
+
+* `"20190301.koi"` (`v0.0.2`) (`Size: 2.12 MiB`): Wikipedia dataset for koi, parsed from 20190301 dump.
+
+* `"20190301.kr"` (`v0.0.2`) (`Size: 13.89 KiB`): Wikipedia dataset for kr, parsed from 20190301 dump.
+
+* `"20190301.krc"` (`v0.0.2`) (`Size: 3.16 MiB`): Wikipedia dataset for krc, parsed from 20190301 dump.
+
+* `"20190301.ks"` (`v0.0.2`) (`Size: 309.15 KiB`): Wikipedia dataset for ks, parsed from 20190301 dump.
+
+* `"20190301.ksh"` (`v0.0.2`) (`Size: 3.07 MiB`): Wikipedia dataset for ksh, parsed from 20190301 dump.
+
+* `"20190301.ku"` (`v0.0.2`) (`Size: 17.09 MiB`): Wikipedia dataset for ku, parsed from 20190301 dump.
+
+* `"20190301.kv"` (`v0.0.2`) (`Size: 3.36 MiB`): Wikipedia dataset for kv, parsed from 20190301 dump.
+
+* `"20190301.kw"` (`v0.0.2`) (`Size: 1.71 MiB`): Wikipedia dataset for kw, parsed from 20190301 dump.
+
+* `"20190301.ky"` (`v0.0.2`) (`Size: 33.13 MiB`): Wikipedia dataset for ky, parsed from 20190301 dump.
+
+* `"20190301.la"` (`v0.0.2`) (`Size: 82.72 MiB`): Wikipedia dataset for la, parsed from 20190301 dump.
+
+* `"20190301.lad"` (`v0.0.2`) (`Size: 3.39 MiB`): Wikipedia dataset for lad, parsed from 20190301 dump.
+
+* `"20190301.lb"` (`v0.0.2`) (`Size: 45.70 MiB`): Wikipedia dataset for lb, parsed from 20190301 dump.
+
+* `"20190301.lbe"` (`v0.0.2`) (`Size: 1.22 MiB`): Wikipedia dataset for lbe, parsed from 20190301 dump.
+
+* `"20190301.lez"` (`v0.0.2`) (`Size: 4.16 MiB`): Wikipedia dataset for lez, parsed from 20190301 dump.
+
+* `"20190301.lfn"` (`v0.0.2`) (`Size: 2.81 MiB`): Wikipedia dataset for lfn, parsed from 20190301 dump.
+
+* `"20190301.lg"` (`v0.0.2`) (`Size: 1.58 MiB`): Wikipedia dataset for lg, parsed from 20190301 dump.
+
+* `"20190301.li"` (`v0.0.2`) (`Size: 13.86 MiB`): Wikipedia dataset for li, parsed from 20190301 dump.
+
+* `"20190301.lij"` (`v0.0.2`) (`Size: 2.73 MiB`): Wikipedia dataset for lij, parsed from 20190301 dump.
+
+* `"20190301.lmo"` (`v0.0.2`) (`Size: 21.34 MiB`): Wikipedia dataset for lmo, parsed from 20190301 dump.
+
+* `"20190301.ln"` (`v0.0.2`) (`Size: 1.83 MiB`): Wikipedia dataset for ln, parsed from 20190301 dump.
+
+* `"20190301.lo"` (`v0.0.2`) (`Size: 3.44 MiB`): Wikipedia dataset for lo, parsed from 20190301 dump.
+
+* `"20190301.lrc"` (`v0.0.2`) (`Size: 4.71 MiB`): Wikipedia dataset for lrc, parsed from 20190301 dump.
+
+* `"20190301.lt"` (`v0.0.2`) (`Size: 174.73 MiB`): Wikipedia dataset for lt, parsed from 20190301 dump.
+
+* `"20190301.ltg"` (`v0.0.2`) (`Size: 798.18 KiB`): Wikipedia dataset for ltg, parsed from 20190301 dump.
+
+* `"20190301.lv"` (`v0.0.2`) (`Size: 127.47 MiB`): Wikipedia dataset for lv, parsed from 20190301 dump.
+
+* `"20190301.mai"` (`v0.0.2`) (`Size: 10.80 MiB`): Wikipedia dataset for mai, parsed from 20190301 dump.
+
+* `"20190301.map-bms"` (`v0.0.2`) (`Size: 4.49 MiB`): Wikipedia dataset for map-bms, parsed from 20190301 dump.
+
+* `"20190301.mdf"` (`v0.0.2`) (`Size: 1.04 MiB`): Wikipedia dataset for mdf, parsed from 20190301 dump.
+
+* `"20190301.mg"` (`v0.0.2`) (`Size: 25.64 MiB`): Wikipedia dataset for mg, parsed from 20190301 dump.
+
+* `"20190301.mh"` (`v0.0.2`) (`Size: 27.71 KiB`): Wikipedia dataset for mh, parsed from 20190301 dump.
+
+* `"20190301.mhr"` (`v0.0.2`) (`Size: 5.69 MiB`): Wikipedia dataset for mhr, parsed from 20190301 dump.
+
+* `"20190301.mi"` (`v0.0.2`) (`Size: 1.96 MiB`): Wikipedia dataset for mi, parsed from 20190301 dump.
+
+* `"20190301.min"` (`v0.0.2`) (`Size: 25.05 MiB`): Wikipedia dataset for min, parsed from 20190301 dump.
+
+* `"20190301.mk"` (`v0.0.2`) (`Size: 140.69 MiB`): Wikipedia dataset for mk, parsed from 20190301 dump.
+
+* `"20190301.ml"` (`v0.0.2`) (`Size: 117.24 MiB`): Wikipedia dataset for ml, parsed from 20190301 dump.
+
+* `"20190301.mn"` (`v0.0.2`) (`Size: 28.23 MiB`): Wikipedia dataset for mn, parsed from 20190301 dump.
+
+* `"20190301.mr"` (`v0.0.2`) (`Size: 49.58 MiB`): Wikipedia dataset for mr, parsed from 20190301 dump.
+
+* `"20190301.mrj"` (`v0.0.2`) (`Size: 3.01 MiB`): Wikipedia dataset for mrj, parsed from 20190301 dump.
+
+* `"20190301.ms"` (`v0.0.2`) (`Size: 205.79 MiB`): Wikipedia dataset for ms, parsed from 20190301 dump.
+
+* `"20190301.mt"` (`v0.0.2`) (`Size: 8.21 MiB`): Wikipedia dataset for mt, parsed from 20190301 dump.
+
+* `"20190301.mus"` (`v0.0.2`) (`Size: 14.20 KiB`): Wikipedia dataset for mus, parsed from 20190301 dump.
+
+* `"20190301.mwl"` (`v0.0.2`) (`Size: 8.95 MiB`): Wikipedia dataset for mwl, parsed from 20190301 dump.
+
+* `"20190301.my"` (`v0.0.2`) (`Size: 34.60 MiB`): Wikipedia dataset for my, parsed from 20190301 dump.
+
+* `"20190301.myv"` (`v0.0.2`) (`Size: 7.79 MiB`): Wikipedia dataset for myv, parsed from 20190301 dump.
+
+* `"20190301.mzn"` (`v0.0.2`) (`Size: 6.47 MiB`): Wikipedia dataset for mzn, parsed from 20190301 dump.
+
+* `"20190301.na"` (`v0.0.2`) (`Size: 480.57 KiB`): Wikipedia dataset for na, parsed from 20190301 dump.
+
+* `"20190301.nah"` (`v0.0.2`) (`Size: 4.30 MiB`): Wikipedia dataset for nah, parsed from 20190301 dump.
+
+* `"20190301.nap"` (`v0.0.2`) (`Size: 5.55 MiB`): Wikipedia dataset for nap, parsed from 20190301 dump.
+
+* `"20190301.nds"` (`v0.0.2`) (`Size: 33.28 MiB`): Wikipedia dataset for nds, parsed from 20190301 dump.
+
+* `"20190301.nds-nl"` (`v0.0.2`) (`Size: 6.67 MiB`): Wikipedia dataset for nds-nl, parsed from 20190301 dump.
+
+* `"20190301.ne"` (`v0.0.2`) (`Size: 29.26 MiB`): Wikipedia dataset for ne, parsed from 20190301 dump.
+
+* `"20190301.new"` (`v0.0.2`) (`Size: 16.91 MiB`): Wikipedia dataset for new, parsed from 20190301 dump.
+
+* `"20190301.ng"` (`v0.0.2`) (`Size: 91.11 KiB`): Wikipedia dataset for ng, parsed from 20190301 dump.
+
+* `"20190301.nl"` (`v0.0.2`) (`Size: 1.38 GiB`): Wikipedia dataset for nl, parsed from 20190301 dump.
+
+* `"20190301.nn"` (`v0.0.2`) (`Size: 126.01 MiB`): Wikipedia dataset for nn, parsed from 20190301 dump.
+
+* `"20190301.no"` (`v0.0.2`) (`Size: 610.74 MiB`): Wikipedia dataset for no, parsed from 20190301 dump.
+
+* `"20190301.nov"` (`v0.0.2`) (`Size: 1.12 MiB`): Wikipedia dataset for nov, parsed from 20190301 dump.
+
+* `"20190301.nrm"` (`v0.0.2`) (`Size: 1.56 MiB`): Wikipedia dataset for nrm, parsed from 20190301 dump.
+
+* `"20190301.nso"` (`v0.0.2`) (`Size: 2.20 MiB`): Wikipedia dataset for nso, parsed from 20190301 dump.
+
+* `"20190301.nv"` (`v0.0.2`) (`Size: 2.52 MiB`): Wikipedia dataset for nv, parsed from 20190301 dump.
+
+* `"20190301.ny"` (`v0.0.2`) (`Size: 1.18 MiB`): Wikipedia dataset for ny, parsed from 20190301 dump.
+
+* `"20190301.oc"` (`v0.0.2`) (`Size: 70.97 MiB`): Wikipedia dataset for oc, parsed from 20190301 dump.
+
+* `"20190301.olo"` (`v0.0.2`) (`Size: 1.55 MiB`): Wikipedia dataset for olo, parsed from 20190301 dump.
+
+* `"20190301.om"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for om, parsed from 20190301 dump.
+
+* `"20190301.or"` (`v0.0.2`) (`Size: 24.90 MiB`): Wikipedia dataset for or, parsed from 20190301 dump.
+
+* `"20190301.os"` (`v0.0.2`) (`Size: 7.31 MiB`): Wikipedia dataset for os, parsed from 20190301 dump.
+
+* `"20190301.pa"` (`v0.0.2`) (`Size: 40.39 MiB`): Wikipedia dataset for pa, parsed from 20190301 dump.
+
+* `"20190301.pag"` (`v0.0.2`) (`Size: 1.29 MiB`): Wikipedia dataset for pag, parsed from 20190301 dump.
+
+* `"20190301.pam"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for pam, parsed from 20190301 dump.
+
+* `"20190301.pap"` (`v0.0.2`) (`Size: 1.33 MiB`): Wikipedia dataset for pap, parsed from 20190301 dump.
+
+* `"20190301.pcd"` (`v0.0.2`) (`Size: 4.14 MiB`): Wikipedia dataset for pcd, parsed from 20190301 dump.
+
+* `"20190301.pdc"` (`v0.0.2`) (`Size: 1.10 MiB`): Wikipedia dataset for pdc, parsed from 20190301 dump.
+
+* `"20190301.pfl"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for pfl, parsed from 20190301 dump.
+
+* `"20190301.pi"` (`v0.0.2`) (`Size: 586.77 KiB`): Wikipedia dataset for pi, parsed from 20190301 dump.
+
+* `"20190301.pih"` (`v0.0.2`) (`Size: 654.11 KiB`): Wikipedia dataset for pih, parsed from 20190301 dump.
+
+* `"20190301.pl"` (`v0.0.2`) (`Size: 1.76 GiB`): Wikipedia dataset for pl, parsed from 20190301 dump.
+
+* `"20190301.pms"` (`v0.0.2`) (`Size: 13.42 MiB`): Wikipedia dataset for pms, parsed from 20190301 dump.
+
+* `"20190301.pnb"` (`v0.0.2`) (`Size: 24.31 MiB`): Wikipedia dataset for pnb, parsed from 20190301 dump.
+
+* `"20190301.pnt"` (`v0.0.2`) (`Size: 533.84 KiB`): Wikipedia dataset for pnt, parsed from 20190301 dump.
+
+* `"20190301.ps"` (`v0.0.2`) (`Size: 14.09 MiB`): Wikipedia dataset for ps, parsed from 20190301 dump.
+
+* `"20190301.pt"` (`v0.0.2`) (`Size: 1.58 GiB`): Wikipedia dataset for pt, parsed from 20190301 dump.
+
+* `"20190301.qu"` (`v0.0.2`) (`Size: 11.42 MiB`): Wikipedia dataset for qu, parsed from 20190301 dump.
+
+* `"20190301.rm"` (`v0.0.2`) (`Size: 5.85 MiB`): Wikipedia dataset for rm, parsed from 20190301 dump.
+
+* `"20190301.rmy"` (`v0.0.2`) (`Size: 509.61 KiB`): Wikipedia dataset for rmy, parsed from 20190301 dump.
+
+* `"20190301.rn"` (`v0.0.2`) (`Size: 779.25 KiB`): Wikipedia dataset for rn, parsed from 20190301 dump.
+
+* `"20190301.ro"` (`v0.0.2`) (`Size: 449.49 MiB`): Wikipedia dataset for ro, parsed from 20190301 dump.
+
+* `"20190301.roa-rup"` (`v0.0.2`) (`Size: 931.23 KiB`): Wikipedia dataset for roa-rup, parsed from 20190301 dump.
+
+* `"20190301.roa-tara"` (`v0.0.2`) (`Size: 5.98 MiB`): Wikipedia dataset for roa-tara, parsed from 20190301 dump.
+
+* `"20190301.ru"` (`v0.0.2`) (`Size: 3.51 GiB`): Wikipedia dataset for ru, parsed from 20190301 dump.
+
+* `"20190301.rue"` (`v0.0.2`) (`Size: 4.11 MiB`): Wikipedia dataset for rue, parsed from 20190301 dump.
+
+* `"20190301.rw"` (`v0.0.2`) (`Size: 904.81 KiB`): Wikipedia dataset for rw, parsed from 20190301 dump.
+
+* `"20190301.sa"` (`v0.0.2`) (`Size: 14.29 MiB`): Wikipedia dataset for sa, parsed from 20190301 dump.
+
+* `"20190301.sah"` (`v0.0.2`) (`Size: 11.88 MiB`): Wikipedia dataset for sah, parsed from 20190301 dump.
+
+* `"20190301.sat"` (`v0.0.2`) (`Size: 2.36 MiB`): Wikipedia dataset for sat, parsed from 20190301 dump.
+
+* `"20190301.sc"` (`v0.0.2`) (`Size: 4.39 MiB`): Wikipedia dataset for sc, parsed from 20190301 dump.
+
+* `"20190301.scn"` (`v0.0.2`) (`Size: 11.83 MiB`): Wikipedia dataset for scn, parsed from 20190301 dump.
+
+* `"20190301.sco"` (`v0.0.2`) (`Size: 57.80 MiB`): Wikipedia dataset for sco, parsed from 20190301 dump.
+
+* `"20190301.sd"` (`v0.0.2`) (`Size: 12.62 MiB`): Wikipedia dataset for sd, parsed from 20190301 dump.
+
+* `"20190301.se"` (`v0.0.2`) (`Size: 3.30 MiB`): Wikipedia dataset for se, parsed from 20190301 dump.
+
+* `"20190301.sg"` (`v0.0.2`) (`Size: 286.02 KiB`): Wikipedia dataset for sg, parsed from 20190301 dump.
+
+* `"20190301.sh"` (`v0.0.2`) (`Size: 406.72 MiB`): Wikipedia dataset for sh, parsed from 20190301 dump.
+
+* `"20190301.si"` (`v0.0.2`) (`Size: 36.84 MiB`): Wikipedia dataset for si, parsed from 20190301 dump.
+
+* `"20190301.simple"` (`v0.0.2`) (`Size: 156.11 MiB`): Wikipedia dataset for simple, parsed from 20190301 dump.
+
+* `"20190301.sk"` (`v0.0.2`) (`Size: 254.37 MiB`): Wikipedia dataset for sk, parsed from 20190301 dump.
+
+* `"20190301.sl"` (`v0.0.2`) (`Size: 201.41 MiB`): Wikipedia dataset for sl, parsed from 20190301 dump.
+
+* `"20190301.sm"` (`v0.0.2`) (`Size: 678.46 KiB`): Wikipedia dataset for sm, parsed from 20190301 dump.
+
+* `"20190301.sn"` (`v0.0.2`) (`Size: 2.02 MiB`): Wikipedia dataset for sn, parsed from 20190301 dump.
+
+* `"20190301.so"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for so, parsed from 20190301 dump.
+
+* `"20190301.sq"` (`v0.0.2`) (`Size: 77.55 MiB`): Wikipedia dataset for sq, parsed from 20190301 dump.
+
+* `"20190301.sr"` (`v0.0.2`) (`Size: 725.30 MiB`): Wikipedia dataset for sr, parsed from 20190301 dump.
+
+* `"20190301.srn"` (`v0.0.2`) (`Size: 634.21 KiB`): Wikipedia dataset for srn, parsed from 20190301 dump.
+
+* `"20190301.ss"` (`v0.0.2`) (`Size: 737.58 KiB`): Wikipedia dataset for ss, parsed from 20190301 dump.
+
+* `"20190301.st"` (`v0.0.2`) (`Size: 482.27 KiB`): Wikipedia dataset for st, parsed from 20190301 dump.
+
+* `"20190301.stq"` (`v0.0.2`) (`Size: 3.26 MiB`): Wikipedia dataset for stq, parsed from 20190301 dump.
+
+* `"20190301.su"` (`v0.0.2`) (`Size: 20.52 MiB`): Wikipedia dataset for su, parsed from 20190301 dump.
+
+* `"20190301.sv"` (`v0.0.2`) (`Size: ?? GiB`): Wikipedia dataset for sv, parsed from 20190301 dump.
+
+* `"20190301.sw"` (`v0.0.2`) (`Size: 27.60 MiB`): Wikipedia dataset for sw, parsed from 20190301 dump.
+
+* `"20190301.szl"` (`v0.0.2`) (`Size: 4.06 MiB`): Wikipedia dataset for szl, parsed from 20190301 dump.
+
+* `"20190301.ta"` (`v0.0.2`) (`Size: 141.07 MiB`): Wikipedia dataset for ta, parsed from 20190301 dump.
+
+* `"20190301.tcy"` (`v0.0.2`) (`Size: 2.33 MiB`): Wikipedia dataset for tcy, parsed from 20190301 dump.
+
+* `"20190301.te"` (`v0.0.2`) (`Size: 113.16 MiB`): Wikipedia dataset for te, parsed from 20190301 dump.
+
+* `"20190301.tet"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for tet, parsed from 20190301 dump.
+
+* `"20190301.tg"` (`v0.0.2`) (`Size: 36.95 MiB`): Wikipedia dataset for tg, parsed from 20190301 dump.
+
+* `"20190301.th"` (`v0.0.2`) (`Size: 254.00 MiB`): Wikipedia dataset for th, parsed from 20190301 dump.
+
+* `"20190301.ti"` (`v0.0.2`) (`Size: 309.72 KiB`): Wikipedia dataset for ti, parsed from 20190301 dump.
+
+* `"20190301.tk"` (`v0.0.2`) (`Size: 4.50 MiB`): Wikipedia dataset for tk, parsed from 20190301 dump.
+
+* `"20190301.tl"` (`v0.0.2`) (`Size: 50.85 MiB`): Wikipedia dataset for tl, parsed from 20190301 dump.
+
+* `"20190301.tn"` (`v0.0.2`) (`Size: 1.21 MiB`): Wikipedia dataset for tn, parsed from 20190301 dump.
+
+* `"20190301.to"` (`v0.0.2`) (`Size: 775.10 KiB`): Wikipedia dataset for to, parsed from 20190301 dump.
+
+* `"20190301.tpi"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for tpi, parsed from 20190301 dump.
+
+* `"20190301.tr"` (`v0.0.2`) (`Size: 497.19 MiB`): Wikipedia dataset for tr, parsed from 20190301 dump.
+
+* `"20190301.ts"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for ts, parsed from 20190301 dump.
+
+* `"20190301.tt"` (`v0.0.2`) (`Size: 53.23 MiB`): Wikipedia dataset for tt, parsed from 20190301 dump.
+
+* `"20190301.tum"` (`v0.0.2`) (`Size: 309.58 KiB`): Wikipedia dataset for tum, parsed from 20190301 dump.
+
+* `"20190301.tw"` (`v0.0.2`) (`Size: 345.96 KiB`): Wikipedia dataset for tw, parsed from 20190301 dump.
+
+* `"20190301.ty"` (`v0.0.2`) (`Size: 485.56 KiB`): Wikipedia dataset for ty, parsed from 20190301 dump.
+
+* `"20190301.tyv"` (`v0.0.2`) (`Size: 2.60 MiB`): Wikipedia dataset for tyv, parsed from 20190301 dump.
+
+* `"20190301.udm"` (`v0.0.2`) (`Size: 2.94 MiB`): Wikipedia dataset for udm, parsed from 20190301 dump.
+
+* `"20190301.ug"` (`v0.0.2`) (`Size: 5.64 MiB`): Wikipedia dataset for ug, parsed from 20190301 dump.
+
+* `"20190301.uk"` (`v0.0.2`) (`Size: 1.28 GiB`): Wikipedia dataset for uk, parsed from 20190301 dump.
+
+* `"20190301.ur"` (`v0.0.2`) (`Size: 129.57 MiB`): Wikipedia dataset for ur, parsed from 20190301 dump.
+
+* `"20190301.uz"` (`v0.0.2`) (`Size: 60.85 MiB`): Wikipedia dataset for uz, parsed from 20190301 dump.
+
+* `"20190301.ve"` (`v0.0.2`) (`Size: 257.59 KiB`): Wikipedia dataset for ve, parsed from 20190301 dump.
+
+* `"20190301.vec"` (`v0.0.2`) (`Size: 10.65 MiB`): Wikipedia dataset for vec, parsed from 20190301 dump.
+
+* `"20190301.vep"` (`v0.0.2`) (`Size: 4.59 MiB`): Wikipedia dataset for vep, parsed from 20190301 dump.
+
+* `"20190301.vi"` (`v0.0.2`) (`Size: 623.74 MiB`): Wikipedia dataset for vi, parsed from 20190301 dump.
+
+* `"20190301.vls"` (`v0.0.2`) (`Size: 6.58 MiB`): Wikipedia dataset for vls, parsed from 20190301 dump.
+
+* `"20190301.vo"` (`v0.0.2`) (`Size: 23.80 MiB`): Wikipedia dataset for vo, parsed from 20190301 dump.
+
+* `"20190301.wa"` (`v0.0.2`) (`Size: 8.75 MiB`): Wikipedia dataset for wa, parsed from 20190301 dump.
+
+* `"20190301.war"` (`v0.0.2`) (`Size: 256.72 MiB`): Wikipedia dataset for war, parsed from 20190301 dump.
+
+* `"20190301.wo"` (`v0.0.2`) (`Size: 1.54 MiB`): Wikipedia dataset for wo, parsed from 20190301 dump.
+
+* `"20190301.wuu"` (`v0.0.2`) (`Size: 9.08 MiB`): Wikipedia dataset for wuu, parsed from 20190301 dump.
+
+* `"20190301.xal"` (`v0.0.2`) (`Size: 1.64 MiB`): Wikipedia dataset for xal, parsed from 20190301 dump.
+
+* `"20190301.xh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for xh, parsed from 20190301 dump.
+
+* `"20190301.xmf"` (`v0.0.2`) (`Size: 9.40 MiB`): Wikipedia dataset for xmf, parsed from 20190301 dump.
+
+* `"20190301.yi"` (`v0.0.2`) (`Size: 11.56 MiB`): Wikipedia dataset for yi, parsed from 20190301 dump.
+
+* `"20190301.yo"` (`v0.0.2`) (`Size: 11.55 MiB`): Wikipedia dataset for yo, parsed from 20190301 dump.
+
+* `"20190301.za"` (`v0.0.2`) (`Size: 735.93 KiB`): Wikipedia dataset for za, parsed from 20190301 dump.
+
+* `"20190301.zea"` (`v0.0.2`) (`Size: 2.47 MiB`): Wikipedia dataset for zea, parsed from 20190301 dump.
+
+* `"20190301.zh"` (`v0.0.2`) (`Size: 1.71 GiB`): Wikipedia dataset for zh, parsed from 20190301 dump.
+
+* `"20190301.zh-classical"` (`v0.0.2`) (`Size: 13.37 MiB`): Wikipedia dataset for zh-classical, parsed from 20190301 dump.
+
+* `"20190301.zh-min-nan"` (`v0.0.2`) (`Size: 50.30 MiB`): Wikipedia dataset for zh-min-nan, parsed from 20190301 dump.
+
+* `"20190301.zh-yue"` (`v0.0.2`) (`Size: 52.41 MiB`): Wikipedia dataset for zh-yue, parsed from 20190301 dump.
+
+* `"20190301.zu"` (`v0.0.2`) (`Size: 1.50 MiB`): Wikipedia dataset for zu, parsed from 20190301 dump.
+
+
+#### `"wikipedia/20190301.aa"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ab"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ace"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ady"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.af"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ak"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.als"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.am"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.an"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ang"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ar"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.arc"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.arz"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.as"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ast"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.atj"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.av"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ay"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.az"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.azb"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ba"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bar"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bat-smg"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bcl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.be"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.be-x-old"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bg"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bh"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bjn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bm"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bpy"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.br"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bs"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bug"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.bxr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ca"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.cbk-zam"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.cdo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ce"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ceb"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ch"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.cho"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.chr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.chy"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ckb"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.co"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.cr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.crh"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.cs"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.csb"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.cu"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.cv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.cy"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.da"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.de"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.din"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.diq"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.dsb"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.dty"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.dv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.dz"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ee"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.el"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.eml"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.en"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.eo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.es"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.et"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.eu"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ext"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.fa"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ff"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.fi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.fiu-vro"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.fj"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.fo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.fr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.frp"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.frr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.fur"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.fy"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ga"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gag"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gan"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gd"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.glk"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gom"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gor"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.got"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gu"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.gv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ha"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.hak"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.haw"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.he"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.hi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.hif"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ho"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.hr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.hsb"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ht"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.hu"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.hy"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.hz"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ia"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.id"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ie"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ig"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ii"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ik"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ilo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.inh"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.io"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.is"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.it"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.iu"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ja"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.jam"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.jbo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.jv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ka"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kaa"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kab"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kbd"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kbp"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kg"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ki"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kj"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kk"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.km"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ko"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.koi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.krc"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ks"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ksh"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ku"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.kw"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ky"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.la"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lad"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lb"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lbe"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lez"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lfn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lg"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.li"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lij"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lmo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ln"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lrc"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lt"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ltg"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.lv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mai"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.map-bms"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mdf"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mg"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mh"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mhr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.min"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mk"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ml"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mrj"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ms"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mt"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mus"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mwl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.my"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.myv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.mzn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.na"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nah"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nap"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nds"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nds-nl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ne"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.new"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ng"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.no"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nov"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nrm"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nso"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.nv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ny"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.oc"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.olo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.om"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.or"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.os"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pa"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pag"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pam"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pap"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pcd"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pdc"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pfl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pih"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pms"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pnb"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pnt"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ps"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.pt"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.qu"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.rm"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.rmy"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.rn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ro"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.roa-rup"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.roa-tara"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ru"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.rue"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.rw"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sa"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sah"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sat"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sc"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.scn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sco"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sd"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.se"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sg"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sh"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.si"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.simple"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sk"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sm"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.so"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sq"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.srn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ss"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.st"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.stq"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.su"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.sw"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.szl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ta"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tcy"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.te"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tet"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tg"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.th"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ti"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tk"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tl"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tn"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.to"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tpi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tr"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ts"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tt"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tum"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tw"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ty"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.tyv"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.udm"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ug"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.uk"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ur"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.uz"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.ve"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.vec"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.vep"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.vi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.vls"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.vo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.wa"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.war"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.wo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.wuu"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.xal"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.xh"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.xmf"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.yi"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.yo"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.za"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.zea"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.zh"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.zh-classical"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.zh-min-nan"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.zh-yue"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wikipedia/20190301.zu"`
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'title': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+None computed
+
+#### Urls
+ * [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@ONLINE {wikidump,
+    author = "Wikimedia Foundation",
+    title  = "Wikimedia Downloads",
+    url    = "https://dumps.wikimedia.org"
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="xnli" />
+  <meta itemprop="description" content="XNLI is a subset of a few thousand examples from MNLI which has been translated
+into a 14 different languages (some low-ish resource). As with MNLI, the goal is
+to predict textual entailment (does sentence A imply/contradict/neither sentence
+B) and is a classification task (given two sentences, predict one of three
+labels)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#xnli" />
+  <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/xnli/" />
+</div>
+
+### `"xnli"`
+
+XNLI is a subset of a few thousand examples from MNLI which has been translated
+into a 14 different languages (some low-ish resource). As with MNLI, the goal is
+to predict textual entailment (does sentence A imply/contradict/neither sentence
+B) and is a classification task (given two sentences, predict one of three
+labels).
+
+
+* URL: [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
+* `DatasetBuilder`: [`tfds.text.xnli.Xnli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/xnli.py)
+
+`xnli` is configured with `tfds.text.xnli.BuilderConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"plain_text"` (`v0.0.1`) (`Size: 17.04 MiB`): Plain text import of XNLI
+
+#### `"xnli/plain_text"`
+
+```python
+FeaturesDict({
+    'hypothesis': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string, encoder=None),
+        'translation': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Translation({
+        'ar': Text(shape=(), dtype=tf.string, encoder=None),
+        'bg': Text(shape=(), dtype=tf.string, encoder=None),
+        'de': Text(shape=(), dtype=tf.string, encoder=None),
+        'el': Text(shape=(), dtype=tf.string, encoder=None),
+        'en': Text(shape=(), dtype=tf.string, encoder=None),
+        'es': Text(shape=(), dtype=tf.string, encoder=None),
+        'fr': Text(shape=(), dtype=tf.string, encoder=None),
+        'hi': Text(shape=(), dtype=tf.string, encoder=None),
+        'ru': Text(shape=(), dtype=tf.string, encoder=None),
+        'sw': Text(shape=(), dtype=tf.string, encoder=None),
+        'th': Text(shape=(), dtype=tf.string, encoder=None),
+        'tr': Text(shape=(), dtype=tf.string, encoder=None),
+        'ur': Text(shape=(), dtype=tf.string, encoder=None),
+        'vi': Text(shape=(), dtype=tf.string, encoder=None),
+        'zh': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 7,500
+TEST       | 5,010
+VALIDATION | 2,490
+
+#### Urls
+ * [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@InProceedings{conneau2018xnli,
+  author = "Conneau, Alexis
+                 and Rinott, Ruty
+                 and Lample, Guillaume
+                 and Williams, Adina
+                 and Bowman, Samuel R.
+                 and Schwenk, Holger
+                 and Stoyanov, Veselin",
+  title = "XNLI: Evaluating Cross-lingual Sentence Representations",
+  booktitle = "Proceedings of the 2018 Conference on Empirical Methods
+               in Natural Language Processing",
+  year = "2018",
+  publisher = "Association for Computational Linguistics",
+  location = "Brussels, Belgium",
+}
+```
+
+---
+
 
 ## [`translate`](#translate)
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="flores" />
+  <meta itemprop="description" content="Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#flores" />
+  <meta itemprop="sameAs" content="https://github.com/facebookresearch/flores/" />
+</div>
 
 ### `"flores"`
 
@@ -2483,7 +10328,341 @@ TEST       |      2,766
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="para_crawl" />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Hungarian." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
+  <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
+</div>
+
+### `"para_crawl"`
+
+Web-Scale Parallel Corpora for Official European Languages. English-Hungarian.
+
+*   URL:
+    [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
+*   `DatasetBuilder`:
+    [`tfds.translate.para_crawl.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
+
+`para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
+has the following configurations predefined (defaults to the first one):
+
+*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fr, uses encoder plain_text.
+
+*   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fi, uses encoder plain_text.
+
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to da, uses encoder plain_text.
+
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
+
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to it, uses encoder plain_text.
+
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pl, uses encoder plain_text.
+
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ro, uses encoder plain_text.
+
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pt, uses encoder plain_text.
+
+*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to mt, uses encoder plain_text.
+
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to cs, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
+
+*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to es, uses encoder plain_text.
+
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to et, uses encoder plain_text.
+
+*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to el, uses encoder plain_text.
+
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ga, uses encoder plain_text.
+
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to bg, uses encoder plain_text.
+
+*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sv, uses encoder plain_text.
+
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
+
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
+
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to nl, uses encoder plain_text.
+
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
+
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
+
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hu, uses encoder plain_text.
+
+#### `"para_crawl/enfr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfi_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enda_plain_text"`
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ende_plain_text"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enit_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'it': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enro_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enmt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'mt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/encs_plain_text"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enes_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'es': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enet_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enel_plain_text"`
+
+```python
+Translation({
+    'el': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enga_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ga': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensk_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sk': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ennl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhu_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hu': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+None computed
+
+#### Urls
+
+*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hu.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hu.bicleaner07.txt.gz)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'en', u'hu')`
+
+#### Citation
+
+```
+@misc {paracrawl,
+    title  = "ParaCrawl",
+    year   = "2018",
+    url    = "http://paracrawl.eu/download.html."
+}
+```
+
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="ted_hrlr_translate" />
+  <meta itemprop="description" content="Data sets derived from TED talk transcripts for comparing similar language pairs
+where one is high resource and the other is low resource." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#ted_hrlr_translate" />
+  <meta itemprop="sameAs" content="https://github.com/neulab/word-embeddings-for-nmt" />
+</div>
 
 ### `"ted_hrlr_translate"`
 
@@ -2708,6 +10887,18 @@ VALIDATION |      4,045
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="ted_multi_translate" />
+  <meta itemprop="description" content="Massively multilingual (60 language) data set derived from TED Talk transcripts.
+Each record consists of parallel arrays of language and text. Missing and
+incomplete translations will be filtered out." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#ted_multi_translate" />
+  <meta itemprop="sameAs" content="https://github.com/neulab/word-embeddings-for-nmt" />
+</div>
+
 ### `"ted_multi_translate"`
 
 Massively multilingual (60 language) data set derived from TED Talk transcripts.
@@ -2772,17 +10963,975 @@ VALIDATION |      6,049
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt15_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt15_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt15/translation-task.html" />
+</div>
+
+### `"wmt15_translate"`
+
+Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
+* URL: [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+* `DatasetBuilder`: [`tfds.translate.wmt15.Wmt15Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt15.py)
+
+`wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"cs-en"` (`v0.0.2`) (`Size: 1.62 GiB`): WMT 2015 translation task dataset.
+
+* `"de-en"` (`v0.0.2`) (`Size: 1.62 GiB`): WMT 2015 translation task dataset.
+
+* `"fi-en"` (`v0.0.2`) (`Size: 260.51 MiB`): WMT 2015 translation task dataset.
+
+* `"fr-en"` (`v0.0.2`) (`Size: 6.24 GiB`): WMT 2015 translation task dataset.
+
+* `"ru-en"` (`v0.0.2`) (`Size: 1.02 GiB`): WMT 2015 translation task dataset.
+
+* `"cs-en.subwords8k"` (`v0.0.1`) (`Size: ?? GiB`): WMT 2015 translation dataset with subword encoding.
+
+* `"de-en.subwords8k"` (`v0.0.1`) (`Size: 1.62 GiB`): WMT 2015 translation dataset with subword encoding.
+
+* `"fi-en.subwords8k"` (`v0.0.1`) (`Size: 260.51 MiB`): WMT 2015 translation dataset with subword encoding.
+
+* `"fr-en.subwords8k"` (`v0.0.1`) (`Size: 6.24 GiB`): WMT 2015 translation dataset with subword encoding.
+
+* `"ru-en.subwords8k"` (`v0.0.1`) (`Size: 1.02 GiB`): WMT 2015 translation dataset with subword encoding.
+
+
+#### `"wmt15_translate/cs-en"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt15_translate/de-en"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt15_translate/fi-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt15_translate/fr-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt15_translate/ru-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt15_translate/cs-en.subwords8k"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt15_translate/de-en.subwords8k"`
+
+```python
+Translation({
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
+})
+```
+
+
+
+#### `"wmt15_translate/fi-en.subwords8k"`
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
+    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
+})
+```
+
+
+
+#### `"wmt15_translate/fr-en.subwords8k"`
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
+})
+```
+
+
+
+#### `"wmt15_translate/ru-en.subwords8k"`
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
+    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |  2,506,905
+TRAIN      |  2,495,081
+VALIDATION |      9,006
+TEST       |      2,818
+
+
+#### Urls
+ * [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'ru', u'en')`
+
+#### Citation
+```
+@InProceedings{bojar-EtAl:2015:WMT,
+  author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Haddow, Barry  and  Huck, Matthias  and  Hokamp, Chris  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco},
+  title     = {Findings of the 2015 Workshop on Statistical Machine Translation},
+  booktitle = {Proceedings of the Tenth Workshop on Statistical Machine Translation},
+  month     = {September},
+  year      = {2015},
+  address   = {Lisbon, Portugal},
+  publisher = {Association for Computational Linguistics},
+  pages     = {1--46},
+  url       = {http://aclweb.org/anthology/W15-3001}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt16_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt16_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt16/translation-task.html" />
+</div>
+
+### `"wmt16_translate"`
+
+Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
+* URL: [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
+* `DatasetBuilder`: [`tfds.translate.wmt16.Wmt16Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt16.py)
+
+`wmt16_translate` is configured with `tfds.translate.wmt16.WmtConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"cs-en"` (`v0.0.1`) (`Size: 1.57 GiB`): WMT 2016 translation task dataset.
+
+* `"de-en"` (`v0.0.1`) (`Size: 1.57 GiB`): WMT 2016 translation task dataset.
+
+* `"fi-en"` (`v0.0.1`) (`Size: 260.51 MiB`): WMT 2016 translation task dataset.
+
+* `"ro-en"` (`v0.0.1`) (`Size: 273.83 MiB`): WMT 2016 translation task dataset.
+
+* `"ru-en"` (`v0.0.1`) (`Size: 993.38 MiB`): WMT 2016 translation task dataset.
+
+* `"tr-en"` (`v0.0.1`) (`Size: 59.32 MiB`): WMT 2016 translation task dataset.
+
+
+#### `"wmt16_translate/cs-en"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt16_translate/de-en"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt16_translate/fi-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt16_translate/ro-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt16_translate/ru-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt16_translate/tr-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'tr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    209,757
+TRAIN      |    205,756
+TEST       |      3,000
+VALIDATION |      1,001
+
+
+#### Urls
+ * [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'tr', u'en')`
+
+#### Citation
+```
+@InProceedings{bojar-EtAl:2016:WMT1,
+  author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huck, Matthias  and  Jimeno Yepes, Antonio  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Neveol, Aurelie  and  Neves, Mariana  and  Popel, Martin  and  Post, Matt  and  Rubino, Raphael  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco  and  Verspoor, Karin  and  Zampieri, Marcos},
+  title     = {Findings of the 2016 Conference on Machine Translation},
+  booktitle = {Proceedings of the First Conference on Machine Translation},
+  month     = {August},
+  year      = {2016},
+  address   = {Berlin, Germany},
+  publisher = {Association for Computational Linguistics},
+  pages     = {131--198},
+  url       = {http://www.aclweb.org/anthology/W/W16/W16-2301}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt17_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt17_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt17/translation-task.html" />
+</div>
+
+### `"wmt17_translate"`
+
+Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
+* URL: [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
+* `DatasetBuilder`: [`tfds.translate.wmt17.Wmt17Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt17.py)
+
+`wmt17_translate` is configured with `tfds.translate.wmt17.WmtConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"cs-en"` (`v0.0.2`) (`Size: 1.66 GiB`): WMT 2017 translation task dataset.
+
+* `"de-en"` (`v0.0.2`) (`Size: 1.81 GiB`): WMT 2017 translation task dataset.
+
+* `"fi-en"` (`v0.0.2`) (`Size: 414.10 MiB`): WMT 2017 translation task dataset.
+
+* `"lv-en"` (`v0.0.2`) (`Size: 161.69 MiB`): WMT 2017 translation task dataset.
+
+* `"ru-en"` (`v0.0.2`) (`Size: 3.34 GiB`): WMT 2017 translation task dataset.
+
+* `"tr-en"` (`v0.0.2`) (`Size: 59.32 MiB`): WMT 2017 translation task dataset.
+
+* `"zh-en"` (`v0.0.2`) (`Size: 2.16 GiB`): WMT 2017 translation task dataset.
+
+
+#### `"wmt17_translate/cs-en"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt17_translate/de-en"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt17_translate/fi-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt17_translate/lv-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt17_translate/ru-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt17_translate/tr-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'tr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt17_translate/zh-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'zh': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        | 25,140,612
+TRAIN      | 25,136,609
+VALIDATION |      2,002
+TEST       |      2,001
+
+
+#### Urls
+ * [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'zh', u'en')`
+
+#### Citation
+```
+@InProceedings{bojar-EtAl:2017:WMT1,
+  author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huang, Shujian  and  Huck, Matthias  and  Koehn, Philipp  and  Liu, Qun  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Rubino, Raphael  and  Specia, Lucia  and  Turchi, Marco},
+  title     = {Findings of the 2017 Conference on Machine Translation (WMT17)},
+  booktitle = {Proceedings of the Second Conference on Machine Translation, Volume 2: Shared Task Papers},
+  month     = {September},
+  year      = {2017},
+  address   = {Copenhagen, Denmark},
+  publisher = {Association for Computational Linguistics},
+  pages     = {169--214},
+  url       = {http://www.aclweb.org/anthology/W17-4717}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt18_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt18_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt18/translation-task.html" />
+</div>
+
+### `"wmt18_translate"`
+
+Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
+* URL: [http://www.statmt.org/wmt18/translation-task.html](http://www.statmt.org/wmt18/translation-task.html)
+* `DatasetBuilder`: [`tfds.translate.wmt18.Wmt18Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt18.py)
+
+`wmt18_translate` is configured with `tfds.translate.wmt18.WmtConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"cs-en"` (`v0.0.2`) (`Size: 1.89 GiB`): WMT 2018 translation task dataset.
+
+* `"de-en"` (`v0.0.2`) (`Size: 3.55 GiB`): WMT 2018 translation task dataset.
+
+* `"et-en"` (`v0.0.2`) (`Size: 499.91 MiB`): WMT 2018 translation task dataset.
+
+* `"fi-en"` (`v0.0.2`) (`Size: 468.76 MiB`): WMT 2018 translation task dataset.
+
+* `"kk-en"` (`v0.0.2`) (`Size: ?? GiB`): WMT 2018 translation task dataset.
+
+* `"ru-en"` (`v0.0.2`) (`Size: 3.91 GiB`): WMT 2018 translation task dataset.
+
+* `"tr-en"` (`v0.0.2`) (`Size: 59.32 MiB`): WMT 2018 translation task dataset.
+
+* `"zh-en"` (`v0.0.2`) (`Size: 2.10 GiB`): WMT 2018 translation task dataset.
+
+
+#### `"wmt18_translate/cs-en"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt18_translate/de-en"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt18_translate/et-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt18_translate/fi-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt18_translate/kk-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'kk': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt18_translate/ru-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt18_translate/tr-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'tr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt18_translate/zh-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'zh': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        | 25,170,193
+TRAIN      | 25,162,209
+VALIDATION |      4,003
+TEST       |      3,981
+
+
+#### Urls
+ * [http://www.statmt.org/wmt18/translation-task.html](http://www.statmt.org/wmt18/translation-task.html)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'zh', u'en')`
+
+#### Citation
+```
+@InProceedings{bojar-EtAl:2018:WMT1,
+  author    = {Bojar, Ond{r}ej  and  Federmann, Christian  and  Fishel, Mark
+    and Graham, Yvette  and  Haddow, Barry  and  Huck, Matthias  and
+    Koehn, Philipp  and  Monz, Christof},
+  title     = {Findings of the 2018 Conference on Machine Translation (WMT18)},
+  booktitle = {Proceedings of the Third Conference on Machine Translation,
+    Volume 2: Shared Task Papers},
+  month     = {October},
+  year      = {2018},
+  address   = {Belgium, Brussels},
+  publisher = {Association for Computational Linguistics},
+  pages     = {272--307},
+  url       = {http://www.aclweb.org/anthology/W18-6401}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt19_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt19_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt19/translation-task.html" />
+</div>
+
+### `"wmt19_translate"`
+
+Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
+* URL: [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+* `DatasetBuilder`: [`tfds.translate.wmt19.Wmt19Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt19.py)
+
+`wmt19_translate` is configured with `tfds.translate.wmt19.WmtConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"cs-en"` (`v0.0.2`) (`Size: 1.88 GiB`): WMT 2019 translation task dataset.
+
+* `"de-en"` (`v0.0.2`) (`Size: 9.71 GiB`): WMT 2019 translation task dataset.
+
+* `"fi-en"` (`v0.0.2`) (`Size: 959.46 MiB`): WMT 2019 translation task dataset.
+
+* `"gu-en"` (`v0.0.2`) (`Size: 37.03 MiB`): WMT 2019 translation task dataset.
+
+* `"kk-en"` (`v0.0.2`) (`Size: 39.58 MiB`): WMT 2019 translation task dataset.
+
+* `"lt-en"` (`v0.0.2`) (`Size: 392.20 MiB`): WMT 2019 translation task dataset.
+
+* `"ru-en"` (`v0.0.2`) (`Size: 3.86 GiB`): WMT 2019 translation task dataset.
+
+* `"zh-en"` (`v0.0.2`) (`Size: 2.04 GiB`): WMT 2019 translation task dataset.
+
+* `"fr-de"` (`v0.0.2`) (`Size: 722.20 MiB`): WMT 2019 translation task dataset.
+
+
+#### `"wmt19_translate/cs-en"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt19_translate/de-en"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt19_translate/fi-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt19_translate/gu-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'gu': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt19_translate/kk-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'kk': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt19_translate/lt-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt19_translate/ru-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt19_translate/zh-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'zh': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"wmt19_translate/fr-de"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |  9,825,988
+TRAIN      |  9,824,476
+VALIDATION |      1,512
+
+
+#### Urls
+ * [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'fr', u'de')`
+
+#### Citation
+```
+@ONLINE {wmt19translate,
+    author = "Wikimedia Foundation",
+    title  = "ACL 2019 Fourth Conference on Machine Translation (WMT19), Shared Task: Machine Translation of News",
+    url    = "http://www.statmt.org/wmt19/translation-task.html"
+}
+```
+
+---
+
 
 ## [`video`](#video)
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="bair_robot_pushing_small" />
+  <meta itemprop="description" content="This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#bair_robot_pushing_small" />
+  <meta itemprop="sameAs" content="https://sites.google.com/view/sna-visual-mpc/" />
+</div>
 
 ### `"bair_robot_pushing_small"`
 
 This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
-* URL: [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
-* `DatasetBuilder`: [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
-* Version: `v1.0.0`
-* Size: `30.06 GiB`
+*   URL:
+    [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
+*   `DatasetBuilder`:
+    [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
+*   Version: `v1.0.0`
+*   Size: `30.06 GiB`
 
 #### Features
 ```python
@@ -2802,35 +11951,38 @@ ALL        |     43,520
 TRAIN      |     43,264
 TEST       |        256
 
-
 #### Urls
- * [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
+
+*   [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
 
 #### Citation
+
 ```
-@inproceedings{conf/nips/FinnGL16,
-  added-at = {2016-12-16T00:00:00.000+0100},
-  author = {Finn, Chelsea and Goodfellow, Ian J. and Levine, Sergey},
-  biburl = {https://www.bibsonomy.org/bibtex/230073873b4fe43b314724b772d0f9256/dblp},
-  booktitle = {NIPS},
-  crossref = {conf/nips/2016},
-  editor = {Lee, Daniel D. and Sugiyama, Masashi and Luxburg, Ulrike V. and Guyon, Isabelle and Garnett, Roman},
-  ee = {http://papers.nips.cc/paper/6161-unsupervised-learning-for-physical-interaction-through-video-prediction},
-  interhash = {2e6b416723704f4aa5ad0686ce5a3593},
-  intrahash = {30073873b4fe43b314724b772d0f9256},
-  keywords = {dblp},
-  pages = {64-72},
-  timestamp = {2016-12-17T11:33:40.000+0100},
-  title = {Unsupervised Learning for Physical Interaction through Video Prediction.},
-  url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
-  year = 2016
+@misc{1710.05268,
+  Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
+  Title = {Self-Supervised Visual Planning with Temporal Skip Connections},
+  Year = {2017},
+  Eprint = {arXiv:1710.05268},
 }
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="moving_mnist" />
+  <meta itemprop="description" content="Moving variant of MNIST database of handwritten digits. This is the
+data used by the authors for reporting model performance. See
+`tfds.video.moving_mnist.image_as_moving_sequence`
+for generating training/validation data from the MNIST dataset." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#moving_mnist" />
+  <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~nitish/unsupervised_video/" />
+</div>
 
 ### `"moving_mnist"`
 
@@ -2886,6 +12038,16 @@ ALL        |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="starcraft_video" />
+  <meta itemprop="description" content="This data set contains videos generated from Starcraft." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#starcraft_video" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/scv_dataset/README.html" />
+</div>
 
 ### `"starcraft_video"`
 
@@ -3029,6 +12191,72 @@ TEST       |      2,000
   eprint    = {1812.01717},
   timestamp = {Tue, 01 Jan 2019 15:01:25 +0100},
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1812-01717},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="ucf101" />
+  <meta itemprop="description" content="A 101-label video classification dataset." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#ucf101" />
+  <meta itemprop="sameAs" content="https://www.crcv.ucf.edu/data/UCF101.php" />
+</div>
+
+### `"ucf101"`
+
+A 101-label video classification dataset.
+
+* URL: [https://www.crcv.ucf.edu/data/UCF101.php](https://www.crcv.ucf.edu/data/UCF101.php)
+* `DatasetBuilder`: [`tfds.video.ucf101.Ucf101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/ucf101.py)
+
+`ucf101` is configured with `tfds.video.ucf101.Ucf101Config` and has the following
+configurations predefined (defaults to the first one):
+
+* `"ucf101_1_256"` (`v1.0.0`) (`Size: ?? GiB`): 256x256 UCF with the first action recognition split.
+
+
+#### `"ucf101/ucf101_1_256"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=101),
+    'video': Video(shape=(None, 256, 256, 3), dtype=tf.uint8, feature=Image(shape=(256, 256, 3), dtype=tf.uint8)),
+})
+```
+
+
+
+
+#### Statistics
+None computed
+
+#### Urls
+ * [https://www.crcv.ucf.edu/data/UCF101.php](https://www.crcv.ucf.edu/data/UCF101.php)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@article{DBLP:journals/corr/abs-1212-0402,
+  author    = {Khurram Soomro and
+               Amir Roshan Zamir and
+               Mubarak Shah},
+  title     = {{UCF101:} {A} Dataset of 101 Human Actions Classes From Videos in
+               The Wild},
+  journal   = {CoRR},
+  volume    = {abs/1212.0402},
+  year      = {2012},
+  url       = {http://arxiv.org/abs/1212.0402},
+  archivePrefix = {arXiv},
+  eprint    = {1212.0402},
+  timestamp = {Mon, 13 Aug 2018 16:47:45 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1212-0402},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```

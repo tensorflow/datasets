@@ -13,11 +13,12 @@
 
 # Module: tfds.units
 
-
+Defines convenience constants/functions for converting various units.
 
 Defined in [`core/units.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py).
 
-Defines convenience constants/functions for converting various units.
+<!-- Placeholder for "Used in" -->
+
 
 ## Functions
 

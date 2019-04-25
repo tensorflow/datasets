@@ -5,6 +5,8 @@
 
 # tfds.testing.rm_tmp_dir
 
+Rm temporary directory.
+
 ``` python
 tfds.testing.rm_tmp_dir(dirname)
 ```
@@ -13,4 +15,4 @@ tfds.testing.rm_tmp_dir(dirname)
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
-Rm temporary directory.
+<!-- Placeholder for "Used in" -->

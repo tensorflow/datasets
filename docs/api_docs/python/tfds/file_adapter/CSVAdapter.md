@@ -5,11 +5,14 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="dataset_from_filename"/>
 <meta itemprop="property" content="write_from_generator"/>
+<meta itemprop="property" content="write_from_pcollection"/>
 </div>
 
 # tfds.file_adapter.CSVAdapter
 
 ## Class `CSVAdapter`
+
+Writes/reads features to/from CSV files.
 
 Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.md)
 
@@ -17,7 +20,7 @@ Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.m
 
 Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
 
-Writes/reads features to/from CSV files.
+<!-- Placeholder for "Used in" -->
 
 Constraints on generators:
 
@@ -86,6 +89,25 @@ write_from_generator(
 ```
 
 
+
+<h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
+
+``` python
+write_from_pcollection(
+    pcollection,
+    file_path_prefix=None,
+    num_shards=None
+)
+```
+
+Write the PCollection to file.
+
+#### Args:
+
+* <b>`pcollection`</b>: `beam.PCollection`, the PCollection containing the examples
+    to write.
+* <b>`file_path_prefix`</b>: `str`, output files to write files to.
+* <b>`num_shards`</b>: `int`,
 
 
 

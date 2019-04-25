@@ -19,13 +19,15 @@
 
 ## Class `Image`
 
+`FeatureConnector` for images.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/image_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py).
 
-`FeatureConnector` for images.
+<!-- Placeholder for "Used in" -->
 
 Input: The image connector accepts as input:
   * path to a {bmp,gif,jpeg,png} image.

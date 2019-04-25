@@ -25,8 +25,8 @@ from tensorflow_datasets.image import mnist
 
 # testing/mnist.py generates fake input data
 
-mnist._TRAIN_EXAMPLES = 10
-mnist._TEST_EXAMPLES = 2
+mnist._TRAIN_EXAMPLES = 10  # pylint: disable=protected-access
+mnist._TEST_EXAMPLES = 2  # pylint: disable=protected-access
 
 
 class MNISTTest(testing.DatasetBuilderTestCase):

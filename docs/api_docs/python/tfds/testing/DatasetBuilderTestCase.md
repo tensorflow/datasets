@@ -149,13 +149,11 @@
 
 ## Class `DatasetBuilderTestCase`
 
-
-
-
+Inherit this class to test your DatasetBuilder class.
 
 Defined in [`testing/dataset_builder_testing.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py).
 
-Inherit this class to test your DatasetBuilder class.
+<!-- Placeholder for "Used in" -->
 
 You must set the following class attributes:
   DATASET_CLASS: class object of DatasetBuilder you want to test.
@@ -1016,8 +1014,8 @@ using assertSameStructure.
 
 #### Args:
 
-* <b>`first`</b>: A string containing a JSON to decode and compare to second.
-* <b>`second`</b>: A string containing a JSON to decode and compare to first.
+* <b>`first`</b>: A string containing JSON to decode and compare to second.
+* <b>`second`</b>: A string containing JSON to decode and compare to first.
 * <b>`msg`</b>: Additional text to include in the failure message.
 
 <h3 id="assertLen"><code>assertLen</code></h3>

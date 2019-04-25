@@ -5,6 +5,8 @@
 
 # tfds.as_numpy
 
+Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
+
 ``` python
 tfds.as_numpy(
     dataset,
@@ -16,7 +18,7 @@ tfds.as_numpy(
 
 Defined in [`core/dataset_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py).
 
-Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
+<!-- Placeholder for "Used in" -->
 
 `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
 and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.

@@ -15,6 +15,7 @@
 
 """Image datasets."""
 
+from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.caltech_birds import CaltechBirds2010
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
@@ -30,10 +31,12 @@ from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLa
 from tensorflow_datasets.image.cycle_gan import CycleGAN
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
 from tensorflow_datasets.image.dsprites import Dsprites
+from tensorflow_datasets.image.dtd import Dtd
 from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
+from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
@@ -41,8 +44,11 @@ from tensorflow_datasets.image.mnist import KMNIST
 from tensorflow_datasets.image.mnist import MNIST
 from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4
+from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
 from tensorflow_datasets.image.shapes3d import Shapes3d
+from tensorflow_datasets.image.smallnorb import Smallnorb
+from tensorflow_datasets.image.sun import Sun397
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.voc import Voc2007

@@ -63,7 +63,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         ),
         splits_lib.SplitGenerator(
             name=splits_lib.Split.TEST,
-            num_shards=4,
+            num_shards=None,  # Use liquid sharing.
             gen_kwargs=dict(num_examples=725),
         ),
     ]
@@ -106,7 +106,8 @@ class BeamBasedBuilderTest(testing.TestCase):
       self._assertShards(
           data_dir,
           pattern="dummy_beam_dataset-test.tfrecord-{:05}-of-{:05}",
-          num_shards=4,
+          # Liquid sharding is not guaranteed to always use the same number.
+          num_shards=builder.info.splits["test"].num_shards,
       )
       self._assertShards(
           data_dir,
@@ -129,6 +130,7 @@ class BeamBasedBuilderTest(testing.TestCase):
       )
 
   def _assertShards(self, data_dir, pattern, num_shards):
+    self.assertTrue(num_shards)
     shards_filenames = [
         pattern.format(i, num_shards) for i in range(num_shards)
     ]
@@ -148,12 +150,9 @@ class BeamBasedBuilderTest(testing.TestCase):
   # The default beam pipeline do not works with Python2
   def test_download_prepare(self):
 
-    # TODO(tfds): The current apache-beam 2.11.0 do not work with Python 3.
+    # TODO(b/129148632): The current apache-beam 2.11.0 do not work with Py3
     # Update once the new version is out (around April)
-    if six.PY3:
-      skip_beam_test = True
-    else:
-      skip_beam_test = False
+    skip_beam_test = bool(six.PY3)
     if skip_beam_test:
       return
 

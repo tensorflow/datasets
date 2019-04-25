@@ -135,6 +135,7 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
         yield self._generate_example(data_path, image_id)
 
   def _generate_example(self, data_path, image_id):
+    """Yields examples."""
     image_filepath = os.path.join(
         data_path, "VOCdevkit/VOC2007/JPEGImages", "{}.jpg".format(image_id))
     annon_filepath = os.path.join(
@@ -171,9 +172,11 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
           }
 
     objects = list(_get_example_objects())
-    labels = sorted(list(set([obj["label"] for obj in objects])))
-    labels_no_difficult = sorted(list(set(
-        [obj["label"] for obj in objects if obj["is_difficult"] == 0])))
+    # Use set() to remove duplicates
+    labels = sorted(set(obj["label"] for obj in objects))
+    labels_no_difficult = sorted(set(
+        obj["label"] for obj in objects if obj["is_difficult"] == 0
+    ))
     return {
         "image": image_filepath,
         "image/filename": image_id + ".jpg",

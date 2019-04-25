@@ -32,6 +32,11 @@ def camelcase_to_snakecase(name):
   return _all_cap_re.sub(r"\1_\2", s1).lower()
 
 
+def snake_to_camelcase(name):
+  """Convert snake-case string to camel-case string."""
+  return "".join(n.capitalize() for n in name.split("_"))
+
+
 def filename_prefix_for_name(name):
   if os.path.basename(name) != name:
     raise ValueError("Should be a dataset name, not a path: %s" % name)

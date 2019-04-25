@@ -4,19 +4,19 @@
 <meta itemprop="property" content="filetype_suffix"/>
 <meta itemprop="property" content="dataset_from_filename"/>
 <meta itemprop="property" content="write_from_generator"/>
+<meta itemprop="property" content="write_from_pcollection"/>
 </div>
 
 # tfds.file_adapter.FileFormatAdapter
 
 ## Class `FileFormatAdapter`
 
-
-
-
+Provides writing and reading methods for a file format.
 
 Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
 
-Provides writing and reading methods for a file format.
+<!-- Placeholder for "Used in" -->
+
 
 ## Properties
 
@@ -51,7 +51,26 @@ Write to files from generators_and_filenames.
 
 * <b>`generator_fn`</b>: returns generator yielding dictionaries of feature name to
     value.
-* <b>`output_files`</b>: `list<str>`, output files to write records to.
+* <b>`output_files`</b>: `list<str>`, output files to write files to.
+
+<h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
+
+``` python
+write_from_pcollection(
+    pcollection,
+    file_path_prefix=None,
+    num_shards=None
+)
+```
+
+Write the PCollection to file.
+
+#### Args:
+
+* <b>`pcollection`</b>: `beam.PCollection`, the PCollection containing the examples
+    to write.
+* <b>`file_path_prefix`</b>: `str`, output files to write files to.
+* <b>`num_shards`</b>: `int`,
 
 
 

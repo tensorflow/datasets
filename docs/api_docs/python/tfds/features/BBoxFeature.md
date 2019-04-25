@@ -17,13 +17,15 @@
 
 ## Class `BBoxFeature`
 
+`FeatureConnector` for a normalized bounding box.
+
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 
 
 Defined in [`core/features/bounding_boxes.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py).
 
-`FeatureConnector` for a normalized bounding box.
+<!-- Placeholder for "Used in" -->
 
 Note: If you have multiple bounding boxes, you may want to wrap the feature
 inside a `tfds.feature.SequenceDict`.

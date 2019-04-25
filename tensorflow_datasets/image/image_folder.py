@@ -101,7 +101,7 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
+    """Returns SplitGenerators from the folder names."""
     # At data creation time, parse the folder to deduce number of splits,
     # labels, image size,
 

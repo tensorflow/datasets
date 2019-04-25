@@ -5,6 +5,8 @@
 
 # tfds.load
 
+Loads the named dataset into a `tf.data.Dataset`.
+
 ``` python
 tfds.load(
     name,
@@ -24,7 +26,7 @@ tfds.load(
 
 Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
 
-Loads the named dataset into a `tf.data.Dataset`.
+<!-- Placeholder for "Used in" -->
 
 If `split=None` (the default), returns all splits for the dataset. Otherwise,
 returns the specified split.
@@ -94,7 +96,9 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     cache_dir and manual_dir will automatically be deduced from data_dir.
 * <b>`as_dataset_kwargs`</b>: `dict` (optional), keyword arguments passed to
     <a href="../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>. `split` will be passed through by
-    default.
+    default. Example: `{'shuffle_files': True}`.
+    Note that shuffle_files is False by default unless
+    `split == tfds.Split.TRAIN`.
 
 
 #### Returns:

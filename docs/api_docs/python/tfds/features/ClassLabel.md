@@ -21,13 +21,16 @@
 
 ## Class `ClassLabel`
 
+`FeatureConnector` for integer class labels.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/class_label_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/class_label_feature.py).
 
-`FeatureConnector` for integer class labels.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -43,6 +46,7 @@ Constructs a ClassLabel FeatureConnector.
 
 There are 3 ways to define a ClassLabel, which correspond to the 3
 arguments:
+
  * `num_classes`: create 0 to (num_classes-1) labels
  * `names`: a list of label strings
  * `names_file`: a file containing the list of labels.

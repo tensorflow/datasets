@@ -5,6 +5,8 @@
 
 # tfds.testing.tmp_dir
 
+Context manager for a temporary directory.
+
 ``` python
 tfds.testing.tmp_dir(
     *args,
@@ -12,4 +14,4 @@ tfds.testing.tmp_dir(
 )
 ```
 
-Context manager for a temporary directory.
+<!-- Placeholder for "Used in" -->

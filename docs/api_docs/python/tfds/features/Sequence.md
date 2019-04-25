@@ -18,13 +18,15 @@
 
 ## Class `Sequence`
 
+Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
-Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
+<!-- Placeholder for "Used in" -->
 
 Ex:
 In `DatasetInfo`:

@@ -8,13 +8,11 @@
 
 ## Class `SplitGenerator`
 
-
-
-
+Defines the split information for the generator.
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
-Defines the split information for the generator.
+<!-- Placeholder for "Used in" -->
 
 This should be used as returned value of
 `GeneratorBasedBuilder._split_generators`.

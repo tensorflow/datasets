@@ -19,27 +19,43 @@
 
 ## Class `DummyDatasetSharedGenerator`
 
+Test DatasetBuilder.
+
 Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)
 
 
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
-Test DatasetBuilder.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
-__init__(**kwargs)
+```python
+__init__(
+    data_dir=None,
+    config=None,
+    version=None
+)
 ```
 
-Builder constructor.
+Constructs a DatasetBuilder.
+
+Callers must pass arguments as keyword arguments.
 
 #### Args:
 
-* <b>`**kwargs`</b>: Constructor kwargs forwarded to DatasetBuilder
-
-
+*   <b>`data_dir`</b>: `str`, directory to read/write data. Defaults to
+    datasets are stored.
+*   <b>`config`</b>:
+    <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
+    or `str` name, optional configuration for the dataset that affects the data
+    generated on disk. Different `builder_config`s will have their own
+    subdirectories and versions.
+*   <b>`version`</b>: `str`. Optional version at which to load the dataset. An
+    error is raised if specified version cannot be satisfied. Eg: '1.2.3',
+    '1.2.*'. Note that only the currently defined version can be loaded.
 
 ## Properties
 
@@ -119,6 +135,11 @@ Downloads and prepares dataset for reading.
     Defaults to "~/tensorflow-datasets/downloads".
 * <b>`download_config`</b>: <a href="../../tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>, further configuration for
     downloading and preparing dataset.
+
+
+#### Raises:
+
+* <b>`IOError`</b>: if there is not enough disk space available.
 
 
 

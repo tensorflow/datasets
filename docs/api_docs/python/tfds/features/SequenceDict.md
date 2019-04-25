@@ -23,13 +23,15 @@
 
 ## Class `SequenceDict`
 
+Composite `FeatureConnector` for a `dict` where each value is a list.
+
 Inherits From: [`FeaturesDict`](../../tfds/features/FeaturesDict.md)
 
 
 
 Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
-Composite `FeatureConnector` for a `dict` where each value is a list.
+<!-- Placeholder for "Used in" -->
 
 `SequenceDict` correspond to sequence of `tfds.features.FeatureDict`. At
 generation time, a list for each of the sequence element is given. The output

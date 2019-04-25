@@ -91,6 +91,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     path = dl_manager.manual_dir
     train_path = os.path.join(path, _TRAIN_DIR)
     val_path = os.path.join(path, _VALIDATION_DIR)
@@ -120,6 +121,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, imgs_path, csv_path):
+    """Yields examples."""
     with tf.io.gfile.GFile(csv_path) as csv_f:
       reader = csv.DictReader(csv_f)
       # Get keys for each label from csv

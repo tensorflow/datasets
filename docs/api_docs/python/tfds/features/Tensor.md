@@ -17,13 +17,16 @@
 
 ## Class `Tensor`
 
+`FeatureConnector` for generic data of arbitrary shape and type.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
-`FeatureConnector` for generic data of arbitrary shape and type.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 

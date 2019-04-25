@@ -5,11 +5,12 @@
 
 # Module: tfds
 
-
+`tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a
+collection of datasets ready-to-use with TensorFlow.
 
 Defined in [`__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py).
 
-`tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a collection of datasets ready-to-use with TensorFlow.
+<!-- Placeholder for "Used in" -->
 
 Each dataset is defined as a <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>, which encapsulates
 the logic to download the dataset and construct an input pipeline, as well as
@@ -60,3 +61,5 @@ Documentation:
 
 [`load(...)`](./tfds/load.md): Loads the named dataset into a `tf.data.Dataset`.
 
+[`disable_progress_bar(...)`](./tfds/disable_progress_bar.md): Disabled Tqdm
+progress bar.

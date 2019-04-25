@@ -140,13 +140,12 @@
 
 ## Class `FeatureExpectationsTestCase`
 
-
-
-
+Tests FeatureExpectations with full encode-decode.
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
-Tests FeatureExpectations with full encode-decode.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -999,8 +998,8 @@ using assertSameStructure.
 
 #### Args:
 
-* <b>`first`</b>: A string containing a JSON to decode and compare to second.
-* <b>`second`</b>: A string containing a JSON to decode and compare to first.
+* <b>`first`</b>: A string containing JSON to decode and compare to second.
+* <b>`second`</b>: A string containing JSON to decode and compare to first.
 * <b>`msg`</b>: Additional text to include in the failure message.
 
 <h3 id="assertLen"><code>assertLen</code></h3>
