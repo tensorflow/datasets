@@ -83,8 +83,8 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       CycleGANConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
-          description=("A dataset consisting of images from two classes: "
-                       "A and B for example: horses and zebras."),
+          description=("A dataset consisting of images from two classes A and "
+                       "B (For example: horses/zebras, apple/orange,...)"),
           version="0.1.0",
           data=config_name,
       ) for config_name in _DATA_OPTIONS
