@@ -573,7 +573,7 @@ class FileAdapterBuilder(DatasetBuilder):
 
   @utils.memoized_property
   def _file_format_adapter(self):
-    # Load the format adapter (CSV, TF-Record,...)
+    # Load the format adapter (TF-Record,...)
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
     serialized_info = self.info.features.get_serialized_info()
     return file_adapter_cls(serialized_info)
