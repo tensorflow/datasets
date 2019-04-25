@@ -12,6 +12,8 @@
 
 ## Class `CSVAdapter`
 
+Writes/reads features to/from CSV files.
+
 Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.md)
 
 
@@ -19,8 +21,6 @@ Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.m
 Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
 
 <!-- Placeholder for "Used in" -->
-
-Writes/reads features to/from CSV files.
 
 Constraints on generators:
 

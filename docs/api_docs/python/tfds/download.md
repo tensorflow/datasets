@@ -5,13 +5,13 @@
 
 # Module: tfds.download
 
-
+<a href="../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
+API.
 
 Defined in [`core/download/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/__init__.py).
 
 <!-- Placeholder for "Used in" -->
 
-<a href="../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a> API.
 
 ## Classes
 

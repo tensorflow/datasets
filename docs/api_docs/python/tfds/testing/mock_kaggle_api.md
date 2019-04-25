@@ -5,6 +5,8 @@
 
 # tfds.testing.mock_kaggle_api
 
+Mock out the kaggle CLI.
+
 ``` python
 tfds.testing.mock_kaggle_api(
     *args,
@@ -13,8 +15,6 @@ tfds.testing.mock_kaggle_api(
 ```
 
 <!-- Placeholder for "Used in" -->
-
-Mock out the kaggle CLI.
 
 #### Args:
 
