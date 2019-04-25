@@ -15,7 +15,8 @@
 
 from __future__ import absolute_import
 from __future__ import division
-from __future__ import print_function 
+from __future__ import print_function
+
 from tensorflow_datasets.image import caltech_birds
 import tensorflow_datasets.testing as tfds_test
 
