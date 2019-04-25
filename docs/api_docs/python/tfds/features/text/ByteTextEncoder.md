@@ -14,6 +14,8 @@
 
 ## Class `ByteTextEncoder`
 
+Byte-encodes text.
+
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 
@@ -22,7 +24,6 @@ Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/
 
 <!-- Placeholder for "Used in" -->
 
-Byte-encodes text.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

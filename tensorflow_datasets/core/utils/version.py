@@ -21,6 +21,14 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
+import re
+
+_VERSION_TMPL = (
+    r"^(?P<major>{v})"
+    r"\.(?P<minor>{v})"
+    r"\.(?P<patch>{v})$")
+_VERSION_WILDCARD_REG = re.compile(_VERSION_TMPL.format(v=r"\d+|\*"))
+_VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=r"\d+"))
 
 
 class Version(collections.namedtuple("Version", ["major", "minor", "patch"])):
@@ -47,18 +55,29 @@ class Version(collections.namedtuple("Version", ["major", "minor", "patch"])):
   def __str__(self):
     return "{}.{}.{}".format(self.major, self.minor, self.patch)
 
+  def match(self, other_version):
+    """Returns True if other_version matches.
 
-def _str_to_version(version_str):
+    Args:
+      other_version: string, of the form "x[.y[.x]]" where {x,y,z} can be a
+        number or a wildcard.
+    """
+    major, minor, patch = _str_to_version(other_version, allow_wildcard=True)
+    return (major in [self.major, "*"] and minor in [self.minor, "*"]
+            and patch in [self.patch, "*"])
+
+
+def _str_to_version(version_str, allow_wildcard=False):
   """Return the tuple (major, minor, patch) version extracted from the str."""
-  version_ids = version_str.split(".")
-  if len(version_ids) != 3 or "-" in version_str:
-    raise ValueError(
-        "Could not convert the {} to version. Format should be x.y.z".format(
-            version_str))
-  try:
-    version_ids = tuple(int(v) for v in version_ids)
-  except ValueError:
-    raise ValueError(
-        "Could not convert the {} to version. Format should be x.y.z".format(
-            version_str))
-  return version_ids
+  reg = _VERSION_WILDCARD_REG if allow_wildcard else _VERSION_RESOLVED_REG
+  res = reg.match(version_str)
+  if not res:
+    msg = "Invalid version '{}'. Format should be x.y.z".format(version_str)
+    if allow_wildcard:
+      msg += " with {x,y,z} being digits or wildcard."
+    else:
+      msg += " with {x,y,z} being digits."
+    raise ValueError(msg)
+  return tuple(
+      v if v == "*" else int(v)
+      for v in [res.group("major"), res.group("minor"), res.group("patch")])

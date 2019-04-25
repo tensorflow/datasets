@@ -7,7 +7,7 @@
 
 ## Class `failureException`
 
-
+Assertion failed.
 
 ### Aliases:
 
@@ -17,5 +17,4 @@
 
 <!-- Placeholder for "Used in" -->
 
-Assertion failed.
 

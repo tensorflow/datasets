@@ -34,6 +34,8 @@ There are two features:
     highlight, which is the target summary
 """
 
+# The second citation introduces the source data, while the first
+# introduces the specific form (non-anonymized) we use here.
 _CITATION = """\
 @article{DBLP:journals/corr/SeeLM17,
   author    = {Abigail See and
@@ -49,6 +51,14 @@ _CITATION = """\
   timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},
   biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{hermann2015teaching,
+  title={Teaching machines to read and comprehend},
+  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},
+  booktitle={Advances in neural information processing systems},
+  pages={1693--1701},
+  year={2015}
 }
 """
 

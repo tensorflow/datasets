@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.testing.TestCase.assertContainsSubsequence", 
+  "current_doc_full_name": "tfds.features.Audio.__weakref__", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
@@ -112,7 +112,6 @@
     "tfds.core.SplitInfo.__new__": "tfds.core.BeamBasedBuilder.__new__", 
     "tfds.core.SplitInfo.__reduce__": "tfds.core.BeamBasedBuilder.__reduce__", 
     "tfds.core.SplitInfo.__reduce_ex__": "tfds.core.BeamBasedBuilder.__reduce_ex__", 
-    "tfds.core.SplitInfo.__setattr__": "tfds.core.BeamBasedBuilder.__setattr__", 
     "tfds.core.SplitInfo.__sizeof__": "tfds.core.BeamBasedBuilder.__sizeof__", 
     "tfds.core.SplitInfo.__str__": "tfds.core.BeamBasedBuilder.__str__", 
     "tfds.core.Version.__delattr__": "tfds.core.BeamBasedBuilder.__delattr__", 
@@ -962,10 +961,12 @@
     "tfds.core.Version.count": true, 
     "tfds.core.Version.index": true, 
     "tfds.core.Version.major": true, 
+    "tfds.core.Version.match": true, 
     "tfds.core.Version.minor": true, 
     "tfds.core.Version.patch": true, 
     "tfds.core.get_tfds_path": false, 
     "tfds.core.lazy_imports": false, 
+    "tfds.disable_progress_bar": false, 
     "tfds.download": false, 
     "tfds.download.ComputeStatsMode": false, 
     "tfds.download.ComputeStatsMode.AUTO": true, 

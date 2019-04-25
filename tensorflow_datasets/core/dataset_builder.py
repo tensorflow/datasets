@@ -140,7 +140,7 @@ class DatasetBuilder(object):
 
 
   @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None, config=None):
+  def __init__(self, data_dir=None, config=None, version=None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -151,16 +151,23 @@ class DatasetBuilder(object):
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
+      version: `str`. Optional version at which to load the dataset. An error is
+        raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
+        Note that only the currently defined version can be loaded.
     """
     self._builder_config = self._create_builder_config(config)
     # Extract code version (VERSION or config)
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
-          "DatasetBuilder {} does not have defined version. Please add a "
-          "`VERSION = tfds.Version('x.y.z')` to the class.".format(
+          "DatasetBuilder {} does not have a defined version. Please add a "
+          "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
               self.name))
     self._version = utils.Version(
         self._builder_config and self._builder_config.version or self.VERSION)
+    if version and not self._version.match(version):
+      msg = "Dataset {} cannot be loaded at version {}, only {}.".format(
+          self.name, version, self._version)
+      raise AssertionError(msg)
     self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
     self._data_dir = self._build_data_dir()
     if tf.io.gfile.exists(self._data_dir):
@@ -361,7 +368,7 @@ class DatasetBuilder(object):
 
   def _maybe_log_gcs_data_dir(self):
     """If data is on GCS, set _data_dir to GCS path."""
-    if not gcs_utils.is_gcs_dataset_accessible(self.info.full_name):
+    if not gcs_utils.is_dataset_on_gcs(self.info.full_name):
       return
 
     gcs_path = os.path.join(constants.GCS_DATA_DIR, self.info.full_name)
@@ -566,7 +573,7 @@ class FileAdapterBuilder(DatasetBuilder):
 
   @utils.memoized_property
   def _file_format_adapter(self):
-    # Load the format adapter (CSV, TF-Record,...)
+    # Load the format adapter (TF-Record,...)
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
     serialized_info = self.info.features.get_serialized_info()
     return file_adapter_cls(serialized_info)
@@ -701,14 +708,33 @@ class FileAdapterBuilder(DatasetBuilder):
     """Return the list of files and reading mask of the files to read."""
     instruction_dicts = []
     for sliced_split_info in list_sliced_split_info:
+      mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+
       # Compute filenames from the given split
-      for filepath in self._build_split_filenames(
+      filepaths = list(sorted(self._build_split_filenames(
           split_info_list=[sliced_split_info.split_info],
-      ):
-        mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+      )))
+
+      # Compute the offsets
+      if sliced_split_info.split_info.num_examples:
+        shard_id2num_examples = splits_lib.get_shard_id2num_examples(
+            sliced_split_info.split_info.num_shards,
+            sliced_split_info.split_info.num_examples,
+        )
+        mask_offsets = splits_lib.compute_mask_offsets(shard_id2num_examples)
+      else:
+        logging.warning(
+            "Statistics not present in the dataset. TFDS is not able to load "
+            "the total number of examples, so using the subsplit API may not "
+            "provide precise subsplits."
+        )
+        mask_offsets = [0] * len(filepaths)
+
+      for filepath, mask_offset in zip(filepaths, mask_offsets):
         instruction_dicts.append({
             "filepath": filepath,
             "mask": mask,
+            "mask_offset": mask_offset,
         })
     return instruction_dicts
 
@@ -823,6 +849,9 @@ class BeamBasedBuilder(FileAdapterBuilder):
     `_split_generators`. The examples from the PCollection will be
     encoded and written to disk.
 
+    Beam liquid sharding can be used by setting num_shards to `None` in the
+    `SplitGenerator`.
+
     Warning: When running in a distributed setup, make sure that the data
     which will be read (download_dir, manual_dir,...) and written (data_dir)
     can be accessed by the workers jobs. The data should be located in a
@@ -872,6 +901,16 @@ class BeamBasedBuilder(FileAdapterBuilder):
           dl_manager,
           pipeline=pipeline,
       )
+
+    # Update the number of shards for splits where liquid sharding were used.
+    split_dict = self.info.splits
+    for split_info in split_dict.values():
+      if not split_info.num_shards:
+        output_prefix = naming.filename_prefix_for_split(
+            self.name, split_info.name)
+        output_prefix = os.path.join(self._data_dir, output_prefix)
+        split_info.num_shards = len(tf.io.gfile.glob(output_prefix + "*"))
+    self.info.update_splits_if_different(split_dict)
 
   def _prepare_split(self, split_generator, pipeline):
     beam = lazy_imports.lazy_imports.apache_beam

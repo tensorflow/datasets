@@ -12,6 +12,8 @@
 
 ## Class `NamedSplit`
 
+Descriptor corresponding to a named split (train, test, ...).
+
 Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
 
 
@@ -19,8 +21,6 @@ Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
 <!-- Placeholder for "Used in" -->
-
-Descriptor corresponding to a named split (train, test, ...).
 
 Each descriptor can be composed with other using addition or slice. Ex:
 

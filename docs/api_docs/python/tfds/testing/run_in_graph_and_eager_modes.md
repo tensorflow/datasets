@@ -5,6 +5,8 @@
 
 # tfds.testing.run_in_graph_and_eager_modes
 
+Execute the decorated test in both graph mode and eager mode.
+
 ``` python
 tfds.testing.run_in_graph_and_eager_modes(
     func=None,
@@ -18,8 +20,6 @@ tfds.testing.run_in_graph_and_eager_modes(
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
 <!-- Placeholder for "Used in" -->
-
-Execute the decorated test in both graph mode and eager mode.
 
 This function returns a decorator intended to be applied to test methods in
 a `test_case.TestCase` class. Doing so will cause the contents of the test

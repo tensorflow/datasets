@@ -486,6 +486,44 @@ def slice_to_percent_mask(slice_value):
   return [i in selected for i in range(100)]
 
 
+def get_shard_id2num_examples(num_shards, total_num_examples):
+  """Return the mapping shard_id=>num_examples, assuming round-robin."""
+  # TODO(b/130353071): This has the strong assumption that the shards have
+  # been written in a round-robin fashion. This assumption does not hold, for
+  # instance, with Beam generation. The mapping shard_id=>num_examples
+  # should be computed during generation.
+
+  # Minimum number of example per shards
+  num_example_in_shard = total_num_examples // num_shards
+  shard_id2num_examples = [num_example_in_shard for _ in range(num_shards)]
+  # If there are remaining examples, we add them to the first shards
+  for shard_id in range(total_num_examples % num_shards):
+    shard_id2num_examples[shard_id] += 1
+  return shard_id2num_examples
+
+
+def compute_mask_offsets(shard_id2num_examples):
+  """Return the list of offsets associated with each shards.
+
+  Args:
+    shard_id2num_examples: `list[int]`, mapping shard_id=>num_examples
+
+  Returns:
+    mask_offsets: `list[int]`, offset to skip for each of the shard
+  """
+  total_num_examples = sum(shard_id2num_examples)
+
+  mask_offsets = []
+  total_num_examples = 0
+  for num_examples_in_shard in shard_id2num_examples:
+    # The offset (nb of examples to skip in the next shard) correspond to the
+    # number of examples remaining in the current shard
+    mask_offsets.append(total_num_examples % 100)
+    total_num_examples += num_examples_in_shard
+
+  return mask_offsets
+
+
 class SplitDict(utils.NonMutableDict):
   """Split info object."""
 

@@ -8,15 +8,13 @@
 
 ## Class `TextEncoderConfig`
 
-
-
-
+Configuration for
+<a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
 <!-- Placeholder for "Used in" -->
 
-Configuration for <a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
