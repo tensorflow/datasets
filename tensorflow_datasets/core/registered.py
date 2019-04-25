@@ -30,6 +30,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core.utils import gcs_utils
 
 
 FLAGS = flags.FLAGS
@@ -181,7 +182,8 @@ def load(name,
          with_info=False,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
-         as_dataset_kwargs=None):
+         as_dataset_kwargs=None,
+         try_gcs=False):
   """Loads the named dataset into a `tf.data.Dataset`.
 
   If `split=None` (the default), returns all splits for the dataset. Otherwise,
@@ -254,6 +256,8 @@ def load(name,
       default. Example: `{'shuffle_files': True}`.
       Note that shuffle_files is False by default unless
       `split == tfds.Split.TRAIN`.
+    try_gcs: `bool`, if True, tfds.load will see if the dataset exists on
+      the public GCS bucket before building it locally.
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
@@ -265,9 +269,16 @@ def load(name,
       object documents the entire dataset, regardless of the `split` requested.
       Split-specific information is available in `ds_info.splits`.
   """
-  if data_dir is None:
+  name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  name_builder_kwargs.update(builder_kwargs or {})
+  builder_kwargs = name_builder_kwargs
+
+  # Set data_dir
+  if try_gcs and gcs_utils.is_dataset_on_gcs(name):
+    data_dir = constants.GCS_DATA_DIR
+  elif data_dir is None:
     data_dir = constants.DATA_DIR
-  builder_kwargs = builder_kwargs or {}
+
   dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
   if download:
     download_and_prepare_kwargs = download_and_prepare_kwargs or {}
