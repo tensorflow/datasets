@@ -63,3 +63,6 @@ Documentation:
 
 [`disable_progress_bar(...)`](./tfds/disable_progress_bar.md): Disabled Tqdm
 progress bar.
+
+[`is_dataset_on_gcs(...)`](./tfds/is_dataset_on_gcs.md): If the dataset is
+available on the GCS bucket gs://tfds-data/datasets.
