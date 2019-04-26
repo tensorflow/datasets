@@ -21,6 +21,8 @@
 
 ## Class `ClassLabel`
 
+`FeatureConnector` for integer class labels.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
@@ -29,7 +31,6 @@ Defined in [`core/features/class_label_feature.py`](https://github.com/tensorflo
 
 <!-- Placeholder for "Used in" -->
 
-`FeatureConnector` for integer class labels.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

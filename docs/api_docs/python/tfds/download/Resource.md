@@ -10,15 +10,12 @@
 
 ## Class `Resource`
 
-
-
-
+Represents a resource to download, extract, or both.
 
 Defined in [`core/download/resource.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py).
 
 <!-- Placeholder for "Used in" -->
 
-Represents a resource to download, extract, or both.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

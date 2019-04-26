@@ -138,15 +138,11 @@
 
 ## Class `TestCase`
 
-
-
-
+Base TestCase to be used for all tests.
 
 Defined in [`testing/test_case.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py).
 
 <!-- Placeholder for "Used in" -->
-
-Base TestCase to be used for all tests.
 
 `test_data` class attribute: path to the directory with test data.
 `tmp_dir` attribute: path to temp directory reset before every test.

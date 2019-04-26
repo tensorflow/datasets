@@ -19,6 +19,8 @@
 
 ## Class `DummyMnist`
 
+Test DatasetBuilder.
+
 Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)
 
 
@@ -27,7 +29,6 @@ Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree
 
 <!-- Placeholder for "Used in" -->
 
-Test DatasetBuilder.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

@@ -23,6 +23,8 @@
 
 ## Class `FeaturesDict`
 
+Composite `FeatureConnector`; each feature in `dict` has its own connector.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
@@ -30,8 +32,6 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
 <!-- Placeholder for "Used in" -->
-
-Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
 The encode/decode method of the spec feature will recursively encode/decode
 every sub-connector given on the constructor.

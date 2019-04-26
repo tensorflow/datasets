@@ -8,6 +8,8 @@ toc:
       path: /datasets/api_docs/python/tfds/as_numpy
     - title: builder
       path: /datasets/api_docs/python/tfds/builder
+    - title: disable_progress_bar
+      path: /datasets/api_docs/python/tfds/disable_progress_bar
     - title: list_builders
       path: /datasets/api_docs/python/tfds/list_builders
     - title: load

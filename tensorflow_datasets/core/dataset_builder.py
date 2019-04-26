@@ -368,7 +368,7 @@ class DatasetBuilder(object):
 
   def _maybe_log_gcs_data_dir(self):
     """If data is on GCS, set _data_dir to GCS path."""
-    if not gcs_utils.is_gcs_dataset_accessible(self.info.full_name):
+    if not gcs_utils.is_dataset_on_gcs(self.info.full_name):
       return
 
     gcs_path = os.path.join(constants.GCS_DATA_DIR, self.info.full_name)
@@ -573,7 +573,7 @@ class FileAdapterBuilder(DatasetBuilder):
 
   @utils.memoized_property
   def _file_format_adapter(self):
-    # Load the format adapter (CSV, TF-Record,...)
+    # Load the format adapter (TF-Record,...)
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
     serialized_info = self.info.features.get_serialized_info()
     return file_adapter_cls(serialized_info)

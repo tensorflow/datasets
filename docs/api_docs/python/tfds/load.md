@@ -5,6 +5,8 @@
 
 # tfds.load
 
+Loads the named dataset into a `tf.data.Dataset`.
+
 ``` python
 tfds.load(
     name,
@@ -25,8 +27,6 @@ tfds.load(
 Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
 
 <!-- Placeholder for "Used in" -->
-
-Loads the named dataset into a `tf.data.Dataset`.
 
 If `split=None` (the default), returns all splits for the dataset. Otherwise,
 returns the specified split.

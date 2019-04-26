@@ -149,15 +149,11 @@
 
 ## Class `DatasetBuilderTestCase`
 
-
-
-
+Inherit this class to test your DatasetBuilder class.
 
 Defined in [`testing/dataset_builder_testing.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py).
 
 <!-- Placeholder for "Used in" -->
-
-Inherit this class to test your DatasetBuilder class.
 
 You must set the following class attributes:
   DATASET_CLASS: class object of DatasetBuilder you want to test.

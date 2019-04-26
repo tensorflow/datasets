@@ -11,7 +11,7 @@
 
 ## Class `GenerateMode`
 
-
+`Enum` for how to treat pre-existing downloads and data.
 
 ### Aliases:
 
@@ -23,8 +23,6 @@
 Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py).
 
 <!-- Placeholder for "Used in" -->
-
-`Enum` for how to treat pre-existing downloads and data.
 
 The default mode is `REUSE_DATASET_IF_EXISTS`, which will reuse both
 raw downloads and the prepared dataset if they exist.
