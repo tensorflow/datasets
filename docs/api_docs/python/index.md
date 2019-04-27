@@ -50,9 +50,9 @@
 *   <a href="./tfds/features/text/TokenTextEncoder.md"><code>tfds.features.text.TokenTextEncoder</code></a>
 *   <a href="./tfds/features/text/Tokenizer.md"><code>tfds.features.text.Tokenizer</code></a>
 *   <a href="./tfds/file_adapter.md"><code>tfds.file_adapter</code></a>
-*   <a href="./tfds/file_adapter/CSVAdapter.md"><code>tfds.file_adapter.CSVAdapter</code></a>
 *   <a href="./tfds/file_adapter/FileFormatAdapter.md"><code>tfds.file_adapter.FileFormatAdapter</code></a>
 *   <a href="./tfds/file_adapter/TFRecordExampleAdapter.md"><code>tfds.file_adapter.TFRecordExampleAdapter</code></a>
+*   <a href="./tfds/is_dataset_on_gcs.md"><code>tfds.is_dataset_on_gcs</code></a>
 *   <a href="./tfds/list_builders.md"><code>tfds.list_builders</code></a>
 *   <a href="./tfds/load.md"><code>tfds.load</code></a>
 *   <a href="./tfds/percent.md"><code>tfds.percent</code></a>
