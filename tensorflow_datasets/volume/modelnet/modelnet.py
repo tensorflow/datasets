@@ -457,7 +457,7 @@ class ModelnetSampled(tfds.core.GeneratorBasedBuilder):
     return out
 
   def _generate_examples(self, split_path, data_dir):
-    with tf.io.gfile.GFile(split_path, "rb") as fp:
+    with tf.io.gfile.GFile(split_path, "r") as fp:
       example_ids = [l for l in fp.read().split("\n") if l != ""]
     for example_id in example_ids:
       split_id = example_id.split("_")
