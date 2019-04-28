@@ -5,6 +5,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
+import struct
 
 
 def _num_edges(face_lengths):
@@ -104,6 +105,7 @@ class OffObject(object):
   @staticmethod
   def from_file(fp):
     lines = fp.readlines()
+    lines = (l.decode("utf-8") for l in lines)
     lines = (l.rstrip() for l in lines if not l.startswith('#'))
     lines = (l for l in lines if l != '')
     line_iter = iter(lines)
