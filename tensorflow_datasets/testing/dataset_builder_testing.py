@@ -311,9 +311,9 @@ def checksum(example):
         ret += _bytes_flatten(v)
     elif isinstance(element, str):
       if hasattr(element, "decode"):
-        # Python2 considers bytes to be str, but are almost always utf-8
+        # Python2 considers bytes to be str, but are almost always latin-1
         # encoded bytes here. Extra step needed to avoid DecodeError.
-        element = element.decode("utf-8")
+        element = element.decode("latin-1")
       element = element.encode("utf-8")
       ret += element
     elif isinstance(element, np.ndarray):
