@@ -281,13 +281,13 @@ class PointCloudModelnetConfig(ModelnetConfig):
 class ModelnetSampledConfig(tfds.core.BuilderConfig):
   num_points = 10000
 
-  def __init__(self, num_classes):
+  def __init__(self, num_classes, name_prefix="c"):
     """num_classes must be 10 or 40."""
     assert(num_classes in (10, 40))
     self.input_key = "cloud"
     self.num_classes = num_classes
     super(ModelnetSampledConfig, self).__init__(
-        name="c%d" % num_classes,
+        name="%s%d" % (name_prefix, num_classes),
         description=(
           "%d-class sampled 1000-point cloud used by PointNet++" % num_classes),
         version=core_utils.Version(0, 0, 1)
@@ -295,6 +295,9 @@ class ModelnetSampledConfig(tfds.core.BuilderConfig):
 
   def input_features(self):
     return cloud_features(self.num_points)
+
+  def map_cloud(self, cloud):
+    return cloud
 
 
 def _class_names_path(num_classes):
@@ -468,4 +471,5 @@ class ModelnetSampled(tfds.core.GeneratorBasedBuilder):
         data = np.loadtxt(fp, delimiter=",", dtype=np.float32)
       positions, normals = np.split(data, 2, axis=1)  # pylint: disable=unbalanced-tuple-unpacking
       cloud = dict(positions=positions, normals=normals)
+      cloud = self.builder_config.map_cloud(cloud)
       yield dict(cloud=cloud, label=label, example_index=example_index)

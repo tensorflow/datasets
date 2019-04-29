@@ -72,6 +72,8 @@ DATASET_FILES = [
     'image/imagenet2012_validation_labels.txt',
     'image/quickdraw_labels.txt',
     'url_checksums/*',
+    'volume/modelnet/class_names10.txt',
+    'volume/modelnet/class_names40.txt',
 ]
 
 DATASET_EXTRAS = {
