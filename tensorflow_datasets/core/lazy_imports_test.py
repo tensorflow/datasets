@@ -29,9 +29,11 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
   @parameterized.parameters(
       "cv2",
+      "librosa",
       "matplotlib",
       "mwparserfromhell",
       "os",
+      "pretty_midi",
       "pydub",
       "pyplot",
       "scipy",
