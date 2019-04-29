@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.features.Audio.dtype", 
+  "current_doc_full_name": "tfds.features.text.TokenTextEncoder", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
