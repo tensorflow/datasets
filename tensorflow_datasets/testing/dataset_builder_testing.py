@@ -21,10 +21,12 @@ from __future__ import print_function
 
 import hashlib
 import itertools
+import numbers
 import os
 
 from absl.testing import absltest
 from absl.testing import parameterized
+import numpy as np
 import six
 import tensorflow as tf
 
@@ -295,17 +297,33 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
 def checksum(example):
   """Computes the md5 for a given example."""
-  hash_ = hashlib.md5()
-  for key, val in sorted(example.items()):
-    hash_.update(key.encode("utf-8"))
-    # TODO(b/120124306): This will only work for "one-level"
-    #                    dictionary. We might need a better solution here.
-    if isinstance(val, dict):
-      for k, v in sorted(val.items()):
-        hash_.update(k.encode("utf-8"))
-        hash_.update(v)
+
+  def _bytes_flatten(element):
+    """Recursively flatten an element to its byte representation."""
+    ret = "".encode("utf-8")
+    if isinstance(element, numbers.Number):
+      # In python3, bytes(-3) is not allowed (or large numbers),
+      # so convert to str to avoid problems.
+      element = str(element)
+    if isinstance(element, dict):
+      for k, v in sorted(element.items()):
+        ret += k.encode("utf-8")
+        ret += _bytes_flatten(v)
+    elif isinstance(element, str):
+      if hasattr(element, "decode"):
+        # Python2 considers bytes to be str, but are almost always utf-8
+        # encoded bytes here. Extra step needed to avoid DecodeError.
+        element = element.decode("utf-8")
+      element = element.encode("utf-8")
+      ret += element
+    elif isinstance(element, np.ndarray):
+      ret += element.tobytes()
     else:
-      hash_.update(val)
+      ret += bytes(element)
+    return ret
+
+  hash_ = hashlib.md5()
+  hash_.update(_bytes_flatten(example))
   return hash_.hexdigest()
 
 
