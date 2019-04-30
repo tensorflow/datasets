@@ -228,6 +228,18 @@ class Sequence(feature_lib.FeatureConnector):
     """Allow to access the underlying attributes directly."""
     return getattr(self._seq_feature['inner'], key)
 
+  # The __getattr__ method triggers an infinite recursion loop when loading a
+  # pickled instance. So we override that name in the instance dict, and remove
+  # it when unplickling.
+  def __getstate__(self):
+    state = self.__dict__.copy()
+    state['__getattr__'] = 0
+    return state
+
+  def __setstate__(self, state):
+    del state['__getattr__']
+    self.__dict__.update(state)
+
   def get_tensor_info(self):
     return self._seq_feature.get_tensor_info()['inner']
 

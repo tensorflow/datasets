@@ -40,6 +40,7 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
     'promise',
@@ -54,9 +55,9 @@ REQUIRED_PKGS = [
 ]
 
 TESTS_REQUIRE = [
+    'apache-beam',
     'jupyter',
     'pytest',
-    'apache-beam',
 ]
 
 if sys.version_info.major == 3:
