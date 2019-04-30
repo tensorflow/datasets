@@ -4,6 +4,7 @@
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
+<meta itemprop="property" content="__getstate__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
@@ -100,6 +101,12 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 
 ## Methods
+
+<h3 id="__getstate__"><code>__getstate__</code></h3>
+
+```python
+__getstate__()
+```
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 

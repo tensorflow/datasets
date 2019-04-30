@@ -250,14 +250,14 @@ a particular matrix.
 `tfds.image.abstract_reasoning.AbstractReasoningConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"neutral"` (`v0.0.1`) (`Size: ?? GiB`): The structures encoding the
+*   `"neutral"` (`v0.0.2`) (`Size: ?? GiB`): The structures encoding the
     matrices in both the \
     training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \
     $o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
     separation occurring at the level of the input variables (i.e. pixel \
     manifestations).
 
-*   `"interpolation"` (`v0.0.1`) (`Size: ?? GiB`): As in the neutral split, $S$
+*   `"interpolation"` (`v0.0.2`) (`Size: ?? GiB`): As in the neutral split, $S$
     consisted of any \
     triples $[r, o, a]$. For interpolation, in the training set, when the \
     attribute was "colour" or "size" (i.e., the ordered attributes), the values
@@ -268,13 +268,13 @@ configurations predefined (defaults to the first one):
     $S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
     Thus, generalisation is required for every question in the test set.
 
-*   `"extrapolation"` (`v0.0.1`) (`Size: ?? GiB`): Same as in interpolation, but
+*   `"extrapolation"` (`v0.0.2`) (`Size: ?? GiB`): Same as in interpolation, but
     the values of \
     the attributes were restricted to the lower half of the discrete set during
     \
     training, whereas in the test set they took values in the upper half.
 
-*   `"attr.rel.pairs"` (`v0.0.1`) (`Size: ?? GiB`): All $S$ contained at least
+*   `"attr.rel.pairs"` (`v0.0.2`) (`Size: ?? GiB`): All $S$ contained at least
     two triples, \
     $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$, of which 400 are viable. We \
     randomly allocated 360 to the training set and 40 to the test set. Members \
@@ -283,7 +283,7 @@ configurations predefined (defaults to the first one):
     in the training set, and all structures $S$ had at least one such pair \
     $(t_1, t_2)$ as a subset.
 
-*   `"attr.rels"` (`v0.0.1`) (`Size: ?? GiB`): In our dataset, there are 29
+*   `"attr.rels"` (`v0.0.2`) (`Size: ?? GiB`): In our dataset, there are 29
     possible unique \
     triples $[r,o,a]$. We allocated seven of these for the test set, at random,
     \
@@ -293,7 +293,7 @@ configurations predefined (defaults to the first one):
     \
     every $S$ in the test set contained at least one of them.
 
-*   `"attrs.pairs"` (`v0.0.1`) (`Size: ?? GiB`): $S$ contained at least two
+*   `"attrs.pairs"` (`v0.0.2`) (`Size: ?? GiB`): $S$ contained at least two
     triples. There are 20 \
     (unordered) viable pairs of attributes $(a_1, a_2)$ such that for some \
     $r_i, o_i, ([r_1,o_1,a_1],[r_2,o_2,a_2])$ is a viable triple pair \
@@ -304,14 +304,14 @@ configurations predefined (defaults to the first one):
     $S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
     set, all $S$ contained triples with $a_1$ and $a_2$.
 
-*   `"attrs.shape.color"` (`v0.0.1`) (`Size: ?? GiB`): Held-out attribute
+*   `"attrs.shape.color"` (`v0.0.2`) (`Size: ?? GiB`): Held-out attribute
     shape-colour. $S$ in \
     the training set contained no triples with $o$=shape and $a$=colour. \
     All structures governing puzzles in the test set contained at least one
     triple \
     with $o$=shape and $a$=colour.
 
-*   `"attrs.line.type"` (`v0.0.1`) (`Size: ?? GiB`): Held-out attribute
+*   `"attrs.line.type"` (`v0.0.2`) (`Size: ?? GiB`): Held-out attribute
     line-type. $S$ in \
     the training set contained no triples with $o$=line and $a$=type. \
     All structures governing puzzles in the test set contained at least one
@@ -322,8 +322,8 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -335,8 +335,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -348,8 +348,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -361,8 +361,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -374,8 +374,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -387,8 +387,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -400,8 +400,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -413,8 +413,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-    'context': Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -4544,7 +4544,6 @@ per class).
 *   Size: `336.76 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
@@ -4567,11 +4566,9 @@ TRAIN      | 1,020
 *   [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 #### Citation
-
 ```
 @InProceedings{Nilsback08,
    author = "Nilsback, M-E. and Zisserman, A.",
@@ -5876,15 +5873,17 @@ the correct citation for each contained dataset.
   </div>
   <meta itemprop="name" content="imdb_reviews" />
   <meta itemprop="description" content="Large Movie Review Dataset.
-This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing." />
+This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#imdb_reviews" />
   <meta itemprop="sameAs" content="http://ai.stanford.edu/~amaas/data/sentiment/" />
 </div>
 
 ### `"imdb_reviews"`
 
-Large Movie Review Dataset.
-This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing.
+Large Movie Review Dataset. This is a dataset for binary sentiment
+classification containing substantially more data than previous benchmark
+datasets. We provide a set of 25,000 highly polar movie reviews for training,
+and 25,000 for testing. There is additional unlabeled data for use as well.
 
 * URL: [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 * `DatasetBuilder`: [`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
@@ -5892,14 +5891,16 @@ This is a dataset for binary sentiment classification containing substantially m
 `imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"plain_text"` (`v0.0.1`) (`Size: 80.23 MiB`): Plain text
+*   `"plain_text"` (`v0.1.0`) (`Size: 80.23 MiB`): Plain text
 
-* `"bytes"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+*   `"bytes"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses byte-level text encoding with
+    `tfds.features.text.ByteTextEncoder`
 
-* `"subwords8k"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+*   `"subwords8k"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses
+    `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
-* `"subwords32k"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
-
+*   `"subwords32k"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses
+    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 #### `"imdb_reviews/plain_text"`
 
@@ -5943,16 +5944,14 @@ FeaturesDict({
 })
 ```
 
-
-
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     50,000
-TRAIN      |     25,000
-TEST       |     25,000
 
+Split        | Examples
+:----------- | -------:
+ALL          | 100,000
+UNSUPERVISED | 50,000
+TRAIN        | 25,000
+TEST         | 25,000
 
 #### Urls
  * [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
@@ -10426,14 +10425,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Finnish." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-French." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-Finnish.
+Web-Scale Parallel Corpora for Official European Languages. English-French.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -10443,41 +10442,17 @@ Web-Scale Parallel Corpora for Official European Languages. English-Finnish.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
+*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to es, uses encoder plain_text.
 
-*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to et, uses encoder plain_text.
 
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pt, uses encoder plain_text.
 
-*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
-
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
-
-*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
-
-*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hu, uses encoder plain_text.
-
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
-
-*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sv, uses encoder plain_text.
-
-*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to el, uses encoder plain_text.
-
-*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to cs, uses encoder plain_text.
-
-*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ga, uses encoder plain_text.
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to it, uses encoder plain_text.
 
 *   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to ro, uses encoder plain_text.
@@ -10485,138 +10460,90 @@ has the following configurations predefined (defaults to the first one):
 *   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to mt, uses encoder plain_text.
 
-*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to da, uses encoder plain_text.
-
 *   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to pl, uses encoder plain_text.
 
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to it, uses encoder plain_text.
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ga, uses encoder plain_text.
 
-*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pt, uses encoder plain_text.
+*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to el, uses encoder plain_text.
 
-*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to es, uses encoder plain_text.
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to cs, uses encoder plain_text.
 
-*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to et, uses encoder plain_text.
+*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sv, uses encoder plain_text.
 
-*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fr, uses encoder plain_text.
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
 
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to bg, uses encoder plain_text.
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to nl, uses encoder plain_text.
+
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hu, uses encoder plain_text.
+
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
+
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to da, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
+
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
+
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
+
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
 
 *   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to fi, uses encoder plain_text.
 
-#### `"para_crawl/enlv_plain_text"`
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to bg, uses encoder plain_text.
+
+*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fr, uses encoder plain_text.
+
+#### `"para_crawl/enes_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+    'es': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enlt_plain_text"`
+#### `"para_crawl/enet_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/ensk_plain_text"`
+#### `"para_crawl/enpt_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sk': Text(shape=(), dtype=tf.string, encoder=None),
+    'pt': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/ensl_plain_text"`
+#### `"para_crawl/enit_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ende_plain_text"`
-
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hr': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhu_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hu': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ennl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'nl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enel_plain_text"`
-
-```python
-Translation({
-    'el': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/encs_plain_text"`
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enga_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ga': Text(shape=(), dtype=tf.string, encoder=None),
+    'it': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10638,15 +10565,6 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enda_plain_text"`
-
-```python
-Translation({
-    'da': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
 #### `"para_crawl/enpl_plain_text"`
 
 ```python
@@ -10656,57 +10574,120 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enit_plain_text"`
+#### `"para_crawl/enga_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'it': Text(shape=(), dtype=tf.string, encoder=None),
+    'ga': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enpt_plain_text"`
+#### `"para_crawl/enel_plain_text"`
 
 ```python
 Translation({
+    'el': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enes_plain_text"`
+#### `"para_crawl/encs_plain_text"`
 
 ```python
 Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'es': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enet_plain_text"`
+#### `"para_crawl/ensv_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'et': Text(shape=(), dtype=tf.string, encoder=None),
+    'sv': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enfr_plain_text"`
+#### `"para_crawl/enhr_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'hr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enbg_plain_text"`
+#### `"para_crawl/ennl_plain_text"`
 
 ```python
 Translation({
-    'bg': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhu_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hu': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ende_plain_text"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enda_plain_text"`
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensk_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sk': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10719,17 +10700,35 @@ Translation({
 })
 ```
 
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
 #### Statistics
 None computed
 
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fi.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fi.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
 
-`(u'en', u'fi')`
+`(u'en', u'fr')`
 
 #### Citation
 ```
