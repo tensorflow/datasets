@@ -22,9 +22,7 @@ Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/dataset
 
 <h3 id="filetype_suffix"><code>filetype_suffix</code></h3>
 
-Returns a str file type suffix (e.g. "csv").
-
-
+Returns a str file type suffix (e.g. "tfrecord").
 
 ## Methods
 

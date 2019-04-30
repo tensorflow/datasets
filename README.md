@@ -31,6 +31,9 @@ pip install tensorflow
 pip install tensorflow-gpu
 ```
 
+Join [our Google group](https://groups.google.com/forum/#!forum/tensorflow-datasets-public-announce)
+to receive updates on the project.
+
 ### Usage
 
 ```python

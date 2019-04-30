@@ -89,6 +89,7 @@ class Image(feature.FeatureConnector):
     """
     self._encoding_format = None
     self._shape = None
+    self._runner = None
 
     # Set and validate values
     self.set_encoding_format(encoding_format or 'png')
@@ -118,19 +119,19 @@ class Image(feature.FeatureConnector):
     # Only store raw image (includes size).
     return tf.io.FixedLenFeature(tuple(), tf.string)
 
-  @utils.memoized_property
-  def _runner(self):
-    # TODO(epot): Should clear the runner once every image has been encoded.
-    # TODO(epot): Better support for multi-shape image (instead of re-building
-    # a new graph every time)
-    return utils.TFGraphRunner()
-
   def _encode_image(self, np_image):
     """Returns np_image encoded as jpeg or png."""
+    if not self._runner:
+      self._runner = utils.TFGraphRunner()
     if np_image.dtype != np.uint8:
       raise ValueError('Image should be uint8. Detected: %s.' % np_image.dtype)
     utils.assert_shape_match(np_image.shape, self._shape)
     return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
+
+  def __getstate__(self):
+    state = self.__dict__.copy()
+    state['_runner'] = None
+    return state
 
   def encode_example(self, image_or_path_or_fobj):
     """Convert the given image into a dict convertible to tf example."""

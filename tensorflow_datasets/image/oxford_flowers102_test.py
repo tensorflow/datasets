@@ -13,25 +13,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for imdb dataset module."""
+"""TODO(oxford_102_flowers): Add a description here."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import imdb
+from tensorflow_datasets.image import oxford_flowers102
 
 
-class IMDBReviewsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = imdb.IMDBReviews
+class OxfordFlowers102Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = oxford_flowers102.OxfordFlowers102
   SPLITS = {
-      "train": 5,
-      "test": 4,
-      "unsupervised": 3,
+      "train": 3,
+      "test": 3,
+      "validation": 4,
   }
-  DL_EXTRACT_RESULT = "aclImdb_v1.tar.gz"
+
+  DL_EXTRACT_RESULT = {
+      "images": "images",
+      "labels": "imagelabels.mat",
+      "setid": "setid.mat",
+  }
 
 
 if __name__ == "__main__":
   testing.test_main()
+
