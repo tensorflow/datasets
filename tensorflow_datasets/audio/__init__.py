@@ -15,7 +15,6 @@
 
 """Audio datasets."""
 
-from tensorflow_datasets.audio.groove import Groove
 from tensorflow_datasets.audio.librispeech import Librispeech
 from tensorflow_datasets.audio.librispeech import LibrispeechConfig
 from tensorflow_datasets.audio.nsynth import Nsynth
