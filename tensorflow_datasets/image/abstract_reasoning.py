@@ -20,8 +20,6 @@ from __future__ import division
 from __future__ import print_function
 import os
 import random
-import shutil
-import tarfile
 import numpy as np
 import six
 import tensorflow as tf
@@ -152,48 +150,48 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
   BUILDER_CONFIGS = [
       AbstractReasoningConfig(
           name="neutral",
-          version="0.0.1",
+          version="0.0.2",
           description=_DESCRIPTION_NEUTRAL,
       ),
       AbstractReasoningConfig(
           name="interpolation",
-          version="0.0.1",
+          version="0.0.2",
           description=_DESCRIPTION_INTERPOLATION,
           split_type="interpolation",
       ),
       AbstractReasoningConfig(
           name="extrapolation",
-          version="0.0.1",
+          version="0.0.2",
           description=_DESCRIPTION_EXTRAPOLATION,
           split_type="extrapolation",
       ),
       AbstractReasoningConfig(
           name="attr.rel.pairs",
-          version="0.0.1",
+          version="0.0.2",
           description=_DESCRIPTION_ATTR_REL_PAIRS,
           split_type="attr.rel.pairs",
       ),
       AbstractReasoningConfig(
           name="attr.rels",
-          version="0.0.1",
+          version="0.0.2",
           description=_DESCRIPTION_ATTR_RELS,
           split_type="attr.rels",
       ),
       AbstractReasoningConfig(
           name="attrs.pairs",
-          version="0.0.1",
+          version="0.0.2",
           description=_DESCRIPTION_ATTR_PAIRS,
           split_type="attrs.pairs",
       ),
       AbstractReasoningConfig(
           name="attrs.shape.color",
-          version="0.0.1",
+          version="0.0.2",
           description=_DESCRIPTION_ATTR_SHAPE_COLOR,
           split_type="attrs.shape.color",
       ),
       AbstractReasoningConfig(
           name="attrs.line.type",
-          version="0.0.1",
+          version="0.0.2",
           description=_DESCRIPTION_ATTR_LINE_TYPE,
           split_type="attrs.line.type",
       ),
@@ -204,10 +202,8 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "context":
-                tfds.features.Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
-            "answers":
-                tfds.features.Tensor(shape=[8, 160, 160, 1], dtype=tf.uint8),
+            "context": tfds.features.Video(shape=(8, 160, 160, 1)),
+            "answers": tfds.features.Video(shape=(8, 160, 160, 1)),
             "target":
                 tfds.features.ClassLabel(num_classes=8),
             "meta_target":
@@ -226,21 +222,21 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
+            num_shards=50,
             gen_kwargs={
                 "folder": path,
                 "split": "train",
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=50,
+            num_shards=2,
             gen_kwargs={
                 "folder": path,
                 "split": "val",
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=50,
+            num_shards=10,
             gen_kwargs={
                 "folder": path,
                 "split": "test",
@@ -258,14 +254,11 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
     def _extract_data(inputs):
       """Extracts files from the tar archives."""
       filename, split = inputs
-      with tf.io.gfile.GFile(filename, "rb") as f:
-        with tarfile.open(fileobj=f, mode="r") as tar:
-          for tarinfo in tar:
-            split_name = tarinfo.name.split("_")
-            if len(split_name) > 2 and split_name[2] == split:
-              buf = six.BytesIO()
-              shutil.copyfileobj(tar.extractfile(tarinfo), buf)
-              yield [tarinfo.name, buf.getvalue()]
+      for name, fobj in tfds.download.iter_archive(
+          filename, tfds.download.ExtractMethod.TAR_STREAM):
+        split_name = name.split("_")
+        if len(split_name) > 2 and split_name[2] == split:
+          yield [name, fobj.read()]
 
     def _process_example(inputs):
       filename, data_string = inputs
