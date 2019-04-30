@@ -57,7 +57,7 @@ REQUIRED_PKGS = [
 TESTS_REQUIRE = [
     'apache-beam',
     'jupyter',
-    'pytest',
+    'pytest-faulthandler',
 ]
 
 if sys.version_info.major == 3:
@@ -93,6 +93,7 @@ DATASET_EXTRAS = {
         'scikit-image',
         'scipy'
     ],
+    'groove': ['pretty_midi', 'librosa'],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'svhn': ['scipy'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],

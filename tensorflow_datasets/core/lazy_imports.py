@@ -79,6 +79,16 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def pretty_midi(cls):
+    return _try_import("pretty_midi")
+
+  @utils.classproperty
+  @classmethod
+  def librosa(cls):
+    return _try_import("librosa")
+
+  @utils.classproperty
+  @classmethod
   def pyplot(cls):
     return _try_import("matplotlib.pyplot")
 

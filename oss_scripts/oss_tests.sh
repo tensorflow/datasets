@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -vx  # print command from file as well as evaluated command
-
 source ./oss_scripts/utils.sh
 
 : "${TF_VERSION:?}"
@@ -18,6 +16,8 @@ function set_status() {
     STATUS=$(($last_status || $STATUS))
 }
 
+set -vx  # print command from file as well as evaluated command
+
 # Certain datasets/tests don't work with TF2
 # Skip them here, and link to a GitHub issue that explains why it doesn't work
 # and what the plan is to support it.
@@ -31,6 +31,13 @@ then
 fi
 TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 
+RUN_SEPARATE_TESTS="
+tensorflow_datasets/audio/groove_test.py
+tensorflow_datasets/audio/librispeech_test.py
+tensorflow_datasets/audio/nsynth_test.py
+"
+RUN_SEPARATE_IGNORE=$(for test in $RUN_SEPARATE_TESTS; do echo "--ignore=$test "; done)
+
 # Run Tests
 # Ignores:
 # * Some TF2 tests if running against TF2 (see above)
@@ -38,12 +45,20 @@ TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 # * eager_not_enabled_by_default_test needs to be run separately because the
 #   enable_eager_execution calls set global state and pytest runs all the tests
 #   in the same process.
-pytest \
+pytest -vs \
   --disable-warnings \
   $TF2_IGNORE \
+  $RUN_SEPARATE_IGNORE \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
   --ignore="tensorflow_datasets/eager_not_enabled_by_default_test.py"
 set_status
+
+for test in $RUN_SEPARATE_TESTS
+do
+  pytest -vs --disable-warnings $test
+  set_status
+done
+
 # If not running with TF2, ensure Eager is not enabled by default
 if [[ "$TF_VERSION" != "tf2" ]]
 then
