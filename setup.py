@@ -74,6 +74,7 @@ DATASET_FILES = [
     'url_checksums/*',
     'volume/modelnet/class_names10.txt',
     'volume/modelnet/class_names40.txt',
+    'volume/shapenet/iccv2017_synsetoffset2category.txt',
 ]
 
 DATASET_EXTRAS = {
