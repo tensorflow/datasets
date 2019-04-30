@@ -37,15 +37,18 @@ _URL = ("http://vision.stanford.edu/aditya86/ImageNetDogs/main.html")
 
 _CITATION = """\
 @inproceedings{KhoslaYaoJayadevaprakashFeiFei_FGVC2011,
-author = "Aditya Khosla and Nityananda Jayadevaprakash and Bangpeng Yao and Li Fei-Fei",
+author = "Aditya Khosla and Nityananda Jayadevaprakash and Bangpeng Yao and
+          Li Fei-Fei",
 title = "Novel Dataset for Fine-Grained Image Categorization",
-booktitle = "First Workshop on Fine-Grained Visual Categorization, IEEE Conference on Computer Vision and Pattern Recognition",
+booktitle = "First Workshop on Fine-Grained Visual Categorization,
+             IEEE Conference on Computer Vision and Pattern Recognition",
 year = "2011",
 month = "June",
 address = "Colorado Springs, CO",
 }
 @inproceedings{imagenet_cvpr09,
-        AUTHOR = {Deng, J. and Dong, W. and Socher, R. and Li, L.-J. and Li, K. and Fei-Fei, L.},
+        AUTHOR = {Deng, J. and Dong, W. and Socher, R. and Li, L.-J. and
+                  Li, K. and Fei-Fei, L.},
         TITLE = {{ImageNet: A Large-Scale Hierarchical Image Database}},
         BOOKTITLE = {CVPR09},
         YEAR = {2009},
@@ -85,15 +88,19 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
 
     def _split_generators(self, dl_manager):
 
-        download_path = dl_manager.download([_SPLIT_URL, _ANNOTATIONS_URL, _IMAGES_URL])
-        extracted_path = dl_manager.download_and_extract([_SPLIT_URL, _ANNOTATIONS_URL])
+        download_path = dl_manager.download([_SPLIT_URL, _ANNOTATIONS_URL,
+                                            _IMAGES_URL])
+        extracted_path = dl_manager.download_and_extract([_SPLIT_URL,
+                                                         _ANNOTATIONS_URL])
         xml_file_list = defaultdict(str)
 
         # Parsing the mat file which contains the list of train/test images
         def parse_mat_file(file_name):
 
-            parsed_mat_arr = tfds.core.lazy_imports.scipy_io.loadmat(file_name, squeeze_me=True)
-            file_list = [element.split('/')[-1] for element in parsed_mat_arr['file_list']]
+            parsed_mat_arr = tfds.core.lazy_imports.scipy_io.loadmat(file_name,
+                                                                     squeeze_me=True)
+            file_list = [element.split('/')[-1]
+                         for element in parsed_mat_arr['file_list']]
 
             return file_list, parsed_mat_arr
 
@@ -101,7 +108,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
             # Train-test split using train_list.mat and test_list.mat
             full_file_name = os.path.join(extracted_path[0], fname)
 
-            if "train" in fname: 
+            if "train" in fname:
                 train_list, train_mat_arr = parse_mat_file(full_file_name)
                 label_names = set([element.split('/')[-2].lower()
                                   for element in train_mat_arr['file_list']])
