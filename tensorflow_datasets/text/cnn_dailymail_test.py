@@ -18,8 +18,27 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import tempfile
+
 import tensorflow_datasets.testing as tfds_test
 from tensorflow_datasets.text import cnn_dailymail
+
+
+_STORY_FILE = b"""Some article.
+This is some article text.
+
+@highlight
+
+highlight text
+
+@highlight
+
+Highlight two
+
+@highlight
+
+highlight Three
+"""
 
 
 class CnnDailymailTest(tfds_test.DatasetBuilderTestCase):
@@ -34,6 +53,19 @@ class CnnDailymailTest(tfds_test.DatasetBuilderTestCase):
                        'test_urls': 'all_test.txt',
                        'train_urls': 'all_train.txt',
                        'val_urls': 'all_val.txt'}
+
+  def test_get_art_abs(self):
+    with tempfile.NamedTemporaryFile(delete=True) as f:
+      f.write(_STORY_FILE)
+      f.flush()
+      article, abstract = cnn_dailymail._get_art_abs(f.name)
+      self.assertEqual('some article. this is some article text.',
+                       article)
+      # This is a bit weird, but the original code at
+      # https://github.com/abisee/cnn-dailymail/ adds space before period
+      # for abstracts and we retain this behavior.
+      self.assertEqual('highlight text . highlight two . highlight three .',
+                       abstract)
 
 
 if __name__ == '__main__':
