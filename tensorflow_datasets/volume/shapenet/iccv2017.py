@@ -68,18 +68,33 @@ def load_class_names():
   return class_names, class_ids
 
 
-class ShapenetPart2017(tfds.core.GeneratorBasedBuilder):
-  URLS = [SHAPENET_URL, _ICCV2017_URL]
-  _DL_URL = "https://shapenet.cs.stanford.edu/media/shapenetcore_partanno_segmentation_benchmark_v0_normal.zip"
-  VERSION = core_utils.Version("0.0.1")
-
-  def _info(self):
-    _, class_ids = load_class_names()
-    cloud = tfds.features.SequenceDict({
+class ShapenetPart2017Config(tfds.core.BuilderConfig):
+  @property
+  def cloud_features(self):
+    return tfds.features.SequenceDict({
         "labels": tfds.features.ClassLabel(num_classes=NUM_PART_CLASSES),
         "positions": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
         "normals": tfds.features.Tensor(shape=(3,), dtype=tf.float32)
     })
+
+  def map_cloud(self, cloud):
+    return cloud
+
+
+base_config = ShapenetPart2017Config(
+    name="base", version=core_utils.Version("0.0.1"),
+    description="base point cloud segmentation dataset for iccv2017 challenge")
+
+
+class ShapenetPart2017(tfds.core.GeneratorBasedBuilder):
+  URLS = [SHAPENET_URL, _ICCV2017_URL]
+  _DL_URL = "https://shapenet.cs.stanford.edu/media/shapenetcore_partanno_segmentation_benchmark_v0_normal.zip"
+
+  BUILDER_CONFIGS = [base_config]
+
+  def _info(self):
+    _, class_ids = load_class_names()
+    cloud = self.builder_config.cloud_features
     label = tfds.features.ClassLabel(names=class_ids)
     example_id = tfds.features.Text()
     features = tfds.features.FeaturesDict({
@@ -128,11 +143,11 @@ class ShapenetPart2017(tfds.core.GeneratorBasedBuilder):
         data = np.loadtxt(fp, dtype=np.float32)
       positions, normals, labels = np.split(data, (3, 6), axis=1)  # pylint: disable=unbalanced-tuple-unpacking
       yield dict(
-        cloud=dict(
+        cloud=self.builder_config.map_cloud(dict(
             positions=positions,
             normals=normals,
             labels=labels.astype(np.int64)
-        ),
+        )),
         label=class_id,
         example_id=example_id
       )
