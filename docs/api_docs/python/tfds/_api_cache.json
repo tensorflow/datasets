@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.features.FeatureConnector.save_metadata", 
+  "current_doc_full_name": "tfds.core.SplitDict.__reduce_ex__", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
