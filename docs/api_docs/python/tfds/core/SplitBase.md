@@ -11,15 +11,11 @@
 
 ## Class `SplitBase`
 
-
-
-
+Abstract base class for Split compositionality.
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
 <!-- Placeholder for "Used in" -->
-
-Abstract base class for Split compositionality.
 
 See the
 [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)

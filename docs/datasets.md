@@ -28,71 +28,262 @@ np_datasets = tfds.as_numpy(datasets)
 
 ## All Datasets
 
-* [`audio`](#audio)
-  * [`"nsynth"`](#nsynth)
-* [`image`](#image)
-  * [`"caltech101"`](#caltech101)
-  * [`"cats_vs_dogs"`](#cats_vs_dogs)
-  * [`"celeb_a"`](#celeb_a)
-  * [`"celeb_a_hq"`](#celeb_a_hq)
-  * [`"cifar10"`](#cifar10)
-  * [`"cifar100"`](#cifar100)
-  * [`"cifar10_corrupted"`](#cifar10_corrupted)
-  * [`"coco2014"`](#coco2014)
-  * [`"colorectal_histology"`](#colorectal_histology)
-  * [`"colorectal_histology_large"`](#colorectal_histology_large)
-  * [`"cycle_gan"`](#cycle_gan)
-  * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
-  * [`"dsprites"`](#dsprites)
-  * [`"dtd"`](#dtd)
-  * [`"emnist"`](#emnist)
-  * [`"fashion_mnist"`](#fashion_mnist)
-  * [`"horses_or_humans"`](#horses_or_humans)
-  * [`"image_label_folder"`](#image_label_folder)
-  * [`"imagenet2012"`](#imagenet2012)
-  * [`"imagenet2012_corrupted"`](#imagenet2012_corrupted)
-  * [`"kmnist"`](#kmnist)
-  * [`"lsun"`](#lsun)
-  * [`"mnist"`](#mnist)
-  * [`"omniglot"`](#omniglot)
-  * [`"open_images_v4"`](#open_images_v4)
-  * [`"oxford_iiit_pet"`](#oxford_iiit_pet)
-  * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
-  * [`"rock_paper_scissors"`](#rock_paper_scissors)
-  * [`"shapes3d"`](#shapes3d)
-  * [`"smallnorb"`](#smallnorb)
-  * [`"sun397"`](#sun397)
-  * [`"svhn_cropped"`](#svhn_cropped)
-  * [`"tf_flowers"`](#tf_flowers)
-  * [`"voc2007"`](#voc2007)
+*   [`audio`](#audio)
+    *   [`"groove"`](#groove)
+    *   [`"nsynth"`](#nsynth)
+*   [`image`](#image)
+    *   [`"abstract_reasoning"`](#abstract_reasoning)
+    *   [`"caltech101"`](#caltech101)
+    *   [`"cats_vs_dogs"`](#cats_vs_dogs)
+    *   [`"celeb_a"`](#celeb_a)
+    *   [`"celeb_a_hq"`](#celeb_a_hq)
+    *   [`"cifar10"`](#cifar10)
+    *   [`"cifar100"`](#cifar100)
+    *   [`"cifar10_corrupted"`](#cifar10_corrupted)
+    *   [`"coco2014"`](#coco2014)
+    *   [`"colorectal_histology"`](#colorectal_histology)
+    *   [`"colorectal_histology_large"`](#colorectal_histology_large)
+    *   [`"cycle_gan"`](#cycle_gan)
+    *   [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
+    *   [`"dsprites"`](#dsprites)
+    *   [`"dtd"`](#dtd)
+    *   [`"emnist"`](#emnist)
+    *   [`"fashion_mnist"`](#fashion_mnist)
+    *   [`"horses_or_humans"`](#horses_or_humans)
+    *   [`"image_label_folder"`](#image_label_folder)
+    *   [`"imagenet2012"`](#imagenet2012)
+    *   [`"imagenet2012_corrupted"`](#imagenet2012_corrupted)
+    *   [`"kmnist"`](#kmnist)
+    *   [`"lsun"`](#lsun)
+    *   [`"mnist"`](#mnist)
+    *   [`"omniglot"`](#omniglot)
+    *   [`"open_images_v4"`](#open_images_v4)
+    *   [`"oxford_flowers102"`](#oxford_flowers102)
+    *   [`"oxford_iiit_pet"`](#oxford_iiit_pet)
+    *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
+    *   [`"rock_paper_scissors"`](#rock_paper_scissors)
+    *   [`"shapes3d"`](#shapes3d)
+    *   [`"smallnorb"`](#smallnorb)
+    *   [`"sun397"`](#sun397)
+    *   [`"svhn_cropped"`](#svhn_cropped)
+    *   [`"tf_flowers"`](#tf_flowers)
 
-* [`structured`](#structured)
-  * [`"higgs"`](#higgs)
-  * [`"titanic"`](#titanic)
-* [`text`](#text)
-  * [`"imdb_reviews"`](#imdb_reviews)
-  * [`"lm1b"`](#lm1b)
-  * [`"multi_nli"`](#multi_nli)
-  * [`"squad"`](#squad)
-  * [`"wikipedia"`](#wikipedia)
-* [`translate`](#translate)
-  * [`"flores"`](#flores)
-  * [`"ted_hrlr_translate"`](#ted_hrlr_translate)
-  * [`"ted_multi_translate"`](#ted_multi_translate)
-  * [`"wmt15_translate"`](#wmt15_translate)
-  * [`"wmt16_translate"`](#wmt16_translate)
-  * [`"wmt17_translate"`](#wmt17_translate)
-  * [`"wmt18_translate"`](#wmt18_translate)
-  * [`"wmt19_translate"`](#wmt19_translate)
-* [`video`](#video)
-  * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
-  * [`"moving_mnist"`](#moving_mnist)
-  * [`"starcraft_video"`](#starcraft_video)
-  * [`"ucf101"`](#ucf101)
+*   [`structured`](#structured)
+
+    *   [`"higgs"`](#higgs)
+    *   [`"iris"`](#iris)
+    *   [`"titanic"`](#titanic)
+
+*   [`text`](#text)
+
+    *   [`"cnn_dailymail"`](#cnn_dailymail)
+    *   [`"glue"`](#glue)
+    *   [`"imdb_reviews"`](#imdb_reviews)
+    *   [`"lm1b"`](#lm1b)
+    *   [`"multi_nli"`](#multi_nli)
+    *   [`"squad"`](#squad)
+    *   [`"wikipedia"`](#wikipedia)
+    *   [`"xnli"`](#xnli)
+
+*   [`translate`](#translate)
+
+    *   [`"flores"`](#flores)
+    *   [`"para_crawl"`](#para_crawl)
+    *   [`"ted_hrlr_translate"`](#ted_hrlr_translate)
+    *   [`"ted_multi_translate"`](#ted_multi_translate)
+    *   [`"wmt15_translate"`](#wmt15_translate)
+    *   [`"wmt16_translate"`](#wmt16_translate)
+    *   [`"wmt17_translate"`](#wmt17_translate)
+    *   [`"wmt18_translate"`](#wmt18_translate)
+    *   [`"wmt19_translate"`](#wmt19_translate)
+
+*   [`video`](#video)
+
+    *   [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
+    *   [`"moving_mnist"`](#moving_mnist)
+    *   [`"starcraft_video"`](#starcraft_video)
+    *   [`"ucf101"`](#ucf101)
+
+--------------------------------------------------------------------------------
+
+## [`audio`](#audio)
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="groove" />
+  <meta itemprop="description" content="The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and
+(synthesized) audio of human-performed, tempo-aligned expressive drumming
+captured on a Roland TD-11 V-Drum electronic drum kit." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#groove" />
+  <meta itemprop="sameAs" content="https://g.co/magenta/groove-dataset" />
+</div>
+
+### `"groove"`
+
+The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and
+(synthesized) audio of human-performed, tempo-aligned expressive drumming
+captured on a Roland TD-11 V-Drum electronic drum kit.
+
+*   URL:
+    [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+*   `DatasetBuilder`:
+    [`tfds.audio.groove.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
+
+`groove` is configured with `tfds.audio.groove.GrooveConfig` and has the
+following configurations predefined (defaults to the first one):
+
+*   `"full-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without
+    audio, unsplit.
+
+*   `"full-16000hz"` (`v1.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
+    unsplit.
+
+*   `"2bar-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without
+    audio, split into 2-bar chunks.
+
+*   `"2bar-16000hz"` (`v1.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
+    split into 2-bar chunks.
+
+*   `"4bar-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without
+    audio, split into 4-bar chunks.
+
+#### `"groove/full-midionly"`
+
+```python
+FeaturesDict({
+    'bpm': Tensor(shape=(), dtype=tf.int32),
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'midi': Tensor(shape=(), dtype=tf.string),
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': Tensor(shape=(), dtype=tf.string),
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+#### `"groove/full-16000hz"`
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=[None], dtype=tf.float32),
+    'bpm': Tensor(shape=(), dtype=tf.int32),
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'midi': Tensor(shape=(), dtype=tf.string),
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': Tensor(shape=(), dtype=tf.string),
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+#### `"groove/2bar-midionly"`
+
+```python
+FeaturesDict({
+    'bpm': Tensor(shape=(), dtype=tf.int32),
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'midi': Tensor(shape=(), dtype=tf.string),
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': Tensor(shape=(), dtype=tf.string),
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+#### `"groove/2bar-16000hz"`
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=[None], dtype=tf.float32),
+    'bpm': Tensor(shape=(), dtype=tf.int32),
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'midi': Tensor(shape=(), dtype=tf.string),
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': Tensor(shape=(), dtype=tf.string),
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+#### `"groove/4bar-midionly"`
+
+```python
+FeaturesDict({
+    'bpm': Tensor(shape=(), dtype=tf.int32),
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'midi': Tensor(shape=(), dtype=tf.string),
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': Tensor(shape=(), dtype=tf.string),
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 21,415
+TRAIN      | 17,261
+VALIDATION | 2,121
+TEST       | 2,033
+
+#### Urls
+
+*   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
+
+#### Citation
+
+```
+@inproceedings{groove2019,
+    Author = {Jon Gillick and Adam Roberts and Jesse Engel and Douglas Eck and David Bamman},
+    Title = {Learning to Groove with Inverse Sequence Transformations},
+    Booktitle   = {International Conference on Machine Learning (ICML)}
+    Year = {2019},
+}
+```
 
 ---
 
-## [`audio`](#audio)
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="nsynth" />
+  <meta itemprop="description" content="The NSynth Dataset is an audio dataset containing ~300k musical notes, each
+with a unique pitch, timbre, and envelope. Each note is annotated with three
+additional pieces of information based on a combination of human evaluation
+and heuristic algorithms:
+ -Source: The method of sound production for the note's instrument.
+ -Family: The high-level family of which the note's instrument is a member.
+ -Qualities: Sonic qualities of the note.
+
+The dataset is split into train, valid, and test sets, with no instruments
+overlapping between the train set and the valid/test sets." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#nsynth" />
+  <meta itemprop="sameAs" content="https://g.co/magenta/nsynth-dataset" />
+</div>
 
 ### `"nsynth"`
 
@@ -180,6 +371,264 @@ TEST       |      4,096
 
 ## [`image`](#image)
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="abstract_reasoning" />
+  <meta itemprop="description" content="Procedurally Generated Matrices (PGM) data from the paper Measuring Abstract Reasoning in Neural Networks, Barrett, Hill, Santoro et al. 2018. The goal is to infer the correct answer from the context panels based on abstract reasoning.
+
+To use this data set, please download all the *.tar.gz files from the data set page and place them in ~/tensorflow_datasets/abstract_reasoning/.
+
+$R$ denotes the set of relation types (progression, XOR, OR, AND, consistent union), $O$ denotes the object types (shape, line), and $A$ denotes the attribute types (size, colour, position, number). The structure of a matrix, $S$, is the set of triples $S={[r, o, a]}$ that determine the challenge posed by a particular matrix." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#abstract_reasoning" />
+  <meta itemprop="sameAs" content="https://github.com/deepmind/abstract-reasoning-matrices" />
+</div>
+
+### `"abstract_reasoning"`
+
+Procedurally Generated Matrices (PGM) data from the paper Measuring Abstract
+Reasoning in Neural Networks, Barrett, Hill, Santoro et al. 2018. The goal is to
+infer the correct answer from the context panels based on abstract reasoning.
+
+To use this data set, please download all the *.tar.gz files from the data set
+page and place them in ~/tensorflow_datasets/abstract_reasoning/.
+
+$R$ denotes the set of relation types (progression, XOR, OR, AND, consistent
+union), $O$ denotes the object types (shape, line), and $A$ denotes the
+attribute types (size, colour, position, number). The structure of a matrix,
+$S$, is the set of triples $S={[r, o, a]}$ that determine the challenge posed by
+a particular matrix.
+
+*   URL:
+    [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+*   `DatasetBuilder`:
+    [`tfds.image.abstract_reasoning.AbstractReasoning`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/abstract_reasoning.py)
+
+`abstract_reasoning` is configured with
+`tfds.image.abstract_reasoning.AbstractReasoningConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"neutral"` (`v0.0.2`) (`Size: ?? GiB`): The structures encoding the
+    matrices in both the \
+    training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \
+    $o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
+    separation occurring at the level of the input variables (i.e. pixel \
+    manifestations).
+
+*   `"interpolation"` (`v0.0.2`) (`Size: ?? GiB`): As in the neutral split, $S$
+    consisted of any \
+    triples $[r, o, a]$. For interpolation, in the training set, when the \
+    attribute was "colour" or "size" (i.e., the ordered attributes), the values
+    of \
+    the attributes were restricted to even-indexed members of a discrete set, \
+    whereas in the test set only odd-indexed values were permitted. Note that
+    all \
+    $S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
+    Thus, generalisation is required for every question in the test set.
+
+*   `"extrapolation"` (`v0.0.2`) (`Size: ?? GiB`): Same as in interpolation, but
+    the values of \
+    the attributes were restricted to the lower half of the discrete set during
+    \
+    training, whereas in the test set they took values in the upper half.
+
+*   `"attr.rel.pairs"` (`v0.0.2`) (`Size: ?? GiB`): All $S$ contained at least
+    two triples, \
+    $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$, of which 400 are viable. We \
+    randomly allocated 360 to the training set and 40 to the test set. Members \
+    $(t_1, t_2)$ of the 40 held-out pairs did not occur together in structures
+    $S$ \
+    in the training set, and all structures $S$ had at least one such pair \
+    $(t_1, t_2)$ as a subset.
+
+*   `"attr.rels"` (`v0.0.2`) (`Size: ?? GiB`): In our dataset, there are 29
+    possible unique \
+    triples $[r,o,a]$. We allocated seven of these for the test set, at random,
+    \
+    but such that each of the attributes was represented exactly once in this
+    set. \
+    These held-out triples never occurred in questions in the training set, and
+    \
+    every $S$ in the test set contained at least one of them.
+
+*   `"attrs.pairs"` (`v0.0.2`) (`Size: ?? GiB`): $S$ contained at least two
+    triples. There are 20 \
+    (unordered) viable pairs of attributes $(a_1, a_2)$ such that for some \
+    $r_i, o_i, ([r_1,o_1,a_1],[r_2,o_2,a_2])$ is a viable triple pair \
+    $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$. We allocated 16 of these pairs
+    \
+    for training and four for testing. For a pair $(a_1, a_2)$ in the test set,
+    \
+    $S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
+    set, all $S$ contained triples with $a_1$ and $a_2$.
+
+*   `"attrs.shape.color"` (`v0.0.2`) (`Size: ?? GiB`): Held-out attribute
+    shape-colour. $S$ in \
+    the training set contained no triples with $o$=shape and $a$=colour. \
+    All structures governing puzzles in the test set contained at least one
+    triple \
+    with $o$=shape and $a$=colour.
+
+*   `"attrs.line.type"` (`v0.0.2`) (`Size: ?? GiB`): Held-out attribute
+    line-type. $S$ in \
+    the training set contained no triples with $o$=line and $a$=type. \
+    All structures governing puzzles in the test set contained at least one
+    triple \
+    with $o$=line and $a$=type.
+
+#### `"abstract_reasoning/neutral"`
+
+```python
+FeaturesDict({
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/interpolation"`
+
+```python
+FeaturesDict({
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/extrapolation"`
+
+```python
+FeaturesDict({
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attr.rel.pairs"`
+
+```python
+FeaturesDict({
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attr.rels"`
+
+```python
+FeaturesDict({
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attrs.pairs"`
+
+```python
+FeaturesDict({
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attrs.shape.color"`
+
+```python
+FeaturesDict({
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### `"abstract_reasoning/attrs.line.type"`
+
+```python
+FeaturesDict({
+    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+#### Statistics
+None computed
+
+#### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+
+```
+@InProceedings{pmlr-v80-barrett18a,
+  title =    {Measuring abstract reasoning in neural networks},
+  author =   {Barrett, David and Hill, Felix and Santoro, Adam and Morcos, Ari and Lillicrap, Timothy},
+  booktitle =    {Proceedings of the 35th International Conference on Machine Learning},
+  pages =    {511--520},
+  year =     {2018},
+  editor =   {Dy, Jennifer and Krause, Andreas},
+  volume =   {80},
+  series =   {Proceedings of Machine Learning Research},
+  address =      {Stockholmsmassan, Stockholm Sweden},
+  month =    {10--15 Jul},
+  publisher =    {PMLR},
+  pdf =      {http://proceedings.mlr.press/v80/barrett18a/barrett18a.pdf},
+  url =      {http://proceedings.mlr.press/v80/barrett18a.html},
+  abstract =     {Whether neural networks can learn abstract reasoning or whetherthey merely rely on superficial statistics is a topic of recent debate. Here, we propose a dataset and challenge designed to probe abstract reasoning, inspired by a well-known human IQ test. To succeed at this challenge, models must cope with various generalisation 'regimes' in which the training data and test questions differ in clearly-defined ways. We show that popular models such as ResNets perform poorly, even when the training and test sets differ only minimally, and we present a novel architecture, with structure designed to encourage reasoning, that does significantly better. When we vary the way in which the test questions and training data differ, we find that our model is notably proficient at certain forms of generalisation, but notably weak at others. We further show that the model's ability to generalise improves markedly if it is trained to predict symbolic explanations for its answers. Altogether, we introduce and explore ways to both measure and induce stronger abstract reasoning in neural networks. Our freely-available dataset should motivate further progress in this direction.}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="caltech101" />
+  <meta itemprop="description" content="Caltech-101 consists of pictures of objects belonging to 101 classes, plus
+one `background clutter` class. Each image is labelled with a single object.
+Each class contains roughly 40 to 800 images, totalling around 9k images.
+Images are of variable sizes, with typical edge lengths of 200-300 pixels.
+This version contains image-level labels only. The original dataset also
+contains bounding boxes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#caltech101" />
+  <meta itemprop="sameAs" content="http://www.vision.caltech.edu/Image_Datasets/Caltech101/" />
+</div>
+
 ### `"caltech101"`
 
 Caltech-101 consists of pictures of objects belonging to 101 classes, plus
@@ -230,6 +679,16 @@ ALL        |      9,144
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cats_vs_dogs" />
+  <meta itemprop="description" content="A large set of images of cats and dogs.There are 1738 corrupted images that are dropped." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cats_vs_dogs" />
+  <meta itemprop="sameAs" content="https://www.microsoft.com/en-us/download/details.aspx?id=54765" />
+</div>
+
 ### `"cats_vs_dogs"`
 
 A large set of images of cats and dogs.There are 1738 corrupted images that are dropped.
@@ -277,6 +736,21 @@ edition = {Proceedings of 14th ACM Conference on Computer and Communications Sec
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="celeb_a" />
+  <meta itemprop="description" content="CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including
+ - 10,177 number of identities,
+ - 202,599 number of face images, and
+ - 5 landmark locations, 40 binary attributes annotations per image.
+
+The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#celeb_a" />
+  <meta itemprop="sameAs" content="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html" />
+</div>
 
 ### `"celeb_a"`
 
@@ -393,6 +867,19 @@ VALIDATION |     19,867
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="celeb_a_hq" />
+  <meta itemprop="description" content="High-quality version of the CELEBA
+dataset, consisting of 30000 images in 1024 x 1024 resolution.
+
+WARNING: This dataset currently requires you to prepare images on your own." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#celeb_a_hq" />
+  <meta itemprop="sameAs" content="https://github.com/tkarras/progressive_growing_of_gans" />
+</div>
 
 ### `"celeb_a_hq"`
 
@@ -588,6 +1075,16 @@ ALL        |     30,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cifar10" />
+  <meta itemprop="description" content="The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cifar10" />
+  <meta itemprop="sameAs" content="https://www.cs.toronto.edu/~kriz/cifar.html" />
+</div>
+
 ### `"cifar10"`
 
 The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with 6000 images per class. There are 50000 training images and 10000 test images.
@@ -631,6 +1128,16 @@ TEST       |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cifar100" />
+  <meta itemprop="description" content="This dataset is just like the CIFAR-10, except it has 100 classes containing 600 images each. There are 500 training images and 100 testing images per class. The 100 classes in the CIFAR-100 are grouped into 20 superclasses. Each image comes with a &quot;fine&quot; label (the class to which it belongs) and a &quot;coarse&quot; label (the superclass to which it belongs)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cifar100" />
+  <meta itemprop="sameAs" content="https://www.cs.toronto.edu/~kriz/cifar.html" />
+</div>
 
 ### `"cifar100"`
 
@@ -676,6 +1183,18 @@ TEST       |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cifar10_corrupted" />
+  <meta itemprop="description" content="Cifar10Corrupted is a dataset generated by adding 15 common corruptions to the
+test images in the Cifar10 dataset. This dataset wraps the corrupted Cifar10
+test images uploaded by the original authors." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cifar10_corrupted" />
+  <meta itemprop="sameAs" content="https://github.com/hendrycks/robustness" />
+</div>
 
 ### `"cifar10_corrupted"`
 
@@ -1694,6 +2213,20 @@ ALL        |     10,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="coco2014" />
+  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and captioning dataset. This version contains images, bounding boxes and labels for the 2014 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only had 80 classes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#coco2014" />
+  <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
+</div>
+
 ### `"coco2014"`
 
 COCO is a large-scale object detection, segmentation, and captioning dataset. This version contains images, bounding boxes and labels for the 2014 version.
@@ -1766,6 +2299,16 @@ VALIDATION |     40,504
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="colorectal_histology" />
+  <meta itemprop="description" content="Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#colorectal_histology" />
+  <meta itemprop="sameAs" content="https://zenodo.org/record/53169#.XGZemKwzbmG" />
+</div>
+
 ### `"colorectal_histology"`
 
 Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes.
@@ -1813,6 +2356,16 @@ ALL        |      5,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="colorectal_histology_large" />
+  <meta itemprop="description" content="10 large 5000 x 5000 textured colorectal cancer histology images" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#colorectal_histology_large" />
+  <meta itemprop="sameAs" content="https://zenodo.org/record/53169#.XGZemKwzbmG" />
+</div>
+
 ### `"colorectal_histology_large"`
 
 10 large 5000 x 5000 textured colorectal cancer histology images
@@ -1859,6 +2412,16 @@ ALL        |         10
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cycle_gan" />
+  <meta itemprop="description" content="Dataset with images from 2 classes (see config name for information on the specific class)" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cycle_gan" />
+  <meta itemprop="sameAs" content="https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/" />
+</div>
+
 ### `"cycle_gan"`
 
 Dataset with images from 2 classes (see config name for information on the specific class)
@@ -1869,28 +2432,47 @@ Dataset with images from 2 classes (see config name for information on the speci
 `cycle_gan` is configured with `tfds.image.cycle_gan.CycleGANConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"apple2orange"` (`v0.1.0`) (`Size: 74.82 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"apple2orange"` (`v0.1.0`) (`Size: 74.82 MiB`): A dataset consisting of
+    images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
-* `"summer2winter_yosemite"` (`v0.1.0`) (`Size: 126.50 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"summer2winter_yosemite"` (`v0.1.0`) (`Size: 126.50 MiB`): A dataset
+    consisting of images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
-* `"horse2zebra"` (`v0.1.0`) (`Size: 111.45 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"horse2zebra"` (`v0.1.0`) (`Size: 111.45 MiB`): A dataset consisting of
+    images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
-* `"monet2photo"` (`v0.1.0`) (`Size: 291.09 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"monet2photo"` (`v0.1.0`) (`Size: 291.09 MiB`): A dataset consisting of
+    images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
-* `"cezanne2photo"` (`v0.1.0`) (`Size: 266.92 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"cezanne2photo"` (`v0.1.0`) (`Size: 266.92 MiB`): A dataset consisting of
+    images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
-* `"ukiyoe2photo"` (`v0.1.0`) (`Size: 279.38 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"ukiyoe2photo"` (`v0.1.0`) (`Size: 279.38 MiB`): A dataset consisting of
+    images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
-* `"vangogh2photo"` (`v0.1.0`) (`Size: 292.39 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"vangogh2photo"` (`v0.1.0`) (`Size: 292.39 MiB`): A dataset consisting of
+    images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
-* `"maps"` (`v0.1.0`) (`Size: 1.38 GiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"maps"` (`v0.1.0`) (`Size: 1.38 GiB`): A dataset consisting of images from
+    two classes A and B (For example: horses/zebras, apple/orange,...)
 
-* `"cityscapes"` (`v0.1.0`) (`Size: 266.65 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"cityscapes"` (`v0.1.0`) (`Size: 266.65 MiB`): A dataset consisting of
+    images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
-* `"facades"` (`v0.1.0`) (`Size: 33.51 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
+*   `"facades"` (`v0.1.0`) (`Size: 33.51 MiB`): A dataset consisting of images
+    from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-* `"iphone2dslr_flower"` (`v0.1.0`) (`Size: 324.22 MiB`): A dataset consisting of images from two classes: A and B for example: horses and zebras.
-
+*   `"iphone2dslr_flower"` (`v0.1.0`) (`Size: 324.22 MiB`): A dataset consisting
+    of images from two classes A and B (For example: horses/zebras,
+    apple/orange,...)
 
 #### `"cycle_gan/apple2orange"`
 
@@ -2033,16 +2615,38 @@ TESTB      |        480
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="diabetic_retinopathy_detection" />
+  <meta itemprop="description" content="A large set of high-resolution retina images taken under a variety of imaging conditions." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#diabetic_retinopathy_detection" />
+  <meta itemprop="sameAs" content="https://www.kaggle.com/c/diabetic-retinopathy-detection/data" />
+</div>
+
 ### `"diabetic_retinopathy_detection"`
 
 A large set of high-resolution retina images taken under a variety of imaging conditions.
 
 * URL: [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 * `DatasetBuilder`: [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py)
-* Version: `v1.0.0`
-* Size: `?? GiB`
 
-#### Features
+`diabetic_retinopathy_detection` is configured with
+`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetectionConfig`
+and has the following configurations predefined (defaults to the first one):
+
+*   `"original"` (`v2.0.0`) (`Size: 1.13 MiB`): Images at their original
+    resolution and quality.
+
+*   `"1M"` (`v2.1.0`) (`Size: 1.13 MiB`): Images have roughly 1,000,000 pixels,
+    at 72 quality.
+
+*   `"250K"` (`v2.1.0`) (`Size: 1.13 MiB`): Images have roughly 250,000 pixels,
+    at 72 quality.
+
+#### `"diabetic_retinopathy_detection/original"`
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -2051,15 +2655,35 @@ FeaturesDict({
 })
 ```
 
+#### `"diabetic_retinopathy_detection/1M"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'name': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"diabetic_retinopathy_detection/250K"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'name': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
 
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     88,712
-TEST       |     53,576
-TRAIN      |     35,126
-SAMPLE     |         10
 
+Split      | Examples
+:--------- | -------:
+ALL        | 88,712
+TEST       | 42,670
+TRAIN      | 35,126
+VALIDATION | 10,906
+SAMPLE     | 10
 
 #### Urls
  * [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
@@ -2079,6 +2703,38 @@ SAMPLE     |         10
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="dsprites" />
+  <meta itemprop="description" content="dSprites is a dataset of 2D shapes procedurally generated from 6 ground truth
+independent latent factors. These factors are *color*, *shape*, *scale*,
+*rotation*, *x* and *y* positions of a sprite.
+
+All possible combinations of these latents are present exactly once,
+generating N = 737280 total images.
+
+### Latent factor values
+
+*   Color: white
+*   Shape: square, ellipse, heart
+*   Scale: 6 values linearly spaced in [0.5, 1]
+*   Orientation: 40 values in [0, 2 pi]
+*   Position X: 32 values in [0, 1]
+*   Position Y: 32 values in [0, 1]
+
+We varied one latent at a time (starting from Position Y, then Position X, etc),
+and sequentially stored the images in fixed order.
+Hence the order along the first dimension is fixed and allows you to map back to
+the value of the latents corresponding to that image.
+
+We chose the latents values deliberately to have the smallest step changes
+while ensuring that all pixel outputs were different. No noise was added." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#dsprites" />
+  <meta itemprop="sameAs" content="https://github.com/deepmind/dsprites-dataset" />
+</div>
 
 ### `"dsprites"`
 
@@ -2155,6 +2811,23 @@ year = "2017",
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="dtd" />
+  <meta itemprop="description" content="The Describable Textures Dataset (DTD) is an evolving collection of textural
+images in the wild, annotated with a series of human-centric attributes,
+inspired by the perceptual properties of textures. This data is made available
+to the computer vision community for research purposes.
+
+The &quot;label&quot; of each example is its &quot;key attribute&quot; (see the official website).
+The official release of the dataset defines a 10-fold cross-validation
+partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#dtd" />
+  <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html" />
+</div>
+
 ### `"dtd"`
 
 The Describable Textures Dataset (DTD) is an evolving collection of textural
@@ -2207,6 +2880,16 @@ Year      = {2014}}
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="emnist" />
+  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digitsderived from the NIST Special Database 19 and converted toa 28x28 pixel image format and dataset structure that directlymatches the MNIST dataset." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#emnist" />
+  <meta itemprop="sameAs" content="https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip" />
+</div>
 
 ### `"emnist"`
 
@@ -2325,6 +3008,16 @@ TEST       |     10,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="fashion_mnist" />
+  <meta itemprop="description" content="Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#fashion_mnist" />
+  <meta itemprop="sameAs" content="https://github.com/zalandoresearch/fashion-mnist" />
+</div>
+
 ### `"fashion_mnist"`
 
 Fashion-MNIST is a dataset of Zalando's article images consisting of a training set of 60,000 examples and a test set of 10,000 examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.
@@ -2379,6 +3072,16 @@ TEST       |     10,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="horses_or_humans" />
+  <meta itemprop="description" content="A large set of images of horses and humans." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#horses_or_humans" />
+  <meta itemprop="sameAs" content="http://laurencemoroney.com/horses-or-humans-dataset" />
+</div>
+
 ### `"horses_or_humans"`
 
 A large set of images of horses and humans.
@@ -2391,11 +3094,10 @@ A large set of images of horses and humans.
 #### Features
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -2423,6 +3125,15 @@ url = "http://laurencemoroney.com/horses-or-humans-dataset"
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="image_label_folder" />
+  <meta itemprop="description" content="Generic image classification dataset." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#image_label_folder" />
+</div>
 
 ### `"image_label_folder"`
 
@@ -2453,6 +3164,23 @@ None computed
 
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="imagenet2012" />
+  <meta itemprop="description" content="ILSVRC 2012, aka ImageNet is an image dataset organized according to the
+WordNet hierarchy. Each meaningful concept in WordNet, possibly described by
+multiple words or word phrases, is called a &quot;synonym set&quot; or &quot;synset&quot;. There are
+more than 100,000 synsets in WordNet, majority of them are nouns (80,000+). In
+ImageNet, we aim to provide on average 1000 images to illustrate each synset.
+Images of each concept are quality-controlled and human-annotated. In its
+completion, we hope ImageNet will offer tens of millions of cleanly sorted
+images for most of the concepts in the WordNet hierarchy." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#imagenet2012" />
+  <meta itemprop="sameAs" content="http://image-net.org/" />
+</div>
 
 ### `"imagenet2012"`
 
@@ -2510,6 +3238,22 @@ pages={211-252}
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="imagenet2012_corrupted" />
+  <meta itemprop="description" content="Imagenet2012Corrupted is a dataset generated by adding common corruptions to the
+validation images in the ImageNet dataset. In the original paper, there are
+15 different corruptions, and each has 5 levels of severity. In this dataset,
+we implement 12 out of the 15 corruptions, including Gaussian noise, shot noise,
+impulse_noise, defocus blur, frosted glass blur, zoom blur, fog, brightness,
+contrast, elastic, pixelate, and jpeg compression. The randomness is fixed so
+that regeneration is deterministic." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#imagenet2012_corrupted" />
+  <meta itemprop="sameAs" content="https://openreview.net/forum?id=HJz6tiCqYm" />
+</div>
 
 ### `"imagenet2012_corrupted"`
 
@@ -3397,6 +4141,16 @@ ALL        |     50,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="kmnist" />
+  <meta itemprop="description" content="Kuzushiji-MNIST is a drop-in replacement for the MNIST dataset (28x28 grayscale, 70,000 images), provided in the original MNIST format as well as a NumPy format. Since MNIST restricts us to 10 classes, we chose one character to represent each of the 10 rows of Hiragana when creating Kuzushiji-MNIST." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#kmnist" />
+  <meta itemprop="sameAs" content="http://codh.rois.ac.jp/kmnist/index.html.en" />
+</div>
+
 ### `"kmnist"`
 
 Kuzushiji-MNIST is a drop-in replacement for the MNIST dataset (28x28 grayscale, 70,000 images), provided in the original MNIST format as well as a NumPy format. Since MNIST restricts us to 10 classes, we chose one character to represent each of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
@@ -3443,6 +4197,16 @@ TEST       |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="lsun" />
+  <meta itemprop="description" content="Large scale images showing different objects from given categories like bedroom, tower etc." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#lsun" />
+  <meta itemprop="sameAs" content="https://www.yf.io/p/lsun" />
+</div>
 
 ### `"lsun"`
 
@@ -3611,6 +4375,16 @@ VALIDATION |        300
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="mnist" />
+  <meta itemprop="description" content="The MNIST database of handwritten digits." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#mnist" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/cvdf-datasets/mnist/" />
+</div>
+
 ### `"mnist"`
 
 The MNIST database of handwritten digits.
@@ -3655,6 +4429,17 @@ TEST       |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="omniglot" />
+  <meta itemprop="description" content="Omniglot data set for one-shot learning. This dataset contains 1623 different
+handwritten characters from 50 different alphabets." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#omniglot" />
+  <meta itemprop="sameAs" content="https://github.com/brendenlake/omniglot/" />
+</div>
 
 ### `"omniglot"`
 
@@ -3710,6 +4495,25 @@ SMALL1     |      2,720
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="open_images_v4" />
+  <meta itemprop="description" content="Open Images is a dataset of ~9M images that have been annotated with image-level
+ labels and object bounding boxes.
+
+The training set of V4 contains 14.6M bounding boxes for 600 object classes on
+1.74M images, making it the largest existing dataset with object location
+annotations. The boxes have been largely manually drawn by professional
+annotators to ensure accuracy and consistency. The images are very diverse and
+often contain complex scenes with several objects (8.4 per image on average).
+Moreover, the dataset is annotated with image-level labels spanning thousands of
+classes." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#open_images_v4" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/openimages/web/index.html" />
+</div>
+
 ### `"open_images_v4"`
 
 Open Images is a dataset of ~9M images that have been annotated with image-level
@@ -3726,10 +4530,18 @@ classes.
 
 * URL: [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 * `DatasetBuilder`: [`tfds.image.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/open_images.py)
-* Version: `v0.1.1`
-* Size: `565.11 GiB`
 
-#### Features
+`open_images_v4` is configured with `tfds.image.open_images.OpenImagesV4Config`
+and has the following configurations predefined (defaults to the first one):
+
+*   `"original"` (`v0.2.0`) (`Size: 565.11 GiB`): Images at their original
+    resolution and quality.
+
+*   `"300k"` (`v0.2.0`) (`Size: 565.11 GiB`): Images have roughly 300,000
+    pixels, at 75 JPEG quality.
+
+#### `"open_images_v4/original"`
+
 ```python
 FeaturesDict({
     'bobjects': SequenceDict({
@@ -3739,7 +4551,7 @@ FeaturesDict({
         'is_inside': Tensor(shape=(), dtype=tf.int8),
         'is_occluded': Tensor(shape=(), dtype=tf.int8),
         'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -3749,9 +4561,42 @@ FeaturesDict({
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
     }),
+    'objects_trainable': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
+#### `"open_images_v4/300k"`
+
+```python
+FeaturesDict({
+    'bobjects': SequenceDict({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'objects': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+})
+```
 
 #### Statistics
 Split  | Examples
@@ -3818,7 +4663,94 @@ VALIDATION |     41,620
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="oxford_flowers102" />
+  <meta itemprop="description" content="The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly occurring
+in the United Kingdom. Each class consists of between 40 and 258 images. The images have
+large scale, pose and light variations. In addition, there are categories that have large
+variations within the category and several very similar categories.
+
+The dataset is divided into a training set, a validation set and a test set.
+The training set and validation set each consist of 10 images per class (totalling 1030 images each).
+The test set consist of the remaining 6129 images (minimum 20 per class)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#oxford_flowers102" />
+  <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/data/flowers/102/" />
+</div>
+
+### `"oxford_flowers102"`
+
+The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly
+occurring in the United Kingdom. Each class consists of between 40 and 258
+images. The images have large scale, pose and light variations. In addition,
+there are categories that have large variations within the category and several
+very similar categories.
+
+The dataset is divided into a training set, a validation set and a test set. The
+training set and validation set each consist of 10 images per class (totalling
+1030 images each). The test set consist of the remaining 6129 images (minimum 20
+per class).
+
+*   URL:
+    [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
+*   `DatasetBuilder`:
+    [`tfds.image.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_flowers102.py)
+*   Version: `v0.0.1`
+*   Size: `336.76 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 8,189
+TEST       | 6,149
+VALIDATION | 1,020
+TRAIN      | 1,020
+
+#### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@InProceedings{Nilsback08,
+   author = "Nilsback, M-E. and Zisserman, A.",
+   title = "Automated Flower Classification over a Large Number of Classes",
+   booktitle = "Proceedings of the Indian Conference on Computer Vision, Graphics and Image Processing",
+   year = "2008",
+   month = "Dec"
+}
+```
+
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="oxford_iiit_pet" />
+  <meta itemprop="description" content="The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
+images for each class. The images have large variations in scale, pose and
+lighting. All images have an associated ground truth annotation of breed." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#oxford_iiit_pet" />
+  <meta itemprop="sameAs" content="http://www.robots.ox.ac.uk/~vgg/data/pets/" />
+</div>
 
 ### `"oxford_iiit_pet"`
 
@@ -3829,7 +4761,7 @@ lighting. All images have an associated ground truth annotation of breed.
 
 * URL: [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 * `DatasetBuilder`: [`tfds.image.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_iiit_pet.py)
-* Version: `v1.0.0`
+* Version: `v1.1.0`
 * Size: `801.24 MiB`
 
 #### Features
@@ -3867,6 +4799,16 @@ TEST       |      3,669
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="quickdraw_bitmap" />
+  <meta itemprop="description" content="The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#quickdraw_bitmap" />
+  <meta itemprop="sameAs" content="h" />
+</div>
 
 ### `"quickdraw_bitmap"`
 
@@ -3972,6 +4914,16 @@ ALL        | 50,426,266
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="rock_paper_scissors" />
+  <meta itemprop="description" content="Images of hands playing rock, paper, scissor game." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#rock_paper_scissors" />
+  <meta itemprop="sameAs" content="http://laurencemoroney.com/rock-paper-scissors-dataset" />
+</div>
+
 ### `"rock_paper_scissors"`
 
 Images of hands playing rock, paper, scissor game.
@@ -4016,6 +4968,31 @@ url = "http://laurencemoroney.com/rock-paper-scissors-dataset"
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="shapes3d" />
+  <meta itemprop="description" content="3dshapes is a dataset of 3D shapes procedurally generated from 6 ground truth
+independent latent factors. These factors are *floor colour*, *wall colour*, *object colour*,
+*scale*, *shape* and *orientation*.
+
+All possible combinations of these latents are present exactly once, generating N = 480000 total images.
+
+### Latent factor values
+
+*   floor hue: 10 values linearly spaced in [0, 1]
+*   wall hue: 10 values linearly spaced in [0, 1]
+*   object hue: 10 values linearly spaced in [0, 1]
+*   scale: 8 values linearly spaced in [0, 1]
+*   shape: 4 values in [0, 1, 2, 3]
+*   orientation: 15 values linearly spaced in [-30, 30]
+
+We varied one latent at a time (starting from orientation, then shape, etc), and sequentially stored the images in fixed order in the `images` array. The corresponding values of the factors are stored in the same order in the `labels` array." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#shapes3d" />
+  <meta itemprop="sameAs" content="https://github.com/deepmind/3d-shapes" />
+</div>
 
 ### `"shapes3d"`
 
@@ -4087,6 +5064,19 @@ ALL        |    480,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="smallnorb" />
+  <meta itemprop="description" content="\
+This database is intended for experiments in 3D object recognition from shape. It contains images of 50 toys belonging to 5 generic categories: four-legged animals, human figures, airplanes, trucks, and cars. The objects were imaged by two cameras under 6 lighting conditions, 9 elevations (30 to 70 degrees every 5 degrees), and 18 azimuths (0 to 340 every 20 degrees).
+
+The training set is composed of 5 instances of each category (instances 4, 6, 7, 8 and 9), and the test set of the remaining 5 instances (instances 0, 1, 2, 3, and 5)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#smallnorb" />
+  <meta itemprop="sameAs" content="https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/" />
+</div>
+
 ### `"smallnorb"`
 
 \
@@ -4098,7 +5088,7 @@ The training set is composed of 5 instances of each category (instances 4, 6, 7,
 * URL: [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
 * `DatasetBuilder`: [`tfds.image.smallnorb.Smallnorb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/smallnorb.py)
 * Version: `v0.1.0`
-* Size: `?? GiB`
+* Size: `250.60 MiB`
 
 #### Features
 ```python
@@ -4115,7 +5105,12 @@ FeaturesDict({
 
 
 #### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |     48,600
+TRAIN      |     24,300
+TEST       |     24,300
+
 
 #### Urls
  * [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
@@ -4137,6 +5132,23 @@ None computed
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="sun397" />
+  <meta itemprop="description" content="The database contains 108,754 images of 397 categories, used in the
+Scene UNderstanding (SUN) benchmark. The number of images varies across
+categories, but there are at least 100 images per category.
+
+The official release of the dataset defines 10 overlapping partitions of the
+dataset, with 50 testing and training images in each.
+Since TFDS requires the splits not to overlap, we provide a single split for
+the entire dataset (named &quot;full&quot;). All images are converted to RGB." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#sun397" />
+  <meta itemprop="sameAs" content="https://vision.princeton.edu/projects/2010/SUN/" />
+</div>
 
 ### `"sun397"`
 
@@ -4196,6 +5208,16 @@ month={June},}
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="svhn_cropped" />
+  <meta itemprop="description" content="The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#svhn_cropped" />
+  <meta itemprop="sameAs" content="http://ufldl.stanford.edu/housenumbers/" />
+</div>
+
 ### `"svhn_cropped"`
 
 The Street View House Numbers (SVHN) Dataset is an image digit recognition dataset of over 600,000 digit images coming from real world data. Images are cropped to 32x32.
@@ -4241,6 +5263,16 @@ year = {2011}
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="tf_flowers" />
+  <meta itemprop="description" content="A large set of images of flowers" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#tf_flowers" />
+  <meta itemprop="sameAs" content="http://download.tensorflow.org/example_images/flower_photos.tgz" />
+</div>
+
 ### `"tf_flowers"`
 
 A large set of images of flowers
@@ -4283,6 +5315,24 @@ url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="voc2007" />
+  <meta itemprop="description" content="This dataset contains the data from the PASCAL Visual Object Classes Challenge
+2007, a.k.a. VOC2007, corresponding to the Classification and Detection
+competitions.
+A total of 9,963 images are included in this dataset, where each image contains
+a set of objects, out of 20 different classes, making a total of 24,640
+annotated objects.
+In the Classification competition, the goal is to predict the set of labels
+contained in the image, while in the Detection competition the goal is to
+predict the bounding box and label of each individual object." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#voc2007" />
+  <meta itemprop="sameAs" content="http://host.robots.ox.ac.uk/pascal/VOC/voc2007/" />
+</div>
 
 ### `"voc2007"`
 
@@ -4348,6 +5398,25 @@ TRAIN      |      2,501
 
 
 ## [`structured`](#structured)
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="higgs" />
+  <meta itemprop="description" content="The data has been produced using Monte Carlo simulations. 
+The first 21 features (columns 2-22) are kinematic properties 
+measured by the particle detectors in the accelerator. 
+The last seven features are functions of the first 21 features; 
+these are high-level features derived by physicists to help 
+discriminate between the two classes. There is an interest 
+in using deep learning methods to obviate the need for physicists 
+to manually develop such features. Benchmark results using 
+Bayesian Decision Trees from a standard physics package and 
+5-layer neural networks are presented in the original paper." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#higgs" />
+  <meta itemprop="sameAs" content="https://archive.ics.uci.edu/ml/datasets/HIGGS" />
+</div>
 
 ### `"higgs"`
 
@@ -4435,7 +5504,83 @@ ALL        | 11,000,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="iris" />
+  <meta itemprop="description" content="This is perhaps the best known database to be found in the pattern recognition
+literature. Fisher's paper is a classic in the field and is referenced
+frequently to this day. (See Duda &amp; Hart, for example.) The data set contains
+3 classes of 50 instances each, where each class refers to a type of iris
+plant. One class is linearly separable from the other 2; the latter are NOT
+linearly separable from each other." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#iris" />
+  <meta itemprop="sameAs" content="https://archive.ics.uci.edu/ml/datasets/iris" />
+</div>
+
+### `"iris"`
+
+This is perhaps the best known database to be found in the pattern recognition
+literature. Fisher's paper is a classic in the field and is referenced
+frequently to this day. (See Duda & Hart, for example.) The data set contains 3
+classes of 50 instances each, where each class refers to a type of iris plant.
+One class is linearly separable from the other 2; the latter are NOT linearly
+separable from each other.
+
+*   URL:
+    [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
+*   `DatasetBuilder`:
+    [`tfds.structured.iris.Iris`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/iris.py)
+*   Version: `v1.0.0`
+*   Size: `4.44 KiB`
+
+#### Features
+```python
+FeaturesDict({
+    'features': Tensor(shape=(4,), dtype=tf.float32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+TRAIN | 150
+ALL   | 150
+
+#### Urls
+
+*   [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'features', u'label')`
+
+#### Citation
+```
+@misc{Dua:2019 ,
+author = "Dua, Dheeru and Graff, Casey",
+year = "2017",
+title = "{UCI} Machine Learning Repository",
+url = "http://archive.ics.uci.edu/ml",
+institution = "University of California, Irvine, School of Information and Computer Sciences"
+}
+```
+
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="titanic" />
+  <meta itemprop="description" content="Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#titanic" />
+  <meta itemprop="sameAs" content="https://www.openml.org/d/40945" />
+</div>
 
 ### `"titanic"`
 
@@ -4498,10 +5643,399 @@ url    = "https://www.openml.org/d/40945"
 
 ## [`text`](#text)
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="cnn_dailymail" />
+  <meta itemprop="description" content="CNN/DailyMail non-anonymized summarization dataset.
+
+There are two features:
+  - article: text of news article, used as the document to be summarized
+  - highlights: joined text of highlights with &lt;s&gt; and &lt;/s&gt; around each
+    highlight, which is the target summary" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#cnn_dailymail" />
+  <meta itemprop="sameAs" content="https://github.com/abisee/cnn-dailymail" />
+</div>
+
+### `"cnn_dailymail"`
+
+CNN/DailyMail non-anonymized summarization dataset.
+
+There are two features:
+  - article: text of news article, used as the document to be summarized
+  - highlights: joined text of highlights with <s> and </s> around each
+    highlight, which is the target summary
+
+
+* URL: [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+* `DatasetBuilder`: [`tfds.text.cnn_dailymail.CnnDailymail`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/cnn_dailymail.py)
+
+`cnn_dailymail` is configured with `tfds.text.cnn_dailymail.CnnDailymailConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"plain_text"` (`v0.0.2`) (`Size: ?? GiB`): Plain text
+
+*   `"bytes"` (`v0.0.2`) (`Size: ?? GiB`): Uses byte-level text encoding with
+    `tfds.features.text.ByteTextEncoder`
+
+*   `"subwords32k"` (`v0.0.2`) (`Size: ?? GiB`): Uses
+    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+#### `"cnn_dailymail/plain_text"`
+
+```python
+FeaturesDict({
+    'article': Text(shape=(), dtype=tf.string, encoder=None),
+    'highlights': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"cnn_dailymail/bytes"`
+
+```python
+FeaturesDict({
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
+
+
+
+#### `"cnn_dailymail/subwords32k"`
+
+```python
+FeaturesDict({
+    'article': Text(shape=(), dtype=tf.string, encoder=None),
+    'highlights': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+None computed
+
+#### Urls
+ * [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'article', u'highlights')`
+
+#### Citation
+```
+@article{DBLP:journals/corr/SeeLM17,
+  author    = {Abigail See and
+               Peter J. Liu and
+               Christopher D. Manning},
+  title     = {Get To The Point: Summarization with Pointer-Generator Networks},
+  journal   = {CoRR},
+  volume    = {abs/1704.04368},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1704.04368},
+  archivePrefix = {arXiv},
+  eprint    = {1704.04368},
+  timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{hermann2015teaching,
+  title={Teaching machines to read and comprehend},
+  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},
+  booktitle={Advances in neural information processing systems},
+  pages={1693--1701},
+  year={2015}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="glue" />
+  <meta itemprop="description" content="The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task
+            in which a system must read a sentence with a pronoun and select the referent of that pronoun from
+            a list of choices. The examples are manually constructed to foil simple statistical methods: Each
+            one is contingent on contextual information provided by a single word or phrase in the sentence.
+            To convert the problem into sentence pair classification, we construct sentence pairs by replacing
+            the ambiguous pronoun with each possible referent. The task is to predict if the sentence with the
+            pronoun substituted is entailed by the original sentence. We use a small evaluation set consisting of
+            new examples derived from fiction books that was shared privately by the authors of the original
+            corpus. While the included training set is balanced between two classes, the test set is imbalanced
+            between them (65% not entailment). Also, due to a data quirk, the development set is adversarial:
+            hypotheses are sometimes shared between training and development examples, so if a model memorizes the
+            training examples, they will predict the wrong label on corresponding development set
+            example. As with QNLI, each example is evaluated separately, so there is not a systematic correspondence
+            between a model's score on this task and its score on the unconverted original task. We
+            call converted dataset WNLI (Winograd NLI)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#glue" />
+  <meta itemprop="sameAs" content="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html" />
+</div>
+
+### `"glue"`
+
+            The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task
+            in which a system must read a sentence with a pronoun and select the referent of that pronoun from
+            a list of choices. The examples are manually constructed to foil simple statistical methods: Each
+            one is contingent on contextual information provided by a single word or phrase in the sentence.
+            To convert the problem into sentence pair classification, we construct sentence pairs by replacing
+            the ambiguous pronoun with each possible referent. The task is to predict if the sentence with the
+            pronoun substituted is entailed by the original sentence. We use a small evaluation set consisting of
+            new examples derived from fiction books that was shared privately by the authors of the original
+            corpus. While the included training set is balanced between two classes, the test set is imbalanced
+            between them (65% not entailment). Also, due to a data quirk, the development set is adversarial:
+            hypotheses are sometimes shared between training and development examples, so if a model memorizes the
+            training examples, they will predict the wrong label on corresponding development set
+            example. As with QNLI, each example is evaluated separately, so there is not a systematic correspondence
+            between a model's score on this task and its score on the unconverted original task. We
+            call converted dataset WNLI (Winograd NLI).
+
+* URL: [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+* `DatasetBuilder`: [`tfds.text.glue.Glue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/glue.py)
+
+`glue` is configured with `tfds.text.glue.GlueConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"cola"` (`v0.0.1`) (`Size: 368.14 KiB`): The Corpus of Linguistic
+    Acceptability consists of English acceptability judgments drawn from books
+    and journal articles on linguistic theory. Each example is a sequence of
+    words annotated with whether it is a grammatical English sentence.
+
+*   `"sst2"` (`v0.0.1`) (`Size: 7.09 MiB`): The Stanford Sentiment Treebank
+    consists of sentences from movie reviews and human annotations of their
+    sentiment. The task is to predict the sentiment of a given sentence. We use
+    the two-way (positive/negative) class split, and use only sentence-level
+    labels.
+
+*   `"mrpc"` (`v0.0.1`) (`Size: 1.43 MiB`): The Microsoft Research Paraphrase
+    Corpus (Dolan & Brockett, 2005) is a corpus of sentence pairs automatically
+    extracted from online news sources, with human annotations for whether the
+    sentences in the pair are semantically equivalent.
+
+*   `"qqp"` (`v0.0.1`) (`Size: 57.73 MiB`): The Quora Question Pairs2 dataset is
+    a collection of question pairs from the community question-answering website
+    Quora. The task is to determine whether a pair of questions are semantically
+    equivalent.
+
+*   `"stsb"` (`v0.0.1`) (`Size: 784.05 KiB`): The Semantic Textual Similarity
+    Benchmark (Cer et al., 2017) is a collection of sentence pairs drawn from
+    news headlines, video and image captions, and natural language inference
+    data. Each pair is human-annotated with a similarity score from 1 to 5.
+
+*   `"mnli"` (`v0.0.1`) (`Size: 298.29 MiB`): The Multi-Genre Natural Language
+    Inference Corpusn is a crowdsourced collection of sentence pairs with
+    textual entailment annotations. Given a premise sentence and a hypothesis
+    sentence, the task is to predict whether the premise entails the hypothesis
+    (entailment), contradicts the hypothesis (contradiction), or neither
+    (neutral). The premise sentences are gathered from ten different sources,
+    including transcribed speech, fiction, and government reports. We use the
+    standard test set, for which we obtained private labels from the authors,
+    and evaluate on both the matched (in-domain) and mismatched (cross-domain)
+    section. We also use and recommend the SNLI corpus as 550k examples of
+    auxiliary training data.
+
+*   `"qnli"` (`v0.0.1`) (`Size: 10.14 MiB`): The Stanford Question Answering
+    Dataset is a question-answering dataset consisting of question-paragraph
+    pairs, where one of the sentences in the paragraph (drawn from Wikipedia)
+    contains the answer to the corresponding question (written by an annotator).
+    We convert the task into sentence pair classification by forming a pair
+    between each question and each sentence in the corresponding context, and
+    filtering out pairs with low lexical overlap between the question and the
+    context sentence. The task is to determine whether the context sentence
+    contains the answer to the question. This modified version of the original
+    task removes the requirement that the model select the exact answer, but
+    also removes the simplifying assumptions that the answer is always present
+    in the input and that lexical overlap is a reliable cue.
+
+*   `"rte"` (`v0.0.1`) (`Size: 680.81 KiB`): The Recognizing Textual Entailment
+    (RTE) datasets come from a series of annual textual entailment challenges.
+    We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim et al.,
+    2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009).4
+    Examples are constructed based on news and Wikipedia text. We convert all
+    datasets to a two-class split, where for three-class datasets we collapse
+    neutral and contradiction into not entailment, for consistency.
+
+*   `"wnli"` (`v0.0.1`) (`Size: 28.32 KiB`): The Winograd Schema Challenge
+    (Levesque et al., 2011) is a reading comprehension task in which a system
+    must read a sentence with a pronoun and select the referent of that pronoun
+    from a list of choices. The examples are manually constructed to foil simple
+    statistical methods: Each one is contingent on contextual information
+    provided by a single word or phrase in the sentence. To convert the problem
+    into sentence pair classification, we construct sentence pairs by replacing
+    the ambiguous pronoun with each possible referent. The task is to predict if
+    the sentence with the pronoun substituted is entailed by the original
+    sentence. We use a small evaluation set consisting of new examples derived
+    from fiction books that was shared privately by the authors of the original
+    corpus. While the included training set is balanced between two classes, the
+    test set is imbalanced between them (65% not entailment). Also, due to a
+    data quirk, the development set is adversarial: hypotheses are sometimes
+    shared between training and development examples, so if a model memorizes
+    the training examples, they will predict the wrong label on corresponding
+    development set example. As with QNLI, each example is evaluated separately,
+    so there is not a systematic correspondence between a model's score on this
+    task and its score on the unconverted original task. We call converted
+    dataset WNLI (Winograd NLI).
+
+#### `"glue/cola"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/sst2"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/mrpc"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/qqp"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'question1': Text(shape=(), dtype=tf.string, encoder=None),
+    'question2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/stsb"`
+
+```python
+FeaturesDict({
+    'label': Tensor(shape=(), dtype=tf.float32),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"glue/mnli"`
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/qnli"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'question': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/rte"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+
+
+#### `"glue/wnli"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 852
+TRAIN      | 635
+TEST       | 146
+VALIDATION | 71
+
+#### Urls
+ * [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+ * [https://gluebenchmark.com/](https://gluebenchmark.com/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@inproceedings{levesque2012winograd,
+              title={The winograd schema challenge},
+              author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
+              booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
+              year={2012}
+            }
+@inproceedings{wang2019glue,
+  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},
+  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},
+  note={In the Proceedings of ICLR.},
+  year={2019}
+}
+
+Note that each GLUE dataset has its own citation. Please see the source to see
+the correct citation for each contained dataset.
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="imdb_reviews" />
+  <meta itemprop="description" content="Large Movie Review Dataset.
+This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#imdb_reviews" />
+  <meta itemprop="sameAs" content="http://ai.stanford.edu/~amaas/data/sentiment/" />
+</div>
+
 ### `"imdb_reviews"`
 
-Large Movie Review Dataset.
-This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing.
+Large Movie Review Dataset. This is a dataset for binary sentiment
+classification containing substantially more data than previous benchmark
+datasets. We provide a set of 25,000 highly polar movie reviews for training,
+and 25,000 for testing. There is additional unlabeled data for use as well.
 
 * URL: [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 * `DatasetBuilder`: [`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
@@ -4509,14 +6043,16 @@ This is a dataset for binary sentiment classification containing substantially m
 `imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"plain_text"` (`v0.0.1`) (`Size: 80.23 MiB`): Plain text
+*   `"plain_text"` (`v0.1.0`) (`Size: 80.23 MiB`): Plain text
 
-* `"bytes"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+*   `"bytes"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses byte-level text encoding with
+    `tfds.features.text.ByteTextEncoder`
 
-* `"subwords8k"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+*   `"subwords8k"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses
+    `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
-* `"subwords32k"` (`v0.0.1`) (`Size: 80.23 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
-
+*   `"subwords32k"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses
+    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 #### `"imdb_reviews/plain_text"`
 
@@ -4560,16 +6096,14 @@ FeaturesDict({
 })
 ```
 
-
-
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |     50,000
-TRAIN      |     25,000
-TEST       |     25,000
 
+Split        | Examples
+:----------- | -------:
+ALL          | 100,000
+UNSUPERVISED | 50,000
+TRAIN        | 25,000
+TEST         | 25,000
 
 #### Urls
  * [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
@@ -4593,6 +6127,16 @@ TEST       |     25,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="lm1b" />
+  <meta itemprop="description" content="A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#lm1b" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/lm-benchmark/" />
+</div>
 
 ### `"lm1b"`
 
@@ -4694,6 +6238,21 @@ TEST       |    306,688
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="multi_nli" />
+  <meta itemprop="description" content="The Multi-Genre Natural Language Inference (MultiNLI) corpus is a
+crowd-sourced collection of 433k sentence pairs annotated with textual
+entailment information. The corpus is modeled on the SNLI corpus, but differs in
+that covers a range of genres of spoken and written text, and supports a
+distinctive cross-genre generalization evaluation. The corpus served as the
+basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#multi_nli" />
+  <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/multinli/" />
+</div>
+
 ### `"multi_nli"`
 
 The Multi-Genre Natural Language Inference (MultiNLI) corpus is a
@@ -4710,29 +6269,26 @@ basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 `multi_nli` is configured with `tfds.text.multi_nli.MultiNLIConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"plain_text"` (`v0.0.1`) (`Size: 216.34 MiB`): Plain text
-
+*   `"plain_text"` (`v0.0.2`) (`Size: 216.34 MiB`): Plain text
 
 #### `"multi_nli/plain_text"`
 
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
-    'label': Text(shape=(), dtype=tf.string, encoder=None),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'premise': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-
-
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |    402,702
-TRAIN      |    392,702
-VALIDATION |     10,000
 
+Split                 | Examples
+:-------------------- | -------:
+ALL                   | 412,349
+TRAIN                 | 392,702
+VALIDATION_MISMATCHED | 9,832
+VALIDATION_MATCHED    | 9,815
 
 #### Urls
  * [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
@@ -4762,6 +6318,16 @@ VALIDATION |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="squad" />
+  <meta itemprop="description" content="Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, consisting of questions posed by crowdworkers on a set of Wikipedia articles, where the answer to every question is a segment of text, or span, from the corresponding reading passage, or the question might be unanswerable." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#squad" />
+  <meta itemprop="sameAs" content="https://rajpurkar.github.io/SQuAD-explorer/" />
+</div>
 
 ### `"squad"`
 
@@ -4862,6 +6428,16 @@ archivePrefix = {arXiv},
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wikipedia" />
+  <meta itemprop="description" content="Wikipedia dataset containing cleaned articles of all languages. The datasets are built from the Wikipedia dump (https://dumps.wikimedia.org/) with one split per language. Each example contains the content of one full Wikipedia article with cleaning to strip markdown and unwanted sections (references, etc.)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wikipedia" />
+  <meta itemprop="sameAs" content="https://dumps.wikimedia.org" />
+</div>
 
 ### `"wikipedia"`
 
@@ -8821,8 +10397,113 @@ None computed
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="xnli" />
+  <meta itemprop="description" content="XNLI is a subset of a few thousand examples from MNLI which has been translated
+into a 14 different languages (some low-ish resource). As with MNLI, the goal is
+to predict textual entailment (does sentence A imply/contradict/neither sentence
+B) and is a classification task (given two sentences, predict one of three
+labels)." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#xnli" />
+  <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/xnli/" />
+</div>
+
+### `"xnli"`
+
+XNLI is a subset of a few thousand examples from MNLI which has been translated
+into a 14 different languages (some low-ish resource). As with MNLI, the goal is
+to predict textual entailment (does sentence A imply/contradict/neither sentence
+B) and is a classification task (given two sentences, predict one of three
+labels).
+
+
+* URL: [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
+* `DatasetBuilder`: [`tfds.text.xnli.Xnli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/xnli.py)
+
+`xnli` is configured with `tfds.text.xnli.BuilderConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"plain_text"` (`v0.0.1`) (`Size: 17.04 MiB`): Plain text import of XNLI
+
+#### `"xnli/plain_text"`
+
+```python
+FeaturesDict({
+    'hypothesis': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string, encoder=None),
+        'translation': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Translation({
+        'ar': Text(shape=(), dtype=tf.string, encoder=None),
+        'bg': Text(shape=(), dtype=tf.string, encoder=None),
+        'de': Text(shape=(), dtype=tf.string, encoder=None),
+        'el': Text(shape=(), dtype=tf.string, encoder=None),
+        'en': Text(shape=(), dtype=tf.string, encoder=None),
+        'es': Text(shape=(), dtype=tf.string, encoder=None),
+        'fr': Text(shape=(), dtype=tf.string, encoder=None),
+        'hi': Text(shape=(), dtype=tf.string, encoder=None),
+        'ru': Text(shape=(), dtype=tf.string, encoder=None),
+        'sw': Text(shape=(), dtype=tf.string, encoder=None),
+        'th': Text(shape=(), dtype=tf.string, encoder=None),
+        'tr': Text(shape=(), dtype=tf.string, encoder=None),
+        'ur': Text(shape=(), dtype=tf.string, encoder=None),
+        'vi': Text(shape=(), dtype=tf.string, encoder=None),
+        'zh': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 7,500
+TEST       | 5,010
+VALIDATION | 2,490
+
+#### Urls
+ * [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@InProceedings{conneau2018xnli,
+  author = "Conneau, Alexis
+                 and Rinott, Ruty
+                 and Lample, Guillaume
+                 and Williams, Adina
+                 and Bowman, Samuel R.
+                 and Schwenk, Holger
+                 and Stoyanov, Veselin",
+  title = "XNLI: Evaluating Cross-lingual Sentence Representations",
+  booktitle = "Proceedings of the 2018 Conference on Empirical Methods
+               in Natural Language Processing",
+  year = "2018",
+  publisher = "Association for Computational Linguistics",
+  location = "Brussels, Belgium",
+}
+```
+
+---
+
 
 ## [`translate`](#translate)
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="flores" />
+  <meta itemprop="description" content="Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#flores" />
+  <meta itemprop="sameAs" content="https://github.com/facebookresearch/flores/" />
+</div>
 
 ### `"flores"`
 
@@ -8889,7 +10570,339 @@ TEST       |      2,766
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="para_crawl" />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-German." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
+  <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
+</div>
+
+### `"para_crawl"`
+
+Web-Scale Parallel Corpora for Official European Languages. English-German.
+
+*   URL:
+    [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
+*   `DatasetBuilder`:
+    [`tfds.translate.para_crawl.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
+
+`para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
+has the following configurations predefined (defaults to the first one):
+
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ro, uses encoder plain_text.
+
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pt, uses encoder plain_text.
+
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to it, uses encoder plain_text.
+
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pl, uses encoder plain_text.
+
+*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to mt, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
+
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to et, uses encoder plain_text.
+
+*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to es, uses encoder plain_text.
+
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to nl, uses encoder plain_text.
+
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to cs, uses encoder plain_text.
+
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ga, uses encoder plain_text.
+
+*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to el, uses encoder plain_text.
+
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
+
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
+
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
+
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hu, uses encoder plain_text.
+
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
+
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to bg, uses encoder plain_text.
+
+*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sv, uses encoder plain_text.
+
+*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fr, uses encoder plain_text.
+
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to da, uses encoder plain_text.
+
+*   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fi, uses encoder plain_text.
+
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
+
+#### `"para_crawl/enro_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enit_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'it': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enmt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'mt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enet_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enes_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'es': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ennl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/encs_plain_text"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enga_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ga': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enel_plain_text"`
+
+```python
+Translation({
+    'el': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensk_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sk': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhu_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hu': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enda_plain_text"`
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfi_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ende_plain_text"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+None computed
+
+#### Urls
+
+*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-de.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-de.bicleaner07.txt.gz)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'en', u'de')`
+
+#### Citation
+```
+@misc {paracrawl,
+    title  = "ParaCrawl",
+    year   = "2018",
+    url    = "http://paracrawl.eu/download.html."
+}
+```
+
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="ted_hrlr_translate" />
+  <meta itemprop="description" content="Data sets derived from TED talk transcripts for comparing similar language pairs
+where one is high resource and the other is low resource." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#ted_hrlr_translate" />
+  <meta itemprop="sameAs" content="https://github.com/neulab/word-embeddings-for-nmt" />
+</div>
 
 ### `"ted_hrlr_translate"`
 
@@ -9114,6 +11127,18 @@ VALIDATION |      4,045
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="ted_multi_translate" />
+  <meta itemprop="description" content="Massively multilingual (60 language) data set derived from TED Talk transcripts.
+Each record consists of parallel arrays of language and text. Missing and
+incomplete translations will be filtered out." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#ted_multi_translate" />
+  <meta itemprop="sameAs" content="https://github.com/neulab/word-embeddings-for-nmt" />
+</div>
+
 ### `"ted_multi_translate"`
 
 Massively multilingual (60 language) data set derived from TED Talk transcripts.
@@ -9178,10 +11203,51 @@ VALIDATION |      6,049
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt15_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt15_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt15/translation-task.html" />
+</div>
+
 ### `"wmt15_translate"`
 
 Translate dataset based on the data from statmt.org.
 
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
 
 * URL: [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt15.Wmt15Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt15.py)
@@ -9353,10 +11419,51 @@ TEST       |      2,818
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt16_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt16_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt16/translation-task.html" />
+</div>
+
 ### `"wmt16_translate"`
 
 Translate dataset based on the data from statmt.org.
 
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
 
 * URL: [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt16.Wmt16Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt16.py)
@@ -9476,10 +11583,51 @@ VALIDATION |      1,001
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt17_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt17_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt17/translation-task.html" />
+</div>
+
 ### `"wmt17_translate"`
 
 Translate dataset based on the data from statmt.org.
 
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
 
 * URL: [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt17.Wmt17Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt17.py)
@@ -9612,10 +11760,51 @@ TEST       |      2,001
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt18_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt18_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt18/translation-task.html" />
+</div>
+
 ### `"wmt18_translate"`
 
 Translate dataset based on the data from statmt.org.
 
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
 
 * URL: [http://www.statmt.org/wmt18/translation-task.html](http://www.statmt.org/wmt18/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt18.Wmt18Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt18.py)
@@ -9764,10 +11953,51 @@ TEST       |      3,981
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt19_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt19_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt19/translation-task.html" />
+</div>
+
 ### `"wmt19_translate"`
 
 Translate dataset based on the data from statmt.org.
 
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
 
 * URL: [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt19.Wmt19Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt19.py)
@@ -9922,14 +12152,26 @@ VALIDATION |      1,512
 
 ## [`video`](#video)
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="bair_robot_pushing_small" />
+  <meta itemprop="description" content="This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#bair_robot_pushing_small" />
+  <meta itemprop="sameAs" content="https://sites.google.com/view/sna-visual-mpc/" />
+</div>
+
 ### `"bair_robot_pushing_small"`
 
 This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
-* URL: [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
-* `DatasetBuilder`: [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
-* Version: `v1.0.0`
-* Size: `30.06 GiB`
+*   URL:
+    [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
+*   `DatasetBuilder`:
+    [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
+*   Version: `v1.0.0`
+*   Size: `30.06 GiB`
 
 #### Features
 ```python
@@ -9949,35 +12191,37 @@ ALL        |     43,520
 TRAIN      |     43,264
 TEST       |        256
 
-
 #### Urls
- * [https://sites.google.com/site/brainrobotdata/home/push-dataset](https://sites.google.com/site/brainrobotdata/home/push-dataset)
+
+*   [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
 
 #### Citation
 ```
-@inproceedings{conf/nips/FinnGL16,
-  added-at = {2016-12-16T00:00:00.000+0100},
-  author = {Finn, Chelsea and Goodfellow, Ian J. and Levine, Sergey},
-  biburl = {https://www.bibsonomy.org/bibtex/230073873b4fe43b314724b772d0f9256/dblp},
-  booktitle = {NIPS},
-  crossref = {conf/nips/2016},
-  editor = {Lee, Daniel D. and Sugiyama, Masashi and Luxburg, Ulrike V. and Guyon, Isabelle and Garnett, Roman},
-  ee = {http://papers.nips.cc/paper/6161-unsupervised-learning-for-physical-interaction-through-video-prediction},
-  interhash = {2e6b416723704f4aa5ad0686ce5a3593},
-  intrahash = {30073873b4fe43b314724b772d0f9256},
-  keywords = {dblp},
-  pages = {64-72},
-  timestamp = {2016-12-17T11:33:40.000+0100},
-  title = {Unsupervised Learning for Physical Interaction through Video Prediction.},
-  url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
-  year = 2016
+@misc{1710.05268,
+  Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
+  Title = {Self-Supervised Visual Planning with Temporal Skip Connections},
+  Year = {2017},
+  Eprint = {arXiv:1710.05268},
 }
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="moving_mnist" />
+  <meta itemprop="description" content="Moving variant of MNIST database of handwritten digits. This is the
+data used by the authors for reporting model performance. See
+`tfds.video.moving_mnist.image_as_moving_sequence`
+for generating training/validation data from the MNIST dataset." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#moving_mnist" />
+  <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~nitish/unsupervised_video/" />
+</div>
 
 ### `"moving_mnist"`
 
@@ -10033,6 +12277,16 @@ ALL        |     10,000
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="starcraft_video" />
+  <meta itemprop="description" content="This data set contains videos generated from Starcraft." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#starcraft_video" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/scv_dataset/README.html" />
+</div>
 
 ### `"starcraft_video"`
 
@@ -10182,6 +12436,16 @@ TEST       |      2,000
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="ucf101" />
+  <meta itemprop="description" content="A 101-label video classification dataset." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#ucf101" />
+  <meta itemprop="sameAs" content="https://www.crcv.ucf.edu/data/UCF101.php" />
+</div>
+
 ### `"ucf101"`
 
 A 101-label video classification dataset.
@@ -10192,8 +12456,8 @@ A 101-label video classification dataset.
 `ucf101` is configured with `tfds.video.ucf101.Ucf101Config` and has the following
 configurations predefined (defaults to the first one):
 
-* `"ucf101_1_256"` (`v1.0.0`) (`Size: ?? GiB`): 256x256 UCF with the first action recognition split.
-
+*   `"ucf101_1_256"` (`v1.0.0`) (`Size: 6.48 GiB`): 256x256 UCF with the first
+    action recognition split.
 
 #### `"ucf101/ucf101_1_256"`
 
@@ -10204,11 +12468,13 @@ FeaturesDict({
 })
 ```
 
-
-
-
 #### Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 13,320
+TRAIN | 9,537
+TEST  | 3,783
 
 #### Urls
  * [https://www.crcv.ucf.edu/data/UCF101.php](https://www.crcv.ucf.edu/data/UCF101.php)

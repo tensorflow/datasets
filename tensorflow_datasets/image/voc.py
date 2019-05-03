@@ -172,9 +172,11 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
           }
 
     objects = list(_get_example_objects())
-    labels = sorted(list(set([obj["label"] for obj in objects])))
-    labels_no_difficult = sorted(list(set(
-        [obj["label"] for obj in objects if obj["is_difficult"] == 0])))
+    # Use set() to remove duplicates
+    labels = sorted(set(obj["label"] for obj in objects))
+    labels_no_difficult = sorted(set(
+        obj["label"] for obj in objects if obj["is_difficult"] == 0
+    ))
     return {
         "image": image_filepath,
         "image/filename": image_id + ".jpg",

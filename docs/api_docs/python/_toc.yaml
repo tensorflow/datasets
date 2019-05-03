@@ -8,6 +8,10 @@ toc:
       path: /datasets/api_docs/python/tfds/as_numpy
     - title: builder
       path: /datasets/api_docs/python/tfds/builder
+    - title: disable_progress_bar
+      path: /datasets/api_docs/python/tfds/disable_progress_bar
+    - title: is_dataset_on_gcs
+      path: /datasets/api_docs/python/tfds/is_dataset_on_gcs
     - title: list_builders
       path: /datasets/api_docs/python/tfds/list_builders
     - title: load
@@ -114,8 +118,6 @@ toc:
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds/file_adapter
-    - title: CSVAdapter
-      path: /datasets/api_docs/python/tfds/file_adapter/CSVAdapter
     - title: FileFormatAdapter
       path: /datasets/api_docs/python/tfds/file_adapter/FileFormatAdapter
     - title: TFRecordExampleAdapter

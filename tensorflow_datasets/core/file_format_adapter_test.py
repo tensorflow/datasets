@@ -67,15 +67,6 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
     )
 
 
-class DummyCSVBuilder(DummyTFRecordBuilder):
-
-  @property
-  def _file_format_adapter(self):
-    file_adapter_cls = file_format_adapter.CSVAdapter
-    serialized_info = self.info.features.get_serialized_info()
-    return file_adapter_cls(serialized_info)
-
-
 class FileFormatAdapterTest(testing.TestCase):
 
   def _test_generator_based_builder(self, builder_cls):
@@ -104,9 +95,6 @@ class FileFormatAdapterTest(testing.TestCase):
 
   def test_tfrecords(self):
     self._test_generator_based_builder(DummyTFRecordBuilder)
-
-  def test_csv(self):
-    self._test_generator_based_builder(DummyCSVBuilder)
 
 
 class TFRecordUtilsTest(testing.TestCase):

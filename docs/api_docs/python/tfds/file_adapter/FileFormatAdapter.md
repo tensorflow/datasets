@@ -11,23 +11,18 @@
 
 ## Class `FileFormatAdapter`
 
-
-
-
+Provides writing and reading methods for a file format.
 
 Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
 
 <!-- Placeholder for "Used in" -->
 
-Provides writing and reading methods for a file format.
 
 ## Properties
 
 <h3 id="filetype_suffix"><code>filetype_suffix</code></h3>
 
-Returns a str file type suffix (e.g. "csv").
-
-
+Returns a str file type suffix (e.g. "tfrecord").
 
 ## Methods
 

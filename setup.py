@@ -43,24 +43,25 @@ __version__ += 'dev%s' % datestring
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
-  'absl-py',
-  'future',
-  'numpy',
-  'promise',
-  'protobuf>=3.6.1',
-  'psutil',
-  'requests',
-  'six',
-  'tensorflow-metadata',
-  'termcolor',
-  'tqdm',
-  'wrapt',
+    'absl-py',
+    'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'future',
+    'numpy',
+    'promise',
+    'protobuf>=3.6.1',
+    'psutil',
+    'requests',
+    'six',
+    'tensorflow-metadata',
+    'termcolor',
+    'tqdm',
+    'wrapt',
 ]
 
 TESTS_REQUIRE = [
-  'jupyter',
-  'pytest',
-  'apache-beam',
+    'apache-beam',
+    'jupyter',
+    'pytest',
 ]
 
 if sys.version_info.major == 3:
@@ -86,20 +87,21 @@ DATASET_FILES = [
 ]
 
 DATASET_EXTRAS = {
-  # In alphabetical order
-  'cats_vs_dogs': ['matplotlib'],
-  'colorectal_histology': ['Pillow'],
-  'imagenet2012_corrupted': [
-    # This includes pre-built source; you may need to use an alternative
-    # route to install OpenCV
-    'opencv-python==3.4.0.14',
-    'scikit-image',
-    'scipy'
-  ],
-  'librispeech': ['pydub'],  # and ffmpeg installed
-  'svhn': ['scipy'],
-  'tiered_imagenet': ['opencv-python'],
-  'wikipedia': ['mwparserfromhell', 'apache_beam']
+    # In alphabetical order
+    'cats_vs_dogs': ['matplotlib'],
+    'colorectal_histology': ['Pillow'],
+    'imagenet2012_corrupted': [
+        # This includes pre-built source; you may need to use an alternative
+        # route to install OpenCV
+        'opencv-python==3.4.0.14',
+        'scikit-image',
+        'scipy'
+    ],
+    'groove': ['pretty_midi', 'pydub'],
+    'librispeech': ['pydub'],  # and ffmpeg installed
+    'svhn': ['scipy'],
+    'tiered_imagenet': ['opencv-python'],
+    'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
 all_dataset_extras = []

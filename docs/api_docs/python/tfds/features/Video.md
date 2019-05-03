@@ -5,7 +5,9 @@
 <meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getattr__"/>
+<meta itemprop="property" content="__getstate__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="__setstate__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -18,6 +20,8 @@
 
 ## Class `Video`
 
+`FeatureConnector` for videos, encoding frames individually on disk.
+
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 
 
@@ -25,8 +29,6 @@ Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
 
 <!-- Placeholder for "Used in" -->
-
-`FeatureConnector` for videos, encoding frames individually on disk.
 
 Video: The image connector accepts as input a 4 dimensional uint8 array
 representing a video, a sequence of paths to encoded frames, or a path or a
@@ -125,6 +127,18 @@ __getattr__(key)
 ```
 
 Allow to access the underlying attributes directly.
+
+<h3 id="__getstate__"><code>__getstate__</code></h3>
+
+```python
+__getstate__()
+```
+
+<h3 id="__setstate__"><code>__setstate__</code></h3>
+
+```python
+__setstate__(state)
+```
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 

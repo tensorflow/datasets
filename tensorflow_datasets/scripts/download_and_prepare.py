@@ -95,6 +95,7 @@ flags.DEFINE_boolean("debug_start", False,
                      "If True, will drop into debugger on startup")
 flags.DEFINE_boolean("sleep_start", False,
                      "If True, will sleep on startup; useful for ssh")
+flags.DEFINE_boolean("disable_tqdm", False, "If True, disable tqdm.")
 
 
 def download_config():
@@ -147,6 +148,10 @@ def main(_):
     pdb.set_trace()
   if FLAGS.sleep_start:
     time.sleep(60*60*3)
+
+  if FLAGS.disable_tqdm:
+    logging.info("Disabling tqdm.")
+    tfds.disable_progress_bar()
 
   datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
                           or tfds.list_builders())

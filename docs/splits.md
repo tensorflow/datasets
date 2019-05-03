@@ -36,11 +36,12 @@ ds = tfds.load("mnist", split=tfds.Split.ALL)
 You have 3 options for how to get a thinner slice of the data than the
 base splits, all based on `tfds.Split.subsplit`.
 
-*Note*: For a given set of data already on disk, subsplits are deterministic
-if shuffling is disabled (i.e. `shuffle_files=False`),
-but TFDS does not currently guarantee the order of the data on disk when data
-is generated, so if you regenerate the data, the subsplits may no longer be
+*Warning*: TFDS does not currently guarantee the order of the data on disk when
+data is generated, so if you regenerate the data, the subsplits may no longer be
 the same.
+
+*Warning*: If the `total_number_examples % 100 != 0`, then remainder examples
+may not be evenly distributed among subsplits.
 
 ### Specify number of subsplits
 

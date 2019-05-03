@@ -64,8 +64,11 @@ generate on a single machine. See the
 
 ### Use the default template
 
-To help you get started to add a new dataset inside `tfds`, you can cloned the
-repository and use the default template by running the following command:
+If you want to
+[contribute to our repo](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md)
+and add a new dataset, the following script will help you get started by
+generating the required python files,...
+To use it, clone the `tfds` repository and run the following command:
 
 ```
 python tensorflow_datasets/scripts/create_new_dataset.py \
@@ -74,7 +77,8 @@ python tensorflow_datasets/scripts/create_new_dataset.py \
 ```
 
 
-It will create the minimum python files that you're requiring to get started.
+Then search for `TODO(my_dataset)` in the generated files to do the
+modifications.
 
 ### `DatasetBuilder`
 
@@ -220,7 +224,7 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
-            name="train",
+            name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "train"),
@@ -228,7 +232,7 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
             },
         ),
         tfds.core.SplitGenerator(
-            name="test",
+            name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "test"),
@@ -540,7 +544,7 @@ to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 
 ```sh
-./oss_scripts/lint.sh image
+./oss_scripts/lint.sh tensorflow_datasets/image
 ```
 
 See

@@ -17,6 +17,8 @@
 
 from tensorflow_datasets.translate.flores import Flores
 from tensorflow_datasets.translate.flores import FloresConfig
+from tensorflow_datasets.translate.para_crawl import ParaCrawl
+from tensorflow_datasets.translate.para_crawl import ParaCrawlConfig
 from tensorflow_datasets.translate.ted_hrlr import TedHrlrTranslate
 from tensorflow_datasets.translate.ted_multi import TedMultiTranslate
 from tensorflow_datasets.translate.wmt import WmtConfig

@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import abc
 import functools
 import gzip
 import itertools
@@ -35,6 +34,23 @@ import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
 Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
 """
 
 
@@ -545,6 +561,7 @@ class WmtConfig(tfds.core.BuilderConfig):
                description=None,
                language_pair=(None, None),
                text_encoder_config=None,
+               subsets=None,
                **kwargs):
     """BuilderConfig for WMT.
 
@@ -554,32 +571,45 @@ class WmtConfig(tfds.core.BuilderConfig):
       description: The description of the dataset.
       language_pair: pair of languages that will be used for translation. Should
                  contain 2 letter coded strings. For example: ("en", "de").
-     text_encoder_config: `tfds.features.text.TextEncoderConfig` (optional),
+      text_encoder_config: `tfds.features.text.TextEncoderConfig` (optional),
         configuration for the `tfds.features.text.TextEncoder` used for the
         `tfds.features.text.Translation` features.
+      subsets: Dict[split, list[str]]. List of the subset to use for each of the
+        split. Note that WMT subclasses overwrite this parameter.
       **kwargs: keyword arguments forwarded to super.
     """
     name = "%s-%s" % (language_pair[0], language_pair[1])
     if text_encoder_config:
       name += "." + text_encoder_config.name
+    if "name" in kwargs:  # Add name suffix for custom configs
+      name += "." + kwargs.pop("name")
 
     super(WmtConfig, self).__init__(
         name=name, description=description, **kwargs)
 
-    self.url = url
+    self.url = url or "http://www.statmt.org"
     self.citation = citation
     self.language_pair = language_pair
     self.text_encoder_config = text_encoder_config
+    self.subsets = subsets
 
 
 class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   """WMT translation dataset."""
-  IN_DEVELOPMENT = True
 
-  @abc.abstractproperty
+  def __init__(self, *args, **kwargs):
+    if type(self) == WmtTranslate and "config" not in kwargs:   # pylint: disable=unidiomatic-typecheck
+      raise ValueError(
+          "The raw `wmt_translate` can only be instantiated with the config "
+          "kwargs. You may want to use one of the `wmtYY_translate` "
+          "implementation instead to get the WMT dataset for a specific year."
+      )
+    super(WmtTranslate, self).__init__(*args, **kwargs)
+
+  @property
   def _subsets(self):
     """Subsets that make up each split of the dataset."""
-    pass
+    return self.builder_config.subsets
 
   @property
   def subsets(self):

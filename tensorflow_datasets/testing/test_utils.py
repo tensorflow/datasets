@@ -26,6 +26,7 @@ import tempfile
 
 from absl.testing import absltest
 
+import dill
 import numpy as np
 import tensorflow as tf
 
@@ -219,6 +220,9 @@ class FeatureExpectationsTestCase(SubTestCase):
 
   def assertFeatureTest(self, fdict, test, feature, shape, dtype):
     """Test that encode=>decoding of a value works correctly."""
+
+    # test feature.encode_example can be pickled and unpickled for beam.
+    dill.loads(dill.dumps(feature.encode_example))
 
     # self._process_subtest_exp(e)
     input_value = {"inner": test.value}
