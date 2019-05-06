@@ -43,7 +43,7 @@ class Wmt15Translate(wmt.WmtTranslate):
 
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
-          description="WMT 2015 translation task dataset.",
+          description="WMT 2015 %s-%s translation task dataset." % (l1, l2),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
@@ -51,7 +51,9 @@ class Wmt15Translate(wmt.WmtTranslate):
       for l1, l2 in _LANGUAGE_PAIRS
   ] + [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
-          description="WMT 2015 translation dataset with subword encoding.",
+          description=(
+              "WMT 2015 %s-%s translation task dataset with subword encoding."
+              % (l1, l2)),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),

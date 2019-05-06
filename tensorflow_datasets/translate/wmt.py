@@ -219,6 +219,14 @@ _TRAIN_SUBSETS = [
         path=("giga-fren.release2.fixed.fr.gz",
               "giga-fren.release2.fixed.en.gz")),
     SubDataset(
+        name="hindencorp_01",
+        target="en",
+        sources={"hi"},
+        url="http://ufallab.ms.mff.cuni.cz/~bojar/hindencorp",
+        manual_dl_files=["hindencorp0.1.gz"],
+        path=None  # TODO(adarob): Fill in once we know the path format.
+    ),
+    SubDataset(
         name="leta_v1",
         target="en",
         sources={"lv"},
@@ -231,19 +239,12 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt13/training-parallel-un.tgz",
         path=("un/undoc.2000.{src}-en.{src}", "un/undoc.2000.{src}-en.en")),
     SubDataset(
-        name="newscommentary_v8",
-        target="en",
-        sources={"cs", "de", "es", "fr", "ru"},
-        url="http://www.statmt.org/wmt13/training-parallel-nc-v8.tgz",
-        path=("training-parallel-nc-v8/news-commentary-v8.{src}-en.{src}",
-              "training-parallel-nc-v8/news-commentary-v8.{src}-en.en")),
-    SubDataset(
         name="newscommentary_v9",
         target="en",
         sources={"cs", "de", "fr", "ru"},
         url="http://www.statmt.org/wmt14/training-parallel-nc-v9.tgz",
-        path=("training-parallel-nc-v9/news-commentary-v9.{src}-en.{src}",
-              "training-parallel-nc-v9/news-commentary-v9.{src}-en.en")),
+        path=("training/news-commentary-v9.{src}-en.{src}",
+              "training/news-commentary-v9.{src}-en.en")),
     SubDataset(
         name="newscommentary_v10",
         target="en",
@@ -354,6 +355,13 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt15/wiki-titles.tgz",
         path="wiki/fi-en/titles.fi-en"),
     SubDataset(
+        name="wikiheadlines_hi",
+        target="en",
+        sources={"hi"},
+        url="http://www.statmt.org/wmt15/wiki-titles.tgz",
+        path="wiki/hi-en/wiki-titles.hi-en"),
+    SubDataset(
+        # Verified that wmt14 and wmt15 files are identical.
         name="wikiheadlines_ru",
         target="en",
         sources={"ru"},
@@ -492,7 +500,7 @@ _DEV_SUBSETS = [
     SubDataset(
         name="newstest2014",
         target="en",
-        sources={"cs", "de", "es", "fr", "ru"},
+        sources={"cs", "de", "es", "fr", "hi", "ru"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2014-{src}en-src.{src}.sgm",
               "dev/newstest2014-{src}en-ref.en.sgm")),
