@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -42,12 +43,13 @@ contains bounding boxes.
 _LABELS_FNAME = "image/caltech101_labels.txt"
 _URL = "http://www.vision.caltech.edu/Image_Datasets/Caltech101/"
 _IMAGES_FNAME = "101_ObjectCategories.tar.gz"
+_TRAIN_POINTS_PER_CLASS = 30
 
 
 class Caltech101(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.1.0")
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -66,33 +68,64 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download_and_extract(os.path.join(_URL, _IMAGES_FNAME))
-    # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             num_shards=5,
             gen_kwargs={
-                "images_dir_path": path
+                "images_dir_path": path,
+                "is_train_split": True,
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            num_shards=5,
+            gen_kwargs={
+                "images_dir_path": path,
+                "is_train_split": False,
             }),
     ]
 
-  def _generate_examples(self, images_dir_path):
+  def _generate_examples(self, images_dir_path, is_train_split):
     """Generates images and labels given the image directory path.
+
+    As is usual for this dataset, 30 random examples from each class are added
+    to the train split, and the remainder are added to the test split.
 
     Args:
       images_dir_path: path to the directory where the images are stored.
+      is_train_split: bool, if true, generates the train split, else generates
+        the test split.
 
     Yields:
       The image path, and its corresponding label and filename.
+
+    Raises:
+      ValueError: If too few points are present to create the train set for any
+        class.
     """
+    # Sets random seed so the random partitioning of files is the same when
+    # called for the train and test splits.
+    np.random.seed(1234)
+
     parent_dir = tf.io.gfile.listdir(images_dir_path)[0]
     walk_dir = os.path.join(images_dir_path, parent_dir)
     dirs = tf.io.gfile.listdir(walk_dir)
 
     for d in dirs:
+      # Each directory contains all the images from a single class.
       if tf.io.gfile.isdir(os.path.join(walk_dir, d)):
-        for full_path, _, fname in tf.io.gfile.walk(os.path.join(walk_dir, d)):
-          for image_file in fname:
+        for full_path, _, fnames in tf.io.gfile.walk(os.path.join(walk_dir, d)):
+
+          # _TRAIN_POINTS_PER_CLASS datapoints are sampled for the train split,
+          # the others constitute the test split.
+          if _TRAIN_POINTS_PER_CLASS > len(fnames):
+            raise ValueError("Fewer than {} ({}) points in class {}".format(
+                _TRAIN_POINTS_PER_CLASS, len(fnames), d))
+          train_fnames = np.random.choice(fnames, _TRAIN_POINTS_PER_CLASS)
+          test_fnames = set(fnames).difference(train_fnames)
+          fnames_to_emit = train_fnames if is_train_split else test_fnames
+
+          for image_file in fnames_to_emit:
             if image_file.endswith(".jpg"):
               image_path = os.path.join(full_path, image_file)
               yield {
