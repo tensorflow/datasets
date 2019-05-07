@@ -144,7 +144,9 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
       data = np.load(os.path.join(file_paths, path))
       max_strokes = len(max(data, key=len))
       for sketch in data:
-        stroke_5 = self._pad(self._stroke_3_to_stroke_5(sketch), max_strokes)
+        stroke_5 = self._pad(
+            self._stroke_3_to_stroke_5(sketch), max_strokes + 1
+        )  # +1 Because we have prepended all sketch with the initial stroke
         yield {"sketch": stroke_5, "label": path[:-4]}
 
   @staticmethod
@@ -166,7 +168,7 @@ class QuickdrawSketchRNN(tfds.core.GeneratorBasedBuilder):
     """
     padding_vector = [[0, 0, 0, 0, 1]]
     pad_elements = max_strokes - len(sketch)
-    if pad_elements:
+    if pad_elements > 0:
       sketch.extend(padding_vector * pad_elements)
     return sketch
 

@@ -45,7 +45,7 @@ def _gen_stroke():
   return np.array([delta_y, delta_x, pen_off], dtype=np.int16)
 
 
-def _gen_sketch(max_strokes=10):
+def _gen_sketch(max_strokes=30):
   """Sketches are arrays of strokes."""
   return np.array(
       [_gen_stroke() for s in range(np.random.randint(2, max_strokes))])
@@ -74,7 +74,8 @@ def _unpack_dummies():
       split_dir = os.path.join(extract_dir, split)
       if not tf.io.gfile.exists(split_dir):
         tf.io.gfile.makedirs(split_dir)
-      np.save(os.path.join(split_dir, path[:-4]), data[split])
+      np.save(
+          os.path.join(split_dir, path[:-4]), data[split], allow_pickle=True)
 
 
 class QuickdrawSketchRNNTest(testing.DatasetBuilderTestCase):
@@ -87,6 +88,7 @@ def main():
   _generate_dummies()
   _unpack_dummies()
   testing.test_main()
+  # TODO: Find a way to test if the padding is correct.
 
 
 if __name__ == "__main__":
