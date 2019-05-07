@@ -11,20 +11,18 @@
 
 ## Class `SplitBase`
 
-
-
-
+Abstract base class for Split compositionality.
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
-Abstract base class for Split compositionality.
+<!-- Placeholder for "Used in" -->
 
 See the
 [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
 for more information.
 
 There are three parts to the composition:
-  1) The splits are composed (defined, merged, splitted,...) together before
+  1) The splits are composed (defined, merged, split,...) together before
      calling the `.as_dataset()` function. This is done with the `__add__`,
      `__getitem__`, which return a tree of `SplitBase` (whose leaf
      are the `NamedSplit` objects)
@@ -116,7 +114,7 @@ subsplit = split.subsplit(tfds.percent[-20:])
 ```
 
 Warning: k and weighted will be converted into percent which mean that
-values bellow the percent will be rounded up or down. The final split may be
+values below the percent will be rounded up or down. The final split may be
 bigger to deal with remainders. For instance:
 
 ```

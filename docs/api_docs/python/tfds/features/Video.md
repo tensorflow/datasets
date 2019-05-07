@@ -5,7 +5,9 @@
 <meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getattr__"/>
+<meta itemprop="property" content="__getstate__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="__setstate__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -18,16 +20,22 @@
 
 ## Class `Video`
 
+`FeatureConnector` for videos, encoding frames individually on disk.
+
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 
 
 
 Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
 
-`FeatureConnector` for videos, png-encoding frames on disk.
+<!-- Placeholder for "Used in" -->
 
-Video: The image connector accepts as input:
-  * uint8 array representing a video.
+Video: The image connector accepts as input a 4 dimensional uint8 array
+representing a video, a sequence of paths to encoded frames, or a path or a
+file object that can be decoded with ffmpeg. Note that not all formats in
+ffmpeg support reading from pipes, so providing a file object might fail.
+Furthermore, if a path is given that is not on the local file system, we first
+copy it to a temporary local file before passing it to ffmpeg.
 
 Output:
   video: tf.Tensor of type tf.uint8 and shape
@@ -35,28 +43,58 @@ Output:
 
 Example:
   * In the DatasetInfo object:
-    features=features.FeatureDict({
-        'video': features.Video(shape=(None, 64, 64, 3)),
-    })
+      features=features.FeatureDict({
+          'video': features.Video(shape=(None, 64, 64, 3)),
+      })
 
   * During generation:
-    yield {
-        'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
-    }
+      ```
+      yield {
+          'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
+      }
+      ```
+      or
+      ```
+      yield {
+  '      video': ['path/to/frame001.png', 'path/to/frame002.png'],
+      }
+      ```
+      or
+      ```
+      yield {
+            'input': '/path/to/video.avi',
+      }
+      ```
+      or
+      ```
+      yield {
+            'input': gfile.GFile('/complex/path/video.avi'),
+      }
+      ```
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 ``` python
-__init__(shape)
+__init__(
+    shape,
+    encoding_format='png',
+    ffmpeg_extra_args=()
+)
 ```
 
-Construct the connector.
+Initializes the connector.
 
 #### Args:
 
 * <b>`shape`</b>: tuple of ints, the shape of the video (num_frames, height, width,
     channels), where channels is 1 or 3.
-
+* <b>`encoding_format`</b>: The video is stored as a sequence of encoded images.
+    You can use any encoding format supported by image_feature.Feature.
+* <b>`ffmpeg_extra_args`</b>: A sequence of additional args to be passed to the
+    ffmpeg binary. Specifically, ffmpeg will be called as:
+      ``
+      ffmpeg -i <input_file> <ffmpeg_extra_args> %010d.<encoding_format>
+      ``
 
 #### Raises:
 
@@ -90,21 +128,33 @@ __getattr__(key)
 
 Allow to access the underlying attributes directly.
 
+<h3 id="__getstate__"><code>__getstate__</code></h3>
+
+```python
+__getstate__()
+```
+
+<h3 id="__setstate__"><code>__setstate__</code></h3>
+
+```python
+__setstate__(state)
+```
+
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 ``` python
 decode_example(tfexample_data)
 ```
 
-Wrapper arround SequenceDict.
+Wrapper around SequenceDict.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
 ``` python
-encode_example(example_data)
+encode_example(video_or_path_or_fobj)
 ```
 
-Wrapper arround SequenceDict.
+Converts the given image into a dict convertible to tf example.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 

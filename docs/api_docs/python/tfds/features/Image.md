@@ -4,6 +4,7 @@
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
+<meta itemprop="property" content="__getstate__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
@@ -19,13 +20,15 @@
 
 ## Class `Image`
 
+`FeatureConnector` for images.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/image_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py).
 
-`FeatureConnector` for images.
+<!-- Placeholder for "Used in" -->
 
 Input: The image connector accepts as input:
   * path to a {bmp,gif,jpeg,png} image.
@@ -98,6 +101,12 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 
 ## Methods
+
+<h3 id="__getstate__"><code>__getstate__</code></h3>
+
+```python
+__getstate__()
+```
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 

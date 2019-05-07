@@ -12,13 +12,15 @@
 
 ## Class `NamedSplit`
 
+Descriptor corresponding to a named split (train, test, ...).
+
 Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
 
 
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
-Descriptor corresponding to a named split (train, test, ...).
+<!-- Placeholder for "Used in" -->
 
 Each descriptor can be composed with other using addition or slice. Ex:
 
@@ -126,7 +128,7 @@ subsplit = split.subsplit(tfds.percent[-20:])
 ```
 
 Warning: k and weighted will be converted into percent which mean that
-values bellow the percent will be rounded up or down. The final split may be
+values below the percent will be rounded up or down. The final split may be
 bigger to deal with remainders. For instance:
 
 ```

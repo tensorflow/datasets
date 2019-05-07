@@ -19,13 +19,11 @@
 
 ## Class `DatasetBuilder`
 
-
-
-
+Abstract base class for all datasets.
 
 Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
 
-Abstract base class for all datasets.
+<!-- Placeholder for "Used in" -->
 
 `DatasetBuilder` has 3 key methods:
 
@@ -61,10 +59,11 @@ image, label = features['image'], features['label']
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
+```python
 __init__(
     data_dir=None,
-    config=None
+    config=None,
+    version=None
 )
 ```
 
@@ -74,13 +73,16 @@ Callers must pass arguments as keyword arguments.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, directory to read/write data. Defaults to
-    "~/tensorflow_datasets".
-* <b>`config`</b>: <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> or `str` name, optional configuration
-    for the dataset that affects the data generated on disk. Different
-    `builder_config`s will have their own subdirectories and versions.
-
-
+*   <b>`data_dir`</b>: `str`, directory to read/write data. Defaults to
+    datasets are stored.
+*   <b>`config`</b>:
+    <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
+    or `str` name, optional configuration for the dataset that affects the data
+    generated on disk. Different `builder_config`s will have their own
+    subdirectories and versions.
+*   <b>`version`</b>: `str`. Optional version at which to load the dataset. An
+    error is raised if specified version cannot be satisfied. Eg: '1.2.3',
+    '1.2.*'. Note that only the currently defined version can be loaded.
 
 ## Properties
 
@@ -160,6 +162,11 @@ Downloads and prepares dataset for reading.
     Defaults to "~/tensorflow-datasets/downloads".
 * <b>`download_config`</b>: <a href="../../tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>, further configuration for
     downloading and preparing dataset.
+
+
+#### Raises:
+
+* <b>`IOError`</b>: if there is not enough disk space available.
 
 
 

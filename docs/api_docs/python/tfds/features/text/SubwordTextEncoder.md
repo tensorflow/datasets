@@ -15,13 +15,15 @@
 
 ## Class `SubwordTextEncoder`
 
+Invertible `TextEncoder` using word pieces with a byte-level fallback.
+
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 
 
 Defined in [`core/features/text/subword_text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py).
 
-Invertible `TextEncoder` using word pieces with a byte-level fallback.
+<!-- Placeholder for "Used in" -->
 
 Encoding is fully invertible because all out-of-vocab wordpieces are
 byte-encoded.

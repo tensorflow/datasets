@@ -5,15 +5,18 @@
 
 # Module: tfds.core
 
-
+API to define datasets.
 
 Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py).
 
-API to define datasets.
+<!-- Placeholder for "Used in" -->
+
 
 ## Classes
 
 [`class lazy_imports`](../tfds/core/lazy_imports.md): Lazy importer for heavy dependencies.
+
+[`class BeamBasedBuilder`](../tfds/core/BeamBasedBuilder.md): Beam based Builder.
 
 [`class BuilderConfig`](../tfds/core/BuilderConfig.md): Base class for `DatasetBuilder` data configuration.
 

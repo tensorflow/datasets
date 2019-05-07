@@ -12,13 +12,11 @@
 
 ## Class `TextEncoder`
 
-
-
-
+Abstract base class for converting between text and integers.
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
-Abstract base class for converting between text and integers.
+<!-- Placeholder for "Used in" -->
 
 **A note on padding**:
 

@@ -19,13 +19,16 @@
 
 ## Class `DummyMnist`
 
+Test DatasetBuilder.
+
 Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)
 
 
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
-Test DatasetBuilder.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -118,6 +121,11 @@ Downloads and prepares dataset for reading.
     Defaults to "~/tensorflow-datasets/downloads".
 * <b>`download_config`</b>: <a href="../../tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>, further configuration for
     downloading and preparing dataset.
+
+
+#### Raises:
+
+* <b>`IOError`</b>: if there is not enough disk space available.
 
 
 

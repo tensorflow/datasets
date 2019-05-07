@@ -14,6 +14,10 @@ tar -zcvf aclImdb_v1.tar.gz aclImdb
       * 0_7.txt
       * 1_8.txt
       * 2_9.txt
+    * unsup/
+      * 0_0.txt
+      * 123_0.txt
+      * 456_0.txt
   * test/
     * pos/
       * 777_7.txt

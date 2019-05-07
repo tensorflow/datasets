@@ -23,13 +23,16 @@
 
 ## Class `Text`
 
+`FeatureConnector` for text, encoding to integers with a `TextEncoder`.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/text_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py).
 
-`FeatureConnector` for text, encoding to integers with a `TextEncoder`.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 

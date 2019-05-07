@@ -27,13 +27,11 @@
 
 ## Class `DatasetInfo`
 
-
-
-
+Information about a dataset.
 
 Defined in [`core/dataset_info.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py).
 
-Information about a dataset.
+<!-- Placeholder for "Used in" -->
 
 `DatasetInfo` documents datasets, including its name, version, and features.
 See the constructor arguments and properties for a full list.

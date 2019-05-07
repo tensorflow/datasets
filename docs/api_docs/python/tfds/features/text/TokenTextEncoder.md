@@ -17,13 +17,15 @@
 
 ## Class `TokenTextEncoder`
 
+TextEncoder backed by a list of tokens.
+
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
-TextEncoder backed by a list of tokens.
+<!-- Placeholder for "Used in" -->
 
 Tokenization splits on (and drops) non-alphanumeric characters with
 regex "\W+".

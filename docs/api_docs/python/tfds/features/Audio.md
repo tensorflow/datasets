@@ -17,13 +17,16 @@
 
 ## Class `Audio`
 
+`FeatureConnector` for audio, encoded as raw integer wave form.
+
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 
 
 Defined in [`core/features/audio_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/audio_feature.py).
 
-`FeatureConnector` for audio, encoded as raw integer wave form.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 

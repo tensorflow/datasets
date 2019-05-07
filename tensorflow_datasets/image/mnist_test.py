@@ -25,8 +25,8 @@ from tensorflow_datasets.image import mnist
 
 # testing/mnist.py generates fake input data
 
-mnist._TRAIN_EXAMPLES = 10
-mnist._TEST_EXAMPLES = 2
+mnist._TRAIN_EXAMPLES = 10  # pylint: disable=protected-access
+mnist._TEST_EXAMPLES = 2  # pylint: disable=protected-access
 
 
 class MNISTTest(testing.DatasetBuilderTestCase):
@@ -51,8 +51,23 @@ class KMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.KMNIST
 
 
-class EMNISTTest(MNISTTest):
+mnist.EMNIST.BUILDER_CONFIGS.append(
+    mnist.EMNISTConfig(
+        name="test",
+        class_number=200,
+        train_examples=10,
+        test_examples=2,
+        description="EMNIST test data config.",
+        version="1.0.1",
+    ))
+
+
+class EMNISTTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = mnist.EMNIST
+  SPLITS = {
+      "train": 10,
+      "test": 2,
+  }
   BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
 
 

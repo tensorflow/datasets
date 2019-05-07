@@ -16,13 +16,11 @@
 
 ## Class `FeatureConnector`
 
-
-
-
+Abstract base class for feature types.
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
-Abstract base class for feature types.
+<!-- Placeholder for "Used in" -->
 
 This class provides an interface between the way the information is stored
 on disk, and the way it is presented to the user.

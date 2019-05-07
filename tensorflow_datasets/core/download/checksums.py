@@ -72,7 +72,6 @@ def _read_file(path):
 
 
 
-@utils.memoize()
 def _get_sizes_checksums(checksums_path):
   """Returns {URL: (size, checksum)}s stored within file."""
   checksums = {}
