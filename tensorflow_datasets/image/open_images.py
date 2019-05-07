@@ -167,9 +167,14 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
           description='Images at their original resolution and quality.'),
       OpenImagesV4Config(
           name='300k',
-          version='0.2.0',
-          description='Images have roughly 300,000 pixels, at 75 JPEG quality.',
-          target_pixels=300000)
+          version='0.2.1',
+          description='Images have roughly 300,000 pixels, at 72 JPEG quality.',
+          target_pixels=300000),
+      OpenImagesV4Config(
+          name='200k',
+          version='0.2.1',
+          description='Images have roughly 200,000 pixels, at 72 JPEG quality.',
+          target_pixels=200000)
   ]
 
   def _info(self):

@@ -46,7 +46,7 @@ class Wmt18Translate(wmt.WmtTranslate):
 
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
-          description="WMT 2018 translation task dataset.",
+          description="WMT 2018 %s-%s translation task dataset." % (l1, l2),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
