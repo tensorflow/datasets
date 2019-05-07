@@ -86,7 +86,7 @@ Return the tf-example features for the adapter, as stored on disk.
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
-Ex:
+#### Ex:
 
 ```
 return {
@@ -96,12 +96,8 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto
-directly:
-
-```
-return tf.FixedLenFeature((64, 64), tf.uint8)
-```
+FeatureConnector which are not containers should return the feature proto *
+<b>`directly`</b>: `return tf.FixedLenFeature((64, 64), tf.uint8)`
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.
@@ -134,9 +130,10 @@ will restore the feature metadata from the saved file.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -168,9 +165,7 @@ overwrite the function.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
-
-
-
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)

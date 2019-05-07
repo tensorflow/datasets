@@ -27,7 +27,7 @@ Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree
 The default mode is `REUSE_DATASET_IF_EXISTS`, which will reuse both
 raw downloads and the prepared dataset if they exist.
 
-The generations modes:
+#### The generations modes:
 
 |                                    | Downloads | Dataset |
 | -----------------------------------|-----------|---------|

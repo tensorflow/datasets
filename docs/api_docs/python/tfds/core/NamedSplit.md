@@ -31,7 +31,8 @@ split = tfds.Split.TRAIN.subsplit(tfds.percent[0:25]) + tfds.Split.TEST
 The resulting split will correspond to 25% of the train split merged with
 100% of the test split.
 
-Warning:
+#### Warning:
+
   A split cannot be added twice, so the following will fail:
 
 ```
@@ -42,7 +43,8 @@ split = (
 split = tfds.Split.TEST + tfds.Split.ALL  # Error
 ```
 
-Warning:
+#### Warning:
+
   The slices can be applied only one time. So the following are valid:
 
 ```
@@ -116,7 +118,7 @@ arguments `k` (get `k` even subsplits), `percent` (get a slice of the
 dataset with <a href="../../tfds/percent.md"><code>tfds.percent</code></a>), and `weighted` (get subsplits with proportions
 specified by `weighted`).
 
-Examples:
+#### Examples:
 
 ```
 # 50% train, 50% test
@@ -127,9 +129,9 @@ train, test, validation = split.subsplit(weighted=[2, 1, 1])
 subsplit = split.subsplit(tfds.percent[-20:])
 ```
 
-Warning: k and weighted will be converted into percent which mean that
-values below the percent will be rounded up or down. The final split may be
-bigger to deal with remainders. For instance:
+*   <b>`Warning`</b>: k and weighted will be converted into percent which mean
+    that values below the percent will be rounded up or down. The final split
+    may be bigger to deal with remainders. For instance:
 
 ```
 train, test, valid = split.subsplit(k=3)  # 33%, 33%, 34%
@@ -138,22 +140,18 @@ s1, s2, s3, s4 = split.subsplit(weighted=[2, 2, 1, 1])  # 33%, 33%, 16%, 18%
 
 #### Args:
 
-* <b>`arg`</b>: If no kwargs are given, `arg` will be interpreted as one of
-    `k`, `percent`, or `weighted` depending on the type.
-    For example:
-    ```
-    split.subsplit(10)  # Equivalent to split.subsplit(k=10)
-    split.subsplit(tfds.percent[:-20])  # percent=tfds.percent[:-20]
-    split.subsplit([1, 1, 2])  # weighted=[1, 1, 2]
-    ```
-* <b>`k`</b>: `int` If set, subdivide the split into `k` equal parts.
-* <b>`percent`</b>: `tfds.percent slice`, return a single subsplit corresponding to
-    a slice of the original split. For example:
-    `split.subsplit(tfds.percent[-20:])  # Last 20% of the dataset`.
-* <b>`weighted`</b>: `list[int]`, return a list of subsplits whose proportions match
-    the normalized sum of the list. For example:
-    `split.subsplit(weighted=[1, 1, 2])  # 25%, 25%, 50%`.
-
+*   <b>`arg`</b>: If no kwargs are given, `arg` will be interpreted as one of
+    `k`, `percent`, or `weighted` depending on the type. For example:
+    `split.subsplit(10) # Equivalent to split.subsplit(k=10)
+    split.subsplit(tfds.percent[:-20]) # percent=tfds.percent[:-20]
+    split.subsplit([1, 1, 2]) # weighted=[1, 1, 2]`
+*   <b>`k`</b>: `int` If set, subdivide the split into `k` equal parts.
+*   <b>`percent`</b>: `tfds.percent slice`, return a single subsplit
+    corresponding to a slice of the original split. For example:
+    `split.subsplit(tfds.percent[-20:]) # Last 20% of the dataset`.
+*   <b>`weighted`</b>: `list[int]`, return a list of subsplits whose proportions
+    match the normalized sum of the list. For example:
+    `split.subsplit(weighted=[1, 1, 2]) # 25%, 25%, 50%`.
 
 #### Returns:
 

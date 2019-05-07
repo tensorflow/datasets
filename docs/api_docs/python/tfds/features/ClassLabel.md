@@ -55,13 +55,12 @@ Note: On python2, the strings are encoded as utf-8.
 
 #### Args:
 
-* <b>`num_classes`</b>: `int`, number of classes. All labels must be < num_classes.
-* <b>`names`</b>: `list<str>`, string names for the integer classes. The
-    order in which the names are provided is kept.
-* <b>`names_file`</b>: `str`, path to a file with names for the integer
+*   <b>`num_classes`</b>: `int`, number of classes. All labels must be <
+    num_classes.
+*   <b>`names`</b>: `list<str>`, string names for the integer classes. The order
+    in which the names are provided is kept.
+*   <b>`names_file`</b>: `str`, path to a file with names for the integer
     classes, one per line.
-
-
 
 ## Properties
 
@@ -116,7 +115,7 @@ Return the tf-example features for the adapter, as stored on disk.
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
-Ex:
+#### Ex:
 
 ```
 return {
@@ -126,12 +125,8 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto
-directly:
-
-```
-return tf.FixedLenFeature((64, 64), tf.uint8)
-```
+FeatureConnector which are not containers should return the feature proto *
+<b>`directly`</b>: `return tf.FixedLenFeature((64, 64), tf.uint8)`
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.

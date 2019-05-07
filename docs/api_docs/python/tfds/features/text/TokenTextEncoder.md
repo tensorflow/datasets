@@ -49,15 +49,14 @@ To load from a file saved with `TokenTextEncoder.save_to_file`, use
 
 #### Args:
 
-* <b>`vocab_list`</b>: `list<str>`, list of tokens.
-* <b>`oov_buckets`</b>: `int`, the number of `int`s to reserve for OOV hash buckets.
-    Tokens that are OOV will be hash-modded into a OOV bucket in `encode`.
-* <b>`oov_token`</b>: `str`, the string to use for OOV ids in `decode`.
-* <b>`lowercase`</b>: `bool`, whether to make all text and tokens lowercase.
-* <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text into a
-    list of tokens.
-
-
+*   <b>`vocab_list`</b>: `list<str>`, list of tokens.
+*   <b>`oov_buckets`</b>: `int`, the number of `int`s to reserve for OOV hash
+    buckets. Tokens that are OOV will be hash-modded into a OOV bucket in
+    `encode`.
+*   <b>`oov_token`</b>: `str`, the string to use for OOV ids in `decode`.
+*   <b>`lowercase`</b>: `bool`, whether to make all text and tokens lowercase.
+*   <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text
+    into a list of tokens.
 
 ## Properties
 

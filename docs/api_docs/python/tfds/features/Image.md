@@ -34,24 +34,20 @@ Input: The image connector accepts as input:
   * path to a {bmp,gif,jpeg,png} image.
   * uint8 array representing an image.
 
-Output:
-  image: tf.Tensor of type tf.uint8 and shape [height, width, num_channels]
-  for BMP, JPEG, and PNG images and shape [num_frames, height, width, 3] for
-  GIF images.
+#### Output:
 
-Example:
-  * In the DatasetInfo object:
-    features=features.FeaturesDict({
-        'input': features.Image(),
-        'target': features.Image(shape=(None, None, 1),
-                                 encoding_format='png'),
-    })
+*   <b>`image`</b>: tf.Tensor of type tf.uint8 and shape [height, width,
+    num_channels] for BMP, JPEG, and PNG images and shape [num_frames, height,
+    width, 3] for GIF images.
 
-  * During generation:
-    yield {
-        'input': 'path/to/img.jpg',
-        'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
-    }
+#### Example:
+
+*   In the DatasetInfo object: features=features.FeaturesDict({ 'input':
+    features.Image(), 'target': features.Image(shape=(None, None, 1),
+    encoding_format='png'), })
+
+*   During generation: yield { 'input': 'path/to/img.jpg', 'target':
+    np.ones(shape=(64, 64, 1), dtype=np.uint8), }
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -66,17 +62,14 @@ Construct the connector.
 
 #### Args:
 
-* <b>`shape`</b>: tuple of ints or None, the shape of decoded image.
-    For GIF images: (num_frames, height, width, channels=3). num_frames,
-      height and width can be None.
-    For other images: (height, width, channels). height and width can be
-      None. See `tf.image.encode_*` for doc on channels parameter.
+*   <b>`shape`</b>: tuple of ints or None, the shape of decoded image. For GIF
+    images: (num_frames, height, width, channels=3). num_frames, height and
+    width can be None. For other images: (height, width, channels). height and
+    width can be None. See `tf.image.encode_*` for doc on channels parameter.
     Defaults to (None, None, 3).
-* <b>`encoding_format`</b>: 'jpeg' or 'png' (default). Format to serialize np.ndarray
-    images on disk.
-    If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
-    ignored, and file original encoding is used.
-
+*   <b>`encoding_format`</b>: 'jpeg' or 'png' (default). Format to serialize
+    np.ndarray images on disk. If image is loaded from {bmg,gif,jpeg,png} file,
+    this parameter is ignored, and file original encoding is used.
 
 #### Raises:
 

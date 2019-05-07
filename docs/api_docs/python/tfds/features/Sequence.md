@@ -30,7 +30,8 @@ Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/d
 
 <!-- Placeholder for "Used in" -->
 
-Ex:
+#### Ex:
+
 In `DatasetInfo`:
 
 ```
@@ -40,7 +41,7 @@ features=tfds.features.FeatureDict({
 })
 ```
 
-At generation time:
+#### At generation time:
 
 ```
 yield {
@@ -69,11 +70,12 @@ Construct a sequence from a specific feature.
 
 #### Args:
 
-* <b>`feature`</b>: <a href="../../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>, The feature to wrap as sequence
-* <b>`**kwargs`</b>: Same additional arguments as for <a href="../../tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>,
+*   <b>`feature`</b>:
+    <a href="../../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>,
+    The feature to wrap as sequence
+*   <b>`**kwargs`</b>: Same additional arguments as for
+    <a href="../../tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>,
     like `length`.
-
-
 
 ## Properties
 
@@ -161,9 +163,10 @@ will restore the feature metadata from the saved file.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -195,9 +198,7 @@ overwrite the function.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
-
-
-
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)

@@ -43,8 +43,9 @@ specified in the constructor using the `length` param.
 Note that `SequenceDict` do not support features which are of type
 `tf.io.FixedLenSequenceFeature` and do not support empty sequences.
 
-Example:
-At construction time:
+#### Example:
+
+#### At construction time:
 
 ```
 tfds.SequenceDict({

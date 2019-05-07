@@ -39,10 +39,8 @@ Constructs a TFRecordExampleAdapter.
 
 #### Args:
 
-* <b>`example_reading_spec`</b>: `dict`, feature name to tf.FixedLenFeature or
+*   <b>`example_reading_spec`</b>: `dict`, feature name to tf.FixedLenFeature or
     tf.VarLenFeature. Passed to tf.io.parse_single_example.
-
-
 
 ## Properties
 
