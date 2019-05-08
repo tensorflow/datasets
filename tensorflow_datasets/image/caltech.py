@@ -105,6 +105,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
     """
     # Sets random seed so the random partitioning of files is the same when
     # called for the train and test splits.
+    numpy_original_state = np.random.get_state()
     np.random.seed(1234)
 
     parent_dir = tf.io.gfile.listdir(images_dir_path)[0]
@@ -133,3 +134,5 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
                   "label": d.lower(),
                   "image/file_name": image_file,
               }
+    # Resets the seeds to their previous states.
+    np.random.set_state(numpy_original_state)
