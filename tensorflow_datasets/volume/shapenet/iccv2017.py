@@ -68,11 +68,50 @@ def load_class_names():
   return class_names, class_ids
 
 
+CLASS_NAMES, CLASS_IDS = load_class_names()
+
+
 class ShapenetPart2017Config(tfds.core.BuilderConfig):
+  def __init__(
+      self,
+      name_prefix="base",
+      version=core_utils.Version("0.0.1"),
+      description="point cloud segmentation dataset for iccv2017 challenge",
+      class_id=None):
+    if class_id is None:
+      self.class_index = None
+      self.class_id = None
+      self.class_name = None
+      name = name_prefix
+    else:
+      if isinstance(class_id, int):
+        self.class_name = class_names[class_id]
+        self.class_id = class_ids[class_id]
+        self.class_index = class_id
+      else:
+        class_id = class_id.lower()
+        for i, (name, id_) in enumerate(zip(CLASS_NAMES, CLASS_IDS)):
+          if class_id in (name.lower(), id_):
+            self.class_id = id_
+            self.class_name = name.lower()
+            self.class_index = i
+            break
+        else:
+          raise ValueError('Unrecognized class_id %s' % class_id)
+        name = '%s-%s' % (name_prefix, self.class_id)
+        description = '%s (%s)' % (description, self.class_name)
+    super(ShapenetPart2017Config, self).__init__(
+      name=name, version=version, description=description)
+
   @property
   def cloud_features(self):
+    if self.class_index is None:
+      num_part_classes = NUM_PART_CLASSES
+    else:
+      num_part_classes = (
+        LABEL_SPLITS[self.class_index+1] - LABEL_SPLITS[self.class_index])
     return tfds.features.SequenceDict({
-        "labels": tfds.features.ClassLabel(num_classes=NUM_PART_CLASSES),
+        "labels": tfds.features.ClassLabel(num_classes=num_part_classes),
         "positions": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
         "normals": tfds.features.Tensor(shape=(3,), dtype=tf.float32)
     })
@@ -81,9 +120,7 @@ class ShapenetPart2017Config(tfds.core.BuilderConfig):
     return cloud
 
 
-base_config = ShapenetPart2017Config(
-    name="base", version=core_utils.Version("0.0.1"),
-    description="base point cloud segmentation dataset for iccv2017 challenge")
+base_config = ShapenetPart2017Config()
 
 
 class ShapenetPart2017(tfds.core.GeneratorBasedBuilder):
@@ -93,9 +130,8 @@ class ShapenetPart2017(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [base_config]
 
   def _info(self):
-    _, class_ids = load_class_names()
     cloud = self.builder_config.cloud_features
-    label = tfds.features.ClassLabel(names=class_ids)
+    label = tfds.features.ClassLabel(names=CLASS_IDS)
     example_id = tfds.features.Text()
     features = tfds.features.FeaturesDict({
       "label": label,
@@ -134,10 +170,17 @@ class ShapenetPart2017(tfds.core.GeneratorBasedBuilder):
     return out
 
   def _generate_examples(self, split_path, data_dir):
+    config_class_id = self.builder_config.class_id
+    config_class_index = self.builder_config.class_index
+    label_offset = 0 if config_class_index is None else LABEL_SPLITS[
+      config_class_index]
+
     with tf.io.gfile.GFile(split_path, "rb") as fp:
       subpaths = json.load(fp)
     for subpath in subpaths:
       class_id, example_id = subpath.split("/")[1:]
+      if config_class_id is not None and class_id != config_class_id:
+        continue
       path = os.path.join(data_dir, class_id, "%s.txt" % example_id)
       with tf.io.gfile.GFile(path, "rb") as fp:
         data = np.loadtxt(fp, dtype=np.float32)
@@ -146,7 +189,7 @@ class ShapenetPart2017(tfds.core.GeneratorBasedBuilder):
         cloud=self.builder_config.map_cloud(dict(
             positions=positions,
             normals=normals,
-            labels=labels.astype(np.int64)
+            labels=labels.astype(np.int64) - label_offset
         )),
         label=class_id,
         example_id=example_id
