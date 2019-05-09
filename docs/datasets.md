@@ -2887,14 +2887,14 @@ Year      = {2014}}
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="emnist" />
-  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digitsderived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directlymatches the MNIST dataset." />
+  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#emnist" />
   <meta itemprop="sameAs" content="https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip" />
 </div>
 
 ### `"emnist"`
 
-The EMNIST dataset is a set of handwritten character digitsderived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directlymatches the MNIST dataset.
+The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.
 
 * URL: [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
 * `DatasetBuilder`: [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
