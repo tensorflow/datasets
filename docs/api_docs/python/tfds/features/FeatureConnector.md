@@ -44,8 +44,6 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
 
 <h3 id="decode_example"><code>decode_example</code></h3>
@@ -54,9 +52,10 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
-Decode the feature dict to TF compatible input. Note: If eager is not enabled,
-this function will be executed as a tensorflow graph (in
-`tf.data.Dataset.map(features.decode_example)`).
+Decode the feature dict to TF compatible input.
+
+Note: If eager is not enabled, this function will be executed as a tensorflow
+graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 #### Args:
 
@@ -77,6 +76,7 @@ encode_example(example_data)
 ```
 
 Encode the feature dict into tf-example compatible input.
+
 The input example_data can be anything that the user passed at data
 generation. For example:
 
@@ -125,8 +125,9 @@ yield {
 get_serialized_info()
 ```
 
-Return the shape/dtype of features after encoding (for the adapter). The
-`FileAdapter` then use those information to write data on disk.
+Return the shape/dtype of features after encoding (for the adapter).
+
+The `FileAdapter` then use those information to write data on disk.
 
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
@@ -162,6 +163,7 @@ get_tensor_info()
 ```
 
 Return the tf.Tensor dtype/shape of the feature.
+
 This returns the tensor dtype/shape, as returned by .as_dataset by the
 `tf.data.Dataset` object.
 
@@ -199,6 +201,7 @@ load_metadata(
 ```
 
 Restore the feature metadata from disk.
+
 If a dataset is re-loaded and generated files exists on disk, this function
 will restore the feature metadata from the saved file.
 
@@ -219,6 +222,7 @@ save_metadata(
 ```
 
 Save the feature metadata on disk.
+
 This function is called after the data has been generated (by
 `_download_and_prepare`) to save the feature connector info with the
 generated dataset.

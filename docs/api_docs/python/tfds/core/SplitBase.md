@@ -96,6 +96,7 @@ subsplit(
 ```
 
 Divides this split into subsplits.
+
 There are 3 ways to define subsplits, which correspond to the 3
 arguments `k` (get `k` even subsplits), `percent` (get a slice of the
 dataset with <a href="../../tfds/percent.md"><code>tfds.percent</code></a>), and `weighted` (get subsplits with proportions

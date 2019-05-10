@@ -99,8 +99,6 @@ The inner feature.
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
 
 <h3 id="__getattr__"><code>__getattr__</code></h3>
