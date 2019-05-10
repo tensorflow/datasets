@@ -35,11 +35,13 @@ LABEL_SPLITS = (
   50,
 )
 
+
 def part_class_indices(object_class_index):
   return range(
     LABEL_SPLITS[object_class_index],
     LABEL_SPLITS[object_class_index+1],
   )
+
 
 _CITATION = """\
 @article{yi2017large,
@@ -85,8 +87,8 @@ class ShapenetPart2017Config(tfds.core.BuilderConfig):
       name = name_prefix
     else:
       if isinstance(class_id, int):
-        self.class_name = class_names[class_id]
-        self.class_id = class_ids[class_id]
+        self.class_name = CLASS_NAMES[class_id]
+        self.class_id = CLASS_IDS[class_id]
         self.class_index = class_id
       else:
         class_id = class_id.lower()
@@ -98,8 +100,8 @@ class ShapenetPart2017Config(tfds.core.BuilderConfig):
             break
         else:
           raise ValueError('Unrecognized class_id %s' % class_id)
-        name = '%s-%s' % (name_prefix, self.class_id)
-        description = '%s (%s)' % (description, self.class_name)
+      name = '%s-%s' % (name_prefix, self.class_id)
+      description = '%s (%s)' % (description, self.class_name)
     super(ShapenetPart2017Config, self).__init__(
       name=name, version=version, description=description)
 
