@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.testing.FeatureExpectationsTestCase.failureException.__sizeof__", 
+  "current_doc_full_name": "tfds.testing.DatasetBuilderTestCase.assertEqual", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 

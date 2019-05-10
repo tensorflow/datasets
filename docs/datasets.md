@@ -10615,14 +10615,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Italian." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Maltese." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-Italian.
+Web-Scale Parallel Corpora for Official European Languages. English-Maltese.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -10632,11 +10632,35 @@ Web-Scale Parallel Corpora for Official European Languages. English-Italian.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
+*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sv, uses encoder plain_text.
+
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to nl, uses encoder plain_text.
+
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to da, uses encoder plain_text.
+
 *   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to hr, uses encoder plain_text.
 
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
+
 *   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to hu, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
+
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
+
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
+
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
 
 *   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to fi, uses encoder plain_text.
@@ -10647,59 +10671,62 @@ has the following configurations predefined (defaults to the first one):
 *   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to fr, uses encoder plain_text.
 
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
-
-*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to da, uses encoder plain_text.
-
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
-
-*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pt, uses encoder plain_text.
-
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
-
-*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
-
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
-
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
-
-*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ga, uses encoder plain_text.
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to et, uses encoder plain_text.
 
 *   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to es, uses encoder plain_text.
 
-*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to et, uses encoder plain_text.
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pt, uses encoder plain_text.
+
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ga, uses encoder plain_text.
+
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to it, uses encoder plain_text.
+
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pl, uses encoder plain_text.
 
 *   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to el, uses encoder plain_text.
 
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ro, uses encoder plain_text.
+
 *   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to cs, uses encoder plain_text.
-
-*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sv, uses encoder plain_text.
-
-*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
-
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
 
 *   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to mt, uses encoder plain_text.
 
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to it, uses encoder plain_text.
+#### `"para_crawl/ensv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ennl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enda_plain_text"`
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
 
 #### `"para_crawl/enhr_plain_text"`
 
@@ -10710,12 +10737,57 @@ Translation({
 })
 ```
 
+#### `"para_crawl/ende_plain_text"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
 #### `"para_crawl/enhu_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'hu': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensk_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sk': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10746,84 +10818,12 @@ Translation({
 })
 ```
 
-#### `"para_crawl/ende_plain_text"`
-
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enda_plain_text"`
-
-```python
-Translation({
-    'da': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ennl_plain_text"`
+#### `"para_crawl/enet_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'nl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enpt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enro_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ro': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enpl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enga_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ga': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10836,66 +10836,21 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enet_plain_text"`
+#### `"para_crawl/enpt_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'et': Text(shape=(), dtype=tf.string, encoder=None),
+    'pt': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enel_plain_text"`
-
-```python
-Translation({
-    'el': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/encs_plain_text"`
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensv_plain_text"`
+#### `"para_crawl/enga_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensk_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sk': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enmt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'mt': Text(shape=(), dtype=tf.string, encoder=None),
+    'ga': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10908,17 +10863,62 @@ Translation({
 })
 ```
 
+#### `"para_crawl/enpl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enel_plain_text"`
+
+```python
+Translation({
+    'el': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enro_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/encs_plain_text"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enmt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'mt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
 #### Statistics
 None computed
 
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-it.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-it.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-mt.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-mt.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
 
-`(u'en', u'it')`
+`(u'en', u'mt')`
 
 #### Citation
 ```
