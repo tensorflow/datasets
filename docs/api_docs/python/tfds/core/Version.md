@@ -31,19 +31,11 @@ __new__(
 )
 ```
 
-
-
-
-
 ## Properties
 
 <h3 id="major"><code>major</code></h3>
 
-
-
 <h3 id="minor"><code>minor</code></h3>
-
-
 
 <h3 id="patch"><code>patch</code></h3>
 

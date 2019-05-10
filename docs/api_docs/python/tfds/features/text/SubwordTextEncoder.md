@@ -53,6 +53,7 @@ __init__(vocab_list=None)
 ```
 
 Constructs a SubwordTextEncoder from a vocabulary list.
+
 Note: To generate a vocabulary from a corpus, use
 <a href="../../../tfds/features/text/SubwordTextEncoder.md#build_from_corpus"><code>tfds.features.text.SubwordTextEncoder.build_from_corpus</code></a>.
 
@@ -68,13 +69,7 @@ Note: To generate a vocabulary from a corpus, use
 
 <h3 id="subwords"><code>subwords</code></h3>
 
-
-
 <h3 id="vocab_size"><code>vocab_size</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -149,6 +144,3 @@ save_to_file(filename_prefix)
 ```
 
 Save the vocabulary to a file.
-
-
-
