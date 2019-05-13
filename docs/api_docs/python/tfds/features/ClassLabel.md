@@ -21,13 +21,16 @@
 
 ## Class `ClassLabel`
 
+`FeatureConnector` for integer class labels.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/class_label_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/class_label_feature.py).
 
-`FeatureConnector` for integer class labels.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -43,6 +46,7 @@ Constructs a ClassLabel FeatureConnector.
 
 There are 3 ways to define a ClassLabel, which correspond to the 3
 arguments:
+
  * `num_classes`: create 0 to (num_classes-1) labels
  * `names`: a list of label strings
  * `names_file`: a file containing the list of labels.
@@ -51,13 +55,12 @@ Note: On python2, the strings are encoded as utf-8.
 
 #### Args:
 
-* <b>`num_classes`</b>: `int`, number of classes. All labels must be < num_classes.
-* <b>`names`</b>: `list<str>`, string names for the integer classes. The
-    order in which the names are provided is kept.
-* <b>`names_file`</b>: `str`, path to a file with names for the integer
+*   <b>`num_classes`</b>: `int`, number of classes. All labels must be <
+    num_classes.
+*   <b>`names`</b>: `list<str>`, string names for the integer classes. The order
+    in which the names are provided is kept.
+*   <b>`names_file`</b>: `str`, path to a file with names for the integer
     classes, one per line.
-
-
 
 ## Properties
 
@@ -112,7 +115,7 @@ Return the tf-example features for the adapter, as stored on disk.
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
-Ex:
+#### Ex:
 
 ```
 return {
@@ -122,12 +125,8 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto
-directly:
-
-```
-return tf.FixedLenFeature((64, 64), tf.uint8)
-```
+FeatureConnector which are not containers should return the feature proto *
+<b>`directly`</b>: `return tf.FixedLenFeature((64, 64), tf.uint8)`
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.

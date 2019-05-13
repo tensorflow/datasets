@@ -5,11 +5,13 @@
 
 # Module: tfds.features
 
-
+<a href="../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>
+API defining feature types.
 
 Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/__init__.py).
 
-<a href="../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a> API defining feature types.
+<!-- Placeholder for "Used in" -->
+
 
 ## Modules
 
@@ -41,5 +43,5 @@ Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/
 
 [`class Text`](../tfds/features/Text.md): `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
-[`class Video`](../tfds/features/Video.md): `FeatureConnector` for videos, png-encoding frames on disk.
+[`class Video`](../tfds/features/Video.md): `FeatureConnector` for videos, encoding frames individually on disk.
 

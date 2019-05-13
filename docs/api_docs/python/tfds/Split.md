@@ -12,13 +12,11 @@
 
 ## Class `Split`
 
-
-
-
+`Enum` for dataset splits.
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
-`Enum` for dataset splits.
+<!-- Placeholder for "Used in" -->
 
 Datasets are typically split into different subsets to be used at various
 stages of training and evaluation.

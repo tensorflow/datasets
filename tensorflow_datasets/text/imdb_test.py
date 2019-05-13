@@ -28,6 +28,7 @@ class IMDBReviewsTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 5,
       "test": 4,
+      "unsupervised": 3,
   }
   DL_EXTRACT_RESULT = "aclImdb_v1.tar.gz"
 
