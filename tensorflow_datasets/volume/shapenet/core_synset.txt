@@ -1,0 +1,354 @@
+02691156	airplane,aeroplane,plane
+02690373	airliner
+03809312	narrowbody aircraft,narrow-body aircraft,narrow-body
+04583620	widebody aircraft,wide-body aircraft,wide-body,twin-aisle airplane
+02842573	biplane
+02867715	bomber
+03174079	delta wing
+03335030	fighter,fighter aircraft,attack aircraft
+03595860	jet,jet plane,jet-propelled plane
+03321419	fanjet,fan-jet,turbofan,turbojet
+03604311	jumbojet,jumbo jet
+04012084	propeller plane
+04160586	seaplane,hydroplane
+03373611	flying boat
+20000000	straight wing
+20000001	swept wing
+20000002	transport airplane
+02747177	ashcan,trash can,garbage can,wastebin,ash bin,ash-bin,ashbin,dustbin,trash barrel,trash bin
+02773838	bag,traveling bag,travelling bag,grip,suitcase
+03986949	portmanteau,Gladstone,Gladstone bag
+02801938	basket,handbasket
+03482405	hamper
+03050864	clothes hamper,laundry basket,clothes basket,voider
+04582349	wicker basket
+02808440	bathtub,bathing tub,bath,tub
+02818832	bed
+02831724	berth,bunk,built in bed
+02920083	bunk
+02920259	bunk bed,bunk
+03114504	cot,camp bed
+03115762	couch
+03388549	four-poster
+03482252	hammock,sack
+03962852	platform bed
+04222210	single bed
+03540914	hospital bed
+20000004	headboard beds
+20000005	headless beds
+20000006	king size beds
+20000007	misc beds
+02828884	bench
+03360622	flat bench
+03891251	park bench
+03920867	pew,church bench
+04177820	settle,settee
+04590021	window seat
+02834778	bicycle,bike,wheel,cycle
+02843684	birdhouse
+02871439	bookshelf
+02876657	bottle
+02823428	beer bottle
+03359566	flask
+02952374	canteen
+03603722	jug
+03923379	phial,vial,ampule,ampul,ampoule
+03983396	pop bottle,soda bottle
+04591713	wine bottle
+02880940	bowl
+04263257	soup bowl
+02924116	bus,autobus,coach,charabanc,double-decker,jitney,motorbus,motorcoach,omnibus,passenger vehi
+04146614	school bus
+04487081	trolleybus,trolley coach,trackless trolley
+02933112	cabinet
+03018349	china cabinet,china closet
+03237340	dresser
+03742115	medicine chest,medicine cabinet
+20000008	bed cabinet
+20000009	box cabinet
+20000010	desk cabinet
+20000011	garage cabinet
+20000012	tall cabinet
+20000013	two-door cabinet
+02942699	camera,photographic camera
+02884994	box camera,box Kodak
+03196062	digital camera
+04569063	webcam
+03358726	flash camera
+03789171	motion-picture camera,movie camera,cine-camera
+02946921	can,tin,tin can
+02823510	beer can
+04255586	soda can
+02954340	cap
+02799323	baseball cap,jockey cap,golf cap
+03049924	cloth cap,flat cap
+03610682	kepi,peaked cap,service cap,yachting cap
+04387095	tam,tam-o'-shanter,tammy
+02958343	car,auto,automobile,machine,motorcar
+02701002	ambulance
+02814533	beach wagon,station wagon,wagon,estate car,beach waggon,station waggon,waggon
+02930766	cab,hack,taxi,taxicab
+03100240	convertible
+03119396	coupe
+03141065	cruiser,police cruiser,patrol car,police car,prowl car,squad car
+03881534	panda car
+03498781	hatchback
+03543394	hot rod,hot-rod
+03594945	jeep,landrover
+03670208	limousine,limo
+03770679	minivan
+03870105	pace car
+04037443	racer,race car,racing car
+04322801	stock car
+04097373	roadster,runabout,two-seater
+04166281	sedan,saloon
+04285008	sports car,sport car
+04285965	sport utility,sport utility vehicle,S.U.V.,SUV
+04459122	touring car,phaeton,tourer
+03001627	chair
+02738535	armchair
+02957862	captain's chair
+03262932	easy chair,lounge chair,overstuffed chair
+04593077	wing chair
+03786621	Morris chair
+04062428	recliner,reclining chair,lounger
+03002210	chair of state
+04429376	throne
+03002711	chaise longue,chaise,daybed
+03260849	Eames chair
+03376595	folding chair
+02946270	camp chair
+03168217	deck chair,beach chair
+03632729	ladder-back,ladder-back chair
+03649674	lawn chair,garden chair
+04099969	rocking chair,rocker
+04331277	straight chair,side chair
+04590933	Windsor chair
+04373704	swivel chair
+04576002	wheelchair
+20000015	ball chair
+20000016	barcelona chair
+20000018	bean chair
+20000019	butterfly chair
+20000020	cantilever chair
+20000021	NO. 14 chair
+20000022	rex chair
+20000023	tulip chair
+20000024	wassily chair
+20000025	X chair
+20000026	zigzag chair
+20000027	club chair
+03046257	clock
+02694662	alarm clock,alarm
+03909406	pendulum clock
+03452594	grandfather clock,longcase clock
+04548280	wall clock
+03085013	computer keyboard,keypad
+03207941	dishwasher,dish washer,dishwashing machine
+03211117	display,video display
+03196598	digital display,alphanumeric display
+03676759	liquid crystal display,LCD
+03211616	display panel,display board,board
+03361380	flat panel display,FPD
+03782190	monitor,monitoring device
+03085219	computer monitor
+04152593	screen,CRT screen
+02769075	background,desktop,screen background
+03085602	computer screen,computer display
+03261776	earphone,earpiece,headphone,phone
+03325088	faucet,spigot
+03775636	mixing faucet
+04559451	water faucet,water tap,tap,hydrant
+03337140	file,file cabinet,filing cabinet
+04529681	vertical file
+03467517	guitar
+02676566	acoustic guitar
+03513137	helmet
+03379051	football helmet
+03492922	hard hat,tin hat,safety hat
+04265428	space helmet
+03593526	jar
+04522168	vase
+03624134	knife
+02812949	bayonet
+03158885	dagger,sticker
+03636649	lamp
+03367059	floor lamp
+04380533	table lamp
+03642806	laptop,laptop computer
+03691459	loudspeaker,speaker,speaker unit,loudspeaker system,speaker system
+04349401	subwoofer
+04502670	tweeter
+04599124	woofer
+03710193	mailbox,letter box
+03759954	microphone,mike
+03761084	microwave,microwave oven
+03790512	motorcycle,bike
+03769722	minibike,motorbike
+03785016	moped
+04466871	trail bike,dirt bike,scrambler
+03797390	mug
+02824058	beer mug,stein
+03063599	coffee mug
+03928116	piano,pianoforte,forte-piano
+03452741	grand piano,grand
+03086457	concert grand,concert piano
+04515003	upright,upright piano
+03938244	pillow
+03948459	pistol,handgun,side arm,shooting iron
+04086273	revolver,six-gun,six-shooter
+03991062	pot,flowerpot
+03957315	planter
+04004475	printer,printing machine
+03280644	electrostatic printer
+03643737	laser printer
+04074963	remote control,remote
+04090263	rifle
+02961451	carbine
+04250224	sniper rifle,precision rifle
+04099429	rocket,projectile
+03773504	missile
+02693413	air-to-air missile
+02781338	ballistic missile
+03466162	guided missile
+02929923	buzz bomb,robot bomb,flying bomb,doodlebug,V-1
+04363210	surface-to-air missile,SAM
+04225987	skateboard
+04256520	sofa,couch,lounge
+03100346	convertible,sofa bed
+03164605	davenport
+03015149	chesterfield
+04344873	studio couch,day bed
+03165096	daybed,divan bed
+03693474	love seat,loveseat,tete-a-tete,vis-a-vis
+04177755	settee
+20000028	double couch
+20000029	L-shaped couch
+20000030	leather couch
+04330267	stove
+04379243	table
+02699629	altar,communion table,Lord's table
+02874214	booth
+02894337	breakfast table
+02964075	card table
+02964196	card table
+03063968	coffee table,cocktail table
+03090000	conference table,council table,council board
+03092883	console table,console
+03116530	counter
+02789487	bar
+04255768	soda fountain
+04591631	wine bar
+03011741	checkout,checkout counter
+04061681	reception desk
+03179701	desk
+04164868	secretary,writing table,escritoire,secretaire
+04608329	writing desk
+03238586	dressing table,dresser,vanity,toilet table
+03246933	drop-leaf table
+03620967	kitchen table
+03850492	operating table
+03904060	pedestal table
+04436012	tilt-top table,tip-top table,tip table
+03982430	pool table,billiard table,snooker table
+04301000	stand
+03653583	lectern,reading desk
+04381587	table-tennis table,ping-pong table,pingpong table
+04398951	tea table
+04603729	worktable,work table
+03231368	drafting table,drawing table
+04600486	workbench,work bench,bench
+03630262	lab bench,laboratory bench
+20000036	cabinet table
+20000037	rectangular table
+20000038	round table
+20000039	short table
+20000040	side table
+20000041	workshop table
+04401088	telephone,phone,telephone set
+03179910	desk phone
+03488438	handset,French telephone
+04044498	radiotelephone,radiophone,wireless telephone
+02992529	cellular telephone,cellular phone,cellphone,cell,mobile phone
+04460130	tower
+02814860	beacon,lighthouse,beacon light,pharos
+02826886	bell tower
+03029197	church tower
+03047052	clock tower
+03519387	high-rise,tower block
+04028581	pylon,power pylon
+04206790	shot tower
+04220250	silo
+04312432	steeple,spire
+04361260	supporting tower
+04501947	turret
+04556948	watchtower
+03347617	fire tower
+04468005	train,railroad train
+02971579	car train
+03394480	freight train,rattler
+03896233	passenger train
+03078802	commuter,commuter train
+04349306	subway train
+04530566	vessel,watercraft
+02858304	boat
+02792552	barge,flatboat,hoy,lighter
+03545470	houseboat
+03981566	pontoon
+02947660	canal boat,narrow boat,narrowboat
+03329663	ferry,ferryboat
+03464628	guard boat
+03790230	motorboat,powerboat
+02932891	cabin cruiser,cruiser,pleasure boat,pleasure craft
+03859170	outboard motorboat,outboard
+04273569	speedboat
+03939178	pilot boat
+03977592	police boat
+04024983	punt
+04095210	river boat
+04158807	sea boat
+04244997	small boat
+02951358	canoe
+03254374	dugout canoe,dugout,pirogue
+03609235	kayak
+03199901	dinghy,dory,rowboat
+04115456	rowing boat
+04409128	tender,ship's boat,pinnace,cutter
+03351262	fishing boat,fishing smack,fishing vessel
+03900194	patrol boat,patrol ship
+04128837	sailing vessel,sailing ship
+02793199	bark,barque
+03045228	clipper,clipper ship
+04128499	sailboat,sailing boat
+02981792	catamaran
+04194289	ship
+02965300	cargo ship,cargo vessel
+03095699	container ship,containership,container vessel
+03845190	oil tanker,oiler,tanker,tank ship
+03541269	hospital ship
+03896103	passenger ship
+03673027	liner,ocean liner
+03141327	cruise ship,cruise liner
+03947888	pirate,pirate ship
+04146862	school ship,training ship
+04224543	sister ship
+04309348	steamer,steamship
+04409011	tender,supply ship
+04552696	warship,war vessel,combat ship
+02687172	aircraft carrier,carrier,flattop,attack aircraft carrier
+02956393	capital ship
+03140900	cruiser
+02811618	battle cruiser
+03180504	destroyer,guided missile destroyer
+03180732	destroyer escort
+03465151	guard ship
+03718212	man-of-war,ship of the line
+04348184	submersible,submersible warship
+04347754	submarine,pigboat,sub,U-boat
+02755529	attack submarine
+03811295	nautilus,nuclear submarine,nuclear-powered submarine
+04363082	surface ship
+04567746	weather ship
+04610013	yacht,racing yacht
+04554684	washer,automatic washer,washing machine
+04591713	wine bottle

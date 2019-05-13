@@ -7,5 +7,6 @@ from tensorflow_datasets.volume.modelnet import ModelnetAligned40
 from tensorflow_datasets.volume.modelnet import ModelnetSampled
 from tensorflow_datasets.volume.modelnet import ModelnetSampledConfig
 # from tensorflow_datasets.volume import shapenet
+from tensorflow_datasets.volume.shapenet import ShapenetCore
 from tensorflow_datasets.volume.shapenet import ShapenetPart2017
 from tensorflow_datasets.volume import utils
