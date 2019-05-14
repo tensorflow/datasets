@@ -34,8 +34,6 @@ from tensorflow_datasets.image import shapenet_r2n2 as sn
 import tensorflow_datasets.core.features.run_length_encoded_feature.rle.binvox as bv
 import tensorflow_datasets.core.features.run_length_encoded_feature.rle.np_impl as np_impl
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
 flags.DEFINE_string("compression", "zip", "compression to use for images")
 FLAGS = flags.FLAGS
 
@@ -47,7 +45,8 @@ N_EXAMPLES = 2
 
 def examples_dir():
   return os.path.join(
-      FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "shapenet_r2n2")
+      py_utils.tfds_dir(), "testing", "test_data", "fake_examples",
+      "shapenet_r2n2")
 
 
 def make_images(num_examples):
