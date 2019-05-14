@@ -34,16 +34,17 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import abc
 import collections
+import json
 import os
 import posixpath
 import pprint
 import tempfile
-from xml.etree import ElementTree
 
 from absl import logging
 import numpy as np
-import requests
+import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
@@ -51,20 +52,15 @@ from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.proto import dataset_info_pb2
-from google.protobuf import json_format
+from tensorflow_datasets.core.proto import json_format
+from tensorflow_datasets.core.utils import gcs_utils
+
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
-
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
-
 LICENSE_FILENAME = "LICENSE"
-
-# GCS
-GCS_URL = "http://storage.googleapis.com/tfds-data"
-GCS_BUCKET = "gs://tfds-data"
-GCS_DATASET_INFO_PATH = "dataset_info"
 
 INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
@@ -103,6 +99,7 @@ class DatasetInfo(object):
                supervised_keys=None,
                urls=None,
                citation=None,
+               metadata=None,
                redistribution_info=None):
     """Constructs DatasetInfo.
 
@@ -116,6 +113,9 @@ class DatasetInfo(object):
         supervised learning, if applicable for the dataset.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
+      metadata: `tfds.core.Metadata`, additonal object which will be
+        stored/restored with the dataset. This allows for storing additional
+        information with the dataset.
       redistribution_info: `dict`, optional, information needed for
         redistribution, as specified in `dataset_info_pb2.RedistributionInfo`.
         The content of the `license` subfield will automatically be written to a
@@ -140,6 +140,12 @@ class DatasetInfo(object):
       assert len(supervised_keys) == 2
       self._info_proto.supervised_keys.input = supervised_keys[0]
       self._info_proto.supervised_keys.output = supervised_keys[1]
+
+    if metadata and not isinstance(metadata, Metadata):
+      raise ValueError(
+          "Metadata should be a `tfds.core.Metadata` instance. Received "
+          "{}".format(metadata))
+    self._metadata = metadata
 
     # Is this object initialized with both the static and the dynamic data?
     self._fully_initialized = False
@@ -184,6 +190,10 @@ class DatasetInfo(object):
   @property
   def features(self):
     return self._features
+
+  @property
+  def metadata(self):
+    return self._metadata
 
   @property
   def supervised_keys(self):
@@ -238,23 +248,14 @@ class DatasetInfo(object):
     return self.as_proto.location.urls
 
   @property
-  def download_checksums(self):
-    return self.as_proto.download_checksums
-
-  @download_checksums.setter
-  def download_checksums(self, checksums):
-    self.as_proto.download_checksums.clear()
-    self.as_proto.download_checksums.update(checksums)
-
-  @property
   def initialized(self):
     """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized
 
-  def _dataset_info_filename(self, dataset_info_dir):
+  def _dataset_info_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
-  def _license_filename(self, dataset_info_dir):
+  def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
   def compute_dynamic_properties(self):
@@ -302,13 +303,15 @@ class DatasetInfo(object):
     if self.features:
       self.features.save_metadata(dataset_info_dir)
 
+    # Save any additional metadata
+    if self.metadata is not None:
+      self.metadata.save_metadata(dataset_info_dir)
+
     if self.redistribution_info.license:
-      with tf.io.gfile.GFile(self._license_filename(dataset_info_dir),
-                             "w") as f:
+      with tf.io.gfile.GFile(self._license_path(dataset_info_dir), "w") as f:
         f.write(self.redistribution_info.license)
 
-    with tf.io.gfile.GFile(self._dataset_info_filename(dataset_info_dir),
-                           "w") as f:
+    with tf.io.gfile.GFile(self._dataset_info_path(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir):
@@ -327,7 +330,7 @@ class DatasetInfo(object):
       raise ValueError(
           "Calling read_from_directory with undefined dataset_info_dir.")
 
-    json_filename = self._dataset_info_filename(dataset_info_dir)
+    json_filename = self._dataset_info_path(dataset_info_dir)
 
     # Load the metadata from disk
     parsed_proto = read_from_json(json_filename)
@@ -338,6 +341,9 @@ class DatasetInfo(object):
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
+
+    if self.metadata is not None:
+      self.metadata.load_metadata(dataset_info_dir)
 
     # Update fields which are not defined in the code. This means that
     # the code will overwrite fields which are present in
@@ -386,14 +392,13 @@ class DatasetInfo(object):
     # In order to support Colab, we use the HTTP GCS API to access the metadata
     # files. They are copied locally and then loaded.
     tmp_dir = tempfile.mkdtemp("tfds")
-    data_files = gcs_dataset_files(self.full_name)
+    data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
-      logging.info("No GCS info files found for %s", self.full_name)
       return
     logging.info("Loading info from GCS for %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
-      download_gcs_file(fname, out_fname)
+      gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
   def __str__(self):
@@ -493,6 +498,11 @@ def get_dataset_feature_statistics(builder, split):
       feature_dtype = type(feature_np)
 
       if isinstance(feature_np, np.ndarray):
+        # If we have an empty array, then don't proceed further with computing
+        # statistics on it.
+        if feature_np.size == 0:
+          continue
+
         feature_dtype = feature_np.dtype.type
 
       feature_min, feature_max = None, None
@@ -577,33 +587,48 @@ def read_from_json(json_filename):
   return parsed_proto
 
 
-def download_gcs_file(path, out_fname=None):
-  """Download a file from GCS, optionally to a file."""
-  url = "/".join([GCS_URL, path])
-  stream = bool(out_fname)
-  resp = requests.get(url, stream=stream)
-  if not resp.ok:
-    raise ValueError("GCS bucket inaccessible")
-  if out_fname:
-    with tf.io.gfile.GFile(out_fname, "wb") as f:
-      for chunk in resp.iter_content(1024):
-        f.write(chunk)
-  else:
-    return resp.content
+@six.add_metaclass(abc.ABCMeta)
+class Metadata(dict):
+  """Abstract base class for DatasetInfo metadata container.
+
+  `builder.info.metadata` allows the dataset to expose additional general
+  information about the dataset which are not specific to a feature or
+  individual example.
+
+  To implement the interface, overwrite `save_metadata` and
+  `load_metadata`.
+
+  See `tfds.core.MetadataDict` for a simple implementation that acts as a
+  dict that saves data to/from a JSON file.
+  """
+
+  @abc.abstractmethod
+  def save_metadata(self, data_dir):
+    """Save the metadata."""
+    raise NotImplementedError()
+
+  @abc.abstractmethod
+  def load_metadata(self, data_dir):
+    """Restore the metadata."""
+    raise NotImplementedError()
 
 
-@utils.memoize()
-def gcs_files():
-  top_level_xml_str = download_gcs_file("")
-  xml_root = ElementTree.fromstring(top_level_xml_str)
-  filenames = [el[0].text for el in xml_root if el.tag.endswith("Contents")]
-  return filenames
+class MetadataDict(Metadata, dict):
+  """A `tfds.core.Metadata` object that acts as a `dict`.
 
+  By default, the metadata will be serialized as JSON.
+  """
 
-def gcs_dataset_files(dataset_dir):
-  """Return paths to GCS files in the given dataset directory."""
-  prefix = posixpath.join(GCS_DATASET_INFO_PATH, dataset_dir, "")
-  # Filter for this dataset
-  filenames = [el for el in gcs_files()
-               if el.startswith(prefix) and len(el) > len(prefix)]
-  return filenames
+  def _build_filepath(self, data_dir):
+    return os.path.join(data_dir, "metadata.json")
+
+  def save_metadata(self, data_dir):
+    """Save the metadata."""
+    with tf.io.gfile.GFile(self._build_filepath(data_dir), "w") as f:
+      json.dump(self, f)
+
+  def load_metadata(self, data_dir):
+    """Restore the metadata."""
+    self.clear()
+    with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
+      self.update(json.load(f))

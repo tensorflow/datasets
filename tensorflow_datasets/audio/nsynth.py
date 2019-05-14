@@ -115,6 +115,7 @@ class Nsynth(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns splits."""
     dl_urls = {
         split: _BASE_DOWNLOAD_PATH + "%s.tfrecord" % split for split in _SPLITS
     }

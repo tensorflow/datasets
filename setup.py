@@ -23,21 +23,29 @@ if '--nightly' in sys.argv:
   sys.argv.remove('--nightly')
 
 project_name = 'tensorflow-datasets'
-version = '1.0.1'
+
+# To enable importing version.py directly, we add its path to sys.path.
+version_path = os.path.join(
+    os.path.dirname(__file__), 'tensorflow_datasets')
+sys.path.append(version_path)
+from version import __version__  # pylint: disable=g-import-not-at-top
+
 if nightly:
   project_name = 'tfds-nightly'
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
-  version = '%s-dev%s' % (version, datestring)
+  __version__ += 'dev%s' % datestring
 
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
     'promise',
     'protobuf>=3.6.1',
+    'psutil',
     'requests',
     'six',
     'tensorflow-metadata',
@@ -47,6 +55,7 @@ REQUIRED_PKGS = [
 ]
 
 TESTS_REQUIRE = [
+    'apache-beam',
     'jupyter',
     'pytest',
 ]
@@ -70,18 +79,24 @@ DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/quickdraw_labels.txt',
+    'url_checksums/*',
 ]
 
 DATASET_EXTRAS = {
-    'librispeech': ['pydub'],  # and ffmpeg installed
+    # In alphabetical order
     'cats_vs_dogs': ['matplotlib'],
-    'svhn': ['scipy'],
     'colorectal_histology': ['Pillow'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
-        'opencv-python==3.4.0.14'
+        'opencv-python==3.4.0.14',
+        'scikit-image',
+        'scipy'
     ],
+    'groove': ['pretty_midi', 'pydub'],
+    'librispeech': ['pydub'],  # and ffmpeg installed
+    'svhn': ['scipy'],
+    'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
 all_dataset_extras = []
@@ -89,15 +104,16 @@ for deps in DATASET_EXTRAS.values():
   all_dataset_extras.extend(deps)
 
 EXTRAS_REQUIRE = {
-    'tensorflow': ['tensorflow>=1.12.0'],
-    'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
+    'apache-beam': ['apache-beam'],
+    'tensorflow': ['tensorflow>=1.13.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.13.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 
 setup(
     name=project_name,
-    version=version,
+    version=__version__,
     description=DOCLINES[0],
     long_description='\n'.join(DOCLINES[2:]),
     author='Google Inc.',

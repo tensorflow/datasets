@@ -43,7 +43,6 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
       'train-annotations-bbox': 'train-annotations-bbox.csv',
       'test-annotations-bbox': 'test-annotations-bbox.csv',
       'validation-annotations-bbox': 'validation-annotations-bbox.csv',
-      'class_descriptions': 'class_descriptions.csv',
   }
 
 

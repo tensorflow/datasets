@@ -1,0 +1,2 @@
+http://pjreddie.com/media/files/VOCtest_06-Nov-2007.tar 451020800 6836888e2e01dca84577a849d339fa4f73e1e4f135d312430c4856b5609b4892
+http://pjreddie.com/media/files/VOCtrainval_06-Nov-2007.tar 460032000 7d8cd951101b0957ddfd7a530bdc8a94f06121cfc1e511bb5937e973020c7508

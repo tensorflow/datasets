@@ -33,11 +33,13 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
+from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import gcs_utils
 
 import termcolor
 
@@ -45,6 +47,13 @@ import termcolor
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
 REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
+
+GCS_HOSTED_MSG = """\
+Dataset {name} is hosted on GCS. You can skip download_and_prepare by setting
+data_dir=gs://tfds-data/datasets. If you find
+that read performance is slow, copy the data locally with gsutil:
+gsutil -m cp -R {gcs_path} {local_data_dir_no_version}
+"""
 
 
 class BuilderConfig(object):
@@ -131,7 +140,7 @@ class DatasetBuilder(object):
 
 
   @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None, config=None):
+  def __init__(self, data_dir=None, config=None, version=None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -142,16 +151,23 @@ class DatasetBuilder(object):
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
+      version: `str`. Optional version at which to load the dataset. An error is
+        raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
+        Note that only the currently defined version can be loaded.
     """
     self._builder_config = self._create_builder_config(config)
     # Extract code version (VERSION or config)
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
-          "DatasetBuilder {} does not have defined version. Please add a "
-          "`VERSION = tfds.Version('x.y.z')` to the class.".format(
+          "DatasetBuilder {} does not have a defined version. Please add a "
+          "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
               self.name))
     self._version = utils.Version(
         self._builder_config and self._builder_config.version or self.VERSION)
+    if version and not self._version.match(version):
+      msg = "Dataset {} cannot be loaded at version {}, only {}.".format(
+          self.name, version, self._version)
+      raise AssertionError(msg)
     self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
     self._data_dir = self._build_data_dir()
     if tf.io.gfile.exists(self._data_dir):
@@ -160,6 +176,10 @@ class DatasetBuilder(object):
     else:  # Use the code version (do not restore data)
       logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
+
+  @property
+  def data_dir(self):
+    return self._data_dir
 
   @utils.memoized_property
   def info(self):
@@ -185,14 +205,20 @@ class DatasetBuilder(object):
         Defaults to "~/tensorflow-datasets/downloads".
       download_config: `tfds.download.DownloadConfig`, further configuration for
         downloading and preparing dataset.
+
+    Raises:
+      IOError: if there is not enough disk space available.
     """
 
     download_config = download_config or download.DownloadConfig()
     data_exists = tf.io.gfile.exists(self._data_dir)
-    if (data_exists and
-        download_config.download_mode == REUSE_DATASET_IF_EXISTS):
+    if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
+
+    # Data may exist on GCS
+    if not data_exists:
+      self._maybe_log_gcs_data_dir()
 
     dl_manager = self._make_download_manager(
         download_dir=download_dir,
@@ -208,6 +234,10 @@ class DatasetBuilder(object):
           "please update the version number.".format(self.name, self._data_dir,
                                                      self.info.version))
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
+    if not utils.has_sufficient_disk_space(
+        self.info.size_in_bytes, directory=self._data_dir_root):
+      raise IOError("Not enough disk space. Needed: %s" %
+                    units.size_str(self.info.size_in_bytes))
     self._log_download_bytes()
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
@@ -217,7 +247,7 @@ class DatasetBuilder(object):
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
         self._download_and_prepare(
             dl_manager=dl_manager,
-            max_examples_per_split=download_config.max_examples_per_split)
+            download_config=download_config)
 
         # NOTE: If modifying the lines below to put additional information in
         # DatasetInfo, you'll likely also want to update
@@ -235,11 +265,10 @@ class DatasetBuilder(object):
         else:  # Mode is forced or stats do not exists yet
           logging.info("Computing statistics.")
           self.info.compute_dynamic_properties()
-        # Set checksums of downloaded (or cached) files, and size:
-        self.info.download_checksums = dl_manager.recorded_download_checksums
-        self.info.size_in_bytes = sum(dl_manager.download_sizes.values())
+        self.info.size_in_bytes = dl_manager.downloaded_size
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)
+    self._log_download_done()
 
   @api_utils.disallow_positional_args
   def as_dataset(self,
@@ -335,17 +364,39 @@ class DatasetBuilder(object):
 
     if wants_full_dataset:
       return tf.data.experimental.get_single_element(dataset)
-    else:
-      return dataset
+    return dataset
 
-  def _build_data_dir(self):
-    """Return the data directory for the current version."""
-    builder_data_dir = os.path.join(self._data_dir_root, self.name)
+  def _maybe_log_gcs_data_dir(self):
+    """If data is on GCS, set _data_dir to GCS path."""
+    if not gcs_utils.is_dataset_on_gcs(self.info.full_name):
+      return
+
+    gcs_path = os.path.join(constants.GCS_DATA_DIR, self.info.full_name)
+    msg = GCS_HOSTED_MSG.format(
+        name=self.name,
+        gcs_path=gcs_path,
+        local_data_dir_no_version=os.path.split(self._data_dir)[0])
+    logging.info(msg)
+
+  def _relative_data_dir(self, with_version=True):
+    """Relative path of this dataset in data_dir."""
+    builder_data_dir = self.name
     builder_config = self._builder_config
     if builder_config:
       builder_data_dir = os.path.join(builder_data_dir, builder_config.name)
+    if not with_version:
+      return builder_data_dir
+
     version = self._version
     version_data_dir = os.path.join(builder_data_dir, str(version))
+    return version_data_dir
+
+  def _build_data_dir(self):
+    """Return the data directory for the current version."""
+    builder_data_dir = os.path.join(
+        self._data_dir_root, self._relative_data_dir(with_version=False))
+    version_data_dir = os.path.join(
+        self._data_dir_root, self._relative_data_dir(with_version=True))
 
     def _other_versions_on_disk():
       """Returns previous versions on disk."""
@@ -378,13 +429,21 @@ class DatasetBuilder(object):
 
     return version_data_dir
 
+  def _log_download_done(self):
+    msg = ("Dataset {name} downloaded and prepared to {data_dir}. "
+           "Subsequent calls will reuse this data.").format(
+               name=self.name,
+               data_dir=self._data_dir,
+           )
+    termcolor.cprint(msg, attrs=["bold"])
+
   def _log_download_bytes(self):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
     size_text = units.size_str(self.info.size_in_bytes)
     termcolor.cprint(
-        "Downloading / extracting dataset %s (%s) to %s..." %
+        "Downloading and preparing dataset %s (%s) to %s..." %
         (self.name, size_text, self._data_dir),
         attrs=["bold"])
     # TODO(tfds): Should try to estimate the available free disk space (if
@@ -403,7 +462,7 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _download_and_prepare(self, dl_manager, max_examples_per_split=None):
+  def _download_and_prepare(self, dl_manager, download_config=None):
     """Downloads and prepares dataset for reading.
 
     This is the internal implementation to overwrite called when user calls
@@ -413,8 +472,7 @@ class DatasetBuilder(object):
     Args:
       dl_manager: (DownloadManager) `DownloadManager` used to download and cache
         data.
-      max_examples_per_split: `int`, optional max number of examples to write
-        into each split (use for testing).
+      download_config: `DownloadConfig`, Additional options.
     """
     raise NotImplementedError
 
@@ -447,12 +505,12 @@ class DatasetBuilder(object):
 
     return download.DownloadManager(
         dataset_name=self.name,
-        checksums=self.info.download_checksums,
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
+        register_checksums=download_config.register_checksums,
     )
 
   @property
@@ -467,7 +525,7 @@ class DatasetBuilder(object):
       logging.info("No config specified, defaulting to first: %s/%s", self.name,
                    builder_config.name)
     if not builder_config:
-      return
+      return None
     if isinstance(builder_config, six.string_types):
       name = builder_config
       builder_config = self.builder_configs.get(name)
@@ -505,35 +563,17 @@ class DatasetBuilder(object):
     return config_dict
 
 
-class GeneratorBasedBuilder(DatasetBuilder):
-  """Base class for datasets with data generation based on dict generators.
-
-  `GeneratorBasedBuilder` is a convenience class that abstracts away much
-  of the data writing and reading of `DatasetBuilder`. It expects subclasses to
-  implement generators of feature dictionaries across the dataset splits
-  (`_split_generators`) and to specify a file type
-  (`_file_format_adapter`). See the method docstrings for details.
-
-  Minimally, subclasses must override `_split_generators` and
-  `_file_format_adapter`.
+class FileAdapterBuilder(DatasetBuilder):
+  """Base class for datasets with data generation based on file adapter.
 
   `FileFormatAdapter`s are defined in
   `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
   feature dictionaries yielded by example generators. See the class docstrings.
   """
 
-  @api_utils.disallow_positional_args
-  def __init__(self, **kwargs):
-    """Builder constructor.
-
-    Args:
-      **kwargs: Constructor kwargs forwarded to DatasetBuilder
-    """
-    super(GeneratorBasedBuilder, self).__init__(**kwargs)
-
   @utils.memoized_property
   def _file_format_adapter(self):
-    # Load the format adapter (CSV, TF-Record,...)
+    # Load the format adapter (TF-Record,...)
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
     serialized_info = self.info.features.get_serialized_info()
     return file_adapter_cls(serialized_info)
@@ -606,45 +646,19 @@ class GeneratorBasedBuilder(DatasetBuilder):
     raise NotImplementedError()
 
   @abc.abstractmethod
-  def _generate_examples(self, **kwargs):
-    """Default function generating examples for each `SplitGenerator`.
-
-    This function preprocess the examples from the raw data to the preprocessed
-    dataset files.
-    This function is called once for each `SplitGenerator` defined in
-    `_split_generators`. The examples yielded here will be written on
-    disk.
+  def _prepare_split(self, split_generator, **kwargs):
+    """Generate the examples and record them on disk.
 
     Args:
-      **kwargs: (dict) Arguments forwarded from the SplitGenerator.gen_kwargs
-
-    Yields:
-      example: (`dict<str feature_name, feature_value>`), a feature dictionary
-        ready to be encoded and written to disk. The example will be
-        encoded with `self.info.features.encode_example({...})`.
+      split_generator: `SplitGenerator`, Split generator to process
+      **kwargs: Additional kwargs forwarded from _download_and_prepare (ex:
+        beam pipeline)
     """
     raise NotImplementedError()
 
-  def _download_and_prepare(self, dl_manager, max_examples_per_split=None):
-    if max_examples_per_split is not None:
-      logging.warn("Splits capped at %s examples max.", max_examples_per_split)
+  def _download_and_prepare(self, dl_manager, **prepare_split_kwargs):
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)
-
-    # Generate the filenames and write the example on disk
-    def make_generator_fn(**kwargs):
-      """Returns generator_fn bound to **kwargs."""
-
-      def generator_fn():
-        for i, ex in enumerate(self._generate_examples(**kwargs)):
-          # Use the DatasetInfo FeaturesDict to encode the example. This allows
-          # the user's function to simply yield raw examples from the source
-          # data, which makes reusing it easier.
-          if max_examples_per_split and i >= max_examples_per_split:
-            break
-          yield self.info.features.encode_example(ex)
-
-      return generator_fn
 
     # Generating data for all splits
     split_dict = splits_lib.SplitDict()
@@ -661,13 +675,8 @@ class GeneratorBasedBuilder(DatasetBuilder):
         logging.info("Generating split %s", s.name)
         split_dict.add(s)
 
-      output_files = self._build_split_filenames(
-          split_info_list=split_generator.split_info_list,
-      )
-      self._file_format_adapter.write_from_generator(
-          make_generator_fn(**split_generator.gen_kwargs),
-          output_files,
-      )
+      # Prepare split will record examples associated to the split
+      self._prepare_split(split_generator, **prepare_split_kwargs)
 
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
@@ -699,14 +708,33 @@ class GeneratorBasedBuilder(DatasetBuilder):
     """Return the list of files and reading mask of the files to read."""
     instruction_dicts = []
     for sliced_split_info in list_sliced_split_info:
+      mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+
       # Compute filenames from the given split
-      for filepath in self._build_split_filenames(
+      filepaths = list(sorted(self._build_split_filenames(
           split_info_list=[sliced_split_info.split_info],
-      ):
-        mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+      )))
+
+      # Compute the offsets
+      if sliced_split_info.split_info.num_examples:
+        shard_id2num_examples = splits_lib.get_shard_id2num_examples(
+            sliced_split_info.split_info.num_shards,
+            sliced_split_info.split_info.num_examples,
+        )
+        mask_offsets = splits_lib.compute_mask_offsets(shard_id2num_examples)
+      else:
+        logging.warning(
+            "Statistics not present in the dataset. TFDS is not able to load "
+            "the total number of examples, so using the subsplit API may not "
+            "provide precise subsplits."
+        )
+        mask_offsets = [0] * len(filepaths)
+
+      for filepath, mask_offset in zip(filepaths, mask_offsets):
         instruction_dicts.append({
             "filepath": filepath,
             "mask": mask,
+            "mask_offset": mask_offset,
         })
     return instruction_dicts
 
@@ -735,3 +763,189 @@ class GeneratorBasedBuilder(DatasetBuilder):
           filetype_suffix=self._file_format_adapter.filetype_suffix,
       ))
     return filenames
+
+
+class GeneratorBasedBuilder(FileAdapterBuilder):
+  """Base class for datasets with data generation based on dict generators.
+
+  `GeneratorBasedBuilder` is a convenience class that abstracts away much
+  of the data writing and reading of `DatasetBuilder`. It expects subclasses to
+  implement generators of feature dictionaries across the dataset splits
+  (`_split_generators`) and to specify a file type
+  (`_file_format_adapter`). See the method docstrings for details.
+
+  `FileFormatAdapter`s are defined in
+  `tensorflow_datasets.core.file_format_adapter` and specify constraints on the
+  feature dictionaries yielded by example generators. See the class docstrings.
+  """
+
+  @abc.abstractmethod
+  def _generate_examples(self, **kwargs):
+    """Default function generating examples for each `SplitGenerator`.
+
+    This function preprocess the examples from the raw data to the preprocessed
+    dataset files.
+    This function is called once for each `SplitGenerator` defined in
+    `_split_generators`. The examples yielded here will be written on
+    disk.
+
+    Args:
+      **kwargs: (dict) Arguments forwarded from the SplitGenerator.gen_kwargs
+
+    Yields:
+      example: (`dict<str feature_name, feature_value>`), a feature dictionary
+        ready to be encoded and written to disk. The example will be
+        encoded with `self.info.features.encode_example({...})`.
+    """
+    raise NotImplementedError()
+
+  def _download_and_prepare(self, dl_manager, download_config):
+    # Extract max_examples_per_split and forward it to _prepare_split
+    super(GeneratorBasedBuilder, self)._download_and_prepare(
+        dl_manager=dl_manager,
+        max_examples_per_split=download_config.max_examples_per_split,
+    )
+
+  def _prepare_split(self, split_generator, max_examples_per_split):
+
+    if max_examples_per_split is not None:
+      logging.warn("Splits capped at %s examples max.",
+                   max_examples_per_split)
+
+    # Generate the filenames and write the example on disk
+    def make_generator_fn(**kwargs):
+      """Returns generator_fn bound to **kwargs."""
+
+      def generator_fn():
+        for i, ex in enumerate(self._generate_examples(**kwargs)):
+          # Use the DatasetInfo FeaturesDict to encode the example. This allows
+          # the user's function to simply yield raw examples from the source
+          # data, which makes reusing it easier.
+          if (max_examples_per_split and
+              i >= max_examples_per_split):
+            break
+          yield self.info.features.encode_example(ex)
+
+      return generator_fn
+
+    output_files = self._build_split_filenames(
+        split_info_list=split_generator.split_info_list,
+    )
+    self._file_format_adapter.write_from_generator(
+        make_generator_fn(**split_generator.gen_kwargs),
+        output_files,
+    )
+
+
+class BeamBasedBuilder(FileAdapterBuilder):
+  """Beam based Builder."""
+
+  @abc.abstractmethod
+  def _build_pcollection(self, pipeline, **kwargs):
+    """Build the beam pipeline examples for each `SplitGenerator`.
+
+    This function extracts examples from the raw data with parallel transforms
+    in a Beam pipeline. It is called once for each `SplitGenerator` defined in
+    `_split_generators`. The examples from the PCollection will be
+    encoded and written to disk.
+
+    Beam liquid sharding can be used by setting num_shards to `None` in the
+    `SplitGenerator`.
+
+    Warning: When running in a distributed setup, make sure that the data
+    which will be read (download_dir, manual_dir,...) and written (data_dir)
+    can be accessed by the workers jobs. The data should be located in a
+    shared filesystem, like GCS.
+
+    Example:
+
+    ```
+    def _build_pcollection(pipeline, extracted_dir):
+      return (
+          pipeline
+          | beam.Create(gfile.io.listdir(extracted_dir))
+          | beam.Map(_process_file)
+      )
+    ```
+
+    Args:
+      pipeline: `beam.Pipeline`, root Beam pipeline
+      **kwargs: Arguments forwarded from the SplitGenerator.gen_kwargs
+
+    Returns:
+      pcollection: `PCollection`, an Apache Beam PCollection containing the
+        example to send to `self.info.features.encode_example(...)`.
+    """
+    raise NotImplementedError()
+
+  def _download_and_prepare(self, dl_manager, download_config):
+    # Create the Beam pipeline and forward it to _prepare_split
+    beam = lazy_imports.lazy_imports.apache_beam
+
+    if not download_config.beam_runner and not download_config.beam_options:
+      raise ValueError(
+          "Trying to generate a dataset using Apache Beam, yet no Beam Runner "
+          "or PipelineOptions() has been provided. Please pass a "
+          "tfds.download.DownloadConfig(beam_runner=...) object to the "
+          "builder.download_and_prepare(download_config=...) method"
+      )
+
+    # Use a single pipeline for all splits
+    with beam.Pipeline(
+        runner=download_config.beam_runner,
+        options=download_config.beam_options,
+    ) as pipeline:
+      # TODO(tfds): Should eventually try to add support to
+      # download_config.max_examples_per_split
+      super(BeamBasedBuilder, self)._download_and_prepare(
+          dl_manager,
+          pipeline=pipeline,
+      )
+
+    # Update the number of shards for splits where liquid sharding were used.
+    split_dict = self.info.splits
+    for split_info in split_dict.values():
+      if not split_info.num_shards:
+        output_prefix = naming.filename_prefix_for_split(
+            self.name, split_info.name)
+        output_prefix = os.path.join(self._data_dir, output_prefix)
+        split_info.num_shards = len(tf.io.gfile.glob(output_prefix + "*"))
+    self.info.update_splits_if_different(split_dict)
+
+  def _prepare_split(self, split_generator, pipeline):
+    beam = lazy_imports.lazy_imports.apache_beam
+
+    if not tf.io.gfile.exists(self._data_dir):
+      tf.io.gfile.makedirs(self._data_dir)
+
+    if len(split_generator.split_info_list) > 1:
+      # Could support Shared-split PCollection, either with same behavior as
+      # GeneratorBasedBuilder, or by having each value be a tuple
+      # ('split_name', example_value) ? Or should we return three branched
+      # PCollections ? Should ask for user feedback
+      raise NotImplementedError("Shared-split PCollections not supported yet.")
+
+    split_info = split_generator.split_info_list[0]
+    output_prefix = naming.filename_prefix_for_split(
+        self.name, split_info.name)
+    output_prefix = os.path.join(self._data_dir, output_prefix)
+
+    # Note: We need to wrap the pipeline in a PTransform to avoid re-using the
+    # same label names for each split
+    @beam.ptransform_fn
+    def _build_pcollection(pipeline):
+      """PTransformation which build a single split."""
+      # Encode the PCollection
+      pcoll_examples = self._build_pcollection(
+          pipeline, **split_generator.gen_kwargs)
+      pcoll_examples |= "Encode" >> beam.Map(self.info.features.encode_example)
+
+      # Write the example to disk
+      return self._file_format_adapter.write_from_pcollection(
+          pcoll_examples,
+          file_path_prefix=output_prefix,
+          num_shards=split_info.num_shards,
+      )
+
+    # Add the PCollection to the pipeline
+    _ = pipeline | split_info.name >> _build_pcollection()   # pylint: disable=no-value-for-parameter

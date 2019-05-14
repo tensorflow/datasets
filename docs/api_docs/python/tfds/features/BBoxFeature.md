@@ -17,34 +17,36 @@
 
 ## Class `BBoxFeature`
 
+`FeatureConnector` for a normalized bounding box.
+
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 
 
 Defined in [`core/features/bounding_boxes.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py).
 
-`FeatureConnector` for a normalized bounding box.
+<!-- Placeholder for "Used in" -->
 
 Note: If you have multiple bounding boxes, you may want to wrap the feature
 inside a `tfds.feature.SequenceDict`.
 
-Input:
-  * <a href="../../tfds/features/BBox.md"><code>tfds.features.BBox</code></a> tuple.
+#### Input:
 
-Output:
-  bbox: tf.Tensor of type tf.float32 and shape [4,] which contains the
-    normalized coordinates of the bounding box [ymin, xmin, ymax, xmax]
+*   <a href="../../tfds/features/BBox.md"><code>tfds.features.BBox</code></a>
+    tuple.
 
-Example:
-  * In the DatasetInfo object:
-    features=features.FeatureDict({
-        'bbox': features.BBox(shape=(None, 64, 64, 3)),
-    })
+#### Output:
 
-  * During generation:
-    yield {
-        'input': tfds.feature.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
-    }
+*   <b>`bbox`</b>: tf.Tensor of type tf.float32 and shape [4,] which contains
+    the normalized coordinates of the bounding box [ymin, xmin, ymax, xmax]
+
+#### Example:
+
+*   In the DatasetInfo object: features=features.FeatureDict({ 'bbox':
+    features.BBox(shape=(None, 64, 64, 3)), })
+
+*   During generation: yield { 'input': tfds.feature.BBox(ymin=0.3, xmin=0.8,
+    ymax=0.5, xmax=1.0), }
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -101,7 +103,7 @@ Return the tf-example features for the adapter, as stored on disk.
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
-Ex:
+#### Ex:
 
 ```
 return {
@@ -111,12 +113,8 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto
-directly:
-
-```
-return tf.FixedLenFeature((64, 64), tf.uint8)
-```
+FeatureConnector which are not containers should return the feature proto *
+<b>`directly`</b>: `return tf.FixedLenFeature((64, 64), tf.uint8)`
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.
@@ -149,9 +147,10 @@ will restore the feature metadata from the saved file.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -183,9 +182,7 @@ overwrite the function.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeatureDict key)
-
-
-
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)

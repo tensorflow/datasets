@@ -12,13 +12,11 @@
 
 ## Class `Split`
 
-
-
-
+`Enum` for dataset splits.
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
-`Enum` for dataset splits.
+<!-- Placeholder for "Used in" -->
 
 Datasets are typically split into different subsets to be used at various
 stages of training and evaluation.
@@ -29,8 +27,8 @@ stages of training and evaluation.
   model architecture, etc.).
 * `TEST`: the testing data. This is the data to report metrics on. Typically
   you do not want to use this during model iteration as you may overfit to it.
-* `ALL`: Special value corresponding to all existing splits of a dataset
-  merged together
+* `ALL`: Special value, never defined by a dataset, but corresponding to all
+  defined splits of a dataset merged together.
 
 Note: All splits, including compositions inherit from <a href="../tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>
 

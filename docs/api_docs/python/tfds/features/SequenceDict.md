@@ -23,13 +23,15 @@
 
 ## Class `SequenceDict`
 
+Composite `FeatureConnector` for a `dict` where each value is a list.
+
 Inherits From: [`FeaturesDict`](../../tfds/features/FeaturesDict.md)
 
 
 
 Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
-Composite `FeatureConnector` for a `dict` where each value is a list.
+<!-- Placeholder for "Used in" -->
 
 `SequenceDict` correspond to sequence of `tfds.features.FeatureDict`. At
 generation time, a list for each of the sequence element is given. The output
@@ -41,8 +43,9 @@ specified in the constructor using the `length` param.
 Note that `SequenceDict` do not support features which are of type
 `tf.io.FixedLenSequenceFeature` and do not support empty sequences.
 
-Example:
-At construction time:
+#### Example:
+
+#### At construction time:
 
 ```
 tfds.SequenceDict({
@@ -54,10 +57,10 @@ tfds.SequenceDict({
 During data generation:
 
 ```
-yield self.info.encode_example({
+yield {
     'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
     'action': ['left', 'left', 'up', ...],
-})
+}
 ```
 
 Tensor returned by `.as_dataset()`:

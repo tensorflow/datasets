@@ -5,11 +5,12 @@
 
 # Module: tfds.testing
 
-
+Testing utilities.
 
 Defined in [`testing/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/__init__.py).
 
-Testing utilities.
+<!-- Placeholder for "Used in" -->
+
 
 ## Classes
 

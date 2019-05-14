@@ -15,11 +15,14 @@
 
 """API to define datasets."""
 
+from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
 
 from tensorflow_datasets.core.dataset_info import DatasetInfo
+from tensorflow_datasets.core.dataset_info import Metadata
+from tensorflow_datasets.core.dataset_info import MetadataDict
 
 from tensorflow_datasets.core.lazy_imports import lazy_imports
 
@@ -33,12 +36,15 @@ from tensorflow_datasets.core.utils import Version
 
 __all__ = [
     "lazy_imports",
+    "BeamBasedBuilder",
     "BuilderConfig",
     "DatasetBuilder",
     "GeneratorBasedBuilder",
     "get_tfds_path",
     "DatasetInfo",
     "NamedSplit",
+    "Metadata",
+    "MetadataDict",
     "SplitBase",
     "SplitDict",
     "SplitGenerator",

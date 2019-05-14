@@ -27,7 +27,8 @@ class DiabeticRetinopathyDetectionTest(testing.DatasetBuilderTestCase):
   SPLITS = {  # Expected number of examples on each split.
       "sample": 4,
       "train": 12,
-      "test": 12,
+      "validation": 6,
+      "test": 6,
   }
   OVERLAPPING_SPLITS = ["sample"]  # contains examples from other examples
 
