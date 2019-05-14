@@ -204,22 +204,29 @@ def run_in_graph_and_eager_modes(func=None,
 class FeatureExpectationsTestCase(SubTestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
-  def assertShapesCompatible(self, shape0, shape1):
-    """Similar to self.assertAllEqual(shape0, shape1) but works with `None`.
-
-    Passes if both shapes are None, or neither is `None` and shapes are
-    compatible according to `TensorShape.is_compatible_with`.
-
-    Required because of the following intended behaviour:
-    ```python
-    tf.TensorShape((5, 3)) == tf.TensorShape((5, 3))        # True
-    tf.TensorShape((None, 3)) == tf.TensorShape((None, 3))  # False
-    ```
-    """
+  def _assertShapesCompatible(self, shape0, shape1):
     self.assertEqual(shape0 is None, shape1 is None)
     if shape0 is not None:
       self.assertTrue(
         tf.TensorShape(shape0).is_compatible_with(tf.TensorShape(shape1)))
+
+  def assertShapesCompatible(self, shape0, shape1):
+      """Similar to self.assertAllEqual(shape0, shape1) but works with `None`.
+
+      Passes if both shapes are None, or neither is `None` and shapes are
+      compatible according to `TensorShape.is_compatible_with`.
+
+      Required because of the following intended behaviour:
+      ```python
+      tf.TensorShape((5, 3)) == tf.TensorShape((5, 3))        # True
+      tf.TensorShape((None, 3)) == tf.TensorShape((None, 3))  # False
+      ```
+      """
+      if isinstance(shape0, dict):
+        self.assertIsInstance(shape1, dict)
+        tf.nest.map_structure(self.assertShapesCompatible, shape0, shape1)
+      else:
+        self._assertShapesCompatible(shape0, shape1)
 
   @property
   def expectations(self):
