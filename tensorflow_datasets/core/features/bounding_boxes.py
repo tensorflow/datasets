@@ -33,7 +33,7 @@ class BBoxFeature(feature.Tensor):
   """`FeatureConnector` for a normalized bounding box.
 
   Note: If you have multiple bounding boxes, you may want to wrap the feature
-  inside a `tfds.feature.SequenceDict`.
+  inside a `tfds.feature.Sequence`.
 
   Input:
     * `tfds.features.BBox` tuple.

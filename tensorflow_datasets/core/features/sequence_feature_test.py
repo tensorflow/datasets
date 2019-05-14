@@ -32,7 +32,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
   def test_int(self):
 
     self.assertFeature(
-        feature=tfds.features.SequenceDict({
+        feature=tfds.features.Sequence({
             'int': tf.int32,
         }, length=3),
         shape={'int': (3,)},
@@ -69,7 +69,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
   def test_label(self):
 
     self.assertFeature(
-        feature=tfds.features.SequenceDict({
+        feature=tfds.features.Sequence({
             'label': tfds.features.ClassLabel(names=['left', 'right']),
         }, length=None),
         shape={'label': (None,)},
@@ -95,7 +95,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
   def test_nested(self):
 
     self.assertFeature(
-        feature=tfds.features.SequenceDict({
+        feature=tfds.features.Sequence({
             'a': tf.string,
             'b': {
                 'c': tfds.features.Tensor(shape=(4, 2), dtype=tf.int32),
@@ -177,7 +177,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
     imgs_stacked = np.stack(imgs)
 
     self.assertFeature(
-        feature=tfds.features.SequenceDict({
+        feature=tfds.features.Sequence({
             'image': tfds.features.Image(shape=(128, 100, 3)),
         }, length=None),
         shape={'image': (None, 128, 100, 3)},
@@ -269,6 +269,21 @@ class SequenceFeatureTest(testing.FeatureExpectationsTestCase):
         tfds.features.ClassLabel(names=['left', 'right']),
     )
     self.assertEqual(feature.names, ['left', 'right'])
+
+    feature = tfds.features.Sequence({
+        'label': tfds.features.ClassLabel(names=['left', 'right']),
+    })
+    self.assertEqual(feature['label'].names, ['left', 'right'])
+
+  def test_metadata(self):
+    feature = tfds.features.Sequence(tfds.features.ClassLabel(num_classes=2))
+    feature.feature.names = ['left', 'right']
+    with testing.tmp_dir() as tmp_dir:
+      feature.save_metadata(data_dir=tmp_dir, feature_name='test')
+
+      feature2 = tfds.features.Sequence(tfds.features.ClassLabel(num_classes=2))
+      feature2.load_metadata(data_dir=tmp_dir, feature_name='test')
+    self.assertEqual(feature2.feature.names, ['left', 'right'])
 
 
 if __name__ == '__main__':

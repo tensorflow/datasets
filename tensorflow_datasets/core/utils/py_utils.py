@@ -29,6 +29,7 @@ import os
 import sys
 import uuid
 
+import psutil
 import six
 import tensorflow as tf
 from tensorflow_datasets.core import constants
@@ -197,10 +198,19 @@ def as_proto_cls(proto_cls):
       """Base class simulating the protobuf."""
 
       def __init__(self, *args, **kwargs):
-        self.__proto = proto_cls(*args, **kwargs)
+        super(ProtoCls, self).__setattr__(
+            "_ProtoCls__proto",
+            proto_cls(*args, **kwargs),
+        )
 
       def __getattr__(self, attr_name):
         return getattr(self.__proto, attr_name)
+
+      def __setattr__(self, attr_name, new_value):
+        try:
+          return setattr(self.__proto, attr_name, new_value)
+        except AttributeError:
+          return super(ProtoCls, self).__setattr__(attr_name, new_value)
 
       def __eq__(self, other):
         return self.__proto, other.get_proto()
@@ -275,3 +285,11 @@ def rgetattr(obj, attr, *args):
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
   return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def has_sufficient_disk_space(needed_bytes, directory="."):
+  try:
+    free_bytes = psutil.disk_usage(os.path.abspath(directory)).free
+  except OSError:
+    return True
+  return needed_bytes < free_bytes

@@ -23,31 +23,33 @@
 
 ## Class `FeaturesDict`
 
+Composite `FeatureConnector`; each feature in `dict` has its own connector.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
-Composite `FeatureConnector`; each feature in `dict` has its own connector.
+<!-- Placeholder for "Used in" -->
 
 The encode/decode method of the spec feature will recursively encode/decode
 every sub-connector given on the constructor.
 Other features can inherit from this class and call super() in order to get
 nested container.
 
-Example:
+#### Example:
 
-For DatasetInfo:
+#### For DatasetInfo:
 
 ```
 features = tfds.features.FeaturesDict({
     'input': tfds.features.Image(),
-    'target': tf.int32,
+    'output': tf.int32,
 })
 ```
 
-At generation time:
+#### At generation time:
 
 ```
 for image, label in generate_examples:
@@ -70,7 +72,7 @@ features and the conversion to tf.train.Example. Indeed, the tf.train.Example
 proto do not support nested feature, while tf.data.Dataset does.
 But internal transformation should be invisible to the user.
 
-Example:
+#### Example:
 
 ```
 tfds.features.FeaturesDict({
@@ -110,7 +112,7 @@ feature_dict (dict): Dictionary containing the feature connectors of a
 
 #### Raises:
 
-* <b>`ValueError`</b>: If one of the given features is not recognised
+* <b>`ValueError`</b>: If one of the given features is not recognized
 
 
 

@@ -16,13 +16,11 @@
 
 ## Class `FeatureConnector`
 
-
-
-
+Abstract base class for feature types.
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
-Abstract base class for feature types.
+<!-- Placeholder for "Used in" -->
 
 This class provides an interface between the way the information is stored
 on disk, and the way it is presented to the user.
@@ -68,16 +66,15 @@ tensorflow graph (in `tf.data.Dataset.map(features.decode_examples)`).
 
 #### Args:
 
-* <b>`tfexample_data`</b>: Data or dictionary of data, as read by the tf-example
-    reader. It correspond to the `tf.Tensor()` (or dict of `tf.Tensor()`)
-    extracted from the `tf.train.Example`, matching the info defined in
-    `get_serialize_info()`.
-
+*   <b>`tfexample_data`</b>: Data or dictionary of data, as read by the
+    tf-example reader. It correspond to the `tf.Tensor()` (or dict of
+    `tf.Tensor()`) extracted from the `tf.train.Example`, matching the info
+    defined in `get_serialize_info()`.
 
 #### Returns:
 
-* <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the tf.data.Dataset
-    object
+*   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
+    tf.data.Dataset object
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -90,7 +87,7 @@ Encode the feature dict into tf-example compatible input.
 The input example_data can be anything that the user passed at data
 generation. For example:
 
-For features:
+#### For features:
 
 ```
 features={
@@ -108,28 +105,26 @@ yield {
 }
 ```
 
-Then:
+#### Then:
 
- * <a href="../../tfds/features/Image.md#encode_example"><code>tfds.features.Image.encode_example</code></a> will get `'path/to/img.png'` as
-   input
- * `tfds.features.CustomFeature.encode_example` will get `[123, 'str',
-   lambda x: x+1] as input
+*   <a href="../../tfds/features/Image.md#encode_example"><code>tfds.features.Image.encode_example</code></a>
+    will get `'path/to/img.png'` as input
+*   `tfds.features.CustomFeature.encode_example` will get `[123, 'str', lambda
+    x: x+1] as input
 
 #### Args:
 
-* <b>`example_data`</b>: Value or dictionary of values to convert into tf-example
-    compatible data.
-
+*   <b>`example_data`</b>: Value or dictionary of values to convert into
+    tf-example compatible data.
 
 #### Returns:
 
-* <b>`tfexample_data`</b>: Data or dictionary of data to write as tf-example. Data
-    can be a list or numpy array.
-    Note that numpy arrays are flattened so it's the feature connector
-    responsibility to reshape them in `decode_example()`.
-    Note that tf.train.Example only supports int64, float32 and string so
-    the data returned here should be integer, float or string. User type
-    can be restored in `decode_example()`.
+*   <b>`tfexample_data`</b>: Data or dictionary of data to write as tf-example.
+    Data can be a list or numpy array. Note that numpy arrays are flattened so
+    it's the feature connector responsibility to reshape them in
+    `decode_example()`. Note that tf.train.Example only supports int64, float32
+    and string so the data returned here should be integer, float or string.
+    User type can be restored in `decode_example()`.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
@@ -142,7 +137,7 @@ Return the tf-example features for the adapter, as stored on disk.
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
-Ex:
+#### Ex:
 
 ```
 return {
@@ -152,12 +147,8 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto
-directly:
-
-```
-return tf.FixedLenFeature((64, 64), tf.uint8)
-```
+FeatureConnector which are not containers should return the feature proto *
+<b>`directly`</b>: `return tf.FixedLenFeature((64, 64), tf.uint8)`
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.
@@ -177,7 +168,7 @@ Return the tf.Tensor dtype/shape of the feature.
 This returns the tensor dtype/shape, as returned by .as_dataset by the
 `tf.data.Dataset` object.
 
-Ex:
+#### Ex:
 
 ```
 return {
@@ -187,16 +178,15 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto
-directly:
-
-```
-return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
-```
+FeatureConnector which are not containers should return the feature proto *
+<b>`directly`</b>: `return tfds.features.TensorInfo(shape=(256, 256),
+dtype=tf.uint8)`
 
 #### Returns:
 
-* <b>`tensor_info`</b>: Either a dict of <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a> object, or a
+*   <b>`tensor_info`</b>: Either a dict of
+    <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>
+    object, or a
     <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
@@ -215,9 +205,10 @@ will restore the feature metadata from the saved file.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -249,9 +240,7 @@ overwrite the function.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
-
-
-
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)

@@ -5,7 +5,9 @@
 <meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getattr__"/>
+<meta itemprop="property" content="__getstate__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="__setstate__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -18,15 +20,18 @@
 
 ## Class `Sequence`
 
+Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
+
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 
 
 Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
-Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
+<!-- Placeholder for "Used in" -->
 
-Ex:
+#### Ex:
+
 In `DatasetInfo`:
 
 ```
@@ -36,7 +41,7 @@ features=tfds.features.FeatureDict({
 })
 ```
 
-At generation time:
+#### At generation time:
 
 ```
 yield {
@@ -65,11 +70,12 @@ Construct a sequence from a specific feature.
 
 #### Args:
 
-* <b>`feature`</b>: <a href="../../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>, The feature to wrap as sequence
-* <b>`**kwargs`</b>: Same additional arguments as for <a href="../../tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>,
+*   <b>`feature`</b>:
+    <a href="../../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>,
+    The feature to wrap as sequence
+*   <b>`**kwargs`</b>: Same additional arguments as for
+    <a href="../../tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>,
     like `length`.
-
-
 
 ## Properties
 
@@ -97,13 +103,25 @@ __getattr__(key)
 
 Allow to access the underlying attributes directly.
 
+<h3 id="__getstate__"><code>__getstate__</code></h3>
+
+```python
+__getstate__()
+```
+
+<h3 id="__setstate__"><code>__setstate__</code></h3>
+
+```python
+__setstate__(state)
+```
+
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 ``` python
 decode_example(tfexample_data)
 ```
 
-Wrapper arround SequenceDict.
+Wrapper around SequenceDict.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -111,7 +129,7 @@ Wrapper arround SequenceDict.
 encode_example(example_data)
 ```
 
-Wrapper arround SequenceDict.
+Wrapper around SequenceDict.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
@@ -145,9 +163,10 @@ will restore the feature metadata from the saved file.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
@@ -179,9 +198,7 @@ overwrite the function.
 
 #### Args:
 
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
-
-
-
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)

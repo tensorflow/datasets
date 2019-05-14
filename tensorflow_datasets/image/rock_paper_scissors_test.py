@@ -22,7 +22,7 @@ from __future__ import print_function
 from tensorflow_datasets.image import rock_paper_scissors
 import tensorflow_datasets.testing as tfds_test
 
-rock_paper_scissors._IMAGE_SHAPE = (None, None, 3)
+rock_paper_scissors._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access
 
 
 class RockPaperScissorsTest(tfds_test.DatasetBuilderTestCase):

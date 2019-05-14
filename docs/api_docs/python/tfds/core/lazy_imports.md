@@ -7,15 +7,13 @@
 
 ## Class `lazy_imports`
 
-
-
-
+Lazy importer for heavy dependencies.
 
 Defined in [`core/lazy_imports.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports.py).
 
-Lazy importer for heavy dependencies.
+<!-- Placeholder for "Used in" -->
 
 Some datasets require heavy dependencies for data generation. To allow for
-the default installation to remain lean, those heavy depdencies are
+the default installation to remain lean, those heavy dependencies are
 lazily imported here.
 

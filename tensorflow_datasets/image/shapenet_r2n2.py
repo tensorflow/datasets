@@ -215,7 +215,7 @@ class ShapenetR2n2(tfds.core.GeneratorBasedBuilder):
         example_id=tfds.features.Text(),
         voxels=tfds.features.BinaryRunLengthEncodedFeature(shape=VOXEL_SHAPE))
 
-    features["renderings"] = tfds.features.SequenceDict({
+    features["renderings"] = tfds.features.Sequence({
         "image": tfds.features.Image(shape=IMAGE_SHAPE),
         "meta": tfds.features.Tensor(shape=(5,), dtype=tf.float32)
     }, length=RENDERINGS_PER_EXAMPLE)

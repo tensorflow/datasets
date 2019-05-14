@@ -7,7 +7,7 @@
 
 ## Class `failureException`
 
-
+Assertion failed.
 
 ### Aliases:
 
@@ -15,5 +15,6 @@
 * Class `tfds.testing.FeatureExpectationsTestCase.failureException`
 * Class `tfds.testing.TestCase.failureException`
 
-Assertion failed.
+<!-- Placeholder for "Used in" -->
+
 

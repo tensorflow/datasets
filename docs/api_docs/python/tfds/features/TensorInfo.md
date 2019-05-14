@@ -10,13 +10,12 @@
 
 ## Class `TensorInfo`
 
-
-
-
+TensorInfo(shape, dtype)
 
 Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
-TensorInfo(shape, dtype)
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__new__"><code>__new__</code></h2>
 

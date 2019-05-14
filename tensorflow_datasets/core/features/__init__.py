@@ -30,7 +30,6 @@ from tensorflow_datasets.core.features.run_length_encoded_feature import ShapedT
 from tensorflow_datasets.core.features.run_length_encoded_feature import BinaryRunLengthEncodedFeature
 from tensorflow_datasets.core.features.run_length_encoded_feature import RunLengthEncodedFeature
 from tensorflow_datasets.core.features.sequence_feature import Sequence
-from tensorflow_datasets.core.features.sequence_feature import SequenceDict
 from tensorflow_datasets.core.features.text_feature import Text
 from tensorflow_datasets.core.features.translation_feature import Translation
 from tensorflow_datasets.core.features.translation_feature import TranslationVariableLanguages
@@ -43,15 +42,12 @@ __all__ = [
     "BBoxFeature",
     "BinaryRunLengthEncodedFeature",
     "ClassLabel",
-    "DynamicShapedTensor",
     "FeatureConnector",
     "FeaturesDict",
     "RunLengthEncodedFeature",
     "Tensor",
     "TensorInfo",
     "Sequence",
-    "SequenceDict",
-    "StaticShapedTensor",
     "Image",
     "Text",
     "Video",

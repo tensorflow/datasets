@@ -6,6 +6,8 @@
 <meta itemprop="property" content="NO_EXTRACT"/>
 <meta itemprop="property" content="TAR"/>
 <meta itemprop="property" content="TAR_GZ"/>
+<meta itemprop="property" content="TAR_GZ_STREAM"/>
+<meta itemprop="property" content="TAR_STREAM"/>
 <meta itemprop="property" content="ZIP"/>
 <meta itemprop="property" content="__members__"/>
 </div>
@@ -14,13 +16,12 @@
 
 ## Class `ExtractMethod`
 
-
-
-
+The extraction method to use to pre-process a downloaded file.
 
 Defined in [`core/download/resource.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py).
 
-The extraction method to use to pre-process a downloaded file.
+<!-- Placeholder for "Used in" -->
+
 
 ## Class Members
 
@@ -33,6 +34,10 @@ The extraction method to use to pre-process a downloaded file.
 <h3 id="TAR"><code>TAR</code></h3>
 
 <h3 id="TAR_GZ"><code>TAR_GZ</code></h3>
+
+<h3 id="TAR_GZ_STREAM"><code>TAR_GZ_STREAM</code></h3>
+
+<h3 id="TAR_STREAM"><code>TAR_STREAM</code></h3>
 
 <h3 id="ZIP"><code>ZIP</code></h3>
 
