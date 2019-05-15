@@ -36,7 +36,7 @@ _SUPER_GLUE_CITATION = """\
 }
 
 Note that each SuperGLUE dataset has its own citation. Please see the source to
-see the correct citation for each contained dataset."
+get the correct citation for each contained dataset.
 """
 
 _CB_DESCRIPTION = """\
@@ -73,6 +73,18 @@ the most, jumping from near random-chance performance (~56%) at the time of GLUE
 85% accuracy (Liu et al., 2019c) at the time of writing. Given the eight point gap with respect to
 human performance, however, the task is not yet solved by machines, and we expect the remaining
 gap to be difficult to close."""
+
+_MULTIRC_DESCRIPTION = """\
+The Multi-Sentence Reading Comprehension dataset (MultiRC, Khashabi et al., 2018)
+is a true/false question-answering task. Each example consists of a context paragraph, a question
+about that paragraph, and a list of possible answers to that question which must be labeled as true or
+false. Question-answering (QA) is a popular problem with many datasets. We use MultiRC because
+of a number of desirable properties: (i) each question can have multiple possible correct answers,
+so each question-answer pair must be evaluated independent of other pairs, (ii) the questions are
+designed such that answering each question requires drawing facts from multiple context sentences,
+and (iii) the question-answer pair format more closely matches the API of other SuperGLUE tasks
+than span-based extractive QA does. The paragraphs are drawn from seven domains including news,
+fiction, and historical text."""
 
 _WIC_DESCRIPTION = """\
 The Word-in-Context (WiC, Pilehvar and Camacho-Collados, 2019) dataset supports a word
@@ -159,6 +171,14 @@ _RTE_CITATION = """\
   year={2009}
 }"""
 
+_MULTIRC_CITATION = """\
+@inproceedings{MultiRC2018,
+    author = {Daniel Khashabi and Snigdha Chaturvedi and Michael Roth and Shyam Upadhyay and Dan Roth},
+    title = {Looking Beyond the Surface:A Challenge Set for Reading Comprehension over Multiple Sentences},
+    booktitle = {Proceedings of North American Chapter of the Association for Computational Linguistics (NAACL)},
+    year = {2018}
+}"""
+
 _WIC_CITATION = """\
 @article{DBLP:journals/corr/abs-1808-09121,
   author={Mohammad Taher Pilehvar and os{\'{e}} Camacho{-}Collados},
@@ -192,19 +212,19 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
                data_url,
                citation,
                url,
-               label_classes=("0", "1"),
+               label_classes=("False", "True"),
                **kwargs):
     """BuilderConfig for GLUE.
 
     Args:
       features: `list[string]`, list of the features that will appear in the
         feature dict. Should not include "label".
-      data_url: `string`, url to download the zip file from
-      citation: `string`, citation for the data set
-      url: `string`, url for information about the data set
+      data_url: `string`, url to download the zip file from.
+      citation: `string`, citation for the data set.
+      url: `string`, url for information about the data set.
       label_classes: `list[string]`, the list of classes for the label if the
         label is present as a string. Non-string labels will be cast to either
-        '0' or '1'.
+        'False' or 'True'.
       **kwargs: keyword arguments forwarded to super.
     """
     super(SuperGlueConfig, self).__init__(**kwargs)
@@ -237,7 +257,15 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/COPA.zip",
           citation=_COPA_CITATION,
           url="http://people.ict.usc.edu/~gordon/copa.html"),
-      # TODO(adarob): Add MultiRC.
+      SuperGlueConfig(
+          name="multirc",
+          version="0.0.1",
+          description=_MULTIRC_DESCRIPTION,
+          label_classes=["False", "True"],
+          features=["paragraph", "question", "answer"],
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/MultiRC.zip",
+          citation=_MULTIRC_CITATION,
+          url="https://cogcomp.org/multirc/"),
       SuperGlueConfig(
           name="rte",
           version="0.0.1",
@@ -279,16 +307,23 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.name == "wsc":
       features["span1_index"] = tf.int32
       features["span2_index"] = tf.int32
+    if self.builder_config.name == "multirc":
+      features["idx"] = tfds.features.FeaturesDict({
+          "paragraph": tf.int32,
+          "question": tf.int32,
+          "answer": tf.int32,
+      })
+    else:
+      features["idx"] = tf.int32
     features["label"] = tfds.features.ClassLabel(
         names=self.builder_config.label_classes)
-    features["idx"] = tf.int32
     return tfds.core.DatasetInfo(
         builder=self,
         description=self.builder_config.description,
         features=tfds.features.FeaturesDict(features),
         urls=[
             self.builder_config.url,
-            "https://gluebenchmark.com/",
+            "https://super.gluebenchmark.com/",
         ],
         citation=self.builder_config.citation + "\n" + _SUPER_GLUE_CITATION,
     )
@@ -321,28 +356,45 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
       for line in f:
         row = json.loads(line)
 
-        if self.builder_config.name == "wsc":
-          row.update(row["target"])
-
-        example = {
-            feature: row[feature] for feature in self.builder_config.features
-        }
-        example["idx"] = row["idx"]
-        if "label" in example:
-          example["label"] = _process_label(row["label"])
+        if self.builder_config.name == "multirc":
+          paragraph = row["paragraph"]
+          for question in paragraph["questions"]:
+            for answer in question["answers"]:
+              is_answer = answer.get("isAnswer")
+              yield {
+                  "paragraph": paragraph["text"],
+                  "question": question["question"],
+                  "answer": answer["text"],
+                  "label": -1 if is_answer is None else _cast_label(is_answer),
+                  "idx": {
+                      "paragraph": row["idx"],
+                      "question": question["idx"],
+                      "answer": answer["idx"]
+                  }
+              }
         else:
-          example["label"] = -1
+          if self.builder_config.name == "wsc":
+            row.update(row["target"])
+          example = {
+              feature: row[feature] for feature in self.builder_config.features
+          }
+          example["idx"] = row["idx"]
 
-        yield example
+          if "label" in example:
+            example["label"] = _cast_label(row["label"])
+          else:
+            example["label"] = -1
+
+          yield example
 
 
-def _process_label(label):
+def _cast_label(label):
   """Converts the label into the appropriate string version."""
   if isinstance(label, six.string_types):
     return label
-  elif isinstance(label, (int, long)):
+  elif isinstance(label, (int, six.integer_types)):
     return str(label)
   elif isinstance(label, bool):
-    return "1" if label else "0"
+    return "True" if label else "False"
   else:
     raise ValueError("Invalid label format.")

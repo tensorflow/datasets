@@ -51,6 +51,17 @@ class SuperGlueCopaTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SuperGlueMultiRcTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["multirc"]
+  DATASET_CLASS = super_glue.SuperGlue
+  EXAMPLE_DIR = os.path.join(_BASE_DIR, "MultiRC")
+  SPLITS = {
+      "train": 58,
+      "validation": 62,
+      "test": 58,
+  }
+
+
 class SuperGlueRteTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["rte"]
   DATASET_CLASS = super_glue.SuperGlue
