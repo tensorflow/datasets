@@ -34,8 +34,8 @@ cmaterdb.Cmaterdb.BUILDER_CONFIGS.append(
 class CmaterdbTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cmaterdb.Cmaterdb
   SPLITS = {
-      "train": 10,
-      "test": 2,
+      "train": 20,
+      "test": 10,
   }
   DL_EXTRACT_RESULT = [
       "training-images.npz",
