@@ -11,6 +11,8 @@
 *   <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
 *   <a href="./tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>
 *   <a href="./tfds/core/GeneratorBasedBuilder.md"><code>tfds.core.GeneratorBasedBuilder</code></a>
+*   <a href="./tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>
+*   <a href="./tfds/core/MetadataDict.md"><code>tfds.core.MetadataDict</code></a>
 *   <a href="./tfds/core/NamedSplit.md"><code>tfds.core.NamedSplit</code></a>
 *   <a href="./tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>
 *   <a href="./tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>

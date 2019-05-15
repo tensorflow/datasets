@@ -17,7 +17,7 @@ Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree
 
 <!-- Placeholder for "Used in" -->
 
-Mode can be:
+#### Mode can be:
 
 * AUTO: Compute the DatasetInfo dynamic fields only if they haven't been
   restored from GCS.

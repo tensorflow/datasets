@@ -38,9 +38,9 @@ every sub-connector given on the constructor.
 Other features can inherit from this class and call super() in order to get
 nested container.
 
-Example:
+#### Example:
 
-For DatasetInfo:
+#### For DatasetInfo:
 
 ```
 features = tfds.features.FeaturesDict({
@@ -49,7 +49,7 @@ features = tfds.features.FeaturesDict({
 })
 ```
 
-At generation time:
+#### At generation time:
 
 ```
 for image, label in generate_examples:
@@ -72,7 +72,7 @@ features and the conversion to tf.train.Example. Indeed, the tf.train.Example
 proto do not support nested feature, while tf.data.Dataset does.
 But internal transformation should be invisible to the user.
 
-Example:
+#### Example:
 
 ```
 tfds.features.FeaturesDict({

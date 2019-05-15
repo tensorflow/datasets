@@ -57,7 +57,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
     # metadata (action and position)
-    features = tfds.features.SequenceDict({
+    features = tfds.features.Sequence({
         "image_main": tfds.features.Image(shape=IMG_SHAPE),
         "image_aux1": tfds.features.Image(shape=IMG_SHAPE),
         "action": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
@@ -109,8 +109,8 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         all_frames = []
         for frame_id in range(FRAMES_PER_VIDEO):
           # Extract all features from the original proto context field
-          frame_feature = {
-              out_key: example.context.feature[in_key.format(frame_id)]
+          frame_feature = {   # pylint: disable=
+              out_key: example.context.feature[in_key.format(frame_id)]   # pylint: disable=g-complex-comprehension
               for out_key, in_key in [
                   ("image_main", "{}/image_main/encoded"),
                   ("image_aux1", "{}/image_aux1/encoded"),

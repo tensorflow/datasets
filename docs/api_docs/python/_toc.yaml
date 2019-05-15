@@ -38,6 +38,10 @@ toc:
       path: /datasets/api_docs/python/tfds/core/get_tfds_path
     - title: lazy_imports
       path: /datasets/api_docs/python/tfds/core/lazy_imports
+    - title: Metadata
+      path: /datasets/api_docs/python/tfds/core/Metadata
+    - title: MetadataDict
+      path: /datasets/api_docs/python/tfds/core/MetadataDict
     - title: NamedSplit
       path: /datasets/api_docs/python/tfds/core/NamedSplit
     - title: SplitBase

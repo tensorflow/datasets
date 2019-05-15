@@ -47,9 +47,9 @@ Write to files from generators_and_filenames.
 
 #### Args:
 
-* <b>`generator_fn`</b>: returns generator yielding dictionaries of feature name to
-    value.
-* <b>`output_files`</b>: `list<str>`, output files to write files to.
+*   <b>`generator_fn`</b>: returns generator yielding dictionaries of feature
+    name to value.
+*   <b>`output_files`</b>: `list<str>`, output files to write files to.
 
 <h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
 
@@ -65,10 +65,7 @@ Write the PCollection to file.
 
 #### Args:
 
-* <b>`pcollection`</b>: `beam.PCollection`, the PCollection containing the examples
-    to write.
-* <b>`file_path_prefix`</b>: `str`, output files to write files to.
-* <b>`num_shards`</b>: `int`,
-
-
-
+*   <b>`pcollection`</b>: `beam.PCollection`, the PCollection containing the
+    examples to write.
+*   <b>`file_path_prefix`</b>: `str`, output files to write files to.
+*   <b>`num_shards`</b>: `int`,

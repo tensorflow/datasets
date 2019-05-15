@@ -5,7 +5,6 @@
 <meta itemprop="property" content="__eq__"/>
 <meta itemprop="property" content="__getattr__"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="__setattr__"/>
 <meta itemprop="property" content="get_proto"/>
 </div>
 
@@ -57,14 +56,7 @@ __eq__(other)
 __getattr__(attr_name)
 ```
 
-<h3 id="__setattr__"><code>__setattr__</code></h3>
 
-```python
-__setattr__(
-    attr_name,
-    new_value
-)
-```
 
 <h3 id="get_proto"><code>get_proto</code></h3>
 

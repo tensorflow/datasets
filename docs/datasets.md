@@ -91,6 +91,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"para_crawl"`](#para_crawl)
     *   [`"ted_hrlr_translate"`](#ted_hrlr_translate)
     *   [`"ted_multi_translate"`](#ted_multi_translate)
+    *   [`"wmt14_translate"`](#wmt14_translate)
     *   [`"wmt15_translate"`](#wmt15_translate)
     *   [`"wmt16_translate"`](#wmt16_translate)
     *   [`"wmt17_translate"`](#wmt17_translate)
@@ -250,7 +251,6 @@ TEST       | 2,033
 *   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `None`
 
 #### Citation
@@ -638,11 +638,12 @@ Images are of variable sizes, with typical edge lengths of 200-300 pixels.
 This version contains image-level labels only. The original dataset also
 contains bounding boxes.
 
-
-* URL: [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
-* `DatasetBuilder`: [`tfds.image.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech.py)
-* Version: `v1.0.0`
-* Size: `125.64 MiB`
+*   URL:
+    [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
+*   `DatasetBuilder`:
+    [`tfds.image.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech.py)
+*   Version: `v1.1.0`
+*   Size: `125.64 MiB`
 
 #### Features
 ```python
@@ -653,13 +654,13 @@ FeaturesDict({
 })
 ```
 
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-TRAIN      |      9,144
-ALL        |      9,144
 
+Split | Examples
+:---- | -------:
+ALL   | 9,801
+TEST  | 6,741
+TRAIN | 3,060
 
 #### Urls
  * [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
@@ -4537,8 +4538,11 @@ and has the following configurations predefined (defaults to the first one):
 *   `"original"` (`v0.2.0`) (`Size: 565.11 GiB`): Images at their original
     resolution and quality.
 
-*   `"300k"` (`v0.2.0`) (`Size: 565.11 GiB`): Images have roughly 300,000
-    pixels, at 75 JPEG quality.
+*   `"300k"` (`v0.2.1`) (`Size: 565.11 GiB`): Images have roughly 300,000
+    pixels, at 72 JPEG quality.
+
+*   `"200k"` (`v0.2.1`) (`Size: 565.11 GiB`): Images have roughly 200,000
+    pixels, at 72 JPEG quality.
 
 #### `"open_images_v4/original"`
 
@@ -4570,6 +4574,35 @@ FeaturesDict({
 ```
 
 #### `"open_images_v4/300k"`
+
+```python
+FeaturesDict({
+    'bobjects': SequenceDict({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'objects': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': SequenceDict({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+})
+```
+
+#### `"open_images_v4/200k"`
 
 ```python
 FeaturesDict({
@@ -5674,12 +5707,12 @@ There are two features:
 `cnn_dailymail` is configured with `tfds.text.cnn_dailymail.CnnDailymailConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"plain_text"` (`v0.0.2`) (`Size: ?? GiB`): Plain text
+*   `"plain_text"` (`v0.0.2`) (`Size: 558.32 MiB`): Plain text
 
-*   `"bytes"` (`v0.0.2`) (`Size: ?? GiB`): Uses byte-level text encoding with
-    `tfds.features.text.ByteTextEncoder`
+*   `"bytes"` (`v0.0.2`) (`Size: 558.32 MiB`): Uses byte-level text encoding
+    with `tfds.features.text.ByteTextEncoder`
 
-*   `"subwords32k"` (`v0.0.2`) (`Size: ?? GiB`): Uses
+*   `"subwords32k"` (`v0.0.2`) (`Size: 558.32 MiB`): Uses
     `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 #### `"cnn_dailymail/plain_text"`
@@ -5708,14 +5741,19 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'article': Text(shape=(), dtype=tf.string, encoder=None),
-    'highlights': Text(shape=(), dtype=tf.string, encoder=None),
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
 })
 ```
 
 #### Statistics
 
-None computed
+Split      | Examples
+:--------- | -------:
+ALL        | 311,971
+TRAIN      | 287,113
+VALIDATION | 13,368
+TEST       | 11,490
 
 #### Urls
  * [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
@@ -10577,14 +10615,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-German." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Slovak." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-German.
+Web-Scale Parallel Corpora for Official European Languages. English-Slovak.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -10594,8 +10632,11 @@ Web-Scale Parallel Corpora for Official European Languages. English-German.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
+
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to da, uses encoder plain_text.
 
 *   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to pt, uses encoder plain_text.
@@ -10603,14 +10644,26 @@ has the following configurations predefined (defaults to the first one):
 *   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to it, uses encoder plain_text.
 
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ga, uses encoder plain_text.
 
 *   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to mt, uses encoder plain_text.
 
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ro, uses encoder plain_text.
+
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pl, uses encoder plain_text.
+
+*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to el, uses encoder plain_text.
+
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to bg, uses encoder plain_text.
+
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to cs, uses encoder plain_text.
 
 *   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to et, uses encoder plain_text.
@@ -10618,57 +10671,51 @@ has the following configurations predefined (defaults to the first one):
 *   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to es, uses encoder plain_text.
 
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
-
-*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to cs, uses encoder plain_text.
-
-*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ga, uses encoder plain_text.
-
-*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to el, uses encoder plain_text.
-
-*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
-
-*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
-
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
-
-*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hu, uses encoder plain_text.
-
-*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
-
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to bg, uses encoder plain_text.
-
 *   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to sv, uses encoder plain_text.
+
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to nl, uses encoder plain_text.
 
 *   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to fr, uses encoder plain_text.
 
-*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to da, uses encoder plain_text.
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
+
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hu, uses encoder plain_text.
+
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
+
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
 
 *   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to fi, uses encoder plain_text.
 
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
 
-#### `"para_crawl/enro_plain_text"`
+#### `"para_crawl/ende_plain_text"`
 
 ```python
 Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enda_plain_text"`
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10690,12 +10737,12 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enpl_plain_text"`
+#### `"para_crawl/enga_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+    'ga': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10708,12 +10755,48 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enlv_plain_text"`
+#### `"para_crawl/enro_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enel_plain_text"`
+
+```python
+Translation({
+    'el': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/encs_plain_text"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10735,102 +10818,21 @@ Translation({
 })
 ```
 
-#### `"para_crawl/ennl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'nl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/encs_plain_text"`
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enga_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ga': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enel_plain_text"`
-
-```python
-Translation({
-    'el': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensk_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sk': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhu_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hu': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hr': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enbg_plain_text"`
-
-```python
-Translation({
-    'bg': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
 #### `"para_crawl/ensv_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'sv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ennl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10843,12 +10845,48 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enda_plain_text"`
+#### `"para_crawl/enhr_plain_text"`
 
 ```python
 Translation({
-    'da': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhu_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hu': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sl': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10861,12 +10899,12 @@ Translation({
 })
 ```
 
-#### `"para_crawl/ende_plain_text"`
+#### `"para_crawl/ensk_plain_text"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sk': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10876,11 +10914,11 @@ None computed
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-de.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-de.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sk.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sk.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
 
-`(u'en', u'de')`
+`(u'en', u'sk')`
 
 #### Citation
 ```
@@ -11201,6 +11239,141 @@ VALIDATION |      6,049
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt14_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt14_translate" />
+  <meta itemprop="sameAs" content="http://www.statmt.org/wmt14/translation-task.html" />
+</div>
+
+### `"wmt14_translate"`
+
+Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
+*   URL:
+    [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
+*   `DatasetBuilder`:
+    [`tfds.translate.wmt14.Wmt14Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt14.py)
+
+`wmt14_translate` is configured with `tfds.translate.wmt14.WmtConfig` and has
+the following configurations predefined (defaults to the first one):
+
+*   `"cs-en"` (`v0.0.1`) (`Size: 1.58 GiB`): WMT 2014 cs-en translation task
+    dataset.
+
+*   `"de-en"` (`v0.0.1`) (`Size: 1.58 GiB`): WMT 2014 de-en translation task
+    dataset.
+
+*   `"fr-en"` (`v0.0.1`) (`Size: 6.20 GiB`): WMT 2014 fr-en translation task
+    dataset.
+
+*   `"ru-en"` (`v0.0.1`) (`Size: 998.38 MiB`): WMT 2014 ru-en translation task
+    dataset.
+
+#### `"wmt14_translate/cs-en"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"wmt14_translate/de-en"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"wmt14_translate/fr-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"wmt14_translate/ru-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,495,971
+TRAIN      | 2,486,965
+VALIDATION | 6,003
+TEST       | 3,003
+
+#### Urls
+
+*   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'ru', u'en')`
+
+#### Citation
+```
+@InProceedings{bojar-EtAl:2014:W14-33,
+  author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},
+  title     = {Findings of the 2014 Workshop on Statistical Machine Translation},
+  booktitle = {Proceedings of the Ninth Workshop on Statistical Machine Translation},
+  month     = {June},
+  year      = {2014},
+  address   = {Baltimore, Maryland, USA},
+  publisher = {Association for Computational Linguistics},
+  pages     = {12--58},
+  url       = {http://www.aclweb.org/anthology/W/W14/W14-3302}
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -11255,26 +11428,35 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"cs-en"` (`v0.0.2`) (`Size: 1.62 GiB`): WMT 2015 translation task dataset.
+*   `"cs-en"` (`v0.0.2`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
+    dataset.
 
-* `"de-en"` (`v0.0.2`) (`Size: 1.62 GiB`): WMT 2015 translation task dataset.
+*   `"de-en"` (`v0.0.2`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
+    dataset.
 
-* `"fi-en"` (`v0.0.2`) (`Size: 260.51 MiB`): WMT 2015 translation task dataset.
+*   `"fi-en"` (`v0.0.2`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
+    dataset.
 
-* `"fr-en"` (`v0.0.2`) (`Size: 6.24 GiB`): WMT 2015 translation task dataset.
+*   `"fr-en"` (`v0.0.2`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
+    dataset.
 
-* `"ru-en"` (`v0.0.2`) (`Size: 1.02 GiB`): WMT 2015 translation task dataset.
+*   `"ru-en"` (`v0.0.2`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
+    dataset.
 
-* `"cs-en.subwords8k"` (`v0.0.1`) (`Size: ?? GiB`): WMT 2015 translation dataset with subword encoding.
+*   `"cs-en.subwords8k"` (`v0.0.1`) (`Size: ?? GiB`): WMT 2015 cs-en translation
+    task dataset with subword encoding.
 
-* `"de-en.subwords8k"` (`v0.0.1`) (`Size: 1.62 GiB`): WMT 2015 translation dataset with subword encoding.
+*   `"de-en.subwords8k"` (`v0.0.1`) (`Size: 1.62 GiB`): WMT 2015 de-en
+    translation task dataset with subword encoding.
 
-* `"fi-en.subwords8k"` (`v0.0.1`) (`Size: 260.51 MiB`): WMT 2015 translation dataset with subword encoding.
+*   `"fi-en.subwords8k"` (`v0.0.1`) (`Size: 260.51 MiB`): WMT 2015 fi-en
+    translation task dataset with subword encoding.
 
-* `"fr-en.subwords8k"` (`v0.0.1`) (`Size: 6.24 GiB`): WMT 2015 translation dataset with subword encoding.
+*   `"fr-en.subwords8k"` (`v0.0.1`) (`Size: 6.24 GiB`): WMT 2015 fr-en
+    translation task dataset with subword encoding.
 
-* `"ru-en.subwords8k"` (`v0.0.1`) (`Size: 1.02 GiB`): WMT 2015 translation dataset with subword encoding.
-
+*   `"ru-en.subwords8k"` (`v0.0.1`) (`Size: 1.02 GiB`): WMT 2015 ru-en
+    translation task dataset with subword encoding.
 
 #### `"wmt15_translate/cs-en"`
 
@@ -11471,18 +11653,23 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt16_translate` is configured with `tfds.translate.wmt16.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"cs-en"` (`v0.0.1`) (`Size: 1.57 GiB`): WMT 2016 translation task dataset.
+*   `"cs-en"` (`v0.0.1`) (`Size: 1.57 GiB`): WMT 2016 cs-en translation task
+    dataset.
 
-* `"de-en"` (`v0.0.1`) (`Size: 1.57 GiB`): WMT 2016 translation task dataset.
+*   `"de-en"` (`v0.0.1`) (`Size: 1.57 GiB`): WMT 2016 de-en translation task
+    dataset.
 
-* `"fi-en"` (`v0.0.1`) (`Size: 260.51 MiB`): WMT 2016 translation task dataset.
+*   `"fi-en"` (`v0.0.1`) (`Size: 260.51 MiB`): WMT 2016 fi-en translation task
+    dataset.
 
-* `"ro-en"` (`v0.0.1`) (`Size: 273.83 MiB`): WMT 2016 translation task dataset.
+*   `"ro-en"` (`v0.0.1`) (`Size: 273.83 MiB`): WMT 2016 ro-en translation task
+    dataset.
 
-* `"ru-en"` (`v0.0.1`) (`Size: 993.38 MiB`): WMT 2016 translation task dataset.
+*   `"ru-en"` (`v0.0.1`) (`Size: 993.38 MiB`): WMT 2016 ru-en translation task
+    dataset.
 
-* `"tr-en"` (`v0.0.1`) (`Size: 59.32 MiB`): WMT 2016 translation task dataset.
-
+*   `"tr-en"` (`v0.0.1`) (`Size: 59.32 MiB`): WMT 2016 tr-en translation task
+    dataset.
 
 #### `"wmt16_translate/cs-en"`
 
@@ -11635,20 +11822,26 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt17_translate` is configured with `tfds.translate.wmt17.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"cs-en"` (`v0.0.2`) (`Size: 1.66 GiB`): WMT 2017 translation task dataset.
+*   `"cs-en"` (`v0.0.2`) (`Size: 1.66 GiB`): WMT 2017 cs-en translation task
+    dataset.
 
-* `"de-en"` (`v0.0.2`) (`Size: 1.81 GiB`): WMT 2017 translation task dataset.
+*   `"de-en"` (`v0.0.2`) (`Size: 1.81 GiB`): WMT 2017 de-en translation task
+    dataset.
 
-* `"fi-en"` (`v0.0.2`) (`Size: 414.10 MiB`): WMT 2017 translation task dataset.
+*   `"fi-en"` (`v0.0.2`) (`Size: 414.10 MiB`): WMT 2017 fi-en translation task
+    dataset.
 
-* `"lv-en"` (`v0.0.2`) (`Size: 161.69 MiB`): WMT 2017 translation task dataset.
+*   `"lv-en"` (`v0.0.2`) (`Size: 161.69 MiB`): WMT 2017 lv-en translation task
+    dataset.
 
-* `"ru-en"` (`v0.0.2`) (`Size: 3.34 GiB`): WMT 2017 translation task dataset.
+*   `"ru-en"` (`v0.0.2`) (`Size: 3.34 GiB`): WMT 2017 ru-en translation task
+    dataset.
 
-* `"tr-en"` (`v0.0.2`) (`Size: 59.32 MiB`): WMT 2017 translation task dataset.
+*   `"tr-en"` (`v0.0.2`) (`Size: 59.32 MiB`): WMT 2017 tr-en translation task
+    dataset.
 
-* `"zh-en"` (`v0.0.2`) (`Size: 2.16 GiB`): WMT 2017 translation task dataset.
-
+*   `"zh-en"` (`v0.0.2`) (`Size: 2.16 GiB`): WMT 2017 zh-en translation task
+    dataset.
 
 #### `"wmt17_translate/cs-en"`
 
@@ -11812,22 +12005,29 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt18_translate` is configured with `tfds.translate.wmt18.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"cs-en"` (`v0.0.2`) (`Size: 1.89 GiB`): WMT 2018 translation task dataset.
+*   `"cs-en"` (`v0.0.2`) (`Size: 1.89 GiB`): WMT 2018 cs-en translation task
+    dataset.
 
-* `"de-en"` (`v0.0.2`) (`Size: 3.55 GiB`): WMT 2018 translation task dataset.
+*   `"de-en"` (`v0.0.2`) (`Size: 3.55 GiB`): WMT 2018 de-en translation task
+    dataset.
 
-* `"et-en"` (`v0.0.2`) (`Size: 499.91 MiB`): WMT 2018 translation task dataset.
+*   `"et-en"` (`v0.0.2`) (`Size: 499.91 MiB`): WMT 2018 et-en translation task
+    dataset.
 
-* `"fi-en"` (`v0.0.2`) (`Size: 468.76 MiB`): WMT 2018 translation task dataset.
+*   `"fi-en"` (`v0.0.2`) (`Size: 468.76 MiB`): WMT 2018 fi-en translation task
+    dataset.
 
-* `"kk-en"` (`v0.0.2`) (`Size: ?? GiB`): WMT 2018 translation task dataset.
+*   `"kk-en"` (`v0.0.2`) (`Size: ?? GiB`): WMT 2018 kk-en translation task
+    dataset.
 
-* `"ru-en"` (`v0.0.2`) (`Size: 3.91 GiB`): WMT 2018 translation task dataset.
+*   `"ru-en"` (`v0.0.2`) (`Size: 3.91 GiB`): WMT 2018 ru-en translation task
+    dataset.
 
-* `"tr-en"` (`v0.0.2`) (`Size: 59.32 MiB`): WMT 2018 translation task dataset.
+*   `"tr-en"` (`v0.0.2`) (`Size: 59.32 MiB`): WMT 2018 tr-en translation task
+    dataset.
 
-* `"zh-en"` (`v0.0.2`) (`Size: 2.10 GiB`): WMT 2018 translation task dataset.
-
+*   `"zh-en"` (`v0.0.2`) (`Size: 2.10 GiB`): WMT 2018 zh-en translation task
+    dataset.
 
 #### `"wmt18_translate/cs-en"`
 
@@ -12005,24 +12205,32 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt19_translate` is configured with `tfds.translate.wmt19.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"cs-en"` (`v0.0.2`) (`Size: 1.88 GiB`): WMT 2019 translation task dataset.
+*   `"cs-en"` (`v0.0.2`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task
+    dataset.
 
-* `"de-en"` (`v0.0.2`) (`Size: 9.71 GiB`): WMT 2019 translation task dataset.
+*   `"de-en"` (`v0.0.2`) (`Size: 9.71 GiB`): WMT 2019 de-en translation task
+    dataset.
 
-* `"fi-en"` (`v0.0.2`) (`Size: 959.46 MiB`): WMT 2019 translation task dataset.
+*   `"fi-en"` (`v0.0.2`) (`Size: 959.46 MiB`): WMT 2019 fi-en translation task
+    dataset.
 
-* `"gu-en"` (`v0.0.2`) (`Size: 37.03 MiB`): WMT 2019 translation task dataset.
+*   `"gu-en"` (`v0.0.2`) (`Size: 37.03 MiB`): WMT 2019 gu-en translation task
+    dataset.
 
-* `"kk-en"` (`v0.0.2`) (`Size: 39.58 MiB`): WMT 2019 translation task dataset.
+*   `"kk-en"` (`v0.0.2`) (`Size: 39.58 MiB`): WMT 2019 kk-en translation task
+    dataset.
 
-* `"lt-en"` (`v0.0.2`) (`Size: 392.20 MiB`): WMT 2019 translation task dataset.
+*   `"lt-en"` (`v0.0.2`) (`Size: 392.20 MiB`): WMT 2019 lt-en translation task
+    dataset.
 
-* `"ru-en"` (`v0.0.2`) (`Size: 3.86 GiB`): WMT 2019 translation task dataset.
+*   `"ru-en"` (`v0.0.2`) (`Size: 3.86 GiB`): WMT 2019 ru-en translation task
+    dataset.
 
-* `"zh-en"` (`v0.0.2`) (`Size: 2.04 GiB`): WMT 2019 translation task dataset.
+*   `"zh-en"` (`v0.0.2`) (`Size: 2.04 GiB`): WMT 2019 zh-en translation task
+    dataset.
 
-* `"fr-de"` (`v0.0.2`) (`Size: 722.20 MiB`): WMT 2019 translation task dataset.
-
+*   `"fr-de"` (`v0.0.2`) (`Size: 722.20 MiB`): WMT 2019 fr-de translation task
+    dataset.
 
 #### `"wmt19_translate/cs-en"`
 

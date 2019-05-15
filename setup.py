@@ -109,10 +109,10 @@ for deps in DATASET_EXTRAS.values():
   all_dataset_extras.extend(deps)
 
 EXTRAS_REQUIRE = {
-  'apache-beam': ['apache-beam'],
-  'tensorflow': ['tensorflow>=1.12.0'],
-  'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
-  'tests': TESTS_REQUIRE + all_dataset_extras,
+    'apache-beam': ['apache-beam'],
+    'tensorflow': ['tensorflow>=1.13.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.13.0'],
+    'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 
