@@ -99,7 +99,7 @@ DATASET_EXTRAS = {
     ],
     'groove': ['pretty_midi', 'pydub'],
     'librispeech': ['pydub'],  # and ffmpeg installed
-    'modelnet': 'trimesh',
+    'modelnet': ['trimesh'],
     'svhn': ['scipy'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
