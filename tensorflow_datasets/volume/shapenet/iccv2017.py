@@ -112,7 +112,7 @@ class ShapenetPart2017Config(tfds.core.BuilderConfig):
     else:
       num_part_classes = (
         LABEL_SPLITS[self.class_index+1] - LABEL_SPLITS[self.class_index])
-    return tfds.features.SequenceDict({
+    return tfds.features.Sequence({
         "labels": tfds.features.ClassLabel(num_classes=num_part_classes),
         "positions": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
         "normals": tfds.features.Tensor(shape=(3,), dtype=tf.float32)
