@@ -189,8 +189,6 @@ class PolyMeshModelnetConfig(ModelnetConfig):
         "vertices": tfds.features.Tensor(shape=(None, 3), dtype=tf.float32),
         "face_values": tfds.features.Tensor(shape=(None,), dtype=tf.int64),
         "face_lengths": tfds.features.Tensor(shape=(None,), dtype=tf.int64),
-        "center": tfds.features.Tensor(shape=(3,), dtype=tf.float32),
-        "radius": tfds.features.Tensor(shape=(), dtype=tf.float32),
     })
 
   def load(self, fp, path=None):

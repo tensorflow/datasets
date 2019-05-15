@@ -138,16 +138,17 @@ class OffObject(object):
       return OffObject(vertices, face_values, face_lengths)
 
   def to_file(self, fp):
-    fp.write('OFF\n')
-    fp.write('%d %d %d\n' % (self.num_vertices, self.num_faces, self.num_edges))
+    fp.write(('OFF\n').encode('utf-8'))
+    fp.write(('%d %d %d\n' % (self.num_vertices, self.num_faces, self.num_edges)
+        ).encode('utf-8'))
     for v in self.vertices:
-      fp.write('%s\n' % ' '.join(str(vi) for vi in v))
+      fp.write(('%s\n' % ' '.join(str(vi) for vi in v)).encode('utf-8'))
     values = self.face_values
 
     for face_size in self.face_lengths:
       face, values = np.split(values, (face_size,))  # pylint: disable=unbalanced-tuple-unpacking
-      fp.write('%d %s\n' % (len(face), ' '.join(str(fi) for fi in face)))
-
+      fp.write(('%d %s\n' % (len(face), ' '.join(str(fi) for fi in face))
+        ).encode('utf-8'))
 
 
 def triangulated_faces(face_values, face_lengths):
