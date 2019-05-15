@@ -80,7 +80,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
             # Images can have variable shape
             "image": tfds.features.Image(encoding_format="jpeg"),
             "image/filename": tfds.features.Text(),
-            "objects": tfds.features.SequenceDict({
+            "objects": tfds.features.Sequence({
                 "bbox": tfds.features.BBoxFeature(),
                 # Coco has 91 categories but only 80 are present in the dataset
                 "label": tfds.features.ClassLabel(num_classes=80),
@@ -239,7 +239,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
       yield {
           "image": os.path.join(image_dir, split_type, image_info["file_name"]),
           "image/filename": image_info["file_name"],
-          "objects": [{
+          "objects": [{   # pylint: disable=g-complex-comprehension
               "bbox": build_bbox(*instance_info["bbox"]),
               "label": categories_id2name[instance_info["category_id"]],
               "is_crowd": bool(instance_info["iscrowd"]),
