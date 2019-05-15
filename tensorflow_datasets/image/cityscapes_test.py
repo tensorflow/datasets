@@ -10,15 +10,17 @@ from tensorflow_datasets.image import cityscapes
 
 class CityscapesTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cityscapes.Cityscapes
-  SPLITS = {  # Expected number of examples on each split.
+  BUILDER_CONFIG_NAMES_TO_TEST = ['fine']
+  SPLITS = {
       'train': 3,
       'validation': 1,
       'test': 2,
   }
 
 class CityscapesCoarseTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = cityscapes.CityscapesCoarse
-  SPLITS = {  # Expected number of examples on each split.
+  DATASET_CLASS = cityscapes.Cityscapes
+  BUILDER_CONFIG_NAMES_TO_TEST = ['coarse']
+  SPLITS = {
       'train': 3,
       'train_extra': 4,
       'validation': 1,

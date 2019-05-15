@@ -25,7 +25,6 @@ from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image.cityscapes import Cityscapes
-from tensorflow_datasets.image.cityscapes import CityscapesCoarse
 from tensorflow_datasets.image.clevr import CLEVR
 from tensorflow_datasets.image.coco import Coco2014
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistology
