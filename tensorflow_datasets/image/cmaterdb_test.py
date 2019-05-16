@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 """Tests for CMATERdb dataset."""
 
 from __future__ import absolute_import
@@ -23,16 +24,9 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.image import cmaterdb
 
 
-cmaterdb.Cmaterdb.BUILDER_CONFIGS.append(
-    cmaterdb.CmaterdbConfig(
-        name="test",
-        description="CMATERdb test data config.",
-        version="1.0.0",
-    ))
-
-
 class CmaterdbTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cmaterdb.Cmaterdb
+  BUILDER_CONFIG_NAMES_TO_TEST = ["bangla"]
   SPLITS = {
       "train": 20,
       "test": 10,
@@ -41,7 +35,6 @@ class CmaterdbTest(testing.DatasetBuilderTestCase):
       "training-images.npz",
       "testing-images.npz",
   ]
-  BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
 
 
 if __name__ == "__main__":

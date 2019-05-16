@@ -80,10 +80,12 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-CMATERdb is the pattern recognition database repository created at the 
-'Center for Microprocessor Applications for Training Education and Research' (CMATER) research lab, India.
-This dataset contains images of handwritten indic numerals viz. Devanagari, Bangla and Telugu 
-from CMATERdb 3: Handwritten Indian script character database.
+This dataset contains images of -
+  Handwritten Bangla numerals - balanced dataset of total 6000 Bangla numerals (32x32 RGB coloured, 6000 images), each having 600 images per class(per digit). 
+  Handwritten Devanagari numerals - balanced dataset of total 3000 Devanagari numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit). 
+  Handwritten Telugu numerals - balanced dataset of total 3000 Telugu numerals (32x32 RGB coloured, 3000 images), each having 300 images per class(per digit). 
+
+CMATERdb is the pattern recognition database repository created at the 'Center for Microprocessor Applications for Training Education and Research' (CMATER) research lab, Jadavpur University, India.
 """
 
 
