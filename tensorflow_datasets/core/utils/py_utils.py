@@ -273,11 +273,22 @@ def read_checksum_digest(path, checksum_cls=hashlib.sha256):
   return checksum.hexdigest(), size
 
 
-def reraise(additional_msg):
+def reraise(prefix=None, suffix=None):
   """Reraise an exception with an additional message."""
   exc_type, exc_value, exc_traceback = sys.exc_info()
-  msg = str(exc_value) + "\n" + additional_msg
+  prefix = prefix or ""
+  suffix = "\n" + suffix if suffix else ""
+  msg = prefix + str(exc_value) + suffix
   six.reraise(exc_type, exc_type(msg), exc_traceback)
+
+
+@contextlib.contextmanager
+def try_reraise(*args, **kwargs):
+  """Reraise an exception with an additional message."""
+  try:
+    yield
+  except Exception:   # pylint: disable=broad-except
+    reraise(*args, **kwargs)
 
 
 def rgetattr(obj, attr, *args):

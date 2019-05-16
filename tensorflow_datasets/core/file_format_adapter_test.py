@@ -99,38 +99,6 @@ class FileFormatAdapterTest(testing.TestCase):
 
 class TFRecordUtilsTest(testing.TestCase):
 
-  def test_dicts_to_sequence_example(self):
-    context_dict = {
-        "a": 1,
-        "a2": np.array(1),
-        "b": ["foo", "bar"],
-    }
-    sequence_dict = {
-        "w": [["foo"], ["foo", "bar"]],
-        "x": [1, 2, 3],
-        "y": np.array([2., 3., 4., 5.]),
-        "z": [[1, 2], [3, 4, 5]],
-    }
-    seq_ex = file_format_adapter._dicts_to_tf_sequence_example(
-        context_dict, sequence_dict)
-    context = seq_ex.context.feature
-    self.assertEqual([1], list(context["a"].int64_list.value))
-    self.assertEqual([1], list(context["a2"].int64_list.value))
-    self.assertEqual([b"foo", b"bar"], list(context["b"].bytes_list.value))
-    seq = seq_ex.feature_lists.feature_list
-    self.assertEqual(
-        [[b"foo"], [b"foo", b"bar"]],
-        [list(el.bytes_list.value) for el in seq["w"].feature])
-    self.assertEqual(
-        [[el] for el in [1, 2, 3]],
-        [list(el.int64_list.value) for el in seq["x"].feature])
-    self.assertAllClose(
-        [[el] for el in [2., 3., 4., 5.]],
-        [list(el.float_list.value) for el in seq["y"].feature])
-    self.assertEqual(
-        [[1, 2], [3, 4, 5]],
-        [list(el.int64_list.value) for el in seq["z"].feature])
-
   def test_dict_to_example(self):
     example = file_format_adapter._dict_to_tf_example({
         "a": 1,
@@ -157,7 +125,7 @@ class TFRecordUtilsTest(testing.TestCase):
     self.assertEqual([b"\x00\x00", b"\x00\x00"],
                      list(feature["e2"].bytes_list.value))
 
-    with self.assertRaisesWithPredicateMatch(ValueError, "received an empty"):
+    with self.assertRaisesWithPredicateMatch(ValueError, "Received an empty"):
       # Raise error if an undefined empty value is given
       file_format_adapter._dict_to_tf_example({
           "empty": [],

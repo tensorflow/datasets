@@ -22,7 +22,7 @@ from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.features import feature
 
 
-class ClassLabel(feature.FeatureConnector):
+class ClassLabel(feature.Tensor):
   """`FeatureConnector` for integer class labels."""
 
   @api_utils.disallow_positional_args
@@ -45,6 +45,8 @@ class ClassLabel(feature.FeatureConnector):
       names_file: `str`, path to a file with names for the integer
         classes, one per line.
     """
+    super(ClassLabel, self).__init__(shape=(), dtype=tf.int64)
+
     self._num_classes = None
     self._str2int = None
     self._int2str = None
@@ -126,9 +128,6 @@ class ClassLabel(feature.FeatureConnector):
       raise ValueError("Invalid integer class label %d" % int_value)
     return tf.compat.as_text(str(int_value))
 
-  def get_tensor_info(self):
-    return feature.TensorInfo(shape=(), dtype=tf.int64)
-
   def encode_example(self, example_data):
     if self._num_classes is None:
       raise ValueError(
@@ -145,9 +144,6 @@ class ClassLabel(feature.FeatureConnector):
       raise ValueError("Class label %d greater than configured num_classes %d" %
                        (example_data, self._num_classes))
     return example_data
-
-  def decode_example(self, tfexample_data):
-    return tf.reshape(tfexample_data, tuple())
 
   def save_metadata(self, data_dir, feature_name=None):
     """See base class for details."""

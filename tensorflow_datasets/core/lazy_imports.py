@@ -33,7 +33,7 @@ def _try_import(module_name):
     err_msg = ("Tried importing %s but failed. See setup.py extras_require. "
                "The dataset you are trying to use may have additional "
                "dependencies.")
-    utils.reraise(err_msg)
+    utils.reraise(suffix=err_msg)
 
 
 class LazyImporter(object):
