@@ -126,7 +126,6 @@ Download given url(s).
     <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 #### Returns:
-
 downloaded_path(s): `str`, The downloaded paths matching the given input
   url_or_urls.
 
@@ -137,7 +136,6 @@ download_and_extract(url_or_urls)
 ```
 
 Download and extract given url_or_urls.
-
 Is roughly equivalent to:
 
 ```
@@ -146,13 +144,12 @@ extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
 
 #### Args:
 
-url_or_urls: url or `list`/`dict` of urls to download and extract. Each url can
-be a `str` or
-<a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
+*   <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract.
+    Each url can be a `str` or
+    <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 If not explicitly specified in `Resource`, the extraction method will
 automatically be deduced from downloaded file name.
-
 
 #### Returns:
 
@@ -176,16 +173,14 @@ Extract given path(s).
 
 #### Args:
 
-path_or_paths: path or `list`/`dict` of path of file to extract. Each path can
-be a `str` or
-<a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
+*   <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract.
+    Each path can be a `str` or
+    <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 If not explicitly specified in `Resource`, the extraction method is deduced
 from downloaded file name.
 
-
 #### Returns:
-
 extracted_path(s): `str`, The extracted paths matching the given input
   path_or_paths.
 
@@ -196,7 +191,6 @@ iter_archive(resource)
 ```
 
 Returns iterator over files within archive.
-
 **Important Note**: caller should read files as they are yielded.
 Reading out of order is slow.
 
@@ -204,10 +198,6 @@ Reading out of order is slow.
 
 * <b>`resource`</b>: path to archive or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
-
 #### Returns:
 
 Generator yielding tuple (path_within_archive, file_obj).
-
-
-

@@ -104,7 +104,6 @@ get_serialized_info()
 ```
 
 Return the tf-example features for the adapter, as stored on disk.
-
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
@@ -118,8 +117,12 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto *
-<b>`directly`</b>: `return tf.FixedLenFeature((64, 64), tf.uint8)`
+FeatureConnector which are not containers should return the feature proto
+directly:
+
+```
+return tf.FixedLenFeature((64, 64), tf.uint8)
+```
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.

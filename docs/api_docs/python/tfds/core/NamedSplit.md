@@ -33,7 +33,7 @@ The resulting split will correspond to 25% of the train split merged with
 
 #### Warning:
 
-  A split cannot be added twice, so the following will fail:
+A split cannot be added twice, so the following will fail:
 
 ```
 split = (
@@ -45,7 +45,7 @@ split = tfds.Split.TEST + tfds.Split.ALL  # Error
 
 #### Warning:
 
-  The slices can be applied only one time. So the following are valid:
+The slices can be applied only one time. So the following are valid:
 
 ```
 split = (
@@ -112,7 +112,6 @@ subsplit(
 ```
 
 Divides this split into subsplits.
-
 There are 3 ways to define subsplits, which correspond to the 3
 arguments `k` (get `k` even subsplits), `percent` (get a slice of the
 dataset with <a href="../../tfds/percent.md"><code>tfds.percent</code></a>), and `weighted` (get subsplits with proportions
@@ -129,9 +128,9 @@ train, test, validation = split.subsplit(weighted=[2, 1, 1])
 subsplit = split.subsplit(tfds.percent[-20:])
 ```
 
-*   <b>`Warning`</b>: k and weighted will be converted into percent which mean
-    that values below the percent will be rounded up or down. The final split
-    may be bigger to deal with remainders. For instance:
+Warning: k and weighted will be converted into percent which mean that values
+below the percent will be rounded up or down. The final split may be bigger to
+deal with remainders. For instance:
 
 ```
 train, test, valid = split.subsplit(k=3)  # 33%, 33%, 34%
@@ -156,6 +155,3 @@ s1, s2, s3, s4 = split.subsplit(weighted=[2, 2, 1, 1])  # 33%, 33%, 16%, 18%
 #### Returns:
 
 A subsplit or list of subsplits extracted from this split object.
-
-
-

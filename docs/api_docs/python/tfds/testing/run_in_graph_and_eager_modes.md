@@ -64,6 +64,6 @@ executing the `z` tensor with a session.
 
 #### Returns:
 
-Returns a decorator that will run the decorated test method twice:
-once by constructing and executing a graph in a session and once with
-eager execution enabled.
+Returns a decorator that will run the decorated test method twice: once by
+constructing and executing a graph in a session and once with eager execution
+enabled.

@@ -38,8 +38,8 @@ Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/ma
 
 #### Returns:
 
-A <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>.
-
+A
+<a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>.
 
 #### Raises:
 

@@ -41,7 +41,6 @@ __init__(
 ```
 
 Constructs a DatasetBuilder.
-
 Callers must pass arguments as keyword arguments.
 
 #### Args:
@@ -87,7 +86,6 @@ as_dataset(
 ```
 
 Constructs a `tf.data.Dataset`.
-
 Callers must pass arguments as keyword arguments.
 
 #### Args:
@@ -109,7 +107,6 @@ Callers must pass arguments as keyword arguments.
     `tf.data.Dataset` will have a dictionary with all the features.
 
 #### Returns:
-
 `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
 tfds.data.Dataset>`.
 

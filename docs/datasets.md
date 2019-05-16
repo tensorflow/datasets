@@ -40,6 +40,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"cifar10"`](#cifar10)
     *   [`"cifar100"`](#cifar100)
     *   [`"cifar10_corrupted"`](#cifar10_corrupted)
+    *   [`"clevr"`](#clevr)
     *   [`"coco2014"`](#coco2014)
     *   [`"colorectal_histology"`](#colorectal_histology)
     *   [`"colorectal_histology_large"`](#colorectal_histology_large)
@@ -82,6 +83,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"lm1b"`](#lm1b)
     *   [`"multi_nli"`](#multi_nli)
     *   [`"squad"`](#squad)
+    *   [`"super_glue"`](#super_glue)
     *   [`"wikipedia"`](#wikipedia)
     *   [`"xnli"`](#xnli)
 
@@ -97,6 +99,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"wmt17_translate"`](#wmt17_translate)
     *   [`"wmt18_translate"`](#wmt18_translate)
     *   [`"wmt19_translate"`](#wmt19_translate)
+    *   [`"wmt_t2t_translate"`](#wmt_t2t_translate)
 
 *   [`video`](#video)
 
@@ -2212,6 +2215,71 @@ ALL        |     10,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="clevr" />
+  <meta itemprop="description" content="CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.
+It contains minimal biases and has detailed annotations describing the kind of
+reasoning each question requires." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#clevr" />
+  <meta itemprop="sameAs" content="https://cs.stanford.edu/people/jcjohns/clevr/" />
+</div>
+
+### `"clevr"`
+
+CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.
+It contains minimal biases and has detailed annotations describing the kind of
+reasoning each question requires.
+
+*   URL:
+    [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
+*   `DatasetBuilder`:
+    [`tfds.image.clevr.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
+*   Version: `v1.0.0`
+*   Size: `17.72 GiB`
+
+#### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'objects': Sequence({'material': TensorInfo(shape=(None,), dtype=tf.int64), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'color': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'size': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 100,000
+TRAIN      | 70,000
+VALIDATION | 15,000
+TEST       | 15,000
+
+#### Urls
+
+*   [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
+
+#### Citation
+
+```
+@inproceedings{johnson2017clevr,
+  title={{CLEVR}: A diagnostic dataset for compositional language and elementary visual reasoning},
+  author={Johnson, Justin and Hariharan, Bharath and van der Maaten, Laurens and Fei-Fei, Li and Lawrence Zitnick, C and Girshick, Ross},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  year={2017}
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -2243,18 +2311,14 @@ Note:
 * Size: `37.57 GiB`
 
 #### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': SequenceDict({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_crowd': Tensor(shape=(), dtype=tf.bool),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
-    }),
+    'objects': Sequence({'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -2887,14 +2951,16 @@ Year      = {2014}}
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="emnist" />
-  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digitsderived from the NIST Special Database 19 and converted toa 28x28 pixel image format and dataset structure that directlymatches the MNIST dataset." />
+  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#emnist" />
   <meta itemprop="sameAs" content="https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip" />
 </div>
 
 ### `"emnist"`
 
-The EMNIST dataset is a set of handwritten character digitsderived from the NIST Special Database 19 and converted toa 28x28 pixel image format and dataset structure that directlymatches the MNIST dataset.
+The EMNIST dataset is a set of handwritten character digits derived from the
+NIST Special Database 19 and converted to a 28x28 pixel image format and dataset
+structure that directly matches the MNIST dataset.
 
 * URL: [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
 * `DatasetBuilder`: [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
@@ -4548,28 +4614,11 @@ and has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'bobjects': SequenceDict({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
+    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': SequenceDict({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'objects_trainable': SequenceDict({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
+    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -4577,28 +4626,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': SequenceDict({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
+    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': SequenceDict({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'objects_trainable': SequenceDict({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
+    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -4606,28 +4638,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': SequenceDict({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
+    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': SequenceDict({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'objects_trainable': SequenceDict({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
+    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5386,22 +5401,16 @@ predict the bounding box and label of each individual object.
 * Size: `868.85 MiB`
 
 #### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
     'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
     'labels_no_difficult': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'objects': SequenceDict({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_difficult': Tensor(shape=(), dtype=tf.bool),
-        'is_truncated': Tensor(shape=(), dtype=tf.bool),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
-        'pose': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    }),
+    'objects': Sequence({'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -6463,6 +6472,349 @@ VALIDATION |     10,570
 archivePrefix = {arXiv},
        eprint = {1606.05250},
 }
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="super_glue" />
+  <meta itemprop="description" content="The Winograd Schema Challenge (WSC, Levesque et al., 2012) is a reading comprehension
+task in which a system must read a sentence with a pronoun and select the referent of that pronoun
+from a list of choices. Given the difficulty of this task and the headroom still left, we have included
+WSC in SuperGLUE and recast the dataset into its coreference form. The task is cast as a binary
+classification problem, as opposed to N-multiple choice, in order to isolate the model's ability to
+understand the coreference links within a sentence as opposed to various other strategies that may
+come into play in multiple choice conditions. With that in mind, we create a split with 65% negative
+majority class in the validation set, reflecting the distribution of the hidden test set, and 52% negative
+class in the training set. The training and validation examples are drawn from the original Winograd
+Schema dataset (Levesque et al., 2012), as well as those distributed by the affiliated organization
+Commonsense Reasoning. The test examples are derived from fiction books and have been shared
+with us by the authors of the original dataset. Previously, a version of WSC recast as NLI as included
+in GLUE, known as WNLI. No substantial progress was made on WNLI, with many submissions
+opting to submit only majority class predictions. WNLI was made especially difficult due to an
+adversarial train/dev split: Premise sentences that appeared in the training set sometimes appeared
+in the development set with a different hypothesis and a flipped label. If a system memorized the
+training set without meaningfully generalizing, which was easy due to the small size of the training
+set, it could perform far below chance on the development set. We remove this adversarial design
+in the SuperGLUE version of WSC by ensuring that no sentences are shared between the training,
+validation, and test sets.
+
+However, the validation and test sets come from different domains, with the validation set consisting
+of ambiguous examples such that changing one non-noun phrase word will change the coreference
+dependencies in the sentence. The test set consists only of more straightforward examples, with a
+high number of noun phrases (and thus more choices for the model), but low to no ambiguity.
+
+This version fixes issues where the spans are not actually substrings of the text." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#super_glue" />
+  <meta itemprop="sameAs" content="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html" />
+</div>
+
+### `"super_glue"`
+
+The Winograd Schema Challenge (WSC, Levesque et al., 2012) is a reading
+comprehension task in which a system must read a sentence with a pronoun and
+select the referent of that pronoun from a list of choices. Given the difficulty
+of this task and the headroom still left, we have included WSC in SuperGLUE and
+recast the dataset into its coreference form. The task is cast as a binary
+classification problem, as opposed to N-multiple choice, in order to isolate the
+model's ability to understand the coreference links within a sentence as opposed
+to various other strategies that may come into play in multiple choice
+conditions. With that in mind, we create a split with 65% negative majority
+class in the validation set, reflecting the distribution of the hidden test set,
+and 52% negative class in the training set. The training and validation examples
+are drawn from the original Winograd Schema dataset (Levesque et al., 2012), as
+well as those distributed by the affiliated organization Commonsense Reasoning.
+The test examples are derived from fiction books and have been shared with us by
+the authors of the original dataset. Previously, a version of WSC recast as NLI
+as included in GLUE, known as WNLI. No substantial progress was made on WNLI,
+with many submissions opting to submit only majority class predictions. WNLI was
+made especially difficult due to an adversarial train/dev split: Premise
+sentences that appeared in the training set sometimes appeared in the
+development set with a different hypothesis and a flipped label. If a system
+memorized the training set without meaningfully generalizing, which was easy due
+to the small size of the training set, it could perform far below chance on the
+development set. We remove this adversarial design in the SuperGLUE version of
+WSC by ensuring that no sentences are shared between the training, validation,
+and test sets.
+
+However, the validation and test sets come from different domains, with the
+validation set consisting of ambiguous examples such that changing one non-noun
+phrase word will change the coreference dependencies in the sentence. The test
+set consists only of more straightforward examples, with a high number of noun
+phrases (and thus more choices for the model), but low to no ambiguity.
+
+This version fixes issues where the spans are not actually substrings of the
+text.
+
+*   URL:
+    [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+*   `DatasetBuilder`:
+    [`tfds.text.super_glue.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+
+`super_glue` is configured with `tfds.text.super_glue.SuperGlueConfig` and has
+the following configurations predefined (defaults to the first one):
+
+*   `"cb"` (`v0.0.2`) (`Size: ?? GiB`): The CommitmentBank (De Marneffe et al.,
+    2019) is a corpus of short texts in which at least one sentence contains an
+    embedded clause. Each of these embedded clauses is annotated with the degree
+    to which we expect that the person who wrote the text is committed to the
+    truth of the clause. The resulting task framed as three-class textual
+    entailment on examples that are drawn from the Wall Street Journal, fiction
+    from the British National Corpus, and Switchboard. Each example consists of
+    a premise containing an embedded clause and the corresponding hypothesis is
+    the extraction of that clause. We use a subset of the data that had
+    inter-annotator agreement above 0.85. The data is imbalanced (relatively
+    fewer neutral examples), so we evaluate using accuracy and F1, where for
+    multi-class F1 we compute the unweighted average of the F1 per class.
+
+*   `"copa"` (`v0.0.2`) (`Size: ?? GiB`): The Choice Of Plausible Alternatives
+    (COPA, Roemmele et al., 2011) dataset is a causal reasoning task in which a
+    system is given a premise sentence and two possible alternatives. The system
+    must choose the alternative which has the more plausible causal relationship
+    with the premise. The method used for the construction of the alternatives
+    ensures that the task requires causal reasoning to solve. Examples either
+    deal with alternative possible causes or alternative possible effects of the
+    premise sentence, accompanied by a simple question disambiguating between
+    the two instance types for the model. All examples are handcrafted and focus
+    on topics from online blogs and a photography-related encyclopedia.
+    Following the recommendation of the authors, we evaluate using accuracy.
+
+*   `"multirc"` (`v0.0.2`) (`Size: ?? GiB`): The Multi-Sentence Reading
+    Comprehension dataset (MultiRC, Khashabi et al., 2018) is a true/false
+    question-answering task. Each example consists of a context paragraph, a
+    question about that paragraph, and a list of possible answers to that
+    question which must be labeled as true or false. Question-answering (QA) is
+    a popular problem with many datasets. We use MultiRC because of a number of
+    desirable properties: (i) each question can have multiple possible correct
+    answers, so each question-answer pair must be evaluated independent of other
+    pairs, (ii) the questions are designed such that answering each question
+    requires drawing facts from multiple context sentences, and (iii) the
+    question-answer pair format more closely matches the API of other SuperGLUE
+    tasks than span-based extractive QA does. The paragraphs are drawn from
+    seven domains including news, fiction, and historical text.
+
+*   `"rte"` (`v0.0.2`) (`Size: ?? GiB`): The Recognizing Textual Entailment
+    (RTE) datasets come from a series of annual competitions on textual
+    entailment, the problem of predicting whether a given premise sentence
+    entails a given hypothesis sentence (also known as natural language
+    inference, NLI). RTE was previously included in GLUE, and we use the same
+    data and format as before: We merge data from RTE1 (Dagan et al., 2006),
+    RTE2 (Bar Haim et al., 2006), RTE3 (Giampiccolo et al., 2007), and RTE5
+    (Bentivogli et al., 2009). All datasets are combined and converted to
+    two-class classification: entailment and not_entailment. Of all the GLUE
+    tasks, RTE was among those that benefited from transfer learning the most,
+    jumping from near random-chance performance (~56%) at the time of GLUE's
+    launch to 85% accuracy (Liu et al., 2019c) at the time of writing. Given the
+    eight point gap with respect to human performance, however, the task is not
+    yet solved by machines, and we expect the remaining gap to be difficult to
+    close.
+
+*   `"wic"` (`v0.0.2`) (`Size: ?? GiB`): The Word-in-Context (WiC, Pilehvar and
+    Camacho-Collados, 2019) dataset supports a word sense disambiguation task
+    cast as binary classification over sentence pairs. Given two sentences and a
+    polysemous (sense-ambiguous) word that appears in both sentences, the task
+    is to determine whether the word is used with the same sense in both
+    sentences. Sentences are drawn from WordNet (Miller, 1995), VerbNet
+    (Schuler, 2005), and Wiktionary. We follow the original work and evaluate
+    using accuracy.
+
+*   `"wsc"` (`v0.0.2`) (`Size: ?? GiB`): The Winograd Schema Challenge (WSC,
+    Levesque et al., 2012) is a reading comprehension task in which a system
+    must read a sentence with a pronoun and select the referent of that pronoun
+    from a list of choices. Given the difficulty of this task and the headroom
+    still left, we have included WSC in SuperGLUE and recast the dataset into
+    its coreference form. The task is cast as a binary classification problem,
+    as opposed to N-multiple choice, in order to isolate the model's ability to
+    understand the coreference links within a sentence as opposed to various
+    other strategies that may come into play in multiple choice conditions. With
+    that in mind, we create a split with 65% negative majority class in the
+    validation set, reflecting the distribution of the hidden test set, and 52%
+    negative class in the training set. The training and validation examples are
+    drawn from the original Winograd Schema dataset (Levesque et al., 2012), as
+    well as those distributed by the affiliated organization Commonsense
+    Reasoning. The test examples are derived from fiction books and have been
+    shared with us by the authors of the original dataset. Previously, a version
+    of WSC recast as NLI as included in GLUE, known as WNLI. No substantial
+    progress was made on WNLI, with many submissions opting to submit only
+    majority class predictions. WNLI was made especially difficult due to an
+    adversarial train/dev split: Premise sentences that appeared in the training
+    set sometimes appeared in the development set with a different hypothesis
+    and a flipped label. If a system memorized the training set without
+    meaningfully generalizing, which was easy due to the small size of the
+    training set, it could perform far below chance on the development set. We
+    remove this adversarial design in the SuperGLUE version of WSC by ensuring
+    that no sentences are shared between the training, validation, and test
+    sets.
+
+However, the validation and test sets come from different domains, with the
+validation set consisting of ambiguous examples such that changing one non-noun
+phrase word will change the coreference dependencies in the sentence. The test
+set consists only of more straightforward examples, with a high number of noun
+phrases (and thus more choices for the model), but low to no ambiguity.
+
+*   `"wsc.fixed"` (`v0.0.2`) (`Size: ?? GiB`): The Winograd Schema Challenge
+    (WSC, Levesque et al., 2012) is a reading comprehension task in which a
+    system must read a sentence with a pronoun and select the referent of that
+    pronoun from a list of choices. Given the difficulty of this task and the
+    headroom still left, we have included WSC in SuperGLUE and recast the
+    dataset into its coreference form. The task is cast as a binary
+    classification problem, as opposed to N-multiple choice, in order to isolate
+    the model's ability to understand the coreference links within a sentence as
+    opposed to various other strategies that may come into play in multiple
+    choice conditions. With that in mind, we create a split with 65% negative
+    majority class in the validation set, reflecting the distribution of the
+    hidden test set, and 52% negative class in the training set. The training
+    and validation examples are drawn from the original Winograd Schema dataset
+    (Levesque et al., 2012), as well as those distributed by the affiliated
+    organization Commonsense Reasoning. The test examples are derived from
+    fiction books and have been shared with us by the authors of the original
+    dataset. Previously, a version of WSC recast as NLI as included in GLUE,
+    known as WNLI. No substantial progress was made on WNLI, with many
+    submissions opting to submit only majority class predictions. WNLI was made
+    especially difficult due to an adversarial train/dev split: Premise
+    sentences that appeared in the training set sometimes appeared in the
+    development set with a different hypothesis and a flipped label. If a system
+    memorized the training set without meaningfully generalizing, which was easy
+    due to the small size of the training set, it could perform far below chance
+    on the development set. We remove this adversarial design in the SuperGLUE
+    version of WSC by ensuring that no sentences are shared between the
+    training, validation, and test sets.
+
+However, the validation and test sets come from different domains, with the
+validation set consisting of ambiguous examples such that changing one non-noun
+phrase word will change the coreference dependencies in the sentence. The test
+set consists only of more straightforward examples, with a high number of noun
+phrases (and thus more choices for the model), but low to no ambiguity.
+
+This version fixes issues where the spans are not actually substrings of the
+text.
+
+#### `"super_glue/cb"`
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"super_glue/copa"`
+
+```python
+FeaturesDict({
+    'choice1': Text(shape=(), dtype=tf.string, encoder=None),
+    'choice2': Text(shape=(), dtype=tf.string, encoder=None),
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+    'question': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"super_glue/multirc"`
+
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string, encoder=None),
+    'idx': FeaturesDict({
+        'answer': Tensor(shape=(), dtype=tf.int32),
+        'paragraph': Tensor(shape=(), dtype=tf.int32),
+        'question': Tensor(shape=(), dtype=tf.int32),
+    }),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'paragraph': Text(shape=(), dtype=tf.string, encoder=None),
+    'question': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"super_glue/rte"`
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"super_glue/wic"`
+
+```python
+FeaturesDict({
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'pos': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+    'word': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"super_glue/wsc"`
+
+```python
+FeaturesDict({
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'span1_index': Tensor(shape=(), dtype=tf.int32),
+    'span1_text': Text(shape=(), dtype=tf.string, encoder=None),
+    'span2_index': Tensor(shape=(), dtype=tf.int32),
+    'span2_text': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"super_glue/wsc.fixed"`
+
+```python
+FeaturesDict({
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'span1_index': Tensor(shape=(), dtype=tf.int32),
+    'span1_text': Text(shape=(), dtype=tf.string, encoder=None),
+    'span2_index': Tensor(shape=(), dtype=tf.int32),
+    'span2_text': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+None computed
+
+#### Urls
+
+*   [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
+
+#### Citation
+
+```
+@inproceedings{levesque2012winograd,
+  title={The winograd schema challenge},
+  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
+  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
+  year={2012}
+}
+@article{wang2019superglue,
+  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
+  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},
+  journal={arXiv preprint arXiv:1905.00537},
+  year={2019}
+}
+
+Note that each SuperGLUE dataset has its own citation. Please see the source to
+get the correct citation for each contained dataset.
 ```
 
 ---
@@ -10470,10 +10822,7 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'hypothesis': TranslationVariableLanguages({
-        'language': Text(shape=(), dtype=tf.string, encoder=None),
-        'translation': Text(shape=(), dtype=tf.string, encoder=None),
-    }),
+    'hypothesis': TranslationVariableLanguages({'translation': TensorInfo(shape=(None,), dtype=tf.string), 'language': TensorInfo(shape=(None,), dtype=tf.string)}),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'premise': Translation({
         'ar': Text(shape=(), dtype=tf.string, encoder=None),
@@ -10615,14 +10964,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Slovak." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-French." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-Slovak.
+Web-Scale Parallel Corpora for Official European Languages. English-French.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -10632,53 +10981,8 @@ Web-Scale Parallel Corpora for Official European Languages. English-Slovak.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
-
-*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to da, uses encoder plain_text.
-
-*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pt, uses encoder plain_text.
-
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to it, uses encoder plain_text.
-
-*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ga, uses encoder plain_text.
-
-*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to mt, uses encoder plain_text.
-
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
-
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
-
-*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to el, uses encoder plain_text.
-
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to bg, uses encoder plain_text.
-
-*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to cs, uses encoder plain_text.
-
-*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to et, uses encoder plain_text.
-
-*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to es, uses encoder plain_text.
-
 *   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to sv, uses encoder plain_text.
-
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
-
-*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fr, uses encoder plain_text.
 
 *   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to hr, uses encoder plain_text.
@@ -10686,137 +10990,65 @@ has the following configurations predefined (defaults to the first one):
 *   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to hu, uses encoder plain_text.
 
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to bg, uses encoder plain_text.
+
 *   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to lt, uses encoder plain_text.
-
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
-
-*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
-
-*   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fi, uses encoder plain_text.
 
 *   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to sk, uses encoder plain_text.
 
-#### `"para_crawl/ende_plain_text"`
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
 
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to nl, uses encoder plain_text.
 
-#### `"para_crawl/enda_plain_text"`
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
 
-```python
-Translation({
-    'da': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to el, uses encoder plain_text.
 
-#### `"para_crawl/enpt_plain_text"`
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ga, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to et, uses encoder plain_text.
 
-#### `"para_crawl/enit_plain_text"`
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to cs, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'it': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to es, uses encoder plain_text.
 
-#### `"para_crawl/enga_plain_text"`
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ro, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ga': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pl, uses encoder plain_text.
 
-#### `"para_crawl/enmt_plain_text"`
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to it, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'mt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to mt, uses encoder plain_text.
 
-#### `"para_crawl/enro_plain_text"`
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pt, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ro': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
 
-#### `"para_crawl/enpl_plain_text"`
+*   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fi, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to da, uses encoder plain_text.
 
-#### `"para_crawl/enel_plain_text"`
-
-```python
-Translation({
-    'el': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enbg_plain_text"`
-
-```python
-Translation({
-    'bg': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/encs_plain_text"`
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enet_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'et': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enes_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'es': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fr, uses encoder plain_text.
 
 #### `"para_crawl/ensv_plain_text"`
 
@@ -10824,24 +11056,6 @@ Translation({
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'sv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ennl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'nl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enfr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10863,39 +11077,21 @@ Translation({
 })
 ```
 
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
 #### `"para_crawl/enlt_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'lt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enfi_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -10908,17 +11104,170 @@ Translation({
 })
 ```
 
+#### `"para_crawl/ensl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ennl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enel_plain_text"`
+
+```python
+Translation({
+    'el': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enga_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ga': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enet_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/encs_plain_text"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enes_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'es': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enro_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enit_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'it': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enmt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'mt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ende_plain_text"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfi_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enda_plain_text"`
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
 #### Statistics
 None computed
 
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sk.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sk.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
 
-`(u'en', u'sk')`
+`(u'en', u'fr')`
 
 #### Citation
 ```
@@ -11198,15 +11547,9 @@ configurations predefined (defaults to the first one):
 ```python
 FeaturesDict({
     'talk_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'translations': TranslationVariableLanguages({
-        'language': Text(shape=(), dtype=tf.string, encoder=None),
-        'translation': Text(shape=(), dtype=tf.string, encoder=None),
-    }),
+    'translations': TranslationVariableLanguages({'translation': TensorInfo(shape=(None,), dtype=tf.string), 'language': TensorInfo(shape=(None,), dtype=tf.string)}),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -11295,16 +11638,16 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt14_translate` is configured with `tfds.translate.wmt14.WmtConfig` and has
 the following configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.1`) (`Size: 1.58 GiB`): WMT 2014 cs-en translation task
+*   `"cs-en"` (`v0.0.3`) (`Size: 1.58 GiB`): WMT 2014 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.1`) (`Size: 1.58 GiB`): WMT 2014 de-en translation task
+*   `"de-en"` (`v0.0.3`) (`Size: 1.58 GiB`): WMT 2014 de-en translation task
     dataset.
 
-*   `"fr-en"` (`v0.0.1`) (`Size: 6.20 GiB`): WMT 2014 fr-en translation task
+*   `"fr-en"` (`v0.0.3`) (`Size: 6.20 GiB`): WMT 2014 fr-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.1`) (`Size: 998.38 MiB`): WMT 2014 ru-en translation task
+*   `"ru-en"` (`v0.0.3`) (`Size: 998.38 MiB`): WMT 2014 ru-en translation task
     dataset.
 
 #### `"wmt14_translate/cs-en"`
@@ -11347,10 +11690,10 @@ Translation({
 
 Split      | Examples
 :--------- | --------:
-ALL        | 2,495,971
+ALL        | 2,492,968
 TRAIN      | 2,486,965
-VALIDATION | 6,003
 TEST       | 3,003
+VALIDATION | 3,000
 
 #### Urls
 
@@ -11428,35 +11771,35 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.2`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
+*   `"cs-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.2`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
+*   `"de-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 de-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.2`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
+*   `"fi-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 fi-en translation task
     dataset.
 
-*   `"fr-en"` (`v0.0.2`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
+*   `"fr-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 fr-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.2`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
+*   `"ru-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 ru-en translation task
     dataset.
 
-*   `"cs-en.subwords8k"` (`v0.0.1`) (`Size: ?? GiB`): WMT 2015 cs-en translation
+*   `"cs-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 cs-en translation
     task dataset with subword encoding.
 
-*   `"de-en.subwords8k"` (`v0.0.1`) (`Size: 1.62 GiB`): WMT 2015 de-en
-    translation task dataset with subword encoding.
+*   `"de-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 de-en translation
+    task dataset with subword encoding.
 
-*   `"fi-en.subwords8k"` (`v0.0.1`) (`Size: 260.51 MiB`): WMT 2015 fi-en
-    translation task dataset with subword encoding.
+*   `"fi-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 fi-en translation
+    task dataset with subword encoding.
 
-*   `"fr-en.subwords8k"` (`v0.0.1`) (`Size: 6.24 GiB`): WMT 2015 fr-en
-    translation task dataset with subword encoding.
+*   `"fr-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 fr-en translation
+    task dataset with subword encoding.
 
-*   `"ru-en.subwords8k"` (`v0.0.1`) (`Size: 1.02 GiB`): WMT 2015 ru-en
-    translation task dataset with subword encoding.
+*   `"ru-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 ru-en translation
+    task dataset with subword encoding.
 
 #### `"wmt15_translate/cs-en"`
 
@@ -11528,55 +11871,41 @@ Translation({
 
 ```python
 Translation({
-    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
-
-
 
 #### `"wmt15_translate/fi-en.subwords8k"`
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
-    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
-
-
 
 #### `"wmt15_translate/fr-en.subwords8k"`
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
-
-
 
 #### `"wmt15_translate/ru-en.subwords8k"`
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
-    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ru': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-
-
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |  2,506,905
-TRAIN      |  2,495,081
-VALIDATION |      9,006
-TEST       |      2,818
 
+None computed
 
 #### Urls
  * [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
@@ -11653,22 +11982,22 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt16_translate` is configured with `tfds.translate.wmt16.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.1`) (`Size: 1.57 GiB`): WMT 2016 cs-en translation task
+*   `"cs-en"` (`v0.0.3`) (`Size: 1.57 GiB`): WMT 2016 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.1`) (`Size: 1.57 GiB`): WMT 2016 de-en translation task
+*   `"de-en"` (`v0.0.3`) (`Size: 1.57 GiB`): WMT 2016 de-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.1`) (`Size: 260.51 MiB`): WMT 2016 fi-en translation task
+*   `"fi-en"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2016 fi-en translation task
     dataset.
 
-*   `"ro-en"` (`v0.0.1`) (`Size: 273.83 MiB`): WMT 2016 ro-en translation task
+*   `"ro-en"` (`v0.0.3`) (`Size: 273.83 MiB`): WMT 2016 ro-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.1`) (`Size: 993.38 MiB`): WMT 2016 ru-en translation task
+*   `"ru-en"` (`v0.0.3`) (`Size: 993.38 MiB`): WMT 2016 ru-en translation task
     dataset.
 
-*   `"tr-en"` (`v0.0.1`) (`Size: 59.32 MiB`): WMT 2016 tr-en translation task
+*   `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2016 tr-en translation task
     dataset.
 
 #### `"wmt16_translate/cs-en"`
@@ -11822,25 +12151,25 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt17_translate` is configured with `tfds.translate.wmt17.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.2`) (`Size: 1.66 GiB`): WMT 2017 cs-en translation task
+*   `"cs-en"` (`v0.0.3`) (`Size: 1.66 GiB`): WMT 2017 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.2`) (`Size: 1.81 GiB`): WMT 2017 de-en translation task
+*   `"de-en"` (`v0.0.3`) (`Size: 1.81 GiB`): WMT 2017 de-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.2`) (`Size: 414.10 MiB`): WMT 2017 fi-en translation task
+*   `"fi-en"` (`v0.0.3`) (`Size: 414.10 MiB`): WMT 2017 fi-en translation task
     dataset.
 
-*   `"lv-en"` (`v0.0.2`) (`Size: 161.69 MiB`): WMT 2017 lv-en translation task
+*   `"lv-en"` (`v0.0.3`) (`Size: 161.69 MiB`): WMT 2017 lv-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.2`) (`Size: 3.34 GiB`): WMT 2017 ru-en translation task
+*   `"ru-en"` (`v0.0.3`) (`Size: 3.34 GiB`): WMT 2017 ru-en translation task
     dataset.
 
-*   `"tr-en"` (`v0.0.2`) (`Size: 59.32 MiB`): WMT 2017 tr-en translation task
+*   `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2017 tr-en translation task
     dataset.
 
-*   `"zh-en"` (`v0.0.2`) (`Size: 2.16 GiB`): WMT 2017 zh-en translation task
+*   `"zh-en"` (`v0.0.3`) (`Size: 2.16 GiB`): WMT 2017 zh-en translation task
     dataset.
 
 #### `"wmt17_translate/cs-en"`
@@ -12005,28 +12334,28 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt18_translate` is configured with `tfds.translate.wmt18.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.2`) (`Size: 1.89 GiB`): WMT 2018 cs-en translation task
+*   `"cs-en"` (`v0.0.3`) (`Size: 1.89 GiB`): WMT 2018 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.2`) (`Size: 3.55 GiB`): WMT 2018 de-en translation task
+*   `"de-en"` (`v0.0.3`) (`Size: 3.55 GiB`): WMT 2018 de-en translation task
     dataset.
 
-*   `"et-en"` (`v0.0.2`) (`Size: 499.91 MiB`): WMT 2018 et-en translation task
+*   `"et-en"` (`v0.0.3`) (`Size: 499.91 MiB`): WMT 2018 et-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.2`) (`Size: 468.76 MiB`): WMT 2018 fi-en translation task
+*   `"fi-en"` (`v0.0.3`) (`Size: 468.76 MiB`): WMT 2018 fi-en translation task
     dataset.
 
-*   `"kk-en"` (`v0.0.2`) (`Size: ?? GiB`): WMT 2018 kk-en translation task
+*   `"kk-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2018 kk-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.2`) (`Size: 3.91 GiB`): WMT 2018 ru-en translation task
+*   `"ru-en"` (`v0.0.3`) (`Size: 3.91 GiB`): WMT 2018 ru-en translation task
     dataset.
 
-*   `"tr-en"` (`v0.0.2`) (`Size: 59.32 MiB`): WMT 2018 tr-en translation task
+*   `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2018 tr-en translation task
     dataset.
 
-*   `"zh-en"` (`v0.0.2`) (`Size: 2.10 GiB`): WMT 2018 zh-en translation task
+*   `"zh-en"` (`v0.0.3`) (`Size: 2.10 GiB`): WMT 2018 zh-en translation task
     dataset.
 
 #### `"wmt18_translate/cs-en"`
@@ -12115,17 +12444,14 @@ Translation({
 })
 ```
 
-
-
-
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        | 25,170,193
-TRAIN      | 25,162,209
-VALIDATION |      4,003
-TEST       |      3,981
 
+Split      | Examples
+:--------- | ---------:
+ALL        | 25,168,191
+TRAIN      | 25,162,209
+TEST       | 3,981
+VALIDATION | 2,001
 
 #### Urls
  * [http://www.statmt.org/wmt18/translation-task.html](http://www.statmt.org/wmt18/translation-task.html)
@@ -12205,31 +12531,31 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt19_translate` is configured with `tfds.translate.wmt19.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.2`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task
+*   `"cs-en"` (`v0.0.3`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.2`) (`Size: 9.71 GiB`): WMT 2019 de-en translation task
+*   `"de-en"` (`v0.0.3`) (`Size: 9.71 GiB`): WMT 2019 de-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.2`) (`Size: 959.46 MiB`): WMT 2019 fi-en translation task
+*   `"fi-en"` (`v0.0.3`) (`Size: 959.46 MiB`): WMT 2019 fi-en translation task
     dataset.
 
-*   `"gu-en"` (`v0.0.2`) (`Size: 37.03 MiB`): WMT 2019 gu-en translation task
+*   `"gu-en"` (`v0.0.3`) (`Size: 37.03 MiB`): WMT 2019 gu-en translation task
     dataset.
 
-*   `"kk-en"` (`v0.0.2`) (`Size: 39.58 MiB`): WMT 2019 kk-en translation task
+*   `"kk-en"` (`v0.0.3`) (`Size: 39.58 MiB`): WMT 2019 kk-en translation task
     dataset.
 
-*   `"lt-en"` (`v0.0.2`) (`Size: 392.20 MiB`): WMT 2019 lt-en translation task
+*   `"lt-en"` (`v0.0.3`) (`Size: 392.20 MiB`): WMT 2019 lt-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.2`) (`Size: 3.86 GiB`): WMT 2019 ru-en translation task
+*   `"ru-en"` (`v0.0.3`) (`Size: 3.86 GiB`): WMT 2019 ru-en translation task
     dataset.
 
-*   `"zh-en"` (`v0.0.2`) (`Size: 2.04 GiB`): WMT 2019 zh-en translation task
+*   `"zh-en"` (`v0.0.3`) (`Size: 2.04 GiB`): WMT 2019 zh-en translation task
     dataset.
 
-*   `"fr-de"` (`v0.0.2`) (`Size: 722.20 MiB`): WMT 2019 fr-de translation task
+*   `"fr-de"` (`v0.0.3`) (`Size: 722.20 MiB`): WMT 2019 fr-de translation task
     dataset.
 
 #### `"wmt19_translate/cs-en"`
@@ -12357,6 +12683,106 @@ VALIDATION |      1,512
 
 ---
 
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="wmt_t2t_translate" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version=&quot;0.0.1&quot;,
+    language_pair=(&quot;fr&quot;, &quot;de&quot;),
+    subsets={
+        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
+        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
+    },
+)
+builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
+```" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#wmt_t2t_translate" />
+  <meta itemprop="sameAs" content="https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py" />
+</div>
+
+### `"wmt_t2t_translate"`
+
+Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
+*   URL:
+    [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
+*   `DatasetBuilder`:
+    [`tfds.translate.wmt_t2t.WmtT2tTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_t2t.py)
+
+`wmt_t2t_translate` is configured with `tfds.translate.wmt_t2t.WmtConfig` and
+has the following configurations predefined (defaults to the first one):
+
+*   `"de-en"` (`v0.0.1`) (`Size: 1.61 GiB`): WMT T2T EnDe translation task
+    dataset.
+
+#### `"wmt_t2t_translate/de-en"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 4,598,292
+TRAIN      | 4,592,289
+TEST       | 3,003
+VALIDATION | 3,000
+
+#### Urls
+
+*   [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'de', u'en')`
+
+#### Citation
+
+```
+@InProceedings{bojar-EtAl:2014:W14-33,
+  author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},
+  title     = {Findings of the 2014 Workshop on Statistical Machine Translation},
+  booktitle = {Proceedings of the Ninth Workshop on Statistical Machine Translation},
+  month     = {June},
+  year      = {2014},
+  address   = {Baltimore, Maryland, USA},
+  publisher = {Association for Computational Linguistics},
+  pages     = {12--58},
+  url       = {http://www.aclweb.org/anthology/W/W14/W14-3302}
+}
+```
+
+--------------------------------------------------------------------------------
 
 ## [`video`](#video)
 
@@ -12382,15 +12808,15 @@ This data set contains roughly 44,000 examples of robot pushing motions, includi
 *   Size: `30.06 GiB`
 
 #### Features
+
 ```python
-SequenceDict({
+Sequence({
     'action': Tensor(shape=(4,), dtype=tf.float32),
     'endeffector_pos': Tensor(shape=(3,), dtype=tf.float32),
     'image_aux1': Image(shape=(64, 64, 3), dtype=tf.uint8),
     'image_main': Image(shape=(64, 64, 3), dtype=tf.uint8),
 })
 ```
-
 
 #### Statistics
 Split  | Examples

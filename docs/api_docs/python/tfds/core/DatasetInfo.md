@@ -167,7 +167,6 @@ read_from_directory(dataset_info_dir)
 ```
 
 Update DatasetInfo from the JSON file in `dataset_info_dir`.
-
 This function updates all the dynamically generated fields (num_examples,
 hash, time of creation,...) of the DatasetInfo.
 
@@ -185,7 +184,6 @@ update_splits_if_different(split_dict)
 ```
 
 Overwrite the splits if they are different from the current ones.
-
 * If splits aren't already defined or different (ex: different number of
   shards), then the new split dict is used. This will trigger stats
   computation during download_and_prepare.

@@ -43,7 +43,6 @@ __init__(
 ```
 
 Constructs a TokenTextEncoder.
-
 To load from a file saved with `TokenTextEncoder.save_to_file`, use
 `TokenTextEncoder.load_from_file`.
 

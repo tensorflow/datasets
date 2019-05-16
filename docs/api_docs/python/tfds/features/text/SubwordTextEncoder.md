@@ -53,7 +53,6 @@ __init__(vocab_list=None)
 ```
 
 Constructs a SubwordTextEncoder from a vocabulary list.
-
 Note: To generate a vocabulary from a corpus, use
 <a href="../../../tfds/features/text/SubwordTextEncoder.md#build_from_corpus"><code>tfds.features.text.SubwordTextEncoder.build_from_corpus</code></a>.
 
