@@ -240,7 +240,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       SuperGlueConfig(
           name="cb",
-          version="0.0.1",
+          version="0.0.2",
           description=_CB_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "contradiction", "neutral"],
@@ -249,7 +249,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="https://github.com/mcdm/CommitmentBank"),
       SuperGlueConfig(
           name="copa",
-          version="0.0.1",
+          version="0.0.2",
           description=_COPA_DESCRIPTION,
           # Note that question will only be the X in the statement "What's
           # the X for this?".
@@ -259,7 +259,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="http://people.ict.usc.edu/~gordon/copa.html"),
       SuperGlueConfig(
           name="multirc",
-          version="0.0.1",
+          version="0.0.2",
           description=_MULTIRC_DESCRIPTION,
           label_classes=["False", "True"],
           features=["paragraph", "question", "answer"],
@@ -268,7 +268,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="https://cogcomp.org/multirc/"),
       SuperGlueConfig(
           name="rte",
-          version="0.0.1",
+          version="0.0.2",
           description=_RTE_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "not_entailment"],
@@ -277,7 +277,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"),
       SuperGlueConfig(
           name="wic",
-          version="0.0.1",
+          version="0.0.2",
           description=_WIC_DESCRIPTION,
           # pos refers to part of speech (e.g., "N", "V", ...).
           features=["word", "pos", "sentence1", "sentence2"],
@@ -286,8 +286,24 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="https://pilehvar.github.io/wic/"),
       SuperGlueConfig(
           name="wsc",
-          version="0.0.1",
+          version="0.0.2",
           description=_WSC_DESCRIPTION,
+          # Note that span1_index and span2_index will be integers stored as
+          # tf.int32.
+          features=[
+              "text", "span1_index", "span2_index", "span1_text", "span2_text"
+          ],
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/WSC.zip",
+          citation=_WSC_CITATION,
+          url="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
+      ),
+      SuperGlueConfig(
+          name="wsc.fixed",
+          version="0.0.2",
+          description=(
+              _WSC_DESCRIPTION +
+              "\n\nThis version fixes issues where the spans are not actually "
+              "substrings of the text."),
           # Note that span1_index and span2_index will be integers stored as
           # tf.int32.
           features=[
@@ -304,7 +320,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
         feature: tfds.features.Text()
         for feature in self.builder_config.features
     }
-    if self.builder_config.name == "wsc":
+    if self.builder_config.name.startswith("wsc"):
       features["span1_index"] = tf.int32
       features["span2_index"] = tf.int32
     if self.builder_config.name == "multirc":
@@ -336,22 +352,25 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
             num_shards=1,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir or "", "train.jsonl"),
+                "split": tfds.Split.TRAIN,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             num_shards=1,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir or "", "val.jsonl"),
+                "split": tfds.Split.VALIDATION,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir or "", "test.jsonl"),
+                "split": tfds.Split.TEST,
             }),
     ]
 
-  def _generate_examples(self, data_file):
+  def _generate_examples(self, data_file, split):
     with tf.io.gfile.GFile(data_file) as f:
       for line in f:
         row = json.loads(line)
@@ -373,27 +392,65 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
                   }
               }
         else:
-          if self.builder_config.name == "wsc":
+          if self.builder_config.name.startswith("wsc"):
             row.update(row["target"])
           example = {
               feature: row[feature] for feature in self.builder_config.features
           }
+          if self.builder_config.name == "wsc.fixed":
+            example = _fix_wst(example)
           example["idx"] = row["idx"]
 
-          if "label" in example:
+          if "label" in row:
             example["label"] = _cast_label(row["label"])
           else:
+            assert split == tfds.Split.TEST, row
             example["label"] = -1
-
           yield example
+
+
+def _fix_wst(ex):
+  """Fixes most cases where spans are not actually substrings of text."""
+  def _fix_span_text(k):
+    """Fixes a single span."""
+    text = ex[k + "_text"]
+    index = ex[k + "_index"]
+
+    if text in ex["text"]:
+      return
+
+    if text in ("Kamenev and Zinoviev", "Kamenev, Zinoviev, and Stalin"):
+      # There is no way to correct these examples since the subjects have
+      # intervening text.
+      return
+
+    if "theyscold" in text:
+      ex["text"].replace("theyscold", "they scold")
+      ex["span2_index"] = 10
+    # Make sure case of the first words match.
+    first_word = ex["text"].split()[index]
+    if first_word[0].islower():
+      text = text[0].lower() + text[1:]
+    else:
+      text = text[0].upper() + text[1:]
+    # Remove punctuation in span.
+    text = text.rstrip(".")
+    # Replace incorrect whitespace character in span.
+    text = text.replace("\n", " ")
+    ex[k + "_text"] = text
+    assert ex[k + "_text"] in ex["text"], ex
+  _fix_span_text("span1")
+  _fix_span_text("span2")
+  return ex
 
 
 def _cast_label(label):
   """Converts the label into the appropriate string version."""
   if isinstance(label, six.string_types):
     return label
-  elif isinstance(label, (int, six.integer_types)):
-    return str(label)
+  elif isinstance(label, six.integer_types):
+    assert label in (0, 1)
+    return "True" if label else "False"
   elif isinstance(label, bool):
     return "True" if label else "False"
   else:

@@ -74,7 +74,7 @@ class SuperGlueRteTest(testing.DatasetBuilderTestCase):
 
 
 class SuperGlueWscTest(testing.DatasetBuilderTestCase):
-  BUILDER_CONFIG_NAMES_TO_TEST = ["wsc"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["wsc", "wsc.fixed"]
   DATASET_CLASS = super_glue.SuperGlue
   EXAMPLE_DIR = os.path.join(_BASE_DIR, "WSC")
   SPLITS = {
