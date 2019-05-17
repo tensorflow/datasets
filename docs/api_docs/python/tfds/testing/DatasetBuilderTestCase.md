@@ -12,6 +12,7 @@
 <meta itemprop="property" content="assertAllClose"/>
 <meta itemprop="property" content="assertAllCloseAccordingToType"/>
 <meta itemprop="property" content="assertAllEqual"/>
+<meta itemprop="property" content="assertAllEqualNested"/>
 <meta itemprop="property" content="assertAllGreater"/>
 <meta itemprop="property" content="assertAllGreaterEqual"/>
 <meta itemprop="property" content="assertAllInRange"/>
@@ -368,6 +369,17 @@ Asserts that two numpy arrays or Tensors have the same values.
 * <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
 * <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
 * <b>`msg`</b>: Optional message to report on failure.
+
+<h3 id="assertAllEqualNested"><code>assertAllEqualNested</code></h3>
+
+```python
+assertAllEqualNested(
+    d1,
+    d2
+)
+```
+
+Same as assertAllEqual but compatible with nested dict.
 
 <h3 id="assertAllGreater"><code>assertAllGreater</code></h3>
 

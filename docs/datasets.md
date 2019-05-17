@@ -2248,7 +2248,7 @@ reasoning each question requires.
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'objects': Sequence({'material': TensorInfo(shape=(None,), dtype=tf.int64), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'color': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'size': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'objects': Sequence({'3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'color': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'size': TensorInfo(shape=(None,), dtype=tf.int64), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'material': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -2266,11 +2266,9 @@ TEST       | 15,000
 *   [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `None`
 
 #### Citation
-
 ```
 @inproceedings{johnson2017clevr,
   title={{CLEVR}: A diagnostic dataset for compositional language and elementary visual reasoning},
@@ -2316,7 +2314,7 @@ Note:
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'objects': Sequence({'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool)}),
 })
 ```
 
@@ -4614,11 +4612,11 @@ and has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -4626,11 +4624,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -4638,11 +4636,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5408,7 +5406,7 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
     'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
     'labels_no_difficult': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'objects': Sequence({'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'objects': Sequence({'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool)}),
 })
 ```
 
@@ -6557,32 +6555,34 @@ text.
 `super_glue` is configured with `tfds.text.super_glue.SuperGlueConfig` and has
 the following configurations predefined (defaults to the first one):
 
-*   `"cb"` (`v0.0.2`) (`Size: ?? GiB`): The CommitmentBank (De Marneffe et al.,
-    2019) is a corpus of short texts in which at least one sentence contains an
-    embedded clause. Each of these embedded clauses is annotated with the degree
-    to which we expect that the person who wrote the text is committed to the
-    truth of the clause. The resulting task framed as three-class textual
-    entailment on examples that are drawn from the Wall Street Journal, fiction
-    from the British National Corpus, and Switchboard. Each example consists of
-    a premise containing an embedded clause and the corresponding hypothesis is
-    the extraction of that clause. We use a subset of the data that had
-    inter-annotator agreement above 0.85. The data is imbalanced (relatively
-    fewer neutral examples), so we evaluate using accuracy and F1, where for
-    multi-class F1 we compute the unweighted average of the F1 per class.
+*   `"cb"` (`v0.0.2`) (`Size: 73.56 KiB`): The CommitmentBank (De Marneffe et
+    al., 2019) is a corpus of short texts in which at least one sentence
+    contains an embedded clause. Each of these embedded clauses is annotated
+    with the degree to which we expect that the person who wrote the text is
+    committed to the truth of the clause. The resulting task framed as
+    three-class textual entailment on examples that are drawn from the Wall
+    Street Journal, fiction from the British National Corpus, and Switchboard.
+    Each example consists of a premise containing an embedded clause and the
+    corresponding hypothesis is the extraction of that clause. We use a subset
+    of the data that had inter-annotator agreement above 0.85. The data is
+    imbalanced (relatively fewer neutral examples), so we evaluate using
+    accuracy and F1, where for multi-class F1 we compute the unweighted average
+    of the F1 per class.
 
-*   `"copa"` (`v0.0.2`) (`Size: ?? GiB`): The Choice Of Plausible Alternatives
-    (COPA, Roemmele et al., 2011) dataset is a causal reasoning task in which a
-    system is given a premise sentence and two possible alternatives. The system
-    must choose the alternative which has the more plausible causal relationship
-    with the premise. The method used for the construction of the alternatives
-    ensures that the task requires causal reasoning to solve. Examples either
-    deal with alternative possible causes or alternative possible effects of the
-    premise sentence, accompanied by a simple question disambiguating between
-    the two instance types for the model. All examples are handcrafted and focus
-    on topics from online blogs and a photography-related encyclopedia.
-    Following the recommendation of the authors, we evaluate using accuracy.
+*   `"copa"` (`v0.0.2`) (`Size: 42.79 KiB`): The Choice Of Plausible
+    Alternatives (COPA, Roemmele et al., 2011) dataset is a causal reasoning
+    task in which a system is given a premise sentence and two possible
+    alternatives. The system must choose the alternative which has the more
+    plausible causal relationship with the premise. The method used for the
+    construction of the alternatives ensures that the task requires causal
+    reasoning to solve. Examples either deal with alternative possible causes or
+    alternative possible effects of the premise sentence, accompanied by a
+    simple question disambiguating between the two instance types for the model.
+    All examples are handcrafted and focus on topics from online blogs and a
+    photography-related encyclopedia. Following the recommendation of the
+    authors, we evaluate using accuracy.
 
-*   `"multirc"` (`v0.0.2`) (`Size: ?? GiB`): The Multi-Sentence Reading
+*   `"multirc"` (`v0.0.2`) (`Size: 1.16 MiB`): The Multi-Sentence Reading
     Comprehension dataset (MultiRC, Khashabi et al., 2018) is a true/false
     question-answering task. Each example consists of a context paragraph, a
     question about that paragraph, and a list of possible answers to that
@@ -6596,7 +6596,7 @@ the following configurations predefined (defaults to the first one):
     tasks than span-based extractive QA does. The paragraphs are drawn from
     seven domains including news, fiction, and historical text.
 
-*   `"rte"` (`v0.0.2`) (`Size: ?? GiB`): The Recognizing Textual Entailment
+*   `"rte"` (`v0.0.2`) (`Size: 733.16 KiB`): The Recognizing Textual Entailment
     (RTE) datasets come from a series of annual competitions on textual
     entailment, the problem of predicting whether a given premise sentence
     entails a given hypothesis sentence (also known as natural language
@@ -6612,16 +6612,16 @@ the following configurations predefined (defaults to the first one):
     yet solved by machines, and we expect the remaining gap to be difficult to
     close.
 
-*   `"wic"` (`v0.0.2`) (`Size: ?? GiB`): The Word-in-Context (WiC, Pilehvar and
-    Camacho-Collados, 2019) dataset supports a word sense disambiguation task
-    cast as binary classification over sentence pairs. Given two sentences and a
-    polysemous (sense-ambiguous) word that appears in both sentences, the task
-    is to determine whether the word is used with the same sense in both
+*   `"wic"` (`v0.0.2`) (`Size: 347.15 KiB`): The Word-in-Context (WiC, Pilehvar
+    and Camacho-Collados, 2019) dataset supports a word sense disambiguation
+    task cast as binary classification over sentence pairs. Given two sentences
+    and a polysemous (sense-ambiguous) word that appears in both sentences, the
+    task is to determine whether the word is used with the same sense in both
     sentences. Sentences are drawn from WordNet (Miller, 1995), VerbNet
     (Schuler, 2005), and Wiktionary. We follow the original work and evaluate
     using accuracy.
 
-*   `"wsc"` (`v0.0.2`) (`Size: ?? GiB`): The Winograd Schema Challenge (WSC,
+*   `"wsc"` (`v0.0.2`) (`Size: 31.84 KiB`): The Winograd Schema Challenge (WSC,
     Levesque et al., 2012) is a reading comprehension task in which a system
     must read a sentence with a pronoun and select the referent of that pronoun
     from a list of choices. Given the difficulty of this task and the headroom
@@ -6655,7 +6655,7 @@ phrase word will change the coreference dependencies in the sentence. The test
 set consists only of more straightforward examples, with a high number of noun
 phrases (and thus more choices for the model), but low to no ambiguity.
 
-*   `"wsc.fixed"` (`v0.0.2`) (`Size: ?? GiB`): The Winograd Schema Challenge
+*   `"wsc.fixed"` (`v0.0.2`) (`Size: 31.84 KiB`): The Winograd Schema Challenge
     (WSC, Levesque et al., 2012) is a reading comprehension task in which a
     system must read a sentence with a pronoun and select the referent of that
     pronoun from a list of choices. Given the difficulty of this task and the
@@ -6786,7 +6786,12 @@ FeaturesDict({
 
 #### Statistics
 
-None computed
+Split      | Examples
+:--------- | -------:
+ALL        | 804
+TRAIN      | 554
+TEST       | 146
+VALIDATION | 104
 
 #### Urls
 
@@ -6794,11 +6799,9 @@ None computed
 *   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `None`
 
 #### Citation
-
 ```
 @inproceedings{levesque2012winograd,
   title={The winograd schema challenge},
@@ -10964,14 +10967,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-French." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Bulgarian." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-French.
+Web-Scale Parallel Corpora for Official European Languages. English-Bulgarian.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -10981,41 +10984,20 @@ Web-Scale Parallel Corpora for Official European Languages. English-French.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sv, uses encoder plain_text.
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to it, uses encoder plain_text.
 
-*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
-
-*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hu, uses encoder plain_text.
-
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to bg, uses encoder plain_text.
-
-*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
-
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
-
-*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
-
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
-
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
-
-*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to el, uses encoder plain_text.
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ro, uses encoder plain_text.
 
 *   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to ga, uses encoder plain_text.
 
-*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to et, uses encoder plain_text.
+*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to el, uses encoder plain_text.
+
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pl, uses encoder plain_text.
 
 *   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to cs, uses encoder plain_text.
@@ -11023,26 +11005,41 @@ has the following configurations predefined (defaults to the first one):
 *   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to es, uses encoder plain_text.
 
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
-
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
-
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to it, uses encoder plain_text.
-
-*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to mt, uses encoder plain_text.
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to et, uses encoder plain_text.
 
 *   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to pt, uses encoder plain_text.
 
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to nl, uses encoder plain_text.
+
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
+
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hu, uses encoder plain_text.
+
+*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to mt, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
+
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
+
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
+
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
 
 *   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to fi, uses encoder plain_text.
+
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
 
 *   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to da, uses encoder plain_text.
@@ -11050,93 +11047,27 @@ has the following configurations predefined (defaults to the first one):
 *   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to fr, uses encoder plain_text.
 
-#### `"para_crawl/ensv_plain_text"`
+*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sv, uses encoder plain_text.
+
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to bg, uses encoder plain_text.
+
+#### `"para_crawl/enit_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sv': Text(shape=(), dtype=tf.string, encoder=None),
+    'it': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enhr_plain_text"`
+#### `"para_crawl/enro_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hr': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhu_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hu': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enbg_plain_text"`
-
-```python
-Translation({
-    'bg': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensk_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sk': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ennl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'nl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enel_plain_text"`
-
-```python
-Translation({
-    'el': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11149,12 +11080,21 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enet_plain_text"`
+#### `"para_crawl/enel_plain_text"`
+
+```python
+Translation({
+    'el': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpl_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'et': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11176,39 +11116,12 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enro_plain_text"`
+#### `"para_crawl/enet_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ro': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enpl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enit_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'it': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enmt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'mt': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11221,12 +11134,75 @@ Translation({
 })
 ```
 
-#### `"para_crawl/ende_plain_text"`
+#### `"para_crawl/ennl_plain_text"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhu_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hu': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enmt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'mt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ensk_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sk': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11236,6 +11212,15 @@ Translation({
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ende_plain_text"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11257,17 +11242,35 @@ Translation({
 })
 ```
 
+#### `"para_crawl/ensv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
 #### Statistics
 None computed
 
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-bg.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-bg.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
 
-`(u'en', u'fr')`
+`(u'en', u'bg')`
 
 #### Citation
 ```
@@ -11860,19 +11863,17 @@ Translation({
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'cs': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
 })
 ```
-
-
 
 #### `"wmt15_translate/de-en.subwords8k"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
 })
 ```
 
@@ -11880,8 +11881,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'fi': Text(shape=(None,), dtype=tf.int64, encoder=None),
 })
 ```
 
@@ -11889,8 +11890,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=None),
 })
 ```
 
@@ -11898,13 +11899,12 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'ru': Text(shape=(None,), dtype=tf.int64, encoder=None),
 })
 ```
 
 #### Statistics
-
 None computed
 
 #### Urls
@@ -12763,11 +12763,9 @@ VALIDATION | 3,000
 *   [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `(u'de', u'en')`
 
 #### Citation
-
 ```
 @InProceedings{bojar-EtAl:2014:W14-33,
   author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},
@@ -12808,7 +12806,6 @@ This data set contains roughly 44,000 examples of robot pushing motions, includi
 *   Size: `30.06 GiB`
 
 #### Features
-
 ```python
 Sequence({
     'action': Tensor(shape=(4,), dtype=tf.float32),

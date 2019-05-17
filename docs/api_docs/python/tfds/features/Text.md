@@ -25,9 +25,7 @@
 
 `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-
+Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 Defined in [`core/features/text_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py).
 
@@ -87,7 +85,7 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
-
+See base class for details.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -137,7 +135,7 @@ If not defined, the retuned values are automatically deduced from the
 get_tensor_info()
 ```
 
-
+See base class for details.
 
 <h3 id="ints2str"><code>ints2str</code></h3>
 

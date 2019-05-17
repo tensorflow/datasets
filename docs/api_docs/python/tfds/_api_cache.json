@@ -1,5 +1,5 @@
 {
-  "current_doc_full_name": "tfds.features.text.TextEncoderConfig.__new__", 
+  "current_doc_full_name": "tfds.core.SplitBase.__reduce__", 
   "duplicate_of": {
     "tfds.GenerateMode": "tfds.download.GenerateMode", 
     "tfds.GenerateMode.FORCE_REDOWNLOAD": "tfds.download.GenerateMode.FORCE_REDOWNLOAD", 
@@ -1686,6 +1686,7 @@
     "tfds.testing.DatasetBuilderTestCase.assertAllClose": true, 
     "tfds.testing.DatasetBuilderTestCase.assertAllCloseAccordingToType": true, 
     "tfds.testing.DatasetBuilderTestCase.assertAllEqual": true, 
+    "tfds.testing.DatasetBuilderTestCase.assertAllEqualNested": true, 
     "tfds.testing.DatasetBuilderTestCase.assertAllGreater": true, 
     "tfds.testing.DatasetBuilderTestCase.assertAllGreaterEqual": true, 
     "tfds.testing.DatasetBuilderTestCase.assertAllInRange": true, 
@@ -1927,6 +1928,7 @@
     "tfds.testing.FeatureExpectationsTestCase.assertAllClose": true, 
     "tfds.testing.FeatureExpectationsTestCase.assertAllCloseAccordingToType": true, 
     "tfds.testing.FeatureExpectationsTestCase.assertAllEqual": true, 
+    "tfds.testing.FeatureExpectationsTestCase.assertAllEqualNested": true, 
     "tfds.testing.FeatureExpectationsTestCase.assertAllGreater": true, 
     "tfds.testing.FeatureExpectationsTestCase.assertAllGreaterEqual": true, 
     "tfds.testing.FeatureExpectationsTestCase.assertAllInRange": true, 

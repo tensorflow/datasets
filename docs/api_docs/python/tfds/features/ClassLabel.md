@@ -23,9 +23,7 @@
 
 `FeatureConnector` for integer class labels.
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-
+Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 Defined in [`core/features/class_label_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/class_label_feature.py).
 
@@ -93,7 +91,7 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
-
+See base class for details.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -143,7 +141,7 @@ If not defined, the retuned values are automatically deduced from the
 get_tensor_info()
 ```
 
-
+See base class for details.
 
 <h3 id="int2str"><code>int2str</code></h3>
 
