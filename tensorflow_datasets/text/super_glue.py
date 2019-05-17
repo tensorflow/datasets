@@ -204,7 +204,7 @@ _WSC_CITATION = """\
 
 
 class SuperGlueConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for GLUE."""
+  """BuilderConfig for SuperGLUE."""
 
   @api_utils.disallow_positional_args
   def __init__(self,
@@ -214,7 +214,7 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
                url,
                label_classes=("False", "True"),
                **kwargs):
-    """BuilderConfig for GLUE.
+    """BuilderConfig for SuperGLUE.
 
     Args:
       features: `list[string]`, list of the features that will appear in the
