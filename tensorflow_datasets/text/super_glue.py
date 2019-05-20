@@ -251,6 +251,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           name="copa",
           version="0.0.2",
           description=_COPA_DESCRIPTION,
+          label_classes=["choice1", "choice2"],
           # Note that question will only be the X in the statement "What's
           # the X for this?".
           features=["premise", "choice1", "choice2", "question"],
@@ -261,7 +262,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           name="multirc",
           version="0.0.2",
           description=_MULTIRC_DESCRIPTION,
-          label_classes=["False", "True"],
           features=["paragraph", "question", "answer"],
           data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/MultiRC.zip",
           citation=_MULTIRC_CITATION,
@@ -402,7 +402,10 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           example["idx"] = row["idx"]
 
           if "label" in row:
-            example["label"] = _cast_label(row["label"])
+            if self.builder_config.name == "copa":
+              example["label"] = "choice2" if row["label"] else "choice1"
+            else:
+              example["label"] = _cast_label(row["label"])
           else:
             assert split == tfds.Split.TEST, row
             example["label"] = -1
@@ -448,10 +451,10 @@ def _cast_label(label):
   """Converts the label into the appropriate string version."""
   if isinstance(label, six.string_types):
     return label
-  elif isinstance(label, six.integer_types):
-    assert label in (0, 1)
-    return "True" if label else "False"
   elif isinstance(label, bool):
     return "True" if label else "False"
+  elif isinstance(label, six.integer_types):
+    assert label in (0, 1)
+    return str(label)
   else:
     raise ValueError("Invalid label format.")
