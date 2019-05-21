@@ -177,6 +177,7 @@ def load(name,
          split=None,
          data_dir=None,
          batch_size=1,
+         in_memory=None,
          download=True,
          as_supervised=False,
          with_info=False,
@@ -231,6 +232,12 @@ def load(name,
     batch_size: `int`, set to > 1 to get batches of examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
+    in_memory: `bool`, if `True`, loads the dataset in memory which
+      increases iteration speeds. Note that if `True` and the dataset has
+      unknown dimensions, the features will be padded to the maximum
+      size across the dataset. By default (when `None`), will load the
+      dataset in memory if the size is <1GB and all feature dimensions are
+      statically known.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
@@ -290,6 +297,7 @@ def load(name,
   as_dataset_kwargs["split"] = split
   as_dataset_kwargs["as_supervised"] = as_supervised
   as_dataset_kwargs["batch_size"] = batch_size
+  as_dataset_kwargs["in_memory"] = in_memory
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:

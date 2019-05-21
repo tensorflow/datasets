@@ -415,6 +415,13 @@ class DatasetBuilderReadTest(testing.TestCase):
     self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
 
   @testing.run_in_graph_and_eager_modes()
+  def test_in_memory(self):
+    train_data = dataset_utils.as_numpy(
+        self.builder.as_dataset(split="train", in_memory=True))
+    train_data = [el for el in train_data]
+    self.assertEqual(20, len(train_data))
+
+  @testing.run_in_graph_and_eager_modes()
   def test_all_splits(self):
     splits = dataset_utils.as_numpy(
         self.builder.as_dataset(batch_size=-1))

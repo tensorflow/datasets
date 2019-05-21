@@ -122,6 +122,7 @@ class RegisteredTest(testing.TestCase):
                      builder.as_dataset_kwargs.pop("split"))
     self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
+    self.assertIsNone(builder.as_dataset_kwargs.pop("in_memory"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
