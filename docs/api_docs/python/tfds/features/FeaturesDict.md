@@ -103,12 +103,10 @@ __init__(feature_dict)
 Initialize the features.
 
 #### Args:
-
 feature_dict (dict): Dictionary containing the feature connectors of a
   example. The keys should correspond to the data dict as returned by
   tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically
   be converted into FeatureConnector.
-
 
 #### Raises:
 

@@ -47,7 +47,7 @@ class Wmt15Translate(wmt.WmtTranslate):
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version="0.0.2")
+          version="0.0.3")
       for l1, l2 in _LANGUAGE_PAIRS
   ] + [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension

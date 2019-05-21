@@ -60,7 +60,6 @@ decode_example(tfexample_data)
 ```
 
 Decode the feature dict to TF compatible input.
-
 Note: If eager is not enabled, this function will be executed as a
 tensorflow graph (in `tf.data.Dataset.map(features.decode_examples)`).
 
@@ -83,7 +82,6 @@ encode_example(example_data)
 ```
 
 Encode the feature dict into tf-example compatible input.
-
 The input example_data can be anything that the user passed at data
 generation. For example:
 
@@ -133,7 +131,6 @@ get_serialized_info()
 ```
 
 Return the tf-example features for the adapter, as stored on disk.
-
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
@@ -147,8 +144,12 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto *
-<b>`directly`</b>: `return tf.FixedLenFeature((64, 64), tf.uint8)`
+FeatureConnector which are not containers should return the feature proto
+directly:
+
+```
+return tf.FixedLenFeature((64, 64), tf.uint8)
+```
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.
@@ -164,7 +165,6 @@ get_tensor_info()
 ```
 
 Return the tf.Tensor dtype/shape of the feature.
-
 This returns the tensor dtype/shape, as returned by .as_dataset by the
 `tf.data.Dataset` object.
 
@@ -178,9 +178,12 @@ return {
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto *
-<b>`directly`</b>: `return tfds.features.TensorInfo(shape=(256, 256),
-dtype=tf.uint8)`
+FeatureConnector which are not containers should return the feature proto
+directly:
+
+```
+return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
+```
 
 #### Returns:
 
@@ -199,7 +202,6 @@ load_metadata(
 ```
 
 Restore the feature metadata from disk.
-
 If a dataset is re-loaded and generated files exists on disk, this function
 will restore the feature metadata from the saved file.
 
@@ -220,7 +222,6 @@ save_metadata(
 ```
 
 Save the feature metadata on disk.
-
 This function is called after the data has been generated (by
 `_download_and_prepare`) to save the feature connector info with the
 generated dataset.

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# coding=utf-8
 """Tests for tensorflow_datasets.core.features.feature.
 
 """
@@ -281,6 +282,63 @@ class FeatureTensorTest(testing.FeatureExpectationsTestCase):
                 expected=[True, False, True],
             ),
         ]
+    )
+
+  def test_string(self):
+    nonunicode_text = 'hello world'
+    unicode_text = u'你好'
+
+    self.assertFeature(
+        feature=features_lib.Tensor(shape=(), dtype=tf.string),
+        shape=(),
+        dtype=tf.string,
+        tests=[
+            # Non-unicode
+            testing.FeatureExpectationItem(
+                value=nonunicode_text,
+                expected=tf.compat.as_bytes(nonunicode_text),
+            ),
+            # Unicode
+            testing.FeatureExpectationItem(
+                value=unicode_text,
+                expected=tf.compat.as_bytes(unicode_text),
+            ),
+            # Empty string
+            testing.FeatureExpectationItem(
+                value='',
+                expected=b'',
+            ),
+            # Trailing zeros
+            testing.FeatureExpectationItem(
+                value=b'abc\x00\x00',
+                expected=b'abc\x00\x00',
+            ),
+        ],
+    )
+
+    self.assertFeature(
+        feature=features_lib.Tensor(shape=(2, 1), dtype=tf.string),
+        shape=(2, 1),
+        dtype=tf.string,
+        tests=[
+            testing.FeatureExpectationItem(
+                value=[[nonunicode_text], [unicode_text]],
+                expected=[
+                    [tf.compat.as_bytes(nonunicode_text)],
+                    [tf.compat.as_bytes(unicode_text)],
+                ],
+            ),
+            testing.FeatureExpectationItem(
+                value=[nonunicode_text, unicode_text],  # Wrong shape
+                raise_cls=ValueError,
+                raise_msg='(2,) and (2, 1) must have the same rank',
+            ),
+            testing.FeatureExpectationItem(
+                value=[['some text'], [123]],  # Wrong dtype
+                raise_cls=TypeError,
+                raise_msg='Expected binary or unicode string, got 123',
+            ),
+        ],
     )
 
 

@@ -31,7 +31,6 @@ __init__(
 ```
 
 Constructs a Tokenizer.
-
 Note that the Tokenizer is invertible if `alphanum_only=False`.
 i.e. `s == t.join(t.tokenize(s))`.
 

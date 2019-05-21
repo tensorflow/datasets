@@ -39,7 +39,6 @@
 *   <a href="./tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>
 *   <a href="./tfds/features/Image.md"><code>tfds.features.Image</code></a>
 *   <a href="./tfds/features/Sequence.md"><code>tfds.features.Sequence</code></a>
-*   <a href="./tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>
 *   <a href="./tfds/features/Tensor.md"><code>tfds.features.Tensor</code></a>
 *   <a href="./tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>
 *   <a href="./tfds/features/Text.md"><code>tfds.features.Text</code></a>

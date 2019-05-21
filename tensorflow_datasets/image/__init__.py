@@ -47,10 +47,12 @@ from tensorflow_datasets.image.open_images import OpenImagesV4
 from tensorflow_datasets.image.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
+from tensorflow_datasets.image.resisc45 import Resisc45
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.smallnorb import Smallnorb
 from tensorflow_datasets.image.sun import Sun397
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.tiered_imagenet import TieredImagenet
+from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.voc import Voc2007

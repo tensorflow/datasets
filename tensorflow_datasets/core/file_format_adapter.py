@@ -153,44 +153,6 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     return "tfrecord"
 
 
-class TFRecordSequenceExampleAdapter(TFRecordExampleAdapter):
-  """Writes/Reads serialized SequenceExample protos to/from TFRecord files.
-
-  Constraints on generators:
-
-  * The generator must yield 2-tuples of (context, sequence), where context
-    is a feature dictionary (`dict<str feature_name, feature_value>`), and
-    sequence is a sequence feature dictionary
-    (`dict<str feature_name, list<feature_value>>`).
-  * The allowed feature types are `int`, `float`, and `str` (or `bytes` in
-    Python 3; `unicode` strings will be encoded in `utf-8`), or lists thereof.
-  """
-
-  def __init__(self, context_reading_spec, sequence_reading_spec):  # pylint: disable=super-init-not-called
-    """Constructs a TFRecordSequenceExampleAdapter.
-
-    Args:
-      context_reading_spec: `dict`, feature name to tf.FixedLenFeature or
-        tf.VarLenFeature for the context features. Passed to
-        tf.io.parse_single_sequence_example.
-      sequence_reading_spec: `dict`, feature name to tf.FixedLenFeature or
-        tf.VarLenFeature for the sequence features. Passed to
-        tf.io.parse_single_sequence_example.
-    """
-    self._context_reading_spec = context_reading_spec
-    self._sequence_reading_spec = sequence_reading_spec
-
-  def _serialize_record(self, record):
-    context, sequence = record
-    return _dicts_to_tf_sequence_example(context, sequence).SerializeToString()
-
-  def _decode(self, record):
-    return tf.io.parse_single_sequence_example(
-        serialized=record,
-        context_features=self._context_reading_spec,
-        sequence_features=self._sequence_reading_spec)
-
-
 def do_files_exist(filenames):
   """Whether any of the filenames exist."""
   preexisting = [tf.io.gfile.exists(f) for f in filenames]
@@ -288,64 +250,65 @@ def _round_robin_write(writers, generator):
     writers[i % len(writers)].write(example)
 
 
-def _dicts_to_tf_sequence_example(context_dict, sequences_dict):
-  flists = {}
-  for k, flist in six.iteritems(sequences_dict):
-    flists[k] = tf.train.FeatureList(
-        feature=[_item_to_tf_feature(el, k) for el in flist])
-  return tf.train.SequenceExample(
-      context=_dict_to_tf_features(context_dict),
-      feature_lists=tf.train.FeatureLists(feature_list=flists),
-  )
-
-
 def _dict_to_tf_example(example_dict):
   """Builds tf.train.Example from (string -> int/float/str list) dictionary."""
   return tf.train.Example(features=_dict_to_tf_features(example_dict))
 
 
-def _item_to_tf_feature(item, key_name):
+def _is_string(item):
+  """Check if the object contains string or bytes."""
+  if isinstance(item, (six.binary_type, six.string_types)):
+    return True
+  elif (isinstance(item, (tuple, list)) and
+        all(isinstance(x, (six.binary_type, six.string_types)) for x in item)):
+    return True
+  elif (isinstance(item, np.ndarray) and  # binary or unicode
+        (item.dtype.kind in ("U", "S") or item.dtype == object)):
+    return True
+  return False
+
+
+def _item_to_tf_feature(item):
   """Single item to a tf.train.Feature."""
   v = item
   if isinstance(v, (list, tuple)) and not v:
     raise ValueError(
-        "Feature {} received an empty list value, so is unable to infer the "
+        "Received an empty list value, so is unable to infer the "
         "feature type to record. To support empty value, the corresponding "
         "FeatureConnector should return a numpy array with the correct dtype "
-        "instead of a Python list.".format(key_name)
+        "instead of a Python list."
     )
 
   # Handle strings/bytes first
-  if isinstance(v, (six.binary_type, six.string_types)):
-    v = [tf.compat.as_bytes(v)]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
-  elif (isinstance(v, (tuple, list)) and
-        all(isinstance(x, (six.binary_type, six.string_types)) for x in v)):
-    v = [tf.compat.as_bytes(x) for x in v]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
-  elif (isinstance(v, np.ndarray) and
-        (v.dtype.kind in ("U", "S") or v.dtype == object)):  # binary or unicode
-    v = [tf.compat.as_bytes(x) for x in v.flatten()]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
+  is_string = _is_string(v)
+
+  if is_string:
+    np_dtype = object  # Avoid truncating trailing '\x00' when converting to np
+  else:
+    np_dtype = None
 
   # Use NumPy for numeric types
-  v = np.array(v).flatten()  # Convert v into a 1-d array
+  v = np.array(v, dtype=np_dtype)
 
+  v = v.flatten()  # Convert v into a 1-d array
   if np.issubdtype(v.dtype, np.integer):
     return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
   elif np.issubdtype(v.dtype, np.floating):
     return tf.train.Feature(float_list=tf.train.FloatList(value=v))
+  elif is_string:
+    v = [tf.compat.as_bytes(x) for x in v]
+    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
   else:
     raise ValueError(
-        "Value received: {}.\n"
-        "tf.train.Feature does not support type {} for feature key {}. "
+        "Unsuported value: {}.\n"
+        "tf.train.Feature does not support type {}. "
         "This may indicate that one of the FeatureConnectors received an "
-        "unsupported value as input.".format(repr(v), repr(type(v)), key_name)
+        "unsupported value as input.".format(repr(v), repr(type(v)))
     )
 
 
 def _dict_to_tf_features(example_dict):
   """Builds tf.train.Features from (string -> int/float/str list) dictionary."""
-  features = {k: _item_to_tf_feature(v, k) for k, v
+  features = {k: _item_to_tf_feature(v) for k, v
               in six.iteritems(example_dict)}
   return tf.train.Features(feature=features)
