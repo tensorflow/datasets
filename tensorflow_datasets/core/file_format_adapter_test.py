@@ -24,6 +24,7 @@ import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
@@ -97,7 +98,7 @@ class FileFormatAdapterTest(testing.TestCase):
     self._test_generator_based_builder(DummyTFRecordBuilder)
 
 
-class TFRecordUtilsTest(testing.TestCase):
+class TFRecordUtilsTest(testing.SubTestCase):
 
   def test_dict_to_example(self):
     example = file_format_adapter._dict_to_tf_example({
@@ -136,6 +137,265 @@ class TFRecordUtilsTest(testing.TestCase):
       file_format_adapter._dict_to_tf_example({
           "wrong_type": np.zeros(shape=(5,), dtype=np.complex64),
       })
+
+  def test_features(self):
+
+    default_dict = {
+        "str": "some value",
+        "int": 1,
+        "bool": [True],
+        "float": [[2.0, 3.0]],
+    }
+
+    self.assertFeature(
+        specs={
+            "str": features.TensorInfo(shape=(), dtype=tf.string),
+            "int": features.TensorInfo(shape=(), dtype=tf.int32),
+            "bool": features.TensorInfo(shape=(1,), dtype=tf.bool),
+            "float": features.TensorInfo(shape=(1, 2), dtype=tf.float32),
+        },
+        serialized_info={
+            "str": tf.io.FixedLenFeature(shape=(), dtype=tf.string),
+            "int": tf.io.FixedLenFeature(shape=(), dtype=tf.int64),
+            "bool": tf.io.FixedLenFeature(shape=(1,), dtype=tf.int64),
+            "float": tf.io.FixedLenFeature(shape=(1, 2), dtype=tf.float32),
+        },
+        tests=[
+            # Raw values
+            testing.FeatureExpectationItem(
+                value={
+                    "str": "",
+                    "int": 1,
+                    "bool": [True],
+                    "float": [[2.0, 3.0]],
+                },
+                expected={
+                    "str": b"",
+                    "int": 1,
+                    "bool": [True],
+                    "float": [[2.0, 3.0]],
+                },
+                expected_serialized={
+                    "str": tf.train.Feature(
+                        bytes_list=tf.train.BytesList(value=[b""])),
+                    "int": tf.train.Feature(
+                        int64_list=tf.train.Int64List(value=[1])),
+                    "bool": tf.train.Feature(
+                        int64_list=tf.train.Int64List(value=[1])),
+                    "float": tf.train.Feature(
+                        float_list=tf.train.FloatList(value=[2.0, 3.0])),
+                },
+            ),
+            # Test numpy array
+            testing.FeatureExpectationItem(
+                value={
+                    "str": np.zeros(2, dtype=np.uint8).tobytes(),
+                    "int": np.array(1),
+                    "bool": np.array([True]),
+                    "float": np.array([[2.0, 3.0]]),
+                },
+                expected={
+                    "str": b"\000\000",
+                    "int": 1,
+                    "bool": np.array([True]),
+                    "float": np.array([[2.0, 3.0]], dtype=np.float32),
+                },
+                expected_serialized={
+                    "str": tf.train.Feature(
+                        bytes_list=tf.train.BytesList(value=[b"\000\000"])),
+                    "int": tf.train.Feature(
+                        int64_list=tf.train.Int64List(value=[1])),
+                    "bool": tf.train.Feature(
+                        int64_list=tf.train.Int64List(value=[1])),
+                    "float": tf.train.Feature(
+                        float_list=tf.train.FloatList(value=[2.0, 3.0])),
+                },
+            ),
+            testing.FeatureExpectationItem(
+                value=dict(default_dict, float=[[2.0], [3.0]]),  # Wrong shape
+                raise_cls=ValueError,
+                raise_msg="Shapes (2, 1) and (1, 2) are incompatible",
+            ),
+            testing.FeatureExpectationItem(
+                value=dict(default_dict, bool=True),  # Wrong shape
+                raise_cls=ValueError,
+                raise_msg="Shapes () and (1,) must have the same rank",
+            ),
+            testing.FeatureExpectationItem(
+                value=dict(default_dict, str=123),  # Wrong dtype
+                raise_cls=ValueError,
+                raise_msg="Could not convert to bytes",
+            ),
+        ],
+    )
+
+  def test_features_sequence(self):
+
+    self.assertFeature(
+        specs={
+            "a": {
+                "b": features.TensorInfo(shape=(None,), dtype=tf.string),
+            },
+            "a/c": features.TensorInfo(shape=(None, 2), dtype=tf.int32),
+        },
+        serialized_info={
+            "a/b": tf.io.FixedLenSequenceFeature(
+                shape=(), dtype=tf.string, allow_missing=True),
+            "a/c": tf.io.FixedLenSequenceFeature(
+                shape=(2,), dtype=tf.int64, allow_missing=True),
+        },
+        tests=[
+            # Raw values
+            testing.FeatureExpectationItem(
+                value={
+                    "a": {
+                        "b": [],
+                    },
+                    "a/c": [[1, 2], [3, 4]],
+                },
+                expected={
+                    "a": {
+                        "b": [],
+                    },
+                    "a/c": [[1, 2], [3, 4]],
+                },
+                expected_serialized={
+                    "a/b": tf.train.Feature(
+                        bytes_list=tf.train.BytesList(value=[])),
+                    "a/c": tf.train.Feature(
+                        int64_list=tf.train.Int64List(value=[1, 2, 3, 4])),
+                },
+            ),
+            testing.FeatureExpectationItem(
+                value={
+                    "a": {
+                        "b": ["abc\n", "", "def  "],
+                    },
+                    "a/c": np.empty(shape=(0, 2), dtype=np.int32),
+                },
+                expected={
+                    "a": {
+                        "b": [b"abc\n", b"", b"def  "],
+                    },
+                    "a/c": np.empty(shape=(0, 2), dtype=np.int32),
+                },
+                expected_serialized={
+                    "a/b": tf.train.Feature(
+                        bytes_list=tf.train.BytesList(
+                            value=[b"abc\n", b"", b"def  "])),
+                    "a/c": tf.train.Feature(
+                        int64_list=tf.train.Int64List(value=[])),
+                },
+            ),
+        ],
+    )
+
+  def test_wrong_type(self):
+
+    # Raise error if an unsupported dtype is given
+    self.assertWrongSpecs(
+        features.TensorInfo(shape=(), dtype=tf.complex64),
+        raise_cls=NotImplementedError,
+        raise_msg="not implemented for dtype",
+    )
+
+    # Raise error if an unsupported shape is given
+    self.assertWrongSpecs(
+        features.TensorInfo(shape=(3, None), dtype=tf.int32),
+        raise_cls=NotImplementedError,
+        raise_msg="unknown dimension not at the first position",
+    )
+
+  def assertWrongSpecs(self, specs, raise_cls, raise_msg):
+
+    adapter = file_format_adapter.TFRecordExampleAdapter({"wrong_field": specs})
+    # Raise error if an unsupported dtype is given
+    with self.assertRaisesWithPredicateMatch(raise_cls, raise_msg):
+      adapter._build_feature_specs()
+
+  @testing.run_in_graph_and_eager_modes()
+  def assertFeature(self, specs, serialized_info, tests):
+    """Test the TFRecordExampleAdapter encoding."""
+
+    adapter = file_format_adapter.TFRecordExampleAdapter(specs)
+
+    with self._subTest("serialized_info"):
+      self.assertEqual(serialized_info, adapter._build_feature_specs())
+
+    for i, test in enumerate(tests):
+      with self._subTest(str(i)):
+
+        if test.raise_cls is not None:
+          with self.assertRaisesWithPredicateMatch(
+              test.raise_cls, test.raise_msg):
+            adapter.serialize_example(test.value)
+          continue
+        serialized = adapter.serialize_example(test.value)
+
+        if test.expected_serialized is not None:
+          example_proto = tf.train.Example()
+          example_proto.ParseFromString(serialized)
+          expected_proto = tf.train.Example(
+              features=tf.train.Features(feature=test.expected_serialized)
+          )
+          self.assertEqual(expected_proto, example_proto)
+
+        example = _parse_example(serialized, adapter.parse_example)
+
+        with self._subTest("dtype"):
+          out_dtypes = utils.map_nested(lambda s: s.dtype, example)
+          expected_dtypes = utils.map_nested(lambda s: s.dtype, specs)
+          self.assertEqual(out_dtypes, expected_dtypes)
+        with self._subTest("shape"):
+          # For shape, because (None, 3) match with (5, 3), we use
+          # tf.TensorShape.assert_is_compatible_with on each of the elements
+          utils.map_nested(
+              lambda x: x[0].shape.assert_is_compatible_with(x[1].shape),
+              utils.zip_nested(example, specs)
+          )
+        np_example = dataset_utils.as_numpy(example)
+        self.assertAllEqualNested(np_example, test.expected)
+
+  def test_default_value(self):
+
+    # Encode example with the previous version
+    file_adapter = file_format_adapter.TFRecordExampleAdapter({
+        "image/encoded": features.TensorInfo(shape=(), dtype=tf.string),
+    })
+    serialized_example = file_adapter.serialize_example({
+        "image/encoded": "hello world",
+    })
+
+    # Decode example with the new version
+    file_adapter = file_format_adapter.TFRecordExampleAdapter({
+        "image/encoded": features.TensorInfo(
+            shape=(), dtype=tf.string, default_value=b"some string"),
+        "image/height": features.TensorInfo(
+            shape=(), dtype=tf.int64, default_value=-1),
+        "image/width": features.TensorInfo(
+            shape=(), dtype=tf.int64, default_value=-1),
+    })
+
+    # New fields should have the default values
+    ds = tf.data.Dataset.from_tensors(serialized_example)
+    ds = ds.map(file_adapter.parse_example)
+    example = next(iter(dataset_utils.as_numpy(ds)))
+    self.assertEqual(example, {
+        "image/encoded": b"hello world",
+        "image/height": -1,
+        "image/width": -1,
+    })
+
+
+def _parse_example(serialized, parse_function):
+  """Decode the given feature."""
+  ds = tf.data.Dataset.from_tensors(serialized)
+  ds = ds.map(parse_function)
+
+  if tf.executing_eagerly():
+    return next(iter(ds))
+  else:
+    return tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
 
 
 if __name__ == "__main__":
