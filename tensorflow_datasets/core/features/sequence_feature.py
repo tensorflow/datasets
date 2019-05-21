@@ -27,7 +27,7 @@ from tensorflow_datasets.core.features import feature as feature_lib
 
 
 class Sequence(feature_lib.FeatureConnector):
-  """Composite `FeatureConnector` where each value is a list.
+  """Composite `FeatureConnector` for a `dict` where each value is a list.
 
   `Sequence` correspond to sequence of `tfds.features.FeatureConnector`. At
   generation time, a list for each of the sequence element is given. The output
@@ -96,12 +96,10 @@ class Sequence(feature_lib.FeatureConnector):
   def get_tensor_info(self):
     """See base class for details."""
     # Add the additional length dimension to every shape
-
     def add_length_dim(tensor_info):
-      return feature_lib.TensorInfo(
-          shape=(self._length,) + tensor_info.shape,
-          dtype=tensor_info.dtype,
-      )
+      tensor_info = feature_lib.TensorInfo.copy_from(tensor_info)
+      tensor_info.shape = (self._length,) + tensor_info.shape
+      return tensor_info
 
     tensor_info = self._feature.get_tensor_info()
     return utils.map_nested(add_length_dim, tensor_info)
@@ -110,34 +108,12 @@ class Sequence(feature_lib.FeatureConnector):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
 
-    def add_length_dim(serialized_info):
-      """Add the length dimension to the serialized_info.
-
-      Args:
-        serialized_info: One of tf.io.FixedLenFeature, tf.io.VarLenFeature,...
-
-      Returns:
-        new_serialized_info: serialized_info with extended first dimension
-      """
-      if isinstance(serialized_info, tf.io.FixedLenFeature):
-        if self._length is not None:
-          return tf.io.FixedLenFeature(
-              shape=(self._length,) + serialized_info.shape,
-              dtype=serialized_info.dtype,
-          )
-        else:
-          return tf.io.FixedLenSequenceFeature(
-              shape=serialized_info.shape,
-              dtype=serialized_info.dtype,
-              allow_missing=True,
-          )
-      elif isinstance(serialized_info, tf.io.VarLenFeature):
-        return serialized_info
-      else:
-        raise ValueError(
-            'FixedLenSequenceFeature not supported inside Sequence'
-        )
-      return serialized_info
+    def add_length_dim(tensor_info):
+      """Add the length dimension to the serialized_info."""
+      return feature_lib.TensorInfo(
+          shape=(self._length,) + tensor_info.shape,
+          dtype=tensor_info.dtype,
+      )
 
     tensor_info = self._feature.get_serialized_info()
     return utils.map_nested(add_length_dim, tensor_info)
@@ -156,7 +132,10 @@ class Sequence(feature_lib.FeatureConnector):
     # Empty sequences return empty arrays
     if not sequence_elements:
       def _build_empty_np(serialized_info):
-        return np.empty(shape=(0,), dtype=serialized_info.dtype.as_numpy_dtype)
+        return np.empty(
+            shape=tuple(s if s else 0 for s in serialized_info.shape),
+            dtype=serialized_info.dtype.as_numpy_dtype,
+        )
 
       return utils.map_nested(_build_empty_np, self.get_serialized_info())
 
