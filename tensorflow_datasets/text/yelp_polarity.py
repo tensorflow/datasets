@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""IMDB movie reviews dataset."""
+"""Yelp Polarity Reviews dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -58,7 +58,7 @@ class YelpPolarityReviewsConfig(tfds.core.BuilderConfig):
 
     Args:
         text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-            for the `tfds.features.text.TextEncoder` used for the IMDB `"text"`
+            for the `tfds.features.text.TextEncoder` used for the Yelp `"text"`
             feature.
         **kwargs: keyword arguments forwarded to super.
     """
