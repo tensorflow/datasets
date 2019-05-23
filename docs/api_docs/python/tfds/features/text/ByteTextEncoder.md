@@ -43,13 +43,7 @@ Constructs ByteTextEncoder.
 
 <h3 id="additional_tokens"><code>additional_tokens</code></h3>
 
-
-
 <h3 id="vocab_size"><code>vocab_size</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -59,15 +53,11 @@ Constructs ByteTextEncoder.
 decode(ids)
 ```
 
-
-
 <h3 id="encode"><code>encode</code></h3>
 
 ``` python
 encode(s)
 ```
-
-
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
 
@@ -79,15 +69,8 @@ load_from_file(
 )
 ```
 
-
-
 <h3 id="save_to_file"><code>save_to_file</code></h3>
 
 ``` python
 save_to_file(filename_prefix)
 ```
-
-
-
-
-
