@@ -158,7 +158,6 @@ __init__(methodName='runTest')
 ```
 
 ## Child Classes
-
 [`class failureException`](../../tfds/testing/DatasetBuilderTestCase/failureException.md)
 
 ## Methods
@@ -194,7 +193,7 @@ addCleanup(
 )
 ```
 
-Add a function, with arguments, to be called when the test iscompleted.
+Add a function, with arguments, to be called when the test is completed.
 Functions added are called on a LIFO basis and are called after tearDown on test
 failure or success.
 
@@ -235,9 +234,10 @@ addTypeEqualityFunc(
 )
 ```
 
-Add a type specific assertEqual style function to compare a type. This method is
-for use by TestCase subclasses that need to register their own type equality
-functions to provide nicer error messages.
+Add a type specific assertEqual style function to compare a type.
+
+This method is for use by TestCase subclasses that need to register their own
+type equality functions to provide nicer error messages.
 
 #### Args:
 
@@ -256,9 +256,10 @@ assertAllClose(
 )
 ```
 
-Asserts that two structures of numpy arrays or Tensors, have near values. `a`
-and `b` can be arbitrarily nested structures. A layer of a nested structure can
-be a `dict`, `namedtuple`, `tuple` or `list`.
+Asserts that two structures of numpy arrays or Tensors, have near values.
+
+`a` and `b` can be arbitrarily nested structures. A layer of a nested structure
+can be a `dict`, `namedtuple`, `tuple` or `list`.
 
 #### Args:
 
@@ -288,9 +289,10 @@ assertAllCloseAccordingToType(
 )
 ```
 
-Like assertAllClose, but also suitable for comparing fp16 arrays. In particular,
-the tolerance is reduced to 1e-3 if at least one of the arguments is of type
-float16.
+Like assertAllClose, but also suitable for comparing fp16 arrays.
+
+In particular, the tolerance is reduced to 1e-3 if at least one of the arguments
+is of type float16.
 
 #### Args:
 
@@ -465,7 +467,7 @@ assertAlmostEqual(
 )
 ```
 
-Fail if the two objects are unequal as determined by theirdifference rounded to
+Fail if the two objects are unequal as determined by their difference rounded to
 the given number of decimal places (default 7) and comparing to zero, or by
 comparing that the difference between the two objects is more than the given
 delta.
@@ -488,7 +490,7 @@ assertAlmostEquals(
 )
 ```
 
-Fail if the two objects are unequal as determined by theirdifference rounded to
+Fail if the two objects are unequal as determined by their difference rounded to
 the given number of decimal places (default 7) and comparing to zero, or by
 comparing that the difference between the two objects is more than the given
 delta.
@@ -508,8 +510,10 @@ assertArrayNear(
 )
 ```
 
-Asserts that two float arrays are near each other. Checks that for all elements
-of farray1 and farray2 |f1 - f2| < err. Asserts a test failure if not.
+Asserts that two float arrays are near each other.
+
+Checks that for all elements of farray1 and farray2 |f1 - f2| < err. Asserts a
+test failure if not.
 
 #### Args:
 
@@ -594,9 +598,10 @@ assertContainsExactSubsequence(
 )
 ```
 
-Asserts that "container" contains "subsequence" as an exact subsequence. Asserts
-that "container" contains all the elements of "subsequence", in order, and
-without other elements interspersed. For example, [1, 2, 3] is an exact
+Asserts that "container" contains "subsequence" as an exact subsequence.
+
+Asserts that "container" contains all the elements of "subsequence", in order,
+and without other elements interspersed. For example, [1, 2, 3] is an exact
 subsequence of [0, 0, 1, 2, 3, 0] but not of [0, 0, 1, 2, 0, 3, 0].
 
 #### Args:
@@ -616,8 +621,9 @@ assertContainsInOrder(
 )
 ```
 
-Asserts that the strings provided are found in the target in order. This may be
-useful for checking HTML output.
+Asserts that the strings provided are found in the target in order.
+
+This may be useful for checking HTML output.
 
 #### Args:
 
@@ -636,10 +642,11 @@ assertContainsSubsequence(
 )
 ```
 
-Asserts that "container" contains "subsequence" as a subsequence. Asserts that
-"container" contains all the elements of "subsequence", in order, but possibly
-with other elements interspersed. For example, [1, 2, 3] is a subsequence of [0,
-0, 1, 2, 0, 3, 0] but not of [0, 0, 1, 3, 0, 2, 0].
+Asserts that "container" contains "subsequence" as a subsequence.
+
+Asserts that "container" contains all the elements of "subsequence", in order,
+but possibly with other elements interspersed. For example, [1, 2, 3] is a
+subsequence of [0, 0, 1, 2, 0, 3, 0] but not of [0, 0, 1, 3, 0, 2, 0].
 
 #### Args:
 
@@ -669,10 +676,11 @@ assertCountEqual(
 )
 ```
 
-Tests two sequences have the same elements regardless of order. It tests that
-the first sequence contains the same elements as the second, regardless of their
-order. When they don't, an error message listing the differences between the
-sequences will be generated.
+Tests two sequences have the same elements regardless of order.
+
+It tests that the first sequence contains the same elements as the second,
+regardless of their order. When they don't, an error message listing the
+differences between the sequences will be generated.
 
 Duplicate elements are not ignored when comparing first and second. It verifies
 whether each element has the same count in both sequences. Equivalent to:
@@ -807,7 +815,7 @@ assertEqual(
 )
 ```
 
-Fail if the two objects are unequal as determined by the '=='operator.
+Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertEquals"><code>assertEquals</code></h3>
 
@@ -819,7 +827,7 @@ assertEquals(
 )
 ```
 
-Fail if the two objects are unequal as determined by the '=='operator.
+Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertFalse"><code>assertFalse</code></h3>
 
@@ -890,7 +898,7 @@ assertIsInstance(
 )
 ```
 
-Same as self.assertTrue(isinstance(obj, cls)), with a nicerdefault message.
+Same as self.assertTrue(isinstance(obj, cls)), with a nicer default message.
 
 <h3 id="assertIsNone"><code>assertIsNone</code></h3>
 
@@ -936,9 +944,10 @@ assertItemsEqual(
 )
 ```
 
-Deprecated, please use assertCountEqual instead. This is equivalent to
-assertCountEqual in Python 3. An implementation of assertCountEqual is also
-provided by absltest.TestCase for Python 2.
+Deprecated, please use assertCountEqual instead.
+
+This is equivalent to assertCountEqual in Python 3. An implementation of
+assertCountEqual is also provided by absltest.TestCase for Python 2.
 
 #### Args:
 
@@ -956,8 +965,10 @@ assertJsonEqual(
 )
 ```
 
-Asserts that the JSON objects defined in two strings are equal. A summary of the
-differences will be included in the failure message using assertSameStructure.
+Asserts that the JSON objects defined in two strings are equal.
+
+A summary of the differences will be included in the failure message using
+assertSameStructure.
 
 #### Args:
 
@@ -1076,8 +1087,9 @@ assertNear(
 )
 ```
 
-Asserts that two floats are near each other. Checks that |f1 - f2| < err and
-asserts a test failure if not.
+Asserts that two floats are near each other.
+
+Checks that |f1 - f2| < err and asserts a test failure if not.
 
 #### Args:
 
@@ -1133,7 +1145,7 @@ assertNotAlmostEqual(
 )
 ```
 
-Fail if the two objects are equal as determined by theirdifference rounded to
+Fail if the two objects are equal as determined by their difference rounded to
 the given number of decimal places (default 7) and comparing to zero, or by
 comparing that the difference between the two objects is less than the given
 delta.
@@ -1155,7 +1167,7 @@ assertNotAlmostEquals(
 )
 ```
 
-Fail if the two objects are equal as determined by theirdifference rounded to
+Fail if the two objects are equal as determined by their difference rounded to
 the given number of decimal places (default 7) and comparing to zero, or by
 comparing that the difference between the two objects is less than the given
 delta.
@@ -1210,7 +1222,7 @@ assertNotEqual(
 )
 ```
 
-Fail if the two objects are equal as determined by the '!='operator.
+Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotEquals"><code>assertNotEquals</code></h3>
 
@@ -1222,7 +1234,7 @@ assertNotEquals(
 )
 ```
 
-Fail if the two objects are equal as determined by the '!='operator.
+Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotIn"><code>assertNotIn</code></h3>
 
@@ -1297,9 +1309,10 @@ assertProtoEquals(
 )
 ```
 
-Asserts that message is same as parsed expected_message_ascii. Creates another
-prototype of message, reads the ascii message into it and then compares them
-using self._AssertProtoEqual().
+Asserts that message is same as parsed expected_message_ascii.
+
+Creates another prototype of message, reads the ascii message into it and then
+compares them using self._AssertProtoEqual().
 
 #### Args:
 
@@ -1331,7 +1344,7 @@ assertRaises(
 )
 ```
 
-Fail unless an exception of class excClass is raisedby callableObj when invoked
+Fail unless an exception of class excClass is raised by callableObj when invoked
 with arguments args and keyword arguments kwargs. If a different type of
 exception is raised, it will not be caught, and the test case will be deemed to
 have suffered an error, exactly as for an unexpected exception.
@@ -1400,8 +1413,10 @@ assertRaisesWithLiteralMatch(
 )
 ```
 
-Asserts that the message in a raised exception equals the given string. Unlike
-assertRaisesRegex, this method takes a literal string, not a regular expression.
+Asserts that the message in a raised exception equals the given string.
+
+Unlike assertRaisesRegex, this method takes a literal string, not a regular
+expression.
 
 with self.assertRaisesWithLiteralMatch(ExType, 'message'): DoSomething()
 
@@ -1474,10 +1489,11 @@ assertRegexMatch(
 )
 ```
 
-Asserts that at least one regex in regexes matches str. If possible you should
-use `assertRegex`, which is a simpler version of this method. `assertRegex`
-takes a single regular expression (a string or re compiled object) instead of a
-list.
+Asserts that at least one regex in regexes matches str.
+
+If possible you should use `assertRegex`, which is a simpler version of this
+method. `assertRegex` takes a single regular expression (a string or re compiled
+object) instead of a list.
 
 #### Notes:
 
@@ -1526,9 +1542,10 @@ assertSameElements(
 )
 ```
 
-Asserts that two sequences have the same elements (in any order). This method,
-unlike assertCountEqual, doesn't care about any duplicates in the expected and
-actual sequences.
+Asserts that two sequences have the same elements (in any order).
+
+This method, unlike assertCountEqual, doesn't care about any duplicates in the
+expected and actual sequences.
 
 > > assertSameElements([1, 1, 1, 0, 0, 0], [0, 1]) # Doesn't raise an
 > > AssertionError
@@ -1553,12 +1570,14 @@ assertSameStructure(
 )
 ```
 
-Asserts that two values contain the same structural content. The two arguments
-should be data trees consisting of trees of dicts and lists. They will be deeply
-compared by walking into the contents of dicts and lists; other items will be
-compared using the == operator. If the two structures differ in content, the
-failure message will indicate the location within the structures where the first
-difference is found. This may be helpful when comparing large structures.
+Asserts that two values contain the same structural content.
+
+The two arguments should be data trees consisting of trees of dicts and lists.
+They will be deeply compared by walking into the contents of dicts and lists;
+other items will be compared using the == operator. If the two structures differ
+in content, the failure message will indicate the location within the structures
+where the first difference is found. This may be helpful when comparing large
+structures.
 
 Mixed Sequence and Set types are supported. Mixed Mapping types are supported,
 but the order of the keys will not be considered in the comparison.
@@ -1584,11 +1603,12 @@ assertSequenceAlmostEqual(
 )
 ```
 
-An approximate equality assertion for ordered sequences. Fail if the two
-sequences are unequal as determined by their value differences rounded to the
-given number of decimal places (default 7) and comparing to zero, or by
-comparing that the difference between each value in the two sequences is more
-than the given delta.
+An approximate equality assertion for ordered sequences.
+
+Fail if the two sequences are unequal as determined by their value differences
+rounded to the given number of decimal places (default 7) and comparing to zero,
+or by comparing that the difference between each value in the two sequences is
+more than the given delta.
 
 Note that decimal places (from zero) are usually not the same as significant
 digits (measured from the most signficant digit).
@@ -1615,9 +1635,10 @@ assertSequenceEqual(
 )
 ```
 
-An equality assertion for ordered sequences (like lists and tuples). For the
-purposes of this function, a valid ordered sequence type is one which can be
-indexed, has a length, and has an equality operator.
+An equality assertion for ordered sequences (like lists and tuples).
+
+For the purposes of this function, a valid ordered sequence type is one which
+can be indexed, has a length, and has an equality operator.
 
 #### Args:
 
@@ -1638,8 +1659,10 @@ assertSequenceStartsWith(
 )
 ```
 
-An equality assertion for the beginning of ordered sequences. If prefix is an
-empty sequence, it will raise an error unless whole is also an empty sequence.
+An equality assertion for the beginning of ordered sequences.
+
+If prefix is an empty sequence, it will raise an error unless whole is also an
+empty sequence.
 
 If prefix is not a sequence, it will raise an error if the first element of
 whole does not match.
@@ -1722,9 +1745,10 @@ assertTotallyOrdered(
 )
 ```
 
-Asserts that total ordering has been implemented correctly. For example, say you
-have a class A that compares only on its attribute x. Comparators other than
-__lt__ are omitted for brevity.
+Asserts that total ordering has been implemented correctly.
+
+For example, say you have a class A that compares only on its attribute x.
+Comparators other than __lt__ are omitted for brevity.
 
 class A(object): def __init__(self, x, y): self.x = x self.y = y
 
@@ -1811,11 +1835,12 @@ cached_session(
 )
 ```
 
-Returns a TensorFlow Session for use in executing tests. This method behaves
-differently than self.session(): for performance reasons `cached_session` will
-by default reuse the same session within the same test. The session returned by
-this function will only be closed at the end of the test (in the TearDown
-function).
+Returns a TensorFlow Session for use in executing tests.
+
+This method behaves differently than self.session(): for performance reasons
+`cached_session` will by default reuse the same session within the same test.
+The session returned by this function will only be closed at the end of the test
+(in the TearDown function).
 
 Use the `use_gpu` and `force_gpu` options to control where ops are run. If
 `force_gpu` is True, all ops are pinned to `/device:GPU:0`. Otherwise, if
@@ -1858,11 +1883,12 @@ captureWritesToStream(
 )
 ```
 
-A context manager that captures the writes to a given stream. This context
-manager captures all writes to a given stream inside of a `CapturedWrites`
-object. When this context manager is created, it yields the `CapturedWrites`
-object. The captured contents can be accessed by calling `.contents()` on the
-`CapturedWrites`.
+A context manager that captures the writes to a given stream.
+
+This context manager captures all writes to a given stream inside of a
+`CapturedWrites` object. When this context manager is created, it yields the
+`CapturedWrites` object. The captured contents can be accessed by calling
+`.contents()` on the `CapturedWrites`.
 
 For this function to work, the stream must have a file descriptor that can be
 modified using `os.dup` and `os.dup2`, and the stream must support a `.flush()`
@@ -1902,10 +1928,11 @@ checkedThread(
 )
 ```
 
-Returns a Thread wrapper that asserts 'target' completes successfully. This
-method should be used to create all threads in test cases, as otherwise there is
-a risk that a thread will silently fail, and/or assertions made in the thread
-will not be respected.
+Returns a Thread wrapper that asserts 'target' completes successfully.
+
+This method should be used to create all threads in test cases, as otherwise
+there is a risk that a thread will silently fail, and/or assertions made in the
+thread will not be respected.
 
 #### Args:
 
@@ -1933,9 +1960,10 @@ create_tempdir(
 )
 ```
 
-Create a temporary directory specific to the test. NOTE: The directory and its
-contents will be recursively cleared before creation. This ensures that there is
-no pre-existing state.
+Create a temporary directory specific to the test.
+
+NOTE: The directory and its contents will be recursively cleared before
+creation. This ensures that there is no pre-existing state.
 
 This creates a named directory on disk that is isolated to this test, and will
 be properly cleaned up by the test. This avoids several pitfalls of creating
@@ -1969,11 +1997,12 @@ create_tempfile(
 )
 ```
 
-Create a temporary file specific to the test. This creates a named file on disk
-that is isolated to this test, and will be properly cleaned up by the test. This
-avoids several pitfalls of creating temporary files for test purposes, as well
-as makes it easier to setup files, their data, read them back, and inspect them
-when a test fails.
+Create a temporary file specific to the test.
+
+This creates a named file on disk that is isolated to this test, and will be
+properly cleaned up by the test. This avoids several pitfalls of creating
+temporary files for test purposes, as well as makes it easier to setup files,
+their data, read them back, and inspect them when a test fails.
 
 NOTE: This will zero-out the file. This ensures there is no pre-existing state.
 
@@ -2022,7 +2051,7 @@ defaultTestResult()
 doCleanups()
 ```
 
-Execute all cleanup functions. Normally called for you aftertearDown.
+Execute all cleanup functions. Normally called for you after tearDown.
 
 <h3 id="evaluate"><code>evaluate</code></h3>
 
@@ -2149,12 +2178,14 @@ Return any properties that the user has recorded.
 get_temp_dir()
 ```
 
-Returns a unique temporary directory for the test to use. If you call this
-method multiple times during in a test, it will return the same folder. However,
-across different runs the directories will be different. This will ensure that
-across different runs tests will not be able to pollute each others environment.
-If you need multiple unique directories within a single test, you should use
-tempfile.mkdtemp as follows: tempfile.mkdtemp(dir=self.get_temp_dir()):
+Returns a unique temporary directory for the test to use.
+
+If you call this method multiple times during in a test, it will return the same
+folder. However, across different runs the directories will be different. This
+will ensure that across different runs tests will not be able to pollute each
+others environment. If you need multiple unique directories within a single
+test, you should use tempfile.mkdtemp as follows:
+tempfile.mkdtemp(dir=self.get_temp_dir()):
 
 #### Returns:
 
@@ -2199,8 +2230,9 @@ session(
 )
 ```
 
-Returns a TensorFlow Session for use in executing tests. Note that this will set
-this session and the graph as global defaults.
+Returns a TensorFlow Session for use in executing tests.
+
+Note that this will set this session and the graph as global defaults.
 
 Use the `use_gpu` and `force_gpu` options to control where ops are run. If
 `force_gpu` is True, all ops are pinned to `/device:GPU:0`. Otherwise, if
@@ -2253,8 +2285,9 @@ setUpClass(cls)
 shortDescription()
 ```
 
-Formats both the test method name and the first line of its docstring. If no
-docstring is given, only returns the method name.
+Formats both the test method name and the first line of its docstring.
+
+If no docstring is given, only returns the method name.
 
 This method overrides unittest.TestCase.shortDescription(), which only returns
 the first line of the docstring, obscuring the name of the test upon failure.
@@ -2306,9 +2339,11 @@ test_session(
 )
 ```
 
-Use cached_session instead. (deprecated) Warning: THIS FUNCTION IS DEPRECATED.
-It will be removed in a future version. Instructions for updating: Use
-`self.session()` or `self.cached_session()` instead.
+Use cached_session instead. (deprecated)
+
+Warning: THIS FUNCTION IS DEPRECATED. It will be removed in a future version.
+Instructions for updating: Use `self.session()` or `self.cached_session()`
+instead.
 
 ## Class Members
 

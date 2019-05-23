@@ -54,8 +54,6 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
 
 <h3 id="decode_example"><code>decode_example</code></h3>
@@ -64,9 +62,10 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
-Decode the feature dict to TF compatible input. Note: If eager is not enabled,
-this function will be executed as a tensorflow graph (in
-`tf.data.Dataset.map(features.decode_example)`).
+Decode the feature dict to TF compatible input.
+
+Note: If eager is not enabled, this function will be executed as a tensorflow
+graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 #### Args:
 
@@ -86,16 +85,15 @@ this function will be executed as a tensorflow graph (in
 encode_example(audio_or_path_or_fobj)
 ```
 
-
-
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
 get_serialized_info()
 ```
 
-Return the shape/dtype of features after encoding (for the adapter). The
-`FileAdapter` then use those information to write data on disk.
+Return the shape/dtype of features after encoding (for the adapter).
+
+The `FileAdapter` then use those information to write data on disk.
 
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
@@ -142,6 +140,7 @@ load_metadata(
 ```
 
 Restore the feature metadata from disk.
+
 If a dataset is re-loaded and generated files exists on disk, this function
 will restore the feature metadata from the saved file.
 
@@ -162,6 +161,7 @@ save_metadata(
 ```
 
 Save the feature metadata on disk.
+
 This function is called after the data has been generated (by
 `_download_and_prepare`) to save the feature connector info with the
 generated dataset.
