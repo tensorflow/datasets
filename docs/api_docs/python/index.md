@@ -65,6 +65,8 @@
 *   <a href="./tfds/testing/FeatureExpectationItem.md"><code>tfds.testing.FeatureExpectationItem</code></a>
 *   <a href="./tfds/testing/FeatureExpectationsTestCase.md"><code>tfds.testing.FeatureExpectationsTestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.FeatureExpectationsTestCase.failureException</code></a>
+*   <a href="./tfds/testing/SubTestCase.md"><code>tfds.testing.SubTestCase</code></a>
+*   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.SubTestCase.failureException</code></a>
 *   <a href="./tfds/testing/TestCase.md"><code>tfds.testing.TestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.TestCase.failureException</code></a>
 *   <a href="./tfds/testing/make_tmp_dir.md"><code>tfds.testing.make_tmp_dir</code></a>

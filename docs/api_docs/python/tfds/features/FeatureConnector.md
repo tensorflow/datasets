@@ -2,7 +2,6 @@
 <meta itemprop="name" content="tfds.features.FeatureConnector" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
@@ -41,10 +40,6 @@ the connector type.
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
@@ -59,16 +54,16 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
-Decode the feature dict to TF compatible input.
-Note: If eager is not enabled, this function will be executed as a
-tensorflow graph (in `tf.data.Dataset.map(features.decode_examples)`).
+Decode the feature dict to TF compatible input. Note: If eager is not enabled,
+this function will be executed as a tensorflow graph (in
+`tf.data.Dataset.map(features.decode_example)`).
 
 #### Args:
 
 *   <b>`tfexample_data`</b>: Data or dictionary of data, as read by the
     tf-example reader. It correspond to the `tf.Tensor()` (or dict of
     `tf.Tensor()`) extracted from the `tf.train.Example`, matching the info
-    defined in `get_serialize_info()`.
+    defined in `get_serialized_info()`.
 
 #### Returns:
 
@@ -130,7 +125,9 @@ yield {
 get_serialized_info()
 ```
 
-Return the tf-example features for the adapter, as stored on disk.
+Return the shape/dtype of features after encoding (for the adapter). The
+`FileAdapter` then use those information to write data on disk.
+
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
@@ -138,9 +135,9 @@ The DatasetBuilder are written on disk as tf.train.Example proto.
 
 ```
 return {
-    'image': tf.VarLenFeature(tf.uint8):
-    'height': tf.FixedLenFeature((), tf.int32),
-    'width': tf.FixedLenFeature((), tf.int32),
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
+    'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+    'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
 }
 ```
 
@@ -148,7 +145,7 @@ FeatureConnector which are not containers should return the feature proto
 directly:
 
 ```
-return tf.FixedLenFeature((64, 64), tf.uint8)
+return tfds.features.TensorInfo(shape=(64, 64), tf.uint8)
 ```
 
 If not defined, the retuned values are automatically deduced from the

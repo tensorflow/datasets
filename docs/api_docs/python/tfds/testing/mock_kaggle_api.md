@@ -23,5 +23,4 @@ tfds.testing.mock_kaggle_api(
     CalledProcessError and this will be the command output.
 
 #### Yields:
-
 None, context will have kaggle CLI mocked out.

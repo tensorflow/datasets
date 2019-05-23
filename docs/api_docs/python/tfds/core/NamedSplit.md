@@ -32,7 +32,6 @@ The resulting split will correspond to 25% of the train split merged with
 100% of the test split.
 
 #### Warning:
-
 A split cannot be added twice, so the following will fail:
 
 ```
@@ -44,7 +43,6 @@ split = tfds.Split.TEST + tfds.Split.ALL  # Error
 ```
 
 #### Warning:
-
 The slices can be applied only one time. So the following are valid:
 
 ```

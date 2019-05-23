@@ -3,7 +3,6 @@
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="feature"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getattr__"/>
 <meta itemprop="property" content="__getitem__"/>
@@ -91,10 +90,6 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 <h3 id="feature"><code>feature</code></h3>
 
 The inner feature.
-
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
 
 <h3 id="shape"><code>shape</code></h3>
 

@@ -2,7 +2,6 @@
 <meta itemprop="name" content="tfds.features.FeaturesDict" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
@@ -120,10 +119,6 @@ feature_dict (dict): Dictionary containing the feature connectors of a
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
@@ -158,8 +153,8 @@ __len__()
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-``` python
-decode_example(tfexample_dict)
+```python
+decode_example(example_dict)
 ```
 
 See base class for details.
