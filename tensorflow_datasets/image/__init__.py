@@ -32,6 +32,7 @@ from tensorflow_datasets.image.cycle_gan import CycleGAN
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
 from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
+from tensorflow_datasets.image.eurosat import Eurosat
 from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
