@@ -27,4 +27,3 @@ from tensorflow_datasets.text.squad import Squad
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.xnli import Xnli
 from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviews
-from tensorflow_datasets.text.yelp_polarity import YelpPolarityReviewsConfig

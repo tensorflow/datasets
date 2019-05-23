@@ -122,12 +122,6 @@ class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
-    # arch_path = dl_manager.download(_DOWNLOAD_URL)
-    # archive = lambda: dl_manager.iter_archive(arch_path)
-    #
-    # # Generate vocabulary from training data if SubwordTextEncoder configured
-    # self.info.features["text"].maybe_build_from_corpus(
-    # 		self._vocab_text_gen(archive()))
     arch_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     train_file = os.path.join(arch_path, "yelp_review_polarity_csv", "train.csv")
     test_file = os.path.join(arch_path, "yelp_review_polarity_csv", "test.csv")
