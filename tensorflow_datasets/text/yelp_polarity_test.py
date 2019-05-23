@@ -26,10 +26,9 @@ from tensorflow_datasets.text import yelp_polarity
 class YelpPolarityReviewsTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = yelp_polarity.YelpPolarityReviews
   SPLITS = {
-    "train": 5,
-    "test": 4,
+    "train": 2,
+    "test": 2,
   }
-  DL_EXTRACT_RESULT = "yelp_review_polarity_csv.tgz"
 
 
 if __name__ == "__main__":
