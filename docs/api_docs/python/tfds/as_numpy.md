@@ -30,5 +30,6 @@ and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
 *   <b>`graph`</b>: `tf.Graph`, optional, explicitly set the graph to use.
 
 #### Returns:
+
 A structure matching `dataset` where `tf.data.Dataset`s are converted to
 generators of NumPy arrays and `tf.Tensor`s are converted to NumPy arrays.
