@@ -99,6 +99,7 @@ class LazyImporter(object):
   def skimage(cls):
     _try_import("skimage.color")
     _try_import("skimage.filters")
+    _try_import("skimage.external.tifffile")
     return _try_import("skimage")
 
   @utils.classproperty
