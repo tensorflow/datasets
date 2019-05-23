@@ -69,7 +69,7 @@ class YelpPolarityReviewsConfig(tfds.core.BuilderConfig):
 
 class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
   """Yelp Polarity reviews dataset."""
-  BUILDER_CONFIGS = [
+  BUILDER_CONFIGS = {
     YelpPolarityReviewsConfig(
       name="plain_text",
       version="0.1.0",
@@ -101,7 +101,7 @@ class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
         encoder_cls=tfds.features.text.SubwordTextEncoder,
         vocab_size=2 ** 15),
     ),
-  ]
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -140,7 +140,6 @@ class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, file):
     """Generate Yelp examples."""
-    examples = []
     with tf.io.gfile.GFile(file) as f:
       for line in f:
         yield {
