@@ -13,15 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Version utils.
-"""
+"""Version utils."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import collections
+import functools
 import re
+
+import enum
+import six
 
 _VERSION_TMPL = (
     r"^(?P<major>{v})"
@@ -31,29 +33,63 @@ _VERSION_WILDCARD_REG = re.compile(_VERSION_TMPL.format(v=r"\d+|\*"))
 _VERSION_RESOLVED_REG = re.compile(_VERSION_TMPL.format(v=r"\d+"))
 
 
-class Version(collections.namedtuple("Version", ["major", "minor", "patch"])):
+class Experiment(enum.Enum):
+  """Experiments which can be enabled/disabled on a per version basis.
+
+  Experiments are designed to gradually apply changes to datasets while
+  maintaining backward compatibility with previous versions. All experiments
+  should eventually be deleted, once used by all versions of all datasets.
+
+  Eg:
+  class Experiment(enum.Enum):
+    EXP_A = enum.auto()  # Short description of experiment.
+
+  class MyBuilder(...):
+    VERSION = tfds.core.Version('1.2.3', experiments={
+        tfds.core.Experiment.EXP_A: True,
+        })
+  """
+  # A Dummy experiment, which should NOT be used, except for testing.
+  DUMMY = 1
+
+
+@functools.total_ordering
+class Version(object):
   """Dataset version MAJOR.MINOR.PATCH."""
 
-  LATEST = "latest"
+  _DEFAULT_EXPERIMENTS = {
+      Experiment.DUMMY: False,
+  }
 
-  def __new__(cls, *args, **kwargs):
-    if len(args) == 1:
-      if kwargs:
-        raise ValueError(
-            "Only one of version str or major/minor/patch can be set")
-      version_str = args[0]
-      if isinstance(version_str, cls):
-        return version_str
-      elif version_str == cls.LATEST:
-        return version_str
-      return super(Version, cls).__new__(cls, *_str_to_version(version_str))
-    elif not args and not kwargs:
-      return super(Version, cls).__new__(cls, 0, 0, 0)
-    else:
-      return super(Version, cls).__new__(cls, *args, **kwargs)
+  def __init__(self, version_str, experiments=None):
+    self._experiments = self._DEFAULT_EXPERIMENTS.copy()
+    if experiments:
+      self._experiments.update(experiments)
+    self.major, self.minor, self.patch = _str_to_version(version_str)
+
+  def implements(self, experiment):
+    """Returns True if version implements given experiment."""
+    return self._experiments[experiment]
 
   def __str__(self):
     return "{}.{}.{}".format(self.major, self.minor, self.patch)
+
+  def tuple(self):
+    return self.major, self.minor, self.patch
+
+  def _validate_operand(self, other):
+    if isinstance(other, six.string_types):
+      return Version(other)
+    elif isinstance(other, Version):
+      return other
+    raise AssertionError("{} (type {}) cannot be compared to version.".format(
+        other, type(other)))
+
+  def __eq__(self, other):
+    return self.tuple() == self._validate_operand(other).tuple()
+
+  def __lt__(self, other):
+    return self.tuple() < self._validate_operand(other).tuple()
 
   def match(self, other_version):
     """Returns True if other_version matches.

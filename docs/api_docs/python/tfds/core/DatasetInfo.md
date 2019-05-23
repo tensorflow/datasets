@@ -84,23 +84,13 @@ Constructs DatasetInfo.
 
 <h3 id="as_json"><code>as_json</code></h3>
 
-
-
 <h3 id="as_proto"><code>as_proto</code></h3>
-
-
 
 <h3 id="citation"><code>citation</code></h3>
 
-
-
 <h3 id="description"><code>description</code></h3>
 
-
-
 <h3 id="features"><code>features</code></h3>
-
-
 
 <h3 id="full_name"><code>full_name</code></h3>
 
@@ -114,33 +104,17 @@ Whether DatasetInfo has been fully initialized.
 
 <h3 id="name"><code>name</code></h3>
 
-
-
 <h3 id="redistribution_info"><code>redistribution_info</code></h3>
-
-
 
 <h3 id="size_in_bytes"><code>size_in_bytes</code></h3>
 
-
-
 <h3 id="splits"><code>splits</code></h3>
-
-
 
 <h3 id="supervised_keys"><code>supervised_keys</code></h3>
 
-
-
 <h3 id="urls"><code>urls</code></h3>
 
-
-
 <h3 id="version"><code>version</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -149,8 +123,6 @@ Whether DatasetInfo has been fully initialized.
 ``` python
 compute_dynamic_properties()
 ```
-
-
 
 <h3 id="initialize_from_bucket"><code>initialize_from_bucket</code></h3>
 
@@ -167,6 +139,7 @@ read_from_directory(dataset_info_dir)
 ```
 
 Update DatasetInfo from the JSON file in `dataset_info_dir`.
+
 This function updates all the dynamically generated fields (num_examples,
 hash, time of creation,...) of the DatasetInfo.
 
@@ -184,6 +157,7 @@ update_splits_if_different(split_dict)
 ```
 
 Overwrite the splits if they are different from the current ones.
+
 * If splits aren't already defined or different (ex: different number of
   shards), then the new split dict is used. This will trigger stats
   computation during download_and_prepare.
@@ -202,6 +176,3 @@ write_to_directory(dataset_info_dir)
 ```
 
 Write `DatasetInfo` as JSON to `dataset_info_dir`.
-
-
-
