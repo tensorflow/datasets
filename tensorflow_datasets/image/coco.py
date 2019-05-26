@@ -280,7 +280,7 @@ class CocoAnnotation(object):
 
   @property
   def images(self):
-    """Return the category dicts, as sorted in the file."""
+    """Return the image dicts, as sorted in the file."""
     return self._data["images"]
 
   def get_annotations(self, img_id):
