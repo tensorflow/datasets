@@ -35,11 +35,9 @@ Constructs ByteTextEncoder.
 
 #### Args:
 
-* <b>`additional_tokens`</b>: `list<str>`, list of additional tokens. These will be
-    assigned vocab ids `[1, 1+len(additional_tokens)]`. Useful for things
-    like "end-of-string" tokens (e.g. "<EOS>").
-
-
+*   <b>`additional_tokens`</b>: `list<str>`, list of additional tokens. These
+    will be assigned vocab ids `[1, 1+len(additional_tokens)]`. Useful for
+    things like "end-of-string" tokens (e.g. "<EOS>").
 
 ## Properties
 

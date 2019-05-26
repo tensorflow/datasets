@@ -54,16 +54,16 @@ executing the `z` tensor with a session.
 
 #### Args:
 
-* <b>`func`</b>: function to be annotated. If `func` is None, this method returns a
-    decorator the can be applied to a function. If `func` is not None this
-    returns the decorator applied to `func`.
-* <b>`config`</b>: An optional config_pb2.ConfigProto to use to configure the session
-    when executing graphs.
-* <b>`use_gpu`</b>: If True, attempt to run as many operations as possible on GPU.
-
+*   <b>`func`</b>: function to be annotated. If `func` is None, this method
+    returns a decorator the can be applied to a function. If `func` is not None
+    this returns the decorator applied to `func`.
+*   <b>`config`</b>: An optional config_pb2.ConfigProto to use to configure the
+    session when executing graphs.
+*   <b>`use_gpu`</b>: If True, attempt to run as many operations as possible on
+    GPU.
 
 #### Returns:
 
-Returns a decorator that will run the decorated test method twice:
-once by constructing and executing a graph in a session and once with
-eager execution enabled.
+Returns a decorator that will run the decorated test method twice: once by
+constructing and executing a graph in a session and once with eager execution
+enabled.

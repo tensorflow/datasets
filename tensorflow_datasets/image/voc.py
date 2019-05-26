@@ -91,7 +91,7 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),
-            "objects": tfds.features.SequenceDict({
+            "objects": tfds.features.Sequence({
                 "label": tfds.features.ClassLabel(names=_VOC2007_LABELS),
                 "bbox": tfds.features.BBoxFeature(),
                 "pose": tfds.features.ClassLabel(names=_VOC2007_POSES),

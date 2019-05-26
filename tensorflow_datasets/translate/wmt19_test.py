@@ -35,23 +35,12 @@ class TranslateDeEnWmt19Test(testing.DatasetBuilderTestCase):
       "newscommentary_v14": ["sentences.de-en.tsv"],
       "wikititles_v1": ["sentences.de-en.tsv"],
       "rapid_2019": ["rapid_2019"],
-      "newssyscomb2009": ["validation"],
-      "newstest2008": ["validation"],
-      "newstest2009": ["validation"],
-      "newstest2010": ["validation"],
-      "newstest2011": ["validation"],
-      "newstest2012": ["validation"],
-      "newstest2013": ["validation"],
-      "newstest2014": ["validation"],
-      "newstest2015": ["validation"],
-      "newstest2016": ["validation"],
-      "newstest2017": ["validation"],
       "newstest2018": ["validation"],
   }
 
   SPLITS = {
       "train": 12,
-      "validation": 24,
+      "validation": 2,
   }
 
 
@@ -67,23 +56,12 @@ class TranslateCsEnWmt19Test(testing.DatasetBuilderTestCase):
       "commoncrawl": ["commoncrawl"],
       "newscommentary_v14": ["sentences.cs-en.tsv"],
       "wikititles_v1": ["sentences.cs-en.tsv"],
-      "newssyscomb2009": ["validation"],
-      "newstest2008": ["validation"],
-      "newstest2009": ["validation"],
-      "newstest2010": ["validation"],
-      "newstest2011": ["validation"],
-      "newstest2012": ["validation"],
-      "newstest2013": ["validation"],
-      "newstest2014": ["validation"],
-      "newstest2015": ["validation"],
-      "newstest2016": ["validation"],
-      "newstest2017": ["validation"],
       "newstest2018": ["validation"],
   }
 
   SPLITS = {
       "train": 13,
-      "validation": 24,
+      "validation": 2,
   }
 
 

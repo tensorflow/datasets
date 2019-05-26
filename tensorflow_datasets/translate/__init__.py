@@ -28,3 +28,4 @@ from tensorflow_datasets.translate.wmt16 import Wmt16Translate
 from tensorflow_datasets.translate.wmt17 import Wmt17Translate
 from tensorflow_datasets.translate.wmt18 import Wmt18Translate
 from tensorflow_datasets.translate.wmt19 import Wmt19Translate
+from tensorflow_datasets.translate.wmt_t2t import WmtT2tTranslate

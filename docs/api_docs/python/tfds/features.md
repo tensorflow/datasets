@@ -33,11 +33,11 @@ Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/
 
 [`class Tensor`](../tfds/features/Tensor.md): `FeatureConnector` for generic data of arbitrary shape and type.
 
-[`class TensorInfo`](../tfds/features/TensorInfo.md): TensorInfo(shape, dtype)
+[`class TensorInfo`](../tfds/features/TensorInfo.md): Structure containing info
+on the `tf.Tensor` shape/dtype.
 
-[`class Sequence`](../tfds/features/Sequence.md): Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
-
-[`class SequenceDict`](../tfds/features/SequenceDict.md): Composite `FeatureConnector` for a `dict` where each value is a list.
+[`class Sequence`](../tfds/features/Sequence.md): Composite `FeatureConnector`
+for a `dict` where each value is a list.
 
 [`class Image`](../tfds/features/Image.md): `FeatureConnector` for images.
 

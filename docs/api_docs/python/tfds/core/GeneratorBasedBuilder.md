@@ -46,7 +46,6 @@ __init__(
 ```
 
 Constructs a DatasetBuilder.
-
 Callers must pass arguments as keyword arguments.
 
 #### Args:
@@ -82,41 +81,43 @@ Callers must pass arguments as keyword arguments.
 
 <h3 id="as_dataset"><code>as_dataset</code></h3>
 
-``` python
+```python
 as_dataset(
     split=None,
     batch_size=1,
     shuffle_files=None,
-    as_supervised=False
+    as_supervised=False,
+    in_memory=None
 )
 ```
 
 Constructs a `tf.data.Dataset`.
-
 Callers must pass arguments as keyword arguments.
 
 #### Args:
 
-* <b>`split`</b>: <a href="../../tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>, which subset(s) of the data to read. If None
-    (default), returns all splits in a dict
-    `<key: tfds.Split, value: tf.data.Dataset>`.
-* <b>`batch_size`</b>: `int`, batch size. Note that variable-length features will
-    be 0-padded if `batch_size > 1`. Users that want more custom behavior
-    should use `batch_size=1` and use the `tf.data` API to construct a
-    custom pipeline. If `batch_size == -1`, will return feature
-    dictionaries of the whole dataset with `tf.Tensor`s instead of a
-    `tf.data.Dataset`.
-* <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files.
-    Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
-* <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
+*   <b>`split`</b>:
+    <a href="../../tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>,
+    which subset(s) of the data to read. If None (default), returns all splits
+    in a dict `<key: tfds.Split, value: tf.data.Dataset>`.
+*   <b>`batch_size`</b>: `int`, batch size. Note that variable-length features
+    will be 0-padded if `batch_size > 1`. Users that want more custom behavior
+    should use `batch_size=1` and use the `tf.data` API to construct a custom
+    pipeline. If `batch_size == -1`, will return feature dictionaries of the
+    whole dataset with `tf.Tensor`s instead of a `tf.data.Dataset`.
+*   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
+    to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+*   <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
     will have a 2-tuple structure `(input, label)` according to
-    `builder.info.supervised_keys`. If `False`, the default,
-    the returned `tf.data.Dataset` will have a dictionary with all the
-    features.
-
+    `builder.info.supervised_keys`. If `False`, the default, the returned
+    `tf.data.Dataset` will have a dictionary with all the features.
+*   <b>`in_memory`</b>: `bool`, if `True`, loads the dataset in memory which
+    increases iteration speeds. Note that if `True` and the dataset has unknown
+    dimensions, the features will be padded to the maximum size across the
+    dataset. By default (when `None`), will load the dataset in memory if the
+    size is <1GB and all feature dimensions are statically known.
 
 #### Returns:
-
 `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
 tfds.data.Dataset>`.
 
@@ -136,11 +137,11 @@ Downloads and prepares dataset for reading.
 
 #### Args:
 
-* <b>`download_dir`</b>: `str`, directory where downloaded files are stored.
+*   <b>`download_dir`</b>: `str`, directory where downloaded files are stored.
     Defaults to "~/tensorflow-datasets/downloads".
-* <b>`download_config`</b>: <a href="../../tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>, further configuration for
-    downloading and preparing dataset.
-
+*   <b>`download_config`</b>:
+    <a href="../../tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>,
+    further configuration for downloading and preparing dataset.
 
 #### Raises:
 

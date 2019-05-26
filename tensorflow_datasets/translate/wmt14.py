@@ -48,7 +48,7 @@ class Wmt14Translate(wmt.WmtTranslate):
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version="0.0.1")
+          version="0.0.3")
       for l1, l2 in _LANGUAGE_PAIRS
   ]
 
@@ -58,10 +58,11 @@ class Wmt14Translate(wmt.WmtTranslate):
         tfds.Split.TRAIN: [
             "europarl_v7", "commoncrawl", "multiun",
             "newscommentary_v9", "gigafren", "czeng_10", "yandexcorpus",
-            "wikiheadlines_hi", "wikiheadlines_ru", "hindencorp_01"],
+            "wikiheadlines_hi", "wikiheadlines_ru", "hindencorp_01"
+        ],
         tfds.Split.VALIDATION: [
-            "newsdev2014", "newssyscomb2009", "newstest2008", "newstest2009",
-            "newstest2010", "newstest2011", "newstest2012", "newstest2013"],
+            "newsdev2014", "newstest2013"
+        ],
         tfds.Split.TEST: [
             "newstest2014"
         ]

@@ -18,11 +18,9 @@ tfds.testing.mock_kaggle_api(
 
 #### Args:
 
-* <b>`filenames`</b>: `list<str>`, names of the competition files.
-* <b>`err_msg`</b>: `str`, if provided, the kaggle CLI will raise a CalledProcessError
-    and this will be the command output.
-
+*   <b>`filenames`</b>: `list<str>`, names of the competition files.
+*   <b>`err_msg`</b>: `str`, if provided, the kaggle CLI will raise a
+    CalledProcessError and this will be the command output.
 
 #### Yields:
-
 None, context will have kaggle CLI mocked out.

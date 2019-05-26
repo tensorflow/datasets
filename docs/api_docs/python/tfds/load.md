@@ -13,6 +13,7 @@ tfds.load(
     split=None,
     data_dir=None,
     batch_size=1,
+    in_memory=None,
     download=True,
     as_supervised=False,
     with_info=False,
@@ -74,6 +75,11 @@ of hundreds of GiB to disk. Refer to the `download` argument.
 *   <b>`batch_size`</b>: `int`, set to > 1 to get batches of examples. Note that
     variable length features will be 0-padded. If `batch_size=-1`, will return
     the full dataset as `tf.Tensor`s.
+*   <b>`in_memory`</b>: `bool`, if `True`, loads the dataset in memory which
+    increases iteration speeds. Note that if `True` and the dataset has unknown
+    dimensions, the features will be padded to the maximum size across the
+    dataset. By default (when `None`), will load the dataset in memory if the
+    size is <1GB and all feature dimensions are statically known.
 *   <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is expected
@@ -106,11 +112,14 @@ of hundreds of GiB to disk. Refer to the `download` argument.
 
 #### Returns:
 
-* <b>`ds`</b>: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
-    `dict<key: tfds.Split, value: tfds.data.Dataset>`. If `batch_size=-1`,
-    these will be full datasets as `tf.Tensor`s.
-* <b>`ds_info`</b>: <a href="../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>, if `with_info` is True, then <a href="../tfds/load.md"><code>tfds.load</code></a>
-    will return a tuple `(ds, ds_info)` containing dataset information
-    (version, features, splits, num_examples,...). Note that the `ds_info`
-    object documents the entire dataset, regardless of the `split` requested.
-    Split-specific information is available in `ds_info.splits`.
+*   <b>`ds`</b>: `tf.data.Dataset`, the dataset requested, or if `split` is
+    None, a `dict<key: tfds.Split, value: tfds.data.Dataset>`. If
+    `batch_size=-1`, these will be full datasets as `tf.Tensor`s.
+*   <b>`ds_info`</b>:
+    <a href="../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>,
+    if `with_info` is True, then
+    <a href="../tfds/load.md"><code>tfds.load</code></a> will return a tuple
+    `(ds, ds_info)` containing dataset information (version, features, splits,
+    num_examples,...). Note that the `ds_info` object documents the entire
+    dataset, regardless of the `split` requested. Split-specific information is
+    available in `ds_info.splits`.

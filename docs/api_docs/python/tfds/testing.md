@@ -24,6 +24,9 @@ Defined in [`testing/__init__.py`](https://github.com/tensorflow/datasets/tree/m
 
 [`class FeatureExpectationsTestCase`](../tfds/testing/FeatureExpectationsTestCase.md): Tests FeatureExpectations with full encode-decode.
 
+[`class SubTestCase`](../tfds/testing/SubTestCase.md): Adds subTest() context
+manager to the TestCase if supported.
+
 [`class TestCase`](../tfds/testing/TestCase.md): Base TestCase to be used for all tests.
 
 ## Functions

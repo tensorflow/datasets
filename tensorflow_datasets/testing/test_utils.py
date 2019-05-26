@@ -108,6 +108,20 @@ class SubTestCase(test_case.TestCase):
         yield
       self._sub_test_stack.pop()
 
+  def assertAllEqualNested(self, d1, d2):
+    """Same as assertAllEqual but compatible with nested dict."""
+    if isinstance(d1, dict):
+      # assertAllEqual do not works well with dictionaries so assert
+      # on each individual elements instead
+      zipped_examples = utils.zip_nested(d1, d2, dict_only=True)
+      utils.map_nested(
+          lambda x: self.assertAllEqual(x[0], x[1]),
+          zipped_examples,
+          dict_only=True,
+      )
+    else:
+      self.assertAllEqual(d1, d2)
+
 
 def run_in_graph_and_eager_modes(func=None,
                                  config=None,
@@ -265,21 +279,7 @@ class FeatureExpectationsTestCase(SubTestCase):
       with self._subTest("out_value"):
         decoded_examples = features_encode_decode(fdict, input_value)
         decoded_examples = decoded_examples["inner"]
-        if isinstance(decoded_examples, dict):
-          # assertAllEqual do not works well with dictionaries so assert
-          # on each individual elements instead
-          zipped_examples = utils.zip_nested(
-              test.expected,
-              decoded_examples,
-              dict_only=True,
-          )
-          utils.map_nested(
-              lambda x: self.assertAllEqual(x[0], x[1]),
-              zipped_examples,
-              dict_only=True,
-          )
-        else:
-          self.assertAllEqual(test.expected, decoded_examples)
+        self.assertAllEqualNested(decoded_examples, test.expected)
 
 
 def features_encode_decode(features_dict, example, as_tensor=False):
@@ -297,19 +297,19 @@ def features_encode_decode(features_dict, example, as_tensor=False):
         generator_fn=lambda: [encoded_example],
         output_files=[tmp_filename],
     )
-    dataset = file_adapter.dataset_from_filename(tmp_filename)
+    ds = file_adapter.dataset_from_filename(tmp_filename)
 
     # Decode the example
-    dataset = dataset.map(features_dict.decode_example)
+    ds = ds.map(features_dict.decode_example)
 
     if not as_tensor:  # Evaluate to numpy array
-      for el in dataset_utils.as_numpy(dataset):
+      for el in dataset_utils.as_numpy(ds):
         return el
     else:
       if tf.executing_eagerly():
-        return next(iter(dataset))
+        return next(iter(ds))
       else:
-        return tf.compat.v1.data.make_one_shot_iterator(dataset).get_next()
+        return tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):

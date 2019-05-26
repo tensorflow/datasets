@@ -163,8 +163,13 @@ def _eager_dataset_iterator(dataset):
     yield tf.nest.pack_sequence_as(item, flat)
 
 
-def _graph_dataset_iterator(ds_item, graph=None):
+def _graph_dataset_iterator(ds_iter, graph=None):
+  """Constructs a Python generator from a tf.data.Iterator."""
+  with utils.maybe_with_graph(graph, create_if_none=False):
+    init = ds_iter.initializer
+    ds_item = ds_iter.get_next()
   with utils.nogpu_session(graph) as sess:
+    sess.run(init)
     while True:
       try:
         yield sess.run(ds_item)
@@ -219,7 +224,7 @@ def as_numpy(dataset, graph=None):
     # First create iterators for datasets
     with utils.maybe_with_graph(graph, create_if_none=False):
       ds_iters = [
-          tf.compat.v1.data.make_one_shot_iterator(ds_el).get_next()
+          tf.compat.v1.data.make_initializable_iterator(ds_el)
           for ds_el in flat_ds if tf_compat.is_dataset(ds_el)
       ]
     ds_iters = [_graph_dataset_iterator(ds_iter, graph) for ds_iter in ds_iters]
@@ -240,3 +245,8 @@ def as_numpy(dataset, graph=None):
 
   # Nest
   return tf.nest.pack_sequence_as(nested_ds, flat_np)
+
+
+def dataset_shape_is_fully_defined(ds):
+  return all(
+      [ts.is_fully_defined() for ts in tf.nest.flatten(ds.output_shapes)])
