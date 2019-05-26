@@ -17,13 +17,15 @@
 
 ## Class `TokenTextEncoder`
 
+TextEncoder backed by a list of tokens.
+
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
-TextEncoder backed by a list of tokens.
+<!-- Placeholder for "Used in" -->
 
 Tokenization splits on (and drops) non-alphanumeric characters with
 regex "\W+".
@@ -41,21 +43,19 @@ __init__(
 ```
 
 Constructs a TokenTextEncoder.
-
 To load from a file saved with `TokenTextEncoder.save_to_file`, use
 `TokenTextEncoder.load_from_file`.
 
 #### Args:
 
-* <b>`vocab_list`</b>: `list<str>`, list of tokens.
-* <b>`oov_buckets`</b>: `int`, the number of `int`s to reserve for OOV hash buckets.
-    Tokens that are OOV will be hash-modded into a OOV bucket in `encode`.
-* <b>`oov_token`</b>: `str`, the string to use for OOV ids in `decode`.
-* <b>`lowercase`</b>: `bool`, whether to make all text and tokens lowercase.
-* <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text into a
-    list of tokens.
-
-
+*   <b>`vocab_list`</b>: `list<str>`, list of tokens.
+*   <b>`oov_buckets`</b>: `int`, the number of `int`s to reserve for OOV hash
+    buckets. Tokens that are OOV will be hash-modded into a OOV bucket in
+    `encode`.
+*   <b>`oov_token`</b>: `str`, the string to use for OOV ids in `decode`.
+*   <b>`lowercase`</b>: `bool`, whether to make all text and tokens lowercase.
+*   <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text
+    into a list of tokens.
 
 ## Properties
 

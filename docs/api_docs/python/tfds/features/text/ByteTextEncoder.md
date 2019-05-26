@@ -14,13 +14,16 @@
 
 ## Class `ByteTextEncoder`
 
+Byte-encodes text.
+
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
-Byte-encodes text.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -32,11 +35,9 @@ Constructs ByteTextEncoder.
 
 #### Args:
 
-* <b>`additional_tokens`</b>: `list<str>`, list of additional tokens. These will be
-    assigned vocab ids `[1, 1+len(additional_tokens)]`. Useful for things
-    like "end-of-string" tokens (e.g. "<EOS>").
-
-
+*   <b>`additional_tokens`</b>: `list<str>`, list of additional tokens. These
+    will be assigned vocab ids `[1, 1+len(additional_tokens)]`. Useful for
+    things like "end-of-string" tokens (e.g. "<EOS>").
 
 ## Properties
 

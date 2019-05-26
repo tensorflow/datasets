@@ -28,7 +28,8 @@ class MultiNLITest(testing.DatasetBuilderTestCase):
 
   SPLITS = {
       "train": 3,
-      "validation": 2,
+      "validation_matched": 2,
+      "validation_mismatched": 1,
   }
 
 

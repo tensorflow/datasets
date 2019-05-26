@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import six.moves.urllib as urllib
+from six.moves import urllib
 import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -99,7 +99,7 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
       Generator yielding the next samples
     """
     with tf.io.gfile.GFile(filepath, "rb") as f:
-      data = tfds.core.lazy_imports.scipy_io.loadmat(f)
+      data = tfds.core.lazy_imports.scipy.io.loadmat(f)
 
     # Maybe should shuffle ?
 
@@ -107,6 +107,7 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
     assert np.min(data["y"]) > 0
 
     for image, label in zip(np.rollaxis(data["X"], -1), data["y"]):
+      label = label.reshape(())
       yield {
           "image": image,
           "label": label % 10,  # digit 0 is saved as 0 (instead of 10)

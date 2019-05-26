@@ -24,12 +24,15 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 ```sh
 pip install tensorflow-datasets
 
-# Requires TF 1.12+ to be installed.
+# Requires TF 1.13+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
 pip install tensorflow
 # or:
 pip install tensorflow-gpu
 ```
+
+Join [our Google group](https://groups.google.com/forum/#!forum/tensorflow-datasets-public-announce)
+to receive updates on the project.
 
 ### Usage
 
@@ -109,6 +112,17 @@ print(info)
             }
       """',
   )
+```
+
+You can also get details about the classes (number of classes and their names).
+
+```python
+info = tfds.builder('cats_vs_dogs').info
+
+info.features['label'].num_classes  # 2
+info.features['label'].names  # ['cat', 'dog']
+info.features['label'].int2str(1)  # "dog"
+info.features['label'].str2int('cat')  # 0
 ```
 
 ### NumPy Usage with `tfds.as_numpy`
