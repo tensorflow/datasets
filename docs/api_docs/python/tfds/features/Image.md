@@ -86,8 +86,6 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
 
 <h3 id="__getstate__"><code>__getstate__</code></h3>
@@ -118,15 +116,11 @@ Convert the given image into a dict convertible to tf example.
 get_serialized_info()
 ```
 
-
-
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
 ``` python
 get_tensor_info()
 ```
-
-
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
@@ -165,6 +159,3 @@ set_shape(shape)
 ```
 
 Update the shape.
-
-
-
