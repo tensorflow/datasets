@@ -30,23 +30,10 @@ __init__(
 )
 ```
 
-
-
-
-
 ## Properties
 
 <h3 id="description"><code>description</code></h3>
 
-
-
 <h3 id="name"><code>name</code></h3>
 
-
-
 <h3 id="version"><code>version</code></h3>
-
-
-
-
-
