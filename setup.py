@@ -79,6 +79,9 @@ DATASET_FILES = [
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/quickdraw_labels.txt',
+    'image/open_images_classes_all.txt',
+    'image/open_images_classes_boxable.txt',
+    'image/open_images_classes_trainable.txt',
     'url_checksums/*',
 ]
 
