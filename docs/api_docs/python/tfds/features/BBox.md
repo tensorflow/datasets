@@ -34,25 +34,12 @@ __new__(
 
 Create new instance of BBox(ymin, xmin, ymax, xmax)
 
-
-
 ## Properties
 
 <h3 id="ymin"><code>ymin</code></h3>
 
-
-
 <h3 id="xmin"><code>xmin</code></h3>
-
-
 
 <h3 id="ymax"><code>ymax</code></h3>
 
-
-
 <h3 id="xmax"><code>xmax</code></h3>
-
-
-
-
-

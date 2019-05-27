@@ -29,17 +29,11 @@ Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master
 __init__()
 ```
 
-
-
-
-
 ## Properties
 
 <h3 id="total_num_examples"><code>total_num_examples</code></h3>
 
 Return the total number of examples.
-
-
 
 ## Methods
 
@@ -49,8 +43,6 @@ Return the total number of examples.
 __getitem__(key)
 ```
 
-
-
 <h3 id="__setitem__"><code>__setitem__</code></h3>
 
 ``` python
@@ -59,8 +51,6 @@ __setitem__(
     value
 )
 ```
-
-
 
 <h3 id="add"><code>add</code></h3>
 
@@ -75,8 +65,6 @@ Add the split info.
 ``` python
 copy()
 ```
-
-
 
 <h3 id="from_proto"><code>from_proto</code></h3>
 
@@ -103,8 +91,3 @@ Returns a list of SplitInfo protos that we have.
 ``` python
 update(other)
 ```
-
-
-
-
-
