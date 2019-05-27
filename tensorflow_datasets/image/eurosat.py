@@ -44,7 +44,7 @@ Two datasets are offered:
 - rgb: Contains only the optical R, G, B frequency bands encoded as JPEG image.
 - all: Contains all 13 bands in the original value range (float32).
 
-URL: http://go/gh/phelber/eurosat
+URL: https://github.com/phelber/eurosat
 """
 
 _LABELS = [
@@ -52,7 +52,7 @@ _LABELS = [
     'Pasture', 'PermanentCrop', 'Residential', 'River', 'SeaLake'
 ]
 
-_URL = 'http://go/gh/phelber/eurosat'
+_URL = 'https://github.com/phelber/eurosat'
 
 _DATA_OPTIONS = ['rgb', 'all']
 
