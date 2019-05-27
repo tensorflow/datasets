@@ -31,6 +31,7 @@ __init__(
 ```
 
 Constructs a Tokenizer.
+
 Note that the Tokenizer is invertible if `alphanum_only=False`.
 i.e. `s == t.join(t.tokenize(s))`.
 
@@ -48,13 +49,7 @@ i.e. `s == t.join(t.tokenize(s))`.
 
 <h3 id="alphanum_only"><code>alphanum_only</code></h3>
 
-
-
 <h3 id="reserved_tokens"><code>reserved_tokens</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -76,15 +71,11 @@ load_from_file(
 )
 ```
 
-
-
 <h3 id="save_to_file"><code>save_to_file</code></h3>
 
 ``` python
 save_to_file(filename_prefix)
 ```
-
-
 
 <h3 id="tokenize"><code>tokenize</code></h3>
 
@@ -93,6 +84,3 @@ tokenize(s)
 ```
 
 Splits a string into tokens.
-
-
-

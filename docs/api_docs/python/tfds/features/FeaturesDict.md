@@ -102,6 +102,7 @@ __init__(feature_dict)
 Initialize the features.
 
 #### Args:
+
 feature_dict (dict): Dictionary containing the feature connectors of a
   example. The keys should correspond to the data dict as returned by
   tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically
@@ -123,8 +124,6 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
@@ -141,15 +140,11 @@ Return the feature associated with the key.
 __iter__()
 ```
 
-
-
 <h3 id="__len__"><code>__len__</code></h3>
 
 ``` python
 __len__()
 ```
-
-
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
@@ -189,15 +184,11 @@ See base class for details.
 items()
 ```
 
-
-
 <h3 id="keys"><code>keys</code></h3>
 
 ``` python
 keys()
 ```
-
-
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
@@ -226,8 +217,3 @@ See base class for details.
 ``` python
 values()
 ```
-
-
-
-
-
