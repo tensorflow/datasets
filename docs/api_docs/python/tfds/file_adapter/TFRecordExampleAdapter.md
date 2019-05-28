@@ -49,10 +49,6 @@ Constructor.
 
 <h3 id="filetype_suffix"><code>filetype_suffix</code></h3>
 
-
-
-
-
 ## Methods
 
 <h3 id="dataset_from_filename"><code>dataset_from_filename</code></h3>
@@ -113,8 +109,6 @@ write_from_generator(
 )
 ```
 
-
-
 <h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
 
 ``` python
@@ -124,8 +118,3 @@ write_from_pcollection(
     num_shards
 )
 ```
-
-
-
-
-
