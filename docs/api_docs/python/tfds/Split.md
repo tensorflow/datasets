@@ -48,8 +48,6 @@ __new__(
 
 Create a custom split with tfds.Split('custom_name').
 
-
-
 ## Class Members
 
 <h3 id="ALL"><code>ALL</code></h3>

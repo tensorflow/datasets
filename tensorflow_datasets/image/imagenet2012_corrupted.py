@@ -80,6 +80,16 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
     self.severity = severity
 
 
+_VERSION = tfds.core.Version('0.0.1')
+_SUPPORTED_VERSIONS = [
+    tfds.core.Version('3.0.0'),  # Will be made canonical in near future.
+]
+# Version history:
+# 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
+#        (jump to match imagenet version).
+# 0.0.1: Initial dataset.
+
+
 def _make_builder_configs():
   """Construct a list of BuilderConfigs.
 

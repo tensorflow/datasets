@@ -45,7 +45,7 @@ There are three parts to the composition:
      to define which files to read and how to skip examples within file.
 
   ```
-  files_to_read = read_instruction.split_info_list
+  files_to_read = read_instruction.split_info
   slice_per_file = read_instruction.slice_list
   ```
 
@@ -96,6 +96,7 @@ subsplit(
 ```
 
 Divides this split into subsplits.
+
 There are 3 ways to define subsplits, which correspond to the 3
 arguments `k` (get `k` even subsplits), `percent` (get a slice of the
 dataset with <a href="../../tfds/percent.md"><code>tfds.percent</code></a>), and `weighted` (get subsplits with proportions

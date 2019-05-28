@@ -107,8 +107,6 @@ Returns the total size of downloaded files.
 
 Returns the directory containing the manually extracted data.
 
-
-
 ## Methods
 
 <h3 id="download"><code>download</code></h3>
@@ -126,6 +124,7 @@ Download given url(s).
     <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 #### Returns:
+
 downloaded_path(s): `str`, The downloaded paths matching the given input
   url_or_urls.
 
@@ -136,6 +135,7 @@ download_and_extract(url_or_urls)
 ```
 
 Download and extract given url_or_urls.
+
 Is roughly equivalent to:
 
 ```
@@ -181,6 +181,7 @@ If not explicitly specified in `Resource`, the extraction method is deduced
 from downloaded file name.
 
 #### Returns:
+
 extracted_path(s): `str`, The extracted paths matching the given input
   path_or_paths.
 
@@ -191,6 +192,7 @@ iter_archive(resource)
 ```
 
 Returns iterator over files within archive.
+
 **Important Note**: caller should read files as they are yielded.
 Reading out of order is slow.
 

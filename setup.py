@@ -41,6 +41,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'cityhash',
     'future',
     'numpy',
     'promise',
@@ -86,6 +87,9 @@ DATASET_EXTRAS = {
     # In alphabetical order
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
+    'eurosat': [
+        'scikit-image',
+    ],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
