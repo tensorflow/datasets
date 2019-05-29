@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tempfile
 
 import h5py
 import numpy as np
@@ -128,7 +127,7 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
     # We need to calculate the class labels from the float values in the file.
     labels_array = np.zeros_like(values_array, dtype=np.int64)
     for i in range(values_array.shape[1]):
-      labels_array[:, i] = _discretize(values_array[:, i])
+      labels_array[:, i] = _discretize(values_array[:, i])  # pylint: disable=unsupported-assignment-operation
 
     for image, labels, values in moves.zip(image_array, labels_array,
                                            values_array):

@@ -20,7 +20,6 @@ from __future__ import division
 from __future__ import print_function
 
 import io
-import os
 import tarfile
 
 import tensorflow as tf
@@ -53,6 +52,7 @@ pages={211-252}
 }
 '''
 
+_URL_PREFIX = 'http://www.image-net.org/challenges/LSVRC/2012/nnoupb'
 _LABELS_FNAME = 'image/imagenet2012_labels.txt'
 
 # This file contains the validation labels, in the alphabetic order of
@@ -64,7 +64,7 @@ _VALIDATION_LABELS_FNAME = 'image/imagenet2012_validation_labels.txt'
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
-  VERSION = tfds.core.Version('2.0.0')
+  VERSION = tfds.core.Version('2.0.1')
   # 1.0.0 to 2.0.0: fix validation labels.
 
   def _info(self):
@@ -102,8 +102,10 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return dict(zip(images, labels))
 
   def _split_generators(self, dl_manager):
-    train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
-    val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
+    train_path, val_path = dl_manager.download([
+        '%s/ILSVRC2012_img_train.tar' % _URL_PREFIX,
+        '%s/ILSVRC2012_img_val.tar' % _URL_PREFIX,
+    ])
     if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
       msg = 'You must download the dataset files manually and place them in: '
       msg += ', '.join([train_path, val_path])
@@ -127,6 +129,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, archive, validation_labels=None):
+    """Yields examples."""
     if validation_labels:  # Validation split
       for example in self._generate_examples_validation(archive,
                                                         validation_labels):

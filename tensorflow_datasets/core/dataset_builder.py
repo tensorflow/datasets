@@ -39,6 +39,7 @@ from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import gcs_utils
 
 import termcolor
 
@@ -46,6 +47,13 @@ import termcolor
 FORCE_REDOWNLOAD = download.GenerateMode.FORCE_REDOWNLOAD
 REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
+
+GCS_HOSTED_MSG = """\
+Dataset {name} is hosted on GCS. You can skip download_and_prepare by setting
+data_dir=gs://tfds-data/datasets. If you find
+that read performance is slow, copy the data locally with gsutil:
+gsutil -m cp -R {gcs_path} {local_data_dir_no_version}
+"""
 
 
 class BuilderConfig(object):
@@ -132,7 +140,7 @@ class DatasetBuilder(object):
 
 
   @api_utils.disallow_positional_args
-  def __init__(self, data_dir=None, config=None):
+  def __init__(self, data_dir=None, config=None, version=None):
     """Constructs a DatasetBuilder.
 
     Callers must pass arguments as keyword arguments.
@@ -143,16 +151,23 @@ class DatasetBuilder(object):
       config: `tfds.core.BuilderConfig` or `str` name, optional configuration
         for the dataset that affects the data generated on disk. Different
         `builder_config`s will have their own subdirectories and versions.
+      version: `str`. Optional version at which to load the dataset. An error is
+        raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
+        Note that only the currently defined version can be loaded.
     """
     self._builder_config = self._create_builder_config(config)
     # Extract code version (VERSION or config)
     if not self._builder_config and not self.VERSION:
       raise AssertionError(
-          "DatasetBuilder {} does not have defined version. Please add a "
-          "`VERSION = tfds.Version('x.y.z')` to the class.".format(
+          "DatasetBuilder {} does not have a defined version. Please add a "
+          "`VERSION = tfds.core.Version('x.y.z')` to the class.".format(
               self.name))
     self._version = utils.Version(
         self._builder_config and self._builder_config.version or self.VERSION)
+    if version and not self._version.match(version):
+      msg = "Dataset {} cannot be loaded at version {}, only {}.".format(
+          self.name, version, self._version)
+      raise AssertionError(msg)
     self._data_dir_root = os.path.expanduser(data_dir or constants.DATA_DIR)
     self._data_dir = self._build_data_dir()
     if tf.io.gfile.exists(self._data_dir):
@@ -190,14 +205,20 @@ class DatasetBuilder(object):
         Defaults to "~/tensorflow-datasets/downloads".
       download_config: `tfds.download.DownloadConfig`, further configuration for
         downloading and preparing dataset.
+
+    Raises:
+      IOError: if there is not enough disk space available.
     """
 
     download_config = download_config or download.DownloadConfig()
     data_exists = tf.io.gfile.exists(self._data_dir)
-    if (data_exists and
-        download_config.download_mode == REUSE_DATASET_IF_EXISTS):
+    if data_exists and download_config.download_mode == REUSE_DATASET_IF_EXISTS:
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
+
+    # Data may exist on GCS
+    if not data_exists:
+      self._maybe_log_gcs_data_dir()
 
     dl_manager = self._make_download_manager(
         download_dir=download_dir,
@@ -213,6 +234,10 @@ class DatasetBuilder(object):
           "please update the version number.".format(self.name, self._data_dir,
                                                      self.info.version))
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
+    if not utils.has_sufficient_disk_space(
+        self.info.size_in_bytes, directory=self._data_dir_root):
+      raise IOError("Not enough disk space. Needed: %s" %
+                    units.size_str(self.info.size_in_bytes))
     self._log_download_bytes()
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
@@ -243,13 +268,15 @@ class DatasetBuilder(object):
         self.info.size_in_bytes = dl_manager.downloaded_size
         # Write DatasetInfo to disk, even if we haven't computed the statistics.
         self.info.write_to_directory(self._data_dir)
+    self._log_download_done()
 
   @api_utils.disallow_positional_args
   def as_dataset(self,
                  split=None,
                  batch_size=1,
                  shuffle_files=None,
-                 as_supervised=False):
+                 as_supervised=False,
+                 in_memory=None):
     """Constructs a `tf.data.Dataset`.
 
     Callers must pass arguments as keyword arguments.
@@ -271,6 +298,12 @@ class DatasetBuilder(object):
         `builder.info.supervised_keys`. If `False`, the default,
         the returned `tf.data.Dataset` will have a dictionary with all the
         features.
+      in_memory: `bool`, if `True`, loads the dataset in memory which
+        increases iteration speeds. Note that if `True` and the dataset has
+        unknown dimensions, the features will be padded to the maximum
+        size across the dataset. By default (when `None`), will load the
+        dataset in memory if the size is <1GB and all feature dimensions are
+        statically known.
 
     Returns:
       `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
@@ -296,12 +329,13 @@ class DatasetBuilder(object):
         shuffle_files=shuffle_files,
         batch_size=batch_size,
         as_supervised=as_supervised,
+        in_memory=in_memory,
     )
     datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
 
   def _build_single_dataset(self, split, shuffle_files, batch_size,
-                            as_supervised):
+                            as_supervised, in_memory):
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
@@ -315,10 +349,39 @@ class DatasetBuilder(object):
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
     dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+
+    # If the dataset is small, load it in memory
+    # TODO(tfds): Expose and use the actual data size on disk and rm the manual
+    # name guards. size_in_bytes is the download size, which is misleading,
+    # particularly for datasets that use manual_dir as well as some downloads
+    # (wmt and diabetic_retinopathy_detection).
+    dataset_shape_is_fully_defined = (
+        dataset_utils.dataset_shape_is_fully_defined(dataset))
+    in_memory_default = (
+        self.info.size_in_bytes and
+        self.info.size_in_bytes <= 1e9 and
+        not self.name.startswith("wmt") and
+        not self.name.startswith("diabetic") and
+        dataset_shape_is_fully_defined)
+    in_memory = in_memory_default if in_memory is None else in_memory
+    if in_memory and not wants_full_dataset:
+      # TODO(tfds): Enable in_memory without padding features. May be able
+      # to do by using a requested version of tf.data.Dataset.cache that can
+      # persist a cache beyond iterator instances.
+      if not dataset_shape_is_fully_defined:
+        tf.logging.warning("Called in_memory=True on a dataset that does not "
+                           "have fully defined shapes. Note that features with "
+                           "variable length dimensions will be 0-padded to "
+                           "the maximum length across the dataset.")
+      # Use padded_batch so that features with unknown shape are supported.
+      full_bs = self.info.splits.total_num_examples or sys.maxsize
+      dataset = dataset.padded_batch(full_bs, dataset.output_shapes)
+      dataset = tf.data.Dataset.from_tensor_slices(
+          next(dataset_utils.as_numpy(dataset)))
+
     if batch_size > 1:
       # Use padded_batch so that features with unknown shape are supported.
-      padded_shapes = self.info.features.shape
-      dataset = dataset.padded_batch(batch_size, padded_shapes)
+      dataset = dataset.padded_batch(batch_size, dataset.output_shapes)
 
     if as_supervised:
       if not self.info.supervised_keys:
@@ -338,17 +401,39 @@ class DatasetBuilder(object):
 
     if wants_full_dataset:
       return tf.data.experimental.get_single_element(dataset)
-    else:
-      return dataset
+    return dataset
 
-  def _build_data_dir(self):
-    """Return the data directory for the current version."""
-    builder_data_dir = os.path.join(self._data_dir_root, self.name)
+  def _maybe_log_gcs_data_dir(self):
+    """If data is on GCS, set _data_dir to GCS path."""
+    if not gcs_utils.is_dataset_on_gcs(self.info.full_name):
+      return
+
+    gcs_path = os.path.join(constants.GCS_DATA_DIR, self.info.full_name)
+    msg = GCS_HOSTED_MSG.format(
+        name=self.name,
+        gcs_path=gcs_path,
+        local_data_dir_no_version=os.path.split(self._data_dir)[0])
+    logging.info(msg)
+
+  def _relative_data_dir(self, with_version=True):
+    """Relative path of this dataset in data_dir."""
+    builder_data_dir = self.name
     builder_config = self._builder_config
     if builder_config:
       builder_data_dir = os.path.join(builder_data_dir, builder_config.name)
+    if not with_version:
+      return builder_data_dir
+
     version = self._version
     version_data_dir = os.path.join(builder_data_dir, str(version))
+    return version_data_dir
+
+  def _build_data_dir(self):
+    """Return the data directory for the current version."""
+    builder_data_dir = os.path.join(
+        self._data_dir_root, self._relative_data_dir(with_version=False))
+    version_data_dir = os.path.join(
+        self._data_dir_root, self._relative_data_dir(with_version=True))
 
     def _other_versions_on_disk():
       """Returns previous versions on disk."""
@@ -381,13 +466,21 @@ class DatasetBuilder(object):
 
     return version_data_dir
 
+  def _log_download_done(self):
+    msg = ("Dataset {name} downloaded and prepared to {data_dir}. "
+           "Subsequent calls will reuse this data.").format(
+               name=self.name,
+               data_dir=self._data_dir,
+           )
+    termcolor.cprint(msg, attrs=["bold"])
+
   def _log_download_bytes(self):
     # Print is intentional: we want this to always go to stdout so user has
     # information needed to cancel download/preparation if needed.
     # This comes right before the progress bar.
     size_text = units.size_str(self.info.size_in_bytes)
     termcolor.cprint(
-        "Downloading / extracting dataset %s (%s) to %s..." %
+        "Downloading and preparing dataset %s (%s) to %s..." %
         (self.name, size_text, self._data_dir),
         attrs=["bold"])
     # TODO(tfds): Should try to estimate the available free disk space (if
@@ -469,7 +562,7 @@ class DatasetBuilder(object):
       logging.info("No config specified, defaulting to first: %s/%s", self.name,
                    builder_config.name)
     if not builder_config:
-      return
+      return None
     if isinstance(builder_config, six.string_types):
       name = builder_config
       builder_config = self.builder_configs.get(name)
@@ -517,7 +610,7 @@ class FileAdapterBuilder(DatasetBuilder):
 
   @utils.memoized_property
   def _file_format_adapter(self):
-    # Load the format adapter (CSV, TF-Record,...)
+    # Load the format adapter (TF-Record,...)
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
     serialized_info = self.info.features.get_serialized_info()
     return file_adapter_cls(serialized_info)
@@ -652,14 +745,33 @@ class FileAdapterBuilder(DatasetBuilder):
     """Return the list of files and reading mask of the files to read."""
     instruction_dicts = []
     for sliced_split_info in list_sliced_split_info:
+      mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+
       # Compute filenames from the given split
-      for filepath in self._build_split_filenames(
+      filepaths = list(sorted(self._build_split_filenames(
           split_info_list=[sliced_split_info.split_info],
-      ):
-        mask = splits_lib.slice_to_percent_mask(sliced_split_info.slice_value)
+      )))
+
+      # Compute the offsets
+      if sliced_split_info.split_info.num_examples:
+        shard_id2num_examples = splits_lib.get_shard_id2num_examples(
+            sliced_split_info.split_info.num_shards,
+            sliced_split_info.split_info.num_examples,
+        )
+        mask_offsets = splits_lib.compute_mask_offsets(shard_id2num_examples)
+      else:
+        logging.warning(
+            "Statistics not present in the dataset. TFDS is not able to load "
+            "the total number of examples, so using the subsplit API may not "
+            "provide precise subsplits."
+        )
+        mask_offsets = [0] * len(filepaths)
+
+      for filepath, mask_offset in zip(filepaths, mask_offsets):
         instruction_dicts.append({
             "filepath": filepath,
             "mask": mask,
+            "mask_offset": mask_offset,
         })
     return instruction_dicts
 
@@ -774,6 +886,9 @@ class BeamBasedBuilder(FileAdapterBuilder):
     `_split_generators`. The examples from the PCollection will be
     encoded and written to disk.
 
+    Beam liquid sharding can be used by setting num_shards to `None` in the
+    `SplitGenerator`.
+
     Warning: When running in a distributed setup, make sure that the data
     which will be read (download_dir, manual_dir,...) and written (data_dir)
     can be accessed by the workers jobs. The data should be located in a
@@ -823,6 +938,16 @@ class BeamBasedBuilder(FileAdapterBuilder):
           dl_manager,
           pipeline=pipeline,
       )
+
+    # Update the number of shards for splits where liquid sharding were used.
+    split_dict = self.info.splits
+    for split_info in split_dict.values():
+      if not split_info.num_shards:
+        output_prefix = naming.filename_prefix_for_split(
+            self.name, split_info.name)
+        output_prefix = os.path.join(self._data_dir, output_prefix)
+        split_info.num_shards = len(tf.io.gfile.glob(output_prefix + "*"))
+    self.info.update_splits_if_different(split_dict)
 
   def _prepare_split(self, split_generator, pipeline):
     beam = lazy_imports.lazy_imports.apache_beam

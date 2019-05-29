@@ -5,6 +5,7 @@
 <meta itemprop="property" content="minor"/>
 <meta itemprop="property" content="patch"/>
 <meta itemprop="property" content="__new__"/>
+<meta itemprop="property" content="match"/>
 <meta itemprop="property" content="LATEST"/>
 </div>
 
@@ -12,13 +13,12 @@
 
 ## Class `Version`
 
-
-
-
+Dataset version MAJOR.MINOR.PATCH.
 
 Defined in [`core/utils/version.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py).
 
-Dataset version MAJOR.MINOR.PATCH.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__new__"><code>__new__</code></h2>
 
@@ -47,9 +47,20 @@ __new__(
 
 <h3 id="patch"><code>patch</code></h3>
 
+## Methods
 
+<h3 id="match"><code>match</code></h3>
 
+```python
+match(other_version)
+```
 
+Returns True if other_version matches.
+
+#### Args:
+
+*   <b>`other_version`</b>: string, of the form "x[.y[.x]]" where {x,y,z} can be
+    a number or a wildcard.
 
 ## Class Members
 

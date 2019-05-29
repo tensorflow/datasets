@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import os
 import numpy as np
-import six.moves.urllib as urllib
+from six.moves import urllib
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
@@ -111,8 +111,8 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
-    # Download the full MNist Database
+    """Returns SplitGenerators."""
+    # Download the full MNIST Database
     filenames = {
         "train_data": _MNIST_TRAIN_DATA_FILENAME,
         "train_labels": _MNIST_TRAIN_LABELS_FILENAME,
@@ -303,9 +303,9 @@ class EMNIST(MNIST):
     return tfds.core.DatasetInfo(
         builder=self,
         description=(
-            "The EMNIST dataset is a set of handwritten character digits"
-            "derived from the NIST Special Database 19 and converted to"
-            "a 28x28 pixel image format and dataset structure that directly"
+            "The EMNIST dataset is a set of handwritten character digits "
+            "derived from the NIST Special Database 19 and converted to "
+            "a 28x28 pixel image format and dataset structure that directly "
             "matches the MNIST dataset."),
         features=tfds.features.FeaturesDict({
             "image":

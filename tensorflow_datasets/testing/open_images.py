@@ -28,6 +28,7 @@ import tarfile
 from absl import app
 from absl import flags
 
+from tensorflow_datasets.core.features import ClassLabel
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import open_images
 from tensorflow_datasets.testing import fake_data_utils
@@ -36,21 +37,10 @@ flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
 FLAGS = flags.FLAGS
 
-CLASSES_NB = 32
-CLASS_NAMES = ['/m/016x%i' % i_ for i_ in range(CLASSES_NB)]
-
 
 def _output_dir():
   return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
                       'open_images_v4')
-
-
-def _write_class_descriptions():
-  lines = ['%s,name %s' % (class_name, i)
-           for i, class_name in enumerate(CLASS_NAMES)]
-  path = os.path.join(_output_dir(), 'class_descriptions.csv')
-  with open(path, 'w') as csv_f:
-    csv_f.write('\n'.join(lines))
 
 
 def _get_image_ids(images_number, prefix=None):
@@ -74,16 +64,26 @@ def _write_tar(path, split_name, image_ids, prefix=None):
   if prefix is not None:
     split_name = '%s_%s' % (split_name, prefix)
   with tarfile.open(path, mode='w') as tar:
-    for image_id in image_ids:
+    for i, image_id in enumerate(image_ids):
       fname = '%s/%s.jpg' % (split_name, image_id)
-      tar.add(fake_data_utils.get_random_jpeg(), arcname=fname)
+      # Note: Generate two large images with more than 300k pixels.
+      kwargs = dict(height=600, width=600) if i < 2 else dict()
+      tar.add(fake_data_utils.get_random_jpeg(**kwargs), arcname=fname)
 
 
 def _write_image_level_labels(fname, image_ids, machine=False):
   """Writes CSV with 0-10 labels per image."""
   lines = ['ImageID,Source,LabelName,Condidence']
-  for image_id in image_ids:
-    labels = random.sample(CLASS_NAMES, random.randint(0, 10))
+  all_class_label = ClassLabel(names_file=py_utils.get_tfds_path(
+      os.path.join('image', 'open_images_classes_all.txt')))
+  trainable_class_label = ClassLabel(names_file=py_utils.get_tfds_path(
+      os.path.join('image', 'open_images_classes_trainable.txt')))
+  for i, image_id in enumerate(image_ids):
+    if i < 1:
+      # Ensure that at least some image contains trainable classes.
+      labels = random.sample(trainable_class_label.names, random.randint(0, 10))
+    else:
+      labels = random.sample(all_class_label.names, random.randint(0, 10))
     for label in labels:
       source = random.choice(open_images.IMAGE_LEVEL_SOURCES)
       confidence = random.choice((0, 1))
@@ -101,8 +101,10 @@ def _write_bbox_labels(fname, image_ids):
   """Writes CSV with 0-10 labels per image."""
   lines = ['ImageID,Source,LabelName,Confidence,XMin,XMax,YMin,YMax,IsOccluded,'
            'IsTruncated,IsGroupOf,IsDepiction,IsInside']
+  boxable_class_label = ClassLabel(names_file=py_utils.get_tfds_path(
+      os.path.join('image', 'open_images_classes_boxable.txt')))
   for image_id in image_ids:
-    labels = random.sample(CLASS_NAMES, random.randint(0, 10))
+    labels = random.sample(boxable_class_label.names, random.randint(0, 10))
     for label in labels:
       source = random.choice(open_images.BBOX_SOURCES)
       xmin = random.uniform(0, 1)
@@ -158,7 +160,6 @@ def main(argv):
   _generate_train_files()
   _generate_test_files()
   _generate_validation_files()
-  _write_class_descriptions()
 
 
 if __name__ == '__main__':

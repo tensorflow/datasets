@@ -13,11 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Text-based sentiment analysis datasets."""
+"""Text datasets."""
 
+from tensorflow_datasets.text.cnn_dailymail import CnnDailymail
+from tensorflow_datasets.text.cnn_dailymail import CnnDailymailConfig
+from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.squad import Squad
+from tensorflow_datasets.text.super_glue import SuperGlue
+from tensorflow_datasets.text.wikipedia import Wikipedia
+from tensorflow_datasets.text.xnli import Xnli

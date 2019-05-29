@@ -5,6 +5,8 @@
 
 # tfds.testing.run_in_graph_and_eager_modes
 
+Execute the decorated test in both graph mode and eager mode.
+
 ``` python
 tfds.testing.run_in_graph_and_eager_modes(
     func=None,
@@ -17,7 +19,7 @@ tfds.testing.run_in_graph_and_eager_modes(
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
-Execute the decorated test in both graph mode and eager mode.
+<!-- Placeholder for "Used in" -->
 
 This function returns a decorator intended to be applied to test methods in
 a `test_case.TestCase` class. Doing so will cause the contents of the test
@@ -52,16 +54,16 @@ executing the `z` tensor with a session.
 
 #### Args:
 
-* <b>`func`</b>: function to be annotated. If `func` is None, this method returns a
-    decorator the can be applied to a function. If `func` is not None this
-    returns the decorator applied to `func`.
-* <b>`config`</b>: An optional config_pb2.ConfigProto to use to configure the session
-    when executing graphs.
-* <b>`use_gpu`</b>: If True, attempt to run as many operations as possible on GPU.
-
+*   <b>`func`</b>: function to be annotated. If `func` is None, this method
+    returns a decorator the can be applied to a function. If `func` is not None
+    this returns the decorator applied to `func`.
+*   <b>`config`</b>: An optional config_pb2.ConfigProto to use to configure the
+    session when executing graphs.
+*   <b>`use_gpu`</b>: If True, attempt to run as many operations as possible on
+    GPU.
 
 #### Returns:
 
-Returns a decorator that will run the decorated test method twice:
-once by constructing and executing a graph in a session and once with
-eager execution enabled.
+Returns a decorator that will run the decorated test method twice: once by
+constructing and executing a graph in a session and once with eager execution
+enabled.
