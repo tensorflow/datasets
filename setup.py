@@ -86,6 +86,9 @@ DATASET_EXTRAS = {
     # In alphabetical order
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
+    'eurosat': [
+        'scikit-image',
+    ],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV

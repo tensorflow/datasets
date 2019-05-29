@@ -49,7 +49,7 @@ class ImageUtilsTest(testing.TestCase):
 
   def _get_image(self, name):
     path = os.path.join(self.test_data, name)
-    with tf.gfile.Open(path, 'rb') as img_f:
+    with tf.io.gfile.GFile(path, 'rb') as img_f:
       return img_f.read()
 
   def test_decode_image(self):
