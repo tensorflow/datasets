@@ -13,17 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""TODO(eurosat): Add a description here."""
+"""Tests for Eurosat data loading."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import eurosat
 
 
 class EurosatTest(testing.DatasetBuilderTestCase):
+  # TODO(mnn): Re-enable Py3 test (b/129964829)
+  # None implies testing all BUILDER_CONFIGS, while [] implies no tests.
+  BUILDER_CONFIG_NAMES_TO_TEST = None if six.PY2 else []
+
   DATASET_CLASS = eurosat.Eurosat
   SPLITS = {
       "train": 3,

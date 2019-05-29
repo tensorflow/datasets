@@ -39,7 +39,7 @@ _DESCRIPTION = """\
 The BigEarthNet is a new large-scale Sentinel-2 benchmark archive, consisting of
 590,326 Sentinel-2 image patches. The image patch size on the ground is
 1.2 x 1.2 km with variable image size depending on the channel resolution.
-This is a multi-label dataset with 45 imbalanced labels.
+This is a multi-label dataset with 43 imbalanced labels.
 
 To construct the BigEarthNet, 125 Sentinel-2
 tiles acquired between June 2017 and May 2018 over the 10 countries (Austria,
