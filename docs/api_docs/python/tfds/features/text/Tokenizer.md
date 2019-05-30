@@ -14,15 +14,12 @@
 
 ## Class `Tokenizer`
 
-
-
-
+Splits a string into tokens, and joins them back.
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
 <!-- Placeholder for "Used in" -->
 
-Splits a string into tokens, and joins them back.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -34,21 +31,18 @@ __init__(
 ```
 
 Constructs a Tokenizer.
-
 Note that the Tokenizer is invertible if `alphanum_only=False`.
 i.e. `s == t.join(t.tokenize(s))`.
 
 #### Args:
 
-* <b>`alphanum_only`</b>: `bool`, if `True`, only parse out alphanumeric tokens
-    (non-alphanumeric characters are dropped);
-    otherwise, keep all characters (individual tokens will still be either
-    all alphanumeric or all non-alphanumeric).
-* <b>`reserved_tokens`</b>: `list<str>`, a list of strings that, if any are in `s`,
-    will be preserved as whole tokens, even if they contain mixed
+*   <b>`alphanum_only`</b>: `bool`, if `True`, only parse out alphanumeric
+    tokens (non-alphanumeric characters are dropped); otherwise, keep all
+    characters (individual tokens will still be either all alphanumeric or all
+    non-alphanumeric).
+*   <b>`reserved_tokens`</b>: `list<str>`, a list of strings that, if any are in
+    `s`, will be preserved as whole tokens, even if they contain mixed
     alphanumeric/non-alphanumeric characters.
-
-
 
 ## Properties
 

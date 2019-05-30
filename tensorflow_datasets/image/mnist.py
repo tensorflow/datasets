@@ -303,9 +303,9 @@ class EMNIST(MNIST):
     return tfds.core.DatasetInfo(
         builder=self,
         description=(
-            "The EMNIST dataset is a set of handwritten character digits"
-            "derived from the NIST Special Database 19 and converted to"
-            "a 28x28 pixel image format and dataset structure that directly"
+            "The EMNIST dataset is a set of handwritten character digits "
+            "derived from the NIST Special Database 19 and converted to "
+            "a 28x28 pixel image format and dataset structure that directly "
             "matches the MNIST dataset."),
         features=tfds.features.FeaturesDict({
             "image":

@@ -21,6 +21,8 @@ from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
 
 from tensorflow_datasets.core.dataset_info import DatasetInfo
+from tensorflow_datasets.core.dataset_info import Metadata
+from tensorflow_datasets.core.dataset_info import MetadataDict
 
 from tensorflow_datasets.core.lazy_imports import lazy_imports
 
@@ -41,6 +43,8 @@ __all__ = [
     "get_tfds_path",
     "DatasetInfo",
     "NamedSplit",
+    "Metadata",
+    "MetadataDict",
     "SplitBase",
     "SplitDict",
     "SplitGenerator",

@@ -29,7 +29,7 @@ class GcsUtilsTest(testing.TestCase):
   def is_dataset_accessible(self):
     # Re-enable GCS access. TestCase disables it.
     with self.gcs_access():
-      self.assertTrue(gcs_utils.is_gcs_dataset_accessible("mnist/1.0.0"))
+      self.assertTrue(gcs_utils.is_dataset_on_gcs("mnist/1.0.0"))
 
   def test_mnist(self):
     with self.gcs_access():

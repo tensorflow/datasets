@@ -16,15 +16,12 @@
 
 ## Class `SplitDict`
 
-
-
-
+Split info object.
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
 <!-- Placeholder for "Used in" -->
 
-Split info object.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

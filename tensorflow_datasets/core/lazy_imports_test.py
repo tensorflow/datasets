@@ -32,6 +32,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "matplotlib",
       "mwparserfromhell",
       "os",
+      "pretty_midi",
       "pydub",
       "pyplot",
       "scipy",

@@ -43,15 +43,17 @@ class Wmt15Translate(wmt.WmtTranslate):
 
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
-          description="WMT 2015 translation task dataset.",
+          description="WMT 2015 %s-%s translation task dataset." % (l1, l2),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version="0.0.2")
+          version="0.0.3")
       for l1, l2 in _LANGUAGE_PAIRS
   ] + [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
-          description="WMT 2015 translation dataset with subword encoding.",
+          description=(
+              "WMT 2015 %s-%s translation task dataset with subword encoding."
+              % (l1, l2)),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
@@ -59,7 +61,7 @@ class Wmt15Translate(wmt.WmtTranslate):
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               name="subwords8k",
               vocab_size=2**13),
-          version="0.0.1")
+          version="0.0.3")
       for l1, l2 in _LANGUAGE_PAIRS
   ]
 
@@ -71,10 +73,8 @@ class Wmt15Translate(wmt.WmtTranslate):
             "newscommentary_v10", "gigafren", "czeng_10", "yandexcorpus",
             "wikiheadlines_fi", "wikiheadlines_ru"],
         tfds.Split.VALIDATION: [
-            "newsdev2014", "newsdev2015",
-            "newsdiscussdev2015", "newssyscomb2009",
-            "newstest2008", "newstest2009", "newstest2010", "newstest2011",
-            "newstest2012", "newstest2013", "newstest2014"],
+            "newsdev2015", "newstest2014"
+        ],
         tfds.Split.TEST: [
             "newstest2015"
         ]

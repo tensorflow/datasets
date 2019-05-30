@@ -40,6 +40,7 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
     'promise',
@@ -54,9 +55,9 @@ REQUIRED_PKGS = [
 ]
 
 TESTS_REQUIRE = [
+    'apache-beam',
     'jupyter',
     'pytest',
-    'apache-beam',
 ]
 
 if sys.version_info.major == 3:
@@ -92,6 +93,7 @@ DATASET_EXTRAS = {
         'scikit-image',
         'scipy'
     ],
+    'groove': ['pretty_midi', 'pydub'],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'patch_camelyon': ['h5py'],
     'svhn': ['scipy'],
@@ -104,8 +106,8 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
-    'tensorflow': ['tensorflow>=1.12.0'],
-    'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
+    'tensorflow': ['tensorflow>=1.13.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.13.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)

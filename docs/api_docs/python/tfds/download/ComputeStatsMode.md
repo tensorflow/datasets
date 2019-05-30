@@ -11,17 +11,13 @@
 
 ## Class `ComputeStatsMode`
 
-
-
-
+Mode to decide if dynamic dataset info fields should be computed or not.
 
 Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py).
 
 <!-- Placeholder for "Used in" -->
 
-Mode to decide if dynamic dataset info fields should be computed or not.
-
-Mode can be:
+#### Mode can be:
 
 * AUTO: Compute the DatasetInfo dynamic fields only if they haven't been
   restored from GCS.
