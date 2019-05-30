@@ -26,7 +26,6 @@ import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
-# From https://arxiv.org/abs/1601.06759
 _CITATION = """\
 @article{DBLP:journals/corr/OordKK16,
   author    = {A{\"{a}}ron van den Oord and
