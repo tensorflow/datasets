@@ -4855,14 +4855,14 @@ TEST       |      3,669
   <meta itemprop="name" content="quickdraw_bitmap" />
   <meta itemprop="description" content="The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#quickdraw_bitmap" />
-  <meta itemprop="sameAs" content="h" />
+  <meta itemprop="sameAs" content="https://github.com/googlecreativelab/quickdraw-dataset" />
 </div>
 
 ### `"quickdraw_bitmap"`
 
 The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images
 
-* URL: [h](h)
+* URL: [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 * `DatasetBuilder`: [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
 * Version: `v1.0.0`
 * Size: `36.82 GiB`
@@ -4884,60 +4884,7 @@ ALL        | 50,426,266
 
 
 #### Urls
- * [h](h)
- * [t](t)
- * [t](t)
- * [p](p)
- * [s](s)
- * [:](:)
- * [/](/)
- * [/](/)
- * [g](g)
- * [i](i)
- * [t](t)
- * [h](h)
- * [u](u)
- * [b](b)
- * [.](.)
- * [c](c)
- * [o](o)
- * [m](m)
- * [/](/)
- * [g](g)
- * [o](o)
- * [o](o)
- * [g](g)
- * [l](l)
- * [e](e)
- * [c](c)
- * [r](r)
- * [e](e)
- * [a](a)
- * [t](t)
- * [i](i)
- * [v](v)
- * [e](e)
- * [l](l)
- * [a](a)
- * [b](b)
- * [/](/)
- * [q](q)
- * [u](u)
- * [i](i)
- * [c](c)
- * [k](k)
- * [d](d)
- * [r](r)
- * [a](a)
- * [w](w)
- * [-](-)
- * [d](d)
- * [a](a)
- * [t](t)
- * [a](a)
- * [s](s)
- * [e](e)
- * [t](t)
+ * [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
 `(u'image', u'label')`
