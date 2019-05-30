@@ -153,10 +153,6 @@ Defined in [`testing/test_case.py`](https://github.com/tensorflow/datasets/tree/
 __init__(methodName='runTest')
 ```
 
-
-
-
-
 ## Child Classes
 [`class failureException`](../../tfds/testing/DatasetBuilderTestCase/failureException.md)
 
@@ -171,23 +167,17 @@ __call__(
 )
 ```
 
-
-
 <h3 id="__eq__"><code>__eq__</code></h3>
 
 ``` python
 __eq__(other)
 ```
 
-
-
 <h3 id="__ne__"><code>__ne__</code></h3>
 
 ``` python
 __ne__(other)
 ```
-
-
 
 <h3 id="addCleanup"><code>addCleanup</code></h3>
 
@@ -199,7 +189,7 @@ addCleanup(
 )
 ```
 
-Add a function, with arguments, to be called when the test iscompleted.
+Add a function, with arguments, to be called when the test is completed.
 Functions added are called on a LIFO basis and are called after tearDown on test
 failure or success.
 
@@ -241,6 +231,7 @@ addTypeEqualityFunc(
 ```
 
 Add a type specific assertEqual style function to compare a type.
+
 This method is for use by TestCase subclasses that need to register
 their own type equality functions to provide nicer error messages.
 
@@ -262,6 +253,7 @@ assertAllClose(
 ```
 
 Asserts that two structures of numpy arrays or Tensors, have near values.
+
 `a` and `b` can be arbitrarily nested structures. A layer of a nested
 structure can be a `dict`, `namedtuple`, `tuple` or `list`.
 
@@ -294,6 +286,7 @@ assertAllCloseAccordingToType(
 ```
 
 Like assertAllClose, but also suitable for comparing fp16 arrays.
+
 In particular, the tolerance is reduced to 1e-3 if at least
 one of the arguments is of type float16.
 
@@ -459,7 +452,7 @@ assertAlmostEqual(
 )
 ```
 
-Fail if the two objects are unequal as determined by theirdifference rounded to
+Fail if the two objects are unequal as determined by their difference rounded to
 the given number of decimal places (default 7) and comparing to zero, or by
 comparing that the difference between the two objects is more than the given
 delta.
@@ -482,7 +475,7 @@ assertAlmostEquals(
 )
 ```
 
-Fail if the two objects are unequal as determined by theirdifference rounded to
+Fail if the two objects are unequal as determined by their difference rounded to
 the given number of decimal places (default 7) and comparing to zero, or by
 comparing that the difference between the two objects is more than the given
 delta.
@@ -503,6 +496,7 @@ assertArrayNear(
 ```
 
 Asserts that two float arrays are near each other.
+
 Checks that for all elements of farray1 and farray2
 |f1 - f2| < err.  Asserts a test failure if not.
 
@@ -590,6 +584,7 @@ assertContainsExactSubsequence(
 ```
 
 Asserts that "container" contains "subsequence" as an exact subsequence.
+
 Asserts that "container" contains all the elements of "subsequence", in
 order, and without other elements interspersed. For example, [1, 2, 3] is an
 exact subsequence of [0, 0, 1, 2, 3, 0] but not of [0, 0, 1, 2, 0, 3, 0].
@@ -611,6 +606,7 @@ assertContainsInOrder(
 ```
 
 Asserts that the strings provided are found in the target in order.
+
 This may be useful for checking HTML output.
 
 #### Args:
@@ -631,6 +627,7 @@ assertContainsSubsequence(
 ```
 
 Asserts that "container" contains "subsequence" as a subsequence.
+
 Asserts that "container" contains all the elements of "subsequence", in
 order, but possibly with other elements interspersed. For example, [1, 2, 3]
 is a subsequence of [0, 0, 1, 2, 0, 3, 0] but not of [0, 0, 1, 3, 0, 2, 0].
@@ -664,6 +661,7 @@ assertCountEqual(
 ```
 
 Tests two sequences have the same elements regardless of order.
+
 It tests that the first sequence contains the same elements as the
 second, regardless of their order. When they don't, an error message
 listing the differences between the sequences will be generated.
@@ -801,7 +799,7 @@ assertEqual(
 )
 ```
 
-Fail if the two objects are unequal as determined by the '=='operator.
+Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertEquals"><code>assertEquals</code></h3>
 
@@ -813,7 +811,7 @@ assertEquals(
 )
 ```
 
-Fail if the two objects are unequal as determined by the '=='operator.
+Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertFalse"><code>assertFalse</code></h3>
 
@@ -884,7 +882,7 @@ assertIsInstance(
 )
 ```
 
-Same as self.assertTrue(isinstance(obj, cls)), with a nicerdefault message.
+Same as self.assertTrue(isinstance(obj, cls)), with a nicer default message.
 
 <h3 id="assertIsNone"><code>assertIsNone</code></h3>
 
@@ -931,6 +929,7 @@ assertItemsEqual(
 ```
 
 Deprecated, please use assertCountEqual instead.
+
 This is equivalent to assertCountEqual in Python 3. An implementation of
 assertCountEqual is also provided by absltest.TestCase for Python 2.
 
@@ -951,6 +950,7 @@ assertJsonEqual(
 ```
 
 Asserts that the JSON objects defined in two strings are equal.
+
 A summary of the differences will be included in the failure message
 using assertSameStructure.
 
@@ -1030,8 +1030,6 @@ assertLogs(
 )
 ```
 
-
-
 <h3 id="assertMultiLineEqual"><code>assertMultiLineEqual</code></h3>
 
 ``` python
@@ -1073,6 +1071,7 @@ assertNear(
 ```
 
 Asserts that two floats are near each other.
+
 Checks that |f1 - f2| < err and asserts a test failure
 if not.
 
@@ -1129,7 +1128,7 @@ assertNotAlmostEqual(
 )
 ```
 
-Fail if the two objects are equal as determined by theirdifference rounded to
+Fail if the two objects are equal as determined by their difference rounded to
 the given number of decimal places (default 7) and comparing to zero, or by
 comparing that the difference between the two objects is less than the given
 delta.
@@ -1151,7 +1150,7 @@ assertNotAlmostEquals(
 )
 ```
 
-Fail if the two objects are equal as determined by theirdifference rounded to
+Fail if the two objects are equal as determined by their difference rounded to
 the given number of decimal places (default 7) and comparing to zero, or by
 comparing that the difference between the two objects is less than the given
 delta.
@@ -1205,7 +1204,7 @@ assertNotEqual(
 )
 ```
 
-Fail if the two objects are equal as determined by the '!='operator.
+Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotEquals"><code>assertNotEquals</code></h3>
 
@@ -1217,7 +1216,7 @@ assertNotEquals(
 )
 ```
 
-Fail if the two objects are equal as determined by the '!='operator.
+Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotIn"><code>assertNotIn</code></h3>
 
@@ -1251,8 +1250,6 @@ assertNotRegex(
     **kwargs
 )
 ```
-
-
 
 <h3 id="assertNotRegexpMatches"><code>assertNotRegexpMatches</code></h3>
 
@@ -1295,6 +1292,7 @@ assertProtoEquals(
 ```
 
 Asserts that message is same as parsed expected_message_ascii.
+
 Creates another prototype of message, reads the ascii message into it and
 then compares them using self._AssertProtoEqual().
 
@@ -1316,8 +1314,6 @@ assertProtoEqualsVersion(
 )
 ```
 
-
-
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
 ``` python
@@ -1329,7 +1325,7 @@ assertRaises(
 )
 ```
 
-Fail unless an exception of class excClass is raisedby callableObj when invoked
+Fail unless an exception of class excClass is raised by callableObj when invoked
 with arguments args and keyword arguments kwargs. If a different type of
 exception is raised, it will not be caught, and the test case will be deemed to
 have suffered an error, exactly as for an unexpected exception.
@@ -1355,8 +1351,6 @@ exception after the assertion::
 assertRaisesOpError(expected_err_re_or_predicate)
 ```
 
-
-
 <h3 id="assertRaisesRegex"><code>assertRaisesRegex</code></h3>
 
 ``` python
@@ -1365,8 +1359,6 @@ assertRaisesRegex(
     **kwargs
 )
 ```
-
-
 
 <h3 id="assertRaisesRegexp"><code>assertRaisesRegexp</code></h3>
 
@@ -1404,6 +1396,7 @@ assertRaisesWithLiteralMatch(
 ```
 
 Asserts that the message in a raised exception equals the given string.
+
 Unlike assertRaisesRegex, this method takes a literal string, not
 a regular expression.
 
@@ -1421,9 +1414,11 @@ with self.assertRaisesWithLiteralMatch(ExType, 'message'):
 *   <b>`**kwargs`</b>: Extra kwargs.
 
 #### Returns:
+
 A context manager if callable_obj is None. Otherwise, None.
 
 #### Raises:
+
 self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
@@ -1434,8 +1429,6 @@ assertRaisesWithPredicateMatch(
     predicate
 )
 ```
-
-
 
 <h3 id="assertRaisesWithRegexpMatch"><code>assertRaisesWithRegexpMatch</code></h3>
 
@@ -1469,8 +1462,6 @@ assertRegex(
 )
 ```
 
-
-
 <h3 id="assertRegexMatch"><code>assertRegexMatch</code></h3>
 
 ``` python
@@ -1482,6 +1473,7 @@ assertRegexMatch(
 ```
 
 Asserts that at least one regex in regexes matches str.
+
 If possible you should use `assertRegex`, which is a simpler
 version of this method. `assertRegex` takes a single regular
 expression (a string or re compiled object) instead of a list.
@@ -1536,6 +1528,7 @@ assertSameElements(
 ```
 
 Asserts that two sequences have the same elements (in any order).
+
 This method, unlike assertCountEqual, doesn't care about any
 duplicates in the expected and actual sequences.
 
@@ -1564,6 +1557,7 @@ assertSameStructure(
 ```
 
 Asserts that two values contain the same structural content.
+
 The two arguments should be data trees consisting of trees of dicts and
 lists. They will be deeply compared by walking into the contents of dicts
 and lists; other items will be compared using the == operator.
@@ -1596,6 +1590,7 @@ assertSequenceAlmostEqual(
 ```
 
 An approximate equality assertion for ordered sequences.
+
 Fail if the two sequences are unequal as determined by their value
 differences rounded to the given number of decimal places (default 7) and
 comparing to zero, or by comparing that the difference between each value
@@ -1627,6 +1622,7 @@ assertSequenceEqual(
 ```
 
 An equality assertion for ordered sequences (like lists and tuples).
+
 For the purposes of this function, a valid ordered sequence type is one
 which can be indexed, has a length, and has an equality operator.
 
@@ -1650,6 +1646,7 @@ assertSequenceStartsWith(
 ```
 
 An equality assertion for the beginning of ordered sequences.
+
 If prefix is an empty sequence, it will raise an error unless whole is also
 an empty sequence.
 
@@ -1736,6 +1733,7 @@ assertTotallyOrdered(
 ```
 
 Asserts that total ordering has been implemented correctly.
+
 For example, say you have a class A that compares only on its attribute x.
 Comparators other than __lt__ are omitted for brevity.
 
@@ -1836,6 +1834,7 @@ cached_session(
 ```
 
 Returns a TensorFlow Session for use in executing tests.
+
 This method behaves differently than self.session(): for performance reasons
 `cached_session` will by default reuse the same session within the same
 test. The session returned by this function will only be closed at the end
@@ -1884,6 +1883,7 @@ captureWritesToStream(
 ```
 
 A context manager that captures the writes to a given stream.
+
 This context manager captures all writes to a given stream inside of a
 `CapturedWrites` object. When this context manager is created, it yields
 the `CapturedWrites` object. The captured contents can be accessed  by
@@ -1913,6 +1913,7 @@ class MyOperatorTest(test_util.TensorFlowTestCase):
     and must have a `.flush()` method.
 
 #### Yields:
+
 A `CapturedWrites` object that contains all writes to the specified stream
 made during this context.
 
@@ -1927,6 +1928,7 @@ checkedThread(
 ```
 
 Returns a Thread wrapper that asserts 'target' completes successfully.
+
 This method should be used to create all threads in test cases, as
 otherwise there is a risk that a thread will silently fail, and/or
 assertions made in the thread will not be respected.
@@ -1939,6 +1941,7 @@ assertions made in the thread will not be respected.
     invocation. Defaults to {}.
 
 #### Returns:
+
 A wrapper for threading.Thread that supports start() and join() methods.
 
 <h3 id="countTestCases"><code>countTestCases</code></h3>
@@ -1946,8 +1949,6 @@ A wrapper for threading.Thread that supports start() and join() methods.
 ``` python
 countTestCases()
 ```
-
-
 
 <h3 id="create_tempdir"><code>create_tempdir</code></h3>
 
@@ -1959,6 +1960,7 @@ create_tempdir(
 ```
 
 Create a temporary directory specific to the test.
+
 NOTE: The directory and its contents will be recursively cleared before
 creation. This ensures that there is no pre-existing state.
 
@@ -1978,6 +1980,7 @@ See also: `create_tempfile()` for creating temporary files.
     `self.tempfile_cleanup`.
 
 #### Returns:
+
 A _TempDir representing the created directory.
 
 <h3 id="create_tempfile"><code>create_tempfile</code></h3>
@@ -1994,6 +1997,7 @@ create_tempfile(
 ```
 
 Create a temporary file specific to the test.
+
 This creates a named file on disk that is isolated to this test, and will
 be properly cleaned up by the test. This avoids several pitfalls of
 creating temporary files for test purposes, as well as makes it easier
@@ -2042,15 +2046,13 @@ Run the test without collecting errors in a TestResult
 defaultTestResult()
 ```
 
-
-
 <h3 id="doCleanups"><code>doCleanups</code></h3>
 
 ``` python
 doCleanups()
 ```
 
-Execute all cleanup functions. Normally called for you aftertearDown.
+Execute all cleanup functions. Normally called for you after tearDown.
 
 <h3 id="evaluate"><code>evaluate</code></h3>
 
@@ -2088,8 +2090,6 @@ failIf(
 )
 ```
 
-
-
 <h3 id="failIfAlmostEqual"><code>failIfAlmostEqual</code></h3>
 
 ``` python
@@ -2098,8 +2098,6 @@ failIfAlmostEqual(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failIfEqual"><code>failIfEqual</code></h3>
 
@@ -2110,8 +2108,6 @@ failIfEqual(
 )
 ```
 
-
-
 <h3 id="failUnless"><code>failUnless</code></h3>
 
 ``` python
@@ -2120,8 +2116,6 @@ failUnless(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failUnlessAlmostEqual"><code>failUnlessAlmostEqual</code></h3>
 
@@ -2132,8 +2126,6 @@ failUnlessAlmostEqual(
 )
 ```
 
-
-
 <h3 id="failUnlessEqual"><code>failUnlessEqual</code></h3>
 
 ``` python
@@ -2142,8 +2134,6 @@ failUnlessEqual(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failUnlessRaises"><code>failUnlessRaises</code></h3>
 
@@ -2154,8 +2144,6 @@ failUnlessRaises(
 )
 ```
 
-
-
 <h3 id="gcs_access"><code>gcs_access</code></h3>
 
 ``` python
@@ -2164,8 +2152,6 @@ gcs_access(
     **kwds
 )
 ```
-
-
 
 <h3 id="getExternalLinks"><code>getExternalLinks</code></h3>
 
@@ -2194,6 +2180,7 @@ get_temp_dir()
 ```
 
 Returns a unique temporary directory for the test to use.
+
 If you call this method multiple times during in a test, it will return the
 same folder. However, across different runs the directories will be
 different. This will ensure that across different runs tests will not be
@@ -2211,8 +2198,6 @@ string, the path to the unique temporary directory created for this test.
 ``` python
 id()
 ```
-
-
 
 <h3 id="recordProperty"><code>recordProperty</code></h3>
 
@@ -2238,8 +2223,6 @@ Record an arbitrary property for later use.
 run(result=None)
 ```
 
-
-
 <h3 id="session"><code>session</code></h3>
 
 ``` python
@@ -2250,6 +2233,7 @@ session(
 ```
 
 Returns a TensorFlow Session for use in executing tests.
+
 Note that this will set this session and the graph as global defaults.
 
 Use the `use_gpu` and `force_gpu` options to control where ops are run. If
@@ -2281,6 +2265,7 @@ class MyOperatorTest(test_util.TensorFlowTestCase):
 *   <b>`force_gpu`</b>: If True, pin all ops to `/device:GPU:0`.
 
 #### Yields:
+
 A Session object that should be used as a context manager to surround
 the graph building and execution code in a test case.
 
@@ -2290,16 +2275,12 @@ the graph building and execution code in a test case.
 setUp()
 ```
 
-
-
 <h3 id="setUpClass"><code>setUpClass</code></h3>
 
 ``` python
 @classmethod
 setUpClass(cls)
 ```
-
-
 
 <h3 id="shortDescription"><code>shortDescription</code></h3>
 
@@ -2308,6 +2289,7 @@ shortDescription()
 ```
 
 Formats both the test method name and the first line of its docstring.
+
 If no docstring is given, only returns the method name.
 
 This method overrides unittest.TestCase.shortDescription(), which
@@ -2343,8 +2325,6 @@ Return a context manager that will run the enclosed subtest.
 tearDown()
 ```
 
-
-
 <h3 id="tearDownClass"><code>tearDownClass</code></h3>
 
 ``` python
@@ -2363,6 +2343,7 @@ test_session(
 ```
 
 Use cached_session instead. (deprecated)
+
 Warning: THIS FUNCTION IS DEPRECATED. It will be removed in a future version.
 Instructions for updating:
 Use `self.session()` or `self.cached_session()` instead.

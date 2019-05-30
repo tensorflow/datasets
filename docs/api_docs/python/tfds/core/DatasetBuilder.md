@@ -68,6 +68,7 @@ __init__(
 ```
 
 Constructs a DatasetBuilder.
+
 Callers must pass arguments as keyword arguments.
 
 #### Args:
@@ -91,13 +92,9 @@ Callers must pass arguments as keyword arguments.
 
 <h3 id="data_dir"><code>data_dir</code></h3>
 
-
-
 <h3 id="info"><code>info</code></h3>
 
 <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> for this builder.
-
-
 
 ## Methods
 
@@ -114,6 +111,7 @@ as_dataset(
 ```
 
 Constructs a `tf.data.Dataset`.
+
 Callers must pass arguments as keyword arguments.
 
 #### Args:
@@ -140,6 +138,7 @@ Callers must pass arguments as keyword arguments.
     size is <1GB and all feature dimensions are statically known.
 
 #### Returns:
+
 `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
 tfds.data.Dataset>`.
 
