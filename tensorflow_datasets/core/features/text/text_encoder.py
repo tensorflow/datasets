@@ -365,7 +365,6 @@ class Tokenizer(object):
     reserved_tokens, self._reserved_tokens_re = _prepare_reserved_tokens(
         reserved_tokens)
     self._reserved_tokens = set(reserved_tokens)
-    self._alphanum_re = ALPHANUM_REGEX if self._alphanum_only else ALL_REGEX
 
   @property
   def alphanum_only(self):
@@ -389,8 +388,10 @@ class Tokenizer(object):
     for substr in substrs:
       if substr in self.reserved_tokens:
         toks.append(substr)
+      elif self._alphanum_only:
+        toks.extend(ALPHANUM_REGEX.split(substr))
       else:
-        toks.extend(self._alphanum_re.split(substr))
+        toks.extend(ALL_REGEX.split(substr))
 
     # Filter out empty strings
     toks = [t for t in toks if t]

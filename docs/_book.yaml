@@ -25,6 +25,8 @@ upper_tabs:
         path: /datasets/add_dataset
       - title: Add huge datasets
         path: /datasets/beam_datasets
+      - title: Store your dataset on GCS
+        path: /datasets/gcs
     - name: API
       skip_translation: true
       contents:

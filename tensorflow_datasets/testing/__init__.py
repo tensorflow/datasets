@@ -25,6 +25,7 @@ from tensorflow_datasets.testing.test_utils import make_tmp_dir
 from tensorflow_datasets.testing.test_utils import mock_kaggle_api
 from tensorflow_datasets.testing.test_utils import rm_tmp_dir
 from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
+from tensorflow_datasets.testing.test_utils import SubTestCase
 from tensorflow_datasets.testing.test_utils import test_main
 from tensorflow_datasets.testing.test_utils import tmp_dir
 
@@ -34,6 +35,7 @@ __all__ = [
     "DummyMnist",
     "FeatureExpectationItem",
     "FeatureExpectationsTestCase",
+    "SubTestCase",
     "TestCase",
     "run_in_graph_and_eager_modes",
     "test_main",

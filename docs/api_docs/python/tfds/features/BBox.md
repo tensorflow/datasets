@@ -12,15 +12,12 @@
 
 ## Class `BBox`
 
-
-
-
+BBox(ymin, xmin, ymax, xmax)
 
 Defined in [`core/features/bounding_boxes.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py).
 
 <!-- Placeholder for "Used in" -->
 
-BBox(ymin, xmin, ymax, xmax)
 
 <h2 id="__new__"><code>__new__</code></h2>
 

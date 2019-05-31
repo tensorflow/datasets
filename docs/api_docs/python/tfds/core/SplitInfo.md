@@ -12,15 +12,12 @@
 
 ## Class `SplitInfo`
 
-
-
-
+Wraps `proto.SplitInfo` with an additional property.
 
 Defined in [`core/utils/py_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/py_utils.py).
 
 <!-- Placeholder for "Used in" -->
 
-Wraps `proto.SplitInfo` with an additional property.
 
 <h2 id="__init__"><code>__init__</code></h2>
 

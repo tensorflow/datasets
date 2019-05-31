@@ -167,9 +167,14 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
           description='Images at their original resolution and quality.'),
       OpenImagesV4Config(
           name='300k',
-          version='0.2.0',
-          description='Images have roughly 300,000 pixels, at 75 JPEG quality.',
-          target_pixels=300000)
+          version='0.2.1',
+          description='Images have roughly 300,000 pixels, at 72 JPEG quality.',
+          target_pixels=300000),
+      OpenImagesV4Config(
+          name='200k',
+          version='0.2.1',
+          description='Images have roughly 200,000 pixels, at 72 JPEG quality.',
+          target_pixels=200000)
   ]
 
   def _info(self):
@@ -190,19 +195,19 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(),
             'image/filename': tfds.features.Text(),  # eg '226f0a1873b9bf8e.jpg'
-            'objects': tfds.features.SequenceDict({
+            'objects': tfds.features.Sequence({
                 'label': all_class_label,
                 # Original data is 0, .1, ..., 1. We use 0, 1, 2, ..., 10.
                 'confidence': tf.int32,
                 'source': source_class_label,
             }),
-            'objects_trainable': tfds.features.SequenceDict({
+            'objects_trainable': tfds.features.Sequence({
                 'label': trainable_class_label,
                 # Original data is 0, .1, ..., 1. We use 0, 1, 2, ..., 10.
                 'confidence': tf.int32,
                 'source': source_class_label,
             }),
-            'bobjects': tfds.features.SequenceDict({
+            'bobjects': tfds.features.Sequence({
                 'label': boxable_class_label,
                 'source': source_class_label,
                 'bbox': tfds.features.BBoxFeature(),

@@ -34,7 +34,7 @@ from tensorflow_datasets.core.utils import gcs_utils
 GCS_ACCESS_FNS = {
     "original_info": gcs_utils.gcs_dataset_info_files,
     "dummy_info": lambda _: [],
-    "original_datasets": gcs_utils.is_gcs_dataset_accessible,
+    "original_datasets": gcs_utils.is_dataset_on_gcs,
     "dummy_datasets": lambda _: False,
 }
 
@@ -52,17 +52,17 @@ class TestCase(tf.test.TestCase):
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
     # Test must not communicate with GCS.
     gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
-    gcs_utils.is_gcs_dataset_accessible = GCS_ACCESS_FNS["dummy_datasets"]
+    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
 
   @contextlib.contextmanager
   def gcs_access(self):
     # Restore GCS access
     gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["original_info"]
-    gcs_utils.is_gcs_dataset_accessible = GCS_ACCESS_FNS["original_datasets"]
+    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["original_datasets"]
     yield
     # Revert access
     gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
-    gcs_utils.is_gcs_dataset_accessible = GCS_ACCESS_FNS["dummy_datasets"]
+    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
 
   def setUp(self):
     super(TestCase, self).setUp()

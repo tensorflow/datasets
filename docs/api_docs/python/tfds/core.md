@@ -5,13 +5,12 @@
 
 # Module: tfds.core
 
-
+API to define datasets.
 
 Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py).
 
 <!-- Placeholder for "Used in" -->
 
-API to define datasets.
 
 ## Classes
 
@@ -28,6 +27,13 @@ API to define datasets.
 [`class DatasetInfo`](../tfds/core/DatasetInfo.md): Information about a dataset.
 
 [`class NamedSplit`](../tfds/core/NamedSplit.md): Descriptor corresponding to a named split (train, test, ...).
+
+[`class Metadata`](../tfds/core/Metadata.md): Abstract base class for
+DatasetInfo metadata container.
+
+[`class MetadataDict`](../tfds/core/MetadataDict.md): A
+<a href="../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a> object
+that acts as a `dict`.
 
 [`class SplitBase`](../tfds/core/SplitBase.md): Abstract base class for Split compositionality.
 

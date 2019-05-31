@@ -145,10 +145,10 @@ class PatchCAMELYON(tfds.core.GeneratorBasedBuilder):
         with tfds.core.lazy_imports.h5py.File(data_path) as f_x:
             imgs = f_x['x']
             with tfds.core.lazy_imports.h5py.File(label_path) as f_y:
-                lbls = f_y['y']
+                lbls = f_y['y'][:,0,0,0]
                 data = zip(imgs, lbls)
                 for image, label in data:
                     yield {
                         "image": image,
-                        "label": label,
+                        "label": label.flatten()[0],
                     }

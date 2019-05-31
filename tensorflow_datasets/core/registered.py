@@ -30,6 +30,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core.utils import gcs_utils
 
 
 FLAGS = flags.FLAGS
@@ -176,12 +177,14 @@ def load(name,
          split=None,
          data_dir=None,
          batch_size=1,
+         in_memory=None,
          download=True,
          as_supervised=False,
          with_info=False,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
-         as_dataset_kwargs=None):
+         as_dataset_kwargs=None,
+         try_gcs=False):
   """Loads the named dataset into a `tf.data.Dataset`.
 
   If `split=None` (the default), returns all splits for the dataset. Otherwise,
@@ -229,6 +232,12 @@ def load(name,
     batch_size: `int`, set to > 1 to get batches of examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
+    in_memory: `bool`, if `True`, loads the dataset in memory which
+      increases iteration speeds. Note that if `True` and the dataset has
+      unknown dimensions, the features will be padded to the maximum
+      size across the dataset. By default (when `None`), will load the
+      dataset in memory if the size is <1GB and all feature dimensions are
+      statically known.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
@@ -254,6 +263,8 @@ def load(name,
       default. Example: `{'shuffle_files': True}`.
       Note that shuffle_files is False by default unless
       `split == tfds.Split.TRAIN`.
+    try_gcs: `bool`, if True, tfds.load will see if the dataset exists on
+      the public GCS bucket before building it locally.
 
   Returns:
     ds: `tf.data.Dataset`, the dataset requested, or if `split` is None, a
@@ -265,9 +276,16 @@ def load(name,
       object documents the entire dataset, regardless of the `split` requested.
       Split-specific information is available in `ds_info.splits`.
   """
-  if data_dir is None:
+  name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
+  name_builder_kwargs.update(builder_kwargs or {})
+  builder_kwargs = name_builder_kwargs
+
+  # Set data_dir
+  if try_gcs and gcs_utils.is_dataset_on_gcs(name):
+    data_dir = constants.GCS_DATA_DIR
+  elif data_dir is None:
     data_dir = constants.DATA_DIR
-  builder_kwargs = builder_kwargs or {}
+
   dbuilder = builder(name, data_dir=data_dir, **builder_kwargs)
   if download:
     download_and_prepare_kwargs = download_and_prepare_kwargs or {}
@@ -279,6 +297,7 @@ def load(name,
   as_dataset_kwargs["split"] = split
   as_dataset_kwargs["as_supervised"] = as_supervised
   as_dataset_kwargs["batch_size"] = batch_size
+  as_dataset_kwargs["in_memory"] = in_memory
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:
