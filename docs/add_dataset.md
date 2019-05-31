@@ -30,7 +30,8 @@ already added.
     *   [3. Double-check the citation](#3-double-check-the-citation)
     *   [4. Add a test](#4-add-a-test)
     *   [5. Check your code style](#5-check-your-code-style)
-    *   [6. Send for review!](#6-send-for-review)
+    *   [6. Add release notes](#6-add-release-notes)
+    *   [7. Send for review!](#7-send-for-review)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 *   [Testing `MyDataset`](#testing-mydataset)
 
@@ -551,7 +552,13 @@ See
 [TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
 for more information.
 
-### 6. Send for review!
+### 6. Add release notes
+
+Add the dataset to the
+[release notes](https://github.com/tensorflow/datasets/blob/master/docs/release_notes.md).
+The release note will be published for the next release.
+
+### 7. Send for review!
 
 Send the pull request for review.
 
