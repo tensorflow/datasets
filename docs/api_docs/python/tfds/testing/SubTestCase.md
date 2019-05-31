@@ -2347,10 +2347,7 @@ instead.
 
 ## Class Members
 
-<h3 id="MOCK_MONARCH"><code>MOCK_MONARCH</code></h3>
-
-<h3 id="longMessage"><code>longMessage</code></h3>
-
-<h3 id="maxDiff"><code>maxDiff</code></h3>
-
-<h3 id="tempfile_cleanup"><code>tempfile_cleanup</code></h3>
+*   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
+*   `longMessage = True` <a id="longMessage"></a>
+*   `maxDiff = 1600` <a id="maxDiff"></a>
+*   `tempfile_cleanup` <a id="tempfile_cleanup"></a>

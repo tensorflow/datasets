@@ -2445,25 +2445,16 @@ Use `self.session()` or `self.cached_session()` instead.
 
 ## Class Members
 
-<h3 id="BUILDER_CONFIG_NAMES_TO_TEST"><code>BUILDER_CONFIG_NAMES_TO_TEST</code></h3>
-
-<h3 id="DATASET_CLASS"><code>DATASET_CLASS</code></h3>
-
-<h3 id="DL_EXTRACT_RESULT"><code>DL_EXTRACT_RESULT</code></h3>
-
-<h3 id="EXAMPLE_DIR"><code>EXAMPLE_DIR</code></h3>
-
-<h3 id="INTERNAL_DATASET"><code>INTERNAL_DATASET</code></h3>
-
-<h3 id="MOCK_MONARCH"><code>MOCK_MONARCH</code></h3>
-
-<h3 id="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"><code>MOCK_OUT_FORBIDDEN_OS_FUNCTIONS</code></h3>
-
-<h3 id="OVERLAPPING_SPLITS"><code>OVERLAPPING_SPLITS</code></h3>
-
-<h3 id="longMessage"><code>longMessage</code></h3>
-
-<h3 id="maxDiff"><code>maxDiff</code></h3>
-
-<h3 id="tempfile_cleanup"><code>tempfile_cleanup</code></h3>
-
+*   `BUILDER_CONFIG_NAMES_TO_TEST = None`
+    <a id="BUILDER_CONFIG_NAMES_TO_TEST"></a>
+*   `DATASET_CLASS = None` <a id="DATASET_CLASS"></a>
+*   `DL_EXTRACT_RESULT = None` <a id="DL_EXTRACT_RESULT"></a>
+*   `EXAMPLE_DIR = None` <a id="EXAMPLE_DIR"></a>
+*   `INTERNAL_DATASET = False` <a id="INTERNAL_DATASET"></a>
+*   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
+*   `MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True`
+    <a id="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"></a>
+*   `OVERLAPPING_SPLITS` <a id="OVERLAPPING_SPLITS"></a>
+*   `longMessage = True` <a id="longMessage"></a>
+*   `maxDiff = 1600` <a id="maxDiff"></a>
+*   `tempfile_cleanup` <a id="tempfile_cleanup"></a>

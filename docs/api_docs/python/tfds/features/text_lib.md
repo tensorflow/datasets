@@ -24,7 +24,7 @@ expressive, performant, and reproducible natural language research.
 
 [`class TextEncoderConfig`](../../tfds/features/text/TextEncoderConfig.md): Configuration for <a href="../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
 
-[`class Tokenizer`](../../tfds/features/text/Tokenizer.md): Splits a string into tokens, and joins them back.
-
 [`class TokenTextEncoder`](../../tfds/features/text/TokenTextEncoder.md): TextEncoder backed by a list of tokens.
 
+[`class Tokenizer`](../../tfds/features/text/Tokenizer.md): Splits a string into
+tokens, and joins them back.

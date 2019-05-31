@@ -39,17 +39,18 @@ The main library entrypoints are:
 
 [`file_adapter`](./tfds/file_adapter.md) module: <a href="./tfds/file_adapter/FileFormatAdapter.md"><code>tfds.file_adapter.FileFormatAdapter</code></a>s for GeneratorBasedBuilder.
 
-[`units`](./tfds/units.md) module: Defines convenience constants/functions for converting various units.
-
 [`testing`](./tfds/testing.md) module: Testing utilities.
+
+[`units`](./tfds/units.md) module: Defines convenience constants/functions for
+converting various units.
 
 ## Classes
 
 [`class GenerateMode`](./tfds/download/GenerateMode.md): `Enum` for how to treat pre-existing downloads and data.
 
-[`class percent`](./tfds/percent.md): Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
-
 [`class Split`](./tfds/Split.md): `Enum` for dataset splits.
+
+[`class percent`](./tfds/percent.md): Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
 
 ## Functions
 
@@ -57,12 +58,13 @@ The main library entrypoints are:
 
 [`builder(...)`](./tfds/builder.md): Fetches a <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by string name.
 
-[`list_builders(...)`](./tfds/list_builders.md): Returns the string names of all <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>s.
-
-[`load(...)`](./tfds/load.md): Loads the named dataset into a `tf.data.Dataset`.
-
 [`disable_progress_bar(...)`](./tfds/disable_progress_bar.md): Disabled Tqdm
 progress bar.
 
 [`is_dataset_on_gcs(...)`](./tfds/is_dataset_on_gcs.md): If the dataset is
 available on the GCS bucket gs://tfds-data/datasets.
+
+[`list_builders(...)`](./tfds/list_builders.md): Returns the string names of all <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>s.
+
+[`load(...)`](./tfds/load.md): Loads the named dataset into a `tf.data.Dataset`.
+

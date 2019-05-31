@@ -4,7 +4,6 @@
 <meta itemprop="property" content="major"/>
 <meta itemprop="property" content="minor"/>
 <meta itemprop="property" content="patch"/>
-<meta itemprop="property" content="__new__"/>
 <meta itemprop="property" content="match"/>
 <meta itemprop="property" content="LATEST"/>
 </div>
@@ -19,17 +18,6 @@ Defined in [`core/utils/version.py`](https://github.com/tensorflow/datasets/tree
 
 <!-- Placeholder for "Used in" -->
 
-
-<h2 id="__new__"><code>__new__</code></h2>
-
-``` python
-@staticmethod
-__new__(
-    cls,
-    *args,
-    **kwargs
-)
-```
 
 ## Properties
 
@@ -56,5 +44,4 @@ Returns True if other_version matches.
 
 ## Class Members
 
-<h3 id="LATEST"><code>LATEST</code></h3>
-
+*   `LATEST = 'latest'` <a id="LATEST"></a>

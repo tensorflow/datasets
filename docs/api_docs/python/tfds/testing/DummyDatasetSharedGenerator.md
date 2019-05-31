@@ -10,6 +10,7 @@
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
 <meta itemprop="property" content="GOOGLE_DISABLED"/>
 <meta itemprop="property" content="IN_DEVELOPMENT"/>
+<meta itemprop="property" content="SUPPORTED_VERSIONS"/>
 <meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
@@ -55,7 +56,7 @@ Callers must pass arguments as keyword arguments.
     subdirectories and versions.
 *   <b>`version`</b>: `str`. Optional version at which to load the dataset. An
     error is raised if specified version cannot be satisfied. Eg: '1.2.3',
-    '1.2.*'. Note that only the currently defined version can be loaded.
+    '1.2.*'.
 
 ## Properties
 
@@ -78,8 +79,7 @@ as_dataset(
     split=None,
     batch_size=1,
     shuffle_files=None,
-    as_supervised=False,
-    in_memory=None
+    as_supervised=False
 )
 ```
 
@@ -104,11 +104,6 @@ Callers must pass arguments as keyword arguments.
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
     `tf.data.Dataset` will have a dictionary with all the features.
-*   <b>`in_memory`</b>: `bool`, if `True`, loads the dataset in memory which
-    increases iteration speeds. Note that if `True` and the dataset has unknown
-    dimensions, the features will be padded to the maximum size across the
-    dataset. By default (when `None`), will load the dataset in memory if the
-    size is <1GB and all feature dimensions are statically known.
 
 #### Returns:
 
@@ -145,15 +140,10 @@ Downloads and prepares dataset for reading.
 
 ## Class Members
 
-<h3 id="BUILDER_CONFIGS"><code>BUILDER_CONFIGS</code></h3>
-
-<h3 id="GOOGLE_DISABLED"><code>GOOGLE_DISABLED</code></h3>
-
-<h3 id="IN_DEVELOPMENT"><code>IN_DEVELOPMENT</code></h3>
-
-<h3 id="VERSION"><code>VERSION</code></h3>
-
-<h3 id="builder_configs"><code>builder_configs</code></h3>
-
-<h3 id="name"><code>name</code></h3>
-
+*   `BUILDER_CONFIGS` <a id="BUILDER_CONFIGS"></a>
+*   `GOOGLE_DISABLED = False` <a id="GOOGLE_DISABLED"></a>
+*   `IN_DEVELOPMENT = False` <a id="IN_DEVELOPMENT"></a>
+*   `SUPPORTED_VERSIONS` <a id="SUPPORTED_VERSIONS"></a>
+*   `VERSION` <a id="VERSION"></a>
+*   `builder_configs` <a id="builder_configs"></a>
+*   `name = 'dummy_dataset_shared_generator'` <a id="name"></a>
