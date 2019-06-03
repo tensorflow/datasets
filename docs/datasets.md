@@ -26,6 +26,10 @@ np_datasets = tfds.as_numpy(datasets)
 
 ---
 
+Note: The datasets documented here are from `HEAD` and so not all are available
+in the current `tensorflow-datasets` package. They are all accessible in our
+nightly package `tfds-nightly`.
+
 ## All Datasets
 
 *   [`audio`](#audio)
