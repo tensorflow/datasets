@@ -119,19 +119,19 @@ class BigearthnetConfig(tfds.core.BuilderConfig):
     self.selection = selection
 
 
-class Bigearthnet(tfds.core.GeneratorBasedBuilder):
+class Bigearthnet(tfds.core.BeamBasedBuilder):
   """Bigearthnet remote sensing dataset of Sentinel-2 image patches."""
 
   BUILDER_CONFIGS = [
       BigearthnetConfig(
           selection='rgb',
           name='rgb',
-          version='0.0.1',
+          version='0.0.2',
           description='Sentinel-2 RGB channels'),
       BigearthnetConfig(
           selection='all',
           name='all',
-          version='0.0.1',
+          version='0.0.2',
           description='13 Sentinel-2 channels'),
   ]
 
@@ -218,11 +218,15 @@ class Bigearthnet(tfds.core.GeneratorBasedBuilder):
         ),
     ]
 
-  def _generate_examples(self, path, selection):
-    """Yields examples."""
-    for subdir in tf.io.gfile.listdir(path):
-      d = _read_chip(os.path.join(path, subdir), selection)
-      yield d
+  def _build_pcollection(self, pipeline, path, selection):
+    """Generates examples as dicts."""
+    beam = tfds.core.lazy_imports.apache_beam
+
+    def _process_example(subdir):
+      return _read_chip(os.path.join(path, subdir), selection)
+
+    return (pipeline | beam.Create(tf.io.gfile.listdir(path))
+            | beam.Map(_process_example))
 
 
 def _read_chip(path, selection):
