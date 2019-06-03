@@ -86,6 +86,7 @@ DATASET_FILES = [
     'image/quickdraw_labels.txt',
     'image/sun397_labels.txt',
     'url_checksums/*',
+    'video/ucf101_labels.txt',
 ]
 
 DATASET_EXTRAS = {
