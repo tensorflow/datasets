@@ -19,18 +19,18 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets import testing
-from tensorflow_datasets.image import downsampled_imagenet
 
 import tensorflow_datasets as tfds
+from tensorflow_datasets import testing
+from tensorflow_datasets.image import downsampled_imagenet
 
 
 class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = downsampled_imagenet.DownsampledImagenet
   BUILDER_CONFIG_NAMES_TO_TEST = ["32x32", "64x64"]
-  
+
   SPLITS = {
-      tfds.Split.TRAIN: 5,
+      tfds.Split.TRAIN: 2,
       tfds.Split.VALIDATION: 2,
   }
 
@@ -38,6 +38,7 @@ class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
       "train_images": "train_images",
       "valid_images": "valid_images",
   }
+
 
 if __name__ == "__main__":
   testing.test_main()

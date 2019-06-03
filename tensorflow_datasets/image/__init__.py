@@ -16,6 +16,7 @@
 """Image datasets."""
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
+from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.celeba import CelebA
@@ -33,6 +34,7 @@ from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRet
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
 from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
+from tensorflow_datasets.image.eurosat import Eurosat
 from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
