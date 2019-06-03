@@ -33,6 +33,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"nsynth"`](#nsynth)
 *   [`image`](#image)
     *   [`"abstract_reasoning"`](#abstract_reasoning)
+    *   [`"bigearthnet"`](#bigearthnet)
     *   [`"caltech101"`](#caltech101)
     *   [`"cats_vs_dogs"`](#cats_vs_dogs)
     *   [`"celeb_a"`](#celeb_a)
@@ -46,9 +47,11 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"colorectal_histology_large"`](#colorectal_histology_large)
     *   [`"cycle_gan"`](#cycle_gan)
     *   [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
+    *   [`"downsampled_imagenet"`](#downsampled_imagenet)
     *   [`"dsprites"`](#dsprites)
     *   [`"dtd"`](#dtd)
     *   [`"emnist"`](#emnist)
+    *   [`"eurosat"`](#eurosat)
     *   [`"fashion_mnist"`](#fashion_mnist)
     *   [`"horses_or_humans"`](#horses_or_humans)
     *   [`"image_label_folder"`](#image_label_folder)
@@ -66,6 +69,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"rock_paper_scissors"`](#rock_paper_scissors)
     *   [`"shapes3d"`](#shapes3d)
     *   [`"smallnorb"`](#smallnorb)
+    *   [`"so2sat"`](#so2sat)
     *   [`"sun397"`](#sun397)
     *   [`"svhn_cropped"`](#svhn_cropped)
     *   [`"tf_flowers"`](#tf_flowers)
@@ -594,6 +598,7 @@ None computed
 *   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
 
 #### Supervised keys (for `as_supervised=True`)
+
 `None`
 
 #### Citation
@@ -614,6 +619,161 @@ None computed
   pdf =      {http://proceedings.mlr.press/v80/barrett18a/barrett18a.pdf},
   url =      {http://proceedings.mlr.press/v80/barrett18a.html},
   abstract =     {Whether neural networks can learn abstract reasoning or whetherthey merely rely on superficial statistics is a topic of recent debate. Here, we propose a dataset and challenge designed to probe abstract reasoning, inspired by a well-known human IQ test. To succeed at this challenge, models must cope with various generalisation 'regimes' in which the training data and test questions differ in clearly-defined ways. We show that popular models such as ResNets perform poorly, even when the training and test sets differ only minimally, and we present a novel architecture, with structure designed to encourage reasoning, that does significantly better. When we vary the way in which the test questions and training data differ, we find that our model is notably proficient at certain forms of generalisation, but notably weak at others. We further show that the model's ability to generalise improves markedly if it is trained to predict symbolic explanations for its answers. Altogether, we introduce and explore ways to both measure and induce stronger abstract reasoning in neural networks. Our freely-available dataset should motivate further progress in this direction.}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="bigearthnet" />
+  <meta itemprop="description" content="The BigEarthNet is a new large-scale Sentinel-2 benchmark archive, consisting of
+590,326 Sentinel-2 image patches. The image patch size on the ground is
+1.2 x 1.2 km with variable image size depending on the channel resolution.
+This is a multi-label dataset with 43 imbalanced labels.
+
+To construct the BigEarthNet, 125 Sentinel-2
+tiles acquired between June 2017 and May 2018 over the 10 countries (Austria,
+Belgium, Finland, Ireland, Kosovo, Lithuania, Luxembourg, Portugal, Serbia,
+Switzerland) of Europe were initially selected. All the tiles were
+atmospherically corrected by the Sentinel-2 Level 2A product generation and
+formatting tool (sen2cor). Then, they were divided into 590,326 non-overlapping
+image patches. Each image patch was annotated by the multiple land-cover classes
+(i.e., multi-labels) that were provided from the CORINE Land Cover database of
+the year 2018 (CLC 2018).
+
+Bands and pixel resolution in meters:
+B01: Coastal aerosol; 60m
+B02: Blue; 10m
+B03: Green; 10m
+B04: Red; 10m
+B05: Vegetation red edge; 20m
+B06: Vegetation red edge; 20m
+B07: Vegetation red edge; 20m
+B08: NIR; 10m
+B09: Water vapor; 60m
+B11: SWIR; 20m
+B12: SWIR; 20m
+B8A: Narrow NIR; 20m
+
+License: Community Data License Agreement - Permissive, Version 1.0.
+
+URL: http://bigearth.net/" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#bigearthnet" />
+  <meta itemprop="sameAs" content="http://bigearth.net" />
+</div>
+
+### `"bigearthnet"`
+
+The BigEarthNet is a new large-scale Sentinel-2 benchmark archive, consisting of
+590,326 Sentinel-2 image patches. The image patch size on the ground is 1.2 x
+1.2 km with variable image size depending on the channel resolution. This is a
+multi-label dataset with 43 imbalanced labels.
+
+To construct the BigEarthNet, 125 Sentinel-2 tiles acquired between June 2017
+and May 2018 over the 10 countries (Austria, Belgium, Finland, Ireland, Kosovo,
+Lithuania, Luxembourg, Portugal, Serbia, Switzerland) of Europe were initially
+selected. All the tiles were atmospherically corrected by the Sentinel-2 Level
+2A product generation and formatting tool (sen2cor). Then, they were divided
+into 590,326 non-overlapping image patches. Each image patch was annotated by
+the multiple land-cover classes (i.e., multi-labels) that were provided from the
+CORINE Land Cover database of the year 2018 (CLC 2018).
+
+Bands and pixel resolution in meters: B01: Coastal aerosol; 60m B02: Blue; 10m
+B03: Green; 10m B04: Red; 10m B05: Vegetation red edge; 20m B06: Vegetation red
+edge; 20m B07: Vegetation red edge; 20m B08: NIR; 10m B09: Water vapor; 60m B11:
+SWIR; 20m B12: SWIR; 20m B8A: Narrow NIR; 20m
+
+License: Community Data License Agreement - Permissive, Version 1.0.
+
+URL: http://bigearth.net/
+
+*   URL: [http://bigearth.net](http://bigearth.net)
+*   `DatasetBuilder`:
+    [`tfds.image.bigearthnet.Bigearthnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bigearthnet.py)
+
+`bigearthnet` is configured with `tfds.image.bigearthnet.BigearthnetConfig` and
+has the following configurations predefined (defaults to the first one):
+
+*   `"rgb"` (`v0.0.2`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+
+*   `"all"` (`v0.0.2`) (`Size: ?? GiB`): 13 Sentinel-2 channels
+
+#### `"bigearthnet/rgb"`
+
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(120, 120, 3), dtype=tf.uint8),
+    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'metadata': FeaturesDict({
+        'acquisition_date': Text(shape=(), dtype=tf.string, encoder=None),
+        'coordinates': FeaturesDict({
+            'lrx': Tensor(shape=(), dtype=tf.int64),
+            'lry': Tensor(shape=(), dtype=tf.int64),
+            'ulx': Tensor(shape=(), dtype=tf.int64),
+            'uly': Tensor(shape=(), dtype=tf.int64),
+        }),
+        'projection': Text(shape=(), dtype=tf.string, encoder=None),
+        'tile_source': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+})
+```
+
+#### `"bigearthnet/all"`
+
+```python
+FeaturesDict({
+    'B01': Tensor(shape=[20, 20], dtype=tf.float32),
+    'B02': Tensor(shape=[120, 120], dtype=tf.float32),
+    'B03': Tensor(shape=[120, 120], dtype=tf.float32),
+    'B04': Tensor(shape=[120, 120], dtype=tf.float32),
+    'B05': Tensor(shape=[60, 60], dtype=tf.float32),
+    'B06': Tensor(shape=[60, 60], dtype=tf.float32),
+    'B07': Tensor(shape=[60, 60], dtype=tf.float32),
+    'B08': Tensor(shape=[120, 120], dtype=tf.float32),
+    'B09': Tensor(shape=[20, 20], dtype=tf.float32),
+    'B11': Tensor(shape=[60, 60], dtype=tf.float32),
+    'B12': Tensor(shape=[60, 60], dtype=tf.float32),
+    'B8A': Tensor(shape=[60, 60], dtype=tf.float32),
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'metadata': FeaturesDict({
+        'acquisition_date': Text(shape=(), dtype=tf.string, encoder=None),
+        'coordinates': FeaturesDict({
+            'lrx': Tensor(shape=(), dtype=tf.int64),
+            'lry': Tensor(shape=(), dtype=tf.int64),
+            'ulx': Tensor(shape=(), dtype=tf.int64),
+            'uly': Tensor(shape=(), dtype=tf.int64),
+        }),
+        'projection': Text(shape=(), dtype=tf.string, encoder=None),
+        'tile_source': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+})
+```
+
+#### Statistics
+
+None computed
+
+#### Urls
+
+*   [http://bigearth.net](http://bigearth.net)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+
+```
+@article{Sumbul2019BigEarthNetAL,
+  title={BigEarthNet: A Large-Scale Benchmark Archive For Remote Sensing Image Understanding},
+  author={Gencer Sumbul and Marcela Charfuelan and Beg{"u}m Demir and Volker Markl},
+  journal={CoRR},
+  year={2019},
+  volume={abs/1902.06148}
 }
 ```
 
@@ -2245,11 +2405,12 @@ reasoning each question requires.
 *   Size: `17.72 GiB`
 
 #### Features
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'objects': Sequence({'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'size': TensorInfo(shape=(None,), dtype=tf.int64), 'color': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'material': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'shape': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'color': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), 'material': TensorInfo(shape=(None,), dtype=tf.int64), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'size': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -2315,7 +2476,7 @@ Note:
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'objects': Sequence({'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -2766,6 +2927,68 @@ SAMPLE     | 10
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="downsampled_imagenet" />
+  <meta itemprop="description" content="Dataset with images of 2 resolutions (see config name for information on the resolution).
+It is used for density estimation and generative modeling experiments." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#downsampled_imagenet" />
+  <meta itemprop="sameAs" content="http://image-net.org/small/download.php" />
+</div>
+
+### `"downsampled_imagenet"`
+
+Dataset with images of 2 resolutions (see config name for information on the
+resolution). It is used for density estimation and generative modeling
+experiments.
+
+*   URL:
+    [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
+*   `DatasetBuilder`:
+    [`tfds.image.downsampled_imagenet.DownsampledImagenet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/downsampled_imagenet.py)
+
+`downsampled_imagenet` is configured with
+`tfds.image.downsampled_imagenet.DownsampledImagenetConfig` and has the
+following configurations predefined (defaults to the first one):
+
+*   `"32x32"` (`v0.1.0`) (`Size: ?? GiB`): A dataset consisting of Train and
+    Validation images of 32x32 resolution.
+
+*   `"64x64"` (`v0.1.0`) (`Size: ?? GiB`): A dataset consisting of Train and
+    Validation images of 64x64 resolution.
+
+#### `"downsampled_imagenet/32x32"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+#### `"downsampled_imagenet/64x64"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+#### Statistics
+
+None computed
+
+#### Urls
+
+*   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -3069,6 +3292,95 @@ TEST       |     10,000
     journal={2017 International Joint Conference on Neural Networks (IJCNN)}, 
     author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van}, 
     year={2017}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="eurosat" />
+  <meta itemprop="description" content="EuroSAT dataset is based on Sentinel-2 satellite images covering 13 spectral
+bands and consisting of 10 classes with 27000 labeled and
+geo-referenced samples.
+
+Two datasets are offered:
+- rgb: Contains only the optical R, G, B frequency bands encoded as JPEG image.
+- all: Contains all 13 bands in the original value range (float32).
+
+URL: https://github.com/phelber/eurosat" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#eurosat" />
+  <meta itemprop="sameAs" content="https://github.com/phelber/eurosat" />
+</div>
+
+### `"eurosat"`
+
+EuroSAT dataset is based on Sentinel-2 satellite images covering 13 spectral
+bands and consisting of 10 classes with 27000 labeled and geo-referenced
+samples.
+
+Two datasets are offered: - rgb: Contains only the optical R, G, B frequency
+bands encoded as JPEG image. - all: Contains all 13 bands in the original value
+range (float32).
+
+URL: https://github.com/phelber/eurosat
+
+*   URL:
+    [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
+*   `DatasetBuilder`:
+    [`tfds.image.eurosat.Eurosat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/eurosat.py)
+
+`eurosat` is configured with `tfds.image.eurosat.EurosatConfig` and has the
+following configurations predefined (defaults to the first one):
+
+*   `"rgb"` (`v0.0.1`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+
+*   `"all"` (`v0.0.1`) (`Size: ?? GiB`): 13 Sentinel-2 channels
+
+#### `"eurosat/rgb"`
+
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"eurosat/all"`
+
+```python
+FeaturesDict({
+    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'sentinel2': Tensor(shape=[64, 64, 13], dtype=tf.float32),
+})
+```
+
+#### Statistics
+
+None computed
+
+#### Urls
+
+*   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'sentinel2', u'label')`
+
+#### Citation
+
+```
+@misc{helber2017eurosat,
+    title={EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification},
+    author={Patrick Helber and Benjamin Bischke and Andreas Dengel and Damian Borth},
+    year={2017},
+    eprint={1709.00029},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
 }
 ```
 
@@ -4613,11 +4925,11 @@ and has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'objects_trainable': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32)}),
 })
 ```
 
@@ -4625,11 +4937,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'objects_trainable': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32)}),
 })
 ```
 
@@ -4637,11 +4949,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'bobjects': Sequence({'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'objects_trainable': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32)}),
 })
 ```
 
@@ -4854,17 +5166,19 @@ TEST       |      3,669
   <meta itemprop="name" content="quickdraw_bitmap" />
   <meta itemprop="description" content="The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#quickdraw_bitmap" />
-  <meta itemprop="sameAs" content="h" />
+  <meta itemprop="sameAs" content="https://github.com/googlecreativelab/quickdraw-dataset" />
 </div>
 
 ### `"quickdraw_bitmap"`
 
 The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images
 
-* URL: [h](h)
-* `DatasetBuilder`: [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
-* Version: `v1.0.0`
-* Size: `36.82 GiB`
+*   URL:
+    [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+*   `DatasetBuilder`:
+    [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
+*   Version: `v1.0.0`
+*   Size: `36.82 GiB`
 
 #### Features
 ```python
@@ -4881,62 +5195,9 @@ Split  | Examples
 TRAIN      | 50,426,266
 ALL        | 50,426,266
 
-
 #### Urls
- * [h](h)
- * [t](t)
- * [t](t)
- * [p](p)
- * [s](s)
- * [:](:)
- * [/](/)
- * [/](/)
- * [g](g)
- * [i](i)
- * [t](t)
- * [h](h)
- * [u](u)
- * [b](b)
- * [.](.)
- * [c](c)
- * [o](o)
- * [m](m)
- * [/](/)
- * [g](g)
- * [o](o)
- * [o](o)
- * [g](g)
- * [l](l)
- * [e](e)
- * [c](c)
- * [r](r)
- * [e](e)
- * [a](a)
- * [t](t)
- * [i](i)
- * [v](v)
- * [e](e)
- * [l](l)
- * [a](a)
- * [b](b)
- * [/](/)
- * [q](q)
- * [u](u)
- * [i](i)
- * [c](c)
- * [k](k)
- * [d](d)
- * [r](r)
- * [a](a)
- * [w](w)
- * [-](-)
- * [d](d)
- * [a](a)
- * [t](t)
- * [a](a)
- * [s](s)
- * [e](e)
- * [t](t)
+
+*   [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
 `(u'image', u'label')`
@@ -4998,7 +5259,6 @@ FeaturesDict({
 ```
 
 #### Statistics
-
 None computed
 
 #### Urls
@@ -5244,6 +5504,89 @@ TEST       |     24,300
   pages={II-104 Vol.2}
 }
 ```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="so2sat" />
+  <meta itemprop="description" content="So2Sat LCZ42 is a dataset consisting of co-registered synthetic aperture radar
+and multispectral optical image patches acquired by the Sentinel-1 and
+Sentinel-2 remote sensing satellites, and the corresponding local climate zones
+(LCZ) label. The dataset is distributed over 42 cities across different
+continents and cultural regions of the world.
+
+The full dataset (`all`) consists of 8 Sentinel-1 and 10 Sentinel-2 channels.
+Alternatively, one can select the `rgb` subset, which contains only the optical
+frequency bands of Sentinel-2, rescaled and encoded as JPEG.
+
+Dataset URL: http://doi.org/10.14459/2018MP1454690
+License: http://creativecommons.org/licenses/by/4.0" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#so2sat" />
+  <meta itemprop="sameAs" content="http://doi.org/10.14459/2018MP1454690" />
+</div>
+
+### `"so2sat"`
+
+So2Sat LCZ42 is a dataset consisting of co-registered synthetic aperture radar
+and multispectral optical image patches acquired by the Sentinel-1 and
+Sentinel-2 remote sensing satellites, and the corresponding local climate zones
+(LCZ) label. The dataset is distributed over 42 cities across different
+continents and cultural regions of the world.
+
+The full dataset (`all`) consists of 8 Sentinel-1 and 10 Sentinel-2 channels.
+Alternatively, one can select the `rgb` subset, which contains only the optical
+frequency bands of Sentinel-2, rescaled and encoded as JPEG.
+
+Dataset URL: http://doi.org/10.14459/2018MP1454690 License:
+http://creativecommons.org/licenses/by/4.0
+
+*   URL:
+    [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
+*   `DatasetBuilder`:
+    [`tfds.image.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/so2sat.py)
+
+`so2sat` is configured with `tfds.image.so2sat.So2satConfig` and has the
+following configurations predefined (defaults to the first one):
+
+*   `"rgb"` (`v0.0.1`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+
+*   `"all"` (`v0.0.1`) (`Size: ?? GiB`): 8 Sentinel-1 and 10 Sentinel-2 channels
+
+#### `"so2sat/rgb"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=17),
+    'sample_id': Tensor(shape=(), dtype=tf.int64),
+})
+```
+
+#### `"so2sat/all"`
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=17),
+    'sample_id': Tensor(shape=(), dtype=tf.int64),
+    'sentinel1': Tensor(shape=[32, 32, 8], dtype=tf.float32),
+    'sentinel2': Tensor(shape=[32, 32, 10], dtype=tf.float32),
+})
+```
+
+#### Statistics
+
+None computed
+
+#### Urls
+
+*   [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
 
 ---
 
@@ -5538,7 +5881,7 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
     'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
     'labels_no_difficult': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'objects': Sequence({'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'objects': Sequence({'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -6518,7 +6861,7 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'answers': Sequence({'answer_start': TensorInfo(shape=(None,), dtype=tf.int32), 'text': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'answers': Sequence({'text': TensorInfo(shape=(None,), dtype=tf.string), 'answer_start': TensorInfo(shape=(None,), dtype=tf.int32)}),
     'context': Text(shape=(), dtype=tf.string, encoder=None),
     'id': Tensor(shape=(), dtype=tf.string),
     'question': Text(shape=(), dtype=tf.string, encoder=None),
@@ -11050,14 +11393,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Croatian." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-French." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-Croatian.
+Web-Scale Parallel Corpora for Official European Languages. English-French.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -11067,17 +11410,29 @@ Web-Scale Parallel Corpora for Official European Languages. English-Croatian.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ga, uses encoder plain_text.
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to it, uses encoder plain_text.
+
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to cs, uses encoder plain_text.
 
 *   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to el, uses encoder plain_text.
 
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pl, uses encoder plain_text.
+
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ro, uses encoder plain_text.
+
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ga, uses encoder plain_text.
 
 *   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to et, uses encoder plain_text.
+
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pt, uses encoder plain_text.
 
 *   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to es, uses encoder plain_text.
@@ -11085,26 +11440,11 @@ has the following configurations predefined (defaults to the first one):
 *   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to nl, uses encoder plain_text.
 
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to bg, uses encoder plain_text.
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hu, uses encoder plain_text.
 
-*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to cs, uses encoder plain_text.
-
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
-
-*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pt, uses encoder plain_text.
-
-*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to mt, uses encoder plain_text.
-
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
-
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to it, uses encoder plain_text.
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
 
 *   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to da, uses encoder plain_text.
@@ -11115,8 +11455,11 @@ has the following configurations predefined (defaults to the first one):
 *   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to de, uses encoder plain_text.
 
-*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fr, uses encoder plain_text.
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
 
 *   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to sl, uses encoder plain_text.
@@ -11124,24 +11467,33 @@ has the following configurations predefined (defaults to the first one):
 *   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to lt, uses encoder plain_text.
 
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
-
-*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hu, uses encoder plain_text.
+*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to mt, uses encoder plain_text.
 
 *   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to sv, uses encoder plain_text.
 
-*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to bg, uses encoder plain_text.
 
-#### `"para_crawl/enga_plain_text"`
+*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fr, uses encoder plain_text.
+
+#### `"para_crawl/enit_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ga': Text(shape=(), dtype=tf.string, encoder=None),
+    'it': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/encs_plain_text"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11154,12 +11506,30 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enlv_plain_text"`
+#### `"para_crawl/enpl_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enro_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enga_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ga': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11169,6 +11539,15 @@ Translation({
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'et': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pt': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11190,66 +11569,21 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enbg_plain_text"`
+#### `"para_crawl/enhu_plain_text"`
 
 ```python
 Translation({
-    'bg': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hu': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/encs_plain_text"`
-
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enro_plain_text"`
+#### `"para_crawl/enhr_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ro': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enpt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enmt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'mt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enpl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enit_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'it': Text(shape=(), dtype=tf.string, encoder=None),
+    'hr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11282,12 +11616,21 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enfr_plain_text"`
+#### `"para_crawl/ensk_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'sk': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11309,21 +11652,12 @@ Translation({
 })
 ```
 
-#### `"para_crawl/ensk_plain_text"`
+#### `"para_crawl/enmt_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sk': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhu_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hu': Text(shape=(), dtype=tf.string, encoder=None),
+    'mt': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11336,12 +11670,21 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enhr_plain_text"`
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfr_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hr': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11351,10 +11694,11 @@ None computed
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hr.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'en', u'hr')`
+
+`(u'en', u'fr')`
 
 #### Citation
 ```
@@ -11734,6 +12078,9 @@ the following configurations predefined (defaults to the first one):
 *   `"fr-en"` (`v0.0.3`) (`Size: 6.20 GiB`): WMT 2014 fr-en translation task
     dataset.
 
+*   `"hi-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2014 hi-en translation task
+    dataset.
+
 *   `"ru-en"` (`v0.0.3`) (`Size: 998.38 MiB`): WMT 2014 ru-en translation task
     dataset.
 
@@ -11761,6 +12108,15 @@ Translation({
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"wmt14_translate/hi-en"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hi': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11858,35 +12214,35 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 cs-en translation task
+*   `"cs-en"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 de-en translation task
+*   `"de-en"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 fi-en translation task
+*   `"fi-en"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
     dataset.
 
-*   `"fr-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 fr-en translation task
+*   `"fr-en"` (`v0.0.3`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 ru-en translation task
+*   `"ru-en"` (`v0.0.3`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
     dataset.
 
-*   `"cs-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 cs-en translation
-    task dataset with subword encoding.
+*   `"cs-en.subwords8k"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 cs-en
+    translation task dataset with subword encoding.
 
-*   `"de-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 de-en translation
-    task dataset with subword encoding.
+*   `"de-en.subwords8k"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 de-en
+    translation task dataset with subword encoding.
 
-*   `"fi-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 fi-en translation
-    task dataset with subword encoding.
+*   `"fi-en.subwords8k"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2015 fi-en
+    translation task dataset with subword encoding.
 
-*   `"fr-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 fr-en translation
-    task dataset with subword encoding.
+*   `"fr-en.subwords8k"` (`v0.0.3`) (`Size: 6.24 GiB`): WMT 2015 fr-en
+    translation task dataset with subword encoding.
 
-*   `"ru-en.subwords8k"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2015 ru-en translation
-    task dataset with subword encoding.
+*   `"ru-en.subwords8k"` (`v0.0.3`) (`Size: 1.02 GiB`): WMT 2015 ru-en
+    translation task dataset with subword encoding.
 
 #### `"wmt15_translate/cs-en"`
 
@@ -11947,8 +12303,8 @@ Translation({
 
 ```python
 Translation({
-    'cs': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8245>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8198>),
 })
 ```
 
@@ -11956,8 +12312,8 @@ Translation({
 
 ```python
 Translation({
-    'de': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
 })
 ```
 
@@ -11965,8 +12321,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'fi': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
+    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
 })
 ```
 
@@ -11974,8 +12330,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
 })
 ```
 
@@ -11983,13 +12339,19 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'ru': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
+    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
 })
 ```
 
 #### Statistics
-None computed
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,500,902
+TRAIN      | 2,495,081
+VALIDATION | 3,003
+TEST       | 2,818
 
 #### Urls
  * [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
