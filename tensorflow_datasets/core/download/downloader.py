@@ -34,6 +34,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import kaggle
+from tensorflow_datasets.core.download import gcs_downloader
 from tensorflow_datasets.core.download import util as download_util
 
 _DRIVE_URL = re.compile(r'^https://drive\.google\.com/')
@@ -152,6 +153,9 @@ class _Downloader(object):
       if proxies['http']:
         os.environ['KAGGLE_PROXY'] = proxies['http']
       return self._sync_kaggle_download(url, destination_path)
+
+    if gcs_downloader.is_gs_url(url):
+      return gcs_downloader.gs_downloader(url, destination_path)
 
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
