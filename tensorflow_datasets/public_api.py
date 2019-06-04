@@ -23,6 +23,7 @@ from tensorflow_datasets import core
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter as file_adapter
+from tensorflow_datasets.core import transform
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core.dataset_utils import as_numpy
 from tensorflow_datasets.core.download import GenerateMode

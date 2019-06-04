@@ -295,6 +295,24 @@ class DatasetBuilderTest(testing.TestCase):
             data_dir=tmp_dir,
         )
 
+  @testing.run_in_graph_and_eager_modes()
+  def test_map_fns(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      ds = registered.load(
+          name="dummy_dataset_shared_generator",
+          data_dir=tmp_dir,
+          map_fns={
+              "x": lambda x: x * 10,
+          },
+          split=splits_lib.Split.TRAIN)
+      data = list(dataset_utils.as_numpy(ds))
+
+      self.assertEqual(
+          sorted(x["x"] for x in data),
+          [0, 10, 30, 40, 60, 70, 90, 100, 120, 130, 150, 160, 180, 190, 210,
+           220, 240, 250, 270, 280],
+      )
+
 
 class BuilderRestoreGcsTest(testing.TestCase):
 

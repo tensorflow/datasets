@@ -46,15 +46,22 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     """
     self.__is_top_level = True
 
-  def decode_example(self, serialized_example):
+  def decode_example(self, serialized_example, decoders=None):
+    # pylint: disable=line-too-long
     """Decode the serialize examples.
 
     Args:
       serialized_example: Nested `dict` of `tf.Tensor`
+      decoders: Nested dict of `Decoder` objects which allow to customize the
+        decoding. The structure should match the feature structure, but only
+        customized feature keys need to be present. See
+        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/transform.md)
+        for more info.
 
     Returns:
       example: Nested `dict` containing the decoded nested examples.
     """
+    # pylint: enable=line-too-long
     if not self.__is_top_level:
       raise AssertionError(
           'Feature {} can only be decoded when defined as top-level '
@@ -66,16 +73,28 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     flat_features = self._flatten(self)
     flat_serialized_info = self._flatten(self.get_serialized_info())
     flat_tensor_info = self._flatten(self.get_tensor_info())
+    flat_decoders = self._flatten(decoders)
 
     # Step 2: Apply the decoding
     flatten_decoded = []
-    for feature, example, tensor_info, serialized_info in zip(
-        flat_features, flat_example, flat_tensor_info, flat_serialized_info):
+    for (
+        feature,
+        example,
+        tensor_info,
+        serialized_info,
+        decoder,
+    ) in zip(
+        flat_features,
+        flat_example,
+        flat_tensor_info,
+        flat_serialized_info,
+        flat_decoders):
       flatten_decoded.append(_decode_feature(
           feature=feature,
           example=example,
           tensor_info=tensor_info,
           serialized_info=serialized_info,
+          decoder=decoder,
       ))
 
     # Step 3: Restore nesting [] => {}
@@ -83,20 +102,29 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     return nested_decoded
 
 
-def _decode_feature(feature, example, tensor_info, serialized_info):
-  """Decode a single feature."""
+def _decode_feature(feature, example, tensor_info, serialized_info, decoder):
+  """Decode a single feature."""\
+  # Eventually overwrite the default decoding
+  if decoder is not None:
+    decoder._setup(feature=feature)  # pylint: disable=protected-access
+    decode_fn = decoder.decode_example
+    out_dtype = decoder.get_tensor_info().dtype
+  else:
+    decode_fn = feature.decode_example
+    out_dtype = tensor_info.dtype
+
   sequence_rank = _get_sequence_rank(serialized_info)
   if sequence_rank == 0:
-    return feature.decode_example(example)
+    return decode_fn(example)
   elif sequence_rank == 1:
     # Note: This all works fine in Eager mode (without tf.function) because
     # tf.data pipelines are always executed in Graph mode.
 
     # Apply the decoding to each of the individual distributed features.
     return tf.map_fn(
-        feature.decode_example,
+        decode_fn,
         example,
-        dtype=tensor_info.dtype,
+        dtype=out_dtype,
         parallel_iterations=10,
         back_prop=False,
         name='sequence_decode',
