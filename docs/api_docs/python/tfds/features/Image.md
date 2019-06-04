@@ -2,9 +2,7 @@
 <meta itemprop="name" content="tfds.features.Image" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
-<meta itemprop="property" content="__getstate__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
@@ -83,23 +81,11 @@ Construct the connector.
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
-
-<h3 id="__getstate__"><code>__getstate__</code></h3>
-
-```python
-__getstate__()
-```
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
@@ -123,15 +109,11 @@ Convert the given image into a dict convertible to tf example.
 get_serialized_info()
 ```
 
-
-
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
 ``` python
 get_tensor_info()
 ```
-
-
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
@@ -170,6 +152,3 @@ set_shape(shape)
 ```
 
 Update the shape.
-
-
-

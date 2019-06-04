@@ -70,10 +70,6 @@ split = (train.subsplit(tfds.percent[:25]) + test).subsplit(tfds.percent[:50])
 __init__(name)
 ```
 
-
-
-
-
 ## Methods
 
 <h3 id="__add__"><code>__add__</code></h3>
@@ -98,8 +94,6 @@ Equality: tfds.Split.TRAIN == 'train'.
 get_read_instruction(split_dict)
 ```
 
-
-
 <h3 id="subsplit"><code>subsplit</code></h3>
 
 ``` python
@@ -112,6 +106,7 @@ subsplit(
 ```
 
 Divides this split into subsplits.
+
 There are 3 ways to define subsplits, which correspond to the 3
 arguments `k` (get `k` even subsplits), `percent` (get a slice of the
 dataset with <a href="../../tfds/percent.md"><code>tfds.percent</code></a>), and `weighted` (get subsplits with proportions

@@ -222,6 +222,8 @@ class FeatureExpectationsTestCase(SubTestCase):
 
     # Create the feature dict
     fdict = features.FeaturesDict({"inner": feature})
+    fdict._set_top_level()  # pylint: disable=protected-access
+
     for i, test in enumerate(tests):
       with self._subTest(str(i)):
         self.assertFeatureTest(
@@ -316,6 +318,10 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
   VERSION = utils.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      "0.0.9",
+      "0.0.8",
+  ]
 
   def _info(self):
     return dataset_info.DatasetInfo(

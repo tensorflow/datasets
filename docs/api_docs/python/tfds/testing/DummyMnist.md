@@ -10,6 +10,7 @@
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
 <meta itemprop="property" content="GOOGLE_DISABLED"/>
 <meta itemprop="property" content="IN_DEVELOPMENT"/>
+<meta itemprop="property" content="SUPPORTED_VERSIONS"/>
 <meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
@@ -39,10 +40,6 @@ __init__(
 )
 ```
 
-
-
-
-
 ## Properties
 
 <h3 id="builder_config"><code>builder_config</code></h3>
@@ -51,19 +48,15 @@ __init__(
 
 <h3 id="data_dir"><code>data_dir</code></h3>
 
-
-
 <h3 id="info"><code>info</code></h3>
 
 <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> for this builder.
-
-
 
 ## Methods
 
 <h3 id="as_dataset"><code>as_dataset</code></h3>
 
-``` python
+```python
 as_dataset(
     split=None,
     batch_size=1,
@@ -73,6 +66,7 @@ as_dataset(
 ```
 
 Constructs a `tf.data.Dataset`.
+
 Callers must pass arguments as keyword arguments.
 
 #### Args:
@@ -94,6 +88,7 @@ Callers must pass arguments as keyword arguments.
     `tf.data.Dataset` will have a dictionary with all the features.
 
 #### Returns:
+
 `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
 tfds.data.Dataset>`.
 
@@ -127,15 +122,10 @@ Downloads and prepares dataset for reading.
 
 ## Class Members
 
-<h3 id="BUILDER_CONFIGS"><code>BUILDER_CONFIGS</code></h3>
-
-<h3 id="GOOGLE_DISABLED"><code>GOOGLE_DISABLED</code></h3>
-
-<h3 id="IN_DEVELOPMENT"><code>IN_DEVELOPMENT</code></h3>
-
-<h3 id="VERSION"><code>VERSION</code></h3>
-
-<h3 id="builder_configs"><code>builder_configs</code></h3>
-
-<h3 id="name"><code>name</code></h3>
-
+*   `BUILDER_CONFIGS` <a id="BUILDER_CONFIGS"></a>
+*   `GOOGLE_DISABLED = False` <a id="GOOGLE_DISABLED"></a>
+*   `IN_DEVELOPMENT = False` <a id="IN_DEVELOPMENT"></a>
+*   `SUPPORTED_VERSIONS` <a id="SUPPORTED_VERSIONS"></a>
+*   `VERSION` <a id="VERSION"></a>
+*   `builder_configs` <a id="builder_configs"></a>
+*   `name = 'dummy_mnist'` <a id="name"></a>

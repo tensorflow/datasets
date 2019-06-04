@@ -4,7 +4,6 @@
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="names"/>
 <meta itemprop="property" content="num_classes"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_example"/>
@@ -23,9 +22,7 @@
 
 `FeatureConnector` for integer class labels.
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-
+Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 Defined in [`core/features/class_label_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/class_label_feature.py).
 
@@ -43,6 +40,7 @@ __init__(
 ```
 
 Constructs a ClassLabel FeatureConnector.
+
 There are 3 ways to define a ClassLabel, which correspond to the 3
 arguments:
 
@@ -69,21 +67,11 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 <h3 id="names"><code>names</code></h3>
 
-
-
 <h3 id="num_classes"><code>num_classes</code></h3>
-
-
-
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
 
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
-
-
 
 ## Methods
 
@@ -93,7 +81,22 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
+Decode the feature dict to TF compatible input.
 
+Note: If eager is not enabled, this function will be executed as a tensorflow
+graph (in `tf.data.Dataset.map(features.decode_example)`).
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: Data or dictionary of data, as read by the
+    tf-example reader. It correspond to the `tf.Tensor()` (or dict of
+    `tf.Tensor()`) extracted from the `tf.train.Example`, matching the info
+    defined in `get_serialized_info()`.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
+    tf.data.Dataset object
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -101,15 +104,16 @@ decode_example(tfexample_data)
 encode_example(example_data)
 ```
 
-
-
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
 get_serialized_info()
 ```
 
-Return the tf-example features for the adapter, as stored on disk.
+Return the shape/dtype of features after encoding (for the adapter).
+
+The `FileAdapter` then use those information to write data on disk.
+
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
@@ -117,9 +121,9 @@ The DatasetBuilder are written on disk as tf.train.Example proto.
 
 ```
 return {
-    'image': tf.VarLenFeature(tf.uint8):
-    'height': tf.FixedLenFeature((), tf.int32),
-    'width': tf.FixedLenFeature((), tf.int32),
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
+    'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+    'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
 }
 ```
 
@@ -127,7 +131,7 @@ FeatureConnector which are not containers should return the feature proto
 directly:
 
 ```
-return tf.FixedLenFeature((64, 64), tf.uint8)
+return tfds.features.TensorInfo(shape=(64, 64), tf.uint8)
 ```
 
 If not defined, the retuned values are automatically deduced from the
@@ -143,7 +147,7 @@ If not defined, the retuned values are automatically deduced from the
 get_tensor_info()
 ```
 
-
+See base class for details.
 
 <h3 id="int2str"><code>int2str</code></h3>
 
@@ -182,6 +186,3 @@ str2int(str_value)
 ```
 
 Conversion class name string => integer.
-
-
-

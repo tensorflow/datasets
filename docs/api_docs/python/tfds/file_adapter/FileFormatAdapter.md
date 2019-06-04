@@ -2,6 +2,7 @@
 <meta itemprop="name" content="tfds.file_adapter.FileFormatAdapter" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="filetype_suffix"/>
+<meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="dataset_from_filename"/>
 <meta itemprop="property" content="write_from_generator"/>
 <meta itemprop="property" content="write_from_pcollection"/>
@@ -17,6 +18,19 @@ Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/dataset
 
 <!-- Placeholder for "Used in" -->
 
+<h2 id="__init__"><code>__init__</code></h2>
+
+```python
+__init__(example_specs)
+```
+
+Constructor.
+
+#### Args:
+
+*   <b>`example_specs`</b>: Nested `dict` of
+    <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>,
+    corresponding to the structure of data to write/read.
 
 ## Properties
 

@@ -43,6 +43,7 @@ __init__(
 ```
 
 Constructs a TokenTextEncoder.
+
 To load from a file saved with `TokenTextEncoder.save_to_file`, use
 `TokenTextEncoder.load_from_file`.
 
@@ -61,25 +62,13 @@ To load from a file saved with `TokenTextEncoder.save_to_file`, use
 
 <h3 id="lowercase"><code>lowercase</code></h3>
 
-
-
 <h3 id="oov_token"><code>oov_token</code></h3>
-
-
 
 <h3 id="tokenizer"><code>tokenizer</code></h3>
 
-
-
 <h3 id="tokens"><code>tokens</code></h3>
 
-
-
 <h3 id="vocab_size"><code>vocab_size</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -89,15 +78,11 @@ To load from a file saved with `TokenTextEncoder.save_to_file`, use
 decode(ids)
 ```
 
-
-
 <h3 id="encode"><code>encode</code></h3>
 
 ``` python
 encode(s)
 ```
-
-
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
 
@@ -109,15 +94,8 @@ load_from_file(
 )
 ```
 
-
-
 <h3 id="save_to_file"><code>save_to_file</code></h3>
 
 ``` python
 save_to_file(filename_prefix)
 ```
-
-
-
-
-

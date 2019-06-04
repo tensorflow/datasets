@@ -3,13 +3,9 @@
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="feature"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
-<meta itemprop="property" content="__getattr__"/>
 <meta itemprop="property" content="__getitem__"/>
-<meta itemprop="property" content="__getstate__"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="__setstate__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -92,25 +88,11 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 The inner feature.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
-
-<h3 id="__getattr__"><code>__getattr__</code></h3>
-
-``` python
-__getattr__(key)
-```
-
-Allow to access the underlying attributes directly.
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
 
@@ -119,18 +101,6 @@ __getitem__(key)
 ```
 
 Convenience method to access the underlying features.
-
-<h3 id="__getstate__"><code>__getstate__</code></h3>
-
-```python
-__getstate__()
-```
-
-<h3 id="__setstate__"><code>__setstate__</code></h3>
-
-```python
-__setstate__(state)
-```
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
