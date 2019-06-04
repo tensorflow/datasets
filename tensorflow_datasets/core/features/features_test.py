@@ -30,14 +30,8 @@ from tensorflow_datasets.core import features as features_lib
 tf.compat.v1.enable_eager_execution()
 
 
-class AnInputConnector(features_lib.FeaturesDict):
+class AnInputConnector(features_lib.FeatureConnector):
   """Simple FeatureConnector implementing the based methods used for test."""
-
-  def __init__(self):
-    super(AnInputConnector, self).__init__({
-        'a': tf.int64,
-        'b': tf.int64,
-    })
 
   def get_tensor_info(self):
     # With this connector, the way the data is on disk ({'a', 'b'}) do not match
@@ -53,15 +47,13 @@ class AnInputConnector(features_lib.FeaturesDict):
 
   def encode_example(self, example_data):
     # Encode take the input data and wrap in in a dict
-    return super(AnInputConnector, self).encode_example({
+    return {
         'a': example_data + 1,
         'b': example_data * 10
-    })
+    }
 
   def decode_example(self, tfexample_dict):
-    # Decode take the saved dict and merge the two values
-    tfexample_dict = super(AnInputConnector,
-                           self).decode_example(tfexample_dict)
+    # Merge the two values
     return tfexample_dict['a'] + tfexample_dict['b']
 
 
