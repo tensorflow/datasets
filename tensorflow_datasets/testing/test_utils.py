@@ -222,6 +222,8 @@ class FeatureExpectationsTestCase(SubTestCase):
 
     # Create the feature dict
     fdict = features.FeaturesDict({"inner": feature})
+    fdict._set_top_level()  # pylint: disable=protected-access
+
     for i, test in enumerate(tests):
       with self._subTest(str(i)):
         self.assertFeatureTest(

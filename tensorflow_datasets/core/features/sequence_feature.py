@@ -20,13 +20,14 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.features import features_dict
+from tensorflow_datasets.core.features import top_level_feature
 
 
-class Sequence(feature_lib.FeatureConnector):
+class Sequence(top_level_feature.TopLevelFeature):
   """Composite `FeatureConnector` for a `dict` where each value is a list.
 
   `Sequence` correspond to sequence of `tfds.features.FeatureConnector`. At
@@ -84,7 +85,7 @@ class Sequence(feature_lib.FeatureConnector):
       **kwargs: `dict`, constructor kwargs of `tfds.features.FeaturesDict`
     """
     # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
-    self._feature = feature_lib.to_feature(feature)
+    self._feature = features_dict.to_feature(feature)
     self._length = length
     super(Sequence, self).__init__(**kwargs)
 
@@ -93,30 +94,24 @@ class Sequence(feature_lib.FeatureConnector):
     """The inner feature."""
     return self._feature
 
+  def _add_length_dim(self, tensor_info):
+    """Add the length dimension to the given tensor_info."""
+    tensor_info = feature_lib.TensorInfo.copy_from(tensor_info)
+    tensor_info.shape = (self._length,) + tensor_info.shape
+    tensor_info.sequence_rank += 1
+    return tensor_info
+
   def get_tensor_info(self):
     """See base class for details."""
     # Add the additional length dimension to every shape
-    def add_length_dim(tensor_info):
-      tensor_info = feature_lib.TensorInfo.copy_from(tensor_info)
-      tensor_info.shape = (self._length,) + tensor_info.shape
-      return tensor_info
-
     tensor_info = self._feature.get_tensor_info()
-    return utils.map_nested(add_length_dim, tensor_info)
+    return utils.map_nested(self._add_length_dim, tensor_info)
 
   def get_serialized_info(self):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
-
-    def add_length_dim(tensor_info):
-      """Add the length dimension to the serialized_info."""
-      return feature_lib.TensorInfo(
-          shape=(self._length,) + tensor_info.shape,
-          dtype=tensor_info.dtype,
-      )
-
     tensor_info = self._feature.get_serialized_info()
-    return utils.map_nested(add_length_dim, tensor_info)
+    return utils.map_nested(self._add_length_dim, tensor_info)
 
   def encode_example(self, example_dict):
     # Convert nested dict[list] into list[nested dict]
@@ -157,19 +152,15 @@ class Sequence(feature_lib.FeatureConnector):
 
     return _stack_nested(sequence_elements)
 
-  def decode_example(self, tfexample_dict):
-    # Note: This all works fine in Eager mode (without tf.function) because
-    # tf.data pipelines are always executed in Graph mode.
+  def _flatten(self, x):
+    """See base class for details."""
+    if isinstance(x, Sequence):
+      return self.feature._flatten(x.feature)  # pylint: disable=protected-access
+    return self.feature._flatten(x)  # pylint: disable=protected-access
 
-    # Apply the decoding to each of the individual feature.
-    return tf.map_fn(
-        self.feature.decode_example,
-        tfexample_dict,
-        dtype=self.dtype,
-        parallel_iterations=10,
-        back_prop=False,
-        name='sequence_decode',
-    )
+  def _nest(self, list_x):
+    """See base class for details."""
+    return self.feature._nest(list_x)  # pylint: disable=protected-access
 
   def save_metadata(self, *args, **kwargs):
     """See base class for details."""
@@ -200,7 +191,7 @@ class Sequence(feature_lib.FeatureConnector):
     self.__dict__.update(state)
 
   def _additional_repr_info(self):
-    """Override to return addtional info to go into __repr__."""
+    """Override to return additional info to go into __repr__."""
     return {'feature': repr(self._feature)}
 
 

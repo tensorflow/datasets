@@ -24,6 +24,8 @@ tensorflow/datasets builders from how they are encoded/decoded from file.
 to be returned by the tf.data.Dataset() object.
 
 Ex:
+
+  ```
   features=features.FeaturesDict({
       'input': features.Image(),
       'target': features.Text(encoder=SubWordEncoder()),
@@ -32,8 +34,11 @@ Ex:
           'language': tf.string,
       }
   })
+  ```
 
 The tf.data.Dataset will return each examples as a dict:
+
+  ```
   {
       'input': tf.Tensor(shape=(batch, height, width, channel), tf.uint8),
       'target': tf.Tensor(shape=(batch, sequence_length), tf.int64),
@@ -42,10 +47,12 @@ The tf.data.Dataset will return each examples as a dict:
           'language': tf.Tensor(shape=(batch,), tf.string),
       }
   }
+  ```
 
 2) In the generator function, yield the examples to match what you have defined
 in the spec. The values will automatically be encoded.
 
+  ```
   yield {
       'input': np_image,
       'target': 'This is some text',
@@ -54,6 +61,7 @@ in the spec. The values will automatically be encoded.
           'language': 'en',
       }
   }
+  ```
 
 # Create your own FeatureConnector
 
@@ -84,7 +92,6 @@ import collections
 
 import numpy as np
 import six
-import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
@@ -93,7 +100,7 @@ from tensorflow_datasets.core import utils
 class TensorInfo(object):
   """Structure containing info on the `tf.Tensor` shape/dtype."""
 
-  def __init__(self, shape, dtype, default_value=None):
+  def __init__(self, shape, dtype, default_value=None, sequence_rank=None):
     """Constructor.
 
     Args:
@@ -101,10 +108,12 @@ class TensorInfo(object):
       dtype: Tensor dtype
       default_value: Used for retrocompatibility with previous files if a new
         field is added to provide a default value when reading the file.
+      sequence_rank: `int`, Number of `tfds.features.Sequence` dimension.
     """
     self.shape = shape
     self.dtype = dtype
     self.default_value = default_value
+    self.sequence_rank = sequence_rank or 0
 
   @classmethod
   def copy_from(cls, tensor_info):
@@ -113,6 +122,7 @@ class TensorInfo(object):
         shape=tensor_info.shape,
         dtype=tensor_info.dtype,
         default_value=tensor_info.default_value,
+        sequence_rank=tensor_info.sequence_rank,
     )
 
   def __eq__(self, other):
@@ -290,8 +300,103 @@ class FeatureConnector(object):
     """
     return tfexample_data
 
+  def _flatten(self, x):
+    """Flatten the input dict into a list of values.
+
+    For instance, the following feature:
+    ```
+    feature = FeatureDict({
+        'a': w,
+        'b': x,
+        'c': {
+            'd': y,
+            'e': z,
+        },
+    })
+    ```
+
+    Applied to the following `dict`:
+    ```
+    feature._flatten({
+        'b': X,
+        'c': {
+            'd': Y,
+        },
+    })
+    ```
+
+    Will produce the following flattened output:
+    ```
+    [
+        None,
+        X,
+        Y,
+        None,
+    ]
+    ```
+
+    Args:
+      x: A nested `dict` like structure matching the structure of the
+      `FeatureConnector`. Note that some elements may be missing.
+
+    Returns:
+      `list`: The flattened list of element of `x`. Order is guaranteed to be
+      deterministic. Missing elements will be filled with `None`.
+    """
+    return [x]
+
+  def _nest(self, list_x):
+    """Pack the list into a nested dict.
+
+    This is the reverse function of flatten.
+
+    For instance, the following feature:
+    ```
+    feature = FeatureDict({
+        'a': w,
+        'b': x,
+        'c': {
+            'd': y,
+            'e': z,
+        },
+    })
+    ```
+
+    Applied to the following `dict`:
+    ```
+    feature._nest([
+        None,
+        X,
+        Y,
+        None,
+    ])
+    ```
+
+    Will produce the following flattened output:
+    ```
+    {
+        'a': None,
+        'b': X,
+        'c': {
+            'd': Y,
+            'e': None,
+        },
+    }
+    ```
+
+    Args:
+      list_x: List of values matching the flattened `FeatureConnector`
+        structure. Missing values should be filled with None.
+
+    Returns:
+      nested_x: nested `dict` matching the flattened `FeatureConnector`
+        structure.
+    """
+    assert len(list_x) == 1
+    return list_x[0]
+
   def _additional_repr_info(self):
-    """Override to return addtional info to go into __repr__."""
+    """Override to return additional info to go into __repr__."""
     return {}
 
   def __repr__(self):
@@ -355,162 +460,6 @@ class FeatureConnector(object):
     pass
 
 
-class FeaturesDict(FeatureConnector):
-  """Composite `FeatureConnector`; each feature in `dict` has its own connector.
-
-  The encode/decode method of the spec feature will recursively encode/decode
-  every sub-connector given on the constructor.
-  Other features can inherit from this class and call super() in order to get
-  nested container.
-
-  Example:
-
-  For DatasetInfo:
-
-  ```
-  features = tfds.features.FeaturesDict({
-      'input': tfds.features.Image(),
-      'output': tf.int32,
-  })
-  ```
-
-  At generation time:
-
-  ```
-  for image, label in generate_examples:
-    yield {
-        'input': image,
-        'output': label
-    }
-  ```
-
-  At tf.data.Dataset() time:
-
-  ```
-  for example in tfds.load(...):
-    tf_input = example['input']
-    tf_output = example['output']
-  ```
-
-  For nested features, the FeaturesDict will internally flatten the keys for the
-  features and the conversion to tf.train.Example. Indeed, the tf.train.Example
-  proto do not support nested feature, while tf.data.Dataset does.
-  But internal transformation should be invisible to the user.
-
-  Example:
-
-  ```
-  tfds.features.FeaturesDict({
-      'input': tf.int32,
-      'target': {
-          'height': tf.int32,
-          'width': tf.int32,
-      },
-  })
-  ```
-
-  Will internally store the data as:
-
-  ```
-  {
-      'input': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
-      'target/height': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
-      'target/width': tf.io.FixedLenFeature(shape=(), dtype=tf.int32),
-  }
-  ```
-
-  """
-
-  def __init__(self, feature_dict):
-    """Initialize the features.
-
-    Args:
-      feature_dict (dict): Dictionary containing the feature connectors of a
-        example. The keys should correspond to the data dict as returned by
-        tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically
-        be converted into FeatureConnector.
-
-    Raises:
-      ValueError: If one of the given features is not recognized
-    """
-    super(FeaturesDict, self).__init__()
-    self._feature_dict = {k: to_feature(v) for k, v in feature_dict.items()}
-
-  # Dict functions.
-  # In Python 3, should inherit from collections.abc.Mapping().
-
-  def keys(self):
-    return self._feature_dict.keys()
-
-  def items(self):
-    return self._feature_dict.items()
-
-  def values(self):
-    return self._feature_dict.values()
-
-  def __getitem__(self, key):
-    """Return the feature associated with the key."""
-    return self._feature_dict[key]
-
-  def __len__(self):
-    return len(self._feature_dict)
-
-  def __iter__(self):
-    return iter(self._feature_dict)
-
-  # Feature functions
-
-  def __repr__(self):
-    """Display the feature dictionary."""
-    return '{}({})'.format(type(self).__name__, self._feature_dict)
-
-  def get_tensor_info(self):
-    """See base class for details."""
-    return {
-        feature_key: feature.get_tensor_info()
-        for feature_key, feature in self._feature_dict.items()
-    }
-
-  def get_serialized_info(self):
-    """See base class for details."""
-    return {
-        feature_key: feature.get_serialized_info()
-        for feature_key, feature in self._feature_dict.items()
-    }
-
-  def encode_example(self, example_dict):
-    """See base class for details."""
-    return {
-        k: feature.encode_example(example_value)
-        for k, (feature, example_value)
-        in utils.zip_dict(self._feature_dict, example_dict)
-    }
-
-  def decode_example(self, example_dict):
-    """See base class for details."""
-    return {
-        k: feature.decode_example(example_value)
-        for k, (feature, example_value)
-        in utils.zip_dict(self._feature_dict, example_dict)
-    }
-
-  def save_metadata(self, data_dir, feature_name=None):
-    """See base class for details."""
-    # Recursively save all child features
-    for feature_key, feature in six.iteritems(self._feature_dict):
-      if feature_name:
-        feature_key = '-'.join((feature_name, feature_key))
-      feature.save_metadata(data_dir, feature_name=feature_key)
-
-  def load_metadata(self, data_dir, feature_name=None):
-    """See base class for details."""
-    # Recursively load all child features
-    for feature_key, feature in six.iteritems(self._feature_dict):
-      if feature_name:
-        feature_key = '-'.join((feature_name, feature_key))
-      feature.load_metadata(data_dir, feature_name=feature_key)
-
-
 class Tensor(FeatureConnector):
   """`FeatureConnector` for generic data of arbitrary shape and type."""
 
@@ -535,15 +484,3 @@ class Tensor(FeatureConnector):
           example_data.dtype, np_dtype))
     utils.assert_shape_match(example_data.shape, self._shape)
     return example_data
-
-
-def to_feature(value):
-  """Convert the given value to Feature if necessary."""
-  if isinstance(value, FeatureConnector):
-    return value
-  elif utils.is_dtype(value):  # tf.int32, tf.string,...
-    return Tensor(shape=(), dtype=tf.as_dtype(value))
-  elif isinstance(value, dict):
-    return FeaturesDict(value)
-  else:
-    raise ValueError('Feature not supported: {}'.format(value))
