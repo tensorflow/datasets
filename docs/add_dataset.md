@@ -1,6 +1,6 @@
 # Adding a dataset
 
-Follow this guide to add a dataset to TFDS.
+Follow this guide to add a dataset to TFDS. Yes
 
 See our [list of datasets](datasets.md) to see if the dataset you want isn't
 already added.
