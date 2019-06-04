@@ -462,6 +462,7 @@
     "tfds.features.FeatureConnector.save_metadata": true, 
     "tfds.features.FeatureConnector.shape": true, 
     "tfds.features.FeaturesDict": false, 
+    "tfds.features.FeaturesDict.__contains__": true, 
     "tfds.features.FeaturesDict.__getitem__": true, 
     "tfds.features.FeaturesDict.__init__": true, 
     "tfds.features.FeaturesDict.__iter__": true, 
