@@ -139,7 +139,7 @@ class DatasetInfo(object):
         raise ValueError(
             "DatasetInfo.features only supports FeaturesDict or Sequence at "
             "the top-level. Got {}".format(features))
-      features._set_top_level()  # pylint: disable=protected-access
+      features.set_top_level()
     self._features = features
     self._splits = splits_lib.SplitDict()
     if supervised_keys is not None:

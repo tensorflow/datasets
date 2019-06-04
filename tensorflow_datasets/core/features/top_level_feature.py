@@ -27,6 +27,9 @@ from tensorflow_datasets.core.features import feature as feature_lib
 class TopLevelFeature(feature_lib.FeatureConnector):
   """Top-level `FeatureConnector` to manage decoding.
 
+  This `FeatureConnector` isn't meant to be used as is but should be inherited
+  instead like `tfds.features.Sequence` and `tfds.features.FeaturedDict`.
+
   Note that `FeatureConnector` which are declared as `TopLevelFeature` can be
   nested. However, only the top-level feature can be decoded.
 
@@ -39,7 +42,7 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     self.__is_top_level = False
     super(TopLevelFeature, self).__init__(*args, **kwargs)
 
-  def _set_top_level(self):
+  def set_top_level(self):
     """Indicates that the feature is top level.
 
     Internal function called by `DatasetInfo`.

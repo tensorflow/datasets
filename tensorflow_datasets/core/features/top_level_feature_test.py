@@ -118,7 +118,7 @@ class FeaturesManagerTest(testing.TestCase):
             'c': tf.int32,
         },
     })
-    f._set_top_level()
+    f.set_top_level()
 
     # Only top level can be decoded
     f.decode_example({
