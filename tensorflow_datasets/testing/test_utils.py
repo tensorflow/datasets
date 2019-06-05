@@ -319,6 +319,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 
   VERSION = utils.Version("1.0.0")
   SUPPORTED_VERSIONS = [
+      "2.0.0",
       "0.0.9",
       "0.0.8",
   ]

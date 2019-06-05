@@ -273,6 +273,12 @@ class DatasetBuilderTest(testing.TestCase):
   def test_with_supported_version(self):
     DummyDatasetWithConfigs(config="plus1", version="0.0.1")
 
+  def test_latest_experimental_version(self):
+    builder1 = DummyDatasetSharedGenerator()
+    self.assertEqual(str(builder1._version), "1.0.0")
+    builder2 = DummyDatasetSharedGenerator(version="experimental_latest")
+    self.assertEqual(str(builder2._version), "2.0.0")
+
   def test_with_unsupported_version(self):
     expected = "Dataset dummy_dataset_with_configs cannot be loaded at version"
     with self.assertRaisesWithPredicateMatch(AssertionError, expected):

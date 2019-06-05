@@ -163,6 +163,9 @@ class DatasetBuilder(object):
         `builder_config`s will have their own subdirectories and versions.
       version: `str`. Optional version at which to load the dataset. An error is
         raised if specified version cannot be satisfied. Eg: '1.2.3', '1.2.*'.
+        The special value "experimental_latest" will use the highest version,
+        even if not default. This is not recommended unless you know what you
+        are doing, as the version could be broken.
     """
     self._builder_config = self._create_builder_config(config)
     # Extract code version (VERSION or config)
@@ -193,6 +196,8 @@ class DatasetBuilder(object):
         utils.Version(v) if isinstance(v, six.string_types) else v
         for v in [canonical_version] + supported_versions
     ]
+    if requested_version == "experimental_latest":
+      return max(versions)
     for version in versions:
       if requested_version is None or version.match(requested_version):
         return version
