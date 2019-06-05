@@ -103,6 +103,10 @@ class SplitBase(object):
     raise NotImplementedError(
         "Equality is not implemented between merged/sub splits.")
 
+  def __ne__(self, other):
+    """InEquality: tfds.Split.TRAIN != 'test'."""
+    return not self.__eq__(other)
+
   def __add__(self, other):
     """Merging: tfds.Split.TRAIN + tfds.Split.TEST."""
     return _SplitMerged(self, other)
