@@ -22,6 +22,13 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.image import imagenet
 
 
+imagenet.Imagenet2012.PNG_IMAGES = ["n01440764_1.JPEG"]
+imagenet.Imagenet2012.CMYK_IMAGES = [
+    "n01440764_2.JPEG",
+    "n01440764_3.JPEG",
+]
+
+
 class Imagenet2012Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagenet.Imagenet2012
   SPLITS = {  # Expected number of examples on each split.

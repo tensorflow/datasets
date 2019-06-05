@@ -208,6 +208,10 @@ class DatasetBuilder(object):
     raise AssertionError(msg)
 
   @property
+  def version(self):
+    return self._version
+
+  @property
   def data_dir(self):
     return self._data_dir
 
