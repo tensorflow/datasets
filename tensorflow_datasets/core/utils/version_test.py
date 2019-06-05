@@ -64,7 +64,7 @@ class VersionTest(testing.TestCase):
         ValueError, 'Format should be '):
       unused_ = v < 'abc'
     with self.assertRaisesWithPredicateMatch(
-        AssertionError, ' cannot be compared to version'):
+        AssertionError, 'cannot be compared to version'):
       unused_ = v > 123
 
   def test_match(self):
@@ -114,6 +114,14 @@ class VersionTest(testing.TestCase):
     self.assertTrue(v2 >= v1)
     self.assertTrue(v3 > v1)
     self.assertTrue(v3 >= v1)
+
+  def test_experiment_default(self):
+    v = version.Version('1.2.3')
+    self.assertFalse(v.implements(version.Experiment.DUMMY))
+
+  def test_experiment_override(self):
+    v = version.Version('1.2.3', experiments={version.Experiment.DUMMY: True})
+    self.assertTrue(v.implements(version.Experiment.DUMMY))
 
 
 if __name__ == '__main__':
