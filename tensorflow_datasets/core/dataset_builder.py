@@ -823,8 +823,7 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
       generator = itertools.islice(generator, max_examples_per_split)
     generator = (self.info.features.encode_example(ex) for ex in generator)
     output_files = self._build_split_filenames(split_generator.split_info)
-    self._file_format_adapter.write_from_generator(
-        lambda: generator, output_files)
+    self._file_format_adapter.write_from_generator(generator, output_files)
 
 
 class BeamBasedBuilder(FileAdapterBuilder):

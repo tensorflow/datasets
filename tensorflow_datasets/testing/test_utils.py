@@ -296,7 +296,7 @@ def features_encode_decode(features_dict, example, as_tensor=False):
     file_adapter = file_format_adapter.TFRecordExampleAdapter(
         features_dict.get_serialized_info())
     file_adapter.write_from_generator(
-        generator_fn=lambda: [encoded_example],
+        generator=[encoded_example],
         output_files=[tmp_filename],
     )
     ds = file_adapter.dataset_from_filename(tmp_filename)

@@ -69,12 +69,11 @@ class FileFormatAdapter(object):
     del example_specs
 
   @abc.abstractmethod
-  def write_from_generator(self, generator_fn, output_files):
+  def write_from_generator(self, generator, output_files):
     """Write to files from generators_and_filenames.
 
     Args:
-      generator_fn: returns generator yielding dictionaries of feature name to
-        value.
+      generator: generator yielding dictionaries of feature name to value.
       output_files: `list<str>`, output files to write files to.
     """
     raise NotImplementedError
@@ -121,10 +120,9 @@ class TFRecordExampleAdapter(FileFormatAdapter):
         example_specs)
     self._parser = example_parser.ExampleParser(example_specs)
 
-  def write_from_generator(self, generator_fn, output_files):
-    wrapped = (
-        self._serializer.serialize_example(example)
-        for example in generator_fn())
+  def write_from_generator(self, generator, output_files):
+    wrapped = (self._serializer.serialize_example(example)
+               for example in generator)
     _write_tfrecords_from_generator(wrapped, output_files, shuffle=True)
 
   def write_from_pcollection(self, pcollection, file_path_prefix, num_shards):
