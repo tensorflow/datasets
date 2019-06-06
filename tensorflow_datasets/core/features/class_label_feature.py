@@ -76,7 +76,7 @@ class ClassLabel(feature.Tensor):
       # If names_file is given as a `txt` file for `list of strings` or a `csv` file for `list of dicts` 
       if names_file and names_file[-3:] == 'csv':
         self._is_multilabel = True
-      self.names = self.names = names or _load_names_from_file(names_file, self._is_multilabel)
+      self.names = names or _load_names_from_file(names_file, self._is_multilabel)
 
   @property
   def num_classes(self):
