@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import abc
 import functools
+import itertools
 import os
 import sys
 
@@ -841,34 +842,14 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     )
 
   def _prepare_split(self, split_generator, max_examples_per_split):
-
+    generator = self._generate_examples(**split_generator.gen_kwargs)
     if max_examples_per_split is not None:
-      logging.warn("Splits capped at %s examples max.",
-                   max_examples_per_split)
-
-    # Generate the filenames and write the example on disk
-    def make_generator_fn(**kwargs):
-      """Returns generator_fn bound to **kwargs."""
-
-      def generator_fn():
-        for i, ex in enumerate(self._generate_examples(**kwargs)):
-          # Use the DatasetInfo FeaturesDict to encode the example. This allows
-          # the user's function to simply yield raw examples from the source
-          # data, which makes reusing it easier.
-          if (max_examples_per_split and
-              i >= max_examples_per_split):
-            break
-          yield self.info.features.encode_example(ex)
-
-      return generator_fn
-
-    output_files = self._build_split_filenames(
-        split_info_list=split_generator.split_info_list,
-    )
+      logging.warn("Splits capped at %s examples max.", max_examples_per_split)
+      generator = itertools.islice(generator, max_examples_per_split)
+    generator = (self.info.features.encode_example(ex) for ex in generator)
+    output_files = self._build_split_filenames(split_generator.split_info_list)
     self._file_format_adapter.write_from_generator(
-        make_generator_fn(**split_generator.gen_kwargs),
-        output_files,
-    )
+        lambda: generator, output_files)
 
 
 class BeamBasedBuilder(FileAdapterBuilder):
