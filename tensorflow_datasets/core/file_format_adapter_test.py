@@ -25,6 +25,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
@@ -105,7 +106,7 @@ class FileFormatAdapterTest(testing.TestCase):
 class TFRecordUtilsTest(testing.SubTestCase):
 
   def test_dict_to_example(self):
-    example = file_format_adapter._dict_to_tf_example({
+    example = example_serializer._dict_to_tf_example({
         "a": 1,
         "a2": np.array(1),
         "b": ["foo", "bar"],
@@ -132,13 +133,13 @@ class TFRecordUtilsTest(testing.SubTestCase):
 
     with self.assertRaisesWithPredicateMatch(ValueError, "Received an empty"):
       # Raise error if an undefined empty value is given
-      file_format_adapter._dict_to_tf_example({
+      example_serializer._dict_to_tf_example({
           "empty": [],
       })
 
     with self.assertRaisesWithPredicateMatch(ValueError, "not support type"):
       # Raise error if an unsupported dtype is given
-      file_format_adapter._dict_to_tf_example({
+      example_serializer._dict_to_tf_example({
           "wrong_type": np.zeros(shape=(5,), dtype=np.complex64),
       })
 
@@ -315,7 +316,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
     adapter = file_format_adapter.TFRecordExampleAdapter({"wrong_field": specs})
     # Raise error if an unsupported dtype is given
     with self.assertRaisesWithPredicateMatch(raise_cls, raise_msg):
-      adapter._build_feature_specs()
+      adapter._parser._build_feature_specs()
 
   @testing.run_in_graph_and_eager_modes()
   def assertFeature(self, specs, serialized_info, tests):
@@ -324,7 +325,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
     adapter = file_format_adapter.TFRecordExampleAdapter(specs)
 
     with self._subTest("serialized_info"):
-      self.assertEqual(serialized_info, adapter._build_feature_specs())
+      self.assertEqual(serialized_info, adapter._parser._build_feature_specs())
 
     for i, test in enumerate(tests):
       with self._subTest(str(i)):
@@ -332,9 +333,9 @@ class TFRecordUtilsTest(testing.SubTestCase):
         if test.raise_cls is not None:
           with self.assertRaisesWithPredicateMatch(
               test.raise_cls, test.raise_msg):
-            adapter.serialize_example(test.value)
+            adapter._serializer.serialize_example(test.value)
           continue
-        serialized = adapter.serialize_example(test.value)
+        serialized = adapter._serializer.serialize_example(test.value)
 
         if test.expected_serialized is not None:
           example_proto = tf.train.Example()
@@ -344,7 +345,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
           )
           self.assertEqual(expected_proto, example_proto)
 
-        example = _parse_example(serialized, adapter.parse_example)
+        example = _parse_example(serialized, adapter._parser.parse_example)
 
         with self._subTest("dtype"):
           out_dtypes = utils.map_nested(lambda s: s.dtype, example)
@@ -366,7 +367,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
     file_adapter = file_format_adapter.TFRecordExampleAdapter({
         "image/encoded": features.TensorInfo(shape=(), dtype=tf.string),
     })
-    serialized_example = file_adapter.serialize_example({
+    serialized_example = file_adapter._serializer.serialize_example({
         "image/encoded": "hello world",
     })
 
@@ -382,7 +383,7 @@ class TFRecordUtilsTest(testing.SubTestCase):
 
     # New fields should have the default values
     ds = tf.data.Dataset.from_tensors(serialized_example)
-    ds = ds.map(file_adapter.parse_example)
+    ds = ds.map(file_adapter._parser.parse_example)
     example = next(iter(dataset_utils.as_numpy(ds)))
     self.assertEqual(example, {
         "image/encoded": b"hello world",
