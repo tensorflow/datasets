@@ -112,23 +112,23 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
     
   def test_dict_classes(self):
     labels = features.ClassLabel(names=[
-        {'wordnet': 'n02119789', 'class_id': 1, 'name': 'kit_fox'},
-        {'wordnet': 'n02100735', 'class_id': 2, 'name': 'English_setter'},
-        {'wordnet': 'n02110185', 'class_id': 3, 'name': 'Siberian_husky'},
+        {'wordnet': 'n02119789', 'class_id': '1', 'name': 'kit_fox'},
+        {'wordnet': 'n02100735', 'class_id': '2', 'name': 'English_setter'},
+        {'wordnet': 'n02110185', 'class_id': '3', 'name': 'Siberian_husky'},
     ])
     self.assertEqual(3, labels.num_classes)
     self.assertEqual(labels.names, [
-        {'wordnet': 'n02119789', 'class_id': 1, 'name': 'kit_fox'},
-        {'wordnet': 'n02100735', 'class_id': 2, 'name': 'English_setter'},
-        {'wordnet': 'n02110185', 'class_id': 3, 'name': 'Siberian_husky'},
+        {'wordnet': 'n02119789', 'class_id': '1', 'name': 'kit_fox'},
+        {'wordnet': 'n02100735', 'class_id': '2', 'name': 'English_setter'},
+        {'wordnet': 'n02110185', 'class_id': '3', 'name': 'Siberian_husky'},
     ])
 
-    self.assertEqual(labels.str2int({'wordnet': 'n02119789', 'class_id': 1, 'name': 'kit_fox'}), 0)
-    self.assertEqual(labels.str2int({'wordnet': 'n02100735', 'class_id': 2, 'name': 'English_setter'}), 1)
-    self.assertEqual(labels.str2int({'wordnet': 'n02110185', 'class_id': 3, 'name': 'Siberian_husky'}), 2)
-    self.assertEqual(labels.int2str(0), {'wordnet': 'n02119789', 'class_id': 1, 'name': 'kit_fox'})
-    self.assertEqual(labels.int2str(1), {'wordnet': 'n02100735', 'class_id': 2, 'name': 'English_setter'})
-    self.assertEqual(labels.int2str(2), {'wordnet': 'n02110185', 'class_id': 3, 'name': 'Siberian_husky'})
+    self.assertEqual(labels.str2int({'wordnet': 'n02119789', 'class_id': '1', 'name': 'kit_fox'}), 0)
+    self.assertEqual(labels.str2int({'wordnet': 'n02100735', 'class_id': '2', 'name': 'English_setter'}), 1)
+    self.assertEqual(labels.str2int({'wordnet': 'n02110185', 'class_id': '3', 'name': 'Siberian_husky'}), 2)
+    self.assertEqual(labels.int2str(0), {'wordnet': 'n02119789', 'class_id': '1', 'name': 'kit_fox'})
+    self.assertEqual(labels.int2str(1), {'wordnet': 'n02100735', 'class_id': '2', 'name': 'English_setter'})
+    self.assertEqual(labels.int2str(2), {'wordnet': 'n02110185', 'class_id': '3', 'name': 'Siberian_husky'})
 
   def test_save_load(self):
     labels1 = features.ClassLabel(names=['label3', 'label1', 'label2'])
@@ -152,24 +152,24 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
     
   def test_save_load_dict(self):
     labels1 = features.ClassLabel(names=[
-        {'wordnet': 'n02119789', 'class_id': 1, 'name': 'kit_fox'},
-        {'wordnet': 'n02100735', 'class_id': 2, 'name': 'English_setter'},
-        {'wordnet': 'n02110185', 'class_id': 3, 'name': 'Siberian_husky'},
+        {'wordnet': 'n02119789', 'class_id': '1', 'name': 'kit_fox'},
+        {'wordnet': 'n02100735', 'class_id': '2', 'name': 'English_setter'},
+        {'wordnet': 'n02110185', 'class_id': '3', 'name': 'Siberian_husky'},
     ])
     labels2 = features.ClassLabel(num_classes=None)
 
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       labels1.save_metadata(tmp_dir, 'test-labels-dict')
-      # Setting labels2._is_multilabel = True because by default it is False and cannot load 'json' file
+      # Setting labels2._is_multilabel = True because by default it is False and cannot load 'csv' file
       labels2._is_multilabel = True
       labels2.load_metadata(tmp_dir, 'test-labels-dict')
 
     # labels2 should have been copied from label1
     self.assertEqual(3, labels2.num_classes)
     self.assertEqual(labels2.names, [
-        {'wordnet': 'n02119789', 'class_id': 1, 'name': 'kit_fox'},
-        {'wordnet': 'n02100735', 'class_id': 2, 'name': 'English_setter'},
-        {'wordnet': 'n02110185', 'class_id': 3, 'name': 'Siberian_husky'},
+        {'wordnet': 'n02119789', 'class_id': '1', 'name': 'kit_fox'},
+        {'wordnet': 'n02100735', 'class_id': '2', 'name': 'English_setter'},
+        {'wordnet': 'n02110185', 'class_id': '3', 'name': 'Siberian_husky'},
     ])
 
   def test_names(self):
