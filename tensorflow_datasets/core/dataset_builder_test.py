@@ -69,9 +69,15 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
     del dl_manager
     return [
         splits_lib.SplitGenerator(
-            name=[splits_lib.Split.TRAIN, splits_lib.Split.TEST],
-            num_shards=[2, 1],
-        )
+            name=splits_lib.Split.TRAIN,
+            num_shards=2,
+            gen_kwargs={"range_": range(20)},
+        ),
+        splits_lib.SplitGenerator(
+            name=splits_lib.Split.TEST,
+            num_shards=1,
+            gen_kwargs={"range_": range(20, 30)},
+        ),
     ]
 
   def _info(self):
@@ -82,8 +88,8 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
         supervised_keys=("x", "x"),
     )
 
-  def _generate_examples(self):
-    for i in range(30):
+  def _generate_examples(self, range_):
+    for i in range_:
       if self.builder_config:
         i += self.builder_config.increment
       yield {"x": i}
@@ -101,44 +107,6 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
 
 
 class DatasetBuilderTest(testing.TestCase):
-
-  @testing.run_in_graph_and_eager_modes()
-  def test_shared_generator(self):
-    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
-      builder = DummyDatasetSharedGenerator(data_dir=tmp_dir)
-      builder.download_and_prepare()
-
-      written_filepaths = [
-          os.path.join(builder._data_dir, fname)
-          for fname in tf.io.gfile.listdir(builder._data_dir)
-      ]
-      # The data_dir contains the cached directory by default
-      expected_filepaths = builder._build_split_filenames(
-          split_info_list=builder.info.splits.values())
-      expected_filepaths.append(
-          os.path.join(builder._data_dir, "dataset_info.json"))
-      self.assertEqual(sorted(expected_filepaths), sorted(written_filepaths))
-
-      splits_list = [
-          splits_lib.Split.TRAIN, splits_lib.Split.TEST
-      ]
-      train_data, test_data = [
-          [el["x"] for el in
-           dataset_utils.as_numpy(builder.as_dataset(split=split))]
-          for split in splits_list
-      ]
-
-      self.assertEqual(20, len(train_data))
-      self.assertEqual(10, len(test_data))
-      self.assertEqual(list(range(30)), sorted(train_data + test_data))
-
-      # Builder's info should also have the above information.
-      self.assertTrue(builder.info.initialized)
-      self.assertEqual(20,
-                       builder.info.splits[splits_lib.Split.TRAIN].num_examples)
-      self.assertEqual(10,
-                       builder.info.splits[splits_lib.Split.TEST].num_examples)
-      self.assertEqual(30, builder.info.splits.total_num_examples)
 
   @testing.run_in_graph_and_eager_modes()
   def test_load(self):
@@ -164,7 +132,7 @@ class DatasetBuilderTest(testing.TestCase):
 
       # Ensure determinism. If this test fail, this mean that numpy random
       # module isn't always determinist (maybe between version, architecture,
-      # ...), and so our datasets aren't guarantee either
+      # ...), and so our datasets aren't guaranteed either.
       l = list(range(20))
       np.random.RandomState(42).shuffle(l)
       self.assertEqual(l, [
@@ -175,8 +143,8 @@ class DatasetBuilderTest(testing.TestCase):
       # deterministically generated.
       self.assertEqual(
           [e["x"] for e in ds_values],
-          [24, 1, 3, 4, 15, 25, 0, 16, 21, 10, 6, 13, 27, 22, 12, 28, 9, 19,
-           18, 7],
+          [16, 1, 2, 3, 10, 17, 0, 11, 14, 7, 4, 9, 18, 15, 8, 19, 6, 13, 12,
+           5],
       )
 
   @testing.run_in_graph_and_eager_modes()

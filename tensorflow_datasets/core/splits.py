@@ -25,7 +25,6 @@ import operator
 
 import six
 from six.moves import range  # pylint: disable=redefined-builtin
-from six.moves import zip  # pylint: disable=redefined-builtin
 
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import utils
@@ -75,11 +74,6 @@ class SplitBase(object):
 
     3) The `SplitReadInstruction` is then used in the `tf.data.Dataset` pipeline
        to define which files to read and how to skip examples within file.
-
-    ```
-    files_to_read = read_instruction.split_info_list
-    slice_per_file = read_instruction.slice_list
-    ```
 
   """
   # pylint: enable=line-too-long
@@ -597,22 +591,13 @@ class SplitGenerator(object):
     """Constructs a `SplitGenerator`.
 
     Args:
-      name: `str` or `list<str>`, name of the Split for which the generator will
-        create the examples. If a list is given, the generator examples will be
-        distributed among the splits proportionally to the num_shards.
-      num_shards: `int` or `list<int>`, number of shards between which the
-        generated examples will be written. If name is a list, then num_shards
-        should be a list with the same number of elements.
+      name: `str`, name of the Split for which the generator will
+        create the examples.
+      num_shards: `int`, number of shards between which the generated examples
+        will be written.
       gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method
         of the builder.
     """
+    self.name = name
     self.gen_kwargs = gen_kwargs or {}
-
-    if isinstance(name, list):
-      split_zip = zip(name, num_shards)
-    else:
-      split_zip = [(name, num_shards)]
-
-    self.split_info_list = [
-        SplitInfo(name=str(n), num_shards=k) for n, k in split_zip
-    ]
+    self.split_info = SplitInfo(name=str(name), num_shards=num_shards)

@@ -646,25 +646,6 @@ class FileAdapterBuilder(DatasetBuilder):
     fraction of the `TRAIN` data for evaluation as you iterate on your model
     so as not to overfit to the `TEST` data.
 
-    You can use a single generator shared between splits by providing list
-    instead of values for `tfds.SplitGenerator` (this is the case if the
-    underlying dataset does not have pre-defined data splits):
-
-      return [tfds.SplitGenerator(
-          name=[tfds.Split.TRAIN, tfds.Split.VALIDATION],
-          num_shards=[10, 3],
-      )]
-
-    This will call `_generate_examples()` once but will automatically distribute
-    the examples between train and validation set.
-    The proportion of the examples that will end up in each split is defined
-    by the relative number of shards each `ShardFiles` object specifies. In
-    the previous case, the train split would contains 10/13 of the examples,
-    while the validation split would contain 3/13.
-
-    Warning: Each shard shouldn't be bigger than 4GiB as shards are loaded
-    entirely in memory during shuffling
-
     For downloads and extractions, use the given `download_manager`.
     Note that the `DownloadManager` caches downloads, so it is fine to have each
     generator attempt to download the source data.
@@ -699,16 +680,15 @@ class FileAdapterBuilder(DatasetBuilder):
     split_dict = splits_lib.SplitDict()
     for split_generator in self._split_generators(dl_manager):
       # Keep track of all split_info
-      for s in split_generator.split_info_list:
-        if splits_lib.Split.ALL == s.name:
-          raise ValueError(
-              "tfds.Split.ALL is a special split keyword corresponding to the "
-              "union of all splits, so cannot be used as key in "
-              "._split_generator()."
-          )
+      if splits_lib.Split.ALL == split_generator.split_info.name:
+        raise ValueError(
+            "tfds.Split.ALL is a special split keyword corresponding to the "
+            "union of all splits, so cannot be used as key in "
+            "._split_generator()."
+        )
 
-        logging.info("Generating split %s", s.name)
-        split_dict.add(s)
+      logging.info("Generating split %s", split_generator.split_info.name)
+      split_dict.add(split_generator.split_info)
 
       # Prepare split will record examples associated to the split
       self._prepare_split(split_generator, **prepare_split_kwargs)
@@ -747,8 +727,7 @@ class FileAdapterBuilder(DatasetBuilder):
 
       # Compute filenames from the given split
       filepaths = list(sorted(self._build_split_filenames(
-          split_info_list=[sliced_split_info.split_info],
-      )))
+          sliced_split_info.split_info)))
 
       # Compute the offsets
       if sliced_split_info.split_info.num_examples:
@@ -773,31 +752,27 @@ class FileAdapterBuilder(DatasetBuilder):
         })
     return instruction_dicts
 
-  def _build_split_filenames(self, split_info_list):
+  def _build_split_filenames(self, split_info):
     """Construct the split filenames associated with the split info.
 
     The filenames correspond to the pre-processed datasets files present in
     the root directory of the dataset.
 
     Args:
-      split_info_list: (list[SplitInfo]) List of split from which generate the
-        filenames
+      split_info: (SplitInfo) needed split.
 
     Returns:
       filenames: (list[str]) The list of filenames path corresponding to the
         split info object
     """
 
-    filenames = []
-    for split_info in split_info_list:
-      filenames.extend(naming.filepaths_for_dataset_split(
-          dataset_name=self.name,
-          split=split_info.name,
-          num_shards=split_info.num_shards,
-          data_dir=self._data_dir,
-          filetype_suffix=self._file_format_adapter.filetype_suffix,
-      ))
-    return filenames
+    return naming.filepaths_for_dataset_split(
+        dataset_name=self.name,
+        split=split_info.name,
+        num_shards=split_info.num_shards,
+        data_dir=self._data_dir,
+        filetype_suffix=self._file_format_adapter.filetype_suffix,
+        )
 
 
 class GeneratorBasedBuilder(FileAdapterBuilder):
@@ -847,7 +822,7 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
       logging.warn("Splits capped at %s examples max.", max_examples_per_split)
       generator = itertools.islice(generator, max_examples_per_split)
     generator = (self.info.features.encode_example(ex) for ex in generator)
-    output_files = self._build_split_filenames(split_generator.split_info_list)
+    output_files = self._build_split_filenames(split_generator.split_info)
     self._file_format_adapter.write_from_generator(
         lambda: generator, output_files)
 
@@ -933,14 +908,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)
 
-    if len(split_generator.split_info_list) > 1:
-      # Could support Shared-split PCollection, either with same behavior as
-      # GeneratorBasedBuilder, or by having each value be a tuple
-      # ('split_name', example_value) ? Or should we return three branched
-      # PCollections ? Should ask for user feedback
-      raise NotImplementedError("Shared-split PCollections not supported yet.")
-
-    split_info = split_generator.split_info_list[0]
+    split_info = split_generator.split_info
     output_prefix = naming.filename_prefix_for_split(
         self.name, split_info.name)
     output_prefix = os.path.join(self._data_dir, output_prefix)

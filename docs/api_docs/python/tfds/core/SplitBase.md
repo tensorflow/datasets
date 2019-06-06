@@ -45,7 +45,7 @@ There are three parts to the composition:
      to define which files to read and how to skip examples within file.
 
   ```
-  files_to_read = read_instruction.split_info_list
+  files_to_read = read_instruction.split_info
   slice_per_file = read_instruction.slice_list
   ```
 

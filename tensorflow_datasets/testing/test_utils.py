@@ -335,13 +335,19 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [splits.SplitGenerator(
-        name=[splits.Split.TRAIN, splits.Split.TEST],
-        num_shards=[2, 1],
-    )]
+    return [
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            num_shards=2,
+            gen_kwargs={"range_": range(20)}),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            num_shards=1,
+            gen_kwargs={"range_": range(20, 30)}),
+    ]
 
-  def _generate_examples(self):
-    for i in range(30):
+  def _generate_examples(self, range_):
+    for i in range_:
       yield {"x": i}
 
 

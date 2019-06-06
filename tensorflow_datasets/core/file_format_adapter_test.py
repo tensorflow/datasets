@@ -40,9 +40,13 @@ class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     return [
         splits.SplitGenerator(
-            name=[splits.Split.TRAIN, splits.Split.VALIDATION],
-            num_shards=[2, 1],
-            gen_kwargs={"range_": range(30)}),
+            name=splits.Split.TRAIN,
+            num_shards=2,
+            gen_kwargs={"range_": range(20)}),
+        splits.SplitGenerator(
+            name=splits.Split.VALIDATION,
+            num_shards=1,
+            gen_kwargs={"range_": range(20, 30)}),
         splits.SplitGenerator(
             name=splits.Split.TEST,
             num_shards=1,
