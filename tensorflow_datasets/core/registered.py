@@ -176,7 +176,7 @@ def builder(name, **builder_init_kwargs):
 def load(name,
          split=None,
          data_dir=None,
-         batch_size=1,
+         batch_size=None,
          download=True,
          as_supervised=False,
          with_info=False,

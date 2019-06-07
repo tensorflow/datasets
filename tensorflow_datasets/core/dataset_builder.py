@@ -308,7 +308,7 @@ class DatasetBuilder(object):
   @api_utils.disallow_positional_args
   def as_dataset(self,
                  split=None,
-                 batch_size=1,
+                 batch_size=None,
                  shuffle_files=None,
                  as_supervised=False):
     """Constructs a `tf.data.Dataset`.
@@ -376,7 +376,7 @@ class DatasetBuilder(object):
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
     dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
-    if batch_size > 1:
+    if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
       padded_shapes = self.info.features.shape
       dataset = dataset.padded_batch(batch_size, padded_shapes)
