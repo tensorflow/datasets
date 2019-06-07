@@ -4,6 +4,7 @@
 <meta itemprop="property" content="builder_config"/>
 <meta itemprop="property" content="data_dir"/>
 <meta itemprop="property" content="info"/>
+<meta itemprop="property" content="version"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
@@ -52,7 +53,9 @@ Callers must pass arguments as keyword arguments.
     subdirectories and versions.
 *   <b>`version`</b>: `str`. Optional version at which to load the dataset. An
     error is raised if specified version cannot be satisfied. Eg: '1.2.3',
-    '1.2.*'.
+    '1.2.*'. The special value "experimental_latest" will use the highest
+    version, even if not default. This is not recommended unless you know what
+    you are doing, as the version could be broken.
 
 ## Properties
 
@@ -65,6 +68,8 @@ Callers must pass arguments as keyword arguments.
 <h3 id="info"><code>info</code></h3>
 
 <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> for this builder.
+
+<h3 id="version"><code>version</code></h3>
 
 ## Methods
 

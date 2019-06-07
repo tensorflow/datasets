@@ -4,6 +4,7 @@
 <meta itemprop="property" content="__add__"/>
 <meta itemprop="property" content="__eq__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="__ne__"/>
 <meta itemprop="property" content="get_read_instruction"/>
 <meta itemprop="property" content="subsplit"/>
 </div>
@@ -87,6 +88,14 @@ __eq__(other)
 ```
 
 Equality: tfds.Split.TRAIN == 'train'.
+
+<h3 id="__ne__"><code>__ne__</code></h3>
+
+```python
+__ne__(other)
+```
+
+InEquality: tfds.Split.TRAIN != 'test'.
 
 <h3 id="get_read_instruction"><code>get_read_instruction</code></h3>
 

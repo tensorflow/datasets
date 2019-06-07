@@ -4,6 +4,7 @@
 <meta itemprop="property" content="builder_config"/>
 <meta itemprop="property" content="data_dir"/>
 <meta itemprop="property" content="info"/>
+<meta itemprop="property" content="version"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
@@ -51,6 +52,8 @@ __init__(
 <h3 id="info"><code>info</code></h3>
 
 <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> for this builder.
+
+<h3 id="version"><code>version</code></h3>
 
 ## Methods
 
