@@ -3,6 +3,7 @@
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="shape"/>
+<meta itemprop="property" content="__contains__"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="__iter__"/>
@@ -24,11 +25,8 @@
 
 Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-
-
-Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
+Defined in
+[`core/features/features_dict.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -126,6 +124,12 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
 
+<h3 id="__contains__"><code>__contains__</code></h3>
+
+```python
+__contains__(k)
+```
+
 <h3 id="__getitem__"><code>__getitem__</code></h3>
 
 ``` python
@@ -149,10 +153,18 @@ __len__()
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 ```python
-decode_example(example_dict)
+decode_example(serialized_example)
 ```
 
-See base class for details.
+Decode the serialize examples.
+
+#### Args:
+
+*   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+
+#### Returns:
+
+*   <b>`example`</b>: Nested `dict` containing the decoded nested examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 

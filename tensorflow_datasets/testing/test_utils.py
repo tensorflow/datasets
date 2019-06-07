@@ -222,6 +222,8 @@ class FeatureExpectationsTestCase(SubTestCase):
 
     # Create the feature dict
     fdict = features.FeaturesDict({"inner": feature})
+    fdict._set_top_level()  # pylint: disable=protected-access
+
     for i, test in enumerate(tests):
       with self._subTest(str(i)):
         self.assertFeatureTest(
@@ -294,7 +296,7 @@ def features_encode_decode(features_dict, example, as_tensor=False):
     file_adapter = file_format_adapter.TFRecordExampleAdapter(
         features_dict.get_serialized_info())
     file_adapter.write_from_generator(
-        generator_fn=lambda: [encoded_example],
+        generator=[encoded_example],
         output_files=[tmp_filename],
     )
     ds = file_adapter.dataset_from_filename(tmp_filename)
@@ -317,6 +319,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 
   VERSION = utils.Version("1.0.0")
   SUPPORTED_VERSIONS = [
+      "2.0.0",
       "0.0.9",
       "0.0.8",
   ]
@@ -332,13 +335,19 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [splits.SplitGenerator(
-        name=[splits.Split.TRAIN, splits.Split.TEST],
-        num_shards=[2, 1],
-    )]
+    return [
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            num_shards=2,
+            gen_kwargs={"range_": range(20)}),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            num_shards=1,
+            gen_kwargs={"range_": range(20, 30)}),
+    ]
 
-  def _generate_examples(self):
-    for i in range(30):
+  def _generate_examples(self, range_):
+    for i in range_:
       yield {"x": i}
 
 

@@ -41,6 +41,7 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'cityhash',
     'future',
     'numpy',
     'promise',
