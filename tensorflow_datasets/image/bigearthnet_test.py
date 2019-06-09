@@ -28,6 +28,11 @@ class BigearthnetTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 1,
   }
+  DL_EXTRACT_RESULT = {
+      "data": "",
+      "snow_ids": "patches_with_seasonal_snow.csv",
+      "clouds_ids": "patches_with_cloud_and_shadow.csv",
+  }
 
 
 if __name__ == "__main__":

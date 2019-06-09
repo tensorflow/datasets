@@ -51,6 +51,15 @@ image patches. Each image patch was annotated by the multiple land-cover classes
 (i.e., multi-labels) that were provided from the CORINE Land Cover database of
 the year 2018 (CLC 2018).
 
+The full dataset (`all`) consists of 12 Sentinel-2 channels.
+Alternatively, one can select the `rgb` subset, which contains only the optical
+frequency bands of Sentinel-2, rescaled and encoded as JPEG.
+Subset `all_extended` contains two additional binary features, `clouds` and
+`snow`, which mark if the given example is dominated by clouds or cloud shadow
+or by seasonal snow.
+Subset `all_clean` is similar to `all`, but the `clouds` and `snow` examples are
+filtered out.
+
 Bands and pixel resolution in meters:
 B01: Coastal aerosol; 60m
 B02: Blue; 10m
@@ -89,10 +98,12 @@ _LABELS = [
     'Transitional woodland/shrub', 'Vineyards', 'Water bodies', 'Water courses'
 ]
 
-_DATA_OPTIONS = ['rgb', 'all']
+_DATA_OPTIONS = ['rgb', 'all', 'all_extended', 'all_clean']
 
 _ZIP_FILE = 'http://bigearth.net/downloads/BigEarthNet-v1.0.tar.gz'
 _ZIP_SUBIDR = 'BigEarthNet-v1.0'
+_SNOW_COVER_IDS_ILE = 'http://bigearth.net/static/documents/patches_with_seasonal_snow.csv'
+_CLOUDS_SHADOW_IDS_FILE = 'http://bigearth.net/static/documents/patches_with_cloud_and_shadow.csv'
 
 # To clip and rescale the RGB channels for the JPEG images visualizatoin.
 # This is not the maximal value.
@@ -133,6 +144,16 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
           name='all',
           version='0.0.2',
           description='13 Sentinel-2 channels'),
+      BigearthnetConfig(
+          selection='all_extended',
+          name='all_extended',
+          version='0.0.2',
+          description='13 Sentinel-2 channels with snow and cloud information'),
+      BigearthnetConfig(
+          selection='all_clean',
+          name='all_clean',
+          version='0.0.2',
+          description='13 Sentinel-2 channels excluding snow and cloud patches')
   ]
 
   def _info(self):
@@ -147,52 +168,47 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
         'projection': tfds.features.Text(),
         'tile_source': tfds.features.Text(),
     })
+    all_image_channels_dict = {
+        'B01': tfds.features.Tensor(shape=[20, 20], dtype=tf.float32),
+        'B02': tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
+        'B03': tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
+        'B04': tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
+        'B05': tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+        'B06': tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+        'B07': tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+        'B08': tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
+        'B09': tfds.features.Tensor(shape=[20, 20], dtype=tf.float32),
+        'B11': tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+        'B12': tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+        'B8A': tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
+    }
+    features_dict = {
+        'labels':
+            tfds.features.Sequence(tfds.features.ClassLabel(names=_LABELS)),
+        'filename':
+            tfds.features.Text(),
+        'metadata':
+            metadata_dict,
+    }
+
     if self.builder_config.selection == 'rgb':
-      features = tfds.features.FeaturesDict({
-          'image':
-              tfds.features.Image(shape=[120, 120, 3]),
-          'labels':
-              tfds.features.Sequence(tfds.features.ClassLabel(names=_LABELS)),
-          'filename':
-              tfds.features.Text(),
-          'metadata':
-              metadata_dict,
-      })
+      features_dict.update({'image': tfds.features.Image(shape=[120, 120, 3])})
       supervised_keys = ('image', 'labels')
     elif self.builder_config.selection == 'all':
-      features = tfds.features.FeaturesDict({
-          'B01':
-              tfds.features.Tensor(shape=[20, 20], dtype=tf.float32),
-          'B02':
-              tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
-          'B03':
-              tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
-          'B04':
-              tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
-          'B05':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
-          'B06':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
-          'B07':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
-          'B08':
-              tfds.features.Tensor(shape=[120, 120], dtype=tf.float32),
-          'B09':
-              tfds.features.Tensor(shape=[20, 20], dtype=tf.float32),
-          'B11':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
-          'B12':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
-          'B8A':
-              tfds.features.Tensor(shape=[60, 60], dtype=tf.float32),
-          'labels':
-              tfds.features.Sequence(tfds.features.ClassLabel(names=_LABELS)),
-          'filename':
-              tfds.features.Text(),
-          'metadata':
-              metadata_dict,
+      features_dict.update(all_image_channels_dict)
+      supervised_keys = None
+    elif self.builder_config.selection == 'all_extended':
+      features_dict.update(all_image_channels_dict)
+      features_dict.update({
+          'snow': tfds.features.ClassLabel(num_classes=2),
+          'clouds': tfds.features.ClassLabel(num_classes=2),
       })
       supervised_keys = None
+    elif self.builder_config.selection == 'all_clean':
+      features_dict.update(all_image_channels_dict)
+      supervised_keys = None
+
+    features = tfds.features.FeaturesDict(features_dict)
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -205,8 +221,12 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract(_ZIP_FILE)
-    path = os.path.join(path, _ZIP_SUBIDR)
+    paths = dl_manager.download_and_extract({
+        'data': _ZIP_FILE,
+        'snow_ids': _SNOW_COVER_IDS_ILE,
+        'clouds_ids': _CLOUDS_SHADOW_IDS_FILE
+    })
+    path = os.path.join(paths['data'], _ZIP_SUBIDR)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -214,22 +234,33 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
             gen_kwargs={
                 'path': path,
                 'selection': self.builder_config.selection,
+                'snow_ids_file': paths['snow_ids'],
+                'clouds_ids_file': paths['clouds_ids'],
             },
         ),
     ]
 
-  def _build_pcollection(self, pipeline, path, selection):
+  def _build_pcollection(self, pipeline, path, selection, snow_ids_file,
+                         clouds_ids_file):
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
+    snow_ids = _read_ids_from_file(snow_ids_file)
+    clouds_ids = _read_ids_from_file(clouds_ids_file)
 
     def _process_example(subdir):
-      return _read_chip(os.path.join(path, subdir), selection)
+      return _read_chip(
+          os.path.join(path, subdir), selection, snow_ids, clouds_ids)
 
+    if selection == 'all_clean':
+      invalid_set = snow_ids | clouds_ids
+      return (pipeline | beam.Create(tf.io.gfile.listdir(path))
+              | beam.Filter(lambda x: x not in invalid_set)
+              | beam.Map(_process_example))
     return (pipeline | beam.Create(tf.io.gfile.listdir(path))
             | beam.Map(_process_example))
 
 
-def _read_chip(path, selection):
+def _read_chip(path, selection, snow_ids, cloud_ids):
   """Reads content of a single classification chip."""
   d = {'filename': os.path.basename(path)}
   for filename in tf.io.gfile.glob(path + '/*'):
@@ -246,7 +277,16 @@ def _read_chip(path, selection):
       raise ValueError('Unexpected file: %s' % filename)
   if selection == 'rgb':
     d['image'] = _create_rgb_image(d)
+  elif selection == 'all_extended':
+    d['snow'] = d['filename'] in snow_ids
+    d['clouds'] = d['filename'] in cloud_ids
   return d
+
+
+def _read_ids_from_file(local_path):
+  """Reads file and returns set of IDs."""
+  with tf.io.gfile.GFile(local_path, 'r') as fp:
+    return set([x.strip() for x in fp.readlines()])
 
 
 def _create_rgb_image(d):
