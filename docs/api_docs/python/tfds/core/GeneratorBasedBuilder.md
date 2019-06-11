@@ -87,7 +87,7 @@ Callers must pass arguments as keyword arguments.
 ```python
 as_dataset(
     split=None,
-    batch_size=1,
+    batch_size=None,
     shuffle_files=None,
     as_supervised=False
 )
@@ -104,10 +104,10 @@ Callers must pass arguments as keyword arguments.
     which subset(s) of the data to read. If None (default), returns all splits
     in a dict `<key: tfds.Split, value: tf.data.Dataset>`.
 *   <b>`batch_size`</b>: `int`, batch size. Note that variable-length features
-    will be 0-padded if `batch_size > 1`. Users that want more custom behavior
-    should use `batch_size=1` and use the `tf.data` API to construct a custom
-    pipeline. If `batch_size == -1`, will return feature dictionaries of the
-    whole dataset with `tf.Tensor`s instead of a `tf.data.Dataset`.
+    will be 0-padded if `batch_size` is set. Users that want more custom
+    behavior should use `batch_size=None` and use the `tf.data` API to construct
+    a custom pipeline. If `batch_size == -1`, will return feature dictionaries
+    of the whole dataset with `tf.Tensor`s instead of a `tf.data.Dataset`.
 *   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
     to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 *   <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
