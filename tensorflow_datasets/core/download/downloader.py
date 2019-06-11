@@ -24,10 +24,11 @@ import hashlib
 import io
 import os
 import re
+import ssl
 import concurrent.futures
 import promise
 import requests
-
+from requests.utils import extract_zipped_paths
 from six.moves import urllib
 
 import tensorflow as tf
@@ -148,6 +149,14 @@ class _Downloader(object):
         'https': os.environ.get('TFDS_HTTPS_PROXY', None),
         'ftp': os.environ.get('TFDS_FTP_PROXY', None)
     }
+    CA_BUNDLE = os.environ.get('TFDS_CA_BUNDLE', None)
+    if CA_BUNDLE:
+      CA_BUNDLE = extract_zipped_paths(CA_BUNDLE)
+    CA_VERIFY = {
+        'urllib':  ssl._create_unverified_context() if CA_BUNDLE is None 
+                   else ssl.create_default_context(capath=CA_BUNDLE),
+        'requests': False if CA_BUNDLE is None else CA_BUNDLE
+    }
     if kaggle.KaggleFile.is_kaggle_url(url):
       if proxies['http']:
         os.environ['KAGGLE_PROXY'] = proxies['http']
@@ -163,6 +172,7 @@ class _Downloader(object):
 
     session = requests.Session()
     session.proxies = proxies
+    session.verify = CA_VERIFY['requests']
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
     use_urllib = url.startswith('ftp')
@@ -172,7 +182,7 @@ class _Downloader(object):
         opener = urllib.request.build_opener(proxy)
         urllib.request.install_opener(opener)   # pylint: disable=too-many-function-args
       request = urllib.request.Request(url)
-      response = urllib.request.urlopen(request)
+      response = urllib.request.urlopen(request, context=CA_VERIFY['urllib'])
     else:
       response = session.get(url, stream=True)
       if response.status_code != 200:
