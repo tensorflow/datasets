@@ -19,6 +19,7 @@ from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
+from tensorflow_datasets.image.cbis_ddsm import CuratedBreastImagingDDSM
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
 from tensorflow_datasets.image.chexpert import Chexpert
