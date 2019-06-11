@@ -153,8 +153,8 @@ class _Downloader(object):
     if CA_BUNDLE:
       CA_BUNDLE = extract_zipped_paths(CA_BUNDLE)
     CA_VERIFY = {
-        'urllib':  ssl._create_unverified_context() if CA_BUNDLE is None 
-                   else ssl.create_default_context(capath=CA_BUNDLE),
+        'urllib': ssl._create_unverified_context() if CA_BUNDLE is None
+        else ssl.create_default_context(capath=CA_BUNDLE),
         'requests': False if CA_BUNDLE is None else CA_BUNDLE
     }
     if kaggle.KaggleFile.is_kaggle_url(url):
