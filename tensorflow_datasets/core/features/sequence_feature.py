@@ -42,11 +42,13 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   Example:
   At construction time:
+
   ```
   tfds.features.Sequence(tfds.features.Image(), length=NB_FRAME)
   ```
 
   or:
+
   ```
   tfds.features.Sequence({
       'frame': tfds.features.Image(shape=(64, 64, 3))
@@ -55,6 +57,7 @@ class Sequence(top_level_feature.TopLevelFeature):
   ```
 
   During data generation:
+
   ```
   yield {
       'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
@@ -63,6 +66,7 @@ class Sequence(top_level_feature.TopLevelFeature):
   ```
 
   Tensor returned by `.as_dataset()`:
+
   ```
   {
       'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
