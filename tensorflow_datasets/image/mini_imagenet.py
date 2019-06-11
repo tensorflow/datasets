@@ -53,109 +53,109 @@ _NUM_CLASSES_TEST = 20
 
 
 class MiniImagenet(tfds.core.GeneratorBasedBuilder):
-    """mini_imagenet: a modified version of the ILSVRC-12 dataset."""
+  """mini_imagenet: a modified version of the ILSVRC-12 dataset."""
 
-    VERSION = tfds.core.Version("1.0.2")
+  VERSION = tfds.core.Version("1.0.2")
 
-    def _info(self):
-        return tfds.core.DatasetInfo(
-            builder=self,
-            description=_MINI_IMAGENET_DESCRIPTION,
-            features=tfds.features.FeaturesDict({
-                "image": tfds.features.Image(),
-                "label": tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
-            }),
-            supervised_keys=("image", "label"),
-            urls=[_MINI_IMAGENET_URL_HOME],
-            citation=_MINI_IMAGENET_CITATION,
-        )
+  def _info(self):
+    return tfds.core.DatasetInfo(
+      builder=self,
+      description=_MINI_IMAGENET_DESCRIPTION,
+      features=tfds.features.FeaturesDict({
+        "image": tfds.features.Image(),
+        "label": tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
+      }),
+      supervised_keys=("image", "label"),
+      urls=[_MINI_IMAGENET_URL_HOME],
+      citation=_MINI_IMAGENET_CITATION,
+    )
 
-    def _split_generators(self, dl_manager):
-        """Downloads the data and defines the split."""
+  def _split_generators(self, dl_manager):
+    """Downloads the data and defines the split."""
 
-        extracted_path = dl_manager.download_and_extract(
-            _MINI_IMAGENET_URL_DOWNLOAD)
+    extracted_path = dl_manager.download_and_extract(
+    _MINI_IMAGENET_URL_DOWNLOAD)
 
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                num_shards=1,
-                gen_kwargs={
-                    "idx_split": 0,
-                    "path_data": os.path.join(extracted_path,
-                                              "mini-imagenet-cache-train.pkl"),
-                }
-            ),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.VALIDATION,
-                num_shards=1,
-                gen_kwargs={
-                    "idx_split": 1,
-                    "path_data": os.path.join(extracted_path,
-                                              "mini-imagenet-cache-val.pkl"),
-                }
-            ),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TEST,
-                num_shards=1,
-                gen_kwargs={
-                    "idx_split": 2,
-                    "path_data": os.path.join(extracted_path,
-                                              "mini-imagenet-cache-test.pkl"),
-                }
-            ),
-        ]
+    return [
+        tfds.core.SplitGenerator(
+          name=tfds.Split.TRAIN,
+          num_shards=1,
+          gen_kwargs={
+            "idx_split": 0,
+            "path_data": os.path.join(extracted_path,
+                                      "mini-imagenet-cache-train.pkl"),
+          }
+        ),
+        tfds.core.SplitGenerator(
+          name=tfds.Split.VALIDATION,
+          num_shards=1,
+          gen_kwargs={
+            "idx_split": 1,
+            "path_data": os.path.join(extracted_path,
+                                      "mini-imagenet-cache-val.pkl"),
+          }
+        ),
+        tfds.core.SplitGenerator(
+          name=tfds.Split.TEST,
+          num_shards=1,
+          gen_kwargs={
+            "idx_split": 2,
+            "path_data": os.path.join(extracted_path,
+                                      "mini-imagenet-cache-test.pkl"),
+          }
+        ),
+      ]
 
-    def _generate_examples(self, idx_split, path_data):
-        """yields examples from the dataset.
+  def _generate_examples(self, idx_split, path_data):
+    """yields examples from the dataset.
 
-        Note: Class indices are as follows:
-        train [0, 63]; val [64, 79]; test [79, 99]
+    Note: Class indices are as follows:
+    train [0, 63]; val [64, 79]; test [79, 99]
 
-        Args:
-            idx_split (int): used to identify split.
-            path_data (string): path to extracted data.
+    Args:
+      idx_split (int): used to identify split.
+      path_data (string): path to extracted data.
 
-        Yields:
-            dict_data (dict): data dictionary of image and label.
-                keys:
-                    "image_data" (np.ndarray, shape=[num_data, 84, 84, 3],
-                                  dtype=np.uint8)
-                    "class_dict" (dict): class name to list of image indices.
-                        value: (list of int, len=600)
-        """
+    Yields:
+      dict_data (dict): data dictionary of image and label.
+        keys:
+          "image_data" (np.ndarray, shape=[num_data, 84, 84, 3],
+                        dtype=np.uint8)
+          "class_dict" (dict): class name to list of image indices.
+            value: (list of int, len=600)
+    """
 
-        # offset classass indices based on split
-        if idx_split == 0:
-            idx_class_start = 0
-        elif idx_split == 1:
-            idx_class_start = _NUM_CLASSES_TRAIN
-        elif idx_split == 2:
-            idx_class_start = _NUM_CLASSES_TRAIN + _NUM_CLASSES_VALIDATION
+    # offset classass indices based on split
+    if idx_split == 0:
+      idx_class_start = 0
+    elif idx_split == 1:
+      idx_class_start = _NUM_CLASSES_TRAIN
+    elif idx_split == 2:
+      idx_class_start = _NUM_CLASSES_TRAIN + _NUM_CLASSES_VALIDATION
 
-        # read data
-        try:
-            with tf.io.gfile.GFile(path_data, "rb") as f:
-                data = pickle.load(f)
-        except UnicodeDecodeError as e:
-            with tf.io.gfile.GFile(path_data, "rb") as f:
-                data = pickle.load(f, encoding="latin1")
-        except Exception as e:
-            print("Unable to load data ", path_data, ":", e)
-            raise
+    # read data
+    try:
+      with tf.io.gfile.GFile(path_data, "rb") as f:
+        data = pickle.load(f)
+    except UnicodeDecodeError as e:
+      with tf.io.gfile.GFile(path_data, "rb") as f:
+        data = pickle.load(f, encoding="latin1")
+    except Exception as e:
+      print("Unable to load data ", path_data, ":", e)
+      raise
 
-        img_data = data["image_data"]
-        class_dict = data["class_dict"]
+    img_data = data["image_data"]
+    class_dict = data["class_dict"]
 
-        for idx_class, (class_name, idx_img_list) in \
-                enumerate(class_dict.items()):
-            idx_class_split = idx_class + idx_class_start
-            for idx_img in idx_img_list:
-                img = img_data[idx_img]
+    for idx_class, (class_name, idx_img_list) in \
+        enumerate(class_dict.items()):
+      idx_class_split = idx_class + idx_class_start
+      for idx_img in idx_img_list:
+        img = img_data[idx_img]
 
-                dict_data = {
-                    "image": img,
-                    "label": idx_class_split
-                }
+        dict_data = {
+          "image": img,
+          "label": idx_class_split
+        }
 
-                yield dict_data
+        yield dict_data
