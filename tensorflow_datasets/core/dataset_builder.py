@@ -308,7 +308,7 @@ class DatasetBuilder(object):
   @api_utils.disallow_positional_args
   def as_dataset(self,
                  split=None,
-                 batch_size=1,
+                 batch_size=None,
                  shuffle_files=None,
                  as_supervised=False):
     """Constructs a `tf.data.Dataset`.
@@ -320,8 +320,8 @@ class DatasetBuilder(object):
         (default), returns all splits in a dict
         `<key: tfds.Split, value: tf.data.Dataset>`.
       batch_size: `int`, batch size. Note that variable-length features will
-        be 0-padded if `batch_size > 1`. Users that want more custom behavior
-        should use `batch_size=1` and use the `tf.data` API to construct a
+        be 0-padded if `batch_size` is set. Users that want more custom behavior
+        should use `batch_size=None` and use the `tf.data` API to construct a
         custom pipeline. If `batch_size == -1`, will return feature
         dictionaries of the whole dataset with `tf.Tensor`s instead of a
         `tf.data.Dataset`.
@@ -376,10 +376,9 @@ class DatasetBuilder(object):
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
     dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
-    if batch_size > 1:
+    if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
-      padded_shapes = self.info.features.shape
-      dataset = dataset.padded_batch(batch_size, padded_shapes)
+      dataset = dataset.padded_batch(batch_size, dataset.output_shapes)
 
     if as_supervised:
       if not self.info.supervised_keys:

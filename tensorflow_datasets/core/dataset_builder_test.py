@@ -228,7 +228,7 @@ class DatasetBuilderTest(testing.TestCase):
       splits_list = [splits_lib.Split.TRAIN, splits_lib.Split.TEST]
       for builder, incr in [(builder1, 1), (builder2, 2)]:
         train_data, test_data = [   # pylint: disable=g-complex-comprehension
-            [el["x"] for el in
+            [el["x"] for el in   # pylint: disable=g-complex-comprehension
              dataset_utils.as_numpy(builder.as_dataset(split=split))]
             for split in splits_list
         ]
@@ -423,6 +423,16 @@ class DatasetBuilderReadTest(testing.TestCase):
     self.assertEqual(10, x2.shape[0])
     self.assertEqual(10, x3.shape[0])
     self.assertEqual(sum(range(30)), int(x1.sum() + x2.sum() + x3.sum()))
+
+    # By default batch_size is None and won't add a batch dimension
+    ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN)
+    self.assertEqual(0, len(ds.output_shapes["x"]))
+    # Setting batch_size=1 will add an extra batch dimension
+    ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=1)
+    self.assertEqual(1, len(ds.output_shapes["x"]))
+    # Setting batch_size=2 will add an extra batch dimension
+    ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=2)
+    self.assertEqual(1, len(ds.output_shapes["x"]))
 
   @testing.run_in_graph_and_eager_modes()
   def test_supervised_keys(self):
