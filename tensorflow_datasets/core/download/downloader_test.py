@@ -67,8 +67,7 @@ class DownloaderTest(testing.TestCase):
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
     self.downloader._pbar_url = absltest.mock.MagicMock()
-    self.downloader._pbar_dl_size = absltest.mock.MagicMock()
-
+    self.downloader._pbar_dl_size = absltest.mock.MagicMock() 
     absltest.mock.patch.object(
         downloader.urllib.request,
         'urlopen',
@@ -82,7 +81,7 @@ class DownloaderTest(testing.TestCase):
     with open(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
-
+  
   def test_drive_no_cookies(self):
     url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
     promise = self.downloader.download(url, self.tmp_dir)
@@ -144,6 +143,15 @@ class DownloaderTest(testing.TestCase):
     promise = self.downloader.download(url, self.tmp_dir)
     with self.assertRaises(downloader.urllib.error.URLError):
       promise.get()
+  
+  def test_ssl_mock(self):
+    ssl_mock_dict = downloader.ssl.__dict__.copy()
+    ssl_mock_dict.pop("_create_unverified_context")
+    absltest.mock.patch.dict(
+        downloader.ssl.__dict__,
+        ssl_mock_dict,
+        clear=True).start()
+    self.test_ok()
 
 
 class GetFilenameTest(testing.TestCase):

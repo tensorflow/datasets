@@ -150,13 +150,25 @@ class _Downloader(object):
         'ftp': os.environ.get('TFDS_FTP_PROXY', None)
     }
     CA_BUNDLE = os.environ.get('TFDS_CA_BUNDLE', None)
+    
+    if not hasattr(ssl, "_create_unverified_context"):
+      # For python Version <= 2.7.16
+      def py2_fn():
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        return ctx
+      ssl.__dict__["_create_unverified_context"] = py2_fn
+
     if CA_BUNDLE:
       CA_BUNDLE = extract_zipped_paths(CA_BUNDLE)
+    
     CA_VERIFY = {
         'urllib': ssl._create_unverified_context() if CA_BUNDLE is None
         else ssl.create_default_context(capath=CA_BUNDLE),
         'requests': False if CA_BUNDLE is None else CA_BUNDLE
     }
+    
     if kaggle.KaggleFile.is_kaggle_url(url):
       if proxies['http']:
         os.environ['KAGGLE_PROXY'] = proxies['http']
