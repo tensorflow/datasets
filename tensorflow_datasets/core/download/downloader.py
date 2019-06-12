@@ -150,25 +150,19 @@ class _Downloader(object):
         'ftp': os.environ.get('TFDS_FTP_PROXY', None)
     }
     CA_BUNDLE = os.environ.get('TFDS_CA_BUNDLE', None)
-    
-    if not hasattr(ssl, "_create_unverified_context"):
-      # For python Version <= 2.7.16
-      def py2_fn():
-        ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
-        return ctx
-      ssl.__dict__["_create_unverified_context"] = py2_fn
 
     if CA_BUNDLE:
       CA_BUNDLE = extract_zipped_paths(CA_BUNDLE)
-    
+    if not hasattr(ssl, '_create_unverified_context'):
+      # For python version <= 2.7.8
+      ssl.__dict__['_create_unverified_context'] = lambda: None
+      ssl.__dict__['create_default_context'] = lambda *args, **kwargs: None
     CA_VERIFY = {
-        'urllib': ssl._create_unverified_context() if CA_BUNDLE is None
+        'urllib': ssl._create_unverified_context() if CA_BUNDLE is None or len(CA_BUNDLE) == 0
         else ssl.create_default_context(capath=CA_BUNDLE),
         'requests': False if CA_BUNDLE is None else CA_BUNDLE
     }
-    
+
     if kaggle.KaggleFile.is_kaggle_url(url):
       if proxies['http']:
         os.environ['KAGGLE_PROXY'] = proxies['http']
@@ -176,7 +170,7 @@ class _Downloader(object):
 
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
-      # use requests.
+      # use requests (http) or urllib (ftp).
       if not url.startswith('http'):
         return self._sync_file_copy(url, destination_path)
     except tf.errors.UnimplementedError:
@@ -192,9 +186,14 @@ class _Downloader(object):
       if proxies['ftp']:
         proxy = urllib.request.ProxyHandler({'ftp': proxies['ftp']})
         opener = urllib.request.build_opener(proxy)
-        urllib.request.install_opener(opener)   # pylint: disable=too-many-function-args
+        urllib.request.install_opener(
+            opener)   # pylint: disable=too-many-function-args
       request = urllib.request.Request(url)
-      response = urllib.request.urlopen(request, context=CA_VERIFY['urllib'])
+
+      if CA_VERIFY['urllib'] is None:     # disable ssl context check for python version <= 2.7.8
+        response = urllib.request.urlopen(request)
+      else:
+        response = urllib.request.urlopen(request, context=CA_VERIFY['urllib'])
     else:
       response = session.get(url, stream=True)
       if response.status_code != 200:
