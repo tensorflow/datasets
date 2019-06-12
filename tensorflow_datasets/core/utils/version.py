@@ -51,12 +51,16 @@ class Experiment(enum.Enum):
   # A Dummy experiment, which should NOT be used, except for testing.
   DUMMY = 1
 
+  # New Shuffling, sharding and slicing mechanism.
+  S3 = 2
+
 
 class Version(object):
   """Dataset version MAJOR.MINOR.PATCH."""
 
   _DEFAULT_EXPERIMENTS = {
       Experiment.DUMMY: False,
+      Experiment.S3: False,
   }
 
   def __init__(self, version_str, experiments=None):

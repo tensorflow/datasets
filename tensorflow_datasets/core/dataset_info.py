@@ -180,7 +180,7 @@ class DatasetInfo(object):
 
   @property
   def version(self):
-    return utils.Version(self.as_proto.version)
+    return self._builder.version
 
   @property
   def citation(self):

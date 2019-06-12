@@ -38,6 +38,8 @@ from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core import tfrecords_reader
+from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import gcs_utils
@@ -267,7 +269,7 @@ class DatasetBuilder(object):
           "Trying to overwrite an existing dataset {} at {}. A dataset with "
           "the same version {} already exists. If the dataset has changed, "
           "please update the version number.".format(self.name, self._data_dir,
-                                                     self.info.version))
+                                                     self.version))
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
         self.info.size_in_bytes, directory=self._data_dir_root):
@@ -340,6 +342,8 @@ class DatasetBuilder(object):
       If `batch_size` is -1, will return feature dictionaries containing
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
+    logging.info("Constructing tf.data.Dataset for split %s, from %s",
+                 split, self._data_dir)
     if not tf.io.gfile.exists(self._data_dir):
       raise AssertionError(
           ("Dataset %s: could not find data in %s. Please make sure to call "
@@ -606,11 +610,20 @@ class FileAdapterBuilder(DatasetBuilder):
   """
 
   @utils.memoized_property
+  def _example_specs(self):
+    return self.info.features.get_serialized_info()
+
+  @utils.memoized_property
   def _file_format_adapter(self):
     # Load the format adapter (TF-Record,...)
+    # The file_format_adapter module will eventually be replaced by
+    # tfrecords_{reader,writer} modules.
     file_adapter_cls = file_format_adapter.TFRecordExampleAdapter
-    serialized_info = self.info.features.get_serialized_info()
-    return file_adapter_cls(serialized_info)
+    return file_adapter_cls(self._example_specs)
+
+  @property
+  def _tfrecords_reader(self):
+    return tfrecords_reader.Reader(self._data_dir, self._example_specs)
 
   @abc.abstractmethod
   def _split_generators(self, dl_manager):
@@ -678,7 +691,6 @@ class FileAdapterBuilder(DatasetBuilder):
     # Generating data for all splits
     split_dict = splits_lib.SplitDict()
     for split_generator in self._split_generators(dl_manager):
-      # Keep track of all split_info
       if splits_lib.Split.ALL == split_generator.split_info.name:
         raise ValueError(
             "tfds.Split.ALL is a special split keyword corresponding to the "
@@ -696,23 +708,26 @@ class FileAdapterBuilder(DatasetBuilder):
     self.info.update_splits_if_different(split_dict)
 
   def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=None):
+    if self.version.implements(utils.Experiment.S3):
+      dataset = self._tfrecords_reader.read(
+          self.name, split, self.info.splits.values())
+    else:
+      # Resolve all the named split tree by real ones
+      read_instruction = split.get_read_instruction(self.info.splits)
+      # Extract the list of SlicedSplitInfo objects containing the splits
+      # to use and their associated slice
+      list_sliced_split_info = read_instruction.get_list_sliced_split_info()
+      # Resolve the SlicedSplitInfo objects into a list of
+      # {'filepath': 'path/to/data-00032-00100', 'mask': [True, False, ...]}
+      instruction_dicts = self._slice_split_info_to_instruction_dicts(
+          list_sliced_split_info)
 
-    # Resolve all the named split tree by real ones
-    read_instruction = split.get_read_instruction(self.info.splits)
-    # Extract the list of SlicedSplitInfo objects containing the splits
-    # to use and their associated slice
-    list_sliced_split_info = read_instruction.get_list_sliced_split_info()
-    # Resolve the SlicedSplitInfo objects into a list of
-    # {'filepath': 'path/to/data-00032-00100', 'mask': [True, True, False, ...]}
-    instruction_dicts = self._slice_split_info_to_instruction_dicts(
-        list_sliced_split_info)
-
-    # Load the dataset
-    dataset = dataset_utils.build_dataset(
-        instruction_dicts=instruction_dicts,
-        dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
-        shuffle_files=shuffle_files,
-    )
+      # Load the dataset
+      dataset = dataset_utils.build_dataset(
+          instruction_dicts=instruction_dicts,
+          dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
+          shuffle_files=shuffle_files,
+      )
     dataset = dataset.map(
         self.info.features.decode_example,
         num_parallel_calls=tf.data.experimental.AUTOTUNE)
@@ -815,14 +830,29 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
         max_examples_per_split=download_config.max_examples_per_split,
     )
 
+  def _prepare_split_legacy(self, generator, split_info):
+    # TODO(pierrot): delete once S3 has been fully rolled-out.
+    generator = (self.info.features.encode_example(ex) for ex in generator)
+    output_files = self._build_split_filenames(split_info)
+    self._file_format_adapter.write_from_generator(generator, output_files)
+
   def _prepare_split(self, split_generator, max_examples_per_split):
     generator = self._generate_examples(**split_generator.gen_kwargs)
+    split_info = split_generator.split_info
     if max_examples_per_split is not None:
       logging.warn("Splits capped at %s examples max.", max_examples_per_split)
       generator = itertools.islice(generator, max_examples_per_split)
-    generator = (self.info.features.encode_example(ex) for ex in generator)
-    output_files = self._build_split_filenames(split_generator.split_info)
-    self._file_format_adapter.write_from_generator(generator, output_files)
+    if not self.version.implements(utils.Experiment.S3):
+      return self._prepare_split_legacy(generator, split_info)
+    fname = "{}-{}.tfrecord".format(self.name, split_generator.name)
+    fpath = os.path.join(self._data_dir, fname)
+    writer = tfrecords_writer.Writer(self._example_specs, fpath)
+    for key, record in utils.tqdm(generator, unit=" examples",
+                                  total=split_info.num_examples, leave=False):
+      example = self.info.features.encode_example(record)
+      writer.write(key, example)
+    shard_lengths = writer.finalize()
+    split_generator.split_info.shard_lengths.extend(shard_lengths)
 
 
 class BeamBasedBuilder(FileAdapterBuilder):

@@ -43,12 +43,24 @@ class MNISTTest(testing.DatasetBuilderTestCase):
   }
 
 
+class MNISTTestS3(MNISTTest):
+  VERSION = "2.0.0"
+
+
 class FashionMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.FashionMNIST
 
 
+class FashionMNISTTestS3(FashionMNISTTest):
+  VERSION = "2.0.0"
+
+
 class KMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.KMNIST
+
+
+class KMNISTTestS3(KMNISTTest):
+  VERSION = "2.0.0"
 
 
 mnist.EMNIST.BUILDER_CONFIGS.append(
