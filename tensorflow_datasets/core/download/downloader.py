@@ -186,8 +186,7 @@ class _Downloader(object):
       if proxies['ftp']:
         proxy = urllib.request.ProxyHandler({'ftp': proxies['ftp']})
         opener = urllib.request.build_opener(proxy)
-        urllib.request.install_opener(
-            opener)   # pylint: disable=too-many-function-args
+        urllib.request.install_opener(opener)   # pylint: disable=too-many-function-args
       request = urllib.request.Request(url)
 
       if CA_VERIFY['urllib'] is None:     # disable ssl context check for python version <= 2.7.8
