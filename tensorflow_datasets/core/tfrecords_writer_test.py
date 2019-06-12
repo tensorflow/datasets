@@ -79,19 +79,10 @@ def _read_records(path):
   return fnames, all_recs
 
 
-class _DummySerializer(object):
-
-  def __init__(self, specs):
-    del specs
-
-  def serialize_example(self, example):
-    return bytes(example)
-
-
 class WriterTest(testing.TestCase):
 
   @absltest.mock.patch.object(
-      example_serializer, 'ExampleSerializer', _DummySerializer)
+      example_serializer, 'ExampleSerializer', testing.DummySerializer)
   def test_write(self):
     """Writes 8 records in 5 shards.
 
