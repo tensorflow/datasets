@@ -32,12 +32,18 @@ toc:
       path: /datasets/api_docs/python/tfds/core/DatasetBuilder
     - title: DatasetInfo
       path: /datasets/api_docs/python/tfds/core/DatasetInfo
+    - title: Experiment
+      path: /datasets/api_docs/python/tfds/core/Experiment
     - title: GeneratorBasedBuilder
       path: /datasets/api_docs/python/tfds/core/GeneratorBasedBuilder
     - title: get_tfds_path
       path: /datasets/api_docs/python/tfds/core/get_tfds_path
     - title: lazy_imports
       path: /datasets/api_docs/python/tfds/core/lazy_imports
+    - title: Metadata
+      path: /datasets/api_docs/python/tfds/core/Metadata
+    - title: MetadataDict
+      path: /datasets/api_docs/python/tfds/core/MetadataDict
     - title: NamedSplit
       path: /datasets/api_docs/python/tfds/core/NamedSplit
     - title: SplitBase
@@ -88,8 +94,6 @@ toc:
       path: /datasets/api_docs/python/tfds/features/Image
     - title: Sequence
       path: /datasets/api_docs/python/tfds/features/Sequence
-    - title: SequenceDict
-      path: /datasets/api_docs/python/tfds/features/SequenceDict
     - title: Tensor
       path: /datasets/api_docs/python/tfds/features/Tensor
     - title: TensorInfo
@@ -146,6 +150,8 @@ toc:
       path: /datasets/api_docs/python/tfds/testing/rm_tmp_dir
     - title: run_in_graph_and_eager_modes
       path: /datasets/api_docs/python/tfds/testing/run_in_graph_and_eager_modes
+    - title: SubTestCase
+      path: /datasets/api_docs/python/tfds/testing/SubTestCase
     - title: TestCase
       path: /datasets/api_docs/python/tfds/testing/TestCase
     - title: test_main

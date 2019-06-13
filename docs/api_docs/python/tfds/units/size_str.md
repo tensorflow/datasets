@@ -23,5 +23,5 @@ For example `size_str(1.5 * tfds.units.GiB) == "1.50 GiB"`.
 
 #### Args:
 
-* <b>`size_in_bytes`</b>: `int` or `None`, the size, in bytes, that we want to
+*   <b>`size_in_bytes`</b>: `int` or `None`, the size, in bytes, that we want to
     format as a human-readable size string.

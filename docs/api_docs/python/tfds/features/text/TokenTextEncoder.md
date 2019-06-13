@@ -49,39 +49,26 @@ To load from a file saved with `TokenTextEncoder.save_to_file`, use
 
 #### Args:
 
-* <b>`vocab_list`</b>: `list<str>`, list of tokens.
-* <b>`oov_buckets`</b>: `int`, the number of `int`s to reserve for OOV hash buckets.
-    Tokens that are OOV will be hash-modded into a OOV bucket in `encode`.
-* <b>`oov_token`</b>: `str`, the string to use for OOV ids in `decode`.
-* <b>`lowercase`</b>: `bool`, whether to make all text and tokens lowercase.
-* <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text into a
-    list of tokens.
-
-
+*   <b>`vocab_list`</b>: `list<str>`, list of tokens.
+*   <b>`oov_buckets`</b>: `int`, the number of `int`s to reserve for OOV hash
+    buckets. Tokens that are OOV will be hash-modded into a OOV bucket in
+    `encode`.
+*   <b>`oov_token`</b>: `str`, the string to use for OOV ids in `decode`.
+*   <b>`lowercase`</b>: `bool`, whether to make all text and tokens lowercase.
+*   <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text
+    into a list of tokens.
 
 ## Properties
 
 <h3 id="lowercase"><code>lowercase</code></h3>
 
-
-
 <h3 id="oov_token"><code>oov_token</code></h3>
-
-
 
 <h3 id="tokenizer"><code>tokenizer</code></h3>
 
-
-
 <h3 id="tokens"><code>tokens</code></h3>
 
-
-
 <h3 id="vocab_size"><code>vocab_size</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -91,15 +78,11 @@ To load from a file saved with `TokenTextEncoder.save_to_file`, use
 decode(ids)
 ```
 
-
-
 <h3 id="encode"><code>encode</code></h3>
 
 ``` python
 encode(s)
 ```
-
-
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
 
@@ -111,15 +94,8 @@ load_from_file(
 )
 ```
 
-
-
 <h3 id="save_to_file"><code>save_to_file</code></h3>
 
 ``` python
 save_to_file(filename_prefix)
 ```
-
-
-
-
-

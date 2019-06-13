@@ -25,10 +25,9 @@ and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
 
 #### Args:
 
-* <b>`dataset`</b>: a possibly nested structure of `tf.data.Dataset`s and/or
+*   <b>`dataset`</b>: a possibly nested structure of `tf.data.Dataset`s and/or
     `tf.Tensor`s.
-* <b>`graph`</b>: `tf.Graph`, optional, explicitly set the graph to use.
-
+*   <b>`graph`</b>: `tf.Graph`, optional, explicitly set the graph to use.
 
 #### Returns:
 

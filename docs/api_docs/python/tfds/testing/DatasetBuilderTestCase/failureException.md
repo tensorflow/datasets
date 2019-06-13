@@ -11,9 +11,10 @@ Assertion failed.
 
 ### Aliases:
 
-* Class `tfds.testing.DatasetBuilderTestCase.failureException`
-* Class `tfds.testing.FeatureExpectationsTestCase.failureException`
-* Class `tfds.testing.TestCase.failureException`
+*   Class `tfds.testing.DatasetBuilderTestCase.failureException`
+*   Class `tfds.testing.FeatureExpectationsTestCase.failureException`
+*   Class `tfds.testing.SubTestCase.failureException`
+*   Class `tfds.testing.TestCase.failureException`
 
 <!-- Placeholder for "Used in" -->
 

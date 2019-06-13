@@ -176,7 +176,7 @@ def builder(name, **builder_init_kwargs):
 def load(name,
          split=None,
          data_dir=None,
-         batch_size=1,
+         batch_size=None,
          download=True,
          as_supervised=False,
          with_info=False,
@@ -228,7 +228,7 @@ def load(name,
       `tfds.Split.TEST`).
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
-    batch_size: `int`, set to > 1 to get batches of examples. Note that
+    batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
     download: `bool` (optional), whether to call

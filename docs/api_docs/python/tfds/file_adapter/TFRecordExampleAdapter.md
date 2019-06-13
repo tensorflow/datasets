@@ -31,47 +31,30 @@ Constraints on generators:
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
-__init__(example_reading_spec)
+```python
+__init__(example_specs)
 ```
-
-Constructs a TFRecordExampleAdapter.
-
-#### Args:
-
-* <b>`example_reading_spec`</b>: `dict`, feature name to tf.FixedLenFeature or
-    tf.VarLenFeature. Passed to tf.io.parse_single_example.
-
-
 
 ## Properties
 
 <h3 id="filetype_suffix"><code>filetype_suffix</code></h3>
 
-
-
-
-
 ## Methods
 
 <h3 id="dataset_from_filename"><code>dataset_from_filename</code></h3>
 
-``` python
+```python
 dataset_from_filename(filename)
 ```
 
-
-
 <h3 id="write_from_generator"><code>write_from_generator</code></h3>
 
-``` python
+```python
 write_from_generator(
-    generator_fn,
+    generator,
     output_files
 )
 ```
-
-
 
 <h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
 
@@ -82,8 +65,3 @@ write_from_pcollection(
     num_shards
 )
 ```
-
-
-
-
-

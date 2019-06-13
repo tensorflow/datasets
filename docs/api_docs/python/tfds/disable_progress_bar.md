@@ -16,6 +16,6 @@ Defined in
 
 <!-- Placeholder for "Used in" -->
 
-Usage:
+#### Usage:
 
 tfds.disable_progress_bar()

@@ -42,7 +42,7 @@ method. E.g.
 The function members accept either plain value, or values wrapped into list
 or dict. Giving a data structure will parallelize the downloads.
 
-Example of usage:
+#### Example of usage:
 
 ```
 # Sequential download: str -> str
@@ -83,17 +83,19 @@ Download manager constructor.
 
 #### Args:
 
-* <b>`download_dir`</b>: `str`, path to directory where downloads are stored.
-* <b>`extract_dir`</b>: `str`, path to directory where artifacts are extracted.
-* <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data directory.
-* <b>`dataset_name`</b>: `str`, name of dataset this instance will be used for. If
-    provided, downloads will contain which datasets they were used for.
-* <b>`force_download`</b>: `bool`, default to False. If True, always [re]download.
-* <b>`force_extraction`</b>: `bool`, default to False. If True, always [re]extract.
-* <b>`register_checksums`</b>: `bool`, default to False. If True, dl checksums aren't
-    checked, but stored into file.
-
-
+*   <b>`download_dir`</b>: `str`, path to directory where downloads are stored.
+*   <b>`extract_dir`</b>: `str`, path to directory where artifacts are
+    extracted.
+*   <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data
+    directory.
+*   <b>`dataset_name`</b>: `str`, name of dataset this instance will be used
+    for. If provided, downloads will contain which datasets they were used for.
+*   <b>`force_download`</b>: `bool`, default to False. If True, always
+    [re]download.
+*   <b>`force_extraction`</b>: `bool`, default to False. If True, always
+    [re]extract.
+*   <b>`register_checksums`</b>: `bool`, default to False. If True, dl checksums
+    aren't checked, but stored into file.
 
 ## Properties
 
@@ -104,8 +106,6 @@ Returns the total size of downloaded files.
 <h3 id="manual_dir"><code>manual_dir</code></h3>
 
 Returns the directory containing the manually extracted data.
-
-
 
 ## Methods
 
@@ -119,9 +119,9 @@ Download given url(s).
 
 #### Args:
 
-* <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
-    url can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
-
+*   <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract.
+    Each url can be a `str` or
+    <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 #### Returns:
 
@@ -144,12 +144,12 @@ extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
 
 #### Args:
 
-* <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
-    url can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
+*   <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract.
+    Each url can be a `str` or
+    <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 If not explicitly specified in `Resource`, the extraction method will
 automatically be deduced from downloaded file name.
-
 
 #### Returns:
 
@@ -173,12 +173,12 @@ Extract given path(s).
 
 #### Args:
 
-* <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract. Each
-    path can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
+*   <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract.
+    Each path can be a `str` or
+    <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 If not explicitly specified in `Resource`, the extraction method is deduced
 from downloaded file name.
-
 
 #### Returns:
 
@@ -200,10 +200,6 @@ Reading out of order is slow.
 
 * <b>`resource`</b>: path to archive or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
-
 #### Returns:
 
 Generator yielding tuple (path_within_archive, file_obj).
-
-
-

@@ -40,7 +40,9 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'attrs',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
+    'cityhash',
     'future',
     'numpy',
     'promise',
@@ -76,16 +78,26 @@ if sys.version_info < (3, 4):
 
 # Static files needed by datasets.
 DATASET_FILES = [
+    'image/caltech101_labels.txt',
+    'image/dtd_key_attributes.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
+    'image/open_images_classes_all.txt',
+    'image/open_images_classes_boxable.txt',
+    'image/open_images_classes_trainable.txt',
     'image/quickdraw_labels.txt',
+    'image/sun397_labels.txt',
     'url_checksums/*',
+    'video/ucf101_labels.txt',
 ]
 
 DATASET_EXTRAS = {
     # In alphabetical order
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
+    'eurosat': [
+        'scikit-image',
+    ],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
@@ -105,8 +117,8 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
-    'tensorflow': ['tensorflow>=1.12.0'],
-    'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
+    'tensorflow': ['tensorflow>=1.13.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.13.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)

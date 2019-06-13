@@ -2,8 +2,8 @@
 <meta itemprop="name" content="tfds.features.FeaturesDict" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
+<meta itemprop="property" content="__contains__"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="__iter__"/>
@@ -25,11 +25,8 @@
 
 Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-
-
-Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
+Defined in
+[`core/features/features_dict.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -38,9 +35,9 @@ every sub-connector given on the constructor.
 Other features can inherit from this class and call super() in order to get
 nested container.
 
-Example:
+#### Example:
 
-For DatasetInfo:
+#### For DatasetInfo:
 
 ```
 features = tfds.features.FeaturesDict({
@@ -49,7 +46,7 @@ features = tfds.features.FeaturesDict({
 })
 ```
 
-At generation time:
+#### At generation time:
 
 ```
 for image, label in generate_examples:
@@ -72,7 +69,7 @@ features and the conversion to tf.train.Example. Indeed, the tf.train.Example
 proto do not support nested feature, while tf.data.Dataset does.
 But internal transformation should be invisible to the user.
 
-Example:
+#### Example:
 
 ```
 tfds.features.FeaturesDict({
@@ -109,7 +106,6 @@ feature_dict (dict): Dictionary containing the feature connectors of a
   tf.data.Dataset(). Types (tf.int32,...) and dicts will automatically
   be converted into FeatureConnector.
 
-
 #### Raises:
 
 * <b>`ValueError`</b>: If one of the given features is not recognized
@@ -122,17 +118,17 @@ feature_dict (dict): Dictionary containing the feature connectors of a
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
+
+<h3 id="__contains__"><code>__contains__</code></h3>
+
+```python
+__contains__(k)
+```
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
 
@@ -148,23 +144,27 @@ Return the feature associated with the key.
 __iter__()
 ```
 
-
-
 <h3 id="__len__"><code>__len__</code></h3>
 
 ``` python
 __len__()
 ```
 
-
-
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-``` python
-decode_example(tfexample_dict)
+```python
+decode_example(serialized_example)
 ```
 
-See base class for details.
+Decode the serialize examples.
+
+#### Args:
+
+*   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+
+#### Returns:
+
+*   <b>`example`</b>: Nested `dict` containing the decoded nested examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -196,15 +196,11 @@ See base class for details.
 items()
 ```
 
-
-
 <h3 id="keys"><code>keys</code></h3>
 
 ``` python
 keys()
 ```
-
-
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
@@ -233,8 +229,3 @@ See base class for details.
 ``` python
 values()
 ```
-
-
-
-
-

@@ -72,7 +72,7 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names_file=labels_path),
         }),
         supervised_keys=("image", "label"),
-        urls=_URL,
+        urls=[_URL],
         citation=_CITATION
     )
 

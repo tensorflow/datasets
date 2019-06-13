@@ -46,11 +46,11 @@ class Wmt18Translate(wmt.WmtTranslate):
 
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
-          description="WMT 2018 translation task dataset.",
+          description="WMT 2018 %s-%s translation task dataset." % (l1, l2),
           url=_URL,
           citation=_CITATION,
           language_pair=(l1, l2),
-          version="0.0.2")
+          version="0.0.3")
       for l1, l2 in _LANGUAGE_PAIRS
   ]
 
@@ -63,12 +63,8 @@ class Wmt18Translate(wmt.WmtTranslate):
             "wikiheadlines_fi", "wikiheadlines_ru", "setimes_2",
             "uncorpus_v1", "rapid_2016"] + wmt.CWMT_SUBSET_NAMES,
         tfds.Split.VALIDATION: [
-            "newsdev2014", "newsdev2015", "newsdev2016", "newsdev2017",
-            "newsdev2018", "newsdiscussdev2015", "newsdiscusstest2015",
-            "newssyscomb2009", "newstest2008", "newstest2009", "newstest2010",
-            "newstest2011", "newstest2012", "newstest2013", "newstest2014",
-            "newstest2015", "newstest2016", "newstestB2016", "newstest2017",
-            "newstestB2017"],
+            "newsdev2018", "newstest2017", "newstestB2017"
+        ],
         tfds.Split.TEST: [
             "newstest2018"
         ]

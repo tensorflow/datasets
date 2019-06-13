@@ -117,7 +117,7 @@ class Image(feature.FeatureConnector):
 
   def get_serialized_info(self):
     # Only store raw image (includes size).
-    return tf.io.FixedLenFeature(tuple(), tf.string)
+    return feature.TensorInfo(shape=(), dtype=tf.string)
 
   def _encode_image(self, np_image):
     """Returns np_image encoded as jpeg or png."""

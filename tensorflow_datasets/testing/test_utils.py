@@ -108,6 +108,20 @@ class SubTestCase(test_case.TestCase):
         yield
       self._sub_test_stack.pop()
 
+  def assertAllEqualNested(self, d1, d2):
+    """Same as assertAllEqual but compatible with nested dict."""
+    if isinstance(d1, dict):
+      # assertAllEqual do not works well with dictionaries so assert
+      # on each individual elements instead
+      zipped_examples = utils.zip_nested(d1, d2, dict_only=True)
+      utils.map_nested(
+          lambda x: self.assertAllEqual(x[0], x[1]),
+          zipped_examples,
+          dict_only=True,
+      )
+    else:
+      self.assertAllEqual(d1, d2)
+
 
 def run_in_graph_and_eager_modes(func=None,
                                  config=None,
@@ -208,6 +222,8 @@ class FeatureExpectationsTestCase(SubTestCase):
 
     # Create the feature dict
     fdict = features.FeaturesDict({"inner": feature})
+    fdict._set_top_level()  # pylint: disable=protected-access
+
     for i, test in enumerate(tests):
       with self._subTest(str(i)):
         self.assertFeatureTest(
@@ -265,21 +281,7 @@ class FeatureExpectationsTestCase(SubTestCase):
       with self._subTest("out_value"):
         decoded_examples = features_encode_decode(fdict, input_value)
         decoded_examples = decoded_examples["inner"]
-        if isinstance(decoded_examples, dict):
-          # assertAllEqual do not works well with dictionaries so assert
-          # on each individual elements instead
-          zipped_examples = utils.zip_nested(
-              test.expected,
-              decoded_examples,
-              dict_only=True,
-          )
-          utils.map_nested(
-              lambda x: self.assertAllEqual(x[0], x[1]),
-              zipped_examples,
-              dict_only=True,
-          )
-        else:
-          self.assertAllEqual(test.expected, decoded_examples)
+        self.assertAllEqualNested(decoded_examples, test.expected)
 
 
 def features_encode_decode(features_dict, example, as_tensor=False):
@@ -294,28 +296,33 @@ def features_encode_decode(features_dict, example, as_tensor=False):
     file_adapter = file_format_adapter.TFRecordExampleAdapter(
         features_dict.get_serialized_info())
     file_adapter.write_from_generator(
-        generator_fn=lambda: [encoded_example],
+        generator=[encoded_example],
         output_files=[tmp_filename],
     )
-    dataset = file_adapter.dataset_from_filename(tmp_filename)
+    ds = file_adapter.dataset_from_filename(tmp_filename)
 
     # Decode the example
-    dataset = dataset.map(features_dict.decode_example)
+    ds = ds.map(features_dict.decode_example)
 
     if not as_tensor:  # Evaluate to numpy array
-      for el in dataset_utils.as_numpy(dataset):
+      for el in dataset_utils.as_numpy(ds):
         return el
     else:
       if tf.executing_eagerly():
-        return next(iter(dataset))
+        return next(iter(ds))
       else:
-        return tf.compat.v1.data.make_one_shot_iterator(dataset).get_next()
+        return tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
   VERSION = utils.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      "2.0.0",
+      "0.0.9",
+      "0.0.8",
+  ]
 
   def _info(self):
     return dataset_info.DatasetInfo(
@@ -328,13 +335,19 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [splits.SplitGenerator(
-        name=[splits.Split.TRAIN, splits.Split.TEST],
-        num_shards=[2, 1],
-    )]
+    return [
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            num_shards=2,
+            gen_kwargs={"range_": range(20)}),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            num_shards=1,
+            gen_kwargs={"range_": range(20, 30)}),
+    ]
 
-  def _generate_examples(self):
-    for i in range(30):
+  def _generate_examples(self, range_):
+    for i in range_:
       yield {"x": i}
 
 
@@ -441,3 +454,24 @@ def mock_kaggle_api(filenames=None, err_msg=None):
   with absltest.mock.patch("subprocess.check_output",
                            make_mock_check_output(filenames, err_msg)):
     yield
+
+
+class DummySerializer(object):
+  """To mock example_serializer.ExampleSerializer."""
+
+  def __init__(self, specs):
+    del specs
+
+  def serialize_example(self, example):
+    return bytes(example)
+
+
+class DummyParser(object):
+  """To mock example_parser.ExampleParser."""
+
+  def __init__(self, specs):
+    del specs
+
+  def parse_example(self, ex):
+    return ex
+
