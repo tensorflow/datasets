@@ -22,18 +22,16 @@ from __future__ import print_function
 from tensorflow_datasets.image import tiered_imagenet
 import tensorflow_datasets.testing as tfds_test
 
-
 class TieredImagenetTest(tfds_test.DatasetBuilderTestCase):
-
-    """Tests for tiered_imagenet dataset module."""
-    DATASET_CLASS = tiered_imagenet.TieredImagenet
-    SPLITS = {
-        "train": 1,
-        "test": 1,
-        "validation": 1
-    }
-    MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
+	"""Tests for tiered_imagenet dataset module."""
+	DATASET_CLASS = tiered_imagenet.TieredImagenet
+	SPLITS = {
+			"train": 1,
+			"test": 1,
+			"validation": 1
+	}
+	MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
 
 
 if __name__ == "__main__":
-    tfds_test.test_main()
+	tfds_test.test_main()
