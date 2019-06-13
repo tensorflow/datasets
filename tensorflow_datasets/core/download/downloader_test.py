@@ -33,7 +33,13 @@ from tensorflow_datasets.core.download import resource as resource_lib
 
 class _FakeResponse(object):
 
-  def __init__(self, url, content, cookies=None, headers=None, status_code=200):
+  def __init__(
+          self,
+          url,
+          content,
+          cookies=None,
+          headers=None,
+          status_code=200):
     self.url = url
     self.raw = io.BytesIO(content)
     self.cookies = cookies or {}
@@ -67,25 +73,26 @@ class DownloaderTest(testing.TestCase):
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
     self.downloader._pbar_url = absltest.mock.MagicMock()
-    self.downloader._pbar_dl_size = absltest.mock.MagicMock() 
+    self.downloader._pbar_dl_size = absltest.mock.MagicMock()
     absltest.mock.patch.object(
         downloader.urllib.request,
         'urlopen',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
-    if not hasattr(downloader.ssl, '_create_unverified_context'): 
+    if not hasattr(downloader.ssl, '_create_unverified_context'):
       # To not throw error for python<=2.7.8 while mocking SSLContext functions
       downloader.ssl.__dict__['_create_unverified_context'] = None
       downloader.ssl.__dict__['create_default_context'] = None
+    # dummy ssl contexts returns for testing
     absltest.mock.patch.object(
-      downloader.ssl,
-      '_create_unverified_context',
-      lambda *a,**kw:'skip_ssl'
+        downloader.ssl,
+        '_create_unverified_context',
+        lambda *a, **kw: 'skip_ssl'
     ).start()
     absltest.mock.patch.object(
-      downloader.ssl,
-      'create_default_context',
-      lambda *a,**kw:'use_ssl'
+        downloader.ssl,
+        'create_default_context',
+        lambda *a, **kw: 'use_ssl'
     ).start()
 
   def test_ok(self):
@@ -95,7 +102,7 @@ class DownloaderTest(testing.TestCase):
     with open(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
-  
+
   def test_drive_no_cookies(self):
     url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
     promise = self.downloader.download(url, self.tmp_dir)
@@ -156,7 +163,7 @@ class DownloaderTest(testing.TestCase):
     url = 'ftp://example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)
     with self.assertRaises(downloader.urllib.error.URLError):
-      promise.get() 
+      promise.get()
 
   def test_py2_ftp_ssl_mock(self):
     ssl_mock_dict = downloader.ssl.__dict__.copy()
@@ -167,32 +174,36 @@ class DownloaderTest(testing.TestCase):
         ssl_mock_dict,
         clear=True).start()
     method = absltest.mock.patch.object(
-      downloader.logging,
-      'info',
-      return_value=None
+        downloader.logging,
+        'info',
+        return_value=None
     ).start()
     self.test_ftp()
-    with self.assertRaises(AssertionError): 
+    with self.assertRaises(AssertionError):
       method.assert_not_called()
+
   def test_ftp_ssl_mock(self, ssl_type='skip_ssl'):
     absltest.mock.patch.object(
-      downloader.urllib.request,
-      'Request',
-      lambda *a,**kw:'dummy_request'
+        downloader.urllib.request,
+        'Request',
+        lambda *a, **kw: 'dummy_request'
     ).start()
 
     method = absltest.mock.patch.object(
-      downloader.urllib.request,
-      'urlopen',
-      return_value=_FakeResponse(self.url, self.response, self.cookies) 
-    ).start()    
+        downloader.urllib.request,
+        'urlopen',
+        return_value=_FakeResponse(self.url, self.response, self.cookies)
+    ).start()
     self.test_ftp()
-    method.assert_called_once_with('dummy_request',context=ssl_type)
+    method.assert_called_once_with('dummy_request', context=ssl_type)
+
   def test_ssl_ftp(self):
     absltest.mock.patch.dict(
-      os.environ,
-      {"TFDS_CA_BUNDLE":"/path/to/dummy.pem"}).start()
+        os.environ,
+        {"TFDS_CA_BUNDLE": "/path/to/dummy.pem"}).start()
     self.test_ftp_ssl_mock('use_ssl')
+
+
 class GetFilenameTest(testing.TestCase):
 
   def test_no_headers(self):
