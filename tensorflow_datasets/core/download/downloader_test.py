@@ -73,6 +73,10 @@ class DownloaderTest(testing.TestCase):
         'urlopen',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
+    if not hasattr(downloader.ssl, '_create_unverified_context'): 
+      # To not throw error for python<=2.7.8 while mocking SSLContext functions
+      downloader.ssl.__dict__['_create_unverified_context'] = None
+      downloader.ssl.__dict__['create_default_context'] = None
     absltest.mock.patch.object(
       downloader.ssl,
       '_create_unverified_context',
@@ -156,7 +160,8 @@ class DownloaderTest(testing.TestCase):
 
   def test_py2_ftp_ssl_mock(self):
     ssl_mock_dict = downloader.ssl.__dict__.copy()
-    ssl_mock_dict.pop("_create_unverified_context")
+    if ssl_mock_dict.get('_create_unverified_context', None):
+      ssl_mock_dict.pop("_create_unverified_context")
     absltest.mock.patch.dict(
         downloader.ssl.__dict__,
         ssl_mock_dict,
