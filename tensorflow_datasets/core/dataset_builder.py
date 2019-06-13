@@ -312,7 +312,8 @@ class DatasetBuilder(object):
                  split=None,
                  batch_size=None,
                  shuffle_files=None,
-                 as_supervised=False):
+                 as_supervised=False,
+                 in_memory=None):
     """Constructs a `tf.data.Dataset`.
 
     Callers must pass arguments as keyword arguments.
@@ -334,6 +335,10 @@ class DatasetBuilder(object):
         `builder.info.supervised_keys`. If `False`, the default,
         the returned `tf.data.Dataset` will have a dictionary with all the
         features.
+      in_memory: `bool`, if `True`, loads the dataset in memory which
+        increases iteration speeds. Note that if `True` and the dataset has
+        unknown dimensions, the features will be padded to the maximum
+        size across the dataset.
 
     Returns:
       `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
@@ -361,12 +366,13 @@ class DatasetBuilder(object):
         shuffle_files=shuffle_files,
         batch_size=batch_size,
         as_supervised=as_supervised,
+        in_memory=in_memory,
     )
     datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
 
   def _build_single_dataset(self, split, shuffle_files, batch_size,
-                            as_supervised):
+                            as_supervised, in_memory):
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
@@ -379,7 +385,46 @@ class DatasetBuilder(object):
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
-    dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+    # If the dataset is small, load it in memory
+    dataset_shape_is_fully_defined = (
+        dataset_utils.features_shape_is_fully_defined(self.info.features))
+    in_memory_default = False
+    # TODO(tfds): Consider default in_memory=True for small datasets with
+    # fully-defined shape.
+    # Expose and use the actual data size on disk and rm the manual
+    # name guards. size_in_bytes is the download size, which is misleading,
+    # particularly for datasets that use manual_dir as well as some downloads
+    # (wmt and diabetic_retinopathy_detection).
+    # in_memory_default = (
+    #     self.info.size_in_bytes and
+    #     self.info.size_in_bytes <= 1e9 and
+    #     not self.name.startswith("wmt") and
+    #     not self.name.startswith("diabetic") and
+    #     dataset_shape_is_fully_defined)
+    in_memory = in_memory_default if in_memory is None else in_memory
+
+    # Build base dataset
+    if in_memory and not wants_full_dataset:
+      # TODO(tfds): Enable in_memory without padding features. May be able
+      # to do by using a requested version of tf.data.Dataset.cache that can
+      # persist a cache beyond iterator instances.
+      if not dataset_shape_is_fully_defined:
+        tf.logging.warning("Called in_memory=True on a dataset that does not "
+                           "have fully defined shapes. Note that features with "
+                           "variable length dimensions will be 0-padded to "
+                           "the maximum length across the dataset.")
+      full_bs = self.info.splits.total_num_examples or sys.maxsize
+      # If using in_memory, escape all device contexts so we can load the data
+      # with a local Session.
+      with tf.device(None):
+        dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+        # Use padded_batch so that features with unknown shape are supported.
+        dataset = dataset.padded_batch(full_bs, dataset.output_shapes)
+        dataset = tf.data.Dataset.from_tensor_slices(
+            next(dataset_utils.as_numpy(dataset)))
+    else:
+      dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
       dataset = dataset.padded_batch(batch_size, dataset.output_shapes)
