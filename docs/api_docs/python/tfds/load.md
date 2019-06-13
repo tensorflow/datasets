@@ -25,7 +25,19 @@ tfds.load(
 
 Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
 
-<!-- Placeholder for "Used in" -->
+### Used in the guide:
+
+*   [Convert Your Existing Code to TensorFlow 2.0](https://www.tensorflow.org/beta/guide/migration_guide)
+
+### Used in the tutorials:
+
+*   [Distributed training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/keras)
+*   [Multi-worker Training with Estimator](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_estimator)
+*   [Multi-worker Training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_keras)
+*   [Text classification of movie reviews with Keras and TensorFlow Hub](https://www.tensorflow.org/beta/tutorials/keras/basic_text_classification_with_tfhub)
+*   [Text classification with an RNN](https://www.tensorflow.org/beta/tutorials/text/text_classification_rnn)
+*   [Transfer Learning Using Pretrained ConvNets](https://www.tensorflow.org/beta/tutorials/images/transfer_learning)
+*   [Transformer model for language understanding](https://www.tensorflow.org/beta/tutorials/text/transformer)
 
 If `split=None` (the default), returns all splits for the dataset. Otherwise,
 returns the specified split.

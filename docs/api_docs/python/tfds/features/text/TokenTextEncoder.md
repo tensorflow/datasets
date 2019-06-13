@@ -25,7 +25,9 @@ Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
-<!-- Placeholder for "Used in" -->
+### Used in the tutorials:
+
+*   [Load text with tf.data](https://www.tensorflow.org/beta/tutorials/load_data/text)
 
 Tokenization splits on (and drops) non-alphanumeric characters with
 regex "\W+".
