@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import six
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
 try:
@@ -30,7 +30,7 @@ except ImportError:
   import collections as collections_abc  # pylint:disable=g-import-not-at-top
 
 
-class Translation(feature.FeaturesDict):
+class Translation(features_dict.FeaturesDict):
   """`FeatureConnector` for translations with fixed languages per example.
 
   Input: The Translate feature accepts a dictionary for each example mapping

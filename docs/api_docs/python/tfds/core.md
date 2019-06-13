@@ -22,6 +22,9 @@ Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/mast
 
 [`class DatasetInfo`](../tfds/core/DatasetInfo.md): Information about a dataset.
 
+[`class Experiment`](../tfds/core/Experiment.md): Experiments which can be
+enabled/disabled on a per version basis.
+
 [`class GeneratorBasedBuilder`](../tfds/core/GeneratorBasedBuilder.md): Base class for datasets with data generation based on dict generators.
 
 [`class Metadata`](../tfds/core/Metadata.md): Abstract base class for

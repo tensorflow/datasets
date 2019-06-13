@@ -12,7 +12,7 @@ tfds.load(
     name,
     split=None,
     data_dir=None,
-    batch_size=1,
+    batch_size=None,
     download=True,
     as_supervised=False,
     with_info=False,
@@ -71,9 +71,9 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     <a href="../tfds/Split.md#TEST"><code>tfds.Split.TEST</code></a>).
 *   <b>`data_dir`</b>: `str` (optional), directory to read/write data. Defaults
     datasets are stored.
-*   <b>`batch_size`</b>: `int`, set to > 1 to get batches of examples. Note that
-    variable length features will be 0-padded. If `batch_size=-1`, will return
-    the full dataset as `tf.Tensor`s.
+*   <b>`batch_size`</b>: `int`, if set, add a batch dimension to examples. Note
+    that variable length features will be 0-padded. If `batch_size=-1`, will
+    return the full dataset as `tf.Tensor`s.
 *   <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is expected

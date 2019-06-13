@@ -4,6 +4,7 @@
 <meta itemprop="property" content="builder_config"/>
 <meta itemprop="property" content="data_dir"/>
 <meta itemprop="property" content="info"/>
+<meta itemprop="property" content="version"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
@@ -52,6 +53,8 @@ __init__(
 
 <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> for this builder.
 
+<h3 id="version"><code>version</code></h3>
+
 ## Methods
 
 <h3 id="as_dataset"><code>as_dataset</code></h3>
@@ -59,7 +62,7 @@ __init__(
 ```python
 as_dataset(
     split=None,
-    batch_size=1,
+    batch_size=None,
     shuffle_files=None,
     as_supervised=False
 )
@@ -76,10 +79,10 @@ Callers must pass arguments as keyword arguments.
     which subset(s) of the data to read. If None (default), returns all splits
     in a dict `<key: tfds.Split, value: tf.data.Dataset>`.
 *   <b>`batch_size`</b>: `int`, batch size. Note that variable-length features
-    will be 0-padded if `batch_size > 1`. Users that want more custom behavior
-    should use `batch_size=1` and use the `tf.data` API to construct a custom
-    pipeline. If `batch_size == -1`, will return feature dictionaries of the
-    whole dataset with `tf.Tensor`s instead of a `tf.data.Dataset`.
+    will be 0-padded if `batch_size` is set. Users that want more custom
+    behavior should use `batch_size=None` and use the `tf.data` API to construct
+    a custom pipeline. If `batch_size == -1`, will return feature dictionaries
+    of the whole dataset with `tf.Tensor`s instead of a `tf.data.Dataset`.
 *   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
     to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 *   <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`

@@ -73,6 +73,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     DATASET_CLASS: class object of DatasetBuilder you want to test.
 
   You may set the following class attributes:
+    VERSION: `str`. The version used to run the test. eg: '1.2.*'.
+      Defaults to None (canonical version).
     BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
       that should be tested. If None, all the BUILDER_CONFIGS from the class
       will be tested.
@@ -104,6 +106,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   """
 
   DATASET_CLASS = None
+  VERSION = None
   BUILDER_CONFIG_NAMES_TO_TEST = None
   DL_EXTRACT_RESULT = None
   EXAMPLE_DIR = None
@@ -187,7 +190,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                             self.DL_EXTRACT_RESULT)
 
   def _make_builder(self, config=None):
-    return self.DATASET_CLASS(data_dir=self.tmp_dir, config=config)  # pylint: disable=not-callable
+    return self.DATASET_CLASS(  # pylint: disable=not-callable
+        data_dir=self.tmp_dir,
+        config=config,
+        version=self.VERSION)
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
@@ -237,8 +243,6 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         beam_runner = None
         beam_options = None
 
-      # Skip computation, otherwise the computed number of samples won't match
-      # the one restored from GCS
       download_config = download.DownloadConfig(
           compute_stats=download.ComputeStatsMode.FORCE,
           beam_runner=beam_runner,
@@ -271,7 +275,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       examples = list(dataset_utils.as_numpy(
           builder.as_dataset(split=split_name)))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
-      self.assertLen(examples, expected_examples_number)
+      if not builder.version.implements(utils.Experiment.S3):
+        self.assertLen(examples, expected_examples_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
         split_to_checksums.items(), 2):
       if (split1 in self.OVERLAPPING_SPLITS or
