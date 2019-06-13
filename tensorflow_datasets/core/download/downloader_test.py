@@ -73,6 +73,16 @@ class DownloaderTest(testing.TestCase):
         'urlopen',
         lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
+    absltest.mock.patch.object(
+      downloader.ssl,
+      '_create_unverified_context',
+      lambda *a,**kw:'skip_ssl'
+    ).start()
+    absltest.mock.patch.object(
+      downloader.ssl,
+      'create_default_context',
+      lambda *a,**kw:'use_ssl'
+    ).start()
 
   def test_ok(self):
     promise = self.downloader.download(self.url, self.tmp_dir)
@@ -142,18 +152,42 @@ class DownloaderTest(testing.TestCase):
     url = 'ftp://example.com/foo.tar.gz'
     promise = self.downloader.download(url, self.tmp_dir)
     with self.assertRaises(downloader.urllib.error.URLError):
-      promise.get()
-  
-  def test_ssl_mock(self):
+      promise.get() 
+
+  def test_py2_ftp_ssl_mock(self):
     ssl_mock_dict = downloader.ssl.__dict__.copy()
     ssl_mock_dict.pop("_create_unverified_context")
     absltest.mock.patch.dict(
         downloader.ssl.__dict__,
         ssl_mock_dict,
         clear=True).start()
-    self.test_ok()
+    method = absltest.mock.patch.object(
+      downloader.logging,
+      'info',
+      return_value=None
+    ).start()
+    self.test_ftp()
+    with self.assertRaises(AssertionError): 
+      method.assert_not_called()
+  def test_ftp_ssl_mock(self, ssl_type='skip_ssl'):
+    absltest.mock.patch.object(
+      downloader.urllib.request,
+      'Request',
+      lambda *a,**kw:'dummy_request'
+    ).start()
 
-
+    method = absltest.mock.patch.object(
+      downloader.urllib.request,
+      'urlopen',
+      return_value=_FakeResponse(self.url, self.response, self.cookies) 
+    ).start()    
+    self.test_ftp()
+    method.assert_called_once_with('dummy_request',context=ssl_type)
+  def test_ssl_ftp(self):
+    absltest.mock.patch.dict(
+      os.environ,
+      {"TFDS_CA_BUNDLE":"/path/to/dummy.pem"}).start()
+    self.test_ftp_ssl_mock('use_ssl')
 class GetFilenameTest(testing.TestCase):
 
   def test_no_headers(self):

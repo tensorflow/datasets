@@ -170,15 +170,15 @@ class _Downloader(object):
       # disable ftp ssl bypassing for python version <= 2.7.8
       def disabled_py2_log_fn(*args, **kwargs):
         return logging.info(
-            "SSL bypassing not available for python version <= 2.7.8 
-            current version: {}\n Protocols affected: FTPS".format(
+            """SSL bypassing not available for python version <= 2.7.8 current version: {}
+            Protocols affected: FTPS""".format(
                 sys.version.split(' ')[0]))
 
       ssl.__dict__['_create_unverified_context'] = disabled_py2_log_fn
       ssl.__dict__['create_default_context'] = disabled_py2_log_fn
-    
+
     ca_verify = {
-        'urllib': ssl._create_unverified_context() if ca_bundle 
+        'urllib': ssl._create_unverified_context() if not ca_bundle
         else ssl.create_default_context(capath=ca_bundle),
         'requests': False if not ca_bundle else ca_bundle}
 
