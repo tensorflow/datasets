@@ -707,10 +707,10 @@ class FileAdapterBuilder(DatasetBuilder):
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
 
-  def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=None):
+  def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=False):
     if self.version.implements(utils.Experiment.S3):
       dataset = self._tfrecords_reader.read(
-          self.name, split, self.info.splits.values())
+          self.name, split, self.info.splits.values(), shuffle_files)
     else:
       # Resolve all the named split tree by real ones
       read_instruction = split.get_read_instruction(self.info.splits)
