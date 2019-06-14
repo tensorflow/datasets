@@ -79,6 +79,7 @@ nightly package `tfds-nightly`.
     *   [`"svhn_cropped"`](#svhn_cropped)
     *   [`"tf_flowers"`](#tf_flowers)
     *   [`"uc_merced"`](#uc_merced)
+    *   [`"voc2007"`](#voc2007)
 
 *   [`structured`](#structured)
 
