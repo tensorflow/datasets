@@ -50,6 +50,7 @@ from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4
 from tensorflow_datasets.image.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
+from tensorflow_datasets.image.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.resisc45 import Resisc45
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
