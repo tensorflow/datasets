@@ -79,6 +79,11 @@ if sys.version_info < (3, 4):
 # Static files needed by datasets.
 DATASET_FILES = [
     'image/caltech101_labels.txt',
+    'image/cbis_ddsm_calc_distributions.txt',
+    'image/cbis_ddsm_calc_types.txt',
+    'image/cbis_ddsm_mass_margins.txt',
+    'image/cbis_ddsm_mass_shapes.txt',
+    'image/cbis_ddsm_patch_labels.txt',
     'image/dtd_key_attributes.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
