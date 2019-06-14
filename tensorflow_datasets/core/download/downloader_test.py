@@ -165,6 +165,29 @@ class DownloaderTest(testing.TestCase):
     with self.assertRaises(downloader.urllib.error.URLError):
       promise.get()
 
+  def test_ssl_mock(self):
+    # Testing ssl for ftp
+    absltest.mock.patch.dict(
+        os.environ,
+        {"TFDS_CA_BUNDLE": "/path/to/dummy.pem"}).start()
+    self.test_ftp_ssl('use_ssl')
+    # TODO: http ssl check
+
+  def test_ftp_ssl(self, ssl_type='skip_ssl'):
+    absltest.mock.patch.object(
+        downloader.urllib.request,
+        'Request',
+        lambda *a, **kw: 'dummy_request'
+    ).start()
+
+    method = absltest.mock.patch.object(
+        downloader.urllib.request,
+        'urlopen',
+        return_value=_FakeResponse(self.url, self.response, self.cookies)
+    ).start()
+    self.test_ftp()
+    method.assert_called_once_with('dummy_request', context=ssl_type)
+
   def test_py2_ftp_ssl_mock(self):
     ssl_mock_dict = downloader.ssl.__dict__.copy()
     if ssl_mock_dict.get('_create_unverified_context', None):
@@ -181,27 +204,6 @@ class DownloaderTest(testing.TestCase):
     self.test_ftp()
     with self.assertRaises(AssertionError):
       method.assert_not_called()
-
-  def test_ftp_ssl_mock(self, ssl_type='skip_ssl'):
-    absltest.mock.patch.object(
-        downloader.urllib.request,
-        'Request',
-        lambda *a, **kw: 'dummy_request'
-    ).start()
-
-    method = absltest.mock.patch.object(
-        downloader.urllib.request,
-        'urlopen',
-        return_value=_FakeResponse(self.url, self.response, self.cookies)
-    ).start()
-    self.test_ftp()
-    method.assert_called_once_with('dummy_request', context=ssl_type)
-
-  def test_ssl_ftp(self):
-    absltest.mock.patch.dict(
-        os.environ,
-        {"TFDS_CA_BUNDLE": "/path/to/dummy.pem"}).start()
-    self.test_ftp_ssl_mock('use_ssl')
 
 
 class GetFilenameTest(testing.TestCase):

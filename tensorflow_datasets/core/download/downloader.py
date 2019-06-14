@@ -159,11 +159,9 @@ class _Downloader(object):
         'https': os.environ.get('TFDS_HTTPS_PROXY', None),
         'ftp': os.environ.get('TFDS_FTP_PROXY', None)
     }
-    ca_bundle = os.environ.get(
-        'TFDS_CA_BUNDLE',
-        None) or os.environ.get(
-        'REQUESTS_CA_BUNDLE',
-        None)
+    ca_bundle = os.environ.get('TFDS_CA_BUNDLE', None)
+    if not ca_bundle:
+      ca_bundle = os.environ.get('REQUESTS_CA_BUNDLE', None)
     if ca_bundle:
       ca_bundle = extract_zipped_paths(ca_bundle)
     if not hasattr(ssl, '_create_unverified_context'):
