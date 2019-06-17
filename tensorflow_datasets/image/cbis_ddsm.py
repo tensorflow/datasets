@@ -131,7 +131,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       CuratedBreastImagingDDSMConfig(
           name='patches',
-          version='0.1.0',
+          version='0.2.0',
           description=('Patches containing both calsification and mass cases, '
                        'plus pathces with no abnormalities. Designed as a '
                        'traditional 5-class classification task.'),
@@ -398,7 +398,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         for abnormality, abnormality_mask, abnormality_area in zip(
             example['abnormalities'], abnormalities_masks, abnormalities_areas):
           # Determine label for the given abnormality.
-          if abnormality['assessment'].startswith('MALIGNANT'):
+          if abnormality['pathology'].startswith('MALIGNANT'):
             benign_or_malignant = 'MALIGNANT'
           else:
             benign_or_malignant = 'BENING'
