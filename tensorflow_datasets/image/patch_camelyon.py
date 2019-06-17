@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+
 import h5py
 import tensorflow_datasets.public_api as tfds
 
@@ -100,8 +101,10 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
     Yields:
       A dictionary with the image and the corresponding label.
     """
-    h5x_file = h5py.File(paths[split + '_x'], 'r')
-    h5y_file = h5py.File(paths[split + '_y'], 'r')
+    filepath_x = paths[split + '_x']
+    filepath_y = paths[split + '_y']
+    h5x_file = h5py.File(filepath_x, 'r')
+    h5y_file = h5py.File(filepath_y, 'r')
     images = h5x_file['x']
     labels = h5y_file['y']  # Note: Labels are in a N x 1 x 1 x 1 tensor.
     for i, (image, label) in enumerate(zip(images, labels)):
