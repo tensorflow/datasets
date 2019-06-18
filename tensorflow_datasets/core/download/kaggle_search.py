@@ -22,6 +22,7 @@ from __future__ import print_function
 import ipywidgets.widgets as widgets
 import IPython.display as display
 
+import os
 import tensorflow as tf
 
 from tensorflow_datasets.core.download import kaggle
@@ -184,7 +185,9 @@ def interactive_kaggle():
       if not downloader.competition_files:
         raise DataNotFoundError('Data is no longer available!')
       for fname in downloader.competition_files:
-        downloader.download_file(fname, dataset_name.value)
+        downloader.download_file(fname, os.path.expanduser(
+                                        os.path.join("~", "tensorflow_datasets",
+                                                     dataset_name.value)))
         print('Downloaded ', fname)
       print('Download Completed!')
 
