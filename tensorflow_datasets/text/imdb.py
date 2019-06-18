@@ -154,7 +154,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     """Generate IMDB examples."""
     # For labeled examples, extract the label from the path.
     reg_path = "(?P<label>neg|pos)" if labeled else "unsup"
-    reg = re.compile(os.path.join("^%s" % directory, reg_path, ""))
+    reg = re.compile(
+        os.path.join("^%s" % directory, reg_path, "").replace("\\", "\\\\"))
     for path, imdb_f in archive:
       res = reg.match(path)
       if not res:
