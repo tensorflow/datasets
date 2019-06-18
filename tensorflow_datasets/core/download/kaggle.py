@@ -218,7 +218,7 @@ class KaggleSearch(object):
     return output
 
 
-def search_and_download():
+def interactive_search_and_download():
   """Kaggle Searcher and Downloader extension for Jupyter Notebook"""
 
   tf.logging.set_verbosity(tf.logging.ERROR)
