@@ -320,7 +320,7 @@ def _pprint_features_dict(features_dict, indent=0, add_prefix=True):
   lines = [first_line]
   for k in sorted(list(features_dict.keys())):
     v = features_dict[k]
-    if isinstance(v, tfds.features.FeaturesDict):
+    if hasattr(v, 'keys'):
       v_str = _pprint_features_dict(v, indent + 4, False)
     else:
       v_str = str(v)
