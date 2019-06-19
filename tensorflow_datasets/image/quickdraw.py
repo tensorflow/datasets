@@ -57,6 +57,12 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
   the 'raw' or 'simplified drawings' datasets).
   """
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
@@ -110,8 +116,12 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
     for label, path in sorted(file_paths.items(), key=lambda x: x[0]):
       with tf.io.gfile.GFile(path, "rb") as f:
         class_images = np.load(f)
-        for np_image in class_images:
-          yield {
+        for i, np_image in enumerate(class_images):
+          record = {
               "image": np_image.reshape(_QUICKDRAW_IMAGE_SHAPE),
               "label": label,
           }
+          if self.version.implements(tfds.core.Experiment.S3):
+            yield "%s_%i" % (label, i), record
+          else:
+            yield record

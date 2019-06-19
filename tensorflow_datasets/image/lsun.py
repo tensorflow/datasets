@@ -71,7 +71,12 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version="0.1.1",
+          version=tfds.core.Version("0.1.1"),
+          supported_versions=[
+              tfds.core.Version("2.0.0", experiments={
+                  tfds.core.Experiment.S3: True}),
+              tfds.core.Version("0.1.1"),
+          ],
       ) for category in _CATEGORIES
   ]
 
@@ -113,5 +118,9 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     with tf.Graph().as_default():
       dataset = tf.contrib.data.LMDBDataset(
           os.path.join(extracted_dir, file_path, "data.mdb"))
-      for _, jpeg_image in tfds.as_numpy(dataset):
-        yield {"image": io.BytesIO(jpeg_image)}
+      for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
+        record = {"image": io.BytesIO(jpeg_image)}
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield i, record
+        else:
+          yield record

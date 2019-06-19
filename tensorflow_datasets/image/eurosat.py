@@ -72,6 +72,9 @@ class EurosatConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
+    kwargs['supported_versions'] = [
+        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
+    ]
     super(EurosatConfig, self).__init__(**kwargs)
     self.selection = selection
     self.download_url = download_url
@@ -146,17 +149,21 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
     for filename in tf.io.gfile.glob(os.path.join(path, '*', '*')):
       label = filename.split('/')[-1].split('_')[0]
       if selection == 'rgb':
-        yield {
+        record = {
             'image': filename,
             'label': label,
             'filename': os.path.basename(filename)
         }
       else:
-        yield {
+        record = {
             'sentinel2': _extract_channels(filename),
             'label': label,
             'filename': os.path.basename(filename)
         }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield filename, record
+      else:
+        yield record
 
 
 def _extract_channels(filename):

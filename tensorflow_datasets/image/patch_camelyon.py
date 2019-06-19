@@ -48,6 +48,12 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
   """PatchCamelyon."""
 
   VERSION = tfds.core.Version('0.1.0')
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version('0.1.0'),
+  ]
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -109,4 +115,9 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
     labels = h5y_file['y']  # Note: Labels are in a N x 1 x 1 x 1 tensor.
     for i, (image, label) in enumerate(zip(images, labels)):
       label = label.flatten()[0]
-      yield {'id': '%s_%d' % (split, i), 'image': image, 'label': label}
+      id_ = '%s_%d' % (split, i)
+      record = {'id': id_, 'image': image, 'label': label}
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield id_, record
+      else:
+        yield record

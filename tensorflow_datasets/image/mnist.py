@@ -243,6 +243,9 @@ class EMNISTConfig(tfds.core.BuilderConfig):
       test_examples: number of test examples
       **kwargs: keyword arguments forwarded to super.
     """
+    kwargs["supported_versions"] = [
+        tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+    ]
     super(EMNISTConfig, self).__init__(**kwargs)
     self.class_number = class_number
     self.train_examples = train_examples
@@ -261,7 +264,8 @@ class EMNIST(MNIST):
           train_examples=697932,
           test_examples=116323,
           description="EMNIST ByClass",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
+
       ),
       EMNISTConfig(
           name="bymerge",
@@ -269,7 +273,7 @@ class EMNIST(MNIST):
           train_examples=697932,
           test_examples=116323,
           description="EMNIST ByMerge",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="balanced",
@@ -277,7 +281,7 @@ class EMNIST(MNIST):
           train_examples=112800,
           test_examples=18800,
           description="EMNIST Balanced",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="letters",
@@ -285,7 +289,7 @@ class EMNIST(MNIST):
           train_examples=88800,
           test_examples=14800,
           description="EMNIST Letters",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="digits",
@@ -293,7 +297,7 @@ class EMNIST(MNIST):
           train_examples=240000,
           test_examples=40000,
           description="EMNIST Digits",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="mnist",
@@ -301,7 +305,7 @@ class EMNIST(MNIST):
           train_examples=60000,
           test_examples=10000,
           description="EMNIST MNIST",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
   ]
 

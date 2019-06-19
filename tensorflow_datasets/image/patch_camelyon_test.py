@@ -23,7 +23,7 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.image import patch_camelyon
 
 
-class Caltech101Test(testing.DatasetBuilderTestCase):
+class PatchCamelyonTest(testing.DatasetBuilderTestCase):
 
   DATASET_CLASS = patch_camelyon.PatchCamelyon
 
@@ -41,6 +41,10 @@ class Caltech101Test(testing.DatasetBuilderTestCase):
       'valid_x': 'camelyonpatch_level_2_split_valid_x.h5',
       'valid_y': 'camelyonpatch_level_2_split_valid_y.h5',
   }
+
+
+class PatchCamelyonS3Test(PatchCamelyonTest):
+  VERSION = '1.0.0'
 
 
 if __name__ == '__main__':

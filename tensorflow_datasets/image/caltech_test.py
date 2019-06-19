@@ -35,5 +35,10 @@ class Caltech101Test(testing.DatasetBuilderTestCase):
     super(Caltech101Test, self).setUp()
     caltech._TRAIN_POINTS_PER_CLASS = 1
 
+
+class Caltech101S3Test(Caltech101Test):
+  VERSION = '2.0.0'
+
+
 if __name__ == '__main__':
   testing.test_main()

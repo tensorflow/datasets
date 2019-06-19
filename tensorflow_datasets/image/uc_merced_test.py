@@ -30,5 +30,9 @@ class UcMercedTest(testing.DatasetBuilderTestCase):
   }
 
 
+class UcMercedS3Test(UcMercedTest):
+  VERSION = "1.0.0"
+
+
 if __name__ == "__main__":
   testing.test_main()

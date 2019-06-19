@@ -36,5 +36,9 @@ class SvhnTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SvhnS3Test(SvhnTest):
+  VERSION = "2.0.0"
+
+
 if __name__ == "__main__":
   testing.test_main()

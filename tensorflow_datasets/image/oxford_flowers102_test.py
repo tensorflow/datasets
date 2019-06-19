@@ -38,6 +38,10 @@ class OxfordFlowers102Test(testing.DatasetBuilderTestCase):
   }
 
 
+class OxfordFlowers102S3Test(OxfordFlowers102Test):
+  VERSION = "1.0.0"
+
+
 if __name__ == "__main__":
   testing.test_main()
 

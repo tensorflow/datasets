@@ -46,6 +46,12 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
   """Horses or Humans dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -94,7 +100,11 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
       if not res:  # if anything other than .png; skip
         continue
       label = res.group(1).lower()
-      yield {
+      record = {
           "image": fobj,
           "label": label,
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield fname, record
+      else:
+        yield record
