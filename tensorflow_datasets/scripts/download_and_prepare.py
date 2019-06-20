@@ -115,7 +115,7 @@ def download_config():
 
 def download_and_prepare(builder):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset {}...".format(builder.info.full_name))
+  logging.info("download_and_prepare for dataset %s...", builder.info.full_name)
 
   dl_config = download_config()
 
