@@ -27,17 +27,17 @@ from tensorflow_datasets.image import downsampled_imagenet
 
 class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = downsampled_imagenet.DownsampledImagenet
-  BUILDER_CONFIG_NAMES_TO_TEST = ["32x32", "64x64"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["32x32"]
 
   SPLITS = {
       tfds.Split.TRAIN: 2,
       tfds.Split.VALIDATION: 2,
   }
 
-  DL_EXTRACT_RESULT = {
-      "train_images": "train_images",
-      "valid_images": "valid_images",
-  }
+  DL_EXTRACT_RESULT = [
+      "train_32x32.tar",
+      "valid_32x32.tar",
+  ]
 
 
 class DownsampledImagenetS3Test(DownsampledImagenetTest):
