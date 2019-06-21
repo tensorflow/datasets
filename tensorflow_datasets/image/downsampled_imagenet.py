@@ -125,7 +125,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, archive):
     for fname, fobj in archive:
       record = {
           "image": fobj,
