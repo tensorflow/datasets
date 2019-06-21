@@ -66,6 +66,12 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
   """NWPU Remote Sensing Image Scene Classification (RESISC) Dataset."""
 
   VERSION = tfds.core.Version('0.0.1')
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version('0.0.1'),
+  ]
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -100,8 +106,12 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     for label in tf.io.gfile.listdir(path):
       for filename in tf.io.gfile.glob(os.path.join(path, label, '*.jpg')):
-        yield {
+        record = {
             'image': filename,
             'label': label,
             'filename': os.path.basename(filename)
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield filename, record
+        else:
+          yield record

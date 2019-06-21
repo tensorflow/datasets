@@ -60,17 +60,11 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 <h3 id="encoder"><code>encoder</code></h3>
 
-
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="vocab_size"><code>vocab_size</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -80,9 +74,10 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
-Decode the feature dict to TF compatible input. Note: If eager is not enabled,
-this function will be executed as a tensorflow graph (in
-`tf.data.Dataset.map(features.decode_example)`).
+Decode the feature dict to TF compatible input.
+
+Note: If eager is not enabled, this function will be executed as a tensorflow
+graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 #### Args:
 
@@ -102,16 +97,15 @@ this function will be executed as a tensorflow graph (in
 encode_example(example_data)
 ```
 
-
-
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
 get_serialized_info()
 ```
 
-Return the shape/dtype of features after encoding (for the adapter). The
-`FileAdapter` then use those information to write data on disk.
+Return the shape/dtype of features after encoding (for the adapter).
+
+The `FileAdapter` then use those information to write data on disk.
 
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
@@ -165,8 +159,6 @@ load_metadata(
 )
 ```
 
-
-
 <h3 id="maybe_build_from_corpus"><code>maybe_build_from_corpus</code></h3>
 
 ``` python
@@ -195,8 +187,6 @@ save_metadata(
 )
 ```
 
-
-
 <h3 id="str2ints"><code>str2ints</code></h3>
 
 ``` python
@@ -204,6 +194,3 @@ str2ints(str_value)
 ```
 
 Conversion string => encoded list[int].
-
-
-

@@ -16,8 +16,10 @@
 """Util import."""
 
 # pylint: disable=wildcard-import
+from tensorflow_datasets.core.utils.image_utils import *
 from tensorflow_datasets.core.utils.py_utils import *
 from tensorflow_datasets.core.utils.tf_utils import *
 from tensorflow_datasets.core.utils.tqdm_utils import *
+from tensorflow_datasets.core.utils.version import Experiment
 from tensorflow_datasets.core.utils.version import Version
 # pylint: enable=wildcard-import

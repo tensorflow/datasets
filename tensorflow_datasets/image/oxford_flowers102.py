@@ -52,6 +52,12 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
   """Oxford 102 category flower dataset."""
 
   VERSION = tfds.core.Version("0.0.1")  # Version 1.1 of oxford flowers 102.
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("0.0.1"),
+  ]
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -111,8 +117,12 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
 
     for image_id in examples:
       file_name = "image_%05d.jpg" % image_id
-      yield {
+      record = {
           "image": os.path.join(images_dir_path, file_name),
           "label": labels[image_id - 1] - 1,
           "file_name": file_name,
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield file_name, record
+      else:
+        yield record

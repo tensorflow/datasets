@@ -51,6 +51,7 @@ from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import json_format
 from tensorflow_datasets.core.utils import gcs_utils
@@ -133,6 +134,12 @@ class DatasetInfo(object):
     if urls:
       self._info_proto.location.urls[:] = urls
 
+    if features:
+      if not isinstance(features, top_level_feature.TopLevelFeature):
+        raise ValueError(
+            "DatasetInfo.features only supports FeaturesDict or Sequence at "
+            "the top-level. Got {}".format(features))
+      features._set_top_level()  # pylint: disable=protected-access
     self._features = features
     self._splits = splits_lib.SplitDict()
     if supervised_keys is not None:
@@ -173,7 +180,7 @@ class DatasetInfo(object):
 
   @property
   def version(self):
-    return utils.Version(self.as_proto.version)
+    return self._builder.version
 
   @property
   def citation(self):

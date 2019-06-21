@@ -39,5 +39,9 @@ class CelebATest(testing.DatasetBuilderTestCase):
   }
 
 
+class CelebAS3Test(CelebATest):
+  VERSION = "1.0.0"
+
+
 if __name__ == "__main__":
   testing.test_main()

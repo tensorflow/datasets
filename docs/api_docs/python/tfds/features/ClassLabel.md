@@ -40,6 +40,7 @@ __init__(
 ```
 
 Constructs a ClassLabel FeatureConnector.
+
 There are 3 ways to define a ClassLabel, which correspond to the 3
 arguments:
 
@@ -66,17 +67,11 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 <h3 id="names"><code>names</code></h3>
 
-
-
 <h3 id="num_classes"><code>num_classes</code></h3>
-
-
 
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
-
-
 
 ## Methods
 
@@ -86,9 +81,10 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
-Decode the feature dict to TF compatible input. Note: If eager is not enabled,
-this function will be executed as a tensorflow graph (in
-`tf.data.Dataset.map(features.decode_example)`).
+Decode the feature dict to TF compatible input.
+
+Note: If eager is not enabled, this function will be executed as a tensorflow
+graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 #### Args:
 
@@ -108,16 +104,15 @@ this function will be executed as a tensorflow graph (in
 encode_example(example_data)
 ```
 
-
-
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
 get_serialized_info()
 ```
 
-Return the shape/dtype of features after encoding (for the adapter). The
-`FileAdapter` then use those information to write data on disk.
+Return the shape/dtype of features after encoding (for the adapter).
+
+The `FileAdapter` then use those information to write data on disk.
 
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
@@ -191,6 +186,3 @@ str2int(str_value)
 ```
 
 Conversion class name string => integer.
-
-
-

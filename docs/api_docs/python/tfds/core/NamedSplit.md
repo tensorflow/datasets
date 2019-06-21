@@ -4,6 +4,7 @@
 <meta itemprop="property" content="__add__"/>
 <meta itemprop="property" content="__eq__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="__ne__"/>
 <meta itemprop="property" content="get_read_instruction"/>
 <meta itemprop="property" content="subsplit"/>
 </div>
@@ -32,6 +33,7 @@ The resulting split will correspond to 25% of the train split merged with
 100% of the test split.
 
 #### Warning:
+
 A split cannot be added twice, so the following will fail:
 
 ```
@@ -43,6 +45,7 @@ split = tfds.Split.TEST + tfds.Split.ALL  # Error
 ```
 
 #### Warning:
+
 The slices can be applied only one time. So the following are valid:
 
 ```
@@ -68,10 +71,6 @@ split = (train.subsplit(tfds.percent[:25]) + test).subsplit(tfds.percent[:50])
 __init__(name)
 ```
 
-
-
-
-
 ## Methods
 
 <h3 id="__add__"><code>__add__</code></h3>
@@ -90,13 +89,19 @@ __eq__(other)
 
 Equality: tfds.Split.TRAIN == 'train'.
 
+<h3 id="__ne__"><code>__ne__</code></h3>
+
+```python
+__ne__(other)
+```
+
+InEquality: tfds.Split.TRAIN != 'test'.
+
 <h3 id="get_read_instruction"><code>get_read_instruction</code></h3>
 
 ``` python
 get_read_instruction(split_dict)
 ```
-
-
 
 <h3 id="subsplit"><code>subsplit</code></h3>
 
@@ -110,6 +115,7 @@ subsplit(
 ```
 
 Divides this split into subsplits.
+
 There are 3 ways to define subsplits, which correspond to the 3
 arguments `k` (get `k` even subsplits), `percent` (get a slice of the
 dataset with <a href="../../tfds/percent.md"><code>tfds.percent</code></a>), and `weighted` (get subsplits with proportions

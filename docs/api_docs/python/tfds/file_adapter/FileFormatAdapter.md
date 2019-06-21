@@ -50,9 +50,9 @@ Returns a `tf.data.Dataset` whose elements are dicts given a filename.
 
 <h3 id="write_from_generator"><code>write_from_generator</code></h3>
 
-``` python
+```python
 write_from_generator(
-    generator_fn,
+    generator,
     output_files
 )
 ```
@@ -61,8 +61,8 @@ Write to files from generators_and_filenames.
 
 #### Args:
 
-*   <b>`generator_fn`</b>: returns generator yielding dictionaries of feature
-    name to value.
+*   <b>`generator`</b>: generator yielding dictionaries of feature name to
+    value.
 *   <b>`output_files`</b>: `list<str>`, output files to write files to.
 
 <h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>

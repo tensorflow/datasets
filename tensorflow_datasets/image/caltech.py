@@ -50,6 +50,11 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
   VERSION = tfds.core.Version("1.1.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -129,10 +134,14 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
           for image_file in fnames_to_emit:
             if image_file.endswith(".jpg"):
               image_path = os.path.join(full_path, image_file)
-              yield {
+              record = {
                   "image": image_path,
                   "label": d.lower(),
                   "image/file_name": image_file,
               }
+              if self.version.implements(tfds.core.Experiment.S3):
+                yield "%s/%s" % (d, image_file), record
+              else:
+                yield record
     # Resets the seeds to their previous states.
     np.random.set_state(numpy_original_state)

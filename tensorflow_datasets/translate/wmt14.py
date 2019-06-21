@@ -33,9 +33,8 @@ _CITATION = """
 }
 """
 
-# TODO(adarob): Add "hi" when access is granted for HindEnCorp.
 _LANGUAGE_PAIRS = [
-    (lang, "en") for lang in ["cs", "de", "fr", "ru"]
+    (lang, "en") for lang in ["cs", "de", "fr", "hi", "ru"]
 ]
 
 

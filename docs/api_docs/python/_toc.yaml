@@ -32,6 +32,8 @@ toc:
       path: /datasets/api_docs/python/tfds/core/DatasetBuilder
     - title: DatasetInfo
       path: /datasets/api_docs/python/tfds/core/DatasetInfo
+    - title: Experiment
+      path: /datasets/api_docs/python/tfds/core/Experiment
     - title: GeneratorBasedBuilder
       path: /datasets/api_docs/python/tfds/core/GeneratorBasedBuilder
     - title: get_tfds_path

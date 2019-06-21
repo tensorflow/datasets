@@ -45,16 +45,13 @@ _CITATION = """\
 """
 
 _DESCRIPTION = """\
-Dataset with images of 2 resolutions (see config name for information on the resolution). 
+Dataset with images of 2 resolutions (see config name for information on the resolution).
 It is used for density estimation and generative modeling experiments.
 """
 
 _DL_URL = "http://image-net.org/small/"
 
 _DATA_OPTIONS = ["32x32", "64x64"]
-
-_DL_URLS_TRAIN = {name: _DL_URL + "train_" + name + ".tar" for name in _DATA_OPTIONS}
-_DL_URLS_VALIDATION = {name: _DL_URL + "valid_" + name + ".tar" for name in _DATA_OPTIONS}
 
 
 class DownsampledImagenetConfig(tfds.core.BuilderConfig):
@@ -72,7 +69,7 @@ class DownsampledImagenetConfig(tfds.core.BuilderConfig):
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)
 
     super(DownsampledImagenetConfig, self).__init__(**kwargs)
-    self.data=data
+    self.data = data
 
 
 class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
@@ -81,8 +78,14 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       DownsampledImagenetConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
-          description=("A dataset consisting of Train and Validation images of " + config_name + " resolution."),
+          description=(
+              "A dataset consisting of Train and Validation images of " +
+              config_name + " resolution."),
           version="0.1.0",
+          supported_versions=[
+              tfds.core.Version("1.0.0", experiments={
+                  tfds.core.Experiment.S3: True}),
+          ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS
   ]
@@ -95,16 +98,14 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
         }),
         supervised_keys=None,
-        urls=[
-            "http://image-net.org/small/download.php"
-        ],
+        urls=["http://image-net.org/small/download.php"],
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
 
-    train_url = _DL_URLS_TRAIN[self.builder_config.name]
-    valid_url = _DL_URLS_VALIDATION[self.builder_config.name]
+    train_url = _DL_URL + "train_" + self.builder_config.name + ".tar"
+    valid_url = _DL_URL + "valid_" + self.builder_config.name + ".tar"
 
     extracted_paths = dl_manager.download_and_extract({
         "train_images": train_url,
@@ -116,13 +117,17 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs={
-                "path": os.path.join(extracted_paths["train_images"], "train_"+self.builder_config.name),
+                "path":
+                    os.path.join(extracted_paths["train_images"],
+                                 "train_" + self.builder_config.name),
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             num_shards=1,
             gen_kwargs={
-                "path": os.path.join(extracted_paths["valid_images"], "valid_"+self.builder_config.name),
+                "path":
+                    os.path.join(extracted_paths["valid_images"],
+                                 "valid_" + self.builder_config.name),
             }),
     ]
 
@@ -130,6 +135,10 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
     images = tf.io.gfile.listdir(path)
 
     for image in images:
-      yield {
+      record = {
           "image": os.path.join(path, image),
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield image, record
+      else:
+        yield record

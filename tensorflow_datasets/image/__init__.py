@@ -16,8 +16,10 @@
 """Image datasets."""
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
+from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
+from tensorflow_datasets.image.cbis_ddsm import CuratedBreastImagingDDSM
 from tensorflow_datasets.image.celeba import CelebA
 from tensorflow_datasets.image.celebahq import CelebAHq
 from tensorflow_datasets.image.chexpert import Chexpert
@@ -33,11 +35,13 @@ from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRet
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
 from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
+from tensorflow_datasets.image.eurosat import Eurosat
 from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
+from tensorflow_datasets.image.kitti import Kitti
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
@@ -47,6 +51,7 @@ from tensorflow_datasets.image.omniglot import Omniglot
 from tensorflow_datasets.image.open_images import OpenImagesV4
 from tensorflow_datasets.image.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
+from tensorflow_datasets.image.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.resisc45 import Resisc45
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
