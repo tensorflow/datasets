@@ -80,7 +80,8 @@ as_dataset(
     split=None,
     batch_size=None,
     shuffle_files=None,
-    as_supervised=False
+    as_supervised=False,
+    in_memory=None
 )
 ```
 
@@ -105,6 +106,10 @@ Callers must pass arguments as keyword arguments.
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
     `tf.data.Dataset` will have a dictionary with all the features.
+*   <b>`in_memory`</b>: `bool`, if `True`, loads the dataset in memory which
+    increases iteration speeds. Note that if `True` and the dataset has unknown
+    dimensions, the features will be padded to the maximum size across the
+    dataset.
 
 #### Returns:
 
