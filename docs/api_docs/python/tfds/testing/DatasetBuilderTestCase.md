@@ -137,7 +137,6 @@
 <meta itemprop="property" content="DATASET_CLASS"/>
 <meta itemprop="property" content="DL_EXTRACT_RESULT"/>
 <meta itemprop="property" content="EXAMPLE_DIR"/>
-<meta itemprop="property" content="INTERNAL_DATASET"/>
 <meta itemprop="property" content="MOCK_MONARCH"/>
 <meta itemprop="property" content="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"/>
 <meta itemprop="property" content="OVERLAPPING_SPLITS"/>
@@ -2450,7 +2449,6 @@ Use `self.session()` or `self.cached_session()` instead.
 *   `DATASET_CLASS = None` <a id="DATASET_CLASS"></a>
 *   `DL_EXTRACT_RESULT = None` <a id="DL_EXTRACT_RESULT"></a>
 *   `EXAMPLE_DIR = None` <a id="EXAMPLE_DIR"></a>
-*   `INTERNAL_DATASET = False` <a id="INTERNAL_DATASET"></a>
 *   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
 *   `MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True`
     <a id="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"></a>
