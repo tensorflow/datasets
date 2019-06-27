@@ -114,5 +114,10 @@ class LazyImporter(object):
     """For testing purposes only."""
     return _try_import("test_foo")
 
+  @utils.classproperty
+  @classmethod
+  def tfdv(cls):
+    """For testing purposes only."""
+    return _try_import("tensorflow_data_validation")
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name

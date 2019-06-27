@@ -47,7 +47,7 @@ import absl
 import numpy as np
 import six
 import tensorflow as tf
-import tensorflow_data_validation as tfdv
+import tensorflow_datasets.public_api as tfds
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import naming
@@ -279,17 +279,15 @@ class DatasetInfo(object):
         "Cannot generate statistics for filetype {}".format(filetype_suffix))
     filepattern = naming.filepattern_for_dataset_split(
       builder.name, split, builder.data_dir, filetype_suffix)
-
     if filetype_suffix == "csv":
-      statistics = tfdv.generate_statistics_from_csv(
+      statistics = tfds.core.lazy_imports.tfdv.generate_statistics_from_csv(
         filepattern)
     else:
-      statistics = tfdv.generate_statistics_from_tfrecord(
+      statistics = tfds.core.lazy_imports.tfdv.generate_statistics_from_tfrecord(
         filepattern)
-
     logger = logging.getLogger()
     logger.disabled = True
-    schema = tfdv.visualize_statistics(statistics)
+    schema = tfds.core.lazy_imports.tfdv.visualize_statistics(statistics)
     logger.disabled = False
     return schema
 
@@ -297,7 +295,7 @@ class DatasetInfo(object):
     self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
 
-  def _compute_dynamic_properties(self, builder):
+  def _compute_dynamic_gproperties(self, builder):
     """Update from the DatasetBuilder."""
     # Fill other things by going over the dataset.
     splits = self.splits
