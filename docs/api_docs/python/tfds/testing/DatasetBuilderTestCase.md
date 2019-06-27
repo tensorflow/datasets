@@ -137,7 +137,6 @@
 <meta itemprop="property" content="DATASET_CLASS"/>
 <meta itemprop="property" content="DL_EXTRACT_RESULT"/>
 <meta itemprop="property" content="EXAMPLE_DIR"/>
-<meta itemprop="property" content="INTERNAL_DATASET"/>
 <meta itemprop="property" content="MOCK_MONARCH"/>
 <meta itemprop="property" content="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"/>
 <meta itemprop="property" content="OVERLAPPING_SPLITS"/>
@@ -178,18 +177,15 @@ MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
 disable checks preventing usage of `os` or builtin functions instead of
 recommended `tf.io.gfile` API.
 
-This test case will check for the following:
- - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
- - the dataset builder can read the fake examples stored in
-     testing/test_data/fake_examples/${dataset_name};
- - the dataset builder can produce serialized data;
- - the dataset builder produces a valid Dataset object from serialized data
-   - in eager mode;
-   - in graph mode.
- - the produced Dataset examples have the expected dimensions and types;
- - the produced Dataset has and the expected number of examples;
- - a example is not part of two splits, or one of these splits is whitelisted
-     in OVERLAPPING_SPLITS.
+This test case will check for the following: - the dataset builder is correctly
+registered, i.e. <a href="../../tfds/load.md"><code>tfds.load(name)</code></a>
+works; - the dataset builder can read the fake examples stored in
+testing/test_data/fake_examples/${dataset_name}; - the dataset builder can
+produce serialized data; - the dataset builder produces a valid Dataset object
+from serialized data - in eager mode; - in graph mode. - the produced Dataset
+examples have the expected dimensions and types; - the produced Dataset has and
+the expected number of examples; - a example is not part of two splits, or one
+of these splits is whitelisted in OVERLAPPING_SPLITS.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -2450,7 +2446,6 @@ Use `self.session()` or `self.cached_session()` instead.
 *   `DATASET_CLASS = None` <a id="DATASET_CLASS"></a>
 *   `DL_EXTRACT_RESULT = None` <a id="DL_EXTRACT_RESULT"></a>
 *   `EXAMPLE_DIR = None` <a id="EXAMPLE_DIR"></a>
-*   `INTERNAL_DATASET = False` <a id="INTERNAL_DATASET"></a>
 *   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
 *   `MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True`
     <a id="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"></a>

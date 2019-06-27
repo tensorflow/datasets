@@ -46,8 +46,10 @@ __init__(
 
 Constructs a TokenTextEncoder.
 
-To load from a file saved with `TokenTextEncoder.save_to_file`, use
-`TokenTextEncoder.load_from_file`.
+To load from a file saved with
+<a href="../../../tfds/features/text/TokenTextEncoder.md#save_to_file"><code>TokenTextEncoder.save_to_file</code></a>,
+use
+<a href="../../../tfds/features/text/TokenTextEncoder.md#load_from_file"><code>TokenTextEncoder.load_from_file</code></a>.
 
 #### Args:
 

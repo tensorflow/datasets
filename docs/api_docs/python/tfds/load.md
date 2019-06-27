@@ -44,9 +44,12 @@ Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/ma
 If `split=None` (the default), returns all splits for the dataset. Otherwise,
 returns the specified split.
 
-`load` is a convenience method that fetches the <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by
-string name, optionally calls `DatasetBuilder.download_and_prepare`
-(if `download=True`), and then calls `DatasetBuilder.as_dataset`.
+`load` is a convenience method that fetches the
+<a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
+by string name, optionally calls
+<a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>DatasetBuilder.download_and_prepare</code></a>
+(if `download=True`), and then calls
+<a href="../tfds/core/DatasetBuilder.md#as_dataset"><code>DatasetBuilder.as_dataset</code></a>.
 This is roughly equivalent to:
 
 ```
