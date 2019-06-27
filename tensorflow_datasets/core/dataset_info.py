@@ -41,13 +41,16 @@ import os
 import posixpath
 import pprint
 import tempfile
+import logging
 
-from absl import logging
+import absl
 import numpy as np
 import six
 import tensorflow as tf
+import tensorflow_data_validation as tfdv
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
@@ -265,6 +268,31 @@ class DatasetInfo(object):
   def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
+  def visualize_dataset(self):
+    return self._visualize_dataset(self._builder, 'train')
+
+  def _visualize_dataset(self, builder, split):
+    """Visualize dataset statistics with FACETS DIVE."""
+    filetype_suffix = builder._file_format_adapter.filetype_suffix  # pylint: disable=protected-access
+    if filetype_suffix not in ["tfrecord", "csv"]:
+      raise ValueError(
+        "Cannot generate statistics for filetype {}".format(filetype_suffix))
+    filepattern = naming.filepattern_for_dataset_split(
+      builder.name, split, builder.data_dir, filetype_suffix)
+
+    if filetype_suffix == "csv":
+      statistics = tfdv.generate_statistics_from_csv(
+        filepattern)
+    else:
+      statistics = tfdv.generate_statistics_from_tfrecord(
+        filepattern)
+
+    logger = logging.getLogger()
+    logger.disabled = True
+    schema = tfdv.visualize_statistics(statistics)
+    logger.disabled = False
+    return schema
+
   def compute_dynamic_properties(self):
     self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
@@ -291,7 +319,7 @@ class DatasetInfo(object):
       except tf.errors.InvalidArgumentError:
         # This means there is no such split, even though it was specified in the
         # info, the least we can do is to log this.
-        logging.error(("%s's info() property specifies split %s, but it "
+        absl.logging.error(("%s's info() property specifies split %s, but it "
                        "doesn't seem to have been generated. Please ensure "
                        "that the data was downloaded for this split and re-run "
                        "download_and_prepare."), self.name, split_name)
@@ -372,7 +400,7 @@ class DatasetInfo(object):
       # If field is defined in code, we ignore the value
       if is_defined:
         if field_value != field_value_restored:
-          logging.info(
+          absl.logging.info(
               "Field info.%s from disk and from code do not match. Keeping "
               "the one from code.", field_name)
         continue
@@ -402,7 +430,7 @@ class DatasetInfo(object):
     data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
       return
-    logging.info("Loading info from GCS for %s", self.full_name)
+    absl.logging.info("Loading info from GCS for %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
       gcs_utils.download_gcs_file(fname, out_fname)
@@ -546,7 +574,7 @@ def get_dataset_feature_statistics(builder, split):
     # proto has no support for it.
     maybe_feature_shape = output_shapes_dict[feature_name]
     if not isinstance(maybe_feature_shape, tf.TensorShape):
-      logging.error(
+      absl.logging.error(
           "Statistics generation doesn't work for nested structures yet")
       continue
 
