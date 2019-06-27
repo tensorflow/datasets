@@ -2419,7 +2419,7 @@ reasoning each question requires.
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'objects': Sequence({'material': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'color': TensorInfo(shape=(None,), dtype=tf.int64), 'size': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'objects': Sequence({'shape': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'material': TensorInfo(shape=(None,), dtype=tf.int64), 'color': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'size': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -2485,7 +2485,7 @@ Note:
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool)}),
 })
 ```
 
@@ -2728,7 +2728,7 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'calc_type': TensorInfo(shape=(None,), dtype=tf.int64), 'calc_distribution': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'abnormalities': Sequence({'calc_distribution': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'id': TensorInfo(shape=(None,), dtype=tf.int32), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'calc_type': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64)}),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
@@ -2741,7 +2741,7 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'mass_margins': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_shape': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'abnormalities': Sequence({'mass_shape': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'id': TensorInfo(shape=(None,), dtype=tf.int32), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_margins': TensorInfo(shape=(None,), dtype=tf.int64)}),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
@@ -4723,7 +4723,7 @@ the Kitti homepage.
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/file_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'location': TensorInfo(shape=(None, 3), dtype=tf.float32), 'truncated': TensorInfo(shape=(None,), dtype=tf.float32), 'type': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'occluded': TensorInfo(shape=(None,), dtype=tf.int64), 'rotation_y': TensorInfo(shape=(None,), dtype=tf.float32), 'alpha': TensorInfo(shape=(None,), dtype=tf.float32), 'dimensions': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'objects': Sequence({'truncated': TensorInfo(shape=(None,), dtype=tf.float32), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'occluded': TensorInfo(shape=(None,), dtype=tf.int64), 'type': TensorInfo(shape=(None,), dtype=tf.int64), 'alpha': TensorInfo(shape=(None,), dtype=tf.float32), 'location': TensorInfo(shape=(None, 3), dtype=tf.float32), 'rotation_y': TensorInfo(shape=(None,), dtype=tf.float32), 'dimensions': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
 })
 ```
 
@@ -5159,11 +5159,11 @@ and has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5171,11 +5171,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5183,11 +5183,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5425,7 +5425,6 @@ Imagenet, trainable on a single GPU.
 *   Size: `7.48 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'id': Text(shape=(), dtype=tf.string, encoder=None),
@@ -6177,7 +6176,6 @@ predict the bounding box and label of each individual object.
 * Size: `868.85 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -11766,14 +11764,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Greek." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Bulgarian." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-Greek.
+Web-Scale Parallel Corpora for Official European Languages. English-Bulgarian.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -11783,68 +11781,20 @@ Web-Scale Parallel Corpora for Official European Languages. English-Greek.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
-
-*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hu, uses encoder plain_text.
-
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to it, uses encoder plain_text.
-
-*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to cs, uses encoder plain_text.
-
-*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pt, uses encoder plain_text.
-
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
-
-*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to mt, uses encoder plain_text.
-
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
-
-*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fr, uses encoder plain_text.
-
-*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to da, uses encoder plain_text.
-
-*   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fi, uses encoder plain_text.
-
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
-
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to bg, uses encoder plain_text.
-
 *   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to sv, uses encoder plain_text.
-
-*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
-
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
 
 *   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to sl, uses encoder plain_text.
 
-*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
 
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
+*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to mt, uses encoder plain_text.
 
-*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to et, uses encoder plain_text.
-
-*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to es, uses encoder plain_text.
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to it, uses encoder plain_text.
 
 *   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to ga, uses encoder plain_text.
@@ -11852,122 +11802,53 @@ has the following configurations predefined (defaults to the first one):
 *   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
     English to el, uses encoder plain_text.
 
-#### `"para_crawl/enpl_plain_text"`
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pl, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to ro, uses encoder plain_text.
 
-#### `"para_crawl/enhu_plain_text"`
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to pt, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hu': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to es, uses encoder plain_text.
 
-#### `"para_crawl/enit_plain_text"`
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to cs, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'it': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to et, uses encoder plain_text.
 
-#### `"para_crawl/encs_plain_text"`
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
 
-```python
-Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
 
-#### `"para_crawl/enpt_plain_text"`
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hu, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
 
-#### `"para_crawl/enro_plain_text"`
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to da, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ro': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
 
-#### `"para_crawl/enmt_plain_text"`
+*   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fi, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'mt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to nl, uses encoder plain_text.
 
-#### `"para_crawl/ensk_plain_text"`
+*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to fr, uses encoder plain_text.
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sk': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enfr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enda_plain_text"`
-
-```python
-Translation({
-    'da': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enfi_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ende_plain_text"`
-
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enbg_plain_text"`
-
-```python
-Translation({
-    'bg': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+    English to bg, uses encoder plain_text.
 
 #### `"para_crawl/ensv_plain_text"`
 
@@ -11975,24 +11856,6 @@ Translation({
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'sv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hr': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -12005,39 +11868,30 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enlt_plain_text"`
+#### `"para_crawl/ensk_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+    'sk': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/ennl_plain_text"`
+#### `"para_crawl/enmt_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+    'mt': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
-#### `"para_crawl/enet_plain_text"`
+#### `"para_crawl/enit_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'et': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enes_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'es': Text(shape=(), dtype=tf.string, encoder=None),
+    'it': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -12059,17 +11913,161 @@ Translation({
 })
 ```
 
+#### `"para_crawl/enpl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enro_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enes_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'es': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/encs_plain_text"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enet_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhu_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hu': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enda_plain_text"`
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ende_plain_text"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfi_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ennl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
 #### Statistics
 None computed
 
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-bg.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-bg.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
 
-`(u'en', u'el')`
+`(u'en', u'bg')`
 
 #### Citation
 ```
