@@ -102,6 +102,11 @@ class LazyImporter(object):
     _try_import("skimage.external.tifffile")
     return _try_import("skimage")
 
+  g@utils.classproperty
+  @classmethod
+  def tfdv(cls):
+    return _try_import("tensorflow_data_validation")
+
   @utils.classproperty
   @classmethod
   def os(cls):
@@ -113,11 +118,5 @@ class LazyImporter(object):
   def test_foo(cls):
     """For testing purposes only."""
     return _try_import("test_foo")
-
-  @utils.classproperty
-  @classmethod
-  def tfdv(cls):
-    """For testing purposes only."""
-    return _try_import("tensorflow_data_validation")
 
 lazy_imports = LazyImporter  # pylint: disable=invalid-name

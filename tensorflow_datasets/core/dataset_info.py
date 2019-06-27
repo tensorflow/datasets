@@ -295,7 +295,7 @@ class DatasetInfo(object):
     self._compute_dynamic_properties(self._builder)
     self._fully_initialized = True
 
-  def _compute_dynamic_gproperties(self, builder):
+  def _compute_dynamic_properties(self, builder):
     """Update from the DatasetBuilder."""
     # Fill other things by going over the dataset.
     splits = self.splits
