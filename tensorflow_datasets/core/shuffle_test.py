@@ -38,15 +38,15 @@ _ITEMS = [
 ]
 
 _ORDERED_ITEMS = [
-    b'over',
-    b'jumps',
-    b'quick ',
     b' dog.',
+    b'over',
+    b'brown',
     b'The',
+    b' fox ',
     b' the ',
     b'lazy',
-    b'brown',
-    b' fox ',
+    b'quick ',
+    b'jumps',
 ]
 
 _TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS)
@@ -97,7 +97,6 @@ class ShuffleTest(testing.TestCase):
     shuffler.add(2, b'b')
     shuffler.add(1, b'c')
     iterator = iter(shuffler)
-    self.assertEqual(next(iterator), b'b')
     self.assertEqual(next(iterator), b'a')
     with self.assertRaisesWithPredicateMatch(
         AssertionError, 'Two records share the same hashed key!'):
