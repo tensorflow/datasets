@@ -102,7 +102,7 @@ class LazyImporter(object):
     _try_import("skimage.external.tifffile")
     return _try_import("skimage")
 
-  g@utils.classproperty
+  @utils.classproperty
   @classmethod
   def tfdv(cls):
     return _try_import("tensorflow_data_validation")

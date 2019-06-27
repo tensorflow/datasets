@@ -269,26 +269,38 @@ class DatasetInfo(object):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
   def visualize_dataset(self):
-    return self._visualize_dataset(self._builder, 'train')
+    """Visualize dataset statistics with FACETS DIVE.
 
-  def _visualize_dataset(self, builder, split):
-    """Visualize dataset statistics with FACETS DIVE."""
-    filetype_suffix = builder._file_format_adapter.filetype_suffix  # pylint: disable=protected-access
-    if filetype_suffix not in ["tfrecord", "csv"]:
+       Example Usage:
+
+          titanic_builder = tfds.builder("titanic")
+          titatanic_builder.download_and_prepare()
+          titanic_builder.info.visualize_dataset()
+
+       Return a <IPython.core.display.HTML object>
+
+       So it's just use on the jupyter notebook."""
+
+    filetype_suffix = self._builder._file_format_adapter.filetype_suffix
+
+    if filetype_suffix != "tfrecord":
       raise ValueError(
-        "Cannot generate statistics for filetype {}".format(filetype_suffix))
+        "Cannot visualize dataset statistics because filetype {}".format(
+          filetype_suffix))
+
+    # Find the train .tfrecord files pattern of dataset.
     filepattern = naming.filepattern_for_dataset_split(
-      builder.name, split, builder.data_dir, filetype_suffix)
-    if filetype_suffix == "csv":
-      statistics = tfds.core.lazy_imports.tfdv.generate_statistics_from_csv(
-        filepattern)
-    else:
-      statistics = tfds.core.lazy_imports.tfdv.generate_statistics_from_tfrecord(
-        filepattern)
+      self._builder.name, 'train', self._builder.data_dir, filetype_suffix)
+
+    statistics = tfds.core.lazy_imports.tfdv.generate_statistics_from_tfrecord(
+       filepattern)
+
+    # logger disabled the tfdv warnings
     logger = logging.getLogger()
     logger.disabled = True
     schema = tfds.core.lazy_imports.tfdv.visualize_statistics(statistics)
     logger.disabled = False
+
     return schema
 
   def compute_dynamic_properties(self):
