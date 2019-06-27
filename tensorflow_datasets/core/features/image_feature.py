@@ -40,6 +40,9 @@ ACCEPTABLE_CHANNELS = {
     'jpeg': (0, 1, 3),
 }
 
+ACCEPTABLE_DTYPES = [ tf.uint8 , tf.uint16 ]
+
+ACCEPTABLE_NP_DTYPES = [ np.uint8 , np.uint16 ]
 
 class Image(feature.FeatureConnector):
   """`FeatureConnector` for images.
@@ -69,7 +72,7 @@ class Image(feature.FeatureConnector):
   """
 
   @api_utils.disallow_positional_args
-  def __init__(self, shape=None, encoding_format=None):
+  def __init__(self, shape=None, encoding_format=None, dtype=None):
     """Construct the connector.
 
     Args:
@@ -83,6 +86,7 @@ class Image(feature.FeatureConnector):
         images on disk.
         If image is loaded from {bmg,gif,jpeg,png} file, this parameter is
         ignored, and file original encoding is used.
+      dtype: tf.uint16 or tf.uint8 (default).
 
     Raises:
       ValueError: If the shape is invalid
@@ -90,10 +94,18 @@ class Image(feature.FeatureConnector):
     self._encoding_format = None
     self._shape = None
     self._runner = None
+    self._dtype = None
 
     # Set and validate values
     self.set_encoding_format(encoding_format or 'png')
     self.set_shape(shape or (None, None, 3))
+    self.set_dtype(dtype or tf.uint8)
+
+  def set_dtype(self , dtype):
+    """ Update the dtype. """
+    if dtype not in ACCEPTABLE_DTYPES:
+      raise ValueError('`dtype` must be either tf.uint8 or tf.uint16')
+    self._dtype = dtype
 
   def set_encoding_format(self, encoding_format):
     """Update the encoding format."""
@@ -123,8 +135,8 @@ class Image(feature.FeatureConnector):
     """Returns np_image encoded as jpeg or png."""
     if not self._runner:
       self._runner = utils.TFGraphRunner()
-    if np_image.dtype != np.uint8:
-      raise ValueError('Image should be uint8. Detected: %s.' % np_image.dtype)
+    if np_image.dtype not in ACCEPTABLE_NP_DTYPES:
+      raise ValueError('Image should be uint8 or uint16. Detected: %s.' % np_image.dtype)
     utils.assert_shape_match(np_image.shape, self._shape)
     return self._runner.run(ENCODE_FN[self._encoding_format], np_image)
 
@@ -146,6 +158,9 @@ class Image(feature.FeatureConnector):
 
   def decode_example(self, example):
     """Reconstruct the image from the tf example."""
+    if self._encoding_format is 'png' and self._dtype is tf.uint16:
+      img = tf.image.decode_png( example , channels=self._shape[-1] , dtype=self._dtype)
+      return img.set_shape(self._shape)
     img = tf.image.decode_image(
         example, channels=self._shape[-1], dtype=tf.uint8)
     img.set_shape(self._shape)
