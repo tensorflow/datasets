@@ -51,5 +51,48 @@ class Coco2014S3Test(Coco2014Test):
   VERSION = "2.0.0"
 
 
+class Coco2017Test(testing.DatasetBuilderTestCase):
+  
+  DATASET_CLASS = coco.Coco2017
+  
+  SPLITS = {
+      tfds.Split.TRAIN: 5,
+      tfds.Split.VALIDATION: 2,
+      tfds.Split.TEST: 2,
+  }
+  
+  DL_EXTRACT_RESULT = {
+      "train_images": "train_images",
+      "val_images": "val_images",
+      "trainval_annotations": "trainval_annotations",
+      "test_images": "test_images",
+      "test_annotations": "test_annotations",
+  }
+
+
+class Coco2017S3Test(Coco2017Test):
+  VERSION = "2.0.0"
+
+
+class Coco2017PanopticTest(testing.DatasetBuilderTestCase):
+  
+  DATASET_CLASS = coco.Coco2017Panoptic
+  
+  SPLITS = {
+      tfds.Split.TRAIN: 3,
+      tfds.Split.VALIDATION: 2,
+  }
+  
+  DL_EXTRACT_RESULT = {
+      "train_images": "train_images",
+      "val_images": "val_images",
+      "panoptic_annotations_trainval2017": "panoptic_annotations_trainval2017",
+  }
+
+
+class Coco2017PanopticS3Test(Coco2017PanopticTest):
+  VERSION = "2.0.0"
+
+
 if __name__ == "__main__":
   testing.test_main()
