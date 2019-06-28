@@ -23,7 +23,9 @@ Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 Defined in [`core/features/text/subword_text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py).
 
-<!-- Placeholder for "Used in" -->
+### Used in the tutorials:
+
+*   [Transformer model for language understanding](https://www.tensorflow.org/beta/tutorials/text/transformer)
 
 Encoding is fully invertible because all out-of-vocab wordpieces are
 byte-encoded.

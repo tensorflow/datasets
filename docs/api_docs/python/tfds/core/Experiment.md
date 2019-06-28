@@ -2,6 +2,7 @@
 <meta itemprop="name" content="tfds.core.Experiment" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="DUMMY"/>
+<meta itemprop="property" content="S3"/>
 </div>
 
 # tfds.core.Experiment
@@ -30,3 +31,4 @@ tfds.core.Experiment.EXP_A: True, })
 ## Class Members
 
 *   `DUMMY` <a id="DUMMY"></a>
+*   `S3` <a id="S3"></a>

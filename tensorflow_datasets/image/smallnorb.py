@@ -54,6 +54,12 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
   """Smallnorb data set."""
 
   VERSION = tfds.core.Version("0.1.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("0.1.0"),
+  ]
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -126,8 +132,9 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
     """
     dat_arr, cat_arr, info_arr = _load_chunk(dat_path, cat_path, info_path)
 
-    for image, category, info_vec in moves.zip(dat_arr, cat_arr, info_arr):
-      yield {
+    for i, (image, category, info_vec) in enumerate(moves.zip(
+        dat_arr, cat_arr, info_arr)):
+      record = {
           "image": image[0],
           "image2": image[1],
           "label_category": category,
@@ -136,6 +143,10 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
           "label_azimuth": info_vec[2],
           "label_lighting": info_vec[3],
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield i, record
+      else:
+        yield record
 
 
 def _load_chunk(dat_path, cat_path, info_path):

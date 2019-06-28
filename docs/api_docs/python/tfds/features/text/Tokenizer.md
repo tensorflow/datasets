@@ -18,8 +18,9 @@ Splits a string into tokens, and joins them back.
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
-<!-- Placeholder for "Used in" -->
+### Used in the tutorials:
 
+*   [Load text with tf.data](https://www.tensorflow.org/beta/tutorials/load_data/text)
 
 <h2 id="__init__"><code>__init__</code></h2>
 

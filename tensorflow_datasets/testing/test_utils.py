@@ -454,3 +454,24 @@ def mock_kaggle_api(filenames=None, err_msg=None):
   with absltest.mock.patch("subprocess.check_output",
                            make_mock_check_output(filenames, err_msg)):
     yield
+
+
+class DummySerializer(object):
+  """To mock example_serializer.ExampleSerializer."""
+
+  def __init__(self, specs):
+    del specs
+
+  def serialize_example(self, example):
+    return bytes(example)
+
+
+class DummyParser(object):
+  """To mock example_parser.ExampleParser."""
+
+  def __init__(self, specs):
+    del specs
+
+  def parse_example(self, ex):
+    return ex
+

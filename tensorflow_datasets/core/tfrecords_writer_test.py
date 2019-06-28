@@ -79,19 +79,10 @@ def _read_records(path):
   return fnames, all_recs
 
 
-class _DummySerializer(object):
-
-  def __init__(self, specs):
-    del specs
-
-  def serialize_example(self, example):
-    return bytes(example)
-
-
 class WriterTest(testing.TestCase):
 
   @absltest.mock.patch.object(
-      example_serializer, 'ExampleSerializer', _DummySerializer)
+      example_serializer, 'ExampleSerializer', testing.DummySerializer)
   def test_write(self):
     """Writes 8 records in 5 shards.
 
@@ -116,7 +107,7 @@ class WriterTest(testing.TestCase):
     self.assertEqual(written_files,
                      ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
     self.assertEqual(all_recs, [
-        [b'f', b'e'], [b'b'], [b'a', b'g'], [b'h'], [b'c', b'd'],
+        [b'f', b'c'], [b'a'], [b'd', b'g'], [b'h'], [b'b', b'e'],
     ])
 
 if __name__ == '__main__':

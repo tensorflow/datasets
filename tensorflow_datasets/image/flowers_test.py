@@ -29,5 +29,10 @@ class TFFlowersTest(testing.DatasetBuilderTestCase):
       'train': 5
   }
 
+
+class TFFlowersS3Test(TFFlowersTest):
+  VERSION = '2.0.0'
+
+
 if __name__ == '__main__':
   testing.test_main()

@@ -120,6 +120,9 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CuratedBreastImagingDDSM."""
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
+    kwargs['supported_versions'] = [
+        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
+    ]
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
     self.patch_size = patch_size
@@ -131,7 +134,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       CuratedBreastImagingDDSMConfig(
           name='patches',
-          version='0.1.0',
+          version=tfds.core.Version('0.2.0'),
           description=('Patches containing both calsification and mass cases, '
                        'plus pathces with no abnormalities. Designed as a '
                        'traditional 5-class classification task.'),
@@ -139,12 +142,12 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
           patch_size=(224, 224)),
       CuratedBreastImagingDDSMConfig(
           name='original-calc',
-          version='0.1.0',
+          version=tfds.core.Version('0.1.0'),
           description=('Original images of the calcification cases compressed '
                        'in lossless PNG.')),
       CuratedBreastImagingDDSMConfig(
           name='original-mass',
-          version='0.1.0',
+          version=tfds.core.Version('0.1.0'),
           description=('Original images of the mass cases compressed in '
                        'lossless PNG.')),
   ]
@@ -363,7 +366,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     for _, patient_examples in sorted(patients_data.items()):
       for _, example in sorted(patient_examples.items()):
         if _include_example_in_split(example):
-          yield {
+          record = {
               'id': example['id'],
               'patient': example['patient'],
               'image': example['image'],
@@ -375,6 +378,10 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
               } for abnormality in example['abnormalities']],
               # pylint: enable=g-complex-comprehension
           }
+          if self.version.implements(tfds.core.Experiment.S3):
+            yield example['id'], record
+          else:
+            yield record
 
   def _generate_examples_patches(self,
                                  patients_data,
@@ -398,7 +405,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         for abnormality, abnormality_mask, abnormality_area in zip(
             example['abnormalities'], abnormalities_masks, abnormalities_areas):
           # Determine label for the given abnormality.
-          if abnormality['assessment'].startswith('MALIGNANT'):
+          if abnormality['pathology'].startswith('MALIGNANT'):
             benign_or_malignant = 'MALIGNANT'
           else:
             benign_or_malignant = 'BENING'
@@ -417,12 +424,16 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
                                        num_positive_patches_per_abnormality)):
             patch_id = ('%s/abnorm_%s/patch_%d' %
                         (example['id'], abnormality['id'], k))
-            yield {
+            record = {
                 'id': patch_id,
                 # Note: TFDS needs the shape to be (?, ?, 1).
                 'image': np.expand_dims(patch, axis=-1),
                 'label': label,
             }
+            if self.version.implements(tfds.core.Experiment.S3):
+              yield patch_id, record
+            else:
+              yield record
 
         # Sample background patches from the given mammography.
         for k, patch in enumerate(
@@ -430,12 +441,17 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
                                      abnormalities_masks, abnormalities_areas,
                                      patch_size,
                                      num_background_patches_per_image)):
-          yield {
-              'id': '%s/background_%d' % (example['id'], k),
+          id_ = '%s/background_%d' % (example['id'], k)
+          record = {
+              'id': id_,
               # Note: TFDS needs the shape to be (?, ?, 1).
               'image': np.expand_dims(patch, axis=-1),
               'label': 'BACKGROUND',
           }
+          if self.version.implements(tfds.core.Experiment.S3):
+            yield id_, record
+          else:
+            yield record
 
 
 def _load_csv_files(manual_dir, dictionary_of_csv_files):

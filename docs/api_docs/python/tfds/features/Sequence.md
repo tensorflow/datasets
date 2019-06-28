@@ -43,16 +43,32 @@ Note that `SequenceDict` do not support features which are of type
 tfds.features.Sequence(tfds.features.Image(), length=NB_FRAME)
 ```
 
-or: `tfds.features.Sequence({ 'frame': tfds.features.Image(shape=(64, 64, 3))
-'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right']) },
-length=NB_FRAME)`
+or:
 
-During data generation: `yield { 'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
-'action': ['left', 'left', 'up', ...], }`
+```
+tfds.features.Sequence({
+    'frame': tfds.features.Image(shape=(64, 64, 3))
+    'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right'])
+}, length=NB_FRAME)
+```
 
-Tensor returned by `.as_dataset()`: `{ 'frame': tf.Tensor(shape=(NB_FRAME, 64,
-64, 3), dtype=tf.uint8), 'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
-}`
+During data generation:
+
+```
+yield {
+    'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
+    'action': ['left', 'left', 'up', ...],
+}
+```
+
+Tensor returned by `.as_dataset()`:
+
+```
+{
+    'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
+    'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
+}
+```
 
 At generation time, you can specify a list of features dict, a dict of list
 values or a stacked numpy array. The lists will automatically be distributed

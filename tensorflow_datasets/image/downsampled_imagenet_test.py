@@ -34,10 +34,14 @@ class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
       tfds.Split.VALIDATION: 2,
   }
 
-  DL_EXTRACT_RESULT = {
-      "train_images": "train_images",
-      "valid_images": "valid_images",
-  }
+  DL_EXTRACT_RESULT = [
+      "train_32x32.tar",
+      "valid_32x32.tar",
+  ]
+
+
+class DownsampledImagenetS3Test(DownsampledImagenetTest):
+  VERSION = "1.0.0"
 
 
 if __name__ == "__main__":

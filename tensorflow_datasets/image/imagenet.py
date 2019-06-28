@@ -95,11 +95,14 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('2.0.1')
   SUPPORTED_VERSIONS = [
-      tfds.core.Version('3.0.0'),  # Will be made canonical in near future.
+      tfds.core.Version('4.0.0', experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version('3.0.0'),
+      tfds.core.Version('2.0.1'),
   ]
   # Version history:
+  # 4.0.0: S3 (new shuffling, sharding and slicing mechanism).
   # 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
-  # 2.1.1: Encoding fix. No changes from user point of view.
+  # 2.0.1: Encoding fix. No changes from user point of view.
   # 2.0.0: Fix validation labels.
 
   def _info(self):
@@ -148,14 +151,14 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1000,
+            num_shards=1000,  # Ignored when using a version with S3 experiment.
             gen_kwargs={
                 'archive': dl_manager.iter_archive(train_path),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=5,
+            num_shards=5,  # Ignored when using a version with S3 experiment.
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
                 'validation_labels': self._get_validation_labels(val_path),
@@ -190,16 +193,24 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
       for image_fname, image in tfds.download.iter_archive(
           fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):
         image = self._fix_image(image_fname, image)
-        yield {
+        record = {
             'file_name': image_fname,
             'image': image,
             'label': label,
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield image_fname, record
+        else:
+          yield record
 
   def _generate_examples_validation(self, archive, labels):
     for fname, fobj in archive:
-      yield {
+      record = {
           'file_name': fname,
           'image': fobj,
           'label': labels[fname],
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield fname, record
+      else:
+        yield record

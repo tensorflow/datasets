@@ -32,5 +32,9 @@ class SmallnorbTest(tfds_test.DatasetBuilderTestCase):
   }
 
 
+class SmallnorbS3Test(SmallnorbTest):
+  VERSION = "1.0.0"
+
+
 if __name__ == "__main__":
   tfds_test.test_main()

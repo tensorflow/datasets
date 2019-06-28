@@ -47,5 +47,9 @@ class Coco2014Test(testing.DatasetBuilderTestCase):
   }
 
 
+class Coco2014S3Test(Coco2014Test):
+  VERSION = "2.0.0"
+
+
 if __name__ == "__main__":
   testing.test_main()

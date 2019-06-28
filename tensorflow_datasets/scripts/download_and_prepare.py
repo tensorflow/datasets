@@ -50,6 +50,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
 
+
 FLAGS = flags.FLAGS
 
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
@@ -115,7 +116,7 @@ def download_config():
 
 def download_and_prepare(builder):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset {}...".format(builder.info.full_name))
+  logging.info("download_and_prepare for dataset %s...", builder.info.full_name)
 
   dl_config = download_config()
 

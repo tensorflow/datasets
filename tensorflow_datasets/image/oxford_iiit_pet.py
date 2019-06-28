@@ -47,6 +47,12 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
 
   VERSION = tfds.core.Version("1.1.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.1.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -109,8 +115,12 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         image_name += ".jpg"
         label = int(label) - 1
 
-        yield {
+        record = {
             "image": os.path.join(images_dir_path, image_name),
             "label": int(label),
             "file_name": image_name
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield image_name, record
+        else:
+          yield record

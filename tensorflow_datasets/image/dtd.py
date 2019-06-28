@@ -49,6 +49,12 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
   """Describable Textures Dataset (DTD)."""
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -93,8 +99,12 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
       for line in split_file:
         fname = line.strip()
         label = fname.split("/")[0]
-        yield {
+        record = {
             "file_name": fname,
             "image": os.path.join(data_path, "dtd", "images", fname),
             "label": label,
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield fname, record
+        else:
+          yield record
