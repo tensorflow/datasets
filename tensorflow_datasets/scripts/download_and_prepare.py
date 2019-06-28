@@ -50,6 +50,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
 
+
 FLAGS = flags.FLAGS
 
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
@@ -67,6 +68,9 @@ flags.DEFINE_multi_string(
 flags.DEFINE_integer(
     "builder_config_id", None,
     "If given 1 dataset with BUILDER_CONFIGS, id of config to build.")
+flags.DEFINE_boolean(
+    "experimental_latest_version", False,
+    "Set to true to builder the latest version available, even if not default.")
 
 flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Where to place the data.")
 flags.DEFINE_string("download_dir", None, "Where to place downloads.")
@@ -112,7 +116,7 @@ def download_config():
 
 def download_and_prepare(builder):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset {}...".format(builder.info.full_name))
+  logging.info("download_and_prepare for dataset %s...", builder.info.full_name)
 
   dl_config = download_config()
 
@@ -156,10 +160,12 @@ def main(_):
   datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
                           or tfds.list_builders())
   datasets_to_build -= set(FLAGS.exclude_datasets.split(","))
+  version = "experimental_latest" if FLAGS.experimental_latest_version else None
   logging.info("Running download_and_prepare for datasets:\n%s",
                "\n".join(datasets_to_build))
+  logging.info('Version: "%s"', version)
   builders = {
-      name: tfds.builder(name, data_dir=FLAGS.data_dir)
+      name: tfds.builder(name, data_dir=FLAGS.data_dir, version=version)
       for name in datasets_to_build
   }
 
@@ -175,7 +181,7 @@ def main(_):
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
     logging.info("Running download_and_prepare for config: %s", config.name)
     builder_for_config = tfds.builder(
-        builder.name, data_dir=FLAGS.data_dir, config=config)
+        builder.name, data_dir=FLAGS.data_dir, config=config, version=version)
     download_and_prepare(builder_for_config)
   else:
     for name, builder in builders.items():
@@ -184,7 +190,8 @@ def main(_):
         # requested, then compute all.
         for config in builder.BUILDER_CONFIGS:
           builder_for_config = tfds.builder(
-              builder.name, data_dir=FLAGS.data_dir, config=config)
+              builder.name, data_dir=FLAGS.data_dir, config=config,
+              version=version)
           download_and_prepare(builder_for_config)
       else:
         # If there is a slash in the name, then user requested a specific

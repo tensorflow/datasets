@@ -20,10 +20,6 @@
 
 Composite `FeatureConnector` for a `dict` where each value is a list.
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-
-
 Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
 <!-- Placeholder for "Used in" -->
@@ -47,16 +43,32 @@ Note that `SequenceDict` do not support features which are of type
 tfds.features.Sequence(tfds.features.Image(), length=NB_FRAME)
 ```
 
-or: `tfds.features.Sequence({ 'frame': tfds.features.Image(shape=(64, 64, 3))
-'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right']) },
-length=NB_FRAME)`
+or:
 
-During data generation: `yield { 'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
-'action': ['left', 'left', 'up', ...], }`
+```
+tfds.features.Sequence({
+    'frame': tfds.features.Image(shape=(64, 64, 3))
+    'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right'])
+}, length=NB_FRAME)
+```
 
-Tensor returned by `.as_dataset()`: `{ 'frame': tf.Tensor(shape=(NB_FRAME, 64,
-64, 3), dtype=tf.uint8), 'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
-}`
+During data generation:
+
+```
+yield {
+    'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
+    'action': ['left', 'left', 'up', ...],
+}
+```
+
+Tensor returned by `.as_dataset()`:
+
+```
+{
+    'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
+    'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
+}
+```
 
 At generation time, you can specify a list of features dict, a dict of list
 values or a stacked numpy array. The lists will automatically be distributed
@@ -109,8 +121,18 @@ Convenience method to access the underlying features.
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 ```python
-decode_example(tfexample_dict)
+decode_example(serialized_example)
 ```
+
+Decode the serialize examples.
+
+#### Args:
+
+*   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+
+#### Returns:
+
+*   <b>`example`</b>: Nested `dict` containing the decoded nested examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 

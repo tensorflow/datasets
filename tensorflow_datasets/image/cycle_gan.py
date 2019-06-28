@@ -86,6 +86,10 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
           description=("A dataset consisting of images from two classes A and "
                        "B (For example: horses/zebras, apple/orange,...)"),
           version="0.1.0",
+          supported_versions=[
+              tfds.core.Version("1.0.0", experiments={
+                  tfds.core.Experiment.S3: True}),
+          ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS
   ]
@@ -152,7 +156,11 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
     images = tf.io.gfile.listdir(path)
 
     for image in images:
-      yield {
+      record = {
           "image": os.path.join(path, image),
           "label": label,
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield image, record
+      else:
+        yield record

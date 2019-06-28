@@ -33,5 +33,10 @@ class CycleGANTest(testing.DatasetBuilderTestCase):
       "testB": 2,
   }
 
+
+class CycleGANS3Test(CycleGANTest):
+  VERSION = "1.0.0"
+
+
 if __name__ == "__main__":
   testing.test_main()

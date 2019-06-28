@@ -62,6 +62,12 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
   """Shapes3d data set."""
 
   VERSION = tfds.core.Version("0.1.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("0.1.0"),
+  ]
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -129,9 +135,9 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
     for i in range(values_array.shape[1]):
       labels_array[:, i] = _discretize(values_array[:, i])  # pylint: disable=unsupported-assignment-operation
 
-    for image, labels, values in moves.zip(image_array, labels_array,
-                                           values_array):
-      yield {
+    for i, (image, labels, values) in enumerate(moves.zip(
+        image_array, labels_array, values_array)):
+      record = {
           "image": image,
           "label_floor_hue": labels[0],
           "label_wall_hue": labels[1],
@@ -146,6 +152,10 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
           "value_shape": values[4],
           "value_orientation": values[5],
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield i, record
+      else:
+        yield record
 
 
 def _load_data(filepath):

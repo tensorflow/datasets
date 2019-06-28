@@ -270,6 +270,8 @@ class SplitsUnitTest(testing.TestCase):
     self.assertNotEqual(train, train.subsplit(tfds.percent[:50]))
     self.assertNotEqual(train.subsplit(tfds.percent[:50]), train)
 
+    self.assertFalse(tfds.Split.TRAIN != "train")
+
   def _info(self, split):
     read_instruction = split.get_read_instruction(self._splits)
     return read_instruction.get_list_sliced_split_info()
