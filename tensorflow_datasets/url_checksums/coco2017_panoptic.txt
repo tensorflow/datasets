@@ -1,0 +1,3 @@
+http://images.cocodataset.org/annotations/panoptic_annotations_trainval2017.zip 860725834 c05f76d2129b6b561eb70efe16e7006df62f73fb92889132d373b9d90e31a370
+http://images.cocodataset.org/zips/train2017.zip 19336861798 69a8bb58ea5f8f99d24875f21416de2e9ded3178e903f1f7603e283b9e06d929
+http://images.cocodataset.org/zips/val2017.zip 815585330 4f7e2ccb2866ec5041993c9cf2a952bbed69647b115d0f74da7ce8f4bef82f05
