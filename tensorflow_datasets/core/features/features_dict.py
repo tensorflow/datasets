@@ -26,6 +26,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
+from tensorflow_datasets.scripts.document_datasets import pprint_features_dict
 
 
 class FeaturesDict(top_level_feature.TopLevelFeature):
@@ -138,7 +139,7 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   def __repr__(self):
     """Display the feature dictionary."""
-    return '{}({})'.format(type(self).__name__, self._feature_dict)
+    return pprint_features_dict(self._feature_dict, types='FeaturesDict')
 
   def get_tensor_info(self):
     """See base class for details."""
