@@ -26,7 +26,7 @@ already added.
 *   [Create your own `FeatureConnector`](#create-your-own-featureconnector)
 *   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
     *   [1. Add an import for registration](#1-add-an-import-for-registration)
-    *   [2. Run download_and_prepare locally](#2-run-download-and-prepare-locally)
+    *   [2. Run download_and_prepare locally](#2-run-download_and_prepare-locally)
     *   [3. Double-check the citation](#3-double-check-the-citation)
     *   [4. Add a test](#4-add-a-test)
     *   [5. Check your code style](#5-check-your-code-style)
