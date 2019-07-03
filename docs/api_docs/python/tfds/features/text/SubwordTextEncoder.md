@@ -23,7 +23,9 @@ Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
 Defined in [`core/features/text/subword_text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py).
 
-<!-- Placeholder for "Used in" -->
+### Used in the tutorials:
+
+*   [Transformer model for language understanding](https://www.tensorflow.org/beta/tutorials/text/transformer)
 
 Encoding is fully invertible because all out-of-vocab wordpieces are
 byte-encoded.
@@ -53,6 +55,7 @@ __init__(vocab_list=None)
 ```
 
 Constructs a SubwordTextEncoder from a vocabulary list.
+
 Note: To generate a vocabulary from a corpus, use
 <a href="../../../tfds/features/text/SubwordTextEncoder.md#build_from_corpus"><code>tfds.features.text.SubwordTextEncoder.build_from_corpus</code></a>.
 
@@ -68,13 +71,7 @@ Note: To generate a vocabulary from a corpus, use
 
 <h3 id="subwords"><code>subwords</code></h3>
 
-
-
 <h3 id="vocab_size"><code>vocab_size</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -149,6 +146,3 @@ save_to_file(filename_prefix)
 ```
 
 Save the vocabulary to a file.
-
-
-

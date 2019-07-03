@@ -22,7 +22,8 @@ Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/t
 __init__(
     shape,
     dtype,
-    default_value=None
+    default_value=None,
+    sequence_rank=None
 )
 ```
 
@@ -34,6 +35,9 @@ Constructor.
 *   <b>`dtype`</b>: Tensor dtype
 *   <b>`default_value`</b>: Used for retrocompatibility with previous files if a
     new field is added to provide a default value when reading the file.
+*   <b>`sequence_rank`</b>: `int`, Number of
+    <a href="../../tfds/features/Sequence.md"><code>tfds.features.Sequence</code></a>
+    dimension.
 
 ## Methods
 

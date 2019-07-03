@@ -59,6 +59,12 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
   """Omniglot dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -116,13 +122,17 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, directory):
     for example in _walk_omniglot_dir(directory):
-      alphabet, alphabet_char_id, label, image_path = example
-      yield {
+      alphabet, alphabet_char_id, label, image_path, image_id = example
+      record = {
           "image": image_path,
           "alphabet": alphabet,
           "alphabet_char_id": alphabet_char_id,
           "label": label,
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield image_id, record
+      else:
+        yield record
 
 
 def _walk_omniglot_dir(directory):
@@ -140,7 +150,8 @@ def _walk_omniglot_dir(directory):
         label, _ = image.split("_")
         label = int(label) - 1
         image_path = os.path.join(character_dir, image)
-        yield alphabet, character_id, label, image_path
+        image_id = "%s_%d_%s" % (alphabet, character_id, image)
+        yield alphabet, character_id, label, image_path, image_id
 
 
 def _get_names(dirs):
@@ -149,7 +160,7 @@ def _get_names(dirs):
   label_names = {}
   for d in dirs:
     for example in _walk_omniglot_dir(d):
-      alphabet, alphabet_char_id, label, _ = example
+      alphabet, alphabet_char_id, label, _, _ = example
       alphabets.add(alphabet)
       label_name = "%s_%d" % (alphabet, alphabet_char_id)
       if label in label_names:

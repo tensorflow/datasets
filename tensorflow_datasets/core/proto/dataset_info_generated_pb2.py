@@ -38,7 +38,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='tensorflow_datasets',
   syntax='proto3',
   serialized_options=_b('\370\001\001'),
-  serialized_pb=_b('\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a-tensorflow_metadata/proto/v0/statistics.proto\x1a)tensorflow_metadata/proto/v0/schema.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"s\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\"/\n\x0eSupervisedKeys\x12\r\n\x05input\x18\x01 \x01(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\x99\x04\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x15\n\rsize_in_bytes\x18\x04 \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x12\x64\x61taset_info.proto\x12\x13tensorflow_datasets\x1a-tensorflow_metadata/proto/v0/statistics.proto\x1a)tensorflow_metadata/proto/v0/schema.proto\"\x1f\n\x0f\x44\x61tasetLocation\x12\x0c\n\x04urls\x18\x01 \x03(\t\"\x8a\x01\n\tSplitInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\nnum_shards\x18\x02 \x01(\x03\x12\x15\n\rshard_lengths\x18\x04 \x03(\x03\x12\x44\n\nstatistics\x18\x03 \x01(\x0b\x32\x30.tensorflow.metadata.v0.DatasetFeatureStatistics\"/\n\x0eSupervisedKeys\x12\r\n\x05input\x18\x01 \x01(\t\x12\x0e\n\x06output\x18\x02 \x01(\t\"%\n\x12RedistributionInfo\x12\x0f\n\x07license\x18\x01 \x01(\t\"\x99\x04\n\x0b\x44\x61tasetInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\t \x01(\t\x12\x10\n\x08\x63itation\x18\x03 \x01(\t\x12\x15\n\rsize_in_bytes\x18\x04 \x01(\x03\x12\x36\n\x08location\x18\x05 \x01(\x0b\x32$.tensorflow_datasets.DatasetLocation\x12W\n\x12\x64ownload_checksums\x18\n \x03(\x0b\x32\x37.tensorflow_datasets.DatasetInfo.DownloadChecksumsEntryB\x02\x18\x01\x12.\n\x06schema\x18\x06 \x01(\x0b\x32\x1e.tensorflow.metadata.v0.Schema\x12.\n\x06splits\x18\x07 \x03(\x0b\x32\x1e.tensorflow_datasets.SplitInfo\x12<\n\x0fsupervised_keys\x18\x08 \x01(\x0b\x32#.tensorflow_datasets.SupervisedKeys\x12\x44\n\x13redistribution_info\x18\x0b \x01(\x0b\x32\'.tensorflow_datasets.RedistributionInfo\x1a\x38\n\x16\x44ownloadChecksumsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x03\xf8\x01\x01\x62\x06proto3')
   ,
   dependencies=[tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2.DESCRIPTOR,tensorflow__metadata_dot_proto_dot_v0_dot_schema__pb2.DESCRIPTOR,])
 
@@ -98,7 +98,14 @@ _SPLITINFO = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='statistics', full_name='tensorflow_datasets.SplitInfo.statistics', index=2,
+      name='shard_lengths', full_name='tensorflow_datasets.SplitInfo.shard_lengths', index=2,
+      number=4, type=3, cpp_type=2, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='statistics', full_name='tensorflow_datasets.SplitInfo.statistics', index=3,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -116,8 +123,8 @@ _SPLITINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=166,
-  serialized_end=281,
+  serialized_start=167,
+  serialized_end=305,
 )
 
 
@@ -154,8 +161,8 @@ _SUPERVISEDKEYS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=283,
-  serialized_end=330,
+  serialized_start=307,
+  serialized_end=354,
 )
 
 
@@ -185,8 +192,8 @@ _REDISTRIBUTIONINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=332,
-  serialized_end=369,
+  serialized_start=356,
+  serialized_end=393,
 )
 
 
@@ -223,8 +230,8 @@ _DATASETINFO_DOWNLOADCHECKSUMSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=853,
-  serialized_end=909,
+  serialized_start=877,
+  serialized_end=933,
 )
 
 _DATASETINFO = _descriptor.Descriptor(
@@ -323,8 +330,8 @@ _DATASETINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=372,
-  serialized_end=909,
+  serialized_start=396,
+  serialized_end=933,
 )
 
 _SPLITINFO.fields_by_name['statistics'].message_type = tensorflow__metadata_dot_proto_dot_v0_dot_statistics__pb2._DATASETFEATURESTATISTICS

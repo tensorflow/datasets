@@ -10,6 +10,7 @@
 *   <a href="./tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
 *   <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
 *   <a href="./tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>
+*   <a href="./tfds/core/Experiment.md"><code>tfds.core.Experiment</code></a>
 *   <a href="./tfds/core/GeneratorBasedBuilder.md"><code>tfds.core.GeneratorBasedBuilder</code></a>
 *   <a href="./tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>
 *   <a href="./tfds/core/MetadataDict.md"><code>tfds.core.MetadataDict</code></a>

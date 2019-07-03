@@ -19,8 +19,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import collections
 import tensorflow as tf
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = ("Web-Scale Parallel Corpora for Official European Languages. "
@@ -40,31 +42,40 @@ _BASE_DATA_URL_FORMAT_STR = ("https://s3.amazonaws.com/web-language-models/"
                              "paracrawl/release4/en-{target_lang}.bicleaner07."
                              "txt.gz")
 
-_TARGET_LANGUAGES = {
-    "bg": "Bulgarian",
-    "da": "Danish",
-    "el": "Greek",
-    "sk": "Slovak",
-    "sl": "Slovenian",
-    "sv": "Swedish",
-    "ga": "Irish",
-    "hr": "Croatian",
-    "mt": "Maltese",
-    "lt": "Lithuanian",
-    "hu": "Hungarian",
-    "et": "Estonian",
-    "de": "German",
-    "fr": "French",
-    "es": "Spanish",
-    "it": "Italian",
-    "pt": "Portuguese",
-    "nl": "Dutch",
-    "pl": "Polish",
-    "cs": "Czech",
-    "ro": "Romanian",
-    "fi": "Finnish",
-    "lv": "Latvian"
-}
+
+@utils.memoize()
+def _target_languages():
+  """Create the sorted dictionary of language codes, and language names.
+
+  Returns:
+    The sorted dictionary as an instance of `collections.OrderedDict`.
+  """
+  langs = {
+      "bg": "Bulgarian",
+      "cs": "Czech",
+      "da": "Danish",
+      "de": "German",
+      "el": "Greek",
+      "es": "Spanish",
+      "et": "Estonian",
+      "fi": "Finnish",
+      "fr": "French",
+      "ga": "Irish",
+      "hr": "Croatian",
+      "hu": "Hungarian",
+      "it": "Italian",
+      "lt": "Lithuanian",
+      "lv": "Latvian",
+      "mt": "Maltese",
+      "nl": "Dutch",
+      "pl": "Polish",
+      "pt": "Portuguese",
+      "ro": "Romanian",
+      "sk": "Slovak",
+      "sl": "Slovenian",
+      "sv": "Swedish",
+  }
+  return collections.OrderedDict(sorted(langs.items()))
 
 
 class ParaCrawlConfig(tfds.core.BuilderConfig):
@@ -83,7 +94,7 @@ class ParaCrawlConfig(tfds.core.BuilderConfig):
       **kwargs: Keyword arguments forwarded to super.
     """
     # Validate the target language.
-    if target_language not in _TARGET_LANGUAGES:
+    if target_language not in _target_languages():
       raise ValueError("Invalid target language: %s " % target_language)
 
     # Initialize the base class.
@@ -111,7 +122,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
       # The version below does not refer to the version of the released
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(target_language=target_language, version="0.1.0")
-      for target_language, _ in _TARGET_LANGUAGES.items()
+      for target_language in _target_languages()
   ]
 
   def _info(self):
@@ -119,7 +130,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION.format(
-            target_lang=_TARGET_LANGUAGES[target_language]),
+            target_lang=_target_languages()[target_language]),
         features=tfds.features.Translation(
             languages=("en", target_language),
             encoder_config=self.builder_config.text_encoder_config),

@@ -250,3 +250,8 @@ def as_numpy(dataset, graph=None):
 def dataset_shape_is_fully_defined(ds):
   return all(
       [ts.is_fully_defined() for ts in tf.nest.flatten(ds.output_shapes)])
+
+
+def features_shape_is_fully_defined(features):
+  return all([tf.TensorShape(info.shape).is_fully_defined() for info in
+              tf.nest.flatten(features.get_tensor_info())])

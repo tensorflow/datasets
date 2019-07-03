@@ -43,6 +43,8 @@ import numpy as np
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import example_parser
+from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.core import utils
 
@@ -64,16 +66,14 @@ class FileFormatAdapter(object):
       example_specs: Nested `dict` of `tfds.features.TensorInfo`, corresponding
         to the structure of data to write/read.
     """
-    self._example_specs = example_specs
-    self._flat_example_specs = utils.flatten_nest_dict(self._example_specs)
+    del example_specs
 
   @abc.abstractmethod
-  def write_from_generator(self, generator_fn, output_files):
+  def write_from_generator(self, generator, output_files):
     """Write to files from generators_and_filenames.
 
     Args:
-      generator_fn: returns generator yielding dictionaries of feature name to
-        value.
+      generator: generator yielding dictionaries of feature name to value.
       output_files: `list<str>`, output files to write files to.
     """
     raise NotImplementedError
@@ -114,70 +114,15 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     Python 3; `unicode` strings will be encoded in `utf-8`), or lists thereof.
   """
 
-  def _build_feature_specs(self):
-    """Returns the `tf.train.Example` feature specification.
+  def __init__(self, example_specs):
+    super(TFRecordExampleAdapter, self).__init__(example_specs)
+    self._serializer = example_serializer.ExampleSerializer(
+        example_specs)
+    self._parser = example_parser.ExampleParser(example_specs)
 
-    Returns:
-      The `dict` of `tf.io.FixedLenFeature`, `tf.io.VarLenFeature`, ...
-    """
-    # Convert individual fields into tf.train.Example compatible format
-    def build_single_spec(k, v):
-      with utils.try_reraise(
-          "Specification error for feature {} ({}): ".format(k, v)):
-        return _to_tf_example_spec(v)
-
-    return {
-        k: build_single_spec(k, v) for k, v in self._flat_example_specs.items()
-    }
-
-  def serialize_example(self, example):
-    """Serialize the given example.
-
-    Args:
-      example: Nested `dict` containing the input to serialize. The input
-        structure and values dtype/shape must match the `example_specs`
-        provided at construction.
-
-    Returns:
-      serialize_proto: `str`, the serialized `tf.train.Example` proto
-    """
-    example = utils.flatten_nest_dict(example)
-    example = _dict_to_tf_example(example, self._flat_example_specs)
-    return example.SerializeToString()
-
-  def parse_example(self, serialized_example):
-    """Deserialize a single `tf.train.Example` proto.
-
-    Usage:
-    ```
-    ds = tf.data.TFRecordDataset(filepath)
-    ds = ds.map(file_adapter.parse_example)
-    ```
-
-    Args:
-      serialized_example: `tf.Tensor`, the `tf.string` tensor containing the
-        serialized proto to decode.
-
-    Returns:
-      example: A nested `dict` of `tf.Tensor` values. The structure and tensors
-        shape/dtype match the  `example_specs` provided at construction.
-    """
-    example = tf.io.parse_single_example(
-        serialized=serialized_example,
-        features=self._build_feature_specs(),
-    )
-    example = {
-        k: _deserialize_single_field(example_data, tensor_info)
-        for k, (example_data, tensor_info)
-        in utils.zip_dict(example, self._flat_example_specs)
-    }
-    # Reconstruct all nesting
-    example = utils.pack_as_nest_dict(example, self._example_specs)
-    return example
-
-  def write_from_generator(self, generator_fn, output_files):
-    wrapped = (
-        self.serialize_example(example) for example in generator_fn())
+  def write_from_generator(self, generator, output_files):
+    wrapped = (self._serializer.serialize_example(example)
+               for example in generator)
     _write_tfrecords_from_generator(wrapped, output_files, shuffle=True)
 
   def write_from_pcollection(self, pcollection, file_path_prefix, num_shards):
@@ -190,7 +135,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
 
     return (
         pcollection
-        | "SerializeDict" >> beam.Map(self.serialize_example)
+        | "SerializeDict" >> beam.Map(self._serializer.serialize_example)
         | "Shuffle" >> beam.Reshuffle()
         | "WriteToExamples" >> beam.io.WriteToTFRecord(
             file_path_prefix=".".join([file_path_prefix, self.filetype_suffix]),
@@ -200,7 +145,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
 
   def dataset_from_filename(self, filename):
     dataset = tf.data.TFRecordDataset(filename, buffer_size=int(16 * 1e6))
-    return dataset.map(self.parse_example,
+    return dataset.map(self._parser.parse_example,
                        num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
   @property
@@ -303,151 +248,3 @@ def _round_robin_write(writers, generator):
   for i, example in enumerate(utils.tqdm(
       generator, unit=" examples", leave=False)):
     writers[i % len(writers)].write(example)
-
-
-def _dict_to_tf_example(example_dict, tensor_info_dict=None):
-  """Builds tf.train.Example from (string -> int/float/str list) dictionary.
-
-  Args:
-    example_dict: `dict`, dict of values, tensor,...
-    tensor_info_dict: `dict` of `tfds.feature.TensorInfo` If given, perform
-      additional checks on the example dict (check dtype, shape, number of
-      fields...)
-  """
-  def serialize_single_field(k, example_data, tensor_info):
-    with utils.try_reraise(
-        "Error while serializing feature {} ({}): ".format(k, tensor_info)):
-      return _item_to_tf_feature(example_data, tensor_info)
-
-  if tensor_info_dict:
-    example_dict = {
-        k: serialize_single_field(k, example_data, tensor_info)
-        for k, (example_data, tensor_info)
-        in utils.zip_dict(example_dict, tensor_info_dict)
-    }
-  else:
-    example_dict = {
-        k: serialize_single_field(k, example_data, None)
-        for k, example_data in example_dict.items()
-    }
-
-  return tf.train.Example(features=tf.train.Features(feature=example_dict))
-
-
-def _is_string(item):
-  """Check if the object contains string or bytes."""
-  if isinstance(item, (six.binary_type, six.string_types)):
-    return True
-  elif (isinstance(item, (tuple, list)) and
-        all(isinstance(x, (six.binary_type, six.string_types)) for x in item)):
-    return True
-  elif (isinstance(item, np.ndarray) and  # binary or unicode
-        (item.dtype.kind in ("U", "S") or item.dtype == object)):
-    return True
-  return False
-
-
-def _item_to_tf_feature(item, tensor_info=None):
-  """Single item to a tf.train.Feature."""
-  v = item
-  if not tensor_info and isinstance(v, (list, tuple)) and not v:
-    raise ValueError(
-        "Received an empty list value, so is unable to infer the "
-        "feature type to record. To support empty value, the corresponding "
-        "FeatureConnector should return a numpy array with the correct dtype "
-        "instead of a Python list."
-    )
-
-  # Handle strings/bytes first
-  is_string = _is_string(v)
-
-  if tensor_info:
-    np_dtype = np.dtype(tensor_info.dtype.as_numpy_dtype)
-  elif is_string:
-    np_dtype = object  # Avoid truncating trailing '\x00' when converting to np
-  else:
-    np_dtype = None
-
-  v = np.array(v, dtype=np_dtype)
-
-  # Check that the shape is expected
-  if tensor_info:
-    utils.assert_shape_match(v.shape, tensor_info.shape)
-    if tensor_info.dtype == tf.string and not is_string:
-      raise ValueError(
-          "Unsuported value: {}\nCould not convert to bytes list.".format(item))
-
-  # Convert boolean to integer (tf.train.Example does not support bool)
-  if v.dtype == np.bool_:
-    v = v.astype(int)
-
-  v = v.flatten()  # Convert v into a 1-d array
-  if np.issubdtype(v.dtype, np.integer):
-    return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
-  elif np.issubdtype(v.dtype, np.floating):
-    return tf.train.Feature(float_list=tf.train.FloatList(value=v))
-  elif is_string:
-    v = [tf.compat.as_bytes(x) for x in v]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
-  else:
-    raise ValueError(
-        "Unsuported value: {}.\n"
-        "tf.train.Feature does not support type {}. "
-        "This may indicate that one of the FeatureConnectors received an "
-        "unsupported value as input.".format(repr(v), repr(type(v)))
-    )
-
-
-def _deserialize_single_field(example_data, tensor_info):
-  """Reconstruct the serialized field."""
-
-  # Restore shape if possible. TF Example flattened it.
-  if tensor_info.shape.count(None) < 2:
-    shape = [-1 if i is None else i for i in tensor_info.shape]
-    example_data = tf.reshape(example_data, shape)
-
-  # Restore dtype
-  if example_data.dtype != tensor_info.dtype:
-    example_data = tf.dtypes.cast(example_data, tensor_info.dtype)
-  return example_data
-
-
-def _to_tf_example_spec(tensor_info):
-  """Convert a `TensorInfo` into a feature proto object."""
-  # Convert the dtype
-
-  # TODO(b/119937875): TF Examples proto only support int64, float32 and string
-  # This create limitation like float64 downsampled to float32, bool converted
-  # to int64 which is space ineficient, no support for complexes or quantized
-  # It seems quite space inefficient to convert bool to int64
-  if tensor_info.dtype.is_integer or tensor_info.dtype.is_bool:
-    dtype = tf.int64
-  elif tensor_info.dtype.is_floating:
-    dtype = tf.float32
-  elif tensor_info.dtype == tf.string:
-    dtype = tf.string
-  else:
-    # TFRecord only support 3 types
-    raise NotImplementedError(
-        "Serialization not implemented for dtype {}".format(tensor_info))
-
-  # Convert the shape
-
-  # Select the feature proto type in function of the unknown shape
-  if all(s is not None for s in tensor_info.shape):
-    return tf.io.FixedLenFeature(  # All shaped defined
-        shape=tensor_info.shape,
-        dtype=dtype,
-        default_value=tensor_info.default_value,
-    )
-  elif (tensor_info.shape.count(None) == 1 and tensor_info.shape[0] is None):
-    return tf.io.FixedLenSequenceFeature(  # First shape undefined
-        shape=tensor_info.shape[1:],
-        dtype=dtype,
-        allow_missing=True,
-        default_value=tensor_info.default_value,
-    )
-  else:
-    raise NotImplementedError(
-        "Tensor with a unknown dimension not at the first position not "
-        "supported: {}".format(tensor_info))

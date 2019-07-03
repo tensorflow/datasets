@@ -36,8 +36,6 @@ Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/
 
 Size of the vocabulary. Decode produces ints [1, vocab_size).
 
-
-
 ## Methods
 
 <h3 id="decode"><code>decode</code></h3>
@@ -75,6 +73,3 @@ save_to_file(filename_prefix)
 ```
 
 Store to file. Inverse of load_from_file.
-
-
-

@@ -53,10 +53,10 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
         metadata=dataset_info.MetadataDict(),
     )
 
-  def _generate_examples(self):
+  def _generate_examples(self, range_):
     self.info.metadata["some_key"] = 123
 
-    for _ in range(30):
+    for _ in range_:
       height = np.random.randint(5, high=10)
       width = np.random.randint(5, high=10)
       yield {
