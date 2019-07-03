@@ -42,6 +42,7 @@ pytest \
   --disable-warnings \
   $TF2_IGNORE \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
+  --ignore="tensorflow_datasets/audio/groove_test.py" \
   --ignore="tensorflow_datasets/eager_not_enabled_by_default_test.py"
 set_status
 # If not running with TF2, ensure Eager is not enabled by default
