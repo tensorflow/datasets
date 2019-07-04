@@ -91,15 +91,17 @@ class HashingTest(testing.TestCase):
     ints = list(range(100))
     hashing._CSIPHASH_AVAILABLE = False
     self._assert_hashes(ints, EXPECTED_INT_HASHES)
-    hashing._CSIPHASH_AVAILABLE = True
-    self._assert_hashes(ints, EXPECTED_INT_HASHES)
+    # https://github.com/tensorflow/datasets/issues/737
+    # hashing._CSIPHASH_AVAILABLE = True
+    # self._assert_hashes(ints, EXPECTED_INT_HASHES)
 
   def test_ascii(self):
     letters = string.ascii_lowercase + string.ascii_uppercase
     hashing._CSIPHASH_AVAILABLE = False
     self._assert_hashes(letters, EXPECTED_ASCII_HASHES)
-    hashing._CSIPHASH_AVAILABLE = True
-    self._assert_hashes(letters, EXPECTED_ASCII_HASHES)
+    # https://github.com/tensorflow/datasets/issues/737
+    # hashing._CSIPHASH_AVAILABLE = True
+    # self._assert_hashes(letters, EXPECTED_ASCII_HASHES)
 
 
 if __name__ == '__main__':
