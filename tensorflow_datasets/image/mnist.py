@@ -112,7 +112,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        urls=[self.URL, _MNIST_URL_FALLBACK_],
+        urls=[self.URL],
         citation=_MNIST_CITATION,
     )
 
