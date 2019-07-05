@@ -119,20 +119,21 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     # Download the full MNIST Database
-    def download_and_extract(url):
-      filenames = {
-          "train_data": _MNIST_TRAIN_DATA_FILENAME,
-          "train_labels": _MNIST_TRAIN_LABELS_FILENAME,
-          "test_data": _MNIST_TEST_DATA_FILENAME,
-          "test_labels": _MNIST_TEST_LABELS_FILENAME,
-      }
-      return dl_manager.download_and_extract(
-          {k: urllib.parse.urljoin(url, v) for k, v in filenames.items()})
+    filenames = {
+        "train_data": _MNIST_TRAIN_DATA_FILENAME,
+        "train_labels": _MNIST_TRAIN_LABELS_FILENAME,
+        "test_data": _MNIST_TEST_DATA_FILENAME,
+        "test_labels": _MNIST_TEST_LABELS_FILENAME,
+    }
 
     try:
-      mnist_files = download_and_extract(self.URL)
+      mnist_files = dl_manager.download_and_extract(
+          {k: urllib.parse.urljoin(self.URL,
+                                   v) for k, v in filenames.items()})
     except Exception:  # pylint: disable=broad-except
-      mnist_files = download_and_extract(_MNIST_URL_FALLBACK_)
+      mnist_files = dl_manager.download_and_extract(
+          {k: urllib.parse.urljoin(_MNIST_URL_FALLBACK_,
+                                   v) for k, v in filenames.items()})
 
     # MNIST provides TRAIN and TEST splits, not a VALIDATION split, so we only
     # write the TRAIN and TEST splits to disk.
