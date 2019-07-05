@@ -18,3 +18,5 @@ dist/
 
 # Other
 *.DS_Store
+# PyCharm
+.idea
