@@ -51,11 +51,6 @@ def get_extractor(*args, **kwargs):
 class ExtractError(Exception):
   """There was an error while extracting the archive."""
 
-  def __init__(self, resource, err):
-    url = ' (%s)' % resource.url if resource.url else ''
-    msg = 'Error while extracting file %s%s: %s.' % (resource.path, url, err)
-    super(ExtractError, self).__init__(msg)
-
 
 class UnsafeArchiveError(Exception):
   """The archive is unsafe to unpack, e.g. absolute path."""
@@ -77,26 +72,26 @@ class _Extractor(object):
       self._pbar_path = pbar_path
       yield
 
-  def extract(self, resource, to_path):
+  def extract(self, path, extract_method, to_path):
     """Returns `promise.Promise` => to_path."""
     self._pbar_path.update_total(1)
-    if resource.extract_method not in _EXTRACT_METHODS:
-      raise ValueError('Unknown extraction method "%s".' %
-                       resource.extract_method)
-    future = self._executor.submit(self._sync_extract, resource, to_path)
+    if extract_method not in _EXTRACT_METHODS:
+      raise ValueError('Unknown extraction method "%s".' % extract_method)
+    future = self._executor.submit(self._sync_extract,
+                                   path, extract_method, to_path)
     return promise.Promise.resolve(future)
 
-  def _sync_extract(self, resource, to_path):
+  def _sync_extract(self, from_path, method, to_path):
     """Returns `to_path` once resource has been extracted there."""
-    from_path = resource.path
-    method = resource.extract_method
     to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
                                uuid.uuid4().hex)
     try:
       for path, handle in iter_archive(from_path, method):
+        path = tf.compat.as_text(path)
         _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     except BaseException as err:
-      raise ExtractError(resource, err)
+      msg = 'Error while extracting %s to %s : %s' % (from_path, to_path, err)
+      raise ExtractError(msg)
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
     if tf.io.gfile.exists(to_path):
@@ -119,9 +114,10 @@ def _copy(src_file, dest_path):
 
 def _normpath(path):
   path = os.path.normpath(path)
-  if path.startswith('.') or os.path.isabs(path):
-    raise UnsafeArchiveError('Archive at %s is not safe.' % path)
-  if path.endswith('~') or os.path.basename(path).startswith('.'):
+  if (path.startswith('.')
+      or os.path.isabs(path)
+      or path.endswith('~')
+      or os.path.basename(path).startswith('.')):
     return None
   return path
 
@@ -135,12 +131,23 @@ def _open_or_pass(path_or_fobj):
     yield path_or_fobj
 
 
-def iter_tar(arch_f, gz=False):
-  """Iter over tar archive, yielding (path, object-like) tuples."""
-  read_type = 'r:gz' if gz else 'r:'
+def iter_tar(arch_f, stream=False):
+  """Iter over tar archive, yielding (path, object-like) tuples.
+
+  Args:
+    arch_f: File object of the archive to iterate.
+    stream: If True, open the archive in stream mode which allows for faster
+      processing and less temporary disk consumption, but random access to the
+      file is not allowed.
+
+  Yields:
+    (filepath, extracted_fobj) for each file in the archive.
+  """
+  read_type = 'r' + ('|' if stream else ':') + '*'
+
   with _open_or_pass(arch_f) as fobj:
     tar = tarfile.open(mode=read_type, fileobj=fobj)
-    for member in tar.getmembers():
+    for member in tar:
       extract_file = tar.extractfile(member)
       if extract_file:  # File with data (not directory):
         path = _normpath(member.path)
@@ -149,8 +156,8 @@ def iter_tar(arch_f, gz=False):
         yield [path, extract_file]
 
 
-def iter_tar_gz(arch_f):
-  return iter_tar(arch_f, gz=True)
+def iter_tar_stream(arch_f):
+  return iter_tar(arch_f, stream=True)
 
 
 def iter_gzip(arch_f):
@@ -178,11 +185,13 @@ def iter_zip(arch_f):
 
 
 _EXTRACT_METHODS = {
-    resource_lib.ExtractMethod.TAR: iter_tar,
-    resource_lib.ExtractMethod.TAR_GZ: iter_tar_gz,
-    resource_lib.ExtractMethod.GZIP: iter_gzip,
-    resource_lib.ExtractMethod.ZIP: iter_zip,
     resource_lib.ExtractMethod.BZIP2: iter_bzip2,
+    resource_lib.ExtractMethod.GZIP: iter_gzip,
+    resource_lib.ExtractMethod.TAR: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ_STREAM: iter_tar_stream,
+    resource_lib.ExtractMethod.TAR_STREAM: iter_tar_stream,
+    resource_lib.ExtractMethod.ZIP: iter_zip,
 }
 
 

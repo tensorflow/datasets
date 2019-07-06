@@ -48,10 +48,12 @@ class ExtractMethod(enum.Enum):
   """The extraction method to use to pre-process a downloaded file."""
   NO_EXTRACT = 1
   TAR = 2
-  TAR_GZ = 3
+  TAR_GZ = 3  # Deprecated: use TAR.
   GZIP = 4
   ZIP = 5
   BZIP2 = 6
+  TAR_STREAM = 7
+  TAR_GZ_STREAM = 8  # Deprecated: use TAR_STREAM
 
 
 _EXTRACTION_METHOD_TO_EXTS = [
@@ -164,8 +166,8 @@ def _sanitize_url(url, max_length):
   return url[:max_length], extension
 
 
-def _get_fname(url, fhash=None):
-  """Returns name of downloaded file (not as downloaded, but as stored).
+def get_dl_fname(url, checksum):
+  """Returns name of file for (url, checksum).
 
   The max length of linux and windows filenames is 255 chars.
   Windows however expects short paths (260 chars), so we limit the file name
@@ -174,22 +176,76 @@ def _get_fname(url, fhash=None):
   Naming pattern: '${url}${checksum}'.
    - url: url sanitized and shortened to 46 chars.
    - checksum: base64url encoded sha256: 44 chars (removing trailing '=').
-     - sha256 of the file if known.
-     - sha256 of url otherwise.
 
   Args:
-    url: string, url of the file.
-    fhash: optional string (hex), defaults to None. The sha256 hexdigest of file
-      when known. If not given, sha256 of url is used.
+    url: `str`, url of the file.
+    checksum: `str` (hex), the sha256 hexdigest of file or url.
 
   Returns:
     string of 90 chars max.
   """
-  checksum = fhash or hashlib.sha256(tf.compat.as_bytes(url)).hexdigest()
   checksum = base64.urlsafe_b64encode(_decode_hex(checksum))
   checksum = tf.compat.as_text(checksum)[:-1]
   name, extension = _sanitize_url(url, max_length=46)
   return '%s%s%s' % (name, checksum, extension)
+
+
+def get_dl_dirname(url):
+  """Returns name of temp dir for given url."""
+  checksum = hashlib.sha256(tf.compat.as_bytes(url)).hexdigest()
+  return get_dl_fname(url, checksum)
+
+
+def _get_info_path(path):
+  """Returns path (`str`) of INFO file associated with resource at path."""
+  return '%s.INFO' % path
+
+
+def _read_info(info_path):
+  """Returns info dict or None."""
+  if not tf.io.gfile.exists(info_path):
+    return None
+  with tf.io.gfile.GFile(info_path) as info_f:
+    return json.load(info_f)
+
+
+# TODO(pierrot): one lock per info path instead of locking everything.
+@util.build_synchronize_decorator()
+def write_info_file(resource, path, dataset_name, original_fname):
+  """Write the INFO file next to local file.
+
+  Although the method is synchronized, there is still a risk two processes
+  running at the same time overlap here. Risk accepted, since potentially lost
+  data (`dataset_name`) is only for human consumption.
+
+  Args:
+    resource: resource for which to write the INFO file.
+    path: path of downloaded file.
+    dataset_name: data used to dl the file.
+    original_fname: name of file as downloaded.
+  """
+  info_path = _get_info_path(path)
+  info = _read_info(info_path) or {}
+  urls = set(info.get('urls', []) + [resource.url])
+  dataset_names = info.get('dataset_names', [])
+  if dataset_name:
+    dataset_names.append(dataset_name)
+  if 'original_fname' in info and info['original_fname'] != original_fname:
+    raise AssertionError(
+        '`original_fname` "%s" stored in %s does NOT match "%s".' % (
+            info['original_fname'], info_path, original_fname))
+  info = dict(urls=list(urls), dataset_names=list(set(dataset_names)),
+              original_fname=original_fname)
+  with py_utils.atomic_write(info_path, 'w') as info_f:
+    json.dump(info, info_f, sort_keys=True)
+
+
+def get_extract_method(path):
+  """Returns `ExtractMethod` to use on resource at path. Cannot be None."""
+  info_path = _get_info_path(path)
+  info = _read_info(info_path)
+  fname = info.get('original_fname', path) if info else path
+  return _guess_extract_method(fname)
 
 
 class Resource(object):
@@ -210,106 +266,20 @@ class Resource(object):
         not be downloaded yet. In such case, `url` must be set.
     """
     self.url = url
-    self._sha256 = None
     self.path = path
     self._extract_method = extract_method
-    self._fname = None
-    self._original_fname = None  # Name of the file as downloaded.
-    self._info = None  # The INFO dict, once known.
 
-  @property
-  def sha256(self):
-    return self._sha256
-
-  @sha256.setter
-  def sha256(self, value):
-    if self._sha256 != value:
-      self._sha256 = value
-      self._fname = None
-
-  @property
-  def fname(self):
-    """Name of downloaded file (not as downloaded, but as stored)."""
-    if self.path:
-      return os.path.basename(self.path)
-    if not self._fname:
-      self._fname = _get_fname(self.url, self.sha256)
-    return self._fname
-
-  @property
-  def extract_fname(self):
-    """Name of extracted archive (file or directory)."""
-    return '%s.%s' % (self.extract_method_name, self.fname)
+  @classmethod
+  def exists_locally(cls, path):
+    """Returns whether the resource exists locally, at `resource.path`."""
+    # If INFO file doesn't exist, consider resource does NOT exist, as it would
+    # prevent guessing the `extract_method`.
+    return (tf.io.gfile.exists(path) and
+            tf.io.gfile.exists(_get_info_path(path)))
 
   @property
   def extract_method(self):
     """Returns `ExtractMethod` to use on resource. Cannot be None."""
-    if not self._extract_method:
-      self._extract_method = _guess_extract_method(
-          # no original_fname if extract is called directly (no URL).
-          # We need to use the original_fname as much as possible for files
-          # for which the url doesn't give extension (eg: drive).
-          self._get_info() and self._get_original_fname() or self.fname)
-    return self._extract_method
-
-  @property
-  def extract_method_name(self):
-    """Returns the name (`str`) of the extraction method."""
-    return ExtractMethod(self.extract_method).name
-
-  @property
-  def info_path(self):
-    """Returns path (`str`) of INFO file associated with resource."""
-    return '%s.INFO' % self.path
-
-  def _get_info(self):
-    """Returns info dict or None."""
-    if not self._info:
-      if not tf.io.gfile.exists(self.info_path):
-        return None
-      with tf.io.gfile.GFile(self.info_path) as info_f:
-        self._info = json.load(info_f)
-    return self._info
-
-  def exists_locally(self):
-    """Returns whether the resource exists locally, at `resource.path`."""
-    # If INFO file doesn't exist, consider resource does NOT exist, as it would
-    # prevent guessing the `extract_method`.
-    return (self.path and tf.io.gfile.exists(self.path) and
-            tf.io.gfile.exists(self.info_path))
-
-  def _get_original_fname(self):
-    # We rely on the INFO file because some urls (eg: drive) do not contain the
-    # name of original file.
-    info = self._get_info()
-    if not info:
-      raise AssertionError('INFO file %s doe not exist.' % self.info_path)
-    return info['original_fname']
-
-  # TODO(pierrot): one lock per info path instead of locking everything.
-  @util.build_synchronize_decorator()
-  def write_info_file(self, dataset_name, original_fname):
-    """Write the INFO file next to local file.
-
-    Although the method is synchronized, there is still a risk two processes
-    running at the same time overlap here. Risk accepted, since potentially lost
-    data (`dataset_name`) is only for human consumption.
-
-    Args:
-      dataset_name: data used to dl the file.
-      original_fname: name of file as downloaded.
-    """
-    info = self._get_info() or {}
-    urls = set(info.get('urls', []) + [self.url])
-    dataset_names = info.get('dataset_names', [])
-    if dataset_name:
-      dataset_names.append(dataset_name)
-    if 'original_fname' in info and info['original_fname'] != original_fname:
-      raise AssertionError(
-          '`original_fname` "%s" stored in %s does NOT match "%s".' % (
-              info['original_fname'], self.info_path, original_fname))
-    info = dict(urls=list(urls), dataset_names=list(set(dataset_names)),
-                original_fname=original_fname)
-    with py_utils.atomic_write(self.info_path, 'w') as info_f:
-      json.dump(info, info_f, sort_keys=True)
-    self._info = info
+    if self._extract_method:
+      return self._extract_method
+    return get_extract_method(self.path)

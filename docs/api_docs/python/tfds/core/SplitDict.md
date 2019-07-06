@@ -4,7 +4,6 @@
 <meta itemprop="property" content="total_num_examples"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="__setitem__"/>
 <meta itemprop="property" content="add"/>
 <meta itemprop="property" content="copy"/>
 <meta itemprop="property" content="from_proto"/>
@@ -16,13 +15,12 @@
 
 ## Class `SplitDict`
 
-
-
-
+Split info object.
 
 Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
-Split info object.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -30,17 +28,11 @@ Split info object.
 __init__()
 ```
 
-
-
-
-
 ## Properties
 
 <h3 id="total_num_examples"><code>total_num_examples</code></h3>
 
 Return the total number of examples.
-
-
 
 ## Methods
 
@@ -49,19 +41,6 @@ Return the total number of examples.
 ``` python
 __getitem__(key)
 ```
-
-
-
-<h3 id="__setitem__"><code>__setitem__</code></h3>
-
-``` python
-__setitem__(
-    key,
-    value
-)
-```
-
-
 
 <h3 id="add"><code>add</code></h3>
 
@@ -76,8 +55,6 @@ Add the split info.
 ``` python
 copy()
 ```
-
-
 
 <h3 id="from_proto"><code>from_proto</code></h3>
 
@@ -104,8 +81,3 @@ Returns a list of SplitInfo protos that we have.
 ``` python
 update(other)
 ```
-
-
-
-
-

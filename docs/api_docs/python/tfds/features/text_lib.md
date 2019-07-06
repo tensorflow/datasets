@@ -5,11 +5,11 @@
 
 # Module: tfds.features.text
 
-
+Text utilities.
 
 Defined in [`core/features/text/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/__init__.py).
 
-Text utilities.
+<!-- Placeholder for "Used in" -->
 
 <a href="../../tfds.md"><code>tfds</code></a> includes a set of `TextEncoder`s as well as a `Tokenizer` to enable
 expressive, performant, and reproducible natural language research.
@@ -24,7 +24,7 @@ expressive, performant, and reproducible natural language research.
 
 [`class TextEncoderConfig`](../../tfds/features/text/TextEncoderConfig.md): Configuration for <a href="../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
 
-[`class Tokenizer`](../../tfds/features/text/Tokenizer.md): Splits a string into tokens, and joins them back.
-
 [`class TokenTextEncoder`](../../tfds/features/text/TokenTextEncoder.md): TextEncoder backed by a list of tokens.
 
+[`class Tokenizer`](../../tfds/features/text/Tokenizer.md): Splits a string into
+tokens, and joins them back.

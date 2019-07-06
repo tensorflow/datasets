@@ -43,8 +43,11 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
       'train-annotations-bbox': 'train-annotations-bbox.csv',
       'test-annotations-bbox': 'test-annotations-bbox.csv',
       'validation-annotations-bbox': 'validation-annotations-bbox.csv',
-      'class_descriptions': 'class_descriptions.csv',
   }
+
+
+class OpenImagesV42012S3Test(OpenImagesV42012Test):
+  VERSION = '1.0.0'
 
 
 if __name__ == '__main__':

@@ -25,9 +25,11 @@ from __future__ import print_function
 import collections
 import csv
 import functools
+import io
 import os
 
 from absl import logging
+import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -117,7 +119,6 @@ _URLS = {
     'train-annotations-bbox': 'https://storage.googleapis.com/openimages/2018_04/train/train-annotations-bbox.csv',
     'test-annotations-bbox': 'https://storage.googleapis.com/openimages/2018_04/test/test-annotations-bbox.csv',
     'validation-annotations-bbox': 'https://storage.googleapis.com/openimages/2018_04/validation/validation-annotations-bbox.csv',
-    'class_descriptions': 'https://storage.googleapis.com/openimages/2018_04/class-descriptions.csv',
 }
 # pylint: enable=line-too-long
 
@@ -137,30 +138,81 @@ BBOX_SOURCES = [
 ]
 
 
+class OpenImagesV4Config(tfds.core.BuilderConfig):
+  """BuilderConfig for OpenImagesV4."""
+
+  def __init__(self, target_pixels=None, **kwargs):
+    """BuilderConfig for OpenImagesV4.
+
+    Args:
+      target_pixels: If given, rescale the images so that the number of pixels
+        is roughly this value.
+      **kwargs: keyword arguments forward to super.
+    """
+    kwargs['supported_versions'] = [
+        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
+    ]
+    super(OpenImagesV4Config, self).__init__(**kwargs)
+    self._target_pixels = target_pixels
+
+  @property
+  def target_pixels(self):
+    return self._target_pixels
+
+
 class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   """Open Images v4."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  BUILDER_CONFIGS = [
+      OpenImagesV4Config(
+          name='original',
+          version=tfds.core.Version('0.2.0'),
+          description='Images at their original resolution and quality.'),
+      OpenImagesV4Config(
+          name='300k',
+          version=tfds.core.Version('0.2.1'),
+          description='Images have roughly 300,000 pixels, at 72 JPEG quality.',
+          target_pixels=300000),
+      OpenImagesV4Config(
+          name='200k',
+          version=tfds.core.Version('0.2.1'),
+          description='Images have roughly 200,000 pixels, at 72 JPEG quality.',
+          target_pixels=200000)
+  ]
 
   def _info(self):
-    class_label = tfds.features.ClassLabel()
-    source = tfds.features.ClassLabel(
-        names=IMAGE_LEVEL_SOURCES+BBOX_SOURCES)
+    source_class_label = tfds.features.ClassLabel(
+        names=IMAGE_LEVEL_SOURCES + BBOX_SOURCES)
+    all_class_label = tfds.features.ClassLabel(
+        names_file=tfds.core.get_tfds_path(
+            os.path.join('image', 'open_images_classes_all.txt')))
+    trainable_class_label = tfds.features.ClassLabel(
+        names_file=tfds.core.get_tfds_path(
+            os.path.join('image', 'open_images_classes_trainable.txt')))
+    boxable_class_label = tfds.features.ClassLabel(
+        names_file=tfds.core.get_tfds_path(
+            os.path.join('image', 'open_images_classes_boxable.txt')))
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(),
             'image/filename': tfds.features.Text(),  # eg '226f0a1873b9bf8e.jpg'
-            'objects': tfds.features.SequenceDict({
-                'label': class_label,
+            'objects': tfds.features.Sequence({
+                'label': all_class_label,
                 # Original data is 0, .1, ..., 1. We use 0, 1, 2, ..., 10.
                 'confidence': tf.int32,
-                'source': source,
+                'source': source_class_label,
             }),
-            'bobjects': tfds.features.SequenceDict({
-                'label': class_label,
-                'source': source,
+            'objects_trainable': tfds.features.Sequence({
+                'label': trainable_class_label,
+                # Original data is 0, .1, ..., 1. We use 0, 1, 2, ..., 10.
+                'confidence': tf.int32,
+                'source': source_class_label,
+            }),
+            'bobjects': tfds.features.Sequence({
+                'label': boxable_class_label,
+                'source': source_class_label,
                 'bbox': tfds.features.BBoxFeature(),
                 # Following values can be: 1 (true), 0 (false) and -1 (unknown).
                 'is_occluded': tf.int8,
@@ -175,28 +227,20 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     paths = dl_manager.download_and_extract(_URLS)
-    source_str2int = self.info.features['objects']['source'].str2int
-    # Set the labels' names:
-    with tf.io.gfile.GFile(paths['class_descriptions']) as classes_f:
-      classes = [l.split(',')[0]
-                 for l in classes_f.read().split('\n') if l]
-    logging.info('Number of loaded classes: %s', len(classes))
-    self.info.features['objects']['label'].names = classes
-    label_str2int = self.info.features['objects']['label'].str2int
     # Load labels from CSVs:
     def load(names):
       csv_positions = [0] * len(names)
       return functools.partial(_load_objects, [paths[name] for name in names],
-                               source_str2int, label_str2int, csv_positions)
+                               csv_positions)
     train_objects = load(['train_human_labels', 'train_machine_labels'])
     test_objects = load(['test_human_labels', 'test_machine_labels'])
     validation_objects = load(['validation_human_labels',
                                'validation_machine_labels'])
     def load_boxes(name):
       csv_positions = [0]
-      return functools.partial(_load_bboxes, paths[name],
-                               source_str2int, label_str2int, csv_positions)
+      return functools.partial(_load_bboxes, paths[name], csv_positions)
     train_bbox = load_boxes('train-annotations-bbox')
     test_bbox = load_boxes('test-annotations-bbox')
     validation_bbox = load_boxes('validation-annotations-bbox')
@@ -227,28 +271,67 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, archive_paths, objects_getter, bboxes_getter,
                          prefixes=None):
+    """Yields examples."""
+    trainable_classes = set(
+        self.info.features['objects_trainable']['label'].names)
     for i, archive_path in enumerate(archive_paths):
-      prefix = prefixes and prefixes[i] or None
+      prefix = prefixes[i] if prefixes else None
       objects = objects_getter(prefix)
       bboxes = bboxes_getter(prefix)
       logging.info('Opening archive %s ...', archive_path)
-      archive = tfds.download.iter_archive(archive_path,
-                                           tfds.download.ExtractMethod.TAR)
+      archive = tfds.download.iter_archive(
+          archive_path, tfds.download.ExtractMethod.TAR_STREAM)
       for fpath, fobj in archive:
         fname = os.path.basename(fpath)
         image_id = int(os.path.splitext(fname)[0], 16)
         image_objects = [obj._asdict() for obj in objects.get(image_id, [])]
         image_bboxes = [bbox._asdict() for bbox in bboxes.get(image_id, [])]
-        yield {
-            'image': fobj,
+        image_objects_trainable = [
+            obj for obj in image_objects if obj['label'] in trainable_classes
+        ]
+        record = {
+            'image': _resize_image_if_necessary(
+                fobj, target_pixels=self.builder_config.target_pixels),
             'image/filename': fname,
             'objects': image_objects,
+            'objects_trainable': image_objects_trainable,
             'bobjects': image_bboxes,
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield fname, record
+        else:
+          yield record
 
 
-def _load_objects(csv_paths, source_str2int, label_str2int,
-                  csv_positions, prefix):
+def _resize_image_if_necessary(image_fobj, target_pixels=None):
+  """Resize an image to have (roughly) the given number of target pixels.
+
+  Args:
+    image_fobj: File object containing the original image.
+    target_pixels: If given, number of pixels that the image must have.
+
+  Returns:
+    A file object.
+  """
+  if target_pixels is None:
+    return image_fobj
+
+  cv2 = tfds.core.lazy_imports.cv2
+  # Decode image using OpenCV2.
+  image = cv2.imdecode(
+      np.fromstring(image_fobj.read(), dtype=np.uint8), flags=3)
+  # Get image height and width.
+  height, width, _ = image.shape
+  actual_pixels = height * width
+  if actual_pixels > target_pixels:
+    factor = np.sqrt(target_pixels / actual_pixels)
+    image = cv2.resize(image, dsize=None, fx=factor, fy=factor)
+  # Encode the image with quality=72 and store it in a BytesIO object.
+  _, buff = cv2.imencode('.jpg', image, [int(cv2.IMWRITE_JPEG_QUALITY), 72])
+  return io.BytesIO(buff.tostring())
+
+
+def _load_objects(csv_paths, csv_positions, prefix):
   """Returns objects listed within given CSV files."""
   logging.info('Loading CSVs %s from positions %s with prefix %s',
                csv_paths, csv_positions, prefix)
@@ -265,15 +348,12 @@ def _load_objects(csv_paths, source_str2int, label_str2int,
           break
         csv_positions[i] = csv_f.tell()
         image_id = int(image_id, 16)
-        source = source_str2int(source)
-        label = label_str2int(label)
         current_obj = _Object(label, int(float(confidence) * 10), source)
         objects[image_id].append(current_obj)
   return dict(objects)
 
 
-def _load_bboxes(csv_path, source_str2int, label_str2int,
-                 csv_positions, prefix):
+def _load_bboxes(csv_path, csv_positions, prefix):
   """Returns bounded boxes listed within given CSV file."""
   logging.info('Loading CSVs %s from positions %s with prefix %s',
                csv_path, csv_positions, prefix)
@@ -291,8 +371,6 @@ def _load_bboxes(csv_path, source_str2int, label_str2int,
         break
       csv_positions[0] = csv_f.tell()
       image_id = int(image_id, 16)
-      label = label_str2int(label)
-      source = source_str2int(source)
       del confidence  # always 1 in bounding boxes.
       current_row = _Bbox(
           label, source, tfds.features.BBox(

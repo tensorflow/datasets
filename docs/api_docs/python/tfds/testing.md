@@ -5,11 +5,12 @@
 
 # Module: tfds.testing
 
-
+Testing utilities.
 
 Defined in [`testing/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/__init__.py).
 
-Testing utilities.
+<!-- Placeholder for "Used in" -->
+
 
 ## Classes
 
@@ -23,19 +24,24 @@ Testing utilities.
 
 [`class FeatureExpectationsTestCase`](../tfds/testing/FeatureExpectationsTestCase.md): Tests FeatureExpectations with full encode-decode.
 
+[`class SubTestCase`](../tfds/testing/SubTestCase.md): Adds subTest() context
+manager to the TestCase if supported.
+
 [`class TestCase`](../tfds/testing/TestCase.md): Base TestCase to be used for all tests.
 
 ## Functions
+
+[`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary
+directory.
+
+[`mock_kaggle_api(...)`](../tfds/testing/mock_kaggle_api.md): Mock out the
+kaggle CLI.
+
+[`rm_tmp_dir(...)`](../tfds/testing/rm_tmp_dir.md): Rm temporary directory.
 
 [`run_in_graph_and_eager_modes(...)`](../tfds/testing/run_in_graph_and_eager_modes.md): Execute the decorated test in both graph mode and eager mode.
 
 [`test_main(...)`](../tfds/testing/test_main.md): Entrypoint for tests.
 
 [`tmp_dir(...)`](../tfds/testing/tmp_dir.md): Context manager for a temporary directory.
-
-[`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary directory.
-
-[`mock_kaggle_api(...)`](../tfds/testing/mock_kaggle_api.md): Mock out the kaggle CLI.
-
-[`rm_tmp_dir(...)`](../tfds/testing/rm_tmp_dir.md): Rm temporary directory.
 

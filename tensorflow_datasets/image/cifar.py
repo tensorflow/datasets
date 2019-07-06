@@ -45,6 +45,12 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
   VERSION = tfds.core.Version("1.0.2")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.2"),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -77,6 +83,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     cifar_path = dl_manager.download_and_extract(self._cifar_info.url)
     cifar_info = self._cifar_info
 
@@ -98,11 +105,11 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
+            num_shards=10,  # Ignored when using a version with S3 experiment.
             gen_kwargs={"filepaths": gen_filenames(cifar_info.train_files)}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
+            num_shards=1,  # Ignored when using a version with S3 experiment.
             gen_kwargs={"filepaths": gen_filenames(cifar_info.test_files)}),
     ]
 
@@ -119,17 +126,26 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
       The cifar examples, as defined in the dataset info features.
     """
     label_keys = self._cifar_info.label_keys
+    index = 0  # Using index as key since data is always loaded in same order.
     for path in filepaths:
       for labels, np_image in _load_data(path, len(label_keys)):
-        row = dict(zip(label_keys, labels))
-        row["image"] = np_image
-        yield row
+        record = dict(zip(label_keys, labels))
+        record["image"] = np_image
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield index, record
+        else:
+          yield record
+        index += 1
 
 
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
   VERSION = tfds.core.Version("1.3.1")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.3.1"),
+  ]
 
   @property
   def _cifar_info(self):

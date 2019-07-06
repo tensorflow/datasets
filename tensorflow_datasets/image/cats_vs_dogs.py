@@ -46,16 +46,20 @@ _DESCRIPTION = (("A large set of images of cats and dogs."
                  "There are %d corrupted images that are dropped.")
                 % _NUM_CORRUPT_IMAGES)
 
-_NAME_RE = re.compile(r"^PetImages/(Cat|Dog)/\d+\.jpg$")
+_NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 
 
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version("2.0.0")
-  # From 1.0.0 to 2.0.0:
-  #  - _NUM_CORRUPT_IMAGES: 1800->1738.
-  #  - add 'image/filename' feature.
+  VERSION = tfds.core.Version("2.0.1")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("2.0.1"),
+  ]
+  # Version history:
+  # 3.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 2.0.0: _NUM_CORRUPT_IMAGES: 1800->1738, add 'image/filename' feature.
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -95,13 +99,17 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       if tf.compat.as_bytes("JFIF") not in fobj.peek(10):
         num_skipped += 1
         continue
-      yield {
+      record = {
           "image": fobj,
           "image/filename": fname,
           "label": label,
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield fname, record
+      else:
+        yield record
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
-      raise ValueError("Expected % corrupt images, but found %d" % (
+      raise ValueError("Expected %d corrupt images, but found %d" % (
           _NUM_CORRUPT_IMAGES, num_skipped))
     logging.warning("%d images were corrupted and were skipped", num_skipped)

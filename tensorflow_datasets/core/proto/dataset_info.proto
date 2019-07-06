@@ -26,9 +26,13 @@ message SplitInfo {
 
   // The number of shards in this splits on-disk representation.
   int64 num_shards = 2;
+  // The number of examples in each shard.
+  repeated int64 shard_lengths = 4;
 
   // The concrete statistics about this split.
   tensorflow.metadata.v0.DatasetFeatureStatistics statistics = 3;
+
+  // Next available: 5.
 }
 
 // This message indicates which feature in the dataset schema is the input and
@@ -61,8 +65,9 @@ message DatasetInfo {
   // Canonical location of the dataset.
   DatasetLocation location = 5;
 
+  // DEPRECATED
   // Checksums of resources: URL to checksum of resource at URL.
-  map<string, string> download_checksums = 10;
+  map<string, string> download_checksums = 10 [deprecated=true];
 
   // The schema of the dataset.
   tensorflow.metadata.v0.Schema schema = 6;

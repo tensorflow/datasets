@@ -59,6 +59,12 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
   """MS Coco dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -80,7 +86,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
             # Images can have variable shape
             "image": tfds.features.Image(encoding_format="jpeg"),
             "image/filename": tfds.features.Text(),
-            "objects": tfds.features.SequenceDict({
+            "objects": tfds.features.Sequence({
                 "bbox": tfds.features.BBoxFeature(),
                 # Coco has 91 categories but only 80 are present in the dataset
                 "label": tfds.features.ClassLabel(num_classes=80),
@@ -92,6 +98,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     root_url = "http://images.cocodataset.org/"
     urls = {
         # Train/validation set
@@ -235,15 +242,19 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
         )
         # pylint: enable=cell-var-from-loop
 
-      yield {
+      record = {
           "image": os.path.join(image_dir, split_type, image_info["file_name"]),
           "image/filename": image_info["file_name"],
-          "objects": [{
+          "objects": [{   # pylint: disable=g-complex-comprehension
               "bbox": build_bbox(*instance_info["bbox"]),
               "label": categories_id2name[instance_info["category_id"]],
               "is_crowd": bool(instance_info["iscrowd"]),
           } for instance_info in instances],
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield image_info["file_name"], record
+      else:
+        yield record
     logging.info(
         "%d/%d images do not contains any annotations",
         annotation_skipped,
@@ -279,7 +290,7 @@ class CocoAnnotation(object):
 
   @property
   def images(self):
-    """Return the category dicts, as sorted in the file."""
+    """Return the image dicts, as sorted in the file."""
     return self._data["images"]
 
   def get_annotations(self, img_id):

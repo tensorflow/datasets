@@ -3,7 +3,6 @@
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="encoder"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="vocab_size"/>
 <meta itemprop="property" content="__init__"/>
@@ -23,13 +22,14 @@
 
 ## Class `Text`
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
+`FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
-
+Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
 Defined in [`core/features/text_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py).
 
-`FeatureConnector` for text, encoding to integers with a `TextEncoder`.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -44,12 +44,13 @@ Constructs a Text FeatureConnector.
 
 #### Args:
 
-* <b>`encoder`</b>: <a href="../../tfds/features/text/TextEncoder.md"><code>tfds.features.text.TextEncoder</code></a>, an encoder that can convert
-    text to integers. If None, the text will be utf-8 byte-encoded.
-* <b>`encoder_config`</b>: <a href="../../tfds/features/text/TextEncoderConfig.md"><code>tfds.features.text.TextEncoderConfig</code></a>, needed if
-    restoring from a file with `load_metadata`.
-
-
+*   <b>`encoder`</b>:
+    <a href="../../tfds/features/text/TextEncoder.md"><code>tfds.features.text.TextEncoder</code></a>,
+    an encoder that can convert text to integers. If None, the text will be
+    utf-8 byte-encoded.
+*   <b>`encoder_config`</b>:
+    <a href="../../tfds/features/text/TextEncoderConfig.md"><code>tfds.features.text.TextEncoderConfig</code></a>,
+    needed if restoring from a file with `load_metadata`.
 
 ## Properties
 
@@ -59,21 +60,11 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 
 <h3 id="encoder"><code>encoder</code></h3>
 
-
-
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="vocab_size"><code>vocab_size</code></h3>
-
-
-
-
 
 ## Methods
 
@@ -83,7 +74,22 @@ Return the shape (or dict of shape) of this FeatureConnector.
 decode_example(tfexample_data)
 ```
 
+Decode the feature dict to TF compatible input.
 
+Note: If eager is not enabled, this function will be executed as a tensorflow
+graph (in `tf.data.Dataset.map(features.decode_example)`).
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: Data or dictionary of data, as read by the
+    tf-example reader. It correspond to the `tf.Tensor()` (or dict of
+    `tf.Tensor()`) extracted from the `tf.train.Example`, matching the info
+    defined in `get_serialized_info()`.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
+    tf.data.Dataset object
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -91,26 +97,26 @@ decode_example(tfexample_data)
 encode_example(example_data)
 ```
 
-
-
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 ``` python
 get_serialized_info()
 ```
 
-Return the tf-example features for the adapter, as stored on disk.
+Return the shape/dtype of features after encoding (for the adapter).
+
+The `FileAdapter` then use those information to write data on disk.
 
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
 
-Ex:
+#### Ex:
 
 ```
 return {
-    'image': tf.VarLenFeature(tf.uint8):
-    'height': tf.FixedLenFeature((), tf.int32),
-    'width': tf.FixedLenFeature((), tf.int32),
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
+    'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+    'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
 }
 ```
 
@@ -118,7 +124,7 @@ FeatureConnector which are not containers should return the feature proto
 directly:
 
 ```
-return tf.FixedLenFeature((64, 64), tf.uint8)
+return tfds.features.TensorInfo(shape=(64, 64), tf.uint8)
 ```
 
 If not defined, the retuned values are automatically deduced from the
@@ -134,7 +140,7 @@ If not defined, the retuned values are automatically deduced from the
 get_tensor_info()
 ```
 
-
+See base class for details.
 
 <h3 id="ints2str"><code>ints2str</code></h3>
 
@@ -152,8 +158,6 @@ load_metadata(
     feature_name
 )
 ```
-
-
 
 <h3 id="maybe_build_from_corpus"><code>maybe_build_from_corpus</code></h3>
 
@@ -183,8 +187,6 @@ save_metadata(
 )
 ```
 
-
-
 <h3 id="str2ints"><code>str2ints</code></h3>
 
 ``` python
@@ -192,6 +194,3 @@ str2ints(str_value)
 ```
 
 Conversion string => encoded list[int].
-
-
-

@@ -21,14 +21,15 @@ from __future__ import print_function
 
 import os
 import numpy as np
-import six.moves.urllib as urllib
+from six.moves import urllib
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # MNIST constants
-_MNIST_URL = "http://yann.lecun.com/exdb/mnist/"
+# CVDF mirror of http://yann.lecun.com/exdb/mnist/
+_MNIST_URL = "https://storage.googleapis.com/cvdf-datasets/mnist/"
 _MNIST_TRAIN_DATA_FILENAME = "train-images-idx3-ubyte.gz"
 _MNIST_TRAIN_LABELS_FILENAME = "train-labels-idx1-ubyte.gz"
 _MNIST_TEST_DATA_FILENAME = "t10k-images-idx3-ubyte.gz"
@@ -80,11 +81,11 @@ _K_MNIST_CITATION = """\
 """
 
 _EMNIST_CITATION = """\
-@article{cohen_afshar_tapson_schaik_2017, 
-    title={EMNIST: Extending MNIST to handwritten letters}, 
-    DOI={10.1109/ijcnn.2017.7966217}, 
-    journal={2017 International Joint Conference on Neural Networks (IJCNN)}, 
-    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van}, 
+@article{cohen_afshar_tapson_schaik_2017,
+    title={EMNIST: Extending MNIST to handwritten letters},
+    DOI={10.1109/ijcnn.2017.7966217},
+    journal={2017 International Joint Conference on Neural Networks (IJCNN)},
+    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van},
     year={2017}
 }
 """
@@ -95,6 +96,11 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   URL = _MNIST_URL
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -110,8 +116,8 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
-    # Download the full MNist Database
+    """Returns SplitGenerators."""
+    # Download the full MNIST Database
     filenames = {
         "train_data": _MNIST_TRAIN_DATA_FILENAME,
         "train_labels": _MNIST_TRAIN_LABELS_FILENAME,
@@ -126,7 +132,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
+            num_shards=10,  # Ignored when using a version with S3 experiment.
             gen_kwargs=dict(
                 num_examples=_TRAIN_EXAMPLES,
                 data_path=mnist_files["train_data"],
@@ -134,7 +140,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
+            num_shards=1,  # Ignored when using a version with S3 experiment.
             gen_kwargs=dict(
                 num_examples=_TEST_EXAMPLES,
                 data_path=mnist_files["test_data"],
@@ -157,12 +163,13 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     labels = _extract_mnist_labels(label_path, num_examples)
     data = list(zip(images, labels))
 
-    # Data is shuffled automatically to distribute classes uniformly.
-    for image, label in data:
-      yield {
-          "image": image,
-          "label": label,
-      }
+    # Using index as key since data is always loaded in same order.
+    for index, (image, label) in enumerate(data):
+      record = {"image": image, "label": label}
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield index, record
+      else:
+        yield record
 
 
 class FashionMNIST(MNIST):
@@ -236,6 +243,9 @@ class EMNISTConfig(tfds.core.BuilderConfig):
       test_examples: number of test examples
       **kwargs: keyword arguments forwarded to super.
     """
+    kwargs["supported_versions"] = [
+        tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+    ]
     super(EMNISTConfig, self).__init__(**kwargs)
     self.class_number = class_number
     self.train_examples = train_examples
@@ -244,8 +254,8 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 
 class EMNIST(MNIST):
   """Emnist dataset."""
-
-  VERSION = tfds.core.Version("1.0.1")
+  URL = "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
+  VERSION = None  # Configs.
 
   BUILDER_CONFIGS = [
       EMNISTConfig(
@@ -253,56 +263,49 @@ class EMNIST(MNIST):
           class_number=62,
           train_examples=697932,
           test_examples=116323,
-          description="EMNIST ByClass:  814,255 characters. 62 unbalanced classes.",
-          version="1.0.1",
+          description="EMNIST ByClass",
+          version=tfds.core.Version("1.0.1"),
+
       ),
       EMNISTConfig(
           name="bymerge",
           class_number=47,
           train_examples=697932,
           test_examples=116323,
-          description="EMNIST ByMerge: 814,255 characters. 47 unbalanced classes.",
-          version="1.0.1",
+          description="EMNIST ByMerge",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="balanced",
           class_number=47,
           train_examples=112800,
           test_examples=18800,
-          description="EMNIST Balanced:	131,600 characters. 47 balanced classes.",
-          version="1.0.1",
+          description="EMNIST Balanced",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="letters",
           class_number=37,
           train_examples=88800,
           test_examples=14800,
-          description="EMNIST Letters:	103,600 characters. 26 balanced classes.",
-          version="1.0.1",
+          description="EMNIST Letters",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="digits",
           class_number=10,
           train_examples=240000,
           test_examples=40000,
-          description="EMNIST Digits:  280,000 characters. 10 balanced classes.",
-          version="1.0.1",
+          description="EMNIST Digits",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="mnist",
           class_number=10,
           train_examples=60000,
           test_examples=10000,
-          description="EMNIST MNIST:  70,000 characters. 10 balanced classes.",
-          version="1.0.1",
-      ),
-      EMNISTConfig(
-          name="test",
-          class_number=62,
-          train_examples=10,
-          test_examples=2,
-          description="EMNIST test data config.",
-          version="1.0.1",
+          description="EMNIST MNIST",
+          version=tfds.core.Version("1.0.1"),
       ),
   ]
 
@@ -310,9 +313,9 @@ class EMNIST(MNIST):
     return tfds.core.DatasetInfo(
         builder=self,
         description=(
-            "The EMNIST dataset is a set of handwritten character digits"
-            "derived from the NIST Special Database 19 and converted to"
-            "a 28x28 pixel image format and dataset structure that directly"
+            "The EMNIST dataset is a set of handwritten character digits "
+            "derived from the NIST Special Database 19 and converted to "
+            "a 28x28 pixel image format and dataset structure that directly "
             "matches the MNIST dataset."),
         features=tfds.features.FeaturesDict({
             "image":
@@ -327,43 +330,25 @@ class EMNIST(MNIST):
     )
 
   def _split_generators(self, dl_manager):
-
     filenames = {
         "train_data":
-            "emnist-{}-train-images-idx3-ubyte".format(
+            "emnist-{}-train-images-idx3-ubyte.gz".format(
                 self.builder_config.name),
         "train_labels":
-            "emnist-{}-train-labels-idx1-ubyte".format(
+            "emnist-{}-train-labels-idx1-ubyte.gz".format(
                 self.builder_config.name),
         "test_data":
-            "emnist-{}-test-images-idx3-ubyte".format(self.builder_config.name),
+            "emnist-{}-test-images-idx3-ubyte.gz".format(
+                self.builder_config.name),
         "test_labels":
-            "emnist-{}-test-labels-idx1-ubyte".format(self.builder_config.name),
+            "emnist-{}-test-labels-idx1-ubyte.gz".format(
+                self.builder_config.name),
     }
 
-    dir_name = dl_manager.manual_dir
-
-    if not tf.io.gfile.exists(os.path.join(dir_name, filenames["train_data"])):
-      # The current tfds.core.download_manager is unable to
-      # extract multiple and nested files.
-      # We'll add soon! (Issue 234)
-      msg = ("You must download and extract the dataset files manually and "
-             "place them in : ")
-      msg += dl_manager.manual_dir
-      msg += """File tree must be like this :\n
-               .
-              | -- emnist
-              |   |-- emnist-byclass-train-images-idx3-ubyte
-              |   |-- emnist-byclass-train-labels-idx3-ubyte
-              |   |-- emnist-byclass-test-images-idx3-ubyte
-              |   |-- emnist-byclass-test-labels-idx3-ubyte
-              |   |-- emnist-bymerge-train-images-idx3-ubyte
-              |   |-- emnist-bymerge-train-labels-idx3-ubyte
-              |   |-- emnist-bymerge-test-images-idx3-ubyte
-              |   |-- emnist-bymerge-test-labels-idx3-ubyte
-              |   |-- .......
-            """
-      raise Exception(msg.replace("               ", ""))
+    dir_name = os.path.join(dl_manager.download_and_extract(self.URL), "gzip")
+    extracted = dl_manager.extract({
+        k: os.path.join(dir_name, fname) for k, fname in filenames.items()
+    })
 
     return [
         tfds.core.SplitGenerator(
@@ -371,16 +356,16 @@ class EMNIST(MNIST):
             num_shards=10,
             gen_kwargs=dict(
                 num_examples=self.builder_config.train_examples,
-                data_path=os.path.join(dir_name, filenames["train_data"]),
-                label_path=os.path.join(dir_name, filenames["train_labels"]),
+                data_path=extracted["train_data"],
+                label_path=extracted["train_labels"],
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs=dict(
                 num_examples=self.builder_config.test_examples,
-                data_path=os.path.join(dir_name, filenames["test_data"]),
-                label_path=os.path.join(dir_name, filenames["test_labels"]),
+                data_path=extracted["test_data"],
+                label_path=extracted["test_labels"],
             ))
     ]
 

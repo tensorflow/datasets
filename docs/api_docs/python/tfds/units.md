@@ -6,18 +6,16 @@
 <meta itemprop="property" content="MiB"/>
 <meta itemprop="property" content="PiB"/>
 <meta itemprop="property" content="TiB"/>
-<meta itemprop="property" content="absolute_import"/>
-<meta itemprop="property" content="division"/>
-<meta itemprop="property" content="print_function"/>
 </div>
 
 # Module: tfds.units
 
-
+Defines convenience constants/functions for converting various units.
 
 Defined in [`core/units.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py).
 
-Defines convenience constants/functions for converting various units.
+<!-- Placeholder for "Used in" -->
+
 
 ## Functions
 
@@ -25,19 +23,8 @@ Defines convenience constants/functions for converting various units.
 
 ## Other Members
 
-<h3 id="GiB"><code>GiB</code></h3>
-
-<h3 id="KiB"><code>KiB</code></h3>
-
-<h3 id="MiB"><code>MiB</code></h3>
-
-<h3 id="PiB"><code>PiB</code></h3>
-
-<h3 id="TiB"><code>TiB</code></h3>
-
-<h3 id="absolute_import"><code>absolute_import</code></h3>
-
-<h3 id="division"><code>division</code></h3>
-
-<h3 id="print_function"><code>print_function</code></h3>
-
+*   `GiB = 1073741824` <a id="GiB"></a>
+*   `KiB = 1024` <a id="KiB"></a>
+*   `MiB = 1048576` <a id="MiB"></a>
+*   `PiB = 1125899906842624` <a id="PiB"></a>
+*   `TiB = 1099511627776` <a id="TiB"></a>

@@ -21,7 +21,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import six.moves.urllib as urllib
+from six.moves import urllib
 import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
@@ -43,6 +43,12 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
   """Street View House Numbers (SVHN) Dataset, cropped version."""
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -99,17 +105,23 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
       Generator yielding the next samples
     """
     with tf.io.gfile.GFile(filepath, "rb") as f:
-      data = tfds.core.lazy_imports.scipy_io.loadmat(f)
+      data = tfds.core.lazy_imports.scipy.io.loadmat(f)
 
     # Maybe should shuffle ?
 
     assert np.max(data["y"]) <= 10  # Sanity check
     assert np.min(data["y"]) > 0
 
-    for image, label in zip(np.rollaxis(data["X"], -1), data["y"]):
-      yield {
+    for i, (image, label) in enumerate(zip(
+        np.rollaxis(data["X"], -1), data["y"])):
+      label = label.reshape(())
+      record = {
           "image": image,
           "label": label % 10,  # digit 0 is saved as 0 (instead of 10)
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield i, record
+      else:
+        yield record
 
 # TODO(tfds): Add the SvhnFull dataset

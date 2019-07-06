@@ -107,6 +107,7 @@ class LibrispeechConfig(tfds.core.BuilderConfig):
 
   @property
   def download_urls(self):
+    """Returns download urls for this config."""
     urls = {
         tfds.Split.TRAIN: ["train_clean100"],
         tfds.Split.VALIDATION: ["dev_clean"],

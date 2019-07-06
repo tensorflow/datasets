@@ -19,7 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-# pylint: disable=g-import-not-at-top
+# pylint: disable=g-import-not-at-top,g-direct-tensorflow-import
 
 import types
 import distutils.version
@@ -27,7 +27,6 @@ import distutils.version
 # Which patch function was called
 # For debug only, not to be depended upon.
 # Will be set to one of:
-# * tf1_12
 # * tf1_13
 # * tf2
 TF_PATCH = ""
@@ -56,8 +55,8 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     raise
 
   tf_version = distutils.version.LooseVersion(tf.__version__)
-  v_1_12 = distutils.version.LooseVersion("1.12.0")
-  if tf_version < v_1_12:
+  v_1_13 = distutils.version.LooseVersion("1.13.0")
+  if tf_version < v_1_13:
     raise ImportError(
         "This version of TensorFlow Datasets requires TensorFlow "
         "version >= {required}; Detected an installation of version {present}. "
@@ -73,15 +72,10 @@ def _patch_tf(tf):
   if TF_PATCH:
     return
 
-  v_1_12 = distutils.version.LooseVersion("1.12.0")
   v_1_13 = distutils.version.LooseVersion("1.13.0")
   v_2 = distutils.version.LooseVersion("2.0.0")
   tf_version = distutils.version.LooseVersion(tf.__version__)
-  if v_1_12 <= tf_version < v_1_13:
-    # TODO(b/123930850): remove when 1.13 is stable.
-    TF_PATCH = "tf1_12"
-    _patch_for_tf1_12(tf)
-  elif v_1_13 <= tf_version < v_2:
+  if v_1_13 <= tf_version < v_2:
     TF_PATCH = "tf1_13"
     _patch_for_tf1_13(tf)
   else:
@@ -90,46 +84,11 @@ def _patch_tf(tf):
 
 
 def _patch_for_tf2(tf):
-  from tensorflow.python.data.ops import dataset_ops
-  if hasattr(dataset_ops, "get_legacy_output_shapes"):
+  if not hasattr(tf.data.Dataset, "output_shapes"):
+    from tensorflow.python.data.ops import dataset_ops
     tf.data.Dataset.output_shapes = property(
         dataset_ops.get_legacy_output_shapes)
     tf.data.Dataset.output_types = property(dataset_ops.get_legacy_output_types)
-
-
-def _patch_for_tf1_12(tf):
-  """Monkey patch tf 1.12 so tfds can use it."""
-  tf.io.gfile = tf.gfile
-  tf.io.gfile.copy = tf.gfile.Copy
-  tf.io.gfile.exists = tf.gfile.Exists
-  tf.io.gfile.glob = tf.gfile.Glob
-  tf.io.gfile.isdir = tf.gfile.IsDirectory
-  tf.io.gfile.listdir = tf.gfile.ListDirectory
-  tf.io.gfile.makedirs = tf.gfile.MakeDirs
-  tf.io.gfile.mkdir = tf.gfile.MkDir
-  tf.io.gfile.remove = tf.gfile.Remove
-  tf.io.gfile.rename = tf.gfile.Rename
-  tf.io.gfile.rmtree = tf.gfile.DeleteRecursively
-  tf.io.gfile.stat = tf.gfile.Stat
-  tf.io.gfile.walk = tf.gfile.Walk
-  tf.io.gfile.GFile = tf.gfile.GFile
-  tf.data.experimental = tf.contrib.data
-  tf.compat.v1 = types.ModuleType("tf.compat.v1")
-  tf.compat.v1.assert_greater = tf.assert_greater
-  tf.compat.v1.placeholder = tf.placeholder
-  tf.compat.v1.ConfigProto = tf.ConfigProto
-  tf.compat.v1.Session = tf.Session
-  tf.compat.v1.enable_eager_execution = tf.enable_eager_execution
-  tf.compat.v1.io = tf.io
-  tf.compat.v1.data = tf.data
-  tf.compat.v1.data.Dataset = tf.data.Dataset
-  tf.compat.v1.data.make_one_shot_iterator = (
-      lambda ds: ds.make_one_shot_iterator())
-  tf.compat.v1.train = tf.train
-  tf.compat.v1.global_variables_initializer = tf.global_variables_initializer
-  tf.compat.v1.test = tf.test
-  tf.compat.v1.test.get_temp_dir = tf.test.get_temp_dir
-  tf.nest = tf.contrib.framework.nest
 
 
 def _patch_for_tf1_13(tf):
@@ -143,6 +102,13 @@ def _patch_for_tf1_13(tf):
     tf.compat.v2.data = types.ModuleType("tf.compat.v2.data")
     from tensorflow.python.data.ops import dataset_ops
     tf.compat.v2.data.Dataset = dataset_ops.DatasetV2
+  if not hasattr(tf.compat.v2.data.Dataset, "output_shapes"):
+    from tensorflow.python.data.ops import dataset_ops
+    if hasattr(dataset_ops, "get_legacy_output_shapes"):
+      tf.compat.v2.data.Dataset.output_shapes = property(
+          dataset_ops.get_legacy_output_shapes)
+      tf.compat.v2.data.Dataset.output_types = property(
+          dataset_ops.get_legacy_output_types)
 
 
 def is_dataset(ds):

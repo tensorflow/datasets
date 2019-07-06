@@ -5,21 +5,35 @@ Follow this guide to add a dataset to TFDS.
 See our [list of datasets](datasets.md) to see if the dataset you want isn't
 already added.
 
-* [Overview](#overview)
-* [Writing `my_dataset.py`](#writing-my-datasetpy)
-* [Specifying `DatasetInfo`](#specifying-datasetinfo)
-  * [`FeatureConnector`s](#featureconnectors)
-* [Downloading and extracting source data](#downloading-and-extracting-source-data)
-  * [Manual download and extraction](#manual-download-and-extraction)
-* [Specifying dataset splits](#specifying-dataset-splits)
-* [Writing an example generator](#writing-an-example-generator)
-  * [File access and `tf.io.gfile`](#file-access-and-tfiogfile)
-  * [Extra dependencies](#extra-dependencies)
-* [Dataset configuration](#dataset-configuration)
-* [Create your own `FeatureConnector`](#create-your-own-featureconnector)
-* [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
-* [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
-* [Testing `MyDataset`](#testing-mydataset)
+*   [Overview](#overview)
+*   [Writing `my_dataset.py`](#writing-my-datasetpy)
+    *   [Use the default template](#use-the-default-template)
+    *   [DatasetBuilder](#datasetbuilde)
+    *   [my_dataset.py](#my-datasetpy)
+*   [Specifying `DatasetInfo`](#specifying-datasetinfo)
+    *   [`FeatureConnector`s](#featureconnectors)
+*   [Downloading and extracting source data](#downloading-and-extracting-source-data)
+    *   [Manual download and extraction](#manual-download-and-extraction)
+*   [Specifying dataset splits](#specifying-dataset-splits)
+*   [Writing an example generator](#writing-an-example-generator)
+    *   [File access and `tf.io.gfile`](#file-access-and-tfiogfile)
+    *   [Extra dependencies](#extra-dependencies)
+    *   [Corrupted data](#corrupted-data)
+    *   [Inconsistent data](#inconsistent-data)
+*   [Dataset configuration](#dataset-configuration)
+    *   [Heavy configuration with BuilderConfig](#heavy-configuration-with-builderconfig)
+    *   [Light configuration with constructor args](#light-configuration-with-constructor-args)
+*   [Create your own `FeatureConnector`](#create-your-own-featureconnector)
+*   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
+    *   [1. Add an import for registration](#1-add-an-import-for-registration)
+    *   [2. Run download_and_prepare locally](#2-run-download-and-prepare-locally)
+    *   [3. Double-check the citation](#3-double-check-the-citation)
+    *   [4. Add a test](#4-add-a-test)
+    *   [5. Check your code style](#5-check-your-code-style)
+    *   [6. Add release notes](#6-add-release-notes)
+    *   [7. Send for review!](#7-send-for-review)
+*   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
+*   [Testing `MyDataset`](#testing-mydataset)
 
 ## Overview
 
@@ -48,6 +62,24 @@ generate on a single machine. See the
 [section below on large datasets](#large-datasets-and-distributed-generation).
 
 ## Writing `my_dataset.py`
+
+### Use the default template
+
+If you want to
+[contribute to our repo](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md)
+and add a new dataset, the following script will help you get started by
+generating the required python files,...
+To use it, clone the `tfds` repository and run the following command:
+
+```
+python tensorflow_datasets/scripts/create_new_dataset.py \
+  --dataset my_dataset \
+  --type image  # text, audio, translation,...
+```
+
+
+Then search for `TODO(my_dataset)` in the generated files to do the
+modifications.
 
 ### `DatasetBuilder`
 
@@ -105,6 +137,9 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 If you'd like to follow a test-driven development workflow, which can help you
 iterate faster, jump to the [testing instructions](#testing-mydataset) below,
 add the test, and then return here.
+
+For an explanation of what the version is, please read
+[datasets versioning](datasets_versioning.md).
 
 ## Specifying `DatasetInfo`
 
@@ -193,7 +228,7 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
-            name="train",
+            name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "train"),
@@ -201,7 +236,7 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
             },
         ),
         tfds.core.SplitGenerator(
-            name="test",
+            name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "test"),
@@ -360,6 +395,11 @@ Note that most datasets will find the [current set of
 `tfds.features.FeatureConnector`s](api_docs/python/tfds/features.md)
 sufficient, but sometimes a new one may need to be defined.
 
+Note: If you need a new `FeatureConnector` not present in the default set and
+are planning to submit it to `tensorflow/datasets`, please open a
+[new issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=)
+on GitHub with your proposal.
+
 [`tfds.features.FeatureConnector`s](api_docs/python/tfds/features/FeatureConnector.md)
 in `DatasetInfo` correspond to the elements returned in the
 `tf.data.Dataset` object. For instance, with:
@@ -445,13 +485,26 @@ import to its subdirectory's `__init__.py`
 
 ### 2. Run `download_and_prepare` locally.
 
+If you're contributing the dataset to `tensorflow/datasets`, add a checksums
+file for the dataset. On first download, the `DownloadManager` will
+automatically add the sizes and checksums for all downloaded URLs to that file.
+This ensures that on subsequent data generation, the downloaded files are
+as expected.
+
+```sh
+touch tensorflow_datasets/url_checksums/my_new_dataset.txt
+```
+
 Run `download_and_prepare` locally to ensure that data generation works:
 
 ```
 # default data_dir is ~/tensorflow_datasets
 python -m tensorflow_datasets.scripts.download_and_prepare \
+  --register_checksums \
   --datasets=my_new_dataset
 ```
+
+Note that the `--register_checksums` flag must only be used while in development.
 
 Copy in the contents of the `dataset_info.json` file(s) to a [GitHub gist](https://gist.github.com/) and link to it in your pull request.
 
@@ -483,12 +536,41 @@ Most datasets in TFDS should have a unit test and your reviewer may ask you
 to add one if you haven't already. See the
 [testing section](#testing-mydataset) below.
 
+### 5. Check your code style
+
+Follow the [PEP 8 Python style guide](https://www.python.org/dev/peps/pep-0008),
+except TensorFlow uses 2 spaces instead of 4. Please conform to the
+[Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
+
+Most importantly, use
+[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/blob/master/oss_scripts/lint.sh)
+to ensure your code is properly formatted. For example, to lint the `image`
+directory:
+
+```sh
+./oss_scripts/lint.sh tensorflow_datasets/image
+```
+
+See
+[TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
+for more information.
+
+### 6. Add release notes
+
+Add the dataset to the
+[release notes](https://github.com/tensorflow/datasets/blob/master/docs/release_notes.md).
+The release note will be published for the next release.
+
+### 7. Send for review!
+
+Send the pull request for review.
+
+
 ## Large datasets and distributed generation
 
 Some datasets are so large as to require multiple machines to download and
-generate. We intend to soon support this use case using Apache Beam. Follow
-[our tracking issue](https://github.com/tensorflow/datasets/issues/10)
-to be updated.
+generate. We support this use case using Apache Beam. Please read the
+[Beam Dataset Guide](beam_datasets.md) to get started.
 
 ## Testing MyDataset
 

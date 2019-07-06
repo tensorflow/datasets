@@ -18,9 +18,8 @@
 FileFormatAdapters implement methods to write and read data from a
 particular file format.
 
-Currently, two FileAdapter are available:
+Currently, a single FileAdapter is available:
  * TFRecordExampleAdapter: To store the pre-processed dataset as .tfrecord file
- * CSVAdapter: To store the dataset as CSV file
 
 ```python
 return TFRecordExampleAdapter({
@@ -35,10 +34,7 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
-import collections
 import contextlib
-import csv
-import itertools
 import random
 import string
 
@@ -47,13 +43,15 @@ import numpy as np
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import example_parser
+from tensorflow_datasets.core import example_serializer
+from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.core import utils
 
 
 __all__ = [
     "FileFormatAdapter",
     "TFRecordExampleAdapter",
-    "CSVAdapter",
 ]
 
 
@@ -61,15 +59,37 @@ __all__ = [
 class FileFormatAdapter(object):
   """Provides writing and reading methods for a file format."""
 
+  def __init__(self, example_specs):
+    """Constructor.
+
+    Args:
+      example_specs: Nested `dict` of `tfds.features.TensorInfo`, corresponding
+        to the structure of data to write/read.
+    """
+    del example_specs
+
   @abc.abstractmethod
-  def write_from_generator(self, generator_fn, output_files):
+  def write_from_generator(self, generator, output_files):
     """Write to files from generators_and_filenames.
 
     Args:
-      generator_fn: returns generator yielding dictionaries of feature name to
-        value.
-      output_files: `list<str>`, output files to write records to.
+      generator: generator yielding dictionaries of feature name to value.
+      output_files: `list<str>`, output files to write files to.
     """
+    raise NotImplementedError
+
+  def write_from_pcollection(
+      self, pcollection, file_path_prefix=None, num_shards=None):
+    """Write the PCollection to file.
+
+    Args:
+      pcollection: `beam.PCollection`, the PCollection containing the examples
+        to write.
+      file_path_prefix: `str`, output files to write files to.
+      num_shards: `int`,
+    """
+    # TODO(tfds): Should try to unify the write_from_generator signatures:
+    # * Have the FileFormatAdapter to add the prefix when reading/writing
     raise NotImplementedError
 
   @abc.abstractmethod
@@ -79,7 +99,7 @@ class FileFormatAdapter(object):
 
   @abc.abstractproperty
   def filetype_suffix(self):
-    """Returns a str file type suffix (e.g. "csv")."""
+    """Returns a str file type suffix (e.g. "tfrecord")."""
     raise NotImplementedError
 
 
@@ -94,146 +114,43 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     Python 3; `unicode` strings will be encoded in `utf-8`), or lists thereof.
   """
 
-  def __init__(self, example_reading_spec):
-    """Construcs a TFRecordExampleAdapter.
+  def __init__(self, example_specs):
+    super(TFRecordExampleAdapter, self).__init__(example_specs)
+    self._serializer = example_serializer.ExampleSerializer(
+        example_specs)
+    self._parser = example_parser.ExampleParser(example_specs)
 
-    Args:
-      example_reading_spec: `dict`, feature name to tf.FixedLenFeature or
-        tf.VarLenFeature. Passed to tf.io.parse_single_example.
-    """
-    self._example_reading_spec = example_reading_spec
-
-  def _serialize_record(self, record):
-    return _dict_to_tf_example(record).SerializeToString()
-
-  def write_from_generator(self, generator_fn, output_files):
-    wrapped = (
-        self._serialize_record(d) for d in generator_fn())
+  def write_from_generator(self, generator, output_files):
+    wrapped = (self._serializer.serialize_example(example)
+               for example in generator)
     _write_tfrecords_from_generator(wrapped, output_files, shuffle=True)
+
+  def write_from_pcollection(self, pcollection, file_path_prefix, num_shards):
+    beam = lazy_imports.lazy_imports.apache_beam
+
+    # WARNING: WriteToTFRecord do not support long in python2 with the default,
+    # beam implementation, so need to convert the long value (from the proto
+    # field) into int, otherwise, the number of shards will be random.
+    num_shards = int(num_shards)
+
+    return (
+        pcollection
+        | "SerializeDict" >> beam.Map(self._serializer.serialize_example)
+        | "Shuffle" >> beam.Reshuffle()
+        | "WriteToExamples" >> beam.io.WriteToTFRecord(
+            file_path_prefix=".".join([file_path_prefix, self.filetype_suffix]),
+            num_shards=num_shards,
+        )
+    )
 
   def dataset_from_filename(self, filename):
     dataset = tf.data.TFRecordDataset(filename, buffer_size=int(16 * 1e6))
-    return dataset.map(self._decode,
+    return dataset.map(self._parser.parse_example,
                        num_parallel_calls=tf.data.experimental.AUTOTUNE)
-
-  def _decode(self, record):
-    return tf.io.parse_single_example(
-        serialized=record, features=self._example_reading_spec)
 
   @property
   def filetype_suffix(self):
     return "tfrecord"
-
-
-class TFRecordSequenceExampleAdapter(TFRecordExampleAdapter):
-  """Writes/Reads serialized SequenceExample protos to/from TFRecord files.
-
-  Constraints on generators:
-
-  * The generator must yield 2-tuples of (context, sequence), where context
-    is a feature dictionary (`dict<str feature_name, feature_value>`), and
-    sequence is a sequence feature dictionary
-    (`dict<str feature_name, list<feature_value>>`).
-  * The allowed feature types are `int`, `float`, and `str` (or `bytes` in
-    Python 3; `unicode` strings will be encoded in `utf-8`), or lists thereof.
-  """
-
-  def __init__(self, context_reading_spec, sequence_reading_spec):  # pylint: disable=super-init-not-called
-    """Construcs a TFRecordSequenceExampleAdapter.
-
-    Args:
-      context_reading_spec: `dict`, feature name to tf.FixedLenFeature or
-        tf.VarLenFeature for the context features. Passed to
-        tf.io.parse_single_sequence_example.
-      sequence_reading_spec: `dict`, feature name to tf.FixedLenFeature or
-        tf.VarLenFeature for the sequence features. Passed to
-        tf.io.parse_single_sequence_example.
-    """
-    self._context_reading_spec = context_reading_spec
-    self._sequence_reading_spec = sequence_reading_spec
-
-  def _serialize_record(self, record):
-    context, sequence = record
-    return _dicts_to_tf_sequence_example(context, sequence).SerializeToString()
-
-  def _decode(self, record):
-    return tf.io.parse_single_sequence_example(
-        serialized=record,
-        context_features=self._context_reading_spec,
-        sequence_features=self._sequence_reading_spec)
-
-
-class CSVAdapter(FileFormatAdapter):
-  """Writes/reads features to/from CSV files.
-
-  Constraints on generators:
-
-  * The generator must yield feature dictionaries (`dict<str feature_name,
-    feature_value>`).
-  * The allowed feature types are `int`, `float`, and `str`. By default, only
-    scalar features are supported (that is, not lists).
-
-  You can modify how records are written by passing `csv_writer_ctor`.
-
-  You can modify how records are read by passing `csv_dataset_kwargs`.
-
-  Note that all CSV files produced will have a header row.
-  """
-
-  # TODO(rsepassi): Instead of feature_types, take record_defaults and
-  # infer the types from the default values if provided.
-  def __init__(self,
-               feature_types,
-               csv_dataset_kwargs=None,
-               csv_writer_ctor=csv.writer):
-    """Constructs CSVAdapter.
-
-    Args:
-      feature_types (dict<name, type>): specifies the dtypes of each of the
-        features (columns in the CSV file).
-      csv_dataset_kwargs (dict): forwarded to `tf.data.experimental.CsvDataset`.
-      csv_writer_ctor (function): takes file handle and returns writer.
-
-    Raises:
-      ValueError: if csv_dataset_kwargs["header"] is present.
-    """
-    self._csv_kwargs = csv_dataset_kwargs or {}
-    if "header" in self._csv_kwargs:
-      raise ValueError("header must not be present")
-    self._feature_types = collections.OrderedDict(sorted(feature_types.items()))
-    self._csv_kwargs["header"] = True
-    # TODO(epot): Should check feature_types and raise error is some are
-    # not supported with CSV. Currently CSV files only support single
-    # values, no array.
-    if "record_defaults" not in self._csv_kwargs:
-      types = [f.dtype for f in self._feature_types.values()]
-      self._csv_kwargs["record_defaults"] = types
-    self._csv_writer_ctor = csv_writer_ctor
-
-  # TODO(rsepassi): Add support for non-scalar features (e.g. list of integers).
-  def write_from_generator(self, generator_fn, output_files):
-    # Flatten the dict returned by the generator and add the header
-    header_keys = list(self._feature_types.keys())
-    rows_generator = ([d[k] for k in header_keys] for d in generator_fn())  # pylint: disable=g-complex-comprehension
-    generator_with_header = itertools.chain([header_keys], rows_generator)
-    _write_csv_from_generator(
-        generator_with_header,
-        output_files,
-        self._csv_writer_ctor)
-
-  def dataset_from_filename(self, filename):
-    dataset = tf.data.experimental.CsvDataset(filename, **self._csv_kwargs)
-    return dataset.map(self._decode,
-                       num_parallel_calls=tf.data.experimental.AUTOTUNE)
-
-  def _decode(self, *record):
-    return {
-        k: v for k, v in zip(self._feature_types.keys(), record)
-    }
-
-  @property
-  def filetype_suffix(self):
-    return "csv"
 
 
 def do_files_exist(filenames):
@@ -331,82 +248,3 @@ def _round_robin_write(writers, generator):
   for i, example in enumerate(utils.tqdm(
       generator, unit=" examples", leave=False)):
     writers[i % len(writers)].write(example)
-
-
-def _write_csv_from_generator(generator, output_files, writer_ctor=None):
-  """Write records to CSVs using writer_ctor (defaults to csv.writer)."""
-  if do_files_exist(output_files):
-    raise ValueError(
-        "Pre-processed files already exists: {}.".format(output_files))
-
-  if writer_ctor is None:
-    writer_ctor = csv.writer
-
-  def create_csv_writer(filename):
-    with tf.io.gfile.GFile(filename, "wb") as f:
-      writer = writer_ctor(f)
-      # Simple way to give the writer a "write" method proxying writerow
-      writer = collections.namedtuple("_writer", ["write"])(
-          write=writer.writerow)
-    return f, writer
-
-  with _incomplete_files(output_files) as tmp_files:
-    handles, writers = zip(*[create_csv_writer(fname) for fname in tmp_files])
-    with _close_on_exit(handles):
-      logging.info("Writing CSVs")
-      header = next(generator)
-      for w in writers:
-        w.write(header)
-      _round_robin_write(writers, generator)
-
-
-def _dicts_to_tf_sequence_example(context_dict, sequences_dict):
-  flists = {}
-  for k, flist in six.iteritems(sequences_dict):
-    flists[k] = tf.train.FeatureList(
-        feature=[_item_to_tf_feature(el, k) for el in flist])
-  return tf.train.SequenceExample(
-      context=_dict_to_tf_features(context_dict),
-      feature_lists=tf.train.FeatureLists(feature_list=flists),
-  )
-
-
-def _dict_to_tf_example(example_dict):
-  """Builds tf.train.Example from (string -> int/float/str list) dictionary."""
-  return tf.train.Example(features=_dict_to_tf_features(example_dict))
-
-
-def _item_to_tf_feature(item, key_name):
-  """Single item to a tf.train.Feature."""
-  v = item
-  if isinstance(v, (list, tuple)) and not v:
-    raise ValueError(
-        "Feature {} received an empty list value, so is unable to infer the "
-        "feature type to record. To support empty value, the corresponding "
-        "FeatureConnector should return a numpy array with the correct dtype "
-        "instead of a Python list.".format(key_name)
-    )
-
-  v = np.array(v).flatten()  # Convert v into a 1-d array
-
-  if np.issubdtype(v.dtype, np.integer):
-    return tf.train.Feature(int64_list=tf.train.Int64List(value=v))
-  elif np.issubdtype(v.dtype, np.floating):
-    return tf.train.Feature(float_list=tf.train.FloatList(value=v))
-  elif v.dtype.kind in ("U", "S") or v.dtype == object:  # binary or unicode
-    v = [tf.compat.as_bytes(x) for x in v]
-    return tf.train.Feature(bytes_list=tf.train.BytesList(value=v))
-  else:
-    raise ValueError(
-        "Value received: {}.\n"
-        "tf.train.Feature does not support type {} for feature key {}. "
-        "This may indicate that one of the FeatureConnectors received an "
-        "unsupported value as input.".format(repr(v), repr(type(v)), key_name)
-    )
-
-
-def _dict_to_tf_features(example_dict):
-  """Builds tf.train.Features from (string -> int/float/str list) dictionary."""
-  features = {k: _item_to_tf_feature(v, k) for k, v
-              in six.iteritems(example_dict)}
-  return tf.train.Features(feature=features)

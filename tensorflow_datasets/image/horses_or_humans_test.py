@@ -22,7 +22,7 @@ from __future__ import print_function
 from tensorflow_datasets.image import horses_or_humans
 import tensorflow_datasets.testing as tfds_test
 
-horses_or_humans._IMAGE_SHAPE = (None, None, 3)
+horses_or_humans._IMAGE_SHAPE = (None, None, 3)  # pylint: disable=protected-access
 
 
 class HorsesOrHumansTest(tfds_test.DatasetBuilderTestCase):
@@ -34,6 +34,11 @@ class HorsesOrHumansTest(tfds_test.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = ['hoh_train.zip', 'hoh_test.zip']
+
+
+class HorsesOrHumansS3Test(HorsesOrHumansTest):
+  VERSION = '2.0.0'
+
 
 if __name__ == '__main__':
   tfds_test.test_main()

@@ -25,7 +25,6 @@ import operator
 
 import six
 from six.moves import range  # pylint: disable=redefined-builtin
-from six.moves import zip  # pylint: disable=redefined-builtin
 
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import utils
@@ -54,7 +53,7 @@ class SplitBase(object):
   for more information.
 
   There are three parts to the composition:
-    1) The splits are composed (defined, merged, splitted,...) together before
+    1) The splits are composed (defined, merged, split,...) together before
        calling the `.as_dataset()` function. This is done with the `__add__`,
        `__getitem__`, which return a tree of `SplitBase` (whose leaf
        are the `NamedSplit` objects)
@@ -75,11 +74,6 @@ class SplitBase(object):
 
     3) The `SplitReadInstruction` is then used in the `tf.data.Dataset` pipeline
        to define which files to read and how to skip examples within file.
-
-    ```
-    files_to_read = read_instruction.split_info_list
-    slice_per_file = read_instruction.slice_list
-    ```
 
   """
   # pylint: enable=line-too-long
@@ -102,6 +96,10 @@ class SplitBase(object):
       return False
     raise NotImplementedError(
         "Equality is not implemented between merged/sub splits.")
+
+  def __ne__(self, other):
+    """InEquality: tfds.Split.TRAIN != 'test'."""
+    return not self.__eq__(other)
 
   def __add__(self, other):
     """Merging: tfds.Split.TRAIN + tfds.Split.TEST."""
@@ -127,7 +125,7 @@ class SplitBase(object):
     ```
 
     Warning: k and weighted will be converted into percent which mean that
-    values bellow the percent will be rounded up or down. The final split may be
+    values below the percent will be rounded up or down. The final split may be
     bigger to deal with remainders. For instance:
 
     ```
@@ -486,6 +484,44 @@ def slice_to_percent_mask(slice_value):
   return [i in selected for i in range(100)]
 
 
+def get_shard_id2num_examples(num_shards, total_num_examples):
+  """Return the mapping shard_id=>num_examples, assuming round-robin."""
+  # TODO(b/130353071): This has the strong assumption that the shards have
+  # been written in a round-robin fashion. This assumption does not hold, for
+  # instance, with Beam generation. The mapping shard_id=>num_examples
+  # should be computed during generation.
+
+  # Minimum number of example per shards
+  num_example_in_shard = total_num_examples // num_shards
+  shard_id2num_examples = [num_example_in_shard for _ in range(num_shards)]
+  # If there are remaining examples, we add them to the first shards
+  for shard_id in range(total_num_examples % num_shards):
+    shard_id2num_examples[shard_id] += 1
+  return shard_id2num_examples
+
+
+def compute_mask_offsets(shard_id2num_examples):
+  """Return the list of offsets associated with each shards.
+
+  Args:
+    shard_id2num_examples: `list[int]`, mapping shard_id=>num_examples
+
+  Returns:
+    mask_offsets: `list[int]`, offset to skip for each of the shard
+  """
+  total_num_examples = sum(shard_id2num_examples)
+
+  mask_offsets = []
+  total_num_examples = 0
+  for num_examples_in_shard in shard_id2num_examples:
+    # The offset (nb of examples to skip in the next shard) correspond to the
+    # number of examples remaining in the current shard
+    mask_offsets.append(total_num_examples % 100)
+    total_num_examples += num_examples_in_shard
+
+  return mask_offsets
+
+
 class SplitDict(utils.NonMutableDict):
   """Split info object."""
 
@@ -555,22 +591,13 @@ class SplitGenerator(object):
     """Constructs a `SplitGenerator`.
 
     Args:
-      name: `str` or `list<str>`, name of the Split for which the generator will
-        create the examples. If a list is given, the generator examples will be
-        distributed among the splits proportionally to the num_shards.
-      num_shards: `int` or `list<int>`, number of shards between which the
-        generated examples will be written. If name is a list, then num_shards
-        should be a list with the same number of elements.
+      name: `str`, name of the Split for which the generator will
+        create the examples.
+      num_shards: `int`, number of shards between which the generated examples
+        will be written.
       gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method
         of the builder.
     """
+    self.name = name
     self.gen_kwargs = gen_kwargs or {}
-
-    if isinstance(name, list):
-      split_zip = zip(name, num_shards)
-    else:
-      split_zip = [(name, num_shards)]
-
-    self.split_info_list = [
-        SplitInfo(name=str(n), num_shards=k) for n, k in split_zip
-    ]
+    self.split_info = SplitInfo(name=str(name), num_shards=num_shards)

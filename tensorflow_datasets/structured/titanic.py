@@ -148,4 +148,3 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
                 for name, value in row.items()
             }
         }
-
