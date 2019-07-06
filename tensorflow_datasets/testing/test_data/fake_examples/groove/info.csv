@@ -1,0 +1,5 @@
+drummer,session,id,style,bpm,beat_type,time_signature,midi_filename,audio_filename,duration,split
+drummer3,drummer3/session1,drummer3/session1/23,jazz,120,beat,4-4,drummer3/session1/23_jazz_120_beat_4-4.mid,drummer3/session1/23_jazz_120_beat_4-4.wav,7.96875,train
+drummer3,drummer3/session1,drummer3/session1/44,rock/hard,120,fill,4-4,drummer3/session1/44_rock_120_beat_4-4.mid,drummer3/session1/44_rock_120_beat_4-4.wav,3.986458,test
+drummer7,drummer7/session1,drummer7/session1/3,rock,86,fill,3-4,drummer7/session1/3_rock_86_fill_4-4.mid,drummer7/session1/3_rock_86_fill_4-4.wav,5.696218,train
+drummer7,drummer7/session2,drummer7/session2/116,jazz/fusion,96,beat,4-4,drummer7/session2/116_jazz-fusion_96_fill_4-4.mid,,4.41276,train

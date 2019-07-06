@@ -21,10 +21,13 @@ from __future__ import print_function
 
 import hashlib
 import itertools
+import numbers
 import os
 
 from absl.testing import absltest
 from absl.testing import parameterized
+import numpy as np
+import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -70,6 +73,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     DATASET_CLASS: class object of DatasetBuilder you want to test.
 
   You may set the following class attributes:
+    VERSION: `str`. The version used to run the test. eg: '1.2.*'.
+      Defaults to None (canonical version).
     BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
       that should be tested. If None, all the BUILDER_CONFIGS from the class
       will be tested.
@@ -77,6 +82,9 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
       If not specified, path to `fake_examples` will always be returned.
+    EXAMPLE_DIR: `str`, the base directory in in which fake examples are
+      contained. Optional; defaults to
+      tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
     OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
       splits (e.g. a "example" split containing pictures from other splits).
     MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
@@ -98,8 +106,10 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   """
 
   DATASET_CLASS = None
-  BUILDER_CONFIG_NAMES_TO_TEST = []
+  VERSION = None
+  BUILDER_CONFIG_NAMES_TO_TEST = None
   DL_EXTRACT_RESULT = None
+  EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
 
@@ -117,9 +127,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     super(DatasetBuilderTestCase, self).setUp()
     self.patchers = []
     self.builder = self._make_builder()
+
+    # Determine the fake_examples directory.
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
         "test_data/fake_examples/%s" % self.builder.name)
+    if self.EXAMPLE_DIR is not None:
+      self.example_dir = self.EXAMPLE_DIR
+
     if not tf.io.gfile.exists(self.example_dir):
       err_msg = "fake_examples dir %s not found." % self.example_dir
       raise ValueError(err_msg)
@@ -175,16 +190,27 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
                             self.DL_EXTRACT_RESULT)
 
   def _make_builder(self, config=None):
-    return self.DATASET_CLASS(data_dir=self.tmp_dir, config=config)  # pylint: disable=not-callable
+    return self.DATASET_CLASS(  # pylint: disable=not-callable
+        data_dir=self.tmp_dir,
+        config=config,
+        version=self.VERSION)
 
   @test_utils.run_in_graph_and_eager_modes()
   def test_download_and_prepare_as_dataset(self):
+    # If configs specified, ensure they are all valid
+    if self.BUILDER_CONFIG_NAMES_TO_TEST:
+      for config in self.BUILDER_CONFIG_NAMES_TO_TEST:  # pylint: disable=not-an-iterable
+        assert config in self.builder.builder_configs, (
+            "Config %s specified in test does not exist. Available:\n%s" % (
+                config, list(self.builder.builder_configs)))
+
     configs = self.builder.BUILDER_CONFIGS
+    print("Total configs: %d" % len(configs))
     if configs:
       for config in configs:
         # Skip the configs that are not in the list.
-        if (self.BUILDER_CONFIG_NAMES_TO_TEST and
-            (config.name not in self.BUILDER_CONFIG_NAMES_TO_TEST)):
+        if (self.BUILDER_CONFIG_NAMES_TO_TEST is not None and
+            (config.name not in self.BUILDER_CONFIG_NAMES_TO_TEST)):  # pylint: disable=unsupported-membership-test
           print("Skipping config %s" % config.name)
           continue
         with self._subTest(config.name):
@@ -199,13 +225,28 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_extract_result,
-        extract=self._get_dl_extract_result,
         manual_dir=self.example_dir,
     ):
-      # Skip computation, otherwise the computed number of samples won't match
-      # the one restored from GCS
+      if isinstance(builder, dataset_builder.BeamBasedBuilder):
+
+        # TODO(b/129148632): The current apache-beam 2.11.0 do not work with Py3
+        # Update once the new version is out (around April)
+        skip_beam_test = bool(six.PY3)
+        if skip_beam_test:
+          return
+
+        import apache_beam as beam   # pylint: disable=g-import-not-at-top
+        # For Beam datasets, set-up the runner config
+        beam_runner = None
+        beam_options = beam.options.pipeline_options.PipelineOptions()
+      else:
+        beam_runner = None
+        beam_options = None
+
       download_config = download.DownloadConfig(
           compute_stats=download.ComputeStatsMode.FORCE,
+          beam_runner=beam_runner,
+          beam_options=beam_options,
       )
       builder.download_and_prepare(download_config=download_config)
 
@@ -234,7 +275,8 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       examples = list(dataset_utils.as_numpy(
           builder.as_dataset(split=split_name)))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
-      self.assertLen(examples, expected_examples_number)
+      if not builder.version.implements(utils.Experiment.S3):
+        self.assertLen(examples, expected_examples_number)
     for (split1, hashes1), (split2, hashes2) in itertools.combinations(
         split_to_checksums.items(), 2):
       if (split1 in self.OVERLAPPING_SPLITS or
@@ -260,17 +302,33 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
 def checksum(example):
   """Computes the md5 for a given example."""
-  hash_ = hashlib.md5()
-  for key, val in sorted(example.items()):
-    hash_.update(key.encode("utf-8"))
-    # TODO(b/120124306): This will only work for "one-level"
-    #                    dictionary. We might need a better solution here.
-    if isinstance(val, dict):
-      for k, v in sorted(val.items()):
-        hash_.update(k.encode("utf-8"))
-        hash_.update(v)
+
+  def _bytes_flatten(element):
+    """Recursively flatten an element to its byte representation."""
+    ret = "".encode("utf-8")
+    if isinstance(element, numbers.Number):
+      # In python3, bytes(-3) is not allowed (or large numbers),
+      # so convert to str to avoid problems.
+      element = str(element)
+    if isinstance(element, dict):
+      for k, v in sorted(element.items()):
+        ret += k.encode("utf-8")
+        ret += _bytes_flatten(v)
+    elif isinstance(element, str):
+      if hasattr(element, "decode"):
+        # Python2 considers bytes to be str, but are almost always latin-1
+        # encoded bytes here. Extra step needed to avoid DecodeError.
+        element = element.decode("latin-1")
+      element = element.encode("utf-8")
+      ret += element
+    elif isinstance(element, np.ndarray):
+      ret += element.tobytes()
     else:
-      hash_.update(val)
+      ret += bytes(element)
+    return ret
+
+  hash_ = hashlib.md5()
+  hash_.update(_bytes_flatten(example))
   return hash_.hexdigest()
 
 

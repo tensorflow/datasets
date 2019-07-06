@@ -30,6 +30,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
@@ -52,7 +53,10 @@ class DownloadConfig(object):
                manual_dir=None,
                download_mode=None,
                compute_stats=None,
-               max_examples_per_split=None):
+               max_examples_per_split=None,
+               register_checksums=False,
+               beam_runner=None,
+               beam_options=None):
     """Constructs a `DownloadConfig`.
 
     Args:
@@ -68,6 +72,12 @@ class DownloadConfig(object):
         statistics over the generated data. Defaults to `AUTO`.
       max_examples_per_split: `int`, optional max number of examples to write
         into each split.
+      register_checksums: `bool`, defaults to False. If True, checksum of
+        downloaded files are recorded.
+      beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
+        based on Beam for the generation.
+      beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
+        datasets based on Beam for the generation.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
@@ -76,6 +86,9 @@ class DownloadConfig(object):
     self.compute_stats = util.ComputeStatsMode(
         compute_stats or util.ComputeStatsMode.AUTO)
     self.max_examples_per_split = max_examples_per_split
+    self.register_checksums = register_checksums
+    self.beam_runner = beam_runner
+    self.beam_options = beam_options
 
 
 class DownloadManager(object):
@@ -132,9 +145,9 @@ class DownloadManager(object):
                extract_dir=None,
                manual_dir=None,
                dataset_name=None,
-               checksums=None,
                force_download=False,
-               force_extraction=False):
+               force_extraction=False,
+               register_checksums=False):
     """Download manager constructor.
 
     Args:
@@ -143,18 +156,12 @@ class DownloadManager(object):
       manual_dir: `str`, path to manually downloaded/extracted data directory.
       dataset_name: `str`, name of dataset this instance will be used for. If
         provided, downloads will contain which datasets they were used for.
-      checksums: `dict<str url, str sha256>`, url to sha256 of resource.
-        Only URLs present are checked.
-        If empty, checksum of (already) downloaded files is computed and can
-        then be retrieved using `recorded_download_checksums` property.
       force_download: `bool`, default to False. If True, always [re]download.
       force_extraction: `bool`, default to False. If True, always [re]extract.
+      register_checksums: `bool`, default to False. If True, dl checksums aren't
+        checked, but stored into file.
     """
     self._dataset_name = dataset_name
-    self._checksums = checksums or {}
-    self._record_checksum_size = not checksums
-    self._recorded_download_checksums = {}
-    self._download_sizes = {}
     self._download_dir = os.path.expanduser(download_dir)
     self._extract_dir = os.path.expanduser(
         extract_dir or os.path.join(download_dir, 'extracted'))
@@ -165,16 +172,26 @@ class DownloadManager(object):
     self._force_extraction = force_extraction
     self._extractor = extractor.get_extractor()
     self._downloader = downloader.get_downloader()
+    self._register_checksums = register_checksums
+    # All known URLs: {url: (size, checksum)}
+    self._sizes_checksums = checksums.get_all_sizes_checksums()
+    # To record what is being used: {url: (size, checksum)}
+    self._recorded_sizes_checksums = {}
 
   @property
-  def recorded_download_checksums(self):
-    """Returns checksums for downloaded urls."""
-    return dict(self._recorded_download_checksums)
+  def downloaded_size(self):
+    """Returns the total size of downloaded files."""
+    return sum(size for size, sha256 in self._recorded_sizes_checksums.values())
 
-  @property
-  def download_sizes(self):
-    """Returns sizes (in bytes) for downloaded urls."""
-    return dict(self._download_sizes)
+  def _get_final_dl_path(self, url, sha256):
+    return os.path.join(self._download_dir,
+                        resource_lib.get_dl_fname(url, sha256))
+
+  @util.build_synchronize_decorator()
+  def _record_sizes_checksums(self):
+    """Store in file when recorded size/checksum of downloaded files."""
+    checksums.store_checksums(self._dataset_name,
+                              self._recorded_sizes_checksums)
 
   def _handle_download_result(self, resource, tmp_dir_path, sha256, dl_size):
     """Store dled file to definitive place, write INFO file, return path."""
@@ -183,18 +200,19 @@ class DownloadManager(object):
       raise AssertionError('More than one file in %s.' % tmp_dir_path)
     original_fname = fnames[0]
     tmp_path = os.path.join(tmp_dir_path, original_fname)
-    if self._record_checksum_size:
-      resource.sha256 = sha256
-      self._download_sizes[resource.url] = dl_size
-      self._recorded_download_checksums[resource.url] = sha256
-    elif self._checksums[resource.url] != sha256:
+    self._recorded_sizes_checksums[resource.url] = (dl_size, sha256)
+    if self._register_checksums:
+      self._record_sizes_checksums()
+    elif (dl_size, sha256) != self._sizes_checksums.get(resource.url, None):
       raise NonMatchingChecksumError(resource.url, tmp_path)
-    resource.write_info_file(self._dataset_name, original_fname)
+    download_path = self._get_final_dl_path(resource.url, sha256)
+    resource_lib.write_info_file(resource, download_path, self._dataset_name,
+                                 original_fname)
     # Unconditionally overwrite because either file doesn't exist or
     # FORCE_DOWNLOAD=true
-    tf.io.gfile.rename(tmp_path, resource.path, overwrite=True)
+    tf.io.gfile.rename(tmp_path, download_path, overwrite=True)
     tf.io.gfile.rmtree(tmp_dir_path)
-    return resource.path
+    return download_path
 
   # synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.
@@ -204,29 +222,29 @@ class DownloadManager(object):
     """Download resource, returns Promise->path to downloaded file."""
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
-    resource.sha256 = self._checksums.get(resource.url, None)
-    if not resource.path:
-      resource.path = os.path.join(self._download_dir, resource.fname)
-    if (not self._force_download and resource.sha256 and
-        resource.exists_locally()):
-      logging.info('URL %s already downloaded: reusing %s.', resource.url,
-                   resource.path)
-      self._recorded_download_checksums[resource.url] = resource.sha256
-      self._download_sizes[resource.url] = (
-          tf.io.gfile.stat(resource.path).length)
-      return promise.Promise.resolve(resource.path)
+    url = resource.url
+    if url in self._sizes_checksums:
+      expected_sha256 = self._sizes_checksums[url][1]
+      download_path = self._get_final_dl_path(url, expected_sha256)
+      if not self._force_download and resource.exists_locally(download_path):
+        logging.info('URL %s already downloaded: reusing %s.',
+                     url, download_path)
+        self._recorded_sizes_checksums[url] = self._sizes_checksums[url]
+        return promise.Promise.resolve(download_path)
     # There is a slight difference between downloader and extractor here:
     # the extractor manages its own temp directory, while the DownloadManager
     # manages the temp directory of downloader.
-    tmp_dir_path = '%s.tmp.%s' % (resource.path, uuid.uuid4().hex)
-    tf.io.gfile.makedirs(tmp_dir_path)
-    logging.info('Downloading %s into %s...', resource.url, tmp_dir_path)
+    download_dir_path = os.path.join(
+        self._download_dir,
+        '%s.tmp.%s' % (resource_lib.get_dl_dirname(url), uuid.uuid4().hex))
+    tf.io.gfile.makedirs(download_dir_path)
+    logging.info('Downloading %s into %s...', url, download_dir_path)
 
     def callback(val):
       checksum, dl_size = val
-      return self._handle_download_result(resource, tmp_dir_path, checksum,
-                                          dl_size)
-    return self._downloader.download(resource, tmp_dir_path).then(callback)
+      return self._handle_download_result(
+          resource, download_dir_path, checksum, dl_size)
+    return self._downloader.download(url, download_dir_path).then(callback)
 
   @util.build_synchronize_decorator()
   @utils.memoize()
@@ -234,16 +252,18 @@ class DownloadManager(object):
     """Extract a single archive, returns Promise->path to extraction result."""
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(path=resource)
-    if resource.extract_method == resource_lib.ExtractMethod.NO_EXTRACT:
-      logging.info(
-          'Skipping extraction for %s (method=NO_EXTRACT).', resource.path)
-      return promise.Promise.resolve(resource.path)
-    extract_path = os.path.join(self._extract_dir, resource.extract_fname)
+    path = resource.path
+    extract_method = resource.extract_method
+    if extract_method == resource_lib.ExtractMethod.NO_EXTRACT:
+      logging.info('Skipping extraction for %s (method=NO_EXTRACT).', path)
+      return promise.Promise.resolve(path)
+    method_name = resource_lib.ExtractMethod(extract_method).name
+    extract_path = os.path.join(self._extract_dir,
+                                '%s.%s' % (method_name, os.path.basename(path)))
     if not self._force_extraction and tf.io.gfile.exists(extract_path):
-      logging.info('Reusing extraction of %s at %s.', resource.path,
-                   extract_path)
+      logging.info('Reusing extraction of %s at %s.', path, extract_path)
       return promise.Promise.resolve(extract_path)
-    return self._extractor.extract(resource, extract_path)
+    return self._extractor.extract(path, extract_method, extract_path)
 
   @util.build_synchronize_decorator()
   @utils.memoize()

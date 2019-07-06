@@ -8,13 +8,12 @@
 
 ## Class `FeatureExpectationItem`
 
-
-
-
+Test item of a FeatureExpectation.
 
 Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
-Test item of a FeatureExpectation.
+<!-- Placeholder for "Used in" -->
+
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -27,8 +26,3 @@ __init__(
     raise_msg=None
 )
 ```
-
-
-
-
-

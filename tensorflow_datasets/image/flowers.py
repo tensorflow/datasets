@@ -40,6 +40,12 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
   """Flowers dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -87,7 +93,11 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
           for image_file in fname:
             if image_file.endswith(".jpg"):
               image_path = os.path.join(full_path, image_file)
-              yield {
+              record = {
                   "image": image_path,
                   "label": d.lower(),
               }
+              if self.version.implements(tfds.core.Experiment.S3):
+                yield "%s/%s" % (d, image_file), record
+              else:
+                yield record

@@ -74,6 +74,10 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
   """CheXpert 2019."""
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("1.0.0"),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -91,6 +95,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns SplitGenerators."""
     path = dl_manager.manual_dir
     train_path = os.path.join(path, _TRAIN_DIR)
     val_path = os.path.join(path, _VALIDATION_DIR)
@@ -120,6 +125,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, imgs_path, csv_path):
+    """Yields examples."""
     with tf.io.gfile.GFile(csv_path) as csv_f:
       reader = csv.DictReader(csv_f)
       # Get keys for each label from csv
@@ -132,8 +138,12 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
         data.append((name, labels))
 
     for name, labels in data:
-      yield {
+      record = {
           "name": name,
           "image": os.path.join(imgs_path, name),
           "label": labels
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield name, record
+      else:
+        yield record

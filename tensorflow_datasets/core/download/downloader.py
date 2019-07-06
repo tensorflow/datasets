@@ -24,12 +24,14 @@ import hashlib
 import io
 import os
 import re
+import ssl
+import sys
+from absl import logging
 import concurrent.futures
 import promise
 import requests
-
+from requests.utils import extract_zipped_paths
 from six.moves import urllib
-
 import tensorflow as tf
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
@@ -90,20 +92,19 @@ class _Downloader(object):
         self._pbar_dl_size = pbar_dl_size
         yield
 
-  def download(self, url_info, destination_path):
+  def download(self, url, destination_path):
     """Download url to given path.
 
     Returns Promise -> sha256 of downloaded file.
 
     Args:
-      url_info: `UrlInfo`, resource to download.
+      url: address of resource to download.
       destination_path: `str`, path to directory where to download the resource.
 
     Returns:
       Promise obj -> (`str`, int): (downloaded object checksum, size in bytes).
     """
     self._pbar_url.update_total(1)
-    url = url_info.url
     future = self._executor.submit(self._sync_download, url, destination_path)
     return promise.Promise.resolve(future)
 
@@ -142,36 +143,95 @@ class _Downloader(object):
         out_path, checksum_cls=self._checksumer)
     return hexdigest, size
 
-  def _sync_ftp_download(self, url, destination_path):
-    out_path = os.path.join(destination_path, download_util.get_file_name(url))
-    urllib.request.urlretrieve(url, out_path)
-    hexdigest, size = utils.read_checksum_digest(
-        out_path, checksum_cls=self._checksumer)
-    return hexdigest, size
-
   def _sync_download(self, url, destination_path):
-    """Synchronous version of `download` method."""
-    if kaggle.KaggleFile.is_kaggle_url(url):
-      return self._sync_kaggle_download(url, destination_path)
+    """Synchronous version of `download` method.
 
-    if url.startswith('ftp'):
-      return self._sync_ftp_download(url, destination_path)
+    Args:
+      url: url to download
+      destination_path: path where to write it
+    Returns:
+      None
+
+    Raises:
+      DownloadError: when download fails.
+
+    Environment Variables:
+        TFDS_HTTP_PROXY  : Configure Proxy Servers for HTTP Requests
+        TFDS_HTTPS_PROXY : Configure Proxy Servers for HTTPS Requests
+        TFDS_FTP_PROXY   : Configure Proxy Servers for FTP Requests
+        TFDS_CA_BUNDLE   : Configure Custom Client Side SSL Certificates
+                           (If REQUESTS_CA_BUNDLE is set, it would use that
+                           path)
+
+      Note: FTPS Custom Certificate verification doesn't work for python version
+      <= 2.7.8
+    """
+    proxies = {
+        'http': os.environ.get('TFDS_HTTP_PROXY', None),
+        'https': os.environ.get('TFDS_HTTPS_PROXY', None),
+        'ftp': os.environ.get('TFDS_FTP_PROXY', None)
+    }
+    ca_bundle = os.environ.get('TFDS_CA_BUNDLE', None)
+    if not ca_bundle:
+      ca_bundle = os.environ.get('REQUESTS_CA_BUNDLE', None)
+    if ca_bundle:
+      ca_bundle = extract_zipped_paths(ca_bundle)
+    if not hasattr(ssl, '_create_unverified_context'):
+      # disable ftp ssl bypassing for python version <= 2.7.8
+      def disabled_py2_log_fn(*args, **kwargs):
+        del args, kwargs
+        return logging.info('SSL bypassing not available for python '
+                            'version <= 2.7.8 current version: %s '
+                            'Protocols affected: FTPS',
+                            sys.version.split(' ')[0])
+
+      ssl.__dict__['_create_unverified_context'] = disabled_py2_log_fn
+      ssl.__dict__['create_default_context'] = disabled_py2_log_fn
+
+    ca_verify = {
+        'urllib':
+            ssl._create_unverified_context()  # pylint: disable=W0212
+            if not ca_bundle else ssl.create_default_context(capath=ca_bundle),
+        'requests':
+            False if not ca_bundle else ca_bundle
+    }
+
+    if kaggle.KaggleFile.is_kaggle_url(url):
+      if proxies['http']:
+        os.environ['KAGGLE_PROXY'] = proxies['http']
+      return self._sync_kaggle_download(url, destination_path)
 
     try:
       # If url is on a filesystem that gfile understands, use copy. Otherwise,
-      # use requests.
+      # use requests (http) or urllib (ftp).
       if not url.startswith('http'):
         return self._sync_file_copy(url, destination_path)
     except tf.errors.UnimplementedError:
       pass
 
     session = requests.Session()
+    session.proxies = proxies
+    session.verify = ca_verify['requests']
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
-    response = session.get(url, stream=True)
-    if response.status_code != 200:
-      raise DownloadError(
-          'Failed to get url %s. HTTP code: %d.' % (url, response.status_code))
+    use_urllib = url.startswith('ftp')
+    if use_urllib:
+      if proxies['ftp']:
+        proxy = urllib.request.ProxyHandler({'ftp': proxies['ftp']})
+        opener = urllib.request.build_opener(proxy)
+        urllib.request.install_opener(opener)   # pylint: disable=too-many-function-args
+      request = urllib.request.Request(url)
+
+      # disable ssl context check for FTPS for python version <= 2.7.8
+      if ca_verify['urllib'] is None:
+        response = urllib.request.urlopen(request)
+      else:
+        response = urllib.request.urlopen(request, context=ca_verify['urllib'])
+    else:
+      response = session.get(url, stream=True)
+      if response.status_code != 200:
+        raise DownloadError('Failed to get url %s. HTTP code: %d.' %
+                            (url, response.status_code))
     fname = _get_filename(response)
     path = os.path.join(destination_path, fname)
     size = 0
@@ -182,7 +242,12 @@ class _Downloader(object):
         int(response.headers.get('Content-length', 0)) // unit_mb)
     with tf.io.gfile.GFile(path, 'wb') as file_:
       checksum = self._checksumer()
-      for block in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
+      if use_urllib:
+        iterator = iter(lambda: response.read(io.DEFAULT_BUFFER_SIZE), b'')
+      else:
+        iterator = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
+
+      for block in iterator:
         size += len(block)
 
         # Update the progress bar

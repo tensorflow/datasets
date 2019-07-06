@@ -50,10 +50,13 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
         builder=self,
         features=features.FeaturesDict({"im": features.Image()}),
         supervised_keys=("im", "im"),
+        metadata=dataset_info.MetadataDict(),
     )
 
-  def _generate_examples(self):
-    for _ in range(30):
+  def _generate_examples(self, range_):
+    self.info.metadata["some_key"] = 123
+
+    for _ in range_:
       height = np.random.randint(5, high=10)
       width = np.random.randint(5, high=10)
       yield {
@@ -128,7 +131,7 @@ class DatasetInfoTest(testing.TestCase):
     info.read_from_directory(_INFO_DIR)
 
     # Read the json file into a string.
-    with tf.io.gfile.GFile(info._dataset_info_filename(_INFO_DIR)) as f:
+    with tf.io.gfile.GFile(info._dataset_info_path(_INFO_DIR)) as f:
       existing_json = json.load(f)
 
     # Now write to a temp directory.
@@ -136,11 +139,11 @@ class DatasetInfoTest(testing.TestCase):
       info.write_to_directory(tmp_dir)
 
       # Read the newly written json file into a string.
-      with tf.io.gfile.GFile(info._dataset_info_filename(tmp_dir)) as f:
+      with tf.io.gfile.GFile(info._dataset_info_path(tmp_dir)) as f:
         new_json = json.load(f)
 
       # Read the newly written LICENSE file into a string.
-      with tf.io.gfile.GFile(info._license_filename(tmp_dir)) as f:
+      with tf.io.gfile.GFile(info._license_path(tmp_dir)) as f:
         license_ = f.read()
 
     # Assert what was read and then written and read again is the same.
@@ -261,6 +264,17 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(-1, schema_feature.shape.dim[0].size)
       self.assertEqual(-1, schema_feature.shape.dim[1].size)
       self.assertEqual(3, schema_feature.shape.dim[2].size)
+
+  def test_metadata(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = RandomShapedImageGenerator(data_dir=tmp_dir)
+      builder.download_and_prepare()
+      # Metadata should have been created
+      self.assertEqual(builder.info.metadata, {"some_key": 123})
+
+      # Metadata should have been restored
+      builder2 = RandomShapedImageGenerator(data_dir=tmp_dir)
+      self.assertEqual(builder2.info.metadata, {"some_key": 123})
 
   def test_updates_on_bucket_info(self):
 

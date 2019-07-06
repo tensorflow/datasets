@@ -36,6 +36,18 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
 
   VERSION = utils.Version("0.0.0")
 
+  def __init__(self, *args, **kwargs):
+    """."""
+    self.range_train = kwargs.pop("range_train", RANGE_TRAIN)
+    self.range_test = kwargs.pop("range_test", RANGE_TEST)
+    self.range_val = kwargs.pop("range_val", RANGE_VAL)
+
+    # Shards number can be arbitrary, only the number of example matter.
+    self.num_shards_train = kwargs.pop("num_shards_train", 13)
+    self.num_shards_test = kwargs.pop("num_shards_test", 51)
+    self.num_shards_val = kwargs.pop("num_shards_val", 2)
+    super(DummyDataset, self).__init__(*args, **kwargs)
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
@@ -47,18 +59,18 @@ class DummyDataset(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             tfds.Split.TRAIN,
-            num_shards=10,
-            gen_kwargs=dict(data=RANGE_TRAIN),
+            num_shards=self.num_shards_train,
+            gen_kwargs=dict(data=self.range_train),
         ),
         tfds.core.SplitGenerator(
             tfds.Split.TEST,
-            num_shards=2,
-            gen_kwargs=dict(data=RANGE_TEST),
+            num_shards=self.num_shards_test,
+            gen_kwargs=dict(data=self.range_test),
         ),
         tfds.core.SplitGenerator(
             tfds.Split("custom"),
-            num_shards=2,
-            gen_kwargs=dict(data=RANGE_VAL),
+            num_shards=self.num_shards_val,
+            gen_kwargs=dict(data=self.range_val),
         ),
     ]
 
@@ -258,6 +270,8 @@ class SplitsUnitTest(testing.TestCase):
     self.assertNotEqual(train, train.subsplit(tfds.percent[:50]))
     self.assertNotEqual(train.subsplit(tfds.percent[:50]), train)
 
+    self.assertFalse(tfds.Split.TRAIN != "train")
+
   def _info(self, split):
     read_instruction = split.get_read_instruction(self._splits)
     return read_instruction.get_list_sliced_split_info()
@@ -277,6 +291,84 @@ class SliceToMaskTest(testing.TestCase):
     self.assertEqual(
         s2p(self[10:20]), [False] * 10 + [True] * 10 + [False] * 80)
     self.assertEqual(s2p(self[:-20]), [True] * 80 + [False] * 20)
+
+
+class SplitsOffsetTest(testing.TestCase):
+
+  def test_get_shard_id2num_examples(self):
+    self.assertEqual(
+        splits.get_shard_id2num_examples(num_shards=8, total_num_examples=80),
+        [10, 10, 10, 10, 10, 10, 10, 10],
+    )
+    self.assertEqual(
+        splits.get_shard_id2num_examples(num_shards=5, total_num_examples=553),
+        [111, 111, 111, 110, 110],
+    )
+
+  def test_compute_mask_offsets(self):
+    self.assertEqual(
+        splits.compute_mask_offsets([1100, 500, 1100, 110]),
+        [0, 0, 0, 0],
+    )
+    self.assertEqual(
+        splits.compute_mask_offsets([1101, 500, 1100, 110]),
+        [0, 1, 1, 1],
+    )
+    self.assertEqual(
+        splits.compute_mask_offsets([87]),
+        [0],
+    )
+    self.assertEqual(
+        splits.compute_mask_offsets([1101, 501, 1113, 110]),
+        [0, 1, 2, 15],
+    )
+
+
+class SplitsOffsetIntegrationTest(testing.TestCase):
+
+  @classmethod
+  def setUpClass(cls):
+    cls._builder = DummyDataset(
+        data_dir=testing.make_tmp_dir(),
+        range_train=range(0, 666),
+        range_test=range(1000, 1501),
+        # Number of shard can be arbitrary and do not matter
+        num_shards_train=13,
+        num_shards_test=31,
+    )
+    cls._builder.download_and_prepare()
+
+  def test_sub_split(self):
+    train = tfds.Split.TRAIN
+    split_00_19 = train.subsplit(tfds.percent[:20])  # 20% of the testing set
+    split_20_39 = train.subsplit(tfds.percent[20:40])  # 20% of the testing set
+    split_40_99 = train.subsplit(tfds.percent[40:])  # 60% of the testing set
+
+    values_00_19 = self._builder.values(split=split_00_19)
+    values_20_39 = self._builder.values(split=split_20_39)
+    values_40_99 = self._builder.values(split=split_40_99)
+
+    range_train = self._builder.range_train
+
+    # All the training set should be covered
+    self.assertEqual(
+        list(sorted(values_00_19 + values_20_39 + values_40_99)),
+        list(sorted(range_train)),
+    )
+
+    # None of the split should intersect with each other
+    self.assertEqual(set(values_00_19) & set(values_20_39), set())
+    self.assertEqual(set(values_20_39) & set(values_40_99), set())
+    self.assertEqual(set(values_40_99) & set(values_00_19), set())
+
+    # The number of example in each split match the defined subsplit
+    # Because the train split contains 666 examples, the remainder is 66:
+    len_00_19 = 600 // 5 + 20
+    len_20_39 = 600 // 5 + 20
+    len_40_99 = 600 * 3 // 5 + 26  # 66 = 20 + 20 + 26
+    self.assertEqual(len(values_00_19), len_00_19)  # around 20%
+    self.assertEqual(len(values_20_39), len_20_39)  # around 20%
+    self.assertEqual(len(values_40_99), len_40_99)  # around 60%
 
 
 class SplitsIntegrationTest(testing.TestCase):
@@ -470,6 +562,22 @@ class SplitsDictTest(testing.TestCase):
     self.assertTrue(splits.check_splits_equals(s1, s2))
     self.assertFalse(splits.check_splits_equals(s1, s3))  # Not same names
     self.assertFalse(splits.check_splits_equals(s1, s4))  # Nb of shards !=
+
+  def test_split_overwrite(self):
+    s1 = splits.SplitDict()
+    s1.add(tfds.core.SplitInfo(name="train", num_shards=15))
+
+    s2 = splits.SplitDict()
+    s2.add(tfds.core.SplitInfo(name="train", num_shards=15))
+
+    self.assertTrue(splits.check_splits_equals(s1, s2))
+
+    # Modifying num_shards should also modify the underlying proto
+    s2["train"].num_shards = 10
+    self.assertEqual(s2["train"].num_shards, 10)
+    self.assertEqual(s2["train"].get_proto().num_shards, 10)
+    self.assertFalse(splits.check_splits_equals(s1, s2))
+
 
 if __name__ == "__main__":
   testing.test_main()

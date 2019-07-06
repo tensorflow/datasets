@@ -39,6 +39,8 @@ class _FakeResponse(object):
     self.cookies = cookies or {}
     self.headers = headers or {'Content-length': 12345}
     self.status_code = status_code
+    # For urllib codepath
+    self.read = self.raw.read
 
   def iter_content(self, chunk_size):
     del chunk_size
@@ -66,19 +68,25 @@ class DownloaderTest(testing.TestCase):
     ).start()
     self.downloader._pbar_url = absltest.mock.MagicMock()
     self.downloader._pbar_dl_size = absltest.mock.MagicMock()
-
-    def write_fake_ftp_result(_, filename):
-      with open(filename, 'wb') as result:
-        result.write(self.response)
-
     absltest.mock.patch.object(
         downloader.urllib.request,
-        'urlretrieve',
-        write_fake_ftp_result,
+        'urlopen',
+        lambda *a, **kw: _FakeResponse(self.url, self.response, self.cookies),
     ).start()
+    if not hasattr(downloader.ssl, '_create_unverified_context'):
+      # To not throw error for python<=2.7.8 while mocking SSLContext functions
+      downloader.ssl.__dict__['_create_unverified_context'] = None
+      downloader.ssl.__dict__['create_default_context'] = None
+    # dummy ssl contexts returns for testing
+    absltest.mock.patch.object(
+        downloader.ssl,
+        '_create_unverified_context', lambda *a, **kw: 'skip_ssl').start()
+    absltest.mock.patch.object(
+        downloader.ssl,
+        'create_default_context', lambda *a, **kw: 'use_ssl').start()
 
   def test_ok(self):
-    promise = self.downloader.download(self.resource, self.tmp_dir)
+    promise = self.downloader.download(self.url, self.tmp_dir)
     checksum, _ = promise.get()
     self.assertEqual(checksum, self.resp_checksum)
     with open(self.path, 'rb') as result:
@@ -86,9 +94,8 @@ class DownloaderTest(testing.TestCase):
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
   def test_drive_no_cookies(self):
-    resource = resource_lib.Resource(
-        url='https://drive.google.com/uc?export=download&id=a1b2bc3')
-    promise = self.downloader.download(resource, self.tmp_dir)
+    url = 'https://drive.google.com/uc?export=download&id=a1b2bc3'
+    promise = self.downloader.download(url, self.tmp_dir)
     checksum, _ = promise.get()
     self.assertEqual(checksum, self.resp_checksum)
     with open(self.path, 'rb') as result:
@@ -103,7 +110,7 @@ class DownloaderTest(testing.TestCase):
     error = downloader.requests.exceptions.HTTPError('Problem serving file.')
     absltest.mock.patch.object(
         downloader.requests.Session, 'get', side_effect=error).start()
-    promise = self.downloader.download(self.resource, self.tmp_dir)
+    promise = self.downloader.download(self.url, self.tmp_dir)
     with self.assertRaises(downloader.requests.exceptions.HTTPError):
       promise.get()
 
@@ -113,24 +120,23 @@ class DownloaderTest(testing.TestCase):
         'get',
         lambda *a, **kw: _FakeResponse(self.url, b'error', status_code=404),
     ).start()
-    promise = self.downloader.download(self.resource, self.tmp_dir)
+    promise = self.downloader.download(self.url, self.tmp_dir)
     with self.assertRaises(downloader.DownloadError):
       promise.get()
 
   def test_kaggle_api(self):
     fname = 'a.csv'
     with testing.mock_kaggle_api(filenames=[fname, 'b.txt']):
-      resource = resource_lib.Resource(url='kaggle://some-competition/a.csv')
-      promise = self.downloader.download(resource, self.tmp_dir)
+      promise = self.downloader.download('kaggle://some-competition/a.csv',
+                                         self.tmp_dir)
       _, dl_size = promise.get()
       self.assertEqual(dl_size, len(fname))
       with tf.io.gfile.GFile(os.path.join(self.tmp_dir, fname)) as f:
         self.assertEqual(fname, f.read())
 
   def test_ftp(self):
-    resource = resource_lib.Resource(
-        url='ftp://username:password@example.com/foo.tar.gz')
-    promise = self.downloader.download(resource, self.tmp_dir)
+    url = 'ftp://username:password@example.com/foo.tar.gz'
+    promise = self.downloader.download(url, self.tmp_dir)
     checksum, _ = promise.get()
     self.assertEqual(checksum, self.resp_checksum)
     with open(self.path, 'rb') as result:
@@ -141,13 +147,45 @@ class DownloaderTest(testing.TestCase):
     error = downloader.urllib.error.URLError('Problem serving file.')
     absltest.mock.patch.object(
         downloader.urllib.request,
-        'urlretrieve',
+        'urlopen',
         side_effect=error,
     ).start()
-    resource = resource_lib.Resource(url='ftp://example.com/foo.tar.gz')
-    promise = self.downloader.download(resource, self.tmp_dir)
+    url = 'ftp://example.com/foo.tar.gz'
+    promise = self.downloader.download(url, self.tmp_dir)
     with self.assertRaises(downloader.urllib.error.URLError):
       promise.get()
+
+  def test_ssl_mock(self):
+    # Testing ssl for ftp
+    absltest.mock.patch.dict(os.environ, {
+        'TFDS_CA_BUNDLE': '/path/to/dummy.pem'
+    }).start()
+    self.test_ftp_ssl('use_ssl')
+
+  def test_ftp_ssl(self, ssl_type='skip_ssl'):
+    absltest.mock.patch.object(
+        downloader.urllib.request,
+        'Request', lambda *a, **kw: 'dummy_request').start()
+
+    method = absltest.mock.patch.object(
+        downloader.urllib.request,
+        'urlopen',
+        return_value=_FakeResponse(self.url, self.response,
+                                   self.cookies)).start()
+    self.test_ftp()
+    method.assert_called_once_with('dummy_request', context=ssl_type)
+
+  def test_py2_ftp_ssl_mock(self):
+    ssl_mock_dict = downloader.ssl.__dict__.copy()
+    if ssl_mock_dict.get('_create_unverified_context', None):
+      ssl_mock_dict.pop('_create_unverified_context')
+    absltest.mock.patch.dict(
+        downloader.ssl.__dict__, ssl_mock_dict, clear=True).start()
+    method = absltest.mock.patch.object(
+        downloader.logging, 'info', return_value=None).start()
+    self.test_ftp()
+    with self.assertRaises(AssertionError):
+      method.assert_not_called()
 
 
 class GetFilenameTest(testing.TestCase):

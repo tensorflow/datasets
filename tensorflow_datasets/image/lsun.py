@@ -28,8 +28,7 @@ import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
-LSUN_URL = "http://lsun.cs.princeton.edu/htbin/download.cgi?tag=latest&category=%s&set=%s"
-LSUN_DATA_FILENAME = "lsun-%s-%s.zip"
+LSUN_URL = "http://dl.yf.io/lsun/scenes/%s_%s_lmdb.zip"
 
 _CITATION = """\
 @article{journals/corr/YuZSSX15,
@@ -50,20 +49,35 @@ _CITATION = """\
 """
 
 
+# From http://dl.yf.io/lsun/categories.txt minus "test"
+_CATEGORIES = [
+    "classroom",
+    "bedroom",
+    "bridge",
+    "church_outdoor",
+    "conference_room",
+    "dining_room",
+    "kitchen",
+    "living_room",
+    "restaurant",
+    "tower",
+]
+
+
 class Lsun(tfds.core.GeneratorBasedBuilder):
   """Lsun dataset."""
 
   BUILDER_CONFIGS = [
-      tfds.core.BuilderConfig(
-          name="classroom",
-          description="Classroom images.",
-          version="0.1.1",
-      ),
-      tfds.core.BuilderConfig(
-          name="bedroom",
-          description="Bedroom images.",
-          version="0.1.1",
-      )
+      tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
+          name=category,
+          description="Images of category %s" % category,
+          version=tfds.core.Version("0.1.1"),
+          supported_versions=[
+              tfds.core.Version("2.0.0", experiments={
+                  tfds.core.Experiment.S3: True}),
+              tfds.core.Version("0.1.1"),
+          ],
+      ) for category in _CATEGORIES
   ]
 
   def _info(self):
@@ -104,5 +118,9 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     with tf.Graph().as_default():
       dataset = tf.contrib.data.LMDBDataset(
           os.path.join(extracted_dir, file_path, "data.mdb"))
-      for _, jpeg_image in tfds.as_numpy(dataset):
-        yield {"image": io.BytesIO(jpeg_image)}
+      for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
+        record = {"image": io.BytesIO(jpeg_image)}
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield i, record
+        else:
+          yield record

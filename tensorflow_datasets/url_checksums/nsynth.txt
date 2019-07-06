@@ -1,0 +1,4 @@
+http://download.magenta.tensorflow.org/datasets/nsynth/nsynth-instrument_labels.txt 20577 c38883696542209bc2401077ac80c6ab75108f9f29ac9566d57e1b35416ee087
+http://download.magenta.tensorflow.org/datasets/nsynth/nsynth-test.tfrecord 1050319843 4f41d3f063a64efed2c67fd1ffc22141727b92ce00f6303e9bbac3ffaf2fc845
+http://download.magenta.tensorflow.org/datasets/nsynth/nsynth-train.tfrecord 74159551500 6b4ee2ff6af2dae426eef0e05b03a9af6f9d11951ceeddf2f99e1a7becc0547d
+http://download.magenta.tensorflow.org/datasets/nsynth/nsynth-valid.tfrecord 3250965303 fe120a707e66e0d0b4bfae232aca0354f355c04382853f8f8619120601ad69c3

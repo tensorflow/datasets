@@ -11,15 +11,17 @@ bucket.
 
 ## How?
 
-First, [create a GCS bucket](https://cloud.google.com/storage/docs/creating-buckets)
-and ensure you have read/write permissions on it.
-
-If you'll be running from cloud machines where your personal credentials may
-not be available, you may want to [create a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-and give it permissions on your bucket.
-
-Save the JSON file with the authentication information and set the
-environment variable:
+1.  First,
+    [create a GCS bucket](https://cloud.google.com/storage/docs/creating-buckets)
+    and ensure you have read/write permissions on it.
+2.  If you'll be running from GCP machines where your personal credentials may
+    not be available, you may want to
+    [create a service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
+    and give it permissions on your bucket.
+3.  On a non-GCP machine, you'll have to use export a service account's key as
+    JSON (
+    [instructions to create a new key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys))
+    and set the environment variable:
 
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=/path/to/credential/json/file

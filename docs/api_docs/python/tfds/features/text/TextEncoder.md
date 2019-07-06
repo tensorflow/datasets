@@ -12,13 +12,11 @@
 
 ## Class `TextEncoder`
 
-
-
-
+Abstract base class for converting between text and integers.
 
 Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
 
-Abstract base class for converting between text and integers.
+<!-- Placeholder for "Used in" -->
 
 **A note on padding**:
 
@@ -37,8 +35,6 @@ Abstract base class for converting between text and integers.
 <h3 id="vocab_size"><code>vocab_size</code></h3>
 
 Size of the vocabulary. Decode produces ints [1, vocab_size).
-
-
 
 ## Methods
 
@@ -77,6 +73,3 @@ save_to_file(filename_prefix)
 ```
 
 Store to file. Inverse of load_from_file.
-
-
-

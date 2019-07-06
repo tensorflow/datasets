@@ -31,5 +31,10 @@ class CelebAHQTest(tfds_test.DatasetBuilderTestCase):
       "train": 3,
   }
 
+
+class CelebAHQS3Test(CelebAHQTest):
+  VERSION = "1.0.0"
+
+
 if __name__ == "__main__":
   tfds_test.test_main()

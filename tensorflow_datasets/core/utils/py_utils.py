@@ -29,6 +29,7 @@ import os
 import sys
 import uuid
 
+import psutil
 import six
 import tensorflow as tf
 from tensorflow_datasets.core import constants
@@ -160,6 +161,40 @@ def zip_nested(arg0, *args, **kwargs):
   return (arg0,) + args
 
 
+def flatten_nest_dict(d):
+  """Return the dict with all nested keys flattened joined with '/'."""
+  # Use NonMutableDict to ensure there is no collision between features keys
+  flat_dict = NonMutableDict()
+  for k, v in d.items():
+    if isinstance(v, dict):
+      flat_dict.update({
+          "{}/{}".format(k, k2): v2 for k2, v2 in flatten_nest_dict(v).items()
+      })
+    else:
+      flat_dict[k] = v
+  return flat_dict
+
+
+def pack_as_nest_dict(flat_d, nest_d):
+  """Pack a 1-lvl dict into a nested dict with same structure as `nest_d`."""
+  nest_out_d = {}
+  for k, v in nest_d.items():
+    if isinstance(v, dict):
+      v_flat = flatten_nest_dict(v)
+      sub_d = {
+          k2: flat_d.pop("{}/{}".format(k, k2)) for k2, _ in v_flat.items()
+      }
+      # Recursivelly pack the dictionary
+      nest_out_d[k] = pack_as_nest_dict(sub_d, v)
+    else:
+      nest_out_d[k] = flat_d.pop(k)
+  if flat_d:  # At the end, flat_d should be empty
+    raise ValueError(
+        "Flat dict strucure do not match the nested dict. Extra keys: "
+        "{}".format(list(flat_d.keys())))
+  return nest_out_d
+
+
 def as_proto_cls(proto_cls):
   """Simulate proto inheritance.
 
@@ -197,10 +232,19 @@ def as_proto_cls(proto_cls):
       """Base class simulating the protobuf."""
 
       def __init__(self, *args, **kwargs):
-        self.__proto = proto_cls(*args, **kwargs)
+        super(ProtoCls, self).__setattr__(
+            "_ProtoCls__proto",
+            proto_cls(*args, **kwargs),
+        )
 
       def __getattr__(self, attr_name):
         return getattr(self.__proto, attr_name)
+
+      def __setattr__(self, attr_name, new_value):
+        try:
+          return setattr(self.__proto, attr_name, new_value)
+        except AttributeError:
+          return super(ProtoCls, self).__setattr__(attr_name, new_value)
 
       def __eq__(self, other):
         return self.__proto, other.get_proto()
@@ -263,11 +307,22 @@ def read_checksum_digest(path, checksum_cls=hashlib.sha256):
   return checksum.hexdigest(), size
 
 
-def reraise(additional_msg):
+def reraise(prefix=None, suffix=None):
   """Reraise an exception with an additional message."""
   exc_type, exc_value, exc_traceback = sys.exc_info()
-  msg = str(exc_value) + "\n" + additional_msg
+  prefix = prefix or ""
+  suffix = "\n" + suffix if suffix else ""
+  msg = prefix + str(exc_value) + suffix
   six.reraise(exc_type, exc_type(msg), exc_traceback)
+
+
+@contextlib.contextmanager
+def try_reraise(*args, **kwargs):
+  """Reraise an exception with an additional message."""
+  try:
+    yield
+  except Exception:   # pylint: disable=broad-except
+    reraise(*args, **kwargs)
 
 
 def rgetattr(obj, attr, *args):
@@ -275,3 +330,11 @@ def rgetattr(obj, attr, *args):
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
   return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def has_sufficient_disk_space(needed_bytes, directory="."):
+  try:
+    free_bytes = psutil.disk_usage(os.path.abspath(directory)).free
+  except OSError:
+    return True
+  return needed_bytes < free_bytes
