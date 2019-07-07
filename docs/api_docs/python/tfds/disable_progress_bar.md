@@ -16,6 +16,10 @@ Defined in
 
 ### Used in the tutorials:
 
+*   [CycleGAN](https://www.tensorflow.org/beta/tutorials/generative/cyclegan)
+*   [Distributed training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/keras)
+*   [Multi-worker Training with Estimator](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_estimator)
+*   [Multi-worker Training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_keras)
 *   [Transfer Learning Using Pretrained ConvNets](https://www.tensorflow.org/beta/tutorials/images/transfer_learning)
 
 #### Usage:

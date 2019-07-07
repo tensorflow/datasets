@@ -127,7 +127,8 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
           if _TRAIN_POINTS_PER_CLASS > len(fnames):
             raise ValueError("Fewer than {} ({}) points in class {}".format(
                 _TRAIN_POINTS_PER_CLASS, len(fnames), d))
-          train_fnames = np.random.choice(fnames, _TRAIN_POINTS_PER_CLASS)
+          train_fnames = np.random.choice(fnames, _TRAIN_POINTS_PER_CLASS,
+                                          replace=False)
           test_fnames = set(fnames).difference(train_fnames)
           fnames_to_emit = train_fnames if is_train_split else test_fnames
 

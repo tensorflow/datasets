@@ -9,8 +9,6 @@
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
-<meta itemprop="property" content="GOOGLE_DISABLED"/>
-<meta itemprop="property" content="IN_DEVELOPMENT"/>
 <meta itemprop="property" content="SUPPORTED_VERSIONS"/>
 <meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
@@ -89,7 +87,8 @@ as_dataset(
     split=None,
     batch_size=None,
     shuffle_files=None,
-    as_supervised=False
+    as_supervised=False,
+    in_memory=None
 )
 ```
 
@@ -114,6 +113,10 @@ Callers must pass arguments as keyword arguments.
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
     `tf.data.Dataset` will have a dictionary with all the features.
+*   <b>`in_memory`</b>: `bool`, if `True`, loads the dataset in memory which
+    increases iteration speeds. Note that if `True` and the dataset has unknown
+    dimensions, the features will be padded to the maximum size across the
+    dataset.
 
 #### Returns:
 
@@ -151,8 +154,6 @@ Downloads and prepares dataset for reading.
 ## Class Members
 
 *   `BUILDER_CONFIGS` <a id="BUILDER_CONFIGS"></a>
-*   `GOOGLE_DISABLED = False` <a id="GOOGLE_DISABLED"></a>
-*   `IN_DEVELOPMENT = False` <a id="IN_DEVELOPMENT"></a>
 *   `SUPPORTED_VERSIONS` <a id="SUPPORTED_VERSIONS"></a>
 *   `VERSION = None` <a id="VERSION"></a>
 *   `builder_configs` <a id="builder_configs"></a>

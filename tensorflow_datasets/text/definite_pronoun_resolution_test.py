@@ -13,35 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for downsampled_imagenet dataset module."""
+"""Tests for multinli dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-
-import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import downsampled_imagenet
+from tensorflow_datasets.text import definite_pronoun_resolution
 
 
-class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = downsampled_imagenet.DownsampledImagenet
-  BUILDER_CONFIG_NAMES_TO_TEST = ["32x32", "64x64"]
-
-  SPLITS = {
-      tfds.Split.TRAIN: 2,
-      tfds.Split.VALIDATION: 2,
+class DefinitePronounResolutionTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = definite_pronoun_resolution.DefinitePronounResolution
+  DL_EXTRACT_RESULT = {
+      "train": "train.c.txt",
+      "test": "test.c.txt",
   }
-
-  DL_EXTRACT_RESULT = [
-      "train_32x32.tar",
-      "valid_32x32.tar",
-  ]
-
-
-class DownsampledImagenetS3Test(DownsampledImagenetTest):
-  VERSION = "1.0.0"
+  SPLITS = {
+      "test": 3,
+      "train": 4,
+  }
 
 
 if __name__ == "__main__":

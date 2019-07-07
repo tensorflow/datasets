@@ -19,8 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow as tf
-
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
@@ -79,7 +77,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
           description=(
               "A dataset consisting of Train and Validation images of " +
               config_name + " resolution."),
-          version="0.1.0",
+          version="1.0.0",
           supported_versions=[
               tfds.core.Version("1.0.0", experiments={
                   tfds.core.Experiment.S3: True}),

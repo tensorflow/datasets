@@ -506,7 +506,7 @@ _DEV_SUBSETS = [
     SubDataset(
         name="newstest2015",
         target="en",
-        sources={"cs", "de", "fi", "ru"},
+        sources={"cs", "de", "fi", "fr", "ru"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2015-{src}en-src.{src}.sgm",
               "dev/newstest2015-{src}en-ref.en.sgm")),

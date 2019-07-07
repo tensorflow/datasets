@@ -138,6 +138,9 @@ If you'd like to follow a test-driven development workflow, which can help you
 iterate faster, jump to the [testing instructions](#testing-mydataset) below,
 add the test, and then return here.
 
+For an explanation of what the version is, please read
+[datasets versioning](datasets_versioning.md).
+
 ## Specifying `DatasetInfo`
 
 [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) describes the

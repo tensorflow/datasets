@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.text.cnn_dailymail import CnnDailymail
 from tensorflow_datasets.text.cnn_dailymail import CnnDailymailConfig
+from tensorflow_datasets.text.definite_pronoun_resolution import DefinitePronounResolution
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig

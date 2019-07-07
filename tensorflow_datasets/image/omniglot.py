@@ -160,7 +160,7 @@ def _get_names(dirs):
   label_names = {}
   for d in dirs:
     for example in _walk_omniglot_dir(d):
-      alphabet, alphabet_char_id, label, _ = example
+      alphabet, alphabet_char_id, label, _, _ = example
       alphabets.add(alphabet)
       label_name = "%s_%d" % (alphabet, alphabet_char_id)
       if label in label_names:

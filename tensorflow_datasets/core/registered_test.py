@@ -141,6 +141,7 @@ class RegisteredTest(testing.TestCase):
     builder = registered.load(
         name=name, split=splits.Split.TEST, data_dir=data_dir,
         batch_size=1)
+    self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
 
   def test_load_all_splits(self):
     name = "empty_dataset_builder"

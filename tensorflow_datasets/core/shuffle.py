@@ -24,10 +24,10 @@ import os
 import struct
 import uuid
 
-import cityhash
 import six
 import tensorflow as tf
 
+from tensorflow_datasets.core import hashing
 
 HKEY_SIZE = 64  # Hash of keys is 64 bits.
 
@@ -48,13 +48,6 @@ MAX_MEM_BUFFER_SIZE = 1000 << 20  # 1GB
 BUCKETS_NUMBER = 1000  # Number of buckets to pre-sort and hold generated data.
 
 
-def _get_hashed_key(key):
-  """Returns hash (int) for given key."""
-  if not isinstance(key, (six.string_types, bytes)):
-    key = str(key)
-  return cityhash.CityHash64(key)
-
-
 def _get_shard(hkey, shards_number):
   """Returns shard number (int) for given hashed key (int)."""
   # We purposely do not use modulo (%) to keep global order across shards.
@@ -73,12 +66,14 @@ class _Bucket(object):
     key1 (8 bytes) | size1 (8 bytes) | data1 (size1 bytes) |
     key2 (8 bytes) | size2 (8 bytes) | data2 (size2 bytes) |
     ...
-
-  Args:
-    path (str): where to write the bucket file.
   """
 
   def __init__(self, path):
+    """Initialize a _Bucket instance.
+
+    Args:
+      path (str): where to write the bucket file.
+    """
     self._path = path
     self._fobj = None
     self._length = 0
@@ -167,7 +162,7 @@ class Shuffler(object):
     if not isinstance(data, six.binary_type):
       raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' % (
           type(data)))
-    hkey = _get_hashed_key(key)
+    hkey = hashing.hash_key(key)
     self._total_bytes += len(data)
     if self._in_memory:
       self._add_to_mem_buffer(hkey, data)

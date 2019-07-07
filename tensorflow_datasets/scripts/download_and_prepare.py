@@ -50,6 +50,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
 
+
 FLAGS = flags.FLAGS
 
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))

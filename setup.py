@@ -42,7 +42,7 @@ REQUIRED_PKGS = [
     'absl-py',
     'attrs',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
-    'cityhash',
+    'siphash',
     'future',
     'numpy',
     'promise',
@@ -58,6 +58,7 @@ REQUIRED_PKGS = [
 
 TESTS_REQUIRE = [
     'apache-beam',
+    # 'csiphash',  # https://github.com/tensorflow/datasets/issues/737
     'jupyter',
     'pytest',
 ]
@@ -122,6 +123,8 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
+    # https://github.com/tensorflow/datasets/issues/737
+    # 'siphash': ['csiphash'],
     'tensorflow': ['tensorflow>=1.13.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.13.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,

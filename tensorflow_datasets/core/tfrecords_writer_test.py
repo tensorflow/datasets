@@ -107,7 +107,7 @@ class WriterTest(testing.TestCase):
     self.assertEqual(written_files,
                      ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
     self.assertEqual(all_recs, [
-        [b'f', b'e'], [b'b'], [b'a', b'g'], [b'h'], [b'c', b'd'],
+        [b'f', b'c'], [b'a'], [b'd', b'g'], [b'h'], [b'b', b'e'],
     ])
 
 if __name__ == '__main__':
