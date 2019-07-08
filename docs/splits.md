@@ -1,7 +1,7 @@
 # Splits
 
 All `DatasetBuilder`s expose various data subsets defined as
-[`tfds.Split`s](api_docs/python/tfds/Split.md)
+[`tfds.Split`](api_docs/python/tfds/Split.md)s
 (typically `tfds.Split.TRAIN` and `tfds.Split.TEST`). A given dataset's
 splits are defined in
 [`tfds.DatasetBuilder.info.splits`](api_docs/python/tfds/core/DatasetBuilder.md#info)
@@ -27,7 +27,7 @@ Note that a special `tfds.Split.ALL` keyword exists to merge all splits
 together:
 
 ```py
-# Ds will iterate over test, train and validation merged together
+# `ds` will iterate over test, train and validation merged together
 ds = tfds.load("mnist", split=tfds.Split.ALL)
 ```
 
@@ -36,8 +36,8 @@ ds = tfds.load("mnist", split=tfds.Split.ALL)
 You have 3 options for how to get a thinner slice of the data than the
 base splits, all based on `tfds.Split.subsplit`.
 
-*Warning*: TFDS does not currently guarantee the order of the data on disk when
-data is generated, so if you regenerate the data, the subsplits may no longer be
+*Warning*: TensorFlow Datasets does not currently guarantee the order of the data on disk when
+data is generated. Therefore, if you regenerate the data, the subsplits may no longer be
 the same.
 
 *Warning*: If the `total_number_examples % 100 != 0`, then remainder examples
@@ -46,7 +46,7 @@ may not be evenly distributed among subsplits.
 ### Specify number of subsplits
 
 ```py
-train_half_1, train_half_2 = tfds.Split.TRAIN.subsplit(2)
+train_half_1, train_half_2 = tfds.Split.TRAIN.subsplit(k=2)
 
 dataset = tfds.load("mnist", split=train_half_1)
 ```
@@ -64,7 +64,7 @@ dataset = tfds.load("mnist", split=middle_50_percent)
 ### Specifying weights
 
 ```py
-half, quarter1, quarter2 = tfds.Split.TRAIN.subsplit([2, 1, 1])
+half, quarter1, quarter2 = tfds.Split.TRAIN.subsplit(weighted=[2, 1, 1])
 
 dataset = tfds.load("mnist", split=half)
 ```
@@ -78,7 +78,7 @@ It's possible to compose the above operations:
 split = tfds.Split.TRAIN.subsplit(tfds.percent[:50]) + tfds.Split.TEST
 
 # Split the combined TRAIN and TEST splits into 2
-first_half, second_half = (tfds.Split.TRAIN + tfds.Split.TEST).subsplit(2)
+first_half, second_half = (tfds.Split.TRAIN + tfds.Split.TEST).subsplit(k=2)
 ```
 
 Note that a split cannot be added twice, and subsplitting can only happen once.
@@ -89,7 +89,7 @@ For example, these are invalid:
 split = tfds.Split.TRAIN.subsplit(tfds.percent[:25]) + tfds.Split.TRAIN
 
 # INVALID! Subsplit of subsplit
-split = tfds.Split.TRAIN.subsplit(tfds.percent[0:25]).subsplit(2)
+split = tfds.Split.TRAIN.subsplit(tfds.percent[0:25]).subsplit(k=2)
 
 # INVALID! Subsplit of subsplit
 split = (tfds.Split.TRAIN.subsplit(tfds.percent[:25]) +
