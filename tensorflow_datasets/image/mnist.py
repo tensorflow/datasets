@@ -35,7 +35,8 @@ _MNIST_TRAIN_LABELS_FILENAME = "train-labels-idx1-ubyte.gz"
 _MNIST_TEST_DATA_FILENAME = "t10k-images-idx3-ubyte.gz"
 _MNIST_TEST_LABELS_FILENAME = "t10k-labels-idx1-ubyte.gz"
 _MNIST_IMAGE_SIZE = 28
-_MNIST_IMAGE_SHAPE = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
+MNIST_IMAGE_SHAPE = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
+MNIST_NUM_CLASSES = 10
 _TRAIN_EXAMPLES = 60000
 _TEST_EXAMPLES = 10000
 
@@ -107,8 +108,8 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=("The MNIST database of handwritten digits."),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(num_classes=10),
+            "image": tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(num_classes=MNIST_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
         urls=[self.URL],
@@ -188,7 +189,7 @@ class FashionMNIST(MNIST):
                      "classes."),
         features=tfds.features.FeaturesDict({
             "image":
-                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
             "label":
                 tfds.features.ClassLabel(names=[
                     "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
@@ -217,7 +218,7 @@ class KMNIST(MNIST):
                      "when creating Kuzushiji-MNIST."),
         features=tfds.features.FeaturesDict({
             "image":
-                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
             "label":
                 tfds.features.ClassLabel(names=[
                     "o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"
@@ -319,7 +320,7 @@ class EMNIST(MNIST):
             "matches the MNIST dataset."),
         features=tfds.features.FeaturesDict({
             "image":
-                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
             "label":
                 tfds.features.ClassLabel(
                     num_classes=self.builder_config.class_number),
