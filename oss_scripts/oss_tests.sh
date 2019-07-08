@@ -31,6 +31,11 @@ then
 fi
 TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 
+# Some tests do not play nicely with the parallel pytest-xdist and should be
+# run separately.
+TEST_SEPARATE=""
+TEST_SEPARATE_IGNORE=$(for test in $TEST_SEPARATE; do echo "--ignore=$test "; done)
+
 # Run Tests
 # Ignores:
 # * Some TF2 tests if running against TF2 (see above)
@@ -38,9 +43,10 @@ TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 # * eager_not_enabled_by_default_test needs to be run separately because the
 #   enable_eager_execution calls set global state and pytest runs all the tests
 #   in the same process.
-pytest \
+pytest -n 4 \
   --disable-warnings \
   $TF2_IGNORE \
+  $TEST_SEPARATE_IGNORE \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
   --ignore="tensorflow_datasets/eager_not_enabled_by_default_test.py"
 set_status
@@ -52,6 +58,12 @@ then
     tensorflow_datasets/eager_not_enabled_by_default_test.py
   set_status
 fi
+
+for test in $TEST_SEPARATE
+do
+  pytest --disable-warnings $test
+  set_status
+done
 
 # Test notebooks in isolated environments
 NOTEBOOKS="
