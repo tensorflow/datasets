@@ -124,6 +124,7 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
+    'tensorflow_data_validation': ['tensorflow_data_validation'],
     # https://github.com/tensorflow/datasets/issues/737
     # 'siphash': ['csiphash'],
     'tensorflow': ['tensorflow>=1.13.0'],

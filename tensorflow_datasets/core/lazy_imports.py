@@ -104,6 +104,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def tfdv(cls):
+    return _try_import("tensorflow_data_validation")
+
+  @utils.classproperty
+  @classmethod
   def os(cls):
     """For testing purposes only."""
     return _try_import("os")

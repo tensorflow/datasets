@@ -25,6 +25,7 @@ import contextlib
 import hashlib
 import io
 import itertools
+import logging
 import os
 import sys
 import uuid
@@ -65,6 +66,24 @@ def zip_dict(*dicts):
   for key in set(itertools.chain(*dicts)):  # set merge all keys
     # Will raise KeyError if the dict don't have the same keys
     yield key, tuple(d[key] for d in dicts)
+
+
+@contextlib.contextmanager
+def disable_logging():
+  """Temporarily assign obj.attr to value."""
+  logger = logging.getLogger()
+  logger_disabled = logger.disabled
+  logger.disabled = True
+  try:
+    yield
+  finally:
+    logger.disabled = logger_disabled
+
+
+@contextlib.contextmanager
+def nullcontext():
+  """No-op context manager (like contextlib.nullcontext but Py 2 compatible)."""
+  yield
 
 
 class NonMutableDict(dict):

@@ -49,6 +49,8 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import lazy_imports
+from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
@@ -264,6 +266,47 @@ class DatasetInfo(object):
 
   def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
+
+  def visualize_statistics(self, disable_logging=True):
+    """Visualize dataset statistics using `tensorflow_data_validation`.
+
+    This is meant to be used in a Jupyter notebook.
+    Example of usage:
+
+    ```
+    builder = tfds.builder("titanic")
+    builder.download_and_prepare()
+    builder.info.visualize_statistics()
+    ```
+
+    Args:
+      disable_logging: `bool`, if True, disable the tfdv logs which can be
+        too verbose
+
+    Returns:
+      <IPython.core.display.HTML object>
+
+    So it's just use on the jupyter notebook.
+    """
+    tfdv = lazy_imports.lazy_imports.tfdv
+
+    # TODO(tfds): Compute DatasetBuilder statistics with tfdv and replace the
+    # following computation here by self.info.statistics
+    # This would also allow the visualization to be used without having to
+    # call `download_and_prepare`
+
+    filetype_suffix = self._builder._file_format_adapter.filetype_suffix  # pylint: disable=protected-access
+    if filetype_suffix != "tfrecord":
+      raise ValueError(
+          "Cannot visualize dataset statistics because filetype {}".format(
+              filetype_suffix))
+    # Find the train .tfrecord files pattern of dataset.
+    filepattern = naming.filepattern_for_dataset_split(
+        self._builder.name, "train", self._builder.data_dir, filetype_suffix)
+    statistics = tfdv.generate_statistics_from_tfrecord(filepattern)
+
+    with utils.disable_logging() if disable_logging else utils.nullcontext():
+      return tfdv.visualize_statistics(statistics)
 
   def compute_dynamic_properties(self):
     self._compute_dynamic_properties(self._builder)
