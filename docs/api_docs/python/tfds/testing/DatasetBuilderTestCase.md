@@ -159,33 +159,43 @@ Defined in [`testing/dataset_builder_testing.py`](https://github.com/tensorflow/
 <!-- Placeholder for "Used in" -->
 
 You must set the following class attributes:
-  DATASET_CLASS: class object of DatasetBuilder you want to test.
 
-You may set the following class attributes: VERSION: `str`. The version used to
-run the test. eg: '1.2.*'. Defaults to None (canonical version).
-BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs that
-should be tested. If None, all the BUILDER_CONFIGS from the class will be
-tested. DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
-`download_and_extract` method. The values should be the path of files present in
-the `fake_examples` directory, relative to that directory. If not specified,
-path to `fake_examples` will always be returned. EXAMPLE_DIR: `str`, the base
-directory in in which fake examples are contained. Optional; defaults to
-tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
-OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other splits
-(e.g. a "example" split containing pictures from other splits).
-MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
-disable checks preventing usage of `os` or builtin functions instead of
-recommended `tf.io.gfile` API.
+*   DATASET_CLASS: class object of DatasetBuilder you want to test.
 
-This test case will check for the following: - the dataset builder is correctly
-registered, i.e. <a href="../../tfds/load.md"><code>tfds.load(name)</code></a>
-works; - the dataset builder can read the fake examples stored in
-testing/test_data/fake_examples/${dataset_name}; - the dataset builder can
-produce serialized data; - the dataset builder produces a valid Dataset object
-from serialized data - in eager mode; - in graph mode. - the produced Dataset
-examples have the expected dimensions and types; - the produced Dataset has and
-the expected number of examples; - a example is not part of two splits, or one
-of these splits is whitelisted in OVERLAPPING_SPLITS.
+You may set the following class attributes:
+
+*   VERSION: `str`. The version used to run the test. eg: '1.2.*'. Defaults to
+    None (canonical version).
+*   BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs that
+    should be tested. If None, all the BUILDER_CONFIGS from the class will be
+    tested.
+*   DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
+    `download_and_extract` method. The values should be the path of files
+    present in the `fake_examples` directory, relative to that directory. If not
+    specified, path to `fake_examples` will always be returned.
+*   EXAMPLE_DIR: `str`, the base directory in in which fake examples are
+    contained. Optional; defaults to
+    tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
+*   OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
+    splits (e.g. a "example" split containing pictures from other splits).
+*   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
+    disable checks preventing usage of `os` or builtin functions instead of
+    recommended `tf.io.gfile` API.
+
+This test case will check for the following:
+
+-   the dataset builder is correctly registered, i.e.
+    <a href="../../tfds/load.md"><code>tfds.load(name)</code></a> works;
+-   the dataset builder can read the fake examples stored in
+    testing/test_data/fake_examples/${dataset_name};
+-   the dataset builder can produce serialized data;
+-   the dataset builder produces a valid Dataset object from serialized data
+    -   in eager mode;
+    -   in graph mode.
+-   the produced Dataset examples have the expected dimensions and types;
+-   the produced Dataset has and the expected number of examples;
+-   a example is not part of two splits, or one of these splits is whitelisted
+    in OVERLAPPING_SPLITS.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
