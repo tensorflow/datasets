@@ -61,6 +61,7 @@ TESTS_REQUIRE = [
     # 'csiphash',  # https://github.com/tensorflow/datasets/issues/737
     'jupyter',
     'pytest',
+    'pytest-xdist',
 ]
 
 if sys.version_info.major == 3:
