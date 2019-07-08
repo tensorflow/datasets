@@ -60,8 +60,16 @@ def _generate_data():
 
   # Generate annotations
   annotations_dir = os.path.join(_output_dir(), 'annotations')
+
   if not tf.io.gfile.exists(annotations_dir):
     tf.io.gfile.makedirs(annotations_dir)
+
+  # Generate trimaps
+  trimaps_dir = os.path.join(annotations_dir, 'trimaps')
+
+  if not tf.io.gfile.exists(trimaps_dir):
+    tf.io.gfile.makedirs(trimaps_dir)
+
   global_count = 0
   for filename, num_examples in [('trainval.txt', _TRAIN_IMAGES_NUMBER),
                                  ('test.txt', _TEST_IMAGES_NUMBER)]:
@@ -71,6 +79,13 @@ def _generate_data():
         fobj.write('image{:03d} {} 0 0\n'.format(global_count, i % 37))
         global_count += 1
     tf.io.gfile.copy(fobj.name, os.path.join(annotations_dir, filename),
+                     overwrite=True)
+
+  # Create trimaps
+  for i in range(_TRAIN_IMAGES_NUMBER + _TEST_IMAGES_NUMBER):
+    trimap_name = 'image{:03d}.png'.format(i)
+    tf.io.gfile.copy(fake_data_utils.get_random_png(channels=1),
+                     os.path.join(trimaps_dir, trimap_name),
                      overwrite=True)
 
 
