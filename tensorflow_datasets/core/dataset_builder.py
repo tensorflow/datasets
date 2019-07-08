@@ -409,10 +409,10 @@ class DatasetBuilder(object):
       # to do by using a requested version of tf.data.Dataset.cache that can
       # persist a cache beyond iterator instances.
       if not dataset_shape_is_fully_defined:
-        tf.logging.warning("Called in_memory=True on a dataset that does not "
-                           "have fully defined shapes. Note that features with "
-                           "variable length dimensions will be 0-padded to "
-                           "the maximum length across the dataset.")
+        logging.warning("Called in_memory=True on a dataset that does not "
+                        "have fully defined shapes. Note that features with "
+                        "variable length dimensions will be 0-padded to "
+                        "the maximum length across the dataset.")
       full_bs = self.info.splits.total_num_examples or sys.maxsize
       # If using in_memory, escape all device contexts so we can load the data
       # with a local Session.
