@@ -13,41 +13,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.lazy_imports."""
+"""Test for PetFinder."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from absl.testing import parameterized
-import six
-import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
+from tensorflow_datasets.image import pet_finder
 
 
-class LazyImportsTest(testing.TestCase, parameterized.TestCase):
-
-  @parameterized.parameters(
-      "cv2",
-      "matplotlib",
-      "mwparserfromhell",
-      "os",
-      "pandas",
-      "pretty_midi",
-      "pydub",
-      "scipy",
-      "skimage",
-  )
-  def test_import(self, module_name):
-    # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)
-    if module_name == "skimage" and six.PY3:
-      return
-    getattr(tfds.core.lazy_imports, module_name)
-
-  def test_bad_import(self):
-    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
-      _ = tfds.core.lazy_imports.test_foo
+class PetFinderTest(testing.DatasetBuilderTestCase):
+  # petfinder:
+  DATASET_CLASS = pet_finder.PetFinder
+  SPLITS = {
+      'train': 2,  # Number of fake train example
+      'test': 2,  # Number of fake test example
+  }
+  DL_EXTRACT_RESULT = {
+      'train': 'train.csv',
+      'train_images': 'train_images',
+      'test': 'test.csv',
+      'test_images': 'test_images',
+  }
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   testing.test_main()
