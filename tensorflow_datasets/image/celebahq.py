@@ -60,8 +60,11 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     kwargs["supported_versions"] = [
+        tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
         tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
     ]
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %

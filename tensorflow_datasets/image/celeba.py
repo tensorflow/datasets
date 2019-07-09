@@ -98,9 +98,11 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("0.3.0")
   SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
       tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
   ]
   # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):

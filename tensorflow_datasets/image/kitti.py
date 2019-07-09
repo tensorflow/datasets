@@ -69,6 +69,11 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version(
       "1.0.0", experiments={tfds.core.Experiment.S3: True})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+  ]
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
 
   def _info(self):
     # Annotation descriptions are in the object development kit.

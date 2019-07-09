@@ -31,7 +31,7 @@ class Sun397Test(testing.DatasetBuilderTestCase):
 
 
 class Sun397S3Test(Sun397Test):
-  VERSION = '2.0.0'
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

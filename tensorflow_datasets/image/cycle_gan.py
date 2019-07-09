@@ -80,6 +80,9 @@ class CycleGANConfig(tfds.core.BuilderConfig):
 class CycleGAN(tfds.core.GeneratorBasedBuilder):
   """CycleGAN dataset."""
 
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       CycleGANConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
@@ -87,6 +90,8 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
                        "B (For example: horses/zebras, apple/orange,...)"),
           version="0.1.0",
           supported_versions=[
+              tfds.core.Version("2.0.0", experiments={
+                  tfds.core.Experiment.S3: True}),
               tfds.core.Version("1.0.0", experiments={
                   tfds.core.Experiment.S3: True}),
           ],

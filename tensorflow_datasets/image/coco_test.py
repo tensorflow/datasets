@@ -48,7 +48,7 @@ class Coco2014Test(testing.DatasetBuilderTestCase):
 
 
 class Coco2014S3Test(Coco2014Test):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

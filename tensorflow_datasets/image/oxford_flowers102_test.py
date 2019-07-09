@@ -39,7 +39,7 @@ class OxfordFlowers102Test(testing.DatasetBuilderTestCase):
 
 
 class OxfordFlowers102S3Test(OxfordFlowers102Test):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

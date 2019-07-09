@@ -31,7 +31,7 @@ class TFFlowersTest(testing.DatasetBuilderTestCase):
 
 
 class TFFlowersS3Test(TFFlowersTest):
-  VERSION = '2.0.0'
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

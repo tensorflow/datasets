@@ -52,8 +52,12 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
         pixels is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
+    # Version history:
+    # 3.0.0: S3 with new hashing function (different shuffle).
+    # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
     kwargs["supported_versions"] = [
         tfds.core.Version("3.0.0", experiments={tfds.core.Experiment.S3: True}),
+        tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
     ]
     super(DiabeticRetinopathyDetectionConfig, self).__init__(**kwargs)
     self._target_pixels = target_pixels

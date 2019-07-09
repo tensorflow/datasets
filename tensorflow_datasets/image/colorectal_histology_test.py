@@ -35,7 +35,7 @@ class ColorectalHistologyTest(testing.DatasetBuilderTestCase):
 
 
 class ColorectalHistologyS3Test(ColorectalHistologyTest):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 class ColorectalHistologyLargeTest(testing.DatasetBuilderTestCase):
@@ -46,7 +46,7 @@ class ColorectalHistologyLargeTest(testing.DatasetBuilderTestCase):
 
 
 class ColorectalHistologyLargeS3Test(ColorectalHistologyLargeTest):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

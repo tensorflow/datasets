@@ -73,8 +73,12 @@ class EurosatConfig(tfds.core.BuilderConfig):
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
     kwargs['supported_versions'] = [
+        tfds.core.Version('2.0.0', experiments={tfds.core.Experiment.S3: True}),
         tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
     ]
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(EurosatConfig, self).__init__(**kwargs)
     self.selection = selection
     self.download_url = download_url

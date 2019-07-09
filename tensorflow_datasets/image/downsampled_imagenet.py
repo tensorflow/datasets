@@ -71,6 +71,9 @@ class DownsampledImagenetConfig(tfds.core.BuilderConfig):
 class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
   """Downsampled Imagenet dataset."""
 
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       DownsampledImagenetConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
@@ -79,6 +82,8 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
               config_name + " resolution."),
           version="1.0.0",
           supported_versions=[
+              tfds.core.Version("2.0.0", experiments={
+                  tfds.core.Experiment.S3: True}),
               tfds.core.Version("1.0.0", experiments={
                   tfds.core.Experiment.S3: True}),
           ],

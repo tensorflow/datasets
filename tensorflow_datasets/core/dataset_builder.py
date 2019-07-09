@@ -898,7 +898,8 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
       return self._prepare_split_legacy(generator, split_info)
     fname = "{}-{}.tfrecord".format(self.name, split_generator.name)
     fpath = os.path.join(self._data_dir, fname)
-    writer = tfrecords_writer.Writer(self._example_specs, fpath)
+    writer = tfrecords_writer.Writer(self._example_specs, fpath,
+                                     hash_salt=split_generator.name)
     for key, record in utils.tqdm(generator, unit=" examples",
                                   total=split_info.num_examples, leave=False):
       example = self.info.features.encode_example(record)

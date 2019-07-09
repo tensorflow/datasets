@@ -121,6 +121,7 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
     kwargs['supported_versions'] = [
+        tfds.core.Version('2.0.0', experiments={tfds.core.Experiment.S3: True}),
         tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
     ]
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)

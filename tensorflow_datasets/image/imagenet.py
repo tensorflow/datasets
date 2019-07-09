@@ -95,11 +95,13 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('2.0.1')
   SUPPORTED_VERSIONS = [
+      tfds.core.Version('5.0.0', experiments={tfds.core.Experiment.S3: True}),
       tfds.core.Version('4.0.0', experiments={tfds.core.Experiment.S3: True}),
       tfds.core.Version('3.0.0'),
       tfds.core.Version('2.0.1'),
   ]
   # Version history:
+  # 5.0.0: S3 with new hashing function (different shuffle).
   # 4.0.0: S3 (new shuffling, sharding and slicing mechanism).
   # 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
   # 2.0.1: Encoding fix. No changes from user point of view.
