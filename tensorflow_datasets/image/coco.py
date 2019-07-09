@@ -24,8 +24,6 @@ import collections
 import json
 import os
 
-from zipfile import ZipFile
-
 from absl import logging
 import tensorflow as tf
 
@@ -541,7 +539,22 @@ class Coco2017Panoptic(tfds.core.GeneratorBasedBuilder):
     extracted_paths = dl_manager.download_and_extract({
         key: root_url + url for key, url in urls.items()
     })
-
+    
+    # Extract the panoptic_{}.zip folders containing the png images
+    panoptic_image_filename = "panoptic_{}.zip"
+    # Extracting panoptic train png images
+    panoptic_train_image_path = os.path.join(
+        extracted_paths["panoptic_annotations_trainval2017"],
+        "annotations",
+        panoptic_image_filename.format("train2017")
+    )
+    # Extracting panoptic val png images
+    panoptic_val_image_path = os.path.join(
+        extracted_paths["panoptic_annotations_trainval2017"],
+        "annotations",
+        panoptic_image_filename.format("val2017")
+    )
+    
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -550,6 +563,7 @@ class Coco2017Panoptic(tfds.core.GeneratorBasedBuilder):
                 image_dir=extracted_paths["train_images"],
                 annotation_dir=extracted_paths["panoptic_annotations_trainval2017"],
                 split_type="train2017",
+                panoptic_extracted_images=os.path.join(dl_manager.extract(panoptic_train_image_path), "panoptic_train2017"),
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
@@ -558,11 +572,12 @@ class Coco2017Panoptic(tfds.core.GeneratorBasedBuilder):
                 image_dir=extracted_paths["val_images"],
                 annotation_dir=extracted_paths["panoptic_annotations_trainval2017"],
                 split_type="val2017",
+                panoptic_extracted_images=os.path.join(dl_manager.extract(panoptic_val_image_path), "panoptic_val2017"),
             )),
     ]
 
   def _generate_examples(
-      self, image_dir, annotation_dir, split_type):
+      self, image_dir, annotation_dir, split_type, panoptic_extracted_images):
     """Generate examples as dicts.
 
     Args:
@@ -609,16 +624,6 @@ class Coco2017Panoptic(tfds.core.GeneratorBasedBuilder):
     
     categories_id2name = {c["id"]: c["name"] for c in categories}
     
-    # Extract the panoptic_{}.zip folder containing the png images
-    panoptic_image_filename = "panoptic_{}.zip"
-    panoptic_image_path = os.path.join(
-        annotation_dir,
-        "annotations",
-        panoptic_image_filename.format(split_type)
-    )
-    with ZipFile(panoptic_image_path) as f:
-      f.extractall(os.path.join(annotation_dir, "annotations"))
-    
     # Iterate over all images
     for image_info in sorted(images, key=lambda x: x["id"]):
       # Each instance annotation is a dict:
@@ -654,7 +659,7 @@ class Coco2017Panoptic(tfds.core.GeneratorBasedBuilder):
           "image": os.path.join(image_dir, split_type, image_info["file_name"]),
           "image_id": image_info["id"],
           "image/filename": image_info["file_name"],
-          "panoptic_image": os.path.join(annotation_dir, "annotations", "panoptic_{}".format(split_type), instances["file_name"]),
+          "panoptic_image": os.path.join(panoptic_extracted_images, instances["file_name"]),
           "panoptic_image/filename": instances["file_name"],
           "objects": [{
               "area": instance["area"],
