@@ -49,7 +49,7 @@ REQUIRED_PKGS = [
     'psutil',
     'requests>=2.19.0',
     'six',
-    'tensorflow-metadata',
+    'tensorflow-metadata>=0.12.1,<0.14',
     'termcolor',
     'tqdm',
     'wrapt',
@@ -60,6 +60,7 @@ TESTS_REQUIRE = [
     'jupyter',
     'pytest',
     'pytest-xdist',
+    'tensorflow-data-validation>=0.13.1,<0.14',
 ]
 
 if sys.version_info.major == 3:
@@ -123,6 +124,7 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
+    'tensorflow-data-validation': ['tensorflow-data-validation>=0.13.1,<0.14'],
     'tensorflow': ['tensorflow>=1.14.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.14.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,

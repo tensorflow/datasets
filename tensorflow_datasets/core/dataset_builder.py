@@ -291,8 +291,16 @@ class DatasetBuilder(object):
         # DatasetInfo.read_from_directory to possibly restore these attributes
         # when reading from package data.
 
+        # Skip statistics computation if tfdv isn't present
+        try:
+          import tensorflow_data_validation  # pylint: disable=g-import-not-at-top,unused-variable
+          skip_stats_computation = False
+        except ImportError:
+          skip_stats_computation = True
+
         # Update the DatasetInfo metadata by computing statistics from the data.
-        if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
+        if (skip_stats_computation or
+            download_config.compute_stats == download.ComputeStatsMode.SKIP or
             download_config.compute_stats == download.ComputeStatsMode.AUTO and
             bool(self.info.splits.total_num_examples)
            ):
