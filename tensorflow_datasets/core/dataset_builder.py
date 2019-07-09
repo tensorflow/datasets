@@ -379,7 +379,14 @@ class DatasetBuilder(object):
 
     if shuffle_files is None:
       # Shuffle files if training
-      shuffle_files = split == splits_lib.Split.TRAIN
+      if split == splits_lib.Split.TRAIN:
+        logging.warning(
+            "Warning: Setting shuffle_files=True because split=TRAIN and "
+            "shuffle_files=None. This behavior will be deprecated on "
+            "2019-08-06, "
+            "at which point shuffle_files=False will be the default for all "
+            "splits.")
+        shuffle_files = True
 
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
@@ -409,10 +416,10 @@ class DatasetBuilder(object):
       # to do by using a requested version of tf.data.Dataset.cache that can
       # persist a cache beyond iterator instances.
       if not dataset_shape_is_fully_defined:
-        tf.logging.warning("Called in_memory=True on a dataset that does not "
-                           "have fully defined shapes. Note that features with "
-                           "variable length dimensions will be 0-padded to "
-                           "the maximum length across the dataset.")
+        logging.warning("Called in_memory=True on a dataset that does not "
+                        "have fully defined shapes. Note that features with "
+                        "variable length dimensions will be 0-padded to "
+                        "the maximum length across the dataset.")
       full_bs = self.info.splits.total_num_examples or sys.maxsize
       # If using in_memory, escape all device contexts so we can load the data
       # with a local Session.
