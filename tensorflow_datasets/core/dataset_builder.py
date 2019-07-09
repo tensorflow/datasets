@@ -515,7 +515,7 @@ class DatasetBuilder(object):
                 name=self.name,
                 data_dir=self._data_dir_root,
                 cur_version=str(self._version)))
-        logging.warn(warn_msg)
+        logging.warning(warn_msg)
 
     return version_data_dir
 
@@ -892,7 +892,8 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     generator = self._generate_examples(**split_generator.gen_kwargs)
     split_info = split_generator.split_info
     if max_examples_per_split is not None:
-      logging.warn("Splits capped at %s examples max.", max_examples_per_split)
+      logging.warning("Splits capped at %s examples max.",
+                      max_examples_per_split)
       generator = itertools.islice(generator, max_examples_per_split)
     if not self.version.implements(utils.Experiment.S3):
       return self._prepare_split_legacy(generator, split_info)
