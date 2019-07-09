@@ -50,7 +50,6 @@ REQUIRED_PKGS = [
     'psutil',
     'requests>=2.19.0',
     'six',
-    'tensorflow_data_validation',
     'tensorflow-metadata',
     'termcolor',
     'tqdm',
