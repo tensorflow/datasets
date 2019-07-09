@@ -26,11 +26,12 @@ already added.
 *   [Create your own `FeatureConnector`](#create-your-own-featureconnector)
 *   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
     *   [1. Add an import for registration](#1-add-an-import-for-registration)
-    *   [2. Run download_and_prepare locally](#2-run-download-and-prepare-locally)
+    *   [2. Run download_and_prepare locally](#2-run-download_and_prepare-locally)
     *   [3. Double-check the citation](#3-double-check-the-citation)
     *   [4. Add a test](#4-add-a-test)
     *   [5. Check your code style](#5-check-your-code-style)
-    *   [6. Send for review!](#6-send-for-review)
+    *   [6. Add release notes](#6-add-release-notes)
+    *   [7. Send for review!](#7-send-for-review)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 *   [Testing `MyDataset`](#testing-mydataset)
 
@@ -136,6 +137,9 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 If you'd like to follow a test-driven development workflow, which can help you
 iterate faster, jump to the [testing instructions](#testing-mydataset) below,
 add the test, and then return here.
+
+For an explanation of what the version is, please read
+[datasets versioning](datasets_versioning.md).
 
 ## Specifying `DatasetInfo`
 
@@ -551,7 +555,13 @@ See
 [TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
 for more information.
 
-### 6. Send for review!
+### 6. Add release notes
+
+Add the dataset to the
+[release notes](https://github.com/tensorflow/datasets/blob/master/docs/release_notes.md).
+The release note will be published for the next release.
+
+### 7. Send for review!
 
 Send the pull request for review.
 

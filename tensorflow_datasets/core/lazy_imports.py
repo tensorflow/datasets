@@ -84,11 +84,6 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def pyplot(cls):
-    return _try_import("matplotlib.pyplot")
-
-  @utils.classproperty
-  @classmethod
   def scipy(cls):
     _try_import("scipy.io")
     _try_import("scipy.ndimage")

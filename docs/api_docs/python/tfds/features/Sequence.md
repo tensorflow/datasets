@@ -4,11 +4,8 @@
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="feature"/>
 <meta itemprop="property" content="shape"/>
-<meta itemprop="property" content="__getattr__"/>
 <meta itemprop="property" content="__getitem__"/>
-<meta itemprop="property" content="__getstate__"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="__setstate__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -22,10 +19,6 @@
 ## Class `Sequence`
 
 Composite `FeatureConnector` for a `dict` where each value is a list.
-
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-
 
 Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
@@ -50,16 +43,32 @@ Note that `SequenceDict` do not support features which are of type
 tfds.features.Sequence(tfds.features.Image(), length=NB_FRAME)
 ```
 
-or: `tfds.features.Sequence({ 'frame': tfds.features.Image(shape=(64, 64, 3))
-'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right']) },
-length=NB_FRAME)`
+or:
 
-During data generation: `yield { 'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
-'action': ['left', 'left', 'up', ...], }`
+```
+tfds.features.Sequence({
+    'frame': tfds.features.Image(shape=(64, 64, 3))
+    'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right'])
+}, length=NB_FRAME)
+```
 
-Tensor returned by `.as_dataset()`: `{ 'frame': tf.Tensor(shape=(NB_FRAME, 64,
-64, 3), dtype=tf.uint8), 'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
-}`
+During data generation:
+
+```
+yield {
+    'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
+    'action': ['left', 'left', 'up', ...],
+}
+```
+
+Tensor returned by `.as_dataset()`:
+
+```
+{
+    'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
+    'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
+}
+```
 
 At generation time, you can specify a list of features dict, a dict of list
 values or a stacked numpy array. The lists will automatically be distributed
@@ -99,17 +108,7 @@ The inner feature.
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
-
-<h3 id="__getattr__"><code>__getattr__</code></h3>
-
-``` python
-__getattr__(key)
-```
-
-Allow to access the underlying attributes directly.
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
 
@@ -119,23 +118,21 @@ __getitem__(key)
 
 Convenience method to access the underlying features.
 
-<h3 id="__getstate__"><code>__getstate__</code></h3>
-
-```python
-__getstate__()
-```
-
-<h3 id="__setstate__"><code>__setstate__</code></h3>
-
-```python
-__setstate__(state)
-```
-
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 ```python
-decode_example(tfexample_dict)
+decode_example(serialized_example)
 ```
+
+Decode the serialize examples.
+
+#### Args:
+
+*   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+
+#### Returns:
+
+*   <b>`example`</b>: Nested `dict` containing the decoded nested examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 

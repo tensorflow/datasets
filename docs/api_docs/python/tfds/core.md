@@ -14,19 +14,18 @@ Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/mast
 
 ## Classes
 
-[`class lazy_imports`](../tfds/core/lazy_imports.md): Lazy importer for heavy dependencies.
-
 [`class BeamBasedBuilder`](../tfds/core/BeamBasedBuilder.md): Beam based Builder.
 
 [`class BuilderConfig`](../tfds/core/BuilderConfig.md): Base class for `DatasetBuilder` data configuration.
 
 [`class DatasetBuilder`](../tfds/core/DatasetBuilder.md): Abstract base class for all datasets.
 
-[`class GeneratorBasedBuilder`](../tfds/core/GeneratorBasedBuilder.md): Base class for datasets with data generation based on dict generators.
-
 [`class DatasetInfo`](../tfds/core/DatasetInfo.md): Information about a dataset.
 
-[`class NamedSplit`](../tfds/core/NamedSplit.md): Descriptor corresponding to a named split (train, test, ...).
+[`class Experiment`](../tfds/core/Experiment.md): Experiments which can be
+enabled/disabled on a per version basis.
+
+[`class GeneratorBasedBuilder`](../tfds/core/GeneratorBasedBuilder.md): Base class for datasets with data generation based on dict generators.
 
 [`class Metadata`](../tfds/core/Metadata.md): Abstract base class for
 DatasetInfo metadata container.
@@ -34,6 +33,8 @@ DatasetInfo metadata container.
 [`class MetadataDict`](../tfds/core/MetadataDict.md): A
 <a href="../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a> object
 that acts as a `dict`.
+
+[`class NamedSplit`](../tfds/core/NamedSplit.md): Descriptor corresponding to a named split (train, test, ...).
 
 [`class SplitBase`](../tfds/core/SplitBase.md): Abstract base class for Split compositionality.
 
@@ -44,6 +45,9 @@ that acts as a `dict`.
 [`class SplitInfo`](../tfds/core/SplitInfo.md): Wraps `proto.SplitInfo` with an additional property.
 
 [`class Version`](../tfds/core/Version.md): Dataset version MAJOR.MINOR.PATCH.
+
+[`class lazy_imports`](../tfds/core/lazy_imports.md): Lazy importer for heavy
+dependencies.
 
 ## Functions
 

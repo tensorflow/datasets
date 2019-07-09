@@ -73,6 +73,12 @@ class UcMerced(tfds.core.GeneratorBasedBuilder):
   """Small 21 class remote sensing land use classification dataset."""
 
   VERSION = tfds.core.Version("0.0.1")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("0.0.1"),
+  ]
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -104,11 +110,16 @@ class UcMerced(tfds.core.GeneratorBasedBuilder):
     for label in tf.io.gfile.listdir(path):
       for filename in tf.io.gfile.glob(os.path.join(path, label, "*.tif")):
         image = _load_tif(filename)
-        yield {
+        filename = os.path.basename(filename)
+        record = {
             "image": image,
             "label": label,
-            "filename": os.path.basename(filename)
+            "filename": filename,
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield filename, record
+        else:
+          yield record
 
 
 def _load_tif(path):

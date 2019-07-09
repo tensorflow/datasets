@@ -43,8 +43,6 @@ Resource constructor.
 
 Returns `ExtractMethod` to use on resource. Cannot be None.
 
-
-
 ## Methods
 
 <h3 id="exists_locally"><code>exists_locally</code></h3>
@@ -58,6 +56,3 @@ exists_locally(
 ```
 
 Returns whether the resource exists locally, at `resource.path`.
-
-
-

@@ -18,8 +18,16 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import imagenet
+
+
+imagenet.Imagenet2012.PNG_IMAGES = ["n01440764_1.JPEG"]
+imagenet.Imagenet2012.CMYK_IMAGES = [
+    "n01440764_2.JPEG",
+    "n01440764_3.JPEG",
+]
 
 
 class Imagenet2012Test(testing.DatasetBuilderTestCase):
@@ -32,6 +40,10 @@ class Imagenet2012Test(testing.DatasetBuilderTestCase):
       "ILSVRC2012_img_train.tar",
       "ILSVRC2012_img_val.tar",
   ]
+
+
+class Imagenet2012S3(Imagenet2012Test):
+  VERSION = "4.0.0"
 
 
 if __name__ == "__main__":

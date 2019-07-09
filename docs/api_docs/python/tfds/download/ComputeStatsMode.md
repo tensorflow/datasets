@@ -4,7 +4,6 @@
 <meta itemprop="property" content="AUTO"/>
 <meta itemprop="property" content="FORCE"/>
 <meta itemprop="property" content="SKIP"/>
-<meta itemprop="property" content="__members__"/>
 </div>
 
 # tfds.download.ComputeStatsMode
@@ -28,11 +27,6 @@ Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree
 
 ## Class Members
 
-<h3 id="AUTO"><code>AUTO</code></h3>
-
-<h3 id="FORCE"><code>FORCE</code></h3>
-
-<h3 id="SKIP"><code>SKIP</code></h3>
-
-<h3 id="__members__"><code>__members__</code></h3>
-
+*   `AUTO` <a id="AUTO"></a>
+*   `FORCE` <a id="FORCE"></a>
+*   `SKIP` <a id="SKIP"></a>

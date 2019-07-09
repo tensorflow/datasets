@@ -19,6 +19,8 @@ from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTe
 from tensorflow_datasets.testing.test_case import TestCase
 from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
 from tensorflow_datasets.testing.test_utils import DummyMnist
+from tensorflow_datasets.testing.test_utils import DummyParser
+from tensorflow_datasets.testing.test_utils import DummySerializer
 from tensorflow_datasets.testing.test_utils import FeatureExpectationItem
 from tensorflow_datasets.testing.test_utils import FeatureExpectationsTestCase
 from tensorflow_datasets.testing.test_utils import make_tmp_dir

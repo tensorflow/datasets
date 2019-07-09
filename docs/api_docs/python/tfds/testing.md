@@ -31,15 +31,17 @@ manager to the TestCase if supported.
 
 ## Functions
 
+[`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary
+directory.
+
+[`mock_kaggle_api(...)`](../tfds/testing/mock_kaggle_api.md): Mock out the
+kaggle CLI.
+
+[`rm_tmp_dir(...)`](../tfds/testing/rm_tmp_dir.md): Rm temporary directory.
+
 [`run_in_graph_and_eager_modes(...)`](../tfds/testing/run_in_graph_and_eager_modes.md): Execute the decorated test in both graph mode and eager mode.
 
 [`test_main(...)`](../tfds/testing/test_main.md): Entrypoint for tests.
 
 [`tmp_dir(...)`](../tfds/testing/tmp_dir.md): Context manager for a temporary directory.
-
-[`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary directory.
-
-[`mock_kaggle_api(...)`](../tfds/testing/mock_kaggle_api.md): Mock out the kaggle CLI.
-
-[`rm_tmp_dir(...)`](../tfds/testing/rm_tmp_dir.md): Rm temporary directory.
 

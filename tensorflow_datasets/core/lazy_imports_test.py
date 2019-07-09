@@ -34,7 +34,6 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "os",
       "pretty_midi",
       "pydub",
-      "pyplot",
       "scipy",
       "skimage",
       "h5py"

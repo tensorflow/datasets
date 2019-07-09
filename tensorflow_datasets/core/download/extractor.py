@@ -87,6 +87,7 @@ class _Extractor(object):
                                uuid.uuid4().hex)
     try:
       for path, handle in iter_archive(from_path, method):
+        path = tf.compat.as_text(path)
         _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     except BaseException as err:
       msg = 'Error while extracting %s to %s : %s' % (from_path, to_path, err)

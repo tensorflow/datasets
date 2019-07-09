@@ -12,7 +12,7 @@ tfds.load(
     name,
     split=None,
     data_dir=None,
-    batch_size=1,
+    batch_size=None,
     in_memory=None,
     download=True,
     as_supervised=False,
@@ -26,14 +26,30 @@ tfds.load(
 
 Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
 
-<!-- Placeholder for "Used in" -->
+### Used in the guide:
+
+*   [Convert Your Existing Code to TensorFlow 2.0](https://www.tensorflow.org/beta/guide/migration_guide)
+
+### Used in the tutorials:
+
+*   [CycleGAN](https://www.tensorflow.org/beta/tutorials/generative/cyclegan)
+*   [Distributed training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/keras)
+*   [Multi-worker Training with Estimator](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_estimator)
+*   [Multi-worker Training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_keras)
+*   [Text classification of movie reviews with Keras and TensorFlow Hub](https://www.tensorflow.org/beta/tutorials/keras/basic_text_classification_with_tfhub)
+*   [Text classification with an RNN](https://www.tensorflow.org/beta/tutorials/text/text_classification_rnn)
+*   [Transfer Learning Using Pretrained ConvNets](https://www.tensorflow.org/beta/tutorials/images/transfer_learning)
+*   [Transformer model for language understanding](https://www.tensorflow.org/beta/tutorials/text/transformer)
 
 If `split=None` (the default), returns all splits for the dataset. Otherwise,
 returns the specified split.
 
-`load` is a convenience method that fetches the <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by
-string name, optionally calls `DatasetBuilder.download_and_prepare`
-(if `download=True`), and then calls `DatasetBuilder.as_dataset`.
+`load` is a convenience method that fetches the
+<a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
+by string name, optionally calls
+<a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>DatasetBuilder.download_and_prepare</code></a>
+(if `download=True`), and then calls
+<a href="../tfds/core/DatasetBuilder.md#as_dataset"><code>DatasetBuilder.as_dataset</code></a>.
 This is roughly equivalent to:
 
 ```
@@ -72,14 +88,13 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     <a href="../tfds/Split.md#TEST"><code>tfds.Split.TEST</code></a>).
 *   <b>`data_dir`</b>: `str` (optional), directory to read/write data. Defaults
     datasets are stored.
-*   <b>`batch_size`</b>: `int`, set to > 1 to get batches of examples. Note that
-    variable length features will be 0-padded. If `batch_size=-1`, will return
-    the full dataset as `tf.Tensor`s.
+*   <b>`batch_size`</b>: `int`, if set, add a batch dimension to examples. Note
+    that variable length features will be 0-padded. If `batch_size=-1`, will
+    return the full dataset as `tf.Tensor`s.
 *   <b>`in_memory`</b>: `bool`, if `True`, loads the dataset in memory which
     increases iteration speeds. Note that if `True` and the dataset has unknown
     dimensions, the features will be padded to the maximum size across the
-    dataset. By default (when `None`), will load the dataset in memory if the
-    size is <1GB and all feature dimensions are statically known.
+    dataset.
 *   <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is expected

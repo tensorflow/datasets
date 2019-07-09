@@ -59,6 +59,9 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
+    kwargs["supported_versions"] = [
+        tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
+    ]
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
@@ -125,4 +128,8 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, archive):
     for fname, fobj in archive:
-      yield {"image": fobj, "image/filename": fname}
+      record = {"image": fobj, "image/filename": fname}
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield fname, record
+      else:
+        yield record

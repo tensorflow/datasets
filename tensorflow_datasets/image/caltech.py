@@ -50,6 +50,11 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
   VERSION = tfds.core.Version("1.1.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -122,17 +127,22 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
           if _TRAIN_POINTS_PER_CLASS > len(fnames):
             raise ValueError("Fewer than {} ({}) points in class {}".format(
                 _TRAIN_POINTS_PER_CLASS, len(fnames), d))
-          train_fnames = np.random.choice(fnames, _TRAIN_POINTS_PER_CLASS)
+          train_fnames = np.random.choice(fnames, _TRAIN_POINTS_PER_CLASS,
+                                          replace=False)
           test_fnames = set(fnames).difference(train_fnames)
           fnames_to_emit = train_fnames if is_train_split else test_fnames
 
           for image_file in fnames_to_emit:
             if image_file.endswith(".jpg"):
               image_path = os.path.join(full_path, image_file)
-              yield {
+              record = {
                   "image": image_path,
                   "label": d.lower(),
                   "image/file_name": image_file,
               }
+              if self.version.implements(tfds.core.Experiment.S3):
+                yield "%s/%s" % (d, image_file), record
+              else:
+                yield record
     # Resets the seeds to their previous states.
     np.random.set_state(numpy_original_state)

@@ -35,7 +35,8 @@ _MNIST_TRAIN_LABELS_FILENAME = "train-labels-idx1-ubyte.gz"
 _MNIST_TEST_DATA_FILENAME = "t10k-images-idx3-ubyte.gz"
 _MNIST_TEST_LABELS_FILENAME = "t10k-labels-idx1-ubyte.gz"
 _MNIST_IMAGE_SIZE = 28
-_MNIST_IMAGE_SHAPE = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
+MNIST_IMAGE_SHAPE = (_MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
+MNIST_NUM_CLASSES = 10
 _TRAIN_EXAMPLES = 60000
 _TEST_EXAMPLES = 10000
 
@@ -81,11 +82,11 @@ _K_MNIST_CITATION = """\
 """
 
 _EMNIST_CITATION = """\
-@article{cohen_afshar_tapson_schaik_2017, 
-    title={EMNIST: Extending MNIST to handwritten letters}, 
-    DOI={10.1109/ijcnn.2017.7966217}, 
-    journal={2017 International Joint Conference on Neural Networks (IJCNN)}, 
-    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van}, 
+@article{cohen_afshar_tapson_schaik_2017,
+    title={EMNIST: Extending MNIST to handwritten letters},
+    DOI={10.1109/ijcnn.2017.7966217},
+    journal={2017 International Joint Conference on Neural Networks (IJCNN)},
+    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van},
     year={2017}
 }
 """
@@ -96,14 +97,19 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   URL = _MNIST_URL
 
   VERSION = tfds.core.Version("1.0.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=("The MNIST database of handwritten digits."),
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(num_classes=10),
+            "image": tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
+            "label": tfds.features.ClassLabel(num_classes=MNIST_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
         urls=[self.URL],
@@ -127,7 +133,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
+            num_shards=10,  # Ignored when using a version with S3 experiment.
             gen_kwargs=dict(
                 num_examples=_TRAIN_EXAMPLES,
                 data_path=mnist_files["train_data"],
@@ -135,7 +141,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
             )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
+            num_shards=1,  # Ignored when using a version with S3 experiment.
             gen_kwargs=dict(
                 num_examples=_TEST_EXAMPLES,
                 data_path=mnist_files["test_data"],
@@ -158,12 +164,13 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     labels = _extract_mnist_labels(label_path, num_examples)
     data = list(zip(images, labels))
 
-    # Data is shuffled automatically to distribute classes uniformly.
-    for image, label in data:
-      yield {
-          "image": image,
-          "label": label,
-      }
+    # Using index as key since data is always loaded in same order.
+    for index, (image, label) in enumerate(data):
+      record = {"image": image, "label": label}
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield index, record
+      else:
+        yield record
 
 
 class FashionMNIST(MNIST):
@@ -182,7 +189,7 @@ class FashionMNIST(MNIST):
                      "classes."),
         features=tfds.features.FeaturesDict({
             "image":
-                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
             "label":
                 tfds.features.ClassLabel(names=[
                     "T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
@@ -211,7 +218,7 @@ class KMNIST(MNIST):
                      "when creating Kuzushiji-MNIST."),
         features=tfds.features.FeaturesDict({
             "image":
-                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
             "label":
                 tfds.features.ClassLabel(names=[
                     "o", "ki", "su", "tsu", "na", "ha", "ma", "ya", "re", "wo"
@@ -237,6 +244,9 @@ class EMNISTConfig(tfds.core.BuilderConfig):
       test_examples: number of test examples
       **kwargs: keyword arguments forwarded to super.
     """
+    kwargs["supported_versions"] = [
+        tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+    ]
     super(EMNISTConfig, self).__init__(**kwargs)
     self.class_number = class_number
     self.train_examples = train_examples
@@ -246,7 +256,7 @@ class EMNISTConfig(tfds.core.BuilderConfig):
 class EMNIST(MNIST):
   """Emnist dataset."""
   URL = "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
-  VERSION = tfds.core.Version("1.0.1")
+  VERSION = None  # Configs.
 
   BUILDER_CONFIGS = [
       EMNISTConfig(
@@ -255,7 +265,8 @@ class EMNIST(MNIST):
           train_examples=697932,
           test_examples=116323,
           description="EMNIST ByClass",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
+
       ),
       EMNISTConfig(
           name="bymerge",
@@ -263,7 +274,7 @@ class EMNIST(MNIST):
           train_examples=697932,
           test_examples=116323,
           description="EMNIST ByMerge",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="balanced",
@@ -271,7 +282,7 @@ class EMNIST(MNIST):
           train_examples=112800,
           test_examples=18800,
           description="EMNIST Balanced",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="letters",
@@ -279,7 +290,7 @@ class EMNIST(MNIST):
           train_examples=88800,
           test_examples=14800,
           description="EMNIST Letters",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="digits",
@@ -287,7 +298,7 @@ class EMNIST(MNIST):
           train_examples=240000,
           test_examples=40000,
           description="EMNIST Digits",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
       EMNISTConfig(
           name="mnist",
@@ -295,7 +306,7 @@ class EMNIST(MNIST):
           train_examples=60000,
           test_examples=10000,
           description="EMNIST MNIST",
-          version="1.0.1",
+          version=tfds.core.Version("1.0.1"),
       ),
   ]
 
@@ -309,7 +320,7 @@ class EMNIST(MNIST):
             "matches the MNIST dataset."),
         features=tfds.features.FeaturesDict({
             "image":
-                tfds.features.Image(shape=_MNIST_IMAGE_SHAPE),
+                tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
             "label":
                 tfds.features.ClassLabel(
                     num_classes=self.builder_config.class_number),

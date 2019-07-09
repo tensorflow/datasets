@@ -21,6 +21,7 @@ from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import mnist
+import tensorflow_datasets.public_api as tfds
 
 
 # testing/mnist.py generates fake input data
@@ -43,15 +44,27 @@ class MNISTTest(testing.DatasetBuilderTestCase):
   }
 
 
+class MNISTTestS3(MNISTTest):
+  VERSION = "2.0.0"
+
+
 class FashionMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.FashionMNIST
+
+
+class FashionMNISTTestS3(FashionMNISTTest):
+  VERSION = "2.0.0"
 
 
 class KMNISTTest(MNISTTest):
   DATASET_CLASS = mnist.KMNIST
 
 
-mnist.EMNIST.BUILDER_CONFIGS.append(
+class KMNISTTestS3(KMNISTTest):
+  VERSION = "2.0.0"
+
+
+mnist.EMNIST.BUILDER_CONFIGS.extend([
     mnist.EMNISTConfig(
         name="test",
         class_number=200,
@@ -59,7 +72,12 @@ mnist.EMNIST.BUILDER_CONFIGS.append(
         test_examples=2,
         description="EMNIST test data config.",
         version="1.0.1",
-    ))
+        supported_versions=[
+            tfds.core.Version("2.0.0", experiments={
+                tfds.core.Experiment.S3: True}),
+        ],
+    ),
+])
 
 
 class EMNISTTest(testing.DatasetBuilderTestCase):
@@ -69,6 +87,10 @@ class EMNISTTest(testing.DatasetBuilderTestCase):
       "test": 2,
   }
   BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
+
+
+class EMNISTTestS3(EMNISTTest):
+  VERSION = "2.0.0"
 
 
 if __name__ == "__main__":
