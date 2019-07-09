@@ -37,6 +37,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.testing import ragged_test_util
 from tensorflow_datasets.testing import test_case
 
 
@@ -84,7 +85,7 @@ class FeatureExpectationItem(object):
     self.raise_msg = raise_msg
 
 
-class SubTestCase(test_case.TestCase):
+class SubTestCase(ragged_test_util.RaggedTensorTestCase, test_case.TestCase):
   """Adds subTest() context manager to the TestCase if supported.
 
   Note: To use this feature, make sure you call super() in setUpClass to
@@ -107,6 +108,18 @@ class SubTestCase(test_case.TestCase):
       with self.subTest(sub_test_str):
         yield
       self._sub_test_stack.pop()
+
+  def assertAllEqual(self, d1, d2):
+    """Same as assertAllEqual but with RaggedTensor support."""
+    # TODO(epot): This function as well as RaggedTensorTestCase could be
+    # removed once tf.test.TestCase support RaggedTensor
+    if any(isinstance(d, tf.RaggedTensor) for d in (d1, d2)):
+      d1, d2 = [  # Required to support list of np.array
+          d if isinstance(d, tf.RaggedTensor) else tf.ragged.constant(d)
+          for d in (d1, d2)
+      ]
+      return self.assertRaggedEqual(d1, d2)
+    return super(SubTestCase, self).assertAllEqual(d1, d2)
 
   def assertAllEqualNested(self, d1, d2):
     """Same as assertAllEqual but compatible with nested dict."""
