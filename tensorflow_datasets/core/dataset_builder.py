@@ -312,8 +312,10 @@ class DatasetBuilder(object):
                  split=None,
                  batch_size=None,
                  shuffle_files=None,
+                 decoders=None,
                  as_supervised=False,
                  in_memory=None):
+    # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
 
     Callers must pass arguments as keyword arguments.
@@ -330,6 +332,9 @@ class DatasetBuilder(object):
         `tf.data.Dataset`.
       shuffle_files: `bool`, whether to shuffle the input files.
         Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+      decoders: Nested dict of `Decoder` objects which allow to customize the
+        decoding. The structure should match the feature structure, but only
+        customized feature keys need to be present.
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
         will have a 2-tuple structure `(input, label)` according to
         `builder.info.supervised_keys`. If `False`, the default,
@@ -347,6 +352,7 @@ class DatasetBuilder(object):
       If `batch_size` is -1, will return feature dictionaries containing
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
+    # pylint: enable=line-too-long
     logging.info("Constructing tf.data.Dataset for split %s, from %s",
                  split, self._data_dir)
     if not tf.io.gfile.exists(self._data_dir):
@@ -365,14 +371,21 @@ class DatasetBuilder(object):
         self._build_single_dataset,
         shuffle_files=shuffle_files,
         batch_size=batch_size,
+        decoders=decoders,
         as_supervised=as_supervised,
         in_memory=in_memory,
     )
     datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
 
-  def _build_single_dataset(self, split, shuffle_files, batch_size,
-                            as_supervised, in_memory):
+  def _build_single_dataset(
+      self,
+      split,
+      shuffle_files,
+      batch_size,
+      decoders,
+      as_supervised,
+      in_memory):
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
@@ -424,13 +437,15 @@ class DatasetBuilder(object):
       # If using in_memory, escape all device contexts so we can load the data
       # with a local Session.
       with tf.device(None):
-        dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+        dataset = self._as_dataset(
+            split=split, shuffle_files=shuffle_files, decoders=decoders)
         # Use padded_batch so that features with unknown shape are supported.
         dataset = dataset.padded_batch(full_bs, dataset.output_shapes)
         dataset = tf.data.Dataset.from_tensor_slices(
             next(dataset_utils.as_numpy(dataset)))
     else:
-      dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+      dataset = self._as_dataset(
+          split=split, shuffle_files=shuffle_files, decoders=decoders)
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
@@ -567,7 +582,7 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _as_dataset(self, split, shuffle_files=None):
+  def _as_dataset(self, split, decoders=None, shuffle_files=None):
     """Constructs a `tf.data.Dataset`.
 
     This is the internal implementation to overwrite called when user calls
@@ -575,8 +590,10 @@ class DatasetBuilder(object):
     the `tf.data.Dataset` object.
 
     Args:
-      split (`tfds.Split`): which subset of the data to read.
-      shuffle_files (bool): whether to shuffle the input files. Optional,
+      split: `tfds.Split` which subset of the data to read.
+      decoders: Nested structure of `Decoder` object to customize the dataset
+        decoding.
+      shuffle_files: `bool`, whether to shuffle the input files. Optional,
         defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 
     Returns:
@@ -759,7 +776,12 @@ class FileAdapterBuilder(DatasetBuilder):
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
 
-  def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=False):
+  def _as_dataset(
+      self,
+      split=splits_lib.Split.TRAIN,
+      decoders=None,
+      shuffle_files=False):
+
     if self.version.implements(utils.Experiment.S3):
       dataset = self._tfrecords_reader.read(
           self.name, split, self.info.splits.values(), shuffle_files)
@@ -780,9 +802,11 @@ class FileAdapterBuilder(DatasetBuilder):
           dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
           shuffle_files=shuffle_files,
       )
+
+    decode_fn = functools.partial(
+        self.info.features.decode_example, decoders=decoders)
     dataset = dataset.map(
-        self.info.features.decode_example,
-        num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return dataset
 
   def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
