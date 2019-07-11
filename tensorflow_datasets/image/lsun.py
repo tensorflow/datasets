@@ -75,7 +75,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
           name=category,
           description="Images of category %s" % category,
           version=tfds.core.Version(
-              "0.1.1", {tfds.core.Experiment.S3: True}),
+              "0.1.1", {tfds.core.Experiment.S3: False}),
           supported_versions=[
               tfds.core.Version("3.0.0"),
               tfds.core.Version("2.0.0"),
