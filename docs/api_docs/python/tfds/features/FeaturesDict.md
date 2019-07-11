@@ -25,8 +25,8 @@
 
 Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
-Defined in
-[`core/features/features_dict.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -93,6 +93,9 @@ Will internally store the data as:
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ``` python
 __init__(feature_dict)
 ```
@@ -126,11 +129,17 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="__contains__"><code>__contains__</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ```python
 __contains__(k)
 ```
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
 
 ``` python
 __getitem__(key)
@@ -140,17 +149,26 @@ Return the feature associated with the key.
 
 <h3 id="__iter__"><code>__iter__</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ``` python
 __iter__()
 ```
 
 <h3 id="__len__"><code>__len__</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ``` python
 __len__()
 ```
 
 <h3 id="decode_example"><code>decode_example</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/top_level_feature.py>View
+source</a>
 
 ```python
 decode_example(serialized_example)
@@ -168,6 +186,9 @@ Decode the serialize examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ``` python
 encode_example(example_dict)
 ```
@@ -175,6 +196,9 @@ encode_example(example_dict)
 See base class for details.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
 
 ``` python
 get_serialized_info()
@@ -184,6 +208,9 @@ See base class for details.
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -192,17 +219,26 @@ See base class for details.
 
 <h3 id="items"><code>items</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ``` python
 items()
 ```
 
 <h3 id="keys"><code>keys</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ``` python
 keys()
 ```
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
 
 ``` python
 load_metadata(
@@ -215,6 +251,9 @@ See base class for details.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
+
 ``` python
 save_metadata(
     data_dir,
@@ -225,6 +264,9 @@ save_metadata(
 See base class for details.
 
 <h3 id="values"><code>values</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py>View
+source</a>
 
 ``` python
 values()

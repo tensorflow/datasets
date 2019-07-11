@@ -20,7 +20,8 @@
 
 Composite `FeatureConnector` for a `dict` where each value is a list.
 
-Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -76,6 +77,9 @@ into their corresponding `FeatureConnector`.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
+
 ```python
 __init__(
     feature,
@@ -112,6 +116,9 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
+
 ```python
 __getitem__(key)
 ```
@@ -119,6 +126,9 @@ __getitem__(key)
 Convenience method to access the underlying features.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/top_level_feature.py>View
+source</a>
 
 ```python
 decode_example(serialized_example)
@@ -136,11 +146,17 @@ Decode the serialize examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
+
 ```python
 encode_example(example_dict)
 ```
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
 
 ``` python
 get_serialized_info()
@@ -150,6 +166,9 @@ See base class for details.
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -157,6 +176,9 @@ get_tensor_info()
 See base class for details.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
 
 ```python
 load_metadata(
@@ -168,6 +190,9 @@ load_metadata(
 See base class for details.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
 
 ```python
 save_metadata(

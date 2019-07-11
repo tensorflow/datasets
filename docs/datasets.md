@@ -68,11 +68,13 @@ nightly package `tfds-nightly`.
     *   [`"kmnist"`](#kmnist)
     *   [`"lsun"`](#lsun)
     *   [`"mnist"`](#mnist)
+    *   [`"mnist_corrupted"`](#mnist_corrupted)
     *   [`"omniglot"`](#omniglot)
     *   [`"open_images_v4"`](#open_images_v4)
     *   [`"oxford_flowers102"`](#oxford_flowers102)
     *   [`"oxford_iiit_pet"`](#oxford_iiit_pet)
     *   [`"patch_camelyon"`](#patch_camelyon)
+    *   [`"pet_finder"`](#pet_finder)
     *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
     *   [`"resisc45"`](#resisc45)
     *   [`"rock_paper_scissors"`](#rock_paper_scissors)
@@ -2421,7 +2423,7 @@ reasoning each question requires.
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'objects': Sequence({'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'size': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'material': TensorInfo(shape=(None,), dtype=tf.int64), 'color': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'objects': Sequence({'size': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'material': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'color': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -2487,7 +2489,7 @@ Note:
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool)}),
 })
 ```
 
@@ -2730,7 +2732,7 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'calc_type': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32), 'calc_distribution': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8)}),
+    'abnormalities': Sequence({'calc_distribution': TensorInfo(shape=(None,), dtype=tf.int64), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'calc_type': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'id': TensorInfo(shape=(None,), dtype=tf.int32), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64)}),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
@@ -2743,7 +2745,7 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32), 'mass_shape': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_margins': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'abnormalities': Sequence({'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_margins': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_shape': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64)}),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
@@ -4730,7 +4732,7 @@ the Kitti homepage.
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/file_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'alpha': TensorInfo(shape=(None,), dtype=tf.float32), 'type': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'rotation_y': TensorInfo(shape=(None,), dtype=tf.float32), 'location': TensorInfo(shape=(None, 3), dtype=tf.float32), 'occluded': TensorInfo(shape=(None,), dtype=tf.int64), 'truncated': TensorInfo(shape=(None,), dtype=tf.float32), 'dimensions': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'objects': Sequence({'truncated': TensorInfo(shape=(None,), dtype=tf.float32), 'rotation_y': TensorInfo(shape=(None,), dtype=tf.float32), 'occluded': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'dimensions': TensorInfo(shape=(None, 3), dtype=tf.float32), 'alpha': TensorInfo(shape=(None,), dtype=tf.float32), 'location': TensorInfo(shape=(None, 3), dtype=tf.float32), 'type': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5047,6 +5049,245 @@ TEST       |     10,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="mnist_corrupted" />
+  <meta itemprop="description" content="MNISTCorrupted is a dataset generated by adding 15 corruptions to the test
+images in the MNIST dataset. This dataset wraps the static, corrupted MNIST
+test images uploaded by the original authors" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#mnist_corrupted" />
+  <meta itemprop="sameAs" content="https://github.com/google-research/mnist-c" />
+</div>
+
+### `"mnist_corrupted"`
+
+MNISTCorrupted is a dataset generated by adding 15 corruptions to the test
+images in the MNIST dataset. This dataset wraps the static, corrupted MNIST test
+images uploaded by the original authors
+
+*   URL:
+    [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+*   `DatasetBuilder`:
+    [`tfds.image.mnist_corrupted.MNISTCorrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist_corrupted.py)
+
+`mnist_corrupted` is configured with
+`tfds.image.mnist_corrupted.MNISTCorruptedConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"identity"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: identity
+
+*   `"shot_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    shot_noise
+
+*   `"impulse_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    impulse_noise
+
+*   `"glass_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    glass_blur
+
+*   `"motion_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    motion_blur
+
+*   `"shear"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: shear
+
+*   `"scale"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: scale
+
+*   `"rotate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: rotate
+
+*   `"brightness"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    brightness
+
+*   `"translate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: translate
+
+*   `"stripe"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: stripe
+
+*   `"fog"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: fog
+
+*   `"spatter"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: spatter
+
+*   `"dotted_line"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    dotted_line
+
+*   `"zigzag"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: zigzag
+
+*   `"canny_edges"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    canny_edges
+
+#### `"mnist_corrupted/identity"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/shot_noise"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/impulse_noise"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/glass_blur"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/motion_blur"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/shear"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/scale"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/rotate"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/brightness"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/translate"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/stripe"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/fog"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/spatter"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/dotted_line"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/zigzag"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/canny_edges"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+#### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+#### Citation
+
+```
+@article{mu2019mnist,
+  title={MNIST-C: A Robustness Benchmark for Computer Vision},
+  author={Mu, Norman and Gilmer, Justin},
+  journal={arXiv preprint arXiv:1906.02337},
+  year={2019}
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -5166,11 +5407,11 @@ and has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5178,11 +5419,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5190,11 +5431,11 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'label': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
 })
 ```
 
@@ -5365,14 +5606,15 @@ lighting. All images have an associated ground truth annotation of breed.
 * Size: `801.24 MiB`
 
 #### Features
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
+    'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -5465,6 +5707,89 @@ TEST       | 32,768
   year         = 2018,
   doi          = {10.1007/978-3-030-00934-2_24},
   url          = {https://doi.org/10.1007/978-3-030-00934-2_24}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="pet_finder" />
+  <meta itemprop="description" content="Dataset with images from 5 classes (see config name for information on the specific class)" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#pet_finder" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/petfinder_dataset/" />
+</div>
+
+### `"pet_finder"`
+
+Dataset with images from 5 classes (see config name for information on the
+specific class)
+
+*   URL:
+    [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
+*   `DatasetBuilder`:
+    [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
+*   Version: `v1.0.0`
+*   Size: `1.94 GiB`
+
+#### Features
+
+```python
+FeaturesDict({
+    'PetID': Text(shape=(), dtype=tf.string, encoder=None),
+    'attributes': FeaturesDict({
+        'Age': Tensor(shape=(), dtype=tf.int64),
+        'Breed1': Tensor(shape=(), dtype=tf.int64),
+        'Breed2': Tensor(shape=(), dtype=tf.int64),
+        'Color1': Tensor(shape=(), dtype=tf.int64),
+        'Color2': Tensor(shape=(), dtype=tf.int64),
+        'Color3': Tensor(shape=(), dtype=tf.int64),
+        'Dewormed': Tensor(shape=(), dtype=tf.int64),
+        'Fee': Tensor(shape=(), dtype=tf.int64),
+        'FurLength': Tensor(shape=(), dtype=tf.int64),
+        'Gender': Tensor(shape=(), dtype=tf.int64),
+        'Health': Tensor(shape=(), dtype=tf.int64),
+        'MaturitySize': Tensor(shape=(), dtype=tf.int64),
+        'Quantity': Tensor(shape=(), dtype=tf.int64),
+        'State': Tensor(shape=(), dtype=tf.int64),
+        'Sterilized': Tensor(shape=(), dtype=tf.int64),
+        'Type': Tensor(shape=(), dtype=tf.int64),
+        'Vaccinated': Tensor(shape=(), dtype=tf.int64),
+        'VideoAmt': Tensor(shape=(), dtype=tf.int64),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 72,776
+TRAIN | 58,311
+TEST  | 14,465
+
+#### Urls
+
+*   [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'attributes', u'label')`
+
+#### Citation
+
+```
+@ONLINE {kaggle-petfinder-adoption-prediction,
+    author = "Kaggle and PetFinder.my",
+    title  = "PetFinder.my Adoption Prediction",
+    month  = "april",
+    year   = "2019",
+    url    = "https://www.kaggle.com/c/petfinder-adoption-prediction/data/"
 }
 ```
 
@@ -6190,7 +6515,7 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
     'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
     'labels_no_difficult': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'objects': Sequence({'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool)}),
+    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool)}),
 })
 ```
 
@@ -6647,11 +6972,9 @@ TEST  | 564
 *   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `(u'sentence', u'label')`
 
 #### Citation
-
 ```
 @inproceedings{rahman2012resolving,
   title={Resolving complex cases of definite pronouns: the winograd schema challenge},
@@ -7753,16 +8076,15 @@ FeaturesDict({
         'type': Text(shape=(), dtype=tf.string, encoder=None),
         'value': Text(shape=(), dtype=tf.string, encoder=None),
     }),
-    'entity_pages': Sequence({'doc_source': TensorInfo(shape=(None,), dtype=tf.string), 'file_name': TensorInfo(shape=(None,), dtype=tf.string), 'title': TensorInfo(shape=(None,), dtype=tf.string), 'wiki_context': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'entity_pages': Sequence({'file_name': TensorInfo(shape=(None,), dtype=tf.string), 'doc_source': TensorInfo(shape=(None,), dtype=tf.string), 'title': TensorInfo(shape=(None,), dtype=tf.string), 'wiki_context': TensorInfo(shape=(None,), dtype=tf.string)}),
     'question': Text(shape=(), dtype=tf.string, encoder=None),
     'question_id': Text(shape=(), dtype=tf.string, encoder=None),
     'question_source': Text(shape=(), dtype=tf.string, encoder=None),
-    'search_results': Sequence({'search_context': TensorInfo(shape=(None,), dtype=tf.string), 'url': TensorInfo(shape=(None,), dtype=tf.string), 'file_name': TensorInfo(shape=(None,), dtype=tf.string), 'rank': TensorInfo(shape=(None,), dtype=tf.int32), 'title': TensorInfo(shape=(None,), dtype=tf.string), 'description': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'search_results': Sequence({'rank': TensorInfo(shape=(None,), dtype=tf.int32), 'search_context': TensorInfo(shape=(None,), dtype=tf.string), 'title': TensorInfo(shape=(None,), dtype=tf.string), 'url': TensorInfo(shape=(None,), dtype=tf.string), 'file_name': TensorInfo(shape=(None,), dtype=tf.string), 'description': TensorInfo(shape=(None,), dtype=tf.string)}),
 })
 ```
 
 #### Statistics
-
 None computed
 
 #### Urls
@@ -7770,11 +8092,9 @@ None computed
 *   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `None`
 
 #### Citation
-
 ```
 @article{2017arXivtriviaqa,
        author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},
@@ -12242,7 +12562,6 @@ ALL   | 3,476,729
 *   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `(u'en', u'sv')`
 
 #### Citation
@@ -12890,7 +13209,6 @@ Translation({
 ```
 
 #### Statistics
-
 None computed
 
 #### Urls

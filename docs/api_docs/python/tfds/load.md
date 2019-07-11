@@ -24,7 +24,8 @@ tfds.load(
 )
 ```
 
-Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py>View
+source</a>
 
 ### Used in the guide:
 

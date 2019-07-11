@@ -8,7 +8,8 @@
 <a href="../tfds/file_adapter/FileFormatAdapter.md"><code>tfds.file_adapter.FileFormatAdapter</code></a>s
 for GeneratorBasedBuilder.
 
-Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
