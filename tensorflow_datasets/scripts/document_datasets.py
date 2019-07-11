@@ -311,29 +311,9 @@ def make_module_to_builder_dict(datasets=None):
   return module_to_builder
 
 
-def _pprint_features_dict(features_dict, indent=0, add_prefix=True):
-  """Pretty-print tfds.features.FeaturesDict."""
-  first_last_indent_str = " " * indent
-  indent_str = " " * (indent + 4)
-  first_line = "%s%s({" % (
-      first_last_indent_str if add_prefix else "",
-      type(features_dict).__name__,
-  )
-  lines = [first_line]
-  for k in sorted(list(features_dict.keys())):
-    v = features_dict[k]
-    if isinstance(v, tfds.features.FeaturesDict):
-      v_str = _pprint_features_dict(v, indent + 4, False)
-    else:
-      v_str = str(v)
-    lines.append("%s'%s': %s," % (indent_str, k, v_str))
-  lines.append("%s})" % first_last_indent_str)
-  return "\n".join(lines)
-
-
 def make_feature_information(info):
   """Make feature information table."""
-  return FEATURE_BLOCK % _pprint_features_dict(info.features)
+  return FEATURE_BLOCK % info.features
 
 
 def make_citation(citation):
