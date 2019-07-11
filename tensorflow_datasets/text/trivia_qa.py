@@ -79,7 +79,8 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
   It containss over 650K question-answer-evidence triples.
   """
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
 
   def _info(self):
     return tfds.core.DatasetInfo(

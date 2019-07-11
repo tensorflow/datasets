@@ -103,7 +103,8 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk data set for comparing high and low resource languages."""
 
   BUILDER_CONFIGS = [
-      TedHrlrConfig(language_pair=pair, version="0.0.1")
+      TedHrlrConfig(language_pair=pair, version=tfds.core.Version(
+          "0.0.1", experiments={tfds.core.Experiment.S3: False}))
       for pair in _VALID_LANGUAGE_PAIRS
   ]
 

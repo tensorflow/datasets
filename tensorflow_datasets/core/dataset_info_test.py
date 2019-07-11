@@ -56,10 +56,10 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
   def _generate_examples(self, range_):
     self.info.metadata["some_key"] = 123
 
-    for _ in range_:
+    for i in range_:
       height = np.random.randint(5, high=10)
       width = np.random.randint(5, high=10)
-      yield {
+      yield i, {
           "im":
               np.random.randint(
                   0, 255, size=(height, width, 3), dtype=np.uint8)
@@ -110,7 +110,7 @@ class DatasetInfoTest(testing.TestCase):
     self.assertTrue("test" in split_dict)
 
     # Assert that this is computed correctly.
-    self.assertEqual(70000, info.splits.total_num_examples)
+    self.assertEqual(40, info.splits.total_num_examples)
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
@@ -292,7 +292,7 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual("won't be updated", info.description)
 
     # These are dynamically computed, so will be updated.
-    self.assertEqual(70000, info.splits.total_num_examples)
+    self.assertEqual(40, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
 
 

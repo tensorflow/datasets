@@ -122,11 +122,11 @@ def _process_image_file(fobj, session, filename):
 class Sun397(tfds.core.GeneratorBasedBuilder):
   """Sun397 Scene Recognition Benchmark."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.1.0"),
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
   ]
   # Version history:
   # 3.0.0: S3 with new hashing function (different shuffle).

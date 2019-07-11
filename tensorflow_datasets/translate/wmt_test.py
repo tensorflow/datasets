@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.translate import wmt
 
 
@@ -37,7 +38,8 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
             "train": ["paracrawl_v3"],
             "validation": ["newstest2009", "newstest2010"],
         },
-        version="0.0.1",
+        version=tfds.core.Version(
+            "0.0.1", experiments={tfds.core.Experiment.S3: False}),
     )
     wmt.WmtTranslate.BUILDER_CONFIGS = [config]
 

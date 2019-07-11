@@ -74,13 +74,11 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version=tfds.core.Version("0.1.1"),
+          version=tfds.core.Version(
+              "0.1.1", {tfds.core.Experiment.S3: True}),
           supported_versions=[
-              tfds.core.Version("3.0.0", experiments={
-                  tfds.core.Experiment.S3: True}),
-              tfds.core.Version("2.0.0", experiments={
-                  tfds.core.Experiment.S3: True}),
-              tfds.core.Version("0.1.1"),
+              tfds.core.Version("3.0.0"),
+              tfds.core.Version("2.0.0"),
           ],
       ) for category in _CATEGORIES
   ]

@@ -21,7 +21,6 @@ from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import mnist
-import tensorflow_datasets.public_api as tfds
 
 
 # testing/mnist.py generates fake input data
@@ -71,11 +70,6 @@ mnist.EMNIST.BUILDER_CONFIGS.extend([
         train_examples=10,
         test_examples=2,
         description="EMNIST test data config.",
-        version="1.0.1",
-        supported_versions=[
-            tfds.core.Version("2.0.0", experiments={
-                tfds.core.Experiment.S3: True}),
-        ],
     ),
 ])
 

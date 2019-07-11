@@ -75,7 +75,11 @@ class FloresConfig(tfds.core.BuilderConfig):
         "Translation dataset from %s to %s, uses encoder %s.") % (
             language_pair[0], language_pair[1], encoder_name)
     super(FloresConfig, self).__init__(
-        name=name, description=description, **kwargs)
+        name=name,
+        description=description,
+        version=tfds.core.Version(
+            "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -97,11 +101,9 @@ class Flores(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       FloresConfig(
           language_pair=("ne", "en"),
-          version="0.0.3",
       ),
       FloresConfig(
           language_pair=("si", "en"),
-          version="0.0.3",
       ),
   ]
 

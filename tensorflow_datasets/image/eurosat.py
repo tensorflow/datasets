@@ -72,14 +72,17 @@ class EurosatConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    kwargs['supported_versions'] = [
-        tfds.core.Version('2.0.0', experiments={tfds.core.Experiment.S3: True}),
-        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
-    ]
     # Version history:
     # 2.0.0: S3 with new hashing function (different shuffle).
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    super(EurosatConfig, self).__init__(**kwargs)
+    super(EurosatConfig, self).__init__(
+        version=tfds.core.Version(
+            '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version('2.0.0'),
+            tfds.core.Version('1.0.0'),
+        ],
+        **kwargs)
     self.selection = selection
     self.download_url = download_url
     self.subdir = subdir
@@ -94,14 +97,12 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
           name='rgb',
           download_url='http://madm.dfki.de/files/sentinel/EuroSAT.zip',
           subdir='2750',
-          version='0.0.1',
           description='Sentinel-2 RGB channels'),
       EurosatConfig(
           selection='all',
           name='all',
           download_url='http://madm.dfki.de/files/sentinel/EuroSATallBands.zip',
           subdir='ds/images/remote_sensing/otherDatasets/sentinel_2/tif',
-          version='0.0.1',
           description='13 Sentinel-2 channels'),
   ]
 

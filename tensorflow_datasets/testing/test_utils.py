@@ -366,27 +366,21 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
     return [
         splits.SplitGenerator(
             name=splits.Split.TRAIN,
-            num_shards=2,
             gen_kwargs={"range_": range(20)}),
         splits.SplitGenerator(
             name=splits.Split.TEST,
-            num_shards=1,
             gen_kwargs={"range_": range(20, 30)}),
     ]
 
   def _generate_examples(self, range_):
     for i in range_:
-      yield {"x": i}
+      yield i, {"x": i}
 
 
 class DummyMnist(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
   VERSION = utils.Version("1.0.0")
-
-  def __init__(self, *args, **kwargs):
-    self._num_shards = kwargs.pop("num_shards", 10)
-    super(DummyMnist, self).__init__(*args, **kwargs)
 
   def _info(self):
     return dataset_info.DatasetInfo(
@@ -401,17 +395,15 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
     return [
         splits.SplitGenerator(
             name=splits.Split.TRAIN,
-            num_shards=self._num_shards,
             gen_kwargs=dict()),
         splits.SplitGenerator(
             name=splits.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict()),
     ]
 
   def _generate_examples(self):
     for i in range(20):
-      yield {
+      yield i, {
           "image": np.ones((28, 28, 1), dtype=np.uint8),
           "label": i % 10,
       }

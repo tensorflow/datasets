@@ -67,10 +67,9 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version(
-      "1.0.0", experiments={tfds.core.Experiment.S3: True})
+  VERSION = tfds.core.Version("1.0.0")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("2.0.0"),
   ]
   # Version history:
   # 2.0.0: S3 with new hashing function (different shuffle).

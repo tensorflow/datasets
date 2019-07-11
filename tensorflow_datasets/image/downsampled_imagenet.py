@@ -80,12 +80,11 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
           description=(
               "A dataset consisting of Train and Validation images of " +
               config_name + " resolution."),
-          version="1.0.0",
+          version=tfds.core.Version(
+              "1.0.0", experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version("2.0.0", experiments={
-                  tfds.core.Experiment.S3: True}),
-              tfds.core.Version("1.0.0", experiments={
-                  tfds.core.Experiment.S3: True}),
+              tfds.core.Version("2.0.0"),
+              tfds.core.Version("1.0.0"),
           ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS

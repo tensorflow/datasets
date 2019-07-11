@@ -102,7 +102,8 @@ def _make_builder_configs():
     config_list.append(
         MNISTCorruptedConfig(
             name=corruption,
-            version='0.0.1',
+            version=tfds.core.Version(
+                '0.0.1', experiments={tfds.core.Experiment.S3: False}),
             description='Corruption method: ' + corruption,
             corruption_type=corruption,
         ))

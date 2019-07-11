@@ -48,11 +48,11 @@ _DATA_URL = "https://www.robots.ox.ac.uk/~vgg/data/dtd/download/dtd-r1.0.1.tar.g
 class Dtd(tfds.core.GeneratorBasedBuilder):
   """Describable Textures Dataset (DTD)."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
   ]
   # Version history:
   # 3.0.0: S3 with new hashing function (different shuffle).
