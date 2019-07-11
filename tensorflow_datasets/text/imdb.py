@@ -66,6 +66,9 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
     super(IMDBReviewsConfig, self).__init__(
         version=tfds.core.Version(
             "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -118,8 +121,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, archive):
-    for ex in self._generate_examples(archive,
-                                      os.path.join("aclImdb", "train")):
+    for ex in self._generate_examples(
+        archive, os.path.join("aclImdb", "train"), keys=False):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
@@ -149,7 +152,7 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
                         "labeled": False}),
     ]
 
-  def _generate_examples(self, archive, directory, labeled=True):
+  def _generate_examples(self, archive, directory, labeled=True, keys=True):
     """Generate IMDB examples."""
     # For labeled examples, extract the label from the path.
     reg_path = "(?P<label>neg|pos)" if labeled else "unsup"
@@ -161,7 +164,11 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
         continue
       text = imdb_f.read().strip()
       label = res.groupdict()["label"] if labeled else -1
-      yield {
+      record = {
           "text": text,
           "label": label,
       }
+      if keys and self.version.implements(tfds.core.Experiment.S3):
+        yield path, record
+      else:
+        yield record
