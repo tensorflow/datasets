@@ -22,11 +22,11 @@ from __future__ import print_function
 
 import six
 import tensorflow as tf
+import tensorflow_datasets as tfds
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import top_level_feature
-from tensorflow_datasets.scripts.document_datasets import pprint_features_dict
 
 
 class FeaturesDict(top_level_feature.TopLevelFeature):
@@ -139,7 +139,13 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   def __repr__(self):
     """Display the feature dictionary."""
-    return pprint_features_dict(self._feature_dict, types='FeaturesDict')
+    lines = ['{}({{'.format(type(self).__name__)]
+    for key, feature in sorted(list(self._feature_dict.items())):
+      all_sub_lines = '\'{}\': {},'.format(key, feature)
+      lines.extend('    ' + l for l in
+                   all_sub_lines.split('\n'))
+    lines.append('})')
+    return '\n'.join(lines)
 
   def get_tensor_info(self):
     """See base class for details."""
@@ -232,3 +238,26 @@ def to_feature(value):
     return FeaturesDict(value)
   else:
     raise ValueError('Feature not supported: {}'.format(value))
+
+
+def pprint_features_dict(features_dict, indent=0, add_prefix=True):
+  """Pretty-print tfds.features.FeaturesDict."""
+  first_last_indent_str = " " * indent
+  indent_str = " " * (indent + 4)
+  first_line = "%s%s({" % (
+      first_last_indent_str if add_prefix else "",
+      type(features_dict).__name__,
+  )
+  lines = [first_line]
+  for k in sorted(list(features_dict.keys())):
+    v = features_dict[k]
+    if isinstance(v, tfds.features.FeaturesDict) or (
+        isinstance(v, tfds.features.Sequence) and
+        isinstance(v, tfds.features.FeaturesDict)
+    ):
+      v_str = pprint_features_dict(v, indent + 4, False)
+    else:
+      v_str = str(v)
+    lines.append("%s'%s': %s," % (indent_str, k, v_str))
+  lines.append("%s})" % first_last_indent_str)
+  return "\n".join(lines)
