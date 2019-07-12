@@ -27,7 +27,8 @@ from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image.clevr import CLEVR
-from tensorflow_datasets.image.coco import Coco2014
+from tensorflow_datasets.image.coco import Coco
+from tensorflow_datasets.image.coco2014_legacy import Coco2014
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLarge
 from tensorflow_datasets.image.cycle_gan import CycleGAN
