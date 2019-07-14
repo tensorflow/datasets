@@ -54,7 +54,7 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase):
             testing.FeatureExpectationItem(
                 value=img,
                 expected=img,
-            ),
+),  
             # File path
             testing.FeatureExpectationItem(
                 value=img_file_path,
@@ -69,7 +69,7 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase):
             testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128, 3), dtype=np.uint32),
                 raise_cls=ValueError,
-                raise_msg='should be uint8',
+                raise_msg='dtype should be',
             ),
             # Invalid number of dimensions
             testing.FeatureExpectationItem(
