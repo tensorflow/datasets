@@ -36,7 +36,7 @@ class SplitInfo(object):
 
   @property
   def num_examples(self):
-    return self.statistics.num_examples
+    return int(self.statistics.num_examples)
 
   def __repr__(self):
     num_examples = self.num_examples or "unknown"
