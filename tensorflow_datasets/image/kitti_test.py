@@ -26,11 +26,14 @@ from tensorflow_datasets.image import kitti
 class KittiTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = kitti.Kitti
   SPLITS = {
-      "train": 5,
+      "train": 6,
+      "validation": 2,
+      "test": 2,
   }
   DL_EXTRACT_RESULT = {
       "images": "data_object_image_2.zip",
       "annotations": "data_object_label_2.zip",
+      "devkit": "devkit_object.zip",
   }
 
 
