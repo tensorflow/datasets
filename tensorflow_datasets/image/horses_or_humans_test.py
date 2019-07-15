@@ -37,7 +37,7 @@ class HorsesOrHumansTest(tfds_test.DatasetBuilderTestCase):
 
 
 class HorsesOrHumansS3Test(HorsesOrHumansTest):
-  VERSION = '2.0.0'
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

@@ -57,6 +57,7 @@
 <meta itemprop="property" content="assertMultiLineEqual"/>
 <meta itemprop="property" content="assertNDArrayNear"/>
 <meta itemprop="property" content="assertNear"/>
+<meta itemprop="property" content="assertNestedListAlmostEqual"/>
 <meta itemprop="property" content="assertNoCommonElements"/>
 <meta itemprop="property" content="assertNotAllClose"/>
 <meta itemprop="property" content="assertNotAlmostEqual"/>
@@ -72,6 +73,8 @@
 <meta itemprop="property" content="assertNotStartsWith"/>
 <meta itemprop="property" content="assertProtoEquals"/>
 <meta itemprop="property" content="assertProtoEqualsVersion"/>
+<meta itemprop="property" content="assertRaggedAlmostEqual"/>
+<meta itemprop="property" content="assertRaggedEqual"/>
 <meta itemprop="property" content="assertRaises"/>
 <meta itemprop="property" content="assertRaisesOpError"/>
 <meta itemprop="property" content="assertRaisesRegex"/>
@@ -104,6 +107,7 @@
 <meta itemprop="property" content="debug"/>
 <meta itemprop="property" content="defaultTestResult"/>
 <meta itemprop="property" content="doCleanups"/>
+<meta itemprop="property" content="eval_to_list"/>
 <meta itemprop="property" content="evaluate"/>
 <meta itemprop="property" content="fail"/>
 <meta itemprop="property" content="failIf"/>
@@ -154,7 +158,8 @@ Inherit this class to test your DatasetBuilder class.
 
 Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)
 
-Defined in [`testing/dataset_builder_testing.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -356,22 +361,22 @@ one of the arguments is of type float16.
 
 <h3 id="assertAllEqual"><code>assertAllEqual</code></h3>
 
-``` python
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
+
+```python
 assertAllEqual(
-    *args,
-    **kwds
+    d1,
+    d2
 )
 ```
 
-Asserts that two numpy arrays or Tensors have the same values.
-
-#### Args:
-
-* <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
-* <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
-* <b>`msg`</b>: Optional message to report on failure.
+Same as assertAllEqual but with RaggedTensor support.
 
 <h3 id="assertAllEqualNested"><code>assertAllEqualNested</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
 
 ```python
 assertAllEqualNested(
@@ -1143,6 +1148,20 @@ if not.
 * <b>`err`</b>: A float value.
 * <b>`msg`</b>: An optional string message to append to the failure message.
 
+<h3 id="assertNestedListAlmostEqual"><code>assertNestedListAlmostEqual</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+source</a>
+
+```python
+assertNestedListAlmostEqual(
+    a,
+    b,
+    places=7,
+    context='value'
+)
+```
+
 <h3 id="assertNoCommonElements"><code>assertNoCommonElements</code></h3>
 
 ``` python
@@ -1375,6 +1394,33 @@ assertProtoEqualsVersion(
 )
 ```
 
+<h3 id="assertRaggedAlmostEqual"><code>assertRaggedAlmostEqual</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+source</a>
+
+```python
+assertRaggedAlmostEqual(
+    a,
+    b,
+    places=7
+)
+```
+
+<h3 id="assertRaggedEqual"><code>assertRaggedEqual</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+source</a>
+
+```python
+assertRaggedEqual(
+    a,
+    b
+)
+```
+
+Asserts that two potentially ragged tensors are equal.
+
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
 ``` python
@@ -1483,6 +1529,9 @@ A context manager if callable_obj is None. Otherwise, None.
 self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py>View
+source</a>
 
 ``` python
 assertRaisesWithPredicateMatch(
@@ -2115,6 +2164,15 @@ doCleanups()
 
 Execute all cleanup functions. Normally called for you after tearDown.
 
+<h3 id="eval_to_list"><code>eval_to_list</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+source</a>
+
+```python
+eval_to_list(tensor)
+```
+
 <h3 id="evaluate"><code>evaluate</code></h3>
 
 ``` python
@@ -2341,11 +2399,17 @@ the graph building and execution code in a test case.
 
 <h3 id="setUp"><code>setUp</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
+
 ``` python
 setUp()
 ```
 
 <h3 id="setUpClass"><code>setUpClass</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
 
 ``` python
 @classmethod
@@ -2391,6 +2455,9 @@ Return a context manager that will run the enclosed subtest.
 
 <h3 id="tearDown"><code>tearDown</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
+
 ``` python
 tearDown()
 ```
@@ -2405,11 +2472,17 @@ Hook method for deconstructing the class fixture after running all tests in the 
 
 <h3 id="test_baseclass"><code>test_baseclass</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
+
 ``` python
 test_baseclass()
 ```
 
 <h3 id="test_download_and_prepare_as_dataset"><code>test_download_and_prepare_as_dataset</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
 
 ``` python
 test_download_and_prepare_as_dataset(
@@ -2422,11 +2495,17 @@ Run the decorated test method.
 
 <h3 id="test_info"><code>test_info</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
+
 ``` python
 test_info()
 ```
 
 <h3 id="test_registered"><code>test_registered</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
 
 ``` python
 test_registered()

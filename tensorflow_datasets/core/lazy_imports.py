@@ -56,6 +56,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def h5py(cls):
+    return _try_import("h5py")
+
+  @utils.classproperty
+  @classmethod
   def pydub(cls):
     return _try_import("pydub")
 
@@ -71,7 +76,12 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def PIL_Image(cls):   # pylint: disable=invalid-name
+  def pandas(cls):
+    return _try_import("pandas")
+
+  @utils.classproperty
+  @classmethod
+  def PIL_Image(cls):  # pylint: disable=invalid-name
     # TiffImagePlugin need to be activated explicitly on some systems
     # https://github.com/python-pillow/Pillow/blob/5.4.x/src/PIL/Image.py#L407
     _try_import("PIL.TiffImagePlugin")
@@ -96,12 +106,6 @@ class LazyImporter(object):
     _try_import("skimage.filters")
     _try_import("skimage.external.tifffile")
     return _try_import("skimage")
-
-  @utils.classproperty
-  @classmethod
-  def h5py(cls):
-    return _try_import("h5py")
-
 
   @utils.classproperty
   @classmethod

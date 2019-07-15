@@ -36,7 +36,7 @@ tf.compat.v1.enable_eager_execution()
 
 class DummyTFRecordBuilder(dataset_builder.GeneratorBasedBuilder):
 
-  VERSION = utils.Version("0.0.0")
+  VERSION = utils.Version("0.0.0", experiments={utils.Experiment.S3: False})
 
   def _split_generators(self, dl_manager):
     return [

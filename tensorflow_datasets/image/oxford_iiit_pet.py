@@ -46,14 +46,16 @@ _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.1.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.1.0"),
+      tfds.core.Version("2.0.0"),
       tfds.core.Version("1.2.0"),
-      tfds.core.Version("1.1.0"),
   ]
   # Version history:
+  # 3.0.0: S3 with new hashing function (different shuffle).
   # 2.1.0, 1.2.0: addition of the segmentation_mask feature.
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 

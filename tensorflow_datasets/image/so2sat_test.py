@@ -36,7 +36,7 @@ class So2satTest(testing.DatasetBuilderTestCase):
 
 
 class So2satS3Test(So2satTest):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

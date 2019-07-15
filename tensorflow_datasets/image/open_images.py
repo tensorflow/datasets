@@ -150,8 +150,12 @@ class OpenImagesV4Config(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forward to super.
     """
     kwargs['supported_versions'] = [
-        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
+        tfds.core.Version('2.0.0'),
+        tfds.core.Version('1.0.0'),
     ]
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(OpenImagesV4Config, self).__init__(**kwargs)
     self._target_pixels = target_pixels
 
@@ -166,16 +170,19 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       OpenImagesV4Config(
           name='original',
-          version=tfds.core.Version('0.2.0'),
+          version=tfds.core.Version(
+              '0.2.0', experiments={tfds.core.Experiment.S3: False}),
           description='Images at their original resolution and quality.'),
       OpenImagesV4Config(
           name='300k',
-          version=tfds.core.Version('0.2.1'),
+          version=tfds.core.Version(
+              '0.2.1', experiments={tfds.core.Experiment.S3: False}),
           description='Images have roughly 300,000 pixels, at 72 JPEG quality.',
           target_pixels=300000),
       OpenImagesV4Config(
           name='200k',
-          version=tfds.core.Version('0.2.1'),
+          version=tfds.core.Version(
+              '0.2.1', experiments={tfds.core.Experiment.S3: False}),
           description='Images have roughly 200,000 pixels, at 72 JPEG quality.',
           target_pixels=200000)
   ]

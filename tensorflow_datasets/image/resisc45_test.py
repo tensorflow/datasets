@@ -31,7 +31,7 @@ class Resisc45Test(testing.DatasetBuilderTestCase):
 
 
 class Resisc45S3Test(Resisc45Test):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

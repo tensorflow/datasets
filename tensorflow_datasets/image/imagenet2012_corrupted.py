@@ -80,9 +80,11 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
     self.severity = severity
 
 
-_VERSION = tfds.core.Version('0.0.1')
+_VERSION = tfds.core.Version('0.0.1',
+                             experiments={tfds.core.Experiment.S3: False})
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version('3.0.0'),  # Will be made canonical in near future.
+    # Will be made canonical in near future.
+    tfds.core.Version('3.0.0'),
 ]
 # Version history:
 # 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
@@ -103,13 +105,13 @@ def _make_builder_configs():
   for each_corruption in TYPE_LIST:
     for each_severity in range(1, 6):
       name_str = each_corruption + '_' + str(each_severity)
-      version_str = '0.0.1'
       description_str = 'corruption type = ' + each_corruption + ', severity = '
       description_str += str(each_severity)
       config_list.append(
           Imagenet2012CorruptedConfig(
               name=name_str,
-              version=version_str,
+              version=_VERSION,
+              supported_versions=_SUPPORTED_VERSIONS,
               description=description_str,
               corruption_type=each_corruption,
               severity=each_severity,

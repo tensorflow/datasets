@@ -39,7 +39,6 @@ import collections
 import json
 import os
 import posixpath
-import pprint
 import tempfile
 
 from absl import logging
@@ -72,7 +71,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     total_num_examples={total_num_examples},
     splits={splits},
     supervised_keys={supervised_keys},
-    citation='{citation}',
+    citation={citation},
     redistribution_info={redistribution_info},
 )
 """
@@ -408,19 +407,13 @@ class DatasetInfo(object):
       gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
-  def __str__(self):
-    splits_pprint = "{\n %s\n    }" % (
-        pprint.pformat(
-            {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
-            indent=8, width=1)[1:-1])
-    features_dict = self.features
-    features_pprint = "%s({\n %s\n    }" % (
-        type(features_dict).__name__,
-        pprint.pformat({
-            k: features_dict[k] for k in sorted(list(features_dict.keys()))
-        }, indent=8, width=1)[1:-1])
-    citation_pprint = '"""\n%s\n    """' % "\n".join(
-        [u" " * 8 + line for line in self.citation.split(u"\n")])
+  def __repr__(self):
+    splits_pprint = _indent("\n".join(["{"] + [
+        "    '{}': {},".format(k, split.num_examples)
+        for k, split in sorted(self.splits.items())
+    ] + ["}"]))
+    features_pprint = _indent(repr(self.features))
+    citation_pprint = _indent('"""{}"""'.format(self.citation.strip()))
     return INFO_STR.format(
         name=self.name,
         version=self.version,
@@ -431,7 +424,14 @@ class DatasetInfo(object):
         citation=citation_pprint,
         urls=self.urls,
         supervised_keys=self.supervised_keys,
-        redistribution_info=self.redistribution_info)
+        # Proto add a \n that we strip.
+        redistribution_info=str(self.redistribution_info).strip())
+
+
+def _indent(content):
+  """Add indentation to all lines except the first."""
+  lines = content.split("\n")
+  return "\n".join([lines[0]] + ["    " + l for l in lines[1:]])
 
 #
 #

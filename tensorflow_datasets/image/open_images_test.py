@@ -47,7 +47,7 @@ class OpenImagesV42012Test(testing.DatasetBuilderTestCase):
 
 
 class OpenImagesV42012S3Test(OpenImagesV42012Test):
-  VERSION = '1.0.0'
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

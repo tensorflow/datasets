@@ -37,19 +37,31 @@ _ITEMS = [
     (9, b' dog.'),
 ]
 
-_ORDERED_ITEMS = [
-    b' dog.',
-    b'over',
-    b'brown',
-    b'The',
+_ORDERED_ITEMS_SPLIT1 = [
     b' fox ',
-    b' the ',
-    b'lazy',
+    b'The',
+    b'over',
     b'quick ',
+    b'lazy',
     b'jumps',
+    b' the ',
+    b' dog.',
+    b'brown',
 ]
 
-_TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS)
+_ORDERED_ITEMS_SPLIT2 = [
+    b' dog.',
+    b'quick ',
+    b'jumps',
+    b' fox ',
+    b' the ',
+    b'brown',
+    b'over',
+    b'lazy',
+    b'The',
+]
+
+_TOTAL_SIZE = sum(len(rec) for rec in _ORDERED_ITEMS_SPLIT1)
 
 
 class GetShardTest(testing.TestCase):
@@ -72,27 +84,32 @@ class GetShardTest(testing.TestCase):
 
 class ShuffleTest(testing.TestCase):
 
-  def test_all_mem(self):
-    shuffler = shuffle.Shuffler(self.get_temp_dir())
+  def _test_items(self, salt, expected_order):
+    shuffler = shuffle.Shuffler(self.get_temp_dir(), salt)
     for key, item in _ITEMS:
       shuffler.add(key, item)
     self.assertEqual(shuffler.size, _TOTAL_SIZE)
     records = list(iter(shuffler))
-    self.assertEqual(records, _ORDERED_ITEMS)
+    self.assertEqual(records, expected_order)
+
+  def test_all_mem(self):
+    self._test_items('split1', _ORDERED_ITEMS_SPLIT1)
+    self._test_items('split2', _ORDERED_ITEMS_SPLIT2)
 
   @mock.patch.object(shuffle, 'MAX_MEM_BUFFER_SIZE', 0)
   def test_disk(self):
-    self.test_all_mem()
+    self._test_items('split1', _ORDERED_ITEMS_SPLIT1)
+    self._test_items('split2', _ORDERED_ITEMS_SPLIT2)
 
   def test_nonbytes(self):
-    shuffler = shuffle.Shuffler(self.get_temp_dir())
+    shuffler = shuffle.Shuffler(self.get_temp_dir(), 'split1')
     with self.assertRaisesWithPredicateMatch(AssertionError, 'Only bytes'):
       shuffler.add(1, u'a')
     with self.assertRaisesWithPredicateMatch(AssertionError, 'Only bytes'):
       shuffler.add(1, 123)
 
   def test_duplicate_key(self):
-    shuffler = shuffle.Shuffler(self.get_temp_dir())
+    shuffler = shuffle.Shuffler(self.get_temp_dir(), 'split1')
     shuffler.add(1, b'a')
     shuffler.add(2, b'b')
     shuffler.add(1, b'c')

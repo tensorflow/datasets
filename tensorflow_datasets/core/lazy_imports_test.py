@@ -29,14 +29,15 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
   @parameterized.parameters(
       "cv2",
+      "h5py",
       "matplotlib",
       "mwparserfromhell",
       "os",
+      "pandas",
       "pretty_midi",
       "pydub",
       "scipy",
-      "skimage",
-      "h5py"
+      "skimage"
   )
   def test_import(self, module_name):
     # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)

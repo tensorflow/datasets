@@ -79,7 +79,10 @@ class GlueConfig(tfds.core.BuilderConfig):
         of the label and processing it to the form required by the label feature
       **kwargs: keyword arguments forwarded to super.
     """
-    super(GlueConfig, self).__init__(**kwargs)
+    super(GlueConfig, self).__init__(
+        version=tfds.core.Version(
+            "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.text_features = text_features
     self.label_column = label_column
     self.label_classes = label_classes
@@ -96,7 +99,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       GlueConfig(
           name="cola",
-          version="0.0.2",
           description="""\
             The Corpus of Linguistic Acceptability consists of English
             acceptability judgments drawn from books and journal articles on
@@ -117,7 +119,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           url="https://nyu-mll.github.io/CoLA/"),
       GlueConfig(
           name="sst2",
-          version="0.0.2",
           description="""\
             The Stanford Sentiment Treebank consists of sentences from movie reviews and
             human annotations of their sentiment. The task is to predict the sentiment of a
@@ -139,7 +140,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           url="https://nlp.stanford.edu/sentiment/index.html"),
       GlueConfig(
           name="mrpc",
-          version="0.0.2",
           description="""\
             The Microsoft Research Paraphrase Corpus (Dolan & Brockett, 2005) is a corpus of
             sentence pairs automatically extracted from online news sources, with human annotations
@@ -163,7 +163,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       ),
       GlueConfig(
           name="qqp",
-          version="0.0.2",
           description="""\
             The Quora Question Pairs2 dataset is a collection of question pairs from the
             community question-answering website Quora. The task is to determine whether a
@@ -188,7 +187,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       ),
       GlueConfig(
           name="stsb",
-          version="0.0.2",
           description="""\
             The Semantic Textual Similarity Benchmark (Cer et al., 2017) is a collection of
             sentence pairs drawn from news headlines, video and image captions, and natural
@@ -212,7 +210,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           process_label=np.float32),
       GlueConfig(
           name="mnli",
-          version="0.0.2",
           description="""\
             The Multi-Genre Natural Language Inference Corpusn is a crowdsourced
             collection of sentence pairs with textual entailment annotations. Given a premise sentence
@@ -258,7 +255,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           train_shards=2),
       GlueConfig(
           name="qnli",
-          version="0.0.2",
           description="""\
             The Stanford Question Answering Dataset is a question-answering
             dataset consisting of question-paragraph pairs, where one of the sentences in the paragraph (drawn
@@ -287,7 +283,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           url="https://rajpurkar.github.io/SQuAD-explorer/"),
       GlueConfig(
           name="rte",
-          version="0.0.2",
           description="""\
             The Recognizing Textual Entailment (RTE) datasets come from a series of annual textual
             entailment challenges. We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim
@@ -339,7 +334,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       ),
       GlueConfig(
           name="wnli",
-          version="0.0.2",
           description="""\
             The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task
             in which a system must read a sentence with a pronoun and select the referent of that pronoun from

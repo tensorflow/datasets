@@ -21,9 +21,8 @@ TextEncoder backed by a list of tokens.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
-
-
-Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
 
 ### Used in the tutorials:
 
@@ -33,6 +32,9 @@ Tokenization splits on (and drops) non-alphanumeric characters with
 regex "\W+".
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
 
 ``` python
 __init__(
@@ -78,17 +80,26 @@ use
 
 <h3 id="decode"><code>decode</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
+
 ``` python
 decode(ids)
 ```
 
 <h3 id="encode"><code>encode</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
+
 ``` python
 encode(s)
 ```
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
 
 ``` python
 @classmethod
@@ -99,6 +110,9 @@ load_from_file(
 ```
 
 <h3 id="save_to_file"><code>save_to_file</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
 
 ``` python
 save_to_file(filename_prefix)

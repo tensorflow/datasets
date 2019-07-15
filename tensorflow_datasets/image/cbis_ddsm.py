@@ -121,7 +121,8 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
     kwargs['supported_versions'] = [
-        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
+        tfds.core.Version('2.0.0'),
+        tfds.core.Version('1.0.0'),
     ]
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
@@ -134,7 +135,8 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       CuratedBreastImagingDDSMConfig(
           name='patches',
-          version=tfds.core.Version('0.2.0'),
+          version=tfds.core.Version(
+              '0.2.0', experiments={tfds.core.Experiment.S3: False}),
           description=('Patches containing both calsification and mass cases, '
                        'plus pathces with no abnormalities. Designed as a '
                        'traditional 5-class classification task.'),
@@ -142,12 +144,14 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
           patch_size=(224, 224)),
       CuratedBreastImagingDDSMConfig(
           name='original-calc',
-          version=tfds.core.Version('0.1.0'),
+          version=tfds.core.Version(
+              '0.1.0', experiments={tfds.core.Experiment.S3: False}),
           description=('Original images of the calcification cases compressed '
                        'in lossless PNG.')),
       CuratedBreastImagingDDSMConfig(
           name='original-mass',
-          version=tfds.core.Version('0.1.0'),
+          version=tfds.core.Version(
+              '0.1.0', experiments={tfds.core.Experiment.S3: False}),
           description=('Original images of the mass cases compressed in '
                        'lossless PNG.')),
   ]

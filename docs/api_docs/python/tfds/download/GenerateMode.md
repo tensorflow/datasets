@@ -17,9 +17,8 @@
 * Class `tfds.GenerateMode`
 * Class `tfds.download.GenerateMode`
 
-
-
-Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 

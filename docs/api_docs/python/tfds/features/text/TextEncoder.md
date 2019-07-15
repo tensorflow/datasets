@@ -14,7 +14,8 @@
 
 Abstract base class for converting between text and integers.
 
-Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -40,6 +41,9 @@ Size of the vocabulary. Decode produces ints [1, vocab_size).
 
 <h3 id="decode"><code>decode</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
+
 ``` python
 decode(ids)
 ```
@@ -48,6 +52,9 @@ Decodes a list of integers into text.
 
 <h3 id="encode"><code>encode</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
+
 ``` python
 encode(s)
 ```
@@ -55,6 +62,9 @@ encode(s)
 Encodes text into a list of integers.
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
 
 ``` python
 @classmethod
@@ -67,6 +77,9 @@ load_from_file(
 Load from file. Inverse of save_to_file.
 
 <h3 id="save_to_file"><code>save_to_file</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+source</a>
 
 ``` python
 save_to_file(filename_prefix)

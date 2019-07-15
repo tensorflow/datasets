@@ -42,7 +42,6 @@ REQUIRED_PKGS = [
     'absl-py',
     'attrs',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
-    'siphash',
     'future',
     'numpy',
     'promise',
@@ -58,7 +57,6 @@ REQUIRED_PKGS = [
 
 TESTS_REQUIRE = [
     'apache-beam',
-    # 'csiphash',  # https://github.com/tensorflow/datasets/issues/737
     'jupyter',
     'pytest',
     'pytest-xdist',
@@ -115,6 +113,7 @@ DATASET_EXTRAS = {
     'groove': ['pretty_midi', 'pydub'],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'patch_camelyon': ['h5py'],
+    'pet_finder': ['pandas'],
     'svhn': ['scipy'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
@@ -125,8 +124,6 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
-    # https://github.com/tensorflow/datasets/issues/737
-    # 'siphash': ['csiphash'],
     'tensorflow': ['tensorflow>=1.13.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.13.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,

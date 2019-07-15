@@ -9,7 +9,8 @@
 
 Lazy importer for heavy dependencies.
 
-Defined in [`core/lazy_imports.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 

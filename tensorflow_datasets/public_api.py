@@ -21,6 +21,7 @@ tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
 from tensorflow_datasets.core import download
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter as file_adapter
 from tensorflow_datasets.core import units
@@ -39,6 +40,7 @@ from tensorflow_datasets.version import __version__
 __all__ = [
     "core",
     "as_numpy",
+    "decode",
     "download",
     "features",
     "file_adapter",
