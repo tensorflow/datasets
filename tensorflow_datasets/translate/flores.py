@@ -86,7 +86,7 @@ class FloresConfig(tfds.core.BuilderConfig):
     # Validate language pair.
     assert "en" in language_pair, (
         "Config language pair must contain `en`, got: %s",
-        self.builder_config.language_pair)
+        language_pair)
     source, target = language_pair
     non_en = source if target == "en" else target
     assert non_en in ["ne", "si"], (
