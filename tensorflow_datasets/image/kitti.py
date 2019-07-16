@@ -72,7 +72,7 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version("3.0.0")
+  VERSION = tfds.core.Version("3.1.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.0.0"),
   ]
@@ -289,10 +289,10 @@ def _build_splits(devkit):
       _VALIDATION_SPLIT_PERCENT_VIDEOS * len(video_to_image) // 100)
   test_videos = set(
       np.random.choice(
-          list(video_to_image.keys()), num_test_videos, replace=False))
+          sorted(list(video_to_image.keys())), num_test_videos, replace=False))
   validation_videos = set(
       np.random.choice(
-          list(set(video_to_image.keys()) - set(test_videos)),
+          sorted(list(set(video_to_image.keys()) - set(test_videos))),
           num_validation_videos,
           replace=False))
   test_images = []
