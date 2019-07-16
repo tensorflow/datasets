@@ -29,6 +29,8 @@ import tensorflow_datasets.public_api as tfds
 # Shared constants
 _CIFAR_IMAGE_SIZE = 32
 _CIFAR_IMAGE_SHAPE = (_CIFAR_IMAGE_SIZE, _CIFAR_IMAGE_SIZE, 3)
+_TRAIN_EXAMPLES = 50000
+_TEST_EXAMPLES = 10000
 
 
 _CITATION = """\
@@ -108,11 +110,17 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             num_shards=10,  # Ignored when using a version with S3 experiment.
-            gen_kwargs={"filepaths": gen_filenames(cifar_info.train_files)}),
+            gen_kwargs=dict(
+                num_examples=_TRAIN_EXAMPLES,
+                filepaths=gen_filenames(cifar_info.train_files),
+            )),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=1,  # Ignored when using a version with S3 experiment.
-            gen_kwargs={"filepaths": gen_filenames(cifar_info.test_files)}),
+            gen_kwargs=dict(
+                num_examples=_TEST_EXAMPLES,
+                filepaths=gen_filenames(cifar_info.test_files),
+            )),
     ]
 
   def _generate_examples(self, filepaths):
