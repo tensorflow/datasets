@@ -109,6 +109,22 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
+  def  test_image_dtype(self):
+      img = randint(256 , size=(128,128,3) ,dtype=np.uint8)
+      
+      # Image with statically defined dtype   
+      self.assertFeature(
+        feature=features_lib.Image( dtype=tf.uint16),
+        shape=(None, None, 3),
+        dtype=tf.uint8,
+        tests=[
+            testing.FeatureExpectationItem(
+                value = img , 
+                raise_cls = ValueError , 
+                raise_msg = 'dtype should be'
+            ),
+        ],
+    )
 
 if __name__ == '__main__':
   testing.test_main()
