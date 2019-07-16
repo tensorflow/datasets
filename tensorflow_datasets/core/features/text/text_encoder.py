@@ -330,16 +330,16 @@ class TokenTextEncoder(TextEncoder):
     }
     if self._user_defined_tokenizer is not None:
       self._tokenizer.save_to_file(filename)
-      kwargs["tokenizer_file_prefix"] = filename
+      kwargs["has_tokenizer"] = True
     self._write_lines_to_file(filename, self._vocab_list, kwargs)
 
   @classmethod
   def load_from_file(cls, filename_prefix):
     filename = cls._filename(filename_prefix)
     vocab_lines, kwargs = cls._read_lines_from_file(filename)
-    tokenizer_file = kwargs.pop("tokenizer_file_prefix", None)
-    if tokenizer_file:
-      kwargs["tokenizer"] = Tokenizer.load_from_file(tokenizer_file)
+    has_tokenizer = kwargs.pop("has_tokenizer", False)
+    if has_tokenizer:
+      kwargs["tokenizer"] = Tokenizer.load_from_file(filename)
     return cls(vocab_list=vocab_lines, **kwargs)
 
 
