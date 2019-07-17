@@ -319,6 +319,46 @@ class DatasetBuilder(object):
     """Constructs a `tf.data.Dataset`.
 
     Callers must pass arguments as keyword arguments.
+    
+    The output types vary depending on the parameters. Examples:
+    
+    ```python
+    ds_builder = tfds.text.imdb.IMDBReviews()
+    ds_builder.download_and_prepare()
+    
+    # Default parameters
+    ds1 = ds_builder.as_dataset()
+    assert isinstance(ds1, dict)
+    print(ds1.keys())  # ==> ['test', 'train', 'unsupervised']
+    
+    assert isinstance(ds1[tfds.Split.TEST], tf.data.Dataset)
+    # Each dataset (test, train, unsup.) consists of dictionaries
+    # {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
+    #  'text': <tf.Tensor: .. dtype=string, numpy=b"I've watched the movie ..">}
+    # {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
+    #  'text': <tf.Tensor: .. dtype=string, numpy=b'If you love Japanese ..'>}
+    
+    # Only (feature, label) tuples specified in this particular DatasetBuilder
+    ds2 = ds_builder.as_dataset(as_supervised=True)
+    assert isinstance(ds2, dict)
+    print(ds2.keys())  # ==> ['test', 'train', 'unsupervised']
+    
+    assert isinstance(ds2[tfds.Split.TEST], tf.data.Dataset)
+    # Each dataset (test, train, unsup.) consists of tuples (text, label)
+    # (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
+    #  <tf.Tensor: ... dtype=int64, numpy=1>)
+    # (<tf.Tensor: ... dtype=string, numpy=b"If you love Japanese ..">,
+    #  <tf.Tensor: ... dtype=int64, numpy=1>)
+    
+    # Same as above plus requesting a particular split
+    ds3 = ds_builder.as_dataset(as_supervised=True, split=tfds.Split.TEST)
+    assert isinstance(ds3, tf.data.Dataset)
+    # The dataset consists of tuples (text, label)
+    # (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
+    #  <tf.Tensor: ... dtype=int64, numpy=1>)
+    # (<tf.Tensor: ... dtype=string, numpy=b"If you love Japanese ..">, 
+    #  <tf.Tensor: ... dtype=int64, numpy=1>)
+    ```
 
     Args:
       split: `tfds.core.SplitBase`, which subset(s) of the data to read. If None
