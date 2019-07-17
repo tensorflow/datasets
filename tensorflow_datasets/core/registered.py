@@ -250,7 +250,9 @@ def load(name,
       features.
     decoders: Nested dict of `Decoder` objects which allow to customize the
       decoding. The structure should match the feature structure, but only
-      customized feature keys need to be present.
+      customized feature keys need to be present. See
+      [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+      for more info.
     with_info: `bool`, if True, tfds.load will return the tuple
       (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
       with the builder.

@@ -374,7 +374,9 @@ class DatasetBuilder(object):
         Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
-        customized feature keys need to be present.
+        customized feature keys need to be present. See
+        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+        for more info.
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
         will have a 2-tuple structure `(input, label)` according to
         `builder.info.supervised_keys`. If `False`, the default,

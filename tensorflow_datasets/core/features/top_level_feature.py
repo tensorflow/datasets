@@ -54,7 +54,9 @@ class TopLevelFeature(feature_lib.FeatureConnector):
       serialized_example: Nested `dict` of `tf.Tensor`
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
-        customized feature keys need to be present.
+        customized feature keys need to be present. See
+        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+        for more info.
 
     Returns:
       example: Nested `dict` containing the decoded nested examples.
