@@ -127,13 +127,14 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     }
 
     try:
-      mnist_files = dl_manager.download_and_extract(
+      download_files = dl_manager.download(
           {k: urllib.parse.urljoin(self.URL,
                                    v) for k, v in filenames.items()})
-    except Exception:  # pylint: disable=broad-except
-      mnist_files = dl_manager.download_and_extract(
+    except tfds.core.download.downloader.DownloadError:
+      download_files = dl_manager.download(
           {k: urllib.parse.urljoin(_MNIST_URL_FALLBACK_,
                                    v) for k, v in filenames.items()})
+    mnist_files = dl_manager.extract(download_files)
 
     # MNIST provides TRAIN and TEST splits, not a VALIDATION split, so we only
     # write the TRAIN and TEST splits to disk.
