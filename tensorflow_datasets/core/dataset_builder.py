@@ -327,11 +327,11 @@ class DatasetBuilder(object):
     ds_builder.download_and_prepare()
     
     # Default parameters
-    ds1 = ds_builder.as_dataset()
-    assert isinstance(ds1, dict)
-    print(ds1.keys())  # ==> ['test', 'train', 'unsupervised']
+    ds_all_dict = ds_builder.as_dataset()
+    assert isinstance(ds_all_dict, dict)
+    print(ds_all_dict.keys())  # ==> ['test', 'train', 'unsupervised']
     
-    assert isinstance(ds1[tfds.Split.TEST], tf.data.Dataset)
+    assert isinstance(ds_all_dict[tfds.Split.TEST], tf.data.Dataset)
     # Each dataset (test, train, unsup.) consists of dictionaries
     # {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
     #  'text': <tf.Tensor: .. dtype=string, numpy=b"I've watched the movie ..">}
@@ -339,11 +339,11 @@ class DatasetBuilder(object):
     #  'text': <tf.Tensor: .. dtype=string, numpy=b'If you love Japanese ..'>}
     
     # Only (feature, label) tuples specified in this particular DatasetBuilder
-    ds2 = ds_builder.as_dataset(as_supervised=True)
-    assert isinstance(ds2, dict)
-    print(ds2.keys())  # ==> ['test', 'train', 'unsupervised']
+    ds_all_supervised = ds_builder.as_dataset(as_supervised=True)
+    assert isinstance(ds_all_supervised, dict)
+    print(ds_all_supervised.keys())  # ==> ['test', 'train', 'unsupervised']
     
-    assert isinstance(ds2[tfds.Split.TEST], tf.data.Dataset)
+    assert isinstance(ds_all_supervised[tfds.Split.TEST], tf.data.Dataset)
     # Each dataset (test, train, unsup.) consists of tuples (text, label)
     # (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
     #  <tf.Tensor: ... dtype=int64, numpy=1>)
@@ -351,8 +351,8 @@ class DatasetBuilder(object):
     #  <tf.Tensor: ... dtype=int64, numpy=1>)
     
     # Same as above plus requesting a particular split
-    ds3 = ds_builder.as_dataset(as_supervised=True, split=tfds.Split.TEST)
-    assert isinstance(ds3, tf.data.Dataset)
+    ds_test_supervised = ds_builder.as_dataset(as_supervised=True, split=tfds.Split.TEST)
+    assert isinstance(ds_test_supervised, tf.data.Dataset)
     # The dataset consists of tuples (text, label)
     # (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
     #  <tf.Tensor: ... dtype=int64, numpy=1>)
