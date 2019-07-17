@@ -54,7 +54,7 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
           "https://tensorflow.org/install.\n\n")
     raise
 
-  tf_version = distutils.version.LooseVersion(tf.__version__)
+  tf_version = distutils.version.LooseVersion(tf.compat.v1.__version__)
   v_1_13 = distutils.version.LooseVersion("1.13.0")
   if tf_version < v_1_13:
     raise ImportError(
@@ -62,7 +62,7 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
         "version >= {required}; Detected an installation of version {present}. "
         "Please upgrade TensorFlow to proceed.".format(
             required="1.13.0",
-            present=tf.__version__))
+            present=tf_version))
   _patch_tf(tf)
 
 
@@ -74,7 +74,7 @@ def _patch_tf(tf):
 
   v_1_13 = distutils.version.LooseVersion("1.13.0")
   v_2 = distutils.version.LooseVersion("2.0.0")
-  tf_version = distutils.version.LooseVersion(tf.__version__)
+  tf_version = distutils.version.LooseVersion(tf.compat.v1.__version__)
   if v_1_13 <= tf_version < v_2:
     TF_PATCH = "tf1_13"
     _patch_for_tf1_13(tf)
