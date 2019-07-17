@@ -43,6 +43,42 @@ _MRPC_DEV_IDS = "https://firebasestorage.googleapis.com/v0/b/mtl-sentence-repres
 _MRPC_TRAIN = "https://dl.fbaipublicfiles.com/senteval/senteval_data/msr_paraphrase_train.txt"
 _MRPC_TEST = "https://dl.fbaipublicfiles.com/senteval/senteval_data/msr_paraphrase_test.txt"
 
+_MNLI_BASE_KWARGS = dict(
+    text_features={
+        "premise": "sentence1",
+        "hypothesis": "sentence2",
+    },
+    label_classes=["entailment", "neutral", "contradiction"],
+    label_column="gold_label",
+    data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FMNLI.zip?alt=media&token=50329ea1-e339-40e2-809c-10c40afff3ce",
+    data_dir="MNLI",
+    citation="""\
+      @InProceedings{N18-1101,
+        author = "Williams, Adina
+                  and Nangia, Nikita
+                  and Bowman, Samuel",
+        title = "A Broad-Coverage Challenge Corpus for
+                 Sentence Understanding through Inference",
+        booktitle = "Proceedings of the 2018 Conference of
+                     the North American Chapter of the
+                     Association for Computational Linguistics:
+                     Human Language Technologies, Volume 1 (Long
+                     Papers)",
+        year = "2018",
+        publisher = "Association for Computational Linguistics",
+        pages = "1112--1122",
+        location = "New Orleans, Louisiana",
+        url = "http://aclweb.org/anthology/N18-1101"
+      }
+      @article{bowman2015large,
+        title={A large annotated corpus for learning natural language inference},
+        author={Bowman, Samuel R and Angeli, Gabor and Potts, Christopher and Manning, Christopher D},
+        journal={arXiv preprint arXiv:1508.05326},
+        year={2015}
+      }""",
+    url="http://www.nyu.edu/projects/bowman/multinli/",
+    train_shards=2)
+
 
 class GlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for GLUE."""
@@ -219,40 +255,19 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             We use the standard test set, for which we obtained private labels from the authors, and evaluate
             on both the matched (in-domain) and mismatched (cross-domain) section. We also use and recommend
             the SNLI corpus as 550k examples of auxiliary training data.""",
-          text_features={
-              "premise": "sentence1",
-              "hypothesis": "sentence2",
-          },
-          label_classes=["entailment", "neutral", "contradiction"],
-          label_column="gold_label",
-          data_url="https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FMNLI.zip?alt=media&token=50329ea1-e339-40e2-809c-10c40afff3ce",
-          data_dir="MNLI",
-          citation="""\
-            @InProceedings{N18-1101,
-              author = "Williams, Adina
-                        and Nangia, Nikita
-                        and Bowman, Samuel",
-              title = "A Broad-Coverage Challenge Corpus for
-                       Sentence Understanding through Inference",
-              booktitle = "Proceedings of the 2018 Conference of
-                           the North American Chapter of the
-                           Association for Computational Linguistics:
-                           Human Language Technologies, Volume 1 (Long
-                           Papers)",
-              year = "2018",
-              publisher = "Association for Computational Linguistics",
-              pages = "1112--1122",
-              location = "New Orleans, Louisiana",
-              url = "http://aclweb.org/anthology/N18-1101"
-            }
-            @article{bowman2015large,
-              title={A large annotated corpus for learning natural language inference},
-              author={Bowman, Samuel R and Angeli, Gabor and Potts, Christopher and Manning, Christopher D},
-              journal={arXiv preprint arXiv:1508.05326},
-              year={2015}
-            }""",
-          url="http://www.nyu.edu/projects/bowman/multinli/",
-          train_shards=2),
+          **_MNLI_BASE_KWARGS),
+      GlueConfig(
+          name="mnli_mismatched",
+          description="""\
+          The mismatched validation and test splits from MNLI.
+          See the "mnli" BuilderConfig for additional information.""",
+          **_MNLI_BASE_KWARGS),
+      GlueConfig(
+          name="mnli_matched",
+          description="""\
+          The matched validation and test splits from MNLI.
+          See the "mnli" BuilderConfig for additional information.""",
+          **_MNLI_BASE_KWARGS),
       GlueConfig(
           name="qnli",
           description="""\
@@ -414,38 +429,23 @@ class Glue(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.name == "mnli":
       return [
           train_split,
-          tfds.core.SplitGenerator(
-              name="validation_matched",
-              num_shards=1,
-              gen_kwargs={
-                  "data_file": os.path.join(data_dir, "dev_matched.tsv"),
-                  "split": "dev",
-                  "mrpc_files": None,
-              }),
-          tfds.core.SplitGenerator(
-              name="validation_mismatched",
-              num_shards=1,
-              gen_kwargs={
-                  "data_file": os.path.join(data_dir, "dev_mismatched.tsv"),
-                  "split": "dev",
-                  "mrpc_files": None,
-              }),
-          tfds.core.SplitGenerator(
-              name="test_matched",
-              num_shards=1,
-              gen_kwargs={
-                  "data_file": os.path.join(data_dir, "test_matched.tsv"),
-                  "split": "test",
-                  "mrpc_files": None,
-              }),
-          tfds.core.SplitGenerator(
-              name="test_mismatched",
-              num_shards=1,
-              gen_kwargs={
-                  "data_file": os.path.join(data_dir, "test_mismatched.tsv"),
-                  "split": "test",
-                  "mrpc_files": None,
-              }),
+          _mnli_split_generator(
+              "validation_matched", data_dir, "dev", matched=True),
+          _mnli_split_generator(
+              "validation_mismatched", data_dir, "dev", matched=False),
+          _mnli_split_generator("test_matched", data_dir, "test", matched=True),
+          _mnli_split_generator(
+              "test_mismatched", data_dir, "test", matched=False)
+      ]
+    elif self.builder_config.name == "mnli_matched":
+      return [
+          _mnli_split_generator("validation", data_dir, "dev", matched=True),
+          _mnli_split_generator("test", data_dir, "test", matched=True)
+      ]
+    elif self.builder_config.name == "mnli_mismatched":
+      return [
+          _mnli_split_generator("validation", data_dir, "dev", matched=False),
+          _mnli_split_generator("test", data_dir, "test", matched=False)
       ]
     else:
       return [
@@ -547,3 +547,16 @@ class Glue(tfds.core.GeneratorBasedBuilder):
                 "label": int(row["Quality"]),
                 "idx": n,
             }
+
+
+def _mnli_split_generator(name, data_dir, split, matched):
+  return tfds.core.SplitGenerator(
+      name=name,
+      num_shards=1,
+      gen_kwargs={
+          "data_file": os.path.join(
+              data_dir,
+              "%s_%s.tsv" % (split, "matched" if matched else "mismatched")),
+          "split": split,
+          "mrpc_files": None,
+      })
