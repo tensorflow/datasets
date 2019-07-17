@@ -84,7 +84,7 @@ _VERSION = tfds.core.Version('0.0.1',
                              experiments={tfds.core.Experiment.S3: False})
 _SUPPORTED_VERSIONS = [
     # Will be made canonical in near future.
-    tfds.core.Version('3.0.0'),
+    tfds.core.Version('3.0.1'),
 ]
 # Version history:
 # 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
@@ -176,13 +176,21 @@ class Imagenet2012Corrupted(Imagenet2012):
     logging.warning('Overwriting cv2 RNG seed.')
     tfds.core.lazy_imports.cv2.setRNGSeed(357)
 
-    for example in super(Imagenet2012Corrupted,
-                         self)._generate_examples_validation(archive, labels):
+    gen_fn = super(Imagenet2012Corrupted, self)._generate_examples_validation
+    for example in gen_fn(archive, labels):
+
+      if self.version.implements(tfds.core.Experiment.S3):
+        key, example = example  # Unpack S3 key
+
       with tf.Graph().as_default():
         tf_img = tf.image.decode_jpeg(example['image'].read(), channels=3)
         image_np = tfds.as_numpy(tf_img)
       example['image'] = self._get_corrupted_example(image_np)
-      yield example
+
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield key, example
+      else:
+        yield example
     # Reset the seeds back to their original values.
     np.random.set_state(numpy_st0)
 
