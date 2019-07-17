@@ -171,7 +171,10 @@ __len__()
 source</a>
 
 ```python
-decode_example(serialized_example)
+decode_example(
+    serialized_example,
+    decoders=None
+)
 ```
 
 Decode the serialize examples.
@@ -179,6 +182,9 @@ Decode the serialize examples.
 #### Args:
 
 *   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present.
 
 #### Returns:
 

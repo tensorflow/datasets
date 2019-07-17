@@ -34,6 +34,8 @@ The main library entrypoints are:
 
 [`core`](./tfds/core.md) module: API to define datasets.
 
+[`decode`](./tfds/decode.md) module: Decoder public API.
+
 [`download`](./tfds/download.md) module: <a href="./tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a> API.
 
 [`features`](./tfds/features.md) module: <a href="./tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a> API defining feature types.

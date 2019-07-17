@@ -16,6 +16,7 @@ tfds.load(
     in_memory=None,
     download=True,
     as_supervised=False,
+    decoders=None,
     with_info=False,
     builder_kwargs=None,
     download_and_prepare_kwargs=None,
@@ -105,6 +106,9 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
     `tf.data.Dataset` will have a dictionary with all the features.
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present.
 *   <b>`with_info`</b>: `bool`, if True, tfds.load will return the tuple
     (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated with
     the builder.

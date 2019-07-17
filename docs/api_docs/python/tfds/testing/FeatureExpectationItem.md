@@ -21,11 +21,14 @@ source</a>
 <a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
 source</a>
 
-``` python
+```python
 __init__(
     value,
     expected=None,
     expected_serialized=None,
+    decoders=None,
+    dtype=None,
+    shape=None,
     raise_cls=None,
     raise_msg=None
 )

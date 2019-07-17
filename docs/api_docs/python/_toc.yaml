@@ -56,6 +56,16 @@ toc:
       path: /datasets/api_docs/python/tfds/core/SplitInfo
     - title: Version
       path: /datasets/api_docs/python/tfds/core/Version
+  - title: tfds.decode
+    section:
+    - title: Overview
+      path: /datasets/api_docs/python/tfds/decode
+    - title: Decoder
+      path: /datasets/api_docs/python/tfds/decode/Decoder
+    - title: make_decoder
+      path: /datasets/api_docs/python/tfds/decode/make_decoder
+    - title: SkipDecoding
+      path: /datasets/api_docs/python/tfds/decode/SkipDecoding
   - title: tfds.download
     section:
     - title: Overview

@@ -36,13 +36,15 @@ regex "\W+".
 <a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
 source</a>
 
-``` python
+```python
 __init__(
     vocab_list,
     oov_buckets=1,
     oov_token='UNK',
     lowercase=False,
-    tokenizer=None
+    tokenizer=None,
+    strip_vocab=True,
+    decode_token_separator=' '
 )
 ```
 
@@ -63,6 +65,10 @@ use
 *   <b>`lowercase`</b>: `bool`, whether to make all text and tokens lowercase.
 *   <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text
     into a list of tokens.
+*   <b>`strip_vocab`</b>: `bool`, whether to strip whitespace from the beginning
+    and end of elements of `vocab_list`.
+*   <b>`decode_token_separator`</b>: `str`, the string used to separate tokens
+    when decoding.
 
 ## Properties
 

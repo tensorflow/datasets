@@ -3,6 +3,12 @@ all modifications will be erased, please edit the original document_datasets.py
 file. -->
 # Datasets
 
+Note: The datasets documented here are from `HEAD` and so not all are available
+in the current `tensorflow-datasets` package. They are all accessible in our
+nightly package `tfds-nightly`.
+
+--------------------------------------------------------------------------------
+
 ## Usage
 
 ```python
@@ -26,12 +32,6 @@ datasets = builder.as_dataset()
 np_datasets = tfds.as_numpy(datasets)
 ```
 
-Note: The datasets documented here are from `HEAD` and so not all are available
-in the current `tensorflow-datasets` package. They are all accessible in our
-nightly package `tfds-nightly`.
-
---------------------------------------------------------------------------------
-
 ## All Datasets
 
 *   [`audio`](#audio)
@@ -48,6 +48,7 @@ nightly package `tfds-nightly`.
     *   [`"cifar100"`](#cifar100)
     *   [`"cifar10_corrupted"`](#cifar10_corrupted)
     *   [`"clevr"`](#clevr)
+    *   [`"coco"`](#coco)
     *   [`"coco2014"`](#coco2014)
     *   [`"colorectal_histology"`](#colorectal_histology)
     *   [`"colorectal_histology_large"`](#colorectal_histology_large)
@@ -506,8 +507,8 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -519,8 +520,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -532,8 +533,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -545,8 +546,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -558,8 +559,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -571,8 +572,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -584,8 +585,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -597,8 +598,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -722,7 +723,7 @@ has the following configurations predefined (defaults to the first one):
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(120, 120, 3), dtype=tf.uint8),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
     'metadata': FeaturesDict({
         'acquisition_date': Text(shape=(), dtype=tf.string, encoder=None),
         'coordinates': FeaturesDict({
@@ -754,7 +755,7 @@ FeaturesDict({
     'B12': Tensor(shape=[60, 60], dtype=tf.float32),
     'B8A': Tensor(shape=[60, 60], dtype=tf.float32),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
     'metadata': FeaturesDict({
         'acquisition_date': Text(shape=(), dtype=tf.string, encoder=None),
         'coordinates': FeaturesDict({
@@ -2423,7 +2424,15 @@ reasoning each question requires.
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'objects': Sequence({'size': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'material': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'color': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({
+        '3d_coords': Tensor(shape=(3,), dtype=tf.float32),
+        'color': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+        'material': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'pixel_coords': Tensor(shape=(3,), dtype=tf.float32),
+        'rotation': Tensor(shape=(), dtype=tf.float32),
+        'shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'size': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
 })
 ```
 
@@ -2453,6 +2462,169 @@ TEST       | 15,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="coco" />
+  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and
+captioning dataset. This version contains images, bounding boxes &quot;
+and labels for the 2017 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * Coco 2014 and 2017 uses the same images, but different train/val/test splits
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only uses 80 classes.
+ * Panotptic annotations defines defines 200 classes but only uses 133." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#coco" />
+  <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
+</div>
+
+### `"coco"`
+
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2017 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
+
+*   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+*   `DatasetBuilder`:
+    [`tfds.image.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
+
+`coco` is configured with `tfds.image.coco.CocoConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"2014"` (`v1.0.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
+    detection, segmentation, and captioning dataset. This version contains
+    images, bounding boxes " and labels for the 2014 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+*   `"2017"` (`v1.0.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
+    detection, segmentation, and captioning dataset. This version contains
+    images, bounding boxes " and labels for the 2017 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+*   `"2017_panoptic"` (`v1.0.0`) (`Size: 19.57 GiB`): COCO is a large-scale
+    object detection, segmentation, and captioning dataset. This version
+    contains images, bounding boxes " and labels for the 2017 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+#### `"coco/2014"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
+#### `"coco/2017"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
+#### `"coco/2017_panoptic"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'panoptic_image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'panoptic_image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'panoptic_objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=133),
+    }),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 123,287
+TRAIN      | 118,287
+VALIDATION | 5,000
+
+#### Urls
+
+*   [http://cocodataset.org/#home](http://cocodataset.org/#home)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
+
+#### Citation
+
+```
+@article{DBLP:journals/corr/LinMBHPRDZ14,
+  author    = {Tsung{-}Yi Lin and
+               Michael Maire and
+               Serge J. Belongie and
+               Lubomir D. Bourdev and
+               Ross B. Girshick and
+               James Hays and
+               Pietro Perona and
+               Deva Ramanan and
+               Piotr Doll{'{a}}r and
+               C. Lawrence Zitnick},
+  title     = {Microsoft {COCO:} Common Objects in Context},
+  journal   = {CoRR},
+  volume    = {abs/1405.0312},
+  year      = {2014},
+  url       = {http://arxiv.org/abs/1405.0312},
+  archivePrefix = {arXiv},
+  eprint    = {1405.0312},
+  timestamp = {Mon, 13 Aug 2018 16:48:13 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -2477,11 +2649,11 @@ Note:
  * The test split don't have any annotations (only images).
  * Coco defines 91 classes but the data only had 80 classes.
 
-
-* URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
-* `DatasetBuilder`: [`tfds.image.coco.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
-* Version: `v1.0.0`
-* Size: `37.57 GiB`
+*   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+*   `DatasetBuilder`:
+    [`tfds.image.coco2014_legacy.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco2014_legacy.py)
+*   Version: `v1.0.0`
+*   Size: `37.57 GiB`
 
 #### Features
 
@@ -2489,7 +2661,11 @@ Note:
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool)}),
+    'objects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
 })
 ```
 
@@ -2732,7 +2908,15 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'calc_distribution': TensorInfo(shape=(None,), dtype=tf.int64), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'calc_type': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'id': TensorInfo(shape=(None,), dtype=tf.int32), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'abnormalities': Sequence({
+        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'calc_distribution': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+        'calc_type': ClassLabel(shape=(), dtype=tf.int64, num_classes=48),
+        'id': Tensor(shape=(), dtype=tf.int32),
+        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
@@ -2745,7 +2929,15 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_margins': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_shape': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'abnormalities': Sequence({
+        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'id': Tensor(shape=(), dtype=tf.int32),
+        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'mass_margins': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+        'mass_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=21),
+        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
@@ -4723,7 +4915,7 @@ the Kitti homepage.
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 *   `DatasetBuilder`:
     [`tfds.image.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/kitti.py)
-*   Version: `v1.0.0`
+*   Version: `v3.1.0`
 *   Size: `11.71 GiB`
 
 #### Features
@@ -4732,16 +4924,27 @@ the Kitti homepage.
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/file_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'truncated': TensorInfo(shape=(None,), dtype=tf.float32), 'rotation_y': TensorInfo(shape=(None,), dtype=tf.float32), 'occluded': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'dimensions': TensorInfo(shape=(None, 3), dtype=tf.float32), 'alpha': TensorInfo(shape=(None,), dtype=tf.float32), 'location': TensorInfo(shape=(None, 3), dtype=tf.float32), 'type': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({
+        'alpha': Tensor(shape=(), dtype=tf.float32),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'dimensions': Tensor(shape=(3,), dtype=tf.float32),
+        'location': Tensor(shape=(3,), dtype=tf.float32),
+        'occluded': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+        'rotation_y': Tensor(shape=(), dtype=tf.float32),
+        'truncated': Tensor(shape=(), dtype=tf.float32),
+        'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+    }),
 })
 ```
 
 #### Statistics
 
-Split | Examples
-:---- | -------:
-TRAIN | 7,481
-ALL   | 7,481
+Split      | Examples
+:--------- | -------:
+ALL        | 7,481
+TRAIN      | 6,347
+TEST       | 711
+VALIDATION | 423
 
 #### Urls
 
@@ -5274,11 +5477,9 @@ TEST  | 10,000
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 #### Citation
-
 ```
 @article{mu2019mnist,
   title={MNIST-C: A Robustness Benchmark for Computer Vision},
@@ -5407,11 +5608,28 @@ and has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5419,11 +5637,28 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5431,11 +5666,28 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5606,7 +5858,6 @@ lighting. All images have an associated ground truth annotation of breed.
 * Size: `801.24 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
@@ -5735,7 +5986,6 @@ specific class)
 *   Size: `1.94 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'PetID': Text(shape=(), dtype=tf.string, encoder=None),
@@ -5778,11 +6028,9 @@ TEST  | 14,465
 *   [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `(u'attributes', u'label')`
 
 #### Citation
-
 ```
 @ONLINE {kaggle-petfinder-adoption-prediction,
     author = "Kaggle and PetFinder.my",
@@ -6513,9 +6761,15 @@ predict the bounding box and label of each individual object.
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'labels_no_difficult': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool)}),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'labels_no_difficult': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'objects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_difficult': Tensor(shape=(), dtype=tf.bool),
+        'is_truncated': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+        'pose': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    }),
 })
 ```
 
@@ -6952,7 +7206,7 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'candidates': Sequence(shape=(2,), dtype=tf.string, feature=Text(shape=(), dtype=tf.string, encoder=None)),
+    'candidates': Sequence(Text(shape=(), dtype=tf.string, encoder=None)),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'pronoun': Text(shape=(), dtype=tf.string, encoder=None),
     'sentence': Text(shape=(), dtype=tf.string, encoder=None),
@@ -7647,7 +7901,10 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'answers': Sequence({'answer_start': TensorInfo(shape=(None,), dtype=tf.int32), 'text': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'answers': Sequence({
+        'answer_start': Tensor(shape=(), dtype=tf.int32),
+        'text': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
     'context': Text(shape=(), dtype=tf.string, encoder=None),
     'id': Tensor(shape=(), dtype=tf.string),
     'question': Text(shape=(), dtype=tf.string, encoder=None),
@@ -8068,19 +8325,31 @@ answering the questions.
 ```python
 FeaturesDict({
     'answer': FeaturesDict({
-        'aliases': Sequence(shape=(None,), dtype=tf.string, feature=Text(shape=(), dtype=tf.string, encoder=None)),
+        'aliases': Sequence(Text(shape=(), dtype=tf.string, encoder=None)),
         'matched_wiki_entity_name': Text(shape=(), dtype=tf.string, encoder=None),
-        'normalized_aliases': Sequence(shape=(None,), dtype=tf.string, feature=Text(shape=(), dtype=tf.string, encoder=None)),
+        'normalized_aliases': Sequence(Text(shape=(), dtype=tf.string, encoder=None)),
         'normalized_matched_wiki_entity_name': Text(shape=(), dtype=tf.string, encoder=None),
         'normalized_value': Text(shape=(), dtype=tf.string, encoder=None),
         'type': Text(shape=(), dtype=tf.string, encoder=None),
         'value': Text(shape=(), dtype=tf.string, encoder=None),
     }),
-    'entity_pages': Sequence({'file_name': TensorInfo(shape=(None,), dtype=tf.string), 'doc_source': TensorInfo(shape=(None,), dtype=tf.string), 'title': TensorInfo(shape=(None,), dtype=tf.string), 'wiki_context': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'entity_pages': Sequence({
+        'doc_source': Text(shape=(), dtype=tf.string, encoder=None),
+        'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+        'title': Text(shape=(), dtype=tf.string, encoder=None),
+        'wiki_context': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
     'question': Text(shape=(), dtype=tf.string, encoder=None),
     'question_id': Text(shape=(), dtype=tf.string, encoder=None),
     'question_source': Text(shape=(), dtype=tf.string, encoder=None),
-    'search_results': Sequence({'rank': TensorInfo(shape=(None,), dtype=tf.int32), 'search_context': TensorInfo(shape=(None,), dtype=tf.string), 'title': TensorInfo(shape=(None,), dtype=tf.string), 'url': TensorInfo(shape=(None,), dtype=tf.string), 'file_name': TensorInfo(shape=(None,), dtype=tf.string), 'description': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'search_results': Sequence({
+        'description': Text(shape=(), dtype=tf.string, encoder=None),
+        'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+        'rank': Tensor(shape=(), dtype=tf.int32),
+        'search_context': Text(shape=(), dtype=tf.string, encoder=None),
+        'title': Text(shape=(), dtype=tf.string, encoder=None),
+        'url': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
 })
 ```
 
@@ -12114,7 +12383,10 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'hypothesis': TranslationVariableLanguages({'translation': TensorInfo(shape=(None,), dtype=tf.string), 'language': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'hypothesis': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string, encoder=None),
+        'translation': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'premise': Translation({
         'ar': Text(shape=(), dtype=tf.string, encoder=None),
@@ -12842,7 +13114,10 @@ configurations predefined (defaults to the first one):
 ```python
 FeaturesDict({
     'talk_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'translations': TranslationVariableLanguages({'translation': TensorInfo(shape=(None,), dtype=tf.string), 'language': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'translations': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string, encoder=None),
+        'translation': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
 })
 ```
 
@@ -13078,35 +13353,35 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 cs-en translation task
+*   `"cs-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 de-en translation task
+*   `"de-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 fi-en translation task
+*   `"fi-en"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
     dataset.
 
-*   `"fr-en"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 fr-en translation task
+*   `"fr-en"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 ru-en translation task
+*   `"ru-en"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
     dataset.
 
-*   `"cs-en.subwords8k"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 cs-en translation
-    task dataset with subword encoding.
+*   `"cs-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en
+    translation task dataset with subword encoding.
 
-*   `"de-en.subwords8k"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 de-en translation
-    task dataset with subword encoding.
+*   `"de-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en
+    translation task dataset with subword encoding.
 
-*   `"fi-en.subwords8k"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 fi-en translation
-    task dataset with subword encoding.
+*   `"fi-en.subwords8k"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en
+    translation task dataset with subword encoding.
 
-*   `"fr-en.subwords8k"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 fr-en translation
-    task dataset with subword encoding.
+*   `"fr-en.subwords8k"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en
+    translation task dataset with subword encoding.
 
-*   `"ru-en.subwords8k"` (`v0.0.4`) (`Size: ?? GiB`): WMT 2015 ru-en translation
-    task dataset with subword encoding.
+*   `"ru-en.subwords8k"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en
+    translation task dataset with subword encoding.
 
 #### `"wmt15_translate/cs-en"`
 
@@ -13167,8 +13442,8 @@ Translation({
 
 ```python
 Translation({
-    'cs': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8193>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8155>),
 })
 ```
 
@@ -13176,8 +13451,8 @@ Translation({
 
 ```python
 Translation({
-    'de': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
 })
 ```
 
@@ -13185,8 +13460,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'fi': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
+    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
 })
 ```
 
@@ -13194,8 +13469,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
 })
 ```
 
@@ -13203,13 +13478,19 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=None),
-    'ru': Text(shape=(None,), dtype=tf.int64, encoder=None),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
+    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
 })
 ```
 
 #### Statistics
-None computed
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,500,902
+TRAIN      | 2,495,081
+VALIDATION | 3,003
+TEST       | 2,818
 
 #### Urls
  * [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
@@ -14172,12 +14453,12 @@ for generating training/validation data from the MNIST dataset.
 * Size: `781.25 MiB`
 
 #### Features
+
 ```python
 FeaturesDict({
-    'image_sequence': Video(shape=(20, 64, 64, 1), dtype=tf.uint8, feature=Image(shape=(64, 64, 1), dtype=tf.uint8)),
+    'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -14254,82 +14535,65 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/brawl_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/collect_mineral_shards_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/collect_mineral_shards_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/move_unit_to_border_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/move_unit_to_border_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/road_trip_with_medivac_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/road_trip_with_medivac_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -14399,7 +14663,7 @@ configurations predefined (defaults to the first one):
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=101),
-    'video': Video(shape=(None, 256, 256, 3), dtype=tf.uint8, feature=Image(shape=(256, 256, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(256, 256, 3), dtype=tf.uint8)),
 })
 ```
 
