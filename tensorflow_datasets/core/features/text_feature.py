@@ -157,4 +157,6 @@ class Text(feature.Tensor):
     return self._encoder_config and self._encoder_config.encoder_cls
 
   def _additional_repr_info(self):
+    if self.encoder is None:
+      return {}
     return {"encoder": repr(self.encoder)}
