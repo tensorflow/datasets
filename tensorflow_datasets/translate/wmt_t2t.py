@@ -43,7 +43,9 @@ class WmtT2tTranslate(wmt.WmtTranslate):
           url=_URL,
           citation=_CITATION,
           language_pair=("de", "en"),
-          version="0.0.1")
+          version=tfds.core.Version(
+              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
+          )
   ]
 
   @property

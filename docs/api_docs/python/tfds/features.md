@@ -8,7 +8,8 @@
 <a href="../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>
 API defining feature types.
 
-Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/__init__.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/__init__.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 

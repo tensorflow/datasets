@@ -44,18 +44,26 @@ _URL_TEST_LABELS = "https://storage.googleapis.com/kaggle-forum-message-attachme
 class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
   """BuilderConfig for DiabeticRetinopathyDetection."""
 
-  def __init__(self, target_pixels=None, **kwargs):
+  def __init__(self, version, target_pixels=None, **kwargs):
     """BuilderConfig for DiabeticRetinopathyDetection.
 
     Args:
+      version: str version, defined with {S3: False} experiment.
       target_pixels: If given, rescale the images so that the total number of
         pixels is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
-    kwargs["supported_versions"] = [
-        tfds.core.Version("3.0.0", experiments={tfds.core.Experiment.S3: True}),
-    ]
-    super(DiabeticRetinopathyDetectionConfig, self).__init__(**kwargs)
+    # Version history:
+    # 3.0.0: S3 with new hashing function (different shuffle).
+    # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    super(DiabeticRetinopathyDetectionConfig, self).__init__(
+        version=tfds.core.Version(
+            version, experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("3.0.0"),
+            tfds.core.Version("2.0.0"),
+        ],
+        **kwargs)
     self._target_pixels = target_pixels
 
   @property

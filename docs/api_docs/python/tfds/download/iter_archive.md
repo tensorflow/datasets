@@ -15,8 +15,7 @@ tfds.download.iter_archive(
 )
 ```
 
-
-
-Defined in [`core/download/extractor.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/extractor.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/extractor.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->

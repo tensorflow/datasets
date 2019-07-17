@@ -17,9 +17,8 @@ Descriptor corresponding to a named split (train, test, ...).
 
 Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
 
-
-
-Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -67,6 +66,9 @@ split = (train.subsplit(tfds.percent[:25]) + test).subsplit(tfds.percent[:50])
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
+
 ``` python
 __init__(name)
 ```
@@ -74,6 +76,9 @@ __init__(name)
 ## Methods
 
 <h3 id="__add__"><code>__add__</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
 
 ``` python
 __add__(other)
@@ -83,6 +88,9 @@ Merging: tfds.Split.TRAIN + tfds.Split.TEST.
 
 <h3 id="__eq__"><code>__eq__</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
+
 ``` python
 __eq__(other)
 ```
@@ -90,6 +98,9 @@ __eq__(other)
 Equality: tfds.Split.TRAIN == 'train'.
 
 <h3 id="__ne__"><code>__ne__</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
 
 ```python
 __ne__(other)
@@ -99,11 +110,17 @@ InEquality: tfds.Split.TRAIN != 'test'.
 
 <h3 id="get_read_instruction"><code>get_read_instruction</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
+
 ``` python
 get_read_instruction(split_dict)
 ```
 
 <h3 id="subsplit"><code>subsplit</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
 
 ``` python
 subsplit(

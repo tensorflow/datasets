@@ -22,6 +22,10 @@
 *   <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
 *   <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
 *   <a href="./tfds/core/lazy_imports.md"><code>tfds.core.lazy_imports</code></a>
+*   <a href="./tfds/decode.md"><code>tfds.decode</code></a>
+*   <a href="./tfds/decode/Decoder.md"><code>tfds.decode.Decoder</code></a>
+*   <a href="./tfds/decode/SkipDecoding.md"><code>tfds.decode.SkipDecoding</code></a>
+*   <a href="./tfds/decode/make_decoder.md"><code>tfds.decode.make_decoder</code></a>
 *   <a href="./tfds/disable_progress_bar.md"><code>tfds.disable_progress_bar</code></a>
 *   <a href="./tfds/download.md"><code>tfds.download</code></a>
 *   <a href="./tfds/download/ComputeStatsMode.md"><code>tfds.download.ComputeStatsMode</code></a>

@@ -78,7 +78,8 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       MultiNLIConfig(
           name="plain_text",
-          version="0.0.2",
+          version=tfds.core.Version(
+              "0.0.2", experiments={tfds.core.Experiment.S3: False}),
           description="Plain text",
       ),
   ]

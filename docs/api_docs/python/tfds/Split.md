@@ -13,7 +13,8 @@
 
 `Enum` for dataset splits.
 
-Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 

@@ -11,8 +11,7 @@ Rm temporary directory.
 tfds.testing.rm_tmp_dir(dirname)
 ```
 
-
-
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->

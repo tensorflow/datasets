@@ -71,7 +71,8 @@ class Squad(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       SquadConfig(
           name="plain_text",
-          version="0.1.0",
+          version=tfds.core.Version(
+              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           description="Plain text",
       ),
   ]

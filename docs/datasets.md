@@ -3,6 +3,12 @@ all modifications will be erased, please edit the original document_datasets.py
 file. -->
 # Datasets
 
+Note: The datasets documented here are from `HEAD` and so not all are available
+in the current `tensorflow-datasets` package. They are all accessible in our
+nightly package `tfds-nightly`.
+
+--------------------------------------------------------------------------------
+
 ## Usage
 
 ```python
@@ -26,12 +32,6 @@ datasets = builder.as_dataset()
 np_datasets = tfds.as_numpy(datasets)
 ```
 
-Note: The datasets documented here are from `HEAD` and so not all are available
-in the current `tensorflow-datasets` package. They are all accessible in our
-nightly package `tfds-nightly`.
-
---------------------------------------------------------------------------------
-
 ## All Datasets
 
 *   [`audio`](#audio)
@@ -48,6 +48,7 @@ nightly package `tfds-nightly`.
     *   [`"cifar100"`](#cifar100)
     *   [`"cifar10_corrupted"`](#cifar10_corrupted)
     *   [`"clevr"`](#clevr)
+    *   [`"coco"`](#coco)
     *   [`"coco2014"`](#coco2014)
     *   [`"colorectal_histology"`](#colorectal_histology)
     *   [`"colorectal_histology_large"`](#colorectal_histology_large)
@@ -68,11 +69,13 @@ nightly package `tfds-nightly`.
     *   [`"kmnist"`](#kmnist)
     *   [`"lsun"`](#lsun)
     *   [`"mnist"`](#mnist)
+    *   [`"mnist_corrupted"`](#mnist_corrupted)
     *   [`"omniglot"`](#omniglot)
     *   [`"open_images_v4"`](#open_images_v4)
     *   [`"oxford_flowers102"`](#oxford_flowers102)
     *   [`"oxford_iiit_pet"`](#oxford_iiit_pet)
     *   [`"patch_camelyon"`](#patch_camelyon)
+    *   [`"pet_finder"`](#pet_finder)
     *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
     *   [`"resisc45"`](#resisc45)
     *   [`"rock_paper_scissors"`](#rock_paper_scissors)
@@ -95,6 +98,7 @@ nightly package `tfds-nightly`.
 *   [`text`](#text)
 
     *   [`"cnn_dailymail"`](#cnn_dailymail)
+    *   [`"definite_pronoun_resolution"`](#definite_pronoun_resolution)
     *   [`"glue"`](#glue)
     *   [`"imdb_reviews"`](#imdb_reviews)
     *   [`"lm1b"`](#lm1b)
@@ -102,6 +106,7 @@ nightly package `tfds-nightly`.
     *   [`"snli"`](#snli)
     *   [`"squad"`](#squad)
     *   [`"super_glue"`](#super_glue)
+    *   [`"trivia_qa"`](#trivia_qa)
     *   [`"wikipedia"`](#wikipedia)
     *   [`"xnli"`](#xnli)
 
@@ -502,8 +507,8 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -515,8 +520,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -528,8 +533,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -541,8 +546,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -554,8 +559,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -567,8 +572,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -580,8 +585,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -593,8 +598,8 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
@@ -718,7 +723,7 @@ has the following configurations predefined (defaults to the first one):
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(120, 120, 3), dtype=tf.uint8),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
     'metadata': FeaturesDict({
         'acquisition_date': Text(shape=(), dtype=tf.string, encoder=None),
         'coordinates': FeaturesDict({
@@ -750,7 +755,7 @@ FeaturesDict({
     'B12': Tensor(shape=[60, 60], dtype=tf.float32),
     'B8A': Tensor(shape=[60, 60], dtype=tf.float32),
     'filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
     'metadata': FeaturesDict({
         'acquisition_date': Text(shape=(), dtype=tf.string, encoder=None),
         'coordinates': FeaturesDict({
@@ -2419,7 +2424,15 @@ reasoning each question requires.
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'objects': Sequence({'material': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'color': TensorInfo(shape=(None,), dtype=tf.int64), 'size': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'objects': Sequence({
+        '3d_coords': Tensor(shape=(3,), dtype=tf.float32),
+        'color': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+        'material': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'pixel_coords': Tensor(shape=(3,), dtype=tf.float32),
+        'rotation': Tensor(shape=(), dtype=tf.float32),
+        'shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'size': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
 })
 ```
 
@@ -2449,6 +2462,169 @@ TEST       | 15,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="coco" />
+  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and
+captioning dataset. This version contains images, bounding boxes &quot;
+and labels for the 2017 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * Coco 2014 and 2017 uses the same images, but different train/val/test splits
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only uses 80 classes.
+ * Panotptic annotations defines defines 200 classes but only uses 133." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#coco" />
+  <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
+</div>
+
+### `"coco"`
+
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2017 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
+
+*   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+*   `DatasetBuilder`:
+    [`tfds.image.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
+
+`coco` is configured with `tfds.image.coco.CocoConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"2014"` (`v1.0.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
+    detection, segmentation, and captioning dataset. This version contains
+    images, bounding boxes " and labels for the 2014 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+*   `"2017"` (`v1.0.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
+    detection, segmentation, and captioning dataset. This version contains
+    images, bounding boxes " and labels for the 2017 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+*   `"2017_panoptic"` (`v1.0.0`) (`Size: 19.57 GiB`): COCO is a large-scale
+    object detection, segmentation, and captioning dataset. This version
+    contains images, bounding boxes " and labels for the 2017 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+#### `"coco/2014"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
+#### `"coco/2017"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
+#### `"coco/2017_panoptic"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'panoptic_image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'panoptic_image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'panoptic_objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=133),
+    }),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 123,287
+TRAIN      | 118,287
+VALIDATION | 5,000
+
+#### Urls
+
+*   [http://cocodataset.org/#home](http://cocodataset.org/#home)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
+
+#### Citation
+
+```
+@article{DBLP:journals/corr/LinMBHPRDZ14,
+  author    = {Tsung{-}Yi Lin and
+               Michael Maire and
+               Serge J. Belongie and
+               Lubomir D. Bourdev and
+               Ross B. Girshick and
+               James Hays and
+               Pietro Perona and
+               Deva Ramanan and
+               Piotr Doll{'{a}}r and
+               C. Lawrence Zitnick},
+  title     = {Microsoft {COCO:} Common Objects in Context},
+  journal   = {CoRR},
+  volume    = {abs/1405.0312},
+  year      = {2014},
+  url       = {http://arxiv.org/abs/1405.0312},
+  archivePrefix = {arXiv},
+  eprint    = {1405.0312},
+  timestamp = {Mon, 13 Aug 2018 16:48:13 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -2473,11 +2649,11 @@ Note:
  * The test split don't have any annotations (only images).
  * Coco defines 91 classes but the data only had 80 classes.
 
-
-* URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
-* `DatasetBuilder`: [`tfds.image.coco.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
-* Version: `v1.0.0`
-* Size: `37.57 GiB`
+*   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+*   `DatasetBuilder`:
+    [`tfds.image.coco2014_legacy.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco2014_legacy.py)
+*   Version: `v1.0.0`
+*   Size: `37.57 GiB`
 
 #### Features
 
@@ -2485,7 +2661,11 @@ Note:
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'objects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
 })
 ```
 
@@ -2728,7 +2908,15 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'calc_type': TensorInfo(shape=(None,), dtype=tf.int64), 'calc_distribution': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'abnormalities': Sequence({
+        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'calc_distribution': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+        'calc_type': ClassLabel(shape=(), dtype=tf.int64, num_classes=48),
+        'id': Tensor(shape=(), dtype=tf.int32),
+        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
@@ -2741,7 +2929,15 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'mass_margins': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_shape': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'abnormalities': Sequence({
+        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'id': Tensor(shape=(), dtype=tf.int32),
+        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'mass_margins': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+        'mass_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=21),
+        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'id': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
@@ -3125,10 +3321,10 @@ experiments.
 `tfds.image.downsampled_imagenet.DownsampledImagenetConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `"32x32"` (`v0.1.0`) (`Size: ?? GiB`): A dataset consisting of Train and
+*   `"32x32"` (`v1.0.0`) (`Size: 3.98 GiB`): A dataset consisting of Train and
     Validation images of 32x32 resolution.
 
-*   `"64x64"` (`v0.1.0`) (`Size: ?? GiB`): A dataset consisting of Train and
+*   `"64x64"` (`v1.0.0`) (`Size: 11.73 GiB`): A dataset consisting of Train and
     Validation images of 64x64 resolution.
 
 #### `"downsampled_imagenet/32x32"`
@@ -3148,7 +3344,12 @@ FeaturesDict({
 ```
 
 #### Statistics
-None computed
+
+Split      | Examples
+:--------- | --------:
+ALL        | 1,331,148
+TRAIN      | 1,281,149
+VALIDATION | 49,999
 
 #### Urls
 
@@ -4714,7 +4915,7 @@ the Kitti homepage.
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 *   `DatasetBuilder`:
     [`tfds.image.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/kitti.py)
-*   Version: `v1.0.0`
+*   Version: `v3.1.0`
 *   Size: `11.71 GiB`
 
 #### Features
@@ -4723,16 +4924,27 @@ the Kitti homepage.
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/file_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'location': TensorInfo(shape=(None, 3), dtype=tf.float32), 'truncated': TensorInfo(shape=(None,), dtype=tf.float32), 'type': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'occluded': TensorInfo(shape=(None,), dtype=tf.int64), 'rotation_y': TensorInfo(shape=(None,), dtype=tf.float32), 'alpha': TensorInfo(shape=(None,), dtype=tf.float32), 'dimensions': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'objects': Sequence({
+        'alpha': Tensor(shape=(), dtype=tf.float32),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'dimensions': Tensor(shape=(3,), dtype=tf.float32),
+        'location': Tensor(shape=(3,), dtype=tf.float32),
+        'occluded': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+        'rotation_y': Tensor(shape=(), dtype=tf.float32),
+        'truncated': Tensor(shape=(), dtype=tf.float32),
+        'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+    }),
 })
 ```
 
 #### Statistics
 
-Split | Examples
-:---- | -------:
-TRAIN | 7,481
-ALL   | 7,481
+Split      | Examples
+:--------- | -------:
+ALL        | 7,481
+TRAIN      | 6,347
+TEST       | 711
+VALIDATION | 423
 
 #### Urls
 
@@ -5040,6 +5252,243 @@ TEST       |     10,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="mnist_corrupted" />
+  <meta itemprop="description" content="MNISTCorrupted is a dataset generated by adding 15 corruptions to the test
+images in the MNIST dataset. This dataset wraps the static, corrupted MNIST
+test images uploaded by the original authors" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#mnist_corrupted" />
+  <meta itemprop="sameAs" content="https://github.com/google-research/mnist-c" />
+</div>
+
+### `"mnist_corrupted"`
+
+MNISTCorrupted is a dataset generated by adding 15 corruptions to the test
+images in the MNIST dataset. This dataset wraps the static, corrupted MNIST test
+images uploaded by the original authors
+
+*   URL:
+    [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+*   `DatasetBuilder`:
+    [`tfds.image.mnist_corrupted.MNISTCorrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist_corrupted.py)
+
+`mnist_corrupted` is configured with
+`tfds.image.mnist_corrupted.MNISTCorruptedConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"identity"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: identity
+
+*   `"shot_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    shot_noise
+
+*   `"impulse_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    impulse_noise
+
+*   `"glass_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    glass_blur
+
+*   `"motion_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    motion_blur
+
+*   `"shear"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: shear
+
+*   `"scale"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: scale
+
+*   `"rotate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: rotate
+
+*   `"brightness"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    brightness
+
+*   `"translate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: translate
+
+*   `"stripe"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: stripe
+
+*   `"fog"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: fog
+
+*   `"spatter"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: spatter
+
+*   `"dotted_line"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    dotted_line
+
+*   `"zigzag"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: zigzag
+
+*   `"canny_edges"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    canny_edges
+
+#### `"mnist_corrupted/identity"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/shot_noise"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/impulse_noise"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/glass_blur"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/motion_blur"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/shear"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/scale"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/rotate"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/brightness"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/translate"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/stripe"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/fog"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/spatter"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/dotted_line"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/zigzag"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/canny_edges"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+#### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@article{mu2019mnist,
+  title={MNIST-C: A Robustness Benchmark for Computer Vision},
+  author={Mu, Norman and Gilmer, Justin},
+  journal={arXiv preprint arXiv:1906.02337},
+  year={2019}
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -5159,11 +5608,28 @@ and has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5171,11 +5637,28 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5183,11 +5666,28 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5363,9 +5863,9 @@ FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string, encoder=None),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
+    'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -5425,7 +5925,6 @@ Imagenet, trainable on a single GPU.
 *   Size: `7.48 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'id': Text(shape=(), dtype=tf.string, encoder=None),
@@ -5459,6 +5958,86 @@ TEST       | 32,768
   year         = 2018,
   doi          = {10.1007/978-3-030-00934-2_24},
   url          = {https://doi.org/10.1007/978-3-030-00934-2_24}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="pet_finder" />
+  <meta itemprop="description" content="Dataset with images from 5 classes (see config name for information on the specific class)" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#pet_finder" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/petfinder_dataset/" />
+</div>
+
+### `"pet_finder"`
+
+Dataset with images from 5 classes (see config name for information on the
+specific class)
+
+*   URL:
+    [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
+*   `DatasetBuilder`:
+    [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
+*   Version: `v1.0.0`
+*   Size: `1.94 GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'PetID': Text(shape=(), dtype=tf.string, encoder=None),
+    'attributes': FeaturesDict({
+        'Age': Tensor(shape=(), dtype=tf.int64),
+        'Breed1': Tensor(shape=(), dtype=tf.int64),
+        'Breed2': Tensor(shape=(), dtype=tf.int64),
+        'Color1': Tensor(shape=(), dtype=tf.int64),
+        'Color2': Tensor(shape=(), dtype=tf.int64),
+        'Color3': Tensor(shape=(), dtype=tf.int64),
+        'Dewormed': Tensor(shape=(), dtype=tf.int64),
+        'Fee': Tensor(shape=(), dtype=tf.int64),
+        'FurLength': Tensor(shape=(), dtype=tf.int64),
+        'Gender': Tensor(shape=(), dtype=tf.int64),
+        'Health': Tensor(shape=(), dtype=tf.int64),
+        'MaturitySize': Tensor(shape=(), dtype=tf.int64),
+        'Quantity': Tensor(shape=(), dtype=tf.int64),
+        'State': Tensor(shape=(), dtype=tf.int64),
+        'Sterilized': Tensor(shape=(), dtype=tf.int64),
+        'Type': Tensor(shape=(), dtype=tf.int64),
+        'Vaccinated': Tensor(shape=(), dtype=tf.int64),
+        'VideoAmt': Tensor(shape=(), dtype=tf.int64),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 72,776
+TRAIN | 58,311
+TEST  | 14,465
+
+#### Urls
+
+*   [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'attributes', u'label')`
+
+#### Citation
+```
+@ONLINE {kaggle-petfinder-adoption-prediction,
+    author = "Kaggle and PetFinder.my",
+    title  = "PetFinder.my Adoption Prediction",
+    month  = "april",
+    year   = "2019",
+    url    = "https://www.kaggle.com/c/petfinder-adoption-prediction/data/"
 }
 ```
 
@@ -6182,9 +6761,15 @@ predict the bounding box and label of each individual object.
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'labels_no_difficult': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool)}),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'labels_no_difficult': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'objects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_difficult': Tensor(shape=(), dtype=tf.bool),
+        'is_truncated': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+        'pose': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    }),
 })
 ```
 
@@ -6570,6 +7155,88 @@ TEST       | 11,490
   booktitle={Advances in neural information processing systems},
   pages={1693--1701},
   year={2015}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="definite_pronoun_resolution" />
+  <meta itemprop="description" content="Composed by 30 students from one of the author's undergraduate classes. These
+sentence pairs cover topics ranging from real events (e.g., Iran's plan to
+attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,
+Batman) and purely imaginary situations, largely reflecting the pop culture as
+perceived by the American kids born in the early 90s. Each annotated example
+spans four lines: the first line contains the sentence, the second line contains
+the target pronoun, the third line contains the two candidate antecedents, and
+the fourth line contains the correct antecedent. If the target pronoun appears
+more than once in the sentence, its first occurrence is the one to be resolved." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#definite_pronoun_resolution" />
+  <meta itemprop="sameAs" content="http://www.hlt.utdallas.edu/~vince/data/emnlp12/" />
+</div>
+
+### `"definite_pronoun_resolution"`
+
+Composed by 30 students from one of the author's undergraduate classes. These
+sentence pairs cover topics ranging from real events (e.g., Iran's plan to
+attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,
+Batman) and purely imaginary situations, largely reflecting the pop culture as
+perceived by the American kids born in the early 90s. Each annotated example
+spans four lines: the first line contains the sentence, the second line contains
+the target pronoun, the third line contains the two candidate antecedents, and
+the fourth line contains the correct antecedent. If the target pronoun appears
+more than once in the sentence, its first occurrence is the one to be resolved.
+
+*   URL:
+    [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+*   `DatasetBuilder`:
+    [`tfds.text.definite_pronoun_resolution.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
+
+`definite_pronoun_resolution` is configured with
+`tfds.text.definite_pronoun_resolution.BuilderConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"plain_text"` (`v0.0.1`) (`Size: 222.12 KiB`): Plain text import of the
+    Definite Pronoun Resolution Dataset.
+
+#### `"definite_pronoun_resolution/plain_text"`
+
+```python
+FeaturesDict({
+    'candidates': Sequence(Text(shape=(), dtype=tf.string, encoder=None)),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'pronoun': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 1,886
+TRAIN | 1,322
+TEST  | 564
+
+#### Urls
+
+*   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'sentence', u'label')`
+
+#### Citation
+```
+@inproceedings{rahman2012resolving,
+  title={Resolving complex cases of definite pronouns: the winograd schema challenge},
+  author={Rahman, Altaf and Ng, Vincent},
+  booktitle={Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},
+  pages={777--789},
+  year={2012},
+  organization={Association for Computational Linguistics}
 }
 ```
 
@@ -7234,7 +7901,10 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'answers': Sequence({'answer_start': TensorInfo(shape=(None,), dtype=tf.int32), 'text': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'answers': Sequence({
+        'answer_start': Tensor(shape=(), dtype=tf.int32),
+        'text': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
     'context': Text(shape=(), dtype=tf.string, encoder=None),
     'id': Tensor(shape=(), dtype=tf.string),
     'question': Text(shape=(), dtype=tf.string, encoder=None),
@@ -7617,6 +8287,95 @@ VALIDATION | 104
 
 Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="trivia_qa" />
+  <meta itemprop="description" content="TriviaqQA is a reading comprehension dataset containing over 650K
+question-answer-evidence triples. TriviaqQA includes 95K question-answer
+pairs authored by trivia enthusiasts and independently gathered evidence
+documents, six per question on average, that provide high quality distant
+supervision for answering the questions." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#trivia_qa" />
+  <meta itemprop="sameAs" content="http://nlp.cs.washington.edu/triviaqa/" />
+</div>
+
+### `"trivia_qa"`
+
+TriviaqQA is a reading comprehension dataset containing over 650K
+question-answer-evidence triples. TriviaqQA includes 95K question-answer pairs
+authored by trivia enthusiasts and independently gathered evidence documents,
+six per question on average, that provide high quality distant supervision for
+answering the questions.
+
+*   URL:
+    [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
+*   `DatasetBuilder`:
+    [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
+*   Version: `v0.1.0`
+*   Size: `?? GiB`
+
+#### Features
+
+```python
+FeaturesDict({
+    'answer': FeaturesDict({
+        'aliases': Sequence(Text(shape=(), dtype=tf.string, encoder=None)),
+        'matched_wiki_entity_name': Text(shape=(), dtype=tf.string, encoder=None),
+        'normalized_aliases': Sequence(Text(shape=(), dtype=tf.string, encoder=None)),
+        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=tf.string, encoder=None),
+        'normalized_value': Text(shape=(), dtype=tf.string, encoder=None),
+        'type': Text(shape=(), dtype=tf.string, encoder=None),
+        'value': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+    'entity_pages': Sequence({
+        'doc_source': Text(shape=(), dtype=tf.string, encoder=None),
+        'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+        'title': Text(shape=(), dtype=tf.string, encoder=None),
+        'wiki_context': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+    'question': Text(shape=(), dtype=tf.string, encoder=None),
+    'question_id': Text(shape=(), dtype=tf.string, encoder=None),
+    'question_source': Text(shape=(), dtype=tf.string, encoder=None),
+    'search_results': Sequence({
+        'description': Text(shape=(), dtype=tf.string, encoder=None),
+        'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+        'rank': Tensor(shape=(), dtype=tf.int32),
+        'search_context': Text(shape=(), dtype=tf.string, encoder=None),
+        'title': Text(shape=(), dtype=tf.string, encoder=None),
+        'url': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
+})
+```
+
+#### Statistics
+None computed
+
+#### Urls
+
+*   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@article{2017arXivtriviaqa,
+       author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},
+                 Daniel and {Zettlemoyer}, Luke},
+        title = "{triviaqa: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension}",
+      journal = {arXiv e-prints},
+         year = 2017,
+          eid = {arXiv:1705.03551},
+        pages = {arXiv:1705.03551},
+archivePrefix = {arXiv},
+       eprint = {1705.03551},
+}
 ```
 
 ---
@@ -11624,7 +12383,10 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'hypothesis': TranslationVariableLanguages({'language': TensorInfo(shape=(None,), dtype=tf.string), 'translation': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'hypothesis': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string, encoder=None),
+        'translation': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'premise': Translation({
         'ar': Text(shape=(), dtype=tf.string, encoder=None),
@@ -11766,14 +12528,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Greek." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Swedish." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-Greek.
+Web-Scale Parallel Corpora for Official European Languages. English-Swedish.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -11783,81 +12545,171 @@ Web-Scale Parallel Corpora for Official European Languages. English-Greek.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
-
-*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hu, uses encoder plain_text.
-
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to it, uses encoder plain_text.
-
-*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to cs, uses encoder plain_text.
-
-*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pt, uses encoder plain_text.
-
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
-
-*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to mt, uses encoder plain_text.
-
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
-
-*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fr, uses encoder plain_text.
-
-*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to da, uses encoder plain_text.
-
-*   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fi, uses encoder plain_text.
-
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
-
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: 98.94 MiB`): Translation dataset from
     English to bg, uses encoder plain_text.
 
-*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sv, uses encoder plain_text.
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: 187.31 MiB`): Translation dataset
+    from English to cs, uses encoder plain_text.
 
-*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: 174.34 MiB`): Translation dataset
+    from English to da, uses encoder plain_text.
 
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: 1.22 GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
 
-*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
+*   `"enel_plain_text"` (`v0.1.0`) (`Size: 184.59 MiB`): Translation dataset
+    from English to el, uses encoder plain_text.
 
-*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
-
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
-
-*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to et, uses encoder plain_text.
-
-*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+*   `"enes_plain_text"` (`v0.1.0`) (`Size: 1.82 GiB`): Translation dataset from
     English to es, uses encoder plain_text.
 
-*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: 66.91 MiB`): Translation dataset from
+    English to et, uses encoder plain_text.
+
+*   `"enfi_plain_text"` (`v0.1.0`) (`Size: 151.83 MiB`): Translation dataset
+    from English to fi, uses encoder plain_text.
+
+*   `"enfr_plain_text"` (`v0.1.0`) (`Size: 2.63 GiB`): Translation dataset from
+    English to fr, uses encoder plain_text.
+
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: 28.03 MiB`): Translation dataset from
     English to ga, uses encoder plain_text.
 
-*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to el, uses encoder plain_text.
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: 80.97 MiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
 
-#### `"para_crawl/enpl_plain_text"`
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: 114.24 MiB`): Translation dataset
+    from English to hu, uses encoder plain_text.
+
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: 1017.30 MiB`): Translation dataset
+    from English to it, uses encoder plain_text.
+
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: 63.28 MiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: 45.17 MiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
+
+*   `"enmt_plain_text"` (`v0.1.0`) (`Size: 18.15 MiB`): Translation dataset from
+    English to mt, uses encoder plain_text.
+
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: 400.63 MiB`): Translation dataset
+    from English to nl, uses encoder plain_text.
+
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: 257.90 MiB`): Translation dataset
+    from English to pl, uses encoder plain_text.
+
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: 608.62 MiB`): Translation dataset
+    from English to pt, uses encoder plain_text.
+
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: 153.24 MiB`): Translation dataset
+    from English to ro, uses encoder plain_text.
+
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: 96.61 MiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
+
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: 62.02 MiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
+
+*   `"ensv_plain_text"` (`v0.1.0`) (`Size: 262.76 MiB`): Translation dataset
+    from English to sv, uses encoder plain_text.
+
+#### `"para_crawl/enbg_plain_text"`
+
+```python
+Translation({
+    'bg': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/encs_plain_text"`
+
+```python
+Translation({
+    'cs': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enda_plain_text"`
+
+```python
+Translation({
+    'da': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ende_plain_text"`
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enel_plain_text"`
+
+```python
+Translation({
+    'el': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enes_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pl': Text(shape=(), dtype=tf.string, encoder=None),
+    'es': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enet_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'et': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfi_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enfr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enga_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'ga': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enhr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'hr': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11879,12 +12731,48 @@ Translation({
 })
 ```
 
-#### `"para_crawl/encs_plain_text"`
+#### `"para_crawl/enlt_plain_text"`
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
     'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enmt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'mt': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/ennl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'nl': Text(shape=(), dtype=tf.string, encoder=None),
+})
+```
+
+#### `"para_crawl/enpl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'pl': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -11906,93 +12794,12 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enmt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'mt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
 #### `"para_crawl/ensk_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
     'sk': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enfr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enda_plain_text"`
-
-```python
-Translation({
-    'da': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enfi_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ende_plain_text"`
-
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enbg_plain_text"`
-
-```python
-Translation({
-    'bg': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hr': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
@@ -12005,71 +12812,29 @@ Translation({
 })
 ```
 
-#### `"para_crawl/enlt_plain_text"`
+#### `"para_crawl/ensv_plain_text"`
 
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ennl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'nl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enet_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'et': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enes_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'es': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enga_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ga': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enel_plain_text"`
-
-```python
-Translation({
-    'el': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'sv': Text(shape=(), dtype=tf.string, encoder=None),
 })
 ```
 
 #### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+TRAIN | 3,476,729
+ALL   | 3,476,729
 
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'el')`
+`(u'en', u'sv')`
 
 #### Citation
 ```
@@ -12349,7 +13114,10 @@ configurations predefined (defaults to the first one):
 ```python
 FeaturesDict({
     'talk_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'translations': TranslationVariableLanguages({'language': TensorInfo(shape=(None,), dtype=tf.string), 'translation': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'translations': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string, encoder=None),
+        'translation': Text(shape=(), dtype=tf.string, encoder=None),
+    }),
 })
 ```
 
@@ -12585,34 +13353,34 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
+*   `"cs-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
+*   `"de-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
+*   `"fi-en"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
     dataset.
 
-*   `"fr-en"` (`v0.0.3`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
+*   `"fr-en"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.3`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
+*   `"ru-en"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
     dataset.
 
-*   `"cs-en.subwords8k"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 cs-en
+*   `"cs-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en
     translation task dataset with subword encoding.
 
-*   `"de-en.subwords8k"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 de-en
+*   `"de-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en
     translation task dataset with subword encoding.
 
-*   `"fi-en.subwords8k"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2015 fi-en
+*   `"fi-en.subwords8k"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en
     translation task dataset with subword encoding.
 
-*   `"fr-en.subwords8k"` (`v0.0.3`) (`Size: 6.24 GiB`): WMT 2015 fr-en
+*   `"fr-en.subwords8k"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en
     translation task dataset with subword encoding.
 
-*   `"ru-en.subwords8k"` (`v0.0.3`) (`Size: 1.02 GiB`): WMT 2015 ru-en
+*   `"ru-en.subwords8k"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en
     translation task dataset with subword encoding.
 
 #### `"wmt15_translate/cs-en"`
@@ -12674,8 +13442,8 @@ Translation({
 
 ```python
 Translation({
-    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8245>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8198>),
+    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8193>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8155>),
 })
 ```
 
@@ -13685,12 +14453,12 @@ for generating training/validation data from the MNIST dataset.
 * Size: `781.25 MiB`
 
 #### Features
+
 ```python
 FeaturesDict({
-    'image_sequence': Video(shape=(20, 64, 64, 1), dtype=tf.uint8, feature=Image(shape=(64, 64, 1), dtype=tf.uint8)),
+    'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -13767,82 +14535,65 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/brawl_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/collect_mineral_shards_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/collect_mineral_shards_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/move_unit_to_border_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/move_unit_to_border_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/road_trip_with_medivac_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/road_trip_with_medivac_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -13912,7 +14663,7 @@ configurations predefined (defaults to the first one):
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=101),
-    'video': Video(shape=(None, 256, 256, 3), dtype=tf.uint8, feature=Image(shape=(256, 256, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(256, 256, 3), dtype=tf.uint8)),
 })
 ```
 

@@ -20,9 +20,8 @@
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
-
-
-Defined in [`core/features/bounding_boxes.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -49,6 +48,9 @@ inside a `tfds.feature.Sequence`.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py>View
+source</a>
+
 ``` python
 __init__()
 ```
@@ -66,6 +68,9 @@ Return the shape (or dict of shape) of this FeatureConnector.
 ## Methods
 
 <h3 id="decode_example"><code>decode_example</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+source</a>
 
 ``` python
 decode_example(tfexample_data)
@@ -90,6 +95,9 @@ graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py>View
+source</a>
+
 ``` python
 encode_example(bbox)
 ```
@@ -97,6 +105,9 @@ encode_example(bbox)
 See base class for details.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+source</a>
 
 ``` python
 get_serialized_info()
@@ -135,6 +146,9 @@ If not defined, the retuned values are automatically deduced from the
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -142,6 +156,9 @@ get_tensor_info()
 See base class for details.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+source</a>
 
 ``` python
 load_metadata(
@@ -163,6 +180,9 @@ will restore the feature metadata from the saved file.
     key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+source</a>
 
 ``` python
 save_metadata(

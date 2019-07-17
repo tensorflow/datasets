@@ -9,7 +9,8 @@
 
 Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
 
-Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 

@@ -37,7 +37,7 @@ class RockPaperScissorsTest(tfds_test.DatasetBuilderTestCase):
 
 
 class RockPaperScissorsS3Test(RockPaperScissorsTest):
-  VERSION = '2.0.0'
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

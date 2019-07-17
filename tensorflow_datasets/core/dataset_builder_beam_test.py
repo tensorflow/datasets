@@ -39,7 +39,7 @@ tf.compat.v1.enable_eager_execution()
 
 class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
 
-  VERSION = utils.Version("1.0.0")
+  VERSION = utils.Version("1.0.0", experiments={utils.Experiment.S3: False})
 
   def _info(self):
 
@@ -84,6 +84,11 @@ def _gen_example(x):
       "label": x % 2,
       "id": x,
   }
+
+
+class FaultyS3DummyBeamDataset(DummyBeamDataset):
+
+  VERSION = utils.Version("1.0.0")
 
 
 class BeamBasedBuilderTest(testing.TestCase):
@@ -147,19 +152,34 @@ class BeamBasedBuilderTest(testing.TestCase):
         self.assertAllEqual(lhs, rhs)
 
 
-  # The default beam pipeline do not works with Python2
-  def test_download_prepare(self):
-
+  def _get_dl_config_if_need_to_run(self):
+    # The default beam pipeline do not works with Python2
     # TODO(b/129148632): The current apache-beam 2.11.0 do not work with Py3
     # Update once the new version is out (around April)
     skip_beam_test = bool(six.PY3)
     if skip_beam_test:
       return
-
-    dl_config = download.DownloadConfig(
+    return download.DownloadConfig(
         beam_options=beam.options.pipeline_options.PipelineOptions(),
     )
+
+  def test_download_prepare(self):
+    dl_config = self._get_dl_config_if_need_to_run()
+    if not dl_config:
+      return
     self._assertBeamGeneration(dl_config)
+
+  def test_s3_raise(self):
+    dl_config = self._get_dl_config_if_need_to_run()
+    if not dl_config:
+      return
+    dl_config.compute_stats = download.ComputeStatsMode.SKIP
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = FaultyS3DummyBeamDataset(data_dir=tmp_dir)
+      builder.download_and_prepare(download_config=dl_config)
+      with self.assertRaisesWithPredicateMatch(
+          AssertionError, "`DatasetInfo.SplitInfo.num_shards` is empty"):
+        builder.as_dataset()
 
 
 if __name__ == "__main__":

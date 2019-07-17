@@ -23,21 +23,43 @@ Test DatasetBuilder.
 
 Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)
 
-
-
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py>View
+source</a>
+
+```python
 __init__(
-    *args,
-    **kwargs
+    data_dir=None,
+    config=None,
+    version=None
 )
 ```
+
+Constructs a DatasetBuilder.
+
+Callers must pass arguments as keyword arguments.
+
+#### Args:
+
+*   <b>`data_dir`</b>: `str`, directory to read/write data. Defaults to
+    datasets are stored.
+*   <b>`config`</b>:
+    <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
+    or `str` name, optional configuration for the dataset that affects the data
+    generated on disk. Different `builder_config`s will have their own
+    subdirectories and versions.
+*   <b>`version`</b>: `str`. Optional version at which to load the dataset. An
+    error is raised if specified version cannot be satisfied. Eg: '1.2.3',
+    '1.2.*'. The special value "experimental_latest" will use the highest
+    version, even if not default. This is not recommended unless you know what
+    you are doing, as the version could be broken.
 
 ## Properties
 
@@ -57,11 +79,15 @@ __init__(
 
 <h3 id="as_dataset"><code>as_dataset</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py>View
+source</a>
+
 ```python
 as_dataset(
     split=None,
     batch_size=None,
     shuffle_files=None,
+    decoders=None,
     as_supervised=False,
     in_memory=None
 )
@@ -84,6 +110,9 @@ Callers must pass arguments as keyword arguments.
     of the whole dataset with `tf.Tensor`s instead of a `tf.data.Dataset`.
 *   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
     to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present.
 *   <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
@@ -102,6 +131,9 @@ If `batch_size` is -1, will return feature dictionaries containing
 the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
 
 <h3 id="download_and_prepare"><code>download_and_prepare</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py>View
+source</a>
 
 ``` python
 download_and_prepare(

@@ -63,7 +63,8 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
-          version='0.0.1',
+          version=tfds.core.Version(
+              '0.0.1', experiments={tfds.core.Experiment.S3: False}),
           description='Plain text import of XNLI',
       )
   ]

@@ -47,6 +47,7 @@ _HOMEPAGE_URL = "http://www.cvlibs.net/datasets/kitti/"
 _DATA_URL = "https://s3.eu-central-1.amazonaws.com/avg-kitti"
 _IMAGES_FNAME = "data_object_image_2.zip"
 _LABELS_FNAME = "data_object_label_2.zip"
+_DEVKIT_FNAME = "devkit_object.zip"
 _OBJECT_LABELS = [
     "Car",
     "Van",
@@ -57,6 +58,10 @@ _OBJECT_LABELS = [
     "Tram",
     "Misc",
 ]
+# The percentage of trainset videos to put into validation and test sets.
+# The released test images do not have labels.
+_VALIDATION_SPLIT_PERCENT_VIDEOS = 10
+_TEST_SPLIT_PERCENT_VIDEOS = 10
 
 # Raw Kitti representation of a bounding box. Coordinates are in pixels,
 # measured from the top-left hand corner.
@@ -67,8 +72,13 @@ RawBoundingBox = collections.namedtuple("RawBoundingBox",
 class Kitti(tfds.core.GeneratorBasedBuilder):
   """Kitti dataset."""
 
-  VERSION = tfds.core.Version(
-      "1.0.0", experiments={tfds.core.Experiment.S3: True})
+  VERSION = tfds.core.Version("3.1.0")
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 3.0.0: Train/val/test splits based on random video IDs created.
 
   def _info(self):
     # Annotation descriptions are in the object development kit.
@@ -98,8 +108,12 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
     filenames = {
         "images": os.path.join(_DATA_URL, _IMAGES_FNAME),
         "annotations": os.path.join(_DATA_URL, _LABELS_FNAME),
+        "devkit": os.path.join(_DATA_URL, _DEVKIT_FNAME),
     }
     files = dl_manager.download(filenames)
+    train_images, validation_images, test_images = _build_splits(
+        dl_manager.iter_archive(files["devkit"]))
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -107,10 +121,27 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
                 "images": dl_manager.iter_archive(files["images"]),
                 "annotations": dl_manager.iter_archive(files["annotations"]),
                 "subdir": "training",
+                "image_ids": train_images,
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                "images": dl_manager.iter_archive(files["images"]),
+                "annotations": dl_manager.iter_archive(files["annotations"]),
+                "subdir": "training",
+                "image_ids": validation_images,
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            gen_kwargs={
+                "images": dl_manager.iter_archive(files["images"]),
+                "annotations": dl_manager.iter_archive(files["annotations"]),
+                "subdir": "training",
+                "image_ids": test_images,
             }),
     ]
 
-  def _generate_examples(self, images, annotations, subdir):
+  def _generate_examples(self, images, annotations, subdir, image_ids):
     """Yields images and annotations.
 
     Args:
@@ -118,6 +149,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
       annotations: object that iterates over the archive of annotations.
       subdir: subdirectory from which to extract images and annotations, e.g.
         training or testing.
+      image_ids: file ids for images in this split.
 
     Yields:
       A tuple containing the example's key, and the example.
@@ -141,8 +173,10 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
         continue
       if prefix.split("/")[0] != subdir:
         continue
-
-      annotations = all_annotations[int(prefix[-6:])]
+      image_id = int(prefix[-6:])
+      if image_id not in image_ids:
+        continue
+      annotations = all_annotations[image_id]
       img = cv2.imdecode(np.fromstring(fobj.read(), dtype=np.uint8),
                          cv2.IMREAD_COLOR)
       img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -207,3 +241,71 @@ def _parse_kitti_annotations(annotations_csv):
         "rotation_y": float(rotation_y),
     })
   return annotations
+
+
+def _build_splits(devkit):
+  """Splits the train data into train/val/test by video.
+
+  Ensures that images from the same video do not traverse the splits.
+
+  Args:
+    devkit: object that iterates over the devkit archive.
+
+  Returns:
+    train_images: File ids for the training set images.
+    validation_images: File ids for the validation set images.
+    test_images: File ids for the test set images.
+  """
+  mapping_line_ids = None
+  mapping_lines = None
+  for fpath, fobj in devkit:
+    if fpath == "mapping/train_rand.txt":
+      # Converts 1-based line index to 0-based line index.
+      mapping_line_ids = [
+          int(x.strip()) - 1 for x in fobj.read().decode("utf-8").split(",")
+      ]
+    if fpath == "mapping/train_mapping.txt":
+      mapping_lines = fobj.readlines()
+      mapping_lines = [x.decode("utf-8") for x in mapping_lines]
+
+  assert mapping_line_ids
+  assert mapping_lines
+
+  video_to_image = collections.defaultdict(list)
+  for image_id, mapping_lineid in enumerate(mapping_line_ids):
+    line = mapping_lines[mapping_lineid]
+    video_id = line.split(" ")[1]
+    video_to_image[video_id].append(image_id)
+
+  # Sets numpy random state.
+  numpy_original_state = np.random.get_state()
+  np.random.seed(seed=123)
+
+  # Max 1 for testing.
+  num_test_videos = max(1,
+                        _TEST_SPLIT_PERCENT_VIDEOS * len(video_to_image) // 100)
+  num_validation_videos = max(
+      1,
+      _VALIDATION_SPLIT_PERCENT_VIDEOS * len(video_to_image) // 100)
+  test_videos = set(
+      np.random.choice(
+          sorted(list(video_to_image.keys())), num_test_videos, replace=False))
+  validation_videos = set(
+      np.random.choice(
+          sorted(list(set(video_to_image.keys()) - set(test_videos))),
+          num_validation_videos,
+          replace=False))
+  test_images = []
+  validation_images = []
+  train_images = []
+  for k, v in video_to_image.items():
+    if k in test_videos:
+      test_images.extend(v)
+    elif k in validation_videos:
+      validation_images.extend(v)
+    else:
+      train_images.extend(v)
+
+  # Resets numpy random state.
+  np.random.set_state(numpy_original_state)
+  return train_images, validation_images, test_images
