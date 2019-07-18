@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tempfile
 
 import h5py
 import numpy as np
@@ -70,7 +69,15 @@ while ensuring that all pixel outputs were different. No noise was added.
 class Dsprites(tfds.core.GeneratorBasedBuilder):
   """dSprites data set."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0"),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -128,9 +135,9 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
     # file is >100x slower and the data set is small (26.7MB). Hence, we first
     # load everything into memory before yielding the samples.
     image_array, class_array, values_array = _load_data(filepath)
-    for image, classes, values in moves.zip(image_array, class_array,
-                                            values_array):
-      yield dict(
+    for i, (image, classes, values) in enumerate(moves.zip(
+        image_array, class_array, values_array)):
+      record = dict(
           image=np.expand_dims(image, -1),
           label_shape=classes[1],
           label_scale=classes[2],
@@ -142,6 +149,10 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
           value_orientation=values[3],
           value_x_position=values[4],
           value_y_position=values[5])
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield i, record
+      else:
+        yield record
 
 
 def _load_data(filepath):

@@ -5,14 +5,14 @@
 
 # tfds.list_builders
 
+Returns the string names of all
+<a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>s.
+
 ``` python
 tfds.list_builders()
 ```
 
-
-
-Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
-
-Returns the string names of all <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>s.

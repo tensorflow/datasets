@@ -5,6 +5,8 @@
 
 # tfds.testing.mock_kaggle_api
 
+Mock out the kaggle CLI.
+
 ``` python
 tfds.testing.mock_kaggle_api(
     *args,
@@ -14,14 +16,11 @@ tfds.testing.mock_kaggle_api(
 
 <!-- Placeholder for "Used in" -->
 
-Mock out the kaggle CLI.
-
 #### Args:
 
-* <b>`filenames`</b>: `list<str>`, names of the competition files.
-* <b>`err_msg`</b>: `str`, if provided, the kaggle CLI will raise a CalledProcessError
-    and this will be the command output.
-
+*   <b>`filenames`</b>: `list<str>`, names of the competition files.
+*   <b>`err_msg`</b>: `str`, if provided, the kaggle CLI will raise a
+    CalledProcessError and this will be the command output.
 
 #### Yields:
 

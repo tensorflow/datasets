@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import six
-from tensorflow_datasets.core.features import feature
+from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import text_feature
 try:
@@ -30,7 +30,7 @@ except ImportError:
   import collections as collections_abc  # pylint:disable=g-import-not-at-top
 
 
-class Translation(feature.FeaturesDict):
+class Translation(features_dict.FeaturesDict):
   """`FeatureConnector` for translations with fixed languages per example.
 
   Input: The Translate feature accepts a dictionary for each example mapping
@@ -98,7 +98,7 @@ class Translation(feature.FeaturesDict):
     return sorted(self.keys())
 
 
-class TranslationVariableLanguages(sequence_feature.SequenceDict):
+class TranslationVariableLanguages(sequence_feature.Sequence):
   """`FeatureConnector` for translations with variable languages per example.
 
   Input: The TranslationVariableLanguages feature accepts a dictionary for each
@@ -148,15 +148,14 @@ class TranslationVariableLanguages(sequence_feature.SequenceDict):
       languages: `list<string>` (optional), full list of language codes if known
         in advance.
     """
-    # TODO(adarob): Add optional text encoders once `SequenceDict` adds support
+    # TODO(adarob): Add optional text encoders once `Sequence` adds support
     # for FixedVarLenFeatures.
 
     self._languages = set(languages) if languages else None
-    super(TranslationVariableLanguages, self).__init__(
-        feature_dict={
-            "language": text_feature.Text(),
-            "translation": text_feature.Text(),
-        })
+    super(TranslationVariableLanguages, self).__init__({
+        "language": text_feature.Text(),
+        "translation": text_feature.Text(),
+    })
 
   @property
   def num_languages(self):

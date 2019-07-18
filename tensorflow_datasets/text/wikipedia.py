@@ -114,7 +114,8 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
-          version="0.0.2",
+          version=tfds.core.Version(
+              "0.0.2", experiments={tfds.core.Experiment.S3: False}),
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES

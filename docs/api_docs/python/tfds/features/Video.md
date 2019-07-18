@@ -2,9 +2,9 @@
 <meta itemprop="name" content="tfds.features.Video" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="serialized_keys"/>
+<meta itemprop="property" content="feature"/>
 <meta itemprop="property" content="shape"/>
-<meta itemprop="property" content="__getattr__"/>
+<meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
@@ -18,47 +18,61 @@
 
 ## Class `Video`
 
+`FeatureConnector` for videos, encoding frames individually on disk.
+
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 
-
-
-Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
-`FeatureConnector` for videos, png-encoding frames on disk.
+Video: The image connector accepts as input a 4 dimensional uint8 array
+representing a video, a sequence of paths to encoded frames, or a path or a
+file object that can be decoded with ffmpeg. Note that not all formats in
+ffmpeg support reading from pipes, so providing a file object might fail.
+Furthermore, if a path is given that is not on the local file system, we first
+copy it to a temporary local file before passing it to ffmpeg.
 
-Video: The image connector accepts as input:
-  * uint8 array representing a video.
+#### Output:
 
-Output:
-  video: tf.Tensor of type tf.uint8 and shape
-    [num_frames, height, width, channels], where channels must be 1 or 3
+*   <b>`video`</b>: tf.Tensor of type tf.uint8 and shape [num_frames, height,
+    width, channels], where channels must be 1 or 3
 
-Example:
-  * In the DatasetInfo object:
-    features=features.FeatureDict({
-        'video': features.Video(shape=(None, 64, 64, 3)),
-    })
+#### Example:
 
-  * During generation:
-    yield {
-        'input': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
-    }
+*   In the DatasetInfo object: features=features.FeatureDict({ 'video':
+    features.Video(shape=(None, 64, 64, 3)), })
+
+*   During generation: `yield { 'input': np.ones(shape=(128, 64, 64, 3),
+    dtype=np.uint8), }` or `yield { ' video': ['path/to/frame001.png',
+    'path/to/frame002.png'], }` or `yield { 'input': '/path/to/video.avi', }` or
+    `yield { 'input': gfile.GFile('/complex/path/video.avi'), }`
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py>View
+source</a>
+
 ``` python
-__init__(shape)
+__init__(
+    shape,
+    encoding_format='png',
+    ffmpeg_extra_args=()
+)
 ```
 
-Construct the connector.
+Initializes the connector.
 
 #### Args:
 
-* <b>`shape`</b>: tuple of ints, the shape of the video (num_frames, height, width,
-    channels), where channels is 1 or 3.
-
+*   <b>`shape`</b>: tuple of ints, the shape of the video (num_frames, height,
+    width, channels), where channels is 1 or 3.
+*   <b>`encoding_format`</b>: The video is stored as a sequence of encoded
+    images. You can use any encoding format supported by image_feature.Feature.
+*   <b>`ffmpeg_extra_args`</b>: A sequence of additional args to be passed to
+    the ffmpeg binary. Specifically, ffmpeg will be called as: `ffmpeg -i
+    <input_file> <ffmpeg_extra_args> %010d.<encoding_format>`
 
 #### Raises:
 
@@ -72,111 +86,109 @@ Construct the connector.
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
+<h3 id="feature"><code>feature</code></h3>
 
-List of the flattened feature keys after serialization.
+The inner feature.
 
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
 
-<h3 id="__getattr__"><code>__getattr__</code></h3>
+<h3 id="__getitem__"><code>__getitem__</code></h3>
 
-``` python
-__getattr__(key)
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
+
+```python
+__getitem__(key)
 ```
 
-Allow to access the underlying attributes directly.
+Convenience method to access the underlying features.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-``` python
-decode_example(tfexample_data)
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/top_level_feature.py>View
+source</a>
+
+```python
+decode_example(
+    serialized_example,
+    decoders=None
+)
 ```
 
-Wrapper around SequenceDict.
+Decode the serialize examples.
+
+#### Args:
+
+*   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present.
+
+#### Returns:
+
+*   <b>`example`</b>: Nested `dict` containing the decoded nested examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py>View
+source</a>
+
 ``` python
-encode_example(example_data)
+encode_example(video_or_path_or_fobj)
 ```
 
-Wrapper around SequenceDict.
+Converts the given image into a dict convertible to tf example.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
 
 ``` python
 get_serialized_info()
 ```
 
-
+See base class for details.
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
 
 ``` python
 get_tensor_info()
 ```
 
-
+See base class for details.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
-``` python
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
+
+```python
 load_metadata(
-    data_dir,
-    feature_name
+    *args,
+    **kwargs
 )
 ```
 
-Restore the feature metadata from disk.
-
-If a dataset is re-loaded and generated files exists on disk, this function
-will restore the feature metadata from the saved file.
-
-#### Args:
-
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
+See base class for details.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
-``` python
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py>View
+source</a>
+
+```python
 save_metadata(
-    data_dir,
-    feature_name
+    *args,
+    **kwargs
 )
 ```
 
-Save the feature metadata on disk.
-
-This function is called after the data has been generated (by
-`_download_and_prepare`) to save the feature connector info with the
-generated dataset.
-
-Some dataset/features dynamically compute info during
-`_download_and_prepare`. For instance:
-
- * Labels are loaded from the downloaded data
- * Vocabulary is created from the downloaded data
- * ImageLabelFolder compute the image dtypes/shape from the manual_dir
-
-After the info have been added to the feature, this function allow to
-save those additional info to be restored the next time the data is loaded.
-
-By default, this function do not save anything, but sub-classes can
-overwrite the function.
-
-#### Args:
-
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
-
-
-
+See base class for details.

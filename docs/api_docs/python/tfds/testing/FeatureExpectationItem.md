@@ -8,29 +8,28 @@
 
 ## Class `FeatureExpectationItem`
 
+Test item of a FeatureExpectation.
 
-
-
-
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
-Test item of a FeatureExpectation.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
+
+```python
 __init__(
     value,
     expected=None,
     expected_serialized=None,
+    decoders=None,
+    dtype=None,
+    shape=None,
     raise_cls=None,
     raise_msg=None
 )
 ```
-
-
-
-
-

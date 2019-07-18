@@ -5,14 +5,13 @@
 
 # tfds.testing.test_main
 
+Entrypoint for tests.
+
 ``` python
 tfds.testing.test_main()
 ```
 
-
-
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
-
-Entrypoint for tests.
