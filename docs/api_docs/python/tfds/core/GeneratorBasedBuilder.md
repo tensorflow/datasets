@@ -104,6 +104,46 @@ Constructs a `tf.data.Dataset`.
 
 Callers must pass arguments as keyword arguments.
 
+The output types vary depending on the parameters. Examples:
+
+```python
+builder = tfds.builder('imdb_reviews')
+builder.download_and_prepare()
+
+# Default parameters: Returns the dict of tf.data.Dataset
+ds_all_dict = builder.as_dataset()
+assert isinstance(ds_all_dict, dict)
+print(ds_all_dict.keys())  # ==> ['test', 'train', 'unsupervised']
+
+assert isinstance(ds_all_dict['test'], tf.data.Dataset)
+# Each dataset (test, train, unsup.) consists of dictionaries
+# {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
+#  'text': <tf.Tensor: .. dtype=string, numpy=b"I've watched the movie ..">}
+# {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
+#  'text': <tf.Tensor: .. dtype=string, numpy=b'If you love Japanese ..'>}
+
+# With as_supervised: tf.data.Dataset only contains (feature, label) tuples
+ds_all_supervised = builder.as_dataset(as_supervised=True)
+assert isinstance(ds_all_supervised, dict)
+print(ds_all_supervised.keys())  # ==> ['test', 'train', 'unsupervised']
+
+assert isinstance(ds_all_supervised['test'], tf.data.Dataset)
+# Each dataset (test, train, unsup.) consists of tuples (text, label)
+# (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
+#  <tf.Tensor: ... dtype=int64, numpy=1>)
+# (<tf.Tensor: ... dtype=string, numpy=b"If you love Japanese ..">,
+#  <tf.Tensor: ... dtype=int64, numpy=1>)
+
+# Same as above plus requesting a particular split
+ds_test_supervised = builder.as_dataset(as_supervised=True, split='test')
+assert isinstance(ds_test_supervised, tf.data.Dataset)
+# The dataset consists of tuples (text, label)
+# (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
+#  <tf.Tensor: ... dtype=int64, numpy=1>)
+# (<tf.Tensor: ... dtype=string, numpy=b"If you love Japanese ..">,
+#  <tf.Tensor: ... dtype=int64, numpy=1>)
+```
+
 #### Args:
 
 *   <b>`split`</b>:
