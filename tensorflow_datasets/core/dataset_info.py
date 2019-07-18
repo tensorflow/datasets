@@ -37,13 +37,13 @@ from __future__ import print_function
 import abc
 import collections
 import json
-import matplotlib.pyplot as plt
 import os
 import posixpath
 import pprint
 import tempfile
 
 from absl import logging
+import matplotlib.pyplot as plt
 import numpy as np
 import six
 import tensorflow as tf
@@ -408,53 +408,40 @@ class DatasetInfo(object):
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
       gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
-  
-  def show_batch(self, ds, max_images=None, rows=None, factor=3):
-    """Shows some random image samples from the image-dataset.
-       Works only with batch data. If image shapes are different then creating
-       batch will raise error. Possibly resize and create the batch data or use
-       batch_size=1.
-    
+
+  def show_examples(self, ds, rows=3, cols=3, factor=3):
+    """Display some random (rows*columns) images from the image-dataset
     Args:
-      ds: `tf.data.Dataset`, with consistent batch size.
-      max_images: `int`, maximum number of images to show from a batch. 
-        Should be <= batch_size. Defaults to None.
-      rows: `int`, number of rows the display grid should have. Defaults to None.
-      factor: `int`, to control the size of the display grid. Defaults to 3.
+      ds: `tf.data.Dataset`.
+      rows: `int`, number of rows of the display grid.
+      cols: `int`, number of columns of the display grid.
     """
+    # Checking if `label is present or not
     show_label = False
     if 'label' in self._features.keys():
       show_label = True
-    for data in ds.take(1):
-      X = dataset_utils.as_numpy(data['image'])
-      if show_label:
-        y = dataset_utils.as_numpy(data['label'])
   
-    if not rows:
-      if not max_images:
-        rows = int(X.shape[0]**0.5)
-      else:
-        rows = int(max_images**0.5)
-      columns = rows  
-    else:  
-      if max_images:
-        columns = min(X.shape[0], max_images) // rows
-      else:
-        columns = X.shape[0] // rows
+    num_examples = rows * cols
+    ds = iter(dataset_utils.as_numpy(ds.take(num_examples)))
   
-    fig = plt.figure(figsize=(factor*columns, factor*rows))
-    fig.subplots_adjust(hspace=3*1/factor, wspace=1/factor)
-
-    for i in range(rows*columns):
-      fig.add_subplot(rows, columns, i+1)
-      img = X[i]
-      if img.shape[2] == 1:
-        img = img.reshape(img.shape[:2])
-      plt.imshow(img, cmap='gray')
+    examples = []
+    for ex in ds:
+      examples.append(ex)
+  
+    fig = plt.figure(figsize=(factor*cols, factor*rows))
+    fig.subplots_adjust(hspace=1/factor, wspace=1/factor)
+  
+    for i, ex in enumerate(examples):
+      fig.add_subplot(rows, cols, i+1)
+      image = ex['image']
+      if image.shape[2] == 1:
+        image = image.reshape(image.shape[:2])
+      plt.imshow(image, cmap='gray')
       if show_label:
-        plt.xlabel("label: int={}, str={}".format(y[i], self._features['label'].int2str(y[i])))
+        label = ex['label']
+        plt.xlabel("label: int={}, str={}".format(label, self._features['label'].int2str(label)))
     plt.show()
-  
+
   def __str__(self):
     splits_pprint = "{\n %s\n    }" % (
         pprint.pformat(
