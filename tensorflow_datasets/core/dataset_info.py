@@ -39,7 +39,6 @@ import collections
 import json
 import os
 import posixpath
-import pprint
 import tempfile
 
 from absl import logging
@@ -50,6 +49,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
@@ -73,7 +73,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     total_num_examples={total_num_examples},
     splits={splits},
     supervised_keys={supervised_keys},
-    citation='{citation}',
+    citation={citation},
     redistribution_info={redistribution_info},
 )
 """
@@ -409,52 +409,52 @@ class DatasetInfo(object):
       gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
-  def show_examples(self, ds, rows=3, cols=3, factor=3):
+  def show_examples(self, ds, rows=3, cols=3, plot_scale=3):
     """Display some random (rows*columns) images from the image-dataset
     Args:
-      ds: `tf.data.Dataset`.
+      ds: `tf.data.Dataset`. Does not accept batch data.
       rows: `int`, number of rows of the display grid.
       cols: `int`, number of columns of the display grid.
     """
-    # Checking if `label is present or not
-    show_label = False
-    if 'label' in self._features.keys():
-      show_label = True
-  
-    num_examples = rows * cols
-    ds = iter(dataset_utils.as_numpy(ds.take(num_examples)))
-  
-    examples = []
-    for ex in ds:
-      examples.append(ex)
-  
-    fig = plt.figure(figsize=(factor*cols, factor*rows))
-    fig.subplots_adjust(hspace=1/factor, wspace=1/factor)
-  
-    for i, ex in enumerate(examples):
-      fig.add_subplot(rows, cols, i+1)
-      image = ex['image']
-      if image.shape[2] == 1:
-        image = image.reshape(image.shape[:2])
-      plt.imshow(image, cmap='gray')
-      if show_label:
-        label = ex['label']
-        plt.xlabel("label: int={}, str={}".format(label, self._features['label'].int2str(label)))
-    plt.show()
+    image_keys = [
+        k for k, feature in self.features.items()
+        if isinstance(feature, features_lib.Image)
+    ]
+    # TODO: Autodetect ClassLabel if present recursively.
+    label_keys = [
+        k for k, feature in self.features.items()
+        if isinstance(feature, features_lib.ClassLabel)
+    ]
+    
+    if len(image_keys) != 1:
+      raise ValueError(
+          'Visualisation not supported for dataset `{}`. Was not able to auto-infer '
+          'image and label keys.'.format(self.name))
+    else:
+      image_key = image_keys[0]
+      num_examples = rows * cols
+      examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+      fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+      fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+      for i, ex in enumerate(examples):
+        fig.add_subplot(rows, cols, i+1)
+        image = ex[image_key]
+        if image.shape[2] == 1:
+          image = image.reshape(image.shape[:2])
+        plt.imshow(image, cmap='gray')
+        if len(label_keys) == 1:
+          label_key = label_keys[0]
+          label = ex[label_key]
+          plt.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
+      plt.show()
 
-  def __str__(self):
-    splits_pprint = "{\n %s\n    }" % (
-        pprint.pformat(
-            {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
-            indent=8, width=1)[1:-1])
-    features_dict = self.features
-    features_pprint = "%s({\n %s\n    }" % (
-        type(features_dict).__name__,
-        pprint.pformat({
-            k: features_dict[k] for k in sorted(list(features_dict.keys()))
-        }, indent=8, width=1)[1:-1])
-    citation_pprint = '"""\n%s\n    """' % "\n".join(
-        [u" " * 8 + line for line in self.citation.split(u"\n")])
+  def __repr__(self):
+    splits_pprint = _indent("\n".join(["{"] + [
+        "    '{}': {},".format(k, split.num_examples)
+        for k, split in sorted(self.splits.items())
+    ] + ["}"]))
+    features_pprint = _indent(repr(self.features))
+    citation_pprint = _indent('"""{}"""'.format(self.citation.strip()))
     return INFO_STR.format(
         name=self.name,
         version=self.version,
@@ -465,7 +465,14 @@ class DatasetInfo(object):
         citation=citation_pprint,
         urls=self.urls,
         supervised_keys=self.supervised_keys,
-        redistribution_info=self.redistribution_info)
+        # Proto add a \n that we strip.
+        redistribution_info=str(self.redistribution_info).strip())
+
+
+def _indent(content):
+  """Add indentation to all lines except the first."""
+  lines = content.split("\n")
+  return "\n".join([lines[0]] + ["    " + l for l in lines[1:]])
 
 #
 #
