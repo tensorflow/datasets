@@ -5,8 +5,8 @@ from PIL import Image
 import tensorflow as tf
 
 
-# TODO:01 change os functions to tf.io.gfile functions
-# TODO:02 add tar.gz support
+# TODO add tar.gz support
+# TODO check types with python-magic
 
 class Holder:
 
@@ -20,7 +20,7 @@ class Holder:
 class ImageHolder(Holder):
 
 	def __init__(self, zip_file=None, *args, **kwargs):
-			super(ImageHolder, self).__init__(*args, **kwargs)
+		super(ImageHolder, self).__init__(*args, **kwargs)
 		self.zip_file = zip_file
 
 	def image_size(self):
