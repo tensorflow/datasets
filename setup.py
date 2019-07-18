@@ -1,9 +1,12 @@
 """tensorflow/datasets is a library of datasets ready to use with TensorFlow.
+
 tensorflow/datasets is a library of public datasets ready to use with
 TensorFlow. Each dataset definition contains the logic necessary to download and
 prepare the dataset, as well as to read it into a model using the
 `tf.data.Dataset` API.
+
 Usage outside of TensorFlow is also supported.
+
 See the README on GitHub for further documentation.
 """
 
@@ -40,7 +43,7 @@ REQUIRED_PKGS = [
     'attrs',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
-    'matplotlib'
+    'matplotlib',
     'numpy',
     'promise',
     'protobuf>=3.6.1',
