@@ -8,7 +8,8 @@
 `tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a
 collection of datasets ready-to-use with TensorFlow.
 
-Defined in [`__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -32,6 +33,8 @@ The main library entrypoints are:
 ## Modules
 
 [`core`](./tfds/core.md) module: API to define datasets.
+
+[`decode`](./tfds/decode.md) module: Decoder public API.
 
 [`download`](./tfds/download.md) module: <a href="./tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a> API.
 

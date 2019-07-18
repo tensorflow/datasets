@@ -124,7 +124,7 @@ def _get_dataset_files(name, path, instruction, name2shard_lengths):
 
 def _read_single_instruction(
     instruction,
-    parse_fn, name, path, name2len, name2shard_lengths):
+    parse_fn, name, path, name2len, name2shard_lengths, shuffle_files):
   """Returns tf.data.Dataset for given instruction.
 
   Args:
@@ -135,6 +135,7 @@ def _read_single_instruction(
     path (str): path to directory where to read tfrecords from.
     name2len: dict associating split names to number of examples.
     name2shard_lengths: dict associating split names to shard lengths.
+    shuffle_files (bool): Defaults to False. True to shuffle input files.
   """
   if not isinstance(instruction, ReadInstruction):
     instruction = ReadInstruction.from_spec(instruction)
@@ -162,7 +163,13 @@ def _read_single_instruction(
   parallel_reads = 16
   block_length = 16
 
-  dataset = tf.data.Dataset.from_tensor_slices(tensor_inputs).interleave(
+  instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
+
+  # If shuffle is True, we shuffle the instructions/shards
+  if shuffle_files:
+    instruction_ds = instruction_ds.shuffle(len(tensor_inputs))
+
+  dataset = instruction_ds.interleave(
       functools.partial(_get_dataset_from_filename,
                         do_skip=do_skip, do_take=do_take),
       cycle_length=parallel_reads,
@@ -193,7 +200,7 @@ class Reader(object):
     self._path = path
     self._parser = example_parser.ExampleParser(example_specs)
 
-  def read(self, name, instructions, split_infos):
+  def read(self, name, instructions, split_infos, shuffle_files=False):
     """Returns tf.data.Dataset instance(s).
 
     Args:
@@ -202,6 +209,8 @@ class Reader(object):
         Instructions can be string and will then be passed to the Instruction
         constructor as it.
       split_infos (list of SplitInfo proto): the available splits for dataset.
+      shuffle_files (bool): defaults to False. If True, input files are shuffled
+        before being read.
 
     Returns:
        a single tf.data.Dataset instance if instruction is a single
@@ -215,7 +224,8 @@ class Reader(object):
         _read_single_instruction,
         parse_fn=self._parser.parse_example,
         name=name, path=self._path,
-        name2len=name2len, name2shard_lengths=name2shard_lengths)
+        name2len=name2len, name2shard_lengths=name2shard_lengths,
+        shuffle_files=shuffle_files)
     datasets = utils.map_nested(read_instruction, instructions, map_tuple=True)
     return datasets
 

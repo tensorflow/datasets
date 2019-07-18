@@ -7,7 +7,8 @@
 
 Testing utilities.
 
-Defined in [`testing/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/__init__.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/__init__.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 

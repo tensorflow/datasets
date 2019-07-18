@@ -312,10 +312,53 @@ class DatasetBuilder(object):
                  split=None,
                  batch_size=None,
                  shuffle_files=None,
-                 as_supervised=False):
+                 decoders=None,
+                 as_supervised=False,
+                 in_memory=None):
+    # pylint: disable=line-too-long
     """Constructs a `tf.data.Dataset`.
 
     Callers must pass arguments as keyword arguments.
+
+    The output types vary depending on the parameters. Examples:
+
+    ```python
+    builder = tfds.builder('imdb_reviews')
+    builder.download_and_prepare()
+
+    # Default parameters: Returns the dict of tf.data.Dataset
+    ds_all_dict = builder.as_dataset()
+    assert isinstance(ds_all_dict, dict)
+    print(ds_all_dict.keys())  # ==> ['test', 'train', 'unsupervised']
+
+    assert isinstance(ds_all_dict['test'], tf.data.Dataset)
+    # Each dataset (test, train, unsup.) consists of dictionaries
+    # {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
+    #  'text': <tf.Tensor: .. dtype=string, numpy=b"I've watched the movie ..">}
+    # {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
+    #  'text': <tf.Tensor: .. dtype=string, numpy=b'If you love Japanese ..'>}
+
+    # With as_supervised: tf.data.Dataset only contains (feature, label) tuples
+    ds_all_supervised = builder.as_dataset(as_supervised=True)
+    assert isinstance(ds_all_supervised, dict)
+    print(ds_all_supervised.keys())  # ==> ['test', 'train', 'unsupervised']
+
+    assert isinstance(ds_all_supervised['test'], tf.data.Dataset)
+    # Each dataset (test, train, unsup.) consists of tuples (text, label)
+    # (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
+    #  <tf.Tensor: ... dtype=int64, numpy=1>)
+    # (<tf.Tensor: ... dtype=string, numpy=b"If you love Japanese ..">,
+    #  <tf.Tensor: ... dtype=int64, numpy=1>)
+
+    # Same as above plus requesting a particular split
+    ds_test_supervised = builder.as_dataset(as_supervised=True, split='test')
+    assert isinstance(ds_test_supervised, tf.data.Dataset)
+    # The dataset consists of tuples (text, label)
+    # (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
+    #  <tf.Tensor: ... dtype=int64, numpy=1>)
+    # (<tf.Tensor: ... dtype=string, numpy=b"If you love Japanese ..">,
+    #  <tf.Tensor: ... dtype=int64, numpy=1>)
+    ```
 
     Args:
       split: `tfds.core.SplitBase`, which subset(s) of the data to read. If None
@@ -329,11 +372,20 @@ class DatasetBuilder(object):
         `tf.data.Dataset`.
       shuffle_files: `bool`, whether to shuffle the input files.
         Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+      decoders: Nested dict of `Decoder` objects which allow to customize the
+        decoding. The structure should match the feature structure, but only
+        customized feature keys need to be present. See
+        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+        for more info.
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
         will have a 2-tuple structure `(input, label)` according to
         `builder.info.supervised_keys`. If `False`, the default,
         the returned `tf.data.Dataset` will have a dictionary with all the
         features.
+      in_memory: `bool`, if `True`, loads the dataset in memory which
+        increases iteration speeds. Note that if `True` and the dataset has
+        unknown dimensions, the features will be padded to the maximum
+        size across the dataset.
 
     Returns:
       `tf.data.Dataset`, or if `split=None`, `dict<key: tfds.Split, value:
@@ -342,6 +394,7 @@ class DatasetBuilder(object):
       If `batch_size` is -1, will return feature dictionaries containing
       the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
     """
+    # pylint: enable=line-too-long
     logging.info("Constructing tf.data.Dataset for split %s, from %s",
                  split, self._data_dir)
     if not tf.io.gfile.exists(self._data_dir):
@@ -360,26 +413,82 @@ class DatasetBuilder(object):
         self._build_single_dataset,
         shuffle_files=shuffle_files,
         batch_size=batch_size,
+        decoders=decoders,
         as_supervised=as_supervised,
+        in_memory=in_memory,
     )
     datasets = utils.map_nested(build_single_dataset, split, map_tuple=True)
     return datasets
 
-  def _build_single_dataset(self, split, shuffle_files, batch_size,
-                            as_supervised):
+  def _build_single_dataset(
+      self,
+      split,
+      shuffle_files,
+      batch_size,
+      decoders,
+      as_supervised,
+      in_memory):
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
 
     if shuffle_files is None:
       # Shuffle files if training
-      shuffle_files = split == splits_lib.Split.TRAIN
+      if split == splits_lib.Split.TRAIN:
+        logging.warning(
+            "Warning: Setting shuffle_files=True because split=TRAIN and "
+            "shuffle_files=None. This behavior will be deprecated on "
+            "2019-08-06, "
+            "at which point shuffle_files=False will be the default for all "
+            "splits.")
+        shuffle_files = True
 
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
       batch_size = self.info.splits.total_num_examples or sys.maxsize
 
-    dataset = self._as_dataset(split=split, shuffle_files=shuffle_files)
+    # If the dataset is small, load it in memory
+    dataset_shape_is_fully_defined = (
+        dataset_utils.features_shape_is_fully_defined(self.info.features))
+    in_memory_default = False
+    # TODO(tfds): Consider default in_memory=True for small datasets with
+    # fully-defined shape.
+    # Expose and use the actual data size on disk and rm the manual
+    # name guards. size_in_bytes is the download size, which is misleading,
+    # particularly for datasets that use manual_dir as well as some downloads
+    # (wmt and diabetic_retinopathy_detection).
+    # in_memory_default = (
+    #     self.info.size_in_bytes and
+    #     self.info.size_in_bytes <= 1e9 and
+    #     not self.name.startswith("wmt") and
+    #     not self.name.startswith("diabetic") and
+    #     dataset_shape_is_fully_defined)
+    in_memory = in_memory_default if in_memory is None else in_memory
+
+    # Build base dataset
+    if in_memory and not wants_full_dataset:
+      # TODO(tfds): Enable in_memory without padding features. May be able
+      # to do by using a requested version of tf.data.Dataset.cache that can
+      # persist a cache beyond iterator instances.
+      if not dataset_shape_is_fully_defined:
+        logging.warning("Called in_memory=True on a dataset that does not "
+                        "have fully defined shapes. Note that features with "
+                        "variable length dimensions will be 0-padded to "
+                        "the maximum length across the dataset.")
+      full_bs = self.info.splits.total_num_examples or sys.maxsize
+      # If using in_memory, escape all device contexts so we can load the data
+      # with a local Session.
+      with tf.device(None):
+        dataset = self._as_dataset(
+            split=split, shuffle_files=shuffle_files, decoders=decoders)
+        # Use padded_batch so that features with unknown shape are supported.
+        dataset = dataset.padded_batch(full_bs, dataset.output_shapes)
+        dataset = tf.data.Dataset.from_tensor_slices(
+            next(dataset_utils.as_numpy(dataset)))
+    else:
+      dataset = self._as_dataset(
+          split=split, shuffle_files=shuffle_files, decoders=decoders)
+
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
       dataset = dataset.padded_batch(batch_size, dataset.output_shapes)
@@ -463,7 +572,7 @@ class DatasetBuilder(object):
                 name=self.name,
                 data_dir=self._data_dir_root,
                 cur_version=str(self._version)))
-        logging.warn(warn_msg)
+        logging.warning(warn_msg)
 
     return version_data_dir
 
@@ -515,7 +624,7 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _as_dataset(self, split, shuffle_files=None):
+  def _as_dataset(self, split, decoders=None, shuffle_files=None):
     """Constructs a `tf.data.Dataset`.
 
     This is the internal implementation to overwrite called when user calls
@@ -523,8 +632,10 @@ class DatasetBuilder(object):
     the `tf.data.Dataset` object.
 
     Args:
-      split (`tfds.Split`): which subset of the data to read.
-      shuffle_files (bool): whether to shuffle the input files. Optional,
+      split: `tfds.Split` which subset of the data to read.
+      decoders: Nested structure of `Decoder` object to customize the dataset
+        decoding.
+      shuffle_files: `bool`, whether to shuffle the input files. Optional,
         defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 
     Returns:
@@ -707,10 +818,15 @@ class FileAdapterBuilder(DatasetBuilder):
     # Update the info object with the splits.
     self.info.update_splits_if_different(split_dict)
 
-  def _as_dataset(self, split=splits_lib.Split.TRAIN, shuffle_files=None):
+  def _as_dataset(
+      self,
+      split=splits_lib.Split.TRAIN,
+      decoders=None,
+      shuffle_files=False):
+
     if self.version.implements(utils.Experiment.S3):
       dataset = self._tfrecords_reader.read(
-          self.name, split, self.info.splits.values())
+          self.name, split, self.info.splits.values(), shuffle_files)
     else:
       # Resolve all the named split tree by real ones
       read_instruction = split.get_read_instruction(self.info.splits)
@@ -728,9 +844,11 @@ class FileAdapterBuilder(DatasetBuilder):
           dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
           shuffle_files=shuffle_files,
       )
+
+    decode_fn = functools.partial(
+        self.info.features.decode_example, decoders=decoders)
     dataset = dataset.map(
-        self.info.features.decode_example,
-        num_parallel_calls=tf.data.experimental.AUTOTUNE)
+        decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
     return dataset
 
   def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
@@ -840,13 +958,15 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     generator = self._generate_examples(**split_generator.gen_kwargs)
     split_info = split_generator.split_info
     if max_examples_per_split is not None:
-      logging.warn("Splits capped at %s examples max.", max_examples_per_split)
+      logging.warning("Splits capped at %s examples max.",
+                      max_examples_per_split)
       generator = itertools.islice(generator, max_examples_per_split)
     if not self.version.implements(utils.Experiment.S3):
       return self._prepare_split_legacy(generator, split_info)
     fname = "{}-{}.tfrecord".format(self.name, split_generator.name)
     fpath = os.path.join(self._data_dir, fname)
-    writer = tfrecords_writer.Writer(self._example_specs, fpath)
+    writer = tfrecords_writer.Writer(self._example_specs, fpath,
+                                     hash_salt=split_generator.name)
     for key, record in utils.tqdm(generator, unit=" examples",
                                   total=split_info.num_examples, leave=False):
       example = self.info.features.encode_example(record)

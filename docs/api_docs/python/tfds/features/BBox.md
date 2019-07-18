@@ -13,7 +13,8 @@
 
 BBox(ymin, xmin, ymax, xmax)
 
-Defined in [`core/features/bounding_boxes.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 

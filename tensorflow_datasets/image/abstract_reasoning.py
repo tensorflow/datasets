@@ -141,7 +141,10 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
         "attrs.pairs", "attrs.shape.color", "attrs.line.type",].
       **kwargs: keyword arguments forwarded to super.
     """
-    super(AbstractReasoningConfig, self).__init__(**kwargs)
+    super(AbstractReasoningConfig, self).__init__(
+        version=tfds.core.Version("0.0.2",
+                                  experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.split_type = split_type
 
 
@@ -150,48 +153,40 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
   BUILDER_CONFIGS = [
       AbstractReasoningConfig(
           name="neutral",
-          version="0.0.2",
           description=_DESCRIPTION_NEUTRAL,
       ),
       AbstractReasoningConfig(
           name="interpolation",
-          version="0.0.2",
           description=_DESCRIPTION_INTERPOLATION,
           split_type="interpolation",
       ),
       AbstractReasoningConfig(
           name="extrapolation",
-          version="0.0.2",
           description=_DESCRIPTION_EXTRAPOLATION,
           split_type="extrapolation",
       ),
       AbstractReasoningConfig(
           name="attr.rel.pairs",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_REL_PAIRS,
           split_type="attr.rel.pairs",
       ),
       AbstractReasoningConfig(
           name="attr.rels",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_RELS,
           split_type="attr.rels",
       ),
       AbstractReasoningConfig(
           name="attrs.pairs",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_PAIRS,
           split_type="attrs.pairs",
       ),
       AbstractReasoningConfig(
           name="attrs.shape.color",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_SHAPE_COLOR,
           split_type="attrs.shape.color",
       ),
       AbstractReasoningConfig(
           name="attrs.line.type",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_LINE_TYPE,
           split_type="attrs.line.type",
       ),

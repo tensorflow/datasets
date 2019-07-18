@@ -22,9 +22,8 @@
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
-
-
-Defined in [`core/features/image_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -48,6 +47,9 @@ Input: The image connector accepts as input:
     np.ones(shape=(64, 64, 1), dtype=np.uint8), }
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
 
 ``` python
 __init__(
@@ -89,6 +91,9 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
+
 ``` python
 decode_example(example)
 ```
@@ -96,6 +101,9 @@ decode_example(example)
 Reconstruct the image from the tf example.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
 
 ``` python
 encode_example(image_or_path_or_fobj)
@@ -105,17 +113,26 @@ Convert the given image into a dict convertible to tf example.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
+
 ``` python
 get_serialized_info()
 ```
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
 
 ``` python
 load_metadata(
@@ -128,6 +145,9 @@ See base class for details.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
+
 ``` python
 save_metadata(
     data_dir,
@@ -139,6 +159,9 @@ See base class for details.
 
 <h3 id="set_encoding_format"><code>set_encoding_format</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
+
 ``` python
 set_encoding_format(encoding_format)
 ```
@@ -146,6 +169,9 @@ set_encoding_format(encoding_format)
 Update the encoding format.
 
 <h3 id="set_shape"><code>set_shape</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+source</a>
 
 ``` python
 set_shape(shape)

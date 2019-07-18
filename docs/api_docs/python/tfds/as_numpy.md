@@ -14,9 +14,8 @@ tfds.as_numpy(
 )
 ```
 
-
-
-Defined in [`core/dataset_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 

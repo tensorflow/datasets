@@ -30,7 +30,8 @@
 
 Information about a dataset.
 
-Defined in [`core/dataset_info.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -43,6 +44,9 @@ split is typically updated during data generation (i.e. on calling
 `builder.download_and_prepare()`).
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+source</a>
 
 ```python
 __init__(
@@ -120,11 +124,17 @@ Whether DatasetInfo has been fully initialized.
 
 <h3 id="compute_dynamic_properties"><code>compute_dynamic_properties</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+source</a>
+
 ``` python
 compute_dynamic_properties()
 ```
 
 <h3 id="initialize_from_bucket"><code>initialize_from_bucket</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+source</a>
 
 ``` python
 initialize_from_bucket()
@@ -133,6 +143,9 @@ initialize_from_bucket()
 Initialize DatasetInfo from GCS bucket info files.
 
 <h3 id="read_from_directory"><code>read_from_directory</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+source</a>
 
 ``` python
 read_from_directory(dataset_info_dir)
@@ -152,6 +165,9 @@ This will overwrite all previous metadata.
 
 <h3 id="update_splits_if_different"><code>update_splits_if_different</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+source</a>
+
 ``` python
 update_splits_if_different(split_dict)
 ```
@@ -170,6 +186,9 @@ Overwrite the splits if they are different from the current ones.
 * <b>`split_dict`</b>: <a href="../../tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>, the new split
 
 <h3 id="write_to_directory"><code>write_to_directory</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+source</a>
 
 ``` python
 write_to_directory(dataset_info_dir)

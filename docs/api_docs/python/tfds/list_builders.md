@@ -12,8 +12,7 @@ Returns the string names of all
 tfds.list_builders()
 ```
 
-
-
-Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->

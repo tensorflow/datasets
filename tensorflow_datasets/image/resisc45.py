@@ -65,7 +65,15 @@ _URL = 'http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html'
 class Resisc45(tfds.core.GeneratorBasedBuilder):
   """NWPU Remote Sensing Image Scene Classification (RESISC) Dataset."""
 
-  VERSION = tfds.core.Version('0.0.1')
+  VERSION = tfds.core.Version('0.0.1',
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('2.0.0'),
+      tfds.core.Version('1.0.0'),
+  ]
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -100,8 +108,12 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     for label in tf.io.gfile.listdir(path):
       for filename in tf.io.gfile.glob(os.path.join(path, label, '*.jpg')):
-        yield {
+        record = {
             'image': filename,
             'label': label,
             'filename': os.path.basename(filename)
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield filename, record
+        else:
+          yield record

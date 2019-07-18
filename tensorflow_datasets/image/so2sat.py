@@ -63,10 +63,20 @@ class So2satConfig(tfds.core.BuilderConfig):
       selection: `str`, one of `_DATA_OPTIONS`.
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    super(So2satConfig, self).__init__(**kwargs)
+    super(So2satConfig, self).__init__(
+        version=tfds.core.Version(
+            '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version('2.0.0'),
+            tfds.core.Version('1.0.0'),
+        ],
+        **kwargs)
     self.selection = selection
 
 
@@ -77,12 +87,10 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
       So2satConfig(
           selection='rgb',
           name='rgb',
-          version='0.0.1',
           description='Sentinel-2 RGB channels'),
       So2satConfig(
           selection='all',
           name='all',
-          version='0.0.1',
           description='8 Sentinel-1 and 10 Sentinel-2 channels'),
   ]
 
@@ -147,18 +155,22 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
       label = fid['label']
       for i in range(len(sen1)):
         if selection == 'rgb':
-          yield {
+          record = {
               'image': _create_rgb(sen2[i]),
               'label': np.argmax(label[i]).astype(int),
               'sample_id': i,
           }
         elif selection == 'all':
-          yield {
+          record = {
               'sentinel1': sen1[i].astype(np.float32),
               'sentinel2': sen2[i].astype(np.float32),
               'label': np.argmax(label[i]).astype(int),
               'sample_id': i,
           }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield i, record
+        else:
+          yield record
 
 
 def _create_rgb(sen2_bands):

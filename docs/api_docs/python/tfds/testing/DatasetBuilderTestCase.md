@@ -57,6 +57,7 @@
 <meta itemprop="property" content="assertMultiLineEqual"/>
 <meta itemprop="property" content="assertNDArrayNear"/>
 <meta itemprop="property" content="assertNear"/>
+<meta itemprop="property" content="assertNestedListAlmostEqual"/>
 <meta itemprop="property" content="assertNoCommonElements"/>
 <meta itemprop="property" content="assertNotAllClose"/>
 <meta itemprop="property" content="assertNotAlmostEqual"/>
@@ -72,6 +73,8 @@
 <meta itemprop="property" content="assertNotStartsWith"/>
 <meta itemprop="property" content="assertProtoEquals"/>
 <meta itemprop="property" content="assertProtoEqualsVersion"/>
+<meta itemprop="property" content="assertRaggedAlmostEqual"/>
+<meta itemprop="property" content="assertRaggedEqual"/>
 <meta itemprop="property" content="assertRaises"/>
 <meta itemprop="property" content="assertRaisesOpError"/>
 <meta itemprop="property" content="assertRaisesRegex"/>
@@ -104,6 +107,7 @@
 <meta itemprop="property" content="debug"/>
 <meta itemprop="property" content="defaultTestResult"/>
 <meta itemprop="property" content="doCleanups"/>
+<meta itemprop="property" content="eval_to_list"/>
 <meta itemprop="property" content="evaluate"/>
 <meta itemprop="property" content="fail"/>
 <meta itemprop="property" content="failIf"/>
@@ -137,10 +141,10 @@
 <meta itemprop="property" content="DATASET_CLASS"/>
 <meta itemprop="property" content="DL_EXTRACT_RESULT"/>
 <meta itemprop="property" content="EXAMPLE_DIR"/>
-<meta itemprop="property" content="INTERNAL_DATASET"/>
 <meta itemprop="property" content="MOCK_MONARCH"/>
 <meta itemprop="property" content="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"/>
 <meta itemprop="property" content="OVERLAPPING_SPLITS"/>
+<meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="longMessage"/>
 <meta itemprop="property" content="maxDiff"/>
 <meta itemprop="property" content="tempfile_cleanup"/>
@@ -154,42 +158,49 @@ Inherit this class to test your DatasetBuilder class.
 
 Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)
 
-Defined in [`testing/dataset_builder_testing.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
 You must set the following class attributes:
-  DATASET_CLASS: class object of DatasetBuilder you want to test.
+
+*   DATASET_CLASS: class object of DatasetBuilder you want to test.
 
 You may set the following class attributes:
-  BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
-    that should be tested. If None, all the BUILDER_CONFIGS from the class
-    will be tested.
-  DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
+
+*   VERSION: `str`. The version used to run the test. eg: '1.2.*'. Defaults to
+    None (canonical version).
+*   BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs that
+    should be tested. If None, all the BUILDER_CONFIGS from the class will be
+    tested.
+*   DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
     `download_and_extract` method. The values should be the path of files
-    present in the `fake_examples` directory, relative to that directory.
-    If not specified, path to `fake_examples` will always be returned.
-  EXAMPLE_DIR: `str`, the base directory in in which fake examples are
+    present in the `fake_examples` directory, relative to that directory. If not
+    specified, path to `fake_examples` will always be returned.
+*   EXAMPLE_DIR: `str`, the base directory in in which fake examples are
     contained. Optional; defaults to
     tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
-  OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
+*   OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
     splits (e.g. a "example" split containing pictures from other splits).
-  MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
+*   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
     disable checks preventing usage of `os` or builtin functions instead of
     recommended `tf.io.gfile` API.
 
 This test case will check for the following:
- - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
- - the dataset builder can read the fake examples stored in
-     testing/test_data/fake_examples/${dataset_name};
- - the dataset builder can produce serialized data;
- - the dataset builder produces a valid Dataset object from serialized data
-   - in eager mode;
-   - in graph mode.
- - the produced Dataset examples have the expected dimensions and types;
- - the produced Dataset has and the expected number of examples;
- - a example is not part of two splits, or one of these splits is whitelisted
-     in OVERLAPPING_SPLITS.
+
+-   the dataset builder is correctly registered, i.e.
+    <a href="../../tfds/load.md"><code>tfds.load(name)</code></a> works;
+-   the dataset builder can read the fake examples stored in
+    testing/test_data/fake_examples/${dataset_name};
+-   the dataset builder can produce serialized data;
+-   the dataset builder produces a valid Dataset object from serialized data
+    -   in eager mode;
+    -   in graph mode.
+-   the produced Dataset examples have the expected dimensions and types;
+-   the produced Dataset has and the expected number of examples;
+-   a example is not part of two splits, or one of these splits is whitelisted
+    in OVERLAPPING_SPLITS.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -350,22 +361,22 @@ one of the arguments is of type float16.
 
 <h3 id="assertAllEqual"><code>assertAllEqual</code></h3>
 
-``` python
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
+
+```python
 assertAllEqual(
-    *args,
-    **kwds
+    d1,
+    d2
 )
 ```
 
-Asserts that two numpy arrays or Tensors have the same values.
-
-#### Args:
-
-* <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
-* <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
-* <b>`msg`</b>: Optional message to report on failure.
+Same as assertAllEqual but with RaggedTensor support.
 
 <h3 id="assertAllEqualNested"><code>assertAllEqualNested</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
 
 ```python
 assertAllEqualNested(
@@ -1137,6 +1148,20 @@ if not.
 * <b>`err`</b>: A float value.
 * <b>`msg`</b>: An optional string message to append to the failure message.
 
+<h3 id="assertNestedListAlmostEqual"><code>assertNestedListAlmostEqual</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+source</a>
+
+```python
+assertNestedListAlmostEqual(
+    a,
+    b,
+    places=7,
+    context='value'
+)
+```
+
 <h3 id="assertNoCommonElements"><code>assertNoCommonElements</code></h3>
 
 ``` python
@@ -1369,6 +1394,33 @@ assertProtoEqualsVersion(
 )
 ```
 
+<h3 id="assertRaggedAlmostEqual"><code>assertRaggedAlmostEqual</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+source</a>
+
+```python
+assertRaggedAlmostEqual(
+    a,
+    b,
+    places=7
+)
+```
+
+<h3 id="assertRaggedEqual"><code>assertRaggedEqual</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+source</a>
+
+```python
+assertRaggedEqual(
+    a,
+    b
+)
+```
+
+Asserts that two potentially ragged tensors are equal.
+
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
 ``` python
@@ -1477,6 +1529,9 @@ A context manager if callable_obj is None. Otherwise, None.
 self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py>View
+source</a>
 
 ``` python
 assertRaisesWithPredicateMatch(
@@ -2109,6 +2164,15 @@ doCleanups()
 
 Execute all cleanup functions. Normally called for you after tearDown.
 
+<h3 id="eval_to_list"><code>eval_to_list</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+source</a>
+
+```python
+eval_to_list(tensor)
+```
+
 <h3 id="evaluate"><code>evaluate</code></h3>
 
 ``` python
@@ -2335,11 +2399,17 @@ the graph building and execution code in a test case.
 
 <h3 id="setUp"><code>setUp</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
+
 ``` python
 setUp()
 ```
 
 <h3 id="setUpClass"><code>setUpClass</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
 
 ``` python
 @classmethod
@@ -2385,6 +2455,9 @@ Return a context manager that will run the enclosed subtest.
 
 <h3 id="tearDown"><code>tearDown</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
+
 ``` python
 tearDown()
 ```
@@ -2399,11 +2472,17 @@ Hook method for deconstructing the class fixture after running all tests in the 
 
 <h3 id="test_baseclass"><code>test_baseclass</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
+
 ``` python
 test_baseclass()
 ```
 
 <h3 id="test_download_and_prepare_as_dataset"><code>test_download_and_prepare_as_dataset</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+source</a>
 
 ``` python
 test_download_and_prepare_as_dataset(
@@ -2416,11 +2495,17 @@ Run the decorated test method.
 
 <h3 id="test_info"><code>test_info</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
+
 ``` python
 test_info()
 ```
 
 <h3 id="test_registered"><code>test_registered</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py>View
+source</a>
 
 ``` python
 test_registered()
@@ -2450,11 +2535,11 @@ Use `self.session()` or `self.cached_session()` instead.
 *   `DATASET_CLASS = None` <a id="DATASET_CLASS"></a>
 *   `DL_EXTRACT_RESULT = None` <a id="DL_EXTRACT_RESULT"></a>
 *   `EXAMPLE_DIR = None` <a id="EXAMPLE_DIR"></a>
-*   `INTERNAL_DATASET = False` <a id="INTERNAL_DATASET"></a>
 *   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
 *   `MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True`
     <a id="MOCK_OUT_FORBIDDEN_OS_FUNCTIONS"></a>
 *   `OVERLAPPING_SPLITS` <a id="OVERLAPPING_SPLITS"></a>
+*   `VERSION = None` <a id="VERSION"></a>
 *   `longMessage = True` <a id="longMessage"></a>
 *   `maxDiff = 1600` <a id="maxDiff"></a>
 *   `tempfile_cleanup` <a id="tempfile_cleanup"></a>

@@ -26,12 +26,16 @@
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
-Defined in [`core/features/text_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py).
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
 
 <!-- Placeholder for "Used in" -->
 
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
 
 ``` python
 __init__(
@@ -70,6 +74,9 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+source</a>
+
 ``` python
 decode_example(tfexample_data)
 ```
@@ -93,11 +100,17 @@ graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
+
 ``` python
 encode_example(example_data)
 ```
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+source</a>
 
 ``` python
 get_serialized_info()
@@ -136,6 +149,9 @@ If not defined, the retuned values are automatically deduced from the
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -144,6 +160,9 @@ See base class for details.
 
 <h3 id="ints2str"><code>ints2str</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
+
 ``` python
 ints2str(int_values)
 ```
@@ -151,6 +170,9 @@ ints2str(int_values)
 Conversion list[int] => decoded string.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
 
 ``` python
 load_metadata(
@@ -161,6 +183,9 @@ load_metadata(
 
 <h3 id="maybe_build_from_corpus"><code>maybe_build_from_corpus</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
+
 ``` python
 maybe_build_from_corpus(
     corpus_generator,
@@ -170,7 +195,21 @@ maybe_build_from_corpus(
 
 Call SubwordTextEncoder.build_from_corpus is encoder_cls is such.
 
+If `self.encoder` is `None` and `self._encoder_cls` is of type
+`SubwordTextEncoder`, the method instantiates `self.encoder` as returned by
+<a href="../../tfds/features/text/SubwordTextEncoder.md#build_from_corpus"><code>SubwordTextEncoder.build_from_corpus()</code></a>.
+
+#### Args:
+
+*   <b>`corpus_generator`</b>: generator yielding `str`, from which subwords
+    will be constructed.
+*   <b>`**kwargs`</b>: kwargs forwarded to
+    <a href="../../tfds/features/text/SubwordTextEncoder.md#build_from_corpus"><code>SubwordTextEncoder.build_from_corpus()</code></a>
+
 <h3 id="maybe_set_encoder"><code>maybe_set_encoder</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
 
 ``` python
 maybe_set_encoder(new_encoder)
@@ -180,6 +219,9 @@ Set encoder, but no-op if encoder is already set.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
+
 ``` python
 save_metadata(
     data_dir,
@@ -188,6 +230,9 @@ save_metadata(
 ```
 
 <h3 id="str2ints"><code>str2ints</code></h3>
+
+<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+source</a>
 
 ``` python
 str2ints(str_value)

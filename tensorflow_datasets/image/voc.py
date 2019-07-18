@@ -79,10 +79,49 @@ _VOC2007_POSES = (
 )
 
 
+def _get_example_objects(annon_filepath):
+  """Function to get all the objects from the annotation XML file."""
+  with tf.io.gfile.GFile(annon_filepath, "r") as f:
+    root = xml.etree.ElementTree.parse(f).getroot()
+
+    size = root.find("size")
+    width = float(size.find("width").text)
+    height = float(size.find("height").text)
+
+    for obj in root.findall("object"):
+      # Get object's label name.
+      label = obj.find("name").text.lower()
+      # Get objects' pose name.
+      pose = obj.find("pose").text.lower()
+      is_truncated = (obj.find("truncated").text == "1")
+      is_difficult = (obj.find("difficult").text == "1")
+      bndbox = obj.find("bndbox")
+      xmax = float(bndbox.find("xmax").text)
+      xmin = float(bndbox.find("xmin").text)
+      ymax = float(bndbox.find("ymax").text)
+      ymin = float(bndbox.find("ymin").text)
+      yield {
+          "label": label,
+          "pose": pose,
+          "bbox": tfds.features.BBox(
+              ymin / height, xmin / width, ymax / height, xmax / width),
+          "is_truncated": is_truncated,
+          "is_difficult": is_difficult,
+      }
+
+
 class Voc2007(tfds.core.GeneratorBasedBuilder):
   """Pascal VOC 2007."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
+  ]
+  # Version history:
+  # 3.0.0: S3 with new hashing function (different shuffle).
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -132,7 +171,11 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(set_filepath, "r") as f:
       for line in f:
         image_id = line.strip()
-        yield self._generate_example(data_path, image_id)
+        example = self._generate_example(data_path, image_id)
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield image_id, example
+        else:
+          yield example
 
   def _generate_example(self, data_path, image_id):
     """Yields examples."""
@@ -140,38 +183,7 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
         data_path, "VOCdevkit/VOC2007/JPEGImages", "{}.jpg".format(image_id))
     annon_filepath = os.path.join(
         data_path, "VOCdevkit/VOC2007/Annotations", "{}.xml".format(image_id))
-
-    def _get_example_objects():
-      """Function to get all the objects from the annotation XML file."""
-      with tf.io.gfile.GFile(annon_filepath, "r") as f:
-        root = xml.etree.ElementTree.parse(f).getroot()
-
-        size = root.find("size")
-        width = float(size.find("width").text)
-        height = float(size.find("height").text)
-
-        for obj in root.findall("object"):
-          # Get object's label name.
-          label = obj.find("name").text.lower()
-          # Get objects' pose name.
-          pose = obj.find("pose").text.lower()
-          is_truncated = (obj.find("truncated").text == "1")
-          is_difficult = (obj.find("difficult").text == "1")
-          bndbox = obj.find("bndbox")
-          xmax = float(bndbox.find("xmax").text)
-          xmin = float(bndbox.find("xmin").text)
-          ymax = float(bndbox.find("ymax").text)
-          ymin = float(bndbox.find("ymin").text)
-          yield {
-              "label": label,
-              "pose": pose,
-              "bbox": tfds.features.BBox(
-                  ymin / height, xmin / width, ymax / height, xmax / width),
-              "is_truncated": is_truncated,
-              "is_difficult": is_difficult,
-          }
-
-    objects = list(_get_example_objects())
+    objects = list(_get_example_objects(annon_filepath))
     # Use set() to remove duplicates
     labels = sorted(set(obj["label"] for obj in objects))
     labels_no_difficult = sorted(set(

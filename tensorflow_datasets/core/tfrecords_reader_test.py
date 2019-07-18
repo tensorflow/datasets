@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import itertools
 import os
 
 from absl.testing import absltest
@@ -301,6 +302,28 @@ class ReaderTest(testing.TestCase):
     ds = self.reader.read('mnist', 'train[1:-1]+test[:-50%]', self.SPLIT_INFOS)
     read_data = list(tfds.as_numpy(ds))
     self.assertEqual(read_data, [six.b(l) for l in 'bcdefghijkmno'])
+
+  def test_shuffle_files(self):
+    self._write_tfrecord('train', 5, 'abcdefghijkl')
+    ds = self.reader.read('mnist', 'train', self.SPLIT_INFOS,
+                          shuffle_files=True)
+    shards = [  # The shards of the dataset:
+        [b'a', b'b'],
+        [b'c', b'd', b'e'],
+        [b'f', b'g'],
+        [b'h', b'i', b'j'],
+        [b'k', b'l'],
+    ]
+    # The various orders in which the dataset can be read:
+    expected_permutations = [tuple(sum(shard, []))
+                             for shard in itertools.permutations(shards)]
+    ds = ds.batch(12).repeat(100)
+    read_data = set(tuple(e) for e in tfds.as_numpy(ds))
+    for batch in read_data:
+      self.assertIn(batch, expected_permutations)
+    # There are theoritically 5! (=120) different arrangements, but we would
+    # need too many repeats to be sure to get them.
+    self.assertGreater(len(set(read_data)), 10)
 
   def test_4fold(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')
