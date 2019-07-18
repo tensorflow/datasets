@@ -109,8 +109,12 @@ class DatasetInfo(object):
       features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
-      supervised_keys: `tuple`, Specifies the input feature and the label for
-        supervised learning, if applicable for the dataset.
+      supervised_keys: `tuple` of size two, optional. The first item is
+        the key from `features` corresponding to a single feature
+        representing the input, the second item is the key of the
+        "feature" containing the label for supervised learning,
+        if applicable for the dataset. Used for transforming the dataset in
+        `tfds.core.DatasetBuilder.as_dataset()`.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
