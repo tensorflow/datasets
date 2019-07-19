@@ -17,7 +17,7 @@
 
 Manages the download and extraction of files, as well as caching.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -68,7 +68,7 @@ For more customization on the download/extraction (ex: passwords, output_name,
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
 ``` python
@@ -115,7 +115,7 @@ Returns the directory containing the manually extracted data.
 
 <h3 id="download"><code>download</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
 ``` python
@@ -137,7 +137,7 @@ downloaded_path(s): `str`, The downloaded paths matching the given input
 
 <h3 id="download_and_extract"><code>download_and_extract</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
 ``` python
@@ -167,7 +167,7 @@ extracted_path(s): `str`, extracted paths of given URL(s).
 
 <h3 id="download_kaggle_data"><code>download_kaggle_data</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
 ``` python
@@ -178,7 +178,7 @@ Download data for a given Kaggle competition.
 
 <h3 id="extract"><code>extract</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
 ``` python
@@ -203,7 +203,7 @@ extracted_path(s): `str`, The extracted paths matching the given input
 
 <h3 id="iter_archive"><code>iter_archive</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
 ``` python

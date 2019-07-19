@@ -12,14 +12,14 @@
 
 Structure containing info on the `tf.Tensor` shape/dtype.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ```python
@@ -47,7 +47,7 @@ Constructor.
 
 <h3 id="__eq__"><code>__eq__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ```python
@@ -58,7 +58,7 @@ Equality.
 
 <h3 id="copy_from"><code>copy_from</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ```python

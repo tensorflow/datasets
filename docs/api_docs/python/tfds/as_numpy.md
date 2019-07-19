@@ -14,7 +14,7 @@ tfds.as_numpy(
 )
 ```
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

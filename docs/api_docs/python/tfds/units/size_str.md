@@ -11,7 +11,7 @@ Returns a human readable size string.
 tfds.units.size_str(size_in_bytes)
 ```
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

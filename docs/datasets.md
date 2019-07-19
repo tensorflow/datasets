@@ -825,7 +825,6 @@ contains bounding boxes.
 *   Size: `125.64 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -880,7 +879,6 @@ A large set of images of cats and dogs.There are 1738 corrupted images that are 
 * Size: `786.68 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -2397,7 +2395,6 @@ reasoning each question requires.
 *   Size: `17.72 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -2632,7 +2629,6 @@ Note:
 *   Size: `37.57 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -2709,7 +2705,6 @@ Classification of textures in colorectal cancer histology. Each example is a 150
 * Size: `246.14 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -2766,7 +2761,6 @@ ALL        |      5,000
 * Size: `707.65 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -3478,7 +3472,6 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 * Size: `608.33 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -3920,7 +3913,6 @@ images for most of the concepts in the WordNet hierarchy.
 * Size: `?? GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -4774,7 +4766,6 @@ the Kitti homepage.
 *   Size: `11.71 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -5651,7 +5642,6 @@ per class).
 *   Size: `336.76 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -5714,7 +5704,6 @@ lighting. All images have an associated ground truth annotation of breed.
 * Size: `801.24 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -5782,7 +5771,6 @@ Imagenet, trainable on a single GPU.
 *   Size: `7.48 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'id': Text(shape=(), dtype=tf.string),
@@ -5844,7 +5832,6 @@ specific class)
 *   Size: `1.94 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'PetID': Text(shape=(), dtype=tf.string),
@@ -5993,7 +5980,6 @@ images in each class.
 *   Size: `?? GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -6367,7 +6353,6 @@ the entire dataset (named "full"). All images are converted to RGB.
 * Size: `36.39 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -6545,7 +6530,6 @@ measures 256x256 pixels.
 *   Size: `317.07 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -6617,7 +6601,6 @@ predict the bounding box and label of each individual object.
 * Size: `868.85 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -8206,7 +8189,6 @@ answering the questions.
 *   Size: `?? GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'answer': FeaturesDict({

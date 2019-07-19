@@ -23,7 +23,7 @@ Test DatasetBuilder.
 
 Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -31,7 +31,7 @@ source</a>
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
 
 ```python
@@ -79,7 +79,7 @@ Callers must pass arguments as keyword arguments.
 
 <h3 id="as_dataset"><code>as_dataset</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
 
 ```python
@@ -152,7 +152,9 @@ assert isinstance(ds_test_supervised, tf.data.Dataset)
     to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
 *   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
     the decoding. The structure should match the feature structure, but only
-    customized feature keys need to be present.
+    customized feature keys need to be present. See
+    [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+    for more info.
 *   <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
@@ -172,7 +174,7 @@ the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
 
 <h3 id="download_and_prepare"><code>download_and_prepare</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
 
 ``` python

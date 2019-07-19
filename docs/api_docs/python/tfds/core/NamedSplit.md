@@ -17,7 +17,7 @@ Descriptor corresponding to a named split (train, test, ...).
 
 Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -66,7 +66,7 @@ split = (train.subsplit(tfds.percent[:25]) + test).subsplit(tfds.percent[:50])
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -77,7 +77,7 @@ __init__(name)
 
 <h3 id="__add__"><code>__add__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -88,7 +88,7 @@ Merging: tfds.Split.TRAIN + tfds.Split.TEST.
 
 <h3 id="__eq__"><code>__eq__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -99,7 +99,7 @@ Equality: tfds.Split.TRAIN == 'train'.
 
 <h3 id="__ne__"><code>__ne__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ```python
@@ -110,7 +110,7 @@ InEquality: tfds.Split.TRAIN != 'test'.
 
 <h3 id="get_read_instruction"><code>get_read_instruction</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -119,7 +119,7 @@ get_read_instruction(split_dict)
 
 <h3 id="subsplit"><code>subsplit</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python

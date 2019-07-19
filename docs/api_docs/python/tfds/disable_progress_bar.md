@@ -11,7 +11,7 @@ Disabled Tqdm progress bar.
 tfds.disable_progress_bar()
 ```
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/tqdm_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/tqdm_utils.py">View
 source</a>
 
 ### Used in the tutorials:

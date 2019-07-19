@@ -12,7 +12,7 @@ Returns the string names of all
 tfds.list_builders()
 ```
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

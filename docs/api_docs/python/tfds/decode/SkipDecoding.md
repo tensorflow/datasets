@@ -15,7 +15,7 @@ Transformation which skip the decoding entirelly.
 
 Inherits From: [`Decoder`](../../tfds/decode/Decoder.md)
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -37,7 +37,7 @@ for ex in ds.take(1):
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
 ```python
@@ -52,7 +52,7 @@ __init__()
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
 ```python
@@ -63,7 +63,7 @@ Forward the serialized feature field.
 
 <h3 id="setup"><code>setup</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
 ```python

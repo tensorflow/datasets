@@ -11,7 +11,7 @@
 
 Abstract base class for DatasetInfo metadata container.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -31,7 +31,7 @@ file.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
 source</a>
 
 ```python
@@ -42,7 +42,7 @@ Restore the metadata.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
 source</a>
 
 ```python

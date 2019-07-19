@@ -17,7 +17,7 @@
 
 Abstract base class for feature types.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -49,7 +49,7 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python
@@ -75,7 +75,7 @@ graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python
@@ -128,7 +128,7 @@ yield {
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python
@@ -168,7 +168,7 @@ If not defined, the retuned values are automatically deduced from the
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python
@@ -206,7 +206,7 @@ return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python
@@ -230,7 +230,7 @@ will restore the feature metadata from the saved file.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python

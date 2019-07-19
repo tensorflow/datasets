@@ -8,7 +8,7 @@
 <a href="../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
 API.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/__init__.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/__init__.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

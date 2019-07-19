@@ -22,7 +22,7 @@
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -48,7 +48,7 @@ Input: The image connector accepts as input:
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python
@@ -91,7 +91,7 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python
@@ -102,7 +102,7 @@ Reconstruct the image from the tf example.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python
@@ -113,7 +113,7 @@ Convert the given image into a dict convertible to tf example.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python
@@ -122,7 +122,7 @@ get_serialized_info()
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python
@@ -131,7 +131,7 @@ get_tensor_info()
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python
@@ -145,7 +145,7 @@ See base class for details.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python
@@ -159,7 +159,7 @@ See base class for details.
 
 <h3 id="set_encoding_format"><code>set_encoding_format</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python
@@ -170,7 +170,7 @@ Update the encoding format.
 
 <h3 id="set_shape"><code>set_shape</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
 ``` python

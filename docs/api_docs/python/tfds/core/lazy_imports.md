@@ -9,7 +9,7 @@
 
 Lazy importer for heavy dependencies.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

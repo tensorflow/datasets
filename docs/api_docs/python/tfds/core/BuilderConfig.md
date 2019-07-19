@@ -14,7 +14,7 @@
 
 Base class for `DatasetBuilder` data configuration.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -24,7 +24,7 @@ DatasetBuilder subclasses with data configuration options should subclass
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
 
 ```python

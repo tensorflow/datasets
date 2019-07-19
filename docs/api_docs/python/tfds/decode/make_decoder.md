@@ -11,7 +11,7 @@ Decorator to create a decoder.
 tfds.decode.make_decoder(output_dtype=None)
 ```
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -31,7 +31,7 @@ def no_op_decoder(example, feature):
   """Decoder simply decoding feature normally."""
   return feature.decode_example(example)
 
-tfds.load('mnist', split='train', decoder: {
+tfds.load('mnist', split='train', decoders: {
     'image': no_op_decoder(),
 })
 ```

@@ -147,7 +147,7 @@ Adds subTest() context manager to the TestCase if supported.
 
 Inherits From: [`TestCase`](../../tfds/testing/TestCase.md)
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -314,7 +314,7 @@ is of type float16.
 
 <h3 id="assertAllEqual"><code>assertAllEqual</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
 ```python
@@ -328,7 +328,7 @@ Same as assertAllEqual but with RaggedTensor support.
 
 <h3 id="assertAllEqualNested"><code>assertAllEqualNested</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
 ```python
@@ -1104,7 +1104,7 @@ Checks that |f1 - f2| < err and asserts a test failure if not.
 
 <h3 id="assertNestedListAlmostEqual"><code>assertNestedListAlmostEqual</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
 source</a>
 
 ```python
@@ -1353,7 +1353,7 @@ assertProtoEqualsVersion(
 
 <h3 id="assertRaggedAlmostEqual"><code>assertRaggedAlmostEqual</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
 source</a>
 
 ```python
@@ -1366,7 +1366,7 @@ assertRaggedAlmostEqual(
 
 <h3 id="assertRaggedEqual"><code>assertRaggedEqual</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
 source</a>
 
 ```python
@@ -1485,7 +1485,7 @@ self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
 source</a>
 
 ```python
@@ -2103,7 +2103,7 @@ Execute all cleanup functions. Normally called for you after tearDown.
 
 <h3 id="eval_to_list"><code>eval_to_list</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
 source</a>
 
 ```python
@@ -2325,7 +2325,7 @@ building and execution code in a test case.
 
 <h3 id="setUp"><code>setUp</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
 source</a>
 
 ```python
@@ -2334,7 +2334,7 @@ setUp()
 
 <h3 id="setUpClass"><code>setUpClass</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
 ```python

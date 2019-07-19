@@ -12,7 +12,7 @@
 
 Defines convenience constants/functions for converting various units.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

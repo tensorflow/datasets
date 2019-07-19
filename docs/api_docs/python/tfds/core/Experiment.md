@@ -11,7 +11,7 @@
 
 Experiments which can be enabled/disabled on a per version basis.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

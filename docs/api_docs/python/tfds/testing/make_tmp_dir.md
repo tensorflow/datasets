@@ -11,7 +11,7 @@ Make a temporary directory.
 tfds.testing.make_tmp_dir(dirname=None)
 ```
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

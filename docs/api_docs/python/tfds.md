@@ -8,7 +8,7 @@
 `tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a
 collection of datasets ready-to-use with TensorFlow.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->

@@ -17,7 +17,7 @@
 
 Split info object.
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 <!-- Placeholder for "Used in" -->
@@ -25,7 +25,7 @@ source</a>
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -42,7 +42,7 @@ Return the total number of examples.
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -51,7 +51,7 @@ __getitem__(key)
 
 <h3 id="add"><code>add</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -62,7 +62,7 @@ Add the split info.
 
 <h3 id="copy"><code>copy</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -71,7 +71,7 @@ copy()
 
 <h3 id="from_proto"><code>from_proto</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -86,7 +86,7 @@ Returns a new SplitDict initialized from the `repeated_split_infos`.
 
 <h3 id="to_proto"><code>to_proto</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -97,7 +97,7 @@ Returns a list of SplitInfo protos that we have.
 
 <h3 id="update"><code>update</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/py_utils.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/py_utils.py">View
 source</a>
 
 ``` python
