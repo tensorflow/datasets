@@ -34,29 +34,32 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import abc
 import collections
+import json
 import os
 import posixpath
-import pprint
 import tempfile
 
 from absl import logging
 import numpy as np
+import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
+from tensorflow_datasets.core.proto import json_format
 from tensorflow_datasets.core.utils import gcs_utils
-from google.protobuf import json_format
+
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
-
 LICENSE_FILENAME = "LICENSE"
 
 INFO_STR = """tfds.core.DatasetInfo(
@@ -68,7 +71,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     total_num_examples={total_num_examples},
     splits={splits},
     supervised_keys={supervised_keys},
-    citation='{citation}',
+    citation={citation},
     redistribution_info={redistribution_info},
 )
 """
@@ -96,6 +99,7 @@ class DatasetInfo(object):
                supervised_keys=None,
                urls=None,
                citation=None,
+               metadata=None,
                redistribution_info=None):
     """Constructs DatasetInfo.
 
@@ -105,10 +109,17 @@ class DatasetInfo(object):
       features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
-      supervised_keys: `tuple`, Specifies the input feature and the label for
-        supervised learning, if applicable for the dataset.
+      supervised_keys: `tuple` of `(input_key, target_key)`, Specifies the
+        input feature and the label for supervised learning, if applicable for
+        the dataset. The keys correspond to the feature names to select in
+        `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
+        with `as_supervised=True`, the `tf.data.Dataset` object will yield
+        the (input, target) defined here.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
+      metadata: `tfds.core.Metadata`, additonal object which will be
+        stored/restored with the dataset. This allows for storing additional
+        information with the dataset.
       redistribution_info: `dict`, optional, information needed for
         redistribution, as specified in `dataset_info_pb2.RedistributionInfo`.
         The content of the `license` subfield will automatically be written to a
@@ -126,6 +137,12 @@ class DatasetInfo(object):
     if urls:
       self._info_proto.location.urls[:] = urls
 
+    if features:
+      if not isinstance(features, top_level_feature.TopLevelFeature):
+        raise ValueError(
+            "DatasetInfo.features only supports FeaturesDict or Sequence at "
+            "the top-level. Got {}".format(features))
+      features._set_top_level()  # pylint: disable=protected-access
     self._features = features
     self._splits = splits_lib.SplitDict()
     if supervised_keys is not None:
@@ -133,6 +150,12 @@ class DatasetInfo(object):
       assert len(supervised_keys) == 2
       self._info_proto.supervised_keys.input = supervised_keys[0]
       self._info_proto.supervised_keys.output = supervised_keys[1]
+
+    if metadata and not isinstance(metadata, Metadata):
+      raise ValueError(
+          "Metadata should be a `tfds.core.Metadata` instance. Received "
+          "{}".format(metadata))
+    self._metadata = metadata
 
     # Is this object initialized with both the static and the dynamic data?
     self._fully_initialized = False
@@ -160,7 +183,7 @@ class DatasetInfo(object):
 
   @property
   def version(self):
-    return utils.Version(self.as_proto.version)
+    return self._builder.version
 
   @property
   def citation(self):
@@ -177,6 +200,10 @@ class DatasetInfo(object):
   @property
   def features(self):
     return self._features
+
+  @property
+  def metadata(self):
+    return self._metadata
 
   @property
   def supervised_keys(self):
@@ -235,10 +262,10 @@ class DatasetInfo(object):
     """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized
 
-  def _dataset_info_filename(self, dataset_info_dir):
+  def _dataset_info_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
-  def _license_filename(self, dataset_info_dir):
+  def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
   def compute_dynamic_properties(self):
@@ -286,13 +313,15 @@ class DatasetInfo(object):
     if self.features:
       self.features.save_metadata(dataset_info_dir)
 
+    # Save any additional metadata
+    if self.metadata is not None:
+      self.metadata.save_metadata(dataset_info_dir)
+
     if self.redistribution_info.license:
-      with tf.io.gfile.GFile(self._license_filename(dataset_info_dir),
-                             "w") as f:
+      with tf.io.gfile.GFile(self._license_path(dataset_info_dir), "w") as f:
         f.write(self.redistribution_info.license)
 
-    with tf.io.gfile.GFile(self._dataset_info_filename(dataset_info_dir),
-                           "w") as f:
+    with tf.io.gfile.GFile(self._dataset_info_path(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir):
@@ -311,7 +340,7 @@ class DatasetInfo(object):
       raise ValueError(
           "Calling read_from_directory with undefined dataset_info_dir.")
 
-    json_filename = self._dataset_info_filename(dataset_info_dir)
+    json_filename = self._dataset_info_path(dataset_info_dir)
 
     # Load the metadata from disk
     parsed_proto = read_from_json(json_filename)
@@ -322,6 +351,9 @@ class DatasetInfo(object):
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
+
+    if self.metadata is not None:
+      self.metadata.load_metadata(dataset_info_dir)
 
     # Update fields which are not defined in the code. This means that
     # the code will overwrite fields which are present in
@@ -379,19 +411,13 @@ class DatasetInfo(object):
       gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
-  def __str__(self):
-    splits_pprint = "{\n %s\n    }" % (
-        pprint.pformat(
-            {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
-            indent=8, width=1)[1:-1])
-    features_dict = self.features
-    features_pprint = "%s({\n %s\n    }" % (
-        type(features_dict).__name__,
-        pprint.pformat({
-            k: features_dict[k] for k in sorted(list(features_dict.keys()))
-        }, indent=8, width=1)[1:-1])
-    citation_pprint = '"""\n%s\n    """' % "\n".join(
-        [u" " * 8 + line for line in self.citation.split(u"\n")])
+  def __repr__(self):
+    splits_pprint = _indent("\n".join(["{"] + [
+        "    '{}': {},".format(k, split.num_examples)
+        for k, split in sorted(self.splits.items())
+    ] + ["}"]))
+    features_pprint = _indent(repr(self.features))
+    citation_pprint = _indent('"""{}"""'.format(self.citation.strip()))
     return INFO_STR.format(
         name=self.name,
         version=self.version,
@@ -402,7 +428,14 @@ class DatasetInfo(object):
         citation=citation_pprint,
         urls=self.urls,
         supervised_keys=self.supervised_keys,
-        redistribution_info=self.redistribution_info)
+        # Proto add a \n that we strip.
+        redistribution_info=str(self.redistribution_info).strip())
+
+
+def _indent(content):
+  """Add indentation to all lines except the first."""
+  lines = content.split("\n")
+  return "\n".join([lines[0]] + ["    " + l for l in lines[1:]])
 
 #
 #
@@ -563,3 +596,50 @@ def read_from_json(json_filename):
   parsed_proto = json_format.Parse(dataset_info_json_str,
                                    dataset_info_pb2.DatasetInfo())
   return parsed_proto
+
+
+@six.add_metaclass(abc.ABCMeta)
+class Metadata(dict):
+  """Abstract base class for DatasetInfo metadata container.
+
+  `builder.info.metadata` allows the dataset to expose additional general
+  information about the dataset which are not specific to a feature or
+  individual example.
+
+  To implement the interface, overwrite `save_metadata` and
+  `load_metadata`.
+
+  See `tfds.core.MetadataDict` for a simple implementation that acts as a
+  dict that saves data to/from a JSON file.
+  """
+
+  @abc.abstractmethod
+  def save_metadata(self, data_dir):
+    """Save the metadata."""
+    raise NotImplementedError()
+
+  @abc.abstractmethod
+  def load_metadata(self, data_dir):
+    """Restore the metadata."""
+    raise NotImplementedError()
+
+
+class MetadataDict(Metadata, dict):
+  """A `tfds.core.Metadata` object that acts as a `dict`.
+
+  By default, the metadata will be serialized as JSON.
+  """
+
+  def _build_filepath(self, data_dir):
+    return os.path.join(data_dir, "metadata.json")
+
+  def save_metadata(self, data_dir):
+    """Save the metadata."""
+    with tf.io.gfile.GFile(self._build_filepath(data_dir), "w") as f:
+      json.dump(self, f)
+
+  def load_metadata(self, data_dir):
+    """Restore the metadata."""
+    self.clear()
+    with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
+      self.update(json.load(f))

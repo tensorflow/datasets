@@ -8,15 +8,12 @@
 
 ## Class `SplitGenerator`
 
+Defines the split information for the generator.
 
-
-
-
-Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
 
 <!-- Placeholder for "Used in" -->
-
-Defines the split information for the generator.
 
 This should be used as returned value of
 `GeneratorBasedBuilder._split_generators`.
@@ -24,6 +21,9 @@ See `GeneratorBasedBuilder._split_generators` for more info and example
 of usage.
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
 
 ``` python
 __init__(
@@ -37,14 +37,9 @@ Constructs a `SplitGenerator`.
 
 #### Args:
 
-* <b>`name`</b>: `str` or `list<str>`, name of the Split for which the generator will
-    create the examples. If a list is given, the generator examples will be
-    distributed among the splits proportionally to the num_shards.
-* <b>`num_shards`</b>: `int` or `list<int>`, number of shards between which the
-    generated examples will be written. If name is a list, then num_shards
-    should be a list with the same number of elements.
-* <b>`gen_kwargs`</b>: `dict`, kwargs to forward to the _generate_examples() method
-    of the builder.
-
-
-
+*   <b>`name`</b>: `str`, name of the Split for which the generator will create
+    the examples.
+*   <b>`num_shards`</b>: `int`, number of shards between which the generated
+    examples will be written.
+*   <b>`gen_kwargs`</b>: `dict`, kwargs to forward to the _generate_examples()
+    method of the builder.

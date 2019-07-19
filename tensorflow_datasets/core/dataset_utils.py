@@ -19,7 +19,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import functools
+import itertools
 
+import numpy as np
 import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import tf_compat
@@ -33,7 +36,7 @@ def build_dataset(instruction_dicts,
   """Constructs a `tf.data.Dataset` from TFRecord files.
 
   Args:
-    instruction_dicts: `list` of {'filepath':, 'mask':}
+    instruction_dicts: `list` of {'filepath':, 'mask':, 'offset_mask':}
       containing the information about which files and which examples to use.
       The boolean mask will be repeated and zipped with the examples from
       filepath.
@@ -46,42 +49,111 @@ def build_dataset(instruction_dicts,
     `tf.data.Dataset`
   """
 
-  def instruction_ds_to_file_ds(instruction):
-    """Map from instruction to real datasets."""
-    examples_ds = dataset_from_file_fn(instruction["filepath"])
-    mask_ds = tf.data.Dataset.from_tensor_slices(instruction["mask"])
-    mask_ds = mask_ds.repeat(),
-    # Zip the mask and real examples
-    ds = tf.data.Dataset.zip({
-        "example": examples_ds,
-        "mask_value": mask_ds,
-    })
-    # Filter according to the mask (only keep True)
-    # Use [0] as from_tensor_slices() yields a tuple
-    ds = ds.filter(lambda dataset_dict: dataset_dict["mask_value"][0])
-    # Only keep the examples
-    ds = ds.map(lambda dataset_dict: dataset_dict["example"])
-    return ds
+  # First case: All examples are taken (No value skipped)
+  if _no_examples_skipped(instruction_dicts):
+    # Only use the filenames as instruction
+    instruction_ds = tf.data.Dataset.from_tensor_slices([
+        d["filepath"] for d in instruction_dicts
+    ])
+    build_ds_from_instruction = dataset_from_file_fn
+  # Second case: Use the instructions to read the examples
+  else:
+    instruction_ds = _build_instruction_ds(instruction_dicts)
+    build_ds_from_instruction = functools.partial(
+        _build_ds_from_instruction,
+        ds_from_file_fn=dataset_from_file_fn,
+    )
 
-  # Transpose the list[dict] into dict[list]
-  tensor_inputs = {
-      key: list(values) for key, values in utils.zip_dict(*instruction_dicts)
-  }
-  # Skip slicing if all masks are True (No value skipped)
-  if all(all(m) for m in tensor_inputs["mask"]):
-    tensor_inputs = tensor_inputs["filepath"]
-    instruction_ds_to_file_ds = dataset_from_file_fn
-
-  # Dataset of filenames (or file instructions)
-  dataset = tf.data.Dataset.from_tensor_slices(tensor_inputs)
+  # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:
-    dataset = dataset.shuffle(len(instruction_dicts))
+    instruction_ds = instruction_ds.shuffle(len(instruction_dicts))
+
   # Use interleave to parallel read files and decode records
-  dataset = dataset.interleave(
-      instruction_ds_to_file_ds,
+  ds = instruction_ds.interleave(
+      build_ds_from_instruction,
       cycle_length=parallel_reads,
       num_parallel_calls=tf.data.experimental.AUTOTUNE)
-  return dataset
+  return ds
+
+
+def _no_examples_skipped(list_of_dict):
+  """Return True if no examples are skipped (mask are only True)."""
+  return all(itertools.chain.from_iterable([d["mask"] for d in list_of_dict]))
+
+
+def _build_instruction_ds(instructions):
+  """Create a dataset containing individual instruction for each shard.
+
+  Each instruction is a dict:
+  ```
+  {
+      "filepath": tf.Tensor(shape=(), dtype=tf.string),
+      "mask_offset": tf.Tensor(shape=(), dtype=tf.int64),
+      "mask": tf.Tensor(shape=(100,), dtype=tf.bool),
+  }
+  ```
+
+  Args:
+    instructions: `list[dict]`, the list of instruction dict
+
+  Returns:
+    instruction_ds: The dataset containing the instruction. The dataset size is
+      the number of shard.
+  """
+  # Transpose the list[dict] into dict[list]
+  tensor_inputs = {
+      # offset_mask need to be converted to int64 explicitly
+      k: np.array(vals, dtype=np.int64) if k == "mask_offset" else list(vals)
+      for k, vals in utils.zip_dict(*instructions)
+  }
+  return tf.data.Dataset.from_tensor_slices(tensor_inputs)
+
+
+def _build_mask_ds(mask, mask_offset):
+  """Build the mask dataset to indicate which element to skip.
+
+  Args:
+    mask: `tf.Tensor`, binary mask to apply to all following elements. This
+      mask should have a length 100.
+    mask_offset: `tf.Tensor`, Integer specifying from how much the mask
+      should be shifted for the first element.
+
+  Returns:
+    mask_ds: `tf.data.Dataset`, a dataset returning False for examples to skip
+      and True for examples to keep.
+  """
+  mask_ds = tf.data.Dataset.from_tensor_slices(mask)
+  mask_ds = mask_ds.repeat()
+  mask_ds = mask_ds.skip(mask_offset)
+  return mask_ds
+
+
+def _build_ds_from_instruction(instruction, ds_from_file_fn):
+  """Map an instruction to a real datasets for one particular shard.
+
+  Args:
+    instruction: A `dict` of `tf.Tensor` containing the instruction to load
+      the particular shard (filename, mask,...)
+    ds_from_file_fn: `fct`, function which returns the dataset associated to
+      the filename
+
+  Returns:
+    dataset: `tf.data.Dataset`, The shard loaded from the instruction
+  """
+  # Create the example and mask ds for this particular shard
+  examples_ds = ds_from_file_fn(instruction["filepath"])
+  mask_ds = _build_mask_ds(
+      mask_offset=instruction["mask_offset"],
+      mask=instruction["mask"],
+  )
+
+  # Zip the mask and real examples
+  ds = tf.data.Dataset.zip((examples_ds, mask_ds))
+  # Filter according to the mask (only keep True)
+  ds = ds.filter(lambda example, mask: mask)
+  # Only keep the examples
+  ds = ds.map(lambda example, mask: example)
+  return ds
 
 
 def _eager_dataset_iterator(dataset):
@@ -91,8 +163,13 @@ def _eager_dataset_iterator(dataset):
     yield tf.nest.pack_sequence_as(item, flat)
 
 
-def _graph_dataset_iterator(ds_item, graph=None):
+def _graph_dataset_iterator(ds_iter, graph=None):
+  """Constructs a Python generator from a tf.data.Iterator."""
+  with utils.maybe_with_graph(graph, create_if_none=False):
+    init = ds_iter.initializer
+    ds_item = ds_iter.get_next()
   with utils.nogpu_session(graph) as sess:
+    sess.run(init)
     while True:
       try:
         yield sess.run(ds_item)
@@ -147,7 +224,7 @@ def as_numpy(dataset, graph=None):
     # First create iterators for datasets
     with utils.maybe_with_graph(graph, create_if_none=False):
       ds_iters = [
-          tf.compat.v1.data.make_one_shot_iterator(ds_el).get_next()
+          tf.compat.v1.data.make_initializable_iterator(ds_el)
           for ds_el in flat_ds if tf_compat.is_dataset(ds_el)
       ]
     ds_iters = [_graph_dataset_iterator(ds_iter, graph) for ds_iter in ds_iters]
@@ -168,3 +245,13 @@ def as_numpy(dataset, graph=None):
 
   # Nest
   return tf.nest.pack_sequence_as(nested_ds, flat_np)
+
+
+def dataset_shape_is_fully_defined(ds):
+  return all(
+      [ts.is_fully_defined() for ts in tf.nest.flatten(ds.output_shapes)])
+
+
+def features_shape_is_fully_defined(features):
+  return all([tf.TensorShape(info.shape).is_fully_defined() for info in
+              tf.nest.flatten(features.get_tensor_info())])

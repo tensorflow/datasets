@@ -32,17 +32,17 @@ MAX_HEIGHT_WIDTH = 15
 CHANNELS_NB = 3
 
 
-def get_random_picture(height=None, width=None):
+def get_random_picture(height=None, width=None, channels=CHANNELS_NB):
   """Returns random picture as np.ndarray (int)."""
   height = height or random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
   width = width or random.randrange(MIN_HEIGHT_WIDTH, MAX_HEIGHT_WIDTH)
   return np.random.randint(
-      256, size=(height, width, CHANNELS_NB), dtype=np.uint8)
+      256, size=(height, width, channels), dtype=np.uint8)
 
 
-def get_random_jpeg(height=None, width=None):
+def get_random_jpeg(height=None, width=None, channels=CHANNELS_NB):
   """Returns path to JPEG picture."""
-  image = get_random_picture(height, width)
+  image = get_random_picture(height, width, channels)
   jpeg = tf.image.encode_jpeg(image)
   with utils.nogpu_session() as sess:
     res = sess.run(jpeg)
@@ -52,9 +52,9 @@ def get_random_jpeg(height=None, width=None):
   return fobj.name
 
 
-def get_random_png(height=None, width=None):
+def get_random_png(height=None, width=None, channels=CHANNELS_NB):
   """Returns path to PNG picture."""
-  image = get_random_picture(height, width)
+  image = get_random_picture(height, width, channels)
   png = tf.image.encode_png(image)
   with utils.nogpu_session() as sess:
     res = sess.run(png)

@@ -48,7 +48,15 @@ _DATA_URL = "https://www.robots.ox.ac.uk/~vgg/data/dtd/download/dtd-r1.0.1.tar.g
 class Dtd(tfds.core.GeneratorBasedBuilder):
   """Describable Textures Dataset (DTD)."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
+  ]
+  # Version history:
+  # 3.0.0: S3 with new hashing function (different shuffle).
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -93,8 +101,12 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
       for line in split_file:
         fname = line.strip()
         label = fname.split("/")[0]
-        yield {
+        record = {
             "file_name": fname,
             "image": os.path.join(data_path, "dtd", "images", fname),
             "label": label,
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield fname, record
+        else:
+          yield record

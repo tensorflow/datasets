@@ -87,6 +87,7 @@ class _Extractor(object):
                                uuid.uuid4().hex)
     try:
       for path, handle in iter_archive(from_path, method):
+        path = tf.compat.as_text(path)
         _copy(handle, path and os.path.join(to_path_tmp, path) or to_path_tmp)
     except BaseException as err:
       msg = 'Error while extracting %s to %s : %s' % (from_path, to_path, err)
@@ -130,12 +131,11 @@ def _open_or_pass(path_or_fobj):
     yield path_or_fobj
 
 
-def iter_tar(arch_f, gz=False, stream=False):
+def iter_tar(arch_f, stream=False):
   """Iter over tar archive, yielding (path, object-like) tuples.
 
   Args:
     arch_f: File object of the archive to iterate.
-    gz: If True, open a gzip'ed archive.
     stream: If True, open the archive in stream mode which allows for faster
       processing and less temporary disk consumption, but random access to the
       file is not allowed.
@@ -143,9 +143,7 @@ def iter_tar(arch_f, gz=False, stream=False):
   Yields:
     (filepath, extracted_fobj) for each file in the archive.
   """
-  read_type = 'r' + ('|' if stream else ':')
-  if gz:
-    read_type += 'gz'
+  read_type = 'r' + ('|' if stream else ':') + '*'
 
   with _open_or_pass(arch_f) as fobj:
     tar = tarfile.open(mode=read_type, fileobj=fobj)
@@ -160,14 +158,6 @@ def iter_tar(arch_f, gz=False, stream=False):
 
 def iter_tar_stream(arch_f):
   return iter_tar(arch_f, stream=True)
-
-
-def iter_tar_gz(arch_f):
-  return iter_tar(arch_f, gz=True)
-
-
-def iter_tar_gz_stream(arch_f):
-  return iter_tar(arch_f, gz=True, stream=True)
 
 
 def iter_gzip(arch_f):
@@ -195,13 +185,13 @@ def iter_zip(arch_f):
 
 
 _EXTRACT_METHODS = {
-    resource_lib.ExtractMethod.TAR: iter_tar,
-    resource_lib.ExtractMethod.TAR_GZ: iter_tar_gz,
-    resource_lib.ExtractMethod.GZIP: iter_gzip,
-    resource_lib.ExtractMethod.ZIP: iter_zip,
     resource_lib.ExtractMethod.BZIP2: iter_bzip2,
+    resource_lib.ExtractMethod.GZIP: iter_gzip,
+    resource_lib.ExtractMethod.TAR: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ: iter_tar,
+    resource_lib.ExtractMethod.TAR_GZ_STREAM: iter_tar_stream,
     resource_lib.ExtractMethod.TAR_STREAM: iter_tar_stream,
-    resource_lib.ExtractMethod.TAR_GZ_STREAM: iter_tar_gz_stream,
+    resource_lib.ExtractMethod.ZIP: iter_zip,
 }
 
 

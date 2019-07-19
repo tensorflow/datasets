@@ -29,5 +29,10 @@ class Sun397Test(testing.DatasetBuilderTestCase):
       'full': 8,
   }
 
+
+class Sun397S3Test(Sun397Test):
+  VERSION = 'experimental_latest'
+
+
 if __name__ == '__main__':
   testing.test_main()
