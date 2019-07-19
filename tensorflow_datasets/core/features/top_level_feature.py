@@ -39,6 +39,10 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     self.__is_top_level = False
     super(TopLevelFeature, self).__init__(*args, **kwargs)
 
+  # AutoGraph doesn't support mangled names (__is_top_level), so we explicitly
+  # disable it in methods that use them, to avoid the warning.
+  # TODO(mdan): Remove decorator once AutoGraph supports mangled names.
+  @tf.autograph.experimental.do_not_convert()
   def _set_top_level(self):
     """Indicates that the feature is top level.
 
@@ -46,6 +50,10 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     """
     self.__is_top_level = True
 
+  # AutoGraph doesn't support mangled names (__is_top_level), so we explicitly
+  # disable it in methods that use them, to avoid the warning.
+  # TODO(mdan): Remove decorator once AutoGraph supports mangled names.
+  @tf.autograph.experimental.do_not_convert()
   def decode_example(self, serialized_example, decoders=None):
     # pylint: disable=line-too-long
     """Decode the serialize examples.

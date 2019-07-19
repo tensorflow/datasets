@@ -109,6 +109,9 @@ def _patch_for_tf1_13(tf):
           dataset_ops.get_legacy_output_shapes)
       tf.compat.v2.data.Dataset.output_types = property(
           dataset_ops.get_legacy_output_types)
+  if not hasattr(tf.autograph.experimental, "do_not_convert"):
+    tf.autograph.experimental.do_not_convert = (
+        tf.contrib.autograph.do_not_convert)
 
 
 def is_dataset(ds):
