@@ -1,8 +1,10 @@
 import os
+import re
 import zipfile
 import shutil
 from PIL import Image
 import tensorflow as tf
+from tensorflow_datasets.core.utils import py_utils
 
 
 # TODO add tar.gz support
@@ -27,7 +29,7 @@ class ImageHolder(Holder):
 		try:
 			if self.zip_file:
 				infile = self.path
-				file = self.zip_file.open(infile,	'r')
+				file = self.zip_file.open(infile, 'r')
 			else:
 				file = self.path
 			im = Image.open(file)
@@ -39,7 +41,7 @@ class ImageHolder(Holder):
 		basedir = os.path.dirname(self.output_path)
 		if not tf.io.gfile.exists(basedir):
 			tf.io.gfile.makedirs(basedir)
-		print('created, ', self.path, ', size: ', self.image_size())
+		print('created, ', self.output_path, ', size: ', self.image_size())
 		img = Image.new('RGB', self.image_size(), (255, 255, 255))
 		img.save(self.output_path)
 
@@ -71,20 +73,22 @@ class ZipHolder(Holder):
 
 	def create_fakes(self):
 		zip_file = zipfile.ZipFile(self.path)
-		files = zip_file.infolist()
-		for file in files:
-			name = os.path.basename(file.filename)
-			typ = os.path.splitext(file.filename)[1]
-			target_path = os.path.join(os.path.splitext(self.output_path)[0],
-																 file.filename)
+		f = zip_file.namelist()
+		r = re.compile(".*/$")
+		folders = list(filter(r.match, f))  # it's catch the folders names
+		ex_files = []
 
-			hold = HolderFactory(zip_file, name, typ, file.filename,
-													 target_path).generate_holder()
+		for prefix in folders:  # take 2 example from the folders
+			ex_files += list(filter(lambda x: x.startswith(prefix), f))[1:3]
+
+		for file in ex_files:
+			name = os.path.basename(file)
+			typ = os.path.splitext(file)[1]
+			target_path = os.path.join(os.path.splitext(self.output_path)[0], file)
+			hold = HolderFactory(zip_file, name, typ, file, target_path).generate_holder()
 			hold.create_fakes()
 
-		print('out = ', self.output_path)
-		print('file2 = ', os.path.join(os.path.splitext(self.path)[0]))
-		print('file type2 = ', type(os.path.join(os.path.splitext(self.path)[0])))
+		zip_file.close()
 		folder_path = os.path.join(os.path.splitext(self.output_path)[0])
 		shutil.make_archive(os.path.splitext(self.output_path)[0], 'zip',
 												folder_path)
@@ -111,28 +115,20 @@ class HolderFactory(Holder):
 class Generator:
 	def __init__(self, inpath):
 		self.inpath = inpath
-		self.outpath = os.path.join('/Users/syny/PycharmProjects/tensorflow'
-																'/datasets/tensorflow_datasets/testing'
-																'/test_data/fake_examples',
-																os.path.basename(inpath) + 'hey')
+		self.outpath = os.path.join(os.path.join(py_utils.tfds_dir(), 'testing',
+																'test_data', 'fake_examples',
+																os.path.basename(inpath) + 'auto_gen'))
+		print('outtttt: ', self.outpath)
 
-	def generator(self):  # hepsini tariyor bu bunu bi duzelt bea
+	def generator(self):
 
 		for dirpath, dirnames, filenames in tf.io.gfile.walk(self.inpath):
-			print('dirpath = ', dirpath, '\ndirnames = ', dirnames, '\n filenames = ',
-						filenames)
-			# check the folder is created
-			if os.path.relpath(dirpath, self.inpath) == '.':
-				if not tf.io.gfile.isdir(self.outpath):
-					tf.io.gfile.mkdir(self.outpath)
-
 			structure = os.path.join(self.outpath,
 															 os.path.relpath(dirpath, self.inpath))
 			if not tf.io.gfile.isdir(structure):
 				tf.io.gfile.mkdir(structure)
 			else:
 				print("Folder does already exits!")
-
 			count = 0
 			while count < 2:  # take just 2 files on one folder
 				try:
