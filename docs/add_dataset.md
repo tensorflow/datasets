@@ -67,9 +67,9 @@ generate on a single machine. See the
 
 If you want to
 [contribute to our repo](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md)
-and add a new dataset, the following script will help you get started by
-generating the required python files,...
-To use it, clone the `tfds` repository and run the following command:
+and add a new dataset, first install TensorFlow (1.14+) and TFDS by running `pip install tensorflow tensorflow-datasets`. 
+The following script will help you get started by generating the required Python files.
+To use it, fork the `tfds` repository, clone it and run the following command:
 
 ```
 python tensorflow_datasets/scripts/create_new_dataset.py \
