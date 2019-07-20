@@ -647,7 +647,7 @@ class DatasetBuilder(object):
     download_dir = download_dir or os.path.join(self._data_dir_root,
                                                 "downloads", self.name)
     extract_dir = (download_config.extract_dir or
-                   os.path.join(download_dir, "extracted"))
+                   os.path.join(self._data_dir_root, "extracted", self.name))
     manual_dir = (download_config.manual_dir or
                   os.path.join(download_dir, "manual"))
     manual_dir = os.path.join(manual_dir, self.name)
