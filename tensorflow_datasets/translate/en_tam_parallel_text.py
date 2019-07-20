@@ -60,17 +60,18 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
   def _info(self):
     return tfds.core.DatasetInfo(
-        builder=self,\
-		description=_DESCRIPTION,\
-		features=tfds.features.Translation(\
-		    languages=("input", "target"),\
-			encoder_config=tfds.features.text.TextEncoderConfig()\
-	    ), urls=[\
-		"http://ufal.mff.cuni.cz/~ramasamy/parallel/html/",\
-		"http://opus.nlpl.eu/",\
-		"https://github.com/joshua-decoder/indian-parallel-corpora"\
+        	builder=self,
+		description=_DESCRIPTION,
+		features=tfds.features.Translation(
+		languages=("input", "target"),
+		encoder_config=tfds.features.text.TextEncoderConfig()
+	    ),  
+	    urls=[
+		"http://ufal.mff.cuni.cz/~ramasamy/parallel/html/",
+		"http://opus.nlpl.eu/",
+		"https://github.com/joshua-decoder/indian-parallel-corpora"
 		],
-        supervised_keys=("input", "target"), citation=_CITATION,\
+            supervised_keys=("input", "target"), citation=_CITATION,
 	)
 
   def _split_generators(self, dl_manager):
@@ -83,7 +84,7 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             num_shards=1,
             gen_kwargs={
-                'data_file': os.path.join(extracted_path_train,\
+                'data_file': os.path.join(extracted_path_train,
 				          'en_tam_parallel_corpus_train')}),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
