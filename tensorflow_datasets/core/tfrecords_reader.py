@@ -22,7 +22,6 @@ from __future__ import print_function
 import functools
 import itertools
 import math
-import os
 import re
 
 import attr

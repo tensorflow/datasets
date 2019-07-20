@@ -22,7 +22,6 @@ from __future__ import print_function
 import os
 
 from absl.testing import absltest
-from absl.testing import parameterized
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
