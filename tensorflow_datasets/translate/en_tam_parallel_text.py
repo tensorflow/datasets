@@ -88,13 +88,13 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             num_shards=1,
-            gen_kwargs={\
-			    'data_file': os.path.join(extracted_path_valid,\
-                          'en_tam_parallel_corpus_validation')}),
+            gen_kwargs={
+		'data_file': os.path.join(extracted_path_valid,\
+                          		   'en_tam_parallel_corpus_validation')}),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             num_shards=1,
-            gen_kwargs={\
+            gen_kwargs={
                 'data_file': os.path.join(extracted_path_test,\
 				          'en_tam_parallel_corpus_test')}),
     ]
