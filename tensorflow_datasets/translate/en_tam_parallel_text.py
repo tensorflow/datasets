@@ -17,19 +17,18 @@ _CITATION = """
 	pages = {113--122},
 	Booktitle = {Proceedings of the Workshop on Machine Translation and Parsing in Indian Languages ({MTPIL}-2012)},
 }
-
 @InProceedings{TIEDEMANN12.463,
-  author = {J�rg Tiedemann},
-  title = {Parallel Data, Tools and Interfaces in OPUS},
-  booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12)},
-  year = {2012},
-  month = {may},
-  date = {23-25},
-  address = {Istanbul, Turkey},
-  editor = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},
-  publisher = {European Language Resources Association (ELRA)},
-  isbn = {978-2-9517408-7-7},
-  language = {english}
+  	author = {J�rg Tiedemann},
+  	title = {Parallel Data, Tools and Interfaces in OPUS},
+  	booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12)},
+  	year = {2012},
+  	month = {may},
+  	date = {23-25},
+  	address = {Istanbul, Turkey},
+  	editor = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},
+  	publisher = {European Language Resources Association (ELRA)},
+  	isbn = {978-2-9517408-7-7},
+  	language = {english}
  }
 """
 _DESCRIPTION = """\
