@@ -5,6 +5,7 @@ import shutil
 from PIL import Image
 import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
+import json
 
 
 # TODO add tar.gz support
@@ -77,7 +78,7 @@ class ZipHolder(Holder):
 		r = re.compile(".*/$")
 		folders = list(filter(r.match, f))  # it's catch the folders names
 		ex_files = []
-
+		print(folders)
 		for prefix in folders:  # take 2 example from the folders
 			ex_files += list(filter(lambda x: x.startswith(prefix), f))[1:3]
 
@@ -85,7 +86,8 @@ class ZipHolder(Holder):
 			name = os.path.basename(file)
 			typ = os.path.splitext(file)[1]
 			target_path = os.path.join(os.path.splitext(self.output_path)[0], file)
-			hold = HolderFactory(zip_file, name, typ, file, target_path).generate_holder()
+			hold = HolderFactory(zip_file, name, typ, file,
+													 target_path).generate_holder()
 			hold.create_fakes()
 
 		zip_file.close()
@@ -113,36 +115,58 @@ class HolderFactory(Holder):
 
 
 class Generator:
-	def __init__(self, inpath):
-		self.inpath = inpath
+	def __init__(self, dataset_name):
+		self.dataset_name = dataset_name
+		self.inpath = self.dataset_folder_finder()
 		self.outpath = os.path.join(os.path.join(py_utils.tfds_dir(), 'testing',
-																'test_data', 'fake_examples',
-																os.path.basename(inpath) + 'auto_gen'))
-		print('outtttt: ', self.outpath)
+																						 'test_data', 'fake_examples',
+																						 os.path.basename(
+																							 self.inpath) + 'auto_gen'))
+
+	def dataset_folder_finder(self):
+		home = os.path.expanduser('~')
+		path = os.path.join(home, 'tensorflow_datasets', 'downloads')
+
+		for r, d, f in os.walk(path):
+			for file in f:
+				if ".INFO" in file:
+					aha = os.path.join(r, file)
+					filename = os.path.splitext(aha)[0]
+					with open(aha) as data_file:
+						data_item = json.load(data_file)
+						if data_item['dataset_names'][0] == self.dataset_name:
+							return filename
+		# raise error
+		raise FileNotFoundError(
+			'Dataset not found in `{}`. Please be sure the dataset is downloaded!'.format(
+				path))
 
 	def generator(self):
+		if self.inpath.endswith('.zip'):
+			self.zip_generator()
+		else:
+			# eger direk zip file gelirse onune bi checker koy zipfile a gonder dosyayi yaratip
+			for dirpath, dirnames, filenames in tf.io.gfile.walk(self.inpath):
+				structure = os.path.join(self.outpath,
+																 os.path.relpath(dirpath, self.inpath))
+				if not tf.io.gfile.isdir(structure):
+					tf.io.gfile.mkdir(structure)
+				else:
+					print("Folder does already exits!")
+				count = 0
+				while count < 2:  # take just 2 files on one folder
+					try:
+						file = filenames[count]
+					except IndexError:
+						break
+					file_path = os.path.join(dirpath, file)
+					file_target_path = os.path.join(structure, file)
+					name = os.path.basename(file_path)
+					typ = os.path.splitext(file_path)[1]
+					hold = HolderFactory(None, name, typ, file_path, file_target_path)
+					try:
+						hold.generate_holder().create_fakes()
+					except AttributeError:
+						pass
 
-		for dirpath, dirnames, filenames in tf.io.gfile.walk(self.inpath):
-			structure = os.path.join(self.outpath,
-															 os.path.relpath(dirpath, self.inpath))
-			if not tf.io.gfile.isdir(structure):
-				tf.io.gfile.mkdir(structure)
-			else:
-				print("Folder does already exits!")
-			count = 0
-			while count < 2:  # take just 2 files on one folder
-				try:
-					file = filenames[count]
-				except IndexError:
-					break
-				file_path = os.path.join(dirpath, file)
-				file_target_path = os.path.join(structure, file)
-				name = os.path.basename(file_path)
-				typ = os.path.splitext(file_path)[1]
-				hold = HolderFactory(None, name, typ, file_path, file_target_path)
-				try:
-					hold.generate_holder().create_fakes()
-				except AttributeError:
-					pass
-
-				count += 1
+					count += 1
