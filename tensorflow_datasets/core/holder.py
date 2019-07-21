@@ -141,6 +141,19 @@ class Generator:
 			'Dataset not found in `{}`. Please be sure the dataset is downloaded!'.format(
 				path))
 
+	def zip_generator(self):
+		tf.io.gfile.mkdir(self.dataset_name)
+		self.outpath = os.path.join(os.path.join(py_utils.tfds_dir(), 'testing',
+																						 'test_data', 'fake_examples',
+																						 self.dataset_name,
+																						 os.path.basename(
+																							 self.inpath)))
+		hold = HolderFactory(None, self.dataset_name, 'zip', self.inpath, self.outpath)
+		try:
+			hold.generate_holder().create_fakes()
+		except AttributeError:
+			pass
+
 	def generator(self):
 		if self.inpath.endswith('.zip'):
 			self.zip_generator()
