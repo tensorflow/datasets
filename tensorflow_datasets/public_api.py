@@ -54,6 +54,7 @@ __all__ = [
     "testing",
     "disable_progress_bar",
     "is_dataset_on_gcs",
+    "__version__",
 ]
 
 
