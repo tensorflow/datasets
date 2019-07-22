@@ -20,6 +20,7 @@ source</a>
 *   [Distributed training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/keras)
 *   [Multi-worker Training with Estimator](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_estimator)
 *   [Multi-worker Training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_keras)
+*   [Save and load a model using `tf.distribute.Strategy`](https://www.tensorflow.org/beta/tutorials/distribute/save_and_load)
 *   [Transfer Learning Using Pretrained ConvNets](https://www.tensorflow.org/beta/tutorials/images/transfer_learning)
 
 #### Usage:

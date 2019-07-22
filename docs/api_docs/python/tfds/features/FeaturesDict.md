@@ -167,13 +167,10 @@ __len__()
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/top_level_feature.py">View
-source</a>
-
 ```python
 decode_example(
-    serialized_example,
-    decoders=None
+    *args,
+    **kwargs
 )
 ```
 
