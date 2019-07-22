@@ -410,11 +410,18 @@ class DatasetInfo(object):
     self.read_from_directory(tmp_dir)
 
   def show_examples(self, ds, rows=3, cols=3, plot_scale=3):
-    """Display some random (rows*columns) images from the image-dataset
+    """Display some random (rows*columns) images from the image-dataset.
+    
+    This function will only work for image datasets which only have 
+    a single main image.
+    
     Args:
       ds: `tf.data.Dataset`. Does not accept batch data.
       rows: `int`, number of rows of the display grid.
       cols: `int`, number of columns of the display grid.
+      plot_scale: `int`, controls the plot size of the images. Keep this
+        value around 3 to get a good plot. High and low values may cause
+        the labels to get overlapped.
     """
     image_keys = [
         k for k, feature in self.features.items()
@@ -430,23 +437,22 @@ class DatasetInfo(object):
       raise ValueError(
           'Visualisation not supported for dataset `{}`. Was not able to auto-infer '
           'image and label keys.'.format(self.name))
-    else:
-      image_key = image_keys[0]
-      num_examples = rows * cols
-      examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
-      fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
-      fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
-      for i, ex in enumerate(examples):
-        fig.add_subplot(rows, cols, i+1)
-        image = ex[image_key]
-        if image.shape[2] == 1:
-          image = image.reshape(image.shape[:2])
-        plt.imshow(image, cmap='gray')
-        if len(label_keys) == 1:
-          label_key = label_keys[0]
-          label = ex[label_key]
-          plt.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
-      plt.show()
+    image_key = image_keys[0]
+    num_examples = rows * cols
+    examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
+    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
+    for i, ex in enumerate(examples):
+      fig.add_subplot(rows, cols, i+1)
+      image = ex[image_key]
+      if image.shape[2] == 1:
+        image = image.reshape(image.shape[:2])
+      plt.imshow(image, cmap='gray')
+      if len(label_keys) == 1:
+        label_key = label_keys[0]
+        label = ex[label_key]
+        plt.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
+    plt.show()
 
   def __repr__(self):
     splits_pprint = _indent("\n".join(["{"] + [
