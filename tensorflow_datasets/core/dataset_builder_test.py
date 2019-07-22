@@ -22,7 +22,6 @@ from __future__ import print_function
 import os
 
 from absl.testing import absltest
-from absl.testing import parameterized
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -390,9 +389,11 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   @classmethod
   def tearDownClass(cls):
+    super(DatasetBuilderReadTest, cls).tearDownClass()
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def setUp(self):
+    super(DatasetBuilderReadTest, self).setUp()
     self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
 
   @testing.run_in_graph_and_eager_modes()
