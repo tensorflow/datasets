@@ -120,28 +120,11 @@ class HolderFactory(Holder):
 class Generator:
 	def __init__(self, dataset_name):
 		self.dataset_name = dataset_name
-		self.inpath = self.dataset_folder_finder()
+		self.inpath = dataset_folder_finder(dataset_name)
 		self.outpath = os.path.join(os.path.join(py_utils.tfds_dir(), 'testing',
 																						 'test_data', 'fake_examples',
 																						 os.path.basename(
 																							 self.inpath) + 'auto_gen'))
-
-	def dataset_folder_finder(self):
-		home = os.path.expanduser('~')
-		path = os.path.join(home, 'tensorflow_datasets', 'downloads')
-
-		for r, d, f in os.walk(path):
-			for file in f:
-				if ".INFO" in file:
-					aha = os.path.join(r, file)
-					filename = os.path.splitext(aha)[0]
-					with open(aha) as data_file:
-						data_item = json.load(data_file)
-						if data_item['dataset_names'][0] == self.dataset_name:
-							return filename
-		raise FileNotFoundError(
-			'Dataset not found in `{}`. Please be sure the dataset is downloaded!'.format(
-				path))
 
 	def zip_generator(self):
 		tf.io.gfile.mkdir(self.dataset_name)
@@ -184,3 +167,21 @@ class Generator:
 						pass
 
 					count += 1
+
+
+def dataset_folder_finder(dataset_name, home_path=None):
+	home = home_path if home_path else os.path.expanduser('~')
+	path = os.path.join(home, 'tensorflow_datasets', 'downloads')
+
+	for r, d, f in tf.io.gfile.walk(path):
+		for file in f:
+			if file.endswith(".INFO"):
+				info_file = os.path.join(r, file)
+				filename = os.path.splitext(info_file)[0]
+				with tf.io.gfile.GFile(info_file) as data_file:
+					data_item = json.load(data_file)
+					if dataset_name in data_item['dataset_names']:
+						return filename
+	raise FileNotFoundError(
+		'Dataset not found in `{}`. Please be sure the dataset is downloaded!'.format(
+			path))
