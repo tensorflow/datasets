@@ -19,6 +19,8 @@ upper_tabs:
       contents:
       - title: Overview
         path: /datasets/overview
+      - title: Versioning
+        path: /datasets/datasets_versioning
       - title: Splits
         path: /datasets/splits
       - title: Add a dataset
