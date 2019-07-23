@@ -114,7 +114,7 @@ class HolderFactory(Holder):
 												 self.output_path)
 		elif self.path.endswith(
 				('.csv', '.txt', '.en', '.ne', '.si', '.data', '.md')):
-			return PlainTextHolder(self.name, self.typ, self.path, self.output_path)
+			return PlainTextHolder(self.zip_file, self.name, self.typ, self.path, self.output_path)
 
 
 class Generator:
