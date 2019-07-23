@@ -100,7 +100,7 @@ class DownloadManagerTest(testing.TestCase):
     def open_(path, mode='r'):
       if 'w' in mode:
         self._add_file(path)
-      return tf.io.gfile.GFile(self.files_content[path], mode)
+      return open(self.files_content[path], mode)
     def rename(from_, to, overwrite=False):
       del overwrite
       if from_ in self.files_content:
