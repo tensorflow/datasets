@@ -58,7 +58,7 @@ def _save_image(jpeg, label, image_idx):
   if not tf.io.gfile.exists(dirname):
     tf.io.gfile.makedirs(dirname)
   path = os.path.join(dirname, "image_{:04d}.jpg".format(image_idx))
-  with open(path, "wb") as out_file:
+  with tf.io.gfile.GFile(path, "wb") as out_file:
     out_file.write(jpeg)
 
 

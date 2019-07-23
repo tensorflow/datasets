@@ -134,7 +134,7 @@ class Video(sequence_feature.Sequence):
                                             stderr_data))
       frames = []
       for image_path in sorted(tf.io.gfile.listdir(ffmpeg_dir)):
-        with open(os.path.join(ffmpeg_dir, image_path), 'rb') as frame_file:
+        with tf.io.gfile.GFile(os.path.join(ffmpeg_dir, image_path), 'rb') as frame_file:
           frames.append(six.BytesIO(frame_file.read()))
       return frames
     except OSError as exception:

@@ -27,6 +27,7 @@ from absl import app
 from absl import flags
 import numpy as np
 
+import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import test_utils
@@ -56,7 +57,7 @@ def cifar100_output_dir():
 def dump(output_dir, fname, images, labels):
   path = os.path.join(output_dir, fname)
   print("Writing %s..." % path)
-  with open(path, "wb") as out_file:
+  with tf.io.gfile.GFile(path, "wb") as out_file:
     for image, labels in zip(images, labels):
       out_file.write(labels.tobytes())
       out_file.write(image.tobytes())
@@ -89,9 +90,9 @@ def _generate_cifar100_data():
   generate_cifar100_batch("test.bin", 2)
   fine_names = tfds.builder("cifar100").info.features["label"].names
   coarse_names = tfds.builder("cifar100").info.features["coarse_label"].names
-  with open(os.path.join(output_dir, "fine_label_names.txt"), "w") as f:
+  with tf.io.gfile.GFile(os.path.join(output_dir, "fine_label_names.txt"), "w") as f:
     f.write("\n".join(fine_names))
-  with open(os.path.join(output_dir, "coarse_label_names.txt"), "w") as f:
+  with tf.io.gfile.GFile(os.path.join(output_dir, "coarse_label_names.txt"), "w") as f:
     f.write("\n".join(coarse_names))
 
 
@@ -103,7 +104,7 @@ def _generate_cifar10_data():
   generate_cifar10_batch("test_batch.bin")
   label_names = tfds.builder("cifar10").info.features["label"].names
   print(label_names)
-  with open(os.path.join(output_dir, "batches.meta.txt"), "w") as f:
+  with tf.io.gfile.GFile(os.path.join(output_dir, "batches.meta.txt"), "w") as f:
     f.write("\n".join(label_names))
 
 

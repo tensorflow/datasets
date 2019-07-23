@@ -93,7 +93,7 @@ def _write_image_level_labels(fname, image_ids, machine=False):
         confidence = random.choice((0, 1))
       lines.append('%s,%s,%s,%s' % (image_id, source, label, confidence))
   path = os.path.join(_output_dir(), fname)
-  with open(path, 'w') as csv_f:
+  with tf.io.gfile.GFile(path, 'w') as csv_f:
     csv_f.write('\n'.join(lines))
 
 
@@ -115,7 +115,7 @@ def _write_bbox_labels(fname, image_ids):
       lines.append('%s,%s,%s,1,%.6f,%.6f,%.6f,%.6f,%s,%s,%s,%s,%s' % (
           image_id, source, label, xmin, xmax, ymin, ymax, p1, p2, p3, p4, p5))
   path = os.path.join(_output_dir(), fname)
-  with open(path, 'w') as csv_f:
+  with tf.io.gfile.GFile(path, 'w') as csv_f:
     csv_f.write('\n'.join(lines))
 
 
