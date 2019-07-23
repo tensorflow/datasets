@@ -49,21 +49,25 @@ class ImageHolder(Holder):
 
 class PlainTextHolder(Holder):
 
-	def __init__(self, *args, **kwargs):
+	def __init__(self, zip_file=None, *args, **kwargs):
 		super(PlainTextHolder, self).__init__(*args, **kwargs)
+		self.zip_file = zip_file
 
 	def create_fakes(self):
 		out = tf.io.gfile.GFile(self.output_path, mode='w')
-		with tf.io.gfile.GFile(self.path, mode='r') as inf:
-			count = 0
-			breaker = 0
-			while count < 5 and breaker < 30:  # write 5 non empty line
-				line = inf.readline()
-				out.write(line)
-				print(line)
-				if not line.rstrip():
-					count += 1
-				breaker += 1
+		if self.zip_file:
+			inf = self.zip_file.open(self.path, 'r')
+		else:
+			inf = tf.io.gfile.GFile(self.path, mode='r')
+		count = 0
+		breaker = 0
+		while count < 5 and breaker < 30:  # write 5 non empty line
+			line = inf.readline()
+			out.write(line)
+			print(line)
+			if not line.rstrip():
+				count += 1
+			breaker += 1
 
 		out.close()
 
@@ -78,7 +82,6 @@ class ZipHolder(Holder):
 		r = re.compile(".*/$")
 		folders = list(filter(r.match, f))  # it's catch the folders names
 		ex_files = []
-		print(folders)
 		for prefix in folders:  # take 2 example from the folders
 			ex_files += list(filter(lambda x: x.startswith(prefix), f))[1:3]
 
@@ -136,7 +139,6 @@ class Generator:
 						data_item = json.load(data_file)
 						if data_item['dataset_names'][0] == self.dataset_name:
 							return filename
-		# raise error
 		raise FileNotFoundError(
 			'Dataset not found in `{}`. Please be sure the dataset is downloaded!'.format(
 				path))
@@ -158,7 +160,6 @@ class Generator:
 		if self.inpath.endswith('.zip'):
 			self.zip_generator()
 		else:
-			# eger direk zip file gelirse onune bi checker koy zipfile a gonder dosyayi yaratip
 			for dirpath, dirnames, filenames in tf.io.gfile.walk(self.inpath):
 				structure = os.path.join(self.outpath,
 																 os.path.relpath(dirpath, self.inpath))
