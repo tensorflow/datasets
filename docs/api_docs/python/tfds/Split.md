@@ -9,12 +9,15 @@
 
 # tfds.Split
 
-## Class `Split`
-
-`Enum` for dataset splits.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
+
+## Class `Split`
+
+`Enum` for dataset splits.
 
 <!-- Placeholder for "Used in" -->
 

@@ -7,12 +7,15 @@
 
 # tfds.core.Experiment
 
-## Class `Experiment`
-
-Experiments which can be enabled/disabled on a per version basis.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
+
+## Class `Experiment`
+
+Experiments which can be enabled/disabled on a per version basis.
 
 <!-- Placeholder for "Used in" -->
 

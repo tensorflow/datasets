@@ -8,12 +8,15 @@
 
 # tfds.download.Resource
 
-## Class `Resource`
-
-Represents a resource to download, extract, or both.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
 source</a>
+
+## Class `Resource`
+
+Represents a resource to download, extract, or both.
 
 <!-- Placeholder for "Used in" -->
 

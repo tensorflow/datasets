@@ -17,12 +17,15 @@
 
 # tfds.core.GeneratorBasedBuilder
 
-## Class `GeneratorBasedBuilder`
-
-Base class for datasets with data generation based on dict generators.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
+
+## Class `GeneratorBasedBuilder`
+
+Base class for datasets with data generation based on dict generators.
 
 <!-- Placeholder for "Used in" -->
 

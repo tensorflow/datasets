@@ -13,14 +13,17 @@
 
 # tfds.features.text.SubwordTextEncoder
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
+source</a>
+
 ## Class `SubwordTextEncoder`
 
 Invertible `TextEncoder` using word pieces with a byte-level fallback.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
-source</a>
 
 ### Used in the tutorials:
 

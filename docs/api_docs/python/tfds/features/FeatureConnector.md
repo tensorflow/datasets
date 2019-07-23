@@ -13,12 +13,15 @@
 
 # tfds.features.FeatureConnector
 
-## Class `FeatureConnector`
-
-Abstract base class for feature types.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
+
+## Class `FeatureConnector`
+
+Abstract base class for feature types.
 
 <!-- Placeholder for "Used in" -->
 

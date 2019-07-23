@@ -11,14 +11,17 @@
 
 # tfds.core.NamedSplit
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
 ## Class `NamedSplit`
 
 Descriptor corresponding to a named split (train, test, ...).
 
 Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

@@ -21,12 +21,15 @@
 
 # tfds.features.FeaturesDict
 
-## Class `FeaturesDict`
-
-Composite `FeatureConnector`; each feature in `dict` has its own connector.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/features_dict.py">View
 source</a>
+
+## Class `FeaturesDict`
+
+Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
 <!-- Placeholder for "Used in" -->
 

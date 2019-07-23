@@ -20,14 +20,17 @@
 
 # tfds.features.Text
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
+source</a>
+
 ## Class `Text`
 
 `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

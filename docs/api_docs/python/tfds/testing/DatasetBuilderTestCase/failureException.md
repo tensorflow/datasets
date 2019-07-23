@@ -5,6 +5,9 @@
 
 # tfds.testing.DatasetBuilderTestCase.failureException
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
 ## Class `failureException`
 
 Assertion failed.

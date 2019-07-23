@@ -5,11 +5,14 @@
 
 # Module: tfds
 
-`tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a
-collection of datasets ready-to-use with TensorFlow.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py">View
 source</a>
+
+`tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a
+collection of datasets ready-to-use with TensorFlow.
 
 <!-- Placeholder for "Used in" -->
 

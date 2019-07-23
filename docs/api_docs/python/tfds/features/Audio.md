@@ -14,14 +14,17 @@
 
 # tfds.features.Audio
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/audio_feature.py">View
+source</a>
+
 ## Class `Audio`
 
 `FeatureConnector` for audio, encoded as raw integer wave form.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/audio_feature.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

@@ -17,12 +17,15 @@
 
 # tfds.core.DatasetBuilder
 
-## Class `DatasetBuilder`
-
-Abstract base class for all datasets.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
+
+## Class `DatasetBuilder`
+
+Abstract base class for all datasets.
 
 <!-- Placeholder for "Used in" -->
 

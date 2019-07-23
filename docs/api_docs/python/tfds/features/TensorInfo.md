@@ -8,12 +8,15 @@
 
 # tfds.features.TensorInfo
 
-## Class `TensorInfo`
-
-Structure containing info on the `tf.Tensor` shape/dtype.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
+
+## Class `TensorInfo`
+
+Structure containing info on the `tf.Tensor` shape/dtype.
 
 <!-- Placeholder for "Used in" -->
 

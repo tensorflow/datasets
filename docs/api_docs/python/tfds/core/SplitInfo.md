@@ -9,12 +9,15 @@
 
 # tfds.core.SplitInfo
 
-## Class `SplitInfo`
-
-Wraps `proto.SplitInfo` with an additional property.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/py_utils.py">View
 source</a>
+
+## Class `SplitInfo`
+
+Wraps `proto.SplitInfo` with an additional property.
 
 <!-- Placeholder for "Used in" -->
 

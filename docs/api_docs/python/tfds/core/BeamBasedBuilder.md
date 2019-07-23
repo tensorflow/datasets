@@ -17,12 +17,15 @@
 
 # tfds.core.BeamBasedBuilder
 
-## Class `BeamBasedBuilder`
-
-Beam based Builder.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
 source</a>
+
+## Class `BeamBasedBuilder`
+
+Beam based Builder.
 
 <!-- Placeholder for "Used in" -->
 

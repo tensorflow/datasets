@@ -13,12 +13,15 @@
 
 # tfds.download.DownloadManager
 
-## Class `DownloadManager`
-
-Manages the download and extraction of files, as well as caching.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
+
+## Class `DownloadManager`
+
+Manages the download and extraction of files, as well as caching.
 
 <!-- Placeholder for "Used in" -->
 

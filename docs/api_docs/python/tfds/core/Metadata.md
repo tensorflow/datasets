@@ -7,12 +7,15 @@
 
 # tfds.core.Metadata
 
-## Class `Metadata`
-
-Abstract base class for DatasetInfo metadata container.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
 source</a>
+
+## Class `Metadata`
+
+Abstract base class for DatasetInfo metadata container.
 
 <!-- Placeholder for "Used in" -->
 

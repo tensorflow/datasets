@@ -14,14 +14,17 @@
 
 # tfds.features.BBoxFeature
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
+source</a>
+
 ## Class `BBoxFeature`
 
 `FeatureConnector` for a normalized bounding box.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

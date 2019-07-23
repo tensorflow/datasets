@@ -136,12 +136,15 @@
 
 # tfds.testing.TestCase
 
-## Class `TestCase`
-
-Base TestCase to be used for all tests.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
 source</a>
+
+## Class `TestCase`
+
+Base TestCase to be used for all tests.
 
 <!-- Placeholder for "Used in" -->
 

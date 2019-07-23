@@ -12,12 +12,15 @@
 
 # tfds.features.text.Tokenizer
 
-## Class `Tokenizer`
-
-Splits a string into tokens, and joins them back.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
 source</a>
+
+## Class `Tokenizer`
+
+Splits a string into tokens, and joins them back.
 
 ### Used in the tutorials:
 

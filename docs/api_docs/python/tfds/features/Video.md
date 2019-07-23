@@ -16,14 +16,17 @@
 
 # tfds.features.Video
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py">View
+source</a>
+
 ## Class `Video`
 
 `FeatureConnector` for videos, encoding frames individually on disk.
 
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

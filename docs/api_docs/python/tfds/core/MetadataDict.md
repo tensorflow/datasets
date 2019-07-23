@@ -7,15 +7,18 @@
 
 # tfds.core.MetadataDict
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
+
 ## Class `MetadataDict`
 
 A <a href="../../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>
 object that acts as a `dict`.
 
 Inherits From: [`Metadata`](../../tfds/core/Metadata.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

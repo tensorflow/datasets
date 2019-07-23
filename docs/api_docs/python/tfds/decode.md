@@ -5,10 +5,13 @@
 
 # Module: tfds.decode
 
-Decoder public API.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/__init__.py">View
 source</a>
+
+Decoder public API.
 
 <!-- Placeholder for "Used in" -->
 

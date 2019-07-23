@@ -152,14 +152,17 @@
 
 # tfds.testing.DatasetBuilderTestCase
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py">View
+source</a>
+
 ## Class `DatasetBuilderTestCase`
 
 Inherit this class to test your DatasetBuilder class.
 
 Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

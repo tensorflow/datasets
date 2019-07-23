@@ -6,13 +6,16 @@
 
 # tfds.features.text.TextEncoderConfig
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ## Class `TextEncoderConfig`
 
 Configuration for
 <a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

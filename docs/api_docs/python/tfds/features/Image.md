@@ -16,14 +16,17 @@
 
 # tfds.features.Image
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
+source</a>
+
 ## Class `Image`
 
 `FeatureConnector` for images.
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

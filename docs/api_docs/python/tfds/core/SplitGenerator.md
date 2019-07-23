@@ -6,12 +6,15 @@
 
 # tfds.core.SplitGenerator
 
-## Class `SplitGenerator`
-
-Defines the split information for the generator.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
+
+## Class `SplitGenerator`
+
+Defines the split information for the generator.
 
 <!-- Placeholder for "Used in" -->
 

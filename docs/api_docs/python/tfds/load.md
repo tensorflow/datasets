@@ -5,6 +5,12 @@
 
 # tfds.load
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
+source</a>
+
 Loads the named dataset into a `tf.data.Dataset`.
 
 ```python
@@ -24,9 +30,6 @@ tfds.load(
     try_gcs=False
 )
 ```
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
-source</a>
 
 ### Used in the guide:
 

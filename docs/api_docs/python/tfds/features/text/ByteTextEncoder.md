@@ -12,14 +12,17 @@
 
 # tfds.features.text.ByteTextEncoder
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ## Class `ByteTextEncoder`
 
 Byte-encodes text.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

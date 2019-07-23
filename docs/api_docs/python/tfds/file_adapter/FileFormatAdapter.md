@@ -10,12 +10,15 @@
 
 # tfds.file_adapter.FileFormatAdapter
 
-## Class `FileFormatAdapter`
-
-Provides writing and reading methods for a file format.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
 source</a>
+
+## Class `FileFormatAdapter`
+
+Provides writing and reading methods for a file format.
 
 <!-- Placeholder for "Used in" -->
 

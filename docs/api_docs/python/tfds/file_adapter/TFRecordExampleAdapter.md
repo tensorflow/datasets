@@ -10,14 +10,17 @@
 
 # tfds.file_adapter.TFRecordExampleAdapter
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
+
 ## Class `TFRecordExampleAdapter`
 
 Writes/Reads serialized Examples protos to/from TFRecord files.
 
 Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.md)
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 
