@@ -164,8 +164,8 @@ def _get_mapping_files():
 
 def _create_zip_files():
   """Saves png and label using name index."""
-  if not os.path.exists(_output_dir()):
-    os.makedirs(_output_dir())
+  if not tf.io.gfile.exists(_output_dir()):
+    tf.io.gfile.makedirs(_output_dir())
 
   images_out_path = os.path.join(_output_dir(), "data_object_image_2.zip")
   with zipfile.ZipFile(images_out_path, "w") as image_zip:

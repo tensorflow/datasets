@@ -111,7 +111,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
     # TODO(pierrot): implement extraction of multiple files archives.
     path = dl_manager.manual_dir
     test_labels_path = dl_manager.download(_URL_TEST_LABELS)
-    if os.path.isdir(test_labels_path):
+    if tf.io.gfile.isdir(test_labels_path):
        # While testing: download() returns the dir containing the tests files.
       test_labels_path = os.path.join(test_labels_path,
                                       "retinopathy_solution.csv")

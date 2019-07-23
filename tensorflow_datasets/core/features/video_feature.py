@@ -133,7 +133,7 @@ class Video(sequence_feature.Sequence):
                                             stdout_data,
                                             stderr_data))
       frames = []
-      for image_path in sorted(os.listdir(ffmpeg_dir)):
+      for image_path in sorted(tf.io.gfile.listdir(ffmpeg_dir)):
         with open(os.path.join(ffmpeg_dir, image_path), 'rb') as frame_file:
           frames.append(six.BytesIO(frame_file.read()))
       return frames
@@ -143,7 +143,7 @@ class Video(sequence_feature.Sequence):
           'the instrutions at https://ffmpeg.org/. '
           'Original exception: {}'.format(exception))
     finally:
-      shutil.rmtree(ffmpeg_dir)
+      tf.io.gfile.rmtree(ffmpeg_dir)
 
   def encode_example(self, video_or_path_or_fobj):
     """Converts the given image into a dict convertible to tf example."""

@@ -148,7 +148,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     tar_gz_path = dl_manager.download(_SUN397_URL + "SUN397.tar.gz")
-    if os.path.isdir(tar_gz_path):
+    if tf.io.gfile.isdir(tar_gz_path):
       # While testing: download() returns the dir containing the tests files.
       tar_gz_path = os.path.join(tar_gz_path, "SUN397.tar.gz")
 
