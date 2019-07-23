@@ -10,6 +10,7 @@ import json
 
 # TODO add tar.gz support
 # TODO check types with python-magic
+# TODO check archive or extracted
 
 class Holder:
 
@@ -18,6 +19,12 @@ class Holder:
 		self.typ = file_type  # png
 		self.path = path  # /folder/image.png
 		self.output_path = output_path  # /target_folder/image.png
+		self.create_basedir()
+
+	def create_basedir(self):
+		basedir = os.path.dirname(self.output_path)
+		if not tf.io.gfile.exists(basedir):
+			tf.io.gfile.makedirs(basedir)
 
 
 class ImageHolder(Holder):
@@ -39,12 +46,9 @@ class ImageHolder(Holder):
 			return 10, 10
 
 	def create_fakes(self):
-		basedir = os.path.dirname(self.output_path)
-		if not tf.io.gfile.exists(basedir):
-			tf.io.gfile.makedirs(basedir)
-		print('created, ', self.output_path, ', size: ', self.image_size())
 		img = Image.new('RGB', self.image_size(), (255, 255, 255))
 		img.save(self.output_path)
+		print('created, ', self.output_path, ', size: ', self.image_size())
 
 
 class PlainTextHolder(Holder):
@@ -64,12 +68,11 @@ class PlainTextHolder(Holder):
 		while count < 5 and breaker < 30:  # write 5 non empty line
 			line = inf.readline()
 			out.write(line)
-			print(line)
 			if not line.rstrip():
 				count += 1
 			breaker += 1
-
 		out.close()
+		print('created, ', self.output_path)
 
 
 class ZipHolder(Holder):
@@ -84,19 +87,26 @@ class ZipHolder(Holder):
 		ex_files = []
 		for prefix in folders:  # take 2 example from the folders
 			ex_files += list(filter(lambda x: x.startswith(prefix), f))[1:3]
-
-		for file in ex_files:
+			ex_files += list(filter(lambda x: x.startswith(prefix)
+																						and not x.endswith('/'), f))[1:3]
+		for file in set(ex_files):
 			name = os.path.basename(file)
 			typ = os.path.splitext(file)[1]
-			target_path = os.path.join(os.path.splitext(self.output_path)[0], file)
+			basedir = os.path.basename(os.path.splitext(self.output_path)[0])
+			if basedir in file:
+				rel_path = os.path.relpath(file, basedir)
+			else:
+				rel_path = file
+			target_path = os.path.join(os.path.splitext(self.output_path)[0], rel_path)
 			hold = HolderFactory(zip_file, name, typ, file,
 													 target_path).generate_holder()
-			hold.create_fakes()
-
+			if hold is not None:
+				hold.create_fakes()
+			else:
+				continue
 		zip_file.close()
-		folder_path = os.path.join(os.path.splitext(self.output_path)[0])
-		shutil.make_archive(os.path.splitext(self.output_path)[0], 'zip',
-												folder_path)
+		folder_path = os.path.splitext(self.output_path)[0]
+		shutil.make_archive(folder_path, 'zip', folder_path)
 		tf.io.gfile.rmtree(folder_path)  # delete created unzipped folder
 
 
@@ -106,7 +116,6 @@ class HolderFactory(Holder):
 		self.zip_file = zip_file
 
 	def generate_holder(self):
-
 		if self.path.endswith('.zip'):
 			return ZipHolder(self.name, self.typ, self.path, self.output_path)
 		elif self.path.endswith(('.jpg', '.jpeg', '.png', '.tiff')):
@@ -121,18 +130,18 @@ class Generator:
 	def __init__(self, dataset_name):
 		self.dataset_name = dataset_name
 		self.inpath = dataset_folder_finder(dataset_name)
-		self.outpath = os.path.join(os.path.join(py_utils.tfds_dir(), 'testing',
+		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
 																						 'test_data', 'fake_examples',
 																						 os.path.basename(
-																							 self.inpath) + 'auto_gen'))
+																							 self.inpath))
 
 	def zip_generator(self):
 		tf.io.gfile.mkdir(self.dataset_name)
-		self.outpath = os.path.join(os.path.join(py_utils.tfds_dir(), 'testing',
+		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
 																						 'test_data', 'fake_examples',
 																						 self.dataset_name,
 																						 os.path.basename(
-																							 self.inpath)))
+																							 self.inpath))
 		hold = HolderFactory(None, self.dataset_name, 'zip', self.inpath, self.outpath)
 		try:
 			hold.generate_holder().create_fakes()
