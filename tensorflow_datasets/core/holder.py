@@ -11,6 +11,8 @@ import json
 # TODO add tar.gz support
 # TODO check types with python-magic
 # TODO check archive or extracted
+# TODO count created example for test file
+# TODO folder limit 2
 
 class Holder(object):
 
@@ -126,10 +128,32 @@ class HolderFactory(Holder):
 			return PlainTextHolder(self.zip_file, self.name, self.typ, self.path, self.output_path)
 
 
-class Generator:
-	def __init__(self, dataset_name):
+class Generator(object):
+	"""
+	Generator of fake examples of dataset for testing.
+
+	Example Usages:
+
+		Just give an dataset_name when using
+		default tfds download dir.(`~/tensorflow_datasets/downloads`)
+
+		>> Generator('cats_vs_dogs').generator()
+
+		Give a downloaded file or extracted folder path.
+		>> Generator('cats_vs_dogs',
+									dataset_path='~/tensorflow_datasets/downloads/kgyq21XHr2.zip')
+									.generator()
+	"""
+
+	def __init__(self, dataset_name, dataset_path=None):
+		"""
+		Args:
+			dataset_name: dataset name of generated
+			dataset_path: path of downloaded file, default is None. It's search path
+			on the `~/tensorflow_datasets/downloads` and return downloaded file path.
+		"""
 		self.dataset_name = dataset_name
-		self.inpath = dataset_folder_finder(dataset_name)
+		self.inpath = dataset_path if dataset_path else dataset_folder_finder(dataset_name)
 		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
 																						 'test_data', 'fake_examples',
 																						 os.path.basename(
