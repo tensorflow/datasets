@@ -25,9 +25,9 @@ import tensorflow_datasets.testing as tfds_test
 class MiniImagenetTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = mini_imagenet.MiniImagenet
   SPLITS = {
-    "train": 6,
-    "validation": 4,
-    "test": 4
+      "train": 6,
+      "validation": 4,
+      "test": 4
   }
 
 
