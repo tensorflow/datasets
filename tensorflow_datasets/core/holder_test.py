@@ -96,10 +96,11 @@ class TestZipHolder(tf.test.TestCase):
 		zip_gen = holder.ZipHolder('test_folder', 'zip', cls.zip_path, cls.out_zip_path)
 		zip_gen.create_fakes()
 
+		cls.original_zip_files = zipfile.ZipFile(cls.zip_path).namelist()
+		cls.copied_zip_files = zipfile.ZipFile(cls.out_zip_path).namelist()
+
 	def test_create_fakes(self):
-		original_zip_files = zipfile.ZipFile(self.zip_path).namelist()
-		copied_zip_files = zipfile.ZipFile(self.out_zip_path).namelist()
-		self.assertEqual(original_zip_files, copied_zip_files)
+		self.assertEqual(self.original_zip_files, self.copied_zip_files)
 
 	@classmethod
 	def tearDownClass(cls):
