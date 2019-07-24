@@ -244,8 +244,8 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                 with tf.io.gfile.GFile(search_file) as f:
                   text = f.read()
                   search_contexts.append(text)
-              except IOError:
-                print("File does not exist!")
+              except (IOError, tf.errors.NotFoundError):
+                logging.info("File does not exist, skipping: %s", file_name)
                 search_contexts.append("")
           else:
             descriptions = []
@@ -276,8 +276,8 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                 with tf.io.gfile.GFile(wiki_file) as f:
                   text = f.read()
                   wiki_contexts.append(text)
-              except IOError:
-                print("File does not exist!")
+              except (IOError, tf.errors.NotFoundError):
+                logging.info("File does not exist, skipping: %s", file_name)
                 wiki_contexts.append("")
           else:
             doc_sources = []
