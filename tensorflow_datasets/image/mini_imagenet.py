@@ -140,8 +140,8 @@ class MiniImagenet(tfds.core.GeneratorBasedBuilder):
       with tf.io.gfile.GFile(path_data, "rb") as f:
         data = pickle.load(f, encoding="latin1")
     except Exception as e:
-      print("Unable to load data ", path_data, ":", e)
-      raise
+      message = "Unable to load data {} : {}".format(path_data, e)
+      raise Exception(message)
 
     img_data = data["image_data"]
     class_dict = data["class_dict"]
