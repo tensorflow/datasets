@@ -12,7 +12,7 @@ import json
 # TODO check types with python-magic
 # TODO check archive or extracted
 
-class Holder:
+class Holder(object):
 
 	def __init__(self, name, file_type, path, output_path=None):
 		self.name = name  # image
