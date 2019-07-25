@@ -329,7 +329,7 @@ class EMNIST(MNIST):
                     num_classes=self.builder_config.class_number),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"],
+        urls=["https://www.nist.gov/node/1298471/emnist-dataset"],
         citation=_EMNIST_CITATION,
     )
 
