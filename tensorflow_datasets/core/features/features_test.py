@@ -196,6 +196,26 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
     self.assertEqual(fdict['integer'].dtype, tf.int32)
     self.assertEqual(fdict['string'].dtype, tf.string)
 
+  def test_feature__repr__(self):
+
+    label = features_lib.ClassLabel(names=['m', 'f'])
+    feature_dict = features_lib.FeaturesDict({
+        'metadata': features_lib.Sequence({
+            'frame': features_lib.Image(shape=(32, 32, 3)),
+        }),
+        'label': features_lib.Sequence(label),
+    })
+
+    self.assertEqual(repr(feature_dict), FEATURE_STR)
+
+
+FEATURE_STR = """FeaturesDict({
+    'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=2)),
+    'metadata': Sequence({
+        'frame': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    }),
+})"""
+
 
 class FeatureTensorTest(testing.FeatureExpectationsTestCase):
 

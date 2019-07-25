@@ -26,7 +26,7 @@ already added.
 *   [Create your own `FeatureConnector`](#create-your-own-featureconnector)
 *   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
     *   [1. Add an import for registration](#1-add-an-import-for-registration)
-    *   [2. Run download_and_prepare locally](#2-run-download-and-prepare-locally)
+    *   [2. Run download_and_prepare locally](#2-run-download_and_prepare-locally)
     *   [3. Double-check the citation](#3-double-check-the-citation)
     *   [4. Add a test](#4-add-a-test)
     *   [5. Check your code style](#5-check-your-code-style)
@@ -103,7 +103,8 @@ Its subclasses implement:
   [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) object
   describing the dataset
 * `_split_generators`: downloads the source data and defines the dataset splits
-* `_generate_examples`: yields examples in the dataset from the source data
+* `_generate_examples`: yields `(key, example)` tuples in the dataset from the
+  source data
 
 This guide will use `GeneratorBasedBuilder`.
 
@@ -131,12 +132,15 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self):
     # Yields examples from the dataset
-    pass  # TODO
+    yield 'key', {}
 ```
 
 If you'd like to follow a test-driven development workflow, which can help you
 iterate faster, jump to the [testing instructions](#testing-mydataset) below,
 add the test, and then return here.
+
+For an explanation of what the version is, please read
+[datasets versioning](datasets_versioning.md).
 
 ## Specifying `DatasetInfo`
 
@@ -226,7 +230,6 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=10,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "train"),
                 "labels": os.path.join(extracted_path, "train_labels.csv"),
@@ -234,7 +237,6 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "test"),
                 "labels": os.path.join(extracted_path, "test_labels.csv"),
@@ -246,10 +248,6 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
 `SplitGenerator` describes how a split should be generated. `gen_kwargs`
 will be passed as keyword arguments to `_generate_examples`, which we'll define
 next.
-
-When specifying `num_shards`, which determines how many files the split will
-use, pick a number such that a single shard is less that 4 GiB as
-as each shard will be loaded in memory for shuffling.
 
 ## Writing an example generator
 
@@ -265,8 +263,8 @@ builder._generate_examples(
 ```
 
 This method will typically read source dataset artifacts (e.g. a CSV file) and
-yield feature dictionaries that correspond to the features specified in
-`DatasetInfo`.
+yield (key, feature dictionary) tuples that correspond to the features specified
+in `DatasetInfo`.
 
 ```python
 def _generate_examples(self, images_dir_path, labels):
@@ -278,7 +276,7 @@ def _generate_examples(self, images_dir_path, labels):
 
   # And yield examples as feature dictionaries
   for image_id, description, label in data:
-    yield {
+    yield image_id, {
         "image_description": description,
         "image": "%s/%s.jpeg" % (images_dir_path, image_id),
         "label": label,
@@ -289,6 +287,10 @@ def _generate_examples(self, images_dir_path, labels):
 format suitable for writing to disk (currently we use `tf.train.Example`
 protocol buffers). For example, `tfds.features.Image` will copy out the
 JPEG content of the passed image files automatically.
+
+The key (here: `image_id`) should uniquely identify the record. It is used to
+shuffle the dataset globally. If two records are yielded using the same key,
+an exception will be raised during preparation of the dataset.
 
 If you've implemented the test harness, your builder test should now pass.
 

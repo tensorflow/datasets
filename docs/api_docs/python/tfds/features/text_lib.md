@@ -5,9 +5,13 @@
 
 # Module: tfds.features.text
 
-Text utilities.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
-Defined in [`core/features/text/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/__init__.py).
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/__init__.py">View
+source</a>
+
+Text utilities.
 
 <!-- Placeholder for "Used in" -->
 

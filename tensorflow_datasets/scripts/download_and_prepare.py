@@ -16,7 +16,7 @@
 r"""Script to call download_and_prepare on DatasetBuilder.
 
 Standalone script to generate specific dataset(s). This can be
-used if you want to separate download/generation of dataset from acual usage.
+used if you want to separate download/generation of dataset from actual usage.
 
 By default, the dataset is generated in the default location
 (~/tensorflow_datasets), which the same as when calling `tfds.load()`.
@@ -49,6 +49,7 @@ from absl import logging
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
+
 
 FLAGS = flags.FLAGS
 
@@ -115,7 +116,7 @@ def download_config():
 
 def download_and_prepare(builder):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset {}...".format(builder.info.full_name))
+  logging.info("download_and_prepare for dataset %s...", builder.info.full_name)
 
   dl_config = download_config()
 

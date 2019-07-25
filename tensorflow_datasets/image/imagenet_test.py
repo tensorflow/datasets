@@ -43,7 +43,7 @@ class Imagenet2012Test(testing.DatasetBuilderTestCase):
 
 
 class Imagenet2012S3(Imagenet2012Test):
-  VERSION = "4.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

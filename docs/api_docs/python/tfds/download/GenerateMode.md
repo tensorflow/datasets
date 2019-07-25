@@ -8,6 +8,12 @@
 
 # tfds.download.GenerateMode
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py">View
+source</a>
+
 ## Class `GenerateMode`
 
 `Enum` for how to treat pre-existing downloads and data.
@@ -17,9 +23,6 @@
 * Class `tfds.GenerateMode`
 * Class `tfds.download.GenerateMode`
 
-
-
-Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py).
 
 <!-- Placeholder for "Used in" -->
 

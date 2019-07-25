@@ -27,7 +27,6 @@ import os
 from absl.testing import absltest
 from absl.testing import parameterized
 import numpy as np
-import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import dataset_builder
@@ -70,28 +69,31 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   """Inherit this class to test your DatasetBuilder class.
 
   You must set the following class attributes:
-    DATASET_CLASS: class object of DatasetBuilder you want to test.
+
+    * DATASET_CLASS: class object of DatasetBuilder you want to test.
 
   You may set the following class attributes:
-    VERSION: `str`. The version used to run the test. eg: '1.2.*'.
+
+    * VERSION: `str`. The version used to run the test. eg: '1.2.*'.
       Defaults to None (canonical version).
-    BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
+    * BUILDER_CONFIG_NAMES_TO_TEST: `list[str]`, the list of builder configs
       that should be tested. If None, all the BUILDER_CONFIGS from the class
       will be tested.
-    DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
+    * DL_EXTRACT_RESULT: `dict[str]`, the returned result of mocked
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
       If not specified, path to `fake_examples` will always be returned.
-    EXAMPLE_DIR: `str`, the base directory in in which fake examples are
+    * EXAMPLE_DIR: `str`, the base directory in in which fake examples are
       contained. Optional; defaults to
       tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
-    OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
+    * OVERLAPPING_SPLITS: `list[str]`, splits containing examples from other
       splits (e.g. a "example" split containing pictures from other splits).
-    MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
+    * MOCK_OUT_FORBIDDEN_OS_FUNCTIONS: `bool`, defaults to True. Set to False to
       disable checks preventing usage of `os` or builtin functions instead of
       recommended `tf.io.gfile` API.
 
   This test case will check for the following:
+
    - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
    - the dataset builder can read the fake examples stored in
        testing/test_data/fake_examples/${dataset_name};
@@ -228,13 +230,6 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         manual_dir=self.example_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
-
-        # TODO(b/129148632): The current apache-beam 2.11.0 do not work with Py3
-        # Update once the new version is out (around April)
-        skip_beam_test = bool(six.PY3)
-        if skip_beam_test:
-          return
-
         import apache_beam as beam   # pylint: disable=g-import-not-at-top
         # For Beam datasets, set-up the runner config
         beam_runner = None

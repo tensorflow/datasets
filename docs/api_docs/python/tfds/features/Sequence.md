@@ -16,11 +16,15 @@
 
 # tfds.features.Sequence
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
 ## Class `Sequence`
 
 Composite `FeatureConnector` for a `dict` where each value is a list.
-
-Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -43,22 +47,41 @@ Note that `SequenceDict` do not support features which are of type
 tfds.features.Sequence(tfds.features.Image(), length=NB_FRAME)
 ```
 
-or: `tfds.features.Sequence({ 'frame': tfds.features.Image(shape=(64, 64, 3))
-'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right']) },
-length=NB_FRAME)`
+or:
 
-During data generation: `yield { 'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
-'action': ['left', 'left', 'up', ...], }`
+```
+tfds.features.Sequence({
+    'frame': tfds.features.Image(shape=(64, 64, 3))
+    'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right'])
+}, length=NB_FRAME)
+```
 
-Tensor returned by `.as_dataset()`: `{ 'frame': tf.Tensor(shape=(NB_FRAME, 64,
-64, 3), dtype=tf.uint8), 'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
-}`
+During data generation:
+
+```
+yield {
+    'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
+    'action': ['left', 'left', 'up', ...],
+}
+```
+
+Tensor returned by `.as_dataset()`:
+
+```
+{
+    'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
+    'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
+}
+```
 
 At generation time, you can specify a list of features dict, a dict of list
 values or a stacked numpy array. The lists will automatically be distributed
 into their corresponding `FeatureConnector`.
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
 
 ```python
 __init__(
@@ -96,6 +119,9 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="__getitem__"><code>__getitem__</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
 ```python
 __getitem__(key)
 ```
@@ -105,7 +131,10 @@ Convenience method to access the underlying features.
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 ```python
-decode_example(serialized_example)
+decode_example(
+    *args,
+    **kwargs
+)
 ```
 
 Decode the serialize examples.
@@ -113,6 +142,11 @@ Decode the serialize examples.
 #### Args:
 
 *   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present. See
+    [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+    for more info.
 
 #### Returns:
 
@@ -120,11 +154,17 @@ Decode the serialize examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
 ```python
 encode_example(example_dict)
 ```
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
 
 ``` python
 get_serialized_info()
@@ -134,6 +174,9 @@ See base class for details.
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -141,6 +184,9 @@ get_tensor_info()
 See base class for details.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
 
 ```python
 load_metadata(
@@ -152,6 +198,9 @@ load_metadata(
 See base class for details.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
 
 ```python
 save_metadata(

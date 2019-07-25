@@ -138,7 +138,13 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
 
   def __repr__(self):
     """Display the feature dictionary."""
-    return '{}({})'.format(type(self).__name__, self._feature_dict)
+    lines = ['{}({{'.format(type(self).__name__)]
+    # Add indentation
+    for key, feature in sorted(list(self._feature_dict.items())):
+      all_sub_lines = '\'{}\': {},'.format(key, feature)
+      lines.extend('    ' + l for l in all_sub_lines.split('\n'))
+    lines.append('})')
+    return '\n'.join(lines)
 
   def get_tensor_info(self):
     """See base class for details."""

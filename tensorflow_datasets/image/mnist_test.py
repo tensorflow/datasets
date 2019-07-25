@@ -44,7 +44,7 @@ class MNISTTest(testing.DatasetBuilderTestCase):
 
 
 class MNISTTestS3(MNISTTest):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
 class FashionMNISTTest(MNISTTest):
@@ -52,7 +52,7 @@ class FashionMNISTTest(MNISTTest):
 
 
 class FashionMNISTTestS3(FashionMNISTTest):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
 class KMNISTTest(MNISTTest):
@@ -60,18 +60,18 @@ class KMNISTTest(MNISTTest):
 
 
 class KMNISTTestS3(KMNISTTest):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
-mnist.EMNIST.BUILDER_CONFIGS.append(
+mnist.EMNIST.BUILDER_CONFIGS.extend([
     mnist.EMNISTConfig(
         name="test",
         class_number=200,
         train_examples=10,
         test_examples=2,
         description="EMNIST test data config.",
-        version="1.0.1",
-    ))
+    ),
+])
 
 
 class EMNISTTest(testing.DatasetBuilderTestCase):
@@ -81,6 +81,10 @@ class EMNISTTest(testing.DatasetBuilderTestCase):
       "test": 2,
   }
   BUILDER_CONFIG_NAMES_TO_TEST = ["test"]
+
+
+class EMNISTTestS3(EMNISTTest):
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

@@ -48,7 +48,15 @@ _DOWNLOAD_URL = "https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip"
 class CLEVR(tfds.core.GeneratorBasedBuilder):
   """CLEVR dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
+  ]
+  # Version history:
+  # 3.0.0: S3 with new hashing function (different shuffle).
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -112,8 +120,13 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
              "rotation", "pixel_coords", "3d_coords"]
     for image_path, scene in zip(image_paths, scenes_json["scenes"]):
       objects = scene["objects"]
-      yield {
+      fname = os.path.basename(image_path)
+      record = {
           "image": image_path,
-          "file_name": os.path.basename(image_path),
+          "file_name": fname,
           "objects": [{attr: obj[attr] for attr in attrs} for obj in objects]  # pylint: disable=g-complex-comprehension
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield fname, record
+      else:
+        yield record

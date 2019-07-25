@@ -42,13 +42,12 @@ REQUIRED_PKGS = [
     'absl-py',
     'attrs',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
-    'cityhash',
     'future',
     'numpy',
     'promise',
     'protobuf>=3.6.1',
     'psutil',
-    'requests',
+    'requests>=2.19.0',
     'six',
     'tensorflow-metadata',
     'termcolor',
@@ -60,6 +59,7 @@ TESTS_REQUIRE = [
     'apache-beam',
     'jupyter',
     'pytest',
+    'pytest-xdist',
 ]
 
 if sys.version_info.major == 3:
@@ -79,6 +79,11 @@ if sys.version_info < (3, 4):
 # Static files needed by datasets.
 DATASET_FILES = [
     'image/caltech101_labels.txt',
+    'image/cbis_ddsm_calc_distributions.txt',
+    'image/cbis_ddsm_calc_types.txt',
+    'image/cbis_ddsm_mass_margins.txt',
+    'image/cbis_ddsm_mass_shapes.txt',
+    'image/cbis_ddsm_patch_labels.txt',
     'image/dtd_key_attributes.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
@@ -107,6 +112,7 @@ DATASET_EXTRAS = {
     ],
     'groove': ['pretty_midi', 'pydub'],
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'pet_finder': ['pandas'],
     'svhn': ['scipy'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
@@ -117,8 +123,8 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
-    'tensorflow': ['tensorflow>=1.13.0'],
-    'tensorflow_gpu': ['tensorflow-gpu>=1.13.0'],
+    'tensorflow': ['tensorflow>=1.14.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.14.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)

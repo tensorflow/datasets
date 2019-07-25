@@ -2,16 +2,20 @@
 <meta itemprop="name" content="tfds.core.Experiment" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="DUMMY"/>
+<meta itemprop="property" content="S3"/>
 </div>
 
 # tfds.core.Experiment
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
+
 ## Class `Experiment`
 
 Experiments which can be enabled/disabled on a per version basis.
-
-Defined in
-[`core/utils/version.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -30,3 +34,4 @@ tfds.core.Experiment.EXP_A: True, })
 ## Class Members
 
 *   `DUMMY` <a id="DUMMY"></a>
+*   `S3` <a id="S3"></a>

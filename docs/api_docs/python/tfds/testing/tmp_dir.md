@@ -5,6 +5,9 @@
 
 # tfds.testing.tmp_dir
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
 Context manager for a temporary directory.
 
 ``` python

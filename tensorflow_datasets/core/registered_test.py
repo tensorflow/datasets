@@ -122,6 +122,8 @@ class RegisteredTest(testing.TestCase):
                      builder.as_dataset_kwargs.pop("split"))
     self.assertEqual(None, builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
+    self.assertFalse(builder.as_dataset_kwargs.pop("decoders"))
+    self.assertIsNone(builder.as_dataset_kwargs.pop("in_memory"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
@@ -140,6 +142,7 @@ class RegisteredTest(testing.TestCase):
     builder = registered.load(
         name=name, split=splits.Split.TEST, data_dir=data_dir,
         batch_size=1)
+    self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
 
   def test_load_all_splits(self):
     name = "empty_dataset_builder"
