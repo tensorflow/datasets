@@ -162,7 +162,6 @@ class Generator(object):
 																							 self.inpath))
 
 	def zip_generator(self):
-		tf.io.gfile.mkdir(self.dataset_name)
 		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
 																						 'test_data', 'fake_examples',
 																						 self.dataset_name,
