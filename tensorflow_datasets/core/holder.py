@@ -1,11 +1,13 @@
 import os
 import re
-import zipfile
-import shutil
-from PIL import Image
+
 import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import lazy_imports
+
 import json
+import shutil
+import zipfile
 
 
 # TODO add tar.gz support
@@ -42,13 +44,13 @@ class ImageHolder(Holder):
 				file = self.zip_file.open(infile, 'r')
 			else:
 				file = self.path
-			im = Image.open(file)
+			im = lazy_imports.PIL_Image.open(file)
 			return im.size
 		except OSError:
 			return 10, 10
 
 	def create_fakes(self):
-		img = Image.new('RGB', self.image_size(), (255, 255, 255))
+		img = lazy_imports.PIL_Image.new('RGB', self.image_size(), (255, 255, 255))
 		img.save(self.output_path)
 		print('created, ', self.output_path, ', size: ', self.image_size())
 
