@@ -89,7 +89,7 @@ class ZipHolder(Holder):
 		r = re.compile(".*/$")
 		folders = list(filter(r.match, f))  # it's catch the folders names
 		ex_files = []
-		for prefix in folders:  # take 2 example from the folders
+		for prefix in folders[:2]:  # take 2 example from 2 folders
 			ex_files += list(filter(lambda x: x.startswith(prefix), f))[1:3]
 			ex_files += list(filter(lambda x: x.startswith(prefix)
 																						and not x.endswith('/'), f))[1:3]
