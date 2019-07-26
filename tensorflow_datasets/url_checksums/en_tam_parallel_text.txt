@@ -1,3 +1,2 @@
-https://drive.google.com/uc?export=download&id=1eet9TaAKoEXEU1gU4xGQxvhl6oJWAZbA 33063574 4c1b5f1313110a185e7af4607d213e00f08556790d0b3722623123566f20a514
-https://github.com/praveenjune17/Neural-Machine-Translation-English-Tamil-model/raw/master/en_tam_parallel_text_test.tar.gz 2668747 96445ac559fe636a5f2fb72e5cfd4666b41be6418af90b5f32064b14198eda8c
-https://github.com/praveenjune17/Neural-Machine-Translation-English-Tamil-model/raw/master/en_tam_parallel_text_valid.tar.gz 2577056 77d56e142ac124b7fa3ad33283239a3aeb73eacc793de15fd34f0882ead21b25
+http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz 24856696 631751d423f989ed46e82d962f41b8a798ca6776ff145942bcdfe0b0d9f1d74f
+
