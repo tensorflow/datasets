@@ -129,16 +129,15 @@ class {dataset_cls}Test(testing.DatasetBuilderTestCase):
   # {TODO}:
   DATASET_CLASS = {dataset_name}.{dataset_cls}
   SPLITS = {{
-      "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "train": 4,  # Number of fake train example
   }}
-
+  
   # If you are calling `download/download_and_extract` with a dict, like:
   #   dl_manager.download({{'some_key': 'http://a.org/out.txt', ...}})
   # then the tests needs to provide the fake output paths relative to the
   # fake data directory
   # DL_EXTRACT_RESULT = {{'some_key': 'output_file1.txt', ...}}
-
+  {dl_extract_result}
 
 if __name__ == "__main__":
   testing.test_main()
@@ -175,7 +174,7 @@ def add_the_init(root_dir, data):
     f.write(context.format(**data))
 
 
-def create_dataset_test_file(root_dir, data):
+def create_dataset_test_file(root_dir, data, dl_extract_result=''):
   """Create the test file associated with the dataset."""
   file_path = os.path.join(root_dir, '{dataset_type}', '{dataset_name}_test.py')
   context = (
@@ -183,7 +182,7 @@ def create_dataset_test_file(root_dir, data):
       _DATASET_TEST_DEFAULTS)
 
   with gfile.GFile(file_path.format(**data), 'w') as f:
-    f.write(context.format(**data))
+    f.write(context.format(dl_extract_result=dl_extract_result, **data))
 
 
 def create_fake_data(root_dir, data):

@@ -4,17 +4,20 @@ import re
 import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.core import lazy_imports
-
+from tensorflow_datasets.core import naming
+from tensorflow_datasets.scripts import create_new_dataset
 import json
 import shutil
 import zipfile
 
 
 # TODO add tar.gz support
-# TODO check types with python-magic
+# TODO check types with python-magic (pip install python-magic-bin==0.4.14
 # TODO check archive or extracted
 # TODO count created example for test file
-# TODO folder limit 2
+# TODO create auto test
+
+NUMBER_OF_CREATED_FILE = 0
 
 class Holder(object):
 
@@ -50,8 +53,10 @@ class ImageHolder(Holder):
 			return 10, 10
 
 	def create_fakes(self):
+		global NUMBER_OF_CREATED_FILE
 		img = lazy_imports.PIL_Image.new('RGB', self.image_size(), (255, 255, 255))
 		img.save(self.output_path)
+		NUMBER_OF_CREATED_FILE += 1
 		print('created, ', self.output_path, ', size: ', self.image_size())
 
 
@@ -62,6 +67,7 @@ class PlainTextHolder(Holder):
 		self.zip_file = zip_file
 
 	def create_fakes(self):
+		global NUMBER_OF_CREATED_FILE
 		out = tf.io.gfile.GFile(self.output_path, mode='w')
 		if self.zip_file:
 			inf = self.zip_file.open(self.path, 'r')
@@ -69,13 +75,14 @@ class PlainTextHolder(Holder):
 			inf = tf.io.gfile.GFile(self.path, mode='r')
 		count = 0
 		breaker = 0
-		while count < 5 and breaker < 30:  # write 5 non empty line
+		while count < 4 and breaker < 30:  # write 4 non empty line
 			line = inf.readline()
 			out.write(line)
 			if not line.rstrip():
 				count += 1
 			breaker += 1
 		out.close()
+		NUMBER_OF_CREATED_FILE += 1
 		print('created, ', self.output_path)
 
 
@@ -93,6 +100,7 @@ class ZipHolder(Holder):
 			ex_files += list(filter(lambda x: x.startswith(prefix), f))[1:3]
 			ex_files += list(filter(lambda x: x.startswith(prefix)
 																						and not x.endswith('/'), f))[1:3]
+		ex_files = ex_files[:5] if len(ex_files) > 4 else ex_files
 		for file in set(ex_files):
 			name = os.path.basename(file)
 			typ = os.path.splitext(file)[1]
@@ -147,19 +155,22 @@ class Generator(object):
 									.generator()
 	"""
 
-	def __init__(self, dataset_name, dataset_path=None):
+	def __init__(self, dataset_name, dataset_path=None, dataset_type='image'):
 		"""
 		Args:
 			dataset_name: dataset name of generated
 			dataset_path: path of downloaded file, default is None. It's search path
 			on the `~/tensorflow_datasets/downloads` and return downloaded file path.
+			dataset_type: type of dataset for creating test file, default is image
 		"""
 		self.dataset_name = dataset_name
-		self.inpath = dataset_path if dataset_path else dataset_folder_finder(dataset_name)
+		self.dataset_type = dataset_type
+		self.inpath = dataset_path if dataset_path else dataset_folder_finder(dataset_name)[0]
 		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
 																						 'test_data', 'fake_examples',
 																						 os.path.basename(
 																							 self.inpath))
+		self.is_extracted = (dataset_folder_finder(dataset_name)[1] == 'extracted')
 
 	def zip_generator(self):
 		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
@@ -174,7 +185,11 @@ class Generator(object):
 			pass
 
 	def generator(self):
-		if self.inpath.endswith('.zip'):
+		global NUMBER_OF_CREATED_FILE
+
+		self.generator_of_tests()
+
+		if not os.path.isdir(self.inpath):
 			self.zip_generator()
 		else:
 			for dirpath, dirnames, filenames in tf.io.gfile.walk(self.inpath):
@@ -199,23 +214,51 @@ class Generator(object):
 						hold.generate_holder().create_fakes()
 					except AttributeError:
 						pass
-
 					count += 1
+					if NUMBER_OF_CREATED_FILE > 4:
+						break
+		print(NUMBER_OF_CREATED_FILE)
+
+	def generator_of_tests(self):
+		data = dict(
+			dataset_name=self.dataset_name,
+			dataset_type=self.dataset_type,
+			dataset_cls=naming.snake_to_camelcase(self.dataset_name),
+			TODO='TODO({})'.format(self.dataset_name),
+		)
+		if not self.is_extracted:
+			dl_extract_result = (
+				"\n# It's created by automatically by auto fake generator. Check it path!\n"
+				"  DL_EXTRACT_RESULT = {{\n"
+				"  		\"train\": \"{path}\"\n"
+				"  }}\n").format(path=os.path.basename(self.inpath))
+		else:
+			dl_extract_result = ''
+
+		create_new_dataset.create_dataset_test_file(py_utils.tfds_dir(), data,
+																								dl_extract_result)
 
 
 def dataset_folder_finder(dataset_name, home_path=None):
 	home = home_path if home_path else os.path.expanduser('~')
-	path = os.path.join(home, 'tensorflow_datasets', 'downloads')
+	download_path = os.path.join(home, 'tensorflow_datasets', 'downloads')
+	extracted_path = os.path.join(download_path, 'extracted')
 
-	for r, d, f in tf.io.gfile.walk(path):
+	for r, d, f in tf.io.gfile.walk(download_path):
 		for file in f:
 			if file.endswith(".INFO"):
 				info_file = os.path.join(r, file)
-				filename = os.path.splitext(info_file)[0]
+				file_path = os.path.splitext(info_file)[0]
+				filename = os.path.basename(file_path)
 				with tf.io.gfile.GFile(info_file) as data_file:
 					data_item = json.load(data_file)
 					if dataset_name in data_item['dataset_names']:
-						return filename
+						for x, y, z in tf.io.gfile.walk(extracted_path):
+							for folder in y:
+								if filename in folder:
+									# it's a extracted
+									return os.path.join(extracted_path, folder), 'extracted'
+						return file_path, 'compressed'
 	raise FileNotFoundError(
-		'Dataset not found in `{}`. Please be sure the dataset is downloaded!'.format(
-			path))
+		'Dataset not found in `{}`. Please be sure the dataset is downloaded!'
+		.format(download_path))
