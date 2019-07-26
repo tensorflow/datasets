@@ -24,13 +24,14 @@ from tensorflow_datasets.image import fruits360
 
 num_classes = len(fruits360._CLASS_NAMES)
 
+
 class FruitsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = fruits360.Fruits360
-  SPLITS = {
-      "train": 2 * num_classes,
-      "test": 2 * num_classes,
-  }
+    DATASET_CLASS = fruits360.Fruits360
+    SPLITS = {
+        "train": 2 * num_classes,
+        "test": 2 * num_classes,
+    }
 
 
 if __name__ == "__main__":
-  testing.test_main()
+    testing.test_main()
