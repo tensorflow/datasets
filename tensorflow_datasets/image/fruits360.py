@@ -21,8 +21,8 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-from tensorflow import io as tfio
 import tensorflow_datasets.public_api as tfds
+from tensorflow import io as tfio
 
 _CITATION = """\
 @article{article,
@@ -37,8 +37,8 @@ doi = {10.2478/ausi-2018-0002}
 }
 """
 
-_COMMIT_SHA = 'b6960fc0287be349c222c3dbdd2624958c902431'
-_DOWNLOAD_URL = f'https://github.com/Horea94/Fruit-Images-Dataset/archive/{_COMMIT_SHA}.zip'
+_COMMIT_SHA = 'b6960fc'
+_DOWNLOAD_URL = f'https://github.com/Horea94/Fruit-Images-Dataset/archive/{_COMMIT_SHA}.tar.gz'
 
 _IMAGE_SIZE = 100
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
@@ -77,11 +77,8 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager):
-        download_resource = tfds.download.Resource(
-            url=_DOWNLOAD_URL,
-            extract_method=tfds.download.ExtractMethod.ZIP
-        )
-        download_path = dl_manager.download_and_extract(download_resource)
+        resource = tfds.download.Resource(url=_DOWNLOAD_URL, extract_method=tfds.download.ExtractMethod.TAR_GZ)
+        download_path = dl_manager.download_and_extract(resource)
         sub = tfio.gfile.listdir(download_path)[0]
         root_path = os.path.join(download_path, sub)
         train_path = os.path.join(root_path, 'Training')
@@ -109,11 +106,11 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
           The image path and its label.
         """
         for class_name in _CLASS_NAMES:
-            split_dir = os.path.join(split_dir, class_name)
-            fns = tfio.gfile.listdir(split_dir)
+            class_dir = os.path.join(split_dir, class_name)
+            fns = tfio.gfile.listdir(class_dir)
 
             for fn in sorted(fns):
-                image_path = os.path.join(split_dir, fn)
+                image_path = os.path.join(class_dir, fn)
                 record = {
                     "image": image_path,
                     "label": class_name,
