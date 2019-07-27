@@ -27,9 +27,15 @@ num_classes = len(fruits360._CLASS_NAMES)
 
 class FruitsTest(testing.DatasetBuilderTestCase):
     DATASET_CLASS = fruits360.Fruits360
+
     SPLITS = {
         "train": 2 * num_classes,
         "test": 2 * num_classes,
+    }
+
+    DL_EXTRACT_RESULT = {
+        'train': 'Fruit-Images-Dataset-%s/Training' % fruits360._COMMIT_SHA,
+        'test': 'Fruit-Images-Dataset-%s/Test' % fruits360._COMMIT_SHA
     }
 
 

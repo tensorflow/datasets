@@ -37,7 +37,7 @@ doi = {10.2478/ausi-2018-0002}
 }
 """
 
-_COMMIT_SHA = 'b6960fc'
+_COMMIT_SHA = 'b6960fc0287be349c222c3dbdd2624958c902431'
 _DOWNLOAD_URL = f'https://github.com/Horea94/Fruit-Images-Dataset/archive/{_COMMIT_SHA}.tar.gz'
 
 _IMAGE_SIZE = 100
