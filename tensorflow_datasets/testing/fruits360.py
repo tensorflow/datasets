@@ -45,7 +45,7 @@ def _generate():
     rs = np.random.RandomState(42)
 
     for split in ("Training", "Test"):
-        for class_name in rs.choice(_CLASS_NAMES, 3, replace=False).tolist():
+        for class_name in rs.choice(_CLASS_NAMES, 2, replace=False).tolist():
             class_directory = os.path.join(output_dir, split, class_name)
             test_utils.remake_dir(class_directory)
 

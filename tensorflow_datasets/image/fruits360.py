@@ -21,6 +21,9 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+
+from tensorflow.python.framework import errors
+
 import tensorflow_datasets.public_api as tfds
 from tensorflow import io as tfio
 
@@ -109,7 +112,13 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
         """
         for class_name in _CLASS_NAMES:
             class_dir = os.path.join(split_dir, class_name)
-            fns = tfio.gfile.listdir(class_dir)
+            try:
+                fns = tfio.gfile.listdir(class_dir)
+            except errors.NotFoundError as err:
+                import logging
+                logging.warning("Class '%s' was not found in the dataset. If this is not a unit test, something may "
+                                "be wrong with the extracted archive at %s.", class_name, split_dir)
+                continue
 
             for fn in sorted(fns):
                 image_path = os.path.join(class_dir, fn)
