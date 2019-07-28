@@ -29,8 +29,8 @@ class FruitsTest(testing.DatasetBuilderTestCase):
     DATASET_CLASS = fruits360.Fruits360
 
     SPLITS = {
-        "train": 2 * num_classes,
-        "test": 2 * num_classes,
+        "train": 6,
+        "test": 6,
     }
 
 
