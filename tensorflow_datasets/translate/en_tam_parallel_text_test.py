@@ -7,10 +7,12 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.translate import en_tam_parallel_text
 
+
 class EnTamParallelTextTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = en_tam_parallel_text.EnTamParallelText
-  SPLITS = {"test": 2, "train": 2, "validation": 2}
-
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en_ta"]
+  SPLITS = {"train": 2, "validation": 2, "test": 2}
+  DL_EXTRACT_RESULT = {'MTPIL': ''}
 if __name__ == "__main__":
   testing.test_main()
   
