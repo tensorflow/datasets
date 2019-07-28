@@ -12,8 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#pylint: disable=blacklist
-#pylint: disable=en_tam
+
 """English-Tamil parallel text corpus"""
 
 from __future__ import absolute_import
@@ -126,28 +125,28 @@ class EnTamParallelTextConfig(tfds.core.BuilderConfig):
           "%s) not supported") % language_pair
       if 'GNOME' in download_link:
         typ = 'GNOME'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]#pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
       elif 'KDE4' in download_link:
         typ = 'KDE4'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]#pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
       elif 'Tatoeba' in download_link:
         typ = 'Tatoeba'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]#pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
       elif 'Ubuntu' in download_link:
         typ = 'Ubuntu'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]# pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
       elif 'OpenSubtitles' in download_link:
         typ = 'OpenSubtitles'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]#pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
     elif 'ufal.mff.cuni.cz/~ramasamy' in download_link:
       name = "en_ta"
