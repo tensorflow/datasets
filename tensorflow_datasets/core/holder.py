@@ -15,7 +15,6 @@ import zipfile
 # TODO check types with python-magic (pip install python-magic-bin==0.4.14
 # TODO check archive or extracted
 # TODO count created example for test file
-# TODO create auto test
 
 NUMBER_OF_CREATED_FILE = 0
 
@@ -228,10 +227,12 @@ class Generator(object):
 		)
 		if not self.is_extracted:
 			dl_extract_result = (
-				"\n# It's created by automatically by auto fake generator. Check it path!\n"
-				"  DL_EXTRACT_RESULT = {{\n"
-				"  		\"train\": \"{path}\"\n"
-				"  }}\n").format(path=os.path.basename(self.inpath))
+				"\n  # The auto fake data generator generate a fake examples of your "
+				"dataset, it\n  # including 4 samples. If you have any restriction to "
+				"data number, you must\n  # edit this number to 4."
+				"\n  # It's created by automatically by auto fake generator. Check it "
+				"path!\n  DL_EXTRACT_RESULT = \"{path}\"\n")\
+				.format(path=os.path.basename(self.inpath))
 		else:
 			dl_extract_result = ''
 
