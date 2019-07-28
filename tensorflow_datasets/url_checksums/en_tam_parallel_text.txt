@@ -1,2 +1,22 @@
 http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz 24856696 631751d423f989ed46e82d962f41b8a798ca6776ff145942bcdfe0b0d9f1d74f
-
+http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en-ta.txt.zip 333939 90b8b453c3562688b79c4355c37e64404ede49ec56b6fdc54d401b4de8582af4
+http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en_AU-ta.txt.zip 286679 97a4a5de14609cf256c0f56b67fe6835d6999dfde37c0d8ce6be2430dd420528
+http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en_CA-ta.txt.zip 194314 eda7582386a2a895ac7c77036bb5faae39e0a4c945f922220b48bcbf8ab5fe6d
+http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en_GB-ta.txt.zip 749108 5cfe4df67081e2a2b066fc28bc0a87b2118f9d97b8c18f5d7f9806402992e9a1
+http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en_US-ta.txt.zip 18486 0b438485d38ea07ee326d409d84d938bdf515ee4daae2b097240ce1dd2e21b74
+http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/en-ta.txt.zip 2004307 1efd96666c1c7513fd5f6df359a40d30ab8ebe63ad7d1591c5f2aca1d3148c61
+http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/en_GB-ta.txt.zip 2184496 c0ba3ab4753acd7743c9aae5b0c44d6aa471208553159f3ea703beeb4dcdbae2
+http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2016/moses/en-ta.txt.zip 672174 88b8da9251c5a3c32d0fca9a834f1a49e93338372c06c7234a7a94310cc69121
+http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/moses/en-ta.txt.zip 1028933 ef9b4fe192467409d950e2ae75361122ff26d539a54252ad92b0e2566d81c0c1
+http://opus.nlpl.eu/download.php?f=Tatoeba/v20190709/moses/en-ta.txt.zip 18830 40b1ca21be856fe1ad5ba515462187d06abeab7cbac51ce4993d7c71b139e468
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en-ta.txt.zip 103408 c0c7badff8d2728e4e8949e38607a190139a54e38529e060120d2a60839d23bd
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en-ta_LK.txt.zip 311322 8ab631a94eda84bd734d85e17fade3f8ef05d3885c54dd59038a4c96ea3538aa
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_AU-ta.txt.zip 102489 e4c483276c6388641a92e37984d38c07ea6ca5f753b210cf0d81878c16f3c8e9
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_AU-ta_LK.txt.zip 308726 7a1cf3027680d66c6af4e7bc2ed788eb629b31a7fe5349459e09b638989b5085
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_CA-ta.txt.zip 83062 04d0af9b3a30bf6236cc3f123fb6d9ef326d49d921bae918328275e65efb27ee
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_CA-ta_LK.txt.zip 265422 ebb524509ce0dd0494258a9b4ed8f92ae8c05a80b8170a10936f1600ceaa909d
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_GB-ta.txt.zip 105682 374368b4cb7118d65f0b326ae93a497a3e6658ac5da2f14fa43e3dcfac2f084e
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_GB-ta_LK.txt.zip 316499 315f19ac715b1fb2de4ced6c34430b3797ed29457eb6d47832dec1b40f46eae4
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_NZ-ta.txt.zip 5083 ed840a29c8ecefd0b6e9b31dd66d1de31a42889af226123743bacfa61869a6a0
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_US-ta.txt.zip 8236 003e503f2a0333b1414fd173243fc74ea921b73bbbcb8255157a40b9df3c7721
+http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_US-ta_LK.txt.zip 6065 356c3c4dc76a92a3bd66c9fbdbdcf7803254fda390295f0871a269b1607924ec
