@@ -7,7 +7,7 @@ Note: The datasets documented here are from `HEAD` and so not all are available
 in the current `tensorflow-datasets` package. They are all accessible in our
 nightly package `tfds-nightly`.
 
---------------------------------------------------------------------------------
+---
 
 ## Usage
 
@@ -34,104 +34,98 @@ np_datasets = tfds.as_numpy(datasets)
 
 ## All Datasets
 
-*   [`audio`](#audio)
-    *   [`"groove"`](#groove)
-    *   [`"nsynth"`](#nsynth)
-*   [`image`](#image)
-    *   [`"abstract_reasoning"`](#abstract_reasoning)
-    *   [`"bigearthnet"`](#bigearthnet)
-    *   [`"caltech101"`](#caltech101)
-    *   [`"cats_vs_dogs"`](#cats_vs_dogs)
-    *   [`"celeb_a"`](#celeb_a)
-    *   [`"celeb_a_hq"`](#celeb_a_hq)
-    *   [`"cifar10"`](#cifar10)
-    *   [`"cifar100"`](#cifar100)
-    *   [`"cifar10_corrupted"`](#cifar10_corrupted)
-    *   [`"clevr"`](#clevr)
-    *   [`"coco"`](#coco)
-    *   [`"coco2014"`](#coco2014)
-    *   [`"colorectal_histology"`](#colorectal_histology)
-    *   [`"colorectal_histology_large"`](#colorectal_histology_large)
-    *   [`"curated_breast_imaging_ddsm"`](#curated_breast_imaging_ddsm)
-    *   [`"cycle_gan"`](#cycle_gan)
-    *   [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
-    *   [`"downsampled_imagenet"`](#downsampled_imagenet)
-    *   [`"dsprites"`](#dsprites)
-    *   [`"dtd"`](#dtd)
-    *   [`"emnist"`](#emnist)
-    *   [`"eurosat"`](#eurosat)
-    *   [`"fashion_mnist"`](#fashion_mnist)
-    *   [`"horses_or_humans"`](#horses_or_humans)
-    *   [`"image_label_folder"`](#image_label_folder)
-    *   [`"imagenet2012"`](#imagenet2012)
-    *   [`"imagenet2012_corrupted"`](#imagenet2012_corrupted)
-    *   [`"kitti"`](#kitti)
-    *   [`"kmnist"`](#kmnist)
-    *   [`"lsun"`](#lsun)
-    *   [`"mnist"`](#mnist)
-    *   [`"mnist_corrupted"`](#mnist_corrupted)
-    *   [`"omniglot"`](#omniglot)
-    *   [`"open_images_v4"`](#open_images_v4)
-    *   [`"oxford_flowers102"`](#oxford_flowers102)
-    *   [`"oxford_iiit_pet"`](#oxford_iiit_pet)
-    *   [`"patch_camelyon"`](#patch_camelyon)
-    *   [`"pet_finder"`](#pet_finder)
-    *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
-    *   [`"resisc45"`](#resisc45)
-    *   [`"rock_paper_scissors"`](#rock_paper_scissors)
-    *   [`"shapes3d"`](#shapes3d)
-    *   [`"smallnorb"`](#smallnorb)
-    *   [`"so2sat"`](#so2sat)
-    *   [`"sun397"`](#sun397)
-    *   [`"svhn_cropped"`](#svhn_cropped)
-    *   [`"tf_flowers"`](#tf_flowers)
-    *   [`"uc_merced"`](#uc_merced)
-    *   [`"voc2007"`](#voc2007)
+* [`audio`](#audio)
+  * [`"groove"`](#groove)
+  * [`"nsynth"`](#nsynth)
+* [`image`](#image)
+  * [`"abstract_reasoning"`](#abstract_reasoning)
+  * [`"bigearthnet"`](#bigearthnet)
+  * [`"binarized_mnist"`](#binarized_mnist)
+  * [`"caltech101"`](#caltech101)
+  * [`"cats_vs_dogs"`](#cats_vs_dogs)
+  * [`"celeb_a"`](#celeb_a)
+  * [`"celeb_a_hq"`](#celeb_a_hq)
+  * [`"chexpert"`](#chexpert)
+  * [`"cifar10"`](#cifar10)
+  * [`"cifar100"`](#cifar100)
+  * [`"cifar10_corrupted"`](#cifar10_corrupted)
+  * [`"clevr"`](#clevr)
+  * [`"coco"`](#coco)
+  * [`"coco2014"`](#coco2014)
+  * [`"colorectal_histology"`](#colorectal_histology)
+  * [`"colorectal_histology_large"`](#colorectal_histology_large)
+  * [`"curated_breast_imaging_ddsm"`](#curated_breast_imaging_ddsm)
+  * [`"cycle_gan"`](#cycle_gan)
+  * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
+  * [`"downsampled_imagenet"`](#downsampled_imagenet)
+  * [`"dsprites"`](#dsprites)
+  * [`"dtd"`](#dtd)
+  * [`"emnist"`](#emnist)
+  * [`"eurosat"`](#eurosat)
+  * [`"fashion_mnist"`](#fashion_mnist)
+  * [`"fruits360"`](#fruits360)
+  * [`"horses_or_humans"`](#horses_or_humans)
+  * [`"image_label_folder"`](#image_label_folder)
+  * [`"imagenet2012"`](#imagenet2012)
+  * [`"imagenet2012_corrupted"`](#imagenet2012_corrupted)
+  * [`"kitti"`](#kitti)
+  * [`"kmnist"`](#kmnist)
+  * [`"lsun"`](#lsun)
+  * [`"mnist"`](#mnist)
+  * [`"mnist_corrupted"`](#mnist_corrupted)
+  * [`"omniglot"`](#omniglot)
+  * [`"open_images_v4"`](#open_images_v4)
+  * [`"oxford_flowers102"`](#oxford_flowers102)
+  * [`"oxford_iiit_pet"`](#oxford_iiit_pet)
+  * [`"patch_camelyon"`](#patch_camelyon)
+  * [`"pet_finder"`](#pet_finder)
+  * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
+  * [`"resisc45"`](#resisc45)
+  * [`"rock_paper_scissors"`](#rock_paper_scissors)
+  * [`"shapes3d"`](#shapes3d)
+  * [`"smallnorb"`](#smallnorb)
+  * [`"so2sat"`](#so2sat)
+  * [`"sun397"`](#sun397)
+  * [`"svhn_cropped"`](#svhn_cropped)
+  * [`"tf_flowers"`](#tf_flowers)
+  * [`"uc_merced"`](#uc_merced)
+  * [`"voc2007"`](#voc2007)
+* [`structured`](#structured)
+  * [`"higgs"`](#higgs)
+  * [`"iris"`](#iris)
+  * [`"titanic"`](#titanic)
+* [`text`](#text)
+  * [`"cnn_dailymail"`](#cnn_dailymail)
+  * [`"definite_pronoun_resolution"`](#definite_pronoun_resolution)
+  * [`"glue"`](#glue)
+  * [`"imdb_reviews"`](#imdb_reviews)
+  * [`"lm1b"`](#lm1b)
+  * [`"multi_nli"`](#multi_nli)
+  * [`"snli"`](#snli)
+  * [`"squad"`](#squad)
+  * [`"super_glue"`](#super_glue)
+  * [`"trivia_qa"`](#trivia_qa)
+  * [`"wikipedia"`](#wikipedia)
+  * [`"xnli"`](#xnli)
+* [`translate`](#translate)
+  * [`"flores"`](#flores)
+  * [`"para_crawl"`](#para_crawl)
+  * [`"ted_hrlr_translate"`](#ted_hrlr_translate)
+  * [`"ted_multi_translate"`](#ted_multi_translate)
+  * [`"wmt14_translate"`](#wmt14_translate)
+  * [`"wmt15_translate"`](#wmt15_translate)
+  * [`"wmt16_translate"`](#wmt16_translate)
+  * [`"wmt17_translate"`](#wmt17_translate)
+  * [`"wmt18_translate"`](#wmt18_translate)
+  * [`"wmt19_translate"`](#wmt19_translate)
+  * [`"wmt_t2t_translate"`](#wmt_t2t_translate)
+* [`video`](#video)
+  * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
+  * [`"moving_mnist"`](#moving_mnist)
+  * [`"starcraft_video"`](#starcraft_video)
+  * [`"ucf101"`](#ucf101)
 
-
-*   [`structured`](#structured)
-
-    *   [`"higgs"`](#higgs)
-    *   [`"iris"`](#iris)
-    *   [`"titanic"`](#titanic)
-
-*   [`text`](#text)
-
-    *   [`"cnn_dailymail"`](#cnn_dailymail)
-    *   [`"definite_pronoun_resolution"`](#definite_pronoun_resolution)
-    *   [`"glue"`](#glue)
-    *   [`"imdb_reviews"`](#imdb_reviews)
-    *   [`"lm1b"`](#lm1b)
-    *   [`"multi_nli"`](#multi_nli)
-    *   [`"snli"`](#snli)
-    *   [`"squad"`](#squad)
-    *   [`"super_glue"`](#super_glue)
-    *   [`"trivia_qa"`](#trivia_qa)
-    *   [`"wikipedia"`](#wikipedia)
-    *   [`"xnli"`](#xnli)
-
-*   [`translate`](#translate)
-
-    *   [`"flores"`](#flores)
-    *   [`"para_crawl"`](#para_crawl)
-    *   [`"ted_hrlr_translate"`](#ted_hrlr_translate)
-    *   [`"ted_multi_translate"`](#ted_multi_translate)
-    *   [`"wmt14_translate"`](#wmt14_translate)
-    *   [`"wmt15_translate"`](#wmt15_translate)
-    *   [`"wmt16_translate"`](#wmt16_translate)
-    *   [`"wmt17_translate"`](#wmt17_translate)
-    *   [`"wmt18_translate"`](#wmt18_translate)
-    *   [`"wmt19_translate"`](#wmt19_translate)
-    *   [`"wmt_t2t_translate"`](#wmt_t2t_translate)
-
-*   [`video`](#video)
-
-    *   [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
-    *   [`"moving_mnist"`](#moving_mnist)
-    *   [`"starcraft_video"`](#starcraft_video)
-    *   [`"ucf101"`](#ucf101)
-
---------------------------------------------------------------------------------
+---
 
 ## [`audio`](#audio)
 
@@ -153,28 +147,23 @@ The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and
 (synthesized) audio of human-performed, tempo-aligned expressive drumming
 captured on a Roland TD-11 V-Drum electronic drum kit.
 
-*   URL:
-    [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
-*   `DatasetBuilder`:
-    [`tfds.audio.groove.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
 
-`groove` is configured with `tfds.audio.groove.GrooveConfig` and has the
-following configurations predefined (defaults to the first one):
+* URL: [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+* `DatasetBuilder`: [`tfds.audio.groove.Groove`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/groove.py)
 
-*   `"full-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without
-    audio, unsplit.
+`groove` is configured with `tfds.audio.groove.GrooveConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"full-16000hz"` (`v1.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
-    unsplit.
+* `"full-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio, unsplit.
 
-*   `"2bar-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without
-    audio, split into 2-bar chunks.
+* `"full-16000hz"` (`v1.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio, unsplit.
 
-*   `"2bar-16000hz"` (`v1.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio,
-    split into 2-bar chunks.
+* `"2bar-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio, split into 2-bar chunks.
 
-*   `"4bar-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without
-    audio, split into 4-bar chunks.
+* `"2bar-16000hz"` (`v1.0.0`) (`Size: 4.76 GiB`): Groove dataset with audio, split into 2-bar chunks.
+
+* `"4bar-midionly"` (`v1.0.0`) (`Size: 3.11 MiB`): Groove dataset without audio, split into 4-bar chunks.
+
 
 #### `"groove/full-midionly"`
 
@@ -192,6 +181,8 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+
 
 #### `"groove/full-16000hz"`
 
@@ -211,6 +202,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"groove/2bar-midionly"`
 
 ```python
@@ -227,6 +220,8 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+
 
 #### `"groove/2bar-16000hz"`
 
@@ -246,6 +241,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"groove/4bar-midionly"`
 
 ```python
@@ -263,29 +260,30 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 21,415
-TRAIN      | 17,261
-VALIDATION | 2,121
-TEST       | 2,033
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     21,415
+TRAIN      |     17,261
+VALIDATION |      2,121
+TEST       |      2,033
+
 
 #### Urls
-
-*   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+ * [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
 
 #### Citation
-
 ```
 @inproceedings{groove2019,
     Author = {Jon Gillick and Adam Roberts and Jesse Engel and Douglas Eck and David Bamman},
     Title = {Learning to Groove with Inverse Sequence Transformations},
-    Booktitle   = {International Conference on Machine Learning (ICML)}
+    Booktitle	= {International Conference on Machine Learning (ICML)}
     Year = {2019},
 }
 ```
@@ -413,95 +411,68 @@ $R$ denotes the set of relation types (progression, XOR, OR, AND, consistent uni
 
 ### `"abstract_reasoning"`
 
-Procedurally Generated Matrices (PGM) data from the paper Measuring Abstract
-Reasoning in Neural Networks, Barrett, Hill, Santoro et al. 2018. The goal is to
-infer the correct answer from the context panels based on abstract reasoning.
+Procedurally Generated Matrices (PGM) data from the paper Measuring Abstract Reasoning in Neural Networks, Barrett, Hill, Santoro et al. 2018. The goal is to infer the correct answer from the context panels based on abstract reasoning.
 
-To use this data set, please download all the *.tar.gz files from the data set
-page and place them in ~/tensorflow_datasets/abstract_reasoning/.
+To use this data set, please download all the *.tar.gz files from the data set page and place them in ~/tensorflow_datasets/abstract_reasoning/.
 
-$R$ denotes the set of relation types (progression, XOR, OR, AND, consistent
-union), $O$ denotes the object types (shape, line), and $A$ denotes the
-attribute types (size, colour, position, number). The structure of a matrix,
-$S$, is the set of triples $S={[r, o, a]}$ that determine the challenge posed by
-a particular matrix.
+$R$ denotes the set of relation types (progression, XOR, OR, AND, consistent union), $O$ denotes the object types (shape, line), and $A$ denotes the attribute types (size, colour, position, number). The structure of a matrix, $S$, is the set of triples $S={[r, o, a]}$ that determine the challenge posed by a particular matrix.
 
-*   URL:
-    [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
-*   `DatasetBuilder`:
-    [`tfds.image.abstract_reasoning.AbstractReasoning`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/abstract_reasoning.py)
 
-`abstract_reasoning` is configured with
-`tfds.image.abstract_reasoning.AbstractReasoningConfig` and has the following
+* URL: [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+* `DatasetBuilder`: [`tfds.image.abstract_reasoning.AbstractReasoning`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/abstract_reasoning.py)
+
+`abstract_reasoning` is configured with `tfds.image.abstract_reasoning.AbstractReasoningConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"neutral"` (`v0.0.2`) (`Size: ?? GiB`): The structures encoding the
-    matrices in both the \
-    training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \
-    $o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
-    separation occurring at the level of the input variables (i.e. pixel \
-    manifestations).
+* `"neutral"` (`v0.0.2`) (`Size: ?? GiB`): The structures encoding the matrices in both the \
+training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \
+$o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
+separation occurring at the level of the input variables (i.e. pixel \
+manifestations).
 
-*   `"interpolation"` (`v0.0.2`) (`Size: ?? GiB`): As in the neutral split, $S$
-    consisted of any \
-    triples $[r, o, a]$. For interpolation, in the training set, when the \
-    attribute was "colour" or "size" (i.e., the ordered attributes), the values
-    of \
-    the attributes were restricted to even-indexed members of a discrete set, \
-    whereas in the test set only odd-indexed values were permitted. Note that
-    all \
-    $S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
-    Thus, generalisation is required for every question in the test set.
+* `"interpolation"` (`v0.0.2`) (`Size: ?? GiB`): As in the neutral split, $S$ consisted of any \
+triples $[r, o, a]$. For interpolation, in the training set, when the \
+attribute was "colour" or "size" (i.e., the ordered attributes), the values of \
+the attributes were restricted to even-indexed members of a discrete set, \
+whereas in the test set only odd-indexed values were permitted. Note that all \
+$S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
+Thus, generalisation is required for every question in the test set.
 
-*   `"extrapolation"` (`v0.0.2`) (`Size: ?? GiB`): Same as in interpolation, but
-    the values of \
-    the attributes were restricted to the lower half of the discrete set during
-    \
-    training, whereas in the test set they took values in the upper half.
+* `"extrapolation"` (`v0.0.2`) (`Size: ?? GiB`): Same as in interpolation, but the values of \
+the attributes were restricted to the lower half of the discrete set during \
+training, whereas in the test set they took values in the upper half.
 
-*   `"attr.rel.pairs"` (`v0.0.2`) (`Size: ?? GiB`): All $S$ contained at least
-    two triples, \
-    $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$, of which 400 are viable. We \
-    randomly allocated 360 to the training set and 40 to the test set. Members \
-    $(t_1, t_2)$ of the 40 held-out pairs did not occur together in structures
-    $S$ \
-    in the training set, and all structures $S$ had at least one such pair \
-    $(t_1, t_2)$ as a subset.
+* `"attr.rel.pairs"` (`v0.0.2`) (`Size: ?? GiB`): All $S$ contained at least two triples, \
+$([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$, of which 400 are viable. We \
+randomly allocated 360 to the training set and 40 to the test set. Members \
+$(t_1, t_2)$ of the 40 held-out pairs did not occur together in structures $S$ \
+in the training set, and all structures $S$ had at least one such pair \
+$(t_1, t_2)$ as a subset.
 
-*   `"attr.rels"` (`v0.0.2`) (`Size: ?? GiB`): In our dataset, there are 29
-    possible unique \
-    triples $[r,o,a]$. We allocated seven of these for the test set, at random,
-    \
-    but such that each of the attributes was represented exactly once in this
-    set. \
-    These held-out triples never occurred in questions in the training set, and
-    \
-    every $S$ in the test set contained at least one of them.
+* `"attr.rels"` (`v0.0.2`) (`Size: ?? GiB`): In our dataset, there are 29 possible unique \
+triples $[r,o,a]$. We allocated seven of these for the test set, at random, \
+but such that each of the attributes was represented exactly once in this set. \
+These held-out triples never occurred in questions in the training set, and \
+every $S$ in the test set contained at least one of them.
 
-*   `"attrs.pairs"` (`v0.0.2`) (`Size: ?? GiB`): $S$ contained at least two
-    triples. There are 20 \
-    (unordered) viable pairs of attributes $(a_1, a_2)$ such that for some \
-    $r_i, o_i, ([r_1,o_1,a_1],[r_2,o_2,a_2])$ is a viable triple pair \
-    $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$. We allocated 16 of these pairs
-    \
-    for training and four for testing. For a pair $(a_1, a_2)$ in the test set,
-    \
-    $S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
-    set, all $S$ contained triples with $a_1$ and $a_2$.
+* `"attrs.pairs"` (`v0.0.2`) (`Size: ?? GiB`): $S$ contained at least two triples. There are 20 \
+(unordered) viable pairs of attributes $(a_1, a_2)$ such that for some \
+$r_i, o_i, ([r_1,o_1,a_1],[r_2,o_2,a_2])$ is a viable triple pair \
+$([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$. We allocated 16 of these pairs \
+for training and four for testing. For a pair $(a_1, a_2)$ in the test set, \
+$S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
+set, all $S$ contained triples with $a_1$ and $a_2$.
 
-*   `"attrs.shape.color"` (`v0.0.2`) (`Size: ?? GiB`): Held-out attribute
-    shape-colour. $S$ in \
-    the training set contained no triples with $o$=shape and $a$=colour. \
-    All structures governing puzzles in the test set contained at least one
-    triple \
-    with $o$=shape and $a$=colour.
+* `"attrs.shape.color"` (`v0.0.2`) (`Size: ?? GiB`): Held-out attribute shape-colour. $S$ in \
+the training set contained no triples with $o$=shape and $a$=colour. \
+All structures governing puzzles in the test set contained at least one triple \
+with $o$=shape and $a$=colour.
 
-*   `"attrs.line.type"` (`v0.0.2`) (`Size: ?? GiB`): Held-out attribute
-    line-type. $S$ in \
-    the training set contained no triples with $o$=line and $a$=type. \
-    All structures governing puzzles in the test set contained at least one
-    triple \
-    with $o$=line and $a$=type.
+* `"attrs.line.type"` (`v0.0.2`) (`Size: ?? GiB`): Held-out attribute line-type. $S$ in \
+the training set contained no triples with $o$=line and $a$=type. \
+All structures governing puzzles in the test set contained at least one triple \
+with $o$=line and $a$=type.
+
 
 #### `"abstract_reasoning/neutral"`
 
@@ -516,6 +487,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"abstract_reasoning/interpolation"`
 
 ```python
@@ -528,6 +501,8 @@ FeaturesDict({
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
+
+
 
 #### `"abstract_reasoning/extrapolation"`
 
@@ -542,6 +517,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"abstract_reasoning/attr.rel.pairs"`
 
 ```python
@@ -554,6 +531,8 @@ FeaturesDict({
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
+
+
 
 #### `"abstract_reasoning/attr.rels"`
 
@@ -568,6 +547,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"abstract_reasoning/attrs.pairs"`
 
 ```python
@@ -580,6 +561,8 @@ FeaturesDict({
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
+
+
 
 #### `"abstract_reasoning/attrs.shape.color"`
 
@@ -594,6 +577,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"abstract_reasoning/attrs.line.type"`
 
 ```python
@@ -607,38 +592,39 @@ FeaturesDict({
 })
 ```
 
+
+
+
 #### Statistics
 None computed
 
 #### Urls
-
-*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+ * [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
 
 #### Citation
-
 ```
 @InProceedings{pmlr-v80-barrett18a,
-  title =    {Measuring abstract reasoning in neural networks},
-  author =   {Barrett, David and Hill, Felix and Santoro, Adam and Morcos, Ari and Lillicrap, Timothy},
-  booktitle =    {Proceedings of the 35th International Conference on Machine Learning},
-  pages =    {511--520},
-  year =     {2018},
-  editor =   {Dy, Jennifer and Krause, Andreas},
-  volume =   {80},
-  series =   {Proceedings of Machine Learning Research},
-  address =      {Stockholmsmassan, Stockholm Sweden},
-  month =    {10--15 Jul},
-  publisher =    {PMLR},
-  pdf =      {http://proceedings.mlr.press/v80/barrett18a/barrett18a.pdf},
-  url =      {http://proceedings.mlr.press/v80/barrett18a.html},
-  abstract =     {Whether neural networks can learn abstract reasoning or whetherthey merely rely on superficial statistics is a topic of recent debate. Here, we propose a dataset and challenge designed to probe abstract reasoning, inspired by a well-known human IQ test. To succeed at this challenge, models must cope with various generalisation 'regimes' in which the training data and test questions differ in clearly-defined ways. We show that popular models such as ResNets perform poorly, even when the training and test sets differ only minimally, and we present a novel architecture, with structure designed to encourage reasoning, that does significantly better. When we vary the way in which the test questions and training data differ, we find that our model is notably proficient at certain forms of generalisation, but notably weak at others. We further show that the model's ability to generalise improves markedly if it is trained to predict symbolic explanations for its answers. Altogether, we introduce and explore ways to both measure and induce stronger abstract reasoning in neural networks. Our freely-available dataset should motivate further progress in this direction.}
+  title = 	 {Measuring abstract reasoning in neural networks},
+  author = 	 {Barrett, David and Hill, Felix and Santoro, Adam and Morcos, Ari and Lillicrap, Timothy},
+  booktitle = 	 {Proceedings of the 35th International Conference on Machine Learning},
+  pages = 	 {511--520},
+  year = 	 {2018},
+  editor = 	 {Dy, Jennifer and Krause, Andreas},
+  volume = 	 {80},
+  series = 	 {Proceedings of Machine Learning Research},
+  address = 	 {Stockholmsmassan, Stockholm Sweden},
+  month = 	 {10--15 Jul},
+  publisher = 	 {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v80/barrett18a/barrett18a.pdf},
+  url = 	 {http://proceedings.mlr.press/v80/barrett18a.html},
+  abstract = 	 {Whether neural networks can learn abstract reasoning or whetherthey merely rely on superficial statistics is a topic of recent debate. Here, we propose a dataset and challenge designed to probe abstract reasoning, inspired by a well-known human IQ test. To succeed at this challenge, models must cope with various generalisation 'regimes' in which the training data and test questions differ in clearly-defined ways. We show that popular models such as ResNets perform poorly, even when the training and test sets differ only minimally, and we present a novel architecture, with structure designed to encourage reasoning, that does significantly better. When we vary the way in which the test questions and training data differ, we find that our model is notably proficient at certain forms of generalisation, but notably weak at others. We further show that the model's ability to generalise improves markedly if it is trained to predict symbolic explanations for its answers. Altogether, we introduce and explore ways to both measure and induce stronger abstract reasoning in neural networks. Our freely-available dataset should motivate further progress in this direction.}
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -684,38 +670,49 @@ URL: http://bigearth.net/" />
 ### `"bigearthnet"`
 
 The BigEarthNet is a new large-scale Sentinel-2 benchmark archive, consisting of
-590,326 Sentinel-2 image patches. The image patch size on the ground is 1.2 x
-1.2 km with variable image size depending on the channel resolution. This is a
-multi-label dataset with 43 imbalanced labels.
+590,326 Sentinel-2 image patches. The image patch size on the ground is
+1.2 x 1.2 km with variable image size depending on the channel resolution.
+This is a multi-label dataset with 43 imbalanced labels.
 
-To construct the BigEarthNet, 125 Sentinel-2 tiles acquired between June 2017
-and May 2018 over the 10 countries (Austria, Belgium, Finland, Ireland, Kosovo,
-Lithuania, Luxembourg, Portugal, Serbia, Switzerland) of Europe were initially
-selected. All the tiles were atmospherically corrected by the Sentinel-2 Level
-2A product generation and formatting tool (sen2cor). Then, they were divided
-into 590,326 non-overlapping image patches. Each image patch was annotated by
-the multiple land-cover classes (i.e., multi-labels) that were provided from the
-CORINE Land Cover database of the year 2018 (CLC 2018).
+To construct the BigEarthNet, 125 Sentinel-2
+tiles acquired between June 2017 and May 2018 over the 10 countries (Austria,
+Belgium, Finland, Ireland, Kosovo, Lithuania, Luxembourg, Portugal, Serbia,
+Switzerland) of Europe were initially selected. All the tiles were
+atmospherically corrected by the Sentinel-2 Level 2A product generation and
+formatting tool (sen2cor). Then, they were divided into 590,326 non-overlapping
+image patches. Each image patch was annotated by the multiple land-cover classes
+(i.e., multi-labels) that were provided from the CORINE Land Cover database of
+the year 2018 (CLC 2018).
 
-Bands and pixel resolution in meters: B01: Coastal aerosol; 60m B02: Blue; 10m
-B03: Green; 10m B04: Red; 10m B05: Vegetation red edge; 20m B06: Vegetation red
-edge; 20m B07: Vegetation red edge; 20m B08: NIR; 10m B09: Water vapor; 60m B11:
-SWIR; 20m B12: SWIR; 20m B8A: Narrow NIR; 20m
+Bands and pixel resolution in meters:
+B01: Coastal aerosol; 60m
+B02: Blue; 10m
+B03: Green; 10m
+B04: Red; 10m
+B05: Vegetation red edge; 20m
+B06: Vegetation red edge; 20m
+B07: Vegetation red edge; 20m
+B08: NIR; 10m
+B09: Water vapor; 60m
+B11: SWIR; 20m
+B12: SWIR; 20m
+B8A: Narrow NIR; 20m
 
 License: Community Data License Agreement - Permissive, Version 1.0.
 
 URL: http://bigearth.net/
 
-*   URL: [http://bigearth.net](http://bigearth.net)
-*   `DatasetBuilder`:
-    [`tfds.image.bigearthnet.Bigearthnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bigearthnet.py)
 
-`bigearthnet` is configured with `tfds.image.bigearthnet.BigearthnetConfig` and
-has the following configurations predefined (defaults to the first one):
+* URL: [http://bigearth.net](http://bigearth.net)
+* `DatasetBuilder`: [`tfds.image.bigearthnet.Bigearthnet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/bigearthnet.py)
 
-*   `"rgb"` (`v0.0.2`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+`bigearthnet` is configured with `tfds.image.bigearthnet.BigearthnetConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"all"` (`v0.0.2`) (`Size: ?? GiB`): 13 Sentinel-2 channels
+* `"rgb"` (`v0.0.2`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+
+* `"all"` (`v0.0.2`) (`Size: ?? GiB`): 13 Sentinel-2 channels
+
 
 #### `"bigearthnet/rgb"`
 
@@ -737,6 +734,8 @@ FeaturesDict({
     }),
 })
 ```
+
+
 
 #### `"bigearthnet/all"`
 
@@ -770,12 +769,14 @@ FeaturesDict({
 })
 ```
 
+
+
+
 #### Statistics
 None computed
 
 #### Urls
-
-*   [http://bigearth.net](http://bigearth.net)
+ * [http://bigearth.net](http://bigearth.net)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
@@ -791,7 +792,68 @@ None computed
 }
 ```
 
---------------------------------------------------------------------------------
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="binarized_mnist" />
+  <meta itemprop="description" content="A specific binarization of the MNIST images originally used in
+(Salakhutdinov &amp; Murray, 2008). This dataset is frequently used to evaluate
+generative models of images, so labels are not provided." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#binarized_mnist" />
+  <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/" />
+</div>
+
+### `"binarized_mnist"`
+
+A specific binarization of the MNIST images originally used in
+(Salakhutdinov & Murray, 2008). This dataset is frequently used to evaluate
+generative models of images, so labels are not provided.
+
+
+* URL: [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
+* `DatasetBuilder`: [`tfds.image.binarized_mnist.BinarizedMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/binarized_mnist.py)
+* Version: `v1.0.0`
+* Size: `104.68 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     70,000
+TRAIN      |     50,000
+VALIDATION |     10,000
+TEST       |     10,000
+
+
+#### Urls
+ * [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@inproceedings{salakhutdinov2008quantitative,
+title={On the quantitative analysis of deep belief networks},
+author={Salakhutdinov, Ruslan and Murray, Iain},
+booktitle={Proceedings of the 25th international conference on Machine learning},
+pages={872--879},
+year={2008},
+organization={ACM}
+}
+```
+
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -817,12 +879,11 @@ Images are of variable sizes, with typical edge lengths of 200-300 pixels.
 This version contains image-level labels only. The original dataset also
 contains bounding boxes.
 
-*   URL:
-    [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
-*   `DatasetBuilder`:
-    [`tfds.image.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech.py)
-*   Version: `v1.1.0`
-*   Size: `125.64 MiB`
+
+* URL: [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
+* `DatasetBuilder`: [`tfds.image.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech.py)
+* Version: `v1.1.0`
+* Size: `125.64 MiB`
 
 #### Features
 ```python
@@ -833,19 +894,20 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | -------:
-ALL   | 9,801
-TEST  | 6,741
-TRAIN | 3,060
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      9,801
+TEST       |      6,741
+TRAIN      |      3,060
+
 
 #### Urls
  * [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -887,6 +949,7 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -898,7 +961,7 @@ ALL        |     23,262
  * [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -1106,6 +1169,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"celeb_a_hq/512"`
 
 ```python
@@ -1114,6 +1179,8 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"celeb_a_hq/256"`
 
@@ -1124,6 +1191,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"celeb_a_hq/128"`
 
 ```python
@@ -1132,6 +1201,8 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"celeb_a_hq/64"`
 
@@ -1142,6 +1213,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"celeb_a_hq/32"`
 
 ```python
@@ -1150,6 +1223,8 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"celeb_a_hq/16"`
 
@@ -1160,6 +1235,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"celeb_a_hq/8"`
 
 ```python
@@ -1168,6 +1245,8 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"celeb_a_hq/4"`
 
@@ -1178,6 +1257,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"celeb_a_hq/2"`
 
 ```python
@@ -1187,6 +1268,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"celeb_a_hq/1"`
 
 ```python
@@ -1195,6 +1278,9 @@ FeaturesDict({
     'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -1225,6 +1311,86 @@ ALL        |     30,000
   eprint    = {1710.10196},
   timestamp = {Mon, 13 Aug 2018 16:46:42 +0200},
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1710-10196},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="chexpert" />
+  <meta itemprop="description" content="CheXpert is a large dataset of chest X-rays and competition for automated chest 
+x-ray interpretation, which features uncertainty labels and radiologist-labeled 
+reference standard evaluation sets. It consists of 224,316 chest radiographs 
+of 65,240 patients, where the chest radiographic examinations and the associated 
+radiology reports were retrospectively collected from Stanford Hospital. Each 
+report was labeled for the presence of 14 observations as positive, negative, 
+or uncertain. We decided on the 14 observations based on the prevalence in the 
+reports and clinical relevance.
+
+The CheXpert dataset must be downloaded separately after reading and agreeing 
+to a Research Use Agreement. To do so, please follow the instructions on the 
+website, https://stanfordmlgroup.github.io/competitions/chexpert/." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#chexpert" />
+  <meta itemprop="sameAs" content="https://stanfordmlgroup.github.io/competitions/chexpert/" />
+</div>
+
+### `"chexpert"`
+
+CheXpert is a large dataset of chest X-rays and competition for automated chest 
+x-ray interpretation, which features uncertainty labels and radiologist-labeled 
+reference standard evaluation sets. It consists of 224,316 chest radiographs 
+of 65,240 patients, where the chest radiographic examinations and the associated 
+radiology reports were retrospectively collected from Stanford Hospital. Each 
+report was labeled for the presence of 14 observations as positive, negative, 
+or uncertain. We decided on the 14 observations based on the prevalence in the 
+reports and clinical relevance.
+
+The CheXpert dataset must be downloaded separately after reading and agreeing 
+to a Research Use Agreement. To do so, please follow the instructions on the 
+website, https://stanfordmlgroup.github.io/competitions/chexpert/.
+
+
+* URL: [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
+* `DatasetBuilder`: [`tfds.image.chexpert.Chexpert`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/chexpert.py)
+* Version: `v1.0.0`
+* Size: `?? GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=4)),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+
+#### Statistics
+None computed
+
+#### Urls
+ * [https://stanfordmlgroup.github.io/competitions/chexpert/](https://stanfordmlgroup.github.io/competitions/chexpert/)
+
+#### Supervised keys (for `as_supervised=True`)
+`('image', 'label')`
+
+#### Citation
+```
+@article{DBLP:journals/corr/abs-1901-07031,
+  author    = {Jeremy Irvin and Pranav Rajpurkar and Michael Ko and Yifan Yu and Silviana Ciurea{-}Ilcus and Chris Chute and Henrik Marklund and Behzad Haghgoo and Robyn L. Ball and Katie Shpanskaya and Jayne Seekins and David A. Mong and Safwan S. Halabi and Jesse K. Sandberg and Ricky Jones and David B. Larson and Curtis P. Langlotz and Bhavik N. Patel and Matthew P. Lungren and Andrew Y. Ng},
+  title     = {CheXpert: {A} Large Chest Radiograph Dataset with Uncertainty Labels and Expert Comparison},
+  journal   = {CoRR},
+  volume    = {abs/1901.07031},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1901.07031},
+  archivePrefix = {arXiv},
+  eprint    = {1901.07031},
+  timestamp = {Fri, 01 Feb 2019 13:39:59 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1901-07031},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
@@ -1271,7 +1437,7 @@ TEST       |     10,000
  * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -1326,7 +1492,7 @@ TEST       |     10,000
  * [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -2353,7 +2519,7 @@ ALL        |     10,000
  * [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -2367,7 +2533,7 @@ ALL        |     10,000
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -2387,12 +2553,11 @@ CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.
 It contains minimal biases and has detailed annotations describing the kind of
 reasoning each question requires.
 
-*   URL:
-    [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
-*   `DatasetBuilder`:
-    [`tfds.image.clevr.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
-*   Version: `v1.0.0`
-*   Size: `17.72 GiB`
+
+* URL: [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
+* `DatasetBuilder`: [`tfds.image.clevr.CLEVR`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/clevr.py)
+* Version: `v1.0.0`
+* Size: `17.72 GiB`
 
 #### Features
 ```python
@@ -2411,18 +2576,18 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 100,000
-TRAIN      | 70,000
-VALIDATION | 15,000
-TEST       | 15,000
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    100,000
+TRAIN      |     70,000
+VALIDATION |     15,000
+TEST       |     15,000
+
 
 #### Urls
-
-*   [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
+ * [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
@@ -2437,7 +2602,7 @@ TEST       | 15,000
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -2459,53 +2624,56 @@ Note:
 
 ### `"coco"`
 
-COCO is a large-scale object detection, segmentation, and captioning dataset.
-This version contains images, bounding boxes " and labels for the 2017 version.
-Note: * Some images from the train and validation sets don't have annotations. *
-Coco 2014 and 2017 uses the same images, but different train/val/test splits *
-The test split don't have any annotations (only images). * Coco defines 91
-classes but the data only uses 80 classes. * Panotptic annotations defines
-defines 200 classes but only uses 133.
+COCO is a large-scale object detection, segmentation, and
+captioning dataset. This version contains images, bounding boxes "
+and labels for the 2017 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * Coco 2014 and 2017 uses the same images, but different train/val/test splits
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only uses 80 classes.
+ * Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
-*   `DatasetBuilder`:
-    [`tfds.image.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
+
+* URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+* `DatasetBuilder`: [`tfds.image.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
 
 `coco` is configured with `tfds.image.coco.CocoConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"2014"` (`v1.0.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
-    detection, segmentation, and captioning dataset. This version contains
-    images, bounding boxes " and labels for the 2014 version. Note:
+* `"2014"` (`v1.0.0`) (`Size: 37.57 GiB`): COCO is a large-scale object detection, segmentation, and
+captioning dataset. This version contains images, bounding boxes "
+and labels for the 2014 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * Coco 2014 and 2017 uses the same images, but different train/val/test splits
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only uses 80 classes.
+ * Panotptic annotations defines defines 200 classes but only uses 133.
 
-    *   Some images from the train and validation sets don't have annotations.
-    *   Coco 2014 and 2017 uses the same images, but different train/val/test
-        splits
-    *   The test split don't have any annotations (only images).
-    *   Coco defines 91 classes but the data only uses 80 classes.
-    *   Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   `"2017"` (`v1.0.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
-    detection, segmentation, and captioning dataset. This version contains
-    images, bounding boxes " and labels for the 2017 version. Note:
+* `"2017"` (`v1.0.0`) (`Size: 25.20 GiB`): COCO is a large-scale object detection, segmentation, and
+captioning dataset. This version contains images, bounding boxes "
+and labels for the 2017 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * Coco 2014 and 2017 uses the same images, but different train/val/test splits
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only uses 80 classes.
+ * Panotptic annotations defines defines 200 classes but only uses 133.
 
-    *   Some images from the train and validation sets don't have annotations.
-    *   Coco 2014 and 2017 uses the same images, but different train/val/test
-        splits
-    *   The test split don't have any annotations (only images).
-    *   Coco defines 91 classes but the data only uses 80 classes.
-    *   Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   `"2017_panoptic"` (`v1.0.0`) (`Size: 19.57 GiB`): COCO is a large-scale
-    object detection, segmentation, and captioning dataset. This version
-    contains images, bounding boxes " and labels for the 2017 version. Note:
+* `"2017_panoptic"` (`v1.0.0`) (`Size: 19.57 GiB`): COCO is a large-scale object detection, segmentation, and
+captioning dataset. This version contains images, bounding boxes "
+and labels for the 2017 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * Coco 2014 and 2017 uses the same images, but different train/val/test splits
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only uses 80 classes.
+ * Panotptic annotations defines defines 200 classes but only uses 133.
 
-    *   Some images from the train and validation sets don't have annotations.
-    *   Coco 2014 and 2017 uses the same images, but different train/val/test
-        splits
-    *   The test split don't have any annotations (only images).
-    *   Coco defines 91 classes but the data only uses 80 classes.
-    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
 
 #### `"coco/2014"`
 
@@ -2523,6 +2691,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"coco/2017"`
 
 ```python
@@ -2538,6 +2708,8 @@ FeaturesDict({
     }),
 })
 ```
+
+
 
 #### `"coco/2017_panoptic"`
 
@@ -2557,17 +2729,19 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 123,287
-TRAIN      | 118,287
-VALIDATION | 5,000
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    123,287
+TRAIN      |    118,287
+VALIDATION |      5,000
+
 
 #### Urls
-
-*   [http://cocodataset.org/#home](http://cocodataset.org/#home)
+ * [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
@@ -2622,11 +2796,11 @@ Note:
  * The test split don't have any annotations (only images).
  * Coco defines 91 classes but the data only had 80 classes.
 
-*   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
-*   `DatasetBuilder`:
-    [`tfds.image.coco2014_legacy.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco2014_legacy.py)
-*   Version: `v1.0.0`
-*   Size: `37.57 GiB`
+
+* URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+* `DatasetBuilder`: [`tfds.image.coco2014_legacy.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco2014_legacy.py)
+* Version: `v1.0.0`
+* Size: `37.57 GiB`
 
 #### Features
 ```python
@@ -2640,6 +2814,7 @@ FeaturesDict({
     }),
 })
 ```
+
 
 #### Statistics
 Split  | Examples
@@ -2713,6 +2888,7 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -2724,7 +2900,7 @@ ALL        |      5,000
  * [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -2768,6 +2944,7 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -2794,7 +2971,7 @@ ALL        |         10
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -2828,8 +3005,9 @@ in order to guarantee reproducible results:
 
 The CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and
 standardized version of the Digital Database for Screening Mammography (DDSM).
-The DDSM is a database of 2,620 scanned film mammography studies. It contains
-normal, benign, and malignant cases with verified pathology information.
+The DDSM is a database of 2,620 scanned film mammography studies.
+It contains normal, benign, and malignant cases with verified pathology
+information.
 
 The default config is made of patches extracted from the original mammograms,
 following the description from http://arxiv.org/abs/1708.09427, in order to
@@ -2842,27 +3020,22 @@ original DCIM files and converted them to PNG.
 The following commands (or equivalent) should be used to generate the PNG files,
 in order to guarantee reproducible results:
 
-find $DATASET_DCIM_DIR -name '*.dcm' | \
-xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
+  find $DATASET_DCIM_DIR -name '*.dcm' | \
+  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
 
-*   URL:
-    [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
-*   `DatasetBuilder`:
-    [`tfds.image.cbis_ddsm.CuratedBreastImagingDDSM`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cbis_ddsm.py)
 
-`curated_breast_imaging_ddsm` is configured with
-`tfds.image.cbis_ddsm.CuratedBreastImagingDDSMConfig` and has the following
+* URL: [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
+* `DatasetBuilder`: [`tfds.image.cbis_ddsm.CuratedBreastImagingDDSM`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cbis_ddsm.py)
+
+`curated_breast_imaging_ddsm` is configured with `tfds.image.cbis_ddsm.CuratedBreastImagingDDSMConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"patches"` (`v0.2.0`) (`Size: 2.01 MiB`): Patches containing both
-    calsification and mass cases, plus pathces with no abnormalities. Designed
-    as a traditional 5-class classification task.
+* `"patches"` (`v0.2.0`) (`Size: 2.01 MiB`): Patches containing both calsification and mass cases, plus pathces with no abnormalities. Designed as a traditional 5-class classification task.
 
-*   `"original-calc"` (`v0.1.0`) (`Size: 1.06 MiB`): Original images of the
-    calcification cases compressed in lossless PNG.
+* `"original-calc"` (`v0.1.0`) (`Size: 1.06 MiB`): Original images of the calcification cases compressed in lossless PNG.
 
-*   `"original-mass"` (`v0.1.0`) (`Size: 966.57 KiB`): Original images of the
-    mass cases compressed in lossless PNG.
+* `"original-mass"` (`v0.1.0`) (`Size: 966.57 KiB`): Original images of the mass cases compressed in lossless PNG.
+
 
 #### `"curated_breast_imaging_ddsm/patches"`
 
@@ -2873,6 +3046,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
 })
 ```
+
+
 
 #### `"curated_breast_imaging_ddsm/original-calc"`
 
@@ -2895,6 +3070,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"curated_breast_imaging_ddsm/original-mass"`
 
 ```python
@@ -2916,17 +3093,19 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | -------:
-ALL   | 1,514
-TRAIN | 1,166
-TEST  | 348
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      1,514
+TRAIN      |      1,166
+TEST       |        348
+
 
 #### Urls
-
-*   [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
+ * [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
@@ -2993,47 +3172,28 @@ Dataset with images from 2 classes (see config name for information on the speci
 `cycle_gan` is configured with `tfds.image.cycle_gan.CycleGANConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"apple2orange"` (`v0.1.0`) (`Size: 74.82 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"apple2orange"` (`v0.1.0`) (`Size: 74.82 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"summer2winter_yosemite"` (`v0.1.0`) (`Size: 126.50 MiB`): A dataset
-    consisting of images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"summer2winter_yosemite"` (`v0.1.0`) (`Size: 126.50 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"horse2zebra"` (`v0.1.0`) (`Size: 111.45 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"horse2zebra"` (`v0.1.0`) (`Size: 111.45 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"monet2photo"` (`v0.1.0`) (`Size: 291.09 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"monet2photo"` (`v0.1.0`) (`Size: 291.09 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"cezanne2photo"` (`v0.1.0`) (`Size: 266.92 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"cezanne2photo"` (`v0.1.0`) (`Size: 266.92 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"ukiyoe2photo"` (`v0.1.0`) (`Size: 279.38 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"ukiyoe2photo"` (`v0.1.0`) (`Size: 279.38 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"vangogh2photo"` (`v0.1.0`) (`Size: 292.39 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"vangogh2photo"` (`v0.1.0`) (`Size: 292.39 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"maps"` (`v0.1.0`) (`Size: 1.38 GiB`): A dataset consisting of images from
-    two classes A and B (For example: horses/zebras, apple/orange,...)
+* `"maps"` (`v0.1.0`) (`Size: 1.38 GiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"cityscapes"` (`v0.1.0`) (`Size: 266.65 MiB`): A dataset consisting of
-    images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"cityscapes"` (`v0.1.0`) (`Size: 266.65 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"facades"` (`v0.1.0`) (`Size: 33.51 MiB`): A dataset consisting of images
-    from two classes A and B (For example: horses/zebras, apple/orange,...)
+* `"facades"` (`v0.1.0`) (`Size: 33.51 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
 
-*   `"iphone2dslr_flower"` (`v0.1.0`) (`Size: 324.22 MiB`): A dataset consisting
-    of images from two classes A and B (For example: horses/zebras,
-    apple/orange,...)
+* `"iphone2dslr_flower"` (`v0.1.0`) (`Size: 324.22 MiB`): A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)
+
 
 #### `"cycle_gan/apple2orange"`
 
@@ -3171,7 +3331,7 @@ TESTB      |        480
  * [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 
 ---
@@ -3193,18 +3353,15 @@ A large set of high-resolution retina images taken under a variety of imaging co
 * URL: [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 * `DatasetBuilder`: [`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetection`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/diabetic_retinopathy_detection.py)
 
-`diabetic_retinopathy_detection` is configured with
-`tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetectionConfig`
-and has the following configurations predefined (defaults to the first one):
+`diabetic_retinopathy_detection` is configured with `tfds.image.diabetic_retinopathy_detection.DiabeticRetinopathyDetectionConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"original"` (`v2.0.0`) (`Size: 1.13 MiB`): Images at their original
-    resolution and quality.
+* `"original"` (`v2.0.0`) (`Size: 1.13 MiB`): Images at their original resolution and quality.
 
-*   `"1M"` (`v2.1.0`) (`Size: 1.13 MiB`): Images have roughly 1,000,000 pixels,
-    at 72 quality.
+* `"1M"` (`v2.1.0`) (`Size: 1.13 MiB`): Images have roughly 1,000,000 pixels, at 72 quality.
 
-*   `"250K"` (`v2.1.0`) (`Size: 1.13 MiB`): Images have roughly 250,000 pixels,
-    at 72 quality.
+* `"250K"` (`v2.1.0`) (`Size: 1.13 MiB`): Images have roughly 250,000 pixels, at 72 quality.
+
 
 #### `"diabetic_retinopathy_detection/original"`
 
@@ -3216,6 +3373,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"diabetic_retinopathy_detection/1M"`
 
 ```python
@@ -3225,6 +3384,8 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"diabetic_retinopathy_detection/250K"`
 
@@ -3236,15 +3397,18 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 88,712
-TEST       | 42,670
-TRAIN      | 35,126
-VALIDATION | 10,906
-SAMPLE     | 10
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     88,712
+TEST       |     42,670
+TRAIN      |     35,126
+VALIDATION |     10,906
+SAMPLE     |         10
+
 
 #### Urls
  * [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
@@ -3263,7 +3427,7 @@ SAMPLE     | 10
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -3278,24 +3442,20 @@ It is used for density estimation and generative modeling experiments." />
 
 ### `"downsampled_imagenet"`
 
-Dataset with images of 2 resolutions (see config name for information on the
-resolution). It is used for density estimation and generative modeling
-experiments.
+Dataset with images of 2 resolutions (see config name for information on the resolution).
+It is used for density estimation and generative modeling experiments.
 
-*   URL:
-    [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
-*   `DatasetBuilder`:
-    [`tfds.image.downsampled_imagenet.DownsampledImagenet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/downsampled_imagenet.py)
 
-`downsampled_imagenet` is configured with
-`tfds.image.downsampled_imagenet.DownsampledImagenetConfig` and has the
-following configurations predefined (defaults to the first one):
+* URL: [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
+* `DatasetBuilder`: [`tfds.image.downsampled_imagenet.DownsampledImagenet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/downsampled_imagenet.py)
 
-*   `"32x32"` (`v1.0.0`) (`Size: 3.98 GiB`): A dataset consisting of Train and
-    Validation images of 32x32 resolution.
+`downsampled_imagenet` is configured with `tfds.image.downsampled_imagenet.DownsampledImagenetConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"64x64"` (`v1.0.0`) (`Size: 11.73 GiB`): A dataset consisting of Train and
-    Validation images of 64x64 resolution.
+* `"32x32"` (`v1.0.0`) (`Size: 3.98 GiB`): A dataset consisting of Train and Validation images of 32x32 resolution.
+
+* `"64x64"` (`v1.0.0`) (`Size: 11.73 GiB`): A dataset consisting of Train and Validation images of 64x64 resolution.
+
 
 #### `"downsampled_imagenet/32x32"`
 
@@ -3305,6 +3465,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"downsampled_imagenet/64x64"`
 
 ```python
@@ -3313,20 +3475,23 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | --------:
-ALL        | 1,331,148
-TRAIN      | 1,281,149
-VALIDATION | 49,999
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |  1,331,148
+TRAIN      |  1,281,149
+VALIDATION |     49,999
+
 
 #### Urls
-
-*   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
+ * [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
+
 
 ---
 
@@ -3480,6 +3645,7 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -3513,16 +3679,14 @@ Year      = {2014}}
   <meta itemprop="name" content="emnist" />
   <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#emnist" />
-  <meta itemprop="sameAs" content="https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip" />
+  <meta itemprop="sameAs" content="https://www.nist.gov/node/1298471/emnist-dataset" />
 </div>
 
 ### `"emnist"`
 
-The EMNIST dataset is a set of handwritten character digits derived from the
-NIST Special Database 19 and converted to a 28x28 pixel image format and dataset
-structure that directly matches the MNIST dataset.
+The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.
 
-* URL: [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
+* URL: [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 * `DatasetBuilder`: [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 
 `emnist` is configured with `tfds.image.mnist.EMNISTConfig` and has the following
@@ -3617,10 +3781,10 @@ TEST       |     10,000
 
 
 #### Urls
- * [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
+ * [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -3633,7 +3797,7 @@ TEST       |     10,000
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -3656,26 +3820,26 @@ URL: https://github.com/phelber/eurosat" />
 ### `"eurosat"`
 
 EuroSAT dataset is based on Sentinel-2 satellite images covering 13 spectral
-bands and consisting of 10 classes with 27000 labeled and geo-referenced
-samples.
+bands and consisting of 10 classes with 27000 labeled and
+geo-referenced samples.
 
-Two datasets are offered: - rgb: Contains only the optical R, G, B frequency
-bands encoded as JPEG image. - all: Contains all 13 bands in the original value
-range (float32).
+Two datasets are offered:
+- rgb: Contains only the optical R, G, B frequency bands encoded as JPEG image.
+- all: Contains all 13 bands in the original value range (float32).
 
 URL: https://github.com/phelber/eurosat
 
-*   URL:
-    [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
-*   `DatasetBuilder`:
-    [`tfds.image.eurosat.Eurosat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/eurosat.py)
 
-`eurosat` is configured with `tfds.image.eurosat.EurosatConfig` and has the
-following configurations predefined (defaults to the first one):
+* URL: [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
+* `DatasetBuilder`: [`tfds.image.eurosat.Eurosat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/eurosat.py)
 
-*   `"rgb"` (`v0.0.1`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+`eurosat` is configured with `tfds.image.eurosat.EurosatConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"all"` (`v0.0.1`) (`Size: ?? GiB`): 13 Sentinel-2 channels
+* `"rgb"` (`v0.0.1`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+
+* `"all"` (`v0.0.1`) (`Size: ?? GiB`): 13 Sentinel-2 channels
+
 
 #### `"eurosat/rgb"`
 
@@ -3687,6 +3851,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"eurosat/all"`
 
 ```python
@@ -3697,15 +3863,17 @@ FeaturesDict({
 })
 ```
 
+
+
+
 #### Statistics
 None computed
 
 #### Urls
-
-*   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
+ * [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'sentinel2', u'label')`
+`('sentinel2', 'label')`
 
 #### Citation
 ```
@@ -3761,7 +3929,7 @@ TEST       |     10,000
  * [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -3789,6 +3957,65 @@ TEST       |     10,000
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+  <meta itemprop="name" content="fruits360" />
+  <meta itemprop="description" content="A large set of fruits on a white background." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#fruits360" />
+  <meta itemprop="sameAs" content="https://www.kaggle.com/moltean/fruits" />
+</div>
+
+### `"fruits360"`
+
+A large set of fruits on a white background.
+
+* URL: [https://www.kaggle.com/moltean/fruits](https://www.kaggle.com/moltean/fruits)
+* `DatasetBuilder`: [`tfds.image.fruits360.Fruits360`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/fruits360.py)
+* Version: `v1.0.0`
+* Size: `655.04 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(100, 100, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=103),
+})
+```
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     71,022
+TRAIN      |     53,177
+TEST       |     17,845
+
+
+#### Urls
+ * [https://www.kaggle.com/moltean/fruits](https://www.kaggle.com/moltean/fruits)
+
+#### Supervised keys (for `as_supervised=True`)
+`('image', 'label')`
+
+#### Citation
+```
+@article{article,
+author = {Mureșan, Horea and Oltean, Mihai},
+year = {2018},
+month = {06},
+pages = {26-42},
+title = {Fruit recognition from images using deep learning},
+volume = {10},
+journal = {Acta Universitatis Sapientiae, Informatica},
+doi = {10.2478/ausi-2018-0002}
+}
+```
+
+---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
   <meta itemprop="name" content="horses_or_humans" />
   <meta itemprop="description" content="A large set of images of horses and humans." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#horses_or_humans" />
@@ -3807,10 +4034,11 @@ A large set of images of horses and humans.
 #### Features
 ```python
 FeaturesDict({
-    'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
 
 #### Statistics
 Split  | Examples
@@ -3824,7 +4052,7 @@ TEST       |        256
  * [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -3873,7 +4101,7 @@ None computed
 
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 
 ---
@@ -3921,6 +4149,7 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -3933,7 +4162,7 @@ VALIDATION |     50,000
  * [http://image-net.org/](http://image-net.org/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -4115,6 +4344,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/gaussian_noise_2"`
 
 ```python
@@ -4124,6 +4355,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/gaussian_noise_3"`
 
@@ -4135,6 +4368,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/gaussian_noise_4"`
 
 ```python
@@ -4144,6 +4379,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/gaussian_noise_5"`
 
@@ -4155,6 +4392,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/shot_noise_1"`
 
 ```python
@@ -4164,6 +4403,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/shot_noise_2"`
 
@@ -4175,6 +4416,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/shot_noise_3"`
 
 ```python
@@ -4184,6 +4427,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/shot_noise_4"`
 
@@ -4195,6 +4440,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/shot_noise_5"`
 
 ```python
@@ -4204,6 +4451,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/impulse_noise_1"`
 
@@ -4215,6 +4464,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/impulse_noise_2"`
 
 ```python
@@ -4224,6 +4475,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/impulse_noise_3"`
 
@@ -4235,6 +4488,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/impulse_noise_4"`
 
 ```python
@@ -4244,6 +4499,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/impulse_noise_5"`
 
@@ -4255,6 +4512,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/defocus_blur_1"`
 
 ```python
@@ -4264,6 +4523,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/defocus_blur_2"`
 
@@ -4275,6 +4536,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/defocus_blur_3"`
 
 ```python
@@ -4284,6 +4547,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/defocus_blur_4"`
 
@@ -4295,6 +4560,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/defocus_blur_5"`
 
 ```python
@@ -4304,6 +4571,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/frosted_glass_blur_1"`
 
@@ -4315,6 +4584,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/frosted_glass_blur_2"`
 
 ```python
@@ -4324,6 +4595,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/frosted_glass_blur_3"`
 
@@ -4335,6 +4608,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/frosted_glass_blur_4"`
 
 ```python
@@ -4344,6 +4619,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/frosted_glass_blur_5"`
 
@@ -4355,6 +4632,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/zoom_blur_1"`
 
 ```python
@@ -4364,6 +4643,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/zoom_blur_2"`
 
@@ -4375,6 +4656,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/zoom_blur_3"`
 
 ```python
@@ -4384,6 +4667,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/zoom_blur_4"`
 
@@ -4395,6 +4680,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/zoom_blur_5"`
 
 ```python
@@ -4404,6 +4691,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/fog_1"`
 
@@ -4415,6 +4704,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/fog_2"`
 
 ```python
@@ -4424,6 +4715,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/fog_3"`
 
@@ -4435,6 +4728,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/fog_4"`
 
 ```python
@@ -4444,6 +4739,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/fog_5"`
 
@@ -4455,6 +4752,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/brightness_1"`
 
 ```python
@@ -4464,6 +4763,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/brightness_2"`
 
@@ -4475,6 +4776,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/brightness_3"`
 
 ```python
@@ -4484,6 +4787,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/brightness_4"`
 
@@ -4495,6 +4800,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/brightness_5"`
 
 ```python
@@ -4504,6 +4811,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/contrast_1"`
 
@@ -4515,6 +4824,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/contrast_2"`
 
 ```python
@@ -4524,6 +4835,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/contrast_3"`
 
@@ -4535,6 +4848,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/contrast_4"`
 
 ```python
@@ -4544,6 +4859,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/contrast_5"`
 
@@ -4555,6 +4872,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/elastic_1"`
 
 ```python
@@ -4564,6 +4883,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/elastic_2"`
 
@@ -4575,6 +4896,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/elastic_3"`
 
 ```python
@@ -4584,6 +4907,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/elastic_4"`
 
@@ -4595,6 +4920,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/elastic_5"`
 
 ```python
@@ -4604,6 +4931,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/pixelate_1"`
 
@@ -4615,6 +4944,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/pixelate_2"`
 
 ```python
@@ -4624,6 +4955,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/pixelate_3"`
 
@@ -4635,6 +4968,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/pixelate_4"`
 
 ```python
@@ -4644,6 +4979,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/pixelate_5"`
 
@@ -4655,6 +4992,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/jpeg_compression_1"`
 
 ```python
@@ -4664,6 +5003,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/jpeg_compression_2"`
 
@@ -4675,6 +5016,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/jpeg_compression_3"`
 
 ```python
@@ -4684,6 +5027,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
 
 #### `"imagenet2012_corrupted/jpeg_compression_4"`
 
@@ -4695,6 +5040,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"imagenet2012_corrupted/jpeg_compression_5"`
 
 ```python
@@ -4704,6 +5051,9 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -4716,7 +5066,7 @@ ALL        |     50,000
  * [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -4730,7 +5080,7 @@ ALL        |     50,000
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -4758,12 +5108,11 @@ training images annotated with 3D bounding boxes. A full description of the
 annotations can be found in the readme of the object development kit readme on
 the Kitti homepage.
 
-*   URL:
-    [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
-*   `DatasetBuilder`:
-    [`tfds.image.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/kitti.py)
-*   Version: `v3.1.0`
-*   Size: `11.71 GiB`
+
+* URL: [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
+* `DatasetBuilder`: [`tfds.image.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/kitti.py)
+* Version: `v3.1.0`
+* Size: `11.71 GiB`
 
 #### Features
 ```python
@@ -4783,18 +5132,18 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 7,481
-TRAIN      | 6,347
-TEST       | 711
-VALIDATION | 423
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      7,481
+TRAIN      |      6,347
+TEST       |        711
+VALIDATION |        423
+
 
 #### Urls
-
-*   [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
+ * [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
@@ -4851,7 +5200,7 @@ TEST       |     10,000
  * [http://codh.rois.ac.jp/kmnist/index.html.en](http://codh.rois.ac.jp/kmnist/index.html.en)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -5085,7 +5434,7 @@ TEST       |     10,000
  * [https://storage.googleapis.com/cvdf-datasets/mnist/](https://storage.googleapis.com/cvdf-datasets/mnist/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -5098,7 +5447,7 @@ TEST       |     10,000
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -5115,56 +5464,48 @@ test images uploaded by the original authors" />
 ### `"mnist_corrupted"`
 
 MNISTCorrupted is a dataset generated by adding 15 corruptions to the test
-images in the MNIST dataset. This dataset wraps the static, corrupted MNIST test
-images uploaded by the original authors
+images in the MNIST dataset. This dataset wraps the static, corrupted MNIST
+test images uploaded by the original authors
 
-*   URL:
-    [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
-*   `DatasetBuilder`:
-    [`tfds.image.mnist_corrupted.MNISTCorrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist_corrupted.py)
 
-`mnist_corrupted` is configured with
-`tfds.image.mnist_corrupted.MNISTCorruptedConfig` and has the following
+* URL: [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+* `DatasetBuilder`: [`tfds.image.mnist_corrupted.MNISTCorrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist_corrupted.py)
+
+`mnist_corrupted` is configured with `tfds.image.mnist_corrupted.MNISTCorruptedConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"identity"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: identity
+* `"identity"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: identity
 
-*   `"shot_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
-    shot_noise
+* `"shot_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: shot_noise
 
-*   `"impulse_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
-    impulse_noise
+* `"impulse_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: impulse_noise
 
-*   `"glass_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
-    glass_blur
+* `"glass_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: glass_blur
 
-*   `"motion_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
-    motion_blur
+* `"motion_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: motion_blur
 
-*   `"shear"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: shear
+* `"shear"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: shear
 
-*   `"scale"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: scale
+* `"scale"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: scale
 
-*   `"rotate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: rotate
+* `"rotate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: rotate
 
-*   `"brightness"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
-    brightness
+* `"brightness"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: brightness
 
-*   `"translate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: translate
+* `"translate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: translate
 
-*   `"stripe"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: stripe
+* `"stripe"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: stripe
 
-*   `"fog"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: fog
+* `"fog"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: fog
 
-*   `"spatter"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: spatter
+* `"spatter"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: spatter
 
-*   `"dotted_line"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
-    dotted_line
+* `"dotted_line"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: dotted_line
 
-*   `"zigzag"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: zigzag
+* `"zigzag"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: zigzag
 
-*   `"canny_edges"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
-    canny_edges
+* `"canny_edges"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: canny_edges
+
 
 #### `"mnist_corrupted/identity"`
 
@@ -5175,6 +5516,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"mnist_corrupted/shot_noise"`
 
 ```python
@@ -5183,6 +5526,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+
 
 #### `"mnist_corrupted/impulse_noise"`
 
@@ -5193,6 +5538,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"mnist_corrupted/glass_blur"`
 
 ```python
@@ -5201,6 +5548,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+
 
 #### `"mnist_corrupted/motion_blur"`
 
@@ -5211,6 +5560,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"mnist_corrupted/shear"`
 
 ```python
@@ -5219,6 +5570,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+
 
 #### `"mnist_corrupted/scale"`
 
@@ -5229,6 +5582,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"mnist_corrupted/rotate"`
 
 ```python
@@ -5237,6 +5592,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+
 
 #### `"mnist_corrupted/brightness"`
 
@@ -5247,6 +5604,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"mnist_corrupted/translate"`
 
 ```python
@@ -5255,6 +5614,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+
 
 #### `"mnist_corrupted/stripe"`
 
@@ -5265,6 +5626,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"mnist_corrupted/fog"`
 
 ```python
@@ -5273,6 +5636,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+
 
 #### `"mnist_corrupted/spatter"`
 
@@ -5283,6 +5648,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"mnist_corrupted/dotted_line"`
 
 ```python
@@ -5291,6 +5658,8 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+
 
 #### `"mnist_corrupted/zigzag"`
 
@@ -5301,6 +5670,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"mnist_corrupted/canny_edges"`
 
 ```python
@@ -5310,20 +5681,22 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | -------:
-ALL   | 70,000
-TRAIN | 60,000
-TEST  | 10,000
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     70,000
+TRAIN      |     60,000
+TEST       |     10,000
+
 
 #### Urls
-
-*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+ * [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -5384,7 +5757,7 @@ SMALL1     |      2,720
  * [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -5438,17 +5811,15 @@ classes.
 * URL: [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 * `DatasetBuilder`: [`tfds.image.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/open_images.py)
 
-`open_images_v4` is configured with `tfds.image.open_images.OpenImagesV4Config`
-and has the following configurations predefined (defaults to the first one):
+`open_images_v4` is configured with `tfds.image.open_images.OpenImagesV4Config` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"original"` (`v0.2.0`) (`Size: 565.11 GiB`): Images at their original
-    resolution and quality.
+* `"original"` (`v0.2.0`) (`Size: 565.11 GiB`): Images at their original resolution and quality.
 
-*   `"300k"` (`v0.2.1`) (`Size: 565.11 GiB`): Images have roughly 300,000
-    pixels, at 72 JPEG quality.
+* `"300k"` (`v0.2.1`) (`Size: 565.11 GiB`): Images have roughly 300,000 pixels, at 72 JPEG quality.
 
-*   `"200k"` (`v0.2.1`) (`Size: 565.11 GiB`): Images have roughly 200,000
-    pixels, at 72 JPEG quality.
+* `"200k"` (`v0.2.1`) (`Size: 565.11 GiB`): Images have roughly 200,000 pixels, at 72 JPEG quality.
+
 
 #### `"open_images_v4/original"`
 
@@ -5479,6 +5850,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"open_images_v4/300k"`
 
 ```python
@@ -5508,6 +5881,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"open_images_v4/200k"`
 
 ```python
@@ -5536,6 +5911,9 @@ FeaturesDict({
     }),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -5602,7 +5980,7 @@ VALIDATION |     41,620
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -5623,23 +6001,21 @@ The test set consist of the remaining 6129 images (minimum 20 per class)." />
 
 ### `"oxford_flowers102"`
 
-The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly
-occurring in the United Kingdom. Each class consists of between 40 and 258
-images. The images have large scale, pose and light variations. In addition,
-there are categories that have large variations within the category and several
-very similar categories.
 
-The dataset is divided into a training set, a validation set and a test set. The
-training set and validation set each consist of 10 images per class (totalling
-1030 images each). The test set consist of the remaining 6129 images (minimum 20
-per class).
+The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly occurring
+in the United Kingdom. Each class consists of between 40 and 258 images. The images have
+large scale, pose and light variations. In addition, there are categories that have large
+variations within the category and several very similar categories.
 
-*   URL:
-    [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
-*   `DatasetBuilder`:
-    [`tfds.image.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_flowers102.py)
-*   Version: `v0.0.1`
-*   Size: `336.76 MiB`
+The dataset is divided into a training set, a validation set and a test set.
+The training set and validation set each consist of 10 images per class (totalling 1030 images each).
+The test set consist of the remaining 6129 images (minimum 20 per class).
+
+
+* URL: [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
+* `DatasetBuilder`: [`tfds.image.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_flowers102.py)
+* Version: `v0.0.1`
+* Size: `336.76 MiB`
 
 #### Features
 ```python
@@ -5650,21 +6026,21 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 8,189
-TEST       | 6,149
-VALIDATION | 1,020
-TRAIN      | 1,020
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      8,189
+TEST       |      6,149
+VALIDATION |      1,020
+TRAIN      |      1,020
+
 
 #### Urls
-
-*   [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
+ * [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -5713,6 +6089,7 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -5725,7 +6102,7 @@ TEST       |      3,669
  * [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -5737,7 +6114,7 @@ TEST       |      3,669
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -5763,12 +6140,11 @@ binary label indicating presence of metastatic tissue. PCam provides a new
 benchmark for machine learning models: bigger than CIFAR10, smaller than
 Imagenet, trainable on a single GPU.
 
-*   URL:
-    [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
-*   `DatasetBuilder`:
-    [`tfds.image.patch_camelyon.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/patch_camelyon.py)
-*   Version: `v0.1.0`
-*   Size: `7.48 GiB`
+
+* URL: [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
+* `DatasetBuilder`: [`tfds.image.patch_camelyon.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/patch_camelyon.py)
+* Version: `v0.1.0`
+* Size: `7.48 GiB`
 
 #### Features
 ```python
@@ -5779,21 +6155,21 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 327,680
-TRAIN      | 262,144
-VALIDATION | 32,768
-TEST       | 32,768
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    327,680
+TRAIN      |    262,144
+VALIDATION |     32,768
+TEST       |     32,768
+
 
 #### Urls
-
-*   [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
+ * [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -5807,7 +6183,7 @@ TEST       | 32,768
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -5821,15 +6197,12 @@ TEST       | 32,768
 
 ### `"pet_finder"`
 
-Dataset with images from 5 classes (see config name for information on the
-specific class)
+Dataset with images from 5 classes (see config name for information on the specific class)
 
-*   URL:
-    [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
-*   `DatasetBuilder`:
-    [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
-*   Version: `v1.0.0`
-*   Size: `1.94 GiB`
+* URL: [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
+* `DatasetBuilder`: [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
+* Version: `v1.0.0`
+* Size: `1.94 GiB`
 
 #### Features
 ```python
@@ -5861,20 +6234,20 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | -------:
-ALL   | 72,776
-TRAIN | 58,311
-TEST  | 14,465
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     72,776
+TRAIN      |     58,311
+TEST       |     14,465
+
 
 #### Urls
-
-*   [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
+ * [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'attributes', u'label')`
+`('attributes', 'label')`
 
 #### Citation
 ```
@@ -5903,12 +6276,10 @@ TEST  | 14,465
 
 The Quick Draw Dataset is a collection of 50 million drawings across 345 categories, contributed by players of the game Quick, Draw!. The bitmap dataset contains these drawings converted from vector format into 28x28 grayscale images
 
-*   URL:
-    [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
-*   `DatasetBuilder`:
-    [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
-*   Version: `v1.0.0`
-*   Size: `36.82 GiB`
+* URL: [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+* `DatasetBuilder`: [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
+* Version: `v1.0.0`
+* Size: `36.82 GiB`
 
 #### Features
 ```python
@@ -5925,12 +6296,12 @@ Split  | Examples
 TRAIN      | 50,426,266
 ALL        | 50,426,266
 
-#### Urls
 
-*   [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
+#### Urls
+ * [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -5950,7 +6321,7 @@ ALL        | 50,426,266
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -5972,12 +6343,10 @@ Scene Classification (RESISC), created by Northwestern Polytechnical University
 (NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700
 images in each class.
 
-*   URL:
-    [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
-*   `DatasetBuilder`:
-    [`tfds.image.resisc45.Resisc45`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/resisc45.py)
-*   Version: `v0.0.1`
-*   Size: `?? GiB`
+* URL: [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
+* `DatasetBuilder`: [`tfds.image.resisc45.Resisc45`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/resisc45.py)
+* Version: `v0.0.1`
+* Size: `?? GiB`
 
 #### Features
 ```python
@@ -5988,15 +6357,15 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
 None computed
 
 #### Urls
-
-*   [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
+ * [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -6058,7 +6427,7 @@ TEST       |        372
  * [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -6220,7 +6589,7 @@ TEST       |     24,300
  * [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label_category')`
+`('image', 'label_category')`
 
 #### Citation
 ```
@@ -6235,7 +6604,7 @@ TEST       |     24,300
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -6270,20 +6639,20 @@ The full dataset (`all`) consists of 8 Sentinel-1 and 10 Sentinel-2 channels.
 Alternatively, one can select the `rgb` subset, which contains only the optical
 frequency bands of Sentinel-2, rescaled and encoded as JPEG.
 
-Dataset URL: http://doi.org/10.14459/2018MP1454690 License:
-http://creativecommons.org/licenses/by/4.0
+Dataset URL: http://doi.org/10.14459/2018MP1454690
+License: http://creativecommons.org/licenses/by/4.0
 
-*   URL:
-    [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
-*   `DatasetBuilder`:
-    [`tfds.image.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/so2sat.py)
 
-`so2sat` is configured with `tfds.image.so2sat.So2satConfig` and has the
-following configurations predefined (defaults to the first one):
+* URL: [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
+* `DatasetBuilder`: [`tfds.image.so2sat.So2sat`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/so2sat.py)
 
-*   `"rgb"` (`v0.0.1`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+`so2sat` is configured with `tfds.image.so2sat.So2satConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"all"` (`v0.0.1`) (`Size: ?? GiB`): 8 Sentinel-1 and 10 Sentinel-2 channels
+* `"rgb"` (`v0.0.1`) (`Size: ?? GiB`): Sentinel-2 RGB channels
+
+* `"all"` (`v0.0.1`) (`Size: ?? GiB`): 8 Sentinel-1 and 10 Sentinel-2 channels
+
 
 #### `"so2sat/rgb"`
 
@@ -6294,6 +6663,8 @@ FeaturesDict({
     'sample_id': Tensor(shape=(), dtype=tf.int64),
 })
 ```
+
+
 
 #### `"so2sat/all"`
 
@@ -6306,15 +6677,18 @@ FeaturesDict({
 })
 ```
 
+
+
+
 #### Statistics
 None computed
 
 #### Urls
-
-*   [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
+ * [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
+
 
 ---
 
@@ -6360,6 +6734,7 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
 })
 ```
+
 
 #### Statistics
 Split  | Examples
@@ -6433,7 +6808,7 @@ TEST       |     26,032
  * [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -6486,7 +6861,7 @@ ALL        |      3,670
  * [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -6498,7 +6873,7 @@ year = "2019",
 url = "http://download.tensorflow.org/example_images/flower_photos.tgz" }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -6519,15 +6894,13 @@ Each image measures 256x256 pixels." />
 UC Merced is a 21 class land use remote sensing image dataset, with 100 images
 per class. The images were manually extracted from large images from the USGS
 National Map Urban Area Imagery collection for various urban areas around the
-country. The pixel resolution of this public domain imagery is 0.3 m. Each image
-measures 256x256 pixels.
+country. The pixel resolution of this public domain imagery is 0.3 m.
+Each image measures 256x256 pixels.
 
-*   URL:
-    [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
-*   `DatasetBuilder`:
-    [`tfds.image.uc_merced.UcMerced`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/uc_merced.py)
-*   Version: `v0.0.1`
-*   Size: `317.07 MiB`
+* URL: [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
+* `DatasetBuilder`: [`tfds.image.uc_merced.UcMerced`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/uc_merced.py)
+* Version: `v0.0.1`
+* Size: `317.07 MiB`
 
 #### Features
 ```python
@@ -6538,19 +6911,19 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | -------:
-TRAIN | 2,100
-ALL   | 2,100
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |      2,100
+ALL        |      2,100
+
 
 #### Urls
-
-*   [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
+ * [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+`('image', 'label')`
 
 #### Citation
 ```
@@ -6617,6 +6990,7 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -6641,7 +7015,6 @@ TRAIN      |      2,501
 ```
 
 ---
-
 
 
 ## [`structured`](#structured)
@@ -6751,7 +7124,7 @@ ALL        | 11,000,000
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -6772,17 +7145,16 @@ linearly separable from each other." />
 
 This is perhaps the best known database to be found in the pattern recognition
 literature. Fisher's paper is a classic in the field and is referenced
-frequently to this day. (See Duda & Hart, for example.) The data set contains 3
-classes of 50 instances each, where each class refers to a type of iris plant.
-One class is linearly separable from the other 2; the latter are NOT linearly
-separable from each other.
+frequently to this day. (See Duda & Hart, for example.) The data set contains
+3 classes of 50 instances each, where each class refers to a type of iris
+plant. One class is linearly separable from the other 2; the latter are NOT
+linearly separable from each other.
 
-*   URL:
-    [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
-*   `DatasetBuilder`:
-    [`tfds.structured.iris.Iris`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/iris.py)
-*   Version: `v1.0.0`
-*   Size: `4.44 KiB`
+
+* URL: [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
+* `DatasetBuilder`: [`tfds.structured.iris.Iris`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/iris.py)
+* Version: `v1.0.0`
+* Size: `4.44 KiB`
 
 #### Features
 ```python
@@ -6792,19 +7164,19 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | -------:
-TRAIN | 150
-ALL   | 150
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |        150
+ALL        |        150
+
 
 #### Urls
-
-*   [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
+ * [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'features', u'label')`
+`('features', 'label')`
 
 #### Citation
 ```
@@ -6872,7 +7244,7 @@ ALL        |      1,309
  * [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'features', u'survived')`
+`('features', 'survived')`
 
 #### Citation
 ```
@@ -6921,13 +7293,12 @@ There are two features:
 `cnn_dailymail` is configured with `tfds.text.cnn_dailymail.CnnDailymailConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"plain_text"` (`v0.0.2`) (`Size: 558.32 MiB`): Plain text
+* `"plain_text"` (`v0.0.2`) (`Size: 558.32 MiB`): Plain text
 
-*   `"bytes"` (`v0.0.2`) (`Size: 558.32 MiB`): Uses byte-level text encoding
-    with `tfds.features.text.ByteTextEncoder`
+* `"bytes"` (`v0.0.2`) (`Size: 558.32 MiB`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
 
-*   `"subwords32k"` (`v0.0.2`) (`Size: 558.32 MiB`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+* `"subwords32k"` (`v0.0.2`) (`Size: 558.32 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
 
 #### `"cnn_dailymail/plain_text"`
 
@@ -6937,6 +7308,8 @@ FeaturesDict({
     'highlights': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"cnn_dailymail/bytes"`
 
@@ -6958,20 +7331,23 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 311,971
-TRAIN      | 287,113
-VALIDATION | 13,368
-TEST       | 11,490
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    311,971
+TRAIN      |    287,113
+VALIDATION |     13,368
+TEST       |     11,490
+
 
 #### Urls
  * [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'article', u'highlights')`
+`('article', 'highlights')`
 
 #### Citation
 ```
@@ -7000,7 +7376,7 @@ TEST       | 11,490
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -7032,17 +7408,15 @@ the target pronoun, the third line contains the two candidate antecedents, and
 the fourth line contains the correct antecedent. If the target pronoun appears
 more than once in the sentence, its first occurrence is the one to be resolved.
 
-*   URL:
-    [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
-*   `DatasetBuilder`:
-    [`tfds.text.definite_pronoun_resolution.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
 
-`definite_pronoun_resolution` is configured with
-`tfds.text.definite_pronoun_resolution.BuilderConfig` and has the following
+* URL: [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+* `DatasetBuilder`: [`tfds.text.definite_pronoun_resolution.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
+
+`definite_pronoun_resolution` is configured with `tfds.text.definite_pronoun_resolution.BuilderConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"plain_text"` (`v0.0.1`) (`Size: 222.12 KiB`): Plain text import of the
-    Definite Pronoun Resolution Dataset.
+* `"plain_text"` (`v0.0.1`) (`Size: 222.12 KiB`): Plain text import of the Definite Pronoun Resolution Dataset.
+
 
 #### `"definite_pronoun_resolution/plain_text"`
 
@@ -7055,20 +7429,22 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | -------:
-ALL   | 1,886
-TRAIN | 1,322
-TEST  | 564
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      1,886
+TRAIN      |      1,322
+TEST       |        564
+
 
 #### Urls
-
-*   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+ * [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'sentence', u'label')`
+`('sentence', 'label')`
 
 #### Citation
 ```
@@ -7132,93 +7508,76 @@ TEST  | 564
 `glue` is configured with `tfds.text.glue.GlueConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cola"` (`v0.0.2`) (`Size: 368.14 KiB`): The Corpus of Linguistic
-    Acceptability consists of English acceptability judgments drawn from books
-    and journal articles on linguistic theory. Each example is a sequence of
-    words annotated with whether it is a grammatical English sentence.
+* `"cola"` (`v0.0.2`) (`Size: 368.14 KiB`):             The Corpus of Linguistic Acceptability consists of English
+            acceptability judgments drawn from books and journal articles on
+            linguistic theory. Each example is a sequence of words annotated
+            with whether it is a grammatical English sentence.
 
-*   `"sst2"` (`v0.0.2`) (`Size: 7.09 MiB`): The Stanford Sentiment Treebank
-    consists of sentences from movie reviews and human annotations of their
-    sentiment. The task is to predict the sentiment of a given sentence. We use
-    the two-way (positive/negative) class split, and use only sentence-level
-    labels.
+* `"sst2"` (`v0.0.2`) (`Size: 7.09 MiB`):             The Stanford Sentiment Treebank consists of sentences from movie reviews and
+            human annotations of their sentiment. The task is to predict the sentiment of a
+            given sentence. We use the two-way (positive/negative) class split, and use only
+            sentence-level labels.
 
-*   `"mrpc"` (`v0.0.2`) (`Size: 1.43 MiB`): The Microsoft Research Paraphrase
-    Corpus (Dolan & Brockett, 2005) is a corpus of sentence pairs automatically
-    extracted from online news sources, with human annotations for whether the
-    sentences in the pair are semantically equivalent.
+* `"mrpc"` (`v0.0.2`) (`Size: 1.43 MiB`):             The Microsoft Research Paraphrase Corpus (Dolan & Brockett, 2005) is a corpus of
+            sentence pairs automatically extracted from online news sources, with human annotations
+            for whether the sentences in the pair are semantically equivalent.
 
-*   `"qqp"` (`v0.0.2`) (`Size: 57.73 MiB`): The Quora Question Pairs2 dataset is
-    a collection of question pairs from the community question-answering website
-    Quora. The task is to determine whether a pair of questions are semantically
-    equivalent.
+* `"qqp"` (`v0.0.2`) (`Size: 57.73 MiB`):             The Quora Question Pairs2 dataset is a collection of question pairs from the
+            community question-answering website Quora. The task is to determine whether a
+            pair of questions are semantically equivalent.
 
-*   `"stsb"` (`v0.0.2`) (`Size: 784.05 KiB`): The Semantic Textual Similarity
-    Benchmark (Cer et al., 2017) is a collection of sentence pairs drawn from
-    news headlines, video and image captions, and natural language inference
-    data. Each pair is human-annotated with a similarity score from 1 to 5.
+* `"stsb"` (`v0.0.2`) (`Size: 784.05 KiB`):             The Semantic Textual Similarity Benchmark (Cer et al., 2017) is a collection of
+            sentence pairs drawn from news headlines, video and image captions, and natural
+            language inference data. Each pair is human-annotated with a similarity score
+            from 1 to 5.
 
-*   `"mnli"` (`v0.0.2`) (`Size: 298.29 MiB`): The Multi-Genre Natural Language
-    Inference Corpusn is a crowdsourced collection of sentence pairs with
-    textual entailment annotations. Given a premise sentence and a hypothesis
-    sentence, the task is to predict whether the premise entails the hypothesis
-    (entailment), contradicts the hypothesis (contradiction), or neither
-    (neutral). The premise sentences are gathered from ten different sources,
-    including transcribed speech, fiction, and government reports. We use the
-    standard test set, for which we obtained private labels from the authors,
-    and evaluate on both the matched (in-domain) and mismatched (cross-domain)
-    section. We also use and recommend the SNLI corpus as 550k examples of
-    auxiliary training data.
+* `"mnli"` (`v0.0.2`) (`Size: 298.29 MiB`):             The Multi-Genre Natural Language Inference Corpusn is a crowdsourced
+            collection of sentence pairs with textual entailment annotations. Given a premise sentence
+            and a hypothesis sentence, the task is to predict whether the premise entails the hypothesis
+            (entailment), contradicts the hypothesis (contradiction), or neither (neutral). The premise sentences are
+            gathered from ten different sources, including transcribed speech, fiction, and government reports.
+            We use the standard test set, for which we obtained private labels from the authors, and evaluate
+            on both the matched (in-domain) and mismatched (cross-domain) section. We also use and recommend
+            the SNLI corpus as 550k examples of auxiliary training data.
 
-*   `"mnli_mismatched"` (`v0.0.2`) (`Size: 298.29 MiB`): The mismatched
-    validation and test splits from MNLI. See the "mnli" BuilderConfig for
-    additional information.
+* `"mnli_mismatched"` (`v0.0.2`) (`Size: 298.29 MiB`):           The mismatched validation and test splits from MNLI.
+          See the "mnli" BuilderConfig for additional information.
 
-*   `"mnli_matched"` (`v0.0.2`) (`Size: 298.29 MiB`): The matched validation and
-    test splits from MNLI. See the "mnli" BuilderConfig for additional
-    information.
+* `"mnli_matched"` (`v0.0.2`) (`Size: 298.29 MiB`):           The matched validation and test splits from MNLI.
+          See the "mnli" BuilderConfig for additional information.
 
-*   `"qnli"` (`v0.0.2`) (`Size: 10.14 MiB`): The Stanford Question Answering
-    Dataset is a question-answering dataset consisting of question-paragraph
-    pairs, where one of the sentences in the paragraph (drawn from Wikipedia)
-    contains the answer to the corresponding question (written by an annotator).
-    We convert the task into sentence pair classification by forming a pair
-    between each question and each sentence in the corresponding context, and
-    filtering out pairs with low lexical overlap between the question and the
-    context sentence. The task is to determine whether the context sentence
-    contains the answer to the question. This modified version of the original
-    task removes the requirement that the model select the exact answer, but
-    also removes the simplifying assumptions that the answer is always present
-    in the input and that lexical overlap is a reliable cue.
+* `"qnli"` (`v0.0.2`) (`Size: 10.14 MiB`):             The Stanford Question Answering Dataset is a question-answering
+            dataset consisting of question-paragraph pairs, where one of the sentences in the paragraph (drawn
+            from Wikipedia) contains the answer to the corresponding question (written by an annotator). We
+            convert the task into sentence pair classification by forming a pair between each question and each
+            sentence in the corresponding context, and filtering out pairs with low lexical overlap between the
+            question and the context sentence. The task is to determine whether the context sentence contains
+            the answer to the question. This modified version of the original task removes the requirement that
+            the model select the exact answer, but also removes the simplifying assumptions that the answer
+            is always present in the input and that lexical overlap is a reliable cue.
 
-*   `"rte"` (`v0.0.2`) (`Size: 680.81 KiB`): The Recognizing Textual Entailment
-    (RTE) datasets come from a series of annual textual entailment challenges.
-    We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim et al.,
-    2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009).4
-    Examples are constructed based on news and Wikipedia text. We convert all
-    datasets to a two-class split, where for three-class datasets we collapse
-    neutral and contradiction into not entailment, for consistency.
+* `"rte"` (`v0.0.2`) (`Size: 680.81 KiB`):             The Recognizing Textual Entailment (RTE) datasets come from a series of annual textual
+            entailment challenges. We combine the data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim
+            et al., 2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009).4 Examples are
+            constructed based on news and Wikipedia text. We convert all datasets to a two-class split, where
+            for three-class datasets we collapse neutral and contradiction into not entailment, for consistency.
 
-*   `"wnli"` (`v0.0.2`) (`Size: 28.32 KiB`): The Winograd Schema Challenge
-    (Levesque et al., 2011) is a reading comprehension task in which a system
-    must read a sentence with a pronoun and select the referent of that pronoun
-    from a list of choices. The examples are manually constructed to foil simple
-    statistical methods: Each one is contingent on contextual information
-    provided by a single word or phrase in the sentence. To convert the problem
-    into sentence pair classification, we construct sentence pairs by replacing
-    the ambiguous pronoun with each possible referent. The task is to predict if
-    the sentence with the pronoun substituted is entailed by the original
-    sentence. We use a small evaluation set consisting of new examples derived
-    from fiction books that was shared privately by the authors of the original
-    corpus. While the included training set is balanced between two classes, the
-    test set is imbalanced between them (65% not entailment). Also, due to a
-    data quirk, the development set is adversarial: hypotheses are sometimes
-    shared between training and development examples, so if a model memorizes
-    the training examples, they will predict the wrong label on corresponding
-    development set example. As with QNLI, each example is evaluated separately,
-    so there is not a systematic correspondence between a model's score on this
-    task and its score on the unconverted original task. We call converted
-    dataset WNLI (Winograd NLI).
+* `"wnli"` (`v0.0.2`) (`Size: 28.32 KiB`):             The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task
+            in which a system must read a sentence with a pronoun and select the referent of that pronoun from
+            a list of choices. The examples are manually constructed to foil simple statistical methods: Each
+            one is contingent on contextual information provided by a single word or phrase in the sentence.
+            To convert the problem into sentence pair classification, we construct sentence pairs by replacing
+            the ambiguous pronoun with each possible referent. The task is to predict if the sentence with the
+            pronoun substituted is entailed by the original sentence. We use a small evaluation set consisting of
+            new examples derived from fiction books that was shared privately by the authors of the original
+            corpus. While the included training set is balanced between two classes, the test set is imbalanced
+            between them (65% not entailment). Also, due to a data quirk, the development set is adversarial:
+            hypotheses are sometimes shared between training and development examples, so if a model memorizes the
+            training examples, they will predict the wrong label on corresponding development set
+            example. As with QNLI, each example is evaluated separately, so there is not a systematic correspondence
+            between a model's score on this task and its score on the unconverted original task. We
+            call converted dataset WNLI (Winograd NLI).
+
 
 #### `"glue/cola"`
 
@@ -7230,6 +7589,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"glue/sst2"`
 
 ```python
@@ -7239,6 +7600,8 @@ FeaturesDict({
     'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"glue/mrpc"`
 
@@ -7251,6 +7614,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"glue/qqp"`
 
 ```python
@@ -7261,6 +7626,8 @@ FeaturesDict({
     'question2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"glue/stsb"`
 
@@ -7273,6 +7640,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"glue/mnli"`
 
 ```python
@@ -7283,6 +7652,8 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"glue/mnli_mismatched"`
 
@@ -7295,6 +7666,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"glue/mnli_matched"`
 
 ```python
@@ -7305,6 +7678,8 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"glue/qnli"`
 
@@ -7317,6 +7692,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"glue/rte"`
 
 ```python
@@ -7327,6 +7704,8 @@ FeaturesDict({
     'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"glue/wnli"`
 
@@ -7339,14 +7718,17 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 852
-TRAIN      | 635
-TEST       | 146
-VALIDATION | 71
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |        852
+TRAIN      |        635
+TEST       |        146
+VALIDATION |         71
+
 
 #### Urls
  * [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
@@ -7389,10 +7771,8 @@ This is a dataset for binary sentiment classification containing substantially m
 
 ### `"imdb_reviews"`
 
-Large Movie Review Dataset. This is a dataset for binary sentiment
-classification containing substantially more data than previous benchmark
-datasets. We provide a set of 25,000 highly polar movie reviews for training,
-and 25,000 for testing. There is additional unlabeled data for use as well.
+Large Movie Review Dataset.
+This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well.
 
 * URL: [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 * `DatasetBuilder`: [`tfds.text.imdb.IMDBReviews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/imdb.py)
@@ -7400,16 +7780,14 @@ and 25,000 for testing. There is additional unlabeled data for use as well.
 `imdb_reviews` is configured with `tfds.text.imdb.IMDBReviewsConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"plain_text"` (`v0.1.0`) (`Size: 80.23 MiB`): Plain text
+* `"plain_text"` (`v0.1.0`) (`Size: 80.23 MiB`): Plain text
 
-*   `"bytes"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses byte-level text encoding with
-    `tfds.features.text.ByteTextEncoder`
+* `"bytes"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
 
-*   `"subwords8k"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+* `"subwords8k"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
-*   `"subwords32k"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses
-    `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+* `"subwords32k"` (`v0.1.0`) (`Size: 80.23 MiB`): Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
 
 #### `"imdb_reviews/plain_text"`
 
@@ -7419,6 +7797,8 @@ FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"imdb_reviews/bytes"`
 
@@ -7451,20 +7831,23 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split        | Examples
-:----------- | -------:
-ALL          | 100,000
-UNSUPERVISED | 50,000
-TRAIN        | 25,000
-TEST         | 25,000
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    100,000
+UNSUPERVISED |     50,000
+TRAIN      |     25,000
+TEST       |     25,000
+
 
 #### Urls
  * [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'text', u'label')`
+`('text', 'label')`
 
 #### Citation
 ```
@@ -7521,6 +7904,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"lm1b/bytes"`
 
 ```python
@@ -7564,7 +7949,7 @@ TEST       |    306,688
  * [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'text', u'text')`
+`('text', 'text')`
 
 #### Citation
 ```
@@ -7622,7 +8007,8 @@ basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 `multi_nli` is configured with `tfds.text.multi_nli.MultiNLIConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"plain_text"` (`v0.0.2`) (`Size: 216.34 MiB`): Plain text
+* `"plain_text"` (`v0.0.2`) (`Size: 216.34 MiB`): Plain text
+
 
 #### `"multi_nli/plain_text"`
 
@@ -7634,14 +8020,17 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split                 | Examples
-:-------------------- | -------:
-ALL                   | 412,349
-TRAIN                 | 392,702
-VALIDATION_MISMATCHED | 9,832
-VALIDATION_MATCHED    | 9,815
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    412,349
+TRAIN      |    392,702
+VALIDATION_MISMATCHED |      9,832
+VALIDATION_MATCHED |      9,815
+
 
 #### Urls
  * [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
@@ -7670,7 +8059,7 @@ VALIDATION_MATCHED    | 9,815
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -7692,15 +8081,15 @@ sentence pairs manually labeled for balanced classification with the labels
 entailment, contradiction, and neutral, supporting the task of natural language
 inference (NLI), also known as recognizing textual entailment (RTE).
 
-*   URL:
-    [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
-*   `DatasetBuilder`:
-    [`tfds.text.snli.Snli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/snli.py)
+
+* URL: [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
+* `DatasetBuilder`: [`tfds.text.snli.Snli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/snli.py)
 
 `snli` is configured with `tfds.text.snli.BuilderConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"plain_text"` (`v0.0.1`) (`Size: 90.17 MiB`): Plain text import of SNLI
+* `"plain_text"` (`v0.0.1`) (`Size: 90.17 MiB`): Plain text import of SNLI
+
 
 #### `"snli/plain_text"`
 
@@ -7712,31 +8101,32 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 570,152
-TRAIN      | 550,152
-VALIDATION | 10,000
-TEST       | 10,000
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |    570,152
+TRAIN      |    550,152
+VALIDATION |     10,000
+TEST       |     10,000
+
 
 #### Urls
-
-*   [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
+ * [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
 
 #### Citation
-
 ```
 @inproceedings{snli:emnlp2015,
-    Author = {Bowman, Samuel R. and Angeli, Gabor and Potts, Christopher, and Manning, Christopher D.},
-    Booktitle = {Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
-    Publisher = {Association for Computational Linguistics},
-    Title = {A large annotated corpus for learning natural language inference},
-    Year = {2015}
+	Author = {Bowman, Samuel R. and Angeli, Gabor and Potts, Christopher, and Manning, Christopher D.},
+	Booktitle = {Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+	Publisher = {Association for Computational Linguistics},
+	Title = {A large annotated corpus for learning natural language inference},
+	Year = {2015}
 }
 ```
 
@@ -7763,7 +8153,8 @@ Stanford Question Answering Dataset (SQuAD) is a reading comprehension dataset, 
 `squad` is configured with `tfds.text.squad.SquadConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"plain_text"` (`v0.1.0`) (`Size: 33.51 MiB`): Plain text
+* `"plain_text"` (`v0.1.0`) (`Size: 33.51 MiB`): Plain text
+
 
 #### `"squad/plain_text"`
 
@@ -7779,6 +8170,9 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -7809,7 +8203,7 @@ archivePrefix = {arXiv},
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -7849,185 +8243,144 @@ This version fixes issues where the spans are not actually substrings of the tex
 
 ### `"super_glue"`
 
-The Winograd Schema Challenge (WSC, Levesque et al., 2012) is a reading
-comprehension task in which a system must read a sentence with a pronoun and
-select the referent of that pronoun from a list of choices. Given the difficulty
-of this task and the headroom still left, we have included WSC in SuperGLUE and
-recast the dataset into its coreference form. The task is cast as a binary
-classification problem, as opposed to N-multiple choice, in order to isolate the
-model's ability to understand the coreference links within a sentence as opposed
-to various other strategies that may come into play in multiple choice
-conditions. With that in mind, we create a split with 65% negative majority
-class in the validation set, reflecting the distribution of the hidden test set,
-and 52% negative class in the training set. The training and validation examples
-are drawn from the original Winograd Schema dataset (Levesque et al., 2012), as
-well as those distributed by the affiliated organization Commonsense Reasoning.
-The test examples are derived from fiction books and have been shared with us by
-the authors of the original dataset. Previously, a version of WSC recast as NLI
-as included in GLUE, known as WNLI. No substantial progress was made on WNLI,
-with many submissions opting to submit only majority class predictions. WNLI was
-made especially difficult due to an adversarial train/dev split: Premise
-sentences that appeared in the training set sometimes appeared in the
-development set with a different hypothesis and a flipped label. If a system
-memorized the training set without meaningfully generalizing, which was easy due
-to the small size of the training set, it could perform far below chance on the
-development set. We remove this adversarial design in the SuperGLUE version of
-WSC by ensuring that no sentences are shared between the training, validation,
-and test sets.
+The Winograd Schema Challenge (WSC, Levesque et al., 2012) is a reading comprehension
+task in which a system must read a sentence with a pronoun and select the referent of that pronoun
+from a list of choices. Given the difficulty of this task and the headroom still left, we have included
+WSC in SuperGLUE and recast the dataset into its coreference form. The task is cast as a binary
+classification problem, as opposed to N-multiple choice, in order to isolate the model's ability to
+understand the coreference links within a sentence as opposed to various other strategies that may
+come into play in multiple choice conditions. With that in mind, we create a split with 65% negative
+majority class in the validation set, reflecting the distribution of the hidden test set, and 52% negative
+class in the training set. The training and validation examples are drawn from the original Winograd
+Schema dataset (Levesque et al., 2012), as well as those distributed by the affiliated organization
+Commonsense Reasoning. The test examples are derived from fiction books and have been shared
+with us by the authors of the original dataset. Previously, a version of WSC recast as NLI as included
+in GLUE, known as WNLI. No substantial progress was made on WNLI, with many submissions
+opting to submit only majority class predictions. WNLI was made especially difficult due to an
+adversarial train/dev split: Premise sentences that appeared in the training set sometimes appeared
+in the development set with a different hypothesis and a flipped label. If a system memorized the
+training set without meaningfully generalizing, which was easy due to the small size of the training
+set, it could perform far below chance on the development set. We remove this adversarial design
+in the SuperGLUE version of WSC by ensuring that no sentences are shared between the training,
+validation, and test sets.
 
-However, the validation and test sets come from different domains, with the
-validation set consisting of ambiguous examples such that changing one non-noun
-phrase word will change the coreference dependencies in the sentence. The test
-set consists only of more straightforward examples, with a high number of noun
-phrases (and thus more choices for the model), but low to no ambiguity.
+However, the validation and test sets come from different domains, with the validation set consisting
+of ambiguous examples such that changing one non-noun phrase word will change the coreference
+dependencies in the sentence. The test set consists only of more straightforward examples, with a
+high number of noun phrases (and thus more choices for the model), but low to no ambiguity.
 
-This version fixes issues where the spans are not actually substrings of the
-text.
+This version fixes issues where the spans are not actually substrings of the text.
 
-*   URL:
-    [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-*   `DatasetBuilder`:
-    [`tfds.text.super_glue.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
+* URL: [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+* `DatasetBuilder`: [`tfds.text.super_glue.SuperGlue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/super_glue.py)
 
-`super_glue` is configured with `tfds.text.super_glue.SuperGlueConfig` and has
-the following configurations predefined (defaults to the first one):
+`super_glue` is configured with `tfds.text.super_glue.SuperGlueConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"cb"` (`v0.0.2`) (`Size: 73.56 KiB`): The CommitmentBank (De Marneffe et
-    al., 2019) is a corpus of short texts in which at least one sentence
-    contains an embedded clause. Each of these embedded clauses is annotated
-    with the degree to which we expect that the person who wrote the text is
-    committed to the truth of the clause. The resulting task framed as
-    three-class textual entailment on examples that are drawn from the Wall
-    Street Journal, fiction from the British National Corpus, and Switchboard.
-    Each example consists of a premise containing an embedded clause and the
-    corresponding hypothesis is the extraction of that clause. We use a subset
-    of the data that had inter-annotator agreement above 0.85. The data is
-    imbalanced (relatively fewer neutral examples), so we evaluate using
-    accuracy and F1, where for multi-class F1 we compute the unweighted average
-    of the F1 per class.
+* `"cb"` (`v0.0.2`) (`Size: 73.56 KiB`): The CommitmentBank (De Marneffe et al., 2019) is a corpus of short texts in which at least
+one sentence contains an embedded clause. Each of these embedded clauses is annotated with the
+degree to which we expect that the person who wrote the text is committed to the truth of the clause.
+The resulting task framed as three-class textual entailment on examples that are drawn from the Wall
+Street Journal, fiction from the British National Corpus, and Switchboard. Each example consists
+of a premise containing an embedded clause and the corresponding hypothesis is the extraction of
+that clause. We use a subset of the data that had inter-annotator agreement above 0.85. The data is
+imbalanced (relatively fewer neutral examples), so we evaluate using accuracy and F1, where for
+multi-class F1 we compute the unweighted average of the F1 per class.
 
-*   `"copa"` (`v0.0.2`) (`Size: 42.79 KiB`): The Choice Of Plausible
-    Alternatives (COPA, Roemmele et al., 2011) dataset is a causal reasoning
-    task in which a system is given a premise sentence and two possible
-    alternatives. The system must choose the alternative which has the more
-    plausible causal relationship with the premise. The method used for the
-    construction of the alternatives ensures that the task requires causal
-    reasoning to solve. Examples either deal with alternative possible causes or
-    alternative possible effects of the premise sentence, accompanied by a
-    simple question disambiguating between the two instance types for the model.
-    All examples are handcrafted and focus on topics from online blogs and a
-    photography-related encyclopedia. Following the recommendation of the
-    authors, we evaluate using accuracy.
+* `"copa"` (`v0.0.2`) (`Size: 42.79 KiB`): The Choice Of Plausible Alternatives (COPA, Roemmele et al., 2011) dataset is a causal
+reasoning task in which a system is given a premise sentence and two possible alternatives. The
+system must choose the alternative which has the more plausible causal relationship with the premise.
+The method used for the construction of the alternatives ensures that the task requires causal reasoning
+to solve. Examples either deal with alternative possible causes or alternative possible effects of the
+premise sentence, accompanied by a simple question disambiguating between the two instance
+types for the model. All examples are handcrafted and focus on topics from online blogs and a
+photography-related encyclopedia. Following the recommendation of the authors, we evaluate using
+accuracy.
 
-*   `"multirc"` (`v0.0.2`) (`Size: 1.16 MiB`): The Multi-Sentence Reading
-    Comprehension dataset (MultiRC, Khashabi et al., 2018) is a true/false
-    question-answering task. Each example consists of a context paragraph, a
-    question about that paragraph, and a list of possible answers to that
-    question which must be labeled as true or false. Question-answering (QA) is
-    a popular problem with many datasets. We use MultiRC because of a number of
-    desirable properties: (i) each question can have multiple possible correct
-    answers, so each question-answer pair must be evaluated independent of other
-    pairs, (ii) the questions are designed such that answering each question
-    requires drawing facts from multiple context sentences, and (iii) the
-    question-answer pair format more closely matches the API of other SuperGLUE
-    tasks than span-based extractive QA does. The paragraphs are drawn from
-    seven domains including news, fiction, and historical text.
+* `"multirc"` (`v0.0.2`) (`Size: 1.16 MiB`): The Multi-Sentence Reading Comprehension dataset (MultiRC, Khashabi et al., 2018)
+is a true/false question-answering task. Each example consists of a context paragraph, a question
+about that paragraph, and a list of possible answers to that question which must be labeled as true or
+false. Question-answering (QA) is a popular problem with many datasets. We use MultiRC because
+of a number of desirable properties: (i) each question can have multiple possible correct answers,
+so each question-answer pair must be evaluated independent of other pairs, (ii) the questions are
+designed such that answering each question requires drawing facts from multiple context sentences,
+and (iii) the question-answer pair format more closely matches the API of other SuperGLUE tasks
+than span-based extractive QA does. The paragraphs are drawn from seven domains including news,
+fiction, and historical text.
 
-*   `"rte"` (`v0.0.2`) (`Size: 733.16 KiB`): The Recognizing Textual Entailment
-    (RTE) datasets come from a series of annual competitions on textual
-    entailment, the problem of predicting whether a given premise sentence
-    entails a given hypothesis sentence (also known as natural language
-    inference, NLI). RTE was previously included in GLUE, and we use the same
-    data and format as before: We merge data from RTE1 (Dagan et al., 2006),
-    RTE2 (Bar Haim et al., 2006), RTE3 (Giampiccolo et al., 2007), and RTE5
-    (Bentivogli et al., 2009). All datasets are combined and converted to
-    two-class classification: entailment and not_entailment. Of all the GLUE
-    tasks, RTE was among those that benefited from transfer learning the most,
-    jumping from near random-chance performance (~56%) at the time of GLUE's
-    launch to 85% accuracy (Liu et al., 2019c) at the time of writing. Given the
-    eight point gap with respect to human performance, however, the task is not
-    yet solved by machines, and we expect the remaining gap to be difficult to
-    close.
+* `"rte"` (`v0.0.2`) (`Size: 733.16 KiB`): The Recognizing Textual Entailment (RTE) datasets come from a series of annual competitions
+on textual entailment, the problem of predicting whether a given premise sentence entails a given
+hypothesis sentence (also known as natural language inference, NLI). RTE was previously included
+in GLUE, and we use the same data and format as before: We merge data from RTE1 (Dagan
+et al., 2006), RTE2 (Bar Haim et al., 2006), RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli
+et al., 2009). All datasets are combined and converted to two-class classification: entailment and
+not_entailment. Of all the GLUE tasks, RTE was among those that benefited from transfer learning
+the most, jumping from near random-chance performance (~56%) at the time of GLUE's launch to
+85% accuracy (Liu et al., 2019c) at the time of writing. Given the eight point gap with respect to
+human performance, however, the task is not yet solved by machines, and we expect the remaining
+gap to be difficult to close.
 
-*   `"wic"` (`v0.0.2`) (`Size: 347.15 KiB`): The Word-in-Context (WiC, Pilehvar
-    and Camacho-Collados, 2019) dataset supports a word sense disambiguation
-    task cast as binary classification over sentence pairs. Given two sentences
-    and a polysemous (sense-ambiguous) word that appears in both sentences, the
-    task is to determine whether the word is used with the same sense in both
-    sentences. Sentences are drawn from WordNet (Miller, 1995), VerbNet
-    (Schuler, 2005), and Wiktionary. We follow the original work and evaluate
-    using accuracy.
+* `"wic"` (`v0.0.2`) (`Size: 347.15 KiB`): The Word-in-Context (WiC, Pilehvar and Camacho-Collados, 2019) dataset supports a word
+sense disambiguation task cast as binary classification over sentence pairs. Given two sentences and a
+polysemous (sense-ambiguous) word that appears in both sentences, the task is to determine whether
+the word is used with the same sense in both sentences. Sentences are drawn from WordNet (Miller,
+1995), VerbNet (Schuler, 2005), and Wiktionary. We follow the original work and evaluate using
+accuracy.
 
-*   `"wsc"` (`v0.0.2`) (`Size: 31.84 KiB`): The Winograd Schema Challenge (WSC,
-    Levesque et al., 2012) is a reading comprehension task in which a system
-    must read a sentence with a pronoun and select the referent of that pronoun
-    from a list of choices. Given the difficulty of this task and the headroom
-    still left, we have included WSC in SuperGLUE and recast the dataset into
-    its coreference form. The task is cast as a binary classification problem,
-    as opposed to N-multiple choice, in order to isolate the model's ability to
-    understand the coreference links within a sentence as opposed to various
-    other strategies that may come into play in multiple choice conditions. With
-    that in mind, we create a split with 65% negative majority class in the
-    validation set, reflecting the distribution of the hidden test set, and 52%
-    negative class in the training set. The training and validation examples are
-    drawn from the original Winograd Schema dataset (Levesque et al., 2012), as
-    well as those distributed by the affiliated organization Commonsense
-    Reasoning. The test examples are derived from fiction books and have been
-    shared with us by the authors of the original dataset. Previously, a version
-    of WSC recast as NLI as included in GLUE, known as WNLI. No substantial
-    progress was made on WNLI, with many submissions opting to submit only
-    majority class predictions. WNLI was made especially difficult due to an
-    adversarial train/dev split: Premise sentences that appeared in the training
-    set sometimes appeared in the development set with a different hypothesis
-    and a flipped label. If a system memorized the training set without
-    meaningfully generalizing, which was easy due to the small size of the
-    training set, it could perform far below chance on the development set. We
-    remove this adversarial design in the SuperGLUE version of WSC by ensuring
-    that no sentences are shared between the training, validation, and test
-    sets.
+* `"wsc"` (`v0.0.2`) (`Size: 31.84 KiB`): The Winograd Schema Challenge (WSC, Levesque et al., 2012) is a reading comprehension
+task in which a system must read a sentence with a pronoun and select the referent of that pronoun
+from a list of choices. Given the difficulty of this task and the headroom still left, we have included
+WSC in SuperGLUE and recast the dataset into its coreference form. The task is cast as a binary
+classification problem, as opposed to N-multiple choice, in order to isolate the model's ability to
+understand the coreference links within a sentence as opposed to various other strategies that may
+come into play in multiple choice conditions. With that in mind, we create a split with 65% negative
+majority class in the validation set, reflecting the distribution of the hidden test set, and 52% negative
+class in the training set. The training and validation examples are drawn from the original Winograd
+Schema dataset (Levesque et al., 2012), as well as those distributed by the affiliated organization
+Commonsense Reasoning. The test examples are derived from fiction books and have been shared
+with us by the authors of the original dataset. Previously, a version of WSC recast as NLI as included
+in GLUE, known as WNLI. No substantial progress was made on WNLI, with many submissions
+opting to submit only majority class predictions. WNLI was made especially difficult due to an
+adversarial train/dev split: Premise sentences that appeared in the training set sometimes appeared
+in the development set with a different hypothesis and a flipped label. If a system memorized the
+training set without meaningfully generalizing, which was easy due to the small size of the training
+set, it could perform far below chance on the development set. We remove this adversarial design
+in the SuperGLUE version of WSC by ensuring that no sentences are shared between the training,
+validation, and test sets.
 
-However, the validation and test sets come from different domains, with the
-validation set consisting of ambiguous examples such that changing one non-noun
-phrase word will change the coreference dependencies in the sentence. The test
-set consists only of more straightforward examples, with a high number of noun
-phrases (and thus more choices for the model), but low to no ambiguity.
+However, the validation and test sets come from different domains, with the validation set consisting
+of ambiguous examples such that changing one non-noun phrase word will change the coreference
+dependencies in the sentence. The test set consists only of more straightforward examples, with a
+high number of noun phrases (and thus more choices for the model), but low to no ambiguity.
 
-*   `"wsc.fixed"` (`v0.0.2`) (`Size: 31.84 KiB`): The Winograd Schema Challenge
-    (WSC, Levesque et al., 2012) is a reading comprehension task in which a
-    system must read a sentence with a pronoun and select the referent of that
-    pronoun from a list of choices. Given the difficulty of this task and the
-    headroom still left, we have included WSC in SuperGLUE and recast the
-    dataset into its coreference form. The task is cast as a binary
-    classification problem, as opposed to N-multiple choice, in order to isolate
-    the model's ability to understand the coreference links within a sentence as
-    opposed to various other strategies that may come into play in multiple
-    choice conditions. With that in mind, we create a split with 65% negative
-    majority class in the validation set, reflecting the distribution of the
-    hidden test set, and 52% negative class in the training set. The training
-    and validation examples are drawn from the original Winograd Schema dataset
-    (Levesque et al., 2012), as well as those distributed by the affiliated
-    organization Commonsense Reasoning. The test examples are derived from
-    fiction books and have been shared with us by the authors of the original
-    dataset. Previously, a version of WSC recast as NLI as included in GLUE,
-    known as WNLI. No substantial progress was made on WNLI, with many
-    submissions opting to submit only majority class predictions. WNLI was made
-    especially difficult due to an adversarial train/dev split: Premise
-    sentences that appeared in the training set sometimes appeared in the
-    development set with a different hypothesis and a flipped label. If a system
-    memorized the training set without meaningfully generalizing, which was easy
-    due to the small size of the training set, it could perform far below chance
-    on the development set. We remove this adversarial design in the SuperGLUE
-    version of WSC by ensuring that no sentences are shared between the
-    training, validation, and test sets.
+* `"wsc.fixed"` (`v0.0.2`) (`Size: 31.84 KiB`): The Winograd Schema Challenge (WSC, Levesque et al., 2012) is a reading comprehension
+task in which a system must read a sentence with a pronoun and select the referent of that pronoun
+from a list of choices. Given the difficulty of this task and the headroom still left, we have included
+WSC in SuperGLUE and recast the dataset into its coreference form. The task is cast as a binary
+classification problem, as opposed to N-multiple choice, in order to isolate the model's ability to
+understand the coreference links within a sentence as opposed to various other strategies that may
+come into play in multiple choice conditions. With that in mind, we create a split with 65% negative
+majority class in the validation set, reflecting the distribution of the hidden test set, and 52% negative
+class in the training set. The training and validation examples are drawn from the original Winograd
+Schema dataset (Levesque et al., 2012), as well as those distributed by the affiliated organization
+Commonsense Reasoning. The test examples are derived from fiction books and have been shared
+with us by the authors of the original dataset. Previously, a version of WSC recast as NLI as included
+in GLUE, known as WNLI. No substantial progress was made on WNLI, with many submissions
+opting to submit only majority class predictions. WNLI was made especially difficult due to an
+adversarial train/dev split: Premise sentences that appeared in the training set sometimes appeared
+in the development set with a different hypothesis and a flipped label. If a system memorized the
+training set without meaningfully generalizing, which was easy due to the small size of the training
+set, it could perform far below chance on the development set. We remove this adversarial design
+in the SuperGLUE version of WSC by ensuring that no sentences are shared between the training,
+validation, and test sets.
 
-However, the validation and test sets come from different domains, with the
-validation set consisting of ambiguous examples such that changing one non-noun
-phrase word will change the coreference dependencies in the sentence. The test
-set consists only of more straightforward examples, with a high number of noun
-phrases (and thus more choices for the model), but low to no ambiguity.
+However, the validation and test sets come from different domains, with the validation set consisting
+of ambiguous examples such that changing one non-noun phrase word will change the coreference
+dependencies in the sentence. The test set consists only of more straightforward examples, with a
+high number of noun phrases (and thus more choices for the model), but low to no ambiguity.
 
-This version fixes issues where the spans are not actually substrings of the
-text.
+This version fixes issues where the spans are not actually substrings of the text.
+
 
 #### `"super_glue/cb"`
 
@@ -8039,6 +8392,8 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"super_glue/copa"`
 
@@ -8052,6 +8407,8 @@ FeaturesDict({
     'question': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"super_glue/multirc"`
 
@@ -8069,6 +8426,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"super_glue/rte"`
 
 ```python
@@ -8079,6 +8438,8 @@ FeaturesDict({
     'premise': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"super_glue/wic"`
 
@@ -8092,6 +8453,8 @@ FeaturesDict({
     'word': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"super_glue/wsc"`
 
@@ -8107,6 +8470,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"super_glue/wsc.fixed"`
 
 ```python
@@ -8121,19 +8486,21 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 804
-TRAIN      | 554
-TEST       | 146
-VALIDATION | 104
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |        804
+TRAIN      |        554
+TEST       |        146
+VALIDATION |        104
+
 
 #### Urls
-
-*   [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
+ * [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
+ * [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
@@ -8157,7 +8524,7 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -8176,17 +8543,16 @@ supervision for answering the questions." />
 ### `"trivia_qa"`
 
 TriviaqQA is a reading comprehension dataset containing over 650K
-question-answer-evidence triples. TriviaqQA includes 95K question-answer pairs
-authored by trivia enthusiasts and independently gathered evidence documents,
-six per question on average, that provide high quality distant supervision for
-answering the questions.
+question-answer-evidence triples. TriviaqQA includes 95K question-answer
+pairs authored by trivia enthusiasts and independently gathered evidence
+documents, six per question on average, that provide high quality distant
+supervision for answering the questions.
 
-*   URL:
-    [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
-*   `DatasetBuilder`:
-    [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
-*   Version: `v0.1.0`
-*   Size: `?? GiB`
+
+* URL: [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
+* `DatasetBuilder`: [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
+* Version: `v0.1.0`
+* Size: `2.48 GiB`
 
 #### Features
 ```python
@@ -8220,12 +8586,17 @@ FeaturesDict({
 })
 ```
 
+
 #### Statistics
-None computed
+Split  | Examples
+:----- | ---:
+ALL        |    155,594
+TRAIN      |    138,384
+TEST       |     17,210
+
 
 #### Urls
-
-*   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
+ * [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
@@ -8267,911 +8638,610 @@ Wikipedia dataset containing cleaned articles of all languages. The datasets are
 `wikipedia` is configured with `tfds.text.wikipedia.WikipediaConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"20190301.aa"` (`v0.0.2`) (`Size: 44.09 KiB`): Wikipedia dataset for aa,
-    parsed from 20190301 dump.
+* `"20190301.aa"` (`v0.0.2`) (`Size: 44.09 KiB`): Wikipedia dataset for aa, parsed from 20190301 dump.
 
-*   `"20190301.ab"` (`v0.0.2`) (`Size: 1.31 MiB`): Wikipedia dataset for ab,
-    parsed from 20190301 dump.
+* `"20190301.ab"` (`v0.0.2`) (`Size: 1.31 MiB`): Wikipedia dataset for ab, parsed from 20190301 dump.
 
-*   `"20190301.ace"` (`v0.0.2`) (`Size: 2.66 MiB`): Wikipedia dataset for ace,
-    parsed from 20190301 dump.
+* `"20190301.ace"` (`v0.0.2`) (`Size: 2.66 MiB`): Wikipedia dataset for ace, parsed from 20190301 dump.
 
-*   `"20190301.ady"` (`v0.0.2`) (`Size: 349.43 KiB`): Wikipedia dataset for ady,
-    parsed from 20190301 dump.
+* `"20190301.ady"` (`v0.0.2`) (`Size: 349.43 KiB`): Wikipedia dataset for ady, parsed from 20190301 dump.
 
-*   `"20190301.af"` (`v0.0.2`) (`Size: 84.13 MiB`): Wikipedia dataset for af,
-    parsed from 20190301 dump.
+* `"20190301.af"` (`v0.0.2`) (`Size: 84.13 MiB`): Wikipedia dataset for af, parsed from 20190301 dump.
 
-*   `"20190301.ak"` (`v0.0.2`) (`Size: 377.84 KiB`): Wikipedia dataset for ak,
-    parsed from 20190301 dump.
+* `"20190301.ak"` (`v0.0.2`) (`Size: 377.84 KiB`): Wikipedia dataset for ak, parsed from 20190301 dump.
 
-*   `"20190301.als"` (`v0.0.2`) (`Size: 46.90 MiB`): Wikipedia dataset for als,
-    parsed from 20190301 dump.
+* `"20190301.als"` (`v0.0.2`) (`Size: 46.90 MiB`): Wikipedia dataset for als, parsed from 20190301 dump.
 
-*   `"20190301.am"` (`v0.0.2`) (`Size: 6.54 MiB`): Wikipedia dataset for am,
-    parsed from 20190301 dump.
+* `"20190301.am"` (`v0.0.2`) (`Size: 6.54 MiB`): Wikipedia dataset for am, parsed from 20190301 dump.
 
-*   `"20190301.an"` (`v0.0.2`) (`Size: 31.39 MiB`): Wikipedia dataset for an,
-    parsed from 20190301 dump.
+* `"20190301.an"` (`v0.0.2`) (`Size: 31.39 MiB`): Wikipedia dataset for an, parsed from 20190301 dump.
 
-*   `"20190301.ang"` (`v0.0.2`) (`Size: 3.77 MiB`): Wikipedia dataset for ang,
-    parsed from 20190301 dump.
+* `"20190301.ang"` (`v0.0.2`) (`Size: 3.77 MiB`): Wikipedia dataset for ang, parsed from 20190301 dump.
 
-*   `"20190301.ar"` (`v0.0.2`) (`Size: 805.82 MiB`): Wikipedia dataset for ar,
-    parsed from 20190301 dump.
+* `"20190301.ar"` (`v0.0.2`) (`Size: 805.82 MiB`): Wikipedia dataset for ar, parsed from 20190301 dump.
 
-*   `"20190301.arc"` (`v0.0.2`) (`Size: 952.49 KiB`): Wikipedia dataset for arc,
-    parsed from 20190301 dump.
+* `"20190301.arc"` (`v0.0.2`) (`Size: 952.49 KiB`): Wikipedia dataset for arc, parsed from 20190301 dump.
 
-*   `"20190301.arz"` (`v0.0.2`) (`Size: 20.32 MiB`): Wikipedia dataset for arz,
-    parsed from 20190301 dump.
+* `"20190301.arz"` (`v0.0.2`) (`Size: 20.32 MiB`): Wikipedia dataset for arz, parsed from 20190301 dump.
 
-*   `"20190301.as"` (`v0.0.2`) (`Size: 19.06 MiB`): Wikipedia dataset for as,
-    parsed from 20190301 dump.
+* `"20190301.as"` (`v0.0.2`) (`Size: 19.06 MiB`): Wikipedia dataset for as, parsed from 20190301 dump.
 
-*   `"20190301.ast"` (`v0.0.2`) (`Size: 216.68 MiB`): Wikipedia dataset for ast,
-    parsed from 20190301 dump.
+* `"20190301.ast"` (`v0.0.2`) (`Size: 216.68 MiB`): Wikipedia dataset for ast, parsed from 20190301 dump.
 
-*   `"20190301.atj"` (`v0.0.2`) (`Size: 467.05 KiB`): Wikipedia dataset for atj,
-    parsed from 20190301 dump.
+* `"20190301.atj"` (`v0.0.2`) (`Size: 467.05 KiB`): Wikipedia dataset for atj, parsed from 20190301 dump.
 
-*   `"20190301.av"` (`v0.0.2`) (`Size: 3.61 MiB`): Wikipedia dataset for av,
-    parsed from 20190301 dump.
+* `"20190301.av"` (`v0.0.2`) (`Size: 3.61 MiB`): Wikipedia dataset for av, parsed from 20190301 dump.
 
-*   `"20190301.ay"` (`v0.0.2`) (`Size: 2.06 MiB`): Wikipedia dataset for ay,
-    parsed from 20190301 dump.
+* `"20190301.ay"` (`v0.0.2`) (`Size: 2.06 MiB`): Wikipedia dataset for ay, parsed from 20190301 dump.
 
-*   `"20190301.az"` (`v0.0.2`) (`Size: 163.04 MiB`): Wikipedia dataset for az,
-    parsed from 20190301 dump.
+* `"20190301.az"` (`v0.0.2`) (`Size: 163.04 MiB`): Wikipedia dataset for az, parsed from 20190301 dump.
 
-*   `"20190301.azb"` (`v0.0.2`) (`Size: 50.59 MiB`): Wikipedia dataset for azb,
-    parsed from 20190301 dump.
+* `"20190301.azb"` (`v0.0.2`) (`Size: 50.59 MiB`): Wikipedia dataset for azb, parsed from 20190301 dump.
 
-*   `"20190301.ba"` (`v0.0.2`) (`Size: 55.04 MiB`): Wikipedia dataset for ba,
-    parsed from 20190301 dump.
+* `"20190301.ba"` (`v0.0.2`) (`Size: 55.04 MiB`): Wikipedia dataset for ba, parsed from 20190301 dump.
 
-*   `"20190301.bar"` (`v0.0.2`) (`Size: 30.14 MiB`): Wikipedia dataset for bar,
-    parsed from 20190301 dump.
+* `"20190301.bar"` (`v0.0.2`) (`Size: 30.14 MiB`): Wikipedia dataset for bar, parsed from 20190301 dump.
 
-*   `"20190301.bat-smg"` (`v0.0.2`) (`Size: 4.61 MiB`): Wikipedia dataset for
-    bat-smg, parsed from 20190301 dump.
+* `"20190301.bat-smg"` (`v0.0.2`) (`Size: 4.61 MiB`): Wikipedia dataset for bat-smg, parsed from 20190301 dump.
 
-*   `"20190301.bcl"` (`v0.0.2`) (`Size: 6.18 MiB`): Wikipedia dataset for bcl,
-    parsed from 20190301 dump.
+* `"20190301.bcl"` (`v0.0.2`) (`Size: 6.18 MiB`): Wikipedia dataset for bcl, parsed from 20190301 dump.
 
-*   `"20190301.be"` (`v0.0.2`) (`Size: 192.23 MiB`): Wikipedia dataset for be,
-    parsed from 20190301 dump.
+* `"20190301.be"` (`v0.0.2`) (`Size: 192.23 MiB`): Wikipedia dataset for be, parsed from 20190301 dump.
 
-*   `"20190301.be-x-old"` (`v0.0.2`) (`Size: 74.77 MiB`): Wikipedia dataset for
-    be-x-old, parsed from 20190301 dump.
+* `"20190301.be-x-old"` (`v0.0.2`) (`Size: 74.77 MiB`): Wikipedia dataset for be-x-old, parsed from 20190301 dump.
 
-*   `"20190301.bg"` (`v0.0.2`) (`Size: 326.20 MiB`): Wikipedia dataset for bg,
-    parsed from 20190301 dump.
+* `"20190301.bg"` (`v0.0.2`) (`Size: 326.20 MiB`): Wikipedia dataset for bg, parsed from 20190301 dump.
 
-*   `"20190301.bh"` (`v0.0.2`) (`Size: 13.28 MiB`): Wikipedia dataset for bh,
-    parsed from 20190301 dump.
+* `"20190301.bh"` (`v0.0.2`) (`Size: 13.28 MiB`): Wikipedia dataset for bh, parsed from 20190301 dump.
 
-*   `"20190301.bi"` (`v0.0.2`) (`Size: 424.88 KiB`): Wikipedia dataset for bi,
-    parsed from 20190301 dump.
+* `"20190301.bi"` (`v0.0.2`) (`Size: 424.88 KiB`): Wikipedia dataset for bi, parsed from 20190301 dump.
 
-*   `"20190301.bjn"` (`v0.0.2`) (`Size: 2.09 MiB`): Wikipedia dataset for bjn,
-    parsed from 20190301 dump.
+* `"20190301.bjn"` (`v0.0.2`) (`Size: 2.09 MiB`): Wikipedia dataset for bjn, parsed from 20190301 dump.
 
-*   `"20190301.bm"` (`v0.0.2`) (`Size: 447.98 KiB`): Wikipedia dataset for bm,
-    parsed from 20190301 dump.
+* `"20190301.bm"` (`v0.0.2`) (`Size: 447.98 KiB`): Wikipedia dataset for bm, parsed from 20190301 dump.
 
-*   `"20190301.bn"` (`v0.0.2`) (`Size: 145.04 MiB`): Wikipedia dataset for bn,
-    parsed from 20190301 dump.
+* `"20190301.bn"` (`v0.0.2`) (`Size: 145.04 MiB`): Wikipedia dataset for bn, parsed from 20190301 dump.
 
-*   `"20190301.bo"` (`v0.0.2`) (`Size: 12.41 MiB`): Wikipedia dataset for bo,
-    parsed from 20190301 dump.
+* `"20190301.bo"` (`v0.0.2`) (`Size: 12.41 MiB`): Wikipedia dataset for bo, parsed from 20190301 dump.
 
-*   `"20190301.bpy"` (`v0.0.2`) (`Size: 5.05 MiB`): Wikipedia dataset for bpy,
-    parsed from 20190301 dump.
+* `"20190301.bpy"` (`v0.0.2`) (`Size: 5.05 MiB`): Wikipedia dataset for bpy, parsed from 20190301 dump.
 
-*   `"20190301.br"` (`v0.0.2`) (`Size: 49.14 MiB`): Wikipedia dataset for br,
-    parsed from 20190301 dump.
+* `"20190301.br"` (`v0.0.2`) (`Size: 49.14 MiB`): Wikipedia dataset for br, parsed from 20190301 dump.
 
-*   `"20190301.bs"` (`v0.0.2`) (`Size: 103.26 MiB`): Wikipedia dataset for bs,
-    parsed from 20190301 dump.
+* `"20190301.bs"` (`v0.0.2`) (`Size: 103.26 MiB`): Wikipedia dataset for bs, parsed from 20190301 dump.
 
-*   `"20190301.bug"` (`v0.0.2`) (`Size: 1.76 MiB`): Wikipedia dataset for bug,
-    parsed from 20190301 dump.
+* `"20190301.bug"` (`v0.0.2`) (`Size: 1.76 MiB`): Wikipedia dataset for bug, parsed from 20190301 dump.
 
-*   `"20190301.bxr"` (`v0.0.2`) (`Size: 3.21 MiB`): Wikipedia dataset for bxr,
-    parsed from 20190301 dump.
+* `"20190301.bxr"` (`v0.0.2`) (`Size: 3.21 MiB`): Wikipedia dataset for bxr, parsed from 20190301 dump.
 
-*   `"20190301.ca"` (`v0.0.2`) (`Size: 849.65 MiB`): Wikipedia dataset for ca,
-    parsed from 20190301 dump.
+* `"20190301.ca"` (`v0.0.2`) (`Size: 849.65 MiB`): Wikipedia dataset for ca, parsed from 20190301 dump.
 
-*   `"20190301.cbk-zam"` (`v0.0.2`) (`Size: 1.84 MiB`): Wikipedia dataset for
-    cbk-zam, parsed from 20190301 dump.
+* `"20190301.cbk-zam"` (`v0.0.2`) (`Size: 1.84 MiB`): Wikipedia dataset for cbk-zam, parsed from 20190301 dump.
 
-*   `"20190301.cdo"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for cdo,
-    parsed from 20190301 dump.
+* `"20190301.cdo"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for cdo, parsed from 20190301 dump.
 
-*   `"20190301.ce"` (`v0.0.2`) (`Size: 43.89 MiB`): Wikipedia dataset for ce,
-    parsed from 20190301 dump.
+* `"20190301.ce"` (`v0.0.2`) (`Size: 43.89 MiB`): Wikipedia dataset for ce, parsed from 20190301 dump.
 
-*   `"20190301.ceb"` (`v0.0.2`) (`Size: 1.79 GiB`): Wikipedia dataset for ceb,
-    parsed from 20190301 dump.
+* `"20190301.ceb"` (`v0.0.2`) (`Size: 1.79 GiB`): Wikipedia dataset for ceb, parsed from 20190301 dump.
 
-*   `"20190301.ch"` (`v0.0.2`) (`Size: 684.97 KiB`): Wikipedia dataset for ch,
-    parsed from 20190301 dump.
+* `"20190301.ch"` (`v0.0.2`) (`Size: 684.97 KiB`): Wikipedia dataset for ch, parsed from 20190301 dump.
 
-*   `"20190301.cho"` (`v0.0.2`) (`Size: 25.99 KiB`): Wikipedia dataset for cho,
-    parsed from 20190301 dump.
+* `"20190301.cho"` (`v0.0.2`) (`Size: 25.99 KiB`): Wikipedia dataset for cho, parsed from 20190301 dump.
 
-*   `"20190301.chr"` (`v0.0.2`) (`Size: 651.25 KiB`): Wikipedia dataset for chr,
-    parsed from 20190301 dump.
+* `"20190301.chr"` (`v0.0.2`) (`Size: 651.25 KiB`): Wikipedia dataset for chr, parsed from 20190301 dump.
 
-*   `"20190301.chy"` (`v0.0.2`) (`Size: 325.90 KiB`): Wikipedia dataset for chy,
-    parsed from 20190301 dump.
+* `"20190301.chy"` (`v0.0.2`) (`Size: 325.90 KiB`): Wikipedia dataset for chy, parsed from 20190301 dump.
 
-*   `"20190301.ckb"` (`v0.0.2`) (`Size: 22.16 MiB`): Wikipedia dataset for ckb,
-    parsed from 20190301 dump.
+* `"20190301.ckb"` (`v0.0.2`) (`Size: 22.16 MiB`): Wikipedia dataset for ckb, parsed from 20190301 dump.
 
-*   `"20190301.co"` (`v0.0.2`) (`Size: 3.38 MiB`): Wikipedia dataset for co,
-    parsed from 20190301 dump.
+* `"20190301.co"` (`v0.0.2`) (`Size: 3.38 MiB`): Wikipedia dataset for co, parsed from 20190301 dump.
 
-*   `"20190301.cr"` (`v0.0.2`) (`Size: 259.71 KiB`): Wikipedia dataset for cr,
-    parsed from 20190301 dump.
+* `"20190301.cr"` (`v0.0.2`) (`Size: 259.71 KiB`): Wikipedia dataset for cr, parsed from 20190301 dump.
 
-*   `"20190301.crh"` (`v0.0.2`) (`Size: 4.01 MiB`): Wikipedia dataset for crh,
-    parsed from 20190301 dump.
+* `"20190301.crh"` (`v0.0.2`) (`Size: 4.01 MiB`): Wikipedia dataset for crh, parsed from 20190301 dump.
 
-*   `"20190301.cs"` (`v0.0.2`) (`Size: 759.21 MiB`): Wikipedia dataset for cs,
-    parsed from 20190301 dump.
+* `"20190301.cs"` (`v0.0.2`) (`Size: 759.21 MiB`): Wikipedia dataset for cs, parsed from 20190301 dump.
 
-*   `"20190301.csb"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for csb,
-    parsed from 20190301 dump.
+* `"20190301.csb"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for csb, parsed from 20190301 dump.
 
-*   `"20190301.cu"` (`v0.0.2`) (`Size: 631.49 KiB`): Wikipedia dataset for cu,
-    parsed from 20190301 dump.
+* `"20190301.cu"` (`v0.0.2`) (`Size: 631.49 KiB`): Wikipedia dataset for cu, parsed from 20190301 dump.
 
-*   `"20190301.cv"` (`v0.0.2`) (`Size: 22.23 MiB`): Wikipedia dataset for cv,
-    parsed from 20190301 dump.
+* `"20190301.cv"` (`v0.0.2`) (`Size: 22.23 MiB`): Wikipedia dataset for cv, parsed from 20190301 dump.
 
-*   `"20190301.cy"` (`v0.0.2`) (`Size: 64.37 MiB`): Wikipedia dataset for cy,
-    parsed from 20190301 dump.
+* `"20190301.cy"` (`v0.0.2`) (`Size: 64.37 MiB`): Wikipedia dataset for cy, parsed from 20190301 dump.
 
-*   `"20190301.da"` (`v0.0.2`) (`Size: 323.53 MiB`): Wikipedia dataset for da,
-    parsed from 20190301 dump.
+* `"20190301.da"` (`v0.0.2`) (`Size: 323.53 MiB`): Wikipedia dataset for da, parsed from 20190301 dump.
 
-*   `"20190301.de"` (`v0.0.2`) (`Size: 4.97 GiB`): Wikipedia dataset for de,
-    parsed from 20190301 dump.
+* `"20190301.de"` (`v0.0.2`) (`Size: 4.97 GiB`): Wikipedia dataset for de, parsed from 20190301 dump.
 
-*   `"20190301.din"` (`v0.0.2`) (`Size: 457.06 KiB`): Wikipedia dataset for din,
-    parsed from 20190301 dump.
+* `"20190301.din"` (`v0.0.2`) (`Size: 457.06 KiB`): Wikipedia dataset for din, parsed from 20190301 dump.
 
-*   `"20190301.diq"` (`v0.0.2`) (`Size: 7.24 MiB`): Wikipedia dataset for diq,
-    parsed from 20190301 dump.
+* `"20190301.diq"` (`v0.0.2`) (`Size: 7.24 MiB`): Wikipedia dataset for diq, parsed from 20190301 dump.
 
-*   `"20190301.dsb"` (`v0.0.2`) (`Size: 3.54 MiB`): Wikipedia dataset for dsb,
-    parsed from 20190301 dump.
+* `"20190301.dsb"` (`v0.0.2`) (`Size: 3.54 MiB`): Wikipedia dataset for dsb, parsed from 20190301 dump.
 
-*   `"20190301.dty"` (`v0.0.2`) (`Size: 4.95 MiB`): Wikipedia dataset for dty,
-    parsed from 20190301 dump.
+* `"20190301.dty"` (`v0.0.2`) (`Size: 4.95 MiB`): Wikipedia dataset for dty, parsed from 20190301 dump.
 
-*   `"20190301.dv"` (`v0.0.2`) (`Size: 4.24 MiB`): Wikipedia dataset for dv,
-    parsed from 20190301 dump.
+* `"20190301.dv"` (`v0.0.2`) (`Size: 4.24 MiB`): Wikipedia dataset for dv, parsed from 20190301 dump.
 
-*   `"20190301.dz"` (`v0.0.2`) (`Size: 360.01 KiB`): Wikipedia dataset for dz,
-    parsed from 20190301 dump.
+* `"20190301.dz"` (`v0.0.2`) (`Size: 360.01 KiB`): Wikipedia dataset for dz, parsed from 20190301 dump.
 
-*   `"20190301.ee"` (`v0.0.2`) (`Size: 434.14 KiB`): Wikipedia dataset for ee,
-    parsed from 20190301 dump.
+* `"20190301.ee"` (`v0.0.2`) (`Size: 434.14 KiB`): Wikipedia dataset for ee, parsed from 20190301 dump.
 
-*   `"20190301.el"` (`v0.0.2`) (`Size: 324.40 MiB`): Wikipedia dataset for el,
-    parsed from 20190301 dump.
+* `"20190301.el"` (`v0.0.2`) (`Size: 324.40 MiB`): Wikipedia dataset for el, parsed from 20190301 dump.
 
-*   `"20190301.eml"` (`v0.0.2`) (`Size: 7.72 MiB`): Wikipedia dataset for eml,
-    parsed from 20190301 dump.
+* `"20190301.eml"` (`v0.0.2`) (`Size: 7.72 MiB`): Wikipedia dataset for eml, parsed from 20190301 dump.
 
-*   `"20190301.en"` (`v0.0.2`) (`Size: 15.72 GiB`): Wikipedia dataset for en,
-    parsed from 20190301 dump.
+* `"20190301.en"` (`v0.0.2`) (`Size: 15.72 GiB`): Wikipedia dataset for en, parsed from 20190301 dump.
 
-*   `"20190301.eo"` (`v0.0.2`) (`Size: 245.73 MiB`): Wikipedia dataset for eo,
-    parsed from 20190301 dump.
+* `"20190301.eo"` (`v0.0.2`) (`Size: 245.73 MiB`): Wikipedia dataset for eo, parsed from 20190301 dump.
 
-*   `"20190301.es"` (`v0.0.2`) (`Size: 2.93 GiB`): Wikipedia dataset for es,
-    parsed from 20190301 dump.
+* `"20190301.es"` (`v0.0.2`) (`Size: 2.93 GiB`): Wikipedia dataset for es, parsed from 20190301 dump.
 
-*   `"20190301.et"` (`v0.0.2`) (`Size: 196.03 MiB`): Wikipedia dataset for et,
-    parsed from 20190301 dump.
+* `"20190301.et"` (`v0.0.2`) (`Size: 196.03 MiB`): Wikipedia dataset for et, parsed from 20190301 dump.
 
-*   `"20190301.eu"` (`v0.0.2`) (`Size: 180.35 MiB`): Wikipedia dataset for eu,
-    parsed from 20190301 dump.
+* `"20190301.eu"` (`v0.0.2`) (`Size: 180.35 MiB`): Wikipedia dataset for eu, parsed from 20190301 dump.
 
-*   `"20190301.ext"` (`v0.0.2`) (`Size: 2.40 MiB`): Wikipedia dataset for ext,
-    parsed from 20190301 dump.
+* `"20190301.ext"` (`v0.0.2`) (`Size: 2.40 MiB`): Wikipedia dataset for ext, parsed from 20190301 dump.
 
-*   `"20190301.fa"` (`v0.0.2`) (`Size: 693.84 MiB`): Wikipedia dataset for fa,
-    parsed from 20190301 dump.
+* `"20190301.fa"` (`v0.0.2`) (`Size: 693.84 MiB`): Wikipedia dataset for fa, parsed from 20190301 dump.
 
-*   `"20190301.ff"` (`v0.0.2`) (`Size: 387.75 KiB`): Wikipedia dataset for ff,
-    parsed from 20190301 dump.
+* `"20190301.ff"` (`v0.0.2`) (`Size: 387.75 KiB`): Wikipedia dataset for ff, parsed from 20190301 dump.
 
-*   `"20190301.fi"` (`v0.0.2`) (`Size: 656.44 MiB`): Wikipedia dataset for fi,
-    parsed from 20190301 dump.
+* `"20190301.fi"` (`v0.0.2`) (`Size: 656.44 MiB`): Wikipedia dataset for fi, parsed from 20190301 dump.
 
-*   `"20190301.fiu-vro"` (`v0.0.2`) (`Size: 2.00 MiB`): Wikipedia dataset for
-    fiu-vro, parsed from 20190301 dump.
+* `"20190301.fiu-vro"` (`v0.0.2`) (`Size: 2.00 MiB`): Wikipedia dataset for fiu-vro, parsed from 20190301 dump.
 
-*   `"20190301.fj"` (`v0.0.2`) (`Size: 262.98 KiB`): Wikipedia dataset for fj,
-    parsed from 20190301 dump.
+* `"20190301.fj"` (`v0.0.2`) (`Size: 262.98 KiB`): Wikipedia dataset for fj, parsed from 20190301 dump.
 
-*   `"20190301.fo"` (`v0.0.2`) (`Size: 13.67 MiB`): Wikipedia dataset for fo,
-    parsed from 20190301 dump.
+* `"20190301.fo"` (`v0.0.2`) (`Size: 13.67 MiB`): Wikipedia dataset for fo, parsed from 20190301 dump.
 
-*   `"20190301.fr"` (`v0.0.2`) (`Size: 4.14 GiB`): Wikipedia dataset for fr,
-    parsed from 20190301 dump.
+* `"20190301.fr"` (`v0.0.2`) (`Size: 4.14 GiB`): Wikipedia dataset for fr, parsed from 20190301 dump.
 
-*   `"20190301.frp"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for frp,
-    parsed from 20190301 dump.
+* `"20190301.frp"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for frp, parsed from 20190301 dump.
 
-*   `"20190301.frr"` (`v0.0.2`) (`Size: 7.88 MiB`): Wikipedia dataset for frr,
-    parsed from 20190301 dump.
+* `"20190301.frr"` (`v0.0.2`) (`Size: 7.88 MiB`): Wikipedia dataset for frr, parsed from 20190301 dump.
 
-*   `"20190301.fur"` (`v0.0.2`) (`Size: 2.29 MiB`): Wikipedia dataset for fur,
-    parsed from 20190301 dump.
+* `"20190301.fur"` (`v0.0.2`) (`Size: 2.29 MiB`): Wikipedia dataset for fur, parsed from 20190301 dump.
 
-*   `"20190301.fy"` (`v0.0.2`) (`Size: 45.52 MiB`): Wikipedia dataset for fy,
-    parsed from 20190301 dump.
+* `"20190301.fy"` (`v0.0.2`) (`Size: 45.52 MiB`): Wikipedia dataset for fy, parsed from 20190301 dump.
 
-*   `"20190301.ga"` (`v0.0.2`) (`Size: 24.78 MiB`): Wikipedia dataset for ga,
-    parsed from 20190301 dump.
+* `"20190301.ga"` (`v0.0.2`) (`Size: 24.78 MiB`): Wikipedia dataset for ga, parsed from 20190301 dump.
 
-*   `"20190301.gag"` (`v0.0.2`) (`Size: 2.04 MiB`): Wikipedia dataset for gag,
-    parsed from 20190301 dump.
+* `"20190301.gag"` (`v0.0.2`) (`Size: 2.04 MiB`): Wikipedia dataset for gag, parsed from 20190301 dump.
 
-*   `"20190301.gan"` (`v0.0.2`) (`Size: 3.82 MiB`): Wikipedia dataset for gan,
-    parsed from 20190301 dump.
+* `"20190301.gan"` (`v0.0.2`) (`Size: 3.82 MiB`): Wikipedia dataset for gan, parsed from 20190301 dump.
 
-*   `"20190301.gd"` (`v0.0.2`) (`Size: 8.51 MiB`): Wikipedia dataset for gd,
-    parsed from 20190301 dump.
+* `"20190301.gd"` (`v0.0.2`) (`Size: 8.51 MiB`): Wikipedia dataset for gd, parsed from 20190301 dump.
 
-*   `"20190301.gl"` (`v0.0.2`) (`Size: 235.07 MiB`): Wikipedia dataset for gl,
-    parsed from 20190301 dump.
+* `"20190301.gl"` (`v0.0.2`) (`Size: 235.07 MiB`): Wikipedia dataset for gl, parsed from 20190301 dump.
 
-*   `"20190301.glk"` (`v0.0.2`) (`Size: 1.91 MiB`): Wikipedia dataset for glk,
-    parsed from 20190301 dump.
+* `"20190301.glk"` (`v0.0.2`) (`Size: 1.91 MiB`): Wikipedia dataset for glk, parsed from 20190301 dump.
 
-*   `"20190301.gn"` (`v0.0.2`) (`Size: 3.37 MiB`): Wikipedia dataset for gn,
-    parsed from 20190301 dump.
+* `"20190301.gn"` (`v0.0.2`) (`Size: 3.37 MiB`): Wikipedia dataset for gn, parsed from 20190301 dump.
 
-*   `"20190301.gom"` (`v0.0.2`) (`Size: 6.07 MiB`): Wikipedia dataset for gom,
-    parsed from 20190301 dump.
+* `"20190301.gom"` (`v0.0.2`) (`Size: 6.07 MiB`): Wikipedia dataset for gom, parsed from 20190301 dump.
 
-*   `"20190301.gor"` (`v0.0.2`) (`Size: 1.28 MiB`): Wikipedia dataset for gor,
-    parsed from 20190301 dump.
+* `"20190301.gor"` (`v0.0.2`) (`Size: 1.28 MiB`): Wikipedia dataset for gor, parsed from 20190301 dump.
 
-*   `"20190301.got"` (`v0.0.2`) (`Size: 604.10 KiB`): Wikipedia dataset for got,
-    parsed from 20190301 dump.
+* `"20190301.got"` (`v0.0.2`) (`Size: 604.10 KiB`): Wikipedia dataset for got, parsed from 20190301 dump.
 
-*   `"20190301.gu"` (`v0.0.2`) (`Size: 27.23 MiB`): Wikipedia dataset for gu,
-    parsed from 20190301 dump.
+* `"20190301.gu"` (`v0.0.2`) (`Size: 27.23 MiB`): Wikipedia dataset for gu, parsed from 20190301 dump.
 
-*   `"20190301.gv"` (`v0.0.2`) (`Size: 5.32 MiB`): Wikipedia dataset for gv,
-    parsed from 20190301 dump.
+* `"20190301.gv"` (`v0.0.2`) (`Size: 5.32 MiB`): Wikipedia dataset for gv, parsed from 20190301 dump.
 
-*   `"20190301.ha"` (`v0.0.2`) (`Size: 1.62 MiB`): Wikipedia dataset for ha,
-    parsed from 20190301 dump.
+* `"20190301.ha"` (`v0.0.2`) (`Size: 1.62 MiB`): Wikipedia dataset for ha, parsed from 20190301 dump.
 
-*   `"20190301.hak"` (`v0.0.2`) (`Size: 3.28 MiB`): Wikipedia dataset for hak,
-    parsed from 20190301 dump.
+* `"20190301.hak"` (`v0.0.2`) (`Size: 3.28 MiB`): Wikipedia dataset for hak, parsed from 20190301 dump.
 
-*   `"20190301.haw"` (`v0.0.2`) (`Size: 1017.76 KiB`): Wikipedia dataset for
-    haw, parsed from 20190301 dump.
+* `"20190301.haw"` (`v0.0.2`) (`Size: 1017.76 KiB`): Wikipedia dataset for haw, parsed from 20190301 dump.
 
-*   `"20190301.he"` (`v0.0.2`) (`Size: 572.30 MiB`): Wikipedia dataset for he,
-    parsed from 20190301 dump.
+* `"20190301.he"` (`v0.0.2`) (`Size: 572.30 MiB`): Wikipedia dataset for he, parsed from 20190301 dump.
 
-*   `"20190301.hi"` (`v0.0.2`) (`Size: 137.86 MiB`): Wikipedia dataset for hi,
-    parsed from 20190301 dump.
+* `"20190301.hi"` (`v0.0.2`) (`Size: 137.86 MiB`): Wikipedia dataset for hi, parsed from 20190301 dump.
 
-*   `"20190301.hif"` (`v0.0.2`) (`Size: 4.57 MiB`): Wikipedia dataset for hif,
-    parsed from 20190301 dump.
+* `"20190301.hif"` (`v0.0.2`) (`Size: 4.57 MiB`): Wikipedia dataset for hif, parsed from 20190301 dump.
 
-*   `"20190301.ho"` (`v0.0.2`) (`Size: 18.37 KiB`): Wikipedia dataset for ho,
-    parsed from 20190301 dump.
+* `"20190301.ho"` (`v0.0.2`) (`Size: 18.37 KiB`): Wikipedia dataset for ho, parsed from 20190301 dump.
 
-*   `"20190301.hr"` (`v0.0.2`) (`Size: 246.05 MiB`): Wikipedia dataset for hr,
-    parsed from 20190301 dump.
+* `"20190301.hr"` (`v0.0.2`) (`Size: 246.05 MiB`): Wikipedia dataset for hr, parsed from 20190301 dump.
 
-*   `"20190301.hsb"` (`v0.0.2`) (`Size: 10.38 MiB`): Wikipedia dataset for hsb,
-    parsed from 20190301 dump.
+* `"20190301.hsb"` (`v0.0.2`) (`Size: 10.38 MiB`): Wikipedia dataset for hsb, parsed from 20190301 dump.
 
-*   `"20190301.ht"` (`v0.0.2`) (`Size: 10.23 MiB`): Wikipedia dataset for ht,
-    parsed from 20190301 dump.
+* `"20190301.ht"` (`v0.0.2`) (`Size: 10.23 MiB`): Wikipedia dataset for ht, parsed from 20190301 dump.
 
-*   `"20190301.hu"` (`v0.0.2`) (`Size: 810.17 MiB`): Wikipedia dataset for hu,
-    parsed from 20190301 dump.
+* `"20190301.hu"` (`v0.0.2`) (`Size: 810.17 MiB`): Wikipedia dataset for hu, parsed from 20190301 dump.
 
-*   `"20190301.hy"` (`v0.0.2`) (`Size: 277.53 MiB`): Wikipedia dataset for hy,
-    parsed from 20190301 dump.
+* `"20190301.hy"` (`v0.0.2`) (`Size: 277.53 MiB`): Wikipedia dataset for hy, parsed from 20190301 dump.
 
-*   `"20190301.hz"` (`v0.0.2`) (`Size: 16.35 KiB`): Wikipedia dataset for hz,
-    parsed from 20190301 dump.
+* `"20190301.hz"` (`v0.0.2`) (`Size: 16.35 KiB`): Wikipedia dataset for hz, parsed from 20190301 dump.
 
-*   `"20190301.ia"` (`v0.0.2`) (`Size: 7.85 MiB`): Wikipedia dataset for ia,
-    parsed from 20190301 dump.
+* `"20190301.ia"` (`v0.0.2`) (`Size: 7.85 MiB`): Wikipedia dataset for ia, parsed from 20190301 dump.
 
-*   `"20190301.id"` (`v0.0.2`) (`Size: 523.94 MiB`): Wikipedia dataset for id,
-    parsed from 20190301 dump.
+* `"20190301.id"` (`v0.0.2`) (`Size: 523.94 MiB`): Wikipedia dataset for id, parsed from 20190301 dump.
 
-*   `"20190301.ie"` (`v0.0.2`) (`Size: 1.70 MiB`): Wikipedia dataset for ie,
-    parsed from 20190301 dump.
+* `"20190301.ie"` (`v0.0.2`) (`Size: 1.70 MiB`): Wikipedia dataset for ie, parsed from 20190301 dump.
 
-*   `"20190301.ig"` (`v0.0.2`) (`Size: 1.00 MiB`): Wikipedia dataset for ig,
-    parsed from 20190301 dump.
+* `"20190301.ig"` (`v0.0.2`) (`Size: 1.00 MiB`): Wikipedia dataset for ig, parsed from 20190301 dump.
 
-*   `"20190301.ii"` (`v0.0.2`) (`Size: 30.88 KiB`): Wikipedia dataset for ii,
-    parsed from 20190301 dump.
+* `"20190301.ii"` (`v0.0.2`) (`Size: 30.88 KiB`): Wikipedia dataset for ii, parsed from 20190301 dump.
 
-*   `"20190301.ik"` (`v0.0.2`) (`Size: 238.12 KiB`): Wikipedia dataset for ik,
-    parsed from 20190301 dump.
+* `"20190301.ik"` (`v0.0.2`) (`Size: 238.12 KiB`): Wikipedia dataset for ik, parsed from 20190301 dump.
 
-*   `"20190301.ilo"` (`v0.0.2`) (`Size: 15.22 MiB`): Wikipedia dataset for ilo,
-    parsed from 20190301 dump.
+* `"20190301.ilo"` (`v0.0.2`) (`Size: 15.22 MiB`): Wikipedia dataset for ilo, parsed from 20190301 dump.
 
-*   `"20190301.inh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for inh,
-    parsed from 20190301 dump.
+* `"20190301.inh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for inh, parsed from 20190301 dump.
 
-*   `"20190301.io"` (`v0.0.2`) (`Size: 12.56 MiB`): Wikipedia dataset for io,
-    parsed from 20190301 dump.
+* `"20190301.io"` (`v0.0.2`) (`Size: 12.56 MiB`): Wikipedia dataset for io, parsed from 20190301 dump.
 
-*   `"20190301.is"` (`v0.0.2`) (`Size: 41.86 MiB`): Wikipedia dataset for is,
-    parsed from 20190301 dump.
+* `"20190301.is"` (`v0.0.2`) (`Size: 41.86 MiB`): Wikipedia dataset for is, parsed from 20190301 dump.
 
-*   `"20190301.it"` (`v0.0.2`) (`Size: 2.66 GiB`): Wikipedia dataset for it,
-    parsed from 20190301 dump.
+* `"20190301.it"` (`v0.0.2`) (`Size: 2.66 GiB`): Wikipedia dataset for it, parsed from 20190301 dump.
 
-*   `"20190301.iu"` (`v0.0.2`) (`Size: 284.06 KiB`): Wikipedia dataset for iu,
-    parsed from 20190301 dump.
+* `"20190301.iu"` (`v0.0.2`) (`Size: 284.06 KiB`): Wikipedia dataset for iu, parsed from 20190301 dump.
 
-*   `"20190301.ja"` (`v0.0.2`) (`Size: 2.74 GiB`): Wikipedia dataset for ja,
-    parsed from 20190301 dump.
+* `"20190301.ja"` (`v0.0.2`) (`Size: 2.74 GiB`): Wikipedia dataset for ja, parsed from 20190301 dump.
 
-*   `"20190301.jam"` (`v0.0.2`) (`Size: 895.29 KiB`): Wikipedia dataset for jam,
-    parsed from 20190301 dump.
+* `"20190301.jam"` (`v0.0.2`) (`Size: 895.29 KiB`): Wikipedia dataset for jam, parsed from 20190301 dump.
 
-*   `"20190301.jbo"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for jbo,
-    parsed from 20190301 dump.
+* `"20190301.jbo"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for jbo, parsed from 20190301 dump.
 
-*   `"20190301.jv"` (`v0.0.2`) (`Size: 39.32 MiB`): Wikipedia dataset for jv,
-    parsed from 20190301 dump.
+* `"20190301.jv"` (`v0.0.2`) (`Size: 39.32 MiB`): Wikipedia dataset for jv, parsed from 20190301 dump.
 
-*   `"20190301.ka"` (`v0.0.2`) (`Size: 131.78 MiB`): Wikipedia dataset for ka,
-    parsed from 20190301 dump.
+* `"20190301.ka"` (`v0.0.2`) (`Size: 131.78 MiB`): Wikipedia dataset for ka, parsed from 20190301 dump.
 
-*   `"20190301.kaa"` (`v0.0.2`) (`Size: 1.35 MiB`): Wikipedia dataset for kaa,
-    parsed from 20190301 dump.
+* `"20190301.kaa"` (`v0.0.2`) (`Size: 1.35 MiB`): Wikipedia dataset for kaa, parsed from 20190301 dump.
 
-*   `"20190301.kab"` (`v0.0.2`) (`Size: 3.62 MiB`): Wikipedia dataset for kab,
-    parsed from 20190301 dump.
+* `"20190301.kab"` (`v0.0.2`) (`Size: 3.62 MiB`): Wikipedia dataset for kab, parsed from 20190301 dump.
 
-*   `"20190301.kbd"` (`v0.0.2`) (`Size: 1.65 MiB`): Wikipedia dataset for kbd,
-    parsed from 20190301 dump.
+* `"20190301.kbd"` (`v0.0.2`) (`Size: 1.65 MiB`): Wikipedia dataset for kbd, parsed from 20190301 dump.
 
-*   `"20190301.kbp"` (`v0.0.2`) (`Size: 1.24 MiB`): Wikipedia dataset for kbp,
-    parsed from 20190301 dump.
+* `"20190301.kbp"` (`v0.0.2`) (`Size: 1.24 MiB`): Wikipedia dataset for kbp, parsed from 20190301 dump.
 
-*   `"20190301.kg"` (`v0.0.2`) (`Size: 439.26 KiB`): Wikipedia dataset for kg,
-    parsed from 20190301 dump.
+* `"20190301.kg"` (`v0.0.2`) (`Size: 439.26 KiB`): Wikipedia dataset for kg, parsed from 20190301 dump.
 
-*   `"20190301.ki"` (`v0.0.2`) (`Size: 370.78 KiB`): Wikipedia dataset for ki,
-    parsed from 20190301 dump.
+* `"20190301.ki"` (`v0.0.2`) (`Size: 370.78 KiB`): Wikipedia dataset for ki, parsed from 20190301 dump.
 
-*   `"20190301.kj"` (`v0.0.2`) (`Size: 16.58 KiB`): Wikipedia dataset for kj,
-    parsed from 20190301 dump.
+* `"20190301.kj"` (`v0.0.2`) (`Size: 16.58 KiB`): Wikipedia dataset for kj, parsed from 20190301 dump.
 
-*   `"20190301.kk"` (`v0.0.2`) (`Size: 113.46 MiB`): Wikipedia dataset for kk,
-    parsed from 20190301 dump.
+* `"20190301.kk"` (`v0.0.2`) (`Size: 113.46 MiB`): Wikipedia dataset for kk, parsed from 20190301 dump.
 
-*   `"20190301.kl"` (`v0.0.2`) (`Size: 862.51 KiB`): Wikipedia dataset for kl,
-    parsed from 20190301 dump.
+* `"20190301.kl"` (`v0.0.2`) (`Size: 862.51 KiB`): Wikipedia dataset for kl, parsed from 20190301 dump.
 
-*   `"20190301.km"` (`v0.0.2`) (`Size: 21.92 MiB`): Wikipedia dataset for km,
-    parsed from 20190301 dump.
+* `"20190301.km"` (`v0.0.2`) (`Size: 21.92 MiB`): Wikipedia dataset for km, parsed from 20190301 dump.
 
-*   `"20190301.kn"` (`v0.0.2`) (`Size: 69.62 MiB`): Wikipedia dataset for kn,
-    parsed from 20190301 dump.
+* `"20190301.kn"` (`v0.0.2`) (`Size: 69.62 MiB`): Wikipedia dataset for kn, parsed from 20190301 dump.
 
-*   `"20190301.ko"` (`v0.0.2`) (`Size: 625.16 MiB`): Wikipedia dataset for ko,
-    parsed from 20190301 dump.
+* `"20190301.ko"` (`v0.0.2`) (`Size: 625.16 MiB`): Wikipedia dataset for ko, parsed from 20190301 dump.
 
-*   `"20190301.koi"` (`v0.0.2`) (`Size: 2.12 MiB`): Wikipedia dataset for koi,
-    parsed from 20190301 dump.
+* `"20190301.koi"` (`v0.0.2`) (`Size: 2.12 MiB`): Wikipedia dataset for koi, parsed from 20190301 dump.
 
-*   `"20190301.kr"` (`v0.0.2`) (`Size: 13.89 KiB`): Wikipedia dataset for kr,
-    parsed from 20190301 dump.
+* `"20190301.kr"` (`v0.0.2`) (`Size: 13.89 KiB`): Wikipedia dataset for kr, parsed from 20190301 dump.
 
-*   `"20190301.krc"` (`v0.0.2`) (`Size: 3.16 MiB`): Wikipedia dataset for krc,
-    parsed from 20190301 dump.
+* `"20190301.krc"` (`v0.0.2`) (`Size: 3.16 MiB`): Wikipedia dataset for krc, parsed from 20190301 dump.
 
-*   `"20190301.ks"` (`v0.0.2`) (`Size: 309.15 KiB`): Wikipedia dataset for ks,
-    parsed from 20190301 dump.
+* `"20190301.ks"` (`v0.0.2`) (`Size: 309.15 KiB`): Wikipedia dataset for ks, parsed from 20190301 dump.
 
-*   `"20190301.ksh"` (`v0.0.2`) (`Size: 3.07 MiB`): Wikipedia dataset for ksh,
-    parsed from 20190301 dump.
+* `"20190301.ksh"` (`v0.0.2`) (`Size: 3.07 MiB`): Wikipedia dataset for ksh, parsed from 20190301 dump.
 
-*   `"20190301.ku"` (`v0.0.2`) (`Size: 17.09 MiB`): Wikipedia dataset for ku,
-    parsed from 20190301 dump.
+* `"20190301.ku"` (`v0.0.2`) (`Size: 17.09 MiB`): Wikipedia dataset for ku, parsed from 20190301 dump.
 
-*   `"20190301.kv"` (`v0.0.2`) (`Size: 3.36 MiB`): Wikipedia dataset for kv,
-    parsed from 20190301 dump.
+* `"20190301.kv"` (`v0.0.2`) (`Size: 3.36 MiB`): Wikipedia dataset for kv, parsed from 20190301 dump.
 
-*   `"20190301.kw"` (`v0.0.2`) (`Size: 1.71 MiB`): Wikipedia dataset for kw,
-    parsed from 20190301 dump.
+* `"20190301.kw"` (`v0.0.2`) (`Size: 1.71 MiB`): Wikipedia dataset for kw, parsed from 20190301 dump.
 
-*   `"20190301.ky"` (`v0.0.2`) (`Size: 33.13 MiB`): Wikipedia dataset for ky,
-    parsed from 20190301 dump.
+* `"20190301.ky"` (`v0.0.2`) (`Size: 33.13 MiB`): Wikipedia dataset for ky, parsed from 20190301 dump.
 
-*   `"20190301.la"` (`v0.0.2`) (`Size: 82.72 MiB`): Wikipedia dataset for la,
-    parsed from 20190301 dump.
+* `"20190301.la"` (`v0.0.2`) (`Size: 82.72 MiB`): Wikipedia dataset for la, parsed from 20190301 dump.
 
-*   `"20190301.lad"` (`v0.0.2`) (`Size: 3.39 MiB`): Wikipedia dataset for lad,
-    parsed from 20190301 dump.
+* `"20190301.lad"` (`v0.0.2`) (`Size: 3.39 MiB`): Wikipedia dataset for lad, parsed from 20190301 dump.
 
-*   `"20190301.lb"` (`v0.0.2`) (`Size: 45.70 MiB`): Wikipedia dataset for lb,
-    parsed from 20190301 dump.
+* `"20190301.lb"` (`v0.0.2`) (`Size: 45.70 MiB`): Wikipedia dataset for lb, parsed from 20190301 dump.
 
-*   `"20190301.lbe"` (`v0.0.2`) (`Size: 1.22 MiB`): Wikipedia dataset for lbe,
-    parsed from 20190301 dump.
+* `"20190301.lbe"` (`v0.0.2`) (`Size: 1.22 MiB`): Wikipedia dataset for lbe, parsed from 20190301 dump.
 
-*   `"20190301.lez"` (`v0.0.2`) (`Size: 4.16 MiB`): Wikipedia dataset for lez,
-    parsed from 20190301 dump.
+* `"20190301.lez"` (`v0.0.2`) (`Size: 4.16 MiB`): Wikipedia dataset for lez, parsed from 20190301 dump.
 
-*   `"20190301.lfn"` (`v0.0.2`) (`Size: 2.81 MiB`): Wikipedia dataset for lfn,
-    parsed from 20190301 dump.
+* `"20190301.lfn"` (`v0.0.2`) (`Size: 2.81 MiB`): Wikipedia dataset for lfn, parsed from 20190301 dump.
 
-*   `"20190301.lg"` (`v0.0.2`) (`Size: 1.58 MiB`): Wikipedia dataset for lg,
-    parsed from 20190301 dump.
+* `"20190301.lg"` (`v0.0.2`) (`Size: 1.58 MiB`): Wikipedia dataset for lg, parsed from 20190301 dump.
 
-*   `"20190301.li"` (`v0.0.2`) (`Size: 13.86 MiB`): Wikipedia dataset for li,
-    parsed from 20190301 dump.
+* `"20190301.li"` (`v0.0.2`) (`Size: 13.86 MiB`): Wikipedia dataset for li, parsed from 20190301 dump.
 
-*   `"20190301.lij"` (`v0.0.2`) (`Size: 2.73 MiB`): Wikipedia dataset for lij,
-    parsed from 20190301 dump.
+* `"20190301.lij"` (`v0.0.2`) (`Size: 2.73 MiB`): Wikipedia dataset for lij, parsed from 20190301 dump.
 
-*   `"20190301.lmo"` (`v0.0.2`) (`Size: 21.34 MiB`): Wikipedia dataset for lmo,
-    parsed from 20190301 dump.
+* `"20190301.lmo"` (`v0.0.2`) (`Size: 21.34 MiB`): Wikipedia dataset for lmo, parsed from 20190301 dump.
 
-*   `"20190301.ln"` (`v0.0.2`) (`Size: 1.83 MiB`): Wikipedia dataset for ln,
-    parsed from 20190301 dump.
+* `"20190301.ln"` (`v0.0.2`) (`Size: 1.83 MiB`): Wikipedia dataset for ln, parsed from 20190301 dump.
 
-*   `"20190301.lo"` (`v0.0.2`) (`Size: 3.44 MiB`): Wikipedia dataset for lo,
-    parsed from 20190301 dump.
+* `"20190301.lo"` (`v0.0.2`) (`Size: 3.44 MiB`): Wikipedia dataset for lo, parsed from 20190301 dump.
 
-*   `"20190301.lrc"` (`v0.0.2`) (`Size: 4.71 MiB`): Wikipedia dataset for lrc,
-    parsed from 20190301 dump.
+* `"20190301.lrc"` (`v0.0.2`) (`Size: 4.71 MiB`): Wikipedia dataset for lrc, parsed from 20190301 dump.
 
-*   `"20190301.lt"` (`v0.0.2`) (`Size: 174.73 MiB`): Wikipedia dataset for lt,
-    parsed from 20190301 dump.
+* `"20190301.lt"` (`v0.0.2`) (`Size: 174.73 MiB`): Wikipedia dataset for lt, parsed from 20190301 dump.
 
-*   `"20190301.ltg"` (`v0.0.2`) (`Size: 798.18 KiB`): Wikipedia dataset for ltg,
-    parsed from 20190301 dump.
+* `"20190301.ltg"` (`v0.0.2`) (`Size: 798.18 KiB`): Wikipedia dataset for ltg, parsed from 20190301 dump.
 
-*   `"20190301.lv"` (`v0.0.2`) (`Size: 127.47 MiB`): Wikipedia dataset for lv,
-    parsed from 20190301 dump.
+* `"20190301.lv"` (`v0.0.2`) (`Size: 127.47 MiB`): Wikipedia dataset for lv, parsed from 20190301 dump.
 
-*   `"20190301.mai"` (`v0.0.2`) (`Size: 10.80 MiB`): Wikipedia dataset for mai,
-    parsed from 20190301 dump.
+* `"20190301.mai"` (`v0.0.2`) (`Size: 10.80 MiB`): Wikipedia dataset for mai, parsed from 20190301 dump.
 
-*   `"20190301.map-bms"` (`v0.0.2`) (`Size: 4.49 MiB`): Wikipedia dataset for
-    map-bms, parsed from 20190301 dump.
+* `"20190301.map-bms"` (`v0.0.2`) (`Size: 4.49 MiB`): Wikipedia dataset for map-bms, parsed from 20190301 dump.
 
-*   `"20190301.mdf"` (`v0.0.2`) (`Size: 1.04 MiB`): Wikipedia dataset for mdf,
-    parsed from 20190301 dump.
+* `"20190301.mdf"` (`v0.0.2`) (`Size: 1.04 MiB`): Wikipedia dataset for mdf, parsed from 20190301 dump.
 
-*   `"20190301.mg"` (`v0.0.2`) (`Size: 25.64 MiB`): Wikipedia dataset for mg,
-    parsed from 20190301 dump.
+* `"20190301.mg"` (`v0.0.2`) (`Size: 25.64 MiB`): Wikipedia dataset for mg, parsed from 20190301 dump.
 
-*   `"20190301.mh"` (`v0.0.2`) (`Size: 27.71 KiB`): Wikipedia dataset for mh,
-    parsed from 20190301 dump.
+* `"20190301.mh"` (`v0.0.2`) (`Size: 27.71 KiB`): Wikipedia dataset for mh, parsed from 20190301 dump.
 
-*   `"20190301.mhr"` (`v0.0.2`) (`Size: 5.69 MiB`): Wikipedia dataset for mhr,
-    parsed from 20190301 dump.
+* `"20190301.mhr"` (`v0.0.2`) (`Size: 5.69 MiB`): Wikipedia dataset for mhr, parsed from 20190301 dump.
 
-*   `"20190301.mi"` (`v0.0.2`) (`Size: 1.96 MiB`): Wikipedia dataset for mi,
-    parsed from 20190301 dump.
+* `"20190301.mi"` (`v0.0.2`) (`Size: 1.96 MiB`): Wikipedia dataset for mi, parsed from 20190301 dump.
 
-*   `"20190301.min"` (`v0.0.2`) (`Size: 25.05 MiB`): Wikipedia dataset for min,
-    parsed from 20190301 dump.
+* `"20190301.min"` (`v0.0.2`) (`Size: 25.05 MiB`): Wikipedia dataset for min, parsed from 20190301 dump.
 
-*   `"20190301.mk"` (`v0.0.2`) (`Size: 140.69 MiB`): Wikipedia dataset for mk,
-    parsed from 20190301 dump.
+* `"20190301.mk"` (`v0.0.2`) (`Size: 140.69 MiB`): Wikipedia dataset for mk, parsed from 20190301 dump.
 
-*   `"20190301.ml"` (`v0.0.2`) (`Size: 117.24 MiB`): Wikipedia dataset for ml,
-    parsed from 20190301 dump.
+* `"20190301.ml"` (`v0.0.2`) (`Size: 117.24 MiB`): Wikipedia dataset for ml, parsed from 20190301 dump.
 
-*   `"20190301.mn"` (`v0.0.2`) (`Size: 28.23 MiB`): Wikipedia dataset for mn,
-    parsed from 20190301 dump.
+* `"20190301.mn"` (`v0.0.2`) (`Size: 28.23 MiB`): Wikipedia dataset for mn, parsed from 20190301 dump.
 
-*   `"20190301.mr"` (`v0.0.2`) (`Size: 49.58 MiB`): Wikipedia dataset for mr,
-    parsed from 20190301 dump.
+* `"20190301.mr"` (`v0.0.2`) (`Size: 49.58 MiB`): Wikipedia dataset for mr, parsed from 20190301 dump.
 
-*   `"20190301.mrj"` (`v0.0.2`) (`Size: 3.01 MiB`): Wikipedia dataset for mrj,
-    parsed from 20190301 dump.
+* `"20190301.mrj"` (`v0.0.2`) (`Size: 3.01 MiB`): Wikipedia dataset for mrj, parsed from 20190301 dump.
 
-*   `"20190301.ms"` (`v0.0.2`) (`Size: 205.79 MiB`): Wikipedia dataset for ms,
-    parsed from 20190301 dump.
+* `"20190301.ms"` (`v0.0.2`) (`Size: 205.79 MiB`): Wikipedia dataset for ms, parsed from 20190301 dump.
 
-*   `"20190301.mt"` (`v0.0.2`) (`Size: 8.21 MiB`): Wikipedia dataset for mt,
-    parsed from 20190301 dump.
+* `"20190301.mt"` (`v0.0.2`) (`Size: 8.21 MiB`): Wikipedia dataset for mt, parsed from 20190301 dump.
 
-*   `"20190301.mus"` (`v0.0.2`) (`Size: 14.20 KiB`): Wikipedia dataset for mus,
-    parsed from 20190301 dump.
+* `"20190301.mus"` (`v0.0.2`) (`Size: 14.20 KiB`): Wikipedia dataset for mus, parsed from 20190301 dump.
 
-*   `"20190301.mwl"` (`v0.0.2`) (`Size: 8.95 MiB`): Wikipedia dataset for mwl,
-    parsed from 20190301 dump.
+* `"20190301.mwl"` (`v0.0.2`) (`Size: 8.95 MiB`): Wikipedia dataset for mwl, parsed from 20190301 dump.
 
-*   `"20190301.my"` (`v0.0.2`) (`Size: 34.60 MiB`): Wikipedia dataset for my,
-    parsed from 20190301 dump.
+* `"20190301.my"` (`v0.0.2`) (`Size: 34.60 MiB`): Wikipedia dataset for my, parsed from 20190301 dump.
 
-*   `"20190301.myv"` (`v0.0.2`) (`Size: 7.79 MiB`): Wikipedia dataset for myv,
-    parsed from 20190301 dump.
+* `"20190301.myv"` (`v0.0.2`) (`Size: 7.79 MiB`): Wikipedia dataset for myv, parsed from 20190301 dump.
 
-*   `"20190301.mzn"` (`v0.0.2`) (`Size: 6.47 MiB`): Wikipedia dataset for mzn,
-    parsed from 20190301 dump.
+* `"20190301.mzn"` (`v0.0.2`) (`Size: 6.47 MiB`): Wikipedia dataset for mzn, parsed from 20190301 dump.
 
-*   `"20190301.na"` (`v0.0.2`) (`Size: 480.57 KiB`): Wikipedia dataset for na,
-    parsed from 20190301 dump.
+* `"20190301.na"` (`v0.0.2`) (`Size: 480.57 KiB`): Wikipedia dataset for na, parsed from 20190301 dump.
 
-*   `"20190301.nah"` (`v0.0.2`) (`Size: 4.30 MiB`): Wikipedia dataset for nah,
-    parsed from 20190301 dump.
+* `"20190301.nah"` (`v0.0.2`) (`Size: 4.30 MiB`): Wikipedia dataset for nah, parsed from 20190301 dump.
 
-*   `"20190301.nap"` (`v0.0.2`) (`Size: 5.55 MiB`): Wikipedia dataset for nap,
-    parsed from 20190301 dump.
+* `"20190301.nap"` (`v0.0.2`) (`Size: 5.55 MiB`): Wikipedia dataset for nap, parsed from 20190301 dump.
 
-*   `"20190301.nds"` (`v0.0.2`) (`Size: 33.28 MiB`): Wikipedia dataset for nds,
-    parsed from 20190301 dump.
+* `"20190301.nds"` (`v0.0.2`) (`Size: 33.28 MiB`): Wikipedia dataset for nds, parsed from 20190301 dump.
 
-*   `"20190301.nds-nl"` (`v0.0.2`) (`Size: 6.67 MiB`): Wikipedia dataset for
-    nds-nl, parsed from 20190301 dump.
+* `"20190301.nds-nl"` (`v0.0.2`) (`Size: 6.67 MiB`): Wikipedia dataset for nds-nl, parsed from 20190301 dump.
 
-*   `"20190301.ne"` (`v0.0.2`) (`Size: 29.26 MiB`): Wikipedia dataset for ne,
-    parsed from 20190301 dump.
+* `"20190301.ne"` (`v0.0.2`) (`Size: 29.26 MiB`): Wikipedia dataset for ne, parsed from 20190301 dump.
 
-*   `"20190301.new"` (`v0.0.2`) (`Size: 16.91 MiB`): Wikipedia dataset for new,
-    parsed from 20190301 dump.
+* `"20190301.new"` (`v0.0.2`) (`Size: 16.91 MiB`): Wikipedia dataset for new, parsed from 20190301 dump.
 
-*   `"20190301.ng"` (`v0.0.2`) (`Size: 91.11 KiB`): Wikipedia dataset for ng,
-    parsed from 20190301 dump.
+* `"20190301.ng"` (`v0.0.2`) (`Size: 91.11 KiB`): Wikipedia dataset for ng, parsed from 20190301 dump.
 
-*   `"20190301.nl"` (`v0.0.2`) (`Size: 1.38 GiB`): Wikipedia dataset for nl,
-    parsed from 20190301 dump.
+* `"20190301.nl"` (`v0.0.2`) (`Size: 1.38 GiB`): Wikipedia dataset for nl, parsed from 20190301 dump.
 
-*   `"20190301.nn"` (`v0.0.2`) (`Size: 126.01 MiB`): Wikipedia dataset for nn,
-    parsed from 20190301 dump.
+* `"20190301.nn"` (`v0.0.2`) (`Size: 126.01 MiB`): Wikipedia dataset for nn, parsed from 20190301 dump.
 
-*   `"20190301.no"` (`v0.0.2`) (`Size: 610.74 MiB`): Wikipedia dataset for no,
-    parsed from 20190301 dump.
+* `"20190301.no"` (`v0.0.2`) (`Size: 610.74 MiB`): Wikipedia dataset for no, parsed from 20190301 dump.
 
-*   `"20190301.nov"` (`v0.0.2`) (`Size: 1.12 MiB`): Wikipedia dataset for nov,
-    parsed from 20190301 dump.
+* `"20190301.nov"` (`v0.0.2`) (`Size: 1.12 MiB`): Wikipedia dataset for nov, parsed from 20190301 dump.
 
-*   `"20190301.nrm"` (`v0.0.2`) (`Size: 1.56 MiB`): Wikipedia dataset for nrm,
-    parsed from 20190301 dump.
+* `"20190301.nrm"` (`v0.0.2`) (`Size: 1.56 MiB`): Wikipedia dataset for nrm, parsed from 20190301 dump.
 
-*   `"20190301.nso"` (`v0.0.2`) (`Size: 2.20 MiB`): Wikipedia dataset for nso,
-    parsed from 20190301 dump.
+* `"20190301.nso"` (`v0.0.2`) (`Size: 2.20 MiB`): Wikipedia dataset for nso, parsed from 20190301 dump.
 
-*   `"20190301.nv"` (`v0.0.2`) (`Size: 2.52 MiB`): Wikipedia dataset for nv,
-    parsed from 20190301 dump.
+* `"20190301.nv"` (`v0.0.2`) (`Size: 2.52 MiB`): Wikipedia dataset for nv, parsed from 20190301 dump.
 
-*   `"20190301.ny"` (`v0.0.2`) (`Size: 1.18 MiB`): Wikipedia dataset for ny,
-    parsed from 20190301 dump.
+* `"20190301.ny"` (`v0.0.2`) (`Size: 1.18 MiB`): Wikipedia dataset for ny, parsed from 20190301 dump.
 
-*   `"20190301.oc"` (`v0.0.2`) (`Size: 70.97 MiB`): Wikipedia dataset for oc,
-    parsed from 20190301 dump.
+* `"20190301.oc"` (`v0.0.2`) (`Size: 70.97 MiB`): Wikipedia dataset for oc, parsed from 20190301 dump.
 
-*   `"20190301.olo"` (`v0.0.2`) (`Size: 1.55 MiB`): Wikipedia dataset for olo,
-    parsed from 20190301 dump.
+* `"20190301.olo"` (`v0.0.2`) (`Size: 1.55 MiB`): Wikipedia dataset for olo, parsed from 20190301 dump.
 
-*   `"20190301.om"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for om,
-    parsed from 20190301 dump.
+* `"20190301.om"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for om, parsed from 20190301 dump.
 
-*   `"20190301.or"` (`v0.0.2`) (`Size: 24.90 MiB`): Wikipedia dataset for or,
-    parsed from 20190301 dump.
+* `"20190301.or"` (`v0.0.2`) (`Size: 24.90 MiB`): Wikipedia dataset for or, parsed from 20190301 dump.
 
-*   `"20190301.os"` (`v0.0.2`) (`Size: 7.31 MiB`): Wikipedia dataset for os,
-    parsed from 20190301 dump.
+* `"20190301.os"` (`v0.0.2`) (`Size: 7.31 MiB`): Wikipedia dataset for os, parsed from 20190301 dump.
 
-*   `"20190301.pa"` (`v0.0.2`) (`Size: 40.39 MiB`): Wikipedia dataset for pa,
-    parsed from 20190301 dump.
+* `"20190301.pa"` (`v0.0.2`) (`Size: 40.39 MiB`): Wikipedia dataset for pa, parsed from 20190301 dump.
 
-*   `"20190301.pag"` (`v0.0.2`) (`Size: 1.29 MiB`): Wikipedia dataset for pag,
-    parsed from 20190301 dump.
+* `"20190301.pag"` (`v0.0.2`) (`Size: 1.29 MiB`): Wikipedia dataset for pag, parsed from 20190301 dump.
 
-*   `"20190301.pam"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for pam,
-    parsed from 20190301 dump.
+* `"20190301.pam"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for pam, parsed from 20190301 dump.
 
-*   `"20190301.pap"` (`v0.0.2`) (`Size: 1.33 MiB`): Wikipedia dataset for pap,
-    parsed from 20190301 dump.
+* `"20190301.pap"` (`v0.0.2`) (`Size: 1.33 MiB`): Wikipedia dataset for pap, parsed from 20190301 dump.
 
-*   `"20190301.pcd"` (`v0.0.2`) (`Size: 4.14 MiB`): Wikipedia dataset for pcd,
-    parsed from 20190301 dump.
+* `"20190301.pcd"` (`v0.0.2`) (`Size: 4.14 MiB`): Wikipedia dataset for pcd, parsed from 20190301 dump.
 
-*   `"20190301.pdc"` (`v0.0.2`) (`Size: 1.10 MiB`): Wikipedia dataset for pdc,
-    parsed from 20190301 dump.
+* `"20190301.pdc"` (`v0.0.2`) (`Size: 1.10 MiB`): Wikipedia dataset for pdc, parsed from 20190301 dump.
 
-*   `"20190301.pfl"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for pfl,
-    parsed from 20190301 dump.
+* `"20190301.pfl"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for pfl, parsed from 20190301 dump.
 
-*   `"20190301.pi"` (`v0.0.2`) (`Size: 586.77 KiB`): Wikipedia dataset for pi,
-    parsed from 20190301 dump.
+* `"20190301.pi"` (`v0.0.2`) (`Size: 586.77 KiB`): Wikipedia dataset for pi, parsed from 20190301 dump.
 
-*   `"20190301.pih"` (`v0.0.2`) (`Size: 654.11 KiB`): Wikipedia dataset for pih,
-    parsed from 20190301 dump.
+* `"20190301.pih"` (`v0.0.2`) (`Size: 654.11 KiB`): Wikipedia dataset for pih, parsed from 20190301 dump.
 
-*   `"20190301.pl"` (`v0.0.2`) (`Size: 1.76 GiB`): Wikipedia dataset for pl,
-    parsed from 20190301 dump.
+* `"20190301.pl"` (`v0.0.2`) (`Size: 1.76 GiB`): Wikipedia dataset for pl, parsed from 20190301 dump.
 
-*   `"20190301.pms"` (`v0.0.2`) (`Size: 13.42 MiB`): Wikipedia dataset for pms,
-    parsed from 20190301 dump.
+* `"20190301.pms"` (`v0.0.2`) (`Size: 13.42 MiB`): Wikipedia dataset for pms, parsed from 20190301 dump.
 
-*   `"20190301.pnb"` (`v0.0.2`) (`Size: 24.31 MiB`): Wikipedia dataset for pnb,
-    parsed from 20190301 dump.
+* `"20190301.pnb"` (`v0.0.2`) (`Size: 24.31 MiB`): Wikipedia dataset for pnb, parsed from 20190301 dump.
 
-*   `"20190301.pnt"` (`v0.0.2`) (`Size: 533.84 KiB`): Wikipedia dataset for pnt,
-    parsed from 20190301 dump.
+* `"20190301.pnt"` (`v0.0.2`) (`Size: 533.84 KiB`): Wikipedia dataset for pnt, parsed from 20190301 dump.
 
-*   `"20190301.ps"` (`v0.0.2`) (`Size: 14.09 MiB`): Wikipedia dataset for ps,
-    parsed from 20190301 dump.
+* `"20190301.ps"` (`v0.0.2`) (`Size: 14.09 MiB`): Wikipedia dataset for ps, parsed from 20190301 dump.
 
-*   `"20190301.pt"` (`v0.0.2`) (`Size: 1.58 GiB`): Wikipedia dataset for pt,
-    parsed from 20190301 dump.
+* `"20190301.pt"` (`v0.0.2`) (`Size: 1.58 GiB`): Wikipedia dataset for pt, parsed from 20190301 dump.
 
-*   `"20190301.qu"` (`v0.0.2`) (`Size: 11.42 MiB`): Wikipedia dataset for qu,
-    parsed from 20190301 dump.
+* `"20190301.qu"` (`v0.0.2`) (`Size: 11.42 MiB`): Wikipedia dataset for qu, parsed from 20190301 dump.
 
-*   `"20190301.rm"` (`v0.0.2`) (`Size: 5.85 MiB`): Wikipedia dataset for rm,
-    parsed from 20190301 dump.
+* `"20190301.rm"` (`v0.0.2`) (`Size: 5.85 MiB`): Wikipedia dataset for rm, parsed from 20190301 dump.
 
-*   `"20190301.rmy"` (`v0.0.2`) (`Size: 509.61 KiB`): Wikipedia dataset for rmy,
-    parsed from 20190301 dump.
+* `"20190301.rmy"` (`v0.0.2`) (`Size: 509.61 KiB`): Wikipedia dataset for rmy, parsed from 20190301 dump.
 
-*   `"20190301.rn"` (`v0.0.2`) (`Size: 779.25 KiB`): Wikipedia dataset for rn,
-    parsed from 20190301 dump.
+* `"20190301.rn"` (`v0.0.2`) (`Size: 779.25 KiB`): Wikipedia dataset for rn, parsed from 20190301 dump.
 
-*   `"20190301.ro"` (`v0.0.2`) (`Size: 449.49 MiB`): Wikipedia dataset for ro,
-    parsed from 20190301 dump.
+* `"20190301.ro"` (`v0.0.2`) (`Size: 449.49 MiB`): Wikipedia dataset for ro, parsed from 20190301 dump.
 
-*   `"20190301.roa-rup"` (`v0.0.2`) (`Size: 931.23 KiB`): Wikipedia dataset for
-    roa-rup, parsed from 20190301 dump.
+* `"20190301.roa-rup"` (`v0.0.2`) (`Size: 931.23 KiB`): Wikipedia dataset for roa-rup, parsed from 20190301 dump.
 
-*   `"20190301.roa-tara"` (`v0.0.2`) (`Size: 5.98 MiB`): Wikipedia dataset for
-    roa-tara, parsed from 20190301 dump.
+* `"20190301.roa-tara"` (`v0.0.2`) (`Size: 5.98 MiB`): Wikipedia dataset for roa-tara, parsed from 20190301 dump.
 
-*   `"20190301.ru"` (`v0.0.2`) (`Size: 3.51 GiB`): Wikipedia dataset for ru,
-    parsed from 20190301 dump.
+* `"20190301.ru"` (`v0.0.2`) (`Size: 3.51 GiB`): Wikipedia dataset for ru, parsed from 20190301 dump.
 
-*   `"20190301.rue"` (`v0.0.2`) (`Size: 4.11 MiB`): Wikipedia dataset for rue,
-    parsed from 20190301 dump.
+* `"20190301.rue"` (`v0.0.2`) (`Size: 4.11 MiB`): Wikipedia dataset for rue, parsed from 20190301 dump.
 
-*   `"20190301.rw"` (`v0.0.2`) (`Size: 904.81 KiB`): Wikipedia dataset for rw,
-    parsed from 20190301 dump.
+* `"20190301.rw"` (`v0.0.2`) (`Size: 904.81 KiB`): Wikipedia dataset for rw, parsed from 20190301 dump.
 
-*   `"20190301.sa"` (`v0.0.2`) (`Size: 14.29 MiB`): Wikipedia dataset for sa,
-    parsed from 20190301 dump.
+* `"20190301.sa"` (`v0.0.2`) (`Size: 14.29 MiB`): Wikipedia dataset for sa, parsed from 20190301 dump.
 
-*   `"20190301.sah"` (`v0.0.2`) (`Size: 11.88 MiB`): Wikipedia dataset for sah,
-    parsed from 20190301 dump.
+* `"20190301.sah"` (`v0.0.2`) (`Size: 11.88 MiB`): Wikipedia dataset for sah, parsed from 20190301 dump.
 
-*   `"20190301.sat"` (`v0.0.2`) (`Size: 2.36 MiB`): Wikipedia dataset for sat,
-    parsed from 20190301 dump.
+* `"20190301.sat"` (`v0.0.2`) (`Size: 2.36 MiB`): Wikipedia dataset for sat, parsed from 20190301 dump.
 
-*   `"20190301.sc"` (`v0.0.2`) (`Size: 4.39 MiB`): Wikipedia dataset for sc,
-    parsed from 20190301 dump.
+* `"20190301.sc"` (`v0.0.2`) (`Size: 4.39 MiB`): Wikipedia dataset for sc, parsed from 20190301 dump.
 
-*   `"20190301.scn"` (`v0.0.2`) (`Size: 11.83 MiB`): Wikipedia dataset for scn,
-    parsed from 20190301 dump.
+* `"20190301.scn"` (`v0.0.2`) (`Size: 11.83 MiB`): Wikipedia dataset for scn, parsed from 20190301 dump.
 
-*   `"20190301.sco"` (`v0.0.2`) (`Size: 57.80 MiB`): Wikipedia dataset for sco,
-    parsed from 20190301 dump.
+* `"20190301.sco"` (`v0.0.2`) (`Size: 57.80 MiB`): Wikipedia dataset for sco, parsed from 20190301 dump.
 
-*   `"20190301.sd"` (`v0.0.2`) (`Size: 12.62 MiB`): Wikipedia dataset for sd,
-    parsed from 20190301 dump.
+* `"20190301.sd"` (`v0.0.2`) (`Size: 12.62 MiB`): Wikipedia dataset for sd, parsed from 20190301 dump.
 
-*   `"20190301.se"` (`v0.0.2`) (`Size: 3.30 MiB`): Wikipedia dataset for se,
-    parsed from 20190301 dump.
+* `"20190301.se"` (`v0.0.2`) (`Size: 3.30 MiB`): Wikipedia dataset for se, parsed from 20190301 dump.
 
-*   `"20190301.sg"` (`v0.0.2`) (`Size: 286.02 KiB`): Wikipedia dataset for sg,
-    parsed from 20190301 dump.
+* `"20190301.sg"` (`v0.0.2`) (`Size: 286.02 KiB`): Wikipedia dataset for sg, parsed from 20190301 dump.
 
-*   `"20190301.sh"` (`v0.0.2`) (`Size: 406.72 MiB`): Wikipedia dataset for sh,
-    parsed from 20190301 dump.
+* `"20190301.sh"` (`v0.0.2`) (`Size: 406.72 MiB`): Wikipedia dataset for sh, parsed from 20190301 dump.
 
-*   `"20190301.si"` (`v0.0.2`) (`Size: 36.84 MiB`): Wikipedia dataset for si,
-    parsed from 20190301 dump.
+* `"20190301.si"` (`v0.0.2`) (`Size: 36.84 MiB`): Wikipedia dataset for si, parsed from 20190301 dump.
 
-*   `"20190301.simple"` (`v0.0.2`) (`Size: 156.11 MiB`): Wikipedia dataset for
-    simple, parsed from 20190301 dump.
+* `"20190301.simple"` (`v0.0.2`) (`Size: 156.11 MiB`): Wikipedia dataset for simple, parsed from 20190301 dump.
 
-*   `"20190301.sk"` (`v0.0.2`) (`Size: 254.37 MiB`): Wikipedia dataset for sk,
-    parsed from 20190301 dump.
+* `"20190301.sk"` (`v0.0.2`) (`Size: 254.37 MiB`): Wikipedia dataset for sk, parsed from 20190301 dump.
 
-*   `"20190301.sl"` (`v0.0.2`) (`Size: 201.41 MiB`): Wikipedia dataset for sl,
-    parsed from 20190301 dump.
+* `"20190301.sl"` (`v0.0.2`) (`Size: 201.41 MiB`): Wikipedia dataset for sl, parsed from 20190301 dump.
 
-*   `"20190301.sm"` (`v0.0.2`) (`Size: 678.46 KiB`): Wikipedia dataset for sm,
-    parsed from 20190301 dump.
+* `"20190301.sm"` (`v0.0.2`) (`Size: 678.46 KiB`): Wikipedia dataset for sm, parsed from 20190301 dump.
 
-*   `"20190301.sn"` (`v0.0.2`) (`Size: 2.02 MiB`): Wikipedia dataset for sn,
-    parsed from 20190301 dump.
+* `"20190301.sn"` (`v0.0.2`) (`Size: 2.02 MiB`): Wikipedia dataset for sn, parsed from 20190301 dump.
 
-*   `"20190301.so"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for so,
-    parsed from 20190301 dump.
+* `"20190301.so"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for so, parsed from 20190301 dump.
 
-*   `"20190301.sq"` (`v0.0.2`) (`Size: 77.55 MiB`): Wikipedia dataset for sq,
-    parsed from 20190301 dump.
+* `"20190301.sq"` (`v0.0.2`) (`Size: 77.55 MiB`): Wikipedia dataset for sq, parsed from 20190301 dump.
 
-*   `"20190301.sr"` (`v0.0.2`) (`Size: 725.30 MiB`): Wikipedia dataset for sr,
-    parsed from 20190301 dump.
+* `"20190301.sr"` (`v0.0.2`) (`Size: 725.30 MiB`): Wikipedia dataset for sr, parsed from 20190301 dump.
 
-*   `"20190301.srn"` (`v0.0.2`) (`Size: 634.21 KiB`): Wikipedia dataset for srn,
-    parsed from 20190301 dump.
+* `"20190301.srn"` (`v0.0.2`) (`Size: 634.21 KiB`): Wikipedia dataset for srn, parsed from 20190301 dump.
 
-*   `"20190301.ss"` (`v0.0.2`) (`Size: 737.58 KiB`): Wikipedia dataset for ss,
-    parsed from 20190301 dump.
+* `"20190301.ss"` (`v0.0.2`) (`Size: 737.58 KiB`): Wikipedia dataset for ss, parsed from 20190301 dump.
 
-*   `"20190301.st"` (`v0.0.2`) (`Size: 482.27 KiB`): Wikipedia dataset for st,
-    parsed from 20190301 dump.
+* `"20190301.st"` (`v0.0.2`) (`Size: 482.27 KiB`): Wikipedia dataset for st, parsed from 20190301 dump.
 
-*   `"20190301.stq"` (`v0.0.2`) (`Size: 3.26 MiB`): Wikipedia dataset for stq,
-    parsed from 20190301 dump.
+* `"20190301.stq"` (`v0.0.2`) (`Size: 3.26 MiB`): Wikipedia dataset for stq, parsed from 20190301 dump.
 
-*   `"20190301.su"` (`v0.0.2`) (`Size: 20.52 MiB`): Wikipedia dataset for su,
-    parsed from 20190301 dump.
+* `"20190301.su"` (`v0.0.2`) (`Size: 20.52 MiB`): Wikipedia dataset for su, parsed from 20190301 dump.
 
-*   `"20190301.sv"` (`v0.0.2`) (`Size: ?? GiB`): Wikipedia dataset for sv,
-    parsed from 20190301 dump.
+* `"20190301.sv"` (`v0.0.2`) (`Size: 1.64 GiB`): Wikipedia dataset for sv, parsed from 20190301 dump.
 
-*   `"20190301.sw"` (`v0.0.2`) (`Size: 27.60 MiB`): Wikipedia dataset for sw,
-    parsed from 20190301 dump.
+* `"20190301.sw"` (`v0.0.2`) (`Size: 27.60 MiB`): Wikipedia dataset for sw, parsed from 20190301 dump.
 
-*   `"20190301.szl"` (`v0.0.2`) (`Size: 4.06 MiB`): Wikipedia dataset for szl,
-    parsed from 20190301 dump.
+* `"20190301.szl"` (`v0.0.2`) (`Size: 4.06 MiB`): Wikipedia dataset for szl, parsed from 20190301 dump.
 
-*   `"20190301.ta"` (`v0.0.2`) (`Size: 141.07 MiB`): Wikipedia dataset for ta,
-    parsed from 20190301 dump.
+* `"20190301.ta"` (`v0.0.2`) (`Size: 141.07 MiB`): Wikipedia dataset for ta, parsed from 20190301 dump.
 
-*   `"20190301.tcy"` (`v0.0.2`) (`Size: 2.33 MiB`): Wikipedia dataset for tcy,
-    parsed from 20190301 dump.
+* `"20190301.tcy"` (`v0.0.2`) (`Size: 2.33 MiB`): Wikipedia dataset for tcy, parsed from 20190301 dump.
 
-*   `"20190301.te"` (`v0.0.2`) (`Size: 113.16 MiB`): Wikipedia dataset for te,
-    parsed from 20190301 dump.
+* `"20190301.te"` (`v0.0.2`) (`Size: 113.16 MiB`): Wikipedia dataset for te, parsed from 20190301 dump.
 
-*   `"20190301.tet"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for tet,
-    parsed from 20190301 dump.
+* `"20190301.tet"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for tet, parsed from 20190301 dump.
 
-*   `"20190301.tg"` (`v0.0.2`) (`Size: 36.95 MiB`): Wikipedia dataset for tg,
-    parsed from 20190301 dump.
+* `"20190301.tg"` (`v0.0.2`) (`Size: 36.95 MiB`): Wikipedia dataset for tg, parsed from 20190301 dump.
 
-*   `"20190301.th"` (`v0.0.2`) (`Size: 254.00 MiB`): Wikipedia dataset for th,
-    parsed from 20190301 dump.
+* `"20190301.th"` (`v0.0.2`) (`Size: 254.00 MiB`): Wikipedia dataset for th, parsed from 20190301 dump.
 
-*   `"20190301.ti"` (`v0.0.2`) (`Size: 309.72 KiB`): Wikipedia dataset for ti,
-    parsed from 20190301 dump.
+* `"20190301.ti"` (`v0.0.2`) (`Size: 309.72 KiB`): Wikipedia dataset for ti, parsed from 20190301 dump.
 
-*   `"20190301.tk"` (`v0.0.2`) (`Size: 4.50 MiB`): Wikipedia dataset for tk,
-    parsed from 20190301 dump.
+* `"20190301.tk"` (`v0.0.2`) (`Size: 4.50 MiB`): Wikipedia dataset for tk, parsed from 20190301 dump.
 
-*   `"20190301.tl"` (`v0.0.2`) (`Size: 50.85 MiB`): Wikipedia dataset for tl,
-    parsed from 20190301 dump.
+* `"20190301.tl"` (`v0.0.2`) (`Size: 50.85 MiB`): Wikipedia dataset for tl, parsed from 20190301 dump.
 
-*   `"20190301.tn"` (`v0.0.2`) (`Size: 1.21 MiB`): Wikipedia dataset for tn,
-    parsed from 20190301 dump.
+* `"20190301.tn"` (`v0.0.2`) (`Size: 1.21 MiB`): Wikipedia dataset for tn, parsed from 20190301 dump.
 
-*   `"20190301.to"` (`v0.0.2`) (`Size: 775.10 KiB`): Wikipedia dataset for to,
-    parsed from 20190301 dump.
+* `"20190301.to"` (`v0.0.2`) (`Size: 775.10 KiB`): Wikipedia dataset for to, parsed from 20190301 dump.
 
-*   `"20190301.tpi"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for tpi,
-    parsed from 20190301 dump.
+* `"20190301.tpi"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for tpi, parsed from 20190301 dump.
 
-*   `"20190301.tr"` (`v0.0.2`) (`Size: 497.19 MiB`): Wikipedia dataset for tr,
-    parsed from 20190301 dump.
+* `"20190301.tr"` (`v0.0.2`) (`Size: 497.19 MiB`): Wikipedia dataset for tr, parsed from 20190301 dump.
 
-*   `"20190301.ts"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for ts,
-    parsed from 20190301 dump.
+* `"20190301.ts"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for ts, parsed from 20190301 dump.
 
-*   `"20190301.tt"` (`v0.0.2`) (`Size: 53.23 MiB`): Wikipedia dataset for tt,
-    parsed from 20190301 dump.
+* `"20190301.tt"` (`v0.0.2`) (`Size: 53.23 MiB`): Wikipedia dataset for tt, parsed from 20190301 dump.
 
-*   `"20190301.tum"` (`v0.0.2`) (`Size: 309.58 KiB`): Wikipedia dataset for tum,
-    parsed from 20190301 dump.
+* `"20190301.tum"` (`v0.0.2`) (`Size: 309.58 KiB`): Wikipedia dataset for tum, parsed from 20190301 dump.
 
-*   `"20190301.tw"` (`v0.0.2`) (`Size: 345.96 KiB`): Wikipedia dataset for tw,
-    parsed from 20190301 dump.
+* `"20190301.tw"` (`v0.0.2`) (`Size: 345.96 KiB`): Wikipedia dataset for tw, parsed from 20190301 dump.
 
-*   `"20190301.ty"` (`v0.0.2`) (`Size: 485.56 KiB`): Wikipedia dataset for ty,
-    parsed from 20190301 dump.
+* `"20190301.ty"` (`v0.0.2`) (`Size: 485.56 KiB`): Wikipedia dataset for ty, parsed from 20190301 dump.
 
-*   `"20190301.tyv"` (`v0.0.2`) (`Size: 2.60 MiB`): Wikipedia dataset for tyv,
-    parsed from 20190301 dump.
+* `"20190301.tyv"` (`v0.0.2`) (`Size: 2.60 MiB`): Wikipedia dataset for tyv, parsed from 20190301 dump.
 
-*   `"20190301.udm"` (`v0.0.2`) (`Size: 2.94 MiB`): Wikipedia dataset for udm,
-    parsed from 20190301 dump.
+* `"20190301.udm"` (`v0.0.2`) (`Size: 2.94 MiB`): Wikipedia dataset for udm, parsed from 20190301 dump.
 
-*   `"20190301.ug"` (`v0.0.2`) (`Size: 5.64 MiB`): Wikipedia dataset for ug,
-    parsed from 20190301 dump.
+* `"20190301.ug"` (`v0.0.2`) (`Size: 5.64 MiB`): Wikipedia dataset for ug, parsed from 20190301 dump.
 
-*   `"20190301.uk"` (`v0.0.2`) (`Size: 1.28 GiB`): Wikipedia dataset for uk,
-    parsed from 20190301 dump.
+* `"20190301.uk"` (`v0.0.2`) (`Size: 1.28 GiB`): Wikipedia dataset for uk, parsed from 20190301 dump.
 
-*   `"20190301.ur"` (`v0.0.2`) (`Size: 129.57 MiB`): Wikipedia dataset for ur,
-    parsed from 20190301 dump.
+* `"20190301.ur"` (`v0.0.2`) (`Size: 129.57 MiB`): Wikipedia dataset for ur, parsed from 20190301 dump.
 
-*   `"20190301.uz"` (`v0.0.2`) (`Size: 60.85 MiB`): Wikipedia dataset for uz,
-    parsed from 20190301 dump.
+* `"20190301.uz"` (`v0.0.2`) (`Size: 60.85 MiB`): Wikipedia dataset for uz, parsed from 20190301 dump.
 
-*   `"20190301.ve"` (`v0.0.2`) (`Size: 257.59 KiB`): Wikipedia dataset for ve,
-    parsed from 20190301 dump.
+* `"20190301.ve"` (`v0.0.2`) (`Size: 257.59 KiB`): Wikipedia dataset for ve, parsed from 20190301 dump.
 
-*   `"20190301.vec"` (`v0.0.2`) (`Size: 10.65 MiB`): Wikipedia dataset for vec,
-    parsed from 20190301 dump.
+* `"20190301.vec"` (`v0.0.2`) (`Size: 10.65 MiB`): Wikipedia dataset for vec, parsed from 20190301 dump.
 
-*   `"20190301.vep"` (`v0.0.2`) (`Size: 4.59 MiB`): Wikipedia dataset for vep,
-    parsed from 20190301 dump.
+* `"20190301.vep"` (`v0.0.2`) (`Size: 4.59 MiB`): Wikipedia dataset for vep, parsed from 20190301 dump.
 
-*   `"20190301.vi"` (`v0.0.2`) (`Size: 623.74 MiB`): Wikipedia dataset for vi,
-    parsed from 20190301 dump.
+* `"20190301.vi"` (`v0.0.2`) (`Size: 623.74 MiB`): Wikipedia dataset for vi, parsed from 20190301 dump.
 
-*   `"20190301.vls"` (`v0.0.2`) (`Size: 6.58 MiB`): Wikipedia dataset for vls,
-    parsed from 20190301 dump.
+* `"20190301.vls"` (`v0.0.2`) (`Size: 6.58 MiB`): Wikipedia dataset for vls, parsed from 20190301 dump.
 
-*   `"20190301.vo"` (`v0.0.2`) (`Size: 23.80 MiB`): Wikipedia dataset for vo,
-    parsed from 20190301 dump.
+* `"20190301.vo"` (`v0.0.2`) (`Size: 23.80 MiB`): Wikipedia dataset for vo, parsed from 20190301 dump.
 
-*   `"20190301.wa"` (`v0.0.2`) (`Size: 8.75 MiB`): Wikipedia dataset for wa,
-    parsed from 20190301 dump.
+* `"20190301.wa"` (`v0.0.2`) (`Size: 8.75 MiB`): Wikipedia dataset for wa, parsed from 20190301 dump.
 
-*   `"20190301.war"` (`v0.0.2`) (`Size: 256.72 MiB`): Wikipedia dataset for war,
-    parsed from 20190301 dump.
+* `"20190301.war"` (`v0.0.2`) (`Size: 256.72 MiB`): Wikipedia dataset for war, parsed from 20190301 dump.
 
-*   `"20190301.wo"` (`v0.0.2`) (`Size: 1.54 MiB`): Wikipedia dataset for wo,
-    parsed from 20190301 dump.
+* `"20190301.wo"` (`v0.0.2`) (`Size: 1.54 MiB`): Wikipedia dataset for wo, parsed from 20190301 dump.
 
-*   `"20190301.wuu"` (`v0.0.2`) (`Size: 9.08 MiB`): Wikipedia dataset for wuu,
-    parsed from 20190301 dump.
+* `"20190301.wuu"` (`v0.0.2`) (`Size: 9.08 MiB`): Wikipedia dataset for wuu, parsed from 20190301 dump.
 
-*   `"20190301.xal"` (`v0.0.2`) (`Size: 1.64 MiB`): Wikipedia dataset for xal,
-    parsed from 20190301 dump.
+* `"20190301.xal"` (`v0.0.2`) (`Size: 1.64 MiB`): Wikipedia dataset for xal, parsed from 20190301 dump.
 
-*   `"20190301.xh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for xh,
-    parsed from 20190301 dump.
+* `"20190301.xh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for xh, parsed from 20190301 dump.
 
-*   `"20190301.xmf"` (`v0.0.2`) (`Size: 9.40 MiB`): Wikipedia dataset for xmf,
-    parsed from 20190301 dump.
+* `"20190301.xmf"` (`v0.0.2`) (`Size: 9.40 MiB`): Wikipedia dataset for xmf, parsed from 20190301 dump.
 
-*   `"20190301.yi"` (`v0.0.2`) (`Size: 11.56 MiB`): Wikipedia dataset for yi,
-    parsed from 20190301 dump.
+* `"20190301.yi"` (`v0.0.2`) (`Size: 11.56 MiB`): Wikipedia dataset for yi, parsed from 20190301 dump.
 
-*   `"20190301.yo"` (`v0.0.2`) (`Size: 11.55 MiB`): Wikipedia dataset for yo,
-    parsed from 20190301 dump.
+* `"20190301.yo"` (`v0.0.2`) (`Size: 11.55 MiB`): Wikipedia dataset for yo, parsed from 20190301 dump.
 
-*   `"20190301.za"` (`v0.0.2`) (`Size: 735.93 KiB`): Wikipedia dataset for za,
-    parsed from 20190301 dump.
+* `"20190301.za"` (`v0.0.2`) (`Size: 735.93 KiB`): Wikipedia dataset for za, parsed from 20190301 dump.
 
-*   `"20190301.zea"` (`v0.0.2`) (`Size: 2.47 MiB`): Wikipedia dataset for zea,
-    parsed from 20190301 dump.
+* `"20190301.zea"` (`v0.0.2`) (`Size: 2.47 MiB`): Wikipedia dataset for zea, parsed from 20190301 dump.
 
-*   `"20190301.zh"` (`v0.0.2`) (`Size: 1.71 GiB`): Wikipedia dataset for zh,
-    parsed from 20190301 dump.
+* `"20190301.zh"` (`v0.0.2`) (`Size: 1.71 GiB`): Wikipedia dataset for zh, parsed from 20190301 dump.
 
-*   `"20190301.zh-classical"` (`v0.0.2`) (`Size: 13.37 MiB`): Wikipedia dataset
-    for zh-classical, parsed from 20190301 dump.
+* `"20190301.zh-classical"` (`v0.0.2`) (`Size: 13.37 MiB`): Wikipedia dataset for zh-classical, parsed from 20190301 dump.
 
-*   `"20190301.zh-min-nan"` (`v0.0.2`) (`Size: 50.30 MiB`): Wikipedia dataset
-    for zh-min-nan, parsed from 20190301 dump.
+* `"20190301.zh-min-nan"` (`v0.0.2`) (`Size: 50.30 MiB`): Wikipedia dataset for zh-min-nan, parsed from 20190301 dump.
 
-*   `"20190301.zh-yue"` (`v0.0.2`) (`Size: 52.41 MiB`): Wikipedia dataset for
-    zh-yue, parsed from 20190301 dump.
+* `"20190301.zh-yue"` (`v0.0.2`) (`Size: 52.41 MiB`): Wikipedia dataset for zh-yue, parsed from 20190301 dump.
 
-*   `"20190301.zu"` (`v0.0.2`) (`Size: 1.50 MiB`): Wikipedia dataset for zu,
-    parsed from 20190301 dump.
+* `"20190301.zu"` (`v0.0.2`) (`Size: 1.50 MiB`): Wikipedia dataset for zu, parsed from 20190301 dump.
+
 
 #### `"wikipedia/20190301.aa"`
 
@@ -9182,6 +9252,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ab"`
 
 ```python
@@ -9190,6 +9262,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ace"`
 
@@ -9200,6 +9274,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ady"`
 
 ```python
@@ -9208,6 +9284,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.af"`
 
@@ -9218,6 +9296,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ak"`
 
 ```python
@@ -9226,6 +9306,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.als"`
 
@@ -9236,6 +9318,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.am"`
 
 ```python
@@ -9244,6 +9328,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.an"`
 
@@ -9254,6 +9340,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ang"`
 
 ```python
@@ -9262,6 +9350,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ar"`
 
@@ -9272,6 +9362,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.arc"`
 
 ```python
@@ -9280,6 +9372,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.arz"`
 
@@ -9290,6 +9384,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.as"`
 
 ```python
@@ -9298,6 +9394,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ast"`
 
@@ -9308,6 +9406,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.atj"`
 
 ```python
@@ -9316,6 +9416,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.av"`
 
@@ -9326,6 +9428,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ay"`
 
 ```python
@@ -9334,6 +9438,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.az"`
 
@@ -9344,6 +9450,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.azb"`
 
 ```python
@@ -9352,6 +9460,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ba"`
 
@@ -9362,6 +9472,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.bar"`
 
 ```python
@@ -9370,6 +9482,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.bat-smg"`
 
@@ -9380,6 +9494,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.bcl"`
 
 ```python
@@ -9388,6 +9504,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.be"`
 
@@ -9398,6 +9516,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.be-x-old"`
 
 ```python
@@ -9406,6 +9526,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.bg"`
 
@@ -9416,6 +9538,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.bh"`
 
 ```python
@@ -9424,6 +9548,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.bi"`
 
@@ -9434,6 +9560,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.bjn"`
 
 ```python
@@ -9442,6 +9570,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.bm"`
 
@@ -9452,6 +9582,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.bn"`
 
 ```python
@@ -9460,6 +9592,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.bo"`
 
@@ -9470,6 +9604,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.bpy"`
 
 ```python
@@ -9478,6 +9614,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.br"`
 
@@ -9488,6 +9626,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.bs"`
 
 ```python
@@ -9496,6 +9636,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.bug"`
 
@@ -9506,6 +9648,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.bxr"`
 
 ```python
@@ -9514,6 +9658,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ca"`
 
@@ -9524,6 +9670,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.cbk-zam"`
 
 ```python
@@ -9532,6 +9680,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.cdo"`
 
@@ -9542,6 +9692,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ce"`
 
 ```python
@@ -9550,6 +9702,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ceb"`
 
@@ -9560,6 +9714,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ch"`
 
 ```python
@@ -9568,6 +9724,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.cho"`
 
@@ -9578,6 +9736,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.chr"`
 
 ```python
@@ -9586,6 +9746,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.chy"`
 
@@ -9596,6 +9758,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ckb"`
 
 ```python
@@ -9604,6 +9768,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.co"`
 
@@ -9614,6 +9780,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.cr"`
 
 ```python
@@ -9622,6 +9790,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.crh"`
 
@@ -9632,6 +9802,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.cs"`
 
 ```python
@@ -9640,6 +9812,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.csb"`
 
@@ -9650,6 +9824,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.cu"`
 
 ```python
@@ -9658,6 +9834,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.cv"`
 
@@ -9668,6 +9846,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.cy"`
 
 ```python
@@ -9676,6 +9856,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.da"`
 
@@ -9686,6 +9868,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.de"`
 
 ```python
@@ -9694,6 +9878,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.din"`
 
@@ -9704,6 +9890,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.diq"`
 
 ```python
@@ -9712,6 +9900,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.dsb"`
 
@@ -9722,6 +9912,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.dty"`
 
 ```python
@@ -9730,6 +9922,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.dv"`
 
@@ -9740,6 +9934,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.dz"`
 
 ```python
@@ -9748,6 +9944,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ee"`
 
@@ -9758,6 +9956,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.el"`
 
 ```python
@@ -9766,6 +9966,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.eml"`
 
@@ -9776,6 +9978,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.en"`
 
 ```python
@@ -9784,6 +9988,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.eo"`
 
@@ -9794,6 +10000,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.es"`
 
 ```python
@@ -9802,6 +10010,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.et"`
 
@@ -9812,6 +10022,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.eu"`
 
 ```python
@@ -9820,6 +10032,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ext"`
 
@@ -9830,6 +10044,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.fa"`
 
 ```python
@@ -9838,6 +10054,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ff"`
 
@@ -9848,6 +10066,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.fi"`
 
 ```python
@@ -9856,6 +10076,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.fiu-vro"`
 
@@ -9866,6 +10088,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.fj"`
 
 ```python
@@ -9874,6 +10098,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.fo"`
 
@@ -9884,6 +10110,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.fr"`
 
 ```python
@@ -9892,6 +10120,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.frp"`
 
@@ -9902,6 +10132,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.frr"`
 
 ```python
@@ -9910,6 +10142,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.fur"`
 
@@ -9920,6 +10154,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.fy"`
 
 ```python
@@ -9928,6 +10164,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ga"`
 
@@ -9938,6 +10176,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.gag"`
 
 ```python
@@ -9946,6 +10186,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.gan"`
 
@@ -9956,6 +10198,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.gd"`
 
 ```python
@@ -9964,6 +10208,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.gl"`
 
@@ -9974,6 +10220,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.glk"`
 
 ```python
@@ -9982,6 +10230,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.gn"`
 
@@ -9992,6 +10242,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.gom"`
 
 ```python
@@ -10000,6 +10252,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.gor"`
 
@@ -10010,6 +10264,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.got"`
 
 ```python
@@ -10018,6 +10274,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.gu"`
 
@@ -10028,6 +10286,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.gv"`
 
 ```python
@@ -10036,6 +10296,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ha"`
 
@@ -10046,6 +10308,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.hak"`
 
 ```python
@@ -10054,6 +10318,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.haw"`
 
@@ -10064,6 +10330,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.he"`
 
 ```python
@@ -10072,6 +10340,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.hi"`
 
@@ -10082,6 +10352,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.hif"`
 
 ```python
@@ -10090,6 +10362,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ho"`
 
@@ -10100,6 +10374,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.hr"`
 
 ```python
@@ -10108,6 +10384,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.hsb"`
 
@@ -10118,6 +10396,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ht"`
 
 ```python
@@ -10126,6 +10406,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.hu"`
 
@@ -10136,6 +10418,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.hy"`
 
 ```python
@@ -10144,6 +10428,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.hz"`
 
@@ -10154,6 +10440,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ia"`
 
 ```python
@@ -10162,6 +10450,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.id"`
 
@@ -10172,6 +10462,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ie"`
 
 ```python
@@ -10180,6 +10472,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ig"`
 
@@ -10190,6 +10484,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ii"`
 
 ```python
@@ -10198,6 +10494,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ik"`
 
@@ -10208,6 +10506,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ilo"`
 
 ```python
@@ -10216,6 +10516,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.inh"`
 
@@ -10226,6 +10528,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.io"`
 
 ```python
@@ -10234,6 +10538,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.is"`
 
@@ -10244,6 +10550,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.it"`
 
 ```python
@@ -10252,6 +10560,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.iu"`
 
@@ -10262,6 +10572,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ja"`
 
 ```python
@@ -10270,6 +10582,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.jam"`
 
@@ -10280,6 +10594,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.jbo"`
 
 ```python
@@ -10288,6 +10604,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.jv"`
 
@@ -10298,6 +10616,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ka"`
 
 ```python
@@ -10306,6 +10626,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.kaa"`
 
@@ -10316,6 +10638,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.kab"`
 
 ```python
@@ -10324,6 +10648,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.kbd"`
 
@@ -10334,6 +10660,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.kbp"`
 
 ```python
@@ -10342,6 +10670,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.kg"`
 
@@ -10352,6 +10682,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ki"`
 
 ```python
@@ -10360,6 +10692,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.kj"`
 
@@ -10370,6 +10704,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.kk"`
 
 ```python
@@ -10378,6 +10714,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.kl"`
 
@@ -10388,6 +10726,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.km"`
 
 ```python
@@ -10396,6 +10736,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.kn"`
 
@@ -10406,6 +10748,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ko"`
 
 ```python
@@ -10414,6 +10758,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.koi"`
 
@@ -10424,6 +10770,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.kr"`
 
 ```python
@@ -10432,6 +10780,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.krc"`
 
@@ -10442,6 +10792,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ks"`
 
 ```python
@@ -10450,6 +10802,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ksh"`
 
@@ -10460,6 +10814,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ku"`
 
 ```python
@@ -10468,6 +10824,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.kv"`
 
@@ -10478,6 +10836,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.kw"`
 
 ```python
@@ -10486,6 +10846,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ky"`
 
@@ -10496,6 +10858,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.la"`
 
 ```python
@@ -10504,6 +10868,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.lad"`
 
@@ -10514,6 +10880,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.lb"`
 
 ```python
@@ -10522,6 +10890,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.lbe"`
 
@@ -10532,6 +10902,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.lez"`
 
 ```python
@@ -10540,6 +10912,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.lfn"`
 
@@ -10550,6 +10924,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.lg"`
 
 ```python
@@ -10558,6 +10934,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.li"`
 
@@ -10568,6 +10946,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.lij"`
 
 ```python
@@ -10576,6 +10956,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.lmo"`
 
@@ -10586,6 +10968,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ln"`
 
 ```python
@@ -10594,6 +10978,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.lo"`
 
@@ -10604,6 +10990,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.lrc"`
 
 ```python
@@ -10612,6 +11000,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.lt"`
 
@@ -10622,6 +11012,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ltg"`
 
 ```python
@@ -10630,6 +11022,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.lv"`
 
@@ -10640,6 +11034,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mai"`
 
 ```python
@@ -10648,6 +11044,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.map-bms"`
 
@@ -10658,6 +11056,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mdf"`
 
 ```python
@@ -10666,6 +11066,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.mg"`
 
@@ -10676,6 +11078,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mh"`
 
 ```python
@@ -10684,6 +11088,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.mhr"`
 
@@ -10694,6 +11100,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mi"`
 
 ```python
@@ -10702,6 +11110,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.min"`
 
@@ -10712,6 +11122,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mk"`
 
 ```python
@@ -10720,6 +11132,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ml"`
 
@@ -10730,6 +11144,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mn"`
 
 ```python
@@ -10738,6 +11154,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.mr"`
 
@@ -10748,6 +11166,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mrj"`
 
 ```python
@@ -10756,6 +11176,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ms"`
 
@@ -10766,6 +11188,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mt"`
 
 ```python
@@ -10774,6 +11198,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.mus"`
 
@@ -10784,6 +11210,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.mwl"`
 
 ```python
@@ -10792,6 +11220,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.my"`
 
@@ -10802,6 +11232,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.myv"`
 
 ```python
@@ -10810,6 +11242,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.mzn"`
 
@@ -10820,6 +11254,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.na"`
 
 ```python
@@ -10828,6 +11264,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.nah"`
 
@@ -10838,6 +11276,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.nap"`
 
 ```python
@@ -10846,6 +11286,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.nds"`
 
@@ -10856,6 +11298,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.nds-nl"`
 
 ```python
@@ -10864,6 +11308,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ne"`
 
@@ -10874,6 +11320,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.new"`
 
 ```python
@@ -10882,6 +11330,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ng"`
 
@@ -10892,6 +11342,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.nl"`
 
 ```python
@@ -10900,6 +11352,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.nn"`
 
@@ -10910,6 +11364,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.no"`
 
 ```python
@@ -10918,6 +11374,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.nov"`
 
@@ -10928,6 +11386,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.nrm"`
 
 ```python
@@ -10936,6 +11396,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.nso"`
 
@@ -10946,6 +11408,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.nv"`
 
 ```python
@@ -10954,6 +11418,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ny"`
 
@@ -10964,6 +11430,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.oc"`
 
 ```python
@@ -10972,6 +11440,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.olo"`
 
@@ -10982,6 +11452,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.om"`
 
 ```python
@@ -10990,6 +11462,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.or"`
 
@@ -11000,6 +11474,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.os"`
 
 ```python
@@ -11008,6 +11484,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.pa"`
 
@@ -11018,6 +11496,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.pag"`
 
 ```python
@@ -11026,6 +11506,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.pam"`
 
@@ -11036,6 +11518,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.pap"`
 
 ```python
@@ -11044,6 +11528,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.pcd"`
 
@@ -11054,6 +11540,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.pdc"`
 
 ```python
@@ -11062,6 +11550,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.pfl"`
 
@@ -11072,6 +11562,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.pi"`
 
 ```python
@@ -11080,6 +11572,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.pih"`
 
@@ -11090,6 +11584,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.pl"`
 
 ```python
@@ -11098,6 +11594,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.pms"`
 
@@ -11108,6 +11606,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.pnb"`
 
 ```python
@@ -11116,6 +11616,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.pnt"`
 
@@ -11126,6 +11628,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ps"`
 
 ```python
@@ -11134,6 +11638,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.pt"`
 
@@ -11144,6 +11650,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.qu"`
 
 ```python
@@ -11152,6 +11660,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.rm"`
 
@@ -11162,6 +11672,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.rmy"`
 
 ```python
@@ -11170,6 +11682,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.rn"`
 
@@ -11180,6 +11694,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ro"`
 
 ```python
@@ -11188,6 +11704,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.roa-rup"`
 
@@ -11198,6 +11716,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.roa-tara"`
 
 ```python
@@ -11206,6 +11726,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ru"`
 
@@ -11216,6 +11738,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.rue"`
 
 ```python
@@ -11224,6 +11748,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.rw"`
 
@@ -11234,6 +11760,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.sa"`
 
 ```python
@@ -11242,6 +11770,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.sah"`
 
@@ -11252,6 +11782,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.sat"`
 
 ```python
@@ -11260,6 +11792,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.sc"`
 
@@ -11270,6 +11804,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.scn"`
 
 ```python
@@ -11278,6 +11814,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.sco"`
 
@@ -11288,6 +11826,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.sd"`
 
 ```python
@@ -11296,6 +11836,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.se"`
 
@@ -11306,6 +11848,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.sg"`
 
 ```python
@@ -11314,6 +11858,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.sh"`
 
@@ -11324,6 +11870,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.si"`
 
 ```python
@@ -11332,6 +11880,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.simple"`
 
@@ -11342,6 +11892,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.sk"`
 
 ```python
@@ -11350,6 +11902,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.sl"`
 
@@ -11360,6 +11914,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.sm"`
 
 ```python
@@ -11368,6 +11924,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.sn"`
 
@@ -11378,6 +11936,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.so"`
 
 ```python
@@ -11386,6 +11946,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.sq"`
 
@@ -11396,6 +11958,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.sr"`
 
 ```python
@@ -11404,6 +11968,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.srn"`
 
@@ -11414,6 +11980,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ss"`
 
 ```python
@@ -11422,6 +11990,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.st"`
 
@@ -11432,6 +12002,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.stq"`
 
 ```python
@@ -11440,6 +12012,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.su"`
 
@@ -11450,6 +12024,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.sv"`
 
 ```python
@@ -11458,6 +12034,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.sw"`
 
@@ -11468,6 +12046,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.szl"`
 
 ```python
@@ -11476,6 +12056,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ta"`
 
@@ -11486,6 +12068,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.tcy"`
 
 ```python
@@ -11494,6 +12078,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.te"`
 
@@ -11504,6 +12090,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.tet"`
 
 ```python
@@ -11512,6 +12100,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.tg"`
 
@@ -11522,6 +12112,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.th"`
 
 ```python
@@ -11530,6 +12122,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ti"`
 
@@ -11540,6 +12134,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.tk"`
 
 ```python
@@ -11548,6 +12144,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.tl"`
 
@@ -11558,6 +12156,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.tn"`
 
 ```python
@@ -11566,6 +12166,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.to"`
 
@@ -11576,6 +12178,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.tpi"`
 
 ```python
@@ -11584,6 +12188,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.tr"`
 
@@ -11594,6 +12200,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ts"`
 
 ```python
@@ -11602,6 +12210,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.tt"`
 
@@ -11612,6 +12222,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.tum"`
 
 ```python
@@ -11620,6 +12232,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.tw"`
 
@@ -11630,6 +12244,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.ty"`
 
 ```python
@@ -11638,6 +12254,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.tyv"`
 
@@ -11648,6 +12266,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.udm"`
 
 ```python
@@ -11656,6 +12276,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ug"`
 
@@ -11666,6 +12288,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.uk"`
 
 ```python
@@ -11674,6 +12298,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ur"`
 
@@ -11684,6 +12310,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.uz"`
 
 ```python
@@ -11692,6 +12320,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.ve"`
 
@@ -11702,6 +12332,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.vec"`
 
 ```python
@@ -11710,6 +12342,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.vep"`
 
@@ -11720,6 +12354,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.vi"`
 
 ```python
@@ -11728,6 +12364,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.vls"`
 
@@ -11738,6 +12376,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.vo"`
 
 ```python
@@ -11746,6 +12386,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.wa"`
 
@@ -11756,6 +12398,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.war"`
 
 ```python
@@ -11764,6 +12408,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.wo"`
 
@@ -11774,6 +12420,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.wuu"`
 
 ```python
@@ -11782,6 +12430,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.xal"`
 
@@ -11792,6 +12442,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.xh"`
 
 ```python
@@ -11800,6 +12452,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.xmf"`
 
@@ -11810,6 +12464,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.yi"`
 
 ```python
@@ -11818,6 +12474,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.yo"`
 
@@ -11828,6 +12486,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.za"`
 
 ```python
@@ -11836,6 +12496,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.zea"`
 
@@ -11846,6 +12508,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.zh"`
 
 ```python
@@ -11854,6 +12518,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.zh-classical"`
 
@@ -11864,6 +12530,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.zh-min-nan"`
 
 ```python
@@ -11872,6 +12540,8 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wikipedia/20190301.zh-yue"`
 
@@ -11882,6 +12552,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"wikipedia/20190301.zu"`
 
 ```python
@@ -11890,6 +12562,9 @@ FeaturesDict({
     'title': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
+
 
 #### Statistics
 None computed
@@ -11940,7 +12615,8 @@ labels).
 `xnli` is configured with `tfds.text.xnli.BuilderConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"plain_text"` (`v0.0.1`) (`Size: 17.04 MiB`): Plain text import of XNLI
+* `"plain_text"` (`v0.0.1`) (`Size: 17.04 MiB`): Plain text import of XNLI
+
 
 #### `"xnli/plain_text"`
 
@@ -11971,13 +12647,16 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | -------:
-ALL        | 7,500
-TEST       | 5,010
-VALIDATION | 2,490
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |      7,500
+TEST       |      5,010
+VALIDATION |      2,490
+
 
 #### Urls
  * [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
@@ -12044,6 +12723,8 @@ Translation({
 })
 ```
 
+
+
 #### `"flores/sien_plain_text"`
 
 ```python
@@ -12052,6 +12733,9 @@ Translation({
     'si': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -12065,7 +12749,7 @@ TEST       |      2,766
  * [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'si', u'en')`
+`('si', 'en')`
 
 #### Citation
 ```
@@ -12079,7 +12763,7 @@ TEST       |      2,766
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -12095,82 +12779,58 @@ TEST       |      2,766
 
 Web-Scale Parallel Corpora for Official European Languages. English-Swedish.
 
-*   URL:
-    [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   `DatasetBuilder`:
-    [`tfds.translate.para_crawl.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
+* URL: [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
+* `DatasetBuilder`: [`tfds.translate.para_crawl.ParaCrawl`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/para_crawl.py)
 
-`para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
-has the following configurations predefined (defaults to the first one):
+`para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: 98.94 MiB`): Translation dataset from
-    English to bg, uses encoder plain_text.
+* `"enbg_plain_text"` (`v0.1.0`) (`Size: 98.94 MiB`): Translation dataset from English to bg, uses encoder plain_text.
 
-*   `"encs_plain_text"` (`v0.1.0`) (`Size: 187.31 MiB`): Translation dataset
-    from English to cs, uses encoder plain_text.
+* `"encs_plain_text"` (`v0.1.0`) (`Size: 187.31 MiB`): Translation dataset from English to cs, uses encoder plain_text.
 
-*   `"enda_plain_text"` (`v0.1.0`) (`Size: 174.34 MiB`): Translation dataset
-    from English to da, uses encoder plain_text.
+* `"enda_plain_text"` (`v0.1.0`) (`Size: 174.34 MiB`): Translation dataset from English to da, uses encoder plain_text.
 
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: 1.22 GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
+* `"ende_plain_text"` (`v0.1.0`) (`Size: 1.22 GiB`): Translation dataset from English to de, uses encoder plain_text.
 
-*   `"enel_plain_text"` (`v0.1.0`) (`Size: 184.59 MiB`): Translation dataset
-    from English to el, uses encoder plain_text.
+* `"enel_plain_text"` (`v0.1.0`) (`Size: 184.59 MiB`): Translation dataset from English to el, uses encoder plain_text.
 
-*   `"enes_plain_text"` (`v0.1.0`) (`Size: 1.82 GiB`): Translation dataset from
-    English to es, uses encoder plain_text.
+* `"enes_plain_text"` (`v0.1.0`) (`Size: 1.82 GiB`): Translation dataset from English to es, uses encoder plain_text.
 
-*   `"enet_plain_text"` (`v0.1.0`) (`Size: 66.91 MiB`): Translation dataset from
-    English to et, uses encoder plain_text.
+* `"enet_plain_text"` (`v0.1.0`) (`Size: 66.91 MiB`): Translation dataset from English to et, uses encoder plain_text.
 
-*   `"enfi_plain_text"` (`v0.1.0`) (`Size: 151.83 MiB`): Translation dataset
-    from English to fi, uses encoder plain_text.
+* `"enfi_plain_text"` (`v0.1.0`) (`Size: 151.83 MiB`): Translation dataset from English to fi, uses encoder plain_text.
 
-*   `"enfr_plain_text"` (`v0.1.0`) (`Size: 2.63 GiB`): Translation dataset from
-    English to fr, uses encoder plain_text.
+* `"enfr_plain_text"` (`v0.1.0`) (`Size: 2.63 GiB`): Translation dataset from English to fr, uses encoder plain_text.
 
-*   `"enga_plain_text"` (`v0.1.0`) (`Size: 28.03 MiB`): Translation dataset from
-    English to ga, uses encoder plain_text.
+* `"enga_plain_text"` (`v0.1.0`) (`Size: 28.03 MiB`): Translation dataset from English to ga, uses encoder plain_text.
 
-*   `"enhr_plain_text"` (`v0.1.0`) (`Size: 80.97 MiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
+* `"enhr_plain_text"` (`v0.1.0`) (`Size: 80.97 MiB`): Translation dataset from English to hr, uses encoder plain_text.
 
-*   `"enhu_plain_text"` (`v0.1.0`) (`Size: 114.24 MiB`): Translation dataset
-    from English to hu, uses encoder plain_text.
+* `"enhu_plain_text"` (`v0.1.0`) (`Size: 114.24 MiB`): Translation dataset from English to hu, uses encoder plain_text.
 
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: 1017.30 MiB`): Translation dataset
-    from English to it, uses encoder plain_text.
+* `"enit_plain_text"` (`v0.1.0`) (`Size: 1017.30 MiB`): Translation dataset from English to it, uses encoder plain_text.
 
-*   `"enlt_plain_text"` (`v0.1.0`) (`Size: 63.28 MiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
+* `"enlt_plain_text"` (`v0.1.0`) (`Size: 63.28 MiB`): Translation dataset from English to lt, uses encoder plain_text.
 
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: 45.17 MiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
+* `"enlv_plain_text"` (`v0.1.0`) (`Size: 45.17 MiB`): Translation dataset from English to lv, uses encoder plain_text.
 
-*   `"enmt_plain_text"` (`v0.1.0`) (`Size: 18.15 MiB`): Translation dataset from
-    English to mt, uses encoder plain_text.
+* `"enmt_plain_text"` (`v0.1.0`) (`Size: 18.15 MiB`): Translation dataset from English to mt, uses encoder plain_text.
 
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: 400.63 MiB`): Translation dataset
-    from English to nl, uses encoder plain_text.
+* `"ennl_plain_text"` (`v0.1.0`) (`Size: 400.63 MiB`): Translation dataset from English to nl, uses encoder plain_text.
 
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: 257.90 MiB`): Translation dataset
-    from English to pl, uses encoder plain_text.
+* `"enpl_plain_text"` (`v0.1.0`) (`Size: 257.90 MiB`): Translation dataset from English to pl, uses encoder plain_text.
 
-*   `"enpt_plain_text"` (`v0.1.0`) (`Size: 608.62 MiB`): Translation dataset
-    from English to pt, uses encoder plain_text.
+* `"enpt_plain_text"` (`v0.1.0`) (`Size: 608.62 MiB`): Translation dataset from English to pt, uses encoder plain_text.
 
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: 153.24 MiB`): Translation dataset
-    from English to ro, uses encoder plain_text.
+* `"enro_plain_text"` (`v0.1.0`) (`Size: 153.24 MiB`): Translation dataset from English to ro, uses encoder plain_text.
 
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: 96.61 MiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
+* `"ensk_plain_text"` (`v0.1.0`) (`Size: 96.61 MiB`): Translation dataset from English to sk, uses encoder plain_text.
 
-*   `"ensl_plain_text"` (`v0.1.0`) (`Size: 62.02 MiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
+* `"ensl_plain_text"` (`v0.1.0`) (`Size: 62.02 MiB`): Translation dataset from English to sl, uses encoder plain_text.
 
-*   `"ensv_plain_text"` (`v0.1.0`) (`Size: 262.76 MiB`): Translation dataset
-    from English to sv, uses encoder plain_text.
+* `"ensv_plain_text"` (`v0.1.0`) (`Size: 262.76 MiB`): Translation dataset from English to sv, uses encoder plain_text.
+
 
 #### `"para_crawl/enbg_plain_text"`
 
@@ -12181,6 +12841,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/encs_plain_text"`
 
 ```python
@@ -12189,6 +12851,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/enda_plain_text"`
 
@@ -12199,6 +12863,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/ende_plain_text"`
 
 ```python
@@ -12207,6 +12873,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/enel_plain_text"`
 
@@ -12217,6 +12885,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/enes_plain_text"`
 
 ```python
@@ -12225,6 +12895,8 @@ Translation({
     'es': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/enet_plain_text"`
 
@@ -12235,6 +12907,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/enfi_plain_text"`
 
 ```python
@@ -12243,6 +12917,8 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/enfr_plain_text"`
 
@@ -12253,6 +12929,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/enga_plain_text"`
 
 ```python
@@ -12261,6 +12939,8 @@ Translation({
     'ga': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/enhr_plain_text"`
 
@@ -12271,6 +12951,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/enhu_plain_text"`
 
 ```python
@@ -12279,6 +12961,8 @@ Translation({
     'hu': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/enit_plain_text"`
 
@@ -12289,6 +12973,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/enlt_plain_text"`
 
 ```python
@@ -12297,6 +12983,8 @@ Translation({
     'lt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/enlv_plain_text"`
 
@@ -12307,6 +12995,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/enmt_plain_text"`
 
 ```python
@@ -12315,6 +13005,8 @@ Translation({
     'mt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/ennl_plain_text"`
 
@@ -12325,6 +13017,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/enpl_plain_text"`
 
 ```python
@@ -12333,6 +13027,8 @@ Translation({
     'pl': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/enpt_plain_text"`
 
@@ -12343,6 +13039,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/enro_plain_text"`
 
 ```python
@@ -12351,6 +13049,8 @@ Translation({
     'ro': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/ensk_plain_text"`
 
@@ -12361,6 +13061,8 @@ Translation({
 })
 ```
 
+
+
 #### `"para_crawl/ensl_plain_text"`
 
 ```python
@@ -12369,6 +13071,8 @@ Translation({
     'sl': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"para_crawl/ensv_plain_text"`
 
@@ -12379,20 +13083,22 @@ Translation({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | --------:
-TRAIN | 3,476,729
-ALL   | 3,476,729
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+TRAIN      |  3,476,729
+ALL        |  3,476,729
+
 
 #### Urls
-
-*   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz)
+ * [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
+ * [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'en', u'sv')`
+`('en', 'sv')`
 
 #### Citation
 ```
@@ -12466,6 +13172,8 @@ Translation({
 })
 ```
 
+
+
 #### `"ted_hrlr_translate/aztr_to_en"`
 
 ```python
@@ -12474,6 +13182,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"ted_hrlr_translate/be_to_en"`
 
@@ -12484,6 +13194,8 @@ Translation({
 })
 ```
 
+
+
 #### `"ted_hrlr_translate/beru_to_en"`
 
 ```python
@@ -12492,6 +13204,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"ted_hrlr_translate/es_to_pt"`
 
@@ -12502,6 +13216,8 @@ Translation({
 })
 ```
 
+
+
 #### `"ted_hrlr_translate/fr_to_pt"`
 
 ```python
@@ -12510,6 +13226,8 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"ted_hrlr_translate/gl_to_en"`
 
@@ -12520,6 +13238,8 @@ Translation({
 })
 ```
 
+
+
 #### `"ted_hrlr_translate/glpt_to_en"`
 
 ```python
@@ -12528,6 +13248,8 @@ Translation({
     'gl_pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"ted_hrlr_translate/he_to_pt"`
 
@@ -12538,6 +13260,8 @@ Translation({
 })
 ```
 
+
+
 #### `"ted_hrlr_translate/it_to_pt"`
 
 ```python
@@ -12546,6 +13270,8 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"ted_hrlr_translate/pt_to_en"`
 
@@ -12556,6 +13282,8 @@ Translation({
 })
 ```
 
+
+
 #### `"ted_hrlr_translate/ru_to_en"`
 
 ```python
@@ -12564,6 +13292,8 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"ted_hrlr_translate/ru_to_pt"`
 
@@ -12574,6 +13304,8 @@ Translation({
 })
 ```
 
+
+
 #### `"ted_hrlr_translate/tr_to_en"`
 
 ```python
@@ -12582,6 +13314,9 @@ Translation({
     'tr': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -12596,7 +13331,7 @@ VALIDATION |      4,045
  * [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'tr', u'en')`
+`('tr', 'en')`
 
 #### Citation
 ```
@@ -12650,6 +13385,9 @@ FeaturesDict({
 })
 ```
 
+
+
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -12681,7 +13419,7 @@ VALIDATION |      6,049
 }
 ```
 
---------------------------------------------------------------------------------
+---
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -12729,28 +13467,24 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
-*   URL:
-    [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
-*   `DatasetBuilder`:
-    [`tfds.translate.wmt14.Wmt14Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt14.py)
 
-`wmt14_translate` is configured with `tfds.translate.wmt14.WmtConfig` and has
-the following configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.3`) (`Size: 1.58 GiB`): WMT 2014 cs-en translation task
-    dataset.
+* URL: [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
+* `DatasetBuilder`: [`tfds.translate.wmt14.Wmt14Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt14.py)
 
-*   `"de-en"` (`v0.0.3`) (`Size: 1.58 GiB`): WMT 2014 de-en translation task
-    dataset.
+`wmt14_translate` is configured with `tfds.translate.wmt14.WmtConfig` and has the following
+configurations predefined (defaults to the first one):
 
-*   `"fr-en"` (`v0.0.3`) (`Size: 6.20 GiB`): WMT 2014 fr-en translation task
-    dataset.
+* `"cs-en"` (`v0.0.3`) (`Size: 1.58 GiB`): WMT 2014 cs-en translation task dataset.
 
-*   `"hi-en"` (`v0.0.3`) (`Size: 44.65 MiB`): WMT 2014 hi-en translation task
-    dataset.
+* `"de-en"` (`v0.0.3`) (`Size: 1.58 GiB`): WMT 2014 de-en translation task dataset.
 
-*   `"ru-en"` (`v0.0.3`) (`Size: 998.38 MiB`): WMT 2014 ru-en translation task
-    dataset.
+* `"fr-en"` (`v0.0.3`) (`Size: 6.20 GiB`): WMT 2014 fr-en translation task dataset.
+
+* `"hi-en"` (`v0.0.3`) (`Size: 44.65 MiB`): WMT 2014 hi-en translation task dataset.
+
+* `"ru-en"` (`v0.0.3`) (`Size: 998.38 MiB`): WMT 2014 ru-en translation task dataset.
+
 
 #### `"wmt14_translate/cs-en"`
 
@@ -12761,6 +13495,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt14_translate/de-en"`
 
 ```python
@@ -12769,6 +13505,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt14_translate/fr-en"`
 
@@ -12779,6 +13517,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt14_translate/hi-en"`
 
 ```python
@@ -12787,6 +13527,8 @@ Translation({
     'hi': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt14_translate/ru-en"`
 
@@ -12797,21 +13539,23 @@ Translation({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | --------:
-ALL        | 2,492,968
-TRAIN      | 2,486,965
-TEST       | 3,003
-VALIDATION | 3,000
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |  2,492,968
+TRAIN      |  2,486,965
+TEST       |      3,003
+VALIDATION |      3,000
+
 
 #### Urls
-
-*   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
+ * [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+`('ru', 'en')`
 
 #### Citation
 ```
@@ -12876,41 +13620,34 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
+
+
 * URL: [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt15.Wmt15Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt15.py)
 
 `wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
-    dataset.
+* `"cs-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task dataset.
 
-*   `"de-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
-    dataset.
+* `"de-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task dataset.
 
-*   `"fi-en"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
-    dataset.
+* `"fi-en"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task dataset.
 
-*   `"fr-en"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
-    dataset.
+* `"fr-en"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task dataset.
 
-*   `"ru-en"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
-    dataset.
+* `"ru-en"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task dataset.
 
-*   `"cs-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en
-    translation task dataset with subword encoding.
+* `"cs-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task dataset with subword encoding.
 
-*   `"de-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en
-    translation task dataset with subword encoding.
+* `"de-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task dataset with subword encoding.
 
-*   `"fi-en.subwords8k"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en
-    translation task dataset with subword encoding.
+* `"fi-en.subwords8k"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task dataset with subword encoding.
 
-*   `"fr-en.subwords8k"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en
-    translation task dataset with subword encoding.
+* `"fr-en.subwords8k"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task dataset with subword encoding.
 
-*   `"ru-en.subwords8k"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en
-    translation task dataset with subword encoding.
+* `"ru-en.subwords8k"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task dataset with subword encoding.
+
 
 #### `"wmt15_translate/cs-en"`
 
@@ -12921,6 +13658,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt15_translate/de-en"`
 
 ```python
@@ -12929,6 +13668,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt15_translate/fi-en"`
 
@@ -12939,6 +13680,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt15_translate/fr-en"`
 
 ```python
@@ -12947,6 +13690,8 @@ Translation({
     'fr': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt15_translate/ru-en"`
 
@@ -12957,6 +13702,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt15_translate/cs-en.subwords8k"`
 
 ```python
@@ -12965,6 +13712,8 @@ Translation({
     'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8155>),
 })
 ```
+
+
 
 #### `"wmt15_translate/de-en.subwords8k"`
 
@@ -12975,6 +13724,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt15_translate/fi-en.subwords8k"`
 
 ```python
@@ -12983,6 +13734,8 @@ Translation({
     'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
 })
 ```
+
+
 
 #### `"wmt15_translate/fr-en.subwords8k"`
 
@@ -12993,6 +13746,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt15_translate/ru-en.subwords8k"`
 
 ```python
@@ -13002,20 +13757,23 @@ Translation({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | --------:
-ALL        | 2,500,902
-TRAIN      | 2,495,081
-VALIDATION | 3,003
-TEST       | 2,818
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |  2,500,902
+TRAIN      |  2,495,081
+VALIDATION |      3,003
+TEST       |      2,818
+
 
 #### Urls
  * [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+`('ru', 'en')`
 
 #### Citation
 ```
@@ -13080,29 +13838,26 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
+
+
 * URL: [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt16.Wmt16Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt16.py)
 
 `wmt16_translate` is configured with `tfds.translate.wmt16.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.3`) (`Size: 1.57 GiB`): WMT 2016 cs-en translation task
-    dataset.
+* `"cs-en"` (`v0.0.3`) (`Size: 1.57 GiB`): WMT 2016 cs-en translation task dataset.
 
-*   `"de-en"` (`v0.0.3`) (`Size: 1.57 GiB`): WMT 2016 de-en translation task
-    dataset.
+* `"de-en"` (`v0.0.3`) (`Size: 1.57 GiB`): WMT 2016 de-en translation task dataset.
 
-*   `"fi-en"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2016 fi-en translation task
-    dataset.
+* `"fi-en"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2016 fi-en translation task dataset.
 
-*   `"ro-en"` (`v0.0.3`) (`Size: 273.83 MiB`): WMT 2016 ro-en translation task
-    dataset.
+* `"ro-en"` (`v0.0.3`) (`Size: 273.83 MiB`): WMT 2016 ro-en translation task dataset.
 
-*   `"ru-en"` (`v0.0.3`) (`Size: 993.38 MiB`): WMT 2016 ru-en translation task
-    dataset.
+* `"ru-en"` (`v0.0.3`) (`Size: 993.38 MiB`): WMT 2016 ru-en translation task dataset.
 
-*   `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2016 tr-en translation task
-    dataset.
+* `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2016 tr-en translation task dataset.
+
 
 #### `"wmt16_translate/cs-en"`
 
@@ -13113,6 +13868,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt16_translate/de-en"`
 
 ```python
@@ -13121,6 +13878,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt16_translate/fi-en"`
 
@@ -13131,6 +13890,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt16_translate/ro-en"`
 
 ```python
@@ -13139,6 +13900,8 @@ Translation({
     'ro': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt16_translate/ru-en"`
 
@@ -13149,6 +13912,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt16_translate/tr-en"`
 
 ```python
@@ -13157,6 +13922,9 @@ Translation({
     'tr': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -13171,7 +13939,7 @@ VALIDATION |      1,001
  * [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'tr', u'en')`
+`('tr', 'en')`
 
 #### Citation
 ```
@@ -13236,32 +14004,28 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
+
+
 * URL: [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt17.Wmt17Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt17.py)
 
 `wmt17_translate` is configured with `tfds.translate.wmt17.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.3`) (`Size: 1.66 GiB`): WMT 2017 cs-en translation task
-    dataset.
+* `"cs-en"` (`v0.0.3`) (`Size: 1.66 GiB`): WMT 2017 cs-en translation task dataset.
 
-*   `"de-en"` (`v0.0.3`) (`Size: 1.81 GiB`): WMT 2017 de-en translation task
-    dataset.
+* `"de-en"` (`v0.0.3`) (`Size: 1.81 GiB`): WMT 2017 de-en translation task dataset.
 
-*   `"fi-en"` (`v0.0.3`) (`Size: 414.10 MiB`): WMT 2017 fi-en translation task
-    dataset.
+* `"fi-en"` (`v0.0.3`) (`Size: 414.10 MiB`): WMT 2017 fi-en translation task dataset.
 
-*   `"lv-en"` (`v0.0.3`) (`Size: 161.69 MiB`): WMT 2017 lv-en translation task
-    dataset.
+* `"lv-en"` (`v0.0.3`) (`Size: 161.69 MiB`): WMT 2017 lv-en translation task dataset.
 
-*   `"ru-en"` (`v0.0.3`) (`Size: 3.34 GiB`): WMT 2017 ru-en translation task
-    dataset.
+* `"ru-en"` (`v0.0.3`) (`Size: 3.34 GiB`): WMT 2017 ru-en translation task dataset.
 
-*   `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2017 tr-en translation task
-    dataset.
+* `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2017 tr-en translation task dataset.
 
-*   `"zh-en"` (`v0.0.3`) (`Size: 2.16 GiB`): WMT 2017 zh-en translation task
-    dataset.
+* `"zh-en"` (`v0.0.3`) (`Size: 2.16 GiB`): WMT 2017 zh-en translation task dataset.
+
 
 #### `"wmt17_translate/cs-en"`
 
@@ -13272,6 +14036,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt17_translate/de-en"`
 
 ```python
@@ -13280,6 +14046,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt17_translate/fi-en"`
 
@@ -13290,6 +14058,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt17_translate/lv-en"`
 
 ```python
@@ -13298,6 +14068,8 @@ Translation({
     'lv': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt17_translate/ru-en"`
 
@@ -13308,6 +14080,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt17_translate/tr-en"`
 
 ```python
@@ -13317,6 +14091,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt17_translate/zh-en"`
 
 ```python
@@ -13325,6 +14101,9 @@ Translation({
     'zh': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -13339,7 +14118,7 @@ TEST       |      2,001
  * [http://www.statmt.org/wmt17/translation-task.html](http://www.statmt.org/wmt17/translation-task.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'zh', u'en')`
+`('zh', 'en')`
 
 #### Citation
 ```
@@ -13404,35 +14183,30 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
+
+
 * URL: [http://www.statmt.org/wmt18/translation-task.html](http://www.statmt.org/wmt18/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt18.Wmt18Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt18.py)
 
 `wmt18_translate` is configured with `tfds.translate.wmt18.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.3`) (`Size: 1.89 GiB`): WMT 2018 cs-en translation task
-    dataset.
+* `"cs-en"` (`v0.0.3`) (`Size: 1.89 GiB`): WMT 2018 cs-en translation task dataset.
 
-*   `"de-en"` (`v0.0.3`) (`Size: 3.55 GiB`): WMT 2018 de-en translation task
-    dataset.
+* `"de-en"` (`v0.0.3`) (`Size: 3.55 GiB`): WMT 2018 de-en translation task dataset.
 
-*   `"et-en"` (`v0.0.3`) (`Size: 499.91 MiB`): WMT 2018 et-en translation task
-    dataset.
+* `"et-en"` (`v0.0.3`) (`Size: 499.91 MiB`): WMT 2018 et-en translation task dataset.
 
-*   `"fi-en"` (`v0.0.3`) (`Size: 468.76 MiB`): WMT 2018 fi-en translation task
-    dataset.
+* `"fi-en"` (`v0.0.3`) (`Size: 468.76 MiB`): WMT 2018 fi-en translation task dataset.
 
-*   `"kk-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2018 kk-en translation task
-    dataset.
+* `"kk-en"` (`v0.0.3`) (`Size: ?? GiB`): WMT 2018 kk-en translation task dataset.
 
-*   `"ru-en"` (`v0.0.3`) (`Size: 3.91 GiB`): WMT 2018 ru-en translation task
-    dataset.
+* `"ru-en"` (`v0.0.3`) (`Size: 3.91 GiB`): WMT 2018 ru-en translation task dataset.
 
-*   `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2018 tr-en translation task
-    dataset.
+* `"tr-en"` (`v0.0.3`) (`Size: 59.32 MiB`): WMT 2018 tr-en translation task dataset.
 
-*   `"zh-en"` (`v0.0.3`) (`Size: 2.10 GiB`): WMT 2018 zh-en translation task
-    dataset.
+* `"zh-en"` (`v0.0.3`) (`Size: 2.10 GiB`): WMT 2018 zh-en translation task dataset.
+
 
 #### `"wmt18_translate/cs-en"`
 
@@ -13443,6 +14217,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt18_translate/de-en"`
 
 ```python
@@ -13451,6 +14227,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt18_translate/et-en"`
 
@@ -13461,6 +14239,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt18_translate/fi-en"`
 
 ```python
@@ -13469,6 +14249,8 @@ Translation({
     'fi': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt18_translate/kk-en"`
 
@@ -13479,6 +14261,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt18_translate/ru-en"`
 
 ```python
@@ -13487,6 +14271,8 @@ Translation({
     'ru': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt18_translate/tr-en"`
 
@@ -13497,6 +14283,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt18_translate/zh-en"`
 
 ```python
@@ -13506,20 +14294,23 @@ Translation({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | ---------:
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
 ALL        | 25,168,191
 TRAIN      | 25,162,209
-TEST       | 3,981
-VALIDATION | 2,001
+TEST       |      3,981
+VALIDATION |      2,001
+
 
 #### Urls
  * [http://www.statmt.org/wmt18/translation-task.html](http://www.statmt.org/wmt18/translation-task.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'zh', u'en')`
+`('zh', 'en')`
 
 #### Citation
 ```
@@ -13587,38 +14378,32 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
+
+
 * URL: [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 * `DatasetBuilder`: [`tfds.translate.wmt19.Wmt19Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt19.py)
 
 `wmt19_translate` is configured with `tfds.translate.wmt19.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.3`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task
-    dataset.
+* `"cs-en"` (`v0.0.3`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task dataset.
 
-*   `"de-en"` (`v0.0.3`) (`Size: 9.71 GiB`): WMT 2019 de-en translation task
-    dataset.
+* `"de-en"` (`v0.0.3`) (`Size: 9.71 GiB`): WMT 2019 de-en translation task dataset.
 
-*   `"fi-en"` (`v0.0.3`) (`Size: 959.46 MiB`): WMT 2019 fi-en translation task
-    dataset.
+* `"fi-en"` (`v0.0.3`) (`Size: 959.46 MiB`): WMT 2019 fi-en translation task dataset.
 
-*   `"gu-en"` (`v0.0.3`) (`Size: 37.03 MiB`): WMT 2019 gu-en translation task
-    dataset.
+* `"gu-en"` (`v0.0.3`) (`Size: 37.03 MiB`): WMT 2019 gu-en translation task dataset.
 
-*   `"kk-en"` (`v0.0.3`) (`Size: 39.58 MiB`): WMT 2019 kk-en translation task
-    dataset.
+* `"kk-en"` (`v0.0.3`) (`Size: 39.58 MiB`): WMT 2019 kk-en translation task dataset.
 
-*   `"lt-en"` (`v0.0.3`) (`Size: 392.20 MiB`): WMT 2019 lt-en translation task
-    dataset.
+* `"lt-en"` (`v0.0.3`) (`Size: 392.20 MiB`): WMT 2019 lt-en translation task dataset.
 
-*   `"ru-en"` (`v0.0.3`) (`Size: 3.86 GiB`): WMT 2019 ru-en translation task
-    dataset.
+* `"ru-en"` (`v0.0.3`) (`Size: 3.86 GiB`): WMT 2019 ru-en translation task dataset.
 
-*   `"zh-en"` (`v0.0.3`) (`Size: 2.04 GiB`): WMT 2019 zh-en translation task
-    dataset.
+* `"zh-en"` (`v0.0.3`) (`Size: 2.04 GiB`): WMT 2019 zh-en translation task dataset.
 
-*   `"fr-de"` (`v0.0.3`) (`Size: 722.20 MiB`): WMT 2019 fr-de translation task
-    dataset.
+* `"fr-de"` (`v0.0.3`) (`Size: 722.20 MiB`): WMT 2019 fr-de translation task dataset.
+
 
 #### `"wmt19_translate/cs-en"`
 
@@ -13629,6 +14414,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt19_translate/de-en"`
 
 ```python
@@ -13637,6 +14424,8 @@ Translation({
     'en': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt19_translate/fi-en"`
 
@@ -13647,6 +14436,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt19_translate/gu-en"`
 
 ```python
@@ -13655,6 +14446,8 @@ Translation({
     'gu': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt19_translate/kk-en"`
 
@@ -13665,6 +14458,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt19_translate/lt-en"`
 
 ```python
@@ -13673,6 +14468,8 @@ Translation({
     'lt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
 
 #### `"wmt19_translate/ru-en"`
 
@@ -13683,6 +14480,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt19_translate/zh-en"`
 
 ```python
@@ -13692,6 +14491,8 @@ Translation({
 })
 ```
 
+
+
 #### `"wmt19_translate/fr-de"`
 
 ```python
@@ -13700,6 +14501,9 @@ Translation({
     'fr': Text(shape=(), dtype=tf.string),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -13713,7 +14517,7 @@ VALIDATION |      1,512
  * [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'fr', u'de')`
+`('fr', 'de')`
 
 #### Citation
 ```
@@ -13772,16 +14576,16 @@ config = tfds.translate.wmt.WmtConfig(
 builder = tfds.builder("wmt_translate", config=config)
 ```
 
-*   URL:
-    [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
-*   `DatasetBuilder`:
-    [`tfds.translate.wmt_t2t.WmtT2tTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_t2t.py)
 
-`wmt_t2t_translate` is configured with `tfds.translate.wmt_t2t.WmtConfig` and
-has the following configurations predefined (defaults to the first one):
 
-*   `"de-en"` (`v0.0.1`) (`Size: 1.61 GiB`): WMT T2T EnDe translation task
-    dataset.
+* URL: [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
+* `DatasetBuilder`: [`tfds.translate.wmt_t2t.WmtT2tTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_t2t.py)
+
+`wmt_t2t_translate` is configured with `tfds.translate.wmt_t2t.WmtConfig` and has the following
+configurations predefined (defaults to the first one):
+
+* `"de-en"` (`v0.0.1`) (`Size: 1.61 GiB`): WMT T2T EnDe translation task dataset.
+
 
 #### `"wmt_t2t_translate/de-en"`
 
@@ -13792,21 +14596,23 @@ Translation({
 })
 ```
 
-#### Statistics
 
-Split      | Examples
-:--------- | --------:
-ALL        | 4,598,292
-TRAIN      | 4,592,289
-TEST       | 3,003
-VALIDATION | 3,000
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |  4,598,292
+TRAIN      |  4,592,289
+TEST       |      3,003
+VALIDATION |      3,000
+
 
 #### Urls
-
-*   [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
+ * [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
 
 #### Supervised keys (for `as_supervised=True`)
-`(u'de', u'en')`
+`('de', 'en')`
 
 #### Citation
 ```
@@ -13823,7 +14629,8 @@ VALIDATION | 3,000
 }
 ```
 
---------------------------------------------------------------------------------
+---
+
 
 ## [`video`](#video)
 
@@ -13841,12 +14648,10 @@ VALIDATION | 3,000
 
 This data set contains roughly 44,000 examples of robot pushing motions, including one training set (train) and two test sets of previously seen (testseen) and unseen (testnovel) objects. This is the small 64x64 version.
 
-*   URL:
-    [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
-*   `DatasetBuilder`:
-    [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
-*   Version: `v1.0.0`
-*   Size: `30.06 GiB`
+* URL: [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
+* `DatasetBuilder`: [`tfds.video.bair_robot_pushing.BairRobotPushingSmall`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/video/bair_robot_pushing.py)
+* Version: `v1.0.0`
+* Size: `30.06 GiB`
 
 #### Features
 ```python
@@ -13858,6 +14663,7 @@ Sequence({
 })
 ```
 
+
 #### Statistics
 Split  | Examples
 :----- | ---:
@@ -13865,9 +14671,9 @@ ALL        |     43,520
 TRAIN      |     43,264
 TEST       |        256
 
-#### Urls
 
-*   [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
+#### Urls
+ * [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
 
 #### Supervised keys (for `as_supervised=True`)
 `None`
@@ -13916,6 +14722,7 @@ FeaturesDict({
     'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
+
 
 #### Statistics
 Split  | Examples
@@ -13996,6 +14803,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"starcraft_video/brawl_128"`
 
 ```python
@@ -14003,6 +14812,8 @@ FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+
 
 #### `"starcraft_video/collect_mineral_shards_64"`
 
@@ -14012,6 +14823,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"starcraft_video/collect_mineral_shards_128"`
 
 ```python
@@ -14019,6 +14832,8 @@ FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+
 
 #### `"starcraft_video/move_unit_to_border_64"`
 
@@ -14028,6 +14843,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"starcraft_video/move_unit_to_border_128"`
 
 ```python
@@ -14035,6 +14852,8 @@ FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+
 
 #### `"starcraft_video/road_trip_with_medivac_64"`
 
@@ -14044,6 +14863,8 @@ FeaturesDict({
 })
 ```
 
+
+
 #### `"starcraft_video/road_trip_with_medivac_128"`
 
 ```python
@@ -14051,6 +14872,9 @@ FeaturesDict({
     'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
+
+
+
 
 #### Statistics
 Split  | Examples
@@ -14112,8 +14936,8 @@ A 101-label video classification dataset.
 `ucf101` is configured with `tfds.video.ucf101.Ucf101Config` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"ucf101_1_256"` (`v1.0.0`) (`Size: 6.48 GiB`): 256x256 UCF with the first
-    action recognition split.
+* `"ucf101_1_256"` (`v1.0.0`) (`Size: 6.48 GiB`): 256x256 UCF with the first action recognition split.
+
 
 #### `"ucf101/ucf101_1_256"`
 
@@ -14124,13 +14948,16 @@ FeaturesDict({
 })
 ```
 
-#### Statistics
 
-Split | Examples
-:---- | -------:
-ALL   | 13,320
-TRAIN | 9,537
-TEST  | 3,783
+
+
+#### Statistics
+Split  | Examples
+:----- | ---:
+ALL        |     13,320
+TRAIN      |      9,537
+TEST       |      3,783
+
 
 #### Urls
  * [https://www.crcv.ucf.edu/data/UCF101.php](https://www.crcv.ucf.edu/data/UCF101.php)
@@ -14159,5 +14986,6 @@ TEST  | 3,783
 ```
 
 ---
+
 
 

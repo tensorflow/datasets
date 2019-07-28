@@ -26,13 +26,13 @@ num_classes = len(fruits360._CLASS_NAMES)
 
 
 class FruitsTest(testing.DatasetBuilderTestCase):
-    DATASET_CLASS = fruits360.Fruits360
+  DATASET_CLASS = fruits360.Fruits360
 
-    SPLITS = {
-        "train": 6,
-        "test": 6,
-    }
+  SPLITS = {
+    "train": 6,
+    "test": 6,
+  }
 
 
 if __name__ == "__main__":
-    testing.test_main()
+  testing.test_main()

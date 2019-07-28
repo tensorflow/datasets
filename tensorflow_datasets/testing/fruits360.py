@@ -37,32 +37,32 @@ FLAGS = flags.FLAGS
 
 
 def _generate():
-    """Generates a fake dataset and writes it to the fake_examples directory."""
-    commit_dir = 'Fruit-Images-Dataset-{}'.format(_COMMIT_SHA)
-    output_dir = os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "fruits360", commit_dir)
-    test_utils.remake_dir(output_dir)
+  """Generates a fake dataset and writes it to the fake_examples directory."""
+  commit_dir = 'Fruit-Images-Dataset-{}'.format(_COMMIT_SHA)
+  output_dir = os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "fruits360", commit_dir)
+  test_utils.remake_dir(output_dir)
 
-    rs = np.random.RandomState(42)
+  rs = np.random.RandomState(42)
 
-    for split in ("Training", "Test"):
-        for class_name in rs.choice(_CLASS_NAMES, 2, replace=False).tolist():
-            class_directory = os.path.join(output_dir, split, class_name)
-            test_utils.remake_dir(class_directory)
+  for split in ("Training", "Test"):
+    for class_name in rs.choice(_CLASS_NAMES, 2, replace=False).tolist():
+      class_directory = os.path.join(output_dir, split, class_name)
+      test_utils.remake_dir(class_directory)
 
-            for prefix in ('', 'r_', 'r2_'):
-                img_index = rs.randint(0, 100)
-                filename = '{prefix}{img_index}_100.jpg'.format(prefix=prefix, img_index=img_index)
+      for prefix in ('', 'r_', 'r2_'):
+        img_index = rs.randint(0, 100)
+        filename = '{prefix}{img_index}_100.jpg'.format(prefix=prefix, img_index=img_index)
 
-                filepath = os.path.join(class_directory, filename)
-                img = rs.randint(0, 255, (100, 100, 3), dtype=np.uint8)
-                Image.fromarray(img).save(filepath)
+        filepath = os.path.join(class_directory, filename)
+        img = rs.randint(0, 255, (100, 100, 3), dtype=np.uint8)
+        Image.fromarray(img).save(filepath)
 
 
 def main(argv):
-    if len(argv) > 1:
-        raise app.UsageError("Too many command-line arguments.")
-    _generate()
+  if len(argv) > 1:
+    raise app.UsageError("Too many command-line arguments.")
+  _generate()
 
 
 if __name__ == "__main__":
-    app.run(main)
+  app.run(main)

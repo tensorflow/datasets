@@ -10,7 +10,8 @@
     [patch_camelyon](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#patch_camelyon)
 *   Image:
     [binarized_mnist](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#binarized_mnist)
-
+*   Image:
+    [fruits360](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#fruits360)
 ### Features
 
 *   Add `in_memory` option to cache small dataset in RAM.

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Fruits-360: A dataset of images containing fruits. About 700MB total.
+"""Fruits-360: A dataset of images containing fruits.
 """
 
 from __future__ import absolute_import
@@ -64,69 +64,71 @@ _CLASS_NAMES = ['Apple Braeburn', 'Apple Crimson Snow', 'Apple Golden 1', 'Apple
 
 
 class Fruits360(tfds.core.GeneratorBasedBuilder):
-    """Fruits 360 dataset."""
+  """Fruits 360 dataset."""
 
-    VERSION = tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})
 
-    def _info(self):
-        return tfds.core.DatasetInfo(
-            builder=self,
-            description="A large set of fruits on a white background.",
-            features=tfds.features.FeaturesDict({
-                "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-                "label": tfds.features.ClassLabel(names=_CLASS_NAMES)
-            }),
-            supervised_keys=("image", "label"),
-            urls=["https://www.kaggle.com/moltean/fruits"],
-            citation=_CITATION
-        )
+  def _info(self):
+    return tfds.core.DatasetInfo(
+      builder=self,
+      description="A large set of fruits on a white background.",
+      features=tfds.features.FeaturesDict({
+        "image": tfds.features.Image(shape=_IMAGE_SHAPE),
+        "image/filename": tfds.features.Text(),
+        "label": tfds.features.ClassLabel(names=_CLASS_NAMES)
+      }),
+      supervised_keys=("image", "label"),
+      urls=["https://www.kaggle.com/moltean/fruits"],
+      citation=_CITATION
+    )
 
-    def _split_generators(self, dl_manager):
-        resource = tfds.download.Resource(url=_DOWNLOAD_URL, extract_method=tfds.download.ExtractMethod.TAR_GZ)
-        download_path = dl_manager.download_and_extract(resource)
-        sub = 'Fruit-Images-Dataset-{}'.format(_COMMIT_SHA)
-        root_path = os.path.join(download_path, sub)
-        train_path = os.path.join(root_path, 'Training')
-        test_path = os.path.join(root_path, 'Test')
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                num_shards=1,
-                gen_kwargs=dict(split_dir=train_path),
-            ),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TEST,
-                num_shards=1,
-                gen_kwargs=dict(split_dir=test_path),
-            ),
-        ]
+  def _split_generators(self, dl_manager):
+    resource = tfds.download.Resource(url=_DOWNLOAD_URL, extract_method=tfds.download.ExtractMethod.TAR_GZ)
+    download_path = dl_manager.download_and_extract(resource)
+    sub = 'Fruit-Images-Dataset-{}'.format(_COMMIT_SHA)
+    root_path = os.path.join(download_path, sub)
+    train_path = os.path.join(root_path, 'Training')
+    test_path = os.path.join(root_path, 'Test')
+    return [
+      tfds.core.SplitGenerator(
+        name=tfds.Split.TRAIN,
+        num_shards=1,
+        gen_kwargs=dict(split_dir=train_path),
+      ),
+      tfds.core.SplitGenerator(
+        name=tfds.Split.TEST,
+        num_shards=1,
+        gen_kwargs=dict(split_dir=test_path),
+      ),
+    ]
 
-    def _generate_examples(self, split_dir):
-        """Generate fruit examples given a base path.
+  def _generate_examples(self, split_dir):
+    """Generate fruit examples given a base path.
 
-        Args:
-          split_dir: path to the directory where the images are stored (in their respective class folders)
+    Args:
+      split_dir: path to the directory where the images are stored (in their respective class folders)
 
-        Yields:
-          The image path and its label.
-        """
-        for class_name in _CLASS_NAMES:
-            class_dir = os.path.join(split_dir, class_name)
-            try:
-                fns = tfio.gfile.listdir(class_dir)
-            except errors.NotFoundError as err:
-                import logging
-                logging.warning("Class '%s' was not found in the dataset. If this is not a unit test, something may "
-                                "be wrong with the extracted archive at %s.", class_name, split_dir)
-                continue
+    Yields:
+      The image path and its label.
+    """
+    for class_name in _CLASS_NAMES:
+      class_dir = os.path.join(split_dir, class_name)
+      try:
+        fns = tfio.gfile.listdir(class_dir)
+      except errors.NotFoundError as err:
+        import logging
+        logging.warning("Class '%s' was not found in the dataset. If this is not a unit test, something may "
+                        "be wrong with the extracted archive at %s.", class_name, split_dir)
+        continue
 
-            for fn in sorted(fns):
-                image_path = os.path.join(class_dir, fn)
-                record = {
-                    "image": image_path,
-                    "label": class_name,
-                }
-                if self.version.implements(tfds.core.Experiment.S3):
-                    yield "%s/%s" % (class_name, fn), record
-                else:
-                    yield record
+      for fn in sorted(fns):
+        image_path = os.path.join(class_dir, fn)
+        record = {
+          "image": image_path,
+          "image/filename": fn,
+          "label": class_name,
+        }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield "%s/%s" % (class_name, fn), record
+        else:
+          yield record
