@@ -81,7 +81,7 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
     def _split_generators(self, dl_manager):
         resource = tfds.download.Resource(url=_DOWNLOAD_URL, extract_method=tfds.download.ExtractMethod.TAR_GZ)
         download_path = dl_manager.download_and_extract(resource)
-        sub = tfio.gfile.listdir(download_path)[0]
+        sub = 'Fruit-Images-Dataset-{}'.format(_COMMIT_SHA)
         root_path = os.path.join(download_path, sub)
         train_path = os.path.join(root_path, 'Training')
         test_path = os.path.join(root_path, 'Test')

@@ -33,11 +33,6 @@ class FruitsTest(testing.DatasetBuilderTestCase):
         "test": 2 * num_classes,
     }
 
-    DL_EXTRACT_RESULT = {
-        'train': 'Fruit-Images-Dataset-%s/Training' % fruits360._COMMIT_SHA,
-        'test': 'Fruit-Images-Dataset-%s/Test' % fruits360._COMMIT_SHA
-    }
-
 
 if __name__ == "__main__":
     testing.test_main()
