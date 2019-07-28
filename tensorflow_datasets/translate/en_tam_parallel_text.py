@@ -32,7 +32,8 @@ DESCRIPTION['MTPIL'] = """\
 	The parallel corpora cover texts from bible, cinema and news domains.
 """
 DESCRIPTION['opus'] = """\
-	OPUS project focuses on converting and aligning free online data, to add linguistic annotation, and to provide the community with a publicly available parallel corpus.
+	OPUS focuses on converting and aligning free online data, to add linguistic annotation,
+	and to provide the community with a publicly available parallel corpus.
 """
 _CITATION['MTPIL'] = """
   @inproceedings {biblio:RaBoMorphologicalProcessing2012,
@@ -51,7 +52,9 @@ _CITATION['opus'] = """
   	month = {may},
   	date = {23-25},
   	address = {Istanbul, Turkey},
-  	editor = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},
+  	editor = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and 
+	         Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and 
+		 Jan Odijk and Stelios Piperidis},
   	publisher = {European Language Resources Association (ELRA)},
   	isbn = {978-2-9517408-7-7},
   	language = {english}
@@ -221,7 +224,8 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
                     "target_file": os.path.join(dl_dir[site], self.builder_config.tname)
                 })]
   def _generate_examples(self, source_file, target_file):
-    """This function returns the filtered text pairs.Some filtering techniques were inspired from https://github.com/himanshudce/MIDAS-NMT-English-Tamil/blob/master/Data%20perprocessing/data.py"""
+    """This function returns the filtered text pairs.Some filtering techniques were 
+    inspired from https://github.com/himanshudce/MIDAS-NMT-English-Tamil"""
     with tf.io.gfile.GFile(source_file) as f:
       source_sentences = f.read().split("\n")
     with tf.io.gfile.GFile(target_file) as f:
@@ -229,7 +233,7 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
 
     assert len(target_sentences) == len(
         source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (len(
-            source_sentences), len(target_sentences), source_file, target_file)
+          source_sentences), len(target_sentences), source_file, target_file)
     source, target = self.builder_config.language_pair
     ta_blacklist = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-(\')''/[]♪/%#$&\/_"{.}|=<>@~`'
     en_blacklist = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ"#$%&\()*+-./:;<=>@[\\]^_`♪{|}~='
@@ -240,7 +244,7 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
       # Remove unwanted html tags from text
       l1 = re.sub(cleantxt, '', l1)
       l2 = re.sub(cleantxt, '', l2)
-	  # Remove english text in tamil sentence and tamil text in english sentence
+      # Remove english text in tamil sentence and tamil text in english sentence
       cleaned_l1 = ''.join([ch for ch in l1 if ch not in en_blacklist])
       cleaned_l2 = ''.join([ch for ch in l2 if ch not in ta_blacklist])
       result = {source: cleaned_l1, target: cleaned_l2}
