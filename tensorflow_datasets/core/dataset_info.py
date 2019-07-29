@@ -42,7 +42,6 @@ import posixpath
 import tempfile
 
 from absl import logging
-import matplotlib.pyplot as plt
 import numpy as np
 import six
 import tensorflow as tf
@@ -59,6 +58,8 @@ from tensorflow_datasets.core.utils import gcs_utils
 
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
+
+import tensorflow_datasets.public_api as tfds
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
@@ -447,19 +448,19 @@ class DatasetInfo(object):
     image_key = image_keys[0]
     num_examples = rows * cols
     examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
-    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
+    fig = tfds.core.lazy_imports.matplotlib.pyplot.figure(figsize=(plot_scale*cols, plot_scale*rows))
     fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
     for i, ex in enumerate(examples):
       fig.add_subplot(rows, cols, i+1)
       image = ex[image_key]
       if image.shape[2] == 1:
         image = image.reshape(image.shape[:2])
-      plt.imshow(image, cmap='gray')
+      tfds.core.lazy_imports.matplotlib.pyplot.imshow(image, cmap='gray')
       if len(label_keys) == 1:
         label_key = label_keys[0]
         label = ex[label_key]
-        plt.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
-    plt.show()    
+        tfds.core.lazy_imports.matplotlib.pyplot.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
+    tfds.core.lazy_imports.matplotlib.pyplot.show()    
     return fig
 
   def __repr__(self):
