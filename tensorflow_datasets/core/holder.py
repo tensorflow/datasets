@@ -12,9 +12,9 @@ import shutil
 import zipfile
 
 
-# TODO add tar.gz support √
-# TODO check archive or extracted √
-# TODO count created example for test file √
+# TODO add tar.gz support
+# TODO check archive or extracted
+# TODO count created example for test file 
 # TODO if download 2 files return array and download both
 
 NUMBER_OF_CREATED_FILE = 0
