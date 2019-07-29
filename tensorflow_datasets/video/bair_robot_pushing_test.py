@@ -32,5 +32,9 @@ class BairRobotPushingTest(testing.DatasetBuilderTestCase):
   }
 
 
+class BairRobotPushingS3Test(BairRobotPushingTest):
+  VERSION = "experimental_latest"
+
+
 if __name__ == "__main__":
   testing.test_main()

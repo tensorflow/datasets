@@ -33,7 +33,7 @@ def _try_import(module_name):
     err_msg = ("Tried importing %s but failed. See setup.py extras_require. "
                "The dataset you are trying to use may have additional "
                "dependencies.")
-    utils.reraise(err_msg)
+    utils.reraise(suffix=err_msg)
 
 
 class LazyImporter(object):
@@ -71,7 +71,12 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def PIL_Image(cls):   # pylint: disable=invalid-name
+  def pandas(cls):
+    return _try_import("pandas")
+
+  @utils.classproperty
+  @classmethod
+  def PIL_Image(cls):  # pylint: disable=invalid-name
     # TiffImagePlugin need to be activated explicitly on some systems
     # https://github.com/python-pillow/Pillow/blob/5.4.x/src/PIL/Image.py#L407
     _try_import("PIL.TiffImagePlugin")
@@ -79,8 +84,8 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def pyplot(cls):
-    return _try_import("matplotlib.pyplot")
+  def pretty_midi(cls):
+    return _try_import("pretty_midi")
 
   @utils.classproperty
   @classmethod
@@ -94,6 +99,7 @@ class LazyImporter(object):
   def skimage(cls):
     _try_import("skimage.color")
     _try_import("skimage.filters")
+    _try_import("skimage.external.tifffile")
     return _try_import("skimage")
 
   @utils.classproperty

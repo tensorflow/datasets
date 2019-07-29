@@ -94,7 +94,8 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=256,
           height=256,
           split_number=1,
-          version='1.0.0',
+          version=tfds.core.Version(
+              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
       ),
   ]
 

@@ -34,6 +34,10 @@ class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
   SPLITS = {  # Expected number of examples on the validation split.
       "validation": 10,
   }
+  DL_EXTRACT_RESULT = [
+      "ILSVRC2012_img_train.tar",
+      "ILSVRC2012_img_val.tar",
+  ]
 
 
 if __name__ == "__main__":
