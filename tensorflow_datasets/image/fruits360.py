@@ -41,7 +41,7 @@ doi = {10.2478/ausi-2018-0002}
 """
 
 _COMMIT_SHA = 'b6960fc0287be349c222c3dbdd2624958c902431'
-_DOWNLOAD_URL = f'https://github.com/Horea94/Fruit-Images-Dataset/archive/{_COMMIT_SHA}.tar.gz'
+_DOWNLOAD_URL = 'https://github.com/Horea94/Fruit-Images-Dataset/archive/{sha}.tar.gz'.format(sha=_COMMIT_SHA)
 
 _IMAGE_SIZE = 100
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
@@ -115,10 +115,7 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
       class_dir = os.path.join(split_dir, class_name)
       try:
         fns = tfio.gfile.listdir(class_dir)
-      except errors.NotFoundError as err:
-        import logging
-        logging.warning("Class '%s' was not found in the dataset. If this is not a unit test, something may "
-                        "be wrong with the extracted archive at %s.", class_name, split_dir)
+      except errors.NotFoundError:
         continue
 
       for fn in sorted(fns):
