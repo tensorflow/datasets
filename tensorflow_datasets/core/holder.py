@@ -55,7 +55,6 @@ class ImageHolder(Holder):
 	def create_fakes(self):
 		global NUMBER_OF_CREATED_FILE
 		img = lazy_imports.PIL_Image.new('RGB', self.image_size(), (255, 255, 255))
-		print('=== = = = ', self.output_path)
 		img.save(self.output_path)
 		NUMBER_OF_CREATED_FILE += 1
 		print('created, ', self.output_path, ', size: ', self.image_size())
@@ -92,14 +91,7 @@ class ZipHolder(Holder):
 		super(ZipHolder, self).__init__(*args, **kwargs)
 
 	def create_fakes(self):
-		if self.path.endswith('.zip'):
-			zip_file = zipfile.ZipFile(self.path)
-			f = zip_file.namelist()
-			r = re.compile(".*/$")
-			folders = list(filter(r.match, f))  # it's catch the folders names
-
-			folder_path = os.path.splitext(self.output_path)[0]
-		elif self.path.endswith('.tar.gz'):
+		if self.typ == 'gztar':
 			zip_file = tarfile.open(self.path)
 			f = zip_file.getnames()
 			folders = list(filter(lambda x: x.isdir(), zip_file))
@@ -107,6 +99,13 @@ class ZipHolder(Holder):
 
 			folder_path = list(reversed(self.output_path.split('.')))[2:]
 			folder_path = '.'.join(reversed(folder_path))
+		else:
+			zip_file = zipfile.ZipFile(self.path)
+			f = zip_file.namelist()
+			r = re.compile(".*/$")
+			folders = list(filter(r.match, f))  # it's catch the folders names
+
+			folder_path = os.path.splitext(self.output_path)[0]
 
 		ex_files = []
 		for prefix in folders[:2]:  # take 2 example from 2 folders
@@ -115,10 +114,11 @@ class ZipHolder(Holder):
 			ex_files += list(filter(lambda x: not os.path.basename(x).startswith('.')
 																				and x.startswith(prefix)
 																						and not x.endswith('/'), f))[1:3]
-		ex_files = ex_files[:5] if len(ex_files) > 4 else ex_files
+		ex_files = list(set(ex_files))
+		ex_files = ex_files[:4] if len(ex_files) > 4 else ex_files
 		for file in ex_files:
 			name = os.path.basename(file)
-			typ = os.path.splitext(file)[1]
+			typ = os.path.splitext(file)[1][1:]
 			basedir = os.path.basename(os.path.splitext(self.output_path)[0])
 			if basedir in file:
 				rel_path = os.path.relpath(file, basedir)
@@ -142,19 +142,18 @@ class HolderFactory(Holder):
 		self.zip_file = zip_file
 
 	def generate_holder(self):
-		if self.typ(('zip', 'gztar')):
+		if self.typ in ('zip', 'gztar'):
 			return ZipHolder(self.name, self.typ, self.path, self.output_path)
-		elif self.typ(('jpg', 'jpeg', 'png', 'tiff')):
+		elif self.typ in ('jpg', 'jpeg', 'png', 'tiff'):
 			return ImageHolder(self.zip_file, self.name, self.typ, self.path,
 												 self.output_path)
-		elif self.typ(
-				('csv', 'txt', 'en', 'ne', 'si', 'data', 'md')):
+		elif self.typ in ('csv', 'txt', 'en', 'ne', 'si', 'data', 'md'):
 			return PlainTextHolder(self.zip_file, self.name, self.typ, self.path, self.output_path)
 
 
 class Generator(object):
 	"""
-	Generator of fake examples of dataset for testing.
+	Generate dataset fake examples and tests.
 
 	Example Usages:
 
@@ -195,7 +194,7 @@ class Generator(object):
 
 		if self.inpath.endswith('.tar.gz'):
 			hold = HolderFactory(None, self.dataset_name, 'gztar', self.inpath, self.outpath)
-		elif self.inpath.qendswith('.zip'):
+		elif self.inpath.endswith('.zip'):
 			hold = HolderFactory(None, self.dataset_name, 'zip', self.inpath, self.outpath)
 
 		try:
