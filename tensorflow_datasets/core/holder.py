@@ -1,5 +1,6 @@
 import os
 import re
+import tarfile
 
 import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
@@ -11,10 +12,11 @@ import shutil
 import zipfile
 
 
-# TODO add tar.gz support
+# TODO add tar.gz support √
 # TODO check types with python-magic (pip install python-magic-bin==0.4.14
-# TODO check archive or extracted
-# TODO count created example for test file
+# TODO check archive or extracted √
+# TODO count created example for test file √
+# TODO if download 2 files return array and download both
 
 NUMBER_OF_CREATED_FILE = 0
 
@@ -54,6 +56,7 @@ class ImageHolder(Holder):
 	def create_fakes(self):
 		global NUMBER_OF_CREATED_FILE
 		img = lazy_imports.PIL_Image.new('RGB', self.image_size(), (255, 255, 255))
+		print('=== = = = ', self.output_path)
 		img.save(self.output_path)
 		NUMBER_OF_CREATED_FILE += 1
 		print('created, ', self.output_path, ', size: ', self.image_size())
@@ -90,17 +93,31 @@ class ZipHolder(Holder):
 		super(ZipHolder, self).__init__(*args, **kwargs)
 
 	def create_fakes(self):
-		zip_file = zipfile.ZipFile(self.path)
-		f = zip_file.namelist()
-		r = re.compile(".*/$")
-		folders = list(filter(r.match, f))  # it's catch the folders names
+		if self.path.endswith('.zip'):
+			zip_file = zipfile.ZipFile(self.path)
+			f = zip_file.namelist()
+			r = re.compile(".*/$")
+			folders = list(filter(r.match, f))  # it's catch the folders names
+
+			folder_path = os.path.splitext(self.output_path)[0]
+		elif self.path.endswith('.tar.gz'):
+			zip_file = tarfile.open(self.path)
+			f = zip_file.getnames()
+			folders = list(filter(lambda x: x.isdir(), zip_file))
+			folders = [i.name for i in folders][1:]
+
+			folder_path = list(reversed(self.output_path.split('.')))[2:]
+			folder_path = '.'.join(reversed(folder_path))
+
 		ex_files = []
 		for prefix in folders[:2]:  # take 2 example from 2 folders
-			ex_files += list(filter(lambda x: x.startswith(prefix), f))[1:3]
-			ex_files += list(filter(lambda x: x.startswith(prefix)
+			ex_files += list(filter(lambda x: not os.path.basename(x).startswith('.')
+																				and x.startswith(prefix), f))[1:3]
+			ex_files += list(filter(lambda x: not os.path.basename(x).startswith('.')
+																				and x.startswith(prefix)
 																						and not x.endswith('/'), f))[1:3]
 		ex_files = ex_files[:5] if len(ex_files) > 4 else ex_files
-		for file in set(ex_files):
+		for file in ex_files:
 			name = os.path.basename(file)
 			typ = os.path.splitext(file)[1]
 			basedir = os.path.basename(os.path.splitext(self.output_path)[0])
@@ -108,7 +125,7 @@ class ZipHolder(Holder):
 				rel_path = os.path.relpath(file, basedir)
 			else:
 				rel_path = file
-			target_path = os.path.join(os.path.splitext(self.output_path)[0], rel_path)
+			target_path = os.path.join(folder_path, rel_path)
 			hold = HolderFactory(zip_file, name, typ, file,
 													 target_path).generate_holder()
 			if hold is not None:
@@ -116,8 +133,7 @@ class ZipHolder(Holder):
 			else:
 				continue
 		zip_file.close()
-		folder_path = os.path.splitext(self.output_path)[0]
-		shutil.make_archive(folder_path, 'zip', folder_path)
+		shutil.make_archive(folder_path, self.typ, folder_path)
 		tf.io.gfile.rmtree(folder_path)  # delete created unzipped folder
 
 
@@ -127,7 +143,7 @@ class HolderFactory(Holder):
 		self.zip_file = zip_file
 
 	def generate_holder(self):
-		if self.path.endswith('.zip'):
+		if self.path.endswith(('.zip', '.tar.gz')):
 			return ZipHolder(self.name, self.typ, self.path, self.output_path)
 		elif self.path.endswith(('.jpg', '.jpeg', '.png', '.tiff')):
 			return ImageHolder(self.zip_file, self.name, self.typ, self.path,
@@ -169,7 +185,7 @@ class Generator(object):
 																						 'test_data', 'fake_examples',
 																						 os.path.basename(
 																							 self.inpath))
-		self.is_extracted = (dataset_folder_finder(dataset_name)[1] == 'extracted')
+		self.is_extracted = (False if dataset_path else dataset_folder_finder(dataset_name)[1] == 'extracted')
 
 	def zip_generator(self):
 		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
@@ -177,7 +193,12 @@ class Generator(object):
 																						 self.dataset_name,
 																						 os.path.basename(
 																							 self.inpath))
-		hold = HolderFactory(None, self.dataset_name, 'zip', self.inpath, self.outpath)
+
+		if self.inpath.endswith('.tar.gz'):
+			hold = HolderFactory(None, self.dataset_name, 'gztar', self.inpath, self.outpath)
+		elif self.inpath.qendswith('.zip'):
+			hold = HolderFactory(None, self.dataset_name, 'zip', self.inpath, self.outpath)
+
 		try:
 			hold.generate_holder().create_fakes()
 		except AttributeError:
