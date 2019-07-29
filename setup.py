@@ -111,6 +111,7 @@ DATASET_EXTRAS = {
         'scipy'
     ],
     'groove': ['pretty_midi', 'pydub'],
+    'leeds_sports_pose': ['scipy'],
     'librispeech': ['pydub'],  # and ffmpeg installed
     'pet_finder': ['pandas'],
     'svhn': ['scipy'],
