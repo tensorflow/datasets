@@ -239,6 +239,7 @@ class Generator(object):
 		print(NUMBER_OF_CREATED_FILE)
 
 	def generator_of_tests(self):
+		"""Creates dataset tests."""
 		data = dict(
 			dataset_name=self.dataset_name,
 			dataset_type=self.dataset_type,
@@ -261,6 +262,17 @@ class Generator(object):
 
 
 def dataset_folder_finder(dataset_name, home_path=None):
+	"""	Downloaded file names may be incomprehensible. The function finds the
+			path of the downloaded file with the name of the dataset by reading the
+			information files.
+
+			Searches in ~/tensorflow-dataset by default. Please specify with
+			'home_path' parameter, if you are download in a different place.
+
+			Usage:
+				>> dataset_folder_finder('cats_vs_dogs')
+				~/tensorflow_datasets/downloads/down6J-PGkgyq21XINdHr2IDS5W0_H7sis.zip
+	"""
 	home = home_path if home_path else os.path.expanduser('~')
 	download_path = os.path.join(home, 'tensorflow_datasets', 'downloads')
 	extracted_path = os.path.join(download_path, 'extracted')
