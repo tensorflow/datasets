@@ -15,12 +15,13 @@
 
 """Public API of tfds, without the registered dataset."""
 
-# pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order
+# pylint: disable=unused-import,g-import-not-at-top,g-bad-import-order,wrong-import-position
 from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
 from tensorflow_datasets.core import download
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter as file_adapter
 from tensorflow_datasets.core import units
@@ -31,11 +32,15 @@ from tensorflow_datasets.core.registered import list_builders
 from tensorflow_datasets.core.registered import load
 from tensorflow_datasets.core.splits import percent
 from tensorflow_datasets.core.splits import Split
+from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
+from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
+from tensorflow_datasets.version import __version__
 
 
 __all__ = [
     "core",
     "as_numpy",
+    "decode",
     "download",
     "features",
     "file_adapter",
@@ -47,6 +52,9 @@ __all__ = [
     "percent",
     "Split",
     "testing",
+    "disable_progress_bar",
+    "is_dataset_on_gcs",
+    "__version__",
 ]
 
 

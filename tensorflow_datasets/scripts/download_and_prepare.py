@@ -16,7 +16,7 @@
 r"""Script to call download_and_prepare on DatasetBuilder.
 
 Standalone script to generate specific dataset(s). This can be
-used if you want to separate download/generation of dataset from acual usage.
+used if you want to separate download/generation of dataset from actual usage.
 
 By default, the dataset is generated in the default location
 (~/tensorflow_datasets), which the same as when calling `tfds.load()`.
@@ -27,6 +27,10 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
   --datasets=cifar10
 ```
 
+If you have your dataset defined outside of `tensorflow_datasets`, use
+`--module_import="path.to.my.dataset_module"` to have your Python module
+containing your `DatasetBuilder` definition imported.
+
 
 """
 
@@ -34,6 +38,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import importlib
 import os
 import pdb
 import time
@@ -45,6 +50,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import termcolor
 
+
 FLAGS = flags.FLAGS
 
 DEFAULT_DATA_DIR = os.path.expanduser(os.path.join("~", "tensorflow_datasets"))
@@ -55,9 +61,16 @@ flags.DEFINE_string("datasets", "",
 flags.DEFINE_string("exclude_datasets", "",
                     "Comma separated list of datasets to exclude,"
                     "(no download, no prepare).")
+flags.DEFINE_multi_string(
+    "module_import", None,
+    "Modules to import. Use this when your DatasetBuilder is defined outside "
+    "of tensorflow_datasets so that it is registered.")
 flags.DEFINE_integer(
     "builder_config_id", None,
     "If given 1 dataset with BUILDER_CONFIGS, id of config to build.")
+flags.DEFINE_boolean(
+    "experimental_latest_version", False,
+    "Set to true to builder the latest version available, even if not default.")
 
 flags.DEFINE_string("data_dir", DEFAULT_DATA_DIR, "Where to place the data.")
 flags.DEFINE_string("download_dir", None, "Where to place downloads.")
@@ -86,6 +99,7 @@ flags.DEFINE_boolean("debug_start", False,
                      "If True, will drop into debugger on startup")
 flags.DEFINE_boolean("sleep_start", False,
                      "If True, will sleep on startup; useful for ssh")
+flags.DEFINE_boolean("disable_tqdm", False, "If True, disable tqdm.")
 
 
 def download_config():
@@ -102,7 +116,7 @@ def download_config():
 
 def download_and_prepare(builder):
   """Generate data for a given dataset."""
-  print("download_and_prepare for dataset {}...".format(builder.info.full_name))
+  logging.info("download_and_prepare for dataset %s...", builder.info.full_name)
 
   dl_config = download_config()
 
@@ -125,20 +139,33 @@ def download_and_prepare(builder):
     del dataset
 
 
+def import_modules(modules):
+  for module in modules:
+    importlib.import_module(module)
+
+
 def main(_):
+  if FLAGS.module_import:
+    import_modules(FLAGS.module_import)
 
   if FLAGS.debug_start:
     pdb.set_trace()
   if FLAGS.sleep_start:
     time.sleep(60*60*3)
 
+  if FLAGS.disable_tqdm:
+    logging.info("Disabling tqdm.")
+    tfds.disable_progress_bar()
+
   datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
                           or tfds.list_builders())
   datasets_to_build -= set(FLAGS.exclude_datasets.split(","))
+  version = "experimental_latest" if FLAGS.experimental_latest_version else None
   logging.info("Running download_and_prepare for datasets:\n%s",
                "\n".join(datasets_to_build))
+  logging.info('Version: "%s"', version)
   builders = {
-      name: tfds.builder(name, data_dir=FLAGS.data_dir)
+      name: tfds.builder(name, data_dir=FLAGS.data_dir, version=version)
       for name in datasets_to_build
   }
 
@@ -154,7 +181,7 @@ def main(_):
     config = builder.BUILDER_CONFIGS[FLAGS.builder_config_id]
     logging.info("Running download_and_prepare for config: %s", config.name)
     builder_for_config = tfds.builder(
-        builder.name, data_dir=FLAGS.data_dir, config=config)
+        builder.name, data_dir=FLAGS.data_dir, config=config, version=version)
     download_and_prepare(builder_for_config)
   else:
     for name, builder in builders.items():
@@ -163,7 +190,8 @@ def main(_):
         # requested, then compute all.
         for config in builder.BUILDER_CONFIGS:
           builder_for_config = tfds.builder(
-              builder.name, data_dir=FLAGS.data_dir, config=config)
+              builder.name, data_dir=FLAGS.data_dir, config=config,
+              version=version)
           download_and_prepare(builder_for_config)
       else:
         # If there is a slash in the name, then user requested a specific

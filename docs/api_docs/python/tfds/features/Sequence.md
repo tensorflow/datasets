@@ -2,9 +2,9 @@
 <meta itemprop="name" content="tfds.features.Sequence" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="serialized_keys"/>
+<meta itemprop="property" content="feature"/>
 <meta itemprop="property" content="shape"/>
-<meta itemprop="property" content="__getattr__"/>
+<meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
@@ -16,60 +16,90 @@
 
 # tfds.features.Sequence
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
 ## Class `Sequence`
 
-Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
+Composite `FeatureConnector` for a `dict` where each value is a list.
 
+<!-- Placeholder for "Used in" -->
 
+`Sequence` correspond to sequence of
+<a href="../../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>.
+At generation time, a list for each of the sequence element is given. The output
+of `tf.data.Dataset` will batch all the elements of the sequence together.
 
-Defined in [`core/features/sequence_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py).
+If the length of the sequence is static and known in advance, it should be
+specified in the constructor using the `length` param.
 
-Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
+Note that `SequenceDict` do not support features which are of type
+`tf.io.FixedLenSequenceFeature`.
 
-Ex:
-In `DatasetInfo`:
+#### Example:
+
+#### At construction time:
 
 ```
-features=tfds.features.FeatureDict({
-    'image': tfds.features.Image(),
-    'labels': tfds.features.Sequence(tfds.features.ClassLabel(num_classes=5)),
-})
+tfds.features.Sequence(tfds.features.Image(), length=NB_FRAME)
 ```
 
-At generation time:
+or:
+
+```
+tfds.features.Sequence({
+    'frame': tfds.features.Image(shape=(64, 64, 3))
+    'action': tfds.features.ClassLabel(['up', 'down', 'left', 'right'])
+}, length=NB_FRAME)
+```
+
+During data generation:
 
 ```
 yield {
-    'image': 'path/to/img.png',
-    'labels': [0, 3, 3, 2, 4],
+    'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
+    'action': ['left', 'left', 'up', ...],
 }
 ```
 
-Note that the underlying feature attributes can be accessed directly through
-the sequence.
+Tensor returned by `.as_dataset()`:
 
 ```
-builder.info.features['labels'].names
+{
+    'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
+    'action': tf.Tensor(shape=(NB_FRAME,), dtype=tf.int64),
+}
 ```
+
+At generation time, you can specify a list of features dict, a dict of list
+values or a stacked numpy array. The lists will automatically be distributed
+into their corresponding `FeatureConnector`.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
+```python
 __init__(
     feature,
+    length=None,
     **kwargs
 )
 ```
 
-Construct a sequence from a specific feature.
+Construct a sequence dict.
 
 #### Args:
 
-* <b>`feature`</b>: <a href="../../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>, The feature to wrap as sequence
-* <b>`**kwargs`</b>: Same additional arguments as for <a href="../../tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>,
-    like `length`.
-
-
+*   <b>`feature`</b>: `dict`, the features to wrap
+*   <b>`length`</b>: `int`, length of the sequence if static and known in
+    advance
+*   <b>`**kwargs`</b>: `dict`, constructor kwargs of
+    <a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>
 
 ## Properties
 
@@ -77,111 +107,106 @@ Construct a sequence from a specific feature.
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
+<h3 id="feature"><code>feature</code></h3>
 
-List of the flattened feature keys after serialization.
+The inner feature.
 
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
 
-<h3 id="__getattr__"><code>__getattr__</code></h3>
+<h3 id="__getitem__"><code>__getitem__</code></h3>
 
-``` python
-__getattr__(key)
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
+```python
+__getitem__(key)
 ```
 
-Allow to access the underlying attributes directly.
+Convenience method to access the underlying features.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-``` python
-decode_example(tfexample_data)
+```python
+decode_example(
+    *args,
+    **kwargs
+)
 ```
 
-Wrapper around SequenceDict.
+Decode the serialize examples.
+
+#### Args:
+
+*   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present. See
+    [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+    for more info.
+
+#### Returns:
+
+*   <b>`example`</b>: Nested `dict` containing the decoded nested examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
-``` python
-encode_example(example_data)
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
+```python
+encode_example(example_dict)
 ```
 
-Wrapper around SequenceDict.
-
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
 
 ``` python
 get_serialized_info()
 ```
 
-
+See base class for details.
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
 
 ``` python
 get_tensor_info()
 ```
 
-
+See base class for details.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
+```python
 load_metadata(
-    data_dir,
-    feature_name
+    *args,
+    **kwargs
 )
 ```
 
-Restore the feature metadata from disk.
-
-If a dataset is re-loaded and generated files exists on disk, this function
-will restore the feature metadata from the saved file.
-
-#### Args:
-
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
+See base class for details.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
+```python
 save_metadata(
-    data_dir,
-    feature_name
+    *args,
+    **kwargs
 )
 ```
 
-Save the feature metadata on disk.
-
-This function is called after the data has been generated (by
-`_download_and_prepare`) to save the feature connector info with the
-generated dataset.
-
-Some dataset/features dynamically compute info during
-`_download_and_prepare`. For instance:
-
- * Labels are loaded from the downloaded data
- * Vocabulary is created from the downloaded data
- * ImageLabelFolder compute the image dtypes/shape from the manual_dir
-
-After the info have been added to the feature, this function allow to
-save those additional info to be restored the next time the data is loaded.
-
-By default, this function do not save anything, but sub-classes can
-overwrite the function.
-
-#### Args:
-
-* <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info (ex:
-    `~/datasets/cifar10/1.2.0/`)
-* <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict key)
-
-
-
+See base class for details.

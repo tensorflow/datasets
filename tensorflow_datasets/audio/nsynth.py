@@ -87,7 +87,8 @@ _SPLIT_SHARDS = {
 class Nsynth(tfds.core.GeneratorBasedBuilder):
   """A large-scale and high-quality dataset of annotated musical notes."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -115,6 +116,7 @@ class Nsynth(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns splits."""
     dl_urls = {
         split: _BASE_DOWNLOAD_PATH + "%s.tfrecord" % split for split in _SPLITS
     }

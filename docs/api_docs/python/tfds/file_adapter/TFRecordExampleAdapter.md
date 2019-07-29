@@ -5,19 +5,24 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="dataset_from_filename"/>
 <meta itemprop="property" content="write_from_generator"/>
+<meta itemprop="property" content="write_from_pcollection"/>
 </div>
 
 # tfds.file_adapter.TFRecordExampleAdapter
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
+
 ## Class `TFRecordExampleAdapter`
+
+Writes/Reads serialized Examples protos to/from TFRecord files.
 
 Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.md)
 
-
-
-Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
-
-Writes/Reads serialized Examples protos to/from TFRecord files.
+<!-- Placeholder for "Used in" -->
 
 Constraints on generators:
 
@@ -28,47 +33,49 @@ Constraints on generators:
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
-__init__(example_reading_spec)
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
+
+```python
+__init__(example_specs)
 ```
-
-Constructs a TFRecordExampleAdapter.
-
-#### Args:
-
-* <b>`example_reading_spec`</b>: `dict`, feature name to tf.FixedLenFeature or
-    tf.VarLenFeature. Passed to tf.io.parse_single_example.
-
-
 
 ## Properties
 
 <h3 id="filetype_suffix"><code>filetype_suffix</code></h3>
 
-
-
-
-
 ## Methods
 
 <h3 id="dataset_from_filename"><code>dataset_from_filename</code></h3>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
+
+```python
 dataset_from_filename(filename)
 ```
 
-
-
 <h3 id="write_from_generator"><code>write_from_generator</code></h3>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
+
+```python
 write_from_generator(
-    generator_fn,
+    generator,
     output_files
 )
 ```
 
+<h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
 
-
-
+``` python
+write_from_pcollection(
+    pcollection,
+    file_path_prefix,
+    num_shards
+)
+```
