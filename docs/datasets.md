@@ -40,6 +40,7 @@ np_datasets = tfds.as_numpy(datasets)
 *   [`image`](#image)
     *   [`"abstract_reasoning"`](#abstract_reasoning)
     *   [`"bigearthnet"`](#bigearthnet)
+    *   [`"binarized_mnist"`](#binarized_mnist)
     *   [`"caltech101"`](#caltech101)
     *   [`"cats_vs_dogs"`](#cats_vs_dogs)
     *   [`"celeb_a"`](#celeb_a)
@@ -788,6 +789,71 @@ None computed
   journal={CoRR},
   year={2019},
   volume={abs/1902.06148}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="binarized_mnist" />
+  <meta itemprop="description" content="A specific binarization of the MNIST images originally used in
+(Salakhutdinov &amp; Murray, 2008). This dataset is frequently used to evaluate
+generative models of images, so labels are not provided." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#binarized_mnist" />
+  <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/" />
+</div>
+
+### `"binarized_mnist"`
+
+A specific binarization of the MNIST images originally used in (Salakhutdinov &
+Murray, 2008). This dataset is frequently used to evaluate generative models of
+images, so labels are not provided.
+
+*   URL:
+    [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
+*   `DatasetBuilder`:
+    [`tfds.image.binarized_mnist.BinarizedMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/binarized_mnist.py)
+*   Version: `v1.0.0`
+*   Size: `104.68 MiB`
+
+#### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 70,000
+TRAIN      | 50,000
+VALIDATION | 10,000
+TEST       | 10,000
+
+#### Urls
+
+*   [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`None`
+
+#### Citation
+
+```
+@inproceedings{salakhutdinov2008quantitative,
+title={On the quantitative analysis of deep belief networks},
+author={Salakhutdinov, Ruslan and Murray, Iain},
+booktitle={Proceedings of the 25th international conference on Machine learning},
+pages={872--879},
+year={2008},
+organization={ACM}
 }
 ```
 
@@ -3513,7 +3579,7 @@ Year      = {2014}}
   <meta itemprop="name" content="emnist" />
   <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#emnist" />
-  <meta itemprop="sameAs" content="https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip" />
+  <meta itemprop="sameAs" content="https://www.nist.gov/node/1298471/emnist-dataset" />
 </div>
 
 ### `"emnist"`
@@ -3522,8 +3588,10 @@ The EMNIST dataset is a set of handwritten character digits derived from the
 NIST Special Database 19 and converted to a 28x28 pixel image format and dataset
 structure that directly matches the MNIST dataset.
 
-* URL: [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
-* `DatasetBuilder`: [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
+*   URL:
+    [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+*   `DatasetBuilder`:
+    [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 
 `emnist` is configured with `tfds.image.mnist.EMNISTConfig` and has the following
 configurations predefined (defaults to the first one):
@@ -3615,9 +3683,9 @@ ALL        |     70,000
 TRAIN      |     60,000
 TEST       |     10,000
 
-
 #### Urls
- * [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
+
+*   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
 `(u'image', u'label')`
@@ -8186,7 +8254,7 @@ answering the questions.
 *   `DatasetBuilder`:
     [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
 *   Version: `v0.1.0`
-*   Size: `?? GiB`
+*   Size: `2.48 GiB`
 
 #### Features
 ```python
@@ -8221,7 +8289,12 @@ FeaturesDict({
 ```
 
 #### Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 155,594
+TRAIN | 138,384
+TEST  | 17,210
 
 #### Urls
 
@@ -9026,7 +9099,7 @@ configurations predefined (defaults to the first one):
 *   `"20190301.su"` (`v0.0.2`) (`Size: 20.52 MiB`): Wikipedia dataset for su,
     parsed from 20190301 dump.
 
-*   `"20190301.sv"` (`v0.0.2`) (`Size: ?? GiB`): Wikipedia dataset for sv,
+*   `"20190301.sv"` (`v0.0.2`) (`Size: 1.64 GiB`): Wikipedia dataset for sv,
     parsed from 20190301 dump.
 
 *   `"20190301.sw"` (`v0.0.2`) (`Size: 27.60 MiB`): Wikipedia dataset for sw,
