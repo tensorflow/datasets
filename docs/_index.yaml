@@ -15,7 +15,6 @@ landing_page:
         <code>tf.data.Datasets</code>
         </a>,
         enabling easy-to-use and high-performance
-        input pipelines.
 
         To get started see the
         <a href="./overview">guide</a>
