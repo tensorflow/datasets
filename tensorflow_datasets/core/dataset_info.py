@@ -419,9 +419,16 @@ class DatasetInfo(object):
       ds: `tf.data.Dataset`. Does not accept batch data.
       rows: `int`, number of rows of the display grid.
       cols: `int`, number of columns of the display grid.
-      plot_scale: `int`, controls the plot size of the images. Keep this
+      plot_scale: `float`, controls the plot size of the images. Keep this
         value around 3 to get a good plot. High and low values may cause
         the labels to get overlapped.
+    
+    Typical `show_examples` usage for image datasets:
+    
+    ```python
+    mnist_ds, mnist_info = tfds.load('mnist', split=tfds.Split.TRAIN, with_info=True)
+    mnist_info.show_examples(mnist_ds)
+    ```        
     """
     image_keys = [
         k for k, feature in self.features.items()
