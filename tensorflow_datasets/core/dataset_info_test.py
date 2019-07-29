@@ -22,7 +22,6 @@ from __future__ import print_function
 import json
 import os
 import tempfile
-import matplotlib.pyplot as plt
 from mock import patch
 import numpy as np
 import six
@@ -304,13 +303,13 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual(40, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
   
-  @patch("matplotlib.pyplot.show")  
+  @patch("matplotlib.pyplot.show")
   def test_show_examples(self, mock_show):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
     builder.download_and_prepare()
     ds = builder.as_dataset(split='train')
-    builder.info.show_examples(ds)
+    fig = builder.info.show_examples(ds)
 
 
 INFO_STR = """tfds.core.DatasetInfo(

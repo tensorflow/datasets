@@ -410,7 +410,7 @@ class DatasetInfo(object):
     self.read_from_directory(tmp_dir)
 
   def show_examples(self, ds, rows=3, cols=3, plot_scale=3):
-    """Display some random (rows*columns) images from the image-dataset.
+    """Returns a plot of some random (rows*columns) images from the image-dataset.
     
     This function will only work for image datasets which only have 
     a single main image.
@@ -427,7 +427,7 @@ class DatasetInfo(object):
     
     ```python
     mnist_ds, mnist_info = tfds.load('mnist', split=tfds.Split.TRAIN, with_info=True)
-    mnist_info.show_examples(mnist_ds)
+    fig = mnist_info.show_examples(mnist_ds)
     ```        
     """
     image_keys = [
@@ -459,7 +459,8 @@ class DatasetInfo(object):
         label_key = label_keys[0]
         label = ex[label_key]
         plt.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
-    plt.show()
+    plt.show()    
+    return fig
 
   def __repr__(self):
     splits_pprint = _indent("\n".join(["{"] + [
