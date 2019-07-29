@@ -13,7 +13,6 @@ import zipfile
 
 
 # TODO add tar.gz support √
-# TODO check types with python-magic (pip install python-magic-bin==0.4.14
 # TODO check archive or extracted √
 # TODO count created example for test file √
 # TODO if download 2 files return array and download both
@@ -143,13 +142,13 @@ class HolderFactory(Holder):
 		self.zip_file = zip_file
 
 	def generate_holder(self):
-		if self.path.endswith(('.zip', '.tar.gz')):
+		if self.typ(('zip', 'gztar')):
 			return ZipHolder(self.name, self.typ, self.path, self.output_path)
-		elif self.path.endswith(('.jpg', '.jpeg', '.png', '.tiff')):
+		elif self.typ(('jpg', 'jpeg', 'png', 'tiff')):
 			return ImageHolder(self.zip_file, self.name, self.typ, self.path,
 												 self.output_path)
-		elif self.path.endswith(
-				('.csv', '.txt', '.en', '.ne', '.si', '.data', '.md')):
+		elif self.typ(
+				('csv', 'txt', 'en', 'ne', 'si', 'data', 'md')):
 			return PlainTextHolder(self.zip_file, self.name, self.typ, self.path, self.output_path)
 
 
