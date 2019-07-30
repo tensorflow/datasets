@@ -5,10 +5,10 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets.image import malaria
-import tensorflow_datasets.testing as tfds_test
+from tensorflow_datasets import testing
 
 
-class MalariaTest(tfds_test.DatasetBuilderTestCase):
+class MalariaTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = malaria.Malaria
   SPLITS = {
       "train": 4,
@@ -16,4 +16,4 @@ class MalariaTest(tfds_test.DatasetBuilderTestCase):
 
 
 if __name__ == "__main__":
-  tfds_test.test_main()
+  testing.test_main()
