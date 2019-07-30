@@ -49,6 +49,7 @@ import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
@@ -58,8 +59,6 @@ from tensorflow_datasets.core.utils import gcs_utils
 
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
-
-import tensorflow_datasets.public_api as tfds
 
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
@@ -445,22 +444,23 @@ class DatasetInfo(object):
       raise ValueError(
           'Visualisation not supported for dataset `{}`. Was not able to auto-infer '
           'image and label keys.'.format(self.name))
+    plt = lazy_imports.lazy_imports.matplotlib.pyplot
     image_key = image_keys[0]
     num_examples = rows * cols
     examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
-    fig = tfds.core.lazy_imports.matplotlib.pyplot.figure(figsize=(plot_scale*cols, plot_scale*rows))
+    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
     fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
     for i, ex in enumerate(examples):
       fig.add_subplot(rows, cols, i+1)
       image = ex[image_key]
       if image.shape[2] == 1:
         image = image.reshape(image.shape[:2])
-      tfds.core.lazy_imports.matplotlib.pyplot.imshow(image, cmap='gray')
+      plt.imshow(image, cmap='gray')
       if len(label_keys) == 1:
         label_key = label_keys[0]
         label = ex[label_key]
-        tfds.core.lazy_imports.matplotlib.pyplot.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
-    tfds.core.lazy_imports.matplotlib.pyplot.show()    
+        plt.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
+    plt.show()    
     return fig
 
   def __repr__(self):
