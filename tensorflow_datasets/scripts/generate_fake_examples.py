@@ -11,7 +11,7 @@ r"""Generate dataset fake examples and tests.
 
 python -m tensorflow_datasets.scripts.generate_fake.examples \
   --dataset_name dataset_name \
-  --file_path /Users/user1/Desktop/test.zip
+  --file_path /Users/user1/Desktop/test.zip \
   --dataset_type dataset_type
 
 """
