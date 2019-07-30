@@ -45,6 +45,7 @@ from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image.kitti import Kitti
 from tensorflow_datasets.image.lsun import Lsun
+from tensorflow_datasets.image.malaria import Malaria
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
 from tensorflow_datasets.image.mnist import KMNIST
