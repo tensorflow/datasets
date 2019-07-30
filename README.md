@@ -8,7 +8,13 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 * [List of datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
 * [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
 * [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
-* [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+* Guides
+  * [Overview](https://www.tensorflow.org/datasets/overview)
+  * [Datasets versioning](https://www.tensorflow.org/datasets/datasets_versioning)
+  * [Using splits and slicing API](https://www.tensorflow.org/datasets/splits)
+  * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
+  * [Add a huge dataset (>>100GiB)](https://www.tensorflow.org/datasets/beam_datasets)
+
 
 **Table of Contents**
 
@@ -24,7 +30,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 ```sh
 pip install tensorflow-datasets
 
-# Requires TF 1.12+ to be installed.
+# Requires TF 1.14+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
 pip install tensorflow
 # or:

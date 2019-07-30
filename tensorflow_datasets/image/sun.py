@@ -122,7 +122,15 @@ def _process_image_file(fobj, session, filename):
 class Sun397(tfds.core.GeneratorBasedBuilder):
   """Sun397 Scene Recognition Benchmark."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
+  ]
+  # Version history:
+  # 3.0.0: S3 with new hashing function (different shuffle).
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -140,7 +148,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     tar_gz_path = dl_manager.download(_SUN397_URL + "SUN397.tar.gz")
-    if os.path.isdir(tar_gz_path):
+    if tf.io.gfile.isdir(tar_gz_path):
       # While testing: download() returns the dir containing the tests files.
       tar_gz_path = os.path.join(tar_gz_path, "SUN397.tar.gz")
 
@@ -169,8 +177,12 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
             # To class: /c/car_interior/backseat
             label = "/".join(filename.split("/")[:-1])
             image = _process_image_file(fobj, sess, filepath)
-            yield {
+            record = {
                 "file_name": filename,
                 "image": image,
                 "label": label,
             }
+            if self.version.implements(tfds.core.Experiment.S3):
+              yield filename, record
+            else:
+              yield record

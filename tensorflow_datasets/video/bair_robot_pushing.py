@@ -52,12 +52,18 @@ _CITATION = """\
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0"),
+  ]
+  # Versions history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
     # metadata (action and position)
-    features = tfds.features.SequenceDict({
+    features = tfds.features.Sequence({
         "image_main": tfds.features.Image(shape=IMG_SHAPE),
         "image_aux1": tfds.features.Image(shape=IMG_SHAPE),
         "action": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
@@ -102,15 +108,16 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
       filepath = os.path.join(filedir, filename)
 
       # For each video inside the file
-      for example_str in tf.compat.v1.io.tf_record_iterator(filepath):
+      for i, example_str in enumerate(
+          tf.compat.v1.io.tf_record_iterator(filepath)):
         example = tf.train.SequenceExample.FromString(example_str)
 
         # Merge all frames together
         all_frames = []
         for frame_id in range(FRAMES_PER_VIDEO):
           # Extract all features from the original proto context field
-          frame_feature = {
-              out_key: example.context.feature[in_key.format(frame_id)]
+          frame_feature = {   # pylint: disable=
+              out_key: example.context.feature[in_key.format(frame_id)]   # pylint: disable=g-complex-comprehension
               for out_key, in_key in [
                   ("image_main", "{}/image_main/encoded"),
                   ("image_aux1", "{}/image_aux1/encoded"),
@@ -139,4 +146,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         #     {'action': [...], 'image_main': img_frame1, ...},  # Frame 1
         #     ...,
         # ]
-        yield all_frames
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield "%s_%s" % (filepath, i), all_frames
+        else:
+          yield all_frames

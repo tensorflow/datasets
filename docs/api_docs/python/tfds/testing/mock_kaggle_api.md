@@ -5,6 +5,9 @@
 
 # tfds.testing.mock_kaggle_api
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
 Mock out the kaggle CLI.
 
 ``` python
@@ -18,10 +21,9 @@ tfds.testing.mock_kaggle_api(
 
 #### Args:
 
-* <b>`filenames`</b>: `list<str>`, names of the competition files.
-* <b>`err_msg`</b>: `str`, if provided, the kaggle CLI will raise a CalledProcessError
-    and this will be the command output.
-
+*   <b>`filenames`</b>: `list<str>`, names of the competition files.
+*   <b>`err_msg`</b>: `str`, if provided, the kaggle CLI will raise a
+    CalledProcessError and this will be the command output.
 
 #### Yields:
 

@@ -10,9 +10,13 @@
 
 # Module: tfds.units
 
-Defines convenience constants/functions for converting various units.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
-Defined in [`core/units.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py).
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py">View
+source</a>
+
+Defines convenience constants/functions for converting various units.
 
 <!-- Placeholder for "Used in" -->
 
@@ -23,13 +27,8 @@ Defined in [`core/units.py`](https://github.com/tensorflow/datasets/tree/master/
 
 ## Other Members
 
-<h3 id="GiB"><code>GiB</code></h3>
-
-<h3 id="KiB"><code>KiB</code></h3>
-
-<h3 id="MiB"><code>MiB</code></h3>
-
-<h3 id="PiB"><code>PiB</code></h3>
-
-<h3 id="TiB"><code>TiB</code></h3>
-
+*   `GiB = 1073741824` <a id="GiB"></a>
+*   `KiB = 1024` <a id="KiB"></a>
+*   `MiB = 1048576` <a id="MiB"></a>
+*   `PiB = 1125899906842624` <a id="PiB"></a>
+*   `TiB = 1099511627776` <a id="TiB"></a>

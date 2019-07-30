@@ -10,7 +10,10 @@
 *   <a href="./tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
 *   <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
 *   <a href="./tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>
+*   <a href="./tfds/core/Experiment.md"><code>tfds.core.Experiment</code></a>
 *   <a href="./tfds/core/GeneratorBasedBuilder.md"><code>tfds.core.GeneratorBasedBuilder</code></a>
+*   <a href="./tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>
+*   <a href="./tfds/core/MetadataDict.md"><code>tfds.core.MetadataDict</code></a>
 *   <a href="./tfds/core/NamedSplit.md"><code>tfds.core.NamedSplit</code></a>
 *   <a href="./tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>
 *   <a href="./tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>
@@ -19,6 +22,10 @@
 *   <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
 *   <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
 *   <a href="./tfds/core/lazy_imports.md"><code>tfds.core.lazy_imports</code></a>
+*   <a href="./tfds/decode.md"><code>tfds.decode</code></a>
+*   <a href="./tfds/decode/Decoder.md"><code>tfds.decode.Decoder</code></a>
+*   <a href="./tfds/decode/SkipDecoding.md"><code>tfds.decode.SkipDecoding</code></a>
+*   <a href="./tfds/decode/make_decoder.md"><code>tfds.decode.make_decoder</code></a>
 *   <a href="./tfds/disable_progress_bar.md"><code>tfds.disable_progress_bar</code></a>
 *   <a href="./tfds/download.md"><code>tfds.download</code></a>
 *   <a href="./tfds/download/ComputeStatsMode.md"><code>tfds.download.ComputeStatsMode</code></a>
@@ -37,7 +44,6 @@
 *   <a href="./tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>
 *   <a href="./tfds/features/Image.md"><code>tfds.features.Image</code></a>
 *   <a href="./tfds/features/Sequence.md"><code>tfds.features.Sequence</code></a>
-*   <a href="./tfds/features/SequenceDict.md"><code>tfds.features.SequenceDict</code></a>
 *   <a href="./tfds/features/Tensor.md"><code>tfds.features.Tensor</code></a>
 *   <a href="./tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>
 *   <a href="./tfds/features/Text.md"><code>tfds.features.Text</code></a>
@@ -64,6 +70,8 @@
 *   <a href="./tfds/testing/FeatureExpectationItem.md"><code>tfds.testing.FeatureExpectationItem</code></a>
 *   <a href="./tfds/testing/FeatureExpectationsTestCase.md"><code>tfds.testing.FeatureExpectationsTestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.FeatureExpectationsTestCase.failureException</code></a>
+*   <a href="./tfds/testing/SubTestCase.md"><code>tfds.testing.SubTestCase</code></a>
+*   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.SubTestCase.failureException</code></a>
 *   <a href="./tfds/testing/TestCase.md"><code>tfds.testing.TestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.TestCase.failureException</code></a>
 *   <a href="./tfds/testing/make_tmp_dir.md"><code>tfds.testing.make_tmp_dir</code></a>

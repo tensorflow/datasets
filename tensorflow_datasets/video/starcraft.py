@@ -50,10 +50,14 @@ _CITATION = """\
 
 
 class StarcraftVideoConfig(tfds.core.BuilderConfig):
+  """Config for StarcraftVideo dataset."""
 
   @api_utils.disallow_positional_args
   def __init__(self, map_name, resolution, size_in_gb, **kwargs):
-    super(StarcraftVideoConfig, self).__init__(**kwargs)
+    super(StarcraftVideoConfig, self).__init__(
+        version=tfds.core.Version(
+            "0.1.2", experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.map_name = map_name
     self.resolution = resolution
     self.size_in_gb = size_in_gb
@@ -67,7 +71,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="brawl_64",
           description="Brawl map with 64x64 resolution.",
           map_name="Brawl",
-          version="0.1.2",
           resolution=64,
           size_in_gb=6.3,
       ),
@@ -75,7 +78,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="brawl_128",
           description="Brawl map with 128x128 resolution.",
           map_name="Brawl",
-          version="0.1.2",
           resolution=128,
           size_in_gb=20.7,
       ),
@@ -83,7 +85,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="collect_mineral_shards_64",
           description="CollectMineralShards map with 64x64 resolution.",
           map_name="CollectMineralShards",
-          version="0.1.2",
           resolution=64,
           size_in_gb=6.3,
       ),
@@ -91,7 +92,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="collect_mineral_shards_128",
           description="CollectMineralShards map with 128x128 resolution.",
           map_name="CollectMineralShards",
-          version="0.1.2",
           resolution=128,
           size_in_gb=20.7,
       ),
@@ -99,7 +99,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="move_unit_to_border_64",
           description="MoveUnitToBorder map with 64x64 resolution.",
           map_name="MoveUnitToBorder",
-          version="0.1.2",
           resolution=64,
           size_in_gb=5.8,
       ),
@@ -107,7 +106,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="move_unit_to_border_128",
           description="MoveUnitToBorder map with 128x128 resolution.",
           map_name="MoveUnitToBorder",
-          version="0.1.2",
           resolution=128,
           size_in_gb=20.7,
       ),
@@ -115,7 +113,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="road_trip_with_medivac_64",
           description="RoadTripWithMedivac map with 64x64 resolution.",
           map_name="RoadTripWithMedivac",
-          version="0.1.2",
           resolution=64,
           size_in_gb=2.4,
       ),
@@ -123,7 +120,6 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           name="road_trip_with_medivac_128",
           description="RoadTripWithMedivac map with 128x128 resolution.",
           map_name="RoadTripWithMedivac",
-          version="0.1.2",
           resolution=128,
           size_in_gb=7.9,
       ),
