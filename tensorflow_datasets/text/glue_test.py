@@ -67,23 +67,15 @@ class GlueStsbTest(testing.DatasetBuilderTestCase):
   }
 
 
-class GlueMnliMatchedTest(testing.DatasetBuilderTestCase):
-  BUILDER_CONFIG_NAMES_TO_TEST = ["mnli_matched"]
+class GlueMnliTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["mnli"]
   DATASET_CLASS = glue.Glue
   SPLITS = {
       "train": 3,
-      "validation": 2,
-      "test": 1,
-  }
-
-
-class GlueMnliMismatchedTest(testing.DatasetBuilderTestCase):
-  BUILDER_CONFIG_NAMES_TO_TEST = ["mnli_mismatched"]
-  DATASET_CLASS = glue.Glue
-  SPLITS = {
-      "train": 3,
-      "validation": 2,
-      "test": 1,
+      "validation_matched": 2,
+      "validation_mismatched": 2,
+      "test_matched": 1,
+      "test_mismatched": 1,
   }
 
 

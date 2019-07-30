@@ -34,6 +34,8 @@ There are two features:
     highlight, which is the target summary
 """
 
+# The second citation introduces the source data, while the first
+# introduces the specific form (non-anonymized) we use here.
 _CITATION = """\
 @article{DBLP:journals/corr/SeeLM17,
   author    = {Abigail See and
@@ -49,6 +51,14 @@ _CITATION = """\
   timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},
   biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{hermann2015teaching,
+  title={Teaching machines to read and comprehend},
+  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},
+  booktitle={Advances in neural information processing systems},
+  pages={1693--1701},
+  year={2015}
 }
 """
 
@@ -79,7 +89,10 @@ class CnnDailymailConfig(tfds.core.BuilderConfig):
         (text) features
       **kwargs: keyword arguments forwarded to super.
     """
-    super(CnnDailymailConfig, self).__init__(**kwargs)
+    super(CnnDailymailConfig, self).__init__(
+        version=tfds.core.Version(
+            '0.0.2', experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -135,8 +148,6 @@ def _subset_filenames(dl_paths, split):
 
 DM_SINGLE_CLOSE_QUOTE = u'\u2019'  # unicode
 DM_DOUBLE_CLOSE_QUOTE = u'\u201d'
-SENTENCE_START = '<s>'
-SENTENCE_END = '</s>'
 # acceptable ways to end a sentence
 END_TOKENS = ['.', '!', '?', '...', "'", '`', '"',
               DM_SINGLE_CLOSE_QUOTE, DM_DOUBLE_CLOSE_QUOTE, ')']
@@ -191,23 +202,21 @@ def _get_art_abs(story_file):
 
   # Make abstract into a single string, putting <s> and </s> tags around
   # the sentences.
-  abstract = ' '.join(['%s %s %s' % (SENTENCE_START, sent,
-                                     SENTENCE_END) for sent in highlights])
+  abstract = ' '.join(highlights)
 
   return article, abstract
 
 
 class CnnDailymail(tfds.core.GeneratorBasedBuilder):
   """CNN/DailyMail non-anonymized summarization dataset."""
+  # 0.0.2 is like 0.0.1 but without special tokens <s> and </s>.
   BUILDER_CONFIGS = [
       CnnDailymailConfig(
           name='plain_text',
-          version='0.0.1',
           description='Plain text',
       ),
       CnnDailymailConfig(
           name='bytes',
-          version='0.0.1',
           description=('Uses byte-level text encoding with '
                        '`tfds.features.text.ByteTextEncoder`'),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -215,7 +224,6 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
       ),
       CnnDailymailConfig(
           name='subwords32k',
-          version='0.0.1',
           description=('Uses `tfds.features.text.SubwordTextEncoder` with '
                        '32k vocab size'),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -250,8 +258,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
     # Generate shared vocabulary
     # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
     self.info.features[_ARTICLE].maybe_build_from_corpus(
-        self._vocab_text_gen(train_files),
-        reserved_tokens=[SENTENCE_START, SENTENCE_END])
+        self._vocab_text_gen(train_files))
     encoder = self.info.features[_ARTICLE].encoder
     # Use maybe_set_encoder because the encoder may have been restored from
     # package data.

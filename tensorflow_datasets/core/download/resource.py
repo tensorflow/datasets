@@ -48,12 +48,12 @@ class ExtractMethod(enum.Enum):
   """The extraction method to use to pre-process a downloaded file."""
   NO_EXTRACT = 1
   TAR = 2
-  TAR_GZ = 3
+  TAR_GZ = 3  # Deprecated: use TAR.
   GZIP = 4
   ZIP = 5
   BZIP2 = 6
   TAR_STREAM = 7
-  TAR_GZ_STREAM = 8
+  TAR_GZ_STREAM = 8  # Deprecated: use TAR_STREAM
 
 
 _EXTRACTION_METHOD_TO_EXTS = [

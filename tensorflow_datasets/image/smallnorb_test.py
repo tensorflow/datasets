@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""Smallnorb dataset test."""
+
 from tensorflow_datasets.image import smallnorb
 import tensorflow_datasets.testing as tfds_test
 
@@ -28,6 +30,10 @@ class SmallnorbTest(tfds_test.DatasetBuilderTestCase):
       "testing_cat": "smallnorb-5x01235x9x18x6x2x96x96-testing-cat.mat",
       "testing_info": "smallnorb-5x01235x9x18x6x2x96x96-testing-info.mat",
   }
+
+
+class SmallnorbS3Test(SmallnorbTest):
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

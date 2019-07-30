@@ -98,7 +98,8 @@ _URL = "https://www.openml.org/data/get_csv/16826755/phpMYEkMl"
 class Titanic(tfds.core.GeneratorBasedBuilder):
   """Titanic dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -148,4 +149,3 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
                 for name, value in row.items()
             }
         }
-

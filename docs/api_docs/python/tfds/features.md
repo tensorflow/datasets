@@ -5,13 +5,17 @@
 
 # Module: tfds.features
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/__init__.py">View
+source</a>
 
-Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/__init__.py).
+<a href="../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>
+API defining feature types.
 
 <!-- Placeholder for "Used in" -->
 
-<a href="../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a> API defining feature types.
 
 ## Modules
 
@@ -31,15 +35,16 @@ Defined in [`core/features/__init__.py`](https://github.com/tensorflow/datasets/
 
 [`class FeaturesDict`](../tfds/features/FeaturesDict.md): Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
-[`class Tensor`](../tfds/features/Tensor.md): `FeatureConnector` for generic data of arbitrary shape and type.
-
-[`class TensorInfo`](../tfds/features/TensorInfo.md): TensorInfo(shape, dtype)
-
-[`class Sequence`](../tfds/features/Sequence.md): Similar to `tfds.featuresSequenceDict`, but only contains a single feature.
-
-[`class SequenceDict`](../tfds/features/SequenceDict.md): Composite `FeatureConnector` for a `dict` where each value is a list.
-
 [`class Image`](../tfds/features/Image.md): `FeatureConnector` for images.
+
+[`class Sequence`](../tfds/features/Sequence.md): Composite `FeatureConnector`
+for a `dict` where each value is a list.
+
+[`class Tensor`](../tfds/features/Tensor.md): `FeatureConnector` for generic
+data of arbitrary shape and type.
+
+[`class TensorInfo`](../tfds/features/TensorInfo.md): Structure containing info
+on the `tf.Tensor` shape/dtype.
 
 [`class Text`](../tfds/features/Text.md): `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 

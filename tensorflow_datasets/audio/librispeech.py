@@ -149,12 +149,14 @@ def _make_builder_configs():
           encoder_cls=tfds.features.text.SubwordTextEncoder,
           vocab_size=2**15),
   ]
-  version = "0.1.0"
   configs = []
   for text_encoder_config in text_encoder_configs:
     for data in _DATA_OPTIONS:
       config = LibrispeechConfig(
-          version=version, text_encoder_config=text_encoder_config, data=data)
+          version=tfds.core.Version(
+              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
+          text_encoder_config=text_encoder_config,
+          data=data)
       configs.append(config)
   return configs
 

@@ -219,6 +219,13 @@ _TRAIN_SUBSETS = [
         path=("giga-fren.release2.fixed.fr.gz",
               "giga-fren.release2.fixed.en.gz")),
     SubDataset(
+        name="hindencorp_01",
+        target="en",
+        sources={"hi"},
+        url="http://ufallab.ms.mff.cuni.cz/~bojar/hindencorp",
+        manual_dl_files=["hindencorp0.1.gz"],
+        path=""),
+    SubDataset(
         name="leta_v1",
         target="en",
         sources={"lv"},
@@ -231,19 +238,12 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt13/training-parallel-un.tgz",
         path=("un/undoc.2000.{src}-en.{src}", "un/undoc.2000.{src}-en.en")),
     SubDataset(
-        name="newscommentary_v8",
-        target="en",
-        sources={"cs", "de", "es", "fr", "ru"},
-        url="http://www.statmt.org/wmt13/training-parallel-nc-v8.tgz",
-        path=("training-parallel-nc-v8/news-commentary-v8.{src}-en.{src}",
-              "training-parallel-nc-v8/news-commentary-v8.{src}-en.en")),
-    SubDataset(
         name="newscommentary_v9",
         target="en",
         sources={"cs", "de", "fr", "ru"},
         url="http://www.statmt.org/wmt14/training-parallel-nc-v9.tgz",
-        path=("training-parallel-nc-v9/news-commentary-v9.{src}-en.{src}",
-              "training-parallel-nc-v9/news-commentary-v9.{src}-en.en")),
+        path=("training/news-commentary-v9.{src}-en.{src}",
+              "training/news-commentary-v9.{src}-en.en")),
     SubDataset(
         name="newscommentary_v10",
         target="en",
@@ -354,6 +354,13 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt15/wiki-titles.tgz",
         path="wiki/fi-en/titles.fi-en"),
     SubDataset(
+        name="wikiheadlines_hi",
+        target="en",
+        sources={"hi"},
+        url="http://www.statmt.org/wmt14/wiki-titles.tgz",
+        path="wiki/hi-en/wiki-titles.hi-en"),
+    SubDataset(
+        # Verified that wmt14 and wmt15 files are identical.
         name="wikiheadlines_ru",
         target="en",
         sources={"ru"},
@@ -404,6 +411,13 @@ _DEV_SUBSETS = [
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newsdev2015-fien-src.{src}.sgm",
               "dev/newsdev2015-fien-ref.en.sgm")),
+    SubDataset(
+        name="newsdiscussdev2015",
+        target="en",
+        sources={"ro", "tr"},
+        url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
+        path=("dev/newsdiscussdev2015-{src}en-src.{src}.sgm",
+              "dev/newsdiscussdev2015-{src}en-ref.en.sgm")),
     SubDataset(
         name="newsdev2016",
         target="en",
@@ -492,7 +506,7 @@ _DEV_SUBSETS = [
     SubDataset(
         name="newstest2014",
         target="en",
-        sources={"cs", "de", "es", "fr", "ru"},
+        sources={"cs", "de", "es", "fr", "hi", "ru"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2014-{src}en-src.{src}.sgm",
               "dev/newstest2014-{src}en-ref.en.sgm")),
@@ -503,6 +517,13 @@ _DEV_SUBSETS = [
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2015-{src}en-src.{src}.sgm",
               "dev/newstest2015-{src}en-ref.en.sgm")),
+    SubDataset(
+        name="newsdiscusstest2015",
+        target="en",
+        sources={"fr"},
+        url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
+        path=("dev/newsdiscusstest2015-{src}en-src.{src}.sgm",
+              "dev/newsdiscusstest2015-{src}en-ref.en.sgm")),
     SubDataset(
         name="newstest2016",
         target="en",
@@ -727,6 +748,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
               _parse_czeng, filter_path=filter_path)
         else:
           sub_generator = _parse_czeng
+      elif ss_name == "hindencorp_01":
+        sub_generator = _parse_hindencorp
       elif len(files) == 2:
         if ss_name.endswith("_frde"):
           sub_generator = _parse_frde_bitext
@@ -926,3 +949,15 @@ def _parse_czeng(*paths, **kwargs):
               "en": en.strip(),
           }
 
+
+def _parse_hindencorp(path):
+  with tf.io.gfile.GFile(path) as f:
+    for line in f:
+      split_line = line.split("\t")
+      if len(split_line) != 5:
+        logging.warning("Skipping invalid HindEnCorp line: %s", line)
+        continue
+      yield {
+          "en": split_line[3].strip(),
+          "hi": split_line[4].strip()
+      }

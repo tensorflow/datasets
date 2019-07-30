@@ -76,7 +76,7 @@ def _get_sizes_checksums(checksums_path):
   """Returns {URL: (size, checksum)}s stored within file."""
   checksums = {}
   for line in _read_file(checksums_path).split('\n'):
-    if not line:
+    if not line or line.strip().startswith('#'):
       continue
     # URL might have spaces inside, but size and checksum will not.
     url, size, checksum = line.rsplit(' ', 2)
