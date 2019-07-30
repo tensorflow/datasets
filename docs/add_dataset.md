@@ -527,13 +527,46 @@ use the
 [BibTeX Online Editor](https://truben.no/latex/bibtex/) to create a custom
 BibTeX entry (the drop-down menu has an `Online` entry type).
 
-### 4. Add a test
+### 4. Run `generate_fake_examples`
+The dataset test needs fake examples of dataset. This script generate a fake examples.
+
+```bash
+python -m tensorflow_datasets.scripts.generate_fake.examples \
+                                 --dataset_name dataset_name \
+                                 --file_path None \
+                                 --dataset_type dataset_type # default is image
+```
+
+**Note:** The generator not compatible for all file types. 
+
+After running script, you need the some checks, 
+* Script prints generated examples number, expected number is 4, you should check to see 
+if your data is compatible.
+* If dataset has any restriction to data number, you must specify as 4 on the test file. 
+* If you testing different parts of dataset(train, test, val, etc.), you should specify 
+at testing.
+* If dataset train and test files are different you should generate again the file that 
+can not generated at first time. 
+
+
+
+For example `train.zip` generated but you also need `test.zip` you should run script
+again with `--file_path` parameter. 
+
+```bash
+ python -m tensorflow_datasets.scripts.generate_fake.examples \
+                                  --dataset_name dataset_name \
+                                  --file_path /Users/user1/Desktop/test.zip
+```
+
+
+### 5. Add a test
 
 Most datasets in TFDS should have a unit test and your reviewer may ask you
 to add one if you haven't already. See the
 [testing section](#testing-mydataset) below.
 
-### 5. Check your code style
+### 6. Check your code style
 
 Follow the [PEP 8 Python style guide](https://www.python.org/dev/peps/pep-0008),
 except TensorFlow uses 2 spaces instead of 4. Please conform to the
@@ -552,13 +585,13 @@ See
 [TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
 for more information.
 
-### 6. Add release notes
+### 7. Add release notes
 
 Add the dataset to the
 [release notes](https://github.com/tensorflow/datasets/blob/master/docs/release_notes.md).
 The release note will be published for the next release.
 
-### 7. Send for review!
+### 8. Send for review!
 
 Send the pull request for review.
 
