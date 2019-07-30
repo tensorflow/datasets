@@ -223,7 +223,7 @@ class Generator(object):
 					file_path = os.path.join(dirpath, file)
 					file_target_path = os.path.join(structure, file)
 					name = os.path.basename(file_path)
-					typ = os.path.splitext(file_path)[1]
+					typ = os.path.splitext(file_path)[1][1:]
 					hold = HolderFactory(None, name, typ, file_path, file_target_path)
 					try:
 						hold.generate_holder().create_fakes()
