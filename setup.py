@@ -99,6 +99,7 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'cats_vs_dogs': ['matplotlib'],
+    'cartoonset': ['scikit-image'],
     'colorectal_histology': ['Pillow'],
     'eurosat': [
         'scikit-image',
