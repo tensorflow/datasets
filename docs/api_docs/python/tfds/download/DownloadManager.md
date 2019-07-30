@@ -13,15 +13,17 @@
 
 # tfds.download.DownloadManager
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
 ## Class `DownloadManager`
 
-
-
-
-
-Defined in [`core/download/download_manager.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py).
-
 Manages the download and extraction of files, as well as caching.
+
+<!-- Placeholder for "Used in" -->
 
 Downloaded files are cached under `download_dir`. The file name of downloaded
  files follows pattern "${sanitized_url}${content_checksum}.${ext}". Eg:
@@ -44,7 +46,7 @@ method. E.g.
 The function members accept either plain value, or values wrapped into list
 or dict. Giving a data structure will parallelize the downloads.
 
-Example of usage:
+#### Example of usage:
 
 ```
 # Sequential download: str -> str
@@ -69,6 +71,9 @@ For more customization on the download/extraction (ex: passwords, output_name,
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
 ``` python
 __init__(
     download_dir,
@@ -85,17 +90,19 @@ Download manager constructor.
 
 #### Args:
 
-* <b>`download_dir`</b>: `str`, path to directory where downloads are stored.
-* <b>`extract_dir`</b>: `str`, path to directory where artifacts are extracted.
-* <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data directory.
-* <b>`dataset_name`</b>: `str`, name of dataset this instance will be used for. If
-    provided, downloads will contain which datasets they were used for.
-* <b>`force_download`</b>: `bool`, default to False. If True, always [re]download.
-* <b>`force_extraction`</b>: `bool`, default to False. If True, always [re]extract.
-* <b>`register_checksums`</b>: `bool`, default to False. If True, dl checksums aren't
-    checked, but stored into file.
-
-
+*   <b>`download_dir`</b>: `str`, path to directory where downloads are stored.
+*   <b>`extract_dir`</b>: `str`, path to directory where artifacts are
+    extracted.
+*   <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data
+    directory.
+*   <b>`dataset_name`</b>: `str`, name of dataset this instance will be used
+    for. If provided, downloads will contain which datasets they were used for.
+*   <b>`force_download`</b>: `bool`, default to False. If True, always
+    [re]download.
+*   <b>`force_extraction`</b>: `bool`, default to False. If True, always
+    [re]extract.
+*   <b>`register_checksums`</b>: `bool`, default to False. If True, dl checksums
+    aren't checked, but stored into file.
 
 ## Properties
 
@@ -107,11 +114,12 @@ Returns the total size of downloaded files.
 
 Returns the directory containing the manually extracted data.
 
-
-
 ## Methods
 
 <h3 id="download"><code>download</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
 
 ``` python
 download(url_or_urls)
@@ -121,9 +129,9 @@ Download given url(s).
 
 #### Args:
 
-* <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
-    url can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
-
+*   <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract.
+    Each url can be a `str` or
+    <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 #### Returns:
 
@@ -131,6 +139,9 @@ downloaded_path(s): `str`, The downloaded paths matching the given input
   url_or_urls.
 
 <h3 id="download_and_extract"><code>download_and_extract</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
 
 ``` python
 download_and_extract(url_or_urls)
@@ -146,18 +157,21 @@ extracted_paths = dl_manager.extract(dl_manager.download(url_or_urls))
 
 #### Args:
 
-* <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract. Each
-    url can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
+*   <b>`url_or_urls`</b>: url or `list`/`dict` of urls to download and extract.
+    Each url can be a `str` or
+    <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 If not explicitly specified in `Resource`, the extraction method will
 automatically be deduced from downloaded file name.
-
 
 #### Returns:
 
 extracted_path(s): `str`, extracted paths of given URL(s).
 
 <h3 id="download_kaggle_data"><code>download_kaggle_data</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
 
 ``` python
 download_kaggle_data(competition_name)
@@ -167,6 +181,9 @@ Download data for a given Kaggle competition.
 
 <h3 id="extract"><code>extract</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
 ``` python
 extract(path_or_paths)
 ```
@@ -175,12 +192,12 @@ Extract given path(s).
 
 #### Args:
 
-* <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract. Each
-    path can be a `str` or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
+*   <b>`path_or_paths`</b>: path or `list`/`dict` of path of file to extract.
+    Each path can be a `str` or
+    <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
 If not explicitly specified in `Resource`, the extraction method is deduced
 from downloaded file name.
-
 
 #### Returns:
 
@@ -188,6 +205,9 @@ extracted_path(s): `str`, The extracted paths matching the given input
   path_or_paths.
 
 <h3 id="iter_archive"><code>iter_archive</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
 
 ``` python
 iter_archive(resource)
@@ -202,10 +222,6 @@ Reading out of order is slow.
 
 * <b>`resource`</b>: path to archive or <a href="../../tfds/download/Resource.md"><code>tfds.download.Resource</code></a>.
 
-
 #### Returns:
 
 Generator yielding tuple (path_within_archive, file_obj).
-
-
-

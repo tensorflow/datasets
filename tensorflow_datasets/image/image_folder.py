@@ -74,7 +74,8 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
   """
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
 
   # TODO(epot): Image shape should be automatically deduced
 
@@ -101,7 +102,7 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-
+    """Returns SplitGenerators from the folder names."""
     # At data creation time, parse the folder to deduce number of splits,
     # labels, image size,
 

@@ -39,7 +39,7 @@ tf.compat.v1.enable_eager_execution()
 
 class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
 
-  VERSION = utils.Version("1.0.0")
+  VERSION = utils.Version("1.0.0", experiments={utils.Experiment.S3: False})
 
   def _info(self):
 
@@ -63,7 +63,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
         ),
         splits_lib.SplitGenerator(
             name=splits_lib.Split.TEST,
-            num_shards=4,
+            num_shards=None,  # Use liquid sharing.
             gen_kwargs=dict(num_examples=725),
         ),
     ]
@@ -86,6 +86,11 @@ def _gen_example(x):
   }
 
 
+class FaultyS3DummyBeamDataset(DummyBeamDataset):
+
+  VERSION = utils.Version("1.0.0")
+
+
 class BeamBasedBuilderTest(testing.TestCase):
 
   def test_download_prepare_raise(self):
@@ -106,7 +111,8 @@ class BeamBasedBuilderTest(testing.TestCase):
       self._assertShards(
           data_dir,
           pattern="dummy_beam_dataset-test.tfrecord-{:05}-of-{:05}",
-          num_shards=4,
+          # Liquid sharding is not guaranteed to always use the same number.
+          num_shards=builder.info.splits["test"].num_shards,
       )
       self._assertShards(
           data_dir,
@@ -129,6 +135,7 @@ class BeamBasedBuilderTest(testing.TestCase):
       )
 
   def _assertShards(self, data_dir, pattern, num_shards):
+    self.assertTrue(num_shards)
     shards_filenames = [
         pattern.format(i, num_shards) for i in range(num_shards)
     ]
@@ -145,22 +152,34 @@ class BeamBasedBuilderTest(testing.TestCase):
         self.assertAllEqual(lhs, rhs)
 
 
-  # The default beam pipeline do not works with Python2
-  def test_download_prepare(self):
-
-    # TODO(tfds): The current apache-beam 2.11.0 do not work with Python 3.
+  def _get_dl_config_if_need_to_run(self):
+    # The default beam pipeline do not works with Python2
+    # TODO(b/129148632): The current apache-beam 2.11.0 do not work with Py3
     # Update once the new version is out (around April)
-    if six.PY3:
-      skip_beam_test = True
-    else:
-      skip_beam_test = False
+    skip_beam_test = bool(six.PY3)
     if skip_beam_test:
       return
-
-    dl_config = download.DownloadConfig(
+    return download.DownloadConfig(
         beam_options=beam.options.pipeline_options.PipelineOptions(),
     )
+
+  def test_download_prepare(self):
+    dl_config = self._get_dl_config_if_need_to_run()
+    if not dl_config:
+      return
     self._assertBeamGeneration(dl_config)
+
+  def test_s3_raise(self):
+    dl_config = self._get_dl_config_if_need_to_run()
+    if not dl_config:
+      return
+    dl_config.compute_stats = download.ComputeStatsMode.SKIP
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = FaultyS3DummyBeamDataset(data_dir=tmp_dir)
+      builder.download_and_prepare(download_config=dl_config)
+      with self.assertRaisesWithPredicateMatch(
+          AssertionError, "`DatasetInfo.SplitInfo.num_shards` is empty"):
+        builder.as_dataset()
 
 
 if __name__ == "__main__":

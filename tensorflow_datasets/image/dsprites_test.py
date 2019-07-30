@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""dSprites dataset test."""
 from tensorflow_datasets.image import dsprites
 import tensorflow_datasets.testing as tfds_test
 
@@ -21,6 +22,11 @@ class DspritesTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = dsprites.Dsprites
   SPLITS = {"train": 5}
   DL_EXTRACT_RESULT = "dsprites_ndarray_co1sh3sc6or40x32y32_64x64.hdf5"
+
+
+class DspritesS3Test(DspritesTest):
+  VERSION = "experimental_latest"
+
 
 if __name__ == "__main__":
   tfds_test.test_main()
