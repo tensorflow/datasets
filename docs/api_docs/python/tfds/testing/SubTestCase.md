@@ -790,7 +790,7 @@ Asserts that an object has zero length.
 
 #### Args:
 
-*   <b>`container`</b>: Anything that implements the collections.Sized
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
     interface.
 *   <b>`msg`</b>: Optional message to report on failure.
 
@@ -997,7 +997,7 @@ Asserts that an object has the expected length.
 
 #### Args:
 
-*   <b>`container`</b>: Anything that implements the collections.Sized
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
     interface.
 *   <b>`expected_len`</b>: The expected length of the container.
 *   <b>`msg`</b>: Optional message to report on failure.
@@ -1211,7 +1211,7 @@ Asserts that an object has non-zero length.
 
 #### Args:
 
-*   <b>`container`</b>: Anything that implements the collections.Sized
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
     interface.
 *   <b>`msg`</b>: Optional message to report on failure.
 
