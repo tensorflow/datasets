@@ -153,8 +153,8 @@ class EnTamParallelTextConfig(tfds.core.BuilderConfig):
         self.link = download_link
     elif 'ufal.mff.cuni.cz/~ramasamy' in download_link:
       name = "en_ta"
-      self.citation = _CITATION['opus']
-      self.descrp = DESCRIPTION['opus']
+      self.citation = _CITATION['MTPIL']
+      self.descrp = DESCRIPTION['MTPIL']
       description = ("Translation dataset from %s to %s in plain text.") % (
           'en', 'ta')##
       self.link = download_link
