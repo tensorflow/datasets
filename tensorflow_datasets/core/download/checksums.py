@@ -35,6 +35,8 @@ _CHECKSUM_DIRS = [
 ]
 _CHECKSUM_SUFFIX = '.txt'
 
+def add_checksums_dir(checksums_dir):
+  _CHECKSUM_DIRS.append(checksums_dir)
 
 def _list_dir(path):
   return tf.io.gfile.listdir(path)

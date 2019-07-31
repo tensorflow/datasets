@@ -35,6 +35,7 @@ from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
 from tensorflow_datasets.version import __version__
+from tensorflow_datasets.core.download.checksums import add_checksums_dir
 
 
 __all__ = [
@@ -55,6 +56,7 @@ __all__ = [
     "disable_progress_bar",
     "is_dataset_on_gcs",
     "__version__",
+    "add_checksums_dir",
 ]
 
 
