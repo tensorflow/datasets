@@ -303,8 +303,8 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual(40, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
   
-  @patch("matplotlib.pyplot.show")
-  def test_show_examples(self, mock_show):
+  @patch('matplotlib.pyplot.figure')
+  def test_show_examples(self, mock_fig):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = RandomShapedImageGenerator(data_dir=tmp_dir)
     builder.download_and_prepare()
