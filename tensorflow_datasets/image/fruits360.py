@@ -66,20 +66,20 @@ _CLASS_NAMES = ['Apple Braeburn', 'Apple Crimson Snow', 'Apple Golden 1', 'Apple
 class Fruits360(tfds.core.GeneratorBasedBuilder):
   """Fruits 360 dataset."""
 
-  VERSION = tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True})
+  VERSION = tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})
 
   def _info(self):
     return tfds.core.DatasetInfo(
-        builder=self,
-        description="A large set of fruits on a white background.",
-        features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(names=_CLASS_NAMES)
-        }),
-        supervised_keys=("image", "label"),
-        urls=["https://www.kaggle.com/moltean/fruits"],
-        citation=_CITATION
+      builder=self,
+      description="A large set of fruits on a white background.",
+      features=tfds.features.FeaturesDict({
+        "image": tfds.features.Image(shape=_IMAGE_SHAPE),
+        "image/filename": tfds.features.Text(),
+        "label": tfds.features.ClassLabel(names=_CLASS_NAMES)
+      }),
+      supervised_keys=("image", "label"),
+      urls=["https://www.kaggle.com/moltean/fruits"],
+      citation=_CITATION
     )
 
   def _split_generators(self, dl_manager):
@@ -90,16 +90,16 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
     train_path = os.path.join(root_path, 'Training')
     test_path = os.path.join(root_path, 'Test')
     return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            num_shards=1,
-            gen_kwargs=dict(split_dir=train_path),
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            num_shards=1,
-            gen_kwargs=dict(split_dir=test_path),
-        ),
+      tfds.core.SplitGenerator(
+        name=tfds.Split.TRAIN,
+        num_shards=1,
+        gen_kwargs=dict(split_dir=train_path),
+      ),
+      tfds.core.SplitGenerator(
+        name=tfds.Split.TEST,
+        num_shards=1,
+        gen_kwargs=dict(split_dir=test_path),
+      ),
     ]
 
   def _generate_examples(self, split_dir):
@@ -120,8 +120,12 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
 
       for fn in sorted(fns):
         image_path = os.path.join(class_dir, fn)
-        yield "%s/%s" % (class_name, fn), {
-            "image": image_path,
-            "image/filename": fn,
-            "label": class_name,
+        record = {
+          "image": image_path,
+          "image/filename": fn,
+          "label": class_name,
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield "%s/%s" % (class_name, fn), record
+        else:
+          yield record
