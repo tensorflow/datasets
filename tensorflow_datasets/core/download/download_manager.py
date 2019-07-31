@@ -55,6 +55,7 @@ class DownloadConfig(object):
                compute_stats=None,
                max_examples_per_split=None,
                register_checksums=False,
+               checksums_dir=None,
                beam_runner=None,
                beam_options=None):
     """Constructs a `DownloadConfig`.
@@ -74,6 +75,8 @@ class DownloadConfig(object):
         into each split.
       register_checksums: `bool`, defaults to False. If True, checksum of
         downloaded files are recorded.
+      checksums_dir: `str`, directory where checksum files are stored.
+        Defaults to "tensorflow_datasets/url_checksums".
       beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
         based on Beam for the generation.
       beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
@@ -87,6 +90,7 @@ class DownloadConfig(object):
         compute_stats or util.ComputeStatsMode.AUTO)
     self.max_examples_per_split = max_examples_per_split
     self.register_checksums = register_checksums
+    self.checksums_dir = checksums_dir
     self.beam_runner = beam_runner
     self.beam_options = beam_options
 
@@ -147,7 +151,8 @@ class DownloadManager(object):
                dataset_name=None,
                force_download=False,
                force_extraction=False,
-               register_checksums=False):
+               register_checksums=False,
+               checksums_dir=None):
     """Download manager constructor.
 
     Args:
@@ -160,6 +165,7 @@ class DownloadManager(object):
       force_extraction: `bool`, default to False. If True, always [re]extract.
       register_checksums: `bool`, default to False. If True, dl checksums aren't
         checked, but stored into file.
+      checksums_dir: `str`, path to directory where checksum files are stored.
     """
     self._dataset_name = dataset_name
     self._download_dir = os.path.expanduser(download_dir)
@@ -173,8 +179,9 @@ class DownloadManager(object):
     self._extractor = extractor.get_extractor()
     self._downloader = downloader.get_downloader()
     self._register_checksums = register_checksums
+    self.checksums_dir = checksums_dir
     # All known URLs: {url: (size, checksum)}
-    self._sizes_checksums = checksums.get_all_sizes_checksums()
+    self._sizes_checksums = checksums.get_all_sizes_checksums(checksums_dir)
     # To record what is being used: {url: (size, checksum)}
     self._recorded_sizes_checksums = {}
 

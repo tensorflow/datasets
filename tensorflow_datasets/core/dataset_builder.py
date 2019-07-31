@@ -660,6 +660,7 @@ class DatasetBuilder(object):
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         register_checksums=download_config.register_checksums,
+        checksums_dir=download_config.checksums_dir,
     )
 
   @property

@@ -43,8 +43,10 @@ def _list_dir(path):
 
 
 @utils.memoize()
-def _checksum_paths():
+def _checksum_paths(checksums_dir=None):
   """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
+  if checksums_dir:
+    _CHECKSUM_DIRS.append(checksums_dir)
   dataset2path = {}
   for dir_path in _CHECKSUM_DIRS:
     for fname in _list_dir(dir_path):
@@ -85,10 +87,10 @@ def _get_sizes_checksums(checksums_path):
 
 
 @utils.memoize()
-def get_all_sizes_checksums():
+def get_all_sizes_checksums(checksums_dir):
   """Returns dict associating URL to (size, sha256)."""
   sizes_checksums = {}
-  for path in _checksum_paths().values():
+  for path in _checksum_paths(checksums_dir).values():
     data = _get_sizes_checksums(path)
     for url, size_checksum in data.items():
       if (url in sizes_checksums and
