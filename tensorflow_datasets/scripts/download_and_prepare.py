@@ -101,6 +101,8 @@ flags.DEFINE_boolean("sleep_start", False,
                      "If True, will sleep on startup; useful for ssh")
 flags.DEFINE_boolean("disable_tqdm", False, "If True, disable tqdm.")
 
+flags.DEFINE_string("checksums_dir", None,
+                    "Where to place the dataset checksum files.")
 
 def download_config():
   return tfds.download.DownloadConfig(
@@ -111,6 +113,7 @@ def download_config():
       download_mode=tfds.download.GenerateMode.REUSE_DATASET_IF_EXISTS,
       max_examples_per_split=FLAGS.max_examples_per_split,
       register_checksums=FLAGS.register_checksums,
+      checksums_dir=FLAGS.checksums_dir
   )
 
 
