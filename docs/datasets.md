@@ -34,98 +34,106 @@ np_datasets = tfds.as_numpy(datasets)
 
 ## All Datasets
 
-* [`audio`](#audio)
-  * [`"groove"`](#groove)
-  * [`"nsynth"`](#nsynth)
-* [`image`](#image)
-  * [`"abstract_reasoning"`](#abstract_reasoning)
-  * [`"bigearthnet"`](#bigearthnet)
-  * [`"binarized_mnist"`](#binarized_mnist)
-  * [`"caltech101"`](#caltech101)
-  * [`"cats_vs_dogs"`](#cats_vs_dogs)
-  * [`"celeb_a"`](#celeb_a)
-  * [`"celeb_a_hq"`](#celeb_a_hq)
-  * [`"chexpert"`](#chexpert)
-  * [`"cifar10"`](#cifar10)
-  * [`"cifar100"`](#cifar100)
-  * [`"cifar10_corrupted"`](#cifar10_corrupted)
-  * [`"clevr"`](#clevr)
-  * [`"coco"`](#coco)
-  * [`"coco2014"`](#coco2014)
-  * [`"colorectal_histology"`](#colorectal_histology)
-  * [`"colorectal_histology_large"`](#colorectal_histology_large)
-  * [`"curated_breast_imaging_ddsm"`](#curated_breast_imaging_ddsm)
-  * [`"cycle_gan"`](#cycle_gan)
-  * [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
-  * [`"downsampled_imagenet"`](#downsampled_imagenet)
-  * [`"dsprites"`](#dsprites)
-  * [`"dtd"`](#dtd)
-  * [`"emnist"`](#emnist)
-  * [`"eurosat"`](#eurosat)
-  * [`"fashion_mnist"`](#fashion_mnist)
-  * [`"fruits360"`](#fruits360)
-  * [`"horses_or_humans"`](#horses_or_humans)
-  * [`"image_label_folder"`](#image_label_folder)
-  * [`"imagenet2012"`](#imagenet2012)
-  * [`"imagenet2012_corrupted"`](#imagenet2012_corrupted)
-  * [`"kitti"`](#kitti)
-  * [`"kmnist"`](#kmnist)
-  * [`"lsun"`](#lsun)
-  * [`"mnist"`](#mnist)
-  * [`"mnist_corrupted"`](#mnist_corrupted)
-  * [`"omniglot"`](#omniglot)
-  * [`"open_images_v4"`](#open_images_v4)
-  * [`"oxford_flowers102"`](#oxford_flowers102)
-  * [`"oxford_iiit_pet"`](#oxford_iiit_pet)
-  * [`"patch_camelyon"`](#patch_camelyon)
-  * [`"pet_finder"`](#pet_finder)
-  * [`"quickdraw_bitmap"`](#quickdraw_bitmap)
-  * [`"resisc45"`](#resisc45)
-  * [`"rock_paper_scissors"`](#rock_paper_scissors)
-  * [`"shapes3d"`](#shapes3d)
-  * [`"smallnorb"`](#smallnorb)
-  * [`"so2sat"`](#so2sat)
-  * [`"sun397"`](#sun397)
-  * [`"svhn_cropped"`](#svhn_cropped)
-  * [`"tf_flowers"`](#tf_flowers)
-  * [`"uc_merced"`](#uc_merced)
-  * [`"voc2007"`](#voc2007)
-* [`structured`](#structured)
-  * [`"higgs"`](#higgs)
-  * [`"iris"`](#iris)
-  * [`"titanic"`](#titanic)
-* [`text`](#text)
-  * [`"cnn_dailymail"`](#cnn_dailymail)
-  * [`"definite_pronoun_resolution"`](#definite_pronoun_resolution)
-  * [`"glue"`](#glue)
-  * [`"imdb_reviews"`](#imdb_reviews)
-  * [`"lm1b"`](#lm1b)
-  * [`"multi_nli"`](#multi_nli)
-  * [`"snli"`](#snli)
-  * [`"squad"`](#squad)
-  * [`"super_glue"`](#super_glue)
-  * [`"trivia_qa"`](#trivia_qa)
-  * [`"wikipedia"`](#wikipedia)
-  * [`"xnli"`](#xnli)
-* [`translate`](#translate)
-  * [`"flores"`](#flores)
-  * [`"para_crawl"`](#para_crawl)
-  * [`"ted_hrlr_translate"`](#ted_hrlr_translate)
-  * [`"ted_multi_translate"`](#ted_multi_translate)
-  * [`"wmt14_translate"`](#wmt14_translate)
-  * [`"wmt15_translate"`](#wmt15_translate)
-  * [`"wmt16_translate"`](#wmt16_translate)
-  * [`"wmt17_translate"`](#wmt17_translate)
-  * [`"wmt18_translate"`](#wmt18_translate)
-  * [`"wmt19_translate"`](#wmt19_translate)
-  * [`"wmt_t2t_translate"`](#wmt_t2t_translate)
-* [`video`](#video)
-  * [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
-  * [`"moving_mnist"`](#moving_mnist)
-  * [`"starcraft_video"`](#starcraft_video)
-  * [`"ucf101"`](#ucf101)
+*   [`audio`](#audio)
+    *   [`"groove"`](#groove)
+    *   [`"nsynth"`](#nsynth)
+*   [`image`](#image)
+    *   [`"abstract_reasoning"`](#abstract_reasoning)
+    *   [`"bigearthnet"`](#bigearthnet)
+    *   [`"binarized_mnist"`](#binarized_mnist)
+    *   [`"caltech101"`](#caltech101)
+    *   [`"cats_vs_dogs"`](#cats_vs_dogs)
+    *   [`"celeb_a"`](#celeb_a)
+    *   [`"celeb_a_hq"`](#celeb_a_hq)
+    *   [`"cifar10"`](#cifar10)
+    *   [`"cifar100"`](#cifar100)
+    *   [`"cifar10_corrupted"`](#cifar10_corrupted)
+    *   [`"clevr"`](#clevr)
+    *   [`"coco"`](#coco)
+    *   [`"coco2014"`](#coco2014)
+    *   [`"colorectal_histology"`](#colorectal_histology)
+    *   [`"colorectal_histology_large"`](#colorectal_histology_large)
+    *   [`"curated_breast_imaging_ddsm"`](#curated_breast_imaging_ddsm)
+    *   [`"cycle_gan"`](#cycle_gan)
+    *   [`"diabetic_retinopathy_detection"`](#diabetic_retinopathy_detection)
+    *   [`"downsampled_imagenet"`](#downsampled_imagenet)
+    *   [`"dsprites"`](#dsprites)
+    *   [`"dtd"`](#dtd)
+    *   [`"emnist"`](#emnist)
+    *   [`"eurosat"`](#eurosat)
+    *   [`"fashion_mnist"`](#fashion_mnist)
+    *   [`"food101"`](#food101)
+    *   [`"horses_or_humans"`](#horses_or_humans)
+    *   [`"image_label_folder"`](#image_label_folder)
+    *   [`"imagenet2012"`](#imagenet2012)
+    *   [`"imagenet2012_corrupted"`](#imagenet2012_corrupted)
+    *   [`"kitti"`](#kitti)
+    *   [`"kmnist"`](#kmnist)
+    *   [`"lsun"`](#lsun)
+    *   [`"mnist"`](#mnist)
+    *   [`"mnist_corrupted"`](#mnist_corrupted)
+    *   [`"omniglot"`](#omniglot)
+    *   [`"open_images_v4"`](#open_images_v4)
+    *   [`"oxford_flowers102"`](#oxford_flowers102)
+    *   [`"oxford_iiit_pet"`](#oxford_iiit_pet)
+    *   [`"patch_camelyon"`](#patch_camelyon)
+    *   [`"pet_finder"`](#pet_finder)
+    *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
+    *   [`"resisc45"`](#resisc45)
+    *   [`"rock_paper_scissors"`](#rock_paper_scissors)
+    *   [`"shapes3d"`](#shapes3d)
+    *   [`"smallnorb"`](#smallnorb)
+    *   [`"so2sat"`](#so2sat)
+    *   [`"sun397"`](#sun397)
+    *   [`"svhn_cropped"`](#svhn_cropped)
+    *   [`"tf_flowers"`](#tf_flowers)
+    *   [`"uc_merced"`](#uc_merced)
+    *   [`"voc2007"`](#voc2007)
 
----
+
+*   [`structured`](#structured)
+
+    *   [`"higgs"`](#higgs)
+    *   [`"iris"`](#iris)
+    *   [`"titanic"`](#titanic)
+
+*   [`text`](#text)
+
+    *   [`"cnn_dailymail"`](#cnn_dailymail)
+    *   [`"definite_pronoun_resolution"`](#definite_pronoun_resolution)
+    *   [`"glue"`](#glue)
+    *   [`"imdb_reviews"`](#imdb_reviews)
+    *   [`"lm1b"`](#lm1b)
+    *   [`"multi_nli"`](#multi_nli)
+    *   [`"snli"`](#snli)
+    *   [`"squad"`](#squad)
+    *   [`"super_glue"`](#super_glue)
+    *   [`"trivia_qa"`](#trivia_qa)
+    *   [`"wikipedia"`](#wikipedia)
+    *   [`"xnli"`](#xnli)
+
+*   [`translate`](#translate)
+
+    *   [`"flores"`](#flores)
+    *   [`"para_crawl"`](#para_crawl)
+    *   [`"ted_hrlr_translate"`](#ted_hrlr_translate)
+    *   [`"ted_multi_translate"`](#ted_multi_translate)
+    *   [`"wmt14_translate"`](#wmt14_translate)
+    *   [`"wmt15_translate"`](#wmt15_translate)
+    *   [`"wmt16_translate"`](#wmt16_translate)
+    *   [`"wmt17_translate"`](#wmt17_translate)
+    *   [`"wmt18_translate"`](#wmt18_translate)
+    *   [`"wmt19_translate"`](#wmt19_translate)
+    *   [`"wmt_t2t_translate"`](#wmt_t2t_translate)
+
+*   [`video`](#video)
+
+    *   [`"bair_robot_pushing_small"`](#bair_robot_pushing_small)
+    *   [`"moving_mnist"`](#moving_mnist)
+    *   [`"starcraft_video"`](#starcraft_video)
+    *   [`"ucf101"`](#ucf101)
+
+--------------------------------------------------------------------------------
 
 ## [`audio`](#audio)
 
@@ -854,6 +862,68 @@ organization={ACM}
 ```
 
 ---
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="binarized_mnist" />
+  <meta itemprop="description" content="A specific binarization of the MNIST images originally used in
+(Salakhutdinov &amp; Murray, 2008). This dataset is frequently used to evaluate
+generative models of images, so labels are not provided." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#binarized_mnist" />
+  <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/" />
+</div>
+
+### `"binarized_mnist"`
+
+A specific binarization of the MNIST images originally used in (Salakhutdinov &
+Murray, 2008). This dataset is frequently used to evaluate generative models of
+images, so labels are not provided.
+
+*   URL:
+    [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
+*   `DatasetBuilder`:
+    [`tfds.image.binarized_mnist.BinarizedMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/binarized_mnist.py)
+*   Version: `v1.0.0`
+*   Size: `104.68 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 70,000
+TRAIN      | 50,000
+VALIDATION | 10,000
+TEST       | 10,000
+
+#### Urls
+
+*   [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@inproceedings{salakhutdinov2008quantitative,
+title={On the quantitative analysis of deep belief networks},
+author={Salakhutdinov, Ruslan and Murray, Iain},
+booktitle={Proceedings of the 25th international conference on Machine learning},
+pages={872--879},
+year={2008},
+organization={ACM}
+}
+```
+
+--------------------------------------------------------------------------------
 
 <div itemscope itemtype="http://schema.org/Dataset">
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
@@ -3686,8 +3756,10 @@ Year      = {2014}}
 
 The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.
 
-* URL: [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
-* `DatasetBuilder`: [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
+*   URL:
+    [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+*   `DatasetBuilder`:
+    [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 
 `emnist` is configured with `tfds.image.mnist.EMNISTConfig` and has the following
 configurations predefined (defaults to the first one):
@@ -3779,9 +3851,9 @@ ALL        |     70,000
 TRAIN      |     60,000
 TEST       |     10,000
 
-
 #### Urls
- * [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+
+*   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
 `('image', 'label')`
@@ -3948,6 +4020,66 @@ TEST       |     10,000
   timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="food101" />
+  <meta itemprop="description" content="This dataset consists of 101 food categories, with 101'000 images. For each class, 250 manually reviewed test images are provided as well as 750 training images. On purpose, the training images were not cleaned, and thus still contain some amount of noise. This comes mostly in the form of intense colors and sometimes wrong labels. All images were rescaled to have a maximum side length of 512 pixels." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#food101" />
+  <meta itemprop="sameAs" content="http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz" />
+</div>
+
+### `"food101"`
+
+This dataset consists of 101 food categories, with 101'000 images. For each
+class, 250 manually reviewed test images are provided as well as 750 training
+images. On purpose, the training images were not cleaned, and thus still contain
+some amount of noise. This comes mostly in the form of intense colors and
+sometimes wrong labels. All images were rescaled to have a maximum side length
+of 512 pixels.
+
+*   URL:
+    [http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)
+*   `DatasetBuilder`:
+    [`tfds.image.food101.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/food101.py)
+*   Version: `v1.0.0`
+*   Size: `4.65 GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=101),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+TRAIN | 101,000
+ALL   | 101,000
+
+#### Urls
+
+*   [http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@inproceedings{bossard14,
+  title = {Food-101 -- Mining Discriminative Components with Random Forests},
+  author = {Bossard, Lukas and Guillaumin, Matthieu and Van Gool, Luc},
+  booktitle = {European Conference on Computer Vision},
+  year = {2014}
 }
 ```
 
@@ -8543,16 +8675,17 @@ supervision for answering the questions." />
 ### `"trivia_qa"`
 
 TriviaqQA is a reading comprehension dataset containing over 650K
-question-answer-evidence triples. TriviaqQA includes 95K question-answer
-pairs authored by trivia enthusiasts and independently gathered evidence
-documents, six per question on average, that provide high quality distant
-supervision for answering the questions.
+question-answer-evidence triples. TriviaqQA includes 95K question-answer pairs
+authored by trivia enthusiasts and independently gathered evidence documents,
+six per question on average, that provide high quality distant supervision for
+answering the questions.
 
-
-* URL: [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
-* `DatasetBuilder`: [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
-* Version: `v0.1.0`
-* Size: `2.48 GiB`
+*   URL:
+    [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
+*   `DatasetBuilder`:
+    [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
+*   Version: `v0.1.0`
+*   Size: `2.48 GiB`
 
 #### Features
 ```python
@@ -8588,11 +8721,12 @@ FeaturesDict({
 
 
 #### Statistics
-Split  | Examples
-:----- | ---:
-ALL        |    155,594
-TRAIN      |    138,384
-TEST       |     17,210
+
+Split | Examples
+:---- | -------:
+ALL   | 155,594
+TRAIN | 138,384
+TEST  | 17,210
 
 
 #### Urls
@@ -9144,7 +9278,8 @@ configurations predefined (defaults to the first one):
 
 * `"20190301.su"` (`v0.0.2`) (`Size: 20.52 MiB`): Wikipedia dataset for su, parsed from 20190301 dump.
 
-* `"20190301.sv"` (`v0.0.2`) (`Size: 1.64 GiB`): Wikipedia dataset for sv, parsed from 20190301 dump.
+*   `"20190301.sv"` (`v0.0.2`) (`Size: 1.64 GiB`): Wikipedia dataset for sv,
+    parsed from 20190301 dump.
 
 * `"20190301.sw"` (`v0.0.2`) (`Size: 27.60 MiB`): Wikipedia dataset for sw, parsed from 20190301 dump.
 

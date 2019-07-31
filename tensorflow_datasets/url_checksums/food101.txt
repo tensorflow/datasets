@@ -1,1 +1,1 @@
-http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz 125255680 f7d7cbe737c2d5c18ed4c6e1a996617e379377311b36a56da080a663cdce661b
+http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz 4996278331 d97d15e438b7f4498f96086a4f7e2fa42a32f2712e87d3295441b2b6314053a4
