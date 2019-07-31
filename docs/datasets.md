@@ -3878,7 +3878,6 @@ of 512 pixels.
 *   Size: `4.65 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -3898,11 +3897,9 @@ ALL   | 101,000
 *   [http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 #### Citation
-
 ```
 @inproceedings{bossard14,
   title = {Food-101 -- Mining Discriminative Components with Random Forests},
