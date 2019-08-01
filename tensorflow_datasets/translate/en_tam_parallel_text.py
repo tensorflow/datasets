@@ -28,14 +28,14 @@ import tensorflow_datasets.public_api as tfds
 
 _CITATION = {}
 DESCRIPTION = {}
-DESCRIPTION['ufal'] = """
-	The parallel corpora covers texts from bible, cinema and news domains.
+DESCRIPTION['MTPIL'] = """\
+	The parallel corpora cover texts from bible, cinema and news domains.
 """
-DESCRIPTION['opus'] = """
+DESCRIPTION['opus'] = """\
 	OPUS focuses on converting and aligning free online data, to add linguistic annotation,
 	and to provide the community with a publicly available parallel corpus.
 """
-_CITATION['ufal'] = """
+_CITATION['MTPIL'] = """
   @inproceedings {biblio:RaBoMorphologicalProcessing2012,
 	title = {Morphological Processing for English-Tamil Statistical Machine Translation},
 	author = {Loganathan Ramasamy and Ond{\v{r}}ej Bojar and Zden{\v{e}}k {\v{Z}}abokrtsk{\'{y}}},
@@ -153,10 +153,10 @@ class EnTamParallelTextConfig(tfds.core.BuilderConfig):
         self.link = download_link
     elif 'ufal.mff.cuni.cz/~ramasamy' in download_link:
       name = "en_ta"
-      self.citation = _CITATION['ufal']
-      self.descrp = DESCRIPTION['ufal']
+      self.citation = _CITATION['opus']
+      self.descrp = DESCRIPTION['opus']
       description = ("Translation dataset from %s to %s in plain text.") % (
-          'en', 'ta')
+          'en', 'ta')##
       self.link = download_link
     super(EnTamParallelTextConfig, self).__init__(
         name=name, description=description, **kwargs)
@@ -177,7 +177,7 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
             languages=("en", "ta")),
         urls=[self.builder_config.link],
         supervised_keys=("en", "ta"),
-        citation=self.builder_config.citation
+        citation=self.builder_config.citation,
     )
 
   def _split_generators(self, dl_manager):
