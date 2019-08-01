@@ -21,7 +21,6 @@ source</a>
 ### Aliases:
 
 * Class `tfds.GenerateMode`
-* Class `tfds.download.GenerateMode`
 
 
 <!-- Placeholder for "Used in" -->
