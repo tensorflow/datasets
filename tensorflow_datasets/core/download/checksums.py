@@ -33,6 +33,7 @@ _ROOT_DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
 _CHECKSUM_DIRS = [
     os.path.join(_ROOT_DIR, 'url_checksums'),
 ]
+
 _CHECKSUM_SUFFIX = '.txt'
 
 
