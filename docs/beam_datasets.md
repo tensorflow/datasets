@@ -84,12 +84,12 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
     ...
     return [
         tfds.core.SplitGenerator(
-            name=tfds..Split.TRAIN,
+            name=tfds.Split.TRAIN,
             num_shards=100,
             gen_kwargs=dict(file_dir='path/to/train_data/'),
         ),
         splits_lib.SplitGenerator(
-            name=tfds..Split.TEST,
+            name=tfds.Split.TEST,
             num_shards=10,
             gen_kwargs=dict(file_dir='path/to/test_data/'),
         ),
