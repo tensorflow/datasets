@@ -156,7 +156,7 @@ class EnTamParallelTextConfig(tfds.core.BuilderConfig):
       self.citation = _CITATION['MTPIL']
       self.descrp = DESCRIPTION['MTPIL']
       description = ("Translation dataset from %s to %s in plain text.") % (
-          'en', 'ta')##
+          'en', 'ta')
       self.link = download_link
     super(EnTamParallelTextConfig, self).__init__(
         name=name, description=description, **kwargs)
