@@ -3,6 +3,12 @@ all modifications will be erased, please edit the original document_datasets.py
 file. -->
 # Datasets
 
+Note: The datasets documented here are from `HEAD` and so not all are available
+in the current `tensorflow-datasets` package. They are all accessible in our
+nightly package `tfds-nightly`.
+
+--------------------------------------------------------------------------------
+
 ## Usage
 
 ```python
@@ -26,12 +32,6 @@ datasets = builder.as_dataset()
 np_datasets = tfds.as_numpy(datasets)
 ```
 
-Note: The datasets documented here are from `HEAD` and so not all are available
-in the current `tensorflow-datasets` package. They are all accessible in our
-nightly package `tfds-nightly`.
-
---------------------------------------------------------------------------------
-
 ## All Datasets
 
 *   [`audio`](#audio)
@@ -40,6 +40,7 @@ nightly package `tfds-nightly`.
 *   [`image`](#image)
     *   [`"abstract_reasoning"`](#abstract_reasoning)
     *   [`"bigearthnet"`](#bigearthnet)
+    *   [`"binarized_mnist"`](#binarized_mnist)
     *   [`"caltech101"`](#caltech101)
     *   [`"cats_vs_dogs"`](#cats_vs_dogs)
     *   [`"celeb_a"`](#celeb_a)
@@ -48,6 +49,7 @@ nightly package `tfds-nightly`.
     *   [`"cifar100"`](#cifar100)
     *   [`"cifar10_corrupted"`](#cifar10_corrupted)
     *   [`"clevr"`](#clevr)
+    *   [`"coco"`](#coco)
     *   [`"coco2014"`](#coco2014)
     *   [`"colorectal_histology"`](#colorectal_histology)
     *   [`"colorectal_histology_large"`](#colorectal_histology_large)
@@ -60,6 +62,7 @@ nightly package `tfds-nightly`.
     *   [`"emnist"`](#emnist)
     *   [`"eurosat"`](#eurosat)
     *   [`"fashion_mnist"`](#fashion_mnist)
+    *   [`"food101"`](#food101)
     *   [`"horses_or_humans"`](#horses_or_humans)
     *   [`"image_label_folder"`](#image_label_folder)
     *   [`"imagenet2012"`](#imagenet2012)
@@ -68,11 +71,13 @@ nightly package `tfds-nightly`.
     *   [`"kmnist"`](#kmnist)
     *   [`"lsun"`](#lsun)
     *   [`"mnist"`](#mnist)
+    *   [`"mnist_corrupted"`](#mnist_corrupted)
     *   [`"omniglot"`](#omniglot)
     *   [`"open_images_v4"`](#open_images_v4)
     *   [`"oxford_flowers102"`](#oxford_flowers102)
     *   [`"oxford_iiit_pet"`](#oxford_iiit_pet)
     *   [`"patch_camelyon"`](#patch_camelyon)
+    *   [`"pet_finder"`](#pet_finder)
     *   [`"quickdraw_bitmap"`](#quickdraw_bitmap)
     *   [`"resisc45"`](#resisc45)
     *   [`"rock_paper_scissors"`](#rock_paper_scissors)
@@ -95,6 +100,7 @@ nightly package `tfds-nightly`.
 *   [`text`](#text)
 
     *   [`"cnn_dailymail"`](#cnn_dailymail)
+    *   [`"definite_pronoun_resolution"`](#definite_pronoun_resolution)
     *   [`"glue"`](#glue)
     *   [`"imdb_reviews"`](#imdb_reviews)
     *   [`"lm1b"`](#lm1b)
@@ -102,6 +108,7 @@ nightly package `tfds-nightly`.
     *   [`"snli"`](#snli)
     *   [`"squad"`](#squad)
     *   [`"super_glue"`](#super_glue)
+    *   [`"trivia_qa"`](#trivia_qa)
     *   [`"wikipedia"`](#wikipedia)
     *   [`"xnli"`](#xnli)
 
@@ -502,9 +509,9 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
@@ -515,9 +522,9 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
@@ -528,9 +535,9 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
@@ -541,9 +548,9 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
@@ -554,9 +561,9 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
@@ -567,9 +574,9 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
@@ -580,9 +587,9 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
@@ -593,9 +600,9 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answers': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(shape=(8, 160, 160, 1), dtype=tf.uint8, feature=Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
     'meta_target': Tensor(shape=[12], dtype=tf.int64),
     'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
     'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
@@ -716,19 +723,19 @@ has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'filename': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(120, 120, 3), dtype=tf.uint8),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
     'metadata': FeaturesDict({
-        'acquisition_date': Text(shape=(), dtype=tf.string, encoder=None),
+        'acquisition_date': Text(shape=(), dtype=tf.string),
         'coordinates': FeaturesDict({
             'lrx': Tensor(shape=(), dtype=tf.int64),
             'lry': Tensor(shape=(), dtype=tf.int64),
             'ulx': Tensor(shape=(), dtype=tf.int64),
             'uly': Tensor(shape=(), dtype=tf.int64),
         }),
-        'projection': Text(shape=(), dtype=tf.string, encoder=None),
-        'tile_source': Text(shape=(), dtype=tf.string, encoder=None),
+        'projection': Text(shape=(), dtype=tf.string),
+        'tile_source': Text(shape=(), dtype=tf.string),
     }),
 })
 ```
@@ -749,18 +756,18 @@ FeaturesDict({
     'B11': Tensor(shape=[60, 60], dtype=tf.float32),
     'B12': Tensor(shape=[60, 60], dtype=tf.float32),
     'B8A': Tensor(shape=[60, 60], dtype=tf.float32),
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=43)),
     'metadata': FeaturesDict({
-        'acquisition_date': Text(shape=(), dtype=tf.string, encoder=None),
+        'acquisition_date': Text(shape=(), dtype=tf.string),
         'coordinates': FeaturesDict({
             'lrx': Tensor(shape=(), dtype=tf.int64),
             'lry': Tensor(shape=(), dtype=tf.int64),
             'ulx': Tensor(shape=(), dtype=tf.int64),
             'uly': Tensor(shape=(), dtype=tf.int64),
         }),
-        'projection': Text(shape=(), dtype=tf.string, encoder=None),
-        'tile_source': Text(shape=(), dtype=tf.string, encoder=None),
+        'projection': Text(shape=(), dtype=tf.string),
+        'tile_source': Text(shape=(), dtype=tf.string),
     }),
 })
 ```
@@ -783,6 +790,68 @@ None computed
   journal={CoRR},
   year={2019},
   volume={abs/1902.06148}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="binarized_mnist" />
+  <meta itemprop="description" content="A specific binarization of the MNIST images originally used in
+(Salakhutdinov &amp; Murray, 2008). This dataset is frequently used to evaluate
+generative models of images, so labels are not provided." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#binarized_mnist" />
+  <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/" />
+</div>
+
+### `"binarized_mnist"`
+
+A specific binarization of the MNIST images originally used in (Salakhutdinov &
+Murray, 2008). This dataset is frequently used to evaluate generative models of
+images, so labels are not provided.
+
+*   URL:
+    [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
+*   `DatasetBuilder`:
+    [`tfds.image.binarized_mnist.BinarizedMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/binarized_mnist.py)
+*   Version: `v1.0.0`
+*   Size: `104.68 MiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 70,000
+TRAIN      | 50,000
+VALIDATION | 10,000
+TEST       | 10,000
+
+#### Urls
+
+*   [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@inproceedings{salakhutdinov2008quantitative,
+title={On the quantitative analysis of deep belief networks},
+author={Salakhutdinov, Ruslan and Murray, Iain},
+booktitle={Proceedings of the 25th international conference on Machine learning},
+pages={872--879},
+year={2008},
+organization={ACM}
 }
 ```
 
@@ -823,7 +892,7 @@ contains bounding boxes.
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/file_name': Text(shape=(), dtype=tf.string),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
 })
 ```
@@ -877,11 +946,10 @@ A large set of images of cats and dogs.There are 1738 corrupted images that are 
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -1098,122 +1166,99 @@ configurations predefined (defaults to the first one):
 ```python
 FeaturesDict({
     'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/512"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(512, 512, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/256"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/128"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/64"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/32"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/16"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(16, 16, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/8"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(8, 8, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/4"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(4, 4, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/2"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(2, 2, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"celeb_a_hq/1"`
 
 ```python
 FeaturesDict({
     'image': Image(shape=(1, 1, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'image/filename': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -2414,12 +2459,19 @@ reasoning each question requires.
 *   Size: `17.72 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'objects': Sequence({'material': TensorInfo(shape=(None,), dtype=tf.int64), 'shape': TensorInfo(shape=(None,), dtype=tf.int64), 'pixel_coords': TensorInfo(shape=(None, 3), dtype=tf.float32), 'rotation': TensorInfo(shape=(None,), dtype=tf.float32), 'color': TensorInfo(shape=(None,), dtype=tf.int64), 'size': TensorInfo(shape=(None,), dtype=tf.int64), '3d_coords': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'objects': Sequence({
+        '3d_coords': Tensor(shape=(3,), dtype=tf.float32),
+        'color': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+        'material': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'pixel_coords': Tensor(shape=(3,), dtype=tf.float32),
+        'rotation': Tensor(shape=(), dtype=tf.float32),
+        'shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'size': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
 })
 ```
 
@@ -2449,6 +2501,167 @@ TEST       | 15,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="coco" />
+  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and
+captioning dataset. This version contains images, bounding boxes &quot;
+and labels for the 2017 version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * Coco 2014 and 2017 uses the same images, but different train/val/test splits
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only uses 80 classes.
+ * Panotptic annotations defines defines 200 classes but only uses 133." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#coco" />
+  <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
+</div>
+
+### `"coco"`
+
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2017 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
+
+*   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+*   `DatasetBuilder`:
+    [`tfds.image.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
+
+`coco` is configured with `tfds.image.coco.CocoConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"2014"` (`v1.0.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
+    detection, segmentation, and captioning dataset. This version contains
+    images, bounding boxes " and labels for the 2014 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+*   `"2017"` (`v1.0.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
+    detection, segmentation, and captioning dataset. This version contains
+    images, bounding boxes " and labels for the 2017 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+*   `"2017_panoptic"` (`v1.0.0`) (`Size: 19.57 GiB`): COCO is a large-scale
+    object detection, segmentation, and captioning dataset. This version
+    contains images, bounding boxes " and labels for the 2017 version. Note:
+
+    *   Some images from the train and validation sets don't have annotations.
+    *   Coco 2014 and 2017 uses the same images, but different train/val/test
+        splits
+    *   The test split don't have any annotations (only images).
+    *   Coco defines 91 classes but the data only uses 80 classes.
+    *   Panotptic annotations defines defines 200 classes but only uses 133.
+
+#### `"coco/2014"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
+#### `"coco/2017"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
+})
+```
+
+#### `"coco/2017_panoptic"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'image/id': Tensor(shape=(), dtype=tf.int64),
+    'panoptic_image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'panoptic_image/filename': Text(shape=(), dtype=tf.string),
+    'panoptic_objects': Sequence({
+        'area': Tensor(shape=(), dtype=tf.int64),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=133),
+    }),
+})
+```
+
+#### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 123,287
+TRAIN      | 118,287
+VALIDATION | 5,000
+
+#### Urls
+
+*   [http://cocodataset.org/#home](http://cocodataset.org/#home)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@article{DBLP:journals/corr/LinMBHPRDZ14,
+  author    = {Tsung{-}Yi Lin and
+               Michael Maire and
+               Serge J. Belongie and
+               Lubomir D. Bourdev and
+               Ross B. Girshick and
+               James Hays and
+               Pietro Perona and
+               Deva Ramanan and
+               Piotr Doll{'{a}}r and
+               C. Lawrence Zitnick},
+  title     = {Microsoft {COCO:} Common Objects in Context},
+  journal   = {CoRR},
+  volume    = {abs/1405.0312},
+  year      = {2014},
+  url       = {http://arxiv.org/abs/1405.0312},
+  archivePrefix = {arXiv},
+  eprint    = {1405.0312},
+  timestamp = {Mon, 13 Aug 2018 16:48:13 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/LinMBHPRDZ14},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -2473,19 +2686,22 @@ Note:
  * The test split don't have any annotations (only images).
  * Coco defines 91 classes but the data only had 80 classes.
 
-
-* URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
-* `DatasetBuilder`: [`tfds.image.coco.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
-* Version: `v1.0.0`
-* Size: `37.57 GiB`
+*   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
+*   `DatasetBuilder`:
+    [`tfds.image.coco2014_legacy.Coco2014`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco2014_legacy.py)
+*   Version: `v1.0.0`
+*   Size: `37.57 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'is_crowd': TensorInfo(shape=(None,), dtype=tf.bool), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32)}),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'objects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_crowd': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+    }),
 })
 ```
 
@@ -2555,12 +2771,11 @@ Classification of textures in colorectal cancer histology. Each example is a 150
 #### Features
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'filename': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(150, 150, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -2612,11 +2827,10 @@ ALL        |      5,000
 #### Features
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'filename': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(5000, 5000, 3), dtype=tf.uint8),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -2718,7 +2932,7 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string, encoder=None),
+    'id': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
 })
@@ -2728,11 +2942,19 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'calc_type': TensorInfo(shape=(None,), dtype=tf.int64), 'calc_distribution': TensorInfo(shape=(None,), dtype=tf.int64), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'abnormalities': Sequence({
+        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'calc_distribution': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+        'calc_type': ClassLabel(shape=(), dtype=tf.int64, num_classes=48),
+        'id': Tensor(shape=(), dtype=tf.int32),
+        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'id': Text(shape=(), dtype=tf.string, encoder=None),
+    'id': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
-    'patient': Text(shape=(), dtype=tf.string, encoder=None),
+    'patient': Text(shape=(), dtype=tf.string),
     'view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
@@ -2741,11 +2963,19 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'abnormalities': Sequence({'mass_margins': TensorInfo(shape=(None,), dtype=tf.int64), 'mask': TensorInfo(shape=(None, None, None, 1), dtype=tf.uint8), 'assessment': TensorInfo(shape=(None,), dtype=tf.int64), 'subtlety': TensorInfo(shape=(None,), dtype=tf.int64), 'pathology': TensorInfo(shape=(None,), dtype=tf.int64), 'mass_shape': TensorInfo(shape=(None,), dtype=tf.int64), 'id': TensorInfo(shape=(None,), dtype=tf.int32)}),
+    'abnormalities': Sequence({
+        'assessment': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+        'id': Tensor(shape=(), dtype=tf.int32),
+        'mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+        'mass_margins': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+        'mass_shape': ClassLabel(shape=(), dtype=tf.int64, num_classes=21),
+        'pathology': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+        'subtlety': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'breast': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'id': Text(shape=(), dtype=tf.string, encoder=None),
+    'id': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 1), dtype=tf.uint8),
-    'patient': Text(shape=(), dtype=tf.string, encoder=None),
+    'patient': Text(shape=(), dtype=tf.string),
     'view': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
@@ -3046,7 +3276,7 @@ and has the following configurations predefined (defaults to the first one):
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'name': Text(shape=(), dtype=tf.string, encoder=None),
+    'name': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -3056,7 +3286,7 @@ FeaturesDict({
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'name': Text(shape=(), dtype=tf.string, encoder=None),
+    'name': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -3066,7 +3296,7 @@ FeaturesDict({
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'name': Text(shape=(), dtype=tf.string, encoder=None),
+    'name': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -3125,10 +3355,10 @@ experiments.
 `tfds.image.downsampled_imagenet.DownsampledImagenetConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `"32x32"` (`v0.1.0`) (`Size: ?? GiB`): A dataset consisting of Train and
+*   `"32x32"` (`v1.0.0`) (`Size: 3.98 GiB`): A dataset consisting of Train and
     Validation images of 32x32 resolution.
 
-*   `"64x64"` (`v0.1.0`) (`Size: ?? GiB`): A dataset consisting of Train and
+*   `"64x64"` (`v1.0.0`) (`Size: 11.73 GiB`): A dataset consisting of Train and
     Validation images of 64x64 resolution.
 
 #### `"downsampled_imagenet/32x32"`
@@ -3148,7 +3378,12 @@ FeaturesDict({
 ```
 
 #### Statistics
-None computed
+
+Split      | Examples
+:--------- | --------:
+ALL        | 1,331,148
+TRAIN      | 1,281,149
+VALIDATION | 49,999
 
 #### Urls
 
@@ -3303,12 +3538,11 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 #### Features
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -3343,7 +3577,7 @@ Year      = {2014}}
   <meta itemprop="name" content="emnist" />
   <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#emnist" />
-  <meta itemprop="sameAs" content="https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip" />
+  <meta itemprop="sameAs" content="https://www.nist.gov/node/1298471/emnist-dataset" />
 </div>
 
 ### `"emnist"`
@@ -3352,8 +3586,10 @@ The EMNIST dataset is a set of handwritten character digits derived from the
 NIST Special Database 19 and converted to a 28x28 pixel image format and dataset
 structure that directly matches the MNIST dataset.
 
-* URL: [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
-* `DatasetBuilder`: [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
+*   URL:
+    [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+*   `DatasetBuilder`:
+    [`tfds.image.mnist.EMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
 
 `emnist` is configured with `tfds.image.mnist.EMNISTConfig` and has the following
 configurations predefined (defaults to the first one):
@@ -3445,9 +3681,9 @@ ALL        |     70,000
 TRAIN      |     60,000
 TEST       |     10,000
 
-
 #### Urls
- * [https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip](https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip)
+
+*   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 #### Supervised keys (for `as_supervised=True`)
 `(u'image', u'label')`
@@ -3511,7 +3747,7 @@ following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'filename': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(64, 64, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
@@ -3521,7 +3757,7 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'filename': Text(shape=(), dtype=tf.string),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
     'sentinel2': Tensor(shape=[64, 64, 13], dtype=tf.float32),
 })
@@ -3610,6 +3846,66 @@ TEST       |     10,000
   timestamp = {Mon, 13 Aug 2018 16:47:27 +0200},
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-07747},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="food101" />
+  <meta itemprop="description" content="This dataset consists of 101 food categories, with 101'000 images. For each class, 250 manually reviewed test images are provided as well as 750 training images. On purpose, the training images were not cleaned, and thus still contain some amount of noise. This comes mostly in the form of intense colors and sometimes wrong labels. All images were rescaled to have a maximum side length of 512 pixels." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#food101" />
+  <meta itemprop="sameAs" content="http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz" />
+</div>
+
+### `"food101"`
+
+This dataset consists of 101 food categories, with 101'000 images. For each
+class, 250 manually reviewed test images are provided as well as 750 training
+images. On purpose, the training images were not cleaned, and thus still contain
+some amount of noise. This comes mostly in the form of intense colors and
+sometimes wrong labels. All images were rescaled to have a maximum side length
+of 512 pixels.
+
+*   URL:
+    [http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)
+*   `DatasetBuilder`:
+    [`tfds.image.food101.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/food101.py)
+*   Version: `v1.0.0`
+*   Size: `4.65 GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=101),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+TRAIN | 101,000
+ALL   | 101,000
+
+#### Urls
+
+*   [http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@inproceedings{bossard14,
+  title = {Food-101 -- Mining Discriminative Components with Random Forests},
+  author = {Bossard, Lukas and Guillaumin, Matthieu and Van Gool, Luc},
+  booktitle = {European Conference on Computer Vision},
+  year = {2014}
 }
 ```
 
@@ -3745,12 +4041,11 @@ images for most of the concepts in the WordNet hierarchy.
 #### Features
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -3940,722 +4235,601 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/gaussian_noise_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/gaussian_noise_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/gaussian_noise_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/gaussian_noise_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/shot_noise_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/shot_noise_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/shot_noise_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/shot_noise_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/shot_noise_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/impulse_noise_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/impulse_noise_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/impulse_noise_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/impulse_noise_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/impulse_noise_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/defocus_blur_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/defocus_blur_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/defocus_blur_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/defocus_blur_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/defocus_blur_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/frosted_glass_blur_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/frosted_glass_blur_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/frosted_glass_blur_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/frosted_glass_blur_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/frosted_glass_blur_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/zoom_blur_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/zoom_blur_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/zoom_blur_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/zoom_blur_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/zoom_blur_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/fog_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/fog_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/fog_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/fog_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/fog_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/brightness_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/brightness_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/brightness_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/brightness_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/brightness_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/contrast_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/contrast_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/contrast_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/contrast_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/contrast_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/elastic_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/elastic_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/elastic_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/elastic_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/elastic_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/pixelate_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/pixelate_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/pixelate_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/pixelate_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/pixelate_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/jpeg_compression_1"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/jpeg_compression_2"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/jpeg_compression_3"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/jpeg_compression_4"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
 
 #### `"imagenet2012_corrupted/jpeg_compression_5"`
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -4714,25 +4888,35 @@ the Kitti homepage.
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 *   `DatasetBuilder`:
     [`tfds.image.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/kitti.py)
-*   Version: `v1.0.0`
+*   Version: `v3.1.0`
 *   Size: `11.71 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/file_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'location': TensorInfo(shape=(None, 3), dtype=tf.float32), 'truncated': TensorInfo(shape=(None,), dtype=tf.float32), 'type': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'occluded': TensorInfo(shape=(None,), dtype=tf.int64), 'rotation_y': TensorInfo(shape=(None,), dtype=tf.float32), 'alpha': TensorInfo(shape=(None,), dtype=tf.float32), 'dimensions': TensorInfo(shape=(None, 3), dtype=tf.float32)}),
+    'image/file_name': Text(shape=(), dtype=tf.string),
+    'objects': Sequence({
+        'alpha': Tensor(shape=(), dtype=tf.float32),
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'dimensions': Tensor(shape=(3,), dtype=tf.float32),
+        'location': Tensor(shape=(3,), dtype=tf.float32),
+        'occluded': ClassLabel(shape=(), dtype=tf.int64, num_classes=4),
+        'rotation_y': Tensor(shape=(), dtype=tf.float32),
+        'truncated': Tensor(shape=(), dtype=tf.float32),
+        'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+    }),
 })
 ```
 
 #### Statistics
 
-Split | Examples
-:---- | -------:
-TRAIN | 7,481
-ALL   | 7,481
+Split      | Examples
+:--------- | -------:
+ALL        | 7,481
+TRAIN      | 6,347
+TEST       | 711
+VALIDATION | 423
 
 #### Urls
 
@@ -5040,6 +5224,243 @@ TEST       |     10,000
 }
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="mnist_corrupted" />
+  <meta itemprop="description" content="MNISTCorrupted is a dataset generated by adding 15 corruptions to the test
+images in the MNIST dataset. This dataset wraps the static, corrupted MNIST
+test images uploaded by the original authors" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#mnist_corrupted" />
+  <meta itemprop="sameAs" content="https://github.com/google-research/mnist-c" />
+</div>
+
+### `"mnist_corrupted"`
+
+MNISTCorrupted is a dataset generated by adding 15 corruptions to the test
+images in the MNIST dataset. This dataset wraps the static, corrupted MNIST test
+images uploaded by the original authors
+
+*   URL:
+    [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+*   `DatasetBuilder`:
+    [`tfds.image.mnist_corrupted.MNISTCorrupted`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist_corrupted.py)
+
+`mnist_corrupted` is configured with
+`tfds.image.mnist_corrupted.MNISTCorruptedConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"identity"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: identity
+
+*   `"shot_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    shot_noise
+
+*   `"impulse_noise"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    impulse_noise
+
+*   `"glass_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    glass_blur
+
+*   `"motion_blur"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    motion_blur
+
+*   `"shear"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: shear
+
+*   `"scale"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: scale
+
+*   `"rotate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: rotate
+
+*   `"brightness"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    brightness
+
+*   `"translate"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: translate
+
+*   `"stripe"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: stripe
+
+*   `"fog"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: fog
+
+*   `"spatter"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: spatter
+
+*   `"dotted_line"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    dotted_line
+
+*   `"zigzag"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method: zigzag
+
+*   `"canny_edges"` (`v0.0.1`) (`Size: 235.23 MiB`): Corruption method:
+    canny_edges
+
+#### `"mnist_corrupted/identity"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/shot_noise"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/impulse_noise"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/glass_blur"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/motion_blur"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/shear"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/scale"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/rotate"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/brightness"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/translate"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/stripe"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/fog"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/spatter"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/dotted_line"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/zigzag"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### `"mnist_corrupted/canny_edges"`
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+#### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'image', u'label')`
+
+#### Citation
+```
+@article{mu2019mnist,
+  title={MNIST-C: A Robustness Benchmark for Computer Vision},
+  author={Mu, Norman and Gilmer, Justin},
+  journal={arXiv preprint arXiv:1906.02337},
+  year={2019}
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -5159,11 +5580,28 @@ and has the following configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5171,11 +5609,28 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5183,11 +5638,28 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'bobjects': Sequence({'source': TensorInfo(shape=(None,), dtype=tf.int64), 'is_depiction': TensorInfo(shape=(None,), dtype=tf.int8), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'is_group_of': TensorInfo(shape=(None,), dtype=tf.int8), 'is_inside': TensorInfo(shape=(None,), dtype=tf.int8), 'is_occluded': TensorInfo(shape=(None,), dtype=tf.int8), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.int8)}),
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'objects': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
-    'objects_trainable': Sequence({'confidence': TensorInfo(shape=(None,), dtype=tf.int32), 'label': TensorInfo(shape=(None,), dtype=tf.int64), 'source': TensorInfo(shape=(None,), dtype=tf.int64)}),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
 })
 ```
 
@@ -5298,7 +5770,7 @@ per class).
 #### Features
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=102),
 })
@@ -5360,12 +5832,12 @@ lighting. All images have an associated ground truth annotation of breed.
 #### Features
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
+    'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -5425,10 +5897,9 @@ Imagenet, trainable on a single GPU.
 *   Size: `7.48 GiB`
 
 #### Features
-
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string, encoder=None),
+    'id': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(96, 96, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
@@ -5459,6 +5930,86 @@ TEST       | 32,768
   year         = 2018,
   doi          = {10.1007/978-3-030-00934-2_24},
   url          = {https://doi.org/10.1007/978-3-030-00934-2_24}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="pet_finder" />
+  <meta itemprop="description" content="Dataset with images from 5 classes (see config name for information on the specific class)" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#pet_finder" />
+  <meta itemprop="sameAs" content="https://storage.googleapis.com/petfinder_dataset/" />
+</div>
+
+### `"pet_finder"`
+
+Dataset with images from 5 classes (see config name for information on the
+specific class)
+
+*   URL:
+    [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
+*   `DatasetBuilder`:
+    [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
+*   Version: `v1.0.0`
+*   Size: `1.94 GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'PetID': Text(shape=(), dtype=tf.string),
+    'attributes': FeaturesDict({
+        'Age': Tensor(shape=(), dtype=tf.int64),
+        'Breed1': Tensor(shape=(), dtype=tf.int64),
+        'Breed2': Tensor(shape=(), dtype=tf.int64),
+        'Color1': Tensor(shape=(), dtype=tf.int64),
+        'Color2': Tensor(shape=(), dtype=tf.int64),
+        'Color3': Tensor(shape=(), dtype=tf.int64),
+        'Dewormed': Tensor(shape=(), dtype=tf.int64),
+        'Fee': Tensor(shape=(), dtype=tf.int64),
+        'FurLength': Tensor(shape=(), dtype=tf.int64),
+        'Gender': Tensor(shape=(), dtype=tf.int64),
+        'Health': Tensor(shape=(), dtype=tf.int64),
+        'MaturitySize': Tensor(shape=(), dtype=tf.int64),
+        'Quantity': Tensor(shape=(), dtype=tf.int64),
+        'State': Tensor(shape=(), dtype=tf.int64),
+        'Sterilized': Tensor(shape=(), dtype=tf.int64),
+        'Type': Tensor(shape=(), dtype=tf.int64),
+        'Vaccinated': Tensor(shape=(), dtype=tf.int64),
+        'VideoAmt': Tensor(shape=(), dtype=tf.int64),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 72,776
+TRAIN | 58,311
+TEST  | 14,465
+
+#### Urls
+
+*   [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'attributes', u'label')`
+
+#### Citation
+```
+@ONLINE {kaggle-petfinder-adoption-prediction,
+    author = "Kaggle and PetFinder.my",
+    title  = "PetFinder.my Adoption Prediction",
+    month  = "april",
+    year   = "2019",
+    url    = "https://www.kaggle.com/c/petfinder-adoption-prediction/data/"
 }
 ```
 
@@ -5557,7 +6108,7 @@ images in each class.
 #### Features
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'filename': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=45),
 })
@@ -5930,12 +6481,11 @@ the entire dataset (named "full"). All images are converted to RGB.
 #### Features
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string, encoder=None),
+    'file_name': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -6108,7 +6658,7 @@ measures 256x256 pixels.
 #### Features
 ```python
 FeaturesDict({
-    'filename': Text(shape=(), dtype=tf.string, encoder=None),
+    'filename': Text(shape=(), dtype=tf.string),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=21),
 })
@@ -6177,14 +6727,19 @@ predict the bounding box and label of each individual object.
 * Size: `868.85 MiB`
 
 #### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string, encoder=None),
-    'labels': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'labels_no_difficult': Sequence(shape=(None,), dtype=tf.int64, feature=ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
-    'objects': Sequence({'label': TensorInfo(shape=(None,), dtype=tf.int64), 'bbox': TensorInfo(shape=(None, 4), dtype=tf.float32), 'pose': TensorInfo(shape=(None,), dtype=tf.int64), 'is_truncated': TensorInfo(shape=(None,), dtype=tf.bool), 'is_difficult': TensorInfo(shape=(None,), dtype=tf.bool)}),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'labels_no_difficult': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=20)),
+    'objects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_difficult': Tensor(shape=(), dtype=tf.bool),
+        'is_truncated': Tensor(shape=(), dtype=tf.bool),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
+        'pose': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    }),
 })
 ```
 
@@ -6504,12 +7059,10 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'article': Text(shape=(), dtype=tf.string, encoder=None),
-    'highlights': Text(shape=(), dtype=tf.string, encoder=None),
+    'article': Text(shape=(), dtype=tf.string),
+    'highlights': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"cnn_dailymail/bytes"`
 
@@ -6570,6 +7123,88 @@ TEST       | 11,490
   booktitle={Advances in neural information processing systems},
   pages={1693--1701},
   year={2015}
+}
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="definite_pronoun_resolution" />
+  <meta itemprop="description" content="Composed by 30 students from one of the author's undergraduate classes. These
+sentence pairs cover topics ranging from real events (e.g., Iran's plan to
+attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,
+Batman) and purely imaginary situations, largely reflecting the pop culture as
+perceived by the American kids born in the early 90s. Each annotated example
+spans four lines: the first line contains the sentence, the second line contains
+the target pronoun, the third line contains the two candidate antecedents, and
+the fourth line contains the correct antecedent. If the target pronoun appears
+more than once in the sentence, its first occurrence is the one to be resolved." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#definite_pronoun_resolution" />
+  <meta itemprop="sameAs" content="http://www.hlt.utdallas.edu/~vince/data/emnlp12/" />
+</div>
+
+### `"definite_pronoun_resolution"`
+
+Composed by 30 students from one of the author's undergraduate classes. These
+sentence pairs cover topics ranging from real events (e.g., Iran's plan to
+attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,
+Batman) and purely imaginary situations, largely reflecting the pop culture as
+perceived by the American kids born in the early 90s. Each annotated example
+spans four lines: the first line contains the sentence, the second line contains
+the target pronoun, the third line contains the two candidate antecedents, and
+the fourth line contains the correct antecedent. If the target pronoun appears
+more than once in the sentence, its first occurrence is the one to be resolved.
+
+*   URL:
+    [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+*   `DatasetBuilder`:
+    [`tfds.text.definite_pronoun_resolution.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
+
+`definite_pronoun_resolution` is configured with
+`tfds.text.definite_pronoun_resolution.BuilderConfig` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"plain_text"` (`v0.0.1`) (`Size: 222.12 KiB`): Plain text import of the
+    Definite Pronoun Resolution Dataset.
+
+#### `"definite_pronoun_resolution/plain_text"`
+
+```python
+FeaturesDict({
+    'candidates': Sequence(Text(shape=(), dtype=tf.string)),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'pronoun': Text(shape=(), dtype=tf.string),
+    'sentence': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 1,886
+TRAIN | 1,322
+TEST  | 564
+
+#### Urls
+
+*   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
+
+#### Supervised keys (for `as_supervised=True`)
+`(u'sentence', u'label')`
+
+#### Citation
+```
+@inproceedings{rahman2012resolving,
+  title={Resolving complex cases of definite pronouns: the winograd schema challenge},
+  author={Rahman, Altaf and Ng, Vincent},
+  booktitle={Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning},
+  pages={777--789},
+  year={2012},
+  organization={Association for Computational Linguistics}
 }
 ```
 
@@ -6661,6 +7296,14 @@ configurations predefined (defaults to the first one):
     section. We also use and recommend the SNLI corpus as 550k examples of
     auxiliary training data.
 
+*   `"mnli_mismatched"` (`v0.0.2`) (`Size: 298.29 MiB`): The mismatched
+    validation and test splits from MNLI. See the "mnli" BuilderConfig for
+    additional information.
+
+*   `"mnli_matched"` (`v0.0.2`) (`Size: 298.29 MiB`): The matched validation and
+    test splits from MNLI. See the "mnli" BuilderConfig for additional
+    information.
+
 *   `"qnli"` (`v0.0.2`) (`Size: 10.14 MiB`): The Stanford Question Answering
     Dataset is a question-answering dataset consisting of question-paragraph
     pairs, where one of the sentences in the paragraph (drawn from Wikipedia)
@@ -6709,7 +7352,7 @@ configurations predefined (defaults to the first one):
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6719,7 +7362,7 @@ FeaturesDict({
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6729,8 +7372,8 @@ FeaturesDict({
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
-    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence1': Text(shape=(), dtype=tf.string),
+    'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6740,8 +7383,8 @@ FeaturesDict({
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'question1': Text(shape=(), dtype=tf.string, encoder=None),
-    'question2': Text(shape=(), dtype=tf.string, encoder=None),
+    'question1': Text(shape=(), dtype=tf.string),
+    'question2': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6751,8 +7394,8 @@ FeaturesDict({
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': Tensor(shape=(), dtype=tf.float32),
-    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
-    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence1': Text(shape=(), dtype=tf.string),
+    'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6760,10 +7403,32 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'hypothesis': Text(shape=(), dtype=tf.string),
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+    'premise': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"glue/mnli_mismatched"`
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string),
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"glue/mnli_matched"`
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string),
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6773,8 +7438,8 @@ FeaturesDict({
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'question': Text(shape=(), dtype=tf.string, encoder=None),
-    'sentence': Text(shape=(), dtype=tf.string, encoder=None),
+    'question': Text(shape=(), dtype=tf.string),
+    'sentence': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6784,8 +7449,8 @@ FeaturesDict({
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
-    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence1': Text(shape=(), dtype=tf.string),
+    'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6795,8 +7460,8 @@ FeaturesDict({
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
-    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
+    'sentence1': Text(shape=(), dtype=tf.string),
+    'sentence2': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -6877,11 +7542,9 @@ configurations predefined (defaults to the first one):
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"imdb_reviews/bytes"`
 
@@ -6980,11 +7643,9 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"lm1b/bytes"`
 
@@ -7093,9 +7754,9 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'hypothesis': Text(shape=(), dtype=tf.string),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+    'premise': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7171,9 +7832,9 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'hypothesis': Text(shape=(), dtype=tf.string),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+    'premise': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7234,11 +7895,14 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'answers': Sequence({'answer_start': TensorInfo(shape=(None,), dtype=tf.int32), 'text': TensorInfo(shape=(None,), dtype=tf.string)}),
-    'context': Text(shape=(), dtype=tf.string, encoder=None),
+    'answers': Sequence({
+        'answer_start': Tensor(shape=(), dtype=tf.int32),
+        'text': Text(shape=(), dtype=tf.string),
+    }),
+    'context': Text(shape=(), dtype=tf.string),
     'id': Tensor(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'question': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7495,10 +8159,10 @@ text.
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'hypothesis': Text(shape=(), dtype=tf.string),
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+    'premise': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7506,12 +8170,12 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'choice1': Text(shape=(), dtype=tf.string, encoder=None),
-    'choice2': Text(shape=(), dtype=tf.string, encoder=None),
+    'choice1': Text(shape=(), dtype=tf.string),
+    'choice2': Text(shape=(), dtype=tf.string),
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'premise': Text(shape=(), dtype=tf.string, encoder=None),
-    'question': Text(shape=(), dtype=tf.string, encoder=None),
+    'premise': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7519,15 +8183,15 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string, encoder=None),
+    'answer': Text(shape=(), dtype=tf.string),
     'idx': FeaturesDict({
         'answer': Tensor(shape=(), dtype=tf.int32),
         'paragraph': Tensor(shape=(), dtype=tf.int32),
         'question': Tensor(shape=(), dtype=tf.int32),
     }),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'paragraph': Text(shape=(), dtype=tf.string, encoder=None),
-    'question': Text(shape=(), dtype=tf.string, encoder=None),
+    'paragraph': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7535,10 +8199,10 @@ FeaturesDict({
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string, encoder=None),
+    'hypothesis': Text(shape=(), dtype=tf.string),
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'premise': Text(shape=(), dtype=tf.string, encoder=None),
+    'premise': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7548,10 +8212,10 @@ FeaturesDict({
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'pos': Text(shape=(), dtype=tf.string, encoder=None),
-    'sentence1': Text(shape=(), dtype=tf.string, encoder=None),
-    'sentence2': Text(shape=(), dtype=tf.string, encoder=None),
-    'word': Text(shape=(), dtype=tf.string, encoder=None),
+    'pos': Text(shape=(), dtype=tf.string),
+    'sentence1': Text(shape=(), dtype=tf.string),
+    'sentence2': Text(shape=(), dtype=tf.string),
+    'word': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7562,10 +8226,10 @@ FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'span1_index': Tensor(shape=(), dtype=tf.int32),
-    'span1_text': Text(shape=(), dtype=tf.string, encoder=None),
+    'span1_text': Text(shape=(), dtype=tf.string),
     'span2_index': Tensor(shape=(), dtype=tf.int32),
-    'span2_text': Text(shape=(), dtype=tf.string, encoder=None),
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'span2_text': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7576,10 +8240,10 @@ FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
     'span1_index': Tensor(shape=(), dtype=tf.int32),
-    'span1_text': Text(shape=(), dtype=tf.string, encoder=None),
+    'span1_text': Text(shape=(), dtype=tf.string),
     'span2_index': Tensor(shape=(), dtype=tf.int32),
-    'span2_text': Text(shape=(), dtype=tf.string, encoder=None),
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
+    'span2_text': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -7619,6 +8283,99 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 ```
 
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
+  <meta itemprop="name" content="trivia_qa" />
+  <meta itemprop="description" content="TriviaqQA is a reading comprehension dataset containing over 650K
+question-answer-evidence triples. TriviaqQA includes 95K question-answer
+pairs authored by trivia enthusiasts and independently gathered evidence
+documents, six per question on average, that provide high quality distant
+supervision for answering the questions." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#trivia_qa" />
+  <meta itemprop="sameAs" content="http://nlp.cs.washington.edu/triviaqa/" />
+</div>
+
+### `"trivia_qa"`
+
+TriviaqQA is a reading comprehension dataset containing over 650K
+question-answer-evidence triples. TriviaqQA includes 95K question-answer pairs
+authored by trivia enthusiasts and independently gathered evidence documents,
+six per question on average, that provide high quality distant supervision for
+answering the questions.
+
+*   URL:
+    [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
+*   `DatasetBuilder`:
+    [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
+*   Version: `v0.1.0`
+*   Size: `2.48 GiB`
+
+#### Features
+```python
+FeaturesDict({
+    'answer': FeaturesDict({
+        'aliases': Sequence(Text(shape=(), dtype=tf.string)),
+        'matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
+        'normalized_aliases': Sequence(Text(shape=(), dtype=tf.string)),
+        'normalized_matched_wiki_entity_name': Text(shape=(), dtype=tf.string),
+        'normalized_value': Text(shape=(), dtype=tf.string),
+        'type': Text(shape=(), dtype=tf.string),
+        'value': Text(shape=(), dtype=tf.string),
+    }),
+    'entity_pages': Sequence({
+        'doc_source': Text(shape=(), dtype=tf.string),
+        'file_name': Text(shape=(), dtype=tf.string),
+        'title': Text(shape=(), dtype=tf.string),
+        'wiki_context': Text(shape=(), dtype=tf.string),
+    }),
+    'question': Text(shape=(), dtype=tf.string),
+    'question_id': Text(shape=(), dtype=tf.string),
+    'question_source': Text(shape=(), dtype=tf.string),
+    'search_results': Sequence({
+        'description': Text(shape=(), dtype=tf.string),
+        'file_name': Text(shape=(), dtype=tf.string),
+        'rank': Tensor(shape=(), dtype=tf.int32),
+        'search_context': Text(shape=(), dtype=tf.string),
+        'title': Text(shape=(), dtype=tf.string),
+        'url': Text(shape=(), dtype=tf.string),
+    }),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 155,594
+TRAIN | 138,384
+TEST  | 17,210
+
+#### Urls
+
+*   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
+
+#### Supervised keys (for `as_supervised=True`)
+`None`
+
+#### Citation
+```
+@article{2017arXivtriviaqa,
+       author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},
+                 Daniel and {Zettlemoyer}, Luke},
+        title = "{triviaqa: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension}",
+      journal = {arXiv e-prints},
+         year = 2017,
+          eid = {arXiv:1705.03551},
+        pages = {arXiv:1705.03551},
+archivePrefix = {arXiv},
+       eprint = {1705.03551},
+}
+```
+
 ---
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -7641,3933 +8398,3629 @@ Wikipedia dataset containing cleaned articles of all languages. The datasets are
 `wikipedia` is configured with `tfds.text.wikipedia.WikipediaConfig` and has the following
 configurations predefined (defaults to the first one):
 
-* `"20190301.aa"` (`v0.0.2`) (`Size: 44.09 KiB`): Wikipedia dataset for aa, parsed from 20190301 dump.
+*   `"20190301.aa"` (`v0.0.2`) (`Size: 44.09 KiB`): Wikipedia dataset for aa,
+    parsed from 20190301 dump.
 
-* `"20190301.ab"` (`v0.0.2`) (`Size: 1.31 MiB`): Wikipedia dataset for ab, parsed from 20190301 dump.
+*   `"20190301.ab"` (`v0.0.2`) (`Size: 1.31 MiB`): Wikipedia dataset for ab,
+    parsed from 20190301 dump.
 
-* `"20190301.ace"` (`v0.0.2`) (`Size: 2.66 MiB`): Wikipedia dataset for ace, parsed from 20190301 dump.
+*   `"20190301.ace"` (`v0.0.2`) (`Size: 2.66 MiB`): Wikipedia dataset for ace,
+    parsed from 20190301 dump.
 
-* `"20190301.ady"` (`v0.0.2`) (`Size: 349.43 KiB`): Wikipedia dataset for ady, parsed from 20190301 dump.
+*   `"20190301.ady"` (`v0.0.2`) (`Size: 349.43 KiB`): Wikipedia dataset for ady,
+    parsed from 20190301 dump.
 
-* `"20190301.af"` (`v0.0.2`) (`Size: 84.13 MiB`): Wikipedia dataset for af, parsed from 20190301 dump.
+*   `"20190301.af"` (`v0.0.2`) (`Size: 84.13 MiB`): Wikipedia dataset for af,
+    parsed from 20190301 dump.
 
-* `"20190301.ak"` (`v0.0.2`) (`Size: 377.84 KiB`): Wikipedia dataset for ak, parsed from 20190301 dump.
+*   `"20190301.ak"` (`v0.0.2`) (`Size: 377.84 KiB`): Wikipedia dataset for ak,
+    parsed from 20190301 dump.
 
-* `"20190301.als"` (`v0.0.2`) (`Size: 46.90 MiB`): Wikipedia dataset for als, parsed from 20190301 dump.
+*   `"20190301.als"` (`v0.0.2`) (`Size: 46.90 MiB`): Wikipedia dataset for als,
+    parsed from 20190301 dump.
 
-* `"20190301.am"` (`v0.0.2`) (`Size: 6.54 MiB`): Wikipedia dataset for am, parsed from 20190301 dump.
+*   `"20190301.am"` (`v0.0.2`) (`Size: 6.54 MiB`): Wikipedia dataset for am,
+    parsed from 20190301 dump.
 
-* `"20190301.an"` (`v0.0.2`) (`Size: 31.39 MiB`): Wikipedia dataset for an, parsed from 20190301 dump.
+*   `"20190301.an"` (`v0.0.2`) (`Size: 31.39 MiB`): Wikipedia dataset for an,
+    parsed from 20190301 dump.
 
-* `"20190301.ang"` (`v0.0.2`) (`Size: 3.77 MiB`): Wikipedia dataset for ang, parsed from 20190301 dump.
+*   `"20190301.ang"` (`v0.0.2`) (`Size: 3.77 MiB`): Wikipedia dataset for ang,
+    parsed from 20190301 dump.
 
-* `"20190301.ar"` (`v0.0.2`) (`Size: 805.82 MiB`): Wikipedia dataset for ar, parsed from 20190301 dump.
+*   `"20190301.ar"` (`v0.0.2`) (`Size: 805.82 MiB`): Wikipedia dataset for ar,
+    parsed from 20190301 dump.
 
-* `"20190301.arc"` (`v0.0.2`) (`Size: 952.49 KiB`): Wikipedia dataset for arc, parsed from 20190301 dump.
+*   `"20190301.arc"` (`v0.0.2`) (`Size: 952.49 KiB`): Wikipedia dataset for arc,
+    parsed from 20190301 dump.
 
-* `"20190301.arz"` (`v0.0.2`) (`Size: 20.32 MiB`): Wikipedia dataset for arz, parsed from 20190301 dump.
+*   `"20190301.arz"` (`v0.0.2`) (`Size: 20.32 MiB`): Wikipedia dataset for arz,
+    parsed from 20190301 dump.
 
-* `"20190301.as"` (`v0.0.2`) (`Size: 19.06 MiB`): Wikipedia dataset for as, parsed from 20190301 dump.
+*   `"20190301.as"` (`v0.0.2`) (`Size: 19.06 MiB`): Wikipedia dataset for as,
+    parsed from 20190301 dump.
 
-* `"20190301.ast"` (`v0.0.2`) (`Size: 216.68 MiB`): Wikipedia dataset for ast, parsed from 20190301 dump.
+*   `"20190301.ast"` (`v0.0.2`) (`Size: 216.68 MiB`): Wikipedia dataset for ast,
+    parsed from 20190301 dump.
 
-* `"20190301.atj"` (`v0.0.2`) (`Size: 467.05 KiB`): Wikipedia dataset for atj, parsed from 20190301 dump.
+*   `"20190301.atj"` (`v0.0.2`) (`Size: 467.05 KiB`): Wikipedia dataset for atj,
+    parsed from 20190301 dump.
 
-* `"20190301.av"` (`v0.0.2`) (`Size: 3.61 MiB`): Wikipedia dataset for av, parsed from 20190301 dump.
+*   `"20190301.av"` (`v0.0.2`) (`Size: 3.61 MiB`): Wikipedia dataset for av,
+    parsed from 20190301 dump.
 
-* `"20190301.ay"` (`v0.0.2`) (`Size: 2.06 MiB`): Wikipedia dataset for ay, parsed from 20190301 dump.
+*   `"20190301.ay"` (`v0.0.2`) (`Size: 2.06 MiB`): Wikipedia dataset for ay,
+    parsed from 20190301 dump.
 
-* `"20190301.az"` (`v0.0.2`) (`Size: 163.04 MiB`): Wikipedia dataset for az, parsed from 20190301 dump.
+*   `"20190301.az"` (`v0.0.2`) (`Size: 163.04 MiB`): Wikipedia dataset for az,
+    parsed from 20190301 dump.
 
-* `"20190301.azb"` (`v0.0.2`) (`Size: 50.59 MiB`): Wikipedia dataset for azb, parsed from 20190301 dump.
+*   `"20190301.azb"` (`v0.0.2`) (`Size: 50.59 MiB`): Wikipedia dataset for azb,
+    parsed from 20190301 dump.
 
-* `"20190301.ba"` (`v0.0.2`) (`Size: 55.04 MiB`): Wikipedia dataset for ba, parsed from 20190301 dump.
+*   `"20190301.ba"` (`v0.0.2`) (`Size: 55.04 MiB`): Wikipedia dataset for ba,
+    parsed from 20190301 dump.
 
-* `"20190301.bar"` (`v0.0.2`) (`Size: 30.14 MiB`): Wikipedia dataset for bar, parsed from 20190301 dump.
+*   `"20190301.bar"` (`v0.0.2`) (`Size: 30.14 MiB`): Wikipedia dataset for bar,
+    parsed from 20190301 dump.
 
-* `"20190301.bat-smg"` (`v0.0.2`) (`Size: 4.61 MiB`): Wikipedia dataset for bat-smg, parsed from 20190301 dump.
+*   `"20190301.bat-smg"` (`v0.0.2`) (`Size: 4.61 MiB`): Wikipedia dataset for
+    bat-smg, parsed from 20190301 dump.
 
-* `"20190301.bcl"` (`v0.0.2`) (`Size: 6.18 MiB`): Wikipedia dataset for bcl, parsed from 20190301 dump.
+*   `"20190301.bcl"` (`v0.0.2`) (`Size: 6.18 MiB`): Wikipedia dataset for bcl,
+    parsed from 20190301 dump.
 
-* `"20190301.be"` (`v0.0.2`) (`Size: 192.23 MiB`): Wikipedia dataset for be, parsed from 20190301 dump.
+*   `"20190301.be"` (`v0.0.2`) (`Size: 192.23 MiB`): Wikipedia dataset for be,
+    parsed from 20190301 dump.
 
-* `"20190301.be-x-old"` (`v0.0.2`) (`Size: 74.77 MiB`): Wikipedia dataset for be-x-old, parsed from 20190301 dump.
+*   `"20190301.be-x-old"` (`v0.0.2`) (`Size: 74.77 MiB`): Wikipedia dataset for
+    be-x-old, parsed from 20190301 dump.
 
-* `"20190301.bg"` (`v0.0.2`) (`Size: 326.20 MiB`): Wikipedia dataset for bg, parsed from 20190301 dump.
+*   `"20190301.bg"` (`v0.0.2`) (`Size: 326.20 MiB`): Wikipedia dataset for bg,
+    parsed from 20190301 dump.
 
-* `"20190301.bh"` (`v0.0.2`) (`Size: 13.28 MiB`): Wikipedia dataset for bh, parsed from 20190301 dump.
+*   `"20190301.bh"` (`v0.0.2`) (`Size: 13.28 MiB`): Wikipedia dataset for bh,
+    parsed from 20190301 dump.
 
-* `"20190301.bi"` (`v0.0.2`) (`Size: 424.88 KiB`): Wikipedia dataset for bi, parsed from 20190301 dump.
+*   `"20190301.bi"` (`v0.0.2`) (`Size: 424.88 KiB`): Wikipedia dataset for bi,
+    parsed from 20190301 dump.
 
-* `"20190301.bjn"` (`v0.0.2`) (`Size: 2.09 MiB`): Wikipedia dataset for bjn, parsed from 20190301 dump.
+*   `"20190301.bjn"` (`v0.0.2`) (`Size: 2.09 MiB`): Wikipedia dataset for bjn,
+    parsed from 20190301 dump.
 
-* `"20190301.bm"` (`v0.0.2`) (`Size: 447.98 KiB`): Wikipedia dataset for bm, parsed from 20190301 dump.
+*   `"20190301.bm"` (`v0.0.2`) (`Size: 447.98 KiB`): Wikipedia dataset for bm,
+    parsed from 20190301 dump.
 
-* `"20190301.bn"` (`v0.0.2`) (`Size: 145.04 MiB`): Wikipedia dataset for bn, parsed from 20190301 dump.
+*   `"20190301.bn"` (`v0.0.2`) (`Size: 145.04 MiB`): Wikipedia dataset for bn,
+    parsed from 20190301 dump.
 
-* `"20190301.bo"` (`v0.0.2`) (`Size: 12.41 MiB`): Wikipedia dataset for bo, parsed from 20190301 dump.
+*   `"20190301.bo"` (`v0.0.2`) (`Size: 12.41 MiB`): Wikipedia dataset for bo,
+    parsed from 20190301 dump.
 
-* `"20190301.bpy"` (`v0.0.2`) (`Size: 5.05 MiB`): Wikipedia dataset for bpy, parsed from 20190301 dump.
+*   `"20190301.bpy"` (`v0.0.2`) (`Size: 5.05 MiB`): Wikipedia dataset for bpy,
+    parsed from 20190301 dump.
 
-* `"20190301.br"` (`v0.0.2`) (`Size: 49.14 MiB`): Wikipedia dataset for br, parsed from 20190301 dump.
+*   `"20190301.br"` (`v0.0.2`) (`Size: 49.14 MiB`): Wikipedia dataset for br,
+    parsed from 20190301 dump.
 
-* `"20190301.bs"` (`v0.0.2`) (`Size: 103.26 MiB`): Wikipedia dataset for bs, parsed from 20190301 dump.
+*   `"20190301.bs"` (`v0.0.2`) (`Size: 103.26 MiB`): Wikipedia dataset for bs,
+    parsed from 20190301 dump.
 
-* `"20190301.bug"` (`v0.0.2`) (`Size: 1.76 MiB`): Wikipedia dataset for bug, parsed from 20190301 dump.
+*   `"20190301.bug"` (`v0.0.2`) (`Size: 1.76 MiB`): Wikipedia dataset for bug,
+    parsed from 20190301 dump.
 
-* `"20190301.bxr"` (`v0.0.2`) (`Size: 3.21 MiB`): Wikipedia dataset for bxr, parsed from 20190301 dump.
+*   `"20190301.bxr"` (`v0.0.2`) (`Size: 3.21 MiB`): Wikipedia dataset for bxr,
+    parsed from 20190301 dump.
 
-* `"20190301.ca"` (`v0.0.2`) (`Size: 849.65 MiB`): Wikipedia dataset for ca, parsed from 20190301 dump.
+*   `"20190301.ca"` (`v0.0.2`) (`Size: 849.65 MiB`): Wikipedia dataset for ca,
+    parsed from 20190301 dump.
 
-* `"20190301.cbk-zam"` (`v0.0.2`) (`Size: 1.84 MiB`): Wikipedia dataset for cbk-zam, parsed from 20190301 dump.
+*   `"20190301.cbk-zam"` (`v0.0.2`) (`Size: 1.84 MiB`): Wikipedia dataset for
+    cbk-zam, parsed from 20190301 dump.
 
-* `"20190301.cdo"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for cdo, parsed from 20190301 dump.
+*   `"20190301.cdo"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for cdo,
+    parsed from 20190301 dump.
 
-* `"20190301.ce"` (`v0.0.2`) (`Size: 43.89 MiB`): Wikipedia dataset for ce, parsed from 20190301 dump.
+*   `"20190301.ce"` (`v0.0.2`) (`Size: 43.89 MiB`): Wikipedia dataset for ce,
+    parsed from 20190301 dump.
 
-* `"20190301.ceb"` (`v0.0.2`) (`Size: ?? GiB`): Wikipedia dataset for ceb, parsed from 20190301 dump.
+*   `"20190301.ceb"` (`v0.0.2`) (`Size: 1.79 GiB`): Wikipedia dataset for ceb,
+    parsed from 20190301 dump.
 
-* `"20190301.ch"` (`v0.0.2`) (`Size: 684.97 KiB`): Wikipedia dataset for ch, parsed from 20190301 dump.
+*   `"20190301.ch"` (`v0.0.2`) (`Size: 684.97 KiB`): Wikipedia dataset for ch,
+    parsed from 20190301 dump.
 
-* `"20190301.cho"` (`v0.0.2`) (`Size: 25.99 KiB`): Wikipedia dataset for cho, parsed from 20190301 dump.
+*   `"20190301.cho"` (`v0.0.2`) (`Size: 25.99 KiB`): Wikipedia dataset for cho,
+    parsed from 20190301 dump.
 
-* `"20190301.chr"` (`v0.0.2`) (`Size: 651.25 KiB`): Wikipedia dataset for chr, parsed from 20190301 dump.
+*   `"20190301.chr"` (`v0.0.2`) (`Size: 651.25 KiB`): Wikipedia dataset for chr,
+    parsed from 20190301 dump.
 
-* `"20190301.chy"` (`v0.0.2`) (`Size: 325.90 KiB`): Wikipedia dataset for chy, parsed from 20190301 dump.
+*   `"20190301.chy"` (`v0.0.2`) (`Size: 325.90 KiB`): Wikipedia dataset for chy,
+    parsed from 20190301 dump.
 
-* `"20190301.ckb"` (`v0.0.2`) (`Size: 22.16 MiB`): Wikipedia dataset for ckb, parsed from 20190301 dump.
+*   `"20190301.ckb"` (`v0.0.2`) (`Size: 22.16 MiB`): Wikipedia dataset for ckb,
+    parsed from 20190301 dump.
 
-* `"20190301.co"` (`v0.0.2`) (`Size: 3.38 MiB`): Wikipedia dataset for co, parsed from 20190301 dump.
+*   `"20190301.co"` (`v0.0.2`) (`Size: 3.38 MiB`): Wikipedia dataset for co,
+    parsed from 20190301 dump.
 
-* `"20190301.cr"` (`v0.0.2`) (`Size: 259.71 KiB`): Wikipedia dataset for cr, parsed from 20190301 dump.
+*   `"20190301.cr"` (`v0.0.2`) (`Size: 259.71 KiB`): Wikipedia dataset for cr,
+    parsed from 20190301 dump.
 
-* `"20190301.crh"` (`v0.0.2`) (`Size: 4.01 MiB`): Wikipedia dataset for crh, parsed from 20190301 dump.
+*   `"20190301.crh"` (`v0.0.2`) (`Size: 4.01 MiB`): Wikipedia dataset for crh,
+    parsed from 20190301 dump.
 
-* `"20190301.cs"` (`v0.0.2`) (`Size: 759.21 MiB`): Wikipedia dataset for cs, parsed from 20190301 dump.
+*   `"20190301.cs"` (`v0.0.2`) (`Size: 759.21 MiB`): Wikipedia dataset for cs,
+    parsed from 20190301 dump.
 
-* `"20190301.csb"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for csb, parsed from 20190301 dump.
+*   `"20190301.csb"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for csb,
+    parsed from 20190301 dump.
 
-* `"20190301.cu"` (`v0.0.2`) (`Size: 631.49 KiB`): Wikipedia dataset for cu, parsed from 20190301 dump.
+*   `"20190301.cu"` (`v0.0.2`) (`Size: 631.49 KiB`): Wikipedia dataset for cu,
+    parsed from 20190301 dump.
 
-* `"20190301.cv"` (`v0.0.2`) (`Size: 22.23 MiB`): Wikipedia dataset for cv, parsed from 20190301 dump.
+*   `"20190301.cv"` (`v0.0.2`) (`Size: 22.23 MiB`): Wikipedia dataset for cv,
+    parsed from 20190301 dump.
 
-* `"20190301.cy"` (`v0.0.2`) (`Size: 64.37 MiB`): Wikipedia dataset for cy, parsed from 20190301 dump.
+*   `"20190301.cy"` (`v0.0.2`) (`Size: 64.37 MiB`): Wikipedia dataset for cy,
+    parsed from 20190301 dump.
 
-* `"20190301.da"` (`v0.0.2`) (`Size: 323.53 MiB`): Wikipedia dataset for da, parsed from 20190301 dump.
+*   `"20190301.da"` (`v0.0.2`) (`Size: 323.53 MiB`): Wikipedia dataset for da,
+    parsed from 20190301 dump.
 
-* `"20190301.de"` (`v0.0.2`) (`Size: 4.97 GiB`): Wikipedia dataset for de, parsed from 20190301 dump.
+*   `"20190301.de"` (`v0.0.2`) (`Size: 4.97 GiB`): Wikipedia dataset for de,
+    parsed from 20190301 dump.
 
-* `"20190301.din"` (`v0.0.2`) (`Size: 457.06 KiB`): Wikipedia dataset for din, parsed from 20190301 dump.
+*   `"20190301.din"` (`v0.0.2`) (`Size: 457.06 KiB`): Wikipedia dataset for din,
+    parsed from 20190301 dump.
 
-* `"20190301.diq"` (`v0.0.2`) (`Size: 7.24 MiB`): Wikipedia dataset for diq, parsed from 20190301 dump.
+*   `"20190301.diq"` (`v0.0.2`) (`Size: 7.24 MiB`): Wikipedia dataset for diq,
+    parsed from 20190301 dump.
 
-* `"20190301.dsb"` (`v0.0.2`) (`Size: 3.54 MiB`): Wikipedia dataset for dsb, parsed from 20190301 dump.
+*   `"20190301.dsb"` (`v0.0.2`) (`Size: 3.54 MiB`): Wikipedia dataset for dsb,
+    parsed from 20190301 dump.
 
-* `"20190301.dty"` (`v0.0.2`) (`Size: 4.95 MiB`): Wikipedia dataset for dty, parsed from 20190301 dump.
+*   `"20190301.dty"` (`v0.0.2`) (`Size: 4.95 MiB`): Wikipedia dataset for dty,
+    parsed from 20190301 dump.
 
-* `"20190301.dv"` (`v0.0.2`) (`Size: 4.24 MiB`): Wikipedia dataset for dv, parsed from 20190301 dump.
+*   `"20190301.dv"` (`v0.0.2`) (`Size: 4.24 MiB`): Wikipedia dataset for dv,
+    parsed from 20190301 dump.
 
-* `"20190301.dz"` (`v0.0.2`) (`Size: 360.01 KiB`): Wikipedia dataset for dz, parsed from 20190301 dump.
+*   `"20190301.dz"` (`v0.0.2`) (`Size: 360.01 KiB`): Wikipedia dataset for dz,
+    parsed from 20190301 dump.
 
-* `"20190301.ee"` (`v0.0.2`) (`Size: 434.14 KiB`): Wikipedia dataset for ee, parsed from 20190301 dump.
+*   `"20190301.ee"` (`v0.0.2`) (`Size: 434.14 KiB`): Wikipedia dataset for ee,
+    parsed from 20190301 dump.
 
-* `"20190301.el"` (`v0.0.2`) (`Size: 324.40 MiB`): Wikipedia dataset for el, parsed from 20190301 dump.
+*   `"20190301.el"` (`v0.0.2`) (`Size: 324.40 MiB`): Wikipedia dataset for el,
+    parsed from 20190301 dump.
 
-* `"20190301.eml"` (`v0.0.2`) (`Size: 7.72 MiB`): Wikipedia dataset for eml, parsed from 20190301 dump.
+*   `"20190301.eml"` (`v0.0.2`) (`Size: 7.72 MiB`): Wikipedia dataset for eml,
+    parsed from 20190301 dump.
 
-* `"20190301.en"` (`v0.0.2`) (`Size: 15.72 GiB`): Wikipedia dataset for en, parsed from 20190301 dump.
+*   `"20190301.en"` (`v0.0.2`) (`Size: 15.72 GiB`): Wikipedia dataset for en,
+    parsed from 20190301 dump.
 
-* `"20190301.eo"` (`v0.0.2`) (`Size: 245.73 MiB`): Wikipedia dataset for eo, parsed from 20190301 dump.
+*   `"20190301.eo"` (`v0.0.2`) (`Size: 245.73 MiB`): Wikipedia dataset for eo,
+    parsed from 20190301 dump.
 
-* `"20190301.es"` (`v0.0.2`) (`Size: 2.93 GiB`): Wikipedia dataset for es, parsed from 20190301 dump.
+*   `"20190301.es"` (`v0.0.2`) (`Size: 2.93 GiB`): Wikipedia dataset for es,
+    parsed from 20190301 dump.
 
-* `"20190301.et"` (`v0.0.2`) (`Size: 196.03 MiB`): Wikipedia dataset for et, parsed from 20190301 dump.
+*   `"20190301.et"` (`v0.0.2`) (`Size: 196.03 MiB`): Wikipedia dataset for et,
+    parsed from 20190301 dump.
 
-* `"20190301.eu"` (`v0.0.2`) (`Size: 180.35 MiB`): Wikipedia dataset for eu, parsed from 20190301 dump.
+*   `"20190301.eu"` (`v0.0.2`) (`Size: 180.35 MiB`): Wikipedia dataset for eu,
+    parsed from 20190301 dump.
 
-* `"20190301.ext"` (`v0.0.2`) (`Size: 2.40 MiB`): Wikipedia dataset for ext, parsed from 20190301 dump.
+*   `"20190301.ext"` (`v0.0.2`) (`Size: 2.40 MiB`): Wikipedia dataset for ext,
+    parsed from 20190301 dump.
 
-* `"20190301.fa"` (`v0.0.2`) (`Size: 693.84 MiB`): Wikipedia dataset for fa, parsed from 20190301 dump.
+*   `"20190301.fa"` (`v0.0.2`) (`Size: 693.84 MiB`): Wikipedia dataset for fa,
+    parsed from 20190301 dump.
 
-* `"20190301.ff"` (`v0.0.2`) (`Size: 387.75 KiB`): Wikipedia dataset for ff, parsed from 20190301 dump.
+*   `"20190301.ff"` (`v0.0.2`) (`Size: 387.75 KiB`): Wikipedia dataset for ff,
+    parsed from 20190301 dump.
 
-* `"20190301.fi"` (`v0.0.2`) (`Size: 656.44 MiB`): Wikipedia dataset for fi, parsed from 20190301 dump.
+*   `"20190301.fi"` (`v0.0.2`) (`Size: 656.44 MiB`): Wikipedia dataset for fi,
+    parsed from 20190301 dump.
 
-* `"20190301.fiu-vro"` (`v0.0.2`) (`Size: 2.00 MiB`): Wikipedia dataset for fiu-vro, parsed from 20190301 dump.
+*   `"20190301.fiu-vro"` (`v0.0.2`) (`Size: 2.00 MiB`): Wikipedia dataset for
+    fiu-vro, parsed from 20190301 dump.
 
-* `"20190301.fj"` (`v0.0.2`) (`Size: 262.98 KiB`): Wikipedia dataset for fj, parsed from 20190301 dump.
+*   `"20190301.fj"` (`v0.0.2`) (`Size: 262.98 KiB`): Wikipedia dataset for fj,
+    parsed from 20190301 dump.
 
-* `"20190301.fo"` (`v0.0.2`) (`Size: 13.67 MiB`): Wikipedia dataset for fo, parsed from 20190301 dump.
+*   `"20190301.fo"` (`v0.0.2`) (`Size: 13.67 MiB`): Wikipedia dataset for fo,
+    parsed from 20190301 dump.
 
-* `"20190301.fr"` (`v0.0.2`) (`Size: 4.14 GiB`): Wikipedia dataset for fr, parsed from 20190301 dump.
+*   `"20190301.fr"` (`v0.0.2`) (`Size: 4.14 GiB`): Wikipedia dataset for fr,
+    parsed from 20190301 dump.
 
-* `"20190301.frp"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for frp, parsed from 20190301 dump.
+*   `"20190301.frp"` (`v0.0.2`) (`Size: 2.03 MiB`): Wikipedia dataset for frp,
+    parsed from 20190301 dump.
 
-* `"20190301.frr"` (`v0.0.2`) (`Size: 7.88 MiB`): Wikipedia dataset for frr, parsed from 20190301 dump.
+*   `"20190301.frr"` (`v0.0.2`) (`Size: 7.88 MiB`): Wikipedia dataset for frr,
+    parsed from 20190301 dump.
 
-* `"20190301.fur"` (`v0.0.2`) (`Size: 2.29 MiB`): Wikipedia dataset for fur, parsed from 20190301 dump.
+*   `"20190301.fur"` (`v0.0.2`) (`Size: 2.29 MiB`): Wikipedia dataset for fur,
+    parsed from 20190301 dump.
 
-* `"20190301.fy"` (`v0.0.2`) (`Size: 45.52 MiB`): Wikipedia dataset for fy, parsed from 20190301 dump.
+*   `"20190301.fy"` (`v0.0.2`) (`Size: 45.52 MiB`): Wikipedia dataset for fy,
+    parsed from 20190301 dump.
 
-* `"20190301.ga"` (`v0.0.2`) (`Size: 24.78 MiB`): Wikipedia dataset for ga, parsed from 20190301 dump.
+*   `"20190301.ga"` (`v0.0.2`) (`Size: 24.78 MiB`): Wikipedia dataset for ga,
+    parsed from 20190301 dump.
 
-* `"20190301.gag"` (`v0.0.2`) (`Size: 2.04 MiB`): Wikipedia dataset for gag, parsed from 20190301 dump.
+*   `"20190301.gag"` (`v0.0.2`) (`Size: 2.04 MiB`): Wikipedia dataset for gag,
+    parsed from 20190301 dump.
 
-* `"20190301.gan"` (`v0.0.2`) (`Size: 3.82 MiB`): Wikipedia dataset for gan, parsed from 20190301 dump.
+*   `"20190301.gan"` (`v0.0.2`) (`Size: 3.82 MiB`): Wikipedia dataset for gan,
+    parsed from 20190301 dump.
 
-* `"20190301.gd"` (`v0.0.2`) (`Size: 8.51 MiB`): Wikipedia dataset for gd, parsed from 20190301 dump.
+*   `"20190301.gd"` (`v0.0.2`) (`Size: 8.51 MiB`): Wikipedia dataset for gd,
+    parsed from 20190301 dump.
 
-* `"20190301.gl"` (`v0.0.2`) (`Size: 235.07 MiB`): Wikipedia dataset for gl, parsed from 20190301 dump.
+*   `"20190301.gl"` (`v0.0.2`) (`Size: 235.07 MiB`): Wikipedia dataset for gl,
+    parsed from 20190301 dump.
 
-* `"20190301.glk"` (`v0.0.2`) (`Size: 1.91 MiB`): Wikipedia dataset for glk, parsed from 20190301 dump.
+*   `"20190301.glk"` (`v0.0.2`) (`Size: 1.91 MiB`): Wikipedia dataset for glk,
+    parsed from 20190301 dump.
 
-* `"20190301.gn"` (`v0.0.2`) (`Size: 3.37 MiB`): Wikipedia dataset for gn, parsed from 20190301 dump.
+*   `"20190301.gn"` (`v0.0.2`) (`Size: 3.37 MiB`): Wikipedia dataset for gn,
+    parsed from 20190301 dump.
 
-* `"20190301.gom"` (`v0.0.2`) (`Size: 6.07 MiB`): Wikipedia dataset for gom, parsed from 20190301 dump.
+*   `"20190301.gom"` (`v0.0.2`) (`Size: 6.07 MiB`): Wikipedia dataset for gom,
+    parsed from 20190301 dump.
 
-* `"20190301.gor"` (`v0.0.2`) (`Size: 1.28 MiB`): Wikipedia dataset for gor, parsed from 20190301 dump.
+*   `"20190301.gor"` (`v0.0.2`) (`Size: 1.28 MiB`): Wikipedia dataset for gor,
+    parsed from 20190301 dump.
 
-* `"20190301.got"` (`v0.0.2`) (`Size: 604.10 KiB`): Wikipedia dataset for got, parsed from 20190301 dump.
+*   `"20190301.got"` (`v0.0.2`) (`Size: 604.10 KiB`): Wikipedia dataset for got,
+    parsed from 20190301 dump.
 
-* `"20190301.gu"` (`v0.0.2`) (`Size: 27.23 MiB`): Wikipedia dataset for gu, parsed from 20190301 dump.
+*   `"20190301.gu"` (`v0.0.2`) (`Size: 27.23 MiB`): Wikipedia dataset for gu,
+    parsed from 20190301 dump.
 
-* `"20190301.gv"` (`v0.0.2`) (`Size: 5.32 MiB`): Wikipedia dataset for gv, parsed from 20190301 dump.
+*   `"20190301.gv"` (`v0.0.2`) (`Size: 5.32 MiB`): Wikipedia dataset for gv,
+    parsed from 20190301 dump.
 
-* `"20190301.ha"` (`v0.0.2`) (`Size: 1.62 MiB`): Wikipedia dataset for ha, parsed from 20190301 dump.
+*   `"20190301.ha"` (`v0.0.2`) (`Size: 1.62 MiB`): Wikipedia dataset for ha,
+    parsed from 20190301 dump.
 
-* `"20190301.hak"` (`v0.0.2`) (`Size: 3.28 MiB`): Wikipedia dataset for hak, parsed from 20190301 dump.
+*   `"20190301.hak"` (`v0.0.2`) (`Size: 3.28 MiB`): Wikipedia dataset for hak,
+    parsed from 20190301 dump.
 
-* `"20190301.haw"` (`v0.0.2`) (`Size: 1017.76 KiB`): Wikipedia dataset for haw, parsed from 20190301 dump.
+*   `"20190301.haw"` (`v0.0.2`) (`Size: 1017.76 KiB`): Wikipedia dataset for
+    haw, parsed from 20190301 dump.
 
-* `"20190301.he"` (`v0.0.2`) (`Size: 572.30 MiB`): Wikipedia dataset for he, parsed from 20190301 dump.
+*   `"20190301.he"` (`v0.0.2`) (`Size: 572.30 MiB`): Wikipedia dataset for he,
+    parsed from 20190301 dump.
 
-* `"20190301.hi"` (`v0.0.2`) (`Size: 137.86 MiB`): Wikipedia dataset for hi, parsed from 20190301 dump.
+*   `"20190301.hi"` (`v0.0.2`) (`Size: 137.86 MiB`): Wikipedia dataset for hi,
+    parsed from 20190301 dump.
 
-* `"20190301.hif"` (`v0.0.2`) (`Size: 4.57 MiB`): Wikipedia dataset for hif, parsed from 20190301 dump.
+*   `"20190301.hif"` (`v0.0.2`) (`Size: 4.57 MiB`): Wikipedia dataset for hif,
+    parsed from 20190301 dump.
 
-* `"20190301.ho"` (`v0.0.2`) (`Size: 18.37 KiB`): Wikipedia dataset for ho, parsed from 20190301 dump.
+*   `"20190301.ho"` (`v0.0.2`) (`Size: 18.37 KiB`): Wikipedia dataset for ho,
+    parsed from 20190301 dump.
 
-* `"20190301.hr"` (`v0.0.2`) (`Size: 246.05 MiB`): Wikipedia dataset for hr, parsed from 20190301 dump.
+*   `"20190301.hr"` (`v0.0.2`) (`Size: 246.05 MiB`): Wikipedia dataset for hr,
+    parsed from 20190301 dump.
 
-* `"20190301.hsb"` (`v0.0.2`) (`Size: 10.38 MiB`): Wikipedia dataset for hsb, parsed from 20190301 dump.
+*   `"20190301.hsb"` (`v0.0.2`) (`Size: 10.38 MiB`): Wikipedia dataset for hsb,
+    parsed from 20190301 dump.
 
-* `"20190301.ht"` (`v0.0.2`) (`Size: 10.23 MiB`): Wikipedia dataset for ht, parsed from 20190301 dump.
+*   `"20190301.ht"` (`v0.0.2`) (`Size: 10.23 MiB`): Wikipedia dataset for ht,
+    parsed from 20190301 dump.
 
-* `"20190301.hu"` (`v0.0.2`) (`Size: 810.17 MiB`): Wikipedia dataset for hu, parsed from 20190301 dump.
+*   `"20190301.hu"` (`v0.0.2`) (`Size: 810.17 MiB`): Wikipedia dataset for hu,
+    parsed from 20190301 dump.
 
-* `"20190301.hy"` (`v0.0.2`) (`Size: 277.53 MiB`): Wikipedia dataset for hy, parsed from 20190301 dump.
+*   `"20190301.hy"` (`v0.0.2`) (`Size: 277.53 MiB`): Wikipedia dataset for hy,
+    parsed from 20190301 dump.
 
-* `"20190301.hz"` (`v0.0.2`) (`Size: 16.35 KiB`): Wikipedia dataset for hz, parsed from 20190301 dump.
+*   `"20190301.hz"` (`v0.0.2`) (`Size: 16.35 KiB`): Wikipedia dataset for hz,
+    parsed from 20190301 dump.
 
-* `"20190301.ia"` (`v0.0.2`) (`Size: 7.85 MiB`): Wikipedia dataset for ia, parsed from 20190301 dump.
+*   `"20190301.ia"` (`v0.0.2`) (`Size: 7.85 MiB`): Wikipedia dataset for ia,
+    parsed from 20190301 dump.
 
-* `"20190301.id"` (`v0.0.2`) (`Size: 523.94 MiB`): Wikipedia dataset for id, parsed from 20190301 dump.
+*   `"20190301.id"` (`v0.0.2`) (`Size: 523.94 MiB`): Wikipedia dataset for id,
+    parsed from 20190301 dump.
 
-* `"20190301.ie"` (`v0.0.2`) (`Size: 1.70 MiB`): Wikipedia dataset for ie, parsed from 20190301 dump.
+*   `"20190301.ie"` (`v0.0.2`) (`Size: 1.70 MiB`): Wikipedia dataset for ie,
+    parsed from 20190301 dump.
 
-* `"20190301.ig"` (`v0.0.2`) (`Size: 1.00 MiB`): Wikipedia dataset for ig, parsed from 20190301 dump.
+*   `"20190301.ig"` (`v0.0.2`) (`Size: 1.00 MiB`): Wikipedia dataset for ig,
+    parsed from 20190301 dump.
 
-* `"20190301.ii"` (`v0.0.2`) (`Size: 30.88 KiB`): Wikipedia dataset for ii, parsed from 20190301 dump.
+*   `"20190301.ii"` (`v0.0.2`) (`Size: 30.88 KiB`): Wikipedia dataset for ii,
+    parsed from 20190301 dump.
 
-* `"20190301.ik"` (`v0.0.2`) (`Size: 238.12 KiB`): Wikipedia dataset for ik, parsed from 20190301 dump.
+*   `"20190301.ik"` (`v0.0.2`) (`Size: 238.12 KiB`): Wikipedia dataset for ik,
+    parsed from 20190301 dump.
 
-* `"20190301.ilo"` (`v0.0.2`) (`Size: 15.22 MiB`): Wikipedia dataset for ilo, parsed from 20190301 dump.
+*   `"20190301.ilo"` (`v0.0.2`) (`Size: 15.22 MiB`): Wikipedia dataset for ilo,
+    parsed from 20190301 dump.
 
-* `"20190301.inh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for inh, parsed from 20190301 dump.
+*   `"20190301.inh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for inh,
+    parsed from 20190301 dump.
 
-* `"20190301.io"` (`v0.0.2`) (`Size: 12.56 MiB`): Wikipedia dataset for io, parsed from 20190301 dump.
+*   `"20190301.io"` (`v0.0.2`) (`Size: 12.56 MiB`): Wikipedia dataset for io,
+    parsed from 20190301 dump.
 
-* `"20190301.is"` (`v0.0.2`) (`Size: 41.86 MiB`): Wikipedia dataset for is, parsed from 20190301 dump.
+*   `"20190301.is"` (`v0.0.2`) (`Size: 41.86 MiB`): Wikipedia dataset for is,
+    parsed from 20190301 dump.
 
-* `"20190301.it"` (`v0.0.2`) (`Size: 2.66 GiB`): Wikipedia dataset for it, parsed from 20190301 dump.
+*   `"20190301.it"` (`v0.0.2`) (`Size: 2.66 GiB`): Wikipedia dataset for it,
+    parsed from 20190301 dump.
 
-* `"20190301.iu"` (`v0.0.2`) (`Size: 284.06 KiB`): Wikipedia dataset for iu, parsed from 20190301 dump.
+*   `"20190301.iu"` (`v0.0.2`) (`Size: 284.06 KiB`): Wikipedia dataset for iu,
+    parsed from 20190301 dump.
 
-* `"20190301.ja"` (`v0.0.2`) (`Size: 2.74 GiB`): Wikipedia dataset for ja, parsed from 20190301 dump.
+*   `"20190301.ja"` (`v0.0.2`) (`Size: 2.74 GiB`): Wikipedia dataset for ja,
+    parsed from 20190301 dump.
 
-* `"20190301.jam"` (`v0.0.2`) (`Size: 895.29 KiB`): Wikipedia dataset for jam, parsed from 20190301 dump.
+*   `"20190301.jam"` (`v0.0.2`) (`Size: 895.29 KiB`): Wikipedia dataset for jam,
+    parsed from 20190301 dump.
 
-* `"20190301.jbo"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for jbo, parsed from 20190301 dump.
+*   `"20190301.jbo"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for jbo,
+    parsed from 20190301 dump.
 
-* `"20190301.jv"` (`v0.0.2`) (`Size: 39.32 MiB`): Wikipedia dataset for jv, parsed from 20190301 dump.
+*   `"20190301.jv"` (`v0.0.2`) (`Size: 39.32 MiB`): Wikipedia dataset for jv,
+    parsed from 20190301 dump.
 
-* `"20190301.ka"` (`v0.0.2`) (`Size: 131.78 MiB`): Wikipedia dataset for ka, parsed from 20190301 dump.
+*   `"20190301.ka"` (`v0.0.2`) (`Size: 131.78 MiB`): Wikipedia dataset for ka,
+    parsed from 20190301 dump.
 
-* `"20190301.kaa"` (`v0.0.2`) (`Size: 1.35 MiB`): Wikipedia dataset for kaa, parsed from 20190301 dump.
+*   `"20190301.kaa"` (`v0.0.2`) (`Size: 1.35 MiB`): Wikipedia dataset for kaa,
+    parsed from 20190301 dump.
 
-* `"20190301.kab"` (`v0.0.2`) (`Size: 3.62 MiB`): Wikipedia dataset for kab, parsed from 20190301 dump.
+*   `"20190301.kab"` (`v0.0.2`) (`Size: 3.62 MiB`): Wikipedia dataset for kab,
+    parsed from 20190301 dump.
 
-* `"20190301.kbd"` (`v0.0.2`) (`Size: 1.65 MiB`): Wikipedia dataset for kbd, parsed from 20190301 dump.
+*   `"20190301.kbd"` (`v0.0.2`) (`Size: 1.65 MiB`): Wikipedia dataset for kbd,
+    parsed from 20190301 dump.
 
-* `"20190301.kbp"` (`v0.0.2`) (`Size: 1.24 MiB`): Wikipedia dataset for kbp, parsed from 20190301 dump.
+*   `"20190301.kbp"` (`v0.0.2`) (`Size: 1.24 MiB`): Wikipedia dataset for kbp,
+    parsed from 20190301 dump.
 
-* `"20190301.kg"` (`v0.0.2`) (`Size: 439.26 KiB`): Wikipedia dataset for kg, parsed from 20190301 dump.
+*   `"20190301.kg"` (`v0.0.2`) (`Size: 439.26 KiB`): Wikipedia dataset for kg,
+    parsed from 20190301 dump.
 
-* `"20190301.ki"` (`v0.0.2`) (`Size: 370.78 KiB`): Wikipedia dataset for ki, parsed from 20190301 dump.
+*   `"20190301.ki"` (`v0.0.2`) (`Size: 370.78 KiB`): Wikipedia dataset for ki,
+    parsed from 20190301 dump.
 
-* `"20190301.kj"` (`v0.0.2`) (`Size: 16.58 KiB`): Wikipedia dataset for kj, parsed from 20190301 dump.
+*   `"20190301.kj"` (`v0.0.2`) (`Size: 16.58 KiB`): Wikipedia dataset for kj,
+    parsed from 20190301 dump.
 
-* `"20190301.kk"` (`v0.0.2`) (`Size: 113.46 MiB`): Wikipedia dataset for kk, parsed from 20190301 dump.
+*   `"20190301.kk"` (`v0.0.2`) (`Size: 113.46 MiB`): Wikipedia dataset for kk,
+    parsed from 20190301 dump.
 
-* `"20190301.kl"` (`v0.0.2`) (`Size: 862.51 KiB`): Wikipedia dataset for kl, parsed from 20190301 dump.
+*   `"20190301.kl"` (`v0.0.2`) (`Size: 862.51 KiB`): Wikipedia dataset for kl,
+    parsed from 20190301 dump.
 
-* `"20190301.km"` (`v0.0.2`) (`Size: 21.92 MiB`): Wikipedia dataset for km, parsed from 20190301 dump.
+*   `"20190301.km"` (`v0.0.2`) (`Size: 21.92 MiB`): Wikipedia dataset for km,
+    parsed from 20190301 dump.
 
-* `"20190301.kn"` (`v0.0.2`) (`Size: 69.62 MiB`): Wikipedia dataset for kn, parsed from 20190301 dump.
+*   `"20190301.kn"` (`v0.0.2`) (`Size: 69.62 MiB`): Wikipedia dataset for kn,
+    parsed from 20190301 dump.
 
-* `"20190301.ko"` (`v0.0.2`) (`Size: 625.16 MiB`): Wikipedia dataset for ko, parsed from 20190301 dump.
+*   `"20190301.ko"` (`v0.0.2`) (`Size: 625.16 MiB`): Wikipedia dataset for ko,
+    parsed from 20190301 dump.
 
-* `"20190301.koi"` (`v0.0.2`) (`Size: 2.12 MiB`): Wikipedia dataset for koi, parsed from 20190301 dump.
+*   `"20190301.koi"` (`v0.0.2`) (`Size: 2.12 MiB`): Wikipedia dataset for koi,
+    parsed from 20190301 dump.
 
-* `"20190301.kr"` (`v0.0.2`) (`Size: 13.89 KiB`): Wikipedia dataset for kr, parsed from 20190301 dump.
+*   `"20190301.kr"` (`v0.0.2`) (`Size: 13.89 KiB`): Wikipedia dataset for kr,
+    parsed from 20190301 dump.
 
-* `"20190301.krc"` (`v0.0.2`) (`Size: 3.16 MiB`): Wikipedia dataset for krc, parsed from 20190301 dump.
+*   `"20190301.krc"` (`v0.0.2`) (`Size: 3.16 MiB`): Wikipedia dataset for krc,
+    parsed from 20190301 dump.
 
-* `"20190301.ks"` (`v0.0.2`) (`Size: 309.15 KiB`): Wikipedia dataset for ks, parsed from 20190301 dump.
+*   `"20190301.ks"` (`v0.0.2`) (`Size: 309.15 KiB`): Wikipedia dataset for ks,
+    parsed from 20190301 dump.
 
-* `"20190301.ksh"` (`v0.0.2`) (`Size: 3.07 MiB`): Wikipedia dataset for ksh, parsed from 20190301 dump.
+*   `"20190301.ksh"` (`v0.0.2`) (`Size: 3.07 MiB`): Wikipedia dataset for ksh,
+    parsed from 20190301 dump.
 
-* `"20190301.ku"` (`v0.0.2`) (`Size: 17.09 MiB`): Wikipedia dataset for ku, parsed from 20190301 dump.
+*   `"20190301.ku"` (`v0.0.2`) (`Size: 17.09 MiB`): Wikipedia dataset for ku,
+    parsed from 20190301 dump.
 
-* `"20190301.kv"` (`v0.0.2`) (`Size: 3.36 MiB`): Wikipedia dataset for kv, parsed from 20190301 dump.
+*   `"20190301.kv"` (`v0.0.2`) (`Size: 3.36 MiB`): Wikipedia dataset for kv,
+    parsed from 20190301 dump.
 
-* `"20190301.kw"` (`v0.0.2`) (`Size: 1.71 MiB`): Wikipedia dataset for kw, parsed from 20190301 dump.
+*   `"20190301.kw"` (`v0.0.2`) (`Size: 1.71 MiB`): Wikipedia dataset for kw,
+    parsed from 20190301 dump.
 
-* `"20190301.ky"` (`v0.0.2`) (`Size: 33.13 MiB`): Wikipedia dataset for ky, parsed from 20190301 dump.
+*   `"20190301.ky"` (`v0.0.2`) (`Size: 33.13 MiB`): Wikipedia dataset for ky,
+    parsed from 20190301 dump.
 
-* `"20190301.la"` (`v0.0.2`) (`Size: 82.72 MiB`): Wikipedia dataset for la, parsed from 20190301 dump.
+*   `"20190301.la"` (`v0.0.2`) (`Size: 82.72 MiB`): Wikipedia dataset for la,
+    parsed from 20190301 dump.
 
-* `"20190301.lad"` (`v0.0.2`) (`Size: 3.39 MiB`): Wikipedia dataset for lad, parsed from 20190301 dump.
+*   `"20190301.lad"` (`v0.0.2`) (`Size: 3.39 MiB`): Wikipedia dataset for lad,
+    parsed from 20190301 dump.
 
-* `"20190301.lb"` (`v0.0.2`) (`Size: 45.70 MiB`): Wikipedia dataset for lb, parsed from 20190301 dump.
+*   `"20190301.lb"` (`v0.0.2`) (`Size: 45.70 MiB`): Wikipedia dataset for lb,
+    parsed from 20190301 dump.
 
-* `"20190301.lbe"` (`v0.0.2`) (`Size: 1.22 MiB`): Wikipedia dataset for lbe, parsed from 20190301 dump.
+*   `"20190301.lbe"` (`v0.0.2`) (`Size: 1.22 MiB`): Wikipedia dataset for lbe,
+    parsed from 20190301 dump.
 
-* `"20190301.lez"` (`v0.0.2`) (`Size: 4.16 MiB`): Wikipedia dataset for lez, parsed from 20190301 dump.
+*   `"20190301.lez"` (`v0.0.2`) (`Size: 4.16 MiB`): Wikipedia dataset for lez,
+    parsed from 20190301 dump.
 
-* `"20190301.lfn"` (`v0.0.2`) (`Size: 2.81 MiB`): Wikipedia dataset for lfn, parsed from 20190301 dump.
+*   `"20190301.lfn"` (`v0.0.2`) (`Size: 2.81 MiB`): Wikipedia dataset for lfn,
+    parsed from 20190301 dump.
 
-* `"20190301.lg"` (`v0.0.2`) (`Size: 1.58 MiB`): Wikipedia dataset for lg, parsed from 20190301 dump.
+*   `"20190301.lg"` (`v0.0.2`) (`Size: 1.58 MiB`): Wikipedia dataset for lg,
+    parsed from 20190301 dump.
 
-* `"20190301.li"` (`v0.0.2`) (`Size: 13.86 MiB`): Wikipedia dataset for li, parsed from 20190301 dump.
+*   `"20190301.li"` (`v0.0.2`) (`Size: 13.86 MiB`): Wikipedia dataset for li,
+    parsed from 20190301 dump.
 
-* `"20190301.lij"` (`v0.0.2`) (`Size: 2.73 MiB`): Wikipedia dataset for lij, parsed from 20190301 dump.
+*   `"20190301.lij"` (`v0.0.2`) (`Size: 2.73 MiB`): Wikipedia dataset for lij,
+    parsed from 20190301 dump.
 
-* `"20190301.lmo"` (`v0.0.2`) (`Size: 21.34 MiB`): Wikipedia dataset for lmo, parsed from 20190301 dump.
+*   `"20190301.lmo"` (`v0.0.2`) (`Size: 21.34 MiB`): Wikipedia dataset for lmo,
+    parsed from 20190301 dump.
 
-* `"20190301.ln"` (`v0.0.2`) (`Size: 1.83 MiB`): Wikipedia dataset for ln, parsed from 20190301 dump.
+*   `"20190301.ln"` (`v0.0.2`) (`Size: 1.83 MiB`): Wikipedia dataset for ln,
+    parsed from 20190301 dump.
 
-* `"20190301.lo"` (`v0.0.2`) (`Size: 3.44 MiB`): Wikipedia dataset for lo, parsed from 20190301 dump.
+*   `"20190301.lo"` (`v0.0.2`) (`Size: 3.44 MiB`): Wikipedia dataset for lo,
+    parsed from 20190301 dump.
 
-* `"20190301.lrc"` (`v0.0.2`) (`Size: 4.71 MiB`): Wikipedia dataset for lrc, parsed from 20190301 dump.
+*   `"20190301.lrc"` (`v0.0.2`) (`Size: 4.71 MiB`): Wikipedia dataset for lrc,
+    parsed from 20190301 dump.
 
-* `"20190301.lt"` (`v0.0.2`) (`Size: 174.73 MiB`): Wikipedia dataset for lt, parsed from 20190301 dump.
+*   `"20190301.lt"` (`v0.0.2`) (`Size: 174.73 MiB`): Wikipedia dataset for lt,
+    parsed from 20190301 dump.
 
-* `"20190301.ltg"` (`v0.0.2`) (`Size: 798.18 KiB`): Wikipedia dataset for ltg, parsed from 20190301 dump.
+*   `"20190301.ltg"` (`v0.0.2`) (`Size: 798.18 KiB`): Wikipedia dataset for ltg,
+    parsed from 20190301 dump.
 
-* `"20190301.lv"` (`v0.0.2`) (`Size: 127.47 MiB`): Wikipedia dataset for lv, parsed from 20190301 dump.
+*   `"20190301.lv"` (`v0.0.2`) (`Size: 127.47 MiB`): Wikipedia dataset for lv,
+    parsed from 20190301 dump.
 
-* `"20190301.mai"` (`v0.0.2`) (`Size: 10.80 MiB`): Wikipedia dataset for mai, parsed from 20190301 dump.
+*   `"20190301.mai"` (`v0.0.2`) (`Size: 10.80 MiB`): Wikipedia dataset for mai,
+    parsed from 20190301 dump.
 
-* `"20190301.map-bms"` (`v0.0.2`) (`Size: 4.49 MiB`): Wikipedia dataset for map-bms, parsed from 20190301 dump.
+*   `"20190301.map-bms"` (`v0.0.2`) (`Size: 4.49 MiB`): Wikipedia dataset for
+    map-bms, parsed from 20190301 dump.
 
-* `"20190301.mdf"` (`v0.0.2`) (`Size: 1.04 MiB`): Wikipedia dataset for mdf, parsed from 20190301 dump.
+*   `"20190301.mdf"` (`v0.0.2`) (`Size: 1.04 MiB`): Wikipedia dataset for mdf,
+    parsed from 20190301 dump.
 
-* `"20190301.mg"` (`v0.0.2`) (`Size: 25.64 MiB`): Wikipedia dataset for mg, parsed from 20190301 dump.
+*   `"20190301.mg"` (`v0.0.2`) (`Size: 25.64 MiB`): Wikipedia dataset for mg,
+    parsed from 20190301 dump.
 
-* `"20190301.mh"` (`v0.0.2`) (`Size: 27.71 KiB`): Wikipedia dataset for mh, parsed from 20190301 dump.
+*   `"20190301.mh"` (`v0.0.2`) (`Size: 27.71 KiB`): Wikipedia dataset for mh,
+    parsed from 20190301 dump.
 
-* `"20190301.mhr"` (`v0.0.2`) (`Size: 5.69 MiB`): Wikipedia dataset for mhr, parsed from 20190301 dump.
+*   `"20190301.mhr"` (`v0.0.2`) (`Size: 5.69 MiB`): Wikipedia dataset for mhr,
+    parsed from 20190301 dump.
 
-* `"20190301.mi"` (`v0.0.2`) (`Size: 1.96 MiB`): Wikipedia dataset for mi, parsed from 20190301 dump.
+*   `"20190301.mi"` (`v0.0.2`) (`Size: 1.96 MiB`): Wikipedia dataset for mi,
+    parsed from 20190301 dump.
 
-* `"20190301.min"` (`v0.0.2`) (`Size: 25.05 MiB`): Wikipedia dataset for min, parsed from 20190301 dump.
+*   `"20190301.min"` (`v0.0.2`) (`Size: 25.05 MiB`): Wikipedia dataset for min,
+    parsed from 20190301 dump.
 
-* `"20190301.mk"` (`v0.0.2`) (`Size: 140.69 MiB`): Wikipedia dataset for mk, parsed from 20190301 dump.
+*   `"20190301.mk"` (`v0.0.2`) (`Size: 140.69 MiB`): Wikipedia dataset for mk,
+    parsed from 20190301 dump.
 
-* `"20190301.ml"` (`v0.0.2`) (`Size: 117.24 MiB`): Wikipedia dataset for ml, parsed from 20190301 dump.
+*   `"20190301.ml"` (`v0.0.2`) (`Size: 117.24 MiB`): Wikipedia dataset for ml,
+    parsed from 20190301 dump.
 
-* `"20190301.mn"` (`v0.0.2`) (`Size: 28.23 MiB`): Wikipedia dataset for mn, parsed from 20190301 dump.
+*   `"20190301.mn"` (`v0.0.2`) (`Size: 28.23 MiB`): Wikipedia dataset for mn,
+    parsed from 20190301 dump.
 
-* `"20190301.mr"` (`v0.0.2`) (`Size: 49.58 MiB`): Wikipedia dataset for mr, parsed from 20190301 dump.
+*   `"20190301.mr"` (`v0.0.2`) (`Size: 49.58 MiB`): Wikipedia dataset for mr,
+    parsed from 20190301 dump.
 
-* `"20190301.mrj"` (`v0.0.2`) (`Size: 3.01 MiB`): Wikipedia dataset for mrj, parsed from 20190301 dump.
+*   `"20190301.mrj"` (`v0.0.2`) (`Size: 3.01 MiB`): Wikipedia dataset for mrj,
+    parsed from 20190301 dump.
 
-* `"20190301.ms"` (`v0.0.2`) (`Size: 205.79 MiB`): Wikipedia dataset for ms, parsed from 20190301 dump.
+*   `"20190301.ms"` (`v0.0.2`) (`Size: 205.79 MiB`): Wikipedia dataset for ms,
+    parsed from 20190301 dump.
 
-* `"20190301.mt"` (`v0.0.2`) (`Size: 8.21 MiB`): Wikipedia dataset for mt, parsed from 20190301 dump.
+*   `"20190301.mt"` (`v0.0.2`) (`Size: 8.21 MiB`): Wikipedia dataset for mt,
+    parsed from 20190301 dump.
 
-* `"20190301.mus"` (`v0.0.2`) (`Size: 14.20 KiB`): Wikipedia dataset for mus, parsed from 20190301 dump.
+*   `"20190301.mus"` (`v0.0.2`) (`Size: 14.20 KiB`): Wikipedia dataset for mus,
+    parsed from 20190301 dump.
 
-* `"20190301.mwl"` (`v0.0.2`) (`Size: 8.95 MiB`): Wikipedia dataset for mwl, parsed from 20190301 dump.
+*   `"20190301.mwl"` (`v0.0.2`) (`Size: 8.95 MiB`): Wikipedia dataset for mwl,
+    parsed from 20190301 dump.
 
-* `"20190301.my"` (`v0.0.2`) (`Size: 34.60 MiB`): Wikipedia dataset for my, parsed from 20190301 dump.
+*   `"20190301.my"` (`v0.0.2`) (`Size: 34.60 MiB`): Wikipedia dataset for my,
+    parsed from 20190301 dump.
 
-* `"20190301.myv"` (`v0.0.2`) (`Size: 7.79 MiB`): Wikipedia dataset for myv, parsed from 20190301 dump.
+*   `"20190301.myv"` (`v0.0.2`) (`Size: 7.79 MiB`): Wikipedia dataset for myv,
+    parsed from 20190301 dump.
 
-* `"20190301.mzn"` (`v0.0.2`) (`Size: 6.47 MiB`): Wikipedia dataset for mzn, parsed from 20190301 dump.
+*   `"20190301.mzn"` (`v0.0.2`) (`Size: 6.47 MiB`): Wikipedia dataset for mzn,
+    parsed from 20190301 dump.
 
-* `"20190301.na"` (`v0.0.2`) (`Size: 480.57 KiB`): Wikipedia dataset for na, parsed from 20190301 dump.
+*   `"20190301.na"` (`v0.0.2`) (`Size: 480.57 KiB`): Wikipedia dataset for na,
+    parsed from 20190301 dump.
 
-* `"20190301.nah"` (`v0.0.2`) (`Size: 4.30 MiB`): Wikipedia dataset for nah, parsed from 20190301 dump.
+*   `"20190301.nah"` (`v0.0.2`) (`Size: 4.30 MiB`): Wikipedia dataset for nah,
+    parsed from 20190301 dump.
 
-* `"20190301.nap"` (`v0.0.2`) (`Size: 5.55 MiB`): Wikipedia dataset for nap, parsed from 20190301 dump.
+*   `"20190301.nap"` (`v0.0.2`) (`Size: 5.55 MiB`): Wikipedia dataset for nap,
+    parsed from 20190301 dump.
 
-* `"20190301.nds"` (`v0.0.2`) (`Size: 33.28 MiB`): Wikipedia dataset for nds, parsed from 20190301 dump.
+*   `"20190301.nds"` (`v0.0.2`) (`Size: 33.28 MiB`): Wikipedia dataset for nds,
+    parsed from 20190301 dump.
 
-* `"20190301.nds-nl"` (`v0.0.2`) (`Size: 6.67 MiB`): Wikipedia dataset for nds-nl, parsed from 20190301 dump.
+*   `"20190301.nds-nl"` (`v0.0.2`) (`Size: 6.67 MiB`): Wikipedia dataset for
+    nds-nl, parsed from 20190301 dump.
 
-* `"20190301.ne"` (`v0.0.2`) (`Size: 29.26 MiB`): Wikipedia dataset for ne, parsed from 20190301 dump.
+*   `"20190301.ne"` (`v0.0.2`) (`Size: 29.26 MiB`): Wikipedia dataset for ne,
+    parsed from 20190301 dump.
 
-* `"20190301.new"` (`v0.0.2`) (`Size: 16.91 MiB`): Wikipedia dataset for new, parsed from 20190301 dump.
+*   `"20190301.new"` (`v0.0.2`) (`Size: 16.91 MiB`): Wikipedia dataset for new,
+    parsed from 20190301 dump.
 
-* `"20190301.ng"` (`v0.0.2`) (`Size: 91.11 KiB`): Wikipedia dataset for ng, parsed from 20190301 dump.
+*   `"20190301.ng"` (`v0.0.2`) (`Size: 91.11 KiB`): Wikipedia dataset for ng,
+    parsed from 20190301 dump.
 
-* `"20190301.nl"` (`v0.0.2`) (`Size: 1.38 GiB`): Wikipedia dataset for nl, parsed from 20190301 dump.
+*   `"20190301.nl"` (`v0.0.2`) (`Size: 1.38 GiB`): Wikipedia dataset for nl,
+    parsed from 20190301 dump.
 
-* `"20190301.nn"` (`v0.0.2`) (`Size: 126.01 MiB`): Wikipedia dataset for nn, parsed from 20190301 dump.
+*   `"20190301.nn"` (`v0.0.2`) (`Size: 126.01 MiB`): Wikipedia dataset for nn,
+    parsed from 20190301 dump.
 
-* `"20190301.no"` (`v0.0.2`) (`Size: 610.74 MiB`): Wikipedia dataset for no, parsed from 20190301 dump.
+*   `"20190301.no"` (`v0.0.2`) (`Size: 610.74 MiB`): Wikipedia dataset for no,
+    parsed from 20190301 dump.
 
-* `"20190301.nov"` (`v0.0.2`) (`Size: 1.12 MiB`): Wikipedia dataset for nov, parsed from 20190301 dump.
+*   `"20190301.nov"` (`v0.0.2`) (`Size: 1.12 MiB`): Wikipedia dataset for nov,
+    parsed from 20190301 dump.
 
-* `"20190301.nrm"` (`v0.0.2`) (`Size: 1.56 MiB`): Wikipedia dataset for nrm, parsed from 20190301 dump.
+*   `"20190301.nrm"` (`v0.0.2`) (`Size: 1.56 MiB`): Wikipedia dataset for nrm,
+    parsed from 20190301 dump.
 
-* `"20190301.nso"` (`v0.0.2`) (`Size: 2.20 MiB`): Wikipedia dataset for nso, parsed from 20190301 dump.
+*   `"20190301.nso"` (`v0.0.2`) (`Size: 2.20 MiB`): Wikipedia dataset for nso,
+    parsed from 20190301 dump.
 
-* `"20190301.nv"` (`v0.0.2`) (`Size: 2.52 MiB`): Wikipedia dataset for nv, parsed from 20190301 dump.
+*   `"20190301.nv"` (`v0.0.2`) (`Size: 2.52 MiB`): Wikipedia dataset for nv,
+    parsed from 20190301 dump.
 
-* `"20190301.ny"` (`v0.0.2`) (`Size: 1.18 MiB`): Wikipedia dataset for ny, parsed from 20190301 dump.
+*   `"20190301.ny"` (`v0.0.2`) (`Size: 1.18 MiB`): Wikipedia dataset for ny,
+    parsed from 20190301 dump.
 
-* `"20190301.oc"` (`v0.0.2`) (`Size: 70.97 MiB`): Wikipedia dataset for oc, parsed from 20190301 dump.
+*   `"20190301.oc"` (`v0.0.2`) (`Size: 70.97 MiB`): Wikipedia dataset for oc,
+    parsed from 20190301 dump.
 
-* `"20190301.olo"` (`v0.0.2`) (`Size: 1.55 MiB`): Wikipedia dataset for olo, parsed from 20190301 dump.
+*   `"20190301.olo"` (`v0.0.2`) (`Size: 1.55 MiB`): Wikipedia dataset for olo,
+    parsed from 20190301 dump.
 
-* `"20190301.om"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for om, parsed from 20190301 dump.
+*   `"20190301.om"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for om,
+    parsed from 20190301 dump.
 
-* `"20190301.or"` (`v0.0.2`) (`Size: 24.90 MiB`): Wikipedia dataset for or, parsed from 20190301 dump.
+*   `"20190301.or"` (`v0.0.2`) (`Size: 24.90 MiB`): Wikipedia dataset for or,
+    parsed from 20190301 dump.
 
-* `"20190301.os"` (`v0.0.2`) (`Size: 7.31 MiB`): Wikipedia dataset for os, parsed from 20190301 dump.
+*   `"20190301.os"` (`v0.0.2`) (`Size: 7.31 MiB`): Wikipedia dataset for os,
+    parsed from 20190301 dump.
 
-* `"20190301.pa"` (`v0.0.2`) (`Size: 40.39 MiB`): Wikipedia dataset for pa, parsed from 20190301 dump.
+*   `"20190301.pa"` (`v0.0.2`) (`Size: 40.39 MiB`): Wikipedia dataset for pa,
+    parsed from 20190301 dump.
 
-* `"20190301.pag"` (`v0.0.2`) (`Size: 1.29 MiB`): Wikipedia dataset for pag, parsed from 20190301 dump.
+*   `"20190301.pag"` (`v0.0.2`) (`Size: 1.29 MiB`): Wikipedia dataset for pag,
+    parsed from 20190301 dump.
 
-* `"20190301.pam"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for pam, parsed from 20190301 dump.
+*   `"20190301.pam"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for pam,
+    parsed from 20190301 dump.
 
-* `"20190301.pap"` (`v0.0.2`) (`Size: 1.33 MiB`): Wikipedia dataset for pap, parsed from 20190301 dump.
+*   `"20190301.pap"` (`v0.0.2`) (`Size: 1.33 MiB`): Wikipedia dataset for pap,
+    parsed from 20190301 dump.
 
-* `"20190301.pcd"` (`v0.0.2`) (`Size: 4.14 MiB`): Wikipedia dataset for pcd, parsed from 20190301 dump.
+*   `"20190301.pcd"` (`v0.0.2`) (`Size: 4.14 MiB`): Wikipedia dataset for pcd,
+    parsed from 20190301 dump.
 
-* `"20190301.pdc"` (`v0.0.2`) (`Size: 1.10 MiB`): Wikipedia dataset for pdc, parsed from 20190301 dump.
+*   `"20190301.pdc"` (`v0.0.2`) (`Size: 1.10 MiB`): Wikipedia dataset for pdc,
+    parsed from 20190301 dump.
 
-* `"20190301.pfl"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for pfl, parsed from 20190301 dump.
+*   `"20190301.pfl"` (`v0.0.2`) (`Size: 3.22 MiB`): Wikipedia dataset for pfl,
+    parsed from 20190301 dump.
 
-* `"20190301.pi"` (`v0.0.2`) (`Size: 586.77 KiB`): Wikipedia dataset for pi, parsed from 20190301 dump.
+*   `"20190301.pi"` (`v0.0.2`) (`Size: 586.77 KiB`): Wikipedia dataset for pi,
+    parsed from 20190301 dump.
 
-* `"20190301.pih"` (`v0.0.2`) (`Size: 654.11 KiB`): Wikipedia dataset for pih, parsed from 20190301 dump.
+*   `"20190301.pih"` (`v0.0.2`) (`Size: 654.11 KiB`): Wikipedia dataset for pih,
+    parsed from 20190301 dump.
 
-* `"20190301.pl"` (`v0.0.2`) (`Size: 1.76 GiB`): Wikipedia dataset for pl, parsed from 20190301 dump.
+*   `"20190301.pl"` (`v0.0.2`) (`Size: 1.76 GiB`): Wikipedia dataset for pl,
+    parsed from 20190301 dump.
 
-* `"20190301.pms"` (`v0.0.2`) (`Size: 13.42 MiB`): Wikipedia dataset for pms, parsed from 20190301 dump.
+*   `"20190301.pms"` (`v0.0.2`) (`Size: 13.42 MiB`): Wikipedia dataset for pms,
+    parsed from 20190301 dump.
 
-* `"20190301.pnb"` (`v0.0.2`) (`Size: 24.31 MiB`): Wikipedia dataset for pnb, parsed from 20190301 dump.
+*   `"20190301.pnb"` (`v0.0.2`) (`Size: 24.31 MiB`): Wikipedia dataset for pnb,
+    parsed from 20190301 dump.
 
-* `"20190301.pnt"` (`v0.0.2`) (`Size: 533.84 KiB`): Wikipedia dataset for pnt, parsed from 20190301 dump.
+*   `"20190301.pnt"` (`v0.0.2`) (`Size: 533.84 KiB`): Wikipedia dataset for pnt,
+    parsed from 20190301 dump.
 
-* `"20190301.ps"` (`v0.0.2`) (`Size: 14.09 MiB`): Wikipedia dataset for ps, parsed from 20190301 dump.
+*   `"20190301.ps"` (`v0.0.2`) (`Size: 14.09 MiB`): Wikipedia dataset for ps,
+    parsed from 20190301 dump.
 
-* `"20190301.pt"` (`v0.0.2`) (`Size: 1.58 GiB`): Wikipedia dataset for pt, parsed from 20190301 dump.
+*   `"20190301.pt"` (`v0.0.2`) (`Size: 1.58 GiB`): Wikipedia dataset for pt,
+    parsed from 20190301 dump.
 
-* `"20190301.qu"` (`v0.0.2`) (`Size: 11.42 MiB`): Wikipedia dataset for qu, parsed from 20190301 dump.
+*   `"20190301.qu"` (`v0.0.2`) (`Size: 11.42 MiB`): Wikipedia dataset for qu,
+    parsed from 20190301 dump.
 
-* `"20190301.rm"` (`v0.0.2`) (`Size: 5.85 MiB`): Wikipedia dataset for rm, parsed from 20190301 dump.
+*   `"20190301.rm"` (`v0.0.2`) (`Size: 5.85 MiB`): Wikipedia dataset for rm,
+    parsed from 20190301 dump.
 
-* `"20190301.rmy"` (`v0.0.2`) (`Size: 509.61 KiB`): Wikipedia dataset for rmy, parsed from 20190301 dump.
+*   `"20190301.rmy"` (`v0.0.2`) (`Size: 509.61 KiB`): Wikipedia dataset for rmy,
+    parsed from 20190301 dump.
 
-* `"20190301.rn"` (`v0.0.2`) (`Size: 779.25 KiB`): Wikipedia dataset for rn, parsed from 20190301 dump.
+*   `"20190301.rn"` (`v0.0.2`) (`Size: 779.25 KiB`): Wikipedia dataset for rn,
+    parsed from 20190301 dump.
 
-* `"20190301.ro"` (`v0.0.2`) (`Size: 449.49 MiB`): Wikipedia dataset for ro, parsed from 20190301 dump.
+*   `"20190301.ro"` (`v0.0.2`) (`Size: 449.49 MiB`): Wikipedia dataset for ro,
+    parsed from 20190301 dump.
 
-* `"20190301.roa-rup"` (`v0.0.2`) (`Size: 931.23 KiB`): Wikipedia dataset for roa-rup, parsed from 20190301 dump.
+*   `"20190301.roa-rup"` (`v0.0.2`) (`Size: 931.23 KiB`): Wikipedia dataset for
+    roa-rup, parsed from 20190301 dump.
 
-* `"20190301.roa-tara"` (`v0.0.2`) (`Size: 5.98 MiB`): Wikipedia dataset for roa-tara, parsed from 20190301 dump.
+*   `"20190301.roa-tara"` (`v0.0.2`) (`Size: 5.98 MiB`): Wikipedia dataset for
+    roa-tara, parsed from 20190301 dump.
 
-* `"20190301.ru"` (`v0.0.2`) (`Size: 3.51 GiB`): Wikipedia dataset for ru, parsed from 20190301 dump.
+*   `"20190301.ru"` (`v0.0.2`) (`Size: 3.51 GiB`): Wikipedia dataset for ru,
+    parsed from 20190301 dump.
 
-* `"20190301.rue"` (`v0.0.2`) (`Size: 4.11 MiB`): Wikipedia dataset for rue, parsed from 20190301 dump.
+*   `"20190301.rue"` (`v0.0.2`) (`Size: 4.11 MiB`): Wikipedia dataset for rue,
+    parsed from 20190301 dump.
 
-* `"20190301.rw"` (`v0.0.2`) (`Size: 904.81 KiB`): Wikipedia dataset for rw, parsed from 20190301 dump.
+*   `"20190301.rw"` (`v0.0.2`) (`Size: 904.81 KiB`): Wikipedia dataset for rw,
+    parsed from 20190301 dump.
 
-* `"20190301.sa"` (`v0.0.2`) (`Size: 14.29 MiB`): Wikipedia dataset for sa, parsed from 20190301 dump.
+*   `"20190301.sa"` (`v0.0.2`) (`Size: 14.29 MiB`): Wikipedia dataset for sa,
+    parsed from 20190301 dump.
 
-* `"20190301.sah"` (`v0.0.2`) (`Size: 11.88 MiB`): Wikipedia dataset for sah, parsed from 20190301 dump.
+*   `"20190301.sah"` (`v0.0.2`) (`Size: 11.88 MiB`): Wikipedia dataset for sah,
+    parsed from 20190301 dump.
 
-* `"20190301.sat"` (`v0.0.2`) (`Size: 2.36 MiB`): Wikipedia dataset for sat, parsed from 20190301 dump.
+*   `"20190301.sat"` (`v0.0.2`) (`Size: 2.36 MiB`): Wikipedia dataset for sat,
+    parsed from 20190301 dump.
 
-* `"20190301.sc"` (`v0.0.2`) (`Size: 4.39 MiB`): Wikipedia dataset for sc, parsed from 20190301 dump.
+*   `"20190301.sc"` (`v0.0.2`) (`Size: 4.39 MiB`): Wikipedia dataset for sc,
+    parsed from 20190301 dump.
 
-* `"20190301.scn"` (`v0.0.2`) (`Size: 11.83 MiB`): Wikipedia dataset for scn, parsed from 20190301 dump.
+*   `"20190301.scn"` (`v0.0.2`) (`Size: 11.83 MiB`): Wikipedia dataset for scn,
+    parsed from 20190301 dump.
 
-* `"20190301.sco"` (`v0.0.2`) (`Size: 57.80 MiB`): Wikipedia dataset for sco, parsed from 20190301 dump.
+*   `"20190301.sco"` (`v0.0.2`) (`Size: 57.80 MiB`): Wikipedia dataset for sco,
+    parsed from 20190301 dump.
 
-* `"20190301.sd"` (`v0.0.2`) (`Size: 12.62 MiB`): Wikipedia dataset for sd, parsed from 20190301 dump.
+*   `"20190301.sd"` (`v0.0.2`) (`Size: 12.62 MiB`): Wikipedia dataset for sd,
+    parsed from 20190301 dump.
 
-* `"20190301.se"` (`v0.0.2`) (`Size: 3.30 MiB`): Wikipedia dataset for se, parsed from 20190301 dump.
+*   `"20190301.se"` (`v0.0.2`) (`Size: 3.30 MiB`): Wikipedia dataset for se,
+    parsed from 20190301 dump.
 
-* `"20190301.sg"` (`v0.0.2`) (`Size: 286.02 KiB`): Wikipedia dataset for sg, parsed from 20190301 dump.
+*   `"20190301.sg"` (`v0.0.2`) (`Size: 286.02 KiB`): Wikipedia dataset for sg,
+    parsed from 20190301 dump.
 
-* `"20190301.sh"` (`v0.0.2`) (`Size: 406.72 MiB`): Wikipedia dataset for sh, parsed from 20190301 dump.
+*   `"20190301.sh"` (`v0.0.2`) (`Size: 406.72 MiB`): Wikipedia dataset for sh,
+    parsed from 20190301 dump.
 
-* `"20190301.si"` (`v0.0.2`) (`Size: 36.84 MiB`): Wikipedia dataset for si, parsed from 20190301 dump.
+*   `"20190301.si"` (`v0.0.2`) (`Size: 36.84 MiB`): Wikipedia dataset for si,
+    parsed from 20190301 dump.
 
-* `"20190301.simple"` (`v0.0.2`) (`Size: 156.11 MiB`): Wikipedia dataset for simple, parsed from 20190301 dump.
+*   `"20190301.simple"` (`v0.0.2`) (`Size: 156.11 MiB`): Wikipedia dataset for
+    simple, parsed from 20190301 dump.
 
-* `"20190301.sk"` (`v0.0.2`) (`Size: 254.37 MiB`): Wikipedia dataset for sk, parsed from 20190301 dump.
+*   `"20190301.sk"` (`v0.0.2`) (`Size: 254.37 MiB`): Wikipedia dataset for sk,
+    parsed from 20190301 dump.
 
-* `"20190301.sl"` (`v0.0.2`) (`Size: 201.41 MiB`): Wikipedia dataset for sl, parsed from 20190301 dump.
+*   `"20190301.sl"` (`v0.0.2`) (`Size: 201.41 MiB`): Wikipedia dataset for sl,
+    parsed from 20190301 dump.
 
-* `"20190301.sm"` (`v0.0.2`) (`Size: 678.46 KiB`): Wikipedia dataset for sm, parsed from 20190301 dump.
+*   `"20190301.sm"` (`v0.0.2`) (`Size: 678.46 KiB`): Wikipedia dataset for sm,
+    parsed from 20190301 dump.
 
-* `"20190301.sn"` (`v0.0.2`) (`Size: 2.02 MiB`): Wikipedia dataset for sn, parsed from 20190301 dump.
+*   `"20190301.sn"` (`v0.0.2`) (`Size: 2.02 MiB`): Wikipedia dataset for sn,
+    parsed from 20190301 dump.
 
-* `"20190301.so"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for so, parsed from 20190301 dump.
+*   `"20190301.so"` (`v0.0.2`) (`Size: 8.17 MiB`): Wikipedia dataset for so,
+    parsed from 20190301 dump.
 
-* `"20190301.sq"` (`v0.0.2`) (`Size: 77.55 MiB`): Wikipedia dataset for sq, parsed from 20190301 dump.
+*   `"20190301.sq"` (`v0.0.2`) (`Size: 77.55 MiB`): Wikipedia dataset for sq,
+    parsed from 20190301 dump.
 
-* `"20190301.sr"` (`v0.0.2`) (`Size: 725.30 MiB`): Wikipedia dataset for sr, parsed from 20190301 dump.
+*   `"20190301.sr"` (`v0.0.2`) (`Size: 725.30 MiB`): Wikipedia dataset for sr,
+    parsed from 20190301 dump.
 
-* `"20190301.srn"` (`v0.0.2`) (`Size: 634.21 KiB`): Wikipedia dataset for srn, parsed from 20190301 dump.
+*   `"20190301.srn"` (`v0.0.2`) (`Size: 634.21 KiB`): Wikipedia dataset for srn,
+    parsed from 20190301 dump.
 
-* `"20190301.ss"` (`v0.0.2`) (`Size: 737.58 KiB`): Wikipedia dataset for ss, parsed from 20190301 dump.
+*   `"20190301.ss"` (`v0.0.2`) (`Size: 737.58 KiB`): Wikipedia dataset for ss,
+    parsed from 20190301 dump.
 
-* `"20190301.st"` (`v0.0.2`) (`Size: 482.27 KiB`): Wikipedia dataset for st, parsed from 20190301 dump.
+*   `"20190301.st"` (`v0.0.2`) (`Size: 482.27 KiB`): Wikipedia dataset for st,
+    parsed from 20190301 dump.
 
-* `"20190301.stq"` (`v0.0.2`) (`Size: 3.26 MiB`): Wikipedia dataset for stq, parsed from 20190301 dump.
+*   `"20190301.stq"` (`v0.0.2`) (`Size: 3.26 MiB`): Wikipedia dataset for stq,
+    parsed from 20190301 dump.
 
-* `"20190301.su"` (`v0.0.2`) (`Size: 20.52 MiB`): Wikipedia dataset for su, parsed from 20190301 dump.
+*   `"20190301.su"` (`v0.0.2`) (`Size: 20.52 MiB`): Wikipedia dataset for su,
+    parsed from 20190301 dump.
 
-* `"20190301.sv"` (`v0.0.2`) (`Size: ?? GiB`): Wikipedia dataset for sv, parsed from 20190301 dump.
+*   `"20190301.sv"` (`v0.0.2`) (`Size: 1.64 GiB`): Wikipedia dataset for sv,
+    parsed from 20190301 dump.
 
-* `"20190301.sw"` (`v0.0.2`) (`Size: 27.60 MiB`): Wikipedia dataset for sw, parsed from 20190301 dump.
+*   `"20190301.sw"` (`v0.0.2`) (`Size: 27.60 MiB`): Wikipedia dataset for sw,
+    parsed from 20190301 dump.
 
-* `"20190301.szl"` (`v0.0.2`) (`Size: 4.06 MiB`): Wikipedia dataset for szl, parsed from 20190301 dump.
+*   `"20190301.szl"` (`v0.0.2`) (`Size: 4.06 MiB`): Wikipedia dataset for szl,
+    parsed from 20190301 dump.
 
-* `"20190301.ta"` (`v0.0.2`) (`Size: 141.07 MiB`): Wikipedia dataset for ta, parsed from 20190301 dump.
+*   `"20190301.ta"` (`v0.0.2`) (`Size: 141.07 MiB`): Wikipedia dataset for ta,
+    parsed from 20190301 dump.
 
-* `"20190301.tcy"` (`v0.0.2`) (`Size: 2.33 MiB`): Wikipedia dataset for tcy, parsed from 20190301 dump.
+*   `"20190301.tcy"` (`v0.0.2`) (`Size: 2.33 MiB`): Wikipedia dataset for tcy,
+    parsed from 20190301 dump.
 
-* `"20190301.te"` (`v0.0.2`) (`Size: 113.16 MiB`): Wikipedia dataset for te, parsed from 20190301 dump.
+*   `"20190301.te"` (`v0.0.2`) (`Size: 113.16 MiB`): Wikipedia dataset for te,
+    parsed from 20190301 dump.
 
-* `"20190301.tet"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for tet, parsed from 20190301 dump.
+*   `"20190301.tet"` (`v0.0.2`) (`Size: 1.06 MiB`): Wikipedia dataset for tet,
+    parsed from 20190301 dump.
 
-* `"20190301.tg"` (`v0.0.2`) (`Size: 36.95 MiB`): Wikipedia dataset for tg, parsed from 20190301 dump.
+*   `"20190301.tg"` (`v0.0.2`) (`Size: 36.95 MiB`): Wikipedia dataset for tg,
+    parsed from 20190301 dump.
 
-* `"20190301.th"` (`v0.0.2`) (`Size: 254.00 MiB`): Wikipedia dataset for th, parsed from 20190301 dump.
+*   `"20190301.th"` (`v0.0.2`) (`Size: 254.00 MiB`): Wikipedia dataset for th,
+    parsed from 20190301 dump.
 
-* `"20190301.ti"` (`v0.0.2`) (`Size: 309.72 KiB`): Wikipedia dataset for ti, parsed from 20190301 dump.
+*   `"20190301.ti"` (`v0.0.2`) (`Size: 309.72 KiB`): Wikipedia dataset for ti,
+    parsed from 20190301 dump.
 
-* `"20190301.tk"` (`v0.0.2`) (`Size: 4.50 MiB`): Wikipedia dataset for tk, parsed from 20190301 dump.
+*   `"20190301.tk"` (`v0.0.2`) (`Size: 4.50 MiB`): Wikipedia dataset for tk,
+    parsed from 20190301 dump.
 
-* `"20190301.tl"` (`v0.0.2`) (`Size: 50.85 MiB`): Wikipedia dataset for tl, parsed from 20190301 dump.
+*   `"20190301.tl"` (`v0.0.2`) (`Size: 50.85 MiB`): Wikipedia dataset for tl,
+    parsed from 20190301 dump.
 
-* `"20190301.tn"` (`v0.0.2`) (`Size: 1.21 MiB`): Wikipedia dataset for tn, parsed from 20190301 dump.
+*   `"20190301.tn"` (`v0.0.2`) (`Size: 1.21 MiB`): Wikipedia dataset for tn,
+    parsed from 20190301 dump.
 
-* `"20190301.to"` (`v0.0.2`) (`Size: 775.10 KiB`): Wikipedia dataset for to, parsed from 20190301 dump.
+*   `"20190301.to"` (`v0.0.2`) (`Size: 775.10 KiB`): Wikipedia dataset for to,
+    parsed from 20190301 dump.
 
-* `"20190301.tpi"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for tpi, parsed from 20190301 dump.
+*   `"20190301.tpi"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for tpi,
+    parsed from 20190301 dump.
 
-* `"20190301.tr"` (`v0.0.2`) (`Size: 497.19 MiB`): Wikipedia dataset for tr, parsed from 20190301 dump.
+*   `"20190301.tr"` (`v0.0.2`) (`Size: 497.19 MiB`): Wikipedia dataset for tr,
+    parsed from 20190301 dump.
 
-* `"20190301.ts"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for ts, parsed from 20190301 dump.
+*   `"20190301.ts"` (`v0.0.2`) (`Size: 1.39 MiB`): Wikipedia dataset for ts,
+    parsed from 20190301 dump.
 
-* `"20190301.tt"` (`v0.0.2`) (`Size: 53.23 MiB`): Wikipedia dataset for tt, parsed from 20190301 dump.
+*   `"20190301.tt"` (`v0.0.2`) (`Size: 53.23 MiB`): Wikipedia dataset for tt,
+    parsed from 20190301 dump.
 
-* `"20190301.tum"` (`v0.0.2`) (`Size: 309.58 KiB`): Wikipedia dataset for tum, parsed from 20190301 dump.
+*   `"20190301.tum"` (`v0.0.2`) (`Size: 309.58 KiB`): Wikipedia dataset for tum,
+    parsed from 20190301 dump.
 
-* `"20190301.tw"` (`v0.0.2`) (`Size: 345.96 KiB`): Wikipedia dataset for tw, parsed from 20190301 dump.
+*   `"20190301.tw"` (`v0.0.2`) (`Size: 345.96 KiB`): Wikipedia dataset for tw,
+    parsed from 20190301 dump.
 
-* `"20190301.ty"` (`v0.0.2`) (`Size: 485.56 KiB`): Wikipedia dataset for ty, parsed from 20190301 dump.
+*   `"20190301.ty"` (`v0.0.2`) (`Size: 485.56 KiB`): Wikipedia dataset for ty,
+    parsed from 20190301 dump.
 
-* `"20190301.tyv"` (`v0.0.2`) (`Size: 2.60 MiB`): Wikipedia dataset for tyv, parsed from 20190301 dump.
+*   `"20190301.tyv"` (`v0.0.2`) (`Size: 2.60 MiB`): Wikipedia dataset for tyv,
+    parsed from 20190301 dump.
 
-* `"20190301.udm"` (`v0.0.2`) (`Size: 2.94 MiB`): Wikipedia dataset for udm, parsed from 20190301 dump.
+*   `"20190301.udm"` (`v0.0.2`) (`Size: 2.94 MiB`): Wikipedia dataset for udm,
+    parsed from 20190301 dump.
 
-* `"20190301.ug"` (`v0.0.2`) (`Size: 5.64 MiB`): Wikipedia dataset for ug, parsed from 20190301 dump.
+*   `"20190301.ug"` (`v0.0.2`) (`Size: 5.64 MiB`): Wikipedia dataset for ug,
+    parsed from 20190301 dump.
 
-* `"20190301.uk"` (`v0.0.2`) (`Size: 1.28 GiB`): Wikipedia dataset for uk, parsed from 20190301 dump.
+*   `"20190301.uk"` (`v0.0.2`) (`Size: 1.28 GiB`): Wikipedia dataset for uk,
+    parsed from 20190301 dump.
 
-* `"20190301.ur"` (`v0.0.2`) (`Size: 129.57 MiB`): Wikipedia dataset for ur, parsed from 20190301 dump.
+*   `"20190301.ur"` (`v0.0.2`) (`Size: 129.57 MiB`): Wikipedia dataset for ur,
+    parsed from 20190301 dump.
 
-* `"20190301.uz"` (`v0.0.2`) (`Size: 60.85 MiB`): Wikipedia dataset for uz, parsed from 20190301 dump.
+*   `"20190301.uz"` (`v0.0.2`) (`Size: 60.85 MiB`): Wikipedia dataset for uz,
+    parsed from 20190301 dump.
 
-* `"20190301.ve"` (`v0.0.2`) (`Size: 257.59 KiB`): Wikipedia dataset for ve, parsed from 20190301 dump.
+*   `"20190301.ve"` (`v0.0.2`) (`Size: 257.59 KiB`): Wikipedia dataset for ve,
+    parsed from 20190301 dump.
 
-* `"20190301.vec"` (`v0.0.2`) (`Size: 10.65 MiB`): Wikipedia dataset for vec, parsed from 20190301 dump.
+*   `"20190301.vec"` (`v0.0.2`) (`Size: 10.65 MiB`): Wikipedia dataset for vec,
+    parsed from 20190301 dump.
 
-* `"20190301.vep"` (`v0.0.2`) (`Size: 4.59 MiB`): Wikipedia dataset for vep, parsed from 20190301 dump.
+*   `"20190301.vep"` (`v0.0.2`) (`Size: 4.59 MiB`): Wikipedia dataset for vep,
+    parsed from 20190301 dump.
 
-* `"20190301.vi"` (`v0.0.2`) (`Size: 623.74 MiB`): Wikipedia dataset for vi, parsed from 20190301 dump.
+*   `"20190301.vi"` (`v0.0.2`) (`Size: 623.74 MiB`): Wikipedia dataset for vi,
+    parsed from 20190301 dump.
 
-* `"20190301.vls"` (`v0.0.2`) (`Size: 6.58 MiB`): Wikipedia dataset for vls, parsed from 20190301 dump.
+*   `"20190301.vls"` (`v0.0.2`) (`Size: 6.58 MiB`): Wikipedia dataset for vls,
+    parsed from 20190301 dump.
 
-* `"20190301.vo"` (`v0.0.2`) (`Size: 23.80 MiB`): Wikipedia dataset for vo, parsed from 20190301 dump.
+*   `"20190301.vo"` (`v0.0.2`) (`Size: 23.80 MiB`): Wikipedia dataset for vo,
+    parsed from 20190301 dump.
 
-* `"20190301.wa"` (`v0.0.2`) (`Size: 8.75 MiB`): Wikipedia dataset for wa, parsed from 20190301 dump.
+*   `"20190301.wa"` (`v0.0.2`) (`Size: 8.75 MiB`): Wikipedia dataset for wa,
+    parsed from 20190301 dump.
 
-* `"20190301.war"` (`v0.0.2`) (`Size: 256.72 MiB`): Wikipedia dataset for war, parsed from 20190301 dump.
+*   `"20190301.war"` (`v0.0.2`) (`Size: 256.72 MiB`): Wikipedia dataset for war,
+    parsed from 20190301 dump.
 
-* `"20190301.wo"` (`v0.0.2`) (`Size: 1.54 MiB`): Wikipedia dataset for wo, parsed from 20190301 dump.
+*   `"20190301.wo"` (`v0.0.2`) (`Size: 1.54 MiB`): Wikipedia dataset for wo,
+    parsed from 20190301 dump.
 
-* `"20190301.wuu"` (`v0.0.2`) (`Size: 9.08 MiB`): Wikipedia dataset for wuu, parsed from 20190301 dump.
+*   `"20190301.wuu"` (`v0.0.2`) (`Size: 9.08 MiB`): Wikipedia dataset for wuu,
+    parsed from 20190301 dump.
 
-* `"20190301.xal"` (`v0.0.2`) (`Size: 1.64 MiB`): Wikipedia dataset for xal, parsed from 20190301 dump.
+*   `"20190301.xal"` (`v0.0.2`) (`Size: 1.64 MiB`): Wikipedia dataset for xal,
+    parsed from 20190301 dump.
 
-* `"20190301.xh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for xh, parsed from 20190301 dump.
+*   `"20190301.xh"` (`v0.0.2`) (`Size: 1.26 MiB`): Wikipedia dataset for xh,
+    parsed from 20190301 dump.
 
-* `"20190301.xmf"` (`v0.0.2`) (`Size: 9.40 MiB`): Wikipedia dataset for xmf, parsed from 20190301 dump.
+*   `"20190301.xmf"` (`v0.0.2`) (`Size: 9.40 MiB`): Wikipedia dataset for xmf,
+    parsed from 20190301 dump.
 
-* `"20190301.yi"` (`v0.0.2`) (`Size: 11.56 MiB`): Wikipedia dataset for yi, parsed from 20190301 dump.
+*   `"20190301.yi"` (`v0.0.2`) (`Size: 11.56 MiB`): Wikipedia dataset for yi,
+    parsed from 20190301 dump.
 
-* `"20190301.yo"` (`v0.0.2`) (`Size: 11.55 MiB`): Wikipedia dataset for yo, parsed from 20190301 dump.
+*   `"20190301.yo"` (`v0.0.2`) (`Size: 11.55 MiB`): Wikipedia dataset for yo,
+    parsed from 20190301 dump.
 
-* `"20190301.za"` (`v0.0.2`) (`Size: 735.93 KiB`): Wikipedia dataset for za, parsed from 20190301 dump.
+*   `"20190301.za"` (`v0.0.2`) (`Size: 735.93 KiB`): Wikipedia dataset for za,
+    parsed from 20190301 dump.
 
-* `"20190301.zea"` (`v0.0.2`) (`Size: 2.47 MiB`): Wikipedia dataset for zea, parsed from 20190301 dump.
+*   `"20190301.zea"` (`v0.0.2`) (`Size: 2.47 MiB`): Wikipedia dataset for zea,
+    parsed from 20190301 dump.
 
-* `"20190301.zh"` (`v0.0.2`) (`Size: 1.71 GiB`): Wikipedia dataset for zh, parsed from 20190301 dump.
+*   `"20190301.zh"` (`v0.0.2`) (`Size: 1.71 GiB`): Wikipedia dataset for zh,
+    parsed from 20190301 dump.
 
-* `"20190301.zh-classical"` (`v0.0.2`) (`Size: 13.37 MiB`): Wikipedia dataset for zh-classical, parsed from 20190301 dump.
+*   `"20190301.zh-classical"` (`v0.0.2`) (`Size: 13.37 MiB`): Wikipedia dataset
+    for zh-classical, parsed from 20190301 dump.
 
-* `"20190301.zh-min-nan"` (`v0.0.2`) (`Size: 50.30 MiB`): Wikipedia dataset for zh-min-nan, parsed from 20190301 dump.
+*   `"20190301.zh-min-nan"` (`v0.0.2`) (`Size: 50.30 MiB`): Wikipedia dataset
+    for zh-min-nan, parsed from 20190301 dump.
 
-* `"20190301.zh-yue"` (`v0.0.2`) (`Size: 52.41 MiB`): Wikipedia dataset for zh-yue, parsed from 20190301 dump.
+*   `"20190301.zh-yue"` (`v0.0.2`) (`Size: 52.41 MiB`): Wikipedia dataset for
+    zh-yue, parsed from 20190301 dump.
 
-* `"20190301.zu"` (`v0.0.2`) (`Size: 1.50 MiB`): Wikipedia dataset for zu, parsed from 20190301 dump.
-
+*   `"20190301.zu"` (`v0.0.2`) (`Size: 1.50 MiB`): Wikipedia dataset for zu,
+    parsed from 20190301 dump.
 
 #### `"wikipedia/20190301.aa"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ab"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ace"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ady"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.af"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ak"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.als"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.am"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.an"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ang"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ar"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.arc"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.arz"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.as"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ast"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.atj"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.av"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ay"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.az"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.azb"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ba"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bar"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bat-smg"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bcl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.be"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.be-x-old"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bg"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bh"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bjn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bm"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bpy"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.br"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bs"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bug"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.bxr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ca"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.cbk-zam"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.cdo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ce"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ceb"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ch"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.cho"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.chr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.chy"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ckb"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.co"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.cr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.crh"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.cs"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.csb"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.cu"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.cv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.cy"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.da"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.de"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.din"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.diq"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.dsb"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.dty"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.dv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.dz"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ee"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.el"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.eml"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.en"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.eo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.es"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.et"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.eu"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ext"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.fa"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ff"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.fi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.fiu-vro"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.fj"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.fo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.fr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.frp"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.frr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.fur"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.fy"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ga"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gag"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gan"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gd"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.glk"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gom"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gor"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.got"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gu"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.gv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ha"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.hak"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.haw"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.he"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.hi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.hif"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ho"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.hr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.hsb"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ht"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.hu"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.hy"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.hz"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ia"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.id"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ie"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ig"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ii"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ik"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ilo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.inh"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.io"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.is"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.it"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.iu"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ja"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.jam"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.jbo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.jv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ka"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kaa"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kab"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kbd"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kbp"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kg"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ki"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kj"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kk"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.km"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ko"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.koi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.krc"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ks"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ksh"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ku"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.kw"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ky"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.la"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lad"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lb"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lbe"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lez"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lfn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lg"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.li"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lij"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lmo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ln"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lrc"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lt"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ltg"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.lv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mai"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.map-bms"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mdf"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mg"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mh"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mhr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.min"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mk"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ml"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mrj"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ms"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mt"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mus"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mwl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.my"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.myv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.mzn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.na"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nah"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nap"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nds"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nds-nl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ne"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.new"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ng"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.no"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nov"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nrm"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nso"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.nv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ny"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.oc"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.olo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.om"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.or"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.os"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pa"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pag"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pam"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pap"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pcd"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pdc"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pfl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pih"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pms"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pnb"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pnt"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ps"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.pt"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.qu"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.rm"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.rmy"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.rn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ro"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.roa-rup"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.roa-tara"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ru"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.rue"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.rw"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sa"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sah"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sat"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sc"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.scn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sco"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sd"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.se"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sg"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sh"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.si"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.simple"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sk"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sm"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.so"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sq"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.srn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ss"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.st"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.stq"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.su"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.sw"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.szl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ta"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tcy"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.te"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tet"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tg"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.th"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ti"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tk"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tl"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tn"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.to"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tpi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tr"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ts"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tt"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tum"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tw"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ty"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.tyv"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.udm"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ug"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.uk"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ur"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.uz"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.ve"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.vec"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.vep"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.vi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.vls"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.vo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.wa"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.war"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.wo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.wuu"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.xal"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.xh"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.xmf"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.yi"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.yo"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.za"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.zea"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.zh"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.zh-classical"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.zh-min-nan"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.zh-yue"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wikipedia/20190301.zu"`
 
 ```python
 FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string, encoder=None),
-    'title': Text(shape=(), dtype=tf.string, encoder=None),
+    'text': Text(shape=(), dtype=tf.string),
+    'title': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
-
 
 #### Statistics
 None computed
@@ -11624,24 +12077,27 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'hypothesis': TranslationVariableLanguages({'language': TensorInfo(shape=(None,), dtype=tf.string), 'translation': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'hypothesis': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string),
+        'translation': Text(shape=(), dtype=tf.string),
+    }),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'premise': Translation({
-        'ar': Text(shape=(), dtype=tf.string, encoder=None),
-        'bg': Text(shape=(), dtype=tf.string, encoder=None),
-        'de': Text(shape=(), dtype=tf.string, encoder=None),
-        'el': Text(shape=(), dtype=tf.string, encoder=None),
-        'en': Text(shape=(), dtype=tf.string, encoder=None),
-        'es': Text(shape=(), dtype=tf.string, encoder=None),
-        'fr': Text(shape=(), dtype=tf.string, encoder=None),
-        'hi': Text(shape=(), dtype=tf.string, encoder=None),
-        'ru': Text(shape=(), dtype=tf.string, encoder=None),
-        'sw': Text(shape=(), dtype=tf.string, encoder=None),
-        'th': Text(shape=(), dtype=tf.string, encoder=None),
-        'tr': Text(shape=(), dtype=tf.string, encoder=None),
-        'ur': Text(shape=(), dtype=tf.string, encoder=None),
-        'vi': Text(shape=(), dtype=tf.string, encoder=None),
-        'zh': Text(shape=(), dtype=tf.string, encoder=None),
+        'ar': Text(shape=(), dtype=tf.string),
+        'bg': Text(shape=(), dtype=tf.string),
+        'de': Text(shape=(), dtype=tf.string),
+        'el': Text(shape=(), dtype=tf.string),
+        'en': Text(shape=(), dtype=tf.string),
+        'es': Text(shape=(), dtype=tf.string),
+        'fr': Text(shape=(), dtype=tf.string),
+        'hi': Text(shape=(), dtype=tf.string),
+        'ru': Text(shape=(), dtype=tf.string),
+        'sw': Text(shape=(), dtype=tf.string),
+        'th': Text(shape=(), dtype=tf.string),
+        'tr': Text(shape=(), dtype=tf.string),
+        'ur': Text(shape=(), dtype=tf.string),
+        'vi': Text(shape=(), dtype=tf.string),
+        'zh': Text(shape=(), dtype=tf.string),
     }),
 })
 ```
@@ -11714,24 +12170,19 @@ configurations predefined (defaults to the first one):
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ne': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ne': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"flores/sien_plain_text"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'si': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'si': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -11766,14 +12217,14 @@ TEST       |      2,766
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="para_crawl" />
-  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Greek." />
+  <meta itemprop="description" content="Web-Scale Parallel Corpora for Official European Languages. English-Swedish." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#para_crawl" />
   <meta itemprop="sameAs" content="https://paracrawl.eu/releases.html" />
 </div>
 
 ### `"para_crawl"`
 
-Web-Scale Parallel Corpora for Official European Languages. English-Greek.
+Web-Scale Parallel Corpora for Official European Languages. English-Swedish.
 
 *   URL:
     [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
@@ -11783,99 +12234,81 @@ Web-Scale Parallel Corpora for Official European Languages. English-Greek.
 `para_crawl` is configured with `tfds.translate.para_crawl.ParaCrawlConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `"enpl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pl, uses encoder plain_text.
-
-*   `"enhu_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hu, uses encoder plain_text.
-
-*   `"enit_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to it, uses encoder plain_text.
-
-*   `"encs_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to cs, uses encoder plain_text.
-
-*   `"enpt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to pt, uses encoder plain_text.
-
-*   `"enro_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to ro, uses encoder plain_text.
-
-*   `"enmt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to mt, uses encoder plain_text.
-
-*   `"ensk_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sk, uses encoder plain_text.
-
-*   `"enfr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fr, uses encoder plain_text.
-
-*   `"enda_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to da, uses encoder plain_text.
-
-*   `"enfi_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to fi, uses encoder plain_text.
-
-*   `"ende_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to de, uses encoder plain_text.
-
-*   `"enbg_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+*   `"enbg_plain_text"` (`v0.1.0`) (`Size: 98.94 MiB`): Translation dataset from
     English to bg, uses encoder plain_text.
 
-*   `"ensv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sv, uses encoder plain_text.
+*   `"encs_plain_text"` (`v0.1.0`) (`Size: 187.31 MiB`): Translation dataset
+    from English to cs, uses encoder plain_text.
 
-*   `"enhr_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to hr, uses encoder plain_text.
+*   `"enda_plain_text"` (`v0.1.0`) (`Size: 174.34 MiB`): Translation dataset
+    from English to da, uses encoder plain_text.
 
-*   `"enlv_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lv, uses encoder plain_text.
+*   `"ende_plain_text"` (`v0.1.0`) (`Size: 1.22 GiB`): Translation dataset from
+    English to de, uses encoder plain_text.
 
-*   `"ensl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to sl, uses encoder plain_text.
+*   `"enel_plain_text"` (`v0.1.0`) (`Size: 184.59 MiB`): Translation dataset
+    from English to el, uses encoder plain_text.
 
-*   `"enlt_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to lt, uses encoder plain_text.
-
-*   `"ennl_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to nl, uses encoder plain_text.
-
-*   `"enet_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to et, uses encoder plain_text.
-
-*   `"enes_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+*   `"enes_plain_text"` (`v0.1.0`) (`Size: 1.82 GiB`): Translation dataset from
     English to es, uses encoder plain_text.
 
-*   `"enga_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
+*   `"enet_plain_text"` (`v0.1.0`) (`Size: 66.91 MiB`): Translation dataset from
+    English to et, uses encoder plain_text.
+
+*   `"enfi_plain_text"` (`v0.1.0`) (`Size: 151.83 MiB`): Translation dataset
+    from English to fi, uses encoder plain_text.
+
+*   `"enfr_plain_text"` (`v0.1.0`) (`Size: 2.63 GiB`): Translation dataset from
+    English to fr, uses encoder plain_text.
+
+*   `"enga_plain_text"` (`v0.1.0`) (`Size: 28.03 MiB`): Translation dataset from
     English to ga, uses encoder plain_text.
 
-*   `"enel_plain_text"` (`v0.1.0`) (`Size: ?? GiB`): Translation dataset from
-    English to el, uses encoder plain_text.
+*   `"enhr_plain_text"` (`v0.1.0`) (`Size: 80.97 MiB`): Translation dataset from
+    English to hr, uses encoder plain_text.
 
-#### `"para_crawl/enpl_plain_text"`
+*   `"enhu_plain_text"` (`v0.1.0`) (`Size: 114.24 MiB`): Translation dataset
+    from English to hu, uses encoder plain_text.
+
+*   `"enit_plain_text"` (`v0.1.0`) (`Size: 1017.30 MiB`): Translation dataset
+    from English to it, uses encoder plain_text.
+
+*   `"enlt_plain_text"` (`v0.1.0`) (`Size: 63.28 MiB`): Translation dataset from
+    English to lt, uses encoder plain_text.
+
+*   `"enlv_plain_text"` (`v0.1.0`) (`Size: 45.17 MiB`): Translation dataset from
+    English to lv, uses encoder plain_text.
+
+*   `"enmt_plain_text"` (`v0.1.0`) (`Size: 18.15 MiB`): Translation dataset from
+    English to mt, uses encoder plain_text.
+
+*   `"ennl_plain_text"` (`v0.1.0`) (`Size: 400.63 MiB`): Translation dataset
+    from English to nl, uses encoder plain_text.
+
+*   `"enpl_plain_text"` (`v0.1.0`) (`Size: 257.90 MiB`): Translation dataset
+    from English to pl, uses encoder plain_text.
+
+*   `"enpt_plain_text"` (`v0.1.0`) (`Size: 608.62 MiB`): Translation dataset
+    from English to pt, uses encoder plain_text.
+
+*   `"enro_plain_text"` (`v0.1.0`) (`Size: 153.24 MiB`): Translation dataset
+    from English to ro, uses encoder plain_text.
+
+*   `"ensk_plain_text"` (`v0.1.0`) (`Size: 96.61 MiB`): Translation dataset from
+    English to sk, uses encoder plain_text.
+
+*   `"ensl_plain_text"` (`v0.1.0`) (`Size: 62.02 MiB`): Translation dataset from
+    English to sl, uses encoder plain_text.
+
+*   `"ensv_plain_text"` (`v0.1.0`) (`Size: 262.76 MiB`): Translation dataset
+    from English to sv, uses encoder plain_text.
+
+#### `"para_crawl/enbg_plain_text"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhu_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hu': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enit_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'it': Text(shape=(), dtype=tf.string, encoder=None),
+    'bg': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -11883,53 +12316,8 @@ Translation({
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enpt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enro_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ro': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enmt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'mt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensk_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sk': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enfr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -11937,17 +12325,8 @@ Translation({
 
 ```python
 Translation({
-    'da': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enfi_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+    'da': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -11955,98 +12334,8 @@ Translation({
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enbg_plain_text"`
-
-```python
-Translation({
-    'bg': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enhr_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hr': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlv_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ensl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'sl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enlt_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lt': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/ennl_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'nl': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enet_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'et': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enes_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'es': Text(shape=(), dtype=tf.string, encoder=None),
-})
-```
-
-#### `"para_crawl/enga_plain_text"`
-
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ga': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -12054,22 +12343,187 @@ Translation({
 
 ```python
 Translation({
-    'el': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'el': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enes_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'es': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enet_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'et': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enfi_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enfr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'fr': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enga_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ga': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enhr_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'hr': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enhu_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'hu': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enit_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'it': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enlt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'lt': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enlv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'lv': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enmt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'mt': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/ennl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'nl': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enpl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'pl': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enpt_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/enro_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ro': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/ensk_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'sk': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/ensl_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'sl': Text(shape=(), dtype=tf.string),
+})
+```
+
+#### `"para_crawl/ensv_plain_text"`
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'sv': Text(shape=(), dtype=tf.string),
 })
 ```
 
 #### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+TRAIN | 3,476,729
+ALL   | 3,476,729
 
 #### Urls
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz)
+*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz)
 
 #### Supervised keys (for `as_supervised=True`)
-
-`(u'en', u'el')`
+`(u'en', u'sv')`
 
 #### Citation
 ```
@@ -12138,156 +12592,127 @@ configurations predefined (defaults to the first one):
 
 ```python
 Translation({
-    'az': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'az': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/aztr_to_en"`
 
 ```python
 Translation({
-    'az_tr': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'az_tr': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/be_to_en"`
 
 ```python
 Translation({
-    'be': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'be': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/beru_to_en"`
 
 ```python
 Translation({
-    'be_ru': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'be_ru': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/es_to_pt"`
 
 ```python
 Translation({
-    'es': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+    'es': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/fr_to_pt"`
 
 ```python
 Translation({
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+    'fr': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/gl_to_en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'gl': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'gl': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/glpt_to_en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'gl_pt': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'gl_pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/he_to_pt"`
 
 ```python
 Translation({
-    'he': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+    'he': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/it_to_pt"`
 
 ```python
 Translation({
-    'it': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+    'it': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/pt_to_en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'pt': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/ru_to_en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/ru_to_pt"`
 
 ```python
 Translation({
-    'pt': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'pt': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"ted_hrlr_translate/tr_to_en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'tr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -12348,8 +12773,11 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'talk_name': Text(shape=(), dtype=tf.string, encoder=None),
-    'translations': TranslationVariableLanguages({'language': TensorInfo(shape=(None,), dtype=tf.string), 'translation': TensorInfo(shape=(None,), dtype=tf.string)}),
+    'talk_name': Text(shape=(), dtype=tf.string),
+    'translations': TranslationVariableLanguages({
+        'language': Text(shape=(), dtype=tf.string),
+        'translation': Text(shape=(), dtype=tf.string),
+    }),
 })
 ```
 
@@ -12459,8 +12887,8 @@ the following configurations predefined (defaults to the first one):
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -12468,8 +12896,8 @@ Translation({
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -12477,8 +12905,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'fr': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -12486,8 +12914,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'hi': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'hi': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -12495,8 +12923,8 @@ Translation({
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -12585,97 +13013,87 @@ builder = tfds.builder("wmt_translate", config=config)
 `wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `"cs-en"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
+*   `"cs-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
     dataset.
 
-*   `"de-en"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
+*   `"de-en"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en translation task
     dataset.
 
-*   `"fi-en"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
+*   `"fi-en"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en translation task
     dataset.
 
-*   `"fr-en"` (`v0.0.3`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
+*   `"fr-en"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en translation task
     dataset.
 
-*   `"ru-en"` (`v0.0.3`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
+*   `"ru-en"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en translation task
     dataset.
 
-*   `"cs-en.subwords8k"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 cs-en
+*   `"cs-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en
     translation task dataset with subword encoding.
 
-*   `"de-en.subwords8k"` (`v0.0.3`) (`Size: 1.62 GiB`): WMT 2015 de-en
+*   `"de-en.subwords8k"` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 de-en
     translation task dataset with subword encoding.
 
-*   `"fi-en.subwords8k"` (`v0.0.3`) (`Size: 260.51 MiB`): WMT 2015 fi-en
+*   `"fi-en.subwords8k"` (`v0.0.4`) (`Size: 260.51 MiB`): WMT 2015 fi-en
     translation task dataset with subword encoding.
 
-*   `"fr-en.subwords8k"` (`v0.0.3`) (`Size: 6.24 GiB`): WMT 2015 fr-en
+*   `"fr-en.subwords8k"` (`v0.0.4`) (`Size: 6.24 GiB`): WMT 2015 fr-en
     translation task dataset with subword encoding.
 
-*   `"ru-en.subwords8k"` (`v0.0.3`) (`Size: 1.02 GiB`): WMT 2015 ru-en
+*   `"ru-en.subwords8k"` (`v0.0.4`) (`Size: 1.02 GiB`): WMT 2015 ru-en
     translation task dataset with subword encoding.
 
 #### `"wmt15_translate/cs-en"`
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt15_translate/de-en"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt15_translate/fi-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt15_translate/fr-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'fr': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt15_translate/ru-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt15_translate/cs-en.subwords8k"`
 
 ```python
 Translation({
-    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8245>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8198>),
+    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8193>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8155>),
 })
 ```
 
@@ -12821,68 +13239,55 @@ configurations predefined (defaults to the first one):
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt16_translate/de-en"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt16_translate/fi-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt16_translate/ro-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ro': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ro': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt16_translate/ru-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt16_translate/tr-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'tr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -12993,79 +13398,64 @@ configurations predefined (defaults to the first one):
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt17_translate/de-en"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt17_translate/fi-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt17_translate/lv-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lv': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'lv': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt17_translate/ru-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt17_translate/tr-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'tr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt17_translate/zh-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'zh': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'zh': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -13179,85 +13569,71 @@ configurations predefined (defaults to the first one):
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt18_translate/de-en"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt18_translate/et-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'et': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'et': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt18_translate/fi-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt18_translate/kk-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'kk': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'kk': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt18_translate/ru-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt18_translate/tr-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'tr': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt18_translate/zh-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'zh': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'zh': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -13379,101 +13755,82 @@ configurations predefined (defaults to the first one):
 
 ```python
 Translation({
-    'cs': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'cs': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt19_translate/de-en"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt19_translate/fi-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'fi': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'fi': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt19_translate/gu-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'gu': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'gu': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt19_translate/kk-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'kk': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'kk': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt19_translate/lt-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'lt': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'lt': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt19_translate/ru-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'ru': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt19_translate/zh-en"`
 
 ```python
 Translation({
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
-    'zh': Text(shape=(), dtype=tf.string, encoder=None),
+    'en': Text(shape=(), dtype=tf.string),
+    'zh': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
 
 #### `"wmt19_translate/fr-de"`
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'fr': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'fr': Text(shape=(), dtype=tf.string),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -13561,8 +13918,8 @@ has the following configurations predefined (defaults to the first one):
 
 ```python
 Translation({
-    'de': Text(shape=(), dtype=tf.string, encoder=None),
-    'en': Text(shape=(), dtype=tf.string, encoder=None),
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
 })
 ```
 
@@ -13687,10 +14044,9 @@ for generating training/validation data from the MNIST dataset.
 #### Features
 ```python
 FeaturesDict({
-    'image_sequence': Video(shape=(20, 64, 64, 1), dtype=tf.uint8, feature=Image(shape=(64, 64, 1), dtype=tf.uint8)),
+    'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),
 })
 ```
-
 
 #### Statistics
 Split  | Examples
@@ -13767,82 +14123,65 @@ configurations predefined (defaults to the first one):
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/brawl_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/collect_mineral_shards_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/collect_mineral_shards_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/move_unit_to_border_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/move_unit_to_border_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/road_trip_with_medivac_64"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 64, 64, 3), dtype=tf.uint8, feature=Image(shape=(64, 64, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
 })
 ```
-
-
 
 #### `"starcraft_video/road_trip_with_medivac_128"`
 
 ```python
 FeaturesDict({
-    'rgb_screen': Video(shape=(None, 128, 128, 3), dtype=tf.uint8, feature=Image(shape=(128, 128, 3), dtype=tf.uint8)),
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
 })
 ```
-
-
-
 
 #### Statistics
 Split  | Examples
@@ -13912,7 +14251,7 @@ configurations predefined (defaults to the first one):
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=101),
-    'video': Video(shape=(None, 256, 256, 3), dtype=tf.uint8, feature=Image(shape=(256, 256, 3), dtype=tf.uint8)),
+    'video': Video(Image(shape=(256, 256, 3), dtype=tf.uint8)),
 })
 ```
 

@@ -34,7 +34,7 @@ class Cifar10Test(testing.DatasetBuilderTestCase):
 
 
 class Cifar10TestS3(Cifar10Test):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
 class Cifar100Test(testing.DatasetBuilderTestCase):
@@ -46,7 +46,7 @@ class Cifar100Test(testing.DatasetBuilderTestCase):
 
 
 class Cifar100TestS3(Cifar100Test):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

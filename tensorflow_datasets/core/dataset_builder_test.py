@@ -22,7 +22,6 @@ from __future__ import print_function
 import os
 
 from absl.testing import absltest
-from absl.testing import parameterized
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -52,13 +51,13 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       DummyBuilderConfig(
           name="plus1",
-          version="0.0.1",
+          version=utils.Version("0.0.1"),
           description="Add 1 to the records",
           increment=1),
       DummyBuilderConfig(
           name="plus2",
-          version="0.0.2",
-          supported_versions=["0.0.1"],
+          version=utils.Version("0.0.2"),
+          supported_versions=[utils.Version("0.0.1")],
           description="Add 2 to the records",
           increment=2),
   ]
@@ -70,12 +69,10 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
     return [
         splits_lib.SplitGenerator(
             name=splits_lib.Split.TRAIN,
-            num_shards=2,
             gen_kwargs={"range_": range(20)},
         ),
         splits_lib.SplitGenerator(
             name=splits_lib.Split.TEST,
-            num_shards=1,
             gen_kwargs={"range_": range(20, 30)},
         ),
     ]
@@ -90,9 +87,10 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
 
   def _generate_examples(self, range_):
     for i in range_:
+      x = i
       if self.builder_config:
-        i += self.builder_config.increment
-      yield {"x": i}
+        x += self.builder_config.increment
+      yield i, {"x": x}
 
 
 class InvalidSplitDataset(DummyDatasetWithConfigs):
@@ -143,8 +141,8 @@ class DatasetBuilderTest(testing.TestCase):
       # deterministically generated.
       self.assertEqual(
           [e["x"] for e in ds_values],
-          [16, 1, 2, 3, 10, 17, 0, 11, 14, 7, 4, 9, 18, 15, 8, 19, 6, 13, 12,
-           5],
+          [6, 16, 19, 12, 14, 18, 5, 13, 15, 4, 10, 17, 0, 8, 3, 1, 9, 7, 11,
+           2],
       )
 
   @testing.run_in_graph_and_eager_modes()
@@ -153,7 +151,7 @@ class DatasetBuilderTest(testing.TestCase):
       ds_train, ds_test = registered.load(
           name="dummy_dataset_shared_generator",
           data_dir=tmp_dir,
-          split=[splits_lib.Split.TRAIN, splits_lib.Split.TEST],
+          split=["train", "test"],
           as_dataset_kwargs=dict(shuffle_files=False))
 
       data = list(dataset_utils.as_numpy(ds_train))
@@ -220,12 +218,12 @@ class DatasetBuilderTest(testing.TestCase):
       # Test that subdirectories were created per config
       self.assertTrue(tf.io.gfile.exists(data_dir1))
       self.assertTrue(tf.io.gfile.exists(data_dir2))
-      # 2 train shards, 1 test shard, plus metadata files
-      self.assertGreater(len(tf.io.gfile.listdir(data_dir1)), 3)
-      self.assertGreater(len(tf.io.gfile.listdir(data_dir2)), 3)
+      # 1 train shard, 1 test shard, plus metadata files
+      self.assertGreater(len(tf.io.gfile.listdir(data_dir1)), 2)
+      self.assertGreater(len(tf.io.gfile.listdir(data_dir2)), 2)
 
       # Test that the config was used and they didn't collide.
-      splits_list = [splits_lib.Split.TRAIN, splits_lib.Split.TEST]
+      splits_list = ["train", "test"]
       for builder, incr in [(builder1, 1), (builder2, 2)]:
         train_data, test_data = [   # pylint: disable=g-complex-comprehension
             [el["x"] for el in   # pylint: disable=g-complex-comprehension
@@ -301,23 +299,24 @@ class BuilderRestoreGcsTest(testing.TestCase):
   def test_stats_restored_from_gcs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 70000)
+      self.assertEqual(builder.info.splits.total_num_examples, 40)
       self.assertFalse(self.compute_dynamic_property.called)
 
       builder.download_and_prepare()
 
       # Statistics shouldn't have been recomputed
-      self.assertEqual(builder.info.splits.total_num_examples, 70000)
+      self.assertEqual(builder.info.splits.total_num_examples, 40)
       self.assertFalse(self.compute_dynamic_property.called)
 
   def test_stats_not_restored_gcs_overwritten(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # If split are different that the one restored, stats should be recomputed
-      builder = testing.DummyMnist(data_dir=tmp_dir, num_shards=5)
-      self.assertEqual(builder.info.splits.total_num_examples, 70000)
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+      self.assertEqual(builder.info.splits.total_num_examples, 40)
       self.assertFalse(self.compute_dynamic_property.called)
 
-      builder.download_and_prepare()
+      dl_config = download.DownloadConfig(max_examples_per_split=5)
+      builder.download_and_prepare(download_config=dl_config)
 
       # Statistics should have been recomputed (split different from the
       # restored ones)
@@ -347,7 +346,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
     self.patch_gcs.stop()
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir, num_shards=5)
+      builder = testing.DummyMnist(data_dir=tmp_dir)
       self.assertEqual(builder.info.splits.total_num_examples, 0)
       self.assertFalse(self.compute_dynamic_property.called)
 
@@ -366,8 +365,8 @@ class BuilderRestoreGcsTest(testing.TestCase):
 
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # No dataset_info restored, so stats are empty
-      builder = testing.DummyMnist(data_dir=tmp_dir, num_shards=5)
-      self.assertEqual(builder.info.splits.total_num_examples, 70000)
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+      self.assertEqual(builder.info.splits.total_num_examples, 40)
       self.assertFalse(self.compute_dynamic_property.called)
 
       download_config = download.DownloadConfig(
@@ -390,9 +389,11 @@ class DatasetBuilderReadTest(testing.TestCase):
 
   @classmethod
   def tearDownClass(cls):
+    super(DatasetBuilderReadTest, cls).tearDownClass()
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def setUp(self):
+    super(DatasetBuilderReadTest, self).setUp()
     self.builder = DummyDatasetSharedGenerator(data_dir=self._tfds_tmp_dir)
 
   @testing.run_in_graph_and_eager_modes()
@@ -433,7 +434,7 @@ class DatasetBuilderReadTest(testing.TestCase):
   @testing.run_in_graph_and_eager_modes()
   def test_with_batch_size(self):
     items = list(dataset_utils.as_numpy(self.builder.as_dataset(
-        split=splits_lib.Split.TRAIN + splits_lib.Split.TEST, batch_size=10)))
+        split="train+test", batch_size=10)))
     # 3 batches of 10
     self.assertEqual(3, len(items))
     x1, x2, x3 = items[0]["x"], items[1]["x"], items[2]["x"]

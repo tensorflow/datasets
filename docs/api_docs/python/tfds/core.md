@@ -5,9 +5,13 @@
 
 # Module: tfds.core
 
-API to define datasets.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
-Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py).
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py">View
+source</a>
+
+API to define datasets.
 
 <!-- Placeholder for "Used in" -->
 

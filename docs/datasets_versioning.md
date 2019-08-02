@@ -82,7 +82,7 @@ use. For example:
 
 ```py
 tfds.load('imagenet2012:2.0.1')
-tfds.builder('imagenet2012:2.0.1'')
+tfds.builder('imagenet2012:2.0.1')
 
 tfds.load('imagenet2012:2.0.0')  # Error: unsupported version.
 
@@ -111,7 +111,6 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
   ]
   # Version history:
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
@@ -123,10 +122,10 @@ definition would then look like:
 
 ```py
 class MNIST(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.0.0"),
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False}),
   ]
   # Version history:
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism), order of records

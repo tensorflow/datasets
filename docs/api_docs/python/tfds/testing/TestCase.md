@@ -136,11 +136,15 @@
 
 # tfds.testing.TestCase
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ## Class `TestCase`
 
 Base TestCase to be used for all tests.
-
-Defined in [`testing/test_case.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -768,8 +772,9 @@ Asserts that an object has zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertEndsWith"><code>assertEndsWith</code></h3>
 
@@ -974,9 +979,10 @@ Asserts that an object has the expected length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`expected_len`</b>: The expected length of the container.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`expected_len`</b>: The expected length of the container.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertLess"><code>assertLess</code></h3>
 
@@ -1173,8 +1179,9 @@ Asserts that an object has non-zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertNotEndsWith"><code>assertNotEndsWith</code></h3>
 
@@ -1422,6 +1429,9 @@ A context manager if callable_obj is None. Otherwise, None.
 self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
 
 ``` python
 assertRaisesWithPredicateMatch(
@@ -2271,11 +2281,17 @@ the graph building and execution code in a test case.
 
 <h3 id="setUp"><code>setUp</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ``` python
 setUp()
 ```
 
 <h3 id="setUpClass"><code>setUpClass</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
 
 ``` python
 @classmethod

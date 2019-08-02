@@ -109,9 +109,6 @@ class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            # {TODO}: Tune the number of shards such that each shard
-            # is < 4 GB.
-            num_shards=10,
             # These kwargs will be passed to _generate_examples
             gen_kwargs={{}},
         ),
@@ -119,8 +116,8 @@ class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self):
     \"""Yields examples.\"""
-    # {TODO}: Yields examples from the dataset
-    yield {{}}\n
+    # {TODO}: Yields (key, example) tuples from the dataset
+    yield 'key', {{}}\n
 """
 
 _DATASET_TEST_DEFAULTS = """\

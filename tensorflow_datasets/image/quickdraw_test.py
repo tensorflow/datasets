@@ -36,7 +36,7 @@ class QuickdrawTest(testing.DatasetBuilderTestCase):
 
 
 class QuickdrawS3Test(QuickdrawTest):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

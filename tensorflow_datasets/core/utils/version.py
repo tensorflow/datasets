@@ -60,7 +60,7 @@ class Version(object):
 
   _DEFAULT_EXPERIMENTS = {
       Experiment.DUMMY: False,
-      Experiment.S3: False,
+      Experiment.S3: True,
   }
 
   def __init__(self, version_str, experiments=None):
