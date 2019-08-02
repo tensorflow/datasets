@@ -123,6 +123,7 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
+    'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=1.14.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.14.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
