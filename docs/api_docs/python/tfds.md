@@ -74,3 +74,5 @@ available on the GCS bucket gs://tfds-data/datasets.
 
 [`load(...)`](./tfds/load.md): Loads the named dataset into a `tf.data.Dataset`.
 
+[`show_examples(...)`](./tfds/show_examples.md): Visualize images (and labels)
+from an image classification dataset.
