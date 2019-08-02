@@ -12,8 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#pylint: disable=blacklist
-#pylint: disable=en_tam
 """English-Tamil parallel text corpus"""
 
 from __future__ import absolute_import
@@ -126,28 +124,28 @@ class EnTamParallelTextConfig(tfds.core.BuilderConfig):
           "%s) not supported") % language_pair
       if 'GNOME' in download_link:
         typ = 'GNOME'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]#pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
       elif 'KDE4' in download_link:
         typ = 'KDE4'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]#pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
       elif 'Tatoeba' in download_link:
         typ = 'Tatoeba'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]#pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
       elif 'Ubuntu' in download_link:
         typ = 'Ubuntu'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]# pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
       elif 'OpenSubtitles' in download_link:
         typ = 'OpenSubtitles'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]#pylint: disable=en_tam
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]#pylint: disable=en_tam
+        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
         self.link = download_link
     elif 'ufal.mff.cuni.cz/~ramasamy' in download_link:
       name = "en_ta"
@@ -222,7 +220,8 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
                     "target_file": os.path.join(dl_dir[site], self.builder_config.tname)
                 })]
   def _generate_examples(self, source_file, target_file):
-    """This function returns the filtered text pairs.Some filtering techniques were inspired from https://github.com/himanshudce/MIDAS-NMT-English-Tamil/blob/master/Data%20perprocessing/data.py"""
+    """This function returns the filtered text pairs.Some filtering 
+    techniques were inspired from github/himanshudce/MIDAS-NMT-English-Tamil"""
     with tf.io.gfile.GFile(source_file) as f:
       source_sentences = f.read().split("\n")
     with tf.io.gfile.GFile(target_file) as f:
@@ -241,9 +240,13 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
       # Remove unwanted html tags from text
       l1 = re.sub(cleantxt, '', l1)
       l2 = re.sub(cleantxt, '', l2)
-	  # Remove english text in tamil sentence and tamil text in english sentence
+      # Remove english text in tamil sentence and tamil text in english sentence
       cleaned_l1 = ''.join([ch for ch in l1 if ch not in en_blacklist])
       cleaned_l2 = ''.join([ch for ch in l2 if ch not in ta_blacklist])
+      # Remove duplicate empty spaces
+      cleaned_l1 = " ".join(cleaned_l1.split())
+      # Remove duplicate empty spaces
+      cleaned_l2 = " ".join(cleaned_l2.split())
       result = {source: cleaned_l1, target: cleaned_l2}
       # Make sure that both translations are non-empty
       if all(result.values()):
