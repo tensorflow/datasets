@@ -176,14 +176,17 @@ def builder(name, **builder_init_kwargs):
 def load(name,
          split=None,
          data_dir=None,
-         batch_size=1,
+         batch_size=None,
+         in_memory=None,
          download=True,
          as_supervised=False,
+         decoders=None,
          with_info=False,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
          as_dataset_kwargs=None,
          try_gcs=False):
+  # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
 
   If `split=None` (the default), returns all splits for the dataset. Otherwise,
@@ -228,9 +231,13 @@ def load(name,
       `tfds.Split.TEST`).
     data_dir: `str` (optional), directory to read/write data.
       Defaults to "~/tensorflow_datasets".
-    batch_size: `int`, set to > 1 to get batches of examples. Note that
+    batch_size: `int`, if set, add a batch dimension to examples. Note that
       variable length features will be 0-padded. If
       `batch_size=-1`, will return the full dataset as `tf.Tensor`s.
+    in_memory: `bool`, if `True`, loads the dataset in memory which
+      increases iteration speeds. Note that if `True` and the dataset has
+      unknown dimensions, the features will be padded to the maximum
+      size across the dataset.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
@@ -241,6 +248,11 @@ def load(name,
       `builder.info.supervised_keys`. If `False`, the default,
       the returned `tf.data.Dataset` will have a dictionary with all the
       features.
+    decoders: Nested dict of `Decoder` objects which allow to customize the
+      decoding. The structure should match the feature structure, but only
+      customized feature keys need to be present. See
+      [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+      for more info.
     with_info: `bool`, if True, tfds.load will return the tuple
       (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
       with the builder.
@@ -269,6 +281,8 @@ def load(name,
       object documents the entire dataset, regardless of the `split` requested.
       Split-specific information is available in `ds_info.splits`.
   """
+  # pylint: enable=line-too-long
+
   name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   name_builder_kwargs.update(builder_kwargs or {})
   builder_kwargs = name_builder_kwargs
@@ -290,6 +304,8 @@ def load(name,
   as_dataset_kwargs["split"] = split
   as_dataset_kwargs["as_supervised"] = as_supervised
   as_dataset_kwargs["batch_size"] = batch_size
+  as_dataset_kwargs["decoders"] = decoders
+  as_dataset_kwargs["in_memory"] = in_memory
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:

@@ -4,10 +4,15 @@
 <meta itemprop="property" content="FORCE_REDOWNLOAD"/>
 <meta itemprop="property" content="REUSE_CACHE_IF_EXISTS"/>
 <meta itemprop="property" content="REUSE_DATASET_IF_EXISTS"/>
-<meta itemprop="property" content="__members__"/>
 </div>
 
 # tfds.download.GenerateMode
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py">View
+source</a>
 
 ## Class `GenerateMode`
 
@@ -16,11 +21,7 @@
 ### Aliases:
 
 * Class `tfds.GenerateMode`
-* Class `tfds.download.GenerateMode`
 
-
-
-Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -37,11 +38,6 @@ raw downloads and the prepared dataset if they exist.
 
 ## Class Members
 
-<h3 id="FORCE_REDOWNLOAD"><code>FORCE_REDOWNLOAD</code></h3>
-
-<h3 id="REUSE_CACHE_IF_EXISTS"><code>REUSE_CACHE_IF_EXISTS</code></h3>
-
-<h3 id="REUSE_DATASET_IF_EXISTS"><code>REUSE_DATASET_IF_EXISTS</code></h3>
-
-<h3 id="__members__"><code>__members__</code></h3>
-
+*   `FORCE_REDOWNLOAD` <a id="FORCE_REDOWNLOAD"></a>
+*   `REUSE_CACHE_IF_EXISTS` <a id="REUSE_CACHE_IF_EXISTS"></a>
+*   `REUSE_DATASET_IF_EXISTS` <a id="REUSE_DATASET_IF_EXISTS"></a>

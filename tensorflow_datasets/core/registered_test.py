@@ -120,8 +120,10 @@ class RegisteredTest(testing.TestCase):
     self.assertFalse(builder.download_called)
     self.assertEqual(splits.Split.TEST,
                      builder.as_dataset_kwargs.pop("split"))
-    self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
+    self.assertEqual(None, builder.as_dataset_kwargs.pop("batch_size"))
     self.assertFalse(builder.as_dataset_kwargs.pop("as_supervised"))
+    self.assertFalse(builder.as_dataset_kwargs.pop("decoders"))
+    self.assertIsNone(builder.as_dataset_kwargs.pop("in_memory"))
     self.assertEqual(builder.as_dataset_kwargs, as_dataset_kwargs)
     self.assertEqual(dict(data_dir=data_dir, k1=1), builder.kwargs)
 
@@ -130,6 +132,17 @@ class RegisteredTest(testing.TestCase):
         download=True, as_dataset_kwargs=as_dataset_kwargs)
     self.assertTrue(builder.as_dataset_called)
     self.assertTrue(builder.download_called)
+
+    # Tests for different batch_size
+    # By default batch_size=None
+    builder = registered.load(
+        name=name, split=splits.Split.TEST, data_dir=data_dir)
+    self.assertEqual(None, builder.as_dataset_kwargs.pop("batch_size"))
+    # Setting batch_size=1
+    builder = registered.load(
+        name=name, split=splits.Split.TEST, data_dir=data_dir,
+        batch_size=1)
+    self.assertEqual(1, builder.as_dataset_kwargs.pop("batch_size"))
 
   def test_load_all_splits(self):
     name = "empty_dataset_builder"

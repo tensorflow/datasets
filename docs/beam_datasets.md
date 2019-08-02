@@ -8,10 +8,6 @@ Note: This mode is still experimental, so the API may change in the future
 depending on user feedback. Do not hesitate to
 [submit your feedback](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=).
 
-Warning: Currently we only support using Apache Beam with Python 2. We will add
-Python 3 support with the next release of Beam which includes a needed
-[bug fix](https://github.com/apache/beam/commit/46a70a8b4691a169c9e018299765e1bdb88239f4).
-
 *   [Prerequisites](#prerequisites)
 *   [Instructions](#instructions)
 *   [Example](#example)
@@ -71,7 +67,9 @@ a look at the
 ```python
 class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 
-  VERSION = tfds.core.Version('1.0.0')
+  # BeamBasedBuilder does not support S3 yet.
+  VERSION = tfds.core.Version(
+      '1.0.0', experiments={tfds.core.Experiment.S3: False})
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -86,12 +84,12 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
     ...
     return [
         tfds.core.SplitGenerator(
-            name=tfds..Split.TRAIN,
+            name=tfds.Split.TRAIN,
             num_shards=100,
             gen_kwargs=dict(file_dir='path/to/train_data/'),
         ),
         splits_lib.SplitGenerator(
-            name=tfds..Split.TEST,
+            name=tfds.Split.TEST,
             num_shards=10,
             gen_kwargs=dict(file_dir='path/to/test_data/'),
         ),

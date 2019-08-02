@@ -2,12 +2,10 @@
 <meta itemprop="name" content="tfds.features.Video" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="serialized_keys"/>
+<meta itemprop="property" content="feature"/>
 <meta itemprop="property" content="shape"/>
-<meta itemprop="property" content="__getattr__"/>
-<meta itemprop="property" content="__getstate__"/>
+<meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="__setstate__"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -18,15 +16,17 @@
 
 # tfds.features.Video
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py">View
+source</a>
+
 ## Class `Video`
 
 `FeatureConnector` for videos, encoding frames individually on disk.
 
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
-
-
-
-Defined in [`core/features/video_feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -53,6 +53,9 @@ copy it to a temporary local file before passing it to ffmpeg.
     `yield { 'input': gfile.GFile('/complex/path/video.avi'), }`
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py">View
+source</a>
 
 ``` python
 __init__(
@@ -86,47 +89,55 @@ Initializes the connector.
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
+<h3 id="feature"><code>feature</code></h3>
 
-List of the flattened feature keys after serialization.
+The inner feature.
 
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
 
-
-
 ## Methods
 
-<h3 id="__getattr__"><code>__getattr__</code></h3>
+<h3 id="__getitem__"><code>__getitem__</code></h3>
 
-``` python
-__getattr__(key)
-```
-
-Allow to access the underlying attributes directly.
-
-<h3 id="__getstate__"><code>__getstate__</code></h3>
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
 
 ```python
-__getstate__()
+__getitem__(key)
 ```
 
-<h3 id="__setstate__"><code>__setstate__</code></h3>
-
-```python
-__setstate__(state)
-```
+Convenience method to access the underlying features.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-``` python
-decode_example(tfexample_data)
+```python
+decode_example(
+    *args,
+    **kwargs
+)
 ```
 
-Wrapper around SequenceDict.
+Decode the serialize examples.
+
+#### Args:
+
+*   <b>`serialized_example`</b>: Nested `dict` of `tf.Tensor`
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present. See
+    [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+    for more info.
+
+#### Returns:
+
+*   <b>`example`</b>: Nested `dict` containing the decoded nested examples.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/video_feature.py">View
+source</a>
 
 ``` python
 encode_example(video_or_path_or_fobj)
@@ -136,72 +147,50 @@ Converts the given image into a dict convertible to tf example.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
 ``` python
 get_serialized_info()
 ```
 
-
+See base class for details.
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
 
 ``` python
 get_tensor_info()
 ```
 
-
+See base class for details.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
+```python
 load_metadata(
-    data_dir,
-    feature_name
+    *args,
+    **kwargs
 )
 ```
 
-Restore the feature metadata from disk.
-
-If a dataset is re-loaded and generated files exists on disk, this function
-will restore the feature metadata from the saved file.
-
-#### Args:
-
-*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
-    (ex: `~/datasets/cifar10/1.2.0/`)
-*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
-    key)
+See base class for details.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/sequence_feature.py">View
+source</a>
+
+```python
 save_metadata(
-    data_dir,
-    feature_name
+    *args,
+    **kwargs
 )
 ```
 
-Save the feature metadata on disk.
-
-This function is called after the data has been generated (by
-`_download_and_prepare`) to save the feature connector info with the
-generated dataset.
-
-Some dataset/features dynamically compute info during
-`_download_and_prepare`. For instance:
-
- * Labels are loaded from the downloaded data
- * Vocabulary is created from the downloaded data
- * ImageLabelFolder compute the image dtypes/shape from the manual_dir
-
-After the info have been added to the feature, this function allow to
-save those additional info to be restored the next time the data is loaded.
-
-By default, this function do not save anything, but sub-classes can
-overwrite the function.
-
-#### Args:
-
-*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
-    (ex: `~/datasets/cifar10/1.2.0/`)
-*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
-    key)
+See base class for details.

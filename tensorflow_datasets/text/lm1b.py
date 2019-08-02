@@ -68,16 +68,20 @@ class Lm1bConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Lm1b."""
 
   @api_utils.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
+  def __init__(self, version=None, text_encoder_config=None, **kwargs):
     """BuilderConfig for Lm1b.
 
     Args:
+      version (string): version as string.
       text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
         for the `tfds.features.text.TextEncoder` used for the Lm1b `"text"`
         feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(Lm1bConfig, self).__init__(**kwargs)
+    super(Lm1bConfig, self).__init__(
+        version=tfds.core.Version(
+            version, experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 

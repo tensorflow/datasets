@@ -5,6 +5,12 @@
 
 # tfds.testing.run_in_graph_and_eager_modes
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
 Execute the decorated test in both graph mode and eager mode.
 
 ``` python
@@ -14,10 +20,6 @@ tfds.testing.run_in_graph_and_eager_modes(
     use_gpu=True
 )
 ```
-
-
-
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -64,6 +66,6 @@ executing the `z` tensor with a session.
 
 #### Returns:
 
-Returns a decorator that will run the decorated test method twice:
-once by constructing and executing a graph in a session and once with
-eager execution enabled.
+Returns a decorator that will run the decorated test method twice: once by
+constructing and executing a graph in a session and once with eager execution
+enabled.

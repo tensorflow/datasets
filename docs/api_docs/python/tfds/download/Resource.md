@@ -8,16 +8,23 @@
 
 # tfds.download.Resource
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
+source</a>
+
 ## Class `Resource`
 
 Represents a resource to download, extract, or both.
-
-Defined in [`core/download/resource.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py).
 
 <!-- Placeholder for "Used in" -->
 
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
+source</a>
 
 ``` python
 __init__(
@@ -43,11 +50,12 @@ Resource constructor.
 
 Returns `ExtractMethod` to use on resource. Cannot be None.
 
-
-
 ## Methods
 
 <h3 id="exists_locally"><code>exists_locally</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
+source</a>
 
 ``` python
 @classmethod
@@ -58,6 +66,3 @@ exists_locally(
 ```
 
 Returns whether the resource exists locally, at `resource.path`.
-
-
-

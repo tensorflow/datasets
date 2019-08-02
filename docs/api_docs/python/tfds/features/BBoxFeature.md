@@ -2,7 +2,6 @@
 <meta itemprop="name" content="tfds.features.BBoxFeature" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
-<meta itemprop="property" content="serialized_keys"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="decode_example"/>
@@ -15,20 +14,22 @@
 
 # tfds.features.BBoxFeature
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
+source</a>
+
 ## Class `BBoxFeature`
 
 `FeatureConnector` for a normalized bounding box.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
-
-
-Defined in [`core/features/bounding_boxes.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py).
-
 <!-- Placeholder for "Used in" -->
 
 Note: If you have multiple bounding boxes, you may want to wrap the feature
-inside a `tfds.feature.SequenceDict`.
+inside a `tfds.feature.Sequence`.
 
 #### Input:
 
@@ -50,13 +51,12 @@ inside a `tfds.feature.SequenceDict`.
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
+source</a>
+
 ``` python
 __init__()
 ```
-
-
-
-
 
 ## Properties
 
@@ -64,27 +64,42 @@ __init__()
 
 Return the dtype (or dict of dtype) of this FeatureConnector.
 
-<h3 id="serialized_keys"><code>serialized_keys</code></h3>
-
-List of the flattened feature keys after serialization.
-
 <h3 id="shape"><code>shape</code></h3>
 
 Return the shape (or dict of shape) of this FeatureConnector.
-
-
 
 ## Methods
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 decode_example(tfexample_data)
 ```
 
-See base class for details.
+Decode the feature dict to TF compatible input.
+
+Note: If eager is not enabled, this function will be executed as a tensorflow
+graph (in `tf.data.Dataset.map(features.decode_example)`).
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: Data or dictionary of data, as read by the
+    tf-example reader. It correspond to the `tf.Tensor()` (or dict of
+    `tf.Tensor()`) extracted from the `tf.train.Example`, matching the info
+    defined in `get_serialized_info()`.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
+    tf.data.Dataset object
 
 <h3 id="encode_example"><code>encode_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
+source</a>
 
 ``` python
 encode_example(bbox)
@@ -94,11 +109,16 @@ See base class for details.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 get_serialized_info()
 ```
 
-Return the tf-example features for the adapter, as stored on disk.
+Return the shape/dtype of features after encoding (for the adapter).
+
+The `FileAdapter` then use those information to write data on disk.
 
 This function indicates how this feature is encoded on file internally.
 The DatasetBuilder are written on disk as tf.train.Example proto.
@@ -107,14 +127,18 @@ The DatasetBuilder are written on disk as tf.train.Example proto.
 
 ```
 return {
-    'image': tf.VarLenFeature(tf.uint8):
-    'height': tf.FixedLenFeature((), tf.int32),
-    'width': tf.FixedLenFeature((), tf.int32),
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
+    'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+    'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
 }
 ```
 
-FeatureConnector which are not containers should return the feature proto *
-<b>`directly`</b>: `return tf.FixedLenFeature((64, 64), tf.uint8)`
+FeatureConnector which are not containers should return the feature proto
+directly:
+
+```
+return tfds.features.TensorInfo(shape=(64, 64), tf.uint8)
+```
 
 If not defined, the retuned values are automatically deduced from the
 `get_tensor_info` function.
@@ -125,6 +149,9 @@ If not defined, the retuned values are automatically deduced from the
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -132,6 +159,9 @@ get_tensor_info()
 See base class for details.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 load_metadata(
@@ -153,6 +183,9 @@ will restore the feature metadata from the saved file.
     key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 save_metadata(

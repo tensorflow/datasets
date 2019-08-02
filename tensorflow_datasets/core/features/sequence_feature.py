@@ -20,14 +20,15 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-import tensorflow as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib
+from tensorflow_datasets.core.features import features_dict
+from tensorflow_datasets.core.features import top_level_feature
 
 
-class Sequence(feature_lib.FeatureConnector):
-  """Composite `FeatureConnector` where each value is a list.
+class Sequence(top_level_feature.TopLevelFeature):
+  """Composite `FeatureConnector` for a `dict` where each value is a list.
 
   `Sequence` correspond to sequence of `tfds.features.FeatureConnector`. At
   generation time, a list for each of the sequence element is given. The output
@@ -41,11 +42,13 @@ class Sequence(feature_lib.FeatureConnector):
 
   Example:
   At construction time:
+
   ```
   tfds.features.Sequence(tfds.features.Image(), length=NB_FRAME)
   ```
 
   or:
+
   ```
   tfds.features.Sequence({
       'frame': tfds.features.Image(shape=(64, 64, 3))
@@ -54,6 +57,7 @@ class Sequence(feature_lib.FeatureConnector):
   ```
 
   During data generation:
+
   ```
   yield {
       'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
@@ -62,6 +66,7 @@ class Sequence(feature_lib.FeatureConnector):
   ```
 
   Tensor returned by `.as_dataset()`:
+
   ```
   {
       'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
@@ -84,7 +89,7 @@ class Sequence(feature_lib.FeatureConnector):
       **kwargs: `dict`, constructor kwargs of `tfds.features.FeaturesDict`
     """
     # Convert {} => FeaturesDict, tf.int32 => Tensor(shape=(), dtype=tf.int32)
-    self._feature = feature_lib.to_feature(feature)
+    self._feature = features_dict.to_feature(feature)
     self._length = length
     super(Sequence, self).__init__(**kwargs)
 
@@ -93,54 +98,24 @@ class Sequence(feature_lib.FeatureConnector):
     """The inner feature."""
     return self._feature
 
+  def _add_length_dim(self, tensor_info):
+    """Add the length dimension to the given tensor_info."""
+    tensor_info = feature_lib.TensorInfo.copy_from(tensor_info)
+    tensor_info.shape = (self._length,) + tensor_info.shape
+    tensor_info.sequence_rank += 1
+    return tensor_info
+
   def get_tensor_info(self):
     """See base class for details."""
     # Add the additional length dimension to every shape
-
-    def add_length_dim(tensor_info):
-      return feature_lib.TensorInfo(
-          shape=(self._length,) + tensor_info.shape,
-          dtype=tensor_info.dtype,
-      )
-
     tensor_info = self._feature.get_tensor_info()
-    return utils.map_nested(add_length_dim, tensor_info)
+    return utils.map_nested(self._add_length_dim, tensor_info)
 
   def get_serialized_info(self):
     """See base class for details."""
     # Add the additional length dimension to every serialized features
-
-    def add_length_dim(serialized_info):
-      """Add the length dimension to the serialized_info.
-
-      Args:
-        serialized_info: One of tf.io.FixedLenFeature, tf.io.VarLenFeature,...
-
-      Returns:
-        new_serialized_info: serialized_info with extended first dimension
-      """
-      if isinstance(serialized_info, tf.io.FixedLenFeature):
-        if self._length is not None:
-          return tf.io.FixedLenFeature(
-              shape=(self._length,) + serialized_info.shape,
-              dtype=serialized_info.dtype,
-          )
-        else:
-          return tf.io.FixedLenSequenceFeature(
-              shape=serialized_info.shape,
-              dtype=serialized_info.dtype,
-              allow_missing=True,
-          )
-      elif isinstance(serialized_info, tf.io.VarLenFeature):
-        return serialized_info
-      else:
-        raise ValueError(
-            'FixedLenSequenceFeature not supported inside Sequence'
-        )
-      return serialized_info
-
     tensor_info = self._feature.get_serialized_info()
-    return utils.map_nested(add_length_dim, tensor_info)
+    return utils.map_nested(self._add_length_dim, tensor_info)
 
   def encode_example(self, example_dict):
     # Convert nested dict[list] into list[nested dict]
@@ -156,7 +131,10 @@ class Sequence(feature_lib.FeatureConnector):
     # Empty sequences return empty arrays
     if not sequence_elements:
       def _build_empty_np(serialized_info):
-        return np.empty(shape=(0,), dtype=serialized_info.dtype.as_numpy_dtype)
+        return np.empty(
+            shape=tuple(s if s else 0 for s in serialized_info.shape),
+            dtype=serialized_info.dtype.as_numpy_dtype,
+        )
 
       return utils.map_nested(_build_empty_np, self.get_serialized_info())
 
@@ -178,19 +156,15 @@ class Sequence(feature_lib.FeatureConnector):
 
     return _stack_nested(sequence_elements)
 
-  def decode_example(self, tfexample_dict):
-    # Note: This all works fine in Eager mode (without tf.function) because
-    # tf.data pipelines are always executed in Graph mode.
+  def _flatten(self, x):
+    """See base class for details."""
+    if isinstance(x, Sequence):
+      return self.feature._flatten(x.feature)  # pylint: disable=protected-access
+    return self.feature._flatten(x)  # pylint: disable=protected-access
 
-    # Apply the decoding to each of the individual feature.
-    return tf.map_fn(
-        self.feature.decode_example,
-        tfexample_dict,
-        dtype=self.dtype,
-        parallel_iterations=10,
-        back_prop=False,
-        name='sequence_decode',
-    )
+  def _nest(self, list_x):
+    """See base class for details."""
+    return self.feature._nest(list_x)  # pylint: disable=protected-access
 
   def save_metadata(self, *args, **kwargs):
     """See base class for details."""
@@ -220,9 +194,13 @@ class Sequence(feature_lib.FeatureConnector):
     del state['__getattr__']
     self.__dict__.update(state)
 
-  def _additional_repr_info(self):
-    """Override to return addtional info to go into __repr__."""
-    return {'feature': repr(self._feature)}
+  def __repr__(self):
+    """Display the feature."""
+    inner_feature_repr = repr(self._feature)
+    if inner_feature_repr.startswith('FeaturesDict('):
+      # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
+      inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]
+    return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
 
 def stack_arrays(*elems):

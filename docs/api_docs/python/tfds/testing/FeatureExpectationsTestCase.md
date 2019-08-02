@@ -12,6 +12,7 @@
 <meta itemprop="property" content="assertAllClose"/>
 <meta itemprop="property" content="assertAllCloseAccordingToType"/>
 <meta itemprop="property" content="assertAllEqual"/>
+<meta itemprop="property" content="assertAllEqualNested"/>
 <meta itemprop="property" content="assertAllGreater"/>
 <meta itemprop="property" content="assertAllGreaterEqual"/>
 <meta itemprop="property" content="assertAllInRange"/>
@@ -58,6 +59,7 @@
 <meta itemprop="property" content="assertMultiLineEqual"/>
 <meta itemprop="property" content="assertNDArrayNear"/>
 <meta itemprop="property" content="assertNear"/>
+<meta itemprop="property" content="assertNestedListAlmostEqual"/>
 <meta itemprop="property" content="assertNoCommonElements"/>
 <meta itemprop="property" content="assertNotAllClose"/>
 <meta itemprop="property" content="assertNotAlmostEqual"/>
@@ -73,6 +75,8 @@
 <meta itemprop="property" content="assertNotStartsWith"/>
 <meta itemprop="property" content="assertProtoEquals"/>
 <meta itemprop="property" content="assertProtoEqualsVersion"/>
+<meta itemprop="property" content="assertRaggedAlmostEqual"/>
+<meta itemprop="property" content="assertRaggedEqual"/>
 <meta itemprop="property" content="assertRaises"/>
 <meta itemprop="property" content="assertRaisesOpError"/>
 <meta itemprop="property" content="assertRaisesRegex"/>
@@ -105,6 +109,7 @@
 <meta itemprop="property" content="debug"/>
 <meta itemprop="property" content="defaultTestResult"/>
 <meta itemprop="property" content="doCleanups"/>
+<meta itemprop="property" content="eval_to_list"/>
 <meta itemprop="property" content="evaluate"/>
 <meta itemprop="property" content="fail"/>
 <meta itemprop="property" content="failIf"/>
@@ -138,11 +143,17 @@
 
 # tfds.testing.FeatureExpectationsTestCase
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
 ## Class `FeatureExpectationsTestCase`
 
 Tests FeatureExpectations with full encode-decode.
 
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
+Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)
 
 <!-- Placeholder for "Used in" -->
 
@@ -152,10 +163,6 @@ Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree
 ``` python
 __init__(methodName='runTest')
 ```
-
-
-
-
 
 ## Child Classes
 [`class failureException`](../../tfds/testing/DatasetBuilderTestCase/failureException.md)
@@ -171,23 +178,17 @@ __call__(
 )
 ```
 
-
-
 <h3 id="__eq__"><code>__eq__</code></h3>
 
 ``` python
 __eq__(other)
 ```
 
-
-
 <h3 id="__ne__"><code>__ne__</code></h3>
 
 ``` python
 __ne__(other)
 ```
-
-
 
 <h3 id="addCleanup"><code>addCleanup</code></h3>
 
@@ -199,9 +200,9 @@ addCleanup(
 )
 ```
 
-Add a function, with arguments, to be called when the test is
-completed. Functions added are called on a LIFO basis and are
-called after tearDown on test failure or success.
+Add a function, with arguments, to be called when the test is completed.
+Functions added are called on a LIFO basis and are called after tearDown on test
+failure or success.
 
 Cleanup items are called even if setUp fails (unlike tearDown).
 
@@ -316,20 +317,31 @@ one of the arguments is of type float16.
 
 <h3 id="assertAllEqual"><code>assertAllEqual</code></h3>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
+```python
 assertAllEqual(
-    *args,
-    **kwds
+    d1,
+    d2
 )
 ```
 
-Asserts that two numpy arrays or Tensors have the same values.
+Same as assertAllEqual but with RaggedTensor support.
 
-#### Args:
+<h3 id="assertAllEqualNested"><code>assertAllEqualNested</code></h3>
 
-* <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
-* <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
-* <b>`msg`</b>: Optional message to report on failure.
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
+```python
+assertAllEqualNested(
+    d1,
+    d2
+)
+```
+
+Same as assertAllEqual but compatible with nested dict.
 
 <h3 id="assertAllGreater"><code>assertAllGreater</code></h3>
 
@@ -462,10 +474,9 @@ assertAlmostEqual(
 )
 ```
 
-Fail if the two objects are unequal as determined by their
-difference rounded to the given number of decimal places
-(default 7) and comparing to zero, or by comparing that the
-difference between the two objects is more than the given
+Fail if the two objects are unequal as determined by their difference rounded to
+the given number of decimal places (default 7) and comparing to zero, or by
+comparing that the difference between the two objects is more than the given
 delta.
 
 Note that decimal places (from zero) are usually not the same
@@ -486,10 +497,9 @@ assertAlmostEquals(
 )
 ```
 
-Fail if the two objects are unequal as determined by their
-difference rounded to the given number of decimal places
-(default 7) and comparing to zero, or by comparing that the
-difference between the two objects is more than the given
+Fail if the two objects are unequal as determined by their difference rounded to
+the given number of decimal places (default 7) and comparing to zero, or by
+comparing that the difference between the two objects is more than the given
 delta.
 
 Note that decimal places (from zero) are usually not the same
@@ -679,9 +689,7 @@ second, regardless of their order. When they don't, an error message
 listing the differences between the sequences will be generated.
 
 Duplicate elements are not ignored when comparing first and second. It verifies
-whether each element has the same count in both sequences.
-
-#### Equivalent to:
+whether each element has the same count in both sequences. Equivalent to:
 
     self.assertEqual(Counter(list(expected_seq)),
                      Counter(list(actual_seq)))
@@ -782,8 +790,9 @@ Asserts that an object has zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertEndsWith"><code>assertEndsWith</code></h3>
 
@@ -813,8 +822,7 @@ assertEqual(
 )
 ```
 
-Fail if the two objects are unequal as determined by the '=='
-operator.
+Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertEquals"><code>assertEquals</code></h3>
 
@@ -826,8 +834,7 @@ assertEquals(
 )
 ```
 
-Fail if the two objects are unequal as determined by the '=='
-operator.
+Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertFalse"><code>assertFalse</code></h3>
 
@@ -842,6 +849,9 @@ Check that the expression is false.
 
 <h3 id="assertFeature"><code>assertFeature</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
 ``` python
 assertFeature(
     *args,
@@ -852,6 +862,9 @@ assertFeature(
 Run the decorated test method.
 
 <h3 id="assertFeatureTest"><code>assertFeatureTest</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
 
 ``` python
 assertFeatureTest(
@@ -923,8 +936,7 @@ assertIsInstance(
 )
 ```
 
-Same as self.assertTrue(isinstance(obj, cls)), with a nicer
-default message.
+Same as self.assertTrue(isinstance(obj, cls)), with a nicer default message.
 
 <h3 id="assertIsNone"><code>assertIsNone</code></h3>
 
@@ -1016,9 +1028,10 @@ Asserts that an object has the expected length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`expected_len`</b>: The expected length of the container.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`expected_len`</b>: The expected length of the container.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertLess"><code>assertLess</code></h3>
 
@@ -1072,8 +1085,6 @@ assertLogs(
 )
 ```
 
-
-
 <h3 id="assertMultiLineEqual"><code>assertMultiLineEqual</code></h3>
 
 ``` python
@@ -1126,6 +1137,20 @@ if not.
 * <b>`err`</b>: A float value.
 * <b>`msg`</b>: An optional string message to append to the failure message.
 
+<h3 id="assertNestedListAlmostEqual"><code>assertNestedListAlmostEqual</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
+source</a>
+
+```python
+assertNestedListAlmostEqual(
+    a,
+    b,
+    places=7,
+    context='value'
+)
+```
+
 <h3 id="assertNoCommonElements"><code>assertNoCommonElements</code></h3>
 
 ``` python
@@ -1172,10 +1197,10 @@ assertNotAlmostEqual(
 )
 ```
 
-Fail if the two objects are equal as determined by their
-difference rounded to the given number of decimal places
-(default 7) and comparing to zero, or by comparing that the
-difference between the two objects is less than the given delta.
+Fail if the two objects are equal as determined by their difference rounded to
+the given number of decimal places (default 7) and comparing to zero, or by
+comparing that the difference between the two objects is less than the given
+delta.
 
 Note that decimal places (from zero) are usually not the same
 as significant digits (measured from the most significant digit).
@@ -1194,10 +1219,10 @@ assertNotAlmostEquals(
 )
 ```
 
-Fail if the two objects are equal as determined by their
-difference rounded to the given number of decimal places
-(default 7) and comparing to zero, or by comparing that the
-difference between the two objects is less than the given delta.
+Fail if the two objects are equal as determined by their difference rounded to
+the given number of decimal places (default 7) and comparing to zero, or by
+comparing that the difference between the two objects is less than the given
+delta.
 
 Note that decimal places (from zero) are usually not the same
 as significant digits (measured from the most significant digit).
@@ -1217,8 +1242,9 @@ Asserts that an object has non-zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertNotEndsWith"><code>assertNotEndsWith</code></h3>
 
@@ -1248,8 +1274,7 @@ assertNotEqual(
 )
 ```
 
-Fail if the two objects are equal as determined by the '!='
-operator.
+Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotEquals"><code>assertNotEquals</code></h3>
 
@@ -1261,8 +1286,7 @@ assertNotEquals(
 )
 ```
 
-Fail if the two objects are equal as determined by the '!='
-operator.
+Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotIn"><code>assertNotIn</code></h3>
 
@@ -1296,8 +1320,6 @@ assertNotRegex(
     **kwargs
 )
 ```
-
-
 
 <h3 id="assertNotRegexpMatches"><code>assertNotRegexpMatches</code></h3>
 
@@ -1362,7 +1384,32 @@ assertProtoEqualsVersion(
 )
 ```
 
+<h3 id="assertRaggedAlmostEqual"><code>assertRaggedAlmostEqual</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
+source</a>
+
+```python
+assertRaggedAlmostEqual(
+    a,
+    b,
+    places=7
+)
+```
+
+<h3 id="assertRaggedEqual"><code>assertRaggedEqual</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
+source</a>
+
+```python
+assertRaggedEqual(
+    a,
+    b
+)
+```
+
+Asserts that two potentially ragged tensors are equal.
 
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
@@ -1375,12 +1422,10 @@ assertRaises(
 )
 ```
 
-Fail unless an exception of class excClass is raised
-by callableObj when invoked with arguments args and keyword
-arguments kwargs. If a different type of exception is
-raised, it will not be caught, and the test case will be
-deemed to have suffered an error, exactly as for an
-unexpected exception.
+Fail unless an exception of class excClass is raised by callableObj when invoked
+with arguments args and keyword arguments kwargs. If a different type of
+exception is raised, it will not be caught, and the test case will be deemed to
+have suffered an error, exactly as for an unexpected exception.
 
 If called with callableObj omitted or None, will return a
 context object used like this::
@@ -1403,8 +1448,6 @@ exception after the assertion::
 assertRaisesOpError(expected_err_re_or_predicate)
 ```
 
-
-
 <h3 id="assertRaisesRegex"><code>assertRaisesRegex</code></h3>
 
 ``` python
@@ -1413,8 +1456,6 @@ assertRaisesRegex(
     **kwargs
 )
 ```
-
-
 
 <h3 id="assertRaisesRegexp"><code>assertRaisesRegexp</code></h3>
 
@@ -1473,12 +1514,14 @@ with self.assertRaisesWithLiteralMatch(ExType, 'message'):
 
 A context manager if callable_obj is None. Otherwise, None.
 
-
 #### Raises:
 
 self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
 
 ``` python
 assertRaisesWithPredicateMatch(
@@ -1486,8 +1529,6 @@ assertRaisesWithPredicateMatch(
     predicate
 )
 ```
-
-
 
 <h3 id="assertRaisesWithRegexpMatch"><code>assertRaisesWithRegexpMatch</code></h3>
 
@@ -1520,8 +1561,6 @@ assertRegex(
     **kwargs
 )
 ```
-
-
 
 <h3 id="assertRegexMatch"><code>assertRegexMatch</code></h3>
 
@@ -1734,10 +1773,10 @@ A set-specific equality assertion.
 
 #### Args:
 
-    set1: The first set to compare.
-    set2: The second set to compare.
-    msg: Optional message to use on failure instead of a list of
-            differences.
+*   <b>`set1`</b>: The first set to compare.
+*   <b>`set2`</b>: The second set to compare.
+*   <b>`msg`</b>: Optional message to use on failure instead of a list of
+    differences.
 
 assertSetEqual uses ducktyping to support different types of sets, and
 is optimized for sets specifically (parameters must support a
@@ -1931,8 +1970,8 @@ class MyOperatorTest(test_util.TensorFlowTestCase):
 
 #### Yields:
 
-A Session object that should be used as a context manager to surround
-the graph building and execution code in a test case.
+A Session object that should be used as a context manager to surround the graph
+building and execution code in a test case.
 
 <h3 id="captureWritesToStream"><code>captureWritesToStream</code></h3>
 
@@ -2010,8 +2049,6 @@ A wrapper for threading.Thread that supports start() and join() methods.
 ``` python
 countTestCases()
 ```
-
-
 
 <h3 id="create_tempdir"><code>create_tempdir</code></h3>
 
@@ -2109,16 +2146,22 @@ Run the test without collecting errors in a TestResult
 defaultTestResult()
 ```
 
-
-
 <h3 id="doCleanups"><code>doCleanups</code></h3>
 
 ``` python
 doCleanups()
 ```
 
-Execute all cleanup functions. Normally called for you after
-tearDown.
+Execute all cleanup functions. Normally called for you after tearDown.
+
+<h3 id="eval_to_list"><code>eval_to_list</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
+source</a>
+
+```python
+eval_to_list(tensor)
+```
 
 <h3 id="evaluate"><code>evaluate</code></h3>
 
@@ -2131,7 +2174,6 @@ Evaluates tensors and returns numpy values.
 #### Args:
 
 * <b>`tensors`</b>: A Tensor or a nested list/tuple of Tensors.
-
 
 #### Returns:
 
@@ -2157,8 +2199,6 @@ failIf(
 )
 ```
 
-
-
 <h3 id="failIfAlmostEqual"><code>failIfAlmostEqual</code></h3>
 
 ``` python
@@ -2167,8 +2207,6 @@ failIfAlmostEqual(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failIfEqual"><code>failIfEqual</code></h3>
 
@@ -2179,8 +2217,6 @@ failIfEqual(
 )
 ```
 
-
-
 <h3 id="failUnless"><code>failUnless</code></h3>
 
 ``` python
@@ -2189,8 +2225,6 @@ failUnless(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failUnlessAlmostEqual"><code>failUnlessAlmostEqual</code></h3>
 
@@ -2201,8 +2235,6 @@ failUnlessAlmostEqual(
 )
 ```
 
-
-
 <h3 id="failUnlessEqual"><code>failUnlessEqual</code></h3>
 
 ``` python
@@ -2211,8 +2243,6 @@ failUnlessEqual(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failUnlessRaises"><code>failUnlessRaises</code></h3>
 
@@ -2223,8 +2253,6 @@ failUnlessRaises(
 )
 ```
 
-
-
 <h3 id="gcs_access"><code>gcs_access</code></h3>
 
 ``` python
@@ -2233,8 +2261,6 @@ gcs_access(
     **kwds
 )
 ```
-
-
 
 <h3 id="getExternalLinks"><code>getExternalLinks</code></h3>
 
@@ -2282,8 +2308,6 @@ string, the path to the unique temporary directory created for this test.
 id()
 ```
 
-
-
 <h3 id="recordProperty"><code>recordProperty</code></h3>
 
 ``` python
@@ -2307,8 +2331,6 @@ Record an arbitrary property for later use.
 ``` python
 run(result=None)
 ```
-
-
 
 <h3 id="session"><code>session</code></h3>
 
@@ -2358,19 +2380,21 @@ the graph building and execution code in a test case.
 
 <h3 id="setUp"><code>setUp</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ``` python
 setUp()
 ```
 
-
-
 <h3 id="setUpClass"><code>setUpClass</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
 
 ``` python
 setUpClass(cls)
 ```
-
-
 
 <h3 id="shortDescription"><code>shortDescription</code></h3>
 
@@ -2415,8 +2439,6 @@ Return a context manager that will run the enclosed subtest.
 tearDown()
 ```
 
-
-
 <h3 id="tearDownClass"><code>tearDownClass</code></h3>
 
 ``` python
@@ -2444,11 +2466,7 @@ Use `self.session()` or `self.cached_session()` instead.
 
 ## Class Members
 
-<h3 id="MOCK_MONARCH"><code>MOCK_MONARCH</code></h3>
-
-<h3 id="longMessage"><code>longMessage</code></h3>
-
-<h3 id="maxDiff"><code>maxDiff</code></h3>
-
-<h3 id="tempfile_cleanup"><code>tempfile_cleanup</code></h3>
-
+*   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
+*   `longMessage = True` <a id="longMessage"></a>
+*   `maxDiff = 1600` <a id="maxDiff"></a>
+*   `tempfile_cleanup` <a id="tempfile_cleanup"></a>

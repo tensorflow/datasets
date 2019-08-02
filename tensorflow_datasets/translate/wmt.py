@@ -224,8 +224,7 @@ _TRAIN_SUBSETS = [
         sources={"hi"},
         url="http://ufallab.ms.mff.cuni.cz/~bojar/hindencorp",
         manual_dl_files=["hindencorp0.1.gz"],
-        path=None  # TODO(adarob): Fill in once we know the path format.
-    ),
+        path=""),
     SubDataset(
         name="leta_v1",
         target="en",
@@ -358,7 +357,7 @@ _TRAIN_SUBSETS = [
         name="wikiheadlines_hi",
         target="en",
         sources={"hi"},
-        url="http://www.statmt.org/wmt15/wiki-titles.tgz",
+        url="http://www.statmt.org/wmt14/wiki-titles.tgz",
         path="wiki/hi-en/wiki-titles.hi-en"),
     SubDataset(
         # Verified that wmt14 and wmt15 files are identical.
@@ -412,6 +411,13 @@ _DEV_SUBSETS = [
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newsdev2015-fien-src.{src}.sgm",
               "dev/newsdev2015-fien-ref.en.sgm")),
+    SubDataset(
+        name="newsdiscussdev2015",
+        target="en",
+        sources={"ro", "tr"},
+        url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
+        path=("dev/newsdiscussdev2015-{src}en-src.{src}.sgm",
+              "dev/newsdiscussdev2015-{src}en-ref.en.sgm")),
     SubDataset(
         name="newsdev2016",
         target="en",
@@ -511,6 +517,13 @@ _DEV_SUBSETS = [
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2015-{src}en-src.{src}.sgm",
               "dev/newstest2015-{src}en-ref.en.sgm")),
+    SubDataset(
+        name="newsdiscusstest2015",
+        target="en",
+        sources={"fr"},
+        url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
+        path=("dev/newsdiscusstest2015-{src}en-src.{src}.sgm",
+              "dev/newsdiscusstest2015-{src}en-ref.en.sgm")),
     SubDataset(
         name="newstest2016",
         target="en",
@@ -735,6 +748,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
               _parse_czeng, filter_path=filter_path)
         else:
           sub_generator = _parse_czeng
+      elif ss_name == "hindencorp_01":
+        sub_generator = _parse_hindencorp
       elif len(files) == 2:
         if ss_name.endswith("_frde"):
           sub_generator = _parse_frde_bitext
@@ -934,3 +949,15 @@ def _parse_czeng(*paths, **kwargs):
               "en": en.strip(),
           }
 
+
+def _parse_hindencorp(path):
+  with tf.io.gfile.GFile(path) as f:
+    for line in f:
+      split_line = line.split("\t")
+      if len(split_line) != 5:
+        logging.warning("Skipping invalid HindEnCorp line: %s", line)
+        continue
+      yield {
+          "en": split_line[3].strip(),
+          "hi": split_line[4].strip()
+      }

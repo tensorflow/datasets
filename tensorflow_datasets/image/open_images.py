@@ -149,6 +149,13 @@ class OpenImagesV4Config(tfds.core.BuilderConfig):
         is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
+    kwargs['supported_versions'] = [
+        tfds.core.Version('2.0.0'),
+        tfds.core.Version('1.0.0'),
+    ]
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(OpenImagesV4Config, self).__init__(**kwargs)
     self._target_pixels = target_pixels
 
@@ -163,16 +170,19 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       OpenImagesV4Config(
           name='original',
-          version='0.2.0',
+          version=tfds.core.Version(
+              '0.2.0', experiments={tfds.core.Experiment.S3: False}),
           description='Images at their original resolution and quality.'),
       OpenImagesV4Config(
           name='300k',
-          version='0.2.1',
+          version=tfds.core.Version(
+              '0.2.1', experiments={tfds.core.Experiment.S3: False}),
           description='Images have roughly 300,000 pixels, at 72 JPEG quality.',
           target_pixels=300000),
       OpenImagesV4Config(
           name='200k',
-          version='0.2.1',
+          version=tfds.core.Version(
+              '0.2.1', experiments={tfds.core.Experiment.S3: False}),
           description='Images have roughly 200,000 pixels, at 72 JPEG quality.',
           target_pixels=200000)
   ]
@@ -286,7 +296,7 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
         image_objects_trainable = [
             obj for obj in image_objects if obj['label'] in trainable_classes
         ]
-        yield {
+        record = {
             'image': _resize_image_if_necessary(
                 fobj, target_pixels=self.builder_config.target_pixels),
             'image/filename': fname,
@@ -294,6 +304,10 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
             'objects_trainable': image_objects_trainable,
             'bobjects': image_bboxes,
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield fname, record
+        else:
+          yield record
 
 
 def _resize_image_if_necessary(image_fobj, target_pixels=None):

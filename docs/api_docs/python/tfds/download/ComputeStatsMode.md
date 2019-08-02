@@ -4,16 +4,19 @@
 <meta itemprop="property" content="AUTO"/>
 <meta itemprop="property" content="FORCE"/>
 <meta itemprop="property" content="SKIP"/>
-<meta itemprop="property" content="__members__"/>
 </div>
 
 # tfds.download.ComputeStatsMode
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py">View
+source</a>
+
 ## Class `ComputeStatsMode`
 
 Mode to decide if dynamic dataset info fields should be computed or not.
-
-Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -28,11 +31,6 @@ Defined in [`core/download/util.py`](https://github.com/tensorflow/datasets/tree
 
 ## Class Members
 
-<h3 id="AUTO"><code>AUTO</code></h3>
-
-<h3 id="FORCE"><code>FORCE</code></h3>
-
-<h3 id="SKIP"><code>SKIP</code></h3>
-
-<h3 id="__members__"><code>__members__</code></h3>
-
+*   `AUTO` <a id="AUTO"></a>
+*   `FORCE` <a id="FORCE"></a>
+*   `SKIP` <a id="SKIP"></a>

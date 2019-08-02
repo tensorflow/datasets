@@ -19,10 +19,14 @@ upper_tabs:
       contents:
       - title: Overview
         path: /datasets/overview
+      - title: Versioning
+        path: /datasets/datasets_versioning
       - title: Splits
         path: /datasets/splits
       - title: Add a dataset
         path: /datasets/add_dataset
+      - title: Feature decoding
+        path: /datasets/decode
       - title: Add huge datasets
         path: /datasets/beam_datasets
       - title: Store your dataset on GCS

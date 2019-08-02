@@ -34,7 +34,7 @@ RANGE_VAL = list(range(6000, 6010))
 class DummyDataset(tfds.core.GeneratorBasedBuilder):
   """Dataset used for the tests."""
 
-  VERSION = utils.Version("0.0.0")
+  VERSION = utils.Version("0.0.0", experiments={utils.Experiment.S3: False})
 
   def __init__(self, *args, **kwargs):
     """."""
@@ -269,6 +269,8 @@ class SplitsUnitTest(testing.TestCase):
     self.assertNotEqual(train, test)
     self.assertNotEqual(train, train.subsplit(tfds.percent[:50]))
     self.assertNotEqual(train.subsplit(tfds.percent[:50]), train)
+
+    self.assertFalse(tfds.Split.TRAIN != "train")
 
   def _info(self, split):
     read_instruction = split.get_read_instruction(self._splits)
@@ -563,17 +565,17 @@ class SplitsDictTest(testing.TestCase):
 
   def test_split_overwrite(self):
     s1 = splits.SplitDict()
-    s1.add(tfds.core.SplitInfo(name="train", num_shards=15))
+    s1.add(tfds.core.SplitInfo(name="train", shard_lengths=[15]))
 
     s2 = splits.SplitDict()
-    s2.add(tfds.core.SplitInfo(name="train", num_shards=15))
+    s2.add(tfds.core.SplitInfo(name="train", shard_lengths=[15]))
 
     self.assertTrue(splits.check_splits_equals(s1, s2))
 
     # Modifying num_shards should also modify the underlying proto
-    s2["train"].num_shards = 10
-    self.assertEqual(s2["train"].num_shards, 10)
-    self.assertEqual(s2["train"].get_proto().num_shards, 10)
+    s2["train"].shard_lengths = [5, 5, 5]
+    self.assertEqual(s2["train"].shard_lengths, [5, 5, 5])
+    self.assertEqual(s2["train"].get_proto().shard_lengths, [5, 5, 5])
     self.assertFalse(splits.check_splits_equals(s1, s2))
 
 

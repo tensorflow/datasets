@@ -44,15 +44,26 @@ _URL_TEST_LABELS = "https://storage.googleapis.com/kaggle-forum-message-attachme
 class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
   """BuilderConfig for DiabeticRetinopathyDetection."""
 
-  def __init__(self, target_pixels=None, **kwargs):
+  def __init__(self, version, target_pixels=None, **kwargs):
     """BuilderConfig for DiabeticRetinopathyDetection.
 
     Args:
+      version: str version, defined with {S3: False} experiment.
       target_pixels: If given, rescale the images so that the total number of
         pixels is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
-    super(DiabeticRetinopathyDetectionConfig, self).__init__(**kwargs)
+    # Version history:
+    # 3.0.0: S3 with new hashing function (different shuffle).
+    # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    super(DiabeticRetinopathyDetectionConfig, self).__init__(
+        version=tfds.core.Version(
+            version, experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("3.0.0"),
+            tfds.core.Version("2.0.0"),
+        ],
+        **kwargs)
     self._target_pixels = target_pixels
 
   @property
@@ -100,7 +111,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
     # TODO(pierrot): implement extraction of multiple files archives.
     path = dl_manager.manual_dir
     test_labels_path = dl_manager.download(_URL_TEST_LABELS)
-    if os.path.isdir(test_labels_path):
+    if tf.io.gfile.isdir(test_labels_path):
        # While testing: download() returns the dir containing the tests files.
       test_labels_path = os.path.join(test_labels_path,
                                       "retinopathy_solution.csv")
@@ -168,7 +179,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
               for fname in tf.io.gfile.listdir(images_dir_path)
               if fname.endswith(".jpeg")]
     for name, label in data:
-      yield {
+      record = {
           "name": name,
           "image": _resize_image_if_necessary(
               tf.io.gfile.GFile("%s/%s.jpeg" % (images_dir_path, name),
@@ -176,6 +187,10 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
               target_pixels=self.builder_config.target_pixels),
           "label": label,
       }
+      if self.version.implements(tfds.core.Experiment.S3):
+        yield name, record
+      else:
+        yield record
 
 
 def _resize_image_if_necessary(image_fobj, target_pixels=None):

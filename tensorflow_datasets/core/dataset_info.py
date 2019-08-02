@@ -39,7 +39,6 @@ import collections
 import json
 import os
 import posixpath
-import pprint
 import tempfile
 
 from absl import logging
@@ -51,6 +50,7 @@ from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import json_format
 from tensorflow_datasets.core.utils import gcs_utils
@@ -71,7 +71,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     total_num_examples={total_num_examples},
     splits={splits},
     supervised_keys={supervised_keys},
-    citation='{citation}',
+    citation={citation},
     redistribution_info={redistribution_info},
 )
 """
@@ -109,8 +109,12 @@ class DatasetInfo(object):
       features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
-      supervised_keys: `tuple`, Specifies the input feature and the label for
-        supervised learning, if applicable for the dataset.
+      supervised_keys: `tuple` of `(input_key, target_key)`, Specifies the
+        input feature and the label for supervised learning, if applicable for
+        the dataset. The keys correspond to the feature names to select in
+        `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
+        with `as_supervised=True`, the `tf.data.Dataset` object will yield
+        the (input, target) defined here.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
@@ -133,6 +137,12 @@ class DatasetInfo(object):
     if urls:
       self._info_proto.location.urls[:] = urls
 
+    if features:
+      if not isinstance(features, top_level_feature.TopLevelFeature):
+        raise ValueError(
+            "DatasetInfo.features only supports FeaturesDict or Sequence at "
+            "the top-level. Got {}".format(features))
+      features._set_top_level()  # pylint: disable=protected-access
     self._features = features
     self._splits = splits_lib.SplitDict()
     if supervised_keys is not None:
@@ -173,7 +183,7 @@ class DatasetInfo(object):
 
   @property
   def version(self):
-    return utils.Version(self.as_proto.version)
+    return self._builder.version
 
   @property
   def citation(self):
@@ -401,19 +411,13 @@ class DatasetInfo(object):
       gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
-  def __str__(self):
-    splits_pprint = "{\n %s\n    }" % (
-        pprint.pformat(
-            {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
-            indent=8, width=1)[1:-1])
-    features_dict = self.features
-    features_pprint = "%s({\n %s\n    }" % (
-        type(features_dict).__name__,
-        pprint.pformat({
-            k: features_dict[k] for k in sorted(list(features_dict.keys()))
-        }, indent=8, width=1)[1:-1])
-    citation_pprint = '"""\n%s\n    """' % "\n".join(
-        [u" " * 8 + line for line in self.citation.split(u"\n")])
+  def __repr__(self):
+    splits_pprint = _indent("\n".join(["{"] + [
+        "    '{}': {},".format(k, split.num_examples)
+        for k, split in sorted(self.splits.items())
+    ] + ["}"]))
+    features_pprint = _indent(repr(self.features))
+    citation_pprint = _indent('"""{}"""'.format(self.citation.strip()))
     return INFO_STR.format(
         name=self.name,
         version=self.version,
@@ -424,7 +428,14 @@ class DatasetInfo(object):
         citation=citation_pprint,
         urls=self.urls,
         supervised_keys=self.supervised_keys,
-        redistribution_info=self.redistribution_info)
+        # Proto add a \n that we strip.
+        redistribution_info=str(self.redistribution_info).strip())
+
+
+def _indent(content):
+  """Add indentation to all lines except the first."""
+  lines = content.split("\n")
+  return "\n".join([lines[0]] + ["    " + l for l in lines[1:]])
 
 #
 #
