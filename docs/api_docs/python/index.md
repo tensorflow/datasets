@@ -34,6 +34,7 @@
 *   <a href="./tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>
 *   <a href="./tfds/download/GenerateMode.md"><code>tfds.download.GenerateMode</code></a>
 *   <a href="./tfds/download/Resource.md"><code>tfds.download.Resource</code></a>
+*   <a href="./tfds/download/add_checksums_dir.md"><code>tfds.download.add_checksums_dir</code></a>
 *   <a href="./tfds/download/iter_archive.md"><code>tfds.download.iter_archive</code></a>
 *   <a href="./tfds/features.md"><code>tfds.features</code></a>
 *   <a href="./tfds/features/Audio.md"><code>tfds.features.Audio</code></a>
@@ -62,6 +63,7 @@
 *   <a href="./tfds/list_builders.md"><code>tfds.list_builders</code></a>
 *   <a href="./tfds/load.md"><code>tfds.load</code></a>
 *   <a href="./tfds/percent.md"><code>tfds.percent</code></a>
+*   <a href="./tfds/show_examples.md"><code>tfds.show_examples</code></a>
 *   <a href="./tfds/testing.md"><code>tfds.testing</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase.md"><code>tfds.testing.DatasetBuilderTestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.DatasetBuilderTestCase.failureException</code></a>
