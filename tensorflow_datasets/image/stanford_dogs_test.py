@@ -13,9 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Structured datasets."""
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
 
-from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
-from tensorflow_datasets.structured.higgs import Higgs
-from tensorflow_datasets.structured.iris import Iris
-from tensorflow_datasets.structured.titanic import Titanic
+from tensorflow_datasets.image import stanford_dogs
+import tensorflow_datasets.testing as tfds_test
+
+
+class StanfordDogsTest(tfds_test.DatasetBuilderTestCase):
+
+  DATASET_CLASS = stanford_dogs.StanfordDogs
+
+  SPLITS = {  # No. of train and test samples
+      'train': 8,
+      'test': 3,
+  }
+
+  DL_EXTRACT_RESULT = ['list.tar', 'Annotation.tar', 'Images.tar']
+
+
+if __name__ == '__main__':
+  tfds_test.test_main()

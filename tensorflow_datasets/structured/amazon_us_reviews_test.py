@@ -13,9 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Structured datasets."""
+"""Tests for amazon_us_reviews dataset module."""
 
-from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
-from tensorflow_datasets.structured.higgs import Higgs
-from tensorflow_datasets.structured.iris import Iris
-from tensorflow_datasets.structured.titanic import Titanic
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.structured import amazon_us_reviews
+
+
+class AmazonUSReviewsTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = amazon_us_reviews.AmazonUSReviews
+  BUILDER_CONFIG_NAMES_TO_TEST = ["Apparel_v1_00"]
+  SPLITS = {
+      "train": 5,
+  }
+
+  DL_EXTRACT_RESULT = "test.tsv"
+
+
+if __name__ == "__main__":
+  testing.test_main()
