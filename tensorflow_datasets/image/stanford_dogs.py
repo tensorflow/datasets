@@ -88,7 +88,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
                 }),
         }),
         supervised_keys=("image", "label"),
-        urls=_URL,
+        urls=[_URL],
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

@@ -59,7 +59,7 @@ def add_checksums_dir(checksums_dir):
   ```
 
   Args:
-    checksums_dir: `str`, checksums dir to add to the registery
+    checksums_dir: `str`, checksums dir to add to the registry
   """
   if checksums_dir in _CHECKSUM_DIRS:  # Avoid duplicate
     return

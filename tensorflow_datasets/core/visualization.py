@@ -31,8 +31,7 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3.):
   """Visualize images (and labels) from an image classification dataset.
 
   Only works with datasets that have 1 image feature and optionally 1 label
-  feature (both inferred from `ds_info`). Note the the dataset should be
-  unbatched.
+  feature (both inferred from `ds_info`). Note the dataset should be unbatched.
   Requires matplotlib to be installed.
 
   This function is for interactive use (Colab, Jupyter). It displays and return
