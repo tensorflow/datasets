@@ -34,7 +34,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
-from tensorflow_datasets.core import lazy_imports
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
@@ -1018,7 +1018,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
 
   def _download_and_prepare(self, dl_manager, download_config):
     # Create the Beam pipeline and forward it to _prepare_split
-    beam = lazy_imports.lazy_imports.apache_beam
+    beam = lazy_imports_lib.lazy_imports.apache_beam
 
     if not download_config.beam_runner and not download_config.beam_options:
       raise ValueError(
@@ -1051,7 +1051,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
     self.info.update_splits_if_different(split_dict)
 
   def _prepare_split(self, split_generator, pipeline):
-    beam = lazy_imports.lazy_imports.apache_beam
+    beam = lazy_imports_lib.lazy_imports.apache_beam
 
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)

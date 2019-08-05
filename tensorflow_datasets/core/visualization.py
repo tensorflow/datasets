@@ -24,7 +24,7 @@ from absl import logging
 
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import features as features_lib
-from tensorflow_datasets.core import lazy_imports
+from tensorflow_datasets.core import lazy_imports_lib
 
 
 def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3.):
@@ -60,7 +60,7 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3.):
   Returns:
     fig: The `matplotlib.Figure` object
   """
-  plt = lazy_imports.lazy_imports.matplotlib.pyplot
+  plt = lazy_imports_lib.lazy_imports.matplotlib.pyplot
 
   # Infer the image and label keys
   image_keys = [

@@ -29,7 +29,7 @@ from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.dataset_info import Metadata
 from tensorflow_datasets.core.dataset_info import MetadataDict
 
-from tensorflow_datasets.core.lazy_imports import lazy_imports
+from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
 from tensorflow_datasets.core.splits import NamedSplit
 from tensorflow_datasets.core.splits import SplitBase
