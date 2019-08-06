@@ -56,8 +56,8 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
   are generated from the raw vector information (i.e. the 'bitmap' dataset, not
   the 'raw' or 'simplified drawings' datasets).
   """
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version("1.1.0",
+                              experiments={tfds.core.Experiment.S3: True})
   SUPPORTED_VERSIONS = [
       tfds.core.Version("3.0.0"),
       tfds.core.Version("2.0.0"),
