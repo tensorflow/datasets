@@ -176,18 +176,18 @@ class Generator(object):
 		self.dataset_name = dataset_name
 		self.dataset_type = dataset_type
 		self.inpath = dataset_path if dataset_path else dataset_folder_finder(dataset_name)[0]
-		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
-																						 'test_data', 'fake_examples',
-																						 os.path.basename(
-																							 self.inpath))
-		self.is_extracted = (False if dataset_path else dataset_folder_finder(dataset_name)[1] == 'extracted')
+		self.fake_examples_dir = (os.path.join(py_utils.tfds_dir(), 'testing',
+																						 'test_data', 'fake_examples')
+															if dataset_name
+															else os.path.join(os.path.dirname(self.inpath),
+																								'fake'))
+		self.outpath = os.path.join(self.fake_examples_dir,
+																os.path.basename(self.inpath))
+		self.is_extracted = (False if dataset_path
+												 else dataset_folder_finder(dataset_name)[1] == 'extracted')
 
 	def zip_generator(self):
-		self.outpath = os.path.join(py_utils.tfds_dir(), 'testing',
-																						 'test_data', 'fake_examples',
-																						 self.dataset_name,
-																						 os.path.basename(
-																							 self.inpath))
+		self.outpath = os.path.join(self.fake_examples_dir, os.path.basename(self.inpath))
 
 		if self.inpath.endswith('.tar.gz'):
 			hold = HolderFactory(None, self.dataset_name, 'gztar', self.inpath, self.outpath)
@@ -236,6 +236,8 @@ class Generator(object):
 
 	def generator_of_tests(self):
 		"""Creates dataset tests."""
+		if self.dataset_name == None:
+			return
 		data = dict(
 			dataset_name=self.dataset_name,
 			dataset_type=self.dataset_type,
