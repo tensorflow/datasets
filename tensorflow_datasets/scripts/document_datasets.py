@@ -15,7 +15,7 @@
 
 """Script to document datasets.
 
-python -m tensorflow_datasets.scripts.document_datasets > docs/datasets.md
+python -m tensorflow_datasets.scripts.document_datasets
 
 """
 
@@ -77,14 +77,6 @@ datasets = builder.as_dataset()
 # If you need NumPy arrays
 np_datasets = tfds.as_numpy(datasets)
 ```
-
-## All Datasets
-
-{toc}
-
----
-
-{datasets}
 """
 
 SECTION_DATASETS = """\
@@ -98,14 +90,14 @@ CONFIG_BULLET = """\
 """
 
 SINGLE_CONFIG_ENTRY = """\
-#### `"{builder_name}/{config_name}"`
+## `"{builder_name}/{config_name}"`
 
 {feature_information}
 
 """
 
 DATASET_WITH_CONFIGS_ENTRY = """\
-### `"{snakecase_name}"`
+# `"{snakecase_name}"`
 
 {description_prefix}{description}
 
@@ -119,13 +111,13 @@ configurations predefined (defaults to the first one):
 
 {configs}
 
-#### Statistics
+## Statistics
 {statistics_information}
 
-#### Urls
+## Urls
 {urls}
 
-#### Supervised keys (for `as_supervised=True`)
+## Supervised keys (for `as_supervised=True`)
 `{supervised_keys}`
 
 {citation}
@@ -133,7 +125,7 @@ configurations predefined (defaults to the first one):
 """
 
 DATASET_ENTRY = """\
-### `"{snakecase_name}"`
+# `"{snakecase_name}"`
 
 {description_prefix}{description}
 
@@ -142,16 +134,16 @@ DATASET_ENTRY = """\
 * Version: `v{version}`
 * Size: `{size}`
 
-#### Features
+## Features
 {feature_information}
 
-#### Statistics
+## Statistics
 {statistics_information}
 
-#### Urls
+## Urls
 {urls}
 
-#### Supervised keys (for `as_supervised=True`)
+## Supervised keys (for `as_supervised=True`)
 `{supervised_keys}`
 
 {citation}
@@ -165,7 +157,7 @@ FEATURE_BLOCK = """\
 """
 
 CITATION_BLOCK = """\
-#### Citation
+## Citation
 ```
 %s
 ```
@@ -345,29 +337,22 @@ def dataset_docs_str(datasets=None):
               If None, then all available datasets will be used.
 
   Returns:
-    string describing the datasets (in the MarkDown format).
+    - overview document
+    - a dictionary of sections. Each dataset in a section is represented by a
+    pair (dataset_name, string describing the datasets (in the MarkDown format))
   """
   module_to_builder = make_module_to_builder_dict(datasets)
 
   sections = sorted(list(module_to_builder.keys()))
-  section_tocs = []
-  section_docs = []
+  section_docs = collections.defaultdict(list)
+
   for section in sections:
     builders = tf.nest.flatten(module_to_builder[section])
     builders = sorted(builders, key=lambda b: b.name)
-    builder_docs = [document_single_builder(builder) for builder in builders]
-    section_doc = SECTION_DATASETS.format(
-        section_name=section, datasets="\n".join(builder_docs))
-    section_toc = create_section_toc(section, builders)
-
-
-    section_docs.append(section_doc)
-    section_tocs.append(section_toc)
-
-  full_doc = DOC.format(toc="\n".join(section_tocs),
-                        datasets="\n".join(section_docs))
-  return full_doc
-
+    builder_docs = [(builder.name, document_single_builder(builder))
+                    for builder in builders]
+    section_docs[section] = builder_docs
+  return [DOC, section_docs]
 
 SCHEMA_ORG_PRE = """\
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -381,7 +366,7 @@ SCHEMA_ORG_NAME = """\
 """
 
 SCHEMA_ORG_URL = """\
-  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#{val}" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/dataset_docs/{val}" />
 """
 
 SCHEMA_ORG_DESC = """\
