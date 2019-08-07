@@ -59,11 +59,18 @@ _LANGUAGES = ('en', 'es', 'pt-br', 'fr', 'ru', 'he', 'ar', 'ko', 'zh-cn', 'it',
 class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk multilingual data set."""
 
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
           version=tfds.core.Version(
               '0.0.3', experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+            tfds.core.Version("2.0.0"),
+            tfds.core.Version("1.0.0"),
+          ],
           description='Plain text import of multilingual TED talk translations',
       )
   ]
@@ -106,15 +113,16 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, data_file):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(data_file) as f:
       reader = csv.DictReader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
-      for row in reader:
+      for idx, row in enumerate(reader):
         # Everything in the row except for 'talk_name' will be a translation.
         # Missing/incomplete translations will contain the string "__NULL__" or
         # "_ _ NULL _ _".
-        yield {
+        records = {
             'translations': {
                 lang: text
                 for lang, text in six.iteritems(row)
@@ -122,6 +130,7 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
             },
             'talk_name': row['talk_name']
         }
+        yield idx, records
 
 
 def _is_translation_complete(text):

@@ -118,13 +118,21 @@ class ParaCrawlConfig(tfds.core.BuilderConfig):
 class ParaCrawl(tfds.core.GeneratorBasedBuilder):
   """ParaCrawl machine translation dataset."""
 
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       # The version below does not refer to the version of the released
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
           target_language=target_language,
           version=tfds.core.Version(
-              "0.1.0", experiments={tfds.core.Experiment.S3: False}))
+              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+            tfds.core.Version("2.0.0"),
+            tfds.core.Version("1.0.0"),
+          ],
+      )
       for target_language in _target_languages()
   ]
 
@@ -159,16 +167,18 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN, num_shards=10, gen_kwargs=data_file)
     ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, data_file):
     """This function returns the examples in the raw (text) form."""
     target_language = self.builder_config.target_language
 
     with tf.io.gfile.GFile(data_file) as f:
-      for i, line in enumerate(f):
+      for idx, line in enumerate(f):
         line_parts = line.strip().split("\t")
         if len(line_parts) != 2:
           raise ValueError(("Wrong data format in line {}. The line '{}' does "
-                            "not have exactly one delimiter.").format(i, line))
+                            "not have exactly one delimiter.").format(idx, line))
         source, target = line_parts[0].strip(), line_parts[1].strip()
+        records = {"en": source, target_language: target}
 
-        yield {"en": source, target_language: target}
+        yield idx, records

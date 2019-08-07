@@ -74,11 +74,18 @@ class FloresConfig(tfds.core.BuilderConfig):
     description = (
         "Translation dataset from %s to %s, uses encoder %s.") % (
             language_pair[0], language_pair[1], encoder_name)
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(FloresConfig, self).__init__(
         name=name,
         description=description,
         version=tfds.core.Version(
             "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+          tfds.core.Version("2.0.0"),
+          tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -158,6 +165,7 @@ class Flores(tfds.core.GeneratorBasedBuilder):
             gen_kwargs=files["devtest"]),
     ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, source_file, target_file):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(source_file) as f:
@@ -171,8 +179,10 @@ class Flores(tfds.core.GeneratorBasedBuilder):
             target_file)
 
     source, target = self.builder_config.language_pair
+    idx = -1
     for l1, l2 in zip(source_sentences, target_sentences):
       result = {source: l1, target: l2}
+      idx += 1
       # Make sure that both translations are non-empty.
       if all(result.values()):
-        yield result
+        yield idx, result
