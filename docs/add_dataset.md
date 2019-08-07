@@ -564,6 +564,33 @@ The release note will be published for the next release.
 
 Send the pull request for review.
 
+## Define the dataset outside TFDS.
+If you do not want to add a dataset to TFDS and if you just want to use TFDS api
+without conforming to the general TFDS structure, you can adjust some static paths
+according to yourself.
+
+### 1. Adjust checksums
+For your download safety TFDS use the checksums of dataset files. And it's stored on
+`tensorflow_datasets/url_checksums`. Before the downloading, TFDS check this folder.
+
+`tensorflow_datasets.scripts.download_and_prepare` script add checksum file with 
+`--register_checksums` parameter.
+
+If you don't want to use it, you can change the checksum directory like that:
+`tfds.add_checksum_dir = your/path`.
+After that your checksums files are stored on there.
+
+### 2. Adjust Fake Example Direcory
+For testing you need to fake examples of dataset and TFDS use 
+`tensorflow_datasets.testing.DatasetBuilderTestCase` class for testing. In this class
+takes the fake examples path as `testing/test_data/fake_examples/{your_dataset_name}`.
+
+If you want to change this path you use:
+```python
+class MyDatasetTest(tfds_test.DatasetBuilderTestCase):
+  EXAMPLE_DIR = 'path/to/fakedata'
+```
+ 
 
 ## Large datasets and distributed generation
 
@@ -607,6 +634,9 @@ class MyDatasetTest(tfds_test.DatasetBuilderTestCase):
       "name1": "path/to/file1",  # Relative to fake_examples/my_dataset dir.
       "name2": "file2",
   }
+  # If you want to change fake_data path:
+  EXAMPLE_DIR = 'path/to/fakedata'
+
 
 if __name__ == "__main__":
   tfds_test.test_main()
