@@ -41,6 +41,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`"abstract_reasoning"`](#abstract_reasoning)
     *   [`"bigearthnet"`](#bigearthnet)
     *   [`"binarized_mnist"`](#binarized_mnist)
+    *   [`"binary_alpha_digits"`](#binary_alpha_digits)
     *   [`"caltech101"`](#caltech101)
     *   [`"cats_vs_dogs"`](#cats_vs_dogs)
     *   [`"celeb_a"`](#celeb_a)
@@ -864,6 +865,59 @@ organization={ACM}
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+  <meta itemprop="name" content="binary_alpha_digits" />
+  <meta itemprop="description" content="Binary 20x16 digits of '0' through '9' and capital 'A' through 'Z'. 39 examples of each class." />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#binary_alpha_digits" />
+  <meta itemprop="sameAs" content="https://cs.nyu.edu/~roweis/data/" />
+</div>
+
+### `"binary_alpha_digits"`
+
+Binary 20x16 digits of '0' through '9' and capital 'A' through 'Z'. 39 examples
+of each class.
+
+*   URL: [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
+*   `DatasetBuilder`:
+    [`tfds.image.binary_alpha_digits.BinaryAlphaDigits`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/binary_alpha_digits.py)
+*   Version: `v1.0.0`
+*   Size: `519.83 KiB`
+
+#### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(20, 16, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=36),
+})
+```
+
+#### Statistics
+
+Split | Examples
+:---- | -------:
+TRAIN | 1,404
+ALL   | 1,404
+
+#### Urls
+
+*   [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
+
+#### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+#### Citation
+
+```
+
+```
+
+--------------------------------------------------------------------------------
+
+<div itemscope itemtype="http://schema.org/Dataset">
+  <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
+    <meta itemprop="name" content="TensorFlow Datasets" />
+  </div>
   <meta itemprop="name" content="caltech101" />
   <meta itemprop="description" content="Caltech-101 consists of pictures of objects belonging to 101 classes, plus
 one `background clutter` class. Each image is labelled with a single object.
@@ -1536,19 +1590,19 @@ configurations predefined (defaults to the first one):
 *   `"frosted_glass_blur_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     frosted_glass_blur, severity level: 5
 
-*   `"gaussian_blur_1"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `"gaussian_blur_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     gaussian_blur, severity level: 1
 
-*   `"gaussian_blur_2"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `"gaussian_blur_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     gaussian_blur, severity level: 2
 
-*   `"gaussian_blur_3"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `"gaussian_blur_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     gaussian_blur, severity level: 3
 
-*   `"gaussian_blur_4"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `"gaussian_blur_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     gaussian_blur, severity level: 4
 
-*   `"gaussian_blur_5"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `"gaussian_blur_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     gaussian_blur, severity level: 5
 
 *   `"gaussian_noise_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
@@ -1626,19 +1680,19 @@ configurations predefined (defaults to the first one):
 *   `"pixelate_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: pixelate,
     severity level: 5
 
-*   `"saturate_1"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: saturate,
+*   `"saturate_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: saturate,
     severity level: 1
 
-*   `"saturate_2"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: saturate,
+*   `"saturate_2"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: saturate,
     severity level: 2
 
-*   `"saturate_3"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: saturate,
+*   `"saturate_3"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: saturate,
     severity level: 3
 
-*   `"saturate_4"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: saturate,
+*   `"saturate_4"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: saturate,
     severity level: 4
 
-*   `"saturate_5"` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: saturate,
+*   `"saturate_5"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: saturate,
     severity level: 5
 
 *   `"shot_noise_1"` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
@@ -6416,7 +6470,7 @@ images in each class.
     [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
 *   `DatasetBuilder`:
     [`tfds.image.resisc45.Resisc45`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/resisc45.py)
-*   Version: `v0.0.1`
+*   Version: `v3.0.0`
 *   Size: `?? GiB`
 
 #### Features
@@ -6429,7 +6483,11 @@ FeaturesDict({
 ```
 
 #### Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+TRAIN | 31,500
+ALL   | 31,500
 
 #### Urls
 
@@ -6839,36 +6897,190 @@ address = "Colorado Springs, CO",
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="sun397" />
-  <meta itemprop="description" content="The database contains 108,754 images of 397 categories, used in the
+  <meta itemprop="description" content="The database contains 108,753 images of 397 categories, used in the
 Scene UNderstanding (SUN) benchmark. The number of images varies across
 categories, but there are at least 100 images per category.
 
-The official release of the dataset defines 10 overlapping partitions of the
-dataset, with 50 testing and training images in each.
-Since TFDS requires the splits not to overlap, we provide a single split for
-the entire dataset (named &quot;full&quot;). All images are converted to RGB." />
+Several configs of the dataset are made available through TFDS:
+- A custom (random) partition of the whole dataset with 76,128 training images,
+  10,875 validation images and 21,750 test images. Images have been resized to
+  have at most 120,000 pixels, and encoded as JPEG with quality of 72.
+- &quot;standard-part1-120k&quot;, &quot;standard-part2-120k&quot;, ..., &quot;standard-part10-120k&quot;:
+  Each of the 10 official train/test partitions with 50 images per class in each
+  split. Images have been resized to have at most 120,000 pixels, and encoded
+  as JPEG with quality of 72." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/datasets#sun397" />
   <meta itemprop="sameAs" content="https://vision.princeton.edu/projects/2010/SUN/" />
 </div>
 
 ### `"sun397"`
 
-The database contains 108,754 images of 397 categories, used in the
-Scene UNderstanding (SUN) benchmark. The number of images varies across
-categories, but there are at least 100 images per category.
+The database contains 108,753 images of 397 categories, used in the Scene
+UNderstanding (SUN) benchmark. The number of images varies across categories,
+but there are at least 100 images per category.
 
-The official release of the dataset defines 10 overlapping partitions of the
-dataset, with 50 testing and training images in each.
-Since TFDS requires the splits not to overlap, we provide a single split for
-the entire dataset (named "full"). All images are converted to RGB.
-
+Several configs of the dataset are made available through TFDS: - A custom
+(random) partition of the whole dataset with 76,128 training images, 10,875
+validation images and 21,750 test images. Images have been resized to have at
+most 120,000 pixels, and encoded as JPEG with quality of 72. -
+"standard-part1-120k", "standard-part2-120k", ..., "standard-part10-120k": Each
+of the 10 official train/test partitions with 50 images per class in each split.
+Images have been resized to have at most 120,000 pixels, and encoded as JPEG
+with quality of 72.
 
 * URL: [https://vision.princeton.edu/projects/2010/SUN/](https://vision.princeton.edu/projects/2010/SUN/)
 * `DatasetBuilder`: [`tfds.image.sun.Sun397`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/sun.py)
-* Version: `v1.1.0`
-* Size: `36.39 GiB`
 
-#### Features
+`sun397` is configured with `tfds.image.sun.Sun397Config` and has the following
+configurations predefined (defaults to the first one):
+
+*   `"tfds"` (`v4.0.0`) (`Size: 36.41 GiB`): TFDS partition with random
+    train/validation/test splits with 70%/10%/20% of the images, respectively.
+    Images are resized to have at most 120,000 pixels, and are compressed with
+    72 JPEG quality.
+
+*   `"standard-part1-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 1. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part2-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 2. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part3-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 3. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part4-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 4. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part5-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 5. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part6-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 6. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part7-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 7. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part8-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 8. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part9-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 9. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+*   `"standard-part10-120k"` (`v4.0.0`) (`Size: 36.41 GiB`): Train and test
+    splits from the official partition number 10. Images are resized to have at
+    most 120,000 pixels, and compressed with 72 JPEG quality.
+
+#### `"sun397/tfds"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part1-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part2-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part3-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part4-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part5-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part6-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part7-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part8-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part9-120k"`
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=397),
+})
+```
+
+#### `"sun397/standard-part10-120k"`
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -6878,11 +7090,12 @@ FeaturesDict({
 ```
 
 #### Statistics
-Split  | Examples
-:----- | ---:
-FULL       |    108,753
-ALL        |    108,753
 
+Split | Examples
+:---- | -------:
+ALL   | 39,700
+TRAIN | 19,850
+TEST  | 19,850
 
 #### Urls
  * [https://vision.princeton.edu/projects/2010/SUN/](https://vision.princeton.edu/projects/2010/SUN/)
@@ -8756,7 +8969,6 @@ ALL   | 14,344,391
 *   [https://wiki.skullsecurity.org/Passwords](https://wiki.skullsecurity.org/Passwords)
 
 #### Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ---
