@@ -32,5 +32,10 @@ class TitanicTest(tfds_test.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = 'test.csv'
 
+
+class TitanicS3Test(TitanicTest):
+  VERSION = "2.0.0"
+
+
 if __name__ == '__main__':
   tfds_test.test_main()

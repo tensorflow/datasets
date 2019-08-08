@@ -97,9 +97,16 @@ _URL = "https://www.openml.org/data/get_csv/16826755/phpMYEkMl"
 
 class Titanic(tfds.core.GeneratorBasedBuilder):
   """Titanic dataset."""
-
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 1.0.0: Initial version.
+  
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
+
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0"),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -140,12 +147,16 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
 
     with tf.io.gfile.GFile(file_path) as f:
       raw_data = csv.DictReader(f)
-      for row in raw_data:
+      for i, row in enumerate(raw_data):
         survive_val = row.pop("survived")
-        yield {
+        record = {
             "survived": convert_to_label(survive_val, _SURVIVED_DICT),
             "features": {
                 name: FEATURE_DICT[name][1](value)
                 for name, value in row.items()
             }
         }
+        if self.version.implements(tfds.core.Experiment.S3):
+          yield i, record
+        else:
+          yield record

@@ -29,6 +29,11 @@ class IrisTest(testing.DatasetBuilderTestCase):
       "train": 15,
   }
   DL_EXTRACT_RESULT = "iris.data"
+  
+  
+class IrisS3Test(IrisTest):
+  VERSION = "2.0.0"
+  
 
 if __name__ == "__main__":
   testing.test_main()
