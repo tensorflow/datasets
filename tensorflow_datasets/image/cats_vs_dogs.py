@@ -106,10 +106,7 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
           "image/filename": fname,
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
       raise ValueError("Expected %d corrupt images, but found %d" % (

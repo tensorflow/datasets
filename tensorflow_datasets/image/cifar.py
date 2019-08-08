@@ -133,10 +133,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
       for labels, np_image in _load_data(path, len(label_keys)):
         record = dict(zip(label_keys, labels))
         record["image"] = np_image
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield index, record
-        else:
-          yield record
+        yield index, record
         index += 1
 
 

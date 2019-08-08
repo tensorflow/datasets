@@ -106,7 +106,4 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
             "image": os.path.join(data_path, "dtd", "images", fname),
             "label": label,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield fname, record
-        else:
-          yield record
+        yield fname, record

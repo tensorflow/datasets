@@ -149,10 +149,7 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
           value_orientation=values[3],
           value_x_position=values[4],
           value_y_position=values[5])
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield i, record
-      else:
-        yield record
+      yield i, record
 
 
 def _load_data(filepath):

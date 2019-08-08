@@ -125,7 +125,4 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
           "label": labels[image_id - 1] - 1,
           "file_name": file_name,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield file_name, record
-      else:
-        yield record
+      yield file_name, record

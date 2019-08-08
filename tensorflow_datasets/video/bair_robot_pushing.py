@@ -146,7 +146,4 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         #     {'action': [...], 'image_main': img_frame1, ...},  # Frame 1
         #     ...,
         # ]
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield "%s_%s" % (filepath, video_id), all_frames
-        else:
-          yield all_frames
+        yield "%s_%s" % (filepath, video_id), all_frames

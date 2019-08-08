@@ -167,10 +167,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
               'label': np.argmax(label[i]).astype(int),
               'sample_id': i,
           }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield i, record
-        else:
-          yield record
+        yield i, record
 
 
 def _create_rgb(sen2_bands):

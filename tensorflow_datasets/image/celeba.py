@@ -213,7 +213,4 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
               k: v > 0 for k, v in zip(attributes[0], attributes[1][file_name])
           },
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield file_name, record
-      else:
-        yield record
+      yield file_name, record

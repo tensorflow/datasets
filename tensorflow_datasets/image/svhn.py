@@ -121,9 +121,6 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
           "image": image,
           "label": label % 10,  # digit 0 is saved as 0 (instead of 10)
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield i, record
-      else:
-        yield record
+      yield i, record
 
 # TODO(tfds): Add the SvhnFull dataset
