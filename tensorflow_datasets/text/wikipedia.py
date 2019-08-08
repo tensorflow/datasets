@@ -111,7 +111,7 @@ class WikipediaConfig(tfds.core.BuilderConfig):
 class Wikipedia(tfds.core.BeamBasedBuilder):
   """Wikipedia dataset."""
   # Use mirror (your.org) to avoid download caps.
-
+  # TODO{us} Update to S3 version.
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=tfds.core.Version(

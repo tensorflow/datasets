@@ -78,9 +78,16 @@ class Lm1bConfig(tfds.core.BuilderConfig):
         feature.
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(Lm1bConfig, self).__init__(
         version=tfds.core.Version(
-            version, experiments={tfds.core.Experiment.S3: False}),
+            "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+          tfds.core.Version("2.0.0"),
+          tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -99,12 +106,10 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       Lm1bConfig(
           name="plain_text",
-          version="0.0.1",
           description="Plain text",
       ),
       Lm1bConfig(
           name="bytes",
-          version="0.0.1",
           description=("Uses byte-level text encoding with "
                        "`tfds.features.text.ByteTextEncoder`"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -112,7 +117,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords8k",
-          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -121,7 +125,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       ),
       Lm1bConfig(
           name="subwords32k",
-          version="0.0.2",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
                        "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -145,8 +148,12 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, training_files):
-    for ex in self._generate_examples(training_files):
-      yield ex["text"]
+    if self.version.implements(tfds.core.Experiment.S3):
+      for idx, ex in self._generate_examples(training_files):
+        yield ex["text"]
+    else:
+      for ex in self._generate_examples(training_files):
+        yield ex["text"]
 
   def _split_generators(self, dl_manager):
     lm1b_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
@@ -169,11 +176,14 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"files": test_files}),
     ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, files):
     for filepath in files:
       logging.info("generating examples from = %s", filepath)
       with tf.io.gfile.GFile(filepath) as f:
-        for line in f:
-          yield {
+
+        for idx, line in enumerate(f):
+          records = {
               "text": line.strip(),
           }
+          yield idx, records

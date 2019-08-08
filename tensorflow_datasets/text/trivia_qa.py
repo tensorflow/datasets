@@ -81,6 +81,13 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("0.1.0",
                               experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+    tfds.core.Version("2.0.0"),
+    tfds.core.Version("1.0.0")
+  ]
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -163,13 +170,14 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                         "wiki_dir": wiki_evidence_dir}),
     ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, files, web_dir, wiki_dir):
     """This function returns the examples."""
     for filepath in files:
       logging.info("generating examples from = %s", filepath)
       with tf.io.gfile.GFile(filepath) as f:
         triviaqa = json.load(f)
-        for article in triviaqa["Data"]:
+        for idx, article in enumerate(triviaqa["Data"]):
           if "Answer" in article:
             answer = article["Answer"]
             aliases = [alias.strip() for alias in answer["Aliases"]]
@@ -285,7 +293,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
             wiki_titles = []
             wiki_contexts = []
 
-          yield {
+          records = {
               "entity_pages": {
                   "doc_source": doc_sources,
                   "file_name": file_names,
@@ -305,3 +313,4 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
               "question_source": question_source,
               "answer": answer_dict,
           }
+          yield idx, records

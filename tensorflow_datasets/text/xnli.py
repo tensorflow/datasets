@@ -60,11 +60,18 @@ _LANGUAGES = ('ar', 'bg', 'de', 'el', 'en', 'es', 'fr', 'hi', 'ru', 'sw', 'th',
 
 class Xnli(tfds.core.GeneratorBasedBuilder):
   """XNLI: The Cross-Lingual NLI Corpus. Version 1.0."""
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
           version=tfds.core.Version(
               '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+            tfds.core.Version("2.0.0"),
+            tfds.core.Version("1.0.0"),
+          ],
           description='Plain text import of XNLI',
       )
   ]
@@ -105,6 +112,7 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.dev.tsv')}),
     ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
     rows_per_pair_id = collections.defaultdict(list)
@@ -114,11 +122,12 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
       for row in reader:
         rows_per_pair_id[row['pairID']].append(row)
 
-    for rows in six.itervalues(rows_per_pair_id):
+    for idx, rows in enumerate(six.itervalues(rows_per_pair_id)):
       premise = {row['language']: row['sentence1'] for row in rows}
       hypothesis = {row['language']: row['sentence2'] for row in rows}
-      yield {
+      records = {
           'premise': premise,
           'hypothesis': hypothesis,
           'label': rows[0]['gold_label'],
       }
+      yield idx, records

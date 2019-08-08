@@ -94,6 +94,8 @@ class SuperGlueWicTest(testing.DatasetBuilderTestCase):
       "test": 1,
   }
 
+class SuperGlueCbS3Test(SuperGlueCbTest):
+  VERSION = "experimental_latest"
 
 # TODO(adarob): Add MultiRC test.
 

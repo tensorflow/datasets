@@ -67,6 +67,8 @@ class CnnDailymailTest(tfds_test.DatasetBuilderTestCase):
       self.assertEqual('highlight text . highlight two . highlight three .',
                        abstract)
 
+class CnnDailymailS3Test(CnnDailymailTest):
+  VERSION = "experimental_latest"
 
 if __name__ == '__main__':
   tfds_test.test_main()

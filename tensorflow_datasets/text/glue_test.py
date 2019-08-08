@@ -123,6 +123,8 @@ class GlueMrpcTest(testing.DatasetBuilderTestCase):
       "test": 15,
   }
 
+class GlueMrpcS3Test(GlueMrpcTest):
+  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()

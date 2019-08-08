@@ -115,9 +115,16 @@ class GlueConfig(tfds.core.BuilderConfig):
         of the label and processing it to the form required by the label feature
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(GlueConfig, self).__init__(
         version=tfds.core.Version(
             "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+          tfds.core.Version("2.0.0"),
+          tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.text_features = text_features
     self.label_column = label_column
@@ -468,6 +475,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               }),
       ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, data_file, split, mrpc_files):
     if self.builder_config.name == "mrpc":
       # We have to prepare the MRPC dataset from the original sources ourselves.
@@ -516,19 +524,20 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             if value is None:
               break
           else:
-            yield example
+            yield n, example
 
   def _generate_example_mrpc_files(self, mrpc_files, split):
     if split == "test":
       with tf.io.gfile.GFile(mrpc_files["test"]) as f:
         reader = csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
         for n, row in enumerate(reader):
-          yield {
+          records = {
               "sentence1": row["#1 String"],
               "sentence2": row["#2 String"],
               "label": -1,
               "idx": n,
           }
+          yield n, records
     else:
       with tf.io.gfile.GFile(mrpc_files["dev_ids"]) as f:
         reader = csv.reader(f, delimiter="\t", quoting=csv.QUOTE_NONE)
@@ -541,12 +550,13 @@ class Glue(tfds.core.GeneratorBasedBuilder):
         for n, row in enumerate(reader):
           is_row_in_dev = [row["#1 ID"], row["#2 ID"]] in dev_ids
           if is_row_in_dev == (split == "dev"):
-            yield {
+            records = {
                 "sentence1": row["#1 String"],
                 "sentence2": row["#2 String"],
                 "label": int(row["Quality"]),
                 "idx": n,
             }
+            yield n, records
 
 
 def _mnli_split_generator(name, data_dir, split, matched):

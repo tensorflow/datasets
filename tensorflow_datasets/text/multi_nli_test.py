@@ -32,6 +32,8 @@ class MultiNLITest(testing.DatasetBuilderTestCase):
       "validation_mismatched": 1,
   }
 
+class MultiNLIS3Test(MultiNLITest):
+  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()

@@ -34,6 +34,8 @@ class DefinitePronounResolutionTest(testing.DatasetBuilderTestCase):
       "train": 4,
   }
 
+class DefinitePronounResolutionS3Test(DefinitePronounResolutionTest):
+  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()

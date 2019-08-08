@@ -67,7 +67,16 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
         for the `tfds.features.text.TextEncoder` used for the features feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(MultiNLIConfig, self).__init__(**kwargs)
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    super(MultiNLIConfig, self).__init__(
+      version=tfds.core.Version(
+        "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+      supported_versions=[
+        tfds.core.Version("2.0.0"),
+        tfds.core.Version("1.0.0"),
+      ], **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -78,8 +87,6 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       MultiNLIConfig(
           name="plain_text",
-          version=tfds.core.Version(
-              "0.0.2", experiments={tfds.core.Experiment.S3: False}),
           description="Plain text",
       ),
   ]
@@ -107,8 +114,12 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, filepath):
-    for ex in self._generate_examples(filepath):
-      yield " ".join([ex["premise"], ex["hypothesis"]])
+    if self.version.implements(tfds.core.Experiment.S3):
+      for idx, ex in self._generate_examples(filepath):
+        yield " ".join([ex["premise"], ex["hypothesis"]])
+    else:
+      for ex in self._generate_examples(filepath):
+        yield " ".join([ex["premise"], ex["hypothesis"]])
 
   def _split_generators(self, dl_manager):
 
@@ -146,6 +157,7 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"filepath": mismatched_validation_path}),
     ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, filepath):
     """Generate mnli examples.
 
@@ -165,8 +177,9 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
       if split_line[0] == "-":
         continue
       # Works for both splits even though dev has some extra human labels.
-      yield {
+      records = {
           "premise": split_line[5],
           "hypothesis": split_line[6],
           "label": split_line[0]
       }
+      yield idx, records

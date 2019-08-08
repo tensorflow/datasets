@@ -36,6 +36,7 @@ from tensorflow_datasets.core.splits import SplitBase
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
+from tensorflow_datasets.core.utils import drop_key_if_not_s3
 from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
@@ -45,6 +46,7 @@ __all__ = [
     "BeamBasedBuilder",
     "BuilderConfig",
     "DatasetBuilder",
+    "drop_key_if_not_s3",
     "Experiment",
     "GeneratorBasedBuilder",
     "get_tfds_path",

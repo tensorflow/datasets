@@ -227,9 +227,16 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
         'False' or 'True'.
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(SuperGlueConfig, self).__init__(
         version=tfds.core.Version(
             "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+          tfds.core.Version("2.0.0"),
+          tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.features = features
     self.label_classes = label_classes
@@ -366,6 +373,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
+  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, data_file, split):
     with tf.io.gfile.GFile(data_file) as f:
       for line in f:
@@ -376,7 +384,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           for question in paragraph["questions"]:
             for answer in question["answers"]:
               is_answer = answer.get("isAnswer")
-              yield {
+              records = {
                   "paragraph": paragraph["text"],
                   "question": question["question"],
                   "answer": answer["text"],
@@ -387,6 +395,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
                       "answer": answer["idx"]
                   }
               }
+              yield records['idx'], records
         else:
           if self.builder_config.name.startswith("wsc"):
             row.update(row["target"])
@@ -405,8 +414,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           else:
             assert split == tfds.Split.TEST, row
             example["label"] = -1
-          yield example
-
+          yield example['idx'], example
 
 def _fix_wst(ex):
   """Fixes most cases where spans are not actually substrings of text."""

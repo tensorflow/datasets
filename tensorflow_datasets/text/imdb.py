@@ -121,9 +121,14 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, archive):
-    for ex in self._generate_examples(
-        archive, os.path.join("aclImdb", "train"), keys=False):
-      yield ex["text"]
+    if self.version.implements(tfds.core.Experiment.S3):
+      for path, ex in self._generate_examples(
+        archive, os.path.join("aclImdb", "train")):
+        yield ex["text"]
+    else:
+      for ex in self._generate_examples(
+        archive, os.path.join("aclImdb", "train")):
+        yield ex["text"]
 
   def _split_generators(self, dl_manager):
     arch_path = dl_manager.download(_DOWNLOAD_URL)
@@ -152,7 +157,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
                         "labeled": False}),
     ]
 
-  def _generate_examples(self, archive, directory, labeled=True, keys=True):
+  @tfds.core.drop_key_if_not_s3
+  def _generate_examples(self, archive, directory, labeled=True):
     """Generate IMDB examples."""
     # For labeled examples, extract the label from the path.
     reg_path = "(?P<label>neg|pos)" if labeled else "unsup"
@@ -168,7 +174,4 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
           "text": text,
           "label": label,
       }
-      if keys and self.version.implements(tfds.core.Experiment.S3):
-        yield path, record
-      else:
-        yield record
+      yield path, record

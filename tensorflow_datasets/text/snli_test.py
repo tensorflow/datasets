@@ -32,6 +32,8 @@ class SnliTest(testing.DatasetBuilderTestCase):
       "test": 1,
   }
 
+class SnliS3Test(SnliTest):
+  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()
