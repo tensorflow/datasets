@@ -242,7 +242,11 @@ def as_proto_cls(proto_cls):
 
       def __setattr__(self, attr_name, new_value):
         try:
-          return setattr(self.__proto, attr_name, new_value)
+          if isinstance(new_value, list):
+            self.ClearField(attr_name)
+            getattr(self.__proto, attr_name).extend(new_value)
+          else:
+            return setattr(self.__proto, attr_name, new_value)
         except AttributeError:
           return super(ProtoCls, self).__setattr__(attr_name, new_value)
 

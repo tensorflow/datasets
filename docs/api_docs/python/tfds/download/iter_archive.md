@@ -5,6 +5,12 @@
 
 # tfds.download.iter_archive
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/extractor.py">View
+source</a>
+
 Yields (path_in_archive, f_obj) for archive at path using
 <a href="../../tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>.
 
@@ -14,9 +20,5 @@ tfds.download.iter_archive(
     method
 )
 ```
-
-
-
-Defined in [`core/download/extractor.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/extractor.py).
 
 <!-- Placeholder for "Used in" -->

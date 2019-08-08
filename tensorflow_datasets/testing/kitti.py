@@ -40,7 +40,8 @@ flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
                     "Path to tensorflow_datasets directory")
 
 FLAGS = flags.FLAGS
-NUM_IMAGES = 5
+NUM_IMAGES = 10
+NUM_VIDEOS = 5
 HEIGHT = 375
 WIDTH = 1242
 OBJECTS = [
@@ -139,6 +140,28 @@ def _get_label_file(annotation):
   return fobj.name
 
 
+def _get_mapping_files():
+  """Returns dummy image to video mapping files."""
+  # Random indices file.
+  train_rand = np.random.permutation(range(1, NUM_IMAGES + 1))  # 1-based index
+  fobj_rand = tempfile.NamedTemporaryFile(
+      delete=False, mode="wb", suffix=".txt")
+  fobj_rand.write(",".join([str(x) for x in train_rand]))
+  fobj_rand.close()
+
+  # Mapping file.
+  fobj_map = tempfile.NamedTemporaryFile(delete=False, mode="wb", suffix=".txt")
+  assert NUM_IMAGES > NUM_VIDEOS
+  assert NUM_IMAGES % NUM_VIDEOS == 0
+  vid_ids = list(range(NUM_VIDEOS)) * (NUM_IMAGES // NUM_VIDEOS)
+  for vid in vid_ids:
+    row = "2011_09_26 2011_09_26_drive_00{:02d}_sync 0000000123".format(vid)
+    fobj_map.write(row + "\n")
+  fobj_map.close()
+
+  return fobj_rand.name, fobj_map.name
+
+
 def _create_zip_files():
   """Saves png and label using name index."""
   if not os.path.exists(_output_dir()):
@@ -160,6 +183,13 @@ def _create_zip_files():
       label_zip.write(
           label,
           os.path.join("training", "label_2", "label_{:06d}.txt".format(i)))
+
+  devkit_out_path = os.path.join(_output_dir(), "devkit_object.zip")
+  with zipfile.ZipFile(devkit_out_path, "w") as devkit_zip:
+    train_rand, train_mapping = _get_mapping_files()
+    devkit_zip.write(train_rand, os.path.join("mapping", "train_rand.txt"))
+    devkit_zip.write(train_mapping, os.path.join("mapping",
+                                                 "train_mapping.txt"))
 
 
 def main(argv):

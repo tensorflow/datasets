@@ -5,6 +5,12 @@
 
 # tfds.as_numpy
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py">View
+source</a>
+
 Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
 ``` python
@@ -13,10 +19,6 @@ tfds.as_numpy(
     graph=None
 )
 ```
-
-
-
-Defined in [`core/dataset_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py).
 
 <!-- Placeholder for "Used in" -->
 

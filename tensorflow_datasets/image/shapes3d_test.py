@@ -25,7 +25,7 @@ class Shapes3dTest(tfds_test.DatasetBuilderTestCase):
 
 
 class Shapes3dS3Test(Shapes3dTest):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

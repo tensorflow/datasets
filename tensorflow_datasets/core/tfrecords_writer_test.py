@@ -89,7 +89,7 @@ class WriterTest(testing.TestCase):
     Number of records is evenly distributed (2-1-2-1-2).
     """
     path = os.path.join(self.tmp_dir, 'foo.tfrecord')
-    writer = tfrecords_writer.Writer('some spec', path)
+    writer = tfrecords_writer.Writer('some spec', path, hash_salt='')
     to_write = [
         (1, b'a'), (2, b'b'),
         (3, b'c'),
@@ -107,7 +107,7 @@ class WriterTest(testing.TestCase):
     self.assertEqual(written_files,
                      ['foo.tfrecord-0000%s-of-00005' % i for i in range(5)])
     self.assertEqual(all_recs, [
-        [b'f', b'c'], [b'a'], [b'd', b'g'], [b'h'], [b'b', b'e'],
+        [b'f', b'g'], [b'd'], [b'a', b'b'], [b'h'], [b'e', b'c'],
     ])
 
 if __name__ == '__main__':

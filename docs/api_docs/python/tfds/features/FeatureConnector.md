@@ -13,11 +13,15 @@
 
 # tfds.features.FeatureConnector
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ## Class `FeatureConnector`
 
 Abstract base class for feature types.
-
-Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -48,6 +52,9 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 decode_example(tfexample_data)
 ```
@@ -70,6 +77,9 @@ graph (in `tf.data.Dataset.map(features.decode_example)`).
     tf.data.Dataset object
 
 <h3 id="encode_example"><code>encode_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 encode_example(example_data)
@@ -121,6 +131,9 @@ yield {
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 get_serialized_info()
 ```
@@ -158,6 +171,9 @@ If not defined, the retuned values are automatically deduced from the
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -193,6 +209,9 @@ return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 load_metadata(
     data_dir,
@@ -213,6 +232,9 @@ will restore the feature metadata from the saved file.
     key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 save_metadata(

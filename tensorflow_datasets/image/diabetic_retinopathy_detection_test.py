@@ -34,7 +34,7 @@ class DiabeticRetinopathyDetectionTest(testing.DatasetBuilderTestCase):
 
 
 class DiabeticRetinopathyDetectionS3Test(DiabeticRetinopathyDetectionTest):
-  VERSION = "3.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

@@ -72,12 +72,14 @@ def _load_tif(path):
 class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
   """Biological 8-class classification problem."""
   URL = _URL
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.0.1"),
+      tfds.core.Version("2.0.0"),
+      tfds.core.Version("1.0.0"),
   ]
   # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -129,12 +131,14 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
 class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
   """10 Large 5000 x 5000 colorectal histology images without labels."""
   URL = _URL
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.0.1"),
+      tfds.core.Version("2.0.0"),
+      tfds.core.Version("1.0.0"),
   ]
   # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):

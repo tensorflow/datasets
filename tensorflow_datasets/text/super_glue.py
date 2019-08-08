@@ -227,7 +227,10 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
         'False' or 'True'.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(SuperGlueConfig, self).__init__(**kwargs)
+    super(SuperGlueConfig, self).__init__(
+        version=tfds.core.Version(
+            "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.features = features
     self.label_classes = label_classes
     self.data_url = data_url
@@ -240,7 +243,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       SuperGlueConfig(
           name="cb",
-          version="0.0.2",
           description=_CB_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "contradiction", "neutral"],
@@ -249,7 +251,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="https://github.com/mcdm/CommitmentBank"),
       SuperGlueConfig(
           name="copa",
-          version="0.0.2",
           description=_COPA_DESCRIPTION,
           label_classes=["choice1", "choice2"],
           # Note that question will only be the X in the statement "What's
@@ -260,7 +261,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="http://people.ict.usc.edu/~gordon/copa.html"),
       SuperGlueConfig(
           name="multirc",
-          version="0.0.2",
           description=_MULTIRC_DESCRIPTION,
           features=["paragraph", "question", "answer"],
           data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/MultiRC.zip",
@@ -268,7 +268,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="https://cogcomp.org/multirc/"),
       SuperGlueConfig(
           name="rte",
-          version="0.0.2",
           description=_RTE_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "not_entailment"],
@@ -277,7 +276,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"),
       SuperGlueConfig(
           name="wic",
-          version="0.0.2",
           description=_WIC_DESCRIPTION,
           # pos refers to part of speech (e.g., "N", "V", ...).
           features=["word", "pos", "sentence1", "sentence2"],
@@ -286,7 +284,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           url="https://pilehvar.github.io/wic/"),
       SuperGlueConfig(
           name="wsc",
-          version="0.0.2",
           description=_WSC_DESCRIPTION,
           # Note that span1_index and span2_index will be integers stored as
           # tf.int32.
@@ -299,7 +296,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
       ),
       SuperGlueConfig(
           name="wsc.fixed",
-          version="0.0.2",
           description=(
               _WSC_DESCRIPTION +
               "\n\nThis version fixes issues where the spans are not actually "

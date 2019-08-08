@@ -5,10 +5,14 @@
 
 # Module: tfds.download
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/__init__.py">View
+source</a>
+
 <a href="../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
 API.
-
-Defined in [`core/download/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/__init__.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -30,6 +34,9 @@ method to use to pre-process a downloaded file.
 [`class Resource`](../tfds/download/Resource.md): Represents a resource to download, extract, or both.
 
 ## Functions
+
+[`add_checksums_dir(...)`](../tfds/download/add_checksums_dir.md): Registers a
+new checksums dir.
 
 [`iter_archive(...)`](../tfds/download/iter_archive.md): Yields (path_in_archive, f_obj) for archive at path using <a href="../tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>.
 

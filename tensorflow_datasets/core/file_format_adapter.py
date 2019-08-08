@@ -45,7 +45,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
-from tensorflow_datasets.core import lazy_imports
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import utils
 
 
@@ -126,7 +126,7 @@ class TFRecordExampleAdapter(FileFormatAdapter):
     _write_tfrecords_from_generator(wrapped, output_files, shuffle=True)
 
   def write_from_pcollection(self, pcollection, file_path_prefix, num_shards):
-    beam = lazy_imports.lazy_imports.apache_beam
+    beam = lazy_imports_lib.lazy_imports.apache_beam
 
     # WARNING: WriteToTFRecord do not support long in python2 with the default,
     # beam implementation, so need to convert the long value (from the proto

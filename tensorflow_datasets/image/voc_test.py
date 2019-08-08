@@ -33,7 +33,7 @@ class Voc2007Test(testing.DatasetBuilderTestCase):
 
 
 class Voc2007S3Test(Voc2007Test):
-  VERSION = '2.0.0'
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

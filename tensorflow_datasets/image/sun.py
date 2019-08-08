@@ -44,14 +44,18 @@ ISSN={1063-6919},
 month={June},}
 """
 _SUN397_DESCRIPTION = """\
-The database contains 108,754 images of 397 categories, used in the
+The database contains 108,753 images of 397 categories, used in the
 Scene UNderstanding (SUN) benchmark. The number of images varies across
 categories, but there are at least 100 images per category.
 
-The official release of the dataset defines 10 overlapping partitions of the
-dataset, with 50 testing and training images in each.
-Since TFDS requires the splits not to overlap, we provide a single split for
-the entire dataset (named "full"). All images are converted to RGB.
+Several configs of the dataset are made available through TFDS:
+- A custom (random) partition of the whole dataset with 76,128 training images,
+  10,875 validation images and 21,750 test images. Images have been resized to
+  have at most 120,000 pixels, and encoded as JPEG with quality of 72.
+- "standard-part1-120k", "standard-part2-120k", ..., "standard-part10-120k":
+  Each of the 10 official train/test partitions with 50 images per class in each
+  split. Images have been resized to have at most 120,000 pixels, and encoded
+  as JPEG with quality of 72.
 """
 _SUN397_URL = "https://vision.princeton.edu/projects/2010/SUN/"
 
@@ -60,6 +64,11 @@ _SUN397_URL = "https://vision.princeton.edu/projects/2010/SUN/"
 _SUN397_IGNORE_IMAGES = [
     "SUN397/c/church/outdoor/sun_bhenjvsvrtumjuri.jpg",
 ]
+
+_SUN397_BUILDER_CONFIG_DESCRIPTION_PATTERN = (
+    "Train and test splits from the official partition number %d. "
+    "Images are resized to have at most %s pixels, and compressed with 72 JPEG "
+    "quality.")
 
 
 def _decode_image(fobj, session, filename):
@@ -102,33 +111,106 @@ def _decode_image(fobj, session, filename):
   return image
 
 
-def _encode_jpeg(image):
-  _, buff = tfds.core.lazy_imports.cv2.imencode(".jpg", image)
-  fobj = io.BytesIO()
-  fobj.write(buff.tostring())
-  fobj.seek(0)
-  return fobj
+def _encode_jpeg(image, quality=None):
+  cv2 = tfds.core.lazy_imports.cv2
+  extra_args = [[int(cv2.IMWRITE_JPEG_QUALITY), quality]] if quality else []
+  _, buff = cv2.imencode(".jpg", image, *extra_args)
+  return io.BytesIO(buff.tostring())
 
 
-def _process_image_file(fobj, session, filename):
+def _process_image_file(
+    fobj, session, filename, quality=None, target_pixels=None):
   """Process image files from the dataset."""
   # We need to read the image files and convert them to JPEG, since some files
   # actually contain GIF, PNG or BMP data (despite having a .jpg extension) and
   # some encoding options that will make TF crash in general.
   image = _decode_image(fobj, session, filename=filename)
-  return _encode_jpeg(image)
+  # Get image height and width.
+  height, width, _ = image.shape
+  actual_pixels = height * width
+  if target_pixels and actual_pixels > target_pixels:
+    factor = np.sqrt(target_pixels / actual_pixels)
+    image = tfds.core.lazy_imports.cv2.resize(
+        image, dsize=None, fx=factor, fy=factor)
+  return _encode_jpeg(image, quality=quality)
+
+
+class Sun397Config(tfds.core.BuilderConfig):
+  """BuilderConfig for Sun 397 dataset."""
+
+  # Version history:
+  # 4.0.0: Pictures resized and compressed, new configs, using S3 features.
+  # 3.0.0: S3 with new hashing function (different shuffle).
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+
+  def __init__(
+      self, target_pixels=None, partition=None, quality=None, **kwargs):
+    self._target_pixels = target_pixels
+    self._partition = partition
+    self._quality = quality
+    super(Sun397Config, self).__init__(**kwargs)
+
+  @property
+  def target_pixels(self):
+    return self._target_pixels
+
+  @property
+  def partition(self):
+    return self._partition
+
+  @property
+  def quality(self):
+    return self._quality
+
+
+def _generate_builder_configs():
+  """Return the BuilderConfig objects for the SUN397 dataset."""
+  version = tfds.core.Version("4.0.0")
+  builder_configs = [
+      # Images randomly split into train/valid/test splits (70%/10%/20%), and
+      # images resized to have at most 120,000 pixels.
+      Sun397Config(
+          name="tfds",
+          version=version,
+          target_pixels=120000,
+          description=(
+              "TFDS partition with random train/validation/test splits with "
+              "70%/10%/20% of the images, respectively. Images are resized to "
+              "have at most 120,000 pixels, and are compressed with 72 JPEG "
+              "quality.")),
+  ]
+  # Configs for each of the standard partitions of the dataset.
+  for partition in range(1, 10 + 1):
+    description = _SUN397_BUILDER_CONFIG_DESCRIPTION_PATTERN % (partition,
+                                                                "120,000")
+    builder_configs.append(
+        Sun397Config(
+            name="standard-part%d-120k" % partition,
+            partition=partition,
+            target_pixels=120000,
+            version=version,
+            description=description))
+  return builder_configs
 
 
 class Sun397(tfds.core.GeneratorBasedBuilder):
   """Sun397 Scene Recognition Benchmark."""
 
-  VERSION = tfds.core.Version("1.1.0")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.1.0"),
-  ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  BUILDER_CONFIGS = _generate_builder_configs()
+
+  def __init__(self, tfds_split_files=None, **kwargs):
+    super(Sun397, self).__init__(**kwargs)
+    # Note: Only used for tests, since the data is fake.
+    if not tfds_split_files:
+      tfds_split_files = {
+          "tr": "sun397_tfds_tr.txt",
+          "te": "sun397_tfds_te.txt",
+          "va": "sun397_tfds_va.txt",
+      }
+      for split, filename in tfds_split_files.items():
+        tfds_split_files[split] = tfds.core.get_tfds_path(
+            os.path.join("image", filename))
+    self._tfds_split_files = tfds_split_files
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -145,36 +227,72 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
         citation=_SUN397_CITATION)
 
   def _split_generators(self, dl_manager):
-    tar_gz_path = dl_manager.download(_SUN397_URL + "SUN397.tar.gz")
-    if os.path.isdir(tar_gz_path):
-      # While testing: download() returns the dir containing the tests files.
-      tar_gz_path = os.path.join(tar_gz_path, "SUN397.tar.gz")
-
-    resource = tfds.download.Resource(
-        path=tar_gz_path,
+    paths = dl_manager.download_and_extract({
+        "images": tfds.download.Resource(
+            url=_SUN397_URL + "SUN397.tar.gz",
+            extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
+        "partitions": _SUN397_URL + "download/Partitions.zip",
+    })
+    if not isinstance(paths, dict):
+      # While testing download_and_extract() returns the dir containing the
+      # test files.
+      paths = {
+          "images": os.path.join(paths, "SUN397.tar.gz"),
+          "partitions": os.path.join(paths, "Partitions"),
+      }
+    images = tfds.download.Resource(
+        path=paths["images"],
         extract_method=tfds.download.ExtractMethod.TAR_GZ_STREAM)
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split("full"),
-            num_shards=20,  # size(shard) ~= 2GB.
-            gen_kwargs=dict(archive=dl_manager.iter_archive(resource)))
-    ]
+    if self.builder_config.name == "tfds":
+      subset_images = self._get_tfds_subsets_images()
+      return [
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TRAIN,
+              gen_kwargs=dict(
+                  archive=dl_manager.iter_archive(images),
+                  subset_images=subset_images["tr"])),
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TEST,
+              gen_kwargs=dict(
+                  archive=dl_manager.iter_archive(images),
+                  subset_images=subset_images["te"])),
+          tfds.core.SplitGenerator(
+              name=tfds.Split.VALIDATION,
+              gen_kwargs=dict(
+                  archive=dl_manager.iter_archive(images),
+                  subset_images=subset_images["va"])),
+      ]
+    else:
+      subset_images = self._get_partition_subsets_images(paths["partitions"])
+      return [
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TRAIN,
+              gen_kwargs=dict(
+                  archive=dl_manager.iter_archive(images),
+                  subset_images=subset_images["tr"])),
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TEST,
+              gen_kwargs=dict(
+                  archive=dl_manager.iter_archive(images),
+                  subset_images=subset_images["te"])),
+      ]
 
-  def _generate_examples(self, archive):
-    """Yields examples."""
+  def _generate_examples(self, archive, subset_images):
     prefix_len = len("SUN397")
     with tf.Graph().as_default():
       with utils.nogpu_session() as sess:
         for filepath, fobj in archive:
-          if (filepath.endswith(".jpg") and
-              filepath not in _SUN397_IGNORE_IMAGES):
-            # Note: all files in the tar.gz are in SUN397/...
-            filename = filepath[prefix_len:]
+          # Note: all files in the tar.gz are in SUN397/...
+          filename = filepath[prefix_len:]
+          if filename in subset_images:
             # Example:
             # From filename: /c/car_interior/backseat/sun_aenygxwhhmjtisnf.jpg
             # To class: /c/car_interior/backseat
             label = "/".join(filename.split("/")[:-1])
-            image = _process_image_file(fobj, sess, filepath)
+            image = _process_image_file(
+                fobj, sess, filename,
+                quality=self.builder_config.quality,
+                target_pixels=self.builder_config.target_pixels)
             record = {
                 "file_name": filename,
                 "image": image,
@@ -184,3 +302,31 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
               yield filename, record
             else:
               yield record
+
+  def _get_tfds_subsets_images(self):
+    splits_sets = {}
+    for split, filepath in self._tfds_split_files.items():
+      splits_sets[split] = self._load_image_set_from_file(filepath)
+    return splits_sets
+
+  def _get_partition_subsets_images(self, partitions_dir):
+    # Get the ID of all images in the dataset.
+    all_images = set()
+    for split_images in self._get_tfds_subsets_images().values():
+      all_images.update(split_images)
+    # Load the images in the training/test split of this partition.
+    filenames = {
+        "tr": "Training_%02d.txt" % self.builder_config.partition,
+        "te": "Testing_%02d.txt" % self.builder_config.partition
+    }
+    splits_sets = {}
+    for split, filename in filenames.items():
+      filepath = os.path.join(partitions_dir, filename)
+      splits_sets[split] = self._load_image_set_from_file(filepath)
+    # Put the remaining images in the dataset into the "validation" split.
+    splits_sets["va"] = all_images - (splits_sets["tr"] | splits_sets["te"])
+    return splits_sets
+
+  def _load_image_set_from_file(self, filepath):
+    with tf.io.gfile.GFile(filepath, mode="r") as f:
+      return set([line.strip() for line in f])
