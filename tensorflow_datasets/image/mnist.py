@@ -170,10 +170,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     # Using index as key since data is always loaded in same order.
     for index, (image, label) in enumerate(data):
       record = {"image": image, "label": label}
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield index, record
-      else:
-        yield record
+      yield index, record
 
 
 class FashionMNIST(MNIST):

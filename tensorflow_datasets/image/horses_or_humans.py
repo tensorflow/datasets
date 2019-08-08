@@ -106,7 +106,4 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
           "image": fobj,
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

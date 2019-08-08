@@ -172,10 +172,7 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
       for line in f:
         image_id = line.strip()
         example = self._generate_example(data_path, image_id)
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield image_id, example
-        else:
-          yield example
+        yield image_id, example
 
   def _generate_example(self, data_path, image_id):
     """Yields examples."""

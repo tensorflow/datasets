@@ -164,7 +164,4 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
           "image": os.path.join(path, image),
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield image, record
-      else:
-        yield record
+      yield image, record

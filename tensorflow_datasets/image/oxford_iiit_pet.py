@@ -133,7 +133,4 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
             "file_name": image_name,
             "segmentation_mask": os.path.join(trimaps_dir_path, trimap_name)
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield image_name, record
-        else:
-          yield record
+        yield image_name, record

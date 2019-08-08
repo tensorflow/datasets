@@ -187,10 +187,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
               target_pixels=self.builder_config.target_pixels),
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield name, record
-      else:
-        yield record
+      yield name, record
 
 
 def _resize_image_if_necessary(image_fobj, target_pixels=None):

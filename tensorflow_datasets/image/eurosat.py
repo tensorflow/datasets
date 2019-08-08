@@ -165,10 +165,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
             'label': label,
             'filename': os.path.basename(filename)
         }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield filename, record
-      else:
-        yield record
+      yield filename, record
 
 
 def _extract_channels(filename):
