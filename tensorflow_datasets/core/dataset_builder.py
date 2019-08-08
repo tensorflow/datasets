@@ -949,7 +949,9 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     )
 
   def _prepare_split_legacy(self, generator, split_info):
-    # TODO(pierrot): delete once S3 has been fully rolled-out.
+    # TODO(pierrot): delete function once S3 has been fully rolled-out.
+    # For builders having both S3 and non S3 versions: drop key if any yielded.
+    generator = (ex[1] if isinstance(ex, tuple) else ex for ex in generator)
     generator = (self.info.features.encode_example(ex) for ex in generator)
     output_files = self._build_split_filenames(split_info)
     self._file_format_adapter.write_from_generator(generator, output_files)

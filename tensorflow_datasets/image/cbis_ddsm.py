@@ -382,10 +382,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
               } for abnormality in example['abnormalities']],
               # pylint: enable=g-complex-comprehension
           }
-          if self.version.implements(tfds.core.Experiment.S3):
-            yield example['id'], record
-          else:
-            yield record
+          yield example['id'], record
 
   def _generate_examples_patches(self,
                                  patients_data,
@@ -434,10 +431,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
                 'image': np.expand_dims(patch, axis=-1),
                 'label': label,
             }
-            if self.version.implements(tfds.core.Experiment.S3):
-              yield patch_id, record
-            else:
-              yield record
+            yield patch_id, record
 
         # Sample background patches from the given mammography.
         for k, patch in enumerate(
@@ -452,10 +446,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
               'image': np.expand_dims(patch, axis=-1),
               'label': 'BACKGROUND',
           }
-          if self.version.implements(tfds.core.Experiment.S3):
-            yield id_, record
-          else:
-            yield record
+          yield id_, record
 
 
 def _load_csv_files(manual_dir, dictionary_of_csv_files):

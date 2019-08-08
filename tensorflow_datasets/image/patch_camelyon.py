@@ -119,7 +119,4 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
       label = label.flatten()[0]
       id_ = '%s_%d' % (split, i)
       record = {'id': id_, 'image': image, 'label': label}
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield id_, record
-      else:
-        yield record
+      yield id_, record

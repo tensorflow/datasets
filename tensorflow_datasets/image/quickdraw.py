@@ -123,7 +123,4 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
               "image": np_image.reshape(_QUICKDRAW_IMAGE_SHAPE),
               "label": label,
           }
-          if self.version.implements(tfds.core.Experiment.S3):
-            yield "%s_%i" % (label, i), record
-          else:
-            yield record
+          yield "%s_%i" % (label, i), record

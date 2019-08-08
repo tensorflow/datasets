@@ -177,20 +177,13 @@ class Imagenet2012Corrupted(Imagenet2012):
     tfds.core.lazy_imports.cv2.setRNGSeed(357)
 
     gen_fn = super(Imagenet2012Corrupted, self)._generate_examples_validation
-    for example in gen_fn(archive, labels):
-
-      if self.version.implements(tfds.core.Experiment.S3):
-        key, example = example  # Unpack S3 key
-
+    for key, example in gen_fn(archive, labels):
       with tf.Graph().as_default():
         tf_img = tf.image.decode_jpeg(example['image'].read(), channels=3)
         image_np = tfds.as_numpy(tf_img)
       example['image'] = self._get_corrupted_example(image_np)
 
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield key, example
-      else:
-        yield example
+      yield key, example
     # Reset the seeds back to their original values.
     np.random.set_state(numpy_st0)
 

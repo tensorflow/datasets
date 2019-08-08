@@ -118,10 +118,7 @@ class UcMerced(tfds.core.GeneratorBasedBuilder):
             "label": label,
             "filename": filename,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield filename, record
-        else:
-          yield record
+        yield filename, record
 
 
 def _load_tif(path):

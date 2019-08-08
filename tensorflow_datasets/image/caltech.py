@@ -143,9 +143,6 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
                   "label": d.lower(),
                   "image/file_name": image_file,
               }
-              if self.version.implements(tfds.core.Experiment.S3):
-                yield "%s/%s" % (d, image_file), record
-              else:
-                yield record
+              yield "%s/%s" % (d, image_file), record
     # Resets the seeds to their previous states.
     np.random.set_state(numpy_original_state)

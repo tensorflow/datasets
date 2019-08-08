@@ -154,10 +154,7 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
           "value_shape": values[4],
           "value_orientation": values[5],
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield i, record
-      else:
-        yield record
+      yield i, record
 
 
 def _load_data(filepath):

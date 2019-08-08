@@ -132,7 +132,4 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
       record = {
           "image": fobj,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

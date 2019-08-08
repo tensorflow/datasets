@@ -260,10 +260,7 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
               "is_crowd": bool(instance_info["iscrowd"]),
           } for instance_info in instances],
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield image_info["file_name"], record
-      else:
-        yield record
+      yield image_info["file_name"], record
     logging.info(
         "%d/%d images do not contains any annotations",
         annotation_skipped,

@@ -123,7 +123,4 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
           os.path.join(extracted_dir, file_path, "data.mdb"))
       for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
         record = {"image": io.BytesIO(jpeg_image)}
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield i, record
-        else:
-          yield record
+        yield i, record
