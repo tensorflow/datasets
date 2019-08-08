@@ -32,7 +32,7 @@ class IrisTest(testing.DatasetBuilderTestCase):
   
   
 class IrisS3Test(IrisTest):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
   
 
 if __name__ == "__main__":
