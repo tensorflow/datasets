@@ -157,7 +157,6 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"filepath": mismatched_validation_path}),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, filepath):
     """Generate mnli examples.
 

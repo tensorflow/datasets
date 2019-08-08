@@ -157,7 +157,6 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
                         "labeled": False}),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, archive, directory, labeled=True):
     """Generate IMDB examples."""
     # For labeled examples, extract the label from the path.

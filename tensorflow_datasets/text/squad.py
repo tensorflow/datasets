@@ -128,7 +128,6 @@ class Squad(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"filepath": downloaded_files["dev"]}),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
     logging.info("generating examples from = %s", filepath)

@@ -112,7 +112,6 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.dev.tsv')}),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
     rows_per_pair_id = collections.defaultdict(list)

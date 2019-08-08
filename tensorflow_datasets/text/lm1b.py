@@ -176,7 +176,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"files": test_files}),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, files):
     for filepath in files:
       logging.info("generating examples from = %s", filepath)

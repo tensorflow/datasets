@@ -170,7 +170,6 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                         "wiki_dir": wiki_evidence_dir}),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, files, web_dir, wiki_dir):
     """This function returns the examples."""
     for filepath in files:

@@ -373,7 +373,6 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, data_file, split):
     with tf.io.gfile.GFile(data_file) as f:
       for line in f:

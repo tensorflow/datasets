@@ -106,7 +106,6 @@ class Snli(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(filepath) as f:

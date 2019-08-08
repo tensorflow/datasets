@@ -292,7 +292,6 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
                                                    tfds.Split.TEST)})
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, files):
     for p in files:
       article, highlights = _get_art_abs(p)

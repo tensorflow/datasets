@@ -100,7 +100,6 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={'filepath': files['train']}),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, filepath):
     with tf.io.gfile.GFile(filepath) as f:
       line_num = 0

@@ -475,7 +475,6 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               }),
       ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, data_file, split, mrpc_files):
     if self.builder_config.name == "mrpc":
       # We have to prepare the MRPC dataset from the original sources ourselves.
