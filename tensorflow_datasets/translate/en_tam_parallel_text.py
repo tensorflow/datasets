@@ -128,7 +128,7 @@ class EnTamParallelTextConfig(tfds.core.BuilderConfig):
       self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
       self.link = download_link
       
-    else:
+    elif 'ufal.mff.cuni.cz' in download_link:
       name = "en_ta"
       self.citation = _CITATION['MTPIL']
       self.descrp = DESCRIPTION['MTPIL']
@@ -191,7 +191,7 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
                     "source_file": os.path.join(data_dir, head+'test.en'),
                     "target_file": os.path.join(data_dir, head+'test.ta')
                 })]
-      else:
+      elif site == 'OPUS':
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
@@ -204,9 +204,9 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
     """This function returns the filtered text pairs.Some filtering 
     techniques were inspired from github/himanshudce/MIDAS-NMT-English-Tamil"""
     with tf.io.gfile.GFile(source_file) as f:
-      source_sentences = f.read().split("\n")
+      source_sentences = f.read().strip().split("\n")
     with tf.io.gfile.GFile(target_file) as f:
-      target_sentences = f.read().split("\n")
+      target_sentences = f.read().strip().split("\n")
 
     assert len(target_sentences) == len(
         source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (len(
