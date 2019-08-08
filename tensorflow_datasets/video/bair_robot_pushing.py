@@ -98,7 +98,6 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, filedir):
     logging.info("Reading data from %s.", filedir)
     files = tf.io.gfile.listdir(filedir)
