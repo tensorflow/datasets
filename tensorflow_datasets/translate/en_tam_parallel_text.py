@@ -46,7 +46,7 @@ _CITATION['opus'] = """\
     @InProceedings{TIEDEMANN12.463,
   	author    = {J�rg Tiedemann},
   	title     = {Parallel Data, Tools and Interfaces in OPUS},
-  	booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12)},
+  	Booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12)},
   	year      = {2012},
   	month     = {may},
   	date      = {23-25},
