@@ -32,6 +32,7 @@ already added.
     *   [5. Check your code style](#5-check-your-code-style)
     *   [6. Add release notes](#6-add-release-notes)
     *   [7. Send for review!](#7-send-for-review)
+*   [Defining the dataset outside TFDS](#defining-the-dataset-outside-tfds)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 *   [Testing `MyDataset`](#testing-mydataset)
 
@@ -564,34 +565,29 @@ The release note will be published for the next release.
 
 Send the pull request for review.
 
-## Define the dataset outside TFDS.
-If you do not want to add a dataset to TFDS and if you just want to use TFDS api
-without conforming to the general TFDS structure, you can adjust some static paths
-according to yourself.
+## Defining the dataset outside TFDS
+If you do not want to add a dataset to TFDS but want to use TFDS api, you can adjust some
+static paths according to your needs.
 
 ### 1. Adjust checksums
-For your download safety TFDS use the checksums of dataset files. And it's stored on
-`tensorflow_datasets/url_checksums`. Before the downloading, TFDS check this folder.
+TFDS stores the checksum of downloaded files in `tensorflow_datasets/url_checksums`
+directory. `tensorflow_datasets.scripts.download_and_prepare` script adds to checksum
+files when run with `--register_checksums` flag.
 
-`tensorflow_datasets.scripts.download_and_prepare` script add checksum file with 
-`--register_checksums` parameter.
-
-If you don't want to use it, you can change the checksum directory like that:
+You can specify an alternative checksums directory like that:
 `tfds.add_checksum_dir = your/path`.
 After that your checksums files are stored on there.
 
 ### 2. Adjust Fake Example Direcory
-For testing you need to fake examples of dataset and TFDS use 
-`tensorflow_datasets.testing.DatasetBuilderTestCase` class for testing. In this class
-takes the fake examples path as `testing/test_data/fake_examples/{your_dataset_name}`.
+When testing, fake examples from `testing/test_data/fake_examples/{your_dataset_name}`
+are used.
 
-If you want to change this path you use:
+To specify an alternative fake testing data directory:
 ```python
 class MyDatasetTest(tfds_test.DatasetBuilderTestCase):
   EXAMPLE_DIR = 'path/to/fakedata'
 ```
  
-
 ## Large datasets and distributed generation
 
 Some datasets are so large as to require multiple machines to download and
