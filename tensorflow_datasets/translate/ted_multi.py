@@ -113,7 +113,6 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, data_file):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(data_file) as f:

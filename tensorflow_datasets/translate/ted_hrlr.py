@@ -167,7 +167,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             }),
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, source_file, target_file):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(source_file) as f:

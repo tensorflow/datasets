@@ -167,7 +167,6 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN, num_shards=10, gen_kwargs=data_file)
     ]
 
-  @tfds.core.drop_key_if_not_s3
   def _generate_examples(self, data_file):
     """This function returns the examples in the raw (text) form."""
     target_language = self.builder_config.target_language
