@@ -33,28 +33,30 @@ DESCRIPTION['MTPIL'] = """\
 DESCRIPTION['opus'] = """\
 	OPUS project focuses on converting and aligning free online data, to add linguistic annotation, and to provide the community with a publicly available parallel corpus.
 """
-_CITATION['MTPIL'] = """
-  @inproceedings {biblio:RaBoMorphologicalProcessing2012,
-	title = {Morphological Processing for English-Tamil Statistical Machine Translation},
-	author = {Loganathan Ramasamy and Ond{\v{r}}ej Bojar and Zden{\v{e}}k {\v{Z}}abokrtsk{\'{y}}},
-	year = {2012},
-	pages = {113--122},
+_CITATION['MTPIL'] = """\
+    @InProceedings {biblio:RaBoMorphologicalProcessing2012,
+	title     = {Morphological Processing for English-Tamil Statistical Machine Translation},
+	author    = {Loganathan Ramasamy and Ond{\v{r}}ej Bojar and Zden{\v{e}}k {\v{Z}}abokrtsk{\'{y}}},
+	year      = {2012},
+	pages     = {113--122},
 	Booktitle = {Proceedings of the Workshop on Machine Translation and Parsing in Indian Languages ({MTPIL}-2012)},
-}"""
-_CITATION['opus'] = """
+}
+"""
+_CITATION['opus'] = """\
     @InProceedings{TIEDEMANN12.463,
-  	author = {J�rg Tiedemann},
-  	title = {Parallel Data, Tools and Interfaces in OPUS},
+  	author    = {J�rg Tiedemann},
+  	title     = {Parallel Data, Tools and Interfaces in OPUS},
   	booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12)},
-  	year = {2012},
-  	month = {may},
-  	date = {23-25},
-  	address = {Istanbul, Turkey},
-  	editor = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},
+  	year      = {2012},
+  	month     = {may},
+  	date      = {23-25},
+  	address   = {Istanbul, Turkey},
+  	editor    = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},
   	publisher = {European Language Resources Association (ELRA)},
-  	isbn = {978-2-9517408-7-7},
-  	language = {english}
- }"""
+  	ISBN      = {978-2-9517408-7-7},
+  	language  = {English}
+ }
+ """
 download_links = [
     'http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz',
     'http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en-ta.txt.zip',
@@ -109,8 +111,7 @@ class EnTamParallelTextConfig(tfds.core.BuilderConfig):
     """
     self.language_pair = ("en", "ta")
     if 'opus' in download_link:
-      language_pair = download_link.split('/')[-1].split('.')[0].split('-')
-      language_pair = tuple(language_pair)
+      language_pair = tuple(download_link.split('/')[-1].split('.')[0].split('-'))
       typ_name = download_link.split('?f=')[1].split('/moses')[0].replace('/', '_')
       name = "%s_to_%s" % (language_pair[0], language_pair[1])
       name = typ_name+'_'+name
@@ -122,32 +123,12 @@ class EnTamParallelTextConfig(tfds.core.BuilderConfig):
       assert language_pair in _VALID_LANGUAGE_PAIRS, (
           "Config language pair (%s, "
           "%s) not supported") % language_pair
-      if 'GNOME' in download_link:
-        typ = 'GNOME'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
-        self.link = download_link
-      elif 'KDE4' in download_link:
-        typ = 'KDE4'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
-        self.link = download_link
-      elif 'Tatoeba' in download_link:
-        typ = 'Tatoeba'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
-        self.link = download_link
-      elif 'Ubuntu' in download_link:
-        typ = 'Ubuntu'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
-        self.link = download_link
-      elif 'OpenSubtitles' in download_link:
-        typ = 'OpenSubtitles'
-        self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
-        self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
-        self.link = download_link
-    elif 'ufal.mff.cuni.cz/~ramasamy' in download_link:
+      typ = download_link.split('?f=')[1].split('/')[0]
+      self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
+      self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
+      self.link = download_link
+      
+    else:
       name = "en_ta"
       self.citation = _CITATION['MTPIL']
       self.descrp = DESCRIPTION['MTPIL']
