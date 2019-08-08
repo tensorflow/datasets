@@ -34,7 +34,7 @@ class TitanicTest(tfds_test.DatasetBuilderTestCase):
 
 
 class TitanicS3Test(TitanicTest):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == '__main__':
