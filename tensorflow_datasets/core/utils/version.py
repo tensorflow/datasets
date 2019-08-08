@@ -20,17 +20,10 @@ from __future__ import division
 from __future__ import print_function
 
 import re
-import sys
 
 import enum
 import six
 
-# pylint: disable=g-import-not-at-top
-if sys.version_info[0] > 2:
-  import functools
-else:
-  import functools32 as functools
-# pylint: enable=g-import-not-at-top
 
 _VERSION_TMPL = (
     r"^(?P<major>{v})"
@@ -146,16 +139,3 @@ def _str_to_version(version_str, allow_wildcard=False):
   return tuple(
       v if v == "*" else int(v)
       for v in [res.group("major"), res.group("minor"), res.group("patch")])
-
-
-def drop_key_if_not_s3(generate_examples_fct):
-  """Wraps generator of (key, record) tuples. Drop key if not S3."""
-  @functools.wraps(generate_examples_fct)
-  def wrapper(self, *args, **kwargs):
-    if self.version.implements(Experiment.S3):
-      for key, record in generate_examples_fct(self, *args, **kwargs):
-        yield key, record
-    else:
-      for unused_key, record in generate_examples_fct(self, *args, **kwargs):
-        yield record
-  return wrapper
