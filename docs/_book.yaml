@@ -13,8 +13,7 @@ upper_tabs:
     other:
     - name: Datasets
       contents:
-        - title: Datasets
-          path: /datasets/datasets
+      - include: /datasets/catalog/_toc.yaml
     - name: Guide
       contents:
       - title: Overview
