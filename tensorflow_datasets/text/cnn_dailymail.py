@@ -255,12 +255,8 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, paths):
-    if self.version.implements(tfds.core.Experiment.S3):
-      for fname, ex in self._generate_examples(paths):
-        yield ' '.join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
-    else:
-      for ex in self._generate_examples(paths):
-        yield ' '.join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
+    for fname, ex in self._generate_examples(paths):
+      yield ' '.join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
 
   def _split_generators(self, dl_manager):
     dl_paths = dl_manager.download_and_extract(_DL_URLS)

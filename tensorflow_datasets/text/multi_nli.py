@@ -114,12 +114,8 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, filepath):
-    if self.version.implements(tfds.core.Experiment.S3):
-      for idx, ex in self._generate_examples(filepath):
-        yield " ".join([ex["premise"], ex["hypothesis"]])
-    else:
-      for ex in self._generate_examples(filepath):
-        yield " ".join([ex["premise"], ex["hypothesis"]])
+    for idx, ex in self._generate_examples(filepath):
+      yield " ".join([ex["premise"], ex["hypothesis"]])
 
   def _split_generators(self, dl_manager):
 

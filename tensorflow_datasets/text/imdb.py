@@ -121,14 +121,9 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, archive):
-    if self.version.implements(tfds.core.Experiment.S3):
-      for path, ex in self._generate_examples(
-        archive, os.path.join("aclImdb", "train")):
-        yield ex["text"]
-    else:
-      for ex in self._generate_examples(
-        archive, os.path.join("aclImdb", "train")):
-        yield ex["text"]
+    for path, ex in self._generate_examples(
+      archive, os.path.join("aclImdb", "train")):
+      yield ex["text"]
 
   def _split_generators(self, dl_manager):
     arch_path = dl_manager.download(_DOWNLOAD_URL)

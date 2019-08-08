@@ -148,12 +148,8 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, training_files):
-    if self.version.implements(tfds.core.Experiment.S3):
-      for idx, ex in self._generate_examples(training_files):
-        yield ex["text"]
-    else:
-      for ex in self._generate_examples(training_files):
-        yield ex["text"]
+    for idx, ex in self._generate_examples(training_files):
+      yield ex["text"]
 
   def _split_generators(self, dl_manager):
     lm1b_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
