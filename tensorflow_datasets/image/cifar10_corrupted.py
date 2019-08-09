@@ -136,11 +136,17 @@ def _make_builder_configs():
               name=corruption + '_' + str(severity),
               version=tfds.core.Version(
                   '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+              supported_versions=[
+                  tfds.core.Version('1.0.0'),
+              ],
               description='Corruption method: ' + corruption +
               ', severity level: ' + str(severity),
               corruption_type=corruption,
               severity=severity,
           ))
+    # Version history:
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.0.1: Initial version.
   return config_list
 
 
@@ -212,8 +218,8 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
     # Slice images corresponding to correct severity level
     images = images[(severity - 1) * num_images:severity * num_images]
 
-    for image, label in zip(images, labels):
-      yield {
+    for i, (image, label) in enumerate(zip(images, labels)):
+      yield i, {
           'image': image,
           'label': label,
       }
