@@ -55,8 +55,7 @@ _DESCRIPTION = """\
 databases with 68 landmarks, including AFW, LFPW, HELEN, IBUG and XM2VTS. With \
 300W, 300W-LP adopt the proposed face profiling to generate 61,225 samples \
 across large poses (1,786 from IBUG, 5,207 from AFW, 16,556 from LFPW and \
-37,676 from HELEN, XM2VTS is not used), which is further expanded
-to 122,450 samples with flipping.
+37,676 from HELEN, XM2VTS is not used).
 
 The dataset can be employed as the training set for the following computer \
 vision tasks: face attribute recognition and landmark (or facial part) \
@@ -76,7 +75,12 @@ class The300wLp(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(
                 shape=(450, 450, 3), encoding_format="jpeg"),
-            "landmarks": tfds.features.Tensor(shape=(68, 2), dtype=tf.float32),
+            "landmarks_origin": tfds.features.Tensor(shape=(68, 2),
+                                                     dtype=tf.float32),
+            "landmarks_2d": tfds.features.Tensor(shape=(68, 2),
+                                                 dtype=tf.float32),
+            "landmarks_3d": tfds.features.Tensor(shape=(68, 2),
+                                                 dtype=tf.float32),
             "roi": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
             "illum_params": tfds.features.Tensor(shape=(10,), dtype=tf.float32),
             "color_params": tfds.features.Tensor(shape=(7,), dtype=tf.float32),
@@ -105,13 +109,19 @@ class The300wLp(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, image_dir_path):
     """Yields examples."""
     image_files = tf.io.gfile.glob(
-        pattern=os.path.join(image_dir_path, "[!Code]*/[!_]*.jpg"))
+        pattern=os.path.join(image_dir_path, "[!Code]*[!_Flip]/[!_]*.jpg"))
     label_files = list(map(lambda s: s.replace("jpg", "mat"), image_files))
-    for image_file, label_file in zip(image_files, label_files):
+    landmark_files = map(lambda s: s.replace("300W_LP", "300W_LP/landmarks"),
+                         image_files)
+    landmark_files = list(map(lambda s: s.replace(".jpg", "_pts.mat"),
+                              landmark_files))
+    for image_file, label_file, landmark_file in zip(image_files,
+                                                     label_files,
+                                                     landmark_files):
       with tf.io.gfile.GFile(label_file, "rb") as f:
         mat = tfds.core.lazy_imports.scipy.io.loadmat(f)
-      pt2d = mat["pt2d"].T
-      pt2d = (pt2d / 450.0).astype(np.float32)
+      pt2d_origin = mat["pt2d"].T
+      pt2d_origin = (pt2d_origin / 450.0).astype(np.float32)
       roi = mat["roi"].reshape(4).astype(np.float32)
       illum_params = mat["Illum_Para"].reshape([-1]).astype(np.float32)
       color_params = mat["Color_Para"].reshape([-1]).astype(np.float32)
@@ -119,9 +129,15 @@ class The300wLp(tfds.core.GeneratorBasedBuilder):
       shape_params = mat["Shape_Para"].reshape([-1]).astype(np.float32)
       exp_params = mat["Exp_Para"].reshape([-1]).astype(np.float32)
       pose_params = mat["Pose_Para"].reshape([-1]).astype(np.float32)
+      with tf.io.gfile.GFile(landmark_file, "rb") as f:
+        ldm_mat = tfds.core.lazy_imports.scipy.io.loadmat(f)
+        pt2d = (ldm_mat["pts_2d"] / 450.0).astype(np.float32)
+        pt3d = (ldm_mat["pts_3d"] / 450.0).astype(np.float32)
       record = {
           "image": image_file,
-          "landmarks": pt2d,
+          "landmarks_origin": pt2d_origin,
+          "landmarks_2d": pt2d,
+          "landmarks_3d": pt3d,
           "roi": roi,
           "illum_params": illum_params,
           "color_params": color_params,
