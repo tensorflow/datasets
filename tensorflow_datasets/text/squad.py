@@ -76,7 +76,7 @@ class Squad(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-            tfds.core.Version("1.0.0"),
+              tfds.core.Version("1.0.0"),
           ],
           description="Plain text",
       ),

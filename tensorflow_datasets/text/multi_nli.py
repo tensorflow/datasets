@@ -70,11 +70,11 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
     # Version history:
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(MultiNLIConfig, self).__init__(
-      version=tfds.core.Version(
-        "0.0.2", experiments={tfds.core.Experiment.S3: False}),
-      supported_versions=[
-        tfds.core.Version("1.0.0"),
-      ], **kwargs)
+        version=tfds.core.Version(
+            "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+        ], **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 

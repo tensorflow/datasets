@@ -93,9 +93,9 @@ class CnnDailymailConfig(tfds.core.BuilderConfig):
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(CnnDailymailConfig, self).__init__(
         version=tfds.core.Version(
-          '0.0.2', experiments={tfds.core.Experiment.S3: False}),
+            '0.0.2', experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-          tfds.core.Version("1.0.0"),
+            tfds.core.Version("1.0.0"),
         ], **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -223,14 +223,14 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
           name='bytes',
           description=('Uses byte-level text encoding with '
                        '`tfds.features.text.ByteTextEncoder`'),
-        text_encoder_config=tfds.features.text.TextEncoderConfig(
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder=tfds.features.text.ByteTextEncoder()),
       ),
       CnnDailymailConfig(
           name='subwords32k',
           description=('Uses `tfds.features.text.SubwordTextEncoder` with '
                        '32k vocab size'),
-        text_encoder_config=tfds.features.text.TextEncoderConfig(
+          text_encoder_config=tfds.features.text.TextEncoderConfig(
               encoder_cls=tfds.features.text.SubwordTextEncoder,
               vocab_size=2**15),
       ),
@@ -297,4 +297,3 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
           _HIGHLIGHTS: highlights
       }
       yield fname, records
-

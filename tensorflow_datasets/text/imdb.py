@@ -122,7 +122,7 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
 
   def _vocab_text_gen(self, archive):
     for _, ex in self._generate_examples(
-      archive, os.path.join("aclImdb", "train")):
+        archive, os.path.join("aclImdb", "train")):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
