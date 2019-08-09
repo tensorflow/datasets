@@ -133,7 +133,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     # Determine the fake_examples directory.
     self.example_dir = os.path.join(
         os.path.dirname(__file__),
-        "test_data/fake_examples/%s" % self.builder.name)
+        "test_data", "fake_examples", self.builder.name)
     if self.EXAMPLE_DIR is not None:
       self.example_dir = self.EXAMPLE_DIR
 
