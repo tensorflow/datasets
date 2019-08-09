@@ -14,7 +14,7 @@ python -m tensorflow_datasets.scripts.generate_fake.examples \
   --file_path /Users/user1/Desktop/test.zip \
   --dataset_type dataset_type
 
-"""
+"""  # pylint: disable=pointless-string-statement
 
 FLAGS = flags.FLAGS
 
@@ -26,11 +26,11 @@ flags.DEFINE_enum('dataset_type', 'image', _DATASET_TYPE, 'Dataset type')
 
 
 def main(_):
-	print(FLAGS.dataset_name)
-	holder.Generator(dataset_name=FLAGS.dataset_name,
-									 dataset_path=FLAGS.file_path,
-									 dataset_type=FLAGS.dataset_type).generator()
+  print(FLAGS.dataset_name)
+  holder.Generator(dataset_name=FLAGS.dataset_name,
+                   dataset_path=FLAGS.file_path,
+                   dataset_type=FLAGS.dataset_type).generator()
 
 
 if __name__ == '__main__':
-	app.run(main)
+  app.run(main)

@@ -212,6 +212,7 @@ class _Downloader(object):
     session = requests.Session()
     session.proxies = proxies
     session.verify = ca_verify['requests']
+    headers = {}
     if _DRIVE_URL.match(url):
       url = self._get_drive_url(url, session)
     use_urllib = url.startswith('ftp')
@@ -228,7 +229,7 @@ class _Downloader(object):
       else:
         response = urllib.request.urlopen(request, context=ca_verify['urllib'])
     else:
-      response = session.get(url, stream=True)
+      response = session.get(url, headers=headers, stream=True)
       if response.status_code != 200:
         raise DownloadError('Failed to get url %s. HTTP code: %d.' %
                             (url, response.status_code))
@@ -240,14 +241,19 @@ class _Downloader(object):
     unit_mb = units.MiB
     self._pbar_dl_size.update_total(
         int(response.headers.get('Content-length', 0)) // unit_mb)
-    with tf.io.gfile.GFile(path, 'wb') as file_:
+    print("path = ", path)
+    with tf.io.gfile.GFile(path, 'ab') as file_:
+      pos = file_.tell()
       checksum = self._checksumer()
+      if pos:
+        headers['Range'] = f'bytes={pos}-'
+
       if use_urllib:
         iterator = iter(lambda: response.read(io.DEFAULT_BUFFER_SIZE), b'')
       else:
         iterator = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
 
-      for block in iterator:
+      for nerde, block in enumerate(iterator):
         size += len(block)
 
         # Update the progress bar
