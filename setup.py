@@ -132,6 +132,7 @@ DATASET_EXTRAS = {
     # sklearn version required to avoid conflict with librosa from
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     'nsynth': ['crepe>=0.0.9', 'librosa', 'scikit-learn==0.20.3'],
+    'nyu_depth_v2': ['Pillow'],
     'pet_finder': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],

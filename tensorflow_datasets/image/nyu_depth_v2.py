@@ -6,6 +6,7 @@ from __future__ import print_function
 
 import csv
 import os
+import numpy as np
 import tensorflow as tf
 
 import tensorflow_datasets as tfds
@@ -41,10 +42,29 @@ Microsoft Kinect.
 _URL = 'https://s3-eu-west-1.amazonaws.com/densedepth/nyu_data.zip'
 
 
+def _generate_image_pairs(file_list):
+  with tf.io.gfile.GFile(file_list) as f:
+    return csv.reader(f, delimiter=',')
+
+
+def _load_image(path):
+  with tf.io.gfile.GFile(path, "rb") as fp:
+    image = tfds.core.lazy_imports.PIL_Image.open(fp)
+  return np.array(image)
+
+
+def _normalize_depth(image):
+  max_depth = 10000  # in mm
+  if image.dtype == np.uint8:
+    image = np.round(image / 255 * max_depth).astype(np.uint16)
+  image = image.astype(np.uint16)
+  return np.expand_dims(image, -1)
+
+
 class NyuDepthV2(tfds.core.GeneratorBasedBuilder):
   """NYU Depth V2 Dataset."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -52,7 +72,7 @@ class NyuDepthV2(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(480, 640, 3)),
-            'depth': tfds.features.Image(shape=(480, 640, 1)),
+            'depth': tfds.features.Image(shape=(480, 640, 1), dtype=tf.uint16),
         }),
         supervised_keys=('image', 'depth'),
         # Homepage of the dataset for documentation
@@ -82,15 +102,13 @@ class NyuDepthV2(tfds.core.GeneratorBasedBuilder):
         ),
     ]
 
-  def _generate_pairs(self, file_list):
-    with tf.io.gfile.GFile(file_list) as f:
-      return csv.reader(f, delimiter=',')
-
   def _generate_examples(self, extracted_path, file_list):
     """Yields examples."""
-    for (image, depth) in self._generate_pairs(file_list):
-      name, _ = os.path.splitext(image)
+    for (image_path, depth_path) in _generate_image_pairs(file_list):
+      name, _ = os.path.splitext(image_path)
+      depth = _load_image(os.path.join(extracted_path, depth_path))
+
       yield name, {
-          'image': os.path.join(extracted_path, image),
-          'depth': os.path.join(extracted_path, depth)
+          'image': os.path.join(extracted_path, image_path),
+          'depth': _normalize_depth(depth)
       }
