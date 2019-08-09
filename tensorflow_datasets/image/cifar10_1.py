@@ -52,7 +52,8 @@ The images in CIFAR-10.1 are a subset of the TinyImages dataset.
 There are currently two versions of the CIFAR-10.1 dataset: v4 and v6.
 """
 
-_DL_URL = "https://github.com/modestyachts/CIFAR-10.1/blob/master/datasets/cifar10.1_{}_data.npy?raw=true"
+_DL_URL_IMAGES = "https://github.com/modestyachts/CIFAR-10.1/blob/master/datasets/cifar10.1_{}_data.npy?raw=true"
+_DL_URL_LABELS = "https://github.com/modestyachts/CIFAR-10.1/blob/master/datasets/cifar10.1_{}_labels.npy?raw=true"
 
 _DATA_OPTIONS = ["v4", "v6"]
 
@@ -86,8 +87,7 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):
               "sections of our paper use this version of the dataset. It was built from the top 25 TinyImages "
               "keywords for each class, which led to a slight class imbalance. The largest difference is that ships "
               "make up only 8% of the test set instead of 10%. v4 contains 2,021 images."),
-          version=tfds.core.Version(
-              "1.0.0", experiments={tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version("1.0.0"),
           data="v4",
       ),
       Cifar10_1Config(
@@ -95,8 +95,7 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):
           description=(
               "It is derived from a slightly improved keyword allocation that is exactly class balanced. This version "
               "of the dataset corresponds to the results in Appendix D of our paper. v6 contains 2,000 images."),
-          version=tfds.core.Version(
-              "1.0.0", experiments={tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version("1.0.0"),
           data="v6",
       )
   ]
@@ -111,23 +110,23 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=("image", "label"),
         urls=["https://github.com/modestyachts/CIFAR-10.1"],
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     
-    image_url = _DL_URL.format(self.builder_config.name)
-    label_url = _DL_URL.format(self.builder_config.name)
-
+    image_url = _DL_URL_IMAGES.format(self.builder_config.name)
+    label_url = _DL_URL_LABELS.format(self.builder_config.name)
+    
     image_path, label_path = dl_manager.download([
         image_url,
         label_url,
     ])
-
+    
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={
                 "image_path": image_path,
                 "label_path": label_path,
@@ -142,7 +141,4 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):
           "image": image,
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield i, record
-      else:
-        yield record
+      yield i, record
