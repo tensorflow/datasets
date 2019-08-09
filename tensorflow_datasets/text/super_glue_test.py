@@ -40,6 +40,10 @@ class SuperGlueCbTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SuperGlueCbS3Test(SuperGlueCbTest):
+  VERSION = "experimental_latest"
+
+
 class SuperGlueCopaTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["copa"]
   DATASET_CLASS = super_glue.SuperGlue
@@ -49,6 +53,10 @@ class SuperGlueCopaTest(testing.DatasetBuilderTestCase):
       "validation": 2,
       "test": 1,
   }
+
+
+class SuperGlueCopaS3Test(SuperGlueCopaTest):
+  VERSION = "experimental_latest"
 
 
 class SuperGlueMultiRcTest(testing.DatasetBuilderTestCase):
@@ -62,6 +70,10 @@ class SuperGlueMultiRcTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SuperGlueMultiRcS3Test(SuperGlueMultiRcTest):
+  VERSION = "experimental_latest"
+
+
 class SuperGlueRteTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["rte"]
   DATASET_CLASS = super_glue.SuperGlue
@@ -71,6 +83,10 @@ class SuperGlueRteTest(testing.DatasetBuilderTestCase):
       "validation": 2,
       "test": 1,
   }
+
+
+class SuperGlueRteS3Test(SuperGlueRteTest):
+  VERSION = "experimental_latest"
 
 
 class SuperGlueWscTest(testing.DatasetBuilderTestCase):
@@ -84,6 +100,10 @@ class SuperGlueWscTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SuperGlueWscS3Test(SuperGlueWscTest):
+  VERSION = "experimental_latest"
+
+
 class SuperGlueWicTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["wic"]
   DATASET_CLASS = super_glue.SuperGlue
@@ -94,8 +114,10 @@ class SuperGlueWicTest(testing.DatasetBuilderTestCase):
       "test": 1,
   }
 
-class SuperGlueCbS3Test(SuperGlueCbTest):
+
+class SuperGlueWicS3Test(SuperGlueWicTest):
   VERSION = "experimental_latest"
+
 
 # TODO(adarob): Add MultiRC test.
 
