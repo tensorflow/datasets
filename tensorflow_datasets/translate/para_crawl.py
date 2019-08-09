@@ -119,7 +119,6 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
   """ParaCrawl machine translation dataset."""
 
   # Version history:
-  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       # The version below does not refer to the version of the released
@@ -129,7 +128,6 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-            tfds.core.Version("2.0.0"),
             tfds.core.Version("1.0.0"),
           ],
       )
@@ -153,7 +151,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _vocab_text_gen(self, files, language):
-    for ex in self._generate_examples(**files):
+    for _, ex in self._generate_examples(**files):
       yield ex[language]
 
   def _split_generators(self, dl_manager):

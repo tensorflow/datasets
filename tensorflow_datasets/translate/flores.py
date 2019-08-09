@@ -75,7 +75,6 @@ class FloresConfig(tfds.core.BuilderConfig):
         "Translation dataset from %s to %s, uses encoder %s.") % (
             language_pair[0], language_pair[1], encoder_name)
     # Version history:
-    # 2.0.0: S3 with new hashing function (different shuffle).
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(FloresConfig, self).__init__(
         name=name,
@@ -83,7 +82,6 @@ class FloresConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version(
             "0.0.3", experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-          tfds.core.Version("2.0.0"),
           tfds.core.Version("1.0.0"),
         ],
         **kwargs)
@@ -128,7 +126,7 @@ class Flores(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, files, language):
-    for ex in self._generate_examples(**files):
+    for _, ex in self._generate_examples(**files):
       yield ex[language]
 
   def _split_generators(self, dl_manager):

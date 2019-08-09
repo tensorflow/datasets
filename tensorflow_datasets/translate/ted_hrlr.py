@@ -103,7 +103,6 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk data set for comparing high and low resource languages."""
 
   # Version history:
-  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       TedHrlrConfig(
@@ -111,8 +110,7 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
         version=tfds.core.Version("0.0.1",
                                   experiments={
                                     tfds.core.Experiment.S3: False}),
-        supported_versions=[tfds.core.Version("2.0.0"),
-                            tfds.core.Version("1.0.0"),
+        supported_versions=[tfds.core.Version("1.0.0"),
                             ])
     for pair in _VALID_LANGUAGE_PAIRS
   ]
