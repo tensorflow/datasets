@@ -630,8 +630,6 @@ class MyDatasetTest(tfds_test.DatasetBuilderTestCase):
       "name1": "path/to/file1",  # Relative to fake_examples/my_dataset dir.
       "name2": "file2",
   }
-  # If you want to change fake_data path:
-  EXAMPLE_DIR = 'path/to/fakedata'
 
 
 if __name__ == "__main__":
