@@ -10,6 +10,8 @@
     [patch_camelyon](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#patch_camelyon)
 *   Image:
     [binarized_mnist](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#binarized_mnist)
+*   Image:
+    [the300w_lp](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#the300w_lp)
 
 ### Features
 
