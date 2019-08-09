@@ -82,11 +82,9 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.1.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-    tfds.core.Version("2.0.0"),
     tfds.core.Version("1.0.0")
   ]
   # Version history:
-  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):

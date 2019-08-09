@@ -48,7 +48,6 @@ _DATA_URL = 'https://nlp.stanford.edu/projects/snli/snli_1.0.zip'
 class Snli(tfds.core.GeneratorBasedBuilder):
   """The Stanford Natural Language Inference (SNLI) Corpus."""
   # Version history:
-  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
@@ -56,7 +55,6 @@ class Snli(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               '0.0.1', experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-            tfds.core.Version("2.0.0"),
             tfds.core.Version("1.0.0"),
           ],
           description='Plain text import of SNLI',

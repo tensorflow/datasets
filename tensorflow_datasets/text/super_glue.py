@@ -228,13 +228,11 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     # Version history:
-    # 2.0.0: S3 with new hashing function (different shuffle).
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(SuperGlueConfig, self).__init__(
         version=tfds.core.Version(
             "0.0.2", experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-          tfds.core.Version("2.0.0"),
           tfds.core.Version("1.0.0"),
         ],
         **kwargs)

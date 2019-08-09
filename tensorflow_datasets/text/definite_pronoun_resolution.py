@@ -50,7 +50,6 @@ _DATA_URL_PATTERN = 'http://www.hlt.utdallas.edu/~vince/data/emnlp12/{}.c.txt'
 class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
   """The Definite Pronoun Resolution Dataset."""
   # Version history:
-  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
@@ -58,7 +57,6 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               '0.0.1', experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-            tfds.core.Version("2.0.0"),
             tfds.core.Version("1.0.0"),
           ],
           description='Plain text import of the Definite Pronoun Resolution Dataset.',
