@@ -173,11 +173,9 @@ VALIDATION | 1,512
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'fr', u'de')`
 
 ## Citation
-
 ```
 @ONLINE {wmt19translate,
     author = "Wikimedia Foundation",

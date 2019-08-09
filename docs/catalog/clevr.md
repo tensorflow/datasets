@@ -24,7 +24,6 @@ reasoning each question requires.
 *   Size: `17.72 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -55,11 +54,9 @@ TEST       | 15,000
 *   [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @inproceedings{johnson2017clevr,
   title={{CLEVR}: A diagnostic dataset for compositional language and elementary visual reasoning},

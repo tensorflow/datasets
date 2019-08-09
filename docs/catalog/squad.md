@@ -53,11 +53,9 @@ VALIDATION | 10,570
 *   [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{2016arXiv160605250R,
        author = {{Rajpurkar}, Pranav and {Zhang}, Jian and {Lopyrev},

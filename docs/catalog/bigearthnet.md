@@ -129,7 +129,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls
@@ -137,11 +136,9 @@ None computed
 *   [http://bigearth.net](http://bigearth.net)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{Sumbul2019BigEarthNetAL,
   title={BigEarthNet: A Large-Scale Benchmark Archive For Remote Sensing Image Understanding},

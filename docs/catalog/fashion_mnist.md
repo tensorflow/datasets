@@ -22,7 +22,6 @@ set of 60,000 examples and a test set of 10,000 examples. Each example is a
 *   Size: `29.45 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -43,11 +42,9 @@ TEST  | 10,000
 *   [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/abs-1708-07747,
   author    = {Han Xiao and

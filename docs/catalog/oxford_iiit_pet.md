@@ -24,7 +24,6 @@ lighting. All images have an associated ground truth annotation of breed.
 *   Size: `801.24 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -47,11 +46,9 @@ TEST  | 3,669
 *   [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @InProceedings{parkhi12a,
   author       = "Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.",

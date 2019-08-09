@@ -20,7 +20,6 @@ The MNIST database of handwritten digits.
 *   Size: `11.06 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -41,11 +40,9 @@ TEST  | 10,000
 *   [https://storage.googleapis.com/cvdf-datasets/mnist/](https://storage.googleapis.com/cvdf-datasets/mnist/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{lecun2010mnist,
   title={MNIST handwritten digit database},

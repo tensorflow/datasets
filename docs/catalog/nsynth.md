@@ -37,7 +37,6 @@ overlapping between the train set and the valid/test sets.
 *   Size: `73.07 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),
@@ -78,7 +77,6 @@ TEST  | 4,096
 *   [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation

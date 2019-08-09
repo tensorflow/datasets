@@ -36,7 +36,6 @@ networks are presented in the original paper.
 *   Size: `2.62 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'class_label': Tensor(shape=(), dtype=tf.float32),
@@ -83,11 +82,9 @@ ALL   | 11,000,000
 *   [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{Baldi:2014kfa,
       author         = "Baldi, Pierre and Sadowski, Peter and Whiteson, Daniel",

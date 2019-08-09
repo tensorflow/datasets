@@ -22,7 +22,6 @@ cropped to 32x32.
 *   Size: `1.47 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -44,11 +43,9 @@ TEST  | 26,032
 *   [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{Netzer2011,
 author = {Netzer, Yuval and Wang, Tao and Coates, Adam and Bissacco, Alessandro and Wu, Bo and Ng, Andrew Y},

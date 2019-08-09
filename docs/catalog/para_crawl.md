@@ -309,11 +309,9 @@ ALL   | 3,476,729
 *   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'en', u'sv')`
 
 ## Citation
-
 ```
 @misc {paracrawl,
     title  = "ParaCrawl",

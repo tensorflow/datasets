@@ -52,7 +52,6 @@ TEST       | 10,000
 *   [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation

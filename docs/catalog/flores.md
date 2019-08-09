@@ -58,11 +58,9 @@ TEST       | 2,766
 *   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'si', u'en')`
 
 ## Citation
-
 ```
 @misc{guzmn2019new,
     title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},

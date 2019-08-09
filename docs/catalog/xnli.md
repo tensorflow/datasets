@@ -72,11 +72,9 @@ VALIDATION | 2,490
 *   [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @InProceedings{conneau2018xnli,
   author = "Conneau, Alexis

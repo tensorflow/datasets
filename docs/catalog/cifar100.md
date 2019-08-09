@@ -24,7 +24,6 @@ superclass to which it belongs).
 *   Size: `160.71 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'coarse_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=20),
@@ -46,11 +45,9 @@ TEST  | 10,000
 *   [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @TECHREPORT{Krizhevsky09learningmultiple,
     author = {Alex Krizhevsky},

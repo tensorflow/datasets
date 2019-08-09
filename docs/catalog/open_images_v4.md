@@ -148,11 +148,9 @@ VALIDATION | 41,620
 *   [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{OpenImages,
   author = {Alina Kuznetsova and

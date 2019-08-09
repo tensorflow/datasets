@@ -20,7 +20,6 @@ A large set of images of flowers
 *   Size: `218.21 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -40,11 +39,9 @@ ALL   | 3,670
 *   [http://download.tensorflow.org/example_images/flower_photos.tgz](http://download.tensorflow.org/example_images/flower_photos.tgz)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @ONLINE {tfflowers,
 author = "The TensorFlow Team",

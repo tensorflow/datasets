@@ -18,6 +18,10 @@ toc:
     title: binary_alpha_digits
   - path: /datasets/catalog/caltech101
     title: caltech101
+  - path: /datasets/catalog/caltech_birds2010
+    title: caltech_birds2010
+  - path: /datasets/catalog/caltech_birds2011
+    title: caltech_birds2011
   - path: /datasets/catalog/cats_vs_dogs
     title: cats_vs_dogs
   - path: /datasets/catalog/celeb_a
@@ -112,6 +116,8 @@ toc:
     title: tf_flowers
   - path: /datasets/catalog/uc_merced
     title: uc_merced
+  - path: /datasets/catalog/visual_domain_decathlon
+    title: visual_domain_decathlon
   - path: /datasets/catalog/voc2007
     title: voc2007
   title: Image
