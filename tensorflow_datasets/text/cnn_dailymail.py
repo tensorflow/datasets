@@ -253,7 +253,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, paths):
-    for fname, ex in self._generate_examples(paths):
+    for _, ex in self._generate_examples(paths):
       yield ' '.join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
 
   def _split_generators(self, dl_manager):

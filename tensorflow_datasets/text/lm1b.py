@@ -146,7 +146,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, training_files):
-    for idx, ex in self._generate_examples(training_files):
+    for _, ex in self._generate_examples(training_files):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
