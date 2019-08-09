@@ -1,0 +1,18 @@
+{
+  "images": [
+    {"id":1, "file_name": "data/imagenet12/1.jpg"},
+    {"id":2, "file_name": "data/imagenet12/2.jpg"},
+    {"id":3, "file_name": "data/imagenet12/3.jpg"}
+  ],
+  "annotations": [
+    {"id":1, "image_id": 1, "category_id": 2},
+    {"id":2, "image_id": 2, "category_id": 1},
+    {"id":3, "image_id": 3, "category_id": 3}
+  ],
+  "categories": [
+    {"id": 1, "name":"label1"},
+    {"id": 2, "name":"label2"},
+    {"id": 3, "name":"label3"},
+    {"id": 4, "name":"label4"}
+  ]
+}
