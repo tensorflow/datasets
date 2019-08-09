@@ -5,14 +5,17 @@
 
 # tfds.units.size_str
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py">View
+source</a>
+
 Returns a human readable size string.
 
 ``` python
 tfds.units.size_str(size_in_bytes)
 ```
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py>View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

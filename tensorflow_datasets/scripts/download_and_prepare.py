@@ -78,6 +78,9 @@ flags.DEFINE_string("extract_dir", None, "Where to extract files.")
 flags.DEFINE_string(
     "manual_dir", None,
     "Directory where dataset have manually been downloaded / extracted.")
+flags.DEFINE_string("checksums_dir", None,
+                    "For external datasets, specify the location of the "
+                    "dataset checksums.")
 default_compute_stats = tfds.download.ComputeStatsMode.AUTO
 flags.DEFINE_enum(
     "compute_stats",
@@ -156,6 +159,9 @@ def main(_):
   if FLAGS.disable_tqdm:
     logging.info("Disabling tqdm.")
     tfds.disable_progress_bar()
+
+  if FLAGS.checksums_dir:
+    tfds.download.add_checksums_dir(FLAGS.checksums_dir)
 
   datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
                           or tfds.list_builders())

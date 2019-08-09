@@ -48,8 +48,6 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
-from tensorflow_datasets.core import features as features_lib
-from tensorflow_datasets.core import lazy_imports
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
@@ -111,8 +109,12 @@ class DatasetInfo(object):
       features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
-      supervised_keys: `tuple`, Specifies the input feature and the label for
-        supervised learning, if applicable for the dataset.
+      supervised_keys: `tuple` of `(input_key, target_key)`, Specifies the
+        input feature and the label for supervised learning, if applicable for
+        the dataset. The keys correspond to the feature names to select in
+        `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
+        with `as_supervised=True`, the `tf.data.Dataset` object will yield
+        the (input, target) defined here.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
@@ -133,6 +135,8 @@ class DatasetInfo(object):
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             **redistribution_info) if redistribution_info else None)
     if urls:
+      if isinstance(urls, six.string_types):
+        urls = [urls]
       self._info_proto.location.urls[:] = urls
 
     if features:
@@ -408,60 +412,6 @@ class DatasetInfo(object):
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
       gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
-
-  def show_examples(self, ds, rows=3, cols=3, plot_scale=3):
-    """Returns a plot of some random (rows*columns) images from the image-dataset.
-    
-    This function will only work for image datasets which only have 
-    a single main image.
-    
-    Args:
-      ds: `tf.data.Dataset`. Does not accept batch data.
-      rows: `int`, number of rows of the display grid.
-      cols: `int`, number of columns of the display grid.
-      plot_scale: `float`, controls the plot size of the images. Keep this
-        value around 3 to get a good plot. High and low values may cause
-        the labels to get overlapped.
-    
-    Typical `show_examples` usage for image datasets:
-    
-    ```python
-    mnist_ds, mnist_info = tfds.load('mnist', split=tfds.Split.TRAIN, with_info=True)
-    fig = mnist_info.show_examples(mnist_ds)
-    ```        
-    """
-    image_keys = [
-        k for k, feature in self.features.items()
-        if isinstance(feature, features_lib.Image)
-    ]
-    # TODO: Autodetect ClassLabel if present recursively.
-    label_keys = [
-        k for k, feature in self.features.items()
-        if isinstance(feature, features_lib.ClassLabel)
-    ]
-    
-    if len(image_keys) != 1:
-      raise ValueError(
-          'Visualisation not supported for dataset `{}`. Was not able to auto-infer '
-          'image and label keys.'.format(self.name))
-    plt = lazy_imports.lazy_imports.matplotlib.pyplot
-    image_key = image_keys[0]
-    num_examples = rows * cols
-    examples = list(dataset_utils.as_numpy(ds.take(num_examples)))
-    fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
-    fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
-    for i, ex in enumerate(examples):
-      fig.add_subplot(rows, cols, i+1)
-      image = ex[image_key]
-      if image.shape[2] == 1:
-        image = image.reshape(image.shape[:2])
-      plt.imshow(image, cmap='gray')
-      if len(label_keys) == 1:
-        label_key = label_keys[0]
-        label = ex[label_key]
-        plt.xlabel("label: int={}, str={}".format(label, self.features[label_key].int2str(label)))
-    plt.show()    
-    return fig
 
   def __repr__(self):
     splits_pprint = _indent("\n".join(["{"] + [

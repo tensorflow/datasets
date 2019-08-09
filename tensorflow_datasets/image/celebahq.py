@@ -135,7 +135,4 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, archive):
     for fname, fobj in archive:
       record = {"image": fobj, "image/filename": fname}
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

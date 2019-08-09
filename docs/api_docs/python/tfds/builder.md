@@ -5,6 +5,12 @@
 
 # tfds.builder
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
+source</a>
+
 Fetches a
 <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
 by string name.
@@ -15,9 +21,6 @@ tfds.builder(
     **builder_init_kwargs
 )
 ```
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py>View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

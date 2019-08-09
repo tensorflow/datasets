@@ -17,7 +17,10 @@
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.bigearthnet import Bigearthnet
+from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
+from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
 from tensorflow_datasets.image.caltech import Caltech101
+from tensorflow_datasets.image.caltech_birds import CaltechBirds2010
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.cbis_ddsm import CuratedBreastImagingDDSM
 from tensorflow_datasets.image.celeba import CelebA
@@ -38,6 +41,7 @@ from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
 from tensorflow_datasets.image.eurosat import Eurosat
 from tensorflow_datasets.image.flowers import TFFlowers
+from tensorflow_datasets.image.food101 import Food101
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
@@ -61,7 +65,9 @@ from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.smallnorb import Smallnorb
 from tensorflow_datasets.image.so2sat import So2sat
+from tensorflow_datasets.image.stanford_dogs import StanfordDogs
 from tensorflow_datasets.image.sun import Sun397
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.uc_merced import UcMerced
+from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
 from tensorflow_datasets.image.voc import Voc2007

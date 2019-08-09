@@ -10,12 +10,15 @@
 
 # tfds.core.SplitBase
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
 ## Class `SplitBase`
 
 Abstract base class for Split compositionality.
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -50,7 +53,7 @@ There are three parts to the composition:
 
 <h3 id="__add__"><code>__add__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -61,7 +64,7 @@ Merging: tfds.Split.TRAIN + tfds.Split.TEST.
 
 <h3 id="__eq__"><code>__eq__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -72,7 +75,7 @@ Equality: tfds.Split.TRAIN == 'train'.
 
 <h3 id="__ne__"><code>__ne__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ```python
@@ -83,7 +86,7 @@ InEquality: tfds.Split.TRAIN != 'test'.
 
 <h3 id="get_read_instruction"><code>get_read_instruction</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python
@@ -103,7 +106,7 @@ Parse the descriptor tree and compile all read instructions together.
 
 <h3 id="subsplit"><code>subsplit</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
 ``` python

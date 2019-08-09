@@ -19,7 +19,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import shutil
 import subprocess
 import tempfile
 
@@ -133,8 +132,9 @@ class Video(sequence_feature.Sequence):
                                             stdout_data,
                                             stderr_data))
       frames = []
-      for image_path in sorted(os.listdir(ffmpeg_dir)):
-        with open(os.path.join(ffmpeg_dir, image_path), 'rb') as frame_file:
+      for image_name in sorted(tf.io.gfile.listdir(ffmpeg_dir)):
+        image_path = os.path.join(ffmpeg_dir, image_name)
+        with tf.io.gfile.GFile(image_path, 'rb') as frame_file:
           frames.append(six.BytesIO(frame_file.read()))
       return frames
     except OSError as exception:
@@ -143,7 +143,7 @@ class Video(sequence_feature.Sequence):
           'the instrutions at https://ffmpeg.org/. '
           'Original exception: {}'.format(exception))
     finally:
-      shutil.rmtree(ffmpeg_dir)
+      tf.io.gfile.rmtree(ffmpeg_dir)
 
   def encode_example(self, video_or_path_or_fobj):
     """Converts the given image into a dict convertible to tf example."""

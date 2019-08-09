@@ -108,7 +108,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
       filepath = os.path.join(filedir, filename)
 
       # For each video inside the file
-      for i, example_str in enumerate(
+      for video_id, example_str in enumerate(
           tf.compat.v1.io.tf_record_iterator(filepath)):
         example = tf.train.SequenceExample.FromString(example_str)
 
@@ -146,7 +146,4 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         #     {'action': [...], 'image_main': img_frame1, ...},  # Frame 1
         #     ...,
         # ]
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield "%s_%s" % (filepath, i), all_frames
-        else:
-          yield all_frames
+        yield "%s_%s" % (filepath, video_id), all_frames

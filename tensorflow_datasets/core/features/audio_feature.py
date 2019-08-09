@@ -23,8 +23,8 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.features import feature
-from tensorflow_datasets.core.lazy_imports import lazy_imports
 
 
 class Audio(feature.Tensor):
@@ -53,7 +53,7 @@ class Audio(feature.Tensor):
 
     with tf.io.gfile.GFile(audio, "rb") as audio_f:
       file_format = self._file_format or audio.split(".")[-1]
-      audio_segment = lazy_imports.pydub.AudioSegment.from_file(
+      audio_segment = lazy_imports_lib.lazy_imports.pydub.AudioSegment.from_file(
           audio_f, format=file_format)
       return super(Audio, self).encode_example(
           np.array(audio_segment.get_array_of_samples()).astype(np.int64))

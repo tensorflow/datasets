@@ -26,7 +26,7 @@ from absl import flags
 import numpy as np
 import tensorflow as tf
 
-from tensorflow_datasets.core import lazy_imports
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.image import colorectal_histology
 
@@ -60,7 +60,7 @@ def make_images(num_images, size):
 
 
 def write_image(filename, data):
-  lazy_imports.PIL_Image.fromarray(data).save(
+  lazy_imports_lib.lazy_imports.PIL_Image.fromarray(data).save(
       filename, compression=FLAGS.compression)
 
 

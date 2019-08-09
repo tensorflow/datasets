@@ -15,18 +15,21 @@
 
 # tfds.core.Version
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
+
 ## Class `Version`
 
 Dataset version MAJOR.MINOR.PATCH.
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python
@@ -44,7 +47,7 @@ __init__(
 
 <h3 id="__eq__"><code>__eq__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python
@@ -53,7 +56,7 @@ __eq__(other)
 
 <h3 id="__ge__"><code>__ge__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python
@@ -62,7 +65,7 @@ __ge__(other)
 
 <h3 id="__gt__"><code>__gt__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python
@@ -71,7 +74,7 @@ __gt__(other)
 
 <h3 id="__le__"><code>__le__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python
@@ -80,7 +83,7 @@ __le__(other)
 
 <h3 id="__lt__"><code>__lt__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python
@@ -89,7 +92,7 @@ __lt__(other)
 
 <h3 id="__ne__"><code>__ne__</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python
@@ -98,7 +101,7 @@ __ne__(other)
 
 <h3 id="implements"><code>implements</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python
@@ -109,7 +112,7 @@ Returns True if version implements given experiment.
 
 <h3 id="match"><code>match</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
 ```python

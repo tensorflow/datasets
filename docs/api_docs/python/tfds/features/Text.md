@@ -20,21 +20,24 @@
 
 # tfds.features.Text
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
+source</a>
+
 ## Class `Text`
 
 `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
-source</a>
-
 <!-- Placeholder for "Used in" -->
 
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
 source</a>
 
 ``` python
@@ -74,7 +77,7 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python
@@ -100,7 +103,7 @@ graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
 source</a>
 
 ``` python
@@ -109,7 +112,7 @@ encode_example(example_data)
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python
@@ -149,7 +152,7 @@ If not defined, the retuned values are automatically deduced from the
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
 source</a>
 
 ``` python
@@ -160,7 +163,7 @@ See base class for details.
 
 <h3 id="ints2str"><code>ints2str</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
 source</a>
 
 ``` python
@@ -171,7 +174,7 @@ Conversion list[int] => decoded string.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
 source</a>
 
 ``` python
@@ -183,7 +186,7 @@ load_metadata(
 
 <h3 id="maybe_build_from_corpus"><code>maybe_build_from_corpus</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
 source</a>
 
 ``` python
@@ -208,7 +211,7 @@ If `self.encoder` is `None` and `self._encoder_cls` is of type
 
 <h3 id="maybe_set_encoder"><code>maybe_set_encoder</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
 source</a>
 
 ``` python
@@ -219,7 +222,7 @@ Set encoder, but no-op if encoder is already set.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
 source</a>
 
 ``` python
@@ -231,7 +234,7 @@ save_metadata(
 
 <h3 id="str2ints"><code>str2ints</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
 source</a>
 
 ``` python

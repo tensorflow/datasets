@@ -12,12 +12,15 @@
 
 # tfds.features.text.Tokenizer
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ## Class `Tokenizer`
 
 Splits a string into tokens, and joins them back.
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
-source</a>
 
 ### Used in the tutorials:
 
@@ -25,7 +28,7 @@ source</a>
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
 source</a>
 
 ``` python
@@ -60,7 +63,7 @@ i.e. `s == t.join(t.tokenize(s))`.
 
 <h3 id="join"><code>join</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
 source</a>
 
 ``` python
@@ -71,7 +74,7 @@ Joins tokens into a string.
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
 source</a>
 
 ``` python
@@ -84,7 +87,7 @@ load_from_file(
 
 <h3 id="save_to_file"><code>save_to_file</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
 source</a>
 
 ``` python
@@ -93,7 +96,7 @@ save_to_file(filename_prefix)
 
 <h3 id="tokenize"><code>tokenize</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
 source</a>
 
 ``` python

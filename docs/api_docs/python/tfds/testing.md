@@ -5,10 +5,13 @@
 
 # Module: tfds.testing
 
-Testing utilities.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/__init__.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/__init__.py">View
 source</a>
+
+Testing utilities.
 
 <!-- Placeholder for "Used in" -->
 

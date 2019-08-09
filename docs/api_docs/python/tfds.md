@@ -5,11 +5,14 @@
 
 # Module: tfds
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py">View
+source</a>
+
 `tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a
 collection of datasets ready-to-use with TensorFlow.
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py>View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -71,3 +74,5 @@ available on the GCS bucket gs://tfds-data/datasets.
 
 [`load(...)`](./tfds/load.md): Loads the named dataset into a `tf.data.Dataset`.
 
+[`show_examples(...)`](./tfds/show_examples.md): Visualize images (and labels)
+from an image classification dataset.

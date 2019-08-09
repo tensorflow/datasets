@@ -32,6 +32,7 @@ already added.
     *   [5. Check your code style](#5-check-your-code-style)
     *   [6. Add release notes](#6-add-release-notes)
     *   [7. Send for review!](#7-send-for-review)
+*   [Define the dataset outside TFDS](#define-the-dataset-outside-tfds)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 *   [Testing `MyDataset`](#testing-mydataset)
 
@@ -310,16 +311,16 @@ additional dependencies only as needed, use `tfds.core.lazy_imports`.
 
 To use `lazy_imports`:
 
-* Add an entry for your dataset into `DATASET_EXTRAS` in
-  [`setup.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/setup.py).
-  This makes it so that users can do, for example,
-  `pip install 'tensorflow-datasets[svhn]'` to install the extra dependencies.
-* Add an entry for your import to
-  [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports.py)
-  and to the
-  [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_test.py).
-* Use `tfds.core.lazy_imports` to access the dependency (for example,
-  `tfds.core.lazy_imports.scipy`) in your `DatasetBuilder`.
+*   Add an entry for your dataset into `DATASET_EXTRAS` in
+    [`setup.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/setup.py).
+    This makes it so that users can do, for example, `pip install
+    'tensorflow-datasets[svhn]'` to install the extra dependencies.
+*   Add an entry for your import to
+    [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py)
+    and to the
+    [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib_test.py).
+*   Use `tfds.core.lazy_imports` to access the dependency (for example,
+    `tfds.core.lazy_imports.scipy`) in your `DatasetBuilder`.
 
 
 ### Corrupted data
@@ -542,7 +543,7 @@ except TensorFlow uses 2 spaces instead of 4. Please conform to the
 [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
 
 Most importantly, use
-[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/blob/master/oss_scripts/lint.sh)
+[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/oss_scripts/lint.sh)
 to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 
@@ -557,13 +558,45 @@ for more information.
 ### 6. Add release notes
 
 Add the dataset to the
-[release notes](https://github.com/tensorflow/datasets/blob/master/docs/release_notes.md).
+[release notes](https://github.com/tensorflow/datasets/tree/master/docs/release_notes.md).
 The release note will be published for the next release.
 
 ### 7. Send for review!
 
 Send the pull request for review.
 
+
+## Define the dataset outside TFDS.
+
+You can use the `tfds` API to define your own custom datasets outside of the
+`tfds` repository. The instructions are mainly the same as above, with some
+minor adjustments, documented below.
+
+### 1. Adjust the checksums directory
+
+For security and reproducibility when redistributing a dataset, `tfds` contains
+URL checksums for all dataset downloads in
+[`tensorflow_datasets/url_checksums`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/url_checksums).
+
+You can register an external checksums directory by calling
+`tfds.download.add_checksums_dir('/path/to/checksums_dir')` in your code, so
+that users of your dataset automatically use your checksums.
+
+You can create this checksums file with the
+`tensorflow_datasets.scripts.download_and_prepare` script by passing the flags
+`--register_checksums --checksums_dir=/path/to/checksums_dir`.
+
+### 2. Adjust the fake example direcory
+
+For testing, instead of using the default
+[fake example directory](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples)
+you can define your own by setting the `EXAMPLE_DIR` property of
+`tfds.testing.DatasetBuilderTestCase`:
+
+```
+class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
+  EXAMPLE_DIR = 'path/to/fakedata'`
+```
 
 ## Large datasets and distributed generation
 

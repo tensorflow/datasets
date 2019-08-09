@@ -9,12 +9,15 @@
 
 # tfds.features.BBox
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
+source</a>
+
 ## Class `BBox`
 
 BBox(ymin, xmin, ymax, xmax)
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py>View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

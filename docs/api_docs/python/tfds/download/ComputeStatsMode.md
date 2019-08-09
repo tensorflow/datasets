@@ -8,12 +8,15 @@
 
 # tfds.download.ComputeStatsMode
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py">View
+source</a>
+
 ## Class `ComputeStatsMode`
 
 Mode to decide if dynamic dataset info fields should be computed or not.
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py>View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 

@@ -11,14 +11,15 @@ upper_tabs:
   lower_tabs:
     # Subsite tabs
     other:
-    - name: Datasets
+    - name: Catalog
       contents:
-        - title: Datasets
-          path: /datasets/datasets
+      - include: /datasets/catalog/_toc.yaml
     - name: Guide
       contents:
       - title: Overview
         path: /datasets/overview
+      - title: Versioning
+        path: /datasets/datasets_versioning
       - title: Splits
         path: /datasets/splits
       - title: Add a dataset

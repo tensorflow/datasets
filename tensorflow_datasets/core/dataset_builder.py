@@ -34,7 +34,7 @@ from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_format_adapter
-from tensorflow_datasets.core import lazy_imports
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
@@ -949,7 +949,9 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     )
 
   def _prepare_split_legacy(self, generator, split_info):
-    # TODO(pierrot): delete once S3 has been fully rolled-out.
+    # TODO(pierrot): delete function once S3 has been fully rolled-out.
+    # For builders having both S3 and non S3 versions: drop key if any yielded.
+    generator = (ex[1] if isinstance(ex, tuple) else ex for ex in generator)
     generator = (self.info.features.encode_example(ex) for ex in generator)
     output_files = self._build_split_filenames(split_info)
     self._file_format_adapter.write_from_generator(generator, output_files)
@@ -1018,7 +1020,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
 
   def _download_and_prepare(self, dl_manager, download_config):
     # Create the Beam pipeline and forward it to _prepare_split
-    beam = lazy_imports.lazy_imports.apache_beam
+    beam = lazy_imports_lib.lazy_imports.apache_beam
 
     if not download_config.beam_runner and not download_config.beam_options:
       raise ValueError(
@@ -1051,7 +1053,7 @@ class BeamBasedBuilder(FileAdapterBuilder):
     self.info.update_splits_if_different(split_dict)
 
   def _prepare_split(self, split_generator, pipeline):
-    beam = lazy_imports.lazy_imports.apache_beam
+    beam = lazy_imports_lib.lazy_imports.apache_beam
 
     if not tf.io.gfile.exists(self._data_dir):
       tf.io.gfile.makedirs(self._data_dir)

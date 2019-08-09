@@ -9,12 +9,15 @@
 
 # tfds.decode.Decoder
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
+source</a>
+
 ## Class `Decoder`
 
 Base decoder object.
-
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
-source</a>
 
 <!-- Placeholder for "Used in" -->
 
@@ -40,7 +43,7 @@ property. This enables compatibility with
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
 ```python
@@ -57,7 +60,7 @@ Returns the `dtype` after decoding.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
 ```python
@@ -77,7 +80,7 @@ Decode the example feature field (eg: image).
 
 <h3 id="setup"><code>setup</code></h3>
 
-<a target="_blank" href=https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py>View
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
 ```python

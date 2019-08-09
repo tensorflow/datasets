@@ -140,7 +140,4 @@ class PetFinder(tfds.core.GeneratorBasedBuilder):
           "attributes": attr_dict[_INT_FEATS].to_dict("records")[0],
           "label": attr_dict["AdoptionSpeed"].values[0]
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield image, record
-      else:
-        yield record
+      yield image, record

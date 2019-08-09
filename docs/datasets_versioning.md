@@ -82,7 +82,7 @@ use. For example:
 
 ```py
 tfds.load('imagenet2012:2.0.1')
-tfds.builder('imagenet2012:2.0.1'')
+tfds.builder('imagenet2012:2.0.1')
 
 tfds.load('imagenet2012:2.0.0')  # Error: unsupported version.
 

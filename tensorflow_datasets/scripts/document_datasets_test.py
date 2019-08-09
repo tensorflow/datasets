@@ -43,10 +43,11 @@ class DocumentDatasetsTest(testing.TestCase):
   def test_schema_org(self):
     schema_str = schema_org(self.builder)
     self.assertIn("http://schema.org/Dataset", schema_str)
-    self.assertIn('<meta itemprop="url" '
-                  'content="https://www.tensorflow.org/'
-                  'datasets/datasets#%s" />' % self.builder.name,
-                  schema_str)
+    self.assertIn(
+        '<meta itemprop="url" '
+        'content="https://www.tensorflow.org'
+        '/datasets/catalog/%s" />' % self.builder.name, schema_str)
+
 
 if __name__ == "__main__":
   testing.test_main()

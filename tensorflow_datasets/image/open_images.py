@@ -304,10 +304,7 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
             'objects_trainable': image_objects_trainable,
             'bobjects': image_bboxes,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield fname, record
-        else:
-          yield record
+        yield fname, record
 
 
 def _resize_image_if_necessary(image_fobj, target_pixels=None):

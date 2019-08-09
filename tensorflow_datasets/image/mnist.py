@@ -170,10 +170,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     # Using index as key since data is always loaded in same order.
     for index, (image, label) in enumerate(data):
       record = {"image": image, "label": label}
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield index, record
-      else:
-        yield record
+      yield index, record
 
 
 class FashionMNIST(MNIST):
@@ -329,7 +326,7 @@ class EMNIST(MNIST):
                     num_classes=self.builder_config.class_number),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"],
+        urls=["https://www.nist.gov/node/1298471/emnist-dataset"],
         citation=_EMNIST_CITATION,
     )
 
