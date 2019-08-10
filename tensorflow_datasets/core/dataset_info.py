@@ -135,6 +135,8 @@ class DatasetInfo(object):
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             **redistribution_info) if redistribution_info else None)
     if urls:
+      if isinstance(urls, six.string_types):
+        urls = [urls]
       self._info_proto.location.urls[:] = urls
 
     if features:

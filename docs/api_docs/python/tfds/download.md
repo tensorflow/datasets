@@ -35,5 +35,8 @@ method to use to pre-process a downloaded file.
 
 ## Functions
 
+[`add_checksums_dir(...)`](../tfds/download/add_checksums_dir.md): Registers a
+new checksums dir.
+
 [`iter_archive(...)`](../tfds/download/iter_archive.md): Yields (path_in_archive, f_obj) for archive at path using <a href="../tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>.
 

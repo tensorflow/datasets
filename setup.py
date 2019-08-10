@@ -85,6 +85,7 @@ DATASET_FILES = [
     'image/cbis_ddsm_mass_shapes.txt',
     'image/cbis_ddsm_patch_labels.txt',
     'image/dtd_key_attributes.txt',
+    'image/food-101_classes.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/open_images_classes_all.txt',
@@ -92,6 +93,9 @@ DATASET_FILES = [
     'image/open_images_classes_trainable.txt',
     'image/quickdraw_labels.txt',
     'image/sun397_labels.txt',
+    'image/sun397_tfds_te.txt',
+    'image/sun397_tfds_tr.txt',
+    'image/sun397_tfds_va.txt',
     'url_checksums/*',
     'video/ucf101_labels.txt',
 ]
@@ -123,6 +127,7 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
+    'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=1.14.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.14.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,

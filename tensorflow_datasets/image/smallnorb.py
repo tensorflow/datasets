@@ -145,10 +145,7 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
           "label_azimuth": info_vec[2],
           "label_lighting": info_vec[3],
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield i, record
-      else:
-        yield record
+      yield i, record
 
 
 def _load_chunk(dat_path, cat_path, info_path):

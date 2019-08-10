@@ -146,7 +146,4 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
           "image": os.path.join(imgs_path, name),
           "label": labels
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield name, record
-      else:
-        yield record
+      yield name, record

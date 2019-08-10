@@ -126,7 +126,4 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
           "file_name": fname,
           "objects": [{attr: obj[attr] for attr in attrs} for obj in objects]  # pylint: disable=g-complex-comprehension
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

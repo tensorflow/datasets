@@ -89,6 +89,12 @@ class Nsynth(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0")
+  ]
+  # Version history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 1.0.0: Initial version.
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -141,9 +147,9 @@ class Nsynth(tfds.core.GeneratorBasedBuilder):
     for example_str in reader:
       example = tf.train.Example.FromString(example_str)
       features = example.features.feature
-      yield {
-          "id":
-              features["note_str"].bytes_list.value[0],
+      key = features["note_str"].bytes_list.value[0]
+      yield key, {
+          "id": key,
           "audio":
               np.array(features["audio"].float_list.value, dtype=np.float32),
           "pitch":
