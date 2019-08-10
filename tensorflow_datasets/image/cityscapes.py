@@ -50,12 +50,11 @@ class CityscapesConfig(tfds.core.BuilderConfig):
     super().__init__(**kwargs)
     self.fine_grain = fine_grain
 
-    # Setup zip file and root names
-    label_zip = 'gtFine_trainvaltest.zip' if fine_grain else 'gtCoarse.zip'
-    label_root = 'gtFine' if fine_grain else 'gtCoarse'
+    # Setup zip and root dir names
     self.zip_root = {
       'images': ('leftImg8bit_trainvaltest.zip', 'leftImg8bit'),
-      'labels': (label_zip, label_root),
+      'labels': ('gtFine_trainvaltest.zip', 'gtFine') if fine_grain else
+                ('gtCoarse.zip', 'gtCoarse'),
     }
 
     # Add coarse grain split
@@ -70,7 +69,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
 
   BUILDER_CONFIGS = [
       CityscapesConfig(
-          name='fine', # TODO can this can be made default
+          name='fine',
           description='Cityscapes subset with fine grain labels.',
           version="0.1.0",
           fine_grain=True,
@@ -109,10 +108,10 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
       msg = 'You must download the dataset files manually and place them in: '
       msg += ', '.join(paths.values())
       raise AssertionError(msg)
-    
+
     for split, (_, zip_root) in self.builder_config.zip_root.items():
       paths[split] = os.path.join(dl_manager.extract(paths[split]), zip_root)
-    
+
     ''' num_shards calculations:
     - instance size = image + label = 1024 * 2048 * 3 + 1024 * 2048 * 1 bytes = 8MB
     - max shard size = 4GB
@@ -175,11 +174,12 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
         label_path = os.path.join(
             city_labels_path, f'{image_id}_{self.builder_config.label_suffix}.png')
 
-        yield {
+        features = {
             'image': image_path,
             'label': label_path,
             'image_id': image_id
         }
+        yield image_id, features
 
 # Helper functions
 
