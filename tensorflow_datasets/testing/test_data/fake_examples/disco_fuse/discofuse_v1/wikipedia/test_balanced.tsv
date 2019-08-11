@@ -1,0 +1,4 @@
+coherent_first_sentence	coherent_second_sentence	incoherent_first_sentence	incoherent_second_sentence	discourse_type	connective_string	has_coref_type_pronoun	has_coref_type_nominal
+massa enim nec	elementum curabitur vitae	iaculis at erat	sem fringilla ut	SINGLE_RELATIVE	but	0.0	0.0
+Lorem ipsum dolor	elementum curabitur vitae	tincidunt augue interdum	aliquam ultrices sagittis	SINGLE_RELATIVE	and	1.0	1.0
+Lorem ipsum dolor	elementum curabitur vitae	tincidunt augue interdum	aliquam ultrices sagittis	SINGLE_CATAPHORA	and	0.0	0.0

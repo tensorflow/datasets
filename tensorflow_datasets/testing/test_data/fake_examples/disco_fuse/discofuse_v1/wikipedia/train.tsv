@@ -1,0 +1,10 @@
+coherent_first_sentence	coherent_second_sentence	incoherent_first_sentence	incoherent_second_sentence	discourse_type	connective_string	has_coref_type_pronoun	has_coref_type_nominal
+Lorem ipsum dolor	condimentum mattis pellentesque	tincidunt augue interdum	aliquam ultrices sagittis	PAIR_CONN	but	1.0	1.0
+Lorem ipsum dolor	condimentum mattis pellentesque	iaculis at erat	sem fringilla ut	SINGLE_VP_COORD	but	1.0	0.0
+massa enim nec	elementum curabitur vitae	tincidunt augue interdum	aliquam ultrices sagittis	SINGLE_CATAPHORA	and	0.0	0.0
+Lorem ipsum dolor	elementum curabitur vitae	iaculis at erat	sem fringilla ut	PAIR_CONN_ANAPHORA	but	1.0	1.0
+Lorem ipsum dolor	elementum curabitur vitae	iaculis at erat	aliquam ultrices sagittis	SINGLE_RELATIVE	and	1.0	0.0
+Lorem ipsum dolor	elementum curabitur vitae	iaculis at erat	sem fringilla ut	SINGLE_CATAPHORA	but	0.0	1.0
+massa enim nec	condimentum mattis pellentesque	iaculis at erat	aliquam ultrices sagittis	SINGLE_CONN_INNER	and	1.0	0.0
+Lorem ipsum dolor	elementum curabitur vitae	iaculis at erat	sem fringilla ut	SINGLE_CONN_INNER	and	1.0	0.0
+Lorem ipsum dolor	elementum curabitur vitae	iaculis at erat	aliquam ultrices sagittis	SINGLE_APPOSITION	but	1.0	1.0
