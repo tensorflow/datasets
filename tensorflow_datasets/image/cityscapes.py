@@ -71,34 +71,42 @@ class CityscapesConfig(tfds.core.BuilderConfig):
 
     # Setup required zips and their root dir names
     self.zip_root = {}
-    self.zip_root['images_left'] = ('leftImg8bit_trainvaltest.zip', 'leftImg8bit')
+    self.zip_root['images_left'] =\
+      ('leftImg8bit_trainvaltest.zip', 'leftImg8bit')
 
     if self.train_extra_split:
-      self.zip_root['images_left/extra'] = ('leftImg8bit_trainextra.zip', 'leftImg8bit')
+      self.zip_root['images_left/extra'] =\
+        ('leftImg8bit_trainextra.zip', 'leftImg8bit')
 
     if self.right_images:
-      self.zip_root['images_right'] = ('rightImg8bit_trainvaltest.zip', 'rightImg8bit')
+      self.zip_root['images_right'] =\
+        ('rightImg8bit_trainvaltest.zip', 'rightImg8bit')
       if self.train_extra_split:
-        self.zip_root['images_right/extra'] = ('rightImg8bit_trainextra.zip', 'rightImg8bit')
+        self.zip_root['images_right/extra'] =\
+          ('rightImg8bit_trainextra.zip', 'rightImg8bit')
 
     if self.segmentation_labels:
       if not self.train_extra_split:
-        self.zip_root['segmentation_labels'] = ('gtFine_trainvaltest.zip', 'gtFine')
+        self.zip_root['segmentation_labels'] =\
+          ('gtFine_trainvaltest.zip', 'gtFine')
         self.label_suffix = 'gtFine_labelIds'
       else:
         # The 'train extra' split only has coarse labels unlike train and val.
         # Therefore, for consistency across splits, we also enable coarse labels
         # using the train_extra_split flag.
         self.zip_root['segmentation_labels'] = ('gtCoarse.zip', 'gtCoarse')
-        self.zip_root['segmentation_labels/extra'] = ('gtCoarse.zip', 'gtCoarse')
+        self.zip_root['segmentation_labels/extra'] = \
+          ('gtCoarse.zip', 'gtCoarse')
         self.label_suffix = 'gtCoarse_labelIds'
-    
+
     if self.disparity_maps:
-      self.zip_root['disparity_maps'] = ('disparity_trainvaltest.zip', 'disparity')
+      self.zip_root['disparity_maps'] =\
+        ('disparity_trainvaltest.zip', 'disparity')
       if self.train_extra_split:
-        self.zip_root['disparity_maps/extra'] = ('disparity_trainextra.zip', 'disparity')
+        self.zip_root['disparity_maps/extra'] =\
+          ('disparity_trainextra.zip', 'disparity')
         self.ignored_ids.add('troisdorf_000000_000073') # No disparity for this file
-  
+
 
 class Cityscapes(tfds.core.GeneratorBasedBuilder):
   '''Base class for Cityscapes datasets'''
@@ -115,7 +123,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
       ),
       CityscapesConfig(
           name='semantic_segmentation_extra',
-          description='Cityscapes semantic segmentation dataset with train_extra split and coarse labels.',
+          description='Cityscapes semantic segmentation dataset with train_extra split and coarse labels.', # pylint: disable=line-too-long
           version="1.0.0",
           right_images=False,
           segmentation_labels=True,
@@ -123,39 +131,45 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
           train_extra_split=True,
       ),
       CityscapesConfig(
-        name='stereo_disparity',
-        description='Cityscapes stereo image and disparity maps dataset.',
-        version="1.0.0",
-        right_images=True,
-        segmentation_labels=False,
-        disparity_maps=True,
-        train_extra_split=False,
+          name='stereo_disparity',
+          description='Cityscapes stereo image and disparity maps dataset.',
+          version="1.0.0",
+          right_images=True,
+          segmentation_labels=False,
+          disparity_maps=True,
+          train_extra_split=False,
       ),
       CityscapesConfig(
-        name='stereo_disparity_extra',
-        description='Cityscapes stereo image and disparity maps dataset with train_extra split.',
-        version="1.0.0",
-        right_images=True,
-        segmentation_labels=False,
-        disparity_maps=True,
-        train_extra_split=True,
+          name='stereo_disparity_extra',
+          description='Cityscapes stereo image and disparity maps dataset with train_extra split.', # pylint: disable=line-too-long
+          version="1.0.0",
+          right_images=True,
+          segmentation_labels=False,
+          disparity_maps=True,
+          train_extra_split=True,
       ),
   ]
 
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    
     # Enable features as necessary
     features = {}
     features['image_id'] = tfds.features.Text()
-    features['image_left'] = tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png')
+    features['image_left'] =\
+      tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png')
+
     if self.builder_config.right_images:
-      features['image_right'] = tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png')
+      features['image_right'] =\
+        tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png')
+
     if self.builder_config.segmentation_labels:
-      features['segmentation_label'] = tfds.features.Image(shape=(1024, 2048, 1), encoding_format='png')
+      features['segmentation_label'] =\
+        tfds.features.Image(shape=(1024, 2048, 1), encoding_format='png')
+
     if self.builder_config.disparity_maps:
-      features['disparity_map'] = tfds.features.Image(shape=(1024, 2048, 1), encoding_format='png')
+      features['disparity_map'] =\
+        tfds.features.Image(shape=(1024, 2048, 1), encoding_format='png')
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -164,9 +178,8 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
         urls=['https://www.cityscapes-dataset.com', 'https://github.com/mcordts/cityscapesScripts'],
         citation=_CITATION,
     )
-  
-  def _split_generators(self, dl_manager):
 
+  def _split_generators(self, dl_manager):
     paths = {}
     for split, (zip_file, zip_root) in self.builder_config.zip_root.items():
       paths[split] = os.path.join(dl_manager.manual_dir, zip_file)
@@ -194,24 +207,24 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
       return math.ceil(split_size / instances_per_shard)
 
     splits = [
-      tfds.core.SplitGenerator(
-          name=tfds.Split.TRAIN,
-          num_shards=calculate_num_shards(2975, features_size_mb),
-          gen_kwargs={
-              feat:os.path.join(path, 'train')
-              for feat, path in paths.items()
-              if not feat.endswith('/extra')
-          },
-      ),
-      tfds.core.SplitGenerator(
-          name=tfds.Split.VALIDATION,
-          num_shards=calculate_num_shards(500, features_size_mb),
-          gen_kwargs={
-              feat:os.path.join(path, 'val')
-              for feat, path in paths.items()
-              if not feat.endswith('/extra')
-          },
-      ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            num_shards=calculate_num_shards(2975, features_size_mb),
+            gen_kwargs={
+                feat_dir: os.path.join(path, 'train')
+                for feat_dir, path in paths.items()
+                if not feat_dir.endswith('/extra')
+            },
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            num_shards=calculate_num_shards(500, features_size_mb),
+            gen_kwargs={
+                feat_dir: os.path.join(path, 'val')
+                for feat_dir, path in paths.items()
+                if not feat_dir.endswith('/extra')
+            },
+        ),
     ]
 
     # Test split does not exist in coarse dataset
@@ -220,7 +233,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
           name=tfds.Split.TEST,
           num_shards=calculate_num_shards(1525, features_size_mb),
           gen_kwargs={
-              feat_dir:os.path.join(path, 'test')
+              feat_dir: os.path.join(path, 'test')
               for feat_dir, path in paths.items()
               if not feat_dir.endswith('/extra')
           },
@@ -230,7 +243,7 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
           name='train_extra',
           num_shards=calculate_num_shards(19998, features_size_mb),
           gen_kwargs={
-              feat_dir.replace('/extra', ''):os.path.join(path, 'train_extra')
+              feat_dir.replace('/extra', ''): os.path.join(path, 'train_extra')
               for feat_dir, path in paths.items()
               if feat_dir.endswith('/extra')
           },
@@ -240,8 +253,8 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, **paths):
     left_imgs_root = paths['images_left']
     for city_id in tf.io.gfile.listdir(left_imgs_root):
-      paths_city_root = {feat:os.path.join(path, city_id)
-                         for feat, path in paths.items()}
+      paths_city_root = {feat_dir: os.path.join(path, city_id)
+                         for feat_dir, path in paths.items()}
 
       left_city_root = paths_city_root['images_left']
       for left_img in tf.io.gfile.listdir(left_city_root):
@@ -252,23 +265,23 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
           continue
 
         features = {
-          'image_id': image_id,
-          'image_left': left_img_path
+            'image_id': image_id,
+            'image_left': left_img_path
         }
 
         if self.builder_config.right_images:
           features['image_right'] = os.path.join(
-            paths_city_root['images_right'], f'{image_id}_rightImg8bit.png')
-        
+              paths_city_root['images_right'], f'{image_id}_rightImg8bit.png')
+
         if self.builder_config.segmentation_labels:
           features['segmentation_label'] = os.path.join(
-            paths_city_root['segmentation_labels'],
-            f'{image_id}_{self.builder_config.label_suffix}.png')
-        
+              paths_city_root['segmentation_labels'],
+              f'{image_id}_{self.builder_config.label_suffix}.png')
+
         if self.builder_config.disparity_maps:
           features['disparity_map'] = os.path.join(
-            paths_city_root['disparity_maps'], f'{image_id}_disparity.png')
-        
+              paths_city_root['disparity_maps'], f'{image_id}_disparity.png')
+
         yield image_id, features
 
 # Helper functions
