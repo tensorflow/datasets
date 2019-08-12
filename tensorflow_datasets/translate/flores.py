@@ -74,11 +74,17 @@ class FloresConfig(tfds.core.BuilderConfig):
     description = (
         "Translation dataset from %s to %s, uses encoder %s.") % (
             language_pair[0], language_pair[1], encoder_name)
+    # Version history:
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.0.3: initial version.
     super(FloresConfig, self).__init__(
         name=name,
         description=description,
         version=tfds.core.Version(
             "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -121,7 +127,7 @@ class Flores(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, files, language):
-    for ex in self._generate_examples(**files):
+    for _, ex in self._generate_examples(**files):
       yield ex[language]
 
   def _split_generators(self, dl_manager):
@@ -171,8 +177,9 @@ class Flores(tfds.core.GeneratorBasedBuilder):
             target_file)
 
     source, target = self.builder_config.language_pair
-    for l1, l2 in zip(source_sentences, target_sentences):
+    for idx, (l1, l2) in enumerate(
+        zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):
-        yield result
+        yield idx, result
