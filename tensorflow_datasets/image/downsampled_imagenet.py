@@ -99,6 +99,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=None,
         urls=["http://image-net.org/small/download.php"],
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
