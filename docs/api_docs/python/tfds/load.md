@@ -39,6 +39,7 @@ tfds.load(
 
 *   [CycleGAN](https://www.tensorflow.org/beta/tutorials/generative/cyclegan)
 *   [Distributed training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/keras)
+*   [How-to create an Estimator from a Keras model](https://www.tensorflow.org/beta/tutorials/estimators/keras_model_to_estimator)
 *   [Image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
 *   [Multi-worker Training with Estimator](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_estimator)
 *   [Multi-worker Training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_keras)

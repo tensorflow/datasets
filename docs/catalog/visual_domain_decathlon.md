@@ -172,7 +172,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls
@@ -180,11 +179,9 @@ None computed
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @ONLINE{hakanbilensylvestrerebuffitomasjakab2017,
     author = "Hakan Bilen, Sylvestre Rebuffi, Tomas Jakab",
