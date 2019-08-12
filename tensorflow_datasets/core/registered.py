@@ -141,7 +141,7 @@ class RegisteredDataset(abc.ABCMeta):
 
 
 def list_builders(versions=False):
-  """Returns the string names of all `tfds.core.DatasetBuilder`s."""
+  """Returns the string names and version of all `tfds.core.DatasetBuilder`s."""
   registry = {}
   if versions:
     for name, vers in _DATASET_REGISTRY.items():
