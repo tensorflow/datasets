@@ -108,6 +108,17 @@ class RegisteredDataset(abc.ABCMeta):
   def __new__(mcs, cls_name, bases, class_dict):
     name = naming.camelcase_to_snakecase(cls_name)
     class_dict["name"] = name
+
+    versions = []
+    if class_dict.get("VERSION"):
+      versions.append(class_dict.get("VERSION"))
+      if class_dict.get("SUPPORTED_VERSIONS"):
+        versions += [str(i) for i in class_dict.get("SUPPORTED_VERSIONS")]
+    elif class_dict.get('BUILDER_CONFIGS'):
+        for i in class_dict.get('BUILDER_CONFIGS'):
+          if i.version not in versions:
+            versions.append(str(i.version))
+
     cls = super(RegisteredDataset, mcs).__new__(
         mcs, cls_name, bases, class_dict)
 
@@ -125,12 +136,17 @@ class RegisteredDataset(abc.ABCMeta):
     elif class_dict.get("IN_DEVELOPMENT"):
       _IN_DEVELOPMENT_REGISTRY[name] = cls
     else:
-      _DATASET_REGISTRY[name] = cls
+      _DATASET_REGISTRY[name] = [cls, sorted(list(map(str, versions)))]
     return cls
 
 
-def list_builders():
+def list_builders(versions=False):
   """Returns the string names of all `tfds.core.DatasetBuilder`s."""
+  registry = {}
+  if versions:
+    for name, vers in _DATASET_REGISTRY.items():
+      registry[name] = vers[1]
+    return sorted(registry.items())
   return sorted(list(_DATASET_REGISTRY))
 
 
