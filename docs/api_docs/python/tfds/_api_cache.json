@@ -479,6 +479,7 @@
     "tfds.features.Image.get_tensor_info": true, 
     "tfds.features.Image.load_metadata": true, 
     "tfds.features.Image.save_metadata": true, 
+    "tfds.features.Image.set_dtype": true, 
     "tfds.features.Image.set_encoding_format": true, 
     "tfds.features.Image.set_shape": true, 
     "tfds.features.Image.shape": true, 

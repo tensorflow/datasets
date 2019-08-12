@@ -76,6 +76,8 @@ toc:
     title: kitti
   - path: /datasets/catalog/kmnist
     title: kmnist
+  - path: /datasets/catalog/lfw
+    title: lfw
   - path: /datasets/catalog/lsun
     title: lsun
   - path: /datasets/catalog/mnist

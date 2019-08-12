@@ -10,6 +10,7 @@
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="save_metadata"/>
+<meta itemprop="property" content="set_dtype"/>
 <meta itemprop="property" content="set_encoding_format"/>
 <meta itemprop="property" content="set_shape"/>
 </div>
@@ -54,9 +55,10 @@ Input: The image connector accepts as input:
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
-``` python
+```python
 __init__(
     shape=None,
+    dtype=None,
     encoding_format=None
 )
 ```
@@ -70,6 +72,8 @@ Construct the connector.
     width can be None. For other images: (height, width, channels). height and
     width can be None. See `tf.image.encode_*` for doc on channels parameter.
     Defaults to (None, None, 3).
+*   <b>`dtype`</b>: tf.uint16 or tf.uint8 (default). tf.uint16 can be used only
+    with png encoding_format
 *   <b>`encoding_format`</b>: 'jpeg' or 'png' (default). Format to serialize
     np.ndarray images on disk. If image is loaded from {bmg,gif,jpeg,png} file,
     this parameter is ignored, and file original encoding is used.
@@ -159,6 +163,17 @@ save_metadata(
 ```
 
 See base class for details.
+
+<h3 id="set_dtype"><code>set_dtype</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
+source</a>
+
+```python
+set_dtype(dtype)
+```
+
+Update the dtype.
 
 <h3 id="set_encoding_format"><code>set_encoding_format</code></h3>
 
