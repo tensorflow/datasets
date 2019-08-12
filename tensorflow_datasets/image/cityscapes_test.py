@@ -8,23 +8,46 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import cityscapes
 
-class CityscapesTest(testing.DatasetBuilderTestCase):
+# TODO add tests for features and files per configuration
+class CityscapesSegmentationTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cityscapes.Cityscapes
-  BUILDER_CONFIG_NAMES_TO_TEST = ['fine']
+  BUILDER_CONFIG_NAMES_TO_TEST = ['semantic_segmentation']
   SPLITS = {
       'train': 3,
       'validation': 1,
       'test': 2,
   }
 
-class CityscapesCoarseTest(testing.DatasetBuilderTestCase):
+
+class CityscapesSegmentationExtraTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cityscapes.Cityscapes
-  BUILDER_CONFIG_NAMES_TO_TEST = ['coarse']
+  BUILDER_CONFIG_NAMES_TO_TEST = ['semantic_segmentation_extra']
   SPLITS = {
       'train': 3,
       'train_extra': 4,
       'validation': 1,
   }
+
+
+class CityscapesStereoDisparityTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = cityscapes.Cityscapes
+  BUILDER_CONFIG_NAMES_TO_TEST = ['stereo_disparity']
+  SPLITS = {
+      'train': 3,
+      'validation': 1,
+      'test': 2,
+  }
+
+
+class CityscapesStereoDisparityExtraTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = cityscapes.Cityscapes
+  BUILDER_CONFIG_NAMES_TO_TEST = ['stereo_disparity_extra']
+  SPLITS = {
+      'train': 3,
+      'train_extra': 4,
+      'validation': 1,
+  }
+
 
 if __name__ == '__main__':
   testing.test_main()
