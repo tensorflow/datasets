@@ -95,6 +95,29 @@ class SuperGlueWicTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SuperGlueCbS3Test(SuperGlueCbTest):
+  VERSION = "experimental_latest"
+
+
+class SuperGlueCopaS3Test(SuperGlueCopaTest):
+  VERSION = "experimental_latest"
+
+
+class SuperGlueMultiRcS3Test(SuperGlueMultiRcTest):
+  VERSION = "experimental_latest"
+
+
+class SuperGlueRteS3Test(SuperGlueRteTest):
+  VERSION = "experimental_latest"
+
+
+class SuperGlueWscS3Test(SuperGlueWscTest):
+  VERSION = "experimental_latest"
+
+
+class SuperGlueWicS3Test(SuperGlueWicTest):
+  VERSION = "experimental_latest"
+
 # TODO(adarob): Add MultiRC test.
 
 if __name__ == "__main__":

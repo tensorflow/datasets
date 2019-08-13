@@ -37,5 +37,8 @@ class SquadTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SquadS3Test(SquadTest):
+  VERSION = "experimental_latest"
+
 if __name__ == "__main__":
   testing.test_main()

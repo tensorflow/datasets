@@ -227,9 +227,15 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
         'False' or 'True'.
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version history:
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.0.2: Initial version.
     super(SuperGlueConfig, self).__init__(
         version=tfds.core.Version(
             "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.features = features
     self.label_classes = label_classes
@@ -376,7 +382,8 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           for question in paragraph["questions"]:
             for answer in question["answers"]:
               is_answer = answer.get("isAnswer")
-              yield {
+              key = "%s_%s_%s" % (row["idx"], question["idx"], answer["idx"])
+              yield key, {
                   "paragraph": paragraph["text"],
                   "question": question["question"],
                   "answer": answer["text"],
@@ -405,7 +412,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           else:
             assert split == tfds.Split.TEST, row
             example["label"] = -1
-          yield example
+          yield example["idx"], example
 
 
 def _fix_wst(ex):
