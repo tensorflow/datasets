@@ -57,7 +57,7 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
   dl_config = tfds.download.DownloadConfig(manual_dir='path/to/manual_dir/')
   builder.download_and_prepare(download_config=dl_config)
   print(builder.info)  # Splits, num examples,... automatically extracted
-  ds = builder.as_dataset(split='split_name')
+  ds = builder.as_dataset(split='split_name', shuffle_files=True)
   ```
 
   Or with load:
