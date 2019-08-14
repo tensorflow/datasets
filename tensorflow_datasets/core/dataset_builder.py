@@ -148,7 +148,7 @@ class DatasetBuilder(object):
   BUILDER_CONFIGS = []
 
   # Set to True for datasets that are under active development and should not
-  # be available through tfds.{load, builder} or documented in datasets.md.
+  # be available through tfds.{load, builder} or documented in overview.md.
   IN_DEVELOPMENT = False
 
 

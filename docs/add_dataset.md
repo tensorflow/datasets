@@ -2,8 +2,8 @@
 
 Follow this guide to add a dataset to TFDS.
 
-See our [list of datasets](datasets.md) to see if the dataset you want isn't
-already added.
+See our [list of datasets](catalog/overview.md) to see if the dataset you want
+isn't already added.
 
 *   [Overview](#overview)
 *   [Writing `my_dataset.py`](#writing-my-datasetpy)
