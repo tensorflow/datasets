@@ -1,0 +1,196 @@
+{
+  "citation": "@misc{dsprites17,\nauthor = {Loic Matthey and Irina Higgins and Demis Hassabis and Alexander Lerchner},\ntitle = {dSprites: Disentanglement testing Sprites dataset},\nhowpublished= {https://github.com/deepmind/dsprites-dataset/},\nyear = \"2017\",\n}\n", 
+  "description": "dSprites is a dataset of 2D shapes procedurally generated from 6 ground truth\nindependent latent factors. These factors are *color*, *shape*, *scale*,\n*rotation*, *x* and *y* positions of a sprite.\n\nAll possible combinations of these latents are present exactly once,\ngenerating N = 737280 total images.\n\n### Latent factor values\n\n*   Color: white\n*   Shape: square, ellipse, heart\n*   Scale: 6 values linearly spaced in [0.5, 1]\n*   Orientation: 40 values in [0, 2 pi]\n*   Position X: 32 values in [0, 1]\n*   Position Y: 32 values in [0, 1]\n\nWe varied one latent at a time (starting from Position Y, then Position X, etc),\nand sequentially stored the images in fixed order.\nHence the order along the first dimension is fixed and allows you to map back to\nthe value of the latents corresponding to that image.\n\nWe chose the latents values deliberately to have the smallest step changes\nwhile ensuring that all pixel outputs were different. No noise was added.\n", 
+  "location": {
+    "urls": [
+      "https://github.com/deepmind/dsprites-dataset"
+    ]
+  }, 
+  "name": "dsprites", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_orientation", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_scale", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_shape", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_x_position", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_y_position", 
+        "type": "INT"
+      }, 
+      {
+        "name": "value_orientation", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_scale", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_shape", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_x_position", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_y_position", 
+        "type": "FLOAT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "28024106", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "184320", 
+        "184320", 
+        "184320", 
+        "184320"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 1.0
+            }
+          }, 
+          {
+            "name": "label_orientation", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 39.0
+            }
+          }, 
+          {
+            "name": "label_scale", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 5.0
+            }
+          }, 
+          {
+            "name": "label_shape", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 2.0
+            }
+          }, 
+          {
+            "name": "label_x_position", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 31.0
+            }
+          }, 
+          {
+            "name": "label_y_position", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 31.0
+            }
+          }, 
+          {
+            "name": "value_orientation", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 6.2831854820251465
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_scale", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 1.0, 
+              "min": 0.5
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_shape", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 3.0, 
+              "min": 1.0
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_x_position", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 1.0
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_y_position", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "737280"
+              }, 
+              "max": 1.0
+            }, 
+            "type": "FLOAT"
+          }
+        ], 
+        "numExamples": "737280"
+      }
+    }
+  ], 
+  "version": "1.0.0"
+}

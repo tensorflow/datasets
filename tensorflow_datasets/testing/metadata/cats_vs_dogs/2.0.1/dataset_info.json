@@ -1,0 +1,83 @@
+{
+  "citation": "@Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,\nauthor = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},\ntitle = {Asirra: A CAPTCHA that Exploits Interest-Aligned Manual Image Categorization},\nbooktitle = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},\nyear = {2007},\nmonth = {October},\npublisher = {Association for Computing Machinery, Inc.},\nurl = {https://www.microsoft.com/en-us/research/publication/asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization/},\nedition = {Proceedings of 14th ACM Conference on Computer and Communications Security (CCS)},\n}\n", 
+  "description": "A large set of images of cats and dogs.There are 1738 corrupted images that are dropped.", 
+  "location": {
+    "urls": [
+      "https://www.microsoft.com/en-us/download/details.aspx?id=54765"
+    ]
+  }, 
+  "name": "cats_vs_dogs", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image/filename", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "824894548", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "20", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "23262"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "23262"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "23262"
+              }, 
+              "max": 1.0
+            }
+          }
+        ], 
+        "numExamples": "23262"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "2.0.1"
+}

@@ -1,0 +1,165 @@
+{
+  "citation": "@InProceedings{Nilsback08,\n   author = \"Nilsback, M-E. and Zisserman, A.\",\n   title = \"Automated Flower Classification over a Large Number of Classes\",\n   booktitle = \"Proceedings of the Indian Conference on Computer Vision, Graphics and Image Processing\",\n   year = \"2008\",\n   month = \"Dec\"\n}\n", 
+  "description": "\nThe Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly occurring\nin the United Kingdom. Each class consists of between 40 and 258 images. The images have\nlarge scale, pose and light variations. In addition, there are categories that have large\nvariations within the category and several very similar categories.\n\nThe dataset is divided into a training set, a validation set and a test set.\nThe training set and validation set each consist of 10 images per class (totalling 1030 images each).\nThe test set consist of the remaining 6129 images (minimum 20 per class).\n", 
+  "location": {
+    "urls": [
+      "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/"
+    ]
+  }, 
+  "name": "oxford_flowers102", 
+  "schema": {
+    "feature": [
+      {
+        "name": "file_name", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "353121411", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "3075", 
+        "3074"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "6149"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "6149"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "6149"
+              }, 
+              "max": 101.0
+            }
+          }
+        ], 
+        "numExamples": "6149"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "1020"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1020"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1020"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1020"
+              }, 
+              "max": 101.0
+            }
+          }
+        ], 
+        "numExamples": "1020"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "1020"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1020"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1020"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1020"
+              }, 
+              "max": 101.0
+            }
+          }
+        ], 
+        "numExamples": "1020"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "2.0.0"
+}

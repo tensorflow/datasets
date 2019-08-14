@@ -1,0 +1,6 @@
+verification
+crowdsource-verification
+machine
+freeform
+xclick
+activemil

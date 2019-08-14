@@ -1,0 +1,221 @@
+{
+  "citation": "\\\n@article{LeCun2004LearningMF,\n  title={Learning methods for generic object recognition with invariance to pose and lighting},\n  author={Yann LeCun and Fu Jie Huang and L{\\'e}on Bottou},\n  journal={Proceedings of the 2004 IEEE Computer Society Conference on Computer Vision and Pattern Recognition},\n  year={2004},\n  volume={2},\n  pages={II-104 Vol.2}\n}\n", 
+  "description": "\\\nThis database is intended for experiments in 3D object recognition from shape. It contains images of 50 toys belonging to 5 generic categories: four-legged animals, human figures, airplanes, trucks, and cars. The objects were imaged by two cameras under 6 lighting conditions, 9 elevations (30 to 70 degrees every 5 degrees), and 18 azimuths (0 to 340 every 20 degrees).\n\nThe training set is composed of 5 instances of each category (instances 4, 6, 7, 8 and 9), and the test set of the remaining 5 instances (instances 0, 1, 2, 3, and 5).\n", 
+  "location": {
+    "urls": [
+      "https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/"
+    ]
+  }, 
+  "name": "smallnorb", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "96"
+            }, 
+            {
+              "size": "96"
+            }, 
+            {
+              "size": "1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image2", 
+        "shape": {
+          "dim": [
+            {
+              "size": "96"
+            }, 
+            {
+              "size": "96"
+            }, 
+            {
+              "size": "1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "instance", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_azimuth", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_category", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_elevation", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_lighting", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "262778180", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 252.0
+            }
+          }, 
+          {
+            "name": "image2", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 252.0
+            }
+          }, 
+          {
+            "name": "instance", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 5.0
+            }
+          }, 
+          {
+            "name": "label_azimuth", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 17.0
+            }
+          }, 
+          {
+            "name": "label_category", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 4.0
+            }
+          }, 
+          {
+            "name": "label_elevation", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 8.0
+            }
+          }, 
+          {
+            "name": "label_lighting", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 5.0
+            }
+          }
+        ], 
+        "numExamples": "24300"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 252.0
+            }
+          }, 
+          {
+            "name": "image2", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 252.0
+            }
+          }, 
+          {
+            "name": "instance", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 9.0, 
+              "min": 4.0
+            }
+          }, 
+          {
+            "name": "label_azimuth", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 17.0
+            }
+          }, 
+          {
+            "name": "label_category", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 4.0
+            }
+          }, 
+          {
+            "name": "label_elevation", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 8.0
+            }
+          }, 
+          {
+            "name": "label_lighting", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "24300"
+              }, 
+              "max": 5.0
+            }
+          }
+        ], 
+        "numExamples": "24300"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label_category"
+  }, 
+  "version": "0.1.0"
+}
