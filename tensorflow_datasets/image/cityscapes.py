@@ -192,24 +192,9 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
     for split, (_, zip_root) in self.builder_config.zip_root.items():
       paths[split] = os.path.join(dl_manager.extract(paths[split]), zip_root)
 
-    features_size_mb = 6 # 1024 * 2048 * 3 = 6MB (left image always present)
-    if self.builder_config.right_images:
-      features_size_mb += 6 # 1024 * 2048 * 3 = 6MB
-    if self.builder_config.segmentation_labels:
-      features_size_mb += 2 # 1024 * 2048 * 1 = 2MB
-    if self.builder_config.disparity_maps:
-      features_size_mb += 2 # 1024 * 2048 * 1 = 2MB
-
-    def calculate_num_shards(split_size, features_size_mb):
-      ''' Calculates the number of shards '''
-      # Each shard must be strictly less than 4gb
-      instances_per_shard = math.floor(4096 / features_size_mb)
-      return math.ceil(split_size / instances_per_shard)
-
     splits = [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=calculate_num_shards(2975, features_size_mb),
             gen_kwargs={
                 feat_dir: os.path.join(path, 'train')
                 for feat_dir, path in paths.items()
@@ -218,7 +203,6 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=calculate_num_shards(500, features_size_mb),
             gen_kwargs={
                 feat_dir: os.path.join(path, 'val')
                 for feat_dir, path in paths.items()
@@ -231,7 +215,6 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
     if not self.builder_config.train_extra_split:
       splits.append(tfds.core.SplitGenerator(
           name=tfds.Split.TEST,
-          num_shards=calculate_num_shards(1525, features_size_mb),
           gen_kwargs={
               feat_dir: os.path.join(path, 'test')
               for feat_dir, path in paths.items()
@@ -241,7 +224,6 @@ class Cityscapes(tfds.core.GeneratorBasedBuilder):
     else:
       splits.append(tfds.core.SplitGenerator(
           name='train_extra',
-          num_shards=calculate_num_shards(19998, features_size_mb),
           gen_kwargs={
               feat_dir.replace('/extra', ''): os.path.join(path, 'train_extra')
               for feat_dir, path in paths.items()
