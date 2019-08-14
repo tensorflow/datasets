@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tempfile
 
 import h5py
 import numpy as np
@@ -62,7 +61,15 @@ We varied one latent at a time (starting from orientation, then shape, etc), and
 class Shapes3d(tfds.core.GeneratorBasedBuilder):
   """Shapes3d data set."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0"),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -130,9 +137,9 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
     for i in range(values_array.shape[1]):
       labels_array[:, i] = _discretize(values_array[:, i])  # pylint: disable=unsupported-assignment-operation
 
-    for image, labels, values in moves.zip(image_array, labels_array,
-                                           values_array):
-      yield {
+    for i, (image, labels, values) in enumerate(moves.zip(
+        image_array, labels_array, values_array)):
+      record = {
           "image": image,
           "label_floor_hue": labels[0],
           "label_wall_hue": labels[1],
@@ -147,6 +154,7 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
           "value_shape": values[4],
           "value_orientation": values[5],
       }
+      yield i, record
 
 
 def _load_data(filepath):

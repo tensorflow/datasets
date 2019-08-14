@@ -58,6 +58,7 @@
 <meta itemprop="property" content="assertNear"/>
 <meta itemprop="property" content="assertNoCommonElements"/>
 <meta itemprop="property" content="assertNotAllClose"/>
+<meta itemprop="property" content="assertNotAllEqual"/>
 <meta itemprop="property" content="assertNotAlmostEqual"/>
 <meta itemprop="property" content="assertNotAlmostEquals"/>
 <meta itemprop="property" content="assertNotEmpty"/>
@@ -136,17 +137,17 @@
 
 # tfds.testing.TestCase
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ## Class `TestCase`
 
-
-
-
-
-Defined in [`testing/test_case.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py).
+Base TestCase to be used for all tests.
 
 <!-- Placeholder for "Used in" -->
-
-Base TestCase to be used for all tests.
 
 `test_data` class attribute: path to the directory with test data.
 `tmp_dir` attribute: path to temp directory reset before every test.
@@ -156,10 +157,6 @@ Base TestCase to be used for all tests.
 ``` python
 __init__(methodName='runTest')
 ```
-
-
-
-
 
 ## Child Classes
 [`class failureException`](../../tfds/testing/DatasetBuilderTestCase/failureException.md)
@@ -175,23 +172,17 @@ __call__(
 )
 ```
 
-
-
 <h3 id="__eq__"><code>__eq__</code></h3>
 
 ``` python
 __eq__(other)
 ```
 
-
-
 <h3 id="__ne__"><code>__ne__</code></h3>
 
 ``` python
 __ne__(other)
 ```
-
-
 
 <h3 id="addCleanup"><code>addCleanup</code></h3>
 
@@ -203,9 +194,9 @@ addCleanup(
 )
 ```
 
-Add a function, with arguments, to be called when the test is
-completed. Functions added are called on a LIFO basis and are
-called after tearDown on test failure or success.
+Add a function, with arguments, to be called when the test is completed.
+Functions added are called on a LIFO basis and are called after tearDown on test
+failure or success.
 
 Cleanup items are called even if setUp fails (unlike tearDown).
 
@@ -251,11 +242,11 @@ their own type equality functions to provide nicer error messages.
 
 #### Args:
 
-* <b>`typeobj`</b>: The data type to call this function on when both values
-            are of the same type in assertEqual().
-* <b>`function`</b>: The callable taking two arguments and an optional
-            msg= argument that raises self.failureException with a
-            useful error message when the two arguments are not equal.
+*   <b>`typeobj`</b>: The data type to call this function on when both values
+    are of the same type in assertEqual().
+*   <b>`function`</b>: The callable taking two arguments and an optional msg=
+    argument that raises self.failureException with a useful error message when
+    the two arguments are not equal.
 
 <h3 id="assertAllClose"><code>assertAllClose</code></h3>
 
@@ -273,23 +264,22 @@ structure can be a `dict`, `namedtuple`, `tuple` or `list`.
 
 #### Args:
 
-* <b>`a`</b>: The expected numpy `ndarray`, or anything that can be converted into a
-    numpy `ndarray` (including Tensor), or any arbitrarily nested of
+*   <b>`a`</b>: The expected numpy `ndarray`, or anything that can be converted
+    into a numpy `ndarray` (including Tensor), or any arbitrarily nested of
     structure of these.
-* <b>`b`</b>: The actual numpy `ndarray`, or anything that can be converted into a
-    numpy `ndarray` (including Tensor), or any arbitrarily nested of
+*   <b>`b`</b>: The actual numpy `ndarray`, or anything that can be converted
+    into a numpy `ndarray` (including Tensor), or any arbitrarily nested of
     structure of these.
-* <b>`rtol`</b>: relative tolerance.
-* <b>`atol`</b>: absolute tolerance.
-* <b>`msg`</b>: Optional message to report on failure.
-
+*   <b>`rtol`</b>: relative tolerance.
+*   <b>`atol`</b>: absolute tolerance.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 #### Raises:
 
-* <b>`ValueError`</b>: if only one of `a[p]` and `b[p]` is a dict or
-      `a[p]` and `b[p]` have different length, where `[p]` denotes a path
-      to the nested structure, e.g. given `a = [(1, 1), {'d': (6, 7)}]` and
-      `[p] = [1]['d']`, then `a[p] = (6, 7)`.
+*   <b>`ValueError`</b>: if only one of `a[p]` and `b[p]` is a dict or `a[p]`
+    and `b[p]` have different length, where `[p]` denotes a path to the nested
+    structure, e.g. given `a = [(1, 1), {'d': (6, 7)}]` and `[p] = [1]['d']`,
+    then `a[p] = (6, 7)`.
 
 <h3 id="assertAllCloseAccordingToType"><code>assertAllCloseAccordingToType</code></h3>
 
@@ -349,9 +339,9 @@ Assert element values are all greater than a target value.
 
 #### Args:
 
-* <b>`a`</b>: The numpy `ndarray`, or anything that can be converted into a numpy
-    `ndarray` (including Tensor).
-* <b>`comparison_target`</b>: The target value of comparison.
+*   <b>`a`</b>: The numpy `ndarray`, or anything that can be converted into a
+    numpy `ndarray` (including Tensor).
+*   <b>`comparison_target`</b>: The target value of comparison.
 
 <h3 id="assertAllGreaterEqual"><code>assertAllGreaterEqual</code></h3>
 
@@ -366,9 +356,9 @@ Assert element values are all greater than or equal to a target value.
 
 #### Args:
 
-* <b>`a`</b>: The numpy `ndarray`, or anything that can be converted into a numpy
-    `ndarray` (including Tensor).
-* <b>`comparison_target`</b>: The target value of comparison.
+*   <b>`a`</b>: The numpy `ndarray`, or anything that can be converted into a
+    numpy `ndarray` (including Tensor).
+*   <b>`comparison_target`</b>: The target value of comparison.
 
 <h3 id="assertAllInRange"><code>assertAllInRange</code></h3>
 
@@ -383,22 +373,20 @@ Assert that elements in a Tensor are all in a given range.
 
 #### Args:
 
-* <b>`target`</b>: The numpy `ndarray`, or anything that can be converted into a
-    numpy `ndarray` (including Tensor).
-* <b>`lower_bound`</b>: lower bound of the range
-* <b>`upper_bound`</b>: upper bound of the range
-* <b>`open_lower_bound`</b>: (`bool`) whether the lower bound is open (i.e., > rather
-    than the default >=)
-* <b>`open_upper_bound`</b>: (`bool`) whether the upper bound is open (i.e., < rather
-    than the default <=)
-
+*   <b>`target`</b>: The numpy `ndarray`, or anything that can be converted into
+    a numpy `ndarray` (including Tensor).
+*   <b>`lower_bound`</b>: lower bound of the range
+*   <b>`upper_bound`</b>: upper bound of the range
+*   <b>`open_lower_bound`</b>: (`bool`) whether the lower bound is open (i.e., >
+    rather than the default >=)
+*   <b>`open_upper_bound`</b>: (`bool`) whether the upper bound is open (i.e., <
+    rather than the default <=)
 
 #### Raises:
 
-* <b>`AssertionError`</b>:     if the value tensor does not have an ordered numeric type (float* or
-      int*), or
-    if there are nan values, or
-    if any of the elements do not fall in the specified range.
+*   <b>`AssertionError`</b>: if the value tensor does not have an ordered
+    numeric type (float* or int*), or if there are nan values, or if any of the
+    elements do not fall in the specified range.
 
 <h3 id="assertAllInSet"><code>assertAllInSet</code></h3>
 
@@ -413,15 +401,15 @@ Assert that elements of a Tensor are all in a given closed set.
 
 #### Args:
 
-* <b>`target`</b>: The numpy `ndarray`, or anything that can be converted into a
-    numpy `ndarray` (including Tensor).
-* <b>`expected_set`</b>: (`list`, `tuple` or `set`) The closed set that the elements
-    of the value of `target` are expected to fall into.
-
+*   <b>`target`</b>: The numpy `ndarray`, or anything that can be converted into
+    a numpy `ndarray` (including Tensor).
+*   <b>`expected_set`</b>: (`list`, `tuple` or `set`) The closed set that the
+    elements of the value of `target` are expected to fall into.
 
 #### Raises:
 
-* <b>`AssertionError`</b>:     if any of the elements do not fall into `expected_set`.
+*   <b>`AssertionError`</b>: if any of the elements do not fall into
+    `expected_set`.
 
 <h3 id="assertAllLess"><code>assertAllLess</code></h3>
 
@@ -436,9 +424,9 @@ Assert element values are all less than a target value.
 
 #### Args:
 
-* <b>`a`</b>: The numpy `ndarray`, or anything that can be converted into a numpy
-    `ndarray` (including Tensor).
-* <b>`comparison_target`</b>: The target value of comparison.
+*   <b>`a`</b>: The numpy `ndarray`, or anything that can be converted into a
+    numpy `ndarray` (including Tensor).
+*   <b>`comparison_target`</b>: The target value of comparison.
 
 <h3 id="assertAllLessEqual"><code>assertAllLessEqual</code></h3>
 
@@ -453,9 +441,9 @@ Assert element values are all less than or equal to a target value.
 
 #### Args:
 
-* <b>`a`</b>: The numpy `ndarray`, or anything that can be converted into a numpy
-    `ndarray` (including Tensor).
-* <b>`comparison_target`</b>: The target value of comparison.
+*   <b>`a`</b>: The numpy `ndarray`, or anything that can be converted into a
+    numpy `ndarray` (including Tensor).
+*   <b>`comparison_target`</b>: The target value of comparison.
 
 <h3 id="assertAlmostEqual"><code>assertAlmostEqual</code></h3>
 
@@ -469,10 +457,9 @@ assertAlmostEqual(
 )
 ```
 
-Fail if the two objects are unequal as determined by their
-difference rounded to the given number of decimal places
-(default 7) and comparing to zero, or by comparing that the
-difference between the two objects is more than the given
+Fail if the two objects are unequal as determined by their difference rounded to
+the given number of decimal places (default 7) and comparing to zero, or by
+comparing that the difference between the two objects is more than the given
 delta.
 
 Note that decimal places (from zero) are usually not the same
@@ -493,10 +480,9 @@ assertAlmostEquals(
 )
 ```
 
-Fail if the two objects are unequal as determined by their
-difference rounded to the given number of decimal places
-(default 7) and comparing to zero, or by comparing that the
-difference between the two objects is more than the given
+Fail if the two objects are unequal as determined by their difference rounded to
+the given number of decimal places (default 7) and comparing to zero, or by
+comparing that the difference between the two objects is more than the given
 delta.
 
 Note that decimal places (from zero) are usually not the same
@@ -555,15 +541,15 @@ Asserts a shell command fails and the error matches a regex in a list.
 
 #### Args:
 
-* <b>`command`</b>: List or string representing the command to run.
-* <b>`regexes`</b>: the list of regular expression strings.
-* <b>`env`</b>: Dictionary of environment variable settings. If None, no environment
-      variables will be set for the child process. This is to make tests
-      more hermetic. NOTE: this behavior is different than the standard
-      subprocess module.
-* <b>`close_fds`</b>: Whether or not to close all open fd's in the child after
-      forking.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`command`</b>: List or string representing the command to run.
+*   <b>`regexes`</b>: the list of regular expression strings.
+*   <b>`env`</b>: Dictionary of environment variable settings. If None, no
+    environment variables will be set for the child process. This is to make
+    tests more hermetic. NOTE: this behavior is different than the standard
+    subprocess module.
+*   <b>`close_fds`</b>: Whether or not to close all open fd's in the child after
+    forking.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertCommandSucceeds"><code>assertCommandSucceeds</code></h3>
 
@@ -581,15 +567,16 @@ Asserts that a shell command succeeds (i.e. exits with code 0).
 
 #### Args:
 
-* <b>`command`</b>: List or string representing the command to run.
-* <b>`regexes`</b>: List of regular expression byte strings that match success.
-* <b>`env`</b>: Dictionary of environment variable settings. If None, no environment
-      variables will be set for the child process. This is to make tests
-      more hermetic. NOTE: this behavior is different than the standard
-      subprocess module.
-* <b>`close_fds`</b>: Whether or not to close all open fd's in the child after
-      forking.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`command`</b>: List or string representing the command to run.
+*   <b>`regexes`</b>: List of regular expression byte strings that match
+    success.
+*   <b>`env`</b>: Dictionary of environment variable settings. If None, no
+    environment variables will be set for the child process. This is to make
+    tests more hermetic. NOTE: this behavior is different than the standard
+    subprocess module.
+*   <b>`close_fds`</b>: Whether or not to close all open fd's in the child after
+    forking.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertContainsExactSubsequence"><code>assertContainsExactSubsequence</code></h3>
 
@@ -629,10 +616,10 @@ This may be useful for checking HTML output.
 
 #### Args:
 
-* <b>`strings`</b>: A list of strings, such as [ 'fox', 'dog' ]
-* <b>`target`</b>: A target string in which to look for the strings, such as
-      'The quick brown fox jumped over the lazy dog'.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`strings`</b>: A list of strings, such as [ 'fox', 'dog' ]
+*   <b>`target`</b>: A target string in which to look for the strings, such as
+    'The quick brown fox jumped over the lazy dog'.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertContainsSubsequence"><code>assertContainsSubsequence</code></h3>
 
@@ -684,18 +671,18 @@ It tests that the first sequence contains the same elements as the
 second, regardless of their order. When they don't, an error message
 listing the differences between the sequences will be generated.
 
-Duplicate elements are not ignored when comparing first and second.
-It verifies whether each element has the same count in both sequences.
-Equivalent to:
+Duplicate elements are not ignored when comparing first and second. It verifies
+whether each element has the same count in both sequences. Equivalent to:
 
     self.assertEqual(Counter(list(expected_seq)),
                      Counter(list(actual_seq)))
 
 but works with sequences of unhashable objects as well.
 
-Example:
-    - [0, 1, 1] and [1, 0, 1] compare equal.
-    - [0, 0, 1] and [0, 1] compare unequal.
+#### Example:
+
+-   [0, 1, 1] and [1, 0, 1] compare equal.
+-   [0, 0, 1] and [0, 1] compare unequal.
 
 #### Args:
 
@@ -716,9 +703,9 @@ Assert ndarray data type is equal to expected.
 
 #### Args:
 
-* <b>`target`</b>: The numpy `ndarray`, or anything that can be converted into a
-    numpy `ndarray` (including Tensor).
-* <b>`expected_dtype`</b>: Expected data type.
+*   <b>`target`</b>: The numpy `ndarray`, or anything that can be converted into
+    a numpy `ndarray` (including Tensor).
+*   <b>`expected_dtype`</b>: Expected data type.
 
 <h3 id="assertDeviceEqual"><code>assertDeviceEqual</code></h3>
 
@@ -786,8 +773,9 @@ Asserts that an object has zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertEndsWith"><code>assertEndsWith</code></h3>
 
@@ -817,8 +805,7 @@ assertEqual(
 )
 ```
 
-Fail if the two objects are unequal as determined by the '=='
-operator.
+Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertEquals"><code>assertEquals</code></h3>
 
@@ -830,8 +817,7 @@ assertEquals(
 )
 ```
 
-Fail if the two objects are unequal as determined by the '=='
-operator.
+Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertFalse"><code>assertFalse</code></h3>
 
@@ -902,8 +888,7 @@ assertIsInstance(
 )
 ```
 
-Same as self.assertTrue(isinstance(obj, cls)), with a nicer
-default message.
+Same as self.assertTrue(isinstance(obj, cls)), with a nicer default message.
 
 <h3 id="assertIsNone"><code>assertIsNone</code></h3>
 
@@ -995,9 +980,10 @@ Asserts that an object has the expected length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`expected_len`</b>: The expected length of the container.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`expected_len`</b>: The expected length of the container.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertLess"><code>assertLess</code></h3>
 
@@ -1037,10 +1023,10 @@ A list-specific equality assertion.
 
 #### Args:
 
-* <b>`list1`</b>: The first list to compare.
-* <b>`list2`</b>: The second list to compare.
-* <b>`msg`</b>: Optional message to use on failure instead of a list of
-            differences.
+*   <b>`list1`</b>: The first list to compare.
+*   <b>`list2`</b>: The second list to compare.
+*   <b>`msg`</b>: Optional message to use on failure instead of a list of
+    differences.
 
 <h3 id="assertLogs"><code>assertLogs</code></h3>
 
@@ -1050,8 +1036,6 @@ assertLogs(
     **kwds
 )
 ```
-
-
 
 <h3 id="assertMultiLineEqual"><code>assertMultiLineEqual</code></h3>
 
@@ -1130,15 +1114,31 @@ Assert that two numpy arrays, or Tensors, do not have near values.
 
 #### Args:
 
-* <b>`a`</b>: the first value to compare.
-* <b>`b`</b>: the second value to compare.
-* <b>`**kwargs`</b>: additional keyword arguments to be passed to the underlying
-    `assertAllClose` call.
-
+*   <b>`a`</b>: the first value to compare.
+*   <b>`b`</b>: the second value to compare.
+*   <b>`**kwargs`</b>: additional keyword arguments to be passed to the
+    underlying `assertAllClose` call.
 
 #### Raises:
 
 * <b>`AssertionError`</b>: If `a` and `b` are unexpectedly close at all elements.
+
+<h3 id="assertNotAllEqual"><code>assertNotAllEqual</code></h3>
+
+```python
+assertNotAllEqual(
+    *args,
+    **kwds
+)
+```
+
+Asserts that two numpy arrays or Tensors do not have the same values.
+
+#### Args:
+
+*   <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
+*   <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertNotAlmostEqual"><code>assertNotAlmostEqual</code></h3>
 
@@ -1152,10 +1152,10 @@ assertNotAlmostEqual(
 )
 ```
 
-Fail if the two objects are equal as determined by their
-difference rounded to the given number of decimal places
-(default 7) and comparing to zero, or by comparing that the
-difference between the two objects is less than the given delta.
+Fail if the two objects are equal as determined by their difference rounded to
+the given number of decimal places (default 7) and comparing to zero, or by
+comparing that the difference between the two objects is less than the given
+delta.
 
 Note that decimal places (from zero) are usually not the same
 as significant digits (measured from the most significant digit).
@@ -1174,10 +1174,10 @@ assertNotAlmostEquals(
 )
 ```
 
-Fail if the two objects are equal as determined by their
-difference rounded to the given number of decimal places
-(default 7) and comparing to zero, or by comparing that the
-difference between the two objects is less than the given delta.
+Fail if the two objects are equal as determined by their difference rounded to
+the given number of decimal places (default 7) and comparing to zero, or by
+comparing that the difference between the two objects is less than the given
+delta.
 
 Note that decimal places (from zero) are usually not the same
 as significant digits (measured from the most significant digit).
@@ -1197,8 +1197,9 @@ Asserts that an object has non-zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertNotEndsWith"><code>assertNotEndsWith</code></h3>
 
@@ -1228,8 +1229,7 @@ assertNotEqual(
 )
 ```
 
-Fail if the two objects are equal as determined by the '!='
-operator.
+Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotEquals"><code>assertNotEquals</code></h3>
 
@@ -1241,8 +1241,7 @@ assertNotEquals(
 )
 ```
 
-Fail if the two objects are equal as determined by the '!='
-operator.
+Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotIn"><code>assertNotIn</code></h3>
 
@@ -1276,8 +1275,6 @@ assertNotRegex(
     **kwargs
 )
 ```
-
-
 
 <h3 id="assertNotRegexpMatches"><code>assertNotRegexpMatches</code></h3>
 
@@ -1342,8 +1339,6 @@ assertProtoEqualsVersion(
 )
 ```
 
-
-
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
 ``` python
@@ -1355,12 +1350,10 @@ assertRaises(
 )
 ```
 
-Fail unless an exception of class excClass is raised
-by callableObj when invoked with arguments args and keyword
-arguments kwargs. If a different type of exception is
-raised, it will not be caught, and the test case will be
-deemed to have suffered an error, exactly as for an
-unexpected exception.
+Fail unless an exception of class excClass is raised by callableObj when invoked
+with arguments args and keyword arguments kwargs. If a different type of
+exception is raised, it will not be caught, and the test case will be deemed to
+have suffered an error, exactly as for an unexpected exception.
 
 If called with callableObj omitted or None, will return a
 context object used like this::
@@ -1383,8 +1376,6 @@ exception after the assertion::
 assertRaisesOpError(expected_err_re_or_predicate)
 ```
 
-
-
 <h3 id="assertRaisesRegex"><code>assertRaisesRegex</code></h3>
 
 ``` python
@@ -1393,8 +1384,6 @@ assertRaisesRegex(
     **kwargs
 )
 ```
-
-
 
 <h3 id="assertRaisesRegexp"><code>assertRaisesRegexp</code></h3>
 
@@ -1412,12 +1401,12 @@ Asserts that the message in a raised exception matches a regexp.
 
 #### Args:
 
-* <b>`expected_exception`</b>: Exception class expected to be raised.
-* <b>`expected_regexp`</b>: Regexp (re pattern object or string) expected
-            to be found in error message.
-* <b>`callable_obj`</b>: Function to be called.
-* <b>`args`</b>: Extra args.
-* <b>`kwargs`</b>: Extra kwargs.
+*   <b>`expected_exception`</b>: Exception class expected to be raised.
+*   <b>`expected_regexp`</b>: Regexp (re pattern object or string) expected to
+    be found in error message.
+*   <b>`callable_obj`</b>: Function to be called.
+*   <b>`args`</b>: Extra args.
+*   <b>`kwargs`</b>: Extra kwargs.
 
 <h3 id="assertRaisesWithLiteralMatch"><code>assertRaisesWithLiteralMatch</code></h3>
 
@@ -1441,19 +1430,17 @@ with self.assertRaisesWithLiteralMatch(ExType, 'message'):
 
 #### Args:
 
-* <b>`expected_exception`</b>: Exception class expected to be raised.
-* <b>`expected_exception_message`</b>: String message expected in the raised
-      exception.  For a raise exception e, expected_exception_message must
-      equal str(e).
-* <b>`callable_obj`</b>: Function to be called, or None to return a context.
-* <b>`*args`</b>: Extra args.
-* <b>`**kwargs`</b>: Extra kwargs.
-
+*   <b>`expected_exception`</b>: Exception class expected to be raised.
+*   <b>`expected_exception_message`</b>: String message expected in the raised
+    exception. For a raise exception e, expected_exception_message must equal
+    str(e).
+*   <b>`callable_obj`</b>: Function to be called, or None to return a context.
+*   <b>`*args`</b>: Extra args.
+*   <b>`**kwargs`</b>: Extra kwargs.
 
 #### Returns:
 
 A context manager if callable_obj is None. Otherwise, None.
-
 
 #### Raises:
 
@@ -1461,14 +1448,15 @@ self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ``` python
 assertRaisesWithPredicateMatch(
     err_type,
     predicate
 )
 ```
-
-
 
 <h3 id="assertRaisesWithRegexpMatch"><code>assertRaisesWithRegexpMatch</code></h3>
 
@@ -1486,12 +1474,12 @@ Asserts that the message in a raised exception matches a regexp.
 
 #### Args:
 
-* <b>`expected_exception`</b>: Exception class expected to be raised.
-* <b>`expected_regexp`</b>: Regexp (re pattern object or string) expected
-            to be found in error message.
-* <b>`callable_obj`</b>: Function to be called.
-* <b>`args`</b>: Extra args.
-* <b>`kwargs`</b>: Extra kwargs.
+*   <b>`expected_exception`</b>: Exception class expected to be raised.
+*   <b>`expected_regexp`</b>: Regexp (re pattern object or string) expected to
+    be found in error message.
+*   <b>`callable_obj`</b>: Function to be called.
+*   <b>`args`</b>: Extra args.
+*   <b>`kwargs`</b>: Extra kwargs.
 
 <h3 id="assertRegex"><code>assertRegex</code></h3>
 
@@ -1501,8 +1489,6 @@ assertRegex(
     **kwargs
 )
 ```
-
-
 
 <h3 id="assertRegexMatch"><code>assertRegexMatch</code></h3>
 
@@ -1520,7 +1506,8 @@ If possible you should use `assertRegex`, which is a simpler
 version of this method. `assertRegex` takes a single regular
 expression (a string or re compiled object) instead of a list.
 
-Notes:
+#### Notes:
+
 1. This function uses substring matching, i.e. the matching
    succeeds if *any* substring of the error message matches *any*
    regex in the list.  This is more convenient for the user than
@@ -1541,10 +1528,10 @@ Notes:
 
 #### Args:
 
-* <b>`actual_str`</b>:  The string we try to match with the items in regexes.
-* <b>`regexes`</b>:  The regular expressions we want to match against str.
-      See "Notes" above for detailed notes on how this is interpreted.
-* <b>`message`</b>:  The message to be printed if the test fails.
+*   <b>`actual_str`</b>: The string we try to match with the items in regexes.
+*   <b>`regexes`</b>: The regular expressions we want to match against str. See
+    "Notes" above for detailed notes on how this is interpreted.
+*   <b>`message`</b>: The message to be printed if the test fails.
 
 <h3 id="assertRegexpMatches"><code>assertRegexpMatches</code></h3>
 
@@ -1638,7 +1625,7 @@ comparing to zero, or by comparing that the difference between each value
 in the two sequences is more than the given delta.
 
 Note that decimal places (from zero) are usually not the same as significant
-digits (measured from the most signficant digit).
+digits (measured from the most significant digit).
 
 If the two sequences compare equal then they will automatically compare
 almost equal.
@@ -1669,12 +1656,12 @@ which can be indexed, has a length, and has an equality operator.
 
 #### Args:
 
-* <b>`seq1`</b>: The first sequence to compare.
-* <b>`seq2`</b>: The second sequence to compare.
-* <b>`seq_type`</b>: The expected datatype of the sequences, or None if no
-            datatype should be enforced.
-* <b>`msg`</b>: Optional message to use on failure instead of a list of
-            differences.
+*   <b>`seq1`</b>: The first sequence to compare.
+*   <b>`seq2`</b>: The second sequence to compare.
+*   <b>`seq_type`</b>: The expected datatype of the sequences, or None if no
+    datatype should be enforced.
+*   <b>`msg`</b>: Optional message to use on failure instead of a list of
+    differences.
 
 <h3 id="assertSequenceStartsWith"><code>assertSequenceStartsWith</code></h3>
 
@@ -1714,10 +1701,10 @@ A set-specific equality assertion.
 
 #### Args:
 
-* <b>`set1`</b>: The first set to compare.
-* <b>`set2`</b>: The second set to compare.
-* <b>`msg`</b>: Optional message to use on failure instead of a list of
-            differences.
+*   <b>`set1`</b>: The first set to compare.
+*   <b>`set2`</b>: The second set to compare.
+*   <b>`msg`</b>: Optional message to use on failure instead of a list of
+    differences.
 
 assertSetEqual uses ducktyping to support different types of sets, and
 is optimized for sets specifically (parameters must support a
@@ -1806,11 +1793,11 @@ self.assertTotallyOrdered(
 
 #### Args:
 
-*groups: A list of groups of elements.  Each group of elements is a list
-    of objects that are equal.  The elements in each group must be less
-    than the elements in the group after it.  For example, these groups are
-    totally ordered: [None], [1], [2, 2], [3].
-* <b>`**kwargs`</b>: optional msg keyword argument can be passed.
+*   <b>`*groups`</b>: A list of groups of elements. Each group of elements is a
+    list of objects that are equal. The elements in each group must be less than
+    the elements in the group after it. For example, these groups are totally
+    ordered: [None], [1], [2, 2], [3]. **kwargs: optional msg keyword argument
+    can be passed.
 
 <h3 id="assertTrue"><code>assertTrue</code></h3>
 
@@ -1837,10 +1824,10 @@ A tuple-specific equality assertion.
 
 #### Args:
 
-* <b>`tuple1`</b>: The first tuple to compare.
-* <b>`tuple2`</b>: The second tuple to compare.
-* <b>`msg`</b>: Optional message to use on failure instead of a list of
-            differences.
+*   <b>`tuple1`</b>: The first tuple to compare.
+*   <b>`tuple2`</b>: The second tuple to compare.
+*   <b>`msg`</b>: Optional message to use on failure instead of a list of
+    differences.
 
 <h3 id="assertUrlEqual"><code>assertUrlEqual</code></h3>
 
@@ -1887,7 +1874,8 @@ Use the `use_gpu` and `force_gpu` options to control where ops are run. If
 possible. If both `force_gpu and `use_gpu` are False, all ops are pinned to
 the CPU.
 
-Example:
+#### Example:
+
 ```python
 class MyOperatorTest(test_util.TensorFlowTestCase):
   def testMyOperator(self):
@@ -1902,17 +1890,16 @@ class MyOperatorTest(test_util.TensorFlowTestCase):
 
 #### Args:
 
-* <b>`graph`</b>: Optional graph to use during the returned session.
-* <b>`config`</b>: An optional config_pb2.ConfigProto to use to configure the
+*   <b>`graph`</b>: Optional graph to use during the returned session.
+*   <b>`config`</b>: An optional config_pb2.ConfigProto to use to configure the
     session.
-* <b>`use_gpu`</b>: If True, attempt to run as many ops as possible on GPU.
-* <b>`force_gpu`</b>: If True, pin all ops to `/device:GPU:0`.
-
+*   <b>`use_gpu`</b>: If True, attempt to run as many ops as possible on GPU.
+*   <b>`force_gpu`</b>: If True, pin all ops to `/device:GPU:0`.
 
 #### Yields:
 
-A Session object that should be used as a context manager to surround
-the graph building and execution code in a test case.
+A Session object that should be used as a context manager to surround the graph
+building and execution code in a test case.
 
 <h3 id="captureWritesToStream"><code>captureWritesToStream</code></h3>
 
@@ -1936,7 +1923,8 @@ a `.flush()` method. The default python sys.stdout and sys.stderr are
 examples of this. Note that this does not work in Colab or Jupyter
 notebooks, because those use alternate stdout streams.
 
-Example:
+#### Example:
+
 ```python
 class MyOperatorTest(test_util.TensorFlowTestCase):
   def testMyOperator(self):
@@ -1948,10 +1936,9 @@ class MyOperatorTest(test_util.TensorFlowTestCase):
 
 #### Args:
 
-* <b>`stream`</b>: The stream whose writes should be captured. This stream must have
-    a file descriptor, support writing via using that file descriptor, and
-    must have a `.flush()` method.
-
+*   <b>`stream`</b>: The stream whose writes should be captured. This stream
+    must have a file descriptor, support writing via using that file descriptor,
+    and must have a `.flush()` method.
 
 #### Yields:
 
@@ -1976,11 +1963,10 @@ assertions made in the thread will not be respected.
 
 #### Args:
 
-* <b>`target`</b>: A callable object to be executed in the thread.
-* <b>`args`</b>: The argument tuple for the target invocation. Defaults to ().
-* <b>`kwargs`</b>: A dictionary of keyword arguments for the target invocation.
-    Defaults to {}.
-
+*   <b>`target`</b>: A callable object to be executed in the thread.
+*   <b>`args`</b>: The argument tuple for the target invocation. Defaults to ().
+*   <b>`kwargs`</b>: A dictionary of keyword arguments for the target
+    invocation. Defaults to {}.
 
 #### Returns:
 
@@ -1991,8 +1977,6 @@ A wrapper for threading.Thread that supports start() and join() methods.
 ``` python
 countTestCases()
 ```
-
-
 
 <h3 id="create_tempdir"><code>create_tempdir</code></h3>
 
@@ -2017,12 +2001,11 @@ See also: `create_tempfile()` for creating temporary files.
 
 #### Args:
 
-* <b>`name`</b>: Optional name of the directory. If not given, a unique
-    name will be generated and used.
-* <b>`cleanup`</b>: Optional cleanup policy on when/if to remove the directory (and
-    all its contents) at the end of the test. If None, then uses
+*   <b>`name`</b>: Optional name of the directory. If not given, a unique name
+    will be generated and used.
+*   <b>`cleanup`</b>: Optional cleanup policy on when/if to remove the directory
+    (and all its contents) at the end of the test. If None, then uses
     `self.tempfile_cleanup`.
-
 
 #### Returns:
 
@@ -2056,24 +2039,22 @@ See also: `create_tempdir()` for creating temporary directories.
 
 #### Args:
 
-* <b>`file_path`</b>: Optional file path for the temp file. If not given, a unique
-    file name will be generated and used. Slashes are allowed in the name;
-    any missing intermediate directories will be created. NOTE: This path is
-    the path that will be cleaned up, including any directories in the path,
+*   <b>`file_path`</b>: Optional file path for the temp file. If not given, a
+    unique file name will be generated and used. Slashes are allowed in the
+    name; any missing intermediate directories will be created. NOTE: This path
+    is the path that will be cleaned up, including any directories in the path,
     e.g., 'foo/bar/baz.txt' will `rm -r foo`.
-* <b>`content`</b>: Optional string or
-    bytes to initially write to the file. If not
-    specified, then an empty file is created.
-* <b>`mode`</b>: Mode string to use when writing content. Only used if `content` is
-    non-empty.
-* <b>`encoding`</b>: Encoding to use when writing string content. Only used if
+*   <b>`content`</b>: Optional string or bytes to initially write to the file.
+    If not specified, then an empty file is created.
+*   <b>`mode`</b>: Mode string to use when writing content. Only used if
+    `content` is non-empty.
+*   <b>`encoding`</b>: Encoding to use when writing string content. Only used if
     `content` is text.
-* <b>`errors`</b>: How to handle text to bytes encoding errors. Only used if
+*   <b>`errors`</b>: How to handle text to bytes encoding errors. Only used if
     `content` is text.
-* <b>`cleanup`</b>: Optional cleanup policy on when/if to remove the directory (and
-    all its contents) at the end of the test. If None, then uses
+*   <b>`cleanup`</b>: Optional cleanup policy on when/if to remove the directory
+    (and all its contents) at the end of the test. If None, then uses
     `self.tempfile_cleanup`.
-
 
 #### Returns:
 
@@ -2093,16 +2074,13 @@ Run the test without collecting errors in a TestResult
 defaultTestResult()
 ```
 
-
-
 <h3 id="doCleanups"><code>doCleanups</code></h3>
 
 ``` python
 doCleanups()
 ```
 
-Execute all cleanup functions. Normally called for you after
-tearDown.
+Execute all cleanup functions. Normally called for you after tearDown.
 
 <h3 id="evaluate"><code>evaluate</code></h3>
 
@@ -2115,7 +2093,6 @@ Evaluates tensors and returns numpy values.
 #### Args:
 
 * <b>`tensors`</b>: A Tensor or a nested list/tuple of Tensors.
-
 
 #### Returns:
 
@@ -2141,8 +2118,6 @@ failIf(
 )
 ```
 
-
-
 <h3 id="failIfAlmostEqual"><code>failIfAlmostEqual</code></h3>
 
 ``` python
@@ -2151,8 +2126,6 @@ failIfAlmostEqual(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failIfEqual"><code>failIfEqual</code></h3>
 
@@ -2163,8 +2136,6 @@ failIfEqual(
 )
 ```
 
-
-
 <h3 id="failUnless"><code>failUnless</code></h3>
 
 ``` python
@@ -2173,8 +2144,6 @@ failUnless(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failUnlessAlmostEqual"><code>failUnlessAlmostEqual</code></h3>
 
@@ -2185,8 +2154,6 @@ failUnlessAlmostEqual(
 )
 ```
 
-
-
 <h3 id="failUnlessEqual"><code>failUnlessEqual</code></h3>
 
 ``` python
@@ -2195,8 +2162,6 @@ failUnlessEqual(
     **kwargs
 )
 ```
-
-
 
 <h3 id="failUnlessRaises"><code>failUnlessRaises</code></h3>
 
@@ -2207,8 +2172,6 @@ failUnlessRaises(
 )
 ```
 
-
-
 <h3 id="gcs_access"><code>gcs_access</code></h3>
 
 ``` python
@@ -2217,8 +2180,6 @@ gcs_access(
     **kwds
 )
 ```
-
-
 
 <h3 id="getExternalLinks"><code>getExternalLinks</code></h3>
 
@@ -2266,8 +2227,6 @@ string, the path to the unique temporary directory created for this test.
 id()
 ```
 
-
-
 <h3 id="recordProperty"><code>recordProperty</code></h3>
 
 ``` python
@@ -2281,17 +2240,16 @@ Record an arbitrary property for later use.
 
 #### Args:
 
-* <b>`property_name`</b>: str, name of property to record; must be a valid XML
+*   <b>`property_name`</b>: str, name of property to record; must be a valid XML
     attribute name
-* <b>`property_value`</b>: value of property; must be valid XML attribute value
+*   <b>`property_value`</b>: value of property; must be valid XML attribute
+    value
 
 <h3 id="run"><code>run</code></h3>
 
 ``` python
 run(result=None)
 ```
-
-
 
 <h3 id="session"><code>session</code></h3>
 
@@ -2312,7 +2270,8 @@ Use the `use_gpu` and `force_gpu` options to control where ops are run. If
 possible. If both `force_gpu and `use_gpu` are False, all ops are pinned to
 the CPU.
 
-Example:
+#### Example:
+
 ```python
 class MyOperatorTest(test_util.TensorFlowTestCase):
   def testMyOperator(self):
@@ -2327,12 +2286,11 @@ class MyOperatorTest(test_util.TensorFlowTestCase):
 
 #### Args:
 
-* <b>`graph`</b>: Optional graph to use during the returned session.
-* <b>`config`</b>: An optional config_pb2.ConfigProto to use to configure the
+*   <b>`graph`</b>: Optional graph to use during the returned session.
+*   <b>`config`</b>: An optional config_pb2.ConfigProto to use to configure the
     session.
-* <b>`use_gpu`</b>: If True, attempt to run as many ops as possible on GPU.
-* <b>`force_gpu`</b>: If True, pin all ops to `/device:GPU:0`.
-
+*   <b>`use_gpu`</b>: If True, attempt to run as many ops as possible on GPU.
+*   <b>`force_gpu`</b>: If True, pin all ops to `/device:GPU:0`.
 
 #### Yields:
 
@@ -2341,20 +2299,22 @@ the graph building and execution code in a test case.
 
 <h3 id="setUp"><code>setUp</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ``` python
 setUp()
 ```
 
-
-
 <h3 id="setUpClass"><code>setUpClass</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
 
 ``` python
 @classmethod
 setUpClass(cls)
 ```
-
-
 
 <h3 id="shortDescription"><code>shortDescription</code></h3>
 
@@ -2399,8 +2359,6 @@ Return a context manager that will run the enclosed subtest.
 tearDown()
 ```
 
-
-
 <h3 id="tearDownClass"><code>tearDownClass</code></h3>
 
 ``` python
@@ -2428,11 +2386,7 @@ Use `self.session()` or `self.cached_session()` instead.
 
 ## Class Members
 
-<h3 id="MOCK_MONARCH"><code>MOCK_MONARCH</code></h3>
-
-<h3 id="longMessage"><code>longMessage</code></h3>
-
-<h3 id="maxDiff"><code>maxDiff</code></h3>
-
-<h3 id="tempfile_cleanup"><code>tempfile_cleanup</code></h3>
-
+*   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
+*   `longMessage = True` <a id="longMessage"></a>
+*   `maxDiff = 1600` <a id="maxDiff"></a>
+*   `tempfile_cleanup` <a id="tempfile_cleanup"></a>

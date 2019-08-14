@@ -31,5 +31,9 @@ class ChexpertTest(testing.DatasetBuilderTestCase):
   }
 
 
+class ChexpertS3Test(ChexpertTest):
+  VERSION = "experimental_latest"
+
+
 if __name__ == "__main__":
   testing.test_main()

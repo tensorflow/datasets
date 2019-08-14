@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import abc
 import functools
 import gzip
 import itertools
@@ -35,6 +34,23 @@ import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
 Translate dataset based on the data from statmt.org.
+
+Versions exists for the different years using a combination of multiple data
+sources. The base `wmt_translate` allows you to create your own config to choose
+your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
+
+```
+config = tfds.translate.wmt.WmtConfig(
+    version="0.0.1",
+    language_pair=("fr", "de"),
+    subsets={
+        tfds.Split.TRAIN: ["commoncrawl_frde"],
+        tfds.Split.VALIDATION: ["euelections_dev2019"],
+    },
+)
+builder = tfds.builder("wmt_translate", config=config)
+```
+
 """
 
 
@@ -203,6 +219,13 @@ _TRAIN_SUBSETS = [
         path=("giga-fren.release2.fixed.fr.gz",
               "giga-fren.release2.fixed.en.gz")),
     SubDataset(
+        name="hindencorp_01",
+        target="en",
+        sources={"hi"},
+        url="http://ufallab.ms.mff.cuni.cz/~bojar/hindencorp",
+        manual_dl_files=["hindencorp0.1.gz"],
+        path=""),
+    SubDataset(
         name="leta_v1",
         target="en",
         sources={"lv"},
@@ -215,19 +238,12 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt13/training-parallel-un.tgz",
         path=("un/undoc.2000.{src}-en.{src}", "un/undoc.2000.{src}-en.en")),
     SubDataset(
-        name="newscommentary_v8",
-        target="en",
-        sources={"cs", "de", "es", "fr", "ru"},
-        url="http://www.statmt.org/wmt13/training-parallel-nc-v8.tgz",
-        path=("training-parallel-nc-v8/news-commentary-v8.{src}-en.{src}",
-              "training-parallel-nc-v8/news-commentary-v8.{src}-en.en")),
-    SubDataset(
         name="newscommentary_v9",
         target="en",
         sources={"cs", "de", "fr", "ru"},
         url="http://www.statmt.org/wmt14/training-parallel-nc-v9.tgz",
-        path=("training-parallel-nc-v9/news-commentary-v9.{src}-en.{src}",
-              "training-parallel-nc-v9/news-commentary-v9.{src}-en.en")),
+        path=("training/news-commentary-v9.{src}-en.{src}",
+              "training/news-commentary-v9.{src}-en.en")),
     SubDataset(
         name="newscommentary_v10",
         target="en",
@@ -338,6 +354,13 @@ _TRAIN_SUBSETS = [
         url="http://www.statmt.org/wmt15/wiki-titles.tgz",
         path="wiki/fi-en/titles.fi-en"),
     SubDataset(
+        name="wikiheadlines_hi",
+        target="en",
+        sources={"hi"},
+        url="http://www.statmt.org/wmt14/wiki-titles.tgz",
+        path="wiki/hi-en/wiki-titles.hi-en"),
+    SubDataset(
+        # Verified that wmt14 and wmt15 files are identical.
         name="wikiheadlines_ru",
         target="en",
         sources={"ru"},
@@ -388,6 +411,13 @@ _DEV_SUBSETS = [
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newsdev2015-fien-src.{src}.sgm",
               "dev/newsdev2015-fien-ref.en.sgm")),
+    SubDataset(
+        name="newsdiscussdev2015",
+        target="en",
+        sources={"ro", "tr"},
+        url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
+        path=("dev/newsdiscussdev2015-{src}en-src.{src}.sgm",
+              "dev/newsdiscussdev2015-{src}en-ref.en.sgm")),
     SubDataset(
         name="newsdev2016",
         target="en",
@@ -476,7 +506,7 @@ _DEV_SUBSETS = [
     SubDataset(
         name="newstest2014",
         target="en",
-        sources={"cs", "de", "es", "fr", "ru"},
+        sources={"cs", "de", "es", "fr", "hi", "ru"},
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2014-{src}en-src.{src}.sgm",
               "dev/newstest2014-{src}en-ref.en.sgm")),
@@ -487,6 +517,13 @@ _DEV_SUBSETS = [
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2015-{src}en-src.{src}.sgm",
               "dev/newstest2015-{src}en-ref.en.sgm")),
+    SubDataset(
+        name="newsdiscusstest2015",
+        target="en",
+        sources={"fr"},
+        url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
+        path=("dev/newsdiscusstest2015-{src}en-src.{src}.sgm",
+              "dev/newsdiscusstest2015-{src}en-ref.en.sgm")),
     SubDataset(
         name="newstest2016",
         target="en",
@@ -545,6 +582,7 @@ class WmtConfig(tfds.core.BuilderConfig):
                description=None,
                language_pair=(None, None),
                text_encoder_config=None,
+               subsets=None,
                **kwargs):
     """BuilderConfig for WMT.
 
@@ -554,32 +592,45 @@ class WmtConfig(tfds.core.BuilderConfig):
       description: The description of the dataset.
       language_pair: pair of languages that will be used for translation. Should
                  contain 2 letter coded strings. For example: ("en", "de").
-     text_encoder_config: `tfds.features.text.TextEncoderConfig` (optional),
+      text_encoder_config: `tfds.features.text.TextEncoderConfig` (optional),
         configuration for the `tfds.features.text.TextEncoder` used for the
         `tfds.features.text.Translation` features.
+      subsets: Dict[split, list[str]]. List of the subset to use for each of the
+        split. Note that WMT subclasses overwrite this parameter.
       **kwargs: keyword arguments forwarded to super.
     """
     name = "%s-%s" % (language_pair[0], language_pair[1])
     if text_encoder_config:
       name += "." + text_encoder_config.name
+    if "name" in kwargs:  # Add name suffix for custom configs
+      name += "." + kwargs.pop("name")
 
     super(WmtConfig, self).__init__(
         name=name, description=description, **kwargs)
 
-    self.url = url
+    self.url = url or "http://www.statmt.org"
     self.citation = citation
     self.language_pair = language_pair
     self.text_encoder_config = text_encoder_config
+    self.subsets = subsets
 
 
 class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   """WMT translation dataset."""
-  IN_DEVELOPMENT = True
 
-  @abc.abstractproperty
+  def __init__(self, *args, **kwargs):
+    if type(self) == WmtTranslate and "config" not in kwargs:   # pylint: disable=unidiomatic-typecheck
+      raise ValueError(
+          "The raw `wmt_translate` can only be instantiated with the config "
+          "kwargs. You may want to use one of the `wmtYY_translate` "
+          "implementation instead to get the WMT dataset for a specific year."
+      )
+    super(WmtTranslate, self).__init__(*args, **kwargs)
+
+  @property
   def _subsets(self):
     """Subsets that make up each split of the dataset."""
-    pass
+    return self.builder_config.subsets
 
   @property
   def subsets(self):
@@ -697,6 +748,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
               _parse_czeng, filter_path=filter_path)
         else:
           sub_generator = _parse_czeng
+      elif ss_name == "hindencorp_01":
+        sub_generator = _parse_hindencorp
       elif len(files) == 2:
         if ss_name.endswith("_frde"):
           sub_generator = _parse_frde_bitext
@@ -896,3 +949,15 @@ def _parse_czeng(*paths, **kwargs):
               "en": en.strip(),
           }
 
+
+def _parse_hindencorp(path):
+  with tf.io.gfile.GFile(path) as f:
+    for line in f:
+      split_line = line.split("\t")
+      if len(split_line) != 5:
+        logging.warning("Skipping invalid HindEnCorp line: %s", line)
+        continue
+      yield {
+          "en": split_line[3].strip(),
+          "hi": split_line[4].strip()
+      }

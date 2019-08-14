@@ -48,5 +48,6 @@ So we have the following mix of images:
  - a4, b2, c2: 12_left.jpeg
  - a4, b2, c3: 12_right.jpeg
 
-There are 4 pictures in `sample` split (marked above). All odd number pictures
-are in `test` split, all pair number pictures are in `train` split.
+There are 4 pictures in `sample` split (marked above).
+Pictures with an even ID are in the `train` split, those with ID {1, 3, 5} are
+in the `validation` split, and those with ID {7, 9, 11} are in the `test` split.

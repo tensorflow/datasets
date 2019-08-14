@@ -26,11 +26,13 @@ already added.
 *   [Create your own `FeatureConnector`](#create-your-own-featureconnector)
 *   [Adding the dataset to `tensorflow/datasets`](#adding-the-dataset-to-tensorflowdatasets)
     *   [1. Add an import for registration](#1-add-an-import-for-registration)
-    *   [2. Run download_and_prepare locally](#2-run-download-and-prepare-locally)
+    *   [2. Run download_and_prepare locally](#2-run-download_and_prepare-locally)
     *   [3. Double-check the citation](#3-double-check-the-citation)
     *   [4. Add a test](#4-add-a-test)
     *   [5. Check your code style](#5-check-your-code-style)
-    *   [6. Send for review!](#6-send-for-review)
+    *   [6. Add release notes](#6-add-release-notes)
+    *   [7. Send for review!](#7-send-for-review)
+*   [Define the dataset outside TFDS](#define-the-dataset-outside-tfds)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 *   [Testing `MyDataset`](#testing-mydataset)
 
@@ -64,8 +66,11 @@ generate on a single machine. See the
 
 ### Use the default template
 
-To help you get started to add a new dataset inside `tfds`, you can cloned the
-repository and use the default template by running the following command:
+If you want to
+[contribute to our repo](https://github.com/tensorflow/datasets/blob/master/CONTRIBUTING.md)
+and add a new dataset, the following script will help you get started by
+generating the required python files,...
+To use it, clone the `tfds` repository and run the following command:
 
 ```
 python tensorflow_datasets/scripts/create_new_dataset.py \
@@ -74,7 +79,8 @@ python tensorflow_datasets/scripts/create_new_dataset.py \
 ```
 
 
-It will create the minimum python files that you're requiring to get started.
+Then search for `TODO(my_dataset)` in the generated files to do the
+modifications.
 
 ### `DatasetBuilder`
 
@@ -98,7 +104,8 @@ Its subclasses implement:
   [`DatasetInfo`](api_docs/python/tfds/core/DatasetInfo.md) object
   describing the dataset
 * `_split_generators`: downloads the source data and defines the dataset splits
-* `_generate_examples`: yields examples in the dataset from the source data
+* `_generate_examples`: yields `(key, example)` tuples in the dataset from the
+  source data
 
 This guide will use `GeneratorBasedBuilder`.
 
@@ -126,12 +133,15 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self):
     # Yields examples from the dataset
-    pass  # TODO
+    yield 'key', {}
 ```
 
 If you'd like to follow a test-driven development workflow, which can help you
 iterate faster, jump to the [testing instructions](#testing-mydataset) below,
 add the test, and then return here.
+
+For an explanation of what the version is, please read
+[datasets versioning](datasets_versioning.md).
 
 ## Specifying `DatasetInfo`
 
@@ -220,16 +230,14 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
-            name="train",
-            num_shards=10,
+            name=tfds.Split.TRAIN,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "train"),
                 "labels": os.path.join(extracted_path, "train_labels.csv"),
             },
         ),
         tfds.core.SplitGenerator(
-            name="test",
-            num_shards=1,
+            name=tfds.Split.TEST,
             gen_kwargs={
                 "images_dir_path": os.path.join(extracted_path, "test"),
                 "labels": os.path.join(extracted_path, "test_labels.csv"),
@@ -241,10 +249,6 @@ through [`tfds.Split.subsplit`](splits.md#subsplit).
 `SplitGenerator` describes how a split should be generated. `gen_kwargs`
 will be passed as keyword arguments to `_generate_examples`, which we'll define
 next.
-
-When specifying `num_shards`, which determines how many files the split will
-use, pick a number such that a single shard is less that 4 GiB as
-as each shard will be loaded in memory for shuffling.
 
 ## Writing an example generator
 
@@ -260,8 +264,8 @@ builder._generate_examples(
 ```
 
 This method will typically read source dataset artifacts (e.g. a CSV file) and
-yield feature dictionaries that correspond to the features specified in
-`DatasetInfo`.
+yield (key, feature dictionary) tuples that correspond to the features specified
+in `DatasetInfo`.
 
 ```python
 def _generate_examples(self, images_dir_path, labels):
@@ -273,7 +277,7 @@ def _generate_examples(self, images_dir_path, labels):
 
   # And yield examples as feature dictionaries
   for image_id, description, label in data:
-    yield {
+    yield image_id, {
         "image_description": description,
         "image": "%s/%s.jpeg" % (images_dir_path, image_id),
         "label": label,
@@ -284,6 +288,10 @@ def _generate_examples(self, images_dir_path, labels):
 format suitable for writing to disk (currently we use `tf.train.Example`
 protocol buffers). For example, `tfds.features.Image` will copy out the
 JPEG content of the passed image files automatically.
+
+The key (here: `image_id`) should uniquely identify the record. It is used to
+shuffle the dataset globally. If two records are yielded using the same key,
+an exception will be raised during preparation of the dataset.
 
 If you've implemented the test harness, your builder test should now pass.
 
@@ -303,16 +311,16 @@ additional dependencies only as needed, use `tfds.core.lazy_imports`.
 
 To use `lazy_imports`:
 
-* Add an entry for your dataset into `DATASET_EXTRAS` in
-  [`setup.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/setup.py).
-  This makes it so that users can do, for example,
-  `pip install 'tensorflow-datasets[svhn]'` to install the extra dependencies.
-* Add an entry for your import to
-  [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports.py)
-  and to the
-  [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_test.py).
-* Use `tfds.core.lazy_imports` to access the dependency (for example,
-  `tfds.core.lazy_imports.scipy`) in your `DatasetBuilder`.
+*   Add an entry for your dataset into `DATASET_EXTRAS` in
+    [`setup.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/setup.py).
+    This makes it so that users can do, for example, `pip install
+    'tensorflow-datasets[svhn]'` to install the extra dependencies.
+*   Add an entry for your import to
+    [`LazyImporter`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py)
+    and to the
+    [`LazyImportsTest`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib_test.py).
+*   Use `tfds.core.lazy_imports` to access the dependency (for example,
+    `tfds.core.lazy_imports.scipy`) in your `DatasetBuilder`.
 
 
 ### Corrupted data
@@ -535,22 +543,60 @@ except TensorFlow uses 2 spaces instead of 4. Please conform to the
 [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
 
 Most importantly, use
-[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/blob/master/oss_scripts/lint.sh)
+[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/oss_scripts/lint.sh)
 to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 
 ```sh
-./oss_scripts/lint.sh image
+./oss_scripts/lint.sh tensorflow_datasets/image
 ```
 
 See
 [TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
 for more information.
 
-### 6. Send for review!
+### 6. Add release notes
+
+Add the dataset to the
+[release notes](https://github.com/tensorflow/datasets/tree/master/docs/release_notes.md).
+The release note will be published for the next release.
+
+### 7. Send for review!
 
 Send the pull request for review.
 
+
+## Define the dataset outside TFDS.
+
+You can use the `tfds` API to define your own custom datasets outside of the
+`tfds` repository. The instructions are mainly the same as above, with some
+minor adjustments, documented below.
+
+### 1. Adjust the checksums directory
+
+For security and reproducibility when redistributing a dataset, `tfds` contains
+URL checksums for all dataset downloads in
+[`tensorflow_datasets/url_checksums`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/url_checksums).
+
+You can register an external checksums directory by calling
+`tfds.download.add_checksums_dir('/path/to/checksums_dir')` in your code, so
+that users of your dataset automatically use your checksums.
+
+You can create this checksums file with the
+`tensorflow_datasets.scripts.download_and_prepare` script by passing the flags
+`--register_checksums --checksums_dir=/path/to/checksums_dir`.
+
+### 2. Adjust the fake example direcory
+
+For testing, instead of using the default
+[fake example directory](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples)
+you can define your own by setting the `EXAMPLE_DIR` property of
+`tfds.testing.DatasetBuilderTestCase`:
+
+```
+class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
+  EXAMPLE_DIR = 'path/to/fakedata'`
+```
 
 ## Large datasets and distributed generation
 

@@ -39,6 +39,7 @@ TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 #   enable_eager_execution calls set global state and pytest runs all the tests
 #   in the same process.
 pytest \
+  -n auto \
   --disable-warnings \
   $TF2_IGNORE \
   --ignore="tensorflow_datasets/testing/test_utils.py" \

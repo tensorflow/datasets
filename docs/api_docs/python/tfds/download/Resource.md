@@ -8,19 +8,23 @@
 
 # tfds.download.Resource
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
+source</a>
+
 ## Class `Resource`
-
-
-
-
-
-Defined in [`core/download/resource.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py).
-
-<!-- Placeholder for "Used in" -->
 
 Represents a resource to download, extract, or both.
 
+<!-- Placeholder for "Used in" -->
+
+
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
+source</a>
 
 ``` python
 __init__(
@@ -34,13 +38,11 @@ Resource constructor.
 
 #### Args:
 
-* <b>`url`</b>: `str`, the URL at which to download the resource.
-* <b>`extract_method`</b>: `ExtractMethod` to be used to extract resource. If
+*   <b>`url`</b>: `str`, the URL at which to download the resource.
+*   <b>`extract_method`</b>: `ExtractMethod` to be used to extract resource. If
     not set, will be guessed from downloaded file name `original_fname`.
-* <b>`path`</b>: `str`, path of resource on local disk. Can be None if resource has
-    not be downloaded yet. In such case, `url` must be set.
-
-
+*   <b>`path`</b>: `str`, path of resource on local disk. Can be None if
+    resource has not be downloaded yet. In such case, `url` must be set.
 
 ## Properties
 
@@ -48,11 +50,12 @@ Resource constructor.
 
 Returns `ExtractMethod` to use on resource. Cannot be None.
 
-
-
 ## Methods
 
 <h3 id="exists_locally"><code>exists_locally</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
+source</a>
 
 ``` python
 @classmethod
@@ -63,6 +66,3 @@ exists_locally(
 ```
 
 Returns whether the resource exists locally, at `resource.path`.
-
-
-

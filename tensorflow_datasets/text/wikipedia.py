@@ -114,7 +114,8 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
-          version="0.0.2",
+          version=tfds.core.Version(
+              "0.0.3", experiments={tfds.core.Experiment.S3: False}),
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES
@@ -169,7 +170,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=tfds.Split.TRAIN,
-            num_shards=int(math.ceil(total_bytes / (4 * 2 ** 30))),  # max 4GB
+            num_shards=int(math.ceil(total_bytes / (128 * 2**20))),  # max 128MB
             gen_kwargs={"filepaths": downloaded_files["xml"], "language": lang})
     ]
 

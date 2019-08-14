@@ -15,9 +15,12 @@
 
 """Common corruptions to images.
 
-Define 12 common image corruptions: Gaussian noise, shot noise, impulse_noise,
+Define 12+4 common image corruptions: Gaussian noise, shot noise, impulse_noise,
 defocus blur, frosted glass blur, zoom blur, fog, brightness, contrast, elastic,
-pixelate, and jpeg compression.
+pixelate, jpeg compression.
+
+4 extra corruptions include gaussian blur, saturate, spatter, and speckle
+noise.
 """
 
 from __future__ import absolute_import
@@ -129,25 +132,25 @@ def plasma_fractal(mapsize=512, wibbledecay=3):
     cornerref = maparray[0:mapsize:stepsize, 0:mapsize:stepsize]
     squareaccum = cornerref + np.roll(cornerref, shift=-1, axis=0)
     squareaccum += np.roll(squareaccum, shift=-1, axis=1)
-    maparray[stepsize // 2:mapsize:stepsize, stepsize //
-             2:mapsize:stepsize] = wibbledmean(squareaccum)
+    maparray[stepsize // 2:mapsize:stepsize,
+             stepsize // 2:mapsize:stepsize] = wibbledmean(squareaccum)
 
   def filldiamonds():
     """For each diamond, calculate middle value as meanof points + wibble."""
     mapsize = maparray.shape[0]
-    drgrid = maparray[stepsize // 2:mapsize:stepsize, stepsize //
-                      2:mapsize:stepsize]
+    drgrid = maparray[stepsize // 2:mapsize:stepsize,
+                      stepsize // 2:mapsize:stepsize]
     ulgrid = maparray[0:mapsize:stepsize, 0:mapsize:stepsize]
     ldrsum = drgrid + np.roll(drgrid, 1, axis=0)
     lulsum = ulgrid + np.roll(ulgrid, -1, axis=1)
     ltsum = ldrsum + lulsum
-    maparray[0:mapsize:stepsize, stepsize //
-             2:mapsize:stepsize] = wibbledmean(ltsum)
+    maparray[0:mapsize:stepsize,
+             stepsize // 2:mapsize:stepsize] = wibbledmean(ltsum)
     tdrsum = drgrid + np.roll(drgrid, 1, axis=1)
     tulsum = ulgrid + np.roll(ulgrid, -1, axis=0)
     ttsum = tdrsum + tulsum
-    maparray[stepsize //
-             2:mapsize:stepsize, 0:mapsize:stepsize] = wibbledmean(ttsum)
+    maparray[stepsize // 2:mapsize:stepsize,
+             0:mapsize:stepsize] = wibbledmean(ttsum)
 
   while stepsize >= 2:
     fillsquares()
@@ -249,8 +252,8 @@ def frosted_glass_blur(x, severity=1):
     numpy array, image with uint8 pixels in [0,255]. Applied frosted glass blur.
   """
   # sigma, max_delta, iterations
-  c = [(0.7, 1, 2), (0.9, 2, 1), (1, 2, 3), (1.1, 3, 2), (1.5, 4,
-                                                          2)][severity - 1]
+  c = [(0.7, 1, 2), (0.9, 2, 1), (1, 2, 3), (1.1, 3, 2),
+       (1.5, 4, 2)][severity - 1]
   x = np.uint8(
       tfds.core.lazy_imports.skimage.filters.gaussian(
           np.array(x) / 255., sigma=c[0], multichannel=True) * 255)
@@ -377,8 +380,8 @@ def elastic(x, severity=1):
     numpy array, image with uint8 pixels in [0,255]. Applied elastic transform.
   """
   c = [(244 * 2, 244 * 0.7, 244 * 0.1), (244 * 2, 244 * 0.08, 244 * 0.2),
-       (244 * 0.05, 244 * 0.01, 244 * 0.02), (244 * 0.07, 244 * 0.01,
-                                              244 * 0.02),
+       (244 * 0.05, 244 * 0.01, 244 * 0.02),
+       (244 * 0.07, 244 * 0.01, 244 * 0.02),
        (244 * 0.12, 244 * 0.01, 244 * 0.02)][severity - 1]
 
   image = np.array(x, dtype=np.float32) / 255.
@@ -416,9 +419,9 @@ def elastic(x, severity=1):
 
   x, y, z = np.meshgrid(
       np.arange(shape[1]), np.arange(shape[0]), np.arange(shape[2]))
-  indices = np.reshape(y + dy, (-1, 1)), np.reshape(x + dx,
-                                                    (-1, 1)), np.reshape(
-                                                        z, (-1, 1))
+  indices = np.reshape(y + dy,
+                       (-1, 1)), np.reshape(x + dx,
+                                            (-1, 1)), np.reshape(z, (-1, 1))
   x_clip = np.clip(
       tfds.core.lazy_imports.scipy.ndimage.interpolation.map_coordinates(
           image, indices, order=1, mode='reflect').reshape(shape), 0, 1) * 255
@@ -464,3 +467,130 @@ def jpeg_compression(x, severity=1):
   output.seek(0)
   x = tfds.core.lazy_imports.PIL_Image.open(output)
   return np.asarray(x)
+
+
+# /////////////// Extra Corruptions ///////////////
+
+
+def gaussian_blur(x, severity=1):
+  """Apply gaussian blur to images.
+
+  Args:
+    x: numpy array, uncorrupted image, assumed to have uint8 pixel in [0,255].
+    severity: integer, severity of corruption.
+
+  Returns:
+    numpy array, image with uint8 pixels in [0,255]. Applied gaussian blur.
+  """
+  c = [1, 2, 3, 4, 6][severity - 1]
+
+  x = tfds.core.lazy_imports.gaussian(
+      np.array(x) / 255., sigma=c, multichannel=True)
+  x = np.clip(x, 0, 1) * 255
+
+  return around_and_astype(x)
+
+
+def saturate(x, severity=1):
+  """Increase saturation of images.
+
+  Args:
+    x: numpy array, uncorrupted image, assumed to have uint8 pixel in [0,255].
+    severity: integer, severity of corruption.
+
+  Returns:
+    numpy array, image with uint8 pixels in [0,255]. Applied saturation.
+  """
+  c = [(0.3, 0), (0.1, 0), (2, 0), (5, 0.1), (20, 0.2)][severity - 1]
+
+  x = np.array(x) / 255.
+  x = tfds.core.lazy_imports.skimage.color.rgb2hsv(x)
+  x[:, :, 1] = np.clip(x[:, :, 1] * c[0] + c[1], 0, 1)
+  x = tfds.core.lazy_imports.skimage.color.hsv2rgb(x)
+  x = np.clip(x, 0, 1) * 255
+
+  return around_and_astype(x)
+
+
+def spatter(x, severity=1):
+  """Apply spatter to images.
+
+  Args:
+    x: numpy array, uncorrupted image, assumed to have uint8 pixel in [0,255].
+    severity: integer, severity of corruption.
+
+  Returns:
+    numpy array, image with uint8 pixels in [0,255]. Applied spatter.
+  """
+  cv2 = tfds.core.lazy_imports.cv2
+  skimage = tfds.core.lazy_imports.skimage
+  c = [(0.65, 0.3, 4, 0.69, 0.6, 0), (0.65, 0.3, 3, 0.68, 0.6, 0),
+       (0.65, 0.3, 2, 0.68, 0.5, 0), (0.65, 0.3, 1, 0.65, 1.5, 1),
+       (0.67, 0.4, 1, 0.65, 1.5, 1)][severity - 1]
+  x = np.array(x, dtype=np.float32) / 255.
+
+  liquid_layer = np.random.normal(size=x.shape[:2], loc=c[0], scale=c[1])
+
+  liquid_layer = skimage.filters.gaussian(liquid_layer, sigma=c[2])
+  liquid_layer[liquid_layer < c[3]] = 0
+  if c[5] == 0:
+    liquid_layer = (liquid_layer * 255).astype(np.uint8)
+    dist = 255 - cv2.Canny(liquid_layer, 50, 150)
+    dist = cv2.distanceTransform(dist, cv2.DIST_L2, 5)
+    _, dist = cv2.threshold(dist, 20, 20, cv2.THRESH_TRUNC)
+    dist = cv2.blur(dist, (3, 3)).astype(np.uint8)
+    dist = cv2.equalizeHist(dist)
+    #     ker = np.array([[-1,-2,-3],[-2,0,0],[-3,0,1]], dtype=np.float32)
+    #     ker -= np.mean(ker)
+    ker = np.array([[-2, -1, 0], [-1, 1, 1], [0, 1, 2]])
+    dist = cv2.filter2D(dist, cv2.CV_8U, ker)
+    dist = cv2.blur(dist, (3, 3)).astype(np.float32)
+
+    m = cv2.cvtColor(liquid_layer * dist, cv2.COLOR_GRAY2BGRA)
+    m /= np.max(m, axis=(0, 1))
+    m *= c[4]
+
+    # water is pale turqouise
+    color = np.concatenate(
+        (175 / 255. * np.ones_like(m[..., :1]), 238 / 255. *
+         np.ones_like(m[..., :1]), 238 / 255. * np.ones_like(m[..., :1])),
+        axis=2)
+
+    color = cv2.cvtColor(color, cv2.COLOR_BGR2BGRA)
+    x = cv2.cvtColor(x, cv2.COLOR_BGR2BGRA)
+
+    x = cv2.cvtColor(np.clip(x + m * color, 0, 1), cv2.COLOR_BGRA2BGR) * 255
+  else:
+    m = np.where(liquid_layer > c[3], 1, 0)
+    m = skimage.filters.gaussian(m.astype(np.float32), sigma=c[4])
+    m[m < 0.8] = 0
+    #         m = np.abs(m) ** (1/c[4])
+
+    # mud brown
+    color = np.concatenate(
+        (63 / 255. * np.ones_like(x[..., :1]), 42 / 255. *
+         np.ones_like(x[..., :1]), 20 / 255. * np.ones_like(x[..., :1])),
+        axis=2)
+
+    color *= m[..., np.newaxis]
+    x *= (1 - m[..., np.newaxis])
+
+    x = np.clip(x + color, 0, 1) * 255
+  return around_and_astype(x)
+
+
+def speckle_noise(x, severity=1):
+  """Apply speckle noise to images.
+
+  Args:
+    x: numpy array, uncorrupted image, assumed to have uint8 pixel in [0,255].
+    severity: integer, severity of corruption.
+
+  Returns:
+    numpy array, image with uint8 pixels in [0,255]. Applied speckle noise.
+  """
+  c = [.15, .2, 0.35, 0.45, 0.6][severity - 1]
+
+  x = np.array(x) / 255.
+  x = np.clip(x + x * np.random.normal(size=x.shape, scale=c), 0, 1) * 255
+  return around_and_astype(x)

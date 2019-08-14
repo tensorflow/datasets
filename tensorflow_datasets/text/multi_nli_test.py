@@ -28,9 +28,13 @@ class MultiNLITest(testing.DatasetBuilderTestCase):
 
   SPLITS = {
       "train": 3,
-      "validation": 2,
+      "validation_matched": 2,
+      "validation_mismatched": 1,
   }
 
+
+class MultiNLIS3Test(MultiNLITest):
+  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()
