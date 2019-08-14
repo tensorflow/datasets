@@ -1,0 +1,60 @@
+book_path: /datasets/_book.yaml
+project_path: /datasets/_project.yaml
+description: <!--no description-->
+landing_page:
+  custom_css_path: /site-assets/css/style.css
+  rows:
+  - heading: A collection of datasets ready to use with TensorFlow.
+    items:
+    - description: >
+        TensorFlow Datasets is a collection of datasets ready to use with
+        TensorFlow.
+
+        All datasets are exposed as
+        <a href="https://www.tensorflow.org/api_docs/python/tf/data/Dataset">
+        <code>tf.data.Datasets</code>
+        </a>,
+        enabling easy-to-use and high-performance
+        input pipelines.
+
+        To get started see the
+        <a href="./overview">guide</a>
+        and our
+        <a href="./datasets">list of datasets</a>.
+    - code_block: |
+        <pre class = "prettyprint">
+        import tensorflow as tf
+        import tensorflow_datasets as tfds
+
+        # tfds works in both Eager and Graph modes
+        tf.enable_eager_execution()
+
+        # See available datasets
+        print(tfds.list_builders())
+
+        # Construct a tf.data.Dataset
+        dataset = tfds.load(name="mnist", split=tfds.Split.TRAIN)
+
+        # Build your input pipeline
+        dataset = dataset.shuffle(1024).batch(32).prefetch(tf.data.experimental.AUTOTUNE)
+        for features in dataset.take(1):
+          image, label = features["image"], features["label"]
+        </pre>
+
+        {% dynamic if request.tld != 'cn' %}
+          <a class="colab-button" target="_blank" href="https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/_index.ipynb">Run in a <span>Notebook</span></a>
+        {% dynamic endif %}
+  - classname: devsite-landing-row-cards
+    items:
+    - heading: Introducing TensorFlow Datasets
+      image_path: /resources/images/tf-logo-card-16x9.png
+      path: https://github.com/tensorflow/datasets/blob/master/docs/announce_proxy.md
+      buttons:
+      - label: Read on TensorFlow Blog
+        path: https://github.com/tensorflow/datasets/blob/master/docs/announce_proxy.md
+    - heading: TensorFlow Datasets on GitHub
+      image_path: /resources/images/github-card-16x9.png
+      path: https://github.com/tensorflow/datasets
+      buttons:
+      - label: View on GitHub
+        path: https://github.com/tensorflow/datasets

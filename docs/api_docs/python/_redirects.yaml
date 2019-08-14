@@ -1,0 +1,11 @@
+redirects:
+- from: /datasets/api_docs/python/tfds/GenerateMode
+  to: /datasets/api_docs/python/tfds/download/GenerateMode
+- from: /datasets/api_docs/python/tfds/testing/FeatureExpectationsTestCase/failureException
+  to: /datasets/api_docs/python/tfds/testing/DatasetBuilderTestCase/failureException
+- from: /datasets/api_docs/python/tfds/testing/SubTestCase/failureException
+  to: /datasets/api_docs/python/tfds/testing/DatasetBuilderTestCase/failureException
+- from: /datasets/api_docs/python/tfds/testing/TestCase/failureException
+  to: /datasets/api_docs/python/tfds/testing/DatasetBuilderTestCase/failureException
+- from: /datasets/api_docs/python/tfds/features/text
+  to: /datasets/api_docs/python/tfds/features/text_lib

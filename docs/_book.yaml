@@ -1,0 +1,38 @@
+upper_tabs:
+# Tabs left of dropdown menu
+- include: /_upper_tabs_left.yaml
+- include: /api_docs/_upper_tabs_api.yaml
+# Dropdown menu
+- name: Resources
+  path: /resources
+  is_default: true
+  menu:
+  - include: /resources/_menu_toc.yaml
+  lower_tabs:
+    # Subsite tabs
+    other:
+    - name: Catalog
+      contents:
+      - include: /datasets/catalog/_toc.yaml
+    - name: Guide
+      contents:
+      - title: Overview
+        path: /datasets/overview
+      - title: Versioning
+        path: /datasets/datasets_versioning
+      - title: Splits
+        path: /datasets/splits
+      - title: Add a dataset
+        path: /datasets/add_dataset
+      - title: Feature decoding
+        path: /datasets/decode
+      - title: Add huge datasets
+        path: /datasets/beam_datasets
+      - title: Store your dataset on GCS
+        path: /datasets/gcs
+    - name: API
+      skip_translation: true
+      contents:
+      - include: /datasets/api_docs/python/_toc.yaml
+
+- include: /_upper_tabs_right.yaml
