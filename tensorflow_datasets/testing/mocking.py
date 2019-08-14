@@ -70,7 +70,7 @@ def mock_data(num_examples=1, as_dataset_fn=None, data_dir=None):
         output_shapes=self.info.features.shape,
     )
 
-  with mock_data(as_dataset_fn=5):
+  with mock_data(as_dataset_fn=as_dataset):
     ds = tfds.load('some_dataset', split='train')
 
     for ex in ds:  # ds will yield the fake data example of 'as_dataset'.
