@@ -1,0 +1,125 @@
+{
+  "citation": "@article{FeiFei2004LearningGV,\n  title={Learning Generative Visual Models from Few Training Examples: An Incremental Bayesian Approach Tested on 101 Object Categories},\n  author={Li Fei-Fei and Rob Fergus and Pietro Perona},\n  journal={Computer Vision and Pattern Recognition Workshop},\n  year={2004},\n}\n", 
+  "description": "Caltech-101 consists of pictures of objects belonging to 101 classes, plus\none `background clutter` class. Each image is labelled with a single object.\nEach class contains roughly 40 to 800 images, totalling around 9k images.\nImages are of variable sizes, with typical edge lengths of 200-300 pixels.\nThis version contains image-level labels only. The original dataset also\ncontains bounding boxes.\n", 
+  "location": {
+    "urls": [
+      "http://www.vision.caltech.edu/Image_Datasets/Caltech101/"
+    ]
+  }, 
+  "name": "caltech101", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image/file_name", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "131740031", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "5", 
+      "shardLengths": [
+        "6084"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "6084"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "6084"
+              }
+            }, 
+            "name": "image/file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "6084"
+              }, 
+              "max": 101.0
+            }
+          }
+        ], 
+        "numExamples": "6084"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "5", 
+      "shardLengths": [
+        "3060"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3060"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "3060"
+              }
+            }, 
+            "name": "image/file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3060"
+              }, 
+              "max": 101.0
+            }
+          }
+        ], 
+        "numExamples": "3060"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "2.0.0"
+}

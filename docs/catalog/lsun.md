@@ -135,11 +135,9 @@ VALIDATION | 300
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{journals/corr/YuZSSX15,
   added-at = {2018-08-13T00:00:00.000+0200},

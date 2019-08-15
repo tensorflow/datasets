@@ -121,11 +121,9 @@ TEST       | 2,000
 *   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/abs-1812-01717,
   author    = {Thomas Unterthiner and

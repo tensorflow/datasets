@@ -160,11 +160,9 @@ ALL   | 30,000
 *   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/abs-1710-10196,
   author    = {Tero Karras and

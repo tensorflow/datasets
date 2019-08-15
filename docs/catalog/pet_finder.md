@@ -21,7 +21,6 @@ specific class)
 *   Size: `1.94 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'PetID': Text(shape=(), dtype=tf.string),
@@ -64,11 +63,9 @@ TEST  | 14,465
 *   [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'attributes', u'label')`
 
 ## Citation
-
 ```
 @ONLINE {kaggle-petfinder-adoption-prediction,
     author = "Kaggle and PetFinder.my",

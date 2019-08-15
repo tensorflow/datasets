@@ -20,7 +20,6 @@
 *   Size: `707.65 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -40,11 +39,9 @@ ALL   | 10
 *   [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{kather2016multi,
   title={Multi-class texture analysis in colorectal cancer histology},

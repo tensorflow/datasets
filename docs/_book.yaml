@@ -11,7 +11,7 @@ upper_tabs:
   lower_tabs:
     # Subsite tabs
     other:
-    - name: Datasets
+    - name: Catalog
       contents:
       - include: /datasets/catalog/_toc.yaml
     - name: Guide

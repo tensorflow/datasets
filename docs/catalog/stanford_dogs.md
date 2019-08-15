@@ -29,7 +29,6 @@ bounding box annotations are provided for all the 12,000 images.
 *   Size: `?? GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -42,7 +41,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls
@@ -50,11 +48,9 @@ None computed
 *   [http://vision.stanford.edu/aditya86/ImageNetDogs/main.html](http://vision.stanford.edu/aditya86/ImageNetDogs/main.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @inproceedings{KhoslaYaoJayadevaprakashFeiFei_FGVC2011,
 author = "Aditya Khosla and Nityananda Jayadevaprakash and Bangpeng Yao and

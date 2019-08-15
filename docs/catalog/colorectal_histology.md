@@ -21,7 +21,6 @@ x 150 x 3 RGB image of one of 8 classes.
 *   Size: `246.14 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -42,11 +41,9 @@ ALL   | 5,000
 *   [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{kather2016multi,
   title={Multi-class texture analysis in colorectal cancer histology},

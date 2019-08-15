@@ -20,7 +20,6 @@ Images of hands playing rock, paper, scissor game.
 *   Size: `219.53 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
@@ -41,11 +40,9 @@ TEST  | 372
 *   [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @ONLINE {rps,
 author = "Laurence Moroney",

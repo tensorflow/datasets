@@ -20,7 +20,6 @@ A large set of images of horses and humans.
 *   Size: `153.59 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(300, 300, 3), dtype=tf.uint8),
@@ -41,11 +40,9 @@ TEST  | 256
 *   [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @ONLINE {horses_or_humans,
 author = "Laurence Moroney",

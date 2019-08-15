@@ -23,7 +23,6 @@ of the 10 rows of Hiragana when creating Kuzushiji-MNIST.
 *   Size: `20.26 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -44,11 +43,9 @@ TEST  | 10,000
 *   [http://codh.rois.ac.jp/kmnist/index.html.en](http://codh.rois.ac.jp/kmnist/index.html.en)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @online{clanuwat2018deep,
   author       = {Tarin Clanuwat and Mikel Bober-Irizar and Asanobu Kitamoto and Alex Lamb and Kazuaki Yamamoto and David Ha},

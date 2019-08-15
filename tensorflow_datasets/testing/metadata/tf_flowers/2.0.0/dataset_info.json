@@ -1,0 +1,74 @@
+{
+  "citation": "@ONLINE {tfflowers,\nauthor = \"The TensorFlow Team\",\ntitle = \"Flowers\",\nmonth = \"jan\",\nyear = \"2019\",\nurl = \"http://download.tensorflow.org/example_images/flower_photos.tgz\" }\n", 
+  "description": "A large set of images of flowers", 
+  "location": {
+    "urls": [
+      "http://download.tensorflow.org/example_images/flower_photos.tgz"
+    ]
+  }, 
+  "name": "tf_flowers", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "228813984", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "20", 
+      "shardLengths": [
+        "1835", 
+        "1835"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3670"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3670"
+              }, 
+              "max": 4.0
+            }
+          }
+        ], 
+        "numExamples": "3670"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "2.0.0"
+}

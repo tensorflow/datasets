@@ -78,11 +78,9 @@ VALIDATION | 3,000
 *   [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'de', u'en')`
 
 ## Citation
-
 ```
 @InProceedings{bojar-EtAl:2014:W14-33,
   author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},

@@ -22,7 +22,6 @@ missing values are replaced with -1, string missing values are replaced with
 *   Size: `114.98 KiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'features': FeaturesDict({
@@ -56,11 +55,9 @@ ALL   | 1,309
 *   [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'features', u'survived')`
 
 ## Citation
-
 ```
 @ONLINE {titanic,
 author = "Frank E. Harrell Jr., Thomas Cason",

@@ -78,9 +78,15 @@ class Lm1bConfig(tfds.core.BuilderConfig):
         feature.
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version history:
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.0.{1,2}: Initial versions.
     super(Lm1bConfig, self).__init__(
         version=tfds.core.Version(
             version, experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -145,7 +151,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, training_files):
-    for ex in self._generate_examples(training_files):
+    for _, ex in self._generate_examples(training_files):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
@@ -173,7 +179,8 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
     for filepath in files:
       logging.info("generating examples from = %s", filepath)
       with tf.io.gfile.GFile(filepath) as f:
-        for line in f:
-          yield {
+
+        for idx, line in enumerate(f):
+          yield idx, {
               "text": line.strip(),
           }

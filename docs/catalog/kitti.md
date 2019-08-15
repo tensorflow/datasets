@@ -32,7 +32,6 @@ the Kitti homepage.
 *   Size: `11.71 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -64,11 +63,9 @@ VALIDATION | 423
 *   [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @inproceedings{Geiger2012CVPR,
   author = {Andreas Geiger and Philip Lenz and Raquel Urtasun},

@@ -45,11 +45,9 @@ ALL   | 10,000
 *   [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/SrivastavaMS15,
   author    = {Nitish Srivastava and

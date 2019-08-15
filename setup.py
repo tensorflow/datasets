@@ -85,6 +85,7 @@ DATASET_FILES = [
     'image/cbis_ddsm_mass_shapes.txt',
     'image/cbis_ddsm_patch_labels.txt',
     'image/dtd_key_attributes.txt',
+    'image/food-101_classes.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/open_images_classes_all.txt',
@@ -92,17 +93,19 @@ DATASET_FILES = [
     'image/open_images_classes_trainable.txt',
     'image/quickdraw_labels.txt',
     'image/sun397_labels.txt',
+    'image/sun397_tfds_te.txt',
+    'image/sun397_tfds_tr.txt',
+    'image/sun397_tfds_va.txt',
     'url_checksums/*',
     'video/ucf101_labels.txt',
 ]
 
 DATASET_EXTRAS = {
     # In alphabetical order
+    'aflw2k3d': ['scipy'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
-    'eurosat': [
-        'scikit-image',
-    ],
+    'eurosat': ['scikit-image',],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV

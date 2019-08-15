@@ -34,7 +34,6 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
 *   Size: `608.33 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -57,11 +56,9 @@ TEST       | 1,880
 *   [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @InProceedings{cimpoi14describing,
 Author    = {M. Cimpoi and S. Maji and I. Kokkinos and S. Mohamed and A. Vedaldi},

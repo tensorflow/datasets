@@ -24,7 +24,6 @@ images, so labels are not provided.
 *   Size: `104.68 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -45,11 +44,9 @@ TEST       | 10,000
 *   [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @inproceedings{salakhutdinov2008quantitative,
 title={On the quantitative analysis of deep belief networks},

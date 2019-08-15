@@ -20,7 +20,6 @@ of each class.
 *   Size: `519.83 KiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(20, 16, 1), dtype=tf.uint8),
@@ -40,11 +39,9 @@ ALL   | 1,404
 *   [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 
 ```

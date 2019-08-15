@@ -61,7 +61,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls
@@ -69,11 +68,9 @@ None computed
 *   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'sentinel2', u'label')`
 
 ## Citation
-
 ```
 @misc{helber2017eurosat,
     title={EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification},

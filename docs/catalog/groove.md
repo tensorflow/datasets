@@ -140,7 +140,6 @@ TEST       | 2,033
 *   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation

@@ -129,11 +129,9 @@ VALIDATION | 5,000
 *   [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/LinMBHPRDZ14,
   author    = {Tsung{-}Yi Lin and

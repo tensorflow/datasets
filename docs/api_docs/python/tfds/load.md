@@ -20,6 +20,7 @@ tfds.load(
     data_dir=None,
     batch_size=None,
     in_memory=None,
+    shuffle_files=None,
     download=True,
     as_supervised=False,
     decoders=None,
@@ -39,6 +40,7 @@ tfds.load(
 
 *   [CycleGAN](https://www.tensorflow.org/beta/tutorials/generative/cyclegan)
 *   [Distributed training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/keras)
+*   [How-to create an Estimator from a Keras model](https://www.tensorflow.org/beta/tutorials/estimators/keras_model_to_estimator)
 *   [Image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
 *   [Multi-worker Training with Estimator](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_estimator)
 *   [Multi-worker Training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_keras)
@@ -102,6 +104,9 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     increases iteration speeds. Note that if `True` and the dataset has unknown
     dimensions, the features will be padded to the maximum size across the
     dataset.
+*   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
+    to `True` if `split == tfds.Split.TRAIN` and `False` otherwise. From
+    2019-08-20, will always default to False.
 *   <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is expected
@@ -131,9 +136,6 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     deduced from data_dir.
 *   <b>`as_dataset_kwargs`</b>: `dict` (optional), keyword arguments passed to
     <a href="../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>.
-    `split` will be passed through by default. Example: `{'shuffle_files':
-    True}`. Note that shuffle_files is False by default unless `split ==
-    tfds.Split.TRAIN`.
 *   <b>`try_gcs`</b>: `bool`, if True, tfds.load will see if the dataset exists
     on the public GCS bucket before building it locally.
 

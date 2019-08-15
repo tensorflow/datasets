@@ -204,11 +204,9 @@ VALIDATION | 4,045
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'tr', u'en')`
 
 ## Citation
-
 ```
 @inproceedings{Ye2018WordEmbeddings,
   author  = {Ye, Qi and Devendra, Sachan and Matthieu, Felix and Sarguna, Padmanabhan and Graham, Neubig},

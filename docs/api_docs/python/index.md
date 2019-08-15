@@ -1,5 +1,7 @@
 # All symbols in TensorFlow Datasets
 
+## Primary symbols
+
 *   <a href="./tfds.md"><code>tfds</code></a>
 *   <a href="./tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>
 *   <a href="./tfds/Split.md"><code>tfds.Split</code></a>

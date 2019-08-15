@@ -22,7 +22,6 @@ handwritten characters from 50 different alphabets.
 *   Size: `17.95 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'alphabet': ClassLabel(shape=(), dtype=tf.int64, num_classes=50),
@@ -47,11 +46,9 @@ SMALL1 | 2,720
 *   [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{lake2015human,
   title={Human-level concept learning through probabilistic program induction},

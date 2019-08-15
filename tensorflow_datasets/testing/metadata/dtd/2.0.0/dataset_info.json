@@ -1,0 +1,163 @@
+{
+  "citation": "@InProceedings{cimpoi14describing,\nAuthor    = {M. Cimpoi and S. Maji and I. Kokkinos and S. Mohamed and A. Vedaldi},\nTitle     = {Describing Textures in the Wild},\nBooktitle = {Proceedings of the {IEEE} Conf. on Computer Vision and Pattern Recognition ({CVPR})},\nYear      = {2014}}\n", 
+  "description": "The Describable Textures Dataset (DTD) is an evolving collection of textural\nimages in the wild, annotated with a series of human-centric attributes,\ninspired by the perceptual properties of textures. This data is made available\nto the computer vision community for research purposes.\n\nThe \"label\" of each example is its \"key attribute\" (see the official website).\nThe official release of the dataset defines a 10-fold cross-validation\npartition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.\n", 
+  "location": {
+    "urls": [
+      "https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html"
+    ]
+  }, 
+  "name": "dtd", 
+  "schema": {
+    "feature": [
+      {
+        "name": "file_name", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "637880320", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "940", 
+        "940"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }, 
+              "max": 46.0
+            }
+          }
+        ], 
+        "numExamples": "1880"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "940", 
+        "940"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }, 
+              "max": 46.0
+            }
+          }
+        ], 
+        "numExamples": "1880"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "940", 
+        "940"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1880"
+              }, 
+              "max": 46.0
+            }
+          }
+        ], 
+        "numExamples": "1880"
+      }
+    }
+  ], 
+  "version": "2.0.0"
+}

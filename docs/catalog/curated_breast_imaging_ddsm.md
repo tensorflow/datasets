@@ -131,11 +131,9 @@ TEST  | 348
 *   [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @misc{CBIS_DDSM_Citation,
   doi = {10.7937/k9/tcia.2016.7o02s9cy},

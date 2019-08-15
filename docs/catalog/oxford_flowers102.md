@@ -36,7 +36,6 @@ per class).
 *   Size: `336.76 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -59,11 +58,9 @@ TRAIN      | 1,020
 *   [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @InProceedings{Nilsback08,
    author = "Nilsback, M-E. and Zisserman, A.",

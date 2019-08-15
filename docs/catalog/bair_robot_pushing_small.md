@@ -22,7 +22,6 @@ including one training set (train) and two test sets of previously seen
 *   Size: `30.06 GiB`
 
 ## Features
-
 ```python
 Sequence({
     'action': Tensor(shape=(4,), dtype=tf.float32),
@@ -45,11 +44,9 @@ TEST  | 256
 *   [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @misc{1710.05268,
   Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},

@@ -19,7 +19,6 @@ Generic image classification dataset.
 *   Size: `?? GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -28,7 +27,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls

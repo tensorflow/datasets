@@ -186,11 +186,9 @@ TEST       | 2,818
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'ru', u'en')`
 
 ## Citation
-
 ```
 @InProceedings{bojar-EtAl:2015:WMT,
   author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Haddow, Barry  and  Huck, Matthias  and  Hokamp, Chris  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco},

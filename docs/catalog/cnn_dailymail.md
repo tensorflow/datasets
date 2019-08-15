@@ -78,11 +78,9 @@ TEST       | 11,490
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'article', u'highlights')`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/SeeLM17,
   author    = {Abigail See and

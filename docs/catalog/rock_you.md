@@ -25,7 +25,6 @@ Machine Learning models for password guessing and cracking.
 *   Size: `133.44 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'password': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),

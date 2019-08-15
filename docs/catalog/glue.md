@@ -270,11 +270,9 @@ VALIDATION | 71
 *   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @inproceedings{levesque2012winograd,
               title={The winograd schema challenge},

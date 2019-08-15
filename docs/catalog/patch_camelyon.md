@@ -30,7 +30,6 @@ Imagenet, trainable on a single GPU.
 *   Size: `7.48 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'id': Text(shape=(), dtype=tf.string),
@@ -53,11 +52,9 @@ TEST       | 32,768
 *   [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @misc{b_s_veeling_j_linmans_j_winkens_t_cohen_2018_2546921,
   author       = {B. S. Veeling, J. Linmans, J. Winkens, T. Cohen, M. Welling},
