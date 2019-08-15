@@ -29,9 +29,9 @@ The main library entrypoints are:
 Documentation:
 
 * These API docs
-* [Available datasets](https://github.com/tensorflow/datasets/tree/master/docs/catalog/overview.md)
+* [Available datasets](https://www.tensorflow.org/datasets/catalog/overview)
 * [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-* [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+* [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
 """
 from __future__ import absolute_import
 from __future__ import division
