@@ -100,7 +100,6 @@ class The300wLp(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 "image_dir_path": os.path.join(extracted_path, '300W_LP'),
             }),
@@ -146,4 +145,4 @@ class The300wLp(tfds.core.GeneratorBasedBuilder):
           "exp_params": exp_params,
           "pose_params": pose_params
       }
-      yield image_file, record
+      yield os.path.basename(image_file), record
