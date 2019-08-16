@@ -54,10 +54,18 @@ for generating training/validation data from the MNIST dataset.
 
 class MovingMnist(tfds.core.GeneratorBasedBuilder):
   """MovingMnist."""
-
+  
+  # Versions history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.1.0: Initial version.
+  
   VERSION = tfds.core.Version("0.1.0",
                               experiments={tfds.core.Experiment.S3: False})
-
+  
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("1.0.0"),
+  ]
+  
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
@@ -96,5 +104,5 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
       images = np.load(fp)
     images = np.transpose(images, (1, 0, 2, 3))
     images = np.expand_dims(images, axis=-1)
-    for sequence in images:
-      yield dict(image_sequence=sequence)
+    for i, sequence in enumerate(images):
+      yield i, dict(image_sequence=sequence)

@@ -86,7 +86,10 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
   Note that in contrast to the labels provided in the original dataset, here the
   labels start at zero, not at one.
   """
-
+  
+  # Versions history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 1.0.0: Initial version.
   BUILDER_CONFIGS = [
       Ucf101Config(
           name='ucf101_1_256',
@@ -96,6 +99,9 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           split_number=1,
           version=tfds.core.Version(
               '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version("2.0.0"),
+          ],
       ),
   ]
 
@@ -160,7 +166,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
     data_list_path_path = os.path.join(splits_dir, data_list)
     with tf.io.gfile.GFile(data_list_path_path, 'r') as data_list_file:
       labels_and_paths = data_list_file.readlines()
-    for label_and_path in labels_and_paths:
+    for i, label_and_path in enumerate(labels_and_paths):
       # The train splits contain not only the filename, but also a digit
       # encoding the label separated by a space, which we ignore.
       label_and_path = label_and_path.strip().split(' ')[0]
@@ -172,4 +178,4 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
         logging.error('Example %s not found', video_path)
         continue
       # We extract the label from the filename.
-      yield {'video': video_path, 'label': label}
+      yield i, {'video': video_path, 'label': label}

@@ -54,9 +54,15 @@ class StarcraftVideoConfig(tfds.core.BuilderConfig):
 
   @api_utils.disallow_positional_args
   def __init__(self, map_name, resolution, size_in_gb, **kwargs):
+    # Versions history:
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.1.2: Initial version.
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(
             "0.1.2", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.map_name = map_name
     self.resolution = resolution
@@ -211,12 +217,14 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
           self._parse_single_video,
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
       iterator = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
+      i = 0
       with tf.compat.v1.Session() as sess:
         sess.run(tf.compat.v1.global_variables_initializer())
         try:
           while True:
             video = sess.run(iterator)
-            yield {"rgb_screen": video}
+            yield i, {"rgb_screen": video}
+            i += 1
 
         except tf.errors.OutOfRangeError:
           # End of file.
