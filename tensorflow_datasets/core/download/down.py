@@ -29,8 +29,10 @@ def split_blocks_to_file(num, div):
   for i in range(div+1):
     p = [marker, (i+1)*plu*buffer_size]
     marker += plu*buffer_size
-
+    if not os.path.exists('downloaded'):
+      os.mkdir('downloaded')
     file_name = os.path.join('downloaded', 'file{}'.format(i))
+
     dic[file_name] = p
   print(dic)
   return dic
