@@ -44,7 +44,6 @@ __all__ = [
 
 # Internal registry containing <str registered_name, DatasetBuilder subclass>
 _DATASET_REGISTRY = {}
-
 # Internal registry containing:
 # <str snake_cased_name, abstract DatasetBuilder subclass>
 _ABSTRACT_DATASET_REGISTRY = {}
@@ -136,7 +135,7 @@ class RegisteredDataset(abc.ABCMeta):
     elif class_dict.get("IN_DEVELOPMENT"):
       _IN_DEVELOPMENT_REGISTRY[name] = cls
     else:
-      _DATASET_REGISTRY[name] = [cls, sorted(list(map(str, versions)))]
+      _DATASET_REGISTRY[name] = cls, sorted(list(map(str, versions)))
     return cls
 
 
@@ -182,7 +181,7 @@ def builder(name, **builder_init_kwargs):
   if name not in _DATASET_REGISTRY:
     raise DatasetNotFoundError(name)
   try:
-    return _DATASET_REGISTRY[name](**builder_kwargs)
+    return _DATASET_REGISTRY[name][0](**builder_kwargs)
   except BaseException:
     logging.error("Failed to construct dataset %s", name)
     raise
