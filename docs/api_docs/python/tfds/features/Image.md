@@ -31,24 +31,41 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 <!-- Placeholder for "Used in" -->
 
-Input: The image connector accepts as input:
-  * path to a {bmp,gif,jpeg,png} image.
-  * uint8 array representing an image.
+During `_generate_examples`, the feature connector accept as input any of:
+
+*   `str`: path to a {bmp,gif,jpeg,png} image (ex: `/path/to/img.png`).
+*   `np.array`: 3d `np.uint8` array representing an image.
+*   A file object containing the png or jpeg encoded image string (ex:
+    `io.BytesIO(encoded_img_bytes)`)
 
 #### Output:
 
-*   <b>`image`</b>: tf.Tensor of type tf.uint8 and shape [height, width,
-    num_channels] for BMP, JPEG, and PNG images and shape [num_frames, height,
-    width, 3] for GIF images.
+`tf.Tensor` of type `tf.uint8` and shape `[height, width, num_channels]` for
+BMP, JPEG, and PNG images and shape `[num_frames, height, width, 3]` for GIF
+images.
 
 #### Example:
 
-*   In the DatasetInfo object: features=features.FeaturesDict({ 'input':
-    features.Image(), 'target': features.Image(shape=(None, None, 1),
-    encoding_format='png'), })
+*   In the
+    <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>
+    object:
 
-*   During generation: yield { 'input': 'path/to/img.jpg', 'target':
-    np.ones(shape=(64, 64, 1), dtype=np.uint8), }
+```python
+features=features.FeaturesDict({
+    'input': features.Image(),
+    'target': features.Image(shape=(None, None, 1),
+                               encoding_format='png'),
+})
+```
+
+*   During generation:
+
+```python
+yield {
+    'input': 'path/to/img.jpg',
+    'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
+}
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 

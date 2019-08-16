@@ -39,37 +39,37 @@ the competition.
 `tfds.image.visual_domain_decathlon.VisualDomainDecathlonConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `aircraft` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "Aircraft", with
+*   `aircraft` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Aircraft", with
     images resized isotropically to have a shorter size of 72 pixels.
 
-*   `cifar100` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "CIFAR-100", with
+*   `cifar100` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "CIFAR-100", with
     images resized isotropically to have a shorter size of 72 pixels.
 
-*   `daimlerpedcls` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "Daimler
+*   `daimlerpedcls` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Daimler
     Pedestrian Classification", with images resized isotropically to have a
     shorter size of 72 pixels.
 
-*   `dtd` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "Describable Textures",
+*   `dtd` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Describable Textures",
     with images resized isotropically to have a shorter size of 72 pixels.
 
-*   `gtsrb` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "German Traffic Signs",
+*   `gtsrb` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "German Traffic Signs",
     with images resized isotropically to have a shorter size of 72 pixels.
 
-*   `imagenet12` (`v1.0.0`) (`Size: 6.40 GiB`): Data based on "Imagenet", with
+*   `imagenet12` (`v1.1.0`) (`Size: 6.40 GiB`): Data based on "Imagenet", with
     images resized isotropically to have a shorter size of 72 pixels.
 
-*   `omniglot` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "Omniglot", with
+*   `omniglot` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Omniglot", with
     images resized isotropically to have a shorter size of 72 pixels.
 
-*   `svhn` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "Street View House
+*   `svhn` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Street View House
     Numbers", with images resized isotropically to have a shorter size of 72
     pixels.
 
-*   `ucf101` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "UCF101 Dynamic
+*   `ucf101` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "UCF101 Dynamic
     Images", with images resized isotropically to have a shorter size of 72
     pixels.
 
-*   `vgg-flowers` (`v1.0.0`) (`Size: 1.04 GiB`): Data based on "VGG-Flowers",
+*   `vgg-flowers` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "VGG-Flowers",
     with images resized isotropically to have a shorter size of 72 pixels.
 
 ## `visual_domain_decathlon/aircraft`

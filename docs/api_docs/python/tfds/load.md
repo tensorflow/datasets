@@ -35,6 +35,7 @@ tfds.load(
 ### Used in the guide:
 
 *   [Convert Your Existing Code to TensorFlow 2.0](https://www.tensorflow.org/beta/guide/migration_guide)
+*   [Estimators](https://www.tensorflow.org/beta/guide/estimators/index)
 
 ### Used in the tutorials:
 

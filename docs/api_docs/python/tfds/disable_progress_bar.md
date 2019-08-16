@@ -17,6 +17,10 @@ Disabled Tqdm progress bar.
 tfds.disable_progress_bar()
 ```
 
+### Used in the guide:
+
+*   [Estimators](https://www.tensorflow.org/beta/guide/estimators/index)
+
 ### Used in the tutorials:
 
 *   [CycleGAN](https://www.tensorflow.org/beta/tutorials/generative/cyclegan)

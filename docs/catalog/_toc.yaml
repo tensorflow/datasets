@@ -10,6 +10,8 @@ toc:
 - section:
   - path: /datasets/catalog/abstract_reasoning
     title: abstract_reasoning
+  - path: /datasets/catalog/aflw2k3d
+    title: aflw2k3d
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
   - path: /datasets/catalog/binarized_mnist
@@ -40,6 +42,8 @@ toc:
     title: coco
   - path: /datasets/catalog/coco2014
     title: coco2014
+  - path: /datasets/catalog/coil100
+    title: coil100
   - path: /datasets/catalog/colorectal_histology
     title: colorectal_histology
   - path: /datasets/catalog/colorectal_histology_large
@@ -142,6 +146,8 @@ toc:
     title: cnn_dailymail
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/gap
+    title: gap
   - path: /datasets/catalog/glue
     title: glue
   - path: /datasets/catalog/imdb_reviews

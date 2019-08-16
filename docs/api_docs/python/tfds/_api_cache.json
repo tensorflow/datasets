@@ -1208,6 +1208,7 @@
     "tfds.testing.TestCase.tempfile_cleanup": true, 
     "tfds.testing.TestCase.test_session": true, 
     "tfds.testing.make_tmp_dir": false, 
+    "tfds.testing.mock_data": false, 
     "tfds.testing.mock_kaggle_api": false, 
     "tfds.testing.rm_tmp_dir": false, 
     "tfds.testing.run_in_graph_and_eager_modes": false, 

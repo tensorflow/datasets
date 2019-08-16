@@ -23,10 +23,9 @@ evaluation platform for the algorithms of scene parsing.
 *   `DatasetBuilder`:
     [`tfds.image.scene_parse_150.SceneParse150`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/scene_parse_150.py)
 *   Version: `v1.0.0`
-*   Size: `?? GiB`
+*   Size: `936.97 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'annotation': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -36,18 +35,20 @@ FeaturesDict({
 
 ## Statistics
 
-None computed
+Split | Examples
+:---- | -------:
+ALL   | 22,210
+TRAIN | 20,210
+TEST  | 2,000
 
 ## Urls
 
 *   [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'annotation')`
 
 ## Citation
-
 ```
 @inproceedings{zhou2017scene,
 title={Scene Parsing through ADE20K Dataset},

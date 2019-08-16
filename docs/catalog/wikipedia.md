@@ -235,698 +235,698 @@ following configurations predefined (defaults to the first one):
 *   `20190301.et` (`v0.0.3`) (`Size: 196.03 MiB`): Wikipedia dataset for et,
     parsed from 20190301 dump.
 
-*   `20190301.eu` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for eu, parsed
-    from 20190301 dump.
-
-*   `20190301.ext` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ext,
+*   `20190301.eu` (`v0.0.3`) (`Size: 180.35 MiB`): Wikipedia dataset for eu,
     parsed from 20190301 dump.
 
-*   `20190301.fa` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for fa, parsed
-    from 20190301 dump.
+*   `20190301.ext` (`v0.0.3`) (`Size: 2.40 MiB`): Wikipedia dataset for ext,
+    parsed from 20190301 dump.
 
-*   `20190301.ff` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ff, parsed
-    from 20190301 dump.
+*   `20190301.fa` (`v0.0.3`) (`Size: 693.84 MiB`): Wikipedia dataset for fa,
+    parsed from 20190301 dump.
 
-*   `20190301.fi` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for fi, parsed
-    from 20190301 dump.
+*   `20190301.ff` (`v0.0.3`) (`Size: 387.75 KiB`): Wikipedia dataset for ff,
+    parsed from 20190301 dump.
 
-*   `20190301.fiu-vro` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for
+*   `20190301.fi` (`v0.0.3`) (`Size: 656.44 MiB`): Wikipedia dataset for fi,
+    parsed from 20190301 dump.
+
+*   `20190301.fiu-vro` (`v0.0.3`) (`Size: 2.00 MiB`): Wikipedia dataset for
     fiu-vro, parsed from 20190301 dump.
 
-*   `20190301.fj` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for fj, parsed
-    from 20190301 dump.
-
-*   `20190301.fo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for fo, parsed
-    from 20190301 dump.
-
-*   `20190301.fr` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for fr, parsed
-    from 20190301 dump.
-
-*   `20190301.frp` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for frp,
+*   `20190301.fj` (`v0.0.3`) (`Size: 262.98 KiB`): Wikipedia dataset for fj,
     parsed from 20190301 dump.
 
-*   `20190301.frr` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for frr,
+*   `20190301.fo` (`v0.0.3`) (`Size: 13.67 MiB`): Wikipedia dataset for fo,
     parsed from 20190301 dump.
 
-*   `20190301.fur` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for fur,
+*   `20190301.fr` (`v0.0.3`) (`Size: 4.14 GiB`): Wikipedia dataset for fr,
     parsed from 20190301 dump.
 
-*   `20190301.fy` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for fy, parsed
-    from 20190301 dump.
-
-*   `20190301.ga` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ga, parsed
-    from 20190301 dump.
-
-*   `20190301.gag` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gag,
+*   `20190301.frp` (`v0.0.3`) (`Size: 2.03 MiB`): Wikipedia dataset for frp,
     parsed from 20190301 dump.
 
-*   `20190301.gan` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gan,
+*   `20190301.frr` (`v0.0.3`) (`Size: 7.88 MiB`): Wikipedia dataset for frr,
     parsed from 20190301 dump.
 
-*   `20190301.gd` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gd, parsed
-    from 20190301 dump.
-
-*   `20190301.gl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gl, parsed
-    from 20190301 dump.
-
-*   `20190301.glk` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for glk,
+*   `20190301.fur` (`v0.0.3`) (`Size: 2.29 MiB`): Wikipedia dataset for fur,
     parsed from 20190301 dump.
 
-*   `20190301.gn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gn, parsed
-    from 20190301 dump.
-
-*   `20190301.gom` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gom,
+*   `20190301.fy` (`v0.0.3`) (`Size: 45.52 MiB`): Wikipedia dataset for fy,
     parsed from 20190301 dump.
 
-*   `20190301.gor` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gor,
+*   `20190301.ga` (`v0.0.3`) (`Size: 24.78 MiB`): Wikipedia dataset for ga,
     parsed from 20190301 dump.
 
-*   `20190301.got` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for got,
+*   `20190301.gag` (`v0.0.3`) (`Size: 2.04 MiB`): Wikipedia dataset for gag,
     parsed from 20190301 dump.
 
-*   `20190301.gu` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gu, parsed
-    from 20190301 dump.
-
-*   `20190301.gv` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for gv, parsed
-    from 20190301 dump.
-
-*   `20190301.ha` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ha, parsed
-    from 20190301 dump.
-
-*   `20190301.hak` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for hak,
+*   `20190301.gan` (`v0.0.3`) (`Size: 3.82 MiB`): Wikipedia dataset for gan,
     parsed from 20190301 dump.
 
-*   `20190301.haw` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for haw,
+*   `20190301.gd` (`v0.0.3`) (`Size: 8.51 MiB`): Wikipedia dataset for gd,
     parsed from 20190301 dump.
 
-*   `20190301.he` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for he, parsed
-    from 20190301 dump.
-
-*   `20190301.hi` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for hi, parsed
-    from 20190301 dump.
-
-*   `20190301.hif` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for hif,
+*   `20190301.gl` (`v0.0.3`) (`Size: 235.07 MiB`): Wikipedia dataset for gl,
     parsed from 20190301 dump.
 
-*   `20190301.ho` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ho, parsed
-    from 20190301 dump.
-
-*   `20190301.hr` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for hr, parsed
-    from 20190301 dump.
-
-*   `20190301.hsb` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for hsb,
+*   `20190301.glk` (`v0.0.3`) (`Size: 1.91 MiB`): Wikipedia dataset for glk,
     parsed from 20190301 dump.
 
-*   `20190301.ht` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ht, parsed
-    from 20190301 dump.
-
-*   `20190301.hu` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for hu, parsed
-    from 20190301 dump.
-
-*   `20190301.hy` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for hy, parsed
-    from 20190301 dump.
-
-*   `20190301.hz` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for hz, parsed
-    from 20190301 dump.
-
-*   `20190301.ia` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ia, parsed
-    from 20190301 dump.
-
-*   `20190301.id` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for id, parsed
-    from 20190301 dump.
-
-*   `20190301.ie` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ie, parsed
-    from 20190301 dump.
-
-*   `20190301.ig` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ig, parsed
-    from 20190301 dump.
-
-*   `20190301.ii` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ii, parsed
-    from 20190301 dump.
-
-*   `20190301.ik` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ik, parsed
-    from 20190301 dump.
-
-*   `20190301.ilo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ilo,
+*   `20190301.gn` (`v0.0.3`) (`Size: 3.37 MiB`): Wikipedia dataset for gn,
     parsed from 20190301 dump.
 
-*   `20190301.inh` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for inh,
+*   `20190301.gom` (`v0.0.3`) (`Size: 6.07 MiB`): Wikipedia dataset for gom,
     parsed from 20190301 dump.
 
-*   `20190301.io` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for io, parsed
-    from 20190301 dump.
-
-*   `20190301.is` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for is, parsed
-    from 20190301 dump.
-
-*   `20190301.it` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for it, parsed
-    from 20190301 dump.
-
-*   `20190301.iu` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for iu, parsed
-    from 20190301 dump.
-
-*   `20190301.ja` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ja, parsed
-    from 20190301 dump.
-
-*   `20190301.jam` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for jam,
+*   `20190301.gor` (`v0.0.3`) (`Size: 1.28 MiB`): Wikipedia dataset for gor,
     parsed from 20190301 dump.
 
-*   `20190301.jbo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for jbo,
+*   `20190301.got` (`v0.0.3`) (`Size: 604.10 KiB`): Wikipedia dataset for got,
     parsed from 20190301 dump.
 
-*   `20190301.jv` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for jv, parsed
-    from 20190301 dump.
-
-*   `20190301.ka` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ka, parsed
-    from 20190301 dump.
-
-*   `20190301.kaa` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kaa,
+*   `20190301.gu` (`v0.0.3`) (`Size: 27.23 MiB`): Wikipedia dataset for gu,
     parsed from 20190301 dump.
 
-*   `20190301.kab` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kab,
+*   `20190301.gv` (`v0.0.3`) (`Size: 5.32 MiB`): Wikipedia dataset for gv,
     parsed from 20190301 dump.
 
-*   `20190301.kbd` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kbd,
+*   `20190301.ha` (`v0.0.3`) (`Size: 1.62 MiB`): Wikipedia dataset for ha,
     parsed from 20190301 dump.
 
-*   `20190301.kbp` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kbp,
+*   `20190301.hak` (`v0.0.3`) (`Size: 3.28 MiB`): Wikipedia dataset for hak,
     parsed from 20190301 dump.
 
-*   `20190301.kg` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kg, parsed
-    from 20190301 dump.
-
-*   `20190301.ki` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ki, parsed
-    from 20190301 dump.
-
-*   `20190301.kj` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kj, parsed
-    from 20190301 dump.
-
-*   `20190301.kk` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kk, parsed
-    from 20190301 dump.
-
-*   `20190301.kl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kl, parsed
-    from 20190301 dump.
-
-*   `20190301.km` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for km, parsed
-    from 20190301 dump.
-
-*   `20190301.kn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kn, parsed
-    from 20190301 dump.
-
-*   `20190301.ko` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ko, parsed
-    from 20190301 dump.
-
-*   `20190301.koi` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for koi,
+*   `20190301.haw` (`v0.0.3`) (`Size: 1017.76 KiB`): Wikipedia dataset for haw,
     parsed from 20190301 dump.
 
-*   `20190301.kr` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kr, parsed
-    from 20190301 dump.
-
-*   `20190301.krc` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for krc,
+*   `20190301.he` (`v0.0.3`) (`Size: 572.30 MiB`): Wikipedia dataset for he,
     parsed from 20190301 dump.
 
-*   `20190301.ks` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ks, parsed
-    from 20190301 dump.
-
-*   `20190301.ksh` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ksh,
+*   `20190301.hi` (`v0.0.3`) (`Size: 137.86 MiB`): Wikipedia dataset for hi,
     parsed from 20190301 dump.
 
-*   `20190301.ku` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ku, parsed
-    from 20190301 dump.
-
-*   `20190301.kv` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kv, parsed
-    from 20190301 dump.
-
-*   `20190301.kw` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for kw, parsed
-    from 20190301 dump.
-
-*   `20190301.ky` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ky, parsed
-    from 20190301 dump.
-
-*   `20190301.la` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for la, parsed
-    from 20190301 dump.
-
-*   `20190301.lad` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lad,
+*   `20190301.hif` (`v0.0.3`) (`Size: 4.57 MiB`): Wikipedia dataset for hif,
     parsed from 20190301 dump.
 
-*   `20190301.lb` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lb, parsed
-    from 20190301 dump.
-
-*   `20190301.lbe` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lbe,
+*   `20190301.ho` (`v0.0.3`) (`Size: 18.37 KiB`): Wikipedia dataset for ho,
     parsed from 20190301 dump.
 
-*   `20190301.lez` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lez,
+*   `20190301.hr` (`v0.0.3`) (`Size: 246.05 MiB`): Wikipedia dataset for hr,
     parsed from 20190301 dump.
 
-*   `20190301.lfn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lfn,
+*   `20190301.hsb` (`v0.0.3`) (`Size: 10.38 MiB`): Wikipedia dataset for hsb,
     parsed from 20190301 dump.
 
-*   `20190301.lg` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lg, parsed
-    from 20190301 dump.
-
-*   `20190301.li` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for li, parsed
-    from 20190301 dump.
-
-*   `20190301.lij` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lij,
+*   `20190301.ht` (`v0.0.3`) (`Size: 10.23 MiB`): Wikipedia dataset for ht,
     parsed from 20190301 dump.
 
-*   `20190301.lmo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lmo,
+*   `20190301.hu` (`v0.0.3`) (`Size: 810.17 MiB`): Wikipedia dataset for hu,
     parsed from 20190301 dump.
 
-*   `20190301.ln` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ln, parsed
-    from 20190301 dump.
-
-*   `20190301.lo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lo, parsed
-    from 20190301 dump.
-
-*   `20190301.lrc` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lrc,
+*   `20190301.hy` (`v0.0.3`) (`Size: 277.53 MiB`): Wikipedia dataset for hy,
     parsed from 20190301 dump.
 
-*   `20190301.lt` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lt, parsed
-    from 20190301 dump.
-
-*   `20190301.ltg` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ltg,
+*   `20190301.hz` (`v0.0.3`) (`Size: 16.35 KiB`): Wikipedia dataset for hz,
     parsed from 20190301 dump.
 
-*   `20190301.lv` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for lv, parsed
-    from 20190301 dump.
-
-*   `20190301.mai` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mai,
+*   `20190301.ia` (`v0.0.3`) (`Size: 7.85 MiB`): Wikipedia dataset for ia,
     parsed from 20190301 dump.
 
-*   `20190301.map-bms` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for
+*   `20190301.id` (`v0.0.3`) (`Size: 523.94 MiB`): Wikipedia dataset for id,
+    parsed from 20190301 dump.
+
+*   `20190301.ie` (`v0.0.3`) (`Size: 1.70 MiB`): Wikipedia dataset for ie,
+    parsed from 20190301 dump.
+
+*   `20190301.ig` (`v0.0.3`) (`Size: 1.00 MiB`): Wikipedia dataset for ig,
+    parsed from 20190301 dump.
+
+*   `20190301.ii` (`v0.0.3`) (`Size: 30.88 KiB`): Wikipedia dataset for ii,
+    parsed from 20190301 dump.
+
+*   `20190301.ik` (`v0.0.3`) (`Size: 238.12 KiB`): Wikipedia dataset for ik,
+    parsed from 20190301 dump.
+
+*   `20190301.ilo` (`v0.0.3`) (`Size: 15.22 MiB`): Wikipedia dataset for ilo,
+    parsed from 20190301 dump.
+
+*   `20190301.inh` (`v0.0.3`) (`Size: 1.26 MiB`): Wikipedia dataset for inh,
+    parsed from 20190301 dump.
+
+*   `20190301.io` (`v0.0.3`) (`Size: 12.56 MiB`): Wikipedia dataset for io,
+    parsed from 20190301 dump.
+
+*   `20190301.is` (`v0.0.3`) (`Size: 41.86 MiB`): Wikipedia dataset for is,
+    parsed from 20190301 dump.
+
+*   `20190301.it` (`v0.0.3`) (`Size: 2.66 GiB`): Wikipedia dataset for it,
+    parsed from 20190301 dump.
+
+*   `20190301.iu` (`v0.0.3`) (`Size: 284.06 KiB`): Wikipedia dataset for iu,
+    parsed from 20190301 dump.
+
+*   `20190301.ja` (`v0.0.3`) (`Size: 2.74 GiB`): Wikipedia dataset for ja,
+    parsed from 20190301 dump.
+
+*   `20190301.jam` (`v0.0.3`) (`Size: 895.29 KiB`): Wikipedia dataset for jam,
+    parsed from 20190301 dump.
+
+*   `20190301.jbo` (`v0.0.3`) (`Size: 1.06 MiB`): Wikipedia dataset for jbo,
+    parsed from 20190301 dump.
+
+*   `20190301.jv` (`v0.0.3`) (`Size: 39.32 MiB`): Wikipedia dataset for jv,
+    parsed from 20190301 dump.
+
+*   `20190301.ka` (`v0.0.3`) (`Size: 131.78 MiB`): Wikipedia dataset for ka,
+    parsed from 20190301 dump.
+
+*   `20190301.kaa` (`v0.0.3`) (`Size: 1.35 MiB`): Wikipedia dataset for kaa,
+    parsed from 20190301 dump.
+
+*   `20190301.kab` (`v0.0.3`) (`Size: 3.62 MiB`): Wikipedia dataset for kab,
+    parsed from 20190301 dump.
+
+*   `20190301.kbd` (`v0.0.3`) (`Size: 1.65 MiB`): Wikipedia dataset for kbd,
+    parsed from 20190301 dump.
+
+*   `20190301.kbp` (`v0.0.3`) (`Size: 1.24 MiB`): Wikipedia dataset for kbp,
+    parsed from 20190301 dump.
+
+*   `20190301.kg` (`v0.0.3`) (`Size: 439.26 KiB`): Wikipedia dataset for kg,
+    parsed from 20190301 dump.
+
+*   `20190301.ki` (`v0.0.3`) (`Size: 370.78 KiB`): Wikipedia dataset for ki,
+    parsed from 20190301 dump.
+
+*   `20190301.kj` (`v0.0.3`) (`Size: 16.58 KiB`): Wikipedia dataset for kj,
+    parsed from 20190301 dump.
+
+*   `20190301.kk` (`v0.0.3`) (`Size: 113.46 MiB`): Wikipedia dataset for kk,
+    parsed from 20190301 dump.
+
+*   `20190301.kl` (`v0.0.3`) (`Size: 862.51 KiB`): Wikipedia dataset for kl,
+    parsed from 20190301 dump.
+
+*   `20190301.km` (`v0.0.3`) (`Size: 21.92 MiB`): Wikipedia dataset for km,
+    parsed from 20190301 dump.
+
+*   `20190301.kn` (`v0.0.3`) (`Size: 69.62 MiB`): Wikipedia dataset for kn,
+    parsed from 20190301 dump.
+
+*   `20190301.ko` (`v0.0.3`) (`Size: 625.16 MiB`): Wikipedia dataset for ko,
+    parsed from 20190301 dump.
+
+*   `20190301.koi` (`v0.0.3`) (`Size: 2.12 MiB`): Wikipedia dataset for koi,
+    parsed from 20190301 dump.
+
+*   `20190301.kr` (`v0.0.3`) (`Size: 13.89 KiB`): Wikipedia dataset for kr,
+    parsed from 20190301 dump.
+
+*   `20190301.krc` (`v0.0.3`) (`Size: 3.16 MiB`): Wikipedia dataset for krc,
+    parsed from 20190301 dump.
+
+*   `20190301.ks` (`v0.0.3`) (`Size: 309.15 KiB`): Wikipedia dataset for ks,
+    parsed from 20190301 dump.
+
+*   `20190301.ksh` (`v0.0.3`) (`Size: 3.07 MiB`): Wikipedia dataset for ksh,
+    parsed from 20190301 dump.
+
+*   `20190301.ku` (`v0.0.3`) (`Size: 17.09 MiB`): Wikipedia dataset for ku,
+    parsed from 20190301 dump.
+
+*   `20190301.kv` (`v0.0.3`) (`Size: 3.36 MiB`): Wikipedia dataset for kv,
+    parsed from 20190301 dump.
+
+*   `20190301.kw` (`v0.0.3`) (`Size: 1.71 MiB`): Wikipedia dataset for kw,
+    parsed from 20190301 dump.
+
+*   `20190301.ky` (`v0.0.3`) (`Size: 33.13 MiB`): Wikipedia dataset for ky,
+    parsed from 20190301 dump.
+
+*   `20190301.la` (`v0.0.3`) (`Size: 82.72 MiB`): Wikipedia dataset for la,
+    parsed from 20190301 dump.
+
+*   `20190301.lad` (`v0.0.3`) (`Size: 3.39 MiB`): Wikipedia dataset for lad,
+    parsed from 20190301 dump.
+
+*   `20190301.lb` (`v0.0.3`) (`Size: 45.70 MiB`): Wikipedia dataset for lb,
+    parsed from 20190301 dump.
+
+*   `20190301.lbe` (`v0.0.3`) (`Size: 1.22 MiB`): Wikipedia dataset for lbe,
+    parsed from 20190301 dump.
+
+*   `20190301.lez` (`v0.0.3`) (`Size: 4.16 MiB`): Wikipedia dataset for lez,
+    parsed from 20190301 dump.
+
+*   `20190301.lfn` (`v0.0.3`) (`Size: 2.81 MiB`): Wikipedia dataset for lfn,
+    parsed from 20190301 dump.
+
+*   `20190301.lg` (`v0.0.3`) (`Size: 1.58 MiB`): Wikipedia dataset for lg,
+    parsed from 20190301 dump.
+
+*   `20190301.li` (`v0.0.3`) (`Size: 13.86 MiB`): Wikipedia dataset for li,
+    parsed from 20190301 dump.
+
+*   `20190301.lij` (`v0.0.3`) (`Size: 2.73 MiB`): Wikipedia dataset for lij,
+    parsed from 20190301 dump.
+
+*   `20190301.lmo` (`v0.0.3`) (`Size: 21.34 MiB`): Wikipedia dataset for lmo,
+    parsed from 20190301 dump.
+
+*   `20190301.ln` (`v0.0.3`) (`Size: 1.83 MiB`): Wikipedia dataset for ln,
+    parsed from 20190301 dump.
+
+*   `20190301.lo` (`v0.0.3`) (`Size: 3.44 MiB`): Wikipedia dataset for lo,
+    parsed from 20190301 dump.
+
+*   `20190301.lrc` (`v0.0.3`) (`Size: 4.71 MiB`): Wikipedia dataset for lrc,
+    parsed from 20190301 dump.
+
+*   `20190301.lt` (`v0.0.3`) (`Size: 174.73 MiB`): Wikipedia dataset for lt,
+    parsed from 20190301 dump.
+
+*   `20190301.ltg` (`v0.0.3`) (`Size: 798.18 KiB`): Wikipedia dataset for ltg,
+    parsed from 20190301 dump.
+
+*   `20190301.lv` (`v0.0.3`) (`Size: 127.47 MiB`): Wikipedia dataset for lv,
+    parsed from 20190301 dump.
+
+*   `20190301.mai` (`v0.0.3`) (`Size: 10.80 MiB`): Wikipedia dataset for mai,
+    parsed from 20190301 dump.
+
+*   `20190301.map-bms` (`v0.0.3`) (`Size: 4.49 MiB`): Wikipedia dataset for
     map-bms, parsed from 20190301 dump.
 
-*   `20190301.mdf` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mdf,
+*   `20190301.mdf` (`v0.0.3`) (`Size: 1.04 MiB`): Wikipedia dataset for mdf,
     parsed from 20190301 dump.
 
-*   `20190301.mg` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mg, parsed
-    from 20190301 dump.
-
-*   `20190301.mh` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mh, parsed
-    from 20190301 dump.
-
-*   `20190301.mhr` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mhr,
+*   `20190301.mg` (`v0.0.3`) (`Size: 25.64 MiB`): Wikipedia dataset for mg,
     parsed from 20190301 dump.
 
-*   `20190301.mi` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mi, parsed
-    from 20190301 dump.
-
-*   `20190301.min` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for min,
+*   `20190301.mh` (`v0.0.3`) (`Size: 27.71 KiB`): Wikipedia dataset for mh,
     parsed from 20190301 dump.
 
-*   `20190301.mk` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mk, parsed
-    from 20190301 dump.
-
-*   `20190301.ml` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ml, parsed
-    from 20190301 dump.
-
-*   `20190301.mn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mn, parsed
-    from 20190301 dump.
-
-*   `20190301.mr` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mr, parsed
-    from 20190301 dump.
-
-*   `20190301.mrj` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mrj,
+*   `20190301.mhr` (`v0.0.3`) (`Size: 5.69 MiB`): Wikipedia dataset for mhr,
     parsed from 20190301 dump.
 
-*   `20190301.ms` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ms, parsed
-    from 20190301 dump.
-
-*   `20190301.mt` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mt, parsed
-    from 20190301 dump.
-
-*   `20190301.mus` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mus,
+*   `20190301.mi` (`v0.0.3`) (`Size: 1.96 MiB`): Wikipedia dataset for mi,
     parsed from 20190301 dump.
 
-*   `20190301.mwl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mwl,
+*   `20190301.min` (`v0.0.3`) (`Size: 25.05 MiB`): Wikipedia dataset for min,
     parsed from 20190301 dump.
 
-*   `20190301.my` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for my, parsed
-    from 20190301 dump.
-
-*   `20190301.myv` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for myv,
+*   `20190301.mk` (`v0.0.3`) (`Size: 140.69 MiB`): Wikipedia dataset for mk,
     parsed from 20190301 dump.
 
-*   `20190301.mzn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for mzn,
+*   `20190301.ml` (`v0.0.3`) (`Size: 117.24 MiB`): Wikipedia dataset for ml,
     parsed from 20190301 dump.
 
-*   `20190301.na` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for na, parsed
-    from 20190301 dump.
-
-*   `20190301.nah` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nah,
+*   `20190301.mn` (`v0.0.3`) (`Size: 28.23 MiB`): Wikipedia dataset for mn,
     parsed from 20190301 dump.
 
-*   `20190301.nap` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nap,
+*   `20190301.mr` (`v0.0.3`) (`Size: 49.58 MiB`): Wikipedia dataset for mr,
     parsed from 20190301 dump.
 
-*   `20190301.nds` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nds,
+*   `20190301.mrj` (`v0.0.3`) (`Size: 3.01 MiB`): Wikipedia dataset for mrj,
     parsed from 20190301 dump.
 
-*   `20190301.nds-nl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nds-nl,
+*   `20190301.ms` (`v0.0.3`) (`Size: 205.79 MiB`): Wikipedia dataset for ms,
     parsed from 20190301 dump.
 
-*   `20190301.ne` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ne, parsed
-    from 20190301 dump.
-
-*   `20190301.new` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for new,
+*   `20190301.mt` (`v0.0.3`) (`Size: 8.21 MiB`): Wikipedia dataset for mt,
     parsed from 20190301 dump.
 
-*   `20190301.ng` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ng, parsed
-    from 20190301 dump.
-
-*   `20190301.nl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nl, parsed
-    from 20190301 dump.
-
-*   `20190301.nn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nn, parsed
-    from 20190301 dump.
-
-*   `20190301.no` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for no, parsed
-    from 20190301 dump.
-
-*   `20190301.nov` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nov,
+*   `20190301.mus` (`v0.0.3`) (`Size: 14.20 KiB`): Wikipedia dataset for mus,
     parsed from 20190301 dump.
 
-*   `20190301.nrm` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nrm,
+*   `20190301.mwl` (`v0.0.3`) (`Size: 8.95 MiB`): Wikipedia dataset for mwl,
     parsed from 20190301 dump.
 
-*   `20190301.nso` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nso,
+*   `20190301.my` (`v0.0.3`) (`Size: 34.60 MiB`): Wikipedia dataset for my,
     parsed from 20190301 dump.
 
-*   `20190301.nv` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for nv, parsed
-    from 20190301 dump.
-
-*   `20190301.ny` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ny, parsed
-    from 20190301 dump.
-
-*   `20190301.oc` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for oc, parsed
-    from 20190301 dump.
-
-*   `20190301.olo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for olo,
+*   `20190301.myv` (`v0.0.3`) (`Size: 7.79 MiB`): Wikipedia dataset for myv,
     parsed from 20190301 dump.
 
-*   `20190301.om` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for om, parsed
-    from 20190301 dump.
-
-*   `20190301.or` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for or, parsed
-    from 20190301 dump.
-
-*   `20190301.os` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for os, parsed
-    from 20190301 dump.
-
-*   `20190301.pa` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pa, parsed
-    from 20190301 dump.
-
-*   `20190301.pag` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pag,
+*   `20190301.mzn` (`v0.0.3`) (`Size: 6.47 MiB`): Wikipedia dataset for mzn,
     parsed from 20190301 dump.
 
-*   `20190301.pam` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pam,
+*   `20190301.na` (`v0.0.3`) (`Size: 480.57 KiB`): Wikipedia dataset for na,
     parsed from 20190301 dump.
 
-*   `20190301.pap` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pap,
+*   `20190301.nah` (`v0.0.3`) (`Size: 4.30 MiB`): Wikipedia dataset for nah,
     parsed from 20190301 dump.
 
-*   `20190301.pcd` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pcd,
+*   `20190301.nap` (`v0.0.3`) (`Size: 5.55 MiB`): Wikipedia dataset for nap,
     parsed from 20190301 dump.
 
-*   `20190301.pdc` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pdc,
+*   `20190301.nds` (`v0.0.3`) (`Size: 33.28 MiB`): Wikipedia dataset for nds,
     parsed from 20190301 dump.
 
-*   `20190301.pfl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pfl,
+*   `20190301.nds-nl` (`v0.0.3`) (`Size: 6.67 MiB`): Wikipedia dataset for
+    nds-nl, parsed from 20190301 dump.
+
+*   `20190301.ne` (`v0.0.3`) (`Size: 29.26 MiB`): Wikipedia dataset for ne,
     parsed from 20190301 dump.
 
-*   `20190301.pi` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pi, parsed
-    from 20190301 dump.
-
-*   `20190301.pih` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pih,
+*   `20190301.new` (`v0.0.3`) (`Size: 16.91 MiB`): Wikipedia dataset for new,
     parsed from 20190301 dump.
 
-*   `20190301.pl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pl, parsed
-    from 20190301 dump.
-
-*   `20190301.pms` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pms,
+*   `20190301.ng` (`v0.0.3`) (`Size: 91.11 KiB`): Wikipedia dataset for ng,
     parsed from 20190301 dump.
 
-*   `20190301.pnb` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pnb,
+*   `20190301.nl` (`v0.0.3`) (`Size: 1.38 GiB`): Wikipedia dataset for nl,
     parsed from 20190301 dump.
 
-*   `20190301.pnt` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pnt,
+*   `20190301.nn` (`v0.0.3`) (`Size: 126.01 MiB`): Wikipedia dataset for nn,
     parsed from 20190301 dump.
 
-*   `20190301.ps` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ps, parsed
-    from 20190301 dump.
-
-*   `20190301.pt` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for pt, parsed
-    from 20190301 dump.
-
-*   `20190301.qu` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for qu, parsed
-    from 20190301 dump.
-
-*   `20190301.rm` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for rm, parsed
-    from 20190301 dump.
-
-*   `20190301.rmy` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for rmy,
+*   `20190301.no` (`v0.0.3`) (`Size: 610.74 MiB`): Wikipedia dataset for no,
     parsed from 20190301 dump.
 
-*   `20190301.rn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for rn, parsed
-    from 20190301 dump.
+*   `20190301.nov` (`v0.0.3`) (`Size: 1.12 MiB`): Wikipedia dataset for nov,
+    parsed from 20190301 dump.
 
-*   `20190301.ro` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ro, parsed
-    from 20190301 dump.
+*   `20190301.nrm` (`v0.0.3`) (`Size: 1.56 MiB`): Wikipedia dataset for nrm,
+    parsed from 20190301 dump.
 
-*   `20190301.roa-rup` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for
+*   `20190301.nso` (`v0.0.3`) (`Size: 2.20 MiB`): Wikipedia dataset for nso,
+    parsed from 20190301 dump.
+
+*   `20190301.nv` (`v0.0.3`) (`Size: 2.52 MiB`): Wikipedia dataset for nv,
+    parsed from 20190301 dump.
+
+*   `20190301.ny` (`v0.0.3`) (`Size: 1.18 MiB`): Wikipedia dataset for ny,
+    parsed from 20190301 dump.
+
+*   `20190301.oc` (`v0.0.3`) (`Size: 70.97 MiB`): Wikipedia dataset for oc,
+    parsed from 20190301 dump.
+
+*   `20190301.olo` (`v0.0.3`) (`Size: 1.55 MiB`): Wikipedia dataset for olo,
+    parsed from 20190301 dump.
+
+*   `20190301.om` (`v0.0.3`) (`Size: 1.06 MiB`): Wikipedia dataset for om,
+    parsed from 20190301 dump.
+
+*   `20190301.or` (`v0.0.3`) (`Size: 24.90 MiB`): Wikipedia dataset for or,
+    parsed from 20190301 dump.
+
+*   `20190301.os` (`v0.0.3`) (`Size: 7.31 MiB`): Wikipedia dataset for os,
+    parsed from 20190301 dump.
+
+*   `20190301.pa` (`v0.0.3`) (`Size: 40.39 MiB`): Wikipedia dataset for pa,
+    parsed from 20190301 dump.
+
+*   `20190301.pag` (`v0.0.3`) (`Size: 1.29 MiB`): Wikipedia dataset for pag,
+    parsed from 20190301 dump.
+
+*   `20190301.pam` (`v0.0.3`) (`Size: 8.17 MiB`): Wikipedia dataset for pam,
+    parsed from 20190301 dump.
+
+*   `20190301.pap` (`v0.0.3`) (`Size: 1.33 MiB`): Wikipedia dataset for pap,
+    parsed from 20190301 dump.
+
+*   `20190301.pcd` (`v0.0.3`) (`Size: 4.14 MiB`): Wikipedia dataset for pcd,
+    parsed from 20190301 dump.
+
+*   `20190301.pdc` (`v0.0.3`) (`Size: 1.10 MiB`): Wikipedia dataset for pdc,
+    parsed from 20190301 dump.
+
+*   `20190301.pfl` (`v0.0.3`) (`Size: 3.22 MiB`): Wikipedia dataset for pfl,
+    parsed from 20190301 dump.
+
+*   `20190301.pi` (`v0.0.3`) (`Size: 586.77 KiB`): Wikipedia dataset for pi,
+    parsed from 20190301 dump.
+
+*   `20190301.pih` (`v0.0.3`) (`Size: 654.11 KiB`): Wikipedia dataset for pih,
+    parsed from 20190301 dump.
+
+*   `20190301.pl` (`v0.0.3`) (`Size: 1.76 GiB`): Wikipedia dataset for pl,
+    parsed from 20190301 dump.
+
+*   `20190301.pms` (`v0.0.3`) (`Size: 13.42 MiB`): Wikipedia dataset for pms,
+    parsed from 20190301 dump.
+
+*   `20190301.pnb` (`v0.0.3`) (`Size: 24.31 MiB`): Wikipedia dataset for pnb,
+    parsed from 20190301 dump.
+
+*   `20190301.pnt` (`v0.0.3`) (`Size: 533.84 KiB`): Wikipedia dataset for pnt,
+    parsed from 20190301 dump.
+
+*   `20190301.ps` (`v0.0.3`) (`Size: 14.09 MiB`): Wikipedia dataset for ps,
+    parsed from 20190301 dump.
+
+*   `20190301.pt` (`v0.0.3`) (`Size: 1.58 GiB`): Wikipedia dataset for pt,
+    parsed from 20190301 dump.
+
+*   `20190301.qu` (`v0.0.3`) (`Size: 11.42 MiB`): Wikipedia dataset for qu,
+    parsed from 20190301 dump.
+
+*   `20190301.rm` (`v0.0.3`) (`Size: 5.85 MiB`): Wikipedia dataset for rm,
+    parsed from 20190301 dump.
+
+*   `20190301.rmy` (`v0.0.3`) (`Size: 509.61 KiB`): Wikipedia dataset for rmy,
+    parsed from 20190301 dump.
+
+*   `20190301.rn` (`v0.0.3`) (`Size: 779.25 KiB`): Wikipedia dataset for rn,
+    parsed from 20190301 dump.
+
+*   `20190301.ro` (`v0.0.3`) (`Size: 449.49 MiB`): Wikipedia dataset for ro,
+    parsed from 20190301 dump.
+
+*   `20190301.roa-rup` (`v0.0.3`) (`Size: 931.23 KiB`): Wikipedia dataset for
     roa-rup, parsed from 20190301 dump.
 
-*   `20190301.roa-tara` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for
+*   `20190301.roa-tara` (`v0.0.3`) (`Size: 5.98 MiB`): Wikipedia dataset for
     roa-tara, parsed from 20190301 dump.
 
-*   `20190301.ru` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ru, parsed
-    from 20190301 dump.
-
-*   `20190301.rue` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for rue,
+*   `20190301.ru` (`v0.0.3`) (`Size: 3.51 GiB`): Wikipedia dataset for ru,
     parsed from 20190301 dump.
 
-*   `20190301.rw` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for rw, parsed
-    from 20190301 dump.
-
-*   `20190301.sa` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sa, parsed
-    from 20190301 dump.
-
-*   `20190301.sah` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sah,
+*   `20190301.rue` (`v0.0.3`) (`Size: 4.11 MiB`): Wikipedia dataset for rue,
     parsed from 20190301 dump.
 
-*   `20190301.sat` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sat,
+*   `20190301.rw` (`v0.0.3`) (`Size: 904.81 KiB`): Wikipedia dataset for rw,
     parsed from 20190301 dump.
 
-*   `20190301.sc` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sc, parsed
-    from 20190301 dump.
-
-*   `20190301.scn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for scn,
+*   `20190301.sa` (`v0.0.3`) (`Size: 14.29 MiB`): Wikipedia dataset for sa,
     parsed from 20190301 dump.
 
-*   `20190301.sco` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sco,
+*   `20190301.sah` (`v0.0.3`) (`Size: 11.88 MiB`): Wikipedia dataset for sah,
     parsed from 20190301 dump.
 
-*   `20190301.sd` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sd, parsed
-    from 20190301 dump.
-
-*   `20190301.se` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for se, parsed
-    from 20190301 dump.
-
-*   `20190301.sg` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sg, parsed
-    from 20190301 dump.
-
-*   `20190301.sh` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sh, parsed
-    from 20190301 dump.
-
-*   `20190301.si` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for si, parsed
-    from 20190301 dump.
-
-*   `20190301.simple` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for simple,
+*   `20190301.sat` (`v0.0.3`) (`Size: 2.36 MiB`): Wikipedia dataset for sat,
     parsed from 20190301 dump.
 
-*   `20190301.sk` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sk, parsed
-    from 20190301 dump.
-
-*   `20190301.sl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sl, parsed
-    from 20190301 dump.
-
-*   `20190301.sm` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sm, parsed
-    from 20190301 dump.
-
-*   `20190301.sn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sn, parsed
-    from 20190301 dump.
-
-*   `20190301.so` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for so, parsed
-    from 20190301 dump.
-
-*   `20190301.sq` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sq, parsed
-    from 20190301 dump.
-
-*   `20190301.sr` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sr, parsed
-    from 20190301 dump.
-
-*   `20190301.srn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for srn,
+*   `20190301.sc` (`v0.0.3`) (`Size: 4.39 MiB`): Wikipedia dataset for sc,
     parsed from 20190301 dump.
 
-*   `20190301.ss` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ss, parsed
-    from 20190301 dump.
-
-*   `20190301.st` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for st, parsed
-    from 20190301 dump.
-
-*   `20190301.stq` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for stq,
+*   `20190301.scn` (`v0.0.3`) (`Size: 11.83 MiB`): Wikipedia dataset for scn,
     parsed from 20190301 dump.
 
-*   `20190301.su` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for su, parsed
-    from 20190301 dump.
-
-*   `20190301.sv` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sv, parsed
-    from 20190301 dump.
-
-*   `20190301.sw` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for sw, parsed
-    from 20190301 dump.
-
-*   `20190301.szl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for szl,
+*   `20190301.sco` (`v0.0.3`) (`Size: 57.80 MiB`): Wikipedia dataset for sco,
     parsed from 20190301 dump.
 
-*   `20190301.ta` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ta, parsed
-    from 20190301 dump.
-
-*   `20190301.tcy` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tcy,
+*   `20190301.sd` (`v0.0.3`) (`Size: 12.62 MiB`): Wikipedia dataset for sd,
     parsed from 20190301 dump.
 
-*   `20190301.te` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for te, parsed
-    from 20190301 dump.
-
-*   `20190301.tet` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tet,
+*   `20190301.se` (`v0.0.3`) (`Size: 3.30 MiB`): Wikipedia dataset for se,
     parsed from 20190301 dump.
 
-*   `20190301.tg` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tg, parsed
-    from 20190301 dump.
-
-*   `20190301.th` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for th, parsed
-    from 20190301 dump.
-
-*   `20190301.ti` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ti, parsed
-    from 20190301 dump.
-
-*   `20190301.tk` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tk, parsed
-    from 20190301 dump.
-
-*   `20190301.tl` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tl, parsed
-    from 20190301 dump.
-
-*   `20190301.tn` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tn, parsed
-    from 20190301 dump.
-
-*   `20190301.to` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for to, parsed
-    from 20190301 dump.
-
-*   `20190301.tpi` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tpi,
+*   `20190301.sg` (`v0.0.3`) (`Size: 286.02 KiB`): Wikipedia dataset for sg,
     parsed from 20190301 dump.
 
-*   `20190301.tr` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tr, parsed
-    from 20190301 dump.
-
-*   `20190301.ts` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ts, parsed
-    from 20190301 dump.
-
-*   `20190301.tt` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tt, parsed
-    from 20190301 dump.
-
-*   `20190301.tum` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tum,
+*   `20190301.sh` (`v0.0.3`) (`Size: 406.72 MiB`): Wikipedia dataset for sh,
     parsed from 20190301 dump.
 
-*   `20190301.tw` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tw, parsed
-    from 20190301 dump.
-
-*   `20190301.ty` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ty, parsed
-    from 20190301 dump.
-
-*   `20190301.tyv` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for tyv,
+*   `20190301.si` (`v0.0.3`) (`Size: 36.84 MiB`): Wikipedia dataset for si,
     parsed from 20190301 dump.
 
-*   `20190301.udm` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for udm,
+*   `20190301.simple` (`v0.0.3`) (`Size: 156.11 MiB`): Wikipedia dataset for
+    simple, parsed from 20190301 dump.
+
+*   `20190301.sk` (`v0.0.3`) (`Size: 254.37 MiB`): Wikipedia dataset for sk,
     parsed from 20190301 dump.
 
-*   `20190301.ug` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ug, parsed
-    from 20190301 dump.
-
-*   `20190301.uk` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for uk, parsed
-    from 20190301 dump.
-
-*   `20190301.ur` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ur, parsed
-    from 20190301 dump.
-
-*   `20190301.uz` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for uz, parsed
-    from 20190301 dump.
-
-*   `20190301.ve` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for ve, parsed
-    from 20190301 dump.
-
-*   `20190301.vec` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for vec,
+*   `20190301.sl` (`v0.0.3`) (`Size: 201.41 MiB`): Wikipedia dataset for sl,
     parsed from 20190301 dump.
 
-*   `20190301.vep` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for vep,
+*   `20190301.sm` (`v0.0.3`) (`Size: 678.46 KiB`): Wikipedia dataset for sm,
     parsed from 20190301 dump.
 
-*   `20190301.vi` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for vi, parsed
-    from 20190301 dump.
-
-*   `20190301.vls` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for vls,
+*   `20190301.sn` (`v0.0.3`) (`Size: 2.02 MiB`): Wikipedia dataset for sn,
     parsed from 20190301 dump.
 
-*   `20190301.vo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for vo, parsed
-    from 20190301 dump.
-
-*   `20190301.wa` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for wa, parsed
-    from 20190301 dump.
-
-*   `20190301.war` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for war,
+*   `20190301.so` (`v0.0.3`) (`Size: 8.17 MiB`): Wikipedia dataset for so,
     parsed from 20190301 dump.
 
-*   `20190301.wo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for wo, parsed
-    from 20190301 dump.
-
-*   `20190301.wuu` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for wuu,
+*   `20190301.sq` (`v0.0.3`) (`Size: 77.55 MiB`): Wikipedia dataset for sq,
     parsed from 20190301 dump.
 
-*   `20190301.xal` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for xal,
+*   `20190301.sr` (`v0.0.3`) (`Size: 725.30 MiB`): Wikipedia dataset for sr,
     parsed from 20190301 dump.
 
-*   `20190301.xh` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for xh, parsed
-    from 20190301 dump.
-
-*   `20190301.xmf` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for xmf,
+*   `20190301.srn` (`v0.0.3`) (`Size: 634.21 KiB`): Wikipedia dataset for srn,
     parsed from 20190301 dump.
 
-*   `20190301.yi` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for yi, parsed
-    from 20190301 dump.
-
-*   `20190301.yo` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for yo, parsed
-    from 20190301 dump.
-
-*   `20190301.za` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for za, parsed
-    from 20190301 dump.
-
-*   `20190301.zea` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for zea,
+*   `20190301.ss` (`v0.0.3`) (`Size: 737.58 KiB`): Wikipedia dataset for ss,
     parsed from 20190301 dump.
 
-*   `20190301.zh` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for zh, parsed
-    from 20190301 dump.
+*   `20190301.st` (`v0.0.3`) (`Size: 482.27 KiB`): Wikipedia dataset for st,
+    parsed from 20190301 dump.
 
-*   `20190301.zh-classical` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for
-    zh-classical, parsed from 20190301 dump.
+*   `20190301.stq` (`v0.0.3`) (`Size: 3.26 MiB`): Wikipedia dataset for stq,
+    parsed from 20190301 dump.
 
-*   `20190301.zh-min-nan` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for
+*   `20190301.su` (`v0.0.3`) (`Size: 20.52 MiB`): Wikipedia dataset for su,
+    parsed from 20190301 dump.
+
+*   `20190301.sv` (`v0.0.3`) (`Size: 1.64 GiB`): Wikipedia dataset for sv,
+    parsed from 20190301 dump.
+
+*   `20190301.sw` (`v0.0.3`) (`Size: 27.60 MiB`): Wikipedia dataset for sw,
+    parsed from 20190301 dump.
+
+*   `20190301.szl` (`v0.0.3`) (`Size: 4.06 MiB`): Wikipedia dataset for szl,
+    parsed from 20190301 dump.
+
+*   `20190301.ta` (`v0.0.3`) (`Size: 141.07 MiB`): Wikipedia dataset for ta,
+    parsed from 20190301 dump.
+
+*   `20190301.tcy` (`v0.0.3`) (`Size: 2.33 MiB`): Wikipedia dataset for tcy,
+    parsed from 20190301 dump.
+
+*   `20190301.te` (`v0.0.3`) (`Size: 113.16 MiB`): Wikipedia dataset for te,
+    parsed from 20190301 dump.
+
+*   `20190301.tet` (`v0.0.3`) (`Size: 1.06 MiB`): Wikipedia dataset for tet,
+    parsed from 20190301 dump.
+
+*   `20190301.tg` (`v0.0.3`) (`Size: 36.95 MiB`): Wikipedia dataset for tg,
+    parsed from 20190301 dump.
+
+*   `20190301.th` (`v0.0.3`) (`Size: 254.00 MiB`): Wikipedia dataset for th,
+    parsed from 20190301 dump.
+
+*   `20190301.ti` (`v0.0.3`) (`Size: 309.72 KiB`): Wikipedia dataset for ti,
+    parsed from 20190301 dump.
+
+*   `20190301.tk` (`v0.0.3`) (`Size: 4.50 MiB`): Wikipedia dataset for tk,
+    parsed from 20190301 dump.
+
+*   `20190301.tl` (`v0.0.3`) (`Size: 50.85 MiB`): Wikipedia dataset for tl,
+    parsed from 20190301 dump.
+
+*   `20190301.tn` (`v0.0.3`) (`Size: 1.21 MiB`): Wikipedia dataset for tn,
+    parsed from 20190301 dump.
+
+*   `20190301.to` (`v0.0.3`) (`Size: 775.10 KiB`): Wikipedia dataset for to,
+    parsed from 20190301 dump.
+
+*   `20190301.tpi` (`v0.0.3`) (`Size: 1.39 MiB`): Wikipedia dataset for tpi,
+    parsed from 20190301 dump.
+
+*   `20190301.tr` (`v0.0.3`) (`Size: 497.19 MiB`): Wikipedia dataset for tr,
+    parsed from 20190301 dump.
+
+*   `20190301.ts` (`v0.0.3`) (`Size: 1.39 MiB`): Wikipedia dataset for ts,
+    parsed from 20190301 dump.
+
+*   `20190301.tt` (`v0.0.3`) (`Size: 53.23 MiB`): Wikipedia dataset for tt,
+    parsed from 20190301 dump.
+
+*   `20190301.tum` (`v0.0.3`) (`Size: 309.58 KiB`): Wikipedia dataset for tum,
+    parsed from 20190301 dump.
+
+*   `20190301.tw` (`v0.0.3`) (`Size: 345.96 KiB`): Wikipedia dataset for tw,
+    parsed from 20190301 dump.
+
+*   `20190301.ty` (`v0.0.3`) (`Size: 485.56 KiB`): Wikipedia dataset for ty,
+    parsed from 20190301 dump.
+
+*   `20190301.tyv` (`v0.0.3`) (`Size: 2.60 MiB`): Wikipedia dataset for tyv,
+    parsed from 20190301 dump.
+
+*   `20190301.udm` (`v0.0.3`) (`Size: 2.94 MiB`): Wikipedia dataset for udm,
+    parsed from 20190301 dump.
+
+*   `20190301.ug` (`v0.0.3`) (`Size: 5.64 MiB`): Wikipedia dataset for ug,
+    parsed from 20190301 dump.
+
+*   `20190301.uk` (`v0.0.3`) (`Size: 1.28 GiB`): Wikipedia dataset for uk,
+    parsed from 20190301 dump.
+
+*   `20190301.ur` (`v0.0.3`) (`Size: 129.57 MiB`): Wikipedia dataset for ur,
+    parsed from 20190301 dump.
+
+*   `20190301.uz` (`v0.0.3`) (`Size: 60.85 MiB`): Wikipedia dataset for uz,
+    parsed from 20190301 dump.
+
+*   `20190301.ve` (`v0.0.3`) (`Size: 257.59 KiB`): Wikipedia dataset for ve,
+    parsed from 20190301 dump.
+
+*   `20190301.vec` (`v0.0.3`) (`Size: 10.65 MiB`): Wikipedia dataset for vec,
+    parsed from 20190301 dump.
+
+*   `20190301.vep` (`v0.0.3`) (`Size: 4.59 MiB`): Wikipedia dataset for vep,
+    parsed from 20190301 dump.
+
+*   `20190301.vi` (`v0.0.3`) (`Size: 623.74 MiB`): Wikipedia dataset for vi,
+    parsed from 20190301 dump.
+
+*   `20190301.vls` (`v0.0.3`) (`Size: 6.58 MiB`): Wikipedia dataset for vls,
+    parsed from 20190301 dump.
+
+*   `20190301.vo` (`v0.0.3`) (`Size: 23.80 MiB`): Wikipedia dataset for vo,
+    parsed from 20190301 dump.
+
+*   `20190301.wa` (`v0.0.3`) (`Size: 8.75 MiB`): Wikipedia dataset for wa,
+    parsed from 20190301 dump.
+
+*   `20190301.war` (`v0.0.3`) (`Size: 256.72 MiB`): Wikipedia dataset for war,
+    parsed from 20190301 dump.
+
+*   `20190301.wo` (`v0.0.3`) (`Size: 1.54 MiB`): Wikipedia dataset for wo,
+    parsed from 20190301 dump.
+
+*   `20190301.wuu` (`v0.0.3`) (`Size: 9.08 MiB`): Wikipedia dataset for wuu,
+    parsed from 20190301 dump.
+
+*   `20190301.xal` (`v0.0.3`) (`Size: 1.64 MiB`): Wikipedia dataset for xal,
+    parsed from 20190301 dump.
+
+*   `20190301.xh` (`v0.0.3`) (`Size: 1.26 MiB`): Wikipedia dataset for xh,
+    parsed from 20190301 dump.
+
+*   `20190301.xmf` (`v0.0.3`) (`Size: 9.40 MiB`): Wikipedia dataset for xmf,
+    parsed from 20190301 dump.
+
+*   `20190301.yi` (`v0.0.3`) (`Size: 11.56 MiB`): Wikipedia dataset for yi,
+    parsed from 20190301 dump.
+
+*   `20190301.yo` (`v0.0.3`) (`Size: 11.55 MiB`): Wikipedia dataset for yo,
+    parsed from 20190301 dump.
+
+*   `20190301.za` (`v0.0.3`) (`Size: 735.93 KiB`): Wikipedia dataset for za,
+    parsed from 20190301 dump.
+
+*   `20190301.zea` (`v0.0.3`) (`Size: 2.47 MiB`): Wikipedia dataset for zea,
+    parsed from 20190301 dump.
+
+*   `20190301.zh` (`v0.0.3`) (`Size: 1.71 GiB`): Wikipedia dataset for zh,
+    parsed from 20190301 dump.
+
+*   `20190301.zh-classical` (`v0.0.3`) (`Size: 13.37 MiB`): Wikipedia dataset
+    for zh-classical, parsed from 20190301 dump.
+
+*   `20190301.zh-min-nan` (`v0.0.3`) (`Size: 50.30 MiB`): Wikipedia dataset for
     zh-min-nan, parsed from 20190301 dump.
 
-*   `20190301.zh-yue` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for zh-yue,
-    parsed from 20190301 dump.
+*   `20190301.zh-yue` (`v0.0.3`) (`Size: 52.41 MiB`): Wikipedia dataset for
+    zh-yue, parsed from 20190301 dump.
 
-*   `20190301.zu` (`v0.0.3`) (`Size: ?? GiB`): Wikipedia dataset for zu, parsed
-    from 20190301 dump.
+*   `20190301.zu` (`v0.0.3`) (`Size: 1.50 MiB`): Wikipedia dataset for zu,
+    parsed from 20190301 dump.
 
 ## `wikipedia/20190301.aa`
 

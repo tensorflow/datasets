@@ -187,7 +187,7 @@ This returns the tensor dtype/shape, as returned by .as_dataset by the
 
 ```
 return {
-    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8):
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
     'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
     'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
 }
