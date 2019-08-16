@@ -77,6 +77,22 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
       "validation": 4,
   }
 
+class TranslateWmtCustomConfigS3Test(TranslateWmtCustomConfigTest):
+  @classmethod
+  def setUpClass(cls):
+    super(TranslateWmtCustomConfigS3Test, cls).setUpClass()
+
+    config = wmt.WmtConfig(
+      name="smallS3",
+      language_pair=("cs", "en"),
+      description="Example of custom config",
+      subsets={
+        "train": ["paracrawl_v3"],
+        "validation": ["newstest2009", "newstest2010"],
+      },
+      version=tfds.core.Version("1.0.0"),
+    )
+    wmt.WmtTranslate.BUILDER_CONFIGS = [config]
 
 if __name__ == "__main__":
   testing.test_main()

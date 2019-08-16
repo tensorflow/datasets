@@ -44,6 +44,10 @@ class TranslateDeEnWmt19Test(testing.DatasetBuilderTestCase):
   }
 
 
+class TranslateDeEnWmt19S3Test(TranslateDeEnWmt19Test):
+  VERSION = "experimental_latest"
+
+
 class TranslateCsEnWmt19Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = wmt19.Wmt19Translate
   BUILDER_CONFIG_NAMES_TO_TEST = ["cs-en"]
@@ -63,6 +67,10 @@ class TranslateCsEnWmt19Test(testing.DatasetBuilderTestCase):
       "train": 13,
       "validation": 2,
   }
+
+
+class TranslateCsEnWmt19S3Test(TranslateCsEnWmt19Test):
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":
