@@ -16,6 +16,7 @@
 """Image datasets."""
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
+from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
@@ -32,6 +33,7 @@ from tensorflow_datasets.image.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image.clevr import CLEVR
 from tensorflow_datasets.image.coco import Coco
 from tensorflow_datasets.image.coco2014_legacy import Coco2014
+from tensorflow_datasets.image.coil100 import Coil100
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLarge
 from tensorflow_datasets.image.cycle_gan import CycleGAN
@@ -47,6 +49,7 @@ from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image.kitti import Kitti
+from tensorflow_datasets.image.lfw import LFW
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
@@ -62,6 +65,7 @@ from tensorflow_datasets.image.pet_finder import PetFinder
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.resisc45 import Resisc45
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
+from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.smallnorb import Smallnorb
 from tensorflow_datasets.image.so2sat import So2sat

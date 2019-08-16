@@ -64,11 +64,9 @@ TEST  | 564
 *   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'sentence', u'label')`
 
 ## Citation
-
 ```
 @inproceedings{rahman2012resolving,
   title={Resolving complex cases of definite pronouns: the winograd schema challenge},

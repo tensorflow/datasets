@@ -21,7 +21,6 @@ dropped.
 *   Size: `786.68 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -42,11 +41,9 @@ ALL   | 23,262
 *   [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @Inproceedings (Conference){asirra-a-captcha-that-exploits-interest-aligned-manual-image-categorization,
 author = {Elson, Jeremy and Douceur, John (JD) and Howell, Jon and Saul, Jared},

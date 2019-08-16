@@ -85,11 +85,9 @@ TEST         | 25,000
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'text', u'label')`
 
 ## Citation
-
 ```
 @InProceedings{maas-EtAl:2011:ACL-HLT2011,
   author    = {Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher},

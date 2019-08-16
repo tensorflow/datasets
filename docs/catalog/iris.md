@@ -50,11 +50,9 @@ ALL   | 150
 *   [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'features', u'label')`
 
 ## Citation
-
 ```
 @misc{Dua:2019 ,
 author = "Dua, Dheeru and Graff, Casey",

@@ -99,10 +99,19 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
   fig = plt.figure(figsize=(plot_scale*cols, plot_scale*rows))
   fig.subplots_adjust(hspace=1/plot_scale, wspace=1/plot_scale)
   for i, ex in enumerate(examples):
+    if not isinstance(ex, dict):
+      raise ValueError(
+          "tfds.show_examples requires examples as `dict`, with the same "
+          "structure as `ds_info.features`. It is currently not compatible "
+          "with `as_supervised=True`. Received: {}".format(type(ex)))
     ax = fig.add_subplot(rows, cols, i+1)
 
     # Plot the image
     image = ex[image_key]
+    if len(image.shape) != 3:
+      raise ValueError(
+          "Image dimension should be 3. tfds.show_examples does not support "
+          "batched examples or video.")
     _, _, c = image.shape
     if c == 1:
       image = image.reshape(image.shape[:2])

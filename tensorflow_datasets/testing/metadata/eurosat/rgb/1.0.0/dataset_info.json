@@ -1,0 +1,86 @@
+{
+  "citation": "\n@misc{helber2017eurosat,\n    title={EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification},\n    author={Patrick Helber and Benjamin Bischke and Andreas Dengel and Damian Borth},\n    year={2017},\n    eprint={1709.00029},\n    archivePrefix={arXiv},\n    primaryClass={cs.CV}\n}\n", 
+  "description": "EuroSAT dataset is based on Sentinel-2 satellite images covering 13 spectral\nbands and consisting of 10 classes with 27000 labeled and\ngeo-referenced samples.\n\nTwo datasets are offered:\n- rgb: Contains only the optical R, G, B frequency bands encoded as JPEG image.\n- all: Contains all 13 bands in the original value range (float32).\n\nURL: https://github.com/phelber/eurosat\n", 
+  "location": {
+    "urls": [
+      "https://github.com/phelber/eurosat"
+    ]
+  }, 
+  "name": "eurosat", 
+  "schema": {
+    "feature": [
+      {
+        "name": "filename", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "94280567", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "27000"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "27000"
+              }
+            }, 
+            "name": "filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "27000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "27000"
+              }, 
+              "max": 9.0
+            }
+          }
+        ], 
+        "numExamples": "27000"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

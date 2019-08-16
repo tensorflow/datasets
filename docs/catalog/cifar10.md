@@ -21,7 +21,6 @@ The CIFAR-10 dataset consists of 60000 32x32 colour images in 10 classes, with
 *   Size: `162.17 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -42,11 +41,9 @@ TEST  | 10,000
 *   [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @TECHREPORT{Krizhevsky09learningmultiple,
     author = {Alex Krizhevsky},

@@ -1,0 +1,135 @@
+{
+  "citation": "@INPROCEEDINGS{Xiao:2010,\nauthor={J. {Xiao} and J. {Hays} and K. A. {Ehinger} and A. {Oliva} and A. {Torralba}},\nbooktitle={2010 IEEE Computer Society Conference on Computer Vision and Pattern Recognition},\ntitle={SUN database: Large-scale scene recognition from abbey to zoo},\nyear={2010},\nvolume={},\nnumber={},\npages={3485-3492},\nkeywords={computer vision;human factors;image classification;object recognition;visual databases;SUN database;large-scale scene recognition;abbey;zoo;scene categorization;computer vision;scene understanding research;scene category;object categorization;scene understanding database;state-of-the-art algorithms;human scene classification performance;finer-grained scene representation;Sun;Large-scale systems;Layout;Humans;Image databases;Computer vision;Anthropometry;Bridges;Legged locomotion;Spatial databases}, \ndoi={10.1109/CVPR.2010.5539970},\nISSN={1063-6919},\nmonth={June},}\n", 
+  "description": "The database contains 108,753 images of 397 categories, used in the\nScene UNderstanding (SUN) benchmark. The number of images varies across\ncategories, but there are at least 100 images per category.\n\nSeveral configs of the dataset are made available through TFDS:\n- A custom (random) partition of the whole dataset with 76,128 training images,\n  10,875 validation images and 21,750 test images. Images have been resized to\n  have at most 120,000 pixels, and encoded as JPEG with quality of 72.\n- \"standard-part1-120k\", \"standard-part2-120k\", ..., \"standard-part10-120k\":\n  Each of the 10 official train/test partitions with 50 images per class in each\n  split. Images have been resized to have at most 120,000 pixels, and encoded\n  as JPEG with quality of 72.\n", 
+  "location": {
+    "urls": [
+      "https://vision.princeton.edu/projects/2010/SUN/"
+    ]
+  }, 
+  "name": "sun397", 
+  "schema": {
+    "feature": [
+      {
+        "name": "file_name", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "39095590629", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2481", 
+        "2482", 
+        "2481", 
+        "2481", 
+        "2481", 
+        "2482", 
+        "2481", 
+        "2481"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "19850"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19850"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19850"
+              }, 
+              "max": 396.0
+            }
+          }
+        ], 
+        "numExamples": "19850"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2481", 
+        "2482", 
+        "2481", 
+        "2481", 
+        "2481", 
+        "2482", 
+        "2481", 
+        "2481"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "19850"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19850"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19850"
+              }, 
+              "max": 396.0
+            }
+          }
+        ], 
+        "numExamples": "19850"
+      }
+    }
+  ], 
+  "version": "4.0.0"
+}

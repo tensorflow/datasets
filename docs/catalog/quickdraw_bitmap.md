@@ -22,7 +22,6 @@ contains these drawings converted from vector format into 28x28 grayscale images
 *   Size: `36.82 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -42,11 +41,9 @@ ALL   | 50,426,266
 *   [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/HaE17,
   author    = {David Ha and

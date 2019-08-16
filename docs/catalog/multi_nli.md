@@ -56,11 +56,9 @@ VALIDATION_MATCHED    | 9,815
 *   [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @InProceedings{N18-1101,
   author = "Williams, Adina

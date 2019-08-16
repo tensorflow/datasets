@@ -101,11 +101,9 @@ TEST  | 10,000
 *   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{cohen_afshar_tapson_schaik_2017,
     title={EMNIST: Extending MNIST to handwritten letters},

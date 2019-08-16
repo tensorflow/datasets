@@ -89,6 +89,16 @@ class ShuffleTest(testing.TestCase):
     for key, item in _ITEMS:
       shuffler.add(key, item)
     self.assertEqual(shuffler.size, _TOTAL_SIZE)
+    if not shuffler._in_memory:  # Check size of temporary bucket files
+      expected_size = (16 + 8) * len(_ITEMS) + sum(len(t[1]) for t in _ITEMS)
+      size = 0
+      for bucket in shuffler._buckets:
+        if not bucket._fobj:
+          continue
+        bucket._fobj.close()
+        size += len(open(bucket._path, 'rb').read())
+      self.assertEqual(size, expected_size)
+    # Check records can be read as expected:
     records = list(iter(shuffler))
     self.assertEqual(records, expected_order)
 

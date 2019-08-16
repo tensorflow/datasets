@@ -162,11 +162,9 @@ VALIDATION | 2,001
 *   [http://www.statmt.org/wmt18/translation-task.html](http://www.statmt.org/wmt18/translation-task.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'zh', u'en')`
 
 ## Citation
-
 ```
 @InProceedings{bojar-EtAl:2018:WMT1,
   author    = {Bojar, Ond{r}ej  and  Federmann, Christian  and  Fishel, Mark

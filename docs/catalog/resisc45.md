@@ -26,7 +26,6 @@ images in each class.
 *   Size: `?? GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -47,11 +46,9 @@ ALL   | 31,500
 *   [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{Cheng_2017,
    title={Remote Sensing Image Scene Classification: Benchmark and State of the Art},

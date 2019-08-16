@@ -265,34 +265,34 @@ configurations predefined (defaults to the first one):
 *   `snow_5` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: snow, severity
     level: 5
 
-*   `spatter_1` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: spatter,
+*   `spatter_1` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: spatter,
     severity level: 1
 
-*   `spatter_2` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: spatter,
+*   `spatter_2` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: spatter,
     severity level: 2
 
-*   `spatter_3` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: spatter,
+*   `spatter_3` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: spatter,
     severity level: 3
 
-*   `spatter_4` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: spatter,
+*   `spatter_4` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: spatter,
     severity level: 4
 
-*   `spatter_5` (`v0.0.1`) (`Size: ?? GiB`): Corruption method: spatter,
+*   `spatter_5` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: spatter,
     severity level: 5
 
-*   `speckle_noise_1` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `speckle_noise_1` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     speckle_noise, severity level: 1
 
-*   `speckle_noise_2` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `speckle_noise_2` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     speckle_noise, severity level: 2
 
-*   `speckle_noise_3` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `speckle_noise_3` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     speckle_noise, severity level: 3
 
-*   `speckle_noise_4` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `speckle_noise_4` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     speckle_noise, severity level: 4
 
-*   `speckle_noise_5` (`v0.0.1`) (`Size: ?? GiB`): Corruption method:
+*   `speckle_noise_5` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method:
     speckle_noise, severity level: 5
 
 *   `zoom_blur_1` (`v0.0.1`) (`Size: 2.72 GiB`): Corruption method: zoom_blur,
@@ -1177,11 +1177,9 @@ ALL   | 10,000
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @inproceedings{
   hendrycks2018benchmarking,

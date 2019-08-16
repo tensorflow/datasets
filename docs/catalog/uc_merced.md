@@ -28,7 +28,6 @@ measures 256x256 pixels.
 *   Size: `317.07 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -49,11 +48,9 @@ ALL   | 2,100
 *   [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @InProceedings{Nilsback08,
    author = "Yang, Yi and Newsam, Shawn",

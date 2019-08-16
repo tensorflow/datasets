@@ -93,11 +93,9 @@ ALL   | 737,280
 *   [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @misc{dsprites17,
 author = {Loic Matthey and Irina Higgins and Demis Hassabis and Alexander Lerchner},

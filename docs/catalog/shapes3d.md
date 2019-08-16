@@ -85,11 +85,9 @@ ALL   | 480,000
 *   [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @misc{3dshapes18,
   title={3D Shapes Dataset},

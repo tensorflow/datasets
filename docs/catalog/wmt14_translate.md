@@ -126,11 +126,9 @@ VALIDATION | 3,000
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'ru', u'en')`
 
 ## Citation
-
 ```
 @InProceedings{bojar-EtAl:2014:W14-33,
   author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},

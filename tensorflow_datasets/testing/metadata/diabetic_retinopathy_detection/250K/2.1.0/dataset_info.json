@@ -1,0 +1,188 @@
+{
+  "citation": "@ONLINE {kaggle-diabetic-retinopathy,\n    author = \"Kaggle and EyePacs\",\n    title  = \"Kaggle Diabetic Retinopathy Detection\",\n    month  = \"jul\",\n    year   = \"2015\",\n    url    = \"https://www.kaggle.com/c/diabetic-retinopathy-detection/data\"\n}\n", 
+  "description": "A large set of high-resolution retina images taken under a variety of imaging conditions.", 
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/diabetic-retinopathy-detection/data"
+    ]
+  }, 
+  "name": "diabetic_retinopathy_detection", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }, 
+      {
+        "name": "name", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "1181257", 
+  "splits": [
+    {
+      "name": "sample", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }, 
+              "max": -1.0, 
+              "min": -1.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }
+            }, 
+            "name": "name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "10"
+      }
+    }, 
+    {
+      "name": "test", 
+      "numShards": "100", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "42670"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "42670"
+              }, 
+              "max": 4.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "42670"
+              }
+            }, 
+            "name": "name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "42670"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "100", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "35126"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "35126"
+              }, 
+              "max": 4.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "35126"
+              }
+            }, 
+            "name": "name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "35126"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "100", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10906"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10906"
+              }, 
+              "max": 4.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "10906"
+              }
+            }, 
+            "name": "name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "10906"
+      }
+    }
+  ], 
+  "version": "2.1.0"
+}

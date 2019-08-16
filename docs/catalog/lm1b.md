@@ -77,11 +77,9 @@ TEST  | 306,688
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'text', u'text')`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/ChelbaMSGBK13,
   author    = {Ciprian Chelba and

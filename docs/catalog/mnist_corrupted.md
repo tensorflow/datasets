@@ -218,11 +218,9 @@ TEST  | 10,000
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{mu2019mnist,
   title={MNIST-C: A Robustness Benchmark for Computer Vision},
