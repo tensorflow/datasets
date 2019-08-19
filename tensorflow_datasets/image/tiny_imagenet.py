@@ -10,7 +10,7 @@ from tensorflow.io.gfile import GFile, glob
 import tensorflow_datasets as tfds
 
 _CITATION = """\
-@ONLINE {,
+@ONLINE {tiny_imagenet,
     title = "Tiny ImageNet Visual Recognition Challenge",
     url   = "https://tiny-imagenet.herokuapp.com"
 }
