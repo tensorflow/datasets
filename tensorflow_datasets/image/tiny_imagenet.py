@@ -20,7 +20,7 @@ _DESCRIPTION = """\
 Tiny Imagenet is a smaller version of ImageNet dataset.
 Tiny Imagenet has 200 classes.
 Each class has 500 training images, 50 validation images, and 50 test images.
-Test split doesnot have labels."""
+Test split images don't have labels and return -1 as labels."""
 
 _URL = "https://tiny-imagenet.herokuapp.com"
 
