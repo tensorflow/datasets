@@ -1369,7 +1369,6 @@ None computed
 *   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 --------------------------------------------------------------------------------

@@ -75,7 +75,6 @@ None computed
 *   [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 --------------------------------------------------------------------------------

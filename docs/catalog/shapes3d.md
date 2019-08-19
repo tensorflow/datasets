@@ -54,7 +54,6 @@ array.
 *   Size: `255.18 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(64, 64, 3), dtype=tf.uint8),

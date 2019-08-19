@@ -32,7 +32,6 @@ and 5).
 *   Size: `250.60 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(96, 96, 1), dtype=tf.uint8),

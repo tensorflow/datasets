@@ -30,7 +30,6 @@ separable from each other.
 *   Size: `4.44 KiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'features': Tensor(shape=(4,), dtype=tf.float32),

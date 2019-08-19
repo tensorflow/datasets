@@ -30,7 +30,6 @@ boxes.
 *   Size: `125.64 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),

@@ -26,7 +26,6 @@ training/validation data from the MNIST dataset.
 *   Size: `781.25 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image_sequence': Video(Image(shape=(64, 64, 1), dtype=tf.uint8)),

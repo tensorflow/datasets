@@ -34,7 +34,6 @@ computer vision tasks: face attribute recognition, face detection, and landmark
 *   Size: `1.38 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'attributes': FeaturesDict({

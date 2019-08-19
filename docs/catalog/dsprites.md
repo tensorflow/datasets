@@ -64,7 +64,6 @@ ensuring that all pixel outputs were different. No noise was added.
 *   Size: `26.73 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(64, 64, 1), dtype=tf.uint8),

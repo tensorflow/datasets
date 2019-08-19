@@ -31,7 +31,6 @@ to 21 points, as the original paper mentioned.
 *   Size: `83.36 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(450, 450, 3), dtype=tf.uint8),
@@ -52,11 +51,9 @@ ALL   | 2,000
 *   [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/ZhuLLSL15,
   author    = {Xiangyu Zhu and

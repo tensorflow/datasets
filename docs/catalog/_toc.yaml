@@ -116,6 +116,8 @@ toc:
     title: so2sat
   - path: /datasets/catalog/stanford_dogs
     title: stanford_dogs
+  - path: /datasets/catalog/stanford_online_products
+    title: stanford_online_products
   - path: /datasets/catalog/sun397
     title: sun397
   - path: /datasets/catalog/svhn_cropped

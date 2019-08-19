@@ -43,7 +43,6 @@ ALL   | 14,344,391
 *   [https://wiki.skullsecurity.org/Passwords](https://wiki.skullsecurity.org/Passwords)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 --------------------------------------------------------------------------------
