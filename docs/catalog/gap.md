@@ -26,7 +26,6 @@ applications.
 *   Size: `2.29 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'A': Text(shape=(), dtype=tf.string),
@@ -57,11 +56,9 @@ VALIDATION | 454
 *   [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/abs-1810-05201,
   author    = {Kellie Webster and

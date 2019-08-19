@@ -30,7 +30,6 @@ pose intervals of 5 degrees.This corresponds to 72 poses per object
 *   Size: `124.63 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(128, 128, 3), dtype=tf.uint8),
@@ -51,11 +50,9 @@ ALL   | 7,200
 *   [http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php](http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{nene1996columbia,
   title={Columbia object image library (coil-20)},

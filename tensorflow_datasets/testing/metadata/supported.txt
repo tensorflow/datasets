@@ -703,6 +703,7 @@ snli/plain_text/0.0.1
 snli/plain_text/1.0.0
 squad/plain_text/0.1.0
 squad/plain_text/1.0.0
+stanford_online_products/1.0.0
 starcraft_video/brawl_128/0.1.2
 starcraft_video/brawl_64/0.1.2
 starcraft_video/collect_mineral_shards_128/0.1.2

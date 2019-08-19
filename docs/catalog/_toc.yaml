@@ -52,6 +52,8 @@ toc:
     title: curated_breast_imaging_ddsm
   - path: /datasets/catalog/cycle_gan
     title: cycle_gan
+  - path: /datasets/catalog/deep_weeds
+    title: deep_weeds
   - path: /datasets/catalog/diabetic_retinopathy_detection
     title: diabetic_retinopathy_detection
   - path: /datasets/catalog/downsampled_imagenet
@@ -116,6 +118,8 @@ toc:
     title: so2sat
   - path: /datasets/catalog/stanford_dogs
     title: stanford_dogs
+  - path: /datasets/catalog/stanford_online_products
+    title: stanford_online_products
   - path: /datasets/catalog/sun397
     title: sun397
   - path: /datasets/catalog/svhn_cropped
