@@ -178,7 +178,7 @@ def load(name,
          data_dir=None,
          batch_size=None,
          in_memory=None,
-         shuffle_files=None,
+         shuffle_files=False,
          download=True,
          as_supervised=False,
          decoders=None,
@@ -240,8 +240,7 @@ def load(name,
       unknown dimensions, the features will be padded to the maximum
       size across the dataset.
     shuffle_files: `bool`, whether to shuffle the input files.
-      Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
-      From 2019-08-20, will always default to False.
+      Defaults to `False`.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
