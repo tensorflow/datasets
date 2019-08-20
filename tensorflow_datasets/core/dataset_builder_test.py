@@ -125,7 +125,7 @@ class DatasetBuilderTest(testing.TestCase):
           name="dummy_dataset_shared_generator",
           data_dir=tmp_dir,
           split=splits_lib.Split.TRAIN,
-          as_dataset_kwargs=dict(shuffle_files=False))
+          shuffle_files=False)
       ds_values = list(dataset_utils.as_numpy(ds))
 
       # Ensure determinism. If this test fail, this mean that numpy random
@@ -152,7 +152,7 @@ class DatasetBuilderTest(testing.TestCase):
           name="dummy_dataset_shared_generator",
           data_dir=tmp_dir,
           split=["train", "test"],
-          as_dataset_kwargs=dict(shuffle_files=False))
+          shuffle_files=False)
 
       data = list(dataset_utils.as_numpy(ds_train))
       self.assertEqual(20, len(data))
