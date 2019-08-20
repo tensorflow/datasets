@@ -17,9 +17,5 @@ class TinyImagenetTest(testing.DatasetBuilderTestCase):
   }
 
 
-class TinyImagenetS3Test(TinyImagenetTest):
-  VERSION = 'experimental_latest'
-
-
 if __name__ == "__main__":
   testing.test_main()

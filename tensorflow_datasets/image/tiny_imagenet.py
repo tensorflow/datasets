@@ -34,20 +34,14 @@ class TinyImagenet(tfds.core.GeneratorBasedBuilder):
     """Returns Dataset Info"""
     return tfds.core.DatasetInfo(
         builder=self,
-        # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             # TODO(tiny_imagenet): Provide bbox from dataset
             # "bbox": tfds.features.BBoxFeature(),
             "label": tfds.features.ClassLabel(num_classes=200)
         }),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
         supervised_keys=("image", "label"),
-        # Homepage of the dataset for documentation
         urls=[_URL],
         citation=_CITATION,
     )
