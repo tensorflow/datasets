@@ -3,21 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="glue" />
-  <meta itemprop="description" content="The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task
-            in which a system must read a sentence with a pronoun and select the referent of that pronoun from
-            a list of choices. The examples are manually constructed to foil simple statistical methods: Each
-            one is contingent on contextual information provided by a single word or phrase in the sentence.
-            To convert the problem into sentence pair classification, we construct sentence pairs by replacing
-            the ambiguous pronoun with each possible referent. The task is to predict if the sentence with the
-            pronoun substituted is entailed by the original sentence. We use a small evaluation set consisting of
-            new examples derived from fiction books that was shared privately by the authors of the original
-            corpus. While the included training set is balanced between two classes, the test set is imbalanced
-            between them (65% not entailment). Also, due to a data quirk, the development set is adversarial:
-            hypotheses are sometimes shared between training and development examples, so if a model memorizes the
-            training examples, they will predict the wrong label on corresponding development set
-            example. As with QNLI, each example is evaluated separately, so there is not a systematic correspondence
-            between a model's score on this task and its score on the unconverted original task. We
-            call converted dataset WNLI (Winograd NLI)." />
+  <meta itemprop="description" content="The Winograd Schema Challenge (Levesque et al., 2011) is a reading comprehension task&#10;            in which a system must read a sentence with a pronoun and select the referent of that pronoun from&#10;            a list of choices. The examples are manually constructed to foil simple statistical methods: Each&#10;            one is contingent on contextual information provided by a single word or phrase in the sentence.&#10;            To convert the problem into sentence pair classification, we construct sentence pairs by replacing&#10;            the ambiguous pronoun with each possible referent. The task is to predict if the sentence with the&#10;            pronoun substituted is entailed by the original sentence. We use a small evaluation set consisting of&#10;            new examples derived from fiction books that was shared privately by the authors of the original&#10;            corpus. While the included training set is balanced between two classes, the test set is imbalanced&#10;            between them (65% not entailment). Also, due to a data quirk, the development set is adversarial:&#10;            hypotheses are sometimes shared between training and development examples, so if a model memorizes the&#10;            training examples, they will predict the wrong label on corresponding development set&#10;            example. As with QNLI, each example is evaluated separately, so there is not a systematic correspondence&#10;            between a model's score on this task and its score on the unconverted original task. We&#10;            call converted dataset WNLI (Winograd NLI)." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/glue" />
   <meta itemprop="sameAs" content="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html" />
 </div>

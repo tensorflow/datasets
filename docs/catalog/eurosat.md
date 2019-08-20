@@ -3,15 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="eurosat" />
-  <meta itemprop="description" content="EuroSAT dataset is based on Sentinel-2 satellite images covering 13 spectral
-bands and consisting of 10 classes with 27000 labeled and
-geo-referenced samples.
-
-Two datasets are offered:
-- rgb: Contains only the optical R, G, B frequency bands encoded as JPEG image.
-- all: Contains all 13 bands in the original value range (float32).
-
-URL: https://github.com/phelber/eurosat" />
+  <meta itemprop="description" content="EuroSAT dataset is based on Sentinel-2 satellite images covering 13 spectral&#10;bands and consisting of 10 classes with 27000 labeled and&#10;geo-referenced samples.&#10;&#10;Two datasets are offered:&#10;- rgb: Contains only the optical R, G, B frequency bands encoded as JPEG image.&#10;- all: Contains all 13 bands in the original value range (float32).&#10;&#10;URL: https://github.com/phelber/eurosat&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/eurosat" />
   <meta itemprop="sameAs" content="https://github.com/phelber/eurosat" />
 </div>

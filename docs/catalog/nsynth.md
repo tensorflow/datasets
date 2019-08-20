@@ -3,16 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="nsynth" />
-  <meta itemprop="description" content="The NSynth Dataset is an audio dataset containing ~300k musical notes, each
-with a unique pitch, timbre, and envelope. Each note is annotated with three
-additional pieces of information based on a combination of human evaluation
-and heuristic algorithms:
- -Source: The method of sound production for the note's instrument.
- -Family: The high-level family of which the note's instrument is a member.
- -Qualities: Sonic qualities of the note.
-
-The dataset is split into train, valid, and test sets, with no instruments
-overlapping between the train set and the valid/test sets." />
+  <meta itemprop="description" content="The NSynth Dataset is an audio dataset containing ~300k musical notes, each&#10;with a unique pitch, timbre, and envelope. Each note is annotated with three&#10;additional pieces of information based on a combination of human evaluation&#10;and heuristic algorithms:&#10; -Source: The method of sound production for the note's instrument.&#10; -Family: The high-level family of which the note's instrument is a member.&#10; -Qualities: Sonic qualities of the note.&#10;&#10;The dataset is split into train, valid, and test sets, with no instruments&#10;overlapping between the train set and the valid/test sets.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/nsynth" />
   <meta itemprop="sameAs" content="https://g.co/magenta/nsynth-dataset" />
 </div>

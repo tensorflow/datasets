@@ -3,9 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="ted_multi_translate" />
-  <meta itemprop="description" content="Massively multilingual (60 language) data set derived from TED Talk transcripts.
-Each record consists of parallel arrays of language and text. Missing and
-incomplete translations will be filtered out." />
+  <meta itemprop="description" content="Massively multilingual (60 language) data set derived from TED Talk transcripts.&#10;Each record consists of parallel arrays of language and text. Missing and&#10;incomplete translations will be filtered out.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/ted_multi_translate" />
   <meta itemprop="sameAs" content="https://github.com/neulab/word-embeddings-for-nmt" />
 </div>

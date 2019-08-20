@@ -3,12 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="coil100" />
-  <meta itemprop="description" content="The dataset contains 7200 color images of 100 objects
-(72 images per object). The objects have a wide variety of complex geometric and reflectance characteristics.
-The objects were placed on a motorized turntable against a black background.
-The turntable was rotated through 360 degrees to vary object pose with respect to a fxed color camera.
-Images of the objects were taken at pose intervals of   5 degrees.This corresponds to
-72 poses per object" />
+  <meta itemprop="description" content="The dataset contains 7200 color images of 100 objects&#10;(72 images per object). The objects have a wide variety of complex geometric and reflectance characteristics.&#10;The objects were placed on a motorized turntable against a black background.&#10;The turntable was rotated through 360 degrees to vary object pose with respect to a fxed color camera.&#10;Images of the objects were taken at pose intervals of   5 degrees.This corresponds to&#10;72 poses per object" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/coil100" />
   <meta itemprop="sameAs" content="http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php" />
 </div>

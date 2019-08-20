@@ -3,8 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="downsampled_imagenet" />
-  <meta itemprop="description" content="Dataset with images of 2 resolutions (see config name for information on the resolution).
-It is used for density estimation and generative modeling experiments." />
+  <meta itemprop="description" content="Dataset with images of 2 resolutions (see config name for information on the resolution).&#10;It is used for density estimation and generative modeling experiments.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/downsampled_imagenet" />
   <meta itemprop="sameAs" content="http://image-net.org/small/download.php" />
 </div>

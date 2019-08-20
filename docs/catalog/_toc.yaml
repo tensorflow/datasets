@@ -52,6 +52,8 @@ toc:
     title: curated_breast_imaging_ddsm
   - path: /datasets/catalog/cycle_gan
     title: cycle_gan
+  - path: /datasets/catalog/deep_weeds
+    title: deep_weeds
   - path: /datasets/catalog/diabetic_retinopathy_detection
     title: diabetic_retinopathy_detection
   - path: /datasets/catalog/downsampled_imagenet

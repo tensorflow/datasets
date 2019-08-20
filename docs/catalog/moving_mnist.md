@@ -3,10 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="moving_mnist" />
-  <meta itemprop="description" content="Moving variant of MNIST database of handwritten digits. This is the
-data used by the authors for reporting model performance. See
-`tfds.video.moving_mnist.image_as_moving_sequence`
-for generating training/validation data from the MNIST dataset." />
+  <meta itemprop="description" content="Moving variant of MNIST database of handwritten digits. This is the&#10;data used by the authors for reporting model performance. See&#10;`tfds.video.moving_mnist.image_as_moving_sequence`&#10;for generating training/validation data from the MNIST dataset.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/moving_mnist" />
   <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~nitish/unsupervised_video/" />
 </div>

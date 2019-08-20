@@ -3,8 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="imdb_reviews" />
-  <meta itemprop="description" content="Large Movie Review Dataset.
-This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well." />
+  <meta itemprop="description" content="Large Movie Review Dataset.&#10;This is a dataset for binary sentiment classification containing substantially more data than previous benchmark datasets. We provide a set of 25,000 highly polar movie reviews for training, and 25,000 for testing. There is additional unlabeled data for use as well." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/imdb_reviews" />
   <meta itemprop="sameAs" content="http://ai.stanford.edu/~amaas/data/sentiment/" />
 </div>

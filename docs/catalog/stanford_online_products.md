@@ -17,22 +17,7 @@ Stanford Online Products Dataset
 *   `DatasetBuilder`:
     [`tfds.image.stanford_online_products.StanfordOnlineProducts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/stanford_online_products.py)
 *   Version: `v1.0.0`
-*   Size: `?? GiB`
 
-## Features
-
-```python
-FeaturesDict({
-    'class_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=22634),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'super_class_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
-    'super_class_id/num': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
-})
-```
-
-## Statistics
-
-None computed
 
 ## Urls
 

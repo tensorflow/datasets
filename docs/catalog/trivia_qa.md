@@ -3,11 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="trivia_qa" />
-  <meta itemprop="description" content="TriviaqQA is a reading comprehension dataset containing over 650K
-question-answer-evidence triples. TriviaqQA includes 95K question-answer
-pairs authored by trivia enthusiasts and independently gathered evidence
-documents, six per question on average, that provide high quality distant
-supervision for answering the questions." />
+  <meta itemprop="description" content="TriviaqQA is a reading comprehension dataset containing over 650K&#10;question-answer-evidence triples. TriviaqQA includes 95K question-answer&#10;pairs authored by trivia enthusiasts and independently gathered evidence&#10;documents, six per question on average, that provide high quality distant&#10;supervision for answering the questions.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/trivia_qa" />
   <meta itemprop="sameAs" content="http://nlp.cs.washington.edu/triviaqa/" />
 </div>

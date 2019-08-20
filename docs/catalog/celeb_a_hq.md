@@ -3,10 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="celeb_a_hq" />
-  <meta itemprop="description" content="High-quality version of the CELEBA
-dataset, consisting of 30000 images in 1024 x 1024 resolution.
-
-WARNING: This dataset currently requires you to prepare images on your own." />
+  <meta itemprop="description" content="High-quality version of the CELEBA&#10;dataset, consisting of 30000 images in 1024 x 1024 resolution.&#10;&#10;WARNING: This dataset currently requires you to prepare images on your own.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/celeb_a_hq" />
   <meta itemprop="sameAs" content="https://github.com/tkarras/progressive_growing_of_gans" />
 </div>

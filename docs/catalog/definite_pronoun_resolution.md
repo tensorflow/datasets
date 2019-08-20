@@ -3,15 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="definite_pronoun_resolution" />
-  <meta itemprop="description" content="Composed by 30 students from one of the author's undergraduate classes. These
-sentence pairs cover topics ranging from real events (e.g., Iran's plan to
-attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,
-Batman) and purely imaginary situations, largely reflecting the pop culture as
-perceived by the American kids born in the early 90s. Each annotated example
-spans four lines: the first line contains the sentence, the second line contains
-the target pronoun, the third line contains the two candidate antecedents, and
-the fourth line contains the correct antecedent. If the target pronoun appears
-more than once in the sentence, its first occurrence is the one to be resolved." />
+  <meta itemprop="description" content="Composed by 30 students from one of the author's undergraduate classes. These&#10;sentence pairs cover topics ranging from real events (e.g., Iran's plan to&#10;attack the Saudi ambassador to the U.S.) to events/characters in movies (e.g.,&#10;Batman) and purely imaginary situations, largely reflecting the pop culture as&#10;perceived by the American kids born in the early 90s. Each annotated example&#10;spans four lines: the first line contains the sentence, the second line contains&#10;the target pronoun, the third line contains the two candidate antecedents, and&#10;the fourth line contains the correct antecedent. If the target pronoun appears&#10;more than once in the sentence, its first occurrence is the one to be resolved.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/definite_pronoun_resolution" />
   <meta itemprop="sameAs" content="http://www.hlt.utdallas.edu/~vince/data/emnlp12/" />
 </div>

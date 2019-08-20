@@ -3,23 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="wmt_t2t_translate" />
-  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.
-
-Versions exists for the different years using a combination of multiple data
-sources. The base `wmt_translate` allows you to create your own config to choose
-your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.
-
-```
-config = tfds.translate.wmt.WmtConfig(
-    version=&quot;0.0.1&quot;,
-    language_pair=(&quot;fr&quot;, &quot;de&quot;),
-    subsets={
-        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],
-        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],
-    },
-)
-builder = tfds.builder(&quot;wmt_translate&quot;, config=config)
-```" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.&#10;&#10;Versions exists for the different years using a combination of multiple data&#10;sources. The base `wmt_translate` allows you to create your own config to choose&#10;your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.&#10;&#10;```&#10;config = tfds.translate.wmt.WmtConfig(&#10;    version=&quot;0.0.1&quot;,&#10;    language_pair=(&quot;fr&quot;, &quot;de&quot;),&#10;    subsets={&#10;        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],&#10;        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],&#10;    },&#10;)&#10;builder = tfds.builder(&quot;wmt_translate&quot;, config=config)&#10;```&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wmt_t2t_translate" />
   <meta itemprop="sameAs" content="https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py" />
 </div>

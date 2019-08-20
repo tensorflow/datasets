@@ -3,11 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="xnli" />
-  <meta itemprop="description" content="XNLI is a subset of a few thousand examples from MNLI which has been translated
-into a 14 different languages (some low-ish resource). As with MNLI, the goal is
-to predict textual entailment (does sentence A imply/contradict/neither sentence
-B) and is a classification task (given two sentences, predict one of three
-labels)." />
+  <meta itemprop="description" content="XNLI is a subset of a few thousand examples from MNLI which has been translated&#10;into a 14 different languages (some low-ish resource). As with MNLI, the goal is&#10;to predict textual entailment (does sentence A imply/contradict/neither sentence&#10;B) and is a classification task (given two sentences, predict one of three&#10;labels).&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/xnli" />
   <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/xnli/" />
 </div>

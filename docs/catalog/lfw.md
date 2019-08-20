@@ -3,9 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="lfw" />
-  <meta itemprop="description" content="Labeled Faces in the Wild:
-        A Database for Studying Face Recognition in
-        Unconstrained Environments" />
+  <meta itemprop="description" content="Labeled Faces in the Wild:&#10;        A Database for Studying Face Recognition in&#10;        Unconstrained Environments" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/lfw" />
   <meta itemprop="sameAs" content="http://vis-www.cs.umass.edu/lfw" />
 </div>

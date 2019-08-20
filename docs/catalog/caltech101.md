@@ -3,12 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="caltech101" />
-  <meta itemprop="description" content="Caltech-101 consists of pictures of objects belonging to 101 classes, plus
-one `background clutter` class. Each image is labelled with a single object.
-Each class contains roughly 40 to 800 images, totalling around 9k images.
-Images are of variable sizes, with typical edge lengths of 200-300 pixels.
-This version contains image-level labels only. The original dataset also
-contains bounding boxes." />
+  <meta itemprop="description" content="Caltech-101 consists of pictures of objects belonging to 101 classes, plus&#10;one `background clutter` class. Each image is labelled with a single object.&#10;Each class contains roughly 40 to 800 images, totalling around 9k images.&#10;Images are of variable sizes, with typical edge lengths of 200-300 pixels.&#10;This version contains image-level labels only. The original dataset also&#10;contains bounding boxes.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/caltech101" />
   <meta itemprop="sameAs" content="http://www.vision.caltech.edu/Image_Datasets/Caltech101/" />
 </div>

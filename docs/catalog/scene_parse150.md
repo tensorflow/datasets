@@ -3,10 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="scene_parse150" />
-  <meta itemprop="description" content="Scene parsing is to segment and parse an image into different image regions
-associated with semantic categories, such as sky, road, person, and bed.
-MIT Scene Parsing Benchmark (SceneParse150) provides a standard training and
-evaluation platform for the algorithms of scene parsing." />
+  <meta itemprop="description" content="&#10;Scene parsing is to segment and parse an image into different image regions&#10;associated with semantic categories, such as sky, road, person, and bed.&#10;MIT Scene Parsing Benchmark (SceneParse150) provides a standard training and&#10;evaluation platform for the algorithms of scene parsing.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/scene_parse150" />
   <meta itemprop="sameAs" content="http://sceneparsing.csail.mit.edu/" />
 </div>

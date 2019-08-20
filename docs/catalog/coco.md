@@ -3,15 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="coco" />
-  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and
-captioning dataset. This version contains images, bounding boxes &quot;
-and labels for the 2017 version.
-Note:
- * Some images from the train and validation sets don't have annotations.
- * Coco 2014 and 2017 uses the same images, but different train/val/test splits
- * The test split don't have any annotations (only images).
- * Coco defines 91 classes but the data only uses 80 classes.
- * Panotptic annotations defines defines 200 classes but only uses 133." />
+  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and&#10;captioning dataset. This version contains images, bounding boxes &quot;&#10;and labels for the 2017 version.&#10;Note:&#10; * Some images from the train and validation sets don't have annotations.&#10; * Coco 2014 and 2017 uses the same images, but different train/val/test splits&#10; * The test split don't have any annotations (only images).&#10; * Coco defines 91 classes but the data only uses 80 classes.&#10; * Panotptic annotations defines defines 200 classes but only uses 133.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/coco" />
   <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
 </div>

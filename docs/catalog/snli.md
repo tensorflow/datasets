@@ -3,10 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="snli" />
-  <meta itemprop="description" content="The SNLI corpus (version 1.0) is a collection of 570k human-written English
-sentence pairs manually labeled for balanced classification with the labels
-entailment, contradiction, and neutral, supporting the task of natural language
-inference (NLI), also known as recognizing textual entailment (RTE)." />
+  <meta itemprop="description" content="The SNLI corpus (version 1.0) is a collection of 570k human-written English&#10;sentence pairs manually labeled for balanced classification with the labels&#10;entailment, contradiction, and neutral, supporting the task of natural language&#10;inference (NLI), also known as recognizing textual entailment (RTE).&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/snli" />
   <meta itemprop="sameAs" content="https://nlp.stanford.edu/projects/snli/" />
 </div>

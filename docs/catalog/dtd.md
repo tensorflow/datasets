@@ -3,14 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="dtd" />
-  <meta itemprop="description" content="The Describable Textures Dataset (DTD) is an evolving collection of textural
-images in the wild, annotated with a series of human-centric attributes,
-inspired by the perceptual properties of textures. This data is made available
-to the computer vision community for research purposes.
-
-The &quot;label&quot; of each example is its &quot;key attribute&quot; (see the official website).
-The official release of the dataset defines a 10-fold cross-validation
-partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold." />
+  <meta itemprop="description" content="The Describable Textures Dataset (DTD) is an evolving collection of textural&#10;images in the wild, annotated with a series of human-centric attributes,&#10;inspired by the perceptual properties of textures. This data is made available&#10;to the computer vision community for research purposes.&#10;&#10;The &quot;label&quot; of each example is its &quot;key attribute&quot; (see the official website).&#10;The official release of the dataset defines a 10-fold cross-validation&#10;partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/dtd" />
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html" />
 </div>

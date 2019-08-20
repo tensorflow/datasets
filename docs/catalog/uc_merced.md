@@ -3,11 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="uc_merced" />
-  <meta itemprop="description" content="UC Merced is a 21 class land use remote sensing image dataset, with 100 images
-per class. The images were manually extracted from large images from the USGS
-National Map Urban Area Imagery collection for various urban areas around the
-country. The pixel resolution of this public domain imagery is 0.3 m.
-Each image measures 256x256 pixels." />
+  <meta itemprop="description" content="UC Merced is a 21 class land use remote sensing image dataset, with 100 images&#10;per class. The images were manually extracted from large images from the USGS&#10;National Map Urban Area Imagery collection for various urban areas around the&#10;country. The pixel resolution of this public domain imagery is 0.3 m.&#10;Each image measures 256x256 pixels." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/uc_merced" />
   <meta itemprop="sameAs" content="http://weegee.vision.ucmerced.edu/datasets/landuse.html" />
 </div>

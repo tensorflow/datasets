@@ -3,13 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="aflw2k3d" />
-  <meta itemprop="description" content="AFLW2000-3D is a dataset of 2000 images that have been annotated with image-level
-68-point 3D facial landmarks.
-This dataset is typically used for evaluation of 3D facial landmark detection
-models. The head poses are very diverse and often hard to be detected by a
-cnn-based face detector.
-The 2D landmarks are skipped in this dataset, since some of the data are not
-consistent to 21 points, as the original paper mentioned." />
+  <meta itemprop="description" content="AFLW2000-3D is a dataset of 2000 images that have been annotated with image-level&#10;68-point 3D facial landmarks.&#10;This dataset is typically used for evaluation of 3D facial landmark detection&#10;models. The head poses are very diverse and often hard to be detected by a &#10;cnn-based face detector.&#10;The 2D landmarks are skipped in this dataset, since some of the data are not&#10;consistent to 21 points, as the original paper mentioned.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/aflw2k3d" />
   <meta itemprop="sameAs" content="http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm" />
 </div>

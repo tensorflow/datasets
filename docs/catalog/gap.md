@@ -3,10 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="gap" />
-  <meta itemprop="description" content="GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
-(ambiguous pronoun, antecedent name), sampled from Wikipedia and released by
-Google AI Language for the evaluation of coreference resolution in practical
-applications." />
+  <meta itemprop="description" content="&#10;GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of &#10;(ambiguous pronoun, antecedent name), sampled from Wikipedia and released by &#10;Google AI Language for the evaluation of coreference resolution in practical &#10;applications.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/gap" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/gap-coreference" />
 </div>

@@ -3,16 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="visual_domain_decathlon" />
-  <meta itemprop="description" content="This contains the 10 datasets used in the Visual Domain Decathlon, part of
-the PASCAL in Detail Workshop Challenge (CVPR 2017).
-The goal of this challenge is to solve simultaneously ten image classification
-problems representative of very different visual domains.
-
-Some of the datasets included here are also available as separate datasets in
-TFDS. However, notice that images were preprocessed for the Visual Domain
-Decathlon (resized isotropically to have a shorter size of 72 pixels) and
-might have different train/validation/test splits. Here we use the official
-splits for the competition." />
+  <meta itemprop="description" content="This contains the 10 datasets used in the Visual Domain Decathlon, part of&#10;the PASCAL in Detail Workshop Challenge (CVPR 2017).&#10;The goal of this challenge is to solve simultaneously ten image classification&#10;problems representative of very different visual domains.&#10;&#10;Some of the datasets included here are also available as separate datasets in&#10;TFDS. However, notice that images were preprocessed for the Visual Domain&#10;Decathlon (resized isotropically to have a shorter size of 72 pixels) and&#10;might have different train/validation/test splits. Here we use the official&#10;splits for the competition.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/visual_domain_decathlon" />
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/decathlon/" />
 </div>

@@ -414,7 +414,10 @@ def schema_org(builder):
     val = extractor(info)
     if val:
       # We are using cgi module instead of html due to Python 2 compatibility
-      out_str += template.format(val=cgi.escape(val, quote=True).strip())
+      val = cgi.escape(val, quote=True)
+      val = val.replace("\n", "&#10;")
+      val = val.strip()
+      out_str += template.format(val=val)
   out_str += SCHEMA_ORG_POST
 
   return out_str
