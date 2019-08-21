@@ -162,6 +162,8 @@ toc:
     title: lm1b
   - path: /datasets/catalog/multi_nli
     title: multi_nli
+  - path: /datasets/catalog/multi_nli_mismatch
+    title: multi_nli_mismatch
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/squad

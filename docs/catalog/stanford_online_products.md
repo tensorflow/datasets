@@ -20,7 +20,6 @@ Stanford Online Products Dataset
 *   Size: `2.87 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'class_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=22634),

@@ -354,9 +354,7 @@ emnist/letters/3.0.0
 emnist/mnist/1.0.1
 emnist/mnist/2.0.0
 emnist/mnist/3.0.0
-eurosat/all/1.0.0
 eurosat/all/2.0.0
-eurosat/rgb/1.0.0
 eurosat/rgb/2.0.0
 fashion_mnist/1.0.0
 fashion_mnist/2.0.0

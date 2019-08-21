@@ -53,8 +53,6 @@ caltech_birds2011/0.1.0
 deep_weeds/1.0.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 diabetic_retinopathy_detection/btgraham-300/2.0.0
-eurosat/all/0.0.1
-eurosat/rgb/0.0.1
 glue/rte/1.0.0
 glue/wnli/1.0.0
 image_label_folder/1.0.0
@@ -105,6 +103,7 @@ lm1b/subwords32k/1.0.0
 lm1b/subwords8k/1.0.0
 malaria/1.0.0
 mnist_corrupted/canny_edges/1.0.0
+multi_nli_mismatch/plain_text/0.0.1
 oxford_iiit_pet/1.2.0
 so2sat/all/0.0.1
 so2sat/all/1.0.0
