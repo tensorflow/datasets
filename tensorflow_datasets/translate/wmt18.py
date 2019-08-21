@@ -58,7 +58,7 @@ class Wmt18Translate(wmt.WmtTranslate):
           supported_versions=[
               tfds.core.Version('1.0.0'),
           ],
-        )
+      )
       for l1, l2 in _LANGUAGE_PAIRS
   ]
 
