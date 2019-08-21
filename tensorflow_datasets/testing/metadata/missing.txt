@@ -50,6 +50,7 @@ bigearthnet/all/0.0.2
 bigearthnet/rgb/0.0.2
 caltech_birds2010/0.1.0
 caltech_birds2011/0.1.0
+deep_weeds/1.0.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 diabetic_retinopathy_detection/btgraham-300/2.0.0
 eurosat/all/0.0.1
@@ -102,6 +103,7 @@ lm1b/bytes/1.0.0
 lm1b/plain_text/1.0.0
 lm1b/subwords32k/1.0.0
 lm1b/subwords8k/1.0.0
+malaria/1.0.0
 mnist_corrupted/canny_edges/1.0.0
 oxford_iiit_pet/1.2.0
 so2sat/all/0.0.1

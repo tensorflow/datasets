@@ -25,7 +25,6 @@ Range", "Kelso", "McKinlay" and "Paluma".
 *   Size: `?? GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
@@ -34,7 +33,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls
@@ -42,11 +40,9 @@ None computed
 *   [https://nextcloud.qriscloud.org.au/index.php/s/a3KxPawpqkiorST/download](https://nextcloud.qriscloud.org.au/index.php/s/a3KxPawpqkiorST/download)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{DeepWeeds2019,
   author = {Alex Olsen and

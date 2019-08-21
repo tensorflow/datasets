@@ -20,7 +20,7 @@ tfds.load(
     data_dir=None,
     batch_size=None,
     in_memory=None,
-    shuffle_files=None,
+    shuffle_files=False,
     download=True,
     as_supervised=False,
     decoders=None,
@@ -106,8 +106,7 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     dimensions, the features will be padded to the maximum size across the
     dataset.
 *   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
-    to `True` if `split == tfds.Split.TRAIN` and `False` otherwise. From
-    2019-08-20, will always default to False.
+    to `False`.
 *   <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is expected
