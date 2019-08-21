@@ -117,6 +117,7 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     'pet_finder': ['pandas'],
     'svhn': ['scipy'],
+    'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
