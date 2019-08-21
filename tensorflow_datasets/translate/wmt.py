@@ -731,7 +731,6 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
         extract_dirs = extract_dirs * len(rel_paths)
       return [os.path.join(ex_dir, rel_path) if rel_path else ex_dir
               for ex_dir, rel_path in zip(extract_dirs, rel_paths)]
-    idx = 0
     for ss_name in split_subsets:
       logging.info("Generating examples from: %s", ss_name)
       ds = DATASET_MAP[ss_name]
@@ -778,8 +777,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
           continue
         # TODO(adarob): Add subset feature.
         # ex["subset"] = subset
-        idx += 1
-        yield idx, ex
+        key = '{}/{}'.format(ss_name, ex)
+        yield key, ex
 
 
 def _parse_parallel_sentences(f1, f2):
