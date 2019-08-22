@@ -22,10 +22,11 @@ from __future__ import print_function
 
 import os
 
+import tensorflow as tf
 from tensorflow.python.framework import errors
-
 import tensorflow_datasets.public_api as tfds
-from tensorflow import io as tfio
+
+from tensorflow_datasets.core import api_utils
 
 _CITATION = """\
 @article{article,
@@ -40,33 +41,54 @@ doi = {10.2478/ausi-2018-0002}
 }
 """
 
-_COMMIT_SHA = 'b6960fc0287be349c222c3dbdd2624958c902431'
-_DOWNLOAD_URL = 'https://github.com/Horea94/Fruit-Images-Dataset/archive/{sha}.tar.gz'.format(sha=_COMMIT_SHA)
+_DESCRIPTION = """\
+A large set of fruits on a white background.
 
+Note that the dataset is frequently updated independent of TensorFlow Datasets. To use a different version of the \
+dataset, create a custom `tfds.image.fruits360.Fruits360Config`. 
+
+```python
+config = tfds.image.fruits360.Fruits360Config(
+    name="2019.08.14.0",
+    ref="3a2533e",
+    num_classes=118
+)
+builder = tfds.builder("fruits360", config=config)
+```
+"""
 _IMAGE_SIZE = 100
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
-_CLASS_NAMES = ['Apple Braeburn', 'Apple Crimson Snow', 'Apple Golden 1', 'Apple Golden 2', 'Apple Golden 3',
-                'Apple Granny Smith', 'Apple Pink Lady', 'Apple Red 1', 'Apple Red 2', 'Apple Red 3',
-                'Apple Red Delicious', 'Apple Red Yellow 1', 'Apple Red Yellow 2', 'Apricot', 'Avocado', 'Avocado ripe',
-                'Banana', 'Banana Lady Finger', 'Banana Red', 'Cactus fruit', 'Cantaloupe 1', 'Cantaloupe 2',
-                'Carambula', 'Cherry 1', 'Cherry 2', 'Cherry Rainier', 'Cherry Wax Black', 'Cherry Wax Red',
-                'Cherry Wax Yellow', 'Chestnut', 'Clementine', 'Cocos', 'Dates', 'Granadilla', 'Grape Blue',
-                'Grape Pink', 'Grape White', 'Grape White 2', 'Grape White 3', 'Grape White 4', 'Grapefruit Pink',
-                'Grapefruit White', 'Guava', 'Hazelnut', 'Huckleberry', 'Kaki', 'Kiwi', 'Kohlrabi', 'Kumquats', 'Lemon',
-                'Lemon Meyer', 'Limes', 'Lychee', 'Mandarine', 'Mango', 'Mangostan', 'Maracuja', 'Melon Piel de Sapo',
-                'Mulberry', 'Nectarine', 'Orange', 'Papaya', 'Passion Fruit', 'Peach', 'Peach 2', 'Peach Flat', 'Pear',
-                'Pear Abate', 'Pear Kaiser', 'Pear Monster', 'Pear Red', 'Pear Williams', 'Pepino', 'Pepper Green',
-                'Pepper Red', 'Pepper Yellow', 'Physalis', 'Physalis with Husk', 'Pineapple', 'Pineapple Mini',
-                'Pitahaya Red', 'Plum', 'Plum 2', 'Plum 3', 'Pomegranate', 'Pomelo Sweetie', 'Quince', 'Rambutan',
-                'Raspberry', 'Redcurrant', 'Salak', 'Strawberry', 'Strawberry Wedge', 'Tamarillo', 'Tangelo',
-                'Tomato 1', 'Tomato 2', 'Tomato 3', 'Tomato 4', 'Tomato Cherry Red', 'Tomato Maroon', 'Tomato Yellow',
-                'Walnut']
+
+
+class Fruits360Config(tfds.core.BuilderConfig):
+  """BuilderConfig for Fruits360."""
+
+  @api_utils.disallow_positional_args
+  def __init__(self,
+               name=None,
+               ref=None,
+               num_classes=None,
+               **kwargs):
+    """BuilderConfig for Fruits360.
+
+    Args:
+      name: The name of the
+      ref: The git reference (either commit or branch) for the dataset version (string).
+      num_classes: The number of classes present in the dataset (int).
+      **kwargs: keyword arguments forwarded to super.
+    """
+    self.url = 'https://github.com/Horea94/Fruit-Images-Dataset/archive/{}.tar.gz'.format(ref)
+    self.num_classes = num_classes
+    super(Fruits360Config, self).__init__(name=name, **kwargs)
 
 
 class Fruits360(tfds.core.GeneratorBasedBuilder):
   """Fruits 360 dataset."""
 
   VERSION = tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True})
+  BUILDER_CONFIGS = [
+      Fruits360Config(name='2019.08.14.0', ref='3a2533e', num_classes=118)
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -75,7 +97,7 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(names=_CLASS_NAMES)
+            "label": tfds.features.ClassLabel(num_classes=self.builder_config.num_classes)
         }),
         supervised_keys=("image", "label"),
         urls=["https://www.kaggle.com/moltean/fruits"],
@@ -83,9 +105,9 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    resource = tfds.download.Resource(url=_DOWNLOAD_URL, extract_method=tfds.download.ExtractMethod.TAR_GZ)
+    resource = tfds.download.Resource(url=self.builder_config.url, extract_method=tfds.download.ExtractMethod.TAR_GZ)
     download_path = dl_manager.download_and_extract(resource)
-    sub = 'Fruit-Images-Dataset-{}'.format(_COMMIT_SHA)
+    sub = tf.io.gfile.listdir(download_path)[0]
     root_path = os.path.join(download_path, sub)
     train_path = os.path.join(root_path, 'Training')
     test_path = os.path.join(root_path, 'Test')
@@ -109,17 +131,18 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
     Yields:
       The image path and its label.
     """
-    for class_name in _CLASS_NAMES:
+    class_names = sorted(tf.io.gfile.listdir(split_dir))
+    for class_name in class_names:
       class_dir = os.path.join(split_dir, class_name)
       try:
-        fns = tfio.gfile.listdir(class_dir)
+        filenames = sorted(tf.io.gfile.listdir(class_dir))
       except errors.NotFoundError:
         continue
 
-      for fn in sorted(fns):
-        image_path = os.path.join(class_dir, fn)
-        yield "%s/%s" % (class_name, fn), {
+      for filename in filenames:
+        image_path = os.path.join(class_dir, filename)
+        yield "%s/%s" % (class_name, filename), {
             "image": image_path,
-            "image/filename": fn,
+            "image/filename": filename,
             "label": class_name,
         }

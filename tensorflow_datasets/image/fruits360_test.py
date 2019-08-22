@@ -22,8 +22,6 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import fruits360
 
-num_classes = len(fruits360._CLASS_NAMES)
-
 
 class Fruits360Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = fruits360.Fruits360
