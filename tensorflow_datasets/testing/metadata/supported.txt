@@ -574,6 +574,7 @@ lsun/restaurant/3.0.0
 lsun/tower/0.1.1
 lsun/tower/2.0.0
 lsun/tower/3.0.0
+malaria/1.0.0
 mnist/1.0.0
 mnist/2.0.0
 mnist/3.0.0
@@ -611,6 +612,7 @@ mnist_corrupted/zigzag/1.0.0
 moving_mnist/0.1.0
 multi_nli/plain_text/0.0.2
 multi_nli/plain_text/1.0.0
+multi_nli_mismatch/plain_text/0.0.1
 nsynth/1.0.0
 nsynth/2.0.0
 omniglot/1.0.0
