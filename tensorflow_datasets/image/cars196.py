@@ -211,7 +211,8 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
 
     image_dict = self.returnImageDict(data_dir_path)
     bbox_dict = self.returnBbox(data_annotations_path, image_dict)
-    mat = tfds.core.lazy_imports.scipy.io.loadmat(data_annotations_path)
+    with tf.io.gfile.GFile(data_annotations_path, 'rb') as f:
+      mat = tfds.core.lazy_imports.scipy.io.loadmat(f)
     for example in mat['annotations'][0]:
       image_name = example[-1].item().split('.')[0]
       # -1 because class labels are index-1 based.
@@ -233,7 +234,8 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
 
   def returnBbox(self, filename, image_dict):
     bbox_dict = {}
-    data = tfds.core.lazy_imports.scipy.io.loadmat(filename)
+    with tf.io.gfile.GFile(filename, 'rb') as f:
+      data = tfds.core.lazy_imports.scipy.io.loadmat(f)
     for example in data['annotations'][0]:
       image_name = example[-1].item().split('.')[0]
       ymin = float(example[1].item())

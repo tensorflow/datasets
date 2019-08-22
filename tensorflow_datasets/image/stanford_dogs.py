@@ -101,9 +101,9 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
 
     # Parsing the mat file which contains the list of train/test images
     def parse_mat_file(file_name):
-
-      parsed_mat_arr = tfds.core.lazy_imports.scipy.io.loadmat(
-          file_name, squeeze_me=True)
+      with tf.io.gfile.GFile(file_name, "rb") as f:
+        parsed_mat_arr = tfds.core.lazy_imports.scipy.io.loadmat(
+            f, squeeze_me=True)
       file_list = [
           element.split("/")[-1] for element in parsed_mat_arr["file_list"]
       ]
