@@ -212,20 +212,22 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files):
     logging.info("Reading data from %s.", ",".join(files))
     with tf.Graph().as_default():
-      ds = tf.data.TFRecordDataset(files)
-      ds = ds.map(
-          self._parse_single_video,
-          num_parallel_calls=tf.data.experimental.AUTOTUNE)
+      ds = tf.data.Dataset.from_tensor_slices(files)
+      ds = ds.interleave(self._make_tfrecord_dataset, 1)
       iterator = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
-      i = 0
       with tf.compat.v1.Session() as sess:
         sess.run(tf.compat.v1.global_variables_initializer())
         try:
           while True:
-            video = sess.run(iterator)
-            yield i, {"rgb_screen": video}
-            i += 1
+            filename, video = sess.run(iterator)
+            yield filename, {"rgb_screen": video}
 
         except tf.errors.OutOfRangeError:
           # End of file.
           return
+          
+  def _make_tfrecord_dataset(self, filename):
+    ds_record = tf.data.TFRecordDataset(filename)
+    ds_record = ds_record.map(self._parse_single_video)
+    ds_filename = tf.data.Dataset.from_tensors(filename)
+    return tf.data.Dataset.zip((ds_filename, ds_record))
