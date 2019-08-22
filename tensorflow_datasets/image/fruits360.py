@@ -77,7 +77,7 @@ class Fruits360Config(tfds.core.BuilderConfig):
       num_classes: The number of classes present in the dataset (int).
       **kwargs: keyword arguments forwarded to super.
     """
-    self.url = 'https://github.com/Horea94/Fruit-Images-Dataset/archive/{}.tar.gz'.format(ref)
+    self.url = "https://github.com/Horea94/Fruit-Images-Dataset/archive/{}.tar.gz".format(ref)
     self.num_classes = num_classes
     super(Fruits360Config, self).__init__(name=name, **kwargs)
 
@@ -87,13 +87,13 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True})
   BUILDER_CONFIGS = [
-      Fruits360Config(name='2019.08.14.0', ref='3a2533e', num_classes=118)
+      Fruits360Config(name="2019.08.14.0", ref="3a2533e", num_classes=118)
   ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description="A large set of fruits on a white background.",
+        description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
             "image/filename": tfds.features.Text(),
@@ -109,8 +109,8 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
     download_path = dl_manager.download_and_extract(resource)
     sub = tf.io.gfile.listdir(download_path)[0]
     root_path = os.path.join(download_path, sub)
-    train_path = os.path.join(root_path, 'Training')
-    test_path = os.path.join(root_path, 'Test')
+    train_path = os.path.join(root_path, "Training")
+    test_path = os.path.join(root_path, "Test")
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,

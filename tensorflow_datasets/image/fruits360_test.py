@@ -25,7 +25,7 @@ from tensorflow_datasets.image import fruits360
 
 class Fruits360Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = fruits360.Fruits360
-
+  BUILDER_CONFIG_NAMES_TO_TEST = ["2019.08.14.0"]
   SPLITS = {
       "train": 6,
       "test": 6,
