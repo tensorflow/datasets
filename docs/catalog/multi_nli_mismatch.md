@@ -26,7 +26,7 @@ the RepEval 2017 Workshop at EMNLP in Copenhagen.
 `tfds.text.multi_nli_mismatch.MultiNLIMismatchConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v0.0.1`) (`Size: ?? GiB`): Plain text
+*   `plain_text` (`v0.0.1`) (`Size: 216.34 MiB`): Plain text
 
 ## `multi_nli_mismatch/plain_text`
 
@@ -40,18 +40,20 @@ FeaturesDict({
 
 ## Statistics
 
-None computed
+Split      | Examples
+:--------- | -------:
+ALL        | 402,702
+TRAIN      | 392,702
+VALIDATION | 10,000
 
 ## Urls
 
 *   [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @InProceedings{N18-1101,
   author = "Williams, Adina

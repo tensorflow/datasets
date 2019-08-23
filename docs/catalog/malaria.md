@@ -19,7 +19,7 @@ segmented cells.
 *   `DatasetBuilder`:
     [`tfds.image.malaria.Malaria`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/malaria.py)
 *   Version: `v1.0.0`
-*   Size: `?? GiB`
+*   Size: `337.08 MiB`
 
 ## Features
 ```python
@@ -30,7 +30,11 @@ FeaturesDict({
 ```
 
 ## Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+TRAIN | 27,558
+ALL   | 27,558
 
 ## Urls
 
