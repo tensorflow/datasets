@@ -122,10 +122,10 @@ class WiderFace(tfds.core.GeneratorBasedBuilder):
     pattern_nbbox = re.compile(r'(\d+)\n')
     pattern_annot = re.compile(r'(\d+) (\d+) (\d+) (\d+) (\d+) '
                                r'(\d+) (\d+) (\d+) (\d+) (\d+) \n')
-    if split == 'test':
-      annot_file = 'wider_face_split/wider_face_test_filelist.txt'
-    else:
-      annot_file = 'wider_face_split/wider_face_' + split + '_bbx_gt.txt'
+    annot_dir = 'wider_face_split'
+    annot_fname = 'wider_face_test_filelist.txt' if split == 'test' else \
+        'wider_face_' + split + '_bbx_gt.txt'
+    annot_file = os.path.join(annot_dir, annot_fname)
     image_dir = os.path.join(extracted_dirs['wider_' + split],
                              'WIDER_' + split, 'images')
     annot_dir = extracted_dirs['wider_annot']
