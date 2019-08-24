@@ -17,18 +17,34 @@ Stanford Online Products Dataset
 *   `DatasetBuilder`:
     [`tfds.image.stanford_online_products.StanfordOnlineProducts`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/stanford_online_products.py)
 *   Version: `v1.0.0`
+*   Size: `2.87 GiB`
 
+## Features
+```python
+FeaturesDict({
+    'class_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=22634),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'super_class_id': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
+    'super_class_id/num': ClassLabel(shape=(), dtype=tf.int64, num_classes=12),
+})
+```
+
+## Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 120,053
+TEST  | 60,502
+TRAIN | 59,551
 
 ## Urls
 
 *   [http://cvgl.stanford.edu/projects/lifted_struct/](http://cvgl.stanford.edu/projects/lifted_struct/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @inproceedings{song2016deep,
  author    = {Song, Hyun Oh and Xiang, Yu and Jegelka, Stefanie and Savarese, Silvio},

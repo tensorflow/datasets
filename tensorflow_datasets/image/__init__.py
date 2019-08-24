@@ -22,6 +22,7 @@ from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.caltech_birds import CaltechBirds2010
+from tensorflow_datasets.image.cars196 import Cars196
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.cbis_ddsm import CuratedBreastImagingDDSM
 from tensorflow_datasets.image.celeba import CelebA
@@ -31,6 +32,7 @@ from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image.clevr import CLEVR
+from tensorflow_datasets.image.cmaterdb import Cmaterdb
 from tensorflow_datasets.image.coco import Coco
 from tensorflow_datasets.image.coco2014_legacy import Coco2014
 from tensorflow_datasets.image.coil100 import Coil100
@@ -75,6 +77,7 @@ from tensorflow_datasets.image.stanford_dogs import StanfordDogs
 from tensorflow_datasets.image.stanford_online_products import StanfordOnlineProducts
 from tensorflow_datasets.image.sun import Sun397
 from tensorflow_datasets.image.svhn import SvhnCropped
+from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
 from tensorflow_datasets.image.voc import Voc2007

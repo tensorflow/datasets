@@ -20,7 +20,7 @@ tfds.load(
     data_dir=None,
     batch_size=None,
     in_memory=None,
-    shuffle_files=None,
+    shuffle_files=False,
     download=True,
     as_supervised=False,
     decoders=None,
@@ -32,24 +32,7 @@ tfds.load(
 )
 ```
 
-### Used in the guide:
-
-*   [Convert Your Existing Code to TensorFlow 2.0](https://www.tensorflow.org/beta/guide/migration_guide)
-*   [Estimators](https://www.tensorflow.org/beta/guide/estimators/index)
-
-### Used in the tutorials:
-
-*   [CycleGAN](https://www.tensorflow.org/beta/tutorials/generative/cyclegan)
-*   [Distributed training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/keras)
-*   [How-to create an Estimator from a Keras model](https://www.tensorflow.org/beta/tutorials/estimators/keras_model_to_estimator)
-*   [Image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
-*   [Multi-worker Training with Estimator](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_estimator)
-*   [Multi-worker Training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_keras)
-*   [Save and load a model using `tf.distribute.Strategy`](https://www.tensorflow.org/beta/tutorials/distribute/save_and_load)
-*   [Text classification of movie reviews with Keras and TensorFlow Hub](https://www.tensorflow.org/beta/tutorials/keras/basic_text_classification_with_tfhub)
-*   [Text classification with an RNN](https://www.tensorflow.org/beta/tutorials/text/text_classification_rnn)
-*   [Transfer Learning Using Pretrained ConvNets](https://www.tensorflow.org/beta/tutorials/images/transfer_learning)
-*   [Transformer model for language understanding](https://www.tensorflow.org/beta/tutorials/text/transformer)
+<!-- Placeholder for "Used in" -->
 
 If `split=None` (the default), returns all splits for the dataset. Otherwise,
 returns the specified split.
@@ -106,8 +89,7 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     dimensions, the features will be padded to the maximum size across the
     dataset.
 *   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
-    to `True` if `split == tfds.Split.TRAIN` and `False` otherwise. From
-    2019-08-20, will always default to False.
+    to `False`.
 *   <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is expected

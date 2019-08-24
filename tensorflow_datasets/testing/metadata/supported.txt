@@ -16,6 +16,8 @@ binary_alpha_digits/1.0.0
 caltech101/1.1.0
 caltech101/2.0.0
 caltech101/3.0.0
+caltech_birds2010/0.1.0
+cars196/1.0.0
 cats_vs_dogs/2.0.1
 cats_vs_dogs/3.0.0
 cats_vs_dogs/4.0.0
@@ -354,9 +356,7 @@ emnist/letters/3.0.0
 emnist/mnist/1.0.1
 emnist/mnist/2.0.0
 emnist/mnist/3.0.0
-eurosat/all/1.0.0
 eurosat/all/2.0.0
-eurosat/rgb/1.0.0
 eurosat/rgb/2.0.0
 fashion_mnist/1.0.0
 fashion_mnist/2.0.0
@@ -576,6 +576,7 @@ lsun/restaurant/3.0.0
 lsun/tower/0.1.1
 lsun/tower/2.0.0
 lsun/tower/3.0.0
+malaria/1.0.0
 mnist/1.0.0
 mnist/2.0.0
 mnist/3.0.0
@@ -613,6 +614,7 @@ mnist_corrupted/zigzag/1.0.0
 moving_mnist/0.1.0
 multi_nli/plain_text/0.0.2
 multi_nli/plain_text/1.0.0
+multi_nli_mismatch/plain_text/0.0.1
 nsynth/1.0.0
 nsynth/2.0.0
 omniglot/1.0.0
@@ -703,6 +705,7 @@ snli/plain_text/0.0.1
 snli/plain_text/1.0.0
 squad/plain_text/0.1.0
 squad/plain_text/1.0.0
+stanford_online_products/1.0.0
 starcraft_video/brawl_128/0.1.2
 starcraft_video/brawl_64/0.1.2
 starcraft_video/collect_mineral_shards_128/0.1.2
@@ -722,19 +725,12 @@ sun397/standard-part7-120k/4.0.0
 sun397/standard-part8-120k/4.0.0
 sun397/standard-part9-120k/4.0.0
 sun397/tfds/4.0.0
-super_glue/cb/0.0.2
 super_glue/cb/1.0.0
-super_glue/copa/0.0.2
 super_glue/copa/1.0.0
-super_glue/multirc/0.0.2
 super_glue/multirc/1.0.0
-super_glue/rte/0.0.2
 super_glue/rte/1.0.0
-super_glue/wic/0.0.2
 super_glue/wic/1.0.0
-super_glue/wsc.fixed/0.0.2
 super_glue/wsc.fixed/1.0.0
-super_glue/wsc/0.0.2
 super_glue/wsc/1.0.0
 svhn_cropped/1.0.0
 svhn_cropped/2.0.0
@@ -772,9 +768,11 @@ ted_multi_translate/plain_text/1.0.0
 tf_flowers/1.0.0
 tf_flowers/2.0.0
 tf_flowers/3.0.0
+the300w_lp/1.0.0
 titanic/1.0.0
 titanic/2.0.0
 trivia_qa/0.1.0
+trivia_qa/1.0.0
 uc_merced/0.0.1
 uc_merced/1.0.0
 uc_merced/2.0.0

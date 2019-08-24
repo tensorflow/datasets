@@ -24,6 +24,8 @@ toc:
     title: caltech_birds2010
   - path: /datasets/catalog/caltech_birds2011
     title: caltech_birds2011
+  - path: /datasets/catalog/cars196
+    title: cars196
   - path: /datasets/catalog/cats_vs_dogs
     title: cats_vs_dogs
   - path: /datasets/catalog/celeb_a
@@ -38,6 +40,8 @@ toc:
     title: cifar10_corrupted
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/cmaterdb
+    title: cmaterdb
   - path: /datasets/catalog/coco
     title: coco
   - path: /datasets/catalog/coco2014
@@ -86,6 +90,8 @@ toc:
     title: lfw
   - path: /datasets/catalog/lsun
     title: lsun
+  - path: /datasets/catalog/malaria
+    title: malaria
   - path: /datasets/catalog/mnist
     title: mnist
   - path: /datasets/catalog/mnist_corrupted
@@ -126,6 +132,8 @@ toc:
     title: svhn_cropped
   - path: /datasets/catalog/tf_flowers
     title: tf_flowers
+  - path: /datasets/catalog/the300w_lp
+    title: the300w_lp
   - path: /datasets/catalog/uc_merced
     title: uc_merced
   - path: /datasets/catalog/visual_domain_decathlon
@@ -160,6 +168,8 @@ toc:
     title: lm1b
   - path: /datasets/catalog/multi_nli
     title: multi_nli
+  - path: /datasets/catalog/multi_nli_mismatch
+    title: multi_nli_mismatch
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/squad

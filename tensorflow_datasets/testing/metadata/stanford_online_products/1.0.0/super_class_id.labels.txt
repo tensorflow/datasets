@@ -1,0 +1,12 @@
+bicycle
+cabinet
+chair
+coffee_maker
+fan
+kettle
+lamp
+mug
+sofa
+stapler
+table
+toaster

@@ -20,7 +20,7 @@ dataset. Annotations include bounding boxes, segmentation labels.
 *   `DatasetBuilder`:
     [`tfds.image.caltech_birds.CaltechBirds2010`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech_birds.py)
 *   Version: `v0.1.0`
-*   Size: `?? GiB`
+*   Size: `659.14 MiB`
 
 ## Features
 ```python
@@ -35,7 +35,12 @@ FeaturesDict({
 ```
 
 ## Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 6,033
+TEST  | 3,033
+TRAIN | 3,000
 
 ## Urls
 
