@@ -56,6 +56,7 @@ config = tfds.image.fruits360.Fruits360Config(
 builder = tfds.builder("fruits360", config=config)
 ```
 """
+
 _IMAGE_SIZE = 100
 _IMAGE_SHAPE = (_IMAGE_SIZE, _IMAGE_SIZE, 3)
 
@@ -87,7 +88,12 @@ class Fruits360(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True})
   BUILDER_CONFIGS = [
-      Fruits360Config(name="2019.08.14.0", ref="3a2533e", num_classes=118)
+      Fruits360Config(
+          name="2019.08.14.0",
+          ref="3a2533e",
+          num_classes=118,
+          version=tfds.core.Version("1.0.0")
+      )
   ]
 
   def _info(self):
