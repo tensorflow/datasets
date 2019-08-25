@@ -13,15 +13,17 @@
 
 # tfds.features.text.SubwordTextEncoder
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
+source</a>
+
 ## Class `SubwordTextEncoder`
 
 Invertible `TextEncoder` using word pieces with a byte-level fallback.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
-
-
-
-Defined in [`core/features/text/subword_text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -47,6 +49,9 @@ text = encoder.decode([1, 2, 3, 4])
 ```
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
+source</a>
 
 ``` python
 __init__(vocab_list=None)
@@ -74,6 +79,9 @@ Note: To generate a vocabulary from a corpus, use
 ## Methods
 
 <h3 id="build_from_corpus"><code>build_from_corpus</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
+source</a>
 
 ``` python
 @classmethod
@@ -111,6 +119,9 @@ Builds a `SubwordTextEncoder` based on the `corpus_generator`.
 
 <h3 id="decode"><code>decode</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
+source</a>
+
 ``` python
 decode(ids)
 ```
@@ -119,6 +130,9 @@ Decodes a list of integers into text.
 
 <h3 id="encode"><code>encode</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
+source</a>
+
 ``` python
 encode(s)
 ```
@@ -126,6 +140,9 @@ encode(s)
 Encodes text into a list of integers.
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
+source</a>
 
 ``` python
 @classmethod
@@ -138,6 +155,9 @@ load_from_file(
 Extracts list of subwords from file.
 
 <h3 id="save_to_file"><code>save_to_file</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/subword_text_encoder.py">View
+source</a>
 
 ``` python
 save_to_file(filename_prefix)

@@ -44,13 +44,14 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'attrs',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
     'promise',
     'protobuf>=3.6.1',
     'psutil',
-    'requests',
+    'requests>=2.19.0',
     'six',
     'tensorflow-metadata',
     'termcolor',
@@ -62,6 +63,7 @@ TESTS_REQUIRE = [
     'apache-beam',
     'jupyter',
     'pytest',
+    'pytest-xdist',
 ]
 
 if sys.version_info.major == 3:
@@ -81,7 +83,13 @@ if sys.version_info < (3, 4):
 # Static files needed by datasets.
 DATASET_FILES = [
     'image/caltech101_labels.txt',
+    'image/cbis_ddsm_calc_distributions.txt',
+    'image/cbis_ddsm_calc_types.txt',
+    'image/cbis_ddsm_mass_margins.txt',
+    'image/cbis_ddsm_mass_shapes.txt',
+    'image/cbis_ddsm_patch_labels.txt',
     'image/dtd_key_attributes.txt',
+    'image/food-101_classes.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/open_images_classes_all.txt',
@@ -89,17 +97,19 @@ DATASET_FILES = [
     'image/open_images_classes_trainable.txt',
     'image/quickdraw_labels.txt',
     'image/sun397_labels.txt',
+    'image/sun397_tfds_te.txt',
+    'image/sun397_tfds_tr.txt',
+    'image/sun397_tfds_va.txt',
     'url_checksums/*',
     'video/ucf101_labels.txt',
 ]
 
 DATASET_EXTRAS = {
     # In alphabetical order
+    'aflw2k3d': ['scipy'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
-    'eurosat': [
-        'scikit-image',
-    ],
+    'eurosat': ['scikit-image',],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
@@ -109,8 +119,10 @@ DATASET_EXTRAS = {
     ],
     'groove': ['pretty_midi', 'pydub'],
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'pet_finder': ['pandas'],
     'svhn': ['scipy'],
     'tiered_imagenet': ['opencv-python'],
+    'the300w_lp': ['scipy'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
@@ -120,8 +132,9 @@ for deps in DATASET_EXTRAS.values():
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
-    'tensorflow': ['tensorflow>=1.13.0'],
-    'tensorflow_gpu': ['tensorflow-gpu>=1.13.0'],
+    'matplotlib': ['matplotlib'],
+    'tensorflow': ['tensorflow>=1.14.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.14.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)

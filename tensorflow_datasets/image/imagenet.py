@@ -61,11 +61,51 @@ _LABELS_FNAME = 'image/imagenet2012_labels.txt'
 _VALIDATION_LABELS_FNAME = 'image/imagenet2012_validation_labels.txt'
 
 
+# From https://github.com/cytsai/ilsvrc-cmyk-image-list
+CMYK_IMAGES = [
+    'n01739381_1309.JPEG',
+    'n02077923_14822.JPEG',
+    'n02447366_23489.JPEG',
+    'n02492035_15739.JPEG',
+    'n02747177_10752.JPEG',
+    'n03018349_4028.JPEG',
+    'n03062245_4620.JPEG',
+    'n03347037_9675.JPEG',
+    'n03467068_12171.JPEG',
+    'n03529860_11437.JPEG',
+    'n03544143_17228.JPEG',
+    'n03633091_5218.JPEG',
+    'n03710637_5125.JPEG',
+    'n03961711_5286.JPEG',
+    'n04033995_2932.JPEG',
+    'n04258138_17003.JPEG',
+    'n04264628_27969.JPEG',
+    'n04336792_7448.JPEG',
+    'n04371774_5854.JPEG',
+    'n04596742_4225.JPEG',
+    'n07583066_647.JPEG',
+    'n13037406_4650.JPEG',
+]
+
+PNG_IMAGES = ['n02105855_2933.JPEG']
+
+
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
-  VERSION = tfds.core.Version('2.0.1')
-  # 1.0.0 to 2.0.0: fix validation labels.
+  VERSION = tfds.core.Version('2.0.1',
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('5.0.0'),
+      tfds.core.Version('4.0.0'),
+      tfds.core.Version('3.0.0', experiments={tfds.core.Experiment.S3: False}),
+  ]
+  # Version history:
+  # 5.0.0: S3 with new hashing function (different shuffle).
+  # 4.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
+  # 2.0.1: Encoding fix. No changes from user point of view.
+  # 2.0.0: Fix validation labels.
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -113,14 +153,14 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1000,
+            num_shards=1000,  # Ignored when using a version with S3 experiment.
             gen_kwargs={
                 'archive': dl_manager.iter_archive(train_path),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=5,
+            num_shards=5,  # Ignored when using a version with S3 experiment.
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
                 'validation_labels': self._get_validation_labels(val_path),
@@ -128,12 +168,22 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
         ),
     ]
 
+  def _fix_image(self, image_fname, image):
+    """Fix image color system and format starting from v 3.0.0."""
+    if self.version < '3.0.0':
+      return image
+    if image_fname in CMYK_IMAGES:
+      image = io.BytesIO(tfds.core.utils.jpeg_cmyk_to_rgb(image.read()))
+    elif image_fname in PNG_IMAGES:
+      image = io.BytesIO(tfds.core.utils.png_to_jpeg(image.read()))
+    return image
+
   def _generate_examples(self, archive, validation_labels=None):
     """Yields examples."""
     if validation_labels:  # Validation split
-      for example in self._generate_examples_validation(archive,
-                                                        validation_labels):
-        yield example
+      for key, example in self._generate_examples_validation(archive,
+                                                             validation_labels):
+        yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
     for fname, fobj in archive:
@@ -142,18 +192,21 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
       # to call `fobj.seekable()`, which Gfile doesn't have. We should find an
       # alternative, as this loads ~150MB in RAM.
       fobj_mem = io.BytesIO(fobj.read())
-      for image_fname, image_fobj in tfds.download.iter_archive(
-          fobj_mem, tfds.download.ExtractMethod.TAR):
-        yield {
+      for image_fname, image in tfds.download.iter_archive(
+          fobj_mem, tfds.download.ExtractMethod.TAR_STREAM):
+        image = self._fix_image(image_fname, image)
+        record = {
             'file_name': image_fname,
-            'image': image_fobj,
+            'image': image,
             'label': label,
         }
+        yield image_fname, record
 
   def _generate_examples_validation(self, archive, labels):
     for fname, fobj in archive:
-      yield {
+      record = {
           'file_name': fname,
           'image': fobj,
           'label': labels[fname],
       }
+      yield fname, record

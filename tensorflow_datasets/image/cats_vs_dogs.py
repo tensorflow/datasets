@@ -52,10 +52,16 @@ _NAME_RE = re.compile(r"^PetImages[\\/](Cat|Dog)[\\/]\d+\.jpg$")
 class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   """Cats vs Dogs."""
 
-  VERSION = tfds.core.Version("2.0.1")
-  # From 1.0.0 to 2.0.0:
-  #  - _NUM_CORRUPT_IMAGES: 1800->1738.
-  #  - add 'image/filename' feature.
+  VERSION = tfds.core.Version("2.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("4.0.0"),
+      tfds.core.Version("3.0.0"),
+  ]
+  # Version history:
+  # 4.0.0: S3 with new hashing function (different shuffle).
+  # 3.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 2.0.0: _NUM_CORRUPT_IMAGES: 1800->1738, add 'image/filename' feature.
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -95,11 +101,12 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
       if tf.compat.as_bytes("JFIF") not in fobj.peek(10):
         num_skipped += 1
         continue
-      yield {
+      record = {
           "image": fobj,
           "image/filename": fname,
           "label": label,
       }
+      yield fname, record
 
     if num_skipped != _NUM_CORRUPT_IMAGES:
       raise ValueError("Expected %d corrupt images, but found %d" % (

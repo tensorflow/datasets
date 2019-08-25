@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for flowers data loading."""
+"""Tests for Caltech data loading."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -34,6 +34,11 @@ class Caltech101Test(testing.DatasetBuilderTestCase):
   def setUp(self):
     super(Caltech101Test, self).setUp()
     caltech._TRAIN_POINTS_PER_CLASS = 1
+
+
+class Caltech101S3Test(Caltech101Test):
+  VERSION = 'experimental_latest'
+
 
 if __name__ == '__main__':
   testing.test_main()

@@ -96,7 +96,15 @@ computer vision tasks: face attribute recognition, face detection, and landmark\
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
-  VERSION = tfds.core.Version("0.3.0")
+  VERSION = tfds.core.Version("0.3.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("2.0.0"),
+      tfds.core.Version("1.0.0"),
+  ]
+  # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -195,7 +203,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
     for file_name in sorted(files):
       path = os.path.join(filedir, file_name)
 
-      yield {
+      record = {
           "image": path,
           "landmarks": {
               k: v for k, v in zip(landmarks[0], landmarks[1][file_name])
@@ -205,3 +213,4 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
               k: v > 0 for k, v in zip(attributes[0], attributes[1][file_name])
           },
       }
+      yield file_name, record

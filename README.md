@@ -5,10 +5,16 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 [![Kokoro](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
 
-* [List of datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
+* [List of datasets](https://www.tensorflow.org/datasets/catalog/overview)
 * [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
 * [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
-* [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+* Guides
+  * [Overview](https://www.tensorflow.org/datasets/overview)
+  * [Datasets versioning](https://www.tensorflow.org/datasets/datasets_versioning)
+  * [Using splits and slicing API](https://www.tensorflow.org/datasets/splits)
+  * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
+  * [Add a huge dataset (>>100GiB)](https://www.tensorflow.org/datasets/beam_datasets)
+
 
 **Table of Contents**
 
@@ -24,7 +30,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 ```sh
 pip install tensorflow-datasets
 
-# Requires TF 1.13+ to be installed.
+# Requires TF 1.14+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
 pip install tensorflow
 # or:

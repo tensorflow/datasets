@@ -1,0 +1,249 @@
+{
+  "citation": "@article{lake2015human,\n  title={Human-level concept learning through probabilistic program induction},\n  author={Lake, Brenden M and Salakhutdinov, Ruslan and Tenenbaum, Joshua B},\n  journal={Science},\n  volume={350},\n  number={6266},\n  pages={1332--1338},\n  year={2015},\n  publisher={American Association for the Advancement of Science}\n}\n", 
+  "description": "Omniglot data set for one-shot learning. This dataset contains 1623 different\nhandwritten characters from 50 different alphabets.\n", 
+  "location": {
+    "urls": [
+      "https://github.com/brendenlake/omniglot/"
+    ]
+  }, 
+  "name": "omniglot", 
+  "schema": {
+    "feature": [
+      {
+        "name": "alphabet", 
+        "type": "INT"
+      }, 
+      {
+        "name": "alphabet_char_id", 
+        "type": "INT"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "105"
+            }, 
+            {
+              "size": "105"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "18827037", 
+  "splits": [
+    {
+      "name": "small1", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2720"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "alphabet", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2720"
+              }, 
+              "max": 31.0, 
+              "min": 10.0
+            }
+          }, 
+          {
+            "name": "alphabet_char_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2720"
+              }, 
+              "max": 39.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2720"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2720"
+              }, 
+              "max": 707.0, 
+              "min": 107.0
+            }
+          }
+        ], 
+        "numExamples": "2720"
+      }
+    }, 
+    {
+      "name": "small2", 
+      "numShards": "1", 
+      "shardLengths": [
+        "3120"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "alphabet", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3120"
+              }, 
+              "max": 45.0, 
+              "min": 21.0
+            }
+          }, 
+          {
+            "name": "alphabet_char_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3120"
+              }, 
+              "max": 46.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3120"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3120"
+              }, 
+              "max": 908.0, 
+              "min": 393.0
+            }
+          }
+        ], 
+        "numExamples": "3120"
+      }
+    }, 
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "13180"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "alphabet", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13180"
+              }, 
+              "max": 49.0, 
+              "min": 1.0
+            }
+          }, 
+          {
+            "name": "alphabet_char_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13180"
+              }, 
+              "max": 46.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13180"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13180"
+              }, 
+              "max": 1622.0, 
+              "min": 964.0
+            }
+          }
+        ], 
+        "numExamples": "13180"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "shardLengths": [
+        "19280"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "alphabet", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19280"
+              }, 
+              "max": 48.0
+            }
+          }, 
+          {
+            "name": "alphabet_char_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19280"
+              }, 
+              "max": 54.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19280"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19280"
+              }, 
+              "max": 963.0
+            }
+          }
+        ], 
+        "numExamples": "19280"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "3.0.0"
+}

@@ -34,5 +34,10 @@ class QuickdrawTest(testing.DatasetBuilderTestCase):
       "angel": "angel.npy",
   }
 
+
+class QuickdrawS3Test(QuickdrawTest):
+  VERSION = "experimental_latest"
+
+
 if __name__ == "__main__":
   testing.test_main()

@@ -31,5 +31,10 @@ class Voc2007Test(testing.DatasetBuilderTestCase):
       'test': 3,
   }
 
+
+class Voc2007S3Test(Voc2007Test):
+  VERSION = 'experimental_latest'
+
+
 if __name__ == '__main__':
   testing.test_main()

@@ -5,9 +5,13 @@
 
 # Module: tfds.core
 
-API to define datasets.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
-Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py).
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py">View
+source</a>
+
+API to define datasets.
 
 <!-- Placeholder for "Used in" -->
 
@@ -21,6 +25,9 @@ Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/mast
 [`class DatasetBuilder`](../tfds/core/DatasetBuilder.md): Abstract base class for all datasets.
 
 [`class DatasetInfo`](../tfds/core/DatasetInfo.md): Information about a dataset.
+
+[`class Experiment`](../tfds/core/Experiment.md): Experiments which can be
+enabled/disabled on a per version basis.
 
 [`class GeneratorBasedBuilder`](../tfds/core/GeneratorBasedBuilder.md): Base class for datasets with data generation based on dict generators.
 

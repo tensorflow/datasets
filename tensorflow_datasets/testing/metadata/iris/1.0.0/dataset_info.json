@@ -1,0 +1,66 @@
+{
+  "citation": "@misc{Dua:2019 ,\nauthor = \"Dua, Dheeru and Graff, Casey\",\nyear = \"2017\",\ntitle = \"{UCI} Machine Learning Repository\",\nurl = \"http://archive.ics.uci.edu/ml\",\ninstitution = \"University of California, Irvine, School of Information and Computer Sciences\"\n}\n", 
+  "description": "This is perhaps the best known database to be found in the pattern recognition\nliterature. Fisher's paper is a classic in the field and is referenced\nfrequently to this day. (See Duda & Hart, for example.) The data set contains\n3 classes of 50 instances each, where each class refers to a type of iris\nplant. One class is linearly separable from the other 2; the latter are NOT\nlinearly separable from each other.\n", 
+  "location": {
+    "urls": [
+      "https://archive.ics.uci.edu/ml/datasets/iris"
+    ]
+  }, 
+  "name": "iris", 
+  "schema": {
+    "feature": [
+      {
+        "name": "features", 
+        "shape": {
+          "dim": [
+            {
+              "size": "4"
+            }
+          ]
+        }, 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "4551", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "features", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "150"
+              }, 
+              "max": 7.900000095367432, 
+              "min": 0.10000000149011612
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "150"
+              }, 
+              "max": 2.0
+            }
+          }
+        ], 
+        "numExamples": "150"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "features", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

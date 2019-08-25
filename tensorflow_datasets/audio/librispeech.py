@@ -149,12 +149,20 @@ def _make_builder_configs():
           encoder_cls=tfds.features.text.SubwordTextEncoder,
           vocab_size=2**15),
   ]
-  version = "0.1.0"
   configs = []
   for text_encoder_config in text_encoder_configs:
     for data in _DATA_OPTIONS:
       config = LibrispeechConfig(
-          version=version, text_encoder_config=text_encoder_config, data=data)
+          version=tfds.core.Version(
+              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version("1.0.0"),
+          ],
+          text_encoder_config=text_encoder_config,
+          data=data)
+      # Version history:
+      # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+      # 0.0.1: Initial version.
       configs.append(config)
   return configs
 
@@ -187,7 +195,7 @@ class Librispeech(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, dirs):
-    for example in self._generate_examples(dirs):
+    for unused_key, example in self._generate_examples(dirs):
       yield example["text"]
 
   def _split_generators(self, dl_manager):
@@ -221,12 +229,13 @@ class Librispeech(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, dirs):
     for directory in dirs:
       for example in _walk_librispeech_dir(directory):
-        yield {
+        record = {
             "speech": example.audio_file,
             "text": example.transcript,
             "speaker_id": example.speaker_id,
             "chapter_id": example.chapter_id,
         }
+        yield "%s/%s" % (example.speaker_id, example.chapter_id), record
 
 
 LibrispeechExample = collections.namedtuple(

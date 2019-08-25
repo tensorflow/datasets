@@ -412,6 +412,13 @@ _DEV_SUBSETS = [
         path=("dev/newsdev2015-fien-src.{src}.sgm",
               "dev/newsdev2015-fien-ref.en.sgm")),
     SubDataset(
+        name="newsdiscussdev2015",
+        target="en",
+        sources={"ro", "tr"},
+        url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
+        path=("dev/newsdiscussdev2015-{src}en-src.{src}.sgm",
+              "dev/newsdiscussdev2015-{src}en-ref.en.sgm")),
+    SubDataset(
         name="newsdev2016",
         target="en",
         sources={"ro", "tr"},
@@ -510,6 +517,13 @@ _DEV_SUBSETS = [
         url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
         path=("dev/newstest2015-{src}en-src.{src}.sgm",
               "dev/newstest2015-{src}en-ref.en.sgm")),
+    SubDataset(
+        name="newsdiscusstest2015",
+        target="en",
+        sources={"fr"},
+        url="http://data.statmt.org/wmt19/translation-task/dev.tgz",
+        path=("dev/newsdiscusstest2015-{src}en-src.{src}.sgm",
+              "dev/newsdiscusstest2015-{src}en-ref.en.sgm")),
     SubDataset(
         name="newstest2016",
         target="en",

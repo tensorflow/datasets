@@ -1,0 +1,88 @@
+{
+  "citation": "@article{Cheng_2017,\n   title={Remote Sensing Image Scene Classification: Benchmark and State of the Art},\n   volume={105},\n   ISSN={1558-2256},\n   url={http://dx.doi.org/10.1109/JPROC.2017.2675998},\n   DOI={10.1109/jproc.2017.2675998},\n   number={10},\n   journal={Proceedings of the IEEE},\n   publisher={Institute of Electrical and Electronics Engineers (IEEE)},\n   author={Cheng, Gong and Han, Junwei and Lu, Xiaoqiang},\n   year={2017},\n   month={Oct},\n   pages={1865-1883}\n}", 
+  "description": "RESISC45 dataset is a publicly available benchmark for Remote Sensing Image\nScene Classification (RESISC), created by Northwestern Polytechnical University\n(NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700\nimages in each class.", 
+  "location": {
+    "urls": [
+      "http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html"
+    ]
+  }, 
+  "name": "resisc45", 
+  "schema": {
+    "feature": [
+      {
+        "name": "filename", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "256"
+            }, 
+            {
+              "size": "256"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "7875", 
+        "7875", 
+        "7875", 
+        "7875"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "31500"
+              }
+            }, 
+            "name": "filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "31500"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "31500"
+              }, 
+              "max": 44.0
+            }
+          }
+        ], 
+        "numExamples": "31500"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "3.0.0"
+}

@@ -14,8 +14,13 @@
 # limitations under the License.
 
 """API to define datasets."""
+# Ensure TensorFlow is importable and its version is sufficiently recent. This
+# needs to happen before anything else, since the imports below will try to
+# import tensorflow, too.
+from tensorflow_datasets.core import tf_compat
+tf_compat.ensure_tf_install()
 
-from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
+from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder  # pylint:disable=g-import-not-at-top
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
@@ -24,13 +29,14 @@ from tensorflow_datasets.core.dataset_info import DatasetInfo
 from tensorflow_datasets.core.dataset_info import Metadata
 from tensorflow_datasets.core.dataset_info import MetadataDict
 
-from tensorflow_datasets.core.lazy_imports import lazy_imports
+from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 
 from tensorflow_datasets.core.splits import NamedSplit
 from tensorflow_datasets.core.splits import SplitBase
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
+from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
 
@@ -39,6 +45,7 @@ __all__ = [
     "BeamBasedBuilder",
     "BuilderConfig",
     "DatasetBuilder",
+    "Experiment",
     "GeneratorBasedBuilder",
     "get_tfds_path",
     "DatasetInfo",

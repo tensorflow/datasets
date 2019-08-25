@@ -171,7 +171,7 @@ class FeatureConnector(object):
 
     ```
     return {
-        'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8):
+        'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
         'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
         'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
     }

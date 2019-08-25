@@ -68,10 +68,17 @@ class Squad(tfds.core.GeneratorBasedBuilder):
   _DEV_FILE = "dev-v1.1.json"
   _TRAINING_FILE = "train-v1.1.json"
 
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.1.0: Initial version.
   BUILDER_CONFIGS = [
       SquadConfig(
           name="plain_text",
-          version="0.1.0",
+          version=tfds.core.Version(
+              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version("1.0.0"),
+          ],
           description="Plain text",
       ),
   ]
@@ -138,7 +145,7 @@ class Squad(tfds.core.GeneratorBasedBuilder):
 
             # Features currently used are "context", "question", and "answers".
             # Others are extracted here for the ease of future expansions.
-            yield {
+            yield id_, {
                 "title": title,
                 "context": context,
                 "question": question,

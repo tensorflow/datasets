@@ -68,5 +68,8 @@ class CnnDailymailTest(tfds_test.DatasetBuilderTestCase):
                        abstract)
 
 
+class CnnDailymailS3Test(CnnDailymailTest):
+  VERSION = 'experimental_latest'
+
 if __name__ == '__main__':
   tfds_test.test_main()

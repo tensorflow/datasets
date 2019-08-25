@@ -42,11 +42,13 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   Example:
   At construction time:
+
   ```
   tfds.features.Sequence(tfds.features.Image(), length=NB_FRAME)
   ```
 
   or:
+
   ```
   tfds.features.Sequence({
       'frame': tfds.features.Image(shape=(64, 64, 3))
@@ -55,6 +57,7 @@ class Sequence(top_level_feature.TopLevelFeature):
   ```
 
   During data generation:
+
   ```
   yield {
       'frame': np.ones(shape=(NB_FRAME, 64, 64, 3)),
@@ -63,6 +66,7 @@ class Sequence(top_level_feature.TopLevelFeature):
   ```
 
   Tensor returned by `.as_dataset()`:
+
   ```
   {
       'frame': tf.Tensor(shape=(NB_FRAME, 64, 64, 3), dtype=tf.uint8),
@@ -190,9 +194,13 @@ class Sequence(top_level_feature.TopLevelFeature):
     del state['__getattr__']
     self.__dict__.update(state)
 
-  def _additional_repr_info(self):
-    """Override to return additional info to go into __repr__."""
-    return {'feature': repr(self._feature)}
+  def __repr__(self):
+    """Display the feature."""
+    inner_feature_repr = repr(self._feature)
+    if inner_feature_repr.startswith('FeaturesDict('):
+      # Minor formatting cleaning: 'Sequence(FeaturesDict({' => 'Sequence({'
+      inner_feature_repr = inner_feature_repr[len('FeaturesDict('):-len(')')]
+    return '{}({})'.format(type(self).__name__, inner_feature_repr)
 
 
 def stack_arrays(*elems):

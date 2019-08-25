@@ -130,7 +130,17 @@ class Text(feature.Tensor):
           "Files: %s" % (feature_name, feature_files))
 
   def maybe_build_from_corpus(self, corpus_generator, **kwargs):
-    """Call SubwordTextEncoder.build_from_corpus is encoder_cls is such."""
+    """Call SubwordTextEncoder.build_from_corpus is encoder_cls is such.
+
+    If `self.encoder` is `None` and `self._encoder_cls` is of type
+    `SubwordTextEncoder`, the method instantiates `self.encoder` as returned
+    by `SubwordTextEncoder.build_from_corpus()`.
+
+    Args:
+      corpus_generator: generator yielding `str`, from which
+        subwords will be constructed.
+      **kwargs: kwargs forwarded to `SubwordTextEncoder.build_from_corpus()`
+    """
     if self._encoder_cls is not text_lib.SubwordTextEncoder:
       return
     if self.encoder:
@@ -147,4 +157,6 @@ class Text(feature.Tensor):
     return self._encoder_config and self._encoder_config.encoder_cls
 
   def _additional_repr_info(self):
+    if self.encoder is None:
+      return {}
     return {"encoder": repr(self.encoder)}

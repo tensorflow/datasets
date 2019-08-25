@@ -1,0 +1,83 @@
+{
+  "citation": "@InProceedings{Nilsback08,\n   author = \"Yang, Yi and Newsam, Shawn\",\n   title = \"Bag-Of-Visual-Words and Spatial Extensions for Land-Use Classification\",\n   booktitle = \"ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems (ACM GIS)\",\n   year = \"2010\",\n}", 
+  "description": "UC Merced is a 21 class land use remote sensing image dataset, with 100 images\nper class. The images were manually extracted from large images from the USGS\nNational Map Urban Area Imagery collection for various urban areas around the\ncountry. The pixel resolution of this public domain imagery is 0.3 m.\nEach image measures 256x256 pixels.", 
+  "location": {
+    "urls": [
+      "http://weegee.vision.ucmerced.edu/datasets/landuse.html"
+    ]
+  }, 
+  "name": "uc_merced", 
+  "schema": {
+    "feature": [
+      {
+        "name": "filename", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "332468434", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2100"
+              }
+            }, 
+            "name": "filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2100"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2100"
+              }, 
+              "max": 20.0
+            }
+          }
+        ], 
+        "numExamples": "2100"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "0.0.1"
+}

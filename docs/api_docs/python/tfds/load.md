@@ -5,6 +5,12 @@
 
 # tfds.load
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
+source</a>
+
 Loads the named dataset into a `tf.data.Dataset`.
 
 ```python
@@ -12,9 +18,12 @@ tfds.load(
     name,
     split=None,
     data_dir=None,
-    batch_size=1,
+    batch_size=None,
+    in_memory=None,
+    shuffle_files=False,
     download=True,
     as_supervised=False,
+    decoders=None,
     with_info=False,
     builder_kwargs=None,
     download_and_prepare_kwargs=None,
@@ -23,16 +32,17 @@ tfds.load(
 )
 ```
 
-Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
-
 <!-- Placeholder for "Used in" -->
 
 If `split=None` (the default), returns all splits for the dataset. Otherwise,
 returns the specified split.
 
-`load` is a convenience method that fetches the <a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a> by
-string name, optionally calls `DatasetBuilder.download_and_prepare`
-(if `download=True`), and then calls `DatasetBuilder.as_dataset`.
+`load` is a convenience method that fetches the
+<a href="../tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
+by string name, optionally calls
+<a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>DatasetBuilder.download_and_prepare</code></a>
+(if `download=True`), and then calls
+<a href="../tfds/core/DatasetBuilder.md#as_dataset"><code>DatasetBuilder.as_dataset</code></a>.
 This is roughly equivalent to:
 
 ```
@@ -71,9 +81,15 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     <a href="../tfds/Split.md#TEST"><code>tfds.Split.TEST</code></a>).
 *   <b>`data_dir`</b>: `str` (optional), directory to read/write data. Defaults
     datasets are stored.
-*   <b>`batch_size`</b>: `int`, set to > 1 to get batches of examples. Note that
-    variable length features will be 0-padded. If `batch_size=-1`, will return
-    the full dataset as `tf.Tensor`s.
+*   <b>`batch_size`</b>: `int`, if set, add a batch dimension to examples. Note
+    that variable length features will be 0-padded. If `batch_size=-1`, will
+    return the full dataset as `tf.Tensor`s.
+*   <b>`in_memory`</b>: `bool`, if `True`, loads the dataset in memory which
+    increases iteration speeds. Note that if `True` and the dataset has unknown
+    dimensions, the features will be padded to the maximum size across the
+    dataset.
+*   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
+    to `False`.
 *   <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is expected
@@ -83,6 +99,11 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
     `tf.data.Dataset` will have a dictionary with all the features.
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present. See
+    [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+    for more info.
 *   <b>`with_info`</b>: `bool`, if True, tfds.load will return the tuple
     (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated with
     the builder.
@@ -98,9 +119,6 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     deduced from data_dir.
 *   <b>`as_dataset_kwargs`</b>: `dict` (optional), keyword arguments passed to
     <a href="../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>.
-    `split` will be passed through by default. Example: `{'shuffle_files':
-    True}`. Note that shuffle_files is False by default unless `split ==
-    tfds.Split.TRAIN`.
 *   <b>`try_gcs`</b>: `bool`, if True, tfds.load will see if the dataset exists
     on the public GCS bucket before building it locally.
 

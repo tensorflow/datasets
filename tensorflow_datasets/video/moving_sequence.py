@@ -146,7 +146,8 @@ def image_as_moving_sequence(
 
 
   tf.enable_eager_execution()
-  mnist_ds = tfds.load("mnist", split=tfds.Split.TRAIN, as_supervised=True)
+  mnist_ds = tfds.load("mnist", split=tfds.Split.TRAIN, as_supervised=True,
+                       shuffle_files=True)
   mnist_ds = mnist_ds.repeat().shuffle(1024)
 
   def map_fn(image, label):

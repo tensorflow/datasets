@@ -1,0 +1,76 @@
+{
+  "citation": " @article{rajaraman2018pre,\n  title={Pre-trained convolutional neural networks as feature extractors toward \n  improved malaria parasite detection in thin blood smear images},\n  author={Rajaraman, Sivaramakrishnan and Antani, Sameer K and Poostchi, Mahdieh\n  and Silamut, Kamolrat and Hossain, Md A and Maude, Richard J and Jaeger, \n  Stefan and Thoma, George R},\n  journal={PeerJ},\n  volume={6},\n  pages={e4568},\n  year={2018},\n  publisher={PeerJ Inc.}\n}\n", 
+  "description": "The Malaria dataset contains a total of 27,558 cell images\nwith equal instances of parasitized and uninfected cells from the thin blood \nsmear slide images of segmented cells.", 
+  "location": {
+    "urls": [
+      "https://ceb.nlm.nih.gov/proj/malaria/cell_images.zip"
+    ]
+  }, 
+  "name": "malaria", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "353452851", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "6890", 
+        "6889", 
+        "6890", 
+        "6889"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "27558"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "27558"
+              }, 
+              "max": 1.0
+            }
+          }
+        ], 
+        "numExamples": "27558"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

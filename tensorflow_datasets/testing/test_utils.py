@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import contextlib
+import functools
 import os
 import subprocess
 import tempfile
@@ -37,6 +38,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.testing import ragged_test_util
 from tensorflow_datasets.testing import test_case
 
 
@@ -75,16 +77,24 @@ class FeatureExpectationItem(object):
       value,
       expected=None,
       expected_serialized=None,
+      decoders=None,
+      dtype=None,
+      shape=None,
       raise_cls=None,
       raise_msg=None):
     self.value = value
     self.expected = expected
     self.expected_serialized = expected_serialized
+    self.decoders = decoders
+    self.dtype = dtype
+    self.shape = shape
+    if not decoders and (dtype is not None or shape is not None):
+      raise ValueError("dtype and shape should only be set with transform")
     self.raise_cls = raise_cls
     self.raise_msg = raise_msg
 
 
-class SubTestCase(test_case.TestCase):
+class SubTestCase(ragged_test_util.RaggedTensorTestCase, test_case.TestCase):
   """Adds subTest() context manager to the TestCase if supported.
 
   Note: To use this feature, make sure you call super() in setUpClass to
@@ -107,6 +117,18 @@ class SubTestCase(test_case.TestCase):
       with self.subTest(sub_test_str):
         yield
       self._sub_test_stack.pop()
+
+  def assertAllEqual(self, d1, d2):
+    """Same as assertAllEqual but with RaggedTensor support."""
+    # TODO(epot): This function as well as RaggedTensorTestCase could be
+    # removed once tf.test.TestCase support RaggedTensor
+    if any(isinstance(d, tf.RaggedTensor) for d in (d1, d2)):
+      d1, d2 = [  # Required to support list of np.array
+          d if isinstance(d, tf.RaggedTensor) else tf.ragged.constant(d)
+          for d in (d1, d2)
+      ]
+      return self.assertRaggedEqual(d1, d2)
+    return super(SubTestCase, self).assertAllEqual(d1, d2)
 
   def assertAllEqualNested(self, d1, d2):
     """Same as assertAllEqual but compatible with nested dict."""
@@ -236,11 +258,9 @@ class FeatureExpectationsTestCase(SubTestCase):
 
   def assertFeatureTest(self, fdict, test, feature, shape, dtype):
     """Test that encode=>decoding of a value works correctly."""
-
     # test feature.encode_example can be pickled and unpickled for beam.
     dill.loads(dill.dumps(feature.encode_example))
 
-    # self._process_subtest_exp(e)
     input_value = {"inner": test.value}
 
     if test.raise_cls is not None:
@@ -251,7 +271,7 @@ class FeatureExpectationsTestCase(SubTestCase):
                   test.raise_cls, type(feature)))
         with self.assertRaisesWithPredicateMatch(
             test.raise_cls, test.raise_msg):
-          features_encode_decode(fdict, input_value)
+          features_encode_decode(fdict, input_value, decoders=test.decoders)
     else:
       # Test the serialization only
       if test.expected_serialized is not None:
@@ -261,30 +281,36 @@ class FeatureExpectationsTestCase(SubTestCase):
               feature.encode_example(test.value),
           )
 
-      # Assert the returned type match the expected one
+      # Test serialization + decoding from disk
       with self._subTest("out"):
-        out = features_encode_decode(fdict, input_value, as_tensor=True)
-        out = out["inner"]
+        out_tensor, out_numpy = features_encode_decode(
+            fdict,
+            input_value,
+            decoders={"inner": test.decoders},
+        )
+        out_tensor = out_tensor["inner"]
+        out_numpy = out_numpy["inner"]
+
+        # Assert the returned type match the expected one
         with self._subTest("dtype"):
-          out_dtypes = utils.map_nested(lambda s: s.dtype, out)
-          self.assertEqual(out_dtypes, feature.dtype)
+          out_dtypes = utils.map_nested(lambda s: s.dtype, out_tensor)
+          self.assertEqual(out_dtypes, test.dtype or feature.dtype)
         with self._subTest("shape"):
           # For shape, because (None, 3) match with (5, 3), we use
           # tf.TensorShape.assert_is_compatible_with on each of the elements
-          out_shapes = utils.zip_nested(out, feature.shape)
+          expected_shape = feature.shape if test.shape is None else test.shape
+          out_shapes = utils.zip_nested(out_tensor, expected_shape)
           utils.map_nested(
               lambda x: x[0].shape.assert_is_compatible_with(x[1]),
               out_shapes
           )
 
-      # Test serialization + decoding from disk
-      with self._subTest("out_value"):
-        decoded_examples = features_encode_decode(fdict, input_value)
-        decoded_examples = decoded_examples["inner"]
-        self.assertAllEqualNested(decoded_examples, test.expected)
+        # Assert value
+        with self._subTest("out_value"):
+          self.assertAllEqualNested(out_numpy, test.expected)
 
 
-def features_encode_decode(features_dict, example, as_tensor=False):
+def features_encode_decode(features_dict, example, decoders):
   """Runs the full pipeline: encode > write > tmp files > read > decode."""
   # Encode example
   encoded_example = features_dict.encode_example(example)
@@ -296,22 +322,24 @@ def features_encode_decode(features_dict, example, as_tensor=False):
     file_adapter = file_format_adapter.TFRecordExampleAdapter(
         features_dict.get_serialized_info())
     file_adapter.write_from_generator(
-        generator_fn=lambda: [encoded_example],
+        generator=[encoded_example],
         output_files=[tmp_filename],
     )
     ds = file_adapter.dataset_from_filename(tmp_filename)
 
     # Decode the example
-    ds = ds.map(features_dict.decode_example)
+    decode_fn = functools.partial(
+        features_dict.decode_example,
+        decoders=decoders,
+    )
+    ds = ds.map(decode_fn)
 
-    if not as_tensor:  # Evaluate to numpy array
-      for el in dataset_utils.as_numpy(ds):
-        return el
+    if tf.executing_eagerly():
+      out_tensor = next(iter(ds))
     else:
-      if tf.executing_eagerly():
-        return next(iter(ds))
-      else:
-        return tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
+      out_tensor = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
+    out_numpy = dataset_utils.as_numpy(out_tensor)
+    return out_tensor, out_numpy
 
 
 class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
@@ -319,6 +347,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
 
   VERSION = utils.Version("1.0.0")
   SUPPORTED_VERSIONS = [
+      "2.0.0",
       "0.0.9",
       "0.0.8",
   ]
@@ -334,24 +363,24 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
     # Split the 30 examples from the generator into 2 train shards and 1 test
     # shard.
     del dl_manager
-    return [splits.SplitGenerator(
-        name=[splits.Split.TRAIN, splits.Split.TEST],
-        num_shards=[2, 1],
-    )]
+    return [
+        splits.SplitGenerator(
+            name=splits.Split.TRAIN,
+            gen_kwargs={"range_": range(20)}),
+        splits.SplitGenerator(
+            name=splits.Split.TEST,
+            gen_kwargs={"range_": range(20, 30)}),
+    ]
 
-  def _generate_examples(self):
-    for i in range(30):
-      yield {"x": i}
+  def _generate_examples(self, range_):
+    for i in range_:
+      yield i, {"x": i}
 
 
 class DummyMnist(dataset_builder.GeneratorBasedBuilder):
   """Test DatasetBuilder."""
 
   VERSION = utils.Version("1.0.0")
-
-  def __init__(self, *args, **kwargs):
-    self._num_shards = kwargs.pop("num_shards", 10)
-    super(DummyMnist, self).__init__(*args, **kwargs)
 
   def _info(self):
     return dataset_info.DatasetInfo(
@@ -366,17 +395,15 @@ class DummyMnist(dataset_builder.GeneratorBasedBuilder):
     return [
         splits.SplitGenerator(
             name=splits.Split.TRAIN,
-            num_shards=self._num_shards,
             gen_kwargs=dict()),
         splits.SplitGenerator(
             name=splits.Split.TEST,
-            num_shards=1,
             gen_kwargs=dict()),
     ]
 
   def _generate_examples(self):
     for i in range(20):
-      yield {
+      yield i, {
           "image": np.ones((28, 28, 1), dtype=np.uint8),
           "label": i % 10,
       }
@@ -447,3 +474,24 @@ def mock_kaggle_api(filenames=None, err_msg=None):
   with absltest.mock.patch("subprocess.check_output",
                            make_mock_check_output(filenames, err_msg)):
     yield
+
+
+class DummySerializer(object):
+  """To mock example_serializer.ExampleSerializer."""
+
+  def __init__(self, specs):
+    del specs
+
+  def serialize_example(self, example):
+    return bytes(example)
+
+
+class DummyParser(object):
+  """To mock example_parser.ExampleParser."""
+
+  def __init__(self, specs):
+    del specs
+
+  def parse_example(self, ex):
+    return ex
+

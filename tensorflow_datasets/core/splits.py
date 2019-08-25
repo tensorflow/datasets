@@ -25,7 +25,6 @@ import operator
 
 import six
 from six.moves import range  # pylint: disable=redefined-builtin
-from six.moves import zip  # pylint: disable=redefined-builtin
 
 from tensorflow_datasets.core import proto
 from tensorflow_datasets.core import utils
@@ -37,7 +36,7 @@ class SplitInfo(object):
 
   @property
   def num_examples(self):
-    return self.statistics.num_examples
+    return int(self.statistics.num_examples)
 
   def __repr__(self):
     num_examples = self.num_examples or "unknown"
@@ -60,7 +59,7 @@ class SplitBase(object):
        are the `NamedSplit` objects)
 
     ```
-    split = tfds.TRAIN + tfds.TEST.subsplit(tfds.percent[:50])
+    split = tfds.Split.TRAIN + tfds.Split.TEST.subsplit(tfds.percent[:50])
     ```
 
     2) The `SplitBase` is forwarded to the `.as_dataset()` function
@@ -75,11 +74,6 @@ class SplitBase(object):
 
     3) The `SplitReadInstruction` is then used in the `tf.data.Dataset` pipeline
        to define which files to read and how to skip examples within file.
-
-    ```
-    files_to_read = read_instruction.split_info_list
-    slice_per_file = read_instruction.slice_list
-    ```
 
   """
   # pylint: enable=line-too-long
@@ -102,6 +96,10 @@ class SplitBase(object):
       return False
     raise NotImplementedError(
         "Equality is not implemented between merged/sub splits.")
+
+  def __ne__(self, other):
+    """InEquality: tfds.Split.TRAIN != 'test'."""
+    return not self.__eq__(other)
 
   def __add__(self, other):
     """Merging: tfds.Split.TRAIN + tfds.Split.TEST."""
@@ -571,11 +569,12 @@ class SplitDict(utils.NonMutableDict):
 
 
 def check_splits_equals(splits1, splits2):
-  """Check that the two split dicts have the same names and num_shards."""
+  """Check two split dicts have same name, shard_lengths and num_shards."""
   if set(splits1) ^ set(splits2):  # Name intersection should be null
     return False
   for _, (split1, split2) in utils.zip_dict(splits1, splits2):
-    if split1.num_shards != split2.num_shards:
+    if (split1.num_shards != split2.num_shards or
+        split1.shard_lengths != split2.shard_lengths):
       return False
   return True
 
@@ -593,22 +592,13 @@ class SplitGenerator(object):
     """Constructs a `SplitGenerator`.
 
     Args:
-      name: `str` or `list<str>`, name of the Split for which the generator will
-        create the examples. If a list is given, the generator examples will be
-        distributed among the splits proportionally to the num_shards.
-      num_shards: `int` or `list<int>`, number of shards between which the
-        generated examples will be written. If name is a list, then num_shards
-        should be a list with the same number of elements.
+      name: `str`, name of the Split for which the generator will
+        create the examples.
+      num_shards: `int`, number of shards between which the generated examples
+        will be written.
       gen_kwargs: `dict`, kwargs to forward to the _generate_examples() method
         of the builder.
     """
+    self.name = name
     self.gen_kwargs = gen_kwargs or {}
-
-    if isinstance(name, list):
-      split_zip = zip(name, num_shards)
-    else:
-      split_zip = [(name, num_shards)]
-
-    self.split_info_list = [
-        SplitInfo(name=str(n), num_shards=k) for n, k in split_zip
-    ]
+    self.split_info = SplitInfo(name=str(name), num_shards=num_shards)

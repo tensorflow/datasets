@@ -31,5 +31,10 @@ class DtdTest(testing.DatasetBuilderTestCase):
       'validation': 1,
   }
 
+
+class DtdS3Test(DtdTest):
+  VERSION = 'experimental_latest'
+
+
 if __name__ == '__main__':
   testing.test_main()
