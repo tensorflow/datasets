@@ -79,6 +79,7 @@ if sys.version_info < (3, 4):
 # Static files needed by datasets.
 DATASET_FILES = [
     'image/caltech101_labels.txt',
+    'image/categories_places365.txt',
     'image/cbis_ddsm_calc_distributions.txt',
     'image/cbis_ddsm_calc_types.txt',
     'image/cbis_ddsm_mass_margins.txt',
