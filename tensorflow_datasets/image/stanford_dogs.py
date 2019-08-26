@@ -129,7 +129,8 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
       # Parsing the XML file which have the image annotations
       for fname in files:
         annotation_file_name = os.path.join(root, fname)
-        xml_file_list[fname] = ET.parse(annotation_file_name)
+        with tf.io.gfile.GFile(annotation_file_name, "rb") as f:
+          xml_file_list[fname] = ET.parse(f)
 
     return [
         tfds.core.SplitGenerator(
