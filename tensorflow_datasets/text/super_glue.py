@@ -262,12 +262,9 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     # 0.0.2: Initial version.
     super(SuperGlueConfig, self).__init__(
-        # Version 0.0.3 corresponds to the change from the pre-release trial
+        # Version 1.0.1 corresponds to the change from the pre-release trial
         # version of SuperGLUE (v1.9) to the full release (v2.0).
-        version=tfds.core.Version("0.0.3"),
-        supported_versions=[
-            tfds.core.Version("1.0.0"),
-        ],
+        version=tfds.core.Version("1.0.1"),
         **kwargs)
     self.features = features
     self.label_classes = label_classes
