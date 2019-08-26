@@ -64,7 +64,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls
@@ -72,7 +71,6 @@ None computed
 *   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation

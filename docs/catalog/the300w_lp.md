@@ -57,11 +57,9 @@ ALL   | 61,225
 *   [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
 
 ## Citation
-
 ```
 @article{DBLP:journals/corr/ZhuLLSL15,
   author    = {Xiangyu Zhu and

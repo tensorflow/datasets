@@ -21,7 +21,7 @@ bounding box annotations are provided for all the 12,000 images.
 *   `DatasetBuilder`:
     [`tfds.image.stanford_dogs.StanfordDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/stanford_dogs.py)
 *   Version: `v0.1.0`
-*   Size: `?? GiB`
+*   Size: `778.12 MiB`
 
 ## Features
 ```python
@@ -36,7 +36,12 @@ FeaturesDict({
 ```
 
 ## Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 20,580
+TRAIN | 12,000
+TEST  | 8,580
 
 ## Urls
 

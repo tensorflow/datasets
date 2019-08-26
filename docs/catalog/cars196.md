@@ -23,7 +23,6 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 *   Size: `1.82 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
@@ -45,11 +44,9 @@ TEST  | 8,041
 *   [http://imagenet.stanford.edu/internal/car196/](http://imagenet.stanford.edu/internal/car196/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @inproceedings{KrauseStarkDengFei-Fei_3DRR2013,
   title = {3D Object Representations for Fine-Grained Categorization},
