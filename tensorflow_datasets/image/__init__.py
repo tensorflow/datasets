@@ -72,3 +72,4 @@ from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
 from tensorflow_datasets.image.voc import Voc2007
+from tensorflow_datasets.image.lost_and_found import LostAndFound  # TODO(lost_and_found) Sort alphabetically
