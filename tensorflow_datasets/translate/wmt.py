@@ -772,12 +772,12 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       else:
         raise ValueError("Invalid number of files: %d" % len(files))
 
-      for ex in sub_generator(*files):
+      for sub_key, ex in enumerate(sub_generator(*files)):
         if not all(ex.values()):
           continue
         # TODO(adarob): Add subset feature.
         # ex["subset"] = subset
-        key = '{}/{}'.format(ss_name, ex)
+        key = '{}/{}'.format(ss_name, sub_key)
         yield key, ex
 
 
