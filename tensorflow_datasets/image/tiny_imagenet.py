@@ -6,7 +6,7 @@ from __future__ import print_function
 
 import os
 import csv
-import tensorflow as tf
+import tensorflow.io as tf_io
 import tensorflow_datasets as tfds
 
 _CITATION = """\
@@ -78,19 +78,19 @@ class TinyImagenet(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, download_dir, split):
     """Yields examples."""
-    with tf.io.gfile.GFile(os.path.join(download_dir, "wnids.txt")) as classes_f:
+    with tf_io.gfile.GFile(os.path.join(download_dir, "wnids.txt")) as classes_f:
       classes = classes_f.read().split()
     assert len(classes) == 200, "Labels length should be exactly 200"
 
     if split == tfds.Split.TRAIN:
-      images = tf.io.gfile.glob(os.path.join(
+      images = tf_io.gfile.glob(os.path.join(
           download_dir, "train/*/images/*.JPEG"))
       for image in images:
         image_id = os.path.basename(image)[:-5]
         label = classes.index(image_id.split("_")[0])
         yield image_id, {"image": image, "label": label}
     elif split == tfds.Split.VALIDATION:
-      with tf.io.gfile.GFile(os.path.join(download_dir, "val/val_annotations.txt")) as csvfile:
+      with tf_io.gfile.GFile(os.path.join(download_dir, "val/val_annotations.txt")) as csvfile:
         rows = csv.reader(csvfile, delimiter="\t")
         for image, label, *_ in rows:
           image_id = image.split(".")[0]
@@ -98,7 +98,7 @@ class TinyImagenet(tfds.core.GeneratorBasedBuilder):
           label = classes.index(label)
           yield image_id, {"image": image, "label": label}
     elif split == tfds.Split.TEST:
-      for f in tf.io.gfile.glob(os.path.join(download_dir, "test", "*.JPEG")):
+      for f in tf_io.gfile.glob(os.path.join(download_dir, "test", "*.JPEG")):
         image_id = os.path.basename(f)[:-5]
         yield image_id, {"image": f, "label": -1}
     else:
