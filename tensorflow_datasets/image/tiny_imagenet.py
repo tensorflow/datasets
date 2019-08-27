@@ -4,9 +4,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from os.path import join, basename
+import os
 import csv
-from tensorflow.io.gfile import GFile, glob
+import tensorflow as tf
 import tensorflow_datasets as tfds
 
 _CITATION = """\
@@ -50,7 +50,7 @@ class TinyImagenet(tfds.core.GeneratorBasedBuilder):
     """Downloads data and returns SplitGenerators"""
     download_dir = dl_manager.download_and_extract(
         "http://cs231n.stanford.edu/tiny-imagenet-200.zip")
-    download_dir = join(download_dir, "tiny-imagenet-200")
+    download_dir = os.path.join(download_dir, "tiny-imagenet-200")
 
     return [
         tfds.core.SplitGenerator(
@@ -78,27 +78,28 @@ class TinyImagenet(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, download_dir, split):
     """Yields examples."""
-    with GFile(join(download_dir, "wnids.txt")) as classes_f:
+    with tf.io.gfile.GFile(os.path.join(download_dir, "wnids.txt")) as classes_f:
       classes = classes_f.read().split()
     assert len(classes) == 200, "Labels length should be exactly 200"
 
     if split == tfds.Split.TRAIN:
-      images = glob(join(download_dir, "train/*/images/*.JPEG"))
+      images = tf.io.gfile.glob(os.path.join(
+          download_dir, "train/*/images/*.JPEG"))
       for image in images:
-        image_id = basename(image)[:-5]
+        image_id = os.path.basename(image)[:-5]
         label = classes.index(image_id.split("_")[0])
         yield image_id, {"image": image, "label": label}
     elif split == tfds.Split.VALIDATION:
-      with GFile(join(download_dir, "val/val_annotations.txt")) as csvfile:
+      with tf.io.gfile.GFile(os.path.join(download_dir, "val/val_annotations.txt")) as csvfile:
         rows = csv.reader(csvfile, delimiter="\t")
         for image, label, *_ in rows:
           image_id = image.split(".")[0]
-          image = join(download_dir, "val/images", image)
+          image = os.path.join(download_dir, "val/images", image)
           label = classes.index(label)
           yield image_id, {"image": image, "label": label}
     elif split == tfds.Split.TEST:
-      for f in glob(join(download_dir, "test", "*.JPEG")):
-        image_id = basename(f)[:-5]
+      for f in tf.io.gfile.glob(os.path.join(download_dir, "test", "*.JPEG")):
+        image_id = os.path.basename(f)[:-5]
         yield image_id, {"image": f, "label": -1}
     else:
       raise NotImplementedError(
