@@ -83,4 +83,3 @@ from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
 from tensorflow_datasets.image.voc import Voc2007
-from tensorflow_datasets.image.lost_and_found import LostAndFound  # TODO(lost_and_found) Sort alphabetically
