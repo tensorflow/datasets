@@ -57,7 +57,7 @@ _CITATION = """\
 class Places365Small(tfds.core.GeneratorBasedBuilder):
   """Places365 Images dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -120,15 +120,10 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, data_dir_path, split_name, annotation_path):
-    class_id_to_label = tfds.features.ClassLabel(
-        names_file=tfds.core.get_tfds_path(_LABELS_FNAME))
     with tf.io.gfile.GFile(annotation_path) as f:
       if split_name == "test":
         # test split doesn't have labels assigned.
-        test_class_id = class_id_to_label.str2int("test")
-        file_to_class = {
-            x[0]: test_class_id for x in csv.reader(f, delimiter=" ")
-        }
+        file_to_class = {x[0]: -1 for x in csv.reader(f, delimiter=" ")}
       else:
         file_to_class = {x[0]: int(x[1]) for x in csv.reader(f, delimiter=" ")}
 
@@ -136,6 +131,6 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
       yield filepath, {
           # it is a "+" instead of os.path.join on purpose.
           # as some annotation file entries contain paths starting with "/"
-          "image": data_dir_path + "/" + filepath,
-          "label": class_id_to_label.int2str(class_id)
+          "image": os.path.normpath(data_dir_path + "/" + filepath),
+          "label": class_id
       }

@@ -340,7 +340,6 @@ tree_farm
 tree_house
 trench
 tundra
-test
 underwater/ocean_deep
 utility_room
 valley
