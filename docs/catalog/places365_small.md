@@ -18,7 +18,7 @@ category in the validation set and 900 images per category in the testing set.
     [http://data.csail.mit.edu/places/places365/](http://data.csail.mit.edu/places/places365/)
 *   `DatasetBuilder`:
     [`tfds.image.places365_small.Places365Small`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/places365_small.py)
-*   Version: `v1.0.0`
+*   Version: `v2.0.0`
 *   Size: `?? GiB`
 
 ## Features
@@ -26,12 +26,11 @@ category in the validation set and 900 images per category in the testing set.
 ```python
 FeaturesDict({
     'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=366),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=365),
 })
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls
@@ -39,11 +38,9 @@ None computed
 *   [http://data.csail.mit.edu/places/places365/](http://data.csail.mit.edu/places/places365/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @article{zhou2017places,
   title={Places: A 10 million Image Database for Scene Recognition},
