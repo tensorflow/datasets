@@ -1,4 +1,4 @@
-"""TODO(lost_and_found): Add a description here."""
+"""Lost and Found Road Hazard Dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -30,6 +30,8 @@ The dataset is designed analogous to the 'Cityscapes' dataset. The datset provid
 - stereo image pairs in either 8 or 16 bit color resolution
 - precomputed disparity maps
 - coarse semantic labels for objects and street
+
+Descriptions of the labels are given here: http://www.6d-vision.com/laf_table.pdf
 """
 
 
@@ -39,6 +41,7 @@ class LostAndFoundConfig(tfds.core.BuilderConfig):
     Args:
       right_images (bool): Enables right images for stereo image tasks.
       segmentation_labels (bool): Enables image segmentation labels.
+      instance_ids (bool): Enables instance-id labels.
       disparity_maps (bool): Enables disparity maps.
       use_16bit (bool): Loads 16 bit (rgb) images instead of 8bit.
   '''
@@ -65,7 +68,7 @@ class LostAndFoundConfig(tfds.core.BuilderConfig):
 
 
 class LostAndFound(tfds.core.GeneratorBasedBuilder):
-  """TODO(lost_and_found): Short description of my dataset."""
+  """Lost and Found Road Hazard Dataset."""
 
   VERSION = tfds.core.Version('1.0.0')
 
@@ -134,10 +137,7 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    # TODO(lost_and_found): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
-    base_url = 'http://www.dhbw-stuttgart.de/~sgehrig/lostAndFoundDataset/{}.zip'
+        base_url = 'http://www.dhbw-stuttgart.de/~sgehrig/lostAndFoundDataset/{}.zip'
     download_urls = {
         'image_left': base_url.format(self.builder_config.left_image_string)}
     if 'image_right' in self.builder_config.features:

@@ -1,18 +1,3 @@
-# coding=utf-8
-# Copyright 2019 The TensorFlow Datasets Authors.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 """Helper functions to generate fake Cityscapes-like zip archives for testing."""
 
 from tensorflow_datasets.testing.fake_data_utils import get_random_png
@@ -27,6 +12,14 @@ CITY_IN_ID_RE = re.compile(r'(.+)_[0-9]+_[0-9]+')
 
 
 def generate_ids(city, num=2):
+  """ Generates image ids following the format of the cityscapes dataset.
+
+  Args:
+    city (str): The city/scene the ids belong to, used as a prefix to the id.
+    num (int): Number of random ids to generate.
+  Returns:
+    Generator for id strings.
+  """
   for _ in range(num):
     yield '{}_{:06d}_{:06d}'.format(city, randint(0, 999999), randint(0, 999999))
 
