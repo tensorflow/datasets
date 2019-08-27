@@ -48,6 +48,7 @@ from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image.kitti import Kitti
+from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
@@ -72,4 +73,3 @@ from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
 from tensorflow_datasets.image.voc import Voc2007
-from tensorflow_datasets.image.lost_and_found import LostAndFound  # TODO(lost_and_found) Sort alphabetically
