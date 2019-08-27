@@ -1,4 +1,4 @@
-"""TODO(lost_and_found): Add a description here."""
+"""Tests for LostAndFound dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
