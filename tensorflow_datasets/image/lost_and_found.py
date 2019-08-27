@@ -4,7 +4,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from os import path, listdir
+from os import path
 import re
 
 import tensorflow as tf
@@ -47,19 +47,18 @@ class LostAndFoundConfig(tfds.core.BuilderConfig):
   '''
 
   @api_utils.disallow_positional_args
-  def __init__(self, right_images=False, segmentation_labels=False, instance_ids=False,
-               disparity_maps=False, use_16bit=False, **kwargs):
+  def __init__(self, right_images=False, segmentation_labels=False,
+               instance_ids=False, disparity_maps=False, use_16bit=False,
+               **kwargs):
     super().__init__(**kwargs)
-
-    self.ignored_ids = set()
 
     self.features = ['image_left']
     if right_images:
       self.features.append('image_right')
-      # this image causes IO errors
-      # self.ignored_ids.add('06_Galgenbergstr_40_000000_000040')
     if segmentation_labels:
       self.features.append('segmentation_label')
+    if instance_ids:
+      self.features.append('instance_id')
     if disparity_maps:
       self.features.append('disparity_map')
 
@@ -116,10 +115,14 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     possible_features = {
-        'image_left': tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png'),
-        'image_right': tfds.features.Image(shape=(1024, 2048, 3), encoding_format='png'),
+        'image_left': tfds.features.Image(shape=(1024, 2048, 3),
+                                          encoding_format='png'),
+        'image_right': tfds.features.Image(shape=(1024, 2048, 3),
+                                           encoding_format='png'),
         'segmentation_label': tfds.features.Image(shape=(1024, 2048, 1),
                                                   encoding_format='png'),
+        'instance_id': tfds.features.Image(shape=(1024, 2048, 1),
+                                           encoding_format='png'),
         'disparity_map': tfds.features.Image(shape=(1024, 2048, 1),
                                              encoding_format='png')}
     return tfds.core.DatasetInfo(
@@ -129,7 +132,8 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             'image_id': tfds.features.Text(),
-            **{feat: possible_features[feat] for feat in self.builder_config.features}}),
+            **{feat: possible_features[feat]
+               for feat in self.builder_config.features}}),
         # Homepage of the dataset for documentation
         urls=['http://www.6d-vision.com/lostandfounddataset'],
         citation=_CITATION,
@@ -137,14 +141,14 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-        base_url = 'http://www.dhbw-stuttgart.de/~sgehrig/lostAndFoundDataset/{}.zip'
+    base_url = 'http://www.dhbw-stuttgart.de/~sgehrig/lostAndFoundDataset/{}.zip'
     download_urls = {
         'image_left': base_url.format(self.builder_config.left_image_string)}
     if 'image_right' in self.builder_config.features:
       download_urls['image_right'] = base_url.format(
           self.builder_config.right_image_string)
     if 'segmentation_label' in self.builder_config.features \
-        or 'instance_id' in self.builder_config.features:
+            or 'instance_id' in self.builder_config.features:
       download_urls['gt'] = base_url.format('gtCoarse')
     if 'disparity_map' in self.builder_config.features:
       download_urls['disparity_map'] = base_url.format('disparity')
@@ -190,8 +194,6 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
         'instance_id': 'gtCoarse_instanceIds',
         'disparity_map': 'disparity'}
 
-    print(paths['image_left'])
-
     for scene_id in tf.io.gfile.listdir(paths['image_left']):
       paths_city_root = {feat: path.join(feat_dir, scene_id)
                          for feat, feat_dir in paths.items()}
@@ -199,11 +201,6 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
       left_city_root = paths_city_root['image_left']
       for left_img in tf.io.gfile.listdir(left_city_root):
         image_id = _get_id_from_left_image(left_img)
-
-        if image_id in self.builder_config.ignored_ids:
-          continue
-
-        print(listdir(paths_city_root['segmentation_label']))
 
         features = {
             'image_id': image_id,
