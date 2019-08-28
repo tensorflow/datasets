@@ -212,9 +212,7 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
 
 # Helper functions
 
-
 LEFT_IMAGE_FILE_RE = re.compile(r'(.+)_leftImg(?:8|16)bit\.png')
-
 
 def _get_id_from_left_image(left_image):
   '''Returns the id of an image file. Used to associate an image file
