@@ -259,12 +259,13 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     # Version history:
+    # 1.0.2: Fixed non-nondeterminism in ReCoRD.
+    # 1.0.1: Change from the pre-release trial version of SuperGLUE (v1.9) to
+    #        the full release (v2.0).
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     # 0.0.2: Initial version.
     super(SuperGlueConfig, self).__init__(
-        # Version 1.0.1 corresponds to the change from the pre-release trial
-        # version of SuperGLUE (v1.9) to the full release (v2.0).
-        version=tfds.core.Version("1.0.1"),
+        version=tfds.core.Version("1.0.2"),
         **kwargs)
     self.features = features
     self.label_classes = label_classes
@@ -552,7 +553,7 @@ def _get_record_entities(passage):
   entities = set()
   for entity in passage["entities"]:
     entities.add(text[entity["start"]:entity["end"] + 1])
-  return list(entities)
+  return sorted(entities)
 
 
 def _get_record_answers(qa):
@@ -562,7 +563,7 @@ def _get_record_answers(qa):
   answers = set()
   for answer in qa["answers"]:
     answers.add(answer["text"])
-  return list(answers)
+  return sorted(answers)
 
 
 def _get_task_name_from_data_url(data_url):
