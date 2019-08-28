@@ -108,4 +108,13 @@ so2sat/all/2.0.0
 so2sat/rgb/0.0.1
 so2sat/rgb/1.0.0
 so2sat/rgb/2.0.0
+super_glue/boolq/1.0.2
+super_glue/cb/1.0.2
+super_glue/copa/1.0.2
+super_glue/multirc/1.0.2
+super_glue/record/1.0.2
+super_glue/rte/1.0.2
+super_glue/wic/1.0.2
+super_glue/wsc.fixed/1.0.2
+super_glue/wsc/1.0.2
 wmt_translate/None

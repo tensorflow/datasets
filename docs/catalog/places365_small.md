@@ -22,7 +22,6 @@ category in the validation set and 900 images per category in the testing set.
 *   Size: `?? GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(256, 256, 3), dtype=tf.uint8),
