@@ -127,7 +127,6 @@ class AmazonMultilingualReviews(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name="train",
-            num_shards=10,
             gen_kwargs={"file_path": path,} 
         ),
     ]
@@ -144,8 +143,8 @@ class AmazonMultilingualReviews(tfds.core.GeneratorBasedBuilder):
     
     with tf.io.gfile.GFile(file_path) as tsvfile: 
       reader = csv.DictReader(tsvfile, dialect='excel-tab')
-      for row in reader:
-        yield{
+      for i, row in enumerate(reader):
+        yield i, {
             "data": row,
         }
 

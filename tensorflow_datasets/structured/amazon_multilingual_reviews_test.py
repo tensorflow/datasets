@@ -21,7 +21,6 @@ from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.structured import amazon_multilingual_reviews
-import tensorflow_datasets.public_api as tfds
 
 
 class AmazonMultilingualReviewsTest(testing.DatasetBuilderTestCase):
