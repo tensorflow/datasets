@@ -582,8 +582,8 @@ You can register an external checksums directory by calling
 `tfds.download.add_checksums_dir('/path/to/checksums_dir')` in your code, so
 that users of your dataset automatically use your checksums.
 
-You can create this checksums file with the
-`tensorflow_datasets.scripts.download_and_prepare` script by passing the flags
+To create this checksum file the first time, you can use the
+`tensorflow_datasets.scripts.download_and_prepare` script and pass the flags
 `--register_checksums --checksums_dir=/path/to/checksums_dir`.
 
 ### 2. Adjust the fake example direcory
