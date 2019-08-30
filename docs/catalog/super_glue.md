@@ -99,7 +99,7 @@ the following configurations predefined (defaults to the first one):
     tasks than span-based extractive QA does. The paragraphs are drawn from
     seven domains including news, fiction, and historical text.
 
-*   `record` (`v1.0.2`) (`Size: ?? GiB`): (Reading Comprehension with
+*   `record` (`v1.0.2`) (`Size: 49.36 MiB`): (Reading Comprehension with
     Commonsense Reasoning Dataset, Zhang et al., 2018) is a multiple-choice QA
     task. Each example consists of a news article and a Cloze-style question
     about the article in which one entity is masked out. The system must predict
@@ -109,31 +109,32 @@ the following configurations predefined (defaults to the first one):
     CNN and Daily Mail. Following the original work, we evaluate with max (over
     all mentions) token-level F1 and exact match (EM).
 
-*   `rte` (`v1.0.2`) (`Size: ?? GiB`): The Recognizing Textual Entailment (RTE)
-    datasets come from a series of annual competitions on textual entailment,
-    the problem of predicting whether a given premise sentence entails a given
-    hypothesis sentence (also known as natural language inference, NLI). RTE was
-    previously included in GLUE, and we use the same data and format as before:
-    We merge data from RTE1 (Dagan et al., 2006), RTE2 (Bar Haim et al., 2006),
-    RTE3 (Giampiccolo et al., 2007), and RTE5 (Bentivogli et al., 2009). All
-    datasets are combined and converted to two-class classification: entailment
-    and not_entailment. Of all the GLUE tasks, RTE was among those that
-    benefited from transfer learning the most, jumping from near random-chance
-    performance (~56%) at the time of GLUE's launch to 85% accuracy (Liu et al.,
-    2019c) at the time of writing. Given the eight point gap with respect to
-    human performance, however, the task is not yet solved by machines, and we
-    expect the remaining gap to be difficult to close.
+*   `rte` (`v1.0.2`) (`Size: 733.32 KiB`): The Recognizing Textual Entailment
+    (RTE) datasets come from a series of annual competitions on textual
+    entailment, the problem of predicting whether a given premise sentence
+    entails a given hypothesis sentence (also known as natural language
+    inference, NLI). RTE was previously included in GLUE, and we use the same
+    data and format as before: We merge data from RTE1 (Dagan et al., 2006),
+    RTE2 (Bar Haim et al., 2006), RTE3 (Giampiccolo et al., 2007), and RTE5
+    (Bentivogli et al., 2009). All datasets are combined and converted to
+    two-class classification: entailment and not_entailment. Of all the GLUE
+    tasks, RTE was among those that benefited from transfer learning the most,
+    jumping from near random-chance performance (~56%) at the time of GLUE's
+    launch to 85% accuracy (Liu et al., 2019c) at the time of writing. Given the
+    eight point gap with respect to human performance, however, the task is not
+    yet solved by machines, and we expect the remaining gap to be difficult to
+    close.
 
-*   `wic` (`v1.0.2`) (`Size: ?? GiB`): The Word-in-Context (WiC, Pilehvar and
-    Camacho-Collados, 2019) dataset supports a word sense disambiguation task
-    cast as binary classification over sentence pairs. Given two sentences and a
-    polysemous (sense-ambiguous) word that appears in both sentences, the task
-    is to determine whether the word is used with the same sense in both
+*   `wic` (`v1.0.2`) (`Size: 386.93 KiB`): The Word-in-Context (WiC, Pilehvar
+    and Camacho-Collados, 2019) dataset supports a word sense disambiguation
+    task cast as binary classification over sentence pairs. Given two sentences
+    and a polysemous (sense-ambiguous) word that appears in both sentences, the
+    task is to determine whether the word is used with the same sense in both
     sentences. Sentences are drawn from WordNet (Miller, 1995), VerbNet
     (Schuler, 2005), and Wiktionary. We follow the original work and evaluate
     using accuracy.
 
-*   `wsc` (`v1.0.2`) (`Size: ?? GiB`): The Winograd Schema Challenge (WSC,
+*   `wsc` (`v1.0.2`) (`Size: 31.98 KiB`): The Winograd Schema Challenge (WSC,
     Levesque et al., 2012) is a reading comprehension task in which a system
     must read a sentence with a pronoun and select the referent of that pronoun
     from a list of choices. Given the difficulty of this task and the headroom
@@ -167,33 +168,33 @@ phrase word will change the coreference dependencies in the sentence. The test
 set consists only of more straightforward examples, with a high number of noun
 phrases (and thus more choices for the model), but low to no ambiguity.
 
-*   `wsc.fixed` (`v1.0.2`) (`Size: ?? GiB`): The Winograd Schema Challenge (WSC,
-    Levesque et al., 2012) is a reading comprehension task in which a system
-    must read a sentence with a pronoun and select the referent of that pronoun
-    from a list of choices. Given the difficulty of this task and the headroom
-    still left, we have included WSC in SuperGLUE and recast the dataset into
-    its coreference form. The task is cast as a binary classification problem,
-    as opposed to N-multiple choice, in order to isolate the model's ability to
-    understand the coreference links within a sentence as opposed to various
-    other strategies that may come into play in multiple choice conditions. With
-    that in mind, we create a split with 65% negative majority class in the
-    validation set, reflecting the distribution of the hidden test set, and 52%
-    negative class in the training set. The training and validation examples are
-    drawn from the original Winograd Schema dataset (Levesque et al., 2012), as
-    well as those distributed by the affiliated organization Commonsense
-    Reasoning. The test examples are derived from fiction books and have been
-    shared with us by the authors of the original dataset. Previously, a version
-    of WSC recast as NLI as included in GLUE, known as WNLI. No substantial
-    progress was made on WNLI, with many submissions opting to submit only
-    majority class predictions. WNLI was made especially difficult due to an
-    adversarial train/dev split: Premise sentences that appeared in the training
-    set sometimes appeared in the development set with a different hypothesis
-    and a flipped label. If a system memorized the training set without
-    meaningfully generalizing, which was easy due to the small size of the
-    training set, it could perform far below chance on the development set. We
-    remove this adversarial design in the SuperGLUE version of WSC by ensuring
-    that no sentences are shared between the training, validation, and test
-    sets.
+*   `wsc.fixed` (`v1.0.2`) (`Size: 31.98 KiB`): The Winograd Schema Challenge
+    (WSC, Levesque et al., 2012) is a reading comprehension task in which a
+    system must read a sentence with a pronoun and select the referent of that
+    pronoun from a list of choices. Given the difficulty of this task and the
+    headroom still left, we have included WSC in SuperGLUE and recast the
+    dataset into its coreference form. The task is cast as a binary
+    classification problem, as opposed to N-multiple choice, in order to isolate
+    the model's ability to understand the coreference links within a sentence as
+    opposed to various other strategies that may come into play in multiple
+    choice conditions. With that in mind, we create a split with 65% negative
+    majority class in the validation set, reflecting the distribution of the
+    hidden test set, and 52% negative class in the training set. The training
+    and validation examples are drawn from the original Winograd Schema dataset
+    (Levesque et al., 2012), as well as those distributed by the affiliated
+    organization Commonsense Reasoning. The test examples are derived from
+    fiction books and have been shared with us by the authors of the original
+    dataset. Previously, a version of WSC recast as NLI as included in GLUE,
+    known as WNLI. No substantial progress was made on WNLI, with many
+    submissions opting to submit only majority class predictions. WNLI was made
+    especially difficult due to an adversarial train/dev split: Premise
+    sentences that appeared in the training set sometimes appeared in the
+    development set with a different hypothesis and a flipped label. If a system
+    memorized the training set without meaningfully generalizing, which was easy
+    due to the small size of the training set, it could perform far below chance
+    on the development set. We remove this adversarial design in the SuperGLUE
+    version of WSC by ensuring that no sentences are shared between the
+    training, validation, and test sets.
 
 However, the validation and test sets come from different domains, with the
 validation set consisting of ambiguous examples such that changing one non-noun
@@ -327,7 +328,12 @@ FeaturesDict({
 
 ## Statistics
 
-None computed
+Split      | Examples
+:--------- | -------:
+ALL        | 804
+TRAIN      | 554
+TEST       | 146
+VALIDATION | 104
 
 ## Urls
 
