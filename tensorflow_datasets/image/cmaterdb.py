@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
+import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
@@ -168,7 +169,8 @@ class Cmaterdb(tfds.core.GeneratorBasedBuilder):
     Yields:
       Generator yielding the next examples
     """
-    data = np.load(data_path)
+    with tf.io.gfile.GFile(data_path, mode="rb") as f:
+      data = np.load(f)
 
     data = list(zip(data["images"], data["labels"]))
     for index, (image, label) in enumerate(data):
