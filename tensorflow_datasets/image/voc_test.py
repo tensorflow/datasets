@@ -44,9 +44,5 @@ class Voc2012Test(testing.DatasetBuilderTestCase):
   }
 
 
-class Voc2012S3Test(Voc2012Test):
-  VERSION = 'experimental_latest'
-
-
 if __name__ == '__main__':
   testing.test_main()

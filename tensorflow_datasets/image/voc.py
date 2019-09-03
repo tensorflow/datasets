@@ -225,12 +225,7 @@ class Voc2007(tfds.core.GeneratorBasedBuilder):
 class Voc2012(tfds.core.GeneratorBasedBuilder):
   """Pascal VOC 2012."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0"),
-      tfds.core.Version("2.0.0"),
-  ]
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -252,7 +247,8 @@ class Voc2012(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(names=_VOC2012_LABELS)),
         }),
         urls=[_VOC2012_URL],
-        citation=_VOC2012_CITATION)
+        citation=_VOC2012_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     trainval_path = dl_manager.download_and_extract(
@@ -260,11 +256,9 @@ class Voc2012(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs=dict(data_path=trainval_path, set_name="train")),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs=dict(data_path=trainval_path, set_name="val")),
     ]
 
