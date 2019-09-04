@@ -419,10 +419,13 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
     dl_dir = dl_manager.download_and_extract(self.builder_config.data_url) or ""
     dl_dir = os.path.join(
         dl_dir, _get_task_name_from_data_url(self.builder_config.data_url))
+    # record is ~141mb which gets assigned 2 shards by
+    # tfrecords_writer._get_number_shards
+    train_shards = 2 if self.builder_config.name.startswith("record") else 1
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
+            num_shards=train_shards,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "train.jsonl"),
                 "split": tfds.Split.TRAIN,
