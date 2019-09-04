@@ -159,5 +159,8 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
+    dependency_links=[
+        'https://github.com/tensorflow/docs/#egg=tensorflow-docs'
+    ],
     keywords='tensorflow machine learning datasets',
 )
