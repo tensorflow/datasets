@@ -15,7 +15,6 @@
 
 """Translation datasets."""
 from tensorflow_datasets.translate.en_tam_parallel_text import EnTamParallelText
-from tensorflow_datasets.translate.en_tam_parallel_text import EnTamParallelTextConfig
 from tensorflow_datasets.translate.flores import Flores
 from tensorflow_datasets.translate.flores import FloresConfig
 from tensorflow_datasets.translate.para_crawl import ParaCrawl
