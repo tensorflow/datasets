@@ -12,28 +12,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""English-Tamil parallel text corpus"""
+"""English-Tamil parallel text corpus from Morphological Processing 2012"""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 import os
-import re
-
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
-_CITATION = {}
-DESCRIPTION = {}
-DESCRIPTION['MTPIL'] = """\
+
+DESCRIPTION = """\
 	The parallel corpora cover texts from bible, cinema and news domains.
 """
-DESCRIPTION['opus'] = """\
-	OPUS project focuses on converting and aligning free online data, to add linguistic annotation, and to provide the community with a publicly available parallel corpus.
-"""
-_CITATION['MTPIL'] = """\
+CITATION = """\
     @InProceedings {biblio:RaBoMorphologicalProcessing2012,
 	title     = {Morphological Processing for English-Tamil Statistical Machine Translation},
 	author    = {Loganathan Ramasamy and Ond{\v{r}}ej Bojar and Zden{\v{e}}k {\v{Z}}abokrtsk{\'{y}}},
@@ -42,193 +35,62 @@ _CITATION['MTPIL'] = """\
 	Booktitle = {Proceedings of the Workshop on Machine Translation and Parsing in Indian Languages ({MTPIL}-2012)},
 }
 """
-_CITATION['opus'] = """\
-    @InProceedings{TIEDEMANN12.463,
-  	author    = {J�rg Tiedemann},
-  	title     = {Parallel Data, Tools and Interfaces in OPUS},
-  	Booktitle = {Proceedings of the Eight International Conference on Language Resources and Evaluation (LREC'12)},
-  	year      = {2012},
-  	month     = {may},
-  	date      = {23-25},
-  	address   = {Istanbul, Turkey},
-  	editor    = {Nicoletta Calzolari (Conference Chair) and Khalid Choukri and Thierry Declerck and Mehmet Ugur Dogan and Bente Maegaard and Joseph Mariani and Jan Odijk and Stelios Piperidis},
-  	publisher = {European Language Resources Association (ELRA)},
-  	ISBN      = {978-2-9517408-7-7},
-  	language  = {English}
- }
- """
-download_links = [
-    'http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz',
-    'http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en_AU-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en_CA-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en_GB-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=GNOME/v1/moses/en_US-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/en-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=KDE4/v2/moses/en_GB-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Tatoeba/v20190709/moses/en-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en-ta_LK.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_GB-ta_LK.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_AU-ta_LK.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_CA-ta_LK.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_US-ta_LK.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_GB-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_AU-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_CA-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_NZ-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=Ubuntu/v14.10/moses/en_US-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2018/moses/en-ta.txt.zip',
-    'http://opus.nlpl.eu/download.php?f=OpenSubtitles/v2016/moses/en-ta.txt.zip']
-
-_VALID_LANGUAGE_PAIRS = [
-    ("en", "ta"),
-    ("en_AU", "ta"),
-    ("en_CA", "ta"),
-    ("en_GB", "ta"),
-    ("en_NZ", "ta"),
-    ("en_US", "ta"),
-    ("en", "ta_LK"),
-    ("en_AU", "ta_LK"),
-    ("en_CA", "ta_LK"),
-    ("en_GB", "ta_LK"),
-    ('en_US', 'ta_LK')
-]
 
 
-class EnTamParallelTextConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for English & Tamil parallel text data."""
-
-  @api_utils.disallow_positional_args
-  def __init__(self, download_link=None, **kwargs):
-    """
-    Create source and target filenames from the link which
-	can be consumed by the download & extract function
-    Args:
-      download_link: links of the files to be downloaded
-      **kwargs: keyword arguments forwarded to super.
-      
-    """
-    self.language_pair = ("en", "ta")
-    if 'opus' in download_link:
-      language_pair = tuple(download_link.split('/')[-1].split('.')[0].split('-'))
-      typ_name = download_link.split('?f=')[1].split('/moses')[0].replace('/', '_')
-      name = "%s_to_%s" % (language_pair[0], language_pair[1])
-      name = typ_name+'_'+name
-      description = ("Translation dataset from %s to %s in plain text.") % (
-          language_pair[0], language_pair[1])
-      self.citation = _CITATION['opus']
-      self.descrp = DESCRIPTION['opus']
-      # Validate language pair.
-      assert language_pair in _VALID_LANGUAGE_PAIRS, (
-          "Config language pair (%s, "
-          "%s) not supported") % language_pair
-      typ = download_link.split('?f=')[1].split('/')[0]
-      self.sname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[0]
-      self.tname = typ+'.'+language_pair[0]+'-'+language_pair[1]+'.'+language_pair[1]
-      self.link = download_link
-      
-    elif 'ufal.mff.cuni.cz' in download_link:
-      name = "en_ta"
-      self.citation = _CITATION['MTPIL']
-      self.descrp = DESCRIPTION['MTPIL']
-      description = ("Translation dataset from %s to %s in plain text.") % (
-          'en', 'ta')
-      self.link = download_link
-    super(EnTamParallelTextConfig, self).__init__(
-        name=name, description=description, **kwargs)
 
 class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
   """(en_tam_parallel_text): English_Tamil parallel text corpus"""
-  BUILDER_CONFIGS = [
-      EnTamParallelTextConfig(download_link=link, version=tfds.core.Version(
-          "0.0.1", experiments={tfds.core.Experiment.S3: False}))
-      for link in download_links
-  ]
-
+  VERSION = tfds.core.Version(
+            "0.0.3", experiments={tfds.core.Experiment.S3: False})
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.descrp,
+        description=DESCRIPTION,
         features=tfds.features.Translation(
             languages=("en", "ta")),
-        urls=[self.builder_config.link],
+        urls=['http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz'],
         supervised_keys=("en", "ta"),
-        citation=self.builder_config.citation,
+        citation=CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Download the links and pass the filenames to split generator"""
-    link_dict = {}
-    head = 'corpus.bcn.'
-    if 'opus' in self.builder_config.link:
-      link_dict['OPUS'] = self.builder_config.link
-    elif 'ufal.mff.cuni.cz' in self.builder_config.link:
-      link_dict['MTPIL'] = self.builder_config.link
-    dl_dir = dl_manager.download_and_extract(link_dict)
-    for site in dl_dir:
-      if site == 'MTPIL':
-        data_dir = os.path.join(dl_dir[site], 'en-ta-parallel-v2')
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                num_shards=1,
-                gen_kwargs={
-                    "source_file": os.path.join(data_dir, head+'train.en'),
-                    "target_file": os.path.join(data_dir, head+'train.ta')
-                }),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.VALIDATION,
-                num_shards=1,
-                gen_kwargs={
-                    "source_file": os.path.join(data_dir, head+'dev.en'),
-                    "target_file": os.path.join(data_dir, head+'dev.ta')
-                }),
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TEST,
-                num_shards=1,
-                gen_kwargs={
-                    "source_file": os.path.join(data_dir, head+'test.en'),
-                    "target_file": os.path.join(data_dir, head+'test.ta')
-                })]
-      elif site == 'OPUS':
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                num_shards=1,
-                gen_kwargs={
-                    "source_file": os.path.join(dl_dir[site], self.builder_config.sname),
-                    "target_file": os.path.join(dl_dir[site], self.builder_config.tname)
-                })]
+    dl_dir = dl_manager.download_and_extract('http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz')
+    data_dir = os.path.join(dl_dir, 'en-ta-parallel-v2')
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            num_shards=1,
+            gen_kwargs={
+                "source_file": os.path.join(data_dir, 'corpus.bcn.train.en'),
+                "target_file": os.path.join(data_dir, 'corpus.bcn.train.ta')
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            num_shards=1,
+            gen_kwargs={
+                "source_file": os.path.join(data_dir, 'corpus.bcn.dev.en'),
+                "target_file": os.path.join(data_dir, 'corpus.bcn.dev.ta')
+            }),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            num_shards=1,
+            gen_kwargs={
+                "source_file": os.path.join(data_dir, 'corpus.bcn.test.en'),
+                "target_file": os.path.join(data_dir, 'corpus.bcn.test.ta')
+            })]
   def _generate_examples(self, source_file, target_file):
-    """This function returns the filtered text pairs.Some filtering 
-    techniques were inspired from github/himanshudce/MIDAS-NMT-English-Tamil"""
+    """This function returns (source, target) text pairs."""
     with tf.io.gfile.GFile(source_file) as f:
       source_sentences = f.read().strip().split("\n")
     with tf.io.gfile.GFile(target_file) as f:
       target_sentences = f.read().strip().split("\n")
-
     assert len(target_sentences) == len(
         source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (len(
             source_sentences), len(target_sentences), source_file, target_file)
-    source, target = self.builder_config.language_pair
-    ta_blacklist = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-(\')''/[]♪/%#$&\/_"{.}|=<>@~`'
-    en_blacklist = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ"#$%&\()*+-./:;<=>@[\\]^_`♪{|}~='
-    cleantxt = re.compile('<.*?>')
-    for l1, l2 in zip(source_sentences, target_sentences):
-      # Lower case english lines
-      l1 = l1.lower()
-      # Remove unwanted html tags from text
-      l1 = re.sub(cleantxt, '', l1)
-      l2 = re.sub(cleantxt, '', l2)
-      # Remove english text in tamil sentence and tamil text in english sentence
-      cleaned_l1 = ''.join([ch for ch in l1 if ch not in en_blacklist])
-      cleaned_l2 = ''.join([ch for ch in l2 if ch not in ta_blacklist])
-      # Remove duplicate empty spaces
-      cleaned_l1 = " ".join(cleaned_l1.split())
-      # Remove duplicate empty spaces
-      cleaned_l2 = " ".join(cleaned_l2.split())
-      result = {source: cleaned_l1, target: cleaned_l2}
+    for source, target in zip(source_sentences, target_sentences):
+      result = {'en': source, 'ta': target}
       # Make sure that both translations are non-empty
       if all(result.values()):
         yield result
+		
