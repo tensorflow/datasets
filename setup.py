@@ -60,6 +60,7 @@ TESTS_REQUIRE = [
     'jupyter',
     'pytest',
     'pytest-xdist',
+    'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',
 ]
 
 if sys.version_info.major == 3:
