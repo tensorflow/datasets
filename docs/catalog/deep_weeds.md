@@ -22,7 +22,7 @@ Range", "Kelso", "McKinlay" and "Paluma".
 *   `DatasetBuilder`:
     [`tfds.image.deep_weeds.DeepWeeds`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/deep_weeds.py)
 *   Version: `v1.0.0`
-*   Size: `?? GiB`
+*   Size: `891.95 MiB`
 
 ## Features
 ```python
@@ -33,7 +33,11 @@ FeaturesDict({
 ```
 
 ## Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+TRAIN | 17,509
+ALL   | 17,509
 
 ## Urls
 

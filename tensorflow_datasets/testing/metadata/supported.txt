@@ -256,6 +256,9 @@ cifar10_corrupted/zoom_blur_5/1.0.0
 clevr/1.0.0
 clevr/2.0.0
 clevr/3.0.0
+cmaterdb/bangla/1.0.0
+cmaterdb/devanagari/1.0.0
+cmaterdb/telugu/1.0.0
 cnn_dailymail/bytes/0.0.2
 cnn_dailymail/bytes/1.0.0
 cnn_dailymail/plain_text/0.0.2
@@ -317,6 +320,7 @@ cycle_gan/ukiyoe2photo/2.0.0
 cycle_gan/vangogh2photo/0.1.0
 cycle_gan/vangogh2photo/1.0.0
 cycle_gan/vangogh2photo/2.0.0
+deep_weeds/1.0.0
 definite_pronoun_resolution/plain_text/0.0.1
 definite_pronoun_resolution/plain_text/1.0.0
 diabetic_retinopathy_detection/1M/2.0.0
