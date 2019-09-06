@@ -54,7 +54,10 @@ def get_random_jpeg(height=None, width=None, channels=CHANNELS_NB):
 
 def get_random_png(height=None, width=None, channels=CHANNELS_NB):
   """Returns path to PNG picture."""
-  image = get_random_picture(height, width, channels)
+  # Big randomly generated pngs take large amounts of diskspace.
+  # Instead, we resize a 4x4 random image to the png size.
+  image = get_random_picture(4, 4, channels)
+  image = tf.image.resize_nearest_neighbor(tf.expand_dims(image, 0), (height, width))[0]
   png = tf.image.encode_png(image)
   with utils.nogpu_session() as sess:
     res = sess.run(png)
