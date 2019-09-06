@@ -41,14 +41,14 @@ CITATION = """\
 class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
   """(en_tam_parallel_text): English_Tamil parallel text corpus"""
   VERSION = tfds.core.Version(
-            "0.0.3", experiments={tfds.core.Experiment.S3: False})
+            "0.0.3")
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=DESCRIPTION,
         features=tfds.features.Translation(
             languages=("en", "ta")),
-        urls=['http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz'],
+        urls=['http://ufal.mff.cuni.cz/~ramasamy/parallel/html/'],
         supervised_keys=("en", "ta"),
         citation=CITATION,
     )
@@ -88,9 +88,10 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
     assert len(target_sentences) == len(
         source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (len(
             source_sentences), len(target_sentences), source_file, target_file)
-    for source, target in zip(source_sentences, target_sentences):
+    for idx, (source, target) in enumerate(
+        zip(source_sentences, target_sentences)):
       result = {'en': source, 'ta': target}
-      # Make sure that both translations are non-empty
+      # Make sure that both translations are non-empty.
       if all(result.values()):
-        yield result
-		
+        yield idx, result
+        
