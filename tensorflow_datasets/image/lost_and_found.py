@@ -142,44 +142,37 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     base_url = 'http://www.dhbw-stuttgart.de/~sgehrig/lostAndFoundDataset/{}.zip'
-    download_urls = {
-        'image_left': base_url.format(self.builder_config.left_image_string)}
-    if 'image_right' in self.builder_config.features:
-      download_urls['image_right'] = base_url.format(
-          self.builder_config.right_image_string)
-    if 'segmentation_label' in self.builder_config.features \
-            or 'instance_id' in self.builder_config.features:
-      download_urls['gt'] = base_url.format('gtCoarse')
-    if 'disparity_map' in self.builder_config.features:
-      download_urls['disparity_map'] = base_url.format('disparity')
-    # split into two steps to save space for testing data
-    dl_paths = dl_manager.download(download_urls)
-    dl_paths = dl_manager.extract(dl_paths)
 
-    # point segmentation label and instance IDs both to directory for ground-truth
-    if 'gt' in dl_paths:
-      dl_paths['segmentation_label'] = dl_paths['gt']
-      dl_paths['instance_id'] = dl_paths['gt']
-
-    # first directory in the zipfile, dependent on feature to load
-    sub_dirs = {
+    # For each feature, this is the name of the zipfile and root-directory in the archive
+    zip_file_names = {
         'image_left': self.builder_config.left_image_string,
         'image_right': self.builder_config.right_image_string,
         'segmentation_label': 'gtCoarse',
         'instance_id': 'gtCoarse',
         'disparity_map': 'disparity'}
 
+    download_urls = {feat: base_url.format(zip_file_names[feat])
+                     for feat in self.builder_config.features}
+    # Split donwload and extract in two functions such that mock-data can replace the
+    # result of the download function and is still used as input to extract. Therefore,
+    # fake_data can be compressed zip archives.
+    dl_paths = dl_manager.extract(dl_manager.download(download_urls))
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             # These kwargs will be passed to _generate_examples
-            gen_kwargs={feat: path.join(dl_paths[feat], sub_dirs[feat], 'train')
+            gen_kwargs={feat: path.join(dl_paths[feat],
+                                        zip_file_names[feat],
+                                        'train')
                         for feat in self.builder_config.features},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             # These kwargs will be passed to _generate_examples
-            gen_kwargs={feat: path.join(dl_paths[feat], sub_dirs[feat], 'test')
+            gen_kwargs={feat: path.join(dl_paths[feat],
+                                        zip_file_names[feat],
+                                        'test')
                         for feat in self.builder_config.features},
         )
     ]

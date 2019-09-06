@@ -20,7 +20,8 @@ class LostAndFoundTest(testing.DatasetBuilderTestCase):
       'image_left': 'leftImg8bit.zip',
       'image_right': 'rightImg8bit.zip',
       'disparity_map': 'disparity.zip',
-      'gt': 'gtCoarse.zip'}
+      'segmentation_label': 'gtCoarse.zip',
+      'instance_id': 'gtCoarse.zip'}
 
 
 if __name__ == "__main__":
