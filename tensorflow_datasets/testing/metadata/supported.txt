@@ -63,6 +63,8 @@ cifar10/3.0.0
 cifar100/1.3.1
 cifar100/2.0.0
 cifar100/3.0.0
+cifar10_1/v4/1.0.0
+cifar10_1/v6/1.0.0
 cifar10_corrupted/brightness_1/0.0.1
 cifar10_corrupted/brightness_1/1.0.0
 cifar10_corrupted/brightness_2/0.0.1
