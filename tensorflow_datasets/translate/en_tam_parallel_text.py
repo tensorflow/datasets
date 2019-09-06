@@ -80,7 +80,7 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
                 "target_file": os.path.join(data_dir, 'corpus.bcn.test.ta')
             })]
   def _generate_examples(self, source_file, target_file):
-    """This function returns (source, target) text pairs."""
+    """Return id and (source, target) text pairs."""
     with tf.io.gfile.GFile(source_file) as f:
       source_sentences = f.read().strip().split("\n")
     with tf.io.gfile.GFile(target_file) as f:
