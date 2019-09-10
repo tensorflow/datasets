@@ -422,21 +422,18 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "train.jsonl"),
                 "split": tfds.Split.TRAIN,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "val.jsonl"),
                 "split": tfds.Split.VALIDATION,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "test.jsonl"),
                 "split": tfds.Split.TEST,

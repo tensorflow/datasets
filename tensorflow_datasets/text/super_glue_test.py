@@ -109,37 +109,5 @@ class SuperGlueWicTest(testing.DatasetBuilderTestCase):
   }
 
 
-class SuperGlueBoolQS3Test(SuperGlueBoolQTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueCbS3Test(SuperGlueCbTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueCopaS3Test(SuperGlueCopaTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueMultiRcS3Test(SuperGlueMultiRcTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueReCoRDS3Test(SuperGlueReCoRDTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueRteS3Test(SuperGlueRteTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueWscS3Test(SuperGlueWscTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueWicS3Test(SuperGlueWicTest):
-  VERSION = "experimental_latest"
-
-
 if __name__ == "__main__":
   testing.test_main()
