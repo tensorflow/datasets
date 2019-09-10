@@ -25,11 +25,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.core import lazy_imports
-import os
 
 _CITATION = """@article{zhou2016semantic,
   title={Semantic understanding of scenes through the ade20k dataset},
@@ -230,73 +229,73 @@ def colorize_mask(mask, colormap=None):
     mask = np.squeeze(mask, axis=-1)
   elif len(mask.shape) != 2:
     raise ValueError(
-      'mask must be shape (H, W, 1) or (H, W), got {}'.format(mask.shape))
+        'mask must be shape (H, W, 1) or (H, W), got {}'.format(mask.shape))
   if colormap is None:
     colormap = create_ade20k_label_colormap()
   return colormap[mask]
 
 
 CLASSES = (
-  None, "wall", "building, edifice", "sky", "floor, flooring", "tree",
-  "ceiling", "road, route", "bed", "windowpane, window", "grass",
-  "cabinet", "sidewalk, pavement",
-  "person, individual, someone, somebody, mortal, soul", "earth, ground",
-  "door, double door", "table", "mountain, mount",
-  "plant, flora, plant life", "curtain, drape, drapery, mantle, pall",
-  "chair", "car, auto, automobile, machine, motorcar", "water",
-  "painting, picture", "sofa, couch, lounge", "shelf", "house", "sea",
-  "mirror", "rug, carpet, carpeting", "field", "armchair", "seat",
-  "fence, fencing", "desk", "rock, stone", "wardrobe, closet, press",
-  "lamp", "bathtub, bathing tub, bath, tub", "railing, rail", "cushion",
-  "base, pedestal, stand", "box", "column, pillar", "signboard, sign",
-  "chest of drawers, chest, bureau, dresser", "counter", "sand", "sink",
-  "skyscraper", "fireplace, hearth, open fireplace",
-  "refrigerator, icebox", "grandstand, covered stand", "path",
-  "stairs, steps", "runway", "case, display case, showcase, vitrine",
-  "pool table, billiard table, snooker table", "pillow",
-  "screen door, screen", "stairway, staircase", "river", "bridge, span",
-  "bookcase", "blind, screen", "coffee table, cocktail table",
-  "toilet, can, commode, crapper, pot, potty, stool, throne", "flower",
-  "book", "hill", "bench", "countertop",
-  "stove, kitchen stove, range, kitchen range, cooking stove",
-  "palm, palm tree", "kitchen island",
-  "computer, computing machine, computing device, data processor, "
-  "electronic computer, information processing system", "swivel chair",
-  "boat", "bar", "arcade machine", "hovel, hut, hutch, shack, shanty",
-  "bus, autobus, coach, charabanc, double-decker, jitney, motorbus, "
-  "motorcoach, omnibus, passenger vehicle", "towel",
-  "light, light source", "truck, motortruck", "tower",
-  "chandelier, pendant, pendent", "awning, sunshade, sunblind",
-  "streetlight, street lamp", "booth, cubicle, stall, kiosk",
-  "television receiver, television, television set, tv, tv set, idiot "
-  "box, boob tube, telly, goggle box", "airplane, aeroplane, plane",
-  "dirt track", "apparel, wearing apparel, dress, clothes", "pole",
-  "land, ground, soil",
-  "bannister, banister, balustrade, balusters, handrail",
-  "escalator, moving staircase, moving stairway",
-  "ottoman, pouf, pouffe, puff, hassock", "bottle",
-  "buffet, counter, sideboard",
-  "poster, posting, placard, notice, bill, card", "stage", "van", "ship",
-  "fountain",
-  "conveyer belt, conveyor belt, conveyer, conveyor, transporter",
-  "canopy", "washer, automatic washer, washing machine", "plaything, toy",
-  "swimming pool, swimming bath, natatorium", "stool", "barrel, cask",
-  "basket, handbasket", "waterfall, falls", "tent, collapsible shelter",
-  "bag", "minibike, motorbike", "cradle", "oven", "ball",
-  "food, solid food", "step, stair", "tank, storage tank",
-  "trade name, brand name, brand, marque", "microwave, microwave oven",
-  "pot, flowerpot",
-  "animal, animate being, beast, brute, creature, fauna",
-  "bicycle, bike, wheel, cycle", "lake",
-  "dishwasher, dish washer, dishwashing machine",
-  "screen, silver screen, projection screen", "blanket, cover",
-  "sculpture", "hood, exhaust hood", "sconce", "vase",
-  "traffic light, traffic signal, stoplight", "tray",
-  "ashcan, trash can, garbage can, wastebin, ash bin, ash-bin, ashbin, "
-  "dustbin, trash barrel, trash bin", "fan",
-  "pier, wharf, wharfage, dock", "crt screen", "plate",
-  "monitor, monitoring device", "bulletin board, notice board", "shower",
-  "radiator", "glass, drinking glass", "clock", "flag")
+    None, "wall", "building, edifice", "sky", "floor, flooring", "tree",
+    "ceiling", "road, route", "bed", "windowpane, window", "grass",
+    "cabinet", "sidewalk, pavement",
+    "person, individual, someone, somebody, mortal, soul", "earth, ground",
+    "door, double door", "table", "mountain, mount",
+    "plant, flora, plant life", "curtain, drape, drapery, mantle, pall",
+    "chair", "car, auto, automobile, machine, motorcar", "water",
+    "painting, picture", "sofa, couch, lounge", "shelf", "house", "sea",
+    "mirror", "rug, carpet, carpeting", "field", "armchair", "seat",
+    "fence, fencing", "desk", "rock, stone", "wardrobe, closet, press",
+    "lamp", "bathtub, bathing tub, bath, tub", "railing, rail", "cushion",
+    "base, pedestal, stand", "box", "column, pillar", "signboard, sign",
+    "chest of drawers, chest, bureau, dresser", "counter", "sand", "sink",
+    "skyscraper", "fireplace, hearth, open fireplace",
+    "refrigerator, icebox", "grandstand, covered stand", "path",
+    "stairs, steps", "runway", "case, display case, showcase, vitrine",
+    "pool table, billiard table, snooker table", "pillow",
+    "screen door, screen", "stairway, staircase", "river", "bridge, span",
+    "bookcase", "blind, screen", "coffee table, cocktail table",
+    "toilet, can, commode, crapper, pot, potty, stool, throne", "flower",
+    "book", "hill", "bench", "countertop",
+    "stove, kitchen stove, range, kitchen range, cooking stove",
+    "palm, palm tree", "kitchen island",
+    "computer, computing machine, computing device, data processor, "
+    "electronic computer, information processing system", "swivel chair",
+    "boat", "bar", "arcade machine", "hovel, hut, hutch, shack, shanty",
+    "bus, autobus, coach, charabanc, double-decker, jitney, motorbus, "
+    "motorcoach, omnibus, passenger vehicle", "towel",
+    "light, light source", "truck, motortruck", "tower",
+    "chandelier, pendant, pendent", "awning, sunshade, sunblind",
+    "streetlight, street lamp", "booth, cubicle, stall, kiosk",
+    "television receiver, television, television set, tv, tv set, idiot "
+    "box, boob tube, telly, goggle box", "airplane, aeroplane, plane",
+    "dirt track", "apparel, wearing apparel, dress, clothes", "pole",
+    "land, ground, soil",
+    "bannister, banister, balustrade, balusters, handrail",
+    "escalator, moving staircase, moving stairway",
+    "ottoman, pouf, pouffe, puff, hassock", "bottle",
+    "buffet, counter, sideboard",
+    "poster, posting, placard, notice, bill, card", "stage", "van", "ship",
+    "fountain",
+    "conveyer belt, conveyor belt, conveyer, conveyor, transporter",
+    "canopy", "washer, automatic washer, washing machine", "plaything, toy",
+    "swimming pool, swimming bath, natatorium", "stool", "barrel, cask",
+    "basket, handbasket", "waterfall, falls", "tent, collapsible shelter",
+    "bag", "minibike, motorbike", "cradle", "oven", "ball",
+    "food, solid food", "step, stair", "tank, storage tank",
+    "trade name, brand name, brand, marque", "microwave, microwave oven",
+    "pot, flowerpot",
+    "animal, animate being, beast, brute, creature, fauna",
+    "bicycle, bike, wheel, cycle", "lake",
+    "dishwasher, dish washer, dishwashing machine",
+    "screen, silver screen, projection screen", "blanket, cover",
+    "sculpture", "hood, exhaust hood", "sconce", "vase",
+    "traffic light, traffic signal, stoplight", "tray",
+    "ashcan, trash can, garbage can, wastebin, ash bin, ash-bin, ashbin, "
+    "dustbin, trash barrel, trash bin", "fan",
+    "pier, wharf, wharfage, dock", "crt screen", "plate",
+    "monitor, monitoring device", "bulletin board, notice board", "shower",
+    "radiator", "glass, drinking glass", "clock", "flag")
 
 
 class Ade20k(tfds.core.GeneratorBasedBuilder):
@@ -318,9 +317,9 @@ class Ade20k(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(dict(
             # These are the features of your dataset like images, labels ...
             image=tfds.features.Image(
-              shape=(None, None, 3), dtype=tf.uint8, encoding_format='jpeg'),
+                shape=(None, None, 3), dtype=tf.uint8, encoding_format='jpeg'),
             segmentation=tfds.features.Image(
-              shape=(None, None, 1), dtype=tf.uint8, encoding_format='png'),
+                shape=(None, None, 1), dtype=tf.uint8, encoding_format='png'),
             example_id=tfds.features.Text(),
         )),
         # If there's a common (input, target) tuple from the features,
@@ -335,8 +334,7 @@ class Ade20k(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     base_dir = dl_manager.download_and_extract(
-      # "http://groups.csail.mit.edu/vision/datasets/ADE20K/ADE20K_2016_07_26.zip"
-      "http://data.csail.mit.edu/places/ADEchallenge/ADEChallengeData2016.zip")
+        "http://data.csail.mit.edu/places/ADEchallenge/ADEChallengeData2016.zip")
 
     dirs = '%s/ADEChallengeData2016/{data}/{split}/' % base_dir
 
@@ -345,17 +343,18 @@ class Ade20k(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             num_shards=16,
             gen_kwargs=dict(
-              images_dir=dirs.format(split='training', data='images'),
-              annotations_dir=dirs.format(split='training', data='annotations'),
+                images_dir=dirs.format(split='training', data='images'),
+                annotations_dir=dirs.format(
+                    split='training', data='annotations'),
             ),
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             num_shards=2,
             gen_kwargs=dict(
-              images_dir=dirs.format(split='validation', data='images'),
-              annotations_dir=dirs.format(
-                split='validation', data='annotations'),
+                images_dir=dirs.format(split='validation', data='images'),
+                annotations_dir=dirs.format(
+                    split='validation', data='annotations'),
             ),
         )
     ]
@@ -365,8 +364,9 @@ class Ade20k(tfds.core.GeneratorBasedBuilder):
     for filename in tf.io.gfile.listdir(images_dir):
       example_id = filename[:-4]
       example = dict(
-        example_id=example_id,
-        image=os.path.join(images_dir, filename),
-        segmentation=os.path.join(annotations_dir, '{}.png'.format(example_id))
+          example_id=example_id,
+          image=os.path.join(images_dir, filename),
+          segmentation=os.path.join(
+              annotations_dir, '{}.png'.format(example_id))
       )
       yield example_id, example

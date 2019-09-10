@@ -22,14 +22,10 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import zipfile
-
 from absl import app
 from absl import flags
-
 from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.testing import fake_data_utils
-import os
 
 flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
                     'Path to tensorflow_datasets directory')
@@ -39,8 +35,8 @@ FLAGS = flags.FLAGS
 
 def _output_dir():
   return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'ade20k', 'ADEChallengeData2016',
-                      '{data}', '{split}', '{filename}')
+                      'ade20k', 'ADEChallengeData2016', '{data}', '{split}',
+                      '{filename}')
 
 
 def main(argv):
@@ -52,9 +48,9 @@ def main(argv):
     example_id = 'fake_{}'.format(split)
     os.rename(jpg, out.format(
         data='images', split=split, filename='{}.jpg'.format(example_id)))
-    os.rename(
-        png, out.format(
-        data='annotations', split=split, filename='{}.png'.format(example_id)))
+    os.rename(png, out.format(
+        data='annotations', split=split,
+        filename='{}.png'.format(example_id)))
 
 
 
