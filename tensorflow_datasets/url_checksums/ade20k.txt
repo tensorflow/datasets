@@ -1,0 +1,1 @@
+http://data.csail.mit.edu/places/ADEchallenge/ADEChallengeData2016.zip 967382037 7ff1be44964418441f542a7cc1e1a650e7dc0fc275f5d23252bc9bbdbc977b29

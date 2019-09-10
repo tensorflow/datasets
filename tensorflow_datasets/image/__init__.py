@@ -16,6 +16,7 @@
 """Image datasets."""
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
+from tensorflow_datasets.image.ade20k import Ade20k
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
 from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
