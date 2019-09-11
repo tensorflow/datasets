@@ -333,7 +333,6 @@ class Ade20k(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=16,
             gen_kwargs=dict(
                 images_dir=dirs.format(split='training', data='images'),
                 annotations_dir=dirs.format(
@@ -342,7 +341,6 @@ class Ade20k(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=2,
             gen_kwargs=dict(
                 images_dir=dirs.format(split='validation', data='images'),
                 annotations_dir=dirs.format(
