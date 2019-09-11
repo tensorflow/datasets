@@ -308,26 +308,18 @@ class Ade20k(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
-    # TODO(ade20k): Specifies the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
-        # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict(dict(
-            # These are the features of your dataset like images, labels ...
             image=tfds.features.Image(
                 shape=(None, None, 3), dtype=tf.uint8, encoding_format='jpeg'),
             segmentation=tfds.features.Image(
                 shape=(None, None, 1), dtype=tf.uint8, encoding_format='png'),
             example_id=tfds.features.Text(),
         )),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
         supervised_keys=('image', 'segmentation'),
-        # Homepage of the dataset for documentation
-        urls=[],
+        urls=['https://groups.csail.mit.edu/vision/datasets/ADE20K/'],
         citation=_CITATION,
     )
 
