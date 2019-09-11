@@ -7,36 +7,43 @@ from __future__ import print_function
 import tensorflow_datasets as tfds
 
 # TODO(my_dataset): BibTeX citation
-_CITATION = """
+_CITATION = """\
+@inproceedings{inproceedings,
+    author = {Wu, Hongbo and Bailey, Chris and Rasoulinejad, Parham and Li, Shuo},
+    year = {2017},
+    month = {09},
+    pages = {127--135},
+    title = {Automatic Landmark Estimation for Adolescent Idiopathic Scoliosis Assessment Using BoostNet},
+    doi = {10.1007/978-3-319-66182-7_15}
+}
 """
 
 # TODO(my_dataset):
-_DESCRIPTION = """
+_DESCRIPTION = """\
+The dataset consists of 609 spinal anterior-posterior x-ray images; it is dataset 16 on SpineWeb.
+The Cobb angles for each image were calculated using landmarks, where four landmarks denoted one vertebrae.
 """
+#_IMAGE_SHAPE = ?
 
+class SpineWeb(tfds.core.GeneratorBasedBuilder):
+  """SpineWeb"""
 
-class MyDataset(tfds.core.GeneratorBasedBuilder):
-  """TODO(my_dataset): Short description of my dataset."""
-
-  # TODO(my_dataset): Set up version.
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
-    # TODO(isic): Specifies the tfds.core.DatasetInfo object
     return tfds.core.DatasetInfo(
         builder=self,
-        # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image()     # These are the features of your dataset like images, labels ...
+            "image": tfds.features.Image(encoding_format='jpeg'), # image size?
+            "cobb_angles": tfds.features.FeaturesDict({
+                PT: tf.float64, # main thoracic
+                MT: tf.float64, # proximal thoracic
+                TLL: tf.float64 # thoracolumbar/lumbar
+            })
         }),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
-        supervised_keys=(),
-        # Homepage of the dataset for documentation
-        urls=[],
+        supervised_keys=('image','cobb_angles'),
+        urls=['http://spineweb.digitalimaginggroup.ca'],
         citation=_CITATION,
     )
 
@@ -60,7 +67,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'images_dir_path': dl_paths['train'],
-                'metadata': dl_paths['train_metadata_csv']
+                'metadata': dl_paths['train_metadata_csv'],
                 'labels': dl_paths['train_csv']
             },
         ),
@@ -69,7 +76,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'images_dir_path': dl_paths['test'],
-                'metadata': dl_paths['test_metadata_csv']
+                'metadata': dl_paths['test_metadata_csv'],
                 'labels': dl_paths['test_csv']            },
         ),
     ]
