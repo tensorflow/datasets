@@ -85,7 +85,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
     # TODO(my_dataset): Yields (key, example) tuples from the dataset
     image_names_list = tf.io.gfile.listdir(images_dir_path)
     with open(labels, 'rb') as f:
-        labels_list = [tf.convert_to_tensor(line) for line in csv.reader(f)]
+        labels_list = [tf.strings.to_number(tf.convert_to_tensor(line), tf.float32) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
         record = {
             "image": os.path.join(images_dir_path, image_name),
