@@ -1,4 +1,4 @@
-"""TODO(my_dataset): Add a description here."""
+    """TODO(my_dataset): Add a description here."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -54,11 +54,10 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
     # download and extract URLs
 
     dl_paths = dl_manager.download_and_extract({
-      'train': 'https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_Input.zip',
-      'train_csv': 'https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_GroundTruth.csv',
-      'train_metadata_csv': 'https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Training_GroundTruth.csv',
-      'test': 'https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Input.zip',
-      'test_csv_metadata': 'https://s3.amazonaws.com/isic-challenge-2019/ISIC_2019_Test_Metadata.csv'
+      'train': 'https://spineweb.s3.amazonaws.com/training_images.zip',
+      'train_csv': 'https://spineweb.s3.amazonaws.com/training_angles.csv',
+      'test': 'https://spineweb.s3.amazonaws.com/test_images.zip',
+      'test_csv': 'https://spineweb.s3.amazonaws.com/test_angles.csv'
     })
 
     return [
@@ -67,7 +66,6 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'images_dir_path': dl_paths['train'],
-                'metadata': dl_paths['train_metadata_csv'],
                 'labels': dl_paths['train_csv']
             },
         ),
@@ -76,12 +74,22 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'images_dir_path': dl_paths['test'],
-                'metadata': dl_paths['test_metadata_csv'],
                 'labels': dl_paths['test_csv']            },
         ),
     ]
 
-  def _generate_examples(self):
+  def _generate_examples(self, images_dir_path, labels):
     """Yields examples."""
     # TODO(my_dataset): Yields (key, example) tuples from the dataset
+    images = _extract_spine_images(images_dir_path)
     yield 'key', {}
+
+  def _extract_spine_images(images_dir_path):
+    with tf.io.gfile.GFile(image_filepath, "rb") as f:
+        f.read(16)  # header
+        buf = f.read(_MNIST_IMAGE_SIZE * _MNIST_IMAGE_SIZE * num_images)
+        data = np.frombuffer(
+            buf,
+            dtype=np.uint8,
+        ).reshape(num_images, _MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
+        return data
