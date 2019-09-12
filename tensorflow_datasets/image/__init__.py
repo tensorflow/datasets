@@ -35,7 +35,7 @@ from tensorflow_datasets.image.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image.clevr import CLEVR
 from tensorflow_datasets.image.cmaterdb import Cmaterdb
 from tensorflow_datasets.image.coco import Coco
-from tensorflow_datasets.image.coco2014_legacy import Coco2014
+from tensorflow_datasets.image.coco2014_legacy import Coco2014  # Deprecated
 from tensorflow_datasets.image.coil100 import Coil100
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistology
 from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLarge
@@ -82,4 +82,4 @@ from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image.voc import Voc2007
+from tensorflow_datasets.image.voc import Voc
