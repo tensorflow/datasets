@@ -5,24 +5,29 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import my_dataset
+
+import spineweb
 
 
 class MyDatasetTest(testing.DatasetBuilderTestCase):
-  # TODO(my_dataset):
-  DATASET_CLASS = my_dataset.MyDataset
-  SPLITS = {
-      "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
-  }
+    # TODO(my_dataset):
+    DATASET_CLASS = spineweb.SpineWeb
+    SPLITS = {
+        "train": 2,  # Number of fake train example
+        "test": 2,  # Number of fake test example
+    }
 
-  # If you are calling `download/download_and_extract` with a dict, like:
-  #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
-  # then the tests needs to provide the fake output paths relative to the
-  # fake data directory
-  # DL_EXTRACT_RESULT = {'some_key': 'output_file1.txt', ...}
+    # If you are calling `download/download_and_extract` with a dict, like:
+    #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
+    # then the tests needs to provide the fake output paths relative to the
+    # fake data directory
+    DL_EXTRACT_RESULT = {
+        'train': 'training_images',
+        'train_csv': 'training_angles.csv',
+        'test': 'test_images',
+        'test_csv': 'test_angles.csv'
+    }
 
 
 if __name__ == "__main__":
-  testing.test_main()
-
+    testing.test_main()
