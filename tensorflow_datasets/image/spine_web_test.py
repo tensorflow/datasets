@@ -5,13 +5,12 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-
-import spineweb
+import spine_web
 
 
 class SpineWebTest(testing.DatasetBuilderTestCase):
     # TODO(my_dataset):
-    DATASET_CLASS = spineweb.SpineWeb
+    DATASET_CLASS = spine_web.SpineWeb
     SPLITS = {
         "train": 2,  # Number of fake train example
         "test": 1,  # Number of fake test example

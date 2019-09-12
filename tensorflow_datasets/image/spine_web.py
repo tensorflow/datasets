@@ -32,7 +32,7 @@ The Cobb angles for each image were calculated using landmarks, where four landm
 
 class SpineWeb(tfds.core.GeneratorBasedBuilder):
     """SpineWeb"""
-
+    SKIP_REGISTERING = True
     VERSION = tfds.core.Version('0.1.0')
 
     def _info(self):
@@ -74,6 +74,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
             ),
             tfds.core.SplitGenerator(
                 name=tfds.Split.TEST,
+                num_shards=1,
                 # These kwargs will be passed to _generate_examples
                 gen_kwargs={
                     'images_dir_path': dl_paths['test'],

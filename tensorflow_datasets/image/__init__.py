@@ -70,7 +70,7 @@ from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.smallnorb import Smallnorb
 from tensorflow_datasets.image.so2sat import So2sat
-from tensorflow_datasets.image.spineweb import SpineWeb
+from tensorflow_datasets.image.spine_web import SpineWeb
 from tensorflow_datasets.image.stanford_dogs import StanfordDogs
 from tensorflow_datasets.image.stanford_online_products import StanfordOnlineProducts
 from tensorflow_datasets.image.sun import Sun397
