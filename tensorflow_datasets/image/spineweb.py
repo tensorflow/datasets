@@ -5,7 +5,7 @@ from __future__ import division
 from __future__ import print_function
 
 import csv
-import os
+# import os
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -65,6 +65,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
+                num_shards=1,
                 # These kwargs will be passed to _generate_examples
                 gen_kwargs={
                     'images_dir_path': dl_paths['train'],
@@ -85,12 +86,12 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         """Yields examples."""
         # TODO(my_dataset): Yields (key, example) tuples from the dataset
         image_names_list = tf.io.gfile.listdir(images_dir_path)
-        with open(labels, 'rb') as f:
+        with tf.io.gfile.GFile(labels, 'r') as f:
             labels_list = [tf.strings.to_number(tf.convert_to_tensor(
                 line), tf.float32) for line in csv.reader(f)]
         for image_name, label in zip(image_names_list, labels_list):
             record = {
-                "image": os.path.join(images_dir_path, image_name),
+                "image": "%s/%s" % (images_dir_path, image_name),
                 "label": label
             }
 
