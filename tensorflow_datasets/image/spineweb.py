@@ -4,6 +4,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import csv
+import os
+
+import tensorflow as tf
 import tensorflow_datasets as tfds
 
 # TODO(my_dataset): BibTeX citation
@@ -36,10 +40,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format='jpeg'), # image size?
-            "cobb_angles": tfds.features.FeaturesDict({
-                PT: tf.float64, # main thoracic
-                MT: tf.float64, # proximal thoracic
-                TLL: tf.float64 # thoracolumbar/lumbar
+            "label": tfds.features.Tensor(shape=3,dtype=tf.float32) # main thoracic, proximal thoracic, thoracolumbar/lumbar
             })
         }),
         supervised_keys=('image','cobb_angles'),
@@ -74,22 +75,22 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'images_dir_path': dl_paths['test'],
-                'labels': dl_paths['test_csv']            },
+                'labels': dl_paths['test_csv']
+            },
         ),
     ]
 
   def _generate_examples(self, images_dir_path, labels):
     """Yields examples."""
     # TODO(my_dataset): Yields (key, example) tuples from the dataset
-    images = _extract_spine_images(images_dir_path)
-    yield 'key', {}
+    image_names_list = tf.io.gfile.listdir(images_dir_path)
+    with open(labels, 'rb') as f:
+        reader = csv.reader(f)
+        labels_list = list(reader)
+    for image_name, label in zip(image_names_list, labels_list):
+        record = {
+            "image": os.path.join(images_dir_path, image_name),
+            "label": label
+        }
 
-  def _extract_spine_images(images_dir_path):
-    with tf.io.gfile.GFile(image_filepath, "rb") as f:
-        f.read(16)  # header
-        buf = f.read(_MNIST_IMAGE_SIZE * _MNIST_IMAGE_SIZE * num_images)
-        data = np.frombuffer(
-            buf,
-            dtype=np.uint8,
-        ).reshape(num_images, _MNIST_IMAGE_SIZE, _MNIST_IMAGE_SIZE, 1)
-        return data
+        yield image_name, record
