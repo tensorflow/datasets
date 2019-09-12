@@ -40,7 +40,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format='jpeg'), # image size?
-            "label": tfds.features.Tensor(shape=3,dtype=tf.float32) # main thoracic, proximal thoracic, thoracolumbar/lumbar
+            "label": tfds.features.Tensor(shape=(3,), dtype=tf.float32) # main thoracic, proximal thoracic, thoracolumbar/lumbar
             })
         }),
         supervised_keys=('image','cobb_angles'),
