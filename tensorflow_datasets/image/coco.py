@@ -89,7 +89,7 @@ class CocoConfig(tfds.core.BuilderConfig):
       has_panoptic=False,
       **kwargs):
     super(CocoConfig, self).__init__(
-        version=tfds.core.Version('1.0.0'),
+        version=tfds.core.Version('1.1.0'),
         **kwargs)
     self.splits = splits
     self.has_panoptic = has_panoptic
@@ -189,6 +189,9 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           'panoptic_image': tfds.features.Image(encoding_format='png'),
           'panoptic_image/filename': tfds.features.Text(),
           'panoptic_objects': tfds.features.Sequence({
+              'id': tf.int64,
+              # Coco has unique id for each annotation. The id can be used for
+              # mapping panoptic image to semantic segmentation label.
               'area': tf.int64,
               'bbox': tfds.features.BBoxFeature(),
               # Coco2017 has 200 categories but only 133 are present in the
@@ -200,6 +203,9 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     else:
       features.update({
           'objects': tfds.features.Sequence({
+              'id': tf.int64,
+              # Coco has unique id for each annotation. The id can be used for
+              # mapping panoptic image to semantic segmentation label.
               'area': tf.int64,
               'bbox': tfds.features.BBoxFeature(),
               # Coco has 91 categories but only 80 are present in the dataset
@@ -392,6 +398,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           'image/filename': image_info['file_name'],
           'image/id': image_info['id'],
           objects_key: [{   # pylint: disable=g-complex-comprehension
+              'id': instance['id'],
               'area': instance['area'],
               'bbox': build_bbox(*instance['bbox']),
               'label': categories_id2name[instance['category_id']],
