@@ -1,9 +1,14 @@
-"""TODO(breastpathq): Add a description here."""
+"""Breast cancer whole slide image dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import os
+import csv
+import numpy as np
+
+import tensorflow as tf
 import tensorflow_datasets as tfds
 
 _URL = "http://spiechallenges.cloudapp.net/competitions/14#participate"
@@ -34,6 +39,11 @@ cellularity scores and enhance tumor burden assessment.
 
 _IMAGE_SHAPE = (512, 512, 3)
 
+def _load_tif(path):
+  with tf.io.gfile.GFile(path, "rb") as fp:
+    image = tfds.core.lazy_imports.PIL_Image.open(fp)
+  return np.array(image)
+
 
 class Breastpathq(tfds.core.GeneratorBasedBuilder):
   """Breast cancer whole slide image dataset."""
@@ -51,7 +61,7 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             # These are the features of your dataset like images, labels ...
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label": tfds.features.Tensor(shape=(1), dtype=tf.float32)
+            "label": tf.float32
         }),
         # If there's a common (input, target) tuple from the features,
         # specify them here. They'll be used if as_supervised=True in
@@ -64,19 +74,38 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    # TODO(breastpathq): Downloads the data and defines the splits
+    # Downloads the data and defines the splits
     # dl_manager is a tfds.download.DownloadManager that can be used to
     # download and extract URLs
+    # manual download is required for this dataset
+    extracted_path = dl_manager.manual_dir
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             # These kwargs will be passed to _generate_examples
-            gen_kwargs={},
+            gen_kwargs={
+              "images_dir_path": os.path.join(extracted_path, "breastpathq/datasets/train"),
+              "labels": os.path.join(extracted_path, "breastpathq/datasets/train_labels.csv"),
+            },
         ),
+        tfds.core.SplitGenerator(
+          name=tfds.Split.VALIDATION,
+          gen_kwargs={
+            "images_dir_path": os.path.join(extracted_path, "breastpathq/datasets/validation"),
+            "labels": os.path.join(extracted_path, "breastpathq-test/val_labels.csv"),
+          }
+        ), 
     ]
 
-  def _generate_examples(self):
+  def _generate_examples(self, image_dir_path, labels):
     """Yields examples."""
-    # TODO(breastpathq): Yields (key, example) tuples from the dataset
-    yield 'key', {}
+    # Yields (key, example) tuples from the dataset
+    with tf.io.gfile.GFile(labels, "r") as f:
+      dataset = csv.DictReader(f)
+      for row in dataset:
+        image_id = row['slide']+'_'+row['rid']
+        yield image_id, {
+            "image": _load_tif(os.path.join(image_dir_path, image_id+'.tif')),
+            'label': row['y'],
+        }
 
