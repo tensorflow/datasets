@@ -37,6 +37,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "pydub",
       "scipy",
       "skimage",
+      "PIL_Image",
   )
   def test_import(self, module_name):
     # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)

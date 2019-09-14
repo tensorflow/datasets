@@ -97,7 +97,7 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
         ), 
     ]
 
-  def _generate_examples(self, image_dir_path, labels):
+  def _generate_examples(self, images_dir_path, labels):
     """Yields examples."""
     # Yields (key, example) tuples from the dataset
     with tf.io.gfile.GFile(labels, "r") as f:
@@ -105,7 +105,7 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
       for row in dataset:
         image_id = row['slide']+'_'+row['rid']
         yield image_id, {
-            "image": _load_tif(os.path.join(image_dir_path, image_id+'.tif')),
+            "image": _load_tif(os.path.join(images_dir_path, image_id+'.tif')),
             'label': row['y'],
         }
 

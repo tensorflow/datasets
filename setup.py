@@ -121,6 +121,7 @@ DATASET_EXTRAS = {
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'breastpathq': ['Pillow'],
 }
 
 all_dataset_extras = []
