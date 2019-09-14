@@ -42,7 +42,8 @@ _IMAGE_SHAPE = (512, 512, 3)
 def _load_tif(path):
   with tf.io.gfile.GFile(path, "rb") as fp:
     image = tfds.core.lazy_imports.PIL_Image.open(fp)
-  return np.array(image)
+    rgb_img = image.convert("RGB")
+  return np.array(rgb_img)
 
 
 class Breastpathq(tfds.core.GeneratorBasedBuilder):
@@ -60,7 +61,7 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             # These are the features of your dataset like images, labels ...
-            "image": tfds.features.Image(shape=_IMAGE_SHAPE),
+            "image": tfds.features.Image(),
             "label": tf.float32
         }),
         # If there's a common (input, target) tuple from the features,
