@@ -61,6 +61,10 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
             'test': 'https://spineweb.s3.amazonaws.com/test_images.zip',
             'test_csv': 'https://spineweb.s3.amazonaws.com/test_angles.csv'
         })
+        # with open('~/Downloads/abc.txt', 'w+') as f:
+        #     f.write(dl_paths)
+        # raise AssertionError
+        print(dl_paths)
 
         return [
             tfds.core.SplitGenerator(
