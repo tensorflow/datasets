@@ -1,4 +1,4 @@
-"""TODO(breastpathq): Add a description here."""
+"""Breast cancer whole slide image dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -9,11 +9,11 @@ from tensorflow_datasets.image import breastpathq
 
 
 class BreastpathqTest(testing.DatasetBuilderTestCase):
-  # TODO(breastpathq):
+
   DATASET_CLASS = breastpathq.Breastpathq
   SPLITS = {
       "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "validation": 1,  # Number of fake test example
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:
