@@ -23,6 +23,7 @@ _CITATION = """\
 _DESCRIPTION = """\
 The dataset consists of 609 spinal anterior-posterior x-ray images; it is dataset 16 on SpineWeb.
 The Cobb angles for each image were calculated using landmarks, where four landmarks denoted one vertebrae.
+Here, the training labels are a tensor of 3 cobb angles, corresponding to thoracic, proximal thoracic, and thoracolumbar/lumbar
 """
 
 
@@ -40,7 +41,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         # main thoracic, proximal thoracic, thoracolumbar/lumbar
         "label": tfds.features.Tensor(shape=(3,), dtype=tf.float32)
       }),
-      supervised_keys=('image', 'cobb_angles'),
+      supervised_keys=('image', 'label'),
       urls=['http://spineweb.digitalimaginggroup.ca'],
       citation=_CITATION,
     )
