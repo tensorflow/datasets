@@ -16,3 +16,4 @@
 *   It is now possible to add arbitrary metadata to `tfds.core.DatasetInfo`
     which will be stored/restored with the dataset. See `tfds.core.Metadata`.
 *   Better proxy support, possibility to add certificate
+*   Add Speech Command dataset
