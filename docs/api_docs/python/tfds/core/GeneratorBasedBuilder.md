@@ -17,11 +17,15 @@
 
 # tfds.core.GeneratorBasedBuilder
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
+source</a>
+
 ## Class `GeneratorBasedBuilder`
 
 Base class for datasets with data generation based on dict generators.
-
-Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -36,6 +40,9 @@ implement generators of feature dictionaries across the dataset splits
 feature dictionaries yielded by example generators. See the class docstrings.
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
+source</a>
 
 ```python
 __init__(
@@ -82,11 +89,15 @@ Callers must pass arguments as keyword arguments.
 
 <h3 id="as_dataset"><code>as_dataset</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
+source</a>
+
 ```python
 as_dataset(
     split=None,
     batch_size=None,
-    shuffle_files=None,
+    shuffle_files=False,
+    decoders=None,
     as_supervised=False,
     in_memory=None
 )
@@ -95,6 +106,46 @@ as_dataset(
 Constructs a `tf.data.Dataset`.
 
 Callers must pass arguments as keyword arguments.
+
+The output types vary depending on the parameters. Examples:
+
+```python
+builder = tfds.builder('imdb_reviews')
+builder.download_and_prepare()
+
+# Default parameters: Returns the dict of tf.data.Dataset
+ds_all_dict = builder.as_dataset()
+assert isinstance(ds_all_dict, dict)
+print(ds_all_dict.keys())  # ==> ['test', 'train', 'unsupervised']
+
+assert isinstance(ds_all_dict['test'], tf.data.Dataset)
+# Each dataset (test, train, unsup.) consists of dictionaries
+# {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
+#  'text': <tf.Tensor: .. dtype=string, numpy=b"I've watched the movie ..">}
+# {'label': <tf.Tensor: .. dtype=int64, numpy=1>,
+#  'text': <tf.Tensor: .. dtype=string, numpy=b'If you love Japanese ..'>}
+
+# With as_supervised: tf.data.Dataset only contains (feature, label) tuples
+ds_all_supervised = builder.as_dataset(as_supervised=True)
+assert isinstance(ds_all_supervised, dict)
+print(ds_all_supervised.keys())  # ==> ['test', 'train', 'unsupervised']
+
+assert isinstance(ds_all_supervised['test'], tf.data.Dataset)
+# Each dataset (test, train, unsup.) consists of tuples (text, label)
+# (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
+#  <tf.Tensor: ... dtype=int64, numpy=1>)
+# (<tf.Tensor: ... dtype=string, numpy=b"If you love Japanese ..">,
+#  <tf.Tensor: ... dtype=int64, numpy=1>)
+
+# Same as above plus requesting a particular split
+ds_test_supervised = builder.as_dataset(as_supervised=True, split='test')
+assert isinstance(ds_test_supervised, tf.data.Dataset)
+# The dataset consists of tuples (text, label)
+# (<tf.Tensor: ... dtype=string, numpy=b"I've watched the movie ..">,
+#  <tf.Tensor: ... dtype=int64, numpy=1>)
+# (<tf.Tensor: ... dtype=string, numpy=b"If you love Japanese ..">,
+#  <tf.Tensor: ... dtype=int64, numpy=1>)
+```
 
 #### Args:
 
@@ -108,7 +159,12 @@ Callers must pass arguments as keyword arguments.
     a custom pipeline. If `batch_size == -1`, will return feature dictionaries
     of the whole dataset with `tf.Tensor`s instead of a `tf.data.Dataset`.
 *   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
-    to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+    to `False`.
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present. See
+    [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+    for more info.
 *   <b>`as_supervised`</b>: `bool`, if `True`, the returned `tf.data.Dataset`
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
@@ -127,6 +183,9 @@ If `batch_size` is -1, will return feature dictionaries containing
 the entire dataset in `tf.Tensor`s instead of a `tf.data.Dataset`.
 
 <h3 id="download_and_prepare"><code>download_and_prepare</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
+source</a>
 
 ``` python
 download_and_prepare(

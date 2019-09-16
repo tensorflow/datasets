@@ -1,0 +1,97 @@
+{
+  "citation": "@article{cohen_afshar_tapson_schaik_2017, \n    title={EMNIST: Extending MNIST to handwritten letters}, \n    DOI={10.1109/ijcnn.2017.7966217}, \n    journal={2017 International Joint Conference on Neural Networks (IJCNN)}, \n    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van}, \n    year={2017}\n}\n", 
+  "description": "The EMNIST dataset is a set of handwritten character digitsderived from the NIST Special Database 19 and converted toa 28x28 pixel image format and dataset structure that directlymatches the MNIST dataset.", 
+  "location": {
+    "urls": [
+      "https://www.itl.nist.gov/iaui/vip/cs_links/EMNIST/gzip.zip"
+    ]
+  }, 
+  "name": "emnist", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "28"
+            }, 
+            {
+              "size": "28"
+            }, 
+            {
+              "size": "1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "561753746", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "40000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "40000"
+              }, 
+              "max": 9.0
+            }
+          }
+        ], 
+        "numExamples": "40000"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "240000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "240000"
+              }, 
+              "max": 9.0
+            }
+          }
+        ], 
+        "numExamples": "240000"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.1"
+}

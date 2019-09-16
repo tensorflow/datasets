@@ -8,15 +8,22 @@
 
 # tfds.features.TensorInfo
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ## Class `TensorInfo`
 
 Structure containing info on the `tf.Tensor` shape/dtype.
 
-Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
-
 <!-- Placeholder for "Used in" -->
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ```python
 __init__(
@@ -43,6 +50,9 @@ Constructor.
 
 <h3 id="__eq__"><code>__eq__</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ```python
 __eq__(other)
 ```
@@ -50,6 +60,9 @@ __eq__(other)
 Equality.
 
 <h3 id="copy_from"><code>copy_from</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ```python
 @classmethod

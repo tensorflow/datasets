@@ -5,6 +5,9 @@
 
 # tfds.testing.mock_kaggle_api
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
 Mock out the kaggle CLI.
 
 ``` python

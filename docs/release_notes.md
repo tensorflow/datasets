@@ -2,13 +2,6 @@
 
 ## Nightly
 
-### New datasets
-
-*   Image:
-    [downsampled_imagenet](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#downsampled_imagenet)
-*   Image:
-    [patch_camelyon](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md#patch_camelyon)
-
 ### Features
 
 *   Add `in_memory` option to cache small dataset in RAM.
@@ -17,3 +10,5 @@
     which will be stored/restored with the dataset. See `tfds.core.Metadata`.
 *   Better proxy support, possibility to add certificate
 *   Add Speech Command dataset
+*   Add `decoders` kwargs to override the default feature decoding
+    ([guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)).

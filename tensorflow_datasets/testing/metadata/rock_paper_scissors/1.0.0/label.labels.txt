@@ -1,0 +1,3 @@
+rock
+paper
+scissors

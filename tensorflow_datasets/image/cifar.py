@@ -44,12 +44,14 @@ _CITATION = """\
 class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
-  VERSION = tfds.core.Version("1.0.2")
+  VERSION = tfds.core.Version("1.0.2",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.2"),
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
   ]
-  # Version history:
+  # Version history
+  # 3.0.0: S3 with new hashing function (different shuffle).
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -131,21 +133,22 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
       for labels, np_image in _load_data(path, len(label_keys)):
         record = dict(zip(label_keys, labels))
         record["image"] = np_image
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield index, record
-        else:
-          yield record
+        yield index, record
         index += 1
 
 
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
-  VERSION = tfds.core.Version("1.3.1")
+  VERSION = tfds.core.Version("1.3.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.3.1"),
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
   ]
+  # Version history
+  # 3.0.0: S3 with new hashing function (different shuffle).
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   @property
   def _cifar_info(self):

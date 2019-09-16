@@ -31,7 +31,8 @@ class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
   ] if six.PY2 else []  # TODO(rsepassi): Re-enable Py3 test (b/129964829)
 
   DATASET_CLASS = imagenet2012_corrupted.Imagenet2012Corrupted
-  SPLITS = {  # Expected number of examples on the validation split.
+  SPLITS = {  # Expected number of examples on the train/validation splits.
+      "train": 100,
       "validation": 10,
   }
   DL_EXTRACT_RESULT = [

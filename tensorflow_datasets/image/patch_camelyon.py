@@ -47,12 +47,14 @@ _URL = 'https://patchcamelyon.grand-challenge.org/'
 class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
   """PatchCamelyon."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.0',
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version('0.1.0'),
+      tfds.core.Version('2.0.0'),
+      tfds.core.Version('1.0.0'),
   ]
   # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -117,7 +119,4 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
       label = label.flatten()[0]
       id_ = '%s_%d' % (split, i)
       record = {'id': id_, 'image': image, 'label': label}
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield id_, record
-      else:
-        yield record
+      yield id_, record

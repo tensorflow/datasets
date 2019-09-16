@@ -10,11 +10,15 @@
 
 # tfds.core.SplitBase
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
 ## Class `SplitBase`
 
 Abstract base class for Split compositionality.
-
-Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -28,9 +32,9 @@ There are three parts to the composition:
      `__getitem__`, which return a tree of `SplitBase` (whose leaf
      are the `NamedSplit` objects)
 
-  ```
-  split = tfds.TRAIN + tfds.TEST.subsplit(tfds.percent[:50])
-  ```
+```
+  split = tfds.Split.TRAIN + tfds.Split.TEST.subsplit(tfds.percent[:50])
+```
 
   2) The `SplitBase` is forwarded to the `.as_dataset()` function
      to be resolved into actual read instruction. This is done by the
@@ -49,6 +53,9 @@ There are three parts to the composition:
 
 <h3 id="__add__"><code>__add__</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
 ``` python
 __add__(other)
 ```
@@ -56,6 +63,9 @@ __add__(other)
 Merging: tfds.Split.TRAIN + tfds.Split.TEST.
 
 <h3 id="__eq__"><code>__eq__</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
 
 ``` python
 __eq__(other)
@@ -65,6 +75,9 @@ Equality: tfds.Split.TRAIN == 'train'.
 
 <h3 id="__ne__"><code>__ne__</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
 ```python
 __ne__(other)
 ```
@@ -72,6 +85,9 @@ __ne__(other)
 InEquality: tfds.Split.TRAIN != 'test'.
 
 <h3 id="get_read_instruction"><code>get_read_instruction</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
 
 ``` python
 get_read_instruction(split_dict)
@@ -89,6 +105,9 @@ Parse the descriptor tree and compile all read instructions together.
 * <b>`split_read_instruction`</b>: `SplitReadInstruction`
 
 <h3 id="subsplit"><code>subsplit</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
 
 ``` python
 subsplit(

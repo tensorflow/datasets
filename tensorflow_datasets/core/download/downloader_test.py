@@ -51,6 +51,7 @@ class _FakeResponse(object):
 class DownloaderTest(testing.TestCase):
 
   def setUp(self):
+    super(DownloaderTest, self).setUp()
     self.addCleanup(absltest.mock.patch.stopall)
     self.downloader = downloader.get_downloader(10, hashlib.sha256)
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
@@ -89,7 +90,7 @@ class DownloaderTest(testing.TestCase):
     promise = self.downloader.download(self.url, self.tmp_dir)
     checksum, _ = promise.get()
     self.assertEqual(checksum, self.resp_checksum)
-    with open(self.path, 'rb') as result:
+    with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
@@ -98,7 +99,7 @@ class DownloaderTest(testing.TestCase):
     promise = self.downloader.download(url, self.tmp_dir)
     checksum, _ = promise.get()
     self.assertEqual(checksum, self.resp_checksum)
-    with open(self.path, 'rb') as result:
+    with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 
@@ -139,7 +140,7 @@ class DownloaderTest(testing.TestCase):
     promise = self.downloader.download(url, self.tmp_dir)
     checksum, _ = promise.get()
     self.assertEqual(checksum, self.resp_checksum)
-    with open(self.path, 'rb') as result:
+    with tf.io.gfile.GFile(self.path, 'rb') as result:
       self.assertEqual(result.read(), self.response)
     self.assertFalse(tf.io.gfile.exists(self.incomplete_path))
 

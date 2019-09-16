@@ -41,7 +41,7 @@ class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
 
 
 class DownsampledImagenetS3Test(DownsampledImagenetTest):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

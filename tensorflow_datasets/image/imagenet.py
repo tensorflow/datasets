@@ -93,13 +93,15 @@ PNG_IMAGES = ['n02105855_2933.JPEG']
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   """Imagenet 2012, aka ILSVRC 2012."""
 
-  VERSION = tfds.core.Version('2.0.1')
+  VERSION = tfds.core.Version('2.0.1',
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version('4.0.0', experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version('3.0.0'),
-      tfds.core.Version('2.0.1'),
+      tfds.core.Version('5.0.0'),
+      tfds.core.Version('4.0.0'),
+      tfds.core.Version('3.0.0', experiments={tfds.core.Experiment.S3: False}),
   ]
   # Version history:
+  # 5.0.0: S3 with new hashing function (different shuffle).
   # 4.0.0: S3 (new shuffling, sharding and slicing mechanism).
   # 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
   # 2.0.1: Encoding fix. No changes from user point of view.
@@ -179,9 +181,9 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, archive, validation_labels=None):
     """Yields examples."""
     if validation_labels:  # Validation split
-      for example in self._generate_examples_validation(archive,
-                                                        validation_labels):
-        yield example
+      for key, example in self._generate_examples_validation(archive,
+                                                             validation_labels):
+        yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
     for fname, fobj in archive:
@@ -198,10 +200,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
             'image': image,
             'label': label,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield image_fname, record
-        else:
-          yield record
+        yield image_fname, record
 
   def _generate_examples_validation(self, archive, labels):
     for fname, fobj in archive:
@@ -210,7 +209,4 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
           'image': fobj,
           'label': labels[fname],
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

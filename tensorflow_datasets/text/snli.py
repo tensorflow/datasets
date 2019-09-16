@@ -47,11 +47,17 @@ _DATA_URL = 'https://nlp.stanford.edu/projects/snli/snli_1.0.zip'
 
 class Snli(tfds.core.GeneratorBasedBuilder):
   """The Stanford Natural Language Inference (SNLI) Corpus."""
-
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.0.1: Initial version.
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
-          version='0.0.1',
+          version=tfds.core.Version(
+              '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version('1.0.0'),
+          ],
           description='Plain text import of SNLI',
       )
   ]
@@ -103,9 +109,9 @@ class Snli(tfds.core.GeneratorBasedBuilder):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(filepath) as f:
       reader = csv.DictReader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
-      for row in reader:
+      for idx, row in enumerate(reader):
         label = -1 if row['gold_label'] == '-' else row['gold_label']
-        yield {
+        yield idx, {
             'premise': row['sentence1'],
             'hypothesis': row['sentence2'],
             'label': label,

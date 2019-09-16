@@ -77,7 +77,17 @@ class GrooveConfig(tfds.core.BuilderConfig):
     else:
       name_parts.append("midionly")
 
-    super(GrooveConfig, self).__init__(name="-".join(name_parts), **kwargs)
+    super(GrooveConfig, self).__init__(
+        name="-".join(name_parts),
+        version=tfds.core.Version(
+            "1.0.0", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("2.0.0"),
+        ],
+        **kwargs)
+    # Version history:
+    # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 1.0.0: Initial version.
     self.split_bars = split_bars
     self.include_audio = include_audio
     self.audio_rate = audio_rate
@@ -89,30 +99,25 @@ class Groove(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       GrooveConfig(
           include_audio=False,
-          version="1.0.0",
           description="Groove dataset without audio, unsplit."
       ),
       GrooveConfig(
           include_audio=True,
-          version="1.0.0",
           description="Groove dataset with audio, unsplit."
       ),
       GrooveConfig(
           include_audio=False,
           split_bars=2,
-          version="1.0.0",
           description="Groove dataset without audio, split into 2-bar chunks."
       ),
       GrooveConfig(
           include_audio=True,
           split_bars=2,
-          version="1.0.0",
           description="Groove dataset with audio, split into 2-bar chunks."
       ),
       GrooveConfig(
           include_audio=False,
           split_bars=4,
-          version="1.0.0",
           description="Groove dataset without audio, split into 4-bar chunks."
       ),
   ]
@@ -197,7 +202,7 @@ class Groove(tfds.core.GeneratorBasedBuilder):
         example["midi"] = midi
         if audio is not None:
           example["audio"] = audio
-        yield example
+        yield example["id"], example
       else:
         # Yield split examples.
         bpm = int(row["bpm"])
@@ -232,7 +237,7 @@ class Groove(tfds.core.GeneratorBasedBuilder):
                 int(time_range[1] * audio_rate)]
 
           example["id"] += ":%03d" % i
-          yield example
+          yield example["id"], example
 
 
 def _load_wav(path, sample_rate):

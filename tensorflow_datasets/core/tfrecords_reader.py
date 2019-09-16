@@ -22,7 +22,6 @@ from __future__ import print_function
 import functools
 import itertools
 import math
-import os
 import re
 
 import attr
@@ -167,7 +166,7 @@ def _read_single_instruction(
 
   # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:
-    instruction_ds = instruction_ds.shuffle(len(tensor_inputs))
+    instruction_ds = instruction_ds.shuffle(len(tensor_inputs['filename']))
 
   dataset = instruction_ds.interleave(
       functools.partial(_get_dataset_from_filename,

@@ -21,6 +21,7 @@ tf_compat.ensure_tf_install()
 
 from tensorflow_datasets import core
 from tensorflow_datasets.core import download
+from tensorflow_datasets.core import decode
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import file_format_adapter as file_adapter
 from tensorflow_datasets.core import units
@@ -33,12 +34,14 @@ from tensorflow_datasets.core.splits import percent
 from tensorflow_datasets.core.splits import Split
 from tensorflow_datasets.core.utils.gcs_utils import is_dataset_on_gcs
 from tensorflow_datasets.core.utils.tqdm_utils import disable_progress_bar
+from tensorflow_datasets.core.visualization import show_examples
 from tensorflow_datasets.version import __version__
 
 
 __all__ = [
     "core",
     "as_numpy",
+    "decode",
     "download",
     "features",
     "file_adapter",
@@ -52,6 +55,8 @@ __all__ = [
     "testing",
     "disable_progress_bar",
     "is_dataset_on_gcs",
+    "show_examples",
+    "__version__",
 ]
 
 

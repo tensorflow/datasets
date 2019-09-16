@@ -1,2 +1,2 @@
-{"label": false, "word": "board", "pos": "N", "sentence1": "Room and board .", "sentence2": "He nailed boards across the windows .", "sentence1_idx": "2", "sentence2_idx": "2", "idx": 0}
-{"label": false, "word": "circulate", "pos": "V", "sentence1": "Circulate a rumor .", "sentence2": "This letter is being circulated among the faculty .", "sentence1_idx": "0", "sentence2_idx": "4", "idx": 1}
+{"word": "class", "sentence1": "An emerging professional class.", "sentence2": "Apologizing for losing your temper, even though you were badly provoked, showed real class.", "idx": 0, "label": false, "start1": 25, "start2": 85, "end1": 30, "end2": 90, "version": 1.1}
+{"word": "stripe", "sentence1": "Businessmen of every stripe joined in opposition to the proposal.", "sentence2": "They earned their stripes in Kuwait.", "idx": 1, "label": false, "start1": 21, "start2": 18, "end1": 27, "end2": 25, "version": 1.1}

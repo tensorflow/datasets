@@ -39,6 +39,12 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 """
 
+_BOOLQ_DESCRIPTION = """\
+BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short
+passage and a yes/no question about the passage. The questions are provided anonymously and
+unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a
+Wikipedia article containing the answer. Following the original work, we evaluate with accuracy."""
+
 _CB_DESCRIPTION = """\
 The CommitmentBank (De Marneffe et al., 2019) is a corpus of short texts in which at least
 one sentence contains an embedded clause. Each of these embedded clauses is annotated with the
@@ -60,6 +66,15 @@ premise sentence, accompanied by a simple question disambiguating between the tw
 types for the model. All examples are handcrafted and focus on topics from online blogs and a
 photography-related encyclopedia. Following the recommendation of the authors, we evaluate using
 accuracy."""
+
+_RECORD_DESCRIPTION = """\
+(Reading Comprehension with Commonsense Reasoning Dataset, Zhang et al., 2018) is a
+multiple-choice QA task. Each example consists of a news article and a Cloze-style question about
+the article in which one entity is masked out. The system must predict the masked out entity from a
+given list of possible entities in the provided passage, where the same entity may be expressed using
+multiple different surface forms, all of which are considered correct. Articles are drawn from CNN
+and Daily Mail. Following the original work, we evaluate with max (over all mentions) token-level
+F1 and exact match (EM)."""
 
 _RTE_DESCRIPTION = """\
 The Recognizing Textual Entailment (RTE) datasets come from a series of annual competitions
@@ -121,6 +136,14 @@ of ambiguous examples such that changing one non-noun phrase word will change th
 dependencies in the sentence. The test set consists only of more straightforward examples, with a
 high number of noun phrases (and thus more choices for the model), but low to no ambiguity."""
 
+_BOOLQ_CITATION = """\
+@inproceedings{clark2019boolq,
+  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},
+  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},
+  booktitle={NAACL},
+  year={2019}
+}"""
+
 _CB_CITATION = """\
 @article{de marneff_simons_tonhauser_2019,
   title={The CommitmentBank: Investigating projection in naturally occurring discourse},
@@ -135,6 +158,14 @@ _COPA_CITATION = """\
   author={Roemmele, Melissa and Bejan, Cosmin Adrian and Gordon, Andrew S},
   booktitle={2011 AAAI Spring Symposium Series},
   year={2011}
+}"""
+
+_RECORD_CITATION = """\
+@article{zhang2018record,
+  title={Record: Bridging the gap between human and machine commonsense reading comprehension},
+  author={Zhang, Sheng and Liu, Xiaodong and Liu, Jingjing and Gao, Jianfeng and Duh, Kevin and Van Durme, Benjamin},
+  journal={arXiv preprint arXiv:1810.12885},
+  year={2018}
 }"""
 
 _RTE_CITATION = """\
@@ -227,7 +258,15 @@ class SuperGlueConfig(tfds.core.BuilderConfig):
         'False' or 'True'.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(SuperGlueConfig, self).__init__(**kwargs)
+    # Version history:
+    # 1.0.2: Fixed non-nondeterminism in ReCoRD.
+    # 1.0.1: Change from the pre-release trial version of SuperGLUE (v1.9) to
+    #        the full release (v2.0).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.0.2: Initial version.
+    super(SuperGlueConfig, self).__init__(
+        version=tfds.core.Version("1.0.2"),
+        **kwargs)
     self.features = features
     self.label_classes = label_classes
     self.data_url = data_url
@@ -239,67 +278,81 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
   """The SuperGLUE benchmark."""
   BUILDER_CONFIGS = [
       SuperGlueConfig(
+          name="boolq",
+          description=_BOOLQ_DESCRIPTION,
+          features=["question", "passage"],
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/BoolQ.zip",
+          citation=_BOOLQ_CITATION,
+          url="https://github.com/google-research-datasets/boolean-questions"),
+      SuperGlueConfig(
           name="cb",
-          version="0.0.2",
           description=_CB_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "contradiction", "neutral"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/CB.zip",
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/CB.zip",
           citation=_CB_CITATION,
           url="https://github.com/mcdm/CommitmentBank"),
       SuperGlueConfig(
           name="copa",
-          version="0.0.2",
           description=_COPA_DESCRIPTION,
           label_classes=["choice1", "choice2"],
           # Note that question will only be the X in the statement "What's
           # the X for this?".
           features=["premise", "choice1", "choice2", "question"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/COPA.zip",
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/COPA.zip",
           citation=_COPA_CITATION,
           url="http://people.ict.usc.edu/~gordon/copa.html"),
       SuperGlueConfig(
           name="multirc",
-          version="0.0.2",
           description=_MULTIRC_DESCRIPTION,
           features=["paragraph", "question", "answer"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/MultiRC.zip",
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/MultiRC.zip",
           citation=_MULTIRC_CITATION,
           url="https://cogcomp.org/multirc/"),
       SuperGlueConfig(
+          name="record",
+          description=_RECORD_DESCRIPTION,
+          # Note that entities and answers will be a sequences of strings. Query
+          # will contain @placeholder as a substring, which represents the word
+          # to be substituted in.
+          features=["passage", "query", "entities", "answers"],
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/ReCoRD.zip",
+          citation=_RECORD_CITATION,
+          url="https://sheng-z.github.io/ReCoRD-explorer/"),
+      SuperGlueConfig(
           name="rte",
-          version="0.0.2",
           description=_RTE_DESCRIPTION,
           features=["premise", "hypothesis"],
           label_classes=["entailment", "not_entailment"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/RTE.zip",
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/RTE.zip",
           citation=_RTE_CITATION,
           url="https://aclweb.org/aclwiki/Recognizing_Textual_Entailment"),
       SuperGlueConfig(
           name="wic",
-          version="0.0.2",
           description=_WIC_DESCRIPTION,
-          # pos refers to part of speech (e.g., "N", "V", ...).
-          features=["word", "pos", "sentence1", "sentence2"],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/WiC.zip",
+          # Note that start1, start2, end1, and end2 will be integers stored as
+          # tf.int32.
+          features=[
+              "word", "sentence1", "sentence2", "start1", "start2", "end1",
+              "end2"
+          ],
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WiC.zip",
           citation=_WIC_CITATION,
           url="https://pilehvar.github.io/wic/"),
       SuperGlueConfig(
           name="wsc",
-          version="0.0.2",
           description=_WSC_DESCRIPTION,
           # Note that span1_index and span2_index will be integers stored as
           # tf.int32.
           features=[
               "text", "span1_index", "span2_index", "span1_text", "span2_text"
           ],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/WSC.zip",
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WSC.zip",
           citation=_WSC_CITATION,
           url="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
       ),
       SuperGlueConfig(
           name="wsc.fixed",
-          version="0.0.2",
           description=(
               _WSC_DESCRIPTION +
               "\n\nThis version fixes issues where the spans are not actually "
@@ -309,7 +362,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           features=[
               "text", "span1_index", "span2_index", "span1_text", "span2_text"
           ],
-          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/WSC.zip",
+          data_url="https://dl.fbaipublicfiles.com/glue/superglue/data/v2/WSC.zip",
           citation=_WSC_CITATION,
           url="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
       ),
@@ -323,16 +376,34 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
     if self.builder_config.name.startswith("wsc"):
       features["span1_index"] = tf.int32
       features["span2_index"] = tf.int32
+    if self.builder_config.name == "wic":
+      features["start1"] = tf.int32
+      features["start2"] = tf.int32
+      features["end1"] = tf.int32
+      features["end2"] = tf.int32
     if self.builder_config.name == "multirc":
       features["idx"] = tfds.features.FeaturesDict({
           "paragraph": tf.int32,
           "question": tf.int32,
           "answer": tf.int32,
       })
+    elif self.builder_config.name == "record":
+      features["idx"] = tfds.features.FeaturesDict({
+          "passage": tf.int32,
+          "query": tf.int32,
+      })
     else:
       features["idx"] = tf.int32
-    features["label"] = tfds.features.ClassLabel(
-        names=self.builder_config.label_classes)
+
+    if self.builder_config.name == "record":
+      # Entities are the set of possible choices for the placeholder.
+      features["entities"] = tfds.features.Sequence(tfds.features.Text())
+      # Answers are the subset of entities that are correct.
+      features["answers"] = tfds.features.Sequence(tfds.features.Text())
+    else:
+      features["label"] = tfds.features.ClassLabel(
+          names=self.builder_config.label_classes)
+
     return tfds.core.DatasetInfo(
         builder=self,
         description=self.builder_config.description,
@@ -345,27 +416,26 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    dl_dir = dl_manager.download_and_extract(self.builder_config.data_url)
+    dl_dir = dl_manager.download_and_extract(self.builder_config.data_url) or ""
+    dl_dir = os.path.join(
+        dl_dir, _get_task_name_from_data_url(self.builder_config.data_url))
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={
-                "data_file": os.path.join(dl_dir or "", "train.jsonl"),
+                "data_file": os.path.join(dl_dir, "train.jsonl"),
                 "split": tfds.Split.TRAIN,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
             gen_kwargs={
-                "data_file": os.path.join(dl_dir or "", "val.jsonl"),
+                "data_file": os.path.join(dl_dir, "val.jsonl"),
                 "split": tfds.Split.VALIDATION,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
             gen_kwargs={
-                "data_file": os.path.join(dl_dir or "", "test.jsonl"),
+                "data_file": os.path.join(dl_dir, "test.jsonl"),
                 "split": tfds.Split.TEST,
             }),
     ]
@@ -376,21 +446,35 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
         row = json.loads(line)
 
         if self.builder_config.name == "multirc":
-          paragraph = row["paragraph"]
+          paragraph = row["passage"]
           for question in paragraph["questions"]:
             for answer in question["answers"]:
-              is_answer = answer.get("isAnswer")
-              yield {
+              label = answer.get("label")
+              key = "%s_%s_%s" % (row["idx"], question["idx"], answer["idx"])
+              yield key, {
                   "paragraph": paragraph["text"],
                   "question": question["question"],
                   "answer": answer["text"],
-                  "label": -1 if is_answer is None else _cast_label(is_answer),
+                  "label": -1 if label is None else _cast_label(bool(label)),
                   "idx": {
                       "paragraph": row["idx"],
                       "question": question["idx"],
                       "answer": answer["idx"]
                   }
               }
+        elif self.builder_config.name == "record":
+          passage = row["passage"]
+          for qa in row["qas"]:
+            yield qa["idx"], {
+                "passage": passage["text"],
+                "query": qa["query"],
+                "entities": _get_record_entities(passage),
+                "answers": _get_record_answers(qa),
+                "idx": {
+                    "passage": row["idx"],
+                    "query": qa["idx"]
+                }
+            }
         else:
           if self.builder_config.name.startswith("wsc"):
             row.update(row["target"])
@@ -409,7 +493,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
           else:
             assert split == tfds.Split.TEST, row
             example["label"] = -1
-          yield example
+          yield example["idx"], example
 
 
 def _fix_wst(ex):
@@ -458,3 +542,26 @@ def _cast_label(label):
     return str(label)
   else:
     raise ValueError("Invalid label format.")
+
+
+def _get_record_entities(passage):
+  """Returns the unique set of entities."""
+  text = passage["text"]
+  entities = set()
+  for entity in passage["entities"]:
+    entities.add(text[entity["start"]:entity["end"] + 1])
+  return sorted(entities)
+
+
+def _get_record_answers(qa):
+  """Returns the unique set of answers."""
+  if "answers" not in qa:
+    return []
+  answers = set()
+  for answer in qa["answers"]:
+    answers.add(answer["text"])
+  return sorted(answers)
+
+
+def _get_task_name_from_data_url(data_url):
+  return data_url.split("/")[-1].split(".")[0]

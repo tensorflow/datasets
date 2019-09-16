@@ -49,11 +49,14 @@ _TRAIN_POINTS_PER_CLASS = 30
 class Caltech101(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
   ]
   # Version history:
+  # 3.0.0: S3 with new hashing function (different shuffle).
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -140,9 +143,6 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
                   "label": d.lower(),
                   "image/file_name": image_file,
               }
-              if self.version.implements(tfds.core.Experiment.S3):
-                yield "%s/%s" % (d, image_file), record
-              else:
-                yield record
+              yield "%s/%s" % (d, image_file), record
     # Resets the seeds to their previous states.
     np.random.set_state(numpy_original_state)

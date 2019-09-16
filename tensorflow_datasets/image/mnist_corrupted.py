@@ -102,10 +102,17 @@ def _make_builder_configs():
     config_list.append(
         MNISTCorruptedConfig(
             name=corruption,
-            version='0.0.1',
+            version=tfds.core.Version(
+                '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+            supported_versions=[
+                tfds.core.Version('1.0.0'),
+            ],
             description='Corruption method: ' + corruption,
             corruption_type=corruption,
         ))
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.0.1: Initial version.
   return config_list
 
 
@@ -186,8 +193,8 @@ class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(images_file, mode='rb') as f:
       images = np.load(f)
 
-    for image, label in zip(images, labels):
-      yield {
+    for i, (image, label) in enumerate(zip(images, labels)):
+      yield i, {
           'image': image,
           'label': label,
       }

@@ -61,12 +61,14 @@ We varied one latent at a time (starting from orientation, then shape, etc), and
 class Shapes3d(tfds.core.GeneratorBasedBuilder):
   """Shapes3d data set."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.1.0"),
+      tfds.core.Version("2.0.0"),
+      tfds.core.Version("1.0.0"),
   ]
   # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -152,10 +154,7 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
           "value_shape": values[4],
           "value_orientation": values[5],
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield i, record
-      else:
-        yield record
+      yield i, record
 
 
 def _load_data(filepath):

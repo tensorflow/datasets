@@ -45,12 +45,14 @@ _NAME_RE = re.compile(r"^(humans|horses)/[\w-]*\.png$")
 class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
   """Horses or Humans dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
   ]
   # Version history:
+  # 3.0.0: S3 with new hashing function (different shuffle).
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -104,7 +106,4 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
           "image": fobj,
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

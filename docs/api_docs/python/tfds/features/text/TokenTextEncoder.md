@@ -15,32 +15,37 @@
 
 # tfds.features.text.TokenTextEncoder
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ## Class `TokenTextEncoder`
 
 TextEncoder backed by a list of tokens.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
-
-
-Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
-
-### Used in the tutorials:
-
-*   [Load text with tf.data](https://www.tensorflow.org/beta/tutorials/load_data/text)
+<!-- Placeholder for "Used in" -->
 
 Tokenization splits on (and drops) non-alphanumeric characters with
 regex "\W+".
 
 <h2 id="__init__"><code>__init__</code></h2>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
+```python
 __init__(
     vocab_list,
     oov_buckets=1,
     oov_token='UNK',
     lowercase=False,
-    tokenizer=None
+    tokenizer=None,
+    strip_vocab=True,
+    decode_token_separator=' '
 )
 ```
 
@@ -61,6 +66,10 @@ use
 *   <b>`lowercase`</b>: `bool`, whether to make all text and tokens lowercase.
 *   <b>`tokenizer`</b>: `Tokenizer`, responsible for converting incoming text
     into a list of tokens.
+*   <b>`strip_vocab`</b>: `bool`, whether to strip whitespace from the beginning
+    and end of elements of `vocab_list`.
+*   <b>`decode_token_separator`</b>: `str`, the string used to separate tokens
+    when decoding.
 
 ## Properties
 
@@ -78,17 +87,26 @@ use
 
 <h3 id="decode"><code>decode</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ``` python
 decode(ids)
 ```
 
 <h3 id="encode"><code>encode</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ``` python
 encode(s)
 ```
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
 
 ``` python
 @classmethod
@@ -99,6 +117,9 @@ load_from_file(
 ```
 
 <h3 id="save_to_file"><code>save_to_file</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
 
 ``` python
 save_to_file(filename_prefix)

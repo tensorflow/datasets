@@ -13,11 +13,15 @@
 
 # tfds.download.DownloadManager
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
 ## Class `DownloadManager`
 
 Manages the download and extraction of files, as well as caching.
-
-Defined in [`core/download/download_manager.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -67,6 +71,9 @@ For more customization on the download/extraction (ex: passwords, output_name,
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
 ``` python
 __init__(
     download_dir,
@@ -111,6 +118,9 @@ Returns the directory containing the manually extracted data.
 
 <h3 id="download"><code>download</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
 ``` python
 download(url_or_urls)
 ```
@@ -129,6 +139,9 @@ downloaded_path(s): `str`, The downloaded paths matching the given input
   url_or_urls.
 
 <h3 id="download_and_extract"><code>download_and_extract</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
 
 ``` python
 download_and_extract(url_or_urls)
@@ -157,6 +170,9 @@ extracted_path(s): `str`, extracted paths of given URL(s).
 
 <h3 id="download_kaggle_data"><code>download_kaggle_data</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
 ``` python
 download_kaggle_data(competition_name)
 ```
@@ -164,6 +180,9 @@ download_kaggle_data(competition_name)
 Download data for a given Kaggle competition.
 
 <h3 id="extract"><code>extract</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
 
 ``` python
 extract(path_or_paths)
@@ -186,6 +205,9 @@ extracted_path(s): `str`, The extracted paths matching the given input
   path_or_paths.
 
 <h3 id="iter_archive"><code>iter_archive</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
 
 ``` python
 iter_archive(resource)

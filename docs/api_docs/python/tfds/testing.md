@@ -5,9 +5,13 @@
 
 # Module: tfds.testing
 
-Testing utilities.
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
 
-Defined in [`testing/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/__init__.py).
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/__init__.py">View
+source</a>
+
+Testing utilities.
 
 <!-- Placeholder for "Used in" -->
 
@@ -33,6 +37,9 @@ manager to the TestCase if supported.
 
 [`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary
 directory.
+
+[`mock_data(...)`](../tfds/testing/mock_data.md): Mock tfds to generate random
+data.
 
 [`mock_kaggle_api(...)`](../tfds/testing/mock_kaggle_api.md): Mock out the
 kaggle CLI.

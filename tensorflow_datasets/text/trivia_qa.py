@@ -79,7 +79,14 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
   It containss over 650K question-answer-evidence triples.
   """
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("1.0.0")
+  ]
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.1.0: Initial version.
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -243,8 +250,8 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                 with tf.io.gfile.GFile(search_file) as f:
                   text = f.read()
                   search_contexts.append(text)
-              except IOError:
-                print("File does not exist!")
+              except (IOError, tf.errors.NotFoundError):
+                logging.info("File does not exist, skipping: %s", file_name)
                 search_contexts.append("")
           else:
             descriptions = []
@@ -275,8 +282,8 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
                 with tf.io.gfile.GFile(wiki_file) as f:
                   text = f.read()
                   wiki_contexts.append(text)
-              except IOError:
-                print("File does not exist!")
+              except (IOError, tf.errors.NotFoundError):
+                logging.info("File does not exist, skipping: %s", file_name)
                 wiki_contexts.append("")
           else:
             doc_sources = []
@@ -284,7 +291,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
             wiki_titles = []
             wiki_contexts = []
 
-          yield {
+          yield "%s_%s" % (os.path.basename(filepath), question_id), {
               "entity_pages": {
                   "doc_source": doc_sources,
                   "file_name": file_names,

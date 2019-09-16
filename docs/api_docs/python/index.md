@@ -1,5 +1,7 @@
 # All symbols in TensorFlow Datasets
 
+## Primary symbols
+
 *   <a href="./tfds.md"><code>tfds</code></a>
 *   <a href="./tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>
 *   <a href="./tfds/Split.md"><code>tfds.Split</code></a>
@@ -22,6 +24,10 @@
 *   <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
 *   <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
 *   <a href="./tfds/core/lazy_imports.md"><code>tfds.core.lazy_imports</code></a>
+*   <a href="./tfds/decode.md"><code>tfds.decode</code></a>
+*   <a href="./tfds/decode/Decoder.md"><code>tfds.decode.Decoder</code></a>
+*   <a href="./tfds/decode/SkipDecoding.md"><code>tfds.decode.SkipDecoding</code></a>
+*   <a href="./tfds/decode/make_decoder.md"><code>tfds.decode.make_decoder</code></a>
 *   <a href="./tfds/disable_progress_bar.md"><code>tfds.disable_progress_bar</code></a>
 *   <a href="./tfds/download.md"><code>tfds.download</code></a>
 *   <a href="./tfds/download/ComputeStatsMode.md"><code>tfds.download.ComputeStatsMode</code></a>
@@ -30,6 +36,7 @@
 *   <a href="./tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>
 *   <a href="./tfds/download/GenerateMode.md"><code>tfds.download.GenerateMode</code></a>
 *   <a href="./tfds/download/Resource.md"><code>tfds.download.Resource</code></a>
+*   <a href="./tfds/download/add_checksums_dir.md"><code>tfds.download.add_checksums_dir</code></a>
 *   <a href="./tfds/download/iter_archive.md"><code>tfds.download.iter_archive</code></a>
 *   <a href="./tfds/features.md"><code>tfds.features</code></a>
 *   <a href="./tfds/features/Audio.md"><code>tfds.features.Audio</code></a>
@@ -58,6 +65,7 @@
 *   <a href="./tfds/list_builders.md"><code>tfds.list_builders</code></a>
 *   <a href="./tfds/load.md"><code>tfds.load</code></a>
 *   <a href="./tfds/percent.md"><code>tfds.percent</code></a>
+*   <a href="./tfds/show_examples.md"><code>tfds.show_examples</code></a>
 *   <a href="./tfds/testing.md"><code>tfds.testing</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase.md"><code>tfds.testing.DatasetBuilderTestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.DatasetBuilderTestCase.failureException</code></a>
@@ -71,6 +79,7 @@
 *   <a href="./tfds/testing/TestCase.md"><code>tfds.testing.TestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.TestCase.failureException</code></a>
 *   <a href="./tfds/testing/make_tmp_dir.md"><code>tfds.testing.make_tmp_dir</code></a>
+*   <a href="./tfds/testing/mock_data.md"><code>tfds.testing.mock_data</code></a>
 *   <a href="./tfds/testing/mock_kaggle_api.md"><code>tfds.testing.mock_kaggle_api</code></a>
 *   <a href="./tfds/testing/rm_tmp_dir.md"><code>tfds.testing.rm_tmp_dir</code></a>
 *   <a href="./tfds/testing/run_in_graph_and_eager_modes.md"><code>tfds.testing.run_in_graph_and_eager_modes</code></a>

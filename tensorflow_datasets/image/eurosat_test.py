@@ -35,9 +35,5 @@ class EurosatTest(testing.DatasetBuilderTestCase):
   }
 
 
-class EurosatS3Test(EurosatTest):
-  VERSION = "1.0.0"
-
-
 if __name__ == "__main__":
   testing.test_main()

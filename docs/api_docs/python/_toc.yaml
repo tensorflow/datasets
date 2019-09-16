@@ -18,6 +18,8 @@ toc:
       path: /datasets/api_docs/python/tfds/load
     - title: percent
       path: /datasets/api_docs/python/tfds/percent
+    - title: show_examples
+      path: /datasets/api_docs/python/tfds/show_examples
     - title: Split
       path: /datasets/api_docs/python/tfds/Split
   - title: tfds.core
@@ -56,10 +58,22 @@ toc:
       path: /datasets/api_docs/python/tfds/core/SplitInfo
     - title: Version
       path: /datasets/api_docs/python/tfds/core/Version
+  - title: tfds.decode
+    section:
+    - title: Overview
+      path: /datasets/api_docs/python/tfds/decode
+    - title: Decoder
+      path: /datasets/api_docs/python/tfds/decode/Decoder
+    - title: make_decoder
+      path: /datasets/api_docs/python/tfds/decode/make_decoder
+    - title: SkipDecoding
+      path: /datasets/api_docs/python/tfds/decode/SkipDecoding
   - title: tfds.download
     section:
     - title: Overview
       path: /datasets/api_docs/python/tfds/download
+    - title: add_checksums_dir
+      path: /datasets/api_docs/python/tfds/download/add_checksums_dir
     - title: ComputeStatsMode
       path: /datasets/api_docs/python/tfds/download/ComputeStatsMode
     - title: DownloadConfig
@@ -144,6 +158,8 @@ toc:
       path: /datasets/api_docs/python/tfds/testing/FeatureExpectationsTestCase
     - title: make_tmp_dir
       path: /datasets/api_docs/python/tfds/testing/make_tmp_dir
+    - title: mock_data
+      path: /datasets/api_docs/python/tfds/testing/mock_data
     - title: mock_kaggle_api
       path: /datasets/api_docs/python/tfds/testing/mock_kaggle_api
     - title: rm_tmp_dir

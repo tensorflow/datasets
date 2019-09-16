@@ -89,7 +89,15 @@ class CnnDailymailConfig(tfds.core.BuilderConfig):
         (text) features
       **kwargs: keyword arguments forwarded to super.
     """
-    super(CnnDailymailConfig, self).__init__(**kwargs)
+    # Version history:
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.0.2: Initial version.
+    super(CnnDailymailConfig, self).__init__(
+        version=tfds.core.Version(
+            '0.0.2', experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version('1.0.0'),
+        ], **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -210,12 +218,10 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       CnnDailymailConfig(
           name='plain_text',
-          version='0.0.2',
           description='Plain text',
       ),
       CnnDailymailConfig(
           name='bytes',
-          version='0.0.2',
           description=('Uses byte-level text encoding with '
                        '`tfds.features.text.ByteTextEncoder`'),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -223,7 +229,6 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
       ),
       CnnDailymailConfig(
           name='subwords32k',
-          version='0.0.2',
           description=('Uses `tfds.features.text.SubwordTextEncoder` with '
                        '32k vocab size'),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -249,7 +254,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, paths):
-    for ex in self._generate_examples(paths):
+    for _, ex in self._generate_examples(paths):
       yield ' '.join([ex[_ARTICLE], ex[_HIGHLIGHTS]])
 
   def _split_generators(self, dl_manager):
@@ -287,7 +292,8 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
       article, highlights = _get_art_abs(p)
       if not article or not highlights:
         continue
-      yield {
+      fname = os.path.basename(p)
+      yield fname, {
           _ARTICLE: article,
           _HIGHLIGHTS: highlights
       }

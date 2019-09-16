@@ -54,132 +54,260 @@ _CITATION = """\
 }
 """
 
+DESCRIPTION = """COCO is a large-scale object detection, segmentation, and
+captioning dataset. This version contains images, bounding boxes "
+and labels for the {year} version.
+Note:
+ * Some images from the train and validation sets don't have annotations.
+ * Coco 2014 and 2017 uses the same images, but different train/val/test splits
+ * The test split don't have any annotations (only images).
+ * Coco defines 91 classes but the data only uses 80 classes.
+ * Panotptic annotations defines defines 200 classes but only uses 133.
+"""
 
-class Coco2014(tfds.core.GeneratorBasedBuilder):
-  """MS Coco dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+Split = collections.namedtuple(
+    'Split', ['name', 'images', 'annotations', 'annotation_type'])
+
+
+class AnnotationType(object):
+  """Enum of the annotation format types.
+
+  Splits are annotated with different formats.
+  """
+  BBOXES = 'bboxes'
+  PANOPTIC = 'panoptic'
+  NONE = 'none'
+
+
+class CocoConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for CocoConfig."""
+
+  def __init__(
+      self,
+      splits=None,
+      has_panoptic=False,
+      **kwargs):
+    super(CocoConfig, self).__init__(
+        version=tfds.core.Version('1.1.0'),
+        **kwargs)
+    self.splits = splits
+    self.has_panoptic = has_panoptic
+
+
+class Coco(tfds.core.GeneratorBasedBuilder):
+  """Base MS Coco dataset."""
+
+  BUILDER_CONFIGS = [
+      CocoConfig(
+          name='2014',
+          description=DESCRIPTION.format(year=2014),
+          splits=[
+              Split(
+                  name=tfds.Split.TRAIN,
+                  images='train2014',
+                  annotations='annotations_trainval2014',
+                  annotation_type=AnnotationType.BBOXES,
+              ),
+              Split(
+                  name=tfds.Split.VALIDATION,
+                  images='val2014',
+                  annotations='annotations_trainval2014',
+                  annotation_type=AnnotationType.BBOXES,
+              ),
+              Split(
+                  name=tfds.Split.TEST,
+                  images='test2014',
+                  annotations='image_info_test2014',
+                  annotation_type=AnnotationType.NONE,
+              ),
+              # Coco2014 contains an extra test split
+              Split(
+                  name='test2015',
+                  images='test2015',
+                  annotations='image_info_test2015',
+                  annotation_type=AnnotationType.NONE,
+              ),
+          ],
+      ),
+      CocoConfig(
+          name='2017',
+          description=DESCRIPTION.format(year=2017),
+          splits=[
+              Split(
+                  name=tfds.Split.TRAIN,
+                  images='train2017',
+                  annotations='annotations_trainval2017',
+                  annotation_type=AnnotationType.BBOXES,
+              ),
+              Split(
+                  name=tfds.Split.VALIDATION,
+                  images='val2017',
+                  annotations='annotations_trainval2017',
+                  annotation_type=AnnotationType.BBOXES,
+              ),
+              Split(
+                  name=tfds.Split.TEST,
+                  images='test2017',
+                  annotations='image_info_test2017',
+                  annotation_type=AnnotationType.NONE,
+              ),
+          ],
+      ),
+      CocoConfig(
+          name='2017_panoptic',
+          description=DESCRIPTION.format(year=2017),
+          has_panoptic=True,
+          splits=[
+              Split(
+                  name=tfds.Split.TRAIN,
+                  images='train2017',
+                  annotations='panoptic_annotations_trainval2017',
+                  annotation_type=AnnotationType.PANOPTIC,
+              ),
+              Split(
+                  name=tfds.Split.VALIDATION,
+                  images='val2017',
+                  annotations='panoptic_annotations_trainval2017',
+                  annotation_type=AnnotationType.PANOPTIC,
+              ),
+          ],
+      ),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
+
+    features = {
+        # Images can have variable shape
+        'image': tfds.features.Image(encoding_format='jpeg'),
+        'image/filename': tfds.features.Text(),
+        'image/id': tf.int64,
+    }
+    # Either uses panotptic or original annotations
+    if self.builder_config.has_panoptic:
+      features.update({
+          'panoptic_image': tfds.features.Image(encoding_format='png'),
+          'panoptic_image/filename': tfds.features.Text(),
+          'panoptic_objects': tfds.features.Sequence({
+              'id': tf.int64,
+              # Coco has unique id for each annotation. The id can be used for
+              # mapping panoptic image to semantic segmentation label.
+              'area': tf.int64,
+              'bbox': tfds.features.BBoxFeature(),
+              # Coco2017 has 200 categories but only 133 are present in the
+              # dataset
+              'label': tfds.features.ClassLabel(num_classes=133),
+              'is_crowd': tf.bool,
+          }),
+      })
+    else:
+      features.update({
+          'objects': tfds.features.Sequence({
+              'id': tf.int64,
+              # Coco has unique id for each annotation. The id can be used for
+              # mapping panoptic image to semantic segmentation label.
+              'area': tf.int64,
+              'bbox': tfds.features.BBoxFeature(),
+              # Coco has 91 categories but only 80 are present in the dataset
+              'label': tfds.features.ClassLabel(num_classes=80),
+              'is_crowd': tf.bool,
+          }),
+      })
+    # More info could be added, like segmentation (as png mask), captions,
+    # person key-points, more metadata (original flickr url,...).
+
     return tfds.core.DatasetInfo(
         builder=self,
-        description=(
-            "COCO is a large-scale object detection, segmentation, and "
-            "captioning dataset. This version contains images, bounding boxes "
-            "and labels for the 2014 version.\n"
-            "Note:\n"
-            " * Some images from the train and validation sets don't have "
-            "annotations.\n"
-            " * The test split don't have any annotations (only images).\n"
-            " * Coco defines 91 classes but the data only had 80 classes.\n"),
+        description=self.builder_config.description,
         # More info could be added, like the segmentation (as png mask),
         # captions, person key-points. For caption encoding, it would probably
         # be better to have a separate class CocoCaption2014 to avoid poluting
         # the main class with builder config for each encoder.
-        features=tfds.features.FeaturesDict({
-            # Images can have variable shape
-            "image": tfds.features.Image(encoding_format="jpeg"),
-            "image/filename": tfds.features.Text(),
-            "objects": tfds.features.Sequence({
-                "bbox": tfds.features.BBoxFeature(),
-                # Coco has 91 categories but only 80 are present in the dataset
-                "label": tfds.features.ClassLabel(num_classes=80),
-                "is_crowd": tf.bool,
-            }),
-        }),
-        urls=["http://cocodataset.org/#home"],
+        features=tfds.features.FeaturesDict(features),
+        urls=['http://cocodataset.org/#home'],
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    root_url = "http://images.cocodataset.org/"
-    urls = {
-        # Train/validation set
-        "train_images": "zips/train2014.zip",
-        "val_images": "zips/val2014.zip",
-        "trainval_annotations": "annotations/annotations_trainval2014.zip",
-        # Testing set (no annotations) (2014)
-        "test_images": "zips/test2014.zip",
-        "test_annotations": "annotations/image_info_test2014.zip",
-        # Testing set (no annotations) (2015)
-        "test2015_images": "zips/test2015.zip",
-        "test2015_annotations": "annotations/image_info_test2015.zip",
-    }
+
+    # Merge urls from all splits together
+    urls = {}
+    for split in self.builder_config.splits:
+      urls['{}_images'.format(split.name)] = 'zips/{}.zip'.format(split.images)
+      urls['{}_annotations'.format(split.name)] = 'annotations/{}.zip'.format(
+          split.annotations)
+
+    # DownloadManager memoize the url, so duplicate urls will only be downloaded
+    # once.
+    root_url = 'http://images.cocodataset.org/'
     extracted_paths = dl_manager.download_and_extract({
         key: root_url + url for key, url in urls.items()
     })
 
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            num_shards=10,
-            gen_kwargs=dict(
-                image_dir=extracted_paths["train_images"],
-                annotation_dir=extracted_paths["trainval_annotations"],
-                split_type="train2014",
-            )),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            num_shards=10,
-            gen_kwargs=dict(
-                image_dir=extracted_paths["val_images"],
-                annotation_dir=extracted_paths["trainval_annotations"],
-                split_type="val2014",
-            )),
-        # Warning: Testing split only contains the images without any annotation
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            num_shards=10,
-            gen_kwargs=dict(
-                image_dir=extracted_paths["test_images"],
-                annotation_dir=extracted_paths["test_annotations"],
-                split_type="test2014",
-                has_annotation=False,
-            )),
-        tfds.core.SplitGenerator(
-            name="test2015",
-            num_shards=10,
-            gen_kwargs=dict(
-                image_dir=extracted_paths["test2015_images"],
-                annotation_dir=extracted_paths["test2015_annotations"],
-                split_type="test2015",
-                has_annotation=False,
-            )),
-    ]
+    splits = []
+    for split in self.builder_config.splits:
+      image_dir = extracted_paths['{}_images'.format(split.name)]
+      annotations_dir = extracted_paths['{}_annotations'.format(split.name)]
+      if self.builder_config.has_panoptic:
+        panoptic_image_zip_path = os.path.join(
+            annotations_dir,
+            'annotations',
+            'panoptic_{}.zip'.format(split.images)
+        )
+        panoptic_dir = dl_manager.extract(panoptic_image_zip_path)
+        panoptic_dir = os.path.join(
+            panoptic_dir, 'panoptic_{}'.format(split.images))
+      else:
+        panoptic_dir = None
+      splits.append(tfds.core.SplitGenerator(
+          name=split.name,
+          gen_kwargs=dict(
+              image_dir=image_dir,
+              annotation_dir=annotations_dir,
+              split_name=split.images,
+              annotation_type=split.annotation_type,
+              panoptic_dir=panoptic_dir,
+          ),
+      ))
+    return splits
 
   def _generate_examples(
-      self, image_dir, annotation_dir, split_type, has_annotation=True):
+      self,
+      image_dir,
+      annotation_dir,
+      split_name,
+      annotation_type,
+      panoptic_dir):
     """Generate examples as dicts.
 
     Args:
       image_dir: `str`, directory containing the images
-      annotation_dir: `str`, directory containing
-      split_type: `str`, <split_name><year> (ex: train2014)
-      has_annotation: `bool`, when False (for the testing set), the annotations
-        are not recorded
+      annotation_dir: `str`, directory containing annotations
+      split_name: `str`, <split_name><year> (ex: train2014, val2017)
+      annotation_type: `AnnotationType`, the annotation format (NONE, BBOXES,
+        PANOPTIC)
+      panoptic_dir: If annotation_type is PANOPTIC, contains the panoptic
+        image directory
 
     Yields:
-      Generator yielding the next samples
+      example key and data
     """
-    if has_annotation:
-      instance_filename = "instances_{}.json"
-    else:
-      instance_filename = "image_info_{}.json"
 
-    # Load the label names and images
+    if annotation_type == AnnotationType.BBOXES:
+      instance_filename = 'instances_{}.json'
+    elif annotation_type == AnnotationType.PANOPTIC:
+      instance_filename = 'panoptic_{}.json'
+    elif annotation_type == AnnotationType.NONE:  # No annotation for test sets
+      instance_filename = 'image_info_{}.json'
+
+    # Load the annotations (label names, images metadata,...)
     instance_path = os.path.join(
         annotation_dir,
-        "annotations",
-        instance_filename.format(split_type),
+        'annotations',
+        instance_filename.format(split_name),
     )
-    coco_annotation = CocoAnnotation(instance_path)
+    coco_annotation = ANNOTATION_CLS[annotation_type](instance_path)
     # Each category is a dict:
     # {
     #    'id': 51,  # From 1-91, some entry missing
@@ -190,9 +318,9 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
     # Each image is a dict:
     # {
     #     'id': 262145,
-    #     'file_name': 'COCO_train2014_000000262145.jpg'
+    #     'file_name': 'COCO_train2017_000000262145.jpg'
     #     'flickr_url': 'http://farm8.staticflickr.com/7187/xyz.jpg',
-    #     'coco_url': 'http://images.cocodataset.org/train2014/xyz.jpg',
+    #     'coco_url': 'http://images.cocodataset.org/train2017/xyz.jpg',
     #     'license': 2,
     #     'date_captured': '2013-11-20 02:07:55',
     #     'height': 427,
@@ -204,16 +332,20 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
     # and 'supercategory' (in addition to 'name')
     # Warning: As Coco only use 80 out of the 91 labels, the c['id'] and
     # dataset names ids won't match.
-    self.info.features["objects"]["label"].names = [
-        c["name"] for c in categories
+    if self.builder_config.has_panoptic:
+      objects_key = 'panoptic_objects'
+    else:
+      objects_key = 'objects'
+    self.info.features[objects_key]['label'].names = [
+        c['name'] for c in categories
     ]
     # TODO(b/121375022): Conversion should be done by ClassLabel
-    categories_id2name = {c["id"]: c["name"] for c in categories}
+    categories_id2name = {c['id']: c['name'] for c in categories}
 
     # Iterate over all images
     annotation_skipped = 0
-    for image_info in sorted(images, key=lambda x: x["id"]):
-      if has_annotation:
+    for image_info in sorted(images, key=lambda x: x['id']):
+      if annotation_type == AnnotationType.BBOXES:
         # Each instance annotation is a dict:
         # {
         #     'iscrowd': 0,
@@ -224,7 +356,26 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
         #     'area': 54652.9556,
         #     'id': 86,
         # }
-        instances = coco_annotation.get_annotations(img_id=image_info["id"])
+        instances = coco_annotation.get_annotations(img_id=image_info['id'])
+      elif annotation_type == AnnotationType.PANOPTIC:
+        # Each panoptic annotation is a dict:
+        # {
+        #     'file_name': '000000037777.png',
+        #     'image_id': 37777,
+        #     'segments_info': [
+        #         {
+        #             'area': 353,
+        #             'category_id': 52,
+        #             'iscrowd': 0,
+        #             'id': 6202563,
+        #             'bbox': [221, 179, 37, 27],
+        #         },
+        #         ...
+        #     ]
+        # }
+        panoptic_annotation = coco_annotation.get_annotations(
+            img_id=image_info['id'])
+        instances = panoptic_annotation['segments_info']
       else:
         instances = []  # No annotations
 
@@ -235,28 +386,35 @@ class Coco2014(tfds.core.GeneratorBasedBuilder):
         # pylint: disable=cell-var-from-loop
         # build_bbox is only used within the loop so it is ok to use image_info
         return tfds.features.BBox(
-            ymin=y / image_info["height"],
-            xmin=x / image_info["width"],
-            ymax=(y + height) / image_info["height"],
-            xmax=(x + width) / image_info["width"],
+            ymin=y / image_info['height'],
+            xmin=x / image_info['width'],
+            ymax=(y + height) / image_info['height'],
+            xmax=(x + width) / image_info['width'],
         )
         # pylint: enable=cell-var-from-loop
 
-      record = {
-          "image": os.path.join(image_dir, split_type, image_info["file_name"]),
-          "image/filename": image_info["file_name"],
-          "objects": [{   # pylint: disable=g-complex-comprehension
-              "bbox": build_bbox(*instance_info["bbox"]),
-              "label": categories_id2name[instance_info["category_id"]],
-              "is_crowd": bool(instance_info["iscrowd"]),
-          } for instance_info in instances],
+      example = {
+          'image': os.path.join(image_dir, split_name, image_info['file_name']),
+          'image/filename': image_info['file_name'],
+          'image/id': image_info['id'],
+          objects_key: [{   # pylint: disable=g-complex-comprehension
+              'id': instance['id'],
+              'area': instance['area'],
+              'bbox': build_bbox(*instance['bbox']),
+              'label': categories_id2name[instance['category_id']],
+              'is_crowd': bool(instance['iscrowd']),
+          } for instance in instances]
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield image_info["file_name"], record
-      else:
-        yield record
+      if self.builder_config.has_panoptic:
+        panoptic_filename = panoptic_annotation['file_name']
+        panoptic_image_path = os.path.join(panoptic_dir, panoptic_filename)
+        example['panoptic_image'] = panoptic_image_path
+        example['panoptic_image/filename'] = panoptic_filename
+
+      yield image_info['file_name'], example
+
     logging.info(
-        "%d/%d images do not contains any annotations",
+        '%d/%d images do not contains any annotations',
         annotation_skipped,
         len(images),
     )
@@ -266,34 +424,61 @@ class CocoAnnotation(object):
   """Coco annotation helper class."""
 
   def __init__(self, annotation_path):
-
     with tf.io.gfile.GFile(annotation_path) as f:
       data = json.load(f)
     self._data = data
 
-    self._img_id2annotations = {}
-
-    # Get the annotations associated with an image
-    if "annotations" in data:  # Testing set don't has any annotations
-      img_id2annotations = collections.defaultdict(list)
-      for a in data["annotations"]:
-        img_id2annotations[a["image_id"]].append(a)
-      self._img_id2annotations = {
-          k: list(sorted(v, key=lambda a: a["id"]))
-          for k, v in img_id2annotations.items()
-      }
-
   @property
   def categories(self):
     """Return the category dicts, as sorted in the file."""
-    return self._data["categories"]
+    return self._data['categories']
 
   @property
   def images(self):
     """Return the image dicts, as sorted in the file."""
-    return self._data["images"]
+    return self._data['images']
+
+  def get_annotations(self, img_id):
+    """Return all annotations associated with the image id string."""
+    raise NotImplementedError  # AnotationType.NONE don't have annotations
+
+
+class CocoAnnotationBBoxes(CocoAnnotation):
+  """Coco annotation helper class."""
+
+  def __init__(self, annotation_path):
+    super(CocoAnnotationBBoxes, self).__init__(annotation_path)
+
+    img_id2annotations = collections.defaultdict(list)
+    for a in self._data['annotations']:
+      img_id2annotations[a['image_id']].append(a)
+    self._img_id2annotations = {
+        k: list(sorted(v, key=lambda a: a['id']))
+        for k, v in img_id2annotations.items()
+    }
 
   def get_annotations(self, img_id):
     """Return all annotations associated with the image id string."""
     # Some images don't have any annotations. Return empty list instead.
     return self._img_id2annotations.get(img_id, [])
+
+
+class CocoAnnotationPanoptic(CocoAnnotation):
+  """Coco annotation helper class."""
+
+  def __init__(self, annotation_path):
+    super(CocoAnnotationPanoptic, self).__init__(annotation_path)
+    self._img_id2annotations = {
+        a['image_id']: a for a in self._data['annotations']
+    }
+
+  def get_annotations(self, img_id):
+    """Return all annotations associated with the image id string."""
+    return self._img_id2annotations[img_id]
+
+
+ANNOTATION_CLS = {
+    AnnotationType.NONE: CocoAnnotation,
+    AnnotationType.BBOXES: CocoAnnotationBBoxes,
+    AnnotationType.PANOPTIC: CocoAnnotationPanoptic,
+}

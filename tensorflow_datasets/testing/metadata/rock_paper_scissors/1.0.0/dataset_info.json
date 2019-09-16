@@ -1,0 +1,103 @@
+{
+  "citation": "@ONLINE {rps,\nauthor = \"Laurence Moroney\",\ntitle = \"Rock, Paper, Scissors Dataset\",\nmonth = \"feb\",\nyear = \"2019\",\nurl = \"http://laurencemoroney.com/rock-paper-scissors-dataset\"\n}\n", 
+  "description": "Images of hands playing rock, paper, scissor game.", 
+  "downloadChecksums": {
+    "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/rps-test-set.zip": "c27ab9fa43ce40b2e453de711365b477f4424586edf0388116674fd320f07503", 
+    "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/rps.zip": "c2403444395842ad04c53612bad54b574443eae17a0723117a2ff87b9d72194f"
+  }, 
+  "location": {
+    "urls": [
+      "http://laurencemoroney.com/rock-paper-scissors-dataset"
+    ]
+  }, 
+  "name": "rock_paper_scissors", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "300"
+            }, 
+            {
+              "size": "300"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "230198979", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "372"
+              }, 
+              "max": 255.0, 
+              "min": 5.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "372"
+              }, 
+              "max": 2.0
+            }
+          }
+        ], 
+        "numExamples": "372"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2520"
+              }, 
+              "max": 255.0, 
+              "min": 3.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2520"
+              }, 
+              "max": 2.0
+            }
+          }
+        ], 
+        "numExamples": "2520"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

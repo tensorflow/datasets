@@ -72,12 +72,14 @@ def _load_tif(path):
 class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
   """Biological 8-class classification problem."""
   URL = _URL
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.0.1"),
+      tfds.core.Version("2.0.0"),
+      tfds.core.Version("1.0.0"),
   ]
   # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -120,21 +122,20 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
             "label": class_name,
             "filename": fn,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield "%s/%s" % (class_name, fn), record
-        else:
-          yield record
+        yield "%s/%s" % (class_name, fn), record
 
 
 class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
   """10 Large 5000 x 5000 colorectal histology images without labels."""
   URL = _URL
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.0.1"),
+      tfds.core.Version("2.0.0"),
+      tfds.core.Version("1.0.0"),
   ]
   # Version history:
+  # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -165,8 +166,5 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
     for fn in tf.io.gfile.listdir(folder):
       image = _load_tif(os.path.join(folder, fn))
       record = dict(image=image, filename=fn)
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fn, record
-      else:
-        yield record
+      yield fn, record
 

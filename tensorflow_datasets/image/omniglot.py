@@ -58,12 +58,14 @@ _NUM_ALPHABETS = 50
 class Omniglot(tfds.core.GeneratorBasedBuilder):
   """Omniglot dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version(
+      "1.0.0", experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version("3.0.0"),
+      tfds.core.Version("2.0.0"),
   ]
   # Version history:
+  # 3.0.0: S3 with new hashing function (different shuffle).
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
@@ -129,10 +131,7 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
           "alphabet_char_id": alphabet_char_id,
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield image_id, record
-      else:
-        yield record
+      yield image_id, record
 
 
 def _walk_omniglot_dir(directory):

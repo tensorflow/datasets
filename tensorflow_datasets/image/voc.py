@@ -26,29 +26,31 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 
-_VOC2007_CITATION = """\
-@misc{pascal-voc-2007,
-  author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
-  title = "The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2007 {(VOC2007)} {R}esults",
-  howpublished = "http://www.pascal-network.org/challenges/VOC/voc2007/workshop/index.html"}
+_VOC_CITATION = """\
+@misc{{pascal-voc-{year},
+	author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
+	title = "The {{PASCAL}} {{V}}isual {{O}}bject {{C}}lasses {{C}}hallenge 2012 {{(VOC{year})}} {{R}}esults",
+	howpublished = "http://www.pascal-network.org/challenges/VOC/voc{year}/workshop/index.html"}}
 """
-_VOC2007_DESCRIPTION = """\
+_VOC_DESCRIPTION = """\
 This dataset contains the data from the PASCAL Visual Object Classes Challenge
-2007, a.k.a. VOC2007, corresponding to the Classification and Detection
+{year}, a.k.a. VOC{year}, corresponding to the Classification and Detection
 competitions.
-A total of 9,963 images are included in this dataset, where each image contains
-a set of objects, out of 20 different classes, making a total of 24,640
-annotated objects.
+A total of {num_images} images are included in this dataset, where each image
+contains a set of objects, out of 20 different classes, making a total of
+{num_objects} annotated objects.
 In the Classification competition, the goal is to predict the set of labels
 contained in the image, while in the Detection competition the goal is to
 predict the bounding box and label of each individual object.
+WARNING: As per the official dataset, the test set of VOC2012 does not contains
+annotations.
 """
-_VOC2007_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc2007/"
+_VOC_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
 # Original site, it is down very often.
-# _VOC2007_DATA_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc2007/"
+# _VOC_DATA_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
 # Data mirror:
-_VOC2007_DATA_URL = "http://pjreddie.com/media/files/"
-_VOC2007_LABELS = (
+_VOC_DATA_URL = "http://pjreddie.com/media/files/"
+_VOC_LABELS = (
     "aeroplane",
     "bicycle",
     "bird",
@@ -70,7 +72,7 @@ _VOC2007_LABELS = (
     "train",
     "tvmonitor",
 )
-_VOC2007_POSES = (
+_VOC_POSES = (
     "frontal",
     "rear",
     "left",
@@ -110,83 +112,121 @@ def _get_example_objects(annon_filepath):
       }
 
 
-class Voc2007(tfds.core.GeneratorBasedBuilder):
-  """Pascal VOC 2007."""
+class VocConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for Voc."""
 
-  VERSION = tfds.core.Version("1.0.0")
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+  def __init__(
+      self, year=None, filenames=None, has_test_annotations=True, **kwargs):
+    self.year = year
+    self.filenames = filenames
+    self.has_test_annotations = has_test_annotations
+    super(VocConfig, self).__init__(
+        name=year,
+        # Version history:
+        # 4.0.0: Added BuildConfig and 2012 version support, deprecate Voc2007.
+        # 3.0.0: S3 with new hashing function (different shuffle).
+        # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+        version=tfds.core.Version("4.0.0"),
+        **kwargs)
+
+
+class Voc(tfds.core.GeneratorBasedBuilder):
+  """Pascal VOC 2007 or 2012."""
+
+  BUILDER_CONFIGS = [
+      VocConfig(
+          year="2007",
+          description=_VOC_DESCRIPTION.format(
+              year=2007, num_images=9963, num_objects=24640),
+          filenames={
+              "trainval": "VOCtrainval_06-Nov-2007.tar",
+              "test": "VOCtest_06-Nov-2007.tar",
+          },
+          has_test_annotations=True,
+      ),
+      VocConfig(
+          year="2012",
+          description=_VOC_DESCRIPTION.format(
+              year=2007, num_images=11540, num_objects=27450),
+          filenames={
+              "trainval": "VOCtrainval_11-May-2012.tar",
+              "test": "VOC2012test.tar",
+          },
+          has_test_annotations=False,
+      ),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_VOC2007_DESCRIPTION,
+        description=self.builder_config.description,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),
             "objects": tfds.features.Sequence({
-                "label": tfds.features.ClassLabel(names=_VOC2007_LABELS),
+                "label": tfds.features.ClassLabel(names=_VOC_LABELS),
                 "bbox": tfds.features.BBoxFeature(),
-                "pose": tfds.features.ClassLabel(names=_VOC2007_POSES),
+                "pose": tfds.features.ClassLabel(names=_VOC_POSES),
                 "is_truncated": tf.bool,
                 "is_difficult": tf.bool,
             }),
             "labels": tfds.features.Sequence(
-                tfds.features.ClassLabel(names=_VOC2007_LABELS)),
+                tfds.features.ClassLabel(names=_VOC_LABELS)),
             "labels_no_difficult": tfds.features.Sequence(
-                tfds.features.ClassLabel(names=_VOC2007_LABELS)),
+                tfds.features.ClassLabel(names=_VOC_LABELS)),
         }),
-        urls=[_VOC2007_URL],
-        citation=_VOC2007_CITATION)
+        urls=[_VOC_URL.format(year=self.builder_config.year)],
+        citation=_VOC_CITATION.format(year=self.builder_config.year),
+    )
 
   def _split_generators(self, dl_manager):
-    trainval_path = dl_manager.download_and_extract(
-        os.path.join(_VOC2007_DATA_URL, "VOCtrainval_06-Nov-2007.tar"))
-    test_path = dl_manager.download_and_extract(
-        os.path.join(_VOC2007_DATA_URL, "VOCtest_06-Nov-2007.tar"))
+    paths = dl_manager.download_and_extract({
+        k: os.path.join(_VOC_DATA_URL, v)
+        for k, v in self.builder_config.filenames.items()
+    })
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=1,
-            gen_kwargs=dict(data_path=test_path, set_name="test")),
+            gen_kwargs=dict(data_path=paths["test"], set_name="test")),
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
-            gen_kwargs=dict(data_path=trainval_path, set_name="train")),
+            gen_kwargs=dict(data_path=paths["trainval"], set_name="train")),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=1,
-            gen_kwargs=dict(data_path=trainval_path, set_name="val")),
+            gen_kwargs=dict(data_path=paths["trainval"], set_name="val")),
     ]
 
   def _generate_examples(self, data_path, set_name):
-    set_filepath = os.path.join(
-        data_path, "VOCdevkit/VOC2007/ImageSets/Main/{}.txt".format(set_name))
+    """Yields examples."""
+    set_filepath = os.path.normpath(os.path.join(
+        data_path, "VOCdevkit/VOC{}/ImageSets/Main/{}.txt".format(
+            self.builder_config.year, set_name)))
+    load_annotations = (
+        self.builder_config.has_test_annotations or set_name != "test")
     with tf.io.gfile.GFile(set_filepath, "r") as f:
       for line in f:
         image_id = line.strip()
-        example = self._generate_example(data_path, image_id)
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield image_id, example
-        else:
-          yield example
+        example = self._generate_example(data_path, image_id, load_annotations)
+        yield image_id, example
 
-  def _generate_example(self, data_path, image_id):
-    """Yields examples."""
-    image_filepath = os.path.join(
-        data_path, "VOCdevkit/VOC2007/JPEGImages", "{}.jpg".format(image_id))
-    annon_filepath = os.path.join(
-        data_path, "VOCdevkit/VOC2007/Annotations", "{}.xml".format(image_id))
-    objects = list(_get_example_objects(annon_filepath))
-    # Use set() to remove duplicates
-    labels = sorted(set(obj["label"] for obj in objects))
-    labels_no_difficult = sorted(set(
-        obj["label"] for obj in objects if obj["is_difficult"] == 0
-    ))
+  def _generate_example(self, data_path, image_id, load_annotations):
+    image_filepath = os.path.normpath(os.path.join(
+        data_path, "VOCdevkit/VOC{}/JPEGImages/{}.jpg".format(
+            self.builder_config.year, image_id)))
+    annon_filepath = os.path.normpath(os.path.join(
+        data_path, "VOCdevkit/VOC{}/Annotations/{}.xml".format(
+            self.builder_config.year, image_id)))
+    if load_annotations:
+      objects = list(_get_example_objects(annon_filepath))
+      # Use set() to remove duplicates
+      labels = sorted(set(obj["label"] for obj in objects))
+      labels_no_difficult = sorted(set(
+          obj["label"] for obj in objects if obj["is_difficult"] == 0
+      ))
+    else:  # The test set of VOC2012 do not contain annotations
+      objects = []
+      labels = []
+      labels_no_difficult = []
     return {
         "image": image_filepath,
         "image/filename": image_id + ".jpg",

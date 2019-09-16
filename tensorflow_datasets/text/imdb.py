@@ -63,7 +63,13 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
         feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(IMDBReviewsConfig, self).__init__(**kwargs)
+    super(IMDBReviewsConfig, self).__init__(
+        version=tfds.core.Version(
+            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+        ],
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -73,12 +79,10 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       IMDBReviewsConfig(
           name="plain_text",
-          version="0.1.0",
           description="Plain text",
       ),
       IMDBReviewsConfig(
           name="bytes",
-          version="0.1.0",
           description=("Uses byte-level text encoding with "
                        "`tfds.features.text.ByteTextEncoder`"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -86,7 +90,6 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       ),
       IMDBReviewsConfig(
           name="subwords8k",
-          version="0.1.0",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -95,7 +98,6 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       ),
       IMDBReviewsConfig(
           name="subwords32k",
-          version="0.1.0",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
                        "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -119,8 +121,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, archive):
-    for ex in self._generate_examples(archive,
-                                      os.path.join("aclImdb", "train")):
+    for _, ex in self._generate_examples(
+        archive, os.path.join("aclImdb", "train")):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
@@ -162,7 +164,7 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
         continue
       text = imdb_f.read().strip()
       label = res.groupdict()["label"] if labeled else -1
-      yield {
+      yield path, {
           "text": text,
           "label": label,
       }

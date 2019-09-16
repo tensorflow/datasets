@@ -59,8 +59,10 @@
 <meta itemprop="property" content="assertMultiLineEqual"/>
 <meta itemprop="property" content="assertNDArrayNear"/>
 <meta itemprop="property" content="assertNear"/>
+<meta itemprop="property" content="assertNestedListAlmostEqual"/>
 <meta itemprop="property" content="assertNoCommonElements"/>
 <meta itemprop="property" content="assertNotAllClose"/>
+<meta itemprop="property" content="assertNotAllEqual"/>
 <meta itemprop="property" content="assertNotAlmostEqual"/>
 <meta itemprop="property" content="assertNotAlmostEquals"/>
 <meta itemprop="property" content="assertNotEmpty"/>
@@ -74,6 +76,8 @@
 <meta itemprop="property" content="assertNotStartsWith"/>
 <meta itemprop="property" content="assertProtoEquals"/>
 <meta itemprop="property" content="assertProtoEqualsVersion"/>
+<meta itemprop="property" content="assertRaggedAlmostEqual"/>
+<meta itemprop="property" content="assertRaggedEqual"/>
 <meta itemprop="property" content="assertRaises"/>
 <meta itemprop="property" content="assertRaisesOpError"/>
 <meta itemprop="property" content="assertRaisesRegex"/>
@@ -106,6 +110,7 @@
 <meta itemprop="property" content="debug"/>
 <meta itemprop="property" content="defaultTestResult"/>
 <meta itemprop="property" content="doCleanups"/>
+<meta itemprop="property" content="eval_to_list"/>
 <meta itemprop="property" content="evaluate"/>
 <meta itemprop="property" content="fail"/>
 <meta itemprop="property" content="failIf"/>
@@ -139,13 +144,17 @@
 
 # tfds.testing.FeatureExpectationsTestCase
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
 ## Class `FeatureExpectationsTestCase`
 
 Tests FeatureExpectations with full encode-decode.
 
 Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)
-
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -309,22 +318,22 @@ one of the arguments is of type float16.
 
 <h3 id="assertAllEqual"><code>assertAllEqual</code></h3>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
+```python
 assertAllEqual(
-    *args,
-    **kwds
+    d1,
+    d2
 )
 ```
 
-Asserts that two numpy arrays or Tensors have the same values.
-
-#### Args:
-
-* <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
-* <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
-* <b>`msg`</b>: Optional message to report on failure.
+Same as assertAllEqual but with RaggedTensor support.
 
 <h3 id="assertAllEqualNested"><code>assertAllEqualNested</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
 
 ```python
 assertAllEqualNested(
@@ -782,8 +791,9 @@ Asserts that an object has zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertEndsWith"><code>assertEndsWith</code></h3>
 
@@ -840,6 +850,9 @@ Check that the expression is false.
 
 <h3 id="assertFeature"><code>assertFeature</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
 ``` python
 assertFeature(
     *args,
@@ -850,6 +863,9 @@ assertFeature(
 Run the decorated test method.
 
 <h3 id="assertFeatureTest"><code>assertFeatureTest</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
 
 ``` python
 assertFeatureTest(
@@ -1013,9 +1029,10 @@ Asserts that an object has the expected length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`expected_len`</b>: The expected length of the container.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`expected_len`</b>: The expected length of the container.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertLess"><code>assertLess</code></h3>
 
@@ -1121,6 +1138,20 @@ if not.
 * <b>`err`</b>: A float value.
 * <b>`msg`</b>: An optional string message to append to the failure message.
 
+<h3 id="assertNestedListAlmostEqual"><code>assertNestedListAlmostEqual</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
+source</a>
+
+```python
+assertNestedListAlmostEqual(
+    a,
+    b,
+    places=7,
+    context='value'
+)
+```
+
 <h3 id="assertNoCommonElements"><code>assertNoCommonElements</code></h3>
 
 ``` python
@@ -1154,6 +1185,23 @@ Assert that two numpy arrays, or Tensors, do not have near values.
 #### Raises:
 
 * <b>`AssertionError`</b>: If `a` and `b` are unexpectedly close at all elements.
+
+<h3 id="assertNotAllEqual"><code>assertNotAllEqual</code></h3>
+
+```python
+assertNotAllEqual(
+    *args,
+    **kwds
+)
+```
+
+Asserts that two numpy arrays or Tensors do not have the same values.
+
+#### Args:
+
+*   <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
+*   <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertNotAlmostEqual"><code>assertNotAlmostEqual</code></h3>
 
@@ -1212,8 +1260,9 @@ Asserts that an object has non-zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertNotEndsWith"><code>assertNotEndsWith</code></h3>
 
@@ -1353,6 +1402,33 @@ assertProtoEqualsVersion(
 )
 ```
 
+<h3 id="assertRaggedAlmostEqual"><code>assertRaggedAlmostEqual</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
+source</a>
+
+```python
+assertRaggedAlmostEqual(
+    a,
+    b,
+    places=7
+)
+```
+
+<h3 id="assertRaggedEqual"><code>assertRaggedEqual</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
+source</a>
+
+```python
+assertRaggedEqual(
+    a,
+    b
+)
+```
+
+Asserts that two potentially ragged tensors are equal.
+
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
 ``` python
@@ -1461,6 +1537,9 @@ A context manager if callable_obj is None. Otherwise, None.
 self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
 
 ``` python
 assertRaisesWithPredicateMatch(
@@ -1636,7 +1715,7 @@ comparing to zero, or by comparing that the difference between each value
 in the two sequences is more than the given delta.
 
 Note that decimal places (from zero) are usually not the same as significant
-digits (measured from the most signficant digit).
+digits (measured from the most significant digit).
 
 If the two sequences compare equal then they will automatically compare
 almost equal.
@@ -2093,6 +2172,15 @@ doCleanups()
 
 Execute all cleanup functions. Normally called for you after tearDown.
 
+<h3 id="eval_to_list"><code>eval_to_list</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
+source</a>
+
+```python
+eval_to_list(tensor)
+```
+
 <h3 id="evaluate"><code>evaluate</code></h3>
 
 ``` python
@@ -2310,11 +2398,17 @@ the graph building and execution code in a test case.
 
 <h3 id="setUp"><code>setUp</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ``` python
 setUp()
 ```
 
 <h3 id="setUpClass"><code>setUpClass</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
 
 ``` python
 setUpClass(cls)
