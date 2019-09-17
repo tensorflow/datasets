@@ -16,8 +16,10 @@ _URL = "http://spiechallenges.cloudapp.net/competitions/14#participate"
 # BibTeX citation
 _CITATION = """\
 @article{peikari2017automatic,
-  title={Automatic cellularity assessment from post-treated breast surgical specimens},
-  author={Peikari, Mohammad and Salama, Sherine and Nofech-Mozes, Sharon and Martel, Anne L},
+  title={Automatic cellularity assessment from \
+  post-treated breast surgical specimens},
+  author={Peikari, Mohammad and Salama, Sherine and \
+  Nofech-Mozes, Sharon and Martel, Anne L},
   journal={Cytometry Part A},
   volume={91},
   number={11},
@@ -29,11 +31,16 @@ _CITATION = """\
 
 
 _DESCRIPTION = """\
-The dataset's training/validation set consists of 2578 patches extracted from 96 breast cancer \
-whole slide images (WSI). Each patch is labelled by a tumor cellularity score. The testing set \
-contains 1121 patches from 25 WSIs. Labels for testing data are not provided by far. \
-The dataset can be used to develop an automated method for evaluating cancer cellularity from \
-histology patches extracted from WSIs. The method is aimed to increase reproducibility of cancer \
+The dataset's training/validation set consists of \
+2578 patches extracted from 96 breast cancer \
+whole slide images (WSI). Each patch is labelled \
+by a tumor cellularity score. The testing set \
+contains 1121 patches from 25 WSIs. Labels for \
+testing data are not provided by far. \
+The dataset can be used to develop an automated method \
+for evaluating cancer cellularity from \
+histology patches extracted from WSIs. The method \
+is aimed to increase reproducibility of cancer \
 cellularity scores and enhance tumor burden assessment.
 """
 
@@ -85,17 +92,21 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
-              "images_dir_path": os.path.join(extracted_path, "breastpathq/datasets/train"),
-              "labels": os.path.join(extracted_path, "breastpathq/datasets/train_labels.csv"),
+              "images_dir_path": os.path.join(extracted_path, \
+                "breastpathq/datasets/train"),
+              "labels": os.path.join(extracted_path, \
+                "breastpathq/datasets/train_labels.csv"),
             },
         ),
         tfds.core.SplitGenerator(
           name=tfds.Split.VALIDATION,
           gen_kwargs={
-            "images_dir_path": os.path.join(extracted_path, "breastpathq/datasets/validation"),
-            "labels": os.path.join(extracted_path, "breastpathq-test/val_labels.csv"),
+            "images_dir_path": os.path.join(extracted_path, \
+              "breastpathq/datasets/validation"),
+            "labels": os.path.join(extracted_path, \
+              "breastpathq-test/val_labels.csv"),
           }
-        ), 
+        ),
     ]
 
   def _generate_examples(self, images_dir_path, labels):
@@ -109,4 +120,3 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
             "image": _load_tif(os.path.join(images_dir_path, image_id+'.tif')),
             'label': row['y'],
         }
-
