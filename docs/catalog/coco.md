@@ -25,7 +25,7 @@ defines 200 classes but only uses 133.
 `coco` is configured with `tfds.image.coco.CocoConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `2014` (`v1.0.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
+*   `2014` (`v1.1.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
     detection, segmentation, and captioning dataset. This version contains
     images, bounding boxes " and labels for the 2014 version. Note:
 
@@ -36,7 +36,7 @@ configurations predefined (defaults to the first one):
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   `2017` (`v1.0.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
+*   `2017` (`v1.1.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
     detection, segmentation, and captioning dataset. This version contains
     images, bounding boxes " and labels for the 2017 version. Note:
 
@@ -47,7 +47,7 @@ configurations predefined (defaults to the first one):
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   `2017_panoptic` (`v1.0.0`) (`Size: 19.57 GiB`): COCO is a large-scale object
+*   `2017_panoptic` (`v1.1.0`) (`Size: 19.57 GiB`): COCO is a large-scale object
     detection, segmentation, and captioning dataset. This version contains
     images, bounding boxes " and labels for the 2017 version. Note:
 
@@ -68,6 +68,7 @@ FeaturesDict({
     'objects': Sequence({
         'area': Tensor(shape=(), dtype=tf.int64),
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': Tensor(shape=(), dtype=tf.int64),
         'is_crowd': Tensor(shape=(), dtype=tf.bool),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
     }),
@@ -84,6 +85,7 @@ FeaturesDict({
     'objects': Sequence({
         'area': Tensor(shape=(), dtype=tf.int64),
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': Tensor(shape=(), dtype=tf.int64),
         'is_crowd': Tensor(shape=(), dtype=tf.bool),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
     }),
@@ -102,6 +104,7 @@ FeaturesDict({
     'panoptic_objects': Sequence({
         'area': Tensor(shape=(), dtype=tf.int64),
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': Tensor(shape=(), dtype=tf.int64),
         'is_crowd': Tensor(shape=(), dtype=tf.bool),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=133),
     }),

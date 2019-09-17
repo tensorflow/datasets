@@ -28,7 +28,6 @@ locaization.
 *   Size: `2.63 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'color_params': Tensor(shape=(7,), dtype=tf.float32),
