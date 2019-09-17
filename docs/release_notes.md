@@ -10,4 +10,5 @@
     which will be stored/restored with the dataset. See `tfds.core.Metadata`.
 *   Better proxy support, possibility to add certificate
 *   Add `decoders` kwargs to override the default feature decoding
-    ([guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)).
+    ([guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md))
+*   Added `spine_web` dataset

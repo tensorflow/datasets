@@ -1,0 +1,4 @@
+https://spineweb.s3.amazonaws.com/test_angles.csv 2597 13f4546112efa6ee530bd693282272dc0c8864c3c0ed911e3d350beb8904409e
+https://spineweb.s3.amazonaws.com/test_images.zip 18143018 dd36375b232dfba89eba553eefb2b0b3d89a8e68f09d4658f6bda86ddb55e7a5
+https://spineweb.s3.amazonaws.com/training_angles.csv 9726 e4da2cd827319aeaa32faefc57c63b0fdb798da443e42b87e796d14e62cbbcfd
+https://spineweb.s3.amazonaws.com/training_images.zip 57127425 d009602972ea69f16287ae60b207cce0843a38540df3d9d67e98108b4ec2e62c

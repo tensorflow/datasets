@@ -36,6 +36,8 @@ toc:
     title: cifar10
   - path: /datasets/catalog/cifar100
     title: cifar100
+  - path: /datasets/catalog/cifar10_1
+    title: cifar10_1
   - path: /datasets/catalog/cifar10_corrupted
     title: cifar10_corrupted
   - path: /datasets/catalog/clevr
@@ -44,8 +46,6 @@ toc:
     title: cmaterdb
   - path: /datasets/catalog/coco
     title: coco
-  - path: /datasets/catalog/coco2014
-    title: coco2014
   - path: /datasets/catalog/coil100
     title: coil100
   - path: /datasets/catalog/colorectal_histology
@@ -140,8 +140,10 @@ toc:
     title: uc_merced
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
-  - path: /datasets/catalog/voc2007
-    title: voc2007
+  - path: /datasets/catalog/voc
+    title: voc
+  - path: /datasets/catalog/wider_face
+    title: wider_face
   title: Image
 - section:
   - path: /datasets/catalog/amazon_us_reviews
