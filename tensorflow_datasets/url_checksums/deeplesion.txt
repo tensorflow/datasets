@@ -1,3 +1,4 @@
-# TODO(deeplesion): If your dataset downloads files, then the checksums will be
-# automatically added here when running the download_and_prepare script
-# with --register_checksums.
+https://nihcc.box.com/shared/static/l9e1ys5e48qq8s409ua3uv6uwuko0y5c.zip 4295332898 e5acf2b27d107aed8b886669c46b4bec6847962a0a1fb783d8b5b789ba7006ee
+https://nihcc.box.com/shared/static/q0f8gy79q2spw96hs6o4jjjfsrg17t55.txt 2911 e6e2e0a4c7c1a4c88f8b6612ebead29500fd7d3c27b0eeeef178b75949dd4fff
+https://nihcc.box.com/shared/static/sp5y2k799v4x1x77f7w1aqp26uyfq7qz.zip 4302204610 e056e1ccaa0dffb2cdf5b92cf32b2e9f00194dfac5cc8e2c3e2ee31a52bbafe8
+https://raw.githubusercontent.com/anir16293/Deep-Lesion/master/DL_info.csv 8479888 a8f57b4b1164c9ed770b5add2920d5f4c5f8defa0df467e12f6a51951e38995c

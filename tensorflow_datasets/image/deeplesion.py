@@ -45,7 +45,7 @@ _MD5_URL = 'https://nihcc.box.com/shared/static/q0f8gy79q2spw96hs6o4jjjfsrg17t55
 
 _IMAGES_URL = [
     'https://nihcc.box.com/shared/static/sp5y2k799v4x1x77f7w1aqp26uyfq7qz.zip',
-    # 'https://nihcc.box.com/shared/static/l9e1ys5e48qq8s409ua3uv6uwuko0y5c.zip',
+    'https://nihcc.box.com/shared/static/l9e1ys5e48qq8s409ua3uv6uwuko0y5c.zip',
     # 'https://nihcc.box.com/shared/static/48jotosvbrw0rlke4u88tzadmabcp72r.zip',
     # 'https://nihcc.box.com/shared/static/xa3rjr6nzej6yfgzj9z6hf97ljpq1wkm.zip',
     # 'https://nihcc.box.com/shared/static/58ix4lxaadjxvjzq4am5ehpzhdvzl7os.zip',
@@ -136,14 +136,14 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
+    dl_manager._register_checksums = True 
+    # download csv file, 
+    csv_path = dl_manager.download([_CSV_URL])
+    # download image files
+    extracted_path = dl_manager.download_and_extract(_IMAGES_URL)
+    assert(len(extracted_path) == 56), "zip_files incomplete"
 
-    download_path = dl_manager.download([*_IMAGES_URL, _CSV_URL, _MD5_URL])
-    extracted_path = dl_manager.download_and_extract([*_IMAGES_URL])
     
-
-    # extracted_paths = dl_manager.download_and_extract({
-    #     key: root_url + url for key, url in urls.items()
-    # })
 
     # splits = []
     # for split in self.builder_config.splits:
@@ -172,6 +172,19 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
+            num_shards=10,
+            # These kwargs will be passed to _generate_examples
+            gen_kwargs={},
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            num_shards=1,
+            # These kwargs will be passed to _generate_examples
+            gen_kwargs={},
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            num_shards=1,
             # These kwargs will be passed to _generate_examples
             gen_kwargs={},
         ),
