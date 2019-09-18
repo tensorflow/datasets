@@ -267,6 +267,9 @@ cnn_dailymail/plain_text/0.0.2
 cnn_dailymail/plain_text/1.0.0
 cnn_dailymail/subwords32k/0.0.2
 cnn_dailymail/subwords32k/1.0.0
+coco/2014/1.1.0
+coco/2017/1.1.0
+coco/2017_panoptic/1.1.0
 coco2014/1.0.0
 coco2014/2.0.0
 coco2014/3.0.0
@@ -799,6 +802,7 @@ visual_domain_decathlon/ucf101/1.1.0
 visual_domain_decathlon/vgg-flowers/1.1.0
 voc/2007/4.0.0
 voc/2012/4.0.0
+wider_face/0.1.0
 wikipedia/20190301.aa/0.0.3
 wikipedia/20190301.ab/0.0.3
 wikipedia/20190301.ace/0.0.3

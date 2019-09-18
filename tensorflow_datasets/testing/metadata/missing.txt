@@ -49,9 +49,6 @@ amazon_us_reviews/Wireless_v1_00/0.1.0
 bigearthnet/all/0.0.2
 bigearthnet/rgb/0.0.2
 caltech_birds2011/0.1.0
-coco/2014/1.1.0
-coco/2017/1.1.0
-coco/2017_panoptic/1.1.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 diabetic_retinopathy_detection/btgraham-300/2.0.0
 glue/rte/1.0.0
@@ -107,5 +104,4 @@ so2sat/all/2.0.0
 so2sat/rgb/0.0.1
 so2sat/rgb/1.0.0
 so2sat/rgb/2.0.0
-wider_face/0.1.0
 wmt_translate/None
