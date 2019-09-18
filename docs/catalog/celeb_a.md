@@ -3,12 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="celeb_a" />
-  <meta itemprop="description" content="CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including
- - 10,177 number of identities,
- - 202,599 number of face images, and
- - 5 landmark locations, 40 binary attributes annotations per image.
-
-The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization." />
+  <meta itemprop="description" content="CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including&#10; - 10,177 number of identities,&#10; - 202,599 number of face images, and&#10; - 5 landmark locations, 40 binary attributes annotations per image.&#10;&#10;The dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/celeb_a" />
   <meta itemprop="sameAs" content="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html" />
 </div>
@@ -34,7 +29,6 @@ computer vision tasks: face attribute recognition, face detection, and landmark
 *   Size: `1.38 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'attributes': FeaturesDict({

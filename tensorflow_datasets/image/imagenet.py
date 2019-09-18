@@ -35,6 +35,9 @@ ImageNet, we aim to provide on average 1000 images to illustrate each synset.
 Images of each concept are quality-controlled and human-annotated. In its
 completion, we hope ImageNet will offer tens of millions of cleanly sorted
 images for most of the concepts in the WordNet hierarchy.
+
+Note that labels were never publicly released for the test set, so we only
+include splits for the training and validation sets here.
 '''
 
 # Web-site is asking to cite paper from 2015.
@@ -145,6 +148,8 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     train_path, val_path = dl_manager.download([
         '%s/ILSVRC2012_img_train.tar' % _URL_PREFIX,
         '%s/ILSVRC2012_img_val.tar' % _URL_PREFIX,
+        # We don't import the original test split, as it doesn't include labels.
+        # These were never publicly released.
     ])
     if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
       msg = 'You must download the dataset files manually and place them in: '

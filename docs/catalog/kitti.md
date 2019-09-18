@@ -3,13 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="kitti" />
-  <meta itemprop="description" content="Kitti contains a suite of vision tasks built using an autonomous driving
-platform. The full benchmark contains many tasks such as stereo, optical flow,
-visual odometry, etc. This dataset contains the object detection dataset,
-including the monocular images and bounding boxes. The dataset contains 7481
-training images annotated with 3D bounding boxes. A full description of the
-annotations can be found in the readme of the object development kit readme on
-the Kitti homepage." />
+  <meta itemprop="description" content="Kitti contains a suite of vision tasks built using an autonomous driving&#10;platform. The full benchmark contains many tasks such as stereo, optical flow,&#10;visual odometry, etc. This dataset contains the object detection dataset,&#10;including the monocular images and bounding boxes. The dataset contains 7481&#10;training images annotated with 3D bounding boxes. A full description of the&#10;annotations can be found in the readme of the object development kit readme on&#10;the Kitti homepage.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/kitti" />
   <meta itemprop="sameAs" content="http://www.cvlibs.net/datasets/kitti/" />
 </div>

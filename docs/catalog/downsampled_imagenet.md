@@ -3,8 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="downsampled_imagenet" />
-  <meta itemprop="description" content="Dataset with images of 2 resolutions (see config name for information on the resolution).
-It is used for density estimation and generative modeling experiments." />
+  <meta itemprop="description" content="Dataset with images of 2 resolutions (see config name for information on the resolution).&#10;It is used for density estimation and generative modeling experiments.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/downsampled_imagenet" />
   <meta itemprop="sameAs" content="http://image-net.org/small/download.php" />
 </div>
@@ -59,7 +58,25 @@ VALIDATION | 49,999
 *   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `None`
+
+## Citation
+```
+@article{DBLP:journals/corr/OordKK16,
+  author    = {A{"{a}}ron van den Oord and
+               Nal Kalchbrenner and
+               Koray Kavukcuoglu},
+  title     = {Pixel Recurrent Neural Networks},
+  journal   = {CoRR},
+  volume    = {abs/1601.06759},
+  year      = {2016},
+  url       = {http://arxiv.org/abs/1601.06759},
+  archivePrefix = {arXiv},
+  eprint    = {1601.06759},
+  timestamp = {Mon, 13 Aug 2018 16:46:29 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/OordKK16},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
 
 --------------------------------------------------------------------------------

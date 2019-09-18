@@ -3,12 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="patch_camelyon" />
-  <meta itemprop="description" content="The PatchCamelyon benchmark is a new and challenging image classification
-dataset. It consists of 327.680 color images (96 x 96px) extracted from
-histopathologic scans of lymph node sections. Each image is annoted with a
-binary label indicating presence of metastatic tissue. PCam provides a new
-benchmark for machine learning models: bigger than CIFAR10, smaller than
-Imagenet, trainable on a single GPU." />
+  <meta itemprop="description" content="The PatchCamelyon benchmark is a new and challenging image classification&#10;dataset. It consists of 327.680 color images (96 x 96px) extracted from&#10;histopathologic scans of lymph node sections. Each image is annoted with a&#10;binary label indicating presence of metastatic tissue. PCam provides a new&#10;benchmark for machine learning models: bigger than CIFAR10, smaller than&#10;Imagenet, trainable on a single GPU.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/patch_camelyon" />
   <meta itemprop="sameAs" content="https://patchcamelyon.grand-challenge.org/" />
 </div>

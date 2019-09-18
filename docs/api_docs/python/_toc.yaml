@@ -158,6 +158,8 @@ toc:
       path: /datasets/api_docs/python/tfds/testing/FeatureExpectationsTestCase
     - title: make_tmp_dir
       path: /datasets/api_docs/python/tfds/testing/make_tmp_dir
+    - title: mock_data
+      path: /datasets/api_docs/python/tfds/testing/mock_data
     - title: mock_kaggle_api
       path: /datasets/api_docs/python/tfds/testing/mock_kaggle_api
     - title: rm_tmp_dir

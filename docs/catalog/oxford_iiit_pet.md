@@ -3,9 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="oxford_iiit_pet" />
-  <meta itemprop="description" content="The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200
-images for each class. The images have large variations in scale, pose and
-lighting. All images have an associated ground truth annotation of breed." />
+  <meta itemprop="description" content="The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200&#10;images for each class. The images have large variations in scale, pose and&#10;lighting. All images have an associated ground truth annotation of breed.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/oxford_iiit_pet" />
   <meta itemprop="sameAs" content="http://www.robots.ox.ac.uk/~vgg/data/pets/" />
 </div>

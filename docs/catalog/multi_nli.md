@@ -3,12 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="multi_nli" />
-  <meta itemprop="description" content="The Multi-Genre Natural Language Inference (MultiNLI) corpus is a
-crowd-sourced collection of 433k sentence pairs annotated with textual
-entailment information. The corpus is modeled on the SNLI corpus, but differs in
-that covers a range of genres of spoken and written text, and supports a
-distinctive cross-genre generalization evaluation. The corpus served as the
-basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen." />
+  <meta itemprop="description" content="The Multi-Genre Natural Language Inference (MultiNLI) corpus is a&#10;crowd-sourced collection of 433k sentence pairs annotated with textual&#10;entailment information. The corpus is modeled on the SNLI corpus, but differs in&#10;that covers a range of genres of spoken and written text, and supports a&#10;distinctive cross-genre generalization evaluation. The corpus served as the&#10;basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/multi_nli" />
   <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/multinli/" />
 </div>

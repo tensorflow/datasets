@@ -49,12 +49,18 @@ _DATA_URL_PATTERN = 'http://www.hlt.utdallas.edu/~vince/data/emnlp12/{}.c.txt'
 
 class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
   """The Definite Pronoun Resolution Dataset."""
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.0.1: Initial version.
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
           version=tfds.core.Version(
               '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-          description='Plain text import of the Definite Pronoun Resolution Dataset.',
+          supported_versions=[
+              tfds.core.Version('1.0.0'),
+          ],
+          description='Plain text import of the Definite Pronoun Resolution Dataset.',  # pylint: disable=line-too-long
       )
   ]
 
@@ -95,7 +101,9 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filepath):
     with tf.io.gfile.GFile(filepath) as f:
+      line_num = -1
       while True:
+        line_num += 1
         sentence = f.readline().strip()
         pronoun = f.readline().strip()
         candidates = [c.strip() for c in f.readline().strip().split(',')]
@@ -103,7 +111,7 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
         f.readline()
         if not sentence:
           break
-        yield {
+        yield line_num, {
             'sentence': sentence,
             'pronoun': pronoun,
             'candidates': candidates,

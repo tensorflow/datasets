@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="emnist" />
-  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset." />
+  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.&#10;&#10;Note: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/emnist" />
   <meta itemprop="sameAs" content="https://www.nist.gov/node/1298471/emnist-dataset" />
 </div>
@@ -13,6 +13,10 @@
 The EMNIST dataset is a set of handwritten character digits derived from the
 NIST Special Database 19 and converted to a 28x28 pixel image format and dataset
 structure that directly matches the MNIST dataset.
+
+Note: Like the original EMNIST data, images provided here are inverted
+horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
+`ds.map` to convert the images to a human-friendlier format.
 
 *   URL:
     [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)

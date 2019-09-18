@@ -176,7 +176,27 @@ TESTB  | 480
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
+
+## Citation
+```
+@article{DBLP:journals/corr/ZhuPIE17,
+  author    = {Jun{-}Yan Zhu and
+               Taesung Park and
+               Phillip Isola and
+               Alexei A. Efros},
+  title     = {Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial
+               Networks},
+  journal   = {CoRR},
+  volume    = {abs/1703.10593},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1703.10593},
+  archivePrefix = {arXiv},
+  eprint    = {1703.10593},
+  timestamp = {Mon, 13 Aug 2018 16:48:06 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuPIE17},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
 
 --------------------------------------------------------------------------------

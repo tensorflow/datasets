@@ -3,9 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="binarized_mnist" />
-  <meta itemprop="description" content="A specific binarization of the MNIST images originally used in
-(Salakhutdinov &amp; Murray, 2008). This dataset is frequently used to evaluate
-generative models of images, so labels are not provided." />
+  <meta itemprop="description" content="A specific binarization of the MNIST images originally used in&#10;(Salakhutdinov &amp; Murray, 2008). This dataset is frequently used to evaluate&#10;generative models of images, so labels are not provided.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/binarized_mnist" />
   <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/" />
 </div>

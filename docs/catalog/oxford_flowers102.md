@@ -3,14 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="oxford_flowers102" />
-  <meta itemprop="description" content="The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly occurring
-in the United Kingdom. Each class consists of between 40 and 258 images. The images have
-large scale, pose and light variations. In addition, there are categories that have large
-variations within the category and several very similar categories.
-
-The dataset is divided into a training set, a validation set and a test set.
-The training set and validation set each consist of 10 images per class (totalling 1030 images each).
-The test set consist of the remaining 6129 images (minimum 20 per class)." />
+  <meta itemprop="description" content="&#10;The Oxford Flowers 102 dataset is a consistent of 102 flower categories commonly occurring&#10;in the United Kingdom. Each class consists of between 40 and 258 images. The images have&#10;large scale, pose and light variations. In addition, there are categories that have large&#10;variations within the category and several very similar categories.&#10;&#10;The dataset is divided into a training set, a validation set and a test set.&#10;The training set and validation set each consist of 10 images per class (totalling 1030 images each).&#10;The test set consist of the remaining 6129 images (minimum 20 per class).&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/oxford_flowers102" />
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/data/flowers/102/" />
 </div>

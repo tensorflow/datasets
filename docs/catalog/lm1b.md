@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="lm1b" />
-  <meta itemprop="description" content="A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data." />
+  <meta itemprop="description" content="A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/lm1b" />
   <meta itemprop="sameAs" content="http://www.statmt.org/lm-benchmark/" />
 </div>

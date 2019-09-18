@@ -3,10 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="resisc45" />
-  <meta itemprop="description" content="RESISC45 dataset is a publicly available benchmark for Remote Sensing Image
-Scene Classification (RESISC), created by Northwestern Polytechnical University
-(NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700
-images in each class." />
+  <meta itemprop="description" content="RESISC45 dataset is a publicly available benchmark for Remote Sensing Image&#10;Scene Classification (RESISC), created by Northwestern Polytechnical University&#10;(NWPU). This dataset contains 31,500 images, covering 45 scene classes with 700&#10;images in each class." />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/resisc45" />
   <meta itemprop="sameAs" content="http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html" />
 </div>

@@ -3,12 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="cnn_dailymail" />
-  <meta itemprop="description" content="CNN/DailyMail non-anonymized summarization dataset.
-
-There are two features:
-  - article: text of news article, used as the document to be summarized
-  - highlights: joined text of highlights with &lt;s&gt; and &lt;/s&gt; around each
-    highlight, which is the target summary" />
+  <meta itemprop="description" content="CNN/DailyMail non-anonymized summarization dataset.&#10;&#10;There are two features:&#10;  - article: text of news article, used as the document to be summarized&#10;  - highlights: joined text of highlights with &lt;s&gt; and &lt;/s&gt; around each&#10;    highlight, which is the target summary&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cnn_dailymail" />
   <meta itemprop="sameAs" content="https://github.com/abisee/cnn-dailymail" />
 </div>

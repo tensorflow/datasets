@@ -1,5 +1,7 @@
 # All symbols in TensorFlow Datasets
 
+## Primary symbols
+
 *   <a href="./tfds.md"><code>tfds</code></a>
 *   <a href="./tfds/download/GenerateMode.md"><code>tfds.GenerateMode</code></a>
 *   <a href="./tfds/Split.md"><code>tfds.Split</code></a>
@@ -77,6 +79,7 @@
 *   <a href="./tfds/testing/TestCase.md"><code>tfds.testing.TestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.TestCase.failureException</code></a>
 *   <a href="./tfds/testing/make_tmp_dir.md"><code>tfds.testing.make_tmp_dir</code></a>
+*   <a href="./tfds/testing/mock_data.md"><code>tfds.testing.mock_data</code></a>
 *   <a href="./tfds/testing/mock_kaggle_api.md"><code>tfds.testing.mock_kaggle_api</code></a>
 *   <a href="./tfds/testing/rm_tmp_dir.md"><code>tfds.testing.rm_tmp_dir</code></a>
 *   <a href="./tfds/testing/run_in_graph_and_eager_modes.md"><code>tfds.testing.run_in_graph_and_eager_modes</code></a>

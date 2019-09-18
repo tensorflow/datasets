@@ -1,0 +1,217 @@
+{
+  "citation": "@misc{3dshapes18,\n  title={3D Shapes Dataset},\n  author={Burgess, Chris and Kim, Hyunjik},\n  howpublished={https://github.com/deepmind/3dshapes-dataset/},\n  year={2018}\n}\n", 
+  "description": "3dshapes is a dataset of 3D shapes procedurally generated from 6 ground truth\nindependent latent factors. These factors are *floor colour*, *wall colour*, *object colour*,\n*scale*, *shape* and *orientation*.\n\nAll possible combinations of these latents are present exactly once, generating N = 480000 total images.\n\n### Latent factor values\n\n*   floor hue: 10 values linearly spaced in [0, 1]\n*   wall hue: 10 values linearly spaced in [0, 1]\n*   object hue: 10 values linearly spaced in [0, 1]\n*   scale: 8 values linearly spaced in [0, 1]\n*   shape: 4 values in [0, 1, 2, 3]\n*   orientation: 15 values linearly spaced in [-30, 30]\n\nWe varied one latent at a time (starting from orientation, then shape, etc), and sequentially stored the images in fixed order in the `images` array. The corresponding values of the factors are stored in the same order in the `labels` array.\n", 
+  "location": {
+    "urls": [
+      "https://github.com/deepmind/3d-shapes"
+    ]
+  }, 
+  "name": "shapes3d", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_floor_hue", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_object_hue", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_orientation", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_scale", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_shape", 
+        "type": "INT"
+      }, 
+      {
+        "name": "label_wall_hue", 
+        "type": "INT"
+      }, 
+      {
+        "name": "value_floor_hue", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_object_hue", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_orientation", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_scale", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_shape", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "value_wall_hue", 
+        "type": "FLOAT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "267573662", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label_floor_hue", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 9.0
+            }
+          }, 
+          {
+            "name": "label_object_hue", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 9.0
+            }
+          }, 
+          {
+            "name": "label_orientation", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 14.0
+            }
+          }, 
+          {
+            "name": "label_scale", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 7.0
+            }
+          }, 
+          {
+            "name": "label_shape", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 3.0
+            }
+          }, 
+          {
+            "name": "label_wall_hue", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 9.0
+            }
+          }, 
+          {
+            "name": "value_floor_hue", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 0.8999999761581421
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_object_hue", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 0.8999999761581421
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_orientation", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 30.0, 
+              "min": -30.0
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_scale", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 1.25, 
+              "min": 0.75
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_shape", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 3.0
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "value_wall_hue", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "480000"
+              }, 
+              "max": 0.8999999761581421
+            }, 
+            "type": "FLOAT"
+          }
+        ], 
+        "numExamples": "480000"
+      }
+    }
+  ], 
+  "version": "0.1.0"
+}

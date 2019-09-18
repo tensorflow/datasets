@@ -115,9 +115,15 @@ class GlueConfig(tfds.core.BuilderConfig):
         of the label and processing it to the form required by the label feature
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version history:
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.0.2: Initial version.
     super(GlueConfig, self).__init__(
         version=tfds.core.Version(
             "0.0.2", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("1.0.0"),
+        ],
         **kwargs)
     self.text_features = text_features
     self.label_column = label_column
@@ -474,7 +480,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       examples = self._generate_example_mrpc_files(
           mrpc_files=mrpc_files, split=split)
       for example in examples:
-        yield example
+        yield example["idx"], example
     else:
       process_label = self.builder_config.process_label
       label_classes = self.builder_config.label_classes
@@ -516,7 +522,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             if value is None:
               break
           else:
-            yield example
+            yield example["idx"], example
 
   def _generate_example_mrpc_files(self, mrpc_files, split):
     if split == "test":

@@ -32,7 +32,6 @@ None computed
 ## Urls
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 --------------------------------------------------------------------------------

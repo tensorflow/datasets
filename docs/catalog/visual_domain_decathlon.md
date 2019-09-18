@@ -3,16 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="visual_domain_decathlon" />
-  <meta itemprop="description" content="This contains the 10 datasets used in the Visual Domain Decathlon, part of
-the PASCAL in Detail Workshop Challenge (CVPR 2017).
-The goal of this challenge is to solve simultaneously ten image classification
-problems representative of very different visual domains.
-
-Some of the datasets included here are also available as separate datasets in
-TFDS. However, notice that images were preprocessed for the Visual Domain
-Decathlon (resized isotropically to have a shorter size of 72 pixels) and
-might have different train/validation/test splits. Here we use the official
-splits for the competition." />
+  <meta itemprop="description" content="This contains the 10 datasets used in the Visual Domain Decathlon, part of&#10;the PASCAL in Detail Workshop Challenge (CVPR 2017).&#10;The goal of this challenge is to solve simultaneously ten image classification&#10;problems representative of very different visual domains.&#10;&#10;Some of the datasets included here are also available as separate datasets in&#10;TFDS. However, notice that images were preprocessed for the Visual Domain&#10;Decathlon (resized isotropically to have a shorter size of 72 pixels) and&#10;might have different train/validation/test splits. Here we use the official&#10;splits for the competition.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/visual_domain_decathlon" />
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/decathlon/" />
 </div>
@@ -39,37 +30,38 @@ the competition.
 `tfds.image.visual_domain_decathlon.VisualDomainDecathlonConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `aircraft` (`v1.0.0`) (`Size: ?? GiB`): Data based on "Aircraft", with
+*   `aircraft` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Aircraft", with
     images resized isotropically to have a shorter size of 72 pixels.
 
-*   `cifar100` (`v1.0.0`) (`Size: ?? GiB`): Data based on "CIFAR-100", with
+*   `cifar100` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "CIFAR-100", with
     images resized isotropically to have a shorter size of 72 pixels.
 
-*   `daimlerpedcls` (`v1.0.0`) (`Size: ?? GiB`): Data based on "Daimler
+*   `daimlerpedcls` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Daimler
     Pedestrian Classification", with images resized isotropically to have a
     shorter size of 72 pixels.
 
-*   `dtd` (`v1.0.0`) (`Size: ?? GiB`): Data based on "Describable Textures",
+*   `dtd` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Describable Textures",
     with images resized isotropically to have a shorter size of 72 pixels.
 
-*   `gtsrb` (`v1.0.0`) (`Size: ?? GiB`): Data based on "German Traffic Signs",
+*   `gtsrb` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "German Traffic Signs",
     with images resized isotropically to have a shorter size of 72 pixels.
 
-*   `imagenet12` (`v1.0.0`) (`Size: ?? GiB`): Data based on "Imagenet", with
+*   `imagenet12` (`v1.1.0`) (`Size: 6.40 GiB`): Data based on "Imagenet", with
     images resized isotropically to have a shorter size of 72 pixels.
 
-*   `omniglot` (`v1.0.0`) (`Size: ?? GiB`): Data based on "Omniglot", with
+*   `omniglot` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Omniglot", with
     images resized isotropically to have a shorter size of 72 pixels.
 
-*   `svhn` (`v1.0.0`) (`Size: ?? GiB`): Data based on "Street View House
+*   `svhn` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "Street View House
     Numbers", with images resized isotropically to have a shorter size of 72
     pixels.
 
-*   `ucf101` (`v1.0.0`) (`Size: ?? GiB`): Data based on "UCF101 Dynamic Images",
-    with images resized isotropically to have a shorter size of 72 pixels.
+*   `ucf101` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "UCF101 Dynamic
+    Images", with images resized isotropically to have a shorter size of 72
+    pixels.
 
-*   `vgg-flowers` (`v1.0.0`) (`Size: ?? GiB`): Data based on "VGG-Flowers", with
-    images resized isotropically to have a shorter size of 72 pixels.
+*   `vgg-flowers` (`v1.1.0`) (`Size: 1.04 GiB`): Data based on "VGG-Flowers",
+    with images resized isotropically to have a shorter size of 72 pixels.
 
 ## `visual_domain_decathlon/aircraft`
 
@@ -173,18 +165,21 @@ FeaturesDict({
 
 ## Statistics
 
-None computed
+Split      | Examples
+:--------- | -------:
+ALL        | 8,189
+TEST       | 6,149
+VALIDATION | 1,020
+TRAIN      | 1,020
 
 ## Urls
 
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @ONLINE{hakanbilensylvestrerebuffitomasjakab2017,
     author = "Hakan Bilen, Sylvestre Rebuffi, Tomas Jakab",

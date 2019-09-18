@@ -3,12 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="stanford_dogs" />
-  <meta itemprop="description" content="The Stanford Dogs dataset contains images of 120 breeds of dogs from around
-the world. This dataset has been built using images and annotation from
-ImageNet for the task of fine-grained image categorization. There are
-20,580 images, out of which 12,000 are used for training and 8580 for
-testing. Class labels and bounding box annotations are provided
-for all the 12,000 images." />
+  <meta itemprop="description" content="The Stanford Dogs dataset contains images of 120 breeds of dogs from around&#10;the world. This dataset has been built using images and annotation from&#10;ImageNet for the task of fine-grained image categorization. There are&#10;20,580 images, out of which 12,000 are used for training and 8580 for&#10;testing. Class labels and bounding box annotations are provided&#10;for all the 12,000 images.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/stanford_dogs" />
   <meta itemprop="sameAs" content="http://vision.stanford.edu/aditya86/ImageNetDogs/main.html" />
 </div>
@@ -26,7 +21,7 @@ bounding box annotations are provided for all the 12,000 images.
 *   `DatasetBuilder`:
     [`tfds.image.stanford_dogs.StanfordDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/stanford_dogs.py)
 *   Version: `v0.1.0`
-*   Size: `?? GiB`
+*   Size: `778.12 MiB`
 
 ## Features
 ```python
@@ -41,7 +36,12 @@ FeaturesDict({
 ```
 
 ## Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 20,580
+TRAIN | 12,000
+TEST  | 8,580
 
 ## Urls
 

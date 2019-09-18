@@ -3,16 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="higgs" />
-  <meta itemprop="description" content="The data has been produced using Monte Carlo simulations.
-The first 21 features (columns 2-22) are kinematic properties
-measured by the particle detectors in the accelerator.
-The last seven features are functions of the first 21 features;
-these are high-level features derived by physicists to help
-discriminate between the two classes. There is an interest
-in using deep learning methods to obviate the need for physicists
-to manually develop such features. Benchmark results using
-Bayesian Decision Trees from a standard physics package and
-5-layer neural networks are presented in the original paper." />
+  <meta itemprop="description" content="The data has been produced using Monte Carlo simulations. &#10;The first 21 features (columns 2-22) are kinematic properties &#10;measured by the particle detectors in the accelerator. &#10;The last seven features are functions of the first 21 features; &#10;these are high-level features derived by physicists to help &#10;discriminate between the two classes. There is an interest &#10;in using deep learning methods to obviate the need for physicists &#10;to manually develop such features. Benchmark results using &#10;Bayesian Decision Trees from a standard physics package and &#10;5-layer neural networks are presented in the original paper. &#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/higgs" />
   <meta itemprop="sameAs" content="https://archive.ics.uci.edu/ml/datasets/HIGGS" />
 </div>

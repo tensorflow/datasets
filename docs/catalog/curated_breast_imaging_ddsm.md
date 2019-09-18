@@ -3,25 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="curated_breast_imaging_ddsm" />
-  <meta itemprop="description" content="The CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and
-standardized version of the Digital Database for Screening Mammography (DDSM).
-The DDSM is a database of 2,620 scanned film mammography studies.
-It contains normal, benign, and malignant cases with verified pathology
-information.
-
-The default config is made of patches extracted from the original mammograms,
-following the description from http://arxiv.org/abs/1708.09427, in order to
-frame the task to solve in a traditional image classification setting.
-
-Because special software and libraries are needed to download and read the
-images contained in the dataset, TFDS assumes that the user has downloaded the
-original DCIM files and converted them to PNG.
-
-The following commands (or equivalent) should be used to generate the PNG files,
-in order to guarantee reproducible results:
-
-  find $DATASET_DCIM_DIR -name '*.dcm' | \
-  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'" />
+  <meta itemprop="description" content="The CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and&#10;standardized version of the Digital Database for Screening Mammography (DDSM).&#10;The DDSM is a database of 2,620 scanned film mammography studies.&#10;It contains normal, benign, and malignant cases with verified pathology&#10;information.&#10;&#10;The default config is made of patches extracted from the original mammograms,&#10;following the description from http://arxiv.org/abs/1708.09427, in order to&#10;frame the task to solve in a traditional image classification setting.&#10;&#10;Because special software and libraries are needed to download and read the&#10;images contained in the dataset, TFDS assumes that the user has downloaded the&#10;original DCIM files and converted them to PNG.&#10;&#10;The following commands (or equivalent) should be used to generate the PNG files,&#10;in order to guarantee reproducible results:&#10;&#10;  find $DATASET_DCIM_DIR -name '*.dcm' | \&#10;  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/curated_breast_imaging_ddsm" />
   <meta itemprop="sameAs" content="https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM" />
 </div>

@@ -1,0 +1,59 @@
+{
+  "citation": "@article{DBLP:journals/corr/SrivastavaMS15,\n  author    = {Nitish Srivastava and\n               Elman Mansimov and\n               Ruslan Salakhutdinov},\n  title     = {Unsupervised Learning of Video Representations using LSTMs},\n  journal   = {CoRR},\n  volume    = {abs/1502.04681},\n  year      = {2015},\n  url       = {http://arxiv.org/abs/1502.04681},\n  archivePrefix = {arXiv},\n  eprint    = {1502.04681},\n  timestamp = {Mon, 13 Aug 2018 16:47:05 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n", 
+  "description": "Moving variant of MNIST database of handwritten digits. This is the\ndata used by the authors for reporting model performance. See\n`tfds.video.moving_mnist.image_as_moving_sequence`\nfor generating training/validation data from the MNIST dataset.\n", 
+  "downloadChecksums": {
+    "http://www.cs.toronto.edu/~nitish/unsupervised_video/mnist_test_seq.npy": "c2a3e8d3939c001ab77bf543f130157424efa486bb4d0974d2cebb773b13f8b3"
+  }, 
+  "location": {
+    "urls": [
+      "http://www.cs.toronto.edu/~nitish/unsupervised_video/"
+    ]
+  }, 
+  "name": "moving_mnist", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image_sequence", 
+        "shape": {
+          "dim": [
+            {
+              "size": "20"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "64"
+            }, 
+            {
+              "size": "1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "819200096", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "5", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image_sequence", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "10000"
+      }
+    }
+  ], 
+  "version": "0.1.0"
+}

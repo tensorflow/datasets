@@ -3,8 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="omniglot" />
-  <meta itemprop="description" content="Omniglot data set for one-shot learning. This dataset contains 1623 different
-handwritten characters from 50 different alphabets." />
+  <meta itemprop="description" content="Omniglot data set for one-shot learning. This dataset contains 1623 different&#10;handwritten characters from 50 different alphabets.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/omniglot" />
   <meta itemprop="sameAs" content="https://github.com/brendenlake/omniglot/" />
 </div>

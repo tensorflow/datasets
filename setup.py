@@ -60,6 +60,7 @@ TESTS_REQUIRE = [
     'jupyter',
     'pytest',
     'pytest-xdist',
+    'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',
 ]
 
 if sys.version_info.major == 3:
@@ -79,6 +80,7 @@ if sys.version_info < (3, 4):
 # Static files needed by datasets.
 DATASET_FILES = [
     'image/caltech101_labels.txt',
+    'image/categories_places365.txt',
     'image/cbis_ddsm_calc_distributions.txt',
     'image/cbis_ddsm_calc_types.txt',
     'image/cbis_ddsm_mass_margins.txt',
@@ -102,11 +104,10 @@ DATASET_FILES = [
 
 DATASET_EXTRAS = {
     # In alphabetical order
+    'aflw2k3d': ['scipy'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
-    'eurosat': [
-        'scikit-image',
-    ],
+    'eurosat': ['scikit-image',],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
@@ -118,6 +119,8 @@ DATASET_EXTRAS = {
     'librispeech': ['pydub'],  # and ffmpeg installed
     'pet_finder': ['pandas'],
     'svhn': ['scipy'],
+    'the300w_lp': ['scipy'],
+    'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 

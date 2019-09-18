@@ -102,9 +102,17 @@ class TedHrlrConfig(tfds.core.BuilderConfig):
 class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk data set for comparing high and low resource languages."""
 
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.0.1: Initial version.
   BUILDER_CONFIGS = [
-      TedHrlrConfig(language_pair=pair, version=tfds.core.Version(
-          "0.0.1", experiments={tfds.core.Experiment.S3: False}))
+      TedHrlrConfig(  # pylint: disable=g-complex-comprehension
+          language_pair=pair,
+          version=tfds.core.Version(
+              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version("1.0.0"),
+          ])
       for pair in _VALID_LANGUAGE_PAIRS
   ]
 
@@ -170,8 +178,9 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             source_sentences), len(target_sentences), source_file, target_file)
 
     source, target = self.builder_config.language_pair
-    for l1, l2 in zip(source_sentences, target_sentences):
+    for idx, (l1, l2) in enumerate(
+        zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):
-        yield result
+        yield idx, result

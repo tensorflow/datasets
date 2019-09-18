@@ -3,11 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="caltech_birds2011" />
-  <meta itemprop="description" content="Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos
-of 200 bird species (mostly North American). The total number of
-categories of birds is 200 and there are 6033 images in the 2010
-dataset and 11,788 images in the 2011 dataset.
-Annotations include bounding boxes, segmentation labels." />
+  <meta itemprop="description" content="Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos &#10;of 200 bird species (mostly North American). The total number of &#10;categories of birds is 200 and there are 6033 images in the 2010 &#10;dataset and 11,788 images in the 2011 dataset.&#10;Annotations include bounding boxes, segmentation labels.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/caltech_birds2011" />
   <meta itemprop="sameAs" content="http://www.vision.caltech.edu/visipedia/CUB-200.html" />
 </div>
@@ -27,7 +23,6 @@ dataset. Annotations include bounding boxes, segmentation labels.
 *   Size: `?? GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
@@ -40,7 +35,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Urls
@@ -48,11 +42,9 @@ None computed
 *   [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @techreport{WelinderEtal2010,
 Author = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},

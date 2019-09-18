@@ -3,9 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="groove" />
-  <meta itemprop="description" content="The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and
-(synthesized) audio of human-performed, tempo-aligned expressive drumming
-captured on a Roland TD-11 V-Drum electronic drum kit." />
+  <meta itemprop="description" content="The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and&#10;(synthesized) audio of human-performed, tempo-aligned expressive drumming&#10;captured on a Roland TD-11 V-Drum electronic drum kit.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/groove" />
   <meta itemprop="sameAs" content="https://g.co/magenta/groove-dataset" />
 </div>

@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="flores" />
-  <meta itemprop="description" content="Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English." />
+  <meta itemprop="description" content="Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/flores" />
   <meta itemprop="sameAs" content="https://github.com/facebookresearch/flores/" />
 </div>

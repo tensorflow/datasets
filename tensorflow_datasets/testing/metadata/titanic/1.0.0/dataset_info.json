@@ -1,0 +1,50 @@
+{
+  "citation": "@ONLINE {titanic,\nauthor = \"Frank E. Harrell Jr., Thomas Cason\",\ntitle  = \"Titanic dataset\",\nmonth  = \"oct\",\nyear   = \"2017\",\nurl    = \"https://www.openml.org/d/40945\"\n}\n", 
+  "description": "Dataset describing the survival status of individual passengers on the Titanic. Missing values in the original dataset are represented using ?. Float and int missing values are replaced with -1, string missing values are replaced with 'Unknown'.", 
+  "downloadChecksums": {
+    "https://www.openml.org/data/get_csv/16826755/phpMYEkMl": "c617db2c7470716250f6f001be51304c76bcc8815527ab8bae734bdca0735737"
+  }, 
+  "location": {
+    "urls": [
+      "https://www.openml.org/d/40945"
+    ]
+  }, 
+  "name": "titanic", 
+  "schema": {
+    "feature": [
+      {
+        "name": "features"
+      }, 
+      {
+        "name": "survived", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "117743", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "survived", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1309"
+              }, 
+              "max": 1.0
+            }
+          }
+        ], 
+        "numExamples": "1309"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "features", 
+    "output": "survived"
+  }, 
+  "version": "1.0.0"
+}

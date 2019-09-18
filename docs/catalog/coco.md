@@ -3,15 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="coco" />
-  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and
-captioning dataset. This version contains images, bounding boxes &quot;
-and labels for the 2017 version.
-Note:
- * Some images from the train and validation sets don't have annotations.
- * Coco 2014 and 2017 uses the same images, but different train/val/test splits
- * The test split don't have any annotations (only images).
- * Coco defines 91 classes but the data only uses 80 classes.
- * Panotptic annotations defines defines 200 classes but only uses 133." />
+  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and&#10;captioning dataset. This version contains images, bounding boxes &quot;&#10;and labels for the 2017 version.&#10;Note:&#10; * Some images from the train and validation sets don't have annotations.&#10; * Coco 2014 and 2017 uses the same images, but different train/val/test splits&#10; * The test split don't have any annotations (only images).&#10; * Coco defines 91 classes but the data only uses 80 classes.&#10; * Panotptic annotations defines defines 200 classes but only uses 133.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/coco" />
   <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
 </div>
@@ -33,7 +25,7 @@ defines 200 classes but only uses 133.
 `coco` is configured with `tfds.image.coco.CocoConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `2014` (`v1.0.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
+*   `2014` (`v1.1.0`) (`Size: 37.57 GiB`): COCO is a large-scale object
     detection, segmentation, and captioning dataset. This version contains
     images, bounding boxes " and labels for the 2014 version. Note:
 
@@ -44,7 +36,7 @@ configurations predefined (defaults to the first one):
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   `2017` (`v1.0.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
+*   `2017` (`v1.1.0`) (`Size: 25.20 GiB`): COCO is a large-scale object
     detection, segmentation, and captioning dataset. This version contains
     images, bounding boxes " and labels for the 2017 version. Note:
 
@@ -55,7 +47,7 @@ configurations predefined (defaults to the first one):
     *   Coco defines 91 classes but the data only uses 80 classes.
     *   Panotptic annotations defines defines 200 classes but only uses 133.
 
-*   `2017_panoptic` (`v1.0.0`) (`Size: 19.57 GiB`): COCO is a large-scale object
+*   `2017_panoptic` (`v1.1.0`) (`Size: 19.57 GiB`): COCO is a large-scale object
     detection, segmentation, and captioning dataset. This version contains
     images, bounding boxes " and labels for the 2017 version. Note:
 
@@ -76,6 +68,7 @@ FeaturesDict({
     'objects': Sequence({
         'area': Tensor(shape=(), dtype=tf.int64),
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': Tensor(shape=(), dtype=tf.int64),
         'is_crowd': Tensor(shape=(), dtype=tf.bool),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
     }),
@@ -92,6 +85,7 @@ FeaturesDict({
     'objects': Sequence({
         'area': Tensor(shape=(), dtype=tf.int64),
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': Tensor(shape=(), dtype=tf.int64),
         'is_crowd': Tensor(shape=(), dtype=tf.bool),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
     }),
@@ -110,6 +104,7 @@ FeaturesDict({
     'panoptic_objects': Sequence({
         'area': Tensor(shape=(), dtype=tf.int64),
         'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'id': Tensor(shape=(), dtype=tf.int64),
         'is_crowd': Tensor(shape=(), dtype=tf.bool),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=133),
     }),
