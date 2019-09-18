@@ -65,6 +65,18 @@ FORBIDDEN_OS_FUNCTIONS = (
 )
 
 
+_ORGINAL_NP_LOAD = np.load
+
+
+def _np_load(file_, mmap_mode=None, allow_pickle=False, **kwargs):
+  if not hasattr(file_, "read"):
+    raise AssertionError(
+        "You MUST pass a `tf.gfile.GFile` or file-like instance to `np.load`.")
+  if allow_pickle:
+    raise AssertionError("Unpicling files is forbidden for security reasons.")
+  return _ORGINAL_NP_LOAD(file_, mmap_mode, allow_pickle, **kwargs)
+
+
 class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   """Inherit this class to test your DatasetBuilder class.
 
@@ -165,6 +177,11 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins)
     open_patcher.start()
     self.patchers.append(open_patcher)
+
+    # It's hard to mock open within numpy, so mock np.load.
+    np_load_patcher = absltest.mock.patch("numpy.load", _np_load)
+    np_load_patcher.start()
+    self.patchers.append(np_load_patcher)
 
   def test_baseclass(self):
     self.assertIsInstance(
