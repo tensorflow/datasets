@@ -133,6 +133,7 @@ DATASET_EXTRAS = {
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
     'lsun': ['tensorflow-io'],
+    'deeplesion': ['pandas'],
 }
 
 
