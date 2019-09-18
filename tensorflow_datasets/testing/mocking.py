@@ -137,9 +137,9 @@ def _generate_random_array(feature, tensor_info):
       np.random.randint(5, 50) if s is None else s
       for s in tensor_info.shape
   ]
-  if isinstance(features_lib, features_lib.ClassLabel):
+  if isinstance(feature, features_lib.ClassLabel):
     max_value = feature.num_classes
-  elif isinstance(features_lib, features_lib.Text) and feature.vocab_size:
+  elif isinstance(feature, features_lib.Text) and feature.vocab_size:
     max_value = feature.vocab_size
   else:
     max_value = 255
@@ -159,7 +159,6 @@ def _generate_random_array(feature, tensor_info):
 
 def _generate_random_example(builder):
   root_feature = builder.info.features
-
   flat_features = root_feature._flatten(root_feature)  # pylint: disable=protected-access
   flat_tensor_info = root_feature._flatten(root_feature.get_tensor_info())  # pylint: disable=protected-access
   flat_np = [
