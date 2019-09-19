@@ -27,6 +27,13 @@ from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import shuffle
 from tensorflow_datasets.core import utils
 
+from apache_beam import typehints
+from apache_beam.transforms import core
+from apache_beam.transforms import ptransform
+
+from tensorflow_datasets.core import hashing
+from tensorflow_datasets.core import lazy_imports_lib
+
 MIN_SHARD_SIZE = 64<<20  # 64 MiB
 MAX_SHARD_SIZE = 1024<<20  # 2 GiB
 
@@ -174,3 +181,97 @@ class Writer(object):
     logging.info('Done writing %s. Shard lengths: %s',
                  self._path, shard_lengths)
     return shard_lengths
+    
+    
+@typehints.with_input_types(str)
+@typehints.with_output_types(typehints.Tuple[int, int])
+class _CountAndSizeCombineFn(core.CombineFn):
+  """CombineFn for computing PCollection length and size (bytes)."""
+
+  def create_accumulator(self):
+    return (0, 0)  # (Count, size)
+
+  def add_input(self, accumulator, element):
+    count, size = accumulator
+    count += 1
+    size += len(element)
+    return count, size
+
+  def add_inputs(self, accumulator, elements):
+    count, size = accumulator
+    count += len(elements)
+    size += sum(len(element) for element in elements)
+    return count, size
+
+  def merge_accumulators(self, accumulators):
+    count = sum(acc[0] for acc in accumulators)
+    size = sum(acc[1] for acc in accumulators)
+    return count, size
+
+  def extract_output(self, accumulator):
+    return accumulator
+
+
+# To get the number of elements and size (bytes) of pcollection.
+@ptransform.ptransform_fn
+def _get_len_size(pcollection):
+  return pcollection | 'GetLenSize' >> core.CombineGlobally(
+      _CountAndSizeCombineFn())
+
+def _shuffle_pcollection(pcollection, split_name):
+  """Shuffle PCollection of (key, obj) tuples and, transforming key into hash(key) (int128).
+  Then remove the key from each tuple in the pcollection.
+  """
+  beam = lazy_imports_lib.lazy_imports.apache_beam
+  hasher = hashing.Hasher(split_name)
+  return (
+      pcollection
+      | 'Hash key' >> beam.Map(lambda t: (hasher.hash_key(t[0]), t[1]))
+      | 'Shuffle' >> beam.ReshufflePerKey()
+      | 'Remove key' >> beam.Map(lambda t: t[1])
+      )
+
+def _use_example_serializer(pcollection, serializer):
+  """Serialize pcollection of examples"""
+  return (
+      pcollection
+      | 'Serialize' >> beam.Map(lambda t: serializer.serialize_example(t))
+      )
+
+
+class Beam_Writer(object):
+  """Shuffles and writes Beam Examples to sharded TFRecord files.
+  
+  The number of shards is computed automatically.
+  """
+
+  def __init__(self, example_specs, pcollections, path, split_name):
+    self._serializer = example_serializer.ExampleSerializer(example_specs)
+    self._pcollections = pcollections
+    self._path = path
+    self._split_name = split_name
+
+  def finalize(self):
+    """Effectively writes examples to the tfrecord files."""
+    print('Shuffling and writing examples to %s' % self._path)
+    pcollection = _shuffle_pcollection(self._pcollections, self._split_name)
+    pcollection = _use_example_serializer(pcollection, self._serializer)
+    length, size = _get_len_size(pcollection)
+    number_of_shards = _get_number_shards(length, size)
+    writer = _TFRecordWriter(self._path, size, number_of_shards)
+    #####
+    shard_lengths = writer.finalize()
+    logging.info('Done writing %s. Shard lengths: %s',
+                 self._path, shard_lengths)
+    return shard_lengths
+
+
+
+
+
+
+
+
+
+
+
