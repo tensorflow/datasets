@@ -99,7 +99,4 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
                   "image": image_path,
                   "label": d.lower(),
               }
-              if self.version.implements(tfds.core.Experiment.S3):
-                yield "%s/%s" % (d, image_file), record
-              else:
-                yield record
+              yield "%s/%s" % (d, image_file), record

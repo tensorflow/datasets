@@ -49,15 +49,15 @@ class Iris(tfds.core.GeneratorBasedBuilder):
   # Version history:
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
   # 1.0.0: Initial version.
-  
+
   NUM_CLASSES = 3
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
-  
+
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.0.0"),
   ]
-  
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
@@ -92,11 +92,7 @@ class Iris(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, records):
     for i, row in enumerate(records):
       elems = row.split(",")
-      record = {
+      yield i, {
           "features": [float(e) for e in elems[:-1]],
           "label": elems[-1],
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield i, record
-      else:
-        yield record

@@ -100,10 +100,8 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
   # Version history:
   # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
   # 1.0.0: Initial version.
-  
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
-
   SUPPORTED_VERSIONS = [
       tfds.core.Version("2.0.0"),
   ]
@@ -149,14 +147,10 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
       raw_data = csv.DictReader(f)
       for i, row in enumerate(raw_data):
         survive_val = row.pop("survived")
-        record = {
+        yield i, {
             "survived": convert_to_label(survive_val, _SURVIVED_DICT),
             "features": {
                 name: FEATURE_DICT[name][1](value)
                 for name, value in row.items()
             }
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield i, record
-        else:
-          yield record

@@ -178,6 +178,7 @@ def load(name,
          data_dir=None,
          batch_size=None,
          in_memory=None,
+         shuffle_files=False,
          download=True,
          as_supervised=False,
          decoders=None,
@@ -238,6 +239,8 @@ def load(name,
       increases iteration speeds. Note that if `True` and the dataset has
       unknown dimensions, the features will be padded to the maximum
       size across the dataset.
+    shuffle_files: `bool`, whether to shuffle the input files.
+      Defaults to `False`.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
@@ -264,10 +267,7 @@ def load(name,
       to control where to download and extract the cached data. If not set,
       cache_dir and manual_dir will automatically be deduced from data_dir.
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
-      `tfds.core.DatasetBuilder.as_dataset`. `split` will be passed through by
-      default. Example: `{'shuffle_files': True}`.
-      Note that shuffle_files is False by default unless
-      `split == tfds.Split.TRAIN`.
+      `tfds.core.DatasetBuilder.as_dataset`.
     try_gcs: `bool`, if True, tfds.load will see if the dataset exists on
       the public GCS bucket before building it locally.
 
@@ -301,11 +301,12 @@ def load(name,
   if as_dataset_kwargs is None:
     as_dataset_kwargs = {}
   as_dataset_kwargs = dict(as_dataset_kwargs)
-  as_dataset_kwargs["split"] = split
-  as_dataset_kwargs["as_supervised"] = as_supervised
-  as_dataset_kwargs["batch_size"] = batch_size
-  as_dataset_kwargs["decoders"] = decoders
-  as_dataset_kwargs["in_memory"] = in_memory
+  as_dataset_kwargs.setdefault("split", split)
+  as_dataset_kwargs.setdefault("as_supervised", as_supervised)
+  as_dataset_kwargs.setdefault("batch_size", batch_size)
+  as_dataset_kwargs.setdefault("decoders", decoders)
+  as_dataset_kwargs.setdefault("in_memory", in_memory)
+  as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:

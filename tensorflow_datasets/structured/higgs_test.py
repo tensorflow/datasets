@@ -30,8 +30,8 @@ class HiggsTest(testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = "test.csv"
-  
-  
+
+
 class HiggsS3Test(HiggsTest):
   VERSION = "experimental_latest"
 

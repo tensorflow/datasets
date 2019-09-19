@@ -19,7 +19,8 @@ tfds.show_examples(
     ds,
     rows=3,
     cols=3,
-    plot_scale=3.0
+    plot_scale=3.0,
+    image_key=None
 )
 ```
 
@@ -52,6 +53,8 @@ fig = tfds.show_examples(ds_info, ds)
 *   <b>`plot_scale`</b>: `float`, controls the plot size of the images. Keep
     this value around 3 to get a good plot. High and low values may cause the
     labels to get overlapped.
+*   <b>`image_key`</b>: `string`, name of the feature that contains the image.
+    If not set, the system will try to auto-detect it.
 
 #### Returns:
 

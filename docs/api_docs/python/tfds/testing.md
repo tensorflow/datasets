@@ -38,6 +38,9 @@ manager to the TestCase if supported.
 [`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary
 directory.
 
+[`mock_data(...)`](../tfds/testing/mock_data.md): Mock tfds to generate random
+data.
+
 [`mock_kaggle_api(...)`](../tfds/testing/mock_kaggle_api.md): Mock out the
 kaggle CLI.
 

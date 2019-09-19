@@ -81,7 +81,13 @@ class GrooveConfig(tfds.core.BuilderConfig):
         name="-".join(name_parts),
         version=tfds.core.Version(
             "1.0.0", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version("2.0.0"),
+        ],
         **kwargs)
+    # Version history:
+    # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 1.0.0: Initial version.
     self.split_bars = split_bars
     self.include_audio = include_audio
     self.audio_rate = audio_rate
@@ -196,7 +202,7 @@ class Groove(tfds.core.GeneratorBasedBuilder):
         example["midi"] = midi
         if audio is not None:
           example["audio"] = audio
-        yield example
+        yield example["id"], example
       else:
         # Yield split examples.
         bpm = int(row["bpm"])
@@ -231,7 +237,7 @@ class Groove(tfds.core.GeneratorBasedBuilder):
                 int(time_range[1] * audio_rate)]
 
           example["id"] += ":%03d" % i
-          yield example
+          yield example["id"], example
 
 
 def _load_wav(path, sample_rate):

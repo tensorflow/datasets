@@ -170,10 +170,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     # Using index as key since data is always loaded in same order.
     for index, (image, label) in enumerate(data):
       record = {"image": image, "label": label}
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield index, record
-      else:
-        yield record
+      yield index, record
 
 
 class FashionMNIST(MNIST):
@@ -320,7 +317,11 @@ class EMNIST(MNIST):
             "The EMNIST dataset is a set of handwritten character digits "
             "derived from the NIST Special Database 19 and converted to "
             "a 28x28 pixel image format and dataset structure that directly "
-            "matches the MNIST dataset."),
+            "matches the MNIST dataset.\n\n"
+            "Note: Like the original EMNIST data, images provided here are "
+            "inverted horizontally and rotated 90 anti-clockwise. You can use "
+            "`tf.transpose` within `ds.map` to convert the images to a "
+            "human-friendlier format."),
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(shape=MNIST_IMAGE_SHAPE),

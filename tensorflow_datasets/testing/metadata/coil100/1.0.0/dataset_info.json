@@ -1,0 +1,86 @@
+{
+  "citation": "@article{nene1996columbia,\n  title={Columbia object image library (coil-20)},\n  author={Nene, Sameer A and Nayar, Shree K and Murase, Hiroshi and others},\n  year={1996},\n  publisher={Technical report CUCS-005-96}\n}\n", 
+  "description": "The dataset contains 7200 color images of 100 objects\n(72 images per object). The objects have a wide variety of complex geometric and reflectance characteristics.\nThe objects were placed on a motorized turntable against a black background.\nThe turntable was rotated through 360 degrees to vary object pose with respect to a fxed color camera.\nImages of the objects were taken at pose intervals of\t5 degrees.This corresponds to\n72 poses per object", 
+  "location": {
+    "urls": [
+      "http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php"
+    ]
+  }, 
+  "name": "coil100", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "128"
+            }, 
+            {
+              "size": "128"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }, 
+      {
+        "name": "object_id", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "130688843", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "7200"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "7200"
+              }, 
+              "max": 253.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "7200"
+              }, 
+              "max": 71.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "7200"
+              }
+            }, 
+            "name": "object_id", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "7200"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

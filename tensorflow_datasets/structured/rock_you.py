@@ -34,16 +34,8 @@ _DOWNLOAD_URL = "https://github.com/brannondorsey/naive-hashcat/releases/downloa
 
 class RockYou(tfds.core.GeneratorBasedBuilder):
   """This dataset contains passwords that were leaked or stolen from from various sites."""
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 1.0.0: Initial version.
-  
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
 
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0"),
-  ]
+  VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -77,10 +69,6 @@ class RockYou(tfds.core.GeneratorBasedBuilder):
       blines = f.readlines()
 
     for i, bline in enumerate(blines):
-      record = {
+      yield i, {
           "password": bline.strip(),
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield i, record
-      else:
-        yield record

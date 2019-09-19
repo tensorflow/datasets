@@ -52,12 +52,12 @@ HKEY_SIZE_BYTES = HKEY_SIZE // 8
 def _hkey_to_bytes(hkey):
   """Converts 128 bits integer hkey to binary representation."""
   max_int64 = 0xFFFFFFFFFFFFFFFF
-  return struct.pack('QQ', (hkey >> 64) & max_int64, hkey & max_int64)
+  return struct.pack('=QQ', (hkey >> 64) & max_int64, hkey & max_int64)
 
 
 def _read_hkey(buff):
   """Reads from fobj and returns hkey (128 bites integer)."""
-  a, b = struct.unpack('QQ', buff)
+  a, b = struct.unpack('=QQ', buff)
   return (a << 64) | b
 
 
@@ -76,8 +76,8 @@ class _Bucket(object):
   hold in memory. Data is written once and read once.
 
   File format:
-    key1 (8 bytes) | size1 (8 bytes) | data1 (size1 bytes) |
-    key2 (8 bytes) | size2 (8 bytes) | data2 (size2 bytes) |
+    key1 (16 bytes) | size1 (8 bytes) | data1 (size1 bytes) |
+    key2 (16 bytes) | size2 (8 bytes) | data2 (size2 bytes) |
     ...
   """
 
@@ -107,7 +107,14 @@ class _Bucket(object):
       self._fobj = tf.io.gfile.GFile(self._path, mode='wb')
     data_size = len(data)
     self._fobj.write(_hkey_to_bytes(key))
-    self._fobj.write(struct.pack('L', data_size))
+    # http://docs.python.org/3/library/struct.html#byte-order-size-and-alignment
+    # The equal sign ("=") is important here, has it guarantees the standard
+    # size (Q: 8 bytes) is used, as opposed to native size, which can differ
+    # from one platform to the other. This way we know exactly 8 bytes have been
+    # written, and we can read that same amount of bytes later.
+    # We do not specify endianess (platform dependent), but this is OK since the
+    # temporary files are going to be written and read by the same platform.
+    self._fobj.write(struct.pack('=Q', data_size))
     self._fobj.write(data)
     self._length += 1
     self._size += data_size
@@ -126,7 +133,7 @@ class _Bucket(object):
           break
         hkey = _read_hkey(buff)
         size_bytes = fobj.read(8)
-        size = struct.unpack('L', size_bytes)[0]
+        size = struct.unpack('=Q', size_bytes)[0]
         data = fobj.read(size)
         res.append((hkey, data))
     return res

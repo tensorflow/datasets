@@ -108,21 +108,14 @@ class AmazonUSReviewsConfig(tfds.core.BuilderConfig):
 
 class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
   """AmazonUSReviews dataset."""
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.1.0: Initial version.
-  
+
   BUILDER_CONFIGS = [
       AmazonUSReviewsConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
           description="A dataset consisting of reviews of Amazon " +
           config_name +
           " products in US marketplace. Each product has its own version as specified with it.",
-          version=tfds.core.Version(
-              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version("1.0.0"),
-          ],
+          version="0.1.0",
           data=config_name,
       ) for config_name in _DATA_OPTIONS
   ]
@@ -178,10 +171,6 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
       reader = csv.DictReader(
           tsvfile, dialect="excel-tab", quoting=csv.QUOTE_NONE)
       for i, row in enumerate(reader):
-        record = {
+        yield i, {
             "data": row,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield i, record
-        else:
-          yield record

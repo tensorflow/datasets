@@ -298,10 +298,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
                 "image": image,
                 "label": label,
             }
-            if self.version.implements(tfds.core.Experiment.S3):
-              yield filename, record
-            else:
-              yield record
+            yield filename, record
 
   def _get_tfds_subsets_images(self):
     splits_sets = {}

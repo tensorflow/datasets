@@ -10,6 +10,7 @@
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="save_metadata"/>
+<meta itemprop="property" content="set_dtype"/>
 <meta itemprop="property" content="set_encoding_format"/>
 <meta itemprop="property" content="set_shape"/>
 </div>
@@ -30,33 +31,51 @@ Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 <!-- Placeholder for "Used in" -->
 
-Input: The image connector accepts as input:
-  * path to a {bmp,gif,jpeg,png} image.
-  * uint8 array representing an image.
+During `_generate_examples`, the feature connector accept as input any of:
+
+*   `str`: path to a {bmp,gif,jpeg,png} image (ex: `/path/to/img.png`).
+*   `np.array`: 3d `np.uint8` array representing an image.
+*   A file object containing the png or jpeg encoded image string (ex:
+    `io.BytesIO(encoded_img_bytes)`)
 
 #### Output:
 
-*   <b>`image`</b>: tf.Tensor of type tf.uint8 and shape [height, width,
-    num_channels] for BMP, JPEG, and PNG images and shape [num_frames, height,
-    width, 3] for GIF images.
+`tf.Tensor` of type `tf.uint8` and shape `[height, width, num_channels]` for
+BMP, JPEG, and PNG images and shape `[num_frames, height, width, 3]` for GIF
+images.
 
 #### Example:
 
-*   In the DatasetInfo object: features=features.FeaturesDict({ 'input':
-    features.Image(), 'target': features.Image(shape=(None, None, 1),
-    encoding_format='png'), })
+*   In the
+    <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>
+    object:
 
-*   During generation: yield { 'input': 'path/to/img.jpg', 'target':
-    np.ones(shape=(64, 64, 1), dtype=np.uint8), }
+```python
+features=features.FeaturesDict({
+    'input': features.Image(),
+    'target': features.Image(shape=(None, None, 1),
+                               encoding_format='png'),
+})
+```
+
+*   During generation:
+
+```python
+yield {
+    'input': 'path/to/img.jpg',
+    'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
+}
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
-``` python
+```python
 __init__(
     shape=None,
+    dtype=None,
     encoding_format=None
 )
 ```
@@ -70,6 +89,8 @@ Construct the connector.
     width can be None. For other images: (height, width, channels). height and
     width can be None. See `tf.image.encode_*` for doc on channels parameter.
     Defaults to (None, None, 3).
+*   <b>`dtype`</b>: tf.uint16 or tf.uint8 (default). tf.uint16 can be used only
+    with png encoding_format
 *   <b>`encoding_format`</b>: 'jpeg' or 'png' (default). Format to serialize
     np.ndarray images on disk. If image is loaded from {bmg,gif,jpeg,png} file,
     this parameter is ignored, and file original encoding is used.
@@ -159,6 +180,17 @@ save_metadata(
 ```
 
 See base class for details.
+
+<h3 id="set_dtype"><code>set_dtype</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
+source</a>
+
+```python
+set_dtype(dtype)
+```
+
+Update the dtype.
 
 <h3 id="set_encoding_format"><code>set_encoding_format</code></h3>
 

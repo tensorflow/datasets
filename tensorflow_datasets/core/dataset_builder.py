@@ -148,7 +148,7 @@ class DatasetBuilder(object):
   BUILDER_CONFIGS = []
 
   # Set to True for datasets that are under active development and should not
-  # be available through tfds.{load, builder} or documented in datasets.md.
+  # be available through tfds.{load, builder} or documented in overview.md.
   IN_DEVELOPMENT = False
 
 
@@ -311,7 +311,7 @@ class DatasetBuilder(object):
   def as_dataset(self,
                  split=None,
                  batch_size=None,
-                 shuffle_files=None,
+                 shuffle_files=False,
                  decoders=None,
                  as_supervised=False,
                  in_memory=None):
@@ -370,8 +370,8 @@ class DatasetBuilder(object):
         custom pipeline. If `batch_size == -1`, will return feature
         dictionaries of the whole dataset with `tf.Tensor`s instead of a
         `tf.data.Dataset`.
-      shuffle_files: `bool`, whether to shuffle the input files.
-        Defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+      shuffle_files: `bool`, whether to shuffle the input files. Defaults to
+        `False`.
       decoders: Nested dict of `Decoder` objects which allow to customize the
         decoding. The structure should match the feature structure, but only
         customized feature keys need to be present. See
@@ -431,17 +431,6 @@ class DatasetBuilder(object):
     """as_dataset for a single split."""
     if isinstance(split, six.string_types):
       split = splits_lib.Split(split)
-
-    if shuffle_files is None:
-      # Shuffle files if training
-      if split == splits_lib.Split.TRAIN:
-        logging.warning(
-            "Warning: Setting shuffle_files=True because split=TRAIN and "
-            "shuffle_files=None. This behavior will be deprecated on "
-            "2019-08-06, "
-            "at which point shuffle_files=False will be the default for all "
-            "splits.")
-        shuffle_files = True
 
     wants_full_dataset = batch_size == -1
     if wants_full_dataset:
@@ -624,7 +613,7 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _as_dataset(self, split, decoders=None, shuffle_files=None):
+  def _as_dataset(self, split, decoders=None, shuffle_files=False):
     """Constructs a `tf.data.Dataset`.
 
     This is the internal implementation to overwrite called when user calls
@@ -636,7 +625,7 @@ class DatasetBuilder(object):
       decoders: Nested structure of `Decoder` object to customize the dataset
         decoding.
       shuffle_files: `bool`, whether to shuffle the input files. Optional,
-        defaults to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+        defaults to `False`.
 
     Returns:
       `tf.data.Dataset`
@@ -949,7 +938,9 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     )
 
   def _prepare_split_legacy(self, generator, split_info):
-    # TODO(pierrot): delete once S3 has been fully rolled-out.
+    # TODO(pierrot): delete function once S3 has been fully rolled-out.
+    # For builders having both S3 and non S3 versions: drop key if any yielded.
+    generator = (ex[1] if isinstance(ex, tuple) else ex for ex in generator)
     generator = (self.info.features.encode_example(ex) for ex in generator)
     output_files = self._build_split_filenames(split_info)
     self._file_format_adapter.write_from_generator(generator, output_files)

@@ -99,6 +99,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
         }),
         supervised_keys=None,
         urls=["http://image-net.org/small/download.php"],
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
@@ -132,7 +133,4 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
       record = {
           "image": fobj,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

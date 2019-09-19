@@ -31,10 +31,6 @@ class AmazonUSReviewsTest(testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = "test.tsv"
-  
-
-class AmazonUSReviewsS3Test(AmazonUSReviewsTest):
-  VERSION = "1.0.0"  
 
 
 if __name__ == "__main__":

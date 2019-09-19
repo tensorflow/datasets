@@ -131,10 +131,7 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
           "alphabet_char_id": alphabet_char_id,
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield image_id, record
-      else:
-        yield record
+      yield image_id, record
 
 
 def _walk_omniglot_dir(directory):

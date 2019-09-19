@@ -118,13 +118,20 @@ class ParaCrawlConfig(tfds.core.BuilderConfig):
 class ParaCrawl(tfds.core.GeneratorBasedBuilder):
   """ParaCrawl machine translation dataset."""
 
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.1.0: Initial versio.
   BUILDER_CONFIGS = [
       # The version below does not refer to the version of the released
       # database. It only indicates the version of the TFDS integration.
       ParaCrawlConfig(  # pylint: disable=g-complex-comprehension
           target_language=target_language,
           version=tfds.core.Version(
-              "0.1.0", experiments={tfds.core.Experiment.S3: False}))
+              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version("1.0.0"),
+          ],
+      )
       for target_language in _target_languages()
   ]
 
@@ -145,7 +152,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _vocab_text_gen(self, files, language):
-    for ex in self._generate_examples(**files):
+    for _, ex in self._generate_examples(**files):
       yield ex[language]
 
   def _split_generators(self, dl_manager):
@@ -164,11 +171,11 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
     target_language = self.builder_config.target_language
 
     with tf.io.gfile.GFile(data_file) as f:
-      for i, line in enumerate(f):
+      for idx, line in enumerate(f):
         line_parts = line.strip().split("\t")
         if len(line_parts) != 2:
-          raise ValueError(("Wrong data format in line {}. The line '{}' does "
-                            "not have exactly one delimiter.").format(i, line))
+          msg = ("Wrong data format in line {}. The line '{}' does "
+                 "not have exactly one delimiter.").format(idx, line)
+          raise ValueError(msg)
         source, target = line_parts[0].strip(), line_parts[1].strip()
-
-        yield {"en": source, target_language: target}
+        yield idx, {"en": source, target_language: target}

@@ -1,0 +1,121 @@
+{
+  "citation": "@inproceedings{conf/iccv/LiuLWT15,\n  added-at = {2018-10-09T00:00:00.000+0200},\n  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},\n  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},\n  booktitle = {ICCV},\n  crossref = {conf/iccv/2015},\n  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},\n  interhash = {3f735aaa11957e73914bbe2ca9d5e702},\n  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},\n  isbn = {978-1-4673-8391-2},\n  keywords = {dblp},\n  pages = {3730-3738},\n  publisher = {IEEE Computer Society},\n  timestamp = {2018-10-11T11:43:28.000+0200},\n  title = {Deep Learning Face Attributes in the Wild.},\n  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},\n  year = 2015\n}\n", 
+  "description": "CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset with more than 200K celebrity images, each with 40 attribute annotations. The images in this dataset cover large pose variations and background clutter. CelebA has large diversities, large quantities, and rich annotations, including\n - 10,177 number of identities,\n - 202,599 number of face images, and\n - 5 landmark locations, 40 binary attributes annotations per image.\n\nThe dataset can be employed as the training and test sets for the following computer vision tasks: face attribute recognition, face detection, and landmark (or facial part) localization.\n", 
+  "location": {
+    "urls": [
+      "http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"
+    ]
+  }, 
+  "name": "celeb_a", 
+  "schema": {
+    "feature": [
+      {
+        "name": "attributes"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "218"
+            }, 
+            {
+              "size": "178"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "landmarks"
+      }
+    ]
+  }, 
+  "sizeInBytes": "1485204305", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "4", 
+      "shardLengths": [
+        "9981", 
+        "9981"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19962"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "19962"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "shardLengths": [
+        "10173", 
+        "10173", 
+        "10173", 
+        "10174", 
+        "10173", 
+        "10173", 
+        "10173", 
+        "10173", 
+        "10173", 
+        "10173", 
+        "10173", 
+        "10174", 
+        "10173", 
+        "10173", 
+        "10173", 
+        "10173"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "162770"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "162770"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "4", 
+      "shardLengths": [
+        "9934", 
+        "9933"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "19867"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "19867"
+      }
+    }
+  ], 
+  "version": "1.0.0"
+}

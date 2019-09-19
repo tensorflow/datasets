@@ -59,7 +59,7 @@ class SplitBase(object):
        are the `NamedSplit` objects)
 
     ```
-    split = tfds.TRAIN + tfds.TEST.subsplit(tfds.percent[:50])
+    split = tfds.Split.TRAIN + tfds.Split.TEST.subsplit(tfds.percent[:50])
     ```
 
     2) The `SplitBase` is forwarded to the `.as_dataset()` function

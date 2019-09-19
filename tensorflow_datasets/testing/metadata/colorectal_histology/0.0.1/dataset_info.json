@@ -1,0 +1,86 @@
+{
+  "citation": "@article{kather2016multi,\n  title={Multi-class texture analysis in colorectal cancer histology},\n  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{\"o}llner, Frank Gerrit},\n  journal={Scientific reports},\n  volume={6},\n  pages={27988},\n  year={2016},\n  publisher={Nature Publishing Group}\n}\n", 
+  "description": "Classification of textures in colorectal cancer histology. Each example is a 150 x 150 x 3 RGB image of one of 8 classes.", 
+  "downloadChecksums": {
+    "https://zenodo.org/record/53169/files/Kather_texture_2016_image_tiles_5000.zip": "936d0b95ae0f04f1f7b18a2b7e8c55776c3e887d102f645bcee752d1a6626a32"
+  }, 
+  "location": {
+    "urls": [
+      "https://zenodo.org/record/53169#.XGZemKwzbmG"
+    ]
+  }, 
+  "name": "colorectal_histology", 
+  "schema": {
+    "feature": [
+      {
+        "name": "filename", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "150"
+            }, 
+            {
+              "size": "150"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "258098431", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5000"
+              }
+            }, 
+            "name": "filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5000"
+              }, 
+              "max": 7.0
+            }
+          }
+        ], 
+        "numExamples": "5000"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "0.0.1"
+}

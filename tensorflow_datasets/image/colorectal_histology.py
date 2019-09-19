@@ -122,10 +122,7 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
             "label": class_name,
             "filename": fn,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield "%s/%s" % (class_name, fn), record
-        else:
-          yield record
+        yield "%s/%s" % (class_name, fn), record
 
 
 class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
@@ -169,8 +166,5 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
     for fn in tf.io.gfile.listdir(folder):
       image = _load_tif(os.path.join(folder, fn))
       record = dict(image=image, filename=fn)
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fn, record
-      else:
-        yield record
+      yield fn, record
 

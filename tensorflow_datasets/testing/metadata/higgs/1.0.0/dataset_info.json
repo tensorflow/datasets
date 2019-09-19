@@ -1,0 +1,457 @@
+{
+  "citation": "@article{Baldi:2014kfa,\n      author         = \"Baldi, Pierre and Sadowski, Peter and Whiteson, Daniel\",\n      title          = \"{Searching for Exotic Particles in High-Energy Physics\n                        with Deep Learning}\",\n      journal        = \"Nature Commun.\",\n      volume         = \"5\",\n      year           = \"2014\",\n      pages          = \"4308\",\n      doi            = \"10.1038/ncomms5308\",\n      eprint         = \"1402.4735\",\n      archivePrefix  = \"arXiv\",\n      primaryClass   = \"hep-ph\",\n      SLACcitation   = \"%%CITATION = ARXIV:1402.4735;%%\"\n}\n", 
+  "description": "The data has been produced using Monte Carlo simulations. \nThe first 21 features (columns 2-22) are kinematic properties \nmeasured by the particle detectors in the accelerator. \nThe last seven features are functions of the first 21 features; \nthese are high-level features derived by physicists to help \ndiscriminate between the two classes. There is an interest \nin using deep learning methods to obviate the need for physicists \nto manually develop such features. Benchmark results using \nBayesian Decision Trees from a standard physics package and \n5-layer neural networks are presented in the original paper. \n", 
+  "location": {
+    "urls": [
+      "https://archive.ics.uci.edu/ml/datasets/HIGGS"
+    ]
+  }, 
+  "name": "higgs", 
+  "schema": {
+    "feature": [
+      {
+        "name": "class_label", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_1_b-tag", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_1_eta", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_1_phi", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_1_pt", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_2_b-tag", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_2_eta", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_2_phi", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_2_pt", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_3_b-tag", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_3_eta", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_3_phi", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_3_pt", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_4_b-tag", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_4_eta", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_4_phi", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "jet_4_pt", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "lepton_eta", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "lepton_pT", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "lepton_phi", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "m_bb", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "m_jj", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "m_jjj", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "m_jlv", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "m_lv", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "m_wbb", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "m_wwbb", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "missing_energy_magnitude", 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "missing_energy_phi", 
+        "type": "FLOAT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "2816407858", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "class_label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 1.0
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_1_b-tag", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 2.1730761528015137
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_1_eta", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 2.9696741104125977, 
+              "min": -2.9697251319885254
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_1_phi", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 1.741453766822815, 
+              "min": -1.7412374019622803
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_1_pt", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 9.940390586853027, 
+              "min": 0.13750243186950684
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_2_b-tag", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 2.214872121810913
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_2_eta", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 2.913209915161133, 
+              "min": -2.9130895137786865
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_2_phi", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 1.7431747913360596, 
+              "min": -1.742371678352356
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_2_pt", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 11.64708137512207, 
+              "min": 0.18898114562034607
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_3_b-tag", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 2.548224449157715
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_3_eta", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 2.730008840560913, 
+              "min": -2.7296628952026367
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_3_phi", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 1.7428839206695557, 
+              "min": -1.7420687675476074
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_3_pt", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 14.708989143371582, 
+              "min": 0.26360762119293213
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_4_b-tag", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 3.101961374282837
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_4_eta", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 2.498008966445923, 
+              "min": -2.497264862060547
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_4_phi", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 1.7433723211288452, 
+              "min": -1.7426908016204834
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "jet_4_pt", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 12.882567405700684, 
+              "min": 0.36535415053367615
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "lepton_eta", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 2.4348678588867188, 
+              "min": -2.434976100921631
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "lepton_pT", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 12.09891414642334, 
+              "min": 0.2746966481208801
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "lepton_phi", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 1.7432359457015991, 
+              "min": -1.7425082921981812
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "m_bb", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 17.76285171508789, 
+              "min": 0.04786214604973793
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "m_jj", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 40.19236755371094, 
+              "min": 0.07507045567035675
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "m_jjj", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 20.37278175354004, 
+              "min": 0.1986757218837738
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "m_jlv", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 14.262438774108887, 
+              "min": 0.13200616836547852
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "m_lv", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 7.992739200592041, 
+              "min": 0.08304865658283234
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "m_wbb", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 11.496521949768066, 
+              "min": 0.2951121926307678
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "m_wwbb", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 8.37449836730957, 
+              "min": 0.330721378326416
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "missing_energy_magnitude", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 15.396821022033691, 
+              "min": 0.00023700884776189923
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "missing_energy_phi", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "11000000"
+              }, 
+              "max": 1.7432570457458496, 
+              "min": -1.7439435720443726
+            }, 
+            "type": "FLOAT"
+          }
+        ], 
+        "numExamples": "11000000"
+      }
+    }
+  ], 
+  "version": "1.0.0"
+}

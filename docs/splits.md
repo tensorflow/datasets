@@ -25,9 +25,12 @@ as well as combinations of those.
 Each versioned dataset either implements the new S3 API, or the legacy API,
 which will eventually be retired. New datasets (except Beam ones for now) all
 implement S3, and we're slowly rolling it out to all datasets.
+If the dataset you're interested in implements S3, use S3.
 
-To find out whether a dataset implements S3, one can look at the source code
-or call:
+To find out whether a dataset implements S3, look at the dataset's source code
+(specifically see if the `tfds.core.Version` object is constructed with
+`experiments={tfds.core.Experiment.S3: False}`; if not, then you can use S3
+with that version because it defaults to `True`). Or you can call:
 
 ```
 ds_builder.version.implements(tfds.core.Experiment.S3)
@@ -138,6 +141,9 @@ elements - regardless of platform, architecture, etc. - even though some of
 the records might have different values (eg: imgage encoding, label, ...).
 
 ## Legacy slicing API
+
+Note: This will soon be deprecated. If the dataset you're interested in
+implements S3, use S3 (see above).
 
 [`tfds.Split`](api_docs/python/tfds/Split.md)s (typically `tfds.Split.TRAIN` and
 `tfds.Split.TEST`). A given dataset's splits are defined in

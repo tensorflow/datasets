@@ -35,6 +35,9 @@ ImageNet, we aim to provide on average 1000 images to illustrate each synset.
 Images of each concept are quality-controlled and human-annotated. In its
 completion, we hope ImageNet will offer tens of millions of cleanly sorted
 images for most of the concepts in the WordNet hierarchy.
+
+Note that labels were never publicly released for the test set, so we only
+include splits for the training and validation sets here.
 '''
 
 # Web-site is asking to cite paper from 2015.
@@ -145,6 +148,8 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     train_path, val_path = dl_manager.download([
         '%s/ILSVRC2012_img_train.tar' % _URL_PREFIX,
         '%s/ILSVRC2012_img_val.tar' % _URL_PREFIX,
+        # We don't import the original test split, as it doesn't include labels.
+        # These were never publicly released.
     ])
     if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
       msg = 'You must download the dataset files manually and place them in: '
@@ -181,9 +186,9 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, archive, validation_labels=None):
     """Yields examples."""
     if validation_labels:  # Validation split
-      for example in self._generate_examples_validation(archive,
-                                                        validation_labels):
-        yield example
+      for key, example in self._generate_examples_validation(archive,
+                                                             validation_labels):
+        yield key, example
     # Training split. Main archive contains archives names after a synset noun.
     # Each sub-archive contains pictures associated to that synset.
     for fname, fobj in archive:
@@ -200,10 +205,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
             'image': image,
             'label': label,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield image_fname, record
-        else:
-          yield record
+        yield image_fname, record
 
   def _generate_examples_validation(self, archive, labels):
     for fname, fobj in archive:
@@ -212,7 +214,4 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
           'image': fobj,
           'label': labels[fname],
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

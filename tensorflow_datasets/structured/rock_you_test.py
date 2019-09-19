@@ -31,10 +31,6 @@ class RockYouTest(testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = "rockyou.txt"
-  
-
-class RockYouS3Test(RockYouTest):
-  VERSION = "2.0.0"
 
 
 if __name__ == "__main__":
