@@ -49,10 +49,10 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract({
-      'train': 'https://spineweb.s3.amazonaws.com/training_images.zip',
-      'train_csv': 'https://spineweb.s3.amazonaws.com/training_angles.csv',
-      'test': 'https://spineweb.s3.amazonaws.com/test_images.zip',
-      'test_csv': 'https://spineweb.s3.amazonaws.com/test_angles.csv'
+        'train': 'https://spineweb.s3.amazonaws.com/training_images.zip',
+        'train_csv': 'https://spineweb.s3.amazonaws.com/training_angles.csv',
+        'test': 'https://spineweb.s3.amazonaws.com/test_images.zip',
+        'test_csv': 'https://spineweb.s3.amazonaws.com/test_angles.csv'
     })
 
     return [
@@ -79,11 +79,11 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
     image_names_list = tf.io.gfile.listdir(images_dir_path)
     with tf.io.gfile.GFile(labels, 'r') as f:
       labels_list = [tf.strings.to_number(tf.convert_to_tensor(
-        line), tf.float32) for line in csv.reader(f)]
+          line), tf.float32) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
       record = {
-        "image": "%s/%s" % (images_dir_path, image_name),
-        "label": label
+          "image": "%s/%s" % (images_dir_path, image_name),
+          "label": label
       }
 
       yield image_name, record
