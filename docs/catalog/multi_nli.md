@@ -29,15 +29,9 @@ following configurations predefined (defaults to the first one):
 
 ## `multi_nli/plain_text`
 
-```python
-FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
-})
-```
+Plain text
 
-## Statistics
+### Statistics
 
 Split                 | Examples
 :-------------------- | -------:
@@ -46,12 +40,19 @@ TRAIN                 | 392,702
 VALIDATION_MISMATCHED | 9,832
 VALIDATION_MATCHED    | 9,815
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'premise': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
 
 *   [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

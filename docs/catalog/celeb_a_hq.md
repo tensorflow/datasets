@@ -48,6 +48,17 @@ following configurations predefined (defaults to the first one):
 
 ## `celeb_a_hq/1024`
 
+CelebaHQ images in 1024 x 1024 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(1024, 1024, 3), dtype=tf.uint8),
@@ -55,7 +66,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/512`
+
+CelebaHQ images in 512 x 512 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -64,7 +90,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/256`
+
+CelebaHQ images in 256 x 256 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -73,7 +114,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/128`
+
+CelebaHQ images in 128 x 128 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -82,7 +138,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/64`
+
+CelebaHQ images in 64 x 64 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -91,7 +162,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/32`
+
+CelebaHQ images in 32 x 32 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -100,7 +186,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/16`
+
+CelebaHQ images in 16 x 16 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -109,7 +210,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/8`
+
+CelebaHQ images in 8 x 8 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -118,7 +234,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/4`
+
+CelebaHQ images in 4 x 4 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -127,7 +258,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/2`
+
+CelebaHQ images in 2 x 2 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -136,7 +282,22 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
+
 ## `celeb_a_hq/1`
+
+CelebaHQ images in 1 x 1 resolution
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 30,000
+TRAIN | 30,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -145,19 +306,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-TRAIN | 30,000
-ALL   | 30,000
-
-## Urls
+### Urls
 
 *   [https://github.com/tkarras/progressive_growing_of_gans](https://github.com/tkarras/progressive_growing_of_gans)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

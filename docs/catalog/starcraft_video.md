@@ -45,83 +45,203 @@ and has the following configurations predefined (defaults to the first one):
 
 ## `starcraft_video/brawl_64`
 
-```python
-FeaturesDict({
-    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
-})
-```
+Brawl map with 64x64 resolution.
 
-## `starcraft_video/brawl_128`
-
-```python
-FeaturesDict({
-    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
-})
-```
-
-## `starcraft_video/collect_mineral_shards_64`
-
-```python
-FeaturesDict({
-    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
-})
-```
-
-## `starcraft_video/collect_mineral_shards_128`
-
-```python
-FeaturesDict({
-    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
-})
-```
-
-## `starcraft_video/move_unit_to_border_64`
-
-```python
-FeaturesDict({
-    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
-})
-```
-
-## `starcraft_video/move_unit_to_border_128`
-
-```python
-FeaturesDict({
-    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
-})
-```
-
-## `starcraft_video/road_trip_with_medivac_64`
-
-```python
-FeaturesDict({
-    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
-})
-```
-
-## `starcraft_video/road_trip_with_medivac_128`
-
-```python
-FeaturesDict({
-    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
-})
-```
-
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | -------:
 ALL        | 14,000
 TRAIN      | 10,000
-VALIDATION | 2,000
 TEST       | 2,000
+VALIDATION | 2,000
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
+})
+```
+
+### Urls
 
 *   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
+## `starcraft_video/brawl_128`
+
+Brawl map with 128x128 resolution.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 14,000
+TRAIN      | 10,000
+TEST       | 2,000
+VALIDATION | 2,000
+
+### Features
+
+```python
+FeaturesDict({
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
+
+## `starcraft_video/collect_mineral_shards_64`
+
+CollectMineralShards map with 64x64 resolution.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 14,000
+TRAIN      | 10,000
+TEST       | 2,000
+VALIDATION | 2,000
+
+### Features
+
+```python
+FeaturesDict({
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
+
+## `starcraft_video/collect_mineral_shards_128`
+
+CollectMineralShards map with 128x128 resolution.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 14,000
+TRAIN      | 10,000
+TEST       | 2,000
+VALIDATION | 2,000
+
+### Features
+
+```python
+FeaturesDict({
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
+
+## `starcraft_video/move_unit_to_border_64`
+
+MoveUnitToBorder map with 64x64 resolution.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 14,000
+TRAIN      | 10,000
+TEST       | 2,000
+VALIDATION | 2,000
+
+### Features
+
+```python
+FeaturesDict({
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
+
+## `starcraft_video/move_unit_to_border_128`
+
+MoveUnitToBorder map with 128x128 resolution.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 14,000
+TRAIN      | 10,000
+TEST       | 2,000
+VALIDATION | 2,000
+
+### Features
+
+```python
+FeaturesDict({
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
+
+## `starcraft_video/road_trip_with_medivac_64`
+
+RoadTripWithMedivac map with 64x64 resolution.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 14,000
+TRAIN      | 10,000
+TEST       | 2,000
+VALIDATION | 2,000
+
+### Features
+
+```python
+FeaturesDict({
+    'rgb_screen': Video(Image(shape=(64, 64, 3), dtype=tf.uint8)),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
+
+## `starcraft_video/road_trip_with_medivac_128`
+
+RoadTripWithMedivac map with 128x128 resolution.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 14,000
+TRAIN      | 10,000
+TEST       | 2,000
+VALIDATION | 2,000
+
+### Features
+
+```python
+FeaturesDict({
+    'rgb_screen': Video(Image(shape=(128, 128, 3), dtype=tf.uint8)),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/scv_dataset/README.html](https://storage.googleapis.com/scv_dataset/README.html)
 
 ## Citation
 ```

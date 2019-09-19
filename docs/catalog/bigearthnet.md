@@ -56,6 +56,14 @@ has the following configurations predefined (defaults to the first one):
 
 ## `bigearthnet/rgb`
 
+Sentinel-2 RGB channels
+
+### Statistics
+
+None computed
+
+### Features
+
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -75,7 +83,23 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [http://bigearth.net](http://bigearth.net)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'labels')`
+
 ## `bigearthnet/all`
+
+13 Sentinel-2 channels
+
+### Statistics
+
+None computed
+
+### Features
 
 ```python
 FeaturesDict({
@@ -107,15 +131,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-None computed
-
-## Urls
+### Urls
 
 *   [http://bigearth.net](http://bigearth.net)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

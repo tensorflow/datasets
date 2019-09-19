@@ -38,25 +38,19 @@ and has the following configurations predefined (defaults to the first one):
 
 ## `diabetic_retinopathy_detection/original`
 
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
+Images at their original resolution and quality.
 
-## `diabetic_retinopathy_detection/1M`
+### Statistics
 
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
+Split      | Examples
+:--------- | -------:
+ALL        | 88,712
+TEST       | 42,670
+TRAIN      | 35,126
+VALIDATION | 10,906
+SAMPLE     | 10
 
-## `diabetic_retinopathy_detection/250K`
+### Features
 
 ```python
 FeaturesDict({
@@ -66,25 +60,90 @@ FeaturesDict({
 })
 ```
 
-## `diabetic_retinopathy_detection/btgraham-300`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'name': Text(shape=(), dtype=tf.string),
-})
-```
-
-## Statistics
-None computed
-
-## Urls
+### Urls
 
 *   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
+## `diabetic_retinopathy_detection/1M`
+
+Images have roughly 1,000,000 pixels, at 72 quality.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 88,712
+TEST       | 42,670
+TRAIN      | 35,126
+VALIDATION | 10,906
+SAMPLE     | 10
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
+
+*   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
+
+## `diabetic_retinopathy_detection/250K`
+
+Images have roughly 250,000 pixels, at 72 quality.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 88,712
+TEST       | 42,670
+TRAIN      | 35,126
+VALIDATION | 10,906
+SAMPLE     | 10
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
+
+*   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
+
+## `diabetic_retinopathy_detection/btgraham-300`
+
+Images have been preprocessed as the winner of the Kaggle competition did in
+2015: first they are resized so that the radius of an eyeball is 300 pixels,
+then they are cropped to 90% of the radius, and finally they are encoded with 72
+JPEG quality.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'name': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
+
+*   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
 ## Citation
 ```

@@ -48,15 +48,12 @@ FeaturesDict({
 
 Split | Examples
 :---- | -------:
-TRAIN | 61,225
 ALL   | 61,225
+TRAIN | 61,225
 
 ## Urls
 
 *   [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

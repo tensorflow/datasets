@@ -40,92 +40,9 @@ and has the following configurations predefined (defaults to the first one):
 
 ## `open_images_v4/original`
 
-```python
-FeaturesDict({
-    'bobjects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'objects': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'objects_trainable': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-})
-```
+Images at their original resolution and quality.
 
-## `open_images_v4/300k`
-
-```python
-FeaturesDict({
-    'bobjects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'objects': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'objects_trainable': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-})
-```
-
-## `open_images_v4/200k`
-
-```python
-FeaturesDict({
-    'bobjects': Sequence({
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'is_depiction': Tensor(shape=(), dtype=tf.int8),
-        'is_group_of': Tensor(shape=(), dtype=tf.int8),
-        'is_inside': Tensor(shape=(), dtype=tf.int8),
-        'is_occluded': Tensor(shape=(), dtype=tf.int8),
-        'is_truncated': Tensor(shape=(), dtype=tf.int8),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'objects': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-    'objects_trainable': Sequence({
-        'confidence': Tensor(shape=(), dtype=tf.int32),
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
-        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    }),
-})
-```
-
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | --------:
@@ -134,12 +51,130 @@ TRAIN      | 1,743,042
 TEST       | 125,436
 VALIDATION | 41,620
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+})
+```
+
+### Urls
 
 *   [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
+## `open_images_v4/300k`
+
+Images have roughly 300,000 pixels, at 72 JPEG quality.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 1,910,098
+TRAIN      | 1,743,042
+TEST       | 125,436
+VALIDATION | 41,620
+
+### Features
+
+```python
+FeaturesDict({
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
+
+## `open_images_v4/200k`
+
+Images have roughly 200,000 pixels, at 72 JPEG quality.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 1,910,098
+TRAIN      | 1,743,042
+TEST       | 125,436
+VALIDATION | 41,620
+
+### Features
+
+```python
+FeaturesDict({
+    'bobjects': Sequence({
+        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
+        'is_depiction': Tensor(shape=(), dtype=tf.int8),
+        'is_group_of': Tensor(shape=(), dtype=tf.int8),
+        'is_inside': Tensor(shape=(), dtype=tf.int8),
+        'is_occluded': Tensor(shape=(), dtype=tf.int8),
+        'is_truncated': Tensor(shape=(), dtype=tf.int8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=601),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'image/filename': Text(shape=(), dtype=tf.string),
+    'objects': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=19995),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+    'objects_trainable': Sequence({
+        'confidence': Tensor(shape=(), dtype=tf.int32),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=7186),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
+    }),
+})
+```
+
+### Urls
+
+*   [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 
 ## Citation
 ```

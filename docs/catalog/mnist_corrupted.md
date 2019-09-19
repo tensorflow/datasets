@@ -61,149 +61,9 @@ configurations predefined (defaults to the first one):
 
 ## `mnist_corrupted/identity`
 
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
+Corruption method: identity
 
-## `mnist_corrupted/shot_noise`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/impulse_noise`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/glass_blur`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/motion_blur`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/shear`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/scale`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/rotate`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/brightness`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/translate`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/stripe`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/fog`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/spatter`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/dotted_line`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/zigzag`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## `mnist_corrupted/canny_edges`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## Statistics
+### Statistics
 
 Split | Examples
 :---- | -------:
@@ -211,11 +71,456 @@ ALL   | 70,000
 TRAIN | 60,000
 TEST  | 10,000
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
 
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/shot_noise`
+
+Corruption method: shot_noise
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/impulse_noise`
+
+Corruption method: impulse_noise
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/glass_blur`
+
+Corruption method: glass_blur
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/motion_blur`
+
+Corruption method: motion_blur
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/shear`
+
+Corruption method: shear
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/scale`
+
+Corruption method: scale
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/rotate`
+
+Corruption method: rotate
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/brightness`
+
+Corruption method: brightness
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/translate`
+
+Corruption method: translate
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/stripe`
+
+Corruption method: stripe
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/fog`
+
+Corruption method: fog
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/spatter`
+
+Corruption method: spatter
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/dotted_line`
+
+Corruption method: dotted_line
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/zigzag`
+
+Corruption method: zigzag
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `mnist_corrupted/canny_edges`
+
+Corruption method: canny_edges
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 70,000
+TRAIN | 60,000
+TEST  | 10,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
+
+### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## Citation

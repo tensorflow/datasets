@@ -35,14 +35,11 @@ FeaturesDict({
 
 Split | Examples
 :---- | ---------:
-TRAIN | 14,344,391
 ALL   | 14,344,391
+TRAIN | 14,344,391
 
 ## Urls
 
 *   [https://wiki.skullsecurity.org/Passwords](https://wiki.skullsecurity.org/Passwords)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 --------------------------------------------------------------------------------

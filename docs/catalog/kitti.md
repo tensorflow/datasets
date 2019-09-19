@@ -56,9 +56,6 @@ VALIDATION | 423
 
 *   [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
-
 ## Citation
 ```
 @inproceedings{Geiger2012CVPR,

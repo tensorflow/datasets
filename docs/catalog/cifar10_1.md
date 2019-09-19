@@ -42,34 +42,65 @@ the following configurations predefined (defaults to the first one):
 
 ## `cifar10_1/v4`
 
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
+It is the first version of our dataset on which we tested any classifier. As
+mentioned above, this makes the v4 dataset independent of the classifiers we
+evaluate. The numbers reported in the main sections of our paper use this
+version of the dataset. It was built from the top 25 TinyImages keywords for
+each class, which led to a slight class imbalance. The largest difference is
+that ships make up only 8% of the test set instead of 10%. v4 contains 2,021
+images.
 
-## `cifar10_1/v6`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## Statistics
+### Statistics
 
 Split | Examples
 :---- | -------:
-TEST  | 2,000
-ALL   | 2,000
+ALL   | 2,021
+TEST  | 2,021
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
 
 *   [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `cifar10_1/v6`
+
+It is derived from a slightly improved keyword allocation that is exactly class
+balanced. This version of the dataset corresponds to the results in Appendix D
+of our paper. v6 contains 2,000 images.
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 2,000
+TEST  | 2,000
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://github.com/modestyachts/CIFAR-10.1](https://github.com/modestyachts/CIFAR-10.1)
+
+### Supervised keys (for `as_supervised=True`)
 
 `(u'image', u'label')`
 

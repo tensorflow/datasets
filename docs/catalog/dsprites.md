@@ -62,15 +62,12 @@ FeaturesDict({
 
 Split | Examples
 :---- | -------:
-TRAIN | 737,280
 ALL   | 737,280
+TRAIN | 737,280
 
 ## Urls
 
 *   [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

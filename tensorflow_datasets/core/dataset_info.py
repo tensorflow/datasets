@@ -188,6 +188,10 @@ class DatasetInfo(object):
     return self._builder.version
 
   @property
+  def homepage_url(self):
+    return self.urls and self.urls[0] or "https://www.tensorflow.org/datasets"
+
+  @property
   def citation(self):
     return self.as_proto.citation
 

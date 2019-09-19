@@ -342,3 +342,21 @@ def has_sufficient_disk_space(needed_bytes, directory="."):
   except OSError:
     return True
   return needed_bytes < free_bytes
+
+
+def get_class_path(cls, use_tfds_prefix=True):
+  """Returns path of given class or object. Eg: `tfds.image.cifar.Cifar10`."""
+  if not isinstance(cls, type):
+    cls = cls.__class__
+  module_path = cls.__module__
+  if use_tfds_prefix and module_path.startswith("tensorflow_datasets"):
+    module_path = "tfds" + module_path[len("tensorflow_datasets"):]
+  return ".".join([module_path, cls.__name__])
+
+
+def get_class_url(cls):
+  """Returns URL of given class or object."""
+  cls_path = get_class_path(cls, use_tfds_prefix=False)
+  module_path, unused_class_name = cls_path.rsplit(".", 1)
+  module_path = module_path.replace(".", "/")
+  return constants.SRC_BASE_URL + module_path + ".py"

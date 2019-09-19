@@ -41,9 +41,6 @@ TRAIN | 59,551
 
 *   [http://cvgl.stanford.edu/projects/lifted_struct/](http://cvgl.stanford.edu/projects/lifted_struct/)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
-
 ## Citation
 ```
 @inproceedings{song2016deep,

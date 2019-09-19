@@ -40,6 +40,18 @@ following configurations predefined (defaults to the first one):
 
 ## `emnist/byclass`
 
+EMNIST ByClass
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 814,255
+TRAIN | 697,932
+TEST  | 116,323
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -47,7 +59,27 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `emnist/bymerge`
+
+EMNIST ByMerge
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 814,255
+TRAIN | 697,932
+TEST  | 116,323
+
+### Features
 
 ```python
 FeaturesDict({
@@ -55,9 +87,29 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
 })
 ```
+
+### Urls
+
+*   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `emnist/balanced`
 
+EMNIST Balanced
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 131,600
+TRAIN | 112,800
+TEST  | 18,800
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -65,7 +117,27 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `emnist/letters`
+
+EMNIST Letters
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 103,600
+TRAIN | 88,800
+TEST  | 14,800
+
+### Features
 
 ```python
 FeaturesDict({
@@ -74,7 +146,27 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `emnist/digits`
+
+EMNIST Digits
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 280,000
+TRAIN | 240,000
+TEST  | 40,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -82,17 +174,20 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+### Urls
+
+*   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `emnist/mnist`
 
-```python
-FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
+EMNIST MNIST
 
-## Statistics
+### Statistics
 
 Split | Examples
 :---- | -------:
@@ -100,11 +195,21 @@ ALL   | 70,000
 TRAIN | 60,000
 TEST  | 10,000
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
 
 *   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## Citation

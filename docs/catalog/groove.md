@@ -39,6 +39,19 @@ following configurations predefined (defaults to the first one):
 
 ## `groove/full-midionly`
 
+Groove dataset without audio, unsplit.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 1,150
+TRAIN      | 897
+TEST       | 129
+VALIDATION | 124
+
+### Features
+
 ```python
 FeaturesDict({
     'bpm': Tensor(shape=(), dtype=tf.int32),
@@ -53,9 +66,26 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 ## `groove/full-16000hz`
 
+Groove dataset with audio, unsplit.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 1,090
+TRAIN      | 846
+TEST       | 124
+VALIDATION | 120
+
+### Features
+
 ```python
 FeaturesDict({
     'audio': Tensor(shape=[None], dtype=tf.float32),
@@ -71,9 +101,26 @@ FeaturesDict({
     'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 ## `groove/2bar-midionly`
 
+Groove dataset without audio, split into 2-bar chunks.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 22,619
+TRAIN      | 18,163
+VALIDATION | 2,252
+TEST       | 2,204
+
+### Features
+
 ```python
 FeaturesDict({
     'bpm': Tensor(shape=(), dtype=tf.int32),
@@ -89,7 +136,24 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+
 ## `groove/2bar-16000hz`
+
+Groove dataset with audio, split into 2-bar chunks.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 18,297
+TRAIN      | 14,390
+VALIDATION | 2,034
+TEST       | 1,873
+
+### Features
 
 ```python
 FeaturesDict({
@@ -107,24 +171,15 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
+
 ## `groove/4bar-midionly`
 
-```python
-FeaturesDict({
-    'bpm': Tensor(shape=(), dtype=tf.int32),
-    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-    'id': Tensor(shape=(), dtype=tf.string),
-    'midi': Tensor(shape=(), dtype=tf.string),
-    'style': FeaturesDict({
-        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
-        'secondary': Tensor(shape=(), dtype=tf.string),
-    }),
-    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
-    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
+Groove dataset without audio, split into 4-bar chunks.
 
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | -------:
@@ -133,12 +188,26 @@ TRAIN      | 17,261
 VALIDATION | 2,121
 TEST       | 2,033
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'bpm': Tensor(shape=(), dtype=tf.int32),
+    'drummer': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'midi': Tensor(shape=(), dtype=tf.string),
+    'style': FeaturesDict({
+        'primary': ClassLabel(shape=(), dtype=tf.int64, num_classes=18),
+        'secondary': Tensor(shape=(), dtype=tf.string),
+    }),
+    'time_signature': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'type': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+### Urls
 
 *   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 

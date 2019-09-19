@@ -102,9 +102,6 @@ VALIDATION | 19,867
 
 *   [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
-
 ## Citation
 ```
 @inproceedings{conf/iccv/LiuLWT15,

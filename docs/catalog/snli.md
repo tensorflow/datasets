@@ -20,12 +20,25 @@ inference (NLI), also known as recognizing textual entailment (RTE).
 *   `DatasetBuilder`:
     [`tfds.text.snli.Snli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/snli.py)
 
-`snli` is configured with `tfds.text.snli.BuilderConfig` and has the following
-configurations predefined (defaults to the first one):
+`snli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
+following configurations predefined (defaults to the first one):
 
 *   `plain_text` (`v0.0.1`) (`Size: 90.17 MiB`): Plain text import of SNLI
 
 ## `snli/plain_text`
+
+Plain text import of SNLI
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 570,152
+TRAIN      | 550,152
+TEST       | 10,000
+VALIDATION | 10,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -35,21 +48,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 570,152
-TRAIN      | 550,152
-VALIDATION | 10,000
-TEST       | 10,000
-
-## Urls
+### Urls
 
 *   [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 

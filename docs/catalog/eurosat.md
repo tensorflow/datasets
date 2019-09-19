@@ -34,6 +34,17 @@ following configurations predefined (defaults to the first one):
 
 ## `eurosat/rgb`
 
+Sentinel-2 RGB channels
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 27,000
+TRAIN | 27,000
+
+### Features
+
 ```python
 FeaturesDict({
     'filename': Text(shape=(), dtype=tf.string),
@@ -42,7 +53,26 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `eurosat/all`
+
+13 Sentinel-2 channels
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 27,000
+TRAIN | 27,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -52,18 +82,12 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-TRAIN | 27,000
-ALL   | 27,000
-
-## Urls
+### Urls
 
 *   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'sentinel2', u'label')`
 
 ## Citation

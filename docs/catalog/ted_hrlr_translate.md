@@ -65,6 +65,19 @@ and has the following configurations predefined (defaults to the first one):
 
 ## `ted_hrlr_translate/az_to_en`
 
+Translation dataset from az to en in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 7,520
+TRAIN      | 5,946
+TEST       | 903
+VALIDATION | 671
+
+### Features
+
 ```python
 Translation({
     'az': Text(shape=(), dtype=tf.string),
@@ -72,7 +85,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'az', u'en')`
+
 ## `ted_hrlr_translate/aztr_to_en`
+
+Translation dataset from az_tr to en in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 189,970
+TRAIN      | 188,396
+TEST       | 903
+VALIDATION | 671
+
+### Features
 
 ```python
 Translation({
@@ -81,7 +115,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'az_tr', u'en')`
+
 ## `ted_hrlr_translate/be_to_en`
+
+Translation dataset from be to en in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 5,421
+TRAIN      | 4,509
+TEST       | 664
+VALIDATION | 248
+
+### Features
 
 ```python
 Translation({
@@ -90,7 +145,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'be', u'en')`
+
 ## `ted_hrlr_translate/beru_to_en`
+
+Translation dataset from be_ru to en in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 213,526
+TRAIN      | 212,614
+TEST       | 664
+VALIDATION | 248
+
+### Features
 
 ```python
 Translation({
@@ -99,7 +175,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'be_ru', u'en')`
+
 ## `ted_hrlr_translate/es_to_pt`
+
+Translation dataset from es to pt in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 47,717
+TRAIN      | 44,938
+TEST       | 1,763
+VALIDATION | 1,016
+
+### Features
 
 ```python
 Translation({
@@ -108,7 +205,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'es', u'pt')`
+
 ## `ted_hrlr_translate/fr_to_pt`
+
+Translation dataset from fr to pt in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 46,498
+TRAIN      | 43,873
+TEST       | 1,494
+VALIDATION | 1,131
+
+### Features
 
 ```python
 Translation({
@@ -117,7 +235,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'fr', u'pt')`
+
 ## `ted_hrlr_translate/gl_to_en`
+
+Translation dataset from gl to en in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 11,706
+TRAIN      | 10,017
+TEST       | 1,007
+VALIDATION | 682
+
+### Features
 
 ```python
 Translation({
@@ -126,7 +265,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'gl', u'en')`
+
 ## `ted_hrlr_translate/glpt_to_en`
+
+Translation dataset from gl_pt to en in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 63,491
+TRAIN      | 61,802
+TEST       | 1,007
+VALIDATION | 682
+
+### Features
 
 ```python
 Translation({
@@ -135,7 +295,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'gl_pt', u'en')`
+
 ## `ted_hrlr_translate/he_to_pt`
+
+Translation dataset from he to pt in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 51,279
+TRAIN      | 48,511
+TEST       | 1,623
+VALIDATION | 1,145
+
+### Features
 
 ```python
 Translation({
@@ -144,7 +325,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'he', u'pt')`
+
 ## `ted_hrlr_translate/it_to_pt`
+
+Translation dataset from it to pt in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 49,090
+TRAIN      | 46,259
+TEST       | 1,669
+VALIDATION | 1,162
+
+### Features
 
 ```python
 Translation({
@@ -153,7 +355,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'it', u'pt')`
+
 ## `ted_hrlr_translate/pt_to_en`
+
+Translation dataset from pt to en in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 54,781
+TRAIN      | 51,785
+TEST       | 1,803
+VALIDATION | 1,193
+
+### Features
 
 ```python
 Translation({
@@ -161,9 +384,30 @@ Translation({
     'pt': Text(shape=(), dtype=tf.string),
 })
 ```
+
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'pt', u'en')`
 
 ## `ted_hrlr_translate/ru_to_en`
 
+Translation dataset from ru to en in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 218,387
+TRAIN      | 208,106
+TEST       | 5,476
+VALIDATION | 4,805
+
+### Features
+
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -171,7 +415,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'ru', u'en')`
+
 ## `ted_hrlr_translate/ru_to_pt`
+
+Translation dataset from ru to pt in plain text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,050
+TRAIN      | 47,278
+TEST       | 1,588
+VALIDATION | 1,184
+
+### Features
 
 ```python
 Translation({
@@ -180,16 +445,19 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'ru', u'pt')`
+
 ## `ted_hrlr_translate/tr_to_en`
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'tr': Text(shape=(), dtype=tf.string),
-})
-```
+Translation dataset from tr to en in plain text.
 
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | -------:
@@ -198,11 +466,21 @@ TRAIN      | 182,450
 TEST       | 5,029
 VALIDATION | 4,045
 
-## Urls
+### Features
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'tr': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
 
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'tr', u'en')`
 
 ## Citation

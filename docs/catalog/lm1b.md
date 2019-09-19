@@ -34,37 +34,9 @@ configurations predefined (defaults to the first one):
 
 ## `lm1b/plain_text`
 
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-})
-```
+Plain text
 
-## `lm1b/bytes`
-
-```python
-FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
-```
-
-## `lm1b/subwords8k`
-
-```python
-FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
-})
-```
-
-## `lm1b/subwords32k`
-
-```python
-FeaturesDict({
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
-})
-```
-
-## Statistics
+### Statistics
 
 Split | Examples
 :---- | ---------:
@@ -72,11 +44,104 @@ ALL   | 30,607,716
 TRAIN | 30,301,028
 TEST  | 306,688
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'text': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
 
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
+`(u'text', u'text')`
+
+## `lm1b/bytes`
+
+Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+### Statistics
+
+Split | Examples
+:---- | ---------:
+ALL   | 30,607,716
+TRAIN | 30,301,028
+TEST  | 306,688
+
+### Features
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
+
+### Urls
+
+*   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'text', u'text')`
+
+## `lm1b/subwords8k`
+
+Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+
+### Statistics
+
+Split | Examples
+:---- | ---------:
+ALL   | 30,607,716
+TRAIN | 30,301,028
+TEST  | 306,688
+
+### Features
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
+})
+```
+
+### Urls
+
+*   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'text', u'text')`
+
+## `lm1b/subwords32k`
+
+Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+### Statistics
+
+Split | Examples
+:---- | ---------:
+ALL   | 30,607,716
+TRAIN | 30,301,028
+TEST  | 306,688
+
+### Features
+
+```python
+FeaturesDict({
+    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
+})
+```
+
+### Urls
+
+*   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
+
+### Supervised keys (for `as_supervised=True`)
+
 `(u'text', u'text')`
 
 ## Citation

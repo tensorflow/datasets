@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="imagenet2012" />
-  <meta itemprop="description" content="ILSVRC 2012, aka ImageNet is an image dataset organized according to the&#10;WordNet hierarchy. Each meaningful concept in WordNet, possibly described by&#10;multiple words or word phrases, is called a &quot;synonym set&quot; or &quot;synset&quot;. There are&#10;more than 100,000 synsets in WordNet, majority of them are nouns (80,000+). In&#10;ImageNet, we aim to provide on average 1000 images to illustrate each synset.&#10;Images of each concept are quality-controlled and human-annotated. In its&#10;completion, we hope ImageNet will offer tens of millions of cleanly sorted&#10;images for most of the concepts in the WordNet hierarchy.&#10;" />
+  <meta itemprop="description" content="ILSVRC 2012, aka ImageNet is an image dataset organized according to the&#10;WordNet hierarchy. Each meaningful concept in WordNet, possibly described by&#10;multiple words or word phrases, is called a &quot;synonym set&quot; or &quot;synset&quot;. There are&#10;more than 100,000 synsets in WordNet, majority of them are nouns (80,000+). In&#10;ImageNet, we aim to provide on average 1000 images to illustrate each synset.&#10;Images of each concept are quality-controlled and human-annotated. In its&#10;completion, we hope ImageNet will offer tens of millions of cleanly sorted&#10;images for most of the concepts in the WordNet hierarchy.&#10;&#10;Note that labels were never publicly released for the test set, so we only&#10;include splits for the training and validation sets here.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/imagenet2012" />
   <meta itemprop="sameAs" content="http://image-net.org/" />
 </div>
@@ -18,6 +18,9 @@ ImageNet, we aim to provide on average 1000 images to illustrate each synset.
 Images of each concept are quality-controlled and human-annotated. In its
 completion, we hope ImageNet will offer tens of millions of cleanly sorted
 images for most of the concepts in the WordNet hierarchy.
+
+Note that labels were never publicly released for the test set, so we only
+include splits for the training and validation sets here.
 
 *   URL: [http://image-net.org/](http://image-net.org/)
 *   `DatasetBuilder`:

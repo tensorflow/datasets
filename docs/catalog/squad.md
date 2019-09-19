@@ -27,6 +27,18 @@ configurations predefined (defaults to the first one):
 
 ## `squad/plain_text`
 
+Plain text
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 98,169
+TRAIN      | 87,599
+VALIDATION | 10,570
+
+### Features
+
 ```python
 FeaturesDict({
     'answers': Sequence({
@@ -40,20 +52,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 98,169
-TRAIN      | 87,599
-VALIDATION | 10,570
-
-## Urls
+### Urls
 
 *   [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

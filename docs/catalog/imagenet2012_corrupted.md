@@ -265,796 +265,17 @@ following configurations predefined (defaults to the first one):
 
 ## `imagenet2012_corrupted/gaussian_noise_1`
 
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_noise_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_noise_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_noise_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_noise_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/shot_noise_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/shot_noise_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/shot_noise_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/shot_noise_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/shot_noise_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/impulse_noise_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/impulse_noise_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/impulse_noise_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/impulse_noise_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/impulse_noise_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/defocus_blur_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/defocus_blur_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/defocus_blur_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/defocus_blur_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/defocus_blur_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/frosted_glass_blur_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/frosted_glass_blur_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/frosted_glass_blur_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/frosted_glass_blur_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/frosted_glass_blur_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/zoom_blur_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/zoom_blur_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/zoom_blur_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/zoom_blur_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/zoom_blur_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/fog_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/fog_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/fog_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/fog_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/fog_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/brightness_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/brightness_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/brightness_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/brightness_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/brightness_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/contrast_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/contrast_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/contrast_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/contrast_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/contrast_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/elastic_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/elastic_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/elastic_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/elastic_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/elastic_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/pixelate_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/pixelate_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/pixelate_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/pixelate_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/pixelate_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/jpeg_compression_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/jpeg_compression_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/jpeg_compression_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/jpeg_compression_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/jpeg_compression_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_blur_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_blur_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_blur_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_blur_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/gaussian_blur_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/saturate_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/saturate_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/saturate_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/saturate_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/saturate_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/spatter_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/spatter_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/spatter_3`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/spatter_4`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/spatter_5`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/speckle_noise_1`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/speckle_noise_2`
-
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
+corruption type = gaussian_noise, severity = 1
 
-## `imagenet2012_corrupted/speckle_noise_3`
+### Statistics
 
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
-
-## `imagenet2012_corrupted/speckle_noise_4`
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
 
-```python
-FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
-})
-```
+### Features
 
-## `imagenet2012_corrupted/speckle_noise_5`
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -1062,15 +283,2244 @@ FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
 })
 ```
-
-## Statistics
-None computed
 
-## Urls
+### Urls
 
 *   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_noise_2`
+
+corruption type = gaussian_noise, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_noise_3`
+
+corruption type = gaussian_noise, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_noise_4`
+
+corruption type = gaussian_noise, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_noise_5`
+
+corruption type = gaussian_noise, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/shot_noise_1`
+
+corruption type = shot_noise, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/shot_noise_2`
+
+corruption type = shot_noise, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/shot_noise_3`
+
+corruption type = shot_noise, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/shot_noise_4`
+
+corruption type = shot_noise, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/shot_noise_5`
+
+corruption type = shot_noise, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/impulse_noise_1`
+
+corruption type = impulse_noise, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/impulse_noise_2`
+
+corruption type = impulse_noise, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/impulse_noise_3`
+
+corruption type = impulse_noise, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/impulse_noise_4`
+
+corruption type = impulse_noise, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/impulse_noise_5`
+
+corruption type = impulse_noise, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/defocus_blur_1`
+
+corruption type = defocus_blur, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/defocus_blur_2`
+
+corruption type = defocus_blur, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/defocus_blur_3`
+
+corruption type = defocus_blur, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/defocus_blur_4`
+
+corruption type = defocus_blur, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/defocus_blur_5`
+
+corruption type = defocus_blur, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/frosted_glass_blur_1`
+
+corruption type = frosted_glass_blur, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/frosted_glass_blur_2`
+
+corruption type = frosted_glass_blur, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/frosted_glass_blur_3`
+
+corruption type = frosted_glass_blur, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/frosted_glass_blur_4`
+
+corruption type = frosted_glass_blur, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/frosted_glass_blur_5`
+
+corruption type = frosted_glass_blur, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/zoom_blur_1`
+
+corruption type = zoom_blur, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/zoom_blur_2`
+
+corruption type = zoom_blur, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/zoom_blur_3`
+
+corruption type = zoom_blur, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/zoom_blur_4`
+
+corruption type = zoom_blur, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/zoom_blur_5`
+
+corruption type = zoom_blur, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/fog_1`
+
+corruption type = fog, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/fog_2`
+
+corruption type = fog, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/fog_3`
+
+corruption type = fog, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/fog_4`
+
+corruption type = fog, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/fog_5`
+
+corruption type = fog, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/brightness_1`
+
+corruption type = brightness, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/brightness_2`
+
+corruption type = brightness, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/brightness_3`
+
+corruption type = brightness, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/brightness_4`
+
+corruption type = brightness, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/brightness_5`
+
+corruption type = brightness, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/contrast_1`
+
+corruption type = contrast, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/contrast_2`
+
+corruption type = contrast, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/contrast_3`
+
+corruption type = contrast, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/contrast_4`
+
+corruption type = contrast, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/contrast_5`
+
+corruption type = contrast, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/elastic_1`
+
+corruption type = elastic, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/elastic_2`
+
+corruption type = elastic, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/elastic_3`
+
+corruption type = elastic, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/elastic_4`
+
+corruption type = elastic, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/elastic_5`
+
+corruption type = elastic, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/pixelate_1`
+
+corruption type = pixelate, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/pixelate_2`
+
+corruption type = pixelate, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/pixelate_3`
+
+corruption type = pixelate, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/pixelate_4`
+
+corruption type = pixelate, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/pixelate_5`
+
+corruption type = pixelate, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/jpeg_compression_1`
+
+corruption type = jpeg_compression, severity = 1
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/jpeg_compression_2`
+
+corruption type = jpeg_compression, severity = 2
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/jpeg_compression_3`
+
+corruption type = jpeg_compression, severity = 3
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/jpeg_compression_4`
+
+corruption type = jpeg_compression, severity = 4
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/jpeg_compression_5`
+
+corruption type = jpeg_compression, severity = 5
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 50,000
+VALIDATION | 50,000
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_blur_1`
+
+corruption type = gaussian_blur, severity = 1
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_blur_2`
+
+corruption type = gaussian_blur, severity = 2
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_blur_3`
+
+corruption type = gaussian_blur, severity = 3
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_blur_4`
+
+corruption type = gaussian_blur, severity = 4
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/gaussian_blur_5`
+
+corruption type = gaussian_blur, severity = 5
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/saturate_1`
+
+corruption type = saturate, severity = 1
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/saturate_2`
+
+corruption type = saturate, severity = 2
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/saturate_3`
+
+corruption type = saturate, severity = 3
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/saturate_4`
+
+corruption type = saturate, severity = 4
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/saturate_5`
+
+corruption type = saturate, severity = 5
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/spatter_1`
+
+corruption type = spatter, severity = 1
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/spatter_2`
+
+corruption type = spatter, severity = 2
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/spatter_3`
+
+corruption type = spatter, severity = 3
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/spatter_4`
+
+corruption type = spatter, severity = 4
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/spatter_5`
+
+corruption type = spatter, severity = 5
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/speckle_noise_1`
+
+corruption type = speckle_noise, severity = 1
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/speckle_noise_2`
+
+corruption type = speckle_noise, severity = 2
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/speckle_noise_3`
+
+corruption type = speckle_noise, severity = 3
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/speckle_noise_4`
+
+corruption type = speckle_noise, severity = 4
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `imagenet2012_corrupted/speckle_noise_5`
+
+corruption type = speckle_noise, severity = 5
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'file_name': Text(shape=(), dtype=tf.string),
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1000),
+})
+```
+
+### Urls
+
+*   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
+
+### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## Citation

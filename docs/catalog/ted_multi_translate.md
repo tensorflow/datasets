@@ -20,13 +20,26 @@ incomplete translations will be filtered out.
     [`tfds.translate.ted_multi.TedMultiTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_multi.py)
 
 `ted_multi_translate` is configured with
-`tfds.translate.ted_multi.BuilderConfig` and has the following configurations
+`tfds.core.dataset_builder.BuilderConfig` and has the following configurations
 predefined (defaults to the first one):
 
 *   `plain_text` (`v0.0.3`) (`Size: 335.91 MiB`): Plain text import of
     multilingual TED talk translations
 
 ## `ted_multi_translate/plain_text`
+
+Plain text import of multilingual TED talk translations
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 271,360
+TRAIN      | 258,098
+TEST       | 7,213
+VALIDATION | 6,049
+
+### Features
 
 ```python
 FeaturesDict({
@@ -38,21 +51,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 271,360
-TRAIN      | 258,098
-TEST       | 7,213
-VALIDATION | 6,049
-
-## Urls
+### Urls
 
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

@@ -37,6 +37,14 @@ following configurations predefined (defaults to the first one):
 
 ## `so2sat/rgb`
 
+Sentinel-2 RGB channels
+
+### Statistics
+
+None computed
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -45,7 +53,23 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `so2sat/all`
+
+8 Sentinel-1 and 10 Sentinel-2 channels
+
+### Statistics
+
+None computed
+
+### Features
 
 ```python
 FeaturesDict({
@@ -56,14 +80,8 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-None computed
-
-## Urls
+### Urls
 
 *   [http://doi.org/10.14459/2018MP1454690](http://doi.org/10.14459/2018MP1454690)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 --------------------------------------------------------------------------------

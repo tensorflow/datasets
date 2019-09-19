@@ -40,16 +40,13 @@ FeaturesDict({
 Split      | Examples
 :--------- | -------:
 ALL        | 5,640
-VALIDATION | 1,880
-TRAIN      | 1,880
 TEST       | 1,880
+TRAIN      | 1,880
+VALIDATION | 1,880
 
 ## Urls
 
 *   [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

@@ -43,9 +43,6 @@ TEST  | 256
 
 *   [https://sites.google.com/view/sna-visual-mpc/](https://sites.google.com/view/sna-visual-mpc/)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
-
 ## Citation
 ```
 @misc{1710.05268,

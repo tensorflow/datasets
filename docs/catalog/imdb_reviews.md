@@ -36,6 +36,19 @@ following configurations predefined (defaults to the first one):
 
 ## `imdb_reviews/plain_text`
 
+Plain text
+
+### Statistics
+
+Split        | Examples
+:----------- | -------:
+ALL          | 100,000
+UNSUPERVISED | 50,000
+TEST         | 25,000
+TRAIN        | 25,000
+
+### Features
+
 ```python
 FeaturesDict({
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
@@ -43,7 +56,28 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'text', u'label')`
+
 ## `imdb_reviews/bytes`
+
+Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+### Statistics
+
+Split        | Examples
+:----------- | -------:
+ALL          | 100,000
+UNSUPERVISED | 50,000
+TEST         | 25,000
+TRAIN        | 25,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -52,7 +86,28 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'text', u'label')`
+
 ## `imdb_reviews/subwords8k`
+
+Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
+
+### Statistics
+
+Split        | Examples
+:----------- | -------:
+ALL          | 100,000
+UNSUPERVISED | 50,000
+TEST         | 25,000
+TRAIN        | 25,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -61,7 +116,28 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'text', u'label')`
+
 ## `imdb_reviews/subwords32k`
+
+Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+### Statistics
+
+Split        | Examples
+:----------- | -------:
+ALL          | 100,000
+UNSUPERVISED | 50,000
+TEST         | 25,000
+TRAIN        | 25,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -70,20 +146,12 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split        | Examples
-:----------- | -------:
-ALL          | 100,000
-UNSUPERVISED | 50,000
-TRAIN        | 25,000
-TEST         | 25,000
-
-## Urls
+### Urls
 
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'text', u'label')`
 
 ## Citation

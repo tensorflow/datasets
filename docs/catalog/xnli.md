@@ -21,12 +21,24 @@ labels).
 *   `DatasetBuilder`:
     [`tfds.text.xnli.Xnli`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/xnli.py)
 
-`xnli` is configured with `tfds.text.xnli.BuilderConfig` and has the following
-configurations predefined (defaults to the first one):
+`xnli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
+following configurations predefined (defaults to the first one):
 
 *   `plain_text` (`v0.0.1`) (`Size: 17.04 MiB`): Plain text import of XNLI
 
 ## `xnli/plain_text`
+
+Plain text import of XNLI
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 7,500
+TEST       | 5,010
+VALIDATION | 2,490
+
+### Features
 
 ```python
 FeaturesDict({
@@ -55,20 +67,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 7,500
-TEST       | 5,010
-VALIDATION | 2,490
-
-## Urls
+### Urls
 
 *   [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

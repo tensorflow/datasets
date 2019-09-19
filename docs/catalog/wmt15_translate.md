@@ -33,8 +33,8 @@ builder = tfds.builder("wmt_translate", config=config)
 *   `DatasetBuilder`:
     [`tfds.translate.wmt15.Wmt15Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt15.py)
 
-`wmt15_translate` is configured with `tfds.translate.wmt15.WmtConfig` and has
-the following configurations predefined (defaults to the first one):
+`wmt15_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
+following configurations predefined (defaults to the first one):
 
 *   `cs-en` (`v0.0.4`) (`Size: 1.62 GiB`): WMT 2015 cs-en translation task
     dataset.
@@ -68,6 +68,19 @@ the following configurations predefined (defaults to the first one):
 
 ## `wmt15_translate/cs-en`
 
+WMT 2015 cs-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 62,208,679
+TRAIN      | 62,203,020
+VALIDATION | 3,003
+TEST       | 2,656
+
+### Features
+
 ```python
 Translation({
     'cs': Text(shape=(), dtype=tf.string),
@@ -75,7 +88,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'cs', u'en')`
+
 ## `wmt15_translate/de-en`
+
+WMT 2015 de-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 4,528,170
+TRAIN      | 4,522,998
+VALIDATION | 3,003
+TEST       | 2,169
+
+### Features
 
 ```python
 Translation({
@@ -84,7 +118,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'de', u'en')`
+
 ## `wmt15_translate/fi-en`
+
+WMT 2015 fi-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,076,264
+TRAIN      | 2,073,394
+VALIDATION | 1,500
+TEST       | 1,370
+
+### Features
 
 ```python
 Translation({
@@ -93,7 +148,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'fi', u'en')`
+
 ## `wmt15_translate/fr-en`
+
+WMT 2015 fr-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 40,859,301
+TRAIN      | 40,853,298
+VALIDATION | 4,503
+TEST       | 1,500
+
+### Features
 
 ```python
 Translation({
@@ -102,61 +178,19 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'fr', u'en')`
+
 ## `wmt15_translate/ru-en`
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ru': Text(shape=(), dtype=tf.string),
-})
-```
+WMT 2015 ru-en translation task dataset.
 
-## `wmt15_translate/cs-en.subwords8k`
-
-```python
-Translation({
-    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8193>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8155>),
-})
-```
-
-## `wmt15_translate/de-en.subwords8k`
-
-```python
-Translation({
-    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
-})
-```
-
-## `wmt15_translate/fi-en.subwords8k`
-
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
-    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
-})
-```
-
-## `wmt15_translate/fr-en.subwords8k`
-
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
-    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
-})
-```
-
-## `wmt15_translate/ru-en.subwords8k`
-
-```python
-Translation({
-    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
-    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
-})
-```
-
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | --------:
@@ -165,11 +199,171 @@ TRAIN      | 2,495,081
 VALIDATION | 3,003
 TEST       | 2,818
 
-## Urls
+### Features
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
 
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
+`(u'ru', u'en')`
+
+## `wmt15_translate/cs-en.subwords8k`
+
+WMT 2015 cs-en translation task dataset with subword encoding.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 62,208,679
+TRAIN      | 62,203,020
+VALIDATION | 3,003
+TEST       | 2,656
+
+### Features
+
+```python
+Translation({
+    'cs': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8193>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8155>),
+})
+```
+
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'cs', u'en')`
+
+## `wmt15_translate/de-en.subwords8k`
+
+WMT 2015 de-en translation task dataset with subword encoding.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 4,528,170
+TRAIN      | 4,522,998
+VALIDATION | 3,003
+TEST       | 2,169
+
+### Features
+
+```python
+Translation({
+    'de': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8270>),
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8212>),
+})
+```
+
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'de', u'en')`
+
+## `wmt15_translate/fi-en.subwords8k`
+
+WMT 2015 fi-en translation task dataset with subword encoding.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,076,264
+TRAIN      | 2,073,394
+VALIDATION | 1,500
+TEST       | 1,370
+
+### Features
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8217>),
+    'fi': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8113>),
+})
+```
+
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'fi', u'en')`
+
+## `wmt15_translate/fr-en.subwords8k`
+
+WMT 2015 fr-en translation task dataset with subword encoding.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 40,859,301
+TRAIN      | 40,853,298
+VALIDATION | 4,503
+TEST       | 1,500
+
+### Features
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8183>),
+    'fr': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8133>),
+})
+```
+
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'fr', u'en')`
+
+## `wmt15_translate/ru-en.subwords8k`
+
+WMT 2015 ru-en translation task dataset with subword encoding.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,500,902
+TRAIN      | 2,495,081
+VALIDATION | 3,003
+TEST       | 2,818
+
+### Features
+
+```python
+Translation({
+    'en': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8194>),
+    'ru': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8180>),
+})
+```
+
+### Urls
+
+*   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
 `(u'ru', u'en')`
 
 ## Citation

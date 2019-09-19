@@ -31,21 +31,9 @@ following configurations predefined (defaults to the first one):
 
 ## `downsampled_imagenet/32x32`
 
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
+A dataset consisting of Train and Validation images of 32x32 resolution.
 
-## `downsampled_imagenet/64x64`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
-
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | --------:
@@ -53,12 +41,41 @@ ALL        | 1,331,148
 TRAIN      | 1,281,149
 VALIDATION | 49,999
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+### Urls
 
 *   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
+## `downsampled_imagenet/64x64`
+
+A dataset consisting of Train and Validation images of 64x64 resolution.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 1,331,148
+TRAIN      | 1,281,149
+VALIDATION | 49,999
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+### Urls
+
+*   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
 
 ## Citation
 ```

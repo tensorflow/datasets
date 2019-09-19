@@ -33,8 +33,8 @@ builder = tfds.builder("wmt_translate", config=config)
 *   `DatasetBuilder`:
     [`tfds.translate.wmt19.Wmt19Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt19.py)
 
-`wmt19_translate` is configured with `tfds.translate.wmt19.WmtConfig` and has
-the following configurations predefined (defaults to the first one):
+`wmt19_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
+following configurations predefined (defaults to the first one):
 
 *   `cs-en` (`v0.0.3`) (`Size: 1.88 GiB`): WMT 2019 cs-en translation task
     dataset.
@@ -65,6 +65,18 @@ the following configurations predefined (defaults to the first one):
 
 ## `wmt19_translate/cs-en`
 
+WMT 2019 cs-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 64,339,036
+TRAIN      | 64,336,053
+VALIDATION | 2,983
+
+### Features
+
 ```python
 Translation({
     'cs': Text(shape=(), dtype=tf.string),
@@ -72,7 +84,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'cs', u'en')`
+
 ## `wmt19_translate/de-en`
+
+WMT 2019 de-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 38,693,332
+TRAIN      | 38,690,334
+VALIDATION | 2,998
+
+### Features
 
 ```python
 Translation({
@@ -81,7 +113,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'de', u'en')`
+
 ## `wmt19_translate/fi-en`
+
+WMT 2019 fi-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 6,590,448
+TRAIN      | 6,587,448
+VALIDATION | 3,000
+
+### Features
 
 ```python
 Translation({
@@ -90,7 +142,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'fi', u'en')`
+
 ## `wmt19_translate/gu-en`
+
+WMT 2019 gu-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 13,668
+TRAIN      | 11,670
+VALIDATION | 1,998
+
+### Features
 
 ```python
 Translation({
@@ -99,7 +171,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'gu', u'en')`
+
 ## `wmt19_translate/kk-en`
+
+WMT 2019 kk-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 128,649
+TRAIN      | 126,583
+VALIDATION | 2,066
+
+### Features
 
 ```python
 Translation({
@@ -108,7 +200,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'kk', u'en')`
+
 ## `wmt19_translate/lt-en`
+
+WMT 2019 lt-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,346,893
+TRAIN      | 2,344,893
+VALIDATION | 2,000
+
+### Features
 
 ```python
 Translation({
@@ -117,7 +229,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'lt', u'en')`
+
 ## `wmt19_translate/ru-en`
+
+WMT 2019 ru-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 38,495,126
+TRAIN      | 38,492,126
+VALIDATION | 3,000
+
+### Features
 
 ```python
 Translation({
@@ -126,7 +258,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'ru', u'en')`
+
 ## `wmt19_translate/zh-en`
+
+WMT 2019 zh-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 25,990,417
+TRAIN      | 25,986,436
+VALIDATION | 3,981
+
+### Features
 
 ```python
 Translation({
@@ -135,7 +287,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'zh', u'en')`
+
 ## `wmt19_translate/fr-de`
+
+WMT 2019 fr-de translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 9,825,988
+TRAIN      | 9,824,476
+VALIDATION | 1,512
+
+### Features
 
 ```python
 Translation({
@@ -144,19 +316,12 @@ Translation({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | --------:
-ALL        | 9,825,988
-TRAIN      | 9,824,476
-VALIDATION | 1,512
-
-## Urls
+### Urls
 
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'fr', u'de')`
 
 ## Citation

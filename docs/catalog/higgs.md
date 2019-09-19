@@ -65,15 +65,12 @@ FeaturesDict({
 
 Split | Examples
 :---- | ---------:
-TRAIN | 11,000,000
 ALL   | 11,000,000
+TRAIN | 11,000,000
 
 ## Urls
 
 *   [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

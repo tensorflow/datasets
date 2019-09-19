@@ -58,6 +58,7 @@ REQUIRED_PKGS = [
 TESTS_REQUIRE = [
     'apache-beam',
     'jupyter',
+    'mako',
     'pytest',
     'pytest-xdist',
     'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',
@@ -149,7 +150,9 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': DATASET_FILES,
+        'tensorflow_datasets': DATASET_FILES + [
+            'scripts/templates/*',
+        ],
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

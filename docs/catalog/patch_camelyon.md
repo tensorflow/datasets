@@ -39,8 +39,8 @@ Split      | Examples
 :--------- | -------:
 ALL        | 327,680
 TRAIN      | 262,144
-VALIDATION | 32,768
 TEST       | 32,768
+VALIDATION | 32,768
 
 ## Urls
 

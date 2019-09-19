@@ -31,15 +31,12 @@ FeaturesDict({
 
 Split | Examples
 :---- | -------:
-TEST  | 10
 ALL   | 10
+TEST  | 10
 
 ## Urls
 
 *   [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

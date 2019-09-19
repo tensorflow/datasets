@@ -238,1116 +238,1705 @@ configurations predefined (defaults to the first one):
 
 ## `amazon_us_reviews/Wireless_v1_00`
 
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
+A dataset consisting of reviews of Amazon Wireless_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
 
-## `amazon_us_reviews/Watches_v1_00`
+### Statistics
 
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Video_Games_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Video_DVD_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Video_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Toys_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Tools_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Sports_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Software_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Shoes_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Pet_Products_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Personal_Care_Appliances_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/PC_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Outdoors_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Office_Products_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Musical_Instruments_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Music_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Mobile_Electronics_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Mobile_Apps_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Major_Appliances_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Luggage_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Lawn_and_Garden_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Kitchen_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Jewelry_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Home_Improvement_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Home_Entertainment_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Home_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Health_Personal_Care_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Grocery_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Gift_Card_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Furniture_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Electronics_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Digital_Video_Games_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Digital_Video_Download_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Digital_Software_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Digital_Music_Purchase_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Digital_Ebook_Purchase_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Camera_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Books_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Beauty_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Baby_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Automotive_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Apparel_v1_00`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Digital_Ebook_Purchase_v1_01`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Books_v1_01`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## `amazon_us_reviews/Books_v1_02`
-
-```python
-FeaturesDict({
-    'data': FeaturesDict({
-        'customer_id': Tensor(shape=(), dtype=tf.string),
-        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
-        'marketplace': Tensor(shape=(), dtype=tf.string),
-        'product_category': Tensor(shape=(), dtype=tf.string),
-        'product_id': Tensor(shape=(), dtype=tf.string),
-        'product_parent': Tensor(shape=(), dtype=tf.string),
-        'product_title': Tensor(shape=(), dtype=tf.string),
-        'review_body': Tensor(shape=(), dtype=tf.string),
-        'review_date': Tensor(shape=(), dtype=tf.string),
-        'review_headline': Tensor(shape=(), dtype=tf.string),
-        'review_id': Tensor(shape=(), dtype=tf.string),
-        'star_rating': Tensor(shape=(), dtype=tf.int32),
-        'total_votes': Tensor(shape=(), dtype=tf.int32),
-        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    }),
-})
-```
-
-## Statistics
 None computed
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
 
 *   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
+## `amazon_us_reviews/Watches_v1_00`
+
+A dataset consisting of reviews of Amazon Watches_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Video_Games_v1_00`
+
+A dataset consisting of reviews of Amazon Video_Games_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Video_DVD_v1_00`
+
+A dataset consisting of reviews of Amazon Video_DVD_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Video_v1_00`
+
+A dataset consisting of reviews of Amazon Video_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Toys_v1_00`
+
+A dataset consisting of reviews of Amazon Toys_v1_00 products in US marketplace.
+Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Tools_v1_00`
+
+A dataset consisting of reviews of Amazon Tools_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Sports_v1_00`
+
+A dataset consisting of reviews of Amazon Sports_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Software_v1_00`
+
+A dataset consisting of reviews of Amazon Software_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Shoes_v1_00`
+
+A dataset consisting of reviews of Amazon Shoes_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Pet_Products_v1_00`
+
+A dataset consisting of reviews of Amazon Pet_Products_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Personal_Care_Appliances_v1_00`
+
+A dataset consisting of reviews of Amazon Personal_Care_Appliances_v1_00
+products in US marketplace. Each product has its own version as specified with
+it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/PC_v1_00`
+
+A dataset consisting of reviews of Amazon PC_v1_00 products in US marketplace.
+Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Outdoors_v1_00`
+
+A dataset consisting of reviews of Amazon Outdoors_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Office_Products_v1_00`
+
+A dataset consisting of reviews of Amazon Office_Products_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Musical_Instruments_v1_00`
+
+A dataset consisting of reviews of Amazon Musical_Instruments_v1_00 products in
+US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Music_v1_00`
+
+A dataset consisting of reviews of Amazon Music_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Mobile_Electronics_v1_00`
+
+A dataset consisting of reviews of Amazon Mobile_Electronics_v1_00 products in
+US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Mobile_Apps_v1_00`
+
+A dataset consisting of reviews of Amazon Mobile_Apps_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Major_Appliances_v1_00`
+
+A dataset consisting of reviews of Amazon Major_Appliances_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Luggage_v1_00`
+
+A dataset consisting of reviews of Amazon Luggage_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Lawn_and_Garden_v1_00`
+
+A dataset consisting of reviews of Amazon Lawn_and_Garden_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Kitchen_v1_00`
+
+A dataset consisting of reviews of Amazon Kitchen_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Jewelry_v1_00`
+
+A dataset consisting of reviews of Amazon Jewelry_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Home_Improvement_v1_00`
+
+A dataset consisting of reviews of Amazon Home_Improvement_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Home_Entertainment_v1_00`
+
+A dataset consisting of reviews of Amazon Home_Entertainment_v1_00 products in
+US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Home_v1_00`
+
+A dataset consisting of reviews of Amazon Home_v1_00 products in US marketplace.
+Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Health_Personal_Care_v1_00`
+
+A dataset consisting of reviews of Amazon Health_Personal_Care_v1_00 products in
+US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Grocery_v1_00`
+
+A dataset consisting of reviews of Amazon Grocery_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Gift_Card_v1_00`
+
+A dataset consisting of reviews of Amazon Gift_Card_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Furniture_v1_00`
+
+A dataset consisting of reviews of Amazon Furniture_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Electronics_v1_00`
+
+A dataset consisting of reviews of Amazon Electronics_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Digital_Video_Games_v1_00`
+
+A dataset consisting of reviews of Amazon Digital_Video_Games_v1_00 products in
+US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Digital_Video_Download_v1_00`
+
+A dataset consisting of reviews of Amazon Digital_Video_Download_v1_00 products
+in US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Digital_Software_v1_00`
+
+A dataset consisting of reviews of Amazon Digital_Software_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Digital_Music_Purchase_v1_00`
+
+A dataset consisting of reviews of Amazon Digital_Music_Purchase_v1_00 products
+in US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Digital_Ebook_Purchase_v1_00`
+
+A dataset consisting of reviews of Amazon Digital_Ebook_Purchase_v1_00 products
+in US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Camera_v1_00`
+
+A dataset consisting of reviews of Amazon Camera_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Books_v1_00`
+
+A dataset consisting of reviews of Amazon Books_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Beauty_v1_00`
+
+A dataset consisting of reviews of Amazon Beauty_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Baby_v1_00`
+
+A dataset consisting of reviews of Amazon Baby_v1_00 products in US marketplace.
+Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Automotive_v1_00`
+
+A dataset consisting of reviews of Amazon Automotive_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Apparel_v1_00`
+
+A dataset consisting of reviews of Amazon Apparel_v1_00 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Digital_Ebook_Purchase_v1_01`
+
+A dataset consisting of reviews of Amazon Digital_Ebook_Purchase_v1_01 products
+in US marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Books_v1_01`
+
+A dataset consisting of reviews of Amazon Books_v1_01 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
+
+## `amazon_us_reviews/Books_v1_02`
+
+A dataset consisting of reviews of Amazon Books_v1_02 products in US
+marketplace. Each product has its own version as specified with it.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'data': FeaturesDict({
+        'customer_id': Tensor(shape=(), dtype=tf.string),
+        'helpful_votes': Tensor(shape=(), dtype=tf.int32),
+        'marketplace': Tensor(shape=(), dtype=tf.string),
+        'product_category': Tensor(shape=(), dtype=tf.string),
+        'product_id': Tensor(shape=(), dtype=tf.string),
+        'product_parent': Tensor(shape=(), dtype=tf.string),
+        'product_title': Tensor(shape=(), dtype=tf.string),
+        'review_body': Tensor(shape=(), dtype=tf.string),
+        'review_date': Tensor(shape=(), dtype=tf.string),
+        'review_headline': Tensor(shape=(), dtype=tf.string),
+        'review_id': Tensor(shape=(), dtype=tf.string),
+        'star_rating': Tensor(shape=(), dtype=tf.int32),
+        'total_votes': Tensor(shape=(), dtype=tf.int32),
+        'verified_purchase': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+        'vine': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    }),
+})
+```
+
+### Urls
+
+*   [https://s3.amazonaws.com/amazon-reviews-pds/readme.html](https://s3.amazonaws.com/amazon-reviews-pds/readme.html)
 
 --------------------------------------------------------------------------------

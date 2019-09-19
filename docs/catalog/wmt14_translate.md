@@ -33,8 +33,8 @@ builder = tfds.builder("wmt_translate", config=config)
 *   `DatasetBuilder`:
     [`tfds.translate.wmt14.Wmt14Translate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt14.py)
 
-`wmt14_translate` is configured with `tfds.translate.wmt14.WmtConfig` and has
-the following configurations predefined (defaults to the first one):
+`wmt14_translate` is configured with `tfds.translate.wmt.WmtConfig` and has the
+following configurations predefined (defaults to the first one):
 
 *   `cs-en` (`v0.0.3`) (`Size: 1.58 GiB`): WMT 2014 cs-en translation task
     dataset.
@@ -53,6 +53,19 @@ the following configurations predefined (defaults to the first one):
 
 ## `wmt14_translate/cs-en`
 
+WMT 2014 cs-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 62,202,876
+TRAIN      | 62,196,873
+TEST       | 3,003
+VALIDATION | 3,000
+
+### Features
+
 ```python
 Translation({
     'cs': Text(shape=(), dtype=tf.string),
@@ -60,7 +73,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'cs', u'en')`
+
 ## `wmt14_translate/de-en`
+
+WMT 2014 de-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 4,514,788
+TRAIN      | 4,508,785
+TEST       | 3,003
+VALIDATION | 3,000
+
+### Features
 
 ```python
 Translation({
@@ -69,7 +103,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'de', u'en')`
+
 ## `wmt14_translate/fr-en`
+
+WMT 2014 fr-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | ---------:
+ALL        | 40,842,879
+TRAIN      | 40,836,876
+TEST       | 3,003
+VALIDATION | 3,000
+
+### Features
 
 ```python
 Translation({
@@ -78,7 +133,28 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'fr', u'en')`
+
 ## `wmt14_translate/hi-en`
+
+WMT 2014 hi-en translation task dataset.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 316,775
+TRAIN      | 313,748
+TEST       | 2,507
+VALIDATION | 520
+
+### Features
 
 ```python
 Translation({
@@ -87,16 +163,19 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'hi', u'en')`
+
 ## `wmt14_translate/ru-en`
 
-```python
-Translation({
-    'en': Text(shape=(), dtype=tf.string),
-    'ru': Text(shape=(), dtype=tf.string),
-})
-```
+WMT 2014 ru-en translation task dataset.
 
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | --------:
@@ -105,11 +184,21 @@ TRAIN      | 2,486,965
 TEST       | 3,003
 VALIDATION | 3,000
 
-## Urls
+### Features
+
+```python
+Translation({
+    'en': Text(shape=(), dtype=tf.string),
+    'ru': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
 
 *   [http://www.statmt.org/wmt14/translation-task.html](http://www.statmt.org/wmt14/translation-task.html)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'ru', u'en')`
 
 ## Citation

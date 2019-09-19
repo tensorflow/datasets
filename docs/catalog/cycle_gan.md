@@ -3,15 +3,15 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="cycle_gan" />
-  <meta itemprop="description" content="Dataset with images from 2 classes (see config name for information on the specific class)" />
+  <meta itemprop="description" content="A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cycle_gan" />
   <meta itemprop="sameAs" content="https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/" />
 </div>
 
 # `cycle_gan`
 
-Dataset with images from 2 classes (see config name for information on the
-specific class)
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
 
 *   URL:
     [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
@@ -64,104 +64,330 @@ following configurations predefined (defaults to the first one):
 
 ## `cycle_gan/apple2orange`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 2,528
+TRAINB | 1,019
+TRAINA | 995
+TESTA  | 266
+TESTB  | 248
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/summer2winter_yosemite`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 2,740
+TRAINA | 1,231
+TRAINB | 962
+TESTA  | 309
+TESTB  | 238
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/horse2zebra`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 2,661
+TRAINB | 1,334
+TRAINA | 1,067
+TESTB  | 140
+TESTA  | 120
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/monet2photo`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 8,231
+TRAINB | 6,287
+TRAINA | 1,072
+TESTB  | 751
+TESTA  | 121
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/cezanne2photo`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 7,621
+TRAINB | 6,287
+TESTB  | 751
+TRAINA | 525
+TESTA  | 58
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/ukiyoe2photo`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 7,863
+TRAINB | 6,287
+TESTB  | 751
+TRAINA | 562
+TESTA  | 263
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/vangogh2photo`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 7,838
+TRAINB | 6,287
+TESTB  | 751
+TESTA  | 400
+TRAINA | 400
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/maps`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 4,388
+TESTA  | 1,098
+TESTB  | 1,098
+TRAINA | 1,096
+TRAINB | 1,096
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/cityscapes`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 6,950
+TRAINA | 2,975
+TRAINB | 2,975
+TESTA  | 500
+TESTB  | 500
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/facades`
 
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
+
+### Statistics
+
+Split  | Examples
+:----- | -------:
+ALL    | 1,012
+TRAINA | 400
+TRAINB | 400
+TESTA  | 106
+TESTB  | 106
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
+
+### Urls
+
+*   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cycle_gan/iphone2dslr_flower`
 
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-})
-```
+A dataset consisting of images from two classes A and B (For example:
+horses/zebras, apple/orange,...)
 
-## Statistics
+### Statistics
 
 Split  | Examples
 :----- | -------:
@@ -171,11 +397,21 @@ TRAINA | 1,812
 TESTA  | 569
 TESTB  | 480
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+})
+```
+
+### Urls
 
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## Citation

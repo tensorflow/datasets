@@ -33,22 +33,17 @@ builder = tfds.builder("wmt_translate", config=config)
 *   `DatasetBuilder`:
     [`tfds.translate.wmt_t2t.WmtT2tTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/wmt_t2t.py)
 
-`wmt_t2t_translate` is configured with `tfds.translate.wmt_t2t.WmtConfig` and
-has the following configurations predefined (defaults to the first one):
+`wmt_t2t_translate` is configured with `tfds.translate.wmt.WmtConfig` and has
+the following configurations predefined (defaults to the first one):
 
 *   `de-en` (`v0.0.1`) (`Size: 1.61 GiB`): WMT T2T EnDe translation task
     dataset.
 
 ## `wmt_t2t_translate/de-en`
 
-```python
-Translation({
-    'de': Text(shape=(), dtype=tf.string),
-    'en': Text(shape=(), dtype=tf.string),
-})
-```
+WMT T2T EnDe translation task dataset.
 
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | --------:
@@ -57,11 +52,21 @@ TRAIN      | 4,592,289
 TEST       | 3,003
 VALIDATION | 3,000
 
-## Urls
+### Features
+
+```python
+Translation({
+    'de': Text(shape=(), dtype=tf.string),
+    'en': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
 
 *   [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'de', u'en')`
 
 ## Citation

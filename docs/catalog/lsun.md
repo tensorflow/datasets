@@ -17,8 +17,8 @@ tower etc.
 *   `DatasetBuilder`:
     [`tfds.image.lsun.Lsun`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lsun.py)
 
-`lsun` is configured with `tfds.image.lsun.BuilderConfig` and has the following
-configurations predefined (defaults to the first one):
+`lsun` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
+following configurations predefined (defaults to the first one):
 
 *   `classroom` (`v0.1.1`) (`Size: 3.06 GiB`): Images of category classroom
 
@@ -44,85 +44,225 @@ configurations predefined (defaults to the first one):
 
 ## `lsun/classroom`
 
+Images of category classroom
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 168,403
+TRAIN      | 168,103
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/bedroom`
 
+Images of category bedroom
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 3,033,342
+TRAIN      | 3,033,042
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/bridge`
 
+Images of category bridge
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 818,987
+TRAIN      | 818,687
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/church_outdoor`
 
+Images of category church_outdoor
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 126,527
+TRAIN      | 126,227
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/conference_room`
 
+Images of category conference_room
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 229,369
+TRAIN      | 229,069
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/dining_room`
 
+Images of category dining_room
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 657,871
+TRAIN      | 657,571
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/kitchen`
 
+Images of category kitchen
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,212,577
+TRAIN      | 2,212,277
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/living_room`
 
+Images of category living_room
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 1,316,102
+TRAIN      | 1,315,802
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/restaurant`
 
+Images of category restaurant
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 626,631
+TRAIN      | 626,331
+VALIDATION | 300
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
 })
 ```
+
+### Urls
+
+*   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/tower`
 
-```python
-FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-})
-```
+Images of category tower
 
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | -------:
@@ -130,12 +270,17 @@ ALL        | 708,564
 TRAIN      | 708,264
 VALIDATION | 300
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
+})
+```
+
+### Urls
 
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

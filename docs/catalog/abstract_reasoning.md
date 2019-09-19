@@ -102,117 +102,236 @@ configurations predefined (defaults to the first one):
 
 ## `abstract_reasoning/neutral`
 
-```python
-FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-})
-```
+The structures encoding the matrices in both the \
+training and testing sets contain any triples $[r, o, a]$ for $r \\in R$, \
+$o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
+separation occurring at the level of the input variables (i.e. pixel \
+manifestations).
 
-## `abstract_reasoning/interpolation`
+### Statistics
 
-```python
-FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-})
-```
-
-## `abstract_reasoning/extrapolation`
-
-```python
-FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-})
-```
-
-## `abstract_reasoning/attr.rel.pairs`
-
-```python
-FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-})
-```
-
-## `abstract_reasoning/attr.rels`
-
-```python
-FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-})
-```
-
-## `abstract_reasoning/attrs.pairs`
-
-```python
-FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-})
-```
-
-## `abstract_reasoning/attrs.shape.color`
-
-```python
-FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-})
-```
-
-## `abstract_reasoning/attrs.line.type`
-
-```python
-FeaturesDict({
-    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
-    'filename': Text(shape=(), dtype=tf.string),
-    'meta_target': Tensor(shape=[12], dtype=tf.int64),
-    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
-    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
-})
-```
-
-## Statistics
 None computed
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+### Urls
 
 *   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
+## `abstract_reasoning/interpolation`
+
+As in the neutral split, $S$ consisted of any \
+triples $[r, o, a]$. For interpolation, in the training set, when the \
+attribute was "colour" or "size" (i.e., the ordered attributes), the values of \
+the attributes were restricted to even-indexed members of a discrete set, \
+whereas in the test set only odd-indexed values were permitted. Note that all \
+$S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
+Thus, generalisation is required for every question in the test set.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
+## `abstract_reasoning/extrapolation`
+
+Same as in interpolation, but the values of \
+the attributes were restricted to the lower half of the discrete set during \
+training, whereas in the test set they took values in the upper half.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
+## `abstract_reasoning/attr.rel.pairs`
+
+All $S$ contained at least two triples, \
+$([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$, of which 400 are viable. We \
+randomly allocated 360 to the training set and 40 to the test set. Members \
+$(t_1, t_2)$ of the 40 held-out pairs did not occur together in structures $S$ \
+in the training set, and all structures $S$ had at least one such pair \
+$(t_1, t_2)$ as a subset.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
+## `abstract_reasoning/attr.rels`
+
+In our dataset, there are 29 possible unique \
+triples $[r,o,a]$. We allocated seven of these for the test set, at random, \
+but such that each of the attributes was represented exactly once in this set. \
+These held-out triples never occurred in questions in the training set, and \
+every $S$ in the test set contained at least one of them.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
+## `abstract_reasoning/attrs.pairs`
+
+$S$ contained at least two triples. There are 20 \
+(unordered) viable pairs of attributes $(a_1, a_2)$ such that for some \
+$r_i, o_i, ([r_1,o_1,a_1],[r_2,o_2,a_2])$ is a viable triple pair \
+$([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$. We allocated 16 of these pairs \
+for training and four for testing. For a pair $(a_1, a_2)$ in the test set, \
+$S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
+set, all $S$ contained triples with $a_1$ and $a_2$.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
+## `abstract_reasoning/attrs.shape.color`
+
+Held-out attribute shape-colour. $S$ in \
+the training set contained no triples with $o$=shape and $a$=colour. \
+All structures governing puzzles in the test set contained at least one triple \
+with $o$=shape and $a$=colour.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
+
+## `abstract_reasoning/attrs.line.type`
+
+Held-out attribute line-type. $S$ in \
+the training set contained no triples with $o$=line and $a$=type. \
+All structures governing puzzles in the test set contained at least one triple \
+with $o$=line and $a$=type.
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'context': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
+    'filename': Text(shape=(), dtype=tf.string),
+    'meta_target': Tensor(shape=[12], dtype=tf.int64),
+    'relation_structure_encoded': Tensor(shape=[4, 12], dtype=tf.int64),
+    'target': ClassLabel(shape=(), dtype=tf.int64, num_classes=8),
+})
+```
+
+### Urls
+
+*   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
 
 ## Citation
 

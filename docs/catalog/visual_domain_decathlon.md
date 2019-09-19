@@ -65,6 +65,20 @@ following configurations predefined (defaults to the first one):
 
 ## `visual_domain_decathlon/aircraft`
 
+Data based on "Aircraft", with images resized isotropically to have a shorter
+size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 10,000
+TRAIN      | 3,334
+TEST       | 3,333
+VALIDATION | 3,333
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -72,9 +86,31 @@ FeaturesDict({
     'name': Text(shape=(), dtype=tf.string),
 })
 ```
+
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `visual_domain_decathlon/cifar100`
 
+Data based on "CIFAR-100", with images resized isotropically to have a shorter
+size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 60,000
+TRAIN      | 40,000
+TEST       | 10,000
+VALIDATION | 10,000
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -83,7 +119,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `visual_domain_decathlon/daimlerpedcls`
+
+Data based on "Daimler Pedestrian Classification", with images resized
+isotropically to have a shorter size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 49,000
+TRAIN      | 23,520
+TEST       | 19,600
+VALIDATION | 5,880
+
+### Features
 
 ```python
 FeaturesDict({
@@ -93,7 +151,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `visual_domain_decathlon/dtd`
+
+Data based on "Describable Textures", with images resized isotropically to have
+a shorter size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 5,640
+TEST       | 1,880
+TRAIN      | 1,880
+VALIDATION | 1,880
+
+### Features
 
 ```python
 FeaturesDict({
@@ -103,7 +183,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `visual_domain_decathlon/gtsrb`
+
+Data based on "German Traffic Signs", with images resized isotropically to have
+a shorter size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 51,839
+TRAIN      | 31,367
+TEST       | 12,630
+VALIDATION | 7,842
+
+### Features
 
 ```python
 FeaturesDict({
@@ -113,7 +215,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `visual_domain_decathlon/imagenet12`
+
+Data based on "Imagenet", with images resized isotropically to have a shorter
+size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | --------:
+ALL        | 1,329,405
+TRAIN      | 1,232,167
+VALIDATION | 49,000
+TEST       | 48,238
+
+### Features
 
 ```python
 FeaturesDict({
@@ -123,7 +247,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `visual_domain_decathlon/omniglot`
+
+Data based on "Omniglot", with images resized isotropically to have a shorter
+size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 32,460
+TRAIN      | 17,853
+TEST       | 8,115
+VALIDATION | 6,492
+
+### Features
 
 ```python
 FeaturesDict({
@@ -133,7 +279,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `visual_domain_decathlon/svhn`
+
+Data based on "Street View House Numbers", with images resized isotropically to
+have a shorter size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 99,289
+TRAIN      | 47,217
+VALIDATION | 26,040
+TEST       | 26,032
+
+### Features
 
 ```python
 FeaturesDict({
@@ -143,7 +311,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `visual_domain_decathlon/ucf101`
+
+Data based on "UCF101 Dynamic Images", with images resized isotropically to have
+a shorter size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 13,320
+TRAIN      | 7,585
+TEST       | 3,783
+VALIDATION | 1,952
+
+### Features
 
 ```python
 FeaturesDict({
@@ -153,7 +343,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
 ## `visual_domain_decathlon/vgg-flowers`
+
+Data based on "VGG-Flowers", with images resized isotropically to have a shorter
+size of 72 pixels.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 8,189
+TEST       | 6,149
+TRAIN      | 1,020
+VALIDATION | 1,020
+
+### Features
 
 ```python
 FeaturesDict({
@@ -163,20 +375,12 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 8,189
-TEST       | 6,149
-VALIDATION | 1,020
-TRAIN      | 1,020
-
-## Urls
+### Urls
 
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## Citation

@@ -43,8 +43,8 @@ Split      | Examples
 :--------- | -------:
 ALL        | 8,189
 TEST       | 6,149
-VALIDATION | 1,020
 TRAIN      | 1,020
+VALIDATION | 1,020
 
 ## Urls
 

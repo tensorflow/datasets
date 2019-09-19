@@ -50,6 +50,20 @@ configurations predefined (defaults to the first one):
 
 ## `curated_breast_imaging_ddsm/patches`
 
+Patches containing both calsification and mass cases, plus pathces with no
+abnormalities. Designed as a traditional 5-class classification task.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 65,130
+TRAIN      | 49,780
+TEST       | 9,770
+VALIDATION | 5,580
+
+### Features
+
 ```python
 FeaturesDict({
     'id': Text(shape=(), dtype=tf.string),
@@ -58,7 +72,23 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
+
 ## `curated_breast_imaging_ddsm/original-calc`
+
+Original images of the calcification cases compressed in lossless PNG.
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 1,511
+TRAIN | 1,227
+TEST  | 284
+
+### Features
 
 ```python
 FeaturesDict({
@@ -79,7 +109,23 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
+
 ## `curated_breast_imaging_ddsm/original-mass`
+
+Original images of the mass cases compressed in lossless PNG.
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 1,514
+TRAIN | 1,166
+TEST  | 348
+
+### Features
 
 ```python
 FeaturesDict({
@@ -100,20 +146,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,514
-TRAIN | 1,166
-TEST  | 348
-
-## Urls
+### Urls
 
 *   [https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM](https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

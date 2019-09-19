@@ -34,32 +34,9 @@ and has the following configurations predefined (defaults to the first one):
 
 ## `cnn_dailymail/plain_text`
 
-```python
-FeaturesDict({
-    'article': Text(shape=(), dtype=tf.string),
-    'highlights': Text(shape=(), dtype=tf.string),
-})
-```
+Plain text
 
-## `cnn_dailymail/bytes`
-
-```python
-FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
-```
-
-## `cnn_dailymail/subwords32k`
-
-```python
-FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
-    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
-})
-```
-
-## Statistics
+### Statistics
 
 Split      | Examples
 :--------- | -------:
@@ -68,11 +45,81 @@ TRAIN      | 287,113
 VALIDATION | 13,368
 TEST       | 11,490
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'article': Text(shape=(), dtype=tf.string),
+    'highlights': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
 
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
+`(u'article', u'highlights')`
+
+## `cnn_dailymail/bytes`
+
+Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 311,971
+TRAIN      | 287,113
+VALIDATION | 13,368
+TEST       | 11,490
+
+### Features
+
+```python
+FeaturesDict({
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
+})
+```
+
+### Urls
+
+*   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'article', u'highlights')`
+
+## `cnn_dailymail/subwords32k`
+
+Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 311,971
+TRAIN      | 287,113
+VALIDATION | 13,368
+TEST       | 11,490
+
+### Features
+
+```python
+FeaturesDict({
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
+})
+```
+
+### Urls
+
+*   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
+
+### Supervised keys (for `as_supervised=True`)
+
 `(u'article', u'highlights')`
 
 ## Citation

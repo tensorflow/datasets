@@ -67,9 +67,6 @@ TEST  | 4,096
 
 *   [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
-
 ## Citation
 
 ```

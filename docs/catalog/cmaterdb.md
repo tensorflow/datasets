@@ -38,32 +38,38 @@ following configurations predefined (defaults to the first one):
 
 ## `cmaterdb/bangla`
 
+CMATERdb Bangla Numerals
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 6,000
+TRAIN | 5,000
+TEST  | 1,000
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
 })
 ```
+
+### Urls
+
+*   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
 
 ## `cmaterdb/devanagari`
 
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
+CMATERdb Devangari Numerals
 
-## `cmaterdb/telugu`
-
-```python
-FeaturesDict({
-    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
-})
-```
-
-## Statistics
+### Statistics
 
 Split | Examples
 :---- | -------:
@@ -71,11 +77,50 @@ ALL   | 3,000
 TRAIN | 2,500
 TEST  | 500
 
-## Urls
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
 
 *   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
+`(u'image', u'label')`
+
+## `cmaterdb/telugu`
+
+CMATERdb Telugu Numerals
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 3,000
+TRAIN | 2,500
+TEST  | 500
+
+### Features
+
+```python
+FeaturesDict({
+    'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+})
+```
+
+### Urls
+
+*   [https://code.google.com/archive/p/cmaterdb/](https://code.google.com/archive/p/cmaterdb/)
+
+### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## Citation

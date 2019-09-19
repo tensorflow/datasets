@@ -25,8 +25,7 @@ from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
-_DESCRIPTION = ("Web-Scale Parallel Corpora for Official European Languages. "
-                "English-{target_lang}.")
+_DESCRIPTION = "Web-Scale Parallel Corpora for Official European Languages."
 
 _BENCHMARK_URL = "https://paracrawl.eu/releases.html"
 
@@ -139,8 +138,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
     target_language = self.builder_config.target_language
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION.format(
-            target_lang=_target_languages()[target_language]),
+        description=_DESCRIPTION,
         features=tfds.features.Translation(
             languages=("en", target_language),
             encoder_config=self.builder_config.text_encoder_config),

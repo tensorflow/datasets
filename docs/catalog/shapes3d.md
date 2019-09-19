@@ -61,15 +61,12 @@ FeaturesDict({
 
 Split | Examples
 :---- | -------:
-TRAIN | 480,000
 ALL   | 480,000
+TRAIN | 480,000
 
 ## Urls
 
 *   [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

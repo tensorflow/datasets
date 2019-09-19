@@ -34,15 +34,12 @@ Split      | Examples
 :--------- | -------:
 ALL        | 70,000
 TRAIN      | 50,000
-VALIDATION | 10,000
 TEST       | 10,000
+VALIDATION | 10,000
 
 ## Urls
 
 *   [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

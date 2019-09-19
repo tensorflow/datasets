@@ -67,9 +67,6 @@ TEST  | 17,210
 
 *   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 
-## Supervised keys (for `as_supervised=True`)
-`None`
-
 ## Citation
 ```
 @article{2017arXivtriviaqa,

@@ -27,7 +27,6 @@ required to submit final prediction files, which we shall proceed to evaluate.
 *   Size: `3.42 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'faces': Sequence({
@@ -56,10 +55,6 @@ VALIDATION | 3,226
 ## Urls
 
 *   [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/)
-
-## Supervised keys (for `as_supervised=True`)
-
-`None`
 
 ## Citation
 

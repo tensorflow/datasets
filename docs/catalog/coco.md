@@ -3,20 +3,12 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="coco" />
-  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and&#10;captioning dataset. This version contains images, bounding boxes &quot;&#10;and labels for the 2017 version.&#10;Note:&#10; * Some images from the train and validation sets don't have annotations.&#10; * Coco 2014 and 2017 uses the same images, but different train/val/test splits&#10; * The test split don't have any annotations (only images).&#10; * Coco defines 91 classes but the data only uses 80 classes.&#10; * Panotptic annotations defines defines 200 classes but only uses 133.&#10;" />
+  <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and&#10;captioning dataset. This version contains images, bounding boxes &quot;&#10;and labels for the 2014 version.&#10;Note:&#10; * Some images from the train and validation sets don't have annotations.&#10; * Coco 2014 and 2017 uses the same images, but different train/val/test splits&#10; * The test split don't have any annotations (only images).&#10; * Coco defines 91 classes but the data only uses 80 classes.&#10; * Panotptic annotations defines defines 200 classes but only uses 133.&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/coco" />
   <meta itemprop="sameAs" content="http://cocodataset.org/#home" />
 </div>
 
 # `coco`
-
-COCO is a large-scale object detection, segmentation, and captioning dataset.
-This version contains images, bounding boxes " and labels for the 2017 version.
-Note: * Some images from the train and validation sets don't have annotations. *
-Coco 2014 and 2017 uses the same images, but different train/val/test splits *
-The test split don't have any annotations (only images). * Coco defines 91
-classes but the data only uses 80 classes. * Panotptic annotations defines
-defines 200 classes but only uses 133.
 
 *   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 *   `DatasetBuilder`:
@@ -60,6 +52,26 @@ configurations predefined (defaults to the first one):
 
 ## `coco/2014`
 
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2014 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 245,496
+TRAIN      | 82,783
+TEST2015   | 81,434
+TEST       | 40,775
+VALIDATION | 40,504
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -74,9 +86,32 @@ FeaturesDict({
     }),
 })
 ```
+
+### Urls
+
+*   [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
 ## `coco/2017`
 
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2017 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 163,957
+TRAIN      | 118,287
+TEST       | 40,670
+VALIDATION | 5,000
+
+### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -92,7 +127,29 @@ FeaturesDict({
 })
 ```
 
+### Urls
+
+*   [http://cocodataset.org/#home](http://cocodataset.org/#home)
+
 ## `coco/2017_panoptic`
+
+COCO is a large-scale object detection, segmentation, and captioning dataset.
+This version contains images, bounding boxes " and labels for the 2017 version.
+Note: * Some images from the train and validation sets don't have annotations. *
+Coco 2014 and 2017 uses the same images, but different train/val/test splits *
+The test split don't have any annotations (only images). * Coco defines 91
+classes but the data only uses 80 classes. * Panotptic annotations defines
+defines 200 classes but only uses 133.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 123,287
+TRAIN      | 118,287
+VALIDATION | 5,000
+
+### Features
 
 ```python
 FeaturesDict({
@@ -111,20 +168,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 123,287
-TRAIN      | 118,287
-VALIDATION | 5,000
-
-## Urls
+### Urls
 
 *   [http://cocodataset.org/#home](http://cocodataset.org/#home)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

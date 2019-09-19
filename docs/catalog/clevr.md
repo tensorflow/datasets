@@ -44,15 +44,12 @@ Split      | Examples
 :--------- | -------:
 ALL        | 100,000
 TRAIN      | 70,000
-VALIDATION | 15,000
 TEST       | 15,000
+VALIDATION | 15,000
 
 ## Urls
 
 *   [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

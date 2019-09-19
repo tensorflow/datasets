@@ -44,16 +44,13 @@ FeaturesDict({
 Split      | Examples
 :--------- | -------:
 ALL        | 4,454
-TRAIN      | 2,000
 TEST       | 2,000
+TRAIN      | 2,000
 VALIDATION | 454
 
 ## Urls
 
 *   [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

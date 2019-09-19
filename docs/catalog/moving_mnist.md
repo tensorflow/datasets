@@ -33,15 +33,12 @@ FeaturesDict({
 
 Split | Examples
 :---- | -------:
-TEST  | 10,000
 ALL   | 10,000
+TEST  | 10,000
 
 ## Urls
 
 *   [http://www.cs.toronto.edu/~nitish/unsupervised_video/](http://www.cs.toronto.edu/~nitish/unsupervised_video/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

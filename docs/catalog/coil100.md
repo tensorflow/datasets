@@ -37,8 +37,8 @@ FeaturesDict({
 
 Split | Examples
 :---- | -------:
-TRAIN | 7,200
 ALL   | 7,200
+TRAIN | 7,200
 
 ## Urls
 

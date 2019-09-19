@@ -29,6 +29,18 @@ following configurations predefined (defaults to the first one):
 
 ## `flores/neen_plain_text`
 
+Translation dataset from ne to en, uses encoder plain_text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 5,394
+TEST       | 2,835
+VALIDATION | 2,559
+
+### Features
+
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -36,7 +48,27 @@ Translation({
 })
 ```
 
+### Urls
+
+*   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
+
+### Supervised keys (for `as_supervised=True`)
+
+`(u'ne', u'en')`
+
 ## `flores/sien_plain_text`
+
+Translation dataset from si to en, uses encoder plain_text.
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 5,664
+VALIDATION | 2,898
+TEST       | 2,766
+
+### Features
 
 ```python
 Translation({
@@ -45,19 +77,12 @@ Translation({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 5,664
-VALIDATION | 2,898
-TEST       | 2,766
-
-## Urls
+### Urls
 
 *   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'si', u'en')`
 
 ## Citation

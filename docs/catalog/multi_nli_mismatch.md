@@ -30,6 +30,18 @@ configurations predefined (defaults to the first one):
 
 ## `multi_nli_mismatch/plain_text`
 
+Plain text
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 402,702
+TRAIN      | 392,702
+VALIDATION | 10,000
+
+### Features
+
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -38,20 +50,9 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 402,702
-TRAIN      | 392,702
-VALIDATION | 10,000
-
-## Urls
+### Urls
 
 *   [https://www.nyu.edu/projects/bowman/multinli/](https://www.nyu.edu/projects/bowman/multinli/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

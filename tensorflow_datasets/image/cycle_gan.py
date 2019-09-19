@@ -101,8 +101,7 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=("Dataset with images from 2 classes (see config name for "
-                     "information on the specific class)"),
+        description=self.builder_config.description,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names=["A", "B"]),

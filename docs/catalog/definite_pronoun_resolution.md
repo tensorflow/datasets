@@ -26,13 +26,25 @@ more than once in the sentence, its first occurrence is the one to be resolved.
     [`tfds.text.definite_pronoun_resolution.DefinitePronounResolution`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/definite_pronoun_resolution.py)
 
 `definite_pronoun_resolution` is configured with
-`tfds.text.definite_pronoun_resolution.BuilderConfig` and has the following
-configurations predefined (defaults to the first one):
+`tfds.core.dataset_builder.BuilderConfig` and has the following configurations
+predefined (defaults to the first one):
 
 *   `plain_text` (`v0.0.1`) (`Size: 222.12 KiB`): Plain text import of the
     Definite Pronoun Resolution Dataset.
 
 ## `definite_pronoun_resolution/plain_text`
+
+Plain text import of the Definite Pronoun Resolution Dataset.
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 1,886
+TRAIN | 1,322
+TEST  | 564
+
+### Features
 
 ```python
 FeaturesDict({
@@ -43,19 +55,12 @@ FeaturesDict({
 })
 ```
 
-## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 1,886
-TRAIN | 1,322
-TEST  | 564
-
-## Urls
+### Urls
 
 *   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
 
-## Supervised keys (for `as_supervised=True`)
+### Supervised keys (for `as_supervised=True`)
+
 `(u'sentence', u'label')`
 
 ## Citation
