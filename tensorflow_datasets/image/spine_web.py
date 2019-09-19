@@ -29,21 +29,21 @@ Here, the training labels are a tensor of 3 cobb angles, corresponding to thorac
 
 class SpineWeb(tfds.core.GeneratorBasedBuilder):
   """SpineWeb"""
-  SKIP_REGISTERING = True
+
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
-      builder=self,
-      description=_DESCRIPTION,
-      features=tfds.features.FeaturesDict({
-        "image": tfds.features.Image(shape=(None, None, 1)),  # b&w jpeg
-        # main thoracic, proximal thoracic, thoracolumbar/lumbar cobb angles
-        "label": tfds.features.Tensor(shape=(3,), dtype=tf.float32)
-      }),
-      supervised_keys=('image', 'label'),
-      urls=['http://spineweb.digitalimaginggroup.ca'],
-      citation=_CITATION,
+        builder=self,
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict({
+            "image": tfds.features.Image(shape=(None, None, 1)),  # b&w jpeg
+            # main thoracic, proximal thoracic, thoracolumbar/lumbar cobb angles
+            "label": tfds.features.Tensor(shape=(3,), dtype=tf.float32)
+        }),
+        supervised_keys=('image', 'label'),
+        urls=['http://spineweb.digitalimaginggroup.ca'],
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
@@ -56,24 +56,22 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
     })
 
     return [
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TRAIN,
-        num_shards=1,
-        # These kwargs will be passed to _generate_examples
-        gen_kwargs={
-          'images_dir_path': dl_paths['train'],
-          'labels': dl_paths['train_csv']
-        },
-      ),
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TEST,
-        num_shards=1,
-        # These kwargs will be passed to _generate_examples
-        gen_kwargs={
-          'images_dir_path': dl_paths['test'],
-          'labels': dl_paths['test_csv']
-        },
-      ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            # These kwargs will be passed to _generate_examples
+            gen_kwargs={
+                'images_dir_path': dl_paths['train'],
+                'labels': dl_paths['train_csv']
+            },
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            # These kwargs will be passed to _generate_examples
+            gen_kwargs={
+                'images_dir_path': dl_paths['test'],
+                'labels': dl_paths['test_csv']
+            },
+        ),
     ]
 
   def _generate_examples(self, images_dir_path, labels):

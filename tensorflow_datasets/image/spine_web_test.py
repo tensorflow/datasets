@@ -11,8 +11,8 @@ import spine_web
 class SpineWebTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = spine_web.SpineWeb
   SPLITS = {
-    "train": 5,  # Number of fake train example
-    "test": 2,  # Number of fake test example
+      "train": 5,  # Number of fake train example
+      "test": 2,  # Number of fake test example
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:
@@ -20,10 +20,10 @@ class SpineWebTest(testing.DatasetBuilderTestCase):
   # then the tests needs to provide the fake output paths relative to the
   # fake data directory
   DL_EXTRACT_RESULT = {
-    'train': "training_images",
-    'train_csv': "training_angles.csv",
-    'test': "test_images",
-    'test_csv': "test_angles.csv"
+      'train': "training_images",
+      'train_csv': "training_angles.csv",
+      'test': "test_images",
+      'test_csv': "test_angles.csv"
   }
 
 
