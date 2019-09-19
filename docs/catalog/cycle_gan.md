@@ -67,6 +67,11 @@ following configurations predefined (defaults to the first one):
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split  | Examples
@@ -98,6 +103,11 @@ FeaturesDict({
 
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -131,6 +141,11 @@ FeaturesDict({
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split  | Examples
@@ -162,6 +177,11 @@ FeaturesDict({
 
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -195,6 +215,11 @@ FeaturesDict({
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split  | Examples
@@ -226,6 +251,11 @@ FeaturesDict({
 
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -259,6 +289,11 @@ FeaturesDict({
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split  | Examples
@@ -290,6 +325,11 @@ FeaturesDict({
 
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -323,6 +363,11 @@ FeaturesDict({
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split  | Examples
@@ -355,6 +400,11 @@ FeaturesDict({
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split  | Examples
@@ -386,6 +436,11 @@ FeaturesDict({
 
 A dataset consisting of images from two classes A and B (For example:
 horses/zebras, apple/orange,...)
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

@@ -19,7 +19,10 @@ images in each class.
     [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
 *   `DatasetBuilder`:
     [`tfds.image.resisc45.Resisc45`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/resisc45.py)
-*   Version: `v3.0.0`
+*   Versions:
+
+    *   **`3.0.0`** (default):
+
 *   Size: `?? GiB`
 
 ## Features

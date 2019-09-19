@@ -25,7 +25,11 @@ and 5).
     [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
 *   `DatasetBuilder`:
     [`tfds.image.smallnorb.Smallnorb`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/smallnorb.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `250.60 MiB`
 
 ## Features

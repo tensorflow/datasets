@@ -53,6 +53,11 @@ configurations predefined (defaults to the first one):
 Patches containing both calsification and mass cases, plus pathces with no
 abnormalities. Designed as a traditional 5-class classification task.
 
+Versions:
+
+*   **`0.2.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -79,6 +84,11 @@ FeaturesDict({
 ## `curated_breast_imaging_ddsm/original-calc`
 
 Original images of the calcification cases compressed in lossless PNG.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -116,6 +126,11 @@ FeaturesDict({
 ## `curated_breast_imaging_ddsm/original-mass`
 
 Original images of the mass cases compressed in lossless PNG.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

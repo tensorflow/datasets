@@ -112,6 +112,11 @@ judgments drawn from books and journal articles on linguistic theory. Each
 example is a sequence of words annotated with whether it is a grammatical
 English sentence.
 
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -143,6 +148,11 @@ human annotations of their sentiment. The task is to predict the sentiment of a
 given sentence. We use the two-way (positive/negative) class split, and use only
 sentence-level labels.
 
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -172,6 +182,11 @@ FeaturesDict({
 The Microsoft Research Paraphrase Corpus (Dolan & Brockett, 2005) is a corpus of
 sentence pairs automatically extracted from online news sources, with human
 annotations for whether the sentences in the pair are semantically equivalent.
+
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -204,6 +219,11 @@ The Quora Question Pairs2 dataset is a collection of question pairs from the
 community question-answering website Quora. The task is to determine whether a
 pair of questions are semantically equivalent.
 
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -235,6 +255,11 @@ The Semantic Textual Similarity Benchmark (Cer et al., 2017) is a collection of
 sentence pairs drawn from news headlines, video and image captions, and natural
 language inference data. Each pair is human-annotated with a similarity score
 from 1 to 5.
+
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -274,6 +299,11 @@ and evaluate on both the matched (in-domain) and mismatched (cross-domain)
 section. We also use and recommend the SNLI corpus as 550k examples of auxiliary
 training data.
 
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split                 | Examples
@@ -306,6 +336,11 @@ FeaturesDict({
 The mismatched validation and test splits from MNLI. See the "mnli"
 BuilderConfig for additional information.
 
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -334,6 +369,11 @@ FeaturesDict({
 
 The matched validation and test splits from MNLI. See the "mnli" BuilderConfig
 for additional information.
+
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -373,6 +413,11 @@ the original task removes the requirement that the model select the exact
 answer, but also removes the simplifying assumptions that the answer is always
 present in the input and that lexical overlap is a reliable cue.
 
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -407,6 +452,11 @@ textual entailment challenges. We combine the data from RTE1 (Dagan et al.,
 text. We convert all datasets to a two-class split, where for three-class
 datasets we collapse neutral and contradiction into not entailment, for
 consistency.
+
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -454,6 +504,11 @@ development set example. As with QNLI, each example is evaluated separately, so
 there is not a systematic correspondence between a model's score on this task
 and its score on the unconverted original task. We call converted dataset WNLI
 (Winograd NLI).
+
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

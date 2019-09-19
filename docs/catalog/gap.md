@@ -19,7 +19,10 @@ applications.
     [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
 *   `DatasetBuilder`:
     [`tfds.text.gap.Gap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/gap.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+
 *   Size: `2.29 MiB`
 
 ## Features

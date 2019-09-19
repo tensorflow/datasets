@@ -17,7 +17,10 @@ specific class)
     [https://storage.googleapis.com/petfinder_dataset/](https://storage.googleapis.com/petfinder_dataset/)
 *   `DatasetBuilder`:
     [`tfds.image.pet_finder.PetFinder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/pet_finder.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+
 *   Size: `1.94 GiB`
 
 ## Features

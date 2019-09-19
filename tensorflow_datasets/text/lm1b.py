@@ -78,14 +78,13 @@ class Lm1bConfig(tfds.core.BuilderConfig):
         feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    # Version history:
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 0.0.{1,2}: Initial versions.
     super(Lm1bConfig, self).__init__(
         version=tfds.core.Version(
             version, experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("1.0.0"),
+            tfds.core.Version(
+                "1.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
         ],
         **kwargs)
     self.text_encoder_config = (

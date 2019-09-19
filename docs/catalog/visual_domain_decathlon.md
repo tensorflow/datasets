@@ -68,6 +68,10 @@ following configurations predefined (defaults to the first one):
 Data based on "Aircraft", with images resized isotropically to have a shorter
 size of 72 pixels.
 
+Versions:
+
+*   **`1.1.0`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -99,6 +103,10 @@ FeaturesDict({
 
 Data based on "CIFAR-100", with images resized isotropically to have a shorter
 size of 72 pixels.
+
+Versions:
+
+*   **`1.1.0`** (default):
 
 ### Statistics
 
@@ -132,6 +140,10 @@ FeaturesDict({
 Data based on "Daimler Pedestrian Classification", with images resized
 isotropically to have a shorter size of 72 pixels.
 
+Versions:
+
+*   **`1.1.0`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -163,6 +175,10 @@ FeaturesDict({
 
 Data based on "Describable Textures", with images resized isotropically to have
 a shorter size of 72 pixels.
+
+Versions:
+
+*   **`1.1.0`** (default):
 
 ### Statistics
 
@@ -196,6 +212,10 @@ FeaturesDict({
 Data based on "German Traffic Signs", with images resized isotropically to have
 a shorter size of 72 pixels.
 
+Versions:
+
+*   **`1.1.0`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -227,6 +247,10 @@ FeaturesDict({
 
 Data based on "Imagenet", with images resized isotropically to have a shorter
 size of 72 pixels.
+
+Versions:
+
+*   **`1.1.0`** (default):
 
 ### Statistics
 
@@ -260,6 +284,10 @@ FeaturesDict({
 Data based on "Omniglot", with images resized isotropically to have a shorter
 size of 72 pixels.
 
+Versions:
+
+*   **`1.1.0`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -291,6 +319,10 @@ FeaturesDict({
 
 Data based on "Street View House Numbers", with images resized isotropically to
 have a shorter size of 72 pixels.
+
+Versions:
+
+*   **`1.1.0`** (default):
 
 ### Statistics
 
@@ -324,6 +356,10 @@ FeaturesDict({
 Data based on "UCF101 Dynamic Images", with images resized isotropically to have
 a shorter size of 72 pixels.
 
+Versions:
+
+*   **`1.1.0`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -355,6 +391,10 @@ FeaturesDict({
 
 Data based on "VGG-Flowers", with images resized isotropically to have a shorter
 size of 72 pixels.
+
+Versions:
+
+*   **`1.1.0`** (default):
 
 ### Statistics
 

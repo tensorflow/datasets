@@ -39,6 +39,11 @@ following configurations predefined (defaults to the first one):
 
 Sentinel-2 RGB channels
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 None computed
@@ -64,6 +69,11 @@ FeaturesDict({
 ## `so2sat/all`
 
 8 Sentinel-1 and 10 Sentinel-2 channels
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

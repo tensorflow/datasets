@@ -42,6 +42,11 @@ and has the following configurations predefined (defaults to the first one):
 
 Images at their original resolution and quality.
 
+Versions:
+
+*   **`0.2.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -88,6 +93,11 @@ FeaturesDict({
 
 Images have roughly 300,000 pixels, at 72 JPEG quality.
 
+Versions:
+
+*   **`0.2.1`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -133,6 +143,11 @@ FeaturesDict({
 ## `open_images_v4/200k`
 
 Images have roughly 200,000 pixels, at 72 JPEG quality.
+
+Versions:
+
+*   **`0.2.1`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

@@ -23,7 +23,10 @@ required to submit final prediction files, which we shall proceed to evaluate.
 *   URL: [http://shuoyang1213.me/WIDERFACE/](http://shuoyang1213.me/WIDERFACE/)
 *   `DatasetBuilder`:
     [`tfds.image.wider_face.WiderFace`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/wider_face.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+
 *   Size: `3.42 GiB`
 
 ## Features

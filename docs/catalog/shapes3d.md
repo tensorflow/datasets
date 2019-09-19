@@ -35,7 +35,11 @@ array.
     [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
 *   `DatasetBuilder`:
     [`tfds.image.shapes3d.Shapes3d`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/shapes3d.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `255.18 MiB`
 
 ## Features

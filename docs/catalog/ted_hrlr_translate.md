@@ -67,6 +67,11 @@ and has the following configurations predefined (defaults to the first one):
 
 Translation dataset from az to en in plain text.
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -96,6 +101,11 @@ Translation({
 ## `ted_hrlr_translate/aztr_to_en`
 
 Translation dataset from az_tr to en in plain text.
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -127,6 +137,11 @@ Translation({
 
 Translation dataset from be to en in plain text.
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -156,6 +171,11 @@ Translation({
 ## `ted_hrlr_translate/beru_to_en`
 
 Translation dataset from be_ru to en in plain text.
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -187,6 +207,11 @@ Translation({
 
 Translation dataset from es to pt in plain text.
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -216,6 +241,11 @@ Translation({
 ## `ted_hrlr_translate/fr_to_pt`
 
 Translation dataset from fr to pt in plain text.
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -247,6 +277,11 @@ Translation({
 
 Translation dataset from gl to en in plain text.
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -276,6 +311,11 @@ Translation({
 ## `ted_hrlr_translate/glpt_to_en`
 
 Translation dataset from gl_pt to en in plain text.
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -307,6 +347,11 @@ Translation({
 
 Translation dataset from he to pt in plain text.
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -336,6 +381,11 @@ Translation({
 ## `ted_hrlr_translate/it_to_pt`
 
 Translation dataset from it to pt in plain text.
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -367,6 +417,11 @@ Translation({
 
 Translation dataset from pt to en in plain text.
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -396,6 +451,11 @@ Translation({
 ## `ted_hrlr_translate/ru_to_en`
 
 Translation dataset from ru to en in plain text.
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -427,6 +487,11 @@ Translation({
 
 Translation dataset from ru to pt in plain text.
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -456,6 +521,11 @@ Translation({
 ## `ted_hrlr_translate/tr_to_en`
 
 Translation dataset from tr to en in plain text.
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

@@ -178,6 +178,10 @@ questions are provided anonymously and unsolicited by users of the Google search
 engine, and afterwards paired with a paragraph from a Wikipedia article
 containing the answer. Following the original work, we evaluate with accuracy.
 
+Versions:
+
+*   **`1.0.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -217,6 +221,10 @@ the data that had inter-annotator agreement above 0.85. The data is imbalanced
 (relatively fewer neutral examples), so we evaluate using accuracy and F1, where
 for multi-class F1 we compute the unweighted average of the F1 per class.
 
+Versions:
+
+*   **`1.0.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -255,6 +263,10 @@ disambiguating between the two instance types for the model. All examples are
 handcrafted and focus on topics from online blogs and a photography-related
 encyclopedia. Following the recommendation of the authors, we evaluate using
 accuracy.
+
+Versions:
+
+*   **`1.0.2`** (default):
 
 ### Statistics
 
@@ -298,6 +310,10 @@ the question-answer pair format more closely matches the API of other SuperGLUE
 tasks than span-based extractive QA does. The paragraphs are drawn from seven
 domains including news, fiction, and historical text.
 
+Versions:
+
+*   **`1.0.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -338,6 +354,10 @@ in the provided passage, where the same entity may be expressed using multiple
 different surface forms, all of which are considered correct. Articles are drawn
 from CNN and Daily Mail. Following the original work, we evaluate with max (over
 all mentions) token-level F1 and exact match (EM).
+
+Versions:
+
+*   **`1.0.2`** (default):
 
 ### Statistics
 
@@ -384,6 +404,10 @@ random-chance performance (~56%) at the time of GLUE's launch to 85% accuracy
 respect to human performance, however, the task is not yet solved by machines,
 and we expect the remaining gap to be difficult to close.
 
+Versions:
+
+*   **`1.0.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -418,6 +442,10 @@ in both sentences, the task is to determine whether the word is used with the
 same sense in both sentences. Sentences are drawn from WordNet (Miller, 1995),
 VerbNet (Schuler, 2005), and Wiktionary. We follow the original work and
 evaluate using accuracy.
+
+Versions:
+
+*   **`1.0.2`** (default):
 
 ### Statistics
 
@@ -483,6 +511,10 @@ phrase word will change the coreference dependencies in the sentence. The test
 set consists only of more straightforward examples, with a high number of noun
 phrases (and thus more choices for the model), but low to no ambiguity.
 
+Versions:
+
+*   **`1.0.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -547,6 +579,10 @@ phrases (and thus more choices for the model), but low to no ambiguity.
 
 This version fixes issues where the spans are not actually substrings of the
 text.
+
+Versions:
+
+*   **`1.0.2`** (default):
 
 ### Statistics
 

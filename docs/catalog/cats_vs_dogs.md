@@ -17,7 +17,11 @@ dropped.
     [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 *   `DatasetBuilder`:
     [`tfds.image.cats_vs_dogs.CatsVsDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cats_vs_dogs.py)
-*   Version: `v2.0.1`
+*   Versions:
+
+    *   **`2.0.1`** (default):
+    *   `4.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `786.68 MiB`
 
 ## Features

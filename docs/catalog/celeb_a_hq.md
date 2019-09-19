@@ -50,6 +50,11 @@ following configurations predefined (defaults to the first one):
 
 CelebaHQ images in 1024 x 1024 resolution
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -73,6 +78,11 @@ FeaturesDict({
 ## `celeb_a_hq/512`
 
 CelebaHQ images in 512 x 512 resolution
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -98,6 +108,11 @@ FeaturesDict({
 
 CelebaHQ images in 256 x 256 resolution
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -121,6 +136,11 @@ FeaturesDict({
 ## `celeb_a_hq/128`
 
 CelebaHQ images in 128 x 128 resolution
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -146,6 +166,11 @@ FeaturesDict({
 
 CelebaHQ images in 64 x 64 resolution
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -169,6 +194,11 @@ FeaturesDict({
 ## `celeb_a_hq/32`
 
 CelebaHQ images in 32 x 32 resolution
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -194,6 +224,11 @@ FeaturesDict({
 
 CelebaHQ images in 16 x 16 resolution
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -217,6 +252,11 @@ FeaturesDict({
 ## `celeb_a_hq/8`
 
 CelebaHQ images in 8 x 8 resolution
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -242,6 +282,11 @@ FeaturesDict({
 
 CelebaHQ images in 4 x 4 resolution
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -266,6 +311,11 @@ FeaturesDict({
 
 CelebaHQ images in 2 x 2 resolution
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -289,6 +339,11 @@ FeaturesDict({
 ## `celeb_a_hq/1`
 
 CelebaHQ images in 1 x 1 resolution
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

@@ -42,6 +42,11 @@ following configurations predefined (defaults to the first one):
 
 EMNIST ByClass
 
+Versions:
+
+*   **`1.0.1`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -70,6 +75,11 @@ FeaturesDict({
 ## `emnist/bymerge`
 
 EMNIST ByMerge
+
+Versions:
+
+*   **`1.0.1`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -100,6 +110,11 @@ FeaturesDict({
 
 EMNIST Balanced
 
+Versions:
+
+*   **`1.0.1`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -128,6 +143,11 @@ FeaturesDict({
 ## `emnist/letters`
 
 EMNIST Letters
+
+Versions:
+
+*   **`1.0.1`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -158,6 +178,11 @@ FeaturesDict({
 
 EMNIST Digits
 
+Versions:
+
+*   **`1.0.1`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -186,6 +211,11 @@ FeaturesDict({
 ## `emnist/mnist`
 
 EMNIST MNIST
+
+Versions:
+
+*   **`1.0.1`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

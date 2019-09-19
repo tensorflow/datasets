@@ -25,7 +25,11 @@ computer vision tasks: face attribute recognition, face detection, and landmark
     [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 *   `DatasetBuilder`:
     [`tfds.image.celeba.CelebA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/celeba.py)
-*   Version: `v0.3.0`
+*   Versions:
+
+    *   **`0.3.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `1.38 GiB`
 
 ## Features

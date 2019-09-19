@@ -102,18 +102,16 @@ class TedHrlrConfig(tfds.core.BuilderConfig):
 class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk data set for comparing high and low resource languages."""
 
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.0.1: Initial version.
   BUILDER_CONFIGS = [
       TedHrlrConfig(  # pylint: disable=g-complex-comprehension
           language_pair=pair,
           version=tfds.core.Version(
               "0.0.1", experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version("1.0.0"),
-          ])
-      for pair in _VALID_LANGUAGE_PAIRS
+              tfds.core.Version(
+                  "1.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
+          ]) for pair in _VALID_LANGUAGE_PAIRS
   ]
 
   def _info(self):

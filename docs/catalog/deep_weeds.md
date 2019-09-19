@@ -21,7 +21,10 @@ Range", "Kelso", "McKinlay" and "Paluma".
     [https://nextcloud.qriscloud.org.au/index.php/s/a3KxPawpqkiorST/download](https://nextcloud.qriscloud.org.au/index.php/s/a3KxPawpqkiorST/download)
 *   `DatasetBuilder`:
     [`tfds.image.deep_weeds.DeepWeeds`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/deep_weeds.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+
 *   Size: `891.95 MiB`
 
 ## Features

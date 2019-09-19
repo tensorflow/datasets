@@ -25,7 +25,11 @@ per class).
     [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 *   `DatasetBuilder`:
     [`tfds.image.oxford_flowers102.OxfordFlowers102`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_flowers102.py)
-*   Version: `v0.0.1`
+*   Versions:
+
+    *   **`0.0.1`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `336.76 MiB`
 
 ## Features

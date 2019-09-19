@@ -20,7 +20,10 @@ bounding box annotations are provided for all the 12,000 images.
     [http://vision.stanford.edu/aditya86/ImageNetDogs/main.html](http://vision.stanford.edu/aditya86/ImageNetDogs/main.html)
 *   `DatasetBuilder`:
     [`tfds.image.stanford_dogs.StanfordDogs`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/stanford_dogs.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+
 *   Size: `778.12 MiB`
 
 ## Features

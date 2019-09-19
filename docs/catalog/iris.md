@@ -21,7 +21,11 @@ separable from each other.
     [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
 *   `DatasetBuilder`:
     [`tfds.structured.iris.Iris`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/iris.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `4.44 KiB`
 
 ## Features

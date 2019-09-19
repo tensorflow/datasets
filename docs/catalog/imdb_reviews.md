@@ -38,6 +38,11 @@ following configurations predefined (defaults to the first one):
 
 Plain text
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split        | Examples
@@ -67,6 +72,11 @@ FeaturesDict({
 ## `imdb_reviews/bytes`
 
 Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -98,6 +108,11 @@ FeaturesDict({
 
 Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split        | Examples
@@ -127,6 +142,11 @@ FeaturesDict({
 ## `imdb_reviews/subwords32k`
 
 Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

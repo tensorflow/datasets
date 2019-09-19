@@ -21,7 +21,10 @@ of 512 pixels.
     [http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)
 *   `DatasetBuilder`:
     [`tfds.image.food101.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/food101.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+
 *   Size: `4.65 GiB`
 
 ## Features

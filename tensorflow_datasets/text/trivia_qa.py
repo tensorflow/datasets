@@ -82,11 +82,9 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("0.1.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0")
+      tfds.core.Version(
+          "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.1.0: Initial version.
 
   def _info(self):
     return tfds.core.DatasetInfo(

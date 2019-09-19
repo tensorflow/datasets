@@ -21,7 +21,10 @@ pose intervals of 5 degrees.This corresponds to 72 poses per object
     [http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php](http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php)
 *   `DatasetBuilder`:
     [`tfds.image.coil100.Coil100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coil100.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+
 *   Size: `124.63 MiB`
 
 ## Features

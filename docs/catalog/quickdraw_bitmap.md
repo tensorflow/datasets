@@ -18,7 +18,11 @@ contains these drawings converted from vector format into 28x28 grayscale images
     [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 *   `DatasetBuilder`:
     [`tfds.image.quickdraw.QuickdrawBitmap`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/quickdraw.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `36.82 GiB`
 
 ## Features

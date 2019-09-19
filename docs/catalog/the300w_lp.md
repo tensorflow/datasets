@@ -24,7 +24,10 @@ locaization.
     [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
 *   `DatasetBuilder`:
     [`tfds.image.the300w_lp.The300wLp`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/the300w_lp.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+
 *   Size: `2.63 GiB`
 
 ## Features

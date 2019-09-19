@@ -16,7 +16,11 @@ The MNIST database of handwritten digits.
     [https://storage.googleapis.com/cvdf-datasets/mnist/](https://storage.googleapis.com/cvdf-datasets/mnist/)
 *   `DatasetBuilder`:
     [`tfds.image.mnist.MNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/mnist.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `3.0.0`: S3: www.tensorflow.org/datasets/splits
+
 *   Size: `11.06 MiB`
 
 ## Features

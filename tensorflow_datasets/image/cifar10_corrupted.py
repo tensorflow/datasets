@@ -137,16 +137,15 @@ def _make_builder_configs():
               version=tfds.core.Version(
                   '0.0.1', experiments={tfds.core.Experiment.S3: False}),
               supported_versions=[
-                  tfds.core.Version('1.0.0'),
+                  tfds.core.Version(
+                      '1.0.0',
+                      'New split API (https://tensorflow.org/datasets/splits)'),
               ],
               description='Corruption method: ' + corruption +
               ', severity level: ' + str(severity),
               corruption_type=corruption,
               severity=severity,
           ))
-    # Version history:
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 0.0.1: Initial version.
   return config_list
 
 

@@ -16,7 +16,11 @@ A large set of images of horses and humans.
     [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
 *   `DatasetBuilder`:
     [`tfds.image.horses_or_humans.HorsesOrHumans`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/horses_or_humans.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `153.59 MiB`
 
 ## Features

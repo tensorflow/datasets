@@ -20,7 +20,11 @@ measures 256x256 pixels.
     [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
 *   `DatasetBuilder`:
     [`tfds.image.uc_merced.UcMerced`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/uc_merced.py)
-*   Version: `v0.0.1`
+*   Versions:
+
+    *   **`0.0.1`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `317.07 MiB`
 
 ## Features

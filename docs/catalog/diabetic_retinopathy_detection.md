@@ -40,6 +40,11 @@ and has the following configurations predefined (defaults to the first one):
 
 Images at their original resolution and quality.
 
+Versions:
+
+*   **`2.0.0`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -68,6 +73,11 @@ FeaturesDict({
 
 Images have roughly 1,000,000 pixels, at 72 quality.
 
+Versions:
+
+*   **`2.1.0`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -95,6 +105,11 @@ FeaturesDict({
 ## `diabetic_retinopathy_detection/250K`
 
 Images have roughly 250,000 pixels, at 72 quality.
+
+Versions:
+
+*   **`2.1.0`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -126,6 +141,11 @@ Images have been preprocessed as the winner of the Kaggle competition did in
 2015: first they are resized so that the radius of an eyeball is 300 pixels,
 then they are cropped to 90% of the radius, and finally they are encoded with 72
 JPEG quality.
+
+Versions:
+
+*   **`1.0.0`** (default):
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

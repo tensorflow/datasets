@@ -18,7 +18,11 @@ missing values are replaced with -1, string missing values are replaced with
 *   URL: [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
 *   `DatasetBuilder`:
     [`tfds.structured.titanic.Titanic`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/titanic.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `114.98 KiB`
 
 ## Features

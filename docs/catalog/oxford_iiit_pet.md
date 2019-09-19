@@ -18,7 +18,12 @@ lighting. All images have an associated ground truth annotation of breed.
     [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 *   `DatasetBuilder`:
     [`tfds.image.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_iiit_pet.py)
-*   Version: `v1.1.0`
+*   Versions:
+
+    *   **`1.1.0`** (default):
+    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits);additon
+        of segmentation_mask feature.
+
 *   Size: `801.24 MiB`
 
 ## Features

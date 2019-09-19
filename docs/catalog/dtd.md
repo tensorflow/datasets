@@ -23,7 +23,11 @@ partition. Our TRAIN/TEST/VALIDATION splits are those of the first fold.
     [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
 *   `DatasetBuilder`:
     [`tfds.image.dtd.Dtd`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dtd.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `608.33 MiB`
 
 ## Features

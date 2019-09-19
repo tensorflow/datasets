@@ -21,7 +21,11 @@ Imagenet, trainable on a single GPU.
     [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 *   `DatasetBuilder`:
     [`tfds.image.patch_camelyon.PatchCamelyon`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/patch_camelyon.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `7.48 GiB`
 
 ## Features

@@ -241,6 +241,10 @@ configurations predefined (defaults to the first one):
 A dataset consisting of reviews of Amazon Wireless_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -277,6 +281,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Watches_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -315,6 +323,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Video_Games_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -351,6 +363,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Video_DVD_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -389,6 +405,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Video_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -425,6 +445,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Toys_v1_00 products in US marketplace.
 Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -463,6 +487,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Tools_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -499,6 +527,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Sports_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -537,6 +569,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Software_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -574,6 +610,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Shoes_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -610,6 +650,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Pet_Products_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -649,6 +693,10 @@ A dataset consisting of reviews of Amazon Personal_Care_Appliances_v1_00
 products in US marketplace. Each product has its own version as specified with
 it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -685,6 +733,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon PC_v1_00 products in US marketplace.
 Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -723,6 +775,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Outdoors_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -759,6 +815,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Office_Products_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -797,6 +857,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Musical_Instruments_v1_00 products in
 US marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -833,6 +897,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Music_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -871,6 +939,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Mobile_Electronics_v1_00 products in
 US marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -907,6 +979,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Mobile_Apps_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -945,6 +1021,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Major_Appliances_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -981,6 +1061,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Luggage_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1019,6 +1103,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Lawn_and_Garden_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1055,6 +1143,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Kitchen_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1093,6 +1185,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Jewelry_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1129,6 +1225,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Home_Improvement_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1167,6 +1267,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Home_Entertainment_v1_00 products in
 US marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1203,6 +1307,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Home_v1_00 products in US marketplace.
 Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1241,6 +1349,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Health_Personal_Care_v1_00 products in
 US marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1277,6 +1389,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Grocery_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1315,6 +1431,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Gift_Card_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1351,6 +1471,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Furniture_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1389,6 +1513,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Electronics_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1425,6 +1553,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Digital_Video_Games_v1_00 products in
 US marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1463,6 +1595,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Digital_Video_Download_v1_00 products
 in US marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1499,6 +1635,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Digital_Software_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1537,6 +1677,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Digital_Music_Purchase_v1_00 products
 in US marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1573,6 +1717,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Digital_Ebook_Purchase_v1_00 products
 in US marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1611,6 +1759,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Camera_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1647,6 +1799,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Books_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1685,6 +1841,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Beauty_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1721,6 +1881,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Baby_v1_00 products in US marketplace.
 Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1759,6 +1923,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Automotive_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1795,6 +1963,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Apparel_v1_00 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 
@@ -1833,6 +2005,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Digital_Ebook_Purchase_v1_01 products
 in US marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1870,6 +2046,10 @@ FeaturesDict({
 A dataset consisting of reviews of Amazon Books_v1_01 products in US
 marketplace. Each product has its own version as specified with it.
 
+Versions:
+
+*   **`0.1.0`** (default):
+
 ### Statistics
 
 None computed
@@ -1906,6 +2086,10 @@ FeaturesDict({
 
 A dataset consisting of reviews of Amazon Books_v1_02 products in US
 marketplace. Each product has its own version as specified with it.
+
+Versions:
+
+*   **`0.1.0`** (default):
 
 ### Statistics
 

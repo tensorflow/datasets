@@ -15,7 +15,11 @@ Generic image classification dataset.
     [https://www.tensorflow.org/datasets](https://www.tensorflow.org/datasets)
 *   `DatasetBuilder`:
     [`tfds.image.image_folder.ImageLabelFolder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/image_folder.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `?? GiB`
 
 ## Features

@@ -52,6 +52,10 @@ competition the goal is to predict the bounding box and label of each individual
 object. WARNING: As per the official dataset, the test set of VOC2012 does not
 contains annotations.
 
+Versions:
+
+*   **`4.0.0`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -94,6 +98,10 @@ predict the set of labels contained in the image, while in the Detection
 competition the goal is to predict the bounding box and label of each individual
 object. WARNING: As per the official dataset, the test set of VOC2012 does not
 contains annotations.
+
+Versions:
+
+*   **`4.0.0`** (default):
 
 ### Statistics
 

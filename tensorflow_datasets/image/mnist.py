@@ -99,12 +99,8 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0"),
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version("3.0.0", "S3: www.tensorflow.org/datasets/splits"),
   ]
-  # Version history:
-  # 3.0.0: S3 with new hashing function (different shuffle).
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -250,8 +246,9 @@ class EMNISTConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version(
             "1.0.1", experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("3.0.0"),
-            tfds.core.Version("2.0.0"),
+            tfds.core.Version(
+                "3.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
         ],
         **kwargs)
     self.class_number = class_number

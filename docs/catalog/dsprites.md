@@ -38,7 +38,11 @@ ensuring that all pixel outputs were different. No noise was added.
     [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
 *   `DatasetBuilder`:
     [`tfds.image.dsprites.Dsprites`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/dsprites.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `26.73 MiB`
 
 ## Features

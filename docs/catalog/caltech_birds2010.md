@@ -19,7 +19,10 @@ dataset. Annotations include bounding boxes, segmentation labels.
     [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
 *   `DatasetBuilder`:
     [`tfds.image.caltech_birds.CaltechBirds2010`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech_birds.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+
 *   Size: `659.14 MiB`
 
 ## Features

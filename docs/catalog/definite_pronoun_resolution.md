@@ -36,6 +36,11 @@ predefined (defaults to the first one):
 
 Plain text import of the Definite Pronoun Resolution Dataset.
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples

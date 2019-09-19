@@ -43,6 +43,10 @@ the following configurations predefined (defaults to the first one):
 
 WMT T2T EnDe translation task dataset.
 
+Versions:
+
+*   **`0.0.1`** (default):
+
 ### Statistics
 
 Split      | Examples

@@ -150,12 +150,9 @@ class OpenImagesV4Config(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forward to super.
     """
     kwargs['supported_versions'] = [
-        tfds.core.Version('2.0.0'),
-        tfds.core.Version('1.0.0'),
+        tfds.core.Version(
+            '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
     ]
-    # Version history:
-    # 2.0.0: S3 with new hashing function (different shuffle).
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(OpenImagesV4Config, self).__init__(**kwargs)
     self._target_pixels = target_pixels
 

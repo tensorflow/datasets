@@ -41,6 +41,11 @@ following configurations predefined (defaults to the first one):
 
 Groove dataset without audio, unsplit.
 
+Versions:
+
+*   **`1.0.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -74,6 +79,11 @@ FeaturesDict({
 ## `groove/full-16000hz`
 
 Groove dataset with audio, unsplit.
+
+Versions:
+
+*   **`1.0.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -110,6 +120,11 @@ FeaturesDict({
 
 Groove dataset without audio, split into 2-bar chunks.
 
+Versions:
+
+*   **`1.0.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -143,6 +158,11 @@ FeaturesDict({
 ## `groove/2bar-16000hz`
 
 Groove dataset with audio, split into 2-bar chunks.
+
+Versions:
+
+*   **`1.0.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -178,6 +198,11 @@ FeaturesDict({
 ## `groove/4bar-midionly`
 
 Groove dataset without audio, split into 4-bar chunks.
+
+Versions:
+
+*   **`1.0.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

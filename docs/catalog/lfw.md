@@ -16,7 +16,10 @@ Unconstrained Environments
 *   URL: [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
 *   `DatasetBuilder`:
     [`tfds.image.lfw.LFW`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/lfw.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+
 *   Size: `172.20 MiB`
 
 ## Features

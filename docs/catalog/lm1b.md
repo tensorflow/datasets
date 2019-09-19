@@ -36,6 +36,11 @@ configurations predefined (defaults to the first one):
 
 Plain text
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -63,6 +68,11 @@ FeaturesDict({
 ## `lm1b/bytes`
 
 Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -92,6 +102,11 @@ FeaturesDict({
 
 Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -119,6 +134,11 @@ FeaturesDict({
 ## `lm1b/subwords32k`
 
 Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
+
+Versions:
+
+*   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

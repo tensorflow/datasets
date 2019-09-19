@@ -60,6 +60,10 @@ The test split don't have any annotations (only images). * Coco defines 91
 classes but the data only uses 80 classes. * Panotptic annotations defines
 defines 200 classes but only uses 133.
 
+Versions:
+
+*   **`1.1.0`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -101,6 +105,10 @@ The test split don't have any annotations (only images). * Coco defines 91
 classes but the data only uses 80 classes. * Panotptic annotations defines
 defines 200 classes but only uses 133.
 
+Versions:
+
+*   **`1.1.0`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -140,6 +148,10 @@ Coco 2014 and 2017 uses the same images, but different train/val/test splits *
 The test split don't have any annotations (only images). * Coco defines 91
 classes but the data only uses 80 classes. * Panotptic annotations defines
 defines 200 classes but only uses 133.
+
+Versions:
+
+*   **`1.1.0`** (default):
 
 ### Statistics
 

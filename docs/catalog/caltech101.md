@@ -21,7 +21,11 @@ boxes.
     [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
 *   `DatasetBuilder`:
     [`tfds.image.caltech.Caltech101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/caltech.py)
-*   Version: `v1.1.0`
+*   Versions:
+
+    *   **`1.1.0`** (default):
+    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `125.64 MiB`
 
 ## Features

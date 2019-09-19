@@ -67,15 +67,15 @@ class MultiNLIConfig(tfds.core.BuilderConfig):
         for the `tfds.features.text.TextEncoder` used for the features feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    # Version history:
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 0.0.2: Initial version.
     super(MultiNLIConfig, self).__init__(
         version=tfds.core.Version(
             "0.0.2", experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("1.0.0"),
-        ], **kwargs)
+            tfds.core.Version(
+                "1.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
+        ],
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 

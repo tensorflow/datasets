@@ -40,6 +40,10 @@ following configurations predefined (defaults to the first one):
 
 CMATERdb Bangla Numerals
 
+Versions:
+
+*   **`1.0.0`** (default):
+
 ### Statistics
 
 Split | Examples
@@ -69,6 +73,10 @@ FeaturesDict({
 
 CMATERdb Devangari Numerals
 
+Versions:
+
+*   **`1.0.0`** (default):
+
 ### Statistics
 
 Split | Examples
@@ -97,6 +105,10 @@ FeaturesDict({
 ## `cmaterdb/telugu`
 
 CMATERdb Telugu Numerals
+
+Versions:
+
+*   **`1.0.0`** (default):
 
 ### Statistics
 

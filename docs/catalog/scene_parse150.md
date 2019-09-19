@@ -19,7 +19,10 @@ evaluation platform for the algorithms of scene parsing.
     [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
 *   `DatasetBuilder`:
     [`tfds.image.scene_parse_150.SceneParse150`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/scene_parse_150.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+
 *   Size: `936.97 MiB`
 
 ## Features

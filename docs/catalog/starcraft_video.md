@@ -47,6 +47,10 @@ and has the following configurations predefined (defaults to the first one):
 
 Brawl map with 64x64 resolution.
 
+Versions:
+
+*   **`0.1.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -71,6 +75,10 @@ FeaturesDict({
 ## `starcraft_video/brawl_128`
 
 Brawl map with 128x128 resolution.
+
+Versions:
+
+*   **`0.1.2`** (default):
 
 ### Statistics
 
@@ -97,6 +105,10 @@ FeaturesDict({
 
 CollectMineralShards map with 64x64 resolution.
 
+Versions:
+
+*   **`0.1.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -121,6 +133,10 @@ FeaturesDict({
 ## `starcraft_video/collect_mineral_shards_128`
 
 CollectMineralShards map with 128x128 resolution.
+
+Versions:
+
+*   **`0.1.2`** (default):
 
 ### Statistics
 
@@ -147,6 +163,10 @@ FeaturesDict({
 
 MoveUnitToBorder map with 64x64 resolution.
 
+Versions:
+
+*   **`0.1.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -171,6 +191,10 @@ FeaturesDict({
 ## `starcraft_video/move_unit_to_border_128`
 
 MoveUnitToBorder map with 128x128 resolution.
+
+Versions:
+
+*   **`0.1.2`** (default):
 
 ### Statistics
 
@@ -197,6 +221,10 @@ FeaturesDict({
 
 RoadTripWithMedivac map with 64x64 resolution.
 
+Versions:
+
+*   **`0.1.2`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -221,6 +249,10 @@ FeaturesDict({
 ## `starcraft_video/road_trip_with_medivac_128`
 
 RoadTripWithMedivac map with 128x128 resolution.
+
+Versions:
+
+*   **`0.1.2`** (default):
 
 ### Statistics
 

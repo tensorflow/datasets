@@ -19,7 +19,10 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
     [http://imagenet.stanford.edu/internal/car196/](http://imagenet.stanford.edu/internal/car196/)
 *   `DatasetBuilder`:
     [`tfds.image.cars196.Cars196`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cars196.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+
 *   Size: `1.82 GiB`
 
 ## Features

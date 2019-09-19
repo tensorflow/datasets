@@ -20,7 +20,11 @@ superclass to which it belongs).
     [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 *   `DatasetBuilder`:
     [`tfds.image.cifar.Cifar100`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cifar.py)
-*   Version: `v1.3.1`
+*   Versions:
+
+    *   **`1.3.1`** (default):
+    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `160.71 MiB`
 
 ## Features

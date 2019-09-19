@@ -20,7 +20,11 @@ answering the questions.
     [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 *   `DatasetBuilder`:
     [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `2.48 GiB`
 
 ## Features

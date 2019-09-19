@@ -68,16 +68,15 @@ class Squad(tfds.core.GeneratorBasedBuilder):
   _DEV_FILE = "dev-v1.1.json"
   _TRAINING_FILE = "train-v1.1.json"
 
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.1.0: Initial version.
   BUILDER_CONFIGS = [
       SquadConfig(
           name="plain_text",
           version=tfds.core.Version(
               "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version("1.0.0"),
+              tfds.core.Version(
+                  "1.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
           ],
           description="Plain text",
       ),

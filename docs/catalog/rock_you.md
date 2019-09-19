@@ -21,7 +21,10 @@ Machine Learning models for password guessing and cracking.
     [https://wiki.skullsecurity.org/Passwords](https://wiki.skullsecurity.org/Passwords)
 *   `DatasetBuilder`:
     [`tfds.structured.rock_you.RockYou`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/rock_you.py)
-*   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+
 *   Size: `133.44 MiB`
 
 ## Features

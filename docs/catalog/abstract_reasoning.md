@@ -108,6 +108,10 @@ $o \\in O$, and $a \\in A$. Training and testing sets are disjoint, with \
 separation occurring at the level of the input variables (i.e. pixel \
 manifestations).
 
+Versions:
+
+*   **`0.0.2`** (default):
+
 ### Statistics
 
 None computed
@@ -139,6 +143,10 @@ whereas in the test set only odd-indexed values were permitted. Note that all \
 $S$ contained some triple $[r, o, a]$ with the colour or size attribute . \
 Thus, generalisation is required for every question in the test set.
 
+Versions:
+
+*   **`0.0.2`** (default):
+
 ### Statistics
 
 None computed
@@ -165,6 +173,10 @@ FeaturesDict({
 Same as in interpolation, but the values of \
 the attributes were restricted to the lower half of the discrete set during \
 training, whereas in the test set they took values in the upper half.
+
+Versions:
+
+*   **`0.0.2`** (default):
 
 ### Statistics
 
@@ -196,6 +208,10 @@ $(t_1, t_2)$ of the 40 held-out pairs did not occur together in structures $S$ \
 in the training set, and all structures $S$ had at least one such pair \
 $(t_1, t_2)$ as a subset.
 
+Versions:
+
+*   **`0.0.2`** (default):
+
 ### Statistics
 
 None computed
@@ -224,6 +240,10 @@ triples $[r,o,a]$. We allocated seven of these for the test set, at random, \
 but such that each of the attributes was represented exactly once in this set. \
 These held-out triples never occurred in questions in the training set, and \
 every $S$ in the test set contained at least one of them.
+
+Versions:
+
+*   **`0.0.2`** (default):
 
 ### Statistics
 
@@ -256,6 +276,10 @@ for training and four for testing. For a pair $(a_1, a_2)$ in the test set, \
 $S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
 set, all $S$ contained triples with $a_1$ and $a_2$.
 
+Versions:
+
+*   **`0.0.2`** (default):
+
 ### Statistics
 
 None computed
@@ -284,6 +308,10 @@ the training set contained no triples with $o$=shape and $a$=colour. \
 All structures governing puzzles in the test set contained at least one triple \
 with $o$=shape and $a$=colour.
 
+Versions:
+
+*   **`0.0.2`** (default):
+
 ### Statistics
 
 None computed
@@ -311,6 +339,10 @@ Held-out attribute line-type. $S$ in \
 the training set contained no triples with $o$=line and $a$=type. \
 All structures governing puzzles in the test set contained at least one triple \
 with $o$=line and $a$=type.
+
+Versions:
+
+*   **`0.0.2`** (default):
 
 ### Statistics
 

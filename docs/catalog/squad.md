@@ -29,6 +29,11 @@ configurations predefined (defaults to the first one):
 
 Plain text
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples

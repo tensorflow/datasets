@@ -70,6 +70,10 @@ following configurations predefined (defaults to the first one):
 
 WMT 2015 cs-en translation task dataset.
 
+Versions:
+
+*   **`0.0.4`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -99,6 +103,10 @@ Translation({
 ## `wmt15_translate/de-en`
 
 WMT 2015 de-en translation task dataset.
+
+Versions:
+
+*   **`0.0.4`** (default):
 
 ### Statistics
 
@@ -130,6 +138,10 @@ Translation({
 
 WMT 2015 fi-en translation task dataset.
 
+Versions:
+
+*   **`0.0.4`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -159,6 +171,10 @@ Translation({
 ## `wmt15_translate/fr-en`
 
 WMT 2015 fr-en translation task dataset.
+
+Versions:
+
+*   **`0.0.4`** (default):
 
 ### Statistics
 
@@ -190,6 +206,10 @@ Translation({
 
 WMT 2015 ru-en translation task dataset.
 
+Versions:
+
+*   **`0.0.4`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -219,6 +239,10 @@ Translation({
 ## `wmt15_translate/cs-en.subwords8k`
 
 WMT 2015 cs-en translation task dataset with subword encoding.
+
+Versions:
+
+*   **`0.0.4`** (default):
 
 ### Statistics
 
@@ -250,6 +274,10 @@ Translation({
 
 WMT 2015 de-en translation task dataset with subword encoding.
 
+Versions:
+
+*   **`0.0.4`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -279,6 +307,10 @@ Translation({
 ## `wmt15_translate/fi-en.subwords8k`
 
 WMT 2015 fi-en translation task dataset with subword encoding.
+
+Versions:
+
+*   **`0.0.4`** (default):
 
 ### Statistics
 
@@ -310,6 +342,10 @@ Translation({
 
 WMT 2015 fr-en translation task dataset with subword encoding.
 
+Versions:
+
+*   **`0.0.4`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -339,6 +375,10 @@ Translation({
 ## `wmt15_translate/ru-en.subwords8k`
 
 WMT 2015 ru-en translation task dataset with subword encoding.
+
+Versions:
+
+*   **`0.0.4`** (default):
 
 ### Statistics
 

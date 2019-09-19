@@ -46,6 +46,11 @@ following configurations predefined (defaults to the first one):
 
 Images of category classroom
 
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -69,6 +74,11 @@ FeaturesDict({
 ## `lsun/bedroom`
 
 Images of category bedroom
+
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -94,6 +104,11 @@ FeaturesDict({
 
 Images of category bridge
 
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -117,6 +132,11 @@ FeaturesDict({
 ## `lsun/church_outdoor`
 
 Images of category church_outdoor
+
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -142,6 +162,11 @@ FeaturesDict({
 
 Images of category conference_room
 
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -165,6 +190,11 @@ FeaturesDict({
 ## `lsun/dining_room`
 
 Images of category dining_room
+
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -190,6 +220,11 @@ FeaturesDict({
 
 Images of category kitchen
 
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -213,6 +248,11 @@ FeaturesDict({
 ## `lsun/living_room`
 
 Images of category living_room
+
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -238,6 +278,11 @@ FeaturesDict({
 
 Images of category restaurant
 
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -261,6 +306,11 @@ FeaturesDict({
 ## `lsun/tower`
 
 Images of category tower
+
+Versions:
+
+*   **`0.1.1`** (default): {<Experiment.S3: 2>: False}
+*   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

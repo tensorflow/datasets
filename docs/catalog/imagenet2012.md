@@ -25,7 +25,11 @@ include splits for the training and validation sets here.
 *   URL: [http://image-net.org/](http://image-net.org/)
 *   `DatasetBuilder`:
     [`tfds.image.imagenet.Imagenet2012`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/imagenet.py)
-*   Version: `v2.0.1`
+*   Versions:
+
+    *   **`2.0.1`** (default):
+    *   `5.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `?? GiB`
 
 ## Features

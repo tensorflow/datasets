@@ -22,7 +22,11 @@ the Kitti homepage.
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 *   `DatasetBuilder`:
     [`tfds.image.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/kitti.py)
-*   Version: `v3.1.0`
+*   Versions:
+
+    *   **`3.1.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `11.71 GiB`
 
 ## Features

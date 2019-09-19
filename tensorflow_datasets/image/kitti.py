@@ -74,11 +74,9 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("3.1.0")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 2.0.0: S3 with new hashing function (different shuffle).
-  # 3.0.0: Train/val/test splits based on random video IDs created.
 
   def _info(self):
     # Annotation descriptions are in the object development kit.

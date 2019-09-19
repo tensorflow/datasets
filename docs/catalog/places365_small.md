@@ -18,7 +18,10 @@ category in the validation set and 900 images per category in the testing set.
     [http://data.csail.mit.edu/places/places365/](http://data.csail.mit.edu/places/places365/)
 *   `DatasetBuilder`:
     [`tfds.image.places365_small.Places365Small`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/places365_small.py)
-*   Version: `v2.0.0`
+*   Versions:
+
+    *   **`2.0.0`** (default):
+
 *   Size: `?? GiB`
 
 ## Features

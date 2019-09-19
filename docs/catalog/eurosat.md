@@ -36,6 +36,10 @@ following configurations predefined (defaults to the first one):
 
 Sentinel-2 RGB channels
 
+Versions:
+
+*   **`2.0.0`** (default):
+
 ### Statistics
 
 Split | Examples
@@ -64,6 +68,10 @@ FeaturesDict({
 ## `eurosat/all`
 
 13 Sentinel-2 channels
+
+Versions:
+
+*   **`2.0.0`** (default):
 
 ### Statistics
 

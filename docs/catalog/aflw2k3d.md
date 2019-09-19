@@ -21,7 +21,10 @@ to 21 points, as the original paper mentioned.
     [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
 *   `DatasetBuilder`:
     [`tfds.image.aflw2k3d.Aflw2k3d`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/aflw2k3d.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+
 *   Size: `83.36 MiB`
 
 ## Features

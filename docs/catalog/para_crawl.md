@@ -93,6 +93,11 @@ has the following configurations predefined (defaults to the first one):
 
 Translation dataset from English to bg, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -121,6 +126,11 @@ Translation({
 ## `para_crawl/encs_plain_text`
 
 Translation dataset from English to cs, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -151,6 +161,11 @@ Translation({
 
 Translation dataset from English to da, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -179,6 +194,11 @@ Translation({
 ## `para_crawl/ende_plain_text`
 
 Translation dataset from English to de, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -209,6 +229,11 @@ Translation({
 
 Translation dataset from English to el, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -237,6 +262,11 @@ Translation({
 ## `para_crawl/enes_plain_text`
 
 Translation dataset from English to es, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -267,6 +297,11 @@ Translation({
 
 Translation dataset from English to et, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -295,6 +330,11 @@ Translation({
 ## `para_crawl/enfi_plain_text`
 
 Translation dataset from English to fi, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -325,6 +365,11 @@ Translation({
 
 Translation dataset from English to fr, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -353,6 +398,11 @@ Translation({
 ## `para_crawl/enga_plain_text`
 
 Translation dataset from English to ga, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -383,6 +433,11 @@ Translation({
 
 Translation dataset from English to hr, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -411,6 +466,11 @@ Translation({
 ## `para_crawl/enhu_plain_text`
 
 Translation dataset from English to hu, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -441,6 +501,11 @@ Translation({
 
 Translation dataset from English to it, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -469,6 +534,11 @@ Translation({
 ## `para_crawl/enlt_plain_text`
 
 Translation dataset from English to lt, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -499,6 +569,11 @@ Translation({
 
 Translation dataset from English to lv, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -527,6 +602,11 @@ Translation({
 ## `para_crawl/enmt_plain_text`
 
 Translation dataset from English to mt, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -557,6 +637,11 @@ Translation({
 
 Translation dataset from English to nl, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -585,6 +670,11 @@ Translation({
 ## `para_crawl/enpl_plain_text`
 
 Translation dataset from English to pl, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -615,6 +705,11 @@ Translation({
 
 Translation dataset from English to pt, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -643,6 +738,11 @@ Translation({
 ## `para_crawl/enro_plain_text`
 
 Translation dataset from English to ro, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 
@@ -673,6 +773,11 @@ Translation({
 
 Translation dataset from English to sk, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -702,6 +807,11 @@ Translation({
 
 Translation dataset from English to sl, uses encoder plain_text.
 
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
+
 ### Statistics
 
 Split | Examples
@@ -730,6 +840,11 @@ Translation({
 ## `para_crawl/ensv_plain_text`
 
 Translation dataset from English to sv, uses encoder plain_text.
+
+Versions:
+
+*   **`0.1.0`** (default):
+*   `1.0.0`: None
 
 ### Statistics
 

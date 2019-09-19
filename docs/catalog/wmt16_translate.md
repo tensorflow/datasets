@@ -58,6 +58,10 @@ following configurations predefined (defaults to the first one):
 
 WMT 2016 cs-en translation task dataset.
 
+Versions:
+
+*   **`0.0.3`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -87,6 +91,10 @@ Translation({
 ## `wmt16_translate/de-en`
 
 WMT 2016 de-en translation task dataset.
+
+Versions:
+
+*   **`0.0.3`** (default):
 
 ### Statistics
 
@@ -118,6 +126,10 @@ Translation({
 
 WMT 2016 fi-en translation task dataset.
 
+Versions:
+
+*   **`0.0.3`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -147,6 +159,10 @@ Translation({
 ## `wmt16_translate/ro-en`
 
 WMT 2016 ro-en translation task dataset.
+
+Versions:
+
+*   **`0.0.3`** (default):
 
 ### Statistics
 
@@ -178,6 +194,10 @@ Translation({
 
 WMT 2016 ru-en translation task dataset.
 
+Versions:
+
+*   **`0.0.3`** (default):
+
 ### Statistics
 
 Split      | Examples
@@ -207,6 +227,10 @@ Translation({
 ## `wmt16_translate/tr-en`
 
 WMT 2016 tr-en translation task dataset.
+
+Versions:
+
+*   **`0.0.3`** (default):
 
 ### Statistics
 

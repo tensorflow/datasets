@@ -96,8 +96,11 @@ class CnnDailymailConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version(
             '0.0.2', experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version('1.0.0'),
-        ], **kwargs)
+            tfds.core.Version(
+                '1.0.0',
+                'New split API (https://tensorflow.org/datasets/splits)'),
+        ],
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 

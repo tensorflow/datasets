@@ -31,6 +31,11 @@ following configurations predefined (defaults to the first one):
 
 Translation dataset from ne to en, uses encoder plain_text.
 
+Versions:
+
+*   **`0.0.3`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -59,6 +64,11 @@ Translation({
 ## `flores/sien_plain_text`
 
 Translation dataset from si to en, uses encoder plain_text.
+
+Versions:
+
+*   **`0.0.3`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

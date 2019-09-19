@@ -98,13 +98,10 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
 _VERSION = tfds.core.Version(
     '0.0.1', experiments={tfds.core.Experiment.S3: False})
 _SUPPORTED_VERSIONS = [
-    # Will be made canonical in near future.
-    tfds.core.Version('3.0.1'),
+    tfds.core.Version('3.0.1', (
+        'New split API (https://tensorflow.org/datasets/splits); fix colorization (all RGB) and '
+        'format (all jpeg); use TAR_STREAM.')),
 ]
-# Version history:
-# 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
-#        (jump to match imagenet version).
-# 0.0.1: Initial dataset.
 
 
 def _make_builder_configs():

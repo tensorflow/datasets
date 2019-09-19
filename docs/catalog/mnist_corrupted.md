@@ -63,6 +63,11 @@ configurations predefined (defaults to the first one):
 
 Corruption method: identity
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -91,6 +96,11 @@ FeaturesDict({
 ## `mnist_corrupted/shot_noise`
 
 Corruption method: shot_noise
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -121,6 +131,11 @@ FeaturesDict({
 
 Corruption method: impulse_noise
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -149,6 +164,11 @@ FeaturesDict({
 ## `mnist_corrupted/glass_blur`
 
 Corruption method: glass_blur
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -179,6 +199,11 @@ FeaturesDict({
 
 Corruption method: motion_blur
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -207,6 +232,11 @@ FeaturesDict({
 ## `mnist_corrupted/shear`
 
 Corruption method: shear
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -237,6 +267,11 @@ FeaturesDict({
 
 Corruption method: scale
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -265,6 +300,11 @@ FeaturesDict({
 ## `mnist_corrupted/rotate`
 
 Corruption method: rotate
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -295,6 +335,11 @@ FeaturesDict({
 
 Corruption method: brightness
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -323,6 +368,11 @@ FeaturesDict({
 ## `mnist_corrupted/translate`
 
 Corruption method: translate
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -353,6 +403,11 @@ FeaturesDict({
 
 Corruption method: stripe
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -381,6 +436,11 @@ FeaturesDict({
 ## `mnist_corrupted/fog`
 
 Corruption method: fog
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -411,6 +471,11 @@ FeaturesDict({
 
 Corruption method: spatter
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -439,6 +504,11 @@ FeaturesDict({
 ## `mnist_corrupted/dotted_line`
 
 Corruption method: dotted_line
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -469,6 +539,11 @@ FeaturesDict({
 
 Corruption method: zigzag
 
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split | Examples
@@ -497,6 +572,11 @@ FeaturesDict({
 ## `mnist_corrupted/canny_edges`
 
 Corruption method: canny_edges
+
+Versions:
+
+*   **`0.0.1`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

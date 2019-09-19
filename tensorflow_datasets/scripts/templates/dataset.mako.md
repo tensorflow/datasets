@@ -28,6 +28,17 @@ ${'#' * level} Supervised keys (for `as_supervised=True`)
 %endif
 </%def>
 
+## Print list of supported versions minus default.
+<%def name="supported_versions(builder, level)">\
+<%
+versions = (builder.SUPPORTED_VERSIONS if hasattr(builder, 'SUPPORTED_VERSIONS')
+            else builder.supported_versions)
+%>\
+%for version in versions:
+${'  '*level|n}* `${str(version)}`: ${version.description}
+%endfor
+</%def>
+
 ## Print the bullet points + features specific to builder with a single version.
 <%def name="print_general_info_one_config(builder)">
 ${display_description(builder)}
@@ -35,6 +46,9 @@ ${display_description(builder)}
 * URL: [${builder.info.homepage_url}](${builder.info.homepage_url})
 * `DatasetBuilder`: [`${get_class_path(builder)}`](${get_class_url(builder)})
 * Version: `v${str(builder.info.version)}`
+* Versions:
+  * **`${builder.info.version}`** (default): ${builder.info.version.description or ''}
+${supported_versions(builder, level=1)}
 * Size: `${tfds.units.size_str(builder.info.size_in_bytes)}`
 
 ${display_features(builder, level=2)}
@@ -70,6 +84,12 @@ the following configurations predefined (defaults to the first one):
 %for config, config_builder in zip(builder.BUILDER_CONFIGS, config_builders):
 ${'##'} `${builder.name}/${config.name}`
 ${config.description}
+
+Versions:
+
+* **`${config.version}`** (default): ${getattr(config.version, 'description', '') or ''}
+${supported_versions(config, level=0)}
+
 ${display_stats(config_builder, level=3)}
 ${display_features(config_builder, level=3)}
 ${display_urls(config_builder, level=3)}

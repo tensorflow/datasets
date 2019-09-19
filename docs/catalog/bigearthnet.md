@@ -58,6 +58,10 @@ has the following configurations predefined (defaults to the first one):
 
 Sentinel-2 RGB channels
 
+Versions:
+
+*   **`0.0.2`** (default):
+
 ### Statistics
 
 None computed
@@ -94,6 +98,10 @@ FeaturesDict({
 ## `bigearthnet/all`
 
 13 Sentinel-2 channels
+
+Versions:
+
+*   **`0.0.2`** (default):
 
 ### Statistics
 

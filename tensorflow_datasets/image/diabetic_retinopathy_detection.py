@@ -58,15 +58,13 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
         pixels is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
-    # Version history:
-    # 3.0.0: S3 with new hashing function (different shuffle).
-    # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(DiabeticRetinopathyDetectionConfig, self).__init__(
         version=tfds.core.Version(
             version, experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("3.0.0"),
-            tfds.core.Version("2.0.0"),
+            tfds.core.Version(
+                "3.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
         ],
         **kwargs)
     self._target_pixels = target_pixels
@@ -122,7 +120,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.manual_dir
     test_labels_path = dl_manager.download(_URL_TEST_LABELS)
     if tf.io.gfile.isdir(test_labels_path):
-       # While testing: download() returns the dir containing the tests files.
+      # While testing: download() returns the dir containing the tests files.
       test_labels_path = os.path.join(test_labels_path,
                                       "retinopathy_solution.csv")
     return [

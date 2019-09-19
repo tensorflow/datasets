@@ -33,6 +33,11 @@ following configurations predefined (defaults to the first one):
 
 A dataset consisting of Train and Validation images of 32x32 resolution.
 
+Versions:
+
+*   **`1.0.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 ### Statistics
 
 Split      | Examples
@@ -56,6 +61,11 @@ FeaturesDict({
 ## `downsampled_imagenet/64x64`
 
 A dataset consisting of Train and Validation images of 64x64 resolution.
+
+Versions:
+
+*   **`1.0.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

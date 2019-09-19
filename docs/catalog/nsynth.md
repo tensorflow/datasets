@@ -24,7 +24,11 @@ overlapping between the train set and the valid/test sets.
     [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 *   `DatasetBuilder`:
     [`tfds.audio.nsynth.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `73.07 GiB`
 
 ## Features

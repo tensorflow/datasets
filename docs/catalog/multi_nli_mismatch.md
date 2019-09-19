@@ -32,6 +32,10 @@ configurations predefined (defaults to the first one):
 
 Plain text
 
+Versions:
+
+*   **`0.0.1`** (default):
+
 ### Statistics
 
 Split      | Examples

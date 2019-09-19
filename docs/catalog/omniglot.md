@@ -17,7 +17,11 @@ handwritten characters from 50 different alphabets.
     [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 *   `DatasetBuilder`:
     [`tfds.image.omniglot.Omniglot`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/omniglot.py)
-*   Version: `v1.0.0`
+*   Versions:
+
+    *   **`1.0.0`** (default):
+    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `17.95 MiB`
 
 ## Features

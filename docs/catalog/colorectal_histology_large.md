@@ -16,7 +16,11 @@
     [https://zenodo.org/record/53169#.XGZemKwzbmG](https://zenodo.org/record/53169#.XGZemKwzbmG)
 *   `DatasetBuilder`:
     [`tfds.image.colorectal_histology.ColorectalHistologyLarge`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/colorectal_histology.py)
-*   Version: `v0.0.1`
+*   Versions:
+
+    *   **`0.0.1`** (default):
+    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `707.65 MiB`
 
 ## Features
