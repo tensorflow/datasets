@@ -27,6 +27,7 @@ from tensorflow_datasets.text.imdb import IMDBReviews
 from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig
+from tensorflow_datasets.text.multi_news import MultiNews
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
 from tensorflow_datasets.text.newsroom import Newsroom
