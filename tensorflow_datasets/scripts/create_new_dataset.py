@@ -53,7 +53,7 @@ from __future__ import print_function
 """
 
 _DATASET_DEFAULT_IMPORTS = """\
-import tensorflow_datasets as tfds\n
+import tensorflow_datasets.public_api as tfds\n
 """
 
 _DATASET_TEST_DEFAULTS_IMPORTS = """\
