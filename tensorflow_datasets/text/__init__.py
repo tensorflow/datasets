@@ -31,6 +31,7 @@ from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
 from tensorflow_datasets.text.newsroom import Newsroom
 from tensorflow_datasets.text.reddit_tifu import RedditTifu
+from tensorflow_datasets.text.scientific_papers import ScientificPapers
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.squad import Squad
 from tensorflow_datasets.text.super_glue import SuperGlue
