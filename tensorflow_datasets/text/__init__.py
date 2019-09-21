@@ -15,6 +15,7 @@
 
 """Text datasets."""
 
+from tensorflow_datasets.text.aeslc import Aeslc
 from tensorflow_datasets.text.big_patent import BigPatent
 from tensorflow_datasets.text.cnn_dailymail import CnnDailymail
 from tensorflow_datasets.text.cnn_dailymail import CnnDailymailConfig
