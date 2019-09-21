@@ -34,3 +34,4 @@ from tensorflow_datasets.text.super_glue import SuperGlue
 from tensorflow_datasets.text.trivia_qa import TriviaQA
 from tensorflow_datasets.text.wikipedia import Wikipedia
 from tensorflow_datasets.text.xnli import Xnli
+from tensorflow_datasets.text.xsum import Xsum
