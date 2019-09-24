@@ -1,0 +1,153 @@
+{
+  "citation": "\n@misc{sharma2019bigpatent,\n    title={BIGPATENT: A Large-Scale Dataset for Abstractive and Coherent Summarization},\n    author={Eva Sharma and Chen Li and Lu Wang},\n    year={2019},\n    eprint={1906.03741},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}\n", 
+  "description": "\nBIGPATENT, consisting of 1.3 million records of U.S. patent documents\nalong with human written abstractive summaries.\nEach US patent application is filed under a Cooperative Patent Classification\n(CPC) code. There are nine such classification categories:\nA (Human Necessities), B (Performing Operations; Transporting),\nC (Chemistry; Metallurgy), D (Textiles; Paper), E (Fixed Constructions),\nF (Mechanical Engineering; Lightning; Heating; Weapons; Blasting),\nG (Physics), H (Electricity), and\nY (General tagging of new or cross-sectional technology)\n\nThere are two features:\n  - description: detailed description of patent.\n  - summary: Patent abastract.\n\n", 
+  "location": {
+    "urls": [
+      "https://evasharma.github.io/bigpatent/"
+    ]
+  }, 
+  "name": "big_patent", 
+  "schema": {
+    "feature": [
+      {
+        "name": "abstract", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "description", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "6448045871", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2807", 
+        "2807"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5614"
+              }
+            }, 
+            "name": "abstract", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5614"
+              }
+            }, 
+            "name": "description", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "5614"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158", 
+        "3157", 
+        "3158"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "101042"
+              }
+            }, 
+            "name": "abstract", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "101042"
+              }
+            }, 
+            "name": "description", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "101042"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2807", 
+        "2806"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5613"
+              }
+            }, 
+            "name": "abstract", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5613"
+              }
+            }, 
+            "name": "description", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "5613"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "description", 
+    "output": "abstract"
+  }, 
+  "version": "1.0.0"
+}
