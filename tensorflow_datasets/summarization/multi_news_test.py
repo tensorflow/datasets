@@ -13,18 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for Annotated Enron Subject Line Corpus Dataset."""
+"""Test for Multi-News dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import aeslc
+from tensorflow_datasets.summarization import multi_news
 
 
-class AeslcTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = aeslc.Aeslc
+class MultiNewsTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = multi_news.MultiNews
   SPLITS = {
       "train": 1,  # Number of fake train example
       "validation": 1,  # Number of fake validation example

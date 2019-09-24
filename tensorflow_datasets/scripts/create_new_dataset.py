@@ -36,7 +36,10 @@ from tensorflow_datasets.core.utils import py_utils
 
 FLAGS = flags.FLAGS
 
-_DATASET_TYPE = ['image', 'video', 'audio', 'text', 'structured', 'translate']
+_DATASET_TYPE = [
+    'image', 'video', 'audio', 'text', 'structured', 'translate',
+    'summarization'
+]
 
 flags.DEFINE_string('tfds_dir', None, 'Root directory of tfds (auto-computed)')
 flags.DEFINE_string('dataset', None, 'Dataset name')
@@ -153,9 +156,8 @@ def create_dataset_file(root_dir, data):
   """Create a new dataset from a template."""
   file_path = os.path.join(root_dir, '{dataset_type}', '{dataset_name}.py')
   context = (
-      _HEADER + _DATASET_DEFAULT_IMPORTS + _CITATION
-      + _DESCRIPTION + _DATASET_DEFAULTS
-  )
+      _HEADER + _DATASET_DEFAULT_IMPORTS + _CITATION + _DESCRIPTION +
+      _DATASET_DEFAULTS)
 
   with gfile.GFile(file_path.format(**data), 'w') as f:
     f.write(context.format(**data))
@@ -164,10 +166,8 @@ def create_dataset_file(root_dir, data):
 def add_the_init(root_dir, data):
   """Append the new dataset file to the __init__.py."""
   init_file = os.path.join(root_dir, '{dataset_type}', '__init__.py')
-  context = (
-      'from tensorflow_datasets.{dataset_type}.{dataset_name} import '
-      '{dataset_cls}  # {TODO} Sort alphabetically\n'
-  )
+  context = ('from tensorflow_datasets.{dataset_type}.{dataset_name} import '
+             '{dataset_cls}  # {TODO} Sort alphabetically\n')
   with gfile.GFile(init_file.format(**data), 'a') as f:
     f.write(context.format(**data))
 
@@ -175,22 +175,20 @@ def add_the_init(root_dir, data):
 def create_dataset_test_file(root_dir, data):
   """Create the test file associated with the dataset."""
   file_path = os.path.join(root_dir, '{dataset_type}', '{dataset_name}_test.py')
-  context = (
-      _HEADER + _DATASET_TEST_DEFAULTS_IMPORTS +
-      _DATASET_TEST_DEFAULTS)
+  context = (_HEADER + _DATASET_TEST_DEFAULTS_IMPORTS + _DATASET_TEST_DEFAULTS)
 
   with gfile.GFile(file_path.format(**data), 'w') as f:
     f.write(context.format(**data))
 
 
 def create_fake_data(root_dir, data):
-  fake_examples_dir = os.path.join(
-      root_dir, 'testing', 'test_data', 'fake_examples', '{dataset_name}')
+  fake_examples_dir = os.path.join(root_dir, 'testing', 'test_data',
+                                   'fake_examples', '{dataset_name}')
   fake_examples_dir = fake_examples_dir.format(**data)
   gfile.makedirs(fake_examples_dir)
 
-  fake_path = os.path.join(
-      fake_examples_dir, 'TODO-add_fake_data_in_this_directory.txt')
+  fake_path = os.path.join(fake_examples_dir,
+                           'TODO-add_fake_data_in_this_directory.txt')
   with gfile.GFile(fake_path, 'w') as f:
     f.write('{TODO}: Add fake data in this directory'.format(**data))
 
@@ -226,8 +224,7 @@ def main(_):
       'You can start with searching TODO({}).\n'
       'Please check this '
       '`https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md`'
-      'for details.'.format(root_dir, dataset_name)
-  )
+      'for details.'.format(root_dir, dataset_name))
 
 
 if __name__ == '__main__':

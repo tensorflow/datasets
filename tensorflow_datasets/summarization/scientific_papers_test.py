@@ -13,21 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for WikiHow datasets."""
+"""Scientific Papers Dataset Test."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import wikihow
+from tensorflow_datasets.summarization import scientific_papers
 
 
-class WikihowTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = wikihow.Wikihow
+class ScientificPapersTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = scientific_papers.ScientificPapers
   SPLITS = {
-      "train": 3,  # Number of fake train example
+      "train": 1,  # Number of fake train example
+      "validation": 1,  # Number of fake validation example
+      "test": 1,  # Number of fake test example
   }
+  DL_EXTRACT_RESULT = {"arxiv": "", "pubmed": ""}
 
 
 if __name__ == "__main__":

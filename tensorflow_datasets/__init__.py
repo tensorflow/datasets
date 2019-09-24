@@ -51,6 +51,7 @@ tf_compat.ensure_tf_install()
 from tensorflow_datasets import audio
 from tensorflow_datasets import image
 from tensorflow_datasets import structured
+from tensorflow_datasets import summarization
 from tensorflow_datasets import text
 from tensorflow_datasets import translate
 from tensorflow_datasets import video

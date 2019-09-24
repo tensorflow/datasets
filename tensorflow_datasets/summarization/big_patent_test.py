@@ -13,24 +13,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Scientific Papers Dataset Test."""
+"""Test for BigPatent dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import scientific_papers
+from tensorflow_datasets.summarization import big_patent
 
 
-class ScientificPapersTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = scientific_papers.ScientificPapers
+class BigPatentTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = big_patent.BigPatent
+  BUILDER_CONFIG_NAMES_TO_TEST = ["all"]
+  SPLITS = {
+      "train": 9,  # Number of fake train example
+      "validation": 9,  # Number of fake val example
+      "test": 9,  # Number of fake test example
+  }
+
+
+class BigPatentATest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = big_patent.BigPatent
+  BUILDER_CONFIG_NAMES_TO_TEST = ["a", "y"]
   SPLITS = {
       "train": 1,  # Number of fake train example
-      "validation": 1,  # Number of fake validation example
+      "validation": 1,  # Number of fake val example
       "test": 1,  # Number of fake test example
   }
-  DL_EXTRACT_RESULT = {"arxiv": "", "pubmed": ""}
 
 
 if __name__ == "__main__":

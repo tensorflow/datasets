@@ -13,32 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for BigPatent dataset."""
+"""Test for NEWSROOM dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import big_patent
+from tensorflow_datasets.summarization import newsroom
 
 
-class BigPatentTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = big_patent.BigPatent
-  BUILDER_CONFIG_NAMES_TO_TEST = ["all"]
+class NewsroomTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = newsroom.Newsroom
   SPLITS = {
-      "train": 9,  # Number of fake train example
-      "validation": 9,  # Number of fake val example
-      "test": 9,  # Number of fake test example
-  }
-
-
-class BigPatentATest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = big_patent.BigPatent
-  BUILDER_CONFIG_NAMES_TO_TEST = ["a", "y"]
-  SPLITS = {
-      "train": 1,  # Number of fake train example
-      "validation": 1,  # Number of fake val example
+      "train": 3,  # Number of fake train example
+      "validation": 2,  # Number of fake validation example
       "test": 1,  # Number of fake test example
   }
 

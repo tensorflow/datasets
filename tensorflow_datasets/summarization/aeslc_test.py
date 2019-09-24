@@ -13,24 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for XSum dataset."""
+"""Test for Annotated Enron Subject Line Corpus Dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import xsum
+from tensorflow_datasets.summarization import aeslc
 
 
-class XsumTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = xsum.Xsum
+class AeslcTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = aeslc.Aeslc
   SPLITS = {
       "train": 1,  # Number of fake train example
       "validation": 1,  # Number of fake validation example
       "test": 1,  # Number of fake test example
   }
-  DL_EXTRACT_RESULT = "XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json"
+  DL_EXTRACT_RESULT = ""
 
 
 if __name__ == "__main__":

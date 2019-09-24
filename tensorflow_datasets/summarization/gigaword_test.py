@@ -13,21 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for Multi-News dataset."""
+"""Test for Gigaword dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import multi_news
+from tensorflow_datasets.summarization import gigaword
 
 
-class MultiNewsTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = multi_news.MultiNews
+class GigawordOriginalTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = gigaword.Gigaword
   SPLITS = {
-      "train": 1,  # Number of fake train example
-      "validation": 1,  # Number of fake validation example
+      "train": 3,  # Number of fake train example
       "test": 1,  # Number of fake test example
   }
   DL_EXTRACT_RESULT = ""

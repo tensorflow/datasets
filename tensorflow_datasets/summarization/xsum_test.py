@@ -13,23 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for NEWSROOM dataset."""
+"""Test for XSum dataset."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import newsroom
+from tensorflow_datasets.summarization import xsum
 
 
-class NewsroomTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = newsroom.Newsroom
+class XsumTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = xsum.Xsum
   SPLITS = {
-      "train": 3,  # Number of fake train example
-      "validation": 2,  # Number of fake validation example
+      "train": 1,  # Number of fake train example
+      "validation": 1,  # Number of fake validation example
       "test": 1,  # Number of fake test example
   }
+  DL_EXTRACT_RESULT = "XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json"
 
 
 if __name__ == "__main__":

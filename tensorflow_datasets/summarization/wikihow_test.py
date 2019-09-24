@@ -13,23 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for Gigaword dataset."""
+"""Test for WikiHow datasets."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import gigaword
+from tensorflow_datasets.summarization import wikihow
 
 
-class GigawordOriginalTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = gigaword.Gigaword
+class WikihowTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = wikihow.Wikihow
   SPLITS = {
       "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
   }
-  DL_EXTRACT_RESULT = ""
 
 
 if __name__ == "__main__":
