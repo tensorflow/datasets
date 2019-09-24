@@ -147,7 +147,8 @@ class DownloadManager(object):
                dataset_name=None,
                force_download=False,
                force_extraction=False,
-               register_checksums=False):
+               register_checksums=False,
+               ignore_checksums=False):
     """Download manager constructor.
 
     Args:
@@ -160,6 +161,8 @@ class DownloadManager(object):
       force_extraction: `bool`, default to False. If True, always [re]extract.
       register_checksums: `bool`, default to False. If True, dl checksums aren't
         checked, but stored into file.
+      ignore_checksums: `bool`, default to False. If True, dl checksums aren't
+        checked or registered. Overrides `register_checksums`.
     """
     self._dataset_name = dataset_name
     self._download_dir = os.path.expanduser(download_dir)
@@ -177,11 +180,16 @@ class DownloadManager(object):
     self._sizes_checksums = checksums.get_all_sizes_checksums()
     # To record what is being used: {url: (size, checksum)}
     self._recorded_sizes_checksums = {}
+    self._ignore_checksums = ignore_checksums
 
   @property
   def downloaded_size(self):
     """Returns the total size of downloaded files."""
     return sum(size for size, sha256 in self._recorded_sizes_checksums.values())
+
+  def set_ignore_checksums(self, value):
+    """Enables/disables ignoring of checksums."""
+    self._ignore_checksums = value
 
   def _get_final_dl_path(self, url, sha256):
     return os.path.join(self._download_dir,
@@ -201,7 +209,9 @@ class DownloadManager(object):
     original_fname = fnames[0]
     tmp_path = os.path.join(tmp_dir_path, original_fname)
     self._recorded_sizes_checksums[resource.url] = (dl_size, sha256)
-    if self._register_checksums:
+    if self._ignore_checksums:
+      pass
+    elif self._register_checksums:
       self._record_sizes_checksums()
     elif (dl_size, sha256) != self._sizes_checksums.get(resource.url, None):
       raise NonMatchingChecksumError(resource.url, tmp_path)
