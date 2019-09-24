@@ -328,6 +328,7 @@ flores/sien_plain_text/0.0.3
 flores/sien_plain_text/1.0.0
 food101/1.0.0
 gap/0.1.0
+gigaword/1.0.0
 glue/cola/0.0.2
 glue/cola/1.0.0
 glue/mnli/0.0.2
