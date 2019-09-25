@@ -40,7 +40,7 @@ _CITATION = """\
 _DESCRIPTION = """The original data set contains 1364 images and
 consists of two classes of uninfected cells(red blood cells and leukocytes) and
 four classes of infected cells(gametocytes, rings, schizonts, and trophozoites).
-The Malaria dataset contains a total of 74,211 cell images and we have removed 414 cell images
+The Malaria dataset contains a total of 74,238 cell images and we have removed 441 cell images
 because annotators marked the cells as difficult as it was not clearly in one of the cell classes.
 Fianlly malaria_bbbc data set contains 73,797 cells.
 This data set is extremly skewed toward uninfected cases, so we did not divide original data to train and test sets
