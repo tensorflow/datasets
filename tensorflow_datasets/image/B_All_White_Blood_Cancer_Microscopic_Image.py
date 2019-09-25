@@ -6,8 +6,10 @@ import os
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
-Image_Data = ("https://drive.google.com/uc?aut"
-              "huser=0&id=1K98T0TxlgaSWbfKX9DcWR71i15JOnoo2&export=download")
+_IMAGE_URL = ("https://drive.google.com/uc?export=download"
+              "&confirm=XoMA&id=1XJVKZma-6ypwaxyY0SVKdU_IO3EpbuUD")
+
+_INFO_URL = "https://competitions.codalab.org/competitions/20395"
 
 _CITATION = """\
 @article{gupta2017stain,
@@ -59,15 +61,13 @@ ation of Microscopic Medical Images},
 author={Anubha Gupta, Rahul Duggal, Ritu Gupta, Lalit Kumar, Nisarg Thakkar,
 and Devprakash Satpathy}
 }
-
 """
 
 _DESCRIPTION = """\
  A large data set of  B-ALL white blood cancer microscopic images. The dataset
  contains total 1867 cropped images, which 1219 malignant cells images are
  labeled as class 1, 647 normal cells images are labeled as class 0. The size
- of each image is roughly 300 x 300 x 3 RGB.
-"""
+ of each image is roughly 300 x 300 x 3 RGB."""
 
 
 class BAllWhiteBloodCancerMicroscopicImage(tfds.core.GeneratorBasedBuilder):
@@ -83,12 +83,18 @@ class BAllWhiteBloodCancerMicroscopicImage(tfds.core.GeneratorBasedBuilder):
                 "label": tfds.features.ClassLabel(names=["cancer", "normal"]),
             }),
             supervised_keys=("image", "label"),
-            urls=["https://competitions.codalab.org/competitions/20395"],
+            urls=[_INFO_URL],
             citation=_CITATION,
         )
 
     def _split_generators(self, dl_manager):
-        extracted_path = dl_manager.manual_dir
+        # The file is in ZIP format, though URL doesn't mention it.
+        extracted_path = dl_manager.download_and_extract(
+          tfds.download.Resource(
+            url=_IMAGE_URL,
+            extract_method=tfds.download.extract_method.ZIP
+          )
+        )
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
