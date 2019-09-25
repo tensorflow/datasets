@@ -45,12 +45,6 @@ because annotators marked the cells as difficult as it was not clearly in one of
 Fianlly malaria_bbbc data set contains 73,797 cells.
 This data set is extremly skewed toward uninfected cases, so we did not divide original data to train and test sets
 so that the user can try in their own way to deal with this problem.
-
-For the docker user:
-FROM tensorflow/tensorflow:1.14.0-py3
-RUN apt-get update
-RUN apt-get install -y git wget vim htop
-RUN pip3 install tensorflow-datasets
 """
 
 _NAMES = ["gametocyte", "leukocyte", "red blood cell", "ring", "schizont", "trophozoite"]
@@ -64,8 +58,6 @@ class MalariaBbbc(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('0.1.0')
 
   def _info(self):
-    """Define Dataset Info."""
-
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
