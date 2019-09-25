@@ -1,0 +1,5 @@
+https://storage.googleapis.com/duke-tfds/ultraduke/mark.csv 98745 23054d1ed629a8c09a5a2d814022afd7702f2230ac662abdf37ea744278cf712
+https://storage.googleapis.com/duke-tfds/ultraduke/testing-phantom-v2.csv 167160 901c5cd25a83704f530ae5d49869f9c363b9b2dc80f936f930ab093c8736c655
+https://storage.googleapis.com/duke-tfds/ultraduke/training-v2-verasonics-phantom.csv 1000009 5438a9dc911722e073fd2ddb66ef711ebd83cc4e1c07756672e156c680db5fb2
+https://storage.googleapis.com/duke-tfds/ultraduke/ultraphantom.tar.gz 10150530772 0f2708e4d472b3cda681c1e662836f1967a276f23d53e6affb01773c53909f71
+https://storage.googleapis.com/duke-tfds/ultraduke/validation-phantom-v2.csv 105359 8ef7331293b283e9c97cc72f4104850b4b97631e7d6e7e20de3835708d0c473d

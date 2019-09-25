@@ -45,6 +45,7 @@ from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRet
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
 from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
+from tensorflow_datasets.image.duke_ultrasound import DukeUltrasound
 from tensorflow_datasets.image.eurosat import Eurosat
 from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.food101 import Food101
