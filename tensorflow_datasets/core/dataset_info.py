@@ -577,10 +577,8 @@ def get_dataset_feature_statistics(builder, split):
 
     if feature.type == schema_pb2.INT or feature.type == schema_pb2.FLOAT:
       numeric_statistics = statistics_pb2.NumericStatistics()
-      # Uses `.get` as Sequence(int) containing only empty array won't contains
-      # any value.
-      numeric_statistics.min = feature_to_min.get(feature_name, 0)
-      numeric_statistics.max = feature_to_max.get(feature_name, 0)
+      numeric_statistics.min = feature_to_min[feature_name]
+      numeric_statistics.max = feature_to_max[feature_name]
       numeric_statistics.common_stats.CopyFrom(common_statistics)
       feature_name_statistics.num_stats.CopyFrom(numeric_statistics)
     else:

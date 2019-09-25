@@ -24,21 +24,16 @@ from tensorflow_datasets.image import voc
 
 
 class Voc2007Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = voc.Voc
-  BUILDER_CONFIG_NAMES_TO_TEST = ['2007']
+  DATASET_CLASS = voc.Voc2007
   SPLITS = {
       'train': 1,
       'validation': 2,
       'test': 3,
   }
-  DL_EXTRACT_RESULT = {
-      'trainval': '',
-      'test': '',
-  }
 
 
-class Voc2012Test(Voc2007Test):
-  BUILDER_CONFIG_NAMES_TO_TEST = ['2012']
+class Voc2007S3Test(Voc2007Test):
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

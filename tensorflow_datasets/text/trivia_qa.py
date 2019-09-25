@@ -291,7 +291,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
             wiki_titles = []
             wiki_contexts = []
 
-          yield "%s_%s" % (os.path.basename(filepath), question_id), {
+          yield question_id, {
               "entity_pages": {
                   "doc_source": doc_sources,
                   "file_name": file_names,

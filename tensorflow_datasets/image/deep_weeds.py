@@ -92,11 +92,7 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Define Splits."""
-    # The file is in ZIP format, but URL doesn't mention it.
-    path = dl_manager.download_and_extract(
-        tfds.download.Resource(
-            url=_URL,
-            extract_method=tfds.download.ExtractMethod.ZIP))
+    path = dl_manager.download_and_extract(_URL)
 
     return [
         tfds.core.SplitGenerator(

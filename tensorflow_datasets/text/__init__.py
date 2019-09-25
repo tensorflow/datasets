@@ -25,7 +25,6 @@ from tensorflow_datasets.text.imdb import IMDBReviewsConfig
 from tensorflow_datasets.text.lm1b import Lm1b
 from tensorflow_datasets.text.lm1b import Lm1bConfig
 from tensorflow_datasets.text.multi_nli import MultiNLI
-from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.squad import Squad
 from tensorflow_datasets.text.super_glue import SuperGlue

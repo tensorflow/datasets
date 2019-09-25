@@ -181,6 +181,6 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
       with tf.io.gfile.GFile(filepath) as f:
 
         for idx, line in enumerate(f):
-          yield "%s_%d" % (os.path.basename(filepath), idx), {
+          yield idx, {
               "text": line.strip(),
           }

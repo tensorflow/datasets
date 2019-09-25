@@ -214,7 +214,6 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     """See base class for details."""
     # Recursively save all child features
     for feature_key, feature in six.iteritems(self._feature_dict):
-      feature_key = feature_key.replace('/', '.')
       if feature_name:
         feature_key = '-'.join((feature_name, feature_key))
       feature.save_metadata(data_dir, feature_name=feature_key)
@@ -223,7 +222,6 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     """See base class for details."""
     # Recursively load all child features
     for feature_key, feature in six.iteritems(self._feature_dict):
-      feature_key = feature_key.replace('/', '.')
       if feature_name:
         feature_key = '-'.join((feature_name, feature_key))
       feature.load_metadata(data_dir, feature_name=feature_key)

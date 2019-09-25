@@ -11,3 +11,4 @@
 *   Better proxy support, possibility to add certificate
 *   Add `decoders` kwargs to override the default feature decoding
     ([guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)).
+*   drwitt submitted pull request to add new tensorflow dataset (fastmri).

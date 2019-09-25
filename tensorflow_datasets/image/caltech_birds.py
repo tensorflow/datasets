@@ -108,9 +108,8 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
       for fname in files:
         if fname.endswith(".mat"):
           path = os.path.join(root, fname)
-          with tf.io.gfile.GFile(path, "rb") as f:
-            mat = tfds.core.lazy_imports.scipy.io.loadmat(
-                f, squeeze_me=True, variable_names=["bbox", "seg"])
+          mat = tfds.core.lazy_imports.scipy.io.loadmat(
+              path, squeeze_me=True, variable_names=["bbox", "seg"])
           attributes[fname.split(".")[0]].append(mat["bbox"])
           attributes[fname.split(".")[0]].append(mat["seg"])
 

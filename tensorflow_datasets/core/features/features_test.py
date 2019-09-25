@@ -208,15 +208,6 @@ class FeatureDictTest(testing.FeatureExpectationsTestCase):
 
     self.assertEqual(repr(feature_dict), FEATURE_STR)
 
-  def test_feature_save_load_metadata_slashes(self):
-    with testing.tmp_dir() as data_dir:
-      fd = features_lib.FeaturesDict({
-          'image/frame': features_lib.Image(shape=(32, 32, 3)),
-          'image/label': features_lib.ClassLabel(num_classes=2),
-      })
-      fd.save_metadata(data_dir)
-      fd.load_metadata(data_dir)
-
 
 FEATURE_STR = """FeaturesDict({
     'label': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=2)),
