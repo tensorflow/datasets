@@ -6,8 +6,7 @@ import os
 import tensorflow as tf
 import tensorflow_datasets as tfds
 
-_IMAGE_URL = ("https://drive.google.com/uc?export=download"
-              "&confirm=XoMA&id=1XJVKZma-6ypwaxyY0SVKdU_IO3EpbuUD")
+_IMAGE_URL = ("http://people.duke.edu/~yx141/C_NMC_test_prelim_phase_data.zip")
 
 _INFO_URL = "https://competitions.codalab.org/competitions/20395"
 
@@ -88,13 +87,8 @@ class BAllWhiteBloodCancerMicroscopicImage(tfds.core.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager):
-        # The file is in ZIP format, though URL doesn't mention it.
-        extracted_path = dl_manager.download_and_extract(
-          tfds.download.Resource(
-            url=_IMAGE_URL,
-            extract_method=tfds.download.extract_method.ZIP
-          )
-        )
+        extracted_path = dl_manager.download_and_extract(_IMAGE_URL)
+
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
