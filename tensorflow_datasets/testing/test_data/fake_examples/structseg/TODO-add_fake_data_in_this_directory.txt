@@ -1,1 +1,0 @@
-TODO(structseg): Add fake data in this directory

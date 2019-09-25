@@ -13,20 +13,14 @@ import re
 import numpy 
 
 # TODO(structseg): BibTeX citation
-_CITATION = """\
-@misc{li_zhou_deng_chen, title={StructSeg2019 - Grand Challenge}, 
-url={https://structseg2019.grand-challenge.org/}, 
-journal={Automatic Structure Segmentation for Radiotherapy Planning Challenge }, 
-author={Li, Hongsheng and Zhou, Jinghao and Deng, Jincheng and Chen, Ming}}
+_CITATION = """
 """
 
 # TODO(structseg):
 _DESCRIPTION = """
-The dataset is used for evaluating automatic algorithms on segmentation of organ-at-risk(OAR)
-of nasopharynx cancer, for radiation therapy planning. The dataset contains organ-at-risk 
-segmentation from head & neck CT scans 
 """
 _BASE_URL = """https://structseg2019.grand-challenge.org/"""
+_CITATION = """  XXXX """
 
 
 class Structseg(tfds.core.GeneratorBasedBuilder):
