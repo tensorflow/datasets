@@ -40,7 +40,7 @@ as well as data post-processed with Siemens Dynamic TCE for speckle
 reduction, contrast enhancement and improvement in conspicuity of 
 anatomical structures."""
 
-_URLS = ['https://arxiv.org/abs/1908.05782']
+_URLS = ['https://arxiv.org/abs/1908.05782', 'https://github.com/ouwen/mimicknet']
 
 
 class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
