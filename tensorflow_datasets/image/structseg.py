@@ -1,4 +1,4 @@
-"""TODO(structseg): Add a description here."""
+##add structure segmentation dataset 
 
 from __future__ import absolute_import
 from __future__ import division
@@ -12,21 +12,25 @@ import nibabel as nib
 import re
 import numpy 
 
-# TODO(structseg): BibTeX citation
-_CITATION = """
+_CITATION = """\
+@misc{li_zhou_deng_chen, title={StructSeg2019 - Grand Challenge}, 
+url={https://structseg2019.grand-challenge.org/}, 
+journal={Automatic Structure Segmentation for Radiotherapy Planning Challenge }, 
+author={Li, Hongsheng and Zhou, Jinghao and Deng, Jincheng and Chen, Ming}}
 """
 
-# TODO(structseg):
 _DESCRIPTION = """
+The dataset is used for evaluating automatic algorithms on segmentation of organ-at-risk(OAR)
+of nasopharynx cancer, for radiation therapy planning. The dataset contains organ-at-risk 
+segmentation from head & neck CT scans 
 """
+
 _BASE_URL = """https://structseg2019.grand-challenge.org/"""
-_CITATION = """  XXXX """
+
 
 
 class Structseg(tfds.core.GeneratorBasedBuilder):
-  """TODO(structseg): Short description of my dataset."""
-
-  # TODO(structseg): Set up version.
+ 
   VERSION = tfds.core.Version('0.1.0')
   SKIP_REGISTERING = True  
   VERSION = tfds.core.Version("1.0.0",
@@ -51,7 +55,7 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
     return file_paths
 
   def _info(self):
-    # TODO(structseg): Specifies the tfds.core.DatasetInfo object
+  
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.
@@ -73,9 +77,8 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    # TODO(structseg): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
+    
+    #join the folder that contains the folder with images 
     path = os.path.join(dl_manager.manual_dir, 'HaN_OAR') 
     if not tf.io.gfile.exists(path):
       raise AssertionError('You must download the dataset manually from {}, ''extract it, and place it in {}.'.format( _BASE_URL, dl_manager.manual_dir)) 
@@ -91,9 +94,8 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self,filepath):
-    """Yields examples."""
-    # TODO(structseg): Yields (key, example) tuples from the dataset
-    file_path = filepath  #hard-code, need change
+
+    file_path = filepath  #define file path
     
     
     dirs = self.get_all_file_paths(file_path)
@@ -127,7 +129,6 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
 
       for slice_idx in range(label_array.shape[2]):
         patient = patient_index+"_"+str(slice_idx)
-        #new_index = int(patient_index)*label_array.shape[2] +slice_idx
 
         record = {
             "image": data_array[:,:,slice_idx].reshape(512, 512, 1),
