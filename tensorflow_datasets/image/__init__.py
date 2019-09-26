@@ -84,3 +84,4 @@ from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
 from tensorflow_datasets.image.voc import Voc
 from tensorflow_datasets.image.wider_face import WiderFace
+from tensorflow_datasets.image.structseg import Structseg  # TODO(structseg) Sort alphabetically
