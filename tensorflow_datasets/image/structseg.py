@@ -66,9 +66,7 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.Image(shape=(512, 512,1))
             # These are the features of your dataset like images, labels ...
         }),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
+        #specify feature tuples 
         supervised_keys=("image", "label"),
         # Homepage of the dataset for documentation
         urls=[_BASE_URL],
@@ -132,7 +130,7 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
             "label": label_array[:,:,slice_idx].reshape(512, 512, 1)
         }
 
-    yield patient, record
+        yield patient, record
 
 
 
