@@ -161,7 +161,7 @@ subsplitting them up. The resulting splits can be passed to `tfds.load` or
 ```py
 combined_split = tfds.Split.TRAIN + tfds.Split.TEST
 
-ds = tfds.load("mnist", split=combined_split)
+ds = tfds.load("mnist:3.*.*", split=combined_split)
 ```
 
 Note that a special `tfds.Split.ALL` keyword exists to merge all splits
@@ -169,7 +169,7 @@ together:
 
 ```py
 # `ds` will iterate over test, train and validation merged together
-ds = tfds.load("mnist", split=tfds.Split.ALL)
+ds = tfds.load("mnist:3.*.*", split=tfds.Split.ALL)
 ```
 
 ### Subsplit
@@ -191,7 +191,7 @@ may not be evenly distributed among subsplits.
 ```py
 train_half_1, train_half_2 = tfds.Split.TRAIN.subsplit(k=2)
 
-dataset = tfds.load("mnist", split=train_half_1)
+dataset = tfds.load("mnist:3.*.*", split=train_half_1)
 ```
 
 #### Specifying a percentage slice
@@ -201,7 +201,7 @@ first_10_percent = tfds.Split.TRAIN.subsplit(tfds.percent[:10])
 last_2_percent = tfds.Split.TRAIN.subsplit(tfds.percent[-2:])
 middle_50_percent = tfds.Split.TRAIN.subsplit(tfds.percent[25:75])
 
-dataset = tfds.load("mnist", split=middle_50_percent)
+dataset = tfds.load("mnist:3.*.*", split=middle_50_percent)
 ```
 
 #### Specifying weights
@@ -209,7 +209,7 @@ dataset = tfds.load("mnist", split=middle_50_percent)
 ```py
 half, quarter1, quarter2 = tfds.Split.TRAIN.subsplit(weighted=[2, 1, 1])
 
-dataset = tfds.load("mnist", split=half)
+dataset = tfds.load("mnist:3.*.*", split=half)
 ```
 
 ### Composing split, adding, and subsplitting
@@ -247,5 +247,5 @@ still use the subsplit API by defining the custom named split with
 
 ```py
 split = tfds.Split('test2015') + tfds.Split.TEST
-ds = tfds.load('coco2014', split=split)
+ds = tfds.load('coco/2014:1.*.*', split=split)
 ```

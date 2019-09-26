@@ -40,14 +40,14 @@ def show_examples(ds_info, ds, rows=3, cols=3, plot_scale=3., image_key=None):
   Usage:
 
   ```python
-  ds, ds_info = tfds.load('cifar10', split='train', with_info=True)
+  ds, ds_info = tfds.load('cifar10:3.*.*', split='train', with_info=True)
   fig = tfds.show_examples(ds_info, ds)
   ```
 
   Args:
     ds_info: The dataset info object to which extract the label and features
-      info. Available either through `tfds.load('mnist', with_info=True)` or
-      `tfds.builder('mnist').info`
+      info. Available either through `tfds.load('mnist:3.*.*', with_info=True)` or
+      `tfds.builder('mnist:3.*.*').info`
     ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
       should not be batched. Examples will be consumed in order until
       (rows * cols) are read or the dataset is consumed.

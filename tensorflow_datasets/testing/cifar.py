@@ -87,8 +87,8 @@ def _generate_cifar100_data():
   test_utils.remake_dir(output_dir)
   generate_cifar100_batch("train.bin", 10)
   generate_cifar100_batch("test.bin", 2)
-  fine_names = tfds.builder("cifar100").info.features["label"].names
-  coarse_names = tfds.builder("cifar100").info.features["coarse_label"].names
+  fine_names = tfds.builder("cifar100:3.*.*").info.features["label"].names
+  coarse_names = tfds.builder("cifar100:3.*.*").info.features["coarse_label"].names
   with open(os.path.join(output_dir, "fine_label_names.txt"), "w") as f:
     f.write("\n".join(fine_names))
   with open(os.path.join(output_dir, "coarse_label_names.txt"), "w") as f:
@@ -101,7 +101,7 @@ def _generate_cifar10_data():
   for batch_number in range(1, NUMBER_BATCHES + 1):
     generate_cifar10_batch("data_batch_%s.bin" % batch_number)
   generate_cifar10_batch("test_batch.bin")
-  label_names = tfds.builder("cifar10").info.features["label"].names
+  label_names = tfds.builder("cifar10:3.*.*").info.features["label"].names
   print(label_names)
   with open(os.path.join(output_dir, "batches.meta.txt"), "w") as f:
     f.write("\n".join(label_names))

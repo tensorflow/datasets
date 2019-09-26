@@ -30,18 +30,18 @@ tf.compat.v1.enable_eager_execution()
 
 def main(argv):
   del argv
-  mnist, info = tfds.load('mnist', with_info=True)
+  mnist, info = tfds.load('mnist:3.*.*', with_info=True)
   print(mnist, info)
-  mnist_train = tfds.load('mnist', split='train')
+  mnist_train = tfds.load('mnist:3.*.*', split='train')
   print(mnist_train)
   mnist_subsplit = tfds.Split.TRAIN.subsplit(tfds.percent[:10])
-  mnist_train2 = tfds.load('mnist', split=mnist_subsplit)
+  mnist_train2 = tfds.load('mnist:3.*.*', split=mnist_subsplit)
   print(mnist_train2)
   for i, unused_row in enumerate(mnist_train2):
     if i > 10:
       break
     print(i)
-  builder = tfds.builder('cifar10')
+  builder = tfds.builder('cifar10:3.*.*')
   dataset = builder.as_dataset(split='train')
   print(dataset)
   cifar10_np = tfds.as_numpy(dataset)

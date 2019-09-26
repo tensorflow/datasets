@@ -18,14 +18,14 @@ ${"##"} Usage
 tfds.list_builders()
 
 # Load a given dataset by name, along with the DatasetInfo
-data, info = tfds.load("mnist", with_info=True)
+data, info = tfds.load("mnist:3.*.*", with_info=True)
 train_data, test_data = data['train'], data['test']
 assert isinstance(train_data, tf.data.Dataset)
 assert info.features['label'].num_classes == 10
 assert info.splits['train'].num_examples == 60000
 
 # You can also access a builder directly
-builder = tfds.builder("mnist")
+builder = tfds.builder("mnist:3.*.*")
 assert builder.info.splits['train'].num_examples == 60000
 builder.download_and_prepare()
 datasets = builder.as_dataset()

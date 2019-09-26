@@ -46,7 +46,7 @@ pre-defined set of configurations in `tfds.DatasetBuilder.builder_configs`.
 Typical `DatasetBuilder` usage:
 
 ```python
-mnist_builder = tfds.builder("mnist")
+mnist_builder = tfds.builder("mnist:3.*.*")
 mnist_info = mnist_builder.info
 mnist_builder.download_and_prepare()
 datasets = mnist_builder.as_dataset()
@@ -132,7 +132,7 @@ Callers must pass arguments as keyword arguments.
 The output types vary depending on the parameters. Examples:
 
 ```python
-builder = tfds.builder('imdb_reviews')
+builder = tfds.builder('imdb_reviews:1.*.*')
 builder.download_and_prepare()
 
 # Default parameters: Returns the dict of tf.data.Dataset

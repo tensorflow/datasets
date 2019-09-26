@@ -324,17 +324,17 @@ class ReadInstruction(object):
   Examples of usage:
 
   # The following lines are equivalent:
-  ds = tfds.load('mnist', split='test[:33%]')
-  ds = tfds.load('mnist', split=ReadInstruction.from_spec('test[:33%]'))
-  ds = tfds.load('mnist', split=ReadInstruction('test', to=33, unit='%'))
-  ds = tfds.load('mnist', split=ReadInstruction(
+  ds = tfds.load('mnist:3.*.*', split='test[:33%]')
+  ds = tfds.load('mnist:3.*.*', split=ReadInstruction.from_spec('test[:33%]'))
+  ds = tfds.load('mnist:3.*.*', split=ReadInstruction('test', to=33, unit='%'))
+  ds = tfds.load('mnist:3.*.*', split=ReadInstruction(
       'test', from_=0, to=33, unit='%'))
 
   # The following lines are equivalent:
-  ds = tfds.load('mnist', split='test[:33%]+train[1:-1]')
-  ds = tfds.load('mnist', split=ReadInstruction.from_spec(
+  ds = tfds.load('mnist:3.*.*', split='test[:33%]+train[1:-1]')
+  ds = tfds.load('mnist:3.*.*', split=ReadInstruction.from_spec(
       'test[:33%]+train[1:-1]'))
-  ds = tfds.load('mnist', split=(
+  ds = tfds.load('mnist:3.*.*', split=(
       ReadInstruction.('test', to=33, unit='%') +
       ReadInstruction.('train', from_=1, to=-1, unit='abs')))
 

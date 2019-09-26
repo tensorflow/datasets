@@ -32,7 +32,7 @@ pip install -q -U numpy
 # data load
 pip install -e .
 python -c "import tensorflow_datasets as tfds"
-python -c "import tensorflow_datasets as tfds; tfds.load('mnist', split=tfds.Split.TRAIN)"
+python -c "import tensorflow_datasets as tfds; tfds.load('mnist:3.*.*', split=tfds.Split.TRAIN)"
 
 # Then install the test dependencies
 pip install -e .[tests]

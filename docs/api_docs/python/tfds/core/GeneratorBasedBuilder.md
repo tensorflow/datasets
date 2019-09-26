@@ -110,7 +110,7 @@ Callers must pass arguments as keyword arguments.
 The output types vary depending on the parameters. Examples:
 
 ```python
-builder = tfds.builder('imdb_reviews')
+builder = tfds.builder('imdb_reviews:1.*.*')
 builder.download_and_prepare()
 
 # Default parameters: Returns the dict of tf.data.Dataset

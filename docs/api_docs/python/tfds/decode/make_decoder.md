@@ -34,7 +34,7 @@ def no_op_decoder(example, feature):
   """Decoder simply decoding feature normally."""
   return feature.decode_example(example)
 
-tfds.load('mnist', split='train', decoders: {
+tfds.load('mnist:3.*.*', split='train', decoders: {
     'image': no_op_decoder(),
 })
 ```

@@ -22,7 +22,7 @@ images get decoded (for better performance), you can skip the image decoding
 entirely. This works with both `tfds.features.Image` and `tfds.features.Video`.
 
 ```python
-ds = tfds.load('imagenet2012', split='train', decoders={
+ds = tfds.load('imagenet2012:5.*.*', split='train', decoders={
     'image': tfds.decode.SkipDecoding(),
 })
 
@@ -72,7 +72,7 @@ def decode_example(serialized_image, feature):
       channels=feature.feature.shape[-1],
   )
 
-ds = tfds.load('imagenet2012', split='train', decoders={
+ds = tfds.load('imagenet2012:5.*.*', split='train', decoders={
     # With video, decoders are applied to individual frames
     'image': decode_example(),
 })

@@ -80,7 +80,7 @@ import tensorflow_datasets as tfds
 # The following is the equivalent of the `load` call above.
 
 # You can fetch the DatasetBuilder class by string
-mnist_builder = tfds.builder("mnist")
+mnist_builder = tfds.builder("mnist:3.*.*")
 
 # Download the dataset
 mnist_builder.download_and_prepare()
@@ -123,7 +123,7 @@ print(info)
 You can also get details about the classes (number of classes and their names).
 
 ```python
-info = tfds.builder('cats_vs_dogs').info
+info = tfds.builder('cats_vs_dogs:4.*.*').info
 
 info.features['label'].num_classes  # 2
 info.features['label'].names  # ['cat', 'dog']
@@ -142,7 +142,7 @@ input pipelines with `tf.data` but use whatever you'd like for your model
 components.
 
 ```python
-train_ds = tfds.load("mnist", split=tfds.Split.TRAIN)
+train_ds = tfds.load("mnist:3.*.*", split=tfds.Split.TRAIN)
 train_ds = train_ds.shuffle(1024).batch(128).repeat(5).prefetch(10)
 for example in tfds.as_numpy(train_ds):
   numpy_images, numpy_labels = example["image"], example["label"]
@@ -152,7 +152,7 @@ You can also use `tfds.as_numpy` in conjunction with `batch_size=-1` to
 get the full dataset in NumPy arrays from the returned `tf.Tensor` object:
 
 ```python
-train_ds = tfds.load("mnist", split=tfds.Split.TRAIN, batch_size=-1)
+train_ds = tfds.load("mnist:3.*.*", split=tfds.Split.TRAIN, batch_size=-1)
 numpy_ds = tfds.as_numpy(train_ds)
 numpy_images, numpy_labels = numpy_ds["image"], numpy_ds["label"]
 ```
