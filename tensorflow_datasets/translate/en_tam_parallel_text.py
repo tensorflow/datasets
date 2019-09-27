@@ -39,6 +39,8 @@ CITATION = """\
 }
 """
 
+_DATA_URL = "http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz"
+
 class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
   """(en_tam_parallel_text): English_Tamil parallel text corpus"""
 
@@ -59,7 +61,7 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Download the links and pass the filenames to split generator"""
 
-    dl_dir = dl_manager.download_and_extract('http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v2.tar.gz')
+    dl_dir = dl_manager.download_and_extract(_DATA_URL)
     data_dir = os.path.join(dl_dir, 'en-ta-parallel-v2')
 
     return [
