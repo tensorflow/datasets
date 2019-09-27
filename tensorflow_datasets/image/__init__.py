@@ -22,6 +22,7 @@ from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.caltech_birds import CaltechBirds2010
+from tensorflow_datasets.image.cars196 import Cars196
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.cbis_ddsm import CuratedBreastImagingDDSM
 from tensorflow_datasets.image.celeba import CelebA
@@ -70,6 +71,7 @@ from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
 from tensorflow_datasets.image.smallnorb import Smallnorb
 from tensorflow_datasets.image.so2sat import So2sat
+from tensorflow_datasets.image.spine_web import SpineWeb
 from tensorflow_datasets.image.stanford_dogs import StanfordDogs
 from tensorflow_datasets.image.stanford_online_products import StanfordOnlineProducts
 from tensorflow_datasets.image.sun import Sun397
@@ -78,4 +80,3 @@ from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
 from tensorflow_datasets.image.voc import Voc
 from tensorflow_datasets.image.wider_face import WiderFace
-from tensorflow_datasets.image.spine_web import SpineWeb
