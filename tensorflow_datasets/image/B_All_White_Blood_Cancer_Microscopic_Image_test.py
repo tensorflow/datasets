@@ -4,7 +4,7 @@ from __future__ import print_function
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image \
-    import B_ALL_White_Blood_Cancer_Microscopic_Image
+    import B_All_White_Blood_Cancer_Microscopic_Image
 
 
 class BAllWhiteBloodCancerMicroscopicImageTest(testing.DatasetBuilderTestCase):
