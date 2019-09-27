@@ -43,10 +43,9 @@ There are two features:
   - document: Input news article.
   - summary: One sentence summary of the article.
 
-This data need to manaully downloaded and extracted as described in
+This data need to manaully downloaded and processed as described in
 https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md.
-The folder 'xsum-extracts-from-downloads' need to be compressed as
-'xsum-extracts-from-downloads.tar.gz' and put in manually downloaded folder.
+The folder 'xsum-preprocessed' need to be put in manually downloaded folder.
 """
 
 _URL = "https://raw.githubusercontent.com/EdinburghNLP/XSum/master/XSum-Dataset/XSum-TRAINING-DEV-TEST-SPLIT-90-5-5.json"
@@ -58,7 +57,9 @@ _SUMMARY = "summary"
 class Xsum(tfds.core.GeneratorBasedBuilder):
   """Extreme Summarization (XSum) Dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  # 2.0.0: use preprocessed (lowercased and noise reduction) instead of
+  #        extracted data.
+  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -78,59 +79,52 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
     dl_path = dl_manager.download(_URL)
     with tf.io.gfile.GFile(dl_path, "r") as json_file:
       split_ids = json.load(json_file)
-    folder_name = "xsum-extracts-from-downloads"
-    extract_path = os.path.join(
-        dl_manager.extract(
-            os.path.join(dl_manager.manual_dir, folder_name + ".tar.gz")),
-        folder_name)
+    expected_counts = {k: len(v) for k, v in split_ids.items()}
+    pattern = os.path.join(
+        os.path.join(dl_manager.manual_dir, "xsum-preprocessed", "{0}",
+                     "{1}.{0}"))
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "split_ids": split_ids["train"],
-                "path": extract_path,
+                "document_path": pattern.format("document", "train"),
+                "summary_path": pattern.format("summary", "train"),
+                "expected_count": expected_counts["train"],
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
-                "split_ids": split_ids["validation"],
-                "path": extract_path,
+                "document_path": pattern.format("document", "validation"),
+                "summary_path": pattern.format("summary", "validation"),
+                "expected_count": expected_counts["validation"],
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "split_ids": split_ids["test"],
-                "path": extract_path,
+                "document_path": pattern.format("document", "test"),
+                "summary_path": pattern.format("summary", "test"),
+                "expected_count": expected_counts["test"],
             },
         ),
     ]
 
-  def _generate_examples(self, split_ids=None, path=None):
+  def _generate_examples(self,
+                         document_path=None,
+                         summary_path=None,
+                         expected_count=None):
     """Yields examples."""
-    missing = 0
-    total_num = len(split_ids)
-    for i in split_ids:
-      filename = os.path.join(path, i + ".data")
-      if tf.io.gfile.exists(filename):
-        with tf.io.gfile.GFile(filename) as f:
-          text = "".join(f.readlines())
-          # Each file follows below format:
-          # [XSUM]URL[XSUM]
-          # http://somelink
-          #
-          # [XSUM]INTRODUCTION[XSUM]
-          # some intro
-          #
-          # [XSUM]RESTBODY[XSUM]
-          # text line.
-          # another text line.
-          # "another text line."
-          segs = text.split("[XSUM]")
-          yield i, {_DOCUMENT: segs[6].strip(), _SUMMARY: segs[4].strip()}
-      else:
-        missing += 1
-        logging.info("id %s missing.", i)
-    if missing:
-      logging.warning("%d out of %d examples are missing.", missing, total_num)
+    count = 0
+    with tf.io.gfile.GFile(document_path) as document_f, tf.io.gfile.GFile(
+        summary_path) as summary_f:
+      for i, (document_line,
+              summary_line) in enumerate(zip(document_f, summary_f)):
+        count += 1
+        yield i, {
+            _DOCUMENT: document_line.strip(),
+            _SUMMARY: summary_line.strip()
+        }
+    if count < expected_count:
+      logging.warning("Actual count %d is less than expected count %d.", count,
+                      expected_count)
