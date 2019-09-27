@@ -11,6 +11,10 @@ import tensorflow as tf
 import os
 import collections
 
+
+# info of deeplesion dataset
+_URL = ("https://www.nih.gov/news-events/news-releases/nih-clinical-center-releases-dataset-32000-ct-images")
+
 _DESCRIPTION = """\
 The DeepLesion dataset contains 32,120 axial computed tomography (CT) slices 
 from 10,594 CT scans (studies) of 4,427 unique patients. There are 1–3 lesions 
@@ -40,14 +44,20 @@ _CITATION = """\
 }
 """
 
-_URL = ("https://www.nih.gov/news-events/news-releases/\
-  nih-clinical-center-releases-dataset-32000-ct-images")
-_BOX_URL = ("https://nihcc.app.box.com/v/DeepLesion")
-_CSV_URL = "https://raw.githubusercontent.com/anir16293/Deep-Lesion/master/DL_info.csv"
-_DATA_DIR = "Deeplesion-v0.1.0"
-_TRAIN_LABELS_FNAME = "train.csv"
-_VALIDATION_LABELS_FNAME = "valid.csv"
 
+# link for download data
+_BOX_URL = ("https://nihcc.app.box.com/v/DeepLesion")
+_CSV_URL = ("https://raw.githubusercontent.com/anir16293/Deep-Lesion/master/DL_info.csv")
+
+
+# location where local resource should be
+_VERSION_DIR = "Deeplesion-v0.1.0"
+_IMAGE_DIR = "Images_png"
+_TRAIN_LABELS_FNAME = os.path.join("train.csv")
+_VALIDATION_LABELS_FNAME = os.path.join("valid.csv")
+
+
+# addtional definition for data parsing
 _ANNOTATION_CATEGORY = collections.OrderedDict({
     '1':'Bone', 
     '2':'Abdomen', 
@@ -64,15 +74,18 @@ _ANNOTATION_CATEGORY = collections.OrderedDict({
 class Deeplesion(tfds.core.GeneratorBasedBuilder):
   """DeepLesion dataset builder.
   
-    Attention: 
-    Users are expected to download the dataset(56 zip files) and csv file 
-    (DL_info.csv) from _BOX_URL manually. _BOX_URL can obtain by run `info` 
-    function. `batch_download_zips.py` are recommanded to download the zip 
-    files. After download the data, unzip all zip files, collect all
-    subfolders under `Images_png` folder and place them into 
-    `manual_dir/Deeplesion-v0.1.0`. Also, Two Split files(train.csv, valid.csv) 
-    are expected. Each split files should contain columns in the 
-    following order: 'slice_uid, xmin, ymin, xmax, ymax, label'"
+    **Attention**: 
+    The version only support manually data download.
+    To properly make use of this dataset with tfds, users are expected to 
+    download the dataset(56 zip files) and csv file (DL_info.csv) from 
+    [box](https://nihcc.app.box.com/v/DeepLesion) manually.
+    `batch_download_zips.py` are recommanded to download the zip files. 
+    After download the data and unzip all zip files, please place the folder
+    `Images_png` into `<manual_dir>/Deeplesion-v0.1.0`. Also, 
+    Two Split files(train.csv, valid.csv) are expected inside 
+    `<manual_dir>/Deeplesion-v0.1.0`. 
+    Each split files should contain a header line. the name of columns should be 
+    in the following order: 'slice_uid', 'xmin', 'ymin', 'xmax', 'ymax', 'label'"
   """
 
   VERSION = tfds.core.Version('0.1.0')
@@ -94,8 +107,10 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    path = dl_manager.manual_dir
-    imgs_path = os.path.join(path, _DATA_DIR)
+    path = os.path.join(dl_manager.manual_dir, _VERSION_DIR)
+    imgs_path = os.path.join(path, _IMAGE_DIR)
+    csv_path_train = os.path.join(path, _TRAIN_LABELS_FNAME)
+    csv_path_valid = os.path.join(path, _VALIDATION_LABELS_FNAME)
 
     if not tf.io.gfile.exists(imgs_path):
       msg = ("You must download the dataset(56 zip files) and csv file \
@@ -103,9 +118,10 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
         recommanded to download the zip files. After download the data, \
         unzip all zip files, collect all subfolders under `Images_png` \
         folder and place them into {}. Also, Two Split files(train.csv, \
-        valid.csv) are expected. Each split files should contain columns \
-        in the following order: \
-        'slice_uid, xmin, ymin, xmax, ymax, label'".format(_BOX_URL, image_path))
+        valid.csv) are expected placed into {}. Each split files should \
+        contain columns in the following order: \
+        'slice_uid, xmin, ymin, xmax, ymax, label'".format(_BOX_URL, \
+          image_path, path))
       raise AssertionError(msg)
 
     return [
@@ -114,7 +130,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
             num_shards=100,
             gen_kwargs={
                 "imgs_path": imgs_path,
-                "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME)
+                "csv_path": csv_path_train,
             },
         ),
         tfds.core.SplitGenerator(
@@ -122,7 +138,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
             num_shards=10,
             gen_kwargs={
                 "imgs_path": imgs_path,
-                "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME)
+                "csv_path": csv_path_valid,
             },
         ),
     ]
@@ -144,6 +160,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
       fname = slice_uid.split('_')[-1]
       return os.path.join(folder, fname)
     
+
     with tf.io.gfile.GFile(csv_path) as csv_f:
       pd = tfds.core.lazy_imports.pandas
       data = pd.read_csv(csv_path).values

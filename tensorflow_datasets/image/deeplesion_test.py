@@ -12,8 +12,8 @@ class DeeplesionTest(testing.DatasetBuilderTestCase):
   # TODO(deeplesion):
   DATASET_CLASS = deeplesion.Deeplesion
   SPLITS = {
-      "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "train": 5,
+      "validation": 5,
   }
 
   # If you are calling `download/download_and_extract` with a dict, like:
