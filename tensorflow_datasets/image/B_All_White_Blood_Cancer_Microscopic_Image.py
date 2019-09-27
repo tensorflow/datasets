@@ -54,23 +54,22 @@ _CITATION = """\
   year={2017},
   organization={Springer}
 }
-//@under review{
+@under review{
 title={GCTI-SN: Geometry-Inspired Chemical and Tissue Invariant Stain Normaliz
 ation of Microscopic Medical Images},
 author={Anubha Gupta, Rahul Duggal, Ritu Gupta, Lalit Kumar, Nisarg Thakkar,
 and Devprakash Satpathy}
-}
-"""
+}"""
 
 _DESCRIPTION = """\
  A large data set of  B-ALL white blood cancer microscopic images. The dataset
  contains total 1867 cropped images, which 1219 malignant cells images are
- labeled as class 1, 647 normal cells images are labeled as class 0. The size
- of each image is roughly 300 x 300 x 3 RGB."""
+ labeled as class cancer, 647 normal cells images are labeled as class normal. The size
+ of each image is 450 x 450 pixels x 3."""
 
 
 class BAllWhiteBloodCancerMicroscopicImage(tfds.core.GeneratorBasedBuilder):
-    """This is a two class classification problem."""
+    """This is a binary classification problem."""
     VERSION = tfds.core.Version('0.1.0')
 
     def _info(self):
