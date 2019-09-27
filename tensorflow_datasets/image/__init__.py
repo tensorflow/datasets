@@ -30,8 +30,10 @@ from tensorflow_datasets.image.celebahq import CelebAHq
 from tensorflow_datasets.image.chexpert import Chexpert
 from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
+from tensorflow_datasets.image.cifar10_1 import Cifar10_1
 from tensorflow_datasets.image.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image.clevr import CLEVR
+from tensorflow_datasets.image.cmaterdb import Cmaterdb
 from tensorflow_datasets.image.coco import Coco
 from tensorflow_datasets.image.coco2014_legacy import Coco2014  # Deprecated
 from tensorflow_datasets.image.coil100 import Coil100
@@ -53,6 +55,7 @@ from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupt
 from tensorflow_datasets.image.kitti import Kitti
 from tensorflow_datasets.image.lfw import LFW
 from tensorflow_datasets.image.lsun import Lsun
+from tensorflow_datasets.image.malaria import Malaria
 from tensorflow_datasets.image.mnist import EMNIST
 from tensorflow_datasets.image.mnist import FashionMNIST
 from tensorflow_datasets.image.mnist import KMNIST
@@ -64,6 +67,7 @@ from tensorflow_datasets.image.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
 from tensorflow_datasets.image.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image.pet_finder import PetFinder
+from tensorflow_datasets.image.places365_small import Places365Small
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.resisc45 import Resisc45
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
@@ -76,6 +80,7 @@ from tensorflow_datasets.image.stanford_dogs import StanfordDogs
 from tensorflow_datasets.image.stanford_online_products import StanfordOnlineProducts
 from tensorflow_datasets.image.sun import Sun397
 from tensorflow_datasets.image.svhn import SvhnCropped
+from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
 from tensorflow_datasets.image.voc import Voc
