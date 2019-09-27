@@ -21,6 +21,3 @@ dist/
 
 # PyCharm
 .idea
-
-# Jupyter notebook
-*.ipynb
