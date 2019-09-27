@@ -9,7 +9,7 @@ from tensorflow_datasets.image \
 
 class BAllWhiteBloodCancerMicroscopicImageTest(testing.DatasetBuilderTestCase):
 
-    DATASET_CLASS = B_ALL_White_Blood_Cancer_Microscopic_Image.\
+    DATASET_CLASS = B_All_White_Blood_Cancer_Microscopic_Image.\
                                         BAllWhiteBloodCancerMicroscopicImage
     SPLITS = {
         'train': 2
