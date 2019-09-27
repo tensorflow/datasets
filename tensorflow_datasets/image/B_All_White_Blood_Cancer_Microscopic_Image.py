@@ -64,7 +64,7 @@ and Devprakash Satpathy}
 _DESCRIPTION = """\
  A large data set of  B-ALL white blood cancer microscopic images. The dataset
  contains total 1867 cropped images, which 1219 malignant cells images are
- labeled as class cancer, 647 normal cells images are labeled as class normal. The size
+ labeled as class cancer, 648 normal cells images are labeled as class normal. The size
  of each image is 450 x 450 pixels x 3."""
 
 
