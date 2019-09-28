@@ -10,6 +10,7 @@ import imageio
 import numpy as np
 import csv
 import os
+import zipfile
 
 _CITATION = """\
 @inproceedings{inproceedings,
@@ -87,12 +88,16 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         # file_path = "%s/%s" % (images_dir_path, image_name)
         file_path = os.path.join(images_dir_path, image_name)
         print(file_path)
-        if file_path.endswith('.jpg'):
-            img = imageio.imread(file_path, as_gray=True, pilmode='L')
+        # if file_path.endswith('.jpg'):
+        #     img = imageio.imread(file_path, as_gray=True, pilmode='L')
+        #     img = img.astype(np.uint8)
+        #     img = img[..., None]
+        # else:
+        #     img = file_path
+        with images_dir_path.open(image_name) as img_file
+            img = imageio.imread(img_file, as_gray=True, pilmode='L')
             img = img.astype(np.uint8)
             img = img[..., None]
-        else:
-            img = file_path
         # img = tf.io.read_file(file_path)
         # img = tf.image.decode_jpeg(img, channels=1).numpy()
         record = {
