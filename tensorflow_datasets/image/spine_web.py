@@ -8,8 +8,8 @@ import csv
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
-import scipy
-
+import imageio
+import numpy as np
 _CITATION = """\
 @inproceedings{inproceedings,
     author = {Wu, Hongbo and Bailey, Chris and Rasoulinejad, Parham and Li, Shuo},
@@ -84,7 +84,10 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
           line), tf.float32) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
         file_path = "%s/%s" % (images_dir_path, image_name)
-        img = scipy.ndimage.imread(file_path, flatten=True)
+        print(file_path)
+        img = imageio.imread(file_path, as_gray=True, pilmode='L')
+        img = img.astype(np.uint8)
+        img = img[..., None]
         # img = tf.io.read_file(file_path)
         # img = tf.image.decode_jpeg(img, channels=1).numpy()
         record = {
