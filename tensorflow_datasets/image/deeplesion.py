@@ -21,6 +21,7 @@ from __future__ import print_function
 import tensorflow_datasets as tfds
 import tensorflow as tf
 import os
+import csv
 import collections
 
 
@@ -82,6 +83,17 @@ _ANNOTATION_CATEGORY = collections.OrderedDict({
     '-1':'unknown',
 })
 
+_MANUAL_DOWNLOAD_INSTRUCTION = """\
+You must download the dataset(56 zip files) and csv file\
+(DL_info.csv) from {} manually. `batch_download_zips.py` are\
+recommanded to download the zip files. After download the data,\
+unzip all zip files, collect all subfolders under `Images_png`\
+folder and place them into {}. Also, Two Split files(train.csv,\
+valid.csv) are expected placed into {}. Each split files should\
+contain columns in the following order:\
+'slice_uid, xmin, ymin, xmax, ymax, label'
+"""
+
 
 class Deeplesion(tfds.core.GeneratorBasedBuilder):
   """DeepLesion dataset builder.
@@ -125,15 +137,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
     csv_path_valid = os.path.join(path, _VALIDATION_LABELS_FNAME)
 
     if not tf.io.gfile.exists(imgs_path):
-      msg = ("You must download the dataset(56 zip files) and csv file \
-        (DL_info.csv) from {} manually. `batch_download_zips.py` are \
-        recommanded to download the zip files. After download the data, \
-        unzip all zip files, collect all subfolders under `Images_png` \
-        folder and place them into {}. Also, Two Split files(train.csv, \
-        valid.csv) are expected placed into {}. Each split files should \
-        contain columns in the following order: \
-        'slice_uid, xmin, ymin, xmax, ymax, label'".format(_BOX_URL, \
-          image_path, path))
+      msg = _MANUAL_DOWNLOAD_INSTRUCTION.format(_BOX_URL, imgs_path, path)
       raise AssertionError(msg)
 
     return [
@@ -174,8 +178,12 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
     
 
     with tf.io.gfile.GFile(csv_path) as csv_f:
-      pd = tfds.core.lazy_imports.pandas
-      data = pd.read_csv(csv_path).values
+      reader = csv.DictReader(csv_f)
+      data = []
+      for row in reader:
+        data.append([row['slice_uid'],
+          float(row['xmin']), float(row['ymin']), 
+          float(row['xmax']), float(row['ymax']), row['label']])
 
     for idx, value in enumerate(data):
       slice_uid, xmin, ymin, xmax, ymax, label = value
