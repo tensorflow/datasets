@@ -8,6 +8,7 @@ import csv
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
+import scipy
 
 _CITATION = """\
 @inproceedings{inproceedings,
@@ -83,8 +84,9 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
           line), tf.float32) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
         file_path = "%s/%s" % (images_dir_path, image_name)
-        img = tf.io.read_file(file_path)
-        img = tf.image.decode_jpeg(img, channels=1).numpy()
+        img = scipy.ndimage.imread(file_path, flatten=True)
+        # img = tf.io.read_file(file_path)
+        # img = tf.image.decode_jpeg(img, channels=1).numpy()
         record = {
           "image": img,
           "label": label
