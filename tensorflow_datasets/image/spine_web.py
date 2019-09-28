@@ -84,7 +84,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
     for image_name, label in zip(image_names_list, labels_list):
         file_path = "%s/%s" % (images_dir_path, image_name)
         img = tf.io.read_file(file_path)
-        img = tf.image.decode_jpeg(img, channels=1)
+        img = tf.image.decode_jpeg(img, channels=1).numpy()
         record = {
           "image": img,
           "label": label
