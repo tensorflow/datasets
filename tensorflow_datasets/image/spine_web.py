@@ -4,12 +4,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import csv
-
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import imageio
 import numpy as np
+import csv
+import os
+
 _CITATION = """\
 @inproceedings{inproceedings,
     author = {Wu, Hongbo and Bailey, Chris and Rasoulinejad, Parham and Li, Shuo},
@@ -83,7 +84,8 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         labels_list = [tf.convert_to_tensor(
             np.array(line).astype(np.float32)) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
-        file_path = "%s/%s" % (images_dir_path, image_name)
+        # file_path = "%s/%s" % (images_dir_path, image_name)
+        file_path = os.path.join(images_dir_path, image_name)
         print(file_path)
         if file_path.endswith('.jpg'):
             img = imageio.imread(file_path, as_gray=True, pilmode='L')
@@ -91,8 +93,8 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
             img = img[..., None]
         else:
             img = file_path
-        #img = tf.io.read_file(file_path)
-        #img = tf.image.decode_jpeg(img, channels=1).numpy()
+        # img = tf.io.read_file(file_path)
+        # img = tf.image.decode_jpeg(img, channels=1).numpy()
         record = {
           "image": img,
           "label": label
