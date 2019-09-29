@@ -4,12 +4,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.misc
 from PIL import Image
+import imageio
 
 def rgb2gray(rgb):
     return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
 
 
-# img1 = plt.imread('./tensorflow_datasets/testing/test_data/fake_examples/spine_web/test_images/test_1.jpg')
+#img1 = plt.imread('./tensorflow_datasets/testing/test_data/fake_examples/spine_web/test_images/test_1.jpg')
 #
 # img2 = plt.imread('./tensorflow_datasets/testing/test_data/fake_examples/spine_web/training_images/train_1.jpg')
 #
@@ -36,13 +37,14 @@ def rgb2gray(rgb):
 
 #plt.imsave('./tensorflow_datasets/testing/test_data/fake_examples/spine_web/training_images/train1.jpg', gray2)
 
-
-
-#dataset = tfds.load('spine_web')
-#dataset = dataset['train']
-
-dataset = tfds.load('spine_web', split=tfds.Split.TRAIN)
-
-for x in dataset: break
-img = x['image']
+img = imageio.imread('./tensorflow_datasets/testing/test_data/fake_examples/spine_web/training_images/train1.jpg', as_gray=True, pilmode='L')
+img = img.astype(np.uint8)
+img = img[..., None]
 print(img.shape)
+print(img)
+
+# dataset = tfds.load('spine_web', split=tfds.Split.TRAIN)
+#
+# for x in dataset: break
+# img = x['image']
+# print(img.shape)
