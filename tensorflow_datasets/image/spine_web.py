@@ -109,4 +109,4 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
           "label": label
         }
 
-    yield image_name, record
+        yield image_name, record
