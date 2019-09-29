@@ -94,7 +94,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         #     img = img[..., None]
         # else:
         #     img = file_path
-        zf = zipfile.ZipFile(images_dir_path, 'r')
+        zf = zipfile.ZipFile(file_path, 'r')
         img = imageio.imread(zf.open(image_name), as_gray=True, pilmode='L')
         img = img.astype(np.uint8)
         img = img[..., None]

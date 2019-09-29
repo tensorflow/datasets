@@ -37,11 +37,14 @@ def rgb2gray(rgb):
 
 #plt.imsave('./tensorflow_datasets/testing/test_data/fake_examples/spine_web/training_images/train1.jpg', gray2)
 
-img = imageio.imread('./tensorflow_datasets/testing/test_data/fake_examples/spine_web/training_images/train1.jpg', as_gray=True, pilmode='L')
+# img = imageio.imread('./tensorflow_datasets/testing/test_data/fake_examples/spine_web/training_images/train1.jpg', as_gray=True, pilmode='L')
+img = imageio.imread('./../../test/ZIP.test2.zip/test1 A A A.jpg', as_gray=True, pilmode='L')
+
 img = img.astype(np.uint8)
 img = img[..., None]
 print(img.shape)
 print(img)
+
 
 # dataset = tfds.load('spine_web', split=tfds.Split.TRAIN)
 #
