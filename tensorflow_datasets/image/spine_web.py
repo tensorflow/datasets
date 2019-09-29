@@ -85,21 +85,18 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         labels_list = [tf.convert_to_tensor(
             np.array(line).astype(np.float32)) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
-        # file_path = "%s/%s" % (images_dir_path, image_name)
-        file_path = os.path.join(images_dir_path, image_name)
+        file_path = "%s/%s" % (images_dir_path, image_name)
+        # file_path = os.path.join(images_dir_path, image_name)
         print(file_path)
+        print(image_name)
         # if file_path.endswith('.jpg'):
         #     img = imageio.imread(file_path, as_gray=True, pilmode='L')
         #     img = img.astype(np.uint8)
         #     img = img[..., None]
         # else:
         #     img = file_path
-        zf = zipfile.ZipFile(file_path, 'r')
-        img = imageio.imread(zf.open(image_name), as_gray=True, pilmode='L')
-        img = img.astype(np.uint8)
-        img = img[..., None]
-        # img = tf.io.read_file(file_path)
-        # img = tf.image.decode_jpeg(img, channels=1).numpy()
+        img = tf.io.read_file(file_path)
+        img = tf.image.decode_jpeg(img, channels=1).numpy()
         record = {
           "image": img,
           "label": label
