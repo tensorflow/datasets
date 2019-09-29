@@ -86,7 +86,8 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
     # dl_manager is a tfds.download.DownloadManager that can be used to
     # download and extract URLs
     # manual download is required for this dataset
-    extracted_path = dl_manager.manual_dir
+    download_path = dl_manager.manual_dir
+    extracted_path = dl_manager.extract(download_path)
 
     if not tf.io.gfile.exists(extracted_path):
       # The current celebahq generation code depends on a concrete version of
