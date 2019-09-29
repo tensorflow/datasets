@@ -7,7 +7,7 @@ from __future__ import print_function
 import tensorflow as tf
 import tensorflow_datasets as tfds
 import imageio
-from scipy.ndimage import imread
+import cv2
 import numpy as np
 import csv
 import os
@@ -100,7 +100,7 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         # img = tf.io.read_file(file_path)
         # img = tf.image.decode_jpeg(img, channels=1).numpy()
 
-        img = imread(file_path)
+        img = cv2.imread(file_path, 0)
         img = img.astype(np.uint8)
         img = img[..., None]
 
