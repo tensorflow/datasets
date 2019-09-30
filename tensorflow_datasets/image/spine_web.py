@@ -87,8 +87,8 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
     unordered_list = tf.io.gfile.listdir(images_dir_path)
     image_names_list = sorted(unordered_list)
     with tf.io.gfile.GFile(labels, 'r') as f:
-        labels_list = [tf.convert_to_tensor(
-            np.array(line).astype(np.float32)) for line in csv.reader(f)]
+        labels_list = [np.array(
+            line).astype(np.float32) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
         file_path = "%s/%s" % (images_dir_path, image_name)
         # if file_path.endswith('.jpg'):
@@ -107,9 +107,9 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
 
         record = {
             "image": file_path,
-            "label": {'a1': float(label[0]),
-                'a2': float(label[1]),
-                'a3': float(label[2])
+            "label": {'a1': label[0],
+                'a2': label[1],
+                'a3': label[2]
             }
         }
 
