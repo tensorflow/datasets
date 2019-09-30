@@ -38,19 +38,36 @@ DukeUltrasound is an ultrasound dataset collected at Duke University with a
 Verasonics c52v probe. It contains delay-and-sum (DAS) beamformed data 
 as well as data post-processed with Siemens Dynamic TCE for speckle 
 reduction, contrast enhancement and improvement in conspicuity of 
-anatomical structures."""
+anatomical structures. These data were collected with support from the
+National Institute of Biomedical Imaging and Bioengineering under Grant 
+R01-EB026574 and National Institutes of Health under Grant 5T32GM007171-44."""
 
 _URLS = ['https://arxiv.org/abs/1908.05782', 'https://github.com/ouwen/mimicknet']
+
+_DATA_URL = {
+    'phantom_data': 'https://research.repository.duke.edu/downloads/vt150j912',
+    'mark_data': 'https://research.repository.duke.edu/downloads/4x51hj56d'
+}
+
+_DEFAULT_SPLITS = {
+    tfds.Split.TRAIN: 'https://research.repository.duke.edu/downloads/tt44pn391',
+    tfds.Split.TEST: 'https://research.repository.duke.edu/downloads/zg64tm441',
+    tfds.Split.VALIDATION: 'https://research.repository.duke.edu/downloads/dj52w535x',
+    'MARK': 'https://research.repository.duke.edu/downloads/wd375w77v',
+    'A': 'https://research.repository.duke.edu/downloads/nc580n18d',
+    'B': 'https://research.repository.duke.edu/downloads/7h149q56p'
+}
 
 
 class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
   """DAS beamformed phantom images and paired post-processed images."""
 
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0", "S3: www.tensorflow.org/datasets/splits"),
-  ]
+  VERSION = tfds.core.Version("3.0.0")
+
+  def __init__(self, *args, custom_csv_splits={}, **kwargs):
+    """custom_csv_splits is a dictionary of { 'name': 'csvpaths'}"""
+    super().__init__(*args, **kwargs)
+    self.custom_csv_splits = custom_csv_splits
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -58,9 +75,9 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'das': {
-                'dB': tfds.features.Tensor(shape=(None,), dtype=tf.float32),
-                'real': tfds.features.Tensor(shape=(None,), dtype=tf.float32),
-                'imag': tfds.features.Tensor(shape=(None,), dtype=tf.float32)
+              'dB': tfds.features.Tensor(shape=(None,), dtype=tf.float32),
+              'real': tfds.features.Tensor(shape=(None,), dtype=tf.float32),
+              'imag': tfds.features.Tensor(shape=(None,), dtype=tf.float32)
             },
             'dtce': tfds.features.Tensor(shape=(None,), dtype=tf.float32),
             'f0_hz': tfds.features.Tensor(shape=(), dtype=tf.float32),
@@ -76,7 +93,7 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
             'scanner': tfds.features.Tensor(shape=(), dtype=tf.string),
             'target': tfds.features.Tensor(shape=(), dtype=tf.string),
             'timestamp_id': tfds.features.Tensor(shape=(), dtype=tf.uint32),
-            'harmonic': tfds.features.Tensor(shape=(), dtype=tf.bool),
+            'harmonic': tfds.features.Tensor(shape=(), dtype=tf.bool)
         }),
         supervised_keys=('das/dB', 'dtce'),
         urls=_URLS,
@@ -84,49 +101,39 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    dl_paths = dl_manager.download_and_extract({
-        'data': 'https://storage.googleapis.com/duke-tfds/ultraduke/ultraphantom.tar.gz',
-        'train': 'https://storage.googleapis.com/duke-tfds/ultraduke/training-v2-verasonics-phantom.csv',
-        'test': 'https://storage.googleapis.com/duke-tfds/ultraduke/testing-phantom-v2.csv',
-        'validation': 'https://storage.googleapis.com/duke-tfds/ultraduke/validation-phantom-v2.csv',
-        'invivo': 'https://storage.googleapis.com/duke-tfds/ultraduke/mark.csv'
-    })
-
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'datapath': dl_paths['data'],
-                'csvpath': dl_paths['train']
-            },
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs={
-                'datapath': dl_paths['data'],
-                'csvpath': dl_paths['validation']
-            },
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                'datapath': dl_paths['data'],
-                'csvpath': dl_paths['test']
-            },
-        ),
-        tfds.core.SplitGenerator(
-            name='invivo',
-            gen_kwargs={
-                'datapath': dl_paths['data'],
-                'csvpath': dl_paths['invivo']
-            },
-        )
+    dl_paths = dl_manager.download_and_extract({**_DEFAULT_SPLITS, **_DATA_URL})
+    splits = [
+      tfds.core.SplitGenerator(
+          name=name,
+          num_shards=10,
+          gen_kwargs={
+              'datapath': {
+                  'mark_data': dl_paths['mark_data'],
+                  'phantom_data': dl_paths['phantom_data']
+              },
+              'csvpath': dl_paths[name]
+          }) for name, path in _DEFAULT_SPLITS.items()
     ]
+
+    for name, csv_path in self.custom_csv_splits.items():
+      splits.append(tfds.core.SplitGenerator(
+          name=name,
+          num_shards=10,
+          gen_kwargs={
+              'datapath': dl_paths['data'],
+              'csvpath': csv_path
+      }))
+
+    return splits
 
   def _generate_examples(self, datapath, csvpath):
     reader = csv.DictReader(tf.io.gfile.GFile(csvpath))
     for row in reader:
-      filepath = os.path.join(datapath, 'ultraphantom', row['filename'])
+      data_key = 'mark_data' if row['target'] == 'mark' else 'phantom_data'
+      print('...')
+      print(datapath[data_key])
+
+      filepath = os.path.join(datapath[data_key], row['filename'])
       matfile = sio.loadmat(tf.io.gfile.GFile(filepath, 'rb'))
 
       iq = np.abs(np.reshape(matfile['iq'], -1))
