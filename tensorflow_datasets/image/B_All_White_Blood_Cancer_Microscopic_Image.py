@@ -65,7 +65,7 @@ _DESCRIPTION = """\
  A large data set of  B-ALL white blood cancer microscopic images. The dataset
  contains total 1867 cropped images, which 1219 malignant cells images are
  labeled as class cancer, 648 normal cells images are labeled as class normal. The size
- of each image is 450 x 450 pixels x 3."""
+ of each image is about 450 x 450 pixels x 3."""
 
 
 class BAllWhiteBloodCancerMicroscopicImage(tfds.core.GeneratorBasedBuilder):
