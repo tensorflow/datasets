@@ -9,7 +9,6 @@ import os
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
-import scipy.io as sio
 
 
 _CITATION = """\
@@ -130,11 +129,9 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
     reader = csv.DictReader(tf.io.gfile.GFile(csvpath))
     for row in reader:
       data_key = 'mark_data' if row['target'] == 'mark' else 'phantom_data'
-      print('...')
-      print(datapath[data_key])
 
       filepath = os.path.join(datapath[data_key], row['filename'])
-      matfile = sio.loadmat(tf.io.gfile.GFile(filepath, 'rb'))
+      matfile = tfds.core.lazy_imports.scipy.io.loadmat(tf.io.gfile.GFile(filepath, 'rb'))
 
       iq = np.abs(np.reshape(matfile['iq'], -1))
       iq = iq/iq.max()
