@@ -46,6 +46,7 @@ from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
 from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
 from tensorflow_datasets.image.eurosat import Eurosat
+from tensorflow_datasets.image.fastmri import FastMRI
 from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.food101 import Food101
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
