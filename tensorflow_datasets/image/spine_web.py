@@ -43,7 +43,11 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=(None, None, 1)),  # b&w jpeg
             # main thoracic, proximal thoracic, thoracolumbar/lumbar cobb angles
-            "label": tfds.features.Tensor(shape=(3,), dtype=tf.float32)
+            "label": tfds.features.FeaturesDict({
+                'a1':tf.float32,
+                'a2':tf.float32,
+                'a3':tf.float32
+            })
         }),
         supervised_keys=('image', 'label'),
         urls=['http://spineweb.digitalimaginggroup.ca'],
@@ -87,9 +91,6 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
             np.array(line).astype(np.float32)) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
         file_path = "%s/%s" % (images_dir_path, image_name)
-        # file_path = os.path.join(images_dir_path, image_name)
-        print(file_path)
-        print(image_name)
         # if file_path.endswith('.jpg'):
         #     img = imageio.imread(file_path, as_gray=True, pilmode='L')
         #     img = img.astype(np.uint8)
@@ -100,13 +101,16 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         # img = tf.io.read_file(file_path)
         # img = tf.image.decode_jpeg(img, channels=1).numpy()
 
-        img = cv2.imread(file_path, 0)
-        img = img.astype(np.uint8)
-        img = img[..., None]
+        # img = cv2.imread(file_path, 0)
+        # img = img.astype(np.uint8)
+        # img = img[..., None]
 
         record = {
-          "image": img,
-          "label": label
+            "image": file_path,
+            "label": {'a1': float(label[0]),
+                'a2': float(label[1]),
+                'a3': float(label[2])
+            }
         }
 
         yield image_name, record
