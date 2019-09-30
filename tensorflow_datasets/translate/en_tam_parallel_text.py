@@ -44,9 +44,7 @@ _DATA_URL = "http://ufal.mff.cuni.cz/~ramasamy/parallel/data/v2/en-ta-parallel-v
 class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
   """(en_tam_parallel_text): English_Tamil parallel text corpus"""
 
-  VERSION = tfds.core.Version(
-            "0.0.3")
-	
+  VERSION = tfds.core.Version("0.0.3")
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
@@ -95,9 +93,10 @@ class EnTamParallelText(tfds.core.GeneratorBasedBuilder):
       target_sentences = f.read().strip().split("\n")
 
     assert len(target_sentences) == len(
-        source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (len(
-            source_sentences), len(target_sentences), source_file, target_file)
-	
+        source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (
+            len(source_sentences), len(target_sentences), source_file,
+            target_file)
+
     for idx, (source, target) in enumerate(
         zip(source_sentences, target_sentences)):
       result = {'en': source, 'ta': target}
