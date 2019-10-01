@@ -6,12 +6,9 @@ from __future__ import print_function
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
-import imageio
-import cv2
+
 import numpy as np
 import csv
-import os
-import zipfile
 
 _CITATION = """\
 @inproceedings{inproceedings,
@@ -41,9 +38,8 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=(None, None, 1)),  # b&w jpeg
-            # main thoracic, proximal thoracic, thoracolumbar/lumbar cobb angles
-            "label": tfds.features.FeaturesDict({
+            "image": tfds.features.Image(shape=(None, None, 1)),
+            "label":
                 'a1':tf.float32,
                 'a2':tf.float32,
                 'a3':tf.float32
@@ -91,20 +87,6 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
             line).astype(np.float32) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
         file_path = "%s/%s" % (images_dir_path, image_name)
-        # if file_path.endswith('.jpg'):
-        #     img = imageio.imread(file_path, as_gray=True, pilmode='L')
-        #     img = img.astype(np.uint8)
-        #     img = img[..., None]
-        # else:
-        #     img = file_path
-
-        # img = tf.io.read_file(file_path)
-        # img = tf.image.decode_jpeg(img, channels=1).numpy()
-
-        # img = cv2.imread(file_path, 0)
-        # img = img.astype(np.uint8)
-        # img = img[..., None]
-
         record = {
             "image": file_path,
             "label": {'a1': label[0],
@@ -112,5 +94,4 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
                 'a3': label[2]
             }
         }
-
         yield image_name, record
