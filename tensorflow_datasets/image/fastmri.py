@@ -349,20 +349,48 @@ class FastMRI(tfds.core.GeneratorBasedBuilder):
     """Raw k-space MRI image data created from manual directory.
 
     The tar.gz files stored in the data directory should have the structure:
-    ```
+    
     path/to/manual_dir/<challenge>/fast_mri/<tar_file_train>, <tar_file_test>
-
-    <challenge> should be either 'singlecoil' or 'multicoil'
-    ```
-    To use it:
-    ```
-    builder = tfds.image.ImageLabelFolder('<dataset_name>')
-    dl_config = tfds.download.DownloadConfig(manual_dir='path/to/manual_dir/')
-    builder.download_and_prepare(download_config=dl_config)
-    print(builder.info)  # Splits, num examples,... automatically extracted
-    ds = builder.as_dataset(split='split_name')
-    ```
-    ```
+    
+        <challenge> should be either 'singlecoil' or 'multicoil'
+    
+        <tar_file_train> should be 'singlecoil_train.tar.gz' or
+        'multicoil_train.tar.gz'
+        
+        <tar_file_test> should be 'singlecoil_test_v2.tar.gz' or
+        'multicoil_test_v2.tar.gz'
+    
+    These directory and file relationships mirror those of the downloaded
+    tar.gz files from the cited download url.
+    
+    To generate dataset in tensorflow:
+    
+    directory = '/path/to/manual_dir/<challenge>'
+    
+    dl_config = tfds.download.DownloadConfig(manual_dir=directory)
+    
+    dataset = tfds.load(
+                'fast_mri',
+                builder_kwargs=dict(config = <challenge>),
+                download_and_prepare_kwargs=dict(download_dir=directory,
+                                                 download_config=dl_config)
+    )
+    
+    To generate sample images of raw k-space:
+    
+    e.g.,
+    
+    for ele in dataset['train']: break
+    import matplotlib.pyplot as plt
+    plt.imshow(tf.reshape(ele['image_kspace'], shape=(640,368)))
+    
+    To generage sample images of pre-processed MRI images:
+    
+    e.g.,
+    for ele in dataset['train']: break
+    import matplotlib.pyplot as plt
+    plt.imshow(tf.reshape(ele['image_transformed'], shape=(640,368)), cmap='gray')
+    
     """
     
     VERSION = tfds.core.Version('0.1.0')
