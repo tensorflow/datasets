@@ -39,11 +39,11 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=(None, None, 1)),
-            "label":
-                'a1':tf.float32,
-                'a2':tf.float32,
-                'a3':tf.float32
-            })
+            "label": {
+                'a1': tf.float32,
+                'a2': tf.float32,
+                'a3': tf.float32
+            }
         }),
         supervised_keys=('image', 'label'),
         urls=['http://spineweb.digitalimaginggroup.ca'],
