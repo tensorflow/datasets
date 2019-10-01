@@ -48,6 +48,7 @@ _CITATION = """\
   timestamp = {Mon, 26 Nov 2018 12:52:45 +0100},
   biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1811-08839},
   bibsource = {dblp computer science bibliography, https://dblp.org}
+}
 """
 
 
@@ -320,6 +321,7 @@ class MaskFunc:
         mask = mask.reshape(*mask_shape).astype(np.float32)
         return mask
 
+
 _CHALLENGES_TO_FILENAMES = {
     'singlecoil': ['singlecoil_train.tar.gz',
                    'singlecoil_test_v2.tar.gz'],
@@ -387,9 +389,11 @@ class FastMRI(tfds.core.GeneratorBasedBuilder):
     To generage sample images of pre-processed MRI images:
     
     e.g.,
+    
     for ele in dataset['train']: break
     import matplotlib.pyplot as plt
-    plt.imshow(tf.reshape(ele['image_transformed'], shape=(640,368)), cmap='gray')
+    plt.imshow(tf.reshape(ele['image_transformed'], shape=(640,368)),
+               cmap='gray')
     
     """
     
@@ -455,11 +459,11 @@ class FastMRI(tfds.core.GeneratorBasedBuilder):
                 },
             ),
         ]
-
+    
     def _generate_examples(self, images_dir_path=None, split_type=None):
         challenge = self.builder_config.challenge
         if challenge == 'singlecoil':
-            if split_type == 'train':
+            if split_type == tfds.Splits.TRAIN:
                 images_dir_path = images_dir_path + '/singlecoil_train/'
             else:
                 images_dir_path = images_dir_path + '/singlecoil_test_v2/'
@@ -479,8 +483,8 @@ class FastMRI(tfds.core.GeneratorBasedBuilder):
                     "image_kspace": kspace_output,
                     "image_transformed": ab_output
                 }
-        else:
-            if split_type == 'train':
+        elif challenge == 'multicoil':
+            if split_type == tfds.Splits.TRAIN:
                 images_dir_path = images_dir_path + '/multicoil_train/'
             else:
                 images_dir_path = images_dir_path + '/multicoil_test_v2/'
@@ -501,3 +505,6 @@ class FastMRI(tfds.core.GeneratorBasedBuilder):
                     "image_kspace": kspace_output,
                     "image_transformed": rss_output
                 }
+        else:
+            pass
+
