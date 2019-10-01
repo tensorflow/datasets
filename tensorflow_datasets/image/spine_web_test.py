@@ -5,7 +5,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-import spine_web
+from tensorflow_datasets.image import spine_web
 
 
 class SpineWebTest(testing.DatasetBuilderTestCase):

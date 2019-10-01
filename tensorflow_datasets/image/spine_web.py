@@ -4,12 +4,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import csv
-
 import tensorflow as tf
 import tensorflow_datasets as tfds
-import imageio
+
 import numpy as np
+import csv
+
 _CITATION = """\
 @inproceedings{inproceedings,
     author = {Wu, Hongbo and Bailey, Chris and Rasoulinejad, Parham and Li, Shuo},
@@ -38,9 +38,12 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=(None, None, 1)),  # b&w jpeg
-            # main thoracic, proximal thoracic, thoracolumbar/lumbar cobb angles
-            "label": tfds.features.Tensor(shape=(3,), dtype=tf.float32)
+            "image": tfds.features.Image(shape=(None, None, 1)),
+            "label": {
+                'a1': tf.float32,
+                'a2': tf.float32,
+                'a3': tf.float32
+            }
         }),
         supervised_keys=('image', 'label'),
         urls=['http://spineweb.digitalimaginggroup.ca'],
@@ -80,21 +83,15 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
     unordered_list = tf.io.gfile.listdir(images_dir_path)
     image_names_list = sorted(unordered_list)
     with tf.io.gfile.GFile(labels, 'r') as f:
-        labels_list = [tf.convert_to_tensor(np.array(line).astype(np.float32)) for line in csv.reader(f)]
+        labels_list = [np.array(
+            line).astype(np.float32) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
         file_path = "%s/%s" % (images_dir_path, image_name)
-        # if image_name.endswith('.jpg'):
-        #     f = tf.io.gfile.GFile(file_path)
-        #     img = imageio.imread(f, as_gray=True, pilmode='L')
-        #     img = img.astype(np.uint8)
-        #     img = img[..., None]
-        # else:
-        #     img = image_name
-
-        # img = tf.io.read_file(file_path)
-        # img = tf.image.decode_jpeg(img, channels=1).numpy()
         record = {
-          "image": file_path,
-          "label": label
+            "image": file_path,
+            "label": {'a1': label[0],
+                'a2': label[1],
+                'a3': label[2]
+            }
         }
         yield image_name, record
