@@ -463,7 +463,7 @@ class FastMRI(tfds.core.GeneratorBasedBuilder):
     def _generate_examples(self, images_dir_path=None, split_type=None):
         challenge = self.builder_config.challenge
         if challenge == 'singlecoil':
-            if split_type == tfds.Splits.TRAIN:
+            if split_type == "train":
                 images_dir_path = images_dir_path + '/singlecoil_train/'
             else:
                 images_dir_path = images_dir_path + '/singlecoil_test_v2/'
@@ -484,7 +484,7 @@ class FastMRI(tfds.core.GeneratorBasedBuilder):
                     "image_transformed": ab_output
                 }
         elif challenge == 'multicoil':
-            if split_type == tfds.Splits.TRAIN:
+            if split_type == "train":
                 images_dir_path = images_dir_path + '/multicoil_train/'
             else:
                 images_dir_path = images_dir_path + '/multicoil_test_v2/'
