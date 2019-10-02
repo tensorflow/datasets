@@ -68,8 +68,8 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
             description=_DESCRIPTION,
             # tfds.features.FeatureConnectors
             features=tfds.features.FeaturesDict({
-                "image": tfds.features.Image(shape=(512, 512, 1)),
-                "label": tfds.features.Image(shape=(512, 512, 1))
+                "image": tfds.features.Tensor(shape=(512, 512, 1), dtype = tf.float64),
+                "label": tfds.features.Tensor(shape=(512, 512, 1), dtype = tf.bool)
             }),
             # specify feature tuples
             supervised_keys=("image", "label"),
@@ -124,16 +124,14 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
             data_temp = nib.load(data_dir)
 
             label_array = label_temp.get_fdata()
-            label_array = numpy.array(label_array, dtype=numpy.uint8)
             data_array = data_temp.get_fdata()
-            data_array = numpy.array(data_array, dtype=numpy.uint8)
 
             for slice_idx in range(label_array.shape[2]):
                 patient = patient_index + "_" + str(slice_idx)
 
                 record = {
                     "image": data_array[:, :, slice_idx].reshape(512, 512, 1),
-                    "label": label_array[:, :, slice_idx].reshape(512, 512, 1)
+                    "label": tf.dtypes.cast((label_array[:, :, slice_idx].reshape(512, 512, 1)), tf.bool),
 
                 }
 

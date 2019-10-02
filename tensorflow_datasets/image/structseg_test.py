@@ -17,7 +17,7 @@ class StructsegTest(testing.DatasetBuilderTestCase):
     DATASET_CLASS = structseg.Structseg
     SPLITS = {
         "train": 1,  # Number of fake train example
-        "test": 1, 
+        "test": 1,
     }
 
     DL_EXTRACT_RESULT = {
