@@ -47,7 +47,7 @@ import tensorflow_datasets as tfds
 import tensorflow as tf
 
 # tfds works in both Eager and Graph modes
-tf.enable_eager_execution()
+tf.compat.v1.enable_eager_execution()
 
 # See available datasets
 print(tfds.list_builders())
