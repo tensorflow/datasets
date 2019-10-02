@@ -55,6 +55,9 @@ class InDevelopmentDatasetBuilder(EmptyDatasetBuilder):
 
   IN_DEVELOPMENT = True
 
+class SkipRegisteringDatasetBuilder(EmptyDatasetBuilder):
+
+  SKIP_REGISTERING= False
 
 class RegisteredTest(testing.TestCase):
 
@@ -166,6 +169,11 @@ class RegisteredTest(testing.TestCase):
                               data_dir=data_dir)
     self.assertEqual(dict(data_dir=data_dir, config="bar"),
                      builder.kwargs)
+
+  def test_skip_registering(self):
+    name="skip_registering_dataset_builder"
+    self.assertEqual(name,SkipRegisteringDatasetBuilder.name)
+    self.assertNotIn(name, registered.list_builders())
 
 
 if __name__ == "__main__":

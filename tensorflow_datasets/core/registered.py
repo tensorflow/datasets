@@ -111,7 +111,7 @@ class RegisteredDataset(abc.ABCMeta):
     cls = super(RegisteredDataset, mcs).__new__(
         mcs, cls_name, bases, class_dict)
 
-    if name in _DATASET_REGISTRY:
+    if (not class_dict.get("SKIP_REGISTERING") and name in _DATASET_REGISTRY):
       raise ValueError("Dataset with name %s already registered." % name)
     if name in _IN_DEVELOPMENT_REGISTRY:
       raise ValueError(
@@ -124,7 +124,7 @@ class RegisteredDataset(abc.ABCMeta):
       _ABSTRACT_DATASET_REGISTRY[name] = cls
     elif class_dict.get("IN_DEVELOPMENT"):
       _IN_DEVELOPMENT_REGISTRY[name] = cls
-    else:
+    elif not class_dict.get("SKIP_REGISTERING"):
       _DATASET_REGISTRY[name] = cls
     return cls
 
