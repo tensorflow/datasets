@@ -324,19 +324,6 @@ class DownloadManagerTest(testing.TestCase):
       manager.download(a.url)
     self.assertEqual(0, self.extractor_extract.call_count)
 
-  def test_ignore_wrong_checksum(self):
-    a = Artifact('a.tar.gz')
-    sha_b = _sha256('content of another file')
-    dl_a, self.dl_results[a.url] = _get_promise_on_event(a.checksum_size)
-    dl_a.set()
-    manager = self._get_manager(checksums={
-        a.url: (a.size, sha_b),
-    })
-    manager.set_ignore_checksums(True)
-    res = manager.download(a.url)
-    expected = '/dl_dir/%s' % a.dl_fname
-    self.assertEqual(expected, res)
-
 
 if __name__ == '__main__':
   testing.test_main()
