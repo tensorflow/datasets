@@ -100,4 +100,7 @@ so2sat/all/0.0.1
 so2sat/all/2.0.0
 so2sat/rgb/0.0.1
 so2sat/rgb/2.0.0
+ucf101/ucf101_1/1.0.0
+ucf101/ucf101_2/1.0.0
+ucf101/ucf101_3/1.0.0
 wmt_translate/None
