@@ -90,8 +90,6 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
     extracted_path = dl_manager.extract(download_path)
 
     if not tf.io.gfile.exists(extracted_path):
-      # The current celebahq generation code depends on a concrete version of
-      # pillow library and cannot be easily ported into tfds.
       msg = "You must download the dataset files manually and place them in: "
       msg += dl_manager.manual_dir
       msg += " as .tar files. See testing/test_data/fake_examples/breastpathq "
