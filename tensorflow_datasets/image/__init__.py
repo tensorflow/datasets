@@ -52,6 +52,7 @@ from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
 from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
+from tensorflow_datasets.image.imagenet_resized import ImagenetResized
 from tensorflow_datasets.image.kitti import Kitti
 from tensorflow_datasets.image.lfw import LFW
 from tensorflow_datasets.image.lsun import Lsun
