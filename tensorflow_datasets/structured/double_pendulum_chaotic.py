@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import csv
+import glob
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -114,9 +115,9 @@ class DoublePendulum(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             "input_sequence":
-                tfds.features.Tensor(shape=(6,), dtype=tf.int32),
+                tfds.features.Tensor(shape=(6,), dtype=tf.float64),
             "output_sequence":
-                tfds.features.Tensor(shape=(6,), dtype=tf.int32),
+                tfds.features.Tensor(shape=(6,), dtype=tf.float64),
         }),
         supervised_keys=("input_sequence", "output_sequence"),
         urls=["https://developer.ibm.com/exchanges/data/all/double-pendulum-chaotic/"],
@@ -133,11 +134,14 @@ class DoublePendulum(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={"dp_files": dp_files}),
     ]
 
-  def _generate_examples(self, dp_files):
-    file_path = None #TODO: decide how to structure files and records when fetching
-    with tf.io.gfile.GFile(file_path) as f:
-      raw_data = csv.DictReader(f)
-      for i, row in enumerate(raw_data):
-        yield i, {
-            ""
-        }
+  def _generate_examples(self, dp_files, input_size=4, output_size=1):
+    csv_files_path = dp_files+_REL_CSV_PATH
+    for file_path in glob.glob(csv_files_path):
+      with tf.io.gfile.GFile(file_path) as f:
+        raw_data = csv.reader(f, quote=csv.QUOTE_NONNUMERIC)
+        for i, _ in enumerate(raw_data):
+          raw_data.seek(i)
+          yield i, {
+            "input_sequence" : tf.convert_to_tensor([next(raw_data) for _ in range(input_size)]),
+            "output_sequence" : tf.convert_to_tensor([next(raw_data) for _ in range(output_size)])
+          }
