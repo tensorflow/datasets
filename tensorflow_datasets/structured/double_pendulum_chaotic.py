@@ -98,7 +98,7 @@ the task into classic multiple-input multiple-output time-series prediction.
 """
 
 
-class DoublePendulum(tfds.core.GeneratorBasedBuilder):
+class DoublePendulumChaotic(tfds.core.GeneratorBasedBuilder):
   """Double Pendulum Chaotic dataset."""
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
@@ -115,9 +115,9 @@ class DoublePendulum(tfds.core.GeneratorBasedBuilder):
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
             "input_sequence":
-                tfds.features.Tensor(shape=(6,), dtype=tf.float64),
+                tfds.features.Tensor(shape=(None, 6), dtype=tf.float64),
             "output_sequence":
-                tfds.features.Tensor(shape=(6,), dtype=tf.float64),
+                tfds.features.Tensor(shape=(None, 6), dtype=tf.float64),
         }),
         supervised_keys=("input_sequence", "output_sequence"),
         urls=["https://developer.ibm.com/exchanges/data/all/double-pendulum-chaotic/"],
