@@ -12,19 +12,24 @@ import csv
 
 _CITATION = """\
 @inproceedings{inproceedings,
-    author = {Wu, Hongbo and Bailey, Chris and Rasoulinejad, Parham and Li, Shuo},
-    year = {2017},
-    month = {09},
-    pages = {127--135},
-    title = {Automatic Landmark Estimation for Adolescent Idiopathic Scoliosis Assessment Using BoostNet},
-    doi = {10.1007/978-3-319-66182-7_15}
+  author = {Wu, Hongbo and Bailey, Chris and Rasoulinejad,
+    Parham and Li, Shuo},
+  year = {2017},
+  month = {09},
+  pages = {127--135},
+  title = {Automatic Landmark Estimation for Adolescent Idiopathic Scoliosis
+    Assessment Using BoostNet},
+  doi = {10.1007/978-3-319-66182-7_15}
 }
 """
 
 _DESCRIPTION = """\
-The dataset consists of 609 spinal anterior-posterior x-ray images; it is dataset 16 on SpineWeb.
-The Cobb angles for each image were calculated using landmarks, where four landmarks denoted one vertebrae.
-Here, the training labels are a tensor of 3 cobb angles, corresponding to thoracic, proximal thoracic, and thoracolumbar/lumbar
+The dataset consists of 609 spinal anterior-posterior x-ray images.
+It is dataset 16 on SpineWeb.
+The Cobb angles for each image were calculated using landmarks,
+where four landmarks denoted one vertebrae.
+Here, the training labels are a tensor of 3 cobb angles,
+corresponding to thoracic, proximal thoracic, and thoracolumbar/lumbar.
 """
 
 
@@ -83,15 +88,16 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
     unordered_list = tf.io.gfile.listdir(images_dir_path)
     image_names_list = sorted(unordered_list)
     with tf.io.gfile.GFile(labels, 'r') as f:
-        labels_list = [np.array(
-            line).astype(np.float32) for line in csv.reader(f)]
+      labels_list = [np.array(
+          line).astype(np.float32) for line in csv.reader(f)]
     for image_name, label in zip(image_names_list, labels_list):
-        file_path = "%s/%s" % (images_dir_path, image_name)
-        record = {
-            "image": file_path,
-            "label": {'a1': label[0],
-                'a2': label[1],
-                'a3': label[2]
-            }
-        }
-        yield image_name, record
+      file_path = "%s/%s" % (images_dir_path, image_name)
+      record = {
+          "image": file_path,
+          "label": {'a1': label[0],
+              'a2': label[1],
+              'a3': label[2]
+          }
+      }
+
+      yield image_name, record
