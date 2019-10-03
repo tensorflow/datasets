@@ -142,6 +142,8 @@ class DoublePendulumChaotic(tfds.core.GeneratorBasedBuilder):
         for i, _ in enumerate(raw_data):
           raw_data.seek(i)
           yield i, {
-            "input_sequence" : tf.convert_to_tensor([next(raw_data) for _ in range(input_size)]),
-            "output_sequence" : tf.convert_to_tensor([next(raw_data) for _ in range(output_size)])
+              "input_sequence": tf.convert_to_tensor([next(raw_data) for \
+                                                      _ in range(input_size)]),
+              "output_sequence": tf.convert_to_tensor([next(raw_data) for \
+                                                       _ in range(output_size)])
           }
