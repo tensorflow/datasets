@@ -1,7 +1,6 @@
 """
 Organ-at-risk segmentation dataset from head & neck CT scans
 """
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -28,12 +27,10 @@ segmentation from head & neck CT scans
 
 _BASE_URL = """https://structseg2019.grand-challenge.org/"""
 
-
 class Structseg(tfds.core.GeneratorBasedBuilder):
     """
     Organ-at-risk segmentation dataset from head & neck CT scans
     """
-    # VERSION = tfds.core.Version('0.1.0')
 
     VERSION = tfds.core.Version("1.0.0",
                                 experiments={tfds.core.Experiment.S3: False})
@@ -41,7 +38,7 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
         tfds.core.Version("2.0.0"),
     ]
 
-    def get_all_file_paths(self, directory):
+    def get_all_file_paths(self, images_dir_path):
         """
         Images stored in the following format:
         HaN_OAR/1/image.nii.gz
@@ -51,16 +48,21 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
         Get the file path to all images
         """
 
-        file_paths = []
+        image_path = []
+        parent_dir = tf.io.gfile.listdir(images_dir_path)[0]
+        walk_dir = os.path.join(images_dir_path, parent_dir)
+        dirs = tf.io.gfile.listdir(walk_dir)
 
-        # crawling through directory and subdirectories
-        for root, directories, files in os.walk(directory):
-            for filename in files:
-                # join the two strings in order to form the full filepath.
-                filepath = os.path.join(root, filename)
-                file_paths.append(filepath)
+        for subdir in dirs:
 
-        return file_paths
+            if tf.io.gfile.isdir(os.path.join(walk_dir, subdir)):
+                for full_path, _, fname in tf.io.gfile.walk(os.path.join(walk_dir, subdir)):
+                    for image_file in fname:
+                        if image_file.endswith("nii.gz"):
+                            image_path.append(os.path.join(full_path, image_file))
+                            # print(image_path)
+
+        return image_path
 
     def _info(self):
         return tfds.core.DatasetInfo(
@@ -68,8 +70,8 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
             description=_DESCRIPTION,
             # tfds.features.FeatureConnectors
             features=tfds.features.FeaturesDict({
-                "image": tfds.features.Tensor(shape=(512, 512, 1), dtype = tf.float64),
-                "label": tfds.features.Tensor(shape=(512, 512, 1), dtype = tf.bool)
+                "image": tfds.features.Tensor(shape=(512, 512, 1), dtype=tf.float64),
+                "label": tfds.features.Tensor(shape=(512, 512, 1), dtype=tf.bool)
             }),
             # specify feature tuples
             supervised_keys=("image", "label"),
@@ -79,7 +81,7 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager):
-        path = os.path.join(dl_manager.manual_dir, 'HaN_OAR')
+        path = dl_manager.manual_dir
         if not tf.io.gfile.exists(path):
             raise AssertionError(
                 'You must download the dataset manually from {},' \

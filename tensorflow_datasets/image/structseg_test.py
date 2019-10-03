@@ -16,9 +16,9 @@ class StructsegTest(testing.DatasetBuilderTestCase):
     '''
     DATASET_CLASS = structseg.Structseg
     SPLITS = {
-        "train": 1,  # Number of fake train example
-        "test": 1,
+        "train": 242,  # Number of fake train example
     }
+
 
     DL_EXTRACT_RESULT = {
         "name1": "/tensorflow_datasets/testing/test_data/fake_examples/structseg"
