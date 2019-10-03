@@ -87,31 +87,35 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
     # download and extract URLs
     # manual download is required for this dataset
     download_path = dl_manager.manual_dir
-    extracted_path = dl_manager.extract(download_path)
+    train_file_list = list(filter(lambda x: 'breastpathq.zip' in x, tf.io.gfile.listdir(download_path)))
+    test_file_list = list(filter(lambda x: 'breastpathq-test.zip' in x, tf.io.gfile.listdir(download_path)))
 
-    if not tf.io.gfile.exists(extracted_path):
+    if len(train_file_list)==0 or len(test_file_list)==0:
       msg = "You must download the dataset files manually and place them in: "
       msg += dl_manager.manual_dir
-      msg += " as .tar files. See testing/test_data/fake_examples/breastpathq "
+      msg += " as .zip files. See testing/test_data/fake_examples/breastpathq "
       raise AssertionError(msg)
+
+    train_dir = dl_manager.extract(os.path.join(download_path, train_file_list[0]))
+    test_dir = dl_manager.extract(os.path.join(download_path, test_file_list[0]))
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
-              "images_dir_path": os.path.join(extracted_path, \
+              "images_dir_path": os.path.join(train_dir, \
                 "breastpathq/datasets/train"),
-              "labels": os.path.join(extracted_path, \
+              "labels": os.path.join(train_dir, \
                 "breastpathq/datasets/train_labels.csv"),
             },
         ),
         tfds.core.SplitGenerator(
           name=tfds.Split.VALIDATION,
           gen_kwargs={
-            "images_dir_path": os.path.join(extracted_path, \
+            "images_dir_path": os.path.join(train_dir, \
               "breastpathq/datasets/validation"),
-            "labels": os.path.join(extracted_path, \
+            "labels": os.path.join(test_dir, \
               "breastpathq-test/val_labels.csv"),
           }
         ),
@@ -128,3 +132,4 @@ class Breastpathq(tfds.core.GeneratorBasedBuilder):
             "image": _load_tif(os.path.join(images_dir_path, image_id+'.tif')),
             'label': row['y'],
         }
+        
