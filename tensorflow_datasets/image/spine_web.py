@@ -94,7 +94,8 @@ class SpineWeb(tfds.core.GeneratorBasedBuilder):
       file_path = "%s/%s" % (images_dir_path, image_name)
       record = {
           "image": file_path,
-          "label": {'a1': label[0],
+          "label": {
+              'a1': label[0],
               'a2': label[1],
               'a3': label[2]
           }
