@@ -30,7 +30,7 @@ class DoublePendulumChaoticTest(testing.DatasetBuilderTestCase):
   }
   DL_EXTRACT_RESULT = {
       "name1": "/tensorflow_datasets/testing/test_data/fake_examples/double_pendulum_chaotic"
-  } 
+  }
 
 class DoublePendulumChaoticS3Test(DoublePendulumChaoticTest):
   VERSION = "experimental_latest"
