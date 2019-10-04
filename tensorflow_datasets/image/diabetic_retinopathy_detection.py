@@ -24,6 +24,7 @@ import csv
 import io
 import os
 
+from absl import logging
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -274,7 +275,7 @@ def _scale_radius_size(image, filepath, target_radius_size):
     # Some images in the dataset are corrupted, causing the radius heuristic to
     # fail. In these cases, just assume that the radius is the height of the
     # original image.
-    tf.logging.info("Radius of image \"%s\" could not be determined.", filepath)
+    logging.info("Radius of image \"%s\" could not be determined.", filepath)
     r = image.shape[0] / 2.0
   s = target_radius_size / r
   return cv2.resize(image, dsize=None, fx=s, fy=s)

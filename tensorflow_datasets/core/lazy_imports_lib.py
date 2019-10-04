@@ -56,8 +56,8 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def pydub(cls):
-    return _try_import("pydub")
+  def langdetect(cls):
+    return _try_import("langdetect")
 
   @utils.classproperty
   @classmethod
@@ -68,6 +68,11 @@ class LazyImporter(object):
   @classmethod
   def mwparserfromhell(cls):
     return _try_import("mwparserfromhell")
+
+  @utils.classproperty
+  @classmethod
+  def nltk(cls):
+    return _try_import("nltk")
 
   @utils.classproperty
   @classmethod
@@ -89,6 +94,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def pydub(cls):
+    return _try_import("pydub")
+
+  @utils.classproperty
+  @classmethod
   def scipy(cls):
     _try_import("scipy.io")
     _try_import("scipy.ndimage")
@@ -101,6 +111,11 @@ class LazyImporter(object):
     _try_import("skimage.filters")
     _try_import("skimage.external.tifffile")
     return _try_import("skimage")
+
+  @utils.classproperty
+  @classmethod
+  def tldextract(cls):
+    return _try_import("tldextract")
 
   @utils.classproperty
   @classmethod

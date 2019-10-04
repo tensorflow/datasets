@@ -109,9 +109,15 @@ def _read_file(path):
 
 
 def _get_sizes_checksums(checksums_path):
-  """Returns {URL: (size, checksum)}s stored within file."""
+  """Returns {URL: (size, checksum)}s stored within file at given path."""
+  checksums_file = _read_file(checksums_path).split('\n')
+  return parse_sizes_checksums(checksums_file)
+
+
+def parse_sizes_checksums(checksums_file):
+  """Returns {URL: (size, checksum)}s stored within given file."""
   checksums = {}
-  for line in _read_file(checksums_path).split('\n'):
+  for line in checksums_file:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.
     if not line or line.startswith('#'):
       continue

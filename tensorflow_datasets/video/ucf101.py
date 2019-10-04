@@ -97,6 +97,33 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               '1.0.0', experiments={tfds.core.Experiment.S3: False}),
       ),
+      Ucf101Config(
+          name='ucf101_1',
+          description='UCF with the action recognition split #1.',
+          width=None,
+          height=None,
+          split_number=1,
+          version=tfds.core.Version(
+              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+      ),
+      Ucf101Config(
+          name='ucf101_2',
+          description='UCF with the action recognition split #2.',
+          width=None,
+          height=None,
+          split_number=2,
+          version=tfds.core.Version(
+              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+      ),
+      Ucf101Config(
+          name='ucf101_3',
+          description='UCF with the action recognition split #3.',
+          width=None,
+          height=None,
+          split_number=3,
+          version=tfds.core.Version(
+              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+      ),
   ]
 
   def _info(self):

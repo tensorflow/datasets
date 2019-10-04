@@ -29,7 +29,7 @@ import tensorflow_datasets.public_api as tfds
 _VOC_CITATION = """\
 @misc{{pascal-voc-{year},
 	author = "Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.",
-	title = "The {{PASCAL}} {{V}}isual {{O}}bject {{C}}lasses {{C}}hallenge 2012 {{(VOC{year})}} {{R}}esults",
+	title = "The {{PASCAL}} {{V}}isual {{O}}bject {{C}}lasses {{C}}hallenge {year} {{(VOC{year})}} {{R}}esults",
 	howpublished = "http://www.pascal-network.org/challenges/VOC/voc{year}/workshop/index.html"}}
 """
 _VOC_DESCRIPTION = """\
@@ -42,7 +42,7 @@ contains a set of objects, out of 20 different classes, making a total of
 In the Classification competition, the goal is to predict the set of labels
 contained in the image, while in the Detection competition the goal is to
 predict the bounding box and label of each individual object.
-WARNING: As per the official dataset, the test set of VOC2012 does not contains
+WARNING: As per the official dataset, the test set of VOC2012 does not contain
 annotations.
 """
 _VOC_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
@@ -147,7 +147,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
       VocConfig(
           year="2012",
           description=_VOC_DESCRIPTION.format(
-              year=2007, num_images=11540, num_objects=27450),
+              year=2012, num_images=11540, num_objects=27450),
           filenames={
               "trainval": "VOCtrainval_11-May-2012.tar",
               "test": "VOC2012test.tar",
@@ -223,7 +223,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
       labels_no_difficult = sorted(set(
           obj["label"] for obj in objects if obj["is_difficult"] == 0
       ))
-    else:  # The test set of VOC2012 do not contain annotations
+    else:  # The test set of VOC2012 does not contain annotations
       objects = []
       labels = []
       labels_no_difficult = []

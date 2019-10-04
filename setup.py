@@ -106,6 +106,7 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
+    'c4': ['langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'eurosat': ['scikit-image',],

@@ -13,43 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.core.lazy_imports."""
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from absl.testing import parameterized
-import six
-import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
+from tensorflow_datasets.image import imagenet_resized
 
 
-class LazyImportsTest(testing.TestCase, parameterized.TestCase):
+class ImagenetResizedTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = [
+      "8x8",
+  ]
+  DATASET_CLASS = imagenet_resized.ImagenetResized
+  SPLITS = {
+      "train": 3,
+      "validation": 1,
+  }
 
-  @parameterized.parameters(
-      "cv2",
-      "langdetect",
-      "matplotlib",
-      "mwparserfromhell",
-      "nltk",
-      "os",
-      "pandas",
-      "pretty_midi",
-      "pydub",
-      "scipy",
-      "skimage",
-      "tldextract",
-  )
-  def test_import(self, module_name):
-    # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)
-    if module_name == "skimage" and six.PY3:
-      return
-    getattr(tfds.core.lazy_imports, module_name)
-
-  def test_bad_import(self):
-    with self.assertRaisesWithPredicateMatch(ImportError, "extras_require"):
-      _ = tfds.core.lazy_imports.test_foo
+  DL_EXTRACT_RESULT = ["Imagenet8_train_npz.zip", "Imagenet8_val_npz.zip"]
 
 
 if __name__ == "__main__":
