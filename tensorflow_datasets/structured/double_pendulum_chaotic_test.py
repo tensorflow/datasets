@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.structured.iris."""
+"""Tests for tensorflow_datasets.structured.double_pendulum_chaotic."""
 
 from __future__ import absolute_import
 from __future__ import division
