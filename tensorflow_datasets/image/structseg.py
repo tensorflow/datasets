@@ -10,7 +10,7 @@ import re
 import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
 import nibabel as nib
-import numpy
+import numpy as np
 
 _CITATION = """
 @misc{li_zhou_deng_chen, title={StructSeg2019 - Grand Challenge}, 
@@ -27,16 +27,13 @@ segmentation from head & neck CT scans
 
 _BASE_URL = """https://structseg2019.grand-challenge.org/"""
 
+
 class Structseg(tfds.core.GeneratorBasedBuilder):
     """
     Organ-at-risk segmentation dataset from head & neck CT scans
     """
 
-    VERSION = tfds.core.Version("1.0.0",
-                                experiments={tfds.core.Experiment.S3: False})
-    SUPPORTED_VERSIONS = [
-        tfds.core.Version("2.0.0"),
-    ]
+    VERSION = tfds.core.Version("1.0.0")
 
     def get_all_file_paths(self, images_dir_path):
         """
@@ -60,7 +57,6 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
                     for image_file in fname:
                         if image_file.endswith("nii.gz"):
                             image_path.append(os.path.join(full_path, image_file))
-                            # print(image_path)
 
         return image_path
 
@@ -70,8 +66,8 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
             description=_DESCRIPTION,
             # tfds.features.FeatureConnectors
             features=tfds.features.FeaturesDict({
-                "image": tfds.features.Tensor(shape=(512, 512, 1), dtype=tf.float64),
-                "label": tfds.features.Tensor(shape=(512, 512, 1), dtype=tf.bool)
+                "image": tfds.features.Tensor(shape=(None, 512, 512, 1), dtype=tf.float16),
+                "label": tfds.features.Tensor(shape=(None, 512, 512, 1), dtype=tf.bool)
             }),
             # specify feature tuples
             supervised_keys=("image", "label"),
@@ -94,20 +90,17 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
                 num_shards=20,
                 gen_kwargs={
                     'file_path': path  # pylint: disable=no-value-for-parameter
-
                 }
             )
         ]
 
     def _generate_examples(self, file_path):
-        # file_path = filepath
         dirs = self.get_all_file_paths(file_path)
 
         label_dirs = []
         data_dirs = []
 
         # separate the directory paths into label subdir and data subdir
-
         for each_dir in dirs:
             if each_dir.endswith("/label.nii.gz"):
                 label_dirs.append(each_dir)
@@ -125,16 +118,17 @@ class Structseg(tfds.core.GeneratorBasedBuilder):
             label_temp = nib.load(label_dir)
             data_temp = nib.load(data_dir)
 
-            label_array = label_temp.get_fdata()
-            data_array = data_temp.get_fdata()
+            label_array = label_temp.get_fdata(dtype=np.float16).astype(np.bool)
+            data_array = data_temp.get_fdata(dtype=np.float16)
 
-            for slice_idx in range(label_array.shape[2]):
-                patient = patient_index + "_" + str(slice_idx)
+            vol_size = label_array.shape[2]
+            print(data_array.shape)
+            data_array = np.transpose(data_array, (2, 0, 1)).reshape(vol_size, 512, 512, 1)
+            label_array = np.transpose(label_array, (2, 0, 1)).reshape(vol_size, 512, 512, 1)
 
-                record = {
-                    "image": data_array[:, :, slice_idx].reshape(512, 512, 1),
-                    "label": tf.dtypes.cast((label_array[:, :, slice_idx].reshape(512, 512, 1)), tf.bool),
+            record = {
+                "image": data_array,
+                "label": label_array
+            }
 
-                }
-
-                yield patient, record
+            yield patient_index, record
