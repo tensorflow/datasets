@@ -1,0 +1,3 @@
+https://datahub.io/akornilo/billsum/r/ca_test_data_final.jsonl 15086790 4db74f4ffed4ba6692a14f8823e719dbc93b4aa79acd9fedf3825e7f656b73ed
+https://datahub.io/akornilo/billsum/r/us_test_data_final.jsonl 59068884 6285ff95d86d0c2f4e4b42954a7aae0709439bf3f448da66fb822ab681c69489
+https://datahub.io/akornilo/billsum/r/us_train_data_final.jsonl 335338742 baa27a45443541ff77f610f8353c75b121c66ae29517629eeee9154bdce7ab82
