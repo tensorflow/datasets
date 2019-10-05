@@ -42,58 +42,65 @@ _NAME_RE = re.compile(
 
 
 class TFFlowers(tfds.core.GeneratorBasedBuilder):
-    """Flowers dataset."""
+  """Flowers dataset."""
 
-    VERSION = tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})
-    SUPPORTED_VERSIONS = [
-        tfds.core.Version(
-            "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"
+  VERSION = tfds.core.Version(
+      "1.0.0", experiments={tfds.core.Experiment.S3: False}
+    )
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"
+      )
+  ]
+
+  def _info(self):
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description="A large set of images of flowers",
+        features=tfds.features.FeaturesDict(
+            {
+                "image": tfds.features.Image(),
+                "label": tfds.features.ClassLabel(
+                    names=["dandelion",
+                           "daisy",
+                           "tulips",
+                           "sunflowers",
+                           "roses",]
+                ),
+            }
+        ),
+        supervised_keys=("image", "label"),
+        urls=[_URL],
+        citation=_CITATION,
+    )
+
+  def _split_generators(self, dl_manager):
+    path = dl_manager.download(_URL)
+    if tf.io.gfile.isdir(path):
+      path = os.path.join(path, tf.io.gfile.listdir(path)[0])
+    # There is no predefined train/val/test split for this dataset.
+    return [
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            num_shards=20,
+            gen_kwargs={"archive": dl_manager.iter_archive(path)},
         )
     ]
 
-    def _info(self):
-        return tfds.core.DatasetInfo(
-            builder=self,
-            description="A large set of images of flowers",
-            features=tfds.features.FeaturesDict(
-                {
-                    "image": tfds.features.Image(),
-                    "label": tfds.features.ClassLabel(
-                        names=["dandelion", "daisy", "tulips", "sunflowers", "roses"]
-                    ),
-                }
-            ),
-            supervised_keys=("image", "label"),
-            urls=[_URL],
-            citation=_CITATION,
-        )
+  def _generate_examples(self, archive):
+    """Generate flower images and labels given the image directory path.
 
-    def _split_generators(self, dl_manager):
-        path = dl_manager.download(_URL)
-        path = os.path.join(path, tf.io.gfile.listdir(path)[0])
-        # There is no predefined train/val/test split for this dataset.
-        return [
-            tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
-                num_shards=20,
-                gen_kwargs={"archive": dl_manager.iter_archive(path)},
-            )
-        ]
+  Args:
+    archive: Complete path where the image is stored.
 
-    def _generate_examples(self, archive):
-        """Generate flower images and labels given the image directory path.
-
-    Args:
-      archive: C  omplete path where the image is stored.
-
-    Yields:
-      The image path and its corresponding label.
+  Yields:
+    The image path and its corresponding label.
     """
-        for fname, fobj in archive:
-            res = _NAME_RE.match(fname)
-            if not res:
-                continue
-            label = res.group(1).lower()
-            record = {"image": fobj, "label": label}
-            print("yield content is :", label, " fname is :", os.path.basename(fname))
-            yield "%s/%s" % (label, os.path.basename(fname)), record
+    for fname, fobj in archive:
+      res = _NAME_RE.match(fname)
+      if not res:
+        continue
+      label = res.group(1).lower()
+      record = {"image": fobj, "label": label}
+      yield "%s/%s" % (label, os.path.basename(fname)), record
+      
