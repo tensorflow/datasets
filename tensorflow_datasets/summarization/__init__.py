@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.summarization.aeslc import Aeslc
 from tensorflow_datasets.summarization.big_patent import BigPatent
+from tensorflow_datasets.summarization.billsum import Billsum
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymail
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymailConfig
 from tensorflow_datasets.summarization.gigaword import Gigaword

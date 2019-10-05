@@ -496,6 +496,10 @@ imagenet2012_corrupted/zoom_blur_4/0.0.1
 imagenet2012_corrupted/zoom_blur_4/3.0.1
 imagenet2012_corrupted/zoom_blur_5/0.0.1
 imagenet2012_corrupted/zoom_blur_5/3.0.1
+imagenet_resized/16x16/0.1.0
+imagenet_resized/32x32/0.1.0
+imagenet_resized/64x64/0.1.0
+imagenet_resized/8x8/0.1.0
 imdb_reviews/bytes/0.1.0
 imdb_reviews/bytes/1.0.0
 imdb_reviews/plain_text/0.1.0
@@ -732,7 +736,10 @@ trivia_qa/0.1.0
 trivia_qa/1.0.0
 uc_merced/0.0.1
 uc_merced/2.0.0
+ucf101/ucf101_1/1.0.0
 ucf101/ucf101_1_256/1.0.0
+ucf101/ucf101_2/1.0.0
+ucf101/ucf101_3/1.0.0
 visual_domain_decathlon/aircraft/1.1.0
 visual_domain_decathlon/cifar100/1.1.0
 visual_domain_decathlon/daimlerpedcls/1.1.0
