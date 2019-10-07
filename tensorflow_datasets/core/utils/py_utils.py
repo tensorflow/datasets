@@ -29,13 +29,16 @@ import os
 import sys
 import uuid
 
-import psutil
 import six
 import tensorflow as tf
 from tensorflow_datasets.core import constants
 
 
 # pylint: disable=g-import-not-at-top
+try:
+  from shutil import disk_usage
+except ImportError:
+  from psutil import disk_usage
 if sys.version_info[0] > 2:
   import functools
 else:
@@ -338,7 +341,7 @@ def rgetattr(obj, attr, *args):
 
 def has_sufficient_disk_space(needed_bytes, directory="."):
   try:
-    free_bytes = psutil.disk_usage(os.path.abspath(directory)).free
+    free_bytes = disk_usage(os.path.abspath(directory)).free
   except OSError:
     return True
   return needed_bytes < free_bytes
