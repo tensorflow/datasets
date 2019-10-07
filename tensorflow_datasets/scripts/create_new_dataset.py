@@ -30,7 +30,9 @@ import os
 from absl import app
 from absl import flags
 
-from tensorflow.io import gfile
+#from tensorflow.io import gfile
+import tensorflow
+gfile = tensorflow.io.gfile
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import py_utils
 
