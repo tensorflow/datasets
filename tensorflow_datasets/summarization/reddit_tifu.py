@@ -70,8 +70,9 @@ class RedditTifuConfig(tfds.core.BuilderConfig):
       summary_key: key string of summary in downloaded json file.
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version 1.1.0 remove empty document and summary strings.
     super(RedditTifuConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"), **kwargs)
+        version=tfds.core.Version("1.1.0"), **kwargs)
     self.summary_key = summary_key
 
 
@@ -127,13 +128,12 @@ class RedditTifu(tfds.core.GeneratorBasedBuilder):
         #   'selftext','trimmed_title','selftext_without_tldr_tokenized',
         #   'id','selftext_without_tldr'
         d = json.loads(line)
-        # skip if tldr is empty
-        if self.builder_config.summary_key == _TLDR and not d["tldr"]:
-          continue
         r = {
-            _DOCUMENT: d["selftext_without_tldr"],
-            _TITLE: d["trimmed_title"],
-            _TLDR: d["tldr"] or "",
+            _DOCUMENT: d["selftext_without_tldr"].strip(),
+            _TITLE: d["trimmed_title"].strip(),
+            _TLDR: (d["tldr"] or "").strip(),
         }
         r.update({k: d[k] for k in _ADDITIONAL_FEATURES})
-        yield i, r
+        # skip if document or summary is empty
+        if r[_DOCUMENT] and r[self.builder_config.summary_key]:
+          yield i, r

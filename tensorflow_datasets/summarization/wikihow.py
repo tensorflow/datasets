@@ -70,8 +70,9 @@ class WikihowConfig(tfds.core.BuilderConfig):
       filename: filename of different configs for the dataset.
       **kwargs: keyword arguments forwarded to super.
     """
+    # Version 1.1.0 remove empty document and summary strings.
     super(WikihowConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"), **kwargs)
+        version=tfds.core.Version("1.1.0"), **kwargs)
     self.filename = filename
 
 
@@ -134,4 +135,6 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
       for i, line in enumerate(reader):
         # skip empty line or insufficient line.
         if len(line) == len(key2id):
-          yield i, {k: line[v] for k, v in key2id.items()}
+          # document and summary not empty
+          if line[key2id[_DOCUMENT]].strip() and line[key2id[_SUMMARY]].strip():
+            yield i, {k: line[v].strip() for k, v in key2id.items()}

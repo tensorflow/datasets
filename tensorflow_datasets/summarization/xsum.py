@@ -54,11 +54,19 @@ _URL = "https://raw.githubusercontent.com/EdinburghNLP/XSum/master/XSum-Dataset/
 _DOCUMENT = "document"
 _SUMMARY = "summary"
 
+_REMOVE_LINES = set([
+    "Share this with\n", "Email\n", "Facebook\n", "Messenger\n", "Twitter\n",
+    "Pinterest\n", "WhatsApp\n", "Linkedin\n", "LinkedIn\n", "Copy this link\n",
+    "These are external links and will open in a new window\n"
+])
+
 
 class Xsum(tfds.core.GeneratorBasedBuilder):
   """Extreme Summarization (XSum) Dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  # Version 1.1.0 removes web contents.
+  VERSION = tfds.core.Version("1.1.0")
+  SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0", "Dataset without cleaning.")]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -115,7 +123,10 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
       filename = os.path.join(path, i + ".data")
       if tf.io.gfile.exists(filename):
         with tf.io.gfile.GFile(filename) as f:
-          text = "".join(f.readlines())
+          text = "".join([
+              line for line in f.readlines()
+              if line not in _REMOVE_LINES and line.strip()
+          ])
           # Each file follows below format:
           # [XSUM]URL[XSUM]
           # http://somelink
