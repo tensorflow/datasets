@@ -108,7 +108,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
    - the dataset builder is correctly registered, i.e. `tfds.load(name)` works;
    - the dataset builder can read the fake examples stored in
-       testing/test_data/fake_examples/${dataset_name};
+       testing/test_data/fake_examples/{dataset_name};
    - the dataset builder can produce serialized data;
    - the dataset builder produces a valid Dataset object from serialized data
      - in eager mode;
