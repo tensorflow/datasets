@@ -23,6 +23,7 @@ from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
 from tensorflow_datasets.image.caltech import Caltech101
 from tensorflow_datasets.image.caltech_birds import CaltechBirds2010
 from tensorflow_datasets.image.cars196 import Cars196
+from tensorflow_datasets.image.cassava import Cassava
 from tensorflow_datasets.image.cats_vs_dogs import CatsVsDogs
 from tensorflow_datasets.image.cbis_ddsm import CuratedBreastImagingDDSM
 from tensorflow_datasets.image.celeba import CelebA
