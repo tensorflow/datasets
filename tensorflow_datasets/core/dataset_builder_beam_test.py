@@ -22,7 +22,6 @@ from __future__ import print_function
 import os
 import apache_beam as beam
 import numpy as np
-import six
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
@@ -153,12 +152,6 @@ class BeamBasedBuilderTest(testing.TestCase):
 
 
   def _get_dl_config_if_need_to_run(self):
-    # The default beam pipeline do not works with Python2
-    # TODO(b/129148632): The current apache-beam 2.11.0 do not work with Py3
-    # Update once the new version is out (around April)
-    skip_beam_test = bool(six.PY3)
-    if skip_beam_test:
-      return
     return download.DownloadConfig(
         beam_options=beam.options.pipeline_options.PipelineOptions(),
     )
