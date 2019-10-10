@@ -401,7 +401,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
               'id': instance['id'],
               'area': instance['area'],
               'bbox': build_bbox(*instance['bbox']),
-              'label': categories_id2name[instance['category_id']],
+              'label': instance['category_id'],
               'is_crowd': bool(instance['iscrowd']),
           } for instance in instances]
       }
