@@ -110,6 +110,7 @@ DATASET_EXTRAS = {
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'eurosat': ['scikit-image',],
+    'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
@@ -117,8 +118,8 @@ DATASET_EXTRAS = {
         'scikit-image',
         'scipy'
     ],
-    'groove': ['pretty_midi', 'pydub'],
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'nsynth': ['crepe', 'librosa'],
     'pet_finder': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],

@@ -18,9 +18,9 @@ from tensorflow_datasets.audio import nsynth
 import tensorflow_datasets.testing as tfds_test
 
 
-class NsynthTest(tfds_test.DatasetBuilderTestCase):
-  """Test Nsynth."""
+class NsynthFullTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = nsynth.Nsynth
+  BUILDER_CONFIG_NAMES_TO_TEST = ["full"]
   SPLITS = {"train": 3, "test": 3, "valid": 3}
   DL_EXTRACT_RESULT = {
       "train": "nsynth-train.tfrecord",
@@ -30,8 +30,9 @@ class NsynthTest(tfds_test.DatasetBuilderTestCase):
   }
 
 
-class NsynthS3Test(NsynthTest):
-  VERSION = "experimental_latest"
+class GANsynthTest(NsynthFullTest):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["iclr2019_gansynth_subset"]
+  SPLITS = {"train": 1, "test": 0, "valid": 0}
 
 
 if __name__ == "__main__":
