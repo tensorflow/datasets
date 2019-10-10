@@ -22,12 +22,14 @@ big_patent/f/1.0.0
 big_patent/g/1.0.0
 big_patent/h/1.0.0
 big_patent/y/1.0.0
+billsum/1.0.0
 binarized_mnist/1.0.0
 binary_alpha_digits/1.0.0
 caltech101/1.1.0
 caltech101/3.0.0
 caltech_birds2010/0.1.0
 cars196/1.0.0
+cassava/0.1.0
 cats_vs_dogs/2.0.1
 cats_vs_dogs/4.0.0
 celeb_a/0.3.0
@@ -648,8 +650,8 @@ patch_camelyon/2.0.0
 pet_finder/1.0.0
 quickdraw_bitmap/1.0.0
 quickdraw_bitmap/3.0.0
-reddit_tifu/long/1.0.0
-reddit_tifu/short/1.0.0
+reddit_tifu/long/1.1.0
+reddit_tifu/short/1.1.0
 resisc45/3.0.0
 rock_paper_scissors/1.0.0
 rock_paper_scissors/3.0.0
@@ -753,8 +755,8 @@ visual_domain_decathlon/vgg-flowers/1.1.0
 voc/2007/4.0.0
 voc/2012/4.0.0
 wider_face/0.1.0
-wikihow/all/1.0.0
-wikihow/sep/1.0.0
+wikihow/all/1.1.0
+wikihow/sep/1.1.0
 wikipedia/20190301.aa/0.0.3
 wikipedia/20190301.ab/0.0.3
 wikipedia/20190301.ace/0.0.3
@@ -1106,3 +1108,4 @@ wmt_t2t_translate/de-en/0.0.1
 xnli/plain_text/0.0.1
 xnli/plain_text/1.0.0
 xsum/1.0.0
+xsum/1.1.0
