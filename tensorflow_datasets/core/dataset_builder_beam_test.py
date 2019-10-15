@@ -50,6 +50,7 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
             "id": tf.int32,
         }),
         supervised_keys=("x", "x"),
+        metadata=dataset_info.BeamMetadataDict(),
     )
 
   def _split_generators(self, dl_manager):
@@ -69,12 +70,22 @@ class DummyBeamDataset(dataset_builder.BeamBasedBuilder):
 
   def _build_pcollection(self, pipeline, num_examples):
     """Generate examples as dicts."""
-
-    return (
+    examples = (
         pipeline
         | beam.Create(range(num_examples))
         | beam.Map(_gen_example)
     )
+
+    self.info.metadata["label_sum_%d" % num_examples] = (
+        examples
+        | beam.Map(lambda x: x["label"])
+        | beam.CombineGlobally(sum))
+    self.info.metadata["id_mean_%d" % num_examples] = (
+        examples
+        | beam.Map(lambda x: x["id"])
+        | beam.CombineGlobally(beam.combiners.MeanCombineFn()))
+
+    return examples
 
 
 def _gen_example(x):
@@ -131,6 +142,14 @@ class BeamBasedBuilderTest(testing.TestCase):
       self._assertElemsAllEqual(
           sorted(list(datasets["train"]), key=_get_id),
           sorted([_gen_example(i) for i in range(1000)], key=_get_id),
+      )
+
+      self.assertDictEqual(
+          builder.info.metadata,
+          {
+              "label_sum_1000": 500, "id_mean_1000": 499.5,
+              "label_sum_725": 362, "id_mean_725": 362.0,
+          }
       )
 
   def _assertShards(self, data_dir, pattern, num_shards):

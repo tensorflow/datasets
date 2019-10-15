@@ -48,6 +48,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
@@ -651,3 +652,57 @@ class MetadataDict(Metadata, dict):
     self.clear()
     with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
       self.update(json.load(f))
+
+
+class BeamMetadataDict(MetadataDict):
+  """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
+
+  def __init__(self):
+    super(BeamMetadataDict, self).__init__()
+    self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
+
+  def _temp_filepath(self, key):
+    return os.path.join(self._tempdir, "%s.json" % key)
+
+  def __setitem__(self, key, item):
+    """Creates write sink for beam PValues or sets value of key in `dict`.
+
+    If the item is a PValue, it is expected to contain exactly one element,
+    which will be written out as a temporary JSON file once the beam pipeline
+    runs. These outputs will be loaded and stored in a single JSON when
+    `save_metadata` is called after the pipeline completes.
+
+    Args:
+      key: hashable type, the key for the item.
+      item: `beam.pvalue.PValue` or other, the metadata value.
+    """
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    if isinstance(item, beam.pvalue.PValue):
+      if key in self:
+        raise ValueError("Already added PValue with key: %s" % key)
+      logging.info("Lazily adding metadata item with Beam: %s", key)
+      def _to_json(item_list):
+        if len(item_list) != 1:
+          raise ValueError(
+              "Each metadata PValue must contain a single element. Got %d." %
+              len(item_list))
+        item = item_list[0]
+        return json.dumps(item)
+      _ = (item
+           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
+           | "metadata_%s_tojson" % key >> beam.Map(_to_json)
+           | "metadata_%s_write" % key >> beam.io.WriteToText(
+               self._temp_filepath(key),
+               num_shards=1,
+               shard_name_template=""))
+    super(BeamMetadataDict, self).__setitem__(key, item)
+
+  def save_metadata(self, data_dir):
+    """Save the metadata inside the beam job."""
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    for key, item in self.items():
+      if isinstance(item, beam.pvalue.PValue):
+        with tf.io.gfile.GFile(self._temp_filepath(key), "r") as f:
+          self[key] = json.load(f)
+    tf.io.gfile.rmtree(self._tempdir)
+    super(BeamMetadataDict, self).save_metadata(data_dir)
