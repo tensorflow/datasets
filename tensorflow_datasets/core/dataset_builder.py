@@ -735,12 +735,12 @@ class FileAdapterBuilder(DatasetBuilder):
     Example:
 
       return[
-          tfds.SplitGenerator(
+          tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
               num_shards=10,
               gen_kwargs={'file': 'train_data.zip'},
           ),
-          tfds.SplitGenerator(
+          tfds.core.SplitGenerator(
               name=tfds.Split.TEST,
               num_shards=5,
               gen_kwargs={'file': 'test_data.zip'},
