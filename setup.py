@@ -46,7 +46,6 @@ REQUIRED_PKGS = [
     'numpy',
     'promise',
     'protobuf>=3.6.1',
-    'psutil',
     'requests>=2.19.0',
     'six',
     'tensorflow-metadata',
@@ -77,6 +76,10 @@ else:
 if sys.version_info < (3, 4):
   # enum introduced in Python 3.4
   REQUIRED_PKGS.append('enum34')
+
+if sys.version_info < (3, 3):
+  # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
+  REQUIRED_PKGS.append('psutil')
 
 # Static files needed by datasets.
 DATASET_FILES = [
