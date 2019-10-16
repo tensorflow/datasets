@@ -28,7 +28,6 @@ import os
 
 import numpy as np
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.image import mnist
 import tensorflow_datasets.public_api as tfds
 
@@ -76,7 +75,7 @@ _TEST_LABELS_FILENAME = 'test_labels.npy'
 class MNISTCorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for MNISTcorrupted."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, corruption_type, **kwargs):
     """Constructor.
 

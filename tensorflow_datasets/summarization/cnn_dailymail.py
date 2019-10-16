@@ -21,7 +21,6 @@ import hashlib
 import os
 from absl import logging
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 
@@ -79,7 +78,7 @@ _ARTICLE = 'article'
 class CnnDailymailConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CnnDailymail."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for CnnDailymail.
 

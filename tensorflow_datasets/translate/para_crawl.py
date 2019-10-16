@@ -21,7 +21,6 @@ from __future__ import print_function
 
 import collections
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
@@ -80,7 +79,7 @@ def _target_languages():
 class ParaCrawlConfig(tfds.core.BuilderConfig):
   """BuilderConfig for ParaCrawl."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, target_language=None, **kwargs):
     """BuilderConfig for ParaCrawl.
 

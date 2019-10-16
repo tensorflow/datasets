@@ -24,7 +24,6 @@ import numpy as np
 from six.moves import urllib
 import tensorflow as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # MNIST constants
@@ -231,7 +230,7 @@ class KMNIST(MNIST):
 class EMNISTConfig(tfds.core.BuilderConfig):
   """BuilderConfig for EMNIST CONFIG."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, class_number, train_examples, test_examples, **kwargs):
     """BuilderConfig for EMNIST class number.
 

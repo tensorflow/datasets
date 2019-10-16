@@ -23,7 +23,6 @@ from __future__ import print_function
 from absl import logging
 import numpy as np
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.image import corruptions
 from tensorflow_datasets.image.imagenet import Imagenet2012
 import tensorflow_datasets.public_api as tfds
@@ -80,7 +79,7 @@ EXTRA_CORRUPTIONS = ['gaussian_blur', 'saturate', 'spatter', 'speckle_noise']
 class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Imagenet2012Corrupted."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, corruption_type=None, severity=1, **kwargs):
     """BuilderConfig for Imagenet2012Corrupted.
 

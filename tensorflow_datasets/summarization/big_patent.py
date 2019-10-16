@@ -23,7 +23,6 @@ import gzip
 import json
 import os
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -75,7 +74,7 @@ _CPC_DESCRIPTION = {
 class BigPatentConfig(tfds.core.BuilderConfig):
   """BuilderConfig for BigPatent."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, cpc_codes=None, **kwargs):
     """BuilderConfig for Wikihow.
 

@@ -27,7 +27,6 @@ import xml.etree.cElementTree as etree
 from absl import logging
 import six
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 
@@ -89,7 +88,7 @@ _INFO_FILE = "dumpstatus.json"
 class WikipediaConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Wikipedia."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, language=None, date=None, **kwargs):
     """BuilderConfig for Wikipedia.
 

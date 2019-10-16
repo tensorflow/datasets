@@ -20,7 +20,9 @@
 from tensorflow_datasets.core import tf_compat
 tf_compat.ensure_tf_install()
 
-from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder  # pylint:disable=g-import-not-at-top
+from tensorflow_datasets.core.api_utils import disallow_positional_args  # pylint:disable=g-import-not-at-top
+
+from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
@@ -37,9 +39,13 @@ from tensorflow_datasets.core.splits import SplitBase
 from tensorflow_datasets.core.splits import SplitDict
 from tensorflow_datasets.core.splits import SplitGenerator
 from tensorflow_datasets.core.splits import SplitInfo
+
+from tensorflow_datasets.core.tfrecords_reader import ReadInstruction
+
 from tensorflow_datasets.core.utils import Experiment
 from tensorflow_datasets.core.utils import get_tfds_path
 from tensorflow_datasets.core.utils import Version
+
 
 __all__ = [
     "lazy_imports",
@@ -47,6 +53,7 @@ __all__ = [
     "BeamMetadataDict",
     "BuilderConfig",
     "DatasetBuilder",
+    "disallow_positional_args",
     "Experiment",
     "GeneratorBasedBuilder",
     "get_tfds_path",
@@ -54,6 +61,7 @@ __all__ = [
     "NamedSplit",
     "Metadata",
     "MetadataDict",
+    "ReadInstruction",
     "SplitBase",
     "SplitDict",
     "SplitGenerator",

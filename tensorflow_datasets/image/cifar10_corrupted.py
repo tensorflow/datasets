@@ -28,7 +28,6 @@ import os
 
 import numpy as np
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -105,7 +104,7 @@ EXTRA_CORRUPTIONS = [
 class Cifar10CorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Cifar10Corrupted."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, corruption_type, severity, **kwargs):
     """Constructor.
 

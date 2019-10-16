@@ -24,7 +24,6 @@ import os
 
 import tensorflow as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -62,7 +61,7 @@ _DATA_OPTIONS = ["clean100", "clean360", "all"]
 class LibrispeechConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Librispeech."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, data="clean100", **kwargs):
     """Constructs a LibrispeechConfig.
 

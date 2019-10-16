@@ -22,7 +22,6 @@ from __future__ import print_function
 from absl import logging
 import tensorflow as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 DATA_URL_DIR = "https://storage.googleapis.com/scv_dataset/data/"
@@ -52,7 +51,7 @@ _CITATION = """\
 class StarcraftVideoConfig(tfds.core.BuilderConfig):
   """Config for StarcraftVideo dataset."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, map_name, resolution, size_in_gb, **kwargs):
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(

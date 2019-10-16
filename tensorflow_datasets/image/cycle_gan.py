@@ -23,7 +23,6 @@ import os
 
 import tensorflow as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # From https://arxiv.org/abs/1703.10593
@@ -62,7 +61,7 @@ _DL_URLS = {name: _DL_URL + name + ".zip" for name in _DATA_OPTIONS}
 class CycleGANConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CycleGAN."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, data=None, **kwargs):
     """Constructs a CycleGANConfig.
 

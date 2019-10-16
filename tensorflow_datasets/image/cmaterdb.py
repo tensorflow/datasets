@@ -21,7 +21,6 @@ from __future__ import print_function
 
 import numpy as np
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # CMATERdb constants
@@ -93,7 +92,7 @@ CMATERdb is the pattern recognition database repository created at the 'Center f
 class CmaterdbConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CMATERdb Config."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, **kwargs):
     """BuilderConfig for CMATERdb examples.
 

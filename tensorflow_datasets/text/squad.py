@@ -24,7 +24,6 @@ import os
 
 from absl import logging
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -52,7 +51,7 @@ from the corresponding reading passage, or the question might be unanswerable.
 class SquadConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SQUAD."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, **kwargs):
     """BuilderConfig for SQUAD.
 

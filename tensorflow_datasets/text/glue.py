@@ -25,7 +25,6 @@ import numpy as np
 import six
 
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _GLUE_CITATION = """\
@@ -83,7 +82,7 @@ _MNLI_BASE_KWARGS = dict(
 class GlueConfig(tfds.core.BuilderConfig):
   """BuilderConfig for GLUE."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self,
                text_features,
                label_column,

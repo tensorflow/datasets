@@ -23,7 +23,6 @@ import os
 
 from absl import logging
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 UCF_101_URL = 'https://storage.googleapis.com/thumos14_files/UCF101_videos.zip'
@@ -55,7 +54,7 @@ _LABELS_FNAME = 'video/ucf101_labels.txt'
 class Ucf101Config(tfds.core.BuilderConfig):
   """"Configuration for UCF101 split and possible video rescaling."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, split_number, width=None, height=None, **kwargs):
     """The parameters specifying how the dataset will be processed.
 

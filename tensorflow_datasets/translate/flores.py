@@ -22,7 +22,6 @@ from __future__ import print_function
 import collections
 
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -52,7 +51,7 @@ TranslateData = collections.namedtuple("TranslateData",
 class FloresConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLoRes."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self,
                text_encoder_config=None,
                language_pair=(None, None),

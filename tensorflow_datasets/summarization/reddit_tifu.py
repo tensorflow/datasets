@@ -22,7 +22,6 @@ from __future__ import print_function
 import json
 
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -62,7 +61,7 @@ _ADDITIONAL_FEATURES = ["ups", "num_comments", "score", "upvote_ratio"]
 class RedditTifuConfig(tfds.core.BuilderConfig):
   """BuilderConfig for RedditTifu."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, summary_key=None, **kwargs):
     """BuilderConfig for RedditTifu.
 
