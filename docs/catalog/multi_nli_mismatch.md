@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="multi_nli_mismatch" />
   <meta itemprop="description" content="The Multi-Genre Natural Language Inference (MultiNLI) corpus is a&#10;crowd-sourced collection of 433k sentence pairs annotated with textual&#10;entailment information. The corpus is modeled on the SNLI corpus, but differs in&#10;that covers a range of genres of spoken and written text, and supports a&#10;distinctive cross-genre generalization evaluation. The corpus served as the&#10;basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('multi_nli_mismatch')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/multi_nli_mismatch" />
   <meta itemprop="sameAs" content="https://www.nyu.edu/projects/bowman/multinli/" />
   <meta itemprop="citation" content="@InProceedings{N18-1101,&#10;  author = &quot;Williams, Adina&#10;            and Nangia, Nikita&#10;            and Bowman, Samuel&quot;,&#10;  title = &quot;A Broad-Coverage Challenge Corpus for&#10;           Sentence Understanding through Inference&quot;,&#10;  booktitle = &quot;Proceedings of the 2018 Conference of&#10;               the North American Chapter of the&#10;               Association for Computational Linguistics:&#10;               Human Language Technologies, Volume 1 (Long&#10;               Papers)&quot;,&#10;  year = &quot;2018&quot;,&#10;  publisher = &quot;Association for Computational Linguistics&quot;,&#10;  pages = &quot;1112--1122&quot;,&#10;  location = &quot;New Orleans, Louisiana&quot;,&#10;  url = &quot;http://aclweb.org/anthology/N18-1101&quot;&#10;}&#10;" />
 </div>
-
 # `multi_nli_mismatch`
 
 The Multi-Genre Natural Language Inference (MultiNLI) corpus is a crowd-sourced
@@ -31,7 +29,6 @@ configurations predefined (defaults to the first one):
 *   `plain_text` (`v0.0.1`) (`Size: 216.34 MiB`): Plain text
 
 ## `multi_nli_mismatch/plain_text`
-
 Plain text
 
 Versions:

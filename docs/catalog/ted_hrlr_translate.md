@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="ted_hrlr_translate" />
   <meta itemprop="description" content="Data sets derived from TED talk transcripts for comparing similar language pairs&#10;where one is high resource and the other is low resource.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('ted_hrlr_translate')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/ted_hrlr_translate" />
   <meta itemprop="sameAs" content="https://github.com/neulab/word-embeddings-for-nmt" />
   <meta itemprop="citation" content="@inproceedings{Ye2018WordEmbeddings,&#10;  author  = {Ye, Qi and Devendra, Sachan and Matthieu, Felix and Sarguna, Padmanabhan and Graham, Neubig},&#10;  title   = {When and Why are pre-trained word embeddings useful for Neural Machine Translation},&#10;  booktitle = {HLT-NAACL},&#10;  year    = {2018},&#10;  }&#10;" />
 </div>
-
 # `ted_hrlr_translate`
 
 Data sets derived from TED talk transcripts for comparing similar language pairs

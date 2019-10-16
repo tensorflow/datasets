@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="flores" />
   <meta itemprop="description" content="Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('flores')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/flores" />
   <meta itemprop="sameAs" content="https://github.com/facebookresearch/flores/" />
   <meta itemprop="citation" content="@misc{guzmn2019new,&#10;    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},&#10;    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},&#10;    year={2019},&#10;    eprint={1902.01382},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}&#10;" />
 </div>
-
 # `flores`
 
 Evaluation datasets for low-resource machine translation: Nepali-English and

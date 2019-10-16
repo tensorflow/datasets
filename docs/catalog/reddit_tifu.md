@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="reddit_tifu" />
   <meta itemprop="description" content="&#10;Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu.&#10;As defined in the publication, styel &quot;short&quot; uses title as summary and&#10;&quot;long&quot; uses tldr as summary.&#10;&#10;Features includes:&#10;  - document: post text without tldr.&#10;  - tldr: tldr line.&#10;  - title: trimmed title without tldr.&#10;  - ups: upvotes.&#10;  - score: score.&#10;  - num_comments: number of comments.&#10;  - upvote_ratio: upvote ratio.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('reddit_tifu')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/reddit_tifu" />
   <meta itemprop="sameAs" content="https://github.com/ctr4si/MMN" />
   <meta itemprop="citation" content="&#10;@misc{kim2018abstractive,&#10;    title={Abstractive Summarization of Reddit Posts with Multi-level Memory Networks},&#10;    author={Byeongchang Kim and Hyunwoo Kim and Gunhee Kim},&#10;    year={2018},&#10;    eprint={1811.00783},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}&#10;" />
 </div>
-
 # `reddit_tifu`
 
 Reddit dataset, where TIFU denotes the name of subbreddit /r/tifu. As defined in
@@ -33,7 +31,6 @@ configurations predefined (defaults to the first one):
 *   `long` (`v1.1.0`) (`Size: 639.54 MiB`): Using TLDR as summary.
 
 ## `reddit_tifu/short`
-
 Using title as summary.
 
 Versions:
@@ -48,7 +45,6 @@ ALL   | 79,740
 TRAIN | 79,740
 
 ### Features
-
 ```python
 FeaturesDict({
     'documents': Text(shape=(), dtype=tf.string),
@@ -66,11 +62,9 @@ FeaturesDict({
 *   [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'documents', u'title')`
 
 ## `reddit_tifu/long`
-
 Using TLDR as summary.
 
 Versions:
@@ -85,7 +79,6 @@ ALL   | 42,139
 TRAIN | 42,139
 
 ### Features
-
 ```python
 FeaturesDict({
     'documents': Text(shape=(), dtype=tf.string),
@@ -103,11 +96,9 @@ FeaturesDict({
 *   [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'documents', u'tldr')`
 
 ## Citation
-
 ```
 @misc{kim2018abstractive,
     title={Abstractive Summarization of Reddit Posts with Multi-level Memory Networks},

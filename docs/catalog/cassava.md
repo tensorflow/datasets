@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="cassava" />
   <meta itemprop="description" content="Cassava consists of leaf images for the cassava plant depicting healthy and&#10;four (4) disease conditions; Cassava Mosaic Disease (CMD), Cassava Bacterial&#10;Blight (CBB), Cassava Greem Mite (CGM) and Cassava Brown Streak Disease (CBSD).&#10;Dataset consists of a total of 9430 labelled images.&#10;The 9430 labelled images are split into a training set (5656), a test set(1885)&#10;and a validation set (1889). The number of images per class are unbalanced with&#10;the two disease classes CMD and CBSD having 72% of the images.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('cassava')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cassava" />
   <meta itemprop="sameAs" content="https://www.kaggle.com/c/cassava-disease/overview" />
   <meta itemprop="citation" content="@misc{mwebaze2019icassava,&#10;    title={iCassava 2019Fine-Grained Visual Categorization Challenge},&#10;    author={Ernest Mwebaze and Timnit Gebru and Andrea Frome and Solomon Nsumba and Jeremy Tusubira},&#10;    year={2019},&#10;    eprint={1908.02900},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CV}&#10;}&#10;" />
 </div>
-
 # `cassava`
 
 Cassava consists of leaf images for the cassava plant depicting healthy and four
@@ -32,7 +30,6 @@ CBSD having 72% of the images.
 *   Size: `1.26 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -55,11 +52,9 @@ TEST       | 1,885
 *   [https://www.kaggle.com/c/cassava-disease/overview](https://www.kaggle.com/c/cassava-disease/overview)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @misc{mwebaze2019icassava,
     title={iCassava 2019Fine-Grained Visual Categorization Challenge},

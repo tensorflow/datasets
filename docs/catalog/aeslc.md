@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="aeslc" />
   <meta itemprop="description" content="&#10;A collection of email messages of employees in the Enron Corporation.&#10;&#10;There are two features:&#10;  - email_body: email body text.&#10;  - subject_line: email subject text.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('aeslc')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/aeslc" />
   <meta itemprop="sameAs" content="https://github.com/ryanzhumich/AESLC" />
   <meta itemprop="citation" content="&#10;@misc{zhang2019email,&#10;    title={This Email Could Save Your Life: Introducing the Task of Email Subject Line Generation},&#10;    author={Rui Zhang and Joel Tetreault},&#10;    year={2019},&#10;    eprint={1906.03497},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}&#10;" />
 </div>
-
 # `aeslc`
 
 A collection of email messages of employees in the Enron Corporation.
@@ -29,7 +27,6 @@ subject text.
 *   Size: `11.10 MiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'email_body': Text(shape=(), dtype=tf.string),
@@ -51,11 +48,9 @@ TEST       | 1,906
 *   [https://github.com/ryanzhumich/AESLC](https://github.com/ryanzhumich/AESLC)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'email_body', u'subject_line')`
 
 ## Citation
-
 ```
 @misc{zhang2019email,
     title={This Email Could Save Your Life: Introducing the Task of Email Subject Line Generation},
