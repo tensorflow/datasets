@@ -5,6 +5,7 @@
 <meta itemprop="property" content="xmin"/>
 <meta itemprop="property" content="ymax"/>
 <meta itemprop="property" content="xmax"/>
+<meta itemprop="property" content="__new__"/>
 </div>
 
 # tfds.features.BBox
@@ -20,6 +21,21 @@ source</a>
 BBox(ymin, xmin, ymax, xmax)
 
 <!-- Placeholder for "Used in" -->
+
+<h2 id="__new__"><code>__new__</code></h2>
+
+```python
+@staticmethod
+__new__(
+    _cls,
+    ymin,
+    xmin,
+    ymax,
+    xmax
+)
+```
+
+Create new instance of BBox(ymin, xmin, ymax, xmax)
 
 ## Properties
 

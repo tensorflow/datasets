@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="super_glue" />
-  <meta itemprop="description" content="BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy." />
+  <meta itemprop="description" content="BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('super_glue')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/super_glue" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
+  <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle={NAACL},&#10;  year={2019}&#10;}&#10;@article{wang2019superglue,&#10;  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},&#10;  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1905.00537},&#10;  year={2019}&#10;}&#10;&#10;Note that each SuperGLUE dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset.&#10;" />
 </div>
 
 # `super_glue`
@@ -192,7 +194,6 @@ VALIDATION | 3,270
 TEST       | 3,245
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -235,7 +236,6 @@ TRAIN      | 250
 VALIDATION | 56
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -278,7 +278,6 @@ TRAIN      | 400
 VALIDATION | 100
 
 ### Features
-
 ```python
 FeaturesDict({
     'choice1': Text(shape=(), dtype=tf.string),
@@ -324,7 +323,6 @@ TEST       | 9,693
 VALIDATION | 4,848
 
 ### Features
-
 ```python
 FeaturesDict({
     'answer': Text(shape=(), dtype=tf.string),
@@ -369,7 +367,6 @@ TEST       | 10,000
 VALIDATION | 10,000
 
 ### Features
-
 ```python
 FeaturesDict({
     'answers': Sequence(Text(shape=(), dtype=tf.string)),
@@ -418,7 +415,6 @@ TRAIN      | 2,490
 VALIDATION | 277
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -457,7 +453,6 @@ TEST       | 1,400
 VALIDATION | 638
 
 ### Features
-
 ```python
 FeaturesDict({
     'end1': Tensor(shape=(), dtype=tf.int32),
@@ -525,7 +520,6 @@ TEST       | 146
 VALIDATION | 104
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -594,7 +588,6 @@ TEST       | 146
 VALIDATION | 104
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),

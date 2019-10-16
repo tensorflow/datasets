@@ -1,6 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="__version__"/>
 </div>
 
 # Module: tfds
@@ -76,3 +77,7 @@ available on the GCS bucket gs://tfds-data/datasets.
 
 [`show_examples(...)`](./tfds/show_examples.md): Visualize images (and labels)
 from an image classification dataset.
+
+## Other Members
+
+*   `__version__ = '1.2.0'` <a id="__version__"></a>

@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="ted_hrlr_translate" />
-  <meta itemprop="description" content="Data sets derived from TED talk transcripts for comparing similar language pairs&#10;where one is high resource and the other is low resource.&#10;" />
+  <meta itemprop="description" content="Data sets derived from TED talk transcripts for comparing similar language pairs&#10;where one is high resource and the other is low resource.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('ted_hrlr_translate')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/ted_hrlr_translate" />
   <meta itemprop="sameAs" content="https://github.com/neulab/word-embeddings-for-nmt" />
+  <meta itemprop="citation" content="@inproceedings{Ye2018WordEmbeddings,&#10;  author  = {Ye, Qi and Devendra, Sachan and Matthieu, Felix and Sarguna, Padmanabhan and Graham, Neubig},&#10;  title   = {When and Why are pre-trained word embeddings useful for Neural Machine Translation},&#10;  booktitle = {HLT-NAACL},&#10;  year    = {2018},&#10;  }&#10;" />
 </div>
 
 # `ted_hrlr_translate`
@@ -64,7 +66,6 @@ and has the following configurations predefined (defaults to the first one):
     en in plain text.
 
 ## `ted_hrlr_translate/az_to_en`
-
 Translation dataset from az to en in plain text.
 
 Versions:
@@ -82,7 +83,6 @@ TEST       | 903
 VALIDATION | 671
 
 ### Features
-
 ```python
 Translation({
     'az': Text(shape=(), dtype=tf.string),
@@ -95,11 +95,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'az', u'en')`
 
 ## `ted_hrlr_translate/aztr_to_en`
-
 Translation dataset from az_tr to en in plain text.
 
 Versions:
@@ -117,7 +115,6 @@ TEST       | 903
 VALIDATION | 671
 
 ### Features
-
 ```python
 Translation({
     'az_tr': Text(shape=(), dtype=tf.string),
@@ -130,11 +127,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'az_tr', u'en')`
 
 ## `ted_hrlr_translate/be_to_en`
-
 Translation dataset from be to en in plain text.
 
 Versions:
@@ -152,7 +147,6 @@ TEST       | 664
 VALIDATION | 248
 
 ### Features
-
 ```python
 Translation({
     'be': Text(shape=(), dtype=tf.string),
@@ -165,11 +159,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'be', u'en')`
 
 ## `ted_hrlr_translate/beru_to_en`
-
 Translation dataset from be_ru to en in plain text.
 
 Versions:
@@ -187,7 +179,6 @@ TEST       | 664
 VALIDATION | 248
 
 ### Features
-
 ```python
 Translation({
     'be_ru': Text(shape=(), dtype=tf.string),
@@ -200,11 +191,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'be_ru', u'en')`
 
 ## `ted_hrlr_translate/es_to_pt`
-
 Translation dataset from es to pt in plain text.
 
 Versions:
@@ -222,7 +211,6 @@ TEST       | 1,763
 VALIDATION | 1,016
 
 ### Features
-
 ```python
 Translation({
     'es': Text(shape=(), dtype=tf.string),
@@ -235,11 +223,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'es', u'pt')`
 
 ## `ted_hrlr_translate/fr_to_pt`
-
 Translation dataset from fr to pt in plain text.
 
 Versions:
@@ -257,7 +243,6 @@ TEST       | 1,494
 VALIDATION | 1,131
 
 ### Features
-
 ```python
 Translation({
     'fr': Text(shape=(), dtype=tf.string),
@@ -270,11 +255,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'fr', u'pt')`
 
 ## `ted_hrlr_translate/gl_to_en`
-
 Translation dataset from gl to en in plain text.
 
 Versions:
@@ -292,7 +275,6 @@ TEST       | 1,007
 VALIDATION | 682
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -305,11 +287,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'gl', u'en')`
 
 ## `ted_hrlr_translate/glpt_to_en`
-
 Translation dataset from gl_pt to en in plain text.
 
 Versions:
@@ -327,7 +307,6 @@ TEST       | 1,007
 VALIDATION | 682
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -340,11 +319,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'gl_pt', u'en')`
 
 ## `ted_hrlr_translate/he_to_pt`
-
 Translation dataset from he to pt in plain text.
 
 Versions:
@@ -362,7 +339,6 @@ TEST       | 1,623
 VALIDATION | 1,145
 
 ### Features
-
 ```python
 Translation({
     'he': Text(shape=(), dtype=tf.string),
@@ -375,11 +351,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'he', u'pt')`
 
 ## `ted_hrlr_translate/it_to_pt`
-
 Translation dataset from it to pt in plain text.
 
 Versions:
@@ -397,7 +371,6 @@ TEST       | 1,669
 VALIDATION | 1,162
 
 ### Features
-
 ```python
 Translation({
     'it': Text(shape=(), dtype=tf.string),
@@ -410,11 +383,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'it', u'pt')`
 
 ## `ted_hrlr_translate/pt_to_en`
-
 Translation dataset from pt to en in plain text.
 
 Versions:
@@ -432,7 +403,6 @@ TEST       | 1,803
 VALIDATION | 1,193
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -445,11 +415,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'pt', u'en')`
 
 ## `ted_hrlr_translate/ru_to_en`
-
 Translation dataset from ru to en in plain text.
 
 Versions:
@@ -467,7 +435,6 @@ TEST       | 5,476
 VALIDATION | 4,805
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -480,11 +447,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'ru', u'en')`
 
 ## `ted_hrlr_translate/ru_to_pt`
-
 Translation dataset from ru to pt in plain text.
 
 Versions:
@@ -502,7 +467,6 @@ TEST       | 1,588
 VALIDATION | 1,184
 
 ### Features
-
 ```python
 Translation({
     'pt': Text(shape=(), dtype=tf.string),
@@ -515,11 +479,9 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'ru', u'pt')`
 
 ## `ted_hrlr_translate/tr_to_en`
-
 Translation dataset from tr to en in plain text.
 
 Versions:
@@ -537,7 +499,6 @@ TEST       | 5,029
 VALIDATION | 4,045
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -550,7 +511,6 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'tr', u'en')`
 
 ## Citation

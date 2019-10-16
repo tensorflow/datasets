@@ -6,6 +6,7 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
 <meta itemprop="property" content="download_and_extract"/>
+<meta itemprop="property" content="download_checksums"/>
 <meta itemprop="property" content="download_kaggle_data"/>
 <meta itemprop="property" content="extract"/>
 <meta itemprop="property" content="iter_archive"/>
@@ -167,6 +168,17 @@ automatically be deduced from downloaded file name.
 #### Returns:
 
 extracted_path(s): `str`, extracted paths of given URL(s).
+
+<h3 id="download_checksums"><code>download_checksums</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
+```python
+download_checksums(checksums_url)
+```
+
+Downloads checksum file from the given URL and adds it to registry.
 
 <h3 id="download_kaggle_data"><code>download_kaggle_data</code></h3>
 

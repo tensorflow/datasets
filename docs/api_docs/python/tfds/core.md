@@ -20,6 +20,10 @@ API to define datasets.
 
 [`class BeamBasedBuilder`](../tfds/core/BeamBasedBuilder.md): Beam based Builder.
 
+[`class BeamMetadataDict`](../tfds/core/BeamMetadataDict.md): A
+<a href="../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a> object
+supporting Beam-generated datasets.
+
 [`class BuilderConfig`](../tfds/core/BuilderConfig.md): Base class for `DatasetBuilder` data configuration.
 
 [`class DatasetBuilder`](../tfds/core/DatasetBuilder.md): Abstract base class for all datasets.

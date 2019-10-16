@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="glue" />
-  <meta itemprop="description" content="The Corpus of Linguistic Acceptability consists of English&#10;            acceptability judgments drawn from books and journal articles on&#10;            linguistic theory. Each example is a sequence of words annotated&#10;            with whether it is a grammatical English sentence." />
+  <meta itemprop="description" content="The Corpus of Linguistic Acceptability consists of English&#10;            acceptability judgments drawn from books and journal articles on&#10;            linguistic theory. Each example is a sequence of words annotated&#10;            with whether it is a grammatical English sentence.&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('glue')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/glue" />
   <meta itemprop="sameAs" content="https://nyu-mll.github.io/CoLA/" />
+  <meta itemprop="citation" content="@article{warstadt2018neural,&#10;              title={Neural Network Acceptability Judgments},&#10;              author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},&#10;              journal={arXiv preprint arXiv:1805.12471},&#10;              year={2018}&#10;            }&#10;@inproceedings{wang2019glue,&#10;  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},&#10;  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},&#10;  note={In the Proceedings of ICLR.},&#10;  year={2019}&#10;}&#10;&#10;Note that each GLUE dataset has its own citation. Please see the source to see&#10;the correct citation for each contained dataset." />
 </div>
 
 # `glue`
@@ -127,7 +129,6 @@ TEST       | 1,063
 VALIDATION | 1,043
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -163,7 +164,6 @@ TEST       | 1,821
 VALIDATION | 872
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -198,7 +198,6 @@ TEST       | 1,725
 VALIDATION | 408
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -234,7 +233,6 @@ TRAIN      | 363,849
 VALIDATION | 40,430
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -271,7 +269,6 @@ VALIDATION | 1,500
 TEST       | 1,379
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -316,7 +313,6 @@ VALIDATION_MATCHED    | 9,815
 TEST_MATCHED          | 9,796
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -350,7 +346,6 @@ TEST       | 9,847
 VALIDATION | 9,832
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -384,7 +379,6 @@ VALIDATION | 9,815
 TEST       | 9,796
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),
@@ -428,7 +422,6 @@ TEST       | 5,463
 VALIDATION | 5,463
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -468,7 +461,6 @@ TRAIN      | 2,490
 VALIDATION | 277
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),
@@ -520,7 +512,6 @@ TEST       | 146
 VALIDATION | 71
 
 ### Features
-
 ```python
 FeaturesDict({
     'idx': Tensor(shape=(), dtype=tf.int32),

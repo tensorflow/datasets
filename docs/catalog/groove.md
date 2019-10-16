@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="groove" />
-  <meta itemprop="description" content="The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and&#10;(synthesized) audio of human-performed, tempo-aligned expressive drumming&#10;captured on a Roland TD-11 V-Drum electronic drum kit.&#10;" />
+  <meta itemprop="description" content="The Groove MIDI Dataset (GMD) is composed of 13.6 hours of aligned MIDI and&#10;(synthesized) audio of human-performed, tempo-aligned expressive drumming&#10;captured on a Roland TD-11 V-Drum electronic drum kit.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('groove')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/groove" />
   <meta itemprop="sameAs" content="https://g.co/magenta/groove-dataset" />
+  <meta itemprop="citation" content="&#10;@inproceedings{groove2019,&#10;    Author = {Jon Gillick and Adam Roberts and Jesse Engel and Douglas Eck and David Bamman},&#10;    Title = {Learning to Groove with Inverse Sequence Transformations},&#10;    Booktitle    = {International Conference on Machine Learning (ICML)}&#10;    Year = {2019},&#10;}&#10;" />
 </div>
 
 # `groove`
@@ -38,7 +40,6 @@ following configurations predefined (defaults to the first one):
     split into 4-bar chunks.
 
 ## `groove/full-midionly`
-
 Groove dataset without audio, unsplit.
 
 Versions:
@@ -56,7 +57,6 @@ TEST       | 129
 VALIDATION | 124
 
 ### Features
-
 ```python
 FeaturesDict({
     'bpm': Tensor(shape=(), dtype=tf.int32),
@@ -77,7 +77,6 @@ FeaturesDict({
 *   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 ## `groove/full-16000hz`
-
 Groove dataset with audio, unsplit.
 
 Versions:
@@ -95,7 +94,6 @@ TEST       | 124
 VALIDATION | 120
 
 ### Features
-
 ```python
 FeaturesDict({
     'audio': Tensor(shape=[None], dtype=tf.float32),
@@ -117,7 +115,6 @@ FeaturesDict({
 *   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 ## `groove/2bar-midionly`
-
 Groove dataset without audio, split into 2-bar chunks.
 
 Versions:
@@ -135,7 +132,6 @@ VALIDATION | 2,252
 TEST       | 2,204
 
 ### Features
-
 ```python
 FeaturesDict({
     'bpm': Tensor(shape=(), dtype=tf.int32),
@@ -156,7 +152,6 @@ FeaturesDict({
 *   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 ## `groove/2bar-16000hz`
-
 Groove dataset with audio, split into 2-bar chunks.
 
 Versions:
@@ -174,7 +169,6 @@ VALIDATION | 2,034
 TEST       | 1,873
 
 ### Features
-
 ```python
 FeaturesDict({
     'audio': Tensor(shape=[None], dtype=tf.float32),
@@ -196,7 +190,6 @@ FeaturesDict({
 *   [https://g.co/magenta/groove-dataset](https://g.co/magenta/groove-dataset)
 
 ## `groove/4bar-midionly`
-
 Groove dataset without audio, split into 4-bar chunks.
 
 Versions:
@@ -214,7 +207,6 @@ VALIDATION | 2,121
 TEST       | 2,033
 
 ### Features
-
 ```python
 FeaturesDict({
     'bpm': Tensor(shape=(), dtype=tf.int32),

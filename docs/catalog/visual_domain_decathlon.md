@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="visual_domain_decathlon" />
-  <meta itemprop="description" content="This contains the 10 datasets used in the Visual Domain Decathlon, part of&#10;the PASCAL in Detail Workshop Challenge (CVPR 2017).&#10;The goal of this challenge is to solve simultaneously ten image classification&#10;problems representative of very different visual domains.&#10;&#10;Some of the datasets included here are also available as separate datasets in&#10;TFDS. However, notice that images were preprocessed for the Visual Domain&#10;Decathlon (resized isotropically to have a shorter size of 72 pixels) and&#10;might have different train/validation/test splits. Here we use the official&#10;splits for the competition.&#10;" />
+  <meta itemprop="description" content="This contains the 10 datasets used in the Visual Domain Decathlon, part of&#10;the PASCAL in Detail Workshop Challenge (CVPR 2017).&#10;The goal of this challenge is to solve simultaneously ten image classification&#10;problems representative of very different visual domains.&#10;&#10;Some of the datasets included here are also available as separate datasets in&#10;TFDS. However, notice that images were preprocessed for the Visual Domain&#10;Decathlon (resized isotropically to have a shorter size of 72 pixels) and&#10;might have different train/validation/test splits. Here we use the official&#10;splits for the competition.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('visual_domain_decathlon')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/visual_domain_decathlon" />
   <meta itemprop="sameAs" content="https://www.robots.ox.ac.uk/~vgg/decathlon/" />
+  <meta itemprop="citation" content="@ONLINE{hakanbilensylvestrerebuffitomasjakab2017,&#10;    author = &quot;Hakan Bilen, Sylvestre Rebuffi, Tomas Jakab&quot;,&#10;    title  = &quot;Visual Domain Decathlon&quot;,&#10;    year   = &quot;2017&quot;,&#10;    url    = &quot;https://www.robots.ox.ac.uk/~vgg/decathlon/&quot;&#10;}&#10;" />
 </div>
 
 # `visual_domain_decathlon`
@@ -82,7 +84,6 @@ TEST       | 3,333
 VALIDATION | 3,333
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -96,7 +97,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/cifar100`
@@ -118,7 +118,6 @@ TEST       | 10,000
 VALIDATION | 10,000
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -132,7 +131,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/daimlerpedcls`
@@ -154,7 +152,6 @@ TEST       | 19,600
 VALIDATION | 5,880
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -168,7 +165,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/dtd`
@@ -190,7 +186,6 @@ TRAIN      | 1,880
 VALIDATION | 1,880
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -204,7 +199,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/gtsrb`
@@ -226,7 +220,6 @@ TEST       | 12,630
 VALIDATION | 7,842
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -240,7 +233,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/imagenet12`
@@ -262,7 +254,6 @@ VALIDATION | 49,000
 TEST       | 48,238
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -276,7 +267,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/omniglot`
@@ -298,7 +288,6 @@ TEST       | 8,115
 VALIDATION | 6,492
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -312,7 +301,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/svhn`
@@ -334,7 +322,6 @@ VALIDATION | 26,040
 TEST       | 26,032
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -348,7 +335,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/ucf101`
@@ -370,7 +356,6 @@ TEST       | 3,783
 VALIDATION | 1,952
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -384,7 +369,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `visual_domain_decathlon/vgg-flowers`
@@ -406,7 +390,6 @@ TRAIN      | 1,020
 VALIDATION | 1,020
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -420,7 +403,6 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation

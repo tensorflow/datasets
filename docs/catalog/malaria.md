@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="malaria" />
-  <meta itemprop="description" content="The Malaria dataset contains a total of 27,558 cell images&#10;with equal instances of parasitized and uninfected cells from the thin blood &#10;smear slide images of segmented cells." />
+  <meta itemprop="description" content="The Malaria dataset contains a total of 27,558 cell images&#10;with equal instances of parasitized and uninfected cells from the thin blood &#10;smear slide images of segmented cells.&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('malaria')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/malaria" />
   <meta itemprop="sameAs" content="https://ceb.nlm.nih.gov/proj/malaria/cell_images.zip" />
+  <meta itemprop="citation" content="@article{rajaraman2018pre,&#10;  title={Pre-trained convolutional neural networks as feature extractors toward &#10;  improved malaria parasite detection in thin blood smear images},&#10;  author={Rajaraman, Sivaramakrishnan and Antani, Sameer K and Poostchi, Mahdieh&#10;  and Silamut, Kamolrat and Hossain, Md A and Maude, Richard J and Jaeger, &#10;  Stefan and Thoma, George R},&#10;  journal={PeerJ},&#10;  volume={6},&#10;  pages={e4568},&#10;  year={2018},&#10;  publisher={PeerJ Inc.}&#10;}&#10;" />
 </div>
 
 # `malaria`
@@ -18,6 +20,7 @@ segmented cells.
     [https://ceb.nlm.nih.gov/proj/malaria/cell_images.zip](https://ceb.nlm.nih.gov/proj/malaria/cell_images.zip)
 *   `DatasetBuilder`:
     [`tfds.image.malaria.Malaria`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/malaria.py)
+*   Version: `v1.0.0`
 *   Versions:
 
     *   **`1.0.0`** (default):

@@ -30,27 +30,59 @@ Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 
 <!-- Placeholder for "Used in" -->
 
-Video: The image connector accepts as input a 4 dimensional uint8 array
-representing a video, a sequence of paths to encoded frames, or a path or a
-file object that can be decoded with ffmpeg. Note that not all formats in
-ffmpeg support reading from pipes, so providing a file object might fail.
-Furthermore, if a path is given that is not on the local file system, we first
-copy it to a temporary local file before passing it to ffmpeg.
+Video: The image connector accepts as input a 4 dimensional `tf.uint8` array
+representing a video, a sequence of paths to encoded frames, or a path or a file
+object that can be decoded with ffmpeg. Note that not all formats in ffmpeg
+support reading from pipes, so providing a file object might fail. Furthermore,
+if a path is given that is not on the local file system, we first copy it to a
+temporary local file before passing it to ffmpeg.
 
 #### Output:
 
-*   <b>`video`</b>: tf.Tensor of type tf.uint8 and shape [num_frames, height,
+*   <b>`video`</b>: tf.Tensor of type `tf.uint8` and shape [num_frames, height,
     width, channels], where channels must be 1 or 3
 
 #### Example:
 
-*   In the DatasetInfo object: features=features.FeatureDict({ 'video':
-    features.Video(shape=(None, 64, 64, 3)), })
+*   In the DatasetInfo object:
 
-*   During generation: `yield { 'input': np.ones(shape=(128, 64, 64, 3),
-    dtype=np.uint8), }` or `yield { ' video': ['path/to/frame001.png',
-    'path/to/frame002.png'], }` or `yield { 'input': '/path/to/video.avi', }` or
-    `yield { 'input': gfile.GFile('/complex/path/video.avi'), }`
+```
+features=features.FeatureDict({
+    'video': features.Video(shape=(None, 64, 64, 3)),
+})
+```
+
+*   During generation, you can use any of:
+
+```
+yield {
+    'video': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
+}
+```
+
+or list of frames:
+
+```
+yield {
+    'video': ['path/to/frame001.png', 'path/to/frame002.png'],
+}
+```
+
+or path to video:
+
+```
+yield {
+    'video': '/path/to/video.avi',
+}
+```
+
+or file object:
+
+```
+yield {
+    'video': tf.io.gfile.GFile('/complex/path/video.avi'),
+}
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 

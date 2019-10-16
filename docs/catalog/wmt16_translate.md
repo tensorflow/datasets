@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="wmt16_translate" />
-  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.&#10;&#10;Versions exists for the different years using a combination of multiple data&#10;sources. The base `wmt_translate` allows you to create your own config to choose&#10;your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.&#10;&#10;```&#10;config = tfds.translate.wmt.WmtConfig(&#10;    version=&quot;0.0.1&quot;,&#10;    language_pair=(&quot;fr&quot;, &quot;de&quot;),&#10;    subsets={&#10;        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],&#10;        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],&#10;    },&#10;)&#10;builder = tfds.builder(&quot;wmt_translate&quot;, config=config)&#10;```&#10;&#10;" />
+  <meta itemprop="description" content="Translate dataset based on the data from statmt.org.&#10;&#10;Versions exists for the different years using a combination of multiple data&#10;sources. The base `wmt_translate` allows you to create your own config to choose&#10;your own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.&#10;&#10;```&#10;config = tfds.translate.wmt.WmtConfig(&#10;    version=&quot;0.0.1&quot;,&#10;    language_pair=(&quot;fr&quot;, &quot;de&quot;),&#10;    subsets={&#10;        tfds.Split.TRAIN: [&quot;commoncrawl_frde&quot;],&#10;        tfds.Split.VALIDATION: [&quot;euelections_dev2019&quot;],&#10;    },&#10;)&#10;builder = tfds.builder(&quot;wmt_translate&quot;, config=config)&#10;```&#10;&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('wmt16_translate')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wmt16_translate" />
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt16/translation-task.html" />
+  <meta itemprop="citation" content="&#10;@InProceedings{bojar-EtAl:2016:WMT1,&#10;  author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Graham, Yvette  and  Haddow, Barry  and  Huck, Matthias  and  Jimeno Yepes, Antonio  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Neveol, Aurelie  and  Neves, Mariana  and  Popel, Martin  and  Post, Matt  and  Rubino, Raphael  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco  and  Verspoor, Karin  and  Zampieri, Marcos},&#10;  title     = {Findings of the 2016 Conference on Machine Translation},&#10;  booktitle = {Proceedings of the First Conference on Machine Translation},&#10;  month     = {August},&#10;  year      = {2016},&#10;  address   = {Berlin, Germany},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {131--198},&#10;  url       = {http://www.aclweb.org/anthology/W/W16/W16-2301}&#10;}&#10;" />
 </div>
 
 # `wmt16_translate`
@@ -55,7 +57,6 @@ following configurations predefined (defaults to the first one):
     dataset.
 
 ## `wmt16_translate/cs-en`
-
 WMT 2016 cs-en translation task dataset.
 
 Versions:
@@ -72,7 +73,6 @@ TEST       | 2,999
 VALIDATION | 2,656
 
 ### Features
-
 ```python
 Translation({
     'cs': Text(shape=(), dtype=tf.string),
@@ -85,11 +85,9 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'cs', u'en')`
 
 ## `wmt16_translate/de-en`
-
 WMT 2016 de-en translation task dataset.
 
 Versions:
@@ -106,7 +104,6 @@ TEST       | 2,999
 VALIDATION | 2,169
 
 ### Features
-
 ```python
 Translation({
     'de': Text(shape=(), dtype=tf.string),
@@ -119,11 +116,9 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'de', u'en')`
 
 ## `wmt16_translate/fi-en`
-
 WMT 2016 fi-en translation task dataset.
 
 Versions:
@@ -140,7 +135,6 @@ TEST       | 6,000
 VALIDATION | 1,370
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -153,11 +147,9 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'fi', u'en')`
 
 ## `wmt16_translate/ro-en`
-
 WMT 2016 ro-en translation task dataset.
 
 Versions:
@@ -174,7 +166,6 @@ TEST       | 1,999
 VALIDATION | 1,999
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -187,11 +178,9 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'ro', u'en')`
 
 ## `wmt16_translate/ru-en`
-
 WMT 2016 ru-en translation task dataset.
 
 Versions:
@@ -208,7 +197,6 @@ TEST       | 2,998
 VALIDATION | 2,818
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -221,11 +209,9 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'ru', u'en')`
 
 ## `wmt16_translate/tr-en`
-
 WMT 2016 tr-en translation task dataset.
 
 Versions:
@@ -242,7 +228,6 @@ TEST       | 3,000
 VALIDATION | 1,001
 
 ### Features
-
 ```python
 Translation({
     'en': Text(shape=(), dtype=tf.string),
@@ -255,7 +240,6 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'tr', u'en')`
 
 ## Citation

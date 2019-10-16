@@ -38,16 +38,27 @@ inside a `tfds.feature.Sequence`.
 
 #### Output:
 
-*   <b>`bbox`</b>: tf.Tensor of type tf.float32 and shape [4,] which contains
-    the normalized coordinates of the bounding box [ymin, xmin, ymax, xmax]
+*   <b>`bbox`</b>: tf.Tensor of type `tf.float32` and shape `[4,]` which
+    contains the normalized coordinates of the bounding box `[ymin, xmin, ymax,
+    xmax]`
 
 #### Example:
 
-*   In the DatasetInfo object: features=features.FeatureDict({ 'bbox':
-    features.BBox(shape=(None, 64, 64, 3)), })
+*   In the DatasetInfo object:
 
-*   During generation: yield { 'input': tfds.feature.BBox(ymin=0.3, xmin=0.8,
-    ymax=0.5, xmax=1.0), }
+```
+features=features.FeatureDict({
+    'bbox': features.BBox(shape=(None, 64, 64, 3)),
+})
+```
+
+*   During generation:
+
+```
+yield {
+    'input': tfds.feature.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
+}
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 

@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="diabetic_retinopathy_detection" />
-  <meta itemprop="description" content="A large set of high-resolution retina images taken under a variety of imaging conditions." />
+  <meta itemprop="description" content="A large set of high-resolution retina images taken under a variety of imaging conditions.&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('diabetic_retinopathy_detection')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/diabetic_retinopathy_detection" />
   <meta itemprop="sameAs" content="https://www.kaggle.com/c/diabetic-retinopathy-detection/data" />
+  <meta itemprop="citation" content="@ONLINE {kaggle-diabetic-retinopathy,&#10;    author = &quot;Kaggle and EyePacs&quot;,&#10;    title  = &quot;Kaggle Diabetic Retinopathy Detection&quot;,&#10;    month  = &quot;jul&quot;,&#10;    year   = &quot;2015&quot;,&#10;    url    = &quot;https://www.kaggle.com/c/diabetic-retinopathy-detection/data&quot;&#10;}&#10;" />
 </div>
 
 # `diabetic_retinopathy_detection`
@@ -37,7 +39,6 @@ and has the following configurations predefined (defaults to the first one):
     the radius, and finally they are encoded with 72 JPEG quality.
 
 ## `diabetic_retinopathy_detection/original`
-
 Images at their original resolution and quality.
 
 Versions:
@@ -56,7 +57,6 @@ VALIDATION | 10,906
 SAMPLE     | 10
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -70,7 +70,6 @@ FeaturesDict({
 *   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
 ## `diabetic_retinopathy_detection/1M`
-
 Images have roughly 1,000,000 pixels, at 72 quality.
 
 Versions:
@@ -89,7 +88,6 @@ VALIDATION | 10,906
 SAMPLE     | 10
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -103,7 +101,6 @@ FeaturesDict({
 *   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
 ## `diabetic_retinopathy_detection/250K`
-
 Images have roughly 250,000 pixels, at 72 quality.
 
 Versions:
@@ -122,7 +119,6 @@ VALIDATION | 10,906
 SAMPLE     | 10
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -148,11 +144,9 @@ Versions:
 *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),

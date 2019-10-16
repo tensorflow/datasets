@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="cycle_gan" />
-  <meta itemprop="description" content="A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)" />
+  <meta itemprop="description" content="A dataset consisting of images from two classes A and B (For example: horses/zebras, apple/orange,...)&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('cycle_gan')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cycle_gan" />
   <meta itemprop="sameAs" content="https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/" />
+  <meta itemprop="citation" content="@article{DBLP:journals/corr/ZhuPIE17,&#10;  author    = {Jun{-}Yan Zhu and&#10;               Taesung Park and&#10;               Phillip Isola and&#10;               Alexei A. Efros},&#10;  title     = {Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial&#10;               Networks},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1703.10593},&#10;  year      = {2017},&#10;  url       = {http://arxiv.org/abs/1703.10593},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1703.10593},&#10;  timestamp = {Mon, 13 Aug 2018 16:48:06 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuPIE17},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;" />
 </div>
 
 # `cycle_gan`
@@ -83,7 +85,6 @@ TESTA  | 266
 TESTB  | 248
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -96,7 +97,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/summer2winter_yosemite`
@@ -120,7 +120,6 @@ TESTA  | 309
 TESTB  | 238
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -133,7 +132,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/horse2zebra`
@@ -157,7 +155,6 @@ TESTB  | 140
 TESTA  | 120
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -170,7 +167,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/monet2photo`
@@ -194,7 +190,6 @@ TESTB  | 751
 TESTA  | 121
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -207,7 +202,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/cezanne2photo`
@@ -231,7 +225,6 @@ TRAINA | 525
 TESTA  | 58
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -244,7 +237,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/ukiyoe2photo`
@@ -268,7 +260,6 @@ TRAINA | 562
 TESTA  | 263
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -281,7 +272,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/vangogh2photo`
@@ -305,7 +295,6 @@ TESTA  | 400
 TRAINA | 400
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -318,7 +307,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/maps`
@@ -342,7 +330,6 @@ TRAINA | 1,096
 TRAINB | 1,096
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -355,7 +342,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/cityscapes`
@@ -379,7 +365,6 @@ TESTA  | 500
 TESTB  | 500
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -392,7 +377,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/facades`
@@ -416,7 +400,6 @@ TESTA  | 106
 TESTB  | 106
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -429,7 +412,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `cycle_gan/iphone2dslr_flower`
@@ -453,7 +435,6 @@ TESTA  | 569
 TESTB  | 480
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -466,7 +447,6 @@ FeaturesDict({
 *   [https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/](https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation

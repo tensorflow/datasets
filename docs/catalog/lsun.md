@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="lsun" />
-  <meta itemprop="description" content="Large scale images showing different objects from given categories like bedroom, tower etc." />
+  <meta itemprop="description" content="Large scale images showing different objects from given categories like bedroom, tower etc.&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('lsun')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/lsun" />
   <meta itemprop="sameAs" content="https://www.yf.io/p/lsun" />
+  <meta itemprop="citation" content="@article{journals/corr/YuZSSX15,&#10;  added-at = {2018-08-13T00:00:00.000+0200},&#10;  author = {Yu, Fisher and Zhang, Yinda and Song, Shuran and Seff, Ari and Xiao, Jianxiong},&#10;  biburl = {https://www.bibsonomy.org/bibtex/2446d4ffb99a5d7d2ab6e5417a12e195f/dblp},&#10;  ee = {http://arxiv.org/abs/1506.03365},&#10;  interhash = {3e9306c4ce2ead125f3b2ab0e25adc85},&#10;  intrahash = {446d4ffb99a5d7d2ab6e5417a12e195f},&#10;  journal = {CoRR},&#10;  keywords = {dblp},&#10;  timestamp = {2018-08-14T15:08:59.000+0200},&#10;  title = {LSUN: Construction of a Large-scale Image Dataset using Deep Learning with Humans in the Loop.},&#10;  url = {http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YuZSSX15},&#10;  volume = {abs/1506.03365},&#10;  year = 2015&#10;}&#10;" />
 </div>
 
 # `lsun`
@@ -43,7 +45,6 @@ following configurations predefined (defaults to the first one):
 *   `tower` (`v0.1.1`) (`Size: 11.19 GiB`): Images of category tower
 
 ## `lsun/classroom`
-
 Images of category classroom
 
 Versions:
@@ -60,7 +61,6 @@ TRAIN      | 168,103
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -72,7 +72,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/bedroom`
-
 Images of category bedroom
 
 Versions:
@@ -89,7 +88,6 @@ TRAIN      | 3,033,042
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -101,7 +99,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/bridge`
-
 Images of category bridge
 
 Versions:
@@ -118,7 +115,6 @@ TRAIN      | 818,687
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -130,7 +126,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/church_outdoor`
-
 Images of category church_outdoor
 
 Versions:
@@ -147,7 +142,6 @@ TRAIN      | 126,227
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -159,7 +153,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/conference_room`
-
 Images of category conference_room
 
 Versions:
@@ -176,7 +169,6 @@ TRAIN      | 229,069
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -188,7 +180,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/dining_room`
-
 Images of category dining_room
 
 Versions:
@@ -205,7 +196,6 @@ TRAIN      | 657,571
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -217,7 +207,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/kitchen`
-
 Images of category kitchen
 
 Versions:
@@ -234,7 +223,6 @@ TRAIN      | 2,212,277
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -246,7 +234,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/living_room`
-
 Images of category living_room
 
 Versions:
@@ -263,7 +250,6 @@ TRAIN      | 1,315,802
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -275,7 +261,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/restaurant`
-
 Images of category restaurant
 
 Versions:
@@ -292,7 +277,6 @@ TRAIN      | 626,331
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
@@ -304,7 +288,6 @@ FeaturesDict({
 *   [https://www.yf.io/p/lsun](https://www.yf.io/p/lsun)
 
 ## `lsun/tower`
-
 Images of category tower
 
 Versions:
@@ -321,7 +304,6 @@ TRAIN      | 708,264
 VALIDATION | 300
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),

@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="emnist" />
-  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.&#10;&#10;Note: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format." />
+  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.&#10;&#10;Note: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format.&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('emnist')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/emnist" />
   <meta itemprop="sameAs" content="https://www.nist.gov/node/1298471/emnist-dataset" />
+  <meta itemprop="citation" content="@article{cohen_afshar_tapson_schaik_2017,&#10;    title={EMNIST: Extending MNIST to handwritten letters},&#10;    DOI={10.1109/ijcnn.2017.7966217},&#10;    journal={2017 International Joint Conference on Neural Networks (IJCNN)},&#10;    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van},&#10;    year={2017}&#10;}&#10;" />
 </div>
 
 # `emnist`
@@ -39,7 +41,6 @@ following configurations predefined (defaults to the first one):
 *   `mnist` (`v1.0.1`) (`Size: 535.73 MiB`): EMNIST MNIST
 
 ## `emnist/byclass`
-
 EMNIST ByClass
 
 Versions:
@@ -56,7 +57,6 @@ TRAIN | 697,932
 TEST  | 116,323
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -69,11 +69,9 @@ FeaturesDict({
 *   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `emnist/bymerge`
-
 EMNIST ByMerge
 
 Versions:
@@ -90,7 +88,6 @@ TRAIN | 697,932
 TEST  | 116,323
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -103,11 +100,9 @@ FeaturesDict({
 *   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `emnist/balanced`
-
 EMNIST Balanced
 
 Versions:
@@ -124,7 +119,6 @@ TRAIN | 112,800
 TEST  | 18,800
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -137,11 +131,9 @@ FeaturesDict({
 *   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `emnist/letters`
-
 EMNIST Letters
 
 Versions:
@@ -158,7 +150,6 @@ TRAIN | 88,800
 TEST  | 14,800
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -171,11 +162,9 @@ FeaturesDict({
 *   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `emnist/digits`
-
 EMNIST Digits
 
 Versions:
@@ -192,7 +181,6 @@ TRAIN | 240,000
 TEST  | 40,000
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -205,11 +193,9 @@ FeaturesDict({
 *   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## `emnist/mnist`
-
 EMNIST MNIST
 
 Versions:
@@ -226,7 +212,6 @@ TRAIN | 60,000
 TEST  | 10,000
 
 ### Features
-
 ```python
 FeaturesDict({
     'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
@@ -239,7 +224,6 @@ FeaturesDict({
 *   [https://www.nist.gov/node/1298471/emnist-dataset](https://www.nist.gov/node/1298471/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation

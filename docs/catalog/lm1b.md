@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="lm1b" />
-  <meta itemprop="description" content="A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data.&#10;" />
+  <meta itemprop="description" content="A benchmark corpus to be used for measuring progress in statistical language modeling. This has almost one billion words in the training data.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('lm1b')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/lm1b" />
   <meta itemprop="sameAs" content="http://www.statmt.org/lm-benchmark/" />
+  <meta itemprop="citation" content="@article{DBLP:journals/corr/ChelbaMSGBK13,&#10;  author    = {Ciprian Chelba and&#10;               Tomas Mikolov and&#10;               Mike Schuster and&#10;               Qi Ge and&#10;               Thorsten Brants and&#10;               Phillipp Koehn},&#10;  title     = {One Billion Word Benchmark for Measuring Progress in Statistical Language&#10;               Modeling},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1312.3005},&#10;  year      = {2013},&#10;  url       = {http://arxiv.org/abs/1312.3005},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1312.3005},&#10;  timestamp = {Mon, 13 Aug 2018 16:46:16 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/ChelbaMSGBK13},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;" />
 </div>
 
 # `lm1b`
@@ -33,7 +35,6 @@ configurations predefined (defaults to the first one):
     `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 ## `lm1b/plain_text`
-
 Plain text
 
 Versions:
@@ -50,7 +51,6 @@ TRAIN | 30,301,028
 TEST  | 306,688
 
 ### Features
-
 ```python
 FeaturesDict({
     'text': Text(shape=(), dtype=tf.string),
@@ -62,11 +62,9 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'text', u'text')`
 
 ## `lm1b/bytes`
-
 Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
 
 Versions:
@@ -83,7 +81,6 @@ TRAIN | 30,301,028
 TEST  | 306,688
 
 ### Features
-
 ```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
@@ -95,11 +92,9 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'text', u'text')`
 
 ## `lm1b/subwords8k`
-
 Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
 
 Versions:
@@ -116,7 +111,6 @@ TRAIN | 30,301,028
 TEST  | 306,688
 
 ### Features
-
 ```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8189>),
@@ -128,11 +122,9 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'text', u'text')`
 
 ## `lm1b/subwords32k`
-
 Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 Versions:
@@ -149,7 +141,6 @@ TRAIN | 30,301,028
 TEST  | 306,688
 
 ### Features
-
 ```python
 FeaturesDict({
     'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32711>),
@@ -161,7 +152,6 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'text', u'text')`
 
 ## Citation

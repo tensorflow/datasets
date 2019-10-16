@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="binarized_mnist" />
-  <meta itemprop="description" content="A specific binarization of the MNIST images originally used in&#10;(Salakhutdinov &amp; Murray, 2008). This dataset is frequently used to evaluate&#10;generative models of images, so labels are not provided.&#10;" />
+  <meta itemprop="description" content="A specific binarization of the MNIST images originally used in&#10;(Salakhutdinov &amp; Murray, 2008). This dataset is frequently used to evaluate&#10;generative models of images, so labels are not provided.&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('binarized_mnist')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/binarized_mnist" />
   <meta itemprop="sameAs" content="http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/" />
+  <meta itemprop="citation" content="@inproceedings{salakhutdinov2008quantitative,&#10;title={On the quantitative analysis of deep belief networks},&#10;author={Salakhutdinov, Ruslan and Murray, Iain},&#10;booktitle={Proceedings of the 25th international conference on Machine learning},&#10;pages={872--879},&#10;year={2008},&#10;organization={ACM}&#10;}&#10;" />
 </div>
 
 # `binarized_mnist`
@@ -18,6 +20,7 @@ images, so labels are not provided.
     [http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/](http://www.cs.toronto.edu/~larocheh/public/datasets/binarized_mnist/)
 *   `DatasetBuilder`:
     [`tfds.image.binarized_mnist.BinarizedMNIST`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/binarized_mnist.py)
+*   Version: `v1.0.0`
 *   Versions:
 
     *   **`1.0.0`** (default):

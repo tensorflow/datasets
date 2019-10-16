@@ -38,6 +38,9 @@ with mock_data(num_examples=5):
     ex
 ```
 
+The examples will be deterministically generated. Train and test split will
+yield the same examples.
+
 If you want more fine grain control over the generated examples, you can
 manually overwrite the `DatasetBuilder._as_dataset` method. Usage (manual):
 

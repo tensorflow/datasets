@@ -2032,10 +2032,11 @@ creating temporary files for test purposes, as well as makes it easier
 to setup files, their data, read them back, and inspect them when
 a test fails.
 
-NOTE: This will zero-out the file. This ensures there is no pre-existing
-state.
+NOTE: This will zero-out the file. This ensures there is no pre-existing state.
+NOTE: If the file already exists, it will be made writable and overwritten.
 
-See also: `create_tempdir()` for creating temporary directories.
+See also: `create_tempdir()` for creating temporary directories, and
+`_TempDir.create_file` for creating files within a temporary directory.
 
 #### Args:
 

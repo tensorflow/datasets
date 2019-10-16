@@ -26,6 +26,8 @@ toc:
     title: caltech_birds2011
   - path: /datasets/catalog/cars196
     title: cars196
+  - path: /datasets/catalog/cassava
+    title: cassava
   - path: /datasets/catalog/cats_vs_dogs
     title: cats_vs_dogs
   - path: /datasets/catalog/celeb_a
@@ -82,6 +84,8 @@ toc:
     title: imagenet2012
   - path: /datasets/catalog/imagenet2012_corrupted
     title: imagenet2012_corrupted
+  - path: /datasets/catalog/imagenet_resized
+    title: imagenet_resized
   - path: /datasets/catalog/kitti
     title: kitti
   - path: /datasets/catalog/kmnist
@@ -158,8 +162,30 @@ toc:
     title: titanic
   title: Structured
 - section:
+  - path: /datasets/catalog/aeslc
+    title: aeslc
+  - path: /datasets/catalog/big_patent
+    title: big_patent
+  - path: /datasets/catalog/billsum
+    title: billsum
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
+  - path: /datasets/catalog/gigaword
+    title: gigaword
+  - path: /datasets/catalog/multi_news
+    title: multi_news
+  - path: /datasets/catalog/newsroom
+    title: newsroom
+  - path: /datasets/catalog/reddit_tifu
+    title: reddit_tifu
+  - path: /datasets/catalog/scientific_papers
+    title: scientific_papers
+  - path: /datasets/catalog/wikihow
+    title: wikihow
+  - path: /datasets/catalog/xsum
+    title: xsum
+  title: Summarization
+- section:
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/gap

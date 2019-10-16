@@ -2,10 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="snli" />
-  <meta itemprop="description" content="The SNLI corpus (version 1.0) is a collection of 570k human-written English&#10;sentence pairs manually labeled for balanced classification with the labels&#10;entailment, contradiction, and neutral, supporting the task of natural language&#10;inference (NLI), also known as recognizing textual entailment (RTE).&#10;" />
+  <meta itemprop="description" content="The SNLI corpus (version 1.0) is a collection of 570k human-written English&#10;sentence pairs manually labeled for balanced classification with the labels&#10;entailment, contradiction, and neutral, supporting the task of natural language&#10;inference (NLI), also known as recognizing textual entailment (RTE).&#10;&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('snli')&#10;```&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/snli" />
   <meta itemprop="sameAs" content="https://nlp.stanford.edu/projects/snli/" />
+  <meta itemprop="citation" content="@inproceedings{snli:emnlp2015,&#10;    Author = {Bowman, Samuel R. and Angeli, Gabor and Potts, Christopher, and Manning, Christopher D.},&#10;    Booktitle = {Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing (EMNLP)},&#10;  Publisher = {Association for Computational Linguistics},&#10;   Title = {A large annotated corpus for learning natural language inference},&#10;    Year = {2015}&#10;}&#10;" />
 </div>
 
 # `snli`
@@ -26,7 +28,6 @@ following configurations predefined (defaults to the first one):
 *   `plain_text` (`v0.0.1`) (`Size: 90.17 MiB`): Plain text import of SNLI
 
 ## `snli/plain_text`
-
 Plain text import of SNLI
 
 Versions:
@@ -44,7 +45,6 @@ TEST       | 10,000
 VALIDATION | 10,000
 
 ### Features
-
 ```python
 FeaturesDict({
     'hypothesis': Text(shape=(), dtype=tf.string),

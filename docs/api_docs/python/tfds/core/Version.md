@@ -35,6 +35,7 @@ source</a>
 ```python
 __init__(
     version_str,
+    description=None,
     experiments=None
 )
 ```
