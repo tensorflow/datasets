@@ -30,8 +30,12 @@ import os
 from absl import app
 from absl import flags
 
-from tensorflow.io import gfile
-from tensorflow_datasets.core import naming
+# gfile cannot be imported directly `from tensorflow.io import gfile`
+import tensorflow as tf
+gfile = tf.io.gfile
+del tf
+
+from tensorflow_datasets.core import naming  # pylint: disable=g-import-not-at-top
 from tensorflow_datasets.core.utils import py_utils
 
 FLAGS = flags.FLAGS
