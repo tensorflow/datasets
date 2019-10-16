@@ -47,8 +47,10 @@ original DCIM files and converted them to PNG.
 The following commands (or equivalent) should be used to generate the PNG files,
 in order to guarantee reproducible results:
 
+```
   find $DATASET_DCIM_DIR -name '*.dcm' | \\
   xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
+```
 """
 
 _CITATION = """\

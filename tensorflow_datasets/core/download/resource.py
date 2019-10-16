@@ -173,7 +173,7 @@ def get_dl_fname(url, checksum):
   Windows however expects short paths (260 chars), so we limit the file name
   to an arbitrary 90 chars.
 
-  Naming pattern: '${url}${checksum}'.
+  Naming pattern: '{url}{checksum}'.
    - url: url sanitized and shortened to 46 chars.
    - checksum: base64url encoded sha256: 44 chars (removing trailing '=').
 
