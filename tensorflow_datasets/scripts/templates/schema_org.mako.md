@@ -1,13 +1,15 @@
-<!-- Builds schema.org microdata for DatasetSearch from DatasetBuilder.
+<%!
+"""
+Builds schema.org microdata for DatasetSearch from DatasetBuilder.
 
 Markup spec: https://developers.google.com/search/docs/data-types/dataset#dataset
 Testing tool: https://search.google.com/structured-data/testing-tool
 For Google Dataset Search: https://toolbox.google.com/datasetsearch
 
 Microdata format was chosen over JSON-LD due to the fact that Markdown
-rendering engines remove all <script> tags. -->
+rendering engines remove all \<script\> tags.
+"""
 
-<%!
 # We are using cgi module instead of html due to Python 2 compatibility
 import cgi
 
@@ -40,8 +42,8 @@ homepage_url = (builder.info.urls and builder.info.urls[0]) or ""
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="${builder.info.name}" />
-  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/${builder.info.name}" />
   <meta itemprop="description" content="${escape(description)}" />
+  <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/${builder.info.name}" />
   <meta itemprop="sameAs" content="${escape(homepage_url)}" />
   <meta itemprop="citation" content="${escape(builder.info.citation)}" />
 </div>
