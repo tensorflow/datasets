@@ -323,6 +323,7 @@ class ReadInstruction(object):
 
   Examples of usage:
 
+  ```
   # The following lines are equivalent:
   ds = tfds.load('mnist', split='test[:33%]')
   ds = tfds.load('mnist', split=ReadInstruction.from_spec('test[:33%]'))
@@ -347,6 +348,8 @@ class ReadInstruction(object):
       'mnist',
       [RI('train', to=k, unit='%') + RI('train', from_=k+10, unit='%')
        for k in range(0, 100, 10)])
+  ```
+
   """
 
   def _init(self, relative_instructions):
