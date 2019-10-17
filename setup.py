@@ -60,7 +60,8 @@ TESTS_REQUIRE = [
     'mako',
     'pytest',
     'pytest-xdist',
-    'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',
+    # TODO(b/142892342): Re-enable
+    # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
 ]
 
 if sys.version_info.major == 3:
