@@ -37,14 +37,12 @@ and has the following configurations predefined (defaults to the first one):
 *   `h` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
     Classification (CPC)h: Electricity
 
-*   `a` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)a: Human Necessities
+*   `g` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)g: Physics
 
-*   `c` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)c: Chemistry; Metallurgy
-
-*   `b` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)b: Performing Operations; Transporting
+*   `f` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons;
+    Blasting
 
 *   `e` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
     Classification (CPC)e: Fixed Constructions
@@ -52,12 +50,14 @@ and has the following configurations predefined (defaults to the first one):
 *   `d` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
     Classification (CPC)d: Textiles; Paper
 
-*   `g` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)g: Physics
+*   `c` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)c: Chemistry; Metallurgy
 
-*   `f` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)f: Mechanical Engineering; Lightning; Heating; Weapons;
-    Blasting
+*   `b` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)b: Performing Operations; Transporting
+
+*   `a` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)a: Human Necessities
 
 ## `big_patent/all`
 Patents under all categories.
@@ -124,7 +124,6 @@ FeaturesDict({
 `(u'description', u'abstract')`
 
 ## `big_patent/h`
-
 Patents under Cooperative Patent Classification (CPC)h: Electricity
 
 Versions:
@@ -155,8 +154,9 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'description', u'abstract')`
 
-## `big_patent/a`
-Patents under Cooperative Patent Classification (CPC)a: Human Necessities
+## `big_patent/g`
+
+Patents under Cooperative Patent Classification (CPC)g: Physics
 
 Versions:
 
@@ -166,10 +166,107 @@ Versions:
 
 Split      | Examples
 :--------- | -------:
-ALL        | 193,483
-TRAIN      | 174,134
-TEST       | 9,675
-VALIDATION | 9,674
+ALL        | 287,706
+TRAIN      | 258,935
+TEST       | 14,386
+VALIDATION | 14,385
+
+### Features
+```python
+FeaturesDict({
+    'abstract': Text(shape=(), dtype=tf.string),
+    'description': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
+
+*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'description', u'abstract')`
+
+## `big_patent/f`
+
+Patents under Cooperative Patent Classification (CPC)f: Mechanical Engineering;
+Lightning; Heating; Weapons; Blasting
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 95,076
+TRAIN      | 85,568
+TEST       | 4,754
+VALIDATION | 4,754
+
+### Features
+```python
+FeaturesDict({
+    'abstract': Text(shape=(), dtype=tf.string),
+    'description': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
+
+*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'description', u'abstract')`
+
+## `big_patent/e`
+
+Patents under Cooperative Patent Classification (CPC)e: Fixed Constructions
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 38,271
+TRAIN      | 34,443
+TEST       | 1,914
+VALIDATION | 1,914
+
+### Features
+```python
+FeaturesDict({
+    'abstract': Text(shape=(), dtype=tf.string),
+    'description': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
+
+*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'description', u'abstract')`
+
+## `big_patent/d`
+
+Patents under Cooperative Patent Classification (CPC)d: Textiles; Paper
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 11,294
+TRAIN      | 10,164
+TEST       | 565
+VALIDATION | 565
 
 ### Features
 ```python
@@ -251,41 +348,9 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'description', u'abstract')`
 
-## `big_patent/e`
+## `big_patent/a`
 
-Patents under Cooperative Patent Classification (CPC)e: Fixed Constructions
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 38,271
-TRAIN      | 34,443
-TEST       | 1,914
-VALIDATION | 1,914
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Urls
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/d`
-
-Patents under Cooperative Patent Classification (CPC)d: Textiles; Paper
+Patents under Cooperative Patent Classification (CPC)a: Human Necessities
 
 Versions:
 
@@ -295,75 +360,10 @@ Versions:
 
 Split      | Examples
 :--------- | -------:
-ALL        | 11,294
-TRAIN      | 10,164
-TEST       | 565
-VALIDATION | 565
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Urls
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/g`
-
-Patents under Cooperative Patent Classification (CPC)g: Physics
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 287,706
-TRAIN      | 258,935
-TEST       | 14,386
-VALIDATION | 14,385
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Urls
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/f`
-
-Patents under Cooperative Patent Classification (CPC)f: Mechanical Engineering;
-Lightning; Heating; Weapons; Blasting
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 95,076
-TRAIN      | 85,568
-TEST       | 4,754
-VALIDATION | 4,754
+ALL        | 193,483
+TRAIN      | 174,134
+TEST       | 9,675
+VALIDATION | 9,674
 
 ### Features
 ```python

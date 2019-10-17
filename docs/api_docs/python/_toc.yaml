@@ -35,6 +35,8 @@ toc:
     path: /datasets/api_docs/python/tfds/core/DatasetBuilder
   - title: DatasetInfo
     path: /datasets/api_docs/python/tfds/core/DatasetInfo
+  - title: disallow_positional_args
+    path: /datasets/api_docs/python/tfds/core/disallow_positional_args
   - title: Experiment
     path: /datasets/api_docs/python/tfds/core/Experiment
   - title: GeneratorBasedBuilder
@@ -49,6 +51,8 @@ toc:
     path: /datasets/api_docs/python/tfds/core/MetadataDict
   - title: NamedSplit
     path: /datasets/api_docs/python/tfds/core/NamedSplit
+  - title: ReadInstruction
+    path: /datasets/api_docs/python/tfds/core/ReadInstruction
   - title: SplitBase
     path: /datasets/api_docs/python/tfds/core/SplitBase
   - title: SplitDict

@@ -18,11 +18,13 @@
 *   <a href="./tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>
 *   <a href="./tfds/core/MetadataDict.md"><code>tfds.core.MetadataDict</code></a>
 *   <a href="./tfds/core/NamedSplit.md"><code>tfds.core.NamedSplit</code></a>
+*   <a href="./tfds/core/ReadInstruction.md"><code>tfds.core.ReadInstruction</code></a>
 *   <a href="./tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>
 *   <a href="./tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>
 *   <a href="./tfds/core/SplitGenerator.md"><code>tfds.core.SplitGenerator</code></a>
 *   <a href="./tfds/core/SplitInfo.md"><code>tfds.core.SplitInfo</code></a>
 *   <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
+*   <a href="./tfds/core/disallow_positional_args.md"><code>tfds.core.disallow_positional_args</code></a>
 *   <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
 *   <a href="./tfds/core/lazy_imports.md"><code>tfds.core.lazy_imports</code></a>
 *   <a href="./tfds/decode.md"><code>tfds.decode</code></a>
