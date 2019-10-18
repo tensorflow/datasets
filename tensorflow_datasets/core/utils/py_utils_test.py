@@ -28,6 +28,9 @@ from tensorflow_datasets.core.utils import py_utils
 
 class PyUtilsTest(testing.TestCase):
 
+  def test_is_notebook(self):
+    self.assertFalse(py_utils.is_notebook())
+
   def test_map_nested(self):
     """Test the mapping function."""
     def map_fn(x):
