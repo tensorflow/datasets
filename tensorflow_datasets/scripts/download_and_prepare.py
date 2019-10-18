@@ -91,6 +91,14 @@ flags.DEFINE_integer(
     "max_examples_per_split", None,
     "optional max number of examples to write into each split (for testing).")
 
+# Beam flags
+flags.DEFINE_list(
+    "beam_pipeline_options", [],
+    "A (comma-separated) list of flags to pass to `PipelineOptions` when "
+    "preparing with Apache Beam. Example: "
+    "`--beam_pipeline_options=job_name=my-job,project=my-project`")
+
+
 # Development flags
 flags.DEFINE_boolean("register_checksums", False,
                      "If True, store size and checksum of downloaded files.")
@@ -128,7 +136,8 @@ def download_and_prepare(builder):
     # TODO(b/129149715): Restore compute stats. Currently skipped because not
     # beam supported.
     dl_config.compute_stats = tfds.download.ComputeStatsMode.SKIP
-    dl_config.beam_options = beam.options.pipeline_options.PipelineOptions()
+    dl_config.beam_options = beam.options.pipeline_options.PipelineOptions(
+        flags=["--%s" % opt for opt in FLAGS.beam_pipeline_options])
 
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,
