@@ -146,6 +146,7 @@ class MiniImagenet(tfds.core.GeneratorBasedBuilder):
     img_data = data["image_data"]
     class_dict = data["class_dict"]
 
+    idx_data = 0
     for idx_class, (class_name, idx_img_list) in \
             enumerate(class_dict.items()):
       idx_class_split = idx_class + idx_class_start
@@ -157,4 +158,5 @@ class MiniImagenet(tfds.core.GeneratorBasedBuilder):
             "label": idx_class_split
         }
 
-        yield dict_data
+        idx_data += 1
+        yield idx_data, dict_data
