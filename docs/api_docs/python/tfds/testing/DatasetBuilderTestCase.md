@@ -196,7 +196,7 @@ This test case will check for the following:
 -   the dataset builder is correctly registered, i.e.
     <a href="../../tfds/load.md"><code>tfds.load(name)</code></a> works;
 -   the dataset builder can read the fake examples stored in
-    testing/test_data/fake_examples/${dataset_name};
+    testing/test_data/fake_examples/{dataset_name};
 -   the dataset builder can produce serialized data;
 -   the dataset builder produces a valid Dataset object from serialized data
     -   in eager mode;

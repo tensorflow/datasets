@@ -44,6 +44,9 @@ that acts as a `dict`.
 
 [`class NamedSplit`](../tfds/core/NamedSplit.md): Descriptor corresponding to a named split (train, test, ...).
 
+[`class ReadInstruction`](../tfds/core/ReadInstruction.md): Reading instruction
+for a dataset.
+
 [`class SplitBase`](../tfds/core/SplitBase.md): Abstract base class for Split compositionality.
 
 [`class SplitDict`](../tfds/core/SplitDict.md): Split info object.
@@ -58,6 +61,9 @@ that acts as a `dict`.
 dependencies.
 
 ## Functions
+
+[`disallow_positional_args(...)`](../tfds/core/disallow_positional_args.md):
+Requires function to be called using keyword arguments.
 
 [`get_tfds_path(...)`](../tfds/core/get_tfds_path.md): Returns absolute path to file given path relative to tfds root.
 
