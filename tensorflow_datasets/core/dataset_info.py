@@ -34,37 +34,34 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import abc
 import collections
+import json
 import os
 import posixpath
-import pprint
 import tempfile
-from xml.etree import ElementTree
 
 from absl import logging
 import numpy as np
-import requests
+import six
 import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.features import top_level_feature
 from tensorflow_datasets.core.proto import dataset_info_pb2
-from google.protobuf import json_format
+from tensorflow_datasets.core.proto import json_format
+from tensorflow_datasets.core.utils import gcs_utils
+
 from tensorflow_metadata.proto.v0 import schema_pb2
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
-
 # Name of the file to output the DatasetInfo protobuf object.
 DATASET_INFO_FILENAME = "dataset_info.json"
-
 LICENSE_FILENAME = "LICENSE"
-
-# GCS
-GCS_URL = "http://storage.googleapis.com/tfds-data"
-GCS_BUCKET = "gs://tfds-data"
-GCS_DATASET_INFO_PATH = "dataset_info"
 
 INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
@@ -75,7 +72,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     total_num_examples={total_num_examples},
     splits={splits},
     supervised_keys={supervised_keys},
-    citation='{citation}',
+    citation={citation},
     redistribution_info={redistribution_info},
 )
 """
@@ -103,6 +100,7 @@ class DatasetInfo(object):
                supervised_keys=None,
                urls=None,
                citation=None,
+               metadata=None,
                redistribution_info=None):
     """Constructs DatasetInfo.
 
@@ -112,10 +110,17 @@ class DatasetInfo(object):
       features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
-      supervised_keys: `tuple`, Specifies the input feature and the label for
-        supervised learning, if applicable for the dataset.
+      supervised_keys: `tuple` of `(input_key, target_key)`, Specifies the
+        input feature and the label for supervised learning, if applicable for
+        the dataset. The keys correspond to the feature names to select in
+        `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
+        with `as_supervised=True`, the `tf.data.Dataset` object will yield
+        the (input, target) defined here.
       urls: `list(str)`, optional, the homepage(s) for this dataset.
       citation: `str`, optional, the citation to use for this dataset.
+      metadata: `tfds.core.Metadata`, additonal object which will be
+        stored/restored with the dataset. This allows for storing additional
+        information with the dataset.
       redistribution_info: `dict`, optional, information needed for
         redistribution, as specified in `dataset_info_pb2.RedistributionInfo`.
         The content of the `license` subfield will automatically be written to a
@@ -131,8 +136,16 @@ class DatasetInfo(object):
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             **redistribution_info) if redistribution_info else None)
     if urls:
+      if isinstance(urls, six.string_types):
+        urls = [urls]
       self._info_proto.location.urls[:] = urls
 
+    if features:
+      if not isinstance(features, top_level_feature.TopLevelFeature):
+        raise ValueError(
+            "DatasetInfo.features only supports FeaturesDict or Sequence at "
+            "the top-level. Got {}".format(features))
+      features._set_top_level()  # pylint: disable=protected-access
     self._features = features
     self._splits = splits_lib.SplitDict()
     if supervised_keys is not None:
@@ -140,6 +153,12 @@ class DatasetInfo(object):
       assert len(supervised_keys) == 2
       self._info_proto.supervised_keys.input = supervised_keys[0]
       self._info_proto.supervised_keys.output = supervised_keys[1]
+
+    if metadata and not isinstance(metadata, Metadata):
+      raise ValueError(
+          "Metadata should be a `tfds.core.Metadata` instance. Received "
+          "{}".format(metadata))
+    self._metadata = metadata
 
     # Is this object initialized with both the static and the dynamic data?
     self._fully_initialized = False
@@ -167,7 +186,11 @@ class DatasetInfo(object):
 
   @property
   def version(self):
-    return utils.Version(self.as_proto.version)
+    return self._builder.version
+
+  @property
+  def homepage_url(self):
+    return self.urls and self.urls[0] or "https://www.tensorflow.org/datasets"
 
   @property
   def citation(self):
@@ -184,6 +207,10 @@ class DatasetInfo(object):
   @property
   def features(self):
     return self._features
+
+  @property
+  def metadata(self):
+    return self._metadata
 
   @property
   def supervised_keys(self):
@@ -242,10 +269,10 @@ class DatasetInfo(object):
     """Whether DatasetInfo has been fully initialized."""
     return self._fully_initialized
 
-  def _dataset_info_filename(self, dataset_info_dir):
+  def _dataset_info_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, DATASET_INFO_FILENAME)
 
-  def _license_filename(self, dataset_info_dir):
+  def _license_path(self, dataset_info_dir):
     return os.path.join(dataset_info_dir, LICENSE_FILENAME)
 
   def compute_dynamic_properties(self):
@@ -293,13 +320,15 @@ class DatasetInfo(object):
     if self.features:
       self.features.save_metadata(dataset_info_dir)
 
+    # Save any additional metadata
+    if self.metadata is not None:
+      self.metadata.save_metadata(dataset_info_dir)
+
     if self.redistribution_info.license:
-      with tf.io.gfile.GFile(self._license_filename(dataset_info_dir),
-                             "w") as f:
+      with tf.io.gfile.GFile(self._license_path(dataset_info_dir), "w") as f:
         f.write(self.redistribution_info.license)
 
-    with tf.io.gfile.GFile(self._dataset_info_filename(dataset_info_dir),
-                           "w") as f:
+    with tf.io.gfile.GFile(self._dataset_info_path(dataset_info_dir), "w") as f:
       f.write(self.as_json)
 
   def read_from_directory(self, dataset_info_dir):
@@ -318,7 +347,7 @@ class DatasetInfo(object):
       raise ValueError(
           "Calling read_from_directory with undefined dataset_info_dir.")
 
-    json_filename = self._dataset_info_filename(dataset_info_dir)
+    json_filename = self._dataset_info_path(dataset_info_dir)
 
     # Load the metadata from disk
     parsed_proto = read_from_json(json_filename)
@@ -329,6 +358,9 @@ class DatasetInfo(object):
     # Restore the feature metadata (vocabulary, labels names,...)
     if self.features:
       self.features.load_metadata(dataset_info_dir)
+
+    if self.metadata is not None:
+      self.metadata.load_metadata(dataset_info_dir)
 
     # Update fields which are not defined in the code. This means that
     # the code will overwrite fields which are present in
@@ -377,29 +409,22 @@ class DatasetInfo(object):
     # In order to support Colab, we use the HTTP GCS API to access the metadata
     # files. They are copied locally and then loaded.
     tmp_dir = tempfile.mkdtemp("tfds")
-    data_files = gcs_dataset_files(self.full_name)
+    data_files = gcs_utils.gcs_dataset_info_files(self.full_name)
     if not data_files:
-      logging.info("No GCS info files found for %s", self.full_name)
       return
     logging.info("Loading info from GCS for %s", self.full_name)
     for fname in data_files:
       out_fname = os.path.join(tmp_dir, os.path.basename(fname))
-      download_gcs_file(fname, out_fname)
+      gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
-  def __str__(self):
-    splits_pprint = "{\n %s\n    }" % (
-        pprint.pformat(
-            {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
-            indent=8, width=1)[1:-1])
-    features_dict = self.features
-    features_pprint = "%s({\n %s\n    }" % (
-        type(features_dict).__name__,
-        pprint.pformat({
-            k: features_dict[k] for k in sorted(list(features_dict.keys()))
-        }, indent=8, width=1)[1:-1])
-    citation_pprint = '"""\n%s\n    """' % "\n".join(
-        [u" " * 8 + line for line in self.citation.split(u"\n")])
+  def __repr__(self):
+    splits_pprint = _indent("\n".join(["{"] + [
+        "    '{}': {},".format(k, split.num_examples)
+        for k, split in sorted(self.splits.items())
+    ] + ["}"]))
+    features_pprint = _indent(repr(self.features))
+    citation_pprint = _indent('"""{}"""'.format(self.citation.strip()))
     return INFO_STR.format(
         name=self.name,
         version=self.version,
@@ -410,7 +435,14 @@ class DatasetInfo(object):
         citation=citation_pprint,
         urls=self.urls,
         supervised_keys=self.supervised_keys,
-        redistribution_info=self.redistribution_info)
+        # Proto add a \n that we strip.
+        redistribution_info=str(self.redistribution_info).strip())
+
+
+def _indent(content):
+  """Add indentation to all lines except the first."""
+  lines = content.split("\n")
+  return "\n".join([lines[0]] + ["    " + l for l in lines[1:]])
 
 #
 #
@@ -484,6 +516,11 @@ def get_dataset_feature_statistics(builder, split):
       feature_dtype = type(feature_np)
 
       if isinstance(feature_np, np.ndarray):
+        # If we have an empty array, then don't proceed further with computing
+        # statistics on it.
+        if feature_np.size == 0:
+          continue
+
         feature_dtype = feature_np.dtype.type
 
       feature_min, feature_max = None, None
@@ -545,8 +582,10 @@ def get_dataset_feature_statistics(builder, split):
 
     if feature.type == schema_pb2.INT or feature.type == schema_pb2.FLOAT:
       numeric_statistics = statistics_pb2.NumericStatistics()
-      numeric_statistics.min = feature_to_min[feature_name]
-      numeric_statistics.max = feature_to_max[feature_name]
+      # Uses `.get` as Sequence(int) containing only empty array won't contains
+      # any value.
+      numeric_statistics.min = feature_to_min.get(feature_name, 0)
+      numeric_statistics.max = feature_to_max.get(feature_name, 0)
       numeric_statistics.common_stats.CopyFrom(common_statistics)
       feature_name_statistics.num_stats.CopyFrom(numeric_statistics)
     else:
@@ -568,33 +607,102 @@ def read_from_json(json_filename):
   return parsed_proto
 
 
-def download_gcs_file(path, out_fname=None):
-  """Download a file from GCS, optionally to a file."""
-  url = "/".join([GCS_URL, path])
-  stream = bool(out_fname)
-  resp = requests.get(url, stream=stream)
-  if not resp.ok:
-    raise ValueError("GCS bucket inaccessible")
-  if out_fname:
-    with tf.io.gfile.GFile(out_fname, "wb") as f:
-      for chunk in resp.iter_content(1024):
-        f.write(chunk)
-  else:
-    return resp.content
+@six.add_metaclass(abc.ABCMeta)
+class Metadata(dict):
+  """Abstract base class for DatasetInfo metadata container.
+
+  `builder.info.metadata` allows the dataset to expose additional general
+  information about the dataset which are not specific to a feature or
+  individual example.
+
+  To implement the interface, overwrite `save_metadata` and
+  `load_metadata`.
+
+  See `tfds.core.MetadataDict` for a simple implementation that acts as a
+  dict that saves data to/from a JSON file.
+  """
+
+  @abc.abstractmethod
+  def save_metadata(self, data_dir):
+    """Save the metadata."""
+    raise NotImplementedError()
+
+  @abc.abstractmethod
+  def load_metadata(self, data_dir):
+    """Restore the metadata."""
+    raise NotImplementedError()
 
 
-@utils.memoize()
-def gcs_files():
-  top_level_xml_str = download_gcs_file("")
-  xml_root = ElementTree.fromstring(top_level_xml_str)
-  filenames = [el[0].text for el in xml_root if el.tag.endswith("Contents")]
-  return filenames
+class MetadataDict(Metadata, dict):
+  """A `tfds.core.Metadata` object that acts as a `dict`.
+
+  By default, the metadata will be serialized as JSON.
+  """
+
+  def _build_filepath(self, data_dir):
+    return os.path.join(data_dir, "metadata.json")
+
+  def save_metadata(self, data_dir):
+    """Save the metadata."""
+    with tf.io.gfile.GFile(self._build_filepath(data_dir), "w") as f:
+      json.dump(self, f)
+
+  def load_metadata(self, data_dir):
+    """Restore the metadata."""
+    self.clear()
+    with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
+      self.update(json.load(f))
 
 
-def gcs_dataset_files(dataset_dir):
-  """Return paths to GCS files in the given dataset directory."""
-  prefix = posixpath.join(GCS_DATASET_INFO_PATH, dataset_dir, "")
-  # Filter for this dataset
-  filenames = [el for el in gcs_files()
-               if el.startswith(prefix) and len(el) > len(prefix)]
-  return filenames
+class BeamMetadataDict(MetadataDict):
+  """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
+
+  def __init__(self):
+    super(BeamMetadataDict, self).__init__()
+    self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
+
+  def _temp_filepath(self, key):
+    return os.path.join(self._tempdir, "%s.json" % key)
+
+  def __setitem__(self, key, item):
+    """Creates write sink for beam PValues or sets value of key in `dict`.
+
+    If the item is a PValue, it is expected to contain exactly one element,
+    which will be written out as a temporary JSON file once the beam pipeline
+    runs. These outputs will be loaded and stored in a single JSON when
+    `save_metadata` is called after the pipeline completes.
+
+    Args:
+      key: hashable type, the key for the item.
+      item: `beam.pvalue.PValue` or other, the metadata value.
+    """
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    if isinstance(item, beam.pvalue.PValue):
+      if key in self:
+        raise ValueError("Already added PValue with key: %s" % key)
+      logging.info("Lazily adding metadata item with Beam: %s", key)
+      def _to_json(item_list):
+        if len(item_list) != 1:
+          raise ValueError(
+              "Each metadata PValue must contain a single element. Got %d." %
+              len(item_list))
+        item = item_list[0]
+        return json.dumps(item)
+      _ = (item
+           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
+           | "metadata_%s_tojson" % key >> beam.Map(_to_json)
+           | "metadata_%s_write" % key >> beam.io.WriteToText(
+               self._temp_filepath(key),
+               num_shards=1,
+               shard_name_template=""))
+    super(BeamMetadataDict, self).__setitem__(key, item)
+
+  def save_metadata(self, data_dir):
+    """Save the metadata inside the beam job."""
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    for key, item in self.items():
+      if isinstance(item, beam.pvalue.PValue):
+        with tf.io.gfile.GFile(self._temp_filepath(key), "r") as f:
+          self[key] = json.load(f)
+    tf.io.gfile.rmtree(self._tempdir)
+    super(BeamMetadataDict, self).save_metadata(data_dir)

@@ -48,8 +48,15 @@ def _get_synset(synset_name):
   tar = tarfile.open(mode='w', fileobj=fobj)
   for i in range(1, TRAIN_IMAGES_PER_SYNSET+1):
     fname = '%s_%s.JPEG' % (synset_name, i)
-    jpeg = fake_data_utils.get_random_jpeg()
-    tar.add(jpeg, arcname=fname)
+    # There are a few PNG and CMYK images:
+    if synset_name == 'n01440764' and i == 1:
+      path = fake_data_utils.get_random_png()
+    elif synset_name == 'n01440764' and i in [2, 3]:
+      path = os.path.join(
+          FLAGS.tfds_dir, 'testing', 'test_data', '6pixels_cmyk.jpeg')
+    else:
+      path = fake_data_utils.get_random_jpeg()
+    tar.add(path, arcname=fname)
   fobj.close()
   return fobj.name
 

@@ -1,0 +1,204 @@
+{
+  "citation": "@article{journals/corr/YuZSSX15,\n  added-at = {2018-08-13T00:00:00.000+0200},\n  author = {Yu, Fisher and Zhang, Yinda and Song, Shuran and Seff, Ari and Xiao, Jianxiong},\n  biburl = {https://www.bibsonomy.org/bibtex/2446d4ffb99a5d7d2ab6e5417a12e195f/dblp},\n  ee = {http://arxiv.org/abs/1506.03365},\n  interhash = {3e9306c4ce2ead125f3b2ab0e25adc85},\n  intrahash = {446d4ffb99a5d7d2ab6e5417a12e195f},\n  journal = {CoRR},\n  keywords = {dblp},\n  timestamp = {2018-08-14T15:08:59.000+0200},\n  title = {LSUN: Construction of a Large-scale Image Dataset using Deep Learning with Humans in the Loop.},\n  url = {http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YuZSSX15},\n  volume = {abs/1506.03365},\n  year = 2015\n}\n", 
+  "description": "Large scale images showing different objects from given categories like bedroom, tower etc.", 
+  "location": {
+    "urls": [
+      "https://www.yf.io/p/lsun"
+    ]
+  }, 
+  "name": "lsun", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "16484821352", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "40", 
+      "shardLengths": [
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6395", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396", 
+        "6396"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "818687"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "818687"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "300"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "300"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "300"
+      }
+    }
+  ], 
+  "version": "3.0.0"
+}

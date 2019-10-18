@@ -5,10 +5,16 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 [![Kokoro](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
 
-* [List of datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
+* [List of datasets](https://www.tensorflow.org/datasets/catalog/overview)
 * [Try it in Colab](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
 * [API docs](https://www.tensorflow.org/datasets/api_docs/python/tfds)
-* [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+* Guides
+  * [Overview](https://www.tensorflow.org/datasets/overview)
+  * [Datasets versioning](https://www.tensorflow.org/datasets/datasets_versioning)
+  * [Using splits and slicing API](https://www.tensorflow.org/datasets/splits)
+  * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
+  * [Add a huge dataset (>>100GiB)](https://www.tensorflow.org/datasets/beam_datasets)
+
 
 **Table of Contents**
 
@@ -24,12 +30,15 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 ```sh
 pip install tensorflow-datasets
 
-# Requires TF 1.12+ to be installed.
+# Requires TF 1.15+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
 pip install tensorflow
 # or:
 pip install tensorflow-gpu
 ```
+
+Join [our Google group](https://groups.google.com/forum/#!forum/tensorflow-datasets-public-announce)
+to receive updates on the project.
 
 ### Usage
 
@@ -38,7 +47,7 @@ import tensorflow_datasets as tfds
 import tensorflow as tf
 
 # tfds works in both Eager and Graph modes
-tf.enable_eager_execution()
+tf.compat.v1.enable_eager_execution()
 
 # See available datasets
 print(tfds.list_builders())
@@ -109,6 +118,17 @@ print(info)
             }
       """',
   )
+```
+
+You can also get details about the classes (number of classes and their names).
+
+```python
+info = tfds.builder('cats_vs_dogs').info
+
+info.features['label'].num_classes  # 2
+info.features['label'].names  # ['cat', 'dog']
+info.features['label'].int2str(1)  # "dog"
+info.features['label'].str2int('cat')  # 0
 ```
 
 ### NumPy Usage with `tfds.as_numpy`

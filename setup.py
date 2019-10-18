@@ -23,22 +23,30 @@ if '--nightly' in sys.argv:
   sys.argv.remove('--nightly')
 
 project_name = 'tensorflow-datasets'
-version = '1.0.1'
+
+# To enable importing version.py directly, we add its path to sys.path.
+version_path = os.path.join(
+    os.path.dirname(__file__), 'tensorflow_datasets')
+sys.path.append(version_path)
+from version import __version__  # pylint: disable=g-import-not-at-top
+
 if nightly:
   project_name = 'tfds-nightly'
   datestring = (os.environ.get('TFDS_NIGHTLY_TIMESTAMP') or
                 datetime.datetime.now().strftime('%Y%m%d%H%M'))
-  version = '%s-dev%s' % (version, datestring)
+  __version__ += 'dev%s' % datestring
 
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
+    'attrs',
+    'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
     'promise',
     'protobuf>=3.6.1',
-    'requests',
+    'requests>=2.19.0',
     'six',
     'tensorflow-metadata',
     'termcolor',
@@ -47,8 +55,13 @@ REQUIRED_PKGS = [
 ]
 
 TESTS_REQUIRE = [
+    'apache-beam',
     'jupyter',
+    'mako',
     'pytest',
+    'pytest-xdist',
+    # TODO(b/142892342): Re-enable
+    # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
 ]
 
 if sys.version_info.major == 3:
@@ -65,25 +78,56 @@ if sys.version_info < (3, 4):
   # enum introduced in Python 3.4
   REQUIRED_PKGS.append('enum34')
 
+if sys.version_info < (3, 3):
+  # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
+  REQUIRED_PKGS.append('psutil')
+
 # Static files needed by datasets.
 DATASET_FILES = [
+    'image/caltech101_labels.txt',
+    'image/categories_places365.txt',
+    'image/cbis_ddsm_calc_distributions.txt',
+    'image/cbis_ddsm_calc_types.txt',
+    'image/cbis_ddsm_mass_margins.txt',
+    'image/cbis_ddsm_mass_shapes.txt',
+    'image/cbis_ddsm_patch_labels.txt',
+    'image/dtd_key_attributes.txt',
+    'image/food-101_classes.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
+    'image/open_images_classes_all.txt',
+    'image/open_images_classes_boxable.txt',
+    'image/open_images_classes_trainable.txt',
     'image/quickdraw_labels.txt',
+    'image/sun397_labels.txt',
+    'image/sun397_tfds_te.txt',
+    'image/sun397_tfds_tr.txt',
+    'image/sun397_tfds_va.txt',
     'url_checksums/*',
+    'video/ucf101_labels.txt',
 ]
 
 DATASET_EXTRAS = {
     # In alphabetical order
+    'aflw2k3d': ['scipy'],
+    'c4': ['langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
+    'eurosat': ['scikit-image',],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
-        'opencv-python==3.4.0.14'
+        'opencv-python==3.4.0.14',
+        'scikit-image',
+        'scipy'
     ],
+    'groove': ['pretty_midi', 'pydub'],
     'librispeech': ['pydub'],  # and ffmpeg installed
+    'pet_finder': ['pandas'],
     'svhn': ['scipy'],
+    'the300w_lp': ['scipy'],
+    'wider_face': ['Pillow'],
+    'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
 all_dataset_extras = []
@@ -91,15 +135,17 @@ for deps in DATASET_EXTRAS.values():
   all_dataset_extras.extend(deps)
 
 EXTRAS_REQUIRE = {
-    'tensorflow': ['tensorflow>=1.12.0'],
-    'tensorflow_gpu': ['tensorflow-gpu>=1.12.0'],
+    'apache-beam': ['apache-beam'],
+    'matplotlib': ['matplotlib'],
+    'tensorflow': ['tensorflow>=1.15.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
     'tests': TESTS_REQUIRE + all_dataset_extras,
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 
 setup(
     name=project_name,
-    version=version,
+    version=__version__,
     description=DOCLINES[0],
     long_description='\n'.join(DOCLINES[2:]),
     author='Google Inc.',
@@ -109,7 +155,9 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': DATASET_FILES,
+        'tensorflow_datasets': DATASET_FILES + [
+            'scripts/templates/*',
+        ],
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

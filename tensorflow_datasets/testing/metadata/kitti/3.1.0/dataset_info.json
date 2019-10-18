@@ -1,0 +1,201 @@
+{
+  "citation": "@inproceedings{Geiger2012CVPR,\n  author = {Andreas Geiger and Philip Lenz and Raquel Urtasun},\n  title = {Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite},\n  booktitle = {Conference on Computer Vision and Pattern Recognition (CVPR)},\n  year = {2012}\n}\n", 
+  "description": "Kitti contains a suite of vision tasks built using an autonomous driving\nplatform. The full benchmark contains many tasks such as stereo, optical flow,\nvisual odometry, etc. This dataset contains the object detection dataset,\nincluding the monocular images and bounding boxes. The dataset contains 7481\ntraining images annotated with 3D bounding boxes. A full description of the\nannotations can be found in the readme of the object development kit readme on\nthe Kitti homepage.\n", 
+  "location": {
+    "urls": [
+      "http://www.cvlibs.net/datasets/kitti/"
+    ]
+  }, 
+  "name": "kitti", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image/file_name", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "objects"
+      }
+    ]
+  }, 
+  "sizeInBytes": "12575610548", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "178", 
+        "178", 
+        "177", 
+        "178"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "711"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "711"
+              }
+            }, 
+            "name": "image/file_name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "711"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "99", 
+        "100", 
+        "99", 
+        "99"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "6347"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "6347"
+              }
+            }, 
+            "name": "image/file_name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "6347"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "106", 
+        "106", 
+        "105", 
+        "106"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "423"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "423"
+              }
+            }, 
+            "name": "image/file_name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "423"
+      }
+    }
+  ], 
+  "version": "3.1.0"
+}

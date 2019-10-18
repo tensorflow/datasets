@@ -87,7 +87,12 @@ _SPLIT_SHARDS = {
 class Nsynth(tfds.core.GeneratorBasedBuilder):
   """A large-scale and high-quality dataset of annotated musical notes."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -115,6 +120,7 @@ class Nsynth(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    """Returns splits."""
     dl_urls = {
         split: _BASE_DOWNLOAD_PATH + "%s.tfrecord" % split for split in _SPLITS
     }
@@ -139,9 +145,9 @@ class Nsynth(tfds.core.GeneratorBasedBuilder):
     for example_str in reader:
       example = tf.train.Example.FromString(example_str)
       features = example.features.feature
-      yield {
-          "id":
-              features["note_str"].bytes_list.value[0],
+      key = features["note_str"].bytes_list.value[0]
+      yield key, {
+          "id": key,
           "audio":
               np.array(features["audio"].float_list.value, dtype=np.float32),
           "pitch":

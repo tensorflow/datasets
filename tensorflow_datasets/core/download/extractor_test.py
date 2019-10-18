@@ -27,6 +27,15 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import extractor
 from tensorflow_datasets.core.download import resource as resource_lib
 
+BZIP2 = resource_lib.ExtractMethod.BZIP2
+GZIP = resource_lib.ExtractMethod.GZIP
+NO_EXTRACT = resource_lib.ExtractMethod.NO_EXTRACT
+TAR = resource_lib.ExtractMethod.TAR
+TAR_GZ = resource_lib.ExtractMethod.TAR_GZ
+ZIP = resource_lib.ExtractMethod.ZIP
+TAR_STREAM = resource_lib.ExtractMethod.TAR_STREAM
+TAR_GZ_STREAM = resource_lib.ExtractMethod.TAR_GZ_STREAM
+
 
 def _read(path):
   with tf.io.gfile.GFile(path, 'rb') as f:
@@ -58,76 +67,67 @@ class ExtractorTest(testing.TestCase):
 
   def test_unknown_method(self):
     with self.assertRaises(ValueError):
-      resource = resource_lib.Resource(
-          path='from/path',
-          extract_method=resource_lib.ExtractMethod.NO_EXTRACT)
-      self.extractor.extract(resource, 'to/path')
+      self.extractor.extract('from/path', NO_EXTRACT, 'to/path')
 
   def _test_extract(self, method, archive_name, expected_files):
     from_path = os.path.join(self.test_data, 'archives', archive_name)
-    resource = resource_lib.Resource(path=from_path, extract_method=method)
-    self.extractor.extract(resource, self.to_path).get()
+    self.extractor.extract(from_path, method, self.to_path).get()
     for name, content in expected_files.items():
       path = os.path.join(self.to_path, name)
       self.assertEqual(_read(path), content, 'File %s has bad content.' % path)
 
   def test_zip(self):
     self._test_extract(
-        resource_lib.ExtractMethod.ZIP, 'arch1.zip',
+        ZIP, 'arch1.zip',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_tar(self):
     self._test_extract(
-        resource_lib.ExtractMethod.TAR, 'arch1.tar',
+        TAR, 'arch1.tar',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_targz(self):
     self._test_extract(
-        resource_lib.ExtractMethod.TAR_GZ, 'arch1.tar.gz',
+        TAR_GZ, 'arch1.tar.gz',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+
+  def test_tar_stream(self):
+    self._test_extract(
+        TAR_STREAM, 'arch1.tar',
+        {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
+
+  def test_targz_stream(self):
+    self._test_extract(
+        TAR_GZ_STREAM, 'arch1.tar.gz',
         {'6pixels.png': self.f1_content, 'foo.csv': self.f2_content})
 
   def test_gzip(self):
     from_path = os.path.join(self.test_data, 'archives', 'arch1.tar.gz')
-    resource = resource_lib.Resource(
-        path=from_path, extract_method=resource_lib.ExtractMethod.GZIP)
-    self.extractor.extract(resource, self.to_path).get()
+    self.extractor.extract(from_path, GZIP, self.to_path).get()
     arch1_path = os.path.join(self.test_data, 'archives', 'arch1.tar')
     self.assertEqual(_read(self.to_path), _read(arch1_path))
 
   def test_gzip2(self):
     # Same as previous test, except it is not a .tar.gz, but a .gz.
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
-    resource = resource_lib.Resource(
-        path=from_path, extract_method=resource_lib.ExtractMethod.GZIP)
-    self.extractor.extract(resource, self.to_path).get()
+    self.extractor.extract(from_path, GZIP, self.to_path).get()
     foo_csv_path = os.path.join(self.test_data, 'foo.csv')
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
   def test_bzip2(self):
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.bz2')
-    resource = resource_lib.Resource(
-        path=from_path, extract_method=resource_lib.ExtractMethod.BZIP2)
-    self.extractor.extract(resource, self.to_path).get()
+    self.extractor.extract(from_path, BZIP2, self.to_path).get()
     foo_csv_path = os.path.join(self.test_data, 'foo.csv')
     self.assertEqual(_read(self.to_path), _read(foo_csv_path))
 
   def test_absolute_path(self):
-    from_path = os.path.join(self.test_data, 'archives', 'absolute_path.tar')
-    resource = resource_lib.Resource(
-        path=from_path, extract_method=resource_lib.ExtractMethod.TAR)
-    promise = self.extractor.extract(resource, self.to_path)
-    with self.assertRaisesWithPredicateMatch(
-        extractor.ExtractError, 'is not safe'):
-      promise.get()
+    # There is a file with absolute path (ignored) + a file named "foo".
+    self._test_extract(TAR, 'absolute_path.tar', {'foo': b'bar\n'})
 
   def test_wrong_method(self):
     from_path = os.path.join(self.test_data, 'archives', 'foo.csv.gz')
-    resource = resource_lib.Resource(
-        path=from_path, extract_method=resource_lib.ExtractMethod.ZIP,
-        url='http://example.com/foo.zip')
-    promise = self.extractor.extract(resource, self.to_path)
-    expected_msg = (
-        'foo.csv.gz (http://example.com/foo.zip): File is not a zip file.')
+    promise = self.extractor.extract(from_path, ZIP, self.to_path)
+    expected_msg = 'File is not a zip file'
     with self.assertRaisesWithPredicateMatch(
         extractor.ExtractError, expected_msg):
       promise.get()

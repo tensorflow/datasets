@@ -230,7 +230,9 @@ class TokenTextEncoder(TextEncoder):
                oov_buckets=1,
                oov_token="UNK",
                lowercase=False,
-               tokenizer=None):
+               tokenizer=None,
+               strip_vocab=True,
+               decode_token_separator=" "):
     """Constructs a TokenTextEncoder.
 
     To load from a file saved with `TokenTextEncoder.save_to_file`, use
@@ -244,8 +246,14 @@ class TokenTextEncoder(TextEncoder):
       lowercase: `bool`, whether to make all text and tokens lowercase.
       tokenizer: `Tokenizer`, responsible for converting incoming text into a
         list of tokens.
+      strip_vocab: `bool`, whether to strip whitespace from the beginning and
+        end of elements of `vocab_list`.
+      decode_token_separator: `str`, the string used to separate tokens when
+        decoding.
     """
-    self._vocab_list = [tf.compat.as_text(el).strip() for el in vocab_list]
+    self._vocab_list = [tf.compat.as_text(el) for el in vocab_list]
+    if strip_vocab:
+      self._vocab_list = [el.strip() for el in self._vocab_list]
     self._lowercase = lowercase
     if self._lowercase:
       self._vocab_list = [t.lower() for t in self._vocab_list]
@@ -260,6 +268,8 @@ class TokenTextEncoder(TextEncoder):
     reserved_tokens = [t for t in self._vocab_list if is_mixed_alphanum(t)]
     self._tokenizer = (tokenizer or Tokenizer(reserved_tokens=reserved_tokens))
     self._user_defined_tokenizer = tokenizer
+
+    self._decode_token_separator = decode_token_separator
 
   def encode(self, s):
     s = tf.compat.as_text(s)
@@ -286,7 +296,7 @@ class TokenTextEncoder(TextEncoder):
         tokens.append(self._vocab_list[int_id])
       else:
         tokens.append(self._oov_token)
-    return " ".join(tokens)
+    return self._decode_token_separator.join(tokens)
 
   @property
   def vocab_size(self):
@@ -330,16 +340,16 @@ class TokenTextEncoder(TextEncoder):
     }
     if self._user_defined_tokenizer is not None:
       self._tokenizer.save_to_file(filename)
-      kwargs["tokenizer_file_prefix"] = filename
+      kwargs["has_tokenizer"] = True
     self._write_lines_to_file(filename, self._vocab_list, kwargs)
 
   @classmethod
   def load_from_file(cls, filename_prefix):
     filename = cls._filename(filename_prefix)
     vocab_lines, kwargs = cls._read_lines_from_file(filename)
-    tokenizer_file = kwargs.pop("tokenizer_file_prefix", None)
-    if tokenizer_file:
-      kwargs["tokenizer"] = Tokenizer.load_from_file(tokenizer_file)
+    has_tokenizer = kwargs.pop("has_tokenizer", False)
+    if has_tokenizer:
+      kwargs["tokenizer"] = Tokenizer.load_from_file(filename)
     return cls(vocab_list=vocab_lines, **kwargs)
 
 
@@ -359,13 +369,12 @@ class Tokenizer(object):
         all alphanumeric or all non-alphanumeric).
       reserved_tokens: `list<str>`, a list of strings that, if any are in `s`,
         will be preserved as whole tokens, even if they contain mixed
-        alphnumeric/non-alphanumeric characters.
+        alphanumeric/non-alphanumeric characters.
     """
     self._alphanum_only = alphanum_only
     reserved_tokens, self._reserved_tokens_re = _prepare_reserved_tokens(
         reserved_tokens)
     self._reserved_tokens = set(reserved_tokens)
-    self._alphanum_re = ALPHANUM_REGEX if self._alphanum_only else ALL_REGEX
 
   @property
   def alphanum_only(self):
@@ -389,8 +398,10 @@ class Tokenizer(object):
     for substr in substrs:
       if substr in self.reserved_tokens:
         toks.append(substr)
+      elif self._alphanum_only:
+        toks.extend(ALPHANUM_REGEX.split(substr))
       else:
-        toks.extend(self._alphanum_re.split(substr))
+        toks.extend(ALL_REGEX.split(substr))
 
     # Filter out empty strings
     toks = [t for t in toks if t]

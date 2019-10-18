@@ -10,15 +10,17 @@
 
 # tfds.Split
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
 ## Class `Split`
 
-
-
-
-
-Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
-
 `Enum` for dataset splits.
+
+<!-- Placeholder for "Used in" -->
 
 Datasets are typically split into different subsets to be used at various
 stages of training and evaluation.
@@ -29,8 +31,8 @@ stages of training and evaluation.
   model architecture, etc.).
 * `TEST`: the testing data. This is the data to report metrics on. Typically
   you do not want to use this during model iteration as you may overfit to it.
-* `ALL`: Special value corresponding to all existing splits of a dataset
-  merged together
+* `ALL`: Special value, never defined by a dataset, but corresponding to all
+  defined splits of a dataset merged together.
 
 Note: All splits, including compositions inherit from <a href="../tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>
 
@@ -40,7 +42,10 @@ for more information.
 
 <h2 id="__new__"><code>__new__</code></h2>
 
-``` python
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
+```python
 @staticmethod
 __new__(
     cls,
@@ -50,15 +55,9 @@ __new__(
 
 Create a custom split with tfds.Split('custom_name').
 
-
-
 ## Class Members
 
-<h3 id="ALL"><code>ALL</code></h3>
-
-<h3 id="TEST"><code>TEST</code></h3>
-
-<h3 id="TRAIN"><code>TRAIN</code></h3>
-
-<h3 id="VALIDATION"><code>VALIDATION</code></h3>
-
+*   `ALL` <a id="ALL"></a>
+*   `TEST` <a id="TEST"></a>
+*   `TRAIN` <a id="TRAIN"></a>
+*   `VALIDATION` <a id="VALIDATION"></a>

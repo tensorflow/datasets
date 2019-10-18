@@ -32,8 +32,7 @@ import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
 
-DATA_URL = (
-    "http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0.tar")
+DATA_URL = "http://rail.eecs.berkeley.edu/datasets/bair_robot_pushing_dataset_v0.tar"
 
 # There are exactly 30 frames in each video.
 FRAMES_PER_VIDEO = 30
@@ -41,22 +40,11 @@ IMG_SHAPE = (64, 64, 3)
 
 
 _CITATION = """\
-@inproceedings{conf/nips/FinnGL16,
-  added-at = {2016-12-16T00:00:00.000+0100},
-  author = {Finn, Chelsea and Goodfellow, Ian J. and Levine, Sergey},
-  biburl = {https://www.bibsonomy.org/bibtex/230073873b4fe43b314724b772d0f9256/dblp},
-  booktitle = {NIPS},
-  crossref = {conf/nips/2016},
-  editor = {Lee, Daniel D. and Sugiyama, Masashi and Luxburg, Ulrike V. and Guyon, Isabelle and Garnett, Roman},
-  ee = {http://papers.nips.cc/paper/6161-unsupervised-learning-for-physical-interaction-through-video-prediction},
-  interhash = {2e6b416723704f4aa5ad0686ce5a3593},
-  intrahash = {30073873b4fe43b314724b772d0f9256},
-  keywords = {dblp},
-  pages = {64-72},
-  timestamp = {2016-12-17T11:33:40.000+0100},
-  title = {Unsupervised Learning for Physical Interaction through Video Prediction.},
-  url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FinnGL16},
-  year = 2016
+@misc{1710.05268,
+  Author = {Frederik Ebert and Chelsea Finn and Alex X. Lee and Sergey Levine},
+  Title = {Self-Supervised Visual Planning with Temporal Skip Connections},
+  Year = {2017},
+  Eprint = {arXiv:1710.05268},
 }
 """
 
@@ -64,12 +52,19 @@ _CITATION = """\
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+  ]
+  # Versions history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
     # metadata (action and position)
-    features = tfds.features.SequenceDict({
+    features = tfds.features.Sequence({
         "image_main": tfds.features.Image(shape=IMG_SHAPE),
         "image_aux1": tfds.features.Image(shape=IMG_SHAPE),
         "action": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
@@ -83,7 +78,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         "two test sets of previously seen (testseen) and unseen "
         "(testnovel) objects. This is the small 64x64 version.",
         features=features,
-        urls=["https://sites.google.com/site/brainrobotdata/home/push-dataset"],
+        urls=["https://sites.google.com/view/sna-visual-mpc/"],
         citation=_CITATION,
     )
 
@@ -114,15 +109,16 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
       filepath = os.path.join(filedir, filename)
 
       # For each video inside the file
-      for example_str in tf.compat.v1.io.tf_record_iterator(filepath):
+      for video_id, example_str in enumerate(
+          tf.compat.v1.io.tf_record_iterator(filepath)):
         example = tf.train.SequenceExample.FromString(example_str)
 
         # Merge all frames together
         all_frames = []
         for frame_id in range(FRAMES_PER_VIDEO):
           # Extract all features from the original proto context field
-          frame_feature = {
-              out_key: example.context.feature[in_key.format(frame_id)]
+          frame_feature = {   # pylint: disable=
+              out_key: example.context.feature[in_key.format(frame_id)]   # pylint: disable=g-complex-comprehension
               for out_key, in_key in [
                   ("image_main", "{}/image_main/encoded"),
                   ("image_aux1", "{}/image_aux1/encoded"),
@@ -151,4 +147,4 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         #     {'action': [...], 'image_main': img_frame1, ...},  # Frame 1
         #     ...,
         # ]
-        yield all_frames
+        yield "%s_%s" % (filepath, video_id), all_frames

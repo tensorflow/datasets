@@ -30,5 +30,9 @@ class NsynthTest(tfds_test.DatasetBuilderTestCase):
   }
 
 
+class NsynthS3Test(NsynthTest):
+  VERSION = "experimental_latest"
+
+
 if __name__ == "__main__":
   tfds_test.test_main()

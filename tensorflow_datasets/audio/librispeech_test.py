@@ -40,6 +40,10 @@ class LibrispeechTest100(testing.DatasetBuilderTestCase):
   }
 
 
+class LibrispeechTest100S3(LibrispeechTest100):
+  VERSION = "experimental_latest"
+
+
 class LibrispeechTest360(testing.DatasetBuilderTestCase):
   DATASET_CLASS = librispeech.Librispeech
   BUILDER_CONFIG_NAMES_TO_TEST = ["clean360_plain_text"]
@@ -54,6 +58,10 @@ class LibrispeechTest360(testing.DatasetBuilderTestCase):
       tfds.Split.TEST: ["test-clean"],
       tfds.Split.VALIDATION: ["dev-clean"],
   }
+
+
+class LibrispeechTest360S3(LibrispeechTest360):
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

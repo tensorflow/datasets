@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for cifar dataset module."""
+"""Test for ImageLabelFolder."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -26,6 +26,7 @@ from tensorflow_datasets.image import image_folder
 
 
 class ImageLabelFolderTest(testing.DatasetBuilderTestCase):
+  """Test for ImageLabelFolder."""
   DATASET_CLASS = functools.partial(
       image_folder.ImageLabelFolder, dataset_name="image_folder_data")
   # The above construct forces us to disable those checks:
@@ -41,6 +42,10 @@ class ImageLabelFolderTest(testing.DatasetBuilderTestCase):
   def test_registered(self):
     self.assertIn("image_label_folder", registered.list_builders(),
                   "Dataset was not registered.")
+
+
+class ImageLabelFolderS3Test(ImageLabelFolderTest):
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

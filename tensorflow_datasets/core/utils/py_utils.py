@@ -35,6 +35,10 @@ from tensorflow_datasets.core import constants
 
 
 # pylint: disable=g-import-not-at-top
+try:  # Use shutil on Python 3.3+
+  from shutil import disk_usage  # pylint: disable=g-importing-member
+except ImportError:
+  from psutil import disk_usage  # pylint: disable=g-importing-member
 if sys.version_info[0] > 2:
   import functools
 else:
@@ -48,6 +52,19 @@ else:
 # https://stackoverflow.com/questions/14946264/python-lru-cache-decorator-per-instance
 # For @property methods, use @memoized_property below.
 memoize = functools.lru_cache
+
+
+def is_notebook():
+  """Returns True if running in a notebook (Colab, Jupyter) environement."""
+  # Inspired from the tfdm autonotebook code
+  try:
+    from IPython import get_ipython  # pylint: disable=g-import-not-at-top
+    if "IPKernelApp" not in get_ipython().config:
+      return False  # Run in a IPython terminal
+  except:  # pylint: disable=bare-except
+    return False
+  else:
+    return True
 
 
 @contextlib.contextmanager
@@ -160,6 +177,40 @@ def zip_nested(arg0, *args, **kwargs):
   return (arg0,) + args
 
 
+def flatten_nest_dict(d):
+  """Return the dict with all nested keys flattened joined with '/'."""
+  # Use NonMutableDict to ensure there is no collision between features keys
+  flat_dict = NonMutableDict()
+  for k, v in d.items():
+    if isinstance(v, dict):
+      flat_dict.update({
+          "{}/{}".format(k, k2): v2 for k2, v2 in flatten_nest_dict(v).items()
+      })
+    else:
+      flat_dict[k] = v
+  return flat_dict
+
+
+def pack_as_nest_dict(flat_d, nest_d):
+  """Pack a 1-lvl dict into a nested dict with same structure as `nest_d`."""
+  nest_out_d = {}
+  for k, v in nest_d.items():
+    if isinstance(v, dict):
+      v_flat = flatten_nest_dict(v)
+      sub_d = {
+          k2: flat_d.pop("{}/{}".format(k, k2)) for k2, _ in v_flat.items()
+      }
+      # Recursivelly pack the dictionary
+      nest_out_d[k] = pack_as_nest_dict(sub_d, v)
+    else:
+      nest_out_d[k] = flat_d.pop(k)
+  if flat_d:  # At the end, flat_d should be empty
+    raise ValueError(
+        "Flat dict strucure do not match the nested dict. Extra keys: "
+        "{}".format(list(flat_d.keys())))
+  return nest_out_d
+
+
 def as_proto_cls(proto_cls):
   """Simulate proto inheritance.
 
@@ -197,10 +248,23 @@ def as_proto_cls(proto_cls):
       """Base class simulating the protobuf."""
 
       def __init__(self, *args, **kwargs):
-        self.__proto = proto_cls(*args, **kwargs)
+        super(ProtoCls, self).__setattr__(
+            "_ProtoCls__proto",
+            proto_cls(*args, **kwargs),
+        )
 
       def __getattr__(self, attr_name):
         return getattr(self.__proto, attr_name)
+
+      def __setattr__(self, attr_name, new_value):
+        try:
+          if isinstance(new_value, list):
+            self.ClearField(attr_name)
+            getattr(self.__proto, attr_name).extend(new_value)
+          else:
+            return setattr(self.__proto, attr_name, new_value)
+        except AttributeError:
+          return super(ProtoCls, self).__setattr__(attr_name, new_value)
 
       def __eq__(self, other):
         return self.__proto, other.get_proto()
@@ -263,11 +327,22 @@ def read_checksum_digest(path, checksum_cls=hashlib.sha256):
   return checksum.hexdigest(), size
 
 
-def reraise(additional_msg):
+def reraise(prefix=None, suffix=None):
   """Reraise an exception with an additional message."""
   exc_type, exc_value, exc_traceback = sys.exc_info()
-  msg = str(exc_value) + "\n" + additional_msg
+  prefix = prefix or ""
+  suffix = "\n" + suffix if suffix else ""
+  msg = prefix + str(exc_value) + suffix
   six.reraise(exc_type, exc_type(msg), exc_traceback)
+
+
+@contextlib.contextmanager
+def try_reraise(*args, **kwargs):
+  """Reraise an exception with an additional message."""
+  try:
+    yield
+  except Exception:   # pylint: disable=broad-except
+    reraise(*args, **kwargs)
 
 
 def rgetattr(obj, attr, *args):
@@ -275,3 +350,29 @@ def rgetattr(obj, attr, *args):
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
   return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def has_sufficient_disk_space(needed_bytes, directory="."):
+  try:
+    free_bytes = disk_usage(os.path.abspath(directory)).free
+  except OSError:
+    return True
+  return needed_bytes < free_bytes
+
+
+def get_class_path(cls, use_tfds_prefix=True):
+  """Returns path of given class or object. Eg: `tfds.image.cifar.Cifar10`."""
+  if not isinstance(cls, type):
+    cls = cls.__class__
+  module_path = cls.__module__
+  if use_tfds_prefix and module_path.startswith("tensorflow_datasets"):
+    module_path = "tfds" + module_path[len("tensorflow_datasets"):]
+  return ".".join([module_path, cls.__name__])
+
+
+def get_class_url(cls):
+  """Returns URL of given class or object."""
+  cls_path = get_class_path(cls, use_tfds_prefix=False)
+  module_path, unused_class_name = cls_path.rsplit(".", 1)
+  module_path = module_path.replace(".", "/")
+  return constants.SRC_BASE_URL + module_path + ".py"

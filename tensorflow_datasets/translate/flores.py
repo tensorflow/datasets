@@ -19,11 +19,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import abc
 import collections
 
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -53,7 +51,7 @@ TranslateData = collections.namedtuple("TranslateData",
 class FloresConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLoRes."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self,
                text_encoder_config=None,
                language_pair=(None, None),
@@ -75,15 +73,27 @@ class FloresConfig(tfds.core.BuilderConfig):
     description = (
         "Translation dataset from %s to %s, uses encoder %s.") % (
             language_pair[0], language_pair[1], encoder_name)
+    # Version history:
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    # 0.0.3: initial version.
     super(FloresConfig, self).__init__(
-        name=name, description=description, **kwargs)
+        name=name,
+        description=description,
+        version=tfds.core.Version(
+            "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version(
+                "1.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
+        ],
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
     # Validate language pair.
     assert "en" in language_pair, (
         "Config language pair must contain `en`, got: %s",
-        self.builder_config.language_pair)
+        language_pair)
     source, target = language_pair
     non_en = source if target == "en" else target
     assert non_en in ["ne", "si"], (
@@ -92,13 +102,17 @@ class FloresConfig(tfds.core.BuilderConfig):
     self.language_pair = language_pair
 
 
-class FloresTranslate(tfds.core.GeneratorBasedBuilder):
+class Flores(tfds.core.GeneratorBasedBuilder):
   """FLoRes machine translation dataset."""
 
-  @abc.abstractproperty
-  def is_abstract(self):
-    """Forces base class to be abstract."""
-    return True
+  BUILDER_CONFIGS = [
+      FloresConfig(
+          language_pair=("ne", "en"),
+      ),
+      FloresConfig(
+          language_pair=("si", "en"),
+      ),
+  ]
 
   def _info(self):
     source, target = self.builder_config.language_pair
@@ -114,7 +128,7 @@ class FloresTranslate(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, files, language):
-    for ex in self._generate_examples(**files):
+    for _, ex in self._generate_examples(**files):
       yield ex[language]
 
   def _split_generators(self, dl_manager):
@@ -164,8 +178,9 @@ class FloresTranslate(tfds.core.GeneratorBasedBuilder):
             target_file)
 
     source, target = self.builder_config.language_pair
-    for l1, l2 in zip(source_sentences, target_sentences):
+    for idx, (l1, l2) in enumerate(
+        zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):
-        yield result
+        yield idx, result

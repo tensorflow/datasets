@@ -1,0 +1,4 @@
+ class_id super_class_id path
+115308 21635 11 table_final/381052627539_0.JPG
+80418 14815 4 coffee_maker_final/371344103996_3.JPG
+82898 15277 5 fan_final/321823124835_0.JPG

@@ -22,14 +22,14 @@ from __future__ import print_function
 import os
 import re
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
 Large Movie Review Dataset.
 This is a dataset for binary sentiment classification containing substantially \
 more data than previous benchmark datasets. We provide a set of 25,000 highly \
-polar movie reviews for training, and 25,000 for testing.\
+polar movie reviews for training, and 25,000 for testing. There is additional \
+unlabeled data for use as well.\
 """
 
 _CITATION = """\
@@ -52,7 +52,7 @@ _DOWNLOAD_URL = "http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
 class IMDBReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for IMDBReviews."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, **kwargs):
     """BuilderConfig for IMDBReviews.
 
@@ -62,7 +62,15 @@ class IMDBReviewsConfig(tfds.core.BuilderConfig):
         feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(IMDBReviewsConfig, self).__init__(**kwargs)
+    super(IMDBReviewsConfig, self).__init__(
+        version=tfds.core.Version(
+            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version(
+                "1.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
+        ],
+        **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
 
@@ -72,12 +80,10 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       IMDBReviewsConfig(
           name="plain_text",
-          version="0.0.1",
           description="Plain text",
       ),
       IMDBReviewsConfig(
           name="bytes",
-          version="0.0.1",
           description=("Uses byte-level text encoding with "
                        "`tfds.features.text.ByteTextEncoder`"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -85,7 +91,6 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       ),
       IMDBReviewsConfig(
           name="subwords8k",
-          version="0.0.1",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
                        "vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -94,7 +99,6 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
       ),
       IMDBReviewsConfig(
           name="subwords32k",
-          version="0.0.1",
           description=("Uses `tfds.features.text.SubwordTextEncoder` with "
                        "32k vocab size"),
           text_encoder_config=tfds.features.text.TextEncoderConfig(
@@ -118,8 +122,8 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, archive):
-    for ex in self._generate_examples(archive,
-                                      os.path.join("aclImdb", "train")):
+    for _, ex in self._generate_examples(
+        archive, os.path.join("aclImdb", "train")):
       yield ex["text"]
 
   def _split_generators(self, dl_manager):
@@ -141,17 +145,27 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
             num_shards=10,
             gen_kwargs={"archive": archive(),
                         "directory": os.path.join("aclImdb", "test")}),
+        tfds.core.SplitGenerator(
+            name=tfds.Split("unsupervised"),
+            num_shards=20,
+            gen_kwargs={"archive": archive(),
+                        "directory": os.path.join("aclImdb", "train"),
+                        "labeled": False}),
     ]
 
-  def _generate_examples(self, archive, directory):
+  def _generate_examples(self, archive, directory, labeled=True):
     """Generate IMDB examples."""
-    reg = re.compile(os.path.join("^%s" % directory, "(?P<label>neg|pos)", ""))
+    # For labeled examples, extract the label from the path.
+    reg_path = "(?P<label>neg|pos)" if labeled else "unsup"
+    reg = re.compile(
+        os.path.join("^%s" % directory, reg_path, "").replace("\\", "\\\\"))
     for path, imdb_f in archive:
       res = reg.match(path)
       if not res:
         continue
       text = imdb_f.read().strip()
-      yield {
+      label = res.groupdict()["label"] if labeled else -1
+      yield path, {
           "text": text,
-          "label": res.groupdict()["label"],
+          "label": label,
       }

@@ -10,19 +10,21 @@
 
 # tfds.features.BBox
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
+source</a>
+
 ## Class `BBox`
-
-
-
-
-
-Defined in [`core/features/bounding_boxes.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py).
 
 BBox(ymin, xmin, ymax, xmax)
 
+<!-- Placeholder for "Used in" -->
+
 <h2 id="__new__"><code>__new__</code></h2>
 
-``` python
+```python
 @staticmethod
 __new__(
     _cls,
@@ -35,25 +37,12 @@ __new__(
 
 Create new instance of BBox(ymin, xmin, ymax, xmax)
 
-
-
 ## Properties
 
 <h3 id="ymin"><code>ymin</code></h3>
 
-
-
 <h3 id="xmin"><code>xmin</code></h3>
-
-
 
 <h3 id="ymax"><code>ymax</code></h3>
 
-
-
 <h3 id="xmax"><code>xmax</code></h3>
-
-
-
-
-

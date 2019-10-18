@@ -72,7 +72,12 @@ def _load_tif(path):
 class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
   """Biological 8-class classification problem."""
   URL = _URL
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -109,17 +114,23 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
 
       for fn in sorted(fns):
         image = _load_tif(os.path.join(class_dir, fn))
-        yield {
+        record = {
             "image": image,
             "label": class_name,
             "filename": fn,
         }
+        yield "%s/%s" % (class_name, fn), record
 
 
 class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
   """10 Large 5000 x 5000 colorectal histology images without labels."""
   URL = _URL
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -148,4 +159,5 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
     folder = os.path.join(folder, _LARGE_SUBDIR)
     for fn in tf.io.gfile.listdir(folder):
       image = _load_tif(os.path.join(folder, fn))
-      yield dict(image=image, filename=fn)
+      record = dict(image=image, filename=fn)
+      yield fn, record

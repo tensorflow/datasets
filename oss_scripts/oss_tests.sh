@@ -38,10 +38,13 @@ TF2_IGNORE=$(for test in $TF2_IGNORE_TESTS; do echo "--ignore=$test "; done)
 # * eager_not_enabled_by_default_test needs to be run separately because the
 #   enable_eager_execution calls set global state and pytest runs all the tests
 #   in the same process.
+# * build_docs_test: See b/142892342
 pytest \
+  -n auto \
   --disable-warnings \
   $TF2_IGNORE \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
+  --ignore="tensorflow_datasets/scripts/build_docs_test.py" \
   --ignore="tensorflow_datasets/eager_not_enabled_by_default_test.py"
 set_status
 # If not running with TF2, ensure Eager is not enabled by default

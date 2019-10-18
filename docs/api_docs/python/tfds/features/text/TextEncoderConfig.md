@@ -6,17 +6,24 @@
 
 # tfds.features.text.TextEncoderConfig
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ## Class `TextEncoderConfig`
 
+Configuration for
+<a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
 
+<!-- Placeholder for "Used in" -->
 
-
-
-Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
-
-Configuration for <a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
 
 ``` python
 __init__(
@@ -26,8 +33,3 @@ __init__(
     name=None
 )
 ```
-
-
-
-
-

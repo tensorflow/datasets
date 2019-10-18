@@ -30,13 +30,21 @@ class NamingTest(parameterized.TestCase, testing.TestCase):
   @parameterized.parameters(
       ("HelloWorld", "hello_world"),
       ("FooBARBaz", "foo_bar_baz"),
-      ("FooBARBaz", "foo_bar_baz"),
       ("FooBar123", "foo_bar123"),
       ("FooBar123Baz", "foo_bar123_baz"),
       ("FooBar123baz", "foo_bar123baz"),
   )
   def test_camelcase_to_snakecase(self, camel, snake):
     self.assertEqual(snake, naming.camelcase_to_snakecase(camel))
+
+  @parameterized.parameters(
+      ("HelloWorld", "hello_world"),
+      ("FooBar123", "foo_bar123"),
+      ("FooBar123Baz", "foo_bar123_baz"),
+      ("FooBar123baz", "foo_bar123baz"),
+  )
+  def test_snake_to_camelcase(self, camel, snake):
+    self.assertEqual(naming.snake_to_camelcase(snake), camel)
 
   def test_sharded_filenames(self):
     prefix = "/tmp/foo"

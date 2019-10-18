@@ -1,0 +1,174 @@
+{
+  "citation": "@inproceedings{song2016deep,\n author    = {Song, Hyun Oh and Xiang, Yu and Jegelka, Stefanie and Savarese, Silvio},\n title     = {Deep Metric Learning via Lifted Structured Feature Embedding},\n booktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},\n year      = {2016}\n}\n", 
+  "description": "Stanford Online Products Dataset", 
+  "location": {
+    "urls": [
+      "http://cvgl.stanford.edu/projects/lifted_struct/"
+    ]
+  }, 
+  "name": "stanford_online_products", 
+  "schema": {
+    "feature": [
+      {
+        "name": "class_id", 
+        "type": "INT"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "super_class_id", 
+        "type": "INT"
+      }, 
+      {
+        "name": "super_class_id/num", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "3083860082", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "3781", 
+        "3782", 
+        "3781", 
+        "3782", 
+        "3781", 
+        "3781", 
+        "3782", 
+        "3781", 
+        "3781", 
+        "3782", 
+        "3781", 
+        "3782", 
+        "3781", 
+        "3781", 
+        "3782", 
+        "3781"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "class_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60502"
+              }, 
+              "max": 22633.0, 
+              "min": 11318.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60502"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "super_class_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60502"
+              }, 
+              "max": 11.0
+            }
+          }, 
+          {
+            "name": "super_class_id/num", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "60502"
+              }, 
+              "max": 11.0
+            }
+          }
+        ], 
+        "numExamples": "60502"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3721", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722", 
+        "3722"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "class_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "59551"
+              }, 
+              "max": 11317.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "59551"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "super_class_id", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "59551"
+              }, 
+              "max": 11.0
+            }
+          }, 
+          {
+            "name": "super_class_id/num", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "59551"
+              }, 
+              "max": 11.0
+            }
+          }
+        ], 
+        "numExamples": "59551"
+      }
+    }
+  ], 
+  "version": "1.0.0"
+}

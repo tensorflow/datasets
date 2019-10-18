@@ -24,7 +24,6 @@ import os
 
 from absl import logging
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -52,18 +51,14 @@ from the corresponding reading passage, or the question might be unanswerable.
 class SquadConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SQUAD."""
 
-  @api_utils.disallow_positional_args
-  def __init__(self, text_encoder_config=None, **kwargs):
+  @tfds.core.disallow_positional_args
+  def __init__(self, **kwargs):
     """BuilderConfig for SQUAD.
 
     Args:
-      text_encoder_config: `tfds.features.text.TextEncoderConfig`, configuration
-        for the `tfds.features.text.TextEncoder` used for the features feature.
       **kwargs: keyword arguments forwarded to super.
     """
     super(SquadConfig, self).__init__(**kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.features.text.TextEncoderConfig())
 
 
 class Squad(tfds.core.GeneratorBasedBuilder):
@@ -75,34 +70,14 @@ class Squad(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       SquadConfig(
           name="plain_text",
-          version="0.0.1",
+          version=tfds.core.Version(
+              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version(
+                  "1.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
+          ],
           description="Plain text",
-      ),
-      SquadConfig(
-          name="bytes",
-          version="0.0.1",
-          description=("Uses byte-level text encoding with "
-                       "`tfds.features.text.ByteTextEncoder`"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder=tfds.features.text.ByteTextEncoder()),
-      ),
-      SquadConfig(
-          name="subwords8k",
-          version="0.0.1",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with 8k "
-                       "vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
-              vocab_size=2**13),
-      ),
-      SquadConfig(
-          name="subwords32k",
-          version="0.0.2",
-          description=("Uses `tfds.features.text.SubwordTextEncoder` with "
-                       "32k vocab size"),
-          text_encoder_config=tfds.features.text.TextEncoderConfig(
-              encoder_cls=tfds.features.text.SubwordTextEncoder,
-              vocab_size=2**15),
       ),
   ]
 
@@ -111,15 +86,19 @@ class Squad(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
+            "id":
+                tf.string,
+            "title":
+                tfds.features.Text(),
             "context":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+                tfds.features.Text(),
             "question":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "first_answer":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
+                tfds.features.Text(),
+            "answers":
+                tfds.features.Sequence({
+                    "text": tfds.features.Text(),
+                    "answer_start": tf.int32,
+                }),
         }),
         # No default supervised_keys (as we have to pass both question
         # and context as input).
@@ -128,27 +107,12 @@ class Squad(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, filepath):
-    for ex in self._generate_examples(filepath):
-      # "first_answer" is a substring of "context" so not need to add it here
-      yield " ".join([ex["question"], ex["context"]])
-
   def _split_generators(self, dl_manager):
     urls_to_download = {
         "train": os.path.join(self._URL, self._TRAINING_FILE),
         "dev": os.path.join(self._URL, self._DEV_FILE)
     }
     downloaded_files = dl_manager.download_and_extract(urls_to_download)
-
-    # Generate shared vocabulary
-    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
-    self.info.features["context"].maybe_build_from_corpus(
-        self._vocab_text_gen(downloaded_files["train"]))
-    encoder = self.info.features["context"].encoder
-    # Use maybe_set_encoder because the encoder may have been restored from
-    # package data.
-    self.info.features["question"].maybe_set_encoder(encoder)
-    self.info.features["first_answer"].maybe_set_encoder(encoder)
 
     return [
         tfds.core.SplitGenerator(
@@ -167,10 +131,7 @@ class Squad(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(filepath) as f:
       squad = json.load(f)
       for article in squad["data"]:
-        if "title" in article:
-          title = article["title"].strip()
-        else:
-          title = ""
+        title = article.get("title", "").strip()
         for paragraph in article["paragraphs"]:
           context = paragraph["context"].strip()
           for qa in paragraph["qas"]:
@@ -182,17 +143,13 @@ class Squad(tfds.core.GeneratorBasedBuilder):
 
             # Features currently used are "context", "question", and "answers".
             # Others are extracted here for the ease of future expansions.
-            example = {
+            yield id_, {
                 "title": title,
                 "context": context,
                 "question": question,
                 "id": id_,
-                "answer_starts": answer_starts,
-                "answers": answers,
-            }
-            yield {
-                "question": example["question"],
-                # TODO(b/121176753): return all the answers.
-                "first_answer": example["answers"][0],
-                "context": example["context"]
+                "answers": {
+                    "answer_start": answer_starts,
+                    "text": answers,
+                },
             }
