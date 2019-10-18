@@ -13,30 +13,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for definite_pronoun_resolution dataset module."""
+"""Tests for c4 dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import six
+
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import definite_pronoun_resolution
+from tensorflow_datasets.text import c4
 
 
-class DefinitePronounResolutionTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = definite_pronoun_resolution.DefinitePronounResolution
+class C4Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = c4.C4
+  # 10k shards take make the test too slow.
+  c4._DEFAULT_NUM_SHARDS = 1
+  # GzipFile + GFile and TextIOWrapper are broken for py2.
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en"] if six.PY3 else []
+
   DL_EXTRACT_RESULT = {
-      "train": "train.c.txt",
-      "test": "test.c.txt",
+      "wet_urls": ["wet_urls.txt"],
+      "wet_files": ["cc_0.warc.wet.gz", "cc_1.warc.wet.gz"],
+      "badwords": "badwords.txt",
   }
   SPLITS = {
-      "test": 3,
+      "train": 2,
+  }
+
+
+class C4NoCleanTest(C4Test):
+  # GzipFile + GFile and TextIOWrapper are broken for py2.
+  BUILDER_CONFIG_NAMES_TO_TEST = ["en.noclean"] if six.PY3 else []
+  SPLITS = {
       "train": 4,
   }
 
-
-class DefinitePronounResolutionS3Test(DefinitePronounResolutionTest):
-  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()

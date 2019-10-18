@@ -144,8 +144,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
 
     # Determine the fake_examples directory.
     self.example_dir = os.path.join(
-        os.path.dirname(__file__),
-        "test_data", "fake_examples", self.builder.name)
+        test_utils.fake_examples_dir(), self.builder.name)
     if self.EXAMPLE_DIR is not None:
       self.example_dir = self.EXAMPLE_DIR
 
@@ -244,6 +243,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_extract_result,
+        download_checksums=lambda *_: None,
         manual_dir=self.example_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):

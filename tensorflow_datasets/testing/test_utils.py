@@ -69,6 +69,10 @@ def remake_dir(d):
   tf.io.gfile.makedirs(d)
 
 
+def fake_examples_dir():
+  return os.path.join(os.path.dirname(__file__), "test_data", "fake_examples")
+
+
 class FeatureExpectationItem(object):
   """Test item of a FeatureExpectation."""
 
