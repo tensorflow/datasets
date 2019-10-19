@@ -28,8 +28,10 @@ from tensorflow_datasets import testing
 class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
   @parameterized.parameters(
+      "crepe",
       "cv2",
       "langdetect",
+      # "librosa",
       "matplotlib",
       "mwparserfromhell",
       "nltk",
