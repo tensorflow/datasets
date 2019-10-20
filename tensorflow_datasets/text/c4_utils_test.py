@@ -118,12 +118,9 @@ But then, all of a sudden, there's a badword... or not?
     outputs_should_be_none = [False, True, True, True]
     expected_counters = [
         {"lines-valid": 4, "emitted-clean-pages": 1},
-        {"lines-valid": 3, "filtered-url-badword": 1,
-         "badword-first-match-ass": 1},
-        {"lines-valid": 3, "filtered-url-badword": 1,
-         "badword-first-match-ass": 1},
-        {"lines-valid": 3, "filtered-url-badword": 1,
-         "badword-first-match-ass": 1},
+        {"lines-valid": 3, "filtered-url-badword": 1},
+        {"lines-valid": 3, "filtered-url-badword": 1},
+        {"lines-valid": 3, "filtered-url-badword": 1},
     ]
     for final_sentence, output_should_be_none, expected_counter in zip(
         final_sentences, outputs_should_be_none, expected_counters

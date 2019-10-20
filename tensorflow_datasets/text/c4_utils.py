@@ -188,8 +188,6 @@ def clean_page(url_and_text, citation_regex, badwords_regex=None,
       badwords_found = badwords_regex.search(line_lower)
       if badwords_found is not None:
         counter_inc_fn("filtered-url-badword")
-        counter_inc_fn("badword-first-match-%s" % (
-            badwords_found.group(1).replace(" ", "_")))
         return
     num_sentences += len(_get_sentences(line))
     valid_lines.append(line)
