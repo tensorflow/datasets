@@ -76,10 +76,10 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
     # archives format is uncompressed tar.
     dl_paths = dl_manager.download_and_extract({
         "images": tfds.download.Resource(
-            url=os.path.join(_BASE_URL, "images.tar.gz"),
+            url=_BASE_URL + "/images.tar.gz",
             extract_method=tfds.download.ExtractMethod.TAR),
         "annotations": tfds.download.Resource(
-            url=os.path.join(_BASE_URL, "annotations.tar.gz"),
+            url=_BASE_URL + "/annotations.tar.gz",
             extract_method=tfds.download.ExtractMethod.TAR)
     })
 
