@@ -131,6 +131,7 @@ DATASET_EXTRAS = {
     'the300w_lp': ['scipy'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'lsun': ['tensorflow-io==0.8.0']
 }
 
 all_dataset_extras = []

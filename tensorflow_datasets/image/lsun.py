@@ -64,6 +64,10 @@ _CATEGORIES = [
 ]
 
 
+def _make_lmdb_dataset(path):
+  return tfds.core.lazy_imports.tensorflow_io.IODataset.from_lmdb(path)
+
+
 class Lsun(tfds.core.GeneratorBasedBuilder):
   """Lsun dataset."""
 
@@ -116,8 +120,8 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, extracted_dir, file_path):
     with tf.Graph().as_default():
-      dataset = tf.contrib.data.LMDBDataset(
-          os.path.join(extracted_dir, file_path, "data.mdb"))
+      path = os.path.join(extracted_dir, file_path, "data.mdb")
+      dataset = _make_lmdb_dataset(path)
       for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
         record = {"image": io.BytesIO(jpeg_image)}
         yield i, record
