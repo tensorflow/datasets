@@ -118,7 +118,7 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 To generate the dataset on Beam, the API is the same as for other datasets, but
 you have to pass the Beam options or runner to the `DownloadConfig`.
 
-```
+```py
 # To use Beam, you have to set at least one of `beam_options` or `beam_runner`
 dl_config = tfds.download.DownloadConfig(
     beam_options=beam.options.pipeline_options.PipelineOptions()
@@ -131,13 +131,59 @@ builder.download_and_prepare(
 )
 ```
 
+Below are examples of running Beam using the `downoad_and_prepare` script either
+on [Google Cloud Dataflow](https://cloud.google.com/dataflow/) or locally.
+
+### On Google Cloud Dataflow
+
+To run the pipeline using
+[Google Cloud Dataflow](https://cloud.google.com/dataflow/) and take advantage
+of distributed computation, first follow the
+[Quickstart instructions](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python).
+
+Once your environment is set up, you can run the `download_and_prepare` script
+using a data directory on [GCS](https://cloud.google.com/storage/) and
+specifying the
+[required options](http://cloud/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)
+for the `--beam_pipeline_options` flag.
+
+To make it easier to launch the script, it's helpful to define the following
+variables using the actual values for your GCP/GCS setup and the dataset
+you want to generate:
+
+```sh
+DATASET_NAME=my-dataset
+GCP_PROJECT=my-project-id
+GCS_BUCKET=gs://my-gcs-bucket
+```
+
+You will then need to create a file to tell Dataflow to install `tfds` on the
+workers:
+
+```sh
+echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
+```
+
+Finally, you can launch the job using the command below:
+
+```sh
+python -m tensorflow_datasets.scripts.download_and_prepare \
+  --register_checksums \
+  --datasets=$DATASET_NAME \
+  --data_dir=$GCP_BUCKET/tensorflow_datasets \
+  --beam_pipeline_options=\
+"runner=DataflowRunner,project=$GCP_PROJECT,job_name=$DATASET_NAME-gen,"\
+"staging_location=$GCP_BUCKET/binaries,temp_location=$GCP_BUCKET/temp,"\
+"requirements_file=/tmp/beam_requirements.txt"
+```
+
+### Locally
+
 To run your script locally using the default Apache Beam runner, the command is
 the same as for other datasets:
 
-```
+```sh
 python -m tensorflow_datasets.scripts.download_and_prepare \
   --register_checksums \
   --datasets=my_new_dataset
 ```
-
-TODO(tfds): Add instructions to run with `Cloud Dataflow`
