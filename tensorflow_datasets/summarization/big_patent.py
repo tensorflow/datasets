@@ -101,7 +101,7 @@ class BigPatent(tfds.core.GeneratorBasedBuilder):
           name=k,
           description=("Patents under Cooperative Patent Classification (CPC)"
                        "{0}: {1}".format(k, v)),
-      ) for k, v in _CPC_DESCRIPTION.items()
+      ) for k, v in sorted(_CPC_DESCRIPTION.items())
   ]
 
   def _info(self):
