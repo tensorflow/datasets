@@ -31,7 +31,7 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "crepe",
       "cv2",
       "langdetect",
-      # "librosa",
+      "librosa",
       "matplotlib",
       "mwparserfromhell",
       "nltk",
