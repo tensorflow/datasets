@@ -71,6 +71,10 @@ big_patent/y/1.0.0
 billsum/1.0.0
 binarized_mnist/1.0.0
 binary_alpha_digits/1.0.0
+c4/en.noclean/1.0.0
+c4/en.realnewslike/1.0.0
+c4/en.webtextlike/1.0.0
+c4/en/1.0.0
 caltech101/1.1.0
 caltech101/3.0.0
 caltech_birds2010/0.1.0
@@ -631,8 +635,9 @@ multi_nli/plain_text/0.0.2
 multi_nli/plain_text/1.0.0
 multi_nli_mismatch/plain_text/0.0.1
 newsroom/1.0.0
-nsynth/1.0.0
-nsynth/2.0.0
+nsynth/full/1.1.0
+nsynth/gansynth_subset.f0_and_loudness/1.1.0
+nsynth/gansynth_subset/1.1.0
 omniglot/1.0.0
 omniglot/3.0.0
 open_images_v4/200k/0.2.1

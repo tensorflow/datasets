@@ -31,11 +31,14 @@ and has the following configurations predefined (defaults to the first one):
 
 *   `all` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under all categories.
 
-*   `h` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)h: Electricity
+*   `a` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)a: Human Necessities
 
-*   `y` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)y: General tagging of new or cross-sectional technology
+*   `b` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)b: Performing Operations; Transporting
+
+*   `c` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)c: Chemistry; Metallurgy
 
 *   `d` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
     Classification (CPC)d: Textiles; Paper
@@ -50,14 +53,11 @@ and has the following configurations predefined (defaults to the first one):
 *   `g` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
     Classification (CPC)g: Physics
 
-*   `a` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)a: Human Necessities
+*   `h` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)h: Electricity
 
-*   `b` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)b: Performing Operations; Transporting
-
-*   `c` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
-    Classification (CPC)c: Chemistry; Metallurgy
+*   `y` (`v1.0.0`) (`Size: 6.01 GiB`): Patents under Cooperative Patent
+    Classification (CPC)y: General tagging of new or cross-sectional technology
 
 ## `big_patent/all`
 Patents under all categories.
@@ -90,9 +90,9 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'description', u'abstract')`
 
-## `big_patent/h`
+## `big_patent/a`
 
-Patents under Cooperative Patent Classification (CPC)h: Electricity
+Patents under Cooperative Patent Classification (CPC)a: Human Necessities
 
 Versions:
 
@@ -102,10 +102,10 @@ Versions:
 
 Split      | Examples
 :--------- | -------:
-ALL        | 285,577
-TRAIN      | 257,019
-TEST       | 14,279
-VALIDATION | 14,279
+ALL        | 193,483
+TRAIN      | 174,134
+TEST       | 9,675
+VALIDATION | 9,674
 
 ### Features
 ```python
@@ -122,10 +122,10 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'description', u'abstract')`
 
-## `big_patent/y`
+## `big_patent/b`
 
-Patents under Cooperative Patent Classification (CPC)y: General tagging of new
-or cross-sectional technology
+Patents under Cooperative Patent Classification (CPC)b: Performing Operations;
+Transporting
 
 Versions:
 
@@ -135,10 +135,42 @@ Versions:
 
 Split      | Examples
 :--------- | -------:
-ALL        | 138,219
-TRAIN      | 124,397
-TEST       | 6,911
-VALIDATION | 6,911
+ALL        | 179,467
+TRAIN      | 161,520
+TEST       | 8,974
+VALIDATION | 8,973
+
+### Features
+```python
+FeaturesDict({
+    'abstract': Text(shape=(), dtype=tf.string),
+    'description': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
+
+*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'description', u'abstract')`
+
+## `big_patent/c`
+
+Patents under Cooperative Patent Classification (CPC)c: Chemistry; Metallurgy
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+
+Split      | Examples
+:--------- | -------:
+ALL        | 112,269
+TRAIN      | 101,042
+TEST       | 5,614
+VALIDATION | 5,613
 
 ### Features
 ```python
@@ -284,9 +316,9 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'description', u'abstract')`
 
-## `big_patent/a`
+## `big_patent/h`
 
-Patents under Cooperative Patent Classification (CPC)a: Human Necessities
+Patents under Cooperative Patent Classification (CPC)h: Electricity
 
 Versions:
 
@@ -296,10 +328,10 @@ Versions:
 
 Split      | Examples
 :--------- | -------:
-ALL        | 193,483
-TRAIN      | 174,134
-TEST       | 9,675
-VALIDATION | 9,674
+ALL        | 285,577
+TRAIN      | 257,019
+TEST       | 14,279
+VALIDATION | 14,279
 
 ### Features
 ```python
@@ -316,42 +348,10 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'description', u'abstract')`
 
-## `big_patent/b`
+## `big_patent/y`
 
-Patents under Cooperative Patent Classification (CPC)b: Performing Operations;
-Transporting
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-Split      | Examples
-:--------- | -------:
-ALL        | 179,467
-TRAIN      | 161,520
-TEST       | 8,974
-VALIDATION | 8,973
-
-### Features
-```python
-FeaturesDict({
-    'abstract': Text(shape=(), dtype=tf.string),
-    'description': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Urls
-
-*   [https://evasharma.github.io/bigpatent/](https://evasharma.github.io/bigpatent/)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'description', u'abstract')`
-
-## `big_patent/c`
-
-Patents under Cooperative Patent Classification (CPC)c: Chemistry; Metallurgy
+Patents under Cooperative Patent Classification (CPC)y: General tagging of new
+or cross-sectional technology
 
 Versions:
 
@@ -361,10 +361,10 @@ Versions:
 
 Split      | Examples
 :--------- | -------:
-ALL        | 112,269
-TRAIN      | 101,042
-TEST       | 5,614
-VALIDATION | 5,613
+ALL        | 138,219
+TRAIN      | 124,397
+TEST       | 6,911
+VALIDATION | 6,911
 
 ### Features
 ```python

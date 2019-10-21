@@ -127,6 +127,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`wikihow`](wikihow.md)
     *   [`xsum`](xsum.md)
 *   `Text`
+    *   [`c4`](c4.md)
     *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
     *   [`gap`](gap.md)
     *   [`glue`](glue.md)
