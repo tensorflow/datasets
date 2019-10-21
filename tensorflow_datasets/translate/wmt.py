@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import codecs
 import functools
 import gzip
 import itertools
@@ -870,8 +871,13 @@ def _parse_tmx(path):
     assert len(segs) == 1, "Invalid number of segments: %d" % len(segs)
     return segs[0].text
 
-  with tf.io.gfile.GFile(path) as f:
-    for _, elem in ElementTree.iterparse(f):
+  with tf.io.gfile.GFile(path, "rb") as f:
+    if six.PY3:
+      # Workaround due to: https://github.com/tensorflow/tensorflow/issues/33563
+      utf_f = codecs.getreader("utf-8")(f)
+    else:
+      utf_f = f
+    for _, elem in ElementTree.iterparse(utf_f):
       if elem.tag == "tu":
         yield {
             _get_tuv_lang(tuv):
