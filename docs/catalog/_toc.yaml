@@ -186,6 +186,8 @@ toc:
     title: xsum
   title: Summarization
 - section:
+  - path: /datasets/catalog/c4
+    title: c4
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/gap

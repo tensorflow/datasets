@@ -1376,6 +1376,7 @@
     "tfds.testing.TestCase.tearDownClass": true, 
     "tfds.testing.TestCase.tempfile_cleanup": true, 
     "tfds.testing.TestCase.test_session": true, 
+    "tfds.testing.fake_examples_dir": false, 
     "tfds.testing.make_tmp_dir": false, 
     "tfds.testing.mock_data": false, 
     "tfds.testing.mock_kaggle_api": false, 

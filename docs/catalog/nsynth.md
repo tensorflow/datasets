@@ -26,15 +26,47 @@ overlapping between the train set and the valid/test sets.
     [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 *   `DatasetBuilder`:
     [`tfds.audio.nsynth.Nsynth`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/audio/nsynth.py)
-*   Version: `v1.0.0`
-*   Versions:
 
-    *   **`1.0.0`** (default):
-    *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+`nsynth` is configured with `tfds.audio.nsynth.NsynthConfig` and has the
+following configurations predefined (defaults to the first one):
 
-*   Size: `73.07 GiB`
+*   `full` (`v1.1.0`) (`Size: 73.07 GiB`): Full NSynth Dataset is split into
+    train, valid, and test sets, with no instruments overlapping between the
+    train set and the valid/test sets.
 
-## Features
+*   `gansynth_subset` (`v1.1.0`) (`Size: 73.08 GiB`): NSynth Dataset limited to
+    acoustic instruments in the MIDI pitch interval [24, 84]. Uses alternate
+    splits that have overlap in instruments (but not exact notes) between the
+    train set and valid/test sets.
+
+This variant was originally introduced in the ICLR 2019 GANSynth paper
+(https://arxiv.org/abs/1902.08710).
+
+*   `gansynth_subset.f0_and_loudness` (`v1.1.0`) (`Size: 73.08 GiB`): NSynth
+    Dataset limited to acoustic instruments in the MIDI pitch interval [24, 84].
+    Uses alternate splits that have overlap in instruments (but not exact notes)
+    between the train set and valid/test sets.
+
+This variant was originally introduced in the ICLR 2019 GANSynth paper
+(https://arxiv.org/abs/1902.08710). This version additionally contains estimates
+for F0 using CREPE (Kim et al., 2018) and A-weighted perceptual loudness. Both
+signals are provided at a frame rate of 250Hz.
+
+## `nsynth/full`
+
+Full NSynth Dataset is split into train, valid, and test sets, with no
+instruments overlapping between the train set and the valid/test sets.
+
+Versions:
+
+*   **`1.1.0`** (default):
+
+### Statistics
+
+None computed
+
+### Features
+
 ```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),
@@ -61,16 +93,115 @@ FeaturesDict({
 })
 ```
 
-## Statistics
+### Urls
 
-Split | Examples
-:---- | -------:
-ALL   | 305,979
-TRAIN | 289,205
-VALID | 12,678
-TEST  | 4,096
+*   [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 
-## Urls
+## `nsynth/gansynth_subset`
+
+NSynth Dataset limited to acoustic instruments in the MIDI pitch interval [24,
+84]. Uses alternate splits that have overlap in instruments (but not exact
+notes) between the train set and valid/test sets.
+
+This variant was originally introduced in the ICLR 2019 GANSynth paper
+(https://arxiv.org/abs/1902.08710).
+
+Versions:
+
+*   **`1.1.0`** (default):
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'instrument': FeaturesDict({
+        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    }),
+    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'qualities': FeaturesDict({
+        'bright': Tensor(shape=(), dtype=tf.bool),
+        'dark': Tensor(shape=(), dtype=tf.bool),
+        'distortion': Tensor(shape=(), dtype=tf.bool),
+        'fast_decay': Tensor(shape=(), dtype=tf.bool),
+        'long_release': Tensor(shape=(), dtype=tf.bool),
+        'multiphonic': Tensor(shape=(), dtype=tf.bool),
+        'nonlinear_env': Tensor(shape=(), dtype=tf.bool),
+        'percussive': Tensor(shape=(), dtype=tf.bool),
+        'reverb': Tensor(shape=(), dtype=tf.bool),
+        'tempo-synced': Tensor(shape=(), dtype=tf.bool),
+    }),
+    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+})
+```
+
+### Urls
+
+*   [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
+
+## `nsynth/gansynth_subset.f0_and_loudness`
+
+NSynth Dataset limited to acoustic instruments in the MIDI pitch interval [24,
+84]. Uses alternate splits that have overlap in instruments (but not exact
+notes) between the train set and valid/test sets.
+
+This variant was originally introduced in the ICLR 2019 GANSynth paper
+(https://arxiv.org/abs/1902.08710). This version additionally contains estimates
+for F0 using CREPE (Kim et al., 2018) and A-weighted perceptual loudness. Both
+signals are provided at a frame rate of 250Hz.
+
+Versions:
+
+*   **`1.1.0`** (default):
+
+### Statistics
+
+None computed
+
+### Features
+
+```python
+FeaturesDict({
+    'audio': Tensor(shape=(64000,), dtype=tf.float32),
+    'f0': FeaturesDict({
+        'confidence': Tensor(shape=(1001,), dtype=tf.float32),
+        'hz': Tensor(shape=(1001,), dtype=tf.float32),
+        'midi': Tensor(shape=(1001,), dtype=tf.float32),
+    }),
+    'id': Tensor(shape=(), dtype=tf.string),
+    'instrument': FeaturesDict({
+        'family': ClassLabel(shape=(), dtype=tf.int64, num_classes=11),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=1006),
+        'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    }),
+    'loudness': FeaturesDict({
+        'db': Tensor(shape=(1001,), dtype=tf.float32),
+    }),
+    'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+    'qualities': FeaturesDict({
+        'bright': Tensor(shape=(), dtype=tf.bool),
+        'dark': Tensor(shape=(), dtype=tf.bool),
+        'distortion': Tensor(shape=(), dtype=tf.bool),
+        'fast_decay': Tensor(shape=(), dtype=tf.bool),
+        'long_release': Tensor(shape=(), dtype=tf.bool),
+        'multiphonic': Tensor(shape=(), dtype=tf.bool),
+        'nonlinear_env': Tensor(shape=(), dtype=tf.bool),
+        'percussive': Tensor(shape=(), dtype=tf.bool),
+        'reverb': Tensor(shape=(), dtype=tf.bool),
+        'tempo-synced': Tensor(shape=(), dtype=tf.bool),
+    }),
+    'velocity': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
+})
+```
+
+### Urls
 
 *   [https://g.co/magenta/nsynth-dataset](https://g.co/magenta/nsynth-dataset)
 

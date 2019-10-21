@@ -80,4 +80,4 @@ from an image classification dataset.
 
 ## Other Members
 
-*   `__version__ = '1.2.0'` <a id="__version__"></a>
+*   `__version__ = '1.3.0'` <a id="__version__"></a>

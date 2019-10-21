@@ -35,6 +35,8 @@ manager to the TestCase if supported.
 
 ## Functions
 
+[`fake_examples_dir(...)`](../tfds/testing/fake_examples_dir.md)
+
 [`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary
 directory.
 

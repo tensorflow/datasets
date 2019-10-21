@@ -157,6 +157,8 @@ toc:
     path: /datasets/api_docs/python/tfds/testing/DummyDatasetSharedGenerator
   - title: DummyMnist
     path: /datasets/api_docs/python/tfds/testing/DummyMnist
+  - title: fake_examples_dir
+    path: /datasets/api_docs/python/tfds/testing/fake_examples_dir
   - title: FeatureExpectationItem
     path: /datasets/api_docs/python/tfds/testing/FeatureExpectationItem
   - title: FeatureExpectationsTestCase
