@@ -51,11 +51,6 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
-  def crepe(cls):
-    return _try_import("crepe")
-
-  @utils.classproperty
-  @classmethod
   def cv2(cls):
     return _try_import("cv2")  # pylint: disable=unreachable
 
@@ -63,11 +58,6 @@ class LazyImporter(object):
   @classmethod
   def langdetect(cls):
     return _try_import("langdetect")
-
-  @utils.classproperty
-  @classmethod
-  def librosa(cls):
-    return _try_import("librosa")
 
   @utils.classproperty
   @classmethod

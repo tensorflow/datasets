@@ -18,32 +18,20 @@ from tensorflow_datasets.audio import nsynth
 import tensorflow_datasets.testing as tfds_test
 
 
-class NsynthFullTest(tfds_test.DatasetBuilderTestCase):
+class NsynthTest(tfds_test.DatasetBuilderTestCase):
+  """Test Nsynth."""
   DATASET_CLASS = nsynth.Nsynth
-  # Make test run faster by using fewer output shards.
-  nsynth._SPLIT_SHARDS = {"train": 1, "valid": 1, "test": 1,}
-  BUILDER_CONFIG_NAMES_TO_TEST = ["full"]
   SPLITS = {"train": 3, "test": 3, "valid": 3}
   DL_EXTRACT_RESULT = {
-      "examples": {
-          "train": "train",
-          "test": "test",
-          "valid": "valid",
-      },
+      "train": "nsynth-train.tfrecord",
+      "test": "nsynth-test.tfrecord",
+      "valid": "nsynth-valid.tfrecord",
       "instrument_labels": "nsynth-instrument_labels.txt"
   }
 
 
-class GANsynthTest(NsynthFullTest):
-  BUILDER_CONFIG_NAMES_TO_TEST = ["gansynth_subset"]
-  SPLITS = {"train": 3, "test": 1, "valid": 2}
-  DL_EXTRACT_RESULT = dict(NsynthFullTest.DL_EXTRACT_RESULT)
-  DL_EXTRACT_RESULT["gansynth_splits"] = "gansynth_splits.csv"
-
-
-class GANsynthWithF0AndLoudnessTest(GANsynthTest):
-  MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = False
-  BUILDER_CONFIG_NAMES_TO_TEST = ["gansynth_subset.f0_and_loudness"]
+class NsynthS3Test(NsynthTest):
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

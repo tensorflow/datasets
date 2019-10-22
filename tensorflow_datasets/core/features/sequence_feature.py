@@ -37,7 +37,7 @@ class Sequence(top_level_feature.TopLevelFeature):
   If the length of the sequence is static and known in advance, it should be
   specified in the constructor using the `length` param.
 
-  Note that `Sequence` does not support features which are of type
+  Note that `SequenceDict` do not support features which are of type
   `tf.io.FixedLenSequenceFeature`.
 
   Example:
