@@ -95,6 +95,11 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       `download_and_extract` method. The values should be the path of files
       present in the `fake_examples` directory, relative to that directory.
       If not specified, path to `fake_examples` will always be returned.
+    * DL_DOWNLOAD_RESULT: `dict[str]`, the returned result of mocked
+      `download_and_extract` method. The values should be the path of files
+      present in the `fake_examples` directory, relative to that directory.
+      If not specified: will use DL_EXTRACT_RESULT (this is due to backwards
+      compatibility and will be removed in the future).
     * EXAMPLE_DIR: `str`, the base directory in in which fake examples are
       contained. Optional; defaults to
       tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
@@ -123,6 +128,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   VERSION = None
   BUILDER_CONFIG_NAMES_TO_TEST = None
   DL_EXTRACT_RESULT = None
+  DL_DOWNLOAD_RESULT = None
   EXAMPLE_DIR = None
   OVERLAPPING_SPLITS = []
   MOCK_OUT_FORBIDDEN_OS_FUNCTIONS = True
@@ -207,6 +213,14 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
                             self.DL_EXTRACT_RESULT)
 
+  def _get_dl_download_result(self, url):
+    if self.DL_DOWNLOAD_RESULT is None:
+      # This is only to be backwards compatible with old approach.
+      # In the future it will be replaced with using self.example_dir.
+      return self._get_dl_extract_result(url)
+    return utils.map_nested(lambda fname: os.path.join(self.example_dir, fname),
+                            self.DL_DOWNLOAD_RESULT)
+
   def _make_builder(self, config=None):
     return self.DATASET_CLASS(  # pylint: disable=not-callable
         data_dir=self.tmp_dir,
@@ -242,7 +256,7 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
     with absltest.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
-        download=self._get_dl_extract_result,
+        download=self._get_dl_download_result,
         download_checksums=lambda *_: None,
         manual_dir=self.example_dir,
     ):
