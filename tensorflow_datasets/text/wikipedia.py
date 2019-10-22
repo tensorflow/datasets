@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import codecs
 import json
 import math
 import re
@@ -181,8 +182,14 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     def _extract_content(filepath):
       """Extracts article content from a single WikiMedia XML file."""
       logging.info("generating examples from = %s", filepath)
-      with tf.io.gfile.GFile(filepath) as f:
-        for _, elem in etree.iterparse(f, events=("end",)):
+      with tf.io.gfile.GFile(filepath, "rb") as f:
+        if six.PY3:
+          # Workaround due to:
+          # https://github.com/tensorflow/tensorflow/issues/33563
+          utf_f = codecs.getreader("utf-8")(f)
+        else:
+          utf_f = f
+        for _, elem in etree.iterparse(utf_f, events=("end",)):
           if not elem.tag.endswith("page"):
             continue
           namespace = elem.tag[:-4]
