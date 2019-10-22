@@ -764,6 +764,7 @@
     "tfds.testing.DatasetBuilderTestCase": false, 
     "tfds.testing.DatasetBuilderTestCase.BUILDER_CONFIG_NAMES_TO_TEST": true, 
     "tfds.testing.DatasetBuilderTestCase.DATASET_CLASS": true, 
+    "tfds.testing.DatasetBuilderTestCase.DL_DOWNLOAD_RESULT": true, 
     "tfds.testing.DatasetBuilderTestCase.DL_EXTRACT_RESULT": true, 
     "tfds.testing.DatasetBuilderTestCase.EXAMPLE_DIR": true, 
     "tfds.testing.DatasetBuilderTestCase.MOCK_MONARCH": true, 

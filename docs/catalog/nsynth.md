@@ -53,7 +53,6 @@ for F0 using CREPE (Kim et al., 2018) and A-weighted perceptual loudness. Both
 signals are provided at a frame rate of 250Hz.
 
 ## `nsynth/full`
-
 Full NSynth Dataset is split into train, valid, and test sets, with no
 instruments overlapping between the train set and the valid/test sets.
 
@@ -62,11 +61,9 @@ Versions:
 *   **`1.1.0`** (default):
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),
@@ -111,11 +108,9 @@ Versions:
 *   **`1.1.0`** (default):
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),
@@ -162,11 +157,9 @@ Versions:
 *   **`1.1.0`** (default):
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),

@@ -140,6 +140,7 @@
 <meta itemprop="property" content="test_session"/>
 <meta itemprop="property" content="BUILDER_CONFIG_NAMES_TO_TEST"/>
 <meta itemprop="property" content="DATASET_CLASS"/>
+<meta itemprop="property" content="DL_DOWNLOAD_RESULT"/>
 <meta itemprop="property" content="DL_EXTRACT_RESULT"/>
 <meta itemprop="property" content="EXAMPLE_DIR"/>
 <meta itemprop="property" content="MOCK_MONARCH"/>
@@ -182,6 +183,11 @@ You may set the following class attributes:
     `download_and_extract` method. The values should be the path of files
     present in the `fake_examples` directory, relative to that directory. If not
     specified, path to `fake_examples` will always be returned.
+*   DL_DOWNLOAD_RESULT: `dict[str]`, the returned result of mocked
+    `download_and_extract` method. The values should be the path of files
+    present in the `fake_examples` directory, relative to that directory. If not
+    specified: will use DL_EXTRACT_RESULT (this is due to backwards
+    compatibility and will be removed in the future).
 *   EXAMPLE_DIR: `str`, the base directory in in which fake examples are
     contained. Optional; defaults to
     tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
@@ -2558,6 +2564,7 @@ Use `self.session()` or `self.cached_session()` instead.
 *   `BUILDER_CONFIG_NAMES_TO_TEST = None`
     <a id="BUILDER_CONFIG_NAMES_TO_TEST"></a>
 *   `DATASET_CLASS = None` <a id="DATASET_CLASS"></a>
+*   `DL_DOWNLOAD_RESULT = None` <a id="DL_DOWNLOAD_RESULT"></a>
 *   `DL_EXTRACT_RESULT = None` <a id="DL_EXTRACT_RESULT"></a>
 *   `EXAMPLE_DIR = None` <a id="EXAMPLE_DIR"></a>
 *   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
