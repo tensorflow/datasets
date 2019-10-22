@@ -789,7 +789,7 @@ def _parse_parallel_sentences(f1, f2):
 
     if split_path[-1] == "gz":
       lang = split_path[-2]
-      with tf.io.gfile.GFile(path) as f, gzip.GzipFile(fileobj=f) as g:
+      with tf.io.gfile.GFile(path, "rb") as f, gzip.GzipFile(fileobj=f) as g:
         return g.read().split("\n"), lang
 
     if split_path[-1] == "txt":
