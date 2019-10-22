@@ -23,7 +23,7 @@ function install_tf() {
     pip install -q tf-nightly;
   elif [[ "$version" == "tf2"  ]]
   then
-    pip install -q "tf-nightly-2.0-preview"
+    pip install -q "tf-nightly"
   else
     pip install -q "tensorflow==$version"
   fi
