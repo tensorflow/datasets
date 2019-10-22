@@ -28,7 +28,7 @@ class Imagenet2012CorruptedTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = [  # pylint: disable=g-long-ternary
       "defocus_blur_5", "elastic_2", "brightness_3", "zoom_blur_1",
       "frosted_glass_blur_4"
-  ] if six.PY2 else []  # TODO(rsepassi): Re-enable Py3 test (b/129964829)
+  ] if six.PY3 else []  # skimage do not support Python 2 anymore
 
   DATASET_CLASS = imagenet2012_corrupted.Imagenet2012Corrupted
   SPLITS = {  # Expected number of examples on the train/validation splits.
