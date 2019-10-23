@@ -272,8 +272,9 @@ class CaltechBirds2011(CaltechBirds2010):
     for root, _, files in tf.io.gfile.walk(extracted_path[1]):
       for fname in files:
         if fname.endswith(".png"):
-          mask = tfds.core.lazy_imports.cv2.imread(
-              os.path.join(root, fname), flags=0)
+          with tf.io.gfile.GFile(os.path.join(root, fname), "rb") as png_f:
+            mask = tfds.core.lazy_imports.cv2.imdecode(
+                np.fromstring(png_f.read(), dtype=np.uint8), flags=0)
           attributes[fname.split(".")[0]].append(mask)
 
     return [
