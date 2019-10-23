@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import io
+import os
 import tarfile
 
 import tensorflow as tf
@@ -55,7 +56,6 @@ pages={211-252}
 }
 '''
 
-_URL_PREFIX = 'http://www.image-net.org/challenges/LSVRC/2012/nnoupb'
 _LABELS_FNAME = 'image/imagenet2012_labels.txt'
 
 # This file contains the validation labels, in the alphabetic order of
@@ -138,16 +138,15 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return dict(zip(images, labels))
 
   def _split_generators(self, dl_manager):
-    train_path, val_path = dl_manager.download([
-        '%s/ILSVRC2012_img_train.tar' % _URL_PREFIX,
-        '%s/ILSVRC2012_img_val.tar' % _URL_PREFIX,
-        # We don't import the original test split, as it doesn't include labels.
-        # These were never publicly released.
-    ])
+    train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
+    val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
+    # We don't import the original test split, as it doesn't include labels.
+    # These were never publicly released.
     if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
-      msg = 'You must download the dataset files manually and place them in: '
-      msg += ', '.join([train_path, val_path])
-      raise AssertionError(msg)
+      raise AssertionError(
+          'ImageNet requires manual download of the data. Please download '
+          'the train and val set and place them into: {}, {}'.format(
+              train_path, val_path))
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
