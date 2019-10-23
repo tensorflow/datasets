@@ -38,7 +38,6 @@ import abc
 import collections
 import json
 import os
-import posixpath
 import tempfile
 
 from absl import logging
@@ -178,7 +177,7 @@ class DatasetInfo(object):
     if self._builder.builder_config:
       names.append(self._builder.builder_config.name)
     names.append(str(self.version))
-    return posixpath.join(*names)
+    return "/".join(names)
 
   @property
   def description(self):

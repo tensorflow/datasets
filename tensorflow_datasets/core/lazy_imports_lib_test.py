@@ -28,10 +28,10 @@ from tensorflow_datasets import testing
 class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
   @parameterized.parameters(
-      "crepe",
+      # "crepe",  # Nsynth using this deps is run in isolation
       "cv2",
       "langdetect",
-      "librosa",
+      # "librosa",  # Nsynth using this deps is run in isolation
       "matplotlib",
       "mwparserfromhell",
       "nltk",

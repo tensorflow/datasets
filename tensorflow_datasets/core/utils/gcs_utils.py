@@ -15,7 +15,6 @@
 
 """Utilities for accessing TFDS GCS buckets."""
 
-import posixpath
 from xml.etree import ElementTree
 
 import requests
@@ -26,14 +25,14 @@ from tensorflow_datasets.core import utils
 GCS_URL = "http://storage.googleapis.com"
 
 # for dataset_info/
-GCS_BUCKET = posixpath.join(GCS_URL, "tfds-data")
+GCS_BUCKET = "/".join([GCS_URL, "tfds-data"])
 GCS_DATASET_INFO_DIR = "dataset_info"
 GCS_DATASETS_DIR = "datasets"
 
 
 def download_gcs_file(path, out_fname=None, prefix_filter=None):
   """Download a file from GCS, optionally to a file."""
-  url = posixpath.join(GCS_BUCKET, path)
+  url = "/".join([GCS_BUCKET, path])
   if prefix_filter:
     url += "?prefix=%s" % prefix_filter
   stream = bool(out_fname)
@@ -59,7 +58,7 @@ def gcs_files(prefix_filter=None):
 
 def gcs_dataset_info_files(dataset_dir):
   """Return paths to GCS files in the given dataset directory."""
-  prefix = posixpath.join(GCS_DATASET_INFO_DIR, dataset_dir, "")
+  prefix = "/".join([GCS_DATASET_INFO_DIR, dataset_dir, ""])
   # Filter for this dataset
   filenames = [el for el in gcs_files(prefix_filter=prefix)
                if el.startswith(prefix) and len(el) > len(prefix)]
@@ -68,6 +67,6 @@ def gcs_dataset_info_files(dataset_dir):
 
 def is_dataset_on_gcs(dataset_name):
   """If the dataset is available on the GCS bucket gs://tfds-data/datasets."""
-  dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
+  dir_name = "/".join([GCS_DATASETS_DIR, dataset_name])
   return len(gcs_files(prefix_filter=dir_name)) > 2
 
