@@ -78,6 +78,7 @@ c4/en/1.0.0
 caltech101/1.1.0
 caltech101/3.0.0
 caltech_birds2010/0.1.0
+caltech_birds2011/0.1.0
 cars196/1.0.0
 cassava/0.1.0
 cats_vs_dogs/2.0.1

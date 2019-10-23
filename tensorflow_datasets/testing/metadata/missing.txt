@@ -2,7 +2,6 @@
 # This is used for reference and debugging.
 bigearthnet/all/0.0.2
 bigearthnet/rgb/0.0.2
-caltech_birds2011/0.1.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/rte/1.0.0
 glue/wnli/1.0.0

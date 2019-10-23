@@ -1,0 +1,227 @@
+{
+  "citation": "@techreport{WelinderEtal2010,\nAuthor = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},\nInstitution = {California Institute of Technology},\nNumber = {CNS-TR-2010-001},\nTitle = {{Caltech-UCSD Birds 200}},\nYear = {2010}\n}\n",
+  "description": "Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos \nof 200 bird species (mostly North American). The total number of \ncategories of birds is 200 and there are 6033 images in the 2010 \ndataset and 11,788 images in the 2011 dataset.\nAnnotations include bounding boxes, segmentation labels.\n",
+  "location": {
+    "urls": [
+      "http://www.vision.caltech.edu/visipedia/CUB-200.html"
+    ]
+  },
+  "name": "caltech_birds2011",
+  "schema": {
+    "feature": [
+      {
+        "name": "bbox",
+        "shape": {
+          "dim": [
+            {
+              "size": "4"
+            }
+          ]
+        },
+        "type": "FLOAT"
+      },
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "image/filename",
+        "type": "BYTES"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      },
+      {
+        "name": "label_name",
+        "type": "BYTES"
+      },
+      {
+        "name": "segmentation_mask",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "1"
+            }
+          ]
+        },
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "1189858222",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "724",
+        "724",
+        "725",
+        "724",
+        "724",
+        "725",
+        "724",
+        "724"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "bbox",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5794"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5794"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5794"
+              }
+            },
+            "name": "image/filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5794"
+              },
+              "max": 199.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5794"
+              }
+            },
+            "name": "label_name",
+            "type": "BYTES"
+          },
+          {
+            "name": "segmentation_mask",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5794"
+              },
+              "max": 255.0
+            }
+          }
+        ],
+        "numExamples": "5794"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "749",
+        "749",
+        "750",
+        "749",
+        "749",
+        "750",
+        "749",
+        "749"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "bbox",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5994"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5994"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5994"
+              }
+            },
+            "name": "image/filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5994"
+              },
+              "max": 199.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5994"
+              }
+            },
+            "name": "label_name",
+            "type": "BYTES"
+          },
+          {
+            "name": "segmentation_mask",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5994"
+              },
+              "max": 255.0
+            }
+          }
+        ],
+        "numExamples": "5994"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}
