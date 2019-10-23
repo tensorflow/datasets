@@ -471,7 +471,8 @@ class DatasetBuilder(object):
         dataset = self._as_dataset(
             split=split, shuffle_files=shuffle_files, decoders=decoders)
         # Use padded_batch so that features with unknown shape are supported.
-        dataset = dataset.padded_batch(full_bs, dataset.output_shapes)
+        dataset = dataset.padded_batch(
+            full_bs, tf.compat.v1.data.get_output_shapes(dataset))
         dataset = tf.data.Dataset.from_tensor_slices(
             next(dataset_utils.as_numpy(dataset)))
     else:
@@ -480,7 +481,8 @@ class DatasetBuilder(object):
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
-      dataset = dataset.padded_batch(batch_size, dataset.output_shapes)
+      dataset = dataset.padded_batch(
+          batch_size, tf.compat.v1.data.get_output_shapes(dataset))
 
     if as_supervised:
       if not self.info.supervised_keys:

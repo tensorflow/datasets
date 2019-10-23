@@ -78,17 +78,6 @@ def _patch_tf(tf):
   if v_1_13 <= tf_version < v_2:
     TF_PATCH = "tf1_13"
     _patch_for_tf1_13(tf)
-  else:
-    TF_PATCH = "tf2"
-    _patch_for_tf2(tf)
-
-
-def _patch_for_tf2(tf):
-  if not hasattr(tf.data.Dataset, "output_shapes"):
-    from tensorflow.python.data.ops import dataset_ops
-    tf.data.Dataset.output_shapes = property(
-        dataset_ops.get_legacy_output_shapes)
-    tf.data.Dataset.output_types = property(dataset_ops.get_legacy_output_types)
 
 
 def _patch_for_tf1_13(tf):
@@ -102,13 +91,6 @@ def _patch_for_tf1_13(tf):
     tf.compat.v2.data = types.ModuleType("tf.compat.v2.data")
     from tensorflow.python.data.ops import dataset_ops
     tf.compat.v2.data.Dataset = dataset_ops.DatasetV2
-  if not hasattr(tf.compat.v2.data.Dataset, "output_shapes"):
-    from tensorflow.python.data.ops import dataset_ops
-    if hasattr(dataset_ops, "get_legacy_output_shapes"):
-      tf.compat.v2.data.Dataset.output_shapes = property(
-          dataset_ops.get_legacy_output_shapes)
-      tf.compat.v2.data.Dataset.output_types = property(
-          dataset_ops.get_legacy_output_types)
   if not hasattr(tf.autograph.experimental, "do_not_convert"):
     tf.autograph.experimental.do_not_convert = (
         tf.contrib.autograph.do_not_convert)

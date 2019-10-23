@@ -545,8 +545,8 @@ def get_dataset_feature_statistics(builder, split):
 
   # Start here, we've processed all examples.
 
-  output_shapes_dict = dataset.output_shapes
-  output_types_dict = dataset.output_types
+  output_shapes_dict = tf.compat.v1.data.get_output_shapes(dataset)
+  output_types_dict = tf.compat.v1.data.get_output_types(dataset)
 
   for feature_name in sorted(feature_to_num_examples.keys()):
     # Try to fill in the schema.

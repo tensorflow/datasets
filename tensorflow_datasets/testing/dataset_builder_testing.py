@@ -295,9 +295,12 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
   def _assertAsDataset(self, builder):
     split_to_checksums = {}  # {"split": set(examples_checksums)}
     for split_name, expected_examples_number in self.SPLITS.items():
-      dataset = builder.as_dataset(split=split_name)
-      compare_shapes_and_types(builder.info.features.get_tensor_info(),
-                               dataset.output_types, dataset.output_shapes)
+      ds = builder.as_dataset(split=split_name)
+      compare_shapes_and_types(
+          builder.info.features.get_tensor_info(),
+          tf.compat.v1.data.get_output_types(ds),
+          tf.compat.v1.data.get_output_shapes(ds),
+      )
       examples = list(dataset_utils.as_numpy(
           builder.as_dataset(split=split_name)))
       split_to_checksums[split_name] = set(checksum(rec) for rec in examples)
