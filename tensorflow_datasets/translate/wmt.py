@@ -757,8 +757,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
           sub_generator = _parse_parallel_sentences
       elif len(files) == 1:
         fname = files[0]
-         # Note: Due to formatting used by `download_manager`, the file
-         # extension may not be at the end of the file path.
+        # Note: Due to formatting used by `download_manager`, the file
+        # extension may not be at the end of the file path.
         if ".tsv" in fname:
           sub_generator = _parse_tsv
         elif ss_name.startswith("newscommentary_v14"):
@@ -790,7 +790,7 @@ def _parse_parallel_sentences(f1, f2):
     if split_path[-1] == "gz":
       lang = split_path[-2]
       with tf.io.gfile.GFile(path, "rb") as f, gzip.GzipFile(fileobj=f) as g:
-        return g.read().split("\n"), lang
+        return g.read().decode("utf-8").split("\n"), lang
 
     if split_path[-1] == "txt":
       # CWMT
