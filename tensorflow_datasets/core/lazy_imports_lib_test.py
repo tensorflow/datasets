@@ -27,11 +27,13 @@ from tensorflow_datasets import testing
 
 class LazyImportsTest(testing.TestCase, parameterized.TestCase):
 
+  # The following deps are not in the test list because the datasets that
+  # require them need to have their tests run in isolation:
+  # * crepe (NSynth)
+  # * librosa (NSynth)
   @parameterized.parameters(
-      "crepe",
       "cv2",
       "langdetect",
-      "librosa",
       "matplotlib",
       "mwparserfromhell",
       "nltk",

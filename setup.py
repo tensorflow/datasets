@@ -11,6 +11,7 @@ See the README on GitHub for further documentation.
 """
 
 import datetime
+import itertools
 import os
 import sys
 
@@ -107,6 +108,7 @@ DATASET_FILES = [
     'video/ucf101_labels.txt',
 ]
 
+# Extra dependencies required by specific datasets
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
@@ -133,16 +135,23 @@ DATASET_EXTRAS = {
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
-all_dataset_extras = []
-for deps in DATASET_EXTRAS.values():
-  all_dataset_extras.extend(deps)
+
+# Extra dataset deps are required for the tests
+all_dataset_extras = list(itertools.chain.from_iterable(
+    deps for ds_name, deps in DATASET_EXTRAS.items() if ds_name != 'nsynth'))
+
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=1.15.0'],
     'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
+    # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
+    # and run in ./oss_scripts/oss_tests.sh
     'tests': TESTS_REQUIRE + all_dataset_extras,
+    # Nsynth is run in isolation, installed and run in
+    # ./oss_scripts/oss_tests.sh.
+    'tests_nsynth': TESTS_REQUIRE + DATASET_EXTRAS['nsynth'],
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 
