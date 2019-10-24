@@ -24,11 +24,17 @@ description = """{description}
 
 To use this dataset:
 
-```
+```python
 import tensorflow_datasets as tfds
 
-ds = tfds.load('{name}')
+ds = tfds.load('{name}', split='train')
+for ex in ds.take(4):
+  print(ex)
 ```
+
+See [the guide](https://www.tensorflow.org/datasets/overview) for more
+informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).
+
 """.format(
     description=builder.info.description,
     name=builder.info.name,
