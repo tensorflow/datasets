@@ -33,6 +33,7 @@ from tensorflow_datasets.image.cifar import Cifar10
 from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.cifar10_1 import Cifar10_1
 from tensorflow_datasets.image.cifar10_corrupted import Cifar10Corrupted
+from tensorflow_datasets.image.citrus import CitrusLeaves
 from tensorflow_datasets.image.clevr import CLEVR
 from tensorflow_datasets.image.cmaterdb import Cmaterdb
 from tensorflow_datasets.image.coco import Coco
