@@ -31,10 +31,12 @@ from tensorflow_datasets.text import c4_utils
 _DESCRIPTION = "A colossal, cleaned version of Common Crawl's web crawl corpus."
 _CITATION = """
 @article{2019t5,
-  author = {Colin Raffel and Noam Shazeer and Adam Roberts and Katherine Lee and Sharan Narang and Michael Matena and Yanqi Zhou and Wei Li and Peter Liu},
+  author = {Colin Raffel and Noam Shazeer and Adam Roberts and Katherine Lee and Sharan Narang and Michael Matena and Yanqi Zhou and Wei Li and Peter J. Liu},
   title = {Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer},
   journal = {arXiv e-prints},
-  year = {2019}
+  year = {2019},
+  archivePrefix = {arXiv},
+  eprint = {1910.10683},
 }
 """
 _VERSION = tfds.core.Version(
@@ -91,7 +93,6 @@ class C4Config(tfds.core.BuilderConfig):
     name = ".".join(name_parts)
     super(C4Config, self).__init__(
         name=name,
-        description=_DESCRIPTION,
         version=_VERSION,
         **kwargs)
     self.lang = language
@@ -107,10 +108,22 @@ class C4(tfds.core.BeamBasedBuilder):
   """C4 dataset based on Common Crawl."""
 
   BUILDER_CONFIGS = [
-      C4Config(language="en"),
-      C4Config(language="en", clean=False),
-      C4Config(language="en", realnewslike=True),
-      C4Config(language="en", webtextlike=True),
+      C4Config(language="en", description="English C4 dataset."),
+      C4Config(
+          language="en",
+          clean=False,
+          description="Disables all cleaning (deduplication, removal based on bad words, "
+          "etc.)"),
+      C4Config(
+          language="en",
+          realnewslike=True,
+          description="Filters from the default config to only include content from the "
+          "domains used in the 'RealNews' dataset (Zellers et al., 2019)."),
+      C4Config(
+          language="en",
+          webtextlike=True,
+          description="Filters from the default config to only include content from the "
+          "URLs in OpenWebText (https://github.com/jcpeterson/openwebtext)."),
   ]
 
   def _info(self):

@@ -91,7 +91,6 @@ FeaturesDict({
 `(u'description', u'abstract')`
 
 ## `big_patent/a`
-
 Patents under Cooperative Patent Classification (CPC)a: Human Necessities
 
 Versions:
@@ -156,7 +155,6 @@ FeaturesDict({
 `(u'description', u'abstract')`
 
 ## `big_patent/c`
-
 Patents under Cooperative Patent Classification (CPC)c: Chemistry; Metallurgy
 
 Versions:
@@ -188,7 +186,6 @@ FeaturesDict({
 `(u'description', u'abstract')`
 
 ## `big_patent/d`
-
 Patents under Cooperative Patent Classification (CPC)d: Textiles; Paper
 
 Versions:
@@ -220,7 +217,6 @@ FeaturesDict({
 `(u'description', u'abstract')`
 
 ## `big_patent/e`
-
 Patents under Cooperative Patent Classification (CPC)e: Fixed Constructions
 
 Versions:
@@ -285,7 +281,6 @@ FeaturesDict({
 `(u'description', u'abstract')`
 
 ## `big_patent/g`
-
 Patents under Cooperative Patent Classification (CPC)g: Physics
 
 Versions:
@@ -317,7 +312,6 @@ FeaturesDict({
 `(u'description', u'abstract')`
 
 ## `big_patent/h`
-
 Patents under Cooperative Patent Classification (CPC)h: Electricity
 
 Versions:

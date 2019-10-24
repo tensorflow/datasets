@@ -24,7 +24,7 @@ dataset. Annotations include bounding boxes, segmentation labels.
 
     *   **`0.1.0`** (default):
 
-*   Size: `?? GiB`
+*   Size: `1.11 GiB`
 
 ## Features
 ```python
@@ -39,7 +39,12 @@ FeaturesDict({
 ```
 
 ## Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 11,788
+TRAIN | 5,994
+TEST  | 5,794
 
 ## Urls
 
