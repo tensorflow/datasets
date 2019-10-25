@@ -82,7 +82,7 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
 
   def test_gzip_reading(self):
     results = [
-        x for x in wmt._parse_parallel_sentences(
+        x for _, x in wmt._parse_parallel_sentences(
             os.path.join(self.example_dir, "first.cs.gz"),
             os.path.join(self.example_dir, "second.en.txt"))
     ]
