@@ -1,3 +1,4 @@
+https://bit.ly/2BOtOJ7 222257 0e13510b1bb14436ff7e2ee82338f0efb0133ecf2e73507a697dc210db3f05fd
 https://dl.fbaipublicfiles.com/senteval/senteval_data/msr_paraphrase_test.txt 441275 a04e271090879aaba6423d65b94950c089298587d9c084bf9cd7439bd785f784
 https://dl.fbaipublicfiles.com/senteval/senteval_data/msr_paraphrase_train.txt 1047044 60a9b09084528f0673eedee2b69cb941920f0b8cd0eeccefc464a98768457f89
 https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2FCoLA.zip?alt=media&token=46d5e637-3411-4188-bc44-5809b5bfb5f4 376971 f212fcd832b8f7b435fb991f101abf89f96b933ab400603bf198960dfc32cbff
