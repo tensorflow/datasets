@@ -30,13 +30,12 @@ _DESCRIPTION = """\
 The NSynth Dataset is an audio dataset containing ~300k musical notes, each
 with a unique pitch, timbre, and envelope. Each note is annotated with three
 additional pieces of information based on a combination of human evaluation
-and heuristic algorithms:
- -Source: The method of sound production for the note's instrument.
- -Family: The high-level family of which the note's instrument is a member.
- -Qualities: Sonic qualities of the note.
+and heuristic algorithms: Source, Family, and Qualities.
 
-The dataset is split into train, valid, and test sets, with no instruments
-overlapping between the train set and the valid/test sets.
+To access the dataset without needing to run the expensive preparation, you
+can load it with `try_gcs` enabled (e.g., `tfds.load('nsynth', try_gcs=True)`).
+You can also download the prepared dataset from GCS
+(`gs://tfs-data/datasets/nsynth`) and copy it to your local data directory.
 """
 
 _FULL_DESCRIPTION = """\
@@ -48,10 +47,8 @@ instruments overlapping between the train set and the valid/test sets.
 _GANSYNTH_DESCRIPTION = """\
 NSynth Dataset limited to acoustic instruments in the MIDI pitch interval
 [24, 84]. Uses alternate splits that have overlap in instruments (but not exact
-notes) between the train set and valid/test sets.
-
-This variant was originally introduced in the ICLR 2019 GANSynth paper
-(https://arxiv.org/abs/1902.08710).
+notes) between the train set and valid/test sets. This variant was originally 
+introduced in the ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 """
 
 _F0_AND_LOUDNESS_ADDENDUM = """\

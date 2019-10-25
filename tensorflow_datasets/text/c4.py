@@ -28,7 +28,13 @@ import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import c4_utils
 
-_DESCRIPTION = "A colossal, cleaned version of Common Crawl's web crawl corpus."
+_DESCRIPTION = """\
+A colossal, cleaned version of Common Crawl's web crawl corpus.
+
+Due to the overhead of cleaning the dataset, it is recommend you prepare it with
+a distributed service like Cloud Dataflow. More info at
+https://www.tensorflow.org/datasets/beam_datasets.
+"""
 _CITATION = """
 @article{2019t5,
   author = {Colin Raffel and Noam Shazeer and Adam Roberts and Katherine Lee and Sharan Narang and Michael Matena and Yanqi Zhou and Wei Li and Peter J. Liu},
