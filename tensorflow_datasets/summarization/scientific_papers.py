@@ -73,8 +73,9 @@ class ScientificPapersConfig(tfds.core.BuilderConfig):
       filename: filename of different configs for the dataset.
       **kwargs: keyword arguments forwarded to super.
     """
+    # 1.1.0 remove sentence breaker <S> and </S> in summary.
     super(ScientificPapersConfig, self).__init__(
-        version=tfds.core.Version("1.0.0"), **kwargs)
+        version=tfds.core.Version("1.1.0"), **kwargs)
     self.filename = filename
 
 
@@ -133,8 +134,13 @@ class ScientificPapers(tfds.core.GeneratorBasedBuilder):
         # "section_names": list[str], list of section names.
         # "sections": list[list[str]], list of sections (list of paragraphs)
         d = json.loads(line)
+        summary = "\n".join(d["abstract_text"])
+        # In original paper, <S> and </S> are not used in vocab during training
+        # or during decoding.
+        # https://github.com/armancohan/long-summarization/blob/master/data.py#L27
+        summary = summary.replace("<S>", "").replace("</S>", "")
         yield d["article_id"], {
             _DOCUMENT: "\n".join(d["article_text"]),
-            _SUMMARY: "\n".join(d["abstract_text"]),
+            _SUMMARY: summary,
             "section_names": "\n".join(d["section_names"])
         }
