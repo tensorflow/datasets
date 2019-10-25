@@ -389,6 +389,26 @@ class Glue(tfds.core.GeneratorBasedBuilder):
             }""",
           url="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html"
       ),
+      GlueConfig(
+          name="ax",
+          description="""\
+            A manually-curated evaluation dataset for fine-grained analysis of
+            system performance on a broad range of linguistic phenomena. This
+            dataset evaluates sentence understanding through Natural Language
+            Inference (NLI) problems. Use a model trained on MulitNLI to produce
+            predictions for this dataset.""",
+          text_features={
+              "premise": "sentence1",
+              "hypothesis": "sentence2",
+          },
+          label_classes=["entailment", "neutral", "contradiction"],
+          label_column="",  # No label since we only have test set.
+          # We must use a URL shortener since the URL from GLUE is very long and
+          # causes issues in TFDS.
+          data_url="https://bit.ly/2BOtOJ7",
+          data_dir="",  # We are downloading a tsv.
+          citation="",  # The GLUE citation is sufficient.
+          url="https://gluebenchmark.com/diagnostics"),
   ]
 
   def _info(self):
@@ -414,6 +434,18 @@ class Glue(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
+    if self.builder_config.name == "ax":
+      data_file = dl_manager.download(self.builder_config.data_url)
+      return [
+          tfds.core.SplitGenerator(
+              name=tfds.Split.TEST,
+              num_shards=1,
+              gen_kwargs={
+                  "data_file": data_file,
+                  "split": "test",
+              })
+      ]
+
     if self.builder_config.name == "mrpc":
       data_dir = None
       mrpc_files = dl_manager.download({
@@ -475,7 +507,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               }),
       ]
 
-  def _generate_examples(self, data_file, split, mrpc_files):
+  def _generate_examples(self, data_file, split, mrpc_files=None):
     if self.builder_config.name == "mrpc":
       # We have to prepare the MRPC dataset from the original sources ourselves.
       examples = self._generate_example_mrpc_files(

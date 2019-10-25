@@ -109,5 +109,21 @@ class SuperGlueWicTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SuperGlueAxBTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["axb"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "test": 3,
+  }
+
+
+class SuperGlueAxGTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["axg"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "test": 3,
+  }
+
+
 if __name__ == "__main__":
   testing.test_main()
