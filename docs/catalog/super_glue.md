@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="super_glue" />
-  <meta itemprop="description" content="BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('super_glue')&#10;```&#10;" />
+  <meta itemprop="description" content="BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('super_glue', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/super_glue" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
   <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle={NAACL},&#10;  year={2019}&#10;}&#10;@article{wang2019superglue,&#10;  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},&#10;  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1905.00537},&#10;  year={2019}&#10;}&#10;&#10;Note that each SuperGLUE dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset.&#10;" />
 </div>
+
 # `super_glue`
 
 *   URL:
@@ -169,6 +171,38 @@ phrases (and thus more choices for the model), but low to no ambiguity.
 
 This version fixes issues where the spans are not actually substrings of the
 text.
+
+*   `axb` (`v1.0.2`) (`Size: 33.15 KiB`): An expert-constructed, diagnostic
+    dataset that automatically tests models for a broad range of linguistic,
+    commonsense, and world knowledge. Each example in this broad-coverage
+    diagnostic is a sentence pair labeled with a three-way entailment relation
+    (entailment, neutral, or contradiction) and tagged with labels that indicate
+    the phenomena that characterize the relationship between the two sentences.
+    Submissions to the GLUE leaderboard are required to include predictions from
+    the submission's MultiNLI classifier on the diagnostic dataset, and analyses
+    of the results were shown alongside the main leaderboard. Since this
+    broad-coverage diagnostic task has proved difficult for top models, we
+    retain it in SuperGLUE. However, since MultiNLI is not part of SuperGLUE, we
+    collapse contradiction and neutral into a single not_entailment label, and
+    request that submissions include predictions on the resulting set from the
+    model used for the RTE task.
+
+*   `axg` (`v1.0.2`) (`Size: 10.17 KiB`): Winogender is designed to measure
+    gender bias in coreference resolution systems. We use the Diverse Natural
+    Language Inference Collection (DNC; Poliak et al., 2018) version that casts
+    Winogender as a textual entailment task. Each example consists of a premise
+    sentence with a male or female pronoun and a hypothesis giving a possible
+    antecedent of the pronoun. Examples occur in minimal pairs, where the only
+    difference between an example and its pair is the gender of the pronoun in
+    the premise. Performance on Winogender is measured with both accuracy and
+    the gender parity score: the percentage of minimal pairs for which the
+    predictions are the same. We note that a system can trivially obtain a
+    perfect gender parity score by guessing the same class for all examples, so
+    a high gender parity score is meaningless unless accompanied by high
+    accuracy. As a diagnostic test of gender bias, we view the schemas as having
+    high positive predictive value and low negative predictive value; that is,
+    they may demonstrate the presence of gender bias in a system, but not prove
+    its absence.
 
 ## `super_glue/boolq`
 
@@ -603,14 +637,106 @@ FeaturesDict({
 *   [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
 *   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
-## Citation
+## `super_glue/axb`
+
+An expert-constructed, diagnostic dataset that automatically tests models for a
+broad range of linguistic, commonsense, and world knowledge. Each example in
+this broad-coverage diagnostic is a sentence pair labeled with a three-way
+entailment relation (entailment, neutral, or contradiction) and tagged with
+labels that indicate the phenomena that characterize the relationship between
+the two sentences. Submissions to the GLUE leaderboard are required to include
+predictions from the submission's MultiNLI classifier on the diagnostic dataset,
+and analyses of the results were shown alongside the main leaderboard. Since
+this broad-coverage diagnostic task has proved difficult for top models, we
+retain it in SuperGLUE. However, since MultiNLI is not part of SuperGLUE, we
+collapse contradiction and neutral into a single not_entailment label, and
+request that submissions include predictions on the resulting set from the model
+used for the RTE task.
+
+Versions:
+
+*   **`1.0.2`** (default):
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 1,104
+TEST  | 1,104
+
+### Features
+
+```python
+FeaturesDict({
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=tf.string),
+    'sentence2': Text(shape=(), dtype=tf.string),
+})
 ```
-@inproceedings{levesque2012winograd,
-  title={The winograd schema challenge},
-  author={Levesque, Hector and Davis, Ernest and Morgenstern, Leora},
-  booktitle={Thirteenth International Conference on the Principles of Knowledge Representation and Reasoning},
-  year={2012}
+
+### Urls
+
+*   [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
+*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
+
+## `super_glue/axg`
+
+Winogender is designed to measure gender bias in coreference resolution systems.
+We use the Diverse Natural Language Inference Collection (DNC; Poliak et al.,
+2018) version that casts Winogender as a textual entailment task. Each example
+consists of a premise sentence with a male or female pronoun and a hypothesis
+giving a possible antecedent of the pronoun. Examples occur in minimal pairs,
+where the only difference between an example and its pair is the gender of the
+pronoun in the premise. Performance on Winogender is measured with both accuracy
+and the gender parity score: the percentage of minimal pairs for which the
+predictions are the same. We note that a system can trivially obtain a perfect
+gender parity score by guessing the same class for all examples, so a high
+gender parity score is meaningless unless accompanied by high accuracy. As a
+diagnostic test of gender bias, we view the schemas as having high positive
+predictive value and low negative predictive value; that is, they may
+demonstrate the presence of gender bias in a system, but not prove its absence.
+
+Versions:
+
+*   **`1.0.2`** (default):
+
+### Statistics
+
+Split | Examples
+:---- | -------:
+ALL   | 356
+TEST  | 356
+
+### Features
+
+```python
+FeaturesDict({
+    'hypothesis': Text(shape=(), dtype=tf.string),
+    'idx': Tensor(shape=(), dtype=tf.int32),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
+    'premise': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Urls
+
+*   [https://github.com/rudinger/winogender-schemas](https://github.com/rudinger/winogender-schemas)
+*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
+
+## Citation
+
+```
+@inproceedings{rudinger-EtAl:2018:N18,
+  author    = {Rudinger, Rachel  and  Naradowsky, Jason  and  Leonard, Brian  and  {Van Durme}, Benjamin},
+  title     = {Gender Bias in Coreference Resolution},
+  booktitle = {Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies},
+  month     = {June},
+  year      = {2018},
+  address   = {New Orleans, Louisiana},
+  publisher = {Association for Computational Linguistics}
 }
+
 @article{wang2019superglue,
   title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},
   author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},

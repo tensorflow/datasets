@@ -2,12 +2,14 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="mnist" />
-  <meta itemprop="description" content="The MNIST database of handwritten digits.&#10;&#10;To use this dataset:&#10;&#10;```&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('mnist')&#10;```&#10;" />
+  <meta itemprop="description" content="The MNIST database of handwritten digits.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('mnist', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/mnist" />
   <meta itemprop="sameAs" content="https://storage.googleapis.com/cvdf-datasets/mnist/" />
   <meta itemprop="citation" content="@article{lecun2010mnist,&#10;  title={MNIST handwritten digit database},&#10;  author={LeCun, Yann and Cortes, Corinna and Burges, CJ},&#10;  journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},&#10;  volume={2},&#10;  year={2010}&#10;}&#10;" />
 </div>
+
 # `mnist`
 
 The MNIST database of handwritten digits.
