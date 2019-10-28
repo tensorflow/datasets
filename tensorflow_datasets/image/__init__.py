@@ -71,6 +71,7 @@ from tensorflow_datasets.image.oxford_iiit_pet import OxfordIIITPet
 from tensorflow_datasets.image.patch_camelyon import PatchCamelyon
 from tensorflow_datasets.image.pet_finder import PetFinder
 from tensorflow_datasets.image.places365_small import Places365Small
+from tensorflow_datasets.image.plant_village import PlantVillage
 from tensorflow_datasets.image.quickdraw import QuickdrawBitmap
 from tensorflow_datasets.image.resisc45 import Resisc45
 from tensorflow_datasets.image.rock_paper_scissors import RockPaperScissors
