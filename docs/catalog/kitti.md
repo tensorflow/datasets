@@ -23,7 +23,7 @@ the Kitti homepage.
 *   URL:
     [http://www.cvlibs.net/datasets/kitti/](http://www.cvlibs.net/datasets/kitti/)
 *   `DatasetBuilder`:
-    [`tfds.image.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/kitti.py)
+    [`tfds.image.kitti.Kitti`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/kitti.py)
 *   Version: `v3.1.0`
 *   Versions:
 

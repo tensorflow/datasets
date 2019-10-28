@@ -86,6 +86,9 @@ def _get_example_objects(annon_filepath):
   with tf.io.gfile.GFile(annon_filepath, "r") as f:
     root = xml.etree.ElementTree.parse(f).getroot()
 
+    # Disable pytype to avoid attribute-error due to find returning
+    # Optional[Element]
+    # pytype: disable=attribute-error
     size = root.find("size")
     width = float(size.find("width").text)
     height = float(size.find("height").text)
@@ -110,6 +113,7 @@ def _get_example_objects(annon_filepath):
           "is_truncated": is_truncated,
           "is_difficult": is_difficult,
       }
+    # pytype: enable=attribute-error
 
 
 class VocConfig(tfds.core.BuilderConfig):

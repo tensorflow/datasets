@@ -40,9 +40,8 @@ WORKER_COUNT_CONFIGS = 50
 BASE_URL = "https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets"
 
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
-# coco2014: Deprecated (b/140916921)
 # TODO(tfds): Document image_label_folder datasets in a separate section
-BUILDER_BLACKLIST = ["wmt_translate", "coco2014"]
+BUILDER_BLACKLIST = ["wmt_translate"]
 
 
 @py_utils.memoize()

@@ -26,7 +26,7 @@ classes.
 *   URL:
     [https://storage.googleapis.com/openimages/web/index.html](https://storage.googleapis.com/openimages/web/index.html)
 *   `DatasetBuilder`:
-    [`tfds.image.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/open_images.py)
+    [`tfds.image.open_images.OpenImagesV4`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/open_images.py)
 
 `open_images_v4` is configured with `tfds.image.open_images.OpenImagesV4Config`
 and has the following configurations predefined (defaults to the first one):
