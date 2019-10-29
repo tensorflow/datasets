@@ -99,6 +99,7 @@ DATASET_FILES = [
     'image/open_images_classes_all.txt',
     'image/open_images_classes_boxable.txt',
     'image/open_images_classes_trainable.txt',
+    'image/plant_leaves_urls.txt',
     'image/plantae_k_urls.txt',
     'image/quickdraw_labels.txt',
     'image/sun397_labels.txt',
