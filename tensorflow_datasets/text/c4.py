@@ -142,7 +142,7 @@ class C4(tfds.core.BeamBasedBuilder):
         }),
         citation=_CITATION,
         urls=[
-            "https://github.com/google-research/text-to-text-transfer-tranformer",
+            "https://github.com/google-research/text-to-text-transfer-transformer",
             "https://commoncrawl.org",
         ],
     )
