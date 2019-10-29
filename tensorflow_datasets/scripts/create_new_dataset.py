@@ -41,8 +41,14 @@ from tensorflow_datasets.core.utils import py_utils
 FLAGS = flags.FLAGS
 
 _DATASET_TYPE = [
-    'image', 'video', 'audio', 'text', 'structured', 'translate',
-    'summarization'
+    'audio',
+    'image',
+    'object_detection',
+    'structured',
+    'summarization',
+    'text',
+    'translate',
+    'video',
 ]
 
 flags.DEFINE_string('tfds_dir', None, 'Root directory of tfds (auto-computed)')
