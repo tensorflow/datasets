@@ -15,7 +15,7 @@
 *   URL:
     [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
 *   `DatasetBuilder`:
-    [`tfds.image.voc.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/voc.py)
+    [`tfds.image.voc.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
 
 `voc` is configured with `tfds.image.voc.VocConfig` and has the following
 configurations predefined (defaults to the first one):

@@ -13,32 +13,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for PASCAL VOC image data loading."""
+"""Tests for WIDER FACE dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import voc
+from tensorflow_datasets.object_detection import wider_face
+import tensorflow_datasets.public_api as tfds
 
 
-class Voc2007Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = voc.Voc
-  BUILDER_CONFIG_NAMES_TO_TEST = ['2007']
+class WiderFaceTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = wider_face.WiderFace
   SPLITS = {
-      'train': 1,
-      'validation': 2,
-      'test': 3,
+      tfds.Split.TRAIN: 3,
+      tfds.Split.VALIDATION: 3,
+      tfds.Split.TEST: 3,
   }
   DL_EXTRACT_RESULT = {
-      'trainval': '',
-      'test': '',
+      'wider_train': 'wider_train',
+      'wider_val': 'wider_val',
+      'wider_test': 'wider_test',
+      'wider_annot': 'wider_annot',
   }
-
-
-class Voc2012Test(Voc2007Test):
-  BUILDER_CONFIG_NAMES_TO_TEST = ['2012']
 
 
 if __name__ == '__main__':

@@ -13,33 +13,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests the data loading for Kitti."""
+"""Tests for PASCAL VOC image data loading."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import kitti
+from tensorflow_datasets.object_detection import voc
 
 
-class KittiTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = kitti.Kitti
+class Voc2007Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = voc.Voc
+  BUILDER_CONFIG_NAMES_TO_TEST = ['2007']
   SPLITS = {
-      "train": 6,
-      "validation": 2,
-      "test": 2,
+      'train': 1,
+      'validation': 2,
+      'test': 3,
   }
   DL_EXTRACT_RESULT = {
-      "images": "data_object_image_2.zip",
-      "annotations": "data_object_label_2.zip",
-      "devkit": "devkit_object.zip",
+      'trainval': '',
+      'test': '',
   }
 
 
-class KittiTestExperimental(KittiTest):
-  VERSION = "experimental_latest"
+class Voc2012Test(Voc2007Test):
+  BUILDER_CONFIG_NAMES_TO_TEST = ['2012']
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
   testing.test_main()

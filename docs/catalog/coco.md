@@ -14,7 +14,7 @@
 
 *   URL: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 *   `DatasetBuilder`:
-    [`tfds.image.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/coco.py)
+    [`tfds.image.coco.Coco`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/coco.py)
 
 `coco` is configured with `tfds.image.coco.CocoConfig` and has the following
 configurations predefined (defaults to the first one):

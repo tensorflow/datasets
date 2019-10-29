@@ -13,31 +13,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for WIDER FACE dataset module."""
+"""Tests the data loading for Kitti."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import wider_face
-import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets.object_detection import kitti
 
 
-class WiderFaceTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = wider_face.WiderFace
+class KittiTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = kitti.Kitti
   SPLITS = {
-      tfds.Split.TRAIN: 3,
-      tfds.Split.VALIDATION: 3,
-      tfds.Split.TEST: 3,
+      "train": 6,
+      "validation": 2,
+      "test": 2,
   }
   DL_EXTRACT_RESULT = {
-      'wider_train': 'wider_train',
-      'wider_val': 'wider_val',
-      'wider_test': 'wider_test',
-      'wider_annot': 'wider_annot',
+      "images": "data_object_image_2.zip",
+      "annotations": "data_object_label_2.zip",
+      "devkit": "devkit_object.zip",
   }
 
 
-if __name__ == '__main__':
+class KittiTestExperimental(KittiTest):
+  VERSION = "experimental_latest"
+
+
+if __name__ == "__main__":
   testing.test_main()

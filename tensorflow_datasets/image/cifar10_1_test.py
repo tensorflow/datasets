@@ -19,9 +19,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import cifar10_1
+import tensorflow_datasets.public_api as tfds
 
 
 class Cifar10_1Test(testing.DatasetBuilderTestCase):  # pylint: disable=invalid-name
