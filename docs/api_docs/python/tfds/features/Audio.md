@@ -15,6 +15,8 @@
 
 # tfds.features.Audio
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -22,6 +24,8 @@
 source</a>
 
 ## Class `Audio`
+
+<!-- Start diff -->
 
 `FeatureConnector` for audio, encoded as raw integer wave form.
 

@@ -17,6 +17,8 @@
 
 # tfds.testing.DummyDatasetSharedGenerator
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -24,6 +26,8 @@
 source</a>
 
 ## Class `DummyDatasetSharedGenerator`
+
+<!-- Start diff -->
 
 Test DatasetBuilder.
 

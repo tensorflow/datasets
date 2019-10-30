@@ -6,6 +6,8 @@
 
 # tfds.testing.FeatureExpectationItem
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -13,6 +15,8 @@
 source</a>
 
 ## Class `FeatureExpectationItem`
+
+<!-- Start diff -->
 
 Test item of a FeatureExpectation.
 

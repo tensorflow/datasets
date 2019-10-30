@@ -15,10 +15,10 @@
 *   URL:
     [http://host.robots.ox.ac.uk/pascal/VOC/voc2007/](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/)
 *   `DatasetBuilder`:
-    [`tfds.image.voc.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
+    [`tfds.object_detection.voc.Voc`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/object_detection/voc.py)
 
-`voc` is configured with `tfds.image.voc.VocConfig` and has the following
-configurations predefined (defaults to the first one):
+`voc` is configured with `tfds.object_detection.voc.VocConfig` and has the
+following configurations predefined (defaults to the first one):
 
 *   `2007` (`v4.0.0`) (`Size: 868.85 MiB`): This dataset contains the data from
     the PASCAL Visual Object Classes Challenge 2007, a.k.a. VOC2007,

@@ -10,6 +10,8 @@
 
 # tfds.Split
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -17,6 +19,8 @@
 source</a>
 
 ## Class `Split`
+
+<!-- Start diff -->
 
 `Enum` for dataset splits.
 

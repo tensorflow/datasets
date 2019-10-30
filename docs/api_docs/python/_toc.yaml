@@ -83,6 +83,8 @@ toc:
     path: /datasets/api_docs/python/tfds/download/ComputeStatsMode
   - title: DownloadConfig
     path: /datasets/api_docs/python/tfds/download/DownloadConfig
+  - title: DownloadError
+    path: /datasets/api_docs/python/tfds/download/DownloadError
   - title: DownloadManager
     path: /datasets/api_docs/python/tfds/download/DownloadManager
   - title: ExtractMethod

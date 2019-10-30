@@ -6,6 +6,8 @@
 
 # tfds.features.text.TextEncoderConfig
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -13,6 +15,8 @@
 source</a>
 
 ## Class `TextEncoderConfig`
+
+<!-- Start diff -->
 
 Configuration for
 <a href="../../../tfds/features/Text.md"><code>tfds.features.Text</code></a>.

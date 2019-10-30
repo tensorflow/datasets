@@ -18,6 +18,8 @@
 
 # tfds.features.Image
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -25,6 +27,8 @@
 source</a>
 
 ## Class `Image`
+
+<!-- Start diff -->
 
 `FeatureConnector` for images.
 

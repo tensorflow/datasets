@@ -10,6 +10,8 @@
 
 # tfds.decode.Decoder
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -17,6 +19,8 @@
 source</a>
 
 ## Class `Decoder`
+
+<!-- Start diff -->
 
 Base decoder object.
 

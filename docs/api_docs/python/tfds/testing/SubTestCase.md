@@ -108,7 +108,6 @@
 <meta itemprop="property" content="debug"/>
 <meta itemprop="property" content="defaultTestResult"/>
 <meta itemprop="property" content="doCleanups"/>
-<meta itemprop="property" content="enter_context"/>
 <meta itemprop="property" content="eval_to_list"/>
 <meta itemprop="property" content="evaluate"/>
 <meta itemprop="property" content="fail"/>
@@ -143,6 +142,8 @@
 
 # tfds.testing.SubTestCase
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -150,6 +151,8 @@
 source</a>
 
 ## Class `SubTestCase`
+
+<!-- Start diff -->
 
 Adds subTest() context manager to the TestCase if supported.
 
@@ -2124,31 +2127,6 @@ doCleanups()
 ```
 
 Execute all cleanup functions. Normally called for you after tearDown.
-
-<h3 id="enter_context"><code>enter_context</code></h3>
-
-```python
-enter_context(manager)
-```
-
-Returns the CM's value after registering it with the exit stack.
-
-Entering a context pushes it onto a stack of contexts. The context is exited
-when the test completes. Contexts are are exited in the reverse order of
-entering. They will always be exited, regardless of test failure/success. The
-context stack is specific to the test being run.
-
-This is useful to eliminate per-test boilerplate when context managers are used.
-For example, instead of decorating every test with `@mock.patch`, simply do
-`self.foo = self.enter_context(mock.patch(...))' in`setUp()`.
-
-NOTE: The context managers will always be exited without any error information.
-This is an unfortunate implementation detail due to some internals of how
-unittest runs tests.
-
-#### Args:
-
-*   <b>`manager`</b>: The context manager to enter.
 
 <h3 id="eval_to_list"><code>eval_to_list</code></h3>
 

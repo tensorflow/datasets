@@ -9,6 +9,8 @@
 
 # tfds.core.SplitInfo
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -16,6 +18,8 @@
 source</a>
 
 ## Class `SplitInfo`
+
+<!-- Start diff -->
 
 Wraps `proto.SplitInfo` with an additional property.
 

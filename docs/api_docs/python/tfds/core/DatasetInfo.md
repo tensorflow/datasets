@@ -27,6 +27,8 @@
 
 # tfds.core.DatasetInfo
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -34,6 +36,8 @@
 source</a>
 
 ## Class `DatasetInfo`
+
+<!-- Start diff -->
 
 Information about a dataset.
 

@@ -17,6 +17,8 @@
 
 # tfds.core.GeneratorBasedBuilder
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -24,6 +26,8 @@
 source</a>
 
 ## Class `GeneratorBasedBuilder`
+
+<!-- Start diff -->
 
 Base class for datasets with data generation based on dict generators.
 

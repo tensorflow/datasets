@@ -10,6 +10,8 @@
 
 # tfds.decode.SkipDecoding
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -17,6 +19,8 @@
 source</a>
 
 ## Class `SkipDecoding`
+
+<!-- Start diff -->
 
 Transformation which skip the decoding entirelly.
 

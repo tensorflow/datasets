@@ -10,6 +10,8 @@
 
 # tfds.features.BBox
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -17,6 +19,8 @@
 source</a>
 
 ## Class `BBox`
+
+<!-- Start diff -->
 
 BBox(ymin, xmin, ymax, xmax)
 

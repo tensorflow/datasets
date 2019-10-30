@@ -22,6 +22,8 @@
 
 # tfds.features.FeaturesDict
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -29,6 +31,8 @@
 source</a>
 
 ## Class `FeaturesDict`
+
+<!-- Start diff -->
 
 Composite `FeatureConnector`; each feature in `dict` has its own connector.
 

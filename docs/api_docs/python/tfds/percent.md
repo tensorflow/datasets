@@ -5,6 +5,8 @@
 
 # tfds.percent
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -12,6 +14,8 @@
 source</a>
 
 ## Class `percent`
+
+<!-- Start diff -->
 
 Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.
 

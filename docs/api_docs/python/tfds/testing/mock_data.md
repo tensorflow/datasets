@@ -5,8 +5,12 @@
 
 # tfds.testing.mock_data
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
+
+<!-- Start diff -->
 
 Mock tfds to generate random data.
 

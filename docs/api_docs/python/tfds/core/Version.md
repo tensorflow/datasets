@@ -15,6 +15,8 @@
 
 # tfds.core.Version
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -22,6 +24,8 @@
 source</a>
 
 ## Class `Version`
+
+<!-- Start diff -->
 
 Dataset version MAJOR.MINOR.PATCH.
 

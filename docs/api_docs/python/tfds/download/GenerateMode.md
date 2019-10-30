@@ -8,6 +8,8 @@
 
 # tfds.download.GenerateMode
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -15,6 +17,8 @@
 source</a>
 
 ## Class `GenerateMode`
+
+<!-- Start diff -->
 
 `Enum` for how to treat pre-existing downloads and data.
 

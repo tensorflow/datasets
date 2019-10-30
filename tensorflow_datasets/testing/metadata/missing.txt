@@ -2,6 +2,10 @@
 # This is used for reference and debugging.
 bigearthnet/all/0.0.2
 bigearthnet/rgb/0.0.2
+c4/en.noclean/1.0.1
+c4/en.realnewslike/1.0.1
+c4/en.webtextlike/1.0.1
+c4/en/1.0.1
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/ax/0.0.2
 glue/ax/1.0.0
@@ -50,19 +54,11 @@ imagenet2012_corrupted/speckle_noise_5/0.0.1
 imagenet2012_corrupted/speckle_noise_5/3.0.1
 mnist_corrupted/canny_edges/1.0.0
 places365_small/2.0.0
-plant_village/1.0.0
-scientific_papers/arxiv/1.1.0
-scientific_papers/pubmed/1.1.0
 so2sat/all/0.0.1
 so2sat/all/2.0.0
 so2sat/rgb/0.0.1
 so2sat/rgb/2.0.0
 wmt14_translate/ru-en/1.0.0
-wmt15_translate/cs-en/1.0.0
-wmt15_translate/de-en/1.0.0
-wmt15_translate/fi-en/1.0.0
-wmt15_translate/fr-en/1.0.0
-wmt15_translate/ru-en/1.0.0
 wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0
 wmt18_translate/et-en/1.0.0

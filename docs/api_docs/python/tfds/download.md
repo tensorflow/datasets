@@ -14,15 +14,14 @@ source</a>
 <a href="../tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
 API.
 
-<!-- Placeholder for "Used in" -->
-
-
 ## Classes
 
 [`class ComputeStatsMode`](../tfds/download/ComputeStatsMode.md): Mode to decide
 if dynamic dataset info fields should be computed or not.
 
 [`class DownloadConfig`](../tfds/download/DownloadConfig.md): Configuration for <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.
+
+[`class DownloadError`](../tfds/download/DownloadError.md)
 
 [`class DownloadManager`](../tfds/download/DownloadManager.md): Manages the download and extraction of files, as well as caching.
 

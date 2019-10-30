@@ -318,8 +318,6 @@ cnn_dailymail/subwords32k/1.0.0
 coco/2014/1.1.0
 coco/2017/1.1.0
 coco/2017_panoptic/1.1.0
-coco2014/1.0.0
-coco2014/3.0.0
 coil100/1.0.0
 colorectal_histology/0.0.1
 colorectal_histology/2.0.0
@@ -702,6 +700,9 @@ para_crawl/ensv_plain_text/1.0.0
 patch_camelyon/0.1.0
 patch_camelyon/2.0.0
 pet_finder/1.0.0
+plant_leaves/0.1.0
+plant_village/1.0.0
+plantae_k/0.1.0
 quickdraw_bitmap/1.0.0
 quickdraw_bitmap/3.0.0
 reddit_tifu/long/1.1.0
@@ -711,6 +712,8 @@ rock_paper_scissors/1.0.0
 rock_paper_scissors/3.0.0
 rock_you/0.1.0
 scene_parse150/1.0.0
+scientific_papers/arxiv/1.1.0
+scientific_papers/pubmed/1.1.0
 shapes3d/0.1.0
 shapes3d/2.0.0
 smallnorb/0.1.0
@@ -1124,14 +1127,19 @@ wmt14_translate/hi-en/1.0.0
 wmt14_translate/ru-en/0.0.3
 wmt15_translate/cs-en.subwords8k/0.0.4
 wmt15_translate/cs-en/0.0.4
+wmt15_translate/cs-en/1.0.0
 wmt15_translate/de-en.subwords8k/0.0.4
 wmt15_translate/de-en/0.0.4
+wmt15_translate/de-en/1.0.0
 wmt15_translate/fi-en.subwords8k/0.0.4
 wmt15_translate/fi-en/0.0.4
+wmt15_translate/fi-en/1.0.0
 wmt15_translate/fr-en.subwords8k/0.0.4
 wmt15_translate/fr-en/0.0.4
+wmt15_translate/fr-en/1.0.0
 wmt15_translate/ru-en.subwords8k/0.0.4
 wmt15_translate/ru-en/0.0.4
+wmt15_translate/ru-en/1.0.0
 wmt16_translate/cs-en/0.0.3
 wmt16_translate/cs-en/1.0.0
 wmt16_translate/de-en/0.0.3
