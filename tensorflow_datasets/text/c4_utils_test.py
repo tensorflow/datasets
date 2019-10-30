@@ -27,7 +27,6 @@ import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.text import c4_utils
 
-
 EN_TEXT = """This line has enough words and ends in punctuation, Dr. Roberts!
 Economic History | All Institutions | Open Access Articles | Digital Commons Network
 \"Open Access. Powered by Scholars. Published by Universities.\"
@@ -43,60 +42,92 @@ You'd better follow our terms of use!
 EXPECTED_CLEAN_EN = """This line has enough words and ends in punctuation, Dr. Roberts!
 \"Open Access. Powered by Scholars. Published by Universities.\""""
 
+FAKE_CONTENT_LENGTH = "5793"
+FAKE_CONTENT_TYPE = "text/plain"
+FAKE_TIMESTAMP = "2019-04-24T09:23:58Z"
+
 
 def _get_counters():
   counters = collections.defaultdict(int)
+
   def counter_inc_fn(c, amt=1):
     counters[c] += amt
+
   return counters, counter_inc_fn
 
 
 class C4UtilsTest(testing.TestCase):
 
-  def run_clean_page(self, text, badwords=None):
+  def run_clean_page(self, features, badwords=None):
     counters, counter_inc_fn = _get_counters()
     results = list(
         c4_utils.get_clean_page_fn(badwords)(
-            url_and_text=("url", text),
-            counter_inc_fn=counter_inc_fn))
+            url_and_features=("url", features), counter_inc_fn=counter_inc_fn))
     self.assertLessEqual(len(results), 1)
     result = None if not results else results[0][1]
     return result, counters
 
   def test_clean_page(self):
-    clean_en, counters = self.run_clean_page(EN_TEXT)
-    self.assertEqual(EXPECTED_CLEAN_EN, clean_en)
+    clean_en, counters = self.run_clean_page({
+        "text": EN_TEXT,
+        "content-type": FAKE_CONTENT_TYPE,
+        "content-length": FAKE_CONTENT_LENGTH,
+        "timestamp": FAKE_TIMESTAMP
+    })
+    self.assertEqual(EXPECTED_CLEAN_EN, clean_en["text"])
     self.assertEqual(
-        {"lines-valid": 2, "lines-too-short": 1, "lines-no-endmark": 2,
-         "lines-javascript": 2, "lines-policy": 3, "emitted-clean-pages": 1},
-        dict(counters))
+        {
+            "lines-valid": 2,
+            "lines-too-short": 1,
+            "lines-no-endmark": 2,
+            "lines-javascript": 2,
+            "lines-policy": 3,
+            "emitted-clean-pages": 1
+        }, dict(counters))
 
   def test_clean_page_toofewsentences(self):
     text_with_toofewsentences = """This first line has one sentence.
 This line looks like it has three sentences...but it's actually just 1."""
-    clean_en, counters = self.run_clean_page(text_with_toofewsentences)
+    clean_en, counters = self.run_clean_page({
+        "text": text_with_toofewsentences,
+        "content-type": FAKE_CONTENT_TYPE,
+        "content-length": FAKE_CONTENT_LENGTH,
+        "timestamp": FAKE_TIMESTAMP
+    })
     self.assertEqual(None, clean_en)
-    self.assertEqual(
-        {"lines-valid": 2, "filtered-url-toofewsentences": 1},
-        dict(counters))
+    self.assertEqual({
+        "lines-valid": 2,
+        "filtered-url-toofewsentences": 1
+    }, dict(counters))
 
   def test_clean_page_squigglybracket(self):
     text_that_is_actually_code = """This page starts out with some text.
 Everything looks good at first, since these are sentences.
 But then, all of a sudden, there's a bunch of code like the next block.
 fn foo(a) { bar = a + 10; }."""
-    clean_en, counters = self.run_clean_page(text_that_is_actually_code)
+    clean_en, counters = self.run_clean_page({
+        "text": text_that_is_actually_code,
+        "content-type": FAKE_CONTENT_TYPE,
+        "content-length": FAKE_CONTENT_LENGTH,
+        "timestamp": FAKE_TIMESTAMP,
+    })
     self.assertEqual(None, clean_en)
-    self.assertEqual(
-        {"filtered-url-squigglybracket": 1, "lines-valid": 3}, dict(counters)
-    )
+    self.assertEqual({
+        "filtered-url-squigglybracket": 1,
+        "lines-valid": 3
+    }, dict(counters))
 
   def test_clean_page_loremipsum(self):
     lorem_ipsum_text = """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."""
-    clean_en, counters = self.run_clean_page(lorem_ipsum_text)
+    clean_en, counters = self.run_clean_page({
+        "text": lorem_ipsum_text,
+        "content-type": FAKE_CONTENT_TYPE,
+        "content-length": FAKE_CONTENT_LENGTH,
+        "timestamp": FAKE_TIMESTAMP
+    })
     self.assertEqual(None, clean_en)
     self.assertEqual({"filtered-url-loremipsum": 1}, dict(counters))
 
@@ -117,17 +148,38 @@ But then, all of a sudden, there's a badword... or not?
     ]
     outputs_should_be_none = [False, True, True, True]
     expected_counters = [
-        {"lines-valid": 4, "emitted-clean-pages": 1},
-        {"lines-valid": 3, "filtered-url-badword": 1},
-        {"lines-valid": 3, "filtered-url-badword": 1},
-        {"lines-valid": 3, "filtered-url-badword": 1},
+        {
+            "lines-valid": 4,
+            "emitted-clean-pages": 1
+        },
+        {
+            "lines-valid": 3,
+            "filtered-url-badword": 1
+        },
+        {
+            "lines-valid": 3,
+            "filtered-url-badword": 1
+        },
+        {
+            "lines-valid": 3,
+            "filtered-url-badword": 1
+        },
     ]
     for final_sentence, output_should_be_none, expected_counter in zip(
-        final_sentences, outputs_should_be_none, expected_counters
-    ):
+        final_sentences, outputs_should_be_none, expected_counters):
       text = padding_text + final_sentence
-      out, counters = self.run_clean_page(text, badwords=["ass"])
-      self.assertEqual(None if output_should_be_none else text, out)
+      out, counters = self.run_clean_page(
+          {
+              "text": text,
+              "content-type": FAKE_CONTENT_TYPE,
+              "content-length": FAKE_CONTENT_LENGTH,
+              "timestamp": FAKE_TIMESTAMP
+          },
+          badwords=["ass"])
+      if output_should_be_none:
+        self.assertEqual(None, out)
+      else:
+        self.assertEqual(text, out["text"])
       self.assertEqual(expected_counter, dict(counters))
 
   def test_clean_page_citations(self):
@@ -140,9 +192,17 @@ Or have requested citations[citation needed]. Or the option to edit.[edit]
 And some of these lines end with citations.
 Or have requested citations. Or the option to edit."""
     expected_counters = {
-        "lines-valid": 3, "lines-no-endmark": 1, "emitted-clean-pages": 1}
-    out, counters = self.run_clean_page(text)
-    self.assertEqual(expected_clean_text, out)
+        "lines-valid": 3,
+        "lines-no-endmark": 1,
+        "emitted-clean-pages": 1
+    }
+    out, counters = self.run_clean_page({
+        "text": text,
+        "content-type": FAKE_CONTENT_TYPE,
+        "content-length": FAKE_CONTENT_LENGTH,
+        "timestamp": FAKE_TIMESTAMP
+    })
+    self.assertEqual(expected_clean_text, out["text"])
     self.assertEqual(expected_counters, dict(counters))
 
   def test_clean_page_policy(self):
@@ -157,9 +217,17 @@ Let's talk about the Cookie Policy now.
 But at the end it has some polciy lines.
 This line should be okay."""
     expected_counters = {
-        "lines-valid": 3, "lines-policy": 3, "emitted-clean-pages": 1}
-    out, counters = self.run_clean_page(text)
-    self.assertEqual(expected_clean_text, out)
+        "lines-valid": 3,
+        "lines-policy": 3,
+        "emitted-clean-pages": 1
+    }
+    out, counters = self.run_clean_page({
+        "text": text,
+        "content-type": FAKE_CONTENT_TYPE,
+        "content-length": FAKE_CONTENT_LENGTH,
+        "timestamp": FAKE_TIMESTAMP
+    })
+    self.assertEqual(expected_clean_text, out["text"])
     self.assertEqual(expected_counters, dict(counters))
 
   def test_emit_url_to_sentences(self):
@@ -172,12 +240,19 @@ This line should be okay."""
         ("sentence 2.", "sentence 3.", "sentence 4."),
         ("another sentence.", ".", "."),
     )
-    results = c4_utils._emit_url_to_sentences(
-        ("url",
-         EXPECTED_CLEAN_EN +
-         "\nSentence 1. Sentence 2. Sentence 3. Sentence 4."
-         "\nAnother sentence. . . ? ? ! ! !"),
-        max_window_size=3)
+    results = c4_utils._emit_url_to_sentences(("url", {
+        "text":
+            EXPECTED_CLEAN_EN +
+            "\nSentence 1. Sentence 2. Sentence 3. Sentence 4."
+            "\nAnother sentence. . . ? ? ! ! !",
+        "content-type":
+            FAKE_CONTENT_TYPE,
+        "content-length":
+            FAKE_CONTENT_LENGTH,
+        "timestamp":
+            FAKE_TIMESTAMP
+    }),
+                                              max_window_size=3)
     ret_sentences, ret_urls = zip(*results)
     self.assertEqual(("url",) * len(expected_sentences), ret_urls)
     self.assertEqual(expected_sentences, ret_sentences)
@@ -187,8 +262,9 @@ This line should be okay."""
     urls = ["urlA", "urlB", "urlC", "urlD"]
     sentence = "test sentence."
     expected_urls = ("urlA", "urlD")
-    results = c4_utils._emit_sentences_to_urls(
-        (sentence, urls), counter_inc_fn, skip_n=2)
+    results = c4_utils._emit_sentences_to_urls((sentence, urls),
+                                               counter_inc_fn,
+                                               skip_n=2)
     ret_urls, ret_sentences = zip(*results)
     self.assertEqual(expected_urls, ret_urls)
     self.assertEqual((sentence,) * 2, ret_sentences)
@@ -205,49 +281,93 @@ This line should be okay."""
     ]
     text = (
         EXPECTED_CLEAN_EN + "\nSentence 1. Sentence 2. Sentence 3. Sentence 4.")
-    expected_text = ("\"Open Access. Powered by Scholars. "
-                     "Published by Universities.\"\nSentence 4.")
-    result = list(c4_utils._remove_sentences_from_text(
-        ("url", {"text": [text], "sentences": sentences_to_remove}),
-        max_window_size=3,
-        counter_inc_fn=counter_inc_fn))
-    self.assertEqual([("url", expected_text)], result)
+    expected_features = {
+        "text": ("\"Open Access. Powered by Scholars. "
+                 "Published by Universities.\"\nSentence 4."),
+        "content-type": FAKE_CONTENT_TYPE,
+        "content-length": FAKE_CONTENT_LENGTH,
+        "timestamp": FAKE_TIMESTAMP
+    }
+    result = list(
+        c4_utils._remove_sentences_from_text(("url", {
+            "features": [{
+                "text": text,
+                "content-type": FAKE_CONTENT_TYPE,
+                "content-length": FAKE_CONTENT_LENGTH,
+                "timestamp": FAKE_TIMESTAMP
+            }],
+            "sentences": sentences_to_remove
+        }),
+                                             max_window_size=3,
+                                             counter_inc_fn=counter_inc_fn))
+    self.assertEqual([("url", expected_features)], result)
     self.assertEqual({"filtered-sentence-duplicate": 4}, dict(counters))
 
     counters.clear()
     sentences_to_remove.append(("sentence 2.", "sentence 3.", "sentence 4."))
-    expected_text = (
-        "\"Open Access. Powered by Scholars. Published by Universities.\"")
-    result = list(c4_utils._remove_sentences_from_text(
-        ("url", {"text": [text], "sentences": sentences_to_remove}),
-        counter_inc_fn=counter_inc_fn,
-        max_window_size=3,
-        min_num_sentences=3))
-    self.assertEqual([("url", expected_text)], result)
+    expected_features = {
+        "text":
+            ("\"Open Access. Powered by Scholars. Published by Universities.\""
+            ),
+        "content-type": FAKE_CONTENT_TYPE,
+        "content-length": FAKE_CONTENT_LENGTH,
+        "timestamp": FAKE_TIMESTAMP
+    }
+    result = list(
+        c4_utils._remove_sentences_from_text(("url", {
+            "features": [{
+                "text": text,
+                "content-type": FAKE_CONTENT_TYPE,
+                "content-length": FAKE_CONTENT_LENGTH,
+                "timestamp": FAKE_TIMESTAMP
+            }],
+            "sentences": sentences_to_remove
+        }),
+                                             counter_inc_fn=counter_inc_fn,
+                                             max_window_size=3,
+                                             min_num_sentences=3))
+    self.assertEqual([("url", expected_features)], result)
     self.assertEqual({"filtered-sentence-duplicate": 5}, dict(counters))
 
     counters.clear()
-    result = list(c4_utils._remove_sentences_from_text(
-        ("url", {"text": [text], "sentences": sentences_to_remove}),
-        counter_inc_fn=counter_inc_fn,
-        max_window_size=3,
-        min_num_sentences=4))
+    result = list(
+        c4_utils._remove_sentences_from_text(("url", {
+            "features": [{
+                "text": text,
+                "content-type": FAKE_CONTENT_TYPE,
+                "content-length": FAKE_CONTENT_LENGTH,
+                "timestamp": FAKE_TIMESTAMP
+            }],
+            "sentences": sentences_to_remove
+        }),
+                                             counter_inc_fn=counter_inc_fn,
+                                             max_window_size=3,
+                                             min_num_sentences=4))
     self.assertEqual([], result)
     self.assertEqual(
-        {"filtered-sentence-duplicate": 5, "filtered-doc-toofewsentences": 1},
-        dict(counters))
+        {
+            "filtered-sentence-duplicate": 5,
+            "filtered-doc-toofewsentences": 1
+        }, dict(counters))
 
   def test_split_wet_file(self):
     if six.PY2:
       # GzipFile + GFile and TextIOWrapper are broken for py2.
       return
     counters, counter_inc_fn = _get_counters()
-    list(c4_utils.split_wet_file(
-        os.path.join(testing.fake_examples_dir(), "c4", "cc_0.warc.wet.gz"),
-        counter_inc_fn=counter_inc_fn))
+    list(
+        c4_utils.split_wet_file(
+            os.path.join(testing.fake_examples_dir(), "c4", "cc_0.warc.wet.gz"),
+            counter_inc_fn=counter_inc_fn))
     self.assertEqual(
-        {"wet-file": 1, "page-emitted": 2, "page-filitered-nourl": 1},
-        dict(counters))
+        {
+            "wet-file": 1,
+            "page-emitted": 2,
+            "page-filitered-nourl": 1,
+            "page-filtered-nocontentlen": 1,
+            "page-filtered-nocontenttype": 1,
+            "page-filtered-notimestamp": 1,
+        }, dict(counters))
 
 
 if __name__ == "__main__":

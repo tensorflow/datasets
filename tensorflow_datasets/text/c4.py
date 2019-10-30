@@ -46,7 +46,8 @@ _CITATION = """
 }
 """
 _VERSION = tfds.core.Version(
-    "1.0.0", experiments={tfds.core.Experiment.S3: False})
+    "1.0.1", experiments={tfds.core.Experiment.S3: False})
+_SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0")]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
 _WET_PATH_URL = "https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"
@@ -100,6 +101,7 @@ class C4Config(tfds.core.BuilderConfig):
     super(C4Config, self).__init__(
         name=name,
         version=_VERSION,
+        supported_versions=_SUPPORTED_VERSIONS,
         **kwargs)
     self.lang = language
     self.cc_versions = cc_versions or (
@@ -139,6 +141,9 @@ class C4(tfds.core.BeamBasedBuilder):
         features=tfds.features.FeaturesDict({
             "text": tfds.features.Text(),
             "url": tfds.features.Text(),
+            "content-type": tfds.features.Text(),
+            "content-length": tfds.features.Text(),
+            "timestamp": tfds.features.Text(),
         }),
         citation=_CITATION,
         urls=[
@@ -274,9 +279,17 @@ class C4(tfds.core.BeamBasedBuilder):
         c4_utils.is_language, language=self.builder_config.lang)
 
     # Emit final examples.
-    # Output: {"url": url, "text": text}
+    # Output: {"url": url, "text": text, "content-type": content-type,\
+    #          "content-length": content-length, "timestamp": timestamp}
     def _emit_examples(el):
       c4_utils.get_counter_inc_fn("emit-examples")("emitted")
-      url, text = el
-      return {"url": url, "text": text}
+      _, features = el
+      return {
+          "url": features["url"],
+          "text": features["text"],
+          "content-type": features["content-type"],
+          "content-length": features["content-length"],
+          "timestamp": features["timestamp"]
+      }
+
     return page_content | beam.Map(_emit_examples)
