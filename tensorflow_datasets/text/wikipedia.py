@@ -39,12 +39,18 @@ _CITATION = """\
 }
 """
 
-_DESCRIPTION = (
-    "Wikipedia dataset containing cleaned articles of all languages. "
-    "The datasets are built from the Wikipedia dump "
-    "(https://dumps.wikimedia.org/) with one split per language. Each "
-    "example contains the content of one full Wikipedia article with cleaning "
-    "to strip markdown and unwanted sections (references, etc.).")
+_DESCRIPTION = """\
+Wikipedia dataset containing cleaned articles of all languages.
+The datasets are built from the Wikipedia dump
+(https://dumps.wikimedia.org/) with one split per language. Each example
+contains the content of one full Wikipedia article with cleaning to strip
+markdown and unwanted sections (references, etc.).
+
+To access the dataset without needing to run the expensive preparation, you can
+load it with `try_gcs` enabled (e.g., `tfds.load('wikipedia', try_gcs=True)`).
+You can also download the prepared dataset from GCS
+(`gs://tfs-data/datasets/wikipedia`) and copy it to your local data directory.
+"""
 
 _LICENSE = (
     "This work is licensed under the Creative Commons Attribution-ShareAlike "
