@@ -23,3 +23,4 @@
     [DIV2K](http://www.vision.ee.ethz.ch/~timofter/publications/Agustsson-CVPRW-2017.pdf)
 *   Add CFQ (Compositional Freebase Questions) dataset from
     [this paper](https://openreview.net/pdf?id=SygcCnNKwr).
+*   Add the numeric [German Credit dataset](https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)).

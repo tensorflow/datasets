@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2019 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,11 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Structured datasets."""
+"""German Credit (numeric) tests."""
 
-from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
-from tensorflow_datasets.structured.german_credit_numeric import GermanCreditNumeric
-from tensorflow_datasets.structured.higgs import Higgs
-from tensorflow_datasets.structured.iris import Iris
-from tensorflow_datasets.structured.rock_you import RockYou
-from tensorflow_datasets.structured.titanic import Titanic
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.structured import german_credit_numeric
+
+
+class GermanCreditNumericTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = german_credit_numeric.GermanCreditNumeric
+
+  SPLITS = {
+      "train": 3,
+  }
+  DL_EXTRACT_RESULT = 'german.data-numeric'
+
+
+if __name__ == "__main__":
+  testing.test_main()
