@@ -91,7 +91,7 @@ class ImagenetResized(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(names_file=names_file)
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://patrykchrabaszcz.github.io/Imagenet32/'],
+        homepage='https://patrykchrabaszcz.github.io/Imagenet32/',
         citation=_CITATION,
     )
 

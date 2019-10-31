@@ -103,7 +103,7 @@ class Squad(tfds.core.GeneratorBasedBuilder):
         # No default supervised_keys (as we have to pass both question
         # and context as input).
         supervised_keys=None,
-        urls=["https://rajpurkar.github.io/SQuAD-explorer/"],
+        homepage="https://rajpurkar.github.io/SQuAD-explorer/",
         citation=_CITATION,
     )
 

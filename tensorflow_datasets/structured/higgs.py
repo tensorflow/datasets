@@ -106,7 +106,7 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
             'm_wwbb': tf.float64
         }),
         supervised_keys=None,
-        urls=['https://archive.ics.uci.edu/ml/datasets/HIGGS'],
+        homepage='https://archive.ics.uci.edu/ml/datasets/HIGGS',
         citation=_CITATION,
     )
 

@@ -110,7 +110,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=MNIST_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
-        urls=[self.URL],
+        homepage="http://yann.lecun.com/exdb/mnist/",
         citation=_MNIST_CITATION,
     )
 
@@ -193,7 +193,7 @@ class FashionMNIST(MNIST):
                 ]),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://github.com/zalandoresearch/fashion-mnist"],
+        homepage="https://github.com/zalandoresearch/fashion-mnist",
         citation=_FASHION_MNIST_CITATION,
     )
 
@@ -222,7 +222,7 @@ class KMNIST(MNIST):
                 ]),
         }),
         supervised_keys=("image", "label"),
-        urls=["http://codh.rois.ac.jp/kmnist/index.html.en"],
+        homepage="http://codh.rois.ac.jp/kmnist/index.html.en",
         citation=_K_MNIST_CITATION,
     )
 
@@ -326,7 +326,7 @@ class EMNIST(MNIST):
                     num_classes=self.builder_config.class_number),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.nist.gov/node/1298471/emnist-dataset"],
+        homepage="https://www.nist.gov/node/1298471/emnist-dataset",
         citation=_EMNIST_CITATION,
     )
 

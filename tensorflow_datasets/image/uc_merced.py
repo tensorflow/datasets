@@ -89,7 +89,7 @@ class UcMerced(tfds.core.GeneratorBasedBuilder):
             "filename": tfds.features.Text(),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 

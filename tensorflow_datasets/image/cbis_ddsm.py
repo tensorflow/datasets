@@ -172,7 +172,8 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=features_fn_map[self.builder_config.name](),
-        urls=['https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM'],
+        homepage=
+        'https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM',
         citation=_CITATION)
 
   def _get_features_original_base(self):

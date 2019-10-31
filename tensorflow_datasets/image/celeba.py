@@ -117,7 +117,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
                 name: tf.bool for name in ATTR_HEADINGS
             },
         }),
-        urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],
+        homepage="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
         citation=_CITATION,
     )
 

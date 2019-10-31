@@ -103,7 +103,7 @@ class RedditTifu(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         supervised_keys=(_DOCUMENT, self.builder_config.summary_key),
-        urls=["https://github.com/ctr4si/MMN"],
+        homepage="https://github.com/ctr4si/MMN",
         citation=_CITATION,
     )
 

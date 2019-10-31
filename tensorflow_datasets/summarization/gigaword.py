@@ -80,7 +80,7 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
             _SUMMARY: tfds.features.Text()
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://github.com/harvardnlp/sent-summary"],
+        homepage="https://github.com/harvardnlp/sent-summary",
         citation=_CITATION,
     )
 

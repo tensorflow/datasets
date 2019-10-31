@@ -70,7 +70,7 @@ class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=_LEAVES_LABELS)
         }),
         supervised_keys=("image", "label"),
-        urls=["https://data.mendeley.com/datasets/3f83gxmv57/2"],
+        homepage="https://data.mendeley.com/datasets/3f83gxmv57/2",
         citation=_CITATION,
     )
 

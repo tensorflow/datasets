@@ -106,7 +106,7 @@ class CelebAHq(tfds.core.GeneratorBasedBuilder):
             "image/filename":
                 tfds.features.Text(),
         },),
-        urls=["https://github.com/tkarras/progressive_growing_of_gans"],
+        homepage="https://github.com/tkarras/progressive_growing_of_gans",
         citation=_CITATION,
     )
 

@@ -67,7 +67,7 @@ class Malaria(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=_NAMES),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage="https://lhncbc.nlm.nih.gov/publication/pub9932",
         citation=_CITATION,
     )
 

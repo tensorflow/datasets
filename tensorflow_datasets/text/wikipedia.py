@@ -139,7 +139,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
         }),
         # No default supervised_keys.
         supervised_keys=None,
-        urls=["https://dumps.wikimedia.org"],
+        homepage="https://dumps.wikimedia.org",
         citation=_CITATION,
         redistribution_info={"license": _LICENSE},
     )

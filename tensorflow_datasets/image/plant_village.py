@@ -115,7 +115,7 @@ class PlantVillage(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=_LABELS)
         }),
         supervised_keys=("image", "label"),
-        urls=["https://arxiv.org/abs/1511.08060"],
+        homepage="https://arxiv.org/abs/1511.08060",
         citation=_CITATION,
     )
 

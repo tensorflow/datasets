@@ -61,7 +61,7 @@ class SvhnCropped(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        urls=[URL],
+        homepage=URL,
         citation=_CITATION,
     )
 

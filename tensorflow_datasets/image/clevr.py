@@ -77,7 +77,7 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
                                                      dtype=tf.float32),
             })
         }),
-        urls=[_BASE_URL],
+        homepage=_BASE_URL,
         citation=_CITATION,
     )
 

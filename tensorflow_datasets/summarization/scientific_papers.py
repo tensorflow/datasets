@@ -99,7 +99,7 @@ class ScientificPapers(tfds.core.GeneratorBasedBuilder):
             "section_names": tfds.features.Text(),
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://github.com/armancohan/long-summarization"],
+        homepage="https://github.com/armancohan/long-summarization",
         citation=_CITATION,
     )
 

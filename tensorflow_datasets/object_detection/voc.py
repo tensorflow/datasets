@@ -179,7 +179,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
             "labels_no_difficult": tfds.features.Sequence(
                 tfds.features.ClassLabel(names=_VOC_LABELS)),
         }),
-        urls=[_VOC_URL.format(year=self.builder_config.year)],
+        homepage=_VOC_URL.format(year=self.builder_config.year),
         citation=_VOC_CITATION.format(year=self.builder_config.year),
     )
 

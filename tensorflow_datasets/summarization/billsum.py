@@ -75,7 +75,7 @@ class Billsum(tfds.core.GeneratorBasedBuilder):
             "title": tfds.features.Text(),
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://github.com/FiscalNote/BillSum"],
+        homepage="https://github.com/FiscalNote/BillSum",
         citation=_CITATION,
     )
 

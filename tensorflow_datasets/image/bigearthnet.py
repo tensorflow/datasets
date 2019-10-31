@@ -200,7 +200,7 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
         description=_DESCRIPTION,
         features=features,
         supervised_keys=supervised_keys,
-        urls=['http://bigearth.net'],
+        homepage='http://bigearth.net',
         citation=_CITATION,
     )
 

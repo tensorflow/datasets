@@ -86,7 +86,7 @@ class WiderFace(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
-        urls=[_PROJECT_URL],
+        homepage=_PROJECT_URL,
         citation=_CITATION,
     )
 

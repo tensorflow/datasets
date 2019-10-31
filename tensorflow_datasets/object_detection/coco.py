@@ -224,7 +224,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         # be better to have a separate class CocoCaption2014 to avoid poluting
         # the main class with builder config for each encoder.
         features=tfds.features.FeaturesDict(features),
-        urls=['http://cocodataset.org/#home'],
+        homepage='http://cocodataset.org/#home',
         citation=_CITATION,
     )
 

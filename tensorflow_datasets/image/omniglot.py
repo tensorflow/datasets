@@ -80,7 +80,7 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
-        urls=[_BASE_URL],
+        homepage=_BASE_URL,
         citation=_CITATION,
     )
 

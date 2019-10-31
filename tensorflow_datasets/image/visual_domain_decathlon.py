@@ -103,7 +103,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(num_classes=num_classes),
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://www.robots.ox.ac.uk/~vgg/decathlon/'],
+        homepage='https://www.robots.ox.ac.uk/~vgg/decathlon/',
         citation=_CITATION,
     )
 

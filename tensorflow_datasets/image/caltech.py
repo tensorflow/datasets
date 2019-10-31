@@ -67,7 +67,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
             "image/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION
         )
 

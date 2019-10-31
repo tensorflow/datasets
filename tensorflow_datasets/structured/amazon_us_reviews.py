@@ -139,7 +139,7 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
                 ])
         }),
         supervised_keys=None,
-        urls=["https://s3.amazonaws.com/amazon-reviews-pds/readme.html"],
+        homepage="https://s3.amazonaws.com/amazon-reviews-pds/readme.html",
         citation=_CITATION,
     )
 

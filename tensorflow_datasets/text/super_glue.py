@@ -38,6 +38,13 @@ Note that each SuperGLUE dataset has its own citation. Please see the source to
 get the correct citation for each contained dataset.
 """
 
+_GLUE_DESCRIPTION = """\
+SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after
+GLUE with a new set of more difficult language understanding tasks, improved
+resources, and a new public leaderboard.
+
+"""
+
 _BOOLQ_DESCRIPTION = """\
 BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short
 passage and a yes/no question about the passage. The questions are provided anonymously and
@@ -462,12 +469,9 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
 
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description=_GLUE_DESCRIPTION + self.builder_config.description,
         features=tfds.features.FeaturesDict(features),
-        urls=[
-            self.builder_config.url,
-            "https://super.gluebenchmark.com/",
-        ],
+        homepage=self.builder_config.url,
         citation=self.builder_config.citation + "\n" + _SUPER_GLUE_CITATION,
     )
 

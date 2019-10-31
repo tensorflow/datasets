@@ -91,7 +91,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(names=_LABELS.values())),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://stanfordmlgroup.github.io/competitions/chexpert/"],
+        homepage="https://stanfordmlgroup.github.io/competitions/chexpert/",
         citation=_CITATION
     )
 

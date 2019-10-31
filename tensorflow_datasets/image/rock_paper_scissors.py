@@ -62,7 +62,7 @@ class RockPaperScissors(tfds.core.GeneratorBasedBuilder):
                 names=["rock", "paper", "scissors"]),
         }),
         supervised_keys=("image", "label"),
-        urls=["http://laurencemoroney.com/rock-paper-scissors-dataset"],
+        homepage="http://laurencemoroney.com/rock-paper-scissors-dataset",
         citation=_CITATION
         )
 

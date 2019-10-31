@@ -69,7 +69,7 @@ class Iris(tfds.core.GeneratorBasedBuilder):
                     names=["Iris-setosa", "Iris-versicolor", "Iris-virginica"]),
         }),
         supervised_keys=("features", "label"),
-        urls=["https://archive.ics.uci.edu/ml/datasets/iris"],
+        homepage="https://archive.ics.uci.edu/ml/datasets/iris",
         citation=_CITATION,
     )
 

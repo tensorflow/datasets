@@ -143,7 +143,7 @@ class Groove(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features_dict),
-        urls=["https://g.co/magenta/groove-dataset"],
+        homepage="https://g.co/magenta/groove-dataset",
         citation=_CITATION,
     )
 

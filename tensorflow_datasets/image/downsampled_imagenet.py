@@ -97,7 +97,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
         }),
         supervised_keys=None,
-        urls=["http://image-net.org/small/download.php"],
+        homepage="http://image-net.org/small/download.php",
         citation=_CITATION,
     )
 

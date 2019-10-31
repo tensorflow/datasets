@@ -104,7 +104,7 @@ class Dsprites(tfds.core.GeneratorBasedBuilder):
             "value_y_position":
                 tfds.features.Tensor(shape=[], dtype=tf.float32),
         }),
-        urls=["https://github.com/deepmind/dsprites-dataset"],
+        homepage="https://github.com/deepmind/dsprites-dataset",
         citation=_CITATION,
     )
 

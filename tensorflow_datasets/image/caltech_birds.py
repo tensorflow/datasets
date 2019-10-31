@@ -77,7 +77,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
             "segmentation_mask": tfds.features.Image(shape=(None, None, 1)),
         }),
         supervised_keys=("image", "label"),
-        urls=_URL,
+        homepage=_URL,
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
@@ -231,7 +231,7 @@ class CaltechBirds2011(CaltechBirds2010):
             "segmentation_mask": tfds.features.Image(shape=(None, None, 1)),
         }),
         supervised_keys=("image", "label"),
-        urls=_URL,
+        homepage=_URL,
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

@@ -123,7 +123,7 @@ class Flores(tfds.core.GeneratorBasedBuilder):
             languages=self.builder_config.language_pair,
             encoder_config=self.builder_config.text_encoder_config),
         supervised_keys=(source, target),
-        urls=["https://github.com/facebookresearch/flores/"],
+        homepage="https://github.com/facebookresearch/flores/",
         citation=_CITATION,
     )
 

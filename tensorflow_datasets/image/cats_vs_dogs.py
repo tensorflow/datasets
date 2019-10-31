@@ -69,7 +69,8 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["cat", "dog"]),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.microsoft.com/en-us/download/details.aspx?id=54765"],
+        homepage=
+        "https://www.microsoft.com/en-us/download/details.aspx?id=54765",
         citation=_CITATION
         )
 

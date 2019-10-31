@@ -104,7 +104,6 @@ class CmaterdbConfig(tfds.core.BuilderConfig):
 
 class Cmaterdb(tfds.core.GeneratorBasedBuilder):
   """CMATERdb dataset."""
-  URL = "https://code.google.com/archive/p/cmaterdb/"
 
   BUILDER_CONFIGS = [
       CmaterdbConfig(
@@ -133,7 +132,7 @@ class Cmaterdb(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        urls=[self.URL],
+        homepage="https://code.google.com/archive/p/cmaterdb/",
         citation=_CITATION,
     )
 

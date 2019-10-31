@@ -67,7 +67,7 @@ class PatchCamelyon(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(num_classes=2),
         }),
         supervised_keys=('image', 'label'),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

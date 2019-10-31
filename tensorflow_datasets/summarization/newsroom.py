@@ -95,7 +95,7 @@ class Newsroom(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://summari.es"],
+        homepage="https://summari.es",
         citation=_CITATION,
     )
 

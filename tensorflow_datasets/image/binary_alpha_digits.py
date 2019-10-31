@@ -56,7 +56,7 @@ class BinaryAlphaDigits(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(names=_NAMES),
         }),
         supervised_keys=('image', 'label'),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

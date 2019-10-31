@@ -148,7 +148,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description='A 101-label video classification dataset.',
         features=features,
-        urls=['https://www.crcv.ucf.edu/data/UCF101.php'],
+        homepage='https://www.crcv.ucf.edu/data/UCF101.php',
         citation=_CITATION,
     )
 

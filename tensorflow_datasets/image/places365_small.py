@@ -69,7 +69,7 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names_file=names_file),
         }),
         supervised_keys=("image", "label"),
-        urls=[_BASE_URL],
+        homepage="http://places2.csail.mit.edu/",
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

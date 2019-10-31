@@ -77,7 +77,7 @@ class Snli(tfds.core.GeneratorBasedBuilder):
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
         supervised_keys=None,
-        urls=['https://nlp.stanford.edu/projects/snli/'],
+        homepage='https://nlp.stanford.edu/projects/snli/',
         citation=_CITATION,
     )
 

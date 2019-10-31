@@ -87,7 +87,7 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
             'talk_name':
                 tfds.features.Text(),
         }),
-        urls=['https://github.com/neulab/word-embeddings-for-nmt'],
+        homepage='https://github.com/neulab/word-embeddings-for-nmt',
         citation=_CITATION,
     )
 

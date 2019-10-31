@@ -92,7 +92,7 @@ class PlantaeK(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=labels)
         }),
         supervised_keys=("image", "label"),
-        urls=["https://data.mendeley.com/datasets/t6j2h22jpx/1"],
+        homepage="https://data.mendeley.com/datasets/t6j2h22jpx/1",
         citation=_CITATION,
     )
 

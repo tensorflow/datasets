@@ -134,7 +134,7 @@ class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(num_classes=mnist.MNIST_NUM_CLASSES),
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://github.com/google-research/mnist-c'],
+        homepage='https://github.com/google-research/mnist-c',
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

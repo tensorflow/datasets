@@ -251,7 +251,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
                 encoder_config=self.builder_config.text_encoder_config),
         }),
         supervised_keys=(_ARTICLE, _HIGHLIGHTS),
-        urls=['https://github.com/abisee/cnn-dailymail'],
+        homepage='https://github.com/abisee/cnn-dailymail',
         citation=_CITATION,
     )
 

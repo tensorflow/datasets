@@ -114,7 +114,7 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict(
             {k: tfds.features.Text() for k in feature_names}),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://github.com/mahnazkoupaee/WikiHow-Dataset"],
+        homepage="https://github.com/mahnazkoupaee/WikiHow-Dataset",
         citation=_CITATION,
     )
 

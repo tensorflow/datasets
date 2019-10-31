@@ -78,7 +78,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         "two test sets of previously seen (testseen) and unseen "
         "(testnovel) objects. This is the small 64x64 version.",
         features=features,
-        urls=["https://sites.google.com/view/sna-visual-mpc/"],
+        homepage="https://sites.google.com/view/sna-visual-mpc/",
         citation=_CITATION,
     )
 

@@ -113,7 +113,7 @@ class BigPatent(tfds.core.GeneratorBasedBuilder):
             _SUMMARY: tfds.features.Text()
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://evasharma.github.io/bigpatent/"],
+        homepage="https://evasharma.github.io/bigpatent/",
         citation=_CITATION,
     )
 

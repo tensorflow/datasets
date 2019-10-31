@@ -135,7 +135,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description="This data set contains videos generated from Starcraft.",
         features=features,
-        urls=["https://storage.googleapis.com/scv_dataset/README.html"],
+        homepage="https://storage.googleapis.com/scv_dataset/README.html",
         citation=_CITATION,
     )
 

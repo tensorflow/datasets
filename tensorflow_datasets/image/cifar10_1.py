@@ -111,7 +111,7 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):  # pylint: disable=invalid-nam
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://github.com/modestyachts/CIFAR-10.1"],
+        homepage="https://github.com/modestyachts/CIFAR-10.1",
         citation=_CITATION,
     )
 

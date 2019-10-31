@@ -100,7 +100,7 @@ class Shapes3d(tfds.core.GeneratorBasedBuilder):
             "value_orientation":
                 tfds.features.Tensor(shape=[], dtype=tf.float32),
         }),
-        urls=["https://github.com/deepmind/3d-shapes"],
+        homepage="https://github.com/deepmind/3d-shapes",
         citation=_CITATION,
     )
 

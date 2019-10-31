@@ -119,7 +119,7 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.Translation(
             languages=self.builder_config.language_pair),
-        urls=["https://github.com/neulab/word-embeddings-for-nmt"],
+        homepage="https://github.com/neulab/word-embeddings-for-nmt",
         supervised_keys=self.builder_config.language_pair,
         citation=_CITATION,
     )

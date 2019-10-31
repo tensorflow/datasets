@@ -98,7 +98,7 @@ class Kitti(tfds.core.GeneratorBasedBuilder):
             "image/file_name": tfds.features.Text(),  # E.g. "000001.png".
             "objects": tfds.features.Sequence(annotations),
         }),
-        urls=[_HOMEPAGE_URL],
+        homepage=_HOMEPAGE_URL,
         citation=_CITATION,
     )
 

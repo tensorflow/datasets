@@ -226,7 +226,7 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
                 'is_inside': tf.int8,
             }),
         }),
-        urls=['https://storage.googleapis.com/openimages/web/index.html'],
+        homepage='https://storage.googleapis.com/openimages/web/index.html',
         citation=_CITATION,
     )
 

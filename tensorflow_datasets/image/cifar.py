@@ -62,7 +62,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
+        homepage="https://www.cs.toronto.edu/~kriz/cifar.html",
         citation=_CITATION,
     )
 
@@ -172,7 +172,7 @@ class Cifar100(Cifar10):
             "coarse_label": tfds.features.ClassLabel(num_classes=20),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
+        homepage="https://www.cs.toronto.edu/~kriz/cifar.html",
         citation=_CITATION,
     )
 
@@ -188,7 +188,7 @@ class CifarInfo(collections.namedtuple("_CifarInfo", [
 ])):
   """Contains the information necessary to generate a CIFAR dataset.
 
-  Args:
+  Attributes:
     name (str): name of dataset.
     url (str): data URL.
     prefix (str): path prefix within the downloaded and extracted file to look

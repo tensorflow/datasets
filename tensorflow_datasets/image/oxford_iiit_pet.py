@@ -65,7 +65,7 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
             "segmentation_mask": tfds.features.Image(shape=(None, None, 1))
         }),
         supervised_keys=("image", "label"),
-        urls=["http://www.robots.ox.ac.uk/~vgg/data/pets/"],
+        homepage="http://www.robots.ox.ac.uk/~vgg/data/pets/",
         citation=_CITATION,
     )
 

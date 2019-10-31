@@ -38,6 +38,13 @@ _GLUE_CITATION = """\
 Note that each GLUE dataset has its own citation. Please see the source to see
 the correct citation for each contained dataset."""
 
+_GLUE_DESCRIPTION = """\
+GLUE, the General Language Understanding Evaluation benchmark
+(https://gluebenchmark.com/) is a collection of resources for training,
+evaluating, and analyzing natural language understanding systems.
+
+"""
+
 _MRPC_DEV_IDS = "https://firebasestorage.googleapis.com/v0/b/mtl-sentence-representations.appspot.com/o/data%2Fmrpc_dev_ids.tsv?alt=media&token=ec5c0836-31d5-48f4-b431-7480817f1adc"
 _MRPC_TRAIN = "https://dl.fbaipublicfiles.com/senteval/senteval_data/msr_paraphrase_train.txt"
 _MRPC_TEST = "https://dl.fbaipublicfiles.com/senteval/senteval_data/msr_paraphrase_test.txt"
@@ -424,12 +431,9 @@ class Glue(tfds.core.GeneratorBasedBuilder):
     features["idx"] = tf.int32
     return tfds.core.DatasetInfo(
         builder=self,
-        description=self.builder_config.description,
+        description=_GLUE_DESCRIPTION + self.builder_config.description,
         features=tfds.features.FeaturesDict(features),
-        urls=[
-            self.builder_config.url,
-            "https://gluebenchmark.com/",
-        ],
+        homepage=self.builder_config.url,
         citation=self.builder_config.citation + "\n" + _GLUE_CITATION,
     )
 

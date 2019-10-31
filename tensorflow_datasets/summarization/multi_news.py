@@ -66,7 +66,7 @@ class MultiNews(tfds.core.GeneratorBasedBuilder):
             _SUMMARY: tfds.features.Text()
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        urls=["https://github.com/Alex-Fabbri/Multi-News"],
+        homepage="https://github.com/Alex-Fabbri/Multi-News",
         citation=_CITATION,
     )
 

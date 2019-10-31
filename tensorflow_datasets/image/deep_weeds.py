@@ -86,7 +86,7 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=_NAMES),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage="https://github.com/AlexOlsen/DeepWeeds",
         citation=_CITATION,
     )
 

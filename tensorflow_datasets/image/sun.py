@@ -223,7 +223,7 @@ class Sun397(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(shape=(None, None, 3)),
             "label": tfds.features.ClassLabel(names_file=names_file),
         }),
-        urls=[_SUN397_URL],
+        homepage=_SUN397_URL,
         citation=_SUN397_CITATION)
 
   def _split_generators(self, dl_manager):

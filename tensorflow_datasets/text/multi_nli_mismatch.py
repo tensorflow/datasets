@@ -102,7 +102,7 @@ class MultiNLIMismatch(tfds.core.GeneratorBasedBuilder):
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
         supervised_keys=None,
-        urls=["https://www.nyu.edu/projects/bowman/multinli/"],
+        homepage="https://www.nyu.edu/projects/bowman/multinli/",
         citation=_CITATION,
     )
 

@@ -83,7 +83,7 @@ class Smallnorb(tfds.core.GeneratorBasedBuilder):
             "label_lighting":
                 tfds.features.ClassLabel(num_classes=6),
         }),
-        urls=["https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/"],
+        homepage="https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/",
         citation=_CITATION,
         supervised_keys=("image", "label_category"),
     )

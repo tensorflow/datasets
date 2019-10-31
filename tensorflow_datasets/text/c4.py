@@ -31,6 +31,8 @@ from tensorflow_datasets.text import c4_utils
 _DESCRIPTION = """\
 A colossal, cleaned version of Common Crawl's web crawl corpus.
 
+Based on Common Crawl dataset: "https://commoncrawl.org"
+
 Due to the overhead of cleaning the dataset, it is recommend you prepare it with
 a distributed service like Cloud Dataflow. More info at
 https://www.tensorflow.org/datasets/beam_datasets.
@@ -146,10 +148,8 @@ class C4(tfds.core.BeamBasedBuilder):
             "timestamp": tfds.features.Text(),
         }),
         citation=_CITATION,
-        urls=[
-            "https://github.com/google-research/text-to-text-transfer-transformer",
-            "https://commoncrawl.org",
-        ],
+        homepage=
+        "https://github.com/google-research/text-to-text-transfer-transformer#datasets",
     )
 
   def _split_generators(self, dl_manager):

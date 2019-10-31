@@ -126,7 +126,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=features,
         supervised_keys=supervised_keys,
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 

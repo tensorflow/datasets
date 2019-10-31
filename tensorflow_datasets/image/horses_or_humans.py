@@ -62,7 +62,7 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
                 names=["horses", "humans"]),
         }),
         supervised_keys=("image", "label"),
-        urls=["http://laurencemoroney.com/horses-or-humans-dataset"],
+        homepage="http://laurencemoroney.com/horses-or-humans-dataset",
         citation=_CITATION
         )
 

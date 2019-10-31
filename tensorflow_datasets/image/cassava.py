@@ -64,7 +64,7 @@ class Cassava(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=_LABELS)
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.kaggle.com/c/cassava-disease/overview"],
+        homepage="https://www.kaggle.com/c/cassava-disease/overview",
         citation=_CITATION,
     )
 

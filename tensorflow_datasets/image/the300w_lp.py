@@ -95,7 +95,7 @@ class The300wLp(tfds.core.GeneratorBasedBuilder):
             "pose_params":
                 tfds.features.Tensor(shape=(7,), dtype=tf.float32)
         }),
-        urls=[_PROJECT_URL],
+        homepage=_PROJECT_URL,
         citation=_CITATION,
     )
 

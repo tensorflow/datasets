@@ -101,7 +101,7 @@ class PlantLeaves(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=labels)
         }),
         supervised_keys=("image", "label"),
-        urls=["https://data.mendeley.com/datasets/hb74ynkjcn/1"],
+        homepage="https://data.mendeley.com/datasets/hb74ynkjcn/1",
         citation=_CITATION,
     )
 

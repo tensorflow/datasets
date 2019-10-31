@@ -76,7 +76,7 @@ class PetFinder(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
         supervised_keys=("attributes", "label"),
-        urls=[_URL],
+        homepage="https://www.kaggle.com/c/petfinder-adoption-prediction/data",
         citation=_CITATION,
     )
 

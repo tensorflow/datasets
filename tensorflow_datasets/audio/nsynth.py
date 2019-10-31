@@ -193,7 +193,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
-        urls=["https://g.co/magenta/nsynth-dataset"],
+        homepage="https://g.co/magenta/nsynth-dataset",
         citation=_CITATION,
         metadata=tfds.core.BeamMetadataDict(),
     )

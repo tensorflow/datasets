@@ -111,7 +111,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             # From 0 (no DR - saine) to 4 (Proliferative DR). -1 means no label.
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
-        urls=["https://www.kaggle.com/c/diabetic-retinopathy-detection/data"],
+        homepage="https://www.kaggle.com/c/diabetic-retinopathy-detection/data",
         citation=_CITATION,
     )
 

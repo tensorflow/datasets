@@ -88,7 +88,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format="jpeg"),
         }),
-        urls=["https://www.yf.io/p/lsun"],
+        homepage="https://www.yf.io/p/lsun",
         citation=_CITATION,
     )
 

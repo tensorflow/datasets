@@ -659,7 +659,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
             languages=self.builder_config.language_pair,
             encoder_config=self.builder_config.text_encoder_config),
         supervised_keys=(src, target),
-        urls=[self.builder_config.url],
+        homepage=self.builder_config.url,
         citation=self.builder_config.citation,
     )
 

@@ -166,7 +166,7 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(num_classes=_CIFAR_CLASSES),
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://github.com/hendrycks/robustness'],
+        homepage='https://github.com/hendrycks/robustness',
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

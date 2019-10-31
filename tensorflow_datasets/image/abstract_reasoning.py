@@ -207,7 +207,7 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
             "filename":
                 tfds.features.Text(),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 

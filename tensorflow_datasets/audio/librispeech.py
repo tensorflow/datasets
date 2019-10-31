@@ -191,7 +191,7 @@ class Librispeech(tfds.core.GeneratorBasedBuilder):
                 tf.int64,
         }),
         supervised_keys=("speech", "text"),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 

@@ -117,7 +117,7 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
                          for name, (dtype, func) in FEATURE_DICT.items()}
         }),
         supervised_keys=("features", "survived"),
-        urls=["https://www.openml.org/d/40945"],
+        homepage="https://www.openml.org/d/40945",
         citation=_CITATION
         )
 

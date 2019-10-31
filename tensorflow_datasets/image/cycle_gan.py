@@ -104,9 +104,8 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["A", "B"]),
         }),
         supervised_keys=("image", "label"),
-        urls=[
-            "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
-        ],
+        homepage=
+        "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/",
         citation=_CITATION,
     )
 

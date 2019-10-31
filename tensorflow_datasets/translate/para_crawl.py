@@ -142,10 +142,7 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
             languages=("en", target_language),
             encoder_config=self.builder_config.text_encoder_config),
         supervised_keys=("en", target_language),
-        urls=[
-            _BENCHMARK_URL,
-            _BASE_DATA_URL_FORMAT_STR.format(target_lang=target_language)
-        ],
+        homepage=_BENCHMARK_URL,
         citation=_CITATION)
 
   def _vocab_text_gen(self, files, language):

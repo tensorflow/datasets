@@ -68,7 +68,7 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
             "file_name": tfds.features.Text(),
         }),
         supervised_keys=("image", "label"),
-        urls=[_BASE_URL],
+        homepage=_BASE_URL,
         citation=_CITATION,
     )
 

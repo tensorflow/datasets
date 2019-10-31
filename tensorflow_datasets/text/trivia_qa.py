@@ -139,7 +139,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
         }),
 
         supervised_keys=None,
-        urls=["http://nlp.cs.washington.edu/triviaqa/"],
+        homepage="http://nlp.cs.washington.edu/triviaqa/",
         citation=_CITATION,
     )
 

@@ -117,7 +117,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=features,
         supervised_keys=supervised_keys,
-        urls=['http://doi.org/10.14459/2018MP1454690'],
+        homepage='http://doi.org/10.14459/2018MP1454690',
     )
 
   def _split_generators(self, dl_manager):

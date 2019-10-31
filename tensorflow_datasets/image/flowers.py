@@ -56,7 +56,7 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
                 names=["dandelion", "daisy", "tulips", "sunflowers", "roses"]),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage="https://www.tensorflow.org/tutorials/load_data/images",
         citation=_CITATION
         )
 

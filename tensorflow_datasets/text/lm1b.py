@@ -144,7 +144,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
                     encoder_config=self.builder_config.text_encoder_config),
         }),
         supervised_keys=("text", "text"),
-        urls=["http://www.statmt.org/lm-benchmark/"],
+        homepage="http://www.statmt.org/lm-benchmark/",
         citation=_CITATION,
     )
 

@@ -150,7 +150,7 @@ class Imagenet2012Corrupted(Imagenet2012):
             'file_name': tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://openreview.net/forum?id=HJz6tiCqYm'],
+        homepage='https://openreview.net/forum?id=HJz6tiCqYm',
         citation=_CITATION,
     )
 

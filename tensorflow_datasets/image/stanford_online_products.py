@@ -46,7 +46,7 @@ class StanfordOnlineProducts(tfds.core.GeneratorBasedBuilder):
         description=("Stanford Online Products Dataset"),
         builder=self,
         citation=_CITATION,
-        urls=["http://cvgl.stanford.edu/projects/lifted_struct/"],
+        homepage="http://cvgl.stanford.edu/projects/lifted_struct/",
         features=tfds.features.FeaturesDict({
             "class_id":
                 tfds.features.ClassLabel(num_classes=22634),

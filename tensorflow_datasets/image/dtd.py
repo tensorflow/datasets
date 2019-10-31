@@ -66,7 +66,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names_file=names_file),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

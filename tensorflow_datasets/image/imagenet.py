@@ -114,7 +114,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
             'file_name': tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
         }),
         supervised_keys=('image', 'label'),
-        urls=['http://image-net.org/'],
+        homepage='http://image-net.org/',
         citation=_CITATION,
     )
 

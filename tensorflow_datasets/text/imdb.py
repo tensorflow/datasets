@@ -117,7 +117,7 @@ class IMDBReviews(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=["neg", "pos"]),
         }),
         supervised_keys=("text", "label"),
-        urls=["http://ai.stanford.edu/~amaas/data/sentiment/"],
+        homepage="http://ai.stanford.edu/~amaas/data/sentiment/",
         citation=_CITATION,
     )
 

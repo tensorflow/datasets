@@ -166,7 +166,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
             'bbox': tfds.features.BBoxFeature(),
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://ai.stanford.edu/~jkrause/cars/car_dataset.html'],
+        homepage='https://ai.stanford.edu/~jkrause/cars/car_dataset.html',
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
