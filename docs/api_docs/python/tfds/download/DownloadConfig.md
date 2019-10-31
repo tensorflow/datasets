@@ -6,6 +6,8 @@
 
 # tfds.download.DownloadConfig
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -13,6 +15,8 @@
 source</a>
 
 ## Class `DownloadConfig`
+
+<!-- Start diff -->
 
 Configuration for
 <a href="../../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.

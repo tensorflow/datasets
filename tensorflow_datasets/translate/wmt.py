@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import codecs
 import functools
 import gzip
 import itertools
@@ -29,7 +30,6 @@ import xml.etree.cElementTree as ElementTree
 from absl import logging
 import six
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -575,7 +575,7 @@ _CZENG17_FILTER = SubDataset(
 class WmtConfig(tfds.core.BuilderConfig):
   """BuilderConfig for WMT."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self,
                url=None,
                citation=None,
@@ -664,7 +664,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     )
 
   def _vocab_text_gen(self, split_subsets, extraction_map, language):
-    for ex in self._generate_examples(split_subsets, extraction_map):
+    for _, ex in self._generate_examples(split_subsets, extraction_map):
       yield ex[language]
 
   def _split_generators(self, dl_manager):
@@ -757,8 +757,8 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
           sub_generator = _parse_parallel_sentences
       elif len(files) == 1:
         fname = files[0]
-         # Note: Due to formatting used by `download_manager`, the file
-         # extension may not be at the end of the file path.
+        # Note: Due to formatting used by `download_manager`, the file
+        # extension may not be at the end of the file path.
         if ".tsv" in fname:
           sub_generator = _parse_tsv
         elif ss_name.startswith("newscommentary_v14"):
@@ -773,12 +773,13 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
       else:
         raise ValueError("Invalid number of files: %d" % len(files))
 
-      for ex in sub_generator(*files):
+      for sub_key, ex in sub_generator(*files):
         if not all(ex.values()):
           continue
         # TODO(adarob): Add subset feature.
         # ex["subset"] = subset
-        yield ex
+        key = "{}/{}".format(ss_name, sub_key)
+        yield key, ex
 
 
 def _parse_parallel_sentences(f1, f2):
@@ -789,8 +790,8 @@ def _parse_parallel_sentences(f1, f2):
 
     if split_path[-1] == "gz":
       lang = split_path[-2]
-      with tf.io.gfile.GFile(path) as f, gzip.GzipFile(fileobj=f) as g:
-        return g.read().split("\n"), lang
+      with tf.io.gfile.GFile(path, "rb") as f, gzip.GzipFile(fileobj=f) as g:
+        return g.read().decode("utf-8").split("\n"), lang
 
     if split_path[-1] == "txt":
       # CWMT
@@ -828,7 +829,7 @@ def _parse_parallel_sentences(f1, f2):
       "Number of files do not match: %d vs %d for %s vs %s." % (
           len(f1_files), len(f2_files), f1, f2))
 
-  for f1_i, f2_i in zip(sorted(f1_files), sorted(f2_files)):
+  for f_id, (f1_i, f2_i) in enumerate(zip(sorted(f1_files), sorted(f2_files))):
     l1_sentences, l1 = parse_file(f1_i)
     l2_sentences, l2 = parse_file(f2_i)
 
@@ -836,8 +837,9 @@ def _parse_parallel_sentences(f1, f2):
         "Sizes do not match: %d vs %d for %s vs %s." % (
             len(l1_sentences), len(l2_sentences), f1_i, f2_i))
 
-    for s1, s2 in zip(l1_sentences, l2_sentences):
-      yield {
+    for line_id, (s1, s2) in enumerate(zip(l1_sentences, l2_sentences)):
+      key = "{}/{}".format(f_id, line_id)
+      yield key, {
           l1: s1,
           l2: s2
       }
@@ -851,8 +853,8 @@ def _parse_frde_bitext(fr_path, de_path):
   assert len(fr_sentences) == len(de_sentences), (
       "Sizes do not match: %d vs %d for %s vs %s." % (
           len(fr_sentences), len(de_sentences), fr_path, de_path))
-  for s1, s2 in zip(fr_sentences, de_sentences):
-    yield {
+  for line_id, (s1, s2) in enumerate(zip(fr_sentences, de_sentences)):
+    yield line_id, {
         "fr": s1,
         "de": s2
     }
@@ -871,10 +873,15 @@ def _parse_tmx(path):
     assert len(segs) == 1, "Invalid number of segments: %d" % len(segs)
     return segs[0].text
 
-  with tf.io.gfile.GFile(path) as f:
-    for _, elem in ElementTree.iterparse(f):
+  with tf.io.gfile.GFile(path, "rb") as f:
+    if six.PY3:
+      # Workaround due to: https://github.com/tensorflow/tensorflow/issues/33563
+      utf_f = codecs.getreader("utf-8")(f)
+    else:
+      utf_f = f
+    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):
       if elem.tag == "tu":
-        yield {
+        yield line_id, {
             _get_tuv_lang(tuv):
                 _get_tuv_seg(tuv) for tuv in elem.iterfind("tuv")
         }
@@ -898,7 +905,7 @@ def _parse_tsv(path, language_pair=None):
             j, path, len(cols))
         continue
       s1, s2 = cols
-      yield {
+      yield j, {
           l1: s1.strip(),
           l2: s2.strip()
       }
@@ -910,9 +917,9 @@ def _parse_wikiheadlines(path):
   assert lang_match is not None, "Invalid Wikiheadlines filename: %s" % path
   l1, l2 = lang_match.groups()
   with tf.io.gfile.GFile(path) as f:
-    for line in f:
+    for line_id, line in enumerate(f):
       s1, s2 = line.split("|||")
-      yield {
+      yield line_id, {
           l1: s1.strip(),
           l2: s2.strip()
       }
@@ -935,7 +942,8 @@ def _parse_czeng(*paths, **kwargs):
   for path in paths:
     for gz_path in tf.io.gfile.glob(path):
       with tf.io.gfile.GFile(gz_path, "rb") as g, gzip.GzipFile(fileobj=g) as f:
-        for line in f:
+        filename = os.path.basename(gz_path)
+        for line_id, line in enumerate(f):
           line = line.decode("utf-8")  # required for py3
           if not line.strip():
             continue
@@ -944,7 +952,8 @@ def _parse_czeng(*paths, **kwargs):
             block_match = re.match(re_block, id_)
             if block_match and block_match.groups()[0] in bad_blocks:
               continue
-          yield {
+          sub_key = "{}/{}".format(filename, line_id)
+          yield sub_key, {
               "cs": cs.strip(),
               "en": en.strip(),
           }
@@ -952,12 +961,12 @@ def _parse_czeng(*paths, **kwargs):
 
 def _parse_hindencorp(path):
   with tf.io.gfile.GFile(path) as f:
-    for line in f:
+    for line_id, line in enumerate(f):
       split_line = line.split("\t")
       if len(split_line) != 5:
         logging.warning("Skipping invalid HindEnCorp line: %s", line)
         continue
-      yield {
+      yield line_id, {
           "en": split_line[3].strip(),
           "hi": split_line[4].strip()
       }

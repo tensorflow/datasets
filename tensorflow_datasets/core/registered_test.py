@@ -20,10 +20,12 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
+import mock
 import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits
+from tensorflow_datasets.core.utils import py_utils
 
 
 @six.add_metaclass(registered.RegisteredDataset)
@@ -166,6 +168,40 @@ class RegisteredTest(testing.TestCase):
                               data_dir=data_dir)
     self.assertEqual(dict(data_dir=data_dir, config="bar"),
                      builder.kwargs)
+
+  def test_notebook_overwrite_dataset(self):
+    """Redefining the same builder twice is possible on colab."""
+
+    with mock.patch.object(py_utils, "is_notebook", lambda: True):
+      name = "colab_builder"
+      self.assertNotIn(name, registered.list_builders())
+
+      @six.add_metaclass(registered.RegisteredDataset)
+      class ColabBuilder(object):
+        pass
+
+      self.assertIn(name, registered.list_builders())
+      self.assertIsInstance(registered.builder(name), ColabBuilder)
+      old_colab_class = ColabBuilder
+
+      @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=function-redefined
+      class ColabBuilder(object):
+        pass
+
+      self.assertIsInstance(registered.builder(name), ColabBuilder)
+      self.assertNotIsInstance(registered.builder(name), old_colab_class)
+
+  def test_duplicate_dataset(self):
+    """Redefining the same builder twice should raises error."""
+
+    @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=unused-variable
+    class DuplicateBuilder(object):
+      pass
+
+    with self.assertRaisesWithPredicateMatch(ValueError, "already registered"):
+      @six.add_metaclass(registered.RegisteredDataset)  # pylint: disable=function-redefined
+      class DuplicateBuilder(object):
+        pass
 
 
 if __name__ == "__main__":

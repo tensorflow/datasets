@@ -37,6 +37,8 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
       'splits': 'splits',
   }
 
+  BUILDER_CONFIG_NAMES_TO_TEST = ['ucf101_1_256', 'ucf101_2']
+
   def _assertAsDataset(self, builder):
     """Check the label distribution for each split."""
     super(Ucf101Test, self)._assertAsDataset(builder)

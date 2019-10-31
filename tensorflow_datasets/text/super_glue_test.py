@@ -109,36 +109,20 @@ class SuperGlueWicTest(testing.DatasetBuilderTestCase):
   }
 
 
-class SuperGlueBoolQS3Test(SuperGlueBoolQTest):
-  VERSION = "experimental_latest"
+class SuperGlueAxBTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["axb"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "test": 3,
+  }
 
 
-class SuperGlueCbS3Test(SuperGlueCbTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueCopaS3Test(SuperGlueCopaTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueMultiRcS3Test(SuperGlueMultiRcTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueReCoRDS3Test(SuperGlueReCoRDTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueRteS3Test(SuperGlueRteTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueWscS3Test(SuperGlueWscTest):
-  VERSION = "experimental_latest"
-
-
-class SuperGlueWicS3Test(SuperGlueWicTest):
-  VERSION = "experimental_latest"
+class SuperGlueAxGTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["axg"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "test": 3,
+  }
 
 
 if __name__ == "__main__":

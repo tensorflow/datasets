@@ -15,6 +15,8 @@
 
 # tfds.features.text.TokenTextEncoder
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -22,6 +24,8 @@
 source</a>
 
 ## Class `TokenTextEncoder`
+
+<!-- Start diff -->
 
 TextEncoder backed by a list of tokens.
 

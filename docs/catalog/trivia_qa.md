@@ -3,11 +3,11 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="trivia_qa" />
-  <meta itemprop="description" content="TriviaqQA is a reading comprehension dataset containing over 650K&#10;question-answer-evidence triples. TriviaqQA includes 95K question-answer&#10;pairs authored by trivia enthusiasts and independently gathered evidence&#10;documents, six per question on average, that provide high quality distant&#10;supervision for answering the questions.&#10;" />
+  <meta itemprop="description" content="TriviaqQA is a reading comprehension dataset containing over 650K&#10;question-answer-evidence triples. TriviaqQA includes 95K question-answer&#10;pairs authored by trivia enthusiasts and independently gathered evidence&#10;documents, six per question on average, that provide high quality distant&#10;supervision for answering the questions.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('trivia_qa', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/trivia_qa" />
   <meta itemprop="sameAs" content="http://nlp.cs.washington.edu/triviaqa/" />
+  <meta itemprop="citation" content="&#10;@article{2017arXivtriviaqa,&#10;       author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},&#10;                 Daniel and {Zettlemoyer}, Luke},&#10;        title = &quot;{triviaqa: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension}&quot;,&#10;      journal = {arXiv e-prints},&#10;         year = 2017,&#10;          eid = {arXiv:1705.03551},&#10;        pages = {arXiv:1705.03551},&#10;archivePrefix = {arXiv},&#10;       eprint = {1705.03551},&#10;}&#10;" />
 </div>
-
 # `trivia_qa`
 
 TriviaqQA is a reading comprehension dataset containing over 650K
@@ -21,6 +21,11 @@ answering the questions.
 *   `DatasetBuilder`:
     [`tfds.text.trivia_qa.TriviaQA`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/trivia_qa.py)
 *   Version: `v0.1.0`
+*   Versions:
+
+    *   **`0.1.0`** (default):
+    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
 *   Size: `2.48 GiB`
 
 ## Features
@@ -66,9 +71,6 @@ TEST  | 17,210
 ## Urls
 
 *   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
-
-## Supervised keys (for `as_supervised=True`)
-`None`
 
 ## Citation
 ```

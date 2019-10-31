@@ -63,7 +63,8 @@ class Version(object):
       Experiment.S3: True,
   }
 
-  def __init__(self, version_str, experiments=None):
+  def __init__(self, version_str, description=None, experiments=None):
+    self.description = description
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
     if experiments:
       self._experiments.update(experiments)

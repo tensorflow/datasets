@@ -445,13 +445,13 @@ class DatasetBuilderReadTest(testing.TestCase):
 
     # By default batch_size is None and won't add a batch dimension
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN)
-    self.assertEqual(0, len(ds.output_shapes["x"]))
+    self.assertEqual(0, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
     # Setting batch_size=1 will add an extra batch dimension
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=1)
-    self.assertEqual(1, len(ds.output_shapes["x"]))
+    self.assertEqual(1, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
     # Setting batch_size=2 will add an extra batch dimension
     ds = self.builder.as_dataset(split=splits_lib.Split.TRAIN, batch_size=2)
-    self.assertEqual(1, len(ds.output_shapes["x"]))
+    self.assertEqual(1, len(tf.compat.v1.data.get_output_shapes(ds)["x"]))
 
   @testing.run_in_graph_and_eager_modes()
   def test_supervised_keys(self):

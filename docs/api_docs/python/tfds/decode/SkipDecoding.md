@@ -3,11 +3,14 @@
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="setup"/>
 </div>
 
 # tfds.decode.SkipDecoding
+
+<!-- Insert buttons -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -16,6 +19,8 @@
 source</a>
 
 ## Class `SkipDecoding`
+
+<!-- Start diff -->
 
 Transformation which skip the decoding entirelly.
 
@@ -52,6 +57,19 @@ __init__()
 <h3 id="dtype"><code>dtype</code></h3>
 
 ## Methods
+
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
+source</a>
+
+```python
+decode_batch_example(serialized_example)
+```
+
+See
+<a href="../../tfds/features/FeatureConnector.md#decode_batch_example"><code>FeatureConnector.decode_batch_example</code></a>
+for details.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 

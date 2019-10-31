@@ -118,18 +118,8 @@ def _decode_feature(feature, example, serialized_info, decoder):
   if sequence_rank == 0:
     return decoder.decode_example(example)
   elif sequence_rank == 1:
-    # Note: This all works fine in Eager mode (without tf.function) because
-    # tf.data pipelines are always executed in Graph mode.
-
-    # Apply the decoding to each of the individual distributed features.
-    return tf.map_fn(
-        decoder.decode_example,
-        example,
-        dtype=decoder.dtype,
-        parallel_iterations=10,
-        back_prop=False,
-        name='sequence_decode',
-    )
+    # Return a batch of examples from a sequence
+    return decoder.decode_batch_example(example)
   else:
     raise NotImplementedError(
         'Nested sequences not supported yet. Got: {}'.format(serialized_info)

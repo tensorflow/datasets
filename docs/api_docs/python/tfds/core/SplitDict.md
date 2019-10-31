@@ -13,6 +13,8 @@
 
 # tfds.core.SplitDict
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -20,6 +22,8 @@
 source</a>
 
 ## Class `SplitDict`
+
+<!-- Start diff -->
 
 Split info object.
 

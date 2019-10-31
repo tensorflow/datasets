@@ -5,8 +5,12 @@
 
 # tfds.testing.mock_data
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
+
+<!-- Start diff -->
 
 Mock tfds to generate random data.
 
@@ -37,6 +41,9 @@ with mock_data(num_examples=5):
   for ex in ds:  # ds will yield randomly generated examples.
     ex
 ```
+
+The examples will be deterministically generated. Train and test split will
+yield the same examples.
 
 If you want more fine grain control over the generated examples, you can
 manually overwrite the `DatasetBuilder._as_dataset` method. Usage (manual):

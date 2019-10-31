@@ -31,6 +31,7 @@ from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import py_utils
 
 
 FLAGS = flags.FLAGS
@@ -111,12 +112,14 @@ class RegisteredDataset(abc.ABCMeta):
     cls = super(RegisteredDataset, mcs).__new__(
         mcs, cls_name, bases, class_dict)
 
-    if name in _DATASET_REGISTRY:
+    if py_utils.is_notebook():  # On Colab/Jupyter, we allow overwriting
+      pass
+    elif name in _DATASET_REGISTRY:
       raise ValueError("Dataset with name %s already registered." % name)
-    if name in _IN_DEVELOPMENT_REGISTRY:
+    elif name in _IN_DEVELOPMENT_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as in development." % name)
-    if name in _ABSTRACT_DATASET_REGISTRY:
+    elif name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
 

@@ -7,6 +7,8 @@
 
 # tfds.core.Experiment
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -14,6 +16,8 @@
 source</a>
 
 ## Class `Experiment`
+
+<!-- Start diff -->
 
 Experiments which can be enabled/disabled on a per version basis.
 

@@ -6,12 +6,15 @@
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="download"/>
 <meta itemprop="property" content="download_and_extract"/>
+<meta itemprop="property" content="download_checksums"/>
 <meta itemprop="property" content="download_kaggle_data"/>
 <meta itemprop="property" content="extract"/>
 <meta itemprop="property" content="iter_archive"/>
 </div>
 
 # tfds.download.DownloadManager
+
+<!-- Insert buttons -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -21,27 +24,26 @@ source</a>
 
 ## Class `DownloadManager`
 
+<!-- Start diff -->
+
 Manages the download and extraction of files, as well as caching.
 
 <!-- Placeholder for "Used in" -->
 
 Downloaded files are cached under `download_dir`. The file name of downloaded
- files follows pattern "${sanitized_url}${content_checksum}.${ext}". Eg:
- 'cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz'.
+files follows pattern "{sanitized_url}{content_checksum}.{ext}". Eg:
+'cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz'.
 
 While a file is being downloaded, it is placed into a directory following a
-similar but different pattern:
-"%{sanitized_url}${url_checksum}.tmp.${uuid}".
+similar but different pattern: "{sanitized_url}{url_checksum}.tmp.{uuid}".
 
-When a file is downloaded, a "%{fname}s.INFO.json" file is created next to it.
-This INFO file contains the following information:
-{"dataset_names": ["name1", "name2"],
- "urls": ["http://url.of/downloaded_file"]}
+When a file is downloaded, a "{fname}.INFO.json" file is created next to it.
+This INFO file contains the following information: {"dataset_names": ["name1",
+"name2"], "urls": ["http://url.of/downloaded_file"]}
 
-Extracted files/dirs are stored under `extract_dir`. The file name or
-directory name is the same as the original name, prefixed with the extraction
-method. E.g.
- "${extract_dir}/TAR_GZ.cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz".
+Extracted files/dirs are stored under `extract_dir`. The file name or directory
+name is the same as the original name, prefixed with the extraction method. E.g.
+"{extract_dir}/TAR_GZ.cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz".
 
 The function members accept either plain value, or values wrapped into list
 or dict. Giving a data structure will parallelize the downloads.
@@ -167,6 +169,17 @@ automatically be deduced from downloaded file name.
 #### Returns:
 
 extracted_path(s): `str`, extracted paths of given URL(s).
+
+<h3 id="download_checksums"><code>download_checksums</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
+source</a>
+
+```python
+download_checksums(checksums_url)
+```
+
+Downloads checksum file from the given URL and adds it to registry.
 
 <h3 id="download_kaggle_data"><code>download_kaggle_data</code></h3>
 

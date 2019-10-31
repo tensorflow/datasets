@@ -24,7 +24,6 @@ import os
 
 from absl import logging
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -52,7 +51,7 @@ from the corresponding reading passage, or the question might be unanswerable.
 class SquadConfig(tfds.core.BuilderConfig):
   """BuilderConfig for SQUAD."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, **kwargs):
     """BuilderConfig for SQUAD.
 
@@ -68,16 +67,15 @@ class Squad(tfds.core.GeneratorBasedBuilder):
   _DEV_FILE = "dev-v1.1.json"
   _TRAINING_FILE = "train-v1.1.json"
 
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.1.0: Initial version.
   BUILDER_CONFIGS = [
       SquadConfig(
           name="plain_text",
           version=tfds.core.Version(
               "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version("1.0.0"),
+              tfds.core.Version(
+                  "1.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
           ],
           description="Plain text",
       ),

@@ -4,6 +4,7 @@
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -14,6 +15,8 @@
 
 # tfds.features.BBoxFeature
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -21,6 +24,8 @@
 source</a>
 
 ## Class `BBoxFeature`
+
+<!-- Start diff -->
 
 `FeatureConnector` for a normalized bounding box.
 
@@ -38,16 +43,27 @@ inside a `tfds.feature.Sequence`.
 
 #### Output:
 
-*   <b>`bbox`</b>: tf.Tensor of type tf.float32 and shape [4,] which contains
-    the normalized coordinates of the bounding box [ymin, xmin, ymax, xmax]
+*   <b>`bbox`</b>: tf.Tensor of type `tf.float32` and shape `[4,]` which
+    contains the normalized coordinates of the bounding box `[ymin, xmin, ymax,
+    xmax]`
 
 #### Example:
 
-*   In the DatasetInfo object: features=features.FeatureDict({ 'bbox':
-    features.BBox(shape=(None, 64, 64, 3)), })
+*   In the DatasetInfo object:
 
-*   During generation: yield { 'input': tfds.feature.BBox(ymin=0.3, xmin=0.8,
-    ymax=0.5, xmax=1.0), }
+```
+features=features.FeatureDict({
+    'bbox': features.BBox(shape=(None, 64, 64, 3)),
+})
+```
+
+*   During generation:
+
+```
+yield {
+    'input': tfds.feature.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
+}
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -69,6 +85,17 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
+
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_batch_example(example_data)
+```
+
+See base class for details.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 

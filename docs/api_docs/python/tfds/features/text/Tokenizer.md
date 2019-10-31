@@ -12,6 +12,8 @@
 
 # tfds.features.text.Tokenizer
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -19,6 +21,8 @@
 source</a>
 
 ## Class `Tokenizer`
+
+<!-- Start diff -->
 
 Splits a string into tokens, and joins them back.
 

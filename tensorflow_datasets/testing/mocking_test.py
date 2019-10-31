@@ -30,6 +30,7 @@ from tensorflow_datasets.testing import test_utils
 # Import for registration
 from tensorflow_datasets.image import imagenet  # pylint: disable=unused-import,g-bad-import-order
 from tensorflow_datasets.text import lm1b  # pylint: disable=unused-import,g-bad-import-order
+from tensorflow_datasets.image import mnist  # pylint: disable=unused-import,g-bad-import-order
 
 tf.compat.v1.enable_eager_execution()
 
@@ -65,6 +66,20 @@ class MockingTest(test_case.TestCase):
       ds = registered.load('lm1b', split='train')
       out = [ex['text'] for ex in dataset_utils.as_numpy(ds)]
       self.assertEqual(out, [b'some sentence', b'some other sentence'])
+
+  def test_max_values(self):
+    with mocking.mock_data(num_examples=50):
+      ds = registered.load('mnist', split='train')
+      for ex in ds.take(50):
+        self.assertLessEqual(tf.math.reduce_max(ex['label']).numpy(), 10)
+      self.assertEqual(  # Test determinism
+          [ex['label'].numpy() for ex in ds.take(5)],
+          [1, 9, 2, 5, 3],
+      )
+      self.assertEqual(  # Iterating twice should yield the same samples
+          [ex['label'].numpy() for ex in ds.take(5)],
+          [1, 9, 2, 5, 3],
+      )
 
 
 if __name__ == '__main__':

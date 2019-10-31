@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
-from tensorflow_datasets.core import api_utils
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # CMATERdb constants
@@ -92,7 +92,7 @@ CMATERdb is the pattern recognition database repository created at the 'Center f
 class CmaterdbConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CMATERdb Config."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, **kwargs):
     """BuilderConfig for CMATERdb examples.
 
@@ -168,7 +168,8 @@ class Cmaterdb(tfds.core.GeneratorBasedBuilder):
     Yields:
       Generator yielding the next examples
     """
-    data = np.load(data_path)
+    with tf.io.gfile.GFile(data_path, mode="rb") as f:
+      data = np.load(f)
 
     data = list(zip(data["images"], data["labels"]))
     for index, (image, label) in enumerate(data):

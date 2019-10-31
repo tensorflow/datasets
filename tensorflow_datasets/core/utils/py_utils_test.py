@@ -22,10 +22,14 @@ from __future__ import print_function
 import hashlib
 import os
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core.utils import py_utils
 
 
 class PyUtilsTest(testing.TestCase):
+
+  def test_is_notebook(self):
+    self.assertFalse(py_utils.is_notebook())
 
   def test_map_nested(self):
     """Test the mapping function."""
@@ -191,6 +195,23 @@ class ReadChecksumDigestTest(testing.TestCase):
         digest,
         '04f38ebed34d3b027d2683193766155912fba647158c583c3bdb4597ad8af34c')
     self.assertEqual(102, size)
+
+
+class GetClassPathUrlTest(testing.TestCase):
+
+  def test_get_class_path(self):
+    cls_path = py_utils.get_class_path(py_utils.NonMutableDict)
+    self.assertEqual(cls_path, 'tfds.core.utils.py_utils.NonMutableDict')
+    cls_path = py_utils.get_class_path(
+        py_utils.NonMutableDict(), use_tfds_prefix=False)
+    self.assertEqual(cls_path,
+                     'tensorflow_datasets.core.utils.py_utils.NonMutableDict')
+
+  def test_get_class_url(self):
+    cls_url = py_utils.get_class_url(py_utils.NonMutableDict)
+    self.assertEqual(
+        cls_url,
+        (constants.SRC_BASE_URL + 'tensorflow_datasets/core/utils/py_utils.py'))
 
 
 if __name__ == '__main__':

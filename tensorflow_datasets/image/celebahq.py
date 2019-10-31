@@ -17,7 +17,6 @@
 import os
 
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -50,7 +49,7 @@ WARNING: This dataset currently requires you to prepare images on your own.
 class CelebaHQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CelebaHQ."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, resolution, **kwargs):
     """BuilderConfig for SQUAD.
 
@@ -59,18 +58,16 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
         1024.
       **kwargs: keyword arguments forwarded to super.
     """
-    # Versions history:
-    # 2.0.0: S3 with new hashing function (different shuffle).
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(CelebaHQConfig, self).__init__(
         name="%d" % resolution,
         description=("CelebaHQ images in %d x %d resolution" %
                      (resolution, resolution)),
-        version=tfds.core.Version("0.1.0",
-                                  experiments={tfds.core.Experiment.S3: False}),
+        version=tfds.core.Version(
+            "0.1.0", experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("2.0.0"),
-            tfds.core.Version("1.0.0"),
+            tfds.core.Version(
+                "2.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
         ],
         **kwargs)
     self.resolution = resolution

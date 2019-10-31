@@ -46,6 +46,10 @@ class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
       'extracted/TAR_GZ.CUB_200_2011.tar.gz', 'extracted/segmentations.tgz'
   ]
 
+  DL_DOWNLOAD_RESULT = [
+      'CUB_200_2011.tar.gz'
+  ]
+
 
 if __name__ == '__main__':
   tfds_test.test_main()

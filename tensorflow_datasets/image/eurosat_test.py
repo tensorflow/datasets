@@ -29,6 +29,7 @@ class EurosatTest(testing.DatasetBuilderTestCase):
   # None implies testing all BUILDER_CONFIGS, while [] implies no tests.
   BUILDER_CONFIG_NAMES_TO_TEST = None if six.PY2 else []
 
+
   DATASET_CLASS = eurosat.Eurosat
   SPLITS = {
       "train": 3,

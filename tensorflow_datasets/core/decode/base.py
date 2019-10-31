@@ -24,6 +24,7 @@ import abc
 import functools
 
 import six
+import tensorflow as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.utils import py_utils
 
@@ -87,6 +88,17 @@ class Decoder(object):
       example: Decoded example.
     """
     raise NotImplementedError('Abstract class')
+
+  def decode_batch_example(self, serialized_example):
+    """See `FeatureConnector.decode_batch_example` for details."""
+    return tf.map_fn(
+        self.decode_example,
+        serialized_example,
+        dtype=self.dtype,
+        parallel_iterations=10,
+        back_prop=False,
+        name='sequence_decode',
+    )
 
 
 class SkipDecoding(Decoder):

@@ -95,14 +95,14 @@ class DownloadManager(object):
   """Manages the download and extraction of files, as well as caching.
 
   Downloaded files are cached under `download_dir`. The file name of downloaded
-   files follows pattern "${sanitized_url}${content_checksum}.${ext}". Eg:
+   files follows pattern "{sanitized_url}{content_checksum}.{ext}". Eg:
    'cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz'.
 
   While a file is being downloaded, it is placed into a directory following a
   similar but different pattern:
-  "%{sanitized_url}${url_checksum}.tmp.${uuid}".
+  "{sanitized_url}{url_checksum}.tmp.{uuid}".
 
-  When a file is downloaded, a "%{fname}s.INFO.json" file is created next to it.
+  When a file is downloaded, a "{fname}.INFO.json" file is created next to it.
   This INFO file contains the following information:
   {"dataset_names": ["name1", "name2"],
    "urls": ["http://url.of/downloaded_file"]}
@@ -110,7 +110,7 @@ class DownloadManager(object):
   Extracted files/dirs are stored under `extract_dir`. The file name or
   directory name is the same as the original name, prefixed with the extraction
   method. E.g.
-   "${extract_dir}/TAR_GZ.cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz".
+   "{extract_dir}/TAR_GZ.cs.toronto.edu_kriz_cifar-100-pythonJDF[...]I.tar.gz".
 
   The function members accept either plain value, or values wrapped into list
   or dict. Giving a data structure will parallelize the downloads.
@@ -213,6 +213,12 @@ class DownloadManager(object):
     tf.io.gfile.rename(tmp_path, download_path, overwrite=True)
     tf.io.gfile.rmtree(tmp_dir_path)
     return download_path
+
+  def download_checksums(self, checksums_url):
+    """Downloads checksum file from the given URL and adds it to registry."""
+    checksums_path = self.download(checksums_url)
+    with tf.io.gfile.GFile(checksums_path) as f:
+      self._sizes_checksums.update(checksums.parse_sizes_checksums(f))
 
   # synchronize and memoize decorators ensure same resource will only be
   # processed once, even if passed twice to download_manager.

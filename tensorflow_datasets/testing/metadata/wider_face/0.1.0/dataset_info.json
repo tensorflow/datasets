@@ -1,0 +1,165 @@
+{
+  "citation": "\n@inproceedings{yang2016wider,\n\tAuthor = {Yang, Shuo and Luo, Ping and Loy, Chen Change and Tang, Xiaoou},\n\tBooktitle = {IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},\n\tTitle = {WIDER FACE: A Face Detection Benchmark},\n\tYear = {2016}}\n", 
+  "description": "\nWIDER FACE dataset is a face detection benchmark dataset, of which images are \nselected from the publicly available WIDER dataset. We choose 32,203 images and \nlabel 393,703 faces with a high degree of variability in scale, pose and \nocclusion as depicted in the sample images. WIDER FACE dataset is organized \nbased on 61 event classes. For each event class, we randomly select 40%/10%/50% \ndata as training, validation and testing sets. We adopt the same evaluation \nmetric employed in the PASCAL VOC dataset. Similar to MALF and Caltech datasets,\nwe do not release bounding box ground truth for the test images. Users are \nrequired to submit final prediction files, which we shall proceed to evaluate.\n", 
+  "location": {
+    "urls": [
+      "http://shuoyang1213.me/WIDERFACE/"
+    ]
+  }, 
+  "name": "wider_face", 
+  "schema": {
+    "feature": [
+      {
+        "name": "faces"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image/filename", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "3676086479", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1007", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006", 
+        "1006"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "16097"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "16097"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "16097"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805", 
+        "805"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "12880"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "12880"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "12880"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "807", 
+        "806", 
+        "807", 
+        "806"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3226"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "3226"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "3226"
+      }
+    }
+  ], 
+  "version": "0.1.0"
+}

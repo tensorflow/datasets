@@ -25,9 +25,12 @@ as well as combinations of those.
 Each versioned dataset either implements the new S3 API, or the legacy API,
 which will eventually be retired. New datasets (except Beam ones for now) all
 implement S3, and we're slowly rolling it out to all datasets.
+If the dataset you're interested in implements S3, use S3.
 
-To find out whether a dataset implements S3, one can look at the source code
-or call:
+To find out whether a dataset implements S3, look at the dataset's source code
+(specifically see if the `tfds.core.Version` object is constructed with
+`experiments={tfds.core.Experiment.S3: False}`; if not, then you can use S3
+with that version because it defaults to `True`). Or you can call:
 
 ```
 ds_builder.version.implements(tfds.core.Experiment.S3)
@@ -44,39 +47,69 @@ and might be easier to use with variable slicing parameters.
 
 ### Examples
 
-The following examples show equivalent instructions:
+Examples using the string API:
 
 ```py
 # The full `train` split.
 train_ds = tfds.load('mnist:3.*.*', split='train')
-train_ds = tfds.load('mnist:3.*.*', split=tfds.ReadInstruction('train'))
 
 # The full `train` split and the full `test` split as two distinct datasets.
 train_ds, test_ds = tfds.load('mnist:3.*.*', split=['train', 'test'])
-train_ds, test_ds = tfds.load('mnist:3.*.*', split=[
-    tfds.ReadInstruction('train'),
-    tfds.ReadInstruction('test'),
-])
 
 # The full `train` and `test` splits, concatenated together.
 train_test_ds = tfds.load('mnist:3.*.*', split='train+test')
-ri = tfds.ReadInstruction('train') + tfds.ReadInstruction('test')
-train_test_ds = tfds.load('mnist:3.*.*', split=ri)
 
 # From record 10 (included) to record 20 (excluded) of `train` split.
 train_10_20_ds = tfds.load('mnist:3.*.*', split='train[10:20]')
-train_10_20_ds = tfds.load('mnist:3.*.*', split=tfds.ReadInstruction(
-    'train', from_=10, to=20, unit='abs'))
 
 # The first 10% of train split.
 train_10pct_ds = tfds.load('mnist:3.*.*', split='train[:10%]')
-train_10_20_ds = tfds.load('mnist:3.*.*', split=tfds.ReadInstruction(
-    'train', to=10, unit='%'))
 
 # The first 10% of train + the last 80% of train.
 train_10_80pct_ds = tfds.load('mnist:3.*.*', split='train[:10%]+train[-80%:]')
-ri = (tfds.ReadInstruction('train', to=10, unit='%') +
-      tfds.ReadInstruction('train', from_=-80, unit='%'))
+
+# 10-fold cross-validation (see also next section on rounding behavior):
+# The validation datasets are each going to be 10%:
+# [0%:10%], [10%:20%], ..., [90%:100%].
+# And the training datasets are each going to be the complementary 90%:
+# [10%:100%] (for a corresponding validation set of [0%:10%]),
+# [0%:10%] + [20%:100%] (for a validation set of [10%:20%]), ...,
+# [0%:90%] (for a validation set of [90%:100%]).
+vals_ds = tfds.load('mnist:3.*.*', split=[
+    'train[{}%:{}%]'.format(k, k+10) for k in range(0, 100, 10)
+])
+trains_ds = tfds.load('mnist:3.*.*', split=[
+    'train[:{}%]+train[{}%:]'.format(k, k+10) for k in range(0, 100, 10)
+])
+```
+
+Examples using the `ReadInstruction` API (equivalent as above):
+
+```py
+# The full `train` split.
+train_ds = tfds.load('mnist:3.*.*', split=tfds.core.ReadInstruction('train'))
+
+# The full `train` split and the full `test` split as two distinct datasets.
+train_ds, test_ds = tfds.load('mnist:3.*.*', split=[
+    tfds.core.ReadInstruction('train'),
+    tfds.core.ReadInstruction('test'),
+])
+
+# The full `train` and `test` splits, concatenated together.
+ri = tfds.core.ReadInstruction('train') + tfds.core.ReadInstruction('test')
+train_test_ds = tfds.load('mnist:3.*.*', split=ri)
+
+# From record 10 (included) to record 20 (excluded) of `train` split.
+train_10_20_ds = tfds.load('mnist:3.*.*', split=tfds.core.ReadInstruction(
+    'train', from_=10, to=20, unit='abs'))
+
+# The first 10% of train split.
+train_10_20_ds = tfds.load('mnist:3.*.*', split=tfds.core.ReadInstruction(
+    'train', to=10, unit='%'))
+
+# The first 10% of train + the last 80% of train.
+ri = (tfds.core.ReadInstruction('train', to=10, unit='%') +
+      tfds.core.ReadInstruction('train', from_=-80, unit='%'))
 train_10_80pct_ds = tfds.load('mnist:3.*.*', split=ri)
 
 # 10-fold cross-validation (see also next section on rounding behavior):
@@ -86,17 +119,12 @@ train_10_80pct_ds = tfds.load('mnist:3.*.*', split=ri)
 # [10%:100%] (for a corresponding validation set of [0%:10%]),
 # [0%:10%] + [20%:100%] (for a validation set of [10%:20%]), ...,
 # [0%:90%] (for a validation set of [90%:100%]).
-vals_ds = tfds.load('mnist:3.*.*', ['train[{}%:{}%]'.format(k, k+10)
-                                    for k in range(0, 100, 10)])
-trains_ds = tfds.load('mnist:3.*.*', ['train[:{}%]+train[{}%:]'.format(k, k+10)
-                                      for k in range(0, 100, 10)])
-# or using the `ReadInstruction`:
 vals_ds = tfds.load('mnist:3.*.*', [
-    tfds.ReadInstruction('train', from_=k, to=k+10, unit='%')
+    tfds.core.ReadInstruction('train', from_=k, to=k+10, unit='%')
     for k in range(0, 100, 10)])
 trains_ds = tfds.load('mnist:3.*.*', [
-    (tfds.ReadInstruction('train', to=k, unit='%') +
-     tfds.ReadInstruction('train', from_=k+10, unit='%'))
+    (tfds.core.ReadInstruction('train', to=k, unit='%') +
+     tfds.core.ReadInstruction('train', from_=k+10, unit='%'))
     for k in range(0, 100, 10)])
 ```
 
@@ -138,6 +166,9 @@ elements - regardless of platform, architecture, etc. - even though some of
 the records might have different values (eg: imgage encoding, label, ...).
 
 ## Legacy slicing API
+
+Note: This will soon be deprecated. If the dataset you're interested in
+implements S3, use S3 (see above).
 
 [`tfds.Split`](api_docs/python/tfds/Split.md)s (typically `tfds.Split.TRAIN` and
 `tfds.Split.TEST`). A given dataset's splits are defined in

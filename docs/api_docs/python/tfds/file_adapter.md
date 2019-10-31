@@ -14,8 +14,6 @@ source</a>
 <a href="../tfds/file_adapter/FileFormatAdapter.md"><code>tfds.file_adapter.FileFormatAdapter</code></a>s
 for GeneratorBasedBuilder.
 
-<!-- Placeholder for "Used in" -->
-
 FileFormatAdapters implement methods to write and read data from a
 particular file format.
 

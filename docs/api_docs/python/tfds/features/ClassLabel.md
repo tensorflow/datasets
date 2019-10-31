@@ -6,6 +6,7 @@
 <meta itemprop="property" content="num_classes"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -18,6 +19,8 @@
 
 # tfds.features.ClassLabel
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -25,6 +28,8 @@
 source</a>
 
 ## Class `ClassLabel`
+
+<!-- Start diff -->
 
 `FeatureConnector` for integer class labels.
 
@@ -81,6 +86,17 @@ Return the dtype (or dict of dtype) of this FeatureConnector.
 Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
+
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_batch_example(example_data)
+```
+
+See base class for details.
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 

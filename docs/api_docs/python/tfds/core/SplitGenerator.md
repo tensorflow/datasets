@@ -6,6 +6,8 @@
 
 # tfds.core.SplitGenerator
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -13,6 +15,8 @@
 source</a>
 
 ## Class `SplitGenerator`
+
+<!-- Start diff -->
 
 Defines the split information for the generator.
 

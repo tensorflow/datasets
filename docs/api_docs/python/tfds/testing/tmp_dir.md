@@ -5,8 +5,12 @@
 
 # tfds.testing.tmp_dir
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
+
+<!-- Start diff -->
 
 Context manager for a temporary directory.
 

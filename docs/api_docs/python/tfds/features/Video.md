@@ -6,6 +6,7 @@
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
@@ -16,6 +17,8 @@
 
 # tfds.features.Video
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -24,33 +27,67 @@ source</a>
 
 ## Class `Video`
 
+<!-- Start diff -->
+
 `FeatureConnector` for videos, encoding frames individually on disk.
 
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)
 
 <!-- Placeholder for "Used in" -->
 
-Video: The image connector accepts as input a 4 dimensional uint8 array
-representing a video, a sequence of paths to encoded frames, or a path or a
-file object that can be decoded with ffmpeg. Note that not all formats in
-ffmpeg support reading from pipes, so providing a file object might fail.
-Furthermore, if a path is given that is not on the local file system, we first
-copy it to a temporary local file before passing it to ffmpeg.
+Video: The image connector accepts as input a 4 dimensional `tf.uint8` array
+representing a video, a sequence of paths to encoded frames, or a path or a file
+object that can be decoded with ffmpeg. Note that not all formats in ffmpeg
+support reading from pipes, so providing a file object might fail. Furthermore,
+if a path is given that is not on the local file system, we first copy it to a
+temporary local file before passing it to ffmpeg.
 
 #### Output:
 
-*   <b>`video`</b>: tf.Tensor of type tf.uint8 and shape [num_frames, height,
+*   <b>`video`</b>: tf.Tensor of type `tf.uint8` and shape [num_frames, height,
     width, channels], where channels must be 1 or 3
 
 #### Example:
 
-*   In the DatasetInfo object: features=features.FeatureDict({ 'video':
-    features.Video(shape=(None, 64, 64, 3)), })
+*   In the DatasetInfo object:
 
-*   During generation: `yield { 'input': np.ones(shape=(128, 64, 64, 3),
-    dtype=np.uint8), }` or `yield { ' video': ['path/to/frame001.png',
-    'path/to/frame002.png'], }` or `yield { 'input': '/path/to/video.avi', }` or
-    `yield { 'input': gfile.GFile('/complex/path/video.avi'), }`
+```
+features=features.FeatureDict({
+    'video': features.Video(shape=(None, 64, 64, 3)),
+})
+```
+
+*   During generation, you can use any of:
+
+```
+yield {
+    'video': np.ones(shape=(128, 64, 64, 3), dtype=np.uint8),
+}
+```
+
+or list of frames:
+
+```
+yield {
+    'video': ['path/to/frame001.png', 'path/to/frame002.png'],
+}
+```
+
+or path to video:
+
+```
+yield {
+    'video': '/path/to/video.avi',
+}
+```
+
+or file object:
+
+```
+yield {
+    'video': tf.io.gfile.GFile('/complex/path/video.avi'),
+}
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 
@@ -109,6 +146,33 @@ __getitem__(key)
 ```
 
 Convenience method to access the underlying features.
+
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_batch_example(tfexample_data)
+```
+
+Decode multiple features batched in a single tf.Tensor.
+
+This function is used to decode features wrapped in
+<a href="../../tfds/features/Sequence.md"><code>tfds.features.Sequence()</code></a>.
+By default, this function apply `decode_example` on each individual elements
+using `tf.map_fn`. However, for optimization, features can overwrite this method
+to apply a custom batch decoding.
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: Same `tf.Tensor` inputs as `decode_example`, but
+    with and additional first dimension for the sequence length.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
+    tf.data.Dataset object
 
 <h3 id="decode_example"><code>decode_example</code></h3>
 

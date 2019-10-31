@@ -30,7 +30,7 @@ TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 ```sh
 pip install tensorflow-datasets
 
-# Requires TF 1.14+ to be installed.
+# Requires TF 1.15+ to be installed.
 # Some datasets require additional libraries; see setup.py extras_require
 pip install tensorflow
 # or:
@@ -47,7 +47,7 @@ import tensorflow_datasets as tfds
 import tensorflow as tf
 
 # tfds works in both Eager and Graph modes
-tf.enable_eager_execution()
+tf.compat.v1.enable_eager_execution()
 
 # See available datasets
 print(tfds.list_builders())

@@ -236,12 +236,14 @@ class CaltechBirds2011(CaltechBirds2010):
 
   def _split_generators(self, dl_manager):
 
+    download_path = dl_manager.download([
+        self._caltech_birds_info.images_url,
+    ])
+
     extracted_path = dl_manager.download_and_extract([
         self._caltech_birds_info.images_url,
         self._caltech_birds_info.annotations_url
     ])
-    tar_file_path = extracted_path[0].split("extracted/")
-    tar_file = tar_file_path[0] + tar_file_path[1][7:]
 
     image_names_path = os.path.join(extracted_path[0],
                                     "CUB_200_2011/images.txt")
@@ -270,22 +272,23 @@ class CaltechBirds2011(CaltechBirds2010):
     for root, _, files in tf.io.gfile.walk(extracted_path[1]):
       for fname in files:
         if fname.endswith(".png"):
-          mask = tfds.core.lazy_imports.cv2.imread(
-              os.path.join(root, fname), flags=0)
+          with tf.io.gfile.GFile(os.path.join(root, fname), "rb") as png_f:
+            mask = tfds.core.lazy_imports.cv2.imdecode(
+                np.fromstring(png_f.read(), dtype=np.uint8), flags=0)
           attributes[fname.split(".")[0]].append(mask)
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                "archive": dl_manager.iter_archive(tar_file),
+                "archive": dl_manager.iter_archive(download_path[0]),
                 "file_names": train_list,
                 "annotations": attributes,
             }),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
-                "archive": dl_manager.iter_archive(tar_file),
+                "archive": dl_manager.iter_archive(download_path[0]),
                 "file_names": test_list,
                 "annotations": attributes,
             }),

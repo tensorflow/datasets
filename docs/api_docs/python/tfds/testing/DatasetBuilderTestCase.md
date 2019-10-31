@@ -140,6 +140,7 @@
 <meta itemprop="property" content="test_session"/>
 <meta itemprop="property" content="BUILDER_CONFIG_NAMES_TO_TEST"/>
 <meta itemprop="property" content="DATASET_CLASS"/>
+<meta itemprop="property" content="DL_DOWNLOAD_RESULT"/>
 <meta itemprop="property" content="DL_EXTRACT_RESULT"/>
 <meta itemprop="property" content="EXAMPLE_DIR"/>
 <meta itemprop="property" content="MOCK_MONARCH"/>
@@ -153,6 +154,8 @@
 
 # tfds.testing.DatasetBuilderTestCase
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -160,6 +163,8 @@
 source</a>
 
 ## Class `DatasetBuilderTestCase`
+
+<!-- Start diff -->
 
 Inherit this class to test your DatasetBuilder class.
 
@@ -182,6 +187,11 @@ You may set the following class attributes:
     `download_and_extract` method. The values should be the path of files
     present in the `fake_examples` directory, relative to that directory. If not
     specified, path to `fake_examples` will always be returned.
+*   DL_DOWNLOAD_RESULT: `dict[str]`, the returned result of mocked
+    `download_and_extract` method. The values should be the path of files
+    present in the `fake_examples` directory, relative to that directory. If not
+    specified: will use DL_EXTRACT_RESULT (this is due to backwards
+    compatibility and will be removed in the future).
 *   EXAMPLE_DIR: `str`, the base directory in in which fake examples are
     contained. Optional; defaults to
     tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
@@ -196,7 +206,7 @@ This test case will check for the following:
 -   the dataset builder is correctly registered, i.e.
     <a href="../../tfds/load.md"><code>tfds.load(name)</code></a> works;
 -   the dataset builder can read the fake examples stored in
-    testing/test_data/fake_examples/${dataset_name};
+    testing/test_data/fake_examples/{dataset_name};
 -   the dataset builder can produce serialized data;
 -   the dataset builder produces a valid Dataset object from serialized data
     -   in eager mode;
@@ -2138,10 +2148,11 @@ creating temporary files for test purposes, as well as makes it easier
 to setup files, their data, read them back, and inspect them when
 a test fails.
 
-NOTE: This will zero-out the file. This ensures there is no pre-existing
-state.
+NOTE: This will zero-out the file. This ensures there is no pre-existing state.
+NOTE: If the file already exists, it will be made writable and overwritten.
 
-See also: `create_tempdir()` for creating temporary directories.
+See also: `create_tempdir()` for creating temporary directories, and
+`_TempDir.create_file` for creating files within a temporary directory.
 
 #### Args:
 
@@ -2557,6 +2568,7 @@ Use `self.session()` or `self.cached_session()` instead.
 *   `BUILDER_CONFIG_NAMES_TO_TEST = None`
     <a id="BUILDER_CONFIG_NAMES_TO_TEST"></a>
 *   `DATASET_CLASS = None` <a id="DATASET_CLASS"></a>
+*   `DL_DOWNLOAD_RESULT = None` <a id="DL_DOWNLOAD_RESULT"></a>
 *   `DL_EXTRACT_RESULT = None` <a id="DL_EXTRACT_RESULT"></a>
 *   `EXAMPLE_DIR = None` <a id="EXAMPLE_DIR"></a>
 *   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>

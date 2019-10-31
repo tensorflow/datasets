@@ -11,6 +11,7 @@ See the README on GitHub for further documentation.
 """
 
 import datetime
+import itertools
 import os
 import sys
 
@@ -46,7 +47,6 @@ REQUIRED_PKGS = [
     'numpy',
     'promise',
     'protobuf>=3.6.1',
-    'psutil',
     'requests>=2.19.0',
     'six',
     'tensorflow-metadata',
@@ -58,8 +58,11 @@ REQUIRED_PKGS = [
 TESTS_REQUIRE = [
     'apache-beam',
     'jupyter',
+    'mako',
     'pytest',
     'pytest-xdist',
+    # TODO(b/142892342): Re-enable
+    # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
 ]
 
 if sys.version_info.major == 3:
@@ -75,6 +78,10 @@ else:
 if sys.version_info < (3, 4):
   # enum introduced in Python 3.4
   REQUIRED_PKGS.append('enum34')
+
+if sys.version_info < (3, 3):
+  # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
+  REQUIRED_PKGS.append('psutil')
 
 # Static files needed by datasets.
 DATASET_FILES = [
@@ -92,6 +99,8 @@ DATASET_FILES = [
     'image/open_images_classes_all.txt',
     'image/open_images_classes_boxable.txt',
     'image/open_images_classes_trainable.txt',
+    'image/plant_leaves_urls.txt',
+    'image/plantae_k_urls.txt',
     'image/quickdraw_labels.txt',
     'image/sun397_labels.txt',
     'image/sun397_tfds_te.txt',
@@ -101,12 +110,15 @@ DATASET_FILES = [
     'video/ucf101_labels.txt',
 ]
 
+# Extra dependencies required by specific datasets
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
+    'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'eurosat': ['scikit-image',],
+    'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
         # route to install OpenCV
@@ -114,24 +126,34 @@ DATASET_EXTRAS = {
         'scikit-image',
         'scipy'
     ],
-    'groove': ['pretty_midi', 'pydub'],
     'librispeech': ['pydub'],  # and ffmpeg installed
+    # sklearn version required to avoid conflict with librosa from
+    # https://github.com/scikit-learn/scikit-learn/issues/14485
+    'nsynth': ['crepe>=0.0.9', 'librosa', 'scikit-learn==0.20.3'],
     'pet_finder': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
+    'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
 
-all_dataset_extras = []
-for deps in DATASET_EXTRAS.values():
-  all_dataset_extras.extend(deps)
+
+# Extra dataset deps are required for the tests
+all_dataset_extras = list(itertools.chain.from_iterable(
+    deps for ds_name, deps in DATASET_EXTRAS.items() if ds_name != 'nsynth'))
+
 
 EXTRAS_REQUIRE = {
     'apache-beam': ['apache-beam'],
     'matplotlib': ['matplotlib'],
-    'tensorflow': ['tensorflow>=1.14.0'],
-    'tensorflow_gpu': ['tensorflow-gpu>=1.14.0'],
+    'tensorflow': ['tensorflow>=1.15.0'],
+    'tensorflow_gpu': ['tensorflow-gpu>=1.15.0'],
+    # Tests dependencies are installed in ./oss_scripts/oss_pip_install.sh
+    # and run in ./oss_scripts/oss_tests.sh
     'tests': TESTS_REQUIRE + all_dataset_extras,
+    # Nsynth is run in isolation, installed and run in
+    # ./oss_scripts/oss_tests.sh.
+    'tests_nsynth': TESTS_REQUIRE + DATASET_EXTRAS['nsynth'],
 }
 EXTRAS_REQUIRE.update(DATASET_EXTRAS)
 
@@ -147,7 +169,9 @@ setup(
     license='Apache 2.0',
     packages=find_packages(),
     package_data={
-        'tensorflow_datasets': DATASET_FILES,
+        'tensorflow_datasets': DATASET_FILES + [
+            'scripts/templates/*',
+        ],
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,

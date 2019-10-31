@@ -7,6 +7,7 @@
 <meta itemprop="property" content="description"/>
 <meta itemprop="property" content="features"/>
 <meta itemprop="property" content="full_name"/>
+<meta itemprop="property" content="homepage_url"/>
 <meta itemprop="property" content="initialized"/>
 <meta itemprop="property" content="metadata"/>
 <meta itemprop="property" content="name"/>
@@ -26,6 +27,8 @@
 
 # tfds.core.DatasetInfo
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -33,6 +36,8 @@
 source</a>
 
 ## Class `DatasetInfo`
+
+<!-- Start diff -->
 
 Information about a dataset.
 
@@ -107,6 +112,8 @@ Constructs DatasetInfo.
 <h3 id="full_name"><code>full_name</code></h3>
 
 Full canonical name: (<dataset_name>/<config_name>/<version>).
+
+<h3 id="homepage_url"><code>homepage_url</code></h3>
 
 <h3 id="initialized"><code>initialized</code></h3>
 

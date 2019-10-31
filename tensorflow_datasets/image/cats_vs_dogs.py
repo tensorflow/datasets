@@ -55,13 +55,9 @@ class CatsVsDogs(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("2.0.1",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("4.0.0"),
-      tfds.core.Version("3.0.0"),
+      tfds.core.Version(
+          "4.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 4.0.0: S3 with new hashing function (different shuffle).
-  # 3.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 2.0.0: _NUM_CORRUPT_IMAGES: 1800->1738, add 'image/filename' feature.
 
   def _info(self):
     return tfds.core.DatasetInfo(
