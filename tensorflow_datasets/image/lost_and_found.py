@@ -125,15 +125,15 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
                                            encoding_format='png'),
         'disparity_map': tfds.features.Image(shape=(1024, 2048, 1),
                                              encoding_format='png')}
+    features = {feat: possible_features[feat]
+                for feat in self.builder_config.features}
+    features['image_id'] = tfds.features.Text()
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
-        features=tfds.features.FeaturesDict({
-            'image_id': tfds.features.Text(),
-            **{feat: possible_features[feat]
-               for feat in self.builder_config.features}}),
+        features=features,
         # Homepage of the dataset for documentation
         urls=['http://www.6d-vision.com/lostandfounddataset'],
         citation=_CITATION,
@@ -195,11 +195,10 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
       for left_img in tf.io.gfile.listdir(left_city_root):
         image_id = _get_id_from_left_image(left_img)
 
-        features = {
-            'image_id': image_id,
-            **{feat: path.join(paths_city_root[feat],
-                               '{}_{}.png'.format(image_id, file_suffix[feat]))
-               for feat in paths}}
+        features = {feat: path.join(paths_city_root[feat],
+                                    '{}_{}.png'.format(image_id, file_suffix[feat]))
+                    for feat in paths}
+        features['image_id'] = image_id
 
         yield image_id, features
 
