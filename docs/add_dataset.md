@@ -169,7 +169,7 @@ class MyDataset(tfds.core.GeneratorBasedBuilder):
         # builder.as_dataset.
         supervised_keys=("image", "label"),
         # Homepage of the dataset for documentation
-        urls=["https://dataset-homepage.org"],
+        homepage="https://dataset-homepage.org",
         # Bibtex citation for the dataset
         citation=r"""@article{my-awesome-dataset-2020,
                               author = {Smith, John},"}""",

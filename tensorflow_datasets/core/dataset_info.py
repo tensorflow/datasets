@@ -67,7 +67,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
     version={version},
     description='{description}',
-    urls={urls},
+    homepage='{homepage}',
     features={features},
     total_num_examples={total_num_examples},
     splits={splits},
@@ -98,6 +98,7 @@ class DatasetInfo(object):
                description=None,
                features=None,
                supervised_keys=None,
+               homepage=None,
                urls=None,
                citation=None,
                metadata=None,
@@ -116,7 +117,8 @@ class DatasetInfo(object):
         `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
         with `as_supervised=True`, the `tf.data.Dataset` object will yield
         the (input, target) defined here.
-      urls: `list(str)`, optional, the homepage(s) for this dataset.
+      homepage: `str`, optional, the homepage for this dataset.
+      urls: DEPRECATED, use `homepage` instead.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
         stored/restored with the dataset. This allows for storing additional
@@ -135,10 +137,13 @@ class DatasetInfo(object):
         citation=citation,
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             **redistribution_info) if redistribution_info else None)
-    if urls:
+
+    if urls:  # TODO(epot):Delete field once every user have been migrated
       if isinstance(urls, six.string_types):
         urls = [urls]
-      self._info_proto.location.urls[:] = urls
+      homepage = urls[0]
+    if homepage:
+      self._info_proto.location.urls[:] = [homepage]
 
     if features:
       if not isinstance(features, top_level_feature.TopLevelFeature):
@@ -189,8 +194,11 @@ class DatasetInfo(object):
     return self._builder.version
 
   @property
-  def homepage_url(self):
-    return self.urls and self.urls[0] or "https://www.tensorflow.org/datasets"
+  def homepage(self):
+    urls = self.as_proto.location.urls
+    tfds_homepage = "https://www.tensorflow.org/datasets/catalog/{}".format(
+        self.name)
+    return urls and urls[0] or tfds_homepage
 
   @property
   def citation(self):
@@ -259,10 +267,6 @@ class DatasetInfo(object):
     del self.as_proto.splits[:]  # Clear previous
     for split_info in split_dict.to_proto():
       self.as_proto.splits.add().CopyFrom(split_info)
-
-  @property
-  def urls(self):
-    return self.as_proto.location.urls
 
   @property
   def initialized(self):
@@ -433,7 +437,7 @@ class DatasetInfo(object):
         features=features_pprint,
         splits=splits_pprint,
         citation=citation_pprint,
-        urls=self.urls,
+        homepage=self.homepage,
         supervised_keys=self.supervised_keys,
         # Proto add a \n that we strip.
         redistribution_info=str(self.redistribution_info).strip())

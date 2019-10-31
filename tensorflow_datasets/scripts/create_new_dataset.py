@@ -110,7 +110,7 @@ class {dataset_cls}(tfds.core.GeneratorBasedBuilder):
         # builder.as_dataset.
         supervised_keys=(),
         # Homepage of the dataset for documentation
-        urls=[],
+        homepage='https://dataset-homepage/',
         citation=_CITATION,
     )
 

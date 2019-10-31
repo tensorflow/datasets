@@ -5,11 +5,9 @@ from tensorflow_datasets.core.utils.py_utils import get_class_url
 %>
 
 ## Print URLs
-<%def name="display_urls(builder, level)">\
-${'#' * level} Urls
-% for url in builder.info.urls:
- * [${url}](${url})
-%endfor
+<%def name="display_homepage(builder, level)">\
+${'#' * level} Homepage
+ * [${builder.info.homepage}](${builder.info.homepage})
 </%def>
 
 ## Print features
@@ -43,7 +41,7 @@ ${'  '*level|n}* `${str(version)}`: ${version.description}
 <%def name="print_general_info_one_config(builder)">
 ${display_description(builder)}
 
-* URL: [${builder.info.homepage_url}](${builder.info.homepage_url})
+* URL: [${builder.info.homepage}](${builder.info.homepage})
 * `DatasetBuilder`: [`${get_class_path(builder)}`](${get_class_url(builder)})
 * Version: `v${str(builder.info.version)}`
 * Versions:
@@ -53,7 +51,7 @@ ${supported_versions(builder, level=1)}
 
 ${display_features(builder, level=2)}
 ${display_stats(builder, level=2)}
-${display_urls(builder, level=2)}
+${display_homepage(builder, level=2)}
 ${display_supervised_keys(builder, level=2)}
 ${display_citation(builder.info.citation, level=2)}
 </%def>
@@ -68,7 +66,7 @@ len_conf_descs = len(set([c.description for c in  builder.BUILDER_CONFIGS] + [
 ${display_description(builder)}
 %endif
 
-* URL: [${builder.info.homepage_url}](${builder.info.homepage_url})
+* URL: [${builder.info.homepage}](${builder.info.homepage})
 * `DatasetBuilder`: [`${get_class_path(builder)}`](${get_class_url(builder)})
 
 `${builder.name}` is configured with `${get_class_path(builder.builder_config)}` and has
@@ -92,7 +90,7 @@ ${supported_versions(config, level=0)}
 
 ${display_stats(config_builder, level=3)}
 ${display_features(config_builder, level=3)}
-${display_urls(config_builder, level=3)}
+${display_homepage(config_builder, level=3)}
 ${display_supervised_keys(config_builder, level=3)}
 %endfor
 ${display_citation(config_builder.info.citation, level=2)}

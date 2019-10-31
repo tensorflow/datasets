@@ -80,13 +80,13 @@ import tensorflow_datasets as tfds
 # The following is the equivalent of the `load` call above.
 
 # You can fetch the DatasetBuilder class by string
-mnist_builder = tfds.builder("mnist")
+mnist_builder = tfds.builder('mnist')
 
 # Download the dataset
 mnist_builder.download_and_prepare()
 
 # Construct a tf.data.Dataset
-ds = mnist_builder.as_dataset(split=tfds.Split.TRAIN)
+ds = mnist_builder.as_dataset(split='train')
 
 # Get the `DatasetInfo` object, which contains useful information about the
 # dataset and its features
@@ -97,17 +97,17 @@ print(info)
         name='mnist',
         version=1.0.0,
         description='The MNIST database of handwritten digits.',
-        urls=[u'http://yann.lecun.com/exdb/mnist/'],
+        homepage='http://yann.lecun.com/exdb/mnist/',
         features=FeaturesDict({
             'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
             'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
         },
         total_num_examples=70000,
         splits={
-            u'test': <tfds.core.SplitInfo num_examples=10000>,
-            u'train': <tfds.core.SplitInfo num_examples=60000>
+            'test': <tfds.core.SplitInfo num_examples=10000>,
+            'train': <tfds.core.SplitInfo num_examples=60000>
         },
-        supervised_keys=(u'image', u'label'),
+        supervised_keys=('image', 'label'),
         citation='"""
             @article{lecun2010mnist,
               title={MNIST handwritten digit database},

@@ -40,7 +40,6 @@ informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).
     name=builder.info.name,
 )
 
-homepage_url = (builder.info.urls and builder.info.urls[0]) or ""
 %>
 
 <div itemscope itemtype="http://schema.org/Dataset">
@@ -50,6 +49,6 @@ homepage_url = (builder.info.urls and builder.info.urls[0]) or ""
   <meta itemprop="name" content="${builder.info.name}" />
   <meta itemprop="description" content="${escape(description)}" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/${builder.info.name}" />
-  <meta itemprop="sameAs" content="${escape(homepage_url)}" />
+  <meta itemprop="sameAs" content="${escape(builder.info.homepage)}" />
   <meta itemprop="citation" content="${escape(builder.info.citation)}" />
 </div>
