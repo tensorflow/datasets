@@ -364,9 +364,6 @@ This line should be okay."""
             "wet-file": 1,
             "page-emitted": 2,
             "page-filitered-nourl": 1,
-            "page-filtered-nocontentlen": 1,
-            "page-filtered-nocontenttype": 1,
-            "page-filtered-notimestamp": 1,
         }, dict(counters))
 
 

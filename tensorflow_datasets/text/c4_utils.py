@@ -344,12 +344,12 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
         counter_inc_fn("page-filitered-nourl")
       if not content and content is not None:
         counter_inc_fn("page-filtered-nocontent")
-      if not content_type:
-        counter_inc_fn("page-filtered-nocontenttype")
-      if not content_len:
-        counter_inc_fn("page-filtered-nocontentlen")
-      if not timestamp:
-        counter_inc_fn("page-filtered-notimestamp")
+      if not content_type and content_type is not None:
+        counter_inc_fn("page-nocontenttype")
+      if not content_len and content_len is not None:
+        counter_inc_fn("page-nocontentlen")
+      if not timestamp and timestamp is not None:
+        counter_inc_fn("page-notimestamp")
       if content and url:
         counter_inc_fn("page-emitted")
         return (url, {
@@ -371,9 +371,9 @@ def split_wet_file(wet_file_path, counter_inc_fn=None):
           yield page
         url = ""
         content = []
-        content_len = None
-        content_type = None
-        timestamp = None
+        content_len = ""
+        content_type = ""
+        timestamp = ""
 
       if line.startswith(_URL_KEY):
         url = line[len(_URL_KEY):].strip()
