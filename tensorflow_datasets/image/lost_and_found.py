@@ -128,6 +128,7 @@ class LostAndFound(tfds.core.GeneratorBasedBuilder):
     features = {feat: possible_features[feat]
                 for feat in self.builder_config.features}
     features['image_id'] = tfds.features.Text()
+    features = tfds.features.FeaturesDict(features)
     return tfds.core.DatasetInfo(
         builder=self,
         # This is the description that will appear on the datasets page.
