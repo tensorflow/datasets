@@ -13,3 +13,4 @@
     ([guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)).
 *   Add `duke_ultrasound` dataset of ultrasound phantoms and invivo liver images
     from the [MimickNet paper](https://arxiv.org/abs/1908.05782)
+*   Add `Google ConceptualCaptions` dataset of image alt-text dataset for automatic image captioning from the [ConceptualCaptions paper](https://www.aclweb.org/anthology/P18-1238.pdf)
