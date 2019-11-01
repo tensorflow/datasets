@@ -27,6 +27,7 @@ import os
 import tensorflow as tf
 
 import tensorflow_datasets.public_api as tfds
+from tensorflow.contrib import data as contrib_data
 
 LSUN_URL = "http://dl.yf.io/lsun/scenes/%s_%s_lmdb.zip"
 
@@ -116,7 +117,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, extracted_dir, file_path):
     with tf.Graph().as_default():
-      dataset = tf.contrib.data.LMDBDataset(
+      dataset = contrib_data.LMDBDataset(
           os.path.join(extracted_dir, file_path, "data.mdb"))
       for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
         record = {"image": io.BytesIO(jpeg_image)}
