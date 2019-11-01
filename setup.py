@@ -133,6 +133,7 @@ DATASET_EXTRAS = {
     'pet_finder': ['pandas'],
     'svhn': ['scipy'],
     'the300w_lp': ['scipy'],
+    'duke_ultrasound': ['scipy'],
     'wider_face': ['Pillow'],
     'wikipedia': ['mwparserfromhell', 'apache_beam'],
 }
