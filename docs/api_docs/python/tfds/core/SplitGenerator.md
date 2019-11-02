@@ -17,7 +17,6 @@ source</a>
 ## Class `SplitGenerator`
 
 <!-- Start diff -->
-
 Defines the split information for the generator.
 
 <!-- Placeholder for "Used in" -->

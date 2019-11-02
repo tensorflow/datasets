@@ -11,7 +11,6 @@
 </table>
 
 <!-- Start diff -->
-
 Mock out the kaggle CLI.
 
 ``` python

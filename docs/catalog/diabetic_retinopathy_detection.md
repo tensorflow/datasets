@@ -63,7 +63,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
@@ -94,7 +94,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
@@ -125,7 +125,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 
@@ -153,7 +153,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://www.kaggle.com/c/diabetic-retinopathy-detection/data](https://www.kaggle.com/c/diabetic-retinopathy-detection/data)
 

@@ -2,13 +2,25 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="super_glue" />
-  <meta itemprop="description" content="BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('super_glue', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after&#10;GLUE with a new set of more difficult language understanding tasks, improved&#10;resources, and a new public leaderboard.&#10;&#10;BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example consists of a short&#10;passage and a yes/no question about the passage. The questions are provided anonymously and&#10;unsolicited by users of the Google search engine, and afterwards paired with a paragraph from a&#10;Wikipedia article containing the answer. Following the original work, we evaluate with accuracy.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('super_glue', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/super_glue" />
   <meta itemprop="sameAs" content="https://github.com/google-research-datasets/boolean-questions" />
   <meta itemprop="citation" content="@inproceedings{clark2019boolq,&#10;  title={BoolQ: Exploring the Surprising Difficulty of Natural Yes/No Questions},&#10;  author={Clark, Christopher and Lee, Kenton and Chang, Ming-Wei, and Kwiatkowski, Tom and Collins, Michael, and Toutanova, Kristina},&#10;  booktitle={NAACL},&#10;  year={2019}&#10;}&#10;@article{wang2019superglue,&#10;  title={SuperGLUE: A Stickier Benchmark for General-Purpose Language Understanding Systems},&#10;  author={Wang, Alex and Pruksachatkun, Yada and Nangia, Nikita and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R},&#10;  journal={arXiv preprint arXiv:1905.00537},&#10;  year={2019}&#10;}&#10;&#10;Note that each SuperGLUE dataset has its own citation. Please see the source to&#10;get the correct citation for each contained dataset.&#10;" />
 </div>
+
 # `super_glue`
+
+SuperGLUE (https://super.gluebenchmark.com/) is a new benchmark styled after
+GLUE with a new set of more difficult language understanding tasks, improved
+resources, and a new public leaderboard.
+
+BoolQ (Boolean Questions, Clark et al., 2019a) is a QA task where each example
+consists of a short passage and a yes/no question about the passage. The
+questions are provided anonymously and unsolicited by users of the Google search
+engine, and afterwards paired with a paragraph from a Wikipedia article
+containing the answer. Following the original work, we evaluate with accuracy.
 
 *   URL:
     [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
@@ -233,10 +245,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/google-research-datasets/boolean-questions](https://github.com/google-research-datasets/boolean-questions)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/cb`
 
@@ -275,10 +286,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/mcdm/CommitmentBank](https://github.com/mcdm/CommitmentBank)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/copa`
 
@@ -319,10 +329,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://people.ict.usc.edu/~gordon/copa.html](http://people.ict.usc.edu/~gordon/copa.html)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/multirc`
 
@@ -367,10 +376,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://cogcomp.org/multirc/](https://cogcomp.org/multirc/)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/record`
 
@@ -410,10 +418,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://sheng-z.github.io/ReCoRD-explorer/](https://sheng-z.github.io/ReCoRD-explorer/)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/rte`
 
@@ -454,10 +461,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/wic`
 
@@ -497,10 +503,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://pilehvar.github.io/wic/](https://pilehvar.github.io/wic/)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/wsc`
 
@@ -562,10 +567,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/wsc.fixed`
 
@@ -630,10 +634,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/axb`
 
@@ -672,10 +675,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## `super_glue/axg`
 
@@ -715,10 +717,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/rudinger/winogender-schemas](https://github.com/rudinger/winogender-schemas)
-*   [https://super.gluebenchmark.com/](https://super.gluebenchmark.com/)
 
 ## Citation
 ```

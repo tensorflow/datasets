@@ -44,7 +44,7 @@ Split | Examples
 ALL   | 150
 TRAIN | 150
 
-## Urls
+## Homepage
 
 *   [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
 

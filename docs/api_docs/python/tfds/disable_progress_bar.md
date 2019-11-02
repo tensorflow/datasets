@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Disabled Tqdm progress bar.
 
 ```python

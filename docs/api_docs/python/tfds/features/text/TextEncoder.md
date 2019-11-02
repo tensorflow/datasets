@@ -21,7 +21,6 @@ source</a>
 ## Class `TextEncoder`
 
 <!-- Start diff -->
-
 Abstract base class for converting between text and integers.
 
 <!-- Placeholder for "Used in" -->

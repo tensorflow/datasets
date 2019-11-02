@@ -28,7 +28,6 @@ source</a>
 ## Class `DummyDatasetSharedGenerator`
 
 <!-- Start diff -->
-
 Test DatasetBuilder.
 
 Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)

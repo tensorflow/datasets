@@ -2,13 +2,24 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
+
   <meta itemprop="name" content="glue" />
-  <meta itemprop="description" content="The Corpus of Linguistic Acceptability consists of English&#10;            acceptability judgments drawn from books and journal articles on&#10;            linguistic theory. Each example is a sequence of words annotated&#10;            with whether it is a grammatical English sentence.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('glue', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="GLUE, the General Language Understanding Evaluation benchmark&#10;(https://gluebenchmark.com/) is a collection of resources for training,&#10;evaluating, and analyzing natural language understanding systems.&#10;&#10;            The Corpus of Linguistic Acceptability consists of English&#10;            acceptability judgments drawn from books and journal articles on&#10;            linguistic theory. Each example is a sequence of words annotated&#10;            with whether it is a grammatical English sentence.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('glue', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/glue" />
   <meta itemprop="sameAs" content="https://nyu-mll.github.io/CoLA/" />
   <meta itemprop="citation" content="@article{warstadt2018neural,&#10;              title={Neural Network Acceptability Judgments},&#10;              author={Warstadt, Alex and Singh, Amanpreet and Bowman, Samuel R},&#10;              journal={arXiv preprint arXiv:1805.12471},&#10;              year={2018}&#10;            }&#10;@inproceedings{wang2019glue,&#10;  title={{GLUE}: A Multi-Task Benchmark and Analysis Platform for Natural Language Understanding},&#10;  author={Wang, Alex and Singh, Amanpreet and Michael, Julian and Hill, Felix and Levy, Omer and Bowman, Samuel R.},&#10;  note={In the Proceedings of ICLR.},&#10;  year={2019}&#10;}&#10;&#10;Note that each GLUE dataset has its own citation. Please see the source to see&#10;the correct citation for each contained dataset." />
 </div>
+
 # `glue`
+
+GLUE, the General Language Understanding Evaluation benchmark
+(https://gluebenchmark.com/) is a collection of resources for training,
+evaluating, and analyzing natural language understanding systems.
+
+            The Corpus of Linguistic Acceptability consists of English
+            acceptability judgments drawn from books and journal articles on
+            linguistic theory. Each example is a sequence of words annotated
+            with whether it is a grammatical English sentence.
 
 *   URL: [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
 *   `DatasetBuilder`:
@@ -141,10 +152,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://nyu-mll.github.io/CoLA/](https://nyu-mll.github.io/CoLA/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/sst2`
 
@@ -176,10 +186,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://nlp.stanford.edu/sentiment/index.html](https://nlp.stanford.edu/sentiment/index.html)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/mrpc`
 
@@ -211,10 +220,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://www.microsoft.com/en-us/download/details.aspx?id=52398](https://www.microsoft.com/en-us/download/details.aspx?id=52398)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/qqp`
 
@@ -246,10 +254,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs](https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/stsb`
 
@@ -282,10 +289,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/mnli`
 
@@ -326,10 +332,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/mnli_mismatched`
 
@@ -359,10 +364,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/mnli_matched`
 
@@ -392,10 +396,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://www.nyu.edu/projects/bowman/multinli/](http://www.nyu.edu/projects/bowman/multinli/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/qnli`
 
@@ -435,10 +438,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/rte`
 
@@ -474,10 +476,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://aclweb.org/aclwiki/Recognizing_Textual_Entailment](https://aclweb.org/aclwiki/Recognizing_Textual_Entailment)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/wnli`
 
@@ -525,10 +526,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html](https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## `glue/ax`
 
@@ -555,10 +555,9 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://gluebenchmark.com/diagnostics](https://gluebenchmark.com/diagnostics)
-*   [https://gluebenchmark.com/](https://gluebenchmark.com/)
 
 ## Citation
 ```

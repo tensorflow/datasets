@@ -54,7 +54,7 @@ ALL   | 48,600
 TEST  | 24,300
 TRAIN | 24,300
 
-## Urls
+## Homepage
 
 *   [https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/](https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/)
 

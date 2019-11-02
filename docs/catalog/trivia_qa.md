@@ -68,7 +68,7 @@ ALL   | 155,594
 TRAIN | 138,384
 TEST  | 17,210
 
-## Urls
+## Homepage
 
 *   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 

@@ -29,7 +29,6 @@ source</a>
 ## Class `Image`
 
 <!-- Start diff -->
-
 `FeatureConnector` for images.
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)

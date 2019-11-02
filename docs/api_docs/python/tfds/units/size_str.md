@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Returns a human readable size string.
 
 ``` python

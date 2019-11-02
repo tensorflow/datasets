@@ -24,7 +24,6 @@ source</a>
 ## Class `ExtractMethod`
 
 <!-- Start diff -->
-
 The extraction method to use to pre-process a downloaded file.
 
 <!-- Placeholder for "Used in" -->

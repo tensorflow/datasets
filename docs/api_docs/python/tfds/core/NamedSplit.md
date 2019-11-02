@@ -22,7 +22,6 @@ source</a>
 ## Class `NamedSplit`
 
 <!-- Start diff -->
-
 Descriptor corresponding to a named split (train, test, ...).
 
 Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)

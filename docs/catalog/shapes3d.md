@@ -69,7 +69,7 @@ Split | Examples
 ALL   | 480,000
 TRAIN | 480,000
 
-## Urls
+## Homepage
 
 *   [https://github.com/deepmind/3d-shapes](https://github.com/deepmind/3d-shapes)
 

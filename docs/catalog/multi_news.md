@@ -45,7 +45,7 @@ TRAIN      | 44,972
 TEST       | 5,622
 VALIDATION | 5,622
 
-## Urls
+## Homepage
 
 *   [https://github.com/Alex-Fabbri/Multi-News](https://github.com/Alex-Fabbri/Multi-News)
 

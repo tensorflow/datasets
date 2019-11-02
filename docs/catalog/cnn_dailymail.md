@@ -58,7 +58,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
@@ -90,7 +90,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
@@ -122,7 +122,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 

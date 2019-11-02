@@ -54,7 +54,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 

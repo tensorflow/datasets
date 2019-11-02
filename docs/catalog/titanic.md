@@ -55,7 +55,7 @@ Split | Examples
 ALL   | 1,309
 TRAIN | 1,309
 
-## Urls
+## Homepage
 
 *   [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
 

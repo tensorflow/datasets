@@ -51,7 +51,7 @@ TEST       | 6,149
 TRAIN      | 1,020
 VALIDATION | 1,020
 
-## Urls
+## Homepage
 
 *   [https://www.robots.ox.ac.uk/~vgg/data/flowers/102/](https://www.robots.ox.ac.uk/~vgg/data/flowers/102/)
 

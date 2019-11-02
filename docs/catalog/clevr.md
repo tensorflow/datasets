@@ -52,7 +52,7 @@ TRAIN      | 70,000
 TEST       | 15,000
 VALIDATION | 15,000
 
-## Urls
+## Homepage
 
 *   [https://cs.stanford.edu/people/jcjohns/clevr/](https://cs.stanford.edu/people/jcjohns/clevr/)
 

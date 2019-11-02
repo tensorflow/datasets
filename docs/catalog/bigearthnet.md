@@ -84,7 +84,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://bigearth.net](http://bigearth.net)
 
@@ -132,7 +132,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://bigearth.net](http://bigearth.net)
 

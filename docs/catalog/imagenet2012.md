@@ -50,7 +50,7 @@ ALL        | 1,331,167
 TRAIN      | 1,281,167
 VALIDATION | 50,000
 
-## Urls
+## Homepage
 
 *   [http://image-net.org/](http://image-net.org/)
 

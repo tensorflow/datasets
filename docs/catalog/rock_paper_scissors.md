@@ -40,7 +40,7 @@ ALL   | 2,892
 TRAIN | 2,520
 TEST  | 372
 
-## Urls
+## Homepage
 
 *   [http://laurencemoroney.com/rock-paper-scissors-dataset](http://laurencemoroney.com/rock-paper-scissors-dataset)
 

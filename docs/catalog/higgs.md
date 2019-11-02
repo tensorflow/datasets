@@ -73,7 +73,7 @@ Split | Examples
 ALL   | 11,000,000
 TRAIN | 11,000,000
 
-## Urls
+## Homepage
 
 *   [https://archive.ics.uci.edu/ml/datasets/HIGGS](https://archive.ics.uci.edu/ml/datasets/HIGGS)
 

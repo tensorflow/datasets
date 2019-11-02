@@ -120,7 +120,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
 
@@ -164,7 +164,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
 
@@ -208,7 +208,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
 
@@ -252,7 +252,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://patrykchrabaszcz.github.io/Imagenet32/](https://patrykchrabaszcz.github.io/Imagenet32/)
 

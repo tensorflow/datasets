@@ -41,7 +41,7 @@ Split | Examples
 ALL   | 50,426,266
 TRAIN | 50,426,266
 
-## Urls
+## Homepage
 
 *   [https://github.com/googlecreativelab/quickdraw-dataset](https://github.com/googlecreativelab/quickdraw-dataset)
 

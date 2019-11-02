@@ -45,7 +45,7 @@ ALL   | 60,000
 TRAIN | 50,000
 TEST  | 10,000
 
-## Urls
+## Homepage
 
 *   [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)
 

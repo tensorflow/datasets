@@ -42,7 +42,7 @@ Split | Examples
 ALL   | 31,500
 TRAIN | 31,500
 
-## Urls
+## Homepage
 
 *   [http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html](http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html)
 

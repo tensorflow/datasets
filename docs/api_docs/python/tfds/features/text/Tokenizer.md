@@ -23,7 +23,6 @@ source</a>
 ## Class `Tokenizer`
 
 <!-- Start diff -->
-
 Splits a string into tokens, and joins them back.
 
 <!-- Placeholder for "Used in" -->

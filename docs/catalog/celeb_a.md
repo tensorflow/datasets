@@ -103,7 +103,7 @@ TRAIN      | 162,770
 TEST       | 19,962
 VALIDATION | 19,867
 
-## Urls
+## Homepage
 
 *   [http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 

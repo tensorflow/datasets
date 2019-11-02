@@ -38,7 +38,7 @@ Split | Examples
 ALL   | 1,404
 TRAIN | 1,404
 
-## Urls
+## Homepage
 
 *   [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
 

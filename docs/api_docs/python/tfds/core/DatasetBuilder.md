@@ -28,7 +28,6 @@ source</a>
 ## Class `DatasetBuilder`
 
 <!-- Start diff -->
-
 Abstract base class for all datasets.
 
 <!-- Placeholder for "Used in" -->

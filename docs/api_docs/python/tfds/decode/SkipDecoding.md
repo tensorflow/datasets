@@ -21,7 +21,6 @@ source</a>
 ## Class `SkipDecoding`
 
 <!-- Start diff -->
-
 Transformation which skip the decoding entirelly.
 
 Inherits From: [`Decoder`](../../tfds/decode/Decoder.md)

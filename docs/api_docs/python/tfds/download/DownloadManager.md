@@ -25,7 +25,6 @@ source</a>
 ## Class `DownloadManager`
 
 <!-- Start diff -->
-
 Manages the download and extraction of files, as well as caching.
 
 <!-- Placeholder for "Used in" -->

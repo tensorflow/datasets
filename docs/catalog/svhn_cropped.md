@@ -43,7 +43,7 @@ EXTRA | 531,131
 TRAIN | 73,257
 TEST  | 26,032
 
-## Urls
+## Homepage
 
 *   [http://ufldl.stanford.edu/housenumbers/](http://ufldl.stanford.edu/housenumbers/)
 

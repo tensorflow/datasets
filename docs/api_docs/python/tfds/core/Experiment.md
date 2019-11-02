@@ -18,7 +18,6 @@ source</a>
 ## Class `Experiment`
 
 <!-- Start diff -->
-
 Experiments which can be enabled/disabled on a per version basis.
 
 <!-- Placeholder for "Used in" -->

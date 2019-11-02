@@ -21,7 +21,6 @@ source</a>
 ## Class `SplitBase`
 
 <!-- Start diff -->
-
 Abstract base class for Split compositionality.
 
 <!-- Placeholder for "Used in" -->

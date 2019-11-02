@@ -8,8 +8,6 @@ c4/en.webtextlike/1.0.1
 c4/en/1.0.1
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/ax/0.0.2
-glue/ax/1.0.0
-glue/wnli/1.0.0
 image_label_folder/1.0.0
 image_label_folder/2.0.0
 imagenet2012_corrupted/gaussian_blur_1/0.0.1

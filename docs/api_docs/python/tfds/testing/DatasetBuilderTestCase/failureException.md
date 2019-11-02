@@ -13,7 +13,6 @@
 ## Class `failureException`
 
 <!-- Start diff -->
-
 Assertion failed.
 
 ### Aliases:

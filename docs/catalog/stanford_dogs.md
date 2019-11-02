@@ -47,7 +47,7 @@ ALL   | 20,580
 TRAIN | 12,000
 TEST  | 8,580
 
-## Urls
+## Homepage
 
 *   [http://vision.stanford.edu/aditya86/ImageNetDogs/main.html](http://vision.stanford.edu/aditya86/ImageNetDogs/main.html)
 

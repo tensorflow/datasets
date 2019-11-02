@@ -19,7 +19,6 @@ source</a>
 ## Class `TensorInfo`
 
 <!-- Start diff -->
-
 Structure containing info on the `tf.Tensor` shape/dtype.
 
 <!-- Placeholder for "Used in" -->

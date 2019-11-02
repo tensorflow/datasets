@@ -112,10 +112,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-bg.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-bg.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'bg')`
@@ -143,10 +142,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-cs.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-cs.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'cs')`
@@ -174,10 +172,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-da.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-da.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'da')`
@@ -205,10 +202,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-de.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-de.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'de')`
@@ -236,10 +232,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-el.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'el')`
@@ -267,10 +262,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-es.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-es.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'es')`
@@ -298,10 +292,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-et.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-et.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'et')`
@@ -329,10 +322,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fi.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fi.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'fi')`
@@ -360,10 +352,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-fr.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'fr')`
@@ -391,10 +382,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-ga.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-ga.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'ga')`
@@ -422,10 +412,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hr.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hr.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'hr')`
@@ -453,10 +442,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hu.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-hu.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'hu')`
@@ -484,10 +472,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-it.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-it.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'it')`
@@ -515,10 +502,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-lt.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-lt.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'lt')`
@@ -546,10 +532,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-lv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-lv.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'lv')`
@@ -577,10 +562,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-mt.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-mt.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'mt')`
@@ -608,10 +592,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-nl.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-nl.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'nl')`
@@ -639,10 +622,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-pl.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-pl.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'pl')`
@@ -670,10 +652,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-pt.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-pt.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'pt')`
@@ -701,10 +682,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-ro.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-ro.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'ro')`
@@ -732,10 +712,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sk.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sk.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'sk')`
@@ -763,10 +742,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sl.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sl.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'sl')`
@@ -794,10 +772,9 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://paracrawl.eu/releases.html](https://paracrawl.eu/releases.html)
-*   [https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz](https://s3.amazonaws.com/web-language-models/paracrawl/release4/en-sv.bicleaner07.txt.gz)
 
 ### Supervised keys (for `as_supervised=True`)
 `(u'en', u'sv')`

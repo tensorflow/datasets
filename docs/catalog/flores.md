@@ -51,7 +51,7 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
@@ -82,7 +82,7 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 

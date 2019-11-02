@@ -49,7 +49,7 @@ TEST       | 1,880
 TRAIN      | 1,880
 VALIDATION | 1,880
 
-## Urls
+## Homepage
 
 *   [https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html)
 

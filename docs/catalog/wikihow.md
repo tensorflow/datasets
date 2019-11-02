@@ -67,7 +67,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 
@@ -101,7 +101,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 

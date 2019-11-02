@@ -24,7 +24,6 @@ source</a>
 ## Class `SplitDict`
 
 <!-- Start diff -->
-
 Split info object.
 
 <!-- Placeholder for "Used in" -->

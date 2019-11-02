@@ -25,7 +25,6 @@ source</a>
 ## Class `FeatureConnector`
 
 <!-- Start diff -->
-
 Abstract base class for feature types.
 
 <!-- Placeholder for "Used in" -->

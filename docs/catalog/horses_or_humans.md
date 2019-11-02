@@ -40,7 +40,7 @@ ALL   | 1,283
 TRAIN | 1,027
 TEST  | 256
 
-## Urls
+## Homepage
 
 *   [http://laurencemoroney.com/horses-or-humans-dataset](http://laurencemoroney.com/horses-or-humans-dataset)
 

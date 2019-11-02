@@ -64,7 +64,7 @@ Translation({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
 

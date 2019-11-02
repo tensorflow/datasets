@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Loads the named dataset into a `tf.data.Dataset`.
 
 ```python

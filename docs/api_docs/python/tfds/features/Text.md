@@ -32,7 +32,6 @@ source</a>
 ## Class `Text`
 
 <!-- Start diff -->
-
 `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)

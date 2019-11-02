@@ -44,7 +44,7 @@ Split | Examples
 ALL   | 2,100
 TRAIN | 2,100
 
-## Urls
+## Homepage
 
 *   [http://weegee.vision.ucmerced.edu/datasets/landuse.html](http://weegee.vision.ucmerced.edu/datasets/landuse.html)
 

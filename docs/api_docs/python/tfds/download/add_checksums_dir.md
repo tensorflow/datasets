@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Registers a new checksums dir.
 
 ```python

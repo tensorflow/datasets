@@ -46,7 +46,7 @@ ALL   | 6,033
 TEST  | 3,033
 TRAIN | 3,000
 
-## Urls
+## Homepage
 
 *   [http://www.vision.caltech.edu/visipedia/CUB-200.html](http://www.vision.caltech.edu/visipedia/CUB-200.html)
 

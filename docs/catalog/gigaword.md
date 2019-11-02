@@ -45,7 +45,7 @@ TRAIN      | 3,803,957
 VALIDATION | 189,651
 TEST       | 1,951
 
-## Urls
+## Homepage
 
 *   [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
 

@@ -21,7 +21,6 @@ source</a>
 ## Class `TFRecordExampleAdapter`
 
 <!-- Start diff -->
-
 Writes/Reads serialized Examples protos to/from TFRecord files.
 
 Inherits From: [`FileFormatAdapter`](../../tfds/file_adapter/FileFormatAdapter.md)

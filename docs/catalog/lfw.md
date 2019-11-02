@@ -38,7 +38,7 @@ Split | Examples
 ALL   | 13,233
 TRAIN | 13,233
 
-## Urls
+## Homepage
 
 *   [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
 

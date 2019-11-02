@@ -18,7 +18,6 @@ source</a>
 ## Class `Metadata`
 
 <!-- Start diff -->
-
 Abstract base class for DatasetInfo metadata container.
 
 <!-- Placeholder for "Used in" -->

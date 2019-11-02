@@ -30,7 +30,6 @@ source</a>
 ## Class `ClassLabel`
 
 <!-- Start diff -->
-
 `FeatureConnector` for integer class labels.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)

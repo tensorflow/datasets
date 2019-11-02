@@ -26,7 +26,6 @@ source</a>
 ## Class `TokenTextEncoder`
 
 <!-- Start diff -->
-
 TextEncoder backed by a list of tokens.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)

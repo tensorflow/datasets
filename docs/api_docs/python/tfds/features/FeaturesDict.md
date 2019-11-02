@@ -33,7 +33,6 @@ source</a>
 ## Class `FeaturesDict`
 
 <!-- Start diff -->
-
 Composite `FeatureConnector`; each feature in `dict` has its own connector.
 
 <!-- Placeholder for "Used in" -->

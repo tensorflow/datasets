@@ -21,7 +21,6 @@ source</a>
 ## Class `Split`
 
 <!-- Start diff -->
-
 `Enum` for dataset splits.
 
 <!-- Placeholder for "Used in" -->

@@ -11,7 +11,6 @@
 </table>
 
 <!-- Start diff -->
-
 Context manager for a temporary directory.
 
 ``` python

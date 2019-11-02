@@ -55,7 +55,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
 
@@ -82,7 +82,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [http://image-net.org/small/download.php](http://image-net.org/small/download.php)
 

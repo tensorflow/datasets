@@ -19,7 +19,6 @@ source</a>
 ## Class `GenerateMode`
 
 <!-- Start diff -->
-
 `Enum` for how to treat pre-existing downloads and data.
 
 ### Aliases:

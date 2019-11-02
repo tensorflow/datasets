@@ -45,7 +45,7 @@ ALL   | 7,349
 TRAIN | 3,680
 TEST  | 3,669
 
-## Urls
+## Homepage
 
 *   [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 

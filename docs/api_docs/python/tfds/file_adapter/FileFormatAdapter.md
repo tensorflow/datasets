@@ -21,7 +21,6 @@ source</a>
 ## Class `FileFormatAdapter`
 
 <!-- Start diff -->
-
 Provides writing and reading methods for a file format.
 
 <!-- Placeholder for "Used in" -->

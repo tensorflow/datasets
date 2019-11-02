@@ -17,7 +17,6 @@ source</a>
 ## Class `FeatureExpectationItem`
 
 <!-- Start diff -->
-
 Test item of a FeatureExpectation.
 
 <!-- Placeholder for "Used in" -->

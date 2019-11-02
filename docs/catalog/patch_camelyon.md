@@ -47,7 +47,7 @@ TRAIN      | 262,144
 TEST       | 32,768
 VALIDATION | 32,768
 
-## Urls
+## Homepage
 
 *   [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 

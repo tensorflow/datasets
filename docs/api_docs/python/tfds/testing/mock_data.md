@@ -11,7 +11,6 @@
 </table>
 
 <!-- Start diff -->
-
 Mock tfds to generate random data.
 
 ```python

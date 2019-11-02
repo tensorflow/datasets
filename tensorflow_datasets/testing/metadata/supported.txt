@@ -369,6 +369,7 @@ dsprites/0.1.0
 dsprites/2.0.0
 dtd/1.0.0
 dtd/3.0.0
+duke_ultrasound/1.0.0
 emnist/balanced/1.0.1
 emnist/balanced/3.0.0
 emnist/byclass/1.0.1
@@ -392,6 +393,7 @@ flores/sien_plain_text/1.0.0
 food101/1.0.0
 gap/0.1.0
 gigaword/1.1.0
+glue/ax/1.0.0
 glue/cola/0.0.2
 glue/cola/1.0.0
 glue/mnli/0.0.2
@@ -413,6 +415,7 @@ glue/sst2/1.0.0
 glue/stsb/0.0.2
 glue/stsb/1.0.0
 glue/wnli/0.0.2
+glue/wnli/1.0.0
 groove/2bar-16000hz/1.0.0
 groove/2bar-16000hz/2.0.0
 groove/2bar-midionly/1.0.0

@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
 ``` python

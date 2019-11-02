@@ -16,4 +16,5 @@ source</a>
 ## Class `DownloadError`
 
 <!-- Start diff -->
+
 <!-- Placeholder for "Used in" -->

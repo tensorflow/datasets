@@ -21,7 +21,6 @@ source</a>
 ## Class `Decoder`
 
 <!-- Start diff -->
-
 Base decoder object.
 
 <!-- Placeholder for "Used in" -->

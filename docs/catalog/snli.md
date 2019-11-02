@@ -53,7 +53,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://nlp.stanford.edu/projects/snli/](https://nlp.stanford.edu/projects/snli/)
 

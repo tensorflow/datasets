@@ -19,7 +19,6 @@ source</a>
 ## Class `ComputeStatsMode`
 
 <!-- Start diff -->
-
 Mode to decide if dynamic dataset info fields should be computed or not.
 
 <!-- Placeholder for "Used in" -->

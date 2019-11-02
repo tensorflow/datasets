@@ -21,7 +21,6 @@ source</a>
 ## Class `BuilderConfig`
 
 <!-- Start diff -->
-
 Base class for `DatasetBuilder` data configuration.
 
 <!-- Placeholder for "Used in" -->

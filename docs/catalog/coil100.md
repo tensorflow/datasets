@@ -46,7 +46,7 @@ Split | Examples
 ALL   | 7,200
 TRAIN | 7,200
 
-## Urls
+## Homepage
 
 *   [http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php](http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php)
 

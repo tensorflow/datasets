@@ -26,7 +26,6 @@ source</a>
 ## Class `BBoxFeature`
 
 <!-- Start diff -->
-
 `FeatureConnector` for a normalized bounding box.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)

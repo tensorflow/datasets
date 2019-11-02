@@ -42,7 +42,7 @@ Split | Examples
 ALL   | 14,344,391
 TRAIN | 14,344,391
 
-## Urls
+## Homepage
 
 *   [https://wiki.skullsecurity.org/Passwords](https://wiki.skullsecurity.org/Passwords)
 

@@ -21,7 +21,6 @@ source</a>
 ## Class `BBox`
 
 <!-- Start diff -->
-
 BBox(ymin, xmin, ymax, xmax)
 
 <!-- Placeholder for "Used in" -->

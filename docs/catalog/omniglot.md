@@ -45,7 +45,7 @@ TEST   | 13,180
 SMALL2 | 3,120
 SMALL1 | 2,720
 
-## Urls
+## Homepage
 
 *   [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 

@@ -20,7 +20,6 @@ source</a>
 ## Class `ReadInstruction`
 
 <!-- Start diff -->
-
 Reading instruction for a dataset.
 
 <!-- Placeholder for "Used in" -->

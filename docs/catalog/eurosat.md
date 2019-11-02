@@ -55,7 +55,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
@@ -85,7 +85,7 @@ FeaturesDict({
 })
 ```
 
-### Urls
+### Homepage
 
 *   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 

@@ -42,7 +42,7 @@ ALL   | 70,000
 TRAIN | 60,000
 TEST  | 10,000
 
-## Urls
+## Homepage
 
 *   [https://github.com/zalandoresearch/fashion-mnist](https://github.com/zalandoresearch/fashion-mnist)
 

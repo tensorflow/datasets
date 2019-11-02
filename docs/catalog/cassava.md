@@ -47,7 +47,7 @@ TRAIN      | 5,656
 VALIDATION | 1,889
 TEST       | 1,885
 
-## Urls
+## Homepage
 
 *   [https://www.kaggle.com/c/cassava-disease/overview](https://www.kaggle.com/c/cassava-disease/overview)
 

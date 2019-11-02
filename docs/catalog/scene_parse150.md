@@ -42,7 +42,7 @@ ALL   | 22,210
 TRAIN | 20,210
 TEST  | 2,000
 
-## Urls
+## Homepage
 
 *   [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
 

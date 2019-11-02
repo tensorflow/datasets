@@ -28,7 +28,6 @@ source</a>
 ## Class `GeneratorBasedBuilder`
 
 <!-- Start diff -->
-
 Base class for datasets with data generation based on dict generators.
 
 <!-- Placeholder for "Used in" -->

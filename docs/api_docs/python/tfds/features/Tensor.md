@@ -26,7 +26,6 @@ source</a>
 ## Class `Tensor`
 
 <!-- Start diff -->
-
 `FeatureConnector` for generic data of arbitrary shape and type.
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)

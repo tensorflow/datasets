@@ -28,7 +28,6 @@ source</a>
 ## Class `BeamBasedBuilder`
 
 <!-- Start diff -->
-
 Beam based Builder.
 
 <!-- Placeholder for "Used in" -->

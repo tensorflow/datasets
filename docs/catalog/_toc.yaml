@@ -68,6 +68,8 @@ toc:
     title: dsprites
   - path: /datasets/catalog/dtd
     title: dtd
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
   - path: /datasets/catalog/emnist
     title: emnist
   - path: /datasets/catalog/eurosat

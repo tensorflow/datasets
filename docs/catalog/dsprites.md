@@ -70,7 +70,7 @@ Split | Examples
 ALL   | 737,280
 TRAIN | 737,280
 
-## Urls
+## Homepage
 
 *   [https://github.com/deepmind/dsprites-dataset](https://github.com/deepmind/dsprites-dataset)
 

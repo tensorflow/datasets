@@ -19,7 +19,6 @@ source</a>
 ## Class `Resource`
 
 <!-- Start diff -->
-
 Represents a resource to download, extract, or both.
 
 <!-- Placeholder for "Used in" -->

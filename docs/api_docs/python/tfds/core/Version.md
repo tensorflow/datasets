@@ -26,7 +26,6 @@ source</a>
 ## Class `Version`
 
 <!-- Start diff -->
-
 Dataset version MAJOR.MINOR.PATCH.
 
 <!-- Placeholder for "Used in" -->

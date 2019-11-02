@@ -46,7 +46,7 @@ ALL   | 9,801
 TEST  | 6,741
 TRAIN | 3,060
 
-## Urls
+## Homepage
 
 *   [http://www.vision.caltech.edu/Image_Datasets/Caltech101/](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
 

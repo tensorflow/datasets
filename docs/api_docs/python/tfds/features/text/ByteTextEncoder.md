@@ -23,7 +23,6 @@ source</a>
 ## Class `ByteTextEncoder`
 
 <!-- Start diff -->
-
 Byte-encodes text.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)

@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Visualize images (and labels) from an image classification dataset.
 
 ```python

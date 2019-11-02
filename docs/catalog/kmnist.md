@@ -43,7 +43,7 @@ ALL   | 70,000
 TRAIN | 60,000
 TEST  | 10,000
 
-## Urls
+## Homepage
 
 *   [http://codh.rois.ac.jp/kmnist/index.html.en](http://codh.rois.ac.jp/kmnist/index.html.en)
 

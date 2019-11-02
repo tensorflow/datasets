@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Decorator to create a decoder.
 
 ```python

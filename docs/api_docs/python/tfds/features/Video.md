@@ -28,7 +28,6 @@ source</a>
 ## Class `Video`
 
 <!-- Start diff -->
-
 `FeatureConnector` for videos, encoding frames individually on disk.
 
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)

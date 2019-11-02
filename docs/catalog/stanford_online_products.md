@@ -41,7 +41,7 @@ ALL   | 120,053
 TEST  | 60,502
 TRAIN | 59,551
 
-## Urls
+## Homepage
 
 *   [http://cvgl.stanford.edu/projects/lifted_struct/](http://cvgl.stanford.edu/projects/lifted_struct/)
 
