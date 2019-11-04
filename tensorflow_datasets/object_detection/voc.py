@@ -202,8 +202,9 @@ class Voc(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, data_path, set_name):
     """Yields examples."""
-    set_filepath = os.path.normpath(os.path.join(
-        data_path, "VOCdevkit/VOC{}/ImageSets/Main/{}.txt".format(
+    set_filepath = os.path.join(
+        data_path,
+        os.path.normpath("VOCdevkit/VOC{}/ImageSets/Main/{}.txt".format(
             self.builder_config.year, set_name)))
     load_annotations = (
         self.builder_config.has_test_annotations or set_name != "test")
@@ -214,11 +215,13 @@ class Voc(tfds.core.GeneratorBasedBuilder):
         yield image_id, example
 
   def _generate_example(self, data_path, image_id, load_annotations):
-    image_filepath = os.path.normpath(os.path.join(
-        data_path, "VOCdevkit/VOC{}/JPEGImages/{}.jpg".format(
+    image_filepath = os.path.join(
+        data_path,
+        os.path.normpath("VOCdevkit/VOC{}/JPEGImages/{}.jpg".format(
             self.builder_config.year, image_id)))
-    annon_filepath = os.path.normpath(os.path.join(
-        data_path, "VOCdevkit/VOC{}/Annotations/{}.xml".format(
+    annon_filepath = os.path.join(
+        data_path,
+        os.path.normpath("VOCdevkit/VOC{}/Annotations/{}.xml".format(
             self.builder_config.year, image_id)))
     if load_annotations:
       objects = list(_get_example_objects(annon_filepath))
