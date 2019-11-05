@@ -92,6 +92,8 @@ toc:
     title: kmnist
   - path: /datasets/catalog/lfw
     title: lfw
+  - path: /datasets/catalog/lost_and_found
+    title: lost_and_found
   - path: /datasets/catalog/lsun
     title: lsun
   - path: /datasets/catalog/malaria

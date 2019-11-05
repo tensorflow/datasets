@@ -583,6 +583,10 @@ lm1b/subwords32k/0.0.2
 lm1b/subwords32k/1.0.0
 lm1b/subwords8k/0.0.2
 lm1b/subwords8k/1.0.0
+lost_and_found/full/1.0.0
+lost_and_found/full_16bit/1.0.0
+lost_and_found/semantic_segmentation/1.0.0
+lost_and_found/stereo_disparity/1.0.0
 lsun/bedroom/0.1.1
 lsun/bedroom/3.0.0
 lsun/bridge/0.1.1
