@@ -56,7 +56,8 @@ class DownloadConfig(object):
                max_examples_per_split=None,
                register_checksums=False,
                beam_runner=None,
-               beam_options=None):
+               beam_options=None,
+               try_download_gcs=True):
     """Constructs a `DownloadConfig`.
 
     Args:
@@ -78,6 +79,9 @@ class DownloadConfig(object):
         based on Beam for the generation.
       beam_options: `PipelineOptions` to pass to `beam.Pipeline`, only used for
         datasets based on Beam for the generation.
+      try_download_gcs: `bool`, defaults to True. If True, prepared dataset
+        will be downloaded from GCS, when available. If False, dataset will be
+        downloaded and prepared from scratch.
     """
     self.extract_dir = extract_dir
     self.manual_dir = manual_dir
@@ -89,6 +93,7 @@ class DownloadConfig(object):
     self.register_checksums = register_checksums
     self.beam_runner = beam_runner
     self.beam_options = beam_options
+    self.try_download_gcs = try_download_gcs
 
 
 class DownloadManager(object):

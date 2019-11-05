@@ -146,6 +146,34 @@ class DatasetBuilderTest(testing.TestCase):
       )
 
   @testing.run_in_graph_and_eager_modes()
+  def test_load_from_gcs(self):
+    from tensorflow_datasets.image import mnist  # pylint:disable=g-import-not-at-top
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      with absltest.mock.patch.object(
+          mnist.MNIST, "_download_and_prepare",
+          side_effect=NotImplementedError):
+        # Make sure the dataset cannot be generated.
+        with self.assertRaises(NotImplementedError):
+          registered.load(
+              name="mnist",
+              data_dir=tmp_dir)
+        # Enable GCS access so that dataset will be loaded from GCS.
+        with self.gcs_access():
+          _, info = registered.load(
+              name="mnist",
+              data_dir=tmp_dir,
+              with_info=True)
+      self.assertSetEqual(
+          set(["dataset_info.json", "image.image.json",
+               "mnist-test.counts.txt-00000-of-00001",
+               "mnist-test.tfrecord-00000-of-00001",
+               "mnist-train.counts.txt-00000-of-00001"] +
+              ["mnist-train.tfrecord-0000%d-of-00010" % i for i in range(10)]),
+          set(tf.io.gfile.listdir(os.path.join(tmp_dir, "mnist/1.0.0"))))
+
+      self.assertEqual(set(info.splits.keys()), set(["train", "test"]))
+
+  @testing.run_in_graph_and_eager_modes()
   def test_multi_split(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       ds_train, ds_test = registered.load(

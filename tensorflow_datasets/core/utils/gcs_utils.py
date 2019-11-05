@@ -18,6 +18,7 @@
 import posixpath
 from xml.etree import ElementTree
 
+import concurrent.futures
 import requests
 import tensorflow as tf
 
@@ -71,3 +72,21 @@ def is_dataset_on_gcs(dataset_name):
   dir_name = posixpath.join(GCS_DATASETS_DIR, dataset_name)
   return len(gcs_files(prefix_filter=dir_name)) > 2
 
+
+def download_gcs_dataset(
+    dataset_name, local_dataset_dir, max_simultaneous_downloads=50):
+  """Downloads prepared GCS dataset to local dataset directory."""
+  gcs_paths_to_dl = gcs_files(posixpath.join(GCS_DATASETS_DIR, dataset_name))
+  with utils.async_tqdm(
+      total=len(gcs_paths_to_dl), desc="Dl Completed...", unit=" file") as pbar:
+    def _copy_from_gcs(gcs_path):
+      local_path = posixpath.join(
+          local_dataset_dir, posixpath.basename(gcs_path))
+      download_gcs_file(gcs_path, local_path)
+      pbar.update(1)
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=max_simultaneous_downloads) as executor:
+      futures = [
+          executor.submit(_copy_from_gcs, path) for path in gcs_paths_to_dl]
+      for future in concurrent.futures.as_completed(futures):
+        future.result()

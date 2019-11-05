@@ -31,11 +31,6 @@ The NSynth Dataset is an audio dataset containing ~300k musical notes, each
 with a unique pitch, timbre, and envelope. Each note is annotated with three
 additional pieces of information based on a combination of human evaluation
 and heuristic algorithms: Source, Family, and Qualities.
-
-To access the dataset without needing to run the expensive preparation, you
-can load it with `try_gcs` enabled (e.g., `tfds.load('nsynth', try_gcs=True)`).
-You can also download the prepared dataset from GCS
-(`gs://tfs-data/datasets/nsynth`) and copy it to your local data directory.
 """
 
 _FULL_DESCRIPTION = """\

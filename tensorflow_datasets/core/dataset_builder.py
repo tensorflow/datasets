@@ -52,10 +52,10 @@ REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
 
 GCS_HOSTED_MSG = """\
-Dataset {name} is hosted on GCS. You can skip download_and_prepare by setting
-data_dir=gs://tfds-data/datasets. If you find
-that read performance is slow, copy the data locally with gsutil:
-gsutil -m cp -R {gcs_path} {local_data_dir_no_version}
+Dataset %s is hosted on GCS. It will automatically be downloaded to your
+local data directory. If you'd instead prefer to read directly from our public
+GCS bucket (recommended if you're running on GCP), you can instead set
+data_dir=gs://tfds-data/datasets.
 """
 
 
@@ -253,10 +253,6 @@ class DatasetBuilder(object):
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
-    # Data may exist on GCS
-    if not data_exists:
-      self._maybe_log_gcs_data_dir()
-
     dl_manager = self._make_download_manager(
         download_dir=download_dir,
         download_config=download_config)
@@ -282,29 +278,35 @@ class DatasetBuilder(object):
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
-        self._download_and_prepare(
-            dl_manager=dl_manager,
-            download_config=download_config)
+        if (download_config.try_download_gcs and
+            gcs_utils.is_dataset_on_gcs(self.info.full_name)):
+          logging.warning(GCS_HOSTED_MSG, self.name)
+          gcs_utils.download_gcs_dataset(self.info.full_name, self._data_dir)
+          self.info.read_from_directory(self._data_dir)
+        else:
+          self._download_and_prepare(
+              dl_manager=dl_manager,
+              download_config=download_config)
 
-        # NOTE: If modifying the lines below to put additional information in
-        # DatasetInfo, you'll likely also want to update
-        # DatasetInfo.read_from_directory to possibly restore these attributes
-        # when reading from package data.
+          # NOTE: If modifying the lines below to put additional information in
+          # DatasetInfo, you'll likely also want to update
+          # DatasetInfo.read_from_directory to possibly restore these attributes
+          # when reading from package data.
 
-        # Update the DatasetInfo metadata by computing statistics from the data.
-        if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
-            download_config.compute_stats == download.ComputeStatsMode.AUTO and
-            bool(self.info.splits.total_num_examples)
-           ):
-          logging.info(
-              "Skipping computing stats for mode %s.",
-              download_config.compute_stats)
-        else:  # Mode is forced or stats do not exists yet
-          logging.info("Computing statistics.")
-          self.info.compute_dynamic_properties()
-        self.info.size_in_bytes = dl_manager.downloaded_size
-        # Write DatasetInfo to disk, even if we haven't computed the statistics.
-        self.info.write_to_directory(self._data_dir)
+          # Update DatasetInfo metadata by computing statistics from the data.
+          if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
+              download_config.compute_stats == download.ComputeStatsMode.AUTO
+              and bool(self.info.splits.total_num_examples)
+             ):
+            logging.info(
+                "Skipping computing stats for mode %s.",
+                download_config.compute_stats)
+          else:  # Mode is forced or stats do not exists yet
+            logging.info("Computing statistics.")
+            self.info.compute_dynamic_properties()
+          self.info.size_in_bytes = dl_manager.downloaded_size
+          # Write DatasetInfo to disk, even if we haven't computed statistics.
+          self.info.write_to_directory(self._data_dir)
     self._log_download_done()
 
   @api_utils.disallow_positional_args
@@ -503,18 +505,6 @@ class DatasetBuilder(object):
     if wants_full_dataset:
       return tf.data.experimental.get_single_element(dataset)
     return dataset
-
-  def _maybe_log_gcs_data_dir(self):
-    """If data is on GCS, set _data_dir to GCS path."""
-    if not gcs_utils.is_dataset_on_gcs(self.info.full_name):
-      return
-
-    gcs_path = os.path.join(constants.GCS_DATA_DIR, self.info.full_name)
-    msg = GCS_HOSTED_MSG.format(
-        name=self.name,
-        gcs_path=gcs_path,
-        local_data_dir_no_version=os.path.split(self._data_dir)[0])
-    logging.info(msg)
 
   def _relative_data_dir(self, with_version=True):
     """Relative path of this dataset in data_dir."""
