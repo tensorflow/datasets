@@ -100,13 +100,7 @@ the task into classic multiple-input multiple-output time-series prediction.
 
 class DoublePendulumChaotic(tfds.core.GeneratorBasedBuilder):
   """Double Pendulum Chaotic dataset."""
-  VERSION = tfds.core.Version("1.0.0",
-                              experiments={tfds.core.Experiment.S3: False})
-
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version(
-          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-  ]
+  VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -130,12 +124,11 @@ class DoublePendulumChaotic(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=1,
             gen_kwargs={"dp_files": dp_files}),
     ]
 
   def _generate_examples(self, dp_files, input_size=4, output_size=1):
-    csv_files_path = dp_files+_REL_CSV_PATH
+    csv_files_path = dp_files + _REL_CSV_PATH
     for file_path in glob.glob(csv_files_path):
       with tf.io.gfile.GFile(file_path) as f:
         raw_data = csv.reader(f, quote=csv.QUOTE_NONNUMERIC)

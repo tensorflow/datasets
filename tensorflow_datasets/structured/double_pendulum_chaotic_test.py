@@ -26,15 +26,11 @@ class DoublePendulumChaoticTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = double_pendulum_chaotic.DoublePendulumChaotic
 
   SPLITS = {
-      "train": 10,
+      "train": 12,
   }
   DL_EXTRACT_RESULT = {
       "name1": "/tensorflow_datasets/testing/test_data/fake_examples/double_pendulum_chaotic"
   }
-
-class DoublePendulumChaoticS3Test(DoublePendulumChaoticTest):
-  VERSION = "experimental_latest"
-
 
 if __name__ == "__main__":
   testing.test_main()
