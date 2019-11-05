@@ -72,9 +72,13 @@ billsum/1.0.0
 binarized_mnist/1.0.0
 binary_alpha_digits/1.0.0
 c4/en.noclean/1.0.0
+c4/en.noclean/1.0.1
 c4/en.realnewslike/1.0.0
+c4/en.realnewslike/1.0.1
 c4/en.webtextlike/1.0.0
+c4/en.webtextlike/1.0.1
 c4/en/1.0.0
+c4/en/1.0.1
 caltech101/1.1.0
 caltech101/3.0.0
 caltech_birds2010/0.1.0
