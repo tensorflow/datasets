@@ -120,10 +120,9 @@ def _decode_feature(feature, example, serialized_info, decoder):
   elif sequence_rank == 1:
     # Return a batch of examples from a sequence
     return decoder.decode_batch_example(example)
-  else:
-    raise NotImplementedError(
-        'Nested sequences not supported yet. Got: {}'.format(serialized_info)
-    )
+  elif sequence_rank > 1:
+    # Use ragged tensor if the sequance rank is greater than one
+    return decoder.decode_ragged_example(example)
 
 
 def _get_sequence_rank(serialized_info):

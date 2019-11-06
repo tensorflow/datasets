@@ -489,5 +489,91 @@ class DatasetBuilderReadTest(testing.TestCase):
 
 
 
+
+class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
+  """Dataset containing nested sequences."""
+
+  VERSION = utils.Version("0.0.1")
+
+  def _info(self):
+    return dataset_info.DatasetInfo(
+        builder=self,
+        features=features.FeaturesDict({
+            "frames": features.Sequence({
+                "coordinates": features.Sequence(
+                    features.Tensor(shape=(2,), dtype=tf.int32)
+                ),
+            }),
+        }),
+    )
+
+  def _split_generators(self, dl_manager):
+    # Split the 30 examples from the generator into 2 train shards and 1 test
+    # shard.
+    del dl_manager
+    return [
+        splits_lib.SplitGenerator(
+            name=splits_lib.Split.TRAIN,
+            gen_kwargs={},
+        ),
+    ]
+
+  def _generate_examples(self):
+    ex0 = [
+        [[0, 1], [2, 3], [4, 5]],
+        [],
+        [[6, 7]]
+    ]
+    ex1 = []
+    ex2 = [
+        [[10, 11]],
+        [[12, 13], [14, 15]],
+    ]
+    for i, ex in enumerate([ex0, ex1, ex2]):
+      yield i, {"frames": {"coordinates": ex}}
+
+
+class NestedSequenceBuilderTest(testing.TestCase):
+  """Test of the NestedSequenceBuilder."""
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_nested_sequence(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      ds_train, ds_info = registered.load(
+          name="nested_sequence_builder",
+          data_dir=tmp_dir,
+          split="train",
+          with_info=True,
+          shuffle_files=False)
+      ex0, ex1, ex2 = [
+          ex["frames"]["coordinates"]
+          for ex in dataset_utils.as_numpy(ds_train)
+      ]
+      self.assertAllEqual(ex0, tf.ragged.constant([
+          [[0, 1], [2, 3], [4, 5]],
+          [],
+          [[6, 7]],
+      ], inner_shape=(2,)))
+      self.assertAllEqual(ex1, tf.ragged.constant([], ragged_rank=1))
+      self.assertAllEqual(ex2, tf.ragged.constant([
+          [[10, 11]],
+          [[12, 13], [14, 15]],
+      ], inner_shape=(2,)))
+
+      self.assertEqual(
+          ds_info.features.dtype,
+          {"frames": {"coordinates": tf.int32}},
+      )
+      self.assertEqual(
+          ds_info.features.shape,
+          {"frames": {"coordinates": (None, None, 2)}},
+      )
+      nested_tensor_info = ds_info.features.get_tensor_info()
+      self.assertEqual(
+          nested_tensor_info["frames"]["coordinates"].sequence_rank,
+          2,
+      )
+
+
 if __name__ == "__main__":
   testing.test_main()

@@ -212,6 +212,22 @@ def run_in_graph_and_eager_modes(func=None,
   return decorator
 
 
+class RaggedConstant(object):
+  """Container of tf.ragged.constant values.
+
+  This simple wrapper forward the arguments to delay the RaggedTensor
+  construction after `@run_in_graph_and_eager_modes` has been called.
+  This is required to avoid incompabilities between Graph/eager.
+  """
+
+  def __init__(self, *args, **kwargs):
+    self._args = args
+    self._kwargs = dict(kwargs)
+
+  def build(self):
+    return tf.ragged.constant(*self._args, **self._kwargs)
+
+
 class FeatureExpectationsTestCase(SubTestCase):
   """Tests FeatureExpectations with full encode-decode."""
 
@@ -298,7 +314,11 @@ class FeatureExpectationsTestCase(SubTestCase):
 
         # Assert value
         with self._subTest("out_value"):
-          self.assertAllEqualNested(out_numpy, test.expected)
+          # Eventually construct the tf.RaggedTensor
+          expected = utils.map_nested(
+              lambda t: t.build() if isinstance(t, RaggedConstant) else t,
+              test.expected)
+          self.assertAllEqualNested(out_numpy, expected)
 
 
 def features_encode_decode(features_dict, example, decoders):
