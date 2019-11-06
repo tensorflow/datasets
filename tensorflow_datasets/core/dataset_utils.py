@@ -159,7 +159,7 @@ def _build_ds_from_instruction(instruction, ds_from_file_fn):
 def _eager_dataset_iterator(dataset):
   for item in dataset:
     flat = tf.nest.flatten(item)
-    flat = [el.numpy() for el in flat]
+    flat = [t if isinstance(t, tf.RaggedTensor) else t.numpy() for t in flat]
     yield tf.nest.pack_sequence_as(item, flat)
 
 
@@ -184,6 +184,13 @@ def as_numpy(dataset, graph=None):
   `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
   and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
 
+  Note that because TensorFlow has support for ragged tensors and NumPy has
+  no equivalent representation,
+  [`tf.RaggedTensor`s](https://www.tensorflow.org/api_docs/python/tf/RaggedTensor)
+  are left as-is for the user to deal with them (e.g. using `to_list()`).
+  In TF 1 (i.e. graph mode), `tf.RaggedTensor`s are returned as
+  `tf.ragged.RaggedTensorValue`s.
+
   Args:
     dataset: a possibly nested structure of `tf.data.Dataset`s and/or
       `tf.Tensor`s.
@@ -204,7 +211,9 @@ def as_numpy(dataset, graph=None):
   for ds_el in flat_ds:
     types = [type(el) for el in flat_ds]
     types = tf.nest.pack_sequence_as(nested_ds, types)
-    if not (isinstance(ds_el, tf.Tensor) or tf_compat.is_dataset(ds_el)):
+    if not (
+        isinstance(ds_el, (tf.Tensor, tf.RaggedTensor)) or
+        tf_compat.is_dataset(ds_el)):
       raise ValueError("Arguments to as_numpy must be tf.Tensors or "
                        "tf.data.Datasets. Got: %s" % types)
 
@@ -213,6 +222,8 @@ def as_numpy(dataset, graph=None):
     for ds_el in flat_ds:
       if isinstance(ds_el, tf.Tensor):
         np_el = ds_el.numpy()
+      elif isinstance(ds_el, tf.RaggedTensor):
+        np_el = ds_el
       elif tf_compat.is_dataset(ds_el):
         np_el = _eager_dataset_iterator(ds_el)
       else:
