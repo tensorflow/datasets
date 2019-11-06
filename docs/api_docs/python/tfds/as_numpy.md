@@ -28,6 +28,13 @@ tfds.as_numpy(
 `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
 and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
 
+Note that because TensorFlow has support for ragged tensors and NumPy has no
+equivalent representation,
+[`tf.RaggedTensor`s](https://www.tensorflow.org/api_docs/python/tf/RaggedTensor)
+are left as-is for the user to deal with them (e.g. using `to_list()`). In TF 1
+(i.e. graph mode), `tf.RaggedTensor`s are returned as
+`tf.ragged.RaggedTensorValue`s.
+
 #### Args:
 
 *   <b>`dataset`</b>: a possibly nested structure of `tf.data.Dataset`s and/or

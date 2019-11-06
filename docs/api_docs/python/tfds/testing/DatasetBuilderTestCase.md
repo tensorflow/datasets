@@ -57,7 +57,6 @@
 <meta itemprop="property" content="assertMultiLineEqual"/>
 <meta itemprop="property" content="assertNDArrayNear"/>
 <meta itemprop="property" content="assertNear"/>
-<meta itemprop="property" content="assertNestedListAlmostEqual"/>
 <meta itemprop="property" content="assertNoCommonElements"/>
 <meta itemprop="property" content="assertNotAllClose"/>
 <meta itemprop="property" content="assertNotAllEqual"/>
@@ -74,8 +73,6 @@
 <meta itemprop="property" content="assertNotStartsWith"/>
 <meta itemprop="property" content="assertProtoEquals"/>
 <meta itemprop="property" content="assertProtoEqualsVersion"/>
-<meta itemprop="property" content="assertRaggedAlmostEqual"/>
-<meta itemprop="property" content="assertRaggedEqual"/>
 <meta itemprop="property" content="assertRaises"/>
 <meta itemprop="property" content="assertRaisesOpError"/>
 <meta itemprop="property" content="assertRaisesRegex"/>
@@ -109,7 +106,6 @@
 <meta itemprop="property" content="defaultTestResult"/>
 <meta itemprop="property" content="doCleanups"/>
 <meta itemprop="property" content="enter_context"/>
-<meta itemprop="property" content="eval_to_list"/>
 <meta itemprop="property" content="evaluate"/>
 <meta itemprop="property" content="fail"/>
 <meta itemprop="property" content="failIf"/>
@@ -375,17 +371,20 @@ one of the arguments is of type float16.
 
 <h3 id="assertAllEqual"><code>assertAllEqual</code></h3>
 
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
-source</a>
-
 ```python
 assertAllEqual(
-    d1,
-    d2
+    *args,
+    **kwds
 )
 ```
 
-Same as assertAllEqual but with RaggedTensor support.
+Asserts that two numpy arrays or Tensors have the same values.
+
+#### Args:
+
+*   <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
+*   <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertAllEqualNested"><code>assertAllEqualNested</code></h3>
 
@@ -1164,20 +1163,6 @@ if not.
 * <b>`err`</b>: A float value.
 * <b>`msg`</b>: An optional string message to append to the failure message.
 
-<h3 id="assertNestedListAlmostEqual"><code>assertNestedListAlmostEqual</code></h3>
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
-source</a>
-
-```python
-assertNestedListAlmostEqual(
-    a,
-    b,
-    places=7,
-    context='value'
-)
-```
-
 <h3 id="assertNoCommonElements"><code>assertNoCommonElements</code></h3>
 
 ``` python
@@ -1427,33 +1412,6 @@ assertProtoEqualsVersion(
     msg=None
 )
 ```
-
-<h3 id="assertRaggedAlmostEqual"><code>assertRaggedAlmostEqual</code></h3>
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
-source</a>
-
-```python
-assertRaggedAlmostEqual(
-    a,
-    b,
-    places=7
-)
-```
-
-<h3 id="assertRaggedEqual"><code>assertRaggedEqual</code></h3>
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
-source</a>
-
-```python
-assertRaggedEqual(
-    a,
-    b
-)
-```
-
-Asserts that two potentially ragged tensors are equal.
 
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
@@ -2223,15 +2181,6 @@ unittest runs tests.
 #### Args:
 
 *   <b>`manager`</b>: The context manager to enter.
-
-<h3 id="eval_to_list"><code>eval_to_list</code></h3>
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
-source</a>
-
-```python
-eval_to_list(tensor)
-```
 
 <h3 id="evaluate"><code>evaluate</code></h3>
 
