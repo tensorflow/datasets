@@ -49,7 +49,8 @@ _CITATION = """
 """
 _VERSION = tfds.core.Version(
     "1.0.1", experiments={tfds.core.Experiment.S3: False})
-_SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0")]
+_SUPPORTED_VERSIONS = [
+    tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
 _WET_PATH_URL = "https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"
@@ -137,16 +138,20 @@ class C4(tfds.core.BeamBasedBuilder):
   ]
 
   def _info(self):
+    features = {
+        "text": tfds.features.Text(),
+        "url": tfds.features.Text(),
+    }
+    if self.version > "1.0.0":
+      features.update({
+          "content-type": tfds.features.Text(),
+          "content-length": tfds.features.Text(),
+          "timestamp": tfds.features.Text(),
+      })
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "text": tfds.features.Text(),
-            "url": tfds.features.Text(),
-            "content-type": tfds.features.Text(),
-            "content-length": tfds.features.Text(),
-            "timestamp": tfds.features.Text(),
-        }),
+        features=tfds.features.FeaturesDict(features),
         citation=_CITATION,
         homepage=
         "https://github.com/google-research/text-to-text-transfer-transformer#datasets",
