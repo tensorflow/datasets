@@ -27,6 +27,9 @@ Testing utilities.
 
 [`class FeatureExpectationsTestCase`](../tfds/testing/FeatureExpectationsTestCase.md): Tests FeatureExpectations with full encode-decode.
 
+[`class RaggedConstant`](../tfds/testing/RaggedConstant.md): Container of
+tf.ragged.constant values.
+
 [`class SubTestCase`](../tfds/testing/SubTestCase.md): Adds subTest() context
 manager to the TestCase if supported.
 

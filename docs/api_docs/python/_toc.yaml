@@ -171,6 +171,8 @@ toc:
     path: /datasets/api_docs/python/tfds/testing/mock_data
   - title: mock_kaggle_api
     path: /datasets/api_docs/python/tfds/testing/mock_kaggle_api
+  - title: RaggedConstant
+    path: /datasets/api_docs/python/tfds/testing/RaggedConstant
   - title: rm_tmp_dir
     path: /datasets/api_docs/python/tfds/testing/rm_tmp_dir
   - title: run_in_graph_and_eager_modes

@@ -78,6 +78,7 @@
 *   <a href="./tfds/testing/FeatureExpectationItem.md"><code>tfds.testing.FeatureExpectationItem</code></a>
 *   <a href="./tfds/testing/FeatureExpectationsTestCase.md"><code>tfds.testing.FeatureExpectationsTestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.FeatureExpectationsTestCase.failureException</code></a>
+*   <a href="./tfds/testing/RaggedConstant.md"><code>tfds.testing.RaggedConstant</code></a>
 *   <a href="./tfds/testing/SubTestCase.md"><code>tfds.testing.SubTestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.SubTestCase.failureException</code></a>
 *   <a href="./tfds/testing/TestCase.md"><code>tfds.testing.TestCase</code></a>
