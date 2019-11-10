@@ -206,7 +206,7 @@ def incomplete_dir(dirname):
 def _shuffle_tfrecord(path, random_gen):
   """Shuffle a single record file in memory."""
   # Read all records
-  record_iter = tf.compat.v1.io.tf_record_iterator(path)
+  record_iter = tf.data.TFRecordDataset(path)
   all_records = [
       r for r in utils.tqdm(
           record_iter, desc="Reading...", unit=" examples", leave=False)
