@@ -42,6 +42,7 @@ from tensorflow_datasets.image.colorectal_histology import ColorectalHistologyLa
 from tensorflow_datasets.image.cycle_gan import CycleGAN
 from tensorflow_datasets.image.deep_weeds import DeepWeeds
 from tensorflow_datasets.image.diabetic_retinopathy_detection import DiabeticRetinopathyDetection
+from tensorflow_datasets.image.dmlab import Dmlab
 from tensorflow_datasets.image.downsampled_imagenet import DownsampledImagenet
 from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
