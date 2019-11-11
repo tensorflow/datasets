@@ -23,22 +23,21 @@ _DESCRIPTION = """Automatically identify the boundaries of the car in an image."
 
 _URL = "https://www.kaggle.com/c/carvana-image-masking-challenge"
 
-_CITATION = r"""this dataset does not provide a citation."""
-
+_CITATION = r"this dataset does not provide a citation."
 
 class Carvana(tfds.core.GeneratorBasedBuilder):
     """Carvana Image Masking Challenge."""
 
-    VERSION = tfds.core.Version("1.0.1")
+    VERSION = tfds.core.Version("1.0.0")
 
     def _info(self):
         return tfds.core.DatasetInfo(
             builder=self,
             description=_DESCRIPTION,
             features=tfds.features.FeaturesDict({
-                'image': tfds.features.Image(shape=(None, None, 3), dtype=tf.uint8),
+                'image': tfds.features.Image(shape=(1280, 1920, 3), dtype=tf.uint8),
                 'mask/rle': tfds.features.Sequence(tf.int32),
-                'mask': tfds.features.Image(shape=(1, None, None, 3), dtype=tf.uint8),
+                'mask': tfds.features.Image(shape=(1, 1280, 1920, 3), dtype=tf.uint8),
                 'rotation': tf.uint8,
                 'metadata': {
                     'model': tf.string,
@@ -103,7 +102,9 @@ class Carvana(tfds.core.GeneratorBasedBuilder):
         metadata = self._read_metadata(metadata_file)
         masks_rle = self._read_masks_rle(masks_lre_file)
 
-        for img in tf.io.gfile.listdir(images_dir):
+        images = tf.io.gfile.listdir(images_dir)
+
+        for img in sorted(images):
             name, _ext = os.path.splitext(img)
             id, rotation = name.split('_')
             rotation = int(rotation) - 1
