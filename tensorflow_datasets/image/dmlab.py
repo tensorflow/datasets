@@ -32,7 +32,7 @@ _URL = "https://storage.googleapis.com/akolesnikov-dmlab-tfds/dmlab.tar.gz"
 class Dmlab(tfds.core.GeneratorBasedBuilder):
   """Dmlab dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
