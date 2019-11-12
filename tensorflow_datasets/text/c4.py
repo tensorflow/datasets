@@ -207,7 +207,7 @@ class C4(tfds.core.BeamBasedBuilder):
       file_paths["wet_files"].extend(wet_files)
 
     if self.builder_config.realnewslike or self.builder_config.webtextlike:
-      num_shards = min(1, _DEFAULT_NUM_SHARDS // 10)
+      num_shards = max(1, _DEFAULT_NUM_SHARDS // 10)
     else:
       num_shards = _DEFAULT_NUM_SHARDS
 
