@@ -68,10 +68,10 @@ Finally, you can launch the job using the command below:
 ```sh
 python -m tensorflow_datasets.scripts.download_and_prepare \
   --datasets=$DATASET_NAME \
-  --data_dir=$GCP_BUCKET/tensorflow_datasets \
+  --data_dir=$GCS_BUCKET/tensorflow_datasets \
   --beam_pipeline_options=\
 "runner=DataflowRunner,project=$GCP_PROJECT,job_name=$DATASET_NAME-gen,"\
-"staging_location=$GCP_BUCKET/binaries,temp_location=$GCP_BUCKET/temp,"\
+"staging_location=$GCS_BUCKET/binaries,temp_location=$GCS_BUCKET/temp,"\
 "requirements_file=/tmp/beam_requirements.txt"
 ```
 
