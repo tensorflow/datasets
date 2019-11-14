@@ -19,7 +19,9 @@ import os
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_DESCRIPTION = """Automatically identify the boundaries of the car in an image."""
+_DESCRIPTION = ("Automatically identify the boundaries of the car in an image. "
+                "This data is provided by a competition by Kaggle. "
+                "Both the masks and the polylines are provided in this dataset.")
 
 _URL = "https://www.kaggle.com/c/carvana-image-masking-challenge"
 
