@@ -116,7 +116,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=tfds.core.Version(
-              "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+              "0.0.4", experiments={tfds.core.Experiment.S3: False}),
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES
@@ -222,6 +222,10 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
           tfds.core.lazy_imports.mwparserfromhell.parser.ParserError) as e:
         beam.metrics.Metrics.counter(language, "parser-error").inc()
         logging.error("mwparserfromhell ParseError: %s", e)
+        return
+
+      if not text:
+        beam.metrics.Metrics.counter(language, "empty-clean-examples").inc()
         return
 
       beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
