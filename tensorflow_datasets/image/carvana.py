@@ -25,6 +25,7 @@ _URL = "https://www.kaggle.com/c/carvana-image-masking-challenge"
 
 _CITATION = r"this dataset does not provide a citation."
 
+
 class Carvana(tfds.core.GeneratorBasedBuilder):
     """Carvana Image Masking Challenge."""
 
@@ -80,6 +81,7 @@ class Carvana(tfds.core.GeneratorBasedBuilder):
         metadata = tf.io.gfile.GFile(metadata_file)
         metadata = metadata.readlines()[1:]
         metadata = (m.strip().split(',') for m in metadata)
+        # the [1:-1] is to crop the " at each label
         metadata = {
             id[1:-1]: {'year': year[1:-1],
                        'make': make[1:-1],
