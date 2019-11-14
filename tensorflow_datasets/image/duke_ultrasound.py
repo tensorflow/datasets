@@ -57,10 +57,6 @@ R01-EB026574 and National Institutes of Health under Grant 5T32GM007171-44.
 A usage example is avalible 
 [here](https://colab.research.google.com/drive/1R_ARqpWoiHcUQWg1Fxwyx-ZkLi0IZ5qs)."""
 
-_URLS = [
-    'https://arxiv.org/abs/1908.05782', 'https://github.com/ouwen/mimicknet'
-]
-
 _DATA_URL = {
     'phantom_data': 'https://research.repository.duke.edu/downloads/vt150j912',
     'mark_data': 'https://research.repository.duke.edu/downloads/4x51hj56d'
@@ -113,7 +109,7 @@ class DukeUltrasound(tfds.core.GeneratorBasedBuilder):
             'harmonic': tfds.features.Tensor(shape=(), dtype=tf.bool)
         }),
         supervised_keys=('das/dB', 'dtce'),
-        urls=_URLS,
+        homepage='https://github.com/ouwen/mimicknet',
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
