@@ -21,7 +21,7 @@ A new dataset of image captionannotations, Conceptual Captions, whichcontains an
 
 class GoogleConceptualCaptions(tfds.core.GeneratorBasedBuilder):
     """
-    A new dataset of image captionannotations, Conceptual Captions, whichcontains an order of magnitude more im-ages than the MS-COCO dataset and  represents  a  wider  variety  of both images and image caption styles.
+    A new dataset of image captionannotations, Conceptual Captions, which contains an order of magnitude more images than the MS-COCO dataset and  represents  a  wider  variety  of both images and image caption styles.
     """
 
     VERSION = tfds.core.Version('1.1.0')
@@ -39,7 +39,9 @@ class GoogleConceptualCaptions(tfds.core.GeneratorBasedBuilder):
             citation=_CITATION,
         )
 
+
     def _split_generators(self, dl_manager):
+        """Returns SplitGenerators."""
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
@@ -57,7 +59,9 @@ class GoogleConceptualCaptions(tfds.core.GeneratorBasedBuilder):
             ),
         ]
 
+
     def _generate_examples(self, dataset_path):
+        """Yields examples."""
         with tf.io.gfile.GFile(dataset_path) as tsvfile:
             reader = csv.reader(tsvfile, delimiter='\t')
             for idx, row in enumerate(reader):
