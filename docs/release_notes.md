@@ -15,3 +15,5 @@
     from the [MimickNet paper](https://arxiv.org/abs/1908.05782)
 *   Add Dmlab dataset from the
     [VTAB benchmark](https://arxiv.org/abs/1910.04867).
+*   Add e-SNLI dataset from the paper
+    [e-SNLI](http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf).

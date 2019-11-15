@@ -1,0 +1,2 @@
+pairID,gold_label,Sentence1,Sentence2,Explanation_1,WorkerId,Sentence1_marked_1,Sentence2_marked_1,Sentence1_Highlighted_1,Sentence2_Highlighted_1
+1d,entailment,A woman smiles at the child.,A woman is present.,A woman must be present to smile.,xyz,A woman *smiles* at the child.,A woman is *present*,{},"1,2,3"
