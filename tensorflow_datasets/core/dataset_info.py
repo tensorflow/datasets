@@ -139,9 +139,8 @@ class DatasetInfo(object):
             **redistribution_info) if redistribution_info else None)
 
     if urls:  # TODO(epot):Delete field once every user have been migrated
-      if isinstance(urls, six.string_types):
-        urls = [urls]
-      homepage = urls[0]
+      raise ValueError("`urls=` field is deprecated. Please use "
+                       "`homepage='{}'` instead.".format(urls[0]))
     if homepage:
       self._info_proto.location.urls[:] = [homepage]
 
