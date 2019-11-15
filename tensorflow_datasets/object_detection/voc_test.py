@@ -41,5 +41,28 @@ class Voc2012Test(Voc2007Test):
   BUILDER_CONFIG_NAMES_TO_TEST = ['2012']
 
 
+class Voc2007SegmentationTest(Voc2007Test):
+  BUILDER_CONFIG_NAMES_TO_TEST = ['2007-segmentation']
+
+
+class Voc2012SegmentationTest(Voc2007Test):
+  BUILDER_CONFIG_NAMES_TO_TEST = ['2012-segmentation']
+
+  SPLITS = {
+      'train': 1,
+      'validation': 2,
+      # Of the three ids in the fake SBD train split, two are in 'train' or
+      # 'validation' already, so we expect those to be filtered out and
+      # 'sbd_train' to have length one.
+      'sbd_train': 1,
+      'sbd_validation': 2,
+  }
+  DL_EXTRACT_RESULT = {
+      'trainval': '',
+      'test': '',
+      'sbd': '',
+  }
+
+
 if __name__ == '__main__':
   testing.test_main()
