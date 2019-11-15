@@ -52,9 +52,8 @@ def arc_dir(name):
 
 def make_image_data():
   size = np.random.randint(30, size=2) + 1
-  img = np.random.randint(10 + 1, size=size[0]*size[1]).reshape(size) - 1
-  return [[value if value != -1 else None for value in row]
-          for row in img.tolist()]
+  img = np.random.randint(10, size=size[0]*size[1]).reshape(size)
+  return img.tolist()
 
 
 def make_pair():

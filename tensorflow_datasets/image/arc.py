@@ -72,15 +72,15 @@ class ARC(tfds.core.GeneratorBasedBuilder):
             # Images are of varying size
             "task_id": tfds.features.Text(),
             "train": tfds.features.Sequence({
-                "input": tfds.features.Tensor(shape=(30, 30), dtype=tf.int8),
+                "input": tfds.features.Tensor(shape=(30, 30), dtype=tf.uint8),
                 "input_size": tfds.features.Tensor(shape=(2,), dtype=tf.uint8),
-                "output": tfds.features.Tensor(shape=(30, 30), dtype=tf.int8),
+                "output": tfds.features.Tensor(shape=(30, 30), dtype=tf.uint8),
                 "output_size": tfds.features.Tensor(shape=(2,), dtype=tf.uint8),
             }),
             "test": tfds.features.Sequence({
-                "input": tfds.features.Tensor(shape=(30, 30), dtype=tf.int8),
+                "input": tfds.features.Tensor(shape=(30, 30), dtype=tf.uint8),
                 "input_size": tfds.features.Tensor(shape=(2,), dtype=tf.uint8),
-                "output": tfds.features.Tensor(shape=(30, 30), dtype=tf.int8),
+                "output": tfds.features.Tensor(shape=(30, 30), dtype=tf.uint8),
                 "output_size": tfds.features.Tensor(shape=(2,), dtype=tf.uint8),
             })
         }),
@@ -119,12 +119,15 @@ class ARC(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _to_image(self, data):
-      img = np.full(shape=[30, 30], fill_value=-1, dtype=np.int8)
+      img = np.zeros(shape=[30, 30], dtype=np.uint8)
       height = len(data)
       width = len(data[0])
       for index, row in enumerate(data):
           width = max(width, len(row))
-          img[index, :len(row)] = [value if value is not None else -1
+          # Temporary hack to replace null values with 5 (gray).
+          # See https://github.com/fchollet/ARC/pull/2
+          #                              vvvvvvvvvvvvvvvvvvvvvvvvvvv
+          img[index, :len(row)] = [value if value is not None else 5
                                    for value in row]
       return img, np.array([height, width], dtype=np.uint8)
 
