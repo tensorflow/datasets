@@ -89,7 +89,7 @@ class ARC(tfds.core.GeneratorBasedBuilder):
         # builder.as_dataset.
         supervised_keys=None,
         # Homepage of the dataset for documentation
-        urls=[_BASE_URL],
+        homepage=_BASE_URL,
         citation=_CITATION,
     )
 
@@ -147,7 +147,7 @@ class ARC(tfds.core.GeneratorBasedBuilder):
     for json_path in sorted(json_filepaths):
         with tf.io.gfile.GFile(json_path) as f:
             task = json.load(f)
-        task_id = json_path[:-len(".json")]
+        task_id = os.path.basename(json_path)[:-len(".json")]
         yield task_id, {
             "task_id": task_id,
             "train": self._prepare_pairs(task["train"]),
