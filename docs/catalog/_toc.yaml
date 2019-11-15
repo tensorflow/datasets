@@ -62,6 +62,8 @@ toc:
     title: deep_weeds
   - path: /datasets/catalog/diabetic_retinopathy_detection
     title: diabetic_retinopathy_detection
+  - path: /datasets/catalog/dmlab
+    title: dmlab
   - path: /datasets/catalog/downsampled_imagenet
     title: downsampled_imagenet
   - path: /datasets/catalog/dsprites
@@ -212,6 +214,8 @@ toc:
     title: imdb_reviews
   - path: /datasets/catalog/lm1b
     title: lm1b
+  - path: /datasets/catalog/math_dataset
+    title: math_dataset
   - path: /datasets/catalog/multi_nli
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch

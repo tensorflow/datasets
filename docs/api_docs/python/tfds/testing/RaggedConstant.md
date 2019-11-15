@@ -18,7 +18,6 @@ source</a>
 ## Class `RaggedConstant`
 
 <!-- Start diff -->
-
 Container of tf.ragged.constant values.
 
 <!-- Placeholder for "Used in" -->
