@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
+from tensorflow_datasets.image.arc import ARC
 from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
