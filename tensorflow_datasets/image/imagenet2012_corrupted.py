@@ -23,7 +23,6 @@ from __future__ import print_function
 from absl import logging
 import numpy as np
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.image import corruptions
 from tensorflow_datasets.image.imagenet import Imagenet2012
 import tensorflow_datasets.public_api as tfds
@@ -80,7 +79,7 @@ EXTRA_CORRUPTIONS = ['gaussian_blur', 'saturate', 'spatter', 'speckle_noise']
 class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Imagenet2012Corrupted."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, corruption_type=None, severity=1, **kwargs):
     """BuilderConfig for Imagenet2012Corrupted.
 
@@ -98,13 +97,10 @@ class Imagenet2012CorruptedConfig(tfds.core.BuilderConfig):
 _VERSION = tfds.core.Version(
     '0.0.1', experiments={tfds.core.Experiment.S3: False})
 _SUPPORTED_VERSIONS = [
-    # Will be made canonical in near future.
-    tfds.core.Version('3.0.1'),
+    tfds.core.Version('3.0.1', (
+        'New split API (https://tensorflow.org/datasets/splits); fix colorization (all RGB) and '
+        'format (all jpeg); use TAR_STREAM.')),
 ]
-# Version history:
-# 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
-#        (jump to match imagenet version).
-# 0.0.1: Initial dataset.
 
 
 def _make_builder_configs():
@@ -154,7 +150,7 @@ class Imagenet2012Corrupted(Imagenet2012):
             'file_name': tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://openreview.net/forum?id=HJz6tiCqYm'],
+        homepage='https://openreview.net/forum?id=HJz6tiCqYm',
         citation=_CITATION,
     )
 

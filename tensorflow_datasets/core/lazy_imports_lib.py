@@ -30,9 +30,10 @@ def _try_import(module_name):
     mod = importlib.import_module(module_name)
     return mod
   except ImportError:
-    err_msg = ("Tried importing %s but failed. See setup.py extras_require. "
-               "The dataset you are trying to use may have additional "
-               "dependencies.")
+    err_msg = ("Failed importing {name}. This likely means that the dataset "
+               "requires additional dependencies that have to be "
+               "manually installed (usually with `pip install {name}`). See "
+               "setup.py extras_require.").format(name=module_name)
     utils.reraise(suffix=err_msg)
 
 
@@ -51,13 +52,23 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def crepe(cls):
+    return _try_import("crepe")
+
+  @utils.classproperty
+  @classmethod
   def cv2(cls):
     return _try_import("cv2")  # pylint: disable=unreachable
 
   @utils.classproperty
   @classmethod
-  def pydub(cls):
-    return _try_import("pydub")
+  def langdetect(cls):
+    return _try_import("langdetect")
+
+  @utils.classproperty
+  @classmethod
+  def librosa(cls):
+    return _try_import("librosa")
 
   @utils.classproperty
   @classmethod
@@ -68,6 +79,11 @@ class LazyImporter(object):
   @classmethod
   def mwparserfromhell(cls):
     return _try_import("mwparserfromhell")
+
+  @utils.classproperty
+  @classmethod
+  def nltk(cls):
+    return _try_import("nltk")
 
   @utils.classproperty
   @classmethod
@@ -89,6 +105,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def pydub(cls):
+    return _try_import("pydub")
+
+  @utils.classproperty
+  @classmethod
   def scipy(cls):
     _try_import("scipy.io")
     _try_import("scipy.ndimage")
@@ -101,6 +122,11 @@ class LazyImporter(object):
     _try_import("skimage.filters")
     _try_import("skimage.external.tifffile")
     return _try_import("skimage")
+
+  @utils.classproperty
+  @classmethod
+  def tldextract(cls):
+    return _try_import("tldextract")
 
   @utils.classproperty
   @classmethod

@@ -1,6 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="__version__"/>
 </div>
 
 # Module: tfds
@@ -13,8 +14,6 @@ source</a>
 
 `tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a
 collection of datasets ready-to-use with TensorFlow.
-
-<!-- Placeholder for "Used in" -->
 
 Each dataset is defined as a <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>, which encapsulates
 the logic to download the dataset and construct an input pipeline, as well as
@@ -29,9 +28,9 @@ The main library entrypoints are:
 #### Documentation:
 
 *   These API docs
-*   [Available datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
+*   [Available datasets](https://www.tensorflow.org/datasets/catalog/overview)
 *   [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-*   [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+*   [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
 
 ## Modules
 
@@ -76,3 +75,7 @@ available on the GCS bucket gs://tfds-data/datasets.
 
 [`show_examples(...)`](./tfds/show_examples.md): Visualize images (and labels)
 from an image classification dataset.
+
+## Other Members
+
+*   `__version__ = '1.3.0'` <a id="__version__"></a>

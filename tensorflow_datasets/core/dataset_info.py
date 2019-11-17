@@ -48,6 +48,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
@@ -66,7 +67,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
     version={version},
     description='{description}',
-    urls={urls},
+    homepage='{homepage}',
     features={features},
     total_num_examples={total_num_examples},
     splits={splits},
@@ -97,6 +98,7 @@ class DatasetInfo(object):
                description=None,
                features=None,
                supervised_keys=None,
+               homepage=None,
                urls=None,
                citation=None,
                metadata=None,
@@ -115,7 +117,8 @@ class DatasetInfo(object):
         `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
         with `as_supervised=True`, the `tf.data.Dataset` object will yield
         the (input, target) defined here.
-      urls: `list(str)`, optional, the homepage(s) for this dataset.
+      homepage: `str`, optional, the homepage for this dataset.
+      urls: DEPRECATED, use `homepage` instead.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
         stored/restored with the dataset. This allows for storing additional
@@ -134,10 +137,12 @@ class DatasetInfo(object):
         citation=citation,
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             **redistribution_info) if redistribution_info else None)
-    if urls:
-      if isinstance(urls, six.string_types):
-        urls = [urls]
-      self._info_proto.location.urls[:] = urls
+
+    if urls:  # TODO(epot):Delete field once every user have been migrated
+      raise ValueError("`urls=` field is deprecated. Please use "
+                       "`homepage='{}'` instead.".format(urls[0]))
+    if homepage:
+      self._info_proto.location.urls[:] = [homepage]
 
     if features:
       if not isinstance(features, top_level_feature.TopLevelFeature):
@@ -186,6 +191,13 @@ class DatasetInfo(object):
   @property
   def version(self):
     return self._builder.version
+
+  @property
+  def homepage(self):
+    urls = self.as_proto.location.urls
+    tfds_homepage = "https://www.tensorflow.org/datasets/catalog/{}".format(
+        self.name)
+    return urls and urls[0] or tfds_homepage
 
   @property
   def citation(self):
@@ -254,10 +266,6 @@ class DatasetInfo(object):
     del self.as_proto.splits[:]  # Clear previous
     for split_info in split_dict.to_proto():
       self.as_proto.splits.add().CopyFrom(split_info)
-
-  @property
-  def urls(self):
-    return self.as_proto.location.urls
 
   @property
   def initialized(self):
@@ -428,7 +436,7 @@ class DatasetInfo(object):
         features=features_pprint,
         splits=splits_pprint,
         citation=citation_pprint,
-        urls=self.urls,
+        homepage=self.homepage,
         supervised_keys=self.supervised_keys,
         # Proto add a \n that we strip.
         redistribution_info=str(self.redistribution_info).strip())
@@ -540,8 +548,8 @@ def get_dataset_feature_statistics(builder, split):
 
   # Start here, we've processed all examples.
 
-  output_shapes_dict = dataset.output_shapes
-  output_types_dict = dataset.output_types
+  output_shapes_dict = tf.compat.v1.data.get_output_shapes(dataset)
+  output_types_dict = tf.compat.v1.data.get_output_types(dataset)
 
   for feature_name in sorted(feature_to_num_examples.keys()):
     # Try to fill in the schema.
@@ -577,8 +585,10 @@ def get_dataset_feature_statistics(builder, split):
 
     if feature.type == schema_pb2.INT or feature.type == schema_pb2.FLOAT:
       numeric_statistics = statistics_pb2.NumericStatistics()
-      numeric_statistics.min = feature_to_min[feature_name]
-      numeric_statistics.max = feature_to_max[feature_name]
+      # Uses `.get` as Sequence(int) containing only empty array won't contains
+      # any value.
+      numeric_statistics.min = feature_to_min.get(feature_name, 0)
+      numeric_statistics.max = feature_to_max.get(feature_name, 0)
       numeric_statistics.common_stats.CopyFrom(common_statistics)
       feature_name_statistics.num_stats.CopyFrom(numeric_statistics)
     else:
@@ -645,3 +655,57 @@ class MetadataDict(Metadata, dict):
     self.clear()
     with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
       self.update(json.load(f))
+
+
+class BeamMetadataDict(MetadataDict):
+  """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
+
+  def __init__(self):
+    super(BeamMetadataDict, self).__init__()
+    self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
+
+  def _temp_filepath(self, key):
+    return os.path.join(self._tempdir, "%s.json" % key)
+
+  def __setitem__(self, key, item):
+    """Creates write sink for beam PValues or sets value of key in `dict`.
+
+    If the item is a PValue, it is expected to contain exactly one element,
+    which will be written out as a temporary JSON file once the beam pipeline
+    runs. These outputs will be loaded and stored in a single JSON when
+    `save_metadata` is called after the pipeline completes.
+
+    Args:
+      key: hashable type, the key for the item.
+      item: `beam.pvalue.PValue` or other, the metadata value.
+    """
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    if isinstance(item, beam.pvalue.PValue):
+      if key in self:
+        raise ValueError("Already added PValue with key: %s" % key)
+      logging.info("Lazily adding metadata item with Beam: %s", key)
+      def _to_json(item_list):
+        if len(item_list) != 1:
+          raise ValueError(
+              "Each metadata PValue must contain a single element. Got %d." %
+              len(item_list))
+        item = item_list[0]
+        return json.dumps(item)
+      _ = (item
+           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
+           | "metadata_%s_tojson" % key >> beam.Map(_to_json)
+           | "metadata_%s_write" % key >> beam.io.WriteToText(
+               self._temp_filepath(key),
+               num_shards=1,
+               shard_name_template=""))
+    super(BeamMetadataDict, self).__setitem__(key, item)
+
+  def save_metadata(self, data_dir):
+    """Save the metadata inside the beam job."""
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    for key, item in self.items():
+      if isinstance(item, beam.pvalue.PValue):
+        with tf.io.gfile.GFile(self._temp_filepath(key), "r") as f:
+          self[key] = json.load(f)
+    tf.io.gfile.rmtree(self._tempdir)
+    super(BeamMetadataDict, self).save_metadata(data_dir)

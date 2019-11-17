@@ -67,18 +67,15 @@ _CATEGORIES = [
 class Lsun(tfds.core.GeneratorBasedBuilder):
   """Lsun dataset."""
 
-  # Version history:
-  # 3.0.0: S3 with new hashing function (different shuffle).
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version=tfds.core.Version(
-              "0.1.1", {tfds.core.Experiment.S3: False}),
+          version=tfds.core.Version("0.1.1", {tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version("3.0.0"),
-              tfds.core.Version("2.0.0"),
+              tfds.core.Version(
+                  "3.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
           ],
       ) for category in _CATEGORIES
   ]
@@ -91,7 +88,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format="jpeg"),
         }),
-        urls=["https://www.yf.io/p/lsun"],
+        homepage="https://www.yf.io/p/lsun",
         citation=_CITATION,
     )
 

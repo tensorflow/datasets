@@ -7,6 +7,7 @@
 <meta itemprop="property" content="description"/>
 <meta itemprop="property" content="features"/>
 <meta itemprop="property" content="full_name"/>
+<meta itemprop="property" content="homepage"/>
 <meta itemprop="property" content="initialized"/>
 <meta itemprop="property" content="metadata"/>
 <meta itemprop="property" content="name"/>
@@ -14,7 +15,6 @@
 <meta itemprop="property" content="size_in_bytes"/>
 <meta itemprop="property" content="splits"/>
 <meta itemprop="property" content="supervised_keys"/>
-<meta itemprop="property" content="urls"/>
 <meta itemprop="property" content="version"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="compute_dynamic_properties"/>
@@ -26,6 +26,8 @@
 
 # tfds.core.DatasetInfo
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -34,6 +36,7 @@ source</a>
 
 ## Class `DatasetInfo`
 
+<!-- Start diff -->
 Information about a dataset.
 
 <!-- Placeholder for "Used in" -->
@@ -57,6 +60,7 @@ __init__(
     description=None,
     features=None,
     supervised_keys=None,
+    homepage=None,
     urls=None,
     citation=None,
     metadata=None,
@@ -81,7 +85,8 @@ Constructs DatasetInfo.
     <a href="../../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset()</code></a>
     with `as_supervised=True`, the `tf.data.Dataset` object will yield the
     (input, target) defined here.
-*   <b>`urls`</b>: `list(str)`, optional, the homepage(s) for this dataset.
+*   <b>`homepage`</b>: `str`, optional, the homepage for this dataset.
+*   <b>`urls`</b>: DEPRECATED, use `homepage` instead.
 *   <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
 *   <b>`metadata`</b>:
     <a href="../../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>,
@@ -108,6 +113,8 @@ Constructs DatasetInfo.
 
 Full canonical name: (<dataset_name>/<config_name>/<version>).
 
+<h3 id="homepage"><code>homepage</code></h3>
+
 <h3 id="initialized"><code>initialized</code></h3>
 
 Whether DatasetInfo has been fully initialized.
@@ -123,8 +130,6 @@ Whether DatasetInfo has been fully initialized.
 <h3 id="splits"><code>splits</code></h3>
 
 <h3 id="supervised_keys"><code>supervised_keys</code></h3>
-
-<h3 id="urls"><code>urls</code></h3>
 
 <h3 id="version"><code>version</code></h3>
 

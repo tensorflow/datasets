@@ -22,7 +22,6 @@ from __future__ import print_function
 import os
 
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -62,7 +61,7 @@ _VALID_LANGUAGE_PAIRS = (
 class TedHrlrConfig(tfds.core.BuilderConfig):
   """BuilderConfig for TED talk data comparing high/low resource languages."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, language_pair=(None, None), **kwargs):
     """BuilderConfig for TED talk data comparing high/low resource languages.
 
@@ -103,9 +102,15 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk data set for comparing high and low resource languages."""
 
   BUILDER_CONFIGS = [
-      TedHrlrConfig(language_pair=pair, version=tfds.core.Version(
-          "0.0.1", experiments={tfds.core.Experiment.S3: False}))
-      for pair in _VALID_LANGUAGE_PAIRS
+      TedHrlrConfig(  # pylint: disable=g-complex-comprehension
+          language_pair=pair,
+          version=tfds.core.Version(
+              "0.0.1", experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version(
+                  "1.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
+          ]) for pair in _VALID_LANGUAGE_PAIRS
   ]
 
   def _info(self):
@@ -114,7 +119,7 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.Translation(
             languages=self.builder_config.language_pair),
-        urls=["https://github.com/neulab/word-embeddings-for-nmt"],
+        homepage="https://github.com/neulab/word-embeddings-for-nmt",
         supervised_keys=self.builder_config.language_pair,
         citation=_CITATION,
     )
@@ -170,8 +175,9 @@ class TedHrlrTranslate(tfds.core.GeneratorBasedBuilder):
             source_sentences), len(target_sentences), source_file, target_file)
 
     source, target = self.builder_config.language_pair
-    for l1, l2 in zip(source_sentences, target_sentences):
+    for idx, (l1, l2) in enumerate(
+        zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):
-        yield result
+        yield idx, result

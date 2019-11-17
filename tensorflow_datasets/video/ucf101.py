@@ -23,7 +23,6 @@ import os
 
 from absl import logging
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 UCF_101_URL = 'https://storage.googleapis.com/thumos14_files/UCF101_videos.zip'
@@ -55,7 +54,7 @@ _LABELS_FNAME = 'video/ucf101_labels.txt'
 class Ucf101Config(tfds.core.BuilderConfig):
   """"Configuration for UCF101 split and possible video rescaling."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, split_number, width=None, height=None, **kwargs):
     """The parameters specifying how the dataset will be processed.
 
@@ -97,6 +96,33 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               '1.0.0', experiments={tfds.core.Experiment.S3: False}),
       ),
+      Ucf101Config(
+          name='ucf101_1',
+          description='UCF with the action recognition split #1.',
+          width=None,
+          height=None,
+          split_number=1,
+          version=tfds.core.Version(
+              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+      ),
+      Ucf101Config(
+          name='ucf101_2',
+          description='UCF with the action recognition split #2.',
+          width=None,
+          height=None,
+          split_number=2,
+          version=tfds.core.Version(
+              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+      ),
+      Ucf101Config(
+          name='ucf101_3',
+          description='UCF with the action recognition split #3.',
+          width=None,
+          height=None,
+          split_number=3,
+          version=tfds.core.Version(
+              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+      ),
   ]
 
   def _info(self):
@@ -122,7 +148,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description='A 101-label video classification dataset.',
         features=features,
-        urls=['https://www.crcv.ucf.edu/data/UCF101.php'],
+        homepage='https://www.crcv.ucf.edu/data/UCF101.php',
         citation=_CITATION,
     )
 

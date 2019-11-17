@@ -82,12 +82,11 @@ class GrooveConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version(
             "1.0.0", experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("2.0.0"),
+            tfds.core.Version(
+                "2.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
         ],
         **kwargs)
-    # Version history:
-    # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 1.0.0: Initial version.
     self.split_bars = split_bars
     self.include_audio = include_audio
     self.audio_rate = audio_rate
@@ -144,7 +143,7 @@ class Groove(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(features_dict),
-        urls=["https://g.co/magenta/groove-dataset"],
+        homepage="https://g.co/magenta/groove-dataset",
         citation=_CITATION,
     )
 
@@ -248,4 +247,3 @@ def _load_wav(path, sample_rate):
   # Convert from int to float representation.
   audio /= 2**(8 * audio_segment.sample_width)
   return audio
-

@@ -47,8 +47,10 @@ original DCIM files and converted them to PNG.
 The following commands (or equivalent) should be used to generate the PNG files,
 in order to guarantee reproducible results:
 
+```
   find $DATASET_DCIM_DIR -name '*.dcm' | \\
   xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
+```
 """
 
 _CITATION = """\
@@ -121,8 +123,8 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
     kwargs['supported_versions'] = [
-        tfds.core.Version('2.0.0'),
-        tfds.core.Version('1.0.0'),
+        tfds.core.Version(
+            '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
     ]
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
@@ -170,7 +172,8 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=features_fn_map[self.builder_config.name](),
-        urls=['https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM'],
+        homepage=
+        'https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM',
         citation=_CITATION)
 
   def _get_features_original_base(self):

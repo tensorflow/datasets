@@ -51,12 +51,9 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0"),
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 3.0.0: S3 with new hashing function (different shuffle).
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -80,7 +77,7 @@ class CLEVR(tfds.core.GeneratorBasedBuilder):
                                                      dtype=tf.float32),
             })
         }),
-        urls=[_BASE_URL],
+        homepage=_BASE_URL,
         citation=_CITATION,
     )
 

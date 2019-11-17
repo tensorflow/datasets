@@ -6,6 +6,8 @@
 
 # tfds.download.DownloadConfig
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -13,6 +15,8 @@
 source</a>
 
 ## Class `DownloadConfig`
+
+<!-- Start diff -->
 
 Configuration for
 <a href="../../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.
@@ -25,7 +29,7 @@ Configuration for
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
-``` python
+```python
 __init__(
     extract_dir=None,
     manual_dir=None,
@@ -34,7 +38,8 @@ __init__(
     max_examples_per_split=None,
     register_checksums=False,
     beam_runner=None,
-    beam_options=None
+    beam_options=None,
+    try_download_gcs=True
 )
 ```
 
@@ -61,3 +66,6 @@ Constructs a `DownloadConfig`.
     datasets based on Beam for the generation.
 *   <b>`beam_options`</b>: `PipelineOptions` to pass to `beam.Pipeline`, only
     used for datasets based on Beam for the generation.
+*   <b>`try_download_gcs`</b>: `bool`, defaults to True. If True, prepared
+    dataset will be downloaded from GCS, when available. If False, dataset will
+    be downloaded and prepared from scratch.

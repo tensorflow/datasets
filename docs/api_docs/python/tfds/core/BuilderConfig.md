@@ -10,6 +10,8 @@
 
 # tfds.core.BuilderConfig
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -18,6 +20,7 @@ source</a>
 
 ## Class `BuilderConfig`
 
+<!-- Start diff -->
 Base class for `DatasetBuilder` data configuration.
 
 <!-- Placeholder for "Used in" -->

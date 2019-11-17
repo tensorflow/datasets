@@ -24,7 +24,6 @@ import numpy as np
 from six.moves import urllib
 import tensorflow as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # MNIST constants
@@ -99,12 +98,8 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0"),
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version("3.0.0", "S3: www.tensorflow.org/datasets/splits"),
   ]
-  # Version history:
-  # 3.0.0: S3 with new hashing function (different shuffle).
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -115,7 +110,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=MNIST_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
-        urls=[self.URL],
+        homepage="http://yann.lecun.com/exdb/mnist/",
         citation=_MNIST_CITATION,
     )
 
@@ -198,7 +193,7 @@ class FashionMNIST(MNIST):
                 ]),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://github.com/zalandoresearch/fashion-mnist"],
+        homepage="https://github.com/zalandoresearch/fashion-mnist",
         citation=_FASHION_MNIST_CITATION,
     )
 
@@ -227,7 +222,7 @@ class KMNIST(MNIST):
                 ]),
         }),
         supervised_keys=("image", "label"),
-        urls=["http://codh.rois.ac.jp/kmnist/index.html.en"],
+        homepage="http://codh.rois.ac.jp/kmnist/index.html.en",
         citation=_K_MNIST_CITATION,
     )
 
@@ -235,7 +230,7 @@ class KMNIST(MNIST):
 class EMNISTConfig(tfds.core.BuilderConfig):
   """BuilderConfig for EMNIST CONFIG."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, class_number, train_examples, test_examples, **kwargs):
     """BuilderConfig for EMNIST class number.
 
@@ -250,8 +245,9 @@ class EMNISTConfig(tfds.core.BuilderConfig):
         version=tfds.core.Version(
             "1.0.1", experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("3.0.0"),
-            tfds.core.Version("2.0.0"),
+            tfds.core.Version(
+                "3.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
         ],
         **kwargs)
     self.class_number = class_number
@@ -317,7 +313,11 @@ class EMNIST(MNIST):
             "The EMNIST dataset is a set of handwritten character digits "
             "derived from the NIST Special Database 19 and converted to "
             "a 28x28 pixel image format and dataset structure that directly "
-            "matches the MNIST dataset."),
+            "matches the MNIST dataset.\n\n"
+            "Note: Like the original EMNIST data, images provided here are "
+            "inverted horizontally and rotated 90 anti-clockwise. You can use "
+            "`tf.transpose` within `ds.map` to convert the images to a "
+            "human-friendlier format."),
         features=tfds.features.FeaturesDict({
             "image":
                 tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
@@ -326,7 +326,7 @@ class EMNIST(MNIST):
                     num_classes=self.builder_config.class_number),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.nist.gov/node/1298471/emnist-dataset"],
+        homepage="https://www.nist.gov/node/1298471/emnist-dataset",
         citation=_EMNIST_CITATION,
     )
 

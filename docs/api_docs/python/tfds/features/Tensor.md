@@ -4,7 +4,9 @@
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="decode_ragged_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
@@ -14,6 +16,8 @@
 
 # tfds.features.Tensor
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -22,6 +26,7 @@ source</a>
 
 ## Class `Tensor`
 
+<!-- Start diff -->
 `FeatureConnector` for generic data of arbitrary shape and type.
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
@@ -55,6 +60,17 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
 
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_batch_example(example_data)
+```
+
+See base class for details.
+
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
@@ -80,6 +96,17 @@ graph (in `tf.data.Dataset.map(features.decode_example)`).
 
 *   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
     tf.data.Dataset object
+
+<h3 id="decode_ragged_example"><code>decode_ragged_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_ragged_example(example_data)
+```
+
+See base class for details.
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 

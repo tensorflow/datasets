@@ -49,15 +49,10 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.1.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0"),
-      tfds.core.Version("2.1.0"),
-      tfds.core.Version("2.0.0"),
-      tfds.core.Version("1.2.0"),
+      tfds.core.Version(
+          "3.0.0", ("New split API (https://tensorflow.org/datasets/splits);"
+                    "additon of segmentation_mask feature.")),
   ]
-  # Version history:
-  # 3.0.0: S3 with new hashing function (different shuffle).
-  # 2.1.0, 1.2.0: addition of the segmentation_mask feature.
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -70,7 +65,7 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
             "segmentation_mask": tfds.features.Image(shape=(None, None, 1))
         }),
         supervised_keys=("image", "label"),
-        urls=["http://www.robots.ox.ac.uk/~vgg/data/pets/"],
+        homepage="http://www.robots.ox.ac.uk/~vgg/data/pets/",
         citation=_CITATION,
     )
 
@@ -81,10 +76,10 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
     # archives format is uncompressed tar.
     dl_paths = dl_manager.download_and_extract({
         "images": tfds.download.Resource(
-            url=os.path.join(_BASE_URL, "images.tar.gz"),
+            url=_BASE_URL + "/images.tar.gz",
             extract_method=tfds.download.ExtractMethod.TAR),
         "annotations": tfds.download.Resource(
-            url=os.path.join(_BASE_URL, "annotations.tar.gz"),
+            url=_BASE_URL + "/annotations.tar.gz",
             extract_method=tfds.download.ExtractMethod.TAR)
     })
 

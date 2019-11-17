@@ -5,9 +5,12 @@
 <meta itemprop="property" content="xmin"/>
 <meta itemprop="property" content="ymax"/>
 <meta itemprop="property" content="xmax"/>
+<meta itemprop="property" content="__new__"/>
 </div>
 
 # tfds.features.BBox
+
+<!-- Insert buttons -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -17,9 +20,25 @@ source</a>
 
 ## Class `BBox`
 
+<!-- Start diff -->
 BBox(ymin, xmin, ymax, xmax)
 
 <!-- Placeholder for "Used in" -->
+
+<h2 id="__new__"><code>__new__</code></h2>
+
+```python
+@staticmethod
+__new__(
+    _cls,
+    ymin,
+    xmin,
+    ymax,
+    xmax
+)
+```
+
+Create new instance of BBox(ymin, xmin, ymax, xmax)
 
 ## Properties
 

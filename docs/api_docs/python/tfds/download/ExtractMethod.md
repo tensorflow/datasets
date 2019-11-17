@@ -13,6 +13,8 @@
 
 # tfds.download.ExtractMethod
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -21,6 +23,7 @@ source</a>
 
 ## Class `ExtractMethod`
 
+<!-- Start diff -->
 The extraction method to use to pre-process a downloaded file.
 
 <!-- Placeholder for "Used in" -->

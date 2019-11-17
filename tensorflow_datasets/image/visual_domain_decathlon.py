@@ -60,7 +60,7 @@ class VisualDomainDecathlonConfig(tfds.core.BuilderConfig):
   def __init__(self, num_classes, **kwargs):
     self.num_classes = num_classes
     if 'version' not in kwargs:
-      kwargs['version'] = tfds.core.Version('1.0.0')
+      kwargs['version'] = tfds.core.Version('1.1.0')
     super(VisualDomainDecathlonConfig, self).__init__(**kwargs)
 
 
@@ -103,7 +103,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
             'label': tfds.features.ClassLabel(num_classes=num_classes),
         }),
         supervised_keys=('image', 'label'),
-        urls=['https://www.robots.ox.ac.uk/~vgg/decathlon/'],
+        homepage='https://www.robots.ox.ac.uk/~vgg/decathlon/',
         citation=_CITATION,
     )
 
@@ -157,7 +157,6 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
         path=images_archive, method=tfds.download.ExtractMethod.TAR_STREAM):
       if image_fname in filename_to_label:
         label = filename_to_label[image_fname]
-        label = label or -1  # Note: No labels for test images.
         example = {
             'name': image_fname,
             'image': image_fobj,

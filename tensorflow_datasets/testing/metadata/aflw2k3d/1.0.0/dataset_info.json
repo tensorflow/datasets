@@ -1,0 +1,106 @@
+{
+  "citation": "@article{DBLP:journals/corr/ZhuLLSL15,\n  author    = {Xiangyu Zhu and\n               Zhen Lei and\n               Xiaoming Liu and\n               Hailin Shi and\n               Stan Z. Li},\n  title     = {Face Alignment Across Large Poses: {A} 3D Solution},\n  journal   = {CoRR},\n  volume    = {abs/1511.07212},\n  year      = {2015},\n  url       = {http://arxiv.org/abs/1511.07212},\n  archivePrefix = {arXiv},\n  eprint    = {1511.07212},\n  timestamp = {Mon, 13 Aug 2018 16:48:23 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuLLSL15},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n", 
+  "description": "AFLW2000-3D is a dataset of 2000 images that have been annotated with image-level\n68-point 3D facial landmarks.\nThis dataset is typically used for evaluation of 3D facial landmark detection\nmodels. The head poses are very diverse and often hard to be detected by a \ncnn-based face detector.\nThe 2D landmarks are skipped in this dataset, since some of the data are not\nconsistent to 21 points, as the original paper mentioned.\n", 
+  "location": {
+    "urls": [
+      "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm"
+    ]
+  }, 
+  "name": "aflw2k3d", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "450"
+            }, 
+            {
+              "size": "450"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "landmarks_68_3d_xy_normalized", 
+        "shape": {
+          "dim": [
+            {
+              "size": "68"
+            }, 
+            {
+              "size": "2"
+            }
+          ]
+        }, 
+        "type": "FLOAT"
+      }, 
+      {
+        "name": "landmarks_68_3d_z", 
+        "shape": {
+          "dim": [
+            {
+              "size": "68"
+            }, 
+            {
+              "size": "1"
+            }
+          ]
+        }, 
+        "type": "FLOAT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "87413900", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2000"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "landmarks_68_3d_xy_normalized", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 1.2392321825027466, 
+              "min": -0.14475858211517334
+            }, 
+            "type": "FLOAT"
+          }, 
+          {
+            "name": "landmarks_68_3d_z", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 249.442138671875, 
+              "min": -236.1607208251953
+            }, 
+            "type": "FLOAT"
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }
+  ], 
+  "version": "1.0.0"
+}

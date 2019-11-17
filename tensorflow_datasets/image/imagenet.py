@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import io
+import os
 import tarfile
 
 import tensorflow as tf
@@ -35,6 +36,9 @@ ImageNet, we aim to provide on average 1000 images to illustrate each synset.
 Images of each concept are quality-controlled and human-annotated. In its
 completion, we hope ImageNet will offer tens of millions of cleanly sorted
 images for most of the concepts in the WordNet hierarchy.
+
+Note that labels were never publicly released for the test set, so we only
+include splits for the training and validation sets here.
 '''
 
 # Web-site is asking to cite paper from 2015.
@@ -52,7 +56,6 @@ pages={211-252}
 }
 '''
 
-_URL_PREFIX = 'http://www.image-net.org/challenges/LSVRC/2012/nnoupb'
 _LABELS_FNAME = 'image/imagenet2012_labels.txt'
 
 # This file contains the validation labels, in the alphabetic order of
@@ -96,16 +99,9 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('2.0.1',
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version('5.0.0'),
-      tfds.core.Version('4.0.0'),
-      tfds.core.Version('3.0.0', experiments={tfds.core.Experiment.S3: False}),
+      tfds.core.Version(
+          '5.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
   ]
-  # Version history:
-  # 5.0.0: S3 with new hashing function (different shuffle).
-  # 4.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 3.0.0: Fix colorization (all RGB) and format (all jpeg); use TAR_STREAM.
-  # 2.0.1: Encoding fix. No changes from user point of view.
-  # 2.0.0: Fix validation labels.
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -118,7 +114,7 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
             'file_name': tfds.features.Text(),  # Eg: 'n15075141_54.JPEG'
         }),
         supervised_keys=('image', 'label'),
-        urls=['http://image-net.org/'],
+        homepage='http://image-net.org/',
         citation=_CITATION,
     )
 
@@ -142,14 +138,15 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
     return dict(zip(images, labels))
 
   def _split_generators(self, dl_manager):
-    train_path, val_path = dl_manager.download([
-        '%s/ILSVRC2012_img_train.tar' % _URL_PREFIX,
-        '%s/ILSVRC2012_img_val.tar' % _URL_PREFIX,
-    ])
+    train_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_train.tar')
+    val_path = os.path.join(dl_manager.manual_dir, 'ILSVRC2012_img_val.tar')
+    # We don't import the original test split, as it doesn't include labels.
+    # These were never publicly released.
     if not tf.io.gfile.exists(train_path) or not tf.io.gfile.exists(val_path):
-      msg = 'You must download the dataset files manually and place them in: '
-      msg += ', '.join([train_path, val_path])
-      raise AssertionError(msg)
+      raise AssertionError(
+          'ImageNet requires manual download of the data. Please download '
+          'the train and val set and place them into: {}, {}'.format(
+              train_path, val_path))
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,

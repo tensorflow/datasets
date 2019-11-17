@@ -18,7 +18,6 @@ source</a>
 
 Defines convenience constants/functions for converting various units.
 
-<!-- Placeholder for "Used in" -->
 
 
 ## Functions

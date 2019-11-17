@@ -1,0 +1,2 @@
+pairID,gold_label,Sentence1,Sentence2,Explanation_1,WorkerId,Sentence1_marked_1,Sentence2_marked_1,Sentence1_Highlighted_1,Sentence2_Highlighted_1
+1t,neutral,A woman looks at the child.,A woman is smiling.,Smiling and looking at the child are independent.,xyz,A woman *smiles* at the child.,A woman is *present*,{},"1,2,3"

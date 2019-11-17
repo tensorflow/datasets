@@ -1,0 +1,149 @@
+{
+  "citation": "\n@misc{,\n  author={Vippon Preet Kour, Sakshi Arora},\n  title={PlantaeK: A leaf database of native plants of Jammu and Kashmir},\n  howpublished={Mendeley Data},\n  year={2019}\n}\n",
+  "description": "\nThis dataset contains 2153 images of healthy and unhealthy plant leaves divided\n16 categories by species and state of health. The images are in high resolution\nJPG format.\n\nNote: Each image is a separate download. Some might rarely fail, therefore make\nsure to restart if that happens. An exception will be raised in case one of the\ndownloads repeatedly fails.\n\nDataset URL: https://data.mendeley.com/datasets/t6j2h22jpx/1\nLicense: http://creativecommons.org/licenses/by/4.0\n",
+  "location": {
+    "urls": [
+      "https://data.mendeley.com/datasets/t6j2h22jpx/1"
+    ]
+  },
+  "name": "plantae_k",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "image/filename",
+        "type": "BYTES"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "4616378582",
+  "splits": [
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34",
+        "33",
+        "34",
+        "34",
+        "33",
+        "34"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2153"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2153"
+              }
+            },
+            "name": "image/filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2153"
+              },
+              "max": 15.0
+            }
+          }
+        ],
+        "numExamples": "2153"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

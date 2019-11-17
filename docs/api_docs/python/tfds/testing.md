@@ -13,7 +13,6 @@ source</a>
 
 Testing utilities.
 
-<!-- Placeholder for "Used in" -->
 
 
 ## Classes
@@ -28,6 +27,9 @@ Testing utilities.
 
 [`class FeatureExpectationsTestCase`](../tfds/testing/FeatureExpectationsTestCase.md): Tests FeatureExpectations with full encode-decode.
 
+[`class RaggedConstant`](../tfds/testing/RaggedConstant.md): Container of
+tf.ragged.constant values.
+
 [`class SubTestCase`](../tfds/testing/SubTestCase.md): Adds subTest() context
 manager to the TestCase if supported.
 
@@ -35,8 +37,13 @@ manager to the TestCase if supported.
 
 ## Functions
 
+[`fake_examples_dir(...)`](../tfds/testing/fake_examples_dir.md)
+
 [`make_tmp_dir(...)`](../tfds/testing/make_tmp_dir.md): Make a temporary
 directory.
+
+[`mock_data(...)`](../tfds/testing/mock_data.md): Mock tfds to generate random
+data.
 
 [`mock_kaggle_api(...)`](../tfds/testing/mock_kaggle_api.md): Mock out the
 kaggle CLI.

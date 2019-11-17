@@ -6,7 +6,9 @@
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__getitem__"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="decode_ragged_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
@@ -16,6 +18,8 @@
 
 # tfds.features.Sequence
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -24,6 +28,7 @@ source</a>
 
 ## Class `Sequence`
 
+<!-- Start diff -->
 Composite `FeatureConnector` for a `dict` where each value is a list.
 
 <!-- Placeholder for "Used in" -->
@@ -36,7 +41,7 @@ of `tf.data.Dataset` will batch all the elements of the sequence together.
 If the length of the sequence is static and known in advance, it should be
 specified in the constructor using the `length` param.
 
-Note that `SequenceDict` do not support features which are of type
+Note that `Sequence` does not support features which are of type
 `tf.io.FixedLenSequenceFeature`.
 
 #### Example:
@@ -128,6 +133,33 @@ __getitem__(key)
 
 Convenience method to access the underlying features.
 
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_batch_example(tfexample_data)
+```
+
+Decode multiple features batched in a single tf.Tensor.
+
+This function is used to decode features wrapped in
+<a href="../../tfds/features/Sequence.md"><code>tfds.features.Sequence()</code></a>.
+By default, this function apply `decode_example` on each individual elements
+using `tf.map_fn`. However, for optimization, features can overwrite this method
+to apply a custom batch decoding.
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: Same `tf.Tensor` inputs as `decode_example`, but
+    with and additional first dimension for the sequence length.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
+    tf.data.Dataset object
+
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 ```python
@@ -151,6 +183,33 @@ Decode the serialize examples.
 #### Returns:
 
 *   <b>`example`</b>: Nested `dict` containing the decoded nested examples.
+
+<h3 id="decode_ragged_example"><code>decode_ragged_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_ragged_example(tfexample_data)
+```
+
+Decode nested features from a tf.RaggedTensor.
+
+This function is used to decode features wrapped in nested
+<a href="../../tfds/features/Sequence.md"><code>tfds.features.Sequence()</code></a>.
+By default, this function apply `decode_batch_example` on the flat values of the
+ragged tensor. For optimization, features can overwrite this method to apply a
+custom batch decoding.
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: `tf.RaggedTensor` inputs containing the nested
+    encoded examples.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: The decoded `tf.RaggedTensor` or dictionary of tensor,
+    output of the tf.data.Dataset object
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 

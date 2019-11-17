@@ -17,6 +17,8 @@
 
 # tfds.core.GeneratorBasedBuilder
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -25,6 +27,7 @@ source</a>
 
 ## Class `GeneratorBasedBuilder`
 
+<!-- Start diff -->
 Base class for datasets with data generation based on dict generators.
 
 <!-- Placeholder for "Used in" -->
@@ -96,7 +99,7 @@ source</a>
 as_dataset(
     split=None,
     batch_size=None,
-    shuffle_files=None,
+    shuffle_files=False,
     decoders=None,
     as_supervised=False,
     in_memory=None
@@ -159,7 +162,7 @@ assert isinstance(ds_test_supervised, tf.data.Dataset)
     a custom pipeline. If `batch_size == -1`, will return feature dictionaries
     of the whole dataset with `tf.Tensor`s instead of a `tf.data.Dataset`.
 *   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
-    to `True` if `split == tfds.Split.TRAIN` and `False` otherwise.
+    to `False`.
 *   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
     the decoding. The structure should match the feature structure, but only
     customized feature keys need to be present. See

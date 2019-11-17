@@ -10,6 +10,8 @@
 
 # tfds.core.SplitBase
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -18,6 +20,7 @@ source</a>
 
 ## Class `SplitBase`
 
+<!-- Start diff -->
 Abstract base class for Split compositionality.
 
 <!-- Placeholder for "Used in" -->
@@ -32,9 +35,9 @@ There are three parts to the composition:
      `__getitem__`, which return a tree of `SplitBase` (whose leaf
      are the `NamedSplit` objects)
 
-  ```
-  split = tfds.TRAIN + tfds.TEST.subsplit(tfds.percent[:50])
-  ```
+```
+  split = tfds.Split.TRAIN + tfds.Split.TEST.subsplit(tfds.percent[:50])
+```
 
   2) The `SplitBase` is forwarded to the `.as_dataset()` function
      to be resolved into actual read instruction. This is done by the

@@ -13,6 +13,8 @@
 
 # tfds.features.text.SubwordTextEncoder
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -21,13 +23,12 @@ source</a>
 
 ## Class `SubwordTextEncoder`
 
+<!-- Start diff -->
 Invertible `TextEncoder` using word pieces with a byte-level fallback.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)
 
-### Used in the tutorials:
-
-*   [Transformer model for language understanding](https://www.tensorflow.org/beta/tutorials/text/transformer)
+<!-- Placeholder for "Used in" -->
 
 Encoding is fully invertible because all out-of-vocab wordpieces are
 byte-encoded.

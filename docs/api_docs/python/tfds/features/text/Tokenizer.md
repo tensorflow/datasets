@@ -12,6 +12,8 @@
 
 # tfds.features.text.Tokenizer
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -20,11 +22,10 @@ source</a>
 
 ## Class `Tokenizer`
 
+<!-- Start diff -->
 Splits a string into tokens, and joins them back.
 
-### Used in the tutorials:
-
-*   [Load text with tf.data](https://www.tensorflow.org/beta/tutorials/load_data/text)
+<!-- Placeholder for "Used in" -->
 
 <h2 id="__init__"><code>__init__</code></h2>
 

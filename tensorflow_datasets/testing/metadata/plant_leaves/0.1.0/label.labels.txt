@@ -1,0 +1,22 @@
+Mango (P0) healthy
+Arjun (P1) healthy
+Alstonia Scholaris (P2) healthy
+Gauva (P3) healthy
+Jamun (P5) healthy
+Jatropha (P6) healthy
+Pongamia Pinnata (P7) healthy
+Basil (P8) healthy
+Pomegranate (P9) healthy
+Lemon (P10) healthy
+Chinar (P11) healthy
+Mango (P0) diseased
+Arjun (P1) diseased
+Alstonia Scholaris (P2) diseased
+Gauva (P3) diseased
+Bael (P4) diseased
+Jamun (P5) diseased
+Jatropha (P6) diseased
+Pongamia Pinnata (P7) diseased
+Pomegranate (P9) diseased
+Lemon (P10) diseased
+Chinar (P11) diseased

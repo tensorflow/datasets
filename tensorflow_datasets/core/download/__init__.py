@@ -18,6 +18,7 @@
 from tensorflow_datasets.core.download.checksums import add_checksums_dir
 from tensorflow_datasets.core.download.download_manager import DownloadConfig
 from tensorflow_datasets.core.download.download_manager import DownloadManager
+from tensorflow_datasets.core.download.downloader import DownloadError
 from tensorflow_datasets.core.download.extractor import iter_archive
 from tensorflow_datasets.core.download.resource import ExtractMethod
 from tensorflow_datasets.core.download.resource import Resource
@@ -28,6 +29,7 @@ __all__ = [
     "add_checksums_dir",
     "DownloadConfig",
     "DownloadManager",
+    "DownloadError",
     "ComputeStatsMode",
     "GenerateMode",
     "Resource",

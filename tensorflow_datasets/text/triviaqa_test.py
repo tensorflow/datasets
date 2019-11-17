@@ -30,5 +30,9 @@ class TriviaqaTest(testing.DatasetBuilderTestCase):
       "test": 1,  # Number of fake test example
   }
 
+
+class TriviaqaS3Test(TriviaqaTest):
+  VERSION = "experimental_latest"
+
 if __name__ == "__main__":
   testing.test_main()

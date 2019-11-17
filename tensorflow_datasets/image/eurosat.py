@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import io
 import os
 
 import tensorflow as tf
@@ -76,12 +77,7 @@ class EurosatConfig(tfds.core.BuilderConfig):
     # 2.0.0: S3 with new hashing function (different shuffle).
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(EurosatConfig, self).__init__(
-        version=tfds.core.Version(
-            '0.0.1', experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version('2.0.0'),
-            tfds.core.Version('1.0.0'),
-        ],
+        version=tfds.core.Version('2.0.0'),
         **kwargs)
     self.selection = selection
     self.download_url = download_url
@@ -130,7 +126,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=features,
         supervised_keys=supervised_keys,
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 
@@ -169,6 +165,9 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
 
 
 def _extract_channels(filename):
-  arr = tfds.core.lazy_imports.skimage.external.tifffile.imread(filename)
+  with tf.io.gfile.GFile(filename, 'rb') as f:
+    arr = tfds.core.lazy_imports.skimage.external.tifffile.imread(
+        io.BytesIO(f.read()))
+
   arr = arr.astype('float32')
   return arr

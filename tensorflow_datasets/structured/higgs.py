@@ -60,9 +60,13 @@ _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00280/HIGGS.cs
 
 class Higgs(tfds.core.GeneratorBasedBuilder):
   """HIGGS Data Set."""
-
   VERSION = tfds.core.Version('1.0.0',
                               experiments={tfds.core.Experiment.S3: False})
+
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -102,7 +106,7 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
             'm_wwbb': tf.float64
         }),
         supervised_keys=None,
-        urls=['https://archive.ics.uci.edu/ml/datasets/HIGGS'],
+        homepage='https://archive.ics.uci.edu/ml/datasets/HIGGS',
         citation=_CITATION,
     )
 
@@ -141,5 +145,5 @@ class Higgs(tfds.core.GeneratorBasedBuilder):
 
     with tf.io.gfile.GFile(file_path) as csvfile:
       reader = csv.DictReader(csvfile, fieldnames=fieldnames)
-      for row in reader:
-        yield row
+      for i, row in enumerate(reader):
+        yield i, row

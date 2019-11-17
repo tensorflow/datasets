@@ -66,7 +66,7 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
             "image_sequence": tfds.features.Video(
                 shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,))
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 

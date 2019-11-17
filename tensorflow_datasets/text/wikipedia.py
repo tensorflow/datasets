@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import codecs
 import json
 import math
 import re
@@ -27,7 +28,6 @@ import xml.etree.cElementTree as etree
 from absl import logging
 import six
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 
@@ -39,12 +39,13 @@ _CITATION = """\
 }
 """
 
-_DESCRIPTION = (
-    "Wikipedia dataset containing cleaned articles of all languages. "
-    "The datasets are built from the Wikipedia dump "
-    "(https://dumps.wikimedia.org/) with one split per language. Each "
-    "example contains the content of one full Wikipedia article with cleaning "
-    "to strip markdown and unwanted sections (references, etc.).")
+_DESCRIPTION = """\
+Wikipedia dataset containing cleaned articles of all languages.
+The datasets are built from the Wikipedia dump
+(https://dumps.wikimedia.org/) with one split per language. Each example
+contains the content of one full Wikipedia article with cleaning to strip
+markdown and unwanted sections (references, etc.).
+"""
 
 _LICENSE = (
     "This work is licensed under the Creative Commons Attribution-ShareAlike "
@@ -89,7 +90,7 @@ _INFO_FILE = "dumpstatus.json"
 class WikipediaConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Wikipedia."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, language=None, date=None, **kwargs):
     """BuilderConfig for Wikipedia.
 
@@ -115,7 +116,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
           version=tfds.core.Version(
-              "0.0.3", experiments={tfds.core.Experiment.S3: False}),
+              "0.0.4", experiments={tfds.core.Experiment.S3: False}),
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES
@@ -133,7 +134,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
         }),
         # No default supervised_keys.
         supervised_keys=None,
-        urls=["https://dumps.wikimedia.org"],
+        homepage="https://dumps.wikimedia.org",
         citation=_CITATION,
         redistribution_info={"license": _LICENSE},
     )
@@ -182,8 +183,14 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     def _extract_content(filepath):
       """Extracts article content from a single WikiMedia XML file."""
       logging.info("generating examples from = %s", filepath)
-      with tf.io.gfile.GFile(filepath) as f:
-        for _, elem in etree.iterparse(f, events=("end",)):
+      with tf.io.gfile.GFile(filepath, "rb") as f:
+        if six.PY3:
+          # Workaround due to:
+          # https://github.com/tensorflow/tensorflow/issues/33563
+          utf_f = codecs.getreader("utf-8")(f)
+        else:
+          utf_f = f
+        for _, elem in etree.iterparse(utf_f, events=("end",)):
           if not elem.tag.endswith("page"):
             continue
           namespace = elem.tag[:-4]
@@ -215,6 +222,10 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
           tfds.core.lazy_imports.mwparserfromhell.parser.ParserError) as e:
         beam.metrics.Metrics.counter(language, "parser-error").inc()
         logging.error("mwparserfromhell ParseError: %s", e)
+        return
+
+      if not text:
+        beam.metrics.Metrics.counter(language, "empty-clean-examples").inc()
         return
 
       beam.metrics.Metrics.counter(language, "cleaned-examples").inc()

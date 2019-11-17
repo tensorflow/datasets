@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for multinli dataset module."""
+"""Tests for definite_pronoun_resolution dataset module."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -34,6 +34,9 @@ class DefinitePronounResolutionTest(testing.DatasetBuilderTestCase):
       "train": 4,
   }
 
+
+class DefinitePronounResolutionS3Test(DefinitePronounResolutionTest):
+  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()

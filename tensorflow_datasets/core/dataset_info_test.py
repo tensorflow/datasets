@@ -165,7 +165,7 @@ class DatasetInfoTest(testing.TestCase):
         builder=self._builder,
         description="A description",
         supervised_keys=("input", "output"),
-        urls=["some location"],
+        homepage="http://some-location",
         citation="some citation",
         redistribution_info={"license": "some license"}
     )
@@ -194,7 +194,7 @@ class DatasetInfoTest(testing.TestCase):
       restored_info = dataset_info.DatasetInfo(
           builder=self._builder,
           supervised_keys=("input (new)", "output (new)"),
-          urls=["some location (new)"],
+          homepage="http://some-location-new",
           citation="some citation (new)",
           redistribution_info={"license": "some license (new)"}
       )
@@ -215,7 +215,7 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(restored_info.description, "A description")
       self.assertEqual(
           restored_info.supervised_keys, ("input (new)", "output (new)"))
-      self.assertEqual(restored_info.urls, ["some location (new)"])
+      self.assertEqual(restored_info.homepage, "http://some-location-new")
       self.assertEqual(restored_info.citation, "some citation (new)")
       self.assertEqual(restored_info.redistribution_info.license,
                        "some license (new)")
@@ -307,7 +307,7 @@ INFO_STR = """tfds.core.DatasetInfo(
     name='mnist',
     version=1.0.0,
     description='The MNIST database of handwritten digits.',
-    urls=['https://storage.googleapis.com/cvdf-datasets/mnist/'],
+    homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
     features=FeaturesDict({
         'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
         'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),

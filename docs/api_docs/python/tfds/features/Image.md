@@ -4,17 +4,22 @@
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="decode_ragged_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
 <meta itemprop="property" content="load_metadata"/>
 <meta itemprop="property" content="save_metadata"/>
+<meta itemprop="property" content="set_dtype"/>
 <meta itemprop="property" content="set_encoding_format"/>
 <meta itemprop="property" content="set_shape"/>
 </div>
 
 # tfds.features.Image
+
+<!-- Insert buttons -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -24,39 +29,58 @@ source</a>
 
 ## Class `Image`
 
+<!-- Start diff -->
 `FeatureConnector` for images.
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
 
 <!-- Placeholder for "Used in" -->
 
-Input: The image connector accepts as input:
-  * path to a {bmp,gif,jpeg,png} image.
-  * uint8 array representing an image.
+During `_generate_examples`, the feature connector accept as input any of:
+
+*   `str`: path to a {bmp,gif,jpeg,png} image (ex: `/path/to/img.png`).
+*   `np.array`: 3d `np.uint8` array representing an image.
+*   A file object containing the png or jpeg encoded image string (ex:
+    `io.BytesIO(encoded_img_bytes)`)
 
 #### Output:
 
-*   <b>`image`</b>: tf.Tensor of type tf.uint8 and shape [height, width,
-    num_channels] for BMP, JPEG, and PNG images and shape [num_frames, height,
-    width, 3] for GIF images.
+`tf.Tensor` of type `tf.uint8` and shape `[height, width, num_channels]` for
+BMP, JPEG, and PNG images and shape `[num_frames, height, width, 3]` for GIF
+images.
 
 #### Example:
 
-*   In the DatasetInfo object: features=features.FeaturesDict({ 'input':
-    features.Image(), 'target': features.Image(shape=(None, None, 1),
-    encoding_format='png'), })
+*   In the
+    <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>
+    object:
 
-*   During generation: yield { 'input': 'path/to/img.jpg', 'target':
-    np.ones(shape=(64, 64, 1), dtype=np.uint8), }
+```python
+features=features.FeaturesDict({
+    'input': features.Image(),
+    'target': features.Image(shape=(None, None, 1),
+                               encoding_format='png'),
+})
+```
+
+*   During generation:
+
+```python
+yield {
+    'input': 'path/to/img.jpg',
+    'target': np.ones(shape=(64, 64, 1), dtype=np.uint8),
+}
+```
 
 <h2 id="__init__"><code>__init__</code></h2>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
-``` python
+```python
 __init__(
     shape=None,
+    dtype=None,
     encoding_format=None
 )
 ```
@@ -70,6 +94,8 @@ Construct the connector.
     width can be None. For other images: (height, width, channels). height and
     width can be None. See `tf.image.encode_*` for doc on channels parameter.
     Defaults to (None, None, 3).
+*   <b>`dtype`</b>: tf.uint16 or tf.uint8 (default). tf.uint16 can be used only
+    with png encoding_format
 *   <b>`encoding_format`</b>: 'jpeg' or 'png' (default). Format to serialize
     np.ndarray images on disk. If image is loaded from {bmg,gif,jpeg,png} file,
     this parameter is ignored, and file original encoding is used.
@@ -92,6 +118,33 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
 
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_batch_example(tfexample_data)
+```
+
+Decode multiple features batched in a single tf.Tensor.
+
+This function is used to decode features wrapped in
+<a href="../../tfds/features/Sequence.md"><code>tfds.features.Sequence()</code></a>.
+By default, this function apply `decode_example` on each individual elements
+using `tf.map_fn`. However, for optimization, features can overwrite this method
+to apply a custom batch decoding.
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: Same `tf.Tensor` inputs as `decode_example`, but
+    with and additional first dimension for the sequence length.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
+    tf.data.Dataset object
+
 <h3 id="decode_example"><code>decode_example</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
@@ -102,6 +155,33 @@ decode_example(example)
 ```
 
 Reconstruct the image from the tf example.
+
+<h3 id="decode_ragged_example"><code>decode_ragged_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_ragged_example(tfexample_data)
+```
+
+Decode nested features from a tf.RaggedTensor.
+
+This function is used to decode features wrapped in nested
+<a href="../../tfds/features/Sequence.md"><code>tfds.features.Sequence()</code></a>.
+By default, this function apply `decode_batch_example` on the flat values of the
+ragged tensor. For optimization, features can overwrite this method to apply a
+custom batch decoding.
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: `tf.RaggedTensor` inputs containing the nested
+    encoded examples.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: The decoded `tf.RaggedTensor` or dictionary of tensor,
+    output of the tf.data.Dataset object
 
 <h3 id="encode_example"><code>encode_example</code></h3>
 
@@ -159,6 +239,17 @@ save_metadata(
 ```
 
 See base class for details.
+
+<h3 id="set_dtype"><code>set_dtype</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
+source</a>
+
+```python
+set_dtype(dtype)
+```
+
+Update the dtype.
 
 <h3 id="set_encoding_format"><code>set_encoding_format</code></h3>
 

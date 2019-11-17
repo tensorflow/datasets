@@ -81,6 +81,10 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version("0.1.0",
                               experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -135,7 +139,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
         }),
 
         supervised_keys=None,
-        urls=["http://nlp.cs.washington.edu/triviaqa/"],
+        homepage="http://nlp.cs.washington.edu/triviaqa/",
         citation=_CITATION,
     )
 
@@ -285,7 +289,7 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
             wiki_titles = []
             wiki_contexts = []
 
-          yield {
+          yield "%s_%s" % (os.path.basename(filepath), question_id), {
               "entity_pages": {
                   "doc_source": doc_sources,
                   "file_name": file_names,
