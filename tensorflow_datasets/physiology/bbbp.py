@@ -1,4 +1,4 @@
-"""TODO(bbbp): Add a description here."""
+"""BBBP(Blood-brain Barrier Penetration)  dataset"""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -6,12 +6,27 @@ from __future__ import print_function
 
 import tensorflow_datasets.public_api as tfds
 
-# TODO(bbbp): BibTeX citation
-_CITATION = """
+
+_CITATION = """\
+@article{wu2018moleculenet,
+  title={MoleculeNet: a benchmark for molecular machine learning},
+  author={Wu, Zhenqin and Ramsundar, Bharath and Feinberg, Evan N and Gomes, Joseph and Geniesse, Caleb and Pappu, 
+          Aneesh S and Leswing, Karl and Pande, Vijay},
+  journal={Chemical science},
+  volume={9},
+  number={2},
+  pages={513--530},
+  year={2018},
+  publisher={Royal Society of Chemistry}
+}
 """
 
-# TODO(bbbp):
-_DESCRIPTION = """
+_DESCRIPTION = """\
+The Blood-brain barrier penetration (BBBP) dataset comes from a recent study 52 on the modeling and prediction of 
+the barrier permeability. As a membrane separating circulating blood and brain extracellular fluid, the  blood-brain 
+barrier blocks most drugs, hormones and neurotransmitters. Thus penetration of the barrier forms a long-standing issue 
+in development of drugs targeting central nervous system. This dataset includes binary labels for over 2000 compounds 
+on their permeability properties. Scaffold splitting is also recommended for this well-defined target.
 """
 
 
@@ -36,7 +51,7 @@ class Bbbp(tfds.core.GeneratorBasedBuilder):
         # builder.as_dataset.
         supervised_keys=(),
         # Homepage of the dataset for documentation
-        homepage='https://dataset-homepage/',
+        homepage='http://moleculenet.ai/datasets-1',
         citation=_CITATION,
     )
 
