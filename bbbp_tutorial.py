@@ -13,3 +13,4 @@ dataset = dataset.shuffle(128).batch(32).prefetch(tf.data.experimental.AUTOTUNE)
 for features in dataset.take(1):
   smile, label = features["smile"], features["label"]
   print(smile, label)
+
