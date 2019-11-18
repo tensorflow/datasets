@@ -137,6 +137,7 @@ np_datasets = tfds.as_numpy(datasets)
 *   `Text`
     *   [`c4`](c4.md)
     *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
+    *   [`esnli`](esnli.md)
     *   [`gap`](gap.md)
     *   [`glue`](glue.md)
     *   [`imdb_reviews`](imdb_reviews.md)

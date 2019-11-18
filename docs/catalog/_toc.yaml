@@ -206,6 +206,8 @@ toc:
     title: c4
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/esnli
+    title: esnli
   - path: /datasets/catalog/gap
     title: gap
   - path: /datasets/catalog/glue
