@@ -1,3 +1,1 @@
-# TODO(bbbp): If your dataset downloads files, then the checksums will be
-# automatically added here when running the download_and_prepare script
-# with --register_checksums.
+http://deepchem.io.s3-website-us-west-1.amazonaws.com/datasets/BBBP.csv 148743 d07a38487aeac5cee5508413e468043ef3097451d2a112701c2d60be9ec6b662

@@ -1,1 +1,1 @@
-from tensorflow_datasets.text.bbbp import Bbbp  # TODO(bbbp) Sort alphabetically
+from tensorflow_datasets.physiology.bbbp import Bbbp

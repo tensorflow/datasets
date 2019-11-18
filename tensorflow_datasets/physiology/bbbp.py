@@ -4,8 +4,10 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import tensorflow_datasets.public_api as tfds
+import csv
 
+import tensorflow as tf
+import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
 @article{wu2018moleculenet,
@@ -29,47 +31,51 @@ in development of drugs targeting central nervous system. This dataset includes 
 on their permeability properties. Scaffold splitting is also recommended for this well-defined target.
 """
 
+_URL_ = "http://moleculenet.ai/datasets-1"
+_DOWNLOAD_URL = "http://deepchem.io.s3-website-us-west-1.amazonaws.com/datasets/BBBP.csv"
+
 
 class Bbbp(tfds.core.GeneratorBasedBuilder):
-  """TODO(bbbp): Short description of my dataset."""
+    """Predict Blood-brain barrier penetration in binary classification."""
 
-  # TODO(bbbp): Set up version.
-  VERSION = tfds.core.Version('0.1.0')
+    # TODO(bbbp): Set up version.s
+    VERSION = tfds.core.Version('0.1.0')
 
-  def _info(self):
-    # TODO(bbbp): Specifies the tfds.core.DatasetInfo object
-    return tfds.core.DatasetInfo(
-        builder=self,
-        # This is the description that will appear on the datasets page.
-        description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
-        features=tfds.features.FeaturesDict({
-            # These are the features of your dataset like images, labels ...
-        }),
-        # If there's a common (input, target) tuple from the features,
-        # specify them here. They'll be used if as_supervised=True in
-        # builder.as_dataset.
-        supervised_keys=(),
-        # Homepage of the dataset for documentation
-        homepage='http://moleculenet.ai/datasets-1',
-        citation=_CITATION,
-    )
+    def _info(self):
+        # TODO(bbbp): Specifies the tfds.core.DatasetInfo object
+        return tfds.core.DatasetInfo(
+            builder=self,
+            description=_DESCRIPTION,
+            features=tfds.features.FeaturesDict({
+                "smile": tfds.features.Text(),
+                "label":  tfds.features.ClassLabel(names=["0", "1"]),
+            }),
+            supervised_keys=("smile", "label"),
+            homepage=_URL_,
+            citation=_CITATION,
+        )
 
-  def _split_generators(self, dl_manager):
-    """Returns SplitGenerators."""
-    # TODO(bbbp): Downloads the data and defines the splits
-    # dl_manager is a tfds.download.DownloadManager that can be used to
-    # download and extract URLs
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            # These kwargs will be passed to _generate_examples
-            gen_kwargs={},
-        ),
-    ]
+    def _split_generators(self, dl_manager):
+        file = dl_manager.download(_DOWNLOAD_URL)
+        """Returns SplitGenerators."""
 
-  def _generate_examples(self):
-    """Yields examples."""
-    # TODO(bbbp): Yields (key, example) tuples from the dataset
-    yield 'key', {}
+        return [
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TRAIN,
+                gen_kwargs={"file": file},
+            ),
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TEST,
+                gen_kwargs={"file": file},
+            ),
+        ]
 
+    def _generate_examples(self, file):
+        """Yields examples."""
+        with tf.io.gfile.GFile(file) as f:
+            reader = csv.DictReader(f)
+            for _, row in enumerate(reader):
+                yield row['num'], {
+                    'smile': row['smiles'],
+                    'label': row['p_np'],
+                }
