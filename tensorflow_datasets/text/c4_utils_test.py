@@ -25,6 +25,7 @@ import os
 
 import six
 from tensorflow_datasets import testing
+from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
 from tensorflow_datasets.text import c4_utils
 
 EN_TEXT = """This line has enough words and ends in punctuation, Dr. Roberts!
@@ -230,125 +231,45 @@ This line should be okay."""
     self.assertEqual(expected_clean_text, out["text"])
     self.assertEqual(expected_counters, dict(counters))
 
-  def test_emit_url_to_sentences(self):
-    # Try with punkt language (en).
-    expected_sentences = (
-        ("this line has enough words and ends in punctuation, dr. roberts!",),
-        ("\"open access.", "powered by scholars.",
-         "published by universities.\""),
-        ("sentence 1.", "sentence 2.", "sentence 3."),
-        ("sentence 2.", "sentence 3.", "sentence 4."),
-        ("another sentence.", ".", "."),
-    )
-    results = c4_utils._emit_url_to_sentences(("url", {
-        "text":
-            EXPECTED_CLEAN_EN +
-            "\nSentence 1. Sentence 2. Sentence 3. Sentence 4."
-            "\nAnother sentence. . . ? ? ! ! !",
-        "content-type":
-            FAKE_CONTENT_TYPE,
-        "content-length":
-            FAKE_CONTENT_LENGTH,
-        "timestamp":
-            FAKE_TIMESTAMP
-    }),
-                                              max_window_size=3)
-    ret_sentences, ret_urls = zip(*results)
-    self.assertEqual(("url",) * len(expected_sentences), ret_urls)
-    self.assertEqual(expected_sentences, ret_sentences)
-
-  def test_emit_sentences_to_urls(self):
-    counters, counter_inc_fn = _get_counters()
-    urls = ["urlA", "urlB", "urlC", "urlD"]
-    sentence = "test sentence."
-    expected_urls = ("urlA", "urlD")
-    results = c4_utils._emit_sentences_to_urls((sentence, urls),
-                                               counter_inc_fn,
-                                               skip_n=2)
-    ret_urls, ret_sentences = zip(*results)
-    self.assertEqual(expected_urls, ret_urls)
-    self.assertEqual((sentence,) * 2, ret_sentences)
-    self.assertEqual({"emitted-sentences-duplicate": 1}, dict(counters))
-
-  def test_remove_sentences_from_page(self):
-    counters, counter_inc_fn = _get_counters()
-    sentences_to_remove = [
-        ("this line has enough words and ends in punctuation, dr. roberts!",),
-        ("sentence 1.", "sentence 2.", "sentence 3."),
-        ("sentence 3.", "sentence 4."),  # no match
-        ("sentence 1.", "sentence 3.", "sentence 4."),  # no match
-        ("sentence 3.", "sentence 4.", "sentence 5."),  # no match
+  def test_remove_duplicate_text(self):
+    import apache_beam.testing.util as beam_testing_util  # pylint:disable=g-import-not-at-top
+    beam = lazy_imports.apache_beam
+    input_urls_and_text = [
+        ("url/1-0",
+         "This is a duplicated line.\nThis is a unique line.\n"
+         "This one comes first and so it stays."),
+        ("url/2-1",
+         "This is 2nd unique line.\nThis one comes second so it is removed "
+         "even though the capitalizaiton is different.\n"
+         "this is a Duplicated line. "),
+        ("url/3-4",
+         "This is a 3rd unique line.\nThis is a duplicated line.\n"
+         "This one comes third and so it is removed. But the page stays "
+         "because there are still 3 sentences remaining."),
+        ("url/4-4",
+         "This is a 4th unique line.\nThis is a duplicated line.\n"
+         "This one comes third and so it is removed, and the page is too "
+         "since there aren't enough sentences left."),
     ]
-    text = (
-        EXPECTED_CLEAN_EN + "\nSentence 1. Sentence 2. Sentence 3. Sentence 4.")
-    expected_features = {
-        "text": ("\"Open Access. Powered by Scholars. "
-                 "Published by Universities.\"\nSentence 4."),
-        "content-type": FAKE_CONTENT_TYPE,
-        "content-length": FAKE_CONTENT_LENGTH,
-        "timestamp": FAKE_TIMESTAMP
-    }
-    result = list(
-        c4_utils._remove_sentences_from_text(("url", {
-            "features": [{
-                "text": text,
-                "content-type": FAKE_CONTENT_TYPE,
-                "content-length": FAKE_CONTENT_LENGTH,
-                "timestamp": FAKE_TIMESTAMP
-            }],
-            "sentences": sentences_to_remove
-        }),
-                                             max_window_size=3,
-                                             counter_inc_fn=counter_inc_fn))
-    self.assertEqual([("url", expected_features)], result)
-    self.assertEqual({"filtered-sentence-duplicate": 4}, dict(counters))
-
-    counters.clear()
-    sentences_to_remove.append(("sentence 2.", "sentence 3.", "sentence 4."))
-    expected_features = {
-        "text":
-            ("\"Open Access. Powered by Scholars. Published by Universities.\""
-            ),
-        "content-type": FAKE_CONTENT_TYPE,
-        "content-length": FAKE_CONTENT_LENGTH,
-        "timestamp": FAKE_TIMESTAMP
-    }
-    result = list(
-        c4_utils._remove_sentences_from_text(("url", {
-            "features": [{
-                "text": text,
-                "content-type": FAKE_CONTENT_TYPE,
-                "content-length": FAKE_CONTENT_LENGTH,
-                "timestamp": FAKE_TIMESTAMP
-            }],
-            "sentences": sentences_to_remove
-        }),
-                                             counter_inc_fn=counter_inc_fn,
-                                             max_window_size=3,
-                                             min_num_sentences=3))
-    self.assertEqual([("url", expected_features)], result)
-    self.assertEqual({"filtered-sentence-duplicate": 5}, dict(counters))
-
-    counters.clear()
-    result = list(
-        c4_utils._remove_sentences_from_text(("url", {
-            "features": [{
-                "text": text,
-                "content-type": FAKE_CONTENT_TYPE,
-                "content-length": FAKE_CONTENT_LENGTH,
-                "timestamp": FAKE_TIMESTAMP
-            }],
-            "sentences": sentences_to_remove
-        }),
-                                             counter_inc_fn=counter_inc_fn,
-                                             max_window_size=3,
-                                             min_num_sentences=4))
-    self.assertEqual([], result)
-    self.assertEqual(
-        {
-            "filtered-sentence-duplicate": 5,
-            "filtered-doc-toofewsentences": 1
-        }, dict(counters))
+    expected_urls_and_text = [
+        ("url/1-0",
+         "This is a duplicated line.\nThis is a unique line.\n"
+         "This one comes first and so it stays."),
+        ("url/3-4",
+         "This is a 3rd unique line.\n"
+         "This one comes third and so it is removed. But the page stays "
+         "because there are still 3 sentences remaining."),
+    ]
+    with beam.Pipeline() as pipeline:
+      pages = pipeline | beam.Create([
+          (url, {"text": text}) for url, text in input_urls_and_text
+      ])
+      deduped_pages = c4_utils.remove_duplicate_text(pages)
+      beam_testing_util.assert_that(
+          deduped_pages,
+          beam_testing_util.equal_to([
+              (url, {"text": text}) for url, text in expected_urls_and_text
+          ]))
 
   def test_split_wet_file(self):
     if six.PY2:

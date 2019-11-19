@@ -209,115 +209,102 @@ def clean_page(url_and_features,
   yield url, features
 
 
-def _emit_url_to_sentences(page, max_window_size):
-  """Emits url to all (lower-cased) sentences grouped by sliding window."""
+def _hash_line(line):
+  m = hashlib.md5()
+  m.update(tf.compat.as_text(line).encode("utf-8").strip().lower())
+  return m.hexdigest()
+
+
+def _emit_url_to_lines(page):
+  """Emits url to all (lower-cased, hashed) lines."""
   url, features = page
   text = features["text"]
-  for sentences in _get_sentences_by_line(text, lower=True):
-    # We don't want to emit windows where all "sentences" are just endmarks
-    # (e.g., "! ! !").
-    is_solo_endmark = [w in _END_MARKS for w in sentences]
-    for i in range(len(sentences) - min(len(sentences), max_window_size) + 1):
-      if not all(is_solo_endmark[i:i+max_window_size]):
-        yield tuple(sentences[i:i+max_window_size]), url
+  for line in text.split("\n"):
+    yield _hash_line(line), url
 
 
-def _emit_sentences_to_urls(el, counter_inc_fn, skip_n=1):
-  """Emits sentences to all but `skip_n` urls."""
-  sentences, urls = el
+def _emit_line_to_urls(el, counter_inc_fn, skip_n=1):
+  """Emits (hashed) line to all but `skip_n` urls."""
+  line, urls = el
   # Hash urls and sort to have a consistent, but unbiased, selection when the
-  # same urls exist for multiple sentences.
+  # same urls exist for multiple lines.
   sorted_urls = sorted(
       urls,
       key=lambda x: hashlib.md5(tf.compat.as_text(x).encode("utf-8")).
       hexdigest())
   del sorted_urls[:skip_n]
   if sorted_urls:
-    counter_inc_fn("emitted-sentences-duplicate")
-    logging.info(
-        "Emitting sentences to %d documents: %s", len(sorted_urls), sentences)
+    counter_inc_fn("emitted-lines-duplicate")
     for url in sorted_urls:
-      yield url, sentences
+      yield url, line
 
 
-def _remove_sentences_from_text(
-    el, counter_inc_fn, max_window_size,
-    min_num_sentences=_MIN_NUM_SENTENCES):
-  """Removes matching sentence windows from the page.
+def _remove_lines_from_text(
+    el, counter_inc_fn, min_num_sentences=_MIN_NUM_SENTENCES):
+  """Removes matching lines from the page.
 
   Process the result of a join containing a single value for 'features' and zero
-  or more values for 'sentences'. Each value in 'sentences' is a tuple
-  containing a window of one or more sentences.
+  or more values for 'lines'. Each value in 'lines' is a lower-cased, hashed
+  line.
 
   If a line has fewer sentences than `max_window_size`, the full line is
   compared for a match.
 
   Args:
-    el: `(string, {'features': [string], 'sentences': [tuple(string)]})`,
+    el: `(string, {'features': features_dict, 'lines': [string]})`,
       element containing the result of a join on key with both the page text
-      and lower-cased sentence windows to remove.
+      and lower-cased, hashed lines to remove.
     counter_inc_fn: function, a function taking the name of a counter to be
       incremented and the (optional) amount.
-    max_window_size: int, the maximum size of a sentence window to slide across
-      lines.
     min_num_sentences: int, the minimum number of sentences a page needs to not
       be skipped.
 
   Yields:
     url: The URL of the page.
-    features: The page features with sentences removed.
+    features: The page features with lines removed from text.
   """
   url, join_values = el
   features = join_values["features"]
 
-  assert len(features) == 1, "Invalid page count (%d) for %s" % (len(features),
-                                                                 url)
+  assert len(features) == 1, "Invalid page count (%d) for %s" % (
+      len(features), url)
   features = features[0]
   text = features["text"]
-  sentences_to_remove = set(join_values["sentences"])
-  sentences_by_line = _get_sentences_by_line(text, lower=False)
-  new_sentences_by_line = []
-  for line_sentences in sentences_by_line:
-    indices_to_remove = set()
-    for i in range(
-        len(line_sentences) - min(len(line_sentences), max_window_size) + 1):
-      sentence_window = tuple(
-          s.lower() for s in line_sentences[i:i+max_window_size])
-      if sentence_window in sentences_to_remove:
-        indices_to_remove.update(range(i, i+len(sentence_window)))
-    counter_inc_fn("filtered-sentence-duplicate", len(indices_to_remove))
-    new_line_sentences = [
-        s for i, s in enumerate(line_sentences) if i not in indices_to_remove]
-    if new_line_sentences:
-      new_sentences_by_line.append(new_line_sentences)
-  if sum(len(sents) for sents in new_sentences_by_line) < min_num_sentences:
+  lines_to_remove = set(join_values["lines"])
+  new_lines = []
+  for line in text.split("\n"):
+    if _hash_line(line) in lines_to_remove:
+      counter_inc_fn("filtered-lines-duplicate")
+    else:
+      new_lines.append(line)
+  new_text = "\n".join(new_lines)
+  if len(_get_sentences(new_text)) < min_num_sentences:
     counter_inc_fn("filtered-doc-toofewsentences")
     return
-  features["text"] = "\n".join(" ".join(sent) for sent in new_sentences_by_line)
-  yield (url, features)
+  new_features = features.copy()
+  new_features["text"] = new_text
+  yield (url, new_features)
 
 
-def remove_duplicate_text(pages, sentence_window_size=3):
-  """Utility to remove duplicate sentence windows across text documents."""
-  # Output: url, sentence
+def remove_duplicate_text(pages):
+  """Utility to remove duplicate lines across text documents."""
+  # Output: url, lines
   beam = tfds.core.lazy_imports.apache_beam
-  counter_inc_fn = get_counter_inc_fn("dedupe-sentences")
-  sentences_to_remove = (
+  counter_inc_fn = get_counter_inc_fn("dedupe-lines")
+  lines_to_remove = (
       pages
-      | beam.FlatMap(_emit_url_to_sentences,
-                     max_window_size=sentence_window_size)
+      | beam.FlatMap(_emit_url_to_lines)
       | "group_sentences" >> beam.GroupByKey()
-      | beam.FlatMap(_emit_sentences_to_urls, counter_inc_fn=counter_inc_fn))
+      | beam.FlatMap(_emit_line_to_urls, counter_inc_fn=counter_inc_fn))
 
   # Output: url, text
   final_docs = ({
       "features": pages,
-      "sentences": sentences_to_remove
+      "lines": lines_to_remove
   }
-                | "group_text_and_sentences_by_url" >> beam.CoGroupByKey()
+                | "group_features_and_lines_by_url" >> beam.CoGroupByKey()
                 | beam.FlatMap(
-                    _remove_sentences_from_text,
-                    max_window_size=sentence_window_size,
+                    _remove_lines_from_text,
                     counter_inc_fn=counter_inc_fn))
 
   return final_docs
