@@ -187,25 +187,36 @@ class DatasetBuilder(object):
       logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
 
+  @utils.memoized_property
+  def canonical_version(self):
+    if self._builder_config:
+      return self._builder_config.version
+    else:
+      return self.VERSION
+
+  @utils.memoized_property
+  def supported_versions(self):
+    if self._builder_config:
+      return self._builder_config.supported_versions
+    else:
+      return self.SUPPORTED_VERSIONS
+
+  @utils.memoized_property
+  def versions(self):
+    """Versions (canonical + availables), in preference order."""
+    return [
+        utils.Version(v) if isinstance(v, six.string_types) else v
+        for v in [self.canonical_version] + self.supported_versions
+    ]
+
   def _pick_version(self, requested_version):
     """Returns utils.Version instance, or raise AssertionError."""
-    if self._builder_config:
-      canonical_version = self._builder_config.version
-      supported_versions = self._builder_config.supported_versions
-    else:
-      canonical_version = self.VERSION
-      supported_versions = self.SUPPORTED_VERSIONS
-    versions = [
-        utils.Version(v) if isinstance(v, six.string_types) else v
-        for v in [canonical_version] + supported_versions
-    ]
     if requested_version == "experimental_latest":
-      return max(versions)
-    for version in versions:
+      return max(self.versions)
+    for version in self.versions:
       if requested_version is None or version.match(requested_version):
         return version
-    available_versions = [str(v)
-                          for v in [canonical_version] + supported_versions]
+    available_versions = [str(v) for v in self.versions]
     msg = "Dataset {} cannot be loaded at version {}, only: {}.".format(
         self.name, requested_version, ", ".join(available_versions))
     raise AssertionError(msg)
@@ -253,9 +264,17 @@ class DatasetBuilder(object):
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
-    dl_manager = self._make_download_manager(
-        download_dir=download_dir,
-        download_config=download_config)
+    if self.version.tfds_version_to_prepare:
+      available_to_prepare = ", ".join(str(v) for v in self.versions
+                                       if not v.tfds_version_to_prepare)
+      raise AssertionError(
+          "The version of the dataset you are trying to use ({}:{}) can only "
+          "be generated using TFDS code synced @ {} or earlier. Either sync to "
+          "that version of TFDS to first prepare the data or use another "
+          "version of the dataset (available for `download_and_prepare`: "
+          "{}).".format(
+              self.name, self.version, self.version.tfds_version_to_prepare,
+              available_to_prepare))
 
     # Currently it's not possible to overwrite the data because it would
     # conflict with versioning: If the last version has already been generated,
@@ -266,12 +285,17 @@ class DatasetBuilder(object):
           "the same version {} already exists. If the dataset has changed, "
           "please update the version number.".format(self.name, self._data_dir,
                                                      self.version))
+
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
         self.info.size_in_bytes, directory=self._data_dir_root):
       raise IOError("Not enough disk space. Needed: %s" %
                     units.size_str(self.info.size_in_bytes))
     self._log_download_bytes()
+
+    dl_manager = self._make_download_manager(
+        download_dir=download_dir,
+        download_config=download_config)
 
     # Create a tmp dir and rename to self._data_dir on successful exit.
     with file_format_adapter.incomplete_dir(self._data_dir) as tmp_data_dir:

@@ -286,6 +286,18 @@ class DatasetBuilderTest(testing.TestCase):
     older_builder = DummyDatasetSharedGenerator(version="0.0.*")
     self.assertEqual(str(older_builder.info.version), "0.0.9")
 
+  def test_non_preparable_version(self, *unused_mocks):
+    expected = (
+        "The version of the dataset you are trying to use ("
+        "dummy_dataset_shared_generator:0.0.7) can only be generated using TFDS"
+        " code synced @ v1.0.0 or earlier. Either sync to that version of TFDS "
+        "to first prepare the data or use another version of the dataset "
+        "(available for `download_and_prepare`: 1.0.0, 2.0.0, 0.0.9, 0.0.8).")
+    builder = DummyDatasetSharedGenerator(version="0.0.7")
+    self.assertIsNotNone(builder)
+    with self.assertRaisesWithPredicateMatch(AssertionError, expected):
+      builder.download_and_prepare()
+
   def test_invalid_split_dataset(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       with self.assertRaisesWithPredicateMatch(ValueError, "ALL is a special"):
