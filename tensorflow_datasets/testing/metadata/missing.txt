@@ -2,6 +2,10 @@
 # This is used for reference and debugging.
 bigearthnet/all/0.0.2
 bigearthnet/rgb/0.0.2
+c4/en.noclean/1.1.0
+c4/en.realnewslike/1.1.0
+c4/en.webtextlike/1.1.0
+c4/en/1.1.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/ax/0.0.2
 image_label_folder/1.0.0

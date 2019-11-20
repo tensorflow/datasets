@@ -30,511 +30,7 @@ Example usage: train_examples, val_examples = tfds.load(
 `math_dataset` is configured with `tfds.core.dataset_builder.BuilderConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `algebra__linear_1d_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__mixed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__add_or_sub_big` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__kth_biggest` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__div_remainder` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `measurement__time` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__is_prime` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `probability__swr_p_sequence` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `algebra__linear_1d` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__add_or_sub_in_base` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__simplify_surd` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__lcm_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__add_sub_multiple` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__is_factor` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__closest` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__add_sub_multiple_longer` (`v1.0.0`) (`Size: ?? GiB`):
-    Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__compose` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__div_remainder_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `algebra__polynomial_roots_composed` (`v1.0.0`) (`Size: ?? GiB`):
-    Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `probability__swr_p_level_set_more_samples` (`v1.0.0`) (`Size: ?? GiB`):
-    Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__mul_div_multiple_longer` (`v1.0.0`) (`Size: ?? GiB`):
-    Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__place_value_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__mixed_longer` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__evaluate_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `algebra__sequence_nth_term` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__gcd` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__collect` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `algebra__linear_2d_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__evaluate` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__closest_more` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__kth_biggest_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `probability__swr_p_sequence_more_samples` (`v1.0.0`) (`Size: ?? GiB`):
-    Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `algebra__sequence_next_term` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__nearest_integer_root` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__coefficient_named` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__add_or_sub` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__kth_biggest_more` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__round_number` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
 *   `polynomials__simplify_power` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__div_big` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__pair_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -560,8 +56,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `arithmetic__mul_div_multiple` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
+*   `polynomials__compose` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -573,19 +68,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__linear_2d` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__sort_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `probability__swr_p_level_set` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -611,7 +94,56 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `polynomials__add` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+*   `comparison__pair` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `algebra__polynomial_roots_composed` (`v1.0.0`) (`Size: ?? GiB`):
+    Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `comparison__sort` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `measurement__conversion` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__evaluate` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -635,7 +167,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `numbers__round_number_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `comparison__sort_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -648,8 +180,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `comparison__closest_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
+*   `numbers__gcd_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -661,8 +192,20 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `probability__swr_p_level_set` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
+*   `algebra__linear_1d` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__add_sub_multiple_longer` (`v1.0.0`) (`Size: ?? GiB`):
+    Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -687,68 +230,21 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `numbers__place_value` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__gcd_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__pair` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__mul` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__expand` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__is_prime_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `polynomials__evaluate_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
     database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__mul_div_multiple_longer` (`v1.0.0`) (`Size: ?? GiB`):
+    Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -773,7 +269,43 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `numbers__place_value_big` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `numbers__round_number` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__mul` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__lcm_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__add_or_sub_in_base` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -786,43 +318,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `comparison__sort` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__div` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `measurement__conversion` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__is_factor_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `algebra__sequence_next_term` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -835,7 +331,19 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__polynomial_roots` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `numbers__is_factor` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__coefficient_named` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -848,7 +356,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `numbers__lcm` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+*   `arithmetic__mixed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -860,7 +368,19 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `numbers__base_conversion` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `measurement__time` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__round_number_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -886,7 +406,72 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `calculus__differentiate` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+*   `comparison__closest_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `comparison__kth_biggest_more` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__add_or_sub` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__div_remainder_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__nearest_integer_root` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__mixed_longer` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -910,9 +495,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-## `math_dataset/algebra__linear_1d_composed`
-
-Mathematics database.
+*   `polynomials__collect` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -924,31 +507,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__mixed`
-
-Mathematics database.
+*   `comparison__pair_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -960,31 +520,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__add_or_sub_big`
-
-Mathematics database.
+*   `comparison__closest` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -996,31 +532,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/comparison__kth_biggest`
-
-Mathematics database.
+*   `probability__swr_p_sequence_more_samples` (`v1.0.0`) (`Size: ?? GiB`):
+    Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1032,31 +545,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__div_remainder`
-
-Mathematics database.
+*   `numbers__place_value_big` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1068,31 +558,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/measurement__time`
-
-Mathematics database.
+*   `arithmetic__div` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1104,31 +570,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__is_prime`
-
-Mathematics database.
+*   `numbers__is_prime_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1140,31 +583,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/probability__swr_p_sequence`
-
-Mathematics database.
+*   `numbers__place_value` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1176,31 +595,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/algebra__linear_1d`
-
-Mathematics database.
+*   `comparison__kth_biggest_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1212,31 +608,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__add_or_sub_in_base`
-
-Mathematics database.
+*   `algebra__linear_2d` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1248,31 +620,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__simplify_surd`
-
-Mathematics database.
+*   `algebra__sequence_nth_term` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1284,31 +633,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__lcm_composed`
-
-Mathematics database.
+*   `arithmetic__mul_div_multiple` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1320,30 +646,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__add_sub_multiple`
-Mathematics database.
+*   `numbers__place_value_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1355,31 +659,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__is_factor`
-
-Mathematics database.
+*   `numbers__gcd` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1391,31 +671,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/comparison__closest`
-
-Mathematics database.
+*   `algebra__polynomial_roots` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1427,31 +684,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__add_sub_multiple_longer`
-
-Mathematics database.
+*   `polynomials__add` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1463,31 +696,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/polynomials__compose`
-
-Mathematics database.
+*   `arithmetic__simplify_surd` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1499,31 +709,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__div_remainder_composed`
-
-Mathematics database.
+*   `arithmetic__div_big` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1535,31 +721,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/algebra__polynomial_roots_composed`
-
-Mathematics database.
+*   `algebra__linear_2d_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1571,31 +734,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/probability__swr_p_level_set_more_samples`
-
-Mathematics database.
+*   `arithmetic__add_sub_multiple` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1607,31 +747,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__mul_div_multiple_longer`
-
-Mathematics database.
+*   `arithmetic__add_or_sub_big` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1643,31 +760,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__place_value_composed`
-
-Mathematics database.
+*   `numbers__lcm` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1679,31 +772,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__mixed_longer`
-
-Mathematics database.
+*   `algebra__linear_1d_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1715,31 +785,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/polynomials__evaluate_composed`
-
-Mathematics database.
+*   `probability__swr_p_level_set_more_samples` (`v1.0.0`) (`Size: ?? GiB`):
+    Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1751,31 +798,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/algebra__sequence_nth_term`
-
-Mathematics database.
+*   `numbers__div_remainder` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1787,31 +810,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__gcd`
-
-Mathematics database.
+*   `comparison__closest_more` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1823,31 +823,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/polynomials__collect`
-
-Mathematics database.
+*   `probability__swr_p_sequence` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1859,32 +836,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/algebra__linear_2d_composed`
-
-Mathematics database.
+*   `calculus__differentiate` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1896,31 +848,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/polynomials__evaluate`
-
-Mathematics database.
+*   `polynomials__expand` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1932,31 +860,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/comparison__closest_more`
-
-Mathematics database.
+*   `numbers__is_factor_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -1968,31 +873,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/comparison__kth_biggest_composed`
-
-Mathematics database.
+*   `numbers__is_prime` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -2004,31 +885,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/probability__swr_p_sequence_more_samples`
-
-Mathematics database.
+*   `numbers__base_conversion` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+    database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -2040,31 +898,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/algebra__sequence_next_term`
-
-Mathematics database.
+*   `comparison__kth_biggest` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -2075,282 +909,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__nearest_integer_root`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/polynomials__coefficient_named`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__add_or_sub`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/comparison__kth_biggest_more`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__round_number`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
 
 ## `math_dataset/polynomials__simplify_power`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__div_big`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/comparison__pair_composed`
 
 Mathematics database.
 
@@ -2422,259 +982,7 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/arithmetic__mul_div_multiple`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/algebra__linear_2d`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/comparison__sort_composed`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__round_number_big`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/polynomials__add`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/arithmetic__mul_big`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__round_number_composed`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/comparison__closest_composed`
+## `math_dataset/polynomials__compose`
 
 Mathematics database.
 
@@ -2746,79 +1054,7 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/calculus__differentiate_composed`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__place_value`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__gcd_composed`
+## `math_dataset/numbers__round_number_big`
 
 Mathematics database.
 
@@ -2890,151 +1126,7 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/arithmetic__mul`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/polynomials__expand`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__is_prime_composed`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__list_prime_factors_composed`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
-## `math_dataset/numbers__place_value_big`
+## `math_dataset/algebra__polynomial_roots_composed`
 
 Mathematics database.
 
@@ -3106,42 +1198,6 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/arithmetic__div`
-
-Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-Versions:
-
-*   **`1.0.0`** (default):
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'answer': Text(shape=(), dtype=tf.string),
-    'question': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
-
-### Supervised keys (for `as_supervised=True`)
-`(u'question', u'answer')`
-
 ## `math_dataset/measurement__conversion`
 
 Mathematics database.
@@ -3178,7 +1234,7 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/numbers__is_factor_composed`
+## `math_dataset/polynomials__evaluate`
 
 Mathematics database.
 
@@ -3214,7 +1270,7 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/algebra__polynomial_roots`
+## `math_dataset/arithmetic__mul_big`
 
 Mathematics database.
 
@@ -3250,7 +1306,7 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/numbers__lcm`
+## `math_dataset/comparison__sort_composed`
 
 Mathematics database.
 
@@ -3286,7 +1342,583 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/numbers__base_conversion`
+## `math_dataset/numbers__gcd_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/algebra__linear_1d`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__add_sub_multiple_longer`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/calculus__differentiate_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/polynomials__evaluate_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__mul_div_multiple_longer`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__list_prime_factors_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__round_number`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__mul`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__lcm_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__add_or_sub_in_base`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/algebra__sequence_next_term`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__is_factor`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/polynomials__coefficient_named`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__mixed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/measurement__time`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__round_number_composed`
 
 Mathematics database.
 
@@ -3358,7 +1990,187 @@ FeaturesDict({
 ### Supervised keys (for `as_supervised=True`)
 `(u'question', u'answer')`
 
-## `math_dataset/calculus__differentiate`
+## `math_dataset/comparison__closest_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/comparison__kth_biggest_more`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__add_or_sub`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__div_remainder_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__nearest_integer_root`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__mixed_longer`
 
 Mathematics database.
 
@@ -3395,6 +2207,1194 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__sort_more`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/polynomials__collect`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/comparison__pair_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/comparison__closest`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/probability__swr_p_sequence_more_samples`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__place_value_big`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__div`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__is_prime_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__place_value`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/comparison__kth_biggest_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/algebra__linear_2d`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/algebra__sequence_nth_term`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__mul_div_multiple`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__place_value_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__gcd`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/algebra__polynomial_roots`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/polynomials__add`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__simplify_surd`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__div_big`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/algebra__linear_2d_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__add_sub_multiple`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/arithmetic__add_or_sub_big`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__lcm`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/algebra__linear_1d_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/probability__swr_p_level_set_more_samples`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__div_remainder`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/comparison__closest_more`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/probability__swr_p_sequence`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/calculus__differentiate`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/polynomials__expand`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__is_factor_composed`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__is_prime`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/numbers__base_conversion`
+
+Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+Versions:
+
+*   **`1.0.0`** (default):
+
+### Statistics
+None computed
+
+### Features
+```python
+FeaturesDict({
+    'answer': Text(shape=(), dtype=tf.string),
+    'question': Text(shape=(), dtype=tf.string),
+})
+```
+
+### Homepage
+
+*   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
+
+### Supervised keys (for `as_supervised=True`)
+`(u'question', u'answer')`
+
+## `math_dataset/comparison__kth_biggest`
 
 Mathematics database.
 
