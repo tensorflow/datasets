@@ -24,8 +24,10 @@ import os
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
+import numpy as np
 
 _URL = "https://nextcloud.qriscloud.org.au/index.php/s/a3KxPawpqkiorST/download"
+_URL_LBL = "https://raw.githubusercontent.com/AlexOlsen/DeepWeeds/master/labels/labels.csv"
 
 _DESCRIPTION = (
     """The DeepWeeds dataset consists of 17,509 images capturing eight different weed species native to Australia """
@@ -86,7 +88,7 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names=_NAMES),
         }),
         supervised_keys=("image", "label"),
-        homepage="https://github.com/AlexOlsen/DeepWeeds",
+        urls=[_URL, _URL_LBL],
         citation=_CITATION,
     )
 
@@ -98,19 +100,38 @@ class DeepWeeds(tfds.core.GeneratorBasedBuilder):
             url=_URL,
             extract_method=tfds.download.ExtractMethod.ZIP))
 
+
+    path_lbl = dl_manager.download_and_extract(
+        tfds.download.Resource(
+            url=_URL_LBL,
+            extract_method=None))
+	
+
+    # there are different label set for train and test
+    # for now we return the full dataset as 'train' set.
     return [
         tfds.core.SplitGenerator(
             name="train",
             gen_kwargs={
                 "data_dir_path": path,
+                "label_dir_path": path_lbl,
             },
         ),
     ]
 
-  def _generate_examples(self, data_dir_path):
+  def _generate_examples(self, data_dir_path, label_dir_path):
     """Generate images and labels for splits."""
-
+    # parse the csv-label data
+    csv = np.loadtxt(label_dir_path,
+            dtype={'names': ('Filename', 'Label', 'Species'), 'formats': ('S21', 'i4', 'S1')},
+            skiprows=1,
+            delimiter=',')
+    
+    label_dict = {}
+    for entry in csv:
+        label_dict[entry[0].decode('UTF-8')] = int(entry[1])
+    
     for file_name in tf.io.gfile.listdir(data_dir_path):
       image = os.path.join(data_dir_path, file_name)
-      label = _NAMES[int(file_name.split("-")[2].split(".")[0])]
+      label = _NAMES[label_dict[file_name]]
       yield file_name, {"image": image, "label": label}
