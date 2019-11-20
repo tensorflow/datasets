@@ -126,7 +126,6 @@ so2sat/all/0.0.1
 so2sat/all/2.0.0
 so2sat/rgb/0.0.1
 so2sat/rgb/2.0.0
-wikipedia/20190301.aa/0.0.4
 wikipedia/20190301.ab/0.0.4
 wikipedia/20190301.ace/0.0.4
 wikipedia/20190301.ady/0.0.4

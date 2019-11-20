@@ -22,8 +22,8 @@ cleaning to strip markdown and unwanted sections (references, etc.).
 `wikipedia` is configured with `tfds.text.wikipedia.WikipediaConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `20190301.aa` (`v0.0.4`) (`Size: ?? GiB`): Wikipedia dataset for aa, parsed
-    from 20190301 dump.
+*   `20190301.aa` (`v0.0.4`) (`Size: 44.09 KiB`): Wikipedia dataset for aa,
+    parsed from 20190301 dump.
 
 *   `20190301.ab` (`v0.0.4`) (`Size: ?? GiB`): Wikipedia dataset for ab, parsed
     from 20190301 dump.
