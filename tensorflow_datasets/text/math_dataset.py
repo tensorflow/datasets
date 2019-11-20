@@ -207,7 +207,7 @@ _DATASET_VERSION = "mathematics_dataset-v1.0"
 def _generate_builder_configs():
   """Generate configs with different subsets of mathematics dataset."""
   configs = []
-  for module in set(_MODULES):
+  for module in sorted(set(_MODULES)):
     configs.append(
         tfds.core.BuilderConfig(
             name=module,
