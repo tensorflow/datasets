@@ -133,7 +133,7 @@ _NAMES = [
     'Volkswagen Golf Hatchback 2012', 'Volkswagen Golf Hatchback 1991',
     'Volkswagen Beetle Hatchback 2012', 'Volvo C30 Hatchback 2012',
     'Volvo 240 Sedan 1993', 'Volvo XC90 SUV 2007',
-    'smart fortwo Convertible 2012', 'test'
+    'smart fortwo Convertible 2012'
 ]
 
 _CITATION = """\
@@ -152,7 +152,7 @@ _CITATION = """\
 class Cars196(tfds.core.GeneratorBasedBuilder):
   """Car Images dataset."""
 
-  VERSION = tfds.core.Version('1.0.0')
+  VERSION = tfds.core.Version('1.1.0')
 
   def _info(self):
     """Define the dataset info."""
@@ -217,7 +217,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
       image_name = example[-1].item().split('.')[0]
       # -1 because class labels are index-1 based.
       # There are no labels in the "test" split.
-      label = 'test' if split_name == 'test' else _NAMES[example[4].item() - 1]
+      label = -1 if split_name == 'test' else _NAMES[example[4].item() - 1]
       image = image_dict[image_name]
       bbox = bbox_dict[image_name]
       yield image_name, {
