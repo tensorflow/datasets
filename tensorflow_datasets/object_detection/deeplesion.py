@@ -157,8 +157,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    _CSV_URL = ("https://raw.githubusercontent.com/anir16293/Deep-Lesion/master/DL_info.csv")
-    base_url = 'https://zenodo.org/record/2546921/files/'
+    #_CSV_URL = ("https://raw.githubusercontent.com/anir16293/Deep-Lesion/master/DL_info.csv")
     resources = {
             'zipfile01':'https://nihcc.box.com/shared/static/sp5y2k799v4x1x77f7w1aqp26uyfq7qz.zip',
             'zipfile02':'https://nihcc.box.com/shared/static/l9e1ys5e48qq8s409ua3uv6uwuko0y5c.zip',
@@ -220,16 +219,14 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
             'zipfile53':'https://nihcc.box.com/shared/static/7x4pvrdu0lhazj83sdee7nr0zj0s1t0v.zip',
             'zipfile54':'https://nihcc.box.com/shared/static/z7s2zzdtxe696rlo16cqf5pxahpl8dup.zip',
             'zipfile55':'https://nihcc.box.com/shared/static/shr998yp51gf2y5jj7jqxz2ht8lcbril.zip',
-            'zipfile56':'https://nihcc.box.com/shared/static/kqg4peb9j53ljhrxe3l3zrj4ac6xogif.zip'
+            'zipfile56':'https://nihcc.box.com/shared/static/kqg4peb9j53ljhrxe3l3zrj4ac6xogif.zip',
+            'ann_file':'https://raw.githubusercontent.com/anir16293/Deep-Lesion/master/DL_info.csv'
     }
     dl_manager._register_checksums = True
     paths = dl_manager.download_and_extract(resources)
-#     imgs_path = os.path.join(paths, _IMAGE_DIR)
-    ann_path = dl_manager.download(_CSV_URL)
-#     for k, v in sorted(paths.items()):
-#         print('{}:{}'.format(k, v))
+    ann_path = paths['ann_file']
+    del paths['ann_file']
     lut = _lookup_table(paths)
-    
     split = Split(ann_path)
     train_split, val_split, test_split = split.generator()
     
@@ -281,8 +278,9 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
 def _lookup_table(paths):
     lut = {}
     for k, v in paths.items():
-        for fd in os.listdir(os.path.join(v,'Images_png')):
+        for fd in tf.io.gfile.listdir(os.path.join(v,'Images_png')):
             lut[fd] = os.path.join(v,'Images_png')
+    print(lut)
     return lut
         
 
