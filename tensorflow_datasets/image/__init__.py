@@ -87,5 +87,4 @@ from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon
-from tensorflow_datasets.image.deeplesion import Deeplesion
 

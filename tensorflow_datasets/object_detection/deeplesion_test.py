@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image import deeplesion
+from tensorflow_datasets.object_detection import deeplesion
 
 
 class DeeplesionTest(testing.DatasetBuilderTestCase):
@@ -28,7 +28,15 @@ class DeeplesionTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 5,
       "validation": 5,
+      "test":5,
   }
+  DL_EXTRACT_RESULT = {
+      "zipfile01": "zipfile01",  # Relative to fake_examples/my_dataset dir.
+      "zipfile02": "zipfile02",
+      "zipfile03": "zipfile03",
+      'ann_file': "fake_DL_info.csv"
+  }
+
 
 
 if __name__ == "__main__":
