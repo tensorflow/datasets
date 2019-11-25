@@ -133,7 +133,7 @@ _NAMES = [
     'Volkswagen Golf Hatchback 2012', 'Volkswagen Golf Hatchback 1991',
     'Volkswagen Beetle Hatchback 2012', 'Volvo C30 Hatchback 2012',
     'Volvo 240 Sedan 1993', 'Volvo XC90 SUV 2007',
-    'smart fortwo Convertible 2012'
+    'smart fortwo Convertible 2012',
 ]
 
 _CITATION = """\
@@ -152,17 +152,21 @@ _CITATION = """\
 class Cars196(tfds.core.GeneratorBasedBuilder):
   """Car Images dataset."""
 
-  VERSION = tfds.core.Version('1.1.0')
+  VERSION = tfds.core.Version('2.0.0')
+
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version('1.1.0'),  # Version with no test labels.
+  ]
 
   def _info(self):
     """Define the dataset info."""
-
+    names = _NAMES + ['test'] if self.version < '2.0.0' else _NAMES
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(),
-            'label': tfds.features.ClassLabel(names=_NAMES),
+            'label': tfds.features.ClassLabel(names=names),
             'bbox': tfds.features.BBoxFeature(),
         }),
         supervised_keys=('image', 'label'),
@@ -175,6 +179,8 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
         'train': urllib.parse.urljoin(_URL, 'cars_train.tgz'),
         'test': urllib.parse.urljoin(_URL, 'cars_test.tgz'),
         'extra': _EXTRA_URL,
+        'test_annos':
+            urllib.parse.urljoin(_URL, 'cars_test_annos_withlabels.mat'),
     })
 
     return [
@@ -198,9 +204,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
                     'test',
                 'data_dir_path':
                     os.path.join(output_files['test'], 'cars_test'),
-                'data_annotations_path':
-                    os.path.join(output_files['extra'],
-                                 os.path.join('devkit', 'cars_test_annos.mat')),
+                'data_annotations_path': output_files['test_annos'],
             },
         ),
     ]
@@ -215,9 +219,10 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
       mat = tfds.core.lazy_imports.scipy.io.loadmat(f)
     for example in mat['annotations'][0]:
       image_name = example[-1].item().split('.')[0]
-      # -1 because class labels are index-1 based.
-      # There are no labels in the "test" split.
-      label = -1 if split_name == 'test' else _NAMES[example[4].item() - 1]
+      if self.version < '2.0.0' and split_name == 'test':
+        label = -1
+      else:
+        label = _NAMES[example[4].item() - 1]
       image = image_dict[image_name]
       bbox = bbox_dict[image_name]
       yield image_name, {
