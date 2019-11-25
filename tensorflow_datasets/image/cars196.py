@@ -154,19 +154,14 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('2.0.0')
 
-  SUPPORTED_VERSIONS = [
-      tfds.core.Version('1.1.0'),  # Version with no test labels.
-  ]
-
   def _info(self):
     """Define the dataset info."""
-    names = _NAMES + ['test'] if self.version < '2.0.0' else _NAMES
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(),
-            'label': tfds.features.ClassLabel(names=names),
+            'label': tfds.features.ClassLabel(names=_NAMES),
             'bbox': tfds.features.BBoxFeature(),
         }),
         supervised_keys=('image', 'label'),
@@ -219,10 +214,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
       mat = tfds.core.lazy_imports.scipy.io.loadmat(f)
     for example in mat['annotations'][0]:
       image_name = example[-1].item().split('.')[0]
-      if self.version < '2.0.0' and split_name == 'test':
-        label = -1
-      else:
-        label = _NAMES[example[4].item() - 1]
+      label = _NAMES[example[4].item() - 1]
       image = image_dict[image_name]
       bbox = bbox_dict[image_name]
       yield image_name, {
