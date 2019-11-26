@@ -19,29 +19,26 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
     [https://ai.stanford.edu/~jkrause/cars/car_dataset.html](https://ai.stanford.edu/~jkrause/cars/car_dataset.html)
 *   `DatasetBuilder`:
     [`tfds.image.cars196.Cars196`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/cars196.py)
-*   Version: `v1.0.0`
+*   Version: `v2.0.0`
 *   Versions:
 
-    *   **`1.0.0`** (default):
+    *   **`2.0.0`** (default):
 
-*   Size: `1.82 GiB`
+*   Size: `?? GiB`
 
 ## Features
+
 ```python
 FeaturesDict({
     'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=197),
+    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=196),
 })
 ```
 
 ## Statistics
 
-Split | Examples
-:---- | -------:
-ALL   | 16,185
-TRAIN | 8,144
-TEST  | 8,041
+None computed
 
 ## Homepage
 
