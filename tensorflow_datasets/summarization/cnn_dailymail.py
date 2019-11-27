@@ -73,6 +73,16 @@ _DL_URLS = {
 
 _HIGHLIGHTS = 'highlights'
 _ARTICLE = 'article'
+_SUPPORTED_VERSIONS = [
+    tfds.core.Version('0.0.2', experiments={tfds.core.Experiment.S3: False}),
+    # Same data as 0.0.2
+    tfds.core.Version('1.0.0',
+                      'New split API (https://tensorflow.org/datasets/splits)')]
+
+# Having the model predict newline separators makes it easier to evaluate
+# using summary-level ROUGE.
+_DEFAULT_VERSION = tfds.core.Version('2.0.0',
+                                     'Separate target sentences with newline.')
 
 
 class CnnDailymailConfig(tfds.core.BuilderConfig):
@@ -92,13 +102,8 @@ class CnnDailymailConfig(tfds.core.BuilderConfig):
     # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
     # 0.0.2: Initial version.
     super(CnnDailymailConfig, self).__init__(
-        version=tfds.core.Version(
-            '0.0.2', experiments={tfds.core.Experiment.S3: False}),
-        supported_versions=[
-            tfds.core.Version(
-                '1.0.0',
-                'New split API (https://tensorflow.org/datasets/splits)'),
-        ],
+        version=_DEFAULT_VERSION,
+        supported_versions=_SUPPORTED_VERSIONS,
         **kwargs)
     self.text_encoder_config = (
         text_encoder_config or tfds.features.text.TextEncoderConfig())
@@ -168,7 +173,7 @@ def _read_text_file(text_file):
   return lines
 
 
-def _get_art_abs(story_file):
+def _get_art_abs(story_file, tfds_version):
   """Get abstract (highlights) and article from a story file path."""
   # Based on https://github.com/abisee/cnn-dailymail/blob/master/
   #     make_datafiles.py
@@ -207,16 +212,16 @@ def _get_art_abs(story_file):
   # Make article into a single string
   article = ' '.join(article_lines)
 
-  # Make abstract into a single string, putting <s> and </s> tags around
-  # the sentences.
-  abstract = ' '.join(highlights)
+  if tfds_version >= '2.0.0':
+    abstract = '\n'.join(highlights)
+  else:
+    abstract = ' '.join(highlights)
 
   return article, abstract
 
 
 class CnnDailymail(tfds.core.GeneratorBasedBuilder):
   """CNN/DailyMail non-anonymized summarization dataset."""
-  # 0.0.2 is like 0.0.1 but without special tokens <s> and </s>.
   BUILDER_CONFIGS = [
       CnnDailymailConfig(
           name='plain_text',
@@ -291,7 +296,7 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, files):
     for p in files:
-      article, highlights = _get_art_abs(p)
+      article, highlights = _get_art_abs(p, self.version)
       if not article or not highlights:
         continue
       fname = os.path.basename(p)
