@@ -1639,9 +1639,11 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
+
 None computed
 
 ### Features
+
 ```python
 FeaturesDict({
     'answer': Text(shape=(), dtype=tf.string),
@@ -1654,6 +1656,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
+
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__mul_div_multiple_longer`
@@ -3205,6 +3208,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
+
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__expand`
@@ -3226,9 +3230,11 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
+
 None computed
 
 ### Features
+
 ```python
 FeaturesDict({
     'answer': Text(shape=(), dtype=tf.string),
@@ -3244,7 +3250,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__simplify_power`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3277,11 +3282,9 @@ FeaturesDict({
 *   [https://github.com/deepmind/mathematics_dataset](https://github.com/deepmind/mathematics_dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-
 `(u'question', u'answer')`
 
 ## `math_dataset/probability__swr_p_level_set`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3299,11 +3302,9 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'answer': Text(shape=(), dtype=tf.string),

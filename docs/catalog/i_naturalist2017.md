@@ -34,7 +34,6 @@ the test images (label = -1).
 *   Size: `?? GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'id': Text(shape=(), dtype=tf.string),
@@ -45,7 +44,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Homepage
@@ -53,11 +51,9 @@ None computed
 *   [https://github.com/visipedia/inat_comp/tree/master/2017](https://github.com/visipedia/inat_comp/tree/master/2017)
 
 ## Supervised keys (for `as_supervised=True`)
-
 `(u'image', u'label')`
 
 ## Citation
-
 ```
 @InProceedings{Horn_2018_CVPR,
 author = {

@@ -118,7 +118,6 @@ VALIDATION | 13,368
 TEST       | 11,490
 
 ### Features
-
 ```python
 FeaturesDict({
     'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32857>),

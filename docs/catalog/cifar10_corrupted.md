@@ -324,6 +324,7 @@ ALL   | 10,000
 TEST  | 10,000
 
 ### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -336,9 +337,11 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## `cifar10_corrupted/brightness_2`
+
 Corruption method: brightness, severity level: 2
 
 Versions:
@@ -608,6 +611,7 @@ ALL   | 10,000
 TEST  | 10,000
 
 ### Features
+
 ```python
 FeaturesDict({
     'image': Image(shape=(32, 32, 3), dtype=tf.uint8),
@@ -620,6 +624,7 @@ FeaturesDict({
 *   [https://github.com/hendrycks/robustness](https://github.com/hendrycks/robustness)
 
 ### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## `cifar10_corrupted/defocus_blur_1`
