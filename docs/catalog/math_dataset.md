@@ -911,7 +911,6 @@ Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
 ## `math_dataset/algebra__linear_1d`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -947,7 +946,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/algebra__linear_1d_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -983,7 +981,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/algebra__linear_2d`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1019,7 +1016,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/algebra__linear_2d_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1055,7 +1051,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/algebra__polynomial_roots`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1091,7 +1086,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/algebra__polynomial_roots_big`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1162,7 +1156,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/algebra__sequence_next_term`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1198,7 +1191,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/algebra__sequence_nth_term`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1234,7 +1226,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__add_or_sub`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1270,7 +1261,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__add_or_sub_big`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1306,7 +1296,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__add_or_sub_in_base`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1342,7 +1331,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__add_sub_multiple`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1378,7 +1366,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__add_sub_multiple_longer`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1414,7 +1401,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__div`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1450,7 +1436,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__div_big`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1486,7 +1471,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__mixed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1522,7 +1506,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__mixed_longer`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1558,7 +1541,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__mul`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1594,7 +1576,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__mul_big`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1630,7 +1611,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__mul_div_multiple`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1666,7 +1646,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__mul_div_multiple_longer`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1702,7 +1681,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__nearest_integer_root`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1738,7 +1716,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/arithmetic__simplify_surd`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1774,7 +1751,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/calculus__differentiate`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1810,7 +1786,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/calculus__differentiate_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1846,7 +1821,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__closest`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1882,7 +1856,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__closest_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1918,7 +1891,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__closest_more`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1954,7 +1926,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__kth_biggest`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -1990,7 +1961,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__kth_biggest_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2061,7 +2031,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__pair`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2097,7 +2066,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__pair_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2133,7 +2101,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__sort`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2169,7 +2136,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/comparison__sort_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2240,7 +2206,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/measurement__conversion`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2276,7 +2241,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/measurement__time`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2312,7 +2276,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__base_conversion`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2348,7 +2311,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__div_remainder`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2384,7 +2346,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__div_remainder_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2420,7 +2381,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__gcd`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2456,7 +2416,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__gcd_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2492,7 +2451,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__is_factor`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2528,7 +2486,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__is_factor_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2564,7 +2521,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__is_prime`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2600,7 +2556,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__is_prime_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2636,7 +2591,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__lcm`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2672,7 +2626,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__lcm_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2708,7 +2661,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__list_prime_factors`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2744,7 +2696,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__list_prime_factors_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2780,7 +2731,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__place_value`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2816,7 +2766,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__place_value_big`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2852,7 +2801,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__place_value_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2888,7 +2836,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__round_number`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2924,7 +2871,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__round_number_big`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2960,7 +2906,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/numbers__round_number_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -2996,7 +2941,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__add`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3032,7 +2976,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__coefficient_named`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3068,7 +3011,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__collect`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3104,7 +3046,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__compose`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3140,7 +3081,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__evaluate`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3176,7 +3116,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__evaluate_composed`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3212,7 +3151,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__expand`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3248,7 +3186,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/polynomials__simplify_power`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3284,7 +3221,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/probability__swr_p_level_set`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3320,7 +3256,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/probability__swr_p_level_set_more_samples`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3356,7 +3291,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/probability__swr_p_sequence`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -3392,7 +3326,6 @@ FeaturesDict({
 `(u'question', u'answer')`
 
 ## `math_dataset/probability__swr_p_sequence_more_samples`
-
 Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range

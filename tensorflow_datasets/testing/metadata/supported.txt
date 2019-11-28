@@ -68,7 +68,7 @@ big_patent/f/1.0.0
 big_patent/g/1.0.0
 big_patent/h/1.0.0
 big_patent/y/1.0.0
-billsum/1.0.0
+billsum/2.0.0
 binarized_mnist/1.0.0
 binary_alpha_digits/1.0.0
 c4/en.noclean/1.0.0
@@ -87,6 +87,7 @@ caltech101/1.1.0
 caltech101/3.0.0
 caltech_birds2010/0.1.0
 caltech_birds2011/0.1.0
+cars196/2.0.0
 cassava/0.1.0
 cats_vs_dogs/2.0.1
 cats_vs_dogs/4.0.0
@@ -390,6 +391,7 @@ emnist/letters/1.0.1
 emnist/letters/3.0.0
 emnist/mnist/1.0.1
 emnist/mnist/3.0.0
+esnli/plain_text/0.0.2
 eurosat/all/2.0.0
 eurosat/rgb/2.0.0
 fashion_mnist/1.0.0
@@ -814,8 +816,6 @@ tf_flowers/3.0.0
 the300w_lp/1.0.0
 titanic/1.0.0
 titanic/2.0.0
-trivia_qa/0.1.0
-trivia_qa/1.0.0
 uc_merced/0.0.1
 uc_merced/2.0.0
 ucf101/ucf101_1/1.0.0

@@ -24,10 +24,9 @@ Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.
 
     *   **`2.0.0`** (default):
 
-*   Size: `?? GiB`
+*   Size: `1.82 GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
@@ -38,7 +37,11 @@ FeaturesDict({
 
 ## Statistics
 
-None computed
+Split | Examples
+:---- | -------:
+ALL   | 16,185
+TRAIN | 8,144
+TEST  | 8,041
 
 ## Homepage
 
