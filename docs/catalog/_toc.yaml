@@ -82,6 +82,8 @@ toc:
     title: food101
   - path: /datasets/catalog/horses_or_humans
     title: horses_or_humans
+  - path: /datasets/catalog/i_naturalist2017
+    title: i_naturalist2017
   - path: /datasets/catalog/image_label_folder
     title: image_label_folder
   - path: /datasets/catalog/imagenet2012

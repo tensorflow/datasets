@@ -376,6 +376,7 @@ ALL        | 50,000
 VALIDATION | 50,000
 
 ### Features
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -389,9 +390,11 @@ FeaturesDict({
 *   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
 
 ### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/gaussian_noise_5`
+
 corruption type = gaussian_noise, severity = 5
 
 Versions:
@@ -424,6 +427,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/shot_noise_1`
+
 corruption type = shot_noise, severity = 1
 
 Versions:
@@ -440,6 +444,7 @@ ALL        | 50,000
 VALIDATION | 50,000
 
 ### Features
+
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -453,9 +458,11 @@ FeaturesDict({
 *   [https://openreview.net/forum?id=HJz6tiCqYm](https://openreview.net/forum?id=HJz6tiCqYm)
 
 ### Supervised keys (for `as_supervised=True`)
+
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/shot_noise_2`
+
 corruption type = shot_noise, severity = 2
 
 Versions:
@@ -488,6 +495,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/shot_noise_3`
+
 corruption type = shot_noise, severity = 3
 
 Versions:
@@ -520,6 +528,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/shot_noise_4`
+
 corruption type = shot_noise, severity = 4
 
 Versions:
@@ -552,6 +561,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/shot_noise_5`
+
 corruption type = shot_noise, severity = 5
 
 Versions:
@@ -584,6 +594,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/impulse_noise_1`
+
 corruption type = impulse_noise, severity = 1
 
 Versions:
@@ -616,6 +627,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/impulse_noise_2`
+
 corruption type = impulse_noise, severity = 2
 
 Versions:
@@ -648,6 +660,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/impulse_noise_3`
+
 corruption type = impulse_noise, severity = 3
 
 Versions:
@@ -680,6 +693,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/impulse_noise_4`
+
 corruption type = impulse_noise, severity = 4
 
 Versions:
@@ -712,6 +726,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/impulse_noise_5`
+
 corruption type = impulse_noise, severity = 5
 
 Versions:
@@ -744,6 +759,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/defocus_blur_1`
+
 corruption type = defocus_blur, severity = 1
 
 Versions:
@@ -776,6 +792,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/defocus_blur_2`
+
 corruption type = defocus_blur, severity = 2
 
 Versions:
@@ -808,6 +825,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/defocus_blur_3`
+
 corruption type = defocus_blur, severity = 3
 
 Versions:
@@ -840,6 +858,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/defocus_blur_4`
+
 corruption type = defocus_blur, severity = 4
 
 Versions:
@@ -872,6 +891,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/defocus_blur_5`
+
 corruption type = defocus_blur, severity = 5
 
 Versions:
@@ -904,6 +924,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/frosted_glass_blur_1`
+
 corruption type = frosted_glass_blur, severity = 1
 
 Versions:
@@ -936,6 +957,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/frosted_glass_blur_2`
+
 corruption type = frosted_glass_blur, severity = 2
 
 Versions:
@@ -968,6 +990,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/frosted_glass_blur_3`
+
 corruption type = frosted_glass_blur, severity = 3
 
 Versions:
@@ -1000,6 +1023,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/frosted_glass_blur_4`
+
 corruption type = frosted_glass_blur, severity = 4
 
 Versions:
@@ -1032,6 +1056,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/frosted_glass_blur_5`
+
 corruption type = frosted_glass_blur, severity = 5
 
 Versions:
@@ -1064,6 +1089,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/zoom_blur_1`
+
 corruption type = zoom_blur, severity = 1
 
 Versions:
@@ -1096,6 +1122,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/zoom_blur_2`
+
 corruption type = zoom_blur, severity = 2
 
 Versions:
@@ -1128,6 +1155,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/zoom_blur_3`
+
 corruption type = zoom_blur, severity = 3
 
 Versions:
@@ -1160,6 +1188,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/zoom_blur_4`
+
 corruption type = zoom_blur, severity = 4
 
 Versions:
@@ -1192,6 +1221,7 @@ FeaturesDict({
 `(u'image', u'label')`
 
 ## `imagenet2012_corrupted/zoom_blur_5`
+
 corruption type = zoom_blur, severity = 5
 
 Versions:

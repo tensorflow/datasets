@@ -51,11 +51,9 @@ Versions:
 *   **`1.1.0`** (default):
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'answer': FeaturesDict({
@@ -92,7 +90,6 @@ FeaturesDict({
 *   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 
 ## `trivia_qa/rc.nocontext`
-
 Question-answer pairs where all documents for a given question contain the
 answer string(s).
 
@@ -101,11 +98,9 @@ Versions:
 *   **`1.1.0`** (default):
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'answer': FeaturesDict({
@@ -153,11 +148,9 @@ Versions:
 *   **`1.1.0`** (default):
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'answer': FeaturesDict({
@@ -194,7 +187,6 @@ FeaturesDict({
 *   [http://nlp.cs.washington.edu/triviaqa/](http://nlp.cs.washington.edu/triviaqa/)
 
 ## `trivia_qa/unfiltered.nocontext`
-
 110k question-answer pairs for open domain QA where not all documents for a
 given question contain the answer string(s). This makes the unfiltered dataset
 more appropriate for IR-style QA.
@@ -204,11 +196,9 @@ Versions:
 *   **`1.1.0`** (default):
 
 ### Statistics
-
 None computed
 
 ### Features
-
 ```python
 FeaturesDict({
     'answer': FeaturesDict({

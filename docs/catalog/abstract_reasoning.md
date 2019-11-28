@@ -146,9 +146,11 @@ Versions:
 *   **`0.0.2`** (default):
 
 ### Statistics
+
 None computed
 
 ### Features
+
 ```python
 FeaturesDict({
     'answers': Video(Image(shape=(160, 160, 1), dtype=tf.uint8)),
@@ -165,6 +167,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
 
 ## `abstract_reasoning/extrapolation`
+
 Same as in interpolation, but the values of \
 the attributes were restricted to the lower half of the discrete set during \
 training, whereas in the test set they took values in the upper half.
@@ -193,6 +196,7 @@ FeaturesDict({
 *   [https://github.com/deepmind/abstract-reasoning-matrices](https://github.com/deepmind/abstract-reasoning-matrices)
 
 ## `abstract_reasoning/attr.rel.pairs`
+
 All $S$ contained at least two triples, \
 $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$, of which 400 are viable. We \
 randomly allocated 360 to the training set and 40 to the test set. Members \

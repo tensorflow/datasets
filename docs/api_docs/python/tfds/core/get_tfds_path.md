@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Returns absolute path to file given path relative to tfds root.
 
 ``` python
