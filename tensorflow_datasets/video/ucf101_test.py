@@ -54,5 +54,10 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
                      {'test': {'Archery': 1, 'Nunchucks': 1},
                       'train': {'Archery': 1, 'Nunchucks': 2}})
 
+
+class Ucf101S3Test(Ucf101Test):
+  VERSION = 'experimental_latest'
+
+
 if __name__ == '__main__':
   testing.test_main()
