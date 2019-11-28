@@ -74,6 +74,8 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
   """
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = "This is a 'template' dataset."
+
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [

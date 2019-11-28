@@ -71,6 +71,12 @@ class Resisc45(tfds.core.GeneratorBasedBuilder):
   # 2.0.0: S3 with new hashing function (different shuffle).
   # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  Dataset can be downloaded from OneDrive:
+  https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs
+  After downloading the rar file, please extract it to the manual_dir.
+  """
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,

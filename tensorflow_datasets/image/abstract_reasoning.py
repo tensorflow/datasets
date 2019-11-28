@@ -149,6 +149,12 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
 
 class AbstractReasoning(tfds.core.BeamBasedBuilder):
   """Abstract reasoning dataset."""
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  Data can be downloaded from
+  https://console.cloud.google.com/storage/browser/ravens-matrices
+  Please put all the tar.gz files in manual_dir.
+  """
+
   BUILDER_CONFIGS = [
       AbstractReasoningConfig(
           name="neutral",

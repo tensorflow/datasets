@@ -151,6 +151,15 @@ class DatasetBuilder(object):
   # be available through tfds.{load, builder} or documented in overview.md.
   IN_DEVELOPMENT = False
 
+  # Must be set for datasets that use 'manual_dir' functionality - the ones
+  # that require users to do additional steps to download the data
+  # (this is usually due to some external regulations / rules).
+  #
+  # This field should contain a string with user instructions, including
+  # the list of files that should be present. It will be
+  # displayed in the dataset documentation.
+  MANUAL_DOWNLOAD_INSTRUCTIONS = None
+
 
   @api_utils.disallow_positional_args
   def __init__(self, data_dir=None, config=None, version=None):
@@ -649,19 +658,26 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   def _make_download_manager(self, download_dir, download_config):
+    """Creates a new download manager object."""
     download_dir = download_dir or os.path.join(self._data_dir_root,
                                                 "downloads")
     extract_dir = (download_config.extract_dir or
                    os.path.join(download_dir, "extracted"))
-    manual_dir = (download_config.manual_dir or
-                  os.path.join(download_dir, "manual"))
-    manual_dir = os.path.join(manual_dir, self.name)
+
+    # Use manual_dir only if MANUAL_DOWNLOAD_INSTRUCTIONS are set.
+    if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
+      manual_dir = (
+          download_config.manual_dir or os.path.join(download_dir, "manual"))
+      manual_dir = os.path.join(manual_dir, self.name)
+    else:
+      manual_dir = None
 
     return download.DownloadManager(
         dataset_name=self.name,
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
+        manual_dir_instructions=self.MANUAL_DOWNLOAD_INSTRUCTIONS,
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         register_checksums=download_config.register_checksums,
