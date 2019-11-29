@@ -41,7 +41,7 @@ LFW_CITATION = """\
 
 class LFW(tfds.core.GeneratorBasedBuilder):
   """LFW Class."""
-  URL = "http://vis-www.cs.umass.edu/lfw"
+
   VERSION = tfds.core.Version("0.1.0")
 
   def _info(self):
@@ -55,7 +55,7 @@ class LFW(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(shape=LFW_IMAGE_SHAPE),
         }),
         supervised_keys=("label", "image"),
-        urls=[self.URL],
+        homepage="http://vis-www.cs.umass.edu/lfw",
         citation=LFW_CITATION,
     )
 

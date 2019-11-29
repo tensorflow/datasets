@@ -68,7 +68,9 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               '0.0.3', experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version('1.0.0'),
+              tfds.core.Version(
+                  '1.0.0',
+                  'New split API (https://tensorflow.org/datasets/splits)'),
           ],
           description='Plain text import of multilingual TED talk translations',
       )
@@ -85,7 +87,7 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
             'talk_name':
                 tfds.features.Text(),
         }),
-        urls=['https://github.com/neulab/word-embeddings-for-nmt'],
+        homepage='https://github.com/neulab/word-embeddings-for-nmt',
         citation=_CITATION,
     )
 

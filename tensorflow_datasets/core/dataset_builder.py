@@ -52,10 +52,10 @@ REUSE_CACHE_IF_EXISTS = download.GenerateMode.REUSE_CACHE_IF_EXISTS
 REUSE_DATASET_IF_EXISTS = download.GenerateMode.REUSE_DATASET_IF_EXISTS
 
 GCS_HOSTED_MSG = """\
-Dataset {name} is hosted on GCS. You can skip download_and_prepare by setting
-data_dir=gs://tfds-data/datasets. If you find
-that read performance is slow, copy the data locally with gsutil:
-gsutil -m cp -R {gcs_path} {local_data_dir_no_version}
+Dataset %s is hosted on GCS. It will automatically be downloaded to your
+local data directory. If you'd instead prefer to read directly from our public
+GCS bucket (recommended if you're running on GCP), you can instead set
+data_dir=gs://tfds-data/datasets.
 """
 
 
@@ -151,6 +151,15 @@ class DatasetBuilder(object):
   # be available through tfds.{load, builder} or documented in overview.md.
   IN_DEVELOPMENT = False
 
+  # Must be set for datasets that use 'manual_dir' functionality - the ones
+  # that require users to do additional steps to download the data
+  # (this is usually due to some external regulations / rules).
+  #
+  # This field should contain a string with user instructions, including
+  # the list of files that should be present. It will be
+  # displayed in the dataset documentation.
+  MANUAL_DOWNLOAD_INSTRUCTIONS = None
+
 
   @api_utils.disallow_positional_args
   def __init__(self, data_dir=None, config=None, version=None):
@@ -187,25 +196,36 @@ class DatasetBuilder(object):
       logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
 
+  @utils.memoized_property
+  def canonical_version(self):
+    if self._builder_config:
+      return self._builder_config.version
+    else:
+      return self.VERSION
+
+  @utils.memoized_property
+  def supported_versions(self):
+    if self._builder_config:
+      return self._builder_config.supported_versions
+    else:
+      return self.SUPPORTED_VERSIONS
+
+  @utils.memoized_property
+  def versions(self):
+    """Versions (canonical + availables), in preference order."""
+    return [
+        utils.Version(v) if isinstance(v, six.string_types) else v
+        for v in [self.canonical_version] + self.supported_versions
+    ]
+
   def _pick_version(self, requested_version):
     """Returns utils.Version instance, or raise AssertionError."""
-    if self._builder_config:
-      canonical_version = self._builder_config.version
-      supported_versions = self._builder_config.supported_versions
-    else:
-      canonical_version = self.VERSION
-      supported_versions = self.SUPPORTED_VERSIONS
-    versions = [
-        utils.Version(v) if isinstance(v, six.string_types) else v
-        for v in [canonical_version] + supported_versions
-    ]
     if requested_version == "experimental_latest":
-      return max(versions)
-    for version in versions:
+      return max(self.versions)
+    for version in self.versions:
       if requested_version is None or version.match(requested_version):
         return version
-    available_versions = [str(v)
-                          for v in [canonical_version] + supported_versions]
+    available_versions = [str(v) for v in self.versions]
     msg = "Dataset {} cannot be loaded at version {}, only: {}.".format(
         self.name, requested_version, ", ".join(available_versions))
     raise AssertionError(msg)
@@ -253,13 +273,17 @@ class DatasetBuilder(object):
       logging.info("Reusing dataset %s (%s)", self.name, self._data_dir)
       return
 
-    # Data may exist on GCS
-    if not data_exists:
-      self._maybe_log_gcs_data_dir()
-
-    dl_manager = self._make_download_manager(
-        download_dir=download_dir,
-        download_config=download_config)
+    if self.version.tfds_version_to_prepare:
+      available_to_prepare = ", ".join(str(v) for v in self.versions
+                                       if not v.tfds_version_to_prepare)
+      raise AssertionError(
+          "The version of the dataset you are trying to use ({}:{}) can only "
+          "be generated using TFDS code synced @ {} or earlier. Either sync to "
+          "that version of TFDS to first prepare the data or use another "
+          "version of the dataset (available for `download_and_prepare`: "
+          "{}).".format(
+              self.name, self.version, self.version.tfds_version_to_prepare,
+              available_to_prepare))
 
     # Currently it's not possible to overwrite the data because it would
     # conflict with versioning: If the last version has already been generated,
@@ -270,6 +294,7 @@ class DatasetBuilder(object):
           "the same version {} already exists. If the dataset has changed, "
           "please update the version number.".format(self.name, self._data_dir,
                                                      self.version))
+
     logging.info("Generating dataset %s (%s)", self.name, self._data_dir)
     if not utils.has_sufficient_disk_space(
         self.info.size_in_bytes, directory=self._data_dir_root):
@@ -277,34 +302,44 @@ class DatasetBuilder(object):
                     units.size_str(self.info.size_in_bytes))
     self._log_download_bytes()
 
+    dl_manager = self._make_download_manager(
+        download_dir=download_dir,
+        download_config=download_config)
+
     # Create a tmp dir and rename to self._data_dir on successful exit.
     with file_format_adapter.incomplete_dir(self._data_dir) as tmp_data_dir:
       # Temporarily assign _data_dir to tmp_data_dir to avoid having to forward
       # it to every sub function.
       with utils.temporary_assignment(self, "_data_dir", tmp_data_dir):
-        self._download_and_prepare(
-            dl_manager=dl_manager,
-            download_config=download_config)
+        if (download_config.try_download_gcs and
+            gcs_utils.is_dataset_on_gcs(self.info.full_name)):
+          logging.warning(GCS_HOSTED_MSG, self.name)
+          gcs_utils.download_gcs_dataset(self.info.full_name, self._data_dir)
+          self.info.read_from_directory(self._data_dir)
+        else:
+          self._download_and_prepare(
+              dl_manager=dl_manager,
+              download_config=download_config)
 
-        # NOTE: If modifying the lines below to put additional information in
-        # DatasetInfo, you'll likely also want to update
-        # DatasetInfo.read_from_directory to possibly restore these attributes
-        # when reading from package data.
+          # NOTE: If modifying the lines below to put additional information in
+          # DatasetInfo, you'll likely also want to update
+          # DatasetInfo.read_from_directory to possibly restore these attributes
+          # when reading from package data.
 
-        # Update the DatasetInfo metadata by computing statistics from the data.
-        if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
-            download_config.compute_stats == download.ComputeStatsMode.AUTO and
-            bool(self.info.splits.total_num_examples)
-           ):
-          logging.info(
-              "Skipping computing stats for mode %s.",
-              download_config.compute_stats)
-        else:  # Mode is forced or stats do not exists yet
-          logging.info("Computing statistics.")
-          self.info.compute_dynamic_properties()
-        self.info.size_in_bytes = dl_manager.downloaded_size
-        # Write DatasetInfo to disk, even if we haven't computed the statistics.
-        self.info.write_to_directory(self._data_dir)
+          # Update DatasetInfo metadata by computing statistics from the data.
+          if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
+              download_config.compute_stats == download.ComputeStatsMode.AUTO
+              and bool(self.info.splits.total_num_examples)
+             ):
+            logging.info(
+                "Skipping computing stats for mode %s.",
+                download_config.compute_stats)
+          else:  # Mode is forced or stats do not exists yet
+            logging.info("Computing statistics.")
+            self.info.compute_dynamic_properties()
+          self.info.size_in_bytes = dl_manager.downloaded_size
+          # Write DatasetInfo to disk, even if we haven't computed statistics.
+          self.info.write_to_directory(self._data_dir)
     self._log_download_done()
 
   @api_utils.disallow_positional_args
@@ -471,7 +506,8 @@ class DatasetBuilder(object):
         dataset = self._as_dataset(
             split=split, shuffle_files=shuffle_files, decoders=decoders)
         # Use padded_batch so that features with unknown shape are supported.
-        dataset = dataset.padded_batch(full_bs, dataset.output_shapes)
+        dataset = dataset.padded_batch(
+            full_bs, tf.compat.v1.data.get_output_shapes(dataset))
         dataset = tf.data.Dataset.from_tensor_slices(
             next(dataset_utils.as_numpy(dataset)))
     else:
@@ -480,7 +516,8 @@ class DatasetBuilder(object):
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
-      dataset = dataset.padded_batch(batch_size, dataset.output_shapes)
+      dataset = dataset.padded_batch(
+          batch_size, tf.compat.v1.data.get_output_shapes(dataset))
 
     if as_supervised:
       if not self.info.supervised_keys:
@@ -501,18 +538,6 @@ class DatasetBuilder(object):
     if wants_full_dataset:
       return tf.data.experimental.get_single_element(dataset)
     return dataset
-
-  def _maybe_log_gcs_data_dir(self):
-    """If data is on GCS, set _data_dir to GCS path."""
-    if not gcs_utils.is_dataset_on_gcs(self.info.full_name):
-      return
-
-    gcs_path = os.path.join(constants.GCS_DATA_DIR, self.info.full_name)
-    msg = GCS_HOSTED_MSG.format(
-        name=self.name,
-        gcs_path=gcs_path,
-        local_data_dir_no_version=os.path.split(self._data_dir)[0])
-    logging.info(msg)
 
   def _relative_data_dir(self, with_version=True):
     """Relative path of this dataset in data_dir."""
@@ -633,19 +658,26 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   def _make_download_manager(self, download_dir, download_config):
+    """Creates a new download manager object."""
     download_dir = download_dir or os.path.join(self._data_dir_root,
                                                 "downloads")
     extract_dir = (download_config.extract_dir or
                    os.path.join(download_dir, "extracted"))
-    manual_dir = (download_config.manual_dir or
-                  os.path.join(download_dir, "manual"))
-    manual_dir = os.path.join(manual_dir, self.name)
+
+    # Use manual_dir only if MANUAL_DOWNLOAD_INSTRUCTIONS are set.
+    if self.MANUAL_DOWNLOAD_INSTRUCTIONS:
+      manual_dir = (
+          download_config.manual_dir or os.path.join(download_dir, "manual"))
+      manual_dir = os.path.join(manual_dir, self.name)
+    else:
+      manual_dir = None
 
     return download.DownloadManager(
         dataset_name=self.name,
         download_dir=download_dir,
         extract_dir=extract_dir,
         manual_dir=manual_dir,
+        manual_dir_instructions=self.MANUAL_DOWNLOAD_INSTRUCTIONS,
         force_download=(download_config.download_mode == FORCE_REDOWNLOAD),
         force_extraction=(download_config.download_mode == FORCE_REDOWNLOAD),
         register_checksums=download_config.register_checksums,
@@ -735,12 +767,12 @@ class FileAdapterBuilder(DatasetBuilder):
     Example:
 
       return[
-          tfds.SplitGenerator(
+          tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,
               num_shards=10,
               gen_kwargs={'file': 'train_data.zip'},
           ),
-          tfds.SplitGenerator(
+          tfds.core.SplitGenerator(
               name=tfds.Split.TEST,
               num_shards=5,
               gen_kwargs={'file': 'test_data.zip'},

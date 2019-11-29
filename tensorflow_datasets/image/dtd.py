@@ -51,12 +51,9 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0"),
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 3.0.0: S3 with new hashing function (different shuffle).
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -69,7 +66,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names_file=names_file),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

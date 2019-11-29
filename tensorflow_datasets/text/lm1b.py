@@ -23,7 +23,6 @@ import os
 
 from absl import logging
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -67,7 +66,7 @@ _HELDOUT_FILE_FORMAT = os.path.join(_TOP_LEVEL_DIR,
 class Lm1bConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Lm1b."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, version=None, text_encoder_config=None, **kwargs):
     """BuilderConfig for Lm1b.
 
@@ -78,14 +77,13 @@ class Lm1bConfig(tfds.core.BuilderConfig):
         feature.
       **kwargs: keyword arguments forwarded to super.
     """
-    # Version history:
-    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-    # 0.0.{1,2}: Initial versions.
     super(Lm1bConfig, self).__init__(
         version=tfds.core.Version(
             version, experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("1.0.0"),
+            tfds.core.Version(
+                "1.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
         ],
         **kwargs)
     self.text_encoder_config = (
@@ -146,7 +144,7 @@ class Lm1b(tfds.core.GeneratorBasedBuilder):
                     encoder_config=self.builder_config.text_encoder_config),
         }),
         supervised_keys=("text", "text"),
-        urls=["http://www.statmt.org/lm-benchmark/"],
+        homepage="http://www.statmt.org/lm-benchmark/",
         citation=_CITATION,
     )
 

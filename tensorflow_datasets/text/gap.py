@@ -82,7 +82,7 @@ class Gap(tfds.core.GeneratorBasedBuilder):
             'URL': tfds.features.Text()
         }),
         supervised_keys=None,
-        urls=['https://github.com/google-research-datasets/gap-coreference'],
+        homepage='https://github.com/google-research-datasets/gap-coreference',
         citation=_CITATION,
     )
 

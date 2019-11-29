@@ -9,7 +9,7 @@ toc:
   title: Audio
 - section:
   - path: /datasets/catalog/abstract_reasoning
-    title: abstract_reasoning
+    title: abstract_reasoning (manual)
   - path: /datasets/catalog/aflw2k3d
     title: aflw2k3d
   - path: /datasets/catalog/bigearthnet
@@ -26,26 +26,28 @@ toc:
     title: caltech_birds2011
   - path: /datasets/catalog/cars196
     title: cars196
+  - path: /datasets/catalog/cassava
+    title: cassava
   - path: /datasets/catalog/cats_vs_dogs
     title: cats_vs_dogs
   - path: /datasets/catalog/celeb_a
     title: celeb_a
   - path: /datasets/catalog/celeb_a_hq
-    title: celeb_a_hq
+    title: celeb_a_hq (manual)
   - path: /datasets/catalog/cifar10
     title: cifar10
   - path: /datasets/catalog/cifar100
     title: cifar100
+  - path: /datasets/catalog/cifar10_1
+    title: cifar10_1
   - path: /datasets/catalog/cifar10_corrupted
     title: cifar10_corrupted
+  - path: /datasets/catalog/citrus_leaves
+    title: citrus_leaves
   - path: /datasets/catalog/clevr
     title: clevr
   - path: /datasets/catalog/cmaterdb
     title: cmaterdb
-  - path: /datasets/catalog/coco
-    title: coco
-  - path: /datasets/catalog/coco2014
-    title: coco2014
   - path: /datasets/catalog/coil100
     title: coil100
   - path: /datasets/catalog/colorectal_histology
@@ -53,19 +55,23 @@ toc:
   - path: /datasets/catalog/colorectal_histology_large
     title: colorectal_histology_large
   - path: /datasets/catalog/curated_breast_imaging_ddsm
-    title: curated_breast_imaging_ddsm
+    title: curated_breast_imaging_ddsm (manual)
   - path: /datasets/catalog/cycle_gan
     title: cycle_gan
   - path: /datasets/catalog/deep_weeds
     title: deep_weeds
   - path: /datasets/catalog/diabetic_retinopathy_detection
-    title: diabetic_retinopathy_detection
+    title: diabetic_retinopathy_detection (manual)
+  - path: /datasets/catalog/dmlab
+    title: dmlab
   - path: /datasets/catalog/downsampled_imagenet
     title: downsampled_imagenet
   - path: /datasets/catalog/dsprites
     title: dsprites
   - path: /datasets/catalog/dtd
     title: dtd
+  - path: /datasets/catalog/duke_ultrasound
+    title: duke_ultrasound
   - path: /datasets/catalog/emnist
     title: emnist
   - path: /datasets/catalog/eurosat
@@ -76,18 +82,22 @@ toc:
     title: food101
   - path: /datasets/catalog/horses_or_humans
     title: horses_or_humans
+  - path: /datasets/catalog/i_naturalist2017
+    title: i_naturalist2017
   - path: /datasets/catalog/image_label_folder
-    title: image_label_folder
+    title: image_label_folder (manual)
   - path: /datasets/catalog/imagenet2012
-    title: imagenet2012
+    title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
-    title: imagenet2012_corrupted
-  - path: /datasets/catalog/kitti
-    title: kitti
+    title: imagenet2012_corrupted (manual)
+  - path: /datasets/catalog/imagenet_resized
+    title: imagenet_resized
   - path: /datasets/catalog/kmnist
     title: kmnist
   - path: /datasets/catalog/lfw
     title: lfw
+  - path: /datasets/catalog/lost_and_found
+    title: lost_and_found
   - path: /datasets/catalog/lsun
     title: lsun
   - path: /datasets/catalog/malaria
@@ -98,8 +108,6 @@ toc:
     title: mnist_corrupted
   - path: /datasets/catalog/omniglot
     title: omniglot
-  - path: /datasets/catalog/open_images_v4
-    title: open_images_v4
   - path: /datasets/catalog/oxford_flowers102
     title: oxford_flowers102
   - path: /datasets/catalog/oxford_iiit_pet
@@ -108,10 +116,18 @@ toc:
     title: patch_camelyon
   - path: /datasets/catalog/pet_finder
     title: pet_finder
+  - path: /datasets/catalog/places365_small
+    title: places365_small
+  - path: /datasets/catalog/plant_leaves
+    title: plant_leaves
+  - path: /datasets/catalog/plant_village
+    title: plant_village
+  - path: /datasets/catalog/plantae_k
+    title: plantae_k
   - path: /datasets/catalog/quickdraw_bitmap
     title: quickdraw_bitmap
   - path: /datasets/catalog/resisc45
-    title: resisc45
+    title: resisc45 (manual)
   - path: /datasets/catalog/rock_paper_scissors
     title: rock_paper_scissors
   - path: /datasets/catalog/scene_parse150
@@ -138,9 +154,19 @@ toc:
     title: uc_merced
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
-  - path: /datasets/catalog/voc2007
-    title: voc2007
   title: Image
+- section:
+  - path: /datasets/catalog/coco
+    title: coco
+  - path: /datasets/catalog/kitti
+    title: kitti
+  - path: /datasets/catalog/open_images_v4
+    title: open_images_v4
+  - path: /datasets/catalog/voc
+    title: voc
+  - path: /datasets/catalog/wider_face
+    title: wider_face
+  title: Object_detection
 - section:
   - path: /datasets/catalog/amazon_us_reviews
     title: amazon_us_reviews
@@ -154,10 +180,36 @@ toc:
     title: titanic
   title: Structured
 - section:
+  - path: /datasets/catalog/aeslc
+    title: aeslc
+  - path: /datasets/catalog/big_patent
+    title: big_patent
+  - path: /datasets/catalog/billsum
+    title: billsum
   - path: /datasets/catalog/cnn_dailymail
     title: cnn_dailymail
+  - path: /datasets/catalog/gigaword
+    title: gigaword
+  - path: /datasets/catalog/multi_news
+    title: multi_news
+  - path: /datasets/catalog/newsroom
+    title: newsroom (manual)
+  - path: /datasets/catalog/reddit_tifu
+    title: reddit_tifu
+  - path: /datasets/catalog/scientific_papers
+    title: scientific_papers
+  - path: /datasets/catalog/wikihow
+    title: wikihow (manual)
+  - path: /datasets/catalog/xsum
+    title: xsum (manual)
+  title: Summarization
+- section:
+  - path: /datasets/catalog/c4
+    title: c4
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/esnli
+    title: esnli
   - path: /datasets/catalog/gap
     title: gap
   - path: /datasets/catalog/glue
@@ -166,6 +218,8 @@ toc:
     title: imdb_reviews
   - path: /datasets/catalog/lm1b
     title: lm1b
+  - path: /datasets/catalog/math_dataset
+    title: math_dataset
   - path: /datasets/catalog/multi_nli
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
@@ -193,19 +247,19 @@ toc:
   - path: /datasets/catalog/ted_multi_translate
     title: ted_multi_translate
   - path: /datasets/catalog/wmt14_translate
-    title: wmt14_translate
+    title: wmt14_translate (manual)
   - path: /datasets/catalog/wmt15_translate
-    title: wmt15_translate
+    title: wmt15_translate (manual)
   - path: /datasets/catalog/wmt16_translate
-    title: wmt16_translate
+    title: wmt16_translate (manual)
   - path: /datasets/catalog/wmt17_translate
-    title: wmt17_translate
+    title: wmt17_translate (manual)
   - path: /datasets/catalog/wmt18_translate
-    title: wmt18_translate
+    title: wmt18_translate (manual)
   - path: /datasets/catalog/wmt19_translate
-    title: wmt19_translate
+    title: wmt19_translate (manual)
   - path: /datasets/catalog/wmt_t2t_translate
-    title: wmt_t2t_translate
+    title: wmt_t2t_translate (manual)
   title: Translate
 - section:
   - path: /datasets/catalog/bair_robot_pushing_small

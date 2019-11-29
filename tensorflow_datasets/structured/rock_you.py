@@ -47,7 +47,7 @@ class RockYou(tfds.core.GeneratorBasedBuilder):
                                   ),
         }),
         supervised_keys=None,
-        urls=["https://wiki.skullsecurity.org/Passwords"],
+        homepage="https://wiki.skullsecurity.org/Passwords",
         citation=_CITATION,
     )
 

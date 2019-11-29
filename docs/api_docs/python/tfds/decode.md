@@ -13,8 +13,6 @@ source</a>
 
 Decoder public API.
 
-<!-- Placeholder for "Used in" -->
-
 ## Classes
 
 [`class Decoder`](../tfds/decode/Decoder.md): Base decoder object.

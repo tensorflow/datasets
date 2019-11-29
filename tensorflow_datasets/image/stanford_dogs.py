@@ -66,7 +66,8 @@ _NAME_RE = re.compile(r"([\w-]*/)*([\w]*.jpg)$")
 class StanfordDogs(tfds.core.GeneratorBasedBuilder):
   """Stanford Dogs dataset."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  # Version 0.2.0: Fix non-deterministic label names
+  VERSION = tfds.core.Version("0.2.0")
 
   def _info(self):
 
@@ -88,55 +89,55 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
                 }),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
 
-    download_path = dl_manager.download(
-        [_SPLIT_URL, _ANNOTATIONS_URL, _IMAGES_URL])
-    extracted_path = dl_manager.download_and_extract(
+    images_path = dl_manager.download(_IMAGES_URL)
+    split_path, annotation_path = dl_manager.download_and_extract(
         [_SPLIT_URL, _ANNOTATIONS_URL])
     xml_file_list = collections.defaultdict(str)
 
     # Parsing the mat file which contains the list of train/test images
+    scipy = tfds.core.lazy_imports.scipy
     def parse_mat_file(file_name):
       with tf.io.gfile.GFile(file_name, "rb") as f:
-        parsed_mat_arr = tfds.core.lazy_imports.scipy.io.loadmat(
-            f, squeeze_me=True)
+        parsed_mat_arr = scipy.io.loadmat(f, squeeze_me=True)
       file_list = [
           element.split("/")[-1] for element in parsed_mat_arr["file_list"]
       ]
 
       return file_list, parsed_mat_arr
 
-    for fname in tf.io.gfile.listdir(extracted_path[0]):
+    for fname in tf.io.gfile.listdir(split_path):
       # Train-test split using train_list.mat and test_list.mat
-      full_file_name = os.path.join(extracted_path[0], fname)
+      full_file_name = os.path.join(split_path, fname)
 
       if "train" in fname:
         train_list, train_mat_arr = parse_mat_file(full_file_name)
-        label_names = set([
-            element.split("/")[-2].lower()
+        label_names = set([  # Set to remove duplicates
+            element.split("/")[-2].lower()  # Extract path/label/img.jpg
             for element in train_mat_arr["file_list"]
         ])
       elif "test" in fname:
         test_list, _ = parse_mat_file(full_file_name)
 
-    self.info.features["label"].names = tuple(label_names)
+    self.info.features["label"].names = sorted(label_names)
 
-    for root, _, files in tf.io.gfile.walk(extracted_path[1]):
+    for root, _, files in tf.io.gfile.walk(annotation_path):
       # Parsing the XML file which have the image annotations
       for fname in files:
         annotation_file_name = os.path.join(root, fname)
-        xml_file_list[fname] = ET.parse(annotation_file_name)
+        with tf.io.gfile.GFile(annotation_file_name, "rb") as f:
+          xml_file_list[fname] = ET.parse(f)
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             num_shards=10,
             gen_kwargs={
-                "archive": dl_manager.iter_archive(download_path[2]),
+                "archive": dl_manager.iter_archive(images_path),
                 "file_names": train_list,
                 "annotation_files": xml_file_list,
             }),
@@ -144,7 +145,7 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TEST,
             num_shards=1,
             gen_kwargs={
-                "archive": dl_manager.iter_archive(download_path[2]),
+                "archive": dl_manager.iter_archive(images_path),
                 "file_names": test_list,
                 "annotation_files": xml_file_list,
             })
@@ -162,7 +163,6 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
       Image path, Image file name, its corresponding label and
       bounding box values
     """
-    label_names = self.info.features["label"].names
     bbox_attrib = ["xmin", "xmax", "ymin", "ymax", "width", "height"]
 
     for fname, fobj in archive:
@@ -191,12 +191,9 @@ class StanfordDogs(tfds.core.GeneratorBasedBuilder):
         )
 
       yield fname, {
-          "image":
-              fobj,
-          "image/filename":
-              fname,
-          "label":
-              label_names.index(label),
+          "image": fobj,
+          "image/filename": fname,
+          "label": label,
           "objects": [{
               "bbox": build_box(attributes, n)
           } for n in range(len(attributes["xmin"]))]

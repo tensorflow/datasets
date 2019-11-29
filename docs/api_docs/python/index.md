@@ -9,6 +9,7 @@
 *   <a href="./tfds/builder.md"><code>tfds.builder</code></a>
 *   <a href="./tfds/core.md"><code>tfds.core</code></a>
 *   <a href="./tfds/core/BeamBasedBuilder.md"><code>tfds.core.BeamBasedBuilder</code></a>
+*   <a href="./tfds/core/BeamMetadataDict.md"><code>tfds.core.BeamMetadataDict</code></a>
 *   <a href="./tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
 *   <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>
 *   <a href="./tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a>
@@ -17,11 +18,13 @@
 *   <a href="./tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>
 *   <a href="./tfds/core/MetadataDict.md"><code>tfds.core.MetadataDict</code></a>
 *   <a href="./tfds/core/NamedSplit.md"><code>tfds.core.NamedSplit</code></a>
+*   <a href="./tfds/core/ReadInstruction.md"><code>tfds.core.ReadInstruction</code></a>
 *   <a href="./tfds/core/SplitBase.md"><code>tfds.core.SplitBase</code></a>
 *   <a href="./tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>
 *   <a href="./tfds/core/SplitGenerator.md"><code>tfds.core.SplitGenerator</code></a>
 *   <a href="./tfds/core/SplitInfo.md"><code>tfds.core.SplitInfo</code></a>
 *   <a href="./tfds/core/Version.md"><code>tfds.core.Version</code></a>
+*   <a href="./tfds/core/disallow_positional_args.md"><code>tfds.core.disallow_positional_args</code></a>
 *   <a href="./tfds/core/get_tfds_path.md"><code>tfds.core.get_tfds_path</code></a>
 *   <a href="./tfds/core/lazy_imports.md"><code>tfds.core.lazy_imports</code></a>
 *   <a href="./tfds/decode.md"><code>tfds.decode</code></a>
@@ -32,6 +35,7 @@
 *   <a href="./tfds/download.md"><code>tfds.download</code></a>
 *   <a href="./tfds/download/ComputeStatsMode.md"><code>tfds.download.ComputeStatsMode</code></a>
 *   <a href="./tfds/download/DownloadConfig.md"><code>tfds.download.DownloadConfig</code></a>
+*   <a href="./tfds/download/DownloadError.md"><code>tfds.download.DownloadError</code></a>
 *   <a href="./tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a>
 *   <a href="./tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>
 *   <a href="./tfds/download/GenerateMode.md"><code>tfds.download.GenerateMode</code></a>
@@ -74,10 +78,12 @@
 *   <a href="./tfds/testing/FeatureExpectationItem.md"><code>tfds.testing.FeatureExpectationItem</code></a>
 *   <a href="./tfds/testing/FeatureExpectationsTestCase.md"><code>tfds.testing.FeatureExpectationsTestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.FeatureExpectationsTestCase.failureException</code></a>
+*   <a href="./tfds/testing/RaggedConstant.md"><code>tfds.testing.RaggedConstant</code></a>
 *   <a href="./tfds/testing/SubTestCase.md"><code>tfds.testing.SubTestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.SubTestCase.failureException</code></a>
 *   <a href="./tfds/testing/TestCase.md"><code>tfds.testing.TestCase</code></a>
 *   <a href="./tfds/testing/DatasetBuilderTestCase/failureException.md"><code>tfds.testing.TestCase.failureException</code></a>
+*   <a href="./tfds/testing/fake_examples_dir.md"><code>tfds.testing.fake_examples_dir</code></a>
 *   <a href="./tfds/testing/make_tmp_dir.md"><code>tfds.testing.make_tmp_dir</code></a>
 *   <a href="./tfds/testing/mock_data.md"><code>tfds.testing.mock_data</code></a>
 *   <a href="./tfds/testing/mock_kaggle_api.md"><code>tfds.testing.mock_kaggle_api</code></a>

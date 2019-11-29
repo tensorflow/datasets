@@ -19,7 +19,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -43,6 +42,8 @@ _CITATION = """\
 _DESCRIPTION = """\
 Dataset with images of 2 resolutions (see config name for information on the resolution).
 It is used for density estimation and generative modeling experiments.
+
+For resized ImageNet for supervised learning ([link](https://patrykchrabaszcz.github.io/Imagenet32/)) see `imagenet_resized`.
 """
 
 _DL_URL = "http://image-net.org/small/"
@@ -53,7 +54,7 @@ _DATA_OPTIONS = ["32x32", "64x64"]
 class DownsampledImagenetConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Downsampled Imagenet."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, data=None, **kwargs):
     """Constructs a DownsampledImagenetConfig.
 
@@ -71,9 +72,6 @@ class DownsampledImagenetConfig(tfds.core.BuilderConfig):
 class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
   """Downsampled Imagenet dataset."""
 
-  # Version history:
-  # 2.0.0: S3 with new hashing function (different shuffle).
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
   BUILDER_CONFIGS = [
       DownsampledImagenetConfig(  # pylint: disable=g-complex-comprehension
           name=config_name,
@@ -83,8 +81,9 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
           version=tfds.core.Version(
               "1.0.0", experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version("2.0.0"),
-              tfds.core.Version("1.0.0"),
+              tfds.core.Version(
+                  "2.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
           ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS
@@ -98,7 +97,7 @@ class DownsampledImagenet(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
         }),
         supervised_keys=None,
-        urls=["http://image-net.org/small/download.php"],
+        homepage="http://image-net.org/small/download.php",
         citation=_CITATION,
     )
 

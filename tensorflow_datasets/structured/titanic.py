@@ -103,7 +103,8 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
 
   def _info(self):
@@ -116,7 +117,7 @@ class Titanic(tfds.core.GeneratorBasedBuilder):
                          for name, (dtype, func) in FEATURE_DICT.items()}
         }),
         supervised_keys=("features", "survived"),
-        urls=["https://www.openml.org/d/40945"],
+        homepage="https://www.openml.org/d/40945",
         citation=_CITATION
         )
 

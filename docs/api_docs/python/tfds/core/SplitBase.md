@@ -10,6 +10,8 @@
 
 # tfds.core.SplitBase
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -18,6 +20,7 @@ source</a>
 
 ## Class `SplitBase`
 
+<!-- Start diff -->
 Abstract base class for Split compositionality.
 
 <!-- Placeholder for "Used in" -->

@@ -73,9 +73,8 @@ class Aflw2k3d(tfds.core.GeneratorBasedBuilder):
             "landmarks_68_3d_z":
                 tfds.features.Tensor(shape=(68, 1), dtype=tf.float32),
         }),
-        urls=[
-            "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm"
-        ],
+        homepage=
+        "http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm",
         citation=_CITATION,
     )
 

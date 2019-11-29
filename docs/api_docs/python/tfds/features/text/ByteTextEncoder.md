@@ -12,6 +12,8 @@
 
 # tfds.features.text.ByteTextEncoder
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -20,6 +22,7 @@ source</a>
 
 ## Class `ByteTextEncoder`
 
+<!-- Start diff -->
 Byte-encodes text.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)

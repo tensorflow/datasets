@@ -23,7 +23,6 @@ import random
 import numpy as np
 import six
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -131,7 +130,7 @@ with $o$=line and $a$=type."""
 class AbstractReasoningConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AbstractReasoning."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, split_type="neutral", **kwargs):
     """BuilderConfig for AbstractReasoning.
 
@@ -150,6 +149,12 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
 
 class AbstractReasoning(tfds.core.BeamBasedBuilder):
   """Abstract reasoning dataset."""
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  Data can be downloaded from
+  https://console.cloud.google.com/storage/browser/ravens-matrices
+  Please put all the tar.gz files in manual_dir.
+  """
+
   BUILDER_CONFIGS = [
       AbstractReasoningConfig(
           name="neutral",
@@ -208,7 +213,7 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
             "filename":
                 tfds.features.Text(),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 

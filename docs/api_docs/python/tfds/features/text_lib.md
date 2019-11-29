@@ -13,7 +13,6 @@ source</a>
 
 Text utilities.
 
-<!-- Placeholder for "Used in" -->
 
 <a href="../../tfds.md"><code>tfds</code></a> includes a set of `TextEncoder`s as well as a `Tokenizer` to enable
 expressive, performant, and reproducible natural language research.

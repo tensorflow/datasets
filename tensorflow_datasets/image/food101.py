@@ -63,7 +63,7 @@ class Food101(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names_file=names_file),
         }),
         supervised_keys=("image", "label"),
-        urls=[_BASE_URL],
+        homepage="https://www.vision.ee.ethz.ch/datasets_extra/food-101/",
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):

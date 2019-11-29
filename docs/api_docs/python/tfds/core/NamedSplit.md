@@ -11,6 +11,8 @@
 
 # tfds.core.NamedSplit
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -19,6 +21,7 @@ source</a>
 
 ## Class `NamedSplit`
 
+<!-- Start diff -->
 Descriptor corresponding to a named split (train, test, ...).
 
 Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)

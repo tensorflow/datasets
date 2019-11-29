@@ -62,7 +62,7 @@ class SceneParse150(tfds.core.GeneratorBasedBuilder):
             "annotation": tfds.features.Image(encoding_format="png")
         }),
         supervised_keys=("image", "annotation"),
-        urls=["http://sceneparsing.csail.mit.edu/"],
+        homepage="http://sceneparsing.csail.mit.edu/",
         citation=_CITATION,
     )
 

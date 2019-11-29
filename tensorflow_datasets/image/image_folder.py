@@ -74,18 +74,18 @@ class ImageLabelFolder(tfds.core.GeneratorBasedBuilder):
 
   """
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = "This is a 'template' dataset."
+
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 1.0.0: Initial version.
 
   # TODO(epot): Image shape should be automatically deduced
 
-  def __init__(self, dataset_name, **kwargs):
+  def __init__(self, dataset_name="image_label_folder", **kwargs):
     self.name = dataset_name
     super(ImageLabelFolder, self).__init__(**kwargs)
 

@@ -57,7 +57,6 @@
 <meta itemprop="property" content="assertMultiLineEqual"/>
 <meta itemprop="property" content="assertNDArrayNear"/>
 <meta itemprop="property" content="assertNear"/>
-<meta itemprop="property" content="assertNestedListAlmostEqual"/>
 <meta itemprop="property" content="assertNoCommonElements"/>
 <meta itemprop="property" content="assertNotAllClose"/>
 <meta itemprop="property" content="assertNotAllEqual"/>
@@ -74,8 +73,6 @@
 <meta itemprop="property" content="assertNotStartsWith"/>
 <meta itemprop="property" content="assertProtoEquals"/>
 <meta itemprop="property" content="assertProtoEqualsVersion"/>
-<meta itemprop="property" content="assertRaggedAlmostEqual"/>
-<meta itemprop="property" content="assertRaggedEqual"/>
 <meta itemprop="property" content="assertRaises"/>
 <meta itemprop="property" content="assertRaisesOpError"/>
 <meta itemprop="property" content="assertRaisesRegex"/>
@@ -108,7 +105,7 @@
 <meta itemprop="property" content="debug"/>
 <meta itemprop="property" content="defaultTestResult"/>
 <meta itemprop="property" content="doCleanups"/>
-<meta itemprop="property" content="eval_to_list"/>
+<meta itemprop="property" content="enter_context"/>
 <meta itemprop="property" content="evaluate"/>
 <meta itemprop="property" content="fail"/>
 <meta itemprop="property" content="failIf"/>
@@ -140,6 +137,7 @@
 <meta itemprop="property" content="test_session"/>
 <meta itemprop="property" content="BUILDER_CONFIG_NAMES_TO_TEST"/>
 <meta itemprop="property" content="DATASET_CLASS"/>
+<meta itemprop="property" content="DL_DOWNLOAD_RESULT"/>
 <meta itemprop="property" content="DL_EXTRACT_RESULT"/>
 <meta itemprop="property" content="EXAMPLE_DIR"/>
 <meta itemprop="property" content="MOCK_MONARCH"/>
@@ -153,6 +151,8 @@
 
 # tfds.testing.DatasetBuilderTestCase
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -161,6 +161,7 @@ source</a>
 
 ## Class `DatasetBuilderTestCase`
 
+<!-- Start diff -->
 Inherit this class to test your DatasetBuilder class.
 
 Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)
@@ -182,6 +183,11 @@ You may set the following class attributes:
     `download_and_extract` method. The values should be the path of files
     present in the `fake_examples` directory, relative to that directory. If not
     specified, path to `fake_examples` will always be returned.
+*   DL_DOWNLOAD_RESULT: `dict[str]`, the returned result of mocked
+    `download_and_extract` method. The values should be the path of files
+    present in the `fake_examples` directory, relative to that directory. If not
+    specified: will use DL_EXTRACT_RESULT (this is due to backwards
+    compatibility and will be removed in the future).
 *   EXAMPLE_DIR: `str`, the base directory in in which fake examples are
     contained. Optional; defaults to
     tensorflow_datasets/testing/test_data/fake_examples/<dataset name>.
@@ -196,7 +202,7 @@ This test case will check for the following:
 -   the dataset builder is correctly registered, i.e.
     <a href="../../tfds/load.md"><code>tfds.load(name)</code></a> works;
 -   the dataset builder can read the fake examples stored in
-    testing/test_data/fake_examples/${dataset_name};
+    testing/test_data/fake_examples/{dataset_name};
 -   the dataset builder can produce serialized data;
 -   the dataset builder produces a valid Dataset object from serialized data
     -   in eager mode;
@@ -365,17 +371,20 @@ one of the arguments is of type float16.
 
 <h3 id="assertAllEqual"><code>assertAllEqual</code></h3>
 
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
-source</a>
-
 ```python
 assertAllEqual(
-    d1,
-    d2
+    *args,
+    **kwds
 )
 ```
 
-Same as assertAllEqual but with RaggedTensor support.
+Asserts that two numpy arrays or Tensors have the same values.
+
+#### Args:
+
+*   <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
+*   <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertAllEqualNested"><code>assertAllEqualNested</code></h3>
 
@@ -1154,20 +1163,6 @@ if not.
 * <b>`err`</b>: A float value.
 * <b>`msg`</b>: An optional string message to append to the failure message.
 
-<h3 id="assertNestedListAlmostEqual"><code>assertNestedListAlmostEqual</code></h3>
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
-source</a>
-
-```python
-assertNestedListAlmostEqual(
-    a,
-    b,
-    places=7,
-    context='value'
-)
-```
-
 <h3 id="assertNoCommonElements"><code>assertNoCommonElements</code></h3>
 
 ``` python
@@ -1417,33 +1412,6 @@ assertProtoEqualsVersion(
     msg=None
 )
 ```
-
-<h3 id="assertRaggedAlmostEqual"><code>assertRaggedAlmostEqual</code></h3>
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
-source</a>
-
-```python
-assertRaggedAlmostEqual(
-    a,
-    b,
-    places=7
-)
-```
-
-<h3 id="assertRaggedEqual"><code>assertRaggedEqual</code></h3>
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
-source</a>
-
-```python
-assertRaggedEqual(
-    a,
-    b
-)
-```
-
-Asserts that two potentially ragged tensors are equal.
 
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
@@ -2138,10 +2106,11 @@ creating temporary files for test purposes, as well as makes it easier
 to setup files, their data, read them back, and inspect them when
 a test fails.
 
-NOTE: This will zero-out the file. This ensures there is no pre-existing
-state.
+NOTE: This will zero-out the file. This ensures there is no pre-existing state.
+NOTE: If the file already exists, it will be made writable and overwritten.
 
-See also: `create_tempdir()` for creating temporary directories.
+See also: `create_tempdir()` for creating temporary directories, and
+`_TempDir.create_file` for creating files within a temporary directory.
 
 #### Args:
 
@@ -2188,14 +2157,30 @@ doCleanups()
 
 Execute all cleanup functions. Normally called for you after tearDown.
 
-<h3 id="eval_to_list"><code>eval_to_list</code></h3>
-
-<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/ragged_test_util.py">View
-source</a>
+<h3 id="enter_context"><code>enter_context</code></h3>
 
 ```python
-eval_to_list(tensor)
+enter_context(manager)
 ```
+
+Returns the CM's value after registering it with the exit stack.
+
+Entering a context pushes it onto a stack of contexts. The context is exited
+when the test completes. Contexts are are exited in the reverse order of
+entering. They will always be exited, regardless of test failure/success. The
+context stack is specific to the test being run.
+
+This is useful to eliminate per-test boilerplate when context managers are used.
+For example, instead of decorating every test with `@mock.patch`, simply do
+`self.foo = self.enter_context(mock.patch(...))' in`setUp()`.
+
+NOTE: The context managers will always be exited without any error information.
+This is an unfortunate implementation detail due to some internals of how
+unittest runs tests.
+
+#### Args:
+
+*   <b>`manager`</b>: The context manager to enter.
 
 <h3 id="evaluate"><code>evaluate</code></h3>
 
@@ -2557,6 +2542,7 @@ Use `self.session()` or `self.cached_session()` instead.
 *   `BUILDER_CONFIG_NAMES_TO_TEST = None`
     <a id="BUILDER_CONFIG_NAMES_TO_TEST"></a>
 *   `DATASET_CLASS = None` <a id="DATASET_CLASS"></a>
+*   `DL_DOWNLOAD_RESULT = None` <a id="DL_DOWNLOAD_RESULT"></a>
 *   `DL_EXTRACT_RESULT = None` <a id="DL_EXTRACT_RESULT"></a>
 *   `EXAMPLE_DIR = None` <a id="EXAMPLE_DIR"></a>
 *   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>

@@ -1,0 +1,134 @@
+{
+  "citation": "@inproceedings{KhoslaYaoJayadevaprakashFeiFei_FGVC2011,\nauthor = \"Aditya Khosla and Nityananda Jayadevaprakash and Bangpeng Yao and\n          Li Fei-Fei\",\ntitle = \"Novel Dataset for Fine-Grained Image Categorization\",\nbooktitle = \"First Workshop on Fine-Grained Visual Categorization,\n             IEEE Conference on Computer Vision and Pattern Recognition\",\nyear = \"2011\",\nmonth = \"June\",\naddress = \"Colorado Springs, CO\",\n}\n@inproceedings{imagenet_cvpr09,\n        AUTHOR = {Deng, J. and Dong, W. and Socher, R. and Li, L.-J. and\n                  Li, K. and Fei-Fei, L.},\n        TITLE = {{ImageNet: A Large-Scale Hierarchical Image Database}},\n        BOOKTITLE = {CVPR09},\n        YEAR = {2009},\n        BIBSOURCE = \"http://www.image-net.org/papers/imagenet_cvpr09.bib\"}\n", 
+  "description": "The Stanford Dogs dataset contains images of 120 breeds of dogs from around\nthe world. This dataset has been built using images and annotation from\nImageNet for the task of fine-grained image categorization. There are\n20,580 images, out of which 12,000 are used for training and 8580 for\ntesting. Class labels and bounding box annotations are provided\nfor all the 12,000 images.\n", 
+  "location": {
+    "urls": [
+      "http://vision.stanford.edu/aditya86/ImageNetDogs/main.html"
+    ]
+  }, 
+  "name": "stanford_dogs", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image/filename", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }, 
+      {
+        "name": "objects"
+      }
+    ]
+  }, 
+  "sizeInBytes": "815912960", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2145", 
+        "2145", 
+        "2145", 
+        "2145"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8580"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "8580"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8580"
+              }, 
+              "max": 119.0
+            }
+          }
+        ], 
+        "numExamples": "8580"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "shardLengths": [
+        "3000", 
+        "3000", 
+        "3000", 
+        "3000"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "12000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "12000"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "12000"
+              }, 
+              "max": 119.0
+            }
+          }
+        ], 
+        "numExamples": "12000"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "0.1.0"
+}

@@ -1,6 +1,7 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds.Split" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="__new__"/>
 <meta itemprop="property" content="ALL"/>
 <meta itemprop="property" content="TEST"/>
 <meta itemprop="property" content="TRAIN"/>
@@ -8,6 +9,8 @@
 </div>
 
 # tfds.Split
+
+<!-- Insert buttons -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -17,6 +20,7 @@ source</a>
 
 ## Class `Split`
 
+<!-- Start diff -->
 `Enum` for dataset splits.
 
 <!-- Placeholder for "Used in" -->
@@ -38,6 +42,21 @@ Note: All splits, including compositions inherit from <a href="../tfds/core/Spli
 See the
 [guide on splits](https://github.com/tensorflow/datasets/tree/master/docs/splits.md)
 for more information.
+
+<h2 id="__new__"><code>__new__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
+```python
+@staticmethod
+__new__(
+    cls,
+    name
+)
+```
+
+Create a custom split with tfds.Split('custom_name').
 
 ## Class Members
 

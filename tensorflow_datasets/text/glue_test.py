@@ -124,6 +124,15 @@ class GlueMrpcTest(testing.DatasetBuilderTestCase):
   }
 
 
+class GlueAxTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["ax"]
+  DATASET_CLASS = glue.Glue
+  DL_EXTRACT_RESULT = "AX/ax.tsv"
+  SPLITS = {
+      "test": 3,
+  }
+
+
 class GlueColaS3Test(GlueColaTest):
   VERSION = "experimental_latest"
 
@@ -157,6 +166,10 @@ class GlueWnliS3Test(GlueWnliTest):
 
 
 class GlueMrpcS3Test(GlueMrpcTest):
+  VERSION = "experimental_latest"
+
+
+class GlueAxS3Test(GlueAxTest):
   VERSION = "experimental_latest"
 
 

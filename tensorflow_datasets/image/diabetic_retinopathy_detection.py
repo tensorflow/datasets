@@ -24,6 +24,7 @@ import csv
 import io
 import os
 
+from absl import logging
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -58,15 +59,13 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
         pixels is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
-    # Version history:
-    # 3.0.0: S3 with new hashing function (different shuffle).
-    # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
     super(DiabeticRetinopathyDetectionConfig, self).__init__(
         version=tfds.core.Version(
             version, experiments={tfds.core.Experiment.S3: False}),
         supported_versions=[
-            tfds.core.Version("3.0.0"),
-            tfds.core.Version("2.0.0"),
+            tfds.core.Version(
+                "3.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
         ],
         **kwargs)
     self._target_pixels = target_pixels
@@ -78,6 +77,14 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
 
 class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   """Diabetic retinopathy detection."""
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You have to download this dataset from Kaggle.
+  https://www.kaggle.com/c/diabetic-retinopathy-detection/data
+  After downloading, unpack the test.zip file into test/ directory in manual_dir
+  and sample.zip to sample/. Also unpack the sampleSubmissions.csv and
+  trainLabels.csv.
+  """
 
   BUILDER_CONFIGS = [
       DiabeticRetinopathyDetectionConfig(
@@ -112,7 +119,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             # From 0 (no DR - saine) to 4 (Proliferative DR). -1 means no label.
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
-        urls=["https://www.kaggle.com/c/diabetic-retinopathy-detection/data"],
+        homepage="https://www.kaggle.com/c/diabetic-retinopathy-detection/data",
         citation=_CITATION,
     )
 
@@ -122,7 +129,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.manual_dir
     test_labels_path = dl_manager.download(_URL_TEST_LABELS)
     if tf.io.gfile.isdir(test_labels_path):
-       # While testing: download() returns the dir containing the tests files.
+      # While testing: download() returns the dir containing the tests files.
       test_labels_path = os.path.join(test_labels_path,
                                       "retinopathy_solution.csv")
     return [
@@ -276,7 +283,7 @@ def _scale_radius_size(image, filepath, target_radius_size):
     # Some images in the dataset are corrupted, causing the radius heuristic to
     # fail. In these cases, just assume that the radius is the height of the
     # original image.
-    tf.logging.info("Radius of image \"%s\" could not be determined.", filepath)
+    logging.info("Radius of image \"%s\" could not be determined.", filepath)
     r = image.shape[0] / 2.0
   s = target_radius_size / r
   return cv2.resize(image, dsize=None, fx=s, fy=s)

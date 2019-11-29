@@ -12,6 +12,7 @@ upper_tabs:
     # Subsite tabs
     other:
     - name: Catalog
+      skip_translation: true
       contents:
       - include: /datasets/catalog/_toc.yaml
     - name: Guide

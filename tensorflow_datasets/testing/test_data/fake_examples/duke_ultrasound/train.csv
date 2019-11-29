@@ -1,0 +1,2 @@
+filename,axial_samples,lateral_samples,initial_radius,final_radius,initial_angle,final_angle,f0,timestamp_id,datapath,probe,scanner,target,f0_mhz,span_deg,focus_cm,v,harm
+verasonics.20170501112437_channelData_part10_0.mat,720,70,230.46578227344364,950.4657822734436,-0.15053464798451094,0.15053464798451094,1893939.393939394,20170501112437,/getlab/wjl11/study_quantitative_coherence/data/verasonics/acq050117/session_20170501112323/preset6_acq1/20170501112437_channelData_part41.bin,c52v,verasonics,phantom,1.9,17.25,6.0,23.0,0

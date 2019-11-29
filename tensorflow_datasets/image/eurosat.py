@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import io
 import os
 
 import tensorflow as tf
@@ -125,7 +126,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=features,
         supervised_keys=supervised_keys,
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 
@@ -164,6 +165,9 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
 
 
 def _extract_channels(filename):
-  arr = tfds.core.lazy_imports.skimage.external.tifffile.imread(filename)
+  with tf.io.gfile.GFile(filename, 'rb') as f:
+    arr = tfds.core.lazy_imports.skimage.external.tifffile.imread(
+        io.BytesIO(f.read()))
+
   arr = arr.astype('float32')
   return arr

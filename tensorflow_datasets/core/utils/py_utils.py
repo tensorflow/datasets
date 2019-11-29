@@ -29,13 +29,16 @@ import os
 import sys
 import uuid
 
-import psutil
 import six
 import tensorflow as tf
 from tensorflow_datasets.core import constants
 
 
 # pylint: disable=g-import-not-at-top
+try:  # Use shutil on Python 3.3+
+  from shutil import disk_usage  # pylint: disable=g-importing-member
+except ImportError:
+  from psutil import disk_usage  # pylint: disable=g-importing-member
 if sys.version_info[0] > 2:
   import functools
 else:
@@ -49,6 +52,19 @@ else:
 # https://stackoverflow.com/questions/14946264/python-lru-cache-decorator-per-instance
 # For @property methods, use @memoized_property below.
 memoize = functools.lru_cache
+
+
+def is_notebook():
+  """Returns True if running in a notebook (Colab, Jupyter) environement."""
+  # Inspired from the tfdm autonotebook code
+  try:
+    from IPython import get_ipython  # pylint: disable=g-import-not-at-top
+    if "IPKernelApp" not in get_ipython().config:
+      return False  # Run in a IPython terminal
+  except:  # pylint: disable=bare-except
+    return False
+  else:
+    return True
 
 
 @contextlib.contextmanager
@@ -338,7 +354,25 @@ def rgetattr(obj, attr, *args):
 
 def has_sufficient_disk_space(needed_bytes, directory="."):
   try:
-    free_bytes = psutil.disk_usage(os.path.abspath(directory)).free
+    free_bytes = disk_usage(os.path.abspath(directory)).free
   except OSError:
     return True
   return needed_bytes < free_bytes
+
+
+def get_class_path(cls, use_tfds_prefix=True):
+  """Returns path of given class or object. Eg: `tfds.image.cifar.Cifar10`."""
+  if not isinstance(cls, type):
+    cls = cls.__class__
+  module_path = cls.__module__
+  if use_tfds_prefix and module_path.startswith("tensorflow_datasets"):
+    module_path = "tfds" + module_path[len("tensorflow_datasets"):]
+  return ".".join([module_path, cls.__name__])
+
+
+def get_class_url(cls):
+  """Returns URL of given class or object."""
+  cls_path = get_class_path(cls, use_tfds_prefix=False)
+  module_path, unused_class_name = cls_path.rsplit(".", 1)
+  module_path = module_path.replace(".", "/")
+  return constants.SRC_BASE_URL + module_path + ".py"

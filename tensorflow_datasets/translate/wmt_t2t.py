@@ -37,6 +37,9 @@ _CITATION = """
 class WmtT2tTranslate(wmt.WmtTranslate):
   """The WMT EnDe Translate dataset used by the Tensor2Tensor library."""
 
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.0.1: Initial version.
   BUILDER_CONFIGS = [
       wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
           description="WMT T2T EnDe translation task dataset.",
@@ -45,7 +48,10 @@ class WmtT2tTranslate(wmt.WmtTranslate):
           language_pair=("de", "en"),
           version=tfds.core.Version(
               "0.0.1", experiments={tfds.core.Experiment.S3: False}),
-          )
+          supported_versions=[
+              tfds.core.Version("1.0.0"),
+          ]
+      )
   ]
 
   @property

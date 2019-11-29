@@ -10,6 +10,8 @@
 
 # tfds.features.text.TextEncoder
 
+<!-- Insert buttons -->
+
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
@@ -18,6 +20,7 @@ source</a>
 
 ## Class `TextEncoder`
 
+<!-- Start diff -->
 Abstract base class for converting between text and integers.
 
 <!-- Placeholder for "Used in" -->

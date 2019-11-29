@@ -14,9 +14,6 @@ source</a>
 <a href="../tfds/features/FeatureConnector.md"><code>tfds.features.FeatureConnector</code></a>
 API defining feature types.
 
-<!-- Placeholder for "Used in" -->
-
-
 ## Modules
 
 [`text`](../tfds/features/text.md) module: Text utilities.

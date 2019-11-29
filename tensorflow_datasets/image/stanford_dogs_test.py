@@ -30,7 +30,8 @@ class StanfordDogsTest(tfds_test.DatasetBuilderTestCase):
       'test': 3,
   }
 
-  DL_EXTRACT_RESULT = ['list.tar', 'Annotation.tar', 'Images.tar']
+  DL_DOWNLOAD_RESULT = 'Images.tar'
+  DL_EXTRACT_RESULT = ['list.tar', 'Annotation.tar']
 
 
 if __name__ == '__main__':

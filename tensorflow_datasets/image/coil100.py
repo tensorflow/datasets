@@ -66,7 +66,8 @@ class Coil100(tfds.core.GeneratorBasedBuilder):
             "object_id": tfds.features.Text()
         }),
         supervised_keys=("image", "label"),
-        urls=["http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php"],
+        homepage=
+        "http://www.cs.columbia.edu/CAVE/software/softlib/coil-100.php",
         citation=_CITATION,
     )
 

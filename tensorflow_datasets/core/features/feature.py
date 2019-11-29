@@ -92,6 +92,7 @@ import collections
 
 import numpy as np
 import six
+import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
@@ -300,6 +301,55 @@ class FeatureConnector(object):
     """
     return tfexample_data
 
+  def decode_batch_example(self, tfexample_data):
+    """Decode multiple features batched in a single tf.Tensor.
+
+    This function is used to decode features wrapped in
+    `tfds.features.Sequence()`.
+    By default, this function apply `decode_example` on each individual
+    elements using `tf.map_fn`. However, for optimization, features can
+    overwrite this method to apply a custom batch decoding.
+
+    Args:
+      tfexample_data: Same `tf.Tensor` inputs as `decode_example`, but with
+        and additional first dimension for the sequence length.
+
+    Returns:
+      tensor_data: Tensor or dictionary of tensor, output of the tf.data.Dataset
+        object
+    """
+    # Note: This all works fine in Eager mode (without tf.function) because
+    # tf.data pipelines are always executed in Graph mode.
+
+    # Apply the decoding to each of the individual distributed features.
+    return tf.map_fn(
+        self.decode_example,
+        tfexample_data,
+        dtype=self.dtype,
+        parallel_iterations=10,
+        back_prop=False,
+        name='sequence_decode',
+    )
+
+  def decode_ragged_example(self, tfexample_data):
+    """Decode nested features from a tf.RaggedTensor.
+
+    This function is used to decode features wrapped in nested
+    `tfds.features.Sequence()`.
+    By default, this function apply `decode_batch_example` on the flat values
+    of the ragged tensor. For optimization, features can
+    overwrite this method to apply a custom batch decoding.
+
+    Args:
+      tfexample_data: `tf.RaggedTensor` inputs containing the nested encoded
+        examples.
+
+    Returns:
+      tensor_data: The decoded `tf.RaggedTensor` or dictionary of tensor,
+        output of the tf.data.Dataset object
+    """
+    return tf.ragged.map_flat_values(self.decode_batch_example, tfexample_data)
+
   def _flatten(self, x):
     """Flatten the input dict into a list of values.
 
@@ -472,6 +522,16 @@ class Tensor(FeatureConnector):
   def get_tensor_info(self):
     """See base class for details."""
     return TensorInfo(shape=self._shape, dtype=self._dtype)
+
+  def decode_batch_example(self, example_data):
+    """See base class for details."""
+    # Overwrite the `tf.map_fn`, decoding is a no-op
+    return self.decode_example(example_data)
+
+  def decode_ragged_example(self, example_data):
+    """See base class for details."""
+    # Overwrite the `tf.map_fn`, decoding is a no-op
+    return self.decode_example(example_data)
 
   def encode_example(self, example_data):
     """See base class for details."""

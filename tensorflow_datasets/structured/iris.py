@@ -46,16 +46,13 @@ linearly separable from each other.
 
 class Iris(tfds.core.GeneratorBasedBuilder):
   """Iris flower dataset."""
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 1.0.0: Initial version.
-
   NUM_CLASSES = 3
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
 
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
 
   def _info(self):
@@ -72,7 +69,7 @@ class Iris(tfds.core.GeneratorBasedBuilder):
                     names=["Iris-setosa", "Iris-versicolor", "Iris-virginica"]),
         }),
         supervised_keys=("features", "label"),
-        urls=["https://archive.ics.uci.edu/ml/datasets/iris"],
+        homepage="https://archive.ics.uci.edu/ml/datasets/iris",
         citation=_CITATION,
     )
 

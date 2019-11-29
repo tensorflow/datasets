@@ -76,11 +76,17 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("3.0.0"),
-      tfds.core.Version("2.0.0"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # 3.0.0: S3 with new hashing function (different shuffle).
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You must register and agree to user agreement on the dataset page:
+  https://stanfordmlgroup.github.io/competitions/chexpert/
+  Afterwards, you have to put the CheXpert-v1.0-small directory in the
+  manual_dir. It should contain subdirectories: train/ and valid/ with images
+  and also train.csv and valid.csv files.
+  """
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -93,7 +99,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(names=_LABELS.values())),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://stanfordmlgroup.github.io/competitions/chexpert/"],
+        homepage="https://stanfordmlgroup.github.io/competitions/chexpert/",
         citation=_CITATION
     )
 

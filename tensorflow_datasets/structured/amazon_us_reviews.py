@@ -23,7 +23,6 @@ import collections
 import csv
 import tensorflow as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -91,7 +90,7 @@ _DL_URLS = {
 class AmazonUSReviewsConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AmazonUSReviews."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, data=None, **kwargs):
     """Constructs a AmazonUSReviewsConfig.
 
@@ -140,7 +139,7 @@ class AmazonUSReviews(tfds.core.GeneratorBasedBuilder):
                 ])
         }),
         supervised_keys=None,
-        urls=["https://s3.amazonaws.com/amazon-reviews-pds/readme.html"],
+        homepage="https://s3.amazonaws.com/amazon-reviews-pds/readme.html",
         citation=_CITATION,
     )
 

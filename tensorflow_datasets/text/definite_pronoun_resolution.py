@@ -49,16 +49,15 @@ _DATA_URL_PATTERN = 'http://www.hlt.utdallas.edu/~vince/data/emnlp12/{}.c.txt'
 
 class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
   """The Definite Pronoun Resolution Dataset."""
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
-  # 0.0.1: Initial version.
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
           version=tfds.core.Version(
               '0.0.1', experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version('1.0.0'),
+              tfds.core.Version(
+                  '1.0.0',
+                  'New split API (https://tensorflow.org/datasets/splits)'),
           ],
           description='Plain text import of the Definite Pronoun Resolution Dataset.',  # pylint: disable=line-too-long
       )
@@ -79,7 +78,7 @@ class DefinitePronounResolution(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(num_classes=2),
         }),
         supervised_keys=('sentence', 'label'),
-        urls=['http://www.hlt.utdallas.edu/~vince/data/emnlp12/'],
+        homepage='http://www.hlt.utdallas.edu/~vince/data/emnlp12/',
         citation=_CITATION,
     )
 

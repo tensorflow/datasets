@@ -21,12 +21,10 @@ from __future__ import print_function
 
 import collections
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 
-_DESCRIPTION = ("Web-Scale Parallel Corpora for Official European Languages. "
-                "English-{target_lang}.")
+_DESCRIPTION = "Web-Scale Parallel Corpora for Official European Languages."
 
 _BENCHMARK_URL = "https://paracrawl.eu/releases.html"
 
@@ -81,7 +79,7 @@ def _target_languages():
 class ParaCrawlConfig(tfds.core.BuilderConfig):
   """BuilderConfig for ParaCrawl."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, text_encoder_config=None, target_language=None, **kwargs):
     """BuilderConfig for ParaCrawl.
 
@@ -139,16 +137,12 @@ class ParaCrawl(tfds.core.GeneratorBasedBuilder):
     target_language = self.builder_config.target_language
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION.format(
-            target_lang=_target_languages()[target_language]),
+        description=_DESCRIPTION,
         features=tfds.features.Translation(
             languages=("en", target_language),
             encoder_config=self.builder_config.text_encoder_config),
         supervised_keys=("en", target_language),
-        urls=[
-            _BENCHMARK_URL,
-            _BASE_DATA_URL_FORMAT_STR.format(target_lang=target_language)
-        ],
+        homepage=_BENCHMARK_URL,
         citation=_CITATION)
 
   def _vocab_text_gen(self, files, language):
