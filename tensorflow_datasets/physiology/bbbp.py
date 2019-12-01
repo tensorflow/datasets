@@ -48,7 +48,7 @@ _SCAFF_TOTAL = "https://raw.githubusercontent.com/SoojungYang/ChemDatasetSplitte
 class Bbbp(tfds.core.GeneratorBasedBuilder):
     """Predict Blood-brain barrier penetration in binary classification."""
     # TODO(bbbp): Set up version.s
-    VERSION = tfds.core.Version('0.1.3')
+    VERSION = tfds.core.Version('0.1.0')
 
     def _info(self):
         # TODO(bbbp): Specifies the tfds.core.DatasetInfo object
