@@ -29,17 +29,26 @@ the barrier permeability. As a membrane separating circulating blood and brain e
 barrier blocks most drugs, hormones and neurotransmitters. Thus penetration of the barrier forms a long-standing issue 
 in development of drugs targeting central nervous system. This dataset includes binary labels for over 2000 compounds 
 on their permeability properties. Scaffold splitting is also recommended for this well-defined target.
+
+Original Download URL: http://deepchem.io.s3-website-us-west-1.amazonaws.com/datasets/BBBP.csv
 """
 
 _URL_ = "http://moleculenet.ai/datasets-1"
-_DOWNLOAD_URL = "http://deepchem.io.s3-website-us-west-1.amazonaws.com/datasets/BBBP.csv"
+_DOWNLOAD_URL = "https://raw.githubusercontent.com/SoojungYang/ChemDatasetSplitter/master/bbbp/modified_bbbp.csv"
+
+""" Split URLs """
+_RAND_TRAIN = "https://raw.githubusercontent.com/SoojungYang/ChemDatasetSplitter/master/bbbp/random_train_bbbp.csv"
+_RAND_TEST = "https://raw.githubusercontent.com/SoojungYang/ChemDatasetSplitter/master/bbbp/random_test_bbbp.csv"
+_SCAFF_TRAIN = "https://raw.githubusercontent.com/SoojungYang/ChemDatasetSplitter/master/bbbp/scaffold_train_bbbp.csv"
+_SCAFF_VALID = "https://raw.githubusercontent.com/SoojungYang/ChemDatasetSplitter/master/bbbp/scaffold_valid_bbbp.csv"
+_SCAFF_TEST = "https://raw.githubusercontent.com/SoojungYang/ChemDatasetSplitter/master/bbbp/scaffold_test_bbbp.csv"
+_SCAFF_TOTAL = "https://raw.githubusercontent.com/SoojungYang/ChemDatasetSplitter/master/bbbp/total_scaffold_bbbp.csv"
 
 
 class Bbbp(tfds.core.GeneratorBasedBuilder):
     """Predict Blood-brain barrier penetration in binary classification."""
-
     # TODO(bbbp): Set up version.s
-    VERSION = tfds.core.Version('0.1.0')
+    VERSION = tfds.core.Version('0.1.3')
 
     def _info(self):
         # TODO(bbbp): Specifies the tfds.core.DatasetInfo object
@@ -56,17 +65,47 @@ class Bbbp(tfds.core.GeneratorBasedBuilder):
         )
 
     def _split_generators(self, dl_manager):
-        file = dl_manager.download(_DOWNLOAD_URL)
         """Returns SplitGenerators."""
+        """
+        TOTAL 2039 samples. 
+        11 samples that are unable to be converted to 'mols' were removed from original dataset.
+        ALL: total 2039 samples.  
+        
+        1) Random split samples (seed=123, ratio=8:2)
+        TRAIN: randomly split bbbp for training (1631 samples)
+        TEST: randomly split bbbp for test (408 samples)
+        
+        2) Scaffold split samples
+        scaffold_train: choose samples from the largest scaffold sets (1631 samples)
+        scaffold_valid: choose samples from the largest scaffold sets after train set (204 samples)
+        scaffold_test: choose the remaining samples as test set (204 samples)
+        scaffold: total samples, but sorted by the size of the scaffold set, from the largest to the smallest (2039 samples)
+        """
 
         return [
             tfds.core.SplitGenerator(
                 name=tfds.Split.TRAIN,
-                gen_kwargs={"file": file},
+                gen_kwargs={"file": dl_manager.download(_RAND_TRAIN)},
             ),
             tfds.core.SplitGenerator(
                 name=tfds.Split.TEST,
-                gen_kwargs={"file": file},
+                gen_kwargs={"file": dl_manager.download(_RAND_TEST)},
+            ),
+            tfds.core.SplitGenerator(
+                name=tfds.Split('scaffold_train'),
+                gen_kwargs={"file": dl_manager.download(_SCAFF_TRAIN)},
+            ),
+            tfds.core.SplitGenerator(
+                name=tfds.Split('scaffold_validation'),
+                gen_kwargs={"file": dl_manager.download(_SCAFF_VALID)},
+            ),
+            tfds.core.SplitGenerator(
+                name=tfds.Split('scaffold_test'),
+                gen_kwargs={"file": dl_manager.download(_SCAFF_TEST)},
+            ),
+            tfds.core.SplitGenerator(
+                name=tfds.Split('scaffold'),
+                gen_kwargs={"file": dl_manager.download(_SCAFF_TOTAL)},
             ),
         ]
 
