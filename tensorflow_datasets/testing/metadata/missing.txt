@@ -2,9 +2,6 @@
 # This is used for reference and debugging.
 bigearthnet/all/0.0.2
 bigearthnet/rgb/0.0.2
-cnn_dailymail/bytes/2.0.0
-cnn_dailymail/plain_text/2.0.0
-cnn_dailymail/subwords32k/2.0.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/ax/0.0.2
 image_label_folder/1.0.0
@@ -129,6 +126,10 @@ trivia_qa/rc.nocontext/1.1.0
 trivia_qa/rc/1.1.0
 trivia_qa/unfiltered.nocontext/1.1.0
 trivia_qa/unfiltered/1.1.0
+ucf101/ucf101_1/2.0.0
+ucf101/ucf101_1_256/2.0.0
+ucf101/ucf101_2/2.0.0
+ucf101/ucf101_3/2.0.0
 wmt14_translate/ru-en/1.0.0
 wmt18_translate/cs-en/1.0.0
 wmt18_translate/de-en/1.0.0

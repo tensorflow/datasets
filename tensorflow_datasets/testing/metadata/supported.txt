@@ -319,10 +319,13 @@ cmaterdb/devanagari/1.0.0
 cmaterdb/telugu/1.0.0
 cnn_dailymail/bytes/0.0.2
 cnn_dailymail/bytes/1.0.0
+cnn_dailymail/bytes/2.0.0
 cnn_dailymail/plain_text/0.0.2
 cnn_dailymail/plain_text/1.0.0
+cnn_dailymail/plain_text/2.0.0
 cnn_dailymail/subwords32k/0.0.2
 cnn_dailymail/subwords32k/1.0.0
+cnn_dailymail/subwords32k/2.0.0
 coco/2014/1.1.0
 coco/2017/1.1.0
 coco/2017_panoptic/1.1.0
@@ -440,6 +443,7 @@ higgs/1.0.0
 higgs/2.0.0
 horses_or_humans/1.0.0
 horses_or_humans/3.0.0
+i_naturalist2017/0.1.0
 imagenet2012/2.0.1
 imagenet2012/5.0.0
 imagenet2012_corrupted/brightness_1/0.0.1
