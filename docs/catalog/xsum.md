@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="xsum" />
   <meta itemprop="description" content="&#10;Extreme Summarization (XSum) Dataset.&#10;&#10;There are two features:&#10;  - document: Input news article.&#10;  - summary: One sentence summary of the article.&#10;&#10;This data need to manaully downloaded and extracted as described in&#10;https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md.&#10;The folder 'xsum-extracts-from-downloads' need to be compressed as&#10;'xsum-extracts-from-downloads.tar.gz' and put in manually downloaded folder.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('xsum', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/xsum" />
   <meta itemprop="sameAs" content="https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset" />
   <meta itemprop="citation" content="&#10;@article{Narayan2018DontGM,&#10;  title={Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization},&#10;  author={Shashi Narayan and Shay B. Cohen and Mirella Lapata},&#10;  journal={ArXiv},&#10;  year={2018},&#10;  volume={abs/1808.08745}&#10;}&#10;" />
 </div>
-
 # `xsum` (Manual download)
 
 Extreme Summarization (XSum) Dataset.

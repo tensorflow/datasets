@@ -2,9 +2,6 @@
 # This is used for reference and debugging.
 bigearthnet/all/0.0.2
 bigearthnet/rgb/0.0.2
-cnn_dailymail/bytes/2.0.0
-cnn_dailymail/plain_text/2.0.0
-cnn_dailymail/subwords32k/2.0.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/ax/0.0.2
 image_label_folder/1.0.0
