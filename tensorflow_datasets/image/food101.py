@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import json
 import os
 
 import tensorflow as tf
@@ -49,7 +50,7 @@ _CITATION = """\
 class Food101(tfds.core.GeneratorBasedBuilder):
   """Food-101 Images dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     """Define Dataset Info."""
@@ -69,26 +70,36 @@ class Food101(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Define Splits."""
 
-    path = dl_manager.download_and_extract(_BASE_URL)
+    dl_path = dl_manager.download_and_extract(_BASE_URL)
+    path = os.path.join(dl_path, "food-101", "meta")
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=4,
             gen_kwargs={
-                "data_dir_path": os.path.join(path, "food-101/images"),
+                "path": os.path.join(path, "train.json"),
+            },
+        ),
+
+        tfds.core.SplitGenerator(
+            name=tfds.Split.VALIDATION,
+            gen_kwargs={
+                "path": os.path.join(path, "test.json"),
             },
         ),
     ]
 
-  def _generate_examples(self, data_dir_path):
+  def _generate_examples(self, path):
     """Generate images and labels for splits."""
 
-    for class_name in tf.io.gfile.listdir(data_dir_path):
-      class_dir_path = os.path.join(data_dir_path, class_name)
-      for image_name in tf.io.gfile.listdir(class_dir_path):
-        image = os.path.join(class_dir_path, image_name)
+    dir_path = os.path.dirname(os.path.dirname(path))
+    data_dir_path = os.path.join(dir_path, 'images')
+    with tf.io.gfile.GFile(path) as f:
+      data = json.loads(f.read())
+    for label, images in data.items():
+      for image_name in images:
+        image = os.path.join(data_dir_path, image_name + ".jpg")
         yield image, {
             "image": image,
-            "label": class_name,
+            "label": label,
         }
