@@ -27,8 +27,8 @@ from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import shuffle
 from tensorflow_datasets.core import utils
 
-MIN_SHARD_SIZE = 64<<20  # 64 MiB
-MAX_SHARD_SIZE = 1024<<20  # 2 GiB
+MIN_SHARD_SIZE = 64 << 20  # 64 MiB
+MAX_SHARD_SIZE = 1024 << 20  # 2 GiB
 
 # TFRECORD overheads.
 # https://github.com/tensorflow/tensorflow/blob/27325fabed898880fa1b33a04d4b125a6ef4bbc8/tensorflow/core/lib/io/record_writer.h#L104
@@ -167,8 +167,8 @@ class Writer(object):
                                           self._num_examples)
     writer = _TFRecordWriter(self._path, self._num_examples, number_of_shards)
     for serialized_example in utils.tqdm(
-        self._shuffler, total=self._num_examples,
-        unit=' examples', leave=False):
+            self._shuffler, total=self._num_examples,
+            unit=' examples', leave=False):
       writer.write(serialized_example)
     shard_lengths = writer.finalize()
     logging.info('Done writing %s. Shard lengths: %s',

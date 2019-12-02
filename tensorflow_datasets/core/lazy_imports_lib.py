@@ -110,6 +110,21 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def rdkit_Chem(cls):
+    return _try_import("rdkit.Chem")
+
+  @utils.classproperty
+  @classmethod
+  def rdkit_Chem_AllChem(cls):
+    return _try_import("rdkit.Chem.AllChem")
+
+  @utils.classproperty
+  @classmethod
+  def rdkit_Datastructs(cls):
+    return _try_import("rdkit.DataStructs")
+
+  @utils.classproperty
+  @classmethod
   def scipy(cls):
     _try_import("scipy.io")
     _try_import("scipy.ndimage")

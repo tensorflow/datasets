@@ -1,1 +1,1 @@
-from tensorflow_datasets.physiology.bbbp import Bbbp
+from tensorflow_datasets.physiology.bbbp import BBBP

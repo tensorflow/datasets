@@ -8,9 +8,9 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.text import bbbp
 
 
-class BbbpTest(testing.DatasetBuilderTestCase):
+class BBBPTest(testing.DatasetBuilderTestCase):
   # TODO(bbbp):
-  DATASET_CLASS = bbbp.Bbbp
+  DATASET_CLASS = bbbp.BBBP
   SPLITS = {
       "train": 3,  # Number of fake train example
       "test": 1,  # Number of fake test example
@@ -25,4 +25,3 @@ class BbbpTest(testing.DatasetBuilderTestCase):
 
 if __name__ == "__main__":
   testing.test_main()
-

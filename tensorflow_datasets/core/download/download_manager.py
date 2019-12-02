@@ -41,7 +41,8 @@ class NonMatchingChecksumError(Exception):
   """The downloaded file doesn't have expected checksum."""
 
   def __init__(self, url, tmp_path):
-    msg = 'Artifact %s, downloaded to %s, has wrong checksum.' % (url, tmp_path)
+    msg = 'Artifact %s, downloaded to %s, has wrong checksum.' % (
+        url, tmp_path)
     Exception.__init__(self, msg)
 
 
@@ -282,6 +283,7 @@ class DownloadManager(object):
     """Download-extract `Resource` or url, returns Promise->path."""
     if isinstance(resource, six.string_types):
       resource = resource_lib.Resource(url=resource)
+
     def callback(path):
       resource.path = path
       return self._extract(resource)

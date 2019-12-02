@@ -10,6 +10,7 @@ Usage outside of TensorFlow is also supported.
 See the README on GitHub for further documentation.
 """
 
+from version import __version__  # pylint: disable=g-import-not-at-top
 import datetime
 import itertools
 import os
@@ -29,7 +30,6 @@ project_name = 'tensorflow-datasets'
 version_path = os.path.join(
     os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
-from version import __version__  # pylint: disable=g-import-not-at-top
 
 if nightly:
   project_name = 'tfds-nightly'
@@ -114,10 +114,11 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
+    'bbbp': ['rdkit'],
     'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
-    'eurosat': ['scikit-image',],
+    'eurosat': ['scikit-image', ],
     'groove': ['pretty_midi', 'pydub'],
     'imagenet2012_corrupted': [
         # This includes pre-built source; you may need to use an alternative
@@ -135,7 +136,7 @@ DATASET_EXTRAS = {
     'the300w_lp': ['scipy'],
     'duke_ultrasound': ['scipy'],
     'wider_face': ['Pillow'],
-    'wikipedia': ['mwparserfromhell', 'apache_beam'],
+    'wikipedia': ['mwparserfromhell', 'apache_beam']
 }
 
 
