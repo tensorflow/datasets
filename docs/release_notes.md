@@ -15,3 +15,4 @@
     from the [MimickNet paper](https://arxiv.org/abs/1908.05782)
 *   Add Dmlab dataset from the
     [VTAB benchmark](https://arxiv.org/abs/1910.04867).
+*   Add [Opinosis dataset](https://www.aclweb.org/anthology/C10-1039.pdf).
