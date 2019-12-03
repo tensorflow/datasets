@@ -42,6 +42,11 @@ Competition %s not found. Please ensure you have spelled the competition name \
 correctly.
 """
 
+_NOT_ACCEPT_RULES_ERR_MSG = """\
+You must accept the competition rules through the Kaggle competition's website:
+https://www.kaggle.com/c/%s/rules
+"""
+
 
 class KaggleFile(object):
   """Represents a Kaggle competition file."""
@@ -102,9 +107,9 @@ class KaggleCompetitionDownloader(object):
         "-v",
         self._competition_name,
     ]
-    output = _run_kaggle_command(command, self._competition_name)
+    output = run_kaggle_command(command, self._competition_name)
     return sorted([
-        line.split(",")[0] for line in output.split("\n")[1:] if line
+        line.split(",")[0] for line in output.split("\n")[1:] if line != ""
     ])
 
   @utils.memoized_property
@@ -131,11 +136,11 @@ class KaggleCompetitionDownloader(object):
         "-c",
         self._competition_name,
     ]
-    _run_kaggle_command(command, self._competition_name)
+    run_kaggle_command(command, self._competition_name)
     return os.path.join(output_dir, fname)
 
 
-def _run_kaggle_command(command_args, competition_name):
+def run_kaggle_command(command_args, competition_name=None):
   """Run kaggle command with subprocess."""
   try:
     output = sp.check_output(command_args)
@@ -146,6 +151,9 @@ def _run_kaggle_command(command_args, competition_name):
     if output.startswith(b"404"):
       logging.error(_NOT_FOUND_ERR_MSG, competition_name)
       raise
+    if output.startswith(b'403'):
+      logging.error(_NOT_ACCEPT_RULES_ERR_MSG, competition_name)
+      raise
     logging.error(_ERR_MSG, competition_name)
     raise
 
@@ -153,3 +161,5 @@ def _run_kaggle_command(command_args, competition_name):
 def _log_command_output(output, error=False):
   log = logging.error if error else logging.info
   log("kaggle command output:\n%s", tf.compat.as_text(output))
+
+

@@ -20,6 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import re
 import subprocess
 
 import tensorflow as tf
@@ -49,12 +50,28 @@ class KaggleTest(testing.TestCase):
         with self.assertRaises(subprocess.CalledProcessError):
           _ = downloader.competition_files
 
+  def test_competition_download_403(self):
+    with testing.mock_kaggle_api(err_msg="403 - Forbidden"):
+      with self.assertLogs(
+          "accept the competition rules", level="error"):
+        downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
+        with self.assertRaises(subprocess.CalledProcessError):
+          _ = downloader.competition_files
+
   def test_competition_download_error(self):
     with testing.mock_kaggle_api(err_msg="Some error"):
       with self.assertLogs("install the kaggle API", level="error"):
         downloader = kaggle.KaggleCompetitionDownloader("digit-recognizer")
         with self.assertRaises(subprocess.CalledProcessError):
           _ = downloader.competition_files
+
+  def test_kaggle_search(self):
+    searcher = kaggle.KaggleSearch(search='career-con-2019')
+    reg = re.compile(r'\s+')
+    output = """refdeadlinecategoryrewardteamCountuserHasEntered
+    ------------------------------------------------------------
+    --------------career-con-20192019-04-1123:59:00RecruitmentSwag1478False """
+    self.assertEqual(reg.sub('', searcher.searching), reg.sub('', output))
 
 
 if __name__ == "__main__":
