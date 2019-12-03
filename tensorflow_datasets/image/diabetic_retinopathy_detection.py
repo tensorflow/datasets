@@ -78,6 +78,14 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
 class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   """Diabetic retinopathy detection."""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You have to download this dataset from Kaggle.
+  https://www.kaggle.com/c/diabetic-retinopathy-detection/data
+  After downloading, unpack the test.zip file into test/ directory in manual_dir
+  and sample.zip to sample/. Also unpack the sampleSubmissions.csv and
+  trainLabels.csv.
+  """
+
   BUILDER_CONFIGS = [
       DiabeticRetinopathyDetectionConfig(
           name="original",

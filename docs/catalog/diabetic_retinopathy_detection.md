@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="https://www.kaggle.com/c/diabetic-retinopathy-detection/data" />
   <meta itemprop="citation" content="@ONLINE {kaggle-diabetic-retinopathy,&#10;    author = &quot;Kaggle and EyePacs&quot;,&#10;    title  = &quot;Kaggle Diabetic Retinopathy Detection&quot;,&#10;    month  = &quot;jul&quot;,&#10;    year   = &quot;2015&quot;,&#10;    url    = &quot;https://www.kaggle.com/c/diabetic-retinopathy-detection/data&quot;&#10;}&#10;" />
 </div>
-# `diabetic_retinopathy_detection`
+# `diabetic_retinopathy_detection` (Manual download)
 
 A large set of high-resolution retina images taken under a variety of imaging
 conditions.
@@ -44,6 +44,14 @@ Versions:
 *   **`2.0.0`** (default):
 *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to
+`~/tensorflow_datasets/manual/diabetic_retinopathy_detection/`): You have to
+download this dataset from Kaggle.
+https://www.kaggle.com/c/diabetic-retinopathy-detection/data After downloading,
+unpack the test.zip file into test/ directory in manual_dir and sample.zip to
+sample/. Also unpack the sampleSubmissions.csv and trainLabels.csv.
+
 ### Statistics
 
 Split      | Examples
@@ -75,6 +83,14 @@ Versions:
 *   **`2.1.0`** (default):
 *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to
+`~/tensorflow_datasets/manual/diabetic_retinopathy_detection/`): You have to
+download this dataset from Kaggle.
+https://www.kaggle.com/c/diabetic-retinopathy-detection/data After downloading,
+unpack the test.zip file into test/ directory in manual_dir and sample.zip to
+sample/. Also unpack the sampleSubmissions.csv and trainLabels.csv.
+
 ### Statistics
 
 Split      | Examples
@@ -105,6 +121,14 @@ Versions:
 
 *   **`2.1.0`** (default):
 *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to
+`~/tensorflow_datasets/manual/diabetic_retinopathy_detection/`): You have to
+download this dataset from Kaggle.
+https://www.kaggle.com/c/diabetic-retinopathy-detection/data After downloading,
+unpack the test.zip file into test/ directory in manual_dir and sample.zip to
+sample/. Also unpack the sampleSubmissions.csv and trainLabels.csv.
 
 ### Statistics
 
@@ -140,6 +164,14 @@ Versions:
 
 *   **`1.0.0`** (default):
 *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to
+`~/tensorflow_datasets/manual/diabetic_retinopathy_detection/`): You have to
+download this dataset from Kaggle.
+https://www.kaggle.com/c/diabetic-retinopathy-detection/data After downloading,
+unpack the test.zip file into test/ directory in manual_dir and sample.zip to
+sample/. Also unpack the sampleSubmissions.csv and trainLabels.csv.
 
 ### Statistics
 None computed

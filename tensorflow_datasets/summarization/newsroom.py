@@ -80,6 +80,12 @@ class Newsroom(tfds.core.GeneratorBasedBuilder):
   """NEWSROOM Dataset."""
 
   VERSION = tfds.core.Version("1.0.0")
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You should download the dataset from https://summari.es/download/
+  The webpage requires registration.
+  After downloading, please put dev.jsonl, test.jsonl and train.jsonl
+  files in the manual_dir.
+  """
 
   def _info(self):
     features = {

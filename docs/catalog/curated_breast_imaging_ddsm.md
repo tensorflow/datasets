@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM" />
   <meta itemprop="citation" content="@misc{CBIS_DDSM_Citation,&#10;  doi = {10.7937/k9/tcia.2016.7o02s9cy},&#10;  url = {https://wiki.cancerimagingarchive.net/x/lZNXAQ},&#10;  author = {Sawyer-Lee,  Rebecca and Gimenez,  Francisco and Hoogi,  Assaf and Rubin,  Daniel},&#10;  title = {Curated Breast Imaging Subset of DDSM},&#10;  publisher = {The Cancer Imaging Archive},&#10;  year = {2016},&#10;}&#10;@article{TCIA_Citation,&#10;  author = {&#10;    K. Clark and B. Vendt and K. Smith and J. Freymann and J. Kirby and&#10;    P. Koppel and S. Moore and S. Phillips and D. Maffitt and M. Pringle and&#10;    L. Tarbox and F. Prior&#10;  },&#10;  title = {{The Cancer Imaging Archive (TCIA): Maintaining and Operating a&#10;  Public Information Repository}},&#10;  journal = {Journal of Digital Imaging},&#10;  volume = {26},&#10;  month = {December},&#10;  year = {2013},&#10;  pages = {1045-1057},&#10;}&#10;@article{DBLP:journals/corr/abs-1708-09427,&#10;  author    = {Li Shen},&#10;  title     = {End-to-end Training for Whole Image Breast Cancer Diagnosis using&#10;               An All Convolutional Design},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1708.09427},&#10;  year      = {2017},&#10;  url       = {http://arxiv.org/abs/1708.09427},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1708.09427},&#10;  timestamp = {Mon, 13 Aug 2018 16:48:35 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1708-09427},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}&#10;" />
 </div>
-# `curated_breast_imaging_ddsm`
+# `curated_breast_imaging_ddsm` (Manual download)
 
 The CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and
 standardized version of the Digital Database for Screening Mammography (DDSM).
@@ -60,6 +60,13 @@ Versions:
 *   **`0.2.0`** (default):
 *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to
+`~/tensorflow_datasets/manual/curated_breast_imaging_ddsm/`): You can download
+the images from https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
+Please look at the source file (cbis_ddsm.py) to see the instructions on how to
+conver them into png (using dcmj2pnm).
+
 ### Statistics
 
 Split      | Examples
@@ -89,6 +96,13 @@ Versions:
 
 *   **`0.1.0`** (default):
 *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to
+`~/tensorflow_datasets/manual/curated_breast_imaging_ddsm/`): You can download
+the images from https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
+Please look at the source file (cbis_ddsm.py) to see the instructions on how to
+conver them into png (using dcmj2pnm).
 
 ### Statistics
 
@@ -129,6 +143,13 @@ Versions:
 
 *   **`0.1.0`** (default):
 *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to
+`~/tensorflow_datasets/manual/curated_breast_imaging_ddsm/`): You can download
+the images from https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
+Please look at the source file (cbis_ddsm.py) to see the instructions on how to
+conver them into png (using dcmj2pnm).
 
 ### Statistics
 

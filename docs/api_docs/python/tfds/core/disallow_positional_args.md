@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Requires function to be called using keyword arguments.
 
 ```python

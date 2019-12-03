@@ -48,9 +48,11 @@ _CITATION = """
 }
 """
 _VERSION = tfds.core.Version(
-    "1.0.1", experiments={tfds.core.Experiment.S3: False})
+    "1.1.0", experiments={tfds.core.Experiment.S3: False})
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})]
+    tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False}),
+    tfds.core.Version("1.0.1", experiments={tfds.core.Experiment.S3: False}),
+]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
 _WET_PATH_URL = "https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"

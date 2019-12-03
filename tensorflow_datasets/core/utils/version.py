@@ -63,9 +63,22 @@ class Version(object):
       Experiment.S3: True,
   }
 
-  def __init__(self, version_str, description=None, experiments=None):
+  def __init__(self, version_str, description=None, experiments=None,
+               tfds_version_to_prepare=None):
+    """Version init.
+
+    Args:
+      version_str: string. Eg: "1.2.3".
+      description: string, a description of what is new in this version.
+      experiments: dict of experiments. See Experiment.
+      tfds_version_to_prepare: string, defaults to None. If set, indicates that
+        current version of TFDS cannot be used to `download_and_prepare` the
+        dataset, but that TFDS at version {tfds_version_to_prepare} should be
+        used instead.
+    """
     self.description = description
     self._experiments = self._DEFAULT_EXPERIMENTS.copy()
+    self.tfds_version_to_prepare = tfds_version_to_prepare
     if experiments:
       self._experiments.update(experiments)
     self.major, self.minor, self.patch = _str_to_version(version_str)

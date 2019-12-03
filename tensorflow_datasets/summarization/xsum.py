@@ -68,6 +68,13 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.1.0")
   SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0", "Dataset without cleaning.")]
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  Detailed download instructions (which require running a custom script) are
+  here:
+  https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md#running-the-download-and-extraction-scripts
+  Afterwards, please put xsum-extracts-from-downloads.tar.gz file in the manual_dir.
+  """
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,

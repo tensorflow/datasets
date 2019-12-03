@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="https://www.tensorflow.org/datasets/catalog/image_label_folder" />
   <meta itemprop="citation" content="" />
 </div>
-# `image_label_folder`
+# `image_label_folder` (Manual download)
 
 Generic image classification dataset.
 
@@ -23,6 +23,10 @@ Generic image classification dataset.
     *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 *   Size: `?? GiB`
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/image_label_folder/`):
+This is a 'template' dataset.
 
 ## Features
 ```python

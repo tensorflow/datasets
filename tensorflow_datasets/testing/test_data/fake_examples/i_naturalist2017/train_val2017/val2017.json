@@ -1,0 +1,17 @@
+{
+  "images": [
+    {"file_name": "train_val_images/Aves/Aramus guarauna/0007.jpg", "id": 1},
+    {"file_name": "train_val_images/Insecta/Nicrophorus tomentosus/0006.jpg", "id": 2},
+    {"file_name": "train_val_images/Plantae/Mertensia ciliata/0004.jpg", "id": 3}
+  ],
+  "annotations": [
+    {"image_id": 1, "category_id": 0, "id": 1},
+    {"image_id": 2, "category_id": 1, "id": 2},
+    {"image_id": 3, "category_id": 2, "id": 3}
+  ],
+  "categories": [
+    {"supercategory": "Aves", "id": 4965, "name": "Aramus guarauna"},
+    {"supercategory": "Insecta", "id": 1916, "name": "Nicrophorus tomentosus"},
+    {"supercategory": "Plantae", "id": 4432, "name": "Mertensia ciliata"}
+  ]
+}

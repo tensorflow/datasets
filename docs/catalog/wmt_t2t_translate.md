@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py" />
   <meta itemprop="citation" content="&#10;@InProceedings{bojar-EtAl:2014:W14-33,&#10;  author    = {Bojar, Ondrej  and  Buck, Christian  and  Federmann, Christian  and  Haddow, Barry  and  Koehn, Philipp  and  Leveling, Johannes  and  Monz, Christof  and  Pecina, Pavel  and  Post, Matt  and  Saint-Amand, Herve  and  Soricut, Radu  and  Specia, Lucia  and  Tamchyna, Ale{s}},&#10;  title     = {Findings of the 2014 Workshop on Statistical Machine Translation},&#10;  booktitle = {Proceedings of the Ninth Workshop on Statistical Machine Translation},&#10;  month     = {June},&#10;  year      = {2014},&#10;  address   = {Baltimore, Maryland, USA},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {12--58},&#10;  url       = {http://www.aclweb.org/anthology/W/W14/W14-3302}&#10;}&#10;" />
 </div>
-# `wmt_t2t_translate`
+# `wmt_t2t_translate` (Manual download)
 
 Translate dataset based on the data from statmt.org.
 
@@ -46,6 +46,11 @@ Versions:
 
 *   **`0.0.1`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt_t2t_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 

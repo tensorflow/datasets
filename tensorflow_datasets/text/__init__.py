@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.text.c4 import C4
 from tensorflow_datasets.text.definite_pronoun_resolution import DefinitePronounResolution
+from tensorflow_datasets.text.esnli import Esnli
 from tensorflow_datasets.text.gap import Gap
 from tensorflow_datasets.text.glue import Glue
 from tensorflow_datasets.text.imdb import IMDBReviews

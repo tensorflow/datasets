@@ -1,0 +1,80 @@
+{
+  "citation": " @article{DeepWeeds2019,\n  author = {Alex Olsen and\n    Dmitry A. Konovalov and\n    Bronson Philippa and\n    Peter Ridd and\n    Jake C. Wood and\n    Jamie Johns and\n    Wesley Banks and\n    Benjamin Girgenti and\n    Owen Kenny and\n    James Whinney and\n    Brendan Calvert and\n    Mostafa {Rahimi Azghadi} and\n    Ronald D. White},\n  title = {{DeepWeeds: A Multiclass Weed Species Image Dataset for Deep Learning}},\n  journal = {Scientific Reports},\n  year = 2019,\n  number = 2058,\n  month = 2,\n  volume = 9,\n  issue = 1,\n  day = 14,\n  url = \"https://doi.org/10.1038/s41598-018-38343-3\",\n  doi = \"10.1038/s41598-018-38343-3\"\n}\n",
+  "description": "The DeepWeeds dataset consists of 17,509 images capturing eight different weed species native to Australia in situ with neighbouring flora.The selected weed species are local to pastoral grasslands across the state of Queensland.The images were collected from weed infestations at the following sites across Queensland: \"Black River\", \"Charters Towers\",  \"Cluden\", \"Douglas\", \"Hervey Range\", \"Kelso\", \"McKinlay\" and \"Paluma\".",
+  "location": {
+    "urls": [
+      "https://github.com/AlexOlsen/DeepWeeds"
+    ]
+  },
+  "name": "deep_weeds",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "256"
+            },
+            {
+              "size": "256"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "935874948",
+  "splits": [
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "2189",
+        "2188",
+        "2189",
+        "2188",
+        "2189",
+        "2189",
+        "2188",
+        "2189"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "17509"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "17509"
+              },
+              "max": 8.0
+            }
+          }
+        ],
+        "numExamples": "17509"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "2.0.0"
+}

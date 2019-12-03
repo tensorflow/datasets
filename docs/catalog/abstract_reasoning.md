@@ -10,7 +10,7 @@
   <meta itemprop="citation" content="@InProceedings{pmlr-v80-barrett18a,&#10;  title =   {Measuring abstract reasoning in neural networks},&#10;  author =   {Barrett, David and Hill, Felix and Santoro, Adam and Morcos, Ari and Lillicrap, Timothy},&#10;  booktitle =    {Proceedings of the 35th International Conference on Machine Learning},&#10;  pages =   {511--520},&#10;  year =    {2018},&#10;  editor =      {Dy, Jennifer and Krause, Andreas},&#10;  volume =      {80},&#10;  series =    {Proceedings of Machine Learning Research},&#10;  address =     {Stockholmsmassan, Stockholm Sweden},&#10;  month =     {10--15 Jul},&#10;  publisher =     {PMLR},&#10;  pdf =     {http://proceedings.mlr.press/v80/barrett18a/barrett18a.pdf},&#10;  url =   {http://proceedings.mlr.press/v80/barrett18a.html},&#10;  abstract =    {Whether neural networks can learn abstract reasoning or whetherthey merely rely on superficial statistics is a topic of recent debate. Here, we propose a dataset and challenge designed to probe abstract reasoning, inspired by a well-known human IQ test. To succeed at this challenge, models must cope with various generalisation 'regimes' in which the training data and test questions differ in clearly-defined ways. We show that popular models such as ResNets perform poorly, even when the training and test sets differ only minimally, and we present a novel architecture, with structure designed to encourage reasoning, that does significantly better. When we vary the way in which the test questions and training data differ, we find that our model is notably proficient at certain forms of generalisation, but notably weak at others. We further show that the model's ability to generalise improves markedly if it is trained to predict symbolic explanations for its answers. Altogether, we introduce and explore ways to both measure and induce stronger abstract reasoning in neural networks. Our freely-available dataset should motivate further progress in this direction.}&#10;}&#10;" />
 </div>
 
-# `abstract_reasoning`
+# `abstract_reasoning` (Manual download)
 
 Procedurally Generated Matrices (PGM) data from the paper Measuring Abstract
 Reasoning in Neural Networks, Barrett, Hill, Santoro et al. 2018. The goal is to
@@ -113,6 +113,12 @@ Versions:
 
 *   **`0.0.2`** (default):
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
+Data can be downloaded from
+https://console.cloud.google.com/storage/browser/ravens-matrices Please put all
+the tar.gz files in manual_dir.
+
 ### Statistics
 None computed
 
@@ -145,6 +151,12 @@ Versions:
 
 *   **`0.0.2`** (default):
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
+Data can be downloaded from
+https://console.cloud.google.com/storage/browser/ravens-matrices Please put all
+the tar.gz files in manual_dir.
+
 ### Statistics
 None computed
 
@@ -172,6 +184,12 @@ training, whereas in the test set they took values in the upper half.
 Versions:
 
 *   **`0.0.2`** (default):
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
+Data can be downloaded from
+https://console.cloud.google.com/storage/browser/ravens-matrices Please put all
+the tar.gz files in manual_dir.
 
 ### Statistics
 None computed
@@ -204,6 +222,12 @@ Versions:
 
 *   **`0.0.2`** (default):
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
+Data can be downloaded from
+https://console.cloud.google.com/storage/browser/ravens-matrices Please put all
+the tar.gz files in manual_dir.
+
 ### Statistics
 None computed
 
@@ -233,6 +257,12 @@ every $S$ in the test set contained at least one of them.
 Versions:
 
 *   **`0.0.2`** (default):
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
+Data can be downloaded from
+https://console.cloud.google.com/storage/browser/ravens-matrices Please put all
+the tar.gz files in manual_dir.
 
 ### Statistics
 None computed
@@ -266,6 +296,12 @@ Versions:
 
 *   **`0.0.2`** (default):
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
+Data can be downloaded from
+https://console.cloud.google.com/storage/browser/ravens-matrices Please put all
+the tar.gz files in manual_dir.
+
 ### Statistics
 None computed
 
@@ -295,6 +331,12 @@ Versions:
 
 *   **`0.0.2`** (default):
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
+Data can be downloaded from
+https://console.cloud.google.com/storage/browser/ravens-matrices Please put all
+the tar.gz files in manual_dir.
+
 ### Statistics
 None computed
 
@@ -323,6 +365,12 @@ with $o$=line and $a$=type.
 Versions:
 
 *   **`0.0.2`** (default):
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
+Data can be downloaded from
+https://console.cloud.google.com/storage/browser/ravens-matrices Please put all
+the tar.gz files in manual_dir.
 
 ### Statistics
 None computed

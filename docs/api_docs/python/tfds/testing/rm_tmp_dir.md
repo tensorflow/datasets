@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Rm temporary directory.
 
 ``` python

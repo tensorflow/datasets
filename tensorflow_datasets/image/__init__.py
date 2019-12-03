@@ -55,6 +55,7 @@ from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image.imagenet_resized import ImagenetResized
+from tensorflow_datasets.image.inaturalist import INaturalist2017
 from tensorflow_datasets.image.lfw import LFW
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun

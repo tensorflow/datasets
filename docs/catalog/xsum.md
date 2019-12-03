@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset" />
   <meta itemprop="citation" content="&#10;@article{Narayan2018DontGM,&#10;  title={Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme Summarization},&#10;  author={Shashi Narayan and Shay B. Cohen and Mirella Lapata},&#10;  journal={ArXiv},&#10;  year={2018},&#10;  volume={abs/1808.08745}&#10;}&#10;" />
 </div>
-# `xsum`
+# `xsum` (Manual download)
 
 Extreme Summarization (XSum) Dataset.
 
@@ -31,6 +31,13 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
     *   `1.0.0`: Dataset without cleaning.
 
 *   Size: `2.59 MiB`
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/xsum/`): Detailed download
+instructions (which require running a custom script) are here:
+https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md#running-the-download-and-extraction-scripts
+Afterwards, please put xsum-extracts-from-downloads.tar.gz file in the
+manual_dir.
 
 ## Features
 ```python
