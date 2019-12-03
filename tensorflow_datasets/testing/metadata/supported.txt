@@ -823,9 +823,13 @@ titanic/2.0.0
 uc_merced/0.0.1
 uc_merced/2.0.0
 ucf101/ucf101_1/1.0.0
+ucf101/ucf101_1/2.0.0
 ucf101/ucf101_1_256/1.0.0
+ucf101/ucf101_1_256/2.0.0
 ucf101/ucf101_2/1.0.0
+ucf101/ucf101_2/2.0.0
 ucf101/ucf101_3/1.0.0
+ucf101/ucf101_3/2.0.0
 visual_domain_decathlon/aircraft/1.1.0
 visual_domain_decathlon/cifar100/1.1.0
 visual_domain_decathlon/daimlerpedcls/1.1.0
