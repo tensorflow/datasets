@@ -120,6 +120,14 @@ class C4Config(tfds.core.BuilderConfig):
 class C4(tfds.core.BeamBasedBuilder):
   """C4 dataset based on Common Crawl."""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  For the WebText-like config, you must manually download 'OpenWebText.zip'
+  (from https://mega.nz/#F!EZZD0YwJ!9_PlEQzdMVLaNdKv_ICNVQ) and the Common Crawl
+  WET files from August 2018 to July 2019
+  (https://commoncrawl.org/the-data/get-started/) and place them in the
+  `manual_dir`.
+  """
+
   BUILDER_CONFIGS = [
       C4Config(language="en", description="English C4 dataset."),
       C4Config(
