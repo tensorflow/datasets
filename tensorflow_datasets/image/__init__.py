@@ -48,6 +48,7 @@ from tensorflow_datasets.image.dsprites import Dsprites
 from tensorflow_datasets.image.dtd import Dtd
 from tensorflow_datasets.image.duke_ultrasound import DukeUltrasound
 from tensorflow_datasets.image.eurosat import Eurosat
+from tensorflow_datasets.iamge.fgvc_aircraft import FgvcAircraft
 from tensorflow_datasets.image.flowers import TFFlowers
 from tensorflow_datasets.image.food101 import Food101
 from tensorflow_datasets.image.horses_or_humans import HorsesOrHumans
