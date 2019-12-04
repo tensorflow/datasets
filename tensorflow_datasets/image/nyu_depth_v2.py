@@ -54,6 +54,7 @@ def _load_image(path):
 
 
 def _normalize_depth(image):
+  """Convert uint8 to uint16 in mm and reshape to (h, w, 1)"""
   max_depth = 10000  # in mm
   if image.dtype == np.uint8:
     image = np.round(image / 255 * max_depth).astype(np.uint16)
