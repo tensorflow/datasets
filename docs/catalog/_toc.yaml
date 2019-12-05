@@ -205,7 +205,7 @@ toc:
   title: Summarization
 - section:
   - path: /datasets/catalog/c4
-    title: c4
+    title: c4 (manual)
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/esnli
@@ -224,6 +224,8 @@ toc:
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
+  - path: /datasets/catalog/scicite
+    title: scicite
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/squad
