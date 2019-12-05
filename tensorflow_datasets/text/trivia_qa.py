@@ -307,12 +307,14 @@ class TriviaQA(tfds.core.GeneratorBasedBuilder):
             }
 
           search_results = _transpose_and_strip_dicts(
-              _add_context(article["SearchResults"], "SearchContext", web_dir),
+              _add_context(
+                  article.get("SearchResults", []), "SearchContext", web_dir),
               ["Description", "Filename", "Rank", "Title", "Url",
                "SearchContext"])
 
           entity_pages = _transpose_and_strip_dicts(
-              _add_context(article["EntityPages"], "WikiContext", wiki_dir),
+              _add_context(
+                  article.get("EntityPages", []), "WikiContext", wiki_dir),
               ["DocSource", "Filename", "Title", "WikiContext"])
 
           question = article["Question"].strip()
