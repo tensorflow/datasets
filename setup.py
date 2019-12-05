@@ -53,6 +53,12 @@ REQUIRED_PKGS = [
     'termcolor',
     'tqdm',
     'wrapt',
+    'mock;python_version<"2"',
+    'bz2file;python_version<"2"',
+    'functools32;python_version<"2"',
+    'futures;python_version<"2"',
+    'psutil;python_version<"3.3"',
+    'enum34;python_version<"3.4"'
 ]
 
 TESTS_REQUIRE = [
@@ -64,24 +70,6 @@ TESTS_REQUIRE = [
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
 ]
-
-if sys.version_info.major == 3:
-  # Packages only for Python 3
-  pass
-else:
-  # Packages only for Python 2
-  TESTS_REQUIRE.append('mock')
-  REQUIRED_PKGS.append('bz2file')
-  REQUIRED_PKGS.append('functools32')
-  REQUIRED_PKGS.append('futures')  # concurrent.futures
-
-if sys.version_info < (3, 4):
-  # enum introduced in Python 3.4
-  REQUIRED_PKGS.append('enum34')
-
-if sys.version_info < (3, 3):
-  # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
-  REQUIRED_PKGS.append('psutil')
 
 # Static files needed by datasets.
 DATASET_FILES = [
