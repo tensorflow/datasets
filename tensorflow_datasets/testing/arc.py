@@ -37,8 +37,8 @@ flags.DEFINE_string(name="tfds_dir", default=py_utils.tfds_dir(),
 FLAGS = flags.FLAGS
 
 
-_COMMIT = "34bc532"
-_EXTRACT_SUBDIR = f"fchollet-ARC-{_COMMIT}"
+_COMMIT = "bd9e2c934c83d00251b7b4781ffc38cd167c885f"
+_EXTRACT_SUBDIR = "fchollet-ARC-{}".format(_COMMIT[:7])
 NUM_TASKS = {"training": 10, "evaluation": 5}
 
 def examples_dir():
@@ -50,16 +50,16 @@ def arc_dir(name):
   return os.path.join(examples_dir(), name)
 
 
-def make_image_data():
+def make_grid_data():
   size = np.random.randint(30, size=2) + 1
-  img = np.random.randint(10, size=size[0]*size[1]).reshape(size)
-  return img.tolist()
+  grid = np.random.randint(10, size=size[0] * size[1]).reshape(size)
+  return grid.tolist()
 
 
 def make_pair():
   return {
-    "input": make_image_data(),
-    "output": make_image_data(),
+    "input": make_grid_data(),
+    "output": make_grid_data(),
   }
 
 
@@ -73,7 +73,7 @@ def make_task():
 
 
 def write_task(output_dir, task_id, task):
-    path = os.path.join(output_dir, f"{task_id}.json")
+    path = os.path.join(output_dir, "{}.json".format(task_id))
     with tf.io.gfile.GFile(path, "w") as f:
         json.dump(task, f)
 
