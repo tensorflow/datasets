@@ -133,7 +133,8 @@ def dataset_docs_str(datasets=None):
   Returns:
     - overview document
     - a dictionary of sections. Each dataset in a section is represented by a
-    pair (dataset_name, string describing the datasets (in the MarkDown format))
+    tuple (dataset_name, is_manual_dataset, string describing the datasets
+    (in the MarkDown format))
   """
 
   print("Retrieving the list of builders...")
@@ -147,7 +148,8 @@ def dataset_docs_str(datasets=None):
     unused_ = get_mako_template("dataset")  # To warm cache.
     with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
       builder_docs = tpool.map(document_single_builder, builders)
-    builder_docs = [(builder.name, builder_doc)
+    builder_docs = [(builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS,
+                     builder_doc)
                     for (builder, builder_doc) in zip(builders, builder_docs)]
     section_docs[section.capitalize()] = builder_docs
   tmpl = get_mako_template("catalog_overview")

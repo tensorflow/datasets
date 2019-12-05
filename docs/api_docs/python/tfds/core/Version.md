@@ -39,9 +39,22 @@ source</a>
 __init__(
     version_str,
     description=None,
-    experiments=None
+    experiments=None,
+    tfds_version_to_prepare=None
 )
 ```
+
+Version init.
+
+#### Args:
+
+*   <b>`version_str`</b>: string. Eg: "1.2.3".
+*   <b>`description`</b>: string, a description of what is new in this version.
+*   <b>`experiments`</b>: dict of experiments. See Experiment.
+*   <b>`tfds_version_to_prepare`</b>: string, defaults to None. If set,
+    indicates that current version of TFDS cannot be used to
+    `download_and_prepare` the dataset, but that TFDS at version
+    {tfds_version_to_prepare} should be used instead.
 
 ## Properties
 

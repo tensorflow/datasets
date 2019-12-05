@@ -49,6 +49,12 @@ ${display_description(builder)}
 ${supported_versions(builder, level=1)}
 * Size: `${tfds.units.size_str(builder.info.size_in_bytes)}`
 
+%if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
+WARNING: This dataset requires you to download the source data manually into manual_dir
+(defaults to `~/tensorflow_datasets/manual/${builder.info.name}/`):
+${builder.MANUAL_DOWNLOAD_INSTRUCTIONS}
+%endif
+
 ${display_features(builder, level=2)}
 ${display_stats(builder, level=2)}
 ${display_homepage(builder, level=2)}
@@ -87,6 +93,12 @@ Versions:
 
 * **`${config.version}`** (default): ${getattr(config.version, 'description', '') or ''}
 ${supported_versions(config, level=0)}
+
+%if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
+WARNING: This dataset requires you to download the source data manually into manual_dir
+(defaults to `~/tensorflow_datasets/manual/${builder.info.name}/`):
+${builder.MANUAL_DOWNLOAD_INSTRUCTIONS}
+%endif
 
 ${display_stats(config_builder, level=3)}
 ${display_features(config_builder, level=3)}
@@ -131,7 +143,12 @@ ${citation}
 %endif
 </%def>
 
+%if builder.MANUAL_DOWNLOAD_INSTRUCTIONS:
+# `${builder.name}` (Manual download)
+%else:
 # `${builder.name}`
+%endif
+
 
 %if builder.builder_config:
 ${print_builder_configs(builder, config_builders)}

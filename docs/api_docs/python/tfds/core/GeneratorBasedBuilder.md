@@ -2,13 +2,17 @@
 <meta itemprop="name" content="tfds.core.GeneratorBasedBuilder" />
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="builder_config"/>
+<meta itemprop="property" content="canonical_version"/>
 <meta itemprop="property" content="data_dir"/>
 <meta itemprop="property" content="info"/>
+<meta itemprop="property" content="supported_versions"/>
 <meta itemprop="property" content="version"/>
+<meta itemprop="property" content="versions"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
+<meta itemprop="property" content="MANUAL_DOWNLOAD_INSTRUCTIONS"/>
 <meta itemprop="property" content="SUPPORTED_VERSIONS"/>
 <meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
@@ -80,13 +84,21 @@ Callers must pass arguments as keyword arguments.
 
 <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a> for this builder.
 
+<h3 id="canonical_version"><code>canonical_version</code></h3>
+
 <h3 id="data_dir"><code>data_dir</code></h3>
 
 <h3 id="info"><code>info</code></h3>
 
 <a href="../../tfds/core/DatasetInfo.md"><code>tfds.core.DatasetInfo</code></a> for this builder.
 
+<h3 id="supported_versions"><code>supported_versions</code></h3>
+
 <h3 id="version"><code>version</code></h3>
+
+<h3 id="versions"><code>versions</code></h3>
+
+Versions (canonical + availables), in preference order.
 
 ## Methods
 
@@ -216,6 +228,8 @@ Downloads and prepares dataset for reading.
 ## Class Members
 
 *   `BUILDER_CONFIGS` <a id="BUILDER_CONFIGS"></a>
+*   `MANUAL_DOWNLOAD_INSTRUCTIONS = None`
+    <a id="MANUAL_DOWNLOAD_INSTRUCTIONS"></a>
 *   `SUPPORTED_VERSIONS` <a id="SUPPORTED_VERSIONS"></a>
 *   `VERSION = None` <a id="VERSION"></a>
 *   `builder_configs` <a id="builder_configs"></a>

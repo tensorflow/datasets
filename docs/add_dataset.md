@@ -312,7 +312,7 @@ additional dependencies only as needed, use `tfds.core.lazy_imports`.
 To use `lazy_imports`:
 
 *   Add an entry for your dataset into `DATASET_EXTRAS` in
-    [`setup.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/setup.py).
+    [`setup.py`](https://github.com/tensorflow/datasets/tree/master/setup.py).
     This makes it so that users can do, for example, `pip install
     'tensorflow-datasets[svhn]'` to install the extra dependencies.
 *   Add an entry for your import to

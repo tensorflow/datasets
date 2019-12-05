@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt15/translation-task.html" />
   <meta itemprop="citation" content="&#10;@InProceedings{bojar-EtAl:2015:WMT,&#10;  author    = {Bojar, Ond{r}ej  and  Chatterjee, Rajen  and  Federmann, Christian  and  Haddow, Barry  and  Huck, Matthias  and  Hokamp, Chris  and  Koehn, Philipp  and  Logacheva, Varvara  and  Monz, Christof  and  Negri, Matteo  and  Post, Matt  and  Scarton, Carolina  and  Specia, Lucia  and  Turchi, Marco},&#10;  title     = {Findings of the 2015 Workshop on Statistical Machine Translation},&#10;  booktitle = {Proceedings of the Tenth Workshop on Statistical Machine Translation},&#10;  month     = {September},&#10;  year      = {2015},&#10;  address   = {Lisbon, Portugal},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {1--46},&#10;  url       = {http://aclweb.org/anthology/W15-3001}&#10;}&#10;" />
 </div>
-# `wmt15_translate`
+# `wmt15_translate` (Manual download)
 
 Translate dataset based on the data from statmt.org.
 
@@ -74,6 +74,11 @@ Versions:
 *   **`0.0.4`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -105,6 +110,11 @@ Versions:
 
 *   **`0.0.4`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -138,6 +148,11 @@ Versions:
 *   **`0.0.4`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -169,6 +184,11 @@ Versions:
 
 *   **`0.0.4`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -202,6 +222,11 @@ Versions:
 *   **`0.0.4`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -232,6 +257,11 @@ WMT 2015 cs-en translation task dataset with subword encoding.
 Versions:
 
 *   **`0.0.4`** (default):
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -264,6 +294,11 @@ Versions:
 
 *   **`0.0.4`** (default):
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -294,6 +329,11 @@ WMT 2015 fi-en translation task dataset with subword encoding.
 Versions:
 
 *   **`0.0.4`** (default):
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -326,6 +366,11 @@ Versions:
 
 *   **`0.0.4`** (default):
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -356,6 +401,11 @@ WMT 2015 ru-en translation task dataset with subword encoding.
 Versions:
 
 *   **`0.0.4`** (default):
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt15_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 

@@ -48,9 +48,11 @@ _CITATION = """
 }
 """
 _VERSION = tfds.core.Version(
-    "1.0.1", experiments={tfds.core.Experiment.S3: False})
+    "1.1.0", experiments={tfds.core.Experiment.S3: False})
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})]
+    tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False}),
+    tfds.core.Version("1.0.1", experiments={tfds.core.Experiment.S3: False}),
+]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
 _WET_PATH_URL = "https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"
@@ -117,6 +119,14 @@ class C4Config(tfds.core.BuilderConfig):
 
 class C4(tfds.core.BeamBasedBuilder):
   """C4 dataset based on Common Crawl."""
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  For the WebText-like config, you must manually download 'OpenWebText.zip'
+  (from https://mega.nz/#F!EZZD0YwJ!9_PlEQzdMVLaNdKv_ICNVQ) and the Common Crawl
+  WET files from August 2018 to July 2019
+  (https://commoncrawl.org/the-data/get-started/) and place them in the
+  `manual_dir`.
+  """
 
   BUILDER_CONFIGS = [
       C4Config(language="en", description="English C4 dataset."),

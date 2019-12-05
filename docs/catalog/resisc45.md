@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="http://www.escience.cn/people/JunweiHan/NWPU-RESISC45.html" />
   <meta itemprop="citation" content="@article{Cheng_2017,&#10;   title={Remote Sensing Image Scene Classification: Benchmark and State of the Art},&#10;   volume={105},&#10;   ISSN={1558-2256},&#10;   url={http://dx.doi.org/10.1109/JPROC.2017.2675998},&#10;   DOI={10.1109/jproc.2017.2675998},&#10;   number={10},&#10;   journal={Proceedings of the IEEE},&#10;   publisher={Institute of Electrical and Electronics Engineers (IEEE)},&#10;   author={Cheng, Gong and Han, Junwei and Lu, Xiaoqiang},&#10;   year={2017},&#10;   month={Oct},&#10;   pages={1865-1883}&#10;}" />
 </div>
-# `resisc45`
+# `resisc45` (Manual download)
 
 RESISC45 dataset is a publicly available benchmark for Remote Sensing Image
 Scene Classification (RESISC), created by Northwestern Polytechnical University
@@ -25,6 +25,11 @@ images in each class.
     *   **`3.0.0`** (default):
 
 *   Size: `?? GiB`
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/resisc45/`): Dataset can
+be downloaded from OneDrive: https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs
+After downloading the rar file, please extract it to the manual_dir.
 
 ## Features
 ```python

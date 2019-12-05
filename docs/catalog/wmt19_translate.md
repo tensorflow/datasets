@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt19/translation-task.html" />
   <meta itemprop="citation" content="&#10;@ONLINE {wmt19translate,&#10;    author = &quot;Wikimedia Foundation&quot;,&#10;    title  = &quot;ACL 2019 Fourth Conference on Machine Translation (WMT19), Shared Task: Machine Translation of News&quot;,&#10;    url    = &quot;http://www.statmt.org/wmt19/translation-task.html&quot;&#10;}&#10;" />
 </div>
-# `wmt19_translate`
+# `wmt19_translate` (Manual download)
 
 Translate dataset based on the data from statmt.org.
 
@@ -71,6 +71,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -101,6 +106,11 @@ Versions:
 
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -133,6 +143,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -163,6 +178,11 @@ Versions:
 
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -195,6 +215,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -225,6 +250,11 @@ Versions:
 
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -257,6 +287,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -288,6 +323,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -318,6 +358,11 @@ Versions:
 
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt19_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 

@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Make a temporary directory.
 
 ``` python

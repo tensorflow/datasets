@@ -361,6 +361,7 @@ class DummyDatasetSharedGenerator(dataset_builder.GeneratorBasedBuilder):
       "2.0.0",
       "0.0.9",
       "0.0.8",
+      utils.Version("0.0.7", tfds_version_to_prepare="v1.0.0"),
   ]
 
   def _info(self):

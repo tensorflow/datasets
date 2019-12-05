@@ -21,12 +21,12 @@ summary.
     [https://github.com/FiscalNote/BillSum](https://github.com/FiscalNote/BillSum)
 *   `DatasetBuilder`:
     [`tfds.summarization.billsum.Billsum`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/billsum.py)
-*   Version: `v1.0.0`
+*   Version: `v2.0.0`
 *   Versions:
 
-    *   **`1.0.0`** (default):
+    *   **`2.0.0`** (default):
 
-*   Size: `390.52 MiB`
+*   Size: `65.79 MiB`
 
 ## Features
 ```python
@@ -41,9 +41,9 @@ FeaturesDict({
 
 Split   | Examples
 :------ | -------:
-ALL     | 34,659
-TRAIN   | 28,408
-TEST    | 5,014
+ALL     | 24,116
+TRAIN   | 19,447
+TEST    | 3,432
 CA_TEST | 1,237
 
 ## Homepage

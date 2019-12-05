@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Start diff -->
-
 Entrypoint for tests.
 
 ``` python
