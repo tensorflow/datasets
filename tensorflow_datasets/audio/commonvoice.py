@@ -32,8 +32,128 @@ _SPLITS = {
 
 _GENDER_CLASSES = ["male", "female", "other", "None"]
 
-from commonvoice_accentclass import ACCENT_CLASSES
-_ACCENT_CLASSES = ACCENT_CLASSES
+ACCENT_CLASSES = {
+  "en": [
+    'canada',
+    'None',
+    'us',
+    'indian',
+    'philippines',
+    'england',
+    'scotland',
+    'other',
+    'australia',
+    'hongkong',
+    'african',
+    'newzealand',
+    'wales',
+    'ireland',
+    'malaysia',
+    'bermuda',
+    'singapore',
+    'southatlandtic'
+  ],
+  "de": [
+    'germany',
+    'switzerland',
+    'None',
+    'austria',
+    'other',
+    'liechtenstein',
+    'france',
+    'netherlands',
+    'united_kingdom',
+    'hungary',
+    'poland'
+  ],
+  "fr": [
+    'france',
+    'None',
+    'switzerland',
+    'belgium',
+    'algeria',
+    'canada',
+    'other',
+    'germany',
+    'tunisia',
+    'senegal',
+    'united_states',
+    'st_pierre_et_miquelon',
+    'monaco',
+    'mayotte',
+    'cote_d_ivoire',
+    'guadeloupe',
+    'martinique',
+    'reunion',
+    'portugal',
+    'netherlands'
+  ],
+  "cy": [
+    'None',
+    'united_kingdom',
+    'other'
+  ],
+  "br": [
+    'None',
+    'other'
+  ],
+  "cv": ['None'],
+  "tr": [
+    'None',
+    'other'
+  ],
+  "tt": ['None'],
+  "ky": [
+    'None',
+    'other'
+  ],
+  "ga-IE": [
+    'None',
+    'other',
+    'ulaidh',
+    'connachta'
+  ],
+  "kab": [
+    'None',
+    'other'
+  ],
+  "ca": [
+    'northwestern',
+    'None',
+    'central',
+    'other',
+    'valencian',
+    'balearic',
+    'northern'
+  ],
+  "zh-TW": [
+    'None',
+    'other'
+  ],
+  "sl": [
+    'None',
+    'other'
+  ],
+  "it": [
+    'None',
+    'other'
+  ],
+  "nl": [
+    'netherlands',
+    'None',
+    'belgium',
+    'other'
+  ],
+  "cnh": [
+    'None',
+    'other'
+  ],
+  "eo": [
+    'None',
+    'internacia',
+    'other'
+  ]
+}
 
 class CommonVoiceConfig(tfds.core.BuilderConfig):
   """
@@ -100,7 +220,7 @@ def _generate_builder_configs():
 
 class CommonVoice(tfds.core.GeneratorBasedBuilder):
   """
-  Mozilla Common Voice Dataset
+    Mozilla Common Voice Dataset
   """
   BUILDER_CONFIGS = _generate_builder_configs()
   VERSION = tfds.core.Version("1.0.0")
