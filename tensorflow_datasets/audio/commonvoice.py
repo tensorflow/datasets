@@ -32,7 +32,7 @@ _SPLITS = {
 
 _GENDER_CLASSES = ["male", "female", "other", "None"]
 
-ACCENT_CLASSES = {
+_ACCENT_CLASSES = {
   "en": [
     'canada',
     'None',
