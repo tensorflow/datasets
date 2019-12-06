@@ -54,9 +54,9 @@ REQUIRED_PKGS = [
     'tqdm',
     'wrapt',
     # Python 2 backports
-    'bz2file;python_version<"2"',
-    'functools32;python_version<"2"',
-    'futures;python_version<"2"',
+    'bz2file;python_version<"3"',
+    'functools32;python_version<"3"',
+    'futures;python_version<"3"',
     # shutil.disk_usage was introduced in Python 3.3, use psutil instead.
     'psutil;python_version<"3.3"',
     # enum introduced in Python 3.4
@@ -70,7 +70,7 @@ TESTS_REQUIRE = [
     'pytest',
     'pytest-xdist',
     # Python 2 backports
-    'mock;python_version<"2"',
+    'mock;python_version<"3"',
     # TODO(b/142892342): Re-enable
     # 'tensorflow-docs @ git+https://github.com/tensorflow/docs#egg=tensorflow-docs',  # pylint: disable=line-too-long
 ]
