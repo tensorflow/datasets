@@ -17,7 +17,4 @@ dist/
 .pytest_cache/
 
 # Other
-.*.swp
-.*.swo
-.*.swn
-
+*.DS_Store
