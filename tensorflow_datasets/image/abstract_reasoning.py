@@ -23,7 +23,6 @@ import random
 import numpy as np
 import six
 import tensorflow as tf
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -131,7 +130,7 @@ with $o$=line and $a$=type."""
 class AbstractReasoningConfig(tfds.core.BuilderConfig):
   """BuilderConfig for AbstractReasoning."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, split_type="neutral", **kwargs):
     """BuilderConfig for AbstractReasoning.
 
@@ -141,57 +140,58 @@ class AbstractReasoningConfig(tfds.core.BuilderConfig):
         "attrs.pairs", "attrs.shape.color", "attrs.line.type",].
       **kwargs: keyword arguments forwarded to super.
     """
-    super(AbstractReasoningConfig, self).__init__(**kwargs)
+    super(AbstractReasoningConfig, self).__init__(
+        version=tfds.core.Version("0.0.2",
+                                  experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.split_type = split_type
 
 
 class AbstractReasoning(tfds.core.BeamBasedBuilder):
   """Abstract reasoning dataset."""
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  Data can be downloaded from
+  https://console.cloud.google.com/storage/browser/ravens-matrices
+  Please put all the tar.gz files in manual_dir.
+  """
+
   BUILDER_CONFIGS = [
       AbstractReasoningConfig(
           name="neutral",
-          version="0.0.2",
           description=_DESCRIPTION_NEUTRAL,
       ),
       AbstractReasoningConfig(
           name="interpolation",
-          version="0.0.2",
           description=_DESCRIPTION_INTERPOLATION,
           split_type="interpolation",
       ),
       AbstractReasoningConfig(
           name="extrapolation",
-          version="0.0.2",
           description=_DESCRIPTION_EXTRAPOLATION,
           split_type="extrapolation",
       ),
       AbstractReasoningConfig(
           name="attr.rel.pairs",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_REL_PAIRS,
           split_type="attr.rel.pairs",
       ),
       AbstractReasoningConfig(
           name="attr.rels",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_RELS,
           split_type="attr.rels",
       ),
       AbstractReasoningConfig(
           name="attrs.pairs",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_PAIRS,
           split_type="attrs.pairs",
       ),
       AbstractReasoningConfig(
           name="attrs.shape.color",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_SHAPE_COLOR,
           split_type="attrs.shape.color",
       ),
       AbstractReasoningConfig(
           name="attrs.line.type",
-          version="0.0.2",
           description=_DESCRIPTION_ATTR_LINE_TYPE,
           split_type="attrs.line.type",
       ),
@@ -213,7 +213,7 @@ class AbstractReasoning(tfds.core.BeamBasedBuilder):
             "filename":
                 tfds.features.Text(),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 

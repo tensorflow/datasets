@@ -59,10 +59,19 @@ _LANGUAGES = ('en', 'es', 'pt-br', 'fr', 'ru', 'he', 'ar', 'ko', 'zh-cn', 'it',
 class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
   """TED talk multilingual data set."""
 
+  # Version history:
+  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+  # 0.0.3: Initial version.
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
-          version='0.0.3',
+          version=tfds.core.Version(
+              '0.0.3', experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version(
+                  '1.0.0',
+                  'New split API (https://tensorflow.org/datasets/splits)'),
+          ],
           description='Plain text import of multilingual TED talk translations',
       )
   ]
@@ -78,7 +87,7 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
             'talk_name':
                 tfds.features.Text(),
         }),
-        urls=['https://github.com/neulab/word-embeddings-for-nmt'],
+        homepage='https://github.com/neulab/word-embeddings-for-nmt',
         citation=_CITATION,
     )
 
@@ -109,11 +118,11 @@ class TedMultiTranslate(tfds.core.GeneratorBasedBuilder):
     """This function returns the examples in the raw (text) form."""
     with tf.io.gfile.GFile(data_file) as f:
       reader = csv.DictReader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
-      for row in reader:
+      for idx, row in enumerate(reader):
         # Everything in the row except for 'talk_name' will be a translation.
         # Missing/incomplete translations will contain the string "__NULL__" or
         # "_ _ NULL _ _".
-        yield {
+        yield idx, {
             'translations': {
                 lang: text
                 for lang, text in six.iteritems(row)

@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import io
 import os
 
 import tensorflow as tf
@@ -72,10 +73,12 @@ class EurosatConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    kwargs['supported_versions'] = [
-        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
-    ]
-    super(EurosatConfig, self).__init__(**kwargs)
+    # Version history:
+    # 2.0.0: S3 with new hashing function (different shuffle).
+    # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
+    super(EurosatConfig, self).__init__(
+        version=tfds.core.Version('2.0.0'),
+        **kwargs)
     self.selection = selection
     self.download_url = download_url
     self.subdir = subdir
@@ -90,14 +93,12 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
           name='rgb',
           download_url='http://madm.dfki.de/files/sentinel/EuroSAT.zip',
           subdir='2750',
-          version='0.0.1',
           description='Sentinel-2 RGB channels'),
       EurosatConfig(
           selection='all',
           name='all',
           download_url='http://madm.dfki.de/files/sentinel/EuroSATallBands.zip',
           subdir='ds/images/remote_sensing/otherDatasets/sentinel_2/tif',
-          version='0.0.1',
           description='13 Sentinel-2 channels'),
   ]
 
@@ -125,7 +126,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=features,
         supervised_keys=supervised_keys,
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 
@@ -160,13 +161,13 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
             'label': label,
             'filename': os.path.basename(filename)
         }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield filename, record
-      else:
-        yield record
+      yield filename, record
 
 
 def _extract_channels(filename):
-  arr = tfds.core.lazy_imports.skimage.external.tifffile.imread(filename)
+  with tf.io.gfile.GFile(filename, 'rb') as f:
+    arr = tfds.core.lazy_imports.skimage.external.tifffile.imread(
+        io.BytesIO(f.read()))
+
   arr = arr.astype('float32')
   return arr

@@ -39,19 +39,25 @@ class BBoxFeature(feature.Tensor):
     * `tfds.features.BBox` tuple.
 
   Output:
-    bbox: tf.Tensor of type tf.float32 and shape [4,] which contains the
-      normalized coordinates of the bounding box [ymin, xmin, ymax, xmax]
+    bbox: tf.Tensor of type `tf.float32` and shape `[4,]` which contains the
+      normalized coordinates of the bounding box `[ymin, xmin, ymax, xmax]`
 
   Example:
     * In the DatasetInfo object:
-      features=features.FeatureDict({
-          'bbox': features.BBox(shape=(None, 64, 64, 3)),
-      })
+
+    ```
+    features=features.FeatureDict({
+        'bbox': features.BBox(shape=(None, 64, 64, 3)),
+    })
+    ```
 
     * During generation:
-      yield {
-          'input': tfds.feature.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
-      }
+
+    ```
+    yield {
+        'input': tfds.feature.BBox(ymin=0.3, xmin=0.8, ymax=0.5, xmax=1.0),
+    }
+    ```
   """
 
   def __init__(self):

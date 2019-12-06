@@ -47,8 +47,10 @@ original DCIM files and converted them to PNG.
 The following commands (or equivalent) should be used to generate the PNG files,
 in order to guarantee reproducible results:
 
+```
   find $DATASET_DCIM_DIR -name '*.dcm' | \\
   xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
+```
 """
 
 _CITATION = """\
@@ -121,7 +123,8 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
     kwargs['supported_versions'] = [
-        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
+        tfds.core.Version(
+            '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
     ]
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
@@ -131,10 +134,18 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
 class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   """Curated Breast Imaging Subset of DDSM."""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You can download the images from
+  https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
+  Please look at the source file (cbis_ddsm.py) to see the instructions
+  on how to conver them into png (using dcmj2pnm).
+  """
+
   BUILDER_CONFIGS = [
       CuratedBreastImagingDDSMConfig(
           name='patches',
-          version=tfds.core.Version('0.2.0'),
+          version=tfds.core.Version(
+              '0.2.0', experiments={tfds.core.Experiment.S3: False}),
           description=('Patches containing both calsification and mass cases, '
                        'plus pathces with no abnormalities. Designed as a '
                        'traditional 5-class classification task.'),
@@ -142,12 +153,14 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
           patch_size=(224, 224)),
       CuratedBreastImagingDDSMConfig(
           name='original-calc',
-          version=tfds.core.Version('0.1.0'),
+          version=tfds.core.Version(
+              '0.1.0', experiments={tfds.core.Experiment.S3: False}),
           description=('Original images of the calcification cases compressed '
                        'in lossless PNG.')),
       CuratedBreastImagingDDSMConfig(
           name='original-mass',
-          version=tfds.core.Version('0.1.0'),
+          version=tfds.core.Version(
+              '0.1.0', experiments={tfds.core.Experiment.S3: False}),
           description=('Original images of the mass cases compressed in '
                        'lossless PNG.')),
   ]
@@ -166,7 +179,8 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=features_fn_map[self.builder_config.name](),
-        urls=['https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM'],
+        homepage=
+        'https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM',
         citation=_CITATION)
 
   def _get_features_original_base(self):
@@ -378,10 +392,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
               } for abnormality in example['abnormalities']],
               # pylint: enable=g-complex-comprehension
           }
-          if self.version.implements(tfds.core.Experiment.S3):
-            yield example['id'], record
-          else:
-            yield record
+          yield example['id'], record
 
   def _generate_examples_patches(self,
                                  patients_data,
@@ -430,10 +441,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
                 'image': np.expand_dims(patch, axis=-1),
                 'label': label,
             }
-            if self.version.implements(tfds.core.Experiment.S3):
-              yield patch_id, record
-            else:
-              yield record
+            yield patch_id, record
 
         # Sample background patches from the given mammography.
         for k, patch in enumerate(
@@ -448,10 +456,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
               'image': np.expand_dims(patch, axis=-1),
               'label': 'BACKGROUND',
           }
-          if self.version.implements(tfds.core.Experiment.S3):
-            yield id_, record
-          else:
-            yield record
+          yield id_, record
 
 
 def _load_csv_files(manual_dir, dictionary_of_csv_files):

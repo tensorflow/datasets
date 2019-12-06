@@ -1,0 +1,241 @@
+{
+  "citation": "@misc{b_s_veeling_j_linmans_j_winkens_t_cohen_2018_2546921,\n  author       = {B. S. Veeling, J. Linmans, J. Winkens, T. Cohen, M. Welling},\n  title        = {Rotation Equivariant CNNs for Digital Pathology},\n  month        = sep,\n  year         = 2018,\n  doi          = {10.1007/978-3-030-00934-2_24},\n  url          = {https://doi.org/10.1007/978-3-030-00934-2_24}\n}\n", 
+  "description": "The PatchCamelyon benchmark is a new and challenging image classification\ndataset. It consists of 327.680 color images (96 x 96px) extracted from\nhistopathologic scans of lymph node sections. Each image is annoted with a\nbinary label indicating presence of metastatic tissue. PCam provides a new\nbenchmark for machine learning models: bigger than CIFAR10, smaller than\nImagenet, trainable on a single GPU.\n", 
+  "location": {
+    "urls": [
+      "https://patchcamelyon.grand-challenge.org/"
+    ]
+  }, 
+  "name": "patch_camelyon", 
+  "schema": {
+    "feature": [
+      {
+        "name": "id", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "96"
+            }, 
+            {
+              "size": "96"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "8028222167", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "32768"
+              }
+            }, 
+            "name": "id", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "32768"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "32768"
+              }, 
+              "max": 1.0
+            }
+          }
+        ], 
+        "numExamples": "32768"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "shardLengths": [
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "262144"
+              }
+            }, 
+            "name": "id", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "262144"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "262144"
+              }, 
+              "max": 1.0
+            }
+          }
+        ], 
+        "numExamples": "262144"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096", 
+        "4096"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "32768"
+              }
+            }, 
+            "name": "id", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "32768"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "32768"
+              }, 
+              "max": 1.0
+            }
+          }
+        ], 
+        "numExamples": "32768"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}

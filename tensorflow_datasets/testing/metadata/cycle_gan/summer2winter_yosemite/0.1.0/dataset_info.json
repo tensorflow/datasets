@@ -1,0 +1,150 @@
+{
+  "description": "Dataset with images from 2 classes (see config name for information on the specific class)", 
+  "location": {
+    "urls": [
+      "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
+    ]
+  }, 
+  "name": "cycle_gan", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "132640856", 
+  "splits": [
+    {
+      "name": "testA", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "309"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "309"
+              }
+            }
+          }
+        ], 
+        "numExamples": "309"
+      }
+    }, 
+    {
+      "name": "testB", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "238"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "238"
+              }, 
+              "max": 1.0, 
+              "min": 1.0
+            }
+          }
+        ], 
+        "numExamples": "238"
+      }
+    }, 
+    {
+      "name": "trainA", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1231"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1231"
+              }
+            }
+          }
+        ], 
+        "numExamples": "1231"
+      }
+    }, 
+    {
+      "name": "trainB", 
+      "numShards": "10", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "962"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "962"
+              }, 
+              "max": 1.0, 
+              "min": 1.0
+            }
+          }
+        ], 
+        "numExamples": "962"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "0.1.0"
+}

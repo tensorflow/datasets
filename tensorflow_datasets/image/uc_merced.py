@@ -72,13 +72,12 @@ _ZIP_SUBDIR = "UCMerced_LandUse/Images"
 class UcMerced(tfds.core.GeneratorBasedBuilder):
   """Small 21 class remote sensing land use classification dataset."""
 
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.0.1"),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -90,7 +89,7 @@ class UcMerced(tfds.core.GeneratorBasedBuilder):
             "filename": tfds.features.Text(),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 
@@ -116,10 +115,7 @@ class UcMerced(tfds.core.GeneratorBasedBuilder):
             "label": label,
             "filename": filename,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield filename, record
-        else:
-          yield record
+        yield filename, record
 
 
 def _load_tif(path):

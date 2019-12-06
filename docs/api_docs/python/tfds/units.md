@@ -10,11 +10,14 @@
 
 # Module: tfds.units
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py">View
+source</a>
+
 Defines convenience constants/functions for converting various units.
 
-Defined in [`core/units.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py).
-
-<!-- Placeholder for "Used in" -->
 
 
 ## Functions

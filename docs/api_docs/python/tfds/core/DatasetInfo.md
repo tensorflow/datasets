@@ -7,6 +7,7 @@
 <meta itemprop="property" content="description"/>
 <meta itemprop="property" content="features"/>
 <meta itemprop="property" content="full_name"/>
+<meta itemprop="property" content="homepage"/>
 <meta itemprop="property" content="initialized"/>
 <meta itemprop="property" content="metadata"/>
 <meta itemprop="property" content="name"/>
@@ -14,7 +15,6 @@
 <meta itemprop="property" content="size_in_bytes"/>
 <meta itemprop="property" content="splits"/>
 <meta itemprop="property" content="supervised_keys"/>
-<meta itemprop="property" content="urls"/>
 <meta itemprop="property" content="version"/>
 <meta itemprop="property" content="__init__"/>
 <meta itemprop="property" content="compute_dynamic_properties"/>
@@ -26,11 +26,18 @@
 
 # tfds.core.DatasetInfo
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
+
 ## Class `DatasetInfo`
 
+<!-- Start diff -->
 Information about a dataset.
-
-Defined in [`core/dataset_info.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -44,12 +51,16 @@ split is typically updated during data generation (i.e. on calling
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
+
 ```python
 __init__(
     builder,
     description=None,
     features=None,
     supervised_keys=None,
+    homepage=None,
     urls=None,
     citation=None,
     metadata=None,
@@ -67,9 +78,15 @@ Constructs DatasetInfo.
     <a href="../../tfds/features/FeaturesDict.md"><code>tfds.features.FeaturesDict</code></a>,
     Information on the feature dict of the `tf.data.Dataset()` object from the
     `builder.as_dataset()` method.
-*   <b>`supervised_keys`</b>: `tuple`, Specifies the input feature and the label
-    for supervised learning, if applicable for the dataset.
-*   <b>`urls`</b>: `list(str)`, optional, the homepage(s) for this dataset.
+*   <b>`supervised_keys`</b>: `tuple` of `(input_key, target_key)`, Specifies
+    the input feature and the label for supervised learning, if applicable for
+    the dataset. The keys correspond to the feature names to select in
+    `info.features`. When calling
+    <a href="../../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset()</code></a>
+    with `as_supervised=True`, the `tf.data.Dataset` object will yield the
+    (input, target) defined here.
+*   <b>`homepage`</b>: `str`, optional, the homepage for this dataset.
+*   <b>`urls`</b>: DEPRECATED, use `homepage` instead.
 *   <b>`citation`</b>: `str`, optional, the citation to use for this dataset.
 *   <b>`metadata`</b>:
     <a href="../../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>,
@@ -96,6 +113,8 @@ Constructs DatasetInfo.
 
 Full canonical name: (<dataset_name>/<config_name>/<version>).
 
+<h3 id="homepage"><code>homepage</code></h3>
+
 <h3 id="initialized"><code>initialized</code></h3>
 
 Whether DatasetInfo has been fully initialized.
@@ -112,19 +131,23 @@ Whether DatasetInfo has been fully initialized.
 
 <h3 id="supervised_keys"><code>supervised_keys</code></h3>
 
-<h3 id="urls"><code>urls</code></h3>
-
 <h3 id="version"><code>version</code></h3>
 
 ## Methods
 
 <h3 id="compute_dynamic_properties"><code>compute_dynamic_properties</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
+
 ``` python
 compute_dynamic_properties()
 ```
 
 <h3 id="initialize_from_bucket"><code>initialize_from_bucket</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
 
 ``` python
 initialize_from_bucket()
@@ -133,6 +156,9 @@ initialize_from_bucket()
 Initialize DatasetInfo from GCS bucket info files.
 
 <h3 id="read_from_directory"><code>read_from_directory</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
 
 ``` python
 read_from_directory(dataset_info_dir)
@@ -152,6 +178,9 @@ This will overwrite all previous metadata.
 
 <h3 id="update_splits_if_different"><code>update_splits_if_different</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
+
 ``` python
 update_splits_if_different(split_dict)
 ```
@@ -170,6 +199,9 @@ Overwrite the splits if they are different from the current ones.
 * <b>`split_dict`</b>: <a href="../../tfds/core/SplitDict.md"><code>tfds.core.SplitDict</code></a>, the new split
 
 <h3 id="write_to_directory"><code>write_to_directory</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
 
 ``` python
 write_to_directory(dataset_info_dir)

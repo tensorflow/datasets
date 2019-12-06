@@ -5,15 +5,20 @@
 
 # tfds.units.size_str
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py">View
+source</a>
+
+<!-- Start diff -->
 Returns a human readable size string.
 
 ``` python
 tfds.units.size_str(size_in_bytes)
 ```
-
-
-
-Defined in [`core/units.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py).
 
 <!-- Placeholder for "Used in" -->
 

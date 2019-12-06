@@ -23,7 +23,6 @@ import os
 
 import tensorflow as tf
 
-from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 
 # From https://arxiv.org/abs/1703.10593
@@ -62,7 +61,7 @@ _DL_URLS = {name: _DL_URL + name + ".zip" for name in _DATA_OPTIONS}
 class CycleGANConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CycleGAN."""
 
-  @api_utils.disallow_positional_args
+  @tfds.core.disallow_positional_args
   def __init__(self, data=None, **kwargs):
     """Constructs a CycleGANConfig.
 
@@ -85,10 +84,12 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
           name=config_name,
           description=("A dataset consisting of images from two classes A and "
                        "B (For example: horses/zebras, apple/orange,...)"),
-          version="0.1.0",
+          version=tfds.core.Version(
+              "0.1.0", experiments={tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version("1.0.0", experiments={
-                  tfds.core.Experiment.S3: True}),
+              tfds.core.Version(
+                  "2.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
           ],
           data=config_name,
       ) for config_name in _DATA_OPTIONS
@@ -97,16 +98,15 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=("Dataset with images from 2 classes (see config name for "
-                     "information on the specific class)"),
+        description=self.builder_config.description,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names=["A", "B"]),
         }),
         supervised_keys=("image", "label"),
-        urls=[
-            "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/"
-        ],
+        homepage=
+        "https://people.eecs.berkeley.edu/~taesung_park/CycleGAN/datasets/",
+        citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
@@ -160,7 +160,4 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
           "image": os.path.join(path, image),
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield image, record
-      else:
-        yield record
+      yield image, record

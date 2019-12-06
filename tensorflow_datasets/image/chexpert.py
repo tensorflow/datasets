@@ -73,11 +73,20 @@ _LABELS = collections.OrderedDict({
 class Chexpert(tfds.core.GeneratorBasedBuilder):
   """CheXpert 2019."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You must register and agree to user agreement on the dataset page:
+  https://stanfordmlgroup.github.io/competitions/chexpert/
+  Afterwards, you have to put the CheXpert-v1.0-small directory in the
+  manual_dir. It should contain subdirectories: train/ and valid/ with images
+  and also train.csv and valid.csv files.
+  """
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -90,7 +99,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(names=_LABELS.values())),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://stanfordmlgroup.github.io/competitions/chexpert/"],
+        homepage="https://stanfordmlgroup.github.io/competitions/chexpert/",
         citation=_CITATION
     )
 
@@ -143,7 +152,4 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
           "image": os.path.join(imgs_path, name),
           "label": labels
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield name, record
-      else:
-        yield record
+      yield name, record

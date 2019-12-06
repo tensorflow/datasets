@@ -12,17 +12,25 @@
 
 # tfds.features.text.Tokenizer
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ## Class `Tokenizer`
 
+<!-- Start diff -->
 Splits a string into tokens, and joins them back.
 
-Defined in [`core/features/text/text_encoder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py).
-
-### Used in the tutorials:
-
-*   [Load text with tf.data](https://www.tensorflow.org/beta/tutorials/load_data/text)
+<!-- Placeholder for "Used in" -->
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
 
 ``` python
 __init__(
@@ -56,6 +64,9 @@ i.e. `s == t.join(t.tokenize(s))`.
 
 <h3 id="join"><code>join</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ``` python
 join(tokens)
 ```
@@ -63,6 +74,9 @@ join(tokens)
 Joins tokens into a string.
 
 <h3 id="load_from_file"><code>load_from_file</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
 
 ``` python
 @classmethod
@@ -74,11 +88,17 @@ load_from_file(
 
 <h3 id="save_to_file"><code>save_to_file</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
+
 ``` python
 save_to_file(filename_prefix)
 ```
 
 <h3 id="tokenize"><code>tokenize</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/text_encoder.py">View
+source</a>
 
 ``` python
 tokenize(s)

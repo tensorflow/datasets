@@ -1,0 +1,179 @@
+{
+  "citation": "\n@incollection{NIPS2018_8163,\ntitle = {e-SNLI: Natural Language Inference with Natural Language Explanations},\nauthor = {Camburu, Oana-Maria and Rockt\"{a}schel, Tim and Lukasiewicz, Thomas and Blunsom, Phil},\nbooktitle = {Advances in Neural Information Processing Systems 31},\neditor = {S. Bengio and H. Wallach and H. Larochelle and K. Grauman and N. Cesa-Bianchi and R. Garnett},\npages = {9539--9549},\nyear = {2018},\npublisher = {Curran Associates, Inc.},\nurl = {http://papers.nips.cc/paper/8163-e-snli-natural-language-inference-with-natural-language-explanations.pdf}\n}\n",
+  "description": "\nThe e-SNLI dataset extends the Stanford Natural Language Inference Dataset to\ninclude human-annotated natural language explanations of the entailment\nrelations.\n",
+  "location": {
+    "urls": [
+      "https://github.com/OanaMariaCamburu/e-SNLI"
+    ]
+  },
+  "name": "esnli",
+  "schema": {
+    "feature": [
+      {
+        "name": "explanation",
+        "type": "BYTES"
+      },
+      {
+        "name": "hypothesis",
+        "type": "BYTES"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      },
+      {
+        "name": "premise",
+        "type": "BYTES"
+      }
+    ]
+  },
+  "sizeInBytes": "204516010",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "9824"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "9824"
+              }
+            },
+            "name": "explanation",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "9824"
+              }
+            },
+            "name": "hypothesis",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "9824"
+              },
+              "max": 2.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "9824"
+              }
+            },
+            "name": "premise",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "9824"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "274684",
+        "274683"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "549367"
+              }
+            },
+            "name": "explanation",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "549367"
+              }
+            },
+            "name": "hypothesis",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "549367"
+              },
+              "max": 2.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "549367"
+              }
+            },
+            "name": "premise",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "549367"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "9842"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "9842"
+              }
+            },
+            "name": "explanation",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "9842"
+              }
+            },
+            "name": "hypothesis",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "9842"
+              },
+              "max": 2.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "9842"
+              }
+            },
+            "name": "premise",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "9842"
+      }
+    }
+  ],
+  "version": "0.0.1"
+}

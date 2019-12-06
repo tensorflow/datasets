@@ -63,7 +63,13 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
-          version='0.0.1',
+          version=tfds.core.Version(
+              '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+          supported_versions=[
+              tfds.core.Version(
+                  '1.0.0',
+                  'New split API (https://tensorflow.org/datasets/splits)'),
+          ],
           description='Plain text import of XNLI',
       )
   ]
@@ -86,7 +92,7 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
         supervised_keys=None,
-        urls=['https://www.nyu.edu/projects/bowman/xnli/'],
+        homepage='https://www.nyu.edu/projects/bowman/xnli/',
         citation=_CITATION,
     )
 
@@ -116,7 +122,7 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
     for rows in six.itervalues(rows_per_pair_id):
       premise = {row['language']: row['sentence1'] for row in rows}
       hypothesis = {row['language']: row['sentence2'] for row in rows}
-      yield {
+      yield rows[0]['pairID'], {
           'premise': premise,
           'hypothesis': hypothesis,
           'label': rows[0]['gold_label'],

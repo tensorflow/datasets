@@ -3,7 +3,9 @@
 <meta itemprop="path" content="Stable" />
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="shape"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="decode_ragged_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
@@ -13,11 +15,18 @@
 
 # tfds.features.FeatureConnector
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ## Class `FeatureConnector`
 
+<!-- Start diff -->
 Abstract base class for feature types.
-
-Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -46,7 +55,37 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
 
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_batch_example(tfexample_data)
+```
+
+Decode multiple features batched in a single tf.Tensor.
+
+This function is used to decode features wrapped in
+<a href="../../tfds/features/Sequence.md"><code>tfds.features.Sequence()</code></a>.
+By default, this function apply `decode_example` on each individual elements
+using `tf.map_fn`. However, for optimization, features can overwrite this method
+to apply a custom batch decoding.
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: Same `tf.Tensor` inputs as `decode_example`, but
+    with and additional first dimension for the sequence length.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
+    tf.data.Dataset object
+
 <h3 id="decode_example"><code>decode_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 decode_example(tfexample_data)
@@ -69,7 +108,37 @@ graph (in `tf.data.Dataset.map(features.decode_example)`).
 *   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
     tf.data.Dataset object
 
+<h3 id="decode_ragged_example"><code>decode_ragged_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_ragged_example(tfexample_data)
+```
+
+Decode nested features from a tf.RaggedTensor.
+
+This function is used to decode features wrapped in nested
+<a href="../../tfds/features/Sequence.md"><code>tfds.features.Sequence()</code></a>.
+By default, this function apply `decode_batch_example` on the flat values of the
+ragged tensor. For optimization, features can overwrite this method to apply a
+custom batch decoding.
+
+#### Args:
+
+*   <b>`tfexample_data`</b>: `tf.RaggedTensor` inputs containing the nested
+    encoded examples.
+
+#### Returns:
+
+*   <b>`tensor_data`</b>: The decoded `tf.RaggedTensor` or dictionary of tensor,
+    output of the tf.data.Dataset object
+
 <h3 id="encode_example"><code>encode_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 encode_example(example_data)
@@ -121,6 +190,9 @@ yield {
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 get_serialized_info()
 ```
@@ -158,6 +230,9 @@ If not defined, the retuned values are automatically deduced from the
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -171,7 +246,7 @@ This returns the tensor dtype/shape, as returned by .as_dataset by the
 
 ```
 return {
-    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8):
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
     'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
     'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
 }
@@ -193,6 +268,9 @@ return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 load_metadata(
     data_dir,
@@ -213,6 +291,9 @@ will restore the feature metadata from the saved file.
     key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 save_metadata(

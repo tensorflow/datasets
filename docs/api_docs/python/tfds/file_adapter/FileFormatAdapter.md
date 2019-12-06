@@ -10,15 +10,25 @@
 
 # tfds.file_adapter.FileFormatAdapter
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
+
 ## Class `FileFormatAdapter`
 
+<!-- Start diff -->
 Provides writing and reading methods for a file format.
-
-Defined in [`core/file_format_adapter.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py).
 
 <!-- Placeholder for "Used in" -->
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
 
 ```python
 __init__(example_specs)
@@ -42,6 +52,9 @@ Returns a str file type suffix (e.g. "tfrecord").
 
 <h3 id="dataset_from_filename"><code>dataset_from_filename</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
+
 ``` python
 dataset_from_filename(filename)
 ```
@@ -49,6 +62,9 @@ dataset_from_filename(filename)
 Returns a `tf.data.Dataset` whose elements are dicts given a filename.
 
 <h3 id="write_from_generator"><code>write_from_generator</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
 
 ```python
 write_from_generator(
@@ -66,6 +82,9 @@ Write to files from generators_and_filenames.
 *   <b>`output_files`</b>: `list<str>`, output files to write files to.
 
 <h3 id="write_from_pcollection"><code>write_from_pcollection</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/file_format_adapter.py">View
+source</a>
 
 ``` python
 write_from_pcollection(

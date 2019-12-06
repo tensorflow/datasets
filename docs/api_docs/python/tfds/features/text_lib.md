@@ -5,11 +5,14 @@
 
 # Module: tfds.features.text
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/__init__.py">View
+source</a>
+
 Text utilities.
 
-Defined in [`core/features/text/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text/__init__.py).
-
-<!-- Placeholder for "Used in" -->
 
 <a href="../../tfds.md"><code>tfds</code></a> includes a set of `TextEncoder`s as well as a `Tokenizer` to enable
 expressive, performant, and reproducible natural language research.

@@ -63,13 +63,18 @@ class So2satConfig(tfds.core.BuilderConfig):
       selection: `str`, one of `_DATA_OPTIONS`.
       **kwargs: keyword arguments forwarded to super.
     """
-    kwargs['supported_versions'] = [
-        tfds.core.Version('1.0.0', experiments={tfds.core.Experiment.S3: True}),
-    ]
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    super(So2satConfig, self).__init__(**kwargs)
+    super(So2satConfig, self).__init__(
+        version=tfds.core.Version(
+            '0.0.1', experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version(
+                '2.0.0',
+                'New split API (https://tensorflow.org/datasets/splits)'),
+        ],
+        **kwargs)
     self.selection = selection
 
 
@@ -80,12 +85,10 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
       So2satConfig(
           selection='rgb',
           name='rgb',
-          version=tfds.core.Version('0.0.1'),
           description='Sentinel-2 RGB channels'),
       So2satConfig(
           selection='all',
           name='all',
-          version=tfds.core.Version('0.0.1'),
           description='8 Sentinel-1 and 10 Sentinel-2 channels'),
   ]
 
@@ -114,7 +117,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=features,
         supervised_keys=supervised_keys,
-        urls=['http://doi.org/10.14459/2018MP1454690'],
+        homepage='http://doi.org/10.14459/2018MP1454690',
     )
 
   def _split_generators(self, dl_manager):
@@ -162,10 +165,7 @@ class So2sat(tfds.core.GeneratorBasedBuilder):
               'label': np.argmax(label[i]).astype(int),
               'sample_id': i,
           }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield i, record
-        else:
-          yield record
+        yield i, record
 
 
 def _create_rgb(sen2_bands):

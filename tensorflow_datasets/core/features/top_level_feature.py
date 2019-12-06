@@ -39,6 +39,10 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     self.__is_top_level = False
     super(TopLevelFeature, self).__init__(*args, **kwargs)
 
+  # AutoGraph doesn't support mangled names (__is_top_level), so we explicitly
+  # disable it in methods that use them, to avoid the warning.
+  # TODO(mdan): Remove decorator once AutoGraph supports mangled names.
+  @tf.autograph.experimental.do_not_convert()
   def _set_top_level(self):
     """Indicates that the feature is top level.
 
@@ -46,15 +50,26 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     """
     self.__is_top_level = True
 
-  def decode_example(self, serialized_example):
+  # AutoGraph doesn't support mangled names (__is_top_level), so we explicitly
+  # disable it in methods that use them, to avoid the warning.
+  # TODO(mdan): Remove decorator once AutoGraph supports mangled names.
+  @tf.autograph.experimental.do_not_convert()
+  def decode_example(self, serialized_example, decoders=None):
+    # pylint: disable=line-too-long
     """Decode the serialize examples.
 
     Args:
       serialized_example: Nested `dict` of `tf.Tensor`
+      decoders: Nested dict of `Decoder` objects which allow to customize the
+        decoding. The structure should match the feature structure, but only
+        customized feature keys need to be present. See
+        [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+        for more info.
 
     Returns:
       example: Nested `dict` containing the decoded nested examples.
     """
+    # pylint: enable=line-too-long
     if not self.__is_top_level:
       raise AssertionError(
           'Feature {} can only be decoded when defined as top-level '
@@ -65,17 +80,25 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     flat_example = self._flatten(serialized_example)
     flat_features = self._flatten(self)
     flat_serialized_info = self._flatten(self.get_serialized_info())
-    flat_tensor_info = self._flatten(self.get_tensor_info())
+    flat_decoders = self._flatten(decoders)
 
     # Step 2: Apply the decoding
     flatten_decoded = []
-    for feature, example, tensor_info, serialized_info in zip(
-        flat_features, flat_example, flat_tensor_info, flat_serialized_info):
+    for (
+        feature,
+        example,
+        serialized_info,
+        decoder,
+    ) in zip(
+        flat_features,
+        flat_example,
+        flat_serialized_info,
+        flat_decoders):
       flatten_decoded.append(_decode_feature(
           feature=feature,
           example=example,
-          tensor_info=tensor_info,
           serialized_info=serialized_info,
+          decoder=decoder,
       ))
 
     # Step 3: Restore nesting [] => {}
@@ -83,28 +106,23 @@ class TopLevelFeature(feature_lib.FeatureConnector):
     return nested_decoded
 
 
-def _decode_feature(feature, example, tensor_info, serialized_info):
+def _decode_feature(feature, example, serialized_info, decoder):
   """Decode a single feature."""
+  # Eventually overwrite the default decoding
+  if decoder is not None:
+    decoder.setup(feature=feature)
+  else:
+    decoder = feature
+
   sequence_rank = _get_sequence_rank(serialized_info)
   if sequence_rank == 0:
-    return feature.decode_example(example)
+    return decoder.decode_example(example)
   elif sequence_rank == 1:
-    # Note: This all works fine in Eager mode (without tf.function) because
-    # tf.data pipelines are always executed in Graph mode.
-
-    # Apply the decoding to each of the individual distributed features.
-    return tf.map_fn(
-        feature.decode_example,
-        example,
-        dtype=tensor_info.dtype,
-        parallel_iterations=10,
-        back_prop=False,
-        name='sequence_decode',
-    )
-  else:
-    raise NotImplementedError(
-        'Nested sequences not supported yet. Got: {}'.format(serialized_info)
-    )
+    # Return a batch of examples from a sequence
+    return decoder.decode_batch_example(example)
+  elif sequence_rank > 1:
+    # Use ragged tensor if the sequance rank is greater than one
+    return decoder.decode_ragged_example(example)
 
 
 def _get_sequence_rank(serialized_info):

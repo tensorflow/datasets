@@ -49,12 +49,12 @@ _TRAIN_POINTS_PER_CLASS = 30
 class Caltech101(tfds.core.GeneratorBasedBuilder):
   """Caltech-101."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
@@ -67,7 +67,7 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
             "image/file_name": tfds.features.Text(),  # E.g. 'image_0001.jpg'.
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION
         )
 
@@ -140,9 +140,6 @@ class Caltech101(tfds.core.GeneratorBasedBuilder):
                   "label": d.lower(),
                   "image/file_name": image_file,
               }
-              if self.version.implements(tfds.core.Experiment.S3):
-                yield "%s/%s" % (d, image_file), record
-              else:
-                yield record
+              yield "%s/%s" % (d, image_file), record
     # Resets the seeds to their previous states.
     np.random.set_state(numpy_original_state)

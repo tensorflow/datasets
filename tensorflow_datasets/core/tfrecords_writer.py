@@ -139,9 +139,9 @@ class Writer(object):
   which will eventually be deleted.
   """
 
-  def __init__(self, example_specs, path):
+  def __init__(self, example_specs, path, hash_salt):
     self._serializer = example_serializer.ExampleSerializer(example_specs)
-    self._shuffler = shuffle.Shuffler(os.path.dirname(path))
+    self._shuffler = shuffle.Shuffler(os.path.dirname(path), hash_salt)
     self._num_examples = 0
     self._path = path
 

@@ -52,17 +52,12 @@ lower than the canonical version. For example:
 
 ```py
 class Imagenet2012(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version('2.0.1')
+  VERSION = tfds.core.Version('2.0.1', 'Encoding fix. No changes from user POV')
   SUPPORTED_VERSIONS = [
-      tfds.core.Version('3.0.0'),
-      tfds.core.Version('2.0.1'),
+      tfds.core.Version('3.0.0', 'S3: tensorflow.org/datasets/splits'),
       tfds.core.Version('1.0.0'),
+      tfds.core.Version('0.0.9', tfds_version_to_prepare="v1.0.0"),
   ]
-  # Version history:
-  # 3.0.0: Fix colorization (all RGB) and format (all jpeg).
-  # 2.0.1: Encoding fix. No changes from user point of view.
-  # 2.0.0: Fix validation labels.
-  # 1.0.0: Initial definition of imagenet dataset.
 ```
 
 The choice to continue supporting an older version is done on a case-by-case
@@ -75,6 +70,12 @@ Supported versions with a higher number than the canonical version number are
 considered experimental and might be broken. They will however eventually be
 made canonical.
 
+A version can specify `tfds_version_to_prepare`. This means this dataset version
+can only be used with current version of TFDS code if it has already been
+prepared by an older version of the code, but cannot be prepared. The
+value of `tfds_version_to_prepare` specifies the last known version of TFDS
+which can be used to download and prepare the dataset at this version.
+
 ## Loading a specific version
 
 When loading a dataset or a `DatasetBuilder`, you can specify the version to
@@ -82,7 +83,7 @@ use. For example:
 
 ```py
 tfds.load('imagenet2012:2.0.1')
-tfds.builder('imagenet2012:2.0.1'')
+tfds.builder('imagenet2012:2.0.1')
 
 tfds.load('imagenet2012:2.0.0')  # Error: unsupported version.
 
@@ -110,11 +111,9 @@ first. For example:
 class MNIST(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version("2.0.0", "S3: tensorflow.org/datasets/splits",
+                        experiments={tfds.core.Experiment.S3: True}),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 ```
 
 Once an experiment has been verified to work as expected, it will be extended to
@@ -123,14 +122,11 @@ definition would then look like:
 
 ```py
 class MNIST(tfds.core.GeneratorBasedBuilder):
-  VERSION = tfds.core.Version("2.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0"),
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False}),
+      tfds.core.Version("2.0.0", "S3: tensorflow.org/datasets/splits"),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism), order of records
-  # changes, set of returned records when using slicing API is different.
 ```
 
 Once an experiment is used across all datasets versions (there is no dataset
@@ -152,7 +148,7 @@ class OpenImagesV4(tfds.core.GeneratorBasedBuilder):
           name='original',
           version=tfds.core.Version('0.2.0'),
           supported_version=[
-            tfds.core.Version('1.0.0'),
+            tfds.core.Version('1.0.0', "Major change in data"),
           ],
           description='Images at their original resolution and quality.'),
       ...

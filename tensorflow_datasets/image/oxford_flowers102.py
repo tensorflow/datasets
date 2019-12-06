@@ -43,21 +43,20 @@ large scale, pose and light variations. In addition, there are categories that h
 variations within the category and several very similar categories.
 
 The dataset is divided into a training set, a validation set and a test set.
-The training set and validation set each consist of 10 images per class (totalling 1030 images each).
-The test set consist of the remaining 6129 images (minimum 20 per class).
+The training set and validation set each consist of 10 images per class (totalling 1020 images each).
+The test set consists of the remaining 6149 images (minimum 20 per class).
 """
 
 
 class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
   """Oxford 102 category flower dataset."""
 
-  VERSION = tfds.core.Version("0.0.1")  # Version 1.1 of oxford flowers 102.
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.0.1"),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -69,7 +68,7 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
             "file_name": tfds.features.Text(),
         }),
         supervised_keys=("image", "label"),
-        urls=[_BASE_URL],
+        homepage=_BASE_URL,
         citation=_CITATION,
     )
 
@@ -122,7 +121,4 @@ class OxfordFlowers102(tfds.core.GeneratorBasedBuilder):
           "label": labels[image_id - 1] - 1,
           "file_name": file_name,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield file_name, record
-      else:
-        yield record
+      yield file_name, record

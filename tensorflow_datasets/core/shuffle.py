@@ -29,8 +29,6 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import hashing
 
-HKEY_SIZE = 64  # Hash of keys is 64 bits.
-
 # Approximately how much data to store in memory before writing to disk.
 # If the amount of data to shuffle is < MAX_MEM_BUFFER_SIZE, no intermediary
 # data is written to disk.
@@ -46,6 +44,21 @@ MAX_MEM_BUFFER_SIZE = 1000 << 20  # 1GB
 # Windows has a limit of ~2K open files per process (Linux ~32K); so increasing
 # the number of buckets might warrant some changes in implementation.
 BUCKETS_NUMBER = 1000  # Number of buckets to pre-sort and hold generated data.
+
+HKEY_SIZE = 128  # Hash of keys is 128 bits (md5).
+HKEY_SIZE_BYTES = HKEY_SIZE // 8
+
+
+def _hkey_to_bytes(hkey):
+  """Converts 128 bits integer hkey to binary representation."""
+  max_int64 = 0xFFFFFFFFFFFFFFFF
+  return struct.pack('=QQ', (hkey >> 64) & max_int64, hkey & max_int64)
+
+
+def _read_hkey(buff):
+  """Reads from fobj and returns hkey (128 bites integer)."""
+  a, b = struct.unpack('=QQ', buff)
+  return (a << 64) | b
 
 
 def _get_shard(hkey, shards_number):
@@ -63,8 +76,8 @@ class _Bucket(object):
   hold in memory. Data is written once and read once.
 
   File format:
-    key1 (8 bytes) | size1 (8 bytes) | data1 (size1 bytes) |
-    key2 (8 bytes) | size2 (8 bytes) | data2 (size2 bytes) |
+    key1 (16 bytes) | size1 (8 bytes) | data1 (size1 bytes) |
+    key2 (16 bytes) | size2 (8 bytes) | data2 (size2 bytes) |
     ...
   """
 
@@ -93,7 +106,15 @@ class _Bucket(object):
     if not self._fobj:
       self._fobj = tf.io.gfile.GFile(self._path, mode='wb')
     data_size = len(data)
-    self._fobj.write(struct.pack('LL', key, data_size))
+    self._fobj.write(_hkey_to_bytes(key))
+    # http://docs.python.org/3/library/struct.html#byte-order-size-and-alignment
+    # The equal sign ("=") is important here, has it guarantees the standard
+    # size (Q: 8 bytes) is used, as opposed to native size, which can differ
+    # from one platform to the other. This way we know exactly 8 bytes have been
+    # written, and we can read that same amount of bytes later.
+    # We do not specify endianess (platform dependent), but this is OK since the
+    # temporary files are going to be written and read by the same platform.
+    self._fobj.write(struct.pack('=Q', data_size))
     self._fobj.write(data)
     self._length += 1
     self._size += data_size
@@ -107,10 +128,12 @@ class _Bucket(object):
     res = []
     with tf.io.gfile.GFile(path, 'rb') as fobj:
       while True:
-        buff = fobj.read(16)
+        buff = fobj.read(HKEY_SIZE_BYTES)
         if not buff:
           break
-        hkey, size = struct.unpack('LL', buff)
+        hkey = _read_hkey(buff)
+        size_bytes = fobj.read(8)
+        size = struct.unpack('=Q', size_bytes)[0]
         data = fobj.read(size)
         res.append((hkey, data))
     return res
@@ -121,14 +144,17 @@ class _Bucket(object):
 
 
 class Shuffler(object):
-  """Stores data in temp buckets, restitute it shuffled.
+  """Stores data in temp buckets, restitute it shuffled."""
 
-  Args:
-    dirpath: directory in which to store temporary files.
-  """
+  def __init__(self, dirpath, hash_salt):
+    """Initialize Shuffler.
 
-  def __init__(self, dirpath):
+    Args:
+      dirpath (string): directory in which to store temporary files.
+      hash_salt (string or bytes): salt to hash keys.
+    """
     grp_name = uuid.uuid4()
+    self._hasher = hashing.Hasher(hash_salt)
     self._buckets = [
         _Bucket(os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i)))
         for i in range(BUCKETS_NUMBER)]
@@ -162,7 +188,7 @@ class Shuffler(object):
     if not isinstance(data, six.binary_type):
       raise AssertionError('Only bytes (not %s) can be stored in Shuffler!' % (
           type(data)))
-    hkey = hashing.hash_key(key)
+    hkey = self._hasher.hash_key(key)
     self._total_bytes += len(data)
     if self._in_memory:
       self._add_to_mem_buffer(hkey, data)

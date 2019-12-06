@@ -1,0 +1,15 @@
+{
+  "images": [
+    {"id":1, "file_name": "data/aircraft/1.jpg"},
+    {"id":2, "file_name": "data/aircraft/2.jpg"}
+  ],
+  "annotations": [
+    {"id":1, "image_id": 1, "category_id": 1},
+    {"id":2, "image_id": 2, "category_id": 2}
+  ],
+  "categories": [
+    {"id": 1, "name":"label1"},
+    {"id": 2, "name":"label2"},
+    {"id": 3, "name":"label3"}
+  ]
+}

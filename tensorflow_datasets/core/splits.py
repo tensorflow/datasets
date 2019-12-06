@@ -36,7 +36,7 @@ class SplitInfo(object):
 
   @property
   def num_examples(self):
-    return self.statistics.num_examples
+    return int(self.statistics.num_examples)
 
   def __repr__(self):
     num_examples = self.num_examples or "unknown"
@@ -59,7 +59,7 @@ class SplitBase(object):
        are the `NamedSplit` objects)
 
     ```
-    split = tfds.TRAIN + tfds.TEST.subsplit(tfds.percent[:50])
+    split = tfds.Split.TRAIN + tfds.Split.TEST.subsplit(tfds.percent[:50])
     ```
 
     2) The `SplitBase` is forwarded to the `.as_dataset()` function
@@ -569,11 +569,12 @@ class SplitDict(utils.NonMutableDict):
 
 
 def check_splits_equals(splits1, splits2):
-  """Check that the two split dicts have the same names and num_shards."""
+  """Check two split dicts have same name, shard_lengths and num_shards."""
   if set(splits1) ^ set(splits2):  # Name intersection should be null
     return False
   for _, (split1, split2) in utils.zip_dict(splits1, splits2):
-    if split1.num_shards != split2.num_shards:
+    if (split1.num_shards != split2.num_shards or
+        split1.shard_lengths != split2.shard_lengths):
       return False
   return True
 

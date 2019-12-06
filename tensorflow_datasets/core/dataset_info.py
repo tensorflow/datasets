@@ -39,7 +39,6 @@ import collections
 import json
 import os
 import posixpath
-import pprint
 import tempfile
 
 from absl import logging
@@ -49,6 +48,7 @@ import tensorflow as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import top_level_feature
@@ -67,12 +67,12 @@ INFO_STR = """tfds.core.DatasetInfo(
     name='{name}',
     version={version},
     description='{description}',
-    urls={urls},
+    homepage='{homepage}',
     features={features},
     total_num_examples={total_num_examples},
     splits={splits},
     supervised_keys={supervised_keys},
-    citation='{citation}',
+    citation={citation},
     redistribution_info={redistribution_info},
 )
 """
@@ -98,6 +98,7 @@ class DatasetInfo(object):
                description=None,
                features=None,
                supervised_keys=None,
+               homepage=None,
                urls=None,
                citation=None,
                metadata=None,
@@ -110,9 +111,14 @@ class DatasetInfo(object):
       features: `tfds.features.FeaturesDict`, Information on the feature dict
         of the `tf.data.Dataset()` object from the `builder.as_dataset()`
         method.
-      supervised_keys: `tuple`, Specifies the input feature and the label for
-        supervised learning, if applicable for the dataset.
-      urls: `list(str)`, optional, the homepage(s) for this dataset.
+      supervised_keys: `tuple` of `(input_key, target_key)`, Specifies the
+        input feature and the label for supervised learning, if applicable for
+        the dataset. The keys correspond to the feature names to select in
+        `info.features`. When calling `tfds.core.DatasetBuilder.as_dataset()`
+        with `as_supervised=True`, the `tf.data.Dataset` object will yield
+        the (input, target) defined here.
+      homepage: `str`, optional, the homepage for this dataset.
+      urls: DEPRECATED, use `homepage` instead.
       citation: `str`, optional, the citation to use for this dataset.
       metadata: `tfds.core.Metadata`, additonal object which will be
         stored/restored with the dataset. This allows for storing additional
@@ -131,8 +137,12 @@ class DatasetInfo(object):
         citation=citation,
         redistribution_info=dataset_info_pb2.RedistributionInfo(
             **redistribution_info) if redistribution_info else None)
-    if urls:
-      self._info_proto.location.urls[:] = urls
+
+    if urls:  # TODO(epot):Delete field once every user have been migrated
+      raise ValueError("`urls=` field is deprecated. Please use "
+                       "`homepage='{}'` instead.".format(urls[0]))
+    if homepage:
+      self._info_proto.location.urls[:] = [homepage]
 
     if features:
       if not isinstance(features, top_level_feature.TopLevelFeature):
@@ -181,6 +191,13 @@ class DatasetInfo(object):
   @property
   def version(self):
     return self._builder.version
+
+  @property
+  def homepage(self):
+    urls = self.as_proto.location.urls
+    tfds_homepage = "https://www.tensorflow.org/datasets/catalog/{}".format(
+        self.name)
+    return urls and urls[0] or tfds_homepage
 
   @property
   def citation(self):
@@ -249,10 +266,6 @@ class DatasetInfo(object):
     del self.as_proto.splits[:]  # Clear previous
     for split_info in split_dict.to_proto():
       self.as_proto.splits.add().CopyFrom(split_info)
-
-  @property
-  def urls(self):
-    return self.as_proto.location.urls
 
   @property
   def initialized(self):
@@ -408,19 +421,13 @@ class DatasetInfo(object):
       gcs_utils.download_gcs_file(fname, out_fname)
     self.read_from_directory(tmp_dir)
 
-  def __str__(self):
-    splits_pprint = "{\n %s\n    }" % (
-        pprint.pformat(
-            {k: self.splits[k] for k in sorted(list(self.splits.keys()))},
-            indent=8, width=1)[1:-1])
-    features_dict = self.features
-    features_pprint = "%s({\n %s\n    }" % (
-        type(features_dict).__name__,
-        pprint.pformat({
-            k: features_dict[k] for k in sorted(list(features_dict.keys()))
-        }, indent=8, width=1)[1:-1])
-    citation_pprint = '"""\n%s\n    """' % "\n".join(
-        [u" " * 8 + line for line in self.citation.split(u"\n")])
+  def __repr__(self):
+    splits_pprint = _indent("\n".join(["{"] + [
+        "    '{}': {},".format(k, split.num_examples)
+        for k, split in sorted(self.splits.items())
+    ] + ["}"]))
+    features_pprint = _indent(repr(self.features))
+    citation_pprint = _indent('"""{}"""'.format(self.citation.strip()))
     return INFO_STR.format(
         name=self.name,
         version=self.version,
@@ -429,9 +436,16 @@ class DatasetInfo(object):
         features=features_pprint,
         splits=splits_pprint,
         citation=citation_pprint,
-        urls=self.urls,
+        homepage=self.homepage,
         supervised_keys=self.supervised_keys,
-        redistribution_info=self.redistribution_info)
+        # Proto add a \n that we strip.
+        redistribution_info=str(self.redistribution_info).strip())
+
+
+def _indent(content):
+  """Add indentation to all lines except the first."""
+  lines = content.split("\n")
+  return "\n".join([lines[0]] + ["    " + l for l in lines[1:]])
 
 #
 #
@@ -534,8 +548,8 @@ def get_dataset_feature_statistics(builder, split):
 
   # Start here, we've processed all examples.
 
-  output_shapes_dict = dataset.output_shapes
-  output_types_dict = dataset.output_types
+  output_shapes_dict = tf.compat.v1.data.get_output_shapes(dataset)
+  output_types_dict = tf.compat.v1.data.get_output_types(dataset)
 
   for feature_name in sorted(feature_to_num_examples.keys()):
     # Try to fill in the schema.
@@ -571,8 +585,10 @@ def get_dataset_feature_statistics(builder, split):
 
     if feature.type == schema_pb2.INT or feature.type == schema_pb2.FLOAT:
       numeric_statistics = statistics_pb2.NumericStatistics()
-      numeric_statistics.min = feature_to_min[feature_name]
-      numeric_statistics.max = feature_to_max[feature_name]
+      # Uses `.get` as Sequence(int) containing only empty array won't contains
+      # any value.
+      numeric_statistics.min = feature_to_min.get(feature_name, 0)
+      numeric_statistics.max = feature_to_max.get(feature_name, 0)
       numeric_statistics.common_stats.CopyFrom(common_statistics)
       feature_name_statistics.num_stats.CopyFrom(numeric_statistics)
     else:
@@ -639,3 +655,57 @@ class MetadataDict(Metadata, dict):
     self.clear()
     with tf.io.gfile.GFile(self._build_filepath(data_dir), "r") as f:
       self.update(json.load(f))
+
+
+class BeamMetadataDict(MetadataDict):
+  """A `tfds.core.Metadata` object supporting Beam-generated datasets."""
+
+  def __init__(self):
+    super(BeamMetadataDict, self).__init__()
+    self._tempdir = tempfile.mkdtemp("tfds_beam_metadata")
+
+  def _temp_filepath(self, key):
+    return os.path.join(self._tempdir, "%s.json" % key)
+
+  def __setitem__(self, key, item):
+    """Creates write sink for beam PValues or sets value of key in `dict`.
+
+    If the item is a PValue, it is expected to contain exactly one element,
+    which will be written out as a temporary JSON file once the beam pipeline
+    runs. These outputs will be loaded and stored in a single JSON when
+    `save_metadata` is called after the pipeline completes.
+
+    Args:
+      key: hashable type, the key for the item.
+      item: `beam.pvalue.PValue` or other, the metadata value.
+    """
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    if isinstance(item, beam.pvalue.PValue):
+      if key in self:
+        raise ValueError("Already added PValue with key: %s" % key)
+      logging.info("Lazily adding metadata item with Beam: %s", key)
+      def _to_json(item_list):
+        if len(item_list) != 1:
+          raise ValueError(
+              "Each metadata PValue must contain a single element. Got %d." %
+              len(item_list))
+        item = item_list[0]
+        return json.dumps(item)
+      _ = (item
+           | "metadata_%s_tolist" % key >> beam.combiners.ToList()
+           | "metadata_%s_tojson" % key >> beam.Map(_to_json)
+           | "metadata_%s_write" % key >> beam.io.WriteToText(
+               self._temp_filepath(key),
+               num_shards=1,
+               shard_name_template=""))
+    super(BeamMetadataDict, self).__setitem__(key, item)
+
+  def save_metadata(self, data_dir):
+    """Save the metadata inside the beam job."""
+    beam = lazy_imports_lib.lazy_imports.apache_beam
+    for key, item in self.items():
+      if isinstance(item, beam.pvalue.PValue):
+        with tf.io.gfile.GFile(self._temp_filepath(key), "r") as f:
+          self[key] = json.load(f)
+    tf.io.gfile.rmtree(self._tempdir)
+    super(BeamMetadataDict, self).save_metadata(data_dir)

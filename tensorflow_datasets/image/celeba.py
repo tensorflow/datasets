@@ -96,12 +96,12 @@ computer vision tasks: face attribute recognition, face detection, and landmark\
 class CelebA(tfds.core.GeneratorBasedBuilder):
   """CelebA dataset. Aligned and cropped. With metadata."""
 
-  VERSION = tfds.core.Version("0.3.0")
+  VERSION = tfds.core.Version("0.3.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -117,7 +117,7 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
                 name: tf.bool for name in ATTR_HEADINGS
             },
         }),
-        urls=["http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"],
+        homepage="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
         citation=_CITATION,
     )
 
@@ -210,7 +210,4 @@ class CelebA(tfds.core.GeneratorBasedBuilder):
               k: v > 0 for k, v in zip(attributes[0], attributes[1][file_name])
           },
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield file_name, record
-      else:
-        yield record
+      yield file_name, record

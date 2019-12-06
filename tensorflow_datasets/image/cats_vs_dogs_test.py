@@ -34,7 +34,7 @@ class CatsVsDogsTest(testing.DatasetBuilderTestCase):
 
 
 class CatsVsDogsS3Test(CatsVsDogsTest):
-  VERSION = '3.0.0'
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

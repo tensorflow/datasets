@@ -10,11 +10,18 @@
 
 # tfds.core.BuilderConfig
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
+source</a>
+
 ## Class `BuilderConfig`
 
+<!-- Start diff -->
 Base class for `DatasetBuilder` data configuration.
-
-Defined in [`core/dataset_builder.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -22,6 +29,9 @@ DatasetBuilder subclasses with data configuration options should subclass
 `BuilderConfig` and add their own properties.
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_builder.py">View
+source</a>
 
 ```python
 __init__(

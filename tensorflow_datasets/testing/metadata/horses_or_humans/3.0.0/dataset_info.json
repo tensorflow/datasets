@@ -1,0 +1,104 @@
+{
+  "citation": "@ONLINE {horses_or_humans,\nauthor = \"Laurence Moroney\",\ntitle = \"Horses or Humans Dataset\",\nmonth = \"feb\",\nyear = \"2019\",\nurl = \"http://laurencemoroney.com/horses-or-humans-dataset\"\n}\n", 
+  "description": "A large set of images of horses and humans.", 
+  "location": {
+    "urls": [
+      "http://laurencemoroney.com/horses-or-humans-dataset"
+    ]
+  }, 
+  "name": "horses_or_humans", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "300"
+            }, 
+            {
+              "size": "300"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "161055054", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "10", 
+      "shardLengths": [
+        "256"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "256"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "256"
+              }, 
+              "max": 1.0
+            }
+          }
+        ], 
+        "numExamples": "256"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "shardLengths": [
+        "514", 
+        "513"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1027"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1027"
+              }, 
+              "max": 1.0
+            }
+          }
+        ], 
+        "numExamples": "1027"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "3.0.0"
+}

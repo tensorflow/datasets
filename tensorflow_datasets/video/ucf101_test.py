@@ -37,6 +37,8 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
       'splits': 'splits',
   }
 
+  BUILDER_CONFIG_NAMES_TO_TEST = ['ucf101_1_256', 'ucf101_2']
+
   def _assertAsDataset(self, builder):
     """Check the label distribution for each split."""
     super(Ucf101Test, self)._assertAsDataset(builder)
@@ -51,6 +53,11 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
     self.assertEqual(dict(label_frequncies),
                      {'test': {'Archery': 1, 'Nunchucks': 1},
                       'train': {'Archery': 1, 'Nunchucks': 2}})
+
+
+class Ucf101S3Test(Ucf101Test):
+  VERSION = 'experimental_latest'
+
 
 if __name__ == '__main__':
   testing.test_main()

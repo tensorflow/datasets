@@ -1,0 +1,235 @@
+{
+  "citation": "@misc{pascal-voc-2012,\n\tauthor = \"Everingham, M. and Van~Gool, L. and Williams, C. K. I. and Winn, J. and Zisserman, A.\",\n\ttitle = \"The {PASCAL} {V}isual {O}bject {C}lasses {C}hallenge 2012 {(VOC2012)} {R}esults\",\n\thowpublished = \"http://www.pascal-network.org/challenges/VOC/voc2012/workshop/index.html\"}\n", 
+  "description": "This dataset contains the data from the PASCAL Visual Object Classes Challenge\n2007, a.k.a. VOC2007, corresponding to the Classification and Detection\ncompetitions.\nA total of 11540 images are included in this dataset, where each image\ncontains a set of objects, out of 20 different classes, making a total of\n27450 annotated objects.\nIn the Classification competition, the goal is to predict the set of labels\ncontained in the image, while in the Detection competition the goal is to\npredict the bounding box and label of each individual object.\nWARNING: As per the official dataset, the test set of VOC2012 does not contains\nannotations.\n", 
+  "location": {
+    "urls": [
+      "http://host.robots.ox.ac.uk/pascal/VOC/voc2012/"
+    ]
+  }, 
+  "name": "voc", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image/filename", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "labels", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "labels_no_difficult", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "objects"
+      }
+    ]
+  }, 
+  "sizeInBytes": "3850265600", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "687", 
+        "687", 
+        "687", 
+        "687", 
+        "687", 
+        "687", 
+        "687", 
+        "687", 
+        "686", 
+        "687", 
+        "687", 
+        "687", 
+        "687", 
+        "687", 
+        "687", 
+        "687"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10991"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "10991"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "labels", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10991"
+              }
+            }
+          }, 
+          {
+            "name": "labels_no_difficult", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10991"
+              }
+            }
+          }
+        ], 
+        "numExamples": "10991"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "715", 
+        "714", 
+        "715", 
+        "715", 
+        "714", 
+        "715", 
+        "714", 
+        "715"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5717"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5717"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "labels", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5717"
+              }, 
+              "max": 19.0
+            }
+          }, 
+          {
+            "name": "labels_no_difficult", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5717"
+              }, 
+              "max": 19.0
+            }
+          }
+        ], 
+        "numExamples": "5717"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "728", 
+        "728", 
+        "728", 
+        "728", 
+        "727", 
+        "728", 
+        "728", 
+        "728"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5823"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "5823"
+              }
+            }, 
+            "name": "image/filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "labels", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5823"
+              }, 
+              "max": 19.0
+            }
+          }, 
+          {
+            "name": "labels_no_difficult", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "5823"
+              }, 
+              "max": 19.0
+            }
+          }
+        ], 
+        "numExamples": "5823"
+      }
+    }
+  ], 
+  "version": "4.0.0"
+}

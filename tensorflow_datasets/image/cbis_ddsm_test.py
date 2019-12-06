@@ -37,7 +37,7 @@ class CuratedBreastImagingDDSMOriginalCalcTest(testing.DatasetBuilderTestCase):
 
 class CuratedBreastImagingDDSMOriginalCalcS3Test(
     CuratedBreastImagingDDSMOriginalCalcTest):
-  VERSION = '1.0.0'
+  VERSION = 'experimental_latest'
 
 
 class CuratedBreastImagingDDSMOriginalMassTest(testing.DatasetBuilderTestCase):
@@ -55,7 +55,7 @@ class CuratedBreastImagingDDSMOriginalMassTest(testing.DatasetBuilderTestCase):
 
 class CuratedBreastImagingDDSMOriginalMassS3Test(
     CuratedBreastImagingDDSMOriginalMassTest):
-  VERSION = '1.0.0'
+  VERSION = 'experimental_latest'
 
 
 class CuratedBreastImagingDDSMPatchesTest(testing.DatasetBuilderTestCase):
@@ -77,7 +77,7 @@ class CuratedBreastImagingDDSMPatchesTest(testing.DatasetBuilderTestCase):
 
 class CuratedBreastImagingDDSMPatchesS3Test(
     CuratedBreastImagingDDSMPatchesTest):
-  VERSION = '1.0.0'
+  VERSION = 'experimental_latest'
 
 
 if __name__ == '__main__':

@@ -33,7 +33,7 @@ class CelebAHQTest(tfds_test.DatasetBuilderTestCase):
 
 
 class CelebAHQS3Test(CelebAHQTest):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

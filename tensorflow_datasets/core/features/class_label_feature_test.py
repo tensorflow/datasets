@@ -151,6 +151,12 @@ class ClassLabelFeatureTest(testing.FeatureExpectationsTestCase):
         ValueError, 'number of names do not match the defined num_classes'):
       labels.names = ['label3', 'label1']
 
+  def test_duplicate_names(self):
+
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'label names are duplicated'):
+      features.ClassLabel(names=['label1', 'label1', 'label2'])
+
 
 if __name__ == '__main__':
   testing.test_main()

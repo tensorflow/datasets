@@ -1,0 +1,120 @@
+{
+  "citation": "\n@misc{zhang2019email,\n    title={This Email Could Save Your Life: Introducing the Task of Email Subject Line Generation},\n    author={Rui Zhang and Joel Tetreault},\n    year={2019},\n    eprint={1906.03497},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}\n", 
+  "description": "\nA collection of email messages of employees in the Enron Corporation.\n\nThere are two features:\n  - email_body: email body text.\n  - subject_line: email subject text.\n", 
+  "location": {
+    "urls": [
+      "https://github.com/ryanzhumich/AESLC"
+    ]
+  }, 
+  "name": "aeslc", 
+  "schema": {
+    "feature": [
+      {
+        "name": "email_body", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "subject_line", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "11643743", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "1906"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1906"
+              }
+            }, 
+            "name": "email_body", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1906"
+              }
+            }, 
+            "name": "subject_line", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "1906"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "14436"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "14436"
+              }
+            }, 
+            "name": "email_body", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "14436"
+              }
+            }, 
+            "name": "subject_line", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "14436"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "1960"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1960"
+              }
+            }, 
+            "name": "email_body", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1960"
+              }
+            }, 
+            "name": "subject_line", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "1960"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "email_body", 
+    "output": "subject_line"
+  }, 
+  "version": "1.0.0"
+}

@@ -11,18 +11,22 @@ upper_tabs:
   lower_tabs:
     # Subsite tabs
     other:
-    - name: Datasets
+    - name: Catalog
+      skip_translation: true
       contents:
-        - title: Datasets
-          path: /datasets/datasets
+      - include: /datasets/catalog/_toc.yaml
     - name: Guide
       contents:
       - title: Overview
         path: /datasets/overview
+      - title: Versioning
+        path: /datasets/datasets_versioning
       - title: Splits
         path: /datasets/splits
       - title: Add a dataset
         path: /datasets/add_dataset
+      - title: Feature decoding
+        path: /datasets/decode
       - title: Add huge datasets
         path: /datasets/beam_datasets
       - title: Store your dataset on GCS

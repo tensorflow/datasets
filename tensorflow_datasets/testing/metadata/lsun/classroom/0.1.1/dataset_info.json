@@ -1,0 +1,75 @@
+{
+  "citation": "@article{journals/corr/YuZSSX15,\n  added-at = {2018-08-13T00:00:00.000+0200},\n  author = {Yu, Fisher and Zhang, Yinda and Song, Shuran and Seff, Ari and Xiao, Jianxiong},\n  biburl = {https://www.bibsonomy.org/bibtex/2446d4ffb99a5d7d2ab6e5417a12e195f/dblp},\n  ee = {http://arxiv.org/abs/1506.03365},\n  interhash = {3e9306c4ce2ead125f3b2ab0e25adc85},\n  intrahash = {446d4ffb99a5d7d2ab6e5417a12e195f},\n  journal = {CoRR},\n  keywords = {dblp},\n  timestamp = {2018-08-14T15:08:59.000+0200},\n  title = {LSUN: Construction of a Large-scale Image Dataset using Deep Learning with Humans in the Loop.},\n  url = {http://dblp.uni-trier.de/db/journals/corr/corr1506.html#YuZSSX15},\n  volume = {abs/1506.03365},\n  year = 2015\n}\n", 
+  "description": "Large scale images showing different objects from given categories like bedroom, tower etc.", 
+  "downloadChecksums": {
+    "http://lsun.cs.princeton.edu/htbin/download.cgi?tag=latest&category=classroom&set=train": "73a8a3e318819e1cc602f229673c3f51a68f3ece61e3764ce22df6abea4d0873", 
+    "http://lsun.cs.princeton.edu/htbin/download.cgi?tag=latest&category=classroom&set=val": "5e0e9a375d94091dfe1fa3be87d4a92f41c03f1c0b8e376acc7e05651de512d7"
+  }, 
+  "location": {
+    "urls": [
+      "https://www.yf.io/p/lsun"
+    ]
+  }, 
+  "name": "lsun", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "3285377283", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "40", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "168103"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "168103"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "300"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "300"
+      }
+    }
+  ], 
+  "version": "0.1.1"
+}

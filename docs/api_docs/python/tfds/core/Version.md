@@ -15,22 +15,46 @@
 
 # tfds.core.Version
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
+
 ## Class `Version`
 
+<!-- Start diff -->
 Dataset version MAJOR.MINOR.PATCH.
-
-Defined in [`core/utils/version.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py).
 
 <!-- Placeholder for "Used in" -->
 
 <h2 id="__init__"><code>__init__</code></h2>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
+
 ```python
 __init__(
     version_str,
-    experiments=None
+    description=None,
+    experiments=None,
+    tfds_version_to_prepare=None
 )
 ```
+
+Version init.
+
+#### Args:
+
+*   <b>`version_str`</b>: string. Eg: "1.2.3".
+*   <b>`description`</b>: string, a description of what is new in this version.
+*   <b>`experiments`</b>: dict of experiments. See Experiment.
+*   <b>`tfds_version_to_prepare`</b>: string, defaults to None. If set,
+    indicates that current version of TFDS cannot be used to
+    `download_and_prepare` the dataset, but that TFDS at version
+    {tfds_version_to_prepare} should be used instead.
 
 ## Properties
 
@@ -40,11 +64,17 @@ __init__(
 
 <h3 id="__eq__"><code>__eq__</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
+
 ```python
 __eq__(other)
 ```
 
 <h3 id="__ge__"><code>__ge__</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
 
 ```python
 __ge__(other)
@@ -52,11 +82,17 @@ __ge__(other)
 
 <h3 id="__gt__"><code>__gt__</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
+
 ```python
 __gt__(other)
 ```
 
 <h3 id="__le__"><code>__le__</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
 
 ```python
 __le__(other)
@@ -64,17 +100,26 @@ __le__(other)
 
 <h3 id="__lt__"><code>__lt__</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
+
 ```python
 __lt__(other)
 ```
 
 <h3 id="__ne__"><code>__ne__</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
+
 ```python
 __ne__(other)
 ```
 
 <h3 id="implements"><code>implements</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
 
 ```python
 implements(experiment)
@@ -83,6 +128,9 @@ implements(experiment)
 Returns True if version implements given experiment.
 
 <h3 id="match"><code>match</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
+source</a>
 
 ```python
 match(other_version)

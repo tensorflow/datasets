@@ -32,5 +32,8 @@ class XnliTest(testing.DatasetBuilderTestCase):
   }
 
 
+class XnliS3Test(XnliTest):
+  VERSION = "experimental_latest"
+
 if __name__ == "__main__":
   testing.test_main()

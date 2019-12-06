@@ -16,7 +16,7 @@
 r"""Script to call download_and_prepare on DatasetBuilder.
 
 Standalone script to generate specific dataset(s). This can be
-used if you want to separate download/generation of dataset from acual usage.
+used if you want to separate download/generation of dataset from actual usage.
 
 By default, the dataset is generated in the default location
 (~/tensorflow_datasets), which the same as when calling `tfds.load()`.
@@ -78,6 +78,9 @@ flags.DEFINE_string("extract_dir", None, "Where to extract files.")
 flags.DEFINE_string(
     "manual_dir", None,
     "Directory where dataset have manually been downloaded / extracted.")
+flags.DEFINE_string("checksums_dir", None,
+                    "For external datasets, specify the location of the "
+                    "dataset checksums.")
 default_compute_stats = tfds.download.ComputeStatsMode.AUTO
 flags.DEFINE_enum(
     "compute_stats",
@@ -87,6 +90,14 @@ flags.DEFINE_enum(
 flags.DEFINE_integer(
     "max_examples_per_split", None,
     "optional max number of examples to write into each split (for testing).")
+
+# Beam flags
+flags.DEFINE_list(
+    "beam_pipeline_options", [],
+    "A (comma-separated) list of flags to pass to `PipelineOptions` when "
+    "preparing with Apache Beam. Example: "
+    "`--beam_pipeline_options=job_name=my-job,project=my-project`")
+
 
 # Development flags
 flags.DEFINE_boolean("register_checksums", False,
@@ -125,7 +136,8 @@ def download_and_prepare(builder):
     # TODO(b/129149715): Restore compute stats. Currently skipped because not
     # beam supported.
     dl_config.compute_stats = tfds.download.ComputeStatsMode.SKIP
-    dl_config.beam_options = beam.options.pipeline_options.PipelineOptions()
+    dl_config.beam_options = beam.options.pipeline_options.PipelineOptions(
+        flags=["--%s" % opt for opt in FLAGS.beam_pipeline_options])
 
   builder.download_and_prepare(
       download_dir=FLAGS.download_dir,
@@ -156,6 +168,9 @@ def main(_):
   if FLAGS.disable_tqdm:
     logging.info("Disabling tqdm.")
     tfds.disable_progress_bar()
+
+  if FLAGS.checksums_dir:
+    tfds.download.add_checksums_dir(FLAGS.checksums_dir)
 
   datasets_to_build = set(FLAGS.datasets and FLAGS.datasets.split(",")
                           or tfds.list_builders())

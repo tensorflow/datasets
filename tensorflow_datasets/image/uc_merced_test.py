@@ -31,7 +31,7 @@ class UcMercedTest(testing.DatasetBuilderTestCase):
 
 
 class UcMercedS3Test(UcMercedTest):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

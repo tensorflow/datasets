@@ -170,6 +170,245 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
         ],
     )
 
+  def test_encoding(self):
+
+    f = feature_lib.Sequence({
+        'a': feature_lib.Sequence({'c': tf.int64}),
+        'b': tf.int64,
+    })
+
+    # Different combinaison of list of dict/dict of list to encode the same
+    # nested sequence
+    ex1 = f.encode_example([
+        {'a': {'c': [1, 1, 1]}, 'b': 1},
+        {'a': {'c': []}, 'b': 2},
+        {'a': {'c': [3, 3]}, 'b': 3},
+    ])
+
+    ex2 = f.encode_example([
+        {'a': [{'c': 1}, {'c': 1}, {'c': 1}], 'b': 1},
+        {'a': [], 'b': 2},
+        {'a': [{'c': 3}, {'c': 3}], 'b': 3},
+    ])
+
+    ex3 = f.encode_example({
+        'a': [
+            [{'c': 1}, {'c': 1}, {'c': 1}],
+            [],
+            [{'c': 3}, {'c': 3}],
+        ],
+        'b': [1, 2, 3],
+    })
+
+    ex4 = f.encode_example({
+        'a': {'c': [[1, 1, 1], [], [3, 3]]},
+        'b': [1, 2, 3],
+    })
+
+    out = {
+        'a': {'c': tf.ragged.constant([
+            [1, 1, 1],
+            [],
+            [3, 3],
+        ])},
+        'b': [1, 2, 3],
+    }
+
+    def to_ragged(ex):
+      ex['a']['c'] = tf.ragged.constant(ex['a']['c'])
+      return ex
+    self.assertAllEqualNested(to_ragged(ex1), out)
+    self.assertAllEqualNested(to_ragged(ex2), out)
+    self.assertAllEqualNested(to_ragged(ex3), out)
+    self.assertAllEqualNested(to_ragged(ex4), out)
+
+    # Should raise error if two sequences do not have the same length.
+    with self.assertRaisesWithPredicateMatch(
+        ValueError, 'length of all elements'):
+      f.encode_example({
+          'a': {'c': [[1, 1, 1], []]},
+          'b': [1, 2, 3],
+      })
+
+    # Empty sequence should create the correct number of dimension
+    ex2 = f.encode_example([])
+    self.assertAllEqualNested(ex2, {
+        'a': {'c': np.zeros((0, 0), np.int64)},
+        'b': np.zeros((0,), np.int64),
+    })
+
+  def test_2lvl_sequences_mixed(self):
+    # Mix of sequence and non-sequence
+    self.assertFeature(
+        feature=feature_lib.Sequence({
+            'a': feature_lib.Sequence(tf.int32),
+            'b': tf.int32,
+        }),
+        shape={
+            'a': (None, None),
+            'b': (None,),
+        },
+        dtype={
+            'a': tf.int32,
+            'b': tf.int32,
+        },
+        tests=[
+            testing.FeatureExpectationItem(
+                value={
+                    'a': [[1, 1, 1], [], [3, 3]],
+                    'b': [1, 2, 3],
+                },
+                expected={
+                    'a': [[1, 1, 1], [], [3, 3]],
+                    'b': [1, 2, 3],
+                },
+            ),
+        ],
+    )
+
+  def test_2lvl_sequences(self):
+
+    self.assertFeature(
+        feature=feature_lib.Sequence(
+            feature_lib.Sequence(
+                feature_lib.Tensor(shape=(2,), dtype=tf.int32),
+            ),
+        ),
+        shape=(None, None, 2),
+        dtype=tf.int32,
+        tests=[
+            testing.FeatureExpectationItem(
+                value=[
+                    [[0, 1], [2, 3]],
+                    [],
+                    [[4, 5]],
+                ],
+                expected=testing.RaggedConstant([
+                    [[0, 1], [2, 3]],
+                    [],
+                    [[4, 5]],
+                ], inner_shape=(2,)),
+            ),
+            # Empty
+            testing.FeatureExpectationItem(
+                value=[],
+                expected=[],
+            ),
+            # List of empty lists
+            testing.FeatureExpectationItem(
+                value=[[], [], []],
+                expected=[[], [], []],
+            ),
+            # List of empty np.array
+            testing.FeatureExpectationItem(
+                value=[
+                    np.empty(shape=(0, 2), dtype=np.int32),
+                    np.empty(shape=(0, 2), dtype=np.int32),
+                ],
+                expected=[
+                    [],
+                    [],
+                ],
+            ),
+            testing.FeatureExpectationItem(
+                value=[
+                    np.empty(shape=(0, 2), dtype=np.int32),
+                    np.empty(shape=(0, 2), dtype=np.int32),
+                    np.ones(shape=(3, 2), dtype=np.int32),
+                ],
+                expected=[
+                    [],
+                    [],
+                    [[1, 1], [1, 1], [1, 1]],
+                ],
+            ),
+            # Wrong types should fails
+            testing.FeatureExpectationItem(
+                value=[
+                    np.ones(shape=(3, 2), dtype=np.float32),
+                ],
+                raise_cls=ValueError,
+                raise_msg='float32 do not match int32',
+            ),
+        ],
+    )
+
+  def test_2lvl_sequences_string(self):
+
+    self.assertFeature(
+        feature=feature_lib.Sequence(
+            feature_lib.Sequence(tf.string),
+        ),
+        shape=(None, None,),
+        dtype=tf.string,
+        tests=[
+            testing.FeatureExpectationItem(
+                value=[
+                    ['abcd', '', 'efg'],
+                    [],
+                    ['', ''],
+                    ['hij'],
+                ],
+                expected=[
+                    [b'abcd', b'', b'efg'],
+                    [],
+                    [b'', b''],
+                    [b'hij'],
+                ],
+            ),
+            testing.FeatureExpectationItem(
+                value=[
+                    [],
+                    [],
+                ],
+                expected=[
+                    [],
+                    [],
+                ],
+            ),
+            testing.FeatureExpectationItem(
+                value=[
+                    ['abcd', 'efg', 123],
+                ],
+                raise_cls=TypeError,
+                raise_msg='Expected binary or unicode string',
+            ),
+        ],
+    )
+
+  def test_3lvl_sequence(self):
+
+    self.assertFeature(
+        feature=feature_lib.Sequence(
+            feature_lib.Sequence(
+                feature_lib.Sequence(tf.int32),
+                length=3,
+            ),
+        ),
+        shape=(None, 3, None),
+        dtype=tf.int32,
+        tests=[
+            testing.FeatureExpectationItem(
+                value=[
+                    [[1, 2, 3], [], [4, 5]],
+                    [[10, 11], [12, 13], [14]],
+                ],
+                expected=[
+                    [[1, 2, 3], [], [4, 5]],
+                    [[10, 11], [12, 13], [14]],
+                ],
+            ),
+            testing.FeatureExpectationItem(
+                value=[
+                    [[1, 2, 3], [4, 5]],  # < Only 2 instead of 3
+                    [[10, 11], [12, 13], [14]],
+                ],
+                raise_cls=ValueError,
+                raise_msg='Input sequence length do not match',
+            ),
+        ],
+    )
+
   def test_image(self):
 
     imgs = [

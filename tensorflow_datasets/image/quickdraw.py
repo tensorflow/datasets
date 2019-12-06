@@ -56,13 +56,12 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
   are generated from the raw vector information (i.e. the 'bitmap' dataset, not
   the 'raw' or 'simplified drawings' datasets).
   """
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     labels_path = tfds.core.get_tfds_path(_QUICKDRAW_LABELS_FNAME)
@@ -78,7 +77,7 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names_file=labels_path),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION
     )
 
@@ -121,7 +120,4 @@ class QuickdrawBitmap(tfds.core.GeneratorBasedBuilder):
               "image": np_image.reshape(_QUICKDRAW_IMAGE_SHAPE),
               "label": label,
           }
-          if self.version.implements(tfds.core.Experiment.S3):
-            yield "%s_%i" % (label, i), record
-          else:
-            yield record
+          yield "%s_%i" % (label, i), record

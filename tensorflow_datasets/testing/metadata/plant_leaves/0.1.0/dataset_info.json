@@ -1,0 +1,149 @@
+{
+  "citation": "\n@misc{,\n  author={Siddharth Singh Chouhan, Ajay Kaul, Uday Pratap Singh, Sanjeev\nJain},\n  title={A Database of Leaf Images: Practice towards Plant Conservation with\nPlant Pathology},\n  howpublished={Mendeley Data},\n  year={2019}\n}\n",
+  "description": "\nThis dataset consists of 4502 images of healthy and unhealthy plant leaves\ndivided into 22 categories by species and state of health. The images are in\nhigh resolution JPG format.\n\nThere are no files with label prefix 0000, therefore label encoding is shifted\nby one (e.g. file with label prefix 0001 gets encoded label 0).\n\nNote: Each image is a separate download. Some might rarely fail, therefore make\nsure to restart if that happens. An exception will be raised in case one of the\ndownloads repeatedly fails.\n\nDataset URL: https://data.mendeley.com/datasets/hb74ynkjcn/1\nLicense: http://creativecommons.org/licenses/by/4.0\n",
+  "location": {
+    "urls": [
+      "https://data.mendeley.com/datasets/hb74ynkjcn/1"
+    ]
+  },
+  "name": "plant_leaves",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "image/filename",
+        "type": "BYTES"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "7311979602",
+  "splits": [
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70",
+        "70",
+        "71",
+        "70"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "4502"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "4502"
+              }
+            },
+            "name": "image/filename",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "4502"
+              },
+              "max": 21.0
+            }
+          }
+        ],
+        "numExamples": "4502"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

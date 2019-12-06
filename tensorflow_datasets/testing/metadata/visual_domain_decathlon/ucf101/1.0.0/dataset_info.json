@@ -1,0 +1,167 @@
+{
+  "citation": "@ONLINE{hakanbilensylvestrerebuffitomasjakab2017,\n    author = \"Hakan Bilen, Sylvestre Rebuffi, Tomas Jakab\",\n    title  = \"Visual Domain Decathlon\",\n    year   = \"2017\",\n    url    = \"https://www.robots.ox.ac.uk/~vgg/decathlon/\"\n}\n", 
+  "description": "This contains the 10 datasets used in the Visual Domain Decathlon, part of\nthe PASCAL in Detail Workshop Challenge (CVPR 2017).\nThe goal of this challenge is to solve simultaneously ten image classification\nproblems representative of very different visual domains.\n\nSome of the datasets included here are also available as separate datasets in\nTFDS. However, notice that images were preprocessed for the Visual Domain\nDecathlon (resized isotropically to have a shorter size of 72 pixels) and\nmight have different train/validation/test splits. Here we use the official\nsplits for the competition.\n", 
+  "location": {
+    "urls": [
+      "https://www.robots.ox.ac.uk/~vgg/decathlon/"
+    ]
+  }, 
+  "name": "visual_domain_decathlon", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "INT"
+      }, 
+      {
+        "name": "name", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "1113067520", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "3783"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3783"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "3783"
+              }, 
+              "max": -1.0, 
+              "min": -1.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "3783"
+              }
+            }, 
+            "name": "name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "3783"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "7585"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "7585"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "7585"
+              }, 
+              "max": 100.0, 
+              "min": -1.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "7585"
+              }
+            }, 
+            "name": "name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "7585"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "1952"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1952"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "label", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1952"
+              }, 
+              "max": 100.0, 
+              "min": -1.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1952"
+              }
+            }, 
+            "name": "name", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "1952"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "label"
+  }, 
+  "version": "1.0.0"
+}
