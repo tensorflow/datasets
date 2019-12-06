@@ -69,7 +69,8 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
 
   # 1.0.0 contains a bug that uses validation data as training data.
   # 1.1.0 Update to the correct train, validation and test data.
-  VERSION = tfds.core.Version("1.1.0")
+  # 1.2.0 Replace <unk> with <UNK> in train/val to be consistent with test.
+  VERSION = tfds.core.Version("1.2.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -93,27 +94,36 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "src_path": pattern % ("train", "src"),
-                "tgt_path": pattern % ("train", "tgt")
+                "tgt_path": pattern % ("train", "tgt"),
+                "replace_unk": True,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "src_path": pattern % ("dev", "src"),
-                "tgt_path": pattern % ("dev", "tgt")
+                "tgt_path": pattern % ("dev", "tgt"),
+                "replace_unk": True,
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "src_path": pattern % ("test", "src"),
-                "tgt_path": pattern % ("test", "tgt")
+                "tgt_path": pattern % ("test", "tgt"),
+                "replace_unk": False,
             },
         ),
     ]
 
-  def _generate_examples(self, src_path=None, tgt_path=None):
+  def _generate_examples(self, src_path=None, tgt_path=None, replace_unk=None):
     """Yields examples."""
     with tf.io.gfile.GFile(src_path) as f_d, tf.io.gfile.GFile(tgt_path) as f_s:
       for i, (doc_text, sum_text) in enumerate(zip(f_d, f_s)):
-        yield i, {_DOCUMENT: doc_text.strip(), _SUMMARY: sum_text.strip()}
+        if replace_unk:
+          yield i, {
+              _DOCUMENT: doc_text.strip().replace("<unk>", "UNK"),
+              _SUMMARY: sum_text.strip().replace("<unk>", "UNK")
+          }
+        else:
+          yield i, {_DOCUMENT: doc_text.strip(), _SUMMARY: sum_text.strip()}

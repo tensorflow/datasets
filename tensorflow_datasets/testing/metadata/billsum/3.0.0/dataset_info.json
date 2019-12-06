@@ -1,0 +1,152 @@
+{
+  "citation": "\n@misc{kornilova2019billsum,\n    title={BillSum: A Corpus for Automatic Summarization of US Legislation},\n    author={Anastassia Kornilova and Vlad Eidelman},\n    year={2019},\n    eprint={1910.00523},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}\n",
+  "description": "\nBillSum, summarization of US Congressional and California state bills.\n\nThere are several features:\n  - text: bill text.\n  - summary: summary of the bills.\n  - title: title of the bills.\nfeatures for us bills. ca bills does not have.\n  - text_len: number of chars in text.\n  - sum_len: number of chars in summary.\n",
+  "location": {
+    "urls": [
+      "https://github.com/FiscalNote/BillSum"
+    ]
+  },
+  "name": "billsum",
+  "schema": {
+    "feature": [
+      {
+        "name": "summary",
+        "type": "BYTES"
+      },
+      {
+        "name": "text",
+        "type": "BYTES"
+      },
+      {
+        "name": "title",
+        "type": "BYTES"
+      }
+    ]
+  },
+  "sizeInBytes": "67260676",
+  "splits": [
+    {
+      "name": "ca_test",
+      "numShards": "1",
+      "shardLengths": [
+        "1237"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1237"
+              }
+            },
+            "name": "summary",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1237"
+              }
+            },
+            "name": "text",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1237"
+              }
+            },
+            "name": "title",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "1237"
+      }
+    },
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "3269"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "3269"
+              }
+            },
+            "name": "summary",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "3269"
+              }
+            },
+            "name": "text",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "3269"
+              }
+            },
+            "name": "title",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "3269"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "9474",
+        "9475"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "18949"
+              }
+            },
+            "name": "summary",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "18949"
+              }
+            },
+            "name": "text",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "18949"
+              }
+            },
+            "name": "title",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "18949"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "text",
+    "output": "summary"
+  },
+  "version": "3.0.0"
+}

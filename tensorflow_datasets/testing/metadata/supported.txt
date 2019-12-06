@@ -68,7 +68,7 @@ big_patent/f/1.0.0
 big_patent/g/1.0.0
 big_patent/h/1.0.0
 big_patent/y/1.0.0
-billsum/2.0.0
+billsum/3.0.0
 binarized_mnist/1.0.0
 binary_alpha_digits/1.0.0
 c4/en.noclean/1.0.0
@@ -405,7 +405,7 @@ flores/sien_plain_text/0.0.3
 flores/sien_plain_text/1.0.0
 food101/1.0.0
 gap/0.1.0
-gigaword/1.1.0
+gigaword/1.2.0
 glue/ax/1.0.0
 glue/cola/0.0.2
 glue/cola/1.0.0
@@ -733,6 +733,7 @@ rock_paper_scissors/1.0.0
 rock_paper_scissors/3.0.0
 rock_you/0.1.0
 scene_parse150/1.0.0
+scicite/1.0.0
 scientific_papers/arxiv/1.1.0
 scientific_papers/pubmed/1.1.0
 shapes3d/0.1.0
@@ -823,9 +824,13 @@ titanic/2.0.0
 uc_merced/0.0.1
 uc_merced/2.0.0
 ucf101/ucf101_1/1.0.0
+ucf101/ucf101_1/2.0.0
 ucf101/ucf101_1_256/1.0.0
+ucf101/ucf101_1_256/2.0.0
 ucf101/ucf101_2/1.0.0
+ucf101/ucf101_2/2.0.0
 ucf101/ucf101_3/1.0.0
+ucf101/ucf101_3/2.0.0
 visual_domain_decathlon/aircraft/1.1.0
 visual_domain_decathlon/cifar100/1.1.0
 visual_domain_decathlon/daimlerpedcls/1.1.0
