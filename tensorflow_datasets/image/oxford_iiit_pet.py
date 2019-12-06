@@ -42,6 +42,18 @@ _NUM_SHARDS = 1
 
 _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 
+_LABEL_CLASSES = [
+  'Abyssinian', 'american_bulldog', 'american_pit_bull_terrier',
+  'basset_hound', 'beagle', 'Bengal', 'Birman', 'Bombay', 'boxer',
+  'British_Shorthair', 'chihuahua', 'Egyptian_Mau',
+  'english_cocker_spaniel', 'english_setter', 'german_shorthaired',
+  'great_pyrenees', 'havanese', 'japanese_chin', 'keeshond',
+  'leonberger', 'Maine_Coon', 'miniature_pinscher', 'newfoundland',
+  'Persian', 'pomeranian', 'pug', 'Ragdoll', 'Russian_Blue',
+  'saint_bernard', 'samoyed', 'scottish_terrier', 'shiba_inu',
+  'Siamese', 'Sphynx', 'staffordshire_bull_terrier',
+  'wheaten_terrier', 'yorkshire_terrier'
+]
 _SPECIES_CLASSES = ["Cat", "Dog"]
 
 class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
@@ -61,7 +73,7 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
-            "label": tfds.features.ClassLabel(num_classes=37),
+            "label": tfds.features.ClassLabel(names=_LABEL_CLASSES),
             "species": tfds.features.ClassLabel(names=_SPECIES_CLASSES),
             "file_name": tfds.features.Text(),
             "segmentation_mask": tfds.features.Image(shape=(None, None, 1))
@@ -87,14 +99,6 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
 
     images_path_dir = os.path.join(dl_paths["images"], "images")
     annotations_path_dir = os.path.join(dl_paths["annotations"], "annotations")
-
-    with tf.io.gfile.GFile(os.path.join(annotations_path_dir,
-                                        "trainval.txt"), "r") as images_list:
-        def extract_label_name(line):
-            image_name, label, species, _ = line.strip().split(" ")
-            return (int(label), "_".join(image_name.split("_")[:-1]))
-        label_names = {extract_label_name(line) for line in images_list}
-    self.info.features["label"].names = [p[1] for p in sorted(label_names)]
 
     # Setup train and test splits
     train_split = tfds.core.SplitGenerator(
