@@ -42,6 +42,7 @@ _NUM_SHARDS = 1
 
 _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 
+_SPECIES_CLASSES = ["Cat", "Dog"]
 
 class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
@@ -61,6 +62,7 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(num_classes=37),
+            "species": tfds.features.ClassLabel(names=_SPECIES_CLASSES),
             "file_name": tfds.features.Text(),
             "segmentation_mask": tfds.features.Image(shape=(None, None, 1))
         }),
@@ -114,17 +116,19 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
                          images_list_file):
     with tf.io.gfile.GFile(images_list_file, "r") as images_list:
       for line in images_list:
-        image_name, label, _, _ = line.strip().split(" ")
+        image_name, label, species, _ = line.strip().split(" ")
 
         trimaps_dir_path = os.path.join(annotations_dir_path, "trimaps")
 
         trimap_name = image_name + ".png"
         image_name += ".jpg"
         label = int(label) - 1
+        species = int(species) - 1
 
         record = {
             "image": os.path.join(images_dir_path, image_name),
             "label": int(label),
+            "species": species,
             "file_name": image_name,
             "segmentation_mask": os.path.join(trimaps_dir_path, trimap_name)
         }
