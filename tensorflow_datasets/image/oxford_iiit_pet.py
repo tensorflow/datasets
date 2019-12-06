@@ -88,6 +88,14 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
     images_path_dir = os.path.join(dl_paths["images"], "images")
     annotations_path_dir = os.path.join(dl_paths["annotations"], "annotations")
 
+    with tf.io.gfile.GFile(os.path.join(annotations_path_dir,
+                                        "trainval.txt"), "r") as images_list:
+        def extract_label_name(line):
+            image_name, label, species, _ = line.strip().split(" ")
+            return (int(label), "_".join(image_name.split("_")[:-1]))
+        label_names = {extract_label_name(line) for line in images_list}
+    self.info.features["label"].names = [p[1] for p in sorted(label_names)]
+
     # Setup train and test splits
     train_split = tfds.core.SplitGenerator(
         name="train",
