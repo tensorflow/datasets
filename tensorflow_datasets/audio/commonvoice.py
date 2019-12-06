@@ -1,10 +1,9 @@
-"""
-Mozilla Common Voice Dataset
-"""
+"""Mozilla Common Voice Dataset"""
 import os
 import csv
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
+
 _DOWNLOAD_LINKS = {
   "en": "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-1/en.tar.gz",
   "de": "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-1/de.tar.gz",
@@ -24,11 +23,15 @@ _DOWNLOAD_LINKS = {
   "nl": "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-1/nl.tar.gz",
   "cnh": "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-1/cnh.tar.gz",
   "eo": "https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-1/eo.tar.gz"}
+
 _SPLITS = {
   tfds.Split.TRAIN: "train",
   tfds.Split.TEST: "test",
-  tfds.Split.VALIDATION: "validated"}
+  tfds.Split.VALIDATION: "validated"
+}
+
 _GENDER_CLASSES = ["male", "female", "other", "None"]
+
 _ACCENT_CLASSES = {
   "en": [
     'canada',
@@ -48,7 +51,8 @@ _ACCENT_CLASSES = {
     'malaysia',
     'bermuda',
     'singapore',
-    'southatlandtic'],
+    'southatlandtic'
+  ],
   "de": [
     'germany',
     'switzerland',
@@ -60,7 +64,8 @@ _ACCENT_CLASSES = {
     'netherlands',
     'united_kingdom',
     'hungary',
-    'poland'],
+    'poland'
+  ],
   "fr": [
     'france',
     'None',
@@ -81,30 +86,37 @@ _ACCENT_CLASSES = {
     'martinique',
     'reunion',
     'portugal',
-    'netherlands'],
+    'netherlands'
+  ],
   "cy": [
     'None',
     'united_kingdom',
-    'other'],
+    'other'
+  ],
   "br": [
     'None',
-    'other'],
+    'other'
+  ],
   "cv": ['None'],
   "tr": [
     'None',
-    'other'],
+    'other'
+  ],
   "tt": ['None'],
   "ky": [
     'None',
-    'other'],
+    'other'
+  ],
   "ga-IE": [
     'None',
     'other',
     'ulaidh',
-    'connachta'],
+    'connachta'
+  ],
   "kab": [
     'None',
-    'other'],
+    'other'
+  ],
   "ca": [
     'northwestern',
     'None',
@@ -112,39 +124,45 @@ _ACCENT_CLASSES = {
     'other',
     'valencian',
     'balearic',
-    'northern'],
+    'northern'
+  ],
   "zh-TW": [
     'None',
-    'other'],
+    'other'
+  ],
   "sl": [
     'None',
-    'other'],
+    'other'
+  ],
   "it": [
     'None',
-    'other'],
+    'other'
+  ],
   "nl": [
     'netherlands',
     'None',
     'belgium',
-    'other'],
+    'other'
+  ],
   "cnh": [
     'None',
-    'other'],
+    'other'
+  ],
   "eo": [
     'None',
     'internacia',
-    'other']}
+    'other'
+  ]
+}
 
 
 class CommonVoiceConfig(tfds.core.BuilderConfig):
   """
-   Configuration Class for Mozilla CommonVoice Dataset
-
+    Configuration Class for Mozilla CommonVoice Dataset
   """
   @tfds.core.api_utils.disallow_positional_args
   def __init__(self, language="en", **kwargs):
     """Constructs CommonVoiceConfig
-
 
     Args:
      language: `str`, one of
