@@ -47,7 +47,7 @@ _SPECIES_CLASSES = ["Cat", "Dog"]
 class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
 
-  VERSION = tfds.core.Version("1.1.0",
+  VERSION = tfds.core.Version("1.2.0",
                               experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
