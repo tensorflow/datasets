@@ -119,7 +119,7 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
         "sentence": tfds.features.Text(),
         "voice": tfds.features.Audio()
       }),
-      urls=[u"https://voice.mozilla.org/en/datasets"]
+      urls=["https://voice.mozilla.org/en/datasets"]
     )
 
   def _split_generators(self, dl_manager):
