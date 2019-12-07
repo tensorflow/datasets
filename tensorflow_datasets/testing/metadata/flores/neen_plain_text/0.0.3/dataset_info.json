@@ -1,0 +1,84 @@
+{
+  "citation": "@misc{guzmn2019new,\n    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},\n    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},\n    year={2019},\n    eprint={1902.01382},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}\n", 
+  "description": "Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.\n", 
+  "location": {
+    "urls": [
+      "https://github.com/facebookresearch/flores/"
+    ]
+  }, 
+  "name": "flores", 
+  "schema": {
+    "feature": [
+      {
+        "name": "en", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "ne", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "1008279", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2835"
+              }
+            }, 
+            "name": "en", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2835"
+              }
+            }, 
+            "name": "ne", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "2835"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2559"
+              }
+            }, 
+            "name": "en", 
+            "type": "BYTES"
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "2559"
+              }
+            }, 
+            "name": "ne", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "2559"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "ne", 
+    "output": "en"
+  }, 
+  "version": "0.0.3"
+}

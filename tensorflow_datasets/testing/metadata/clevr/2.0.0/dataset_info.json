@@ -1,0 +1,321 @@
+{
+  "citation": "@inproceedings{johnson2017clevr,\n  title={{CLEVR}: A diagnostic dataset for compositional language and elementary visual reasoning},\n  author={Johnson, Justin and Hariharan, Bharath and van der Maaten, Laurens and Fei-Fei, Li and Lawrence Zitnick, C and Girshick, Ross},\n  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},\n  year={2017}\n}\n", 
+  "description": "CLEVR is a diagnostic dataset that tests a range of visual reasoning abilities.\nIt contains minimal biases and has detailed annotations describing the kind of\nreasoning each question requires.\n", 
+  "location": {
+    "urls": [
+      "https://cs.stanford.edu/people/jcjohns/clevr/"
+    ]
+  }, 
+  "name": "clevr", 
+  "schema": {
+    "feature": [
+      {
+        "name": "file_name", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "objects"
+      }
+    ]
+  }, 
+  "sizeInBytes": "19021600724", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "128", 
+      "shardLengths": [
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "15000"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "15000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "15000"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "128", 
+      "shardLengths": [
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "547", 
+        "546", 
+        "547", 
+        "547", 
+        "547"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "70000"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "70000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "70000"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "128", 
+      "shardLengths": [
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469", 
+        "469", 
+        "469", 
+        "468", 
+        "469"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "15000"
+              }
+            }, 
+            "name": "file_name", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "15000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "15000"
+      }
+    }
+  ], 
+  "version": "2.0.0"
+}

@@ -45,13 +45,12 @@ _NAME_RE = re.compile(r"^(humans|horses)/[\w-]*\.png$")
 class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
   """Horses or Humans dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -63,7 +62,7 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
                 names=["horses", "humans"]),
         }),
         supervised_keys=("image", "label"),
-        urls=["http://laurencemoroney.com/horses-or-humans-dataset"],
+        homepage="http://laurencemoroney.com/horses-or-humans-dataset",
         citation=_CITATION
         )
 
@@ -104,7 +103,4 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
           "image": fobj,
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fname, record
-      else:
-        yield record
+      yield fname, record

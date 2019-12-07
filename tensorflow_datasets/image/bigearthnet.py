@@ -115,7 +115,10 @@ class BigearthnetConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    super(BigearthnetConfig, self).__init__(**kwargs)
+    super(BigearthnetConfig, self).__init__(
+        version=tfds.core.Version('0.0.2',
+                                  experiments={tfds.core.Experiment.S3: False}),
+        **kwargs)
     self.selection = selection
 
 
@@ -126,12 +129,10 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
       BigearthnetConfig(
           selection='rgb',
           name='rgb',
-          version='0.0.2',
           description='Sentinel-2 RGB channels'),
       BigearthnetConfig(
           selection='all',
           name='all',
-          version='0.0.2',
           description='13 Sentinel-2 channels'),
   ]
 
@@ -199,7 +200,7 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
         description=_DESCRIPTION,
         features=features,
         supervised_keys=supervised_keys,
-        urls=['http://bigearth.net'],
+        homepage='http://bigearth.net',
         citation=_CITATION,
     )
 

@@ -1,0 +1,4 @@
+ class_id super_class_id path
+2607 365 1 bicycle_final/181415767003_7.JPG
+16154 2727 4 coffee_maker_final/111737519223_7.JPG
+25971 4540 6 kettle_final/151781232926_10.JPG

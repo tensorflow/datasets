@@ -18,7 +18,7 @@ from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.scripts.document_datasets import schema_org
+from tensorflow_datasets.scripts import document_datasets
 
 DummyMnist = testing.DummyMnist
 
@@ -34,19 +34,22 @@ class DocumentDatasetsTest(testing.TestCase):
 
   @classmethod
   def tearDownClass(cls):
+    super(DocumentDatasetsTest, cls).tearDownClass()
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def setUp(self):
+    super(DocumentDatasetsTest, self).setUp()
     self.builder = DummyMnist(data_dir=self._tfds_tmp_dir)
 
   @testing.run_in_graph_and_eager_modes()
   def test_schema_org(self):
-    schema_str = schema_org(self.builder)
+    schema_str = document_datasets.document_single_builder(self.builder)
     self.assertIn("http://schema.org/Dataset", schema_str)
-    self.assertIn('<meta itemprop="url" '
-                  'content="https://www.tensorflow.org/'
-                  'datasets/datasets#%s" />' % self.builder.name,
-                  schema_str)
+    self.assertIn(
+        '<meta itemprop="url" '
+        'content="https://www.tensorflow.org'
+        '/datasets/catalog/%s" />' % self.builder.name, schema_str)
+
 
 if __name__ == "__main__":
   testing.test_main()

@@ -86,6 +86,9 @@ class ClassLabel(feature.Tensor):
     # Set-up [new] names
     self._int2str = int2str
     self._str2int = {name: i for i, name in enumerate(self._int2str)}
+    if len(self._int2str) != len(self._str2int):
+      raise ValueError(
+          "Some label names are duplicated. Each label name should be unique.")
 
     # If num_classes has been defined, ensure that num_classes and names match
     num_classes = len(self._str2int)

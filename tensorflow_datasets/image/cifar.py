@@ -44,13 +44,12 @@ _CITATION = """\
 class Cifar10(tfds.core.GeneratorBasedBuilder):
   """CIFAR-10."""
 
-  VERSION = tfds.core.Version("1.0.2")
+  VERSION = tfds.core.Version("1.0.2",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.2"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -63,7 +62,7 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(num_classes=10),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
+        homepage="https://www.cs.toronto.edu/~kriz/cifar.html",
         citation=_CITATION,
     )
 
@@ -131,20 +130,18 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
       for labels, np_image in _load_data(path, len(label_keys)):
         record = dict(zip(label_keys, labels))
         record["image"] = np_image
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield index, record
-        else:
-          yield record
+        yield index, record
         index += 1
 
 
 class Cifar100(Cifar10):
   """CIFAR-100 dataset."""
 
-  VERSION = tfds.core.Version("1.3.1")
+  VERSION = tfds.core.Version("1.3.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.3.1"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
 
   @property
@@ -175,7 +172,7 @@ class Cifar100(Cifar10):
             "coarse_label": tfds.features.ClassLabel(num_classes=20),
         }),
         supervised_keys=("image", "label"),
-        urls=["https://www.cs.toronto.edu/~kriz/cifar.html"],
+        homepage="https://www.cs.toronto.edu/~kriz/cifar.html",
         citation=_CITATION,
     )
 
@@ -191,7 +188,7 @@ class CifarInfo(collections.namedtuple("_CifarInfo", [
 ])):
   """Contains the information necessary to generate a CIFAR dataset.
 
-  Args:
+  Attributes:
     name (str): name of dataset.
     url (str): data URL.
     prefix (str): path prefix within the downloaded and extracted file to look

@@ -6,11 +6,18 @@
 
 # tfds.core.SplitGenerator
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
+
 ## Class `SplitGenerator`
 
+<!-- Start diff -->
 Defines the split information for the generator.
-
-Defined in [`core/splits.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -20,6 +27,9 @@ See `GeneratorBasedBuilder._split_generators` for more info and example
 of usage.
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
+source</a>
 
 ``` python
 __init__(

@@ -71,14 +71,12 @@ def _load_tif(path):
 
 class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
   """Biological 8-class classification problem."""
-  URL = _URL
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.0.1"),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -92,7 +90,7 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
                 names=_CLASS_NAMES),
             "filename": tfds.features.Text(),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
         supervised_keys=("image", "label"),
     )
@@ -120,22 +118,17 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
             "label": class_name,
             "filename": fn,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield "%s/%s" % (class_name, fn), record
-        else:
-          yield record
+        yield "%s/%s" % (class_name, fn), record
 
 
 class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
   """10 Large 5000 x 5000 colorectal histology images without labels."""
-  URL = _URL
-  VERSION = tfds.core.Version("0.0.1")
+  VERSION = tfds.core.Version("0.0.1",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("0.0.1"),
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -146,7 +139,7 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(shape=(_LARGE_SIZE,)*2 + (3,)),
             "filename": tfds.features.Text(),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION
     )
 
@@ -165,8 +158,4 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
     for fn in tf.io.gfile.listdir(folder):
       image = _load_tif(os.path.join(folder, fn))
       record = dict(image=image, filename=fn)
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield fn, record
-      else:
-        yield record
-
+      yield fn, record

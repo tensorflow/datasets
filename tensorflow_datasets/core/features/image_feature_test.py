@@ -21,6 +21,7 @@ from __future__ import print_function
 
 import os
 
+from absl.testing import parameterized
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -32,23 +33,27 @@ tf.compat.v1.enable_eager_execution()
 randint = np.random.randint
 
 
-class ImageFeatureTest(testing.FeatureExpectationsTestCase):
+class ImageFeatureTest(
+    testing.FeatureExpectationsTestCase, parameterized.TestCase):
 
-  def test_images(self):
-
-    img = randint(256, size=(128, 100, 3), dtype=np.uint8)
-    img_other_shape = randint(256, size=(64, 200, 3), dtype=np.uint8)
+  @parameterized.parameters(tf.uint8, tf.uint16)
+  def test_images(self, dtype):
+    np_dtype = dtype.as_numpy_dtype
+    img = randint(256, size=(128, 100, 3), dtype=np_dtype)
+    img_other_shape = randint(256, size=(64, 200, 3), dtype=np_dtype)
     img_file_path = os.path.join(os.path.dirname(__file__),
                                  '../../testing/test_data/6pixels.png')
-    img_file_expected_content = [  # see tests_data/README.md
+    img_file_expected_content = np.array([  # see tests_data/README.md
         [[0, 255, 0], [255, 0, 0], [255, 0, 255]],
         [[0, 0, 255], [255, 255, 0], [126, 127, 128]],
-    ]
+    ], dtype=np_dtype)
+    if dtype == tf.uint16:
+      img_file_expected_content *= 257  # Scale int16 images
 
     self.assertFeature(
-        feature=features_lib.Image(),
+        feature=features_lib.Image(dtype=dtype),
         shape=(None, None, 3),
-        dtype=tf.uint8,
+        dtype=dtype,
         tests=[
             # Numpy array
             testing.FeatureExpectationItem(
@@ -69,17 +74,17 @@ class ImageFeatureTest(testing.FeatureExpectationsTestCase):
             testing.FeatureExpectationItem(
                 value=randint(256, size=(128, 128, 3), dtype=np.uint32),
                 raise_cls=ValueError,
-                raise_msg='should be uint8',
+                raise_msg='dtype should be',
             ),
             # Invalid number of dimensions
             testing.FeatureExpectationItem(
-                value=randint(256, size=(128, 128), dtype=np.uint8),
+                value=randint(256, size=(128, 128), dtype=np_dtype),
                 raise_cls=ValueError,
                 raise_msg='must have the same rank',
             ),
             # Invalid number of channels
             testing.FeatureExpectationItem(
-                value=randint(256, size=(128, 128, 1), dtype=np.uint8),
+                value=randint(256, size=(128, 128, 1), dtype=np_dtype),
                 raise_cls=ValueError,
                 raise_msg='are incompatible',
             ),

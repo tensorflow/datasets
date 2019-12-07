@@ -55,7 +55,8 @@ for generating training/validation data from the MNIST dataset.
 class MovingMnist(tfds.core.GeneratorBasedBuilder):
   """MovingMnist."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("0.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -65,7 +66,7 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
             "image_sequence": tfds.features.Video(
                 shape=(_SEQUENCE_LENGTH,) + _OUT_RESOLUTION + (1,))
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION,
     )
 

@@ -1,0 +1,123 @@
+{
+  "citation": "\n@inproceedings{zhou2017scene,\ntitle={Scene Parsing through ADE20K Dataset},\nauthor={Zhou, Bolei and Zhao, Hang and Puig, Xavier and Fidler, Sanja and Barriuso, Adela and Torralba, Antonio},\nbooktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},\nyear={2017}\n}\n", 
+  "description": "\nScene parsing is to segment and parse an image into different image regions\nassociated with semantic categories, such as sky, road, person, and bed.\nMIT Scene Parsing Benchmark (SceneParse150) provides a standard training and\nevaluation platform for the algorithms of scene parsing.\n", 
+  "location": {
+    "urls": [
+      "http://sceneparsing.csail.mit.edu/"
+    ]
+  }, 
+  "name": "scene_parse150", 
+  "schema": {
+    "feature": [
+      {
+        "name": "annotation", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "982487040", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2000"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "annotation", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "2000"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "2000"
+      }
+    }, 
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "2526", 
+        "2527", 
+        "2526", 
+        "2526", 
+        "2526", 
+        "2527", 
+        "2526", 
+        "2526"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "annotation", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "20210"
+              }, 
+              "max": 205.0
+            }
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "20210"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "20210"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "image", 
+    "output": "annotation"
+  }, 
+  "version": "1.0.0"
+}

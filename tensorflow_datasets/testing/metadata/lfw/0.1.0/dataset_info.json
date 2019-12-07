@@ -1,0 +1,74 @@
+{
+  "citation": "@TechReport{LFWTech,\n    author = {Gary B. Huang and Manu Ramesh and Tamara Berg and Erik Learned-Miller},\n    title = {Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environments},\n    institution = {University of Massachusetts, Amherst},\n    year = 2007,\n    number = {07-49},\n    month = {October}\n}\n", 
+  "description": "Labeled Faces in the Wild:\n        A Database for Studying Face Recognition in\n        Unconstrained Environments", 
+  "location": {
+    "urls": [
+      "http://vis-www.cs.umass.edu/lfw"
+    ]
+  }, 
+  "name": "lfw", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "250"
+            }, 
+            {
+              "size": "250"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }, 
+      {
+        "name": "label", 
+        "type": "BYTES"
+      }
+    ]
+  }, 
+  "sizeInBytes": "180566744", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "20", 
+      "shardLengths": [
+        "6617", 
+        "6616"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "13233"
+              }, 
+              "max": 255.0
+            }
+          }, 
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "13233"
+              }
+            }, 
+            "name": "label", 
+            "type": "BYTES"
+          }
+        ], 
+        "numExamples": "13233"
+      }
+    }
+  ], 
+  "supervisedKeys": {
+    "input": "label", 
+    "output": "image"
+  }, 
+  "version": "0.1.0"
+}

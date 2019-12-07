@@ -5,6 +5,15 @@
 
 # tfds.as_numpy
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py">View
+source</a>
+
+<!-- Start diff -->
 Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
 ``` python
@@ -14,14 +23,17 @@ tfds.as_numpy(
 )
 ```
 
-
-
-Defined in [`core/dataset_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_utils.py).
-
 <!-- Placeholder for "Used in" -->
 
 `as_numpy` converts a possibly nested structure of `tf.data.Dataset`s
 and `tf.Tensor`s to iterables of NumPy arrays and NumPy arrays, respectively.
+
+Note that because TensorFlow has support for ragged tensors and NumPy has no
+equivalent representation,
+[`tf.RaggedTensor`s](https://www.tensorflow.org/api_docs/python/tf/RaggedTensor)
+are left as-is for the user to deal with them (e.g. using `to_list()`). In TF 1
+(i.e. graph mode), `tf.RaggedTensor`s are returned as
+`tf.ragged.RaggedTensorValue`s.
 
 #### Args:
 

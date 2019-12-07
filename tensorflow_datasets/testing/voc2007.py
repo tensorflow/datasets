@@ -29,7 +29,7 @@ from absl import flags
 
 import tensorflow as tf
 from tensorflow_datasets.core.utils import py_utils
-from tensorflow_datasets.image import voc
+from tensorflow_datasets.object_detection import voc
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 

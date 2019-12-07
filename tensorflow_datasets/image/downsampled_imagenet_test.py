@@ -19,10 +19,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-
-import tensorflow_datasets as tfds
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import downsampled_imagenet
+import tensorflow_datasets.public_api as tfds
 
 
 class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
@@ -41,7 +40,7 @@ class DownsampledImagenetTest(testing.DatasetBuilderTestCase):
 
 
 class DownsampledImagenetS3Test(DownsampledImagenetTest):
-  VERSION = "1.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

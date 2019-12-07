@@ -23,6 +23,7 @@ import json
 import os
 import tempfile
 import numpy as np
+import six
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_info
@@ -56,10 +57,10 @@ class RandomShapedImageGenerator(DummyDatasetSharedGenerator):
   def _generate_examples(self, range_):
     self.info.metadata["some_key"] = 123
 
-    for _ in range_:
+    for i in range_:
       height = np.random.randint(5, high=10)
       width = np.random.randint(5, high=10)
-      yield {
+      yield i, {
           "im":
               np.random.randint(
                   0, 255, size=(height, width, 3), dtype=np.uint8)
@@ -76,6 +77,7 @@ class DatasetInfoTest(testing.TestCase):
 
   @classmethod
   def tearDownClass(cls):
+    super(DatasetInfoTest, cls).tearDownClass()
     testing.rm_tmp_dir(cls._tfds_tmp_dir)
 
   def test_undefined_dir(self):
@@ -106,11 +108,11 @@ class DatasetInfoTest(testing.TestCase):
     self.assertTrue(len(split_dict), 2)
 
     # Assert on what they are
-    self.assertTrue("train" in split_dict)
-    self.assertTrue("test" in split_dict)
+    self.assertIn("train", split_dict)
+    self.assertIn("test", split_dict)
 
     # Assert that this is computed correctly.
-    self.assertEqual(70000, info.splits.total_num_examples)
+    self.assertEqual(40, info.splits.total_num_examples)
 
     self.assertEqual("image", info.supervised_keys[0])
     self.assertEqual("label", info.supervised_keys[1])
@@ -127,7 +129,8 @@ class DatasetInfoTest(testing.TestCase):
     mnist_builder = mnist.MNIST(
         data_dir=tempfile.mkdtemp(dir=self.get_temp_dir()))
 
-    info = dataset_info.DatasetInfo(builder=mnist_builder)
+    info = dataset_info.DatasetInfo(
+        builder=mnist_builder, features=mnist_builder.info.features)
     info.read_from_directory(_INFO_DIR)
 
     # Read the json file into a string.
@@ -152,13 +155,17 @@ class DatasetInfoTest(testing.TestCase):
     # Assert correct license was written.
     self.assertEqual(existing_json["redistributionInfo"]["license"], license_)
 
+    if six.PY3:
+      # Only test on Python 3 to avoid u'' formatting issues
+      self.assertEqual(repr(info), INFO_STR)
+
   def test_restore_after_modification(self):
     # Create a DatasetInfo
     info = dataset_info.DatasetInfo(
         builder=self._builder,
         description="A description",
         supervised_keys=("input", "output"),
-        urls=["some location"],
+        homepage="http://some-location",
         citation="some citation",
         redistribution_info={"license": "some license"}
     )
@@ -187,7 +194,7 @@ class DatasetInfoTest(testing.TestCase):
       restored_info = dataset_info.DatasetInfo(
           builder=self._builder,
           supervised_keys=("input (new)", "output (new)"),
-          urls=["some location (new)"],
+          homepage="http://some-location-new",
           citation="some citation (new)",
           redistribution_info={"license": "some license (new)"}
       )
@@ -208,7 +215,7 @@ class DatasetInfoTest(testing.TestCase):
       self.assertEqual(restored_info.description, "A description")
       self.assertEqual(
           restored_info.supervised_keys, ("input (new)", "output (new)"))
-      self.assertEqual(restored_info.urls, ["some location (new)"])
+      self.assertEqual(restored_info.homepage, "http://some-location-new")
       self.assertEqual(restored_info.citation, "some citation (new)")
       self.assertEqual(restored_info.redistribution_info.license,
                        "some license (new)")
@@ -292,8 +299,35 @@ class DatasetInfoTest(testing.TestCase):
     self.assertEqual("won't be updated", info.description)
 
     # These are dynamically computed, so will be updated.
-    self.assertEqual(70000, info.splits.total_num_examples)
+    self.assertEqual(40, info.splits.total_num_examples)
     self.assertEqual(2, len(info.as_proto.schema.feature))
+
+
+INFO_STR = """tfds.core.DatasetInfo(
+    name='mnist',
+    version=1.0.0,
+    description='The MNIST database of handwritten digits.',
+    homepage='https://storage.googleapis.com/cvdf-datasets/mnist/',
+    features=FeaturesDict({
+        'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    }),
+    total_num_examples=40,
+    splits={
+        'test': 20,
+        'train': 20,
+    },
+    supervised_keys=('image', 'label'),
+    citation=\"\"\"@article{lecun2010mnist,
+      title={MNIST handwritten digit database},
+      author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+      journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+      volume={2},
+      year={2010}
+    }\"\"\",
+    redistribution_info=license: "test license",
+)
+"""
 
 
 if __name__ == "__main__":

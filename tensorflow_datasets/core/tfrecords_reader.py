@@ -22,7 +22,6 @@ from __future__ import print_function
 import functools
 import itertools
 import math
-import os
 import re
 
 import attr
@@ -167,7 +166,7 @@ def _read_single_instruction(
 
   # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:
-    instruction_ds = instruction_ds.shuffle(len(tensor_inputs))
+    instruction_ds = instruction_ds.shuffle(len(tensor_inputs['filename']))
 
   dataset = instruction_ds.interleave(
       functools.partial(_get_dataset_from_filename,
@@ -324,6 +323,7 @@ class ReadInstruction(object):
 
   Examples of usage:
 
+  ```
   # The following lines are equivalent:
   ds = tfds.load('mnist', split='test[:33%]')
   ds = tfds.load('mnist', split=ReadInstruction.from_spec('test[:33%]'))
@@ -348,6 +348,8 @@ class ReadInstruction(object):
       'mnist',
       [RI('train', to=k, unit='%') + RI('train', from_=k+10, unit='%')
        for k in range(0, 100, 10)])
+  ```
+
   """
 
   def _init(self, relative_instructions):

@@ -71,11 +71,11 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(  # pylint: disable=g-complex-comprehension
           name=category,
           description="Images of category %s" % category,
-          version=tfds.core.Version("0.1.1"),
+          version=tfds.core.Version("0.1.1", {tfds.core.Experiment.S3: False}),
           supported_versions=[
-              tfds.core.Version("2.0.0", experiments={
-                  tfds.core.Experiment.S3: True}),
-              tfds.core.Version("0.1.1"),
+              tfds.core.Version(
+                  "3.0.0",
+                  "New split API (https://tensorflow.org/datasets/splits)"),
           ],
       ) for category in _CATEGORIES
   ]
@@ -88,7 +88,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(encoding_format="jpeg"),
         }),
-        urls=["https://www.yf.io/p/lsun"],
+        homepage="https://www.yf.io/p/lsun",
         citation=_CITATION,
     )
 
@@ -120,7 +120,4 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
           os.path.join(extracted_dir, file_path, "data.mdb"))
       for i, (_, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
         record = {"image": io.BytesIO(jpeg_image)}
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield i, record
-        else:
-          yield record
+        yield i, record

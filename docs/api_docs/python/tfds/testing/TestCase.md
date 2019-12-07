@@ -58,6 +58,7 @@
 <meta itemprop="property" content="assertNear"/>
 <meta itemprop="property" content="assertNoCommonElements"/>
 <meta itemprop="property" content="assertNotAllClose"/>
+<meta itemprop="property" content="assertNotAllEqual"/>
 <meta itemprop="property" content="assertNotAlmostEqual"/>
 <meta itemprop="property" content="assertNotAlmostEquals"/>
 <meta itemprop="property" content="assertNotEmpty"/>
@@ -103,6 +104,7 @@
 <meta itemprop="property" content="debug"/>
 <meta itemprop="property" content="defaultTestResult"/>
 <meta itemprop="property" content="doCleanups"/>
+<meta itemprop="property" content="enter_context"/>
 <meta itemprop="property" content="evaluate"/>
 <meta itemprop="property" content="fail"/>
 <meta itemprop="property" content="failIf"/>
@@ -136,11 +138,18 @@
 
 # tfds.testing.TestCase
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ## Class `TestCase`
 
+<!-- Start diff -->
 Base TestCase to be used for all tests.
-
-Defined in [`testing/test_case.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -768,8 +777,9 @@ Asserts that an object has zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertEndsWith"><code>assertEndsWith</code></h3>
 
@@ -974,9 +984,10 @@ Asserts that an object has the expected length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`expected_len`</b>: The expected length of the container.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`expected_len`</b>: The expected length of the container.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertLess"><code>assertLess</code></h3>
 
@@ -1116,6 +1127,23 @@ Assert that two numpy arrays, or Tensors, do not have near values.
 
 * <b>`AssertionError`</b>: If `a` and `b` are unexpectedly close at all elements.
 
+<h3 id="assertNotAllEqual"><code>assertNotAllEqual</code></h3>
+
+```python
+assertNotAllEqual(
+    *args,
+    **kwds
+)
+```
+
+Asserts that two numpy arrays or Tensors do not have the same values.
+
+#### Args:
+
+*   <b>`a`</b>: the expected numpy ndarray or anything can be converted to one.
+*   <b>`b`</b>: the actual numpy ndarray or anything can be converted to one.
+*   <b>`msg`</b>: Optional message to report on failure.
+
 <h3 id="assertNotAlmostEqual"><code>assertNotAlmostEqual</code></h3>
 
 ``` python
@@ -1173,8 +1201,9 @@ Asserts that an object has non-zero length.
 
 #### Args:
 
-* <b>`container`</b>: Anything that implements the collections.Sized interface.
-* <b>`msg`</b>: Optional message to report on failure.
+*   <b>`container`</b>: Anything that implements the collections.abc.Sized
+    interface.
+*   <b>`msg`</b>: Optional message to report on failure.
 
 <h3 id="assertNotEndsWith"><code>assertNotEndsWith</code></h3>
 
@@ -1423,6 +1452,9 @@ self.failureException if callable_obj does not raise a matching exception.
 
 <h3 id="assertRaisesWithPredicateMatch"><code>assertRaisesWithPredicateMatch</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ``` python
 assertRaisesWithPredicateMatch(
     err_type,
@@ -1597,7 +1629,7 @@ comparing to zero, or by comparing that the difference between each value
 in the two sequences is more than the given delta.
 
 Note that decimal places (from zero) are usually not the same as significant
-digits (measured from the most signficant digit).
+digits (measured from the most significant digit).
 
 If the two sequences compare equal then they will automatically compare
 almost equal.
@@ -2004,10 +2036,11 @@ creating temporary files for test purposes, as well as makes it easier
 to setup files, their data, read them back, and inspect them when
 a test fails.
 
-NOTE: This will zero-out the file. This ensures there is no pre-existing
-state.
+NOTE: This will zero-out the file. This ensures there is no pre-existing state.
+NOTE: If the file already exists, it will be made writable and overwritten.
 
-See also: `create_tempdir()` for creating temporary directories.
+See also: `create_tempdir()` for creating temporary directories, and
+`_TempDir.create_file` for creating files within a temporary directory.
 
 #### Args:
 
@@ -2053,6 +2086,31 @@ doCleanups()
 ```
 
 Execute all cleanup functions. Normally called for you after tearDown.
+
+<h3 id="enter_context"><code>enter_context</code></h3>
+
+```python
+enter_context(manager)
+```
+
+Returns the CM's value after registering it with the exit stack.
+
+Entering a context pushes it onto a stack of contexts. The context is exited
+when the test completes. Contexts are are exited in the reverse order of
+entering. They will always be exited, regardless of test failure/success. The
+context stack is specific to the test being run.
+
+This is useful to eliminate per-test boilerplate when context managers are used.
+For example, instead of decorating every test with `@mock.patch`, simply do
+`self.foo = self.enter_context(mock.patch(...))' in`setUp()`.
+
+NOTE: The context managers will always be exited without any error information.
+This is an unfortunate implementation detail due to some internals of how
+unittest runs tests.
+
+#### Args:
+
+*   <b>`manager`</b>: The context manager to enter.
 
 <h3 id="evaluate"><code>evaluate</code></h3>
 
@@ -2271,11 +2329,17 @@ the graph building and execution code in a test case.
 
 <h3 id="setUp"><code>setUp</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
+
 ``` python
 setUp()
 ```
 
 <h3 id="setUpClass"><code>setUpClass</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_case.py">View
+source</a>
 
 ``` python
 @classmethod

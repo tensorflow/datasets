@@ -7,12 +7,18 @@
 
 # tfds.core.Metadata
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
+
 ## Class `Metadata`
 
+<!-- Start diff -->
 Abstract base class for DatasetInfo metadata container.
-
-Defined in
-[`core/dataset_info.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py).
 
 <!-- Placeholder for "Used in" -->
 
@@ -31,6 +37,9 @@ file.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
+
 ```python
 load_metadata(data_dir)
 ```
@@ -38,6 +47,9 @@ load_metadata(data_dir)
 Restore the metadata.
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
+source</a>
 
 ```python
 save_metadata(data_dir)

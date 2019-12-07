@@ -5,16 +5,23 @@
 
 # Module: tfds.core
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py">View
+source</a>
+
 API to define datasets.
 
-Defined in [`core/__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/__init__.py).
-
-<!-- Placeholder for "Used in" -->
 
 
 ## Classes
 
 [`class BeamBasedBuilder`](../tfds/core/BeamBasedBuilder.md): Beam based Builder.
+
+[`class BeamMetadataDict`](../tfds/core/BeamMetadataDict.md): A
+<a href="../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a> object
+supporting Beam-generated datasets.
 
 [`class BuilderConfig`](../tfds/core/BuilderConfig.md): Base class for `DatasetBuilder` data configuration.
 
@@ -36,6 +43,9 @@ that acts as a `dict`.
 
 [`class NamedSplit`](../tfds/core/NamedSplit.md): Descriptor corresponding to a named split (train, test, ...).
 
+[`class ReadInstruction`](../tfds/core/ReadInstruction.md): Reading instruction
+for a dataset.
+
 [`class SplitBase`](../tfds/core/SplitBase.md): Abstract base class for Split compositionality.
 
 [`class SplitDict`](../tfds/core/SplitDict.md): Split info object.
@@ -50,6 +60,9 @@ that acts as a `dict`.
 dependencies.
 
 ## Functions
+
+[`disallow_positional_args(...)`](../tfds/core/disallow_positional_args.md):
+Requires function to be called using keyword arguments.
 
 [`get_tfds_path(...)`](../tfds/core/get_tfds_path.md): Returns absolute path to file given path relative to tfds root.
 

@@ -35,7 +35,7 @@ class LsunTest(testing.DatasetBuilderTestCase):
 
 
 class LsunS3Test(LsunTest):
-  VERSION = "2.0.0"
+  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":

@@ -1,0 +1,107 @@
+{
+  "description": "Dataset with images of 2 resolutions (see config name for information on the resolution).\nIt is used for density estimation and generative modeling experiments.\n", 
+  "location": {
+    "urls": [
+      "http://image-net.org/small/download.php"
+    ]
+  }, 
+  "name": "downsampled_imagenet", 
+  "schema": {
+    "feature": [
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "-1"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "4274493440", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "10", 
+      "shardLengths": [
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40035", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40035", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40035", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036", 
+        "40036"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1281149"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "1281149"
+      }
+    }, 
+    {
+      "name": "validation", 
+      "numShards": "1", 
+      "shardLengths": [
+        "49999"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "49999"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "49999"
+      }
+    }
+  ], 
+  "version": "1.0.0"
+}

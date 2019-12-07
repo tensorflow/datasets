@@ -135,6 +135,50 @@ class DatasetAsNumPyTest(testing.TestCase):
     # and target may not match
     self.assertAllEqual(ds["a"], ds["b"])
 
+  @testing.run_in_graph_and_eager_modes()
+  def test_ragged_tensors(self):
+    rt = tf.ragged.constant([
+        [1, 2, 3],
+        [],
+        [4, 5],
+    ])
+    rt = dataset_utils.as_numpy(rt)
+
+    if not tf.executing_eagerly():
+      # Output of `sess.run(rt)` is a `RaggedTensorValue` object
+      self.assertIsInstance(rt, tf.compat.v1.ragged.RaggedTensorValue)
+    else:
+      self.assertIsInstance(rt, tf.RaggedTensor)
+
+    self.assertAllEqual(rt, tf.ragged.constant([
+        [1, 2, 3],
+        [],
+        [4, 5],
+    ]))
+
+  @testing.run_in_graph_and_eager_modes()
+  def test_ragged_tensors_ds(self):
+    def _gen_ragged_tensors():
+      # Yield the (flat_values, rowids)
+      yield ([0, 1, 2, 3], [0, 0, 0, 2])  # ex0
+      yield ([], [])  # ex1
+      yield ([4, 5, 6], [0, 1, 1])  # ex2
+    ds = tf.data.Dataset.from_generator(
+        _gen_ragged_tensors,
+        output_types=(tf.int64, tf.int64),
+        output_shapes=((None,), (None,))
+    )
+    ds = ds.map(tf.RaggedTensor.from_value_rowids)
+
+    rt0, rt1, rt2 = list(dataset_utils.as_numpy(ds))
+    self.assertAllEqual(rt0, [
+        [0, 1, 2],
+        [],
+        [3,],
+    ])
+    self.assertAllEqual(rt1, [])
+    self.assertAllEqual(rt2, [[4], [5, 6]])
+
 
 class DatasetOffsetTest(testing.TestCase):
   """Test that the offset functions are working properly."""

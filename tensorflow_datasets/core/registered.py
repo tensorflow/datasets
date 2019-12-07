@@ -31,6 +31,7 @@ from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import py_utils
 
 
 FLAGS = flags.FLAGS
@@ -111,12 +112,14 @@ class RegisteredDataset(abc.ABCMeta):
     cls = super(RegisteredDataset, mcs).__new__(
         mcs, cls_name, bases, class_dict)
 
-    if name in _DATASET_REGISTRY:
+    if py_utils.is_notebook():  # On Colab/Jupyter, we allow overwriting
+      pass
+    elif name in _DATASET_REGISTRY:
       raise ValueError("Dataset with name %s already registered." % name)
-    if name in _IN_DEVELOPMENT_REGISTRY:
+    elif name in _IN_DEVELOPMENT_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as in development." % name)
-    if name in _ABSTRACT_DATASET_REGISTRY:
+    elif name in _ABSTRACT_DATASET_REGISTRY:
       raise ValueError(
           "Dataset with name %s already registered as abstract." % name)
 
@@ -178,13 +181,16 @@ def load(name,
          data_dir=None,
          batch_size=None,
          in_memory=None,
+         shuffle_files=False,
          download=True,
          as_supervised=False,
+         decoders=None,
          with_info=False,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
          as_dataset_kwargs=None,
          try_gcs=False):
+  # pylint: disable=line-too-long
   """Loads the named dataset into a `tf.data.Dataset`.
 
   If `split=None` (the default), returns all splits for the dataset. Otherwise,
@@ -236,6 +242,8 @@ def load(name,
       increases iteration speeds. Note that if `True` and the dataset has
       unknown dimensions, the features will be padded to the maximum
       size across the dataset.
+    shuffle_files: `bool`, whether to shuffle the input files.
+      Defaults to `False`.
     download: `bool` (optional), whether to call
       `tfds.core.DatasetBuilder.download_and_prepare`
       before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is
@@ -246,6 +254,11 @@ def load(name,
       `builder.info.supervised_keys`. If `False`, the default,
       the returned `tf.data.Dataset` will have a dictionary with all the
       features.
+    decoders: Nested dict of `Decoder` objects which allow to customize the
+      decoding. The structure should match the feature structure, but only
+      customized feature keys need to be present. See
+      [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+      for more info.
     with_info: `bool`, if True, tfds.load will return the tuple
       (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
       with the builder.
@@ -257,10 +270,7 @@ def load(name,
       to control where to download and extract the cached data. If not set,
       cache_dir and manual_dir will automatically be deduced from data_dir.
     as_dataset_kwargs: `dict` (optional), keyword arguments passed to
-      `tfds.core.DatasetBuilder.as_dataset`. `split` will be passed through by
-      default. Example: `{'shuffle_files': True}`.
-      Note that shuffle_files is False by default unless
-      `split == tfds.Split.TRAIN`.
+      `tfds.core.DatasetBuilder.as_dataset`.
     try_gcs: `bool`, if True, tfds.load will see if the dataset exists on
       the public GCS bucket before building it locally.
 
@@ -274,6 +284,8 @@ def load(name,
       object documents the entire dataset, regardless of the `split` requested.
       Split-specific information is available in `ds_info.splits`.
   """
+  # pylint: enable=line-too-long
+
   name, name_builder_kwargs = _dataset_name_and_kwargs_from_name_str(name)
   name_builder_kwargs.update(builder_kwargs or {})
   builder_kwargs = name_builder_kwargs
@@ -292,10 +304,12 @@ def load(name,
   if as_dataset_kwargs is None:
     as_dataset_kwargs = {}
   as_dataset_kwargs = dict(as_dataset_kwargs)
-  as_dataset_kwargs["split"] = split
-  as_dataset_kwargs["as_supervised"] = as_supervised
-  as_dataset_kwargs["batch_size"] = batch_size
-  as_dataset_kwargs["in_memory"] = in_memory
+  as_dataset_kwargs.setdefault("split", split)
+  as_dataset_kwargs.setdefault("as_supervised", as_supervised)
+  as_dataset_kwargs.setdefault("batch_size", batch_size)
+  as_dataset_kwargs.setdefault("decoders", decoders)
+  as_dataset_kwargs.setdefault("in_memory", in_memory)
+  as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:

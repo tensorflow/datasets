@@ -48,13 +48,12 @@ _DATA_URL = "https://www.robots.ox.ac.uk/~vgg/data/dtd/download/dtd-r1.0.1.tar.g
 class Dtd(tfds.core.GeneratorBasedBuilder):
   """Describable Textures Dataset (DTD)."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     names_file = tfds.core.get_tfds_path(
@@ -67,7 +66,7 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(names_file=names_file),
         }),
-        urls=[_URL],
+        homepage=_URL,
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
@@ -104,7 +103,4 @@ class Dtd(tfds.core.GeneratorBasedBuilder):
             "image": os.path.join(data_path, "dtd", "images", fname),
             "label": label,
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield fname, record
-        else:
-          yield record
+        yield fname, record

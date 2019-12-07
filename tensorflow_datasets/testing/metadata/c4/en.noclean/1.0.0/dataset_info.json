@@ -1,0 +1,19 @@
+{
+  "citation": "\n@article{2019t5,\n  author = {Colin Raffel and Noam Shazeer and Adam Roberts and Katherine Lee and Sharan Narang and Michael Matena and Yanqi Zhou and Wei Li and Peter Liu},\n  title = {Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer},\n  journal = {arXiv e-prints},\n  year = {2019}\n}\n",
+  "description": "A colossal, cleaned version of Common Crawl's web crawl corpus.",
+  "location": {
+    "urls": [
+      "https://github.com/google-research/text-to-text-transfer-tranformer",
+      "https://commoncrawl.org"
+    ]
+  },
+  "name": "c4",
+  "sizeInBytes": "7650623279985",
+  "splits": [
+    {
+      "name": "train",
+      "numShards": "10000"
+    }
+  ],
+  "version": "1.0.0"
+}

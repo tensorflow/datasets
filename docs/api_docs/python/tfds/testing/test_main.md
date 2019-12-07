@@ -5,14 +5,19 @@
 
 # tfds.testing.test_main
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
+<!-- Start diff -->
 Entrypoint for tests.
 
 ``` python
 tfds.testing.test_main()
 ```
-
-
-
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
 <!-- Placeholder for "Used in" -->

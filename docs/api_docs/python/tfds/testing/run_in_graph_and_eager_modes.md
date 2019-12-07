@@ -5,6 +5,15 @@
 
 # tfds.testing.run_in_graph_and_eager_modes
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
+source</a>
+
+<!-- Start diff -->
 Execute the decorated test in both graph mode and eager mode.
 
 ``` python
@@ -14,10 +23,6 @@ tfds.testing.run_in_graph_and_eager_modes(
     use_gpu=True
 )
 ```
-
-
-
-Defined in [`testing/test_utils.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py).
 
 <!-- Placeholder for "Used in" -->
 

@@ -18,6 +18,9 @@
 
 import os
 
+# Github base URL
+SRC_BASE_URL = "https://github.com/tensorflow/datasets/tree/master/"
+
 # Directory where to store processed datasets.
 DATA_DIR = os.path.join("~", "tensorflow_datasets")
 
@@ -25,4 +28,5 @@ GCS_DATA_DIR = "gs://tfds-data/datasets"
 
 # Suffix of files / directories which aren't finished downloading / extracting.
 INCOMPLETE_SUFFIX = ".incomplete"
+
 

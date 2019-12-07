@@ -24,6 +24,7 @@ import csv
 import io
 import os
 
+from absl import logging
 import numpy as np
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -39,23 +40,34 @@ _CITATION = """\
 }
 """
 _URL_TEST_LABELS = "https://storage.googleapis.com/kaggle-forum-message-attachments/90528/2877/retinopathy_solution.csv"
+_BTGRAHAM_DESCRIPTION_PATTERN = (
+    "Images have been preprocessed as the winner of the Kaggle competition did "
+    "in 2015: first they are resized so that the radius of an eyeball is "
+    "{} pixels, then they are cropped to 90% of the radius, and finally they "
+    "are encoded with 72 JPEG quality.")
 
 
 class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
   """BuilderConfig for DiabeticRetinopathyDetection."""
 
-  def __init__(self, target_pixels=None, **kwargs):
+  def __init__(self, version, target_pixels=None, **kwargs):
     """BuilderConfig for DiabeticRetinopathyDetection.
 
     Args:
+      version: str version, defined with {S3: False} experiment.
       target_pixels: If given, rescale the images so that the total number of
         pixels is roughly this value.
       **kwargs: keyword arguments forward to super.
     """
-    kwargs["supported_versions"] = [
-        tfds.core.Version("3.0.0", experiments={tfds.core.Experiment.S3: True}),
-    ]
-    super(DiabeticRetinopathyDetectionConfig, self).__init__(**kwargs)
+    super(DiabeticRetinopathyDetectionConfig, self).__init__(
+        version=tfds.core.Version(
+            version, experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[
+            tfds.core.Version(
+                "3.0.0",
+                "New split API (https://tensorflow.org/datasets/splits)"),
+        ],
+        **kwargs)
     self._target_pixels = target_pixels
 
   @property
@@ -65,6 +77,14 @@ class DiabeticRetinopathyDetectionConfig(tfds.core.BuilderConfig):
 
 class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
   """Diabetic retinopathy detection."""
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You have to download this dataset from Kaggle.
+  https://www.kaggle.com/c/diabetic-retinopathy-detection/data
+  After downloading, unpack the test.zip file into test/ directory in manual_dir
+  and sample.zip to sample/. Also unpack the sampleSubmissions.csv and
+  trainLabels.csv.
+  """
 
   BUILDER_CONFIGS = [
       DiabeticRetinopathyDetectionConfig(
@@ -81,6 +101,11 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
           version="2.1.0",
           description="Images have roughly 250,000 pixels, at 72 quality.",
           target_pixels=250000),
+      DiabeticRetinopathyDetectionConfig(
+          name="btgraham-300",
+          version="1.0.0",
+          description=_BTGRAHAM_DESCRIPTION_PATTERN.format(300),
+          target_pixels=300),
   ]
 
   def _info(self):
@@ -94,7 +119,7 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
             # From 0 (no DR - saine) to 4 (Proliferative DR). -1 means no label.
             "label": tfds.features.ClassLabel(num_classes=5),
         }),
-        urls=["https://www.kaggle.com/c/diabetic-retinopathy-detection/data"],
+        homepage="https://www.kaggle.com/c/diabetic-retinopathy-detection/data",
         citation=_CITATION,
     )
 
@@ -103,8 +128,8 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
     # TODO(pierrot): implement extraction of multiple files archives.
     path = dl_manager.manual_dir
     test_labels_path = dl_manager.download(_URL_TEST_LABELS)
-    if os.path.isdir(test_labels_path):
-       # While testing: download() returns the dir containing the tests files.
+    if tf.io.gfile.isdir(test_labels_path):
+      # While testing: download() returns the dir containing the tests files.
       test_labels_path = os.path.join(test_labels_path,
                                       "retinopathy_solution.csv")
     return [
@@ -171,18 +196,26 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
               for fname in tf.io.gfile.listdir(images_dir_path)
               if fname.endswith(".jpeg")]
     for name, label in data:
+      image_filepath = "%s/%s.jpeg" % (images_dir_path, name)
       record = {
           "name": name,
-          "image": _resize_image_if_necessary(
-              tf.io.gfile.GFile("%s/%s.jpeg" % (images_dir_path, name),
-                                mode="rb"),
-              target_pixels=self.builder_config.target_pixels),
+          "image": self._process_image(image_filepath),
           "label": label,
       }
-      if self.version.implements(tfds.core.Experiment.S3):
-        yield name, record
+      yield name, record
+
+  def _process_image(self, filepath):
+    with tf.io.gfile.GFile(filepath, mode="rb") as image_fobj:
+      if self.builder_config.name.startswith("btgraham"):
+        return _btgraham_processing(
+            image_fobj=image_fobj,
+            filepath=filepath,
+            target_pixels=self.builder_config.target_pixels,
+            crop_to_radius=True)
       else:
-        yield record
+        return _resize_image_if_necessary(
+            image_fobj=image_fobj,
+            target_pixels=self.builder_config.target_pixels)
 
 
 def _resize_image_if_necessary(image_fobj, target_pixels=None):
@@ -211,3 +244,71 @@ def _resize_image_if_necessary(image_fobj, target_pixels=None):
   # Encode the image with quality=72 and store it in a BytesIO object.
   _, buff = cv2.imencode(".jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 72])
   return io.BytesIO(buff.tostring())
+
+
+def _btgraham_processing(
+    image_fobj, filepath, target_pixels, crop_to_radius=False):
+  """Process an image as the winner of the 2015 Kaggle competition.
+
+  Args:
+    image_fobj: File object containing the original image.
+    filepath: Filepath of the image, for logging purposes only.
+    target_pixels: The number of target pixels for the radius of the image.
+    crop_to_radius: If True, crop the borders of the image to remove gray areas.
+
+  Returns:
+    A file object.
+  """
+  cv2 = tfds.core.lazy_imports.cv2
+  # Decode image using OpenCV2.
+  image = cv2.imdecode(
+      np.fromstring(image_fobj.read(), dtype=np.uint8), flags=3)
+  # Process the image.
+  image = _scale_radius_size(image, filepath, target_radius_size=target_pixels)
+  image = _subtract_local_average(image, target_radius_size=target_pixels)
+  image = _mask_and_crop_to_radius(
+      image, target_radius_size=target_pixels, radius_mask_ratio=0.9,
+      crop_to_radius=crop_to_radius)
+  # Encode the image with quality=72 and store it in a BytesIO object.
+  _, buff = cv2.imencode(".jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 72])
+  return io.BytesIO(buff.tostring())
+
+
+def _scale_radius_size(image, filepath, target_radius_size):
+  """Scale the input image so that the radius of the eyeball is the given."""
+  cv2 = tfds.core.lazy_imports.cv2
+  x = image[image.shape[0] // 2, :, :].sum(axis=1)
+  r = (x > x.mean() / 10.0).sum() / 2.0
+  if r < 1.0:
+    # Some images in the dataset are corrupted, causing the radius heuristic to
+    # fail. In these cases, just assume that the radius is the height of the
+    # original image.
+    logging.info("Radius of image \"%s\" could not be determined.", filepath)
+    r = image.shape[0] / 2.0
+  s = target_radius_size / r
+  return cv2.resize(image, dsize=None, fx=s, fy=s)
+
+
+def _subtract_local_average(image, target_radius_size):
+  cv2 = tfds.core.lazy_imports.cv2
+  image_blurred = cv2.GaussianBlur(image, (0, 0), target_radius_size / 30)
+  image = cv2.addWeighted(image, 4, image_blurred, -4, 128)
+  return image
+
+
+def _mask_and_crop_to_radius(
+    image, target_radius_size, radius_mask_ratio=0.9, crop_to_radius=False):
+  """Mask and crop image to the given radius ratio."""
+  cv2 = tfds.core.lazy_imports.cv2
+  mask = np.zeros(image.shape)
+  center = (image.shape[1]//2, image.shape[0]//2)
+  radius = int(target_radius_size * radius_mask_ratio)
+  cv2.circle(mask, center=center, radius=radius, color=(1, 1, 1), thickness=-1)
+  image = image * mask + (1 - mask) * 128
+  if crop_to_radius:
+    x_max = min(image.shape[1] // 2 + radius, image.shape[1])
+    x_min = max(image.shape[1] // 2 - radius, 0)
+    y_max = min(image.shape[0] // 2 + radius, image.shape[0])
+    y_min = max(image.shape[0] // 2 - radius, 0)
+    image = image[y_min:y_max, x_min:x_max, :]
+  return image

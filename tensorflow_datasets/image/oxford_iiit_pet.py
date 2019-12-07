@@ -46,13 +46,13 @@ _BASE_URL = "http://www.robots.ox.ac.uk/~vgg/data/pets/data"
 class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
   """Oxford-IIIT pet dataset."""
 
-  VERSION = tfds.core.Version("1.1.0")
+  VERSION = tfds.core.Version("1.1.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.1.0"),
+      tfds.core.Version(
+          "3.0.0", ("New split API (https://tensorflow.org/datasets/splits);"
+                    "additon of segmentation_mask feature.")),
   ]
-  # Version history:
-  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -62,9 +62,10 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(num_classes=37),
             "file_name": tfds.features.Text(),
+            "segmentation_mask": tfds.features.Image(shape=(None, None, 1))
         }),
         supervised_keys=("image", "label"),
-        urls=["http://www.robots.ox.ac.uk/~vgg/data/pets/"],
+        homepage="http://www.robots.ox.ac.uk/~vgg/data/pets/",
         citation=_CITATION,
     )
 
@@ -75,10 +76,10 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
     # archives format is uncompressed tar.
     dl_paths = dl_manager.download_and_extract({
         "images": tfds.download.Resource(
-            url=os.path.join(_BASE_URL, "images.tar.gz"),
+            url=_BASE_URL + "/images.tar.gz",
             extract_method=tfds.download.ExtractMethod.TAR),
         "annotations": tfds.download.Resource(
-            url=os.path.join(_BASE_URL, "annotations.tar.gz"),
+            url=_BASE_URL + "/annotations.tar.gz",
             extract_method=tfds.download.ExtractMethod.TAR)
     })
 
@@ -91,6 +92,7 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         num_shards=_NUM_SHARDS,
         gen_kwargs={
             "images_dir_path": images_path_dir,
+            "annotations_dir_path": annotations_path_dir,
             "images_list_file": os.path.join(annotations_path_dir,
                                              "trainval.txt"),
             },
@@ -100,6 +102,7 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
         num_shards=_NUM_SHARDS,
         gen_kwargs={
             "images_dir_path": images_path_dir,
+            "annotations_dir_path": annotations_path_dir,
             "images_list_file": os.path.join(annotations_path_dir,
                                              "test.txt")
             },
@@ -107,20 +110,22 @@ class OxfordIIITPet(tfds.core.GeneratorBasedBuilder):
 
     return [train_split, test_split]
 
-  def _generate_examples(self, images_dir_path, images_list_file):
+  def _generate_examples(self, images_dir_path, annotations_dir_path,
+                         images_list_file):
     with tf.io.gfile.GFile(images_list_file, "r") as images_list:
       for line in images_list:
         image_name, label, _, _ = line.strip().split(" ")
 
+        trimaps_dir_path = os.path.join(annotations_dir_path, "trimaps")
+
+        trimap_name = image_name + ".png"
         image_name += ".jpg"
         label = int(label) - 1
 
         record = {
             "image": os.path.join(images_dir_path, image_name),
             "label": int(label),
-            "file_name": image_name
+            "file_name": image_name,
+            "segmentation_mask": os.path.join(trimaps_dir_path, trimap_name)
         }
-        if self.version.implements(tfds.core.Experiment.S3):
-          yield image_name, record
-        else:
-          yield record
+        yield image_name, record

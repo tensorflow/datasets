@@ -1,16 +1,19 @@
 <div itemscope itemtype="http://developers.google.com/ReferenceObject">
 <meta itemprop="name" content="tfds" />
 <meta itemprop="path" content="Stable" />
+<meta itemprop="property" content="__version__"/>
 </div>
 
 # Module: tfds
 
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py">View
+source</a>
+
 `tensorflow_datasets` (<a href="./tfds.md"><code>tfds</code></a>) defines a
 collection of datasets ready-to-use with TensorFlow.
-
-Defined in [`__init__.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/__init__.py).
-
-<!-- Placeholder for "Used in" -->
 
 Each dataset is defined as a <a href="./tfds/core/DatasetBuilder.md"><code>tfds.core.DatasetBuilder</code></a>, which encapsulates
 the logic to download the dataset and construct an input pipeline, as well as
@@ -25,13 +28,15 @@ The main library entrypoints are:
 #### Documentation:
 
 *   These API docs
-*   [Available datasets](https://github.com/tensorflow/datasets/tree/master/docs/datasets.md)
+*   [Available datasets](https://www.tensorflow.org/datasets/catalog/overview)
 *   [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
-*   [Add a dataset](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+*   [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
 
 ## Modules
 
 [`core`](./tfds/core.md) module: API to define datasets.
+
+[`decode`](./tfds/decode.md) module: Decoder public API.
 
 [`download`](./tfds/download.md) module: <a href="./tfds/download/DownloadManager.md"><code>tfds.download.DownloadManager</code></a> API.
 
@@ -68,3 +73,9 @@ available on the GCS bucket gs://tfds-data/datasets.
 
 [`load(...)`](./tfds/load.md): Loads the named dataset into a `tf.data.Dataset`.
 
+[`show_examples(...)`](./tfds/show_examples.md): Visualize images (and labels)
+from an image classification dataset.
+
+## Other Members
+
+*   `__version__ = '1.3.1'` <a id="__version__"></a>

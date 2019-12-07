@@ -27,7 +27,7 @@ landing_page:
         import tensorflow_datasets as tfds
 
         # tfds works in both Eager and Graph modes
-        tf.enable_eager_execution()
+        tf.compat.v1.enable_eager_execution()
 
         # See available datasets
         print(tfds.list_builders())

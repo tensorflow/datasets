@@ -1,0 +1,57 @@
+{
+  "description": "This dataset contains 14,344,391 passwords that were leaked or stolen from from various sites. The author of this dataset states that \"I'm hosting them because it seems like nobody else does (hopefully it isn't because hosting them is illegal :)). Naturally, I'm not the one who stole these; I simply found them online, removed any names/email addresses/etc.\". This dataset is used to train Machine Learning models for password guessing and cracking.\n", 
+  "location": {
+    "urls": [
+      "https://wiki.skullsecurity.org/Passwords"
+    ]
+  }, 
+  "name": "rock_you", 
+  "schema": {
+    "feature": [
+      {
+        "name": "password", 
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "139921497", 
+  "splits": [
+    {
+      "name": "train", 
+      "numShards": "1", 
+      "shardLengths": [
+        "1793049", 
+        "1793049", 
+        "1793049", 
+        "1793049", 
+        "1793048", 
+        "1793049", 
+        "1793049", 
+        "1793049"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "name": "password", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "14344391"
+              }, 
+              "max": 254.0, 
+              "min": 4.0
+            }
+          }
+        ], 
+        "numExamples": "14344391"
+      }
+    }
+  ], 
+  "version": "0.1.0"
+}

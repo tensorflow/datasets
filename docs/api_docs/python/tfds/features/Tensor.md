@@ -4,7 +4,9 @@
 <meta itemprop="property" content="dtype"/>
 <meta itemprop="property" content="shape"/>
 <meta itemprop="property" content="__init__"/>
+<meta itemprop="property" content="decode_batch_example"/>
 <meta itemprop="property" content="decode_example"/>
+<meta itemprop="property" content="decode_ragged_example"/>
 <meta itemprop="property" content="encode_example"/>
 <meta itemprop="property" content="get_serialized_info"/>
 <meta itemprop="property" content="get_tensor_info"/>
@@ -14,20 +16,28 @@
 
 # tfds.features.Tensor
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ## Class `Tensor`
 
+<!-- Start diff -->
 `FeatureConnector` for generic data of arbitrary shape and type.
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)
-
-
-
-Defined in [`core/features/feature.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py).
 
 <!-- Placeholder for "Used in" -->
 
 
 <h2 id="__init__"><code>__init__</code></h2>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 __init__(
@@ -50,7 +60,21 @@ Return the shape (or dict of shape) of this FeatureConnector.
 
 ## Methods
 
+<h3 id="decode_batch_example"><code>decode_batch_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_batch_example(example_data)
+```
+
+See base class for details.
+
 <h3 id="decode_example"><code>decode_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 decode_example(tfexample_data)
@@ -73,7 +97,21 @@ graph (in `tf.data.Dataset.map(features.decode_example)`).
 *   <b>`tensor_data`</b>: Tensor or dictionary of tensor, output of the
     tf.data.Dataset object
 
+<h3 id="decode_ragged_example"><code>decode_ragged_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
+```python
+decode_ragged_example(example_data)
+```
+
+See base class for details.
+
 <h3 id="encode_example"><code>encode_example</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 encode_example(example_data)
@@ -82,6 +120,9 @@ encode_example(example_data)
 See base class for details.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 get_serialized_info()
@@ -120,6 +161,9 @@ If not defined, the retuned values are automatically deduced from the
 
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
+
 ``` python
 get_tensor_info()
 ```
@@ -127,6 +171,9 @@ get_tensor_info()
 See base class for details.
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 load_metadata(
@@ -148,6 +195,9 @@ will restore the feature metadata from the saved file.
     key)
 
 <h3 id="save_metadata"><code>save_metadata</code></h3>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
+source</a>
 
 ``` python
 save_metadata(

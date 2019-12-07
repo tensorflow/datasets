@@ -1,0 +1,72 @@
+{
+  "citation": "@article{kather2016multi,\n  title={Multi-class texture analysis in colorectal cancer histology},\n  author={Kather, Jakob Nikolas and Weis, Cleo-Aron and Bianconi, Francesco and Melchers, Susanne M and Schad, Lothar R and Gaiser, Timo and Marx, Alexander and Z{\"o}llner, Frank Gerrit},\n  journal={Scientific reports},\n  volume={6},\n  pages={27988},\n  year={2016},\n  publisher={Nature Publishing Group}\n}\n", 
+  "description": "10 large 5000 x 5000 textured colorectal cancer histology images", 
+  "location": {
+    "urls": [
+      "https://zenodo.org/record/53169#.XGZemKwzbmG"
+    ]
+  }, 
+  "name": "colorectal_histology_large", 
+  "schema": {
+    "feature": [
+      {
+        "name": "filename", 
+        "type": "BYTES"
+      }, 
+      {
+        "name": "image", 
+        "shape": {
+          "dim": [
+            {
+              "size": "5000"
+            }, 
+            {
+              "size": "5000"
+            }, 
+            {
+              "size": "3"
+            }
+          ]
+        }, 
+        "type": "INT"
+      }
+    ]
+  }, 
+  "sizeInBytes": "742020106", 
+  "splits": [
+    {
+      "name": "test", 
+      "numShards": "1", 
+      "shardLengths": [
+        "3", 
+        "2", 
+        "3", 
+        "2"
+      ], 
+      "statistics": {
+        "features": [
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }
+            }, 
+            "name": "filename", 
+            "type": "BYTES"
+          }, 
+          {
+            "name": "image", 
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "10"
+              }, 
+              "max": 255.0
+            }
+          }
+        ], 
+        "numExamples": "10"
+      }
+    }
+  ], 
+  "version": "1.0.0"
+}

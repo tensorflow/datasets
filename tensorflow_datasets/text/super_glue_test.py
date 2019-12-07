@@ -29,10 +29,19 @@ _BASE_DIR = os.path.join(
     "testing/test_data/fake_examples/super_glue")
 
 
+class SuperGlueBoolQTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["boolq"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "train": 3,
+      "validation": 2,
+      "test": 1,
+  }
+
+
 class SuperGlueCbTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["cb"]
   DATASET_CLASS = super_glue.SuperGlue
-  EXAMPLE_DIR = os.path.join(_BASE_DIR, "CB")
   SPLITS = {
       "train": 3,
       "validation": 2,
@@ -43,7 +52,6 @@ class SuperGlueCbTest(testing.DatasetBuilderTestCase):
 class SuperGlueCopaTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["copa"]
   DATASET_CLASS = super_glue.SuperGlue
-  EXAMPLE_DIR = os.path.join(_BASE_DIR, "COPA")
   SPLITS = {
       "train": 3,
       "validation": 2,
@@ -54,7 +62,6 @@ class SuperGlueCopaTest(testing.DatasetBuilderTestCase):
 class SuperGlueMultiRcTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["multirc"]
   DATASET_CLASS = super_glue.SuperGlue
-  EXAMPLE_DIR = os.path.join(_BASE_DIR, "MultiRC")
   SPLITS = {
       "train": 58,
       "validation": 62,
@@ -62,10 +69,19 @@ class SuperGlueMultiRcTest(testing.DatasetBuilderTestCase):
   }
 
 
+class SuperGlueReCoRDTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["record"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "train": 9,
+      "validation": 2,
+      "test": 1,
+  }
+
+
 class SuperGlueRteTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["rte"]
   DATASET_CLASS = super_glue.SuperGlue
-  EXAMPLE_DIR = os.path.join(_BASE_DIR, "RTE")
   SPLITS = {
       "train": 3,
       "validation": 2,
@@ -76,7 +92,6 @@ class SuperGlueRteTest(testing.DatasetBuilderTestCase):
 class SuperGlueWscTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["wsc", "wsc.fixed"]
   DATASET_CLASS = super_glue.SuperGlue
-  EXAMPLE_DIR = os.path.join(_BASE_DIR, "WSC")
   SPLITS = {
       "train": 3,
       "validation": 2,
@@ -87,7 +102,6 @@ class SuperGlueWscTest(testing.DatasetBuilderTestCase):
 class SuperGlueWicTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ["wic"]
   DATASET_CLASS = super_glue.SuperGlue
-  EXAMPLE_DIR = os.path.join(_BASE_DIR, "WiC")
   SPLITS = {
       "train": 3,
       "validation": 2,
@@ -95,7 +109,21 @@ class SuperGlueWicTest(testing.DatasetBuilderTestCase):
   }
 
 
-# TODO(adarob): Add MultiRC test.
+class SuperGlueAxBTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["axb"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "test": 3,
+  }
+
+
+class SuperGlueAxGTest(testing.DatasetBuilderTestCase):
+  BUILDER_CONFIG_NAMES_TO_TEST = ["axg"]
+  DATASET_CLASS = super_glue.SuperGlue
+  SPLITS = {
+      "test": 3,
+  }
+
 
 if __name__ == "__main__":
   testing.test_main()

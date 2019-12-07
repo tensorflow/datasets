@@ -5,11 +5,19 @@
 
 # tfds.core.lazy_imports
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py">View
+source</a>
+
 ## Class `lazy_imports`
 
-Lazy importer for heavy dependencies.
+<!-- Start diff -->
 
-Defined in [`core/lazy_imports.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports.py).
+Lazy importer for heavy dependencies.
 
 <!-- Placeholder for "Used in" -->
 

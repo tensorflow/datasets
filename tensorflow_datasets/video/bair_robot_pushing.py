@@ -52,7 +52,14 @@ _CITATION = """\
 class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
   """Robot pushing dataset from BAIR (Small 64x64 version)."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version(
+          "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+  ]
+  # Versions history:
+  # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     # The Bair dataset consist of a sequence of frames (video) with associated
@@ -71,7 +78,7 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         "two test sets of previously seen (testseen) and unseen "
         "(testnovel) objects. This is the small 64x64 version.",
         features=features,
-        urls=["https://sites.google.com/view/sna-visual-mpc/"],
+        homepage="https://sites.google.com/view/sna-visual-mpc/",
         citation=_CITATION,
     )
 
@@ -102,7 +109,8 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
       filepath = os.path.join(filedir, filename)
 
       # For each video inside the file
-      for example_str in tf.compat.v1.io.tf_record_iterator(filepath):
+      for video_id, example_str in enumerate(
+          tf.compat.v1.io.tf_record_iterator(filepath)):
         example = tf.train.SequenceExample.FromString(example_str)
 
         # Merge all frames together
@@ -139,4 +147,4 @@ class BairRobotPushingSmall(tfds.core.GeneratorBasedBuilder):
         #     {'action': [...], 'image_main': img_frame1, ...},  # Frame 1
         #     ...,
         # ]
-        yield all_frames
+        yield "%s_%s" % (filepath, video_id), all_frames

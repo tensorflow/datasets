@@ -1,0 +1,10 @@
+{
+  "images": [
+    {"id":4, "file_name": "data/aircraft/4.jpg"}
+  ],
+  "categories": [
+    {"id": 1, "name":"label1"},
+    {"id": 2, "name":"label2"},
+    {"id": 3, "name":"label3"}
+  ]
+}

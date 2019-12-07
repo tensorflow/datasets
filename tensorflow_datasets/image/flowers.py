@@ -39,13 +39,12 @@ _URL = "http://download.tensorflow.org/example_images/flower_photos.tgz"
 class TFFlowers(tfds.core.GeneratorBasedBuilder):
   """Flowers dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("1.0.0",
+                              experiments={tfds.core.Experiment.S3: False})
   SUPPORTED_VERSIONS = [
-      tfds.core.Version("2.0.0", experiments={tfds.core.Experiment.S3: True}),
-      tfds.core.Version("1.0.0"),
+      tfds.core.Version(
+          "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
-  # Version history:
-  # 1.0.0: S3 (new shuffling, sharding and slicing mechanism).
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -57,7 +56,7 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
                 names=["dandelion", "daisy", "tulips", "sunflowers", "roses"]),
         }),
         supervised_keys=("image", "label"),
-        urls=[_URL],
+        homepage="https://www.tensorflow.org/tutorials/load_data/images",
         citation=_CITATION
         )
 
@@ -97,7 +96,4 @@ class TFFlowers(tfds.core.GeneratorBasedBuilder):
                   "image": image_path,
                   "label": d.lower(),
               }
-              if self.version.implements(tfds.core.Experiment.S3):
-                yield "%s/%s" % (d, image_file), record
-              else:
-                yield record
+              yield "%s/%s" % (d, image_file), record

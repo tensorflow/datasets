@@ -5,6 +5,15 @@
 
 # tfds.load
 
+<!-- Insert buttons -->
+
+<table class="tfo-notebook-buttons tfo-api" align="left">
+</table>
+
+<a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
+source</a>
+
+<!-- Start diff -->
 Loads the named dataset into a `tf.data.Dataset`.
 
 ```python
@@ -14,8 +23,10 @@ tfds.load(
     data_dir=None,
     batch_size=None,
     in_memory=None,
+    shuffle_files=False,
     download=True,
     as_supervised=False,
+    decoders=None,
     with_info=False,
     builder_kwargs=None,
     download_and_prepare_kwargs=None,
@@ -24,22 +35,7 @@ tfds.load(
 )
 ```
 
-Defined in [`core/registered.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py).
-
-### Used in the guide:
-
-*   [Convert Your Existing Code to TensorFlow 2.0](https://www.tensorflow.org/beta/guide/migration_guide)
-
-### Used in the tutorials:
-
-*   [CycleGAN](https://www.tensorflow.org/beta/tutorials/generative/cyclegan)
-*   [Distributed training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/keras)
-*   [Multi-worker Training with Estimator](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_estimator)
-*   [Multi-worker Training with Keras](https://www.tensorflow.org/beta/tutorials/distribute/multi_worker_with_keras)
-*   [Text classification of movie reviews with Keras and TensorFlow Hub](https://www.tensorflow.org/beta/tutorials/keras/basic_text_classification_with_tfhub)
-*   [Text classification with an RNN](https://www.tensorflow.org/beta/tutorials/text/text_classification_rnn)
-*   [Transfer Learning Using Pretrained ConvNets](https://www.tensorflow.org/beta/tutorials/images/transfer_learning)
-*   [Transformer model for language understanding](https://www.tensorflow.org/beta/tutorials/text/transformer)
+<!-- Placeholder for "Used in" -->
 
 If `split=None` (the default), returns all splits for the dataset. Otherwise,
 returns the specified split.
@@ -95,6 +91,8 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     increases iteration speeds. Note that if `True` and the dataset has unknown
     dimensions, the features will be padded to the maximum size across the
     dataset.
+*   <b>`shuffle_files`</b>: `bool`, whether to shuffle the input files. Defaults
+    to `False`.
 *   <b>`download`</b>: `bool` (optional), whether to call
     <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>
     before calling `tf.DatasetBuilder.as_dataset`. If `False`, data is expected
@@ -104,6 +102,11 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     will have a 2-tuple structure `(input, label)` according to
     `builder.info.supervised_keys`. If `False`, the default, the returned
     `tf.data.Dataset` will have a dictionary with all the features.
+*   <b>`decoders`</b>: Nested dict of `Decoder` objects which allow to customize
+    the decoding. The structure should match the feature structure, but only
+    customized feature keys need to be present. See
+    [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
+    for more info.
 *   <b>`with_info`</b>: `bool`, if True, tfds.load will return the tuple
     (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated with
     the builder.
@@ -119,9 +122,6 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     deduced from data_dir.
 *   <b>`as_dataset_kwargs`</b>: `dict` (optional), keyword arguments passed to
     <a href="../tfds/core/DatasetBuilder.md#as_dataset"><code>tfds.core.DatasetBuilder.as_dataset</code></a>.
-    `split` will be passed through by default. Example: `{'shuffle_files':
-    True}`. Note that shuffle_files is False by default unless `split ==
-    tfds.Split.TRAIN`.
 *   <b>`try_gcs`</b>: `bool`, if True, tfds.load will see if the dataset exists
     on the public GCS bucket before building it locally.
 

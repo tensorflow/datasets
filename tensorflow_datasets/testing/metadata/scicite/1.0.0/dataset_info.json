@@ -1,0 +1,503 @@
+{
+  "citation": "\n@InProceedings{Cohan2019Structural,\n  author={Arman Cohan and Waleed Ammar and Madeleine Van Zuylen and Field Cady},\n  title={Structural Scaffolds for Citation Intent Classification in Scientific Publications},\n  booktitle=\"NAACL\",\n  year=\"2019\"\n}\n",
+  "description": "\nThis is a dataset for classifying citation intents in academic papers.\nThe main citation intent label for each Json object is specified with the label\nkey while the citation context is specified in with a context key. Example:\n{\n 'string': 'In chacma baboons, male-infant relationships can be linked to both\n    formation of friendships and paternity success [30,31].'\n 'sectionName': 'Introduction',\n 'label': 'background',\n 'citingPaperId': '7a6b2d4b405439',\n 'citedPaperId': '9d1abadc55b5e0',\n ...\n }\nYou may obtain the full information about the paper using the provided paper ids\nwith the Semantic Scholar API (https://api.semanticscholar.org/).\nThe labels are:\nMethod, Background, Result\n",
+  "location": {
+    "urls": [
+      "https://github.com/allenai/scicite"
+    ]
+  },
+  "name": "scicite",
+  "schema": {
+    "feature": [
+      {
+        "name": "citeEnd",
+        "type": "INT"
+      },
+      {
+        "name": "citeStart",
+        "type": "INT"
+      },
+      {
+        "name": "citedPaperId",
+        "type": "BYTES"
+      },
+      {
+        "name": "citingPaperId",
+        "type": "BYTES"
+      },
+      {
+        "name": "excerpt_index",
+        "type": "INT"
+      },
+      {
+        "name": "id",
+        "type": "BYTES"
+      },
+      {
+        "name": "isKeyCitation",
+        "type": "BYTES"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      },
+      {
+        "name": "label2",
+        "type": "INT"
+      },
+      {
+        "name": "label2_confidence",
+        "type": "FLOAT"
+      },
+      {
+        "name": "label_confidence",
+        "type": "FLOAT"
+      },
+      {
+        "name": "sectionName",
+        "type": "BYTES"
+      },
+      {
+        "name": "source",
+        "type": "INT"
+      },
+      {
+        "name": "string",
+        "type": "BYTES"
+      }
+    ]
+  },
+  "sizeInBytes": "23189911",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "1859"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "citeEnd",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              },
+              "max": 1162.0,
+              "min": -1.0
+            }
+          },
+          {
+            "name": "citeStart",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              },
+              "max": 804.0,
+              "min": -1.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              }
+            },
+            "name": "citedPaperId",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              }
+            },
+            "name": "citingPaperId",
+            "type": "BYTES"
+          },
+          {
+            "name": "excerpt_index",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              },
+              "max": 17.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              }
+            },
+            "name": "id",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              }
+            },
+            "name": "isKeyCitation",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              },
+              "max": 2.0
+            }
+          },
+          {
+            "name": "label2",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              },
+              "max": 3.0
+            }
+          },
+          {
+            "name": "label2_confidence",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              }
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "label_confidence",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              }
+            },
+            "name": "sectionName",
+            "type": "BYTES"
+          },
+          {
+            "name": "source",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              },
+              "max": 6.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1859"
+              }
+            },
+            "name": "string",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "1859"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "8194"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "citeEnd",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              },
+              "max": 3305.0,
+              "min": -1.0
+            }
+          },
+          {
+            "name": "citeStart",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              },
+              "max": 1184.0,
+              "min": -1.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              }
+            },
+            "name": "citedPaperId",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              }
+            },
+            "name": "citingPaperId",
+            "type": "BYTES"
+          },
+          {
+            "name": "excerpt_index",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              },
+              "max": 19.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              }
+            },
+            "name": "id",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              }
+            },
+            "name": "isKeyCitation",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              },
+              "max": 2.0
+            }
+          },
+          {
+            "name": "label2",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              },
+              "max": 3.0
+            }
+          },
+          {
+            "name": "label2_confidence",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "label_confidence",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              }
+            },
+            "name": "sectionName",
+            "type": "BYTES"
+          },
+          {
+            "name": "source",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              },
+              "max": 6.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "8194"
+              }
+            },
+            "name": "string",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "8194"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "916"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "citeEnd",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              },
+              "max": 1415.0,
+              "min": -1.0
+            }
+          },
+          {
+            "name": "citeStart",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              },
+              "max": 777.0,
+              "min": -1.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              }
+            },
+            "name": "citedPaperId",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              }
+            },
+            "name": "citingPaperId",
+            "type": "BYTES"
+          },
+          {
+            "name": "excerpt_index",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              },
+              "max": 18.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              }
+            },
+            "name": "id",
+            "type": "BYTES"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              }
+            },
+            "name": "isKeyCitation",
+            "type": "BYTES"
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              },
+              "max": 2.0
+            }
+          },
+          {
+            "name": "label2",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              },
+              "max": 3.0
+            }
+          },
+          {
+            "name": "label2_confidence",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "label_confidence",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              }
+            },
+            "name": "sectionName",
+            "type": "BYTES"
+          },
+          {
+            "name": "source",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              },
+              "max": 6.0
+            }
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "916"
+              }
+            },
+            "name": "string",
+            "type": "BYTES"
+          }
+        ],
+        "numExamples": "916"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "string",
+    "output": "label"
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,134 @@
+{
+  "citation": "@article{chrabaszcz2017downsampled,\n  title={A downsampled variant of imagenet as an alternative to the cifar datasets},\n  author={Chrabaszcz, Patryk and Loshchilov, Ilya and Hutter, Frank},\n  journal={arXiv preprint arXiv:1707.08819},\n  year={2017}\n}\n",
+  "description": "This dataset consists of the ImageNet dataset resized to 32x32.\nThe images here are the ones provided by Chrabaszcz et. al. using the box resize method.\n\nFor [downsampled ImageNet](http://image-net.org/small/download.php) for unsupervised learning see `downsampled_imagenet`.\n\nWARNING: The integer labels used are defined by the authors and do not match\nthose from the other ImageNet datasets provided by Tensorflow datasets.\nSee the original [label list](https://github.com/PatrykChrabaszcz/Imagenet32_Scripts/blob/master/map_clsloc.txt),\nand the [labels used by this dataset](https://github.com/tensorflow/datasets/blob/master/tensorflow_datasets/image/imagenet_resized_labels.txt).\nAdditionally, the original authors 1 index there labels which we convert to\n0 indexed by subtracting one.\n",
+  "location": {
+    "urls": [
+      "https://patrykchrabaszcz.github.io/Imagenet32/"
+    ]
+  },
+  "name": "imagenet_resized",
+  "schema": {
+    "feature": [
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "32"
+            },
+            {
+              "size": "32"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "3720132947",
+  "splits": [
+    {
+      "name": "train",
+      "numShards": "10",
+      "shardLengths": [
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036",
+        "40037",
+        "40036"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1281167"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1281167"
+              },
+              "max": 999.0
+            }
+          }
+        ],
+        "numExamples": "1281167"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "50000"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "50000"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "50000"
+              },
+              "max": 999.0
+            }
+          }
+        ],
+        "numExamples": "50000"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "0.1.0"
+}

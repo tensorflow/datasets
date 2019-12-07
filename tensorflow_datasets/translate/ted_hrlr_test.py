@@ -33,5 +33,8 @@ class TedHrlrTranslateTest(testing.DatasetBuilderTestCase):
   }
 
 
+class TedHrlrTranslateS3Test(TedHrlrTranslateTest):
+  VERSION = "experimental_latest"
+
 if __name__ == "__main__":
   testing.test_main()
