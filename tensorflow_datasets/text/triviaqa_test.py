@@ -30,7 +30,7 @@ class TriviaqaTest(testing.DatasetBuilderTestCase):
       "unfiltered": "",
   }
   SPLITS = {
-      "train": 1,
+      "train": 2,
       "test": 1,
       "validation": 1,
   }
