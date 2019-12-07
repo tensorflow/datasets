@@ -194,7 +194,7 @@ class CommonVoiceConfig(tfds.core.BuilderConfig):
     return _ACCENT_CLASSES[self._language]
 
   @property
-  def download_urls(self):
+  def download_url(self):
     """
      Property returning Download URL based on Language Specified
 
@@ -244,13 +244,10 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    dl_path = dl_manager.extract(
-      dl_manager.download(
-        self.builder_config.download_urls))
+    dl_path = dl_manager.download_and_extract(self.builder_config.download_url)
     clip_folder = os.path.join(dl_path, "clips")
     return [tfds.core.SplitGenerator(
       name=k,
-      num_shards=40,
       gen_kwargs={
         "audio_path": clip_folder,
         "label_path": os.path.join(dl_path, "%s.tsv" % v)
@@ -267,14 +264,17 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
     """
     with tf.io.gfile.GFile(label_path) as file_:
       dataset = csv.DictReader(file_, delimiter="\t")
-      for row in dataset:
+      for i, row in enumerate(dataset):
         if tf.io.gfile.exists(os.path.join(audio_path, "%s.mp3" % row["path"])):
-          yield {
+          yield i, {
             "client_id": row["client_id"],
             "voice": os.path.join(audio_path, "%s.mp3" % row["path"]),
             "sentence": row["sentence"],
             "upvotes": int(row["up_votes"]) if len(row["up_votes"]) > 0 else 0,
             "downvotes": int(row["down_votes"]) if len(row["down_votes"]) > 0 else 0,
             "age": row["age"],
-            "gender": row["gender"] if row["gender"] is not None and len(row["gender"]) >0 else 'None',
-            "accent": row["accent"] if row["accent"] is not None and len(row["accent"]) > 0 else 'None'}
+            "gender": row["gender"] if row["gender"] is not None \
+                      and len(row["gender"]) >0 else 'None',
+            "accent": row["accent"] if row["accent"] is not None \
+                      and len(row["accent"]) > 0 else 'None'
+            }
