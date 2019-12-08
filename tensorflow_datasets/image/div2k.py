@@ -64,20 +64,16 @@ class Div2kConfig(tfds.core.BuilderConfig):
     if data not in _DATA_OPTIONS:
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)
 
-    name = kwargs.get("name")
-    if name is None:
-      name = data
+    name = kwargs.get("name", data)
     kwargs["name"] = name
 
-    description = kwargs.get("description")
-    if description is None:
-      description = "Uses %s data." % data
+    description = kwargs.get("description", "Uses %s data." % data)
     kwargs["description"] = description
 
     super(Div2kConfig, self).__init__(**kwargs)
     self.data = data
 
-  def download_urls(self):
+  def download_urls():
     """Returns train and validation download urls for this config."""
     urls = {
         "train_lr_url": _DL_URLS["train_"+self.data],
@@ -91,7 +87,7 @@ def _make_builder_configs():
   configs = []
   for data in _DATA_OPTIONS:
     configs.append(Div2kConfig(
-        version=tfds.core.Version("1.0.0"),
+        version=tfds.core.Version("2.0.0"),
         data=data))
   return configs
 
@@ -99,6 +95,7 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
   """DIV2K dataset: DIVerse 2K resolution high quality images"""
 
   BUILDER_CONFIGS = _make_builder_configs()
+  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -108,6 +105,7 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
             "lr": tfds.features.Image(),
             "hr": tfds.features.Image(),
         }),
+        #homepage=_DL_URL,
         citation=_CITATION,
     )
 
@@ -115,7 +113,7 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
 
     extracted_paths = dl_manager.download_and_extract(
-        self.builder_config.download_urls())
+        self.builder_config.download_urls)
 
     return [
         tfds.core.SplitGenerator(
@@ -139,12 +137,12 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
     if not tf.io.gfile.listdir(hr_path)[0].endswith(".png"):
       hr_path = os.path.join(hr_path, tf.io.gfile.listdir(hr_path)[0])
 
-    for root, dirs, files in tf.io.gfile.walk(lr_path):
-      if len(files) == 0:
-        continue
-      for file in files:
-        yield root + file, {
-            "lr": os.path.join(root, file),
-            "hr": os.path.join(hr_path, re.search(r'\d{4}',
-                                                  str(file)).group(0) + ".png")
-        }
+    for root, _, files in tf.io.gfile.walk(lr_path):
+      if len(files):
+        for file in files:
+          yield root + file, {
+              "lr": os.path.join(root, file),
+              "hr": os.path.join(hr_path,
+                                 re.search(r'\d{4}',
+                                           str(file)).group(0) + ".png")
+          }
