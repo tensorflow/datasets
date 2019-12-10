@@ -35,5 +35,9 @@
                 }
             ]
         }
-    ]
+    ],
+    "Domain": "unfiltered-web",
+    "Split": "dev",
+    "VerifiedEval": false,
+    "Version": 1.0
 }
