@@ -43,6 +43,7 @@ from tensorflow_datasets.core import tfrecords_writer
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 import termcolor
 
@@ -348,6 +349,7 @@ class DatasetBuilder(object):
                  batch_size=None,
                  shuffle_files=False,
                  decoders=None,
+                 read_config=None,
                  as_supervised=False,
                  in_memory=None):
     # pylint: disable=line-too-long
@@ -412,6 +414,8 @@ class DatasetBuilder(object):
         customized feature keys need to be present. See
         [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
         for more info.
+      read_config: `tfds.ReadConfig`, Additional options to configure the
+        input pipeline (e.g. seed, num parallel reads,...).
       as_supervised: `bool`, if `True`, the returned `tf.data.Dataset`
         will have a 2-tuple structure `(input, label)` according to
         `builder.info.supervised_keys`. If `False`, the default,
@@ -443,12 +447,15 @@ class DatasetBuilder(object):
     if split is None:
       split = {s: s for s in self.info.splits}
 
+    read_config = read_config or read_config_lib.ReadConfig()
+
     # Create a dataset for each of the given splits
     build_single_dataset = functools.partial(
         self._build_single_dataset,
         shuffle_files=shuffle_files,
         batch_size=batch_size,
         decoders=decoders,
+        read_config=read_config,
         as_supervised=as_supervised,
         in_memory=in_memory,
     )
@@ -461,6 +468,7 @@ class DatasetBuilder(object):
       shuffle_files,
       batch_size,
       decoders,
+      read_config,
       as_supervised,
       in_memory):
     """as_dataset for a single split."""
@@ -503,21 +511,29 @@ class DatasetBuilder(object):
       # If using in_memory, escape all device contexts so we can load the data
       # with a local Session.
       with tf.device(None):
-        dataset = self._as_dataset(
-            split=split, shuffle_files=shuffle_files, decoders=decoders)
+        ds = self._as_dataset(
+            split=split,
+            shuffle_files=shuffle_files,
+            decoders=decoders,
+            read_config=read_config,
+        )
         # Use padded_batch so that features with unknown shape are supported.
-        dataset = dataset.padded_batch(
-            full_bs, tf.compat.v1.data.get_output_shapes(dataset))
-        dataset = tf.data.Dataset.from_tensor_slices(
-            next(dataset_utils.as_numpy(dataset)))
+        ds = ds.padded_batch(
+            full_bs, tf.compat.v1.data.get_output_shapes(ds))
+        ds = tf.data.Dataset.from_tensor_slices(
+            next(dataset_utils.as_numpy(ds)))
     else:
-      dataset = self._as_dataset(
-          split=split, shuffle_files=shuffle_files, decoders=decoders)
+      ds = self._as_dataset(
+          split=split,
+          shuffle_files=shuffle_files,
+          decoders=decoders,
+          read_config=read_config,
+      )
 
     if batch_size:
       # Use padded_batch so that features with unknown shape are supported.
-      dataset = dataset.padded_batch(
-          batch_size, tf.compat.v1.data.get_output_shapes(dataset))
+      ds = ds.padded_batch(
+          batch_size, tf.compat.v1.data.get_output_shapes(ds))
 
     if as_supervised:
       if not self.info.supervised_keys:
@@ -525,19 +541,27 @@ class DatasetBuilder(object):
             "as_supervised=True but %s does not support a supervised "
             "(input, label) structure." % self.name)
       input_f, target_f = self.info.supervised_keys
-      dataset = dataset.map(lambda fs: (fs[input_f], fs[target_f]),
-                            num_parallel_calls=tf.data.experimental.AUTOTUNE)
+      ds = ds.map(lambda fs: (fs[input_f], fs[target_f]),
+                  num_parallel_calls=tf.data.experimental.AUTOTUNE)
 
-    dataset = dataset.prefetch(tf.data.experimental.AUTOTUNE)
+    ds = ds.prefetch(tf.data.experimental.AUTOTUNE)
 
-    # If shuffling, allow pipeline to be non-deterministic
-    options = tf.data.Options()
-    options.experimental_deterministic = not shuffle_files
-    dataset = dataset.with_options(options)
+    # If shuffling is True and seeds not set, allow pipeline to be
+    # non-deterministic
+    # This code should probably be moved inside tfreader, such as
+    # all the tf.data.Options are centralized in a single place.
+    if (shuffle_files and
+        read_config.options.experimental_deterministic is None and
+        read_config.shuffle_seed is None):
+      options = tf.data.Options()
+      options.experimental_deterministic = False
+      ds = ds.with_options(options)
+    # If shuffle is False, keep the default value (deterministic), which
+    # allow the user to overwritte it.
 
     if wants_full_dataset:
-      return tf.data.experimental.get_single_element(dataset)
-    return dataset
+      return tf.data.experimental.get_single_element(ds)
+    return ds
 
   def _relative_data_dir(self, with_version=True):
     """Relative path of this dataset in data_dir."""
@@ -638,7 +662,8 @@ class DatasetBuilder(object):
     raise NotImplementedError
 
   @abc.abstractmethod
-  def _as_dataset(self, split, decoders=None, shuffle_files=False):
+  def _as_dataset(
+      self, split, decoders=None, read_config=None, shuffle_files=False):
     """Constructs a `tf.data.Dataset`.
 
     This is the internal implementation to overwrite called when user calls
@@ -649,6 +674,7 @@ class DatasetBuilder(object):
       split: `tfds.Split` which subset of the data to read.
       decoders: Nested structure of `Decoder` object to customize the dataset
         decoding.
+      read_config: `tfds.ReadConfig`
       shuffle_files: `bool`, whether to shuffle the input files. Optional,
         defaults to `False`.
 
@@ -843,11 +869,17 @@ class FileAdapterBuilder(DatasetBuilder):
       self,
       split=splits_lib.Split.TRAIN,
       decoders=None,
+      read_config=None,
       shuffle_files=False):
 
     if self.version.implements(utils.Experiment.S3):
-      dataset = self._tfrecords_reader.read(
-          self.name, split, self.info.splits.values(), shuffle_files)
+      ds = self._tfrecords_reader.read(
+          name=self.name,
+          instructions=split,
+          split_infos=self.info.splits.values(),
+          read_config=read_config,
+          shuffle_files=shuffle_files,
+      )
     else:
       # Resolve all the named split tree by real ones
       read_instruction = split.get_read_instruction(self.info.splits)
@@ -860,7 +892,7 @@ class FileAdapterBuilder(DatasetBuilder):
           list_sliced_split_info)
 
       # Load the dataset
-      dataset = dataset_utils.build_dataset(
+      ds = dataset_utils.build_dataset(
           instruction_dicts=instruction_dicts,
           dataset_from_file_fn=self._file_format_adapter.dataset_from_filename,
           shuffle_files=shuffle_files,
@@ -868,9 +900,8 @@ class FileAdapterBuilder(DatasetBuilder):
 
     decode_fn = functools.partial(
         self.info.features.decode_example, decoders=decoders)
-    dataset = dataset.map(
-        decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
-    return dataset
+    ds = ds.map(decode_fn, num_parallel_calls=tf.data.experimental.AUTOTUNE)
+    return ds
 
   def _slice_split_info_to_instruction_dicts(self, list_sliced_split_info):
     """Return the list of files and reading mask of the files to read."""
