@@ -33,6 +33,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 tf.compat.v1.enable_eager_execution()
 
@@ -63,8 +64,6 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
   ]
 
   def _split_generators(self, dl_manager):
-    # Split the 30 examples from the generator into 2 train shards and 1 test
-    # shard.
     del dl_manager
     return [
         splits_lib.SplitGenerator(
@@ -99,7 +98,6 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
     return [
         splits_lib.SplitGenerator(
             name=splits_lib.Split.ALL,  # Error: ALL cannot be used as Split key
-            num_shards=5,
         )
     ]
 
@@ -263,6 +261,31 @@ class DatasetBuilderTest(testing.TestCase):
         self.assertEqual(10, len(test_data))
         self.assertEqual([incr + el for el in range(30)],
                          sorted(train_data + test_data))
+
+  def test_read_config(self):
+    is_called = []
+    def interleave_sort(lists):
+      is_called.append(True)
+      return lists
+
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      read_config = read_config_lib.ReadConfig(
+          experimental_interleave_sort_fn=interleave_sort,
+      )
+      read_config.options.experimental_stats.prefix = "tfds_prefix"
+      ds = registered.load(
+          name="dummy_dataset_shared_generator",
+          data_dir=tmp_dir,
+          split="train",
+          read_config=read_config,
+          shuffle_files=True,
+      )
+
+      # Check that the ReadConfig options are properly set
+      self.assertEqual(ds.options().experimental_stats.prefix, "tfds_prefix")
+
+      # The instruction function should have been called
+      self.assertEqual(is_called, [True])
 
   def test_with_supported_version(self):
     DummyDatasetWithConfigs(config="plus1", version="0.0.1")
@@ -520,8 +543,6 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    # Split the 30 examples from the generator into 2 train shards and 1 test
-    # shard.
     del dl_manager
     return [
         splits_lib.SplitGenerator(
