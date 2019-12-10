@@ -37,7 +37,7 @@ flags.DEFINE_string(name="tfds_dir", default=py_utils.tfds_dir(),
 FLAGS = flags.FLAGS
 
 
-_COMMIT = "bd9e2c934c83d00251b7b4781ffc38cd167c885f"
+_COMMIT = "0123456789abcdef0123456789abcdef01234567" # fake commit
 _EXTRACT_SUBDIR = "fchollet-ARC-{}".format(_COMMIT[:7])
 NUM_TASKS = {"training": 10, "evaluation": 5}
 

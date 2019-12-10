@@ -44,20 +44,42 @@ both humans and artificially intelligent systems that aim at emulating a
 human-like form of general fluid intelligence.
 """
 
-
 _BASE_URL = "https://github.com/fchollet/ARC/"
-_COMMIT = "bd9e2c934c83d00251b7b4781ffc38cd167c885f"
-_DL_URL = "{}zipball/{}/".format(_BASE_URL, _COMMIT)
-_DL_RESOURCE = tfds.download.Resource(
-    url=_DL_URL,
-    extract_method=tfds.download.ExtractMethod.ZIP)
-_EXTRACT_SUBDIR = "fchollet-ARC-{}".format(_COMMIT[:7])
+
+
+class ARCConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for ARC."""
+
+  @tfds.core.disallow_positional_args
+  def __init__(self, version, commit, **kwargs):
+    """BuilderConfig for ARC.
+
+    Args:
+      version (string): version as string.
+      commit: github.com/fchollet/ARC commit to use (defaults to "master").
+      **kwargs: keyword arguments forwarded to super.
+    """
+    super(ARCConfig, self).__init__(
+        version=tfds.core.Version(version),
+        **kwargs)
+    self.commit = commit
+    self.download_url = "{}zipball/{}".format(_BASE_URL, self.commit)
+    self.download_resource = tfds.download.Resource(
+        url=self.download_url,
+        extract_method=tfds.download.ExtractMethod.ZIP)
 
 
 class ARC(tfds.core.GeneratorBasedBuilder):
   """The Abstraction and Reasoning Corpus (ARC)."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  BUILDER_CONFIGS = [
+      ARCConfig(
+        name="2019-12-06",
+        version="1.0.0",
+        description="ARC commit bd9e2c9 from 2019-12-06",
+        commit="bd9e2c934c83d00251b7b4781ffc38cd167c885f"
+      ),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -91,8 +113,13 @@ class ARC(tfds.core.GeneratorBasedBuilder):
 
     # dl_manager is a tfds.download.DownloadManager that can be used to
     # download and extract URLs
-    extracted_dir = dl_manager.download_and_extract(_DL_RESOURCE)
-    data_dir = os.path.join(extracted_dir, _EXTRACT_SUBDIR, "data")
+    extracted_dir = dl_manager.download_and_extract(
+        self.builder_config.download_resource)
+    extract_subdir = [path for path in tf.io.gfile.listdir(extracted_dir)
+                      if path.startswith("fchollet-ARC-")]
+    if len(extract_subdir) != 1:
+        raise ValueError("Unexpected ARC archive format")
+    data_dir = os.path.join(extracted_dir, extract_subdir[0], "data")
     train_dir = os.path.join(data_dir, "training")
     test_dir = os.path.join(data_dir, "evaluation")
 
@@ -113,14 +140,11 @@ class ARC(tfds.core.GeneratorBasedBuilder):
     """Yields (key, example) tuples from the dataset"""
     json_filepaths = tf.io.gfile.glob(os.path.join(directory, "*.json"))
     for json_path in sorted(json_filepaths):
-        try:
-            with tf.io.gfile.GFile(json_path) as f:
-                task = json.load(f)
-            task_id = os.path.basename(json_path)[:-len(".json")]
-            yield task_id, {
-                "task_id": task_id,
-                "train": task["train"],
-                "test": task["test"],
-            }
-        except Exception as ex:
-            logging.exception("Could not load task {}.".format(task_id))
+        with tf.io.gfile.GFile(json_path) as f:
+            task = json.load(f)
+        task_id = os.path.basename(json_path)[:-len(".json")]
+        yield task_id, {
+            "task_id": task_id,
+            "train": task["train"],
+            "test": task["test"],
+        }
