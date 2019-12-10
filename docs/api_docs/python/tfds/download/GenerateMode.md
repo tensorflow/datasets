@@ -21,9 +21,6 @@ source</a>
 <!-- Start diff -->
 `Enum` for how to treat pre-existing downloads and data.
 
-### Aliases:
-
-* Class `tfds.GenerateMode`
 
 
 <!-- Placeholder for "Used in" -->

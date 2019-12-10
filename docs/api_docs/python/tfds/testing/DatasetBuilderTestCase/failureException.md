@@ -15,11 +15,9 @@
 <!-- Start diff -->
 Assertion failed.
 
-### Aliases:
-
-*   Class `tfds.testing.FeatureExpectationsTestCase.failureException`
-*   Class `tfds.testing.SubTestCase.failureException`
-*   Class `tfds.testing.TestCase.failureException`
+**Aliases**: `tfds.testing.FeatureExpectationsTestCase.failureException`,
+`tfds.testing.SubTestCase.failureException`,
+`tfds.testing.TestCase.failureException`
 
 <!-- Placeholder for "Used in" -->
 
