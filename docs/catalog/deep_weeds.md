@@ -24,7 +24,8 @@ Range", "Kelso", "McKinlay" and "Paluma".
 *   Version: `v2.0.0`
 *   Versions:
 
-    *   **`2.0.0`** (default):
+    *   **`2.0.0`** (default): Fixes wrong labels in V1.
+    *   `1.0.0`: None
 
 *   Size: `892.52 MiB`
 

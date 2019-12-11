@@ -362,6 +362,7 @@ cycle_gan/ukiyoe2photo/0.1.0
 cycle_gan/ukiyoe2photo/2.0.0
 cycle_gan/vangogh2photo/0.1.0
 cycle_gan/vangogh2photo/2.0.0
+deep_weeds/1.0.0
 deep_weeds/2.0.0
 definite_pronoun_resolution/plain_text/0.0.1
 definite_pronoun_resolution/plain_text/1.0.0
