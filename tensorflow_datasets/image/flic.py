@@ -59,49 +59,43 @@ class Flic(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     extract_path = dl_manager.download_and_extract(_URL)
     data = scipy.io.loadmat(os.path.join(extract_path, "FLIC", "examples.mat"),
-                            struct_as_record=True, squeeze_me=True,
-                            mat_dtype=True)
-
-    train_list = []
-    test_list = []
-
-    for i in range(len(data["examples"])):
-      if data["examples"][i][7]:
-        train_list.append(i)
-      elif data["examples"][i][8]:
-        test_list.append(i)
+                            struct_as_record=True, squeeze_me=True, mat_dtype=True)
 
     return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "extract_path": extract_path,
-                "data": data,
-                "split": train_list,
-            },
-        ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={
-                "extract_path": extract_path,
-                "data": data,
-                "split": test_list,
-            },
-        ),
+      tfds.core.SplitGenerator(
+        name=tfds.Split.TRAIN,
+        gen_kwargs={
+          "extract_path": extract_path,
+          "data": data,
+          "istrain": True,
+          "istest": False,
+        },
+      ),
+      tfds.core.SplitGenerator(
+        name=tfds.Split.TEST,
+        gen_kwargs={
+          "extract_path": extract_path,
+          "data": data,
+          "istrain": False,
+          "istest": True,
+        },
+      ),
     ]
 
-  def _generate_examples(self, extract_path, data, split):
+  def _generate_examples(self, extract_path, data, istrain, istest):
     """Yields examples."""
-    for index in split:
-      yield index, {
-          "image": os.path.join(extract_path, "FLIC", "images",
-                                data["examples"][index][3]),
-          "poselet_hit_idx": list(data["examples"][index][0]),
-          "moviename": data["examples"][index][1],
-          "xcoords": data["examples"][index][2][0],
-          "ycoords": data["examples"][index][2][1],
-          "filepath": data["examples"][index][3],
-          "imgdims": data["examples"][index][4],
-          "currframe": data["examples"][index][5],
-          "torsobox": data["examples"][index][6],
-      }
+    u_id = 0 #unique id for each example to prevent key collisions when hashing
+    for example in data["examples"]:
+      if (example[7] and istrain) or (example[8] and istest):
+        u_id += 1
+        yield u_id, {
+          "image": os.path.join(extract_path, "FLIC", "images", example[3]),
+          "poselet_hit_idx": list(example[0]),
+          "moviename": example[1],
+          "xcoords": example[2][0],
+          "ycoords": example[2][1],
+          "filepath": example[3],
+          "imgdims": example[4],
+          "currframe": example[5],
+          "torsobox": example[6],
+        }
