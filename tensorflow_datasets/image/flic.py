@@ -59,8 +59,8 @@ class Flic(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     extract_path = dl_manager.download_and_extract(_URL)
     data = scipy.io.loadmat(os.path.join(extract_path, "FLIC", "examples.mat"),
-                                       struct_as_record=True, squeeze_me=True,
-                                       mat_dtype=True)
+                            struct_as_record=True, squeeze_me=True,
+                            mat_dtype=True)
 
     train_list = []
     test_list = []
@@ -72,35 +72,36 @@ class Flic(tfds.core.GeneratorBasedBuilder):
         test_list.append(i)
 
     return [
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TRAIN,
-        gen_kwargs={
-          "extract_path": extract_path,
-          "data": data,
-          "split": train_list,
-        },
-      ),
-      tfds.core.SplitGenerator(
-        name=tfds.Split.TEST,
-        gen_kwargs={
-          "extract_path": extract_path,
-          "data": data,
-          "split": test_list,
-        },
-      ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TRAIN,
+            gen_kwargs={
+                "extract_path": extract_path,
+                "data": data,
+                "split": train_list,
+            },
+        ),
+        tfds.core.SplitGenerator(
+            name=tfds.Split.TEST,
+            gen_kwargs={
+                "extract_path": extract_path,
+                "data": data,
+                "split": test_list,
+            },
+        ),
     ]
 
   def _generate_examples(self, extract_path, data, split):
     """Yields examples."""
     for index in split:
       yield index, {
-        "image": os.path.join(extract_path, "FLIC", "images", data["examples"][index][3]),
-        "poselet_hit_idx": list(data["examples"][index][0]),
-        "moviename": data["examples"][index][1],
-        "xcoords": data["examples"][index][2][0],
-        "ycoords": data["examples"][index][2][1],
-        "filepath": data["examples"][index][3],
-        "imgdims": data["examples"][index][4],
-        "currframe": data["examples"][index][5],
-        "torsobox": data["examples"][index][6],
+          "image": os.path.join(extract_path, "FLIC", "images",
+                                data["examples"][index][3]),
+          "poselet_hit_idx": list(data["examples"][index][0]),
+          "moviename": data["examples"][index][1],
+          "xcoords": data["examples"][index][2][0],
+          "ycoords": data["examples"][index][2][1],
+          "filepath": data["examples"][index][3],
+          "imgdims": data["examples"][index][4],
+          "currframe": data["examples"][index][5],
+          "torsobox": data["examples"][index][6],
       }
