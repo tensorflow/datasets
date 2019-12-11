@@ -312,6 +312,7 @@ cifar10_corrupted/zoom_blur_4/1.0.0
 cifar10_corrupted/zoom_blur_5/0.0.1
 cifar10_corrupted/zoom_blur_5/1.0.0
 citrus_leaves/0.1.0
+civil_comments/0.9.0
 clevr/1.0.0
 clevr/3.0.0
 cmaterdb/bangla/1.0.0
@@ -671,8 +672,6 @@ open_images_v4/original/0.2.0
 open_images_v4/original/2.0.0
 oxford_flowers102/0.0.1
 oxford_flowers102/2.0.0
-oxford_iiit_pet/1.1.0
-oxford_iiit_pet/3.0.0
 para_crawl/enbg_plain_text/0.1.0
 para_crawl/enbg_plain_text/1.0.0
 para_crawl/encs_plain_text/0.1.0

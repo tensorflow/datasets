@@ -92,6 +92,8 @@ toc:
     title: imagenet2012_corrupted (manual)
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
+  - path: /datasets/catalog/imagenette
+    title: imagenette
   - path: /datasets/catalog/kmnist
     title: kmnist
   - path: /datasets/catalog/lfw
@@ -206,6 +208,8 @@ toc:
 - section:
   - path: /datasets/catalog/c4
     title: c4 (manual)
+  - path: /datasets/catalog/civil_comments
+    title: civil_comments
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/esnli

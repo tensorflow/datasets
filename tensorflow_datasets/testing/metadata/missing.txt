@@ -46,6 +46,9 @@ imagenet2012_corrupted/speckle_noise_4/0.0.1
 imagenet2012_corrupted/speckle_noise_4/3.0.1
 imagenet2012_corrupted/speckle_noise_5/0.0.1
 imagenet2012_corrupted/speckle_noise_5/3.0.1
+imagenette/160px/0.1.0
+imagenette/320px/0.1.0
+imagenette/full-size/0.1.0
 math_dataset/algebra__linear_1d/1.0.0
 math_dataset/algebra__linear_1d_composed/1.0.0
 math_dataset/algebra__linear_2d/1.0.0
@@ -117,6 +120,8 @@ math_dataset/probability__swr_p_level_set_more_samples/1.0.0
 math_dataset/probability__swr_p_sequence/1.0.0
 math_dataset/probability__swr_p_sequence_more_samples/1.0.0
 mnist_corrupted/canny_edges/1.0.0
+oxford_iiit_pet/1.2.0
+oxford_iiit_pet/3.1.0
 places365_small/2.0.0
 so2sat/all/0.0.1
 so2sat/all/2.0.0
