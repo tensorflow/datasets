@@ -90,7 +90,7 @@ class Flic(tfds.core.GeneratorBasedBuilder):
         u_id += 1
         yield u_id, {
           "image": os.path.join(extract_path, "FLIC", "images", example[3]),
-          "poselet_hit_idx": list(example[0]),
+          "poselet_hit_idx": example[0],
           "moviename": example[1],
           "xcoords": example[2][0],
           "ycoords": example[2][1],
