@@ -88,6 +88,7 @@ DATASET_FILES = [
     'image/food-101_classes.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
+    'image/imagenette_labels.txt',
     'image/inaturalist_labels.txt',
     'image/inaturalist_supercategories.txt',
     'image/open_images_classes_all.txt',
