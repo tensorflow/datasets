@@ -43,10 +43,10 @@ class Flic(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
-            "poselet_hit_idx": tfds.features.Tensor(shape=(None), dtype=tf.uint16),
-            "poselet_hit_idx": tfds.features.Sequence({"idx": tf.uint16}),
+            "poselet_hit_idx": tfds.features.Sequence(tf.uint16),
             "moviename": tfds.features.Text(),
-            "coords": tfds.features.Sequence({"x": tf.float64, "y": tf.float64}),
+            "xcoords": tfds.features.Sequence(tf.float64),
+            "ycoords": tfds.features.Sequence(tf.float64),
             "filepath": tfds.features.Text(),
             "imgdims": tfds.features.Tensor(shape=(3,), dtype=tf.float64),
             "currframe": tfds.features.Tensor(shape=(), dtype=tf.float64),
@@ -95,9 +95,10 @@ class Flic(tfds.core.GeneratorBasedBuilder):
     for index in split:
       yield index, {
         "image": os.path.join(extract_path, "FLIC", "images", data["examples"][index][3]),
-        "poselet_hit_idx": {"idx": list(data["examples"][index][0])},
+        "poselet_hit_idx": list(data["examples"][index][0]),
         "moviename": data["examples"][index][1],
-        "coords": {"coord": list(data["examples"][index][2])},
+        "xcoords": data["examples"][index][2][0],
+        "ycoords": data["examples"][index][2][1],
         "filepath": data["examples"][index][3],
         "imgdims": data["examples"][index][4],
         "currframe": data["examples"][index][5],
