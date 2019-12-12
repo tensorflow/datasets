@@ -1,5 +1,3 @@
-"""TODO(tiny_imagenet): Add a description here."""
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -9,18 +7,16 @@ from tensorflow_datasets.image import tiny_imagenet
 
 
 class TinyImagenetTest(testing.DatasetBuilderTestCase):
-  # TODO(tiny_imagenet):
   DATASET_CLASS = tiny_imagenet.TinyImagenet
   SPLITS = {
-      "train": 3,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "train": 3, 
+      "test": 1,
   }
 
-  # If you are calling `download/download_and_extract` with a dict, like:
-  #   dl_manager.download({'some_key': 'http://a.org/out.txt', ...})
-  # then the tests needs to provide the fake output paths relative to the
-  # fake data directory
-  # DL_EXTRACT_RESULT = {'some_key': 'output_file1.txt', ...}
+DL_EXTRACT_RESULT = [
+  
+  'tiny-imagenet-200.zip'
+]
 
 
 if __name__ == "__main__":
