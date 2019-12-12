@@ -5,7 +5,6 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.image import tiny_imagenet
 
-
 class TinyImagenetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = tiny_imagenet.TinyImagenet
   SPLITS = {
@@ -16,8 +15,8 @@ class TinyImagenetTest(testing.DatasetBuilderTestCase):
 DL_EXTRACT_RESULT = [
   
   'tiny-imagenet-200.zip'
+  
 ]
-
 
 if __name__ == "__main__":
   testing.test_main()
