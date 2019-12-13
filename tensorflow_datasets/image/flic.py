@@ -30,25 +30,56 @@ rejected manually by us if the person was occluded or severely non-frontal. We
 set aside 20% (1016 images) of the data for testing. 
 """
 
-_URL = "https://drive.google.com/uc?id=0B4K3PZp8xXDJN0Fpb0piVjQ3Y3M&export=download"
+_DATA_OPTIONS = ["small", "full"]
+
+_URL_SUBSET = "https://drive.google.com/uc?id=0B4K3PZp8xXDJN0Fpb0piVjQ3Y3M&export=download"
+_URL_SUPERSET = "https://drive.google.com/uc?id=0B4K3PZp8xXDJd2VwblhhOVBfMDg&export=download"
+
+class FlicConfig(tfds.core.BuilderConfig):
+  """BuilderConfig for FLIC."""
+
+  @tfds.core.disallow_positional_args
+
+  def __init__(self, data, **kwargs):
+    """Constructs a FlicConfig."""
+    if data not in _DATA_OPTIONS:
+      raise ValueError("data must be one of %s" % _DATA_OPTIONS)
+
+    name = kwargs.get("name", data)
+    kwargs["name"] = name
+
+    description = kwargs.get("description", "Uses %s data." % data)
+    kwargs["description"] = description
+
+    super(FlicConfig, self).__init__(**kwargs)
+    self.data = data
+    self.url  = _URL_SUBSET if data == "small" else _URL_SUPERSET
+    self.dir = "FLIC" if data == "small" else "FLIC-full"
+
+def _make_builder_configs():
+  configs = []
+  for data in _DATA_OPTIONS:
+    configs.append(FlicConfig(
+        version=tfds.core.Version("2.0.0"),
+        data=data))
+  return configs
 
 class Flic(tfds.core.GeneratorBasedBuilder):
   """Frames Labeled In Cinema (FLIC)"""
 
-  VERSION = tfds.core.Version('1.0.0')
+  BUILDER_CONFIGS = _make_builder_configs()
+  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(),
+            "image": tfds.features.Image(shape=(480, 720, 3)),
             "poselet_hit_idx": tfds.features.Sequence(tf.uint16),
             "moviename": tfds.features.Text(),
             "xcoords": tfds.features.Sequence(tf.float64),
             "ycoords": tfds.features.Sequence(tf.float64),
-            "filepath": tfds.features.Text(),
-            "imgdims": tfds.features.Tensor(shape=(3,), dtype=tf.float64),
             "currframe": tfds.features.Tensor(shape=(), dtype=tf.float64),
             "torsobox": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
         }),
@@ -57,8 +88,11 @@ class Flic(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    extract_path = dl_manager.download_and_extract(_URL)
-    data = scipy.io.loadmat(os.path.join(extract_path, "FLIC", "examples.mat"),
+    extract_path = dl_manager.download_and_extract(
+        self.builder_config.url)
+    
+    data = scipy.io.loadmat(os.path.join(extract_path,
+                                         self.builder_config.dir, "examples.mat"),
                             struct_as_record=True, squeeze_me=True, mat_dtype=True)
 
     return [
@@ -84,18 +118,15 @@ class Flic(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, extract_path, data, istrain, istest):
     """Yields examples."""
-    u_id = 0 #unique id for each example to prevent key collisions when hashing
-    for example in data["examples"]:
+    for u_id, example in enumerate(data["examples"]):
       if (example[7] and istrain) or (example[8] and istest):
-        u_id += 1
         yield u_id, {
-          "image": os.path.join(extract_path, "FLIC", "images", example[3]),
+          "image": os.path.join(extract_path, self.builder_config.dir,
+                                "images", example[3]),
           "poselet_hit_idx": example[0],
           "moviename": example[1],
           "xcoords": example[2][0],
           "ycoords": example[2][1],
-          "filepath": example[3],
-          "imgdims": example[4],
           "currframe": example[5],
           "torsobox": example[6],
         }
