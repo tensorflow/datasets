@@ -9,11 +9,11 @@ from tensorflow_datasets.image import bccd
 
 
 class BCCDTest(testing.DatasetBuilderTestCase):
-    DATASET_CLASS = bccd.BCCD
-    SPLITS = {
-      "train": 1,
-    }
+  DATASET_CLASS = bccd.BCCD
+  SPLITS = {
+    "train": 1,
+  }
 
 
 if __name__ == "__main__":
-    testing.test_main()
+  testing.test_main()
