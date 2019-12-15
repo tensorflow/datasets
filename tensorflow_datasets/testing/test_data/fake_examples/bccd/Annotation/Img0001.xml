@@ -1,0 +1,15 @@
+
+<annotation>
+  <object>
+	<name>RBC</name>
+	<pose>Unspecified</pose>
+	<truncated>0</truncated>
+	<difficult>0</difficult>
+	<bndbox>
+	  <xmin>78</xmin>
+	  <ymin>336</ymin>
+	  <xmax>184</xmax>
+	  <ymax>435</ymax>
+	</bndbox>
+  </object>
+</annotation>

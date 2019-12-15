@@ -36,15 +36,16 @@ _URL_IMG = _URL_BCCD + "/JPEGImages"
 _URL_XML = _URL_BCCD + "/Annotations"
 
 def parse_annotations(annotation_path):
-  root = ET.parse(annotation_path).getroot()
-  cell_types, xmins, ymins, xmaxes, ymaxes = [], [], [], [], []
-  for _object in root.findall("object"):
-    cell_types.append(_object.find("name").text)
-    xmins.append(int(_object.find("bndbox/xmin").text))
-    ymins.append(int(_object.find("bndbox/ymin").text))
-    xmaxes.append(int(_object.find("bndbox/xmax").text))
-    ymaxes.append(int(_object.find("bndbox/ymax").text))
-  return cell_types, xmins, ymins, xmaxes, ymaxes
+  with tf.io.gfile.GFile(annotation_path, "rb") as f:
+    root = ET.parse(f)
+    cell_types, xmins, ymins, xmaxes, ymaxes = [], [], [], [], []
+    for _object in root.findall("object"):
+      cell_types.append(_object.find("name").text)
+      xmins.append(int(_object.find("bndbox/xmin").text))
+      ymins.append(int(_object.find("bndbox/ymin").text))
+      xmaxes.append(int(_object.find("bndbox/xmax").text))
+      ymaxes.append(int(_object.find("bndbox/ymax").text))
+    return cell_types, xmins, ymins, xmaxes, ymaxes
 
 
 class BCCD(tfds.core.GeneratorBasedBuilder):

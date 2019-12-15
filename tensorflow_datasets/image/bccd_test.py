@@ -1,4 +1,4 @@
-"""TODO(bccd_dataset): Add a description here."""
+"""Tests for BCCD data loading"""
 
 from __future__ import absolute_import
 from __future__ import division
