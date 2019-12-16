@@ -115,9 +115,14 @@ class BigearthnetConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
+    v002 = tfds.core.Version(
+        '0.0.2', experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare='845e4d0e1dfa73060ab2f6cfdf7ba342434e4def')
+    v100 = tfds.core.Version(
+        '1.0.0', 'New split API (https://tensorflow.org/datasets/splits)')
     super(BigearthnetConfig, self).__init__(
-        version=tfds.core.Version('0.0.2',
-                                  experiments={tfds.core.Experiment.S3: False}),
+        version=v002,
+        supported_versions=[v100],
         **kwargs)
     self.selection = selection
 
@@ -211,7 +216,6 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=50,
             gen_kwargs={
                 'path': path,
                 'selection': self.builder_config.selection,
@@ -247,7 +251,7 @@ def _read_chip(path, selection):
       raise ValueError('Unexpected file: %s' % filename)
   if selection == 'rgb':
     d['image'] = _create_rgb_image(d)
-  return d
+  return d['filename'], d
 
 
 def _create_rgb_image(d):

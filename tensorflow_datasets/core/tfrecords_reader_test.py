@@ -275,12 +275,15 @@ class ReaderTest(testing.TestCase):
 
   def _write_tfrecord(self, split_name, shards_number, records):
     path = os.path.join(self.tmp_dir, 'mnist-%s.tfrecord' % split_name)
-    writer = tfrecords_writer._TFRecordWriter(path, len(records), shards_number)
-    for rec in records:
-      writer.write(six.b(rec))
+    num_examples = len(records)
     with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
                                     return_value=shards_number):
-      writer.finalize()
+      shard_specs = tfrecords_writer._get_shard_specs(
+          num_examples, 0, [num_examples], path)
+    serialized_records = [six.b(rec) for rec in records]
+    for shard_spec in shard_specs:
+      tfrecords_writer._write_tfrecord_from_shard_spec(
+          shard_spec, lambda unused_i: iter(serialized_records))
 
   def _write_tfrecords(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')

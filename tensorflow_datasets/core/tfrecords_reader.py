@@ -28,6 +28,7 @@ import attr
 
 import numpy as np
 import tensorflow as tf
+from tensorflow_datasets.core import _sharded_files
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import naming
@@ -82,9 +83,6 @@ def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
 def _get_dataset_files(name, path, instruction, name2shard_lengths):
   """Returns a list of files (+skip/take) corresponding to given instruction.
 
-  This is the core of the reading logic, to translate from absolute instructions
-  (split + left/right boundaries) to files + skip/take.
-
   Args:
     name: Name of the dataset.
     path: path to tfrecords.
@@ -107,17 +105,8 @@ def _get_dataset_files(name, path, instruction, name2shard_lengths):
       filetype_suffix='tfrecord')
   from_ = 0 if instruction.from_ is None else instruction.from_
   to = sum(shard_lengths) if instruction.to is None else instruction.to
-  index_start = 0  # Beginning (included) of moving window.
-  index_end = 0  # End (excluded) of moving window.
-  files = []
-  for filename, length in zip(filenames, shard_lengths):
-    index_end += length
-    if from_ < index_end and to > index_start:  # There is something to take.
-      skip = from_ - index_start if from_ > index_start else 0
-      take = to - index_start - skip if to < index_end else -1
-      files.append(dict(filename=filename, skip=skip, take=take))
-    index_start += length
-  return files
+  return _sharded_files.get_read_instructions(from_, to, filenames,
+                                              shard_lengths)
 
 
 def _read_single_instruction(

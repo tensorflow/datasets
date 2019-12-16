@@ -94,11 +94,6 @@ _QUALITIES = [
 _BASE_DOWNLOAD_PATH = "http://download.magenta.tensorflow.org/datasets/nsynth/nsynth-"
 
 _SPLITS = ["train", "valid", "test"]
-_SPLIT_SHARDS = {
-    "train": 512,
-    "valid": 32,
-    "test": 8,
-}
 
 
 class NsynthConfig(tfds.core.BuilderConfig):
@@ -129,10 +124,15 @@ class NsynthConfig(tfds.core.BuilderConfig):
       name_parts.append("full")
     if estimate_f0_and_loudness:
       name_parts.append("f0_and_loudness")
+    v110 = tfds.core.Version(
+        "1.1.0", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="ec93f3121369716b5d0a3b076d9e080602959b2a")
+    v200 = tfds.core.Version(
+        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(NsynthConfig, self).__init__(
         name=".".join(name_parts),
-        version=tfds.core.Version(
-            "1.1.0", experiments={tfds.core.Experiment.S3: False}),
+        version=v110,
+        supported_versions=[v200],
         **kwargs)
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
@@ -225,7 +225,6 @@ class Nsynth(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(  # pylint: disable=g-complex-comprehension
             name=split,
-            num_shards=_SPLIT_SHARDS[split],
             gen_kwargs={
                 "tfrecord_dirs": split_dirs[split],
                 "ids": split_ids[split],
@@ -242,8 +241,9 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       """Maps an input example to a TFDS example."""
       beam.metrics.Metrics.counter(split, "base-examples").inc()
       features = ex.features.feature
-      return  {
-          "id": features["note_str"].bytes_list.value[0],
+      id_ = features["note_str"].bytes_list.value[0]
+      return  id_, {
+          "id": id_,
           "audio":
               np.array(features["audio"].float_list.value, dtype=np.float32),
           "pitch":
@@ -267,14 +267,16 @@ class Nsynth(tfds.core.BeamBasedBuilder):
           }
       }
 
-    def _in_split(ex, split_ids):
+    def _in_split(id_ex, split_ids):
+      unused_id, ex = id_ex
       if not split_ids or tf.compat.as_text(ex["id"]) in split_ids:
         beam.metrics.Metrics.counter(split, "in-split").inc()
         return True
       return False
 
-    def _estimate_f0(ex):
+    def _estimate_f0(id_ex):
       """Estimate the fundamental frequency using CREPE and add to example."""
+      id_, ex = id_ex
       ex = ex.copy()
       beam.metrics.Metrics.counter(split, "estimate-f0").inc()
       _, f0_hz, f0_confidence, _ = tfds.core.lazy_imports.crepe.predict(
@@ -293,10 +295,11 @@ class Nsynth(tfds.core.BeamBasedBuilder):
           "midi": f0_midi.astype(np.float32),
           "confidence": f0_confidence.astype(np.float32),
       }
-      return ex
+      return id_, ex
 
-    def _compute_loudness(ex):
+    def _compute_loudness(id_ex):
       """Compute loudness and add to example."""
+      id_, ex = id_ex
       ex = ex.copy()
       beam.metrics.Metrics.counter(split, "compute-loudness").inc()
       librosa = tfds.core.lazy_imports.librosa
@@ -319,7 +322,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
           amin=amin,
           top_db=top_db)
       ex["loudness"] = {"db": mean_loudness_db.astype(np.float32)}
-      return ex
+      return id_, ex
 
     examples = (
         pipeline
@@ -336,7 +339,8 @@ class Nsynth(tfds.core.BeamBasedBuilder):
           | beam.Map(_compute_loudness))
       if split == tfds.Split.TRAIN:
         # Output mean and variance of loudness for TRAIN split.
-        loudness = examples | beam.Map(lambda x: np.mean(x["loudness"]["db"]))
+        loudness = examples | beam.Map(
+            lambda id_ex: np.mean(id_ex[1]["loudness"]["db"]))
         loudness_mean = (
             loudness
             | "loudness_mean" >> beam.combiners.Mean.Globally())

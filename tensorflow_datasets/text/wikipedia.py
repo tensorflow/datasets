@@ -21,7 +21,6 @@ from __future__ import print_function
 
 import codecs
 import json
-import math
 import re
 import xml.etree.cElementTree as etree
 
@@ -109,18 +108,27 @@ class WikipediaConfig(tfds.core.BuilderConfig):
     self.language = language
 
 
+_VERSION = tfds.core.Version(
+    "0.0.4", experiments={tfds.core.Experiment.S3: False},
+    tfds_version_to_prepare="f567c68af2e9ea39fe866ada8c92aef3b6dba613")
+
+_SUPPORTED_VERSIONS = [
+    tfds.core.Version(
+        "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+    tfds.core.Version(
+        "0.0.3", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="ec93f3121369716b5d0a3b076d9e080602959b2a"),
+]
+
+
 class Wikipedia(tfds.core.BeamBasedBuilder):
   """Wikipedia dataset."""
   # Use mirror (your.org) to avoid download caps.
 
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
-          version=tfds.core.Version(
-              "0.0.4", experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.3", experiments={tfds.core.Experiment.S3: False})
-          ],
+          version=_VERSION,
+          supported_versions=_SUPPORTED_VERSIONS,
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES
@@ -175,7 +183,6 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=tfds.Split.TRAIN,
-            num_shards=int(math.ceil(total_bytes / (128 * 2**20))),  # max 128MB
             gen_kwargs={"filepaths": downloaded_files["xml"], "language": lang})
     ]
 
@@ -234,7 +241,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
       beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
 
-      yield {
+      yield title, {
           "title": title,
           "text": text
       }

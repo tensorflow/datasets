@@ -22,6 +22,7 @@ from __future__ import print_function
 import os
 
 from absl.testing import absltest
+import dill
 import numpy as np
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -329,6 +330,16 @@ class DatasetBuilderTest(testing.TestCase):
             name="invalid_split_dataset",
             data_dir=tmp_dir,
         )
+
+
+class BuilderPickleTest(testing.TestCase):
+
+  def test_load_dump(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+    builder2 = dill.loads(dill.dumps(builder))
+    self.assertEqual(builder.name, builder2.name)
+    self.assertEqual(builder.version, builder2.version)
 
 
 class BuilderRestoreGcsTest(testing.TestCase):
