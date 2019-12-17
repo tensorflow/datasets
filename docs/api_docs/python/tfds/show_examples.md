@@ -5,7 +5,7 @@
 
 # tfds.show_examples
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -13,7 +13,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/visualization.py">View
 source</a>
 
-<!-- Start diff -->
 Visualize images (and labels) from an image classification dataset.
 
 ```python

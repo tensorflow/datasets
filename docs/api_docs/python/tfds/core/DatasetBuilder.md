@@ -21,7 +21,7 @@
 
 # tfds.core.DatasetBuilder
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -31,7 +31,6 @@ source</a>
 
 ## Class `DatasetBuilder`
 
-<!-- Start diff -->
 Abstract base class for all datasets.
 
 <!-- Placeholder for "Used in" -->

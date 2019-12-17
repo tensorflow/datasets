@@ -31,4 +31,3 @@ return TFRecordExampleAdapter({
 [`class FileFormatAdapter`](../tfds/file_adapter/FileFormatAdapter.md): Provides writing and reading methods for a file format.
 
 [`class TFRecordExampleAdapter`](../tfds/file_adapter/TFRecordExampleAdapter.md): Writes/Reads serialized Examples protos to/from TFRecord files.
-

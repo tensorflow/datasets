@@ -21,7 +21,7 @@
 
 # tfds.testing.DummyMnist
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -31,7 +31,6 @@ source</a>
 
 ## Class `DummyMnist`
 
-<!-- Start diff -->
 Test DatasetBuilder.
 
 Inherits From: [`GeneratorBasedBuilder`](../../tfds/core/GeneratorBasedBuilder.md)

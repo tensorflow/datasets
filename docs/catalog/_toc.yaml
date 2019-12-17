@@ -12,6 +12,8 @@ toc:
     title: abstract_reasoning (manual)
   - path: /datasets/catalog/aflw2k3d
     title: aflw2k3d
+  - path: /datasets/catalog/arc
+    title: arc
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
   - path: /datasets/catalog/binarized_mnist

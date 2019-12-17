@@ -46,4 +46,3 @@ on the `tf.Tensor` shape/dtype.
 [`class Text`](../tfds/features/Text.md): `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
 [`class Video`](../tfds/features/Video.md): `FeatureConnector` for videos, encoding frames individually on disk.
-

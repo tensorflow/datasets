@@ -51,6 +51,7 @@ instruments overlapping between the train set and the valid/test sets.
 Versions:
 
 *   **`1.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
@@ -96,6 +97,7 @@ introduced in the ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 Versions:
 
 *   **`1.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
@@ -144,6 +146,7 @@ rate of 250Hz.
 Versions:
 
 *   **`1.1.0`** (default):
+*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
