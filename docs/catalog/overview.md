@@ -40,6 +40,7 @@ np_datasets = tfds.as_numpy(datasets)
 *   `Image`
     *   [`abstract_reasoning`](abstract_reasoning.md)
     *   [`aflw2k3d`](aflw2k3d.md)
+    *   [`arc`](arc.md)
     *   [`bigearthnet`](bigearthnet.md)
     *   [`binarized_mnist`](binarized_mnist.md)
     *   [`binary_alpha_digits`](binary_alpha_digits.md)

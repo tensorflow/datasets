@@ -112,6 +112,7 @@ manifestations).
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
@@ -150,6 +151,7 @@ Thus, generalisation is required for every question in the test set.
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
@@ -184,6 +186,7 @@ training, whereas in the test set they took values in the upper half.
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
@@ -221,6 +224,7 @@ $(t_1, t_2)$ as a subset.
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
@@ -257,6 +261,7 @@ every $S$ in the test set contained at least one of them.
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
@@ -295,6 +300,7 @@ set, all $S$ contained triples with $a_1$ and $a_2$.
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
@@ -330,6 +336,7 @@ with $o$=shape and $a$=colour.
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):
@@ -365,6 +372,7 @@ with $o$=line and $a$=type.
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 WARNING: This dataset requires you to download the source data manually into
 manual_dir (defaults to `~/tensorflow_datasets/manual/abstract_reasoning/`):

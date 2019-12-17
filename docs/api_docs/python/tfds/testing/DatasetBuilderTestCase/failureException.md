@@ -5,14 +5,13 @@
 
 # tfds.testing.DatasetBuilderTestCase.failureException
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
 ## Class `failureException`
 
-<!-- Start diff -->
 Assertion failed.
 
 **Aliases**: `tfds.testing.FeatureExpectationsTestCase.failureException`,
@@ -20,5 +19,3 @@ Assertion failed.
 `tfds.testing.TestCase.failureException`
 
 <!-- Placeholder for "Used in" -->
-
-

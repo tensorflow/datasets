@@ -21,10 +21,10 @@ of 512 pixels.
     [https://www.vision.ee.ethz.ch/datasets_extra/food-101/](https://www.vision.ee.ethz.ch/datasets_extra/food-101/)
 *   `DatasetBuilder`:
     [`tfds.image.food101.Food101`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/food101.py)
-*   Version: `v1.0.0`
+*   Version: `v2.0.0`
 *   Versions:
 
-    *   **`1.0.0`** (default):
+    *   **`2.0.0`** (default):
 
 *   Size: `4.65 GiB`
 
@@ -38,10 +38,11 @@ FeaturesDict({
 
 ## Statistics
 
-Split | Examples
-:---- | -------:
-ALL   | 101,000
-TRAIN | 101,000
+Split      | Examples
+:--------- | -------:
+ALL        | 101,000
+TRAIN      | 75,750
+VALIDATION | 25,250
 
 ## Homepage
 

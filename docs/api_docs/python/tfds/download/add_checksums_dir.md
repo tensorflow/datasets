@@ -5,7 +5,7 @@
 
 # tfds.download.add_checksums_dir
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -13,7 +13,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/checksums.py">View
 source</a>
 
-<!-- Start diff -->
 Registers a new checksums dir.
 
 ```python

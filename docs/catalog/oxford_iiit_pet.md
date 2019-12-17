@@ -27,7 +27,6 @@ lighting. All images have an associated ground truth annotation of breed.
 *   Size: `?? GiB`
 
 ## Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -39,7 +38,6 @@ FeaturesDict({
 ```
 
 ## Statistics
-
 None computed
 
 ## Homepage

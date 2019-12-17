@@ -16,7 +16,7 @@
 
 # tfds.features.BBoxFeature
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -26,7 +26,6 @@ source</a>
 
 ## Class `BBoxFeature`
 
-<!-- Start diff -->
 `FeatureConnector` for a normalized bounding box.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)

@@ -12,7 +12,7 @@
 
 # tfds.ReadConfig
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -21,8 +21,6 @@
 source</a>
 
 ## Class `ReadConfig`
-
-<!-- Start diff -->
 
 Configures input reading pipeline.
 

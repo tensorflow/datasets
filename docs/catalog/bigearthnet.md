@@ -60,6 +60,7 @@ Sentinel-2 RGB channels
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
@@ -97,6 +98,7 @@ FeaturesDict({
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
