@@ -74,6 +74,7 @@ _CITATION = """\
 _NUM_SECS = 4
 _AUDIO_RATE = 16000  # 16 kHz
 _F0_AND_LOUDNESS_RATE = 250  # 250 Hz
+_CREPE_FRAME_SIZE = 1024
 
 _INSTRUMENT_FAMILIES = [
     "bass", "brass", "flute", "guitar", "keyboard", "mallet", "organ", "reed",
@@ -124,15 +125,14 @@ class NsynthConfig(tfds.core.BuilderConfig):
       name_parts.append("full")
     if estimate_f0_and_loudness:
       name_parts.append("f0_and_loudness")
-    v110 = tfds.core.Version(
-        "1.1.0", experiments={tfds.core.Experiment.S3: False},
-        tfds_version_to_prepare="ec93f3121369716b5d0a3b076d9e080602959b2a")
-    v200 = tfds.core.Version(
-        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+    v120 = tfds.core.Version(
+        "1.2.0", experiments={tfds.core.Experiment.S3: False})
+    v220 = tfds.core.Version(
+        "2.2.0", "New split API (https://tensorflow.org/datasets/splits)")
     super(NsynthConfig, self).__init__(
         name=".".join(name_parts),
-        version=v110,
-        supported_versions=[v200],
+        version=v120,
+        supported_versions=[v220],
         **kwargs)
     self.gansynth_subset = gansynth_subset
     self.estimate_f0_and_loudness = estimate_f0_and_loudness
@@ -277,19 +277,32 @@ class Nsynth(tfds.core.BeamBasedBuilder):
     def _estimate_f0(id_ex):
       """Estimate the fundamental frequency using CREPE and add to example."""
       id_, ex = id_ex
-      ex = ex.copy()
       beam.metrics.Metrics.counter(split, "estimate-f0").inc()
+
+      audio = ex["audio"]
+
+      # Pad end so that `num_frames = _NUM_SECS * _F0_AND_LOUDNESS_RATE`.
+      hop_size = _AUDIO_RATE / _F0_AND_LOUDNESS_RATE
+      n_samples = len(audio)
+      n_frames = _NUM_SECS * _F0_AND_LOUDNESS_RATE
+      n_samples_padded = (n_frames - 1) * hop_size + _CREPE_FRAME_SIZE
+      n_padding = (n_samples_padded - n_samples)
+      assert n_padding % 1 == 0
+      audio = np.pad(audio, (0, int(n_padding)), mode="constant")
+
       _, f0_hz, f0_confidence, _ = tfds.core.lazy_imports.crepe.predict(
-          ex["audio"],
+          audio,
           sr=_AUDIO_RATE,
           viterbi=True,
-          step_size=1000 / _F0_AND_LOUDNESS_RATE,
+          step_size=1000/_F0_AND_LOUDNESS_RATE,
+          center=False,
           verbose=0)
       f0_midi = tfds.core.lazy_imports.librosa.core.hz_to_midi(f0_hz)
       # Set -infs introduced by hz_to_midi to 0.
       f0_midi[f0_midi == -np.inf] = 0
       # Set nans to 0 in confidence.
       f0_confidence = np.nan_to_num(f0_confidence)
+      ex = dict(ex)
       ex["f0"] = {
           "hz": f0_hz.astype(np.float32),
           "midi": f0_midi.astype(np.float32),
@@ -297,32 +310,47 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       }
       return id_, ex
 
-    def _compute_loudness(id_ex):
-      """Compute loudness and add to example."""
-      id_, ex = id_ex
-      ex = ex.copy()
-      beam.metrics.Metrics.counter(split, "compute-loudness").inc()
+    def _calc_loudness(audio, n_fft=2048, top_db=200.0, pmin=1e-20):
+      """Perceptual loudness in tf, following librosa implementation."""
       librosa = tfds.core.lazy_imports.librosa
-      n_fft = 2048
-      amin = 1e-15
-      top_db = 200.0
-      stft = librosa.stft(
-          ex["audio"],
-          n_fft=n_fft,
-          hop_length=int(_AUDIO_RATE // _F0_AND_LOUDNESS_RATE))
-      loudness_db = librosa.perceptual_weighting(
-          np.abs(stft)**2,
-          librosa.fft_frequencies(_AUDIO_RATE, n_fft=n_fft),
-          amin=amin,
-          top_db=top_db)
-      # Average across freq in linear scale.
-      mean_loudness_amp = np.mean(librosa.db_to_amplitude(loudness_db), axis=0)
-      mean_loudness_db = librosa.amplitude_to_db(
-          mean_loudness_amp,
-          amin=amin,
-          top_db=top_db)
-      ex["loudness"] = {"db": mean_loudness_db.astype(np.float32)}
-      return id_, ex
+      log10 = lambda x: tf.log(x) / tf.log(10.0)
+
+      spectra = tf.signal.stft(
+          signals=audio,
+          frame_length=n_fft,
+          frame_step=int(_AUDIO_RATE // _F0_AND_LOUDNESS_RATE),
+          fft_length=n_fft,
+          pad_end=True)
+
+      power = tf.abs(spectra)**2.0
+      power_db = 10.0 * log10(tf.maximum(pmin, power))
+      power_db = tf.maximum(power_db, tf.reduce_max(power_db) - top_db)
+
+      fft_frequencies = librosa.fft_frequencies(n_fft=n_fft)
+      a_weighting = librosa.A_weighting(fft_frequencies)
+
+      loudness = power_db + a_weighting[tf.newaxis, tf.newaxis, :]
+      loudness = tf.reduce_mean(loudness, axis=-1)
+      return loudness
+
+    class _ComputeLoudnessFn(beam.DoFn):
+      """Computes loudness, re-using the TF graph."""
+
+      def start_bundle(self):
+        self._calc_loudness = tf.function(
+            _calc_loudness,
+            input_signature=[tf.TensorSpec(
+                shape=[_NUM_SECS * _AUDIO_RATE], dtype=tf.float32)])
+
+      def process(self, id_ex):
+        """Compute loudness and add to example."""
+        id_, ex = id_ex
+        beam.metrics.Metrics.counter(split, "compute-loudness").inc()
+        mean_loudness_db = self._calc_loudness(ex["audio"])
+
+        ex = dict(ex)
+        ex["loudness"] = {"db": mean_loudness_db.astype(np.float32)}
+        yield id_, ex
 
     examples = (
         pipeline
@@ -336,7 +364,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
           examples
           | beam.Reshuffle()
           | beam.Map(_estimate_f0)
-          | beam.Map(_compute_loudness))
+          | beam.ParDo(_ComputeLoudnessFn()))
       if split == tfds.Split.TRAIN:
         # Output mean and variance of loudness for TRAIN split.
         loudness = examples | beam.Map(
