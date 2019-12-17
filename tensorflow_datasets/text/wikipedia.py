@@ -53,6 +53,7 @@ _LICENSE = (
     "Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.")
 
 # Source: https://en.wikipedia.org/wiki/List_of_Wikipedias (accessed 3/1/2019)
+# Removed because no articles: hz.
 WIKIPEDIA_LANGUAGES = [
     "aa", "ab", "ace", "ady", "af", "ak", "als", "am", "an", "ang", "ar", "arc",
     "arz", "as", "ast", "atj", "av", "ay", "az", "azb", "ba", "bar", "bat-smg",
@@ -63,7 +64,7 @@ WIKIPEDIA_LANGUAGES = [
     "es", "et", "eu", "ext", "fa", "ff", "fi", "fiu-vro", "fj", "fo", "fr",
     "frp", "frr", "fur", "fy", "ga", "gag", "gan", "gd", "gl", "glk", "gn",
     "gom", "gor", "got", "gu", "gv", "ha", "hak", "haw", "he", "hi", "hif",
-    "ho", "hr", "hsb", "ht", "hu", "hy", "hz", "ia", "id", "ie", "ig", "ii",
+    "ho", "hr", "hsb", "ht", "hu", "hy", "ia", "id", "ie", "ig", "ii",
     "ik", "ilo", "inh", "io", "is", "it", "iu", "ja", "jam", "jbo", "jv", "ka",
     "kaa", "kab", "kbd", "kbp", "kg", "ki", "kj", "kk", "kl", "km", "kn", "ko",
     "koi", "kr", "krc", "ks", "ksh", "ku", "kv", "kw", "ky", "la", "lad", "lb",
