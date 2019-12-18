@@ -16,7 +16,7 @@
 """Stanford Online Products Dataset."""
 import csv
 import os
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DOWNLOAD_LINK = "ftp://cs.stanford.edu/cs/cvgl/Stanford_Online_Products.zip"

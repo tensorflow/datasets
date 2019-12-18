@@ -24,7 +24,7 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorflow_datasets.core import utils
 import tensorflow_datasets.public_api as tfds
 

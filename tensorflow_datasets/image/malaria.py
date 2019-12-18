@@ -22,7 +22,7 @@ from __future__ import print_function
 import fnmatch
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "https://ceb.nlm.nih.gov/proj/malaria/cell_images.zip"
