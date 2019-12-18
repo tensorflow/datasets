@@ -27,7 +27,7 @@ import collections
 
 from absl import logging
 import six
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 from tensorflow_datasets.core.features.text import text_encoder
 

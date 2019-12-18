@@ -23,7 +23,7 @@ import collections
 import contextlib
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 
 # Struct containing a graph for the TFGraphRunner

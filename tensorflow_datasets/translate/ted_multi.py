@@ -22,7 +22,7 @@ import csv
 import os
 import six
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\

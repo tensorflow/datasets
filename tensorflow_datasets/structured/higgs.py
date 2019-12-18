@@ -20,7 +20,7 @@ from __future__ import division
 from __future__ import print_function
 
 import csv
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 import tensorflow_datasets.public_api as tfds
 

@@ -25,7 +25,7 @@ import os
 import tempfile
 
 from absl.testing import absltest
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resource_lib

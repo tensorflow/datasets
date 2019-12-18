@@ -22,7 +22,7 @@ from __future__ import print_function
 import os
 import xml.etree.ElementTree
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorflow_datasets.public_api as tfds
 
 

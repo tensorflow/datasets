@@ -23,7 +23,7 @@ import os
 import subprocess as sp
 
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 from tensorflow_datasets.core import utils
 

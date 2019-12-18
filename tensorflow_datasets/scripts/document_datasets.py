@@ -30,7 +30,7 @@ import os
 from absl import app
 from concurrent import futures
 import mako.lookup
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import tensorflow_datasets as tfds
 from tensorflow_datasets.core.utils import py_utils
 

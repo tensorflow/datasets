@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import collections
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 
 def _create_moving_sequence(image, pad_lefts, total_padding):

@@ -28,7 +28,7 @@ import threading
 
 from absl.testing import absltest
 import promise
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import checksums as checksums_lib
 from tensorflow_datasets.core.download import download_manager as dm
