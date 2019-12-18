@@ -22,7 +22,7 @@ from __future__ import print_function
 import os
 
 from absl.testing import absltest
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
 from tensorflow_datasets.core import example_serializer

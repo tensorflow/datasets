@@ -22,7 +22,7 @@ from __future__ import print_function
 import json
 import os.path
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 

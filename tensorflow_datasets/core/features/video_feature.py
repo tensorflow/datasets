@@ -23,7 +23,7 @@ import subprocess
 import tempfile
 
 import six
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 

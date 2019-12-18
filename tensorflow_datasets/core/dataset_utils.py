@@ -23,7 +23,7 @@ import functools
 import itertools
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import tf_compat
 from tensorflow_datasets.core import utils

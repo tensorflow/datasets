@@ -52,7 +52,7 @@ from __future__ import print_function
 import hashlib
 
 import six
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 
 def _to_bytes(data):
