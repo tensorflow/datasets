@@ -41,7 +41,7 @@ DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
     'absl-py',
-    'attrs',
+    'attrs>=18.1.0',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
