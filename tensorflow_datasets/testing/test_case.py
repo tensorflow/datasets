@@ -26,7 +26,7 @@ import tempfile
 from absl import logging
 from absl.testing import absltest
 import six
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorflow_datasets.core.utils import gcs_utils
 
 

@@ -24,7 +24,7 @@ import os
 from absl import app
 from absl import flags
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core.utils import py_utils

@@ -26,7 +26,7 @@ import random
 
 from absl.testing import absltest
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 from tensorflow_datasets.core import features as features_lib
 
