@@ -171,7 +171,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
         "qualities": {quality: tf.bool for quality in _QUALITIES},
     }
     if self.builder_config.estimate_f0_and_loudness:
-      f0_and_ld_shape = (_F0_AND_LOUDNESS_RATE * _NUM_SECS + 1,)
+      f0_and_ld_shape = (_F0_AND_LOUDNESS_RATE * _NUM_SECS,)
       features["f0"] = {
           "hz":
               tfds.features.Tensor(shape=f0_and_ld_shape, dtype=tf.float32),
@@ -313,7 +313,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
     def _calc_loudness(audio, n_fft=2048, top_db=200.0, pmin=1e-20):
       """Perceptual loudness in tf, following librosa implementation."""
       librosa = tfds.core.lazy_imports.librosa
-      log10 = lambda x: tf.log(x) / tf.log(10.0)
+      log10 = lambda x: tf.math.log(x) / tf.math.log(10.0)
 
       spectra = tf.signal.stft(
           signals=audio,
@@ -329,7 +329,7 @@ class Nsynth(tfds.core.BeamBasedBuilder):
       fft_frequencies = librosa.fft_frequencies(n_fft=n_fft)
       a_weighting = librosa.A_weighting(fft_frequencies)
 
-      loudness = power_db + a_weighting[tf.newaxis, tf.newaxis, :]
+      loudness = power_db + a_weighting[tf.newaxis, :]
       loudness = tf.reduce_mean(loudness, axis=-1)
       return loudness
 
@@ -341,15 +341,18 @@ class Nsynth(tfds.core.BeamBasedBuilder):
             _calc_loudness,
             input_signature=[tf.TensorSpec(
                 shape=[_NUM_SECS * _AUDIO_RATE], dtype=tf.float32)])
+        self._sess = None if tf.executing_eagerly() else tf.Session()
 
       def process(self, id_ex):
         """Compute loudness and add to example."""
         id_, ex = id_ex
         beam.metrics.Metrics.counter(split, "compute-loudness").inc()
         mean_loudness_db = self._calc_loudness(ex["audio"])
+        if self._sess:
+          mean_loudness_db = self._sess.run(mean_loudness_db)
 
         ex = dict(ex)
-        ex["loudness"] = {"db": mean_loudness_db.astype(np.float32)}
+        ex["loudness"] = {"db": mean_loudness_db}
         yield id_, ex
 
     examples = (

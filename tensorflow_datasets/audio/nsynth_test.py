@@ -37,7 +37,7 @@ class NsynthFullTest(tfds_test.DatasetBuilderTestCase):
 
 class GANsynthTest(NsynthFullTest):
   BUILDER_CONFIG_NAMES_TO_TEST = ["gansynth_subset"]
-  SPLITS = {"train": 3, "test": 1, "valid": 2}
+  SPLITS = {"train": 2, "test": 1, "valid": 1}
   DL_EXTRACT_RESULT = dict(NsynthFullTest.DL_EXTRACT_RESULT)
   DL_EXTRACT_RESULT["gansynth_splits"] = "gansynth_splits.csv"
 
