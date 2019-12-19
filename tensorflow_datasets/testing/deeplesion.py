@@ -81,7 +81,7 @@ def _generate_data():
 
   images_p1 = os.path.join(images_dir1, '000001_01_01')
   images_p2 = os.path.join(images_dir2, '000002_01_01')
-  images_p3 = os.path.join(images_dir2, '000003_01_01') 
+  images_p3 = os.path.join(images_dir3, '000003_01_01') 
   if not tf.io.gfile.exists(images_dir1):
     tf.io.gfile.makedirs(images_dir1)
   if not tf.io.gfile.exists(images_dir2):
