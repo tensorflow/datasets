@@ -86,6 +86,7 @@ DATASET_FILES = [
     'image/cbis_ddsm_patch_labels.txt',
     'image/dtd_key_attributes.txt',
     'image/food-101_classes.txt',
+    'image/imagenet_resized_labels.txt',
     'image/imagenet2012_labels.txt',
     'image/imagenet2012_validation_labels.txt',
     'image/imagenette_labels.txt',
