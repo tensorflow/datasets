@@ -20,11 +20,16 @@ from tensorflow_datasets.image import cars196
 import tensorflow_datasets.testing as tfds_test
 
 
-class BinaryAlphaDigitsTest(tfds_test.DatasetBuilderTestCase):
+class Cars196Test(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = cars196.Cars196
   SPLITS = {'train': 2, 'test': 2}
 
-  DL_EXTRACT_RESULT = {'train': 'train', 'test': 'test', 'extra': 'extra'}
+  DL_EXTRACT_RESULT = {
+      'train': 'train',
+      'test': 'test',
+      'extra': 'extra',
+      'test_annos': 'cars_test_annos_withlabels.mat'
+  }
 
 
 if __name__ == '__main__':

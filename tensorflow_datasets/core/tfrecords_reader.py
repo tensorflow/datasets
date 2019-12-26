@@ -28,6 +28,7 @@ import attr
 
 import numpy as np
 import tensorflow as tf
+from tensorflow_datasets.core import _sharded_files
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import naming
@@ -51,15 +52,15 @@ $
 _ADDITION_SEP_RE = re.compile(r'\s*\+\s*')
 
 
-def _with_options(dataset):
-  """Applies optimization options to given dataset."""
+def _default_options():
+  """Returns optimization options to given dataset."""
   options = tf.data.Options()
   options.experimental_threading.max_intra_op_parallelism = 1
   options.experimental_threading.private_threadpool_size = 16
   options.experimental_optimization.apply_default_optimizations = True
   options.experimental_optimization.map_fusion = True
   options.experimental_optimization.map_parallelization = True
-  return dataset.with_options(options)
+  return options
 
 
 def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
@@ -67,24 +68,20 @@ def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
   filename, skip, take = (filename_skip_take['filename'],
                           filename_skip_take['skip'],
                           filename_skip_take['take'],)
-  dataset = tf.data.TFRecordDataset(
+  ds = tf.data.TFRecordDataset(
       filename,
       buffer_size=_BUFFER_SIZE,
       num_parallel_reads=1,
       )
   if do_skip:
-    dataset = dataset.skip(skip)
+    ds = ds.skip(skip)
   if do_take:
-    dataset = dataset.take(take)
-  dataset = _with_options(dataset)
-  return dataset
+    ds = ds.take(take)
+  return ds
 
 
 def _get_dataset_files(name, path, instruction, name2shard_lengths):
   """Returns a list of files (+skip/take) corresponding to given instruction.
-
-  This is the core of the reading logic, to translate from absolute instructions
-  (split + left/right boundaries) to files + skip/take.
 
   Args:
     name: Name of the dataset.
@@ -108,28 +105,27 @@ def _get_dataset_files(name, path, instruction, name2shard_lengths):
       filetype_suffix='tfrecord')
   from_ = 0 if instruction.from_ is None else instruction.from_
   to = sum(shard_lengths) if instruction.to is None else instruction.to
-  index_start = 0  # Beginning (included) of moving window.
-  index_end = 0  # End (excluded) of moving window.
-  files = []
-  for filename, length in zip(filenames, shard_lengths):
-    index_end += length
-    if from_ < index_end and to > index_start:  # There is something to take.
-      skip = from_ - index_start if from_ > index_start else 0
-      take = to - index_start - skip if to < index_end else -1
-      files.append(dict(filename=filename, skip=skip, take=take))
-    index_start += length
-  return files
+  return _sharded_files.get_read_instructions(from_, to, filenames,
+                                              shard_lengths)
 
 
 def _read_single_instruction(
     instruction,
-    parse_fn, name, path, name2len, name2shard_lengths, shuffle_files):
+    parse_fn,
+    read_config,
+    name,
+    path,
+    name2len,
+    name2shard_lengths,
+    shuffle_files):
   """Returns tf.data.Dataset for given instruction.
 
   Args:
     instruction (ReadInstruction or str): if str, a ReadInstruction will be
       constructed using `ReadInstruction.from_spec(str)`.
     parse_fn (callable): function used to parse each record.
+    read_config: `tfds.ReadConfig`, Additional options to configure the
+      input pipeline (e.g. seed, num parallel reads,...).
     name (str): name of the dataset.
     path (str): path to directory where to read tfrecords from.
     name2len: dict associating split names to number of examples.
@@ -145,6 +141,10 @@ def _read_single_instruction(
   if not files:
     msg = 'Instruction "%s" corresponds to no data!' % instruction
     raise AssertionError(msg)
+  # Eventually apply a transformation to the instruction function.
+  # This allow the user to have direct control over the interleave order.
+  if read_config.experimental_interleave_sort_fn is not None:
+    files = read_config.experimental_interleave_sort_fn(files)
 
   do_skip = any(f['skip'] > 0 for f in files)
   do_take = any(f['take'] > -1 for f in files)
@@ -156,19 +156,20 @@ def _read_single_instruction(
       for k, vals in utils.zip_dict(*files)
   }
 
-  # Both parallel_reads and block_length have empirically been tested to give
-  # good results on imagenet.
-  # This values might be changes in the future, with more performance test runs.
-  parallel_reads = 16
-  block_length = 16
+  parallel_reads = read_config.interleave_parallel_reads
+  block_length = read_config.interleave_block_length
 
   instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
 
   # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:
-    instruction_ds = instruction_ds.shuffle(len(tensor_inputs['filename']))
+    instruction_ds = instruction_ds.shuffle(
+        len(tensor_inputs['filename']),
+        seed=read_config.shuffle_seed,
+        reshuffle_each_iteration=read_config.shuffle_reshuffle_each_iteration,
+    )
 
-  dataset = instruction_ds.interleave(
+  ds = instruction_ds.interleave(
       functools.partial(_get_dataset_from_filename,
                         do_skip=do_skip, do_take=do_take),
       cycle_length=parallel_reads,
@@ -176,11 +177,16 @@ def _read_single_instruction(
       num_parallel_calls=tf.data.experimental.AUTOTUNE,
       )
 
+  # TODO(tfds): Should merge the default options with read_config to allow users
+  # to overwrite the default options.
+  ds = ds.with_options(_default_options())  # Default performance options
+  ds = ds.with_options(read_config.options)  # Additional users options
+
   # TODO(pierrot): `parse_example` uses
   # `tf.io.parse_single_example`. It might be faster to use `parse_example`,
   # after batching.
   # https://www.tensorflow.org/api_docs/python/tf/io/parse_example
-  return dataset.map(parse_fn)
+  return ds.map(parse_fn)
 
 
 class Reader(object):
@@ -199,7 +205,14 @@ class Reader(object):
     self._path = path
     self._parser = example_parser.ExampleParser(example_specs)
 
-  def read(self, name, instructions, split_infos, shuffle_files=False):
+  def read(
+      self,
+      name,
+      instructions,
+      split_infos,
+      read_config,
+      shuffle_files,
+  ):
     """Returns tf.data.Dataset instance(s).
 
     Args:
@@ -208,8 +221,8 @@ class Reader(object):
         Instructions can be string and will then be passed to the Instruction
         constructor as it.
       split_infos (list of SplitInfo proto): the available splits for dataset.
-      shuffle_files (bool): defaults to False. If True, input files are shuffled
-        before being read.
+      read_config: `tfds.ReadConfig`, the input pipeline options
+      shuffle_files (bool): If True, input files are shuffled before being read.
 
     Returns:
        a single tf.data.Dataset instance if instruction is a single
@@ -222,6 +235,7 @@ class Reader(object):
     read_instruction = functools.partial(
         _read_single_instruction,
         parse_fn=self._parser.parse_example,
+        read_config=read_config,
         name=name, path=self._path,
         name2len=name2len, name2shard_lengths=name2shard_lengths,
         shuffle_files=shuffle_files)

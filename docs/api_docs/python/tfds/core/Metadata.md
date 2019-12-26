@@ -7,7 +7,7 @@
 
 # tfds.core.Metadata
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -17,7 +17,6 @@ source</a>
 
 ## Class `Metadata`
 
-<!-- Start diff -->
 Abstract base class for DatasetInfo metadata container.
 
 <!-- Placeholder for "Used in" -->

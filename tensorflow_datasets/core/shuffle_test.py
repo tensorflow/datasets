@@ -69,7 +69,7 @@ class GetShardTest(testing.TestCase):
   @mock.patch.object(shuffle, 'HKEY_SIZE', 10)  # 1024 keys.
   def test_order(self):
     shards_number = 10
-    shards = [shuffle._get_shard(k, shards_number) for k in range(1024)]
+    shards = [shuffle.get_bucket_number(k, shards_number) for k in range(1024)]
     # Check max(shard_x) < min(shard_y) if x < y.
     previous_shard = 0
     for shard in shards:

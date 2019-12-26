@@ -56,6 +56,8 @@ class StarcraftVideoConfig(tfds.core.BuilderConfig):
     super(StarcraftVideoConfig, self).__init__(
         version=tfds.core.Version(
             "0.1.2", experiments={tfds.core.Experiment.S3: False}),
+        supported_versions=[tfds.core.Version(
+            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)")],
         **kwargs)
     self.map_name = map_name
     self.resolution = resolution
@@ -205,7 +207,7 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, files):
     logging.info("Reading data from %s.", ",".join(files))
     with tf.Graph().as_default():
-      ds = tf.data.TFRecordDataset(files)
+      ds = tf.data.TFRecordDataset(sorted(files))
       ds = ds.map(
           self._parse_single_video,
           num_parallel_calls=tf.data.experimental.AUTOTUNE)
@@ -213,9 +215,11 @@ class StarcraftVideo(tfds.core.GeneratorBasedBuilder):
       with tf.compat.v1.Session() as sess:
         sess.run(tf.compat.v1.global_variables_initializer())
         try:
+          i = 0
           while True:
             video = sess.run(iterator)
-            yield {"rgb_screen": video}
+            yield i, {"rgb_screen": video}
+            i += 1
 
         except tf.errors.OutOfRangeError:
           # End of file.

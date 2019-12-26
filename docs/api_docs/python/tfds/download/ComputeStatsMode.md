@@ -8,7 +8,7 @@
 
 # tfds.download.ComputeStatsMode
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -18,7 +18,6 @@ source</a>
 
 ## Class `ComputeStatsMode`
 
-<!-- Start diff -->
 Mode to decide if dynamic dataset info fields should be computed or not.
 
 <!-- Placeholder for "Used in" -->

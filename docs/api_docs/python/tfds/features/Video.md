@@ -18,7 +18,7 @@
 
 # tfds.features.Video
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -28,7 +28,6 @@ source</a>
 
 ## Class `Video`
 
-<!-- Start diff -->
 `FeatureConnector` for videos, encoding frames individually on disk.
 
 Inherits From: [`Sequence`](../../tfds/features/Sequence.md)

@@ -1,0 +1,334 @@
+{
+  "citation": "\n@article{DBLP:journals/corr/abs-1903-04561,\n  author    = {Daniel Borkan and\n               Lucas Dixon and\n               Jeffrey Sorensen and\n               Nithum Thain and\n               Lucy Vasserman},\n  title     = {Nuanced Metrics for Measuring Unintended Bias with Real Data for Text\n               Classification},\n  journal   = {CoRR},\n  volume    = {abs/1903.04561},\n  year      = {2019},\n  url       = {http://arxiv.org/abs/1903.04561},\n  archivePrefix = {arXiv},\n  eprint    = {1903.04561},\n  timestamp = {Sun, 31 Mar 2019 19:01:24 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1903-04561},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n",
+  "description": "\nThe comments in this dataset come from an archive of the Civil Comments\nplatform, a commenting plugin for independent news sites. These public comments\nwere created from 2015 - 2017 and appeared on approximately 50 English-language\nnews sites across the world. When Civil Comments shut down in 2017, they chose\nto make the public comments available in a lasting open archive to enable future\nresearch. The original data, published on figshare, includes the public comment\ntext, some associated metadata such as article IDs, timestamps and\ncommenter-generated \"civility\" labels, but does not include user ids. Jigsaw\nextended this dataset by adding additional labels for toxicity and identity\nmentions. This data set is an exact replica of the data released for the\nJigsaw Unintended Bias in Toxicity Classification Kaggle challenge.  This\ndataset is released under CC0, as is the underlying comment text.\n",
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data"
+    ]
+  },
+  "name": "civil_comments",
+  "schema": {
+    "feature": [
+      {
+        "name": "identity_attack",
+        "type": "FLOAT"
+      },
+      {
+        "name": "insult",
+        "type": "FLOAT"
+      },
+      {
+        "name": "obscene",
+        "type": "FLOAT"
+      },
+      {
+        "name": "severe_toxicity",
+        "type": "FLOAT"
+      },
+      {
+        "name": "sexual_explicit",
+        "type": "FLOAT"
+      },
+      {
+        "name": "text",
+        "type": "BYTES"
+      },
+      {
+        "name": "threat",
+        "type": "FLOAT"
+      },
+      {
+        "name": "toxicity",
+        "type": "FLOAT"
+      }
+    ]
+  },
+  "sizeInBytes": "414947977",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "97320"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "identity_attack",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "insult",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "obscene",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "severe_toxicity",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 0.4000000059604645
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "sexual_explicit",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 0.9727126955986023
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              }
+            },
+            "name": "text",
+            "type": "BYTES"
+          },
+          {
+            "name": "threat",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "toxicity",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          }
+        ],
+        "numExamples": "97320"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "225609",
+        "225609",
+        "225610",
+        "225609",
+        "225609",
+        "225610",
+        "225609",
+        "225609"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "identity_attack",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1804874"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "insult",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1804874"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "obscene",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1804874"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "severe_toxicity",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1804874"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "sexual_explicit",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1804874"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "1804874"
+              }
+            },
+            "name": "text",
+            "type": "BYTES"
+          },
+          {
+            "name": "threat",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1804874"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "toxicity",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "1804874"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          }
+        ],
+        "numExamples": "1804874"
+      }
+    },
+    {
+      "name": "validation",
+      "numShards": "1",
+      "shardLengths": [
+        "97320"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "identity_attack",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "insult",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "obscene",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "severe_toxicity",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 0.30000001192092896
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "sexual_explicit",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "bytesStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              }
+            },
+            "name": "text",
+            "type": "BYTES"
+          },
+          {
+            "name": "threat",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "toxicity",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "97320"
+              },
+              "max": 1.0
+            },
+            "type": "FLOAT"
+          }
+        ],
+        "numExamples": "97320"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "text",
+    "output": "toxicity"
+  },
+  "version": "0.9.0"
+}

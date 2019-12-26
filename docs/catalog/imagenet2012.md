@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="http://image-net.org/" />
   <meta itemprop="citation" content="@article{ILSVRC15,&#10;Author = {Olga Russakovsky and Jia Deng and Hao Su and Jonathan Krause and Sanjeev Satheesh and Sean Ma and Zhiheng Huang and Andrej Karpathy and Aditya Khosla and Michael Bernstein and Alexander C. Berg and Li Fei-Fei},&#10;Title = {{ImageNet Large Scale Visual Recognition Challenge}},&#10;Year = {2015},&#10;journal   = {International Journal of Computer Vision (IJCV)},&#10;doi = {10.1007/s11263-015-0816-y},&#10;volume={115},&#10;number={3},&#10;pages={211-252}&#10;}&#10;" />
 </div>
-# `imagenet2012`
+# `imagenet2012` (Manual download)
 
 ILSVRC 2012, aka ImageNet is an image dataset organized according to the WordNet
 hierarchy. Each meaningful concept in WordNet, possibly described by multiple
@@ -32,6 +32,13 @@ include splits for the training and validation sets here.
     *   `5.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 *   Size: `?? GiB`
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/imagenet2012/`):
+manual_dir should contain two files: ILSVRC2012_img_train.tar and
+ILSVRC2012_img_val.tar. You need to register on
+http://www.image-net.org/download-images in order to get the link to download
+the dataset.
 
 ## Features
 ```python

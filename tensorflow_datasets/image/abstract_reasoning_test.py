@@ -20,6 +20,7 @@ import tensorflow_datasets.testing as tfds_test
 
 class AbstractReasoningTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = abstract_reasoning.AbstractReasoning
+  VERSION = "experimental_latest"
   SPLITS = {"train": 5, "validation": 5, "test": 5}
   DL_EXTRACT_RESULT = [
       "neutral.tar.gz",

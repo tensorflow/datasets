@@ -16,7 +16,7 @@
 
 # tfds.features.Audio
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -26,7 +26,6 @@ source</a>
 
 ## Class `Audio`
 
-<!-- Start diff -->
 `FeatureConnector` for audio, encoded as raw integer wave form.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)

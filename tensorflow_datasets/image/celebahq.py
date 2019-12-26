@@ -77,6 +77,13 @@ class CelebaHQConfig(tfds.core.BuilderConfig):
 class CelebAHq(tfds.core.GeneratorBasedBuilder):
   """Celeba_HQ Dataset."""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  manual_dir should contain multiple tar files with images (data2x2.tar,
+  data4x4.tar .. data1024x1024.tar).
+  Detailed instructions are here:
+  https://github.com/tkarras/progressive_growing_of_gans#preparing-datasets-for-training
+  """
+
   VERSION = tfds.core.Version("0.1.0")
 
   BUILDER_CONFIGS = [

@@ -157,9 +157,9 @@ Some additional considerations:
     object in your functions which has been declared outside of the function,
     you may encounter `pickle` errors or unexpected behavior. The fix is
     typically to avoid mutating closed-over objects.
-*   Avoid using methods on `DatasetBuilder` in the Beam pipeline because
-    Beam will try to pickle the class, including the `DatasetInfo` protocol
-    buffer, which will fail.
+*   Using methods on `DatasetBuilder` in the Beam pipeline is fine. However,
+    the way the class is serialized during pickle, changes done to features
+    during creation will be ignored at best.
 
 ### Example
 
@@ -188,7 +188,6 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs=dict(file_dir='path/to/train_data/'),
         ),
         splits_lib.SplitGenerator(
@@ -203,7 +202,7 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
     beam = tfds.core.lazy_imports.apache_beam
 
     def _process_example(filename):
-      return {
+      return key, {
           'image': os.path.join(file_dir, filename),
           'label': filename.split('.')[1],  # Extract label: "0010102.dog.jpeg"
       }

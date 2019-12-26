@@ -5,7 +5,7 @@
 
 # tfds.decode.make_decoder
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -13,7 +13,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
-<!-- Start diff -->
 Decorator to create a decoder.
 
 ```python

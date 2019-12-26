@@ -25,14 +25,16 @@ from tensorflow_datasets.text import trivia_qa
 
 class TriviaqaTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = trivia_qa.TriviaQA
+  DL_EXTRACT_RESULT = {
+      "rc": "",
+      "unfiltered": "",
+  }
   SPLITS = {
-      "train": 1,  # Number of fake train example
-      "test": 1,  # Number of fake test example
+      "train": 2,
+      "test": 1,
+      "validation": 1,
   }
 
-
-class TriviaqaS3Test(TriviaqaTest):
-  VERSION = "experimental_latest"
 
 if __name__ == "__main__":
   testing.test_main()

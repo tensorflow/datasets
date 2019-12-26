@@ -9,7 +9,7 @@
 
 # tfds.core.ReadInstruction
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -19,7 +19,6 @@ source</a>
 
 ## Class `ReadInstruction`
 
-<!-- Start diff -->
 Reading instruction for a dataset.
 
 <!-- Placeholder for "Used in" -->

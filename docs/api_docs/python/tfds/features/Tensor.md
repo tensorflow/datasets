@@ -16,7 +16,7 @@
 
 # tfds.features.Tensor
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -26,7 +26,6 @@ source</a>
 
 ## Class `Tensor`
 
-<!-- Start diff -->
 `FeatureConnector` for generic data of arbitrary shape and type.
 
 Inherits From: [`FeatureConnector`](../../tfds/features/FeatureConnector.md)

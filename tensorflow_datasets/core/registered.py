@@ -185,6 +185,7 @@ def load(name,
          download=True,
          as_supervised=False,
          decoders=None,
+         read_config=None,
          with_info=False,
          builder_kwargs=None,
          download_and_prepare_kwargs=None,
@@ -259,6 +260,8 @@ def load(name,
       customized feature keys need to be present. See
       [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
       for more info.
+    read_config: `tfds.ReadConfig`, Additional options to configure the
+      input pipeline (e.g. seed, num parallel reads,...).
     with_info: `bool`, if True, tfds.load will return the tuple
       (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated
       with the builder.
@@ -310,6 +313,7 @@ def load(name,
   as_dataset_kwargs.setdefault("decoders", decoders)
   as_dataset_kwargs.setdefault("in_memory", in_memory)
   as_dataset_kwargs.setdefault("shuffle_files", shuffle_files)
+  as_dataset_kwargs.setdefault("read_config", read_config)
 
   ds = dbuilder.as_dataset(**as_dataset_kwargs)
   if with_info:

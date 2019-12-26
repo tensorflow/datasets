@@ -55,8 +55,8 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version('2.0.1', 'Encoding fix. No changes from user POV')
   SUPPORTED_VERSIONS = [
       tfds.core.Version('3.0.0', 'S3: tensorflow.org/datasets/splits'),
-      tfds.core.Version('2.0.1', 'Encoding fix. No changes from user POV'),
       tfds.core.Version('1.0.0'),
+      tfds.core.Version('0.0.9', tfds_version_to_prepare="v1.0.0"),
   ]
 ```
 
@@ -69,6 +69,12 @@ identical to `2.0.1` from a reader perspective.
 Supported versions with a higher number than the canonical version number are
 considered experimental and might be broken. They will however eventually be
 made canonical.
+
+A version can specify `tfds_version_to_prepare`. This means this dataset version
+can only be used with current version of TFDS code if it has already been
+prepared by an older version of the code, but cannot be prepared. The
+value of `tfds_version_to_prepare` specifies the last known version of TFDS
+which can be used to download and prepare the dataset at this version.
 
 ## Loading a specific version
 

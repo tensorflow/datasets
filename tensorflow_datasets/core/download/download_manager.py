@@ -150,6 +150,7 @@ class DownloadManager(object):
                download_dir,
                extract_dir=None,
                manual_dir=None,
+               manual_dir_instructions=None,
                dataset_name=None,
                force_download=False,
                force_extraction=False,
@@ -160,6 +161,8 @@ class DownloadManager(object):
       download_dir: `str`, path to directory where downloads are stored.
       extract_dir: `str`, path to directory where artifacts are extracted.
       manual_dir: `str`, path to manually downloaded/extracted data directory.
+      manual_dir_instructions: `str`, human readable instructions on how to
+                         prepare contents of the manual_dir for this dataset.
       dataset_name: `str`, name of dataset this instance will be used for. If
         provided, downloads will contain which datasets they were used for.
       force_download: `bool`, default to False. If True, always [re]download.
@@ -172,6 +175,7 @@ class DownloadManager(object):
     self._extract_dir = os.path.expanduser(
         extract_dir or os.path.join(download_dir, 'extracted'))
     self._manual_dir = manual_dir and os.path.expanduser(manual_dir)
+    self._manual_dir_instructions = manual_dir_instructions
     tf.io.gfile.makedirs(self._download_dir)
     tf.io.gfile.makedirs(self._extract_dir)
     self._force_download = force_download
@@ -374,10 +378,15 @@ class DownloadManager(object):
   @property
   def manual_dir(self):
     """Returns the directory containing the manually extracted data."""
+    if not self._manual_dir:
+      raise AssertionError(
+          'Manual directory was enabled. '
+          'Did you set MANUAL_DOWNLOAD_INSTRUCTIONS in your dataset?')
     if not tf.io.gfile.exists(self._manual_dir):
       raise AssertionError(
           'Manual directory {} does not exist. Create it and download/extract '
-          'dataset artifacts in there.'.format(self._manual_dir))
+          'dataset artifacts in there. Additional instructions: {}'.format(
+              self._manual_dir, self._manual_dir_instructions))
     return self._manual_dir
 
 

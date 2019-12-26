@@ -17,6 +17,8 @@ toc:
     path: /datasets/api_docs/python/tfds/load
   - title: percent
     path: /datasets/api_docs/python/tfds/percent
+  - title: ReadConfig
+    path: /datasets/api_docs/python/tfds/ReadConfig
   - title: show_examples
     path: /datasets/api_docs/python/tfds/show_examples
   - title: Split

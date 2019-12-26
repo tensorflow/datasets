@@ -79,6 +79,14 @@ class Ucf101Config(tfds.core.BuilderConfig):
     self.split_number = split_number
 
 
+_VERSION = tfds.core.Version(
+    '1.0.0', experiments={tfds.core.Experiment.S3: False})
+_SUPPORTED_VERSIONS = [
+    tfds.core.Version(
+        '2.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
+]
+
+
 class Ucf101(tfds.core.GeneratorBasedBuilder):
   """Ucf101 action recognition dataset.
 
@@ -93,8 +101,8 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=256,
           height=256,
           split_number=1,
-          version=tfds.core.Version(
-              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+          version=_VERSION,
+          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_1',
@@ -102,8 +110,8 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=None,
           height=None,
           split_number=1,
-          version=tfds.core.Version(
-              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+          version=_VERSION,
+          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_2',
@@ -111,8 +119,8 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=None,
           height=None,
           split_number=2,
-          version=tfds.core.Version(
-              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+          version=_VERSION,
+          supported_versions=_SUPPORTED_VERSIONS,
       ),
       Ucf101Config(
           name='ucf101_3',
@@ -120,8 +128,8 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
           width=None,
           height=None,
           split_number=3,
-          version=tfds.core.Version(
-              '1.0.0', experiments={tfds.core.Experiment.S3: False}),
+          version=_VERSION,
+          supported_versions=_SUPPORTED_VERSIONS,
       ),
   ]
 
@@ -186,7 +194,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
     data_list_path_path = os.path.join(splits_dir, data_list)
     with tf.io.gfile.GFile(data_list_path_path, 'r') as data_list_file:
       labels_and_paths = data_list_file.readlines()
-    for label_and_path in labels_and_paths:
+    for label_and_path in sorted(labels_and_paths):
       # The train splits contain not only the filename, but also a digit
       # encoding the label separated by a space, which we ignore.
       label_and_path = label_and_path.strip().split(' ')[0]
@@ -198,4 +206,4 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
         logging.error('Example %s not found', video_path)
         continue
       # We extract the label from the filename.
-      yield {'video': video_path, 'label': label}
+      yield path, {'video': video_path, 'label': label}

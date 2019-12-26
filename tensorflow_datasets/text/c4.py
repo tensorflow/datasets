@@ -48,9 +48,19 @@ _CITATION = """
 }
 """
 _VERSION = tfds.core.Version(
-    "1.0.1", experiments={tfds.core.Experiment.S3: False})
+    "1.1.0", experiments={tfds.core.Experiment.S3: False},
+    tfds_version_to_prepare="42f5bf89efcfd2cd165c2511b22be49cb1a50856")
+
 _SUPPORTED_VERSIONS = [
-    tfds.core.Version("1.0.0", experiments={tfds.core.Experiment.S3: False})]
+    tfds.core.Version(
+        "2.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+    tfds.core.Version(
+        "1.0.1", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
+    tfds.core.Version(
+        "1.0.0", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="6e3fdaea40ff881ca74306279401efd9185a9541"),
+]
 
 _DOWNLOAD_HOST = "https://commoncrawl.s3.amazonaws.com"
 _WET_PATH_URL = "https://commoncrawl.s3.amazonaws.com/crawl-data/CC-MAIN-{cc_version}/wet.paths.gz"
@@ -65,7 +75,6 @@ _DEFAULT_CC_VERSIONS = ("2019-18",)  # April 2019
 _DEFAULT_WEBTEXTLIKE_CC_VERSIONS = (  # August 2018 - July 2019
     "2018-34", "2018-39", "2018-43", "2018-47", "2018-51",
     "2019-04", "2019-09", "2019-13", "2019-18", "2019-22", "2019-26", "2019-30")
-_DEFAULT_NUM_SHARDS = 10000
 
 
 class C4Config(tfds.core.BuilderConfig):
@@ -117,6 +126,14 @@ class C4Config(tfds.core.BuilderConfig):
 
 class C4(tfds.core.BeamBasedBuilder):
   """C4 dataset based on Common Crawl."""
+
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  For the WebText-like config, you must manually download 'OpenWebText.zip'
+  (from https://mega.nz/#F!EZZD0YwJ!9_PlEQzdMVLaNdKv_ICNVQ) and the Common Crawl
+  WET files from August 2018 to July 2019
+  (https://commoncrawl.org/the-data/get-started/) and place them in the
+  `manual_dir`.
+  """
 
   BUILDER_CONFIGS = [
       C4Config(language="en", description="English C4 dataset."),
@@ -206,15 +223,9 @@ class C4(tfds.core.BeamBasedBuilder):
           len(wet_files), cc_version)
       file_paths["wet_files"].extend(wet_files)
 
-    if self.builder_config.realnewslike or self.builder_config.webtextlike:
-      num_shards = max(1, _DEFAULT_NUM_SHARDS // 10)
-    else:
-      num_shards = _DEFAULT_NUM_SHARDS
-
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=num_shards,
             gen_kwargs={"file_paths": file_paths},
         )
     ]
@@ -289,7 +300,7 @@ class C4(tfds.core.BeamBasedBuilder):
     def _emit_examples(el):
       c4_utils.get_counter_inc_fn("emit-examples")("emitted")
       _, features = el
-      return {
+      return features["url"], {
           "url": features["url"],
           "text": features["text"],
           "content-type": features["content-type"],

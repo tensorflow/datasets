@@ -13,7 +13,7 @@
 
 # tfds.features.text.SubwordTextEncoder
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -23,7 +23,6 @@ source</a>
 
 ## Class `SubwordTextEncoder`
 
-<!-- Start diff -->
 Invertible `TextEncoder` using word pieces with a byte-level fallback.
 
 Inherits From: [`TextEncoder`](../../../tfds/features/text/TextEncoder.md)

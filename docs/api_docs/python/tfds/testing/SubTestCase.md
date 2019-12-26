@@ -139,7 +139,7 @@
 
 # tfds.testing.SubTestCase
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -149,7 +149,6 @@ source</a>
 
 ## Class `SubTestCase`
 
-<!-- Start diff -->
 Adds subTest() context manager to the TestCase if supported.
 
 Inherits From: [`TestCase`](../../tfds/testing/TestCase.md)

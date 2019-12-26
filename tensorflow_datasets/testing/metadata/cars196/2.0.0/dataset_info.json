@@ -1,0 +1,150 @@
+{
+  "citation": "\n    @inproceedings{KrauseStarkDengFei-Fei_3DRR2013,\n  title = {3D Object Representations for Fine-Grained Categorization},\n  booktitle = {4th International IEEE Workshop on  3D Representation and Recognition (3dRR-13)},\n  year = {2013},\n  address = {Sydney, Australia},\n  author = {Jonathan Krause and Michael Stark and Jia Deng and Li Fei-Fei}\n  }\n\n",
+  "description": "The Cars dataset contains 16,185 images of 196 classes of cars. The data is split into 8,144 training images and 8,041 testing images, where each class has been split roughly in a 50-50 split. Classes are typically at the level of Make, Model, Year, e.g. 2012 Tesla Model S or 2012 BMW M3 coupe.",
+  "location": {
+    "urls": [
+      "https://ai.stanford.edu/~jkrause/cars/car_dataset.html"
+    ]
+  },
+  "name": "cars196",
+  "schema": {
+    "feature": [
+      {
+        "name": "bbox",
+        "shape": {
+          "dim": [
+            {
+              "size": "4"
+            }
+          ]
+        },
+        "type": "FLOAT"
+      },
+      {
+        "name": "image",
+        "shape": {
+          "dim": [
+            {
+              "size": "-1"
+            },
+            {
+              "size": "-1"
+            },
+            {
+              "size": "3"
+            }
+          ]
+        },
+        "type": "INT"
+      },
+      {
+        "name": "label",
+        "type": "INT"
+      }
+    ]
+  },
+  "sizeInBytes": "1957136468",
+  "splits": [
+    {
+      "name": "test",
+      "numShards": "1",
+      "shardLengths": [
+        "1005",
+        "1005",
+        "1005",
+        "1005",
+        "1006",
+        "1005",
+        "1005",
+        "1005"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "bbox",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8041"
+              },
+              "max": 1.0,
+              "min": 0.00038580247201025486
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8041"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8041"
+              },
+              "max": 195.0
+            }
+          }
+        ],
+        "numExamples": "8041"
+      }
+    },
+    {
+      "name": "train",
+      "numShards": "1",
+      "shardLengths": [
+        "1018",
+        "1018",
+        "1018",
+        "1018",
+        "1018",
+        "1018",
+        "1018",
+        "1018"
+      ],
+      "statistics": {
+        "features": [
+          {
+            "name": "bbox",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8144"
+              },
+              "max": 1.0,
+              "min": 0.00032552084303461015
+            },
+            "type": "FLOAT"
+          },
+          {
+            "name": "image",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8144"
+              },
+              "max": 255.0
+            }
+          },
+          {
+            "name": "label",
+            "numStats": {
+              "commonStats": {
+                "numNonMissing": "8144"
+              },
+              "max": 195.0
+            }
+          }
+        ],
+        "numExamples": "8144"
+      }
+    }
+  ],
+  "supervisedKeys": {
+    "input": "image",
+    "output": "label"
+  },
+  "version": "2.0.0"
+}

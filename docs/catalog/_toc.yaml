@@ -9,9 +9,11 @@ toc:
   title: Audio
 - section:
   - path: /datasets/catalog/abstract_reasoning
-    title: abstract_reasoning
+    title: abstract_reasoning (manual)
   - path: /datasets/catalog/aflw2k3d
     title: aflw2k3d
+  - path: /datasets/catalog/arc
+    title: arc
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
   - path: /datasets/catalog/binarized_mnist
@@ -33,7 +35,7 @@ toc:
   - path: /datasets/catalog/celeb_a
     title: celeb_a
   - path: /datasets/catalog/celeb_a_hq
-    title: celeb_a_hq
+    title: celeb_a_hq (manual)
   - path: /datasets/catalog/cifar10
     title: cifar10
   - path: /datasets/catalog/cifar100
@@ -55,13 +57,13 @@ toc:
   - path: /datasets/catalog/colorectal_histology_large
     title: colorectal_histology_large
   - path: /datasets/catalog/curated_breast_imaging_ddsm
-    title: curated_breast_imaging_ddsm
+    title: curated_breast_imaging_ddsm (manual)
   - path: /datasets/catalog/cycle_gan
     title: cycle_gan
   - path: /datasets/catalog/deep_weeds
     title: deep_weeds
   - path: /datasets/catalog/diabetic_retinopathy_detection
-    title: diabetic_retinopathy_detection
+    title: diabetic_retinopathy_detection (manual)
   - path: /datasets/catalog/dmlab
     title: dmlab
   - path: /datasets/catalog/downsampled_imagenet
@@ -82,14 +84,18 @@ toc:
     title: food101
   - path: /datasets/catalog/horses_or_humans
     title: horses_or_humans
+  - path: /datasets/catalog/i_naturalist2017
+    title: i_naturalist2017
   - path: /datasets/catalog/image_label_folder
-    title: image_label_folder
+    title: image_label_folder (manual)
   - path: /datasets/catalog/imagenet2012
-    title: imagenet2012
+    title: imagenet2012 (manual)
   - path: /datasets/catalog/imagenet2012_corrupted
-    title: imagenet2012_corrupted
+    title: imagenet2012_corrupted (manual)
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
+  - path: /datasets/catalog/imagenette
+    title: imagenette
   - path: /datasets/catalog/kmnist
     title: kmnist
   - path: /datasets/catalog/lfw
@@ -125,7 +131,7 @@ toc:
   - path: /datasets/catalog/quickdraw_bitmap
     title: quickdraw_bitmap
   - path: /datasets/catalog/resisc45
-    title: resisc45
+    title: resisc45 (manual)
   - path: /datasets/catalog/rock_paper_scissors
     title: rock_paper_scissors
   - path: /datasets/catalog/scene_parse150
@@ -191,21 +197,25 @@ toc:
   - path: /datasets/catalog/multi_news
     title: multi_news
   - path: /datasets/catalog/newsroom
-    title: newsroom
+    title: newsroom (manual)
   - path: /datasets/catalog/reddit_tifu
     title: reddit_tifu
   - path: /datasets/catalog/scientific_papers
     title: scientific_papers
   - path: /datasets/catalog/wikihow
-    title: wikihow
+    title: wikihow (manual)
   - path: /datasets/catalog/xsum
-    title: xsum
+    title: xsum (manual)
   title: Summarization
 - section:
   - path: /datasets/catalog/c4
-    title: c4
+    title: c4 (manual)
+  - path: /datasets/catalog/civil_comments
+    title: civil_comments
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
+  - path: /datasets/catalog/esnli
+    title: esnli
   - path: /datasets/catalog/gap
     title: gap
   - path: /datasets/catalog/glue
@@ -220,6 +230,8 @@ toc:
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
+  - path: /datasets/catalog/scicite
+    title: scicite
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/squad
@@ -243,19 +255,19 @@ toc:
   - path: /datasets/catalog/ted_multi_translate
     title: ted_multi_translate
   - path: /datasets/catalog/wmt14_translate
-    title: wmt14_translate
+    title: wmt14_translate (manual)
   - path: /datasets/catalog/wmt15_translate
-    title: wmt15_translate
+    title: wmt15_translate (manual)
   - path: /datasets/catalog/wmt16_translate
-    title: wmt16_translate
+    title: wmt16_translate (manual)
   - path: /datasets/catalog/wmt17_translate
-    title: wmt17_translate
+    title: wmt17_translate (manual)
   - path: /datasets/catalog/wmt18_translate
-    title: wmt18_translate
+    title: wmt18_translate (manual)
   - path: /datasets/catalog/wmt19_translate
-    title: wmt19_translate
+    title: wmt19_translate (manual)
   - path: /datasets/catalog/wmt_t2t_translate
-    title: wmt_t2t_translate
+    title: wmt_t2t_translate (manual)
   title: Translate
 - section:
   - path: /datasets/catalog/bair_robot_pushing_small

@@ -49,6 +49,7 @@ Brawl map with 64x64 resolution.
 Versions:
 
 *   **`0.1.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -76,6 +77,7 @@ Brawl map with 128x128 resolution.
 Versions:
 
 *   **`0.1.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -103,6 +105,7 @@ CollectMineralShards map with 64x64 resolution.
 Versions:
 
 *   **`0.1.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -130,6 +133,7 @@ CollectMineralShards map with 128x128 resolution.
 Versions:
 
 *   **`0.1.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -157,6 +161,7 @@ MoveUnitToBorder map with 64x64 resolution.
 Versions:
 
 *   **`0.1.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -184,6 +189,7 @@ MoveUnitToBorder map with 128x128 resolution.
 Versions:
 
 *   **`0.1.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -211,6 +217,7 @@ RoadTripWithMedivac map with 64x64 resolution.
 Versions:
 
 *   **`0.1.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 
@@ -238,6 +245,7 @@ RoadTripWithMedivac map with 128x128 resolution.
 Versions:
 
 *   **`0.1.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 

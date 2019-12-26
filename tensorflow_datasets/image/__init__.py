@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
+from tensorflow_datasets.image.arc import ARC
 from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
@@ -55,6 +56,8 @@ from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image.imagenet_resized import ImagenetResized
+from tensorflow_datasets.image.imagenette import Imagenette
+from tensorflow_datasets.image.inaturalist import INaturalist2017
 from tensorflow_datasets.image.lfw import LFW
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
