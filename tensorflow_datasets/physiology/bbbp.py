@@ -73,6 +73,7 @@ class BBBPConfig(tfds.core.BuilderConfig):
       assert isinstance(feautre, np.ndarray), _ERR_MSG
       assert len(feature.shape) == 1, _ERR_MSG
       assert feature.shape[0] == graph_option['num_feature'], _ERR_MSG
+
     self.fingerprint_option = fingerprint_option
     self.graph_option = graph_option
 
@@ -98,6 +99,7 @@ class BBBP(tfds.core.GeneratorBasedBuilder):
               }
           },
           graph_option={
+              "max_padding": True,
               "max_atoms": 1000,
               "atom_feature": None,
               "num_feature": 58
@@ -109,7 +111,8 @@ class BBBP(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     # TODO(bbbp): Specifies the tfds.core.DatasetInfo object
     n_bits = self.builder_config.fingerprint_option["kwargs"]["n_bits"]
-    max_atoms = self.builder_config.graph_option["max_atoms"]
+    max_atoms = self.builder_config.graph_option[
+        "max_atoms"] if self.builder_config.graph_option["max_padding"] else None
     num_feature = self.builder_config.graph_option["num_feature"]
 
     return tfds.core.DatasetInfo(
@@ -179,20 +182,22 @@ class BBBP(tfds.core.GeneratorBasedBuilder):
     adj_tmp = tfds.core.lazy_imports.rdkit_Chem.rdmolops.GetAdjacencyMatrix(
         mol)
 
-    if (adj_tmp.shape[0] > self.builder_config.graph_option["max_atoms"]):
-      raise Exception(
-          """
-          Every molecule represented by smiles must be smaller than 
-          graph_option.max_atoms
-          """
-      )
+    if (self.builder_config.graph_option["max_padding"]):
+      if (adj_tmp.shape[0] > self.builder_config.graph_option["max_atoms"]):
+        raise Exception(
+            """
+            Every molecule represented by smiles must be smaller than 
+            graph_option.max_atoms
+            """
+        )
+      else:
+        num_atoms = self.builder_config.graph_option["max_atoms"]
+    else:
+      num_atoms = adj_tmp.shape[0]
 
-    adj = np.zeros(
-        (self.builder_config.graph_option["max_atoms"],
-         self.builder_config.graph_option["max_atoms"])
-    )
+    adj = np.zeros((num_atoms, num_atoms))
     feature = np.zeros(
-        (self.builder_config.graph_option["max_atoms"],
+        (num_atoms,
          self.builder_config.graph_option["num_feature"])
     )
     feature_tmp = []
