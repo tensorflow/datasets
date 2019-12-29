@@ -32,7 +32,7 @@ import tensorflow_datasets.public_api as tfds
 _CITATION = """
 """
 
-_DESCRIPTION = """\
+_DESCRIPTION = """
 Imagewoof is a subset of 10 classified classes from the Imagenet
 dataset. It was originally prepared by FastAI. The objective
 behind putting together a small version of the Imagenet dataset 
@@ -85,7 +85,7 @@ def _make_builder_configs():
 class Imagewoof(tfds.core.GeneratorBasedBuilder):
   """A smaller subset of 10 classified dog breed classes from Imagenet."""
 
-  VERSION = tfds.core.Version("0.1.0")
+  VERSION = tfds.core.Version("2.0.0")
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
