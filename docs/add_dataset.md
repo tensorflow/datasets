@@ -506,7 +506,7 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 
 Note that the `--register_checksums` flag must only be used while in development.
 
-Copy in the contents of the `dataset_info.json` file(s) to the ```testing/metadata``` subdirectory for the dataset.
+The contents of the `dataset_info.json` file(s) should be in the ```tensorflow_datasets/testing/metadata``` subdirectory for the dataset.
 
 
 ### 3. Double-check the citation
