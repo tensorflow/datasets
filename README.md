@@ -92,7 +92,9 @@ ds = mnist_builder.as_dataset(split='train')
 # dataset and its features
 info = mnist_builder.info
 print(info)
+```
 
+```
 tfds.core.DatasetInfo(
     name='mnist',
     version=1.0.0,
@@ -116,7 +118,7 @@ tfds.core.DatasetInfo(
           volume={2},
           year={2010}
         }
-     """'
+    """',
 )
 ```
 
