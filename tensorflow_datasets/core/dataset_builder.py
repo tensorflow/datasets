@@ -197,6 +197,11 @@ class DatasetBuilder(object):
     if tf.io.gfile.exists(self._data_dir):
       logging.info("Overwrite dataset info from restored data version.")
       self.info.read_from_directory(self._data_dir)
+    elif os.path.isdir((lambda drive_directory: os.path.join(drive_directory[0],
+                                                             drive_directory[1][:drive_directory[1].find(os.path.sep,
+                                                                                                         1)])
+                       )(os.path.splitdrive(self._data_dir))):
+      logging.info("No dataset found at this disk location.")
     else:  # Use the code version (do not restore data)
       logging.info("Load pre-computed datasetinfo (eg: splits) from bucket.")
       self.info.initialize_from_bucket()
