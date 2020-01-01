@@ -24,7 +24,7 @@ import os
 
 
 # info of deeplesion dataset
-_URL = ("https://www.nih.gov/news-events/news-releases/nih-clinical-center-releases-dataset-32000-ct-images")
+_URL = ("https://nihcc.app.box.com/v/DeepLesion")
 
 _DESCRIPTION = """\
 The DeepLesion dataset contains 32,120 axial computed tomography (CT) slices 
@@ -55,13 +55,6 @@ _CITATION = """\
 }
 """
 
-# link for download data
-_BOX_URL = ("https://nihcc.app.box.com/v/DeepLesion")
-
-
-# location where local resource should be
-_IMAGE_DIR = "Images_png"
-
 
 class Deeplesion(tfds.core.GeneratorBasedBuilder):
   """DeepLesion dataset builder.
@@ -78,7 +71,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
             "image":tfds.features.Image(shape=(None, None, 1), dtype=tf.uint16, encoding_format='png'),
             "bbox":tfds.features.BBoxFeature()
         }),
-        homepage=_BOX_URL,
+        homepage=_URL,
         citation=_CITATION,
     )
 
@@ -153,17 +146,15 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
     paths = dl_manager.download_and_extract(resources)
     ann_path = paths['ann_file']
     del paths['ann_file']
-    lut = _lookup_table(paths)
-    split = Split(ann_path)
-    train_split, val_split, test_split = split.generator()
-    
+    lut = _build_lut(paths)
+    train_split, val_split, test_split = Split(ann_path).split_generator()
 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             num_shards=100,
             gen_kwargs={
-                "imgs_path_lut": lut,
+                "lut": lut,
                 "split": train_split,
             },
         ),
@@ -171,7 +162,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.VALIDATION,
             num_shards=10,
             gen_kwargs={
-                "imgs_path_lut": lut,
+                "lut": lut,
                 "split": val_split,
             },
         ),
@@ -179,51 +170,60 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TEST,
             num_shards=10,
             gen_kwargs={
-                "imgs_path_lut": lut,
+                "lut": lut,
                 "split": test_split,
             },
         ),
     ]
 
 
-  def _generate_examples(self, imgs_path_lut, split):
-    """
-    :type imgs_path: string, path to read image files
-    :type csv_path: string, path to read ann files
-    :rtype: dict, yield examples
+  def _generate_examples(self, lut, split):
+    """Returns examples
+    :type lut: dict, lookup dictionary to lookup whole paths of series_folder
+    :type split: string, path to read ann files
+    :rtype: yield idx, example
     """
     for idx, value in enumerate(split.values):
       fn, bboxs, size, sp = value
       record = {
           "image/name": fn,
-          "image": load_image(imgs_path_lut, fn),
-          "bbox": load_bboxs(bboxs, size)
+          "image": _lookup_image_path(lut, fn),
+          "bbox": _format_bboxs(bboxs, size)
       }
       yield idx, record
 
     
-def _lookup_table(paths):
+def _build_lut(paths):
+    """Returns lookup dictionary to lookup whole paths of series_folder
+    :type paths: dict, {<zipfn>:<unzip_path>}
+    :rtype: dict, {<series_folder>:<unzip_path>/Images_png/<series_folder>}
+    """
     lut = {}
     for k, v in paths.items():
         for fd in tf.io.gfile.listdir(os.path.join(v,'Images_png')):
-            lut[fd] = os.path.join(v,'Images_png')
-    print(lut)
+            lut[fd] = os.path.join(v,'Images_png', fd)
     return lut
         
 
-def load_image(lut, fn):
+def _lookup_image_path(lut, fn):
+    """Returns whole path of an image
+    """
     slice_fn = fn.split('_')[-1]
     fd = '_'.join(fn.split('_')[:-1])
     
-    return os.path.join(lut[fd], fd, slice_fn)
+    return os.path.join(lut[fd], slice_fn)
     
     
-def load_bboxs(bboxs, size):
+def _format_bboxs(bboxs, size):
+    """Return bbox feature
+    :type bboxs: string, "xxx,xxx,xxx,xxx"
+    :type size: string, "xxx,xxx"
+    :rtype: tfds.features.BBox
+    """
     size = list(map(lambda x: float(x), size.split(',')))
     coords = list(map(lambda x: float(x), bboxs.split(',')))
     coords = list(map(lambda x: x if x>0 else 0.0, coords))
     coords = list(map(lambda x: x if x<size[0] else size[0], coords))
-
 
     cnt = int((len(coords))/4)
 
@@ -239,14 +239,22 @@ def load_bboxs(bboxs, size):
     
     
 class Split:
+    """dataset split builder.
+    """
     def __init__(self, ann_path):
+        """
+        :type ann_path: string, path of the annotation csv file
+        """
         self.ann_path = ann_path
     
-    def generator(self):
-        train_split, val_split, test_split = self._ann_parser()
-        return train_split, val_split, test_split
+    def split_generator(self):
+        """wrapper of the split
+        """
+        return self._ann_parser()
     
     def _ann_parser(self):
+        """parsers the csv file and returns the splits
+        """
         pd = tfds.core.lazy_imports.pandas
         with tf.io.gfile.GFile(self.ann_path) as csv_f:
             df = pd.read_csv(csv_f)
