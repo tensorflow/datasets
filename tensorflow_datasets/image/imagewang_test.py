@@ -12,8 +12,8 @@ class ImagewangFullSizeTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagewang.Imagewang
   BUILDER_CONFIG_NAMES_TO_TEST = ['full-size']
   SPLITS = {
-      "train": 4,
-      "test": 4,
+      "train": 1,
+      "validation": 1,
   }
 
 
@@ -21,8 +21,8 @@ class Imagewang320Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagewang.Imagewang
   BUILDER_CONFIG_NAMES_TO_TEST = ['320px']
   SPLITS = {
-      "train": 4,
-      "test": 4,
+      "train": 1,
+      "validation": 1,
   }
 
 
@@ -30,8 +30,8 @@ class Imagewang160Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagewang.Imagewang
   BUILDER_CONFIG_NAMES_TO_TEST = ['160px']
   SPLITS = {
-      "train": 4,
-      "test": 4,
+      "train": 1,
+      "validation": 1,
   }
 
 
