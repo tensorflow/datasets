@@ -66,7 +66,7 @@ class ImagewangConfig(tfds.core.BuilderConfig):
 
   def __init__(self, size, **kwargs):
     super(ImagewangConfig, self).__init__(
-        version=tfds.core.Version("0.1.0"), **kwargs)
+        version=tfds.core.Version("2.0.0"), **kwargs)
     self.size = size
 
 
@@ -83,8 +83,8 @@ def _make_builder_configs():
 
 class Imagewang(tfds.core.GeneratorBasedBuilder):
   """ Imagewang contains Imagenette and Imagewoof combined. """
-  
-  VERSION = tfds.core.Version("0.1.0")
+
+  VERSION = tfds.core.Version("2.0.0")
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
@@ -107,14 +107,12 @@ class Imagewang(tfds.core.GeneratorBasedBuilder):
     if size in _SIZES:
       size_str = "" if size == "full-size" else "-" + size[:-2]
       url = os.path.join(_URL_PREFIX, "imagewang%s.tgz" % size_str)
-      print(url)
       path = dl_manager.download_and_extract(url)
       train_path = os.path.join(path, _SIZE_TO_DIRNAME[size], "train")
       val_path = os.path.join(path, _SIZE_TO_DIRNAME[size], "val")
     else:
-      raise ValueError("Size not implemented!")
+      raise ValueError("size must be one of %s" % _SIZES)
 
-    print(train_path, 'train_path') 
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
