@@ -8,12 +8,32 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.image import imagewang
 
 
-class ImagewangTest(testing.DatasetBuilderTestCase):
+class ImagewangFullSizeTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = imagewang.Imagewang
+  BUILDER_CONFIG_NAMES_TO_TEST = ['full-size']
   SPLITS = {
-      "train": 4,  # Number of fake train example
-      "test": 4,  # Number of fake test example
+      "train": 4,
+      "test": 4,
   }
+
+
+class Imagewang320Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = imagewang.Imagewang
+  BUILDER_CONFIG_NAMES_TO_TEST = ['320px']
+  SPLITS = {
+      "train": 4,
+      "test": 4,
+  }
+
+
+class Imagewang160Test(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = imagewang.Imagewang
+  BUILDER_CONFIG_NAMES_TO_TEST = ['160px']
+  SPLITS = {
+      "train": 4,
+      "test": 4,
+  }
+
 
 if __name__ == "__main__":
   testing.test_main()
