@@ -51,13 +51,13 @@ def examples_dir():
   return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples")
 
 
-def imagewang_dir(size):
+def imagewang_dir(size, split):
   dir_name = _SIZE_TO_DIRNAME[size]
-  return os.path.join(examples_dir(), 'imagewang', dir_name)
+  return os.path.join(examples_dir(), 'imagewang', dir_name, split)
 
 
-def imagewang_label_dir(size):
-  return os.path.join(imagewang_dir(size), _LABEL_DIRNAME)
+def imagewang_label_dir(size, split):
+  return os.path.join(imagewang_dir(size, split), _LABEL_DIRNAME)
 
 
 def make_image():
@@ -72,9 +72,12 @@ def write_image_file(filename):
 
 def main(_):
   for size in _SIZES:
-    output_dir = imagewang_label_dir(size)
-    test_utils.remake_dir(output_dir)
-    write_image_file(os.path.join(output_dir, _IMAGE_FILENAME))
+    train_output_dir = imagewang_label_dir(size, split='train')
+    val_output_dir = imagewang_label_dir(size, split='val')
+    test_utils.remake_dir(os.path.join(train_output_dir))
+    test_utils.remake_dir(os.path.join(val_output_dir))
+    write_image_file(os.path.join(train_output_dir,  _IMAGE_FILENAME))
+    write_image_file(os.path.join(val_output_dir, _IMAGE_FILENAME))
 
 
 if __name__ == "__main__":
