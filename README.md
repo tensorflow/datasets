@@ -92,32 +92,36 @@ ds = mnist_builder.as_dataset(split='train')
 # dataset and its features
 info = mnist_builder.info
 print(info)
+```
 
-    tfds.core.DatasetInfo(
-        name='mnist',
-        version=1.0.0,
-        description='The MNIST database of handwritten digits.',
-        homepage='http://yann.lecun.com/exdb/mnist/',
-        features=FeaturesDict({
-            'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-            'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
-        },
-        total_num_examples=70000,
-        splits={
-            'test': <tfds.core.SplitInfo num_examples=10000>,
-            'train': <tfds.core.SplitInfo num_examples=60000>
-        },
-        supervised_keys=('image', 'label'),
-        citation='"""
-            @article{lecun2010mnist,
-              title={MNIST handwritten digit database},
-              author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
-              journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
-              volume={2},
-              year={2010}
-            }
-      """',
-  )
+This will print the dataset info content:
+
+```
+tfds.core.DatasetInfo(
+    name='mnist',
+    version=1.0.0,
+    description='The MNIST database of handwritten digits.',
+    homepage='http://yann.lecun.com/exdb/mnist/',
+    features=FeaturesDict({
+        'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
+        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10)
+    },
+    total_num_examples=70000,
+    splits={
+        'test': <tfds.core.SplitInfo num_examples=10000>,
+        'train': <tfds.core.SplitInfo num_examples=60000>
+    },
+    supervised_keys=('image', 'label'),
+    citation='"""
+        @article{lecun2010mnist,
+          title={MNIST handwritten digit database},
+          author={LeCun, Yann and Cortes, Corinna and Burges, CJ},
+          journal={ATT Labs [Online]. Available: http://yann. lecun. com/exdb/mnist},
+          volume={2},
+          year={2010}
+        }
+    """',
+)
 ```
 
 You can also get details about the classes (number of classes and their names).
