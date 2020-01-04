@@ -174,6 +174,10 @@ class FashionMNIST(MNIST):
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
 
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.0.0", "S3: www.tensorflow.org/datasets/splits"),
+  ]
+
   # TODO(afrozm): Try to inherit from MNIST's _info and mutate things as needed.
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -203,6 +207,10 @@ class KMNIST(MNIST):
 
   VERSION = tfds.core.Version("1.0.0",
                               experiments={tfds.core.Experiment.S3: False})
+
+  SUPPORTED_VERSIONS = [
+      tfds.core.Version("3.0.0", "S3: www.tensorflow.org/datasets/splits"),
+  ]
 
   def _info(self):
     return tfds.core.DatasetInfo(
