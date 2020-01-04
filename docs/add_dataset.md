@@ -615,7 +615,7 @@ The test data should be put in
 under the `my_dataset` directory and should mimic the source dataset artifacts
 as downloaded and extracted. It can be created manually or automatically with a
 script
-([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
+([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)). If you're using automation to generate the test data, please include that script in [`testing`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing).
 
 Make sure to use different data in your test data splits, as the test will
 fail if your dataset splits overlap.
