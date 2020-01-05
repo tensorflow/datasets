@@ -142,7 +142,6 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
             'zipfile56':'https://nihcc.box.com/shared/static/kqg4peb9j53ljhrxe3l3zrj4ac6xogif.zip',
             'ann_file':'https://raw.githubusercontent.com/anir16293/Deep-Lesion/master/DL_info.csv'
     }
-    dl_manager._register_checksums = True
     paths = dl_manager.download_and_extract(resources)
     ann_path = paths['ann_file']
     del paths['ann_file']
@@ -152,7 +151,6 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            num_shards=100,
             gen_kwargs={
                 "lut": lut,
                 "split": train_split,
@@ -160,7 +158,6 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            num_shards=10,
             gen_kwargs={
                 "lut": lut,
                 "split": val_split,
@@ -168,7 +165,6 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            num_shards=10,
             gen_kwargs={
                 "lut": lut,
                 "split": test_split,
