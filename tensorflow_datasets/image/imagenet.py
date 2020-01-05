@@ -103,6 +103,13 @@ class Imagenet2012(tfds.core.GeneratorBasedBuilder):
           '5.0.0', 'New split API (https://tensorflow.org/datasets/splits)'),
   ]
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  manual_dir should contain two files: ILSVRC2012_img_train.tar and
+  ILSVRC2012_img_val.tar.
+  You need to register on http://www.image-net.org/download-images in order
+  to get the link to download the dataset.
+  """
+
   def _info(self):
     names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
     return tfds.core.DatasetInfo(

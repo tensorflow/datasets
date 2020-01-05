@@ -5,15 +5,13 @@
 
 # tfds.download.iter_archive
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/extractor.py">View
 source</a>
-
-<!-- Start diff -->
 
 Yields (path_in_archive, f_obj) for archive at path using
 <a href="../../tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>.

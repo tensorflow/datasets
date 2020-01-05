@@ -134,6 +134,13 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
 class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   """Curated Breast Imaging Subset of DDSM."""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You can download the images from
+  https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
+  Please look at the source file (cbis_ddsm.py) to see the instructions
+  on how to conver them into png (using dcmj2pnm).
+  """
+
   BUILDER_CONFIGS = [
       CuratedBreastImagingDDSMConfig(
           name='patches',

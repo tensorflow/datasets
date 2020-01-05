@@ -25,12 +25,12 @@ each highlight, which is the target summary
 `tfds.summarization.cnn_dailymail.CnnDailymailConfig` and has the following
 configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v0.0.2`) (`Size: 558.32 MiB`): Plain text
+*   `plain_text` (`v2.0.0`) (`Size: 558.32 MiB`): Plain text
 
-*   `bytes` (`v0.0.2`) (`Size: 558.32 MiB`): Uses byte-level text encoding with
+*   `bytes` (`v2.0.0`) (`Size: 558.32 MiB`): Uses byte-level text encoding with
     `tfds.features.text.ByteTextEncoder`
 
-*   `subwords32k` (`v0.0.2`) (`Size: 558.32 MiB`): Uses
+*   `subwords32k` (`v2.0.0`) (`Size: 558.32 MiB`): Uses
     `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 ## `cnn_dailymail/plain_text`
@@ -38,7 +38,8 @@ Plain text
 
 Versions:
 
-*   **`0.0.2`** (default):
+*   **`2.0.0`** (default): Separate target sentences with newline.
+*   `0.0.2`: None
 *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
@@ -70,7 +71,8 @@ Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
 
 Versions:
 
-*   **`0.0.2`** (default):
+*   **`2.0.0`** (default): Separate target sentences with newline.
+*   `0.0.2`: None
 *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
@@ -102,7 +104,8 @@ Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
 
 Versions:
 
-*   **`0.0.2`** (default):
+*   **`2.0.0`** (default): Separate target sentences with newline.
+*   `0.0.2`: None
 *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
@@ -117,8 +120,8 @@ TEST       | 11,490
 ### Features
 ```python
 FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
-    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32915>),
+    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32857>),
+    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32857>),
 })
 ```
 

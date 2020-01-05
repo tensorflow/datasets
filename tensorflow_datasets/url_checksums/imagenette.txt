@@ -1,0 +1,3 @@
+https://s3.amazonaws.com/fast-ai-imageclas/imagenette-160.tgz 98752094 4bacf19aa3f2454e330ac366c98ac1e470ccc6bebca8ff63ecc7f339cb2ead11
+https://s3.amazonaws.com/fast-ai-imageclas/imagenette-320.tgz 341289752 0e3ac85d7f3fd0a63d5e27d85c68511be9ac4dae260345b6f7434a0d4fa24b3f
+https://s3.amazonaws.com/fast-ai-imageclas/imagenette.tgz 1556495367 1bd650bc16884ca88e4f0f537ed8569b1f8d7ae865d37eba8ecdd87d9cd9dcfa

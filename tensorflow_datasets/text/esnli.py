@@ -49,10 +49,14 @@ _URL = 'https://raw.githubusercontent.com/OanaMariaCamburu/e-SNLI/master/dataset
 class Esnli(tfds.core.GeneratorBasedBuilder):
   """e-SNLI: Natural Language Inference with Natural Language Explanations corpus."""
 
+  # Version History
+  # 0.0.2 Added explanation_2, explanation_3 fields which exist in the dev/test
+  # splits only.
+  # 0.0.1 Initial version
   BUILDER_CONFIGS = [
       tfds.core.BuilderConfig(
           name='plain_text',
-          version=tfds.core.Version('0.0.1'),
+          version=tfds.core.Version('0.0.2'),
           description='Plain text import of e-SNLI',
       )
   ]
@@ -69,7 +73,11 @@ class Esnli(tfds.core.GeneratorBasedBuilder):
             'label':
                 tfds.features.ClassLabel(
                     names=['entailment', 'neutral', 'contradiction']),
-            'explanation':
+            'explanation_1':
+                tfds.features.Text(),
+            'explanation_2':
+                tfds.features.Text(),
+            'explanation_3':
                 tfds.features.Text(),
         }),
         supervised_keys=None,
@@ -112,5 +120,7 @@ class Esnli(tfds.core.GeneratorBasedBuilder):
               'premise': row['Sentence1'],
               'hypothesis': row['Sentence2'],
               'label': row['gold_label'],
-              'explanation': row['Explanation_1']
+              'explanation_1': row['Explanation_1'],
+              'explanation_2': row.get('Explanation_2', ''),
+              'explanation_3': row.get('Explanation_3', ''),
           }

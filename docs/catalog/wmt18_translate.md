@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="http://www.statmt.org/wmt18/translation-task.html" />
   <meta itemprop="citation" content="@InProceedings{bojar-EtAl:2018:WMT1,&#10;  author    = {Bojar, Ond{r}ej  and  Federmann, Christian  and  Fishel, Mark&#10;    and Graham, Yvette  and  Haddow, Barry  and  Huck, Matthias  and&#10;    Koehn, Philipp  and  Monz, Christof},&#10;  title     = {Findings of the 2018 Conference on Machine Translation (WMT18)},&#10;  booktitle = {Proceedings of the Third Conference on Machine Translation,&#10;    Volume 2: Shared Task Papers},&#10;  month     = {October},&#10;  year      = {2018},&#10;  address   = {Belgium, Brussels},&#10;  publisher = {Association for Computational Linguistics},&#10;  pages     = {272--307},&#10;  url       = {http://www.aclweb.org/anthology/W18-6401}&#10;}&#10;" />
 </div>
-# `wmt18_translate`
+# `wmt18_translate` (Manual download)
 
 Translate dataset based on the data from statmt.org.
 
@@ -68,6 +68,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt18_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -99,6 +104,11 @@ Versions:
 
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt18_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -132,6 +142,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt18_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -163,6 +178,11 @@ Versions:
 
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt18_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -196,6 +216,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt18_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 None computed
 
@@ -221,6 +246,11 @@ Versions:
 
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt18_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 
@@ -254,6 +284,11 @@ Versions:
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt18_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
+
 ### Statistics
 
 Split      | Examples
@@ -285,6 +320,11 @@ Versions:
 
 *   **`0.0.3`** (default):
 *   `1.0.0`: None
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wmt18_translate/`): Some
+of the wmt configs here, require a manual download. Please look into wmt.py to
+see the exact path (and file name) that has to be downloaded.
 
 ### Statistics
 

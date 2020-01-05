@@ -43,8 +43,8 @@ large scale, pose and light variations. In addition, there are categories that h
 variations within the category and several very similar categories.
 
 The dataset is divided into a training set, a validation set and a test set.
-The training set and validation set each consist of 10 images per class (totalling 1030 images each).
-The test set consist of the remaining 6129 images (minimum 20 per class).
+The training set and validation set each consist of 10 images per class (totalling 1020 images each).
+The test set consists of the remaining 6149 images (minimum 20 per class).
 """
 
 

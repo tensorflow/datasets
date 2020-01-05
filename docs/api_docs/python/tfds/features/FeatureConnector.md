@@ -15,7 +15,7 @@
 
 # tfds.features.FeatureConnector
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -25,7 +25,6 @@ source</a>
 
 ## Class `FeatureConnector`
 
-<!-- Start diff -->
 Abstract base class for feature types.
 
 <!-- Placeholder for "Used in" -->

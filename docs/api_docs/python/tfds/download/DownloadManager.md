@@ -14,7 +14,7 @@
 
 # tfds.download.DownloadManager
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -24,7 +24,6 @@ source</a>
 
 ## Class `DownloadManager`
 
-<!-- Start diff -->
 Manages the download and extraction of files, as well as caching.
 
 <!-- Placeholder for "Used in" -->
@@ -75,11 +74,12 @@ For more customization on the download/extraction (ex: passwords, output_name,
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
-``` python
+```python
 __init__(
     download_dir,
     extract_dir=None,
     manual_dir=None,
+    manual_dir_instructions=None,
     dataset_name=None,
     force_download=False,
     force_extraction=False,
@@ -96,6 +96,8 @@ Download manager constructor.
     extracted.
 *   <b>`manual_dir`</b>: `str`, path to manually downloaded/extracted data
     directory.
+*   <b>`manual_dir_instructions`</b>: `str`, human readable instructions on how
+    to prepare contents of the manual_dir for this dataset.
 *   <b>`dataset_name`</b>: `str`, name of dataset this instance will be used
     for. If provided, downloads will contain which datasets they were used for.
 *   <b>`force_download`</b>: `bool`, default to False. If True, always

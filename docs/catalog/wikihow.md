@@ -8,7 +8,7 @@
   <meta itemprop="sameAs" content="https://github.com/mahnazkoupaee/WikiHow-Dataset" />
   <meta itemprop="citation" content="&#10;@misc{koupaee2018wikihow,&#10;    title={WikiHow: A Large Scale Text Summarization Dataset},&#10;    author={Mahnaz Koupaee and William Yang Wang},&#10;    year={2018},&#10;    eprint={1810.09305},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}&#10;" />
 </div>
-# `wikihow`
+# `wikihow` (Manual download)
 
 WikiHow is a new large-scale dataset using the online WikiHow
 (http://www.wikihow.com/) knowledge base.
@@ -49,6 +49,11 @@ Versions:
 
 *   **`1.2.0`** (default):
 
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wikihow/`): Links to files
+can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset Please download
+both wikihowAll.csv and wikihowSep.csv.
+
 ### Statistics
 
 Split      | Examples
@@ -80,6 +85,11 @@ use each paragraph and its summary.
 Versions:
 
 *   **`1.2.0`** (default):
+
+WARNING: This dataset requires you to download the source data manually into
+manual_dir (defaults to `~/tensorflow_datasets/manual/wikihow/`): Links to files
+can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset Please download
+both wikihowAll.csv and wikihowSep.csv.
 
 ### Statistics
 

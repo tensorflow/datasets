@@ -5,7 +5,7 @@
 
 # tfds.load
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -13,7 +13,6 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
 source</a>
 
-<!-- Start diff -->
 Loads the named dataset into a `tf.data.Dataset`.
 
 ```python
@@ -27,6 +26,7 @@ tfds.load(
     download=True,
     as_supervised=False,
     decoders=None,
+    read_config=None,
     with_info=False,
     builder_kwargs=None,
     download_and_prepare_kwargs=None,
@@ -107,6 +107,9 @@ of hundreds of GiB to disk. Refer to the `download` argument.
     customized feature keys need to be present. See
     [the guide](https://github.com/tensorflow/datasets/tree/master/docs/decode.md)
     for more info.
+*   <b>`read_config`</b>:
+    <a href="../tfds/ReadConfig.md"><code>tfds.ReadConfig</code></a>, Additional
+    options to configure the input pipeline (e.g. seed, num parallel reads,...).
 *   <b>`with_info`</b>: `bool`, if True, tfds.load will return the tuple
     (tf.data.Dataset, tfds.core.DatasetInfo) containing the info associated with
     the builder.

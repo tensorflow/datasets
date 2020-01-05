@@ -22,7 +22,7 @@
 
 # tfds.features.Text
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -32,7 +32,6 @@ source</a>
 
 ## Class `Text`
 
-<!-- Start diff -->
 `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)

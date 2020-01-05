@@ -27,6 +27,7 @@ from tensorflow_datasets.text import c4
 
 class C4Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = c4.C4
+  VERSION = "experimental_latest"
   # 10k shards take make the test too slow.
   c4._DEFAULT_NUM_SHARDS = 1
   # GzipFile + GFile and TextIOWrapper are broken for py2.

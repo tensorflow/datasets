@@ -5,7 +5,7 @@
 
 # tfds.core.lazy_imports
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -15,8 +15,6 @@ source</a>
 
 ## Class `lazy_imports`
 
-<!-- Start diff -->
-
 Lazy importer for heavy dependencies.
 
 <!-- Placeholder for "Used in" -->
@@ -24,4 +22,3 @@ Lazy importer for heavy dependencies.
 Some datasets require heavy dependencies for data generation. To allow for
 the default installation to remain lean, those heavy dependencies are
 lazily imported here.
-

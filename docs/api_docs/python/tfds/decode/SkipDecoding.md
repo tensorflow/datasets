@@ -10,7 +10,7 @@
 
 # tfds.decode.SkipDecoding
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -20,7 +20,6 @@ source</a>
 
 ## Class `SkipDecoding`
 
-<!-- Start diff -->
 Transformation which skip the decoding entirelly.
 
 Inherits From: [`Decoder`](../../tfds/decode/Decoder.md)

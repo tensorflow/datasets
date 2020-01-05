@@ -141,7 +141,7 @@
 
 # tfds.testing.FeatureExpectationsTestCase
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -151,7 +151,6 @@ source</a>
 
 ## Class `FeatureExpectationsTestCase`
 
-<!-- Start diff -->
 Tests FeatureExpectations with full encode-decode.
 
 Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)

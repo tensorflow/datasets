@@ -55,4 +55,3 @@ kaggle CLI.
 [`test_main(...)`](../tfds/testing/test_main.md): Entrypoint for tests.
 
 [`tmp_dir(...)`](../tfds/testing/tmp_dir.md): Context manager for a temporary directory.
-

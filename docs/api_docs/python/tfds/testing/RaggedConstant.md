@@ -7,7 +7,7 @@
 
 # tfds.testing.RaggedConstant
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -17,7 +17,6 @@ source</a>
 
 ## Class `RaggedConstant`
 
-<!-- Start diff -->
 Container of tf.ragged.constant values.
 
 <!-- Placeholder for "Used in" -->

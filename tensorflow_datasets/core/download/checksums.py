@@ -91,14 +91,18 @@ def _get_path(dataset_name):
   path = _checksum_paths().get(dataset_name, None)
   if path:
     return path
+  filename = os.path.basename(path)
   msg = (
-      'No checksums file could be find for dataset {}. Please create one in '
-      'one of:\n{}'
+      'No checksums file `{}` could be find for dataset {}. Please '
+      'create one in one of:\n{}'
       'If you are developing your own dataset outsite tfds, you can register '
       'your own checksums_dir with `tfds.download.add_checksums_dir('
       'checksum_dir)` or pass it to the download_and_prepare script with '
       '`--checksum_dir=`'
-  ).format(dataset_name, ''.join(['* {}\n'.format(c) for c in _CHECKSUM_DIRS]))
+  ).format(
+      filename,
+      dataset_name,
+      ''.join(['* {}\n'.format(c) for c in _CHECKSUM_DIRS]))
   raise AssertionError(msg)
 
 

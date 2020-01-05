@@ -253,12 +253,21 @@ class DatasetBuilderTestCase(parameterized.TestCase, test_utils.SubTestCase):
       self._download_and_prepare_as_dataset(self.builder)
 
   def _download_and_prepare_as_dataset(self, builder):
+    # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
+    # set.
+
+    missing_dir_mock = absltest.mock.PropertyMock(
+        side_effect=Exception("Missing MANUAL_DOWNLOAD_INSTRUCTIONS"))
+
+    manual_dir = (
+        self.example_dir
+        if builder.MANUAL_DOWNLOAD_INSTRUCTIONS else missing_dir_mock)
     with absltest.mock.patch.multiple(
         "tensorflow_datasets.core.download.DownloadManager",
         download_and_extract=self._get_dl_extract_result,
         download=self._get_dl_download_result,
         download_checksums=lambda *_: None,
-        manual_dir=self.example_dir,
+        manual_dir=manual_dir,
     ):
       if isinstance(builder, dataset_builder.BeamBasedBuilder):
         import apache_beam as beam   # pylint: disable=g-import-not-at-top
@@ -350,6 +359,9 @@ def checksum(example):
         element = element.decode("latin-1")
       element = element.encode("utf-8")
       ret += element
+    elif isinstance(element,
+                    (tf.RaggedTensor, tf.compat.v1.ragged.RaggedTensorValue)):
+      ret += str(element.to_list()).encode("utf-8")
     elif isinstance(element, np.ndarray):
       ret += element.tobytes()
     else:
@@ -377,4 +389,3 @@ def compare_shapes_and_types(tensor_info, output_types, output_shapes):
       expected_shape = feature_info.shape
       output_shape = output_shapes[feature_name]
       tf_utils.assert_shape_match(expected_shape, output_shape)
-

@@ -92,6 +92,11 @@ class WikihowConfig(tfds.core.BuilderConfig):
 class Wikihow(tfds.core.GeneratorBasedBuilder):
   """WikiHow: A Large Scale Text Summarization Dataset."""
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  Links to files can be found on https://github.com/mahnazkoupaee/WikiHow-Dataset
+  Please download both wikihowAll.csv and wikihowSep.csv.
+  """
+
   BUILDER_CONFIGS = [
       WikihowConfig(
           name="all",

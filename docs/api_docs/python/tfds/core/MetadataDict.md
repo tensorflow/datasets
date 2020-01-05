@@ -7,7 +7,7 @@
 
 # tfds.core.MetadataDict
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -16,8 +16,6 @@
 source</a>
 
 ## Class `MetadataDict`
-
-<!-- Start diff -->
 
 A <a href="../../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>
 object that acts as a `dict`.

@@ -22,14 +22,14 @@ relations.
 `esnli` is configured with `tfds.core.dataset_builder.BuilderConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `plain_text` (`v0.0.1`) (`Size: 195.04 MiB`): Plain text import of e-SNLI
+*   `plain_text` (`v0.0.2`) (`Size: 195.04 MiB`): Plain text import of e-SNLI
 
 ## `esnli/plain_text`
 Plain text import of e-SNLI
 
 Versions:
 
-*   **`0.0.1`** (default):
+*   **`0.0.2`** (default):
 
 ### Statistics
 
@@ -43,7 +43,9 @@ TEST       | 9,824
 ### Features
 ```python
 FeaturesDict({
-    'explanation': Text(shape=(), dtype=tf.string),
+    'explanation_1': Text(shape=(), dtype=tf.string),
+    'explanation_2': Text(shape=(), dtype=tf.string),
+    'explanation_3': Text(shape=(), dtype=tf.string),
     'hypothesis': Text(shape=(), dtype=tf.string),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     'premise': Text(shape=(), dtype=tf.string),

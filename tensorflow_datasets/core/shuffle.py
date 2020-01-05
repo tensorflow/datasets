@@ -61,21 +61,27 @@ def _read_hkey(buff):
   return (a << 64) | b
 
 
-def _get_shard(hkey, shards_number):
-  """Returns shard number (int) for given hashed key (int)."""
+def get_bucket_number(hkey, shards_number):
+  """Returns bucket (shard) number (int) for given hashed key (int)."""
   # We purposely do not use modulo (%) to keep global order across shards.
   # floor(key * shards_number / HKEYS_NUMBER), with HKEYS_NUMBER = 2**HKEY_SIZE.
   return math.trunc((hkey * shards_number)>>HKEY_SIZE)
 
 
 class _Bucket(object):
-  """Holds (8 bytes key, binary value) tuples to disk, fast.
+  """Holds (key, binary value) tuples to disk, fast.
 
-  The assumption is that many _Bucket instances will be written in parallel,
-  while only one will be read at any given time, and a full _Bucket data can
-  hold in memory. Data is written once and read once.
+  Bucket instances are designed to be used either:
+    1. Many buckets are written in parallel, then they are read one by one. When
+    reading, the data can be fully loaded in memory to be sorted.
+    This is how buckets are currently used in Shuffler.
+    2. Buckets are being written one at a time (or on different machines/jobs).
+    Before writing the data, it is sorted in memory. Many bucket are read in
+    parallel.
+    This is not currently used, but could be if we decide do parallelize the
+    writing of final sharded tfrecord files.
 
-  File format:
+  File format (assuming a key of 16 bytes):
     key1 (16 bytes) | size1 (8 bytes) | data1 (size1 bytes) |
     key2 (16 bytes) | size2 (8 bytes) | data2 (size2 bytes) |
     ...
@@ -85,7 +91,7 @@ class _Bucket(object):
     """Initialize a _Bucket instance.
 
     Args:
-      path (str): where to write the bucket file.
+      path (str): path to bucket file, where to write to or read from.
     """
     self._path = path
     self._fobj = None
@@ -96,6 +102,9 @@ class _Bucket(object):
   def size(self):
     return self._size
 
+  def __len__(self):
+    return self._length
+
   def add(self, key, data):
     """Adds (key, data) to bucket.
 
@@ -104,6 +113,7 @@ class _Bucket(object):
       data (binary): the data.
     """
     if not self._fobj:
+      tf.io.gfile.makedirs(os.path.dirname(self._path))
       self._fobj = tf.io.gfile.GFile(self._path, mode='wb')
     data_size = len(data)
     self._fobj.write(_hkey_to_bytes(key))
@@ -119,13 +129,20 @@ class _Bucket(object):
     self._length += 1
     self._size += data_size
 
+  def flush(self):
+    if self._fobj:
+      self._fobj.flush()
+      self._fobj.close()
+
   def read_values(self):
-    """Returns all data stored in bucket as a list of (hkey, data) tuples."""
-    if not self._fobj:
-      return []  # Nothing was written to this bucket.
-    self._fobj.close()
+    """Yields (hkey, data) tuples stored in bucket."""
+    self.flush()
     path = self._path
-    res = []
+    if not tf.io.gfile.exists(path):
+      # In case bucket was created but nothing was ever added.
+      # This is likely to happen if the number of buckets is large compared to
+      # the number of generated examples.
+      return
     with tf.io.gfile.GFile(path, 'rb') as fobj:
       while True:
         buff = fobj.read(HKEY_SIZE_BYTES)
@@ -135,8 +152,7 @@ class _Bucket(object):
         size_bytes = fobj.read(8)
         size = struct.unpack('=Q', size_bytes)[0]
         data = fobj.read(size)
-        res.append((hkey, data))
-    return res
+        yield hkey, data
 
   def del_file(self):
     if tf.io.gfile.exists(self._path):
@@ -155,9 +171,10 @@ class Shuffler(object):
     """
     grp_name = uuid.uuid4()
     self._hasher = hashing.Hasher(hash_salt)
-    self._buckets = [
-        _Bucket(os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i)))
-        for i in range(BUCKETS_NUMBER)]
+    self._buckets = []
+    for i in range(BUCKETS_NUMBER):
+      path = os.path.join(dirpath, 'bucket_%s_%03d.tmp' % (grp_name, i))
+      self._buckets.append(_Bucket(path))
     self._read_only = False
     self._total_bytes = 0
     # To keep data in memory until enough data has been gathered.
@@ -169,8 +186,14 @@ class Shuffler(object):
     """Return total size in bytes of records (not keys)."""
     return self._total_bytes
 
+  @property
+  def bucket_lengths(self):
+    if self._in_memory:
+      return [len(self._mem_buffer)]
+    return [len(b) for b in self._buckets]
+
   def _add_to_bucket(self, hkey, data):
-    bucket_number = _get_shard(hkey, BUCKETS_NUMBER)
+    bucket_number = get_bucket_number(hkey, BUCKETS_NUMBER)
     self._buckets[bucket_number].add(hkey, data)
 
   def _add_to_mem_buffer(self, hkey, data):

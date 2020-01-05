@@ -1,0 +1,103 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="en">
+  <siteinfo>
+    <sitename>Wikipedia</sitename>
+    <dbname>enwiki</dbname>
+    <base>https://en.wikipedia.org/wiki/Main_Page</base>
+    <generator>MediaWiki 1.33.0-wmf.17</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Wikipedia</namespace>
+    </namespaces>
+  </siteinfo>
+  <page>
+    <title>Machine Translation2</title>
+    <ns>0</ns>
+    <id>122</id>
+    <revision>
+      <id>01234</id>
+      <parentid>01233</parentid>
+      <timestamp>2019-02-17T18:39:34Z</timestamp>
+      <contributor>
+        <ip>0.0.0.0</ip>
+      </contributor>
+      <comment>/* Criticisms */</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{redirect2|Human Translation2}}
+{{pp-move-indef}}
+{{short description|Translation using machines.}}
+{{Use dmy dates|date=July 2018}}
+{{use British English|date=January 2014}}
+{{MT sidebar}}
+{{Basic forms of translation}}
+'''Machine translation''' is translation using a machine.
+
+== List of methods  ==
+{{see also|List of machine translation methods}}
+* [[Transformer]]
+
+== References ==
+{{reflist}}
+</text>
+      <sha1>abcdef</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>NeuralNetworks2</title>
+    <ns>0</ns>
+    <id>132</id>
+    <redirect title="Neural Networks2" />
+    <revision>
+      <id>12346</id>
+      <parentid>12345</parentid>
+      <timestamp>2017-06-05T04:18:18Z</timestamp>
+      <contributor>
+        <username>fake.name</username>
+        <id>00000</id>
+      </contributor>
+      <minor />
+      <comment>+{{Redirect category shell}} using [[Project:AWB|AWB]]</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">#REDIRECT [[Neural Networks]]
+
+{{Redirect category shell|1=
+{{R from CamelCase}}
+}}</text>
+      <sha1>ghijklm</sha1>
+    </revision>
+  </page>
+  <page>
+    <title>TestExample2</title>
+    <ns>0</ns>
+    <id>252</id>
+    <revision>
+      <id>123457</id>
+      <parentid>123456</parentid>
+      <timestamp>2019-02-19T06:18:00Z</timestamp>
+      <contributor>
+        <username>fake.name</username>
+        <id>00000</id>
+      </contributor>
+      <minor />
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">{{about}}
+{{pp-semi-indef}}
+{{pp-move-indef}}
+{{short description|a fake example for testing}}
+{{Use dmy dates|date=August 2018}}
+{{Use American English|date=August 2016}}
+
+==About==
+This is simply a fake example.</text>
+      <sha1>ffffff</sha1>
+    </revision>
+  </page>
+</mediawiki>

@@ -80,6 +80,14 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
           "3.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
   ]
 
+  MANUAL_DOWNLOAD_INSTRUCTIONS = """\
+  You must register and agree to user agreement on the dataset page:
+  https://stanfordmlgroup.github.io/competitions/chexpert/
+  Afterwards, you have to put the CheXpert-v1.0-small directory in the
+  manual_dir. It should contain subdirectories: train/ and valid/ with images
+  and also train.csv and valid.csv files.
+  """
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,

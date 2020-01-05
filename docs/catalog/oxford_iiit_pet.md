@@ -18,14 +18,13 @@ lighting. All images have an associated ground truth annotation of breed.
     [http://www.robots.ox.ac.uk/~vgg/data/pets/](http://www.robots.ox.ac.uk/~vgg/data/pets/)
 *   `DatasetBuilder`:
     [`tfds.image.oxford_iiit_pet.OxfordIIITPet`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/oxford_iiit_pet.py)
-*   Version: `v1.1.0`
+*   Version: `v1.2.0`
 *   Versions:
 
-    *   **`1.1.0`** (default):
-    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits);additon
-        of segmentation_mask feature.
+    *   **`1.2.0`** (default):
+    *   `3.1.0`: Added species and labels.
 
-*   Size: `801.24 MiB`
+*   Size: `?? GiB`
 
 ## Features
 ```python
@@ -34,16 +33,12 @@ FeaturesDict({
     'image': Image(shape=(None, None, 3), dtype=tf.uint8),
     'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
     'segmentation_mask': Image(shape=(None, None, 1), dtype=tf.uint8),
+    'species': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
 })
 ```
 
 ## Statistics
-
-Split | Examples
-:---- | -------:
-ALL   | 7,349
-TRAIN | 3,680
-TEST  | 3,669
+None computed
 
 ## Homepage
 

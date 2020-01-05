@@ -151,7 +151,7 @@
 
 # tfds.testing.DatasetBuilderTestCase
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -161,7 +161,6 @@ source</a>
 
 ## Class `DatasetBuilderTestCase`
 
-<!-- Start diff -->
 Inherit this class to test your DatasetBuilder class.
 
 Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)
