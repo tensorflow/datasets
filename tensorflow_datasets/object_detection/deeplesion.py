@@ -20,6 +20,7 @@ from __future__ import print_function
 
 import tensorflow_datasets as tfds
 import tensorflow as tf
+import numpy as np
 import os
 
 
@@ -218,10 +219,8 @@ def _format_bboxs(bboxs, size):
     :type size: string, "xxx,xxx"
     :rtype: tfds.features.BBox
     """
-    size = list(map(lambda x: float(x), size.split(',')))
-    coords = list(map(lambda x: float(x), bboxs.split(',')))
-    coords = list(map(lambda x: x if x>0 else 0.0, coords))
-    coords = list(map(lambda x: x if x<size[0] else size[0], coords))
+    size = [float(x) for x in size.split(',')]
+    coords = np.clip([float(x) for x in bboxs.split(',')], 0.0, size[0])
 
     cnt = int((len(coords))/4)
 
