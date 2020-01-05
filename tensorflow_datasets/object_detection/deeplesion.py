@@ -70,7 +70,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image/name":tfds.features.Text(),
             "image":tfds.features.Image(shape=(None, None, 1), dtype=tf.uint16, encoding_format='png'),
-            "bbox":tfds.features.BBoxFeature()
+            "bbox":tfds.features.Sequence(tfds.features.BBoxFeature())
         }),
         homepage=_URL,
         citation=_CITATION,
@@ -232,7 +232,7 @@ def _format_bboxs(bboxs, size):
         xmax = coords[i*4+2] / size[0]
         bbox_list.append(tfds.features.BBox(ymin=ymin, xmin=xmin, ymax=ymax, xmax=xmax))
     
-    return bbox_list[0]
+    return bbox_list
     
     
 def _ann_parser(ann_path):
