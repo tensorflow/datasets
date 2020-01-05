@@ -20,6 +20,7 @@ from __future__ import print_function
 
 import tensorflow_datasets as tfds
 import tensorflow as tf
+import numpy as np
 import os
 
 
@@ -69,7 +70,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image/name":tfds.features.Text(),
             "image":tfds.features.Image(shape=(None, None, 1), dtype=tf.uint16, encoding_format='png'),
-            "bbox":tfds.features.BBoxFeature()
+            "bbox":tfds.features.Sequence(tfds.features.BBoxFeature())
         }),
         homepage=_URL,
         citation=_CITATION,
@@ -146,7 +147,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
     ann_path = paths['ann_file']
     del paths['ann_file']
     lut = _build_lut(paths)
-    train_split, val_split, test_split = Split(ann_path).split_generator()
+    train_split, val_split, test_split = _ann_parser(ann_path)
 
     return [
         tfds.core.SplitGenerator(
@@ -176,14 +177,14 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, lut, split):
     """Returns examples
     :type lut: dict, lookup dictionary to lookup whole paths of series_folder
-    :type split: string, path to read ann files
+    :type split: pd.dataframe, annotation information associated to images
     :rtype: yield idx, example
     """
     for idx, value in enumerate(split.values):
-      fn, bboxs, size, sp = value
+      file_name, bboxs, size, sp = value
       record = {
-          "image/name": fn,
-          "image": _lookup_image_path(lut, fn),
+          "image/name": file_name,
+          "image": _lookup_image_path(lut, file_name),
           "bbox": _format_bboxs(bboxs, size)
       }
       yield idx, record
@@ -201,11 +202,13 @@ def _build_lut(paths):
     return lut
         
 
-def _lookup_image_path(lut, fn):
+def _lookup_image_path(lut, file_name):
     """Returns whole path of an image
+    :type lut: dict, lookup dictionary
+    :file_name: string, image name recorded in the annotation file
     """
-    slice_fn = fn.split('_')[-1]
-    fd = '_'.join(fn.split('_')[:-1])
+    slice_fn = file_name.split('_')[-1]
+    fd = '_'.join(file_name.split('_')[:-1])
     
     return os.path.join(lut[fd], slice_fn)
     
@@ -216,10 +219,8 @@ def _format_bboxs(bboxs, size):
     :type size: string, "xxx,xxx"
     :rtype: tfds.features.BBox
     """
-    size = list(map(lambda x: float(x), size.split(',')))
-    coords = list(map(lambda x: float(x), bboxs.split(',')))
-    coords = list(map(lambda x: x if x>0 else 0.0, coords))
-    coords = list(map(lambda x: x if x<size[0] else size[0], coords))
+    size = [float(x) for x in size.split(',')]
+    coords = np.clip([float(x) for x in bboxs.split(',')], 0.0, size[0])
 
     cnt = int((len(coords))/4)
 
@@ -231,38 +232,26 @@ def _format_bboxs(bboxs, size):
         xmax = coords[i*4+2] / size[0]
         bbox_list.append(tfds.features.BBox(ymin=ymin, xmin=xmin, ymax=ymax, xmax=xmax))
     
-    return bbox_list[0]
+    return bbox_list
     
     
-class Split:
-    """dataset split builder.
+def _ann_parser(ann_path):
+    """parsers the annotation file and returns the splits in dataframes
+    :type ann_path: string, path of the annotation file
+    :rtype: pandas.dataframes
     """
-    def __init__(self, ann_path):
-        """
-        :type ann_path: string, path of the annotation csv file
-        """
-        self.ann_path = ann_path
-    
-    def split_generator(self):
-        """wrapper of the split
-        """
-        return self._ann_parser()
-    
-    def _ann_parser(self):
-        """parsers the csv file and returns the splits
-        """
-        pd = tfds.core.lazy_imports.pandas
-        with tf.io.gfile.GFile(self.ann_path) as csv_f:
-            df = pd.read_csv(csv_f)
-            df_t = df[['File_name', 'Bounding_boxes', 'Image_size', 'Train_Val_Test']]
-            concat = lambda a: ", ".join(a) 
-            d = {'Bounding_boxes': concat,
-                 'Image_size':'first', 
-                 'Train_Val_Test':'first'}
-            df_new = df_t.groupby('File_name', as_index=False).aggregate(d).reindex(columns=df_t.columns)
+    pd = tfds.core.lazy_imports.pandas
+    with tf.io.gfile.GFile(ann_path) as csv_f:
+        df = pd.read_csv(csv_f)
+        df_t = df[['File_name', 'Bounding_boxes', 'Image_size', 'Train_Val_Test']]
+        concat = lambda a: ", ".join(a) 
+        d = {'Bounding_boxes': concat,
+             'Image_size':'first', 
+             'Train_Val_Test':'first'}
+        df_new = df_t.groupby('File_name', as_index=False).aggregate(d).reindex(columns=df_t.columns)
             
-            df_train = df_new[df_new['Train_Val_Test']==1]
-            df_val = df_new[df_new['Train_Val_Test']==2]
-            df_test = df_new[df_new['Train_Val_Test']==3]
-        return df_train, df_val, df_test
+        df_train = df_new[df_new['Train_Val_Test']==1]
+        df_val = df_new[df_new['Train_Val_Test']==2]
+        df_test = df_new[df_new['Train_Val_Test']==3]
+    return df_train, df_val, df_test
             
