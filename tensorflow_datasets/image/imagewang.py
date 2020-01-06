@@ -50,6 +50,10 @@ The dataset comes in three variants:
 This dataset consists of the Imagenette dataset {size} variant.
 """
 
+_DESCRIPTION_SHORT = """\
+Imagewang contains Imagenette and Imagewoof combined.
+"""
+
 _LABELS_FNAME = "image/imagewang_labels.txt"
 _URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas"
 _SIZES = ["full-size", "320px", "160px"]
@@ -77,7 +81,7 @@ def _make_builder_configs():
         ImagewangConfig(
             name=size,
             size=size,
-            description=_DESCRIPTION.format(size=size)))
+            description=_DESCRIPTION_SHORT))
   return configs
 
 
