@@ -32,6 +32,8 @@ set aside 20% (1016 images) of the data for testing.
 
 _DATA_OPTIONS = ["small", "full"]
 
+_HOMEPAGE_URL = "https://bensapp.github.io/flic-dataset.html"
+
 _URL_SUBSET = "https://drive.google.com/uc?id=0B4K3PZp8xXDJN0Fpb0piVjQ3Y3M&export=download"
 _URL_SUPERSET = "https://drive.google.com/uc?id=0B4K3PZp8xXDJd2VwblhhOVBfMDg&export=download"
 
@@ -45,10 +47,11 @@ class FlicConfig(tfds.core.BuilderConfig):
     if data not in _DATA_OPTIONS:
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)
 
-    name = kwargs.get("name", data)
-    kwargs["name"] = name
-
-    description = kwargs.get("description", "Uses %s data." % data)
+    descriptions = {
+      "small" : "5003 examples used in our CVPR13 MODEC paper."
+      "full": "	20928 examples, a superset of FLIC consisting of more difficult examples."
+    }
+    description = kwargs.get("description", "Uses %s" % descriptions[data])
     kwargs["description"] = description
 
     super(FlicConfig, self).__init__(**kwargs)
@@ -60,6 +63,7 @@ def _make_builder_configs():
   configs = []
   for data in _DATA_OPTIONS:
     configs.append(FlicConfig(
+        name=data,
         version=tfds.core.Version("2.0.0"),
         data=data))
   return configs
@@ -68,7 +72,6 @@ class Flic(tfds.core.GeneratorBasedBuilder):
   """Frames Labeled In Cinema (FLIC)"""
 
   BUILDER_CONFIGS = _make_builder_configs()
-  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -84,6 +87,7 @@ class Flic(tfds.core.GeneratorBasedBuilder):
             "torsobox": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
         }),
         citation=_CITATION,
+        homepage = _HOMEPAGE_URL
     )
 
   def _split_generators(self, dl_manager):
@@ -91,9 +95,10 @@ class Flic(tfds.core.GeneratorBasedBuilder):
     extract_path = dl_manager.download_and_extract(
         self.builder_config.url)
     
-    data = scipy.io.loadmat(os.path.join(extract_path,
-                                         self.builder_config.dir, "examples.mat"),
-                            struct_as_record=True, squeeze_me=True, mat_dtype=True)
+    mat_path = os.path.join(extract_path, self.builder_config.dir, "examples.mat")
+    with tf.io.gfile.GFile(mat_path) as f:
+    data = tfds.core.lazy_imports.scipy.io.loadmat(f, struct_as_record=True,
+                                                   squeeze_me=True, mat_dtype=True)
 
     return [
       tfds.core.SplitGenerator(
