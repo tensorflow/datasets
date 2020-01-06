@@ -22,7 +22,7 @@ from __future__ import print_function
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-DATA_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin"
+DATA_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
 
 _CITATION = """\
 @misc{Dua:2019 ,
