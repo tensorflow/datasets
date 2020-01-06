@@ -177,7 +177,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, lut, split):
     """Returns examples
     :type lut: dict, lookup dictionary to lookup whole paths of series_folder
-    :type split: pd.dataframe, annotation information associated to images
+    :type split: dataframe, annotation information associated to images
     :rtype: yield idx, example
     """
     for idx, value in enumerate(split.values):
@@ -191,12 +191,12 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
 
     
 def _build_lut(paths):
-    """Returns lookup dictionary to lookup whole paths of series_folder
+    """Returns lookup dictionary to lookup whole path of series_folders using extracted paths
     :type paths: dict, {<zipfn>:<unzip_path>}
     :rtype: dict, {<series_folder>:<unzip_path>/Images_png/<series_folder>}
     """
     lut = {}
-    for k, v in paths.items():
+    for _, v in paths.items():
         for fd in tf.io.gfile.listdir(os.path.join(v,'Images_png')):
             lut[fd] = os.path.join(v,'Images_png', fd)
     return lut
@@ -215,11 +215,13 @@ def _lookup_image_path(lut, file_name):
     
 def _format_bboxs(bboxs, size):
     """Return bbox feature
-    :type bboxs: string, "xxx,xxx,xxx,xxx"
-    :type size: string, "xxx,xxx"
+    :type bboxs: string, "xmin,ymin,xmax,ymax"
+    :type size: string, "height,width"
     :rtype: tfds.features.BBox
     """
     size = [float(x) for x in size.split(',')]
+    if len(size) != 2 or size[0] != size[1]:
+        raise AssertionError('height should be equal with width for this dataset')
     coords = np.clip([float(x) for x in bboxs.split(',')], 0.0, size[0])
 
     cnt = int((len(coords))/4)
@@ -238,7 +240,7 @@ def _format_bboxs(bboxs, size):
 def _ann_parser(ann_path):
     """parsers the annotation file and returns the splits in dataframes
     :type ann_path: string, path of the annotation file
-    :rtype: pandas.dataframes
+    :rtype: tuple with 3 dataframes: for train, validation and test.
     """
     pd = tfds.core.lazy_imports.pandas
     with tf.io.gfile.GFile(ann_path) as csv_f:
