@@ -84,7 +84,6 @@ def _make_builder_configs():
 class Imagewang(tfds.core.GeneratorBasedBuilder):
   """ Imagewang contains Imagenette and Imagewoof combined. """
 
-  VERSION = tfds.core.Version("2.0.0")
   BUILDER_CONFIGS = _make_builder_configs()
 
   def _info(self):
