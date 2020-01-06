@@ -5,7 +5,6 @@ from __future__ import division
 from __future__ import print_function
 
 import os
-import scipy.io
 
 import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -49,7 +48,7 @@ class FlicConfig(tfds.core.BuilderConfig):
 
     descriptions = {
       "small" : "5003 examples used in our CVPR13 MODEC paper."
-      "full": "	20928 examples, a superset of FLIC consisting of more difficult examples."
+      "full": "20928 examples, a superset of FLIC consisting of more difficult examples."
     }
     description = kwargs.get("description", "Uses %s" % descriptions[data])
     kwargs["description"] = description
