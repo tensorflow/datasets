@@ -586,7 +586,7 @@ To create this checksum file the first time, you can use the
 `tensorflow_datasets.scripts.download_and_prepare` script and pass the flags
 `--register_checksums --checksums_dir=/path/to/checksums_dir`.
 
-### 2. Adjust the fake example direcory
+### 2. Adjust the fake example directory
 
 For testing, instead of using the default
 [fake example directory](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples)
@@ -595,7 +595,7 @@ you can define your own by setting the `EXAMPLE_DIR` property of
 
 ```
 class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
-  EXAMPLE_DIR = 'path/to/fakedata'`
+  EXAMPLE_DIR = 'path/to/fakedata'
 ```
 
 ## Large datasets and distributed generation
@@ -616,6 +616,9 @@ under the `my_dataset` directory and should mimic the source dataset artifacts
 as downloaded and extracted. It can be created manually or automatically with a
 script
 ([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
+
+If you're using automation to generate the test data, please include that script
+in [`testing`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing).
 
 Make sure to use different data in your test data splits, as the test will
 fail if your dataset splits overlap.
