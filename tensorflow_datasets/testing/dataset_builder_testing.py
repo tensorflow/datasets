@@ -27,7 +27,7 @@ import os
 from absl.testing import absltest
 from absl.testing import parameterized
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -76,7 +76,7 @@ _ORGINAL_NP_LOAD = np.load
 def _np_load(file_, mmap_mode=None, allow_pickle=False, **kwargs):
   if not hasattr(file_, "read"):
     raise AssertionError(
-        "You MUST pass a `tf.gfile.GFile` or file-like instance to `np.load`.")
+        "You MUST pass a `tf.io.gfile.GFile` or file-like object to `np.load`.")
   if allow_pickle:
     raise AssertionError("Unpicling files is forbidden for security reasons.")
   return _ORGINAL_NP_LOAD(file_, mmap_mode, allow_pickle, **kwargs)

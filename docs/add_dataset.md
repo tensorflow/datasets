@@ -542,7 +542,7 @@ except TensorFlow uses 2 spaces instead of 4. Please conform to the
 [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
 
 Most importantly, use
-[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/oss_scripts/lint.sh)
+[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/oss_scripts/lint.sh)
 to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 

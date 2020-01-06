@@ -23,7 +23,7 @@ Currently, a single FileAdapter is available:
 
 ```python
 return TFRecordExampleAdapter({
-    "x": tf.FixedLenFeature(tuple(), tf.int64)
+    "x": tf.io.FixedLenFeature(tuple(), tf.int64)
 })
 ```
 
@@ -41,7 +41,7 @@ import string
 from absl import logging
 import numpy as np
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer

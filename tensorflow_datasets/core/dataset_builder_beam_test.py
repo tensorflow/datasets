@@ -23,7 +23,7 @@ import os
 
 import apache_beam as beam
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info

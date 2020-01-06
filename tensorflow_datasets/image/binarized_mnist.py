@@ -21,7 +21,7 @@ from __future__ import print_function
 
 import numpy as np
 from six.moves import urllib
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.image import mnist
 import tensorflow_datasets.public_api as tfds
 
