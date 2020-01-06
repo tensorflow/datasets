@@ -80,7 +80,7 @@ class WisconsinBreastCancer(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "features":
                 tfds.features.Tensor(shape=(32,), dtype=tf.float32),
-            # Here, labels can be one of 3 classes
+            # Here, labels can be one of 2 classes
             "label":
                 tfds.features.ClassLabel(
                     names=["Melignant", "Benign"]),
