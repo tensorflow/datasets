@@ -30,8 +30,7 @@ isn't already added.
     *   [3. Double-check the citation](#3-double-check-the-citation)
     *   [4. Add a test](#4-add-a-test)
     *   [5. Check your code style](#5-check-your-code-style)
-    *   [6. Add release notes](#6-add-release-notes)
-    *   [7. Send for review!](#7-send-for-review)
+    *   [6. Send for review!](#6-send-for-review)
 *   [Define the dataset outside TFDS](#define-the-dataset-outside-tfds)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 *   [Testing `MyDataset`](#testing-mydataset)
@@ -543,7 +542,7 @@ except TensorFlow uses 2 spaces instead of 4. Please conform to the
 [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
 
 Most importantly, use
-[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/oss_scripts/lint.sh)
+[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/oss_scripts/lint.sh)
 to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 
@@ -555,13 +554,7 @@ See
 [TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
 for more information.
 
-### 6. Add release notes
-
-Add the dataset to the
-[release notes](https://github.com/tensorflow/datasets/tree/master/docs/release_notes.md).
-The release note will be published for the next release.
-
-### 7. Send for review!
+### 6. Send for review!
 
 Send the pull request for review.
 
