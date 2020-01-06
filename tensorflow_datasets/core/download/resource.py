@@ -29,7 +29,7 @@ import re
 
 import enum
 from six.moves import urllib
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core.download import util

@@ -18,7 +18,7 @@
 import os
 import re
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import api_utils
 import tensorflow_datasets.public_api as tfds
 

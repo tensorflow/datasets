@@ -27,7 +27,7 @@ import json
 import re
 
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.utils import py_utils
 
 

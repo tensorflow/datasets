@@ -25,7 +25,7 @@ import os
 
 from absl import logging
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import _sharded_files
 from tensorflow_datasets.core import example_serializer

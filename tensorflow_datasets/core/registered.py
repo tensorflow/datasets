@@ -25,7 +25,7 @@ import re
 
 from absl import flags
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
