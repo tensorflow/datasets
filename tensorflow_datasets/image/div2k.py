@@ -59,18 +59,15 @@ _DATA_OPTIONS = ["bicubic_x2", "bicubic_x3", "bicubic_x4", "bicubic_x8",
 class Div2kConfig(tfds.core.BuilderConfig):
   """BuilderConfig for Div2k."""
 
-  def __init__(self, data, **kwargs):
+  def __init__(self, name, **kwargs):
     """Constructs a Div2kConfig."""
-    if data not in _DATA_OPTIONS:
+    if name not in _DATA_OPTIONS:
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)
-
-    name = kwargs.get("name", data)
-    kwargs["name"] = name
 
     description = kwargs.get("description", "Uses %s data." % data)
     kwargs["description"] = description
 
-    super(Div2kConfig, self).__init__(**kwargs)
+    super(Div2kConfig, self).__init__(name=name, **kwargs)
     self.data = data
 
   def download_urls():
@@ -95,7 +92,6 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
   """DIV2K dataset: DIVerse 2K resolution high quality images"""
 
   BUILDER_CONFIGS = _make_builder_configs()
-  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -105,7 +101,7 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
             "lr": tfds.features.Image(),
             "hr": tfds.features.Image(),
         }),
-        #homepage=_DL_URL,
+        homepage=_DL_URL,
         citation=_CITATION,
     )
 
@@ -139,10 +135,11 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
 
     for root, _, files in tf.io.gfile.walk(lr_path):
       if len(files):
-        for file in files:
-          yield root + file, {
-              "lr": os.path.join(root, file),
+        for file_path in files:
+          yield root + file_path, {
+              "lr": os.path.join(root, file_path),
+              #extract for corresponding file with matching 4 digit id
               "hr": os.path.join(hr_path,
                                  re.search(r'\d{4}',
-                                           str(file)).group(0) + ".png")
+                                           str(file_path)).group(0) + ".png")
           }
