@@ -4,8 +4,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import collections
-import csv
+import tfds.core.lazy_imports.csv
+import tfds.core.lazy_imports.collections
 import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
 
