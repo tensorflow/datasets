@@ -70,7 +70,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image/name":tfds.features.Text(),
             "image":tfds.features.Image(shape=(None, None, 1), dtype=tf.uint16, encoding_format='png'),
-            "bbox":tfds.features.Sequence(tfds.features.BBoxFeature())
+            "bboxs":tfds.features.Sequence(tfds.features.BBoxFeature())
         }),
         homepage=_URL,
         citation=_CITATION,
@@ -185,7 +185,7 @@ class Deeplesion(tfds.core.GeneratorBasedBuilder):
       record = {
           "image/name": file_name,
           "image": _lookup_image_path(lut, file_name),
-          "bbox": _format_bboxs(bboxs, size)
+          "bboxs": _format_bboxs(bboxs, size)
       }
       yield idx, record
 
@@ -216,7 +216,7 @@ def _lookup_image_path(lut, file_name):
 def _format_bboxs(bboxs, size):
     """Return bbox feature
     :type bboxs: string, "xmin,ymin,xmax,ymax"
-    :type size: string, "height,width"
+    :type size: string, "height,width". height is assumed to be equal with width.
     :rtype: tfds.features.BBox
     """
     size = [float(x) for x in size.split(',')]
