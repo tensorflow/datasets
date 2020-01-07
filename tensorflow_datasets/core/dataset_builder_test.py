@@ -533,6 +533,14 @@ class DatasetBuilderReadTest(testing.TestCase):
         split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
     self.assertEqual(x.shape[0], 20)
 
+  def test_is_dataset_v1(self):
+    # For backward compatibility, ensure that the returned dataset object
+    # is a tf.data.DatasetV1 object.
+    with tf.Graph().as_default():
+      ds = self.builder.as_dataset(split="train")
+      ds.make_initializable_iterator()
+      self.assertIsInstance(ds, tf.compat.v1.data.Dataset)
+
 
 
 

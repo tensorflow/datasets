@@ -83,6 +83,8 @@ class FileFormatAdapterTest(testing.TestCase):
       valid_dataset = builder.as_dataset(split=splits.Split.VALIDATION)
       test_dataset = builder.as_dataset(split=splits.Split.TEST)
 
+      self.assertIsInstance(train_dataset, tf.compat.v1.data.Dataset)
+
       def validate_dataset(dataset, min_val, max_val, test_range=False):
         els = []
         for el in dataset:
