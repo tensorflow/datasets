@@ -326,7 +326,8 @@ class EMNIST(MNIST):
                     num_classes=self.builder_config.class_number),
         }),
         supervised_keys=("image", "label"),
-        homepage="https://www.nist.gov/node/1298471/emnist-dataset",
+        homepage=("https://www.nist.gov/itl/products-and-services/"
+                  "emnist-dataset"),
         citation=_EMNIST_CITATION,
     )
 
