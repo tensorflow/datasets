@@ -22,7 +22,7 @@ the pre-processed dataset as .tfrecord file
 
 ```python
 return TFRecordExampleAdapter({
-    "x": tf.FixedLenFeature(tuple(), tf.int64)
+    "x": tf.io.FixedLenFeature(tuple(), tf.int64)
 })
 ```
 
