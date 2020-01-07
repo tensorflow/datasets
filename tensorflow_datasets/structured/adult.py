@@ -1,6 +1,4 @@
-
-
-
+"""Prediction task is to determine whether a person makes over 50K a year."""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -13,7 +11,6 @@ import collections
 import csv
 import numpy as np
 
-
 _CITATION = """
 @misc{Dua:2019 ,
 author = "Dua, Dheeru and Graff, Casey",
@@ -22,7 +19,6 @@ title = "{UCI} Machine Learning Repository",
 url = "http://archive.ics.uci.edu/ml",
 institution = "University of California, Irvine, School of Information and Computer Sciences" } 
 """
-
 
 _DESCRIPTION = """
 Listing of attributes:
