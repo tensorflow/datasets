@@ -7,12 +7,13 @@ from __future__ import print_function
 from tensorflow_datasets import testing
 from tensorflow_datasets.structured import adult
 
-
 class AdultTest(testing.DatasetBuilderTestCase):
   
   DATASET_CLASS = adult.Adult
   SPLITS = {
-      "test": 5
+    
+      "train": 1,
+      "test": 1
   }
 
   DL_EXTRACT_RESULT = 'adult.test'
