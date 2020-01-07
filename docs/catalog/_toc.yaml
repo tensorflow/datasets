@@ -46,6 +46,8 @@ toc:
     title: cifar10_corrupted
   - path: /datasets/catalog/citrus_leaves
     title: citrus_leaves
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
   - path: /datasets/catalog/cmaterdb

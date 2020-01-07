@@ -675,12 +675,9 @@ multi_nli/plain_text/0.0.2
 multi_nli/plain_text/1.0.0
 multi_nli_mismatch/plain_text/0.0.1
 newsroom/1.0.0
-nsynth/full/1.1.0
-nsynth/full/2.0.0
-nsynth/gansynth_subset.f0_and_loudness/1.1.0
-nsynth/gansynth_subset.f0_and_loudness/2.0.0
-nsynth/gansynth_subset/1.1.0
-nsynth/gansynth_subset/2.0.0
+nsynth/full/2.2.0
+nsynth/gansynth_subset.f0_and_loudness/2.2.0
+nsynth/gansynth_subset/2.2.0
 omniglot/1.0.0
 omniglot/3.0.0
 open_images_v4/200k/0.2.1
@@ -1082,8 +1079,6 @@ wikipedia/20190301.hu/0.0.3
 wikipedia/20190301.hu/0.0.4
 wikipedia/20190301.hy/0.0.3
 wikipedia/20190301.hy/0.0.4
-wikipedia/20190301.hz/0.0.3
-wikipedia/20190301.hz/0.0.4
 wikipedia/20190301.ia/0.0.3
 wikipedia/20190301.ia/0.0.4
 wikipedia/20190301.id/0.0.3

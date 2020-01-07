@@ -25,17 +25,17 @@ heuristic algorithms: Source, Family, and Qualities.
 `nsynth` is configured with `tfds.audio.nsynth.NsynthConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `full` (`v1.1.0`) (`Size: 73.07 GiB`): Full NSynth Dataset is split into
-    train, valid, and test sets, with no instruments overlapping between the
-    train set and the valid/test sets.
+*   `full` (`v1.2.0`) (`Size: ?? GiB`): Full NSynth Dataset is split into train,
+    valid, and test sets, with no instruments overlapping between the train set
+    and the valid/test sets.
 
-*   `gansynth_subset` (`v1.1.0`) (`Size: 73.08 GiB`): NSynth Dataset limited to
+*   `gansynth_subset` (`v1.2.0`) (`Size: ?? GiB`): NSynth Dataset limited to
     acoustic instruments in the MIDI pitch interval [24, 84]. Uses alternate
     splits that have overlap in instruments (but not exact notes) between the
     train set and valid/test sets. This variant was originally introduced in the
     ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 
-*   `gansynth_subset.f0_and_loudness` (`v1.1.0`) (`Size: 73.08 GiB`): NSynth
+*   `gansynth_subset.f0_and_loudness` (`v1.2.0`) (`Size: ?? GiB`): NSynth
     Dataset limited to acoustic instruments in the MIDI pitch interval [24, 84].
     Uses alternate splits that have overlap in instruments (but not exact notes)
     between the train set and valid/test sets. This variant was originally
@@ -50,8 +50,8 @@ instruments overlapping between the train set and the valid/test sets.
 
 Versions:
 
-*   **`1.1.0`** (default):
-*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.2.0`** (default):
+*   `2.2.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
@@ -96,8 +96,8 @@ introduced in the ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 
 Versions:
 
-*   **`1.1.0`** (default):
-*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.2.0`** (default):
+*   `2.2.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
@@ -145,20 +145,21 @@ rate of 250Hz.
 
 Versions:
 
-*   **`1.1.0`** (default):
-*   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`1.2.0`** (default):
+*   `2.2.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
 
 ### Features
+
 ```python
 FeaturesDict({
     'audio': Tensor(shape=(64000,), dtype=tf.float32),
     'f0': FeaturesDict({
-        'confidence': Tensor(shape=(1001,), dtype=tf.float32),
-        'hz': Tensor(shape=(1001,), dtype=tf.float32),
-        'midi': Tensor(shape=(1001,), dtype=tf.float32),
+        'confidence': Tensor(shape=(1000,), dtype=tf.float32),
+        'hz': Tensor(shape=(1000,), dtype=tf.float32),
+        'midi': Tensor(shape=(1000,), dtype=tf.float32),
     }),
     'id': Tensor(shape=(), dtype=tf.string),
     'instrument': FeaturesDict({
@@ -167,7 +168,7 @@ FeaturesDict({
         'source': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
     }),
     'loudness': FeaturesDict({
-        'db': Tensor(shape=(1001,), dtype=tf.float32),
+        'db': Tensor(shape=(1000,), dtype=tf.float32),
     }),
     'pitch': ClassLabel(shape=(), dtype=tf.int64, num_classes=128),
     'qualities': FeaturesDict({

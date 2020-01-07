@@ -27,7 +27,7 @@ import re
 import attr
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import _sharded_files
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import example_parser

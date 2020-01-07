@@ -1,4 +1,6 @@
 redirects:
+- from: /datasets/api_docs/python/tf_overview
+  to: /datasets/api_docs/python/tf
 - from: /datasets/api_docs/python/tfds/GenerateMode
   to: /datasets/api_docs/python/tfds/download/GenerateMode
 - from: /datasets/api_docs/python/tfds/testing/FeatureExpectationsTestCase/failureException

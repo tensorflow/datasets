@@ -4,6 +4,10 @@ bigearthnet/all/0.0.2
 bigearthnet/all/1.0.0
 bigearthnet/rgb/0.0.2
 bigearthnet/rgb/1.0.0
+cityscapes/semantic_segmentation/1.0.0
+cityscapes/semantic_segmentation_extra/1.0.0
+cityscapes/stereo_disparity/1.0.0
+cityscapes/stereo_disparity_extra/1.0.0
 diabetic_retinopathy_detection/btgraham-300/1.0.0
 glue/ax/0.0.2
 image_label_folder/1.0.0
@@ -119,6 +123,9 @@ math_dataset/probability__swr_p_level_set_more_samples/1.0.0
 math_dataset/probability__swr_p_sequence/1.0.0
 math_dataset/probability__swr_p_sequence_more_samples/1.0.0
 mnist_corrupted/canny_edges/1.0.0
+nsynth/full/1.2.0
+nsynth/gansynth_subset.f0_and_loudness/1.2.0
+nsynth/gansynth_subset/1.2.0
 oxford_iiit_pet/1.2.0
 places365_small/2.0.0
 so2sat/all/0.0.1
@@ -237,7 +244,6 @@ wikipedia/20190301.hsb/1.0.0
 wikipedia/20190301.ht/1.0.0
 wikipedia/20190301.hu/1.0.0
 wikipedia/20190301.hy/1.0.0
-wikipedia/20190301.hz/1.0.0
 wikipedia/20190301.ia/1.0.0
 wikipedia/20190301.id/1.0.0
 wikipedia/20190301.ie/1.0.0
