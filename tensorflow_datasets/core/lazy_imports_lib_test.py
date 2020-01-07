@@ -44,6 +44,8 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "scipy",
       "skimage",
       "tldextract",
+      "csv",
+      "collections",
   )
   def test_import(self, module_name):
     # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)
