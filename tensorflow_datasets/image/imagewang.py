@@ -100,7 +100,7 @@ class Imagewang(tfds.core.GeneratorBasedBuilder):
             "label": tfds.features.ClassLabel(names_file=names_file)
         }),
         supervised_keys=("image", "label"),
-        homepage='https://dataset-homepage://github.com/fastai/imagenette',
+        homepage='https://github.com/fastai/imagenette',
         citation=_CITATION,
     )
 
