@@ -42,6 +42,8 @@ DOCLINES = __doc__.split('\n')
 REQUIRED_PKGS = [
     'absl-py',
     'attrs',
+    'collections',
+    'csv',
     'dill',  # TODO(tfds): move to TESTS_REQUIRE.
     'future',
     'numpy',
@@ -107,6 +109,7 @@ DATASET_FILES = [
 # Extra dependencies required by specific datasets
 DATASET_EXTRAS = {
     # In alphabetical order
+    'adult' : ['csv', 'collections'],
     'aflw2k3d': ['scipy'],
     'c4': ['apache_beam', 'langdetect', 'nltk', 'tldextract'],
     'cats_vs_dogs': ['matplotlib'],
