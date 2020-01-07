@@ -1,4 +1,6 @@
-"""TODO(adult): Add a description here."""
+
+
+
 
 from __future__ import absolute_import
 from __future__ import division
@@ -11,7 +13,7 @@ import collections
 import csv
 import numpy as np
 
-# TODO(adult): BibTeX citation
+
 _CITATION = """
 @misc{Dua:2019 ,
 author = "Dua, Dheeru and Graff, Casey",
@@ -21,7 +23,7 @@ url = "http://archive.ics.uci.edu/ml",
 institution = "University of California, Irvine, School of Information and Computer Sciences" } 
 """
 
-# TODO(adult):
+
 _DESCRIPTION = """
 Listing of attributes:
 
@@ -155,7 +157,7 @@ class Adult(tfds.core.GeneratorBasedBuilder):
 
   """Prediction task is to determine whether a person makes over 50K a year."""
  
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('2.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -197,9 +199,9 @@ class Adult(tfds.core.GeneratorBasedBuilder):
     with tf.io.gfile.GFile(file_path) as f:
           raw_data = csv.DictReader(f)
           for i, row in enumerate(raw_data):
-            income_val = row.pop(15)
+            income_val = row.pop(14)
             yield i, {
-                "survived": convert_to_label(income_val, _INCOME_DICT),
+                "income": convert_to_label(income_val, _INCOME_DICT),
                 "features": {
                     name: FEATURE_DICT[name][1](value)
                     for name, value in row.items()
