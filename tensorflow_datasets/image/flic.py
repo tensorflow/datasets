@@ -105,8 +105,7 @@ class Flic(tfds.core.GeneratorBasedBuilder):
         gen_kwargs={
           "extract_path": extract_path,
           "data": data,
-          "istrain": True,
-          "istest": False,
+          "selection_column": 7,
         },
       ),
       tfds.core.SplitGenerator(
@@ -114,16 +113,15 @@ class Flic(tfds.core.GeneratorBasedBuilder):
         gen_kwargs={
           "extract_path": extract_path,
           "data": data,
-          "istrain": False,
-          "istest": True,
+          "selection_column": 8,
         },
       ),
     ]
 
-  def _generate_examples(self, extract_path, data, istrain, istest):
+  def _generate_examples(self, extract_path, data, selection_column):
     """Yields examples."""
     for u_id, example in enumerate(data["examples"]):
-      if (example[7] and istrain) or (example[8] and istest):
+      if example[selection_column]:
         yield u_id, {
           "image": os.path.join(extract_path, self.builder_config.dir,
                                 "images", example[3]),
