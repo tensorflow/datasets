@@ -25,24 +25,24 @@ heuristic algorithms: Source, Family, and Qualities.
 `nsynth` is configured with `tfds.audio.nsynth.NsynthConfig` and has the
 following configurations predefined (defaults to the first one):
 
-*   `full` (`v1.2.0`) (`Size: ?? GiB`): Full NSynth Dataset is split into train,
-    valid, and test sets, with no instruments overlapping between the train set
-    and the valid/test sets.
+*   `full` (`v2.3.0`) (`Size: 73.07 GiB`): Full NSynth Dataset is split into
+    train, valid, and test sets, with no instruments overlapping between the
+    train set and the valid/test sets.
 
-*   `gansynth_subset` (`v1.2.0`) (`Size: ?? GiB`): NSynth Dataset limited to
+*   `gansynth_subset` (`v2.3.0`) (`Size: 73.08 GiB`): NSynth Dataset limited to
     acoustic instruments in the MIDI pitch interval [24, 84]. Uses alternate
     splits that have overlap in instruments (but not exact notes) between the
     train set and valid/test sets. This variant was originally introduced in the
     ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 
-*   `gansynth_subset.f0_and_loudness` (`v1.2.0`) (`Size: ?? GiB`): NSynth
+*   `gansynth_subset.f0_and_loudness` (`v2.3.0`) (`Size: 73.08 GiB`): NSynth
     Dataset limited to acoustic instruments in the MIDI pitch interval [24, 84].
     Uses alternate splits that have overlap in instruments (but not exact notes)
     between the train set and valid/test sets. This variant was originally
     introduced in the ICLR 2019 GANSynth paper
     (https://arxiv.org/abs/1902.08710). This version additionally contains
     estimates for F0 using CREPE (Kim et al., 2018) and A-weighted perceptual
-    loudness. Both signals are provided at a frame rate of 250Hz.
+    loudness in decibels. Both signals are provided at a frame rate of 250Hz.
 
 ## `nsynth/full`
 Full NSynth Dataset is split into train, valid, and test sets, with no
@@ -50,8 +50,7 @@ instruments overlapping between the train set and the valid/test sets.
 
 Versions:
 
-*   **`1.2.0`** (default):
-*   `2.2.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`2.3.0`** (default): New `loudness_db` feature in decibels (unormalized).
 
 ### Statistics
 None computed
@@ -96,8 +95,7 @@ introduced in the ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 
 Versions:
 
-*   **`1.2.0`** (default):
-*   `2.2.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`2.3.0`** (default): New `loudness_db` feature in decibels (unormalized).
 
 ### Statistics
 None computed
@@ -140,13 +138,12 @@ NSynth Dataset limited to acoustic instruments in the MIDI pitch interval [24,
 notes) between the train set and valid/test sets. This variant was originally
 introduced in the ICLR 2019 GANSynth paper (https://arxiv.org/abs/1902.08710).
 This version additionally contains estimates for F0 using CREPE (Kim et al.,
-2018) and A-weighted perceptual loudness. Both signals are provided at a frame
-rate of 250Hz.
+2018) and A-weighted perceptual loudness in decibels. Both signals are provided
+at a frame rate of 250Hz.
 
 Versions:
 
-*   **`1.2.0`** (default):
-*   `2.2.0`: New split API (https://tensorflow.org/datasets/splits)
+*   **`2.3.0`** (default): New `loudness_db` feature in decibels (unormalized).
 
 ### Statistics
 None computed

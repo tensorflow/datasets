@@ -77,6 +77,8 @@ big_patent/f/1.0.0
 big_patent/g/1.0.0
 big_patent/h/1.0.0
 big_patent/y/1.0.0
+bigearthnet/all/1.0.0
+bigearthnet/rgb/1.0.0
 billsum/3.0.0
 binarized_mnist/1.0.0
 binary_alpha_digits/1.0.0
@@ -675,9 +677,9 @@ multi_nli/plain_text/0.0.2
 multi_nli/plain_text/1.0.0
 multi_nli_mismatch/plain_text/0.0.1
 newsroom/1.0.0
-nsynth/full/2.2.0
-nsynth/gansynth_subset.f0_and_loudness/2.2.0
-nsynth/gansynth_subset/2.2.0
+nsynth/full/2.3.0
+nsynth/gansynth_subset.f0_and_loudness/2.3.0
+nsynth/gansynth_subset/2.3.0
 omniglot/1.0.0
 omniglot/3.0.0
 open_images_v4/200k/0.2.1
@@ -738,6 +740,7 @@ para_crawl/ensv_plain_text/1.0.0
 patch_camelyon/0.1.0
 patch_camelyon/2.0.0
 pet_finder/1.0.0
+places365_small/2.0.0
 plant_leaves/0.1.0
 plant_village/1.0.0
 plantae_k/0.1.0
@@ -1139,8 +1142,6 @@ wikipedia/20190301.ko/0.0.3
 wikipedia/20190301.ko/0.0.4
 wikipedia/20190301.koi/0.0.3
 wikipedia/20190301.koi/0.0.4
-wikipedia/20190301.kr/0.0.3
-wikipedia/20190301.kr/0.0.4
 wikipedia/20190301.krc/0.0.3
 wikipedia/20190301.krc/0.0.4
 wikipedia/20190301.ks/0.0.3

@@ -22,7 +22,7 @@ category in the validation set and 900 images per category in the testing set.
 
     *   **`2.0.0`** (default):
 
-*   Size: `?? GiB`
+*   Size: `29.27 GiB`
 
 ## Features
 ```python
@@ -33,7 +33,13 @@ FeaturesDict({
 ```
 
 ## Statistics
-None computed
+
+Split      | Examples
+:--------- | --------:
+ALL        | 2,168,460
+TRAIN      | 1,803,460
+TEST       | 328,500
+VALIDATION | 36,500
 
 ## Homepage
 
