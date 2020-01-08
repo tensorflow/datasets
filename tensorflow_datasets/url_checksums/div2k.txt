@@ -1,0 +1,4 @@
+https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip 3530603713 9d0b9c463f6e35b6c62cc6a930ee2224f670b34c1df841a57670f9acf0f6c335
+https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_bicubic_X2.zip 925390592 a53a424317575838dadce4bcd97cf7b744d6855f43740ed5f0245af3cf4bd850
+https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip 448993893 20dd31fd84d777bc1cf5d6b7654a3f569c0aec74458ae094122ad1d0489900fc
+https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_bicubic_X2.zip 117763600 60eed9875c697df51204aa579e2a699e1d5215095788a097ff54dd17e2664d57

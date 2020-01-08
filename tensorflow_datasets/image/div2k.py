@@ -64,28 +64,24 @@ class Div2kConfig(tfds.core.BuilderConfig):
     if name not in _DATA_OPTIONS:
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)
 
-    description = kwargs.get("description", "Uses %s data." % data)
+    description = kwargs.get("description", "Uses %s data." % name)
     kwargs["description"] = description
 
     super(Div2kConfig, self).__init__(name=name, **kwargs)
-    self.data = data
-
-  def download_urls():
-    """Returns train and validation download urls for this config."""
-    urls = {
+    self.data = name
+    self.download_urls = {
         "train_lr_url": _DL_URLS["train_"+self.data],
         "valid_lr_url": _DL_URLS["valid_"+self.data],
         "train_hr_url": _DL_URLS["train_hr"],
         "valid_hr_url": _DL_URLS["valid_hr"],
     }
-    return urls
 
 def _make_builder_configs():
   configs = []
   for data in _DATA_OPTIONS:
     configs.append(Div2kConfig(
         version=tfds.core.Version("2.0.0"),
-        data=data))
+        name=data))
   return configs
 
 class Div2k(tfds.core.GeneratorBasedBuilder):
@@ -107,7 +103,6 @@ class Div2k(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-
     extracted_paths = dl_manager.download_and_extract(
         self.builder_config.download_urls)
 
