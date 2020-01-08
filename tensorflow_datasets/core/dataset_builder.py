@@ -337,10 +337,13 @@ class DatasetBuilder(object):
           # DatasetInfo.read_from_directory to possibly restore these attributes
           # when reading from package data.
 
+          splits = list(self.info.splits.values())
+          statistics_already_computed = bool(
+              splits and splits[0].statistics.num_examples)
           # Update DatasetInfo metadata by computing statistics from the data.
           if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
               download_config.compute_stats == download.ComputeStatsMode.AUTO
-              and bool(self.info.splits.total_num_examples)
+              and statistics_already_computed
              ):
             logging.info(
                 "Skipping computing stats for mode %s.",
