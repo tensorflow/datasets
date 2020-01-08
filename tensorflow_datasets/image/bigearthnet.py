@@ -19,8 +19,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import io
 import json
-import os
 
 import numpy as np
 import tensorflow.compat.v2 as tf
@@ -211,59 +211,73 @@ class Bigearthnet(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract(_ZIP_FILE)
-    path = os.path.join(path, _ZIP_SUBIDR)
+    dl_path = dl_manager.download(_ZIP_FILE)
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs={
-                'path': path,
-                'selection': self.builder_config.selection,
+                'archive_path': dl_path,
             },
         ),
     ]
 
-  def _build_pcollection(self, pipeline, path, selection):
+  def _build_pcollection(self, pipeline, archive_path):
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
+    selection = self.builder_config.selection
 
-    def _process_example(subdir):
-      return _read_chip(os.path.join(path, subdir), selection)
+    return (pipeline
+            | 'ArchivePath' >> beam.Create([archive_path])
+            | 'ReadArchive' >> beam.FlatMap(_read_archive, selection)
+            | 'Reshuffle' >> beam.transforms.Reshuffle()
+            | 'ProcessExamples' >> beam.Map(_process_example, selection))
 
-    return (pipeline | beam.Create(tf.io.gfile.listdir(path))
-            | beam.Map(_process_example))
 
-
-def _read_chip(path, selection):
-  """Reads content of a single classification chip."""
-  d = {'filename': os.path.basename(path)}
-  for filename in tf.io.gfile.glob(path + '/*'):
-    if filename.endswith('_labels_metadata.json'):
-      with tf.io.gfile.GFile(filename, 'r') as fid:
-        d['metadata'] = json.loads(fid.read())
-      d['labels'] = d['metadata'].pop('labels')
-    elif filename.endswith('.tif'):
-      band = filename[-7:-4]
-      if selection == 'rgb' and band not in {'B02', 'B03', 'B04'}:
-        continue
-      d[band] = _load_tif(filename)
+def _read_archive(archive_path, selection):
+  """Yields non-processed examples out of archive."""
+  example = {}
+  read_band_files = 0
+  for fpath, fobj in tfds.core.download.extractor.iter_tar_stream(
+      archive_path):
+    read_band_files += 1
+    _, patch_name, fname = fpath.split('/')
+    if fname.endswith('_labels_metadata.json'):
+      example['metadata'] = fobj.read()
+    elif fname.endswith('.tif'):
+      band = fname[-7:-4]
+      if selection != 'rgb' or (
+          selection == 'rgb' and band in {'B02', 'B03', 'B04'}):
+        example[band] = fobj.read()
+        example.setdefault('bands', []).append(band)
     else:
-      raise ValueError('Unexpected file: %s' % filename)
+      raise AssertionError('Unexpected file: %s' % fpath)
+    if read_band_files == 13:
+      example['filename'] = patch_name
+      yield example
+      example = {}
+      read_band_files = 0
+
+
+def _process_example(example, selection):
+  example = example.copy()
+  example['metadata'] = json.loads(example['metadata'])
+  example['labels'] = example['metadata'].pop('labels')
+  for band in example.pop('bands') or []:
+    example[band] = _load_tif(example[band])
   if selection == 'rgb':
-    d['image'] = _create_rgb_image(d)
-  return d['filename'], d
+    _create_rgb_image(example)
+  return example['filename'], example
 
 
 def _create_rgb_image(d):
   """Creates and rescales RGB image."""
   img = np.stack([d.pop('B04'), d.pop('B03'), d.pop('B02')], axis=2)
   img = img / _OPTICAL_MAX_VALUE * 255.0
-  return np.clip(img, 0, 255).astype(np.uint8)
+  d['image'] = np.clip(img, 0, 255).astype(np.uint8)
 
 
-def _load_tif(path):
+def _load_tif(data):
   """Loads TIF file and returns as float32 numpy array."""
-  with tf.io.gfile.GFile(path, 'rb') as fp:
-    img = tfds.core.lazy_imports.PIL_Image.open(fp)
+  img = tfds.core.lazy_imports.PIL_Image.open(io.BytesIO(data))
   img = np.array(img.getdata()).reshape(img.size).astype(np.float32)
   return img
