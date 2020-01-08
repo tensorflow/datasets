@@ -30,5 +30,12 @@ class Div2kTest_unknown_x2(testing.DatasetBuilderTestCase):
       "validation": 1,
   }
 
+  DL_EXTRACT_RESULT = {
+    "train_hr_url": "DIV2K_train_HR",
+    "valid_hr_url": "DIV2K_valid_HR",
+    "train_lr_url": "DIV2K_train_LR_unknown_X2",
+    "valid_lr_url": "DIV2K_valid_LR_unknown_X2",
+  }
+
 if __name__ == "__main__":
   testing.test_main()
