@@ -102,6 +102,7 @@ DATASET_FILES = [
     'image/sun397_tfds_te.txt',
     'image/sun397_tfds_tr.txt',
     'image/sun397_tfds_va.txt',
+    'image/vgg_face2_labels.txt',
     'url_checksums/*',
     'video/ucf101_labels.txt',
 ]
