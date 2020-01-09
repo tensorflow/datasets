@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/visualization.py">View
 source</a>
 
+<!-- Equality marker -->
+
 Visualize images (and labels) from an image classification dataset.
 
 ```python

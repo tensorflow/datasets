@@ -159,6 +159,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/dataset_builder_testing.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `DatasetBuilderTestCase`
 
 Inherit this class to test your DatasetBuilder class.

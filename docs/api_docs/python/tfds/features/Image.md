@@ -27,6 +27,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `Image`
 
 `FeatureConnector` for images.

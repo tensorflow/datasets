@@ -16,6 +16,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `BeamMetadataDict`
 
 A <a href="../../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>

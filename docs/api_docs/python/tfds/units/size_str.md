@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/units.py">View
 source</a>
 
+<!-- Equality marker -->
+
 Returns a human readable size string.
 
 ``` python

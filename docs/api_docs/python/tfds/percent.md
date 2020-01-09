@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `percent`
 
 Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.

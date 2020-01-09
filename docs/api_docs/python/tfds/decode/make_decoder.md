@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/decode/base.py">View
 source</a>
 
+<!-- Equality marker -->
+
 Decorator to create a decoder.
 
 ```python

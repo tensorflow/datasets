@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `lazy_imports`
 
 Lazy importer for heavy dependencies.

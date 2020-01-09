@@ -53,7 +53,13 @@ Versions:
 *   **`2.3.0`** (default): New `loudness_db` feature in decibels (unormalized).
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 305,979
+TRAIN | 289,205
+VALID | 12,678
+TEST  | 4,096
 
 ### Features
 ```python
@@ -98,7 +104,13 @@ Versions:
 *   **`2.3.0`** (default): New `loudness_db` feature in decibels (unormalized).
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 86,775
+TRAIN | 60,788
+VALID | 17,469
+TEST  | 8,518
 
 ### Features
 ```python
@@ -146,7 +158,13 @@ Versions:
 *   **`2.3.0`** (default): New `loudness_db` feature in decibels (unormalized).
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | -------:
+ALL   | 86,775
+TRAIN | 60,788
+VALID | 17,469
+TEST  | 8,518
 
 ### Features
 ```python
