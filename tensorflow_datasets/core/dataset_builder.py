@@ -995,10 +995,20 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     disk.
 
     Args:
-      **kwargs: (dict) Arguments forwarded from the SplitGenerator.gen_kwargs
+      **kwargs: `dict`, Arguments forwarded from the SplitGenerator.gen_kwargs
 
     Yields:
-      example: (`dict<str feature_name, feature_value>`), a feature dictionary
+      key: `str` or `int`, a unique deterministic example identification key.
+        * Unique: An error will be raised if two examples are yield with the
+          same key.
+        * Deterministic: When generating the dataset twice, the same example
+          should have the same key.
+        Good keys can be the image id, or line number if examples are extracted
+        from a text file.
+        The key will be hashed and sorted to shuffle examples deterministically,
+        such as generating the dataset multiple times keep examples in the
+        same order.
+      example: `dict<str feature_name, feature_value>`, a feature dictionary
         ready to be encoded and written to disk. The example will be
         encoded with `self.info.features.encode_example({...})`.
     """
