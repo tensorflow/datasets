@@ -6,7 +6,7 @@ from __future__ import print_function
 
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """@inproceedings{modec13,
@@ -47,7 +47,7 @@ class FlicConfig(tfds.core.BuilderConfig):
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)
 
     descriptions = {
-      "small" : "5003 examples used in our CVPR13 MODEC paper."
+      "small" : "5003 examples used in CVPR13 MODEC paper."
       "full": "20928 examples, a superset of FLIC consisting of more difficult examples."
     }
     description = kwargs.get("description", "Uses %s" % descriptions[data])
@@ -96,8 +96,8 @@ class Flic(tfds.core.GeneratorBasedBuilder):
     
     mat_path = os.path.join(extract_path, self.builder_config.dir, "examples.mat")
     with tf.io.gfile.GFile(mat_path) as f:
-    data = tfds.core.lazy_imports.scipy.io.loadmat(f, struct_as_record=True,
-                                                   squeeze_me=True, mat_dtype=True)
+      data = tfds.core.lazy_imports.scipy.io.loadmat(f, struct_as_record=True,
+                                                     squeeze_me=True, mat_dtype=True)
 
     return [
       tfds.core.SplitGenerator(
