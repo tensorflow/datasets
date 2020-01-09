@@ -28,6 +28,7 @@ import six
 import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import _sharded_files
+from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import hashing
 from tensorflow_datasets.core import lazy_imports_lib
@@ -60,6 +61,18 @@ _ShardSpec = collections.namedtuple("_ShardSpec", [
     #  dict(shard_index=2, skip=0, take=3)]
     "reading_instructions",
 ])
+
+
+def _raise_error_for_duplicated_keys(example1, example2, example_specs):
+  """Log information about the examples and raise an AssertionError."""
+  msg = "Two records share the same hashed key!"
+  logging.error(msg)
+  parser = example_parser.ExampleParser(example_specs)
+  ex1 = parser.parse_example(example1)
+  ex2 = parser.parse_example(example2)
+  logging.error("1st example: %s", ex1)
+  logging.error("2nd example: %s", ex2)
+  raise AssertionError(msg)
 
 
 def _get_shard_specs(num_examples, total_size, bucket_lengths, path):
@@ -168,6 +181,7 @@ class Writer(object):
   """
 
   def __init__(self, example_specs, path, hash_salt):
+    self._example_specs = example_specs
     self._serializer = example_serializer.ExampleSerializer(example_specs)
     self._shuffler = shuffle.Shuffler(os.path.dirname(path), hash_salt)
     self._num_examples = 0
@@ -199,10 +213,14 @@ class Writer(object):
     examples_generator = iter(utils.tqdm(
         self._shuffler, total=self._num_examples, unit=" examples",
         leave=False))
-    for shard_spec in shard_specs:
-      iterator = itertools.islice(
-          examples_generator, 0, shard_spec.examples_number)
-      _write_tfrecord(shard_spec.path, iterator)
+    try:
+      for shard_spec in shard_specs:
+        iterator = itertools.islice(
+            examples_generator, 0, shard_spec.examples_number)
+        _write_tfrecord(shard_spec.path, iterator)
+    except shuffle.DuplicatedKeysError as err:
+      _raise_error_for_duplicated_keys(err.item1, err.item2,
+                                       self._example_specs)
     shard_lengths = [int(spec.examples_number) for spec in shard_specs]
     logging.info("Done writing %s. Shard lengths: %s",
                  self._path, shard_lengths)
@@ -242,6 +260,7 @@ class BeamWriter(object):
     self._path = path
     self._shards_length_path = "%s.shard_lengths.json" % path
     self._serializer = example_serializer.ExampleSerializer(example_specs)
+    self._example_specs = example_specs
     self._hasher = hashing.Hasher(hash_salt)
     self._shard_lengths = None
 
@@ -265,10 +284,12 @@ class BeamWriter(object):
     """Sort the examples in bucket, emits total size and len on side."""
     beam = lazy_imports_lib.lazy_imports.apache_beam
     bucketid, examples = bucketid_examples
-    examples = list(examples)  # We know by design it fits in memory.
-    if len(set(ex[0] for ex in examples)) != len(examples):
-      raise AssertionError("Two records share the same hashed key!")
-    examples = [ex[1] for ex in sorted(examples)]
+    examples = sorted(examples)  # We know by design it fits in memory.
+    for i in range(len(examples)-1):
+      if examples[i][0] == examples[i+1][0]:
+        _raise_error_for_duplicated_keys(examples[i][1], examples[i+1][1],
+                                         self._example_specs)
+    examples = [ex[1] for ex in examples]
     total_size = sum(len(ex) for ex in examples)
     yield beam.pvalue.TaggedOutput(self._OUTPUT_TAG_BUCKETS_LEN_SIZE,
                                    (bucketid, (len(examples), total_size)))
