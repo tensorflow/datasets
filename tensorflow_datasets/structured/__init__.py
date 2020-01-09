@@ -19,4 +19,5 @@ from tensorflow_datasets.structured.amazon_us_reviews import AmazonUSReviews
 from tensorflow_datasets.structured.higgs import Higgs
 from tensorflow_datasets.structured.iris import Iris
 from tensorflow_datasets.structured.rock_you import RockYou
+from tensorflow_datasets.structured.somerville_happiness import SomervilleHappiness
 from tensorflow_datasets.structured.titanic import Titanic
