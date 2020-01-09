@@ -76,7 +76,7 @@ class WisconsinBreastCancer(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        # tfds.features.FeatureConnectors
+
         features=tfds.features.FeaturesDict({
             "features":
                 tfds.features.Tensor(shape=(32,), dtype=tf.float32),
@@ -93,9 +93,9 @@ class WisconsinBreastCancer(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     data_file = dl_manager.download(DATA_URL)
     all_lines = tf.io.gfile.GFile(data_file).read().split("\n")
-    records = [l for l in all_lines if l]  # get rid of empty lines
+    records = [l for l in all_lines if l]  
 
-    # Specify the splits
+
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
