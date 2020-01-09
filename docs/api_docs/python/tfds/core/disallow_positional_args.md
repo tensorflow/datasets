@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/api_utils.py">View
 source</a>
 
+<!-- Equality marker -->
+
 Requires function to be called using keyword arguments.
 
 ```python

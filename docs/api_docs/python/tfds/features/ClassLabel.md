@@ -28,6 +28,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/class_label_feature.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `ClassLabel`
 
 `FeatureConnector` for integer class labels.

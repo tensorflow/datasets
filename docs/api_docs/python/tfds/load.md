@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/registered.py">View
 source</a>
 
+<!-- Equality marker -->
+
 Loads the named dataset into a `tf.data.Dataset`.
 
 ```python

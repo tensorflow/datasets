@@ -30,7 +30,7 @@ Example usage: train_examples, val_examples = tfds.load(
 `math_dataset` is configured with `tfds.core.dataset_builder.BuilderConfig` and
 has the following configurations predefined (defaults to the first one):
 
-*   `algebra__linear_1d` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+*   `algebra__linear_1d` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -42,7 +42,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__linear_1d_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `algebra__linear_1d_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -55,7 +55,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__linear_2d` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+*   `algebra__linear_2d` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -67,7 +67,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__linear_2d_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `algebra__linear_2d_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -80,7 +80,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__polynomial_roots` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `algebra__polynomial_roots` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -93,7 +93,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__polynomial_roots_composed` (`v1.0.0`) (`Size: ?? GiB`):
+*   `algebra__polynomial_roots_composed` (`v1.0.0`) (`Size: 2.17 GiB`):
     Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -106,7 +106,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__sequence_next_term` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `algebra__sequence_next_term` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -119,7 +119,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `algebra__sequence_nth_term` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `algebra__sequence_nth_term` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -132,19 +132,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `arithmetic__add_or_sub` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__add_or_sub_in_base` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `arithmetic__add_or_sub` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -157,7 +145,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `arithmetic__add_sub_multiple` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `arithmetic__add_or_sub_in_base` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -170,43 +158,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `arithmetic__div` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__mixed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__mul` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `arithmetic__mul_div_multiple` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `arithmetic__add_sub_multiple` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -219,7 +171,43 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `arithmetic__nearest_integer_root` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `arithmetic__div` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__mixed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__mul` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `arithmetic__mul_div_multiple` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -232,318 +220,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `arithmetic__simplify_surd` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `calculus__differentiate` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `calculus__differentiate_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__closest` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__closest_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__kth_biggest` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__kth_biggest_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__pair` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__pair_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__sort` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `comparison__sort_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `measurement__conversion` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `measurement__time` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__base_conversion` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__div_remainder` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__div_remainder_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__gcd` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__gcd_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__is_factor` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__is_factor_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__is_prime` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__is_prime_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__lcm` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__lcm_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__list_prime_factors` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
-    database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__list_prime_factors_composed` (`v1.0.0`) (`Size: ?? GiB`):
+*   `arithmetic__nearest_integer_root` (`v1.0.0`) (`Size: 2.17 GiB`):
     Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -556,19 +233,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `numbers__place_value` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__place_value_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `arithmetic__simplify_surd` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -581,19 +246,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `numbers__round_number` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `numbers__round_number_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `calculus__differentiate` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -606,7 +259,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `polynomials__add` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+*   `calculus__differentiate_composed` (`v1.0.0`) (`Size: 2.17 GiB`):
+    Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -618,7 +272,19 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `polynomials__coefficient_named` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `comparison__closest` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `comparison__closest_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -631,43 +297,7 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `polynomials__collect` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__compose` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__evaluate` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
-
-This dataset code generates mathematical question and answer pairs, from a range
-of question types at roughly school-level difficulty. This is designed to test
-the mathematical learning and algebraic reasoning skills of learning models.
-
-Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
-(Saxton, Grefenstette, Hill, Kohli).
-
-Example usage: train_examples, val_examples = tfds.load(
-'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
-
-*   `polynomials__evaluate_composed` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `comparison__kth_biggest` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -680,7 +310,8 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `polynomials__expand` (`v1.0.0`) (`Size: ?? GiB`): Mathematics database.
+*   `comparison__kth_biggest_composed` (`v1.0.0`) (`Size: 2.17 GiB`):
+    Mathematics database.
 
 This dataset code generates mathematical question and answer pairs, from a range
 of question types at roughly school-level difficulty. This is designed to test
@@ -692,7 +323,19 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `polynomials__simplify_power` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `comparison__pair` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `comparison__pair_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -705,7 +348,19 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `probability__swr_p_level_set` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `comparison__sort` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `comparison__sort_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -718,7 +373,357 @@ Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
 Example usage: train_examples, val_examples = tfds.load(
 'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
 
-*   `probability__swr_p_sequence` (`v1.0.0`) (`Size: ?? GiB`): Mathematics
+*   `measurement__conversion` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `measurement__time` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__base_conversion` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__div_remainder` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__div_remainder_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__gcd` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__gcd_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__is_factor` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__is_factor_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__is_prime` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__is_prime_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__lcm` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__lcm_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__list_prime_factors` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__list_prime_factors_composed` (`v1.0.0`) (`Size: 2.17 GiB`):
+    Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__place_value` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__place_value_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__round_number` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `numbers__round_number_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__add` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__coefficient_named` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__collect` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__compose` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__evaluate` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__evaluate_composed` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__expand` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `polynomials__simplify_power` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `probability__swr_p_level_set` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
+    database.
+
+This dataset code generates mathematical question and answer pairs, from a range
+of question types at roughly school-level difficulty. This is designed to test
+the mathematical learning and algebraic reasoning skills of learning models.
+
+Original paper: Analysing Mathematical Reasoning Abilities of Neural Models
+(Saxton, Grefenstette, Hill, Kohli).
+
+Example usage: train_examples, val_examples = tfds.load(
+'math_dataset/arithmetic__mul', split=['train', 'test'], as_supervised=True)
+
+*   `probability__swr_p_sequence` (`v1.0.0`) (`Size: 2.17 GiB`): Mathematics
     database.
 
 This dataset code generates mathematical question and answer pairs, from a range
@@ -749,7 +754,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -784,7 +794,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -819,7 +834,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -854,7 +874,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -889,7 +914,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -924,7 +954,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -959,7 +994,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -994,7 +1034,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1029,7 +1074,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1064,7 +1114,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1099,7 +1154,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1134,7 +1194,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1169,7 +1234,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1204,7 +1274,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1239,7 +1314,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1274,7 +1354,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1309,7 +1394,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1344,7 +1434,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1379,7 +1474,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1414,7 +1514,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1449,7 +1554,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1484,7 +1594,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1519,7 +1634,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1554,7 +1674,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1589,7 +1714,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1624,7 +1754,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1659,7 +1794,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1694,7 +1834,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1729,7 +1874,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1764,7 +1914,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1799,7 +1954,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1834,7 +1994,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1869,7 +2034,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1904,7 +2074,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1939,7 +2114,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -1974,7 +2154,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2009,7 +2194,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2044,7 +2234,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2079,7 +2274,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2114,7 +2314,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2149,7 +2354,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2184,7 +2394,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2219,7 +2434,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2254,7 +2474,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2289,7 +2514,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2324,7 +2554,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2359,7 +2594,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2394,7 +2634,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2429,7 +2674,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2464,7 +2714,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2499,7 +2754,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2534,7 +2794,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2569,7 +2834,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2604,7 +2874,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2639,7 +2914,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python
@@ -2674,7 +2954,12 @@ Versions:
 *   **`1.0.0`** (default):
 
 ### Statistics
-None computed
+
+Split | Examples
+:---- | --------:
+ALL   | 2,009,998
+TRAIN | 1,999,998
+TEST  | 10,000
 
 ### Features
 ```python

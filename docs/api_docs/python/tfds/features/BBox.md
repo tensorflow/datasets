@@ -18,6 +18,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `BBox`
 
 BBox(ymin, xmin, ymax, xmax)

@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
+<!-- Equality marker -->
+
 Execute the decorated test in both graph mode and eager mode.
 
 ``` python

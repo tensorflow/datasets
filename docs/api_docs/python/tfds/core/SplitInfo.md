@@ -17,6 +17,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/py_utils.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `SplitInfo`
 
 Wraps `proto.SplitInfo` with an additional property.

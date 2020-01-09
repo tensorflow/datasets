@@ -113,6 +113,7 @@ np_datasets = tfds.as_numpy(datasets)
     *   [`tf_flowers`](tf_flowers.md)
     *   [`the300w_lp`](the300w_lp.md)
     *   [`uc_merced`](uc_merced.md)
+    *   [`vgg_face2`](vgg_face2.md)
     *   [`visual_domain_decathlon`](visual_domain_decathlon.md)
 *   `Object_detection`
     *   [`coco`](coco.md)
