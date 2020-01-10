@@ -31,7 +31,7 @@ class WikipediaTest(testing.DatasetBuilderTestCase):
 
   DL_EXTRACT_RESULT = {
       "info": "dumpstatus.json",
-      "xml": ["enwiki_fake.xml", "enwiki_fake2.xml"]
+      "xml": ["enwiki_fake.xml.bz2", "enwiki_fake2.xml.bz2"]
   }
 
   SPLITS = {
