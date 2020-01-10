@@ -1,11 +1,10 @@
-"""TODO(somerville_happiness): Add a description here."""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.summarization import somerville_happiness
+from tensorflow_datasets.structured import somerville_happiness
 
 
 class SomervilleHappinessTest(testing.DatasetBuilderTestCase):
