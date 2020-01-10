@@ -43,7 +43,7 @@ def ensure_tf_install():  # pylint: disable=g-statement-before-imports
     inadequate.
   """
   try:
-    import tensorflow as tf
+    import tensorflow.compat.v2 as tf
   except ImportError:
     # Print more informative error message, then reraise.
     print("\n\nFailed to import TensorFlow. Please note that TensorFlow is not "
@@ -98,7 +98,7 @@ def _patch_for_tf1_13(tf):
 
 def is_dataset(ds):
   """Whether ds is a Dataset. Compatible across TF versions."""
-  import tensorflow as tf
+  import tensorflow.compat.v2 as tf
   from tensorflow_datasets.core.utils import py_utils
   dataset_types = [tf.data.Dataset]
   v1_ds = py_utils.rgetattr(tf, "compat.v1.data.Dataset", None)

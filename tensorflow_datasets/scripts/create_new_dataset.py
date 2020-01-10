@@ -31,7 +31,7 @@ from absl import app
 from absl import flags
 
 # gfile cannot be imported directly `from tensorflow.io import gfile`
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 gfile = tf.io.gfile
 del tf
 

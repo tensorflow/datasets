@@ -27,7 +27,7 @@ import re
 import attr
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core import _sharded_files
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import example_parser
@@ -68,7 +68,11 @@ def _get_dataset_from_filename(filename_skip_take, do_skip, do_take):
   filename, skip, take = (filename_skip_take['filename'],
                           filename_skip_take['skip'],
                           filename_skip_take['take'],)
-  ds = tf.data.TFRecordDataset(
+
+  # Explictly use DatasetV1 for backward compatibility:
+  # * isinstance(ds, tf.data.Dataset)
+  # * ds.make_one_shot_iterator()
+  ds = tf.compat.v1.data.TFRecordDataset(
       filename,
       buffer_size=_BUFFER_SIZE,
       num_parallel_reads=1,
@@ -159,7 +163,7 @@ def _read_single_instruction(
   parallel_reads = read_config.interleave_parallel_reads
   block_length = read_config.interleave_block_length
 
-  instruction_ds = tf.data.Dataset.from_tensor_slices(tensor_inputs)
+  instruction_ds = tf.compat.v1.data.Dataset.from_tensor_slices(tensor_inputs)
 
   # If shuffle is True, we shuffle the instructions/shards
   if shuffle_files:

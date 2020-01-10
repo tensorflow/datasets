@@ -24,7 +24,7 @@ import os
 from absl.testing import absltest
 import dill
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -373,20 +373,20 @@ class BuilderRestoreGcsTest(testing.TestCase):
   def test_stats_restored_from_gcs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
       builder.download_and_prepare()
 
       # Statistics shouldn't have been recomputed
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
   def test_stats_not_restored_gcs_overwritten(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # If split are different that the one restored, stats should be recomputed
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
       dl_config = download.DownloadConfig(max_examples_per_split=5)
@@ -421,7 +421,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # No dataset_info restored, so stats are empty
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 0)
+      self.assertEqual(builder.info.splits, {})
       self.assertFalse(self.compute_dynamic_property.called)
 
       download_config = download.DownloadConfig(
@@ -430,7 +430,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
       builder.download_and_prepare(download_config=download_config)
 
       # Statistics computation should have been skipped
-      self.assertEqual(builder.info.splits.total_num_examples, 0)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 0)
       self.assertFalse(self.compute_dynamic_property.called)
     self.patch_gcs.start()
 
@@ -532,6 +532,14 @@ class DatasetBuilderReadTest(testing.TestCase):
     x, _ = dataset_utils.as_numpy(self.builder.as_dataset(
         split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
     self.assertEqual(x.shape[0], 20)
+
+  def test_is_dataset_v1(self):
+    # For backward compatibility, ensure that the returned dataset object
+    # is a tf.data.DatasetV1 object.
+    with tf.Graph().as_default():
+      ds = self.builder.as_dataset(split="train")
+      ds.make_initializable_iterator()
+      self.assertIsInstance(ds, tf.compat.v1.data.Dataset)
 
 
 

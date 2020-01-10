@@ -15,6 +15,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `RaggedConstant`
 
 Container of tf.ragged.constant values.

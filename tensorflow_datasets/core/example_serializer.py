@@ -22,7 +22,7 @@ from __future__ import print_function
 import collections
 import numpy as np
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import feature as feature_lib

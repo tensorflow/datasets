@@ -13,6 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/checksums.py">View
 source</a>
 
+<!-- Equality marker -->
+
 Registers a new checksums dir.
 
 ```python

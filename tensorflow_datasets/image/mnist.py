@@ -22,7 +22,7 @@ from __future__ import print_function
 import os
 import numpy as np
 from six.moves import urllib
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 import tensorflow_datasets.public_api as tfds
 
@@ -326,7 +326,8 @@ class EMNIST(MNIST):
                     num_classes=self.builder_config.class_number),
         }),
         supervised_keys=("image", "label"),
-        homepage="https://www.nist.gov/node/1298471/emnist-dataset",
+        homepage=("https://www.nist.gov/itl/products-and-services/"
+                  "emnist-dataset"),
         citation=_EMNIST_CITATION,
     )
 

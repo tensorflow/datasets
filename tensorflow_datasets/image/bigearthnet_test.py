@@ -29,7 +29,7 @@ class BigearthnetTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 1,
   }
-
+  DL_EXTRACT_RESULT = "BigEarthNet-v1.0.tar.gz"
 
 if __name__ == "__main__":
   testing.test_main()

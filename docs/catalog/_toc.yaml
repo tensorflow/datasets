@@ -46,6 +46,8 @@ toc:
     title: cifar10_corrupted
   - path: /datasets/catalog/citrus_leaves
     title: citrus_leaves
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
   - path: /datasets/catalog/cmaterdb
@@ -156,6 +158,8 @@ toc:
     title: the300w_lp
   - path: /datasets/catalog/uc_merced
     title: uc_merced
+  - path: /datasets/catalog/vgg_face2
+    title: vgg_face2 (manual)
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
   title: Image

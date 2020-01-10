@@ -16,6 +16,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/resource.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `Resource`
 
 Represents a resource to download, extract, or both.

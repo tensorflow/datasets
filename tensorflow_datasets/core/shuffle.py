@@ -25,7 +25,7 @@ import struct
 import uuid
 
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import hashing
 
@@ -47,6 +47,14 @@ BUCKETS_NUMBER = 1000  # Number of buckets to pre-sort and hold generated data.
 
 HKEY_SIZE = 128  # Hash of keys is 128 bits (md5).
 HKEY_SIZE_BYTES = HKEY_SIZE // 8
+
+
+class DuplicatedKeysError(Exception):
+
+  def __init__(self, item1, item2):
+    super(DuplicatedKeysError, self).__init__()
+    self.item1 = item1
+    self.item2 = item2
 
 
 def _hkey_to_bytes(hkey):
@@ -221,12 +229,14 @@ class Shuffler(object):
   def __iter__(self):
     self._read_only = True
     previous_hkey = None
+    previous_data = None
     iterator = self._iter_mem() if self._in_memory else self._iter_buckets()
     for hkey, data in iterator:
       if hkey == previous_hkey:
-        raise AssertionError('Two records share the same hashed key!')
+        raise DuplicatedKeysError(data, previous_data)
       previous_hkey = hkey
       yield data
+      previous_data = data
 
   def _iter_mem(self):
     for hkey, data in sorted(self._mem_buffer):

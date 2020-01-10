@@ -346,9 +346,6 @@ following configurations predefined (defaults to the first one):
 *   `20190301.hy` (`v0.0.4`) (`Size: 277.53 MiB`): Wikipedia dataset for hy,
     parsed from 20190301 dump.
 
-*   `20190301.hz` (`v0.0.4`) (`Size: 16.35 KiB`): Wikipedia dataset for hz,
-    parsed from 20190301 dump.
-
 *   `20190301.ia` (`v0.0.4`) (`Size: 7.85 MiB`): Wikipedia dataset for ia,
     parsed from 20190301 dump.
 
@@ -437,9 +434,6 @@ following configurations predefined (defaults to the first one):
     parsed from 20190301 dump.
 
 *   `20190301.koi` (`v0.0.4`) (`Size: 2.12 MiB`): Wikipedia dataset for koi,
-    parsed from 20190301 dump.
-
-*   `20190301.kr` (`v0.0.4`) (`Size: 13.89 KiB`): Wikipedia dataset for kr,
     parsed from 20190301 dump.
 
 *   `20190301.krc` (`v0.0.4`) (`Size: 3.16 MiB`): Wikipedia dataset for krc,
@@ -3520,30 +3514,6 @@ FeaturesDict({
 
 *   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
 
-## `wikipedia/20190301.hz`
-Wikipedia dataset for hz, parsed from 20190301 dump.
-
-Versions:
-
-*   **`0.0.4`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
-*   `0.0.3`: None
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
 ## `wikipedia/20190301.ia`
 Wikipedia dataset for ia, parsed from 20190301 dump.
 
@@ -4242,30 +4212,6 @@ FeaturesDict({
 
 ## `wikipedia/20190301.koi`
 Wikipedia dataset for koi, parsed from 20190301 dump.
-
-Versions:
-
-*   **`0.0.4`** (default):
-*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
-*   `0.0.3`: None
-
-### Statistics
-None computed
-
-### Features
-```python
-FeaturesDict({
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
-})
-```
-
-### Homepage
-
-*   [https://dumps.wikimedia.org](https://dumps.wikimedia.org)
-
-## `wikipedia/20190301.kr`
-Wikipedia dataset for kr, parsed from 20190301 dump.
 
 Versions:
 

@@ -34,6 +34,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/dataset_info.py">View
 source</a>
 
+<!-- Equality marker -->
+
 ## Class `DatasetInfo`
 
 Information about a dataset.
@@ -43,10 +45,10 @@ Information about a dataset.
 `DatasetInfo` documents datasets, including its name, version, and features.
 See the constructor arguments and properties for a full list.
 
-Note: Not all fields are known on construction and may be updated later
-by `compute_dynamic_properties`. For example, the number of examples in each
-split is typically updated during data generation (i.e. on calling
-`builder.download_and_prepare()`).
+Note: Not all fields are known on construction and may be updated later by
+`compute_dynamic_properties`. For example: the min and max values of a feature
+is typically updated during data generation (i.e. on calling
+builder.download_and_prepare()`).
 
 <h2 id="__init__"><code>__init__</code></h2>
 

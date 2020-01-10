@@ -25,7 +25,7 @@ from tensorflow_datasets.text import math_dataset
 
 class MathDatasetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = math_dataset.MathDataset
-  BUILDER_CONFIG_NAMES_TO_TEST = ["arithmetic__div_big"]
+  BUILDER_CONFIG_NAMES_TO_TEST = ["algebra__linear_1d"]
   SPLITS = {
       "train": 6,  # Number of fake train example pairs
       "test": 6,  # Number of fake test example pairs

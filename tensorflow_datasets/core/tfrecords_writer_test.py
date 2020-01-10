@@ -22,9 +22,10 @@ from __future__ import print_function
 import os
 
 from absl.testing import absltest
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_utils
+from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import tfrecords_writer
@@ -162,6 +163,8 @@ class WriterTest(testing.TestCase):
         [b'f', b'g'], [b'd'], [b'a', b'b'], [b'h'], [b'e', b'c'],
     ])
 
+  @absltest.mock.patch.object(
+      example_parser, 'ExampleParser', testing.DummyParser)
   def test_write_duplicated_keys(self):
     path = os.path.join(self.tmp_dir, 'foo.tfrecord')
     to_write = [(1, b'a'), (2, b'b'), (1, b'c')]

@@ -27,7 +27,7 @@ import sys
 
 from absl import logging
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import constants
@@ -337,10 +337,13 @@ class DatasetBuilder(object):
           # DatasetInfo.read_from_directory to possibly restore these attributes
           # when reading from package data.
 
+          splits = list(self.info.splits.values())
+          statistics_already_computed = bool(
+              splits and splits[0].statistics.num_examples)
           # Update DatasetInfo metadata by computing statistics from the data.
           if (download_config.compute_stats == download.ComputeStatsMode.SKIP or
               download_config.compute_stats == download.ComputeStatsMode.AUTO
-              and bool(self.info.splits.total_num_examples)
+              and statistics_already_computed
              ):
             logging.info(
                 "Skipping computing stats for mode %s.",
@@ -530,7 +533,7 @@ class DatasetBuilder(object):
         # Use padded_batch so that features with unknown shape are supported.
         ds = ds.padded_batch(
             full_bs, tf.compat.v1.data.get_output_shapes(ds))
-        ds = tf.data.Dataset.from_tensor_slices(
+        ds = tf.compat.v1.data.Dataset.from_tensor_slices(
             next(dataset_utils.as_numpy(ds)))
     else:
       ds = self._as_dataset(
@@ -992,10 +995,20 @@ class GeneratorBasedBuilder(FileAdapterBuilder):
     disk.
 
     Args:
-      **kwargs: (dict) Arguments forwarded from the SplitGenerator.gen_kwargs
+      **kwargs: `dict`, Arguments forwarded from the SplitGenerator.gen_kwargs
 
     Yields:
-      example: (`dict<str feature_name, feature_value>`), a feature dictionary
+      key: `str` or `int`, a unique deterministic example identification key.
+        * Unique: An error will be raised if two examples are yield with the
+          same key.
+        * Deterministic: When generating the dataset twice, the same example
+          should have the same key.
+        Good keys can be the image id, or line number if examples are extracted
+        from a text file.
+        The key will be hashed and sorted to shuffle examples deterministically,
+        such as generating the dataset multiple times keep examples in the
+        same order.
+      example: `dict<str feature_name, feature_value>`, a feature dictionary
         ready to be encoded and written to disk. The example will be
         encoded with `self.info.features.encode_example({...})`.
     """

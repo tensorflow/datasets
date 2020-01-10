@@ -125,8 +125,7 @@ class ShuffleTest(testing.TestCase):
     shuffler.add(1, b'c')
     iterator = iter(shuffler)
     self.assertEqual(next(iterator), b'a')
-    with self.assertRaisesWithPredicateMatch(
-        AssertionError, 'Two records share the same hashed key!'):
+    with self.assertRaises(shuffle.DuplicatedKeysError):
       next(iterator)
 
 
