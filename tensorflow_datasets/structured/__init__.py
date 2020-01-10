@@ -20,3 +20,4 @@ from tensorflow_datasets.structured.higgs import Higgs
 from tensorflow_datasets.structured.iris import Iris
 from tensorflow_datasets.structured.rock_you import RockYou
 from tensorflow_datasets.structured.titanic import Titanic
+from tensorflow_datasets.structured.bbbp import Bbbp
