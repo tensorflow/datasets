@@ -131,6 +131,9 @@ def _read_records(path):
 
 class WriterTest(testing.TestCase):
 
+  EMPTY_SPLIT_ERROR = 'No examples were yielded.'
+  TOO_SMALL_SPLIT_ERROR = 'num_examples (1) < number_of_shards (2)'
+
   @absltest.mock.patch.object(
       example_serializer, 'ExampleSerializer', testing.DummySerializer)
   def _write(self, to_write, path, salt=''):
@@ -174,8 +177,28 @@ class WriterTest(testing.TestCase):
           AssertionError, 'Two records share the same hashed key!'):
         self._write(to_write, path)
 
+  def test_empty_split(self):
+    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
+    to_write = []
+    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
+                                    return_value=1):
+      with self.assertRaisesWithPredicateMatch(
+          AssertionError, self.EMPTY_SPLIT_ERROR):
+        self._write(to_write, path)
+
+  def test_too_small_split(self):
+    path = os.path.join(self.tmp_dir, 'foo.tfrecord')
+    to_write = [(1, b'a')]
+    with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
+                                    return_value=2):
+      with self.assertRaisesWithPredicateMatch(
+          AssertionError, self.TOO_SMALL_SPLIT_ERROR):
+        self._write(to_write, path)
+
 
 class TfrecordsWriterBeamTest(WriterTest):
+
+  EMPTY_SPLIT_ERROR = 'Not a single example present in the PCollection!'
 
   @absltest.mock.patch.object(
       example_serializer, 'ExampleSerializer', testing.DummySerializer)

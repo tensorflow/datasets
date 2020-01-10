@@ -103,6 +103,8 @@ def _get_shard_specs(num_examples, total_size, bucket_lengths, path):
 
 
 def _get_shard_boundaries(num_examples, number_of_shards):
+  if num_examples == 0:
+    raise AssertionError("No examples were yielded.")
   if num_examples < number_of_shards:
     raise AssertionError("num_examples ({}) < number_of_shards ({})".format(
         num_examples, number_of_shards))
@@ -306,6 +308,8 @@ class BeamWriter(object):
         examples in the bucket and size is the total size in bytes of the
         elements in that bucket. Buckets with no elements are not mentioned.
     """
+    if not shard_len_sizes:
+      raise AssertionError("Not a single example present in the PCollection!")
     total_num_examples = 0
     total_size = 0
     bucket2length = {}
