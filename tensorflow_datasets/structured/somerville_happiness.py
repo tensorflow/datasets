@@ -77,7 +77,7 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, file_path):
     fieldnames = ['D', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6']
-    with open(file_path, newline='', encoding='utf-16') as f:
+    with tf.io.gfile.GFile(file_path) as f:
       reader = csv.DictReader(f, fieldnames=fieldnames),
       for row in reader:
         for i, row in zip(row, reader):
