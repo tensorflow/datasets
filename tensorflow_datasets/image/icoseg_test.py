@@ -1,4 +1,3 @@
-"""TODO(icoseg): Add a description here."""
 
 from __future__ import absolute_import
 from __future__ import division
