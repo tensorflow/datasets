@@ -1,6 +1,6 @@
 
 """
-CMU-Cornell iCoseg dataset
+CMU-Cornell iCoseg dataset for image segmentation.
 """
 
 from __future__ import absolute_import
@@ -20,15 +20,18 @@ year = {2010} }
 
 _DESCRIPTION = """\
 This is the CMU-Cornell iCoseg dataset for image segmentation. The dataset contains 38 different \
-groups totalling 643 images. These images also have there respective pixel level groundtruth \
+groups totalling 643 images. These images also have their respective pixel level groundtruth \
 annotations. These groundtruths segment the images into two classes - the subject and the background.
 """
 
+_URL = "http://chenlab.ece.cornell.edu/projects/touch-coseg/CMU_Cornell_iCoseg_dataset.zip"
+
+_HOMEPAGE_URL = "http://chenlab.ece.cornell.edu/projects/touch-coseg/"
 
 class Icoseg(tfds.core.GeneratorBasedBuilder):
   """iCoseg dataset for segmentation."""
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('2.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -39,13 +42,13 @@ class Icoseg(tfds.core.GeneratorBasedBuilder):
         "label_png": tfds.features.Image(shape=(None, None, 1), encoding_format="png"),
       }),
       supervised_keys=("image", "label_png"),
-      homepage="http://chenlab.ece.cornell.edu/projects/touch-coseg/",
+      homepage=_HOMEPAGE_URL,
       citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     extracted_dir = dl_manager.download_and_extract({
-      "iCoseg_dir_path": "http://chenlab.ece.cornell.edu/projects/touch-coseg/CMU_Cornell_iCoseg_dataset.zip"
+      "iCoseg_dir_path": _URL
     })
     return [
       tfds.core.SplitGenerator(
@@ -53,24 +56,23 @@ class Icoseg(tfds.core.GeneratorBasedBuilder):
         num_shards=4,
         gen_kwargs={
           "imgs_dir_path": os.path.join(extracted_dir["iCoseg_dir_path"], "dataset_public", "images"),
-          "label_path": os.path.join(extracted_dir["iCoseg_dir_path"], "dataset_public", "ground_truth"),
+          "labels_dir_path": os.path.join(extracted_dir["iCoseg_dir_path"], "dataset_public", "ground_truth"),
         }
       ),
     ]
 
-  def _generate_examples(self, imgs_dir_path, label_path):
-    for dir in sorted(os.listdir(imgs_dir_path)):
-      img_dir_path = os.path.join(imgs_dir_path, dir)
-      label_dir_path = os.path.join(label_path, dir)
-      for img_name in sorted(os.listdir(img_dir_path)):
-        if str(img_name) == "Thumbs.db" or str(img_name) == "DS.Store":
-      	  break
-        img_path = os.path.join(img_dir_path, img_name)
-        no_ext = os.path.splitext(img_name)
-        png = no_ext[0] + ".png"
-        png_path = os.path.join(label_dir_path, png)
-        features = {
-              "image": img_path,
-              "label_png": png_path,
-        }
-        yield img_name, features
+  def _generate_examples(self, imgs_dir_path, labels_dir_path):
+    for folder in os.listdir(imgs_dir_path):
+      img_dir_path = os.path.join(imgs_dir_path, folder)
+      label_dir_path = os.path.join(labels_dir_path, folder)
+      for img_name in os.listdir(img_dir_path):
+        if img_name != "Thumbs.db" and img_name != "DS.Store":
+          img_path = os.path.join(img_dir_path, img_name)
+          no_ext = os.path.splitext(img_name)
+          label_img_name = no_ext[0] + ".png"
+          label_img_path = os.path.join(label_dir_path, label_img_name)
+          features = {
+                "image": img_path,
+                "label_png": label_img_path,
+          }
+          yield img_name, features
