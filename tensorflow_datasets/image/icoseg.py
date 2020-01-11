@@ -47,16 +47,14 @@ class Icoseg(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    extracted_dir = dl_manager.download_and_extract({
-      "iCoseg_dir_path": _URL
-    })
+    extracted_dir = dl_manager.download_and_extract(_URL)
     return [
       tfds.core.SplitGenerator(
         name=tfds.Split.TRAIN,
         num_shards=4,
         gen_kwargs={
-          "imgs_dir_path": os.path.join(extracted_dir["iCoseg_dir_path"], "dataset_public", "images"),
-          "labels_dir_path": os.path.join(extracted_dir["iCoseg_dir_path"], "dataset_public", "ground_truth"),
+          "imgs_dir_path": os.path.join(extracted_dir, "dataset_public", "images"),
+          "labels_dir_path": os.path.join(extracted_dir, "dataset_public", "ground_truth"),
         }
       ),
     ]
