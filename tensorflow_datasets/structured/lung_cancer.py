@@ -18,7 +18,8 @@ institution = "University of California, Irvine, School of Information and Compu
 """
 
 _DESCRIPTION = """
-This data was used by Hong and Young to illustrate the power of the optimal discriminant plane even in ill-posed settings. Applying the KNN method in the resulting plane gave 77% accuracy. However, these results are strongly biased (See Aeberhard's second ref. above, or email to stefan '@' coral.cs.jcu.edu.au). Results obtained by Aeberhard et al. are :
+This data was used by Hong and Young to illustrate the power of the optimal discriminant plane even in ill-posed settings. Applying the KNN method in the resulting plane gave 77% accuracy. However, these results are strongly biased (See Hong, Z.Q. and Yang, J.Y. "Optimal Discriminant Plane for a Small Number of Samples and Design Method of Classifier on the Plane",
+Pattern Recognition, Vol. 24, No. 4, pp. 317-324, 1991, or email to stefan '@' coral.cs.jcu.edu.au). Results obtained by Aeberhard et al. are :
 
 RDA : 62.5%, KNN 53.1%, Opt. Disc. Plane 59.4%
 
