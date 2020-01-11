@@ -5,6 +5,7 @@ from __future__ import division
 from __future__ import print_function
 
 import csv
+import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -47,7 +48,7 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         
         features=tfds.features.FeaturesDict({
-           "feeling": tfds.features.ClassLabel(names=["happy", "unhappy"]),
+           "feeling": tfds.features.ClassLabel(names=_FEELING),
            "D": tfds.features.ClassLabel(num_classes=2),
            "X1": tfds.features.ClassLabel(num_classes=5),
            "X2": tfds.features.ClassLabel(num_classes=5),
@@ -57,7 +58,7 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
            "X6": tfds.features.ClassLabel(num_classes=5),
         }),
         supervised_keys=("D", "feeling"),
-        #homepage='https://archive.ics.uci.edu/ml/datasets/Somerville+Happiness+Survey',
+        homepage='https://archive.ics.uci.edu/ml/datasets/Somerville+Happiness+Survey',
         citation=_CITATION,
     )
 
@@ -77,7 +78,7 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, file_path):
     fieldnames = ['D', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6']
     with open(file_path, newline='', encoding='utf-16') as f:
-      reader = csv.DictReader(f),
+      reader = csv.DictReader(f, fieldnames=fieldnames),
       for row in reader:
         for i, row in zip(row, reader):
           yield i, {
