@@ -1,3 +1,4 @@
+"""Test for Somerville Happiness Survey Data Set"""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -13,7 +14,6 @@ class SomervilleHappinessTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 1, 
   }
-
 
 if __name__ == "__main__":
   testing.test_main()

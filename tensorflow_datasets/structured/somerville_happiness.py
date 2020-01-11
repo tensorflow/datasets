@@ -1,9 +1,10 @@
-
+"""Somerville Happiness Survey Data Set from UCI Machine Learning Repository"""
 
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import csv
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -31,6 +32,7 @@ X6 = the availability of social community events
 
 Attributes X1 to X6 have values 1 to 5.
 """
+_FEELING = ["happy", "unhappy"]
 
 _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/00479/SomervilleHappinessSurvey2015.csv'
 
@@ -45,6 +47,7 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         
         features=tfds.features.FeaturesDict({
+           "feeling": tfds.features.ClassLabel(names=["happy", "unhappy"]),
            "D": tfds.features.ClassLabel(num_classes=2),
            "X1": tfds.features.ClassLabel(num_classes=5),
            "X2": tfds.features.ClassLabel(num_classes=5),
@@ -53,16 +56,18 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
            "X5": tfds.features.ClassLabel(num_classes=5),
            "X6": tfds.features.ClassLabel(num_classes=5),
         }),
-        supervised_keys=('D', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6'),
-        homepage='https://archive.ics.uci.edu/ml/datasets/Somerville+Happiness+Survey',
+        supervised_keys=("D", "feeling"),
+        #homepage='https://archive.ics.uci.edu/ml/datasets/Somerville+Happiness+Survey',
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     path = dl_manager.download_and_extract(_URL)
+    # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
+            num_shards=1,
             gen_kwargs={
               'file_path': path,
             },
@@ -70,10 +75,13 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, file_path):
-    fieldname = ['D, X1, X2, X3, X4, X5, X6']
-    with tf.io.gfile.GFile(file_path) as csvfile:
-      reader = csv.DictReader(csvfile, fieldnames=fieldname)
-      for i, row in enumerate(reader):
-        yield i, row
-
+    fieldnames = ['D', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6']
+    with open(file_path, newline='', encoding='utf-16') as f:
+      reader = csv.DictReader(f),
+      for row in reader:
+        for i, row in zip(row, reader):
+          yield i, {
+               "feelings":_FEELING[1],
+               "D": 1,
+          }
 
