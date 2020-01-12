@@ -7,7 +7,7 @@ from __future__ import print_function
 import tensorflow_datasets.public_api as tfds
 import tensorflow as tf
 
-import csv
+import os
 
 _CITATION = """\
 @article{10.1093/mnras/stw656,
@@ -91,7 +91,7 @@ class Htru2(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, file_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(file_path + "/HTRU_2.csv", "r") as csvfile:
+    with tf.io.gfile.GFile(os.path.join(file_path, "HTRU_2.csv"), "r") as csvfile:
       features = [
           "Mean of the integrated profile",
           "Standard deviation of the integrated profile",
