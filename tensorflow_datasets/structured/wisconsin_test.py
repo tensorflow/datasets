@@ -26,13 +26,9 @@ class WisconsinTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = wisconsin.WisconsinBreastCancer
 
   SPLITS = {
-      "train": 57,
+      "train": 60,
   }
   DL_EXTRACT_RESULT = "wdbc.data"
-
-
-class WisconsinS3Test(IrisTest):
-  VERSION = "experimental_latest"
 
 
 if __name__ == "__main__":
