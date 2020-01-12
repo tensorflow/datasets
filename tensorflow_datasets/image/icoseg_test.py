@@ -1,3 +1,4 @@
+"""Tests for tensorflow_datasets.image.icoseg"""
 
 from __future__ import absolute_import
 from __future__ import division
@@ -8,13 +9,11 @@ from tensorflow_datasets.image import icoseg
 
 
 class IcosegTest(testing.DatasetBuilderTestCase):
-  # TODO(icoseg):
   DATASET_CLASS = icoseg.Icoseg
+
   SPLITS = {
-      "train": 3, 
-      "test": 1,  
+      "train": 4,
   }
 
 if __name__ == "__main__":
   testing.test_main()
-
