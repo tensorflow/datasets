@@ -10,7 +10,7 @@ from tensorflow_datasets.structured import HTRU2
 class Htru2Test(testing.DatasetBuilderTestCase):
   DATASET_CLASS = HTRU2.Htru2
   SPLITS = {
-      "train": 13
+      "train": 10
   }
 
   DL_EXTRACT_RESULT = ""
