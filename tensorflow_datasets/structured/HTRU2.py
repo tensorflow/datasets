@@ -53,7 +53,7 @@ _URL = "http://archive.ics.uci.edu/ml/machine-learning-databases/00372/HTRU2.zip
 class Htru2(tfds.core.GeneratorBasedBuilder):
   """Dataset for Predicting a Pulsar Star"""
 
-  VERSION = tfds.core.Version('0.1.0',
+  VERSION = tfds.core.Version('2.0.0',
                               experiments={tfds.core.Experiment.S3: False})
 
   def _info(self):
@@ -69,7 +69,7 @@ class Htru2(tfds.core.GeneratorBasedBuilder):
           "Standard deviation of the DM-SNR curve" : tf.float64,
           "Excess kurtosis of the DM-SNR curve" : tf.float64,
           "Skewness of the DM-SNR curve" : tf.float64,
-          "Class" : tf.float32 # 0 for noise, 1 for pulsar
+          "Class" : tfds.features.ClassLabel(num_classes=2)
         }),
         supervised_keys=None,
         homepage="https://archive.ics.uci.edu/ml/datasets/HTRU2",
@@ -101,18 +101,29 @@ class Htru2(tfds.core.GeneratorBasedBuilder):
           "Standard deviation of the DM-SNR curve",
           "Excess kurtosis of the DM-SNR curve",
           "Skewness of the DM-SNR curve",
-          "Class" # 0 for noise, 1 for pulsar
+          "Class"  # 0 for noise, 1 for pulsar
       ]
-      for i in csvfile.readlines():
-        lst = i.split(",")
-        dictionary = {}
-        for j in range(len(lst) - 1):
-          if j % len(features) < len(features) - 1:
-            dictionary[features[j % len(features)]] = float(lst[j])
-            
+
+      lines = csvfile.readlines()
+      for i in lines:
+        feature_lst = i.split(",")
+        length_increase = 0
+        for j in range(len(feature_lst)):
+            if j % (len(features) - 1) == 0 and j != 0:
+              temp = feature_lst[j + length_increase][0:]
+              feature_lst[j + length_increase] = feature_lst[j + length_increase][0]
+              feature_lst.insert(j + length_increase + 1, temp)
+              length_increase += 1
+
+        feature_dict = {}
+        for j in range(len(feature_lst)):
+          if j % len(features) == 0:
+              feature_dict = {}
+              feature_dict[features[j % len(features)]] = float(feature_lst[j])
+
+          elif j % len(features) < len(features) - 1:
+            feature_dict[features[j % len(features)]] = float(feature_lst[j])
+
           elif j % len(features) == len(features) - 1:
-            dictionary[features[j % len(features)]] = float(lst[j])
-            yield dictionary
-
-            dictionary = {}
-
+            feature_dict[features[j % len(features)]] = int(feature_lst[j])
+            yield j // len(features), feature_dict
