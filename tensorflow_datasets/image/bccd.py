@@ -39,12 +39,14 @@ def parse_annotations(annotation_path):
   with tf.io.gfile.GFile(annotation_path, "rb") as f:
     root = ET.parse(f)
     cell_types, xmins, ymins, xmaxes, ymaxes = [], [], [], [], []
+    width = float(root.find("size/width").text)
+    height = float(root.find("size/height").text)
     for _object in root.findall("object"):
       cell_types.append(_object.find("name").text)
-      xmins.append(int(_object.find("bndbox/xmin").text))
-      ymins.append(int(_object.find("bndbox/ymin").text))
-      xmaxes.append(int(_object.find("bndbox/xmax").text))
-      ymaxes.append(int(_object.find("bndbox/ymax").text))
+      xmins.append(float(_object.find("bndbox/xmin").text) / width)
+      ymins.append(float(_object.find("bndbox/ymin").text) / height)
+      xmaxes.append(float(_object.find("bndbox/xmax").text) / width)
+      ymaxes.append(float(_object.find("bndbox/ymax").text) / height)
     return cell_types, xmins, ymins, xmaxes, ymaxes
 
 
@@ -62,11 +64,10 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
       features=tfds.features.FeaturesDict({
         "name": tfds.features.Text(),
         "image": tfds.features.Image(shape=(480, 640, 3), encoding_format="jpeg"),
-        "cell_type": tfds.features.Sequence(tfds.features.ClassLabel(names=["RBC", "WBC", "Platelets"])),
-        "bbox_xmin": tfds.features.Sequence(tf.int32),
-        "bbox_ymin": tfds.features.Sequence(tf.int32),
-        "bbox_xmax": tfds.features.Sequence(tf.int32),
-        "bbox_ymax": tfds.features.Sequence(tf.int32),
+        "objects": tfds.features.Sequence({
+            "cell_type": tfds.features.ClassLabel(names=["RBC", "WBC", "Platelets"]),
+            "bbox": tfds.features.BBoxFeature()
+        })
       }),
       citation=_CITATION,
       homepage=_URL
@@ -116,14 +117,17 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(self, dataset):
-    for example in dataset:
+    for i, example in enumerate(dataset):
       cell_types, xmins, ymins, xmaxes, ymaxes = parse_annotations(example["xml"])
-      yield example["name"], {
+      objects = []
+      for j in range(len(cell_types)):
+          objects.append({
+            "cell_type": cell_types[j],
+            "bbox": tfds.features.BBox(ymins[j], xmins[j], ymaxes[j], xmaxes[j])
+          })
+          
+      yield i, {
         "name": example["name"],
         "image": example["image"],
-        "cell_type": cell_types,
-        "bbox_xmin": xmins,
-        "bbox_ymin": ymins,
-        "bbox_xmax": xmaxes,
-        "bbox_ymax": ymaxes
+        "objects": objects
       }
