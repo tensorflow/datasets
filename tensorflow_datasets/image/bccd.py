@@ -125,7 +125,7 @@ class BCCD(tfds.core.GeneratorBasedBuilder):
             "cell_type": cell_types[j],
             "bbox": tfds.features.BBox(ymins[j], xmins[j], ymaxes[j], xmaxes[j])
           })
-          
+
       yield i, {
         "name": example["name"],
         "image": example["image"],
