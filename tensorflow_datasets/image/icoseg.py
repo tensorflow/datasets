@@ -74,3 +74,4 @@ class Icoseg(tfds.core.GeneratorBasedBuilder):
                 "label_png": label_img_path,
           }
           yield img_name, features
+
