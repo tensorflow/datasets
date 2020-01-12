@@ -11,9 +11,10 @@ from tensorflow_datasets.structured import abalone
 class AbaloneTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = abalone.Abalone
   SPLITS = {
-      "train": 3
+      "train": 1
   }
 
+  DL_EXTRACT_RESULT = "abalone.data"
 
 if __name__ == "__main__":
   testing.test_main()
