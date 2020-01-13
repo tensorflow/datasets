@@ -18,9 +18,26 @@ function set_status() {
     STATUS=$(($last_status || $STATUS))
 }
 
+PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
+
+
+# Certain datasets/tests don't work with Python 2
+PY2_IGNORE_TESTS=""
+if [[ "$PY_BIN" = "python2.7"  ]]
+then
+  PY2_IGNORE_TESTS="
+  tensorflow_datasets/audio/nsynth_test.py
+  tensorflow_datasets/text/c4_test.py
+  tensorflow_datasets/text/c4_utils_test.py
+  tensorflow_datasets/image/imagenet2012_corrupted_test.py
+  "
+fi
+PY2_IGNORE=$(for test in $PY2_IGNORE_TESTS; do echo "--ignore=$test "; done)
+
+
 # Run Tests
 # Ignores:
-# * Some TF2 tests if running against TF2 (see above)
+# * Some Python2 tests if running against Python2 (see above)
 # * Nsynth is run is isolation due to dependency conflict (crepe)
 # * Lsun tests is disabled because the tensorflow_io used in open-source
 #   is linked to static libraries compiled again specific TF version, which
@@ -33,6 +50,7 @@ function set_status() {
 pytest \
   -n auto \
   --disable-warnings \
+  $PY2_IGNORE \
   --ignore="tensorflow_datasets/audio/nsynth_test.py" \
   --ignore="tensorflow_datasets/image/lsun_test.py" \
   --ignore="tensorflow_datasets/testing/test_utils.py" \
@@ -53,7 +71,6 @@ NOTEBOOKS="
 docs/overview.ipynb
 docs/_index.ipynb
 "
-PY_BIN=$(python -c "import sys; print('python%s' % sys.version[0:3])")
 function test_notebook() {
   local notebook=$1
   create_virtualenv tfds_notebook $PY_BIN

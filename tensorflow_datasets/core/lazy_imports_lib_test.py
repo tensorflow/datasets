@@ -46,6 +46,8 @@ class LazyImportsTest(testing.TestCase, parameterized.TestCase):
       "tldextract",
   )
   def test_import(self, module_name):
+    if module_name == "nltk" and six.PY2:  # sklearn do not support Python2
+      return
     # TODO(rsepassi): Re-enable skimage on Py3 (b/129964829)
     if module_name == "skimage" and six.PY3:
       return
