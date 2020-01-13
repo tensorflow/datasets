@@ -66,18 +66,15 @@ class Opinosis(tfds.core.GeneratorBasedBuilder):
       file_path = os.path.join(topics_path, filename)
       topic_name = filename.split(".txt")[0]
       with tf.io.gfile.GFile(file_path, "rb") as src_f:
-        lines = str(src_f.readlines())
-        input_data = "".join(lines)
+        input_data = src_f.read()
       summaries_path = os.path.join(path, "summaries-gold", topic_name)
       summary_lst = []
       for summ_filename in tf.io.gfile.listdir(summaries_path):
         file_path = os.path.join(summaries_path, summ_filename)
-        file_path = os.path.join(summaries_path, summ_filename)
-        with tf.io.gfile.GFile(file_path) as tgt_f:
-          lines = tgt_f.readlines()
-          data = "".join(lines)
+        with tf.io.gfile.GFile(file_path, "rb") as tgt_f:
+          data = tgt_f.read()
           summary_lst.append(data)
-      summary_data = "[SEP_SUM]".join(summary_lst)
+      summary_data = b"[SEP_SUM]".join(summary_lst)
       yield i, {
           _REVIEW_SENTS: input_data,
           _SUMMARIES: summary_data
