@@ -171,8 +171,7 @@ a look at the
 class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 
   # BeamBasedBuilder does not support S3 yet.
-  VERSION = tfds.core.Version(
-      '1.0.0', experiments={tfds.core.Experiment.S3: False})
+  VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
     return tfds.core.DatasetInfo(
