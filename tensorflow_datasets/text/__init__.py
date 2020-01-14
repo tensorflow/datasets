@@ -28,6 +28,7 @@ from tensorflow_datasets.text.lm1b import Lm1bConfig
 from tensorflow_datasets.text.math_dataset import MathDataset
 from tensorflow_datasets.text.multi_nli import MultiNLI
 from tensorflow_datasets.text.multi_nli_mismatch import MultiNLIMismatch
+from tensorflow_datasets.text.scan import Scan
 from tensorflow_datasets.text.scicite import Scicite
 from tensorflow_datasets.text.snli import Snli
 from tensorflow_datasets.text.squad import Squad
