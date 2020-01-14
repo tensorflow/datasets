@@ -16,7 +16,7 @@ class LetterRecognitionTest(testing.DatasetBuilderTestCase):
 
   }
 
-  DL_EXTRACT_RESULT = {'letter-recognition.data'}
+  DL_EXTRACT_RESULT = 'letter-recognition.data'
 
 if __name__ == "__main__":
   testing.test_main()
