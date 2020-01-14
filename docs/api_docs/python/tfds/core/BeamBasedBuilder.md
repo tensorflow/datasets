@@ -30,7 +30,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `BeamBasedBuilder`
 
 Beam based Builder.

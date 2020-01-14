@@ -30,7 +30,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DatasetBuilder`
 
 Abstract base class for all datasets.

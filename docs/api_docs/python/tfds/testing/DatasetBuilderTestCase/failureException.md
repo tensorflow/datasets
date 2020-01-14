@@ -11,7 +11,6 @@
 </table>
 
 <!-- Equality marker -->
-
 ## Class `failureException`
 
 Assertion failed.

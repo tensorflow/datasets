@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `TFRecordExampleAdapter`
 
 Writes/Reads serialized Examples protos to/from TFRecord files.

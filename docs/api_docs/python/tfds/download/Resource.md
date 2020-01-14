@@ -17,7 +17,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Resource`
 
 Represents a resource to download, extract, or both.

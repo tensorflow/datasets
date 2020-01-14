@@ -11,7 +11,6 @@
 </table>
 
 <!-- Equality marker -->
-
 Mock tfds to generate random data.
 
 ```python

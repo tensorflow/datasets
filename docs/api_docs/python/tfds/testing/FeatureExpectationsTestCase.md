@@ -150,7 +150,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `FeatureExpectationsTestCase`
 
 Tests FeatureExpectations with full encode-decode.

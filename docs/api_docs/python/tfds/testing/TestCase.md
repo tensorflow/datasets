@@ -147,7 +147,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `TestCase`
 
 Base TestCase to be used for all tests.

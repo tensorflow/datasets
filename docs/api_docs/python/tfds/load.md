@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Loads the named dataset into a `tf.data.Dataset`.
 
 ```python

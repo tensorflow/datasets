@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Decorator to create a decoder.
 
 ```python

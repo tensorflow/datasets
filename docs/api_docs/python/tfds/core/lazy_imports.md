@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `lazy_imports`
 
 Lazy importer for heavy dependencies.

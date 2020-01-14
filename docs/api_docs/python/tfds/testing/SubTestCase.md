@@ -148,7 +148,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SubTestCase`
 
 Adds subTest() context manager to the TestCase if supported.

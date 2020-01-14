@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DownloadError`
 
 <!-- Placeholder for "Used in" -->

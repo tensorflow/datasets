@@ -22,7 +22,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SubwordTextEncoder`
 
 Invertible `TextEncoder` using word pieces with a byte-level fallback.

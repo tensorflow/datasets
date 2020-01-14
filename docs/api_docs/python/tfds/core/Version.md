@@ -24,7 +24,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Version`
 
 Dataset version MAJOR.MINOR.PATCH.

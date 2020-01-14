@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `percent`
 
 Syntactic sugar for defining slice subsplits: `tfds.percent[75:-5]`.

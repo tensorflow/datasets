@@ -27,7 +27,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Sequence`
 
 Composite `FeatureConnector` for a `dict` where each value is a list.

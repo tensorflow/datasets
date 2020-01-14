@@ -25,7 +25,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `BBoxFeature`
 
 `FeatureConnector` for a normalized bounding box.

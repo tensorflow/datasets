@@ -30,7 +30,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `GeneratorBasedBuilder`
 
 Base class for datasets with data generation based on dict generators.

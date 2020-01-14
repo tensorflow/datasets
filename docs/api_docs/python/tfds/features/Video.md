@@ -27,7 +27,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Video`
 
 `FeatureConnector` for videos, encoding frames individually on disk.

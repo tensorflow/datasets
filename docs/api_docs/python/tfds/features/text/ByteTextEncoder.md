@@ -21,7 +21,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `ByteTextEncoder`
 
 Byte-encodes text.

@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `TextEncoder`
 
 Abstract base class for converting between text and integers.

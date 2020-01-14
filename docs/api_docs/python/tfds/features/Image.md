@@ -28,7 +28,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Image`
 
 `FeatureConnector` for images.

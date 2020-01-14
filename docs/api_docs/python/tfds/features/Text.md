@@ -31,7 +31,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Text`
 
 `FeatureConnector` for text, encoding to integers with a `TextEncoder`.

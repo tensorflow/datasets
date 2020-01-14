@@ -15,7 +15,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `FeatureExpectationItem`
 
 Test item of a FeatureExpectation.

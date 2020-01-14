@@ -16,7 +16,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `RaggedConstant`
 
 Container of tf.ragged.constant values.

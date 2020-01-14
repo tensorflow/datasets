@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SkipDecoding`
 
 Transformation which skip the decoding entirelly.

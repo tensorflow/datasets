@@ -24,7 +24,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `TokenTextEncoder`
 
 TextEncoder backed by a list of tokens.

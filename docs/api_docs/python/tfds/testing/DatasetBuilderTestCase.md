@@ -160,7 +160,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DatasetBuilderTestCase`
 
 Inherit this class to test your DatasetBuilder class.

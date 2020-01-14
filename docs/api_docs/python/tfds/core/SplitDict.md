@@ -22,7 +22,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SplitDict`
 
 Split info object.

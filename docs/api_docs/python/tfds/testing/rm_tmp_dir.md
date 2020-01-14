@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Rm temporary directory.
 
 ``` python

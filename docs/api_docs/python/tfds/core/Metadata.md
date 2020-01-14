@@ -16,7 +16,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Metadata`
 
 Abstract base class for DatasetInfo metadata container.

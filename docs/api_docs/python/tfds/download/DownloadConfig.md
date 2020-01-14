@@ -15,7 +15,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DownloadConfig`
 
 Configuration for

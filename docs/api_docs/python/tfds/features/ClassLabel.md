@@ -29,7 +29,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `ClassLabel`
 
 `FeatureConnector` for integer class labels.

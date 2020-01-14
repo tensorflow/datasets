@@ -17,7 +17,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `GenerateMode`
 
 `Enum` for how to treat pre-existing downloads and data.

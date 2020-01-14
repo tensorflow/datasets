@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 If the dataset is available on the GCS bucket gs://tfds-data/datasets.
 
 ```python

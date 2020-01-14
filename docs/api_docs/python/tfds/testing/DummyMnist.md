@@ -30,7 +30,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DummyMnist`
 
 Test DatasetBuilder.

@@ -24,7 +24,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `FeatureConnector`
 
 Abstract base class for feature types.

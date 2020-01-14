@@ -25,7 +25,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Audio`
 
 `FeatureConnector` for audio, encoded as raw integer wave form.

@@ -15,7 +15,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `TextEncoderConfig`
 
 Configuration for

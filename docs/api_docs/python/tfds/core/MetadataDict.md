@@ -16,7 +16,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `MetadataDict`
 
 A <a href="../../tfds/core/Metadata.md"><code>tfds.core.Metadata</code></a>

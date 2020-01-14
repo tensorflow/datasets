@@ -20,7 +20,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `NamedSplit`
 
 Descriptor corresponding to a named split (train, test, ...).

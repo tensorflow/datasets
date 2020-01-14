@@ -21,7 +21,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `ReadConfig`
 
 Configures input reading pipeline.
