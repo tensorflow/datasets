@@ -25,7 +25,6 @@ _CITATION = """\
     url = {https://doi.org/10.1093/mnras/stw656},
     eprint = {http://oup.prod.sis.lan/mnras/article-pdf/459/1/1104/8115310/stw656.pdf},
 }
-
 """
 
 _DESCRIPTION = """\
@@ -49,7 +48,6 @@ These examples have all been checked by human annotators.
 
 _URL = "http://archive.ics.uci.edu/ml/machine-learning-databases/00372/HTRU2.zip"
 
-
 class Htru2(tfds.core.GeneratorBasedBuilder):
   """Dataset for Predicting a Pulsar Star"""
 
@@ -61,14 +59,16 @@ class Htru2(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-          "Mean of the integrated profile" : tf.float64,
-          "Standard deviation of the integrated profile" : tf.float64,
-          "Excess kurtosis of the integrated profile" : tf.float64,
-          "Skewness of the integrated profile" : tf.float64,
-          "Mean of the DM-SNR curve" : tf.float64,
-          "Standard deviation of the DM-SNR curve" : tf.float64,
-          "Excess kurtosis of the DM-SNR curve" : tf.float64,
-          "Skewness of the DM-SNR curve" : tf.float64,
+          "Features" : tfds.features.FeaturesDict({
+            "Mean of the integrated profile" : tf.float64,
+            "Standard deviation of the integrated profile" : tf.float64,
+            "Excess kurtosis of the integrated profile" : tf.float64,
+            "Skewness of the integrated profile" : tf.float64,
+            "Mean of the DM-SNR curve" : tf.float64,
+            "Standard deviation of the DM-SNR curve" : tf.float64,
+            "Excess kurtosis of the DM-SNR curve" : tf.float64,
+            "Skewness of the DM-SNR curve" : tf.float64,
+          }),
           "Class" : tfds.features.ClassLabel(num_classes=2)
         }),
         supervised_keys=None,
@@ -125,5 +125,5 @@ class Htru2(tfds.core.GeneratorBasedBuilder):
             feature_dict[features[j % len(features)]] = float(feature_lst[j])
 
           elif j % len(features) == len(features) - 1:
-            feature_dict[features[j % len(features)]] = int(feature_lst[j])
-            yield j // len(features), feature_dict
+            yield j // len(features), {"Features" : feature_dict,
+                                       "Class" : int(feature_lst[j])}
