@@ -14,7 +14,7 @@ class TicTacToeTest(testing.DatasetBuilderTestCase):
       "train": 1,
   }
 
-  DL_EXTRACT_RESULT = {'tic-tac-toe.data'}
+  DL_EXTRACT_RESULT = 'tic-tac-toe.data'
 
 
 if __name__ == "__main__":
