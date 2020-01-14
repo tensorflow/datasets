@@ -34,9 +34,12 @@ class LetterRecognition(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
+
             "label": tfds.features.ClassLabel(names=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
                                                      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']),
+          
             "features": tfds.features.Tensor(shape=(16,), dtype=tf.int32)
+
         }),
         supervised_keys=("label", "features"),
         homepage='https://archive.ics.uci.edu/ml/datasets/Letter+Recognition',
@@ -51,6 +54,7 @@ class LetterRecognition(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
 
                 "file_path": data
+              
             },
         ),
     ]
