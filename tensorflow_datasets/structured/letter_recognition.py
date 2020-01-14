@@ -1,5 +1,4 @@
-"""Database of character image features; try to identify the letter
-	"""
+"""Database of character image features; try to identify the letter"""
 
 from __future__ import absolute_import
 from __future__ import division
