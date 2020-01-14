@@ -21,7 +21,7 @@ The character images were based on 20 different fonts and each letter within the
 """
 
 import csv
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 class LetterRecognition(tfds.core.GeneratorBasedBuilder):
