@@ -105,7 +105,7 @@ class Flic(tfds.core.GeneratorBasedBuilder):
         gen_kwargs={
           "extract_path": extract_path,
           "data": data,
-          "selection_column": 7,
+          "selection_column": 7, #indicates train split selection
         },
       ),
       tfds.core.SplitGenerator(
@@ -113,7 +113,7 @@ class Flic(tfds.core.GeneratorBasedBuilder):
         gen_kwargs={
           "extract_path": extract_path,
           "data": data,
-          "selection_column": 8,
+          "selection_column": 8, #indicates test split selection
         },
       ),
     ]
