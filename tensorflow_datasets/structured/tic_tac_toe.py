@@ -29,7 +29,7 @@ def convert(d):
     return 2
 
 import csv
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 class TicTacToe(tfds.core.GeneratorBasedBuilder):
@@ -43,7 +43,7 @@ class TicTacToe(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             "label": tfds.features.ClassLabel(names=["positive", "negative"]),
-            "features": tfds.features.Tensor(shape=(9,), dtype=tf.string)
+            "features": tfds.features.Tensor(shape=(9,), dtype=tf.uint8)
         }),
         supervised_keys=("label", "features"),
         homepage='https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame',
