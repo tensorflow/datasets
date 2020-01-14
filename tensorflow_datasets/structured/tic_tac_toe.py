@@ -17,7 +17,6 @@ institution = "University of California, Irvine, School of Information and Compu
 
 _DESCRIPTION = """
 This database encodes the complete set of possible board configurations at the end of tic-tac-toe games, where "x" is assumed to have played first. The target concept is "win for x" (i.e., true when "x" has one of 8 possible ways to create a "three-in-a-row").
-
 Interestingly, this raw database gives a stripped-down decision tree algorithm (e.g., ID3) fits. However, the rule-based CN2 algorithm, the simple IB1 instance-based learning algorithm, and the CITRE feature-constructing decision tree algorithm perform well on it.
 """
 
@@ -71,3 +70,4 @@ class TicTacToe(tfds.core.GeneratorBasedBuilder):
             "label": str(row[-1]),
             "features": [convert(x) for x in row[:-1]]
         }
+        
