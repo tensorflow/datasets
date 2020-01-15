@@ -565,6 +565,9 @@ the end of the link when creating the pull request. For example:
 
 `https://github.com/tensorflow/datasets/compare/master...<username>:<branch>?template=add_dataset.md`
 
+Fill in the areas for the name, issue reference, and GitHub Gist link. When
+using the checklist, replace each `[ ]` with `[x]` to mark it off.
+
 
 ## Define the dataset outside TFDS.
 
