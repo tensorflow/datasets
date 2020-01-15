@@ -36,6 +36,18 @@ _HOMEPAGE_URL = "https://bensapp.github.io/flic-dataset.html"
 _URL_SUBSET = "https://drive.google.com/uc?id=0B4K3PZp8xXDJN0Fpb0piVjQ3Y3M&export=download"
 _URL_SUPERSET = "https://drive.google.com/uc?id=0B4K3PZp8xXDJd2VwblhhOVBfMDg&export=download"
 
+def _normalize_bbox(raw_bbox, img_path):
+  """Normalize torsobox bbox values."""
+  with tfds.core.lazy_imports.PIL_Image.open(img_path) as img:
+    width, height = img.size
+
+  return tfds.features.BBox(
+      ymin=raw_bbox[1] / height,
+      ymax=raw_bbox[3] / height,
+      xmin=raw_bbox[0] / width,
+      xmax=raw_bbox[2] / width,
+  )
+
 class FlicConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLIC."""
 
@@ -47,7 +59,7 @@ class FlicConfig(tfds.core.BuilderConfig):
       raise ValueError("data must be one of %s" % _DATA_OPTIONS)
 
     descriptions = {
-      "small" : "5003 examples used in CVPR13 MODEC paper."
+      "small" : "5003 examples used in CVPR13 MODEC paper.",
       "full": "20928 examples, a superset of FLIC consisting of more difficult examples."
     }
     description = kwargs.get("description", "Uses %s" % descriptions[data])
@@ -83,10 +95,10 @@ class Flic(tfds.core.GeneratorBasedBuilder):
             "xcoords": tfds.features.Sequence(tf.float64),
             "ycoords": tfds.features.Sequence(tf.float64),
             "currframe": tfds.features.Tensor(shape=(), dtype=tf.float64),
-            "torsobox": tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+            "torsobox": tfds.features.BBoxFeature(),
         }),
-        citation=_CITATION,
-        homepage = _HOMEPAGE_URL
+        homepage = _HOMEPAGE_URL,
+        citation=_CITATION,       
     )
 
   def _split_generators(self, dl_manager):
@@ -95,7 +107,7 @@ class Flic(tfds.core.GeneratorBasedBuilder):
         self.builder_config.url)
     
     mat_path = os.path.join(extract_path, self.builder_config.dir, "examples.mat")
-    with tf.io.gfile.GFile(mat_path) as f:
+    with tf.io.gfile.GFile(mat_path, 'rb') as f:
       data = tfds.core.lazy_imports.scipy.io.loadmat(f, struct_as_record=True,
                                                      squeeze_me=True, mat_dtype=True)
 
@@ -122,13 +134,14 @@ class Flic(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     for u_id, example in enumerate(data["examples"]):
       if example[selection_column]:
+        img_path = os.path.join(extract_path, self.builder_config.dir,
+                                "images", example[3])
         yield u_id, {
-          "image": os.path.join(extract_path, self.builder_config.dir,
-                                "images", example[3]),
+          "image": img_path,
           "poselet_hit_idx": example[0],
           "moviename": example[1],
           "xcoords": example[2][0],
           "ycoords": example[2][1],
           "currframe": example[5],
-          "torsobox": example[6],
+          "torsobox": _normalize_bbox(example[6], img_path),
         }
