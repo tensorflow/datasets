@@ -88,7 +88,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/shot_noise`
 Corruption method: shot_noise
@@ -119,7 +120,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/impulse_noise`
 Corruption method: impulse_noise
@@ -150,7 +152,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/glass_blur`
 Corruption method: glass_blur
@@ -181,7 +184,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/motion_blur`
 Corruption method: motion_blur
@@ -212,7 +216,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/shear`
 Corruption method: shear
@@ -243,7 +248,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/scale`
 Corruption method: scale
@@ -274,7 +280,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/rotate`
 Corruption method: rotate
@@ -305,7 +312,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/brightness`
 Corruption method: brightness
@@ -336,7 +344,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/translate`
 Corruption method: translate
@@ -367,7 +376,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/stripe`
 Corruption method: stripe
@@ -398,7 +408,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/fog`
 Corruption method: fog
@@ -429,7 +440,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/spatter`
 Corruption method: spatter
@@ -460,7 +472,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/dotted_line`
 Corruption method: dotted_line
@@ -491,7 +504,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/zigzag`
 Corruption method: zigzag
@@ -522,7 +536,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `mnist_corrupted/canny_edges`
 Corruption method: canny_edges
@@ -553,7 +568,8 @@ FeaturesDict({
 *   [https://github.com/google-research/mnist-c](https://github.com/google-research/mnist-c)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

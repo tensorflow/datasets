@@ -49,7 +49,8 @@ TRAIN | 17,509
 *   [https://github.com/AlexOlsen/DeepWeeds](https://github.com/AlexOlsen/DeepWeeds)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

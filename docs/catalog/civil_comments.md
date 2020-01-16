@@ -62,7 +62,8 @@ VALIDATION | 97,320
 *   [https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'text', u'toxicity')`
+
+`('text', 'toxicity')`
 
 ## Citation
 ```

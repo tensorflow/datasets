@@ -29,7 +29,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `ClassLabel`
 
 `FeatureConnector` for integer class labels.
@@ -144,6 +143,8 @@ source</a>
 ``` python
 encode_example(example_data)
 ```
+
+See base class for details.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 

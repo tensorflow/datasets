@@ -35,7 +35,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DatasetInfo`
 
 Information about a dataset.

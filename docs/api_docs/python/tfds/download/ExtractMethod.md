@@ -22,7 +22,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `ExtractMethod`
 
 The extraction method to use to pre-process a downloaded file.

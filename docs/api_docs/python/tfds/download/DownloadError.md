@@ -14,7 +14,8 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DownloadError`
+
+Common base class for all non-exit exceptions.
 
 <!-- Placeholder for "Used in" -->

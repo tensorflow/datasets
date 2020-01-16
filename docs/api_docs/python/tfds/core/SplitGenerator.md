@@ -15,7 +15,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SplitGenerator`
 
 Defines the split information for the generator.

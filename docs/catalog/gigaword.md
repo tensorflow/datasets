@@ -50,7 +50,8 @@ TEST       | 1,951
 *   [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'document', u'summary')`
+
+`('document', 'summary')`
 
 ## Citation
 ```

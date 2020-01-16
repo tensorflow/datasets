@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Entrypoint for tests.
 
 ``` python

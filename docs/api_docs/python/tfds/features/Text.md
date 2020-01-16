@@ -31,7 +31,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Text`
 
 `FeatureConnector` for text, encoding to integers with a `TextEncoder`.
@@ -138,6 +137,8 @@ source</a>
 encode_example(example_data)
 ```
 
+See base class for details.
+
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/feature.py">View
@@ -212,6 +213,18 @@ load_metadata(
 )
 ```
 
+Restore the feature metadata from disk.
+
+If a dataset is re-loaded and generated files exists on disk, this function will
+restore the feature metadata from the saved file.
+
+#### Args:
+
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)
+
 <h3 id="maybe_build_from_corpus"><code>maybe_build_from_corpus</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/text_feature.py">View
@@ -259,6 +272,32 @@ save_metadata(
     feature_name
 )
 ```
+
+Save the feature metadata on disk.
+
+This function is called after the data has been generated (by
+`_download_and_prepare`) to save the feature connector info with the generated
+dataset.
+
+Some dataset/features dynamically compute info during `_download_and_prepare`.
+For instance:
+
+*   Labels are loaded from the downloaded data
+*   Vocabulary is created from the downloaded data
+*   ImageLabelFolder compute the image dtypes/shape from the manual_dir
+
+After the info have been added to the feature, this function allow to save those
+additional info to be restored the next time the data is loaded.
+
+By default, this function do not save anything, but sub-classes can overwrite
+the function.
+
+#### Args:
+
+*   <b>`data_dir`</b>: `str`, path to the dataset folder to which save the info
+    (ex: `~/datasets/cifar10/1.2.0/`)
+*   <b>`feature_name`</b>: `str`, the name of the feature (from the FeaturesDict
+    key)
 
 <h3 id="str2ints"><code>str2ints</code></h3>
 

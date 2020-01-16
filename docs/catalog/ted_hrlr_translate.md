@@ -93,7 +93,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'az', u'en')`
+
+`('az', 'en')`
 
 ## `ted_hrlr_translate/aztr_to_en`
 Translation dataset from az_tr to en in plain text.
@@ -125,7 +126,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'az_tr', u'en')`
+
+`('az_tr', 'en')`
 
 ## `ted_hrlr_translate/be_to_en`
 Translation dataset from be to en in plain text.
@@ -157,7 +159,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'be', u'en')`
+
+`('be', 'en')`
 
 ## `ted_hrlr_translate/beru_to_en`
 Translation dataset from be_ru to en in plain text.
@@ -189,7 +192,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'be_ru', u'en')`
+
+`('be_ru', 'en')`
 
 ## `ted_hrlr_translate/es_to_pt`
 Translation dataset from es to pt in plain text.
@@ -221,7 +225,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'es', u'pt')`
+
+`('es', 'pt')`
 
 ## `ted_hrlr_translate/fr_to_pt`
 Translation dataset from fr to pt in plain text.
@@ -253,7 +258,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fr', u'pt')`
+
+`('fr', 'pt')`
 
 ## `ted_hrlr_translate/gl_to_en`
 Translation dataset from gl to en in plain text.
@@ -285,7 +291,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'gl', u'en')`
+
+`('gl', 'en')`
 
 ## `ted_hrlr_translate/glpt_to_en`
 Translation dataset from gl_pt to en in plain text.
@@ -317,7 +324,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'gl_pt', u'en')`
+
+`('gl_pt', 'en')`
 
 ## `ted_hrlr_translate/he_to_pt`
 Translation dataset from he to pt in plain text.
@@ -349,7 +357,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'he', u'pt')`
+
+`('he', 'pt')`
 
 ## `ted_hrlr_translate/it_to_pt`
 Translation dataset from it to pt in plain text.
@@ -381,7 +390,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'it', u'pt')`
+
+`('it', 'pt')`
 
 ## `ted_hrlr_translate/pt_to_en`
 Translation dataset from pt to en in plain text.
@@ -413,7 +423,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'pt', u'en')`
+
+`('pt', 'en')`
 
 ## `ted_hrlr_translate/ru_to_en`
 Translation dataset from ru to en in plain text.
@@ -445,7 +456,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+
+`('ru', 'en')`
 
 ## `ted_hrlr_translate/ru_to_pt`
 Translation dataset from ru to pt in plain text.
@@ -477,7 +489,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'pt')`
+
+`('ru', 'pt')`
 
 ## `ted_hrlr_translate/tr_to_en`
 Translation dataset from tr to en in plain text.
@@ -509,7 +522,8 @@ Translation({
 *   [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'tr', u'en')`
+
+`('tr', 'en')`
 
 ## Citation
 ```

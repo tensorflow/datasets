@@ -21,7 +21,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Tokenizer`
 
 Splits a string into tokens, and joins them back.

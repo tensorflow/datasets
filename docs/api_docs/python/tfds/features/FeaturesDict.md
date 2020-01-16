@@ -32,7 +32,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `FeaturesDict`
 
 Composite `FeatureConnector`; each feature in `dict` has its own connector.

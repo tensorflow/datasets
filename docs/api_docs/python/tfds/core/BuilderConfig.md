@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `BuilderConfig`
 
 Base class for `DatasetBuilder` data configuration.

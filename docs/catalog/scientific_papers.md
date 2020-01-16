@@ -61,7 +61,8 @@ FeaturesDict({
 *   [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'article', u'abstract')`
+
+`('article', 'abstract')`
 
 ## `scientific_papers/pubmed`
 Documents from PubMed repository.
@@ -93,7 +94,8 @@ FeaturesDict({
 *   [https://github.com/armancohan/long-summarization](https://github.com/armancohan/long-summarization)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'article', u'abstract')`
+
+`('article', 'abstract')`
 
 ## Citation
 ```

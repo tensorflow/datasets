@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Decoder`
 
 Base decoder object.
@@ -54,6 +53,8 @@ source</a>
 ```python
 __init__()
 ```
+
+Initialize self. See help(type(self)) for accurate signature.
 
 ## Properties
 

@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SplitBase`
 
 Abstract base class for Split compositionality.

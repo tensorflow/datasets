@@ -15,7 +15,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `TextEncoderConfig`
 
 Configuration for
@@ -37,3 +36,5 @@ __init__(
     name=None
 )
 ```
+
+Initialize self. See help(type(self)) for accurate signature.

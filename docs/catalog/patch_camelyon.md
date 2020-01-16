@@ -52,7 +52,8 @@ VALIDATION | 32,768
 *   [https://patchcamelyon.grand-challenge.org/](https://patchcamelyon.grand-challenge.org/)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

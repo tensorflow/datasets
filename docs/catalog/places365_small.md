@@ -46,7 +46,8 @@ VALIDATION | 36,500
 *   [http://places2.csail.mit.edu/](http://places2.csail.mit.edu/)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

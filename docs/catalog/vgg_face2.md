@@ -2,14 +2,12 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="vgg_face2" />
   <meta itemprop="description" content="VGGFace2 is a large-scale face recognition dataset. Images are downloaded from Google Image Search and have large variations in pose, age, illumination, ethnicity and profession. VGGFace2 contains images from identities spanning a wide range of different ethnicities, accents, professions and ages. All face images are captured &quot;in the wild&quot;, with pose and emotion variations and different lighting and occlusion conditions. Face distribution for different identities is varied, from 87 to 843, with an average of 362 images for each subject.&#10;&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load('vgg_face2', split='train')&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/vgg_face2" />
   <meta itemprop="sameAs" content="http://zeus.robots.ox.ac.uk/vgg_face2/" />
   <meta itemprop="citation" content="@InProceedings{Cao18,&#10;author = &quot;Cao, Q. and Shen, L. and Xie, W. and Parkhi, O. M. and Zisserman, A.&quot;,&#10;title  = &quot;VGGFace2: A dataset for recognising faces across pose and age&quot;,&#10;booktitle = &quot;International Conference on Automatic Face and Gesture Recognition&quot;,&#10;year  = &quot;2018&quot;}" />
 </div>
-
 # `vgg_face2` (Manual download)
 
 VGGFace2 is a large-scale face recognition dataset. Images are downloaded from
@@ -39,7 +37,6 @@ need to register on http://zeus.robots.ox.ac.uk/vgg_face2/signup/ in order to
 get the link to download the dataset.
 
 ## Features
-
 ```python
 FeaturesDict({
     'file_name': Text(shape=(), dtype=tf.string),
@@ -50,7 +47,11 @@ FeaturesDict({
 
 ## Statistics
 
-None computed
+Split | Examples
+:---- | --------:
+ALL   | 3,311,286
+TRAIN | 3,141,890
+TEST  | 169,396
 
 ## Homepage
 
@@ -58,10 +59,9 @@ None computed
 
 ## Supervised keys (for `as_supervised=True`)
 
-`(u'image', u'label')`
+`('image', 'label')`
 
 ## Citation
-
 ```
 @InProceedings{Cao18,
 author = "Cao, Q. and Shen, L. and Xie, W. and Parkhi, O. M. and Zisserman, A.",

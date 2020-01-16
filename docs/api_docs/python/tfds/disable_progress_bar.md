@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Disabled Tqdm progress bar.
 
 ```python

@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Returns a human readable size string.
 
 ``` python

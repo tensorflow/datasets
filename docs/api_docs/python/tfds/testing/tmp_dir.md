@@ -11,7 +11,6 @@
 </table>
 
 <!-- Equality marker -->
-
 Context manager for a temporary directory.
 
 ``` python

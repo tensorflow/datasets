@@ -65,7 +65,8 @@ VALIDATION | 916
 *   [https://github.com/allenai/scicite](https://github.com/allenai/scicite)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'string', u'label')`
+
+`('string', 'label')`
 
 ## Citation
 ```

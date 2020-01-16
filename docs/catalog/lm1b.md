@@ -60,7 +60,8 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'text')`
+
+`('text', 'text')`
 
 ## `lm1b/bytes`
 Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
@@ -90,7 +91,8 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'text')`
+
+`('text', 'text')`
 
 ## `lm1b/subwords8k`
 Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
@@ -120,7 +122,8 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'text')`
+
+`('text', 'text')`
 
 ## `lm1b/subwords32k`
 Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
@@ -150,7 +153,8 @@ FeaturesDict({
 *   [http://www.statmt.org/lm-benchmark/](http://www.statmt.org/lm-benchmark/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'text')`
+
+`('text', 'text')`
 
 ## Citation
 ```

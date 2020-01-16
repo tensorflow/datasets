@@ -27,7 +27,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Sequence`
 
 Composite `FeatureConnector` for a `dict` where each value is a list.
@@ -220,6 +219,50 @@ source</a>
 ```python
 encode_example(example_dict)
 ```
+
+Encode the feature dict into tf-example compatible input.
+
+The input example_data can be anything that the user passed at data generation.
+For example:
+
+#### For features:
+
+```
+features={
+    'image': tfds.features.Image(),
+    'custom_feature': tfds.features.CustomFeature(),
+}
+```
+
+At data generation (in `_generate_examples`), if the user yields:
+
+```
+yield {
+    'image': 'path/to/img.png',
+    'custom_feature': [123, 'str', lambda x: x+1]
+}
+```
+
+#### Then:
+
+*   <a href="../../tfds/features/Image.md#encode_example"><code>tfds.features.Image.encode_example</code></a>
+    will get `'path/to/img.png'` as input
+*   `tfds.features.CustomFeature.encode_example` will get `[123, 'str', lambda
+    x: x+1] as input
+
+#### Args:
+
+*   <b>`example_data`</b>: Value or dictionary of values to convert into
+    tf-example compatible data.
+
+#### Returns:
+
+*   <b>`tfexample_data`</b>: Data or dictionary of data to write as tf-example.
+    Data can be a list or numpy array. Note that numpy arrays are flattened so
+    it's the feature connector responsibility to reshape them in
+    `decode_example()`. Note that tf.train.Example only supports int64, float32
+    and string so the data returned here should be integer, float or string.
+    User type can be restored in `decode_example()`.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 

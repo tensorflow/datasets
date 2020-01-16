@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Split`
 
 `Enum` for dataset splits.

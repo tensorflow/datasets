@@ -12,9 +12,7 @@
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
-<meta itemprop="property" content="MANUAL_DOWNLOAD_INSTRUCTIONS"/>
 <meta itemprop="property" content="SUPPORTED_VERSIONS"/>
-<meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
 </div>
@@ -30,7 +28,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `BeamBasedBuilder`
 
 Beam based Builder.
@@ -49,6 +46,25 @@ __init__(
     **kwargs
 )
 ```
+
+Constructs a DatasetBuilder.
+
+Callers must pass arguments as keyword arguments.
+
+#### Args:
+
+*   <b>`data_dir`</b>: `str`, directory to read/write data. Defaults to
+    datasets are stored.
+*   <b>`config`</b>:
+    <a href="../../tfds/core/BuilderConfig.md"><code>tfds.core.BuilderConfig</code></a>
+    or `str` name, optional configuration for the dataset that affects the data
+    generated on disk. Different `builder_config`s will have their own
+    subdirectories and versions.
+*   <b>`version`</b>: `str`. Optional version at which to load the dataset. An
+    error is raised if specified version cannot be satisfied. Eg: '1.2.3',
+    '1.2.*'. The special value "experimental_latest" will use the highest
+    version, even if not default. This is not recommended unless you know what
+    you are doing, as the version could be broken.
 
 ## Properties
 
@@ -205,9 +221,6 @@ Downloads and prepares dataset for reading.
 ## Class Members
 
 *   `BUILDER_CONFIGS` <a id="BUILDER_CONFIGS"></a>
-*   `MANUAL_DOWNLOAD_INSTRUCTIONS = None`
-    <a id="MANUAL_DOWNLOAD_INSTRUCTIONS"></a>
 *   `SUPPORTED_VERSIONS` <a id="SUPPORTED_VERSIONS"></a>
-*   `VERSION = None` <a id="VERSION"></a>
 *   `builder_configs` <a id="builder_configs"></a>
 *   `name = 'beam_based_builder'` <a id="name"></a>

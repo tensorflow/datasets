@@ -50,7 +50,8 @@ VALIDATION | 5,622
 *   [https://github.com/Alex-Fabbri/Multi-News](https://github.com/Alex-Fabbri/Multi-News)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'document', u'summary')`
+
+`('document', 'summary')`
 
 ## Citation
 ```

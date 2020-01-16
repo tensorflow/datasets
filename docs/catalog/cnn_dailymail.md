@@ -64,7 +64,8 @@ FeaturesDict({
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'article', u'highlights')`
+
+`('article', 'highlights')`
 
 ## `cnn_dailymail/bytes`
 Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
@@ -97,7 +98,8 @@ FeaturesDict({
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'article', u'highlights')`
+
+`('article', 'highlights')`
 
 ## `cnn_dailymail/subwords32k`
 Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
@@ -130,7 +132,8 @@ FeaturesDict({
 *   [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'article', u'highlights')`
+
+`('article', 'highlights')`
 
 ## Citation
 ```

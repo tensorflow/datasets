@@ -28,7 +28,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Image`
 
 `FeatureConnector` for images.
@@ -204,6 +203,38 @@ source</a>
 get_serialized_info()
 ```
 
+Return the shape/dtype of features after encoding (for the adapter).
+
+The `FileAdapter` then use those information to write data on disk.
+
+This function indicates how this feature is encoded on file internally. The
+DatasetBuilder are written on disk as tf.train.Example proto.
+
+#### Ex:
+
+```
+return {
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
+    'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+    'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+}
+```
+
+FeatureConnector which are not containers should return the feature proto
+directly:
+
+```
+return tfds.features.TensorInfo(shape=(64, 64), tf.uint8)
+```
+
+If not defined, the retuned values are automatically deduced from the
+`get_tensor_info` function.
+
+#### Returns:
+
+*   <b>`features`</b>: Either a dict of feature proto object, or a feature proto
+    object
+
 <h3 id="get_tensor_info"><code>get_tensor_info</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/image_feature.py">View
@@ -212,6 +243,35 @@ source</a>
 ``` python
 get_tensor_info()
 ```
+
+Return the tf.Tensor dtype/shape of the feature.
+
+This returns the tensor dtype/shape, as returned by .as_dataset by the
+`tf.data.Dataset` object.
+
+#### Ex:
+
+```
+return {
+    'image': tfds.features.TensorInfo(shape=(None,), dtype=tf.uint8),
+    'height': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+    'width': tfds.features.TensorInfo(shape=(), dtype=tf.int32),
+}
+```
+
+FeatureConnector which are not containers should return the feature proto
+directly:
+
+```
+return tfds.features.TensorInfo(shape=(256, 256), dtype=tf.uint8)
+```
+
+#### Returns:
+
+*   <b>`tensor_info`</b>: Either a dict of
+    <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>
+    object, or a
+    <a href="../../tfds/features/TensorInfo.md"><code>tfds.features.TensorInfo</code></a>
 
 <h3 id="load_metadata"><code>load_metadata</code></h3>
 

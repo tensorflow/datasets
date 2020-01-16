@@ -64,7 +64,8 @@ FeaturesDict({
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'label')`
+
+`('text', 'label')`
 
 ## `imdb_reviews/bytes`
 Uses byte-level text encoding with `tfds.features.text.ByteTextEncoder`
@@ -96,7 +97,8 @@ FeaturesDict({
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'label')`
+
+`('text', 'label')`
 
 ## `imdb_reviews/subwords8k`
 Uses `tfds.features.text.SubwordTextEncoder` with 8k vocab size
@@ -128,7 +130,8 @@ FeaturesDict({
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'label')`
+
+`('text', 'label')`
 
 ## `imdb_reviews/subwords32k`
 Uses `tfds.features.text.SubwordTextEncoder` with 32k vocab size
@@ -160,7 +163,8 @@ FeaturesDict({
 *   [http://ai.stanford.edu/~amaas/data/sentiment/](http://ai.stanford.edu/~amaas/data/sentiment/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'text', u'label')`
+
+`('text', 'label')`
 
 ## Citation
 ```

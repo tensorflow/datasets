@@ -18,7 +18,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SplitInfo`
 
 Wraps `proto.SplitInfo` with an additional property.

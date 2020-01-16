@@ -70,7 +70,8 @@ VALIDATION | 108,837
 *   [https://summari.es](https://summari.es)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'text', u'summary')`
+
+`('text', 'summary')`
 
 ## Citation
 ```

@@ -23,7 +23,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DownloadManager`
 
 Manages the download and extraction of files, as well as caching.

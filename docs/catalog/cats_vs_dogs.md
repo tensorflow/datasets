@@ -46,7 +46,8 @@ TRAIN | 23,262
 *   [https://www.microsoft.com/en-us/download/details.aspx?id=54765](https://www.microsoft.com/en-us/download/details.aspx?id=54765)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

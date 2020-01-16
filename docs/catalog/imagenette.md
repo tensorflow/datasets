@@ -110,7 +110,8 @@ FeaturesDict({
 *   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `imagenette/320px`
 Imagenette is a subset of 10 easily classified classes from the Imagenet
@@ -151,7 +152,8 @@ FeaturesDict({
 *   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `imagenette/160px`
 Imagenette is a subset of 10 easily classified classes from the Imagenet
@@ -192,7 +194,8 @@ FeaturesDict({
 *   [https://github.com/fastai/imagenette](https://github.com/fastai/imagenette)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 

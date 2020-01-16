@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `BBox`
 
 BBox(ymin, xmin, ymax, xmax)

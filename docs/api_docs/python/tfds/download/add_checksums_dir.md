@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Registers a new checksums dir.
 
 ```python

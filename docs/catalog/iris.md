@@ -49,7 +49,8 @@ TRAIN | 150
 *   [https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'features', u'label')`
+
+`('features', 'label')`
 
 ## Citation
 ```

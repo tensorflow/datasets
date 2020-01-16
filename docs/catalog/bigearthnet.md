@@ -90,7 +90,8 @@ FeaturesDict({
 *   [http://bigearth.net](http://bigearth.net)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'labels')`
+
+`('image', 'labels')`
 
 ## `bigearthnet/all`
 13 Sentinel-2 channels

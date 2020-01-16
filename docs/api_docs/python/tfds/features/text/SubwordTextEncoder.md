@@ -22,7 +22,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SubwordTextEncoder`
 
 Invertible `TextEncoder` using word pieces with a byte-level fallback.
@@ -79,6 +78,8 @@ Note: To generate a vocabulary from a corpus, use
 <h3 id="subwords"><code>subwords</code></h3>
 
 <h3 id="vocab_size"><code>vocab_size</code></h3>
+
+Size of the vocabulary. Decode produces ints [1, vocab_size).
 
 ## Methods
 

@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Visualize images (and labels) from an image classification dataset.
 
 ```python
