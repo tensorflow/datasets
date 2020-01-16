@@ -72,7 +72,7 @@ class DownloadConfig(object):
       compute_stats: `tfds.download.ComputeStats`, whether to compute
         statistics over the generated data. Defaults to `AUTO`.
       max_examples_per_split: `int`, optional max number of examples to write
-        into each split.
+        into each split (used for testing).
       register_checksums: `bool`, defaults to False. If True, checksum of
         downloaded files are recorded.
       beam_runner: Runner to pass to `beam.Pipeline`, only used for datasets
