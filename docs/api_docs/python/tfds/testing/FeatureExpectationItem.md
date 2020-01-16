@@ -15,7 +15,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `FeatureExpectationItem`
 
 Test item of a FeatureExpectation.
@@ -40,3 +39,5 @@ __init__(
     raise_msg=None
 )
 ```
+
+Initialize self. See help(type(self)) for accurate signature.

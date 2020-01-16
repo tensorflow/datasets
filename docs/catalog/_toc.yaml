@@ -234,6 +234,8 @@ toc:
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
+  - path: /datasets/catalog/scan
+    title: scan
   - path: /datasets/catalog/scicite
     title: scicite
   - path: /datasets/catalog/snli

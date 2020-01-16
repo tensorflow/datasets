@@ -12,9 +12,7 @@
 <meta itemprop="property" content="as_dataset"/>
 <meta itemprop="property" content="download_and_prepare"/>
 <meta itemprop="property" content="BUILDER_CONFIGS"/>
-<meta itemprop="property" content="MANUAL_DOWNLOAD_INSTRUCTIONS"/>
 <meta itemprop="property" content="SUPPORTED_VERSIONS"/>
-<meta itemprop="property" content="VERSION"/>
 <meta itemprop="property" content="builder_configs"/>
 <meta itemprop="property" content="name"/>
 </div>
@@ -30,7 +28,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `DatasetBuilder`
 
 Abstract base class for all datasets.
@@ -256,9 +253,6 @@ Downloads and prepares dataset for reading.
 ## Class Members
 
 *   `BUILDER_CONFIGS` <a id="BUILDER_CONFIGS"></a>
-*   `MANUAL_DOWNLOAD_INSTRUCTIONS = None`
-    <a id="MANUAL_DOWNLOAD_INSTRUCTIONS"></a>
 *   `SUPPORTED_VERSIONS` <a id="SUPPORTED_VERSIONS"></a>
-*   `VERSION = None` <a id="VERSION"></a>
 *   `builder_configs` <a id="builder_configs"></a>
 *   `name = 'dataset_builder'` <a id="name"></a>

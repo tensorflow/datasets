@@ -101,7 +101,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'cs', u'en')`
+
+`('cs', 'en')`
 
 ## `wmt15_translate/de-en`
 WMT 2015 de-en translation task dataset.
@@ -138,7 +139,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'de', u'en')`
+
+`('de', 'en')`
 
 ## `wmt15_translate/fi-en`
 WMT 2015 fi-en translation task dataset.
@@ -175,7 +177,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fi', u'en')`
+
+`('fi', 'en')`
 
 ## `wmt15_translate/fr-en`
 WMT 2015 fr-en translation task dataset.
@@ -212,7 +215,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fr', u'en')`
+
+`('fr', 'en')`
 
 ## `wmt15_translate/ru-en`
 WMT 2015 ru-en translation task dataset.
@@ -249,7 +253,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+
+`('ru', 'en')`
 
 ## `wmt15_translate/cs-en.subwords8k`
 WMT 2015 cs-en translation task dataset with subword encoding.
@@ -285,7 +290,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'cs', u'en')`
+
+`('cs', 'en')`
 
 ## `wmt15_translate/de-en.subwords8k`
 WMT 2015 de-en translation task dataset with subword encoding.
@@ -321,7 +327,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'de', u'en')`
+
+`('de', 'en')`
 
 ## `wmt15_translate/fi-en.subwords8k`
 WMT 2015 fi-en translation task dataset with subword encoding.
@@ -357,7 +364,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fi', u'en')`
+
+`('fi', 'en')`
 
 ## `wmt15_translate/fr-en.subwords8k`
 WMT 2015 fr-en translation task dataset with subword encoding.
@@ -393,7 +401,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fr', u'en')`
+
+`('fr', 'en')`
 
 ## `wmt15_translate/ru-en.subwords8k`
 WMT 2015 ru-en translation task dataset with subword encoding.
@@ -429,7 +438,8 @@ Translation({
 *   [http://www.statmt.org/wmt15/translation-task.html](http://www.statmt.org/wmt15/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+
+`('ru', 'en')`
 
 ## Citation
 ```

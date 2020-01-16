@@ -56,7 +56,8 @@ Translation({
 *   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ne', u'en')`
+
+`('ne', 'en')`
 
 ## `flores/sien_plain_text`
 Translation dataset from si to en, uses encoder plain_text.
@@ -87,7 +88,8 @@ Translation({
 *   [https://github.com/facebookresearch/flores/](https://github.com/facebookresearch/flores/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'si', u'en')`
+
+`('si', 'en')`
 
 ## Citation
 ```

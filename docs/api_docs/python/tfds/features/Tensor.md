@@ -25,7 +25,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Tensor`
 
 `FeatureConnector` for generic data of arbitrary shape and type.

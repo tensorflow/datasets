@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Execute the decorated test in both graph mode and eager mode.
 
 ``` python

@@ -60,7 +60,8 @@ TRAIN | 1,309
 *   [https://www.openml.org/d/40945](https://www.openml.org/d/40945)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'features', u'survived')`
+
+`('features', 'survived')`
 
 ## Citation
 ```

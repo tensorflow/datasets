@@ -16,7 +16,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Experiment`
 
 Experiments which can be enabled/disabled on a per version basis.

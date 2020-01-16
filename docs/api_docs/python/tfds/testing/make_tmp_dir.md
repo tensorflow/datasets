@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Make a temporary directory.
 
 ``` python

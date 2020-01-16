@@ -51,7 +51,8 @@ CA_TEST | 1,237
 *   [https://github.com/FiscalNote/BillSum](https://github.com/FiscalNote/BillSum)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'text', u'summary')`
+
+`('text', 'summary')`
 
 ## Citation
 ```

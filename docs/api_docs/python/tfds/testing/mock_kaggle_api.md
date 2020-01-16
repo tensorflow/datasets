@@ -11,7 +11,6 @@
 </table>
 
 <!-- Equality marker -->
-
 Mock out the kaggle CLI.
 
 ``` python

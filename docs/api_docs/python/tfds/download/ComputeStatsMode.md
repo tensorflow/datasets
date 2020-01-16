@@ -17,7 +17,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `ComputeStatsMode`
 
 Mode to decide if dynamic dataset info fields should be computed or not.

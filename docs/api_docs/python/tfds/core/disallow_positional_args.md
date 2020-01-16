@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Requires function to be called using keyword arguments.
 
 ```python

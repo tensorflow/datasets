@@ -21,7 +21,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `ReadConfig`
 
 Configures input reading pipeline.
@@ -61,6 +60,8 @@ __init__(
 )
 ```
 
+Initialize self. See help(type(self)) for accurate signature.
+
 ## Methods
 
 <h3 id="__eq__"><code>__eq__</code></h3>
@@ -68,6 +69,8 @@ __init__(
 ```python
 __eq__(other)
 ```
+
+Return self==value.
 
 <h3 id="__ge__"><code>__ge__</code></h3>
 

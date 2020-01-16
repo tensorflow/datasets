@@ -17,7 +17,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `TensorInfo`
 
 Structure containing info on the `tf.Tensor` shape/dtype.

@@ -53,7 +53,8 @@ TRAIN | 54,303
 *   [https://arxiv.org/abs/1511.08060](https://arxiv.org/abs/1511.08060)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

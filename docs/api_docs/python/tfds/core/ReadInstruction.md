@@ -18,7 +18,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `ReadInstruction`
 
 Reading instruction for a dataset.

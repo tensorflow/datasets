@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `FileFormatAdapter`
 
 Provides writing and reading methods for a file format.

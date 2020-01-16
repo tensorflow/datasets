@@ -25,7 +25,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `BBoxFeature`
 
 `FeatureConnector` for a normalized bounding box.
@@ -74,6 +73,8 @@ source</a>
 ``` python
 __init__()
 ```
+
+Construct a Tensor feature.
 
 ## Properties
 

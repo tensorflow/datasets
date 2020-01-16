@@ -19,7 +19,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `SkipDecoding`
 
 Transformation which skip the decoding entirelly.
@@ -52,9 +51,13 @@ source</a>
 __init__()
 ```
 
+Initialize self. See help(type(self)) for accurate signature.
+
 ## Properties
 
 <h3 id="dtype"><code>dtype</code></h3>
+
+Returns the `dtype` after decoding.
 
 ## Methods
 

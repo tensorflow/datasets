@@ -60,7 +60,8 @@ FeaturesDict({
 *   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `eurosat/all`
 13 Sentinel-2 channels
@@ -90,7 +91,8 @@ FeaturesDict({
 *   [https://github.com/phelber/eurosat](https://github.com/phelber/eurosat)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'sentinel2', u'label')`
+
+`('sentinel2', 'label')`
 
 ## Citation
 ```

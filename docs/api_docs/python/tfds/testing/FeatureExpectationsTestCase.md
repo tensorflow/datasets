@@ -5,7 +5,6 @@
 <meta itemprop="property" content="__call__"/>
 <meta itemprop="property" content="__eq__"/>
 <meta itemprop="property" content="__init__"/>
-<meta itemprop="property" content="__ne__"/>
 <meta itemprop="property" content="addCleanup"/>
 <meta itemprop="property" content="addExternalLink"/>
 <meta itemprop="property" content="addTypeEqualityFunc"/>
@@ -97,6 +96,8 @@
 <meta itemprop="property" content="assertTrue"/>
 <meta itemprop="property" content="assertTupleEqual"/>
 <meta itemprop="property" content="assertUrlEqual"/>
+<meta itemprop="property" content="assertWarns"/>
+<meta itemprop="property" content="assertWarnsRegex"/>
 <meta itemprop="property" content="assert_"/>
 <meta itemprop="property" content="cached_session"/>
 <meta itemprop="property" content="captureWritesToStream"/>
@@ -133,8 +134,6 @@
 <meta itemprop="property" content="tearDown"/>
 <meta itemprop="property" content="tearDownClass"/>
 <meta itemprop="property" content="test_session"/>
-<meta itemprop="property" content="MOCK_MONARCH"/>
-<meta itemprop="property" content="longMessage"/>
 <meta itemprop="property" content="maxDiff"/>
 <meta itemprop="property" content="tempfile_cleanup"/>
 </div>
@@ -150,7 +149,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `FeatureExpectationsTestCase`
 
 Tests FeatureExpectations with full encode-decode.
@@ -166,6 +164,10 @@ Inherits From: [`SubTestCase`](../../tfds/testing/SubTestCase.md)
 __init__(methodName='runTest')
 ```
 
+Create an instance of the class that will use the named test method when
+executed. Raises a ValueError if the instance does not have a method with the
+specified name.
+
 ## Child Classes
 [`class failureException`](../../tfds/testing/DatasetBuilderTestCase/failureException.md)
 
@@ -180,17 +182,15 @@ __call__(
 )
 ```
 
+Call self as a function.
+
 <h3 id="__eq__"><code>__eq__</code></h3>
 
 ``` python
 __eq__(other)
 ```
 
-<h3 id="__ne__"><code>__ne__</code></h3>
-
-``` python
-__ne__(other)
-```
+Return self==value.
 
 <h3 id="addCleanup"><code>addCleanup</code></h3>
 
@@ -492,26 +492,12 @@ compare almost equal.
 
 <h3 id="assertAlmostEquals"><code>assertAlmostEquals</code></h3>
 
-``` python
+```python
 assertAlmostEquals(
-    first,
-    second,
-    places=None,
-    msg=None,
-    delta=None
+    *args,
+    **kwargs
 )
 ```
-
-Fail if the two objects are unequal as determined by their difference rounded to
-the given number of decimal places (default 7) and comparing to zero, or by
-comparing that the difference between the two objects is more than the given
-delta.
-
-Note that decimal places (from zero) are usually not the same
-as significant digits (measured from the most significant digit).
-
-If the two objects compare equal then they will automatically
-compare almost equal.
 
 <h3 id="assertArrayNear"><code>assertArrayNear</code></h3>
 
@@ -575,10 +561,10 @@ Asserts a shell command fails and the error matches a regex in a list.
 
 <h3 id="assertCommandSucceeds"><code>assertCommandSucceeds</code></h3>
 
-``` python
+```python
 assertCommandSucceeds(
     command,
-    regexes=('',),
+    regexes=(b'',),
     env=None,
     close_fds=True,
     msg=None
@@ -679,38 +665,23 @@ Checks whether actual iterable is a superset of expected iterable.
 
 <h3 id="assertCountEqual"><code>assertCountEqual</code></h3>
 
-``` python
+```python
 assertCountEqual(
-    expected_seq,
-    actual_seq,
+    first,
+    second,
     msg=None
 )
 ```
 
-Tests two sequences have the same elements regardless of order.
+An unordered sequence comparison asserting that the same elements, regardless of
+order. If the same element occurs more than once, it verifies that the elements
+occur the same number of times.
 
-It tests that the first sequence contains the same elements as the
-second, regardless of their order. When they don't, an error message
-listing the differences between the sequences will be generated.
+    self.assertEqual(Counter(list(first)),
+                     Counter(list(second)))
 
-Duplicate elements are not ignored when comparing first and second. It verifies
-whether each element has the same count in both sequences. Equivalent to:
-
-    self.assertEqual(Counter(list(expected_seq)),
-                     Counter(list(actual_seq)))
-
-but works with sequences of unhashable objects as well.
-
-#### Example:
-
--   [0, 1, 1] and [1, 0, 1] compare equal.
--   [0, 0, 1] and [0, 1] compare unequal.
-
-#### Args:
-
-* <b>`expected_seq`</b>: A sequence containing elements we are expecting.
-* <b>`actual_seq`</b>: The sequence that we are testing.
-* <b>`msg`</b>: The message to be printed if the test fails.
+Example: - [0, 1, 1] and [1, 0, 1] compare equal. - [0, 0, 1] and [0, 1] compare
+unequal.
 
 <h3 id="assertDTypeEqual"><code>assertDTypeEqual</code></h3>
 
@@ -749,15 +720,15 @@ Asserts that the two given devices are the same.
 
 <h3 id="assertDictContainsSubset"><code>assertDictContainsSubset</code></h3>
 
-``` python
+```python
 assertDictContainsSubset(
-    expected,
-    actual,
+    subset,
+    dictionary,
     msg=None
 )
 ```
 
-Checks whether actual is a superset of expected.
+Checks whether dictionary is a superset of subset.
 
 <h3 id="assertDictEqual"><code>assertDictEqual</code></h3>
 
@@ -831,15 +802,12 @@ Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertEquals"><code>assertEquals</code></h3>
 
-``` python
+```python
 assertEquals(
-    first,
-    second,
-    msg=None
+    *args,
+    **kwargs
 )
 ```
-
-Fail if the two objects are unequal as determined by the '==' operator.
 
 <h3 id="assertFalse"><code>assertFalse</code></h3>
 
@@ -979,24 +947,23 @@ Included for symmetry with assertIsNone.
 
 <h3 id="assertItemsEqual"><code>assertItemsEqual</code></h3>
 
-``` python
+```python
 assertItemsEqual(
-    expected_seq,
-    actual_seq,
+    first,
+    second,
     msg=None
 )
 ```
 
-Deprecated, please use assertCountEqual instead.
+An unordered sequence comparison asserting that the same elements, regardless of
+order. If the same element occurs more than once, it verifies that the elements
+occur the same number of times.
 
-This is equivalent to assertCountEqual in Python 3. An implementation of
-assertCountEqual is also provided by absltest.TestCase for Python 2.
+    self.assertEqual(Counter(list(first)),
+                     Counter(list(second)))
 
-#### Args:
-
-* <b>`expected_seq`</b>: A sequence containing elements we are expecting.
-* <b>`actual_seq`</b>: The sequence that we are testing.
-* <b>`msg`</b>: The message to be printed if the test fails.
+Example: - [0, 1, 1] and [1, 0, 1] compare equal. - [0, 0, 1] and [0, 1] compare
+unequal.
 
 <h3 id="assertJsonEqual"><code>assertJsonEqual</code></h3>
 
@@ -1089,6 +1056,23 @@ assertLogs(
     **kwds
 )
 ```
+
+Fail unless a log message of level *level* or higher is emitted on *logger_name*
+or its children. If omitted, *level* defaults to INFO and *logger* defaults to
+the root logger.
+
+This method must be used as a context manager, and will yield a recording object
+with two attributes: `output` and `records`. At the end of the context manager,
+the `output` attribute will be a list of the matching formatted log messages and
+the `records` attribute will be a list of the corresponding LogRecord objects.
+
+Example::
+
+    with self.assertLogs('foo', level='INFO') as cm:
+        logging.getLogger('foo').info('first message')
+        logging.getLogger('foo.bar').error('second message')
+    self.assertEqual(cm.output, ['INFO:foo:first message',
+                                 'ERROR:foo.bar:second message'])
 
 <h3 id="assertMultiLineEqual"><code>assertMultiLineEqual</code></h3>
 
@@ -1217,25 +1201,12 @@ Objects that are equal automatically fail.
 
 <h3 id="assertNotAlmostEquals"><code>assertNotAlmostEquals</code></h3>
 
-``` python
+```python
 assertNotAlmostEquals(
-    first,
-    second,
-    places=None,
-    msg=None,
-    delta=None
+    *args,
+    **kwargs
 )
 ```
-
-Fail if the two objects are equal as determined by their difference rounded to
-the given number of decimal places (default 7) and comparing to zero, or by
-comparing that the difference between the two objects is less than the given
-delta.
-
-Note that decimal places (from zero) are usually not the same
-as significant digits (measured from the most significant digit).
-
-Objects that are equal automatically fail.
 
 <h3 id="assertNotEmpty"><code>assertNotEmpty</code></h3>
 
@@ -1286,15 +1257,12 @@ Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotEquals"><code>assertNotEquals</code></h3>
 
-``` python
+```python
 assertNotEquals(
-    first,
-    second,
-    msg=None
+    *args,
+    **kwargs
 )
 ```
-
-Fail if the two objects are equal as determined by the '!=' operator.
 
 <h3 id="assertNotIn"><code>assertNotIn</code></h3>
 
@@ -1322,24 +1290,24 @@ Included for symmetry with assertIsInstance.
 
 <h3 id="assertNotRegex"><code>assertNotRegex</code></h3>
 
-``` python
+```python
 assertNotRegex(
-    *args,
-    **kwargs
-)
-```
-
-<h3 id="assertNotRegexpMatches"><code>assertNotRegexpMatches</code></h3>
-
-``` python
-assertNotRegexpMatches(
     text,
-    unexpected_regexp,
+    unexpected_regex,
     msg=None
 )
 ```
 
 Fail the test if the text matches the regular expression.
+
+<h3 id="assertNotRegexpMatches"><code>assertNotRegexpMatches</code></h3>
+
+```python
+assertNotRegexpMatches(
+    *args,
+    **kwargs
+)
+```
 
 <h3 id="assertNotStartsWith"><code>assertNotStartsWith</code></h3>
 
@@ -1394,25 +1362,27 @@ assertProtoEqualsVersion(
 
 <h3 id="assertRaises"><code>assertRaises</code></h3>
 
-``` python
+```python
 assertRaises(
-    excClass,
-    callableObj=None,
+    expected_exception,
     *args,
     **kwargs
 )
 ```
 
-Fail unless an exception of class excClass is raised by callableObj when invoked
-with arguments args and keyword arguments kwargs. If a different type of
-exception is raised, it will not be caught, and the test case will be deemed to
-have suffered an error, exactly as for an unexpected exception.
+Fail unless an exception of class expected_exception is raised by the callable
+when invoked with specified positional and keyword arguments. If a different
+type of exception is raised, it will not be caught, and the test case will be
+deemed to have suffered an error, exactly as for an unexpected exception.
 
-If called with callableObj omitted or None, will return a
-context object used like this::
+If called with the callable and arguments omitted, will return a context object
+used like this::
 
      with self.assertRaises(SomeException):
          do_something()
+
+An optional keyword argument 'msg' can be provided when assertRaises is used as
+a context object.
 
 The context manager keeps a reference to the exception as
 the 'exception' attribute. This allows you to inspect the
@@ -1431,35 +1401,49 @@ assertRaisesOpError(expected_err_re_or_predicate)
 
 <h3 id="assertRaisesRegex"><code>assertRaisesRegex</code></h3>
 
-``` python
+```python
 assertRaisesRegex(
-    *args,
-    **kwargs
-)
-```
-
-<h3 id="assertRaisesRegexp"><code>assertRaisesRegexp</code></h3>
-
-``` python
-assertRaisesRegexp(
     expected_exception,
-    expected_regexp,
-    callable_obj=None,
+    expected_regex,
     *args,
     **kwargs
 )
 ```
 
-Asserts that the message in a raised exception matches a regexp.
+Asserts that the message in a raised exception matches a regex.
 
 #### Args:
 
 *   <b>`expected_exception`</b>: Exception class expected to be raised.
-*   <b>`expected_regexp`</b>: Regexp (re pattern object or string) expected to
-    be found in error message.
-*   <b>`callable_obj`</b>: Function to be called.
-*   <b>`args`</b>: Extra args.
+*   <b>`expected_regex`</b>: Regex (re pattern object or string) expected to be
+    found in error message.
+*   <b>`args`</b>: Function to be called and extra positional args.
 *   <b>`kwargs`</b>: Extra kwargs.
+*   <b>`msg`</b>: Optional message used in case of failure. Can only be used
+    when assertRaisesRegex is used as a context manager.
+
+<h3 id="assertRaisesRegexp"><code>assertRaisesRegexp</code></h3>
+
+```python
+assertRaisesRegexp(
+    expected_exception,
+    expected_regex,
+    *args,
+    **kwargs
+)
+```
+
+Asserts that the message in a raised exception matches a regex.
+
+#### Args:
+
+*   <b>`expected_exception`</b>: Exception class expected to be raised.
+*   <b>`expected_regex`</b>: Regex (re pattern object or string) expected to be
+    found in error message.
+*   <b>`args`</b>: Function to be called and extra positional args.
+*   <b>`kwargs`</b>: Extra kwargs.
+*   <b>`msg`</b>: Optional message used in case of failure. Can only be used
+    when assertRaisesRegex is used as a context manager.
 
 <h3 id="assertRaisesWithLiteralMatch"><code>assertRaisesWithLiteralMatch</code></h3>
 
@@ -1511,37 +1495,47 @@ assertRaisesWithPredicateMatch(
 )
 ```
 
+Returns a context manager to enclose code expected to raise an exception.
+
+If the exception is an OpError, the op stack is also included in the message
+predicate search.
+
+#### Args:
+
+*   <b>`exception_type`</b>: The expected type of exception that should be
+    raised.
+*   <b>`expected_err_re_or_predicate`</b>: If this is callable, it should be a
+    function of one argument that inspects the passed-in exception and returns
+    True (success) or False (please fail the test). Otherwise, the error message
+    is expected to match this regular expression partially.
+
+#### Returns:
+
+A context manager to surround code that is expected to raise an exception.
+
 <h3 id="assertRaisesWithRegexpMatch"><code>assertRaisesWithRegexpMatch</code></h3>
 
 ``` python
 assertRaisesWithRegexpMatch(
-    expected_exception,
-    expected_regexp,
-    callable_obj=None,
     *args,
     **kwargs
 )
 ```
 
-Asserts that the message in a raised exception matches a regexp.
 
-#### Args:
 
-*   <b>`expected_exception`</b>: Exception class expected to be raised.
-*   <b>`expected_regexp`</b>: Regexp (re pattern object or string) expected to
-    be found in error message.
-*   <b>`callable_obj`</b>: Function to be called.
-*   <b>`args`</b>: Extra args.
-*   <b>`kwargs`</b>: Extra kwargs.
 
 <h3 id="assertRegex"><code>assertRegex</code></h3>
 
-``` python
+```python
 assertRegex(
-    *args,
-    **kwargs
+    text,
+    expected_regex,
+    msg=None
 )
 ```
+
+Fail the test unless the text matches the regular expression.
 
 <h3 id="assertRegexMatch"><code>assertRegexMatch</code></h3>
 
@@ -1588,15 +1582,12 @@ expression (a string or re compiled object) instead of a list.
 
 <h3 id="assertRegexpMatches"><code>assertRegexpMatches</code></h3>
 
-``` python
+```python
 assertRegexpMatches(
-    text,
-    expected_regexp,
-    msg=None
+    *args,
+    **kwargs
 )
 ```
-
-Fail the test unless the text matches the regular expression.
 
 <h3 id="assertSameElements"><code>assertSameElements</code></h3>
 
@@ -1894,16 +1885,75 @@ assertUrlEqual(
 
 Asserts that urls are equal, ignoring ordering of query params.
 
-<h3 id="assert_"><code>assert_</code></h3>
+<h3 id="assertWarns"><code>assertWarns</code></h3>
 
-``` python
-assert_(
-    expr,
-    msg=None
+```python
+assertWarns(
+    expected_warning,
+    *args,
+    **kwargs
 )
 ```
 
-Check that the expression is true.
+Fail unless a warning of class warnClass is triggered by the callable when
+invoked with specified positional and keyword arguments. If a different type of
+warning is triggered, it will not be handled: depending on the other warning
+filtering rules in effect, it might be silenced, printed out, or raised as an
+exception.
+
+If called with the callable and arguments omitted, will return a context object
+used like this::
+
+     with self.assertWarns(SomeWarning):
+         do_something()
+
+An optional keyword argument 'msg' can be provided when assertWarns is used as a
+context object.
+
+The context manager keeps a reference to the first matching warning as the
+'warning' attribute; similarly, the 'filename' and 'lineno' attributes give you
+information about the line of Python code from which the warning was triggered.
+This allows you to inspect the warning after the assertion::
+
+    with self.assertWarns(SomeWarning) as cm:
+        do_something()
+    the_warning = cm.warning
+    self.assertEqual(the_warning.some_attribute, 147)
+
+<h3 id="assertWarnsRegex"><code>assertWarnsRegex</code></h3>
+
+```python
+assertWarnsRegex(
+    expected_warning,
+    expected_regex,
+    *args,
+    **kwargs
+)
+```
+
+Asserts that the message in a triggered warning matches a regexp. Basic
+functioning is similar to assertWarns() with the addition that only warnings
+whose messages also match the regular expression are considered successful
+matches.
+
+#### Args:
+
+*   <b>`expected_warning`</b>: Warning class expected to be triggered.
+*   <b>`expected_regex`</b>: Regex (re pattern object or string) expected to be
+    found in error message.
+*   <b>`args`</b>: Function to be called and extra positional args.
+*   <b>`kwargs`</b>: Extra kwargs.
+*   <b>`msg`</b>: Optional message used in case of failure. Can only be used
+    when assertWarnsRegex is used as a context manager.
+
+<h3 id="assert_"><code>assert_</code></h3>
+
+```python
+assert_(
+    *args,
+    **kwargs
+)
+```
 
 <h3 id="cached_session"><code>cached_session</code></h3>
 
@@ -2339,7 +2389,7 @@ session(
 )
 ```
 
-Returns a TensorFlow Session for use in executing tests.
+A context manager for a TensorFlow Session for use in executing tests.
 
 Note that this will set this session and the graph as global defaults.
 
@@ -2385,6 +2435,8 @@ source</a>
 setUp()
 ```
 
+Hook method for setting up the test fixture before exercising it.
+
 <h3 id="setUpClass"><code>setUpClass</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
@@ -2393,6 +2445,8 @@ source</a>
 ``` python
 setUpClass(cls)
 ```
+
+Hook method for setting up class fixture before running tests in the class.
 
 <h3 id="shortDescription"><code>shortDescription</code></h3>
 
@@ -2429,13 +2483,18 @@ subTest(
 )
 ```
 
-Return a context manager that will run the enclosed subtest.
+Return a context manager that will return the enclosed block of code in a
+subtest identified by the optional message and keyword parameters. A failure in
+the subtest marks the test case as failed but resumes execution at the end of
+the enclosed block, allowing further test code to be executed.
 
 <h3 id="tearDown"><code>tearDown</code></h3>
 
 ``` python
 tearDown()
 ```
+
+Hook method for deconstructing the test fixture after testing it.
 
 <h3 id="tearDownClass"><code>tearDownClass</code></h3>
 
@@ -2464,7 +2523,5 @@ Use `self.session()` or `self.cached_session()` instead.
 
 ## Class Members
 
-*   `MOCK_MONARCH = True` <a id="MOCK_MONARCH"></a>
-*   `longMessage = True` <a id="longMessage"></a>
 *   `maxDiff = 1600` <a id="maxDiff"></a>
 *   `tempfile_cleanup` <a id="tempfile_cleanup"></a>

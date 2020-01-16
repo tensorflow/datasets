@@ -67,7 +67,8 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `emnist/bymerge`
 EMNIST ByMerge
@@ -98,7 +99,8 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `emnist/balanced`
 EMNIST Balanced
@@ -129,7 +131,8 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `emnist/letters`
 EMNIST Letters
@@ -160,7 +163,8 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `emnist/digits`
 EMNIST Digits
@@ -191,7 +195,8 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `emnist/mnist`
 EMNIST MNIST
@@ -222,7 +227,8 @@ FeaturesDict({
 *   [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

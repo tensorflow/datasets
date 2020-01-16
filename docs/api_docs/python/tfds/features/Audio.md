@@ -25,7 +25,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `Audio`
 
 `FeatureConnector` for audio, encoded as raw integer wave form.
@@ -123,6 +122,8 @@ source</a>
 ``` python
 encode_example(audio_or_path_or_fobj)
 ```
+
+See base class for details.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 

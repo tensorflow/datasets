@@ -14,7 +14,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
 ``` python

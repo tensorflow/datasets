@@ -16,7 +16,6 @@
 source</a>
 
 <!-- Equality marker -->
-
 ## Class `RaggedConstant`
 
 Container of tf.ragged.constant values.
@@ -38,6 +37,8 @@ __init__(
     **kwargs
 )
 ```
+
+Initialize self. See help(type(self)) for accurate signature.
 
 ## Methods
 

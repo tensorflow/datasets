@@ -74,7 +74,8 @@ Translation({
 *   [https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/data_generators/translate_ende.py)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'de', u'en')`
+
+`('de', 'en')`
 
 ## Citation
 ```

@@ -95,7 +95,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/cifar100`
 
@@ -129,7 +130,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/daimlerpedcls`
 
@@ -163,7 +165,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/dtd`
 
@@ -197,7 +200,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/gtsrb`
 
@@ -231,7 +235,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/imagenet12`
 
@@ -265,7 +270,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/omniglot`
 
@@ -299,7 +305,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/svhn`
 
@@ -333,7 +340,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/ucf101`
 
@@ -367,7 +375,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## `visual_domain_decathlon/vgg-flowers`
 
@@ -401,7 +410,8 @@ FeaturesDict({
 *   [https://www.robots.ox.ac.uk/~vgg/decathlon/](https://www.robots.ox.ac.uk/~vgg/decathlon/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```
