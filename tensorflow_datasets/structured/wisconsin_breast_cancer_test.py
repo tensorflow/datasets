@@ -26,7 +26,7 @@ class WisconsinTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = wisconsin.WisconsinBreastCancer
 
   SPLITS = {
-      "train": 60,
+      "train": 15,
   }
   DL_EXTRACT_RESULT = "wdbc.data"
 
