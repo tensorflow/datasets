@@ -20,7 +20,7 @@ from xml.etree import ElementTree
 
 import concurrent.futures
 import requests
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import utils
 

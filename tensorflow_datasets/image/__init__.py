@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.image.abstract_reasoning import AbstractReasoning
 from tensorflow_datasets.image.aflw2k3d import Aflw2k3d
+from tensorflow_datasets.image.arc import ARC
 from tensorflow_datasets.image.bigearthnet import Bigearthnet
 from tensorflow_datasets.image.binarized_mnist import BinarizedMNIST
 from tensorflow_datasets.image.binary_alpha_digits import BinaryAlphaDigits
@@ -34,6 +35,7 @@ from tensorflow_datasets.image.cifar import Cifar100
 from tensorflow_datasets.image.cifar10_1 import Cifar10_1
 from tensorflow_datasets.image.cifar10_corrupted import Cifar10Corrupted
 from tensorflow_datasets.image.citrus import CitrusLeaves
+from tensorflow_datasets.image.cityscapes import Cityscapes
 from tensorflow_datasets.image.clevr import CLEVR
 from tensorflow_datasets.image.cmaterdb import Cmaterdb
 from tensorflow_datasets.image.coil100 import Coil100
@@ -55,6 +57,7 @@ from tensorflow_datasets.image.image_folder import ImageLabelFolder
 from tensorflow_datasets.image.imagenet import Imagenet2012
 from tensorflow_datasets.image.imagenet2012_corrupted import Imagenet2012Corrupted
 from tensorflow_datasets.image.imagenet_resized import ImagenetResized
+from tensorflow_datasets.image.imagenette import Imagenette
 from tensorflow_datasets.image.inaturalist import INaturalist2017
 from tensorflow_datasets.image.lfw import LFW
 from tensorflow_datasets.image.lost_and_found import LostAndFound
@@ -87,4 +90,5 @@ from tensorflow_datasets.image.sun import Sun397
 from tensorflow_datasets.image.svhn import SvhnCropped
 from tensorflow_datasets.image.the300w_lp import The300wLp
 from tensorflow_datasets.image.uc_merced import UcMerced
+from tensorflow_datasets.image.vgg_face2 import VggFace2
 from tensorflow_datasets.image.visual_domain_decathlon import VisualDomainDecathlon

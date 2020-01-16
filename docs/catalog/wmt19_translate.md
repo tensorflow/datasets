@@ -97,7 +97,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'cs', u'en')`
+
+`('cs', 'en')`
 
 ## `wmt19_translate/de-en`
 WMT 2019 de-en translation task dataset.
@@ -133,7 +134,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'de', u'en')`
+
+`('de', 'en')`
 
 ## `wmt19_translate/fi-en`
 WMT 2019 fi-en translation task dataset.
@@ -169,7 +171,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fi', u'en')`
+
+`('fi', 'en')`
 
 ## `wmt19_translate/gu-en`
 WMT 2019 gu-en translation task dataset.
@@ -205,7 +208,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'gu', u'en')`
+
+`('gu', 'en')`
 
 ## `wmt19_translate/kk-en`
 WMT 2019 kk-en translation task dataset.
@@ -241,7 +245,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'kk', u'en')`
+
+`('kk', 'en')`
 
 ## `wmt19_translate/lt-en`
 WMT 2019 lt-en translation task dataset.
@@ -277,7 +282,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'lt', u'en')`
+
+`('lt', 'en')`
 
 ## `wmt19_translate/ru-en`
 WMT 2019 ru-en translation task dataset.
@@ -313,7 +319,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+
+`('ru', 'en')`
 
 ## `wmt19_translate/zh-en`
 WMT 2019 zh-en translation task dataset.
@@ -349,7 +356,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'zh', u'en')`
+
+`('zh', 'en')`
 
 ## `wmt19_translate/fr-de`
 WMT 2019 fr-de translation task dataset.
@@ -385,7 +393,8 @@ Translation({
 *   [http://www.statmt.org/wmt19/translation-task.html](http://www.statmt.org/wmt19/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fr', u'de')`
+
+`('fr', 'de')`
 
 ## Citation
 ```

@@ -20,9 +20,8 @@ from __future__ import division
 from __future__ import print_function
 import csv
 import os
-import six
 import six.moves.urllib as urllib
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.csail.mit.edu/places/places365/"
@@ -73,21 +72,24 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION)
 
   def _split_generators(self, dl_manager):
-    output_files = dl_manager.download_and_extract({
+    output_archives = dl_manager.download({
         "train": urllib.parse.urljoin(_BASE_URL, _TRAIN_URL),
         "test": urllib.parse.urljoin(_BASE_URL, _TEST_URL),
         "validation": urllib.parse.urljoin(_BASE_URL, _VALID_URL),
-        "annotation": urllib.parse.urljoin(_BASE_URL, _FILE_ANNOTATION_URL),
     })
+    annotation_path = dl_manager.download_and_extract(
+        urllib.parse.urljoin(_BASE_URL, _FILE_ANNOTATION_URL))
 
     return [
         tfds.core.SplitGenerator(
             name="train",
             gen_kwargs={
-                "data_dir_path":
-                    os.path.join(output_files["train"], "data_256"),
+                "archive":
+                    dl_manager.iter_archive(output_archives["train"]),
+                "path_prefix":
+                    "data_256",
                 "annotation_path":
-                    os.path.join(output_files["annotation"],
+                    os.path.join(annotation_path,
                                  "places365_train_standard.txt"),
                 "split_name":
                     "train",
@@ -96,11 +98,12 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name="test",
             gen_kwargs={
-                "data_dir_path":
-                    os.path.join(output_files["test"], "test_256"),
+                "archive":
+                    dl_manager.iter_archive(output_archives["test"]),
+                "path_prefix":
+                    "test_256",
                 "annotation_path":
-                    os.path.join(output_files["annotation"],
-                                 "places365_test.txt"),
+                    os.path.join(annotation_path, "places365_test.txt"),
                 "split_name":
                     "test",
             },
@@ -108,18 +111,20 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name="validation",
             gen_kwargs={
-                "data_dir_path":
-                    os.path.join(output_files["validation"], "val_256"),
+                "archive":
+                    dl_manager.iter_archive(output_archives["validation"]),
+                "path_prefix":
+                    "val_256",
                 "annotation_path":
-                    os.path.join(output_files["annotation"],
-                                 "places365_val.txt"),
+                    os.path.join(annotation_path, "places365_val.txt"),
                 "split_name":
                     "validation",
             },
         ),
     ]
 
-  def _generate_examples(self, data_dir_path, split_name, annotation_path):
+  def _generate_examples(self, archive, path_prefix, split_name,
+                         annotation_path):
     with tf.io.gfile.GFile(annotation_path) as f:
       if split_name == "test":
         # test split doesn't have labels assigned.
@@ -127,10 +132,12 @@ class Places365Small(tfds.core.GeneratorBasedBuilder):
       else:
         file_to_class = {x[0]: int(x[1]) for x in csv.reader(f, delimiter=" ")}
 
-    for filepath, class_id in six.iteritems(file_to_class):
-      yield filepath, {
-          # it is a "+" instead of os.path.join on purpose.
-          # as some annotation file entries contain paths starting with "/"
-          "image": os.path.normpath(data_dir_path + "/" + filepath),
-          "label": class_id
-      }
+    for fname, fobj in archive:
+      assert fname.startswith(path_prefix)
+      # The filenames in annotations for train start with "/" while the names
+      # for test and validation do not have a leading "/", so we chop
+      # differently.
+      chop = len(path_prefix) if split_name == "train" else len(path_prefix) + 1
+      key = fname[chop:]
+      class_id = file_to_class[key]
+      yield fname, {"image": fobj, "label": class_id}

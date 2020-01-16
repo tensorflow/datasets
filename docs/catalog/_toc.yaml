@@ -12,6 +12,8 @@ toc:
     title: abstract_reasoning (manual)
   - path: /datasets/catalog/aflw2k3d
     title: aflw2k3d
+  - path: /datasets/catalog/arc
+    title: arc
   - path: /datasets/catalog/bigearthnet
     title: bigearthnet
   - path: /datasets/catalog/binarized_mnist
@@ -44,6 +46,8 @@ toc:
     title: cifar10_corrupted
   - path: /datasets/catalog/citrus_leaves
     title: citrus_leaves
+  - path: /datasets/catalog/cityscapes
+    title: cityscapes (manual)
   - path: /datasets/catalog/clevr
     title: clevr
   - path: /datasets/catalog/cmaterdb
@@ -92,6 +96,8 @@ toc:
     title: imagenet2012_corrupted (manual)
   - path: /datasets/catalog/imagenet_resized
     title: imagenet_resized
+  - path: /datasets/catalog/imagenette
+    title: imagenette
   - path: /datasets/catalog/kmnist
     title: kmnist
   - path: /datasets/catalog/lfw
@@ -152,6 +158,8 @@ toc:
     title: the300w_lp
   - path: /datasets/catalog/uc_merced
     title: uc_merced
+  - path: /datasets/catalog/vgg_face2
+    title: vgg_face2 (manual)
   - path: /datasets/catalog/visual_domain_decathlon
     title: visual_domain_decathlon
   title: Image
@@ -205,7 +213,9 @@ toc:
   title: Summarization
 - section:
   - path: /datasets/catalog/c4
-    title: c4
+    title: c4 (manual)
+  - path: /datasets/catalog/civil_comments
+    title: civil_comments
   - path: /datasets/catalog/definite_pronoun_resolution
     title: definite_pronoun_resolution
   - path: /datasets/catalog/esnli
@@ -224,6 +234,10 @@ toc:
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
     title: multi_nli_mismatch
+  - path: /datasets/catalog/scan
+    title: scan
+  - path: /datasets/catalog/scicite
+    title: scicite
   - path: /datasets/catalog/snli
     title: snli
   - path: /datasets/catalog/squad

@@ -36,6 +36,8 @@ class SplitInfo(object):
 
   @property
   def num_examples(self):
+    if self.shard_lengths:
+      return sum(int(sl) for sl in self.shard_lengths)
     return int(self.statistics.num_examples)
 
   def __repr__(self):

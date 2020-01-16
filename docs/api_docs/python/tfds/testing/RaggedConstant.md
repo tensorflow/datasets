@@ -7,7 +7,7 @@
 
 # tfds.testing.RaggedConstant
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -15,9 +15,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_utils.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `RaggedConstant`
 
-<!-- Start diff -->
 Container of tf.ragged.constant values.
 
 <!-- Placeholder for "Used in" -->
@@ -37,6 +37,8 @@ __init__(
     **kwargs
 )
 ```
+
+Initialize self. See help(type(self)) for accurate signature.
 
 ## Methods
 

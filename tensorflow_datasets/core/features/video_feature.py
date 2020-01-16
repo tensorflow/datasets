@@ -23,7 +23,7 @@ import subprocess
 import tempfile
 
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 
@@ -162,7 +162,8 @@ class Video(sequence_feature.Sequence):
       if not os.path.isfile(video_or_path_or_fobj):
         _, video_temp_path = tempfile.mkstemp()
         try:
-          tf.gfile.Copy(video_or_path_or_fobj, video_temp_path, overwrite=True)
+          tf.io.gfile.copy(
+              video_or_path_or_fobj, video_temp_path, overwrite=True)
           encoded_video = self._ffmpeg_decode(video_temp_path)
         finally:
           os.unlink(video_temp_path)

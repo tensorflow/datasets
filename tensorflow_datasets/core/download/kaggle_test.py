@@ -22,7 +22,7 @@ from __future__ import print_function
 import os
 import subprocess
 
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import kaggle
 

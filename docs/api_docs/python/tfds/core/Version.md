@@ -15,7 +15,7 @@
 
 # tfds.core.Version
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -23,9 +23,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `Version`
 
-<!-- Start diff -->
 Dataset version MAJOR.MINOR.PATCH.
 
 <!-- Placeholder for "Used in" -->
@@ -71,6 +71,8 @@ source</a>
 __eq__(other)
 ```
 
+Return self==value.
+
 <h3 id="__ge__"><code>__ge__</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
@@ -79,6 +81,8 @@ source</a>
 ```python
 __ge__(other)
 ```
+
+Return self>=value.
 
 <h3 id="__gt__"><code>__gt__</code></h3>
 
@@ -89,6 +93,8 @@ source</a>
 __gt__(other)
 ```
 
+Return self>value.
+
 <h3 id="__le__"><code>__le__</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
@@ -97,6 +103,8 @@ source</a>
 ```python
 __le__(other)
 ```
+
+Return self<=value.
 
 <h3 id="__lt__"><code>__lt__</code></h3>
 
@@ -107,6 +115,8 @@ source</a>
 __lt__(other)
 ```
 
+Return self<value.
+
 <h3 id="__ne__"><code>__ne__</code></h3>
 
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/version.py">View
@@ -115,6 +125,8 @@ source</a>
 ```python
 __ne__(other)
 ```
+
+Return self!=value.
 
 <h3 id="implements"><code>implements</code></h3>
 

@@ -20,7 +20,7 @@ from __future__ import print_function
 import hashlib
 import os
 from absl import logging
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
 
 

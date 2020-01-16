@@ -6,7 +6,7 @@
 
 # tfds.download.DownloadConfig
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -14,9 +14,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/download_manager.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `DownloadConfig`
-
-<!-- Start diff -->
 
 Configuration for
 <a href="../../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.

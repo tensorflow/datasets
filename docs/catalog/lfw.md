@@ -43,7 +43,8 @@ TRAIN | 13,233
 *   [http://vis-www.cs.umass.edu/lfw](http://vis-www.cs.umass.edu/lfw)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'label', u'image')`
+
+`('label', 'image')`
 
 ## Citation
 ```

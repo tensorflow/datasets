@@ -24,6 +24,7 @@ class Food101Test(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = food101.Food101
   SPLITS = {
       "train": 4,
+      "validation": 4,
   }
 
 

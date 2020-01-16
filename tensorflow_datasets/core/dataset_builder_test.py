@@ -22,8 +22,9 @@ from __future__ import print_function
 import os
 
 from absl.testing import absltest
+import dill
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
@@ -33,6 +34,7 @@ from tensorflow_datasets.core import features
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 tf.compat.v1.enable_eager_execution()
 
@@ -63,8 +65,6 @@ class DummyDatasetWithConfigs(dataset_builder.GeneratorBasedBuilder):
   ]
 
   def _split_generators(self, dl_manager):
-    # Split the 30 examples from the generator into 2 train shards and 1 test
-    # shard.
     del dl_manager
     return [
         splits_lib.SplitGenerator(
@@ -99,7 +99,6 @@ class InvalidSplitDataset(DummyDatasetWithConfigs):
     return [
         splits_lib.SplitGenerator(
             name=splits_lib.Split.ALL,  # Error: ALL cannot be used as Split key
-            num_shards=5,
         )
     ]
 
@@ -264,6 +263,31 @@ class DatasetBuilderTest(testing.TestCase):
         self.assertEqual([incr + el for el in range(30)],
                          sorted(train_data + test_data))
 
+  def test_read_config(self):
+    is_called = []
+    def interleave_sort(lists):
+      is_called.append(True)
+      return lists
+
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      read_config = read_config_lib.ReadConfig(
+          experimental_interleave_sort_fn=interleave_sort,
+      )
+      read_config.options.experimental_stats.prefix = "tfds_prefix"
+      ds = registered.load(
+          name="dummy_dataset_shared_generator",
+          data_dir=tmp_dir,
+          split="train",
+          read_config=read_config,
+          shuffle_files=True,
+      )
+
+      # Check that the ReadConfig options are properly set
+      self.assertEqual(ds.options().experimental_stats.prefix, "tfds_prefix")
+
+      # The instruction function should have been called
+      self.assertEqual(is_called, [True])
+
   def test_with_supported_version(self):
     DummyDatasetWithConfigs(config="plus1", version="0.0.1")
 
@@ -308,6 +332,16 @@ class DatasetBuilderTest(testing.TestCase):
         )
 
 
+class BuilderPickleTest(testing.TestCase):
+
+  def test_load_dump(self):
+    with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
+      builder = testing.DummyMnist(data_dir=tmp_dir)
+    builder2 = dill.loads(dill.dumps(builder))
+    self.assertEqual(builder.name, builder2.name)
+    self.assertEqual(builder.version, builder2.version)
+
+
 class BuilderRestoreGcsTest(testing.TestCase):
 
   def setUp(self):
@@ -339,20 +373,20 @@ class BuilderRestoreGcsTest(testing.TestCase):
   def test_stats_restored_from_gcs(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
       builder.download_and_prepare()
 
       # Statistics shouldn't have been recomputed
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
   def test_stats_not_restored_gcs_overwritten(self):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # If split are different that the one restored, stats should be recomputed
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 40)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 20)
       self.assertFalse(self.compute_dynamic_property.called)
 
       dl_config = download.DownloadConfig(max_examples_per_split=5)
@@ -387,7 +421,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
     with testing.tmp_dir(self.get_temp_dir()) as tmp_dir:
       # No dataset_info restored, so stats are empty
       builder = testing.DummyMnist(data_dir=tmp_dir)
-      self.assertEqual(builder.info.splits.total_num_examples, 0)
+      self.assertEqual(builder.info.splits, {})
       self.assertFalse(self.compute_dynamic_property.called)
 
       download_config = download.DownloadConfig(
@@ -396,7 +430,7 @@ class BuilderRestoreGcsTest(testing.TestCase):
       builder.download_and_prepare(download_config=download_config)
 
       # Statistics computation should have been skipped
-      self.assertEqual(builder.info.splits.total_num_examples, 0)
+      self.assertEqual(builder.info.splits["train"].statistics.num_examples, 0)
       self.assertFalse(self.compute_dynamic_property.called)
     self.patch_gcs.start()
 
@@ -499,6 +533,14 @@ class DatasetBuilderReadTest(testing.TestCase):
         split=splits_lib.Split.TRAIN, as_supervised=True, batch_size=-1))
     self.assertEqual(x.shape[0], 20)
 
+  def test_is_dataset_v1(self):
+    # For backward compatibility, ensure that the returned dataset object
+    # is a tf.data.DatasetV1 object.
+    with tf.Graph().as_default():
+      ds = self.builder.as_dataset(split="train")
+      ds.make_initializable_iterator()
+      self.assertIsInstance(ds, tf.compat.v1.data.Dataset)
+
 
 
 
@@ -520,8 +562,6 @@ class NestedSequenceBuilder(dataset_builder.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    # Split the 30 examples from the generator into 2 train shards and 1 test
-    # shard.
     del dl_manager
     return [
         splits_lib.SplitGenerator(

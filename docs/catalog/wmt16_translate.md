@@ -89,7 +89,8 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'cs', u'en')`
+
+`('cs', 'en')`
 
 ## `wmt16_translate/de-en`
 WMT 2016 de-en translation task dataset.
@@ -126,7 +127,8 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'de', u'en')`
+
+`('de', 'en')`
 
 ## `wmt16_translate/fi-en`
 WMT 2016 fi-en translation task dataset.
@@ -163,7 +165,8 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'fi', u'en')`
+
+`('fi', 'en')`
 
 ## `wmt16_translate/ro-en`
 WMT 2016 ro-en translation task dataset.
@@ -200,7 +203,8 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ro', u'en')`
+
+`('ro', 'en')`
 
 ## `wmt16_translate/ru-en`
 WMT 2016 ru-en translation task dataset.
@@ -237,7 +241,8 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'ru', u'en')`
+
+`('ru', 'en')`
 
 ## `wmt16_translate/tr-en`
 WMT 2016 tr-en translation task dataset.
@@ -274,7 +279,8 @@ Translation({
 *   [http://www.statmt.org/wmt16/translation-task.html](http://www.statmt.org/wmt16/translation-task.html)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'tr', u'en')`
+
+`('tr', 'en')`
 
 ## Citation
 ```

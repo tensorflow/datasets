@@ -16,7 +16,7 @@
 
 # tfds.features.BBoxFeature
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -24,9 +24,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/bounding_boxes.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `BBoxFeature`
 
-<!-- Start diff -->
 `FeatureConnector` for a normalized bounding box.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
@@ -73,6 +73,8 @@ source</a>
 ``` python
 __init__()
 ```
+
+Construct a Tensor feature.
 
 ## Properties
 

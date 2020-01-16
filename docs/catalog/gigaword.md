@@ -21,10 +21,10 @@ There are two features: - document: article. - summary: headline.
     [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
 *   `DatasetBuilder`:
     [`tfds.summarization.gigaword.Gigaword`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/gigaword.py)
-*   Version: `v1.1.0`
+*   Version: `v1.2.0`
 *   Versions:
 
-    *   **`1.1.0`** (default):
+    *   **`1.2.0`** (default):
 
 *   Size: `551.61 MiB`
 
@@ -50,7 +50,8 @@ TEST       | 1,951
 *   [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'document', u'summary')`
+
+`('document', 'summary')`
 
 ## Citation
 ```

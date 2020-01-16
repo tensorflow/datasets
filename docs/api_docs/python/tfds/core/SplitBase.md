@@ -10,7 +10,7 @@
 
 # tfds.core.SplitBase
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -18,9 +18,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `SplitBase`
 
-<!-- Start diff -->
 Abstract base class for Split compositionality.
 
 <!-- Placeholder for "Used in" -->

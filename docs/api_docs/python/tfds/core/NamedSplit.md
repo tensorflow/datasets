@@ -11,7 +11,7 @@
 
 # tfds.core.NamedSplit
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -19,9 +19,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/splits.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `NamedSplit`
 
-<!-- Start diff -->
 Descriptor corresponding to a named split (train, test, ...).
 
 Inherits From: [`SplitBase`](../../tfds/core/SplitBase.md)
@@ -79,6 +79,8 @@ source</a>
 __init__(name)
 ```
 
+Initialize self. See help(type(self)) for accurate signature.
+
 ## Methods
 
 <h3 id="__add__"><code>__add__</code></h3>
@@ -122,6 +124,17 @@ source</a>
 ``` python
 get_read_instruction(split_dict)
 ```
+
+Parse the descriptor tree and compile all read instructions together.
+
+#### Args:
+
+*   <b>`split_dict`</b>: `dict`, The `dict[split_name, SplitInfo]` of the
+    dataset
+
+#### Returns:
+
+*   <b>`split_read_instruction`</b>: `SplitReadInstruction`
 
 <h3 id="subsplit"><code>subsplit</code></h3>
 

@@ -62,7 +62,8 @@ FeaturesDict({
 *   [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'documents', u'title')`
+
+`('documents', 'title')`
 
 ## `reddit_tifu/long`
 Using TLDR as summary.
@@ -96,7 +97,8 @@ FeaturesDict({
 *   [https://github.com/ctr4si/MMN](https://github.com/ctr4si/MMN)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'documents', u'tldr')`
+
+`('documents', 'tldr')`
 
 ## Citation
 ```

@@ -16,7 +16,7 @@
 
 # tfds.features.Audio
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -24,9 +24,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/features/audio_feature.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `Audio`
 
-<!-- Start diff -->
 `FeatureConnector` for audio, encoded as raw integer wave form.
 
 Inherits From: [`Tensor`](../../tfds/features/Tensor.md)
@@ -122,6 +122,8 @@ source</a>
 ``` python
 encode_example(audio_or_path_or_fobj)
 ```
+
+See base class for details.
 
 <h3 id="get_serialized_info"><code>get_serialized_info</code></h3>
 

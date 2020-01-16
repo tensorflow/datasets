@@ -5,7 +5,7 @@
 
 # tfds.core.lazy_imports
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -13,9 +13,8 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/lazy_imports_lib.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `lazy_imports`
-
-<!-- Start diff -->
 
 Lazy importer for heavy dependencies.
 
@@ -24,4 +23,3 @@ Lazy importer for heavy dependencies.
 Some datasets require heavy dependencies for data generation. To allow for
 the default installation to remain lean, those heavy dependencies are
 lazily imported here.
-

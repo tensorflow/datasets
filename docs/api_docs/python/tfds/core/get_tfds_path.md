@@ -5,7 +5,7 @@
 
 # tfds.core.get_tfds_path
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -13,7 +13,7 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/utils/py_utils.py">View
 source</a>
 
-<!-- Start diff -->
+<!-- Equality marker -->
 Returns absolute path to file given path relative to tfds root.
 
 ``` python

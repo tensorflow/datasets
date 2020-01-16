@@ -63,7 +63,8 @@ FeaturesDict({
 *   [http://www.hlt.utdallas.edu/~vince/data/emnlp12/](http://www.hlt.utdallas.edu/~vince/data/emnlp12/)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'sentence', u'label')`
+
+`('sentence', 'label')`
 
 ## Citation
 ```

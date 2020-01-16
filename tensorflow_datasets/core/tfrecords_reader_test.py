@@ -19,6 +19,7 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import functools
 import itertools
 import os
 
@@ -31,6 +32,7 @@ from tensorflow_datasets.core import example_parser
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import tfrecords_reader
 from tensorflow_datasets.core import tfrecords_writer
+from tensorflow_datasets.core.utils import read_config as read_config_lib
 
 
 class GetDatasetFilesTest(testing.TestCase):
@@ -119,6 +121,7 @@ class GetDatasetFilesTest(testing.TestCase):
 class ReadInstructionTest(testing.TestCase):
 
   def setUp(self):
+    super(ReadInstructionTest, self).setUp()
     self.splits = {
         'train': 200,
         'test': 101,
@@ -264,15 +267,23 @@ class ReaderTest(testing.TestCase):
     with absltest.mock.patch.object(example_parser,
                                     'ExampleParser', testing.DummyParser):
       self.reader = tfrecords_reader.Reader(self.tmp_dir, 'some_spec')
+      self.reader.read = functools.partial(
+          self.reader.read,
+          read_config=read_config_lib.ReadConfig(),
+          shuffle_files=False,
+      )
 
   def _write_tfrecord(self, split_name, shards_number, records):
     path = os.path.join(self.tmp_dir, 'mnist-%s.tfrecord' % split_name)
-    writer = tfrecords_writer._TFRecordWriter(path, len(records), shards_number)
-    for rec in records:
-      writer.write(six.b(rec))
+    num_examples = len(records)
     with absltest.mock.patch.object(tfrecords_writer, '_get_number_shards',
                                     return_value=shards_number):
-      writer.finalize()
+      shard_specs = tfrecords_writer._get_shard_specs(
+          num_examples, 0, [num_examples], path)
+    serialized_records = [six.b(rec) for rec in records]
+    for shard_spec in shard_specs:
+      tfrecords_writer._write_tfrecord_from_shard_spec(
+          shard_spec, lambda unused_i: iter(serialized_records))
 
   def _write_tfrecords(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')
@@ -324,6 +335,23 @@ class ReaderTest(testing.TestCase):
     # There are theoritically 5! (=120) different arrangements, but we would
     # need too many repeats to be sure to get them.
     self.assertGreater(len(set(read_data)), 10)
+
+  def test_shuffle_deterministic(self):
+
+    self._write_tfrecord('train', 5, 'abcdefghijkl')
+    read_config = read_config_lib.ReadConfig(
+        shuffle_seed=123,
+    )
+    ds = self.reader.read(
+        'mnist', 'train', self.SPLIT_INFOS,
+        read_config=read_config,
+        shuffle_files=True)
+    ds_values = list(tfds.as_numpy(ds))
+
+    # Check that shuffle=True with a seed provides deterministic results.
+    self.assertEqual(ds_values, [
+        b'a', b'b', b'k', b'l', b'h', b'i', b'j', b'c', b'd', b'e', b'f', b'g'
+    ])
 
   def test_4fold(self):
     self._write_tfrecord('train', 5, 'abcdefghijkl')

@@ -25,10 +25,11 @@ from tensorflow_datasets.image import bigearthnet
 
 class BigearthnetTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = bigearthnet.Bigearthnet
+  VERSION = "experimental_latest"
   SPLITS = {
       "train": 1,
   }
-
+  DL_EXTRACT_RESULT = "BigEarthNet-v1.0.tar.gz"
 
 if __name__ == "__main__":
   testing.test_main()

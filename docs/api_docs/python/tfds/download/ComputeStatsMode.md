@@ -8,7 +8,7 @@
 
 # tfds.download.ComputeStatsMode
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
@@ -16,9 +16,9 @@
 <a target="_blank" href="https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/core/download/util.py">View
 source</a>
 
+<!-- Equality marker -->
 ## Class `ComputeStatsMode`
 
-<!-- Start diff -->
 Mode to decide if dynamic dataset info fields should be computed or not.
 
 <!-- Placeholder for "Used in" -->

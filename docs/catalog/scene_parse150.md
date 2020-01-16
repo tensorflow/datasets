@@ -47,7 +47,8 @@ TEST  | 2,000
 *   [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'annotation')`
+
+`('image', 'annotation')`
 
 ## Citation
 ```

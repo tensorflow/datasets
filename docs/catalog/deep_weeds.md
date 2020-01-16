@@ -24,7 +24,8 @@ Range", "Kelso", "McKinlay" and "Paluma".
 *   Version: `v2.0.0`
 *   Versions:
 
-    *   **`2.0.0`** (default):
+    *   **`2.0.0`** (default): Fixes wrong labels in V1.
+    *   `1.0.0`: None
 
 *   Size: `892.52 MiB`
 
@@ -48,7 +49,8 @@ TRAIN | 17,509
 *   [https://github.com/AlexOlsen/DeepWeeds](https://github.com/AlexOlsen/DeepWeeds)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

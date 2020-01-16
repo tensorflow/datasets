@@ -43,7 +43,8 @@ TRAIN | 1,404
 *   [https://cs.nyu.edu/~roweis/data/](https://cs.nyu.edu/~roweis/data/)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

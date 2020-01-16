@@ -21,7 +21,8 @@ if dynamic dataset info fields should be computed or not.
 
 [`class DownloadConfig`](../tfds/download/DownloadConfig.md): Configuration for <a href="../tfds/core/DatasetBuilder.md#download_and_prepare"><code>tfds.core.DatasetBuilder.download_and_prepare</code></a>.
 
-[`class DownloadError`](../tfds/download/DownloadError.md)
+[`class DownloadError`](../tfds/download/DownloadError.md): Common base class
+for all non-exit exceptions.
 
 [`class DownloadManager`](../tfds/download/DownloadManager.md): Manages the download and extraction of files, as well as caching.
 
@@ -38,4 +39,3 @@ method to use to pre-process a downloaded file.
 new checksums dir.
 
 [`iter_archive(...)`](../tfds/download/iter_archive.md): Yields (path_in_archive, f_obj) for archive at path using <a href="../tfds/download/ExtractMethod.md"><code>tfds.download.ExtractMethod</code></a>.
-

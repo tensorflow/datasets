@@ -44,7 +44,7 @@ import tempfile
 from absl import logging
 import numpy as np
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 
 from tensorflow_datasets.core import api_utils
 from tensorflow_datasets.core import dataset_utils
@@ -87,9 +87,9 @@ class DatasetInfo(object):
   See the constructor arguments and properties for a full list.
 
   Note: Not all fields are known on construction and may be updated later
-  by `compute_dynamic_properties`. For example, the number of examples in each
-  split is typically updated during data generation (i.e. on calling
-  `builder.download_and_prepare()`).
+  by `compute_dynamic_properties`. For example: the min and max values of a
+  feature is typically updated during data generation (i.e. on calling
+  builder.download_and_prepare()`).
   """
 
   @api_utils.disallow_positional_args

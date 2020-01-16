@@ -50,7 +50,8 @@ SMALL1 | 2,720
 *   [https://github.com/brendenlake/omniglot/](https://github.com/brendenlake/omniglot/)
 
 ## Supervised keys (for `as_supervised=True`)
-`(u'image', u'label')`
+
+`('image', 'label')`
 
 ## Citation
 ```

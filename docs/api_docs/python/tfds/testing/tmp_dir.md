@@ -5,12 +5,12 @@
 
 # tfds.testing.tmp_dir
 
-<!-- Insert buttons -->
+<!-- Insert buttons and diff -->
 
 <table class="tfo-notebook-buttons tfo-api" align="left">
 </table>
 
-<!-- Start diff -->
+<!-- Equality marker -->
 Context manager for a temporary directory.
 
 ``` python

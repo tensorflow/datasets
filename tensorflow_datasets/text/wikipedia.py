@@ -21,14 +21,19 @@ from __future__ import print_function
 
 import codecs
 import json
-import math
 import re
 import xml.etree.cElementTree as etree
 
 from absl import logging
 import six
-import tensorflow as tf
+import tensorflow.compat.v2 as tf
 import tensorflow_datasets.public_api as tfds
+
+if six.PY3:
+  import bz2  # pylint:disable=g-import-not-at-top
+else:
+  # py2's built-in bz2 package does not support reading from file objects.
+  import bz2file as bz2  # pylint:disable=g-import-not-at-top
 
 
 _CITATION = """\
@@ -54,6 +59,7 @@ _LICENSE = (
     "Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.")
 
 # Source: https://en.wikipedia.org/wiki/List_of_Wikipedias (accessed 3/1/2019)
+# Removed because no articles: hz.
 WIKIPEDIA_LANGUAGES = [
     "aa", "ab", "ace", "ady", "af", "ak", "als", "am", "an", "ang", "ar", "arc",
     "arz", "as", "ast", "atj", "av", "ay", "az", "azb", "ba", "bar", "bat-smg",
@@ -64,10 +70,10 @@ WIKIPEDIA_LANGUAGES = [
     "es", "et", "eu", "ext", "fa", "ff", "fi", "fiu-vro", "fj", "fo", "fr",
     "frp", "frr", "fur", "fy", "ga", "gag", "gan", "gd", "gl", "glk", "gn",
     "gom", "gor", "got", "gu", "gv", "ha", "hak", "haw", "he", "hi", "hif",
-    "ho", "hr", "hsb", "ht", "hu", "hy", "hz", "ia", "id", "ie", "ig", "ii",
+    "ho", "hr", "hsb", "ht", "hu", "hy", "ia", "id", "ie", "ig", "ii",
     "ik", "ilo", "inh", "io", "is", "it", "iu", "ja", "jam", "jbo", "jv", "ka",
     "kaa", "kab", "kbd", "kbp", "kg", "ki", "kj", "kk", "kl", "km", "kn", "ko",
-    "koi", "kr", "krc", "ks", "ksh", "ku", "kv", "kw", "ky", "la", "lad", "lb",
+    "koi", "krc", "ks", "ksh", "ku", "kv", "kw", "ky", "la", "lad", "lb",
     "lbe", "lez", "lfn", "lg", "li", "lij", "lmo", "ln", "lo", "lrc", "lt",
     "ltg", "lv", "mai", "map-bms", "mdf", "mg", "mh", "mhr", "mi", "min", "mk",
     "ml", "mn", "mr", "mrj", "ms", "mt", "mus", "mwl", "my", "myv", "mzn", "na",
@@ -109,18 +115,27 @@ class WikipediaConfig(tfds.core.BuilderConfig):
     self.language = language
 
 
+_VERSION = tfds.core.Version(
+    "0.0.4", experiments={tfds.core.Experiment.S3: False},
+    tfds_version_to_prepare="f567c68af2e9ea39fe866ada8c92aef3b6dba613")
+
+_SUPPORTED_VERSIONS = [
+    tfds.core.Version(
+        "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
+    tfds.core.Version(
+        "0.0.3", experiments={tfds.core.Experiment.S3: False},
+        tfds_version_to_prepare="ec93f3121369716b5d0a3b076d9e080602959b2a"),
+]
+
+
 class Wikipedia(tfds.core.BeamBasedBuilder):
   """Wikipedia dataset."""
   # Use mirror (your.org) to avoid download caps.
 
   BUILDER_CONFIGS = [
       WikipediaConfig(  # pylint:disable=g-complex-comprehension
-          version=tfds.core.Version(
-              "0.0.4", experiments={tfds.core.Experiment.S3: False}),
-          supported_versions=[
-              tfds.core.Version(
-                  "0.0.3", experiments={tfds.core.Experiment.S3: False})
-          ],
+          version=_VERSION,
+          supported_versions=_SUPPORTED_VERSIONS,
           language=lang,
           date="20190301",
       ) for lang in WIKIPEDIA_LANGUAGES
@@ -170,12 +185,11 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       xml_urls.append(_base_url(lang) + fname)
 
       # Use dictionary since testing mock always returns the same result.
-    downloaded_files = dl_manager.download_and_extract({"xml": xml_urls})
+    downloaded_files = dl_manager.download({"xml": xml_urls})
 
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
             name=tfds.Split.TRAIN,
-            num_shards=int(math.ceil(total_bytes / (128 * 2**20))),  # max 128MB
             gen_kwargs={"filepaths": downloaded_files["xml"], "language": lang})
     ]
 
@@ -188,26 +202,34 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       """Extracts article content from a single WikiMedia XML file."""
       logging.info("generating examples from = %s", filepath)
       with tf.io.gfile.GFile(filepath, "rb") as f:
+        f = bz2.BZ2File(filename=f)
         if six.PY3:
           # Workaround due to:
           # https://github.com/tensorflow/tensorflow/issues/33563
           utf_f = codecs.getreader("utf-8")(f)
         else:
           utf_f = f
-        for _, elem in etree.iterparse(utf_f, events=("end",)):
+
+        # To clear root, to free-up more memory than just `elem.clear()`.
+        context = etree.iterparse(utf_f, events=("end",))
+        context = iter(context)
+        unused_event, root = next(context)
+        for unused_event, elem in context:
           if not elem.tag.endswith("page"):
             continue
           namespace = elem.tag[:-4]
           title = elem.find("./{0}title".format(namespace)).text
           ns = elem.find("./{0}ns".format(namespace)).text
+          id_ = elem.find("./{0}id".format(namespace)).text
 
           # Filter pages that are not in the "main" namespace.
           if ns != "0":
+            root.clear()
             continue
 
           raw_content = elem.find(
               "./{0}revision/{0}text".format(namespace)).text
-          elem.clear()
+          root.clear()
 
           # Filter redirects.
           if raw_content is None or raw_content.lower().startswith("#redirect"):
@@ -215,11 +237,11 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
             continue
 
           beam.metrics.Metrics.counter(language, "extracted-examples").inc()
-          yield (title, raw_content)
+          yield (id_, title, raw_content)
 
     def _clean_content(inputs):
       """Cleans raw wikicode to extract text."""
-      title, raw_content = inputs
+      id_, title, raw_content = inputs
       try:
         text = _parse_and_clean_wikicode(raw_content)
       except (
@@ -234,7 +256,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
 
       beam.metrics.Metrics.counter(language, "cleaned-examples").inc()
 
-      yield {
+      yield id_, {
           "title": title,
           "text": text
       }
@@ -243,6 +265,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
         pipeline
         | beam.Create(filepaths)
         | beam.FlatMap(_extract_content)
+        | beam.transforms.Reshuffle()
         | beam.FlatMap(_clean_content)
     )
 

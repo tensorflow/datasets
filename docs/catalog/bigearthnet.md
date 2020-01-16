@@ -60,6 +60,7 @@ Sentinel-2 RGB channels
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed
@@ -89,7 +90,8 @@ FeaturesDict({
 *   [http://bigearth.net](http://bigearth.net)
 
 ### Supervised keys (for `as_supervised=True`)
-`(u'image', u'labels')`
+
+`('image', 'labels')`
 
 ## `bigearthnet/all`
 13 Sentinel-2 channels
@@ -97,6 +99,7 @@ FeaturesDict({
 Versions:
 
 *   **`0.0.2`** (default):
+*   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
 
 ### Statistics
 None computed

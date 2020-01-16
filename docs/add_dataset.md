@@ -30,8 +30,7 @@ isn't already added.
     *   [3. Double-check the citation](#3-double-check-the-citation)
     *   [4. Add a test](#4-add-a-test)
     *   [5. Check your code style](#5-check-your-code-style)
-    *   [6. Add release notes](#6-add-release-notes)
-    *   [7. Send for review!](#7-send-for-review)
+    *   [6. Send for review!](#6-send-for-review)
 *   [Define the dataset outside TFDS](#define-the-dataset-outside-tfds)
 *   [Large datasets and distributed generation](#large-datasets-and-distributed-generation)
 *   [Testing `MyDataset`](#testing-mydataset)
@@ -312,7 +311,7 @@ additional dependencies only as needed, use `tfds.core.lazy_imports`.
 To use `lazy_imports`:
 
 *   Add an entry for your dataset into `DATASET_EXTRAS` in
-    [`setup.py`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/setup.py).
+    [`setup.py`](https://github.com/tensorflow/datasets/tree/master/setup.py).
     This makes it so that users can do, for example, `pip install
     'tensorflow-datasets[svhn]'` to install the extra dependencies.
 *   Add an entry for your import to
@@ -543,7 +542,7 @@ except TensorFlow uses 2 spaces instead of 4. Please conform to the
 [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md),
 
 Most importantly, use
-[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/oss_scripts/lint.sh)
+[`tensorflow_datasets/oss_scripts/lint.sh`](https://github.com/tensorflow/datasets/tree/master/oss_scripts/lint.sh)
 to ensure your code is properly formatted. For example, to lint the `image`
 directory:
 
@@ -555,13 +554,7 @@ See
 [TensorFlow code style guide](https://www.tensorflow.org/community/contribute/code_style)
 for more information.
 
-### 6. Add release notes
-
-Add the dataset to the
-[release notes](https://github.com/tensorflow/datasets/tree/master/docs/release_notes.md).
-The release note will be published for the next release.
-
-### 7. Send for review!
+### 6. Send for review!
 
 Send the pull request for review.
 
@@ -586,7 +579,7 @@ To create this checksum file the first time, you can use the
 `tensorflow_datasets.scripts.download_and_prepare` script and pass the flags
 `--register_checksums --checksums_dir=/path/to/checksums_dir`.
 
-### 2. Adjust the fake example direcory
+### 2. Adjust the fake example directory
 
 For testing, instead of using the default
 [fake example directory](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/test_data/fake_examples)
@@ -595,7 +588,7 @@ you can define your own by setting the `EXAMPLE_DIR` property of
 
 ```
 class MyDatasetTest(tfds.testing.DatasetBuilderTestCase):
-  EXAMPLE_DIR = 'path/to/fakedata'`
+  EXAMPLE_DIR = 'path/to/fakedata'
 ```
 
 ## Large datasets and distributed generation
@@ -616,6 +609,9 @@ under the `my_dataset` directory and should mimic the source dataset artifacts
 as downloaded and extracted. It can be created manually or automatically with a
 script
 ([example script](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing/cifar.py)).
+
+If you're using automation to generate the test data, please include that script
+in [`testing`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/testing).
 
 Make sure to use different data in your test data splits, as the test will
 fail if your dataset splits overlap.
