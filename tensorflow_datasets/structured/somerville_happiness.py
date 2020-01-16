@@ -82,7 +82,7 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
       for row in reader:
         for i, row in zip(row, reader):
           yield i, {
-               "feelings":_FEELING[1],
+               "feeling":_FEELING[1],
                "D": 1,
           }
 
