@@ -47,7 +47,6 @@ def check_input_for_D(d):
     return d
 
 FEATURE_DICT = collections.OrderedDict([
-    ("D", (tf.int32, check_input_for_D)),
     ("X1", (tf.int32, check_input)),
     ("X2", (tf.int32, check_input)),
     ("X3", (tf.int32, check_input)),
@@ -94,7 +93,6 @@ class SomervilleHappiness(tfds.core.GeneratorBasedBuilder):
     with open(file_path, newline='', encoding='utf-16') as f:
       reader = csv.DictReader(f, quoting=csv.QUOTE_NONE)
       for i, row in enumerate(reader):
-        feeling = "1"
         yield i, {
                "feeling": _FEELING_DICT['1'],
                "features": row,
